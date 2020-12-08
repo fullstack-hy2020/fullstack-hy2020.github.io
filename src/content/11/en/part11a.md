@@ -17,13 +17,13 @@ Unlike the other parts of this course, you do not write many lines of code in th
 
 ### Getting software to production
 
-Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. After that we need to maintain it, release new versions, and work with other people to expand that software.
+Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. After that we need to maintain it, release new versions and work with other people to expand that software.
 
 We've already used GitHub to store our source code, but what happens when we work within a team with more developers? 
 
-Many problems may arise when more developers are involved. The software might work just fine in <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.
+Many problems may arise when several developers are involved. The software might work just fine in <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.
 
-There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, who's changes get deployed? How would it possible to prevent one developer's changes from overwriting another's? 
+There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, who's changes get deployed? How would it be possible to prevent one developer's changes from overwriting another's? 
 
 In this part, we'll cover ways to work together and build and deploy software in a strictly defined way so that it's clear <i>exactly</i> what will happen under any given circumstance.
 
@@ -82,11 +82,11 @@ We'd likely want to do some of these steps:
 
 We'll discuss each of these steps (and when they're suitable) in more detail later. What is important to remember is that this process should be strictly defined. 
 
-Usually, strict definitions act as a constraint on creativity/development speed, this, however, should usually not be true for CI. This strictness should be set up in such a way as to allow for easier development and working together. Using a good CI system (such as GitHub Actions that we'll cover in this part) will allow us to do this all automagically.
+Usually, strict definitions act as a constraint on creativity/development speed. This, however, should usually not be true for CI. This strictness should be set up in such a way as to allow for easier development and working together. Using a good CI system (such as GitHub Actions that we'll cover in this part) will allow us to do this all automagically.
 
 ### Packaging and Deployment as a part of CI
 
-It may be worthwhile to note that packaging and especially deployment are sometimes considered to not fall under the umbrella of CI. We'll add them in here because in the real world it makes sense to lump it all together. This is partly because they make sense in the context of the flow and pipeline (I want to get my code to users) and partially because these are in fact the most likely point of failure.
+It may be worthwhile to note that packaging and especially deployment are sometimes not considered to fall under the umbrella of CI. We'll add them in here because in the real world it makes sense to lump it all together. This is partly because they make sense in the context of the flow and pipeline (I want to get my code to users) and partially because these are in fact the most likely point of failure.
 
 The packaging is often an area where issues crop up in CI as this isn't something that's usually tested locally. It makes sense to test the packaging of a project during the CI workflow even if we don't do anything with the resulting package. With some workflows, we may even be testing the already built packages. This assures us that we have tested the code in the same form as what will be deployed to production.
 
@@ -94,24 +94,24 @@ What about deployment then? We'll talk about consistency and repeatability at le
 
 #### Is this CD thing related?
 
-The terms <i>Continuous Delivery</i>  <i>Continuous Deployment</i> (both of which have the acronyme CD) are often used when one talks about CI that also takes care of deployments. We won't bore you with the exact definition (you can use e.g. [wikipedia](https://en.wikipedia.org/wiki/Continuous_delivery) or [Martin Fowler's another blogpost](https://martinfowler.com/bliki/ContinuousDelivery.html)) but in general we refer to CD as the practice where the master branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges into the master/base branch.
+The terms <i>Continuous Delivery</i> and <i>Continuous Deployment</i> (both of which have the acronyme CD) are often used when one talks about CI that also takes care of deployments. We won't bore you with the exact definition (you can use e.g. [wikipedia](https://en.wikipedia.org/wiki/Continuous_delivery) or [Martin Fowler's another blogpost](https://martinfowler.com/bliki/ContinuousDelivery.html)) but in general we refer to CD as the practice where the master branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges into the master/base branch.
 
-What about the murky area between CI and CD? If, for example, we have tests that must run before any new code can be merged to master, is this CI because we're making frequent merges to master or is it CD because we're making sure that master is always deployable.
+What about the murky area between CI and CD? If we, for example, have tests that must be run before any new code can be merged to master, is this CI because we're making frequent merges to master or is it CD because we're making sure that master is always deployable?
 
-So, some concepts frequently cross the line between CI and CD and, as we discussed above, deployment sometimes makes sense to consider as part of CI. This is why you'll often see references to CI/CD to describe the entire process. We'll use the terms "CI" and "CI/CD" interchangably in this part. 
+So, some concepts frequently cross the line between CI and CD and, as we discussed above, deployment sometimes makes sense to consider CD as part of CI. This is why you'll often see references to CI/CD to describe the entire process. We'll use the terms "CI" and "CI/CD" interchangably in this part. 
 
 ### Why is it important?
 
 Above we talked about the "works on my machine" problem and the deployment of multiple changes, but what about other issues. What if Alice committed directly to master? What if Bob used a branch but didn't bother to run tests before merging? What if Charlie tries to build the software for production but does so with the wrong parameters?
 
-With use of continuous integration and systematic ways of working we can avoid these. 
+With the use of continuous integration and systematic ways of working we can avoid these. 
  - We can disallow commits directly to master
  - We can have our CI process run on all Pull Requests (PRs) against master and allow merges only when our desired conditions are met e.g. tests pass
  - We can build our packages for production in the known environment of the CI system
 
 There are other advantages to extending this setup:
  - If we use CD with deployment every time there is a merge to master then we know that master is always running in production
- - If we only allow merges when the branch has an up to date master, then we can be sure that different developers don't overwrite eachother's changes
+ - If we only allow merges when the branch has an up to date master, then we can be sure that different developers don't overwrite each other's changes
 
 Note that in this part we are assuming that <i>master</i> or <i>main</i> branch contains the code that is running in production. The numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with git, e.g. in some cases it may be a specific <i>release branch</i> that contains the code which is running in production.
 
@@ -126,7 +126,7 @@ To that end, CI should always be configured to the task at hand and the project 
  - How to make sure that the changes don't overwrite each other?
  - How to make deployments happen at the click of a button or automatically when one merges to master?
 
-There exists even scientific evidence on the numerous benefits the usage of CI/CD has. According to a large study reported in the book [Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://itrevolution.com/book/accelerate/), the use of CI/CD correlates heavily with organizational success (e.g. improves profitability and product quality, increases market share, shortens the time to market). CI/CD even makes developers happier by the reducing their burnout rate. The results summarized in the book are also reported in scientific articles such as [this](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909).
+There even exists scientific evidence on the numerous benefits the usage of CI/CD has. According to a large study reported in the book [Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://itrevolution.com/book/accelerate/), the use of CI/CD correlates heavily with organizational success (e.g. improves profitability and product quality, increases market share, shortens the time to market). CI/CD even makes developers happier by reducing their burnout rate. The results summarized in the book are also reported in scientific articles such as [this](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909).
 #### Documented behavior
 
 There's an old joke that a bug is just an "undocumented feature". We'd like to avoid that. We'd like to avoid any situations where we don't know the exact outcome. For example, if we depend on a label on a PR to define whether something is a "major", "minor" or "patch" release (we'll cover the meanings of those terms later), then it's important that we know what happens if a developer forgets to put a label on their PR. What if they put a label on after the build/test process has started? What happens if the developer changes the label mid-way through, which one is the one that actually releases?
@@ -153,7 +153,7 @@ If, on the other hand, master and production are very different and master is no
 
 It's often important to know what is actually running in production. Ideally, as we discussed above, we'd have master running in production. This is not always possible. Sometimes we intend to have master in production but a build fails, sometimes we batch together several changes and want to have them all deployed at once. 
 
-What we need in these cases (and is generally a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it's useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We shall discuss more about versioning [a bit later in this part](/en/part11/keeping_green#versioning).
+What we need in these cases (and is a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it's useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We shall discuss more about versioning [a bit later in this part](/en/part11/keeping_green#versioning).
 
 It is is even more useful if we combine the version information with a history of all releases. If, for example, we found out that a particular commit has introduced a bug, we can find out exactly when that was released and how many users were affected. This is especially useful when that bug has written bad data to the database. We'd now be able to track where that bad data went based on the time.
 
@@ -182,7 +182,7 @@ The actual CI config for the cloud-based options is often a little simpler, at l
 
 In this part, we'll look at a fairly normal use case. The more complicated setups might, for example, make use of specific hardware resources, e.g. a GPU.
 
-Aside from the configuration issue mentioned above, there are often resource limitations on could based platforms. In a self-hosted setup, if a build is slow, you can just get a bigger server and throw more resources at it. In cloud-based options, this may not be possible. For example, in [GitHub Actions](https://github.com/features/actions), the nodes your builds will run on have 2 vCPUs and 8GB of RAM.
+Aside from the configuration issue mentioned above, there are often resource limitations on cloud-based platforms. In a self-hosted setup, if a build is slow, you can just get a bigger server and throw more resources at it. In cloud-based options, this may not be possible. For example, in [GitHub Actions](https://github.com/features/actions), the nodes your builds will run on have 2 vCPUs and 8GB of RAM.
 
 Cloud-based options are also usually billed by build time which is something to consider.
 
