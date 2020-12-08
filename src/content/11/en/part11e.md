@@ -35,13 +35,13 @@ There are integrations, for example to various messaging applications such as [S
 
 We have set up a Slack channel <fullstackopengroup.slack.com> for testing amessaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately you need an email address for registration. If are not willing to use your own address, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
 
-Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email matti.luukkainen@helsinki.fi of in course telegram, ping @mluukkai
+Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
 
 You can also use some other Slack channel in this exercise but then you are on your own with the setup.
 
 #### 11.19 Build success/failure notification action
 
-You can find dozens of third party actions from [GitHub Action Marketplace]https://github.com/marketplace?type=actions) by using a searcj the word [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many starts and a decent documentation.
+You can find dozens of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using a searcj the word [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many starts and a decent documentation.
 
 Setup the action so that it gives two types of notifications.
 - A success indication if a new version gets deployed
