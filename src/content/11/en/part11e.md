@@ -87,7 +87,7 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 #### 11.20 Periodic health check
 
-We are pretty confident now that our pipeline prevents bad code of being deployed. However there are many sources of errors. If our application would eg. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be good idea to set up <i>a periodic health check</i> that would regurarly do a HTTP GET request to our server. We quite often refer this kind of request as a <i>ping</i>.
+We are pretty confident now that our pipeline prevents bad code of being deployed. However there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be good idea to set up <i>a periodic health check</i> that would regurarly do a HTTP GET request to our server. We quite often refer this kind of request as a <i>ping</i>.
 
 It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happend regurarly. 
 
