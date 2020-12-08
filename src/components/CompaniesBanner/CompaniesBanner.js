@@ -100,6 +100,7 @@ const inChallenge = [
   'Resilient E',
   'Neemia',
   'Bubblin',
+  "Zaibatsu"
 ];
 
 export const CompaniesBanner = ({ isFrontPage, lang }) => {
