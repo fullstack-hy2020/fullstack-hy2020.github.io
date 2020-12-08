@@ -94,7 +94,7 @@ Before moving on let us expand pipeline with one more step, a check that ensures
 Actually a separate workflow step is not needed, since the 
 [deploy-to-heroku](https://github.com/marketplace/actions/deploy-to-heroku) contains on option that takes care of it.
 
-Add to the backend a simple endpoint for doing a application health check. You may eg. copy this code:
+Add to the backend a simple endpoint for doing a application health check. You may e.g. copy this code:
 
 ```js
 app.get('/health', (req, res) => {

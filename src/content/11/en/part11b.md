@@ -334,7 +334,7 @@ Once the end to end test works in your macine, include it to the GitHub Action w
 
 Three opitons are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
 
-Once you are sure that the pileline works, write another test that ensures one can navgate from the main page to the page of a particular Pokemon, eg. <i>ivysaur</i>. The test does not need to be complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in case of <i>ivysaur</i>.
+Once you are sure that the pileline works, write another test that ensures one can navgate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in case of <i>ivysaur</i>.
 
 **Note** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
 
