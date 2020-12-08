@@ -98,9 +98,7 @@ Push some more code to your branch, and ensure that the deployment step <i>is no
 
 ### Versioning
 
-The most important purpose of versioning is to uniquely identify the software we're running and the code associated with it. That also sounds simple, so, let's break it down a little more. In order to achieve the objective of having that unique identifier of code, it needs two things:
- - To be unique
- - To identify code
+The most important purpose of versioning is to uniquely identify the software we're running and the code associated with it. 
 
 The ordering of versions is also an important information. For example, if the current release has broken critical functionality and we need to identify the <i>previous version</i> of the software so that we can roll back the release back to a stabile state.
 
@@ -112,9 +110,9 @@ The first one is [semantic versioning](https://semver.org/), where a version is 
 
 In general, changes that fix the functionality without changing how the application works from the outside are <code>patch</code> changes, changes that make small changes to functionality (as viewed from the outside) are <code>minor</code> changes and changes that completely change the application (or major functionality chagnes) are <code>major</code> changes. The definitions of each of these terms can vary from project to project. 
 
-For example npm-libraries are following the semantic versioning. At the time of writing this text (7th December 2020) the most recent version of React is [17.0.1](https://reactjs.org/versions/), so the major version is 17 that is quite recent. It has just been bumped up one patch step, the minor version is still 0.
+For example npm-libraries are following the semantic versioning. At the time of writing this text (7th December 2020) the most recent version of React is [17.0.1](https://reactjs.org/versions/), so the major version is 17 which is quite recent and it has just been bumped up one patch step, the minor version is still 0.
 
-<i>Hash versioning</i> (also sometimes known as SHA versioning) is quite different. The version "number" in hash versioning is instead a hash derived from the contents of the repository and the changes introduced in this commit. In git, this is already done for you as the commit hash that is unique for any change set.
+<i>Hash versioning</i> (also sometimes known as SHA versioning) is quite different. The version "number" in hash versioning is a hash (that looks like a random string) derived from the contents of the repository and the changes introduced in this commit. In git, this is already done for you as the commit hash that is unique for any change set.
 
 Hash versioning is almost always used in conjunction with automation. It's a pain (and error prone) to copy 32 character long version numbers around to make sure that everything is correctly deployed.
 
@@ -126,13 +124,13 @@ It's a little more complicated when using semantic versioning and there are seve
 
 While we won't cover the last option on the list (since that's a rabbit hole all on its own), it's worth mentioning that this can be as simple as a spreadsheet that lists the Semantic Version and the commit it points to.
 
-For the two repo based approaches, the approach with something in the code usually boils down to a version nuber in a file and the repo/metadata approach usually relies on tags or (in the case of GitHub) releases. In the case of tags or releases, this is relatively simple, the tag or release points to a commit, the code in that commit is the code in the release.
+For the two repo based approaches, the approach with something in the code usually boils down to a version nuber in a file and the repo/metadata approach usually relies on [tags](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) or (in the case of GitHub) releases. In the case of tags or releases, this is relatively simple, the tag or release points to a commit, the code in that commit is the code in the release.
 
 #### Version order
 
 In semantic versioning, even if we have version bumps of different types (major, minor or patch) it's still quite easy to put the releases in order: 1.3.7 comes before 2.0.0 which itself comes before 2.1.5 which comes before 2.2.0. A list of releases (conveniently provided by a package manager or GitHub) is still needed to know what the last version is but it's easier to look at that list and discuss it: It's easier to say "We need to roll back to 3.2.4" than to try communicate a hash in person.
 
-That's not to say that hashes are inconvenient. Aside from giving an easier path to working out the code deployed in a specific version, if you know which commit caused the particular problem, it's easy enough to look back through a git history and get the hash of the previous commit.
+That's not to say that hashes are inconvenient: if you know which commit caused the particular problem, it's easy enough to look back through a git history and get the hash of the previous commit. But if you have two hashes, say <code>d052aa41edfb4a7671c974c5901f4abe1c2db071</code> and <code>12c6f6738a18154cb1cef7cf0607a681f72eaff3</code>, you really can not say which become earlier in history, you need something more, such as the git log that reveals you the ordering.
 
 #### Comparing the Two
 
@@ -140,7 +138,7 @@ We've already touched on some of the advantages and disadvantages of the two ver
 
 Semantic Versioning works well when deploying services where the version number could be of significance or might actually be looked at. As an example, think of the Javascript libraries that you're using. If you're using version 3.4.6 of a particular library, and there's an update available to 3.4.8, if the library uses semantic versioning, you could (hopefully) safely assume that you're ok to upgrade without breaking anything. If the version jumps to 4.0.1 then maybe it's not such a safe upgrade.
 
-Hash versioning is very useful where most commits are being built into artifacts that are themselves uploaded or stored. As an example, if your testing requires building your package into an artifact, uploading it to a server and running tests against it, it would be convenient to have hash versioning as it would prevent accidents. 
+Hash versioning is very useful where most commits are being built into artifacts (e.g. runnable binaries or Docker images) that are themselves uploaded or stored. As an example, if your testing requires building your package into an artifact, uploading it to a server and running tests against it, it would be convenient to have hash versioning as it would prevent accidents. 
 
 As an example think that you're working on version 3.2.2 and you have a failing test, you fix the failure and push the commit but as you're working in your branch, you're not going to update the version number. Without hash versioning, the artifact name may not change. If there's an error in uploading the artifact, maybe the tests run again with the older artifact (since it's still there and has the same name) and you get the wrong test results. If the artifact is versioned with the hash, then the version number *must* change on every commit and this means that if the upload fails, there will be an error since the artifact you told the tests to run again does not exist.
 
@@ -162,26 +160,26 @@ In the above case, the software we release is tested because the CI system makes
 
 <div class="tasks">
 
-### Exercises 11.16.-11.17.
+### Exercises 11.16-11.17.
 
-Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into master and tag the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). You can read the documentation for this action in its [README](https://github.com/anothrNick/github-tag-action).
+Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into master and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
 
 #### 11.16 Adding versioning
 
 We will extend our workflow with one step:
 
 ```js
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.33.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+- name: Bump version and push tag
+  uses: anothrNick/github-tag-action@1.33.0
+  env:
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 We're passing an environmental variable <code>secrets.GITHUB\_TOKEN</code> to the action. As it is third-party action, it needs the token for authenication in your repository. You can read more [here](https://docs.github.com/en/actions/configuring-and-managing-workflows/authenticating-with-the-github_token) about authentication in GitHub Actions.
 
-The [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action) action can accept multiple environmental variables ( <code>secrets.GITHUB\_TOKEN</code> is the only one that is required, the rest are optional). These variables modify the way the action tags your releases. You can look at these in the [README](https://github.com/anothrNick/github-tag-action) and see what suits your needs. 
+The [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action) action can accept multiple environmental variables. These variables modify the way the action tags your releases. You can look at these in the [README](https://github.com/anothrNick/github-tag-action) and see what suits your needs. 
 
-As you can see from the documentation, unless you alter the default behaviour with a <code>DEFAULT_BUMP</code> environmental variable, by default your releases will receive a *minor* bump, meaning that the middle number will be incremented.
+As you can see from the documentation by default your releases will receive a *minor* bump, meaning that the middle number will be incremented.
 
 Modify the above configuration so that each new version os by default a _batch_ bump in version number, so that by default the last number is increased. 
 
@@ -207,31 +205,29 @@ And by clicking it, you can see all the tags (that is the git mechanism to mark 
 
 A quick (but perhaps a bit dirty) way to solve the problem was to checkout the repository once again just before the tagging step:
 
-```jos
-    - uses: actions/checkout@v2 // highlight-line
-    - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@1.33.0
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+```js
+  - uses: actions/checkout@v2 // highlight-line
+  - name: Bump version and push tag
+    uses: anothrNick/github-tag-action@1.33.0
+    env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
 A better option would perhaps be another job that takes care of tagging.
 
 #### 11.17 Skiping a commit for tagging and deployment
 
-In general the more often you deploy the master to production, the better. However there might be some valid reasons from time to time skip a particular commit or a merged pull request to becoming tagged and released to production.
+In general the more often you deploy the master to production, the better. However there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production.
 
-Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not given a version number.
+Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not tagged with a version number.
 
-**Hints:** 
+**Hints:**  
 
-The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) confitions of the the relevant steps.
-
-Simillarly to [exercise 11-5](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information form the [github comntex](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
+The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) confitions of the the relevant steps. Simillarly to [exercise 11-5](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information form the [github comntex](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
 
 You might take this as a starting point:
 
-```yml
+```js
 name: Testing stuff
 
 on:
@@ -258,7 +254,9 @@ jobs:
         run: echo "$COMMIT_MESSAGES"
 ```
 
-Note that you can access the commits and commit messages <i>only when pushing or merging to master</i>, so for pull requests the <code>github.event.commits</code> is empty and it is anyway not neede there since we want to skip the step altogether for pull requests. 
+See what gets printed in the workflow log!
+
+Note that you can access the commits and commit messages <i>only when pushing or merging to master</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests. 
 
 You most likely need functions [contains](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contains) and [join](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#join) for your if condition.
 
