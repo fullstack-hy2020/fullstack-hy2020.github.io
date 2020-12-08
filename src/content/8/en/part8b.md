@@ -501,7 +501,7 @@ export default PersonForm
 <!-- Lomakkeen koodi on suoraviivainen, mielenkiintoiset rivit on korostettu. Mutaation suorittava funktio saadaan luotua _useMutation_-hookin avulla. Hook palauttaa kyselyfunktion <i>taulukon</i> ensimmäisenä alkiona: -->
 The code of the form is straightforward and the interesting lines have been highlighted. 
 We can define mutation function using the _useMutation_-hook.
-The hook returns an <i>array</i>, first element of which contains the result of the mutation.
+The hook returns an <i>array</i>, first element of which contains the function to cause the mutation.
 
 ```js
 const [ createPerson ] = useMutation(CREATE_PERSON)
