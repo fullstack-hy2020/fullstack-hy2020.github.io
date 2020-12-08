@@ -103,6 +103,12 @@ Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit cou
 
 By submitting exercises for part 10 of the courses, React Native, you can earn either one or two additional credits. Earning one credit requires you to submit at least 19 exercises whereas earning two credits requires you to submit at least 26 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native).
 
+#### Continuous integration part's credits
+
+By submitting exercises for part 11 of the courses, Continuous integration/delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of the part.
+
+More information about the part's prerequisites and exercise submission can be found in the [part 11](/en/part11).
+
 ### How to get your credits
 
 Note that in order to receive university credits, you need a Finnish social security number.
@@ -152,7 +158,7 @@ If you have previously passed the course exam (excluding the exam for the three 
 * Part 6, which is about Redux, concentrates on the new, hook-based, Redux API.
 * The material on react-router in part 7 has also been updated to use Hook API. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance.
 * Part 8 on GraphQL has major updates, especially on Apollo Client, which finally has stable Hook-based APIs.
-* Part 9 on TypeScript and part 10 on React Native is completely new.
+* Part 9 on TypeScript, part 10 on React Native and part 11 on CI/CD are completely new.
 
 Last year's course material can be found [here](https://fullstackopen-2019.github.io/).
 
