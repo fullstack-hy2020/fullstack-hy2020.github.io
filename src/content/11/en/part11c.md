@@ -9,11 +9,12 @@ lang: en
 
 Having written a nice application it's time to think about how we're going to deploy it to the use of real users. 
 
-In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply <i>pushing the git repository</i> to the servers of the cloud provider [Heroku](https://www.heroku.com/home). It is pretty simple at least compared to many other type of hosting setups but still contains risks: nothing prevents us from accidently pushing broken code to production.
+In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply <i>pushing the git repository</i> to the servers of the cloud provider [Heroku](https://www.heroku.com/home). It is pretty simple to release software in Heroku at least compared to many other type of hosting setups but it still contains risks: nothing prevents us from accidently pushing broken code to production.
 
-In this part, we're going to look at the principles of making a deployment safely and some of the principles of deploying software on both a small and large scale. 
+Next, we're going to look at the principles of making a deployment safely and some of the principles of deploying software on both a small and large scale. 
 
-### Principles
+### Anything that can go wrong...
+
 We'd like to define some rules about how our deployment process should work but before that, we have to look at some constraints of reality.
 
 One on phrasing of Murphy's Law holds that:
@@ -24,7 +25,7 @@ It's important to remember this when we plan out our deployment system. Some of 
  - I'm connected to the server I'm deploying to over the internet, what happens if my internet connection dies?
  - What happens if any specific instruction in my deployment script/system fails?
  - What happens if, for whatever reason, my software doesn't work as expected on the server I'm deploying to? Can I roll back to a previous version?
- - What happens if a user requests something from our software just before we do a deployment (we didn't have time to send a response to the user)?
+ - What happens if a user does a HTTP request to our software just before we do a deployment (we didn't have time to send a response to the user)?
 
 These are just a small selection of what can go wrong during a deployment, or rather, things that we should plan for. Regardless of what happens, our deployment system should **never** leave our software in a broken state. We should also always know (or be easily able to find out) what state a deployment is in.
 
@@ -33,12 +34,16 @@ Another important rule to remember when it comes to deployments (and CI in gener
 
 This doesn't mean that failures need to be shown to the users of the software, it means we need to be aware if anything goes wrong. If we are aware of a problem, we can fix it, if the deployment system doesn't give any errors but fails, we may end up in a state where we believe we have fixed a critical bug but the deployment failed, leaving the bug in our production environment and us unaware of the situation.
 
-Defining definitive rules/requirements for a deployment system is difficult, let's try anyway:
+### What a good deployment system does?
+
+Defining definitive rules or requirements for a deployment system is difficult, let's try anyway:
  - Our deployment system should be able to fail gracefully at **any** step of the deployment.
  - Our deployment system should **never** leave our software in a broken state.
  - Our deployment system should let us know when a failure has happened. It's more important to notify about failure than about success.
- - Our deployment system should be allow us to roll back to a previous deployment. Preferrably this roll back should be easier to do (and less prone to failure) than a full deployment.
- - Our deployment system should handle the situation where a user makes a request just before/during a deployment.
+ - Our deployment system should be allow us to roll back to a previous deployment
+   - Preferrably this rollback should be easier to do and less prone to failure than a full deployment
+   - Of course the best option would be an automatic rollback in case of deployment failures
+ - Our deployment system should handle the situation where a user makes a HTTP request just before/during a deployment.
  - Our deployment system should make sure that the software we are deploying meets the requirements we have set for this (e.g. don't deploy if tests haven't been run).
 
 Let's define some things we **want** in this hypothetical deployment system too:
@@ -51,15 +56,17 @@ Let's define some things we **want** in this hypothetical deployment system too:
 
 ### Exercises 11.10-12.
 
-Prior to these exercises, you should ensure you have set up an app in your Heroku environment simillarly that we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet). However now we don not push the code to Heroku ourselves, we let the Gihub Action workflow do that for us!
+Before going to the below exercises, you should setup your application in Heroku environment simillarly that we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
-Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>
+In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Gihub Actions workflow do that for us!
 
-Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your_app_name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location!
+Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>.
 
-Generate an API token for your Heroku profile using <code>heroku authorizations:create</code>, and save the credentials to a local file but <i>**do not push those to GitHub**</i>!
+Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your\_app\_name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location!
 
-You'll the <i>token</i> for your deployment workflow. See more information at <https://devcenter.heroku.com/articles/platform-api-quickstart>.
+Generate an API token for your Heroku profile using command <code>heroku authorizations:create</code>, and save the credentials to a local file but <i>**do not push those to GitHub**</i>!
+
+You'll need the the token soon for your deployment workflow. See more information at about Heroku tokens [here](https://devcenter.heroku.com/articles/platform-api-quickstart).
 
 #### 11.10 Deploying your application to Heroku
 
