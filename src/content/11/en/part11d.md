@@ -299,7 +299,8 @@ From CI point of view the most important protection is requiring status checks t
 
 ![Unmergeable PR](../../images/11/part11d_03.png)
 
-To set up protection for your master branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilise the power of GitHub Actions. Under it you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. At least bulding, testing and linting checks are good candidates.
+To set up protection for your master branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilise the power of GitHub Actions. Under it you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. 
+
 
 ![Branch protection rule](../../images/11/part11d_04.png)
 
@@ -318,6 +319,6 @@ You should protect it to:
 - Require all pull request to be approved before merging
 - Require all status checks to pass before merging
 
-Do not yet check <i>Include administrators</i>! If you do that, you need somebody else to review your pull requests to get code released!
+Do not yet check <i>Include administrators</i>. If you do that, you need somebody else to review your pull requests to get code released!
 
 </div>
