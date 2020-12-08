@@ -14,7 +14,7 @@ GitHub Actions work on a basis of [workflows](https://docs.github.com/en/free-pr
 A typical execution of a workflow looks like this:
 
 - Triggering event happens (for example, there is a push to master branch).
-- The workflow that has that trigger is executed.
+- The workflow with that trigger is executed.
 - Cleanup
 
 ### Basic needs
@@ -76,7 +76,7 @@ Study the structure of the project for a while. As you notice both the frontend 
 
 In contrast to most projects in this course, the frontend code <i>does not use</i> create-react-app, but it has relatively simple [webpack](/en/part7/webpack) configuration that takes care of creating the development environment and creating production bundle.
 
-**One more thing:** n exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  If you do not have it already it is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
+**One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  If you do not have it already it is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
 
 </div>
 
@@ -359,7 +359,7 @@ Once the end to end test works in your macine, include it to the GitHub Action w
 
 Three opitons are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
 
-Once you are sure that the pipeline works, write another test which ensures that one can navgate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in case of <i>ivysaur</i>.
+Once you are sure that the pipeline works, write another test which ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in case of <i>ivysaur</i>.
 
 **Note** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
 
