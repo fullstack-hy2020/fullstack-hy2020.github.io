@@ -40,7 +40,7 @@ Defining definitive rules or requirements for a deployment system is difficult, 
  - Our deployment system should be able to fail gracefully at **any** step of the deployment.
  - Our deployment system should **never** leave our software in a broken state.
  - Our deployment system should let us know when a failure has happened. It's more important to notify about failure than about success.
- - Our deployment system should be allow us to roll back to a previous deployment
+ - Our deployment system should allow us to roll back to a previous deployment
    - Preferrably this rollback should be easier to do and less prone to failure than a full deployment
    - Of course the best option would be an automatic rollback in case of deployment failures
  - Our deployment system should handle the situation where a user makes a HTTP request just before/during a deployment.
@@ -56,9 +56,9 @@ Let's define some things we **want** in this hypothetical deployment system too:
 
 ### Exercises 11.10-12.
 
-Before going to the below exercises, you should setup your application in Heroku environment simillarly that we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
+Before going to the below exercises, you should setup your application in Heroku environment similarly that we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
-In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Gihub Actions workflow do that for us!
+In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Github Actions workflow do that for us!
 
 Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>.
 
@@ -88,20 +88,20 @@ If all goes well, your workflow log should look a bit like this:
 
 ![](../../images/11/11.png)
 
-You can then try the app with browser, but most likely you run to a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet) we notice that Heroku assumes that reposity has a file called <i>Procfile</i> that tells Heroku how to start the application. 
+You can then try the app with browser, but most likely you run to a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet) we notice that Heroku assumes that the repository has a file called <i>Procfile</i> that tells Heroku how to start the application. 
 
 So, add a proper Procfile and ensure that the application starts properly. 
 
-**Remember** that it is always essential to have keep on eye what is happening in server logs when playing around with product depolyments, so use <code>heroku logs</code> early and use it often. No, use it all the time!
+**Remember** that it is always essential to keep on eye what is happening in server logs when playing around with product depolyments, so use <code>heroku logs</code> early and use it often. No, use it all the time!
 
 #### 11.11 Health check
 
 Before moving on let us expand the workflow with one more step, a check that ensures that the application is up and running after the deployment. 
 
 Actually a separate workflow step is not needed, since the action
-[deploy-to-heroku](https://github.com/marketplace/actions/deploy-to-heroku) contains on option that takes care of it.
+[deploy-to-heroku](https://github.com/marketplace/actions/deploy-to-heroku) contains an option that takes care of it.
 
-Add to the backend a simple endpoint for doing a application health check. You may e.g. copy this code:
+Add a simple endpoint for doing an application health check to the backend. You may e.g. copy this code:
 
 ```js
 app.get('/health', (req, res) => {
@@ -109,7 +109,7 @@ app.get('/health', (req, res) => {
 })
 ```
 
-It might also be good idea to have a dummy endpoint in the app that makes it possible to do some changes in code and to ensure that the deployed version has really changed:
+It might also be a good idea to have a dummy endpoint in the app that makes it possible to do some changes in code and to ensure that the deployed version has really changed:
 
 ```js
 app.get('/version', (req, res) => {
@@ -117,9 +117,9 @@ app.get('/version', (req, res) => {
 })
 ```
 
-Look now from the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) how to include the health check to the deployment step. Use the created endpoint for the healtcheck url. You most likely need also the <i>checkstring</i> option to get the check working.
+Look now from the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) how to include the health check to the deployment step. Use the created endpoint for the health check url. You most likely need also the <i>checkstring</i> option to get the check working.
 
-Ensure that Actions notices if a deployment breaks yor applicaton. You may simulate this e.g. by writing a wrong startup command to Procfile:
+Ensure that Actions notices if a deployment breaks your applicaton. You may simulate this e.g. by writing a wrong startup command to Procfile:
 
 ![](../../images/11/12a.png)
 
@@ -127,7 +127,7 @@ Before moving to next exercise, fix your deployment and ensure that the applicat
 
 #### 11.12. Rollback
 
-If the deplyment results to a broken application, the best thing to do is to <i>roll back</i> to previous release. Luckyly Heroku makes this pretty easy. Every deployment to Heroku results a [release](https://blog.heroku.com/releases-and-rollbacks#releases). You can see your application's releases with the command <code>heroku releases</code>:
+If the deployment results in a broken application, the best thing to do is to <i>roll back</i> to previous release. Luckily Heroku makes this pretty easy. Every deployment to Heroku results in a [release](https://blog.heroku.com/releases-and-rollbacks#releases). You can see your application's releases with the command <code>heroku releases</code>:
 
 ```js
 $ heroku releases
@@ -148,7 +148,7 @@ One can quickly do a [rollback](https://blog.heroku.com/releases-and-rollbacks#r
 
 What is even better, is that the action [deploy-to-heroku](https://github.com/marketplace/actions/deploy-to-heroku) can take care of the rollback for us!
 
-So read again the [documentation](https://github.com/marketplace/actions/deploy-to-heroku)  and modify the workflow to prevent a broken deployment altogether. You can again simulate a broken deployment with breaking the Procfile:
+So read again the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) and modify the workflow to prevent a broken deployment altogether. You can again simulate a broken deployment with breaking the Procfile:
 
 ![](../../images/11/13.png)
 
