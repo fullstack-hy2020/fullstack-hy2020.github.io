@@ -9,7 +9,7 @@ lang: en
 
 Having written a nice application it's time to think about how we're going to deploy it to the use of real users. 
 
-In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply <i>pushing the git repository</i> to the servers of the cloud provider [Heroku](https://www.heroku.com/home). It is pretty simple to release software in Heroku at least compared to many other type of hosting setups but it still contains risks: nothing prevents us from accidently pushing broken code to production.
+In [part 3](/en/part3/deploying_app_to_internet) of this course, we did this by simply <i>pushing the git repository</i> to the servers of the cloud provider [Heroku](https://www.heroku.com/home). It is pretty simple to release software in Heroku at least compared to many other types of hosting setups but it still contains risks: nothing prevents us from accidentally pushing broken code to production.
 
 Next, we're going to look at the principles of making a deployment safely and some of the principles of deploying software on both a small and large scale. 
 
@@ -17,7 +17,7 @@ Next, we're going to look at the principles of making a deployment safely and so
 
 We'd like to define some rules about how our deployment process should work but before that, we have to look at some constraints of reality.
 
-One on phrasing of Murphy's Law holds that:
+One on the phrasing of Murphy's Law holds that:
   "Anything that can go wrong will go wrong."
 
 It's important to remember this when we plan out our deployment system. Some of the things we'll need to consider could include:
@@ -25,7 +25,7 @@ It's important to remember this when we plan out our deployment system. Some of 
  - I'm connected to the server and deploying over the internet, what happens if my internet connection dies?
  - What happens if any specific instruction in my deployment script/system fails?
  - What happens if, for whatever reason, my software doesn't work as expected on the server I'm deploying to? Can I roll back to a previous version?
- - What happens if a user does a HTTP request to our software just before we do a deployment (we didn't have time to send a response to the user)?
+ - What happens if a user does an HTTP request to our software just before we do deployment (we didn't have time to send a response to the user)?
 
 These are just a small selection of what can go wrong during a deployment, or rather, things that we should plan for. Regardless of what happens, our deployment system should **never** leave our software in a broken state. We should also always know (or be easily able to find out) what state a deployment is in.
 
@@ -34,16 +34,16 @@ Another important rule to remember when it comes to deployments (and CI in gener
 
 This doesn't mean that failures need to be shown to the users of the software, it means we need to be aware if anything goes wrong. If we are aware of a problem, we can fix it, if the deployment system doesn't give any errors but fails, we may end up in a state where we believe we have fixed a critical bug but the deployment failed, leaving the bug in our production environment and us unaware of the situation.
 
-### What a good deployment system does?
+### What does a good deployment system do?
 
 Defining definitive rules or requirements for a deployment system is difficult, let's try anyway:
  - Our deployment system should be able to fail gracefully at **any** step of the deployment.
  - Our deployment system should **never** leave our software in a broken state.
  - Our deployment system should let us know when a failure has happened. It's more important to notify about failure than about success.
  - Our deployment system should allow us to roll back to a previous deployment
-   - Preferrably this rollback should be easier to do and less prone to failure than a full deployment
-   - Of course the best option would be an automatic rollback in case of deployment failures
- - Our deployment system should handle the situation where a user makes a HTTP request just before/during a deployment.
+   - Preferably this rollback should be easier to do and less prone to failure than a full deployment
+   - Of course, the best option would be an automatic rollback in case of deployment failures
+ - Our deployment system should handle the situation where a user makes an HTTP request just before/during a deployment.
  - Our deployment system should make sure that the software we are deploying meets the requirements we have set for this (e.g. don't deploy if tests haven't been run).
 
 Let's define some things we **want** in this hypothetical deployment system too:
@@ -56,7 +56,7 @@ Let's define some things we **want** in this hypothetical deployment system too:
 
 ### Exercises 11.10-11.12.
 
-Before going to the below exercises, you should setup your application in Heroku environment similarly that we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
+Before going to the below exercises, you should setup your application in Heroku environment like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
 
 In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Github Actions workflow do that for us!
 
@@ -66,7 +66,7 @@ Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your
 
 Generate an API token for your Heroku profile using command <code>heroku authorizations:create</code>, and save the credentials to a local file but <i>**do not push those to GitHub**</i>!
 
-You'll need the the token soon for your deployment workflow. See more information at about Heroku tokens [here](https://devcenter.heroku.com/articles/platform-api-quickstart).
+You'll need the token soon for your deployment workflow. See more information at about Heroku tokens [here](https://devcenter.heroku.com/articles/platform-api-quickstart).
 
 #### 11.10 Deploying your application to Heroku
 
@@ -88,11 +88,11 @@ If all goes well, your workflow log should look a bit like this:
 
 ![](../../images/11/11.png)
 
-You can then try the app with browser, but most likely you run to a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet) we notice that Heroku assumes that the repository has a file called <i>Procfile</i> that tells Heroku how to start the application. 
+You can then try the app with a browser, but most likely you run into a problem. If we read carefully [the section 'Application to the Internet' in part 3](/en/part3/deploying_app_to_internet#application-to-the-internet) we notice that Heroku assumes that the repository has a file called <i>Procfile</i> that tells Heroku how to start the application. 
 
 So, add a proper Procfile and ensure that the application starts properly. 
 
-**Remember** that it is always essential to keep on eye what is happening in server logs when playing around with product depolyments, so use <code>heroku logs</code> early and use it often. No, use it all the time!
+**Remember** that it is always essential to keep an on eye what is happening in server logs when playing around with product deployments, so use <code>heroku logs</code> early and use it often. No, use it all the time!
 
 #### 11.11 Health check
 
@@ -109,7 +109,7 @@ app.get('/health', (req, res) => {
 })
 ```
 
-It might also be a good idea to have a dummy endpoint in the app that makes it possible to do some changes in code and to ensure that the deployed version has really changed:
+It might also be a good idea to have a dummy endpoint in the app that makes it possible to do some code changes and to ensure that the deployed version has really changed:
 
 ```js
 app.get('/version', (req, res) => {
@@ -117,9 +117,9 @@ app.get('/version', (req, res) => {
 })
 ```
 
-Look now from the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) how to include the health check to the deployment step. Use the created endpoint for the health check url. You most likely need also the <i>checkstring</i> option to get the check working.
+Look now from the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) how to include the health check in the deployment step. Use the created endpoint for the health check url. You most likely need also the <i>checkstring</i> option to get the check working.
 
-Ensure that Actions notices if a deployment breaks your applicaton. You may simulate this e.g. by writing a wrong startup command to Procfile:
+Ensure that Actions notices if a deployment breaks your application. You may simulate this e.g. by writing a wrong startup command to Procfile:
 
 ![](../../images/11/12a.png)
 
@@ -127,7 +127,7 @@ Before moving to next exercise, fix your deployment and ensure that the applicat
 
 #### 11.12. Rollback
 
-If the deployment results in a broken application, the best thing to do is to <i>roll back</i> to previous release. Luckily Heroku makes this pretty easy. Every deployment to Heroku results in a [release](https://blog.heroku.com/releases-and-rollbacks#releases). You can see your application's releases with the command <code>heroku releases</code>:
+If the deployment results in a broken application, the best thing to do is to <i>roll back</i> to the previous release. Luckily Heroku makes this pretty easy. Every deployment to Heroku results in a [release](https://blog.heroku.com/releases-and-rollbacks#releases). You can see your application's releases with the command <code>heroku releases</code>:
 
 ```js
 $ heroku releases
