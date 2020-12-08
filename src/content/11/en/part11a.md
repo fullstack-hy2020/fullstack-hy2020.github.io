@@ -153,11 +153,9 @@ If, on the other hand, master and production are very different and master is no
 
 It's often important to know what is actually running in production. Ideally, as we discussed above, we'd have master running in production. This is not always possible. Sometimes we intend to have master in production but a build fails, sometimes we batch together several changes and want to have them all deployed at once. 
 
-What we need in these cases (and is a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it's useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We shall discuss more about versioning [a bit later in this part](/en/part11/keeping_green#versioning).
+What we need in these cases (and is a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it's useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We will discuss versioning further [a bit later in this part](/en/part11/keeping_green#versioning).
 
 It is even more useful if we combine the version information with a history of all releases. If, for example, we found out that a particular commit has introduced a bug, we can find out exactly when that was released and how many users were affected. This is especially useful when that bug has written bad data to the database. We'd now be able to track where that bad data went based on the time.
-
-
 
 ### Types of CI setup
 
