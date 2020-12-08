@@ -7,21 +7,21 @@ lang: en
 
 <div class="content">
 
-During this part you will build a robust deployment pipeline to a ready made [example project](https://github.com/smartlyio/full-stack-open-pokedex) starting in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2). You will [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the example project and that will create you a personal copy of the repository. In the [last two](/en/part11/expanding_further#exercises-11-20-22) exercises, you will build another deployment pipeline for some of <i>your own</i> previously created app!
+During this part, you will build a robust deployment pipeline to a ready made [example project](https://github.com/smartlyio/full-stack-open-pokedex) starting in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2). You will [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the example project and that will create you a personal copy of the repository. In the [last two](/en/part11/expanding_further#exercises-11-20-22) exercises, you will build another deployment pipeline for some of <i>your own</i> previously created app!
 
-There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". 
+There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 9, the submission goes to a different "course instance". 
 
-This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finnish at least parts 0 to 5 before starting this part.
+This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finish at least parts 0 to 5 before starting this part.
 
-Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configugations is way more harder, so in this part you need lots of patience and discipline!
+Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configurations is way more harder, so in this part, you need lots of patience and discipline!
 
 ### Getting software to production
 
-Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. After that we need to maintain it, release new versions and work with other people to expand that software.
+Writing software is all well and good but nothing exists in a vacuum. Eventually, we'll need to deploy the software to production, i.e. give it to the real users. After that we need to maintain it, release new versions, and work with other people to expand that software.
 
 We've already used GitHub to store our source code, but what happens when we work within a team with more developers? 
 
-Many problems may arise when several developers are involved. The software might work just fine in <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.
+Many problems may arise when several developers are involved. The software might work just fine on <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.
 
 There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, who's changes get deployed? How would it be possible to prevent one developer's changes from overwriting another's? 
 
@@ -94,17 +94,17 @@ What about deployment then? We'll talk about consistency and repeatability at le
 
 #### Is this CD thing related?
 
-The terms <i>Continuous Delivery</i> and <i>Continuous Deployment</i> (both of which have the acronyme CD) are often used when one talks about CI that also takes care of deployments. We won't bore you with the exact definition (you can use e.g. [wikipedia](https://en.wikipedia.org/wiki/Continuous_delivery) or [Martin Fowler's another blogpost](https://martinfowler.com/bliki/ContinuousDelivery.html)) but in general we refer to CD as the practice where the master branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges into the master/base branch.
+The terms <i>Continuous Delivery</i> and <i>Continuous Deployment</i> (both of which have the acronym CD) are often used when one talks about CI that also takes care of deployments. We won't bore you with the exact definition (you can use e.g. [Wikipedia](https://en.wikipedia.org/wiki/Continuous_delivery) or [Martin Fowler's another blog post](https://martinfowler.com/bliki/ContinuousDelivery.html)) but in general, we refer to CD as the practice where the master branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges into the master/base branch.
 
-What about the murky area between CI and CD? If we, for example, have tests that must be run before any new code can be merged to master, is this CI because we're making frequent merges to master or is it CD because we're making sure that master is always deployable?
+What about the murky area between CI and CD? If we, for example, have tests that must be run before any new code can be merged to master, is this CI because we're making frequent merges to master, or is it CD because we're making sure that master is always deployable?
 
-So, some concepts frequently cross the line between CI and CD and, as we discussed above, deployment sometimes makes sense to consider CD as part of CI. This is why you'll often see references to CI/CD to describe the entire process. We'll use the terms "CI" and "CI/CD" interchangably in this part. 
+So, some concepts frequently cross the line between CI and CD and, as we discussed above, deployment sometimes makes sense to consider CD as part of CI. This is why you'll often see references to CI/CD to describe the entire process. We'll use the terms "CI" and "CI/CD" interchangeably in this part. 
 
 ### Why is it important?
 
 Above we talked about the "works on my machine" problem and the deployment of multiple changes, but what about other issues. What if Alice committed directly to master? What if Bob used a branch but didn't bother to run tests before merging? What if Charlie tries to build the software for production but does so with the wrong parameters?
 
-With the use of continuous integration and systematic ways of working we can avoid these. 
+With the use of continuous integration and systematic ways of working, we can avoid these. 
  - We can disallow commits directly to master
  - We can have our CI process run on all Pull Requests (PRs) against master and allow merges only when our desired conditions are met e.g. tests pass
  - We can build our packages for production in the known environment of the CI system
@@ -113,7 +113,7 @@ There are other advantages to extending this setup:
  - If we use CD with deployment every time there is a merge to master then we know that master is always running in production
  - If we only allow merges when the branch has an up to date master, then we can be sure that different developers don't overwrite each other's changes
 
-Note that in this part we are assuming that <i>master</i> or <i>main</i> branch contains the code that is running in production. The numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with git, e.g. in some cases it may be a specific <i>release branch</i> that contains the code which is running in production.
+Note that in this part we are assuming that <i>master</i> or <i>main</i> branch contains the code that is running in production. The numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code which is running in production.
 
 ### Important principles
 
@@ -126,7 +126,7 @@ To that end, CI should always be configured to the task at hand and the project 
  - How to make sure that the changes don't overwrite each other?
  - How to make deployments happen at the click of a button or automatically when one merges to master?
 
-There even exists scientific evidence on the numerous benefits the usage of CI/CD has. According to a large study reported in the book [Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://itrevolution.com/book/accelerate/), the use of CI/CD correlates heavily with organizational success (e.g. improves profitability and product quality, increases market share, shortens the time to market). CI/CD even makes developers happier by reducing their burnout rate. The results summarized in the book are also reported in scientific articles such as [this](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909).
+There even exists scientific evidence on the numerous benefits the usage of CI/CD has. According to a large study reported in the book [Accelerate: The Science of Lean Software and DevOps: Building and Scaling High Performing Technology Organizations](https://itrevolution.com/book/accelerate/), the use of CI/CD correlate heavily with organizational success (e.g. improves profitability and product quality, increases market share, shortens the time to market). CI/CD even makes developers happier by reducing their burnout rate. The results summarized in the book are also reported in scientific articles such as [this](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=2681909).
 #### Documented behavior
 
 There's an old joke that a bug is just an "undocumented feature". We'd like to avoid that. We'd like to avoid any situations where we don't know the exact outcome. For example, if we depend on a label on a PR to define whether something is a "major", "minor" or "patch" release (we'll cover the meanings of those terms later), then it's important that we know what happens if a developer forgets to put a label on their PR. What if they put a label on after the build/test process has started? What happens if the developer changes the label mid-way through, which one is the one that actually releases?
@@ -155,7 +155,7 @@ It's often important to know what is actually running in production. Ideally, as
 
 What we need in these cases (and is a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it's useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We shall discuss more about versioning [a bit later in this part](/en/part11/keeping_green#versioning).
 
-It is is even more useful if we combine the version information with a history of all releases. If, for example, we found out that a particular commit has introduced a bug, we can find out exactly when that was released and how many users were affected. This is especially useful when that bug has written bad data to the database. We'd now be able to track where that bad data went based on the time.
+It is even more useful if we combine the version information with a history of all releases. If, for example, we found out that a particular commit has introduced a bug, we can find out exactly when that was released and how many users were affected. This is especially useful when that bug has written bad data to the database. We'd now be able to track where that bad data went based on the time.
 
 
 
@@ -204,20 +204,20 @@ Besides it is easy to take into use, GitHub Actions is a good choice from other 
 
 ### Exercise 11.1
 
-Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit what we have read. 
+Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit on what we have read. 
 
 #### 11.1 warming up
 
 Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon.
 
-Let us assume that the application is coded with some other language than JavaScript/TypeScript, e.g. in  Python, Java or Ruby. You can freely pick the language. This might even be language you do not know much yourself.
+Let us assume that the application is coded with some other language than JavaScript/TypeScript, e.g. in  Python, Java, or Ruby. You can freely pick the language. This might even be a language you do not know much yourself.
 
-Write a short text, say 200-300 words, where you answer or discuss some of the points below. You can check the length with https://wordcounter.net/. Save your answer to file named <i>exercise1.md</i> in the root of the repository that you shall create in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2).
+Write a short text, say 200-300 words, where you answer or discuss some of the points below. You can check the length with https://wordcounter.net/. Save your answer to the file named <i>exercise1.md</i> in the root of the repository that you shall create in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2).
 
 The points to discuss:
-- Some common steps in a CI setup include <i>linting</i>, <i>testing</i>, and <i>building</i>. What are the specific tools for taking care of these steps in the ecosystem of the language you picked? You can search the answer by google.
+- Some common steps in a CI setup include <i>linting</i>, <i>testing</i>, and <i>building</i>. What are the specific tools for taking care of these steps in the ecosystem of the language you picked? You can search for the answers by google.
 - What alternatives are there to set up the CI besides Jenkins and GitHub Actions that we mentioned in this section?
-- Would this setup be better in a self-hosted or a cloud based environment? Why? What information would you need to make that decision?
+- Would this setup be better in a self-hosted or a cloud-based environment? Why? What information would you need to make that decision?
 
 Remember that there are no 'right' answers to the above! 
 
