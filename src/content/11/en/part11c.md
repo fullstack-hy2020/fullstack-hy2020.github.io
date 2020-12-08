@@ -22,7 +22,7 @@ One on phrasing of Murphy's Law holds that:
 
 It's important to remember this when we plan out our deployment system. Some of the things we'll need to consider could include:
  - What if my PC crashes or hangs during deployment?
- - I'm connected to the server I'm deploying to over the internet, what happens if my internet connection dies?
+ - I'm connected to the server and deploying over the internet, what happens if my internet connection dies?
  - What happens if any specific instruction in my deployment script/system fails?
  - What happens if, for whatever reason, my software doesn't work as expected on the server I'm deploying to? Can I roll back to a previous version?
  - What happens if a user does a HTTP request to our software just before we do a deployment (we didn't have time to send a response to the user)?

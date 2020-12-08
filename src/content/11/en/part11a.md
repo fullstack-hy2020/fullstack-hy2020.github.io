@@ -204,7 +204,11 @@ Besides it is easy to take into use, GitHub Actions is a good choice from other 
 
 ### Exercise 11.1
 
-Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit what we have read. Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon.
+Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit what we have read. 
+
+#### 11.1 warming up
+
+Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon.
 
 Let us assume that the application is coded with some other language than JavaScript/TypeScript, e.g. in  Python, Java or Ruby. You can freely pick the language. This might even be language you do not know much yourself.
 
