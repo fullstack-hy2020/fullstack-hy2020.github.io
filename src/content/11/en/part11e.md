@@ -99,13 +99,13 @@ Use now the action [url-health-check](https://github.com/marketplace/actions/url
 
 #### 11.21 Your own pipeline
 
-Build a simillar CI/CD-pipeline for some of your own products. A good candidate is the phonebook app that was built in parts 2 to 4 of the course, or bloglist built in part 5, or the redux anecdotes built in part 6. You may also use some app of your own here.
+Build a simillar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or bloglist built in parts 4 and 5, or the redux anecdotes built in part 6. You may also use some app of your own for this exercise.
 
-You most likely need to do some restructuring to get all the pieces togeteher. A logical first step would be to store both the frontend and backend code in a same repository. This is not a requirement but it is recommended since it makes things much more simple.
+You most likely need to do some restructuring to get all the pieces together. A logical first step is to store both the frontend and backend code in a same repository. This is not a requirement but it is recommended since it makes things much more simple.
 
-One possible repository structure would be to have backend at the root of repository and the fronend as a subdirectory. You can also "copy paste" the structure of the example app of this chapter or try out the [example app](https://github.com/fullstack-hy2020/create-app) mentioned in [part 7](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository).
+One possible repository structure would be to have backend at the root of the repository and the fronend as a subdirectory. You can also "copy paste" the structure of the example app of this part or try out the [example app](https://github.com/fullstack-hy2020/create-app) mentioned in [part 7](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository).
 
-It is perhaps best to create a new repository for this exercise and simply copy and paste the old code. In real life you most likely would to this all in the old repository but now "a fresh start" makes things easier.
+It is perhaps best to create a new repository for this exercise and simply copy and paste the old code there. In real life you most likely would to this all in the old repository but now "a fresh start" makes things easier.
 
 This is a long and perhaps quite a tought exercise, but this kind of situation where you have a "legacy code" and you need to build it a proper deployment pipeline is quite commoin in real life!
 
@@ -126,7 +126,7 @@ The you are done!
 
 ### Submitting exercises and getting the credits
 
-Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd-2020) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". 
+Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". 
 
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
