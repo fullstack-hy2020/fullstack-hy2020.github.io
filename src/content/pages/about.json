@@ -99,6 +99,50 @@
       }
     ]
   },
+  "es": {
+    "name": " General ",
+    "intro": [
+      "Este curso sirve como una introducción al desarrollo de aplicaciones web modernas con JavaScript. El enfoque principal es crear aplicaciones de una sola página con ReactJS que utilizan API REST creadas con Node.js. El curso también contiene una sección sobre GraphQL, una alternativa moderna a REST API.",
+      "El curso cubre las pruebas, la configuración y la gestión del entorno, y el uso de MongoDB para almacenar los datos de la aplicación",
+      "La edición del curso de este año contiene una parte nueva sobre <a href='/en/part9'>TypeScript</a>. El contenido de esta parte lo proporciona <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>",
+      "El curso tiene un valor de entre 3 y 9 créditos y el contenido es el mismo que el del <a href='https://fullstack-hy2020.github.io/'> curso de full stack </a> que se lleva a cabo en el <a href='https://www.helsinki.fi/en/computer-science'>Departamento de Ciencias de la Computación</a> en la Universidad de Helsinki en la primavera de 2020. También hay un <a href='/osa0/yleista#full-stack-harjoitustyo'>proyecto</a> asociado que vale entre 1 y 10 créditos.",
+      "Los socios y afiliados del curso incluyen <a href='https://www.houston-inc.com/'>HoustonInc </a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> y <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. Consulta <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>aquí para las conferencias de los invitados</a> sobre temas relacionados con el curso impartidos por varios expertos de nuestros socios y afiliados."
+    ],
+    "information": [
+      {
+        "title": "Material del curso",
+        "content": [
+          "El material del curso debe leerse \"parte por parte\" desde el principio hasta el final. También puede ser útil hacer la parte completa de las tareas solo después de leer la primera parte del artículo de una vez por todas.",
+          "El material se basa en la extensión gradual de algunos de los programas de muestra que cambian parte del material. El material funciona mejor si también escribe el código usted mismo y hace pequeñas modificaciones en el código."
+        ]
+      },
+      {
+        "title": "Rendimiento",
+        "content": [
+          "El curso consta de ocho partes, la primera de las cuales es cero por razones históricas.",
+          "En el material, de la parte n a n + 1, el avance no es significativo hasta que se haya alcanzado el conocimiento suficiente de algunas de las n.",
+          "Se supone que está realizando al menos algunas de las tareas que no han sido marcadas con un asterisco. Las tareas marcadas con un asterisco también afectarán la revisión, pero si no lo hacen no causará demasiados obstáculos para realizar la siguiente sección (sin marcar).",
+          "La velocidad del curso en el curso es libre, las tareas se pueden entregar hasta el 10.1.2021 a las 23:59.",
+          "Las estadísticas de uso del tiempo para las entregas ya realizadas en diferentes partes de este curso se pueden encontrar en la página de devolución de tareas "
+        ]
+      },
+      {
+        "title": "Criterios de calificación",
+        "content": [
+          "El curso se puede completar en 3 o 5-8 créditos.",
+          "El alcance y la calificación están determinados por todas las tareas realizadas, por lo que las tareas marcadas con un asterisco también afectarán la calificación.",
+          "Si desea completar el curso, guarde su solicitud de recuperación de número de estudiante en mis presentaciones-."
+        ]
+      },
+      {
+        "title": "Tipos de material",
+        "content": [
+          "Hay una gran cantidad de material en el curso y se ha escrito muy rápido por las circunstancias. A pesar de las pruebas beta y la corrección, el material tiene errores de ortografía. /Fullstackopen-2020.github.iok en el material del curso.",
+          "Hacer un pull request es fácil. Por ejemplo, si esta página tiene un error tipográfico, vaya a la página de 'código fuente' https://github.com/fullstack-hy2019/fullstack-hy2019.github.io/edit/source/src/content/pages/about.json haga clic en la imagen del lápiz a la derecha, realice los cambios y haga clic varias veces en \"green\" de acuerdo con el curso de Peligro"
+        ]
+      }
+    ]
+  },
   "zh": {
     "name": "General",
     "intro": [

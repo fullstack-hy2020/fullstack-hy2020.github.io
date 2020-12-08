@@ -39,6 +39,26 @@
     "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
     "licenced": "The material is licensed under the Creative Commons BY-NC-SA 3.0 License."
   },
+  "es": {
+    "mainTitle": "Profundización en el desarrollo web moderno.",
+    "intro": "¡Aprenda React, Redux, Node.js, MongoDB, GraphQL y TypeScript de una sola vez! Este curso le presentará el desarrollo web moderno basado en JavaScript. El enfoque principal es crear aplicaciones de una sola página con ReactJS que usan REST API creadas con Node.js.",
+    "current": [
+      "¡La edición 2020 ya está abierta! La fecha límite para las presentaciones es el 10.1.2021.",
+      "La edición de este año del curso contiene una parte nueva sobre <a href='/es/part9'>TypeScript</a>. El contenido de la parte es proporcionado por <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>.",
+      "Lea <a href='/en/part0/general_info#changed-since-the-last-year'>aquí</a> ¡qué más ha cambiado desde el año pasado!",
+      "Puede discutir el curso y temas relacionados en nuestro grupo dedicado en Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. ¡Únase a la conversación!"
+    ],
+    "telegram": "Telegram es una aplicación de foro de discusión estilo whatsapp/messenger que se puede usar con un navegador, dispositivos móviles y clientes Windows/Linux/OSX.",
+    "notice": "NB: Los comentarios inapropiados, degradantes y discriminatorios están estrictamente prohibidos en el canal, y cualquiera que envíe este tipo de mensajes será eliminado permanentemente de la discusión.",
+    "licence": [
+      "Las partes 0 a 8 del material del curso están escritas por <a href='https://github.com/mluukkai'>Matti Luukkainen</a>. El contenido de la parte 9 está escrito por desarrolladores de <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. La parte 10 está escrita por <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>. Numerosas <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>personas</a> han mejorado y corregido el material tanto en contenido como en ortografía. También puede realizar mejoras en el material del curso usted mismo. La página web del curso está diseñada y creada por <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, que también han auditado el contenido del material del curso. Traducción al chino de <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>. Traducción al español de <a target:'_blank href='https://github.com/sebastiantorres86'>Sebastian Torres</a> y <a target='_blank' href='https://github.com/cynthiamv'>Cynthia Vico Vacca</a> con el apoyo de <a target='_blank' href='https://frontend.cafe/'>FrontendCafé</a>",
+      "El material del curso tiene licencia de <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>licencia Creative Commons BY-NC-SA 3.0</a>, lo que significa que son libres de usar y distribuir el material, siempre que no se eliminen los nombres de los autores originales. Si realiza cambios en el material y desea distribuir la versión modificada, debe tener la misma licencia. El uso del material para con fines comerciales está prohibido sin permiso."
+    ],
+    "university": "La Universidad de Helsinki es la universidad de ciencias más grande y antigua de Finlandia, con una comunidad científica internacional de 40.000 personas.",
+    "houston": "The Finnish Houston Inc. es una empresa de software ágil fundada en 2003. Diseñamos e implementamos servicios digitales personalizados para nuestro negocio.",
+    "contacts": ["Full Stack Open 2020", "matti.luukkainen@helsinki.fi"],
+    "licensed": "El material está sujeto a la licencia Creative Commons BY-NC-SA 3.0."
+  },
   "zh": {
     "mainTitle": "深入浅出现代Web编程",
     "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 编程技术。重点是利用 ReactJS 搭配Node.js开发的REST API，来搭建单页面应用程序（SPA：Single Page Application）",
