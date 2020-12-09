@@ -2,6 +2,7 @@ import { Banner } from '../Banner/Banner';
 import { ContentLiftup } from '../ContentLiftup/ContentLiftup';
 import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
+import getPartTranslationPath from '../../utils/getPartTranslationPath';
 
 export const PartBanner = ({ lang }) => {
   // TODO: show part 11 when published
@@ -69,17 +70,9 @@ export const PartBanner = ({ lang }) => {
                 alt: partNames[part],
               }}
               hoverImageSrc={require(`../../images/thumbnails/part-${part}_ovr.svg`)}
-              name={`${
-                lang === 'en' ? 'Part' : lang === 'zh' ? 'Part' : 'Osa'
-              } ${part}`}
+              name={`${lang === 'fi' ? 'Osa' : 'Part'} ${part}`}
               summary={partNames[part]}
-              path={
-                lang === 'en'
-                  ? `/en/part${part}`
-                  : lang === 'zh'
-                  ? `/zh/part${part}`
-                  : `/osa${part}`
-              }
+              path={getPartTranslationPath(lang, part)}
             />
           );
         })}

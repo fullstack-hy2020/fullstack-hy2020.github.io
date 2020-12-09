@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import navigation from '../../content/partnavigation/partnavigation';
 import Element from '../Element/Element';
 import { SubHeader } from '../SubHeader/SubHeader';
+import getPartTranslationPath from '../../utils/getPartTranslationPath';
 
 const SearchResults = ({ query, results = [] }) => {
   const { t, i18n } = useTranslation();
@@ -31,9 +32,11 @@ const SearchResults = ({ query, results = [] }) => {
           {results.map(({ part, letter }) => (
             <li key={`${part}${letter}`}>
               <Link
-                to={`/${
-                  lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part' : 'osa'
-                }${part}/${snakeCase(navigation[lang][part][letter])}`}
+                to={getPartTranslationPath(
+                  lang,
+                  part,
+                  `/${snakeCase(navigation[lang][part][letter])}`
+                )}
               >
                 <div>
                   {`part ${part}, ${letter}: ${navigation[lang][part][letter]}`}

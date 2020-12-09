@@ -7,6 +7,7 @@ import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 import snakeCase from 'lodash/fp/snakeCase';
 import { useTranslation } from 'react-i18next';
+import getTranslationPath from '../../utils/getTranslationPath';
 
 const prevChar = c => String.fromCharCode(c.charCodeAt(0) - 1);
 const nextChar = c => String.fromCharCode(c.charCodeAt(0) + 1);
@@ -21,11 +22,9 @@ const hasNext = (letter, part, lang) => {
   );
 };
 
-const labelOsaPart = lang =>
-  lang === 'en' ? 'Part' : lang === 'zh' ? 'Part' : 'Osa';
+const labelOsaPart = lang => (lang === 'fi' ? 'Osa' : 'Part');
 
-const langUrl = lang =>
-  `/${lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part' : 'osa'}`;
+const langUrl = lang => (lang === 'fi' ? '/osa' : `/${lang}/part`);
 
 const PrevNext = ({ part, letter, lang }) => {
   const { t } = useTranslation();
