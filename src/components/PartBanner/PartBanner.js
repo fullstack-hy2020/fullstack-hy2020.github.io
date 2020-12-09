@@ -6,7 +6,7 @@ import getPartTranslationPath from '../../utils/getPartTranslationPath';
 
 export const PartBanner = ({ lang }) => {
   // TODO: show part 11 when published
-  const parts = Object.keys(navigation[lang]).filter(k => k !== '11');
+  const parts = Object.keys(navigation[lang]);
 
   return (
     <Banner
