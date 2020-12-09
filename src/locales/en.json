@@ -43,5 +43,11 @@
   },
   "faqPage": {
     "faqTitle": "Frequently asked questions"
+  },
+  "homePage": {
+    "startCourseButton": "Start course",
+    "announcementsTitle": "Announcements",
+    "authorsTitle": "Authors and License",
+    "courseNameTitle": "Full Stack open 2020"
   }
 }

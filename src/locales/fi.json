@@ -43,5 +43,11 @@
   },
   "faqPage": {
     "faqTitle": "Usein kysytyt kysymykset"
+  },
+  "homePage": {
+    "startCourseButton": "Aloita kurssi",
+    "announcementsTitle": "Ajankohtaista",
+    "authorsTitle": "Materiaalin tekijä ja lisenssi",
+    "courseNameTitle": "Full Stack open 2020"
   }
 }

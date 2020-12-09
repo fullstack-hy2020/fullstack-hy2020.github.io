@@ -42,5 +42,11 @@
   },
   "faqPage": {
     "faqTitle": "常见问题"
+  },
+  "homePage": {
+    "startCourseButton": "开始课程",
+    "announcementsTitle": "公告",
+    "authorsTitle": "著作权与版权",
+    "courseNameTitle": "全栈公开课 2020"
   }
 }
