@@ -13,7 +13,7 @@ Otros temas incluyen depuración de aplicaciones, configuración, gestión de en
 
 ### Requisitos previos
 
-Se espera que los participantes tengan buenas habilidades de programación, conocimientos básicos de programación web y bases de datos, y dominio del uso básico del sistema de gestión de versiones Git. También se espera que tenga perseverancia y capacidad para resolver problemas y buscar información de forma independiente.
+Se espera que los participantes tengan buenas habilidades de programación, conocimientos básicos de programación web y bases de datos, y dominio del uso básico del sistema de gestión de versiones Git. También se espera que tengan perseverancia y capacidad para resolver problemas y buscar información de forma independiente.
 
 No se requieren conocimientos previos de JavaScript u otros temas del curso.
 
@@ -45,7 +45,7 @@ El curso se puede tomar como un curso más corto con un valor de 3 créditos o c
 
 El número de créditos y la calificación final están determinados por el número de ejercicios presentados, incluidos los que no están marcados con un asterisco.
 
-Si desea obtener créditos universitarios, también hay un examen de curso que no cuenta para su calificación final, pero debe aprobarse. Para [registrarse](/en/part0/general_info/# sign-up-for-the-exam) para créditos universitarios proporcionados por [Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261), debe tener un número de seguro social finlandés.
+Si desea obtener créditos universitarios, también hay un examen de curso que no cuenta para su calificación final, pero debe aprobarse. Para [registrarse](/en/part0/general_info/#sign-up-for-the-exam) para créditos universitarios proporcionados por [Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261), debe tener un número de seguro social finlandés.
 
 Una vez que haya completado suficientes ejercicios para aprobar, puede descargar el certificado del curso desde el [sistema de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). No se requiere un número de seguro social finlandés.
 
@@ -107,20 +107,17 @@ Al enviar ejercicios para la parte 10 de los cursos, React Native, puede obtener
 
 Tenga en cuenta que para recibir créditos universitarios, necesita un número de seguro social finlandés.
 
-<! - Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>mis presentaciones</ i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston] (/ osa0 / yleista / # kokeeseen-ilmoittautuminen) kautta. ->
 Si desea recibir créditos, guarde su número de estudiante de la <b>Universidad de Helsinki</b> en
 [el sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
 ![](../../images/0/28b.png)
 
-Si no eres un estudiante de la Universidad de Helsinki, puedes obtener un número de estudiante registrándote en el curso a través de [Open University](/en/part0/general_info # sign-up-for-the-exam).
+Si no eres un estudiante de la Universidad de Helsinki, puedes obtener un número de estudiante registrándote en el curso a través de [Open University](/en/part0/general_info#sign-up-for-the-exam).
 
-<!-- Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan Maaran tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi Valmis kurssin suorituksen kanssa: -->
-Usted recibirá sus créditos después de haber presentado suficiente ejercicio para una calificación aprobatoria, pasado el examen y háganos saber a través del sistema de envío de ejercicios que ha completado el curso:
+Usted recibirá sus créditos después de haber presentado suficientes ejercicios para una calificación aprobatoria, pasado el examen y háganos saber a través del sistema de envío de ejercicios que ha completado el curso:
 
 ![](../../images/0/28a.png)
 
-<!-- Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. -->
 Puede ver su calificación en Weboodi aproximadamente cuatro semanas después de notificarnos.
 
 ### Certificado del curso
@@ -133,7 +130,7 @@ Si ya ha realizado el curso como MOOC o como curso universitario, ahora puede am
 
 #### Ampliación desde Full stack open 2019
 
-¡Puede continuar donde lo dejó! Si desea volver a enviar una parte completa, comuníquese con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi) o Telegram [@mluukkai](https://t.me/mluukkai), con su GitHub nombre de usuario y las partes que le gustaría eliminar de sus envíos.
+¡Puede continuar donde lo dejó! Si desea volver a enviar una parte completa, comuníquese con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi) o Telegram [@mluukkai](https://t.me/mluukkai), con su nombre de usuario de Github y las partes que le gustaría eliminar de sus envíos.
 
 #### Ampliación de otras instancias de este curso
 
@@ -148,7 +145,7 @@ Si ya aprobó el examen del curso (excluyendo el examen del curso de tres crédi
 ### Cambios desde el año pasado
 
 - Solo hay cambios menores en las partes 0-4.
-- La parte 5d, <i>pruebas de un extremo a otro (end-to-end testing)</i> utilizando la biblioteca [Cypress.io](https://www.cypress.io), es material casi completamente nuevo. El uso de hooks personalizados se ha trasladado de la parte 5 a la parte 7 con contenido nuevo.
+- La parte 5d, <i>pruebas de extremo a extremo (end-to-end testing)</i> utilizando la biblioteca [Cypress.io](https://www.cypress.io), es material casi completamente nuevo. El uso de hooks personalizados se ha trasladado de la parte 5 a la parte 7 con contenido nuevo.
 - La Parte 6, que trata sobre Redux, se concentra en la nueva API Redux basada en hooks.
 - El material sobre react-router en la parte 7 también se ha actualizado para usar Hook API. Semantic UI React se ha reemplazado con la biblioteca MaterialUI debido a la falta de mantenimiento.
 - La Parte 8 en GraphQL tiene actualizaciones importantes, especialmente en Apollo Client, que finalmente tiene API estables basadas en Hooks.
@@ -179,7 +176,7 @@ Siga las instrucciones a continuación para acceder al espacio de Moodle del cur
 - Identificación de usuario. ¿Estudias en la Universidad de Helsinki u otra [institución miembro de HAKA](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
   - En caso afirmativo, utilice su nombre de usuario y contraseña para iniciar sesión en Moodle.
   - Si no es así, active su ID de usuario de la Universidad de Helsinki para acceder a Moodle. Recibirá más información sobre el ID de usuario después del registro a través del correo electrónico.
-- Inicie sesión en el espacio de Moodle con su ID de usuario de la Universidad de Helsinki / HAKA y la clave de inscripción.
+- Inicie sesión en el espacio de Moodle con su ID de usuario de la Universidad de Helsinki/HAKA y la clave de inscripción.
 - Después de la inscripción al curso, guarde su número de identificación de estudiante de la Universidad de Helsinki en la [pestaña de mis envíos](https://studies.cs.helsinki.fi/stats/myinfo) en el sistema de envío.
 - Si utilizó la identificación HAKA de su institución para iniciar sesión en Moodle, envíe un mensaje a avoin-student@helsinki.fi y solicite su identificación de estudiante de la Universidad de Helsinki.
   - Envíe el mensaje desde la misma dirección de correo electrónico que utilizó para la inscripción al curso.
@@ -237,7 +234,7 @@ El administrador de paquetes de Node [npm](https://www.npmjs.com/get-npm) se ins
 
 ### Errores tipográficos en el material
 
-Si encuentra un error tipográfico en el material, o algo no se ha expresado con claridad, o simplemente es mala gramática, haga una <i>pull request</i> al material del curso en el [repositorio](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). Por ejemplo, el código fuente de markdown de esta página se puede encontrar en el repositorio en <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/es/part0a.md>
+Si encuentra un error tipográfico en el material, o algo no se ha expresado con claridad, o simplemente es mala gramática, haga un <i>pull request</i> al material del curso en el [repositorio](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). Por ejemplo, el código fuente de markdown de esta página se puede encontrar en el repositorio en <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/es/part0a.md>
 
 En la parte inferior de cada parte del material hay un enlace para <em>proponer cambios en el material</em>. Puede editar el código fuente de la página haciendo clic en el enlace.
 
