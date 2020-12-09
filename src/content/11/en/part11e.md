@@ -25,7 +25,7 @@ There are several solutions to this problem ranging from simple notifications to
 
 By default, GitHub Actions sends an email on a build failure. This can be changed to send notifications regardless of build status and can also be configured to alert you on the GitHub web interface. Great. But what if we want more. What if for whatever reason this doesn't work for our use case.
 
-There are integrations, for example to various messaging applications such as [Slack[](https://slack.com/intl/en-fi/), to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub.
+There are integrations for example to various messaging applications such as [Slack](https://slack.com/intl/en-fi/), to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub.
 
 </div>
 
@@ -33,21 +33,21 @@ There are integrations, for example to various messaging applications such as [S
 
 ### Exercise 11.19
 
-We have set up a Slack channel <fullstackopengroup.slack.com> for testing amessaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately you need an email address for registration. If are not willing to use your own address, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
+We have set up a Slack channel <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately you need an email address for registration. If are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
 
-Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email matti.luukkainen@helsinki.fi of in course telegram, ping @mluukkai
+Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
 
-You can also use some other Slack channel in this exercise but then you are on your own with the setup.
+<i>You can also use some other Slack channel in this exercise but then you are on your own with the setup.</i>
 
 #### 11.19 Build success/failure notification action
 
-You can find dozens of third party actions from [GitHub Action Marketplace]https://github.com/marketplace?type=actions) by using a searcj the word [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many starts and a decent documentation.
+You can find dozens of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using a search phrase [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many starts and a decent documentation.
 
-Setup the action so that it gives two types of notifications.
+Setup the action so that it gives two types of notifications:
 - A success indication if a new version gets deployed
-- An error indication if abuild fails
+- An error indication if a build fails
 
-In the case of an error, the notification should be a bit more verbose to help developers finding quickly what was the error and what is the commit that caused it.
+In the case of an error, the notification should be a bit more verbose to help developers finding quickly what was the error and which is the commit that caused it.
 
 See [here](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions) how to check the job status!
 
@@ -73,7 +73,7 @@ This data can be sent to a time series database or to an archive of another type
 
 There are often periodic tasks that need to be done in a software development team. Some of these can be automated with commonly available tools and some you will need to automate yourself.
 
-The former category includes things like checking packages for security vulnerabilities. There are several tools that can already do this for you. Some of these tools would even be free for certain types (e.g. open source) projects. Github provides one such tool, [Dependabot](https://dependabot.com/).
+The former category includes things like checking packages for security vulnerabilities. There are several tools that can already do this for you. Some of these tools would even be free for certain types (e.g. open source) projects. GitHub provides one such tool, [Dependabot](https://dependabot.com/).
 
 Words of advice to consider: If your budget allows it, it's almost always better to use a tool that already does the job than to roll your own solution. If security isn't the industry you're aiming for, for example, use Dependabot to check for security vulnerabilities instead of making your own tool.
 
@@ -83,29 +83,29 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 <div class="tasks">
 
-### Exercises 11.20-22
+### Exercises 11.20-11.22
 
 #### 11.20 Periodic health check
 
-We are pretty confident now that our pipeline prevents bad code of being deployed. However there are many sources of errors. If our application would eg. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be good idea to set up <i>a periodic health check</i> that would regurarly do a HTTP GET request to our server. We quite often refer this kind of request as a <i>ping</i>.
+We are pretty confident now that our pipeline prevents bad code of being deployed. However there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be good idea to set up <i>a periodic health check</i> that would regurarly do a HTTP GET request to our server. We quite often refer this kind of request as a <i>ping</i>.
 
 It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happend regurarly. 
 
-Use now action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternatively and schedule a periodic health check ping to your deployed software. Try to simulate a situation where your application breaks down and ensure that the check detects the problem. Write this rule to an own file.
+Use now the action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternatively and schedule a periodic health check ping to your deployed software. Try to simulate a situation where your application breaks down and ensure that the check detects the problem. Write this periodic workflow to an own file.
 
-**Note** that unfortunately it takes quite long until GitHub Actions starts to schedule actions. For me it took nearly one hour. So it might be a good idea to get the the check working firstly by triggering the workflow with git push and when the check is properly working, then switch to a scheduled trigger.
+**Note** that unfortunately it takes quite a long until GitHub Actions for the first time starts to scheduled workflow. For me it took nearly one hour. So it might be a good idea to get the the check working firstly by triggering the workflow with git push. When you are sure that the check is properly working, then switch to a scheduled trigger.
 
 **Note also** that once you are get this working, it is best to drop the ping frequency (to max once in 24 hours) or disable the rule altogether since otherways your health check may consume [all your](https://devcenter.heroku.com/articles/free-dyno-hours) monthly free hours.
 
 #### 11.21 Your own pipeline
 
-Build a simillar CI/CD-pipeline for some of your own products. A good candidate is the phonebook app that was built in parts 2 to 4 of the course, or bloglist built in part 5, or the redux anecdotes built in part 6. You may also use some app of your own here.
+Build a simillar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or bloglist built in parts 4 and 5, or the redux anecdotes built in part 6. You may also use some app of your own for this exercise.
 
-You most likely need to do some restructuring to get all the pieces togeteher. A logical first step would be to store both the frontend and backend code in a same repository. This is not a requirement but it is recommended since it makes things much more simple.
+You most likely need to do some restructuring to get all the pieces together. A logical first step is to store both the frontend and backend code in a same repository. This is not a requirement but it is recommended since it makes things much more simple.
 
-One possible repository structure would be to have backend at the root of repository and the fronend as a subdirectory. You can also "copy paste" the structure of the example app of this chapter or try out the [example app](https://github.com/fullstack-hy2020/create-app) mentioned in [part 7](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository).
+One possible repository structure would be to have backend at the root of the repository and the fronend as a subdirectory. You can also "copy paste" the structure of the example app of this part or try out the [example app](https://github.com/fullstack-hy2020/create-app) mentioned in [part 7](/en/part7/class_components_miscellaneous#frontend-and-backend-in-the-same-repository).
 
-It is perhaps best to create a new repository for this exercise and simply copy and paste the old code. In real life you most likely would to this all in the old repository but now "a fresh start" makes things easier.
+It is perhaps best to create a new repository for this exercise and simply copy and paste the old code there. In real life you most likely would to this all in the old repository but now "a fresh start" makes things easier.
 
 This is a long and perhaps quite a tought exercise, but this kind of situation where you have a "legacy code" and you need to build it a proper deployment pipeline is quite commoin in real life!
 
@@ -126,7 +126,7 @@ The you are done!
 
 ### Submitting exercises and getting the credits
 
-Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd-2020) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". 
+Exercises of thisp are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finnish <i>all the exercises</i> to pass this part!
 
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
@@ -134,6 +134,6 @@ TODO pic
 
 Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
-You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. Note that you must have completed at least one credit worth of exercises before you can download the certificate.
+You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
 
 </div>

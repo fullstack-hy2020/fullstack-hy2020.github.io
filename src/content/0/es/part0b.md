@@ -12,7 +12,7 @@ Antes de comenzar a programar, repasaremos algunos principios del desarrollo web
 Las aplicaciones existen solo para demostrar algunos conceptos básicos del curso, y de ninguna manera son ejemplos de <i>cómo</i> se deben hacer las aplicaciones web.
 Por el contrario, demuestran algunas técnicas antiguas de desarrollo web, que incluso pueden verse como <i>malas prácticas</i> en la actualidad.
 
-La codificación en el estilo recomendado comienza en [parte 1](/es/part1).
+La codificación en el estilo recomendado comienza en la [parte 1](/es/part1).
 
 Utilice el navegador Chrome <i>ahora y durante el resto del curso</i>
 
@@ -54,7 +54,7 @@ La solicitud y la respuesta del servidor tienen varios [encabezados](https://en.
 
 ![](../../images/0/4e.png)
 
-Los <i>encabezados de respuesta (Respopnse headers)</i> en la parte superior nos dicen, por ejemplo, el tamaño de la respuesta en bytes y la hora exacta de la respuesta. Un encabezado importante [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) nos dice que la respuesta es un archivo de texto en [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, cuyo contenido se ha formateado con HTML. De esta manera, el navegador sabe que la respuesta es una página [HTML](https://en.wikipedia.org/wiki/HTML) normal y la representa en el navegador "como una página web".
+Los <i>Encabezados de Respuesta (Response Headers)</i> en la parte superior nos dicen, por ejemplo, el tamaño de la respuesta en bytes y la hora exacta de la respuesta. Un encabezado importante [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) nos dice que la respuesta es un archivo de texto en formato [utf-8](https://en.wikipedia.org/wiki/UTF-8), cuyo contenido se ha formateado con HTML. De esta manera, el navegador sabe que la respuesta es una página [HTML](https://en.wikipedia.org/wiki/HTML) normal y la representa en el navegador "como una página web".
 
 La pestaña <i>Response</i> muestra los datos de la respuesta, una página HTML normal. La sección <i>body</i> determina la estructura de la página renderizada en la pantalla:
 
@@ -66,7 +66,7 @@ Debido a la etiqueta img, el navegador realiza una segunda <i>solicitud HTTP</i>
 
 ![](../../images/0/6e.png)
 
-La solicitud se realizó a la dirección <https://studies.cs.helsinki.fi/exampleapp/kuva.png> y su tipo es HTTP GET. Los encabezados de respuesta nos dicen que el tamaño de la respuesta es 89350 bytes y su [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) es <i >image/png</i>, por lo que es una imagen png. El navegador utiliza esta información para mostrar la imagen correctamente en la pantalla.
+La solicitud se realizó a la dirección <https://studies.cs.helsinki.fi/exampleapp/kuva.png> y su tipo es HTTP GET. Los Encabezados de Respuesta nos dicen que el tamaño de la respuesta es 89350 bytes y su [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) es <i>image/png</i>, por lo que es una imagen png. El navegador utiliza esta información para mostrar la imagen correctamente en la pantalla.
 
 La cadena de eventos causada por abrir la página https://studies.cs.helsinki.fi/exampleapp en un navegador forma el siguiente [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
@@ -93,7 +93,7 @@ const getFrontPageHtml = noteCount => {
       <head>
       </head>
       <body>
-        <div class = 'container '>
+        <div class='container'>
           <h1>
           <p>number of notes created ${noteCount}</p>
           <a href='/notes'>notes</a>
@@ -141,14 +141,14 @@ var xhttp = new XMLHttpRequest()
 
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    const data = JSON.parse ( this.responseText)
+    const data = JSON.parse(this.responseText)
     console.log(data)
 
     var ul = document.createElement('ul')
     ul.setAttribute('class', 'notes')
 
     data.forEach(function(note) {
-      var li = document.createElement (' li ')
+      var li = document.createElement('li')
 
       ul.appendChild(li)
       li.appendChild(document.createTextNode(note.content))
@@ -272,33 +272,33 @@ se define un <i>controlador de eventos</i> para el evento <i>onreadystatechange<
 ```js
 xhttp.onreadystatechange = function() { 
   if (this.readyState == 4 && this.status == 200) {
-    // código que se encarga de de la respuesta del servidor
+    // código que se encarga de la respuesta del servidor
   }
 } 
 ```
 
 El mecanismo de invocación de controladores de eventos es muy común en JavaScript. Las funciones del controlador de eventos se denominan funciones [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). El código de la aplicación no invoca las funciones en sí, sino el entorno de ejecución -el navegador-, invoca la función en el momento adecuado, cuando se ha producido el <i>evento</i>.
 
-### Modelo de objeto de documento o DOM
+### Modelo de Objeto de Documento o DOM
 
 Podemos pensar en las páginas HTML como estructuras de árbol implícitas.
 
-<pre> 
-html 
-  head 
-    link 
-    script 
-  body 
-    div 
-      h1 
-      div 
-        ul 
-          li 
-          li 
-          li 
-      form 
+<pre>
+html
+  head
+    link
+    script
+  body
+    div
+      h1
+      div
+        ul
+          li
+          li
+          li
+      form
         input
-        input 
+        input
 </pre>
 
 La misma estructura arbórea se puede ver en la pestaña de la consola <i>Elements</i>.
@@ -456,7 +456,7 @@ app.post('/new_note', (req, res) => {
     date: new Date(),
   })
 
-  return res.redirect ('/ notes')
+  return res.redirect('/notes')
 })
 ```
 
@@ -481,15 +481,15 @@ El servidor no guarda nuevas notas en una base de datos, por lo que las nuevas n
 
 La página de Notas de la aplicación sigue un estilo de desarrollo web de principios de los noventa y "utiliza Ajax". Como tal, está en la cresta de la ola de tecnología web de principios de la década de 2000.
 
-[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (JavaScript Asincrónico y XML) es un término introducido en febrero de 2005 sobre la base de los avances en la tecnología de los navegadores para describir un nuevo enfoque revolucionario que permitió la obtención de contenido en páginas web utilizando JavaScript incluido dentro del HTML, sin la necesidad de volver a renderizar la página.
+[AJAX](https://en.wikipedia.org/wiki/Ajax_(programming)) (JavaScript Asincrónico y XML) es un término introducido en febrero de 2005 sobre la base de los avances en la tecnología de los navegadores para describir un nuevo enfoque revolucionario que permitió la obtención de contenido en páginas web utilizando JavaScript incluido dentro del HTML, sin la necesidad de volver a renderizar la página.
 
 Antes de la era AJAX, todas las páginas web funcionaban como la [aplicación web tradicional](/es/part0/fundamentos_de_las_aplicaciones_web#aplicaciones_web_tradicionales) que vimos anteriormente en este capítulo.
 Todos los datos que se muestran en la página se obtuvieron con el código HTML generado por el servidor.
 
 La página Notes utiliza AJAX para obtener los datos de las notas. El envío del formulario todavía utiliza el mecanismo tradicional de envío de formularios web.
 
-Las URLs de la aplicación reflejan los viejos tiempos sin preocupaciones. Los datos JSON se obtienen de la URL <https://studies.cs.helsinki.fi/exampleapp/data.json> y se envían nuevas notas a la URL <https://studies.cs.helsinki.fi/exampleapp/new_note >.  
-Hoy en día, URL como estas no se considerarían aceptables, ya que no siguen las convenciones generalmente reconocidas de las API [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), que analizaremos más en [parte 3](/es/part3)
+Las URLs de la aplicación reflejan los viejos tiempos sin preocupaciones. Los datos JSON se obtienen de la URL <https://studies.cs.helsinki.fi/exampleapp/data.json> y se envían nuevas notas a la URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.  
+Hoy en día, URL como estas no se considerarían aceptables, ya que no siguen las convenciones generalmente reconocidas de las API [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), que analizaremos más en la [parte 3](/es/part3)
 
 La cosa denominada AJAX es ahora tan común que se da por sentado. El término se ha desvanecido en el olvido, y la nueva generación ni siquiera ha oído hablar de él.
 
@@ -530,7 +530,7 @@ El encabezado <i>Content-Type</i> de la solicitud le dice al servidor que los da
 
 Sin este encabezado, el servidor no sabría cómo analizar correctamente los datos.
 
-El servidor responde con el código de estado [201 creado](https://httpstatuses.com/201). Esta vez, el servidor no solicita una redirección, el navegador permanece en la misma página y no envía más solicitudes HTTP.
+El servidor responde con el código de estado [201 Created](https://httpstatuses.com/201). Esta vez, el servidor no solicita una redirección, el navegador permanece en la misma página y no envía más solicitudes HTTP.
 
 La versión SPA de la aplicación no envía los datos del formulario de la forma tradicional, sino que utiliza el código JavaScript que obtuvo del servidor.
 Analizaremos un poco este código, aunque comprender todos los detalles aún no es importante.
@@ -542,7 +542,7 @@ form.onsubmit = function(e) {
 
   var note = {
     content: e.target.elements[0].value,
-    date: new Date (),
+    date: new Date(),
   }
 
   notes.push(note)
@@ -580,7 +580,7 @@ Vale la pena recordar que la aplicación solo está destinada a demostrar los co
 
 La aplicación de muestra se realiza con el llamado [vanilla JavaScript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34), utilizando solo la DOM-API y JavaScript para manipular la estructura de las páginas.
 
-En lugar de utilizar JavaScript y DOM-API únicamente, a menudo se utilizan diferentes bibliotecas que contienen herramientas con las que es más fácil trabajar en comparación con DOM-API para manipular páginas. Una de estas bibliotecas es la popular [jQuery](https://jquery.com/).
+En lugar de utilizar JavaScript y DOM-API únicamente, a menudo se utilizan diferentes librerías que contienen herramientas con las que es más fácil trabajar en comparación con DOM-API para manipular páginas. Una de estas librerías es la popular [jQuery](https://jquery.com/).
 
 jQuery se desarrolló cuando las aplicaciones web seguían principalmente el estilo tradicional del servidor que genera páginas HTML, cuya funcionalidad se mejoró en el lado del navegador usando JavaScript escrito con jQuery. Una de las razones del éxito de jQuery fue la llamada compatibilidad entre navegadores. La librería funcionó independientemente del navegador o de la empresa que la hizo, por lo que no hubo necesidad de soluciones específicas para el navegador. Hoy en día, el uso de jQuery no está tan justificado dado el avance de VanillaJS, y los navegadores más populares generalmente soportan bien las funcionalidades básicas.
 
@@ -605,7 +605,7 @@ En el contexto de este curso, el desarrollo web full stack significa que nos enf
 
 Codificaremos el backend con JavaScript, utilizando el entorno de ejecución [Node.js](https://nodejs.org/en/). El uso del mismo lenguaje de programación en múltiples capas de la pila le da al desarrollo web full stack una dimensión completamente nueva. Sin embargo, no es un requisito del desarrollo web full stack utilizar el mismo lenguaje de programación (JavaScript) para todas las capas del stack.
 
-Solía ​​ser más común que los desarrolladores se especializaran en una capa del stack, por ejemplo, el backend. Las tecnologías en el backend y el frontend eran bastante diferentes. Con la tendencia Full stack, se ha vuelto común que los desarrolladores dominen todas las capas de la aplicación y la base de datos. A menudo, los desarrolladores full stack también deben tener suficientes habilidades de configuración y administración para operar su aplicación, por ejemplo, en la nube.
+Solía ​​ser más común que los desarrolladores se especializaran en una capa del stack, por ejemplo, el backend. Las tecnologías en el backend y el frontend eran bastante diferentes. Con la tendencia full stack, se ha vuelto común que los desarrolladores dominen todas las capas de la aplicación y la base de datos. A menudo, los desarrolladores full stack también deben tener suficientes habilidades de configuración y administración para operar su aplicación, por ejemplo, en la nube.
 
 ### Fatiga de JavaScript
 
@@ -641,25 +641,25 @@ Entonces, cada parte tiene su propio directorio, que contiene un directorio para
 
 Los ejercicios se envían **una parte a la vez**. Cuando haya enviado los ejercicios de una parte, ya no podrá enviar los ejercicios perdidos de esa parte.
 
-  <h4> 0.1: HTML</h4>
+<h4> 0.1: HTML</h4>
 
 Revise los conceptos básicos de HTML leyendo este tutorial de Mozilla: [tutorial HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).
 
 <i>Este ejercicio no se envía a GitHub, basta con leer el tutorial</i>
 
-  <h4>0.2: CSS</h4>
+<h4>0.2: CSS</h4>
 
 Revise los conceptos básicos de CSS leyendo este tutorial de Mozilla: [tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
 <i>Este ejercicio no se envía a GitHub, basta con leer el tutorial</i>
 
-  <h4>0.3: Formularios HTML</h4>
+<h4>0.3: Formularios HTML</h4>
 
 Aprende sobre los conceptos básicos de los formularios HTML leyendo el tutorial de Mozilla [Tu primer formulario](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
 <i>Este ejercicio no se envía a GitHub, basta con leer el tutorial</i>
 
-  <h4>0.4: nueva nota</h4>
+<h4>0.4: nueva nota</h4>
 
 En el capítulo [Cargando una página que contiene JavaScript - revisada](/es/part0/fundamentos-de-las-aplicaciones-web#cargando-una-página-que-contiene-java-script-revisado) la cadena de eventos causada al abrir la página <https://studies.cs.helsinki.fi/exampleapp/notes> se representa como un [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
@@ -693,10 +693,10 @@ Si es necesario, muestre las operaciones en el navegador o en el servidor como c
 
 El diagrama no tiene por qué ser un diagrama de secuencia. Cualquier forma sensata de presentar los eventos está bien.
 
-Toda la información necesaria para hacer esto, y los dos ejercicios siguientes, se pueden encontrar en el texto de [esta parte](/es/part0/fundamentos-de-las-aplicaciones-web# formularios-y-http-post).
+Toda la información necesaria para hacer esto, y los dos ejercicios siguientes, se pueden encontrar en el texto de [esta parte](/es/part0/fundamentos-de-las-aplicaciones-web#formularios-y-http-post).
 La idea de estos ejercicios es leer el texto una vez más y pensar en lo que está sucediendo allí. No es necesario leer el [código](https://github.com/mluukkai/example_app) de la aplicación pero, por supuesto, es posible.
 
-  <h4>0.5: Aplicación de una sola página</h4>
+<h4>0.5: Aplicación de una sola página</h4>
 
 Cree un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos-de-las-aplicaciones-web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
 

@@ -230,7 +230,7 @@ You can display the default error message returned by Mongoose, even though they
 #### 3.21 Deploying the database backend to production
 
 
-Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <https://localhost:3001>.
+Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
 
 
 Push the latest version to Heroku and verify that everything works there as well.
