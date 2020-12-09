@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Link } from 'gatsby';
 import Navigation from '../Navigation/Navigation';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
+import getTranslationPath from '../../utils/getTranslationPath';
 
 class Header extends Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class Header extends Component {
   render() {
     const { headerClass } = this.state;
     const { lang } = this.props;
-    
+
     const isSmallHeader = headerClass === 'header--small';
 
     return (
@@ -53,10 +54,7 @@ class Header extends Component {
           className="container"
           style={{ alignItems: 'center', justifyContent: 'flex-start' }}
         >
-          <Link
-            to={lang === 'en' ? '/en' : lang === 'zh' ? '/zh' : '/'}
-            className="header__logo"
-          >
+          <Link to={getTranslationPath(lang, '/')} className="header__logo">
             {headerClass === '' ? (
               <TripleBorder
                 className="nav-item-hover"
