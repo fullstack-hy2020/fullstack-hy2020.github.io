@@ -930,7 +930,7 @@ The code handling of the response looks as follows
 ```js
 router.post('/', (req, res) => {
   const { date, weather, visibility, comment } = req.body;
-  const newDiaryEntry = diaryService.addEntry(
+  const newDiaryEntry = diaryService.addDiary(
     date,
     weather,
     visibility,
@@ -951,7 +951,7 @@ import {
 } from '../types';
 
 
-const addEntry = (
+const addDiary = (
     date: string, weather: Weather, visibility: Visibility, comment: string
   ): DiaryEntry => {
 
