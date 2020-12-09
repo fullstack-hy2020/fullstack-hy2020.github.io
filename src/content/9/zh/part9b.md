@@ -80,7 +80,7 @@ npm install --save-dev ts-node typescript
 <!-- Now within this directory you can use <i>ts-node</i>by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
 现在，在这个目录中，我们可以通过运行<i>npm run ts-node</i> 来使用<i>ts-node</i>。 注意，如果通过 package.json 使用 ts-node，脚本的所有命令行参数都需要以<i>--</i> 作为前缀。 因此，如果希望用<i>ts-node</i> 运行 file.ts，整个运行命令是:
 
-```sh
+```shell
 npm run ts-node -- file.ts
 ```
 
@@ -377,7 +377,7 @@ try {
 <!-- Since the global variable <i>process</i> is defined by Node itself, we get its typings by intalling the package <i>@types/node</i>: -->
 由于全局变量<i>process</i> 是由 Node 本身定义的，所以我们可以通过安装包 <i>@types/node</i>来获得它的类型:
 
-```sh
+```shell
 npm install --save-dev @types/node
 ```
 
@@ -427,21 +427,21 @@ multiplicator(a, b, `Multiplied ${a} and ${b}, the result is:`);
 <!-- and we can run it with -->
 我们可以如下使用
 
-```sh
+```shell
 npm run multiply 5 2
 ```
 
 <!-- if the program is run with parameters that are not of the right type, e.g. -->
 如果程序运行的参数不是正确的类型，例如。
 
-```sh
+```shell
 npm run multiply 5 lol
 ```
 
 <!-- it "works" but gives us the answer -->
 它”能用”，但给我们的答案如下：
 
-```sh
+```shell
 Multiplied 5 and NaN, the result is: NaN
 ```
 
@@ -493,14 +493,14 @@ try {
 <!-- When we now run the program  -->
 当我们现在运行程序时
 
-```sh
+```shell
 npm run multiply 1 lol
 ```
 
 <!-- we get a proper error message: -->
 我们得到一个正确的错误信息:
 
-```sh
+```shell
 Error, something bad happened, message:  Provided values were not numbers!
 ```
 
@@ -573,7 +573,7 @@ console.log(calculateBmi(180, 74))
 <!-- should print the following message -->
 应打印如下信息
 
-```sh
+```shell
 Normal (healthy weight)
 ```
 
@@ -635,7 +635,7 @@ Normal (healthy weight)
 <!-- Your program could work eg. as follows: -->
 你的程序可以运行如下:
 
-```sh
+```shell
 $ npm run calculateBmi 180 91
 
 Overweight
@@ -644,7 +644,7 @@ Overweight
 <!-- and -->
 及
 
-```sh
+```shell
 $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 { periodLength: 9,
@@ -1080,7 +1080,7 @@ const a : any = /* no clue what the type will be! */.
 <!-- Let's install eslint and its typescript extensions: -->
 让我们安装 eslint 和它的TypeScript扩展:
 
-```sh
+```shell
 npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser
 ```
 

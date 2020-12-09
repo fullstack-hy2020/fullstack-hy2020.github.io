@@ -1,6 +1,6 @@
 import { StaticQuery, graphql } from 'gatsby';
 
-import Helmet from 'react-helmet';
+import { Helmet } from 'react-helmet';
 import PropTypes from 'prop-types';
 import React from 'react';
 import defaultImage from '../images/seo_image.jpg';

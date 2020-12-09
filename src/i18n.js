@@ -13,6 +13,7 @@ const resources = {
 i18n.init({
   resources,
   fallbackLng: 'en',
+  lng: 'en',
   defaultNS: 'common',
   react: {
     useSuspense: false,

@@ -86,6 +86,7 @@ const plugins = [
     options: {
       name: `src`,
       path: `${__dirname}/src/content/`,
+      ignore: [`${__dirname}/src/content/pages/*`],
     },
   },
   {
@@ -93,6 +94,7 @@ const plugins = [
     options: {
       path: `${__dirname}/src/content`,
       name: 'markdown-pages',
+      ignore: [`${__dirname}/src/content/pages/*`],
     },
   },
   {
