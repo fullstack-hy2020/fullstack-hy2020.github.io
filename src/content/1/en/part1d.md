@@ -442,7 +442,7 @@ By going to the <i>Console</i> tab, it is easy to inspect the current state of v
 
 Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
 
-The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Source</i> tab.
+The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Sources</i> tab.
 
 You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
 
