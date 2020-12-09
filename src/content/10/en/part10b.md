@@ -569,8 +569,6 @@ Finally, restart Expo's development tools so that our new Webpack configuration 
 
 Now that the Expo's web browser preview is fixed, open the <i>App.js</i> file and add the <em>NativeRouter</em> component to the <em>App</em> component:
 
-<!-- TODO: highlight -->
-
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native'; // highlight-line
