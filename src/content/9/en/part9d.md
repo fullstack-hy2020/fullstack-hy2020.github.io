@@ -27,7 +27,7 @@ That's enough reasoning for now, let's start getting our hands dirty!
 We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding a 
 <i>template</i> argument to the initialisation script. So in order to create a TypeScript Create React App, run the following command:
 
-```sh
+```shell
 npx create-react-app my-app --template typescript
 ```
 
