@@ -656,8 +656,6 @@ module.exports = async function(env, argv) {
 <!-- Now that the Expo's web browser preview is fixed, open the <i>App.js</i> file and add the <em>NativeRouter</em> component to the <em>App</em> component: -->
 既然Expo 的Web 浏览器预览已经修复了，打开 <i>App.js</i> 文件，并添加<em>NativeRouter</em> 组件到<em>App</em> 组件中：
 
-<!-- TODO: highlight -->
-
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native'; // highlight-line
