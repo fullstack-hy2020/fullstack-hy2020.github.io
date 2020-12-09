@@ -3,15 +3,14 @@ import './LanguageSwitcher.scss';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { Link } from 'gatsby';
+import getTranslationPath from '../../utils/getTranslationPath';
 
 const Language = ({ language, active }) => {
   return language === active ? (
     <span className="language-switcher__active-language">{language}</span>
   ) : (
     <div className="language-switcher__language">
-      <Link to={language === 'en' ? '/en' : language === 'zh' ? '/zh' : '/'}>
-        {language}
-      </Link>
+      <Link to={getTranslationPath(language, '/')}>{language}</Link>
     </div>
   );
 };
