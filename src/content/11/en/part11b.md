@@ -50,7 +50,7 @@ To fork the repository, you can click on the Fork button in the top-right area o
 
 ![](../../images/11/1.png)
 
-Once you've clicked on the Fork button, GitHub will start the creation of a new repository called <code>{github_username}/ full-stack-open-pokedex</code>.
+Once you've clicked on the Fork button, GitHub will start the creation of a new repository called <code>{github_username}/full-stack-open-pokedex</code>.
 
 Once the process has been finished, you should be redirected to your brand new repository:
 
@@ -76,7 +76,7 @@ Study the structure of the project for a while. As you notice both the frontend 
 
 In contrast to most projects in this course, the frontend code <i>does not use</i> create-react-app, but it has a relatively simple [webpack](/en/part7/webpack) configuration that takes care of creating the development environment and creating the production bundle.
 
-**One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  If you do not have it already it is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
+**One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>. If you do not have it already it is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
 
 </div>
 
@@ -226,7 +226,7 @@ The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/wor
 
 Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v2</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
 
-Secondly, as the application is written in JavasSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>12.x</code> is selected because it is the version the application is using in the production environment.
+Secondly, as the application is written in JavaSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>12.x</code> is selected because it is the version the application is using in the production environment.
 
 ```js
 # name and trigger not shown anymore...
