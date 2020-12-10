@@ -181,7 +181,7 @@ The [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-acti
 
 As you can see from the documentation by default your releases will receive a *minor* bump, meaning that the middle number will be incremented.
 
-Modify the configuration above so that each new version is by default a _batch_ bump in the version number, so that by default, the last number is increased. 
+Modify the configuration above so that each new version is by default a _patch_ bump in the version number, so that by default, the last number is increased. 
 
 Remember that we want only to bump the version when the change happens to master branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-15)
  to prevent deployment on pull request releated events.
@@ -223,7 +223,7 @@ Modify your setup so that if a commit message in a pull request contains _#skip_
 
 **Hints:**  
 
-The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) confitions of the relevant steps. Similarly to [exercise 11-5](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information from the [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
+The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) confitions of the relevant steps. Similarly to [exercise 11-15](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information from the [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
 
 You might take this as a starting point:
 
@@ -275,11 +275,11 @@ When using a third party action such that <i>github-tag-action</i> it might be a
 
 However, the code in commit with a particular has does not change in any circumstances, so if we want to be 100% sure about the code we use, it is safest to use the hash. 
 
-The version [1.33.0](https://github.com/anothrNick/github-tag-action/releases) of the action corresponds to commit with hash <code>9eca2b69f9e2c24be7decccd0f15fdb1ea5906598</code>, so we might want to change our configuration as follows:
+The version [1.33.0](https://github.com/anothrNick/github-tag-action/releases) of the action corresponds to commit with hash <code>eca2b69f9e2c24be7decccd0f15fdb1ea5906598</code>, so we might want to change our configuration as follows:
 
 ```js
     - name: Bump version and push tag
-      uses: anothrNick/github-tag-action@9eca2b69f9e2c24be7decccd0f15fdb1ea5906598  // highlight-line
+      uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598  // highlight-line
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
