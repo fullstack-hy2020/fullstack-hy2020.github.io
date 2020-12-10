@@ -7,11 +7,11 @@ lang: en
 
 <div class="content">
 
-This part has focused on building a simple, effective, and robust CI system that helps developers to work together, maintain code quality, and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the above things.
+This part has focus on building a simple, effective, and robust CI system that helps developers to work together, maintain code quality, and deploy safely. What more could one possibly want? In the real world, there are more fingers in the pie than just developers and users. Even if that weren't true, even for developers, there's a lot more value to be gained from CI systems than just the things above.
 
 ### Visibility and Understanding
 
-In all but the smallest companies, decisions on what to develop are not made exclusively by developers. The term 'stakeholder' is often used to refer to people, both inside and outside the development team, who may have some interest in keeping an eye on the progress of development. To this end, there are often integrations between git and whatever project management/bug tracking software the team is using.
+In all but the smallest companies, decisions on what to develop are not made exclusively by developers. The term 'stakeholder' is often used to refer to people, both inside and outside the development team, who may have some interest in keeping an eye on the progress of the development. To this end, there are often integrations between git and whatever project management/bug tracking software the team is using.
 
 A common use of this is to have some reference to the tracking system in git pull requests or commits. This way, for example, when you're working on issue number 123, you might name your pull request <code>BUG-123: Fix user copy issue</code> and the bug tracking system would notice the first part of the PR name and automatically move the issue to <code>Done</code> when the PR is merged.
 
@@ -33,7 +33,7 @@ There are integrations for example to various messaging applications such as [Sl
 
 ### Exercise 11.19
 
-We have set up a Slack channel <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately, you need an email address for registration. If are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
+We have set up a Slack channel <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
 
 Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
 
@@ -87,7 +87,7 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 #### 11.20 Periodic health check
 
-We are pretty confident now that our pipeline prevents bad code of being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regurarly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.
+We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regurarly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.
 
 It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happen regurarly. 
 
@@ -109,7 +109,7 @@ It is perhaps best to create a new repository for this exercise and simply copy 
 
 This is a long and perhaps quite a tough exercise, but this kind of situation where you have a "legacy code" and you need to build   proper deployment pipeline is quite common in real life!
 
-Obviously, this exercise is not done in the same repository as the previous exercises. Since you can return only one repository to the submission systen, put a link of the <i>other</i> repository to the one you fill into the submission form.
+Obviously, this exercise is not done in the same repository as the previous exercises. Since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form.
 
 #### 11.22 Protect master and ask for pull request
 
@@ -117,7 +117,7 @@ Protect the master branch of the repository where you did the previous exercise.
 
 Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to master. 
 
-The you are done!
+Then you are done!
 
 </div>
 
@@ -126,7 +126,7 @@ The you are done!
 
 ### Submitting exercises and getting the credits
 
-Exercises of thisp are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finnish <i>all the exercises</i> to pass this part!
+Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finnish <i>all the exercises</i> to pass this part!
 
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
