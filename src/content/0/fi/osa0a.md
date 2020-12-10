@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST ja GraphQL-rajapinnoissa. Tämän vuoden kurssin uusissa osissa tutustutaan TypeScriptiin ja React Nativeen.
+Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST ja GraphQL-rajapinnoissa. Tämän vuoden kurssin uusissa osissa tutustutaan TypeScriptiin, React Nativeen ja jatkuvaan integraatioon.
 
 Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
 
@@ -31,13 +31,14 @@ Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä en
 
 Oletuksena on, että teet kunkin osan tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen.
 
-Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 10.1.2021. klo 23:59 asti. Mahdollisen suoritusmerkinnän saat sen jälkeen kun olet suorittanut myös kurssiin liittyvän kokeen.
+Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2021. klo 23:59 asti. Vuoden 2021 versio alkaa 15.3.2021 ja 
+suuria muutoksia ei ole luvassa, joten voit käytännössä jatkaa koodaamista keskeytyksettä. Jos haluat kurssista Avoimen yliopiston kautta opintopisteet, huomaa, että kokeen suorittaminen ei ole mahdollista 10.1-14.3.
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 ### Arvosteluperusteet
 
-Kurssi voidaan suorittaa joko 3 tai 5-9 opintopisteen laajuisena.
+Kurssi voidaan suorittaa joko 3 tai 5-12 opintopisteen laajuisena.
 
 Laajuus ja arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt tehtävät siis vaikuttavat arvosanaan. 
 
@@ -49,7 +50,7 @@ Kolmen opintopisteen suorituksen edellytyksenä on osien 0-3 kaikkien tähdellä
 
 Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen). Kokeen voi suorittaa 1.5. alkaen.
 
-Kokeen viimeinen suorituspäivä on 10.1.2021. Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt kaikki kolmen opintopisteen suorituksen edellyttämät tehtävät. <b>Huomaa, että viimeinen päivä kurssille ilmoittautumiselle on 9.1.2021.</b>
+Kokeen viimeinen suorituspäivä on 10.1.2021. Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt kaikki kolmen opintopisteen suorituksen edellyttämät tehtävät. <b>Huomaa, että viimeinen päivä kurssille ilmoittautumiselle on 9.1.2021.</b> Jos et ehdi suorittaa koetta määräaikaan mennessä, voit suorittaa sen jälleen 15.3. alkaen kurssin seuraavassa versiossa.
 
 Kokeen tuloksen näet palautussovelluksen välilehdeltä <i>my submissions</i> viimeistään 4 viikkoa kokeen suorittamisen jälkeen (heinäkuu saattaa aiheuttaa kokeen tarkastamiseen pidemmän viiveen). Muista tallettaa opiskelijanumerosi palautussovellukseen.
 
@@ -77,9 +78,10 @@ Suoritukseen edellytetään tehtävien lisäksi hyväksytysti suoritettu koe.
 
 Myös 5-7 op:n suorituksen edellytyksenä on hyväksytysti suoritettu koe. 
 
-Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen). Kokeen voi suorittaa 1.5. alkaen.
+Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
-Kokeen voi suorittaa 1.5. alkaen. Kokeen viimeinen suorituspäivä on 10.1.2021.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2021.</b>
+Kokeen viimeinen suorituspäivä on 10.1.2021.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2021.</b>
+ Jos et ehdi suorittaa koetta määräaikaan mennessä, voit suorittaa sen jälleen 15.3. alkaen kurssin seuraavassa versiossa.
 
 Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-7 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan.
 
@@ -88,7 +90,6 @@ Kokeen tuloksen näet palautussovelluksen välilehdeltä <i>my submissions</i> v
 #### 8 ja 9 opintopisteen suoritus
 
 Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
-
 
 Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen kun olet tehnyt osat 0-7.
 
@@ -145,8 +146,9 @@ email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro github-tunnukse
 
 #### Vuoden 2020 kurssin jatkaminen vuoden 2021 versiossa
 
-Vuoden 2020 versio päättyy 10.1.2021. Jos kurssi jää kesken, voit jatkaa sitä taas 15.3.2021 uuden version alkaessa!
+Vuoden 2020 versio päättyy 1.3.2021. Jos kurssi jää kesken, voit jatkaa sitä taas 15.3.2021 uuden version alkaessa!
 
+Huomaa, että kurssin koetta ei voi suorittaa 10.1.-14.3.2021. ja tänä aikana yliopistosuoritusten kirjaamisessa on tauko.
 #### Kurssin jonkin muun version täydentäminen
 
 Käytännössä täydentäminen tapahtuu siten, että voit korvata tämän kurssin <i>osia</i> aiemmin suorittamasi kurssin aikana palauttamillasi osilla. Eli jos olet suorittanut kurssin esim. avoimen yliopiston kautta kolmen opintopisteen laajuisena, voit korvata vanhan suorituksesi osilla 0-3 tämän kurssin osat 0-3. Ainoastaan peräkkäisten osien korvaaminen onnistuu, eli et voi korvata esim. osia 0 ja 2 mutta tehdä nyt osaa 1.

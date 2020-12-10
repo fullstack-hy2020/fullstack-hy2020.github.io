@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript and React Native.
+This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript,  React Native and Continuous integration.
 
 Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases.
 
@@ -35,7 +35,11 @@ Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good eno
 
 You are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part.
 
-The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 10 January 2021.
+The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 15 February 2021. 
+
+After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding! 
+
+However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2020. 
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -55,7 +59,7 @@ For three credits, you must submit all compulsory exercises (without asterisks) 
 
 For university credits, the three credit course also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
 
-The last possible date for taking the exam is 10 January 2021. <b>Note that you must sign up for the exam by 9 January 2021, at the latest.</b>
+The last possible date for taking the exam is 10 January 2021. <b>Note that you must sign up for the exam by 9 January 2021, at the latest.</b> It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.
 
 Exam results can be found from the <i>my submissions</i> tab of the submission system no later than four weeks after taking the exam, but bear in mind that exams may be corrected slower during July. Remember to save your student number in the submission system!
 
@@ -83,7 +87,7 @@ Credits and grades are calculated as follows:
 
 For university credits, the three credit course also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
 
-The last possible date for taking the exam is 10 January 2021. <b>Note that you must sign up for the exam by 9 January 2021, at the latest.</b>
+The last possible date for taking the exam is 10 January 2021. <b>Note that you must sign up for the exam by 9 January 2021, at the latest.</b>  It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-9 credits and does not count towards your grade.
 
