@@ -51,7 +51,7 @@ const partNameTranslations = {
 
 export const PartBanner = ({ lang }) => {
   // TODO: show part 11 when published
-  const parts = Object.keys(navigation[lang]);
+  const parts = Object.keys(navigation[lang]).filter(p => p !== '11');
 
   return (
     <Banner
@@ -60,7 +60,6 @@ export const PartBanner = ({ lang }) => {
     >
       <div className="container spacing flex-fix-aligning col-7--mobile">
         {parts.map(part => {
-          partNameTranslations;
           const partNames =
             partNameTranslations[lang] || partNameTranslations.en;
 
