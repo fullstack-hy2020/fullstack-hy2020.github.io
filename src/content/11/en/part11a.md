@@ -194,7 +194,7 @@ For larger projects where more resources are needed or in larger companies where
 
 For this course, we'll use [GitHub Actions](https://github.com/features/actions). It is an obvious choice since we're using GitHub anyway. We can get a robust CI solution working immediately without any hassle of setting up a server or configuring a third-party cloud-based service. 
 
-Besides it is easy to take into use, GitHub Actions is a good choice from other respects. It might be the best cloud-based solution at the moment. It has gained lots of popularity since its initial release in November 2019. 
+Besides being easy to take into use, GitHub Actions is a good choice in other respects. It might be the best cloud-based solution at the moment. It has gained lots of popularity since its initial release in November 2019. 
 
 </div>
 
