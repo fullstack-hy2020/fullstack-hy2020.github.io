@@ -128,7 +128,7 @@ Then you are done!
 
 Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finnish <i>all the exercises</i> to pass this part!
 
-Your solutions are in two repositories (pokedex and your own projeck), and since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form!
+Your solutions are in two repositories (pokedex and your own project), and since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form!
 
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
