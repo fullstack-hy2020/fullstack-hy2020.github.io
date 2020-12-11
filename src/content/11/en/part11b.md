@@ -166,7 +166,7 @@ Extend the workflow with steps that print the date and current directory content
 
 Both of these are easy steps, and just running commands [date](https://man7.org/linux/man-pages/man1/date.1.html) and [ls](https://man7.org/linux/man-pages/man1/ls.1.html) will do the trick.
 
-Your workflow shoud now look like this
+Your workflow should now look like this
 
 ![Date and dir content in workflow](../../images/11/4.png)
 
