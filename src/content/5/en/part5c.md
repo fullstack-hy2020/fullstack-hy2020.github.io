@@ -558,7 +558,7 @@ CI=true npm test -- --coverage
 
 <!-- Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit: -->
 A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory. 
-The report will tell us i.e the lines of untested code in each component:
+The report will tell us the lines of untested code in each component:
 
 ![](../../images/5/19ea.png)
 

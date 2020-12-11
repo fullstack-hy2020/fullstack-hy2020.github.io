@@ -34,7 +34,7 @@ lang: zh
 
 我们可以使用[create-react-app](https://create-react-app.dev)，通过在初始化脚本中添加一个额外的<i>template</i> 参数，支持使用 TypeScript 创建应用的方法。 因此，为了使用 TypeScript 创建一个 Create React App，运行如下命令:
 
-```sh
+```shell
 npx create-react-app my-app --template typescript
 ```
 

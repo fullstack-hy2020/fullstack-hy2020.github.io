@@ -26,7 +26,7 @@ exports.createPages = ({ actions, graphql }) => {
         }
       }
     }
-  `).then((result) => {
+  `).then(result => {
     if (result.errors) {
       return Promise.reject(result.errors);
     }
@@ -38,11 +38,9 @@ exports.createPages = ({ actions, graphql }) => {
       if (!frontmatter.letter) {
         createPage({
           path:
-            lang === 'en'
-              ? `/en/part${part.toString()}`
-              : lang === 'zh'
-              ? `/zh/part${part.toString()}`
-              : `/osa${part.toString()}`,
+            lang === 'fi'
+              ? `/osa${part.toString()}`
+              : `/${lang}/part${part.toString()}`,
           component: partIntroTemplate,
           context: {
             part: part,
@@ -52,15 +50,11 @@ exports.createPages = ({ actions, graphql }) => {
       } else if (!isEmpty(navigation[lang][part]) && frontmatter.letter) {
         createPage({
           path:
-            lang === 'en'
-              ? `/en/part${part}/${snakeCase(
+            lang === 'fi'
+              ? `/osa${part}/${snakeCase(
                   navigation[lang][part][frontmatter.letter]
                 )}`
-              : lang === 'zh'
-              ? `/zh/part${part}/${snakeCase(
-                  navigation[lang][part][frontmatter.letter]
-                )}`
-              : `/osa${part}/${snakeCase(
+              : `/${lang}/part${part}/${snakeCase(
                   navigation[lang][part][frontmatter.letter]
                 )}`,
           component: contentTemplate,

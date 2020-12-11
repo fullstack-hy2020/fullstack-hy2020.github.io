@@ -468,7 +468,7 @@ This would completely break our application:
 ![](../../images/1/5b.png)
 
 <!-- Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on -->
-What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write
+What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write:
 
 ```js
 <button onClick={setCounter(counter + 1)}>
@@ -476,10 +476,10 @@ What's going on? An event handler is supposed to be either a <i>function</i> or 
 
 <!-- tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen... -->
 the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the component for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
-This will cause the component to be re-rendered, react will execute the setCounter function call again, and the state will change leading to another rerender...
+This will cause the component to be re-rendered, React will execute the setCounter function call again, and the state will change leading to another rerender...
 
 <!-- Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -->
-Let's define the event handlers like we did before
+Let's define the event handlers like we did before:
 
 ```js
 <button onClick={() => setCounter(counter + 1)}> 
@@ -523,7 +523,7 @@ const App = () => {
 ```
 
 <!-- Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon: -->
-Here the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function:
+Here, the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function:
 
 ```js
 <button onClick={increaseByOne}> 
