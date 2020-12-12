@@ -725,7 +725,7 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 
 ### Development and production configuration
 
-Next, let's add a backend to our application and by repurposing the now-familiar note application backend.
+Next, let's add a backend to our application by repurposing the now-familiar note application backend.
 
 
 Let's store the following content in the <i>db.json</i> file:
