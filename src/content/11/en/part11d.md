@@ -27,7 +27,7 @@ You can configure your GitHub repository in such a way that pull requests cannot
 
 ![Compare & pull request](../../images/11/part11d_00.png)
 
-To open a new pull request, open your branch in GitHub and click on the green "Compare & pull request" at the top. You will be presented with the form where you can fill in pull request description.
+To open a new pull request, open your branch in GitHub and click on the green "Compare & pull request" button at the top. You will be presented with a form where you can fill in the pull request description.
 
 ![Open a new pull request](../../images/11/part11d_01.png)
 
