@@ -92,7 +92,7 @@ You can then try the app with a browser, but most likely you run into a problem.
 
 So, add a proper Procfile and ensure that the application starts properly. 
 
-**Remember** that it is always essential to keep an on eye what is happening in server logs when playing around with product deployments, so use <code>heroku logs</code> early and use it often. No, use it all the time!
+**Remember** that it is always essential to keep an eye on what is happening in server logs when playing around with product deployments, so use <code>heroku logs</code> early and use it often. No, use it all the time!
 
 #### 11.11 Health check
 
