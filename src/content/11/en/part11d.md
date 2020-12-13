@@ -74,7 +74,7 @@ In the "Conversation" tab of the pull request you should see your latest commit(
 
 ![](../../images/11/16.png)
 
-Once the checks have been run, the status should turn to green. Make sure all the checks pass.
+Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
 #### 11.15 run deployment step only for master branch
 
