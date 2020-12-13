@@ -7,7 +7,7 @@ lang: es
 
 <div class="content">
 
-### Estado complejo 
+### Estado complejo
 
 En nuestro ejemplo anterior el estado de la aplicación era simple ya que estaba compuesto por un solo entero. ¿Y si nuestra aplicación requiere un estado más complejo?
 
@@ -38,6 +38,7 @@ const App = () => {
 El componente obtiene acceso a las funciones _setLeft_ y _setRight_ que puede usar para actualizar las dos partes del estado.
 
 El estado del componente o una parte de su estado puede ser de cualquier tipo. Podríamos implementar la misma funcionalidad guardando el recuento de clics de los botones <i>left</i> y <i>right</i> en un solo objeto:
+
 ```js
 {
   left: 0,
@@ -45,7 +46,7 @@ El estado del componente o una parte de su estado puede ser de cualquier tipo. P
 }
 ```
 
-En este caso, la aplicación se vería así: 
+En este caso, la aplicación se vería así:
 
 ```js
 const App = () => {
@@ -54,16 +55,16 @@ const App = () => {
   })
 
   const handleLeftClick = () => {
-    const newClicks = { 
-      left: clicks.left + 1, 
-      right: clicks.right 
+    const newClicks = {
+      left: clicks.left + 1,
+      right: clicks.right
     }
     setClicks(newClicks)
   }
 
   const handleRightClick = () => {
-    const newClicks = { 
-      left: clicks.left, 
+    const newClicks = {
+      left: clicks.left,
       right: clicks.right + 1 
     }
     setClicks(newClicks)
@@ -83,17 +84,19 @@ const App = () => {
 Ahora el componente solo tiene una parte de estado y los controladores de eventos deben encargarse de cambiar el <i>estado completo de la aplicación</i>.
 
 El controlador de eventos se ve un poco desordenado. Cuando se hace clic en el botón izquierdo, se llama a la siguiente función:
+
 ```js
 const handleLeftClick = () => {
-  const newClicks = { 
-    left: clicks.left + 1, 
-    right: clicks.right 
+  const newClicks = {
+    left: clicks.left + 1,
+    right: clicks.right
   }
   setClicks(newClicks)
 }
 ```
 
-The following object is set as the new state of the application:
+El siguiente objeto se establece como el nuevo estado de la aplicación:
+
 ```js
 {
   left: clicks.left + 1,
@@ -107,16 +110,16 @@ Podemos definir el nuevo objeto de estado un poco más claramente utilizando la 
 
 ```js
 const handleLeftClick = () => {
-  const newClicks = { 
-    ...clicks, 
+  const newClicks = {
+    ...clicks,
     left: clicks.left + 1 
   }
   setClicks(newClicks)
 }
 
 const handleRightClick = () => {
-  const newClicks = { 
-    ...clicks, 
+  const newClicks = {
+    ...clicks,
     right: clicks.right + 1 
   }
   setClicks(newClicks)
@@ -369,7 +372,7 @@ Por suerte para nosotros, React es una librería extremadamente amigable para lo
 
 Antes de continuar, recordemos una de las reglas más importantes del desarrollo web.
 
-<h4>La primera regla de desarrollo web</ h4>
+<h4>La primera regla de desarrollo web</h4>
 
 > **Mantenga la consola de desarrollador del navegador abierta en todo momento.**
 >
@@ -421,7 +424,7 @@ Separe las cosas que desea imprimir en la consola con una coma:
 console.log('props value is', props)
 ```
 
-Si usa la forma similar a Java de concatenar una cadena con un objeto, terminará con un mensaje de registro bastante poco informativo: 
+Si usa la forma similar a Java de concatenar una cadena con un objeto, terminará con un mensaje de registro bastante poco informativo:
 
 ```js
 props value is [Object object]
@@ -447,12 +450,11 @@ También puede acceder al depurador sin el comando _debugger_ agregando puntos d
 
 ![](../../images/1/9a.png)
 
-Se recomienda encarecidamente agregar las [herramientas de desarrollo de React](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) para Chrome. Agrega una nueva pestaña _Components_ a las herramientas de desarrollo. La nueva pestaña de herramientas de desarrollador se puede usar para inspeccionar los diferentes elementos de React en la aplicación, junto con su estado y accesorios:
+Se recomienda encarecidamente agregar las [herramientas de desarrollo de React](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) para Chrome. Agrega una nueva pestaña _Components_ a las herramientas de desarrollo. La nueva pestaña de herramientas de desarrollador se puede usar para inspeccionar los diferentes elementos de React en la aplicación, junto con su estado y props:
 
 ![](../../images/1/10ea.png)
 
-
-El estado del componente _App_ se define así: 
+El estado del componente _App_ se define así:
 
 ```js
 const [left, setLeft] = useState(0)
@@ -603,7 +605,7 @@ Podemos implementar el restablecimiento del estado en nuestra aplicación con es
 <button onClick={() => setValue(0)}>button</button>
 ```
 
-El controlador de eventos ahora es la función _( ) => setValue (0)_.
+El controlador de eventos ahora es la función _() => setValue(0)_.
 
 Definir controladores de eventos directamente en el atributo del botón no es necesariamente la mejor idea posible.
 
@@ -682,7 +684,7 @@ const App = () => {
 }
 ```
 
-El código funciona correctamente aunque parece complicado. 
+El código funciona correctamente aunque parece complicado.
 
 El controlador de eventos ahora está configurado para una llamada de función:
 
@@ -926,7 +928,7 @@ const Button = (props) => (
 
 El componente obtiene la función de controlador de eventos de la propiedad _handleClick_, y el texto del botón de la propiedad _text_.
 
-Usar el componente <i>Button</i> es simple, aunque debemos asegurarnos de que usamos los nombres de atributos correctos al pasar accesorios al componente.
+Usar el componente <i>Button</i> es simple, aunque debemos asegurarnos de que usamos los nombres de atributos correctos al pasar props al componente.
 
 ![](../../images/1/12e.png)
 
@@ -1002,13 +1004,14 @@ Internet está lleno de material relacionado con React. Sin embargo, utilizamos 
 
 Puede encontrar útiles los siguientes enlaces:
 
-- Vale la pena echarle un vistazo a la[documentación oficial](https://reactjs.org/docs/hello-world.html) de React en algún momento, aunque la mayor parte será relevante solo más adelante en el curso. Además, todo lo relacionado con los componentes basados ​​en clases es irrelevante para nosotros;
+- Vale la pena echarle un vistazo a la [documentación oficial](https://reactjs.org/docs/hello-world.html) de React en algún momento, aunque la mayor parte será relevante solo más adelante en el curso. Además, todo lo relacionado con los componentes basados ​​en clases es irrelevante para nosotros;
 - Algunos cursos en [Egghead.io](https://egghead.io) como [Start learning React](https://egghead.io/courses/start-learning-react) son de alta calidad y la actualizada recientemente [Guía para principiantes de React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) también es relativamente buena; Ambos cursos introducen conceptos que también se presentarán más adelante en este curso. **NB** El primero usa componentes de clase pero el segundo usa los nuevos funcionales.
 
 </div> 
 
 <div class="tasks">
-  <h3> Ejercicios 1.6.-1.14.</h3>
+
+<h3>Ejercicios 1.6.-1.14.</h3>
 
 Envíe sus soluciones a los ejercicios enviando primero su código a GitHub y luego marcando los ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -1024,7 +1027,7 @@ En algunas situaciones, es posible que también deba ejecutar el siguiente coman
 rm -rf node_modules/ && npm i
 ```
 
-  <h4>1.6: unicafe paso1</h4>
+<h4>1.6: unicafe, paso 1</h4>
 
 Como la mayoría de las empresas, [Unicafe](https://www.unicafe.fi/#/9/4) recopila comentarios de sus clientes. Su tarea es implementar una aplicación web para recopilar comentarios de los clientes. Solo hay tres opciones para los comentarios: <i>good (bueno)</i>, <i>neutral</i> y <i>bad(malo)</i>.
 
@@ -1058,13 +1061,13 @@ ReactDOM.render(<App />,
 )
 ```
 
-<h4>1.7: unicafe paso2</h4>
+<h4>1.7: unicafe, paso 2</h4>
 
 Amplíe su aplicación para que muestre más estadísticas sobre los comentarios recopilados: el número total de comentarios recopilados, la puntuación promedio (buena: 1, neutral: 0, mala: -1) y el porcentaje de comentarios positivos.
 
 ![](../../images/1/14e.png)
 
-<h4>1.8: unicafe paso3</h4>
+<h4>1.8: unicafe, paso 3</h4>
 
 Refactorice su aplicación para que la visualización de las estadísticas se extraiga en su propio componente <i>Statistics</i>. El estado de la aplicación debe permanecer en el componente raíz <i>App</i>.
 
@@ -1092,13 +1095,13 @@ const App = () => {
 }
 ```
 
-<h4>1.9: unicafe paso4</h4>
+<h4>1.9: unicafe, paso 4</h4>
 
 Cambie su aplicación para mostrar estadísticas solo una vez que se hayan recopilado los comentarios.
 
 ![](../../images/1/15e.png)
 
-<h4>1.10: unicafe step5</h4> 
+<h4>1.10: unicafe step5</h4>
 
 Continuemos refactorizando la aplicación. Extraiga los dos componentes siguientes:
 
@@ -1124,7 +1127,7 @@ const Statistics = (props) => {
 
 El estado de la aplicación aún debe mantenerse en el componente raíz <i>App</i>.
 
-<h4>1.11*: unicafe paso6</h4> 
+<h4>1.11*: unicafe, paso 6</h4> 
 
 Muestra las estadísticas en una [tabla](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) HTML, de modo que su la aplicación se ve más o menos así:
 
@@ -1136,11 +1139,11 @@ Recuerde mantener la consola abierta en todo momento. Si ve esta advertencia en 
 
 Luego realice las acciones necesarias para que la advertencia desaparezca. Intente buscar en Google el mensaje de error si se queda atascado.
 
-<i> Fuente típica de un error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` es la extensión de Chrome. Intente ir a `chrome://extensions/` e intente deshabilitarlos uno por uno y actualizar la página de la aplicación React; el error debería desaparecer eventualmente.</i>
+<i>Fuente típica de un error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` es la extensión de Chrome. Intente ir a `chrome://extensions/` e intente deshabilitarlos uno por uno y actualizar la página de la aplicación React; el error debería desaparecer eventualmente.</i>
 
 **¡Asegúrate de que a partir de ahora no veas ninguna advertencia en tu consola!**
 
-<h4>1.12 *: anécdotes paso1</h4>
+<h4>1.12*: anécdotes, paso 1</h4>
 
 El mundo de la ingeniería de software está lleno con [anécdotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que destilan verdades atemporales de nuestro campo en breves frases.
 
@@ -1177,13 +1180,13 @@ ReactDOM.render(
 
 Google te dirá cómo generar números aleatorios en JavaScript. Recuerde que puede probar la generación de números aleatorios, por ejemplo, directamente en la consola de su navegador.
 
-Su aplicación finalizada podría verse así 
+Su aplicación finalizada podría verse así
 
 ![](../../images/1/18a.png)
 
 **ADVERTENCIA** create-react-app convertirá automáticamente su proyecto en un repositorio git a menos que cree su aplicación dentro de un repositorio git existente. **Lo más probable es que no desee que cada uno de sus proyectos sea un repositorio separado**, así que simplemente ejecute el comando _rm -rf .git_ en la raíz de su aplicación.
 
-<h4>1.13*: anecdotes paso2 </h4>
+<h4>1.13*: anecdotes, paso 2</h4>
 
 Expande tu aplicación para que puedas votar por la anécdota mostrada.
 
@@ -1210,11 +1213,12 @@ const copy = [...points]
 // increment the value in position 2 by one
 copy[2] += 1
 ```
+
 El uso de una matriz podría ser la opción más sencilla en este caso. Buscar en Google te proporcionará muchos consejos sobre cómo crear una matriz llena de ceros de la longitud deseada, como [esto](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
-<h4>1,14*: anecdotes paso 3</h4>
+<h4>1.14*: anecdotes, paso 3</h4>
 
-Ahora implemente la versión final de la aplicación que muestra la anécdota con el mayor número de votos 
+Ahora implemente la versión final de la aplicación que muestra la anécdota con el mayor número de votos
 
 ![](../../images/1/20a.png)
 

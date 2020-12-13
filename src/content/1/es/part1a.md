@@ -1,24 +1,24 @@
---- 
-mainImage: ../../../images/part-1.svg 
-part: 1 
-letter: a 
-lang: en 
+---
+mainImage:../../../images/part-1.svg 
+part: 1
+letter: a
+lang: en
 --- 
 
-<div class="content"> 
+<div class="content">
 
-Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la librería [React](https://reactjs.org/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React. 
+Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la librería [React](https://reactjs.org/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React.
 
 La forma más fácil de empezar es utilizando una herramienta llamada [create-react-app](https://github.com/facebook/create-react-app). Es posible (pero no necesario) instalar <i>create-react-app</i> en su máquina si la herramienta <i>npm</i> que se instaló junto con Node tiene un número de versión de al menos <i>5.3</i>.
 
 Creemos una aplicación llamada <i>part1</i> y naveguemos hasta su directorio.
 
 ```bash
-$ npx create-react-app part1 
+$ npx create-react-app part1
 $ cd part1
 ```
 
-Cada comando, aquí y en el futuro, comenzando con el carácter <em>$</em> se escribe en una terminal prompt, también conocido como interfaz de línea de comandos. El carácter <em>$</em> no se debe escribir porque representa el mensaje. 
+Cada comando, aquí y en el futuro, comenzando con el carácter <em>$</em> se escribe en una terminal prompt, también conocido como interfaz de línea de comandos. El carácter <em>$</em> no se debe escribir porque representa el mensaje.
 
 La aplicación se ejecuta de la siguiente manera:
 
@@ -26,25 +26,25 @@ La aplicación se ejecuta de la siguiente manera:
 $ npm start
 ```
 
-De forma predeterminada, la aplicación se ejecuta en el puerto localhost 3000 con la dirección <http://localhost:3000> 
+De forma predeterminada, la aplicación se ejecuta en el puerto localhost 3000 con la dirección <http://localhost:3000>.
 
 Chrome debería iniciarse automáticamente. Abra la consola del navegador **inmediatamente**. También abra un editor de texto para que pueda ver el código y la página web al mismo tiempo en la pantalla:
 
-![](../../images/1/1e.png) 
+![](../../images/1/1e.png)
 
-El código de la aplicación reside en la carpeta <i>src</i>. Simplifiquemos el código predeterminado de modo que el contenido del archivo <i>index.js</i> se vea así: 
+El código de la aplicación reside en la carpeta <i>src</i>. Simplifiquemos el código predeterminado de modo que el contenido del archivo <i>index.js</i> se vea así:
 
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 
-const App = () => ( 
+const App = () => (
   <div>
     <p>Hello world</p> 
   </div>
 )
 
-ReactDOM.render(<App />, document.getElementById('root')) 
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 Los archivos <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, <i>setupTests.js</i> y <i>reportWebVitals.js</i> pueden eliminarse ya que no son necesarios en nuestra aplicación en este momento.
@@ -54,7 +54,7 @@ Los archivos <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>,
 El archivo <i>index.js</i> ahora define un [componente](https://reactjs.org/docs/components-and-props.html) de React con el nombre <i>App</i> y el comando en la línea final
 
 ```js
-ReactDOM.render(<App />, document.getElementById('root')) 
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 renderiza su contenido en el elemento <i>div</i>, definido en el archivo <i>public/index.html</i>, que tiene el valor de <i>id</i> 'root'.
@@ -73,7 +73,7 @@ const App = () => (
 
 Como probablemente adivinaste, el componente se representará como una etiqueta <i>div</i>, que envuelve una etiqueta <i>p</i> que contiene el texto <i>Hello world</i>.
 
-Técnicamente, el componente se define como una función de JavaScript. La siguiente es una función (que no recibe ningún parámetro): 
+Técnicamente, el componente se define como una función de JavaScript. La siguiente es una función (que no recibe ningún parámetro):
 
 ```js
 () => (
@@ -83,7 +83,7 @@ Técnicamente, el componente se define como una función de JavaScript. La sigui
 )
 ```
 
-La función luego se asigna a un variable constante <i>App</i>: 
+La función luego se asigna a un variable constante <i>App</i>:
 
 ```js
 const App = ...
@@ -120,7 +120,7 @@ const App = () => {
 
 También es posible renderizar contenido dinámico dentro de un componente.
 
-Modifique el componente de la siguiente manera: 
+Modifique el componente de la siguiente manera:
 
 ```js
 const App = () => {
@@ -139,13 +139,13 @@ const App = () => {
 }
 ```
 
-Se evalúa cualquier código JavaScript entre llaves y el resultado de esta evaluación se incrusta en el lugar definido en el HTML producido por el componente. 
+Se evalúa cualquier código JavaScript entre llaves y el resultado de esta evaluación se incrusta en el lugar definido en el HTML producido por el componente.
 
 ### JSX
 
-Parece que los componentes de React están devolviendo marcado HTML. Sin embargo, éste no es el caso. El diseño de los componentes de React se escribe principalmente usando [JSX](https://reactjs.org/docs/introducing-jsx.html). Aunque JSX se parece a HTML, en realidad estamos tratando con una forma de escribir JavaScript. Bajo el capó, el JSX devuelto por los componentes de React se compila en JavaScript. 
+Parece que los componentes de React están devolviendo marcado HTML. Sin embargo, éste no es el caso. El diseño de los componentes de React se escribe principalmente usando [JSX](https://reactjs.org/docs/introducing-jsx.html). Aunque JSX se parece a HTML, en realidad estamos tratando con una forma de escribir JavaScript. Bajo el capó, el JSX devuelto por los componentes de React se compila en JavaScript.
 
-Después de compilar, nuestra aplicación se ve así: 
+Después de compilar, nuestra aplicación se ve así:
 
 ```js
 import React from 'react'
@@ -179,7 +179,7 @@ También es posible escribir React como "JavaScript puro" sin usar JSX. Aunque, 
 
 En la práctica, JSX se parece mucho a HTML con la distinción de que con JSX puede incrustar fácilmente contenido dinámico escribiendo JavaScript apropiado entre llaves. La idea de JSX es bastante similar a muchos lenguajes de plantillas, como Thymeleaf, que se utiliza junto con Java Spring, que se utiliza en servidores.
 
-JSX es similar a [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction), lo que significa que todas las etiquetas deben cerrarse. Por ejemplo, una nueva línea es un elemento vacío, que en HTML se puede escribir de la siguiente manera: 
+JSX es similar a [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction), lo que significa que todas las etiquetas deben cerrarse. Por ejemplo, una nueva línea es un elemento vacío, que en HTML se puede escribir de la siguiente manera:
 
 ```html
 <br>
@@ -237,7 +237,7 @@ const App = () => {
 
 Escribir componentes con React es fácil, y al combinar componentes, incluso una aplicación más compleja puede conservarse bastante fácil de mantener. De hecho, una filosofía central de React es componer aplicaciones a partir de muchos componentes reutilizables especializados.
 
-Otra fuerte convención es la idea de un <i>componente raíz</i> llamado <i>App</i> en la parte superior del árbol de componentes de la aplicación. Sin embargo, como aprenderemos en la [parte 6](/es/part6), hay situaciones en las que el componente <i>App</i> no es exactamente la raíz, sino que está incluido en un componente de utilidad apropiado. 
+Otra fuerte convención es la idea de un <i>componente raíz</i> llamado <i>App</i> en la parte superior del árbol de componentes de la aplicación. Sin embargo, como aprenderemos en la [parte 6](/es/part6), hay situaciones en las que el componente <i>App</i> no es exactamente la raíz, sino que está incluido en un componente de utilidad apropiado.
 
 ### props: pasar datos a componentes 
 
@@ -273,7 +273,7 @@ const App = () => {
 
 Puede haber un número arbitrario de props y sus valores pueden ser strings "incrustados en el código" ("hard coded") o resultados de expresiones JavaScript. Si el valor del prop se logra usando JavaScript, debe estar envuelto con llaves. 
 
-Modifiquemos el código para que el componente <i>Hello</i> use dos props: 
+Modifiquemos el código para que el componente <i>Hello</i> use dos props:
 
 ```js
 const Hello = (props) => {
@@ -300,7 +300,7 @@ const App = () => {
 }
 ```
 
-Los props enviados por el componente <i>App</i> son los valores de las variables, el resultado de la evaluación de la expresión suma y un string regular. 
+Los props enviados por el componente <i>App</i> son los valores de las variables, el resultado de la evaluación de la expresión suma y un string regular.
 
 ### Algunas notas
 
@@ -312,7 +312,7 @@ React se ha configurado para generar mensajes de error bastante claros. A pesar 
 
 Es bueno recordar que en React es posible y vale la pena escribir comandos <em>console.log()</em> (que se imprimen en la consola) dentro de tu código. 
 
-También tenga en cuenta que **los nombres de los componentes de React deben estar en mayúscula**. Si intenta definir un componente de la siguiente manera 
+También tenga en cuenta que **los nombres de los componentes de React deben estar en mayúscula**. Si intenta definir un componente de la siguiente manera
 
 ```js
 const footer = () => {
@@ -324,7 +324,7 @@ const footer = () => {
 }
 ```
 
-and use it like this
+y usarlo así
 
 ```js
 const App = () => {
@@ -340,7 +340,7 @@ const App = () => {
 
 la página no mostrará el contenido definido dentro del componente Footer, y en su lugar React solo crea un elemento <i>footer</i> vacío. Si cambia la primera letra del nombre del componente a una letra mayúscula, React crea un elemento <i>div</i> definido en el componente Footer, que se representa en la página.
 
-Tenga en cuenta que el contenido de un componente de React (normalmente) debe contener **un elemento raíz**. Si, por ejemplo, intentamos definir el componente <i>App</i> sin el elemento <i>div</i> más externo: 
+Tenga en cuenta que el contenido de un componente de React (normalmente) debe contener **un elemento raíz**. Si, por ejemplo, intentamos definir el componente <i>App</i> sin el elemento <i>div</i> más externo:
 
 ```js
 const App = () => {
@@ -352,11 +352,11 @@ const App = () => {
 }
 ```
 
-el resultado es un mensaje de error. 
+el resultado es un mensaje de error.
 
 ![](../../images/1/3e.png)
 
-Usar un elemento raíz no es la única opción de trabajo. Un <i>array</i> de componentes también es una solución válida: 
+Usar un elemento raíz no es la única opción de trabajo. Un <i>array</i> de componentes también es una solución válida:
 
 ```js
 const App = () => {
@@ -368,9 +368,9 @@ const App = () => {
 }
 ```
 
-Sin embargo, al definir el componente raíz de la aplicación, esto no es algo particularmente inteligente y hace que el código se vea un poco desagradable. 
+Sin embargo, al definir el componente raíz de la aplicación, esto no es algo particularmente inteligente y hace que el código se vea un poco desagradable.
 
-Debido a que el elemento raíz está estipulado, tenemos elementos div "extra" en el árbol DOM. Esto se puede evitar usando [fragments](https://reactjs.org/docs/fragments.html#short-syntax), es decir, envolviendo los elementos que el componente devolverá con un elemento vacío: 
+Debido a que el elemento raíz está estipulado, tenemos elementos div "extra" en el árbol DOM. Esto se puede evitar usando [fragments](https://reactjs.org/docs/fragments.html#short-syntax), es decir, envolviendo los elementos que el componente devolverá con un elemento vacío:
 
 ```js
 const App = () => {
@@ -392,12 +392,13 @@ Ahora se compila con éxito y el DOM generado por React ya no contiene el elemen
 
 </div>
 
-<div class="tasks"> 
-  <h3>Ejercicios 1.1.-1.2.</h3> 
+<div class="tasks">
 
-Los ejercicios se envían a través de GitHub y marcando los ejercicios completados en la [solicitud de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). 
+<h3>Ejercicios 1.1.-1.2.</h3>
 
-Puede enviar todos los ejercicios de este curso al mismo repositorio o utilizar varios repositorios. Si envía ejercicios de diferentes partes en el mismo repositorio, utilice un esquema de nomenclatura razonable para los directorios. 
+Los ejercicios se envían a través de GitHub y marcando los ejercicios completados en la [solicitud de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+Puede enviar todos los ejercicios de este curso al mismo repositorio o utilizar varios repositorios. Si envía ejercicios de diferentes partes en el mismo repositorio, utilice un esquema de nomenclatura razonable para los directorios.
 
 Una estructura de archivos muy funcional para el repositorio de envíos es la siguiente:
 
@@ -416,17 +417,17 @@ Vea [esto](https://github.com/fullstack-hy2020/example-submission-repository)!
 
 Para cada parte del curso hay un directorio, que se ramifica en directorios que contienen una serie de ejercicios, como "unicafe" para la parte 1. 
 
-Por cada aplicación web para una serie de ejercicios, se recomienda enviar todos los archivos relacionados con ese aplicación, excepto para el directorio <i>node_modules</i>.
+Por cada aplicación web para una serie de ejercicios, se recomienda enviar todos los archivos relacionados con esa aplicación, excepto para el directorio <i>node_modules</i>.
 
 Los ejercicios se envían **una parte a la vez**. Cuando haya enviado los ejercicios para una parte del curso, ya no podrá enviar ejercicios incompletos para la misma parte.
 
 Tenga en cuenta que en esta parte, hay más ejercicios además de los que se encuentran a continuación. <i>No envíe su trabajo</i> hasta que haya completado todos los ejercicios que desea enviar para la parte.
 
-  <h4>1.1: información del curso, paso1</h4> 
+<h4>1.1: información del curso, paso 1</h4>
 
 <i>La aplicación en la que comenzaremos a trabajar en este ejercicio se desarrollará más a fondo en algunos de los siguientes ejercicios. En este y otros conjuntos de ejercicios futuros de este curso, es suficiente enviar solo el estado final de la aplicación. Si lo desea, también puede crear una confirmación para cada ejercicio de la serie, pero esto es completamente opcional.</i>
 
-Use create-react-app para inicializar una nueva aplicación. Modifique <i>index.js</i> para que coincida con el siguiente 
+Use create-react-app para inicializar una nueva aplicación. Modifique <i>index.js</i> para que coincida con el siguiente código
 
 ```js
 import React from 'react'
@@ -461,9 +462,9 @@ const App = () => {
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-y elimine archivos adicionales (App.js, App.css, App.test.js, logo.svg, setupTests.js, reportWebVitals.js). 
+y elimine los archivos adicionales (App.js, App.css, App.test.js, logo.svg, setupTests.js, reportWebVitals.js).
 
-Desafortunadamente, toda la aplicación está en el mismo componente. Refactorice el código para que conste de tres componentes nuevos: <i>Header</i>, <i>Content</i> y <i>Total</i>. Todos los datos aún residen en el componente <i>App</i>, que pasa los datos necesarios a cada componente mediante <i>props</i>. <i>Header</i> se encarga de representar el nombre del curso, <i>Content</i> representa las partes y su número de ejercicios y <i>Total</i> representa el número total de ejercicios. 
+Desafortunadamente, toda la aplicación está en el mismo componente. Refactorice el código para que conste de tres componentes nuevos: <i>Header</i>, <i>Content</i> y <i>Total</i>. Todos los datos aún residen en el componente <i>App</i>, que pasa los datos necesarios a cada componente mediante <i>props</i>. <i>Header</i> se encarga de representar el nombre del curso, <i>Content</i> representa las partes y su número de ejercicios y <i>Total</i> representa el número total de ejercicios.
 
 El cuerpo del componente <i>App</i> será aproximadamente como sigue:
 
@@ -481,11 +482,11 @@ const App = () => {
 }
 ```
 
-**ADVERTENCIA** create-react-app convierte automáticamente el proyecto en un repositorio de git a menos que la aplicación se cree dentro de un repositorio ya existente. Lo más probable es que **no quieras** que el proyecto se convierta en un repositorio, así que ejecuta el comando _rm -rf .git_ en la raíz del proyecto. 
+**ADVERTENCIA** create-react-app convierte automáticamente el proyecto en un repositorio de git a menos que la aplicación se cree dentro de un repositorio ya existente. Lo más probable es que **no quieras** que el proyecto se convierta en un repositorio, así que ejecuta el comando _rm -rf .git_ en la raíz del proyecto.
 
-<h4>1.2: información del curso, paso2</h4>
+<h4>1.2: información del curso, paso 2</h4>
 
-Refactorice el componente <i>Content</i> para que no represente ningún nombre de partes o su número de ejercicios por sí mismo. En su lugar, solo representa tres componentes <i>Part</i> de los cuales cada uno representa el nombre y el número de ejercicios de una parte. 
+Refactorice el componente <i>Content</i> para que no represente ningún nombre de partes o su número de ejercicios por sí mismo. En su lugar, solo representa tres componentes <i>Part</i> de los cuales cada uno representa el nombre y el número de ejercicios de una parte.
 
 ```js
 const Content = ... {
