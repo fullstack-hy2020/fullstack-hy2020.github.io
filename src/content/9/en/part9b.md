@@ -56,7 +56,7 @@ and set up <i>scripts</i> within the package.json:
 ```
 
 <!-- Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Notice that if you are using ts-node through package.json, all possible command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
-Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: -->
+Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is:
 
 ```shell
 npm run ts-node -- file.ts
