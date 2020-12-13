@@ -223,7 +223,7 @@ Modify your setup so that if a commit message in a pull request contains _#skip_
 
 **Hints:**  
 
-The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) confitions of the relevant steps. Similarly to [exercise 11-15](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information from the [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
+The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) conditions of the relevant steps. Similarly to [exercise 11-15](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information from the [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
 
 You might take this as a starting point:
 
