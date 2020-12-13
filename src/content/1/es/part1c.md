@@ -3,9 +3,9 @@ mainImage: ../../../images/part-1.svg
 part: 1
 letter: c
 lang: es
---- 
+---
 
-<div class="content"> 
+<div class="content">
 
 Volvamos a trabajar con React.
 
@@ -36,7 +36,7 @@ const App = () => {
 }
 ```
 
-### Funciones auxiliares del componente 
+### Funciones auxiliares del componente
 
 Vamos a expandir nuestro componente <i>Hello</i> para que adivine el año de nacimiento de la persona que recibe la bienvenida:
 
@@ -60,7 +60,7 @@ const Hello = (props) => {
 }
 ```
 
-La lógica para adivinar el año de nacimiento se divide en su propia función que se llama cuando se representa el componente. 
+La lógica para adivinar el año de nacimiento se divide en su propia función que se llama cuando se representa el componente.
 
 La edad de la persona no tiene que pasarse como parámetro a la función, ya que puede acceder directamente a todos los props que se pasan al componente.
 
@@ -103,7 +103,7 @@ const Hello = (props) => {
 
 Tenga en cuenta que también hemos utilizado la sintaxis más compacta para las funciones de flecha al definir la función _bornYear_. Como se mencionó anteriormente, si una función de flecha consta de una sola expresión, entonces no es necesario escribir el cuerpo de la función entre llaves. En esta forma más compacta, la función simplemente devuelve el resultado de la expresión única.
 
-En resumen, las dos definiciones de función que se muestran a continuación son equivalentes: 
+En resumen, las dos definiciones de función que se muestran a continuación son equivalentes:
 ```js
 const bornYear = () => new Date().getFullYear() - age
 
@@ -130,8 +130,7 @@ const Hello = (props) => {
 }
 ```
 
-<!-- Eli koska -->
-If the object we are destructuring has the values
+Si el objeto que estamos desestructurando tiene los valores
 ```js
 props = {
   name: 'Arto Hellas',
@@ -139,7 +138,7 @@ props = {
 }
 ```
 
-la expresión <em>const {name, age} = props</em> asigna los valores 'Arto Hellas'a _nombre_ y 35 a _edad_.
+la expresión <em>const {name, age} = props</em> asigna los valores 'Arto Hellas'a _name_ y 35 a _age_.
 
 Podemos llevar la desestructuración un paso más allá:
 ```js
@@ -189,7 +188,7 @@ const App = (props) => {
 let counter = 1
 
 ReactDOM.render(
-  <App counter={counter} />, 
+  <App counter={counter} />,
   document.getElementById('root')
 )
 ```
@@ -224,7 +223,7 @@ counter += 1
 refresh()
 ```
 
-El comando de re-renderizado se ha envuelto dentro de la función _refresh_ para reducir la cantidad de código copiado y pegado. 
+El comando de re-renderizado se ha envuelto dentro de la función _refresh_ para reducir la cantidad de código copiado y pegado.
 
 Ahora el componente <i>se renderiza tres veces</i>, primero con el valor 1, luego 2 y finalmente 3. Sin embargo, los valores 1 y 2 se muestran en la pantalla durante un período de tiempo tan corto que pueden no ser notados.
 
@@ -266,7 +265,7 @@ const App = () => {
 }
 
 ReactDOM.render(
-  <App />, 
+  <App />,
   document.getElementById('root')
 )
 ```
@@ -324,11 +323,12 @@ La segunda vez que la función del componente es ejecutado, llama a la función 
 ```js
 () => setCounter(2)
 ```
-Mientras tanto, el antiguo valor de _counter_ - "1" - se muestra en la pantalla.
 
-Cada vez que _setCounter_ modifica el estado, hace que el componente se vuelva a renderizar. El valor del estado se incrementará nuevamente después de un segundo y esto continuará repitiéndose mientras la aplicación esté en ejecución. 
+Mientras tanto, el antiguo valor de _counter_ -"1"- se muestra en la pantalla.
 
-Si el componente no se procesa cuando usted cree que debería, o si se procesa en el "momento incorrecto", puede depurar la aplicación registrando los valores de las variables del componente en la consola. Si hacemos las siguientes adiciones a nuestro código: 
+Cada vez que _setCounter_ modifica el estado, hace que el componente se vuelva a renderizar. El valor del estado se incrementará nuevamente después de un segundo y esto continuará repitiéndose mientras la aplicación esté en ejecución.
+
+Si el componente no se procesa cuando usted cree que debería, o si se procesa en el "momento incorrecto", puede depurar la aplicación registrando los valores de las variables del componente en la consola. Si hacemos las siguientes adiciones a nuestro código:
 
 ```js
 const App = () => {
@@ -347,11 +347,11 @@ const App = () => {
 }
 ```
 
-Es fácil de seguir y rastrear las llamadas realizadas a la <i>App</i> función de renderizado del componente:
+Es fácil de seguir y rastrear las llamadas realizadas a la función de renderizado del componente <i>App</i>:
 
 ![](../../images/1/4e.png)
 
-### Manejo de eventos 
+### Manejo de eventos
 
 Ya hemos mencionado <i>controladores de eventos</i> algunas veces en la [parte 0](/es/part0), que están registrados para ser llamados cuando ocurren eventos específicos. Por ejemplo, la interacción de un usuario con los diferentes elementos de una página web puede provocar que se active una colección de diferentes tipos de eventos.
 
@@ -436,14 +436,10 @@ const App = () => {
 }
 ```
 
-Nuestra aplicación ya está lista!
-
-
-<!-- ### Tapahtumankäsittelijä en funktio -->
+¡Nuestra aplicación ya está lista!
 
 ### El controlador de eventos es una función
 
-<!-- Nappien tapahtumankäsittelijät en siis määritelty suoraan <i> onClick </i> -attribuuttien määrittelyn yhteydessä seuraavasti: -->
 Definimos los controladores de eventos para nuestros botones donde declaramos sus atributos <i>onClick</i>:
 
 ```js
@@ -452,33 +448,27 @@ Definimos los controladores de eventos para nuestros botones donde declaramos su
 </button>
 ```
 
-<!-- Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa: --> 
-¿Qué pasaría si intentáramos definir los controladores de eventos de una forma más simple? 
+¿Qué pasaría si intentáramos definir los controladores de eventos de una forma más simple?
 
 ```js
-<button onClick={setCounter(counter + 1)}> 
+<button onClick={setCounter(counter + 1)}>
   plus
 </button>
 ```
 
-<! - Tämä muutos kuitenkin hajottaa sovelluksemme täysin: -> 
 Esto rompería completamente nuestra aplicación:
 
 ![](../../images/1/5b.png)
 
-<!-- Mistä en kyse? Tapahtumankäsittelijäksi sobre tarkoitus määritellä joko <i> funktio </i> tai <i> viite funktioon </i>. Kun koodissa en --> 
 ¿Qué está pasando? Se supone que un controlador de eventos es una <i>función</i> o una <i>referencia de función</i>, y cuando escribimos
 
 ```js
 <button onClick={setCounter(counter + 1)}>
 ```
 
-<!-- tapahtumankäsittelijäksi tulee määriteltyä <i> funktiokutsu </i>. Sekin en monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i> contador </i> arvo on 0, se suorittaa kutsun <em> setCounter (0 + 1) </em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taenas aiheuttaa komponentin umisa. Ja sama toistuu uudelleen ...-->
-
-el controlador de eventos es en realidad una <i>llamada a función</i>. En muchas situaciones esto está bien, pero no en esta situación particular. Al principio, el valor de la variable <i>counter</i> es 0. Cuando React renderiza el componente por primera vez, ejecuta la llamada de función <em>setCounter(0 + 1)</em> y cambia el valor del estado del componente en 1. 
+el controlador de eventos es en realidad una <i>llamada a función</i>. En muchas situaciones esto está bien, pero no en esta situación particular. Al principio, el valor de la variable <i>counter</i> es 0. Cuando React renderiza el componente por primera vez, ejecuta la llamada de función <em>setCounter(0 + 1)</em> y cambia el valor del estado del componente en 1.
 Esto hará que el componente se vuelva a renderizar, react ejecutará la llamada a la función setCounter nuevamente, y el estado cambiará dando lugar a otra repetición...
 
-<! - Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -> 
 Definamos los controladores de eventos como lo hicimos antes
 
 ```js
@@ -487,16 +477,13 @@ Definamos los controladores de eventos como lo hicimos antes
 </button>
 ```
 
-<!-- Nyt napin tapahtumankäsittelijän määrittelevä atributti <i> onClick </i> saa arvokseen funktion _ () => setCounter (contador + 1) _, ja ​​funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäppia. --> 
-Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón - <i> onClick </i> - tiene el valor _ () => setCounter (contador + 1) _. 
-La función setCounter se llama solo cuando un usuario hace clic en el botón. 
+Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón -<i>onClick</i>- tiene el valor _() => setCounter(counter + 1)_.
+La función setCounter se llama solo cuando un usuario hace clic en el botón.
 
-<!-- Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia. -->
 Por lo general, definir controladores de eventos dentro de las plantillas JSX no es una buena idea.
 Aquí está bien, porque nuestros controladores de eventos son muy simples.
 
-<!-- Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen: -->
-Vamos a separar a los controladores de eventos en funciones separadas de todas formas: 
+Vamos a separar a los controladores de eventos en funciones separadas de todas formas:
 
 ```js
 const App = () => {
@@ -522,11 +509,10 @@ const App = () => {
 }
 ```
 
-<!-- Tälläkin kertaa tapahtumankäsittelijät en määritelty oikein, sillä <i> onClick </i> -attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon: -->
 Aquí los controladores de eventos se han definido correctamente. El valor del atributo <i>onClick</i> es una variable que contiene una referencia a una función:
 
 ```js
-<button onClick={increaseByOne}> 
+<button onClick={increaseByOne}>
   plus
 </button>
 ```
@@ -535,11 +521,11 @@ Aquí los controladores de eventos se han definido correctamente. El valor del a
 
 Se recomienda escribir componentes de React que sean pequeños y reutilizables en toda la aplicación e incluso en proyectos. Refactoricemos nuestra aplicación para que esté compuesta por tres componentes más pequeños, un componente para mostrar el contador y dos componentes para los botones.
 
-Primero implementemos un componente <i>Display</i> que es responsable de mostrar el valor del contador. 
+Primero implementemos un componente <i>Display</i> que es responsable de mostrar el valor del contador.
 
 Una de las mejores prácticas en React es [levantar el estado](https://reactjs.org/docs/lifting-state-up.html) en la jerarquía de componentes. La documentación dice:
 
-> <i>A menudo, varios componentes deben reflejar los mismos datos cambiantes. Recomendamos elevar el estado compartido a su ancestro común más cercano.</i> 
+> <i>A menudo, varios componentes deben reflejar los mismos datos cambiantes. Recomendamos elevar el estado compartido a su ancestro común más cercano.</i>
 
 Así que coloquemos el estado de la aplicación en el componente <i>App</i> y pasémoslo al componente <i>Display</i> a través de <i>props</i>:
 
@@ -551,7 +537,7 @@ const Display = (props) => {
 }
 ```
 
-Usar el componente es sencillo, ya que solo necesitamos pasarle el estado del _counter_: 
+Usar el componente es sencillo, ya que solo necesitamos pasarle el estado del _counter_:
 
 ```js
 const App = () => {
@@ -566,7 +552,7 @@ const App = () => {
       <button onClick={increaseByOne}>
         plus
       </button>
-      <button onClick={setToZero}> 
+      <button onClick={setToZero}>
         zero
       </button>
     </div>
@@ -622,40 +608,34 @@ const App = () => {
 
 Dado que ahora tenemos un componente <i>Button</i> fácilmente reutilizable, también hemos implementado una nueva funcionalidad en nuestra aplicación agregando un botón que se puede usar para disminuir el contador.
 
-El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre del prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria. El propio [tutorial](https://reactjs.org/tutorial/tutorial.html) oficial de React  sugiere esta convención.
+El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre del prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria. El propio [tutorial](https://reactjs.org/tutorial/tutorial.html) oficial de React sugiere esta convención.
 
 ### Los cambios en el estado provocan re-renderizado
 
-<!-- Kerrataan vielä sovelluksen toiminnan pääperiaatteet. -->
 Repasemos los principios fundamentales de cómo funciona una aplicación una vez más.
 
-<!-- Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState] (https://reactjs.org/docs/hooks-reference.html#usestate) -hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät. -->
 Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://reactjs.org/docs/hooks-reference.html#usestate) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
 Este componente contiene el componente _Display_, que muestra el valor del contador, 0, y tres componentes _Button_. Todos los botones tienen controladores de eventos, que se utilizan para cambiar el estado del contador.
 
-<!-- Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. ** Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen. ** --> 
-Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_. 
+Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_.
 **Llamar a una función que cambia el estado hace que el componente se vuelva a procesar.**
 
-<!-- Eli jos painetaan nappia <i> plus </i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät. -->
 Entonces, si un usuario hace clic en el botón <i>plus</i>, el controlador de eventos del botón cambia el valor de _counter_ a 1, y el componente _App_ se vuelve a generar.
 Esto hace que sus subcomponentes _Display_ y _Button_ también se vuelvan arenderizar.
 _Display_ recibe el nuevo valor del contador, 1, como accesorios. Los componentes _Button_ reciben controladores de eventos que pueden usarse para cambiar el estado del contador.
 
 ### Refactorización de los componentes 
 
-<!-- Laskimen arvon näyttävä komponentti on siis seuraava -->
-El componente que muestra el valor del contador es el siguiente: 
+El componente que muestra el valor del contador es el siguiente:
 
 ```js
-const Display = ({ counter }) => {
+const Display = (props) => {
   return (
-    <div>{counter}</div>
+    <div>{props.counter}</div>
   )
 }
 ```
 
-<!-- Komponentti tarvitsee ainoastaan ​​<i> propsin </i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin] (/ osa1 / komponentin_tila_ja_tapa seotoonkasittely destruye) : -->
 El componente solo usa el campo _counter_ de sus <i>props</i>.
 Esto significa que podemos simplificar el componente usando [desestructuración](/es/part1/controladores-de-eventos-de-estado-de-componentes#desestructuración), así:
 
@@ -667,14 +647,12 @@ const Display = ({ counter }) => {
 }
 ```
 
-<!-- Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa -->
 La función que define el componente contiene solo la declaración return, por lo que podemos definir la forma más compacta de funciones de flecha:
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>
 ```
 
-<!-- Vastaava suoraviivaistus voidaan tehdä myös nappia edustavalle komponentille -->
 También podemos simplificar el componente Button.
 
 ```js
@@ -687,7 +665,6 @@ const Button = (props) => {
 }
 ```
 
-<!-- Eli destrukturoidaan <i> props < / i>: ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa -->
 Podemos usar la desestructuración para obtener solo los campos requeridos de <i>props</i>, y usar la forma más compacta de funciones de flecha:
 
 ```js
