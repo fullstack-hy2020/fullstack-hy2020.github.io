@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 
 
-<!-- In addition to the eight exercises in the [React router](/zh/part7/react_router) and [custom hooks]() sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. -->
-除了课程材料第七章节[React router](/zh/part7/react_router) 和[custom hooks]()的八个练习之外，还有13个练习继续我们在课程材料第四章节和第五章节所做的 Bloglist 应用的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
+<!-- In addition to the eight exercises in the [React router](/zh/part7/react_router) and [custom hooks](/zh/part7/custom_hooks) sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. -->
+除了课程材料第七章节[React router](/zh/part7/react_router) 和[custom hooks](/zh/part7/custom_hooks)的八个练习之外，还有13个练习继续我们在课程材料第四章节和第五章节所做的 Bloglist 应用的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
 
 <!-- If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises. -->
 如果您不想使用您自己的 Bloglist 应用，您可以自由地使用模型解决方案中的代码作为这些练习的起点。
