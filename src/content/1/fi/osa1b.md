@@ -503,8 +503,8 @@ class Person {
 const arto = new Person('Arto Hellas', 35)
 arto.greet()
 
-const juhq = new Person('Juha Tauriainen', 48)
-juhq.greet()
+const juha = new Person('Juha Tauriainen', 48)
+juha.greet()
 ```
 
 Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon esim. Javan luokkia ja olioita. Käyttäytymiseltäänkin ne ovat aika lähellä Javan olioita. Perimmiltään kyseessä on kuitenkin edelleen Javascriptin [prototyyppiperintään](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) perustuvista olioista. Molempien olioiden todellinen tyyppi on _Object_ sillä Javascriptissä ei perimmiltään ole muita tyyppejä kuin [Boolean, Null, Undefined, Number, String, Symbol, BigInt ja Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures)
