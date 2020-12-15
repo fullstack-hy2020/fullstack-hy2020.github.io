@@ -237,7 +237,7 @@ const average = function(a, b) {
 }
 
 const result = average(2, 5)
-// el resultasdo es ahora 3.5
+// el resultado es ahora 3.5
 ```
 
 Durante este curso definiremos todas las funciones usando la sintaxis de flecha.
