@@ -481,7 +481,7 @@ setTimeout(arto.greet.bind(arto), 1000)
 
 Al llamar a <em>arto.greet.bind(arto)</em> se crea una nueva función donde _this_ está obligado a apuntar a Arto, independientemente de dónde y cómo se llame al método.
 
-Usando [funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) es posible resolver algunos de los problemas relacionados con _this_. Sin embargo, no deben usarse como métodos para objetos porque entonces _esto_ no funciona en absoluto. Más adelante volveremos al comportamiento de _este_ en relación con las funciones de flecha.
+Usando [funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) es posible resolver algunos de los problemas relacionados con _this_. Sin embargo, no deben usarse como métodos para objetos porque entonces _esto_ no funciona en absoluto. Más adelante volveremos al comportamiento de _this_ en relación con las funciones de flecha.
 
 Si desea obtener una mejor comprensión de cómo _this_ funciona en JavaScript, Internet está lleno de material sobre el tema, por ejemplo, la serie de screencasts [Comprender la palabra clave this de JavaScript en profundidad](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) de [egghead.io](https://egghead.io) es muy recomendable.
 
@@ -519,11 +519,11 @@ La sintaxis de la clase ES6 se usa mucho en React "antiguo" y también en Node.j
 
 ### Materiales JavaScript
 
-Existen guías buenas y malas para JavaScript en Internet. La mayoría de los enlaces de esta página relacionados con la referencia de características de JavaScript [Guía de JavaScript de Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+Existen guías buenas y malas para JavaScript en Internet. La mayoría de los enlaces de esta página relacionados con la referencia de características de JavaScript provienen de la [Guía de JavaScript de Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
 Se recomienda leer inmediatamente [Una reintroducción a JavaScript (tutorial de JS)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) en el sitio web de Mozilla.
 
-Si desea conocer JavaScript en profundidad, hay una gran serie de libros gratuitos en Internet llamada [You Don'tKnow JS](https://github.com/getify/You-Dont-Know-JS).
+Si desea conocer JavaScript en profundidad, hay una gran serie de libros gratuitos en Internet llamada [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS).
 
 Otro gran recurso para aprender JavaScript es [javascript.info](https://javascript.info).
 
