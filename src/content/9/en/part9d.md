@@ -670,7 +670,7 @@ export type State = {
 };
 ```
 
-The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> objects as values.The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
+The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> objects as values. The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
 
 <!-- But be aware! when the type for <i>patients</i> is declared in the way that we have, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not. So, if we were to try to access a patient by a non-existing id, the compiler would still think that the returned value is of type <i>Patient</i> and no error would arise when trying to access it's properties: -->
 But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not.
