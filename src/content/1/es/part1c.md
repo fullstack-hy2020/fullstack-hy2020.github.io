@@ -622,7 +622,7 @@ Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos.
 
 Entonces, si un usuario hace clic en el botón <i>plus</i>, el controlador de eventos del botón cambia el valor de _counter_ a 1, y el componente _App_ se vuelve a generar.
 Esto hace que sus subcomponentes _Display_ y _Button_ también se vuelvan arenderizar.
-_Display_ recibe el nuevo valor del contador, 1, como accesorios. Los componentes _Button_ reciben controladores de eventos que pueden usarse para cambiar el estado del contador.
+_Display_ recibe el nuevo valor del contador, 1, como props. Los componentes _Button_ reciben controladores de eventos que pueden usarse para cambiar el estado del contador.
 
 ### Refactorización de los componentes 
 
