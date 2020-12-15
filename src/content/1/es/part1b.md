@@ -33,9 +33,9 @@ En JavaScript, hay algunas formas de definir las variables:
 const x = 1
 let y = 5
 
-console.log (x, y) // 1, 5 es impreso
+console.log(x, y) // 1, 5 es impreso
 y += 10
-console. log (x, y) // 1, 15 es impreso
+console.log(x, y) // 1, 15 es impreso
 y = 'sometext'
 console.log(x, y) // 1, sometext es impreso
 x = 4 // provoca un error
@@ -58,10 +58,10 @@ const t = [1, -1, 3]
 t.push(5)
 
 console.log(t.length) // Se imprime 4 
-console.log(t [1]) // -1 es impreso
+console.log(t[1]) // -1 es impreso
 
 t.forEach(value => {
-  console.log (valor) // se imprimen los números 1, -1, 3, 5, cada uno en la línea propia
+  console.log(value) // se imprimen los números 1, -1, 3, 5, cada uno en la línea propia
 })
 ```
 
@@ -180,8 +180,8 @@ Ya nos hemos familiarizado con la definición de funciones de flecha. El proceso
 
 ```js
 const sum = (p1, p2) => { 
-  console.log (p1) 
-  console.log (p2) 
+  console.log(p1)
+  console.log(p2)
   return p1 + p2 
 }
 ```
@@ -190,7 +190,7 @@ y la función se llama como se puede esperar:
 
 ```js
 const result = sum(1, 5)
-console.log (result)
+console.log(result)
 ```
 
 Si hay un solo parámetro, podemos excluir los paréntesis de la definición:
@@ -226,7 +226,7 @@ function product(a, b) {
 }
 
 const result = product(2, 6)
-// result is now 12
+// el resultado es ahora 12
 ```
 
 La otra forma de definir la función es usando una [expresión de función](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function). En este caso, no es necesario darle un nombre a la función y la definición puede residir entre el resto del código:
@@ -237,7 +237,7 @@ const average = function(a, b) {
 }
 
 const result = average(2, 5)
-// result is now 3.5
+// el resultasdo es ahora 3.5
 ```
 
 Durante este curso definiremos todas las funciones usando la sintaxis de flecha.
