@@ -916,7 +916,7 @@ Elegir entre las dos formas presentadas de definir sus controladores de eventos 
 
 ### Pasando controladores de eventos a componentes secundarios
 
-Extraigaremos el botón en su propio componente: 
+Extraemos el botón en su propio componente: 
 
 ```js
 const Button = (props) => (
