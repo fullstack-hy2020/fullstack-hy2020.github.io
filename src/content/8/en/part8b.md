@@ -371,8 +371,8 @@ useEffect(() => {
 ```
 
 <!-- Hookin toisena parametrina on _result.data_, tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään. -->
-The hook's second parameter is _result_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
-Would we not handle the update in a controlled way in a hook, returning from a single person view to a list of all persons would cause problems. 
+The hook's second parameter is _result_, so the function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
+Without handling the update in a controlled way in a hook, returning from a single person view to an all persons view would cause problems. 
 
 
 If the state _person_ has a value, instead of showing a list of all persons, only the details of one person are shown. 
@@ -864,7 +864,7 @@ The current code of the application can be found on [Github](https://github.com/
 ### Apollo Client and the applications state
 
 In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL applications. 
-Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all. 
+Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL.
 
 When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).
 
