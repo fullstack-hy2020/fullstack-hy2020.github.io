@@ -991,7 +991,7 @@ const MyComponent = Platform.select({
 <MyComponent />;
 ```
 
-However, a more sophisticated method for implementing and importing platform specific components (or any other piece of code) is to use the <i>.io.jsx</i> and <i>.android.jsx</i> file extensions. Note that the <i>.jsx</i> extension can as well be any extensions recognized by the bundler, such as <i>.js</i>. We can for example have files <i>Button.ios.jsx</i> and <i>Button.android.jsx</i> which we can import like this:
+However, a more sophisticated method for implementing and importing platform specific components (or any other piece of code) is to use the <i>.ios.jsx</i> and <i>.android.jsx</i> file extensions. Note that the <i>.jsx</i> extension can as well be any extensions recognized by the bundler, such as <i>.js</i>. We can for example have files <i>Button.ios.jsx</i> and <i>Button.android.jsx</i> which we can import like this:
 
 ```javascript
 import React from 'react';
