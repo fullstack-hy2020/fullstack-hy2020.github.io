@@ -33,9 +33,9 @@ En JavaScript, hay algunas formas de definir las variables:
 const x = 1
 let y = 5
 
-console.log (x, y) // 1, 5 es impreso
+console.log(x, y) // 1, 5 es impreso
 y += 10
-console. log (x, y) // 1, 15 es impreso
+console.log(x, y) // 1, 15 es impreso
 y = 'sometext'
 console.log(x, y) // 1, sometext es impreso
 x = 4 // provoca un error
@@ -58,10 +58,10 @@ const t = [1, -1, 3]
 t.push(5)
 
 console.log(t.length) // Se imprime 4 
-console.log(t [1]) // -1 es impreso
+console.log(t[1]) // -1 es impreso
 
 t.forEach(value => {
-  console.log (valor) // se imprimen los números 1, -1, 3, 5, cada uno en la línea propia
+  console.log(value) // se imprimen los números 1, -1, 3, 5, cada uno en la línea propia
 })
 ```
 
@@ -180,8 +180,8 @@ Ya nos hemos familiarizado con la definición de funciones de flecha. El proceso
 
 ```js
 const sum = (p1, p2) => { 
-  console.log (p1) 
-  console.log (p2) 
+  console.log(p1)
+  console.log(p2)
   return p1 + p2 
 }
 ```
@@ -190,7 +190,7 @@ y la función se llama como se puede esperar:
 
 ```js
 const result = sum(1, 5)
-console.log (result)
+console.log(result)
 ```
 
 Si hay un solo parámetro, podemos excluir los paréntesis de la definición:
@@ -226,7 +226,7 @@ function product(a, b) {
 }
 
 const result = product(2, 6)
-// result is now 12
+// el resultado es ahora 12
 ```
 
 La otra forma de definir la función es usando una [expresión de función](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function). En este caso, no es necesario darle un nombre a la función y la definición puede residir entre el resto del código:
@@ -237,7 +237,7 @@ const average = function(a, b) {
 }
 
 const result = average(2, 5)
-// result is now 3.5
+// el resultado es ahora 3.5
 ```
 
 Durante este curso definiremos todas las funciones usando la sintaxis de flecha.
@@ -481,7 +481,7 @@ setTimeout(arto.greet.bind(arto), 1000)
 
 Al llamar a <em>arto.greet.bind(arto)</em> se crea una nueva función donde _this_ está obligado a apuntar a Arto, independientemente de dónde y cómo se llame al método.
 
-Usando [funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) es posible resolver algunos de los problemas relacionados con _this_. Sin embargo, no deben usarse como métodos para objetos porque entonces _esto_ no funciona en absoluto. Más adelante volveremos al comportamiento de _este_ en relación con las funciones de flecha.
+Usando [funciones de flecha](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) es posible resolver algunos de los problemas relacionados con _this_. Sin embargo, no deben usarse como métodos para objetos porque entonces _esto_ no funciona en absoluto. Más adelante volveremos al comportamiento de _this_ en relación con las funciones de flecha.
 
 Si desea obtener una mejor comprensión de cómo _this_ funciona en JavaScript, Internet está lleno de material sobre el tema, por ejemplo, la serie de screencasts [Comprender la palabra clave this de JavaScript en profundidad](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) de [egghead.io](https://egghead.io) es muy recomendable.
 
@@ -519,11 +519,11 @@ La sintaxis de la clase ES6 se usa mucho en React "antiguo" y también en Node.j
 
 ### Materiales JavaScript
 
-Existen guías buenas y malas para JavaScript en Internet. La mayoría de los enlaces de esta página relacionados con la referencia de características de JavaScript [Guía de JavaScript de Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+Existen guías buenas y malas para JavaScript en Internet. La mayoría de los enlaces de esta página relacionados con la referencia de características de JavaScript provienen de la [Guía de JavaScript de Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
 Se recomienda leer inmediatamente [Una reintroducción a JavaScript (tutorial de JS)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) en el sitio web de Mozilla.
 
-Si desea conocer JavaScript en profundidad, hay una gran serie de libros gratuitos en Internet llamada [You Don'tKnow JS](https://github.com/getify/You-Dont-Know-JS).
+Si desea conocer JavaScript en profundidad, hay una gran serie de libros gratuitos en Internet llamada [You Don't Know JS](https://github.com/getify/You-Dont-Know-JS).
 
 Otro gran recurso para aprender JavaScript es [javascript.info](https://javascript.info).
 

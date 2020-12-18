@@ -176,14 +176,14 @@ const App = () => {
     setAll(allClicks.concat('L'))
     setLeft(left + 1)
   }
-// highlight-end  
+// highlight-end
 
 // highlight-start
   const handleRightClick = () => {
     setAll(allClicks.concat('R'))
     setRight(right + 1)
   }
-// highlight-end  
+// highlight-end
 
   return (
     <div>
@@ -244,7 +244,7 @@ const App = () => {
 }
 ```
 
-Llamamos al método [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) en la matriz _allClicks_ que une todos los elementos en una sola cadena, separados por la cadena pasada como parámetro de función,que en nuestro caso es un espacio vacío.
+Llamamos al método [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) en la matriz _allClicks_ que une todos los elementos en una sola cadena, separados por la cadena pasada como parámetro de función, que en nuestro caso es un espacio vacío.
 
 ### Renderizado condicional
 
@@ -916,7 +916,7 @@ Elegir entre las dos formas presentadas de definir sus controladores de eventos 
 
 ### Pasando controladores de eventos a componentes secundarios
 
-Extraigaremos el botón en su propio componente: 
+Extraemos el botón en su propio componente: 
 
 ```js
 const Button = (props) => (
@@ -1029,7 +1029,7 @@ rm -rf node_modules/ && npm i
 
 <h4>1.6: unicafe, paso 1</h4>
 
-Como la mayoría de las empresas, [Unicafe](https://www.unicafe.fi/#/9/4) recopila comentarios de sus clientes. Su tarea es implementar una aplicación web para recopilar comentarios de los clientes. Solo hay tres opciones para los comentarios: <i>good (bueno)</i>, <i>neutral</i> y <i>bad(malo)</i>.
+Como la mayoría de las empresas, [Unicafe](https://www.unicafe.fi/#/9/4) recopila comentarios de sus clientes. Su tarea es implementar una aplicación web para recopilar comentarios de los clientes. Solo hay tres opciones para los comentarios: <i>good (bueno)</i>, <i>neutral</i> y <i>bad (malo)</i>.
 
 La aplicación debe mostrar el número total de comentarios recopilados para cada categoría. Su aplicación final podría verse así:
 
@@ -1106,7 +1106,7 @@ Cambie su aplicación para mostrar estadísticas solo una vez que se hayan recop
 Continuemos refactorizando la aplicación. Extraiga los dos componentes siguientes:
 
 - <i>Button</i> para definir los botones utilizados para enviar comentarios
-- <i>Statistics</i> para mostrar una única estadística, por ejemplo, la puntuación media.
+- <i>Statistic</i> para mostrar una única estadística, por ejemplo, la puntuación media.
 
 Para ser claros: el componente <i>Statistics</i> siempre muestra una única estadística, lo que significa que la aplicación utiliza varios componentes para representar todas las estadísticas:
 
@@ -1143,7 +1143,7 @@ Luego realice las acciones necesarias para que la advertencia desaparezca. Inten
 
 **¡Asegúrate de que a partir de ahora no veas ninguna advertencia en tu consola!**
 
-<h4>1.12*: anécdotes, paso 1</h4>
+<h4>1.12*: anecdotes, paso 1</h4>
 
 El mundo de la ingeniería de software está lleno con [anécdotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que destilan verdades atemporales de nuestro campo en breves frases.
 
@@ -1200,7 +1200,7 @@ Puede crear una copia de un objeto como este:
 const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
 const copy = { ...points }
-// increment the property 2 value by one
+// incrementa el valor de la propiedad 2 en uno
 copy[2] += 1
 ```
 
@@ -1210,7 +1210,7 @@ O una copia de una matriz como esta:
 const points = [1, 4, 6, 3]
 
 const copy = [...points]
-// increment the value in position 2 by one
+// incrementa el valor en la posicion 2 en uno
 copy[2] += 1
 ```
 
