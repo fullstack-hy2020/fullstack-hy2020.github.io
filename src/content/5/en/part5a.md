@@ -16,7 +16,7 @@ At the moment the frontend shows existing notes, and lets users change the state
 
 We'll now implement a part of the required user management functionality in the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
 
-
+### Handling login
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. 
 
 ![](../../images/5/1e.png)
