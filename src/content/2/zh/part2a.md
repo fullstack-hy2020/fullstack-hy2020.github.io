@@ -181,7 +181,7 @@ ReactDOM.render(
 <li>{notes[1].content}</li>
 ```
 
-<!-- This is, of course, not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. -->
+<!-- This is, of course, is not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. -->
 数组下标这种方式当然是无法通用的。 可以使用 [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 函数从数组对象生成 React-元素，使解决方案变得更通用。
 
 ```js
@@ -387,8 +387,8 @@ note => <li key={note.id}>{note.content}</li>
 
 ### Anti-pattern: array indexes as keys 
 【反模式: 将数组的索引作为键】
-<!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the map-method:  -->
-通过使用数组的索引作为键，我们可以使控制台上的错误消息消失。可以通过向 map-方法 的回调函数传递的第二个参数来获取索引:
+<!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the _map_ method:  -->
+通过使用数组的索引作为键，我们可以使控制台上的错误消息消失。可以通过向 _map_ 方法 的回调函数传递的第二个参数来获取索引:
 
 ```js
 notes.map((note, i) => ...)
