@@ -537,7 +537,7 @@ const App = () => {
 
 
 <!-- What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write -->
-怎么回事？事件处理程序应该是一个<i>函数</i> 或一个<i>函数引用</i>，当我们编写时
+怎么回事？事件处理程序应该是一个<i>函数</i> 或一个<i>函数引用</i>，当我们编写时:
 
 ```js
 <button onClick={setCounter(counter + 1)}>
@@ -549,7 +549,7 @@ const App = () => {
 事件处理器实际上被定义成了一个<i>函数调用</i>。 在很多情况下这是可行的，但在这种特殊情况下就不行了。 一开始<i>counter</i> 变量的值是0。 当 React 第一次渲染时，它执行函数调用<em>setCounter(0+1)</em>，并将组件状态的值更改为1。
 
 <!-- This will cause the component to be rerendered, react will execute the setCounter function call again, and the state will change leading to another rerender... -->
-这将导致组件重新渲染，react 将再次执行 setCounter 函数调用，并且状态将发生变化，从而导致另一个重新运行...
+这将导致组件重新渲染，React 将再次执行 setCounter 函数调用，并且状态将发生变化，从而导致另一个重新运行...
 
 <!-- Let's define the event handlers like we did before -->
 让我们像之前那样定义事件处理程序
@@ -603,7 +603,7 @@ const App = () => {
 
 
 
-<!-- Here the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function: -->
+<!-- Here, the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function: -->
 这里就正确定义了事件处理。<i>onClick</i> 属性的值是一个包含函数引用的变量:
 
 ```js
