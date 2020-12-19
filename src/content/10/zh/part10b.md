@@ -1122,7 +1122,7 @@ const MyComponent = Platform.select({
 ```
 
 <!-- However, a more sophisticated method for implementing and importing platform specific components (or any other piece of code) is to use the <i>.io.jsx</i> and <i>.android.jsx</i> file extensions. Note that the <i>.jsx</i> extension can as well be any extensions recognized by the bundler, such as <i>.js</i>. We can for example have files <i>Button.ios.jsx</i> and <i>Button.android.jsx</i> which we can import like this: -->
-然而，一个更具古老的方法是使用并引入平台特定的组件（或其他什么代码片段），使用<i>.io.jsx</i> 和 <i>.android.jsx</i>文件扩展。注意 <i>.jsx</i> 扩展也可以被bundler 识别到。我们可以使用 <i>Button.ios.jsx</i> 和 <i>Button.android.jsx</i> 按如下方式引入：
+然而，一个更具古老的方法是使用并引入平台特定的组件（或其他什么代码片段），使用<i>.ios.jsx</i> 和 <i>.android.jsx</i>文件扩展。注意 <i>.jsx</i> 扩展也可以被bundler 识别到。我们可以使用 <i>Button.ios.jsx</i> 和 <i>Button.android.jsx</i> 按如下方式引入：
 
 ```javascript
 import React from 'react';
