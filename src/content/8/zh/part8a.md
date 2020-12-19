@@ -20,7 +20,7 @@ Graphql 哲学与 REST 非常不同。 Rest 是基于资源的。 每个资源(�
 <!-- The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes.  -->
 Rest 的资源基本上在大多数情况下都能很好地工作，但有些时候也有些尴尬。 
 
-<!-- Let's assume our bloglist application contains social media like functionality, and we would i.e want to show a list of all the blogs the users who have commented on the blogs we follow have added.  -->
+<!-- Let's assume our bloglist application contains social media like functionality, and we would e.g. want to show a list of all the blogs the users who have commented on the blogs we follow have added.  -->
 让我们假设我们的博客列表应用包含类似社交媒体的功能，并且我们想显示一个所有博客的列表，这些博客的用户已经在我们关注的博客上添加了评论。
 
 <!-- If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.  -->

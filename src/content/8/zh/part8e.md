@@ -497,7 +497,7 @@ Person: {
 },
 ```
 
-<!-- The parameter _root_ is the person object which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list:  -->
+<!-- The parameter _root_ is the person object for which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list:  -->
 参数 _root_ 是创建好友列表的人对象，因此我们从所有 _User_ 对象中搜索在好友列表中具有 root._id :
 
 ```js
