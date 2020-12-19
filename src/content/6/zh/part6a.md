@@ -580,8 +580,8 @@ Spread-语法的工作原理如下
 const numbers = [1, 2, 3]
 ```
 
-<!--<code>...numbers</code> breaks the array up into individual elements, which can place i.e to another array.-->
-<code>...numbers</code> 将数组分解成单独的元素，这样就可以将它，放到另一个数组中。
+<!--<code>...numbers</code> breaks the array up into individual elements, which can be placed in another array.-->
+<code>...numbers</code> 会将数组分解成单独的元素，这样就可以将它放到另一个数组中。
 
 ```js
 [...numbers, 4, 5]
