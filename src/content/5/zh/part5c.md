@@ -600,8 +600,8 @@ CI=true npm test -- --coverage
 <!-- Quite primitive HTML raport will be generated to the <i>coverage/lcov-report</i> directory.  -->
  <i>coverage/lcov-report</i>目录将生成相当原始的 HTML raport。
 
-<!-- The report will tell us i.e the lines of untested code in each component: -->
-该报告将告诉我们，每个组件中未经测试的代码行:
+<!-- The report will tell us the lines of untested code in each component: -->
+该报告会告诉我们每个组件中未经测试的代码行:
 
 ![](../../images/5/19ea.png)
 
