@@ -350,7 +350,7 @@ const baseUrl = '/api/notes'
 }
 ```
 
-<!-- After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>.  -->
+<!-- After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>.  -->
 在重新启动之后，React 开发环境将作为一个[代理](https://create-React-app.dev/docs/proxying-api-requests-in-development/)工作。 如果 React 代码对服务器地址<i>http://localhost:3000</i>发出了一个 HTTP 请求，而不是 React 应用本身管理的地址(即当请求不是为了获取应用的 CSS 或 JavaScript) ，那么该请求将被重定向到<i> HTTP://localhost:3001</i> 的服务器。
 
 <!-- Now the frontend is also fine, working with the server both in development- and production mode.  -->
