@@ -317,11 +317,11 @@ ReactDOM.render(
 
 
 
-<!-- As I mentioned at the end of [第6章](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
-正如我在[第6章](/zh/part6/connect方法#redux-and-the-component-state)的结尾所提到的，React [Context-api](https://reactjs.org/docs/context.html)为集中式状态管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个主题的 [这个网站](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [这个网站](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)。
+<!-- As I mentioned at the end of [第6章](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this  [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
+正如我在[第6章](/zh/part6/connect方法#redux-and-the-component-state)的结尾所提到的，React [Context-api](https://reactjs.org/docs/context.html)为集中式状态管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以在[这个网站](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [这个网站](https://hswolff.com/blog/how-to-usecontext-with-usereducer/) 阅读更多关于这个主题的内容。
 
 ### React/node-application security
-<!-- So far during the course we have not touched on information security at all. We do not have much time for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
+<!-- So far during the course we have not touched on information security at all. We do not have much time this for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
 到目前为止，我们还没有触及安全。 我们现在也没有太多的时间，但是幸运的是系里有一个 MOOC-course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1)来处理这个重要的话题。
 
 <!-- We will, however, take a look at some things specific to this course. -->
@@ -699,6 +699,9 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 <!-- Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. Few years ago [Parcel](https://parceljs.org) started to make the rounds marketing itself as simpe (which Webpack absolutely is not) and faster than Webpack. However after a promising start Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack.  -->
 在 webpack 开始主导市场之后，赶时髦的人似乎对工具开发失去了兴趣。 几年前，[Parcel](https://parceljs.org)开始以简单(Webpack 绝对不是)和快于 Webpack 的方式推销自己。 然而，在一个有希望的开始后，Parcel 并没有聚集任何动力，而且它开始看起来将不会是 Webpack 的终结者。
+
+<!-- Another notable mention is the [Rome](https://rome.tools/) library, which aspires to be an all-encompassing toolchain to unify linter, compiler, bundler, and more. It is currently under heavy development since the initial commit earlier this year on Feb 27, but the outlook sure seems promising. -->
+另一个值得注意的是 [Rome](https://rome.tools/)  这个库，它想要将统一规范、编译打包等聚合到一条工具链中，并提供了些其他的特性。它自从今年早期的2月27号首次提交开始，目前一直处在繁重的开发阶段，不过前景是相当看好的。
 
 <!-- The site <https://reactpatterns.com/> provides a concise list of best practices for React, some of which are already familiar from this course. Another similar list is [react bits](https://vasanthk.gitbooks.io/react-bits/). -->
 网站 <https://reactpatterns.com/> 提供了一个简明的React最佳实践列表，其中一些已经在本课程中熟悉了。 另一个类似的列表是[react bits](https://vasanthk.gitbooks.io/react-bits/)。
