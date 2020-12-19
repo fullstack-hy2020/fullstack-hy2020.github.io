@@ -27,7 +27,7 @@ You can configure your GitHub repository in such a way that pull requests cannot
 
 ![Compare & pull request](../../images/11/part11d_00.png)
 
-To open a new pull request, open your branch in GitHub and click on the green "Compare & pull request" at the top. You will be presented with the form where you can fill in pull request description.
+To open a new pull request, open your branch in GitHub and click on the green "Compare & pull request" button at the top. You will be presented with a form where you can fill in the pull request description.
 
 ![Open a new pull request](../../images/11/part11d_01.png)
 
@@ -74,7 +74,7 @@ In the "Conversation" tab of the pull request you should see your latest commit(
 
 ![](../../images/11/16.png)
 
-Once the checks have been run, the status should turn to green. Make sure all the checks pass.
+Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
 #### 11.15 run deployment step only for master branch
 

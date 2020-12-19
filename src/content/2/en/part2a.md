@@ -139,7 +139,7 @@ A single note is rendered by accessing the objects in the array by referring to 
 <li>{notes[1].content}</li>
 ```
 
-This is, of course, not practical. We can improve on this by generating React elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
+This is, of course, is not practical. We can improve on this by generating React elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function.
 
 ```js
 notes.map(note => <li>{note.content}</li>)
@@ -325,7 +325,7 @@ The use of curly braces will cause some headache in the beginning, but you will 
 
 ### Anti-pattern: array indexes as keys
 
-We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the map-method: 
+We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the _map_ method: 
 
 ```js
 notes.map((note, i) => ...)
