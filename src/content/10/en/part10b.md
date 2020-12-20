@@ -47,7 +47,7 @@ So we import the [Text](https://reactnative.dev/docs/text) component from React 
 - [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the <em>&lt;strong&gt;</em> and the <em>&lt;h1&gt;</em> elements.
 - [View](https://reactnative.dev/docs/view) component is the basic user interface building block similar to the <em>&lt;div&gt;</em> element.
 - [TextInput](https://reactnative.dev/docs/textinput) component is a text field component similar to the <em>&lt;input&gt;</em> element.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component (and other <i>Touchable\*</i> components) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element.
+- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component (and other <i>Touchable\*</i> components) is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element.
 
 There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example.
 
