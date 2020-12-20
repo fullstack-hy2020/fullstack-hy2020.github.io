@@ -520,8 +520,8 @@ props value is [Object object]
 <!-- Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page. -->
 一旦发现 bug 的原因，您可以删除 _debugger_ 命令并刷新页面。
 
-<!-- The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Source</i> tab. -->
- _debugger_ 还允许我们使用在<i>Source</i> 选项卡右侧找到控件一行一行地执行代码。
+<!-- The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Sources</i> tab. -->
+ _debugger_ 还允许我们使用在<i>Sources</i> 选项卡右侧找到控件一行一行地执行代码。
 
 <!-- You can also access the debugger without the _debugger_ command by adding break points in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section: -->
 通过在<i>Sources</i> 选项卡中添加断点，您还可以在不使用 _debugger_ 命令的情况下访问调试器。 检查组件变量的值可以在 Scope-部分 中完成:

@@ -786,8 +786,8 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 
 ### Development and production configuration
 【开发及生产配置】
-<!-- Next, let's add a backend to our application and by repurposing the now-familiar note application backend. -->
-接下来，让我们为应用添加一个后端，并重用现在熟悉的 note 应用后端。
+<!-- Next, let's add a backend to our application by repurposing the now-familiar note application backend. -->
+接下来，让我们为应用添加一个后端程序，来重用我们已经很熟悉的 note 应用的后端。
 
 <!-- Let's store the following content in the <i>db.json</i> file: -->
 让我们在<i>db.json</i> 文件中存储如下内容:

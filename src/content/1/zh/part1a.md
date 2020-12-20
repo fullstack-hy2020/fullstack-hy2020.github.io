@@ -376,7 +376,7 @@ const App = () => {
 最好记住，在 React 的代码中编写 <em>console.log()</em>  命令(打印到控制台)是可行的，而且是提倡的。
 
 <!-- Also keep in mind that **React component names must be capitalized**. If you try defining a component as follows -->
-还要记住 **React 组件名称必须大写**。 如果你像如下这么定义：
+还要记住 **React 组件名称首字母必须大写**。 如果你像如下这么定义：
 
 ```js
 const footer = () => {

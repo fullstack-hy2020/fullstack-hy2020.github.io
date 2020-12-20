@@ -447,7 +447,7 @@ response.end(JSON.stringify(notes))
 解决这个问题的方法是使用[nodemon](https://github.com/remy/nodemon) :
 
 > <!--<i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>-->
-nodemon 将监视启动 nodemon 的目录中的文件，如果任何文件发生更改，nodemon 将自动重启节点应用。  
+nodemon 将监视启动 nodemon 的目录中的文件，如果任何文件发生更改，nodemon 将自动重启node应用。  
 
 <!-- Let's install nodemon by defining it as a <i>development dependency</i> with the command: -->
 让我们通过下面的命令将 nodemon 定义为<i>开发依赖development dependency</i>:
@@ -883,6 +883,26 @@ app.post('/api/notes', (request, response) => {
 <!-- One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects. -->
 Rest 客户端相对于 Postman 的一个好处是，请求可以在项目仓库的根部轻松获得，并且可以分发给开发团队中的每个人。 Postman也允许用户保存请求，但是当你在处理多个不相关的项目时，情况会变得非常混乱。 
 
+<!-- One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. You can also add multiple requests in the same file using `###` separators: -->
+Rest 客户端相对于 Postman 的一个好处是，请求可以在项目仓库的根目录轻松获得，并且可以分发给开发团队中的每个人。也可以添加利用 `###` 分割符向相同文件中添加多个请求：
+
+```
+GET http://localhost:3001/api/notes/
+
+###
+POST http://localhost:3001/api/notes/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+```
+
+<!-- Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects. -->
+Postman 也允许用户保存请求，但环境会变得越来越混乱，尤其是当你在一些好不相关的项目间切换的时候。
+
+
 > **Important sidenote**
 重要旁注
 >
@@ -1210,7 +1230,7 @@ app.use(requestLogger)
 中间件函数按照与express服务器对象的使用方法一起使用的顺序调用。 请注意，json-parser 是在 requestLogger 中间件之前使用的，否则在执行日志记录器时，不会初始化我们的 <i>request.body</i> ！
 
 <!-- Middleware functions have to be taken into use before routes if we want them to be executed before the route event handlers are called. There are also situations where we want to define middleware functions after routes. In practice, this means that we are defining middleware functions that are only called if no route handles the HTTP request. -->
-如果我们希望在调用路由事件处理程序之前执行路由，则必须在路由之前使用中间件函数。 还有一些情况，我们希望在路由之后定义中间件函数。 实际上，这意味着我们定义的中间件函数只有在没有路由处理 HTTP 请求的情况下才被调用。
+如果我们希望在调用路由事件处理程序之前执行中间件函数，则必须在路由之前使用中间件函数。 还有一些情况，我们希望在路由之后定义中间件函数。 实际上，这意味着我们定义的中间件函数只有在没有路由处理 HTTP 请求的情况下才被调用。
 
 
 <!-- Let's add the following middleware after our routes, that is used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format. -->

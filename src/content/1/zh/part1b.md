@@ -158,7 +158,7 @@ console.log(m2)
 
 <!-- Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). -->
 
-数组中的单个元素可以很容易地通过[解构赋值](destructuring assignment)赋给变量。
+数组中的单个元素可以很容易地通过[解构赋值](https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)赋给变量。
 
 ```js
 const t = [1, 2, 3, 4, 5]
@@ -565,7 +565,7 @@ referenceToGreet() // prints "hello, my name is undefined"
 
 <!-- One situation leading to the disappearance of _this_ arises when, e.g. we ask Arto to greet in one second using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) method. -->
 
-一种消除这种由“this”所引起的问题的方法就是，利用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)方法，让arto对象1秒钟后调用greet。
+例如，当我们使用[setTimeout](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout)方法，让arto对象1秒钟后调用greet。
 
 ```js
 const arto = {

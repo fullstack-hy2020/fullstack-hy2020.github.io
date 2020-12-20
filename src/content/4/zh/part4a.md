@@ -852,7 +852,7 @@ npm test -- -t 'when list has only one blog, equals the likes of that'
 4.7 * : helper function and unit tests，步骤5
 
 <!-- Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received: -->
-定义一个名为 mostlike 的函数，该函数接收一个 blog 数组作为参数。 该函数返回其所有博客点赞最多的作者。 返回值还包含作者收到的赞总数:
+定义一个名为 mostLikes 的函数，该函数接收一个 blog 数组作为参数。 该函数返回其所有博客点赞最多的作者。 返回值还包含作者收到的赞总数:
 
 ```js
 {

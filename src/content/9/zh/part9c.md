@@ -1190,7 +1190,7 @@ import {
    Weather // highlight-line
 } from '../types';
 
-const addEntry = (
+const addDiary = (
     date: string, weather: Weather, visibility: Visibility, comment: string
   ): DiaryEntry => {
     

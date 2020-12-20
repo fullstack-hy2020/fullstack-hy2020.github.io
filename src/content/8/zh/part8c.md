@@ -236,7 +236,7 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('User', schema)
 ```
 
-<!-- Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, i.e <i>mluukkai</i>, adds a person, i.e <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application.  -->
+<!-- Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application.  -->
 每个用户都通过 _friends_ 字段连接到系统中的一群其他人。 这个想法是，当一个用户(即<i>mluukkai</i>)将一个人(即<i>Arto Hellas</i>)添加到列表中时，这个人将被添加到他们的好友列表中。 通过这种方式登录的用户可以在应用中拥有自己的、个性化的视图。
 
 <!-- Logging in and identifying the user are handled the same way we used in [第4章](/zh/part4/密钥认证) when we used REST, by using tokens.  -->
@@ -356,7 +356,7 @@ const server = new ApolloServer({
 <!-- So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined.  -->
 因此，我们的代码设置对应于向上下文的 currentUser 字段发出请求的用户的对象。 如果没有用户连接到请求，则该字段的值是未定义的。
 
-<!-- The resolver of the _me_ query is very simple, it just returns the logged in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged in user, i.e there is no valid token in the header attached to the request, the query returns <i>null</i>: -->
+<!-- The resolver of the _me_ query is very simple, it just returns the logged in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>: -->
 _me_ 查询的解析器非常简单，它只返回它在解析器的第三个参数 context 的 currentUser 字段中接收的登录用户。 值得注意的是，如果没有登录用户，即请求的头部没有有效的令牌，查询返回<i>null</i>: 
 
 ```js
