@@ -521,7 +521,7 @@ Mozillan sivuilta kannattaa lukea oikeastaan välittömästi [A re-introduction 
 
 Jos haluat tutustua todella syvällisesti Javascriptiin, löytyy internetistä ilmaiseksi mainio kirjasarja [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
 
-Toinen hieno resurssi Javascriptin oppimiseen on [javascript.info] (https://javascript.info).
+Toinen hieno resurssi Javascriptin oppimiseen on [javascript.info](https://javascript.info).
 
 [egghead.io](https://egghead.io):lla on tarjolla runsaasti laadukkaita screencasteja Javascriptista, Reactista ym. kiinnostavasta. Valitettavasti materiaali on osittain maksullista.
 
