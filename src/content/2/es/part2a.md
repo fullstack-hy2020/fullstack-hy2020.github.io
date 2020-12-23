@@ -67,13 +67,13 @@ De aquí en adelante, usaremos los métodos de programación funcional de JavaSc
 
 Si la programación funcional con matrices le parece ajena, vale la pena ver al menos las tres primeras partes de la serie de videos de YouTube [Programación funcional en JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
 
-- [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) 
-- [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2) 
-- [Reduce basics](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s) 
+- [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
+- [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
+- [Reduce basics](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
 
-### Controladores de eventos revisados 
+### Controladores de eventos revisados
 
-Según el curso del año pasado, el manejo de eventos ha demostrado ser ser dificil.
+Según el curso del año pasado, el manejo de eventos ha demostrado ser dificil.
 Vale la pena leer el capítulo de revisión al final de la parte anterior [revisión de los controladores de eventos](es/part1/depurando-un-estado-mas-complejo-en-react#manejo-de-eventos-revisitado), si cree que su propio conocimiento sobre el tema necesita algo de mejora.
 
 Pasar controladores de eventos a los componentes secundarios del componente <i>App</i> ha planteado algunas preguntas. Se puede encontrar una pequeña revisión sobre el tema [aquí](es/part1/depurando-un-estado-mas-complejo-en-react#pasar-controladores-de-eventos-a-elementos-secundarios).
@@ -176,7 +176,6 @@ const App = (props) => {
 
 Debido a que el código que genera las etiquetas <i>li</i> es JavaScript, debe incluirse entre llaves en una plantilla JSX al igual que todos los demás códigos JavaScript.
 
-<!-- Parannetaan koodin luetteloa vielä jakamalla nuolifunktion määrittely useammalle riville: -->
 También haremos que el código sea más legible separando la declaración de la función de flecha en varias líneas:
 
 ```js
@@ -187,12 +186,12 @@ const App = (props) => {
     <div>
       <h1>Notes</h1>
       <ul>
-        {notes.map(note => 
+        {notes.map(note =>
         // highlight-start
           <li>
             {note.content}
           </li>
-        // highlight-end   
+        // highlight-end
         )}
       </ul>
     </div>
@@ -202,11 +201,11 @@ const App = (props) => {
 
 ### Atributo key
 
-Aunque la aplicación parece estar funcionando, hay una advertencia desagradable en la consola 
+Aunque la aplicación parece estar funcionando, hay una advertencia desagradable en la consola
 
 ![](../../images/2/1a.png)
 
-Como la [página](https://reactjs.org/docs/lists-and-keys.html#keys) vinculada en el mensaje de error instruye, los elementos de la lista, es decir, los elementos generados por el método _map_, deben tener cada uno una clave única valor: un atributo llamado <i>key</i>.
+Como la [página](https://reactjs.org/docs/lists-and-keys.html#keys) vinculada en el mensaje de error instruye, los elementos de la lista, es decir, los elementos generados por el método _map_, deben tener cada uno una única clave valor: un atributo llamado <i>key</i>.
 
 Agreguemos las keys (claves):
 
@@ -237,7 +236,7 @@ React utiliza los atributos key de los objetos en una matriz para determinar có
 
 ### Map
 
-Comprender cómo funciona el método de matriz [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) es crucial para el resto del curso .
+Comprender cómo funciona el método de matriz [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) es crucial para el resto del curso.
 
 La aplicación contiene una matriz llamada _notes_:
 
@@ -276,7 +275,7 @@ console.log(result)
 <i>[1, 2, 3]</i> se imprimirá en la consola.
 _map_ siempre crea una nueva matriz, cuyos elementos se han creado a partir de los elementos de la matriz original mediante <i>mapeo</i>: utilizando la función dada como parámetro al método _map_.
 
-La función es 
+La función es
 
 ```js
 note => note.id
@@ -292,13 +291,13 @@ que es una función de flecha escrita en forma compacta. La forma completa serí
 
 La función obtiene un objeto de nota como parámetro, y <i>devuelve</i> el valor de su campo <i>id</i>.
 
-Cambiar el comando a: 
+Cambiar el comando a:
 
 ```js
 const result = notes.map(note => note.content)
 ```
 
-da como resultado una matriz que contiene el contenido de las notas. 
+da como resultado una matriz que contiene el contenido de las notas.
 
 Esto ya está bastante cerca del código de React que usamos:
 
@@ -330,11 +329,11 @@ notes.map((note, i) => ...)
 
 Cuando se llama así, a _i_ se le asigna el valor del índice de la posición en la matriz donde reside la nota.
 
-Como tal, una forma de definir la generación de filas sin obtener errores es: 
+Como tal, una forma de definir la generación de filas sin obtener errores es:
 
 ```js
 <ul>
-  {notes.map((note, i) => 
+  {notes.map((note, i) =>
     <li key={i}>
       {note.content}
     </li>
@@ -368,7 +367,6 @@ const App = ({ notes }) => { //highlight-line
 
 Si ha olvidado lo que significa la desestructuración y cómo funciona, revise [esto](/es/part1/manejadores-de-eventos-de-componentes#desestructuración).
 
-
 Separamos la visualización de una sola nota en su propio componente <i>Note</i>:
 
 ```js
@@ -400,7 +398,7 @@ Tenga en cuenta que el atributo <i>key</i> ahora debe definirse para los compone
 
 Se puede escribir una aplicación React completa en un solo archivo. Aunque eso, por supuesto, no es muy práctico. La práctica común es declarar cada componente en su propio archivo como un <i>módulo ES6</i>.
 
-Hemos estado usando módulos todo el tiempo. Las primeras líneas del archivo: 
+Hemos estado usando módulos todo el tiempo. Las primeras líneas del archivo:
 
 ```js
 import React from 'react'
@@ -409,8 +407,7 @@ import ReactDOM from 'react-dom'
 
 [importan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) dos módulos, lo que les permite ser utilizados en ese archivo. El módulo <i>React</i> se coloca en una variable llamada _React_ y <i>React-DOM</i> en la variable _ReactDOM_.
 
-
-Muevamos nuestro componente <i>Note</i> a su propio módulo.
+Movamos nuestro componente <i>Note</i> a su propio módulo.
 
 En aplicaciones más pequeñas, los componentes generalmente se colocan en un directorio llamado <i>components</i>, que a su vez se ubica dentro del directorio <i>src</i>. La convención es nombrar el archivo después del componente.
 
@@ -429,11 +426,11 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-Debido a que este es un componente de React, debemos importar React. 
+Debido a que este es un componente de React, debemos importar React.
 
 La última línea del módulo [exporta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) el módulo declarado, la variable <i>Note</i>.
 
-Ahora el archivo que está usando el componente - <i>index.js</i> - puede [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import ) el módulo:
+Ahora el archivo que está usando el componente -<i>index.js</i>- puede [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import ) el módulo:
 
 ```js
 import React from 'react'
@@ -453,7 +450,7 @@ Tenga en cuenta que al importar nuestros propios componentes, se debe dar su ubi
 './components/Note'
 ```
 
-El punto - <i>.</i> - al principio se refiere al directorio actual, por lo que la ubicación del módulo es un archivo llamado <i>Note.js</i> en el subdirectorio <i>components</i> del directorio actual. La extensión del nombre de archivo - _.js_ - se puede omitir.
+El punto -<i>.</i>- al principio se refiere al directorio actual, por lo que la ubicación del módulo es un archivo llamado <i>Note.js</i> en el subdirectorio <i>components</i> del directorio actual. La extensión del nombre de archivo -_.js_- se puede omitir.
 
 <i>App</i> también es un componente, así que vamos a declararlo también en su propio módulo. Dado que es el componente raíz de la aplicación, lo colocaremos en el directorio <i>src</i>. El contenido del archivo es el siguiente:
 
@@ -477,7 +474,7 @@ const App = ({ notes }) => {
 export default App // highlight-line
 ```
 
-What's left in the <i>index.js</i> file is: 
+Lo que queda en el archivo <i>index.js</i> es:
 
 ```js
 import React from 'react'
@@ -496,9 +493,7 @@ ReactDOM.render(
 
 Los módulos tienen muchos otros usos además de permitir que las declaraciones de componentes se separen en sus propios archivos. Nos pondremos en contacto con ellos más adelante en este curso.
 
-
 El código actual de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
-
 
 Tenga en cuenta que la rama <i>master</i> del repositorio contiene el código para una versión posterior de la aplicación. El código actual está en la rama [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
 
@@ -510,14 +505,12 @@ Si clona el proyecto, ejecute el comando _npm install_ antes de iniciar la aplic
 
 Al principio de tu carrera como programador (e incluso después de 30 años de codificación como la tuya), lo que sucede a menudo es que la aplicación simplemente se descompone por completo. Este es aún más el caso de los lenguajes tipados dinámicamente, como JavaScript, donde el compilador no verifica el tipo de datos de, por ejemplo, variables de función o valores de retorno.
 
-
 Una "explosión de React" puede, por ejemplo, verse así:
 
 ![](../../images/2/3b.png)
 
-
 En estas situaciones, la mejor salida es <em>console.log</em>.
-El fragmento de código que causa la explosión es este: 
+El fragmento de código que causa la explosión es este:
 
 ```js
 const Course = ({ course }) => (
@@ -539,7 +532,6 @@ const App = () => {
 }
 ```
 
-
 Nos centraremos en el motivo del desglose agregando comandos <em>console.log</em> al código. Como lo primero que se renderiza es el componente <i>App</i>, Vale la pena poner el primer <em>console.log</em> allí:
 
 ```js
@@ -556,7 +548,7 @@ const App = () => {
 }
 ```
 
-Para ver la impresión en la consola, debemos desplazarnos hacia arriba sobre la larga pared roja de errores. 
+Para ver la impresión en la consola, debemos desplazarnos hacia arriba sobre la larga pared roja de errores.
 
 ![](../../images/2/4b.png)
 
@@ -570,7 +562,7 @@ const Course = ({ course }) => (
 )
 ```
 
-El componente debe cambiarse a su forma más larga para que agreguemos la impresión: 
+El componente debe cambiarse a su forma más larga para que agreguemos la impresión:
 
 ```js
 const Course = ({ course }) => { 
@@ -601,10 +593,9 @@ Si el problema aún no se ha resuelto, realmente no hay mucho que hacer aparte d
 
 Agregué este capítulo al material después de que la respuesta del modelo para la siguiente pregunta explotara por completo (debido a que los props eran del tipo incorrecto), y tuve que depurarlo usando <em>console.log</em>.
 
-
 </div>
 
-<div clas ="tasks">
+<div class="tasks">
 
 <h3>Ejercicios 2.1.-2.5.</h3>
 
@@ -618,11 +609,9 @@ Tenga en cuenta que esta parte tiene más ejercicios que los anteriores, por lo 
 
 **ADVERTENCIA** create-react-app convierte el proyecto automáticamente en un repositorio git, si el proyecto no se crea dentro de un repositorio ya existente. Probablemente **no** desea que el proyecto se convierta en un repositorio, así que ejecute el comando _rm -rf .git_ desde su raíz.
 
-<h4>2.1: Información del curso paso6</h4>
+<h4>2.1: Información del curso, paso 6</h4>
 
-
-Terminemos el código para renderizar los contenidos del curso de los ejercicios 1.1 - 1.5. Puede comenzar con el código de las respuestas del modelo. Las respuestas modelo para la parte 1 se pueden encontrar yendo al [sistema de presentación](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), haga clic en <i>my submissions</i> en el arriba, y en la fila correspondiente a la parte 1 debajo de la columna <i>solutions</i> haga clic en <i>show</i>. Para ver la solución al ejercicio de <i>información del curso</i>, haga clic en _index.js_ debajo de <i>kurssitiedot</i> ("kurssitiedot" significa "información del curso").
-
+Terminemos el código para renderizar los contenidos del curso de los ejercicios 1.1 - 1.5. Puede comenzar con el código de las respuestas del modelo. Las respuestas modelo para la parte 1 se pueden encontrar yendo al [sistema de presentación](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), haga clic en el <i>my submissions</i> arriba, y en la fila correspondiente a la parte 1 debajo de la columna <i>solutions</i> haga clic en <i>show</i>. Para ver la solución al ejercicio de <i>información del curso</i>, haga clic en _index.js_ debajo de <i>kurssitiedot</i> ("kurssitiedot" significa "información del curso").
 
 **Tenga en cuenta que si copia un proyecto de un lugar a otro, es posible que deba eliminar el directorio <i>node_modules</i> e instalar las dependencias nuevamente con el comando _npm install_ antes de que pueda iniciar la aplicación.**
 Por lo general, no se recomienda que copie todo el contenido de un proyecto y/o agregue el directorio <i>node_modules</i> al sistema de control de versiones.
@@ -683,13 +672,13 @@ La aplicación debe funcionar <i>independientemente del número de partes que te
 
 ¡Asegúrese de que la consola no muestre errores!
 
-<h4>2.2: Información del curso paso 7</h4>
+<h4>2.2: Información del curso, paso 7</h4>
 
 Muestra también la suma de los ejercicios del curso.
 
 ![](../../images/teht/9e.png)
 
-<h4>2.3*: Información del curso, paso8</h4>
+<h4>2.3*: Información del curso, paso 8</h4>
 
 Si aún no lo ha hecho, calcule la suma de ejercicios con el método de matriz [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 

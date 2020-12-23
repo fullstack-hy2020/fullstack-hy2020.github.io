@@ -3,10 +3,9 @@ mainImage: ../../../images/part-2.svg
 part: 2
 letter: d
 lang: es
---- 
+---
 
 <div class="content">
-
 
 Al crear notas en nuestra aplicación, deberíamos naturalmente desear almacenarlos en algún servidor backend. El paquete [json-server](https://github.com/typicode/json-server) afirma ser un llamado REST o API RESTful en su documentación:
 
@@ -48,7 +47,6 @@ addNote = event => {
 }
 ```
 
-
 Creamos un nuevo objeto para la nota pero omitimos la propiedad <i>id</i>, ¡ya que es mejor dejar que el servidor genere identificadores para nuestros recursos!
 
 El objeto se envía al servidor mediante el método axios <em>post</em>. El controlador de eventos registrado registra la respuesta que se envía desde el servidor a la consola.
@@ -62,7 +60,6 @@ El recurso de nota recién creado se almacena en el valor de la propiedad <i>dat
 A veces puede resultar útil inspeccionar las solicitudes HTTP en la pestaña <i>Network</i> de las herramientas para desarrolladores de Chrome, que se utilizó mucho al comienzo de la [parte 0](/es/part0/fundamentos_de_las_aplicaciones_web#http-get):
 
 ![](../../images/2/21e.png)
-
 
 Podemos usar el inspector para verificar que los encabezados enviados en la solicitud POST sean los que esperábamos que fueran y que sus valores sean correctos.
 
@@ -92,13 +89,11 @@ addNote = event => {
 
 La nueva nota devuelta por el servidor backend se agrega a la lista de notas en el estado de nuestra aplicación en la forma habitual de usar la función <em>setNotes</em> y luego restablecer el formulario de creación de notas. Un [detalle importante](/es/part1/depurando_estados_mas_complejos_en_aplicaciones_react#manejando-matrices) para recordar es que el método <em>concat</em> no cambia el estado original del componente, sino que crea una nueva copia de la lista.
 
-
 Una vez que los datos devueltos por el servidor comienzan a tener un efecto en el comportamiento de nuestras aplicaciones web, nos enfrentamos de inmediato a un nuevo conjunto de desafíos que surgen, por ejemplo, de la asincronicidad de la comunicación. Esto requiere nuevas estrategias de depuración, el registro de la consola y otros medios de depuración se vuelven cada vez más importantes, y también debemos desarrollar una comprensión suficiente de los principios tanto del tiempo de ejecución de JavaScript como de los componentes de React. Adivinar no será suficiente.
 
 Es beneficioso inspeccionar el estado del servidor backend, por ejemplo, a través del navegador:
 
 ![](../../images/2/22e.png)
-
 
 Esto hace posible verificar que todos los datos que pretendíamos enviar se recibieron realmente por el servidor.
 
@@ -106,9 +101,7 @@ En la siguiente parte del curso aprenderemos a implementar nuestra propia lógic
 
 > **NB:** En la versión actual de nuestra aplicación, el navegador agrega la propiedad de fecha de creación a la nota. Dado que el reloj de la máquina que ejecuta el navegador puede estar configurado incorrectamente, es mucho más prudente dejar que el servidor backend genere esta marca de tiempo por nosotros. De hecho, esto es lo que haremos en la siguiente parte del curso.
 
-
 El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-5</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
-
 
 ### Cambiar la importancia de las notas
 
@@ -123,7 +116,7 @@ const Note = ({ note, toggleImportance }) => {
 
   return (
     <li>
-      {note.content} 
+      {note.content}
       <button onClick={toggleImportance}>{label}</button>
     </li>
   )
@@ -131,7 +124,6 @@ const Note = ({ note, toggleImportance }) => {
 ```
 
 Agregamos un botón al componente y asignamos su controlador de eventos como la función <em>toggleImportance</em> pasada en los props del componente.
-
 
 El componente <i>App</i> define una versión inicial de la función de controlador de eventos <em>toggleImportanceOf</em> y la pasa a cada componente <i>Note</i>:
 
@@ -174,8 +166,7 @@ const App = () => {
 }
 ```
 
-Observe cómo cada nota recibe su propio <i>única</i> función de controlador de eventos, ya que el <i>id</i> de cada nota es único.
-
+Observe cómo cada nota recibe su propia <i>única</i> función de controlador de eventos, ya que el <i>id</i> de cada nota es único.
 
 Por ejemplo, si <i>note.id</i> es 3, la función de controlador de eventos devuelta por _toggleImportance(note.id)_ será:
 
@@ -189,7 +180,6 @@ Un breve recordatorio aquí. La cadena impresa por el controlador de eventos se 
 console.log('importance of ' + id + ' needs to be toggled')
 ```
 
-
 La sintaxis de [plantilla de cadena](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) agregada en ES6 se puede usar para escribir cadenas similares de una manera mucho más agradable:
 
 ```js
@@ -199,7 +189,6 @@ console.log(`importance of ${id} needs to be toggled`)
 Ahora podemos usar la sintaxis de "llave de dólares" para agregar partes a la cadena que evaluarán las expresiones de JavaScript, por ejemplo, el valor de una variable. Tenga en cuenta que las comillas utilizadas en las cadenas de plantillas difieren de las comillas utilizadas en las cadenas de JavaScript normales.
 
 Las notas individuales almacenadas en el backend del servidor json se pueden modificar de dos formas diferentes haciendo solicitudes HTTP a la URL única de la nota. Podemos <i>reemplazar</i> la nota completa con una solicitud HTTP PUT, o solo cambiar algunas de las propiedades de la nota con una solicitud HTTP PATCH.
-
 
 La forma final de la función del controlador de eventos es la siguiente:
 
@@ -215,24 +204,19 @@ const toggleImportanceOf = id => {
 }
 ```
 
-
 Casi todas las líneas de código en el cuerpo de la función contienen detalles importantes. La primera línea define la URL única para cada recurso de nota en función de su identificación.
-
 
 El método de array [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) se usa para encontrar la nota que queremos modificar, y luego asignamos a la variable _note_.
 
-
 Después de esto creamos un <i>nuevo objeto</i> que es una copia exacta de la nota anterior, además de la propiedad important.
 
-El código para crear el nuevo objeto que usa la sintaxis de [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) 
-puede parecer un poco extraño: 
+El código para crear el nuevo objeto que usa la sintaxis de [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) puede parecer un poco extraño:
 
 ```js
 const changedNote = { ...note, important: !note.important }
 ```
 
 En la práctica, <em>{... note}</em> crea un nuevo objeto con copias de todas las propiedades del objeto _note_ . Cuando agregamos propiedades dentro de las llaves después del objeto extendido, por ejemplo, <em>{... note, important: true}</em>, entonces el valor de la propiedad _important_ del nuevo objeto será _true_. En nuestro ejemplo, la propiedad <em>important</em> obtiene la negación de su valor anterior en el objeto original.
-
 
 Hay algunas cosas que señalar. ¿Por qué hicimos una copia del objeto de nota que queríamos modificar, cuando el siguiente código también parece funcionar: 
 
@@ -244,15 +228,11 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-
 No se recomienda porque la variable <em>note</em> es una referencia a un elemento en el array <em>notes</em> en el estado del componente, y como recordamos, nunca debemos mutar el estado directamente en React.
-
 
 También vale la pena señalar que el nuevo objeto _changedNote_ es solo una llamada [copia superficial](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), lo que significa que los valores del nuevo objeto son los mismos que los valores del objeto antiguo. Si los valores del objeto antiguo fueran objetos en sí mismos, los valores copiados en el nuevo objeto harían referencia a los mismos objetos que estaban en el objeto antiguo.
 
-
 Luego, la nueva nota se envía con una solicitud PUT al backend donde reemplazará el objeto anterior.
-
 
 La función de devolución de llamada establece el estado del componente <em>notes</em> en una nueva matriz que contiene todos los elementos de la matriz de <em>notes</em> anterior, excepto la nota anterior que se reemplaza por la versión actualizada devuelta por el servidor:
 
@@ -262,22 +242,17 @@ axios.put(url, changedNote).then(response => {
 })
 ```
 
-
 Esto se logra con el método <em>map</em>:
 
 ```js
 notes.map(note => note.id !== id ? note : response.data)
 ```
 
-
-El método map crea una nueva matriz al mapear cada elemento de la matriz anterior a un elemento de la nueva matriz. En nuestro ejemplo, la nueva matriz se crea de forma condicional de modo que si <em>note.id! == id</em> es verdadero, simplemente copiamos el elemento de la matriz anterior en la nueva matriz. Si la condición es falsa, el objeto de nota devuelto por el servidor se agrega a la matriz.
-
+El método map crea una nueva matriz al mapear cada elemento de la matriz anterior a un elemento de la nueva matriz. En nuestro ejemplo, la nueva matriz se crea de forma condicional de modo que si <em>note.id !== id</em> es verdadero, simplemente copiamos el elemento de la matriz anterior en la nueva matriz. Si la condición es falsa, el objeto de nota devuelto por el servidor se agrega a la matriz.
 
 Este truco de <em>map</em> puede parecer un poco extraño al principio, pero vale la pena dedicar un tiempo a comprenderlo. Usaremos este método muchas veces a lo largo del curso.
 
-
 ### Extraer la comunicación con el backend en un módulo separado
-
 
 El componente <i>App</i> se ha hinchado un poco después de agregar el código para comunicarse con el servidor backend. En el espíritu del [principio de responsabilidad única](https://en.wikipedia.org/wiki/Single_responsibility_principle), consideramos prudente extraer esta comunicación en su propio [módulo](/es/part2/renderizando_una_coleccion_de_componetes#refactorizando-modulos).
 
@@ -300,13 +275,12 @@ const update = (id, newObject) => {
   return axios.put(`${baseUrl}/${id}`, newObject)
 }
 
-export default { 
-  getAll: getAll, 
-  create: create, 
-  update: update 
+export default {
+  getAll: getAll,
+  create: create,
+  update: update
 }
 ```
-
 
 El módulo devuelve un objeto que tiene tres funciones (<i>getAll</i>, <i>create</i> y <i>update</i>) como propiedades que se ocupan de las notas. Las funciones devuelven directamente las promesas devueltas por los métodos axios.
 
@@ -414,10 +388,10 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-export default { 
-  getAll: getAll, 
-  create: create, 
-  update: update 
+export default {
+  getAll: getAll,
+  create: create,
+  update: update
 }
 ```
 
@@ -500,14 +474,13 @@ const App = () => {
 
 Todo esto es bastante complicado e intentar explicarlo puede dificultar la comprensión. Internet está lleno de material que discute el tema, como [este](https://javascript.info/promise-chaining).
 
-
 El libro "Async and performance" de la serie de libros [You don't know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) explica el tema [bien](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), pero la explicación tiene muchas páginas.
 
 Las promesas son fundamentales para el desarrollo moderno de JavaScript y se recomienda encarecidamente invertir una cantidad de tiempo razonable en comprenderlas.
 
 ### Sintaxis más limpia para definir objetos literales
 
-El módulo que define servicios relacionados con notas actualmente exporta un objeto con las propiedades <i>getAll</i>, <i>create</i> y <i>update</i> que son asignado a funciones para el manejo de notas.
+El módulo que define servicios relacionados con notas actualmente exporta un objeto con las propiedades <i>getAll</i>, <i>create</i> y <i>update</i> que son asignados a funciones para el manejo de notas.
 
 La definición del módulo fue:
 
@@ -530,26 +503,26 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
-export default { 
-  getAll: getAll, 
-  create: create, 
-  update: update 
+export default {
+  getAll: getAll,
+  create: create,
+  update: update
 }
 ```
 
-El módulo exporta el siguiente objeto, de aspecto bastante peculiar: 
+El módulo exporta el siguiente objeto, de aspecto bastante peculiar:
 
 ```js
-{ 
-  getAll: getAll, 
-  create: create, 
-  update: update 
+{
+  getAll: getAll,
+  create: create,
+  update: update
 }
 ```
 
 Las etiquetas a la izquierda de los dos puntos en la definición del objeto son las <i>claves</i> del objeto, mientras que las que están a la derecha de este son <i>variables</i> que se definen dentro del módulo.
 
-Dado que los nombres de las claves y las variables asignadas son los mismos, podemos escribir la definición del objeto con una sintaxis más compacta: 
+Dado que los nombres de las claves y las variables asignadas son los mismos, podemos escribir la definición del objeto con una sintaxis más compacta:
 
 ```js
 {
@@ -609,7 +582,7 @@ const person = { name, age }
 
 El resultado es idéntico para ambas expresiones. Ambos crean un objeto con una propiedad <i>name</i> con el valor <i>Leevi</i> y una propiedad <i>age</i> con el valor <i>0</i>.
 
-### Promesas y errores 
+### Promesas y errores
 
 Si nuestra aplicación permitiera a los usuarios eliminar notas, podríamos terminar en una situación en la que un usuario intenta cambiar la importancia de una nota que ya ha sido eliminada del sistema.
 
@@ -716,23 +689,23 @@ Probablemente no sea una buena idea usar alert en aplicaciones React más serias
 
 El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-6</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
 
-</div> 
+</div>
 
 <div class="tasks">
 
 <h3>Ejercicios 2.15.-2.18.</h3>
 
-<h4>2.15: Guía telefónica paso7</h4>
+<h4>2.15: Guía telefónica, paso 7</h4>
 
 Regresemos a nuestra aplicación de agenda telefónica.
 
 Actualmente, los números que se agregan a la agenda no se guardan en un servidor backend. Arregla esta situación.
 
-<h4>2.16: Guía telefónica paso 8</h4>
+<h4>2.16: Guía telefónica, paso 8</h4>
 
 Extraiga el código que maneja la comunicación con el backend en su propio módulo siguiendo el ejemplo que se mostró anteriormente en esta parte del material del curso.
 
-<h4>2.17:  Guía telefónica Paso9</h4>
+<h4>2.17: Guía telefónica, paso 9</h4>
 
 Permita que los usuarios eliminen entradas de la agenda. La eliminación se puede realizar a través de un botón dedicado para cada persona en la lista de la agenda. Puede confirmar la acción del usuario utilizando el método [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm):
 
@@ -751,7 +724,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.18*: Guía telefónica Paso10</h4>
+<h4>2.18*: Guía telefónica, paso 10</h4>
 
 Cambie la funcionalidad de modo que si se agrega un número a un usuario ya existente, el nuevo número reemplazará al anterior. Se recomienda utilizar el método HTTP PUT para actualizar el número de teléfono.
 

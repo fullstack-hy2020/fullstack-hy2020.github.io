@@ -30,32 +30,30 @@ const App = (props) => { // highlight-line
   )
 }
 
-export default App 
+export default App
 ```
 
 El componente usa la función <em>useState</em> para inicializar la parte de estado almacenada en <em>notes</em> con la matriz de notas pasadas en los props:
 
 ```js
 const App = () => { 
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
 
   // ...
-}  
+}
 ```
 
 Si quisiéramos comenzar con una lista vacía de notas, estableceríamos el valor inicial como una matriz vacía, y dado que los props no se usarían, podríamos omitir el parámetro <em>props</em> de la definición de la función:
 
 ```js
-const App = () => { 
-  const [notes, setNotes] = useState([]) 
+const App = () => {
+  const [notes, setNotes] = useState([])
 
   // ...
-}  
+}
 ```
 
-
 Sigamos con el valor inicial pasado en los props por el momento.
-
 
 A continuación, agreguemos un [formulario](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) HTML al componente que se utilizará para agregar nuevas notas.
 
@@ -63,12 +61,12 @@ A continuación, agreguemos un [formulario](https://developer.mozilla.org/en-US/
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
 
-// highlight-start 
+// highlight-start
   const addNote = (event) => {
     event.preventDefault()
     console.log('button clicked', event.target)
   }
-  // highlight-end   
+  // highlight-end
 
   return (
     <div>
@@ -78,12 +76,12 @@ const App = (props) => {
           <Note key={note.id} note={note} />
         )}
       </ul>
-      // highlight-start 
+      // highlight-start
       <form onSubmit={addNote}>
         <input />
         <button type="submit">save</button>
-      </form>   
-      // highlight-end   
+      </form>
+      // highlight-end
     </div>
   )
 }
@@ -102,21 +100,17 @@ const addNote = (event) => {
 
 El parámetro <em>event</em> es el [evento](https://reactjs.org/docs/handling-events.html) que activa la llamada a la función del controlador de eventos:
 
-
 El controlador de eventos llama inmediatamente al método <em>event.preventDefault()</em>, que evita la acción predeterminada de enviar un formulario. La acción predeterminada, entre otras cosas, haría que la página se recargara.
-
 
 El objetivo del evento almacenado en _event.target_ se registra en la consola:
 
 ![](../../images/2/6e.png)
-
 
 El objetivo (target) en este caso es el formulario que hemos definido en nuestro componente.
 
 ¿Cómo accedemos a los datos contenidos en el elemento <i>input</i> del formulario?
 
 Hay muchas maneras de lograr esto; el primer método que veremos es mediante el uso de los llamados [componentes controlados](https://reactjs.org/docs/forms.html#controlled-components).
-
 
 Agreguemos un nuevo estado llamado <em>newNote</em> para almacenar la entrada enviada por el usuario **y** configurémoslo como el atributo <i>value</i> del elemento <i>input</i>:
 
@@ -145,7 +139,7 @@ const App = (props) => {
       <form onSubmit={addNote}>
         <input value={newNote} /> //highlight-line
         <button type="submit">save</button>
-      </form>   
+      </form>
     </div>
   )
 }
@@ -164,7 +158,7 @@ const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState(
     'a new note...'
-  ) 
+  )
 
   // ...
 
@@ -189,7 +183,7 @@ const App = (props) => {
           onChange={handleNoteChange} // highlight-line
         />
         <button type="submit">save</button>
-      </form>   
+      </form>
     </div>
   )
 }
@@ -221,7 +215,7 @@ Puede seguir en la consola para ver cómo se llama el controlador de eventos:
 
 ![](../../images/2/8e.png)
 
-Se acordó de instalar [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), ¿verdad? Bueno. Puede ver directamente cómo cambia el estado desde la pestaña React Devtools:!
+Se acordó de instalar [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), ¿verdad? Bueno. Puede ver directamente cómo cambia el estado desde la pestaña React Devtools:
 
 ![](../../images/2/9ea.png)
 
@@ -242,7 +236,7 @@ const addNote = (event) => {
 }
 ```
 
-Primero creamos un nuevo objeto para la nota llamado <em>noteObject</em> que recibirá su contenido del esatdo del componente <em>newNote</em>. El identificador único <i>id</i> se genera en función del número total de notas. Este método funciona para nuestra aplicación ya que las notas nunca se eliminan. Con la ayuda de la función <em>Math.random()</em>, nuestra nota tiene un 50% de posibilidades de ser marcada como importante.
+Primero creamos un nuevo objeto para la nota llamado <em>noteObject</em> que recibirá su contenido del estado del componente <em>newNote</em>. El identificador único <i>id</i> se genera en función del número total de notas. Este método funciona para nuestra aplicación ya que las notas nunca se eliminan. Con la ayuda de la función <em>Math.random()</em>, nuestra nota tiene un 50% de posibilidades de ser marcada como importante.
 
 La nueva nota se agrega a la lista de notas usando el método de matriz [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), introducido en la [parte 1](/es/part1/java_script#arrays):
 
@@ -268,10 +262,10 @@ Agreguemos un fragmento de estado al componente <i>App</i> que realiza un seguim
 
 ```js
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
+  const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true) // highlight-line
-  
+
   // ...
 }
 ```
@@ -345,7 +339,7 @@ Puede probar la funcionalidad de filtrado cambiando el valor inicial del estado 
 
 A continuación, agreguemos una funcionalidad que permita a los usuarios alternar el estado <em>showAll</em> de la aplicación desde la interfaz de usuario.
 
-Los cambios relevantes se muestran a continuación: 
+Los cambios relevantes se muestran a continuación:
 
 ```js
 import React, { useState } from 'react'
@@ -379,7 +373,6 @@ const App = (props) => {
 }
 ```
 
-
 Las notas mostradas (todas versus las importantes) se controlan con un botón. El controlador de eventos para el botón es tan simple que se ha definido directamente en el atributo del elemento del botón. El controlador de eventos cambia el valor de _showAll_ de verdadero a falso y viceversa:
 
 ```js
@@ -393,6 +386,7 @@ show {showAll ? 'important' : 'all'}
 ```
 
 Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part2-3</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes/árbol/part2-3).
+
 </div>
 
 <div class="tasks">
@@ -403,7 +397,7 @@ En el primer ejercicio, comenzaremos a trabajar en una aplicación que se desarr
 
 **ADVERTENCIA** create-react-app convertirá automáticamente su proyecto en un repositorio git a menos que cree su aplicación dentro de un repositorio git existente. Es probable que **no desee** que su proyecto sea un repositorio, así que simplemente ejecute el comando _rm -rf .git_ en la raíz de su aplicación.
 
-<h4>2.6: La guía telefónica Paso1</h4>
+<h4>2.6: La guía telefónica, paso 1</h4>
 
 Creemos una guía telefónica simple. <i>**En esta parte solo agregaremos nombres a la agenda.**</i>
 
@@ -458,19 +452,19 @@ Después de terminar este ejercicio, su aplicación debería verse así:
 
 **NB:**
 
-
 - puede utilizar el nombre de la persona como valor de la propiedad <i>key</i>
 - ¡recuerde evitar la acción predeterminada de enviar formularios HTML!
 
-<h4>2.7: La guía telefónica Paso2</h4>
+<h4>2.7: La guía telefónica, paso 2</h4>
 
-Evita que el usuario pueda agregar nombres que ya existen en el directorio telefónico. Los arreglos de JavaScript tienen numerosos [métodos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) adecuados  para realizar esta tarea.
+Evita que el usuario pueda agregar nombres que ya existen en el directorio telefónico. Los arreglos de JavaScript tienen numerosos [métodos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) adecuados para realizar esta tarea.
 
 Emita una advertencia con el comando [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) cuando se intente realizar una acción de este tipo:
 
 ![](../../images/2/11e.png)
 
 **Sugerencia:** cuando está formando cadenas que contienen valores de variables, se recomienda utilizar una [plantilla de cadena](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
+
 
 ```js
 `${newName} is already added to phonebook`
@@ -490,7 +484,7 @@ newName + ' is already added to phonebook'
 
 Usar plantillas de cadenas es la opción más idiomática y el signo de un verdadero profesional de JavaScript.
 
-<h4>2.8: La guía telefónica Paso3</h4>
+<h4>2.8: La guía telefónica, paso 3</h4>
 
 Amplíe su aplicación permitiendo a los usuarios agregar números de teléfono a la guía telefónica. Deberá agregar un segundo elemento <i>input</i> al formulario (junto con su propio controlador de eventos):
 
@@ -502,18 +496,15 @@ Amplíe su aplicación permitiendo a los usuarios agregar números de teléfono 
 </form>
 ```
 
-
 En este punto, la aplicación podría verse así. La imagen también muestra el estado de la aplicación con la ayuda de [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
 
 ![](../../images/2/12e.png)
-
 
 Implemente un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
 
 ![](../../images/2/13e.png)
 
 Puede implementar el campo de búsqueda como un elemento <i>input</i> que se coloca fuera del formulario HTML. La lógica de filtrado que se muestra en la imagen <i>no distingue entre mayúsculas y minúsculas</i>, lo que significa que el término de búsqueda <i>arto</i> también devuelve resultados que contienen Arto con una A mayúscula.
-
 
 **NB:** Cuando están trabajando en una nueva funcionalidad, a menudo es útil "codificar" algunos datos ficticios en su aplicación, por ejemplo
 
@@ -532,7 +523,7 @@ const App = () => {
 
 Esto evita tener que ingresar datos manualmente en su aplicación para probar su nueva funcionalidad.
 
-<h4>2.10: La guía telefónica Paso5</h4>
+<h4>2.10: La guía telefónica, paso 5</h4>
 
 Si ha implementado su aplicación en un solo componente, refactorice extrayendo las partes adecuadas en nuevos componentes. Mantenga el estado de la aplicación y todos los controladores de eventos en el componente raíz de <i>App</i>.
 
@@ -564,7 +555,6 @@ const App = () => {
 }
 ```
 
-<!-- ** HUOM **: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja" väärässä paikassa ", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä] (/ osa1 / monimutkaisempi_tila_reactin_debuggaus # ala-maarittele-komponenttia-komponentin-sisalla). -->
 **NB**: Es posible que tenga problemas en este ejercicio si define sus componentes "en el lugar equivocado". Ahora sería un buen momento para ensayar 
 el capítulo [no defina un componente en otro componente](/es​​/part1/depuracion_de_app_de_react_con_estados_mas_complejos#no_defina_componentes_dentro_de_otros_componentes)
 de la última parte.
