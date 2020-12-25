@@ -23,7 +23,7 @@ We've already used GitHub to store our source code, but what happens when we wor
 
 Many problems may arise when several developers are involved. The software might work just fine on <i>my computer</i>, but maybe some of the other developers are using a different operating system or different library versions. It is not uncommon that a code works just fine in one developer's machine but another developer can not even get it started. This is often called the "works on my machine" problem.
 
-There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, who's changes get deployed? How would it be possible to prevent one developer's changes from overwriting another's? 
+There are also more involved problems. If two developers are both working on changes and they haven't decided on a way to deploy to production, whose changes get deployed? How would it be possible to prevent one developer's changes from overwriting another's? 
 
 In this part, we'll cover ways to work together and build and deploy software in a strictly defined way so that it's clear <i>exactly</i> what will happen under any given circumstance.
 
