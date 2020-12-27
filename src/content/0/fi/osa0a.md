@@ -51,10 +51,9 @@ Kolmen opintopisteen suorituksen edellytyksenä on osien 0-3 kaikkien tähdellä
 Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen). Kokeen voi suorittaa 1.5. alkaen.
 
 Kokeen viimeinen suorituspäivä on 10.1.2021. Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt kaikki kolmen opintopisteen suorituksen edellyttämät tehtävät. <b>Huomaa, että viimeinen päivä kurssille ilmoittautumiselle on 9.1.2021.</b> Jos et ehdi suorittaa koetta määräaikaan mennessä, voit suorittaa sen jälleen 15.3. alkaen kurssin seuraavassa versiossa.
-
-Kokeen tuloksen näet palautussovelluksen välilehdeltä <i>my submissions</i> viimeistään 4 viikkoa kokeen suorittamisen jälkeen (heinäkuu saattaa aiheuttaa kokeen tarkastamiseen pidemmän viiveen). Muista tallettaa opiskelijanumerosi palautussovellukseen.
-
-Suoritus rekisteröidään arvosanalla hyväksytty.
+ 
+ 
+Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 7.5 pistettä. Suoritus rekisteröidään arvosanalla hyväksytty.
 
 Voit halutessasi laajentaa 3 op suorituksen myöhemmin laajempaan 5-8 op suoritukseen. Jos tähtäät suoraan laajempaan suoritukseen, 3 op:n koetta ei kannata suorittaa.
 
@@ -83,10 +82,7 @@ Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/1
 Kokeen viimeinen suorituspäivä on 10.1.2021.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2021.</b>
  Jos et ehdi suorittaa koetta määräaikaan mennessä, voit suorittaa sen jälleen 15.3. alkaen kurssin seuraavassa versiossa.
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-7 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan.
-
-Kokeen tuloksen näet palautussovelluksen välilehdeltä <i>my submissions</i> viimeistään 4 viikkoa kokeen suorittamisen jälkeen (heinäkuu saattaa aiheuttaa kokeen tarkastamiseen pidemmän viiveen). Muista tallettaa opiskelijanumerosi palautussovellukseen.
-
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-7 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12.5 pistettä.
 #### 8 ja 9 opintopisteen suoritus
 
 Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
