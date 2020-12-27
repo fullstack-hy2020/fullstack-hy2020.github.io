@@ -36,8 +36,8 @@ export default App
 El componente usa la función <em>useState</em> para inicializar la parte de estado almacenada en <em>notes</em> con la matriz de notas pasadas en los props:
 
 ```js
-const App = () => { 
-  const [notes, setNotes] = useState([])
+const App = (props) => { 
+  const [notes, setNotes] = useState(props.notes) 
 
   // ...
 }
