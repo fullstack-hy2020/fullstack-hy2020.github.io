@@ -219,6 +219,4 @@ The points to discuss:
 
 Remember that there are no 'right' answers to the above! 
 
-**One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  It is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
-
 </div>

@@ -33,9 +33,11 @@ There are integrations for example to various messaging applications such as [Sl
 
 ### Exercise 11.19
 
-We have set up a Slack channel <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
+We have set up a Slack <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
 
-Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email from matti.luukkainen@helsinki.fi or in the course [Telegram](https://t.me/fullstackcourse) channel, ping @mluukkai
+Note that you need the Slack webhook URL for doing this exercise. You find the webhook in the topic of the channel #general in <i>fullstackopengroup.slack.com</i>
+
+![Releases](../../images/11/22.png)
 
 <i>You can also use some other Slack channel in this exercise but then you are on your own with the setup.</i>
 
