@@ -247,7 +247,7 @@ const Notes = ({notes}) => (
 ```
 
 <!-- Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reititykseen seuraavasti: -->
-We define parametrized urls in the routing in <i>App</i>-component as follows:
+We define parameterized urls in the routing in <i>App</i>-component as follows:
 
 ```js
 <Router>
@@ -546,7 +546,7 @@ Every time the component is rendered, so practically every time the browser's ur
 const match = useRouteMatch('/notes/:id')
 ```
 
-If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
+If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parameterized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
 
 ```js
 const note = match 
