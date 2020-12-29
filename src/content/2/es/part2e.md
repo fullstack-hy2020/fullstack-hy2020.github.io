@@ -2,14 +2,12 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: e
-lang: en
+lang: es
 ---
 
 <div class="content">
 
-
-La apariencia de nuestra aplicación actual es bastante modesta . En el [ejercicio 0.2](/es/part0/fundamentos_de_aplicaiones_web#ejercicios-0-1-0-6), la tarea era pasar por el [tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics) de Mozilla.
-
+La apariencia de nuestra aplicación actual es bastante modesta. En el [ejercicio 0.2](/es/part0/fundamentos_de_aplicaiones_web#ejercicios-0-1-0-6), la tarea era pasar por el [tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics) de Mozilla.
 
 Antes de pasar a la siguiente parte, echemos un vistazo a cómo podemos agregar estilos a una aplicación React. Hay varias formas diferentes de hacer esto y veremos los otros métodos más adelante. Al principio, agregaremos CSS a nuestra aplicación a la vieja usanza; en un solo archivo sin usar un [preprocesador CSS](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (aunque esto no es del todo cierto como veremos más adelante).
 
@@ -95,6 +93,7 @@ const Note = ({ note, toggleImportance }) => {
   )
 }
 ```
+
 Los selectores de clase se definen con la sitaxis _.classname_:
 
 ```css
@@ -111,7 +110,7 @@ Si ahora agrega otros elementos <i>li</i> a la aplicación, no se verán afectad
 
 Anteriormente implementamos el mensaje de error que se mostraba cuando el usuario intentaba cambiar la importancia de una nota eliminada con el método <em>alert</em>. Implementemos el mensaje de error como su propio componente React.
 
-El componente es bastante simple: 
+El componente es bastante simple:
 
 ```js
 const Notification = ({ message }) => {
@@ -202,7 +201,7 @@ El resultado se ve así:
 
 El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-7</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
 
-### Estilos en línea 
+### Estilos en línea
 
 React también hace posible escribir estilos directamente en el código como los llamados [estilos en línea](https://react-cn.github.io/react/tips/inline-styles.html).
 
@@ -259,7 +258,7 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      // ...  
+      // ...
 
       <Footer /> // highlight-line
     </div>
@@ -277,19 +276,19 @@ Las unidades estructurales que componen las entidades funcionales de la aplicaci
 
 El código de la versión final de nuestra aplicación se puede encontrar en la rama <i>part2-8</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8).
 
-</div> 
+</div>
 
 <div class="tasks">
 
 <h3>Ejercicios 2.19.-2.20.</h3>
 
-<h4>2.19: Guía telefónica paso11 </h4>
+<h4>2.19: Guía telefónica, paso 11</h4>
 
 Utilice el ejemplo de [mensaje de error mejorado](/es/part2/agregando_estilos_a_aplicaciones_react#mensaje-de-error-mejorado) de la parte 2 como guía para mostrar una notificación que dura unos segundos después de que se ejecuta una operación exitosa (se agrega una persona o se cambia un número):
 
 ![](../../images/2/27e.png)
 
-<h4>2.20 *: Guía telefónica paso12</h4>
+<h4>2.20*: Guía telefónica, paso 12</h4>
 
 Abra su aplicación en dos navegadores. **Si elimina a una persona en el navegador 1** un momento antes de intentar <i>cambiar el número de teléfono de la persona</i> en el navegador 2, obtendrá el siguiente mensaje de error:
 

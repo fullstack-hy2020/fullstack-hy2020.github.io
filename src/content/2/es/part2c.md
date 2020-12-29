@@ -7,7 +7,7 @@ lang: es
 
 <div class="content">
 
-Desde hace un tiempo solo hemos estado trabajando en "frontend", es decir, funcionalidad del lado del cliente (navegador). Comenzaremos a trabajar en el "backend", es decir, la funcionalidad del lado del servidor en la tercera parte de este curso. No obstante, ahora daremos un paso en esa dirección familiarizándonos con cómo el código que se ejecuta en el navegador se comunica con el backend.
+Desde hace un tiempo solo hemos estado trabajando en el "frontend", es decir, la funcionalidad del lado del cliente (navegador). Comenzaremos a trabajar en el "backend", es decir, la funcionalidad del lado del servidor en la tercera parte de este curso. No obstante, ahora daremos un paso en esa dirección familiarizándonos con cómo el código que se ejecuta en el navegador se comunica con el backend.
 
 Usemos una herramienta diseñada para ser utilizada durante el desarrollo de software llamada [JSON Server](https://github.com/typicode/json-server) para que actúe como nuestro servidor.
 
@@ -64,12 +64,11 @@ Nos familiarizaremos con los principios de implementación de la funcionalidad d
 
 Nuestra primera tarea es recuperar las notas ya existentes en nuestra aplicación React desde la dirección <http://localhost:3001/notes>.
 
-En el [proyecto de ejemplo](/es/part0/fundamentos_de_las_aplicaiones_web#corriendo-la-logica-la-aplicacion-en-el-navegador) ya aprendimos una manera de obtener datos de un servidor usando JavaScript. El código del ejemplo obtenía los datos mediante [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), también conocido como solicitud HTTP realizada mediante un objeto XHR. Esta es una técnica introducida en 1999, que todos los navegadores han admitido durante un buen tiempo.
+En el [proyecto de ejemplo](/es/part0/fundamentos_de_las_aplicaciones_web#corriendo-la-logica-la-aplicacion-en-el-navegador) ya aprendimos una manera de obtener datos de un servidor usando JavaScript. El código del ejemplo obtenía los datos mediante [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), también conocido como solicitud HTTP realizada mediante un objeto XHR. Esta es una técnica introducida en 1999, que todos los navegadores han admitido durante un buen tiempo.
 
 Ya no se recomienda el uso de XHR, y los navegadores ya admiten ampliamente el método [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), que se basa en las llamadas [promesas (promises)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), en lugar del modelo impulsado por eventos utilizado por XHR.
 
 Como recordatorio de la parte 0 (que de hecho se debería <i>recordar no usar</i> sin una razón urgente), los datos se obtuvieron usando XHR de la siguiente manera:
-
 
 ```js
 const xhttp = new XMLHttpRequest()
@@ -77,7 +76,7 @@ const xhttp = new XMLHttpRequest()
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     const data = JSON.parse(this.responseText)
-    // handle the response that is saved in variable data
+    // manejar la respuesta que se guarda en datos variables
   }
 }
 
@@ -131,7 +130,7 @@ Existe una gran cantidad de material adicional sobre el tema que se puede encont
 
 En los navegadores actuales, es posible ejecutar código paralelo con la ayuda de los llamados [web Workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). Sin embargo, el bucle de eventos de una ventana individual del navegador solo lo maneja un [hilo único](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).
 
-### npm 
+### npm
 
 Volvamos al tema de la obtención de datos del servidor.
 
@@ -185,7 +184,6 @@ Ahora queremos usar axios. En teoría, podríamos definir la librería directame
 ```js
 npm install axios
 ```
-
 
 **NB los comandos de _npm_ siempre deben ejecutarse en el directorio raíz del proyecto**, que es donde se puede encontrar el archivo <i>package.json</i>.
 
@@ -282,7 +280,7 @@ Si abre <http://localhost:3000> en el navegador, debe imprimirse a la consola:
 
 ![](../../images/2/16b.png)
 
-El método de Axios _get_ devuelve una [promesa](https://developer.mozilla.org/en-US/docs/Web/JavaScript/ Guide/Using_promises).
+El método de Axios _get_ devuelve una [promesa](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
 La documentación del sitio de Mozilla establece lo siguiente sobre las promesas:
 
@@ -305,6 +303,7 @@ promise.then(response => {
   console.log(response)
 })
 ```
+
 Se imprime lo siguiente en la consola:
 
 ![](../../images/2/17e.png)
@@ -320,10 +319,7 @@ axios.get('http://localhost:3001/notes').then(response => {
 })
 ```
 
-
 La función de devolución de llamada ahora toma los datos contenidos en la respuesta, los almacena en una variable e imprime las notas en la consola.
-
-
 
 Una forma más legible de formatear llamadas de método <i>encadenadas</i> es colocar cada llamada en su propia línea:
 
@@ -362,12 +358,11 @@ Este método podría ser aceptable en algunas circunstancias, pero es algo probl
 
 Sin embargo, lo que no es inmediatamente obvio es dónde se debe colocar el comando <em>axios.get</em> dentro del componente.
 
-
 ### Effect-hooks
 
 Ya hemos utilizado [state hooks](https://reactjs.org/docs/hooks-state.html) que se introdujeron junto con la versión de React [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), que proporciona el estado de los componentes de React definidos como funciones, los llamados <i>componentes funcionales</i>. La versión 16.8.0 también presenta los [hooks de efectos](https://reactjs.org/docs/hooks-effect.html) como una nueva característica. Según los documentos oficiales:
 
-> <i>Effect Hook le permite realizar efectos secundarios en componentes de funciones.</i>
+> <i>Effect Hook le permite realizar efectos secundarios en componentes funcionales.</i>
 > <i>Obtener datos, configurar una suscripción y cambiar manualmente el DOM en los componentes de React son todos ejemplos de efectos secundarios.</i>
 
 Como tal, los hooks de efectos son precisamente la herramienta adecuada para usar cuando se obtienen datos de un servidor.
@@ -530,21 +525,18 @@ La configuración de toda nuestra aplicación se ha vuelto cada vez más complej
 
 El código JavaScript que compone nuestra aplicación React se ejecuta en el navegador. El navegador obtiene el JavaScript del <i>servidor de desarrollo React</i>, que es la aplicación que se ejecuta después de ejecutar el comando <em>npm start</em>. El servidor de desarrollo transforma el JavaScript en un formato comprendido por el navegador. Entre otras cosas, une JavaScript de diferentes archivos en un solo archivo. Analizaremos el servidor de desarrollo con más detalle en la parte 7 del curso.
 
-La aplicación React que se ejecuta en el navegador obtiene los datos formateados JSON desde <i>json-server</i> que se ejecuta en el puerto 3001 de la máquina. El servidor del que consultamos los datos - <i>json-server</i> - obtiene sus datos del archivo <i>db.json</i>.
+La aplicación React que se ejecuta en el navegador obtiene los datos formateados JSON desde <i>json-server</i> que se ejecuta en el puerto 3001 de la máquina. El servidor del que consultamos los datos -<i>json-server</i>- obtiene sus datos del archivo <i>db.json</i>.
 
 En este punto del desarrollo, todas las partes de la aplicación residen en la máquina del desarrollador de software, también conocida como localhost. La situación cambia cuando la aplicación se implementa en Internet. Haremos esto en la parte 3.
 
-</div> 
+</div>
 
 <div class="tasks">
-
 
 <h3>Ejercicios 2.11.-2.14.</h3>
 
 
-<h4>2.11: La guía telefónica Paso6</h4>
-
-
+<h4>2.11: La guía telefónica, paso 6</h4>
 
 Continuamos con el desarrollo del directorio telefónico. Almacene el estado inicial de la aplicación en el archivo <i>db.json</i>, que debe ubicarse en la raíz del proyecto.
 
@@ -577,7 +569,6 @@ Continuamos con el desarrollo del directorio telefónico. Almacene el estado ini
 
 Inicie el servidor json en el puerto 3001 y asegúrese de que el servidor devuelve la lista de personas yendo a la dirección <http://localhost:3001/persons> en el navegador.
 
-
 Si recibe el siguiente mensaje de error: 
 
 ```js
@@ -594,11 +585,11 @@ significa que el puerto 3001 ya está en uso por otra aplicación, por ejemplo e
 
 Modifique la aplicación de modo que el estado inicial de los datos se obtenga del servidor mediante la librería <i>axios</i>. Complete la búsqueda con un [hook de efecto](https://reactjs.org/docs/hooks-effect.html).
 
-<h4>2.12* Datos para países, paso1</h4> 
+<h4>2.12*: Datos para países, paso 1</h4>
 
 La API [https://restcountries.eu](https://restcountries.eu) proporciona datos para diferentes países en un formato legible para máquinas, llamada API REST.
 
-Cree una aplicación en la que se puedan ver datos de varios países. La aplicación probablemente debería obtener los datos del endpoint [all](https://restcountries.eu/#api-endpoints-all). 
+Cree una aplicación en la que se puedan ver datos de varios países. La aplicación probablemente debería obtener los datos del endpoint [all](https://restcountries.eu/#api-endpoints-all).
 
 La interfaz de usuario es muy sencilla. El país que se mostrará se encuentra escribiendo una consulta de búsqueda en el campo de búsqueda.
 
@@ -618,7 +609,7 @@ Cuando solo hay un país que coincide con la consulta, entonces los datos básic
 
 **ADVERTENCIA** create-react-app convertirá automáticamente su proyecto en un repositorio git a menos que cree su aplicación dentro de un repositorio git existente. **Lo más probable es que no desee que cada uno de sus proyectos sea un repositorio separado**, así que simplemente ejecute el comando _rm -rf .git_ en la raíz de su aplicación.
 
-<h4>2.13*: Datos para países, paso2</h4>
+<h4>2.13*: Datos para países, paso 2</h4>
 
 **Todavía queda mucho por hacer en esta parte, ¡así que no se quede atascado en este ejercicio!**
 
@@ -636,10 +627,8 @@ Agregue a la vista que muestra los datos de un país, el informe meteorológico 
 
 ![](../../images/2/19ba.png)
 
-<!-- ** Huom: ** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana] (https://create-react-app.dev/docs/adding-custom-environment-variables/). -->
 **NB:** Necesita una clave de API para utilizar casi todos los servicios meteorológicos. ¡No guarde la clave de API en el control de código fuente! Tampoco codifique la clave api en su código fuente. En su lugar, utilice una [variable de entorno](https://create-react-app.dev/docs/adding-custom-environment-variables/) para guardar la clave.
 
-<!-- Oletetaan että api-avaimen arvo en <i> t0p53cr3t4p1k3yv4lu3 </i>. Kun ohjelma käynnistetään seuraavasti -->
 Suponiendo que la clave api es <i>t0p53cr3t4p1k3yv4lu3</i>, cuando la aplicación se inicia así:
 
 ```bash
@@ -648,7 +637,6 @@ REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' npm start // For Linux/macOS Bash
 set REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' && npm start // For Windows cmd.exe
 ```
 
-<!--koodista päästään avaimen arvoon käsiksi Olion _process.env_ kautta: -->
 usted puede acceder al valor de la clave desde el objeto _process.env_:
 
 ```js
