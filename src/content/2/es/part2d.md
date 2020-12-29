@@ -216,7 +216,7 @@ El código para crear el nuevo objeto que usa la sintaxis de [object spread](htt
 const changedNote = { ...note, important: !note.important }
 ```
 
-En la práctica, <em>{... note}</em> crea un nuevo objeto con copias de todas las propiedades del objeto _note_ . Cuando agregamos propiedades dentro de las llaves después del objeto extendido, por ejemplo, <em>{... note, important: true}</em>, entonces el valor de la propiedad _important_ del nuevo objeto será _true_. En nuestro ejemplo, la propiedad <em>important</em> obtiene la negación de su valor anterior en el objeto original.
+En la práctica, <em>{ ...note }</em> crea un nuevo objeto con copias de todas las propiedades del objeto _note_ . Cuando agregamos propiedades dentro de las llaves después del objeto extendido, por ejemplo, <em>{... note, important: true}</em>, entonces el valor de la propiedad _important_ del nuevo objeto será _true_. En nuestro ejemplo, la propiedad <em>important</em> obtiene la negación de su valor anterior en el objeto original.
 
 Hay algunas cosas que señalar. ¿Por qué hicimos una copia del objeto de nota que queríamos modificar, cuando el siguiente código también parece funcionar: 
 
