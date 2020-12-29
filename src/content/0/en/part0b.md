@@ -418,7 +418,7 @@ Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleap
 
 Next let's examine how adding a new note is done. 
 
-The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
+The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
 ![](../../images/0/20e.png)
 
