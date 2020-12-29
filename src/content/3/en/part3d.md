@@ -100,7 +100,7 @@ When validating an object fails, we return the following default error message f
 
 ### Promise chaining
 
-Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_:
+Many of the route handlers changed the response data into the right format by implicitly calling the _toJSON_ method from _response.json_. For the sake of an example, we can also perform this operation explicitly by calling the _toJSON_ method on the object passed as a parameter to _then_:
 
 ```js
 app.post('/api/notes', (request, response, next) => {
