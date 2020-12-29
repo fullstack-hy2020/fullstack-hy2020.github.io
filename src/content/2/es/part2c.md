@@ -7,7 +7,7 @@ lang: es
 
 <div class="content">
 
-Desde hace un tiempo solo hemos estado trabajando en "frontend", es decir, funcionalidad del lado del cliente (navegador). Comenzaremos a trabajar en el "backend", es decir, la funcionalidad del lado del servidor en la tercera parte de este curso. No obstante, ahora daremos un paso en esa dirección familiarizándonos con cómo el código que se ejecuta en el navegador se comunica con el backend.
+Desde hace un tiempo solo hemos estado trabajando en el "frontend", es decir, la funcionalidad del lado del cliente (navegador). Comenzaremos a trabajar en el "backend", es decir, la funcionalidad del lado del servidor en la tercera parte de este curso. No obstante, ahora daremos un paso en esa dirección familiarizándonos con cómo el código que se ejecuta en el navegador se comunica con el backend.
 
 Usemos una herramienta diseñada para ser utilizada durante el desarrollo de software llamada [JSON Server](https://github.com/typicode/json-server) para que actúe como nuestro servidor.
 
