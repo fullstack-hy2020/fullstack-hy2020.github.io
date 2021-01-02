@@ -61,12 +61,12 @@ const HelloWorld = props => {
 <!-- - [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the <em>&lt;strong&gt;</em> and the <em>&lt;h1&gt;</em> elements.
 - [View](https://reactnative.dev/docs/view) component is the basic user interface building block similar to the <em>&lt;div&gt;</em> element.
 - [TextInput](https://reactnative.dev/docs/textinput) component is a text field component similar to the <em>&lt;input&gt;</em> element.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component (and other <i>Touchable\*</i> components) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element. -->
+- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) (and other <i>Touchable\*</i> components) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element. -->
 
 - [Text](https://reactnative.dev/docs/text) 组件是 <i>唯一</i> 可以有文本子内容的React Native 组件. 类似 <em>&lt;strong&gt;</em> 以及 <em>&lt;h1&gt;</em> 元素.
 - [View](https://reactnative.dev/docs/view) 组件是基础的用户界面的搭建元素，类似 <em>&lt;div&gt;</em>  元素。
 - [TextInput](https://reactnative.dev/docs/textinput) 组件是类似<em>&lt;input&gt;</em> 元素的文本输入区组件.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) 组件 (以及其他的形如 <i>Touchable\*</i> 组件) 是用来捕捉不同的点击事件。类似于 <em>&lt;button&gt;</em> 组件。
+- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) (以及其他的形如 <i>Touchable\*</i> 组件) 是用来捕捉不同的点击事件。类似于 <em>&lt;button&gt;</em> 组件。
 
 
 <!-- There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example. -->
