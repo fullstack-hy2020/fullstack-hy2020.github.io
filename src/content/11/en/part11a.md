@@ -13,7 +13,7 @@ There are 22 exercises in this part, and you need to complete <i>each</i> exerci
 
 This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finish at least parts 0 to 5 before starting this part.
 
-Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configurations is way more harder, so in this part, you need lots of patience and discipline!
+Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configurations is way harder, so in this part, you need lots of patience and discipline!
 
 ### Getting software to production
 
