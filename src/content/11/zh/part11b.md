@@ -125,7 +125,7 @@ GitHub Actions 比自我托管的解决方案有很大的优势: 代码库托管
 与本课程中的大多数项目不同，前端代码不使用 create-react-app，但是它有一个相对简单的 [webpack](/zh/part7/webpack) 配置，用于创建开发环境和创建生产包。
 
 <!-- **One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>. If you do not have it already it is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai -->
-还有一件事: 在练习[11-19](/zh/part11/expanding_further#exercise-11-19)你需要一个 <i>Slack webhook URL</i>。最好是通过电子邮件 matti.luukkainen@helsinhelsinki.fi 或者是 [Telegram](https://t.me/fullstackcourse)中@mluukkai 来询问
+<!-- 还有一件事: 在练习[11-19](/zh/part11/expanding_further#exercise-11-19)你需要一个 <i>Slack webhook URL</i>。最好是通过电子邮件 matti.luukkainen@helsinhelsinki.fi 或者是 [Telegram](https://t.me/fullstackcourse)中@mluukkai 来询问 -->
 
 </div>
 

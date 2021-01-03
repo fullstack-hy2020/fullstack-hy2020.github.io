@@ -346,6 +346,6 @@ GitHub Actions 和其他基于云的解决方案
 <!-- Remember that there are no 'right' answers to the above!  -->
 记住，上面的问题没有正确的答案！
 
-**One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  It is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
-还有一件事: 在练习[11-19](/zh/part11/expanding_further#exercise-11-19)你需要一个 <i>Slack webhook URL</i>。最好是通过电子邮件 matti.luukkainen@helsinhelsinki.fi 或者是 [Telegram](https://t.me/fullstackcourse)中@mluukkai 来询问
+<!-- **One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  It is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
+还有一件事: 在练习[11-19](/zh/part11/expanding_further#exercise-11-19)你需要一个 <i>Slack webhook URL</i>。最好是通过电子邮件 matti.luukkainen@helsinhelsinki.fi 或者是 [Telegram](https://t.me/fullstackcourse)中@mluukkai 来询问 -->
 </div>

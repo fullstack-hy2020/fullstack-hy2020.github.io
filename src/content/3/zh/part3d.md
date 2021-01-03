@@ -102,8 +102,8 @@ const errorHandler = (error, request, response, next) => {
 
 ### Promise chaining 
 【承诺链】
-<!-- Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_: -->
-许多路由处理程序通过调用 toJSON 方法将响应数据更改为正确的格式。 当我们创建一个新的便笺时，toJSON 方法被调用，作为参数传递给下面的对象:
+<!-- Many of the route handlers changed the response data into the right format by implicitly calling the _toJSON_ method from _response.json_. For the sake of an example, we can also perform this operation explicitly by calling the _toJSON_ method on the object passed as a parameter to _then_:-->
+许多的路由处理程序会将响应数据通过隐式地调用 _toJSON_  方法，将  _response.json_ 数据格式转换成正确的格式。为了演示，我们可以在 _then_ 中显示地调用 _toJSON_  方法 到这个对象上：
 
 ```js
 app.post('/api/notes', (request, response, next) => {
