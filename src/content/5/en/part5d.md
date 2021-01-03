@@ -1253,7 +1253,9 @@ Make a test for ensuring that the user who created a blog can delete it.
 
 Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first. 
 
-This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command. 
+This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command.
+
+If you use a `map` on an a selection from cypress, mind that it uses a [jQuery map](https://api.jquery.com/map/#map-callback). This means that the arguments of the callback function are swapped from an [ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (i.e. you use `(i, el) => {...}` instead of `(el, i) => {...}`).
 
 This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
