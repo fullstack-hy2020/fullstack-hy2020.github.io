@@ -47,7 +47,6 @@ Naveguemos a un directorio apropiado y creemos una nueva plantilla para nuestra 
 
 El archivo define, por ejemplo, que el punto de entrada de la aplicación es el archivo <i>index.js</i>.
 
-
 Hagamos un pequeño cambio en el objeto <i>scripts</i>:
 
 ```bash
@@ -64,8 +63,6 @@ Hagamos un pequeño cambio en el objeto <i>scripts</i>:
 
 A continuación, creemos la primera versión de nuestra aplicación agregando un archivo index.js a la raíz del proyecto con el siguiente código:
 
-Next, let's create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:
-
 ```js
 console.log('hello world')
 ```
@@ -77,14 +74,11 @@ Podemos ejecutar el programa directamente con Node desde la línea de comando:
 node index.js
 ```
 
-
 O podemos ejecutarlo como un [script npm](https://docs.npmjs.com/misc/scripts):
-
 
 ```bash
 npm start
 ```
-
 
 El script npm <i>start</i> funciona porque lo definimos en el archivo <i>package.json</i>:
 
@@ -98,7 +92,6 @@ El script npm <i>start</i> funciona porque lo definimos en el archivo <i>package
   // ...
 }
 ```
-
 
 Aunque la ejecución del proyecto funciona cuando se inicia llamando a _node index.js_ desde la línea de comando, es habitual que los proyectos npm ejecuten estas tareas como scripts npm.
 
