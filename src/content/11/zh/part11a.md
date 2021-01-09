@@ -17,7 +17,7 @@ lang: zh
 <!-- This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finish at least parts 0 to 5 before starting this part. -->
 这一章节会依赖课程前面章节所涉及的许多概念。在开始这个章节之前，建议你至少完成0到5章的学习。
 
-<!-- Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configurations is way more harder, so in this part, you need lots of patience and discipline! -->
+<!-- Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configurations is way harder, so in this part, you need lots of patience and discipline! -->
 与本课程的其他章节不同，在本章节中你不会编写很多行代码，而是更多的是关于配置。调试代码可能很困难，但是调试配置要更困难，所以在这一章节中，你需要很多耐心和纪律！
 
 ### Getting software to production
