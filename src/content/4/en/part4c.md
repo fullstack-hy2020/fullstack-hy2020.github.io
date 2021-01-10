@@ -156,7 +156,7 @@ const mongoose = require('mongoose')
 const userSchema = new mongoose.Schema({
   username: String,
   name: String,
-  passwordHash: String,
+  password: String,
   notes: [
     {
       type: mongoose.Schema.Types.ObjectId,
@@ -261,7 +261,7 @@ usersRouter.post('/', async (request, response) => {
   const user = new User({
     username: body.username,
     name: body.name,
-    passwordHash,
+    password:passwordHash,
   })
 
   const savedUser = await user.save()
