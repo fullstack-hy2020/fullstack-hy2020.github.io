@@ -110,7 +110,7 @@ console.log(m2)
 // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] is printed
 ```
 
-Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part 2](/en/part2) of this course, we will see that map is used quite frequently in React.
+Here an array filled with number values is transformed into an array containing strings of HTML using the map method. In [part 2](/en/part2) of this course, we will see that map is used quite frequently in React.
 
 Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
@@ -123,7 +123,7 @@ console.log(first, second)  // 1, 2 is printed
 console.log(rest)          // [3, 4 ,5] is printed
 ```
 
-Thanks to the assignment, the variables _first_ and _second_ will receive the first two integers of the array as their values. The remaining integers are "collected" into an array of their own which is then assigned to the variable _rest_.
+Thanks to the assignment, the variables _first_ and _second_ will receive the first two numbers of the array as their values. The remaining numbers are "collected" into an array of their own which is then assigned to the variable _rest_.
 
 ### Objects
 
@@ -152,7 +152,7 @@ const object3 = {
 }
 ```
 
-The values of the properties can be of any type, like integers, strings, arrays, objects...
+The values of the properties can be of any type, like numbers, strings, arrays, objects...
 
 The properties of an object are referenced by using the "dot" notation, or by using brackets:
 
