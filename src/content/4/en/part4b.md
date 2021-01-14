@@ -131,6 +131,9 @@ We will install the package as a development dependency:
 npm install --save-dev supertest
 ```
 
+//This test is not working, there is no connection to the dabase
+//I will be waiting for the update. Thanks
+
 Let's write our first test in the <i>tests/note_api.test.js</i> file:
 
 ```js
