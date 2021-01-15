@@ -656,7 +656,7 @@ const SignIn = () => {
 <!-- This exercise is completed once you can log the user's <i>authorize</i> mutations result after the sign in form has been submitted. The mutation result should contain the user's access token. -->
 练习完成后你可以在登录表单提交后，就可以将用户的 <i>authorize</i> 信息打印出来。变化结果中应当包含了用户的访问 token。
 
-#### Exercise 10.14: storing the acess token step1
+#### Exercise 10.14: storing the access token step1
 存储访问token 步骤1
 
 <!-- Now that we can obtain the access token we need to store it. Create a file <i>authStorage.js</i> in the <i>utils</i> directory with the following content: -->

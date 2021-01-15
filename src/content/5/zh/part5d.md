@@ -1503,6 +1503,10 @@ describe('Blog app', function() {
 <!-- This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command.  -->
 这项工作可能有点棘手。 一个解决方案是找到所有的博客，然后在[then](https://docs.cypress.io/api/commands/then.html#dom-element)命令的回调函数中对它们进行比较。
 
+<!-- If you use a `map` on an a selection from cypress, mind that it uses a [jQuery map](https://api.jquery.com/map/#map-callback). This means that the arguments of the callback function are swapped from an [ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (i.e. you use `(i, el) => {...}` instead of `(el, i) => {...}`). -->
+
+如果你是从cypress 使用的 `map` ， 记住它实际上是使用的  [jQuery map](https://api.jquery.com/map/#map-callback) 。 也就是说回调函数的入参与[ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 相比是颠倒的。（比如说，你应该使用`(i, el) => {...}` 而不是`(el, i) => {...}` ）。
+
 <!-- This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 这是本章节的最后一个练习，是时候将您的代码推送到 github，并标记您在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中完成的练习。
 

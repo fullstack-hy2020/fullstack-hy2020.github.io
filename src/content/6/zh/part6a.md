@@ -929,7 +929,7 @@ npm install react-redux
 
 
 
-<!-- Next we move the _App_ component into its own file _App.js_. Let's see how this effects the rest of the application files. -->
+<!-- Next we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files. -->
 接下来，我们将 App 组件移动到它自己的文件 App.js 中。 让我们看看这将如何影响其余的应用文件。
 
 
