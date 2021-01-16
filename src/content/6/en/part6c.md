@@ -6,7 +6,7 @@ lang: en
 ---
 
 <div class="content">
-
+### Setting up communications with the server
 
 Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
 
