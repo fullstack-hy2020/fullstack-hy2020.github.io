@@ -358,7 +358,7 @@ Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-libr
 npm install redux-thunk
 ```
 
-The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
+The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. There are also other possible approaches, as we have seen, but using react-thunk is often much more [convenient](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559). While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
