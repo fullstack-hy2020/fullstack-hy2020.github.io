@@ -117,7 +117,7 @@ Obviously, this exercise is not done in the same repository as the previous exer
 
 Protect the master branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.
 
-Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to master. Note that the reviewer needs to be a collaborator in the repoistory. Ping us in telegram/slack to get the review.
+Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to master. Note that the reviewer needs to be a collaborator in the repository. Ping us in telegram/slack to get the review.
 
 Then you are done!
 
@@ -128,7 +128,7 @@ Then you are done!
 
 ### Submitting exercises and getting the credits
 
-Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part!
+Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part!
 
 Your solutions are in two repositories (pokedex and your own project), and since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form!
 
