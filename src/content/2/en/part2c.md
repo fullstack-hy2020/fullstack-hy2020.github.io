@@ -612,7 +612,7 @@ When there is only one country matching the query, then the basic data of the co
 
 ![](../../images/2/19b3.png)
 
-**NB**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause be hard to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not to worry about these edge cases.
+**NB**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can be difficult to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases.
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
