@@ -55,9 +55,9 @@ query FetchBlogsQuery {
 }
 ```
 
+The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them. 
 
-
-The servers response would be about the following JSON-object: 
+The server's response would be about the following JSON-object: 
 
 ```bash
 {
