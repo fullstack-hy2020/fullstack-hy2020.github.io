@@ -341,7 +341,7 @@ This and the next exercises are quite **challenging** like it should be this lat
 
 Some tips
 
-- Instead of using <i>useQuery</i> it is propably better to do the queries with the <i>useLazyQuery</i>-hook
+- Instead of using <i>useQuery</i> it is probably better to do the queries with the <i>useLazyQuery</i>-hook
 - It is sometimes useful to save the results of a GraphQL query to the state of a component. 
 - Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
 - The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
