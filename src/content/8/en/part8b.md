@@ -22,13 +22,6 @@ We could take care of the communication between the React-app and GraphQl by usi
 At the moment there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/). From these two Apollo is absolutely more popular, and we will also be using it. 
 
 ### Apollo client
-
-<!-- Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/), tällä hetkellä (20.2.2020) uusin virallisesti julkaisatu versio on 2.6. eli kun luet dokumentaatiota, muista vaihtaa näytettävän dokumentaation versio vastaamaan 3.0 betaa: -->
-In this course we will use the version [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/) of Apollo Client. 
-At the moment (20.2.2020) 2.6 is the latest officially released version, so when you are reading the documentation remember to select the documentation of 3.0 beta:
-
-![](../../images/8/40ea.png)
-
 Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation).
 
 <!-- Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet. -->
