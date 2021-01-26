@@ -432,9 +432,13 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-Because this is a React-component, we must import React. 
+We import React on the first line of the module.
 
 The last line of the module [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) the declared module, the variable <i>Note</i>.
+
+Please note that on recent versions of React it is no longer necessary to import React to use JSX syntax, however it is still important to learn as there are billions of lines of old React code that still need the React import. The same applies to documentation and examples of React that you may stumble across on the internet.
+
+We would still need to import React in order to use Hooks or other exports that React provides. Read more about this [here](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
 Now the file that is using the component - <i>index.js</i> - can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module: 
 
