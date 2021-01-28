@@ -590,7 +590,7 @@ query {
 ```
 
 
-If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 
