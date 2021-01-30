@@ -549,7 +549,8 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "moduleResolution": "node"
   }
 }
 ```
