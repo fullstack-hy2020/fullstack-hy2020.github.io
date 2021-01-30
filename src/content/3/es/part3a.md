@@ -9,24 +9,17 @@ lang: es
 
 En esta parte, nuestro enfoque se desplaza hacia el backend: es decir, hacia la implementación de la funcionalidad en el lado del servidor.
 
-
 Construiremos nuestro backend sobre [NodeJS](https://nodejs.org/en/), que es un entorno en tiempo de ejecución basado en JavaScript y en el motor [Chrome V8](https://developers.google.com/v8/) de Google.
-
 
 Este material del curso fue escrito con la versión <i>v10.18.0</i> de Node.js. Asegúrese de que su versión de Node sea al menos tan nueva como la versión utilizada en el material (puede verificar la versión ejecutando _node -v_ en la línea de comando).
 
-
 Como se mencionó en la [parte 1](/es/part1/java_script), los navegadores aún no son compatibles con las funciones más nuevas de JavaScript, y es por eso que el código que se ejecuta en el navegador debe <i>transpilarse</i> con, por ejemplo, [babel](https://babeljs.io/). La situación con JavaScript ejecutándose en el backend es diferente. La versión más reciente de Node es compatible con la gran mayoría de las funciones más recientes de JavaScript, por lo que podemos usar las funciones más recientes sin tener que transpilar nuestro código.
-
 
 Nuestro objetivo es implementar un backend que funcione con la aplicación de notas de la [parte 2](/es/part2/). Sin embargo, comencemos con lo básico implementando una aplicación clásica de "hola mundo".
 
-
 **Tenga en cuenta** que las aplicaciones y ejercicios de esta parte no son todas aplicaciones de React, y no usaremos la utilidad <i>create-react-app</i> para inicializar el proyecto para esta aplicación.
 
-
 Ya habíamos mencionado [npm](/es/part2/getting_data_from_server#npm) en la parte 2, que es una herramienta utilizada para administrar paquetes de JavaScript. De hecho, npm se origina en el ecosistema Node.
-
 
 Naveguemos a un directorio apropiado y creemos una nueva plantilla para nuestra aplicación con el comando _npm init_. Responderemos a las preguntas presentadas por la utilidad y el resultado será un archivo <i>package.json</i> generado automáticamente en la raíz del proyecto, que contiene información sobre el proyecto.
 
@@ -44,9 +37,7 @@ Naveguemos a un directorio apropiado y creemos una nueva plantilla para nuestra 
 }
 ```
 
-
 El archivo define, por ejemplo, que el punto de entrada de la aplicación es el archivo <i>index.js</i>.
-
 
 Hagamos un pequeño cambio en el objeto <i>scripts</i>:
 
@@ -61,15 +52,11 @@ Hagamos un pequeño cambio en el objeto <i>scripts</i>:
 }
 ```
 
-
 A continuación, creemos la primera versión de nuestra aplicación agregando un archivo index.js a la raíz del proyecto con el siguiente código:
-
-Next, let's create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:
 
 ```js
 console.log('hello world')
 ```
-
 
 Podemos ejecutar el programa directamente con Node desde la línea de comando:
 
@@ -77,14 +64,11 @@ Podemos ejecutar el programa directamente con Node desde la línea de comando:
 node index.js
 ```
 
-
 O podemos ejecutarlo como un [script npm](https://docs.npmjs.com/misc/scripts):
-
 
 ```bash
 npm start
 ```
-
 
 El script npm <i>start</i> funciona porque lo definimos en el archivo <i>package.json</i>:
 
@@ -99,7 +83,6 @@ El script npm <i>start</i> funciona porque lo definimos en el archivo <i>package
 }
 ```
 
-
 Aunque la ejecución del proyecto funciona cuando se inicia llamando a _node index.js_ desde la línea de comando, es habitual que los proyectos npm ejecuten estas tareas como scripts npm.
 
 De forma predeterminada, el archivo <i>package.json</i> también define otro script npm de uso común llamado <i>npm test</i>. Dado que nuestro proyecto aún no tiene una biblioteca de testing, el comando _npm test_ simplemente ejecuta el siguiente comando:
@@ -107,7 +90,6 @@ De forma predeterminada, el archivo <i>package.json</i> también define otro scr
 ```bash
 echo "Error: no test specified" && exit 1
 ```
-
 
 ### Servidor web simple
 
@@ -156,7 +138,6 @@ Error: listen EADDRINUSE :::3001
     at listenInCluster (net.js:1378:12)
 ```
 
-
 Tienes dos opciones. Apague la aplicación usando el puerto 3001 (el servidor json en la última parte del material estaba usando el puerto 3001), o use un puerto diferente para esta aplicación.
 
 Echemos un vistazo más de cerca a la primera línea del código:
@@ -198,7 +179,6 @@ app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
 ```
 
-
 El propósito principal del servidor backend en este curso es ofrecer datos sin procesar en formato JSON al frontend. Por esta razón, cambiemos inmediatamente nuestro servidor para devolver una lista codificada de notas en formato JSON:
 
 ```js
@@ -239,7 +219,7 @@ console.log(`Server running on port ${PORT}`)
 
 Reiniciemos el servidor (puede apagar el servidor presionando _Ctrl+C_ en la consola) y actualice el navegador.
 
-El valor <i>application/json</i> en el header <i>Content-Type</i> informa al receptor que los datos están en formato JSON. El arrray _notes_ de notas se transforma en JSON con el método <em>JSON.stringify(notes)</em>.
+El valor <i>application/json</i> en el header <i>Content-Type</i> informa al receptor que los datos están en formato JSON. El array _notes_ de notas se transforma en JSON con el método <em>JSON.stringify(notes)</em>.
 
 Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/getting_data_from_server/), donde usamos [json-server](https://github.com/typicode/json-server) para entregar la lista de notas:
 
@@ -269,13 +249,9 @@ La dependencia también se agrega a nuestro archivo <i>package.json</i>:
 
 ```
 
-
 El código fuente de la dependencia se instala en el directorio node_modules ubicado en la raíz del proyecto. Además de express, puede encontrar una gran cantidad de otras dependencias en el directorio:
 
-The source code for the dependency is installed to the <i>node\_modules</i> directory located in the root of the project. In addition to express, you can find a great amount of other dependencies in the directory:
-
 ![](../../images/3/4.png)
-
 
 Estas son, de hecho, las dependencias de la biblioteca express y las dependencias de todas sus dependencias, etc. Estas son las [dependencias transitivas](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) de nuestro proyecto.
 
@@ -284,7 +260,6 @@ La versión 4.17.1. de express se instaló en nuestro proyecto. ¿Qué significa
 ```json
 "express": "^4.17.1"
 ```
-
 
 El modelo de control de versiones utilizado en npm se denomina control de [versiones semántico](https://docs.npmjs.com/getting-started/semantic-versioning).
 
@@ -330,7 +305,6 @@ app.listen(PORT, () => {
 })
 ```
 
-
 Para poder utilizar la nueva versión de nuestra aplicación, tenemos que reiniciar la aplicación.
 
 La aplicación no cambió mucho. Justo al comienzo de nuestro código estamos importando _express_, que esta vez es una <i>función</i> que se usa para crear una aplicación express almacenada en la variable _app_:
@@ -340,7 +314,6 @@ const express = require('express')
 const app = express()
 ```
 
-
 A continuación, definimos dos <i>rutas</i> a la aplicación. El primero define un controlador de eventos, que se utiliza para manejar las solicitudes HTTP GET realizadas a la raíz <i>/</i> de la aplicación:
 
 ```js
@@ -349,16 +322,13 @@ app.get('/', (request, response) => {
 })
 ```
 
-
 La función del controlador de eventos acepta dos parámetros. El primer parámetro [request](http://expressjs.com/en/4x/api.html#req) contiene toda la información de la solicitud HTTP y el segundo parámetro [response](http://expressjs.com/en/4x/api.html#res) se utiliza para definir cómo se responde a la solicitud.
 
 En nuestro código, la solicitud se responde utilizando el método [send](http://expressjs.com/en/4x/api.html#res.send) del objeto _response_. Llamar al método hace que el servidor responda a la solicitud HTTP enviando una respuesta que contiene el string <code>\<h1>Hello World!\</h1></code>, que se pasó al método _send_. Dado que el parámetro es un string, express establece automáticamente el valor del header <i>Content-Type</i> en <i>text/html</i>. El código de estado de la respuesta predeterminado es 200.
 
 Podemos verificar esto desde la pestaña <i>Network</i> en las herramientas para desarrolladores:
 
-
 ![](../../images/3/5.png)
-
 
 La segunda ruta define un controlador de eventos, que maneja las solicitudes HTTP GET realizadas a la ruta <i>notes</i> de la aplicación:
 
@@ -367,7 +337,6 @@ app.get('/api/notes', (request, response) => {
   response.json(notes)
 })
 ```
-
 
 La solicitud se responde con el método [json](http://expressjs.com/en/4x/api.html#res.json) del objeto _response_. Llamar al método enviará el array __notes__ que se le pasó como un string con formato JSON. Express establece automáticamente el header <i>Content-Type</i> con el valor apropiado de <i>application/json</i>.
 
@@ -381,7 +350,6 @@ En la versión anterior donde solo usábamos Node, teníamos que transformar los
 response.end(JSON.stringify(notes))
 ```
 
-
 Con express, esto ya no es necesario, porque esta transformación ocurre automáticamente.
 
 Vale la pena señalar que[JSON](https://en.wikipedia.org/wiki/JSON) es un stringy no un objeto JavaScript como el valor asignado a  _notes_.
@@ -389,7 +357,6 @@ Vale la pena señalar que[JSON](https://en.wikipedia.org/wiki/JSON) es un string
 El experimento que se muestra a continuación ilustra este punto:
 
 ![](../../assets/3/5.png)
-
 
 El experimento anterior se realizó en [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html) interactivo. Puede iniciar node-repl interactivo escribiendo en _node_ en la línea de comando. repl es particularmente útil para probar cómo funcionan los comandos mientras escribe el código de la aplicación. ¡Lo recomiendo mucho!
 
@@ -421,7 +388,6 @@ El contenido de <i>package.json</i> también ha cambiado:
 }
 ```
 
-
 Si usó accidentalmente el comando incorrecto y la dependencia de nodemon se agregó en "dependencias" en lugar de "devDependencies", cambie manualmente el contenido de <i>package.json</i> para que coincida con lo que se muestra arriba.
 
 Por dependencias de desarrollo, nos referimos a herramientas que son necesarias solo durante el desarrollo de la aplicación, por ejemplo, para probar o reiniciar automáticamente la aplicación, como <i>nodemon</i>.
@@ -433,7 +399,6 @@ Podemos iniciar nuestra aplicación con <i>nodemon</i> así:
 ```bash
 node_modules/.bin/nodemon index.js
 ```
-
 
 Los cambios en el código de la aplicación ahora hacen que el servidor se reinicie automáticamente. Vale la pena señalar que, aunque el servidor backend se reinicia automáticamente, el navegador aún debe actualizarse manualmente. Esto se debe a que, a diferencia de cuando se trabaja en React, ni siquiera podemos tener la funcionalidad de [recarga en caliente](https://gaearon.github.io/react-hot-loader/getstarted/) necesaria para recargar automáticamente el navegador.
 
@@ -450,7 +415,6 @@ El comando es largo y bastante desagradable, así que definamos un <i>script npm
   // ..
 }
 ```
-
 
 En el script no es necesario especificar la ruta <i>node\_modules/.bin/nodemon</i> a nodemon, porque _npm_ automáticamente sabe buscar el archivo desde ese directorio.
 
@@ -482,7 +446,6 @@ La URL de la colección completa de todos los recursos de notas es <i>www.exampl
 
 Podemos ejecutar diferentes operaciones sobre recursos. La operación a ejecutar está definida por el <i>verbo</i> HTTP:
 
-
 | URL                   | verbo                | funcionalidad                                                    |
 | --------------------- | ------------------- | -----------------------------------------------------------------|
 | notes/10              | GET                 | obtiene un solo recurso                                    |
@@ -499,14 +462,11 @@ Esta forma de interpretar REST cae dentro del [segundo nivel de madurez RESTful]
 
 En algunos lugares (ver por ejemplo, [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do) ) verá nuestro modelo para una API [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) sencilla, que se conoce como un ejemplo de [arquitectura orientada a recursos](https://en.wikipedia.org/wiki/Resource-oriented_architecture) en lugar de REST. Evitaremos quedarnos atascados discutiendo semántica y en su lugar volveremos a trabajar en nuestra aplicación.
 
-
 ### Obteniendo un solo recurso
 
 Ampliemos nuestra aplicación para que ofrezca una interfaz REST para operar con notas individuales. Primero, creemos una [ruta](http://expressjs.com/en/guide/routing.html) para buscar un solo recurso.
 
-
 La dirección única que usaremos para una nota individual es de la forma <i>notes/10</i>, donde el número al final se refiere al número de id único de la nota.
-
 
 Podemos definir [parámetros](http://expressjs.com/en/guide/routing.html#route-parameters) para rutas en express usando la sintaxis de dos puntos:
 
@@ -517,7 +477,6 @@ app.get('/api/notes/:id', (request, response) => {
   response.json(note)
 })
 ```
-
 
 Ahora <code>app.get('/api/notes/:id', ...)</code> manejará todas las solicitudes HTTP GET, que tienen el formato <i>/api/notes/SOMETHING</i>, donde <i>SOMETHING</i> es un string arbitraria.
 
@@ -543,11 +502,9 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Cuando visitemos <http://localhost:3001/api/notes/1> nuevamente en el navegador, la consola que es la terminal en este caso, mostrará lo siguiente:
 
 ![](../../images/3/8.png)
-
 
 El parámetro id de la ruta se pasa a nuestra aplicación, pero el _find_ método no encuentra una nota con ese id.
 
@@ -565,7 +522,6 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Cuando volvemos a visitar la URL en el navegador, cada llamada a la función de comparación imprime algunas cosas diferentes en la consola. La salida de la consola es la siguiente:
 
 <pre>
@@ -573,7 +529,6 @@ Cuando volvemos a visitar la URL en el navegador, cada llamada a la función de 
 2 'number' '1' 'string' false
 3 'number' '1' 'string' false
 </pre>
-
 
 La causa del error se aclara. La variable _id_ contiene una cadena '1', mientras que los ids de las notas son números enteros. En JavaScript, la comparación "triple iguales" === considera que todos los valores de diferentes tipos no son iguales por defecto, lo que significa que 1 no es '1'.
 
@@ -587,7 +542,6 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Ahora funciona la búsqueda de un recurso individual.
 
 ![](../../images/3/9ea.png)
@@ -598,7 +552,6 @@ Sin embargo, hay otro problema con nuestra aplicación.
 Si buscamos una nota con un id que no existe, el servidor responde con:
 
 ![](../../images/3/10ea.png)
-
 
 El código de estado HTTP que se devuelve es 200, lo que significa que la respuesta se realizó correctamente. No se devuelven datos con la respuesta, ya que el valor del header de <i>content-length</i> es 0, y lo mismo se puede verificar desde el navegador.
 
@@ -621,13 +574,11 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Dado que no se adjuntan datos a la respuesta, utilizamos el método [status](http://expressjs.com/en/4x/api.html#res.status) para establecer el estado y el método [end](http://expressjs.com/en/4x/api.html#res.end) para responder a la solicitud sin enviar ningún dato.
 
 La condición if aprovecha el hecho de que todos los objetos JavaScript son [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), lo que significa que se evalúan como verdaderos en una operación de comparación. Sin embargo, _undefined_ es [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy), lo que significa que se evaluará como falso.
 
 Nuestra aplicación funciona y envía el código de estado de error si no se encuentra ninguna nota. Sin embargo, la aplicación no devuelve nada para mostrar al usuario, como suelen hacer las aplicaciones web cuando visitamos una página que no existe. En realidad, no necesitamos mostrar nada en el navegador porque las API REST son interfaces diseñadas para uso programático, y el código de estado de error es todo lo que se necesita.
-
 
 ### Eliminar recursos
 
@@ -642,11 +593,9 @@ app.delete('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Si la eliminación del recurso es exitosa, lo que significa que la nota existe y se elimina, respondemos a la solicitud con el código de estado [204 no content](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5) y no devolvemos datos con la respuesta.
 
 No hay consenso sobre qué código de estado debe devolverse a una solicitud DELETE si el recurso no existe. Realmente, las únicas dos opciones son 204 y 404. En aras de la simplicidad, nuestra aplicación responderá con 204 en ambos casos.
-
 
 ### Postman
 
@@ -702,7 +651,6 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 La función del controlador de eventos puede acceder a los datos de la propiedad <i>body</i> del objeto de _request_.
 
 Sin json-parser, la propiedad <i>body</i> no estaría definida. El json-parser funciona para que tome los datos JSON de una solicitud, los transforme en un objeto JavaScript y luego los adjunte a la propiedad <i>body</i> del objeto _request_ antes de llamar al controlador de ruta.
@@ -713,16 +661,13 @@ Antes de implementar el resto de la lógica de la aplicación, verifiquemos con 
 
 ![](../../images/3/14ea.png)
 
-
 La aplicación imprime los datos que enviamos en la solicitud a la consola:
 
 ![](../../images/3/15e.png)
 
-
 **NB** <i>Mantenga visible el terminal que ejecuta la aplicación en todo momento</i> cuando esté trabajando en el backend. Gracias a Nodemon, cualquier cambio que hagamos en el código reiniciará la aplicación. Si prestas atención a la consola, inmediatamente podrás detectar los errores que ocurren en la aplicación:
 
 ![](../../images/3/16.png)
-
 
 De manera similar, es útil verificar la consola para asegurarse de que el backend se comporte como esperamos en diferentes situaciones, como cuando enviamos datos con una solicitud HTTP POST. Naturalmente, es una buena idea agregar muchos comandos <em>console.log</em> al código mientras la aplicación aún se está desarrollando.
 
@@ -730,16 +675,13 @@ Una posible causa de problemas es un header <i>Content-Type</i> configurado inco
 
 ![](../../images/3/17e.png)
 
-
 El header <i>Content-Type</i> se establece en <i>text/plain</i>:
 
 ![](../../images/3/18e.png)
 
-
 El servidor parece recibir solo un objeto vacío:
 
 ![](../../images/3/19.png)
-
 
 El servidor no podrá parsear los datos correctamente sin el valor correcto en el header. Ni siquiera intentará adivinar el formato de los datos, ya que hay una [gran cantidad](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) de <i>Content-Types</i> potenciales.
 
@@ -747,13 +689,11 @@ Si está utilizando VS Code, debe instalar ahora el cliente REST del capítulo a
 
 ![](../../images/3/20eb.png)
 
-
 Creamos un nuevo archivo <i>create\_note.rest</i> para la solicitud. La solicitud se formatea de acuerdo con las [instrucciones de la documentación](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
 
 Un beneficio que tiene el cliente REST sobre Postman es que las solicitudes están fácilmente disponibles en la raíz del repositorio del proyecto y se pueden distribuir a todos en el equipo de desarrollo. También puede agregar varias solicitudes en el mismo archivo usando `###` separadores:
 
 ```
-
 GET http://localhost:3001/api/notes/
 
 ###
@@ -766,7 +706,6 @@ content-type: application/json
 }
 ```
 
-
 Postman también permite a los usuarios guardar solicitudes, pero la situación puede volverse bastante caótica, especialmente cuando se trabaja en varios proyectos no relacionados.
 
 > **Nota al margen importante**
@@ -777,10 +716,7 @@ Postman también permite a los usuarios guardar solicitudes, pero la situación 
 > Pueden ocurrir problemas con el cliente VS REST si agrega accidentalmente una línea vacía entre la fila superior y la fila que especifica los headers HTTP. En esta situación, el cliente REST interpreta que esto significa que todos los headers se dejan vacíos, lo que hace que el servidor backend no sepa que los datos que ha recibido están en formato JSON.
 >
 
-
 Podrá detectar este header de <i>Content-Type</i> que falta si en algún punto de su código imprime todos los headers de solicitud con el comando _console.log(request.headers)_.
-
-
 
 Volvamos a la aplicación. Una vez que sabemos que la aplicación recibe los datos correctamente, es el momento de finalizar el manejo de la solicitud:
 
@@ -798,7 +734,6 @@ app.post('/api/notes', (request, response) => {
   response.json(note)
 })
 ```
-
 
 Necesitamos un id única para la nota. Primero, encontramos el número de id más grande en la lista actual y lo asignamos a la variable _maxId_. La id de la nueva nota se define _como maxId + 1_. De hecho, este método no se recomienda, pero viviremos con él por ahora, ya que lo reemplazaremos pronto.
 
@@ -834,7 +769,6 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 La lógica para generar el nuevo número de id para notas se ha separado en una función _generateId_.
 
 Si a los datos recibidos les falta un valor para la propiedad <i>content</i>, el servidor responderá a la solicitud con el código de estado [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
@@ -847,7 +781,6 @@ if (!body.content) {
 }
 ```
 
-
 Tenga en cuenta que llamar a return es crucial, porque de lo contrario el código se ejecutará hasta el final y la nota con formato incorrecto se guardará en la aplicación.
 
 Si la propiedad content tiene un valor, la nota se basará en los datos recibidos. Como se mencionó anteriormente, es mejor generar marcas de tiempo en el servidor que en el navegador, ya que no podemos confiar en que la máquina host que ejecuta el navegador tenga su reloj configurado correctamente. La generación de la propiedad <i>date</i> ahora la realiza el servidor.
@@ -858,7 +791,6 @@ Si falta la propiedad <i>important</i>, el valor predeterminado será <i>false</
 important: body.important || false,
 ```
 
-
 Si los datos guardados en la variable _body_ tienen la propiedad <i>important</i>, la expresión evaluará su valor. Si la propiedad no existe, la expresión se evaluará como falsa, que se define en el lado derecho de las líneas verticales.
 
 > Para ser exactos, cuando la propiedad <i>important</i> es <i>false</i>, entonces la expresión <em>body.important || false</em> devolverá el <i>false</i> del lado derecho ...
@@ -868,7 +800,6 @@ Puede encontrar el código para nuestra aplicación actual en su totalidad en la
 Observe que la rama master del repositorio contiene el código de una versión posterior de la aplicación. El código para el estado actual de la aplicación se encuentra específicamente en la rama [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
 ![](../../images/3/21.png)
-
 
 Si clona el proyecto, ejecute el comando _npm install_ antes de iniciar la aplicación con _npm start_ o _npm run dev_.
 
@@ -883,9 +814,7 @@ const generateId = () => {
 }
 ```
 
-
 El cuerpo de la función contiene una línea que parece un poco intrigante:
-
 
 ```js
 Math.max(...notes.map(n => n.id))
@@ -893,11 +822,9 @@ Math.max(...notes.map(n => n.id))
 
 ¿Qué está sucediendo exactamente en esa línea de código? <em>notes.map(n => n.id)</em> crea un nuevo array que contiene todos los ids de las notas. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) devuelve el valor máximo de los números que se le pasan. Sin embargo, <em>notes.map(n => n.id)</em> es un <i>array</i>, por lo que no se puede asignar directamente como parámetro a _Math.max_. El array se puede transformar en números individuales mediante el uso de la sintaxis de [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) de  los "tres puntos", <em>...</em>.
 
-
 </div>
 
 <div class="tasks">
-
 
 ### Ejercicios 3.1.-3.6.
 
@@ -913,13 +840,11 @@ Implemente una aplicación Node que devuelva una lista hardcodeada de entradas d
 
 ![](../../images/3/22e.png)
 
-
 Observe que la barra inclinada en la ruta <i>api/persons</i> no es un carácter especial y es como cualquier otro carácter dl string.
 
 La aplicación debe iniciarse con el comando _npm start_.
 
 La aplicación también debe ofrecer un comando _npm run dev_ que ejecutará la aplicación y reiniciará el servidor siempre que se realicen cambios y se guarden en un archivo en el código fuente.
-
 
 #### 3.2: backend de la agenda telefónica, paso 2
 
@@ -927,9 +852,7 @@ Implemente una página en la dirección <http://localhost:3001/info> que se pare
 
 ![](../../images/3/23ea.png)
 
-
 La página tiene que mostrar la hora en que se recibió la solicitud y cuántas entradas hay en la agenda telefónica en el momento de procesar la solicitud.
-
 
 #### 3.3: backend de la agenda telefónica, paso 3
 
@@ -937,12 +860,10 @@ Implemente la funcionalidad para mostrar la información de una sola entrada de 
 
 Si no se encuentra una entrada para la identificación dada, el servidor debe responder con el código de estado apropiado.
 
-
 #### 3.4: backend de la agenda telefónica, paso 4
 Implemente la funcionalidad que hace posible eliminar una sola entrada de la agenda telefónica mediante una solicitud HTTP DELETE a la URL única de esa entrada de la agenda.
 
 Pruebe que su funcionalidad funcione con Postman o el cliente REST de Visual Studio Code.
-
 
 #### 3.5: backend de la agenda telefónica, paso 5
 
@@ -950,14 +871,12 @@ Expanda el backend para que se puedan agregar nuevas entradas a la agenda telef�
 
 Genere una nueva id para la entrada de la agenda con la función [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Use un rango lo suficientemente grande para sus valores aleatorios de modo que la probabilidad de crear identificadores duplicados sea pequeña.
 
-
 #### 3.6: backend de la agenda telefónica, paso 6
 
 Implemente el manejo de errores para crear nuevas entradas. No se permite que la solicitud se realice correctamente si:
 
 - Falta el nombre o número
 - El nombre ya existe en la agenda
-
 
 Responda a solicitudes como estas con el código de estado apropiado y también envíe información que explique el motivo del error, por ejemplo:
 
@@ -968,7 +887,6 @@ Responda a solicitudes como estas con el código de estado apropiado y también 
 </div>
 
 <div class="content">
-
 
 ### Acerca de los tipos de solicitudes HTTP
 
@@ -984,7 +902,6 @@ Nada puede garantizar que una solicitud GET sea realmente <i>segura</i>; de hech
 
 El estándar HTTP también define el tipo de solicitud [HEAD](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html#sec9.4), que debería ser seguro. En la práctica, HEAD debería funcionar exactamente como GET, pero no devuelve nada más que el código de estado y los headers de respuesta. El cuerpo de la respuesta no se devolverá cuando realice una solicitud HEAD.
 
-
 Todas las solicitudes HTTP excepto POST deben ser <i>idempotentes</i>:
 
 > <i>Los métodos también pueden tener la propiedad de "idempotencia" en el sentido de que (aparte de errores o problemas de caducidad) los efectos secundarios de N > 0 solicitudes idénticas son los mismos que para una sola solicitud. Los métodos GET, HEAD, PUT y DELETE comparten esta propiedad</i>
@@ -996,7 +913,6 @@ Si hacemos una solicitud HTTP PUT a la url <i>/api/notes/10</i> y con la solicit
 Al igual que la <i>seguridad</i> para la solicitud GET, la <i>idempotencia</i> también es solo una recomendación en el estándar HTTP y no algo que se pueda garantizar simplemente en función del tipo de solicitud. Sin embargo, cuando nuestra API se adhiere a los principios RESTful, las solicitudes GET, HEAD, PUT y DELETE se utilizan de tal manera que son idempotentes.
 
 POST es el único tipo de solicitud HTTP que no es ni <i>seguro</i> ni <i>idempotente</i>. Si enviamos 5 solicitudes HTTP POST diferentes <i>/api/notes</i> con un cuerpo de <em>{content: "many same", important: true}</em>, las 5 notas resultantes en el servidor tendrán todas el mismo contenido.
-
 
 ### Middleware
 
@@ -1044,7 +960,6 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-
 Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-2</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
 
 </div>
@@ -1060,7 +975,6 @@ Agregue el middleware [morgan](https://github.com/expressjs/morgan) a su aplicac
 La documentación de Morgan no es la mejor y es posible que deba dedicar algún tiempo a averiguar cómo configurarla correctamente. Sin embargo, la mayor parte de la documentación del mundo cae en la misma categoría, por lo que es bueno aprender a descifrar e interpretar documentación críptica en cualquier caso.
 
 Morgan se instala como todas las demás bibliotecas con el comando _npm install_. La puesta en funcionamiento de Morgan ocurre de la misma manera que la configuración de cualquier otro middleware mediante el comando _app.use_.
-
 
 #### 3.8*: backend de la agenda telefónica, paso 8
 
