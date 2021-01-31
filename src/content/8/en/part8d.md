@@ -13,7 +13,7 @@ The frontend of our application shows the phone directory just fine with the upd
 ### User log in
 
 <!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
-Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
+Let's add variable _token_ to the application's state. It will contain user's token when one is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
 
 ```js
 const App = () => {
