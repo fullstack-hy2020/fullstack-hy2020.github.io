@@ -26,6 +26,10 @@ TypeScript's native <i>tsc</i> compiler can help us to initialize our project wi
 First we need to add the <i>tsc</i> command to the list of executable scripts in the package.json file (unless you have installed <i>typescript</i> globally).
 Even if you have installed TypeScript globally, you should always include it as a dev-dependency in your project.
 
+```bash
+ npm install typescript --save-dev
+```
+
 The npm script for running <i>tsc</i> is set as follows:
 
 ```json
