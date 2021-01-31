@@ -546,4 +546,6 @@ _login_. Like in the course material, you can assume all users have the same har
 
 Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 
 
+(Don't worry about fixing the frontend for the moment.)
+
 </div>
