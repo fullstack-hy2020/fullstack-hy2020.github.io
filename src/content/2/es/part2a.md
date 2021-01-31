@@ -429,9 +429,13 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-Debido a que este es un componente de React, debemos importar React. 
+Importamos React en la primera línea del módulo.
 
 La última línea del módulo [exporta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) el módulo declarado, la variable <i>Note</i>.
+
+Toma en cuenta que en versiones recientes de React ya no es necesario importar React para usar sintaxis JSX, sin embargo sigue siendo importante conocer su uso, ya que hay miles de millones de líneas de código antiguo de React que aún necesitan importar React. Lo mismo se aplica a la documentación y los ejemplos de React con los que puede tropezar en Internet.
+
+Si necesitamos importar React para usar Hooks y otras funciones exportadas que React provee. Lea más sobre esto [aquí](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
 Ahora el archivo que está usando el componente - <i>index.js</i> - puede [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import ) el módulo:
 
