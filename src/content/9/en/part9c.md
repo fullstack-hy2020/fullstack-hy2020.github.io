@@ -1385,7 +1385,7 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 Create a POST-endpoint `/api/patients` for adding patients. Ensure that you can add patients also from the frontend. You can create unique ids of type `string` using the [uuid](https://github.com/uuidjs/uuid) library:
 
 ```js
-const { v1: uuid } = require('uuid')
+import {v1 as uuid} from 'uuid'
 const id = uuid()
 ```
 
