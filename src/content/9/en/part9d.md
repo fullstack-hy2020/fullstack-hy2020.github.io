@@ -905,7 +905,7 @@ React.useEffect(() => {
  <!-- **A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend. -->
  **A word of warning!** Passing a type parameter to axios will not validate any data. It is quite dangerous especially if you are using external APIs. 
  You can create custom validation functions which take in the whole payload and return the correct type, or you can use a type guard. 
- Both are valid options. There are also many libraries that provide validation through different kind of schemas, for example [io-ts](https://github.com/gcanti/io-ts).
+ Both are valid options. There are also many libraries that provide validation through different kind of schemas, for example [io-ts](https://gcanti.github.io/io-ts/).
  For simplicity's sake we will continue to trust our own work and trust that we will get data of the correct form from the backend.
 
 <!-- As our app is quite small, we will update the state by simply calling the <i>dispatch</i> function provided to us by the <i>useStateValue</i> hook. The compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload: -->
