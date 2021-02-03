@@ -570,5 +570,9 @@ type Mutation {
 <!-- Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token.  -->
 只有在请求包含有效token的情况下，才能使Mutation addBook 和 editAuthor 成为可能。
 
+<!-- (Don't worry about fixing the frontend for the moment.) -->
+（现在不用担心修改前端）
+
+
 </div>
 

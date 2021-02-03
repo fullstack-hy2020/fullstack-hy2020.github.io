@@ -627,7 +627,7 @@ query {
 ```
 
 <!-- If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it.  -->
-如果我们修改 allPersons 来执行连接查询，因为它有时会导致 n + 1问题，当我们不需要相关人员的信息时，它会变得更重。 通过使用解析器函数的[第四个参数](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) ，我们可以进一步优化查询。 第四个参数可以用来检查查询本身，所以我们在预计会出现n+1问题时可以做join查询。 然而，在我们评估这是否值得，否则不应该进入这个优化级别。
+如果我们修改 allPersons 来执行连接查询，因为它有时会导致 n + 1问题，当我们不需要相关人员的信息时，它会变得更重。 通过使用解析器函数的[第四个参数](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) ，我们可以进一步优化查询。 第四个参数可以用来检查查询本身，所以我们在预计会出现n+1问题时可以做join查询。 然而，在我们评估这是否值得，否则不应该进入这个优化级别。
 
 <!-- [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth): -->
 [用 Donald Knuth 的话来说](https://en.wikiquote.org/wiki/donald_knuth) :

@@ -510,10 +510,20 @@ export default Note
 ```
 
 <!-- Because this is a React-component, we must import React.  -->
-由于这是一个 React-组件，因此我们必须导入 React。
+<!-- 由于这是一个 React-组件，因此我们必须导入 React。 -->
+
+<!-- We import React on the first line of the module. -->
+我们在该模块但第一行引入React
+
 
 <!-- The last line of the module [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) the declared module, the variable <i>Note</i>. -->
 模块的最后一行  [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ，是在声明模块，即变量<i>Note</i>。
+
+<!-- Please note that on recent versions of React it is no longer necessary to import React to use JSX syntax, however it is still important to learn as there are billions of lines of old React code that still need the React import. The same applies to documentation and examples of React that you may stumble across on the internet. -->
+请注意，最新版本的React 不再需要引入React 来使用JSX 语法了，但是由于有上百万的老React 代码需要将React 引入，因此了解一下很必要。同样，当你在网上查看文档或者React 样例时可能同样会有这种疑惑。
+
+<!-- We would still need to import React in order to use Hooks or other exports that React provides. Read more about this [here](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html). -->
+我们还要引入更多的在React 中提供的其他的一些export ，比如Hook， 你可以在 [这里](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) 阅读更多。
 
 <!-- Now the file using the component, <i>index.js</i>, can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module:  -->
 现在使用这个组件的文件，即<i>index.js</i>，可以 [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 这个模块了:
