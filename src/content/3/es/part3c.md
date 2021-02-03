@@ -28,12 +28,11 @@ A continuación, puede ver una captura de pantalla donde la ejecución del códi
 
 ![](../../images/3/36e.png)
 
-La ejecución se ha detenido en el <i>breakpoint</i> de la línea 63. En la consola puede ver el valor de la variable de <i>note</i>. En la ventana superior izquierda puede ver otras cosas relacionadas con el estado de la aplicación.
+La ejecución se ha detenido en el <i>breakpoint</i> de la línea 63. En la consola puede ver el valor de la variable <i>note</i>. En la ventana superior izquierda puede ver otras cosas relacionadas con el estado de la aplicación.
 
 Las flechas en la parte superior se pueden utilizar para controlar el flujo del debugger.
 
 Por alguna razón, no uso mucho el debugger de Visual Studio Code.
-
 
 #### Chrome dev tools
 
@@ -44,7 +43,6 @@ node --inspect index.js
 ```
 
 Puede acceder al debugger haciendo clic en el icono verde (el logotipo de node) que aparece en la consola de desarrollo de Chrome:
-
 
 ![](../../images/3/37.png)
 
@@ -65,7 +63,6 @@ Cuando la aplicación "no funciona", primero tenemos que averiguar dónde ocurre
 La clave es ser sistemático. Dado que el problema puede existir en cualquier lugar, <i>debes cuestionarlo todo</i> y eliminar todas las posibilidades una por una. Iniciar sesión en la consola, Postman, debuggeres y la experiencia serán de ayuda.
 
 Cuando ocurren errores, <i>la peor de todas las estrategias posibles</i> es continuar escribiendo código. Garantizará que su código pronto tendrá aún más errores, y debuggearlos será aún más difícil. El principio de [detenerse y reparar](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) de Toyota Production Systems también es muy eficaz en esta situación.
-
 
 ### MongoDB
 
@@ -210,7 +207,6 @@ Ejecutemos nuestro código de nuevo.
 
 Los datos ahora se almacenan en la base de datos correcta. La vista también ofrece la función de <i>create database</i>, que se puede utilizar para crear nuevas bases de datos desde el sitio web. No es necesario crear la base de datos de esta manera, ya que MongoDB Atlas crea automáticamente una nueva base de datos cuando una aplicación intenta conectarse a una base de datos que aún no existe.
 
-
 ### Schema
 
 Después de establecer la conexión a la base de datos, definimos el [esquema](http://mongoosejs.com/docs/guide.html) para una nota y el [modelo](http://mongoosejs.com/docs/models.html) correspondiente:
@@ -232,7 +228,6 @@ En la definición del modelo _Note_, el primer parámetro de <i>"Note"</i> es el
 Las bases de datos de documentos como Mongo <i>no tienen esquema</i>, lo que significa que la base de datos en sí no se preocupa por la estructura de los datos que se almacenan en la base de datos. Es posible almacenar documentos con campos completamente diferentes en la misma colección.
 
 La idea detrás de Mongoose es que los datos almacenados en la base de datos reciben un <i>esquema al nivel de la aplicación</i> que define la forma de los documentos almacenados en una colección determinada.
-
 
 ### Crear y guardar objetos
 
@@ -263,8 +258,7 @@ El resultado de la operación de guardar está en el parámetro _result_ del con
 
 Guardemos también algunas notas más modificando los datos en el código y ejecutando el programa nuevamente.
 
-**NB:** Desafortunadamente, la documentación de Mongoose no es muy consistente, con partes de ella usando callbacks en sus ejemplos y otras partes, otros estilos, por lo que no se recomienda copiar y pegar código directamente desde allí. No se recomienda mezclar promesas con callbacks de la vieja escuela en el mismo código.
-
+**NB:** Desafortunadamente, la documentación de Mongoose no es muy consistente, con partes de ella usando callbacks en sus ejemplos y en otras partes, otros estilos, por lo que no se recomienda copiar y pegar código directamente desde allí. No se recomienda mezclar promesas con callbacks de la vieja escuela en el mismo código.
 
 ### Obteniendo objetos de la base de datos
 
@@ -283,7 +277,7 @@ Cuando se ejecuta el código, el programa imprime todas las notas almacenadas en
 
 ![](../../images/3/70ea.png)
 
-Los objetos se recuperan de la base de datos con el método [find](https://mongoosejs.com/docs/api.html#model_Model.find) del modelo _Note_. El parámetro del método es un objeto que expresa condiciones de búsqueda. Dado que el parámetro es un objeto vacío <code>{}</code>, obtenemos todas las notas almacenadas en la colección  _notes_.
+Los objetos se recuperan de la base de datos con el método [find](https://mongoosejs.com/docs/api.html#model_Model.find) del modelo _Note_. El parámetro del método es un objeto que expresa condiciones de búsqueda. Dado que el parámetro es un objeto vacío <code>{}</code>, obtenemos todas las notas almacenadas en la colección _notes_.
 
 Las condiciones de búsqueda se adhieren a la [sintaxis](https://docs.mongodb.com/manual/reference/operator/) de consulta de búsqueda de Mongo.
 
@@ -307,7 +301,7 @@ Cree una base de datos MongoDB basada en la nube para la aplicación de agenda c
 
 Cree un archivo <i>mongo.js</i> en el directorio del proyecto, que se puede usar para agregar entradas a la agenda y para enumerar todas las entradas existentes en la agenda.
 
-**NB:** ¡No incluya la contraseña en el archivo que hace commit confirma y sube a GitHub!
+**NB:** ¡No incluya la contraseña en el archivo que hace commit y sube a GitHub!
 
 La aplicación debería funcionar de la siguiente manera. Utiliza el programa pasando tres argumentos de línea de comando (el primero es la contraseña), por ejemplo:
 
@@ -327,7 +321,7 @@ La nueva entrada a la agenda telefónica se guardará en la base de datos. Tenga
 node mongo.js yourpassword "Arto Vihavainen" 045-1232456
 ```
 
-Si la contraseña es el único parámetro dado al programa, lo que significa que se invoca así:
+Si la contraseña es el único parámetro dado al programa, significa que se invoca así:
 
 ```bash
 node mongo.js yourpassword
@@ -384,7 +378,7 @@ Comencemos rápidamente copiando y pegando las definiciones de Mongoose en el ar
 ```js
 const mongoose = require('mongoose')
 
-// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
+// NO GUARDE SU CONTRASEÑA EN GITHUB!!
 const url =
   'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
@@ -399,7 +393,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-Cambiemos el controlador para obtener todas las notas al siguiente formulario:
+Cambiemos el controlador para obtener todas las notas de la siguiente forma:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -440,7 +434,6 @@ app.get('/api/notes', (request, response) => {
 ```
 
 Ahora, la variable _notes_ se asigna a un array de objetos devueltos por Mongo. Cuando la respuesta se envía en formato JSON, el método [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) llama automáticamente al método _toJSON_ de cada objeto del array.
-
 
 ### Configuración de la base de datos en su propio módulo
 
@@ -522,7 +515,7 @@ Hay muchas formas de definir el valor de una variable de entorno. Una forma ser�
 MONGODB_URI=address_here npm run dev
 ```
 
-Una forma más sofisticada es utilizar la biblioteca [dotenv](https://github.com/motdotla/dotenv#readme). Puede instalar la librería con el comando:
+Una forma más sofisticada es utilizar la biblioteca [dotenv](https://github.com/motdotla/dotenv#readme). Puede instalar la biblioteca con el comando:
 
 ```bash
 npm install dotenv
@@ -560,7 +553,6 @@ app.listen(PORT, () => {
 ```
 
 Es importante que <i>dotenv</i> se importe antes de importar el modelo <i>note</i>. Esto asegura que las variables de entorno del archivo <i>.env</i> estén disponibles globalmente antes de que se importe el código de los otros módulos.
-
 
 ### Usando la base de datos en los controladores de ruta
 
@@ -605,7 +597,6 @@ app.get('/api/notes/:id', (request, response) => {
   })
 })
 ```
-
 
 ### Verificación de la integración de frontend y backend
 
@@ -711,6 +702,7 @@ app.get('/api/notes/:id', (request, response) => {
     })
 })
 ```
+
 Si el formato del id es incorrecto, terminaremos en el controlador de errores definido en el bloque _catch_. El código de estado apropiado para la situación es [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1), porque la situación se ajusta perfectamente a la descripción:
 
 > <i>El servidor no pudo entender la solicitud debido a una sintaxis incorrecta. El cliente NO DEBE repetir la solicitud sin modificaciones.</i>
@@ -739,8 +731,6 @@ Cada vez que trabajas en un proyecto con un backend, <i>es fundamental estar ate
 Hemos escrito el código para el controlador de errores entre el resto de nuestro código. Esta puede ser una solución razonable a veces, pero hay casos en los que es mejor implementar todo el manejo de errores en un solo lugar. Esto puede ser particularmente útil si más adelante queremos reportar datos relacionados con errores a un sistema de seguimiento de errores externo como [Sentry](https://sentry.io/welcome/).
 
 Cambiemos el manejador de la ruta <i>/api/notes/:id</i>, para que pase el error hacia adelante con la función <em>next</em>. La función <em>next</em> se pasa al controlador como tercer parámetro:
-
-Let's change the handler for the <i>/api/notes/:id</i> route, so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -775,7 +765,6 @@ app.use(errorHandler)
 ```
 
 El controlador de errores comprueba si el error es una excepción <i>CastError</i>, en cuyo caso sabemos que el error fue causado por un ID de objeto no válido para Mongo. En esta situación, el controlador de errores enviará una respuesta al navegador con el objeto de respuesta pasado como parámetro. En todas las demás situaciones de error, el middleware pasa el error al controlador de errores Express predeterminado.
-
 
 ### El orden de carga del middleware
 
@@ -843,7 +832,6 @@ app.get('/api/notes', (request, response) => {
 
 Ahora, el manejo de los endpoints desconocidos se ordena <i>antes que el controlador de solicitudes HTTP</i>. Dado que el controlador de endpoint desconocido responde a todas las solicitudes con <i>404 unknown endpoint</i>, no se llamará a ninguna ruta o middleware después de que el middleware de endpoint desconocido haya enviado la respuesta. La única excepción a esto es el controlador de errores que debe estar al final, después del controlador de endpoints desconocido.
 
-
 ### Otras operaciones
 Agreguemos algunas funciones que faltan a nuestra aplicación, incluida la eliminación y actualización de una nota individual.
 
@@ -906,15 +894,15 @@ Verifique que elfrontend aún funcione después de realizar los cambios.
 
 Mueva el manejo de errores de la aplicación a un nuevo middleware de manejo de errores.
 
-#### 3.17 *: Base de datos de la agenda, paso 5
+#### 3.17*: Base de datos de la agenda, paso 5
 
-Si el usuario intenta crear una nueva entrada en la agenda para una persona cuyo nombre ya está en la agenda, elfrontend intentará actualizar el número de teléfono de la entrada existente realizando una solicitud HTTP PUT a la URL única de la entrada.
+Si el usuario intenta crear una nueva entrada en la agenda para una persona cuyo nombre ya está en la agenda, el frontend intentará actualizar el número de teléfono de la entrada existente realizando una solicitud HTTP PUT a la URL única de la entrada.
 
 Modifique el backend para admitir esta solicitud.
 
 Verifique que el frontend funcione después de realizar sus cambios.
 
-#### 3.18 *: Base de datos de la agenda telefónica, paso 6
+#### 3.18*: Base de datos de la agenda telefónica, paso 6
 
 También actualice el manejo de las rutas <i>api/persons/:id</i> e <i>info</i> para usar la base de datos, y verifique que funcionen directamente con el navegador, Postman o el cliente REST de VS Code.
 
