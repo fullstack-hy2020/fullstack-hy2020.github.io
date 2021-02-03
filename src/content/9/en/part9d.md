@@ -983,7 +983,7 @@ const { id } = useParams<{ id: string }>();
 #### 9.18: patientor, step3
 
 <!-- We are currently creating the <i>action</i> objects everywhere in the code  dispatching the action, e.g. component <i>App</i> has the following: -->
-Currently we create the <i>action</i> objects wherever we dispatch the actions, e.g. component <i>App</i> has the following:
+Currently we create <i>action</i> objects wherever we dispatch actions, e.g. the <i>App</i> component has the following:
 
 ```js
 dispatch({
@@ -991,9 +991,9 @@ dispatch({
 });
 ```
 
-Refactor the code to use [action creator](/en/part6/flux_architecture_and_redux#action-creators) functions that are all defined in the file <i>reducer.tsx</i>. 
+Define [action creator functions](/en/part6/flux_architecture_and_redux#action-creators) in the file `src/state/reducer.tsx` and refactor the code to use them.
 
-For example the <i>App</i> changes like this
+For example the <i>App</i> should become like the following:
 
 ```js
 import { useStateValue, setPatientList } from "./state";
