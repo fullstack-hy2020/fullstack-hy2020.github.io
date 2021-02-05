@@ -1,4 +1,9 @@
-const IS_DEV = process.env.NODE_ENV === 'development';
+const Promise = require('bluebird');
+const  flatten = require('flatten');
+const { transformMarkdown } = require('./markdown-content-by-heading');
+
+// const IS_DEV = process.env.NODE_ENV === 'development';
+const IS_DEV = false;
 
 const createSearchConfig = (indexName, language) => {
   return {
@@ -16,25 +21,29 @@ const createSearchConfig = (indexName, language) => {
                 letter
                 part
               }
-              id      
+              id
               rawMarkdownBody
             }
           }
         }
     `,
       ref: 'id',
-      index: ['body'],
-      store: ['id', 'part', 'letter', 'lang'],
-      normalizer: ({ data }) => {
+      index: ['text'],
+      store: ['id', 'part', 'letter', 'lang', 'text'],
+      normalizer: async ({ data }) => {
         return IS_DEV
           ? []
-          : data.allMarkdownRemark.nodes.map(node => ({
-              id: node.id,
-              part: node.frontmatter.part,
-              letter: node.frontmatter.letter,
-              lang: node.frontmatter.lang,
-              body: node.rawMarkdownBody,
-            }));
+          : flatten(
+              await Promise.all(
+                data.allMarkdownRemark.nodes.map(async node => {
+                  return await transformMarkdown(
+                    node.frontmatter,
+                    node.id,
+                    node.rawMarkdownBody
+                  );
+                })
+              )
+            );
       },
     },
   };
