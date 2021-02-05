@@ -8,6 +8,15 @@ const { kebabCase } = require('lodash');
 
 module.exports = { transformMarkdown };
 
+/*
+Transform each raw markdown node into a markdown AST. Traverse the AST
+pulling out headings and subsequent text, adding them as key-value pairs to a Map object.
+Return the Map as an array.
+
+Note that the 'gatsby-plugin-local-search' plugin expects its normalizer function to return a flat array.
+Since this function returns an array which is in turned mapped, the overall result needs to be flattened.
+*/
+
 function pagePath(lang, part, letter) {
   if (!isEmpty(navigation[lang][part]) && letter) {
     return snakeCase(navigation[lang][part][letter]);
@@ -69,10 +78,7 @@ async function transformMarkdown({ lang, part, letter }, id, node) {
     .use(stringify)
     .process(node);
 
-  // returns an UN-FLATTENED array
   return Array.from(content).map(([key, value]) =>
-    // however, 'gatsby-plugin-local-search' requires a flat array
-    // process it after all promises resolve in the normalizer function
     ({
       id: key,
       part,
