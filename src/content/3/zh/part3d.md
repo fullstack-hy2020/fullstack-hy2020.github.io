@@ -391,7 +391,7 @@ Lint 对我们的代码有很多要说的:
 让我们先不要解决这些问题。
 
 <!-- A better alternative to executing the linter from the command line is to configure a  <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). -->
-从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个<i>eslint-plugin</i>，它可以连续运行lint程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](google  https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-ESLint)。
+从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个<i>eslint-plugin</i>，它可以连续运行lint程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)。
 
 <!-- The VS Code ESlint plugin will underline style violations with a red line: -->
 代码 ESlint 插件会用红线来强调风格的违反:
