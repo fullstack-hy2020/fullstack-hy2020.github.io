@@ -91,7 +91,7 @@ Validoinnin epäonnistuessa palautetaan validaattorin oletusarvoinen virheviesti
 
 ### Promisejen ketjutus
 
-Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla palautetuille olioille niiden metodia _toJSON_. Esimimerkiksi uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttamalle oliolle:
+Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla palautetuille olioille niiden metodia _toJSON_. Esimerkiksi uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttamalle oliolle:
 
 ```js
 app.post('/api/notes', (request, response, next) => {
