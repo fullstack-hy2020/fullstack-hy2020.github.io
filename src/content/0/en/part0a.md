@@ -35,7 +35,7 @@ Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good eno
 
 You are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part.
 
-The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 15 February 2021. 
+The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2021. 
 
 After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding! 
 
