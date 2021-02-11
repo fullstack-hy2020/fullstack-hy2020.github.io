@@ -484,7 +484,7 @@ const NoteForm = ({ createNote }) => {
   }
 
   return (
-    <div className="formDiv"> // highlight-line
+    <div className="formDiv">
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
