@@ -39,7 +39,7 @@ The speed of completing the course is quite flexible, and exercises can be submi
 
 After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding! 
 
-However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2020. 
+However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2021. 
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
