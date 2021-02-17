@@ -387,9 +387,11 @@ La depuración de la vieja escuela basada en impresión siempre es una buena ide
 
 ```js
 const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
-    {text}
-  </button>
+  return (
+    <button onClick={onClick}>
+      {text}
+    </button>
+  )
 )
 ```
 
