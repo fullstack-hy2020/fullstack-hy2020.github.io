@@ -849,7 +849,7 @@ React.useEffect(() => {
 ````
 
  <!--**A word of warning!** Passing the type parameter for axios will not validate any data and is quite dangerous especially if you are using external APIs. You can create custom validation functions taking in the whole payload and returning the correct type or you can use type guard. Both are valid. There are also many libraries that provide validation through different kind of schemas eg. [io-ts](https://github.com/gcanti/io-ts). For simplicity we will continue trusting our own work and trust that we will get data of the correct form from the backend.-->
-**警告一句！ **为 axios 传递类型参数不会验证任何数据，并且非常危险，尤其是在使用外部 api 时。 您可以创建自定义验证函数，包含整个有效负载并返回正确的类型，或者您可以使用类型保护。 两者都是有效的。 还有许多库通过不同的模式提供验证，例如， [io-ts](https://github.com/gcanti/io-ts)，为了简单起见，我们将继续相信我们自己的工作，并相信我们将从后端获得正确形式的数据。
+**警告一句！ **为 axios 传递类型参数不会验证任何数据，并且非常危险，尤其是在使用外部 api 时。 您可以创建自定义验证函数，包含整个有效负载并返回正确的类型，或者您可以使用类型保护。 两者都是有效的。 还有许多库通过不同的模式提供验证，例如， [io-ts](https://gcanti.github.io/io-ts)，为了简单起见，我们将继续相信我们自己的工作，并相信我们将从后端获得正确形式的数据。
 
 <!-- As our app is quite small we will update the state by simply calling the <i>dispatch</i> function provided to us by <i>useStateValue</i> hook. The compiler helps to make sure that we dispatch actions according to our <i>Action</i> type with predefined type string and payload: -->
 由于我们的应用非常小，我们将通过调用<i>useStateValue</i> hook 提供的<i>dispatch</i> 函数来更新状态。 编译器有助于确保我们根据预定义类型字符串和有效负载的<i>Action</i> 类型分派操作:
