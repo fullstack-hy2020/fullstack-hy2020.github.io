@@ -904,4 +904,5 @@ Selaimella tarkastellen yksittäisen numerotiedon tulisi näyttää seuraavalta:
 
 ![](../../images/3/49.png)
 
+<i>HUOM: Mikäli yrität laittaa sovelluksen herokuun, niin Herokulla ei ole vielä tässä vaiheessa pääsyä tietokantaan, koska .env tiedosto on sisällytetty .gitignoreen. Seuraava osio kertoo, kuinka myös Mongo saadaan toimimaan Herokussa olevassa sovelluksessa.</i>
 </div>
