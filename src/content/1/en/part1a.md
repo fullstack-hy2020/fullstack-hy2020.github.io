@@ -20,6 +20,18 @@ $ cd part1
 
 Every command, here and in the future, starting with the character <em>$</em> is typed into a terminal prompt, aka the command-line. The character <em>$</em> is not to be typed out because it represents the prompt.
 
+Since, `npx create-react-app my-app-name` is a little tedious to write in terminal everytime you need to create a react app, you can alias `npx create-react-app` to `cra` in your `~/.bashrc` file with below command. Windows users need to use `git-bash` terminal for this(generally installed with `git`).
+
+```bash
+$ echo "alias cra='npx create-react-app'" >> ~/.bashrc && source ~/.bashrc
+```
+
+Now, creating the creating react app reduces to 
+
+```bash
+$ cra my-app-name
+```
+
 The application is run as follows
 
 ```bash
