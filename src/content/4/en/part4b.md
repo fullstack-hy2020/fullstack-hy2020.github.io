@@ -766,6 +766,8 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
+(Note: At this point I noticed that mongoose is not validating required fields when using the put method, I'm allowed to update a note with not content, and the property is set to null.)
+
 You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
 
 ### Eliminating the try-catch
