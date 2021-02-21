@@ -1382,12 +1382,17 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 
 #### 9.12: Patientor backend, step5
 
-Create a POST-endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend.
+Create a POST-endpoint `/api/patients` for adding patients. Ensure that you can add patients also from the frontend. You can create unique ids of type `string` using the [uuid](https://github.com/uuidjs/uuid) library:
+
+```js
+import {v1 as uuid} from 'uuid'
+const id = uuid()
+```
 
 #### 9.13: Patientor backend, step6
 
-Set up safe parsing, validation and type guards to the POST <i>/api/patients</i> request.
+Set-up safe parsing, validation and type guards to the POST `/api/patients` request.
 
-Refactor the <i>Gender</i> field to use an [enum](http://www.typescriptlang.org/docs/handbook/enums.html) type.
+Refactor the `"gender"` field to use an [enum type](http://www.typescriptlang.org/docs/handbook/enums.html).
 
 </div>
