@@ -1061,7 +1061,7 @@ The <i>useDispatch</i> hook provides any React component access to the dispatch 
 This allows all components to make changes to the state of the redux store.
 
 
-The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector) hoo, from the react-redux library.
+The component can access the notes stored in the store with the [useSelector](https://react-redux.js.org/api/hooks#useselector) hook, from the react-redux library.
 
 
 ```js
@@ -1074,7 +1074,7 @@ const App = () => {
 }
 ```
 
-<i>useSelector</i> receives a function as a parameter. The function, in turn, receives the current state as a parameter and it should return a selection of the state it wants to expose to the componet.
+<i>useSelector</i> receives a function as a parameter. The function, in turn, receives the current state as a parameter and it should return a selection of the state it wants to expose to the component.
 Here we need all of the notes, so our selector function returns the whole state:
 
 
