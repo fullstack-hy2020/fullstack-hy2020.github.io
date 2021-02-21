@@ -26,10 +26,11 @@ Since, `npx create-react-app my-app-name` is a little tedious to write in termin
 $ echo "alias cra='npx create-react-app'" >> ~/.bashrc && source ~/.bashrc
 ```
 
-Now, creating the creating react app reduces to 
+Now, creating a react app reduces to below command
 
 ```bash
 $ cra my-app-name
+$ cd my-app-name
 ```
 
 The application is run as follows
