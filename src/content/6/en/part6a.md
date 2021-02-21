@@ -736,7 +736,7 @@ Let's add the functionality for adding new notes and changing their importance:
 
 ```js
 const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
+  Math.floor(Math.random() * 1000000)
 
 const App = () => {
   const addNote = (event) => {
