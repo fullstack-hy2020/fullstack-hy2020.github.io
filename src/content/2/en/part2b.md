@@ -460,7 +460,7 @@ Note the use of the React developer tools extension in the picture above!
 **NB:**
 
 
-- you can use the person's name as value of the <i>key</i> property
+- you can use the person's name as the value of the <i>key</i> property
 - remember to prevent the default action of submitting HTML forms!
 
 <h4>2.7: The Phonebook Step2</h4>
