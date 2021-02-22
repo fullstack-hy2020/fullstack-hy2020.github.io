@@ -142,60 +142,52 @@ We know that the <i>name</i> should be a string, and we use the [prop-types](htt
 
 
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
-With TypeScript we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript by using the _FunctionComponent_ type or its 
-alias _FC_.
+With TypeScript we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as react components are nothing but merely functions. We will use an interface for the parameters types (i.e., props) and `JSX.Element` as return type for any react component.
 
  <!-- When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type. -->
-When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. 
-We add a type for the component variable instead of the function and its props. 
-_React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type. We can pass it a type as an argument, which then uses as its type. 
 
-The type declarations for _React.FC_ and _React.FunctionComponent_ look like the following:
+<!-- Firstly, you can see that _FC_ is simply an alias for the _FunctionComponent_ interface. They are both generic, which can easily be recognized by the angle bracket _<>_ after the type name. Inside the angle brackets there is <i>P = {}</i>. That means, that you can pass a type as an argument and inside the new type the passed type will go by the name <i>P</i> that is an empty object <i>{}</i> by default. -->
 
-```js
-type FC<P = {}> = FunctionComponent<P>;
+<!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
 
-interface FunctionComponent<P = {}> {
-  (props: PropsWithChildren<P>, context?: any): ReactElement | null;
-  propTypes?: WeakValidationMap<P>;
-  contextTypes?: ValidationMap<any>;
-  defaultProps?: Partial<P>;
-  displayName?: string;
+<!-- Well, that was complicated (or was it?). Basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>. -->
+
+For exampple:
+
+```jsx
+const MyComp1 = () => {
+  // Typescript automatically infers the return type of this function (i.e., a react component) as `JSX.Element`.
+  return <div>Typescript has auto inference!</div>
+}
+
+const MyComp2 = (): JSX.Element => {
+  // We are explicityle defining the return type of a function here (i.e., a react component).
+  return <div>Typescript React is easy.</div>
+}
+
+interface MyProps{
+  lable: string;
+  price?: number;
+}
+const MyComp3 = ({lable, price}: MyProps): JSX.Element => {
+  // We are explicityle defining the parameter types using interface `MyProps` and return types as `JSX.Element` in this function (i.e., a react component).
+  return <div>Typescript is great.</div>
+}
+
+const MyComp4 = ({lable, price}: {lable: string, price: number}) => {
+  // We are explicityle defining the parameter types using an inline interface and typescript automatically infers the return type as JSX.Element of the function (i.e., a react component).
+  return <div>There is nothing like typescript.</div>
 }
 ```
 
-<!-- Firstly, you can see that _FC_ is simply an alias for the _FunctionComponent_ interface. They are both generic, which can easily be recognized by the angle bracket _<>_ after the type name. Inside the angle brackets there is <i>P = {}</i>. That means, that you can pass a type as an argument and inside the new type the passed type will go by the name <i>P</i> that is an empty object <i>{}</i> by default. -->
-Firstly, you can see that _FC_ is simply an alias for the _FunctionComponent_ interface.
-They are both generic, which can easily be recognized by the angle bracket _<>_ after the type name.
-Inside the angle brackets we have <i>P = {}</i>. That means you can pass a type as an argument. The received type will go by the name <i>P</i>, and it is an empty object <i>{}</i> by default.
-
-Now let's take a look at the first line inside _FunctionComponent_:
-
-```js
-(props: PropsWithChildren<P>, context?: any): ReactElement | null;
-```
-
-<!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
-Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed.
-The type <i>PropsWithChildren</i> in turn is a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
-
-```js
-type PropsWithChildren<P> = P | { children?: ReactNode };
-```
-
-<!-- Well, that was complicated (or was it?). Basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>. -->
-Well, that was complicated (or was it?).
-All we need to know at the moment
-is, that we can define a type and pass it to _FunctionComponent_, and the component's <i>props</i> then consist of the defined type and the component's <i>children</i>.
-
-Now, lets return to our code example and see how we would define the type for the <i>Welcome</i> component's props in TypeScript.
+Now, lets return to our code example and see how we would define the type for the <i>Welcome</i> component in TypeScript.
 
 ```jsx
 interface WelcomeProps {
   name: string;
 }
 
-const Welcome: React.FC<WelcomeProps> = (props) => {
+const Welcome = (props: WelcomeProps) => {
   return <h1>Hello, {props.name}</h1>;
 };
 
@@ -204,16 +196,12 @@ ReactDOM.render(element, document.getElementById("root"));
 ```
 
 <!-- We defined a new type _WelcomeProps_ and passed it to the added typing for the <i>Welcome</i> component: -->
-We defined a new type _WelcomeProps_ and passed to the <i>Welcome</i> component in its type declaration: 
-
-```js
-const Welcome: React.FC<WelcomeProps>;
-```
+We defined a new type _WelcomeProps_ and passed to the function's parameter types.
 
 You could write the same thing using a less verbose syntax:
 
 ```jsx
-const Welcome: React.FC<{ name: string }> = ({ name }) => (
+const Welcome = ({ name }: { name: string }) => (
   <h1>Hello, {name}</h1>
 );
 ```
