@@ -198,6 +198,10 @@ ReactDOM.render(element, document.getElementById("root"));
 <!-- We defined a new type _WelcomeProps_ and passed it to the added typing for the <i>Welcome</i> component: -->
 We defined a new type _WelcomeProps_ and passed to the function's parameter types.
 
+```jsx
+const Welcome = (props: WelcomeProps) => {
+```
+
 You could write the same thing using a less verbose syntax:
 
 ```jsx
