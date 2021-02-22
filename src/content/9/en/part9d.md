@@ -152,7 +152,7 @@ With TypeScript we don't need the <i>prop-types</i> package anymore. We can defi
 
 <!-- Well, that was complicated (or was it?). Basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>. -->
 
-For exampple:
+For example:
 
 ```jsx
 const MyComp1 = () => {
