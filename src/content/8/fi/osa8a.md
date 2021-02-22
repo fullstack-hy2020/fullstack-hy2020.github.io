@@ -111,7 +111,7 @@ Skeema määrittelee kaksi [tyyppiä](https://graphql.org/learn/schema/#type-sys
 
 Toinen skeeman määrittelemistä tyypeistä on [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Käytännössä jokaisessa GraphQL-skeemassa määritellään tyyppi Query, joka kertoo mitä kyselyjä API:iin voidaan tehdä. 
 
-Puhelinluettelo määrittelee kolme erilaista kyselyä ja _personCount_ palauttaa kokonaisluvun. _allPersons_ palauttaa listan <i>Person</i>-tyyppisiä olioita. <i>findPerson</i> saa merkkijonomuotoisen parametrin ja palauttaa <i>Person</i>-olion. 
+Puhelinluettelo määrittelee kolme erilaista kyselyä. Näistä ensimmäinen, eli _personCount_ palauttaa kokonaisluvu, _allPersons_ palauttaa listan <i>Person</i>-tyyppisiä olioita. Kysely <i>findPerson</i> saa merkkijonomuotoisen parametrin ja palauttaa <i>Person</i>-olion. 
 
 Queryjen paluuarvon ja parametrin määrittelyssä on jälleen käytetty välillä huutomerkkiä merkkaamaan <i>pakollisuutta</i>, eli _personCount_ palauttaa varmasti kokonaisluvun. Kyselylle _findPerson_ on pakko antaa parametriksi merkkijono. Kysely palauttaa <i>Person</i>-olion tai arvon <i>null</i>. _allPersons_ palauttaa listan <i>Person</i>-olioita, listalla ei ole <i>null</i>-arvoja. 
 
@@ -216,7 +216,7 @@ Kyselyn paluuarvoa ei oltu merkitty pakolliseksi, eli jos etsitään tuntematont
 
 ```js
 query {
-  findPerson(name: "Donald Trump") {
+  findPerson(name: "Joe Biden") {
     phone 
   }
 }
@@ -585,7 +585,7 @@ const resolvers = {
 
 Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolverifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
 
 ### Mutaatio
 
@@ -723,7 +723,7 @@ Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError
 
 ![](../../images/8/6.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
 
 ### Enum
 
@@ -830,7 +830,7 @@ Mutation: {
 
 Mutaatio siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Lisää kyselyistä
 
@@ -913,7 +913,7 @@ Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritet
 
 ### Tehtävät 8.1.-8.7.
 
-Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohdaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
+Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohdaksi [tämä tiedosto](https://github.com/fullstack-hy/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
 Huomaa, että koodin käynnistäminen aiheuttaa alussa virheen, sillä skeeman määrittely on puutteellinen.
 

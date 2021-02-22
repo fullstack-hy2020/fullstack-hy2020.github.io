@@ -112,7 +112,7 @@ Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo kompon
 
 Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), sillä joissain kyselyissä välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi.
 
-Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla
+Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla
 [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient):
 
 ```js
@@ -224,7 +224,7 @@ const PersonForm = ({ setError }) => {
 
 Lähestymistapa on kohtuullisen toimiva, ikävänä puolena on toki se, että päivityksen yhteydessä suoritetaan aina myös kysely. 
 
-Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-2)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
+Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/api/react/hooks/#options-2)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
 
 
 ```js 
@@ -255,7 +255,7 @@ const PersonForm = ({ setError }) => {
 
 Callback-funktio saa parametriksi viitteen välimuistiin sekä mutaation mukana palautetun datan, eli esimerkkimme tapauksessa lisätyn käyttäjän.
 
-Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön.
+Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön.
 
 On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
 

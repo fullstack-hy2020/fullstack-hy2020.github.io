@@ -202,7 +202,7 @@ Mutation: {
 }
 ```
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
+The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 
 ### User and log in
@@ -451,8 +451,22 @@ it is received straight in the parameter definition of the function:
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
+The following query now returns the user's friendlist
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
+```js
+query {
+  me {
+    username
+    friends{
+      name
+      phone
+    }
+  }
+}
+```
+
+
+The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
 
 
 </div>
@@ -464,7 +478,7 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 #### 8.13: Database, part 1
 
 
-Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
+Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
 
 
 Let's change the book graphql schema a little

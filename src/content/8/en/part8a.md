@@ -235,7 +235,7 @@ The return value was marked as nullable, so if we search for the details of an u
 
 ```js
 query {
-  findPerson(name: "Donald Trump") {
+  findPerson(name: "Joe Biden") {
     phone 
   }
 }
