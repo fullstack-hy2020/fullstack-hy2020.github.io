@@ -177,7 +177,7 @@ Now let's take a look at the first line inside _FunctionComponent_:
 
 <!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
 Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed.
-The type <i>PropsWithChildren</i> in turn is an [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
+The type <i>PropsWithChildren</i> in turn is a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
 
 ```js
 type PropsWithChildren<P> = P | { children?: ReactNode };
@@ -983,7 +983,7 @@ const { id } = useParams<{ id: string }>();
 #### 9.18: patientor, step3
 
 <!-- We are currently creating the <i>action</i> objects everywhere in the code  dispatching the action, e.g. component <i>App</i> has the following: -->
-Currently we create the <i>action</i> objects wherever we dispatch the actions, e.g. component <i>App</i> has the following:
+Currently we create <i>action</i> objects wherever we dispatch actions, e.g. the <i>App</i> component has the following:
 
 ```js
 dispatch({
@@ -991,9 +991,9 @@ dispatch({
 });
 ```
 
-Refactor the code to use [action creator](/en/part6/flux_architecture_and_redux#action-creators) functions that are all defined in the file <i>reducer.tsx</i>. 
+Define [action creator functions](/en/part6/flux_architecture_and_redux#action-creators) in the file `src/state/reducer.tsx` and refactor the code to use them.
 
-For example the <i>App</i> changes like this
+For example the <i>App</i> should become like the following:
 
 ```js
 import { useStateValue, setPatientList } from "./state";

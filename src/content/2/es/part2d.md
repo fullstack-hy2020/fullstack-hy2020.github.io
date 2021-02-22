@@ -626,6 +626,14 @@ const getAll = () => {
   }
   return request.then(response => response.data.concat(nonExisting))
 }
+
+useEffect(() => {
+  noteService
+    .getAll()
+    .then(response => {
+      setNotes(response)  // highlight-line
+    })
+}, [])
 ```
 
 Cuando intentamos cambiar la importancia de la nota codificada, vemos el siguiente mensaje de error en la consola. El error dice que el servidor backend respondió a nuestra solicitud HTTP PUT con un código de estado 404 <i>no encontrado (not found)</i>.

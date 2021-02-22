@@ -600,6 +600,14 @@ const getAll = () => {
   }
   return request.then(response => response.data.concat(nonExisting))
 }
+
+useEffect(() => {
+  noteService
+    .getAll()
+    .then(response => {
+      setNotes(response)  // highlight-line
+    })
+}, [])
 ```
 
 Kun valemuistiinpanon tärkeyttä yritetään muuttaa, konsoliin tulee virheilmoitus, joka kertoo palvelimen vastanneen urliin <i>/notes/10000</i> tehtyyn HTTP PUT -pyyntöön statuskoodilla 404 <i>not found</i>:

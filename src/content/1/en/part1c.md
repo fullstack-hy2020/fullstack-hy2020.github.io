@@ -297,7 +297,7 @@ setTimeout(
 )
 ```
 
-The function passed as the first parameter to the _setTimeout_ function is invoked one second after calling the _setTimeout_ function
+The function passed as the first parameter to the _setTimeout_ function is invoked one second after calling the _setTimeout_ function:
 
 ```js
 () => setCounter(counter + 1)
@@ -360,7 +360,7 @@ Let's change the application so that increasing the counter happens when a user 
 
 Button elements support so-called [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), of which [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) is the most common event.
 
-In React, registering an event handler function to the <i>click</i> event [happens](https://reactjs.org/docs/handling-events.html) like this:
+In React, you register an [event handler function](https://reactjs.org/docs/handling-events.html) to the <i>click</i> event like this:
 
 ```js
 const App = () => {

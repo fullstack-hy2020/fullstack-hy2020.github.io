@@ -511,7 +511,7 @@ The following things do <i>not</i> have to work just yet
 
 Complete the program so that all queries (except _allBooks_ with the parameter _author_ ) and mutations work. 
 
-You might find this [useful](https://docs.mongodb.com/manual/reference/operator/query/in/).
+You might find [this](https://docs.mongodb.com/manual/reference/operator/query/in/) useful.
 
 #### 8.15 Database, part 3
 
