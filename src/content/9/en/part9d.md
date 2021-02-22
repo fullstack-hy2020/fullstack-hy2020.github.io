@@ -239,7 +239,7 @@ This exercise is similar to the one you have already done in [Part 1](/en/part1/
 import React from "react";
 import ReactDOM from "react-dom";
 
-const App: React.FC = () => {
+const App = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
     {
@@ -776,7 +776,7 @@ The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference
 used to create the state and the dispatch-function, and pass them on to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
 
 ```js
-export const StateProvider: React.FC<StateProviderProps> = ({
+export const StateProvider = ({
   reducer,
   children
 }: StateProviderProps) => {
@@ -816,7 +816,7 @@ import { useStateValue } from "../state";
 
 // ...
 
-const PatientListPage: React.FC = () => {
+const PatientListPage = () => {
   const [{ patients }, dispatch] = useStateValue();
   // ...
 }
@@ -840,7 +840,7 @@ When we list the patients, we only need to destructure the <i>patients</i> prope
 ```js
 import { useStateValue } from "../state";
 
-const PatientListPage: React.FC = () => {
+const PatientListPage = () => {
   const [{ patients }, dispatch] = useStateValue();
   // ...
 }
@@ -1201,7 +1201,7 @@ object of type <i>PatientFormValues</i> as an argument, so that the callback can
 Looking at the <i>AddPatientForm</i> function component, you can see we have bound the <i>Props</i> as our component's props, and we destructure <i>onSubmit</i> and <i>onCancel</i> from those props.
 
 ```js
-export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
   // ...
 }
 ```
@@ -1247,7 +1247,7 @@ type SelectFieldProps = {
 The function component <i>SelectField</i> in itself is pretty straight forward. It renders the label, a select element, and all given option elements (or actually their labels and values).
 
 ```jsx
-export const SelectField: React.FC<SelectFieldProps> = ({
+export const SelectField = ({
   name,
   label,
   options
@@ -1277,7 +1277,7 @@ interface TextProps extends FieldProps {
   placeholder: string;
 }
 
-export const TextField: React.FC<TextProps> = ({ field, label, placeholder }) => (
+export const TextField = ({ field, label, placeholder }: TextProps) => (
   <Form.Field>
     <label>{label}</label>
     <Field placeholder={placeholder} {...field} />
@@ -1295,7 +1295,7 @@ The component does everything under the hood, and we don't need to specify what 
 It would also be possible to get hold of the error messages within the component by using the prop <i>form</i>: 
 
 ```jsx
-export const TextField: React.FC<TextProps> = ({ field, label, placeholder, form }) => {
+export const TextField = ({ field, label, placeholder, form }: TextProps) => {
   console.log(form.errors); 
   // ...
 }
@@ -1317,7 +1317,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
   return (
     <Formik
       initialValues={{
@@ -1491,7 +1491,7 @@ Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor
 It can be used as follows:
 
 ```js
-const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
   const [{ diagnoses }] = useStateValue() // highlight-line
 
   return (
