@@ -31,7 +31,7 @@ json-server requires all data to be sent in JSON format. What this means in prac
 Let's make the following changes to the event handler responsible for creating a new note:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -72,7 +72,7 @@ Since the data we sent in the POST request was a JavaScript object, axios automa
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
 
 ```js
-addNote = event => {
+const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
