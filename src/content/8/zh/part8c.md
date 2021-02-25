@@ -446,7 +446,7 @@ Mutation解析器:
 ```
 
 <!-- Note how the resolver <i>destructures</i> the logged in user from the context. So instead of saving _currentUser_ to a separate variable in a function -->
-注意解析器<i>是如何从上下文中删除</i> 登录用户的。 因此，不要将 currentUser 保存到函数中的一个单独的变量中
+注意解析器是如何从上下文中<i>通过解构得到</i> 登录用户的。 因此，不是将 currentUser 保存到函数中的一个单独的变量中
 
 ```js
 addAsFriend: async (root, args, context) => {
@@ -454,7 +454,7 @@ addAsFriend: async (root, args, context) => {
 ```
 
 <!-- it is received straight in the parameter definition of the function: -->
-它在函数的参数定义中被直接接收:
+而是在函数的参数定义中被直接接收:
 
 ```js
 addAsFriend: async (root, args, { currentUser }) => {
