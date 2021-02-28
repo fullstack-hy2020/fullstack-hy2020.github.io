@@ -558,6 +558,8 @@ The selected ordering principle state can be maintained for example using the Re
 
 You can use for example [react-native-picker](https://www.npmjs.com/package/react-native-picker-select) library, or [React Native Paper](https://callstack.github.io/react-native-paper/) library's [Menu](https://callstack.github.io/react-native-paper/menu.html) component to implement the ordering principle's selection. You can use the <em>FlatList</em> component's [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop to provide the list with a header containing the selection component.
 
+**Note:** If you use [react-native-picker](https://www.npmjs.com/package/react-native-picker-select) there is a chance that you can get an error like `"RNCAndroidDialogPicker" was not found in the UIManager`. In such case, you can set the version to `"react-native-picker-select": "^7.0.0"` in your `package.json`. Then delete the `node_modules` folder and install again the dependencies with `npm install`. More info [here](https://github.com/react-native-picker/picker/issues/136#issuecomment-693013536).
+
 The final version of the feature, depending on the selection component in use, should look something like this:
 
 ![Application preview](../../images/10/17.jpg)
