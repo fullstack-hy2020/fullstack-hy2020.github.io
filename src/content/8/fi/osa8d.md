@@ -137,7 +137,7 @@ const App = () => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
+Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### Tokenin lisääminen headeriin
 
@@ -203,7 +203,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
+Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
 
 ### Välimuistin päivitys revisited
 
@@ -266,7 +266,7 @@ Välimuistin kanssa kannattaa olla tarkkana. Välimuistissa oleva epäajantasain
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Katso lisää [täältä](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
+Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
 
 </div>
 
@@ -298,19 +298,19 @@ Kun käyttäjä on kirjautuneena, muutetaan navigaatio näyttämään ne toiminn
 
 ![](../../images/8/28.png)
 
-#### 8.19 genren kirjat, osa 1
+#### 8.19 Genren kirjat
 
 Laajenna sovellustasi siten, että kirjojen näkymästä voidaan rajata näytettävä kirjalista ainoastaan niihin, jotka kuuluvat valittuun genreen. Toteutuksesi voi näyttää seuraavalta:
 
 ![](../../images/8/30.png)
 
-#### 8.20 genren kirjat
+#### 8.20 Lempigenren kirjat
 
 Tee sovellukseen näkymä, joka näyttää kirjautuneelle käyttäjälle käyttäjän lempigenreen kuuluvat kirjat.
 
 ![](../../images/8/29.png)
 
-#### 8.21 genren kirjat GraphQL:llä
+#### 8.21 Genren kirjat GraphQL:llä
 
 Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat näytettävät kirjat tehtävässä 8.5 palvelimelle toteutetun suoran GraphQL-kyselyn avulla. 
 
@@ -318,11 +318,11 @@ Tämä **tehtävä on haastava** ja niin kurssin tässä vaiheessa jo kuuluukin 
 
 - Hookin <i>useQuery</i> käytön sijaan saattaa olla parempi tehdä kyselyitä <i>useLazyQuery</i>-hookin avulla
 - GraphQL-kyselyjen tuloksia kannattaa joskus tallentaa komponentin tilaan
-- Huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa (itse en tämän vuotisessa ratkaisussani tosin tehnyt kyselyjä useEffectissä)
+- Huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa (muunkinlaiset ratkaisut ovat mahdollisia...)
 - <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta
 
-#### 8.22 kirjasuositukset, välimuistin ajantasaisuus
+#### 8.22 Välimuistin ajantasaisuus
 
-Jos haet kirjasuositukset GraphQL:llä, varmista jollain tavalla se, että kirjojen näkymä säilyy ajantasaisena. Eli kun lisäät uuden kirjan, päivittyy se kirjalistalle **viimeistään** siinä vaiheessa kun painat jotain genrevalintanappia. Ilman uuden genrevalinnan tekemistä, ei näkymän ole pakko päivittyä. 
+Jos haet tietyn genren kirjat GraphQL:llä eli teit edellisen tehtävän, varmista jollain tavalla se, että kirjojen näkymä säilyy ajantasaisena. Eli kun lisäät uuden kirjan, päivittyy se kirjalistalle **viimeistään** siinä vaiheessa kun painat jotain genrevalintanappia. Ilman uuden genrevalinnan tekemistä, ei näkymän ole pakko päivittyä. 
 
 </div>

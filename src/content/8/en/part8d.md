@@ -144,7 +144,7 @@ const App = () => {
 }
 ```
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Adding a token to a header
 
@@ -210,7 +210,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
 
 ### Updating cache, revisited
 
@@ -274,7 +274,7 @@ Be diligent with the cache. Old data in cache can cause hard to find bugs. As we
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
 
 </div>
 
@@ -346,7 +346,7 @@ Some tips
 
 #### 8.22 Up to date cache and book recommendations
 
-If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
+If you did the previous exercise, that is fetch the books in a genre with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
 
 <i>When new genre selection is not done, the view does not have to be updated. </i>
 

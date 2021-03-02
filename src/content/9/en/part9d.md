@@ -13,17 +13,15 @@ Before we start delving into how you can use TypeScript with React, we should fi
 - Forgetting to pass a required prop to a component
 - Passing a prop of a wrong type to a component
 
-<!-- If we make any of these errors, TypeScript can help us catch the errors in our editor right away. If we didn't use TypeScript, we would have to catch these errors later during testing, and we might be forced to do some tedious debugging in order to find out what is causing our errors. -->
+
 If we make any of these errors, TypeScript can help us catch them in our editor right away. 
 If we didn't use TypeScript, we would have to catch these errors later during testing. 
 We might be forced to do some tedious debugging to find the cause of the errors. 
 
-<!-- But let that be enough of reasoning for now, and let's start getting our hands dirty! -->
 That's enough reasoning for now, let's start getting our hands dirty!
 
 ### Create React App with TypeScript
 
-<!-- [create-react-app](https://create-react-app.dev) supports a way to create an app using TypeScript by adding an additional <i>template</i> argument to the initialisation script. So, in order to create a Create React App using TypeScript, run the following command: -->
 We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding a 
 <i>template</i> argument to the initialisation script. So in order to create a TypeScript Create React App, run the following command:
 
@@ -31,11 +29,9 @@ We can use [create-react-app](https://create-react-app.dev) to create a TypeScri
 npx create-react-app my-app --template typescript
 ```
 
-<!-- After running the command, you should have a complete basic react app, that uses TypeScript. The app can be started by simply running <i>npm start</i> within the app root folder. -->
 After running the command, you should have a complete basic react app which uses TypeScript.
 You can start the app by running <i>npm start</i> in the application's root. 
 
-<!-- If you browse through the files and folders, you will notice that the app is not that different from the one you would have initialised with pure JavaScript. Basically the only differences are that the <i>.js</i> and <i>.jsx</i> files are now renamed to <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root folder also contains a<i>tsconfig.json</i> file. -->
 If you take a look at the files and folders, you'll notice that the app is not that different from 
 one using pure JavaScript. The only differences are, that the <i>.js</i> and <i>.jsx</i> files are now  <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.
 
@@ -175,7 +171,6 @@ Now let's take a look at the first line inside _FunctionComponent_:
 (props: PropsWithChildren<P>, context?: any): ReactElement | null;
 ```
 
-<!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
 Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed.
 The type <i>PropsWithChildren</i> in turn is a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>.
 
@@ -183,7 +178,6 @@ The type <i>PropsWithChildren</i> in turn is a [union type](https://www.typescri
 type PropsWithChildren<P> = P | { children?: ReactNode };
 ```
 
-<!-- Well, that was complicated (or was it?). Basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>. -->
 Well, that was complicated (or was it?).
 All we need to know at the moment
 is, that we can define a type and pass it to _FunctionComponent_, and the component's <i>props</i> then consist of the defined type and the component's <i>children</i>.
@@ -963,7 +957,7 @@ Fetch the data from the endpoint created in the previous exercise. After fetchin
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
-The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you since our main focus now is Typescript.
+The Application uses [Semantic UI React](https://react.semantic-ui.com/) for styling, which is quite similar to [React Bootstrap](https://react-bootstrap.github.io/) and [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you since our main focus now is TypeScript.
 
 The Application also uses [react router](https://reacttraining.com/react-router/web/guides/quick-start) 
 to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.

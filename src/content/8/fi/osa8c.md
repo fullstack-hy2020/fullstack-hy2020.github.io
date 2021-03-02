@@ -448,6 +448,8 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 ### Tehtävät 8.13.-8.16.
 
+Tämän luvun tehtävät todennäköisesti hajottavat frontendin koodin. Tässä luvussa riittääkin keskittyä backendiin. Frontend korjataan ja sitä laajennetaan seuraavan luvun tehtävissä.
+
 #### 8.13: Tietokanta, osa 1
 
 Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).

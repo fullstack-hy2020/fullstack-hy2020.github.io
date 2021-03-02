@@ -475,8 +475,8 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 
 ### Exercises 8.13.-8.16.
 
+The following exercises are guite likely breaking your frontend. Do not worry it yet, the fronend shall be fixed and expanded in next chapter. 
 #### 8.13: Database, part 1
-
 
 Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
 
@@ -493,12 +493,9 @@ type Book {
 }
 ```  
 
-
 so that instead of just the author's name, the book object contains all the details of the author. 
 
-
 You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors. 
-
 
 The following things do <i>not</i> have to work just yet
 
@@ -515,12 +512,9 @@ You might find [this](https://docs.mongodb.com/manual/reference/operator/query/i
 
 #### 8.15 Database, part 3
 
-
 Complete the program so that database validation errors (e.g. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
 
-
 #### 8.16 user and logging in
-
 
 Add user management to your application. Expand the schema like so:
 
@@ -556,7 +550,6 @@ type Mutation {
 
 Create resolvers for query _me_ and the new mutations _createUser_ and 
 _login_. Like in the course material, you can assume all users have the same hardcoded password. 
-
 
 Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 
 
