@@ -818,11 +818,12 @@ We will configure eslint to [disallow explicit any]( https://github.com/typescri
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-explicit-any": 2
+    "@typescript-eslint/no-explicit-any": 2 // highlight-line
   }
 }
 ```
 
+(Newer versions of eslint has this rule on by default, so you don't necessarily need to add it separately.)
 
 Let us also set up a <i>lint</i> npm script to inspect the files with <i>.ts</i> extension by modifying the <i>package.json</i> file: 
 
@@ -865,10 +866,15 @@ So we will use the following <i>.eslintrc</i>
   },
   "rules": {
     "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/no-explicit-any": 2,
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "no-case-declarations": 0
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "no-case-declarations": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
