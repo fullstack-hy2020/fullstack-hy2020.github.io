@@ -364,7 +364,7 @@ app.listen(PORT, () => {
 
 And now if we make a HTTP GET request to http://localhost:3000/api/diaries we should see the message <i>Fetching all diaries!</i>.
 
-Next we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
+Next we need to start serving the seed data (found [here](https://github.com/fullstack-hy/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
 
 We won't be writing the code for the actual data manipulations on the router. We will create a <i>service</i> which takes care of the data manipulation instead.
 It is quite common practice to separate the "business logic" from the router code into its own modules, which are quite often called <i>services</i>.
@@ -769,7 +769,7 @@ The response is what we expect it to be
 
 ### Exercises 9.10.-9.11.
 
-Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
+Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.10: Patientor backend, step3
 
@@ -1329,6 +1329,8 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 
 ![](../../images/9/30b.png)
 
+The source code of the application can be found on [GitHub](https://github.com/FullStack-HY/flight-diary).
+
 </div>
 
 <div class="tasks">
@@ -1337,7 +1339,7 @@ If we now try to create a new diary entry with invalid or missing fields we are 
 
 #### 9.12: Patientor backend, step5
 
-Create a POST-endpoint `/api/patients` for adding patients. Ensure that you can add patients also from the frontend. You can create unique ids of type `string` using the [uuid](https://github.com/uuidjs/uuid) library:
+Create a POST-endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend. You can create unique ids of type <i>string</i> using the [uuid](https://github.com/uuidjs/uuid) library:
 
 ```js
 import {v1 as uuid} from 'uuid'
@@ -1346,8 +1348,8 @@ const id = uuid()
 
 #### 9.13: Patientor backend, step6
 
-Set-up safe parsing, validation and type guards to the POST `/api/patients` request.
+Set-up safe parsing, validation and type guards to the POST `<i>/api/patients</i> request.
 
-Refactor the `"gender"` field to use an [enum type](http://www.typescriptlang.org/docs/handbook/enums.html).
+Refactor the <i>gender</i> field to use an [enum type](http://www.typescriptlang.org/docs/handbook/enums.html).
 
 </div>
