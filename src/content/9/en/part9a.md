@@ -94,10 +94,8 @@ func((result) => {
 First we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) called <i>CallsFunction</i>.
 CallsFunction is a function type with one parameter <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameter and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value.  As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type.
 
-<!-- After that, the function <i>func</i> of the type <i>CallsFunction</i> is defined. In <i>func</i> it can be inferred that the parameter will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, and that causes an error in TypeScript. -->
 Next we define the function <i>func</i> of  type <i>CallsFunction</i>. From the function's type we can infer that its parameter function cb will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, which will cause an error in TypeScript. 
 
-<!-- The last thing is that we call <i>func</i> by giving it the following function as parameter  -->
 Lastly we call <i>func</i> giving it the following function as a parameter
 
 ```js
