@@ -65,7 +65,7 @@ We configure eslint in <i>.eslintrc</i> with following settings:
     }
   },
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0
+    "@typescript-eslint/explicit-function-return-type": "off"
   }
 }
 ```

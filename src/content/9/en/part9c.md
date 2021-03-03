@@ -136,16 +136,21 @@ We also create an <i>.eslintrc</i> file with the following content:
   "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
   "rules": {
     "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unused-vars": [
-        "error", { "argsIgnorePattern": "^_" }
+      "error",
+      { "argsIgnorePattern": "^_" }
     ],
-     "@typescript-eslint/no-explicit-any": 1,
-    "no-case-declarations": 0
+    "no-case-declarations": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -1097,6 +1102,10 @@ In general this is a good rule, and undesired just in this particular file. We c
 /* eslint-disable @typescript-eslint/no-explicit-any */
 ```
 
+TypeScript version 3 also introduced a new kind of top type [<i>unknown</i>](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type). </i>unknown</i> is the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type.
+
+<i>unknown</i> is the ideal type for input to type guards, since we don't yet need to define the type to match <i>any</i> type, but can first verify the type and then confirm the expected type. With the use of <i>unknown</i> we also don't need to worry about the <i>@typescript-eslint/no-explicit-any</i> eslint rule, since we are not using <i>any</i>. However, we might still need to use <i>any</i> in some cases where we are not yet sure about the type and need to access properties of an <i>any</i> object in order to validate or type check the property values themselves.
+
 Let us start creating the parsers for each of the fields of <i>object</i>.
 
 
@@ -1106,7 +1115,7 @@ To validate the <i>comment</i> field we need to check that it exists, and to ens
 The function should look something like this:
 
 ```js
-const parseComment = (comment: any): string => {
+const parseComment = (comment: unknown): string => {
   if (!comment || !isString(comment)) {
     throw new Error('Incorrect or missing comment: ' + comment);
   }
@@ -1120,7 +1129,7 @@ The function gets a parameter of type <i>any</i> and returns it as type <i>strin
 The string validation function looks like this
 
 ```js
-const isString = (text: any): text is string => {
+const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String;
 };
 ```
@@ -1147,7 +1156,7 @@ But after the call, if the code proceeds past the exception (that is the type gu
 Why do we have two conditions in the string type guard?
 
 ```js
-const isString = (text: any): text is string => {
+const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String; // highlight-line
 }
 ```
@@ -1155,7 +1164,7 @@ const isString = (text: any): text is string => {
 would it not be enough to write the guard like this
 
 ```js
-const isString = (text: any): text is string => {
+const isString = (text: unknown): text is string => {
   return typeof text === 'string';
 }
 ```
@@ -1191,7 +1200,7 @@ const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
 };
 
-const parseDate = (date: any): string => {
+const parseDate = (date: unknown): string => {
   if (!date || !isString(date) || !isDate(date)) {
       throw new Error('Incorrect or missing date: ' + date);
   }
@@ -1208,7 +1217,7 @@ Finally we are ready to move on to the last two types, Weather and Visibility.
 We would like the validation and parsing to work as follows:
 
 ```js
-const parseWeather = (weather: any): Weather => {
+const parseWeather = (weather: unknown): Weather => {
   if (!weather || !isString(weather) || !isWeather(weather)) {
       throw new Error('Incorrect or missing weather: ' + weather)
   }
@@ -1249,7 +1258,7 @@ export enum Weather {
 Now we can check that a string is one of the accepted values, and the type guard can be written like this:
 
 ```js
-const isWeather = (param: any): param is Weather => {
+const isWeather = (param: unknown): param is Weather => {
   return Object.values(Weather).includes(param);
 };
 ```
@@ -1260,7 +1269,7 @@ One thing to notice here is that we have changed the parameter type to <i>any</i
 The function <i>parseWeather</i> can be simplified a bit
 
 ```js
-const parseWeather = (weather: any): Weather => {
+const parseWeather = (weather: unknown): Weather => {
   if (!weather || !isWeather(weather)) { // highlight-line
       throw new Error('Incorrect or missing weather: ' + weather);
   }
@@ -1323,11 +1332,11 @@ export enum Visibility {
 The type guard and the parser are below
 
 ```js
-const isVisibility = (param: any): param is Visibility => {
+const isVisibility = (param: unknown): param is Visibility => {
   return Object.values(Visibility).includes(param);
 };
 
-const parseVisibility = (visibility: any): Visibility => {
+const parseVisibility = (visibility: unknown): Visibility => {
   if (!visibility || !isVisibility(visibility)) {
       throw new Error('Incorrect or missing visibility: ' + visibility);
   }
@@ -1338,6 +1347,7 @@ const parseVisibility = (visibility: any): Visibility => {
 And finally we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data:
 
 ```js
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   return {
     date: parseDate(object.date),
@@ -1347,6 +1357,8 @@ const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   };
 };
 ```
+
+Note that in the function above we need to access the properties of <i>object</i> and thus cannot use the <i>unknown</i> type, but need to use the <i>any</i> type instead. Here it is okay to use any, since we are type checking each of the properties within <i>object</i>, but we need to disable the eslint rule to be able to do so.
 
 The first version of our flight diary application is now completed!
 
