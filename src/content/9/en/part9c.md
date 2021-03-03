@@ -135,16 +135,21 @@ We also create an <i>.eslintrc</i> file with the following content:
   "plugins": ["@typescript-eslint"],
   "env": {
     "browser": true,
-    "es6": true
+    "es6": true,
+    "node": true
   },
   "rules": {
     "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/no-unsafe-member-access": "off",
     "@typescript-eslint/no-unused-vars": [
-        "error", { "argsIgnorePattern": "^_" }
+      "error",
+      { "argsIgnorePattern": "^_" }
     ],
-     "@typescript-eslint/no-explicit-any": 1,
-    "no-case-declarations": 0
+    "no-case-declarations": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -1035,8 +1040,7 @@ export default toNewDiaryEntry;
 
 The function should parse each field and make sure that the return value is exactly of type <i>NewDiaryEntry</i>. This means we should check each field separately.
 
-Once again we have a type issue: what is the <i>object</i> type? Since the <i>object</i> is in fact the body of a request, Express has typed it as <i>any</i>.
-Since the idea of this function is to map fields of unknown type to fields of the correct type and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the <i>any</i> type</i>.
+Once again we have a type issue: what is the <i>object</i> type? Since the <i>object</i> is in fact the body of a request, Express has typed it as <i>any</i>. Since the idea of this function is to map fields of unknown type to fields of the correct type and check whether they are defined as expected, this might be the rare case where we actually <i>want to allow the <i>any</i> type</i>.
 
 However if we type the object as <i>any</i>, eslint gives us two complaints:
 
@@ -1058,7 +1062,10 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => { // highlight-line
 export default toNewDiaryEntry;
 ```
 
+[unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type)
+is a new kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type.
 
+<i>unknown</i> is the ideal type for our kind of situation of input validation, since we don't yet need to define the type to match <i>any</i> type, but can first verify the type and then confirm the expected type. With the use of <i>unknown</i> we also don't need to worry about the <i>@typescript-eslint/no-explicit-any</i> eslint rule, since we are not using <i>any</i>. However, we might still need to use <i>any</i> in some cases where we are not yet sure about the type and need to access properties of an <i>any</i> object in order to validate or type check the property values themselves.
 
 Let us start creating the parsers for each of the fields of <i>object</i>.
 
@@ -1099,16 +1106,16 @@ If the type guard function returns true, the TypeScript compiler knows that the 
 
 Before the type guard is called, the actual type of the variable <i>comment</i> is not known:
 
-![](../../images/9/28e.png)
+![](../../images/9/28e-21.png)
 
 But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that <i>comment</i> is of the type <i>string</i>:
 
-![](../../images/9/29e.png)
+![](../../images/9/29e-21.png)
 
 Why do we have two conditions in the string type guard?
 
 ```js
-const isString = (text: any): text is string => {
+const isString = (text: unknown): text is string => {
   return typeof text === 'string' || text instanceof String; // highlight-line
 }
 ```
@@ -1116,7 +1123,7 @@ const isString = (text: any): text is string => {
 would it not be enough to write the guard like this
 
 ```js
-const isString = (text: any): text is string => {
+const isString = (text: unknown): text is string => {
   return typeof text === 'string';
 }
 ```
@@ -1149,7 +1156,7 @@ const isDate = (date: string): boolean => {
   return Boolean(Date.parse(date));
 };
 
-const parseDate = (date: any): string => {
+const parseDate = (date: unknown): string => {
   if (!date || !isString(date) || !isDate(date)) {
       throw new Error('Incorrect or missing date: ' + date);
   }
@@ -1158,14 +1165,14 @@ const parseDate = (date: any): string => {
 ```
 
 The code is really nothing special. The only thing is, that we can't use a type guard here since a date in this case is only considered to be a <i>string</i>.
-Note, that even though the <i>parseDate</i> function accepts the <i>date</i> variable as any, after we check the type with <i>isString</i> its type is set as string, which is why we can give the variable to the <i>isDate</i> function requiring a string without any problems.
+Note, that even though the <i>parseDate</i> function accepts the <i>date</i> variable as unknown, after we check the type with <i>isString</i> its type is set as string, which is why we can give the variable to the <i>isDate</i> function requiring a string without any problems.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 
 We would like the validation and parsing to work as follows:
 
 ```js
-const parseWeather = (weather: any): Weather => {
+const parseWeather = (weather: unknown): Weather => {
   if (!weather || !isString(weather) || !isWeather(weather)) {
       throw new Error('Incorrect or missing weather: ' + weather)
   }
@@ -1202,6 +1209,7 @@ export enum Weather {
 Now we can check that a string is one of the accepted values, and the type guard can be written like this:
 
 ```js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isWeather = (param: any): param is Weather => {
   return Object.values(Weather).includes(param);
 };
@@ -1212,7 +1220,7 @@ One thing to notice here is that we have changed the parameter type to <i>any</i
 The function <i>parseWeather</i> can be simplified a bit
 
 ```js
-const parseWeather = (weather: any): Weather => {
+const parseWeather = (weather: unknown): Weather => {
   if (!weather || !isWeather(weather)) { // highlight-line
       throw new Error('Incorrect or missing weather: ' + weather);
   }
@@ -1244,12 +1252,12 @@ const data = [
 ]
 
 const diaryEntries: DiaryEntry [] = data.map(obj => {
-  const object = toNewDiaryEntry(obj) as DiaryEntry
-  object.id = obj.id
-  return object
-})
+  const object = toNewDiaryEntry(obj) as DiaryEntry;
+  object.id = obj.id;
+  return object;
+});
 
-export default diaryEntries
+export default diaryEntries;
 ```
 Note that since <i>toNewDiaryEntry</i> returns an object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
@@ -1270,11 +1278,12 @@ export enum Visibility {
 The type guard and the parser are below
 
 ```js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isVisibility = (param: any): param is Visibility => {
   return Object.values(Visibility).includes(param);
 };
 
-const parseVisibility = (visibility: any): Visibility => {
+const parseVisibility = (visibility: unknown): Visibility => {
   if (!visibility || !isVisibility(visibility)) {
       throw new Error('Incorrect or missing visibility: ' + visibility);
   }
@@ -1282,16 +1291,35 @@ const parseVisibility = (visibility: any): Visibility => {
 };
 ```
 
-And finally we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data:
+And finally we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data. There is however one more thing to take care of. If we try to access the fields of the parameter <i>object</i> as follows:
 
 ```js
 const toNewDiaryEntry = (object: any): NewDiaryEntry => {
-  return {
-    date: parseDate(object.date),
+  const newEntry: NewDiaryEntry = {
     comment: parseComment(object.comment),
+    date: parseDate(object.date),
     weather: parseWeather(object.weather),
     visibility: parseVisibility(object.visibility)
   };
+
+  return newEntry;
+};
+```
+
+we notice that the code does not compile. Thie is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. We can fix this by destructuring the fields to variables of the type unknown as follows:
+
+```js
+type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
+
+const toNewDiaryEntry = ({ comment, date, weather, visibility } : Fields): NewDiaryEntry => {
+  const newEntry: NewDiaryEntry = {
+    comment: parseComment(comment),
+    date: parseDate(date),
+    weather: parseWeather(weather),
+    visibility: parseVisibility(visibility)
+  };
+
+  return newEntry;
 };
 ```
 
