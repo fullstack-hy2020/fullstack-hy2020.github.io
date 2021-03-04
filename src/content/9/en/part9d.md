@@ -65,16 +65,15 @@ We configure eslint in <i>.eslintrc</i> with following settings:
     }
   },
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": "off"
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0
   }
 }
 ```
 
-<!-- Since basically all React components return a <i>JSX.Element</i> type or  <i>null</i>, we have loosen the default linting rules a bit by disabling the rule [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md), so that we don't need to explicitly write out function return types everywhere. -->
-Since the return type of basically all React components is <i>JSX.Element</i> or <i>null</i>, we have loosened the default linting rules up a bit by disabling the [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) rule. 
+Since the return type of basically all React components is <i>JSX.Element</i> or <i>null</i>, we have loosened the default linting rules up a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md) . 
 Now we don't need to explicitly state our function return types everywhere.
 
-<!-- Now we need to get our linting script to parse  <i>*.tsx </i> files as well, which are the TypeScript equivalent of react's JSX files. We can do that by altering our lint command in <i>.package.json</i> to the following: -->
 Next we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of react's JSX files. 
 We can do that by altering our lint command in <i>.package.json</i> to the following:
 
@@ -93,24 +92,6 @@ We can do that by altering our lint command in <i>.package.json</i> to the follo
 ```
 
 If you are using Windows, you may need to use double quotes for the linting path: `"lint": "eslint \"./src/**/*.{ts,tsx}\""`.
-
-<!-- If we now run <i>npm run lint</i>, we should still receive an error from eslint: -->
-Now if we run <i>npm run lint</i>, we still receive an error from eslint:
-
-![](../../images/9/31a.png)
-
-<!-- Why is that? As we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file. -->
-Why is that? As we can see from the error message, the <i>serviceWorker.ts</i> file 
-doesn't seem to be compliant with our linting configurations. 
-This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that.
-To fix the error we need to move the  <i>register</i> function to the bottom of the file.
-
-
-<!-- If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter, since we do not need the file <i>serviceWorker.ts</i> anyway, it is better to delete it altogether. -->
-Now if we run <i>npm run lint</i>, there should be no errors anymore. 
-Actually the error we got previously does not matter, since we do not need the <i>serviceWorker.ts</i> file anyway.
-It is better to delete it altogether.
-
 ### React components with TypeScript
 
 Let us consider the following JavaScript React example:
@@ -132,13 +113,11 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-<!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
-In the example we have a component called <i>Welcome</i> which we pass a <i>name</i> as a prop. It then renders the name to the screen.  
-We know that the <i>name</i> should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of component's props and warnings about invalid prop types. 
+In the example we have a component called <i>Welcome</i> which we pass a <i>name</i> as a prop. It then renders the name to the screen.  We know that the <i>name</i> should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of component's props and warnings about invalid prop types. 
 
 
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
-With TypeScript we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as react components are nothing but merely functions. We will use an interface for the parameters types (i.e., props) and `JSX.Element` as return type for any react component.
+With TypeScript we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as react components are nothing but merely functions. We will use an interface for the parameters types (i.e., props) and <i>JSX.Element</i> as return type for any react component.
 
  <!-- When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type. -->
 
@@ -152,12 +131,14 @@ For example:
 
 ```jsx
 const MyComp1 = () => {
-  // Typescript automatically infers the return type of this function (i.e., a react component) as `JSX.Element`.
+  // Typescript automatically infers the return type of this function 
+  // (i.e., a react component) as `JSX.Element`.
   return <div>Typescript has auto inference!</div>
 }
 
 const MyComp2 = (): JSX.Element => {
-  // We are explicityle defining the return type of a function here (i.e., a react component).
+  // We are explicityle defining the return type of a function here 
+  // (i.e., a react component).
   return <div>Typescript React is easy.</div>
 }
 
@@ -165,13 +146,16 @@ interface MyProps{
   lable: string;
   price?: number;
 }
+
 const MyComp3 = ({lable, price}: MyProps): JSX.Element => {
-  // We are explicityle defining the parameter types using interface `MyProps` and return types as `JSX.Element` in this function (i.e., a react component).
+  // We are explicityle defining the parameter types using interface `MyProps` 
+  // and return types as `JSX.Element` in this function (i.e., a react component).
   return <div>Typescript is great.</div>
 }
 
 const MyComp4 = ({lable, price}: {lable: string, price: number}) => {
-  // We are explicityle defining the parameter types using an inline interface and typescript automatically infers the return type as JSX.Element of the function (i.e., a react component).
+  // We are explicityle defining the parameter types using an inline interface 
+  // and typescript automatically infers the return type as JSX.Element of the function (i.e., a react component).
   return <div>There is nothing like typescript.</div>
 }
 ```
@@ -206,29 +190,15 @@ const Welcome = ({ name }: { name: string }) => (
 );
 ```
 
-<!-- Now our editor knows that the <i>name</i> prop is a string, but for some reason eslint is not yet satisfied, and warns about that <i>'name' is missing in props validation</i>. This is because the react linting rules expect propTypes to be defined for all props, because it isn't aware of that we are already using TypeScript to define types for our props. -->
-Now our editor knows that the <i>name</i> prop is a string. For some reason eslint is not satisfied, and complains <i>'name' is missing in props validation</i>.
-This happens because the react linting rules expect us to define propTypes for all props.
-It is not aware we are already using TypeScript to define types for our props.
+Now our editor knows that the <i>name</i> prop is a string. 
 
-To fix the error, we need to add a new linting rule to <i>.eslintrc</i>:
-
-```json
-{
-  // ...
-  "rules": {
-    "react/prop-types": 0, // highlight-line
-  },  
-  // ...
-}
-```
+For some reason eslint is not satisfied, and complains <i>'name' is missing in props validation</i>. This happens because the react linting rules expect us to define propTypes for all props.
 
 </div>
 
 <div class="tasks">
 
 ### Exercise 9.14.
-
 #### 9.14.
 
 Create a new Create React App with TypeScript, and set up eslint for the project similarly to how we just did.
@@ -238,7 +208,16 @@ This exercise is similar to the one you have already done in [Part 1](/en/part1/
 ```jsx
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App";
 
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+
+and <i>App.tsx</i> to the following:
+
+```jsx
+import React from 'react';
 const App = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
@@ -276,12 +255,13 @@ const App = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;
+
 ```
 
 and remove the unnecessary files.
 
-The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. Be sure to add type declarations for each component's props! 
+The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i> 
 
 The <i>Header</i> component should take care of rendering the name of the course. <i>Content</i> should render the names of the different parts and the amount of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
 
@@ -463,61 +443,87 @@ When we remove the comments from the <i>Deeper type usage</i> case block, you wi
 
 #### 9.15.
 
-First add the type information to <i>index.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below.
+First add the type information to <i>App.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below.
 
 ```js
 // new types
 interface CoursePartBase {
   name: string;
   exerciseCount: number;
+  type: string;
 }
 
-interface CoursePartOne extends CoursePartBase {
-  name: "Fundamentals";
+interface CourseNormalPart extends CoursePartBase {
+  type: "described";
   description: string;
 }
-
-interface CoursePartTwo extends CoursePartBase {
-  name: "Using props to pass data";
+interface CourseProjectPart extends CoursePartBase {
+  type: "groupProject";
   groupProjectCount: number;
 }
 
-interface CoursePartThree extends CoursePartBase {
-  name: "Deeper type usage";
+interface CourseSubmissionPart extends CoursePartBase {
+  type: "submission";
   description: string;
   exerciseSubmissionLink: string;
 }
 
-type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
+type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart;
+
 
 // this is the new coursePart variable
 const courseParts: CoursePart[] = [
   {
     name: "Fundamentals",
     exerciseCount: 10,
-    description: "This is an awesome course part"
+    description: "This is the leisured course part",
+    type: "normal"
+  },
+  {
+    name: "Advanced",
+    exerciseCount: 7,
+    description: "This is the harded course part",
+    type: "normal"
   },
   {
     name: "Using props to pass data",
     exerciseCount: 7,
-    groupProjectCount: 3
+    groupProjectCount: 3,
+    type: "groupProject"
   },
   {
     name: "Deeper type usage",
     exerciseCount: 14,
     description: "Confusing description",
-    exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev"
+    exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev",
+    type: "submission"
   }
-];
+]
 ```
 
-Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces. 
+Now we know that both interfaces <i>CourseNormalPart</i> and <i>CourseSubmissionPart</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces. 
 
-Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i> without getting any errors.
+Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CourseNormalPart</i> and <i>CourseSubmissionPart</i> without getting any errors.
 
 Then create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
-Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have not modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
+Lastly, add your another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following:
+
+```js
+{
+  name: "Backend development",
+  exerciseCount: 21,
+  description: "Typing the backend",
+  requirements: ["nodejs", "jest"],
+  type: "special"
+}
+```
+
+Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have not modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
+
+The end result might look like the following
+
+![](../../images/9/45.png)
 
 </div>
 
