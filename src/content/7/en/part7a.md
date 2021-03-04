@@ -383,9 +383,9 @@ Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)
 There is one more interesting detail about the <i>Users</i> route: 
 
 ```js
-<Route path="/users" render={() =>
-  user ? <Users /> : <Redirect to="/login" />
-} />
+<Route path="/users">
+  {user ? <Users /> : <Redirect to="/login" />}
+</Route>
 ```
 
 If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view

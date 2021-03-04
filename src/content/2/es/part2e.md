@@ -2,11 +2,10 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: e
-lang: en
+lang: es
 ---
 
 <div class="content">
-
 
 La apariencia de nuestra aplicación actual es bastante modesta . En el [ejercicio 0.2](/es/part0/fundamentos_de_aplicaiones_web#ejercicios-0-1-0-6), la tarea era pasar por el [tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics) de Mozilla.
 

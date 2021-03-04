@@ -320,7 +320,7 @@ The code of the final version of our application can be found in the  <i>part2-8
 
 <h4>2.19: Phonebook step11</h4>
 
-Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed): 
+Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or removed, or a number is changed): 
 
 ![](../../images/2/27e.png)
 

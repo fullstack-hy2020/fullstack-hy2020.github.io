@@ -22,6 +22,7 @@ We could take care of the communication between the React-app and GraphQl by usi
 At the moment there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/), which is the client side of the same library we used in the previous section. Apollo is absolutely the most popular of the two, and we will use it in this section as well.
 
 ### Apollo client
+
 Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/).
 
 ```bash
@@ -110,12 +111,9 @@ ReactDOM.render(
 
 We are ready to implement the main view of the application, which shows a list of phone numbers. 
 
-
-<!-- Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö on hook-funktion [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) käyttäminen. -->
 Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/data/queries/). 
 Currently the use of the hook-function [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) is the dominant practice.
 
-<!-- Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta: -->
 The query is made by the <i>App</i> component, which's code is as follows:
 
 ```js
@@ -149,8 +147,6 @@ const App = () => {
 export default App
 ```
 
-<!-- Hook-funktion _useQuery_ kutsuminen suorittaa parametrina annetun kyselyn. Hookin kutsuminen palauttaa olion, joka -->
-<!-- jolla on [useita kenttiä](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result). Kenttä <i>loading</i> on arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on  -->
 When called, _useQuery_ makes the query it receives as a parameter.
 It returns an object with multiple [fields](https://www.apollographql.com/docs/react/api/react/hooks/#result).
 The field <i>loading</i> is true if the query has not received a response yet. 
@@ -162,7 +158,6 @@ if ( result.loading ) {
 }
 ```
 
-<!-- Kun tulos on valmis, otetaan tuloksen kentästä <i>data</i> kyselyn <i>allPersons</i> vastaus ja renderöidään luettelossa olevat nimet ruudulle. -->
 When response is received, the result of the <i>allPersons</i> query can be found from the <i>data</i> field, and we can render the list of names to the screen.
 
 ```js
@@ -249,12 +244,9 @@ It is also possible to do queries with parameters with the GraphQL Playground. T
 
 ![](../../images/8/10.png)
 
-<!-- Asken käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely on tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually).  -->
 The _useQuery_ hook is well suited for situations where the query is done when the component is rendered. 
 However now we want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
-
-<!-- Tähän tilanteeseen sopii hook-funktio [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery). Komponentti <i>Persons</i> muuttuu seuraavasti: -->
 For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) is a good choice. 
 The <i>Persons</i> component becomes:
 
@@ -331,8 +323,6 @@ export default Persons
 <!-- Koodi on kasvanut paljon, ja kaikki lisäykset eivät ole täysin ilmeisiä. -->
 The code has changed quite a lot, and all of the changes are not completely apparent. 
 
-
-<!-- Jos henkilön yhteydessä olevaa nappia painetaan, suoritetaan klikkauksenkäsittelijä _showPerson_, joka tekee GraphQL-kyselyn henkilön tiedoista: -->
 When a person's "show address" button is clicked, its event handler 
 _showPerson_ is executed, and makes a GraphQL query to fetch the persons details: 
 
@@ -349,7 +339,6 @@ const showPerson = (name) => {
 <!-- Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa. -->
 The query's _nameToSearch_ variable receives a value when the query is run. 
 
-<!-- Kyselyn vastaus tulee muuttujaan _result_, ja sen arvo sijoitetaan komponentin tilan muutujaan _person_. Sijoitus tehdään _useEffect_-hookissa: -->
 The query response is saved to the variable _result_, and its value is saved to the component's state _person_ in the _useEffect_ hook. 
 
 ```js
@@ -360,10 +349,8 @@ useEffect(() => {
 }, [result])
 ```
 
-<!-- Hookin toisena parametrina on _result.data_, tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyssä haetaan uuden henkilön tiedot</i>. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään. -->
 The hook's second parameter is _result_, so the function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
 Without handling the update in a controlled way in a hook, returning from a single person view to an all persons view would cause problems. 
-
 
 If the state _person_ has a value, instead of showing a list of all persons, only the details of one person are shown. 
 
@@ -392,7 +379,6 @@ It is possible to install [Apollo Client devtools](https://chrome.google.com/web
 
 Data in the cache is organized by query. Because <i>Person</i> objects have an identifying field <i>id</i> which is type <i>ID</i>, if the same object is returned by multiple queries, Apollo is able to combine them into one. 
 Because of this, doing <i>findPerson</i> queries for the address details of Arto Hellas has updated the address details also for the query <i>allPersons</i>.
-
 ### Doing mutations
 
 Let's implement functionality for adding new persons. 
@@ -420,7 +406,6 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 `
 ```
 
-<!-- Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation).  -->
 The hook-function [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) provides the functionality for making mutations. 
 
 <!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: -->
@@ -540,7 +525,6 @@ The solution is simple, and every time a user adds a new person, it appears imme
 
 The bad side of the solution is all the pointless web traffic. 
 
-<!-- Toinen helppo tapa välimuistin synkronoimiseen on määritellä _useMutation_-hookin option [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen: -->
 Another easy way to keep the cache in sync is to use the _useMutation_-hook's [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) parameter to define, that the query fetching all persons is done again whenever a new person is created. 
 
 ```js
@@ -612,7 +596,7 @@ Trying to create a person with invalid data causes an error, and the whole appli
 
 ![](../../images/8/14ea.png)
 
-<!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
+<!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
 We should handle the exception. We can register an error handler function to the mutation using _useMutation_-hook's _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
 <!-- Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla: -->
@@ -660,9 +644,9 @@ const App = () => {
 
   return (
     <div>
-      <Notify errorMessage={errorMessage} />
+      <Notify errorMessage={errorMessage} />  // highlight-line
       <Persons persons = {result.data.allPersons} />
-      <PersonForm setError={notify} />
+      <PersonForm setError={notify} />  // highlight-line
     </div>
   )
 }
