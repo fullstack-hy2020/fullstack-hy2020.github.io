@@ -119,7 +119,7 @@ module.exports = {
     },
     '9': {
       a: 'Background and introduction',
-      b: 'First steps with Typescript',
+      b: 'First steps with TypeScript',
       c: 'Typing the express app',
       d: 'React with types',
     },
@@ -196,9 +196,9 @@ module.exports = {
     },
     '9': {
       a: '背景与介绍',
-      b: 'Typescript的一小步',
-      c: 'Typescript版的express应用',
-      d: '利用Typescript编写React应用',
+      b: 'TypeScript的一小步',
+      c: 'TypeScript版的express应用',
+      d: '利用TypeScript编写React应用',
     },
     '10': {
       a: 'React Native 介绍',
@@ -273,7 +273,7 @@ module.exports = {
     },
     '9': {
       a: 'Antecedentes e introducción',
-      b: 'Primeros pasos con Typescript',
+      b: 'Primeros pasos con TypeScript',
       c: 'Escribiendo la aplicación express',
       d: 'React con tipos',
     },
