@@ -239,7 +239,7 @@ module.exports = app
 
 Tiedostossa siis otetaan käyttöön joukko middlewareja, näistä yksi on polkuun <i>/api/notes</i> kiinnitettävä <i>notesRouter</i> (tai notes-kontrolleri niin kuin jotkut sitä kutsuisivat).
 
-Itse toteutettujen middlewarejen määritelty on siirretty tiedostoon <i>utils/middleware.js</i>:
+Itse toteutettujen middlewarejen määrittely on siirretty tiedostoon <i>utils/middleware.js</i>:
 
 ```js
 const logger = require('./logger')
