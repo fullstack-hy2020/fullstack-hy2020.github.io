@@ -35,7 +35,6 @@ After making the changes to the directory structure of our project, we end up wi
 │   └── middleware.js  
 ```
 
-<!-- Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla  <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>: -->
 So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code. 
 However, this is not a very good way to do things. 
 Let's separate all printing to the console to its own module <i>utils/logger.js</i>:
@@ -338,7 +337,7 @@ For smaller applications the structure does not matter that much. Once the appli
 
 There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet.
 
-You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
+You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1).
 
 If you clone the project for yourself, run the _npm install_ command before starting the application with _npm start_.
 
@@ -451,11 +450,9 @@ module.exports = {
 
 > The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on Youtube.
 
-There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), that resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/). Other alternatives do exist, like [ava](https://github.com/avajs/ava) that has gained popularity in some circles.
-
+There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), that resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/). 
 
 Jest is a natural choice for this course, as it works well for testing backends, and it shines when it comes to testing React applications. 
-
 
 > <i>**Windows users:**</i> Jest may not work if the path of the project directory contains a directory that has spaces in its name.
 
@@ -465,7 +462,6 @@ Since tests are only executed during the development of our application, we will
 ```bash
 npm install --save-dev jest
 ```
-
 
 Let's define the <i>npm script _test_</i> to execute tests with Jest and to report about the test execution with the <i>verbose</i> style:
 
@@ -534,19 +530,21 @@ The ESLint configuration we added to the project in the previous part complains 
 
 ```js
 module.exports = {
-  "env": {
-    "commonjs": true 
-    "es6": true,
-    "node": true,
-    "jest": true, // highlight-line
+  'env': {
+    'commonjs': true,
+    'es2021': true,
+    'node': true,
+    'jest': true, // highlight-line
   },
-  "extends": "eslint:recommended",
+  'extends': 'eslint:recommended',
+  'parserOptions': {
+    'ecmaVersion': 12
+  },
   "rules": {
     // ...
   },
-};
+}
 ```
-
 
 In the first row, the test file imports the function to be tested and assigns it to a variable called _palindrome_:
 
@@ -737,7 +735,7 @@ describe('total likes', () => {
 ```
 
 
-If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md).
+If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://raw.githubusercontent.com/FullStack-HY/misc/main/blogs_for_test.md).
 
 
 You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting).

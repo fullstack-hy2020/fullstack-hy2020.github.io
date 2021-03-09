@@ -251,9 +251,87 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branchissä <i>part4-9</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-9), branchissä <i>part4-9</i>.
 
 Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen, kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://github.com/auth0/express-jwt).
+
+
+### Token-perustaisen kirjautumisen ongelmat
+
+Token-kirjautuminen on helppo toteuttaa, mutta se sisältää yhden ongelman. Kun API:n asiakas, esim. webselaimessa toimiva React-sovellus saa tokenin, luottaa API tämän jälkeen tokeniin sokeasti. Entä jos tokenin haltijalta tulisi poistaa käyttöoikeus? 
+
+Ratkaisuja tähän on kaksi. Yksinkertaisempi on asettaa tokenille voimassaoloaika:
+
+```js
+loginRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  const user = await User.findOne({ username: body.username })
+  const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(body.password, user.passwordHash)
+
+  if (!(user && passwordCorrect)) {
+    return response.status(401).json({
+      error: 'invalid username or password'
+    })
+  }
+
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  // token expires in 60*60 seconds, that is, in one hour
+  // highlight-start
+  const token = jwt.sign(
+    userForToken, 
+    process.env.SECRET,
+    { expiresIn: 60*60 }
+  )
+  // highlight-end
+
+  response
+    .status(200)
+    .send({ token, username: user.username, name: user.name })
+})
+```
+
+Kun tokenin voimassaoloaika päättyy, on asiakassovelluksen hankittava uusi token esim. pakottamalla käyttäjä kirjaantumaan uudelleen sovellukseen. 
+
+Virheenkäsittelijämiddleware tulee laajentaa siten, että se antaa vanhentuneen tokenin tapauksessa asianmukaisen virheilmoituksen:
+
+```js
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token'
+    })
+  // highlight-start  
+  } else if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({
+      error: 'token expired'
+    })
+  }
+  // highlight-end
+
+  next(error)
+}
+```
+
+Mitä lyhemmäksi tokenin voimassaolo asetetaan, sitä turvallisempi ratkaisu on. Eli jos token päätyy vääriin käsiin, tai käyttäjän pääsy järjestelmään tulee estää, on token käytettävissä ainoastaan rajallisen ajan. Toistaalta tokenin lyhyt voimassaolo aiheuttaa vaivaa API:n käyttäjälle. Kirjaantuminen pitää tehdä useammin.
+
+Toinen ratkaisu on tallettaa API:ssa tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen API-pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tälläista ratkaisua kutsutaan usen <i>palivelinpuolen sessioksi</i> (engl. server side session).
+
+Tämän ratkaisun negatiivinen puoli on sen backendiin lisäämä monimutkaisuus sekä hienoinen vaikutus suorituskysyyn. Jos tokenin voimassaolo joudutaan tarkastamaan tietokannasta, on se hitaampaa kuin tokenista itsestään tarkastattava voimassaolo. Usein tokeneita vastaava sessio, eli tieto tokenia vastaavasta käyttäjästä, talletetaankin esim. avain-arvo-periaattella toimivaan [Redis](https://redis.io/)-tietokantaan, joka on toiminnallisuudeltaan esim MongoDB:tä tai relaatiotietokantoja rajoittuneempi, mutta toimii tietynlaisissa käyttöskenaarioissa todella nopeasti.
+
+Käytettäessä palvelinpuolen sessioita, token ei useinkaan sisällä jwt-tokenien tapaan mitään tietoa käyttäjäistä (esim. käyttäjätunnusta), sen sijaan token on ainoastaan satunnainen merkkijono, jota vastaava käyttäjä haetaan palvelimella sessiot tallettavasta tietokannasta. On myös yleistä, että palvelinpuolen sessiota käytettäessä tieto käyttäjän identiteestisä välitetään Authorization-headerin sijaan evästeiden (engl. cookie) välityksellä. 
 
 ### Loppuhuomioita
 
@@ -267,7 +345,7 @@ Toteutamme kirjautumisen frontendin puolelle kurssin [seuraavassa osassa](/osa5)
 
 <div class="tasks">
 
-### Tehtävät 4.15.-4.22.
+### Tehtävät 4.15.-4.23.
 
 Seuraavien tehtävien myötä Blogilistalle luodaan käyttäjienhallinnan perusteet. Varminta on seurata melko tarkkaan osan 4 luvusta [Käyttäjien hallinta](/osa4/kayttajien_hallinta) ja [Token-perustainen kirjautuminen](/osa4/token_perustainen_kirjautuminen) etenevää tarinaa. Toki luovuus on sallittua.
 
@@ -404,7 +482,63 @@ backend -> selain: 201 created
 kayttaja -> kayttaja:
 -->
 
-#### 4.22*: blogilistan laajennus, step10
+
+#### 4.22*:  blogilistan laajennus, step10
+
+Sekä uuden blogin luonnin että blogin poistamisen yhteydessä on selvitettävä operaation tekevän käyttäjän identiteetti. Tätä auttaa jo tehtävässä 4.20 tehty middleware _tokenExtractor_. Tästä huolimatta <i>post</i>- ja <i>delete</i>-käsittelijöissä tulee vielä selvittää tokenia vastava käyttäjä.
+
+Tee nyt uusi middleware _userExtractor_, joka selvittää pyyntöön liittyvän käyttäjän ja sijoittaa sen request-olioon. Eli kun rekisteröit middlewaren ennen routeja tiedostossa <i>app.js</i>
+
+```js
+app.use(middleware.userExtractor)
+```
+
+pääsevät routet käyttäjään käsiksi suoraan viittaamalla _request.user_:
+
+
+```js
+blogsRouter.post('/', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+
+blogsRouter.delete('/:id', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+```
+
+Huomaa, että on mahdollista rekisteröidä middleware suoritettavaksi vain osassa tapauksista. Eli sen sijaan, että _userExtractor_-middlewarea käytettäisiin aina
+
+```js
+// use the middleware in all routes
+app.use(userExtractor) // highlight-line
+
+app.use('/api/blogs', blogsRouter)  
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+voidaan määritellä, että se suoritetaan ainoastaan polun <i>/api/blogs</i> routeissa: 
+
+```js
+// use the middleware only in /api/blogs routes
+app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+Tämä siis tapahtuu ketjuttamalla useampi middlware funktion <i>use</i> parametriksi. Middlewareja voitaisiin samaan tapaan rekisteröidä myös ainoastaan yksittäisten routejen yhteyteen:
+
+```js
+router.post('/', userExtractor, async (request, response) => {
+  // ...
+}
+```
+
+#### 4.23*: blogilistan laajennus, step11
 
 Token-kirjautumisen lisääminen valitettavasti hajotti blogien lisäämiseen liittyvät testit. Korjaa testit. Tee myös testi, joka varmistaa että uuden blogin lisäys ei onnistu, ja pyyntö palauttaa oikean statuskoodin <i>401 Unauthorized</i> jos pyynnön mukana ei ole tokenia.
 
