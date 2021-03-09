@@ -6,7 +6,7 @@ lang: en
 ---
 
 <div class="content">
-### Setting up communications with the server
+
 
 Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
 
@@ -91,7 +91,7 @@ const reducer = combineReducers({
   filter: filterReducer,
 })
 
-const store = createStore(reducer)
+const store = createStore(reducer, composeWithDevTools())
 
 // highlight-start
 noteService.getAll().then(notes =>
@@ -155,13 +155,13 @@ import React, {useEffect} from 'react' // highlight-line
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes'
+import noteService from './services/notes'  // highlight-line
 import { initializeNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
+    // highlight-start
   const dispatch = useDispatch()
-  // highlight-start
   useEffect(() => {
     noteService
       .getAll().then(notes => dispatch(initializeNotes(notes)))
@@ -295,7 +295,7 @@ export const createNote = (data) => {
 
 Changing the importance of notes could be implemented using the same principle, meaning making an asynchronous method call to the server and then dispatching an appropriate action.
 
-The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) in the branch <i>part6-3</i>.
+The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3) in the branch <i>part6-3</i>.
 
 </div>
 
@@ -307,7 +307,7 @@ The current state of the code for the application can be found on [github](https
 
 When the application launches, fetch the anecdotes from the backend implemented using json-server.
 
-As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).
 
 #### 6.14 Anecdotes and the backend, step2
 
@@ -326,7 +326,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initializeNotes())
+    dispatch(initializeNotes()))  
   },[dispatch]) 
 
   // ...
@@ -358,7 +358,7 @@ Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-libr
 npm install redux-thunk
 ```
 
-The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. There are also other possible approaches, as we have seen, but using react-thunk is often much more [convenient](https://stackoverflow.com/questions/35411423/how-to-dispatch-a-redux-action-with-a-timeout/35415559#35415559). While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
+The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux'
@@ -482,7 +482,7 @@ const NewNote = () => {
 }
 ```
 
-The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>.
+The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-4) in the branch <i>part6-4</i>.
 
 </div>
 

@@ -7,13 +7,11 @@ lang: en
 
 <div class="content">
 
-<!-- Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla. -->
 So far we have used our redux-store with the help of the [hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
 
 To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-function provided by react-redux.
 
-<!-- Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettävissä. -->
 In new applications you should absolutely use the hook-api, but knowing how to use connect is useful when maintaining older projects using redux.
 
 ### Using the connect-function to share the redux store to components
@@ -124,7 +122,6 @@ const ConnectedNotes = connect(mapStateToProps)(Notes) // highlight-line
 export default ConnectedNotes
 ```
 
-
 The <i>Notes</i> component can access the state of the store directly, e.g. through <i>props.notes</i> that contains the list of notes.  Similarly, <i>props.filter</i> references the value of the filter.
 
 The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this:
@@ -138,7 +135,7 @@ The _NoteList_ component actually does not need the information about which filt
 We just have to give it correctly filtered notes in the _notes_ prop:
 
 ```js
-const Notes = (props) => { // highlight-line
+const Notes = (props) => {
   const dispatch = useDispatch()
 
   return(
@@ -347,7 +344,7 @@ export default connect(
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
+You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-5).
 
 ### Referencing action creators passed as props
 
@@ -608,15 +605,12 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks.
 
-Modify the <i>AnecdoteList</i> component so that it uses the _connect_ function instead of the hooks. You may need to implement your own <i>mapStateToProps</i> and <i>mapDispatchToProps</i> functions.
-
+Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks. 
 #### 6.20 anecdotes and connect, step2
 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
-
 #### 6.21 anecdotes, the grand finale
 
-<!-- Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos vote-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen että notifikaation näyttöaika on 5 sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation. -->
 You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds, 
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
 
