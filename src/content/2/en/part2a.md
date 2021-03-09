@@ -81,11 +81,34 @@ Passing event handlers to the child components of the <i>App</i> component has r
 
 We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [part 0](/en/part0)
 
-Let's start with the following:
+Let's start with the following (the file <i>App.js</i>):
 
 ```js
 import React from 'react'
+
+const App = (props) => {
+  const { notes } = props
+
+  return (
+    <div>
+      <h1>Notes</h1>
+      <ul>
+        <li>{notes[0].content}</li>
+        <li>{notes[1].content}</li>
+        <li>{notes[2].content}</li>
+      </ul>
+    </div>
+  )
+}
+
+export default App
+```
+
+The file <i>index.js</i> looks like:
+
+```js
 import ReactDOM from 'react-dom'
+import App from './App.js'
 
 const notes = [
   {
@@ -107,21 +130,6 @@ const notes = [
     important: true
   }
 ]
-
-const App = (props) => {
-  const { notes } = props
-
-  return (
-    <div>
-      <h1>Notes</h1>
-      <ul>
-        <li>{notes[0].content}</li>
-        <li>{notes[1].content}</li>
-        <li>{notes[2].content}</li>
-      </ul>
-    </div>
-  )
-}
 
 ReactDOM.render(
   <App notes={notes} />,
@@ -371,7 +379,6 @@ const App = ({ notes }) => { //highlight-line
 
 If you have forgotten what destructuring means and how it works, review [this](/en/part1/component_state_event_handlers#destructuring).
 
-
 We'll separate displaying a single note into its own component <i>Note</i>: 
 
 ```js
@@ -403,15 +410,14 @@ Note that the <i>key</i> attribute must now be defined for the <i>Note</i> compo
 
 A whole React application can be written in a single file. Although that is, of course, not very practical. Common practice is to declare each component in their own file as an <i>ES6-module</i>.
 
-We have been using modules the whole time. The first few lines of the file:
+We have been using modules the whole time. The first few lines of the file <i>index.js</i>:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App.js'
 ```
 
-[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The <i>React</i> module is placed into a variable called _React_ and <i>React-DOM</i> to variable _ReactDOM_.
-
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The module <i>react-dom</i> is placed into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_
 
 Let's move our <i>Note</i> component into its own module. 
 
@@ -432,19 +438,14 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-We import React on the first line of the module.
+Because this is a React-component, we must import React. 
 
 The last line of the module [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) the declared module, the variable <i>Note</i>.
 
-Please note that on recent versions of React it is no longer necessary to import React to use JSX syntax, however it is still important to learn as there are billions of lines of old React code that still need the React import. The same applies to documentation and examples of React that you may stumble across on the internet.
-
-We would still need to import React in order to use Hooks or other exports that React provides. Read more about this [here](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
-
-Now the file that is using the component - <i>index.js</i> - can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module: 
+Now the file that is using the component - <i>App.js</i> - can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module: 
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Note from './components/Note' // highlight-line
 
 const App = ({ notes }) => {
@@ -462,52 +463,11 @@ Note that when importing our own components, their location must be given <i>in 
 
 The period - <i>.</i> - in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in the <i>components</i> sub-directory of the current directory. The filename extension - _.js_ - can be omitted.
 
-<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows: 
-
-```js
-import React from 'react'
-import Note from './components/Note'
-
-const App = ({ notes }) => {
-  return (
-    <div>
-      <h1>Notes</h1>
-      <ul>
-        {notes.map((note) => 
-          <Note key={note.id} note={note} />
-        )}
-      </ul>
-    </div>
-  )
-}
-
-export default App // highlight-line
-```
-
-What's left in the <i>index.js</i> file is: 
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'  // highlight-line
-
-const notes = [
-  // ...
-]
-
-ReactDOM.render(
-  <App notes={notes} />,
-  document.getElementById('root')
-)
-```
-
 Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back to them later in this course. 
 
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1).
 
-The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
-
-
-Note that the <i>master</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Note that the <i>master</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 
@@ -615,7 +575,7 @@ I added this chapter to the material after the model answer for the next questio
 
 <h3>Exercises 2.1.-2.5.</h3>
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021).
 
 You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well.
 
@@ -628,7 +588,7 @@ Note that this part has more exercises than the ones before, so <i>do not submit
 <h4>2.1: Course information step6</h4>
 
 
-Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
+Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
 
 
 **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**

@@ -259,7 +259,7 @@ The event handler also resets the value of the controlled input element by calli
 setNewNote('')
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
+You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy/part2-notes/tree/part2-2).
 
 ### Filtering Displayed Elements
 
@@ -393,7 +393,7 @@ The text of the button depends on the value of the <em>showAll</em> state:
 show {showAll ? 'important' : 'all'}
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
+You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">
@@ -460,7 +460,7 @@ Note the use of the React developer tools extension in the picture above!
 **NB:**
 
 
-- you can use the person's name as the value of the <i>key</i> property
+- you can use the person's name as value of the <i>key</i> property
 - remember to prevent the default action of submitting HTML forms!
 
 <h4>2.7: The Phonebook Step2</h4>

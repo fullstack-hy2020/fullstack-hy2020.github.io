@@ -31,7 +31,7 @@ json-server requires all data to be sent in JSON format. What this means in prac
 Let's make the following changes to the event handler responsible for creating a new note:
 
 ```js
-const addNote = event => {
+addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -72,7 +72,7 @@ Since the data we sent in the POST request was a JavaScript object, axios automa
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
 
 ```js
-const addNote = event => {
+addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
@@ -108,7 +108,7 @@ In the next part of the course we will learn to implement our own logic in the b
 > **NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
 
 
-The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
+The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-5).
 
 
 ### Changing the importance of notes
@@ -651,14 +651,6 @@ const getAll = () => {
   }
   return request.then(response => response.data.concat(nonExisting))
 }
-
-useEffect(() => {
-  noteService
-    .getAll()
-    .then(response => {
-      setNotes(response)  // highlight-line
-    })
-}, [])
 ```
 
 When we try to change the importance of the hardcoded note, we see the following error message in the console. The error says that the backend server responded to our HTTP PUT request with a status code 404 <i>not found</i>.
@@ -758,7 +750,7 @@ notes.filter(n => n.id !== id)
 
 It's probably not a good idea to use alert in more serious React applications. We will soon learn a more advanced way of displaying messages and notifications to users. There are situations, however, where a simple, battle-tested method like <em>alert</em> can function as a starting point. A more advanced method could always be added in later, given that there's time and energy for it.
 
-The code for the current state of our application can be found in the  <i>part2-6</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
+The code for the current state of our application can be found in the  <i>part2-6</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-6).
 
 </div>
 
