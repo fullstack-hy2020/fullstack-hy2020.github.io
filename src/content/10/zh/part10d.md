@@ -340,8 +340,8 @@ describe('RepositoryList', () => {
   describe('RepositoryListContainer', () => {
     it('renders repository information correctly', () => {
       const repositories = {
+        totalCount: 8,
         pageInfo: {
-          totalCount: 8,
           hasNextPage: true,
           endCursor:
             'WyJhc3luYy1saWJyYXJ5LnJlYWN0LWFzeW5jIiwxNTg4NjU2NzUwMDc2XQ==',
@@ -750,6 +750,7 @@ export class RepositoryListContainer extends React.Component {
 ```javascript
 {
   repositories(first: 2) {
+    totalCount
     edges {
       node {
         id
@@ -761,7 +762,6 @@ export class RepositoryListContainer extends React.Component {
     pageInfo {
       endCursor
       startCursor
-      totalCount
       hasNextPage
     }
   }
@@ -776,6 +776,7 @@ export class RepositoryListContainer extends React.Component {
 {
   "data": {
     "repositories": {
+      "totalCount": 10,
       "edges": [
         {
           "node": {
@@ -797,7 +798,6 @@ export class RepositoryListContainer extends React.Component {
       "pageInfo": {
         "endCursor": "WyJ6ZWl0LnN3ciIsMTU4OTU0MzkzMzg2N10=",
         "startCursor": "WyJ6ZWl0Lm5leHQuanMiLDE1ODk1NDM5OTc1NTdd",
-        "totalCount": 10,
         "hasNextPage": true
       }
     }
@@ -816,6 +816,7 @@ export class RepositoryListContainer extends React.Component {
 ```javascript
 {
   repositories(first: 2, after: "WyJ6ZWl0LnN3ciIsMTU4OTU0MzkzMzg2N10=") {
+    totalCount
     edges {
       node {
         id
@@ -827,7 +828,6 @@ export class RepositoryListContainer extends React.Component {
     pageInfo {
       endCursor
       startCursor
-      totalCount
       hasNextPage
     }
   }
@@ -1017,6 +1017,7 @@ export default RepositoryList;
     id
     fullName
     reviews(first: 2, after: "WyIxYjEwZTRkOC01N2VlLTRkMDAtODg4Ni1lNGEwNDlkN2ZmOGYuamFyZWRwYWxtZXIuZm9ybWlrIiwxNTg4NjU2NzUwMDgwXQ==") {
+      totalCount
       edges {
         node {
           id
@@ -1034,7 +1035,6 @@ export default RepositoryList;
       pageInfo {
         endCursor
         startCursor
-        totalCount
         hasNextPage
       }
     }

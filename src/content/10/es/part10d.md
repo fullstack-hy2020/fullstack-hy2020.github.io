@@ -300,8 +300,8 @@ describe('RepositoryList', () => {
   describe('RepositoryListContainer', () => {
     it('renders repository information correctly', () => {
       const repositories = {
+        totalCount: 8,
         pageInfo: {
-          totalCount: 8,
           hasNextPage: true,
           endCursor:
             'WyJhc3luYy1saWJyYXJ5LnJlYWN0LWFzeW5jIiwxNTg4NjU2NzUwMDc2XQ==',
@@ -627,6 +627,7 @@ Por tanto, el cursor es solo una presentación serializada de un elemento en una
 ```javascript
 {
   repositories(first: 2) {
+    totalCount
     edges {
       node {
         id
@@ -638,7 +639,6 @@ Por tanto, el cursor es solo una presentación serializada de un elemento en una
     pageInfo {
       endCursor
       startCursor
-      totalCount
       hasNextPage
     }
   }
@@ -651,6 +651,7 @@ El <em>primer</em> argumento le dice a la API que devuelva solo los dos primeros
 {
   "data": {
     "repositories": {
+      "totalCount": 10,
       "edges": [
         {
           "node": {
@@ -672,7 +673,6 @@ El <em>primer</em> argumento le dice a la API que devuelva solo los dos primeros
       "pageInfo": {
         "endCursor": "WyJ6ZWl0LnN3ciIsMTU4OTU0MzkzMzg2N10=",
         "startCursor": "WyJ6ZWl0Lm5leHQuanMiLDE1ODk1NDM5OTc1NTdd",
-        "totalCount": 10,
         "hasNextPage": true
       }
     }
@@ -687,6 +687,7 @@ Digamos que queremos obtener el siguiente conjunto de elementos <i>después</i> 
 ```javascript
 {
   repositories(first: 2, after: "WyJ6ZWl0LnN3ciIsMTU4OTU0MzkzMzg2N10=") {
+    totalCount
     edges {
       node {
         id
@@ -698,7 +699,6 @@ Digamos que queremos obtener el siguiente conjunto de elementos <i>después</i> 
     pageInfo {
       endCursor
       startCursor
-      totalCount
       hasNextPage
     }
   }
@@ -862,6 +862,7 @@ Aquí hay un ejemplo de consulta:
     id
     fullName
     reviews(first: 2, after: "WyIxYjEwZTRkOC01N2VlLTRkMDAtODg4Ni1lNGEwNDlkN2ZmOGYuamFyZWRwYWxtZXIuZm9ybWlrIiwxNTg4NjU2NzUwMDgwXQ==") {
+      totalCount
       edges {
         node {
           id
@@ -879,7 +880,6 @@ Aquí hay un ejemplo de consulta:
       pageInfo {
         endCursor
         startCursor
-        totalCount
         hasNextPage
       }
     }
