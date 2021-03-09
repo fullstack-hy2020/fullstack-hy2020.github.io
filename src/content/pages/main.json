@@ -3,8 +3,7 @@
     "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
     "intro": "Ota haltuusi React, Redux, Node.js, MongoDB, GraphQL ja TypeScript! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
     "current": [
-      "Vuoden 2020 version deadline siirtyy ja on 1.3.2021. Suuria muutoksia ei ole luvassa, joten voit käytännössä jatkaa koodaamista keskeytyksettä 15.3.2021 alkavaan vuoden 2021 versioon.",
-      "Kurssin koetta ei kuitenkaan voi suorittaa 10.1.-14.3.2021. ja tällä välillä yliopistosuoritusten kirjaamisessa on tauko",
+      "Vuoden 2021 versio kurssista käynnistyy 15.3.2021!",
       "Kurssiin liittyvää keskustelua Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
       "Yhteistyökumppaneina kurssilla on <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a>, <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a> ja <a href='https://www.smartly.io/'>Smartly.io</a>. Katso <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>täältä</a> yhteistyökumppaniemme asiantuntijoiden vierailuluentoja kurssin aihepiireistä."
     ],
@@ -16,17 +15,14 @@
     ],
     "university": "Helsingin yliopisto on Suomen vanhin ja suurin tiedekorkeakoulu, yhteensä 40 000 henkilön kansainvälinen tiedeyhteisö. Tieteen voimalla yliopist rakentanut yhteiskuntaa, sivistystä ja hyvinvointia jo vuodesta 1640.",
     "houston": "Suomalainen Houston Inc. on vuonna 2003 perustettu ketterä softatalo. Suunnittelemme ja toteutamme asiakkaillemme räätälöityjä digitaalisia palveluita liiketoiminnan tarpeisiin.",
-    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open 2021", "matti.luukkainen@helsinki.fi"],
     "licenced": "Materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä."
   },
   "en": {
     "mainTitle": "Deep Dive Into Modern Web Development",
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
-      "<strong>The deadline for submissions is extended to 1.3.2021</strong>. After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding.", 
-      "Note that the deadline for taking exam for University of Helsinki credits is still 10.1.2020. For more info see <a href='/en/part0'>part 0</a>",
-      "This year's edition of the course contains a new part on <a href='/en/part9'>TypeScript</a>. Content of the part is provided by <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>",
-      "Read <a href='/en/part0/general_info#changed-since-the-last-year'>here</a> what else has changed since last year!",
+      "2021 version of the course starts 15th March!", 
       "You can discuss the course and related topics in our dedicated group on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
@@ -37,7 +33,7 @@
     ],
     "university": "The University of Helsinki is the oldest and largest science university in Finland, with an international scientific community of 40,000 people.",
     "houston": "The Finnish Houston Inc. is an agile software company founded in 2003. We design and implement customized digital services for our business.",
-    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open 2021", "matti.luukkainen@helsinki.fi"],
     "licenced": "The material is licensed under the Creative Commons BY-NC-SA 3.0 License."
   },
   "es": {
