@@ -24,7 +24,7 @@ import news from '../../images/noun_news_1248039.svg';
 import yliopistoLogo from '../../images/company_logos/uoh_centre.svg';
 import getTranslationPath from '../../utils/getTranslationPath';
 
-const IndexPage = ({ lang, title = 'Full stack open 2020' }) => {
+const IndexPage = ({ lang, title = 'Full stack open 2021' }) => {
   const { t } = useTranslation();
 
   const {
