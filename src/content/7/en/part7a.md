@@ -141,7 +141,7 @@ const App = () => {
       </Switch>
 
       <div>
-        <i>Note app, Department of Computer Science 2020</i>
+        <i>Note app, Department of Computer Science 2021</i>
       </div>
     </Router>
   )
@@ -221,7 +221,7 @@ Note that the order of the components is important. If we would put the <i>Home<
 
 ### Parameterized route
 
-Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
+Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v1.js).
 
 The application now contains five different views whose display is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
@@ -445,7 +445,7 @@ const App = () => {
       </Router>      
       <div>
         <br />
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
@@ -532,14 +532,13 @@ const App = () => {
       </Switch>
 
       <div>
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
 }    
 ```
 
-<!-- Joka kerta kun komponentti renderöidään, eli käytännössä myös aina kun sovelluksen osoiterivillä oleva url, vaihtuu suoritetaan komento -->
 Every time the component is rendered, so practically every time the browser's url changes, the following command is executed:
 
 ```js
@@ -554,15 +553,14 @@ const note = match
   : null
 ```
 
-<!-- Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js). -->
-The completed code can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
+The completed code can be found [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v2.js).
 
 </div>
 <div class="tasks">
 
 ### Exercises 7.1.-7.3.
 
-Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.
+Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy/routed-anecdotes> as the starting point for the exercises.
 
 If you clone the project into an existing git repository remember to <i>delete the git configuration of the cloned application:</i>
 
