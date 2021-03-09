@@ -484,7 +484,7 @@ const NoteForm = ({ createNote }) => {
   }
 
   return (
-    <div className="formDiv">
+    <div className="formDiv"> // highlight-line
       <h2>Create a new note</h2>
 
       <form onSubmit={addNote}>
@@ -563,7 +563,7 @@ The report will tell us the lines of untested code in each component:
 ![](../../images/5/19ea.png)
 
 
-You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
+You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-8).
 </div>
 
 
