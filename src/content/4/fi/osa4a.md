@@ -324,7 +324,7 @@ Jos sovellus on pieni, ei rakenteella ole kovin suurta merkitystä. Sovelluksen 
 
 Express-sovelluksien rakenteelle, eli hakemistojen ja tiedostojen nimennälle ei ole olemassa mitään yleismaailmallista standardia samaan tapaan kuin esim. Ruby on Railsissa. Tässä käyttämämme malli noudattaa eräitä internetissä vastaan tulevia hyviä käytäntöjä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1), branchissa <i>part4-1</i>:
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1)!, branchissa <i>part4-1</i>:
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
 
