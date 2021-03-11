@@ -994,7 +994,7 @@ Laajenna toteutusta siten, että testit menevät läpi.
 
 Testit ovat tällä hetkellä osittain epätäydelliset, esim. reittejä <i>GET /api/notes/:id</i> ja <i>DELETE /api/notes/:id</i> ei tällä hetkellä testata epävalidien id:iden osalta. Myös testien organisoinnissa on hieman toivomisen varaa, sillä kaikki on kirjoitettu suoraan testifunktion "päätasolle", parempaan luettavuuteen pääsisimme eritellessä loogisesti toisiinsa liittyvät testit <i>describe</i>-lohkoihin.
 
-Jossain määrin parannellut testit seuraavassa:
+Jossain määrin parannellut testit seuraavassa: (beforeEach describe-lohkon sisällä)
 
 ```js
 const supertest = require('supertest')
