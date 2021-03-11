@@ -727,7 +727,7 @@ Tämä ja seuraava tehtävä ovat jo hieman haastavampia. Tehtävien tekeminen e
 
 Tehtävän tekeminen onnistuu hyvin ilman mitään kirjastojakin, mutta tämä saattaa olla hyvä paikka tutustua kokoelmien käsittelyä suuresti helpottavaan [Lodash](https://lodash.com/)-kirjastoon.
 
-Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää <i>kirjoittajan</i>, kenellä on eniten blogeja. Funktion paluuarvo kertoo myös ennätysblogaajan blogien määrän:
+Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää <i>kirjoittajan</i>, kenellä on eniten blogeja. Funktion paluuarvo kertoo myös ennätysbloggaajan blogien määrän:
 
 ```js
 {
@@ -736,11 +736,11 @@ Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. 
 }
 ```
 
-Jos ennätysblogaajia on monta, riittää että funktio palauttaa niistä jonkun.
+Jos ennätysbloggaajia on monta, riittää että funktio palauttaa niistä jonkun.
 
 #### 4.7*: apufunktioita ja yksikkötestejä, step5
 
-Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkiblogaajan likejen yhteenlasketun määrän:
+Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkibloggaajan likejen yhteenlasketun määrän:
 
 ```js
 {
@@ -749,6 +749,6 @@ Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. 
 }
 ```
 
-Jos suosikkiblogaajia on monta, riittää että funktio palauttaa niistä jonkun.
+Jos suosikkibloggaajia on monta, riittää että funktio palauttaa niistä jonkun.
 
 </div>
