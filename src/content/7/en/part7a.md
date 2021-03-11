@@ -292,7 +292,7 @@ import {
 
 const Note = ({ notes }) => {
   const id = useParams().id // highlight-line
-  const note = notes.find(n => n.id === Number(id)) 
+  const note = notes.find(n => n.id === id) 
   return (
     <div>
       <h2>{note.content}</h2>
@@ -462,7 +462,7 @@ Our application has a flaw. The _Note_ component receives all of the notes, even
 ```js
 const Note = ({ notes }) => { 
   const id = useParams().id
-  const note = notes.find(n => n.id === Number(id))
+  const note = notes.find(n => n.id === id)
   // ...
 }
 ```
@@ -510,7 +510,7 @@ const App = () => {
  // highlight-start
   const match = useRouteMatch('/notes/:id')
   const note = match 
-    ? notes.find(note => note.id === Number(match.params.id))
+    ? notes.find(note => note.id === match.params.id)
     : null
   // highlight-end
 
@@ -549,7 +549,7 @@ If the url matches _/notes/:id_, the match variable will contain an object from 
 
 ```js
 const note = match 
-  ? notes.find(note => note.id === Number(match.params.id))
+  ? notes.find(note => note.id === match.params.id)
   : null
 ```
 
