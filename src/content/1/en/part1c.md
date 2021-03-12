@@ -206,7 +206,7 @@ ReactDOM.render(
 ```
 
 
-**Note** when you change file <i>index.js</i> React does not refresh the page automatically so you need to relead the browser page to get the new content shown.
+**Note** when you change file <i>index.js</i> React does not refresh the page automatically so you need to reload the browser page to get the new content shown.
 
 The App component is given the value of the counter via the _counter_ prop. This component renders the value to the screen. What happens when the value of _counter_ changes? Even if we were to add the following
 
