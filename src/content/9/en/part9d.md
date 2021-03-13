@@ -1050,13 +1050,21 @@ interface HealthCheckEntry extends BaseEntry {
 }
 ```
 
-Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine and export them as an Entry type like this:
+Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine them in an union and export them as an Entry type like this:
 
 ```js
 export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
+```
+An important point concerning unions is that, when you use them with `Omit` to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the `id` from each `Entry`, we could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type, would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
+
+```ts
+// Define special omit for unions
+type UnionOmit<T, K extends string | number | symbol> = T extends unknown ? Omit<T, K> : never;
+// Define Entry without the 'id' property
+type EntryWithoutId = UnionOmit<Entry, 'id'>;
 ```
 
 </div>
