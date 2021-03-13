@@ -624,7 +624,7 @@ console.log(rest)     // prints [3, 4, 5, 6]
 让我们创建一个（第1章节） uniafe-exercise 的简化版本。
 
 <!-- You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project.  -->
-你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy2020/unicafe-redux 作为你的项目基础。
+你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy/unicafe-redux 作为你的项目基础。
 
 <!--<i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>-->
 先删除git 配置，然后安装 dependencies 
@@ -738,6 +738,9 @@ describe('unicafe reducer', () => {
 #### 6.2: unicafe revisited, 步骤2
 <!-- Now implement the actual functionality of the application.  -->
 现在实现应用的实际功能。
+
+<!-- Note that since all the code is in the file <i>index.js</i> and you have to manually reload the page after each change since the automatic reloading of the browser content does not work for that page! -->
+注意由于所有的代码都在  <i>index.js</i> 文件，你需要手动重新加载页面因为自动加载浏览器内容对这个页面并不起作用。
 
 </div>
 
@@ -1034,9 +1037,7 @@ import { createNote } from './../reducers/noteReducer'
 
 ```js
 import React from 'react'
-import { 
-  createNote, toggleImportanceOf
-} from './reducers/noteReducer' 
+import { createNote, toggleImportanceOf } from './reducers/noteReducer' // highlight-line
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
 
 
@@ -1265,8 +1266,8 @@ const App = () => {
 <!-- We will return to the presentational/container division later in this part. -->
 我们将在本章节后面回顾表现层/容器部分。
 
-<!-- The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>. -->
-Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。 
+<!-- The code of the Redux application can be found on [Github](https://github.com/fullstack-hy/redux-notes/tree/part6-1), branch <i>part6-1</i>. -->
+Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy/redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。 
 
 </div>
 
@@ -1275,7 +1276,7 @@ Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy2020/Redux
 
 ### Exercises 6.3.-6.8.
 <!-- Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy2020/redux-anecdotes to base your solution on.   -->
-让我们从第1章节创建一个新版本的八卦投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy2020/redux-anecdotes 拉取，你的解决方案基于这个库。
+让我们从第1章节创建一个新版本的八卦投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy/redux-anecdotes 拉取，你的解决方案基于这个库。
 
 <!-- If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i>  -->
 如果您将该项目克隆到现有的 git-repository 中，记得删除应用的git 配置
