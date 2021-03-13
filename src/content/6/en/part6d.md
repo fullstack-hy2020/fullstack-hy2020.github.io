@@ -110,12 +110,14 @@ const Notes = (props) => { // highlight-line
   )
 }
 
+// highlight-start
 const mapStateToProps = (state) => {
   return {
     notes: state.notes,
     filter: state.filter,
   }
 }
+// highlight-end
 
 const ConnectedNotes = connect(mapStateToProps)(Notes) // highlight-line
 
