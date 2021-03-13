@@ -23,6 +23,7 @@ import navigation from '../content/partnavigation/partnavigation';
 import { partColors } from './partColors';
 import path from 'path';
 import snakeCase from 'lodash/fp/snakeCase';
+import getPartTranslationPath from '../utils/getPartTranslationPath';
 
 export default class ContentTemplate extends Component {
   constructor(props) {
@@ -77,11 +78,11 @@ export default class ContentTemplate extends Component {
   handleScroll = () => {
     if (window.scrollY > 300 && !this.state.showArrowUp) {
       this.setState({
-        showArrowUp: true
+        showArrowUp: true,
       });
     } else if (window.scrollY <= 300 && this.state.showArrowUp) {
       this.setState({
-        showArrowUp: false
+        showArrowUp: false,
       });
     }
   };
@@ -118,7 +119,7 @@ export default class ContentTemplate extends Component {
           return (
             <Banner
               style={{
-                backgroundColor: colorCode
+                backgroundColor: colorCode,
               }}
               className="spacing tasks content-banner"
             >
@@ -148,7 +149,7 @@ export default class ContentTemplate extends Component {
       <Layout>
         <SEO
           lang={lang}
-          title={`Fullstack ${lang === 'en' ? 'part' :lang === 'zh' ? 'part' :'osa'}${part} | ${
+          title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part} | ${
             this.state.h1Title
           }`}
           description={mainSEOdescription[lang]}
@@ -190,12 +191,12 @@ export default class ContentTemplate extends Component {
                   {
                     backgroundColor: colorCode,
                     text: 'Fullstack',
-                    link: `/${lang === 'en' ? 'en/' :lang === 'zh' ? 'zh/' : ''}#course-contents`,
+                    link: `/${lang === 'fi' ? '' : `${lang}/`}#course-contents`,
                   },
                   {
                     backgroundColor: colorCode,
-                    text: `${lang === 'en' ? 'part' : lang === 'zh' ? 'part' :'osa'} ${part}`,
-                    link: lang === 'en' ? `/en/part${part}` :lang === 'zh' ? `/zh/part${part}` : `/osa${part}`,
+                    text: `${lang === 'fi' ? 'Osa' : 'Part'} ${part}`,
+                    link: getPartTranslationPath(lang, part),
                   },
                   {
                     backgroundColor: colors['black'],
@@ -212,19 +213,21 @@ export default class ContentTemplate extends Component {
               letter={letter}
               lang={lang}
               currentPartTitle={navigation[lang][part][letter]}
-              currentPath={`/${
-                lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part':'osa'
-              }${part}/${snakeCase(navigation[lang][part][letter])}`}
+              currentPath={getPartTranslationPath(
+                lang,
+                part,
+                `/${snakeCase(navigation[lang][part][letter])}`
+              )}
               colorCode={colorCode}
             />
 
             <Element className="course-content-container">
-              <Element
-                className="course-content"
-                autoBottomMargin
-              >
+              <Element className="course-content" autoBottomMargin>
                 <Element className="course-content-inner">
-                  <p className="col-1 letter" style={{ borderColor: colorCode }}>
+                  <p
+                    className="col-1 letter"
+                    style={{ borderColor: colorCode }}
+                  >
                     {letter}
                   </p>
 
@@ -236,7 +239,6 @@ export default class ContentTemplate extends Component {
               </Element>
 
               {Parser(html, parserOptions)}
-
             </Element>
           </Element>
 

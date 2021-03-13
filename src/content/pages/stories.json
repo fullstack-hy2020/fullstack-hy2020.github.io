@@ -20,7 +20,7 @@
       ],
       "name": "Burcu Aybak",
       "title": "Software Engineer"
-    },    
+    },
     {
       "image": "Tuukka_Peuraniemi.jpg",
       "companyLogo": "terveystalo.svg",
@@ -59,8 +59,6 @@
       "name": "Juho Kyrölä",
       "title": "Software Developer"
     },
-
-
     {
       "image": "holly_gibson_sq.jpg",
       "companyLogo": "smartly_io.svg",
@@ -94,7 +92,7 @@
       ],
       "name": "Burcu Aybak",
       "title": "Software Engineer"
-    },    
+    },
     {
       "image": "Tuukka_Peuraniemi.jpg",
       "companyLogo": "terveystalo.svg",
@@ -116,7 +114,7 @@
       ],
       "name": "Kristiina Rönnberg",
       "title": "Software Engineer"
-    },    
+    },
     {
       "image": "Juho_Kyrola.jpg",
       "companyLogo": "elisa.svg",
@@ -145,12 +143,84 @@
       "title": "Software Developer"
     }
   ],
+  "es": [
+    {
+      "image": "Juha_Tauriainen.jpg",
+      "companyLogo": "houston.svg",
+      "text": [
+        "Mi función en Houston se concentra en el desarrollo del frontend. Utilizamos una amplia gama de tecnologías y bibliotecas, incluidas las que se enseñan en este curso. Como empresa de consultoría, ayudamos a nuestros clientes y socios a lograr mejores resultados a través de una mejor calidad. Así como el código, traemos las mejores prácticas del campo y ayudamos a nuestros clientes a tener éxito.",
+        "Trabajar en Houston es fantástico por varias razones. Lo que más me gusta es que los empleados son siempre el número uno. Las ideas, sugerencias y opiniones del personal son escuchadas y reaccionadas. Por ejemplo, Houston me brindó todo su apoyo para iniciar una tutoría Ayudamos a personas de diferentes campos con la programación, los guiamos hacia las mejores prácticas y nuestro objetivo es llevarlos al negocio. Esto nos ha enseñado mucho a mí y a Houston. Me encanta ayudar a los demás, sin importar si clientes, compañeros de trabajo o estudiantes."
+      ],
+      "name": "Juha Tauriainen",
+      "title": "Consultor senior"
+    },
+    {
+      "image": "burcu_aybak.jpg",
+      "companyLogo": "unity.svg",
+      "text": [
+        "Trabajo en Unity como ingeniero de software full stack y tengo diez años de experiencia en el desarrollo de software, que incluyen, por ejemplo, aplicaciones web, sistemas de comando y control y sistemas de comunicación.",
+        "Me encanta estar en ingeniería de software porque es una combinación de resolución inteligente de problemas y trabajo creativo. ¡A veces me hace sentir como un superhéroe! Por otra parte, siempre hay cosas y temas nuevos que aprender y te pagan por hacer lo que quieres. disfruta con la gente que te gusta - ¡trabajar en ingeniería es divertido! Nuestra industria y los clientes son divertidos (¡juegos!) y es genial hacer un trabajo que ayude a nuestros clientes a ganarse la vida con lo que aman.",
+        "Me gusta trabajar en Unity porque el trabajo me permite trabajar con excelentes colegas y diferentes personalidades de todo el mundo que también son muy buenos en sus trabajos. Es un lugar perfecto para aprender nuevas tecnologías y explorar nuevas áreas. Unity es un lugar de trabajo perfecto para mí de una manera que no puedo explicar en unas pocas frases."
+      ],
+      "name": "Burcu Aybak",
+      "title": "Ingeniero de software"
+    },
+    {
+      "image": "Tuukka_Peuraniemi.jpg",
+      "companyLogo": "terveystalo.svg",
+      "text": [
+        "Tengo muchos años de experiencia en tecnologías de la salud. Terminé como desarrollador de software después de algunos giros y vueltas. Comencé como farmacéutico. Luego me gradué como Maestría en Ciencias de la Computación y procedí a trabajar como director de desarrollo y más tarde como desarrollador de software.",
+        "Disfruto trabajando en Terveystalo, porque aquí tienes voz sobre las tecnologías que usamos y en qué proyectos quieres participar. Debido a mi rol y mi experiencia puedo participar en la puesta en marcha y desarrollo de diferentes nuevos servicios. Ahora mismo Desarrollo una nueva aplicación móvil, que verá la luz entre los clientes en un futuro próximo.",
+        "En el futuro quiero seguir avanzando en mi trabajo y seguir aprendiendo. Trabajar en proyectos de múltiples proveedores con colegas experimentados mantiene y desarrolla mis habilidades.",
+        "Creo que Terveystalo seguirá ofreciendo nuevos proyectos significativos en el futuro."
+      ],
+      "name": "Tuukka Peuraniemi",
+      "title": "Desarrollador de aplicaciones y multi-experto digital"
+    },
+    {
+      "image": "kristiina_ronnberg.jpg",
+      "companyLogo": "konecranes.svg",
+      "text": [
+        "En un campo donde el aprendizaje continuo es casi vital, he tenido la suerte de poder trabajar con las últimas tecnologías y colegas experimentados. En mi puesto en Konecranes puedo trabajar en un entorno internacional y desarrollar soluciones que aportan los beneficios de Internet industrial a la vida cotidiana de nuestros clientes. La paleta tecnológica que utilizamos es rica, y los métodos de desarrollo se han vuelto aún más ágiles, los contenidos cubiertos por este curso también están presentes en nuestro trabajo.",
+        "Mi camino hacia la tecnología de la información no fue el más sencillo. Estudié como profesora de finlandés, pero terminé, después de continuar mi educación, cambiando mi carrera hacia este mundo diferente donde también se enfatizan las habilidades de lenguaje y escritura y la creatividad. Antecedentes Estoy encantado de que en Konecrass se aprecien los diferentes antecedentes y habilidades de los empleados y se apoye su avance. En este tipo de entorno, el nuevo campo y el desarrollo en él se ha sentido natural y motivador."
+      ],
+      "name": "Kristiina Rönnberg",
+      "title": "Ingeniero de software"
+    },
+    {
+      "image": "Juho_Kyrola.jpg",
+      "companyLogo": "elisa.svg",
+      "text": [
+        "Trabajo en Elisa como desarrolladora de software y estudio TI en la Universidad Aalto. Estoy terminando mis estudios y pronto comenzaré mi tesis. También he completado cursos y trabajé aquí al mismo tiempo. Terminé en Elisa debido a una recomendación de un amigo, me dijo, que este es un buen lugar para trabajar y me instó a aplicar.",
+        "Anteriormente trabajé para un par de otras empresas durante aproximadamente 1,5 años como desarrollador. La programación ha sido un pasatiempo mío desde la infancia, y siempre supe que lo mío son las computadoras. Mi primer lenguaje de programación fue Java.",
+        "Trabajo en Elisa Automate trabajando en una plataforma de optimización para redes móviles. Trabajo con la plataforma en sí, no con los algoritmos de optimización. Las tecnologías que he usado para proyectos incluyen Python, React, Elasticsearch y Docker, y para mí lo mejor es exactamente esto - programación de pila completa. No eres un héroe de front-end, pero puedes hacerlo todo. Mantiene la pasión. Los proyectos también son significativos para mí. Es divertido que seamos los pioneros en el campo y no solo propias versiones de algo ya existente.",
+        "Al principio fue un poco difícil entender el proyecto en el que estoy trabajando, pero poco a poco llegué allí. Ha sido muy motivador, que esto sea algo más que crear un sitio web 'normal'. Es fácil sumergirse solo en el trabajo, pero es importante tener en cuenta la importancia del trabajo en equipo. Sin trabajo en equipo, el trabajo avanza lentamente y podría terminar haciendo algo incorrecto. Para los nuevos empleados (tanto aprendices como codificadores más experimentados) sería beneficioso hacer, por ejemplo, codificación de pares al principio.",
+        "De antemano me interesaba saber si la cultura en una gran empresa estaría muy estancada, pero me sorprendió gratamente que mi equipo sea tan ágil. Avanzar en el trabajo no se siente como sacar sangre de una piedra, pero es casi un caminar en el parque. Antes de comenzar mi trabajo pensé que fácilmente terminaría encerrado, pero en realidad he podido hacer cosas muy diferentes. ¡Solo tienes que pedir diversas cosas para hacer tú mismo! Tienes que hacerte cargo de tu propia motivación.",
+        "La entrevista tuvo dos partes. Primero conocí a mi futuro jefe, quien determinó qué tipo de persona soy. En otro día hubo una entrevista técnica, donde se puso a prueba mi competencia a través de charlas y pequeños ejercicios. A lo largo del proceso se podía claramente Mira el lado humano, no solo se preocuparon por lo buen codificador que eres, sino también por quién eres como persona. El proceso de solicitud no me dio la sensación de estar siendo examinado, sino que estábamos buscando un terreno común, y tengo una idea de quiénes son mis futuros compañeros.",
+        "La cultura corporativa aquí cumple con mis expectativas y es fácil organizar su trabajo en torno a su vida. La comunicación también funciona bien, las cosas se discuten lo suficiente dentro de la empresa y no tengo la sensación de que exista este 'piso superior' turbio donde todo se decide. por supuesto que no siempre saben lo que se está haciendo en otros equipos, pero que parece ser la misma en todas las otras compañías grandes.",
+        "Hay suficientes oportunidades para avanzar y aprender, y puedes usar tus habilidades. Tu manager y el scrum master de tu equipo proponen cosas diferentes, ahora voy al evento React Finland. En general, es divertido en lugar de molesto venir a trabajar todos los días."
+      ],
+      "name": "Juho Kyrölä",
+      "title": "Desarrollador de software"
+    },
+    {
+      "image": "holly_gibson_sq.jpg",
+      "companyLogo": "smartly_io.svg",
+      "text": [
+        "Trabajo como desarrollador de software en Smartly.io, construyendo nuestras herramientas de creación de plantillas de imágenes y videos y creando una experiencia hermosa y poderosa para los diseñadores que crean medios visuales. Nuestro equipo trabaja con JavaScript, React y Node.js. En el primer momento, me encantó la cultura en Smartly.io, especialmente nuestro valor de ser Humble Hungry Hunters. No tenemos egos aquí, y somos humildes.",
+        "¡Incluso reconstruí nuestro servidor en medio de un bosque finlandés durante mis vacaciones después de que fue pirateado! Tener tanta responsabilidad hizo crecer mi confianza como desarrollador profesional. Desde entonces, he trabajado en varias empresas con diferentes tipos de tecnología y marcos y he avanzado a una posición de líder de equipo ",
+        "Soy en parte ingeniero y en parte artista. La codificación me permite usar ambas mitades de mi cerebro: la parte lógica que ama los acertijos y la resolución de problemas, y la parte artística que disfruta creando interfaces de usuario hermosas y funcionales. También hay un profundo elemento humano para desarrollar software que me guste. Cuando estamos construyendo herramientas creativas, necesitamos tener empatía y comprender las necesidades de nuestros clientes para tener éxito en la producción de algo fácil y poderoso de usar."
+      ],
+      "name": "Holly Gibson",
+      "title": "Desarrollador de software"
+    }
+  ],
   "zh": [
     {
       "image": "Juha_Tauriainen.jpg",
       "companyLogo": "houston.svg",
       "text": [
-        "我在Houston的任务集中在前端开发上。我们会使用各种技术和库，当然包括本课程中讲授的技术和库。作为一家咨询公司，我们帮助客户和合作伙伴通过更高的质量获得更好的结果。除了代码外，我们还带来了该领域的最佳实践，并帮助我们的客户取得成功。",      
+        "我在Houston的任务集中在前端开发上。我们会使用各种技术和库，当然包括本课程中讲授的技术和库。作为一家咨询公司，我们帮助客户和合作伙伴通过更高的质量获得更好的结果。除了代码外，我们还带来了该领域的最佳实践，并帮助我们的客户取得成功。",
         "从很多方面来说，在Houston工作真是棒极了。我最喜欢员工至上的理念。听取并回应员工的想法，建议和意见。例如，Houston全力支持我启动导师计划。我们帮助来自不同领域的人员进行编程，指导他们获得最佳实践，并致力于使他们融入业务。这对我和Houston都非常有帮助。无论对方是客户，同事还是学生，我都会竭尽全力帮助他人。"
       ],
       "name": "Juha Tauriainen",
@@ -159,14 +229,14 @@
     {
       "image": "burcu_aybak.jpg",
       "companyLogo": "unity.svg",
-      "text": [      
+      "text": [
         "我在Unity工作，是一名全栈软件工程师，在软件开发方面拥有十年的经验，包括Web应用程序，命令和控制系统以及通信系统。",
         "我喜欢从事软件工程，因为它是智能解决问题和创造性工作的结合。有时候让我觉得自己是超级英雄！再者说来，总会有新的事物和学科要学习，而与自己喜欢的人一起做自己喜欢的事情，就会得到报酬–工程工作真的很有趣！我们的行业和客户也都很有趣（因为是游戏业啊！），并且工作可以帮助我们的客户以他们所钟爱的方式谋生，这简直棒极了。",
         "我喜欢在Unity工作，因为这项工作使我可以与优秀的同事一起工作,他们来自世界各地且拥有不同的个性，他们同样很擅长工作。这里是学习新技术和探索新领域的理想场所。对于我来说，Unity是一个理想的工作场所，而我只用几句话是无法解释的。"
       ],
       "name": "Burcu Aybak",
       "title": "软件工程师"
-    },    
+    },
     {
       "image": "Tuukka_Peuraniemi.jpg",
       "companyLogo": "terveystalo.svg",
@@ -188,7 +258,7 @@
       ],
       "name": "Kristiina Rönnberg",
       "title": "软件工程师"
-    },    
+    },
     {
       "image": "Juho_Kyrola.jpg",
       "companyLogo": "elisa.svg",

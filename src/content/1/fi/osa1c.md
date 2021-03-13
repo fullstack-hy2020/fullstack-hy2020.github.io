@@ -62,7 +62,7 @@ const Hello = (props) => {
 
 Syntymävuoden arvauksen tekevä logiikka on erotettu omaksi funktiokseen, jota kutsutaan komponentin renderöinnin yhteydessä.
 
-Tervehdittävän henkilön ikää ei metodille tarvitse välittää parametrina, sillä funktio näkee sen sisältävälle komponentille välitettävät propsit.
+Tervehdittävän henkilön ikää ei tarvitse välittää funktiolle parametrina, sillä funktio näkee sen sisältävälle komponentille välitettävät propsit.
 
 Teknisesti ajatellen syntymävuoden selvittävä funktio on määritelty komponentin toiminnan määrittelevän funktion sisällä. Esim. Javalla ohjelmoitaessa metodien määrittely toisen metodin sisällä ei onnistu. Javascriptissa taas funktioiden sisällä määritellyt funktiot on hyvin yleisesti käytetty tekniikka.
 
@@ -101,7 +101,7 @@ const Hello = (props) => {
 }
 ```
 
-Huomaa, että olemme myös hyödyntäneet nuolifunktion kompaktimpaa kirjoitustapaa metodin _bornYear_ määrittelyssä. Kuten aiemmin totesimme, jos nuolifunktio koostuu ainoastaan yhdestä komennosta, ei funktion runkoa tarvitse kirjoittaa aaltosulkeiden sisään ja funktio palauttaa ainoan komentonsa arvon.
+Huomaa, että olemme myös hyödyntäneet nuolifunktion kompaktimpaa kirjoitustapaa funktion _bornYear_ määrittelyssä. Kuten aiemmin totesimme, jos nuolifunktio koostuu ainoastaan yhdestä komennosta, ei funktion runkoa tarvitse kirjoittaa aaltosulkeiden sisään ja funktio palauttaa ainoan komentonsa arvon.
 
 Seuraavat ovat siis vaihtoehtoiset tavat määritellä sama funktio:
 
@@ -178,15 +178,26 @@ const Hello = ({ name, age }) => {
 
 Toistaiseksi tekemämme sovellukset ovat olleet sellaisia, että kun niiden komponentit on kerran renderöity, niiden ulkoasua ei ole enää voinut muuttaa. Entä jos haluaisimme toteuttaa laskurin, jonka arvo kasvaa esim. ajan kuluessa tai nappien painallusten yhteydessä?
 
-Aloitetaan seuraavasta rungosta:
+Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.js</i> tulee:
 
 ```js
+import React from 'react'
+
 const App = (props) => {
   const {counter} = props
   return (
     <div>{counter}</div>
   )
 }
+
+export default App
+```
+
+Tiedoston <i>index.js</i> sisältö on:
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
 
 let counter = 1
 
@@ -196,22 +207,17 @@ ReactDOM.render(
 )
 ```
 
+**HUOM** kun tiedoston <i>index.js</i> sisältöä muutetaan, ei React osaa päivittää selaimeen uutta sisältöä ilman että selainmen koodi ladataan uudelleen refreshaamalla sivu.
+
 Sovelluksen juurikomponentille siis annetaan propsiksi laskurin _counter_ arvo. Juurikomponentti renderöi arvon ruudulle. Entä laskurin arvon muuttuessa? Jos lisäämme ohjelmaan esim. komennon
 
 ```js
 counter += 1
 ```
 
-ei komponenttia kuitenkaan renderöidä uudelleen. Voimme saada komponentin uudelleenrenderöitymään kutsumalla uudelleen metodia _ReactDOM.render_, esim. seuraavasti
+ei komponenttia kuitenkaan renderöidä uudelleen. Voimme saada komponentin uudelleenrenderöitymään kutsumalla uudelleen funktiota _ReactDOM.render_, esim. seuraavasti
 
 ```js
-const App = (props) => {
-  const { counter } = props
-  return (
-    <div>{counter}</div>
-  )
-}
-
 let counter = 1
 
 const refresh = () => {
@@ -239,7 +245,7 @@ setInterval(() => {
 }, 1000)
 ```
 
-_ReactDOM.render_-metodin toistuva kutsuminen ei kuitenkaan ole suositeltu tapa päivittää komponentteja. Tutustutaan seuraavaksi järkevämpään tapaan.
+_ReactDOM.render_-funktion toistuva kutsuminen ei kuitenkaan ole suositeltu tapa päivittää komponentteja. Tutustutaan seuraavaksi järkevämpään tapaan.
 
 ### Tilallinen komponentti
 
@@ -247,13 +253,22 @@ Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että
 
 Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://reactjs.org/docs/hooks-state.html) avulla.
 
-Muutetaan ohjelmaa seuraavasti
+Muutetaan ohjelmaa seuraavasti. Tiedosto <i>index.js</i> palaa muotoon
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, 
+document.getElementById('root'))
+```
+
+Tiedoto <i>App.js</i> muuttuu seuraavasti:
 
 ```js
 import React, { useState } from 'react' // highlight-line
-import ReactDOM from 'react-dom'
 
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
 
 // highlight-start
@@ -268,27 +283,24 @@ const App = (props) => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
-Sovellus importaa nyt heti ensimmäisellä rivillä _useState_-funktion:
+Tiedosto importaa nyt heti ensimmäisellä rivillä _useState_-funktion:
 
 ```js
 import React, { useState } from 'react'
 ```
 
-Komponentin määrittelevä funktio alkaa metodikutsulla
+Komponentin määrittelevä funktio alkaa funktiokutsulla
 
 ```js
 const [ counter, setCounter ] = useState(0)
 ```
 
-Kutsu saa aikaan sen, että komponentille luodaan <i>tila</i>, joka saa alkuarvokseen nollan. Metodi palauttaa taulukon, jossa on kaksi alkiota. Alkiot otetaan taulukon destrukturointisyntaksilla talteen muuttujiin _counter_ ja _setCounter_.
+Kutsu saa aikaan sen, että komponentille luodaan <i>tila</i>, joka saa alkuarvokseen nollan. Funktio palauttaa taulukon, jossa on kaksi alkiota. Alkiot otetaan taulukon destrukturointisyntaksilla talteen muuttujiin _counter_ ja _setCounter_.
 
-Muuttuja _counter_ pitää sisällään <i>tilan arvon</i> joka on siis aluksi nolla. Muuttuja _setCounter_ taas on viite funktioon, jonka avulla <i>tilaa voidaan muuttaa</i>.
+Muuttuja _counter_ pitää sisällään <i>tilan arvon</i> joka on siis aluksi arvoltaan nolla. Muuttuja _setCounter_ taas on viite funktioon, jonka avulla <i>tilaa voidaan muuttaa</i>.
 
 Sovellus määrittelee funktion [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) avulla, että tilan _counter_ arvoa kasvatetaan yhdellä sekunnin päästä:
 
@@ -351,7 +363,7 @@ const App = (props) => {
 }
 ```
 
-voidaan konsolista seurata metodin _render_ kutsuja:
+voidaan konsolista seurata komponentin renderöitymistä:
 
 ![](../../images/1/4e.png)
 
@@ -471,7 +483,7 @@ Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>fu
 <button onClick={setCounter(counter + 1)}>
 ```
 
-tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
+tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi komponentin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen...
 
 Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa
 
@@ -583,7 +595,7 @@ const App = (props) => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
-  const decreaseByOne = () => setCounter(counter - 1)
+  const decreaseByOne = () => setCounter(counter - 1)  // highlight-line
   const setToZero = () => setCounter(0)
 
   return (
@@ -645,7 +657,7 @@ const Display = ({ counter }) => {
 }
 ```
 
-Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa
+Koska komponentin määrittelevä funktio ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>

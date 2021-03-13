@@ -92,13 +92,12 @@ npm install --save-dev cross-env
 ```js
 require('dotenv').config()
 
-let PORT = process.env.PORT
-let MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT
 
 // highlight-start
-if (process.env.NODE_ENV === 'test') {
-  MONGODB_URI = process.env.TEST_MONGODB_URI
-}
+const MONGODB_URI = process.env.NODE_ENV === 'test' 
+  ? process.env.TEST_MONGODB_URI
+  : process.env.MONGODB_URI
 // highlight-end
 
 module.exports = {
@@ -125,8 +124,8 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-
 <!-- These are the only changes we need to make to our application's code. -->
 这些是我们需要对应用代码进行的惟一更改。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2). -->
-您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2)的<i>part4-2</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2). -->
+您可以在[this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2)的<i>part4-2</i> 分支中找到我们当前应用的全部代码。
 
 
 ### supertest
@@ -165,8 +164,8 @@ afterAll(() => {
 <!-- The test imports the Express application from the <i>app.js</i> module and wraps it with the <i>supertest</i> function into a so-called [superagent](https://github.com/visionmedia/superagent) object. This object is assigned to the <i>api</i> variable and tests can use it for making HTTP requests to the backend. -->
 测试从<i>app.js</i> 模块导入 Express 应用，并用<i>supertest</i> 函数将其包装成一个所谓的[superagent](https://github.com/visionmedia/superagent)对象。 这个对象被分配给<i>api</i> 变量，测试可以使用它向后端发出 HTTP 请求。
 
-<!-- Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format. -->
-我们的测试向<i>api/notes</i> url 发出 HTTP GET 请求，并验证请求是否用状态码200响应。 测试还验证<i>Content-Type</i> 头是否设置为 <i>application/json</i>，表明数据是所需的格式。
+<!-- Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format. (If you're not familiar with the RegEx syntax of `/application\/json/`, you can learn more [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).-->
+我们的测试向<i>api/notes</i> url 发出 HTTP GET 请求，并验证请求是否用状态码200响应。 测试还验证<i>Content-Type</i> 头是否设置为 <i>application/json</i>，表明数据是所需的格式。(如果你不熟悉正则语法 `/application\/json/` ， 你可以在[这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) 进行学习)
 
 <!-- The test contains some details that we will explore [a bit later on](/zh/part4/测试后端应用#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code. -->
 该测试包含一些细节，我们将在[稍后讨论](/zh/part4/测试后端应用#async-await)。 定义测试的箭头函数的前面是<i>async</i> 关键字，对<i>api</i> 对象的方法调用的前面是<i>await</i> 关键字。 我们将编写一些测试，然后仔细研究这个 async/await 黑魔法。 现在不要关心它们，只要确保示例测试正确工作就可以了。 async/await 语法与向 API 发出的请求是<i>异步</i> 操作这一事实相关。 [Async/await 语法](https://facebook.github.io/jest/docs/en/asynchronous.html)可以用于编写具有同步代码外观的异步代码 。
@@ -280,7 +279,11 @@ const info = (...params) => {
 }
 
 const error = (...params) => {
-  console.error(...params)
+  // highlight-start
+  if (process.env.NODE_ENV !== 'test') { 
+    console.error(...params)
+  }
+  // highlight-end  
 }
 
 module.exports = {
@@ -509,8 +512,8 @@ notesRouter.get('/', async (request, response) => {
 <!-- We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier. -->
 我们可以通过在浏览器中执行端测试和运行我们之前写的测试代码来验证我们的重构是否成功。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3)的<i>part4-3</i> 分支中找到我们当前应用的全部代码
+<!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-3). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-3)的<i>part4-3</i> 分支中找到我们当前应用的全部代码
 
 ### More tests and refactoring the backend 
 【更多的测试和后端重构】
@@ -838,8 +841,8 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4)的<i>part4-4</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-4). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-4)的<i>part4-4</i> 分支中找到我们当前应用的全部代码。
 
 ### Eliminating the try-catch
 【消除try-catch】
@@ -966,8 +969,8 @@ notesRouter.get('/:id', async (request, response) => {
 
 
 
-<!-- The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>. -->
-我们应用的代码可以在[github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5) ，<i>part4-5</i> 中找到。
+<!-- The code for our application can be found from [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>. -->
+我们应用的代码可以在[github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5) ，<i>part4-5</i> 中找到。
 
 ### Optimizing the beforeEach function
 【优化 beforeEach 函数】
@@ -1185,7 +1188,7 @@ beforeEach(async () => {
   const noteObjects = helper.initialNotes
     .map(note => new Note(note))
   const promiseArray = noteObjects.map(note => note.save())
-  await Promise.all(promiseArray)
+  await Note.insertMany(helper.initialNotes)
 })
 
 describe('when there is initially some notes saved', () => {
@@ -1324,8 +1327,8 @@ afterAll(() => {
 <!-- This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources. -->
 这种通过发出 HTTP 请求和用 Mongoose 检查数据库来测试 API 的方法，绝不是对服务器应用进行 API 集成测试的唯一或最佳方法。 没有通用的编写测试的最佳方法，因为这完全取决于被测试的应用和可用资源。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

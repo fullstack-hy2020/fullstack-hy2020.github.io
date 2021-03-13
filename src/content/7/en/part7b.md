@@ -319,7 +319,7 @@ The internet is starting to fill up with more and more helpful material related 
 
 ### Exercises 7.4.-7.8.
 
-We'll continue with the app from [exercises](/en/part7/custom_hooks#exercises-7-4-7-8) of the chapter [react router](/en/part7/react_router). 
+We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router). 
 
 #### 7.4: anecdotes and hooks step1
 
@@ -426,26 +426,20 @@ If we were to do this we would lose much of the benefit provided by the <i>useFi
 
 Let's return to the exercises [2.12-14](/en/part2/getting_data_from_server#exercises-2-11-2-14).
 
-<!-- Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi.  -->
-Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point.
+Use the code from https://github.com/fullstack-hy/country-hook as your starting point.
 
-<!-- Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot -->
 The application can be used to search for country details from the https://restcountries.eu/ interface. If country is found, the details of the country are displayed
 
 ![](../../images/7/69ea.png)
 
-<!-- jos maata ei löydy, kerrotaan siitä käyttäjälle -->
 If country is not found, message is displayed to the user
 
 ![](../../images/7/70ea.png)
 
-<!-- Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot. -->
 The application is otherwise complete, but in this exercise you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
 
-<!-- Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa. -->
 Use the api endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook.
 
-<!-- Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa.  -->
 Note, that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed.
 
 #### 7.8: ultimate hooks
@@ -462,9 +456,9 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const getAll = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
 }
 
 const create = async newObject => {
@@ -476,9 +470,9 @@ const create = async newObject => {
   return response.data
 }
 
-const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl } /${id}`, newObject)
-  return request.then(response => response.data)
+const update = async (id, newObject) => {
+  const response = await axios.put(`${ baseUrl } /${id}`, newObject)
+  return response.data
 }
 
 export default { getAll, create, update, setToken }
@@ -488,7 +482,7 @@ We notice that the code is in no way specific to the fact that our application d
 
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 
-You can do the exercise for the project found in the https://github.com/fullstack-hy2020/ultimate-hooks repository. The <i>App</i> component for the project is the following:
+You can do the exercise for the project found in the https://github.com/fullstack-hy/ultimate-hooks repository. The <i>App</i> component for the project is the following:
 
 ```js
 const App = () => {

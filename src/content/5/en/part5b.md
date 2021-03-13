@@ -7,22 +7,17 @@ lang: en
 
 <div class="content">
 
-
 ### Displaying the login form only when appropriate
-
 
 Let's modify the application so that the login form is not displayed by default:
 
 ![](../../images/5/10e.png)
 
-
 The login form appears when the user presses the <i>login</i> button:
 
 ![](../../images/5/11e.png)
 
-
 The user can close the login form by clicking the <i>cancel</i> button.
-
 
 Let's start by extracting the login form into its own component:
 
@@ -299,7 +294,7 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
+You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-4).
 
 
 ### State of the forms
@@ -391,8 +386,8 @@ const App = () => {
 <!-- Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi. -->
 We could do the same for the log in form, but we'll leave that for an optional exercise. 
 
-<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
-The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
+<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
+The application code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-5),
 branch <i>part5-5</i>.
 
 ### References to components with ref
@@ -493,7 +488,7 @@ This trick works for changing the state of a component, but it looks a bit unple
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-6).
 
 ### One point about components
 
@@ -525,7 +520,6 @@ And use it like this:
 </div>
 ```
 
-
 We create <i>three separate instances of the component</i> that all have their own separate state:
 
 ![](../../images/5/12e.png)
@@ -536,11 +530,7 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 </div>
 
 <div class="tasks">
-
-
 ### Exercises 5.5.-5.10.
-
-
 #### 5.5 Blog list frontend, step5
 
 Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
@@ -554,12 +544,9 @@ It expands when button <i>new note</i> is clicked
 ![](../../images/5/13be.png)
 
 The form closes when a new blog is created.
-
 #### 5.6 Blog list frontend, step6
 
-<!-- Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle.  -->
-Separate the form for creating a new blog into its own component (if you have not already done so), and 
-move all the states required for creating a new blog to this component. 
+Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component. 
 
 The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
@@ -737,12 +724,13 @@ Create-react-app has installed ESlint to the project by default, so all that's l
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
 ```bash
-npm add --save-dev eslint-plugin-jest
+npm install --save-dev eslint-plugin-jest
 ```
 
 Let's create a <i>.eslintrc.js</i> file with the following contents:
 
 ```js
+/* eslint-env node */
 module.exports = {
   "env": {
       "browser": true,
@@ -806,6 +794,7 @@ Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#igno
 ```bash
 node_modules
 build
+.eslintrc.js
 ```
 
 Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting.
@@ -851,7 +840,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-7).
 
 </div>
 

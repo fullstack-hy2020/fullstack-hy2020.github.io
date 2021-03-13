@@ -1,0 +1,15 @@
+@import '../common.scss';
+
+.select {
+  padding: 3px 6px;
+  appearance: none;
+  border: 1px solid $black;
+  border-radius: 5px;
+  color: inherit;
+  background-color: white;
+  background-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><path fill='none' stroke='%23333333' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 6px center;
+  background-size: 16px 12px;
+  width: 6.5rem;
+}

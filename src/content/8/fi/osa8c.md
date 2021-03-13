@@ -190,7 +190,7 @@ Mutation: {
 }
 ```
 
-Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
+Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
 
 ### Käyttäjä ja kirjautuminen
@@ -425,7 +425,21 @@ otetaan se vastaan suoraan funktion parametrimäärittelyssä:
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
-Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
+Omien tuttavien puhelinnumerot on mahdollista selvittää seuraavalla kyselyllä
+
+```js
+query {
+  me {
+    username
+    friends{
+      name
+      phone
+    }
+  }
+}
+```
+
+Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
 
 
 </div>
@@ -434,9 +448,11 @@ Backendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-h
 
 ### Tehtävät 8.13.-8.16.
 
+Tämän luvun tehtävät todennäköisesti hajottavat frontendin koodin. Tässä luvussa riittääkin keskittyä backendiin. Frontend korjataan ja sitä laajennetaan seuraavan luvun tehtävissä.
+
 #### 8.13: Tietokanta, osa 1
 
-Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
+Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
 
 Muutetaan myös graphql-skeemaa hiukan kirjan osalta
 

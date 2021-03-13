@@ -118,32 +118,10 @@ props value is [Object object]
 - Note 应用实际上是在创建一个和提醒、便笺相关的应用，因此以下的Note均翻译为便笺。
 
 <!-- Let's start with the following: -->
-让我们从如下代码开始:
+让我们从如下代码开始( <i>App.js</i>):
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
-
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only Javascript',
-    date: '2019-05-30T18:39:34.091Z',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
-    important: true
-  }
-]
 
 const App = (props) => {
   const { notes } = props
@@ -159,6 +137,36 @@ const App = (props) => {
     </div>
   )
 }
+
+export default App
+```
+
+<i>index.js</i> 内容如下:
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App.js'
+
+const notes = [
+  {
+    id: 1,
+    content: 'HTML is easy',
+    date: '2019-05-30T17:30:31.098Z',
+    important: true
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only JavaScript',
+    date: '2019-05-30T18:39:34.091Z',
+    important: false
+  },
+  {
+    id: 3,
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    date: '2019-05-30T19:20:14.298Z',
+    important: true
+  }
+]
 
 ReactDOM.render(
   <App notes={notes} />,
@@ -181,7 +189,7 @@ ReactDOM.render(
 <li>{notes[1].content}</li>
 ```
 
-<!-- This is, of course, not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. -->
+<!-- This is, of course, is not practical. The solution can be made general by generating React-elements from the array objects using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) function. -->
 数组下标这种方式当然是无法通用的。 可以使用 [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 函数从数组对象生成 React-元素，使解决方案变得更通用。
 
 ```js
@@ -194,7 +202,7 @@ notes.map(note => <li>{note.content}</li>)
 ```js
 [
   <li>HTML is easy</li>,
-  <li>Browser can execute only Javascript</li>,
+  <li>Browser can execute only JavaScript</li>,
   <li>GET and POST are the most important methods of HTTP protocol</li>,
 ]
 ```
@@ -304,7 +312,7 @@ const notes = [
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
+    content: 'Browser can execute only JavaScript',
     date: '2019-05-30T18:39:34.091Z',
     important: false
   },
@@ -387,8 +395,8 @@ note => <li key={note.id}>{note.content}</li>
 
 ### Anti-pattern: array indexes as keys 
 【反模式: 将数组的索引作为键】
-<!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the map-method:  -->
-通过使用数组的索引作为键，我们可以使控制台上的错误消息消失。可以通过向 map-方法 的回调函数传递的第二个参数来获取索引:
+<!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the _map_ method:  -->
+通过使用数组的索引作为键，我们可以使控制台上的错误消息消失。可以通过向 _map_ 方法 的回调函数传递的第二个参数来获取索引:
 
 ```js
 notes.map((note, i) => ...)
@@ -475,15 +483,18 @@ const App = ({ notes }) => {
 可以在单个文件中编写整个 React 应用。 虽然实践中很少这么用。 通常的做法是将每个组件在其自己的文件中，声明为一个<i>ES6-模块</i>。
 
 <!-- We have been using modules the whole time. The first few lines of the file: -->
-我们一直在使用模块。比如文件的前几行:
+我们一直在使用模块。比如 <i>index.js</i>:文件的前几行:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App.js'
 ```
 
 <!-- [imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_. -->
-为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>react</i> 模块被放入一个名为 React 的变量中， <i>react-dom</i> 模块放到了 ReactDOM 变量中。
+为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块： <i>React</i> 模块被放入一个名为 React 的变量中， <i>React-DOM</i> 模块放到了 ReactDOM 变量中。
+
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The module <i>react-dom</i> is placed into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_
+为了让它们能够在代码中使用，就[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 了两个模块：  <i>react-dom</i>  模块放到了 _ReactDOM_ 变量中，主应用的模块被放入一个名为 _App_ 的变量中。
 
 <!-- Let's move our <i>Note</i> component into its own module.  -->
 让我们将我们的<i>Note</i> 组件移动到它自己的模块中。
@@ -516,11 +527,10 @@ export default Note
 模块的最后一行  [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ，是在声明模块，即变量<i>Note</i>。
 
 <!-- Now the file using the component, <i>index.js</i>, can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module:  -->
-现在使用这个组件的文件，即<i>index.js</i>，可以 [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 这个模块了:
+现在使用这个组件的文件，即<i>App.js</i>，可以 [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) 这个模块了:
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Note from './components/Note' // highlight-line
 
 const App = ({ notes }) => {
@@ -542,9 +552,9 @@ const App = ({ notes }) => {
 开头的 _句点_ 指的是当前工作目录，因此模块的位置是当前<i>components</i> 的子目录中的一个名为<i>Note.js</i> 的文件。 文件扩展名(_.js_)可以省略。
 
 <!--<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows:--> 
-<i>App</i>也是一个组件，所以让我们在它自己的模块中声明它。 因为它是应用的根组件，所以我们将它放在  <i>src</i> 目录中。 文件内容如下:
+<!-- <i>App</i>也是一个组件，所以让我们在它自己的模块中声明它。 因为它是应用的根组件，所以我们将它放在  <i>src</i> 目录中。 文件内容如下: -->
 
-```js
+<!-- ```js
 import React from 'react'
 import Note from './components/Note'
 
@@ -563,12 +573,12 @@ const App = ({ notes }) => {
 
 
 export default App // highlight-line
-```
+``` -->
 
 <!-- What's left in the <i>index.js</i> file is:  -->
-<i>index.js</i> 文件剩下的内容是:
+<!-- <i>index.js</i> 文件剩下的内容是: -->
 
-```js
+<!-- ```js
 import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'  // highlight-line
@@ -581,7 +591,7 @@ ReactDOM.render(
   <App notes={notes} />,
   document.getElementById('root')
 )
-```
+``` -->
 
 <!-- Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back into them later in this course.  -->
 
@@ -589,11 +599,11 @@ ReactDOM.render(
 
 
 
-<!-- The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1). -->
-应用的当前代码可以在 [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)上找到。
+<!-- The current code of the application can be found on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1). -->
+应用的当前代码可以在 [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1)上找到。
 
-<!-- Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1): -->
-注意，仓库的<i>主分支</i>包含应用的后续版本的代码。 当前的代码在分支 [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)中:
+<!-- Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1): -->
+注意，仓库的<i>主分支</i>包含应用的后续版本的代码。 当前的代码在分支 [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1)中:
 
 ![](../../images/2/2e.png)
 
@@ -734,9 +744,9 @@ const Course = (props) => { // highlight-line
 
 <h3>Exercises 2.1.-2.5.</h3>
 
-<!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
+<!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
 
-这些练习是通过 GitHub 提交的，并在[提交系统submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)那样将练习标记为 done。
+这些练习是通过 GitHub 提交的，并在[提交系统submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021)那样将练习标记为 done。
 
 <!-- You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. -->
 您可以将本课程的所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请使用一个合理的目录命名方案。 
@@ -755,8 +765,8 @@ const Course = (props) => { // highlight-line
 <h4>2.1: Course information 步骤6</h4>
 
 <!-- Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers.  -->
-<!-- The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info<i/> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info"). -->
-让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。第一章中的模型答案可以到 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)来找到，单击顶部的<i>my submissions</i>，在对应第一章中下面<i>solutions</i>列，点击<i>show</i>。 如果要查看<i>course info</i> 练习，点击 <i>kurssitiedot</i> 下的_index.js_ ("kurssitiedot" 表示课程信息)
+<!-- The model answers for part 1 can be found by going to the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info<i/> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info"). -->
+让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。第一章中的模型答案可以到 [提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)来找到，单击顶部的<i>my submissions</i>，在对应第一章中下面<i>solutions</i>列，点击<i>show</i>。 如果要查看<i>course info</i> 练习，点击 <i>kurssitiedot</i> 下的_index.js_ ("kurssitiedot" 表示课程信息)
 
 
 <!-- It might not be good to copy a project or to put the  <i>node\_modules</i> directory into the version control per se.  -->

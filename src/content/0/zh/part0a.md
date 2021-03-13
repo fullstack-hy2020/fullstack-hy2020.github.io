@@ -7,9 +7,9 @@ lang: zh
 
 <div class="content">
 
-<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript and React Native. -->
+<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript,  React Native and Continuous integration.-->
 
-本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了两门全新的的课程——TypeScript和React Native。
+本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了三门全新的的课程——TypeScript、React Native以及持续集成。
 
 <!-- Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases. -->
 
@@ -59,9 +59,14 @@ lang: zh
 
 你<i>至少</i>要完成没有带星号(\*)的练习。 带星号的练习虽然对标你的期末成绩，但跳过它们并不妨碍你做下一章节的必选练习。
 
-<!-- The speed of completing the course is quite free, and the exercises can be submitted up until 23:59 10th January 2021. -->
+<!-- The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 15 February 2021.  -->
+课程的完成速度是十分弹性的，练习在[欧洲时间](https://en.wikipedia.org/wiki/Eastern_European_Time) 的2021年3月1日前都可以进行提交。
 
-完成课程的速度十分自由，练习在 2021 年 1 月 10 日 23:59 之前都可以进行提交。
+<!-- After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding!  -->
+在此之后，提交系统会关闭两个周，2021版本会在2021年3月15日启动。2021版本不会有太大的变化，所以你可以接着敲代码啦。
+
+<!-- However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2020.  -->
+不过注意，赫尔辛基大学的学分考试截止日期是2021年1月10号。
 
 <!-- Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
@@ -100,9 +105,9 @@ lang: zh
 
 想要获得大学学分的话，3 个学分的课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦已经[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
 
-<!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest.</b> -->
+<!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest. It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.</b> -->
 
-最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。
+最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。 您也可以参加2021学年的考试，2021年的开课时间是2021年3月15日。
 
 <!-- Exam results can be found from the "my submissions" tab of the submission system no later than 4 weeks after taking the exam (exams might be marked slower during July). Remember to save your student number to the submission system! -->
 
@@ -145,9 +150,10 @@ lang: zh
 
 如果想要获得大学学分，5-9 学分课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
 
-<!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest.</b> -->
+<!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest.</b>  It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.
+-->
 
-最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。
+最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。您也可以参加2021学年的考试，2021年的开课时间是2021年3月15日。
 
 <!-- You can take the exam only after submitting enough exercises for 5 credits. In practice it is not wise to take the course exam immediately after the critical number of exercises has been submitted. The exam is the same for 5-9 credits. The exam does not count towards your grade. -->
 
@@ -183,6 +189,16 @@ React Native 章节的学分
 
 通过提交第10章的练习，React Native， 你可以获得1-2学分。获得1学分需要你提交至少19个练习，获得2学分需要你提交至少26个练习。关于该章节更多的前置要求，练习提交和学分获取规则可以参考 [part 10](/zh/part10/introduction_to_react_native)。
 
+#### Continuous integration part's credits
+持续集成章节的学分
+
+<!-- By submitting exercises for part 11 of the courses, Continuous integration/delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of the part. -->
+通过提交11章的练习，持续集成与持续交付，你可以获得额外的一个学分。获得学分需要你提交该章节的所有22个章节。
+
+<!-- More information about the part's prerequisites and exercise submission can be found in the [part 11](/en/part11). -->
+其他关于该章节的要求和练习提交可以查看[第11章](/zh/part11)
+
+
 ### How to get your credits 
 【如何获得学分】
 
@@ -213,21 +229,21 @@ React Native 章节的学分
 
 即使你没有因为考试而注册公开大学，只要你完成了结业所需的足够的练习数量，你就可以从 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中下载课程的结业证书。如果只想要获得结业证书，你不需要提供芬兰社保账号。
 
-### Expanding a previously completed course 
+### Expanding on a previously completed course 
 【拓展之前完成的课程】
 
 <!-- If you have already taken the course either as a MOOC or as a University Course, you can now expand your course. -->
 
 如果你已经参与过这门课程，无论是在大学课程还是公开课，你都可以基于之前的课来进行拓展。
 
-#### Expanding Full stack open 2019 
+#### Expanding on Full stack open 2019 
 【拓展全栈公开课 2019】
 
 <!-- You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel. -->
 
 你可以续接你上次学习的进度！ 如果您希望重新提交整个章节的内容，请与课程负责人联系。
 
-#### Expanding other course instance
+#### Expanding on other instances of this course
 【拓展其他课程】
 
 <!-- You can substitute <i>parts</i> of this course with parts you have previously submitted. For example, if you have previously completed the 3-credit course, you can substitute parts 0-3 of this course with the parts you have previously completed. You can only substitute parts in sequence, so you cannot for example substitute parts 0 and 2 but now complete part 1. -->
@@ -252,11 +268,11 @@ React Native 章节的学分
 * 对于0~4章节，只有一些很小的改动。
 * 第5d章节，<i>端到端测试</i> 利用了[Cypress.io](https://www.cypress.io) 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
 
-<!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript and part 10 on React Native is completely new. -->
+<!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript, part 10 on React Native and part 11 on CI/CD are completely new. -->
 * 第6章是讲Redux的，主要介绍了新的基于hook的redux API。
 * 第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。
 * 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。
-* 第9章的TypeScript 和第10 章的React Native 是全新的内容。
+* 第9章的TypeScript 和第10 章的React Native 以及第11章的 CI/CD 是全新的内容。
 
 <!-- Last year's course material can be found from https://fullstackopen-2019.github.io/ -->
 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。

@@ -160,7 +160,7 @@ Notelist 组件实际上不需要关于选择哪个过滤器的信息，因此�
 我们只需要在便笺props中给它正确过滤的便笺:
 
 ```js
-const Notes = (props) => { // highlight-line
+const Notes = (props) => {
   const dispatch = useDispatch()
 
   return(
@@ -382,8 +382,8 @@ export default connect(
 <!-- Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_.  -->
 由于组件不需要访问存储的状态，我们可以简单地将<i>null</i> 作为连接的第一个参数。
 
-<!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5). -->
-您可以在 [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5)的<i>part6-5</i> 分支中找到我们当前应用的全部代码
+<!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-5). -->
+您可以在 [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-5)的<i>part6-5</i> 分支中找到我们当前应用的全部代码
 
 ### Referencing action creators passed as props
 <!-- Let's direct our attention to one interesting detail in the <i>NewNote</i> component: -->
@@ -697,8 +697,8 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 <!-- The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks. -->
 <i>redux store</i> 目前通过 <em>useSelector</em> 和 <em>useDispatch</em> hooks传递给所有组件。
 
-修改 <i>AnecdoteList</i> 组件，让它使用 _connect_ 函数而不是hooks。你可能需要实现你自己的 <i>mapStateToProps</i> 和 <i>mapDispatchToProps</i> 函数
-
+<!-- Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks.  -->
+修改 <i>AnecdoteList</i> 组件，让它使用 _connect_ 函数而不是hooks。
 
 #### 6.20 anecdotes and connect, 步骤2
 
@@ -720,7 +720,7 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 这可以通过在必要时显示新通知时取消删除以前的通知来实现。
 <!-- The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this. -->
 Settimeout 函数的[documentation](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout 文档)对此也很有用。 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>

@@ -732,8 +732,8 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development. -->
 一旦我们将数据库混入其中，检查数据库中持久存储的状态就很有用了，例如，通过 MongoDB Atlas 中的控制面板来检查。 很多时候，像我们前面编写的<i>mongo.js</i> 程序这样的小型 Node helper 程序在开发过程中会非常有用。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4)的<i>part3-4</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-4). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-4)的<i>part3-4</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 
@@ -878,7 +878,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 ```js
 .catch(error => {
-  console.log(error)
+  console.log(error) // highlight-line
   response.status(400).send({ error: 'malformatted id' })
 })
 ```
@@ -931,11 +931,15 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
+// 这是最后加载的中间件
 app.use(errorHandler)
 ```
 
 <!-- The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.  -->
 错误处理程序检查错误是否是<i>CastError</i> 异常，在这种情况下，我们知道错误是由 Mongo 的无效对象 id 引起的。 在这种情况下，错误处理程序将向浏览器发送响应，并将response对象作为参数传递。 在所有其他错误情况下，中间件将错误转发给缺省的 Express 错误处理程序。
+
+<!-- Note that the error handling middleware has to be the last loaded middleware! -->
+注意处理错误的中间件是最后加载的中间件
 
 ### The order of middleware loading 
 【中间件加载顺序】
@@ -948,7 +952,7 @@ app.use(errorHandler)
 ```js
 app.use(express.static('build'))
 app.use(express.json())
-app.use(logger)
+app.use(requestLogger)
 
 app.post('/api/notes', (request, response) => {
   const body = request.body
@@ -974,7 +978,7 @@ app.use(errorHandler)
 Json-parser 中间件应该是最早加载到 Express 中的中间件之一，如果顺序变成了下面这样: 
 
 ```js
-app.use(logger) // request.body is undefined!
+app.use(requestLogger) // request.body is undefined!
 
 app.post('/api/notes', (request, response) => {
   // request.body is undefined!
@@ -1064,8 +1068,8 @@ app.put('/api/notes/:id', (request, response, next) => {
 <!-- After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.  -->
 在使用 Postman 和 VS Code REST 客户端直接测试后端之后，我们可以验证它似乎可以工作。 前端似乎也与使用数据库的后端一起工作。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5). -->
-您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).的<i>part3-5</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-5). -->
+您可以在[this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-5).的<i>part3-5</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

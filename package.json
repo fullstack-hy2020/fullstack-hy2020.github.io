@@ -36,7 +36,7 @@
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
     "react-ga": "^2.5.7",
-    "react-helmet": "^5.2.0",
+    "react-helmet": "^6.0.0",
     "react-i18next": "^11.7.2",
     "react-use-flexsearch": "^0.1.1",
     "use-debounce": "^3.4.3"

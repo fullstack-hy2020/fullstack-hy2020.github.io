@@ -294,8 +294,8 @@ setNotes(notes.concat(noteObject))
 setNewNote('')
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2). -->
-您可以在[Github 仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2)的<i>part2-2</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part2-2). -->
+您可以在[Github 仓库](https://github.com/fullstack-hy/part2-notes/tree/part2-2)的<i>part2-2</i> 分支中找到我们当前应用的全部代码。
 
 ### Filtering Displayed Elements
 【过滤显示的元素】
@@ -446,8 +446,8 @@ const App = (props) => {
 show {showAll ? 'important' : 'all'}
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3). -->
-您可以在[this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3)的<i>part2-3</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part2-3). -->
+您可以在[this github repository](https://github.com/fullstack-hy/part2-notes/tree/part2-3)的<i>part2-3</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

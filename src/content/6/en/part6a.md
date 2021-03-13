@@ -397,7 +397,6 @@ Let's install the library as a development dependency
 npm install --save-dev deep-freeze
 ```
 
-
 The test, which we define in file <i>src/reducers/noteReducer.test.js</i>, has the following content: 
 
 ```js
@@ -425,11 +424,9 @@ describe('noteReducer', () => {
 })
 ```
 
-
 The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the _push_ command to manipulate the state, the test will not pass
 
 ![](../../images/6/2.png)
-
 
 Now we'll create a test for the <i>TOGGLE\_IMPORTANCE</i> action:
 
@@ -469,7 +466,6 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
 })
 ```
 
-
 So the following action
 
 ```js
@@ -481,9 +477,7 @@ So the following action
 }
 ```
 
-
 has to change the importance of the note with the id 2.
-
 
 The reducer is expanded as follows
 
@@ -509,16 +503,13 @@ const noteReducer = (state = [], action) => {
 }
 ```
 
-
 We create a copy of the note which importance has changed with the syntax [familiar from part 2](/en/part2/altering_data_in_server#changing-the-importance-of-notes), and replace the state with a new state containing all the notes which have not changed and the copy of the changed note <i>changedNote</i>.
-
 
 Let's recap what goes on in the code. First, we search for a specific note object, the importance of which we want to change: 
 
 ```js
 const noteToChange = state.find(n => n.id === id)
 ```
-
 
 then we create a new object, which is a <i>copy</i> of the original note, only the value of the <i>important</i> field has been changed to the opposite of what it was: 
 
@@ -528,7 +519,6 @@ const changedNote = {
   important: !noteToChange.important 
 }
 ```
-
 
 A new state is then returned. We create it by taking all of the notes from the old state except for the desired note, which we replace with its slightly altered copy: 
 
@@ -540,9 +530,7 @@ state.map(note =>
 
 ### Array spread syntax
 
-
 Because we now have quite good tests for the reducer, we can refactor the code safely. 
-
 
 Adding a new note creates the state it returns with Arrays _concat_-function. Let's take a look at how we can achieve the same by using the JavaScript [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) -syntax:
 
@@ -567,7 +555,7 @@ const numbers = [1, 2, 3]
 ```
 
 
-<code>...numbers</code> breaks the array up into individual elements, which can place i.e to another array. 
+<code>...numbers</code> breaks the array up into individual elements, which can be placed in another array.
 
 ```js
 [...numbers, 4, 5]
@@ -605,11 +593,9 @@ console.log(rest)     // prints [3, 4, 5, 6]
 
 ### Exercises 6.1.-6.2.
 
-
 Let's make a simplified version of the unicafe-exercise from part 1. Let's handle the state management with Redux. 
 
-
-You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project. 
+You can take the project from this repository https://github.com/fullstack-hy/unicafe-redux for the base of your project. 
 
 
 <i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>
@@ -622,9 +608,7 @@ npm install
 
 #### 6.1: unicafe revisited, step1
 
-
 Before implementing the functionality of the UI, let's implement the functionality required by the store. 
-
 
 We have to save the number of each kind of feedback to the store, so the form of the state in the store is: 
 
@@ -635,7 +619,6 @@ We have to save the number of each kind of feedback to the store, so the form of
   bad: 2
 }
 ```
-
 
 The project has the following base for a reducer: 
 
@@ -705,9 +688,7 @@ describe('unicafe reducer', () => {
 })
 ```
 
-
 **Implement the reducer and its tests.**
-
 
 In the tests, make sure that the reducer is an <i>immutable function</i> with the <i>deep-freeze</i>-library. 
 Ensure that the provided first test passes, because Redux expects that the reducer returns a sensible original state when it is called so that the first parameter <i>state</i>, which represents the previous state, is 
@@ -722,8 +703,9 @@ example above.
 
 #### 6.2: unicafe revisited, step2
 
-
 Now implement the actual functionality of the application. 
+
+Note that since all the code is in the file <i>index.js</i> and you have to manually reload the page after each change since the automatic reloading of the browser content does not work for that page!
 
 </div>
 
@@ -731,12 +713,11 @@ Now implement the actual functionality of the application.
 
 ### Uncontrolled form
 
-
 Let's add the functionality for adding new notes and changing their importance: 
 
 ```js
 const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
+  Math.floor(Math.random() * 1000000)
 
 const App = () => {
   const addNote = (event) => {
@@ -808,7 +789,6 @@ addNote = (event) => {
 }
 ```
 
-
 We can get the content of the new note straight from the form field. Because the field has a name, we can access the content via the event object <i>event.target.note.value</i>.  
 
 ```js
@@ -829,7 +809,6 @@ toggleImportance = (id) => {
   })
 }
 ```
-
 ### Action creators
 
 We begin to notice that, even in applications as simple as ours, using Redux can simplify the frontend code. However, we can do a lot better. 
@@ -885,22 +864,17 @@ const App = () => {
 Aside from the reducer, our application is in one file. This is of course not sensible, and we should separate <i>App</i> into its own module. 
 
 Now the question is, how can the <i>App</i> access the store after the move? And more broadly, when a component is composed of many smaller components, there must be a way for all of the components to access the store. 
-
-<!-- Tapoja välittää redux-store sovelluksen komponenteille on useita, tutustutaan ensin ehä uusimpaan ja helpoimpaan tapaan [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan. -->
 There are multiple ways to share the redux-store with components. First we will look into the newest, and possibly the easiest way using the [hooks](https://react-redux.js.org/api/hooks)-api of the [react-redux](https://react-redux.js.org/) library.
 
 
-<!-- Asennetaan react-redux -->
 First we install react-redux
 
 ```bash
 npm install react-redux
 ```
 
-<!-- Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mitä sovelluksen muiden tiedostojen sisällöksi tulee. -->
-Next we move the _App_ component into its own file _App.js_. Let's see how this effects the rest of the application files.
+Next we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files.
 
-<!-- Tiedosto _index.js_ näyttää seuraavalta -->
 _Index.js_ becomes:
 
 ```js
@@ -921,7 +895,6 @@ ReactDOM.render(
 )
 ```
 
-<!-- Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>.  -->
 Note, that the application is now defined as a child of a [Provider](https://react-redux.js.org/api/provider) -component provided by the react redux library.
 The application's store is given to the Provider as its attribute <i> 
 store</i>.
@@ -991,11 +964,8 @@ Code for the <i>App</i> component
 
 ```js
 import React from 'react'
-import { 
-  createNote, toggleImportanceOf
-} from './reducers/noteReducer' 
+import { createNote, toggleImportanceOf } from './reducers/noteReducer' // highlight-line
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
-
 
 const App = () => {
   const dispatch = useDispatch()  // highlight-line
@@ -1204,7 +1174,7 @@ const App = () => {
 
 We will return to the presentational/container division later in this part. 
 
-The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>.
+The code of the Redux application can be found on [Github](https://github.com/fullstack-hy/redux-notes/tree/part6-1), branch <i>part6-1</i>.
 
 </div>
 
@@ -1213,7 +1183,7 @@ The code of the Redux application can be found on [Github](https://github.com/fu
 ### Exercises 6.3.-6.8.
 
 
-Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy2020/redux-anecdotes to base your solution on.  
+Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy/redux-anecdotes to base your solution on.  
 
 
 If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i> 
@@ -1281,8 +1251,8 @@ const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
+      <AnecdoteList />
       <AnecdoteForm />
-      <AnecdoteList  />
     </div>
   )
 }

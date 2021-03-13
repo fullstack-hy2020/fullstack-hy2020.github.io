@@ -9,6 +9,9 @@
     "noMatches": "No matches found",
     "matchesTitle": "Found {{count}} matches for query \"{{query}}\""
   },
+  "aboutPage": {
+    "generalTitle": "General"
+  },
   "navigation": {
     "aboutCourse": "About course",
     "courseContents": "Course contents",
@@ -18,6 +21,8 @@
     "searchLinkSrLabel": "Search from the material"
   },
   "challengePage": {
+    "aboutTitle": "This is Full Stack -challenge",
+    "joinTitle": "Companies, Heed The Call!",
     "registerButton": "Register your company to Full Stack challenge",
     "nameLabel": "Name",
     "namePlaceholder": "Jane Doe",
@@ -32,5 +37,17 @@
     "participantsTitle": "These companies have joined the Full Stack challenge",
     "coOperationTitle": "In co-operation with",
     "infoButton": "More about challenge"
+  },
+  "companiesPage": {
+    "storiesTitle": "Developer stories from our partners"
+  },
+  "faqPage": {
+    "faqTitle": "Frequently asked questions"
+  },
+  "homePage": {
+    "startCourseButton": "Start course",
+    "announcementsTitle": "Announcements",
+    "authorsTitle": "Authors and License",
+    "courseNameTitle": "Full Stack open 2021"
   }
 }

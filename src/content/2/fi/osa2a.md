@@ -11,7 +11,7 @@ Ennen kun menemme uuteen asiaan, nostetaan esiin muutama edellisen osan huomiota
 
 ### console.log
 
-**Mikä erottaa kokeneen ja kokemattoman Javascript-ohjelmoijan? Kokeneet käyttävät 10-100 kertaa enemmän console.logia**.
+**Mikä erottaa kokeneen ja kokemattoman JavaScript-ohjelmoijan? Kokeneet käyttävät 10-100 kertaa enemmän console.logia**.
 
 Paradoksaalista kyllä tämä näyttää olevan tilanne, vaikka kokematon ohjelmoija oikeastaan tarvitsisi console.logia (tai jotain muita debuggaustapoja) huomattavissa määrin kokenutta enemmän. 
 
@@ -41,7 +41,7 @@ Lue tarvittaessa lisää React-sovellusten debuggaamisesta [täältä](/osa1/mon
 
 ### Tapahtumankäsittely revisited
 
-Viime vuoden kurssin alun kokemusten perusteella tapahtumien käsittely on osoittautunut haastavaksi.
+Aiempien vuosien kurssien alun kokemusten perusteella tapahtumien käsittely on osoittautunut haastavaksi.
 
 Edellisen osan lopussa oleva kertaava osa [tapahtumankäsittely revisited](/osa1/monimutkaisempi_tila_reactin_debuggaus#tapahtumankasittely-revisited) kannattaa käydä läpi, jos osaaminen on vielä häilyvällä pohjalla.
 
@@ -70,7 +70,7 @@ Tärkein kaikista snippeteistä on komennon <em>console.log()</em> nopeasti ruud
 
 ### Taulukkojen käyttö Javascriptissä
 
-Tästä osasta lähtien käytämme runsaasti Javascriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja, kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo parin vuoden ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa.
+Tästä osasta lähtien käytämme runsaasti Javascriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja, kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo vuosien ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa. Operaattoreihin tutustutaan myös Ohjelmoinnin jatkokurssin Python-versiossa, [osassa 12](https://python-s20.now.sh/osa-12/3-funktionaalista-ohjelmointia).
 
 Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katsoa Youtubessa olevasta videosarjasta <i>Functional Programming in JavaScript</i> ainakin kolme ensimmäistä osaa
 
@@ -82,32 +82,10 @@ Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katso
 
 Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen [Single page app -versiota](https://fullstack-exampleapp.herokuapp.com/spa) vastaavan sovelluksen 'frontend' eli selainpuolen sovelluslogiikka.
 
-Aloitetaan seuraavasta:
+Aloitetaan seuraavasta (tiedosto <i>App.js</i>):
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
-
-const notes = [
-  {
-    id: 1,
-    content: 'HTML is easy',
-    date: '2020-01-10T17:30:31.098Z',
-    important: true
-  },
-  {
-    id: 2,
-    content: 'Browser can execute only Javascript',
-    date: '2020-01-10T18:39:34.091Z',
-    important: false
-  },
-  {
-    id: 3,
-    content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2020-01-10T19:20:14.298Z',
-    important: true
-  }
-]
 
 const App = (props) => {
   const { notes } = props
@@ -123,6 +101,36 @@ const App = (props) => {
     </div>
   )
 }
+
+export default App
+```
+
+Tiedosto <i>index.js</i> on muuten samanlainen kuin se on ollut toistaiseksi kaikissa ohjelmissa, mutta se määrittelee taulukon, mikä pitää sisällään näytettävän datan.
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App.js'
+
+const notes = [
+  {
+    id: 1,
+    content: 'HTML is easy',
+    date: '2019-05-30T17:30:31.098Z',
+    important: true
+  },
+  {
+    id: 2,
+    content: 'Browser can execute only JavaScript',
+    date: '2019-05-30T18:39:34.091Z',
+    important: false
+  },
+  {
+    id: 3,
+    content: 'GET and POST are the most important methods of HTTP protocol',
+    date: '2019-05-30T19:20:14.298Z',
+    important: true
+  }
+]
 
 ReactDOM.render(
   <App notes={notes} />,
@@ -321,7 +329,7 @@ Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, 
 
 Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
 
-```
+```js
 note =>
   <li key={note.id}>
     {note.content}
@@ -408,14 +416,14 @@ Huomaa, että <i>key</i>-attribuutti täytyy nyt määritellä <i>Note</i>-kompo
 
 Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se ei luonnollisesti ole järkevää. Usein käytäntönä on määritellä yksittäiset komponentit omassa tiedostossaan <i>ES6-moduuleina</i>.
 
-Koodissamme on käytetty koko ajan moduuleja. Tiedoston ensimmäiset rivit
+Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>index.js</i> ensimmäiset rivit
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App.js'
 ```
 
-[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli <i>react</i> sijoitetaan muuttujaan _React_ ja <i>react-dom</i> muuttujaan _ReactDOM_. 
+[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli <i>react-dom</i> sijoitetaan muuttujaan _ReactDOM_, ja sovelluksen pääkomponentin määrittelevä moduuli muuttujaan _App_.
 
 Siirretään nyt komponentti <i>Note</i> omaan moduuliinsa.
 
@@ -439,11 +447,10 @@ Koska kyseessä on React-komponentti, tulee React importata komponentissa.
 
 Moduulin viimeisenä rivinä [eksportataan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) määritelty komponentti, eli muuttuja <i>Note</i>.
 
-Nyt komponenttia käyttävä tiedosto <i>index.js</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
+Nyt komponenttia käyttävä tiedosto <i>App.js</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
 import Note from './components/Note' // highlight-line
 
 const App = ({notes}) => {
@@ -461,50 +468,11 @@ Huomaa, että itse määriteltyä komponenttia importatessa komponentin sijainti
 
 Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston alihakemisto <i>components</i> ja sen sisällä tiedosto <i>Note.js</i>. Tiedoston päätteen voi jättää pois.
 
-Koska myös <i>App</i> on komponentti, eristetään sekin omaan moduuliinsa. Koska kyseessä on sovelluksen juurikomponentti, sijoitetaan se suoraan hakemistoon <i>src</i>. Tiedoston sisältö on seuraava:
-
-```js
-import React from 'react'
-import Note from './components/Note'
-
-const App = ({ notes }) => {
-  return (
-    <div>
-      <h1>Notes</h1>
-      <ul>
-        {notes.map((note, i) => 
-          <Note key={note.id} note={note} />
-        )}
-      </ul>
-    </div>
-  )
-}
-
-export default App // highlight-line
-```
-
-Tiedoston <i>index.js</i> sisällöksi jää:
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'  // highlight-line
-
-const notes = [
-  // ...
-]
-
-ReactDOM.render(
-  <App notes={notes} />,
-  document.getElementById('root')
-)
-```
-
 Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-1)
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi, tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
 
 ![](../../images/2/2b.png)
 

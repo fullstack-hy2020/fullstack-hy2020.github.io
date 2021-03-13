@@ -186,16 +186,17 @@ setTimeout(() => {
 
 ```json
 {
-  "name": "notes",
+  "name": "part2-notes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -204,7 +205,10 @@ setTimeout(() => {
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -242,13 +246,14 @@ Axios 现在被包含在依赖中了:
 ```json
 {
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2", // highlight-line
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "axios": "^0.21.1", // highlight-line
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
   // ...
 }
@@ -346,6 +351,8 @@ console.log(promise2)
 如果你打开浏览器访问<http://localhost:3000>， 此时如下信息会打印到控制台
 
 ![](../../images/2/16b.png)
+<!-- **Note:** when the content of the file <i>index.js</i> changes, React does not notice the automatiaclly so you must refresh the browser to see your changes! -->
+注意，当  <i>index.js</i>  变化时， React 并不会自动感知，因此你必须刷新浏览器来看到变化！
 
 <!-- Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). -->
 Axios 的 _get_ 方法会返回一个[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。 
@@ -478,7 +485,7 @@ import React, { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios' 
 import Note from './components/Note'
 
-const App = () => {
+const App = () => { // highlight-line
   const [notes, setNotes] = useState([])  // highlight-line
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
@@ -633,8 +640,8 @@ useEffect(() => {
 <!-- We still have a problem in our application. When adding new notes, they are not stored on the server. -->
 我们的应用仍然有一个问题。当添加新的便笺时，它们不存储在服务器上。
 
-<!-- The code so far for the application can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4) in the branch <i>part2-4</i>. -->
-到目前为止，应用的代码可以在分支<i>part2-4</i> 中的[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4)上找到。
+<!-- The code so far for the application can be found in full on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-4) in the branch <i>part2-4</i>. -->
+到目前为止，应用的代码可以在分支<i>part2-4</i> 中的[github](https://github.com/fullstack-hy/part2-notes/tree/part2-4)上找到。
 
 ### The development runtime environment  
 【开发的运行时环境】

@@ -130,7 +130,7 @@ eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>prop
 Komponentti _Notes_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
 
 ```js
-const Notes = (props) => { // highlight-line
+const Notes = (props) => {
   const dispatch = useDispatch()
 
   return(
@@ -338,7 +338,7 @@ export default connect(
 
 Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri <i>null</i>.
 
-Sovelluksen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+Sovelluksen koodi on [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
 ### Huomio propsina välitettyyn action creatoriin viittaamisesta
 
@@ -590,10 +590,9 @@ Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman
 
 #### 6.19 anekdootit ja connect, step1
 
-<i>Redux storea</i> käytetään tällä hetkellä <em>useSelector</em> ja <em>useDispatch</em> hookien avulla.
+<i>Redux storea</i> käytetään tällä hetkellä <em>useSelector</em> ja <em>useDispatch</em> hookien avulla. Tämä on varmasti paras tapa tehdä asiat, mutta harjoitellaan kuitenkin hieman connectin käyttöä.
 
-Muokkaa <i>AnecdoteList</i> komponenttia niin, että se käyttää _connect_ funktiota hookien sijaan. Tätä varten saatat joutua toteuttamaan <i>mapStateToProps</i> ja <i>mapDispatchToProps</i> funktiot.
-
+Muokkaa <i>Notification</i> komponenttia niin, että se käyttää _connect_ funktiota hookien sijaan. 
 #### 6.20 anekdootit ja connect, step2
 
 Tee sama <i>Filter</i> ja <i>AnecdoteForm</i> komponenteille.

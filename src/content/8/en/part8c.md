@@ -27,6 +27,7 @@ The person schema has been defined as follows:
 
 ```js
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const schema = new mongoose.Schema({
   name: {
@@ -51,6 +52,7 @@ const schema = new mongoose.Schema({
   },
 })
 
+schema.plugin(uniqueValidator)
 module.exports = mongoose.model('Person', schema)
 ```
 
@@ -202,7 +204,7 @@ Mutation: {
 }
 ```
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
+The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 
 ### User and log in
@@ -213,6 +215,7 @@ The user schema is as follows:
 
 ```js
 const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator')
 
 const schema = new mongoose.Schema({
   username: {
@@ -229,11 +232,12 @@ const schema = new mongoose.Schema({
   ],
 })
 
+schema.plugin(uniqueValidator)
 module.exports = mongoose.model('User', schema)
 ```
 
 
-Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, i.e <i>mluukkai</i>, adds a person, i.e <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application. 
+Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application. 
 
 
 Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens. 
@@ -350,7 +354,7 @@ The object returned by context is given to all resolvers as their <i>third param
 So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined. 
 
 
-The resolver of the _me_ query is very simple, it just returns the logged in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged in user, i.e there is no valid token in the header attached to the request, the query returns <i>null</i>:
+The resolver of the _me_ query is very simple, it just returns the logged in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:
 
 ```js
 Query: {
@@ -451,8 +455,22 @@ it is received straight in the parameter definition of the function:
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
+The following query now returns the user's friendlist
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
+```js
+query {
+  me {
+    username
+    friends{
+      name
+      phone
+    }
+  }
+}
+```
+
+
+The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
 
 
 </div>
@@ -461,10 +479,10 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 
 ### Exercises 8.13.-8.16.
 
+The following exercises are guite likely breaking your frontend. Do not worry it yet, the fronend shall be fixed and expanded in next chapter. 
 #### 8.13: Database, part 1
 
-
-Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
+Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
 
 
 Let's change the book graphql schema a little
@@ -479,12 +497,9 @@ type Book {
 }
 ```  
 
-
 so that instead of just the author's name, the book object contains all the details of the author. 
 
-
 You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors. 
-
 
 The following things do <i>not</i> have to work just yet
 
@@ -497,16 +512,13 @@ The following things do <i>not</i> have to work just yet
 
 Complete the program so that all queries (except _allBooks_ with the parameter _author_ ) and mutations work. 
 
-You might find this [useful](https://docs.mongodb.com/manual/reference/operator/query/in/).
+You might find [this](https://docs.mongodb.com/manual/reference/operator/query/in/) useful.
 
 #### 8.15 Database, part 3
 
-
 Complete the program so that database validation errors (e.g. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
 
-
 #### 8.16 user and logging in
-
 
 Add user management to your application. Expand the schema like so:
 
@@ -543,7 +555,8 @@ type Mutation {
 Create resolvers for query _me_ and the new mutations _createUser_ and 
 _login_. Like in the course material, you can assume all users have the same hardcoded password. 
 
-
 Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 
+
+(Don't worry about fixing the frontend for the moment.)
 
 </div>

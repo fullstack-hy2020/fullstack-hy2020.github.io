@@ -430,12 +430,23 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
+For making new user in production or development environemnt, you may send POST request to ```/api/users/``` via Postman or REST Client in following format:
+```js
+{
+    "notes": [],
+    "username": "root",
+    "name": "Superuser",
+    "password": "salainen"
+}
+
+```
+
 The list looks like this:
 
 ![](../../images/4/9.png)
 
 
-You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
+You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7).
 
 ### Creating a new note
 
@@ -570,6 +581,6 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
+You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8).
 
 </div>
