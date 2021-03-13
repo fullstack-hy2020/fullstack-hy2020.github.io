@@ -176,15 +176,26 @@ const Hello = ({ name, age }) => {
 
 So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button?
 
-Let's start with the following:
+Let's start with the following. File <i>App.js</i> becomes:
 
 ```js
+import React from 'react'
+
 const App = (props) => {
   const {counter} = props
   return (
     <div>{counter}</div>
   )
 }
+
+export default App
+```
+
+And file <i>index.js</i> becomes:
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
 
 let counter = 1
 
@@ -193,6 +204,9 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+
+
+**Note** when you change file <i>index.js</i> React does not refresh the page automatically so you need to reload the browser page to get the new content shown.
 
 The App component is given the value of the counter via the _counter_ prop. This component renders the value to the screen. What happens when the value of _counter_ changes? Even if we were to add the following
 
@@ -203,13 +217,6 @@ counter += 1
 the component won't re-render. We can get the component to re-render by calling the _ReactDOM.render_ method a second time, e.g. in the following way:
 
 ```js
-const App = (props) => {
-  const { counter } = props
-  return (
-    <div>{counter}</div>
-  )
-}
-
 let counter = 1
 
 const refresh = () => {
@@ -245,11 +252,20 @@ All of our components up till now have been simple in the sense that they have n
 
 Next, let's add state to our application's <i>App</i> component with the help of React's [state hook](https://reactjs.org/docs/hooks-state.html).
 
-We will change the application to the following:
+We will change the application as follows.  <i>index.js</i> goes back to
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, 
+document.getElementById('root'))
+```
+
+and <i>App.js</i> changes to the following:
 
 ```js
 import React, { useState } from 'react' // highlight-line
-import ReactDOM from 'react-dom'
 
 const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
@@ -266,13 +282,11 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
-In the first row, the application imports the _useState_ function:
+
+In the first row, the file imports the _useState_ function:
 
 ```js
 import React, { useState } from 'react'
@@ -595,7 +609,7 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
-  const decreaseByOne = () => setCounter(counter - 1)
+  const decreaseByOne = () => setCounter(counter - 1)  // highlight-line
   const setToZero = () => setCounter(0)
 
   return (

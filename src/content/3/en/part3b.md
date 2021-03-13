@@ -69,6 +69,11 @@ And the frontend works! However, the functionality for changing the importance o
 
 You can read more about CORS from [Mozillas page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
+The setup of our app looks now as follows:
+
+![](../../images/3/100.png)
+
+The react app that runs in browser fetches now the data from node/express-server that runs in localhost:3001.
 ### Application to the Internet
 
 Now that the whole stack is ready, let's move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this.
@@ -109,7 +114,7 @@ If not, the issue can be found by reading heroku logs with command <i>heroku log
 
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server. 
 
->**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
+>**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
 
 The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>.
 
@@ -140,7 +145,7 @@ One option for deploying the frontend is to copy the production build (the <i>bu
 We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux computer, the copying can be done from the frontend directory with the command
 
 ```bash
-cp -r build ../../../osa3/notes-backend
+cp -r build ../notes-backend
 ```
 
 If you are using a Windows computer, you may use either [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) or [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) command instead. Otherwise, simply do a copy and paste.
@@ -204,15 +209,29 @@ The React code fetches notes from the server address <http://localhost:3001/api/
 
 ![](../../images/3/29ea.png)
 
+The setup that is ready for product deployment looks as follows:
+
+![](../../images/3/101.png)
+
+Unlike when runnig app in development environment, now everything is in the same node/express-backend that runs in localhost:3001. When brower goes to the page, the file  <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes.
+
+### The whole app to internet
+
 After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. 
 
-[The application](https://vast-oasis-81447.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
+[The application](https://glacial-ravine-74819.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
 
 ![](../../images/3/30ea.png)
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 
 The application needs a database. Before we introduce one, let's go through a few things. 
+
+The setup looks like now as follows:
+
+![](../../images/3/102.png)
+
+The node/express-backend resides now in Heroku server. When the root address that is of the from https://glacial-ravine-74819.herokuapp.com/ is accessed, browser loads and executes the React app that fetches the json-data from the Heroku server.
 
 ###  Streamlining deploying of the frontend 
 
@@ -222,9 +241,9 @@ To create a new production build of the frontend without extra manual work, let'
 {
   "scripts": {
     //...
-    "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
-    "deploy": "git push heroku main",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",    
+    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build --prod && cp -r build ../notes-backend",
+    "deploy": "git push heroku master",
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
   }
 }
@@ -282,7 +301,7 @@ There are multiple ways to achieve this (for example placing both backend and fr
 
 In some situations it may be sensible to deploy the frontend code as its own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack).
 
-Current code of the backend can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1).
+Current code of the backend can be found on [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy/part2-notes/tree/part3-1).
 
 </div>
 

@@ -9,7 +9,7 @@ lang: en
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
-The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
+The application exists only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
 On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
 
 Coding in the recommended style begins in [part 1](/en/part1).

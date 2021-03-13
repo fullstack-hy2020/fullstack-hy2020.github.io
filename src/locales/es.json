@@ -10,8 +10,8 @@
     "matchesTitle": "Se encontraron {{count}} coincidencias para la consulta \"{{query}}\""
   },
   "navigation": {
-    "aboutCourse": "Acerca del curso",
-    "courseContents": "Contenido del curso",
+    "aboutCourse": "Acerca",
+    "courseContents": "Contenido",
     "faq": "Preguntas frecuentes",
     "partners": "Partners",
     "challenge": "Challenge",

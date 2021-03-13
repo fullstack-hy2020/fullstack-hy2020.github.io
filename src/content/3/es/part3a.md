@@ -863,9 +863,9 @@ Si los datos guardados en la variable _body_ tienen la propiedad <i>important</i
 
 > Para ser exactos, cuando la propiedad <i>important</i> es <i>false</i>, entonces la expresión <em>body.important || false</em> devolverá el <i>false</i> del lado derecho ...
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-1</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-1</i> de [este repositorio de github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1).
 
-Observe que la rama master del repositorio contiene el código de una versión posterior de la aplicación. El código para el estado actual de la aplicación se encuentra específicamente en la rama [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
+Observe que la rama master del repositorio contiene el código de una versión posterior de la aplicación. El código para el estado actual de la aplicación se encuentra específicamente en la rama [part3-1](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1).
 
 ![](../../images/3/21.png)
 
@@ -1045,7 +1045,7 @@ app.use(unknownEndpoint)
 ```
 
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-2</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-2</i> de [este repositorio de github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2).
 
 </div>
 

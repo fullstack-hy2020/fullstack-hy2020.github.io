@@ -333,7 +333,7 @@ Para aplicaciones más pequeñas, la estructura no importa mucho. Una vez que la
 
 No existe una estructura de directorio estricta o una convención de nomenclatura de archivos que se requiera para las aplicaciones Express. Para contrastar esto, Ruby on Rails requiere una estructura específica. Nuestra estructura actual simplemente sigue algunas de las mejores prácticas que puede encontrar en Internet.
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-1</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-1</i> de [este repositorio de Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1).
 
 Si clona el proyecto usted mismo, ejecute el comando _npm install_ antes de iniciar la aplicación con _npm start_.
 

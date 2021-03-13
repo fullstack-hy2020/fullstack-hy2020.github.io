@@ -170,7 +170,7 @@ const reducer = combineReducers({
 })
  // highlight-end
 
-const store = createStore(reducer)
+const store = createStore(reducer, composeWithDevTools())
 
 console.log(store.getState())
 
@@ -489,8 +489,8 @@ export default store
 
 ![](../../images/6/13ea.png)
 
-<!-- You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2)的<i>/ part6-2</i> 分支中找到我们当前应用的全部代码，
+<!-- You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-2). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-2)的<i>/ part6-2</i> 分支中找到我们当前应用的全部代码，
 
 </div>
 

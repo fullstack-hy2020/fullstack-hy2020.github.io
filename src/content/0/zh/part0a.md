@@ -60,13 +60,13 @@ lang: zh
 你<i>至少</i>要完成没有带星号(\*)的练习。 带星号的练习虽然对标你的期末成绩，但跳过它们并不妨碍你做下一章节的必选练习。
 
 <!-- The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 15 February 2021.  -->
-课程的完成速度是十分弹性的，练习在[欧洲时间](https://en.wikipedia.org/wiki/Eastern_European_Time) 的2021年1月15日23:59前都可以进行提交。
+课程的完成速度是十分弹性的，练习在[欧洲时间](https://en.wikipedia.org/wiki/Eastern_European_Time) 的2021年3月1日前都可以进行提交。
 
 <!-- After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding!  -->
 在此之后，提交系统会关闭两个周，2021版本会在2021年3月15日启动。2021版本不会有太大的变化，所以你可以接着敲代码啦。
 
 <!-- However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2020.  -->
-不过注意，赫尔辛基大学的学分考试截止日期是2020年1月10号。
+不过注意，赫尔辛基大学的学分考试截止日期是2021年1月10号。
 
 <!-- Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 

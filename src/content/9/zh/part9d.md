@@ -73,15 +73,18 @@ npx create-react-app my-app --template typescript
     }
   },
   "rules": {
-    "@typescript-eslint/explicit-function-return-type": 0
+    "@typescript-eslint/explicit-function-return-type": 0,
+    "@typescript-eslint/explicit-module-boundary-types": 0
   }
 }
 ```
 
-<!-- Since basically all React components return a <i>JSX.Element</i> type or  <i>null</i>, we have loosen the default linting rules a bit by disabling the rule [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md), so that we don't need to explicitly write out function return types everywhere. -->
+<!-- Since the return type of basically all React components is <i>JSX.Element</i> or <i>null</i>, we have loosened the default linting rules up a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md) .  -->
 因为基本上所有 React 组件都返回一个<i>JSX.Element</i> 类型或<i>null</i> 类型，所以我们通过禁用 规则  [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md)来稍微放松默认的lint规则，这样我们就不需要在所有地方显式写出函数返回类型 。
 
-<!-- Now we need to get our linting script to parse  <i>*.tsx </i> files as well, which are the TypeScript equivalent of react's JSX files. We can do that by altering our lint command in <i>.package.json</i> to the following: -->
+Now we don't need to explicitly state our function return types everywhere.
+Next we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of react's JSX files. 
+We can do that by altering our lint command in <i>.package.json</i> to the following:
 
 现在我们需要让我们的 linting 脚本也来解析 <i>*.tsx</i>文件，它们是与 react 的 JSX 文件等价的TypeScript。 我们可以通过改变 <i>.package.json</i> 中的 lint 命令来做到这一点，修改如下:
 
@@ -101,16 +104,6 @@ npx create-react-app my-app --template typescript
 <!-- If you are using Windows, you may need to use double quotes for the linting path: `"lint": "eslint \"./src/**/*.{ts,tsx}\""`. -->
 如果你使用Windows，可能需要使用双引号包住lint 路径：`"lint": "eslint \"./src/**/*.{ts,tsx}\""`
 
-<!-- If we now run <i>npm run lint</i>, we should still receive an error from eslint: -->
-如果我们现在运行 <i>npm run lint</i>,，我们仍然会收到一个来自 eslint 的错误:
-
-![](../../images/9/31a.png)
-
-<!-- Why is that? As we can see from the error, the file  <i>serviceWorker.ts</i> doesn't seem to be compliant with our linting configurations at the moment. This is because the <i>register</i> function uses other functions that are declared later in the same file and the rule [@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md) doesn't like that. To fix the error we need to move the  <i>register</i> function as the last function in the file. -->
-为什么？ 正如我们从错误中看到的，文件<i>serviceWorker.ts</i> 目前似乎与我们的链接配置不兼容。 这是因为<i>register</i> 函数使用了稍后在同一文件中声明的其他函数，而规则[@typescript-eslint/no-use-before-define](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-use-before-define.md)不喜欢这样。 为了修复这个错误，我们需要将<i>register</i> 函数移动到作为文件中的最后一个函数。
-
-<!-- If we now run <i>npm run lint</i>, we shouldn't get any errors. Actually the error does not matter, since we do not need the file <i>serviceWorker.ts</i> anyway, it is better to delete it altogether. -->
-如果我们现在运行 <i>npm run lint</i>，我们不应该得到任何错误。 实际上，错误并不重要，因为我们不需要文件<i>servicedworker.ts</i>，所以最好将其删除。
 
 ### React components with TypeScript
 【用TypeScript 编写 React组件】
@@ -137,53 +130,42 @@ ReactDOM.render(element, document.getElementById("root"));
 <!-- In the example we have a component called <i>Welcome</i>, to which we want to pass a <i>name</i> prop, that is then rendered. We know that the  <i>name</i> prop should be a string and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [第5章](/zh/part5/props_children_与_proptypes#prop-types) to be able to receive hints about component's desired prop types and warnings for invalid prop types. -->
 在这个示例中，我们有一个名为<i>Welcome</i> 的组件，我们希望向它传递一个<i>name</i> prop，然后将其渲染。 我们知道<i>name</i> prop 应该是一个字符串，我们使用在[第5章](/zh/part5/props_children_与_proptypes#prop-types) 中介绍的[prop-types](https://www.npmjs.com/package/prop-types)包，可以接收关于部件所需props类型的提示，以及无效props类型的警告。
 
+With TypeScript we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as react components are nothing but merely functions. We will use an interface for the parameters types (i.e., props) and <i>JSX.Element</i> as return type for any react component.
+For example:
 <!-- With the help of TypeScript we don't need the <i>prop-types</i> package anymore to define prop types, because we can define the types with the help of TypeScript itself by using the _FunctionComponent_ type or it's shorter alias _FC_. -->
 在 TypeScript 的帮助下，我们不再需要<i>prop-types</i> 包来定义 prop 类型，因为我们可以通过使用 _FunctionComponent_ 类型或者更短的别名 FC，在 TypeScript 本身的帮助下定义类型。
 
- <!--When using TypeScript with React components, the type annotations look a bit different than with other TypeScript code. We basically add a type for the component variable, instead of the function and it's props. _React.FunctionComponent_ is a so called [generic](https://www.typescriptlang.org/docs/handbook/generics.html) type, to which you can pass a type as a sort of argument, that it then uses in the final type.-->
-当使用 TypeScript 编写 React 组件时，类型注解看起来与其他 TypeScript 代码有点不同。 我们基本上为组件变量添加一个类型，而不是函数和它的props。 _React.FunctionComponent_ 是一种所谓的[泛型](https://www.typescriptlang.org/docs/handbook/generics.html)类型，您可以将类型作为参数传递给它，然后它在最后的类型中使用这个 。
+```jsx
+const MyComp1 = () => {
+  // Typescript automatically infers the return type of this function 
+  // (i.e., a react component) as `JSX.Element`.
+  return <div>Typescript has auto inference!</div>
+}
 
-<!-- The type declaration for _React.FC_ and _React.FunctionComponent_ look like the following: -->
-_React.FC_ 和 _React.FunctionComponent_ 的类型声明如下所示:
+const MyComp2 = (): JSX.Element => {
+  // We are explicityle defining the return type of a function here 
+  // (i.e., a react component).
+  return <div>Typescript React is easy.</div>
+}
 
-```js
-type FC<P = {}> = FunctionComponent<P>;
+interface MyProps{
+  lable: string;
+  price?: number;
+}
 
-interface FunctionComponent<P = {}> {
-  (props: PropsWithChildren<P>, context?: any): ReactElement | null;
-  propTypes?: WeakValidationMap<P>;
-  contextTypes?: ValidationMap<any>;
-  defaultProps?: Partial<P>;
-  displayName?: string;
+const MyComp3 = ({lable, price}: MyProps): JSX.Element => {
+  // We are explicityle defining the parameter types using interface `MyProps` 
+  // and return types as `JSX.Element` in this function (i.e., a react component).
+  return <div>Typescript is great.</div>
+}
+
+const MyComp4 = ({lable, price}: {lable: string, price: number}) => {
+  // We are explicityle defining the parameter types using an inline interface 
+  // and typescript automatically infers the return type as JSX.Element of the function (i.e., a react component).
+  return <div>There is nothing like typescript.</div>
 }
 ```
-
-<!-- Firstly, you can see that _FC_ is simply an alias for the _FunctionComponent_ interface. They are both generic, which can easily be recognized by the angle bracket _<>_ after the type name. Inside the angle brackets there is <i>P = {}</i>. That means, that you can pass a type as an argument and inside the new type the passed type will go by the name <i>P</i> that is an empty object <i>{}</i> by default. -->
-首先，您可以看到 FC 只是 FunctionComponent 接口的别名。 它们都是泛型的，可以很容易地通过类型名称后面的角括号来识别。 在尖括号中有 <i>P = {}</i>.。 这意味着，您可以将类型作为参数传递，在新类型中，传递的类型将默认使用空对象 <i>{}</i>  的名称 <i>P</i> 。
-
-<!-- Now let's take a look at the first line inside _FunctionComponent_: -->
-现在让我们看看 FunctionComponent 内部的第一行代码:
-
-```js
-(props: PropsWithChildren<P>, context?: any): ReactElement | null;
-```
-
-<!-- There you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type, to which <i>P</i> is passed. The type <i>PropsWithChildren</i> in turn is a [intersection](http://www.typescriptlang.org/docs/handbook/unions-and-intersections.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
-<!-- 
-这里你可以看到<i>props</i> 的类型是 <i>PropsWithChildren</i>， 也是 <i>P</i> 传递给他的泛型。 类型<i>PropsWithChildren</i> 是<i>P</i> 和类型 <i>{ children?: ReactNode }</i>的一个[intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) . -->
-
-<!-- Here you can see that <i>props</i> is of type <i>PropsWithChildren</i>, which is also a generic type to which <i>P</i> is passed. -->
-这里你可以看到<i>props</i> 的类型是 <i>PropsWithChildren</i>， 也是 <i>P</i> 传递给他的泛型。
-<!-- The type <i>PropsWithChildren</i> in turn is a [intersection](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types) of <i>P</i> and the type <i>{ children?: ReactNode }</i>. -->
-<i>PropsWithChildren</i> 类型反过来又是  <i>P</i>  和 <i>{ children?: ReactNode }</i> 的[交集](https://www.typescriptlang.org/docs/handbook/advanced-types.html#intersection-types)。
-
-
-```js
-type PropsWithChildren<P> = P | { children?: ReactNode };
-```
-
-<!-- Well, that was complicated (or was it?). Basically all we need to know at the moment is that we can define a type that we pass to _FunctionComponent_ and the component's <i>props</i> then consist of the defined type and component's <i>children</i>. -->
-好吧，这很复杂(或者说是这样吗?) . 基本上，我们现在需要知道的是，我们可以定义一个传递给 _FunctionComponent_ 的类型，然后组件的<i>props</i> 包含已定义的类型和组件的<i>children</i>。
+Now, lets return to our code example and see how we would define the type for the <i>Welcome</i> component in TypeScript.
 
 <!-- Now, lets return to our code example and see how we would define the type for the <i>Welcome</i> component's props in TypeScript. -->
 现在，让我们回到我们的代码示例，看看如何在TypeScript中为<i>Welcome</i> 组件的 props 定义类型。
@@ -193,7 +175,7 @@ interface WelcomeProps {
   name: string;
 }
 
-const Welcome: React.FC<WelcomeProps> = (props) => {
+const Welcome = (props: WelcomeProps) => {
   return <h1>Hello, {props.name}</h1>;
 };
 
@@ -201,37 +183,23 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-<!-- We defined a new type _WelcomeProps_ and passed it to the added typing for the <i>Welcome</i> component: -->
+We defined a new type _WelcomeProps_ and passed to the function's parameter types.
 我们定义了一个新类型 WelcomeProps，并将其传递给<i>Welcome</i> 组件的添加类型:
 
-```js
-const Welcome: React.FC<WelcomeProps>;
+```jsx
+const Welcome = (props: WelcomeProps) => {
 ```
 
-<!-- You could also write the same thing using a less verbose syntax: -->
-你也可以使用不那么冗长的语法来写同样的东西:
+You could write the same thing using a less verbose syntax:
 
 ```jsx
-const Welcome: React.FC<{ name: string }> = ({ name }) => (
+const Welcome = ({ name }: { name: string }) => (
   <h1>Hello, {name}</h1>
 );
 ```
+Now our editor knows that the <i>name</i> prop is a string. 
 
-<!-- Now our editor knows that the <i>name</i> prop is a string, but for some reason eslint is not yet satisfied, and warns about that <i>'name' is missing in props validation</i>. This is because the react linting rules expect propTypes to be defined for all props, because it isn't aware of that we are already using TypeScript to define types for our props. -->
-现在我们的编辑器知道<i>name</i> prop 是一个字符串，但是由于某些原因 eslint 还不满足，并且警告说在 props validation 中缺少  name。 这是因为 react linting 规则期望 propTypes 为所有props定义，因为它没有意识到我们已经在使用 TypeScript 为props定义了类型。
-
-<!-- To fix the error, we need to add a new linting rule to <i>.eslintrc</i>: -->
-为了修复这个错误，我们需要在<i>.eslintrc</i>中添加一个新的 linting 规则:
-
-```json
-{
-  // ...
-  "rules": {
-    "react/prop-types": 0, // highlight-line
-  },  
-  // ...
-}
-```
+For some reason eslint is not satisfied, and complains <i>'name' is missing in props validation</i>. This happens because the react linting rules expect us to define propTypes for all props.
 
 </div>
 
@@ -250,7 +218,16 @@ const Welcome: React.FC<{ name: string }> = ({ name }) => (
 ```jsx
 import React from "react";
 import ReactDOM from "react-dom";
+import App from "./App";
 
+
+ReactDOM.render(<App />, document.getElementById("root"));
+```
+
+and <i>App.tsx</i> to the following:
+
+```jsx
+import React from 'react';
 const App: React.FC = () => {
   const courseName = "Half Stack application development";
   const courseParts = [
@@ -288,7 +265,7 @@ const App: React.FC = () => {
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;
 ```
 
 <!-- and remove the unnecessary files. -->
@@ -471,66 +448,95 @@ default:
 
 ### Exercise 9.15
 #### 9.15
-<!-- First add the new type information to <i>index.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below. -->
-首先将新类型信息添加到<i>index.tsx</i> 中，并将变量<i>courseParts</i> 替换为下面示例中的变量。
+<!-- First add the new type information to <i>App.tsx</i> and replace the variable <i>courseParts</i> with the one from the example below. -->
+首先将新类型信息添加到<i>App.tsx</i> 中，并将变量<i>courseParts</i> 替换为下面示例中的变量。
 
 ```js
 // new types
 interface CoursePartBase {
   name: string;
   exerciseCount: number;
+  type: string;
 }
 
-interface CoursePartOne extends CoursePartBase {
-  name: "Fundamentals";
+interface CourseNormalPart extends CoursePartBase {
+  type: "described";
   description: string;
 }
-
-interface CoursePartTwo extends CoursePartBase {
-  name: "Using props to pass data";
+interface CourseProjectPart extends CoursePartBase {
+  type: "groupProject";
   groupProjectCount: number;
 }
 
-interface CoursePartThree extends CoursePartBase {
-  name: "Deeper type usage";
+interface CourseSubmissionPart extends CoursePartBase {
+  type: "submission";
   description: string;
   exerciseSubmissionLink: string;
 }
 
-type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
+type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart;
+
 
 // this is the new coursePart variable
 const courseParts: CoursePart[] = [
   {
     name: "Fundamentals",
     exerciseCount: 10,
-    description: "This is an awesome course part"
+    description: "This is the leisured course part",
+    type: "normal"
+  },
+  {
+    name: "Advanced",
+    exerciseCount: 7,
+    description: "This is the harded course part",
+    type: "normal"
   },
   {
     name: "Using props to pass data",
     exerciseCount: 7,
-    groupProjectCount: 3
+    groupProjectCount: 3,
+    type: "groupProject"
   },
   {
     name: "Deeper type usage",
     exerciseCount: 14,
     description: "Confusing description",
-    exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev"
+    exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev",
+    type: "submission"
   }
-];
+]
 ```
 
 <!-- Now we know that both interfaces <i>CoursePartOne</i> and <i>CoursePartThree</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces.  -->
-现在我们知道了<i>CoursePartOne</i> 和<i>CoursePartThree</i>这两个接口不仅共享基本属性，而且共享一个名为<i>description</i>的属性，这是两个接口中的字符串。
+现在我们知道了<i>CourseNormalPart</i> 和<i>CourseSubmissionPart</i>这两个接口不仅共享基本属性，而且共享一个名为<i>description</i>的属性，这是两个接口中的字符串。
 
 <!-- Your first task is to to declare a new interface, that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CoursePartOne</i> and <i>CoursePartThree</i>, without getting any errors. -->
-您的第一个任务是声明一个新接口，其中包括<i>description</i> 属性并扩展<i>CoursePartBase</i>接口。 然后修改代码，以便可以从<i>CoursePartOne</i> 和<i>CoursePartThree</i> 中删除<i>description</i> 属性，而不会出现任何错误。
+您的第一个任务是声明一个新接口，其中包括<i>description</i> 属性并扩展<i>CoursePartBase</i>接口。 然后修改代码，以便可以从<i>CourseNormalPart</i> 和<i>CourseSubmissionPart</i> 中删除<i>description</i> 属性，而不会出现任何错误。
 
 <!-- The create a component <i>Part</i> that renders all attributes of each type of course part. Use switch case -based exhaustive type checking! Use the new component in component <i>Content</i>. -->
 然后创建一个组件<i>Part</i>，它渲染每种类型的课程章节的所有属性。 使用基于switch case的详尽类型检查！ 在组件<i>Content</i> 中使用新组件。
 
 <!-- Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have not modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors. -->
 最后，添加您自己的课程章节接口，至少包含如下属性:<i>name</i>、<i>exerisecount</i> 和<i>description</i>。 然后将该接口添加到类型 union<i>CoursePart</i>，并将相应的数据添加到<i>courseets</i> 变量。 现在，如果您没能正确地修改了您的<i>Content</i> 组件，您应该会得到一个错误，因为您还没有添加对第四个课程部分类型的支持。 对<i>Content</i> 进行必要的更改，这样新课程部分的所有属性都会得到渲染，编译器也不会产生任何错误。
+
+Lastly, add your another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following:
+
+```js
+{
+  name: "Backend development",
+  exerciseCount: 21,
+  description: "Typing the backend",
+  requirements: ["nodejs", "jest"],
+  type: "special"
+}
+```
+
+Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have not modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
+
+The end result might look like the following
+
+![](../../images/9/45.png)
+
 
 </div>
 
@@ -588,8 +594,8 @@ TypeScript文档[建议在大多数情况下使用接口](http://www.typescriptl
 <!-- When diving into the codebase for the first time it is good to get an overall view of the conventions and structure of the project. You can start your research from the <i>README.md</i> in the root of the repository. Usually it contains a brief description of the application and requirements needed to use it and also how to start it for development. If this is not present or somebody has saved time and left it as a stub you can take a peek in the <i>package.json</i>. It is always a good idea to start the application and click around it at the same time verifying that you have a functional development environment. -->
 当第一次深入到代码库中时，最好能够对项目的约定和结构有一个全面的了解。 您可以从存储库根目录中的<i>README.md</i> 开始进行研究。 通常，它包含应用和使用它所需要的需求的简要描述，以及如何启动它进行开发。 如果这个没有出现，或者有人节省了时间，把它留作存根，你可以在<i>package.json</i> 中看一眼。 启动应用并围绕它进行一番点击总是一个好主意，同时验证您拥有一个功能性开发环境。
 
-<!-- You can also browse the folder structure to get insights about application functionality and/or the architecture used. This is not always clear and developers may have chosen a way to organize code that might not be familliar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized featurewise. You can see what different pages the application has and some general components eg. modals and state. Keep in mind that the features represented may have different scopes eg. modals are visible UI level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use. -->
-您还可以浏览文件夹结构，以了解应用的功能和/或所使用的体系结构。 这一点并不总是很清楚，开发人员可能已经选择了一种组织代码的方法，而这种方法对您来说可能并不熟悉。 在本章节的其余部分中使用的[样例项目](https://github.com/fullstack-hy2020/patientor)是有组织特点的。 你可以看到应用有哪些不同的页面和一些通用组件，例如。 模型和状态。 请记住，所代表的特性可能有不同的范围，例如。 modals是可见的 UI 级组件，而状态可以与业务逻辑相媲美，并保持数据组织在底层供应给其余部分使用。
+<!-- You can also browse the folder structure to get insights about application functionality and/or the architecture used. This is not always clear and developers may have chosen a way to organize code that might not be familliar to you. The [sample project](https://github.com/fullstack-hy/patientor) used in the rest of this part is organized featurewise. You can see what different pages the application has and some general components eg. modals and state. Keep in mind that the features represented may have different scopes eg. modals are visible UI level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use. -->
+您还可以浏览文件夹结构，以了解应用的功能和/或所使用的体系结构。 这一点并不总是很清楚，开发人员可能已经选择了一种组织代码的方法，而这种方法对您来说可能并不熟悉。 在本章节的其余部分中使用的[样例项目](https://github.com/fullstack-hy/patientor)是有组织特点的。 你可以看到应用有哪些不同的页面和一些通用组件，例如。 模型和状态。 请记住，所代表的特性可能有不同的范围，例如。 modals是可见的 UI 级组件，而状态可以与业务逻辑相媲美，并保持数据组织在底层供应给其余部分使用。
 
 <!-- TypeScript provides you types which tell you what kind of data structures, functions, components and state to expect. You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting variables and parameters can give you quite much of insight. This all naturally depends on how types are used in the project. -->
 TypeScript 提供的类型可以告诉你需要什么样的数据结构、函数、组件和状态。 您可以尝试寻找 <i>types.ts</i> 或类似的东西来开始。 VSCode 是一个很大的帮助，仅仅突出显示变量和参数就可以提供很参考。 这自然取决于在项目中如何使用类型。 
@@ -733,7 +739,7 @@ export const reducer = (state: State, action: Action): State => {
 在<i>state.ts</i> 文件中发生了许多事情，它们负责设置 context。 它的主要组成部分是使用[useReducer](https://reactjs.org/docs/hooks-reference.html#useReducer)Hook来创建 状态 和 分发函数，并将它们传递给[context provider](https://reactjs.org/docs/context.html#contextprovider) :
 
 ```js
-export const StateProvider: React.FC<StateProviderProps> = ({
+export const StateProvider = ({
   reducer,
   children
 }: StateProviderProps) => {
@@ -775,7 +781,7 @@ import { useStateValue } from "../state";
 
 // ...
 
-const PatientListPage: React.FC = () => {
+const PatientListPage = () => {
   const [{ patients }, dispatch] = useStateValue();
   // ...
 }
@@ -787,6 +793,11 @@ const PatientListPage: React.FC = () => {
 <!-- It is actually quite typical that when you start working with an existing application, at the beginning you do not understand 100% of what happens under the hood. If the app has been properly structured you can trust that if you are making careful modifications, the app still works despite of the fact that you did not understand all the internals. Over the time you can then get a grasp of the more unfamiliar parts, but it does not happen overnight when working with a large codebase. -->
 实际上，当您开始使用一个现有的应用时，在开始的时候您并不完全了解背后发生的事情，这是非常常见的。 如果应用结构合理，你可以相信，如果你正在仔细修改，应用仍然工作，尽管事实上你不了解所有的内部。 随着时间的推移，您可以掌握更多不熟悉的部分，但这不会发生在一夜之间，当与大型代码库工作时。
 
+Don't worry if this seems confusing, it surely is that until you have studied the [context's documentation](https://reactjs.org/docs/context.html) and  its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely for doing the exercises!
+
+It is actually a quite common that when you start working on an existing codebase, you do not understand 100% of what happens under the hood in the beginning. If the app has been properly structured (and it has a proper set of tests), you can trust that if you make careful modifications, the app still works despite the fact that you did not understand  all the internal mechanisms. Over the time you will get a grasp on the more unfamiliar parts, but it does not happen overnight when working with a large codebase.
+
+
 ### Patient listing page
 【病人名单页面】
 <!-- Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. <i>PatientListPage</i> uses our custom hook for injecting state and dispatcher for updating the state.  As we are listing patients we only need to destructure <i>patients</i> property from the state: -->
@@ -795,7 +806,7 @@ const PatientListPage: React.FC = () => {
 ```js
 import { useStateValue } from "../state";
 
-const PatientListPage: React.FC = () => {
+const PatientListPage = () => {
   const [{ patients }, dispatch] = useStateValue();
   // ...
 }
@@ -936,14 +947,17 @@ const { id } = useParams<{ id: string }>();
 ```
 
 #### 9.18: patientor, 步骤3
-<!-- We are currently creating the <i>action</i> objects everywhere in the code when dispatching the action, e.g. component <i>App</i> has the following: -->
-当分派动作时，我们正在代码中随处创建<i>action</i> 对象，例如，component <i>App</i> 具有如下特性:
+Currently we create <i>action</i> objects wherever we dispatch actions, e.g. the <i>App</i> component has the following:
 
 ```js
 dispatch({
   type: "SET_PATIENT_LIST", payload: patientListFromApi
 });
 ```
+
+Define [action creator functions](/en/part6/flux_architecture_and_redux#action-creators) in the file `src/state/reducer.tsx` and refactor the code to use them.
+
+For example the <i>App</i> should become like the following:
 
 <!-- Refactor the code to use [action creator](/zh/part6/flux架构与_redux#action-creators) functions that are all defined in the file <i>reducer.tsx</i>.  -->
 重构代码以使用文件<i>reducer.tsx</i> 中定义的[action creator](/zh/part6/flux架构与_redux#action-creators)函数。
@@ -971,8 +985,8 @@ dispatch(setPatientList(patientListFromApi));
 <!-- In the [exercise 9.12.](/zh/part9/typing_the_express_app#exercises-9-12-9-13) we implemented an endpoint for fetching the diagnoses but we still are not using that endpoint at all. Since we now have a page for viewing details of a single patient it would be a great idea to expand our data by a bit; let's add possible <i>Entry</i> data to our patient data so that each patient can have medical entries that include possible diagnoses. -->
 在 [exercise 9.12.](/zh/part9/typescript版的express应用#exercises-9-12-9-13)我们实现了一个用于获取诊断的端点，但是我们根本没有使用该端点。 既然我们现在有一个页面可以查看单个病人的详细信息，那么最好将我们的数据扩展一点; 让我们向病人数据中添加可能的<i>Entry</i> 数据，这样每个病人都可以有包含可能诊断的医疗条目。
 
-<!-- Let's ditch our old patient seed data from backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts). -->
-让我们从后端丢弃旧病人的种子数据，开始使用[这种扩展格式](https://github.com/fullstack-hy2020/misc/blob/master/patients.ts)。
+<!-- Let's ditch our old patient seed data from backend and start using [this expanded format](https://github.com/fullstack-hy/misc/blob/master/patients.ts). -->
+让我们从后端丢弃旧病人的种子数据，开始使用[这种扩展格式](https://github.com/fullstack-hy/misc/blob/master/patients.ts)。
 
 <!-- **Notice:** This time the data is not in .json but instead in the .ts-format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented so only correct the paths where they are imported from if needed. -->
 **注意: **这次数据不在 .json而是在 .ts-format。 您应该已经实现了完整的<i>Gender</i> 和<i>Patient</i> 类型，以便只在需要时纠正导入它们的路径。
@@ -1237,7 +1251,7 @@ type SelectFieldProps = {
 函数组件<i>SelectField</i> 本身非常直接。 它渲染标签、选择元素和所有给定的选项元素，或者实际上它们的标签和值。
 
 ```jsx
-export const SelectField: React.FC<SelectFieldProps> = ({
+export const SelectField= ({
   name,
   label,
   options
@@ -1266,7 +1280,7 @@ interface TextProps extends FieldProps {
   placeholder: string;
 }
 
-export const TextField: React.FC<TextProps> = ({ field, label, placeholder }) => (
+export const TextField = ({ field, label, placeholder }: TextProps) => (
   <Form.Field>
     <label>{label}</label>
     <Field placeholder={placeholder} {...field} />
@@ -1284,7 +1298,7 @@ export const TextField: React.FC<TextProps> = ({ field, label, placeholder }) =>
 也可以通过使用 prop<i>form</i> 来获得组件内部的错误信息:
 
 ```jsx
-export const TextField: React.FC<TextProps> = ({ field, label, placeholder, form }) => {
+export const TextField: TextProps = ({ field, label, placeholder, form }) => {
   console.log(form.errors); 
   // ...
 }
@@ -1305,7 +1319,7 @@ interface Props {
   onCancel: () => void;
 }
 
-export const AddPatientForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+export const AddPatientForm: Props = ({ onSubmit, onCancel }) => {
   return (
     <Formik
       initialValues={{
@@ -1477,14 +1491,14 @@ const submitNewPatient = async (values: FormValues) => {
 <!-- If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement. -->
 如果您愿意，可以为这个练习重用<i>Add patient</i> 表单中的一些代码，但这不是强制的。
 
-<!-- Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a readily made component _DiagnosisSelection_ that can be to for setting the field <i>diagnoses</i>: -->
-注意，文件[FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/addpatientmodal/FormField.tsx#l58)有一个现成的组件_DiagnosisSelection_，可以用于设置字段<i>diagnosis</i>:
+<!-- Note that the file [FormField.tsx](https://github.com/fullstack-hy/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a readily made component _DiagnosisSelection_ that can be to for setting the field <i>diagnoses</i>: -->
+注意，文件[FormField.tsx](https://github.com/fullstack-hy/patientor/blob/master/src/addpatientmodal/FormField.tsx#l58)有一个现成的组件_DiagnosisSelection_，可以用于设置字段<i>diagnosis</i>:
 
 <!-- It can be used as follows: -->
 它可以用于如下方面:
 
 ```js
-const AddEntryForm: React.FC<Props> = ({ onSubmit, onCancel }) => {
+const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
   const [{ diagnoses }] = useStateValue() // highlight-line
 
   return (

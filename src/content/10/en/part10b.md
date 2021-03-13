@@ -47,23 +47,23 @@ So we import the [Text](https://reactnative.dev/docs/text) component from React 
 - [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the <em>&lt;strong&gt;</em> and the <em>&lt;h1&gt;</em> elements.
 - [View](https://reactnative.dev/docs/view) component is the basic user interface building block similar to the <em>&lt;div&gt;</em> element.
 - [TextInput](https://reactnative.dev/docs/textinput) component is a text field component similar to the <em>&lt;input&gt;</em> element.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component (and other <i>Touchable\*</i> components) is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element.
+- [Pressable](https://reactnative.dev/docs/pressable) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element.
 
 There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example.
 
-The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the family of ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) provides the capability to capture tapping gestures and can display feedback when a gesture is recognized. One of these components is the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component, which accepts the <em>onPress</em> prop:
+The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the [Pressable](https://reactnative.dev/docs/pressable) component provides props for listening to different kind of press events. We can for example use the component's [onPress](https://reactnative.dev/docs/pressable) prop for listening to press events:
 
 ```javascript
 import React from 'react';
-import { Text, TouchableWithoutFeedback, Alert } from 'react-native';
+import { Text, Pressable, Alert } from 'react-native';
 
-const TouchableText = props => {
+const PressableText = props => {
   return (
-    <TouchableWithoutFeedback
+    <Pressable
       onPress={() => Alert.alert('You pressed the text!')}
     >
       <Text>You can press me</Text>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 };
 ```
@@ -510,7 +510,7 @@ const AppBar = () => {
 export default AppBar;
 ```
 
-Now that the <em>AppBar</em> component will prevent the status bar from overlapping the content, you can remove the <em>marginTop</em> style we added for the <em>Main</em> component earlier in the <i>Main.jsx</i> file. The <em>AppBar</em> component should currently contain a tab with text "Repositories". Make the tab touchable by using the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component but you don't have to handle the <em>onPress</em> event in any way. Add the <em>AppBar</em> component to the <em>Main</em> component so that it is the uppermost component in the screen. The <em>AppBar</em> component should look something like this:
+Now that the <em>AppBar</em> component will prevent the status bar from overlapping the content, you can remove the <em>marginTop</em> style we added for the <em>Main</em> component earlier in the <i>Main.jsx</i> file. The <em>AppBar</em> component should currently contain a tab with text "Repositories". Make the tab pressable by using the [Pressable](https://reactnative.dev/docs/pressable) component but you don't have to handle the <em>onPress</em> event in any way. Add the <em>AppBar</em> component to the <em>Main</em> component so that it is the uppermost component in the screen. The <em>AppBar</em> component should look something like this:
 
 ![Application preview](../../images/10/6.jpg)
 
@@ -646,7 +646,7 @@ const SignIn = () => {
 export default SignIn;
 ```
 
-Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. Users should be able to navigate between the two views by pressing the tabs (hint: use the [Link](https://reacttraining.com/react-router/native/api/Link) component and its [component](https://reacttraining.com/react-router/native/api/Link/component-func) prop).
+Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. Users should be able to navigate between the two views by pressing the tabs (hint: you can use the React router's [Link](https://reacttraining.com/react-router/native/api/Link) component).
 
 #### Exercise 10.7: scrollable app bar
 
@@ -682,7 +682,7 @@ Let's see how this actually works by creating a form for calculating the [body m
 
 ```javascript
 import React from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TextInput, Pressable, View } from 'react-native';
 import { Formik, useField } from 'formik';
 
 const initialValues = {
@@ -710,9 +710,9 @@ const BodyMassIndexForm = ({ onSubmit }) => {
         value={heightField.value}
         onChangeText={text => heightHelpers.setValue(text)}
       />
-      <TouchableWithoutFeedback onPress={onSubmit}>
+      <Pressable onPress={onSubmit}>
         <Text>Calculate</Text>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };
@@ -811,9 +811,9 @@ const BodyMassIndexForm = ({ onSubmit }) => {
     <View>
       <FormikTextInput name="mass" placeholder="Weight (kg)" /> // highlight-line
       <FormikTextInput name="height" placeholder="Height (m)" /> //highlight-line
-      <TouchableWithoutFeedback onPress={onSubmit}>
+      <Pressable onPress={onSubmit}>
         <Text>Calculate</Text>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };
@@ -1015,5 +1015,5 @@ Now, the Android bundle of the application will have the component defined in th
 
 Currently the font family of our application is set to <i>System</i> in the theme configuration located in the <i>theme.js</i> file. Instead of the <i>System</i> font, use a platform specific [Sans-serif](https://en.wikipedia.org/wiki/Sans-serif) font. In the Android platform use the <i>Roboto</i> font and in the iOS platform use the <i>Arial</i> font. The default font can be <i>System</i>.
 
-This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system.
+This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021). Note that exercises in this section should be submitted to the part 2 in the exercise submission system.
 </div>

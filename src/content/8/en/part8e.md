@@ -235,7 +235,7 @@ It's possible to test the subscriptions with the GraphQL playground like this:
 When you press "play" on a subscription, the playground waits for notifications from the subscription. 
 
 
-The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
+The backend code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Subscriptions on the client
 
@@ -276,7 +276,9 @@ const wsLink = new WebSocketLink({
     reconnect: true
   }
 })
+// highlight-end
 
+// highlight-start
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query)
@@ -416,7 +418,7 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 } 
 ```
 
-The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
+The final code of the client can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
 
 ### n+1-problem
 
@@ -590,7 +592,7 @@ query {
 ```
 
 
-If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 

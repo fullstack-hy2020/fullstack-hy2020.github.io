@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript,  React Native and Continuous integration.
+This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. Course has also parts on TypeScript,  React Native and Continuous integration.
 
 Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases.
 
@@ -35,11 +35,9 @@ Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good eno
 
 You are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part.
 
-The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 15 February 2021. 
+The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022. 
 
-After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding! 
-
-However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2020. 
+However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2022. 
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -49,7 +47,7 @@ The course can be taken as a shorter course worth 3 credits or as the full cours
 
 The number of credits and the final grade are determined by the number of submitted exercises, including those that are not marked with an asterisk.
 
-If you would like university credits, there is also a course exam which does not count towards your final grade, but must be passed. To [register](/en/part0/general_info/#sign-up-for-the-exam) for university credits that are provided by [Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261), you must have a Finnish social security number.
+If you would like university credits, there is also a course exam which does not count towards your final grade, but must be passed. To [register](/en/part0/general_info/#sign-up-for-the-exam) for university credits that are provided by [Open University](https://studies.helsinki.fi/courses/cur/hy-CUR-136061621/Open_uni_Full_Stack_Web_Development_2021_3_12_cr), you must have a Finnish social security number.
 
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required.
 
@@ -59,7 +57,7 @@ For three credits, you must submit all compulsory exercises (without asterisks) 
 
 For university credits, the three credit course also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
 
-The last possible date for taking the exam is 10 January 2021. <b>Note that you must sign up for the exam by 9 January 2021, at the latest.</b> It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.
+The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b> 
 
 Exam results can be found from the <i>my submissions</i> tab of the submission system no later than four weeks after taking the exam, but bear in mind that exams may be corrected slower during July. Remember to save your student number in the submission system!
 
@@ -87,7 +85,7 @@ Credits and grades are calculated as follows:
 
 For university credits, the three credit course also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
 
-The last possible date for taking the exam is 10 January 2021. <b>Note that you must sign up for the exam by 9 January 2021, at the latest.</b>  It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.
+The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b>
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-9 credits and does not count towards your grade.
 
@@ -117,7 +115,6 @@ More information about the part's prerequisites and exercise submission can be f
 
 Note that in order to receive university credits, you need a Finnish social security number.
 
-<!-- Jos haluat kurssilta suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) näkymään <i>my submissions</i>. Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta. -->
 If you want to receive credits, save your <b>University of Helsinki</b> student number to
 [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
@@ -125,12 +122,10 @@ If you want to receive credits, save your <b>University of Helsinki</b> student 
 
 If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam).
 
-<!-- Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa: -->
 You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
 ![](../../images/0/28a.png)
 
-<!-- Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. -->
 You can view your grade in Weboodi approximately four weeks after notifying us.
 
 ### Course certificate
@@ -141,7 +136,7 @@ Even if you do not register to Open University for the exam, you can still downl
 
 If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
 
-#### Expanding on Full stack open 2019
+#### Expanding on Full stack open 2019 or 2020
 
 You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Telegram [@mluukkai](https://t.me/mluukkai), with your GitHub username and which parts you would like to have deleted from your submissions.
 
@@ -154,17 +149,6 @@ You can only substitute whole parts. For example, if you have previously submitt
 "Credit transfer" of previously completed parts happens in the <i>my submissions</i> tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 If you have previously passed the course exam (excluding the exam for the three credit course), and are now expanding your course, you do not have to do the exam again.
-
-### Changes since last year
-
-* There are only minor changes to parts 0-4.
-* Part 5d, <i>end-to-end testing</i> using the [Cypress.io](https://www.cypress.io) library, is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content.
-* Part 6, which is about Redux, concentrates on the new, hook-based, Redux API.
-* The material on react-router in part 7 has also been updated to use Hook API. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance.
-* Part 8 on GraphQL has major updates, especially on Apollo Client, which finally has stable Hook-based APIs.
-* Part 9 on TypeScript, part 10 on React Native and part 11 on CI/CD are completely new.
-
-Last year's course material can be found [here](https://fullstackopen-2019.github.io/).
 
 ### Submitting exercises
 
@@ -184,7 +168,7 @@ For official university credits you need to pass the course exam that is done in
 
 Follow the instructions below to gain access to the course Moodle space:
 
-- Enroll on the course through Open University by 9 Jan 2021 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
+- Enroll on the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration.
 - User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.
@@ -221,11 +205,11 @@ The number of credits is based on hours of work done. One credit is approximatel
 
 It is possible to complete the project as a pair or a group.
 
-For more information, see the [Open University page](https://courses.helsinki.fi/fi/aytkt21010en/133171897).
+For more information, see the [here](https://github.com/FullStack-HY/misc/blob/main/project.md).
 
 ### Interview promise
 
-Our collaborators, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10).
+Our collaborators, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10).
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
@@ -241,7 +225,7 @@ Install some sensible text editor that supports web development. [Visual Studio 
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
 
-Also install [Node.js](https://nodejs.org/en/). The material has been done with version 10.18, so don't install anything older than that. Installation instructions are [here](https://nodejs.org/en/download/package-manager/).
+Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install anything older than that. Installation instructions are [here](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 

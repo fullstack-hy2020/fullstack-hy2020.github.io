@@ -172,33 +172,38 @@ As mentioned earlier, the rate-repository-api server provides a GraphQL API whic
 
 ![GraphQL Playground](../../images/10/11.png)
 
-In our React Native application, we will be using the [Apollo Boost](https://www.npmjs.com/package/apollo-boost) library which is a zero-config way to start using Apollo Client. As a React integration, we will be using the [@apollo/react-hooks](https://www.apollographql.com/docs/react/api/react-hooks/) library, which provides hooks such as [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) and [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) for using the Apollo Client. Let's get started by installing the dependencies:
+In our React Native application, we will be using the same [@apollo/client](https://www.npmjs.com/package/@apollo/client) library as in part 8. Let's get started by installing the library along with the [graphql](https://www.npmjs.com/package/graphql) library which is required as a peer dependency:
 
 ```shell
-npm install apollo-boost @apollo/react-hooks graphql
+npm install @apollo/client graphql
 ```
 
 Next, let's create a utility function for creating the Apollo Client with the required configuration. Create a <i>utils</i> directory in the <i>src</i> directory and in that <i>utils</i> directory create a file <i>apolloClient.js</i>. In that file configure the Apollo Client to connect to the Apollo Server:
 
 ```javascript
-import ApolloClient from 'apollo-boost';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+
+const httpLink = createHttpLink({
+  // Replace the IP address part with your own IP address!
+  uri: 'http://192.168.100.16:5000/graphql',
+});
 
 const createApolloClient = () => {
   return new ApolloClient({
-    // Replace the IP address part with your own IP address!
-    uri: 'http://192.168.100.16:5000/graphql',
+    link: httpLink,
+    cache: new InMemoryCache(),
   });
 };
 
 export default createApolloClient;
 ```
 
-The URL used to connect to the Apollo Server is otherwise the same as the one you used with the Fetch API expect the path is <i>/graphql</i>. Lastly, we need to provide the Apollo Client using the [ApolloProvider](https://www.apollographql.com/docs/react/api/react-hooks/#apolloprovider) context. We will add it to the <em>App</em> component in the <i>App.js</i> file:
+The URL used to connect to the Apollo Server is otherwise the same as the one you used with the Fetch API expect the path is <i>/graphql</i>. Lastly, we need to provide the Apollo Client using the [ApolloProvider](https://www.apollographql.com/docs/react/api/react/hooks/#the-apolloprovider-component) context. We will add it to the <em>App</em> component in the <i>App.js</i> file:
 
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks'; // highlight-line
+import { ApolloProvider } from '@apollo/client'; // highlight-line
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient'; // highlight-line
@@ -224,10 +229,10 @@ It is up to you how to organize the GraphQL related code in your application. Ho
 
 ![GraphQL structure](../../images/10/12.png)
 
-You can import the [gql](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#gql) template literal tag used to define GraphQL queries from the Apollo Boost library. If we follow the structure suggested above, we could have a <i>queries.js</i> file in the <i>graphql</i> directory for our application's GraphQL queries. Each of the queries can be stored in a variable and exported like this:
+You can import the [gql](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#gql) template literal tag used to define GraphQL queries from <i>@apollo/client</i> library. If we follow the structure suggested above, we could have a <i>queries.js</i> file in the <i>graphql</i> directory for our application's GraphQL queries. Each of the queries can be stored in a variable and exported like this:
 
 ```javascript
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
 export const GET_REPOSITORIES = gql`
   query {
@@ -243,7 +248,7 @@ export const GET_REPOSITORIES = gql`
 We can import these variables and use them with the <em>useQuery</em> hook like this:
 
 ```javascript
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import { GET_REPOSITORIES } from '../graphql/queries';
 
@@ -292,7 +297,7 @@ The first option is fairly decent, however, if components <em>B</em> and <em>C</
 
 We want to replace the Fetch API implementation in the <em>useRepositories</em> hook with a GraphQL query. Open the GraphQL Playground at [http://localhost:5000/graphql](http://localhost:5000/graphql) and open to documentation by clicking the <i>docs</i> tab. Look up the <em>repositories</em> query. The query has some arguments, however, all of these are optional so you don't need to specify them. In the GraphQL Playground form a query for fetching the repositories with the fields you are currently displaying in the application. The result will be paginated and it contains the up to first 30 results by default. For now, you can ignore the pagination entirely.
 
-Once the query is working in the GraphQL Playground, use it to replace the Fetch API implementation in the <em>useRepositories</em> hook. This can be achieved using the [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook. The <em>gql</em> template literal tag can be imported from the Apollo Boost as instructed earlier. Consider using the structure recommended earlier for the GraphQL related code. To avoid future caching issues, use the _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) in the query. It can be used with the <em>useQuery</em> hook like this:
+Once the query is working in the GraphQL Playground, use it to replace the Fetch API implementation in the <em>useRepositories</em> hook. This can be achieved using the [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) hook. The <em>gql</em> template literal tag can be imported from the <i>@apollo/client</i> library as instructed earlier. Consider using the structure recommended earlier for the GraphQL related code. To avoid future caching issues, use the _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) in the query. It can be used with the <em>useQuery</em> hook like this:
 
 ```javascript
 useQuery(MY_QUERY, {
@@ -318,7 +323,7 @@ The configuration can be accessed by importing the <em>Constants</em> constant f
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import Constants from 'expo-constants'; // highlight-line
 
 import Main from './src/components/Main';
@@ -449,12 +454,12 @@ Instead of the hardcoded Apollo Server's URL, use an environment variable define
 
 ### Storing data in the user's device
 
-There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage).
+There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-async-storage.github.io/async-storage/docs/usage/).
 
-We can use the <em>expo install</em> command to install the version of the <i>@react-native-community/async-storage</i> package that is suitable for our Expo SDK version:
+We can use the <em>expo install</em> command to install the version of the <i>@react-native-async-storage/async-storage</i> package that is suitable for our Expo SDK version:
 
 ```shell
-expo install @react-native-community/async-storage
+expo install @react-native-async-storage/async-storage
 ```
 
 The API of the <em>AsyncStorage</em> is in many ways same as the <em>localStorage</em> API. They are both key-value storages with similar methods. The biggest difference between the two is that, as the name implies, the operations of <em>AsyncStorage</em> are <i>asynchronous</i>.
@@ -462,7 +467,7 @@ The API of the <em>AsyncStorage</em> is in many ways same as the <em>localStorag
 Because <em>AsyncStorage</em> operates with string keys in a global namespace it is a good idea to create a simple abstraction for its operations. This abstraction can be implemented for example using a [class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes). As an example, we could implement a shopping cart storage for storing the products user wants to buy:
 
 ```javascript
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class ShoppingCartStorage {
   constructor(namespace = 'shoppingCart') {
@@ -527,7 +532,7 @@ We can add an item to the storage using the [AsyncStorage.setItem](https://react
 
 The current implementation of the sign in form doesn't do much with the submitted user's credentials. Let's do something about that in this exercise. First, read the rate-repository-api server's [authorization documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authorization) and test the provided queries in the GraphQL Playground. If the database doesn't have any users, you can populate the database with some seed data. Instructions for this can be found in the [getting started](https://github.com/fullstack-hy2020/rate-repository-api#-getting-started) section of the README.
 
-Once you know how the authorization queries are supposed to work, create a file _useSignIn.js_ file in the <i>hooks</i> directory. In that file implement a <em>useSignIn</em> hook that sends the <em>authorize</em> mutation using the [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook. Note that the <em>authorize</em> mutation has a <i>single</i> argument called <em>credentials</em>, which is of type <em>AuthorizeInput</em>. This [input type](https://graphql.org/graphql-js/mutations-and-input-types) contains <em>username</em> and <em>password</em> fields.
+Once you know how the authorization queries are supposed to work, create a file _useSignIn.js_ file in the <i>hooks</i> directory. In that file implement a <em>useSignIn</em> hook that sends the <em>authorize</em> mutation using the [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) hook. Note that the <em>authorize</em> mutation has a <i>single</i> argument called <em>credentials</em>, which is of type <em>AuthorizeInput</em>. This [input type](https://graphql.org/graphql-js/mutations-and-input-types) contains <em>username</em> and <em>password</em> fields.
 
 The return value of the hook should be a tuple <em>[signIn, result]</em> where <em>result</em> is the mutations result as it is returned by the <em>useMutation</em> hook and <em>signIn</em> a function that runs the mutation with a <em>{ username, password }</em> object argument. Hint: don't pass the mutation function to the return value directly. Instead, return a function that calls the mutation function like this:
 
@@ -607,7 +612,7 @@ Now that we have implemented storage for storing the user's access token, it is 
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
@@ -632,26 +637,46 @@ export default App;
 We also provided the storage instance for the <em>createApolloClient</em> function as an argument. This is because next, we will send the access token to Apollo Server in each request. The Apollo Server will expect that the access token is present in the <i>Authorization</i> header in the format <i>Bearer <ACCESS_TOKEN></i>. We can enhance the Apollo Client's operation by using the [request](https://www.apollographql.com/docs/react/get-started/#configuration-options) option. Let's send the access token to the Apollo Server in our Apollo Client by modifying the <em>createApolloClient</em> function in the <i>apolloClient.js</i> file:
 
 ```javascript
-const createApolloClient = (authStorage) => { // highlight-line
-  return new ApolloClient({
-    // highlight-start
-    request: async (operation) => {
-      try {
-        const accessToken = await authStorage.getAccessToken();
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import Constants from 'expo-constants';
+import { setContext } from '@apollo/client/link/context'; // highlight-line
 
-        operation.setContext({
-          headers: {
-            authorization: accessToken ? `Bearer ${accessToken}` : '',
-          },
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    // highlight-end
-    // uri and other options...
+// You might need to change this depending on how you have configured the Apollo Server's URI
+const { apolloUri } = Constants.manifest.extra;
+
+const httpLink = createHttpLink({
+  uri: apolloUri,
+});
+
+// highlight-start
+const createApolloClient = (authStorage) => {
+  const authLink = setContext(async (_, { headers }) => {
+    try {
+      const accessToken = await authStorage.getAccessToken();
+
+      return {
+        headers: {
+          ...headers,
+          authorization: accessToken ? `Bearer ${accessToken}` : '',
+        },
+      };
+    } catch (e) {
+      console.log(e);
+
+      return {
+        headers,
+      };
+    }
+  });
+
+  return new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
   });
 };
+// highlight-end
+
+export default createApolloClient;
 ```
 
 ### Using React Context for dependency injection
@@ -671,7 +696,7 @@ Now we can use the <em>AuthStorageContext.Provider</em> to provide the storage i
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
@@ -699,8 +724,8 @@ export default App;
 Accessing the storage instance in the <em>useSignIn</em> hook is now possible using the React's [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) hook like this:
 
 ```javascript
-import { useContext } from 'react'; // highlight-line
 // ...
+import { useContext } from 'react'; // highlight-line
 
 import AuthStorageContext from '../contexts/AuthStorageContext'; //highlight-line
 
@@ -711,6 +736,32 @@ const useSignIn = () => {
 ```
 
 Note that accessing a context's value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://reactjs.org/docs/context.html#contextprovider) component.
+
+Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:
+
+```javascript
+import { useContext } from 'react'; 
+
+import AuthStorageContext from '../contexts/AuthStorageContext';
+
+const useAuthStorage = () => {
+  return useContext(AuthStorageContext);
+};
+
+export default useAuthStorage;
+```
+
+The hook's implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this:
+
+```javascript
+// ...
+import useAuthStorage from '../hooks/useAuthStorage'; // highlight-line
+
+const useSignIn = () => {
+  const authStorage = useAuthStorage(); //highlight-line
+  // ...
+};
+```
 
 The ability to provide data to component's descendants opens tons of use cases for React Context. To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
 
@@ -724,7 +775,7 @@ The ability to provide data to component's descendants opens tons of use cases f
 
 Improve the <em>useSignIn</em> hook so that it stores the user's access token retrieved from the <i>authorize</i> mutation. The return value of the hook should not change. The only change you should make to the <em>SignIn</em> component is that you should redirect the user to the reviewed repositories list view after a successful sign in. You can achieve this by using the [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook and the history's [push](https://reacttraining.com/react-router/native/api/history) method.
 
-After the <i>authorize</i> mutation has been executed and you have stored the user's access token to the storage, you should reset the Apollo Client's store. This will clear the Apollo Client's cache and re-execute all active queries. You can do this by using the Apollo Client's [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) method. You can access the Apollo Client in the <em>useSignIn</em> hook using the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook. Note that the order of the execution is crucial and should be the following:
+After the <i>authorize</i> mutation has been executed and you have stored the user's access token to the storage, you should reset the Apollo Client's store. This will clear the Apollo Client's cache and re-execute all active queries. You can do this by using the Apollo Client's [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method. You can access the Apollo Client in the <em>useSignIn</em> hook using the [useApolloClient](https://www.apollographql.com/docs/react/api/react/hooks/#useapolloclient) hook. Note that the order of the execution is crucial and should be the following:
 
 ```javascript
 const { data } = await mutate(/* options */);
@@ -747,9 +798,9 @@ The final step in completing the sign in feature is to implement a sign out feat
 
 You will probably end up with the <em>null</em> result. This is because the GraphQL Playground is not authorized, meaning that it doesn't send a valid access token with the request. Revise the [authorization documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authorization) and retrieve an access token using the <em>authorize</em> mutation. Use this access token in the _Authorization_ header as instructed in the documentation. Now, run the <em>authorizedUser</em> query again and you should be able to see the authorized user's information.
 
-Open the <em>AppBar</em> component in the <i>AppBar.jsx</i> file where you currently have the tabs "Repositories" and "Sign in". Change the tabs so that if the user is signed in the tab "Sign out" is displayed, otherwise show the "Sign in" tab. You can achieve this by using the <em>authorizedUser</em> query with the [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook.
+Open the <em>AppBar</em> component in the <i>AppBar.jsx</i> file where you currently have the tabs "Repositories" and "Sign in". Change the tabs so that if the user is signed in the tab "Sign out" is displayed, otherwise show the "Sign in" tab. You can achieve this by using the <em>authorizedUser</em> query with the [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) hook.
 
-Pressing the "Sign out" tab should remove the user's access token from the storage and reset the Apollo Client's store with the [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) method. Calling the <em>resetStore</em> method should automatically re-execute all active queries which means that the <em>authorizedUser</em> query should be re-executed. Note that the order of execution is crucial: access token must be removed from the storage <i>before</i> the Apollo Client's store is reset.
+Pressing the "Sign out" tab should remove the user's access token from the storage and reset the Apollo Client's store with the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method. Calling the <em>resetStore</em> method should automatically re-execute all active queries which means that the <em>authorizedUser</em> query should be re-executed. Note that the order of execution is crucial: access token must be removed from the storage <i>before</i> the Apollo Client's store is reset.
 
-This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 3 in the exercise submission system.
+This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021). Note that exercises in this section should be submitted to the part 3 in the exercise submission system.
 </div>

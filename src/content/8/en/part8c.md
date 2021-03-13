@@ -202,7 +202,7 @@ Mutation: {
 }
 ```
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
+The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 
 ### User and log in
@@ -451,8 +451,22 @@ it is received straight in the parameter definition of the function:
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
+The following query now returns the user's friendlist
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
+```js
+query {
+  me {
+    username
+    friends{
+      name
+      phone
+    }
+  }
+}
+```
+
+
+The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
 
 
 </div>
@@ -461,10 +475,10 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 
 ### Exercises 8.13.-8.16.
 
+The following exercises are guite likely breaking your frontend. Do not worry it yet, the fronend shall be fixed and expanded in next chapter. 
 #### 8.13: Database, part 1
 
-
-Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md).
+Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
 
 
 Let's change the book graphql schema a little
@@ -479,12 +493,9 @@ type Book {
 }
 ```  
 
-
 so that instead of just the author's name, the book object contains all the details of the author. 
 
-
 You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors. 
-
 
 The following things do <i>not</i> have to work just yet
 
@@ -497,16 +508,13 @@ The following things do <i>not</i> have to work just yet
 
 Complete the program so that all queries (except _allBooks_ with the parameter _author_ ) and mutations work. 
 
-You might find this [useful](https://docs.mongodb.com/manual/reference/operator/query/in/).
+You might find [this](https://docs.mongodb.com/manual/reference/operator/query/in/) useful.
 
 #### 8.15 Database, part 3
 
-
 Complete the program so that database validation errors (e.g. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
 
-
 #### 8.16 user and logging in
-
 
 Add user management to your application. Expand the schema like so:
 
@@ -543,7 +551,8 @@ type Mutation {
 Create resolvers for query _me_ and the new mutations _createUser_ and 
 _login_. Like in the course material, you can assume all users have the same hardcoded password. 
 
-
 Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token. 
+
+(Don't worry about fixing the frontend for the moment.)
 
 </div>
