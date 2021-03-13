@@ -23,13 +23,8 @@ Por el momento hay dos buenas opciones: [Relay](https://facebook.github.io/relay
 
 ### cliente Apollo
 
-<!-- Käytetään kurssilla Apollo Client en versiota [3.0-beta] (https://www.apollographql.com/docs/react/v3.0-beta/), tällä hetkellä (20.2.2020) uusin virallisesti julkaisatu versio el 2.6 . eli kun luet dokumentaatiota, muista vaihtaa näytettävän dokumentaation versio vastaamaan 3.0 betaa: -->
-En este curso usaremos la versión [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/) de Apollo Client.
-Por el momento (20.2.2020) 2.6 es la última versión lanzada oficialmente, así que cuando esté leyendo la documentación recuerde seleccionar la documentación de 3.0 beta:
 
-![](../../images/8/40ea.png)
-
-Cree una nueva aplicación React e instale las dependencias requeridas por [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation).
+Cree una nueva aplicación React e instale las dependencias requeridas por [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
 
 <!-- Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin] (https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet. -->
 Crearemos una nueva aplicación React e instalaremos las dependencias requeridas por [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation).
@@ -76,7 +71,7 @@ client.query({ query })
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-El comienzo del código crea un nuevo objeto-[client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client), que luego se usa para enviar una consulta al servidor:
+El comienzo del código crea un nuevo objeto-[client](https://www.apollographql.com/docs/react/get-started/#create-a-client), que luego se usa para enviar una consulta al servidor:
 
 ```js
 client.query({ query })
@@ -89,7 +84,7 @@ La respuesta del servidor se imprime en la consola:
 
 ![](../../images/8/9a.png)
 
-La aplicación puede comunicarse con un servidor GraphQL usando el objeto _client_. Se puede hacer que el cliente sea accesible para todos los componentes de la aplicación empaquetando el componente <i>App</i> con [ApolloProvider](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react).
+La aplicación puede comunicarse con un servidor GraphQL usando el objeto _client_. Se puede hacer que el cliente sea accesible para todos los componentes de la aplicación empaquetando el componente <i>App</i> con [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react).
 
 ```js
 import React from 'react'
@@ -118,9 +113,9 @@ ReactDOM.render(
 
 Estamos listos para implementar la vista principal de la aplicación, que muestra una lista de números de teléfono.
 
-<!-- Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen] (https://www.apollographql.com/docs/react/v3.0-beta/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö en hook-funktion [useQuery] (https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) käyttäminen. -->
-Apollo Client ofrece algunas alternativas para realizar [consultas](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/).
-Actualmente, el uso de la función hook [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) es la práctica dominante.
+<!-- Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen] (https://www.apollographql.com/docs/react/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö en hook-funktion [useQuery] (https://www.apollographql.com/docs/react/api/react/hooks/#usequery) käyttäminen. -->
+Apollo Client ofrece algunas alternativas para realizar [consultas](https://www.apollographql.com/docs/react/data/queries/).
+Actualmente, el uso de la función hook [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) es la práctica dominante.
 
 <!-- Kyselyn tekevän komponentin <i> App </i> koodi näyttää seuraavalta: -->
 La consulta la realiza el componente <i>App</i>, cuyo código es el siguiente:
@@ -157,9 +152,9 @@ export default App
 ```
 
 <!-- Hook-funktion _useQuery_ kutsuminen suorittaa parametrina annetun kyselyn. Hookin kutsuminen palauttaa olion, joka -->
-<!-- jolla en [useita kenttiä] (https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result). Kenttä <i> cargando </i> en arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on -->
+<!-- jolla en [useita kenttiä] (https://www.apollographql.com/docs/react/api/react/hooks/#result). Kenttä <i> cargando </i> en arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on -->
 Cuando se llama, _useQuery_ realiza la consulta que recibe como parámetro.
-Devuelve un objeto con varios [campos](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result).
+Devuelve un objeto con varios [campos](https://www.apollographql.com/docs/react/api/react/hooks/#result).
 El campo <i>loading</i> es verdadero si la consulta aún no ha recibido una respuesta.
 Luego se renderiza el siguiente código:
 
@@ -258,10 +253,10 @@ También es posible realizar consultas con parámetros con GraphQL Playground. L
 
 <!-- Pregunte käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely sobre tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa] (https://www.apollographql.com/docs.0-queries/#v3ta ejecutar consultas manualmente). -->
 El hook _useQuery_ es adecuado para situaciones en las que la consulta se realiza cuando se procesa el componente.
-Sin embargo, ahora queremos realizar la consulta solo cuando un usuario desea ver los detalles de una persona específica, por lo que la consulta se realiza solo [según sea necesario](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually).
+Sin embargo, ahora queremos realizar la consulta solo cuando un usuario desea ver los detalles de una persona específica, por lo que la consulta se realiza solo [según sea necesario](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
-<!-- Tähän tilanteeseen sopii hook-funktio [useLazyQuery] (https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery). Komponentti <i> Personas </i> muuttuu seuraavasti: -->
-Para esta situación, la función hook [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) es una buena opción.
+<!-- Tähän tilanteeseen sopii hook-funktio [useLazyQuery] (https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery). Komponentti <i> Personas </i> muuttuu seuraavasti: -->
+Para esta situación, la función hook [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) es una buena opción.
 El componente <i>Persons</i> se convierte en:
 
 ```js
@@ -386,7 +381,7 @@ Cuando hacemos varias consultas, por ejemplo, los detalles de la dirección de A
 
 ![](../../images/8/12.png)
 
-El cliente Apollo guarda las respuestas de las consultas en [cache](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/). Para optimizar el rendimiento si la respuesta a una consulta ya está en la caché, la consulta no se envía al servidor en absoluto.
+El cliente Apollo guarda las respuestas de las consultas en [cache](https://www.apollographql.com/docs/react/caching/cache-configuration/). Para optimizar el rendimiento si la respuesta a una consulta ya está en la caché, la consulta no se envía al servidor en absoluto.
 
 Es posible instalar [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related) en Chrome para ver el estado de la caché.
 
@@ -422,8 +417,8 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 `
 ```
 
-<!-- Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation] (https://www.apollographql.com/docs/react/v3.0-beta/api/ react / hooks / # usemutation). -->
-La función hook [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation) proporciona la funcionalidad para realizar mutaciones.
+<!-- Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation] (https://www.apollographql.com/docs/react/api/ react / hooks / # usemutation). -->
+La función hook [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) proporciona la funcionalidad para realizar mutaciones.
 
 <!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: --> 
 Creemos un nuevo componente para agregar una nueva persona al directorio:
@@ -511,7 +506,7 @@ Podríamos actualizar la pantalla recargando la página, ya que la caché se vac
 
 ### Actualizando la caché
 
-Hay pocas soluciones diferentes para esto. Una forma es hacer la consulta para todas las personas [poll](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) en el servidor, o hacer la consulta repetidamente.
+Hay pocas soluciones diferentes para esto. Una forma es hacer la consulta para todas las personas [poll](https://www.apollographql.com/docs/react/data/queries/#polling) en el servidor, o hacer la consulta repetidamente.
 
 El cambio es pequeño. Configuremos la consulta para sondear cada dos segundos:
 
@@ -540,8 +535,7 @@ La solución es simple, y cada vez que un usuario agrega una nueva persona, apar
 
 El lado malo de la solución es todo el tráfico web inútil.
 
-<!-- Toinen helppo tapa välimuistin synkronoimiseen en määritellä _useMutation_-hookin option [refetchQueries] (https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen: -->
-Otra manera fácil de mantener la caché sincronizada es usar el hook de _useMutation_, el parámetro [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) para definir que la consulta que busca a todas las personas se realice nuevamente cada vez que se cree una nueva persona.
+Otra manera fácil de mantener la caché sincronizada es usar el hook de _useMutation_, el parámetro [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) para definir que la consulta que busca a todas las personas se realice nuevamente cada vez que se cree una nueva persona.
 
 ```js
 const ALL_PERSONS = gql`
@@ -612,8 +606,8 @@ Intentar crear una persona con datos no válidos provoca un error y toda la apli
 
 ![](../../images/8/14ea.png)
 
-<!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [opción] (https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) _onError_ avulla en mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
-Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando _onError_ del hook _useMutation_ [opción](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2).
+<!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [opción] (https://www.apollographql.com/docs/react/api/react/hooks/#params-2) _onError_ avulla en mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
+Debemos manejar la excepción. Podemos registrar una función de manejo de errores en la mutación usando _onError_ del hook _useMutation_ [opción](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
 <!-- Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla: -->
 Registremos la mutación en un controlador de errores, que usa la función _setError_ que recibe como parámetro para establecer un mensaje de error:

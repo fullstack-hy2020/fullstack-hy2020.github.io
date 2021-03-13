@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 
 
-<!-- In addition to the eight exercises in the [React router](/zh/part7/react_router) and [custom hooks]() sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. -->
-除了课程材料第七章节[React router](/zh/part7/react_router) 和[custom hooks]()的八个练习之外，还有13个练习继续我们在课程材料第四章节和第五章节所做的 Bloglist 应用的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
+<!-- In addition to the eight exercises in the [React router](/zh/part7/react_router) and [custom hooks](/zh/part7/custom_hooks) sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so. -->
+除了课程材料第七章节[React router](/zh/part7/react_router) 和[custom hooks](/zh/part7/custom_hooks)的八个练习之外，还有13个练习继续我们在课程材料第四章节和第五章节所做的 Bloglist 应用的工作。 下面的一些练习是相互独立的“特征” ，这意味着没有必要按照任何特定的顺序完成练习。 如果你愿意，你可以跳过这些练习的一部分。
 
 <!-- If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises. -->
 如果您不想使用您自己的 Bloglist 应用，您可以自由地使用模型解决方案中的代码作为这些练习的起点。
@@ -36,7 +36,7 @@ lang: zh
 
 #### 7.10: redux, 步骤2
 <!-- _Note_ that this and the next two exercises are quite laborious but incredibly educational. -->
-请注意，这个和接下来的两个练习相当费力，但有令人难以置信的学习价值。
+<i>请注意</i>，这个和接下来的两个练习相当费力，但有令人难以置信的学习价值。
 
 <!-- Store the information about blog posts in the Redux store. In this exercise it is enought that you can see the blogs in backend and create a new blog. -->
 在 Redux store中存储有关博客文章的信息。 在这个练习中，你可以看到后台的博客，并创建一个新的博客。
@@ -162,8 +162,8 @@ const User = () => {
 <!-- How did we do? Give us some feedback for the course in Moodle! -->
 我们做的怎么样? 给我们一些关于 Moodle 课程的反馈！
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>
 

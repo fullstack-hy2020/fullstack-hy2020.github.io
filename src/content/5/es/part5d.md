@@ -448,7 +448,7 @@ module.exports = app
 
 después de los cambios, una solicitud HTTP POST al extremo <i>/api/testing/reset</i> vacía la base de datos.
 
-El código de backend modificado se puede encontrar en [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), rama <i>part5-1</i>.
+El código de backend modificado se puede encontrar en [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1), rama <i>part5-1</i>.
 
 A continuación, cambiaremos el bloque <i>beforeEach</i> para que vacíe la base de datos del servidor antes de ejecutar las pruebas.
 
@@ -540,7 +540,7 @@ El primer comando busca un componente que contenga el texto <i>another note cypr
 
 El segundo comando comprueba que el texto del botón haya cambiado a <i>make not important</i>.
 
-Las pruebas y el código de interfaz actual se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), rama <i>part5-9</i>.
+Las pruebas y el código de interfaz actual se pueden encontrar en [github](https://github.com/fullstack-hy/part2-notes/tree/part5-9), rama <i>part5-9</i>.
 
 Hagamos una prueba para asegurarnos de que un intento de inicio de sesión falla si la contraseña es incorrecta.
 
@@ -842,7 +842,7 @@ describe('Note app', function() {
 })
 ```
 
-Las pruebas y el código de la interfaz se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), rama <i>part5-10</i>.
+Las pruebas y el código de la interfaz se pueden encontrar en [github](https://github.com/fullstack-hy/part2-notes/tree/part5-10), rama <i>part5-10</i>.
 
 ### Cambiar la importancia de una nota
 
@@ -1003,7 +1003,7 @@ Ahora podemos ejecutar nuestras pruebas desde la línea de comandos con el coman
 
 Tenga en cuenta que el video de la ejecución de la prueba se guardará en <i>cypress/videos/</i>, por lo que probablemente debería ignorar este directorio.
 
-La interfaz y el código de prueba se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), rama <i>part5-11</i>.
+La interfaz y el código de prueba se pueden encontrar en [github](https://github.com/fullstack-hy/part2-notes/tree/part5-11), rama <i>part5-11</i>.
 
 </div>
 

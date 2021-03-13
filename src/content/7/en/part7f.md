@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks]() sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
+In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
 
 If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
 
@@ -29,7 +29,7 @@ Change the application's notifications to use Redux at this point of the exercis
 
 #### 7.10: redux, step2
 
-_Note_ that this and the next two exercises are quite laborious but incredibly educational.
+<i>Note</i> that this and the next two exercises are quite laborious but incredibly educational.
 
 Store the information about blog posts in the Redux store. In this exercise it is enough that you can see the blogs in backend and create a new blog.
 
@@ -94,7 +94,7 @@ Users should be able to access the view by clicking the name of the blog post in
 
 ![](../../images/7/46.png)
 
-After you're done with this exercise, the functionality that was implemented in exercise 5.6 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
+After you're done with this exercise, the functionality that was implemented in exercise 5.7 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
 
 #### 7.16: Navigation
 

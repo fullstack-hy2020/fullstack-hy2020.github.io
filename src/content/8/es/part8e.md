@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-8.svg
 part: 8
 letter: e
-lang: en
+lang: es
 ---
 
 <div class="content">

@@ -9,7 +9,7 @@ lang: en
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
-The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
+The application exists only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
 On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
 
 Coding in the recommended style begins in [part 1](/en/part1).
@@ -401,9 +401,9 @@ The <i>Elements</i> tab of the console can be used to change the styles of the e
 Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server. 
 
 
-### Loading a page containing JavaScript - revised
+### Loading a page containing JavaScript - review
 
-Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
+Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
 
 ![](../../images/0/19e.png)
 
@@ -418,7 +418,7 @@ Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleap
 
 Next let's examine how adding a new note is done. 
 
-The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
+The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
 ![](../../images/0/20e.png)
 

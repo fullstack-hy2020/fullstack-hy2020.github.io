@@ -16,12 +16,11 @@ lang: zh
 
 ### Setting things up
 【准备工作】
-<!-- Install TypeScript support to your editor of choice. For [Visual Studio Code](https://code.visualstudio.com/) you need the [typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero) extension.  -->
-在你选择的编辑器中安装对 TypeScript 支持，对于[Visual Studio Code](https://code.visualstudio.com/)来说，你需要安装[typescript hero](https://marketplace.visualstudio.com/items?itemName=rbbit.typescript-hero)扩展。
+<!-- Install TypeScript support to your editor of choice. [Visual Studio Code](https://code.visualstudio.com/) works natively with TypeScript.  -->
+在你选择的编辑器中安装对 TypeScript 支持，对于[Visual Studio Code](https://code.visualstudio.com/)本身就支持TypeScript
 
 
-
-<!-- As mentioned earlier, TypeScript code is not executable by itself but it has to be first compiled into executable JavaScript.  -->
+/<!-- As mentioned earlier, TypeScript code is not executable by itself but it has to be first compiled into executable JavaScript.  -->
 如前所述，TypeScript 代码本身并不是可执行的，必须首先编译成可执行的 JavaScript。
 
 <!-- When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript.  -->
@@ -94,8 +93,8 @@ npm run ts-node -- file.ts
 
 #### A note about the coding style
 【关于编码风格的提示】
-<!-- JavaScript on itself is quite relaxed language, and things can often be done in multiple different ways. For example we have named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision when creating any kind of JavaScript. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming. -->
-Javascript 本身是一种相当轻松的语言，业务通常可以用多种不同的方式来完成。 例如，可以用命名 vs. 匿名函数、可以使用 const 和 let 或 var 、以及可选地使用<i>分号</i> 。 本课程的这一章节与其他部分不同，使用了分号。 它并不是一个特定于TypeScript的模式，而是创建任何类型的 JavaScript 时一个通用的编码风格决策。 是否使用它们通常掌握在程序员的手中，但是由于常被期望调整编码习惯，以适应现有的代码库，在这一章节的练习中我们期望使用分号，并调整以适应本章的编码风格。 与课程的其他部分相比，这一章节还有一些其他编码风格的差异，例如在目录命名方面。 
+<!-- JavaScript on itself is quite relaxed language, and things can often be done in multiple different ways. For example we have named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming. -->
+Javascript 本身是一种相当轻松的语言，业务通常可以用多种不同的方式来完成。 例如，可以用命名 vs. 匿名函数、可以使用 const 和 let 或 var 、以及可选地使用<i>分号</i> 。 本课程的这一章节与其他部分不同，使用了分号。 它并不是一个特定于TypeScript的模式，而是创建任何类型的 JavaScript 项目时一个通用的编码风格决策。 是否使用它们通常掌握在程序员的手中，但是由于常被期望调整编码习惯，以适应现有的代码库，在这一章节的练习中我们期望使用分号，并调整以适应本章的编码风格。 与课程的其他部分相比，这一章节还有一些其他编码风格的差异，例如在目录命名方面。 
 
 
 
@@ -553,7 +552,7 @@ Exercises 9.1.-9.7. 都会开发到同一个node 项目。 使用<i>npm init</i>
 
 <!-- The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and and [much much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html). -->
 这个 <i>tsconfig.json</i> 文件用于定义TypeScript编译器应该如何解释代码，编译器应该如何严格地工作，哪些文件应该监视或忽略，以及[更多配置](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html)。
-<!-- For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used. -->
+<!-- For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used. -->
 现在我们只使用编译器选项[noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny)，这会使得所有使用的变量都必须有类型。
 
 #### 9.1 Body mass index
@@ -672,8 +671,8 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 【深入研究 tsconfig】
 
 
-<!-- In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper. -->
-在练习中我们只使用了一个 tsconfig 规则[noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny)。 这是一个很好的起点，但现在是时候更深入地研究配置文件了。
+<!-- In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper. -->
+在练习中我们只使用了一个 tsconfig 规则[noImplicitAny]https://www.typescriptlang.org/tsconfig#noImplicitAny)。 这是一个很好的起点，但现在是时候更深入地研究配置文件了。
 
 
 
@@ -703,8 +702,8 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 
 
 
-<!-- Do not worry too much about the <i>compilerOptions</i>, they will be under closer inspection on part 2. -->
-不要过于担心<i>compilerOptions</i>，它们将在第2部分进行更仔细的研究。
+<!-- Do not worry too much about the <i>compilerOptions</i>, they will be under closer inspection later on. -->
+不要过于担心<i>compilerOptions</i>，我们将马上进行更仔细的研究。
 
 
 
@@ -997,18 +996,18 @@ Web 应用应该在生产模式下以通过命令<i>npm start</i> 启动，而np
 <!-- When examining the code a bit closer, we can see a few dangers lurking there. -->
 当我们更仔细地检查代码时，我们可以看到一些潜在的危险。
 
-<!-- Let's add an HTTP GET endpoint <i>calculate</i> to our app: -->
-让我们在应用中添加一个 HTTP GET 端点<i>calculate</i>:
+<!-- Let's add an HTTP POST endpoint <i>calculate</i> to our app: -->
+让我们在应用中添加一个 HTTP POST 端点<i>calculate</i>:
 
 ```js
 import { calculator } from './calculator'
 
 // ...
 
-app.get('/calculate', (req, res) => {
-  const { value1, value2, op } = req.query
+app.post('/calculate', (req, res) => {
+  const { value1, value2, op } = req.body
 
-  const result = calculator(value1, value2, op)
+  const result = calculator(value1, value2, op);
   res.send(result);
 });
 ```
@@ -1018,7 +1017,7 @@ app.get('/calculate', (req, res) => {
 <!-- When you hover over the <i>calculate</i> function, you can see the typing of the <i>calculator</i> even though the code itself does not contain any typings: -->
 当你把鼠标悬停在<i>calculate</i> 函数上时，你可以看到<i>calculator</i> 的类型，即使代码本身不包含任何类型:
 
-![](../../images/9/12a.png)
+![](../../images/9/12a21.png)
 
 
 
@@ -1027,7 +1026,7 @@ app.get('/calculate', (req, res) => {
 <!-- But if you hover over the values parsed from the request, an issue arises: -->
 但是如果你将鼠标悬停在从请求中分析出来的值上，就会出现一个问题:
 
-![](../../images/9/13a.png)
+![](../../images/9/13a21.png)
 
 
 
@@ -1098,10 +1097,12 @@ npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslin
   },
   "plugins": ["@typescript-eslint"],
   "rules": {
-    "@typescript-eslint/no-explicit-any": 2
+    "@typescript-eslint/no-explicit-any": 2 // highlight-line
   }
 }
 ```
+<!-- (Newer versions of eslint has this rule on by default, so you don't necessarily need to add it separately.) -->
+(新版本的eslint 已经默认包含了这些配置，所以你不需要单独写了)
 
 <!-- Let us also set up a <i>lint</i> npm script to inspect the files with <i>.ts</i> extension by modifying the <i>package.json</i> file:  -->
 让我们还设置一个<i>lint</i> npm 脚本，用来检查<i>.ts</i>扩展文件，通过如下修改<i>package.json</i> 文件:
@@ -1156,10 +1157,15 @@ npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslin
   },
   "rules": {
     "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/no-explicit-any": 2,
-    "@typescript-eslint/explicit-function-return-type": 0,
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_" }],
-    "no-case-declarations": 0
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-module-boundary-types": "off",
+    "@typescript-eslint/restrict-template-expressions": "off",
+    "@typescript-eslint/restrict-plus-operands": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      { "argsIgnorePattern": "^_" }
+    ],
+    "no-case-declarations": "off"
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -1240,6 +1246,8 @@ Response 是如下格式的 json
 ```js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ```
+<!-- You might also get in trouble with rules <i>no-unsafe-member-access</i> an <i>no-unsafe-assignment </i>. These rules may be ignored in this exercise. -->
+你可能会因为 <i>no-unsafe-member-access</i> 和 <i>no-unsafe-assignment </i>有点麻烦。这些规则在这个练习中可以忽略。
 
 <!-- Note that you need to have a correct setup in order to get hold to the request body, see [第3章](/zh/part3/node_js_与_express#receiving-data). -->
 请注意，您需要有一个正确的设置，以获得请求主体，请参见[第3章](/zh/part3/node_js_与_express#receiving-data)。

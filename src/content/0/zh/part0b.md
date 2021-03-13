@@ -80,7 +80,7 @@ Windows 系统或Linux 系统，可以按 `F12` 或 `ctrl-shift-i`打开控制�
 
 <!-- The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp/</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
 
-上半部分，General 中的内容，说明了浏览器使用 [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法向地址 https://studies.cs.helsinki.fi/exampleapp/ 发送了一个请求（虽然由于图片已经取到了，地址悄悄发生了变化），并且请求成功，因为服务器响应的状态码为 200。
+上半部分，General 中的内容，说明了浏览器使用 [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法向地址 https://studies.cs.helsinki.fi/exampleapp/ 发送了一个请求（虽然在截图的时候还不是这个地址），并且请求成功，因为服务器响应的状态码为 200。
 
 <!-- The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields): -->
 
@@ -443,7 +443,7 @@ html
 
 <!-- Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) is an Application Programming Interface, (an <i>API</i>), which enables programmatic modification of the <i>element trees</i> corresponding to web-pages. -->
 
-文档对象模型(Document Object Model，DOM)是一个应用编程接口(Application Programming Interface，API) ，它支持对 web 页面对应的元素树进行编程修改。
+文档对象模型(Document Object Model，[DOM](https://en.wikipedia.org/wiki/Document_Object_Model))是一个应用编程接口(Application Programming Interface，API) ，它支持对 web 页面对应的元素树进行编程修改。
 
 <!-- The JavaScript code introduced in the previous chapter used the DOM-API to add a list of notes to the page. -->
 
@@ -524,7 +524,7 @@ Notes 页面的 HTML 代码中 head 元素包含了一个 [link](https://develop
 
 <!-- Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web applications. -->
 
-层叠样式表, 或者叫 CSS，是一种用来确定 web 应用外观的标记语言。
+层叠样式表(Cascading Style Sheets, CSS)，是一种用来确定 web 应用外观的标记语言。
 
 <!-- The fetched CSS-file looks as follows: -->
 
@@ -615,7 +615,7 @@ Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元�
 
 <!-- The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form) -->
 
-Notes 页面包含一个 [form 元素](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
+Notes 页面包含一个 [form 元素](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)。
 
 ![](../../images/0/20e.png)
 
@@ -718,11 +718,11 @@ Notes 页面使用了 AJAX 获取 Notes 数据。 提交表单仍然使用传统
 <!-- The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the url <https://studies.cs.helsinki.fi/exampleapp/new_note>.   -->
 <!-- Nowadays urls like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [第3章](/zh/part3) -->
 
-应用的 url 反映了过去无忧无虑的时光。 数据从 url https://studies.cs.helsinki.fi/exampleapp/data.JSON 中获取，新的 Note 被发送到 url https://studies.cs.helsinki.fi/exampleapp/new_note 。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究
+应用的 url 反映了过去无忧无虑的时光。 数据从 url https://studies.cs.helsinki.fi/exampleapp/data.JSON 中获取，新的 Note 被发送到 url https://studies.cs.helsinki.fi/exampleapp/new_note 。 如今，这样的 url 被认为是不可接受的，因为它们没有遵循公认的 RESTful api 约定，我们将在第三章中进一步研究。
 
 <!-- The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it. -->
 
-现在 AJAX 这个术语是如此普遍，以至于人们认为它是理所当然的。 但这个词已经逐渐被遗忘，“新时代的我们”甚至没有听说过它。
+现在 AJAX 的存在是如此普遍，以至于人们认为它是理所当然的。 AJAX 这个术语已经逐渐被遗忘，“新时代的我们”甚至没有听说过它。
 
 ### Single page app
 【单页面应用】
@@ -868,7 +868,7 @@ var sendToServer = function(note) {
 
 <!-- During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux)-library, which are frequently used together. -->
 
-目前，实现 web 应用浏览器端逻辑的最流行的工具是 Facebook 的 React-库。 在本课程中，我们将熟悉 React 和 [Redux](https://github.com/reactjs/redux) 库，它们经常一起使用。
+目前，实现 web 应用浏览器端逻辑的最流行的工具是 Facebook 的 [React](https://reactjs.org/) 库。 在本课程中，我们将熟悉 React 和 [Redux](https://github.com/reactjs/redux) 库，它们经常一起使用。
 
 <!-- The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer [VueJS](https://vuejs.org/) has been capturing some interest. -->
 
@@ -1016,7 +1016,7 @@ end note
 
 <!-- **Create a similar diagram** depicting the situation where the user creates a new note on page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button. -->
 
-创建一个类似的图表，描述这种情况: 用户在页面上创建一个新的 Note，在文本区域写一些东西，然后点击提交按钮到 https://studies.cs.helsinki.fi/exampleapp/notes。
+创建一个类似的图表，描述这种情况: 用户在页面上创建一个新的 Note，在文本区域写一些东西，然后点击提交按钮到 https://studies.cs.helsinki.fi/exampleapp/notes 。
 
 <!-- If necessary, show operations on the browser or on the server as comments on the diagram. -->
 

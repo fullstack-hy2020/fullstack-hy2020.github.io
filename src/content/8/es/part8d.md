@@ -118,9 +118,7 @@ El uso del hook de efectos es necesario para evitar un bucle de renderizado sin 
 
 Agreguemos también un botón que permite a un usuario que ha iniciado sesión cerrar la sesión. El controlador onClick del botón establece el estado _token_ en nulo, elimina el token del almacenamiento local y restablece la caché del cliente Apollo. El último paso es [importante](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), porque algunas consultas pueden haber obtenido datos en la caché, que solo los usuarios que iniciaron sesión deben tener acceso.
 
-<!-- Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore] (https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla -->
-<!-- [useApolloClient] (https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient): -->
-Podemos restablecer la caché usando el método [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) de un objeto _client_ de Apollo.
+Podemos restablecer la caché usando el método [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) de un objeto _client_ de Apollo.
 Se puede acceder al cliente con el hook [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient):
 
 ```js
@@ -230,7 +228,7 @@ const PersonForm = ({ setError }) => {
 
 Este enfoque es bastante bueno, el inconveniente es que la consulta siempre se vuelve a ejecutar con las actualizaciones.
 
-Es posible optimizar la solución gestionando la actualización de la caché nosotros mismos. Esto se hace definiendo una llamada de devolución de [actualización](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options) adecuada para la mutación, que Apollo ejecuta después la mutación:
+Es posible optimizar la solución gestionando la actualización de la caché nosotros mismos. Esto se hace definiendo una llamada de devolución de [actualización](https://www.apollographql.com/docs/react/api/react/hooks/#options) adecuada para la mutación, que Apollo ejecuta después la mutación:
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -260,7 +258,7 @@ const PersonForm = ({ setError }) => {
 
 La función de devolución de llamada recibe una referencia al caché y los datos devueltos por la mutación como parámetros. Por ejemplo, en nuestro caso sería la persona creada.
 
-El código lee el estado en caché de la consulta <em>ALL_PERSONS</em> usando [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) y actualiza el caché con la función [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) agregando la nueva persona a los datos almacenados en caché.
+El código lee el estado en caché de la consulta <em>ALL_PERSONS</em> usando [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) y actualiza el caché con la función [writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) agregando la nueva persona a los datos almacenados en caché.
 
 Tenga en cuenta que readQuery arrojará un error si su caché no contiene todos los datos necesarios para cumplir con la consulta especificada. Esto se puede resolver usando un bloque try-catch.
 
