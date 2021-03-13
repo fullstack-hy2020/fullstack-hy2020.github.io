@@ -467,8 +467,8 @@ input元素不应该被赋予 reset 属性。
 
 
 
-<!-- Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point. -->
-使用 https://github.com/fullstack-hy2020/country-hook 的代码作为你的起点。
+<!-- Use the code from https://github.com/fullstack-hy/country-hook as your starting point. -->
+使用 https://github.com/fullstack-hy/country-hook 的代码作为你的起点。
 
 
 
@@ -511,9 +511,9 @@ const setToken = newToken => {
   token = `bearer ${newToken}`
 }
 
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+const getAll = async () => {
+  const response = await axios.get(baseUrl)
+  return response.data
 }
 
 const create = async newObject => {
@@ -525,9 +525,9 @@ const create = async newObject => {
   return response.data
 }
 
-const update = (id, newObject) => {
-  const request = axios.put(`${ baseUrl } /${id}`, newObject)
-  return request.then(response => response.data)
+const update = async (id, newObject) => {
+  const response = await axios.put(`${ baseUrl } /${id}`, newObject)
+  return response.data
 }
 
 export default { getAll, create, update, setToken }
@@ -539,8 +539,8 @@ export default { getAll, create, update, setToken }
 <!-- Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource. -->
 将用于与后端通信的代码提取到它自己的 useResource Hook中。 只要实现获取所有资源并创建新资源就足够了。
 
-<!-- You can do the exercise for the project found in the https://github.com/fullstack-hy2020/ultimate-hooks repository. The <i>App</i> component for the project is the following: -->
-你可以在 https://github.com/fullstack-hy2020/ultimate-hooks 仓库中找到这个项目做练习。 该项目的<i>App</i> 组件如下:
+<!-- You can do the exercise for the project found in the https://github.com/fullstack-hy/ultimate-hooks repository. The <i>App</i> component for the project is the following: -->
+你可以在 https://github.com/fullstack-hy/ultimate-hooks 仓库中找到这个项目做练习。 该项目的<i>App</i> 组件如下:
 
 ```js
 const App = () => {

@@ -9,21 +9,21 @@ lang: fi
 
 Kurssin aikana on websovelluskehityksen rinnalla tavoite ja tarve oppia riittävässä määrin Javascriptiä.
 
-Javascript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. Javascript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2019 julkaistu [ES10](https://www.ecma-international.org/ecma-262/10.0/index.html), toiselta nimeltään ECMAScript 2019.
+JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2020 julkaistu [ES11](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2020.
 
 Selaimet eivät vielä osaa kaikkia Javascriptin uusimpien versioiden ominaisuuksia. Tämän takia selaimessa suoritetaan useimmiten koodia joka on käännetty (englanniksi <i>transpiled</i>) uudemmasta Javascriptin versiosta johonkin vanhempaan, laajemmin tuettuun versioon.
 
 Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 
-[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascript-moottoriin perustuva Javascript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>10.18.0</i>. Noden tuoreet versiot osaavat suoraan Javascriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
+[Node.js](https://nodejs.org/en/) on melkein missä vaan, mm. palvelimilla toimiva, Googlen [chrome V8](https://developers.google.com/v8/)-javascript-moottoriin perustuva JavasScript-suoritusympäristö. Harjoitellaan hieman Javascriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>14.8.0</i>. Noden tuoreet versiot osaavat suoraan Javascriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
 
 Koodi kirjoitetaan <i>.js</i>-päätteiseen tiedostoon, ja suoritetaan komennolla <em>node tiedosto.js</em>
 
 Koodia on mahdollisuus kirjoittaa myös Node.js-konsoliin, joka aukeaa kun kirjoitat komentorivillä _node_ tai myös selaimen developer toolin konsoliin. Chromen uusimmat versiot osaavat suoraan transpiloimatta [melko hyvin](http://kangax.github.io/compat-table/es2016plus/) Javascriptin uusiakin piirteitä.
 
-Javascript muistuttaa nimensä ja syntaksinsa puolesta läheisesti Javaa. Perusmekanismeiltaan kielet kuitenkin poikkeavat radikaalisti. Java-taustalta tultaessa Javascriptin käyttäytyminen saattaa aiheuttaa hämmennystä, varsinkin jos kielen piirteistä ei viitsitä ottaa selvää.
+JavaScript muistuttaa nimensä ja syntaksinsa puolesta läheisesti Javaa. Perusmekanismeiltaan kielet kuitenkin poikkeavat radikaalisti. Java-taustalta tultaessa Javascriptin käyttäytyminen saattaa aiheuttaa hämmennystä, varsinkin jos kielen piirteistä ei viitsitä ottaa selvää.
 
-Tietyissä piireissä on myös ollut suosittua yrittää "simuloida" Javascriptilla eräitä Javan piirteitä ja ohjelmointitapoja. En suosittele.
+Tietyissä piireissä on myös ollut suosittua yrittää "simuloida" Javascriptilla eräitä Javan tai Pythonin piirteitä ja ohjelmointitapoja. En suosittele.
 
 ### Muuttujat
 
@@ -173,7 +173,7 @@ Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pisten
 
 Javascriptissä olioilla voi luonnollisesti olla myös metodeja. Emme kuitenkaan tarvitse tällä kurssilla ollenkaan itse määriteltyjä metodillisia olioita, joten asiaa ei tällä kurssilla käsitellä kuin lyhyesti.
 
-Olioita on myös mahdollista määritellä ns. konstruktorifunktioiden avulla, jolloin saadaan aikaan hieman monien ohjelmointikielten, esim. Javan luokkia (class) muistuttava mekanismi. Javascriptissä ei kuitenkaan ole luokkia samassa mielessä kuin olio-ohjelmointikielissä. Kieleen on kuitenkin lisätty versiosta ES6 alkaen <i>luokkasyntaksi</i>, joka helpottaa tietyissä tilanteissa olio-ohjelmointikielimäisten luokkien esittämistä.
+Olioita on myös mahdollista määritellä ns. konstruktorifunktioiden avulla, jolloin saadaan aikaan hieman monien ohjelmointikielten, esim. Javan tai Pythonin luokkia (class) muistuttava mekanismi. Javascriptissä ei kuitenkaan ole luokkia samassa mielessä kuin olio-ohjelmointikielissä. Kieleen on kuitenkin lisätty versiosta ES6 alkaen <i>luokkasyntaksi</i>, joka helpottaa tietyissä tilanteissa olio-ohjelmointikielimäisten luokkien esittämistä.
 
 ### Funktiot
 
@@ -336,7 +336,7 @@ const App = () => {
 
   <h4>1.5: kurssitiedot step5</h4>
 
-Viedään muutos vielä yhtä askelta pidemmälle, eli tehdään kurssista ja sen osista yksi Javascript-olio. Korjaa kaikki mikä menee rikki.
+Viedään muutos vielä yhtä askelta pidemmälle, eli tehdään kurssista ja sen osista yksi JavaScript-olio. Korjaa kaikki mikä menee rikki.
 
 ```js
 const App = () => {
@@ -390,6 +390,8 @@ const arto = {
 
 arto.greet()  // tulostuu hello, my name is Arto Hellas
 ```
+
+Metodin sisällä voidaan siis viitata olion kenttien arvoihin avainsanan <i>this</i> avulla, vastaavasti kuin Javassa. Pythonissa saman asian ajaa avainsana <i>self</i>.
 
 Metodeja voidaan liittää olioille myös niiden luomisen jälkeen:
 
@@ -450,7 +452,7 @@ referenceToGreet() // tulostuu ainoastaan hello, my name is
 
 Kutsuttaessa metodia viitteen kautta, on metodi kadottanut tiedon siitä mikä oli alkuperäinen _this_. Toisin kuin melkein kaikissa muissa kielissä, Javascriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan <i>miten metodia on kutsuttu</i>. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
 
-This:in kadottaminen aiheuttaa Javascriptillä ohjelmoidessa monia potentiaalisia ongelmia. Eteen tulee erittäin usein tilanteita, missä Reactin/Noden (oikeammin ilmaistuna selaimen Javascript-moottorin) tulee kutsua joitain ohjelmoijan määrittelemien olioiden metodeja. Tällä kurssilla kuitenkin säästymme näiltä ongelmilta, sillä käytämme ainoastaan "thissitöntä" Javascriptia.
+This:in kadottaminen aiheuttaa Javascriptillä ohjelmoidessa monia potentiaalisia ongelmia. Eteen tulee erittäin usein tilanteita, missä Reactin/Noden (oikeammin ilmaistuna selaimen JavaScript-moottorin) tulee kutsua joitain ohjelmoijan määrittelemien olioiden metodeja. Tällä kurssilla kuitenkin säästymme näiltä ongelmilta, sillä käytämme ainoastaan "thissitöntä" Javascriptia.
 
 Eräs this:in katoamiseen johtava tilanne tulee esim. jos pyydetään Artoa tervehtimään sekunnin kuluttua metodia [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) hyväksikäyttäen.
 
@@ -466,7 +468,7 @@ setTimeout(arto.greet, 1000)  // highlight-line
 // sekunnin päästä tulostuu hello, my name is
 ```
 
-Javascriptissa this:in arvo siis määräytyy siitä miten metodia on kutsuttu. setTimeoutia käytettäessä metodia kutsuu Javascript-moottori ja this viittaa Timeout-olioon.
+Javascriptissa this:in arvo siis määräytyy siitä miten metodia on kutsuttu. setTimeoutia käytettäessä metodia kutsuu JavaScript-moottori ja this viittaa Timeout-olioon.
 
 On useita mekanismeja, joiden avulla alkuperäinen _this_ voidaan säilyttää, eräs näistä on metodin [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) käyttö:
 
@@ -511,9 +513,9 @@ Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon es
 
 Luokkasyntaksin tuominen Javascriptiin on osin kiistelty lisäys, ks. esim. [Not Awesome: ES6 Classes](https://awesomeopensource.com/project/joshburgess/not-awesome-es6-classes) tai [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)
 
-ES6:n luokkasyntaksia käytetään paljon "vanhassa" Reactissa ja Node.js:ssä ja siksi sen tunteminen on tälläkin kurssilla paikallaan. Koska käytämme kurssilla Reactin uutta [hook](https://reactjs.org/docs/hooks-intro.html)-ominaisuutta, meidän ei ole tarvetta käyttää kurssilla ollenkaan Javascriptin luokkasyntaksia.
+ES6:n luokkasyntaksia käytetään paljon "vanhassa" Reactissa ja Node.js:ssä ja siksi sen tunteminen on tälläkin kurssilla paikallaan. Koska käytämme kurssilla Reactiin vuonna 2019 lisättyä [hook](https://reactjs.org/docs/hooks-intro.html)-ominaisuutta, meidän ei ole tarvetta käyttää kurssilla ollenkaan Javascriptin luokkasyntaksia.
 
-### Javascript-materiaalia
+### JavaScript-materiaalia
 
 Javascriptistä löytyy verkosta suuret määrät sekä hyvää että huonoa materiaalia. Tällä sivulla lähes kaikki Javascriptin ominaisuuksia käsittelevät linkit ovat [Mozillan Javascript -materiaaliin](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 

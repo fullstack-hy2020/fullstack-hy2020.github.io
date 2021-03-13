@@ -18,7 +18,7 @@ React tarjoaa yhteensä 10 erilaista [valmista hookia](https://reactjs.org/docs/
 Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia
 [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle.
 
-Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](https://fullstack-hy2020.github.io/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
+Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
 käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva [connect](/osa6/connect)-api.
 
 Myös edellisessä [luvussa](/osa7/react_router/) käsitellyn [react-routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä history-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
@@ -42,7 +42,7 @@ React tarjoaa mahdollisuuden myös omien eli [custom](https://reactjs.org/docs/h
 
 > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
-Custom-hookit ovat tavallisia Javascript-funktioita, jotka voivat kutsua mitä tahansa muita hookeja kunhan vain toimivat hookien sääntöjen puitteissa. Custom-hookin nimen täytyy alkaa sanalla _use_.
+Custom-hookit ovat tavallisia JavaScript-funktioita, jotka voivat kutsua mitä tahansa muita hookeja kunhan vain toimivat hookien sääntöjen puitteissa. Custom-hookin nimen täytyy alkaa sanalla _use_.
 
 Teimme [osassa 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasittely) laskurin, jonka arvoa voi kasvattaa, vähentää ja nollata. Sovelluksen koodi on seuraava
 
@@ -399,7 +399,7 @@ Tällöin menettäisimme suurelta osin <i>useField</i>-hookin edut. Eli keksi t�
 
 Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin.
 
-Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi. 
+Ota pohjaksi repositoriossa https://github.com/fullstack-hy/country-hook oleva koodi. 
 
 Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot
 
@@ -455,7 +455,7 @@ Huomaamme, että koodi ei itseasiassa välitä ollenkaan siitä että se käsitt
 
 Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien olioiden haku ja uuden olion luominen onnistuvat.
 
-Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2020/ultimate-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
+Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy/ultimate-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
 
 ```js
 const App = () => {

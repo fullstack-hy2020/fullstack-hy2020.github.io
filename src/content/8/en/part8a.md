@@ -20,7 +20,7 @@ The GraphQL philosophy is very different from REST. REST is <i>resource based</i
 The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes. 
 
 
-Let's assume our bloglist application contains social media like functionality, and we would e.g. want to show a list of all the blogs the users who have commented on the blogs we follow have added. 
+Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs we follow. 
 
 
 If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated. 
@@ -55,9 +55,9 @@ query FetchBlogsQuery {
 }
 ```
 
+The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them. 
 
-
-The servers response would be about the following JSON-object: 
+The server's response would be about the following JSON-object: 
 
 ```bash
 {
@@ -235,7 +235,7 @@ The return value was marked as nullable, so if we search for the details of an u
 
 ```js
 query {
-  findPerson(name: "Donald Trump") {
+  findPerson(name: "Joe Biden") {
     phone 
   }
 }
@@ -628,17 +628,13 @@ const resolvers = {
 }
 ```
 
-
 So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields. 
-
 
 The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
 
 ### Mutations
 
-
 Let's add a functionality for adding new persons to the phonebook. In GraphQL, all operations which cause a change are done with [mutations](https://graphql.org/learn/queries/#mutations). Mutations are described in the schema as the keys of type <i>Mutation</i>.
-
 
 The schema for a mutation for adding a new person looks as follows: 
 
@@ -736,19 +732,14 @@ But the response to the mutation is
 }
 ```
 
-
 So the resolver of the <i>address</i> field of the <i>Person</i> type formats the response object to the right form. 
-
 ### Error handling
-
 
 If we try to create a new person, but the parameters do not correspond with the schema description, the server gives an error message: 
 
 ![](../../images/8/5.png)
 
-
 So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
-
 
 However GraphQL cannot handle everything automatically. For example stricter rules for data sent to a Mutation have to be added manually.
 The errors from those rules are handled by [the error handling mechanism of Apollo Server](https://www.apollographql.com/docs/apollo-server/data/errors).

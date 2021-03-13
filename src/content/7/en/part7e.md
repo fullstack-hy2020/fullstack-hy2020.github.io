@@ -13,7 +13,7 @@ During the course we have only used React components having been defined as Java
 
 It is beneficial to at least be familiar with Class Components to some extent, since the world contains a lot of old React code, which will probably never be completely rewritten using the updated syntax.
 
-Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).
 
 
 The initial version of the Class Component look like this
@@ -205,7 +205,7 @@ In some more advanced use cases the effect hook offers a considerably better mec
 
 A notable benefit of using Functional components is not having to deal with the self referencing _this_-reference of the Javascript class.
 
-In my opinion, and the opinion of many others, Class Components offer basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (16th February 2020) isn't yet in use by functional components.
+In my opinion, and the opinion of many others, Class Components offer basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (15th February 2021) isn't yet in use by functional components.
 
 When writing fresh code [there is no rational reason to use Class Components](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) if the project is using React with a version number 16.8 or greater. On the other hand, [there is currently no need to rewrite all old React code](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) as Functional components.
 
@@ -279,7 +279,7 @@ As I mentioned at the end of [part 6](/en/part6/connect#redux-and-the-component-
 
 ### React/node-application security
 
-So far during the course we have not touched on information security at all. We do not have much time this for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) for this important topic.
+So far during the course we have not touched on information security much. We do not have much time this for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) for this important topic.
 
 We will, however, take a look at some things specific to this course.
 
@@ -559,7 +559,7 @@ The [immutable.js](https://github.com/facebook/immutable-js/)-library maintained
 
 For single page applications the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) than for traditional web-applications where the entire page is loaded. The [React Google Analytics](https://github.com/react-ga/react-ga) -library offers a solution.
 
-You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) -library.
+You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) -library, that is topic of the [part 10](/en/part10) of the course.
 
 When it comes to the tools used for the management and bundling of JavaScript projects the community has been very fickle. Best practices have changed rapidly (the years are approximations, nobody remembers that far back in the past):
 

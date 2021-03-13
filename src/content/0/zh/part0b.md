@@ -615,7 +615,7 @@ Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元�
 
 <!-- The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form) -->
 
-Notes 页面包含一个 [form 元素](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
+Notes 页面包含一个 [form 元素](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)。
 
 ![](../../images/0/20e.png)
 

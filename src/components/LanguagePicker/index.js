@@ -7,6 +7,7 @@ const options = [
   { value: 'fi', label: 'Suomi' },
   { value: 'en', label: 'English' },
   { value: 'zh', label: '中文' },
+  { value: 'es', label: 'Spanish' },
 ];
 
 const LanguagePicker = ({

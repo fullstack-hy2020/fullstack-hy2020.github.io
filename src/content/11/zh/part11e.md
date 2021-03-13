@@ -45,12 +45,14 @@ lang: zh
 
 ### Exercise 11.19
 
-<!-- We have set up a Slack channel <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>. -->
-我们已经建立了一个 Slack 频道<i>fullstackopengroup.slack.com</i>，用于测试信息整合。点击[这里](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA)加入这个频道。不幸的是，你需要一个电子邮件地址来注册。如果你不愿意使用你自己的，你可以使用一个临时电子邮件。有很多选择，比如<https://tempmail.ninja/>。
+<!-- We have set up a Slack <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>. -->
+我们已经建立了一个 Slack 频道<i>fullstackopengroup.slack.com</i>，用于测试信息整合。点击[这里](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-kjic53k3-KvDSsrV26swkF10WO6bZ0A)加入这个频道。不幸的是，你需要一个电子邮件地址来注册。如果你不愿意使用你自己的，你可以使用一个临时电子邮件。有很多选择，比如<https://tempmail.ninja/>。
 
-<!-- Note that you need the Slack webhook URL for doing this exercise. If you do not have it yet, ask it by email from matti.luukkainen@helsinki.fi or in the course [Telegram](https://t.me/fullstackcourse) channel, ping @mluukkai -->
-请注意，您需要 Slack webhook URL 来完成这个练习。如果你还没有收到，可以通过 matti.luukkainen@helsinhelsinki.fi 的邮件或 [Telegram](https://t.me/fullstackcourse)  频道 @mluukkai 询问
+<!-- Note that you need the Slack webhook URL for doing this exercise. You find the webhook in the topic of the channel #general in <i>fullstackopengroup.slack.com</i>
+ -->
+请注意，您需要 Slack webhook URL 来完成这个练习。你可以在<i>fullstackopengroup.slack.com</i> 的 #general频道找到网站链接。
 
+![Releases](../../images/11/22.png)
 
 <!-- <i>You can also use some other Slack channel in this exercise but then you are on your own with the setup.</i> -->
 <i>你也可以在这个练习中使用其他的 Slack 通道，但是你可以自己设置。</i>
