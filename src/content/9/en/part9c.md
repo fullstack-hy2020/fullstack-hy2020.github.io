@@ -1294,7 +1294,7 @@ const parseVisibility = (visibility: unknown): Visibility => {
 And finally we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data. There is however one more thing to take care of. If we try to access the fields of the parameter <i>object</i> as follows:
 
 ```js
-const toNewDiaryEntry = (object: any): NewDiaryEntry => {
+const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
   const newEntry: NewDiaryEntry = {
     comment: parseComment(object.comment),
     date: parseDate(object.date),
@@ -1306,7 +1306,9 @@ const toNewDiaryEntry = (object: any): NewDiaryEntry => {
 };
 ```
 
-we notice that the code does not compile. Thie is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. We can fix this by destructuring the fields to variables of the type unknown as follows:
+we notice that the code does not compile. Thie is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. 
+
+We can fix this by destructuring the fields to variables of the type unknown as follows:
 
 ```js
 type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
@@ -1324,6 +1326,22 @@ const toNewDiaryEntry = ({ comment, date, weather, visibility } : Fields): NewDi
 ```
 
 The first version of our flight diary application is now completed!
+
+The other option to bypass the problem would be to use the type <i>any</i> for the parameter and disable the lint rule for that line:
+
+```js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toNewDiaryEntry = (object: any): NewDiaryEntry => {
+  const newEntry: NewDiaryEntry = {
+    comment: parseComment(object.comment),
+    date: parseDate(object.date),
+    weather: parseWeather(object.weather),
+    visibility: parseVisibility(object.visibility)
+  };
+
+  return newEntry;
+};
+```
 
 If we now try to create a new diary entry with invalid or missing fields we are getting an appropriate error message
 
