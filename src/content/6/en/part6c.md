@@ -160,7 +160,7 @@ import { initializeNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
-    // highlight-start
+  // highlight-start
   const dispatch = useDispatch()
   useEffect(() => {
     noteService
@@ -248,7 +248,7 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew,  // highlight-line
 }
 ```
 
@@ -361,7 +361,7 @@ npm install redux-thunk
 The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux' // highlight-line
 import thunk from 'redux-thunk' // highlight-line
 import { composeWithDevTools } from 'redux-devtools-extension'
 
