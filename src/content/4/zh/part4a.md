@@ -368,8 +368,8 @@ module.exports = mongoose.model('Note', noteSchema)
 <!-- There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet. -->
 对于 Express 应用，没有严格的目录结构或文件命名原则。 与此相对的，Ruby on Rails 就需要一个特定的结构。 我们目前的结构只是遵循一些你可以在互联网上遇到的最佳实践。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1). -->
-您可以在 [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1)的<i>part4-1</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1). -->
+您可以在 [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1)的<i>part4-1</i> 分支中找到我们当前应用的全部代码。
 
 <!-- If you clone the project for yourself, run the _npm install_ command before starting the application with _npm start_. -->
 如果您自己克隆项目，请在启动应用之前运行 npm install 命令。

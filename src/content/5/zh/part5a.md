@@ -93,8 +93,8 @@ const App = () => {
 export default App
 ```
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>. -->
+当前的应用代码可以在[Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
 
 
 <!-- The login form is handled the same way we handled forms in -->
@@ -344,8 +344,8 @@ return (
 我们的主组件 <i>App</i> 现在看起来十分臃肿。我们现在做的修改意味着，表单应该重构到它自己的组件中。但我们把这个作为可选的练习放到课后。
 
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) <i>part5-2</i> 分支上找到。
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
+当前的应用代码可以在[Github](https://github.com/fullstack-hy/part2-notes/tree/part5-2) <i>part5-2</i> 分支上找到。
 
 ### Creating new notes
 【创建新的 Note】
@@ -593,8 +593,8 @@ window.localStorage.clear()
 ```
 
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) <i>part5-3</i> 分支上找到。
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-3), branch <i>part5-3</i>. -->
+当前的应用代码可以在[Github](https://github.com/fullstack-hy/part2-notes/tree/part5-3) <i>part5-3</i> 分支上找到。
 
 </div>
 

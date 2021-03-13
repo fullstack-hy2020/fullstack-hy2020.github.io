@@ -604,8 +604,8 @@ module.exports = app
 更改之后，对<i>/api/testing/reset</i> 接口的 HTTP POST 请求将清空数据库。
 
 
-<!-- The modified backend code can be found from [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>. -->
-修改后的后端代码可以在[github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1)分支<i>part5-1</i> 中找到。
+<!-- The modified backend code can be found from [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>. -->
+修改后的后端代码可以在[github](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1)分支<i>part5-1</i> 中找到。
 
 
 
@@ -720,8 +720,8 @@ describe('Note app', function() {
 
 
 
-<!-- The tests and the current frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>. -->
-测试和当前的前端代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9)分支<i>part5-9</i> 中找到。
+<!-- The tests and the current frontend code can be found from [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-9) branch <i>part5-9</i>. -->
+测试和当前的前端代码可以从[github](https://github.com/fullstack-hy/part2-notes/tree/part5-9)分支<i>part5-9</i> 中找到。
 
 ### Failed login test
 【测试登录失败】
@@ -1117,8 +1117,8 @@ describe('Note app', function() {
 
 
 
-<!-- The tests and the frontend code can be found from [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>. -->
-测试和前端代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10)分支<i>part5-10</i> 中找到。
+<!-- The tests and the frontend code can be found from [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-10) branch <i>part5-10</i>. -->
+测试和前端代码可以从[github](https://github.com/fullstack-hy/part2-notes/tree/part5-10)分支<i>part5-10</i> 中找到。
 
 ### Changing the importance of a note
 【改变便笺的重要性】
@@ -1363,8 +1363,8 @@ it('then example', function() {
 
 
 
-<!-- The frontend- and the test code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>. -->
-前端和测试代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11)分支<i>part5-11</i> 中找到。
+<!-- The frontend- and the test code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-11) branch <i>part5-11</i>. -->
+前端和测试代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part5-11)分支<i>part5-11</i> 中找到。
 
 </div>
 

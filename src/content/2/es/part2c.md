@@ -520,7 +520,7 @@ useEffect(() => {
 
 Todavía tenemos un problema en nuestra aplicación. Al agregar nuevas notas, no se almacenan en el servidor.
 
-El código de la aplicación, como se ha descrito hasta ahora, se puede encontrar completo en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), en la rama <i>part2-4</i>.
+El código de la aplicación, como se ha descrito hasta ahora, se puede encontrar completo en [github](https://github.com/fullstack-hy/part2-notes/tree/part2-4), en la rama <i>part2-4</i>.
 
 ### El entorno de ejecución de desarrollo
 

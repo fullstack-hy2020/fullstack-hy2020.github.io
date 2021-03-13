@@ -484,8 +484,8 @@ Eslint 有大量的[规则](https://ESlint.org/docs/rules/) ，可以通过编�
 <!-- Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use. -->
 许多公司定义了通过 ESlint 配置文件在整个组织中执行的编码标准。 建议不要一遍又一遍地使用重造轮子，从别人的项目中采用现成的配置到自己的项目中可能是一个好主意。 最近，很多项目都采用了 Airbnb 的 Javascript 风格指南，使用了 Airbnb 的 [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) 。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6). -->
-您可以在 [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7)的<i>part3-7</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-6). -->
+您可以在 [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7)的<i>part3-7</i> 分支中找到我们当前应用的全部代码。
 </div>
 
 

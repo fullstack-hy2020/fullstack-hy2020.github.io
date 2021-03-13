@@ -107,7 +107,7 @@ El módulo _config_ que hemos implementado se parece ligeramente al paquete [nod
 
 Estos son los únicos cambios que debemos realizar en el código de nuestra aplicación. 
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-2</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/árbol/part4-2).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-2</i> de [este repositorio de github](https://github.com/fullstack-hy/part3-notes-backend/árbol/part4-2).
 
 ### supertest
 
@@ -436,7 +436,7 @@ notesRouter.get('/', async (request, response) => {
 
 Podemos verificar que nuestra refactorización fue exitosa probando el endpoint a través del navegador y ejecutando las pruebas que escribimos anteriormente. 
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-3</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-3</i> de [este repositorio de Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-3).
 
 ### Más pruebas y refactorización del backend
 
@@ -745,7 +745,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-4</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-4</i> de [este repositorio de Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-4).
 
 ### Eliminando el try-catch
 
@@ -852,7 +852,7 @@ notesRouter.get('/:id', async (request, response) => {
 ```
 
 <!-- Sovelluksen tämänhetkinen koodi en kokonaisuudessaan [githubissa] (https://github.com / fullstack-hy2020 / part3-notes-backend / tree / part4-5), haarassa <i> part4-5 </i>. -->
-El código de nuestra aplicación se puede encontrar en [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), rama <i>part4-5</i>.
+El código de nuestra aplicación se puede encontrar en [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), rama <i>part4-5</i>.
 
 ### Optimización de la función beforeEach
 
@@ -1161,7 +1161,7 @@ Todavía hay margen de mejora, pero es hora de seguir adelante.
 
 Esta forma de probar la API, al realizar solicitudes HTTP e inspeccionar la base de datos con Mongoose, no es de ninguna manera la única ni la mejor forma de realizar pruebas de integración a nivel de API para aplicaciones de servidor. No existe una mejor forma universal de escribir pruebas, ya que todo depende de la aplicación que se esté probando y de los recursos disponibles.
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-6</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-6</i> de [este repositorio de Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6).
 
 </div>
 

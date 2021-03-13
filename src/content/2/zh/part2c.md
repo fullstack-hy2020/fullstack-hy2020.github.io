@@ -633,8 +633,8 @@ useEffect(() => {
 <!-- We still have a problem in our application. When adding new notes, they are not stored on the server. -->
 我们的应用仍然有一个问题。当添加新的便笺时，它们不存储在服务器上。
 
-<!-- The code so far for the application can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4) in the branch <i>part2-4</i>. -->
-到目前为止，应用的代码可以在分支<i>part2-4</i> 中的[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4)上找到。
+<!-- The code so far for the application can be found in full on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-4) in the branch <i>part2-4</i>. -->
+到目前为止，应用的代码可以在分支<i>part2-4</i> 中的[github](https://github.com/fullstack-hy/part2-notes/tree/part2-4)上找到。
 
 ### The development runtime environment  
 【开发的运行时环境】

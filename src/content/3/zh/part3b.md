@@ -143,8 +143,8 @@ node_modules
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server. 
 注意：至少在开始的时候，随时关注 heroku 日志是有好处的。 实现这一点的最佳方法是使用命令 <i>heroku logs -t</i> ，该命令会让服务器上发生任何事情时将日志打印到控制台。
 
->**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
-如果你从Git 仓库中拉取，所部署的代码不是master分支（比如，如果你正在修改上节课的 [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)，你需要运行 _git push heroku HEAD:master_ . 如果你已经推送到了heroku， 你可能需要运行 _git push heroku HEAD:main --force_ ）
+>**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
+如果你从Git 仓库中拉取，所部署的代码不是master分支（比如，如果你正在修改上节课的 [notes repo](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2)，你需要运行 _git push heroku HEAD:master_ . 如果你已经推送到了heroku， 你可能需要运行 _git push heroku HEAD:main --force_ ）
 
 <!-- The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>. -->
 前端也与 Heroku 的后端一起工作。 你可以通过更改前端的后端地址，更改为后端在 Heroku 的地址http://localhost:3001</i>。
@@ -365,8 +365,8 @@ const baseUrl = '/api/notes'
 <!-- In some situations it may be sensible to deploy the frontend code as it's own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack). -->
 在某些情况下，将前端代码部署为它自己的应用可能是合理的。 通过create-react-app 创建的应用是[简单的](https://github.com/mars/create-react-app-buildpack)。
 
-<!-- Current code of the backend can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1). -->
-后端的当前代码可以在分支<i>part3-3</i> 中的[Github](https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3)上找到。 前端代码的更改位于 [前端仓库frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1)的<i>part3-1</i> 分支。
+<!-- Current code of the backend can be found on [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy/part2-notes/tree/part3-1). -->
+后端的当前代码可以在分支<i>part3-3</i> 中的[Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3)上找到。 前端代码的更改位于 [前端仓库frontend repository](https://github.com/fullstack-hy/part2-notes/tree/part3-1)的<i>part3-1</i> 分支。
 
 </div>
 

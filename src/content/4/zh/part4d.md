@@ -339,8 +339,8 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>. -->
-当前的应用可以在<i>part4-9</i>，这个[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9)中找到
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>. -->
+当前的应用可以在<i>part4-9</i>，这个[Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-9)中找到
 
 <!-- If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. Some existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. -->
 

@@ -239,8 +239,8 @@ const App = () => {
 
 
 
-<!-- The code for the current state of our application can be found in the  <i>part2-7</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7). -->
-我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7)上的<i>part2-7</i> 分支中找到。
+<!-- The code for the current state of our application can be found in the  <i>part2-7</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-7). -->
+我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-7)上的<i>part2-7</i> 分支中找到。
 
 
 ### Inline styles
@@ -330,8 +330,8 @@ React的哲学，事实上，是这个极端的对立面。 由于将 CSS、 HTM
 <!-- The structural units that make up the application's functional entities are React components. A React component defines the HTML for structuring the content, the JavaScript functions for determining functionality, and also the component's styling; all in one place. This is to create individual components that are as independent and reusable as possible. -->
 构成应用功能实体的结构单元是 React 组件。 React 组件定义了组织内容的 HTML，确定功能的 JavaScript 函数，以及组件的样式; 所有这些都放在一个地方。 这是为了创建尽可能独立和可重用的单个组件。
 
-<!-- The code of the final version of our application can be found in the  <i>part2-8</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8). -->
-我们应用最终版本的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8)上的<i>part2-8</i> 分支中找到。
+<!-- The code of the final version of our application can be found in the  <i>part2-8</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-8). -->
+我们应用最终版本的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-8)上的<i>part2-8</i> 分支中找到。
 
 </div>
 

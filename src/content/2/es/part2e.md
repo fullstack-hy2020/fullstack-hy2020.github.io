@@ -199,7 +199,7 @@ El resultado se ve así:
 
 ![](../../images/2/26e.png)
 
-El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-7</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
+El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-7</i> en [github](https://github.com/fullstack-hy/part2-notes/tree/part2-7).
 
 ### Estilos en línea 
 
@@ -274,7 +274,7 @@ La filosofía de React es, de hecho, el polo opuesto a esto. Dado que la separac
 
 Las unidades estructurales que componen las entidades funcionales de la aplicación son componentes de React. Un componente de React define el HTML para estructurar el contenido, las funciones de JavaScript para determinar la funcionalidad y también el estilo del componente; todo en un lugar. Esto es para crear componentes individuales que sean lo más independientes y reutilizables como sea posible.
 
-El código de la versión final de nuestra aplicación se puede encontrar en la rama <i>part2-8</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8).
+El código de la versión final de nuestra aplicación se puede encontrar en la rama <i>part2-8</i> en [github](https://github.com/fullstack-hy/part2-notes/tree/part2-8).
 
 </div> 
 

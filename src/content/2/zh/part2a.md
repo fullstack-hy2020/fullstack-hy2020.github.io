@@ -599,11 +599,11 @@ ReactDOM.render(
 
 
 
-<!-- The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1). -->
-应用的当前代码可以在 [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)上找到。
+<!-- The current code of the application can be found on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1). -->
+应用的当前代码可以在 [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1)上找到。
 
-<!-- Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1): -->
-注意，仓库的<i>主分支</i>包含应用的后续版本的代码。 当前的代码在分支 [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)中:
+<!-- Note that the master branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1): -->
+注意，仓库的<i>主分支</i>包含应用的后续版本的代码。 当前的代码在分支 [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1)中:
 
 ![](../../images/2/2e.png)
 

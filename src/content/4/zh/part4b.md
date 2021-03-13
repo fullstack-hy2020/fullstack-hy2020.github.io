@@ -125,8 +125,8 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-
 <!-- These are the only changes we need to make to our application's code. -->
 这些是我们需要对应用代码进行的惟一更改。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2). -->
-您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2)的<i>part4-2</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2). -->
+您可以在[this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2)的<i>part4-2</i> 分支中找到我们当前应用的全部代码。
 
 
 ### supertest
@@ -509,8 +509,8 @@ notesRouter.get('/', async (request, response) => {
 <!-- We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier. -->
 我们可以通过在浏览器中执行端测试和运行我们之前写的测试代码来验证我们的重构是否成功。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3)的<i>part4-3</i> 分支中找到我们当前应用的全部代码
+<!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-3). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-3)的<i>part4-3</i> 分支中找到我们当前应用的全部代码
 
 ### More tests and refactoring the backend 
 【更多的测试和后端重构】
@@ -838,8 +838,8 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4)的<i>part4-4</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-4). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-4)的<i>part4-4</i> 分支中找到我们当前应用的全部代码。
 
 ### Eliminating the try-catch
 【消除try-catch】
@@ -966,8 +966,8 @@ notesRouter.get('/:id', async (request, response) => {
 
 
 
-<!-- The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>. -->
-我们应用的代码可以在[github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5) ，<i>part4-5</i> 中找到。
+<!-- The code for our application can be found from [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>. -->
+我们应用的代码可以在[github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5) ，<i>part4-5</i> 中找到。
 
 ### Optimizing the beforeEach function
 【优化 beforeEach 函数】
@@ -1324,8 +1324,8 @@ afterAll(() => {
 <!-- This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources. -->
 这种通过发出 HTTP 请求和用 Mongoose 检查数据库来测试 API 的方法，绝不是对服务器应用进行 API 集成测试的唯一或最佳方法。 没有通用的编写测试的最佳方法，因为这完全取决于被测试的应用和可用资源。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 
