@@ -16,7 +16,7 @@ At the moment the frontend shows existing notes, and lets users change the state
 
 We'll now implement a part of the required user management functionality in the frontend. Let's begin with user login. Throughout this part we will assume that new users will not be added from the frontend. 
 
-
+### Handling login
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. 
 
 ![](../../images/5/1e.png)
@@ -90,7 +90,7 @@ export default App
 ```
 
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>.
 
 
 The login form is handled the same way we handled forms in 
@@ -330,7 +330,7 @@ The solution isn't perfect, but we'll leave it for now.
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise. 
 
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-2), branch <i>part5-2</i>.
 
 ### Creating new notes
 
@@ -552,7 +552,7 @@ window.localStorage.clear()
 ```
 
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-3), branch <i>part5-3</i>.
 
 </div>
 
@@ -561,7 +561,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 ### Exercises 5.1.-5.4.
 
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001. 
+We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy/bloglist-frontend/) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary. 
 
@@ -572,15 +572,15 @@ It might be best to use the backend from model answers of part 4.
 While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console. 
 
 
-**Warning:** If you notice you are mixing async/await and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both. 
+**Warning:** If you notice you are mixing in same function async/await and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both. 
 
 #### 5.1: bloglist frontend, step1
 
 
-Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command: 
+Clone the application from [Github](https://github.com/fullstack-hy/bloglist-frontend) with the command: 
 
 ```bash
-git clone https://github.com/fullstack-hy2020/bloglist-frontend
+git clone https://github.com/fullstack-hy/bloglist-frontend
 ```
 
 
@@ -671,5 +671,26 @@ Failed login can show the following notification:
 
 
 The notifications must be visible for a few seconds. It is not compulsory to add colors. 
+
+</div>
+
+
+<div class="content">
+
+### A note on using local storage
+
+At the [end](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) of the last part we mentioned that the challenge of the token based authentication is how to cope with the situation when the API access of the token holder to the API needs to be revoked.
+
+There are two solutions to the problem. The first one is to limit the validity period of a token. This forces the user to relogin to the app once the token has expired. The other approach is to save the validity information of each token to the backend database. This solution is often called a <i>server side session</i>.
+
+No matter how the validity of tokens is checked and ensured, saving a token in the local storage might contain a security risk if the application has a security vulnerability that allows [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) attacks. A XSS attack is possible if the application would allow a user to inject arbitrary JavaScript code e.g. using a form that the app would then execute. When using React in a sensible manner it should not be possible since [React sanitizes](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) all text that it renders, meaning that it is not executing the rendered content as JavaScript.
+
+If one wants to play safe, the best option is to not store a token to the local storage. This might be an option in situations where leaking a token might have tragic consequences.
+
+It has been suggested that  the identity of a signed in user should be saved as [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), so that JavaScript code could not have any access the token. The drawback of this solution is that it would make implementing SPA-applications a bit more complex. One would need at least to implement a separate page for logging in.
+
+However it is good to notice that even the use of a httpOnly cookies does not guarantee anything. It has even been suggested that httpOnly cookies are [not any safer than](https://academind.com/tutorials/localstorage-vs-cookies-xss/) the use of local storage. 
+
+So no matter the used solution the most important thing is to [minimize the risk](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) of XSS attacks altogether.
 
 </div>

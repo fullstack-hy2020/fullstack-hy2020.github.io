@@ -15,7 +15,7 @@ lang: zh
 我们将在[NodeJS](https://nodejs.org/en/)的基础上构建我们的后端，这是一个基于 Google 的 [Chrome V8](https://developers.google.com/v8/) 引擎的 JavaScript 运行时环境。
 
 <!-- This course material was written with the version <i>v10.18.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line). -->
-本课程材料是使用 Node.js 的<i>v10.18.0</i> 版本编写的。 请确保您的 Node 版本不低于材料中使用的版本(您可以通过在命令行中运行 _node -v_ 来检查版本)。
+本课程材料是使用 Node.js 的<i>v14.8.0</i> 版本编写的。 请确保您的 Node 版本不低于材料中使用的版本(您可以通过在命令行中运行 _node -v_ 来检查版本)。
 
 <!-- As mentioned in [第1章](/zh/part1/javascript), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code. -->
 正如在 [第1章](/zh/part1/javascript)中提到的，浏览器还不支持 JavaScript 的最新特性，这就是为什么在浏览器中运行的代码必须是[babel](https://babeljs.io/)转译过的。而在后端运行 JavaScript 的情况是不同的。 最新版本的 Node 支持大部分最新的 JavaScript 特性，因此我们可以使用最新的特性而不必转译我们的代码。
@@ -466,7 +466,7 @@ npm install --save-dev nodemon
     "express": "^4.17.1",
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.7"
   }
 }
 ```
@@ -498,7 +498,7 @@ node_modules/.bin/nodemon index.js
   // ..
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon index.js", // highlight-line
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   // ..
@@ -799,16 +799,18 @@ app.delete('/api/notes/:id', (request, response) => {
 const express = require('express')
 const app = express()
 
-app.use(express.json())
+app.use(express.json()) // highlight-line
 
 //...
 
+// highlight-start
 app.post('/api/notes', (request, response) => {
   const note = request.body
   console.log(note)
 
   response.json(note)
 })
+// highlight-end
 ```
 
 <!-- The event handler function can access the data from the <i>body</i> property of the _request_ object. -->
@@ -1005,11 +1007,12 @@ important: body.important || false,
 > <!--To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...-->
 确切地说，当<i>important</i> 属性为<i>false</i> 时，那么<em>body.important || false</em> 表达式实际上将从右侧返回<i>false</i>..。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1). -->
-您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)的<i>part3-1</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1). -->
+您可以在[这个 github 仓库](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1)的<i>part3-1</i> 分支中找到我们当前应用的全部代码。
 
-<!-- Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1). -->
-注意，仓库的主分支包含应用的后一个版本的代码。 应用当前状态的代码单独在 branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)中。
+
+<!-- Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1). -->
+注意，仓库的主分支包含应用的后一个版本的代码。 应用当前状态的代码单独在 branch [part3-1](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1)中。
 
 ![](../../images/3/21.png)
 
@@ -1244,8 +1247,8 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2). -->
-您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).的<i>part3-2</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2). -->
+您可以在[this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2).的<i>part3-2</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

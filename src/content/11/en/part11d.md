@@ -11,17 +11,17 @@ Your main branch of the code should always remain <i>green</i>. Being green mean
 
 Why is this important? You will likely deploy your code to production specifically from your main branch. Any failures in the main branch would mean that new features cannot be deployed to production until the issue is sorted out. Sometimes you will discover a nasty bug in production that was not caught by the CI/CD pipeline. In these cases, you want to be able to roll the production environment back to a previous commit in a safe manner.
 
-How do you keep your main branch green then? Avoid committing any changes directly to the main branch. Instead, commit your code on a branch based on the freshest possible version of the main branch. Once you think the branch is ready to be merged into the master you create a GitHub Pull Request (also referred to as <abbr title="Pull Request">PR</abbr>).
+How do you keep your main branch green then? Avoid committing any changes directly to the main branch. Instead, commit your code on a branch based on the freshest possible version of the main branch. Once you think the branch is ready to be merged into the main you create a GitHub Pull Request (also referred to as <abbr title="Pull Request">PR</abbr>).
 
 ### Working with Pull Requests
 
-Pull requests are a core part of the collaboration process when working on any software project with at least two contributors. When making changes to a project you checkout a new branch locally, make and commit your changes, push the branch to the remote repository (in our case to GitHub) and create a pull request for someone to review your changes before those can be merged into the master branch.
+Pull requests are a core part of the collaboration process when working on any software project with at least two contributors. When making changes to a project you checkout a new branch locally, make and commit your changes, push the branch to the remote repository (in our case to GitHub) and create a pull request for someone to review your changes before those can be merged into the main branch.
 
 There are several reasons why using pull requests and getting your code reviewed by at least one other person is always a good idea.
 - Even a seasoned developer can often overlook some issues in their code: we all know of the tunnel vision effect.
 - A reviewer can have a different perspective and offer a different point of view.
 - After reading through your changes, at least one other developer will be familiar with the changes you've made.
-- Using PRs allows you to automatically run all tasks in your CI pipeline before the code gets to the master branch. GitHub Actions provides a trigger for pull requests.
+- Using PRs allows you to automatically run all tasks in your CI pipeline before the code gets to the main branch. GitHub Actions provides a trigger for pull requests.
 
 You can configure your GitHub repository in such a way that pull requests cannot be merged until they are approved.
 
@@ -34,7 +34,7 @@ To open a new pull request, open your branch in GitHub and click on the green "C
 GitHub's pull request interface presents a description and the discussion interface. At the bottom, it displays all the CI checks (in our case each of our Github Actions) that are configured to run for each PR and the statuses of these checks. A green board is what you aim for! You can click on Details of each check to view details and run logs.
 
 
-All the workflows we looked at so far were triggered by commits to master branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "master" and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into master is opened or updated.
+All the workflows we looked at so far were triggered by commits to main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "main" and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into main is opened or updated.
 
 So let us change events that [trigger](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) of the workflow as follows:
 
@@ -42,13 +42,13 @@ So let us change events that [trigger](https://docs.github.com/en/free-pro-team@
 on:
   push:
     branches:
-      - master
+      - main
   pull_request: // highlight-line
-    branches: [master] // highlight-line
+    branches: [main] // highlight-line
     types: [opened, synchronize] // highlight-line
 ```
 
-We shall soon make it impossible to push the code directly to master, but in the meantime, let us still run the workflow also for all the possible direct pushes to master.
+We shall soon make it impossible to push the code directly to main, but in the meantime, let us still run the workflow also for all the possible direct pushes to main.
 
 </div>
 
@@ -56,13 +56,13 @@ We shall soon make it impossible to push the code directly to master, but in the
 
 ### Exercises 11.14-11.15.
 
-Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to master, it's catching the problems too late!
+Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to main, it's catching the problems too late!
 
 #### 11.14 pull request
 
-Update the trigger of the existing workflow as suggested above to run on new pull requests to master.
+Update the trigger of the existing workflow as suggested above to run on new pull requests to main.
 
-Create a new branch, commit your changes, and open a pull request to master.
+Create a new branch, commit your changes, and open a pull request to main.
 
 If you have not worked with branches before, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get started.
 
@@ -76,11 +76,11 @@ In the "Conversation" tab of the pull request you should see your latest commit(
 
 Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
-#### 11.15 run deployment step only for master branch
+#### 11.15 run deployment step only for main branch
 
 All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment, are run also for pull requests. This is surely something we do not want!
 
-Fortunately, there is an easy solution for the problem! We can add an [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when the code is being merged or pushed to master.
+Fortunately, there is an easy solution for the problem! We can add an [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when the code is being merged or pushed to main.
 
 The workflow [context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contexts) gives various kinds of information about the code the workflow is run.
 
@@ -90,7 +90,7 @@ The relevant information is found in [github context](https://docs.github.com/en
 if: ${{ github.event_name == 'push' }}
 ```
 
-Push some more code to your branch, and ensure that the deployment step <i>is not executed</i> anymore. Then merge the branch to master and make sure that the deployment happens.
+Push some more code to your branch, and ensure that the deployment step <i>is not executed</i> anymore. Then merge the branch to main and make sure that the deployment happens.
 
 </div>
 
@@ -223,7 +223,7 @@ Modify your setup so that if a commit message in a pull request contains _#skip_
 
 **Hints:**  
 
-The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) confitions of the relevant steps. Similarly to [exercise 11-15](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information from the [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
+The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) conditions of the relevant steps. Similarly to [exercise 11-15](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information from the [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
 
 You might take this as a starting point:
 

@@ -5,7 +5,7 @@ import FaqPage from '../components/FaqPage';
 const FAQ = () => (
   <FaqPage
     lang="zh"
-    title="常见问题 | 全栈公开课2020"
+    title="常见问题 | 全栈公开课2021"
     seoDescription="Frequently asked questions"
   />
 );

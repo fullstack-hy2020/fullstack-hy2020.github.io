@@ -204,15 +204,26 @@ const Hello = ({ name, age }) => {
 到目前为止，我们的所有应用都是这样的，即在最初的渲染之后，它们的外观一直是相同的。 如果我们想要创建一个计数器，在这个计数器中的值随着时间的变化而增加，或者点通过击一个按钮而增加，会是什么样呢？
 
 <!-- Let's start with the following body: -->
-让我们从下面的主体开始:
+让我们从下面的代码开始, <i>App.js</i> 内容变成了:
 
 ```js
+import React from 'react'
+
 const App = (props) => {
   const {counter} = props
   return (
     <div>{counter}</div>
   )
 }
+
+export default App
+```
+
+<i>index.js</i> 变成了:
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
 
 let counter = 1
 
@@ -221,6 +232,9 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+
+<!-- **Note** when you change file <i>index.js</i> React does not refresh the page automatically so you need to relead the browser page to get the new content shown. -->
+注意，当你修改 <i>index.js</i> 文件时， React 并不会自动刷新，所以你需要重新加载浏览器页面，新的内容才会展示出来。
 
 <!-- The root component is given the value of the counter in the _counter_ prop. The root component renders the value to the screen. But what happens when the value of _counter_ changes? Even if we were to add the command -->
 App 组件通过counter属性，接收到counter的值。 根组件随即将值渲染到屏幕上。 当计数器的值发生变化时会发生什么呢？ 即，如果我们要添加命令
@@ -233,13 +247,6 @@ counter += 1
 部件并不会重新渲染。 我们可以通过再次调用 ReactDOM.render 方法让组件重新渲染，例如:
 
 ```js
-const App = (props) => {
-  const { counter } = props
-  return (
-    <div>{counter}</div>
-  )
-}
-
 let counter = 1
 
 const refresh = () => {
@@ -281,12 +288,20 @@ setInterval(() => {
 <!-- Next, let's add state to our application's <i>App</i> component with the help of React's [state hook](https://reactjs.org/docs/hooks-state.html). -->
 接下来，让我们通过 React 的  [state hook](https://reactjs.org/docs/hooks-state.html) 向应用的<i>App</i> 组件中添加状态。
 
-<!-- We will change the application to the following: -->
-我们会把应用做如下修改:
+<!-- We will change the application as follows.  <i>index.js</i> goes back to -->
+我们会把应用做如下修改， <i>index.js</i> 重新变成了：
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, 
+document.getElementById('root'))
+```
+<!-- and <i>App.js</i> changes to the following: -->
+<i>App.js</i> 变成了：
 
 ```js
 import React, { useState } from 'react' // highlight-line
-import ReactDOM from 'react-dom'
 
 const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
@@ -303,14 +318,11 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
 <!-- In the first row, the application imports the _useState_-function: -->
-在第一行中，应用导入了 useState 函数:
+在第一行中，文件导入了 useState 函数:
 
 ```js
 import React, { useState } from 'react'
@@ -687,7 +699,7 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
-  const decreaseByOne = () => setCounter(counter - 1)
+  const decreaseByOne = () => setCounter(counter - 1) // highlight-line
   const setToZero = () => setCounter(0)
 
   return (

@@ -464,8 +464,8 @@ usersRouter.get('/', async (request, response) => {
 这个列表看起来像这样：
 ![](../../images/4/9.png)
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7). -->
-你也可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7)的 <i>part4-7</i> 分支中找到当前应用的代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7). -->
+你也可以在[Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7)的 <i>part4-7</i> 分支中找到当前应用的代码。
 
 ### Creating a new note 
 【创建一个新 Note】
@@ -619,7 +619,7 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8). -->
-你可以在这个[分支](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).中找到本节课的代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8). -->
+你可以在这个[分支](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8).中找到本节课的代码。
 
 </div>

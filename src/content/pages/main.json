@@ -3,8 +3,7 @@
     "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
     "intro": "Ota haltuusi React, Redux, Node.js, MongoDB, GraphQL ja TypeScript! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
     "current": [
-      "Vuoden 2020 version deadline siirtyy ja on 1.3.2021. Suuria muutoksia ei ole luvassa, joten voit käytännössä jatkaa koodaamista keskeytyksettä 15.3.2021 alkavaan vuoden 2021 versioon.",
-      "Kurssin koetta ei kuitenkaan voi suorittaa 10.1.-14.3.2021. ja tällä välillä yliopistosuoritusten kirjaamisessa on tauko",
+      "Vuoden 2021 versio kurssista käynnissä!",
       "Kurssiin liittyvää keskustelua Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
       "Yhteistyökumppaneina kurssilla on <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a>, <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a> ja <a href='https://www.smartly.io/'>Smartly.io</a>. Katso <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>täältä</a> yhteistyökumppaniemme asiantuntijoiden vierailuluentoja kurssin aihepiireistä."
     ],
@@ -16,37 +15,32 @@
     ],
     "university": "Helsingin yliopisto on Suomen vanhin ja suurin tiedekorkeakoulu, yhteensä 40 000 henkilön kansainvälinen tiedeyhteisö. Tieteen voimalla yliopist rakentanut yhteiskuntaa, sivistystä ja hyvinvointia jo vuodesta 1640.",
     "houston": "Suomalainen Houston Inc. on vuonna 2003 perustettu ketterä softatalo. Suunnittelemme ja toteutamme asiakkaillemme räätälöityjä digitaalisia palveluita liiketoiminnan tarpeisiin.",
-    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open 2021", "matti.luukkainen@helsinki.fi"],
     "licenced": "Materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä."
   },
   "en": {
     "mainTitle": "Deep Dive Into Modern Web Development",
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
-      "<strong>The deadline for submissions is extended to 1.3.2021</strong>. After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding.", 
-      "Note that the deadline for taking exam for University of Helsinki credits is still 10.1.2020. For more info see <a href='/en/part0'>part 0</a>",
-      "This year's edition of the course contains a new part on <a href='/en/part9'>TypeScript</a>. Content of the part is provided by <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>",
-      "Read <a href='/en/part0/general_info#changed-since-the-last-year'>here</a> what else has changed since last year!",
+      "2021 version of the course has started!", 
       "You can discuss the course and related topics in our dedicated group on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
     "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",
     "licence": [
-      "Parts 0-8 of the course material is written by <a href='https://github.com/mluukkai'>Matti Luukkainen</a>. The content of part 9 is written by developers from <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. Part 10 is written by <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>. The content of part 11 is written by developers from <a href='https://www.smartly.io/'>Smartly</a>. Numerous <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>people</a> have improved and corrected the material both in content and spelling. You can also make improvements to the course material yourself. The course webpage is designed and created by <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, who have also audited the content of the course material. Chinese translation by <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>.",
+      "Parts 0-8 of the course material is written by <a href='https://github.com/mluukkai'>Matti Luukkainen</a>. The content of part 9 is written by developers from <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. Part 10 is written by <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>. The content of part 11 is written by developers from <a href='https://www.smartly.io/'>Smartly</a>. Numerous <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>people</a> have improved and corrected the material both in content and spelling. You can also make improvements to the course material yourself. The course webpage is designed and created by <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, who have also audited the content of the course material. Chinese translation by <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>. Spanish translation by <a target='_blank' href='https://github.com/sebastiantorres86'>Sebastian Torres</a> and <a target='_blank' href='https://github.com/cynthiamv'>Cynthia Vico Vacca</a>.",
       "The course material is licensed under <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>Creative Commons BY-NC-SA 3.0 license</a>, which means that you are free to use and distribute the material, as long as the names of the original authors are not removed. If you make changes to the material and want to distribute the modified version, it must be licensed under the same license. Using the material for commercial purposes is forbidden without permission."
     ],
     "university": "The University of Helsinki is the oldest and largest science university in Finland, with an international scientific community of 40,000 people.",
     "houston": "The Finnish Houston Inc. is an agile software company founded in 2003. We design and implement customized digital services for our business.",
-    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open 2021", "matti.luukkainen@helsinki.fi"],
     "licenced": "The material is licensed under the Creative Commons BY-NC-SA 3.0 License."
   },
   "es": {
     "mainTitle": "Profundización en el desarrollo web moderno.",
     "intro": "¡Aprenda React, Redux, Node.js, MongoDB, GraphQL y TypeScript de una sola vez! Este curso le presentará el desarrollo web moderno basado en JavaScript. El enfoque principal es crear aplicaciones de una sola página con ReactJS que usan REST API creadas con Node.js.",
     "current": [
-      "¡La edición 2020 ya está abierta! La fecha límite para las presentaciones es el 10.1.2021.",
-      "La edición de este año del curso contiene una parte nueva sobre <a href='/es/part9'>TypeScript</a>. El contenido de la parte es proporcionado por <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>.",
-      "Lea <a href='/en/part0/general_info#changed-since-the-last-year'>aquí</a> ¡qué más ha cambiado desde el año pasado!",
+      "<a href='https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/issues/1164'>Looking for contributors for the Spanish translation</a>",
       "Puede discutir el curso y temas relacionados en nuestro grupo dedicado en Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. ¡Únase a la conversación!"
     ],
     "telegram": "Telegram es una aplicación de foro de discusión estilo whatsapp/messenger que se puede usar con un navegador, dispositivos móviles y clientes Windows/Linux/OSX.",
@@ -57,17 +51,14 @@
     ],
     "university": "La Universidad de Helsinki es la universidad de ciencias más grande y antigua de Finlandia, con una comunidad científica internacional de 40.000 personas.",
     "houston": "The Finnish Houston Inc. es una empresa de software ágil fundada en 2003. Diseñamos e implementamos servicios digitales personalizados para nuestro negocio.",
-    "contacts": ["Full Stack Open 2020", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full Stack Open 2021", "matti.luukkainen@helsinki.fi"],
     "licensed": "El material está sujeto a la licencia Creative Commons BY-NC-SA 3.0."
   },
   "zh": {
     "mainTitle": "深入浅出现代Web编程",
     "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 编程技术。重点是利用 ReactJS 搭配Node.js开发的REST API，来搭建单页面应用程序（SPA：Single Page Application）",
     "current": [
-      "<strong>任务提交的截止日期延期到了2021年的3月1日</strong>。在此之后，提交系统会关闭两个周，2021版本会在2021年3月15日启动。2021版本不会有太大的变化，所以你可以接着敲代码啦。",
-      "注意赫尔辛基大学获得学分的考试最终截止日期仍然还是2021年1月10日。更多的信息参考<a href='/zh/part0'>第0章</a>",
-      "今年的新课程加入了一个新的章节——<a href='/part9'>TypeScript</a>。这个章节的内容是由<a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>提供的",
-      "阅读<a href='/zh/part0/基础知识#changed-since-the-last-year'>这里</a>了解相比去年的课程增加了什么新内容！",
+      "2021版本的课程在3月15日开启",
       "你可以加入我们的Telegram 群组<a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>来讨论课程以及相关的内容。快来加入我们吧！"
     ],
     "telegram": "Telegram是一个类似 whatsapp / messenger（国内的微信【译者注】） 讨论组应用，是一个多端应用，你可以在浏览器、手机设备以及Windows / Linux / OSX 客户端使用它。",
@@ -78,7 +69,7 @@
     ],
     "university": "赫尔辛基大学（The University of Helsinki）是芬兰历史最悠久、规模最大的学术型大学，拥有40,000人的国际科学团体。",
     "houston": "芬兰的Houston Inc. 是一家敏捷型软件公司，成立于2003年。我们为业务的设计和实施提供个性的数字化解决方案。",
-    "contacts": ["Full stack open 2020", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open 2021", "matti.luukkainen@helsinki.fi"],
     "licenced": "所有内容基于Creative Commons BY-NC-SA 3.0 License.协议框架。"
   }
 }

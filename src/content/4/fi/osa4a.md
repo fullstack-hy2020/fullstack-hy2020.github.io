@@ -324,7 +324,7 @@ Jos sovellus on pieni, ei rakenteella ole kovin suurta merkitystä. Sovelluksen 
 
 Express-sovelluksien rakenteelle, eli hakemistojen ja tiedostojen nimennälle ei ole olemassa mitään yleismaailmallista standardia samaan tapaan kuin esim. Ruby on Railsissa. Tässä käyttämämme malli noudattaa eräitä internetissä vastaan tulevia hyviä käytäntöjä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1), branchissa <i>part4-1</i>:
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1), branchissa <i>part4-1</i>:
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
 
@@ -431,21 +431,21 @@ module.exports = {
 }
 ```
 
-> Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa Youtubesta [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) -sarjasta ainakin kolme ensimmäistä videoa.
+> Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa Youtubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) -sarjasta ainakin kolme ensimmäistä videoa.
 
-Javascriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>. Käytämme tällä kurssilla Facebookin kehittämää ja sisäisesti käyttämää [jest](https://jestjs.io/):iä, joka on toiminnaltaan ja syntaksiltaankin hyvin samankaltainen kuin testikirjastojen entinen kuningas [Mocha](https://mochajs.org/). Muitakin mahdollisuuksia olisi, esim. eräissä piireissä suosiota nopeasti saavuttanut [ava](https://github.com/avajs/ava).
+Javascriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>. Käytämme tällä kurssilla Facebookin kehittämää ja sisäisesti käyttämää [Jest](https://jestjs.io/):iä, joka on toiminnaltaan ja syntaksiltaankin hyvin samankaltainen kuin testikirjastojen entinen kuningas [Mocha](https://mochajs.org/).
 
 Jest on tälle kurssille luonteva valinta, sillä se sopii hyvin backendien testaamiseen, mutta suorastaan loistaa Reactilla tehtyjen frontendien testauksessa.
 
-> <i>**Huomio Windows-käyttäjille:**</i> jest ei välttämättä toimi, jos projektin hakemistopolulla on hakemisto, jonka nimessä on välilyöntejä.
+> <i>**Huomio Windows-käyttäjille:**</i> Jest ei välttämättä toimi, jos projektin hakemistopolulla on hakemisto, jonka nimessä on välilyöntejä.
 
-Koska testejä on tarkoitus suorittaa ainoastaan sovellusta kehitettäessä, asennetaan <i>jest</i> kehitysaikaiseksi riippuvuudeksi komennolla
+Koska testejä on tarkoitus suorittaa ainoastaan sovellusta kehitettäessä, asennetaan Jest <i>kehitysaikaiseksi riippuvuudeksi</i> komennolla
 
 ```bash
 npm install --save-dev jest
 ```
 
-määritellään npm-skripti <i>test</i> suorittamaan testaus jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
+määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
 
 ```bash
 {
@@ -511,17 +511,20 @@ Edellisessä osassa käyttöön ottamamme ESlint valittaa testien käyttämistä
 
 ```js
 module.exports = {
-  "env": {
-    "commonjs": true 
-    "es6": true,
-    "node": true,
-    "jest": true, // highlight-line
+  'env': {
+    'commonjs': true,
+    'es2021': true,
+    'node': true,
+    'jest': true, // highlight-line
   },
-  "extends": "eslint:recommended",
+  'extends': 'eslint:recommended',
+  'parserOptions': {
+    'ecmaVersion': 12
+  },
   "rules": {
     // ...
   },
-};
+}
 ```
 
 Testi ottaa ensimmäisellä rivillä käyttöön testattavan funktion sijoittaen sen muuttujaan _palindrome_:
@@ -688,7 +691,7 @@ describe('total likes', () => {
 })
 ```
 
-Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä.](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md)
+Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä](https://raw.githubusercontent.com/FullStack-HY/misc/main/blogs_for_test.md).
 
 Törmäät varmasti testien tekemisen yhteydessä erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat, voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje [täällä](https://jestjs.io/docs/en/troubleshooting).
 
@@ -724,7 +727,7 @@ Tämä ja seuraava tehtävä ovat jo hieman haastavampia. Tehtävien tekeminen e
 
 Tehtävän tekeminen onnistuu hyvin ilman mitään kirjastojakin, mutta tämä saattaa olla hyvä paikka tutustua kokoelmien käsittelyä suuresti helpottavaan [Lodash](https://lodash.com/)-kirjastoon.
 
-Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää <i>kirjoittajan</i>, kenellä on eniten blogeja. Funktion paluuarvo kertoo myös ennätysblogaajan blogien määrän:
+Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää <i>kirjoittajan</i>, kenellä on eniten blogeja. Funktion paluuarvo kertoo myös ennätysbloggaajan blogien määrän:
 
 ```js
 {
@@ -733,11 +736,11 @@ Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. 
 }
 ```
 
-Jos ennätysblogaajia on monta, riittää että funktio palauttaa niistä jonkun.
+Jos ennätysbloggaajia on monta, riittää että funktio palauttaa niistä jonkun.
 
 #### 4.7*: apufunktioita ja yksikkötestejä, step5
 
-Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkiblogaajan likejen yhteenlasketun määrän:
+Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkibloggaajan likejen yhteenlasketun määrän:
 
 ```js
 {
@@ -746,6 +749,6 @@ Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. 
 }
 ```
 
-Jos suosikkiblogaajia on monta, riittää että funktio palauttaa niistä jonkun.
+Jos suosikkibloggaajia on monta, riittää että funktio palauttaa niistä jonkun.
 
 </div>

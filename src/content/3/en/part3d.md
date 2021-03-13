@@ -278,16 +278,12 @@ The configuration will be saved in the _.eslintrc.js_ file:
 module.exports = {
     'env': {
         'commonjs': true,
-        'es6': true,
+        'es2021': true,
         'node': true
     },
     'extends': 'eslint:recommended',
-    'globals': {
-        'Atomics': 'readonly',
-        'SharedArrayBuffer': 'readonly'
-    },
     'parserOptions': {
-        'ecmaVersion': 2018
+        'ecmaVersion': 12
     },
     'rules': {
         'indent': [
@@ -305,7 +301,15 @@ module.exports = {
         'semi': [
             'error',
             'never'
-        ]
+        ],
+        'eqeqeq': 'error',
+            'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+        'error', 'always'
+    ],
+    'arrow-spacing': [
+        'error', { 'before': true, 'after': true }
+    ]
     }
 }
 ```
@@ -442,21 +446,16 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
 
-
 Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
-
-You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
+You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7).
 </div>
 
 <div class="tasks">
 
-
 ### Exercise 3.22.
 
-
 #### 3.22: Lint configuration
-
 
 Add ESlint to your application and fix all the warnings.
 
