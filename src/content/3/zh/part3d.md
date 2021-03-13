@@ -304,16 +304,12 @@ node_modules/.bin/eslint --init
 module.exports = {
     'env': {
         'commonjs': true,
-        'es6': true,
+        'es2021': true,
         'node': true
     },
     'extends': 'eslint:recommended',
-    'globals': {
-        'Atomics': 'readonly',
-        'SharedArrayBuffer': 'readonly'
-    },
     'parserOptions': {
-        'ecmaVersion': 2018
+        'ecmaVersion': 12
     },
     'rules': {
         'indent': [
@@ -331,6 +327,14 @@ module.exports = {
         'semi': [
             'error',
             'never'
+        ],
+        'eqeqeq': 'error',
+        'no-trailing-spaces': 'error',
+        'object-curly-spacing': [
+            'error', 'always'
+        ],
+        'arrow-spacing': [
+            'error', { 'before': true, 'after': true }
         ]
     }
 }
@@ -391,7 +395,7 @@ Lint 对我们的代码有很多要说的:
 让我们先不要解决这些问题。
 
 <!-- A better alternative to executing the linter from the command line is to configure a  <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint). -->
-从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个<i>eslint-plugin</i>，它可以连续运行lint程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)。
+从命令行执行连接程序的一个更好的替代方法是为编辑器配置一个<i>eslint-plugin</i>，它可以连续运行lint程序。 通过使用该插件，您将立即看到代码中的错误。 你可以找到更多关于 Visual Studio ESLint 插件的信息[点击这里](google  https://marketplace.visualstudio.com/items?itemname=dbaeumer.vscode-ESLint)。
 
 <!-- The VS Code ESlint plugin will underline style violations with a red line: -->
 代码 ESlint 插件会用红线来强调风格的违反:
@@ -484,25 +488,18 @@ Eslint 有大量的[规则](https://ESlint.org/docs/rules/) ，可以通过编�
 <!-- Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use. -->
 许多公司定义了通过 ESlint 配置文件在整个组织中执行的编码标准。 建议不要一遍又一遍地使用重造轮子，从别人的项目中采用现成的配置到自己的项目中可能是一个好主意。 最近，很多项目都采用了 Airbnb 的 Javascript 风格指南，使用了 Airbnb 的 [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) 。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6). -->
-您可以在 [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7)的<i>part3-7</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-6). -->
+您可以在 [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7)的<i>part3-7</i> 分支中找到我们当前应用的全部代码。
 </div>
-
 
 <div class="tasks">
 
-
-
 ### Exercise 3.22.
 
-
-
 #### 3.22: Lint configuration
-
-
 <!-- Add ESlint to your application and fix all the warnings. -->
 向应用中添加 ESlint 并修复所有警告。
 
-<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 </div>
