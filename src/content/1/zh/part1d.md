@@ -22,22 +22,20 @@ lang: zh
 在下面的代码中，我们为应用创建了两个名为 left 和 right 的初始值为0的状态:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={() => setLeft(left + 1)}>
-          left
-        </button>
-        <button onClick={() => setRight(right + 1)}>
-          right
-        </button>
-        {right}
-      </div>
+      {left}
+      <button onClick={() => setLeft(left + 1)}>
+        left
+      </button>
+      <button onClick={() => setRight(right + 1)}>
+        right
+      </button>
+      {right}
     </div>
   )
 }
@@ -61,7 +59,7 @@ const App = (props) => {
 在这种情况下，应用应该是这样的:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [clicks, setClicks] = useState({
     left: 0, right: 0
   })
@@ -84,12 +82,10 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {clicks.left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {clicks.right}
-      </div>
+      {clicks.left}
+      <button handleClick={handleLeftClick}>left</button>
+      <button handleClick={handleRightClick}>right</button>
+      {clicks.right}
     </div>
   )
 }
@@ -198,7 +194,7 @@ const handleLeftClick = () => {
 让我们向应用添加一个状态，该状态包含一个数组 _allClicks_ ，该数组记录应用中发生的每次单击记录。
 
 ```js
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([]) // highlight-line
@@ -219,13 +215,11 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <p>{allClicks.join(' ')}</p> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -270,18 +264,16 @@ const handleLeftClick = () => {
 让我们仔细看看点击历史是如何渲染在页面上的:
 
 ```js
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <p>{allClicks.join(' ')}</p> // highlight-line
-      </div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -296,6 +288,7 @@ const App = (props) => {
 让我们修改我们的应用，使得单击历史的渲染由一个新的 <i>History</i>  组件处理:
 
 ```js
+// highlight-start
 const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
@@ -311,19 +304,18 @@ const History = (props) => {
     </div>
   )
 }
+// highlight-end
 
-const App = (props) => {
+const App = () => {
   // ...
 
   return (
     <div>
-      <div>
-        {left}
-        <button onClick={handleLeftClick}>left</button>
-        <button onClick={handleRightClick}>right</button>
-        {right}
-        <History allClicks={allClicks} /> // highlight-line
-      </div>
+      {left}
+      <button handleClick={handleLeftClick}>left</button>
+      <button handleClick={handleRightClick}>right</button>
+      {right}
+      <History allClicks={allClicks} /> // highlight-line
     </div>
   )
 }
@@ -373,14 +365,14 @@ const History = (props) => {
 }
 
 // highlight-start
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
 // highlight-end
 
-const App = (props) => {
+const App = () => {
   const [left, setLeft] = useState(0)
   const [right, setRight] = useState(0)
   const [allClicks, setAll] = useState([])
@@ -397,15 +389,13 @@ const App = (props) => {
 
   return (
     <div>
-      <div>
-        {left}
-        // highlight-start
-        <Button onClick={handleLeftClick} text='left' />
-        <Button onClick={handleRightClick} text='right' />
-        // highlight-end
-        {right}
-        <History allClicks={allClicks} />
-      </div>
+      {left}
+      // highlight-start
+      <Button handleClick={handleLeftClick} text='left' />
+      <Button handleClick={handleRightClick} text='right' />
+      // highlight-end
+      {right}
+      <History allClicks={allClicks} />
     </div>
   )
 }
@@ -420,7 +410,7 @@ const App = (props) => {
 
 <!-- In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet. -->
 
-在这个课程中，我们做了一个稍微激进的决定，从第一天开始就完全使用Hook，以确保我们正在学习未来的React风格。 尽管函数式组件是 React 的未来，但学习类语法仍然很重要，因为有数十亿行旧的 React 代码可能会在某一天需要维护。 同样的道理，你可能在互联网上偶然发现React的文档和例子也使用了这些旧代码。
+在这个课程中，我们做了一个稍微激进的决定，从第一天开始就完全使用Hook，以确保我们当前和未来的React风格。 尽管函数式组件是 React 的未来，但学习类语法仍然很重要，因为有数十亿行旧的 React 代码可能会在某一天需要维护。 同样的道理，你可能在互联网上偶然发现React的文档和例子也使用了这些旧代码。
 
 <!-- We will learn more about React class components later on in the course. -->
 我们将在稍后的课程中学习更多关于 React 类组件的知识。
@@ -463,8 +453,8 @@ const App = (props) => {
 老派的，基于打印的调试总是一个好主意。如果组件如下所示
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -532,31 +522,32 @@ props value is [Object object]
 <!-- Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page. -->
 一旦发现 bug 的原因，您可以删除 _debugger_ 命令并刷新页面。
 
-<!-- The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Source</i> tab. -->
- _debugger_ 还允许我们使用在<i>Source</i> 选项卡右侧找到控件一行一行地执行代码。
+<!-- The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Sources</i> tab. -->
+ _debugger_ 还允许我们使用在<i>Sources</i> 选项卡右侧找到控件一行一行地执行代码。
 
 <!-- You can also access the debugger without the _debugger_ command by adding break points in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section: -->
 通过在<i>Sources</i> 选项卡中添加断点，您还可以在不使用 _debugger_ 命令的情况下访问调试器。 检查组件变量的值可以在 Scope-部分 中完成:
 
 ![](../../images/1/9a.png)
 
-<!-- It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools: -->
-强烈建议在 Chrome 中添加 [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)扩展。 它为开发工具增加了一个新的 React 选项卡:
+<!-- It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _React_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props: -->
+强烈建议在 Chrome 中添加 [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)扩展。 它为开发工具增加了一个新的 _Components_ 选项卡。新的开发者工具页可以用来检查不同的React 元素，以及它的属性和状态：
 
-![](../../images/1/10e.png)
+![](../../images/1/10ea.png)
 
 <!-- The new _React_ developer tools tab can be used to inspect the different React elements in the application, along with their state and props. -->
-新的 React developer tools 选项卡可用于检查应用中的不同 React 元素，以及它们的状态和属性。
+<!-- 新的 React developer tools 选项卡可用于检查应用中的不同 React 元素，以及它们的状态和属性。 -->
 
 <!-- Unfortunately the current version of React developer tools leaves something to be desired when displaying component state created with hooks: -->
-不幸的是，当前版本的 React developer 工具在用 hooks 时显示创建的组件状态，有一些不足之处:
+<!-- 不幸的是，当前版本的 React developer 工具在用 hooks 时显示创建的组件状态，有一些不足之处: -->
 
 ![](../../images/1/11e.png)
-
+<!-- The _App_ component's state is defined like so: -->
+_App_ 组件的状态定义如下：
 
 
 <!-- The component state was defined like so: -->
-组件状态的定义如下:
+<!-- 组件状态的定义如下: -->
 
 ```js
 const [left, setLeft] = useState(0)
@@ -567,7 +558,11 @@ const [allClicks, setAll] = useState([])
 <!-- Dev tools shows the state of hooks in the order of their definition: -->
 开发工具按照定义顺序显示hook的状态:
 
-![](../../images/1/11be.png)
+![](../../images/1/11ea.png)
+
+<!-- The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state. -->
+
+第一个<i>State</i>包含<i>left</i>状态的值，下一个包含<i>right</i> 状态的值，最后一个包含<i>allClicks</i> 状态的值。
 
 ### Rules of Hooks
 【Hook的规则】
@@ -581,7 +576,7 @@ const [allClicks, setAll] = useState([])
 回顾一下，hook 只能从定义 React component 的函数体内部调用:
 
 ```js
-const App = (props) => {
+const App = () => {
   // these are ok
   const [age, setAge] = useState(0)
   const [name, setName] = useState('Juha Tauriainen')
@@ -616,9 +611,9 @@ const App = (props) => {
 出于这个原因，我们将再次讨论这个话题。
 
 <!-- Let's assume that we're developing this simple application: -->
-假设我们正在开发这个简单的应用:
+假设我们正在开发这个简单的应用， <i>App</i> 如下所示:
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   return (
@@ -629,10 +624,6 @@ const App = (props) => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
 ```
 
 <!-- We want the clicking of the button to reset the state stored in the _value_ variable. -->
@@ -648,7 +639,7 @@ ReactDOM.render(
 如果我们将事件处理程序定义为一个字符串:
 
 ```js
-<button onClick={'crap...'}>button</button>
+<button onClick="crap...">button</button>
 ```
 
 <!-- React would warn us about this in the console: -->
@@ -694,8 +685,8 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 </button>
 ```
 
-<!-- The message gets printed to the console once but nothing happens when we click the button a second time. Why does this not work even when our event handler contains a function _console.log_? -->
-消息被打印到控制台一次，但是当我们第二次单击按钮时什么也没有发生。 为什么即使我们的事件处理程序包含一个函数 console.log 也不能工作？
+<!-- The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function _console.log_? -->
+当组件渲染出来时，消息会被打印到控制台一次，但是当我们点击按钮时什么也没有发生。 为什么即使我们的事件处理程序包含 console.log 函数依然不能工作呢？
 
 <!-- The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is actually assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>. -->
 这里的问题是，我们的事件处理被定义为<i>function call</i>，这意味着事件处理程序实际上被分配了函数返回的值，而 console.log 的返回值是<i>undefined</i>。
@@ -741,7 +732,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 您经常会看到事件处理程序定义在一个单独的位置。 在下面的应用中，我们定义了一个函数，然后将其赋值给组件函数体中的 _handleClick_ 变量:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const handleClick = () =>
@@ -767,7 +758,7 @@ const App = (props) => {
 当然，我们的事件处理可以由多个命令组成。 在这种情况下，我们对箭头函数，使用较长的大括号语法:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -798,7 +789,7 @@ const App = (props) => {
 让我们对我们的代码进行如下修改:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -871,7 +862,7 @@ const hello = () => {
 让我们稍微修改一下代码:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   // highlight-start
@@ -985,7 +976,7 @@ const hello = (who) => () => {
 我们可以使用相同的技巧来定义将组件状态，设置为给定值的事件处理程序。 让我们对我们的代码进行如下修改:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
   
   // highlight-start
@@ -1043,7 +1034,7 @@ const App = (props) => {
 使用返回函数的函数不是实现此功能所必需的。 让我们将负责更新状态的 _setToValue_ 函数返回到一个普通函数:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
@@ -1115,7 +1106,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
@@ -1136,9 +1127,13 @@ const App = props => {
 }
 ```
 
-<!-- The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function: -->
+<!-- The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible to React to optimize the component. -->
 
-应用看起来仍然可以工作，但是 **不要像这样实现组件！**不要在其他组件内部定义组件。 这种方法没有任何好处，而且会导致许多不愉快的问题。 让我们把<i>Display</i> 组件函数移动到正确的位置，这个位置在<i>App</i> 组件函数之外:
+应用看起来仍然可以工作，但是 **不要像这样实现组件！**不要在其他组件内部定义组件。 这种方法没有任何好处，而且会导致许多不愉快的问题。最大的问题是React 在每次渲染时，会将内部的组件当作一个新的组件。这回导致React 无法去优化组件。
+
+<!-- Let's instead move th e <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function: -->
+让我们把<i>Display</i> 组件函数移动到正确的位置，这个位置在<i>App</i> 组件函数之外:
+
 
 ```js
 const Display = props => <div>{props.value}</div>
@@ -1149,7 +1144,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
@@ -1169,7 +1164,7 @@ const App = props => {
 ### Useful Reading
 【有用的阅读材料】
 <!-- The internet is full of React-related material. However, we use such a new style of React that a large majority of the material found online is outdated for our purposes. -->
-互联网上充满了React相关的材料。 然而，我们使用了这样一种新的React方式，以至于网上发现的绝大多数材料对我们的目的来说都已经过时了。
+互联网上充满了React相关的材料。 然而，我们使用了新的React方式，以至于网上发现的绝大多数材料对我们的目的来说都已经过时了。
 
 <!-- You may find the following links useful: -->
 你可在如下链接中找到有用的资料:
@@ -1188,8 +1183,8 @@ const App = props => {
 
 
 
-<!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)完成的练习标记为已完成。
+<!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)完成的练习标记为已完成。
 
 <!-- Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**. -->
 记住，在一次提交中提交一章节的所有练习。 一旦你提交了一章节的解决方案，你就不能再向这个章节提交更多的练习了。
@@ -1224,12 +1219,25 @@ rm -rf node_modules/ && npm i
 <!-- Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear. -->
 请注意，您的应用只需要在单个浏览器会话期间工作。 一旦刷新页面，收集到的反馈信息就会消失。
 
+<!-- It is advisable to use the same structure that is used in mateerial and previous exercise. File <i>index.js</i> is as follows: -->
+建议使用与之前课程材料相同的结构，<i>index.js</i> 文件内容如下：
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById('root')
+)
+```
+
 <!-- You can implement the application in a single <i>index.js</i> file. You can use the code below as a starting point for your application. -->
-您可以在一个<i>index.js</i> 文件中实现该应用。 您可以使用下面的代码作为应用的起点。
+<!-- You can use the code below as a starting point for your the file <i>App.js</i>: -->
+您可以使用下面的代码作为<i>App.js</i>的起点。
 
 ```js
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 
 const App = () => {
   // save clicks of each button to own state
@@ -1244,9 +1252,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
 <h4>1.7: unicafe 步骤2</h4>
@@ -1359,31 +1365,27 @@ const Statistics = (props) => {
 
 ```js
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 
-const App = (props) => {
+const App = () => {
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+  ]
+   
   const [selected, setSelected] = useState(0)
 
   return (
     <div>
-      {props.anecdotes[selected]}
+      {anecdotes[selected]}
     </div>
   )
 }
 
-const anecdotes = [
-  'If it hurts, do it more often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
-
-ReactDOM.render(
-  <App anecdotes={anecdotes} />,
-  document.getElementById('root')
-)
+export default App
 ```
 
 <!-- Google will tell you how to generate random numbers in JavaScript. Remember that you can test generating random numbers e.g. straight in the console of your browser. -->
@@ -1447,8 +1449,8 @@ copy[2] += 1
 <!-- If multiple anecdotes are tied for first place it is sufficient to just show one of them. -->
 如果有多个箴言并列第一，那么只要展示其中一个就足够了。
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>
 

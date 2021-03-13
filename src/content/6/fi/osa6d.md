@@ -9,7 +9,7 @@ lang: fi
 
 Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla.
 
-Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-funktiota.
+Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
 
 Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettäessä.
 
@@ -130,7 +130,7 @@ eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>prop
 Komponentti _Notes_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
 
 ```js
-const Notes = (props) => { // highlight-line
+const Notes = (props) => {
   const dispatch = useDispatch()
 
   return(
@@ -338,7 +338,7 @@ export default connect(
 
 Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri <i>null</i>.
 
-Sovelluksen koodi on [githubissa](https://github.com/fullstackopen-2019/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+Sovelluksen koodi on [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
 ### Huomio propsina välitettyyn action creatoriin viittaamisesta
 
@@ -590,11 +590,12 @@ Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman
 
 #### 6.19 anekdootit ja connect, step1
 
-Muuta notifikaatioiden näyttämisestä huolehtiva komponentti käyttämään _useSelector_-hookin sijaan _connect_-funktiota.
+<i>Redux storea</i> käytetään tällä hetkellä <em>useSelector</em> ja <em>useDispatch</em> hookien avulla. Tämä on varmasti paras tapa tehdä asiat, mutta harjoitellaan kuitenkin hieman connectin käyttöä.
 
+Muokkaa <i>Notification</i> komponenttia niin, että se käyttää _connect_ funktiota hookien sijaan. 
 #### 6.20 anekdootit ja connect, step2
 
-Tee sama komponentille <i>AnecdoteForm</i>.
+Tee sama <i>Filter</i> ja <i>AnecdoteForm</i> komponenteille.
 
 #### 6.21 anekdootit, loppuhuipennus
 

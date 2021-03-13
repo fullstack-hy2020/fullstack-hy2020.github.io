@@ -28,7 +28,7 @@ The principles of token based authentication are depicted in the following seque
 Let's first implement the functionality for logging in. Install the [jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) library, which allows us to generate [JSON web tokens](https://jwt.io/).
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 The code for login functionality goes to the file controllers/login.js.
@@ -197,7 +197,7 @@ const decodedToken = jwt.verify(token, process.env.SECRET)
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. 
 
-If there is no token, or the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
+If there is no token, or the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
 
 ```js
 if (!token || !decodedToken.id) {
@@ -259,15 +259,92 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
 
 If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. Some existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. 
+
+### Problems of Token-based authentication
+
+Token authentication is pretty easy to implement, but it contains one problem. Once the API user, eg. a React app gets a token, the API has a blind trust to the token holder. What if the access rights of the token holder should be revoken?
+
+There are two solutions to the problem. Easier one is to limit the validity period of a token:
+
+```js
+loginRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  const user = await User.findOne({ username: body.username })
+  const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(body.password, user.passwordHash)
+
+  if (!(user && passwordCorrect)) {
+    return response.status(401).json({
+      error: 'invalid username or password'
+    })
+  }
+
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  // token expires in 60*60 seconds, that is, in one hour
+  // highlight-start
+  const token = jwt.sign(
+    userForToken, 
+    process.env.SECRET,
+    { expiresIn: 60*60 }
+  )
+  // highlight-end
+
+  response
+    .status(200)
+    .send({ token, username: user.username, name: user.name })
+})
+```
+
+Once the token expires, the client app needs to get a new token. Usually this happens by forcing the user to relogin to the app.
+
+The error handling middleware should be extended to give a proper error in the case of a expired token:
+
+```js
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token'
+    })
+  // highlight-start  
+  } else if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({
+      error: 'token expired'
+    })
+  }
+  // highlight-end
+
+  next(error)
+}
+```
+
+The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoken, token is usable only a limited amount of time. On the other hand, a short expiration time forces is a potantial pain to a user, one must login to the system more frequently.
+
+The other solution is to save info about each token to backend database and to check for each API request if the access right corresponding to the token is still valid. With this scheme, the access rights can be revoked at any time. This kind of solution is often called a <i>server side session</i>.
+
+The negative aspect of server side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request from database. A database access is considerably slower compared to checking the validity from the token itself. That is why it is a quite common to save the session corresponding to a token to a <i>key-value-database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios.
+
+When server side sessions are used, the token is quite often just a random string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request the server fetches the relevant information about the identitity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.
 
 ### End notes
 
 There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
 
-Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our applications stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
+Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our application stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
 
 We will implement login to the frontend in the [next part](/en/part5).
 
@@ -275,7 +352,7 @@ We will implement login to the frontend in the [next part](/en/part5).
 
 <div class="tasks">
 
-### Exercises 4.15.-4.22.
+### Exercises 4.15.-4.23.
 
 In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity. 
 
@@ -283,15 +360,14 @@ In the next exercises, basics of user management will be implemented for the Blo
 
 #### 4.15: bloglist expansion, step3
 
-Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username
-, password and name</i>.
+Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username, password and name</i>.
 
 Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
 
 **NB** Some Windows users have had problems with <i>bcrypt</i>. If you run into problems, remove the library with command 
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt 
 ```
 
 and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead. 
@@ -386,7 +462,61 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*:  bloglist expansion, step10
 
-After adding token based authentication the tests for adding a new blog broke down. Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> if token is not provided.
+Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who is the user holding a specific token.
+
+Do now a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i>
+
+```js
+app.use(middleware.userExtractor)
+```
+
+the user will be set in the field _request.user_:
+
+```js
+blogsRouter.post('/', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+
+blogsRouter.delete('/:id', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+```
+
+Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes
+
+```js
+// use the middleware in all routes
+app.use(userExtractor) // highlight-line
+
+app.use('/api/blogs', blogsRouter)  
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+we could register it to be only executed eith path <i>/api/blogs</i> routes: 
+
+```js
+// use the middleware only in /api/blogs routes
+app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+As can be seen, this happens by chainig multiple middlewares as the parameter of function  <i>use</i>. It would also be possible to register a middleware only for a specific operation:
+
+```js
+router.post('/', userExtractor, async (request, response) => {
+  // ...
+}
+```
+
+#### 4.23*:  bloglist expansion, step11
+
+After adding token based authentication the tests for adding a new blog broke down. Fix the tests. Also write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided.
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 

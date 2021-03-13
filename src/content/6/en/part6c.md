@@ -68,8 +68,8 @@ export default { getAll }
 
 We'll add axios to the project
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
 We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
@@ -91,7 +91,7 @@ const reducer = combineReducers({
   filter: filterReducer,
 })
 
-const store = createStore(reducer)
+const store = createStore(reducer, composeWithDevTools())
 
 // highlight-start
 noteService.getAll().then(notes =>
@@ -152,16 +152,16 @@ We do, however, decide to move the initialization of the notes into the <i>App</
 
 ```js
 import React, {useEffect} from 'react' // highlight-line
-import NewNote from './components/NowNote'
+import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes'
+import noteService from './services/notes'  // highlight-line
 import { initializeNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
-  const dispatch = useDispatch()
   // highlight-start
+  const dispatch = useDispatch()
   useEffect(() => {
     noteService
       .getAll().then(notes => dispatch(initializeNotes(notes)))
@@ -248,11 +248,11 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew,  // highlight-line
 }
 ```
 
-The method _addNote_ of the component <i>NoteForm</i> changes slightly:
+The method _addNote_ of the component <i>NewNote</i> changes slightly:
 
 ```js
 import React from 'react'
@@ -263,7 +263,7 @@ import noteService from '../services/notes' // highlight-line
 const NewNote = (props) => {
   const dispatch = useDispatch()
   
-  const addNote = async (event) => {
+  const addNote = async (event) => { // highlight-line
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
@@ -295,7 +295,7 @@ export const createNote = (data) => {
 
 Changing the importance of notes could be implemented using the same principle, meaning making an asynchronous method call to the server and then dispatching an appropriate action.
 
-The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) in the branch <i>part6-3</i>.
+The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3) in the branch <i>part6-3</i>.
 
 </div>
 
@@ -307,7 +307,7 @@ The current state of the code for the application can be found on [github](https
 
 When the application launches, fetch the anecdotes from the backend implemented using json-server.
 
-As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).
 
 #### 6.14 Anecdotes and the backend, step2
 
@@ -333,7 +333,7 @@ const App = () => {
 }
 ```
 
-and <i>NoteForm</i> would create a new note as follows:
+and <i>NewNote</i> would create a new note as follows:
 
 ```js
 const NewNote = () => {
@@ -354,14 +354,14 @@ Both components would only use the function provided to them as a prop without c
 
 Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux' // highlight-line
 import thunk from 'redux-thunk' // highlight-line
 import { composeWithDevTools } from 'redux-devtools-extension'
 
@@ -482,7 +482,7 @@ const NewNote = () => {
 }
 ```
 
-The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>.
+The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-4) in the branch <i>part6-4</i>.
 
 </div>
 

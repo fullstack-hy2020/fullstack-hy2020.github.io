@@ -1,32 +1,42 @@
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
+import { navigate } from '@reach/router';
+
 import './Navigation.scss';
 
-import React, { Component } from 'react';
-
-import LanguageSwitcher from '../LanguageSwitcher/LanguageSwitcher';
+import LanguagePicker from '../LanguagePicker';
 import { NavigationItem } from './Item';
-import PropTypes from 'prop-types';
+import SearchLink from './SearchLink';
 
-export const navigation = {
-  en: [
-    { text: 'About course', path: '/en/about' },
-    { text: 'Course contents', path: '/en#course-contents' },
-    { text: 'FAQ', path: '/en/faq' },
-    { text: 'Partners', path: '/en/companies' },
-    { text: 'Challenge', path: '/en/challenge' },
-  ],
-  fi: [
-    { text: 'Kurssista', path: '/about' },
-    { text: 'Kurssin sisältö', path: '#course-contents' },
-    { text: 'FAQ', path: '/faq' },
-    { text: 'Kurssilla mukana', path: '/companies' },
-  ],
-  zh: [
-    { text: '关于课程', path: '/zh/about' },
-    { text: '课程内容', path: '/zh#course-contents' },
-    { text: '常见问题', path: '/zh/faq' },
-    { text: '合作伙伴', path: '/zh/companies' },
-    { text: '挑战', path: '/zh/challenge' },
-  ],
+const getTranslationPath = (path, language) => {
+  return language === 'fi' ? path : `/${language}${path}`;
+};
+
+export const getNavigation = (language, t) => {
+  return [
+    {
+      text: t('navigation:aboutCourse'),
+      path: getTranslationPath('/about', language),
+    },
+    {
+      text: t('navigation:courseContents'),
+      path: getTranslationPath('/#course-contents', language),
+    },
+    { text: t('navigation:faq'), path: getTranslationPath('/faq', language) },
+    {
+      text: t('navigation:partners'),
+      path: getTranslationPath('/companies', language),
+    },
+    {
+      text: t('navigation:challenge'),
+      path: getTranslationPath('/challenge', language),
+    },
+  ];
+};
+
+const searchIsEnabledForLang = lang => {
+  return ['fi', 'en', 'zh'].includes(lang);
 };
 
 const handleCloseMenu = () =>
@@ -36,50 +46,53 @@ const handleHamburgerClick = () => {
   document.body.classList.toggle('is-open--navigation');
 };
 
-class Navigation extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      navigationOpen: false,
-    };
-  }
-  render() {
-    const { className } = this.props;
-    return (
-      <div className={`navigation__wrapper ${className}`}>
-        <button
-          aria-label="Navigation menu"
-          aria-expanded={this.state.navigationOpen}
-          onClick={() => {
-            this.setState({
-              navigationOpen: !this.state.navigationOpen,
-            });
-            handleHamburgerClick();
-          }}
-          className="navigation__toggle"
-        >
-          <div className="navigation__toggle-icon" />
-        </button>
-        <nav>
-          <ul className="navigation">
-            {navigation[this.props.lang].map(i => (
-              <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
-            ))}
+const Navigation = props => {
+  const { t, i18n } = useTranslation();
+  const [navigationOpen, setNavigationOpen] = useState(false);
 
-            <LanguageSwitcher lang={this.props.lang} />
-          </ul>
-        </nav>
-      </div>
-    );
-  }
-}
+  const { className = '' } = props;
+  const lang = i18n.language;
+  const navigation = getNavigation(lang, t);
+  const showSearchLink = searchIsEnabledForLang(lang);
+
+  const onLanguageChange = newLang => {
+    navigate(getTranslationPath('/', newLang));
+  };
+
+  return (
+    <div className={`navigation__wrapper ${className}`}>
+      <button
+        aria-label="Navigation menu"
+        aria-expanded={navigationOpen}
+        onClick={() => {
+          setNavigationOpen(prevOpen => !prevOpen);
+          handleHamburgerClick();
+        }}
+        className="navigation__toggle"
+      >
+        <div className="navigation__toggle-icon" />
+      </button>
+      <nav>
+        <ul className="navigation">
+          {navigation.map(i => (
+            <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
+          ))}
+
+          {showSearchLink && <SearchLink lang={lang} />}
+
+          <LanguagePicker
+            className="navigation__language-picker"
+            onChange={onLanguageChange}
+            value={lang}
+          />
+        </ul>
+      </nav>
+    </div>
+  );
+};
 
 Navigation.propTypes = {
   className: PropTypes.string,
-};
-
-Navigation.defaultProps = {
-  className: '',
 };
 
 export default Navigation;

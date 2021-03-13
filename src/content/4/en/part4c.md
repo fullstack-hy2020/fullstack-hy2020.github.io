@@ -227,7 +227,7 @@ Let's implement a route for creating new users. Users have a unique <i>username<
 Let's install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package for generating the password hashes:
 
 ```bash
-npm install bcrypt --save
+npm install bcrypt
 ```
 
 
@@ -276,7 +276,7 @@ module.exports = usersRouter
 The password sent in the request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the _bcrypt.hash_ function.
 
 
-The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) is outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
+The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
 
 
 Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.
@@ -388,7 +388,7 @@ The test case obviously will not pass at this point. We are essentially practici
 Let's validate the uniqueness of the username with the help of Mongoose validators. As we mentioned in exercise [3.19](/en/part3/validation_and_es_lint#exercises-3-19-3-21), Mongoose does not have a built-in validator for checking the uniqueness of a field. We can find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package. Let's install it:
 
 ```bash
-npm install --save mongoose-unique-validator
+npm install mongoose-unique-validator
 ```
 
 
@@ -405,14 +405,12 @@ const userSchema = new mongoose.Schema({
   },
   name: String,
   passwordHash: String,
-  // highlight-start
   notes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Note'
     }
   ],
-  // highlight-end
 })
 
 userSchema.plugin(uniqueValidator) // highlight-line
@@ -432,12 +430,23 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
+For making new user in production or development environemnt, you may send POST request to ```/api/users/``` via Postman or REST Client in following format:
+```js
+{
+    "notes": [],
+    "username": "root",
+    "name": "Superuser",
+    "password": "salainen"
+}
+
+```
+
 The list looks like this:
 
 ![](../../images/4/9.png)
 
 
-You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
+You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7).
 
 ### Creating a new note
 
@@ -446,7 +455,7 @@ The code for creating a new note has to be updated so that the note is assigned 
 Let's expand our current implementation so, that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
-const User = require('../models/user')
+const User = require('../models/user') //highlight-line
 
 //...
 
@@ -572,6 +581,6 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
+You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8).
 
 </div>

@@ -6,6 +6,8 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 import snakeCase from 'lodash/fp/snakeCase';
+import { useTranslation } from 'react-i18next';
+import getTranslationPath from '../../utils/getTranslationPath';
 
 const prevChar = c => String.fromCharCode(c.charCodeAt(0) - 1);
 const nextChar = c => String.fromCharCode(c.charCodeAt(0) + 1);
@@ -20,13 +22,13 @@ const hasNext = (letter, part, lang) => {
   );
 };
 
-const labelOsaPart = lang => (lang === 'en' ? 'Part' : lang === 'zh' ? 'Part' :'Osa');
-const prevPartText = lang =>
-  lang === 'en' ? 'Previous part' :  lang === 'zh' ? '上一部分' : 'Edellinen osa';
-const nextPartText = lang => (lang === 'en' ? 'Next part' : lang === 'zh' ? '下一部分' :'Seuraava osa');
-const langUrl = lang => `/${lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part' : 'osa'}`;
+const labelOsaPart = lang => (lang === 'fi' ? 'Osa' : 'Part');
+
+const langUrl = lang => (lang === 'fi' ? '/osa' : `/${lang}/part`);
 
 const PrevNext = ({ part, letter, lang }) => {
+  const { t } = useTranslation();
+
   const getPrev = () => {
     if (!letter && hasPart(part - 1, lang)) {
       return (
@@ -40,7 +42,7 @@ const PrevNext = ({ part, letter, lang }) => {
                 {labelOsaPart(lang)} {part - 1}
               </p>
 
-              <b>{prevPartText(lang)}</b>
+              <b>{t('previousPart')}</b>
             </Element>
           </Link>
 
@@ -64,7 +66,7 @@ const PrevNext = ({ part, letter, lang }) => {
                   {labelOsaPart(lang)} {`${part}${prevChar(letter)}`}
                 </p>
 
-                <b>{prevPartText(lang)}</b>
+                <b>{t('previousPart')}</b>
               </Element>
             </Link>
 
@@ -85,7 +87,7 @@ const PrevNext = ({ part, letter, lang }) => {
                   {labelOsaPart(lang)} {part - 1}
                 </p>
 
-                <b>{prevPartText(lang)}</b>
+                <b>{t('previousPart')}</b>
               </Element>
             </Link>
 
@@ -114,7 +116,7 @@ const PrevNext = ({ part, letter, lang }) => {
               {labelOsaPart(lang)} {part + 1}
             </p>
 
-            <b>{nextPartText(lang)}</b>
+            <b>{t('nextPart')}</b>
           </Element>
         </Link>
       );
@@ -132,7 +134,7 @@ const PrevNext = ({ part, letter, lang }) => {
                 {labelOsaPart(lang)} {`${part}${nextChar(letter)}`}
               </p>
 
-              <b>{nextPartText(lang)}</b>
+              <b>{t('nextPart')}</b>
             </Element>
           </Link>
         );
@@ -147,7 +149,7 @@ const PrevNext = ({ part, letter, lang }) => {
                 {labelOsaPart(lang)} {part + 1}
               </p>
 
-              <b>{nextPartText(lang)}</b>
+              <b>{t('nextPart')}</b>
             </Element>
           </Link>
         );

@@ -25,7 +25,7 @@ ja omat sivunsa muistiinpanojen ja käyttäjien tietojen näyttämiseen:
 
 [Vanhan koulukunnan websovelluksessa](/osa0#perinteinen-web-sovellus) sovelluksen näyttämän sivun vaihto tapahtui siten että selain teki palvelimelle uuden HTTP GET -pyynnön ja renderöi sitten palvelimen palauttaman näkymää vastaavan HTML-koodin.
 
-Single page appeissa taas ollaan todellisuudessa koko ajan samalla sivulla, ja selaimessa suoritettava Javascript-koodi luo illuusion eri "sivuista". Jos näkymää vaihdettaessa tehdään HTTP-kutsuja, niiden avulla haetaan ainoastaan JSON-muotoista dataa, jota uuden näkymän näyttäminen ehkä edellyttää.
+Single page appeissa taas ollaan todellisuudessa koko ajan samalla sivulla, ja selaimessa suoritettava JavaScript-koodi luo illuusion eri "sivuista". Jos näkymää vaihdettaessa tehdään HTTP-kutsuja, niiden avulla haetaan ainoastaan JSON-muotoista dataa, jota uuden näkymän näyttäminen ehkä edellyttää.
 
 Navigaatiopalkki ja useita näkymiä sisältävä sovellus on erittäin helppo toteuttaa Reactilla.
 
@@ -99,8 +99,8 @@ Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTr
 
 Muutetaan ylläoleva sovellus käyttämään React routeria. Asennetaan React router komennolla
 
-```js
-npm install --save react-router-dom
+```bash
+npm install react-router-dom
 ```
 
 React routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:
@@ -138,7 +138,7 @@ const App = () => {
       </Switch>
 
       <div>
-        <i>Note app, Department of Computer Science 2020</i>
+        <i>Note app, Department of Computer Science 2021</i>
       </div>
     </Router>
   )
@@ -215,7 +215,7 @@ Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäise
 
 ### Parametroitu route
 
-Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
+Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstack-hy/misc/blob/master/router-app-v1.js).
 
 Sovellus sisältää nyt viisi eri näkymää, joiden näkyvyyttä kontrolloidaan routerin avulla. Edellisestä esimerkistä tuttujen komponenttien <i>Home</i>, <i>Notes</i> ja <i>Users</i> lisäksi mukana on kirjautumisnäkymää vastaava <i>Login</i> ja yksittäisen muistiinpanon näkymää vastaava <i>Note</i>.
 
@@ -359,7 +359,7 @@ const Login = (props) => {
 }
 ```
 
-Mielenkiinoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti.
+Mielenkiintoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti.
 
 Kirjautumisen yhteydessä kutsutaan history-olion metodia push. Komento _history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
@@ -432,7 +432,7 @@ const App = () => {
       </Router>      
       <div>
         <br />
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
@@ -517,7 +517,7 @@ const App = () => {
       </Switch>
 
       <div>
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
@@ -538,7 +538,7 @@ const note = match
   : null
 ```
 
-Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
+Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy/misc/blob/master/router-app-v2.js).
 
 </div>
 
@@ -546,7 +546,7 @@ Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-h
 
 ### Tehtävät 7.1.-7.3.
 
-Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstack-hy2020/routed-anecdotes> oleva reduxiton anekdoottisovellus.
+Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstack-hy/routed-anecdotes> oleva reduxiton anekdoottisovellus.
 
 Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 

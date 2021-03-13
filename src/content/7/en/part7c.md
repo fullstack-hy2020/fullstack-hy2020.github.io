@@ -27,8 +27,8 @@ Let's start by taking a look at Bootstrap with the help of the [react-bootstrap]
 
 Let's install the package with the command:
 
-```js
-npm install --save react-bootstrap
+```bash
+npm install react-bootstrap
 ```
 
 Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
@@ -237,21 +237,18 @@ Chrome developer tools makes it possible to simulate using our application in th
 
 ![](../../images/7/12ea.png)
 
-You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
+You can find the complete code for the application [here](https://github.com/fullstack-hy/misc/blob/master/notes-bootstrap.js).
 
 ### Material UI
 
-<!-- Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://material-ui.com/).  -->
 As our second example we will look into the [MaterialUI](https://material-ui.com/) React library, which implements the [Material design](https://material.io/) visual language developed by Google.
 
-<!-- Asennetaan kirjasto suorittamalla komento -->
 Install the library with the command
 
-```js
-npm install --save @material-ui/core
+```bash
+npm install @material-ui/core
 ```
 
-<!-- Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään bootstrapin css-määrittelyt lataava rivi: -->
 Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads Google's font Roboto.
 
 ```js
@@ -370,7 +367,7 @@ The end result is:
 ![](../../images/7/64ea.png)
 
 <!-- Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä. -->
-Difference to bootstrap is, that MaterialUI does not provide a component for the form itself. The form here an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
+MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 
 <!-- Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.  -->
 Remember to import all the components used in the form.
@@ -395,8 +392,8 @@ The notification displayed on log in can be done using the [Alert](https://mater
 <!-- Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen: -->
 The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it:
 
-```js 
-npm install --save @material-ui/lab
+```bash
+npm install @material-ui/lab
 ```
 
 <!-- Komponentti importataan seuraavasti -->
@@ -488,17 +485,14 @@ The code for the navigation bar is the following
 </AppBar>
 ```
 
-<!-- ja lopputulos on haluammamme kaltainen -->
 and it looks like we want it to
 
 ![](../../images/7/67ea.png)
 
-<!-- Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js) -->
-The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
+The code of the application can be found from [here](https://github.com/fullstack-hy/misc/blob/master/notes-materialui.js).
 
 ### Closing thoughts
 
-<!-- Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänut MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella: -->
 The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking. 
 I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
 According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018:
@@ -543,18 +537,19 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://get.foundation/>
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
+- <https://semantic-ui.com/>
 
 ### Styled components
 
 There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at.
 
 
-The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6.
+The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) that were introduced in ES6.
 
 Let's make a few changes to the styles of our application with the help of styled components. First, install the package with the command:
 
-```js
-npm install --save styled-components
+```bash
+npm install styled-components
 ```
 
 Then let's define two components with styles:
@@ -662,7 +657,7 @@ const App = () => {
       </Switch>
       
       <Footer> // highlight-line
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </Footer> // highlight-line
     </Page> // highlight-line
   )
@@ -678,7 +673,6 @@ Styled components have seen a consistent growth in popularity in recent times, a
 </div>
 
 <div class="tasks">
-
 
 ### Exercises
 

@@ -57,6 +57,8 @@ module.exports = {
       e: 'Fragmentit ja subskriptiot',
     },
     '9': {},
+    '10': {},
+    '11': {},
   },
   en: {
     '0': {
@@ -117,9 +119,22 @@ module.exports = {
     },
     '9': {
       a: 'Background and introduction',
-      b: 'First steps with Typescript',
+      b: 'First steps with TypeScript',
       c: 'Typing the express app',
       d: 'React with types',
+    },
+    '10': {
+      a: 'Introduction to React Native',
+      b: 'React Native basics',
+      c: 'Communicating with server',
+      d: 'Testing and extending our application',
+    },
+    '11': {
+      a: 'Introduction to CI/CD',
+      b: 'Getting started with GitHub Actions',
+      c: 'Deployment',
+      d: 'Keeping green',
+      e: 'Expanding Further',
     },
   },
   zh: {
@@ -181,9 +196,99 @@ module.exports = {
     },
     '9': {
       a: '背景与介绍',
-      b: 'Typescript的一小步',
-      c: 'Typescript版的express应用',
-      d: '利用Typescript编写React应用',
+      b: 'TypeScript的一小步',
+      c: 'TypeScript版的express应用',
+      d: '利用TypeScript编写React应用',
+    },
+    '10': {
+      a: 'React Native 介绍',
+      b: 'React Native 入门',
+      c: '与服务端通信',
+      d: '测试与扩展我们的应用',
+    },
+    '11': {
+      a: 'CI/CD 简介',
+      b: '开始认识 GitHub Actions 吧',
+      c: '部署',
+      d: '保持健康状态',
+      e: '再扩展一下',
+    },
+  },
+  es: {
+    '0': {
+      a: 'Información general',
+      b: 'Fundamentos de las aplicaiones web',
+    },
+    '1': {
+      a: 'Introducción a React',
+      b: 'JavaScript',
+      c: 'Estado del componente, controladores de eventos',
+      d: 'Un estado más complejo, depurando aplicaciones React',
+    },
+    '2': {
+      a: 'Renderizando una colección, módulos',
+      b: 'Formularios',
+      c: 'Obteniendo datos del servidor',
+      d: 'Alterando datos en el servidor',
+      e: 'Agregar estilos a la aplicación React',
+    },
+    '3': {
+      a: 'Node.js y Express',
+      b: 'Implementación de la aplicación en Internet',
+      c: 'Guardando datos en MongoDB',
+      d: 'Validación y ESLint',
+    },
+    '4': {
+      a: 'Estructura de la aplicación backend, introducción a las pruebas',
+      b: 'Porbando el backend',
+      c: 'Administración de usuarios',
+      d: 'Autenticación de token',
+    },
+    '5': {
+      a: 'Iniciar sesión en la interfaz',
+      b: 'props.children y proptypes',
+      c: 'Probando aplicaciones React',
+      d: 'Pruebas de extremo a extremo',
+    },
+    '6': {
+      a: 'Flux-architecture y Redux',
+      b: 'Muchos reducers',
+      c: 'Comunicarse con el servidor en una aplicación redux',
+      d: 'conectar',
+    },
+    '7': {
+      a: 'React-router',
+      b: 'Hooks personalizados',
+      c: 'Más sobre estilos',
+      d: 'Webpack',
+      e: 'Componentes de clases, varios',
+      f: 'Ejercicios: ampliar la lista de blogs',
+    },
+    '8': {
+      a: 'Servidor GraphQL',
+      b: 'React y GraphQL',
+      c: 'Administración de bases de datos y usuarios',
+      d: 'Iniciar sesión y actualizar la caché',
+      e: 'Fragmentos y suscripciones',
+    },
+    '9': {
+      a: 'Antecedentes e introducción',
+      b: 'Primeros pasos con TypeScript',
+      c: 'Escribiendo la aplicación express',
+      d: 'React con tipos',
+    },
+    '10': {
+      a: 'Introducción a React Native',
+      b: 'Conceptos básicos de React Native',
+      c: 'Comunicandose con el servidor',
+      d: 'Probar y ampliar nuestra aplicación',
+    },
+    '11': {
+      a: 'Introducción a CI/CD',
+      b: 'Introducción a las acciones de Github',
+      c: 'Despliegue',
+      d: 'Manteniéndose verde',
+      e: 'Expandiéndose aún más'
     },
   },
 };

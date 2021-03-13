@@ -9,7 +9,7 @@ lang: en
 
 We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React.
 
-The easiest way to get started by far is using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
+The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
 Let's create an application called <i>part1</i> and navigate to its directory.
 
@@ -35,23 +35,33 @@ Chrome should launch automatically. Open the browser console **immediately**. Al
 The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App'
 
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+)
+```
+
+and file <i>App.js</i> looks like this
+
+```js
+import React from 'react'
 const App = () => (
   <div>
     <p>Hello world</p>
   </div>
 )
 
-ReactDOM.render(<App />, document.getElementById('root'))
+export default App
 ```
 
-The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, _setupTests.js_ and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now.
+The files <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.
 
 ### Component
 
-The file <i>index.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i> and the command on the final line
+The file <i>App.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i> 
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -59,7 +69,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'.
 
-By default, the file <i>public/index.html</i> is empty. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components.
+By default, the file <i>public/index.html</i> doesn't contain any HTML markup that is visible to us in the browser. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components.
 
 Let's take a closer look at the code defining the component:
 
@@ -148,9 +158,6 @@ It seems like React components are returning HTML markup. However, this is not t
 After compiling, our application looks like this:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-
 const App = () => {
   const now = new Date()
   const a = 10
@@ -166,18 +173,13 @@ const App = () => {
     )
   )
 }
-
-ReactDOM.render(
-  React.createElement(App, null),
-  document.getElementById('root')
-)
 ```
 
 The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
 It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would actually do so.
 
-In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along Java Spring, which are used on servers.
+In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along with Java Spring, which are used on servers.
 
 JSX is "[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction)-like", which means that every tag needs to be closed. For example, a newline is an empty element, which in HTML can be written as follows:
 
@@ -193,7 +195,7 @@ but when writing JSX, the tag needs to be closed:
 
 ### Multiple components
 
-Let's modify the application as follows (NB: imports at the top of the file are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work):
+Let's modify the file <i>App.js</i> as follows (NB: import at the top of the file and export at the bottom are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work):
 
 ```js
 // highlight-start
@@ -412,7 +414,7 @@ part2
   countries
 ```
 
-See [this](https://github.com/fullstack-hy2020/example-submission-repository)!
+See [this](https://github.com/FullStack-HY/example-submission-repository)!
 
 For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
 
@@ -429,8 +431,19 @@ Note that in this part, there are more exercises besides those found below. <i>D
 Use create-react-app to initialize a new application. Modify <i>index.js</i> to match the following
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById('root')
+)
+```
+
+and <i>App.js</i> to match the following
+
+```js
+import React from 'react'
 
 const App = () => {
   const course = 'Half Stack application development'
@@ -458,12 +471,14 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+export default App
 ```
 
-and remove extra files (App.js, App.css, App.test.js, logo.svg, setupTests.js, serviceWorker.js).
+and remove extra files (App.css, App.test.js, logo.svg, setupTests.js, reportWebVitals.js, setupTests.js)).
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
+
+Define the new components in file <i>App.js</i>.
 
 The <i>App</i> component's body will approximately be as follows:
 
@@ -481,7 +496,7 @@ const App = () => {
 }
 ```
 
-**WARNING** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository. Most likely you **do not want** the project becoming a repository, so run the command _rm -rf .git_ in the root of the project.
+**WARNING** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository. Most likely you **do not want** the project to become a repository, so run the command _rm -rf .git_ in the root of the project.
 
 <h4>1.2: course information, step2</h4>
 

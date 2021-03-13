@@ -9,7 +9,7 @@ lang: en
 
 The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
 
-In addition to the exercises in this and the next chapter, there are a series of exercises which will be revising what we've learned during the whole course by expanding the Bloglist application, which we worked on during parts 4 and 5.
+In addition to the exercises in this and the next chapter, there are a series of exercises which we'll be revising what we've learned during the whole course by expanding the Bloglist application, which we worked on during parts 4 and 5.
 
 ### Application navigation structure
 
@@ -102,8 +102,8 @@ Luckily, React has the [React router](https://github.com/ReactTraining/react-rou
 
 Let's change the above application to use React router. First, we install React router with the command
 
-```js
-npm install --save react-router-dom
+```bash
+npm install react-router-dom
 ```
 
 The routing provided by React Router is enabled by changing the application as follows:
@@ -141,7 +141,7 @@ const App = () => {
       </Switch>
 
       <div>
-        <i>Note app, Department of Computer Science 2020</i>
+        <i>Note app, Department of Computer Science 2021</i>
       </div>
     </Router>
   )
@@ -163,7 +163,7 @@ According to the [manual](https://reacttraining.com/react-router/web/api/Browser
 
 > <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
-Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React-application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
+Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React-application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
 Inside the router we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. For example,
 
@@ -221,7 +221,7 @@ Note that the order of the components is important. If we would put the <i>Home<
 
 ### Parameterized route
 
-Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
+Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v1.js).
 
 The application now contains five different views whose display is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
@@ -383,9 +383,9 @@ Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)
 There is one more interesting detail about the <i>Users</i> route: 
 
 ```js
-<Route path="/users" render={() =>
-  user ? <Users /> : <Redirect to="/login" />
-} />
+<Route path="/users">
+  {user ? <Users /> : <Redirect to="/login" />}
+</Route>
 ```
 
 If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view
@@ -445,7 +445,7 @@ const App = () => {
       </Router>      
       <div>
         <br />
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
@@ -532,14 +532,13 @@ const App = () => {
       </Switch>
 
       <div>
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
 }    
 ```
 
-<!-- Joka kerta kun komponentti renderöidään, eli käytännössä myös aina kun sovelluksen osoiterivillä oleva url, vaihtuu suoritetaan komento -->
 Every time the component is rendered, so practically every time the browser's url changes, the following command is executed:
 
 ```js
@@ -554,15 +553,14 @@ const note = match
   : null
 ```
 
-<!-- Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js). -->
-The completed code can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
+The completed code can be found [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v2.js).
 
 </div>
 <div class="tasks">
 
 ### Exercises 7.1.-7.3.
 
-Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.
+Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy/routed-anecdotes> as the starting point for the exercises.
 
 If you clone the project into an existing git repository remember to <i>delete the git configuration of the cloned application:</i>
 

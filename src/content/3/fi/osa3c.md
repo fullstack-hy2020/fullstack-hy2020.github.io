@@ -49,7 +49,7 @@ Debuggausnäkymä toimii kuten React-koodia debugattaessa, <i>Sources</i>-välil
 
 Ohjelman muuttujien arvoja voi evaluoida oikealla olevaan <i>watch</i>-ikkunaan.
 
-Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista Javascript-koodia:
+Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista JavaScript-koodia:
 
 ![](../../images/3/39ea.png)
 
@@ -65,7 +65,7 @@ Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin 
 
 ### MongoDB
 
-Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla laitoksen kursseilla on käytetty relaatiotietokantoja. Tällä kurssilla käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database).
+Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla Tietojenkäsittelytieteen osaston kursseilla on käytetty relaatiotietokantoja. Tällä kurssilla käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database).
 
 Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokannoihin lyöytyy [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
@@ -121,15 +121,15 @@ mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/test?retryWrites=t
 
 Olemme nyt valmiina kannan käyttöön.
 
-Voisimme käyttää kantaa Javascript-koodista suoraan Mongon virallisen
+Voisimme käyttää kantaa JavaScript-koodista suoraan Mongon virallisen
 [MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) -kirjaston avulla, mutta se on ikävän työlästä. Käytämmekin hieman korkeammalla tasolla toimivaa [Mongoose](http://mongoosejs.com/index.html)-kirjastoa.
 
-Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), ja sen avulla Javascript-olioiden tallettaminen mongon dokumenteiksi on suoraviivaista.
+Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), ja sen avulla JavaScript-olioiden tallettaminen mongon dokumenteiksi on suoraviivaista.
 
 Asennetaan Mongoose:
 
 ```bash
-npm install mongoose --save
+npm install mongoose
 ```
 
 Ei lisätä mongoa käsittelevää koodia heti backendin koodin sekaan, vaan tehdään erillinen kokeilusovellus tiedostoon <i>mongo.js</i>:
@@ -147,7 +147,7 @@ const password = process.argv[2]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -231,7 +231,7 @@ const note = new Note({
 })
 ```
 
-Modelit ovat ns. <i>konstruktorifunktioita</i>, jotka luovat parametrien perusteella Javascript-olioita. Koska oliot on luotu modelien konstruktorifunktiolla, niillä on kaikki modelien ominaisuudet, eli joukko metodeja, joiden avulla olioita voidaan mm. tallettaa tietokantaan.
+Modelit ovat ns. <i>konstruktorifunktioita</i>, jotka luovat parametrien perusteella JavaScript-olioita. Koska oliot on luotu modelien konstruktorifunktiolla, niillä on kaikki modelien ominaisuudet, eli joukko metodeja, joiden avulla olioita voidaan mm. tallettaa tietokantaan.
 
 Tallettaminen tapahtuu metodilla _save_. Metodi palauttaa <i>promisen</i>, jolle voidaan rekisteröidä _then_-metodin avulla tapahtumankäsittelijä:
 
@@ -267,7 +267,7 @@ Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat:
 
 ![](../../images/3/70ea.png)
 
-Oliot haetaan kannasta _Note_-modelin metodilla [find](http://mongoosejs.com/docs/api.html#find_find). Metodin parametrina on hakuehto. Koska hakuehtona on tyhjä olio <code>{}</code>, saimme kannasta kaikki _notes_-kokoelmaan talletetut oliot.
+Oliot haetaan kannasta _Note_-modelin metodilla [find](https://mongoosejs.com/docs/api.html#model_Model.find). Metodin parametrina on hakuehto. Koska hakuehtona on tyhjä olio <code>{}</code>, saimme kannasta kaikki _notes_-kokoelmaan talletetut oliot.
 
 Hakuehdot noudattavat mongon [syntaksia](https://docs.mongodb.com/manual/reference/operator/).
 
@@ -372,7 +372,7 @@ const mongoose = require('mongoose')
 const url =
   'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -437,7 +437,7 @@ const mongoose = require('mongoose')
 const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url) // highlight-line
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -483,7 +483,7 @@ const url = process.env.MONGODB_URI
 
 console.log('connecting to', url)
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
   .then(result => {
     console.log('connected to MongoDB')
   })
@@ -507,7 +507,7 @@ MONGODB_URI=osoite_tahan npm run watch
 Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
 
 ```bash
-npm install dotenv --save
+npm install dotenv
 ```
 
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, minne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta
@@ -522,6 +522,12 @@ Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin 
 **Tiedosto <i>.env</i> tulee heti gitignorata, sillä emme halua julkaista tiedoston sisältöä verkkoon!**
 
 ![](../../images/3/45ae.png)
+
+Kun .env on gitignorattu ei heroku saa tarvitsemiaan tietoja githubin kautta, vaan ne pitää asettaa itse.
+Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin.
+herokuConfig
+
+![](../../images/3/herokuConfig.png)
 
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
 <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
@@ -600,7 +606,7 @@ Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa t
 
 Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atlasin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
 
 </div>
 
@@ -700,13 +706,13 @@ Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määri
 
 Vastaukseen on lisätty myös hieman dataa kertomaan virheen syystä.
 
-Promisejen yhteydessä kannattaa melkeinpä aina lisätä koodiin myös virhetilainteiden käsittely, muuten seurauksena on usein hämmentäviä vikoja.
+Promisejen yhteydessä kannattaa melkeinpä aina lisätä koodiin myös virhetilanteiden käsittely, muuten seurauksena on usein hämmentäviä vikoja.
 
 Ei ole koskaan huono idea tulostaa poikkeuksen aiheuttanutta olioa konsoliin virheenkäsittelijässä:
 
 ```js
 .catch(error => {
-  console.log(error)
+  console.log(error)  // highlight-line
   response.status(400).send({ error: 'malformatted id' })
 })
 ```
@@ -724,8 +730,7 @@ Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodi
 Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em>, jonka se saa <i>kolmantena</i> parametrina:
 
 ```js
-app.get('/api/notes/:id', (request, response, next) => {
-  // highlight-line
+app.get('/api/notes/:id', (request, response, next) => { // highlight-line
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
@@ -753,10 +758,13 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
+// tämä tulee kaikkien muiden middlewarejen rekisteröinnin jälkeen!
 app.use(errorHandler)
 ```
 
 Virhekäsittelijä tarkastaa onko kyse <i>CastError</i>-poikkeuksesta, eli virheellisestä olioid:stä, jos on, se lähettää pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavavksi.
+
+Huomaa, että virheidenkäsittelijämiddleware tulee rekisteröidä muiden middlewarejen rekisteröinnin jälkeen.
 
 ### Middlewarejen käyttöönottojärjestys
 
@@ -767,7 +775,7 @@ Oikeaoppinen järjestys seuraavassa:
 ```js
 app.use(express.static('build'))
 app.use(express.json())
-app.use(logger)
+app.use(requestLogger)
 
 app.post('/api/notes', (request, response) => {
   const body = request.body
@@ -792,7 +800,7 @@ app.use(errorHandler)
 Json-parseri on syytä ottaa käyttöön melkeimpä ensimmäisenä. Jos järjestys olisi seuraava
 
 ```js
-app.use(logger) // request.body on tyhjä
+app.use(requestLogger) // request.body on tyhjä
 
 app.post('/api/notes', (request, response) => {
   // request.body on tyhjä
@@ -863,29 +871,13 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin. Päivämäärän muuttaminen ei ole mahdollista.
 
-Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali Javascript-olio, eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
+Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali JavaScript-olio, eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
 
 Pieni, mutta tärkeä detalji liittyen operaatioon <em>findByIdAndUpdate</em>. Oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code>, jotta saamme muuttuneen olion palautetuksi kutsujalle.
 
 Backend vaikuttaa toimivan postmanista ja VS Coden REST-clientistä tehtyjen kokeilujen perusteella, ja myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
-Kun muutamme muistiinpanon tärkeyttä, tulostuu backendin konsoliin ikävä varoitus
-
-![](../../images/3/48.png)
-
-Googlaamalla virheilmoitusta löytyy [ohje](https://stackoverflow.com/questions/52572852/deprecationwarning-collection-findandmodify-is-deprecated-use-findoneandupdate) ongelman korjaamiseen. Eli kuten [mongoosen dokumentaatio kehottaa](https://mongoosejs.com/docs/deprecations.html) lisätään tiedostoon <i>note.js</i> yksi rivi:
-
-```js
-const mongoose = require('mongoose')
-
-mongoose.set('useFindAndModify', false) // highlight-line
-
-// ...
-
-module.exports = mongoose.model('Note', noteSchema)
-```
-
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
 
 </div>
 

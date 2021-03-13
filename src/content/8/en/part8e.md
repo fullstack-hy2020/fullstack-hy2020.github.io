@@ -235,12 +235,12 @@ It's possible to test the subscriptions with the GraphQL playground like this:
 When you press "play" on a subscription, the playground waits for notifications from the subscription. 
 
 
-The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
+The backend code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Subscriptions on the client
 
 
-In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/).
+In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
 The configuration in <i>index.js</i> has to be modified like so: 
 
 ```js
@@ -252,7 +252,7 @@ import { setContext } from 'apollo-link-context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/link-ws'
+import { WebSocketLink } from '@apollo/client/link/ws'
 // highlight-end
 
 const authLink = setContext((_, { headers }) => {
@@ -276,7 +276,9 @@ const wsLink = new WebSocketLink({
     reconnect: true
   }
 })
+// highlight-end
 
+// highlight-start
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query)
@@ -305,8 +307,8 @@ ReactDOM.render(
 
 For this to work, we have to install some dependencies:
 
-```js
-npm install --save @apollo/link-ws subscriptions-transport-ws
+```bash
+npm install @apollo/client subscriptions-transport-ws
 ```
 
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
@@ -322,7 +324,7 @@ const httpLink = createHttpLink({
 })
 ```
 
-The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usesubscription) hook function.
+The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) hook function.
 
 Let's modify the code like so:
 
@@ -416,7 +418,7 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 } 
 ```
 
-The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
+The final code of the client can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
 
 ### n+1-problem
 
@@ -465,7 +467,7 @@ Person: {
 ```
 
 
-The parameter _root_ is the person object which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list: 
+The parameter _root_ is the person object for which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list: 
 
 ```js
   Person: {
@@ -500,7 +502,19 @@ query {
 ```
 
 
-There is however one issue with our solution, it does an unreasonable amount of queries to the database. If we log every query to the database, and we have 5 persons saved, we see the following:
+There is however one issue with our solution, it does an unreasonable amount of queries to the database. If we log every query to the database, just like this for example,
+```js
+friendOf: async (root) => {
+// highlight-start
+  console.log("Person.find")
+  const friends = await User.find({ friends: { $in: [root._id] } })
+  console.log("User.find")
+  // highlight-end
+  return friends
+},
+```
+
+and we have 5 persons saved, we see an absurd amount of queries.
 
 <pre>
 Person.find
@@ -590,7 +604,7 @@ query {
 ```
 
 
-If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 

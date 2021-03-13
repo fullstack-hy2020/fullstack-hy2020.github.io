@@ -20,7 +20,7 @@ Graphql 哲学与 REST 非常不同。 Rest 是基于资源的。 每个资源(�
 <!-- The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes.  -->
 Rest 的资源基本上在大多数情况下都能很好地工作，但有些时候也有些尴尬。 
 
-<!-- Let's assume our bloglist application contains social media like functionality, and we would i.e want to show a list of all the blogs the users who have commented on the blogs we follow have added.  -->
+<!-- Let's assume our bloglist application contains social media like functionality, and we would e.g. want to show a list of all the blogs the users who have commented on the blogs we follow have added.  -->
 让我们假设我们的博客列表应用包含类似社交媒体的功能，并且我们想显示一个所有博客的列表，这些博客的用户已经在我们关注的博客上添加了评论。
 
 <!-- If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.  -->
@@ -56,7 +56,9 @@ query FetchBlogsQuery {
 }
 ```
 
+The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them. 
 
+`FetchBlogsQuery`的内容可以粗略的解释为：查找一个叫`"mluukkai"` 的用户以及每一个`followedUsers`， 查找所有他的`blogs`， 以及所有博客的`comments`， 还有每个评论的`user`，找到他们的`blogs` ，并返回每一个博客的`title`
 
 <!-- The servers response would be about the following JSON-object:  -->
 服务器响应将是如下 json 对象:
@@ -163,8 +165,9 @@ query {
 ```
 
 <!-- The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe  -->
-获取所有人(_allPersons_)的信息的查询稍微复杂一些。 因为查询返回一个<i>Person</i>-对象列表，所以查询必须描述查询[返回](https://graphql.org/learn/queries/#fields)<i>对象的哪个字段</i>:
-<!-- <i>which fields</i> of the objects the query [returns](https://graphql.org/learn/queries/#fields): -->
+获取所有人(_allPersons_)的信息的查询稍微复杂一些。 因为这个查询会返回一个<i>Person</i>对象列表，所以查询必须描述查询会返回
+<!-- <i>which [fields](https://graphql.org/learn/queries/#fields)</i> of the objects the query returns: -->
+对象的哪些<i>[字段](https://graphql.org/learn/queries/#fields)</i> ：
 
 
 ```js
@@ -251,7 +254,7 @@ query {
 
 ```js
 query {
-  findPerson(name: "Donald Trump") {
+  findPerson(name: "Joe Biden") {
     phone 
   }
 }
@@ -290,8 +293,8 @@ Graphql 查询只描述在服务器和客户端之间移动的数据。 在服�
 <!-- Create a new npm-project with _npm init_ and install the required dependencies. -->
 使用 npm init 创建一个新的 npm-project，并安装所需的依赖项。
 
-```js
-npm install --save apollo-server graphql
+```bash
+npm install apollo-server graphql
 ```
 
 <!-- The initial code is as follows:  -->
@@ -504,7 +507,7 @@ query {
 
 
  <!--In fact all resolver functions are given [four parameters](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part.--> 
-事实上，所有的解析器函数都是给定的[4个参数](https://www.apollographql.com/docs/graphql-tools/resolvers.html#resolver-function-signature)。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
+事实上，所有的解析器函数都是给定的[4个参数](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature)。 使用 JavaScript 时，如果不需要参数，那么就不必定义它们。 我们将在本章节后面使用解析器的第一个和第三个参数。
 
 ### The default resolver
 【默认解析器】
@@ -531,7 +534,7 @@ Graphql-server 必须为模式中每种类型的<i>每种</i>字段定义解析�
 到目前为止，我们只为类型为<i>Query</i> 的字段定义了解析器，因此应用的每个查询都是这样。
 
 <!-- Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.apollographql.com/docs/graphql-tools/resolvers.html#Default-resolver) for them.  -->
-因为我们没有为<i>Person</i> 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器](https://www.apollographql.com/docs/graphql-tools/resolvers.html#default-resolver)。
+因为我们没有为<i>Person</i> 类型的字段定义解析器，Apollo 已经为它们定义了[默认解析器](https://www.graphql-tools.com/docs/resolvers/#default-resolver)。
 <!-- They work like the one shown below:  -->
 它们的工作原理如下图所示:
 
@@ -945,7 +948,7 @@ type Mutation {
 ```
 
 <!-- and is done by a resolver: -->
-而且是由一个解析器完成的:
+而且是由一个resolver完成的:
 
 ```js
 Mutation: {
@@ -964,8 +967,8 @@ Mutation: {
 ```
 
 
-<!-- The mutation finds the person to be by the field <i>name</i>. -->
-这个Mutation通过字段<i>name</i> 找到这个人。
+<!-- The mutation finds the person to be updated by the field <i>name</i>. -->
+mutations 发现person 被 <i>name</i> 字段更新掉了。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>. -->
 当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。

@@ -7,13 +7,11 @@ lang: en
 
 <div class="content">
 
-<!-- Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla. -->
 So far we have used our redux-store with the help of the [hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
 
-To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux.
+To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-function provided by react-redux.
 
-<!-- Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettävissä. -->
 In new applications you should absolutely use the hook-api, but knowing how to use connect is useful when maintaining older projects using redux.
 
 ### Using the connect-function to share the redux store to components
@@ -33,7 +31,7 @@ const Notes = () => {
     if ( filter === 'ALL' ) {
       return notes
     }
-    return filter  === 'IMPORTANT' 
+    return filter === 'IMPORTANT'
       ? notes.filter(note => note.important)
       : notes.filter(note => !note.important)
   })
@@ -87,11 +85,11 @@ const Notes = (props) => { // highlight-line
 
 // highlight-start
   const notesToShow = () => {
-    if ( props.filter === 'ALL ') {
+    if ( props.filter === 'ALL' ) {
       return props.notes
     }
     
-    return props.filter  === 'IMPORTANT' 
+    return props.filter  === 'IMPORTANT'
       ? props.notes.filter(note => note.important)
       : props.notes.filter(note => !note.important)
   }
@@ -124,7 +122,6 @@ const ConnectedNotes = connect(mapStateToProps)(Notes) // highlight-line
 export default ConnectedNotes
 ```
 
-
 The <i>Notes</i> component can access the state of the store directly, e.g. through <i>props.notes</i> that contains the list of notes.  Similarly, <i>props.filter</i> references the value of the filter.
 
 The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this:
@@ -138,7 +135,7 @@ The _NoteList_ component actually does not need the information about which filt
 We just have to give it correctly filtered notes in the _notes_ prop:
 
 ```js
-const Notes = (props) => { // highlight-line
+const Notes = (props) => {
   const dispatch = useDispatch()
 
   return(
@@ -206,9 +203,17 @@ The second parameter of the _connect_ function can be used for defining [mapDisp
 
 ```js
 const mapStateToProps = (state) => {
+  if ( state.filter === 'ALL' ) {
+    return {
+      notes: state.notes
+    }
+  }
+
   return {
-    notes: state.notes,
-    filter: state.filter,
+    notes: (state.filter  === 'IMPORTANT' 
+    ? state.notes.filter(note => note.important)
+    : state.notes.filter(note => !note.important)
+    )
   }
 }
 
@@ -347,7 +352,7 @@ export default connect(
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
+You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-5).
 
 ### Referencing action creators passed as props
 
@@ -606,32 +611,14 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 #### 6.19 anecdotes and connect, step1
 
-The <i>redux store</i> is currently passed to all of the components through props.
+The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks.
 
-Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function.
-
-Voting for and creating new anecdotes **does not need to work** after this exercise.
-
-The <i>mapStateToProps</i> function you will need in this exercise is approximately the following:
-
-```js
-const mapStateToProps = (state) => {
-  // sometimes it is useful to console log from mapStateToProps
-  console.log(state)
-  return {
-    anecdotes: state.anecdotes,
-    filter: state.filter
-  }
-}
-```
-
+Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks. 
 #### 6.20 anecdotes and connect, step2
 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
-
 #### 6.21 anecdotes, the grand finale
 
-<!-- Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos vote-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen että notifikaation näyttöaika on 5 sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation. -->
 You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds, 
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
 
@@ -639,10 +626,6 @@ the last notification is only displayed for two seconds (assuming the notificati
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. 
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.
-
-</div>
-
-<div class="tasks">
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

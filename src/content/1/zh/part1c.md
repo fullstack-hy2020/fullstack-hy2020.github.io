@@ -204,15 +204,26 @@ const Hello = ({ name, age }) => {
 到目前为止，我们的所有应用都是这样的，即在最初的渲染之后，它们的外观一直是相同的。 如果我们想要创建一个计数器，在这个计数器中的值随着时间的变化而增加，或者点通过击一个按钮而增加，会是什么样呢？
 
 <!-- Let's start with the following body: -->
-让我们从下面的主体开始:
+让我们从下面的代码开始, <i>App.js</i> 内容变成了:
 
 ```js
+import React from 'react'
+
 const App = (props) => {
   const {counter} = props
   return (
     <div>{counter}</div>
   )
 }
+
+export default App
+```
+
+<i>index.js</i> 变成了:
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
 
 let counter = 1
 
@@ -221,6 +232,9 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+
+<!-- **Note** when you change file <i>index.js</i> React does not refresh the page automatically so you need to relead the browser page to get the new content shown. -->
+注意，当你修改 <i>index.js</i> 文件时， React 并不会自动刷新，所以你需要重新加载浏览器页面，新的内容才会展示出来。
 
 <!-- The root component is given the value of the counter in the _counter_ prop. The root component renders the value to the screen. But what happens when the value of _counter_ changes? Even if we were to add the command -->
 App 组件通过counter属性，接收到counter的值。 根组件随即将值渲染到屏幕上。 当计数器的值发生变化时会发生什么呢？ 即，如果我们要添加命令
@@ -233,13 +247,6 @@ counter += 1
 部件并不会重新渲染。 我们可以通过再次调用 ReactDOM.render 方法让组件重新渲染，例如:
 
 ```js
-const App = (props) => {
-  const { counter } = props
-  return (
-    <div>{counter}</div>
-  )
-}
-
 let counter = 1
 
 const refresh = () => {
@@ -281,12 +288,20 @@ setInterval(() => {
 <!-- Next, let's add state to our application's <i>App</i> component with the help of React's [state hook](https://reactjs.org/docs/hooks-state.html). -->
 接下来，让我们通过 React 的  [state hook](https://reactjs.org/docs/hooks-state.html) 向应用的<i>App</i> 组件中添加状态。
 
-<!-- We will change the application to the following: -->
-我们会把应用做如下修改:
+<!-- We will change the application as follows.  <i>index.js</i> goes back to -->
+我们会把应用做如下修改， <i>index.js</i> 重新变成了：
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, 
+document.getElementById('root'))
+```
+<!-- and <i>App.js</i> changes to the following: -->
+<i>App.js</i> 变成了：
 
 ```js
 import React, { useState } from 'react' // highlight-line
-import ReactDOM from 'react-dom'
 
 const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
@@ -303,14 +318,11 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
 <!-- In the first row, the application imports the _useState_-function: -->
-在第一行中，应用导入了 useState 函数:
+在第一行中，文件导入了 useState 函数:
 
 ```js
 import React, { useState } from 'react'
@@ -350,7 +362,7 @@ setTimeout(
 当状态修改函数—— setCounter 被调用时， <i>React 重新渲染了这个组件</i> ，这意味着组件函数的函数体被重新执行:
 
 ```js
-(props) => {
+() => {
   const [ counter, setCounter ] = useState(0)
 
   setTimeout(
@@ -371,7 +383,8 @@ setTimeout(
 ```js
 () => setCounter(2)
 ```
-Meanwhile, the old value of _counter_,  "1", is rendered to the screen.
+
+<!--  Meanwhile, the old value of _counter_,  "1", is rendered to the screen. -->
 与此同时，计数器的旧值“1”被渲染到了屏幕上。
 
 <!-- Every time the _setCounter_  modifies the state it causes the component to re-render. The value of the state will be incremented again after one second, and this will continue to repeat for as long as the application is running. -->
@@ -397,8 +410,8 @@ const App = () => {
 }
 ```
 
-<!-- It's easy to follow and track the calls made to the _render_ function: -->
-就很容易跟踪并捕获render函数的调用:
+<!-- It's easy to follow and track the calls made to the  <i>App</i> component's render  function: -->
+很容易就能跟踪和捕获到<i>App</i> 组件 render 函数的调用：
 
 ![](../../images/1/4e.png)
 
@@ -529,14 +542,14 @@ const App = () => {
 
 
 <!-- This would completely break our application: -->
-们的应用崩了:
+我们的应用崩了:
 
 ![](../../images/1/5b.png)
 
 
 
 <!-- What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write -->
-怎么回事？事件处理程序应该是一个<i>函数</i> 或一个<i>函数引用</i>，当我们编写时
+怎么回事？事件处理程序应该是一个<i>函数</i> 或一个<i>函数引用</i>，当我们编写时:
 
 ```js
 <button onClick={setCounter(counter + 1)}>
@@ -548,7 +561,7 @@ const App = () => {
 事件处理器实际上被定义成了一个<i>函数调用</i>。 在很多情况下这是可行的，但在这种特殊情况下就不行了。 一开始<i>counter</i> 变量的值是0。 当 React 第一次渲染时，它执行函数调用<em>setCounter(0+1)</em>，并将组件状态的值更改为1。
 
 <!-- This will cause the component to be rerendered, react will execute the setCounter function call again, and the state will change leading to another rerender... -->
-这将导致组件重新渲染，react 将再次执行 setCounter 函数调用，并且状态将发生变化，从而导致另一个重新运行...
+这将导致组件重新渲染，React 将再次执行 setCounter 函数调用，并且状态将发生变化，从而导致另一个重新运行...
 
 <!-- Let's define the event handlers like we did before -->
 让我们像之前那样定义事件处理程序
@@ -602,7 +615,7 @@ const App = () => {
 
 
 
-<!-- Here the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function: -->
+<!-- Here, the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function: -->
 这里就正确定义了事件处理。<i>onClick</i> 属性的值是一个包含函数引用的变量:
 
 ```js
@@ -686,7 +699,7 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
-  const decreaseByOne = () => setCounter(counter - 1)
+  const decreaseByOne = () => setCounter(counter - 1) // highlight-line
   const setToZero = () => setCounter(0)
 
   return (

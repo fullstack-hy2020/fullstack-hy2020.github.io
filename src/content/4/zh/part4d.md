@@ -60,7 +60,7 @@ lang: zh
 让我们先来实现登录的功能。安装[jsonwebtoken](https://github.com/auth0/node-jsonwebtoken) 库， 它会允许我们生成 [Json Web Token](https://jwt.io/)。
 
 ```bash
-npm install jsonwebtoken --save
+npm install jsonwebtoken
 ```
 
 <!-- The code for login functionality goes to the file controllers/login.js. -->
@@ -339,12 +339,98 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>. -->
-当前的应用可以在<i>part4-9</i>，这个[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9)中找到
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>. -->
+当前的应用可以在<i>part4-9</i>，这个[Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-9)中找到
 
 <!-- If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. Some existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. -->
 
 如果应用有很多接口都需要认证，JWT 认证应当被分拆到它们自己的中间件中。一些现成的类库，如[express-jwt](https://www.npmjs.com/package/express-jwt)可以使用。
+
+### Problems of Token-based authentication
+【基于Token 认证带来的问题】
+
+<!-- Token authentication is pretty easy to implement, but it contains one problem. Once the API user, eg. a React app gets a token, the API has a blind trust to the token holder. What if the access rights of the token holder should be revoken? -->
+Token 认证实现起来十分容易，但是包含一个问题。一旦API 用户， 比如说React app 获得了一个token， API 会盲目地信任这个token的持有者。万一这个token 持有者的访问权限被回收了呢？
+
+<!-- There are two solutions to the problem. Easier one is to limit the validity period of a token: -->
+关于这个问题有两种解决方案。简单一点的是限制token 的有效时间：
+
+```js
+loginRouter.post('/', async (request, response) => {
+  const body = request.body
+
+  const user = await User.findOne({ username: body.username })
+  const passwordCorrect = user === null
+    ? false
+    : await bcrypt.compare(body.password, user.passwordHash)
+
+  if (!(user && passwordCorrect)) {
+    return response.status(401).json({
+      error: 'invalid username or password'
+    })
+  }
+
+  const userForToken = {
+    username: user.username,
+    id: user._id,
+  }
+
+  // token expires in 60*60 seconds, that is, in one hour
+  // highlight-start
+  const token = jwt.sign(
+    userForToken, 
+    process.env.SECRET,
+    { expiresIn: 60*60 }
+  )
+  // highlight-end
+
+  response
+    .status(200)
+    .send({ token, username: user.username, name: user.name })
+})
+```
+
+<!-- Once the token expires, the client app needs to get a new token. Usually this happens by forcing the user to relogin to the app. -->
+一旦token 过期， 客户端程序需要重新获取一个新的token。通常通过强制用户重新登录app 的方式实现。
+
+<!-- The error handling middleware should be extended to give a proper error in the case of a expired token: -->
+一旦token过期， 错误处理中间件应当扩展来给出一个合适的错误提示
+
+```js
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name === 'JsonWebTokenError') {
+    return response.status(401).json({
+      error: 'invalid token'
+    })
+  // highlight-start  
+  } else if (error.name === 'TokenExpiredError') {
+    return response.status(401).json({
+      error: 'token expired'
+    })
+  }
+  // highlight-end
+
+  next(error)
+}
+```
+
+<!-- The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoken, token is usable only a limited amount of time. On the other hand, a short expiration time forces is a potantial pain to a user, one must login to the system more frequently. -->
+过期时间设置得越短，该方案就越安全。所以如果token 给错了人， 或者用户对系统的访问权限需要被回收，token 需要给一个限定的时间。另一方面来说，较短的过期时间会给用户带来潜在的痛苦，因为他们需要更频繁地登录系统。
+
+<!-- The other solution is to save info about each token to backend database and to check for each API request if the access right corresponding to the token is still valid. With this scheme, the access rights can be revoked at any time. This kind of solution is often called a <i>server side session</i>. -->
+另一种解决方案是为每一个token在后台数据库中保存信息，并在每个API请求时都去后台查询该token 是否有对应的访问权限。通过这种方式，访问权限可以随意收回。这种方式通常被叫做<i>服务器端的session</i>。
+
+<!-- The negative aspect of server side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request from database. A database access is considerably slower compared to checking the validity from the token itself. That is why it is a quite common to save the session corresponding to a token to a <i>key-value-database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios. -->
+服务器端的session 的弊端是增加了后台的复杂先，并且会由于每个API都要向后台数据库的认证token的合法性而产生性能影响。与只是单纯验证token有效性本身，数据库的访问要慢许多。这就是为什么保存token 对应的session通常是保存到例如 [Redis](https://redis.io/) 的 <i>键值对数据库</i>中， 虽然这种数据库在功能让与例如MongoDB或者关系型数据库相比有些劣势，但是在某些应用场景下是十分高效的。
+
+When server side sessions are used, the token is quite often just a rendom string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request the server fetches the relevant information about the identitity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.
+当使用服务器端的session时，token 通常是一个随机字符串，并不会像jwt-token那样包含任何用户信息。每个API请求向服务器从数据库中获取该用户相关的认证信息。更常规的做法不是用认证头，而是用 <i>cookies</i>  作为客户端与服务端之间传输token 的机制。
 
 ### End notes
 【结束吧】
@@ -365,7 +451,7 @@ const errorHandler = (error, request, response, next) => {
 <div class="tasks">
 
 
-### Exercises 4.15.-4.22.
+### Exercises 4.15.-4.23.
 <!-- In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/zh/part4/用户管理) to the chapter [Token-based authentication](/zh/part4/密钥认证). You can of course also use your creativity.  -->
 在接下来的练习中，我们将为 Bloglist 应用实现基本的用户管理。 最安全的方法是遵循第4章 [User administration](/zh/part4/用户管理)到[Token-based authentication](/zh/part4/密钥认证)这一章的内容。 当然，你也可以运用你的创造力。
 
@@ -384,7 +470,7 @@ const errorHandler = (error, request, response, next) => {
 注意：有些 Windows 用户在<i>bcrypt</i> 方面有问题。如果遇到问题，请使用命令删除该库
 
 ```bash
-npm uninstall bcrypt --save 
+npm uninstall bcrypt
 ```
 
 <!-- and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead.  -->
@@ -498,14 +584,75 @@ if ( blog.user.toString() === userid.toString() ) ...
 ```
 
 #### 4.22*:  bloglist expansion, 步骤10
+
+<!-- Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who is the user holding a specific token. -->
+无论是博客的创建和删除都需要找到用户的唯一标识，来确定是谁在做相关操作。我们在 4.20 练习中的 _tokenExtractor_ 中间件能够帮上忙，但  <i>post</i> 和  <i>delete</i> 操作仍需要找到哪个用户拥有这个特定的token。
+
+<!-- Do now a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i> -->
+现在使用一个新的中间件 _userExtractor_ ， 来找到这个用户并将它包装成请求对象。在 <i>app.js</i> 中注册这个中间件。
+
+```js
+app.use(middleware.userExtractor)
+```
+
+<!-- the user will be set in the field _request.user_: -->
+用户的信息放到 _request.user_ 字段中：
+
+```js
+blogsRouter.post('/', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+
+blogsRouter.delete('/:id', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+```
+
+<!-- Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes -->
+注意可以为一系列特定的路由注册中间件。所以不必像如下这样使用 _userExtractor_  来注册所有路由。
+
+```js
+// use the middleware in all routes
+app.use(userExtractor) // highlight-line
+
+app.use('/api/blogs', blogsRouter)  
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+<!-- we could register it to be only executed eith path <i>/api/blogs</i> routes:  -->
+我们可以只在 <i>/api/blogs</i> 这个路由上注册：
+
+```js
+// use the middleware only in /api/blogs routes
+app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+<!-- As can be seen, this happens by chainig multiple middlewares as the parameter of function  <i>use</i>. It would also be possible to register a middleware only for a specific operation: -->
+可以看出，这是由chainig 连接起来的多个中间件，他们作为<i>use</i>函数的参数。也可以仅为特定操作注册中间件：
+
+```js
+router.post('/', userExtractor, async (request, response) => {
+  // ...
+}
+```
+
+#### 4.23*:  bloglist expansion, 步骤11
 <!-- After adding token based authentication the tests for adding a new blog broke. down Fix now the tests. Write also a new test that ensures that adding a blog fails with proper status code <i>401 Unauthorized</i> it token is not provided. -->
-在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 现在修复测试。 还要编写一个新的测试，以确保添加一个博客失败与适当的状态代码<i>401 Unauthorized</i> it 令牌没有提供。
+<!-- After adding token based authentication the tests for adding a new blog broke down. Fix the tests. Also write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided. -->
+在添加了基于令牌的身份验证之后，添加新博客的测试中断了。 修复测试，并编写一个新的测试，以确保如果添加一个博客失败，且是因为令牌不存在导致的，会伴随恰当的状态返回码<i>401 Unauthorized</i>。
 
 <!-- [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix. -->
 在进行修复时，[这个](https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。
 
-<!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 <!-- -
 <!-- note left of user -->

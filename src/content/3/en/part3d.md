@@ -100,7 +100,7 @@ When validating an object fails, we return the following default error message f
 
 ### Promise chaining
 
-Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_:
+Many of the route handlers changed the response data into the right format by implicitly calling the _toJSON_ method from _response.json_. For the sake of an example, we can also perform this operation explicitly by calling the _toJSON_ method on the object passed as a parameter to _then_:
 
 ```js
 app.post('/api/notes', (request, response, next) => {
@@ -200,16 +200,6 @@ Mongoose does not offer a built-in validator for this purpose. Install the [mong
 
 If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
 
-
-**NB:** unique-validator causes a warning to be printed to the console
-
-```
-(node:49251) DeprecationWarning: collection.ensureIndex is deprecated. Use createIndexes instead.
-connected to MongoDB
-```
-
-Read the mongoose [documentation](https://mongoosejs.com/docs/deprecations.html) to find out how to get rid of the warning.
-
 #### 3.20*: Phonebook database, step8
 
 Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits.
@@ -240,7 +230,7 @@ You can display the default error message returned by Mongoose, even though they
 #### 3.21 Deploying the database backend to production
 
 
-Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <https://localhost:3001>.
+Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
 
 
 Push the latest version to Heroku and verify that everything works there as well.
@@ -258,7 +248,7 @@ Before we move onto the next part, we will take a look at an important tool call
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
 
 
-In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](http://checkstyle.sourceforge.net/), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
+In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
 
 In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
@@ -288,16 +278,12 @@ The configuration will be saved in the _.eslintrc.js_ file:
 module.exports = {
     'env': {
         'commonjs': true,
-        'es6': true,
+        'es2021': true,
         'node': true
     },
     'extends': 'eslint:recommended',
-    'globals': {
-        'Atomics': 'readonly',
-        'SharedArrayBuffer': 'readonly'
-    },
     'parserOptions': {
-        'ecmaVersion': 2018
+        'ecmaVersion': 12
     },
     'rules': {
         'indent': [
@@ -315,7 +301,15 @@ module.exports = {
         'semi': [
             'error',
             'never'
-        ]
+        ],
+        'eqeqeq': 'error',
+            'no-trailing-spaces': 'error',
+    'object-curly-spacing': [
+        'error', 'always'
+    ],
+    'arrow-spacing': [
+        'error', { 'before': true, 'after': true }
+    ]
     }
 }
 ```
@@ -452,21 +446,16 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
 
-
 Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
-
-You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
+You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7).
 </div>
 
 <div class="tasks">
 
-
 ### Exercise 3.22.
 
-
 #### 3.22: Lint configuration
-
 
 Add ESlint to your application and fix all the warnings.
 

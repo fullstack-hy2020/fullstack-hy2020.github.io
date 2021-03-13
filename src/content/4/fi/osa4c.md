@@ -200,7 +200,7 @@ Toteutetaan seuraavaksi route käyttäjien luomista varten. Käyttäjällä on s
 Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/kelektiv/node.bcrypt.js)-kirjasto:
 
 ```bash
-npm install bcrypt --save
+npm install bcrypt
 ```
 
 Käyttäjien luominen tapahtuu osassa 3 läpikäytyjä [RESTful](/osa3/node_js_ja_express#rest)-periaatteita seuraten tekemällä HTTP POST -pyyntö polkuun <i>users</i>.
@@ -349,10 +349,10 @@ Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellise
 [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus
 
 ```bash
-npm install --save mongoose-unique-validator
+npm install mongoose-unique-validator
 ```
 
-Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti seuraavasti:
+Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti:
 
 ```js
 const mongoose = require('mongoose')
@@ -394,7 +394,7 @@ Lista näyttää seuraavalta
 
 ![](../../images/4/9.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7), branchissä <i>part4-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7), branchissä <i>part4-7</i>.
 
 ### Muistiinpanon luominen
 
@@ -430,7 +430,7 @@ notesRouter.post('/', async (request, response, next) => {
 Huomionarvoista on nyt se, että myös <i>user</i>-olio muuttuu. Sen kenttään <i>notes</i> talletetaan luodun muistiinpanon <i>id</i>:
 
 ```js
-const user = User.findById(userId)
+const user = User.findById(body.userId)
 
 // ...
 
@@ -448,7 +448,7 @@ Operaatio vaikuttaa toimivan. Lisätään vielä yksi muistiinpano ja mennään 
 
 Huomaamme siis, että käyttäjällä on kaksi muistiinpanoa.
 
-Muistiinpanon luoneen käyttäjän id näkyviin muistiinpanon yhteyteen:
+Muistiinpanon luoneen käyttäjän id tulee näkyviin muistiinpanon yhteyteen:
 
 ![](../../images/4/12e.png)
 
@@ -525,6 +525,6 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
 
 </div>

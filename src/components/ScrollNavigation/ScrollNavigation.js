@@ -9,6 +9,7 @@ import PropTypes from 'prop-types';
 import kebabCase from 'lodash/fp/kebabCase';
 import navigation from '../../content/partnavigation/partnavigation';
 import snakeCase from 'lodash/fp/snakeCase';
+import getPartTranslationPath from '../../utils/getPartTranslationPath';
 
 class ScrollNavigation extends Component {
   constructor(props) {
@@ -16,7 +17,7 @@ class ScrollNavigation extends Component {
 
     this.state = {
       headings: [],
-      selectedItem: null
+      selectedItem: null,
     };
   }
 
@@ -34,7 +35,7 @@ class ScrollNavigation extends Component {
       };
     });
 
-    this.setState({ headings: headings});
+    this.setState({ headings: headings });
     window.addEventListener('scroll', this.scrollHandler);
   };
 
@@ -45,26 +46,26 @@ class ScrollNavigation extends Component {
   scrollHandler = () => {
     // Below implements 50 ms debounce
     if (this.scrollTimer) {
-      clearTimeout(this.scrollTimer)
+      clearTimeout(this.scrollTimer);
     }
 
     this.scrollTimer = setTimeout(() => {
-      const scrollThreshold = window.scrollY
-      let last = this.state.headings[0]
+      const scrollThreshold = window.scrollY;
+      let last = this.state.headings[0];
       for (const heading of this.state.headings) {
-        const elem = document.getElementById(heading.id)
+        const elem = document.getElementById(heading.id);
         if (elem && elem.offsetTop >= scrollThreshold) {
-          break
+          break;
         }
-        last = heading
+        last = heading;
       }
       if (this.state.selectedItem !== last.id) {
         this.setState({
-          selectedItem: last.id
-        })
+          selectedItem: last.id,
+        });
       }
-    }, 50)
-  }
+    }, 50);
+  };
 
   loopThroughPartsNode = partsNode => {
     const { headings } = this.state;
@@ -74,18 +75,28 @@ class ScrollNavigation extends Component {
       currentPath,
       currentPartTitle,
       colorCode,
-      lang
+      lang,
     } = this.props;
     let arr = [];
 
     for (let key in partsNode) {
+      console.log(getPartTranslationPath(
+        lang,
+        part,
+        `/${snakeCase(partsNode[key])}`
+      ));
+
       if (currentPartTitle !== partsNode[key]) {
         arr.push(
           <Link
             key={key}
             className="left-navigation-link"
             style={{ borderColor: colorCode }}
-            to={`/${lang === 'en' ? 'en/part' : lang === 'zh' ? 'zh/part' :'osa'}${part}/${snakeCase(partsNode[key])}`}
+            to={getPartTranslationPath(
+              lang,
+              part,
+              `/${snakeCase(partsNode[key])}`
+            )}
           >{`${key} ${partsNode[key]}`}</Link>
         );
       } else {

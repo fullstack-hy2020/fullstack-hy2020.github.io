@@ -139,11 +139,11 @@ Komponenttien näkyvyys on määritelty asettamalla komponentille [inline](/osa2
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
 const showWhenVisible = { display: loginVisible ? '' : 'none' }
 
-<div style="{hideWhenVisible}">
+<div style={hideWhenVisible}>
   // nappi
 </div>
 
-<div style="{showWhenVisible}">
+<div style={showWhenVisible}>
   // lomake
 </div>
 ```
@@ -277,7 +277,7 @@ ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sis
 </Togglable>
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
 
 ### Lomakkeiden tila
 
@@ -289,7 +289,7 @@ Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-
 
 Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
 
-Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti:
+Muistiinpanon luomisesta huolehtiva komponentti muuttuu seuraavasti:
 
 ```js
 import React, {useState} from 'react' 
@@ -358,7 +358,7 @@ const App = () => {
 
 Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
 
 ### ref eli viite komponenttiin
 
@@ -457,7 +457,7 @@ Käyttämämme kikka komponentin tilan muuttamiseksi toimii, mutta se vaikuttaa 
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
 
 ### Huomio komponenteista
 
@@ -501,7 +501,7 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 #### 5.5 blogilistan frontend, step5
 
-Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5#kirjautumislomakkeen-näyttäminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia <i>Togglable</i>.
+Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5/props_children_ja_proptypet#kirjautumislomakkeen-nayttaminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia <i>Togglable</i>.
 
 Lomake ei ole oletusarvoisesti näkyvillä
 
@@ -517,7 +517,7 @@ Lomakkeen tulee sulkeutua kun uusi blogi luodaan.
 
 Eriytä uuden blogin luomisesta huolehtiva lomake omaan komponenttiinsa (jos et jo ole niin tehnyt), ja siirrä kaikki uuden blogin luomiseen liittyvä tila komponentin vastuulle. 
 
-Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](https://fullstack-hy2020.github.io/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NewNote</i>.
+Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](https://fullstack-hy2020.github.io/osa5/props_children_ja_proptypet#lomakkeiden-tila) komponentin <i>NoteForm</i>.
 
 #### 5.7* blogilistan frontend, step7
 
@@ -629,8 +629,8 @@ Haluaisimmekin varmistaa että jos <i>Togglable</i>-komponenttia käytetään, o
 
 Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
 
-```js
-npm install --save prop-types
+```bash
+npm install prop-types
 ```
 
 <i>buttonLabel</i> voidaan määritellä <i>pakolliseksi</i> string-tyyppiseksi propsiksi seuraavasti:
@@ -644,7 +644,7 @@ const Togglable = React.forwardRef((props, ref) => {
 
 Togglable.propTypes = {
   buttonLabel: PropTypes.string.isRequired
-})
+}
 ```
 
 Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus
@@ -745,6 +745,11 @@ module.exports = {
       ],
       "no-console": 0,
       "react/prop-types": 0
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   }
 }
 ```
@@ -754,6 +759,7 @@ Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/use
 ```bash
 node_modules
 build
+.eslintrc.js
 ```
 
 Näin ainoastaan sovelluksessa oleva itse kirjoitettu koodi huomioidaan linttauksessa. 
@@ -799,7 +805,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
 
 </div>
 

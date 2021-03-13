@@ -108,9 +108,9 @@ On the other hand, JavaScript engines, or runtime environments, follow the [asyn
 
 When an asynchronous operation is completed, or more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
 
-Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practise to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
+Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practice to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
 
-Another consequence of this single threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
+Another consequence of this single-threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
 
 ```js
 setTimeout(() => {
@@ -143,16 +143,17 @@ Nowadays, practically all JavaScript projects are defined using the node package
 
 ```json
 {
-  "name": "notes",
+  "name": "part2-notes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -161,7 +162,10 @@ Nowadays, practically all JavaScript projects are defined using the node package
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -183,7 +187,7 @@ At this point the <i>dependencies</i> part is of most interest to us as it defin
 We now want to use axios. Theoretically, we could define the library directly in the <i>package.json</i> file, but it is better to install it from the command line.
 
 ```js
-npm install axios --save
+npm install axios
 ```
 
 
@@ -194,13 +198,14 @@ Axios is now included among the other dependencies:
 ```json
 {
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2", // highlight-line
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "axios": "^0.21.1", // highlight-line
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
   // ...
 }
@@ -250,21 +255,19 @@ As we can see, the application is not able to bind itself to the [port](https://
 We used the command _npm install_ twice, but with slight differences:
 
 ```js
-npm install axios --save
+npm install axios
 npm install json-server --save-dev
 ```
 
-There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency (_--save_) of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
+There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency of the application, because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
 
 ### Axios and promises
 
 Now we are ready to use axios. Going forward, json-server is assumed to be running on port 3001.
 
-NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-sever running and the other to run react-app.
+NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run react-app.
 
 The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement.
-
-
 
 Add the following to the file <i>index.js</i>:
 
@@ -278,9 +281,11 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-This should be printed to the console
+If you open <http://localhost:3000> in the browser, this should be printed to the console
 
 ![](../../images/2/16b.png)
+
+**Note:** when the content of the file <i>index.js</i> changes, React does not notice the automatiaclly so you must refresh the browser to see your changes!
 
 Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
@@ -343,8 +348,8 @@ We can finally begin using the data fetched from the server.
 Let's try and request the notes from our local server and render them, initially as the App component. Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfully retrieve a response:
 
 ```js
-import ReactDOM from 'react-dom'
 import React from 'react'
+import ReactDOM from 'react-dom'
 import App from './App'
 
 import axios from 'axios' // highlight-line
@@ -385,7 +390,7 @@ import React, { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios' // highlight-line
 import Note from './components/Note'
 
-const App = () => {
+const App = () => { // highlight-line
   const [notes, setNotes] = useState([]) // highlight-line
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
@@ -520,7 +525,7 @@ useEffect(() => {
 
 We still have a problem in our application. When adding new notes, they are not stored on the server.
 
-The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
+The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
 
 ### The development runtime environment 
 
@@ -596,7 +601,7 @@ Modify the application such that the initial state of the data is fetched from t
 
 <h4>2.12* Data for countries, step1</h4>
 
-The API [https://restcountries.eu](https://restcountries.eu) provides a data for different countries in a machine readable format, a so-called REST API.
+The API [https://restcountries.eu](https://restcountries.eu) provides data for different countries in a machine-readable format, a so-called REST API.
 
 Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.eu/#api-endpoints-all).
 

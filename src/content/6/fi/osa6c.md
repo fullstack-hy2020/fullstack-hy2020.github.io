@@ -30,8 +30,8 @@ Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 
 Asennetaan projektiin json-server
 
-```js
-npm install json-server --save
+```bash
+npm install json-server
 ```
 
 ja lisätään tiedoston <i>package.json</i> osaan <i>scripts</i> rivi
@@ -62,11 +62,11 @@ export default { getAll }
 
 Asennetaan myös axios projektiin
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
-Muutetaan <i>nodeReducer</i>:issa tapahtuva muistiinpanojen tilan alustusta, siten että oletusarvoisesti muistiinpanoja ei ole:
+Muutetaan <i>noteReducer</i>:issa tapahtuva muistiinpanojen tilan alustusta, siten että oletusarvoisesti muistiinpanoja ei ole:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -83,9 +83,9 @@ import noteService from './services/notes' // highlight-line
 const reducer = combineReducers({
   notes: noteReducer,
   filter: filterReducer,
-});
+})
 
-const store = createStore(reducer);
+const store = createStore(reducer, composeWithDevTools())
 
 // highlight-start
 noteService.getAll().then(notes =>
@@ -145,13 +145,13 @@ import React, {useEffect} from 'react' // highlight-line
 import NewNote from './components/NowNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes'
+import noteService from './services/notes' // highlight-line
 import { initializeNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
-  const dispatch = useDispatch()
   // highlight-start
+  const dispatch = useDispatch()
   useEffect(() => {
     noteService
       .getAll().then(notes => dispatch(initializeNotes(notes)))
@@ -278,7 +278,7 @@ export const createNote = (data) => {
 
 Muistiinpanojen tärkeyden muuttaminen olisi mahdollista toteuttaa samalla periaatteella, eli tehdä palvelimelle ensin asynkroninen metodikutsu ja sen jälkeen dispatchata sopiva action.
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) branchissa <i>part6-3</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-3) branchissa <i>part6-3</i>.
 
 </div>
 
@@ -290,7 +290,7 @@ Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-h
 
 Hae sovelluksen käynnistyessä anekdootit json-serverillä toteutetusta backendistä.
 
-Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
+Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).
 
 #### 6.14 anekdootit ja backend, step2
 
@@ -302,7 +302,7 @@ Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendii
 
 ### Asynkroniset actionit ja redux thunk
 
-Lähestymistapamme on ok, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponenttien funktioissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>, esim. <i>App</i> alustaisi sovelluksen tilan seuraavasti:
+Lähestymistapamme on ok, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponentit määrittelvien funktioiden koodissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>, esim. <i>App</i> alustaisi sovelluksen tilan seuraavasti:
 
 ```js
 const App = () => {
@@ -337,8 +337,8 @@ Molemmat komponentit dispatchaisivat ainoastaan actionin, välittämättä siit�
 
 Asennetaan nyt [redux-thunk](https://github.com/gaearon/redux-thunk)-kirjasto, joka mahdollistaa <i>asynkronisten actionien</i> luomisen. Asennus tapahtuu komennolla:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 redux-thunk-kirjasto on ns. <i>redux-middleware</i> joka täytyy ottaa käyttöön storen alustuksen yhteydessä. Eriytetään samalla storen määrittely omaan tiedostoon <i>src/store.js</i>:
@@ -463,7 +463,7 @@ const NewNote = () => {
 }
 ```
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) branchissa <i>part6-4</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-4) branchissa <i>part6-4</i>.
 
 </div>
 

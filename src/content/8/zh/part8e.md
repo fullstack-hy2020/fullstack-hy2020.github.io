@@ -252,14 +252,14 @@ Subscriptions ready at ws://localhost:4000/graphql
 <!-- When you press "play" on a subscription, the playground waits for notifications from the subscription.  -->
 当您按下订阅上的“ play”键时，playground就会等待订阅的通知。
 
-<!-- The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>. -->
-后端代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
+<!-- The backend code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>. -->
+后端代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Subscriptions on the client
 【客户端的订阅】
 
 <!-- In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration]((https://www.apollographql.com/docs/react/v3.0-beta/data/subscriptions/). -->
-为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](https://www.apollographql.com/docs/React/v3.0-beta/data/subscriptions/)上。
+为了在我们的 React 应用中使用订阅，我们必须做一些更改，特别是在它的[配置](https://www.apollographql.com/docs/React/data/subscriptions/)上。
 <!-- The configuration in <i>index.js</i> has to be modified like so:  -->
 <i>index.js</i> 中的配置必须修改如下:
 
@@ -272,7 +272,7 @@ import { setContext } from 'apollo-link-context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/link-ws'
+import { WebSocketLink } from '@apollo/client/link/ws'
 // highlight-end
 
 const authLink = setContext((_, { headers }) => {
@@ -296,7 +296,9 @@ const wsLink = new WebSocketLink({
     reconnect: true
   }
 })
+// highlight-end
 
+// highlight-start
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query)
@@ -326,8 +328,8 @@ ReactDOM.render(
 <!-- For this to work, we have to install some dependencies: -->
 为了实现这一点，我们必须安装一些依赖项:
 
-```js
-npm install --save @apollo/link-ws subscriptions-transport-ws
+```bash
+npm install @apollo/client subscriptions-transport-ws
 ```
 
 <!-- The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server. -->
@@ -345,7 +347,7 @@ const httpLink = createHttpLink({
 ```
 
 <!-- The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usesubscription) hook function. -->
-订阅是使用[useSubscription](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useSubscription)Hook函数完成的。
+订阅是使用[useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#useSubscription)Hook函数完成的。
 
 <!-- Let's modify the code like so: -->
 让我们像这样修改代码:
@@ -445,8 +447,8 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 } 
 ```
 
-<!-- The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>. -->
-客户端的最终代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
+<!-- The final code of the client can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>. -->
+客户端的最终代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
 
 ### n+1-problem
 【n + 1-问题】
@@ -497,7 +499,7 @@ Person: {
 },
 ```
 
-<!-- The parameter _root_ is the person object which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list:  -->
+<!-- The parameter _root_ is the person object for which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list:  -->
 参数 _root_ 是创建好友列表的人对象，因此我们从所有 _User_ 对象中搜索在好友列表中具有 root._id :
 
 ```js
@@ -688,8 +690,8 @@ query {
 }
 ```
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>
 

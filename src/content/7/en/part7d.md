@@ -9,15 +9,11 @@ lang: en
 
 Developing with React was notorious for requiring tools that were very difficult to configure. These days, getting started with React development is almost painless thanks to [create-react-app](https://github.com/facebookincubator/create-react-app). A better development workflow has probably never existed for browser-side JavaScript development.
 
-
 We can not rely on the black magic of create-react-app forever and it's time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).
-
 
 ### Bundling
 
-
-We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, no browser actually knows how to handle code that is divided into modules.
-
+We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, the older browsers actually do not know how to handle code that is divided into modules.
 
 For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory:
 
@@ -235,8 +231,8 @@ The [output](https://webpack.js.org/concepts/#output) property defines the locat
 
 Next, let's transform our application into a minimal React application. Let's install the required libraries:
 
-```js
-npm install --save react react-dom
+```bash
+npm install react react-dom
 ```
 
 And let's turn our application into a React application by adding the familiar definitions in the <i>index.js</i> file:
@@ -314,7 +310,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['@babel/preset-react'],
         },
       },
@@ -334,13 +330,13 @@ The definition for a single loader consists of three parts:
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react']
   }
 }
 ```
 
-The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality.
+The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>options</i> property is used for specifying parameters for the loader, that configure its functionality.
 
 Let's install the loader and its required packages as a <i>development dependency</i>:
 
@@ -371,8 +367,8 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 
 It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
 
-```
-npm install --save @babel/polyfill
+```bash
+npm install @babel/polyfill
 ```
 
 
@@ -404,7 +400,7 @@ Currently we are using the [@babel/preset-react](https://babeljs.io/docs/plugins
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react'] // highlight-line
   }
 }
@@ -417,7 +413,7 @@ Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) p
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
   }
 }
@@ -485,14 +481,14 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: ['@babel/preset-react', '@babel/preset-env'],
       },
     },
     // highlight-start
     {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     },
     // highlight-end
   ];
@@ -530,7 +526,7 @@ Let's define an npm script for starting the dev-server:
   // ...
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
+    "start": "webpack serve --mode=development" // highlight-line
   },
   // ...
 }
@@ -565,7 +561,8 @@ The process for updating the code is fast. When we use the dev-server, the code 
 Let's extend the code by changing the definition of the <i>App</i> component as shown below:
 
 ```js
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import './index.css'
 
 const App = () => {
   const [counter, setCounter] = useState(0)
@@ -683,7 +680,7 @@ const App = () => {
 ### Minifying the code
 
 
-When we deploy the application to production, we are using the <i>main.js</i> code bundle that is generated by webpack. The size of the <i>main.js</i> file is 974473 bytes even though our application only contains a few lines of our own code. The large file size is due to the fact that the bundle also contains the source code for the entire React library. The size of the bundled code matters since the browser has to load the code when the application is first used. With high-speed internet connections 974473 bytes is not an issue, but if we were to keep adding more external dependencies, loading speeds could become an issue particularly for mobile users.
+When we deploy the application to production, we are using the <i>main.js</i> code bundle that is generated by webpack. The size of the <i>main.js</i> file is 904299 bytes even though our application only contains a few lines of our own code. The large file size is due to the fact that the bundle also contains the source code for the entire React library. The size of the bundled code matters since the browser has to load the code when the application is first used. With high-speed internet connections 904299 bytes is not an issue, but if we were to keep adding more external dependencies, loading speeds could become an issue particularly for mobile users.
 
 If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There's no point in manually optimizing these files, as there are many existing tools for the job.
 
@@ -698,7 +695,7 @@ Starting from version 4 of webpack, the minification plugin does not require add
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "dependencies": {
@@ -714,7 +711,7 @@ When we bundle the application again, the size of the resulting <i>main.js</i> d
 
 ```js
 $ ls -l build/main.js
--rw-r--r--  1 mluukkai  984178727  132299 Feb 16 11:33 build/main.js
+-rw-r--r--  1 mluukkai  984178727  136852 Feb 16 11:33 build/main.js
 ```
 
 The output of the minification process resembles old-school C code; all of the comments and even unnecessary whitespace and newline characters have been removed, and variable names have been replaced with a single character.
@@ -725,7 +722,7 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 
 ### Development and production configuration
 
-Next, let's add a backend to our application and by repurposing the now-familiar note application backend.
+Next, let's add a backend to our application by repurposing the now-familiar note application backend.
 
 
 Let's store the following content in the <i>db.json</i> file:

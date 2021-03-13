@@ -47,7 +47,7 @@ Facebook 有一个 Flux 的实现，但是我们会使用 Redux 库。 它使用
 创建一个新的 create-react-app 应用 使用以下命令安装 redux
 
 ```bash
-npm install redux --save
+npm install redux
 ```
 
 <!-- As in Flux, in Redux the state is also stored in a [store](https://redux.js.org/basics/store). -->
@@ -580,8 +580,8 @@ Spread-语法的工作原理如下
 const numbers = [1, 2, 3]
 ```
 
-<!--<code>...numbers</code> breaks the array up into individual elements, which can place i.e to another array.-->
-<code>...numbers</code> 将数组分解成单独的元素，这样就可以将它，放到另一个数组中。
+<!--<code>...numbers</code> breaks the array up into individual elements, which can be placed in another array.-->
+<code>...numbers</code> 会将数组分解成单独的元素，这样就可以将它放到另一个数组中。
 
 ```js
 [...numbers, 4, 5]
@@ -624,7 +624,7 @@ console.log(rest)     // prints [3, 4, 5, 6]
 让我们创建一个（第1章节） uniafe-exercise 的简化版本。
 
 <!-- You can take the project from this repository https://github.com/fullstack-hy2020/unicafe-redux for the base of your project.  -->
-你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy2020/unicafe-redux 作为你的项目基础。
+你可以把这个项目从这个仓库中的 https://github.com/fullstack-hy/unicafe-redux 作为你的项目基础。
 
 <!--<i>Start by removing the git-configuration of the cloned repository, and by installing dependencies</i>-->
 先删除git 配置，然后安装 dependencies 
@@ -738,6 +738,9 @@ describe('unicafe reducer', () => {
 #### 6.2: unicafe revisited, 步骤2
 <!-- Now implement the actual functionality of the application.  -->
 现在实现应用的实际功能。
+
+<!-- Note that since all the code is in the file <i>index.js</i> and you have to manually reload the page after each change since the automatic reloading of the browser content does not work for that page! -->
+注意由于所有的代码都在  <i>index.js</i> 文件，你需要手动重新加载页面因为自动加载浏览器内容对这个页面并不起作用。
 
 </div>
 
@@ -924,12 +927,12 @@ const App = () => {
 首先我们安装 react-redux
 
 ```js
-npm install --save react-redux
+npm install react-redux
 ```
 
 
 
-<!-- Next we move the _App_ component into its own file _App.js_. Let's see how this effects the rest of the application files. -->
+<!-- Next we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files. -->
 接下来，我们将 App 组件移动到它自己的文件 App.js 中。 让我们看看这将如何影响其余的应用文件。
 
 
@@ -1034,9 +1037,7 @@ import { createNote } from './../reducers/noteReducer'
 
 ```js
 import React from 'react'
-import { 
-  createNote, toggleImportanceOf
-} from './reducers/noteReducer' 
+import { createNote, toggleImportanceOf } from './reducers/noteReducer' // highlight-line
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
 
 
@@ -1265,8 +1266,8 @@ const App = () => {
 <!-- We will return to the presentational/container division later in this part. -->
 我们将在本章节后面回顾表现层/容器部分。
 
-<!-- The code of the Redux application can be found on [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branch <i>part6-1</i>. -->
-Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy2020/Redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。 
+<!-- The code of the Redux application can be found on [Github](https://github.com/fullstack-hy/redux-notes/tree/part6-1), branch <i>part6-1</i>. -->
+Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy/redux-notes/tree/part6-1) ，branch<i>part6-1</i> 上找到。 
 
 </div>
 
@@ -1275,7 +1276,7 @@ Redux 应用的代码可以在[Github](https://Github.com/fullstack-hy2020/Redux
 
 ### Exercises 6.3.-6.8.
 <!-- Let's make a new version of the anecdote voting application from part 1. Take the project from this repository https://github.com/fullstack-hy2020/redux-anecdotes to base your solution on.   -->
-让我们从第1章节创建一个新版本的八卦投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy2020/redux-anecdotes 拉取，你的解决方案基于这个库。
+让我们从第1章节创建一个新版本的八卦投票应用。 把这个项目从这个资源库中 https://github.com/fullstack-hy/redux-anecdotes 拉取，你的解决方案基于这个库。
 
 <!-- If you clone the project into an existing git-repository, <i>remove the git-configuration of the cloned application:</i>  -->
 如果您将该项目克隆到现有的 git-repository 中，记得删除应用的git 配置

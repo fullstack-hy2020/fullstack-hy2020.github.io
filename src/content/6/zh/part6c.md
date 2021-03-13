@@ -36,7 +36,7 @@ lang: zh
 <!-- We'll install json-server for the project... -->
 我们将为这个项目安装 json-server...
 
-```js
+```bash
 npm install json-server --save-dev
 ```
 
@@ -74,8 +74,8 @@ export default { getAll }
 <!-- We'll add axios to the project -->
 我们将在项目中添加 axios
 
-```js
-npm install axios --save
+```bash
+npm install axios
 ```
 
 <!-- We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes: -->
@@ -99,7 +99,7 @@ const reducer = combineReducers({
   filter: filterReducer,
 })
 
-const store = createStore(reducer)
+const store = createStore(reducer, composeWithDevTools())
 
 // highlight-start
 noteService.getAll().then(notes =>
@@ -164,16 +164,16 @@ noteService.getAll().then(notes =>
 
 ```js
 import React, {useEffect} from 'react' // highlight-line
-import NewNote from './components/NowNote'
+import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes'
+import noteService from './services/notes' // highlight-line
 import { initializeNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
-  const dispatch = useDispatch()
   // highlight-start
+  const dispatch = useDispatch()
   useEffect(() => {
     noteService
       .getAll().then(notes => dispatch(initializeNotes(notes)))
@@ -278,7 +278,7 @@ export default {
 ```
 
 <!-- The method _addNote_ of the component <i>NoteForm</i> changes slightly: -->
-组件<i>NoteForm</i> 的方法 addNote 略有变化:
+组件<i>NewNote</i> 的方法 _addNote_ 略有变化:
 
 ```js
 import React from 'react'
@@ -289,7 +289,7 @@ import noteService from '../services/notes' // highlight-line
 const NewNote = (props) => {
   const dispatch = useDispatch()
   
-  const addNote = async (event) => {
+  const addNote = async (event) => { // highlight-line
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
@@ -323,8 +323,8 @@ export const createNote = (data) => {
 <!-- Changing the importance of notes could be implemented using the same principle, meaning making an asynchronous method call to the server and then dispatching an appropriate action. -->
 更改便笺的重要性可以使用相同的原则实现，这意味着对服务器进行异步方法调用，然后调度适当的action。
 
-<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) in the branch <i>part6-3</i>. -->
-应用代码的当前状态可以在分支<i>part6-3</i> 中的 [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3)上找到。
+<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3) in the branch <i>part6-3</i>. -->
+应用代码的当前状态可以在分支<i>part6-3</i> 中的 [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3)上找到。
 
 </div>
 
@@ -342,7 +342,7 @@ export const createNote = (data) => {
 当应用启动时，从使用 json-server 实现的后端获取八卦。
 
 <!-- As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json). -->
-作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)。
+作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json)。
 
 #### 6.14 Anecdotes and the backend, 步骤2
 <!-- Modify the creation of new anecdotes, such that the anecdotes are stored in the backend. -->
@@ -395,8 +395,8 @@ const NewNote = () => {
 <!-- Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command: -->
 现在让我们安装[redux-thunk](https://github.com/gaearon/redux-thunk)-库，它允许我们创建<i>asynchronous actions</i>:
 
-```js
-npm install --save redux-thunk
+```bash
+npm install redux-thunk
 ```
 
 <!-- The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>: -->
@@ -533,8 +533,8 @@ const NewNote = () => {
 }
 ```
 
-<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>. -->
-应用代码的当前状态可以在分支<i>part6-4</i> 中的[github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4)上找到。
+<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-4) in the branch <i>part6-4</i>. -->
+应用代码的当前状态可以在分支<i>part6-4</i> 中的[github](https://github.com/fullstack-hy/redux-notes/tree/part6-4)上找到。
 
 </div>
 

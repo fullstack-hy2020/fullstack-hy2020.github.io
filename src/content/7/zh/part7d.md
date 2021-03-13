@@ -16,8 +16,8 @@ lang: zh
 
 ### Bundling
 【捆绑】
-<!-- We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, no browser actually knows how to handle code that is divided into modules. -->
-我们已经实现了我们的应用，将我们的代码分割成单独的模块，这些模块已经被导入到需要它们的地方。 尽管 ES6模块是在 ECMAScript 标准中定义的，但没有浏览器真正知道如何处理划分为模块的代码。
+<!-- We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, the older browsers actually do not know how to handle code that is divided into modules.-->
+我们已经实现了我们的应用，将我们的代码分割成单独的模块，这些模块已经被导入到需要它们的地方。 尽管 ES6模块是在 ECMAScript 标准中定义的，老一些的浏览器并不知道如何处理划分为模块的代码。
 
 <!-- For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [第3章](/zh/part3/把应用部署到网上), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack which produces the following collection of files in the <i>build</i> directory: -->
 由于这个原因，被划分为模块的代码对于浏览器必须是<i>绑定的</i>，这意味着所有的源代码文件都被转换成一个包含所有应用代码的文件。 在 [第3章](/zh/part3/把应用部署到网上)中部署 React 前端生产应用时，我们执行了将应用与 npm run build 命令绑定在一起的操作。 在底层，npm 脚本使用 webpack 捆绑源代码，在<i>build</i> 目录下生成如下文件集合:
@@ -248,8 +248,8 @@ module.exports = config
 <!-- Next, let's transform our application into a minimal React application. Let's install the required libraries: -->
 接下来，让我们把我们的应用转换成一个最小的 React 应用:
 
-```js
-npm install --save react react-dom
+```bash
+npm install react react-dom
 ```
 
 <!-- And let's turn our application into a React application by adding the familiar definitions in the <i>index.js</i> file: -->
@@ -332,7 +332,7 @@ const config = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
-        query: {
+        options: {
           presets: ['@babel/preset-react'],
         },
       },
@@ -352,14 +352,14 @@ const config = {
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react']
   }
 }
 ```
 
 <!-- The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>query</i> property is used for specifying parameters for the loader, that configure its functionality. -->
- <i>test</i> 属性指定加载程序用于名称以<i>.js</i> 结尾的文件。 属性指定对这些文件的处理将通过[babel-loader](https://github.com/babel/babel-loader)来完成。<i>query</i> 属性用于为加载程序指定参数，用于配置其功能。
+ <i>test</i> 属性指定加载程序用于名称以<i>.js</i> 结尾的文件。 属性指定对这些文件的处理将通过[babel-loader](https://github.com/babel/babel-loader)来完成。<i>options</i> 属性用于为加载程序指定参数，用于配置其功能。
 
 <!-- Let's install the loader and its required packages as a <i>development dependency</i>: -->
 让我们将装载器及其所需的包作为<i>开发依赖项</i> 安装:
@@ -396,8 +396,8 @@ const App = () =>
 <!-- It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill): -->
 值得注意的是，如果捆绑的应用的源代码使用<i>async/await</i>，浏览器将不会在某些浏览器上渲染任何内容。 [谷歌在控制台中搜索错误信息](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined)将会在这个问题上给出一些答案。 我们必须再安装一个缺失的依赖项，即[@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill) :
 
-```
-npm install --save @babel/polyfill
+```bash
+npm install @babel/polyfill
 ```
 
 <!-- Let's make the following changes to the <i>entry</i> property of the webpack configuration object in the <i>webpack.config.js</i> file: -->
@@ -432,7 +432,7 @@ npm install --save @babel/polyfill
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-react'] // highlight-line
   }
 }
@@ -446,7 +446,7 @@ npm install --save @babel/polyfill
 {
   test: /\.js$/,
   loader: 'babel-loader',
-  query: {
+  options: {
     presets: ['@babel/preset-env', '@babel/preset-react'] // highlight-line
   }
 }
@@ -520,14 +520,14 @@ import './index.css'
     {
       test: /\.js$/,
       loader: 'babel-loader',
-      query: {
+      options: {
         presets: ['@babel/preset-react', '@babel/preset-env'],
       },
     },
     // highlight-start
     {
       test: /\.css$/,
-      loaders: ['style-loader', 'css-loader'],
+      use: ['style-loader', 'css-loader'],
     },
     // highlight-end
   ];
@@ -574,7 +574,7 @@ npm install --save-dev webpack-dev-server
   // ...
   "scripts": {
     "build": "webpack --mode=development",
-    "start": "webpack-dev-server --mode=development" // highlight-line
+    "start": "webpack serve --mode=development" // highlight-line
   },
   // ...
 }
@@ -611,7 +611,8 @@ Npm start 命令现在将在端口3000启动 dev-server，这意味着我们的�
 让我们通过更改<i>App</i> 组件的定义来扩展代码，如下所示:
 
 ```js
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import './index.css'
 
 const App = () => {
   const [counter, setCounter] = useState(0)
@@ -739,7 +740,7 @@ const App = () => {
 ### Minifying the code
 【压缩代码】
 <!-- When we deploy the application to production, we are using the <i>main.js</i> code bundle that is generated by webpack. The size of the <i>main.js</i> file is 974473 bytes even though our application only contains a few lines of our own code. The large file size is due to the fact that the bundle also contains the source code for the entire React library. The size of the bundled code matters since the browser has to load the code when the application is first used. With high-speed internet connections 974473 bytes is not an issue, but if we were to keep adding more external dependencies, loading speeds could become an issue particularly for mobile users. -->
-在将应用部署到生产环境时，我们使用的是 webpack 生成的<i>main.js</i> 代码包。 Js 文件的大小为974473字节，尽管我们的应用只包含几行我们自己的代码。 文件大小较大是因为 bundle 还包含整个 React 库的源代码。 捆绑代码的大小很重要，因为浏览器必须在第一次使用应用时加载代码。 对于高速互联网连接，974473字节不是问题，但是如果我们继续增加更多的外部依赖，加载速度可能会成为一个问题，特别是对于移动用户。
+在将应用部署到生产环境时，我们使用的是 webpack 生成的<i>main.js</i> 代码包。 Js 文件的大小为904299字节，尽管我们的应用只包含几行我们自己的代码。 文件大小较大是因为 bundle 还包含整个 React 库的源代码。 捆绑代码的大小很重要，因为浏览器必须在第一次使用应用时加载代码。 对于高速互联网连接，904299字节不是问题，但是如果我们继续增加更多的外部依赖，加载速度可能会成为一个问题，特别是对于移动用户。
 
 <!-- If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There's no point in manually optimizing these files, as there are many existing tools for the job. -->
 如果我们检查 bundle 文件的内容，我们注意到通过删除所有便笺，可以在文件大小方面大大优化它。 手动优化这些文件是没有意义的，因为有许多现有的工具可以完成这项工作。
@@ -757,7 +758,7 @@ Javascript 文件的优化过程被称为<i>minification</i>，用于此目的�
   "description": "practising webpack",
   "scripts": {
     "build": "webpack --mode=production", // highlight-line
-    "start": "webpack-dev-server --mode=development"
+    "start": "webpack serve --mode=development"
   },
   "license": "MIT",
   "dependencies": {
@@ -774,7 +775,7 @@ Javascript 文件的优化过程被称为<i>minification</i>，用于此目的�
 
 ```js
 $ ls -l build/main.js
--rw-r--r--  1 mluukkai  984178727  132299 Feb 16 11:33 build/main.js
+-rw-r--r--  1 mluukkai  984178727  136852 Feb 16 11:33 build/main.js
 ```
 
 <!-- The output of the minification process resembles old-school C code; all of the comments and even unnecessary whitespace and newline characters have been removed, and variable names have been replaced with a single character. -->
@@ -786,8 +787,8 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 
 ### Development and production configuration
 【开发及生产配置】
-<!-- Next, let's add a backend to our application and by repurposing the now-familiar note application backend. -->
-接下来，让我们为应用添加一个后端，并重用现在熟悉的 note 应用后端。
+<!-- Next, let's add a backend to our application by repurposing the now-familiar note application backend. -->
+接下来，让我们为应用添加一个后端程序，来重用我们已经很熟悉的 note 应用的后端。
 
 <!-- Let's store the following content in the <i>db.json</i> file: -->
 让我们在<i>db.json</i> 文件中存储如下内容:

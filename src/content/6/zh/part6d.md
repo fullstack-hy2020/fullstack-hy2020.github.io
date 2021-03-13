@@ -16,7 +16,7 @@ lang: zh
 
 
 <!-- To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-function provided by react-redux. -->
-为了完成这一章节，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[connect](https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options)-函数。
+为了完成这一章节，我们将研究使用 redux 的另一种更古老、更复杂的方法，redux 提供的[connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-函数。
 
 
 
@@ -160,7 +160,7 @@ Notelist 组件实际上不需要关于选择哪个过滤器的信息，因此�
 我们只需要在便笺props中给它正确过滤的便笺:
 
 ```js
-const Notes = (props) => { // highlight-line
+const Notes = (props) => {
   const dispatch = useDispatch()
 
   return(
@@ -382,8 +382,8 @@ export default connect(
 <!-- Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_.  -->
 由于组件不需要访问存储的状态，我们可以简单地将<i>null</i> 作为连接的第一个参数。
 
-<!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5). -->
-您可以在 [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5)的<i>part6-5</i> 分支中找到我们当前应用的全部代码
+<!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-5). -->
+您可以在 [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-5)的<i>part6-5</i> 分支中找到我们当前应用的全部代码
 
 ### Referencing action creators passed as props
 <!-- Let's direct our attention to one interesting detail in the <i>NewNote</i> component: -->
@@ -694,28 +694,11 @@ React hook-api 发布之后，HOCs 变得越来越不受欢迎。 几乎所有�
 
 ### Exercises 6.19.-6.21.
 #### 6.19 anecdotes and connect, 步骤1
-<!-- The <i>redux store</i> is currently passed to all of the components through props. -->
-<i>redux store</i> 目前通过props传递给所有组件。
+<!-- The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks. -->
+<i>redux store</i> 目前通过 <em>useSelector</em> 和 <em>useDispatch</em> hooks传递给所有组件。
 
-<!-- Add the [react-redux](https://github.com/reactjs/react-redux) package to your application, and modify the <i>AnecdoteList</i> so that it accesses the store's state with the help of the _connect_ function. -->
-添加[react-redux](google  https://github.com/reactjs/react-redux)包到您的应用中，并修改<i>/ 八卦列表</i>，以便它借助 connect 函数访问存储的状态。
-
-<!-- Voting for and creating new anecdotes **does not need to work** after this exercise. -->
-在这个练习之后，投票选举和创造新的八卦就不需要工作了。
-
-<!-- The <i>mapStateToProps</i> function you will need in this exercise is approximately the following: -->
-在这个练习中，您需要的<i>mapStateToProps</i> 函数大致如下:
-
-```js
-const mapStateToProps = (state) => {
-  // sometimes it is useful to console log from mapStateToProps
-  console.log(state)
-  return {
-    anecdotes: state.anecdotes,
-    filter: state.filter
-  }
-}
-```
+<!-- Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks.  -->
+修改 <i>AnecdoteList</i> 组件，让它使用 _connect_ 函数而不是hooks。
 
 #### 6.20 anecdotes and connect, 步骤2
 
@@ -737,7 +720,7 @@ const mapStateToProps = (state) => {
 这可以通过在必要时显示新通知时取消删除以前的通知来实现。
 <!-- The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this. -->
 Settimeout 函数的[documentation](https://developer.mozilla.org/en-us/docs/web/api/windoworworkerglobalscope/setTimeout 文档)对此也很有用。 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>

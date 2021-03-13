@@ -246,7 +246,7 @@ const noteSchema = new mongoose.Schema({
 让我们来安装[bcrypt](https://github.com/kelektiv/node.bcrypt.js) 用来生成密码的哈希值。
 
 ```bash
-npm install bcrypt --save
+npm install bcrypt
 ```
 
 <!-- Creating new users happens in compliance with the RESTful conventions discussed in [第3章](/zh/part3/node_js_与_express#rest), by making an HTTP POST request to the <i>users</i> path. -->
@@ -414,7 +414,7 @@ describe('when there is initially one user in db', () => {
 让我们在 Mongoose validator 的帮助下验证用户名的唯一性。正如我们在练习 [3.19](/zh/part3/es_lint与代码检查#exercises)中提到的，Mongoose 并没有内置的 validator 来检查某个字段的唯一性。我们可以使用一个现成的解决方案[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) 这个 npm 包，先安装一下：
 
 ```bash
-npm install --save mongoose-unique-validator
+npm install mongoose-unique-validator
 ```
 
 <!-- We must make the following changes to the schema defined in the <i>models/user.js</i> file: -->
@@ -432,14 +432,12 @@ const userSchema = new mongoose.Schema({
   },
   name: String,
   passwordHash: String,
-  // highlight-start
   notes: [
     {
       type: mongoose.Schema.Types.ObjectId,
       ref: 'Note'
     }
   ],
-  // highlight-end
 })
 
 userSchema.plugin(uniqueValidator) // highlight-line
@@ -466,8 +464,8 @@ usersRouter.get('/', async (request, response) => {
 这个列表看起来像这样：
 ![](../../images/4/9.png)
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7). -->
-你也可以在[Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7)的 <i>part4-7</i> 分支中找到当前应用的代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7). -->
+你也可以在[Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7)的 <i>part4-7</i> 分支中找到当前应用的代码。
 
 ### Creating a new note 
 【创建一个新 Note】
@@ -480,7 +478,7 @@ usersRouter.get('/', async (request, response) => {
 让我们展开当前实现，以便在 request body 的<i>userId</i> 发送关于创建 Note 的信息。
 
 ```js
-const User = require('../models/user')
+const User = require('../models/user') //highlight-line
 
 //...
 
@@ -621,7 +619,7 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8). -->
-你可以在这个[分支](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).中找到本节课的代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8). -->
+你可以在这个[分支](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8).中找到本节课的代码。
 
 </div>
