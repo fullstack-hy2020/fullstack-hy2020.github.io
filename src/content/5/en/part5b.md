@@ -730,6 +730,7 @@ npm install --save-dev eslint-plugin-jest
 Let's create a <i>.eslintrc.js</i> file with the following contents:
 
 ```js
+/* eslint-env node */
 module.exports = {
   "env": {
       "browser": true,
