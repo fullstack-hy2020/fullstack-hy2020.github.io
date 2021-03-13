@@ -66,28 +66,28 @@ const HelloWorld = props => {
 - [Text](https://reactnative.dev/docs/text) 组件是 <i>唯一</i> 可以有文本子内容的React Native 组件. 类似 <em>&lt;strong&gt;</em> 以及 <em>&lt;h1&gt;</em> 元素.
 - [View](https://reactnative.dev/docs/view) 组件是基础的用户界面的搭建元素，类似 <em>&lt;div&gt;</em>  元素。
 - [TextInput](https://reactnative.dev/docs/textinput) 组件是类似<em>&lt;input&gt;</em> 元素的文本输入区组件.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) (以及其他的形如 <i>Touchable\*</i> 组件) 是用来捕捉不同的点击事件。类似于 <em>&lt;button&gt;</em> 组件。
+- [Pressable](https://reactnative.dev/docs/pressable) 是用来捕捉不同的点击事件。类似于 <em>&lt;button&gt;</em> 组件。
 
 
 <!-- There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example. -->
 
 核心组件与DOM元素之间有一些显著的不同。第一个不同点就是 <em>Text</em> 组件是 <i>唯一</i> 能够拥有文本子内容的React Native 组件。也就是说，你不能在之前的例子中比如说用 <em>View</em> 元素替换 <em>Text</em> 元素。
 
-<!-- The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the family of ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) provides the capability to capture tapping gestures and can display feedback when a gesture is recognized. One of these components is the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component, which accepts the <em>onPress</em> prop: -->
+<!-- The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the [Pressable](https://reactnative.dev/docs/pressable) component provides props for listening to different kind of press events. We can for example use the component's [onPress](https://reactnative.dev/docs/pressable) prop for listening to press events: -->
 
-第二个显著的区别就是相关的事件处理器。在DOM元素中我们会将类似<em>onClick</em> 这种事件处理器，添加到任一元素上，例如 <em>&lt;div&gt;</em> 或是 <em>&lt;button&gt;</em>。在React Native 中我们需要认真阅读 [API documentation](https://reactnative.dev/docs/components-and-apis) 来了解什么组件接收什么事件处理器（就像属性那样）。例如， ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) 这一类组件提供了捕捉点击动作的能力，能够在点击动作被识别后做出反馈。这类组件当中有一个[TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback)组件，接收 <em>onPress</em> 属性：
+第二个显著的区别就是相关的事件处理器。在DOM元素中我们会将类似<em>onClick</em> 这种事件处理器，添加到任一元素上，例如 <em>&lt;div&gt;</em> 或是 <em>&lt;button&gt;</em>。在React Native 中我们需要认真阅读 [API documentation](https://reactnative.dev/docs/components-and-apis) 来了解什么组件接收什么事件处理器（就像属性那样）。例如， [Pressable](https://reactnative.dev/docs/pressable) 组件提供了监听不同点击动作的能力，我们可以使用组件的[onPress](https://reactnative.dev/docs/pressable) 属性来监听点击事件：
 
 ```javascript
 import React from 'react';
-import { Text, TouchableWithoutFeedback, Alert } from 'react-native';
+import { Text, Pressable, Alert } from 'react-native';
 
-const TouchableText = props => {
+const PressableText = props => {
   return (
-    <TouchableWithoutFeedback
+    <Pressable
       onPress={() => Alert.alert('You pressed the text!')}
     >
       <Text>You can press me</Text>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 };
 ```
@@ -588,7 +588,7 @@ export default AppBar;
 ```
 
 <!-- Now that the <em>AppBar</em> component will prevent the status bar from overlapping the content, you can remove the <em>marginTop</em> style we added for the <em>Main</em> component earlier in the <i>Main.jsx</i> file. The <em>AppBar</em> component should currently contain a tab with text "Repositories". Make the tab touchable by using the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component but you don't have to handle the <em>onPress</em> event in any way. Add the <em>AppBar</em> component to the <em>Main</em> component so that it is the uppermost component in the screen. The <em>AppBar</em> component should look something like this: -->
-既然<em>AppBar</em>组件会盖住内容挡住状态栏，你可以删除 <em>marginTop</em> 样式，这是我们之前添加到<i>Main.jsx</i> 文件的 <em>Main</em> 组件中。<em>AppBar</em> 组件应当包含一个叫做"Repositories"的tab 页。通过添加 [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) 组件将tab 变成touchable的，但你还不用处理 <em>onPress</em> 事件。将 <em>AppBar</em> 组件放到<em>Main</em>中，让其成为屏幕最顶部的组件。 <em>AppBar</em> 组件应当看起来像如下所示：
+既然<em>AppBar</em>组件会盖住内容挡住状态栏，你可以删除 <em>marginTop</em> 样式，这是我们之前添加到<i>Main.jsx</i> 文件的 <em>Main</em> 组件中。<em>AppBar</em> 组件应当包含一个叫做"Repositories"的tab 页。通过添加 [Pressable](https://reactnative.dev/docs/pressable) 组件将tab 变成touchable的，但你还不用处理 <em>onPress</em> 事件。将 <em>AppBar</em> 组件放到<em>Main</em>中，让其成为屏幕最顶部的组件。 <em>AppBar</em> 组件应当看起来像如下所示：
 
 ![Application preview](../../images/10/6.jpg)
 
@@ -736,8 +736,8 @@ const SignIn = () => {
 export default SignIn;
 ```
 
-<!-- Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. User should be able to navigate between the two views by pressing the tabs (hint: use the [Link](https://reacttraining.com/react-router/native/api/Link) component and its [component](https://reacttraining.com/react-router/native/api/Link/component-func) prop). -->
-为这个<em>SignIn</em>组件在<em>Main</em>组件中创建一个路由。同时在app工具栏的"Repositories" tab 旁增加一个"Sign in" tab。用户能够通过点击导航中的tab在不同的视图中切换（提示：使用[Link](https://reacttraining.com/react-router/native/api/Link) 组件以及它的 [组件属性](https://reacttraining.com/react-router/native/api/Link/component-func) 
+<!-- Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. User should be able to navigate between the two views by pressing the tabs (hint: you can use the React router's [Link](https://reacttraining.com/react-router/native/api/Link) component).. -->
+为这个<em>SignIn</em>组件在<em>Main</em>组件中创建一个路由。同时在app工具栏的"Repositories" tab 旁增加一个"Sign in" tab。用户能够通过点击导航中的tab在不同的视图中切换。（提示：你可以使用React router 的[Link](https://reacttraining.com/react-router/native/api/Link) 组件）
 
 #### Exercise 10.7: scrollable app bar
 
@@ -781,7 +781,7 @@ Formik 的主要概念就是<i>context上下文</i> 和 <i>field字段</i>。For
 
 ```javascript
 import React from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TextInput, Pressable, View } from 'react-native';
 import { Formik, useField } from 'formik';
 
 const initialValues = {
@@ -809,9 +809,9 @@ const BodyMassIndexForm = ({ onSubmit }) => {
         value={heightField.value}
         onChangeText={text => heightHelpers.setValue(text)}
       />
-      <TouchableWithoutFeedback onPress={onSubmit}>
+      <Pressable onPress={onSubmit}>
         <Text>Calculate</Text>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };
@@ -919,9 +919,9 @@ const BodyMassIndexForm = ({ onSubmit }) => {
     <View>
       <FormikTextInput name="mass" placeholder="Weight (kg)" /> // highlight-line
       <FormikTextInput name="height" placeholder="Height (m)" /> //highlight-line
-      <TouchableWithoutFeedback onPress={onSubmit}>
+      <Pressable onPress={onSubmit}>
         <Text>Calculate</Text>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };
@@ -1152,6 +1152,6 @@ const PlatformSpecificButton = () => {
 
 <!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system. -->
 
-这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
+这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
 
 </div>

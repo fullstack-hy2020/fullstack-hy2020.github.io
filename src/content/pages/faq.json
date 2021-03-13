@@ -295,12 +295,6 @@
       ]
     },
     {
-      "title": "这门课与去年的内容有什么不同？",
-      "text": [
-        "对于0~4章节，只有一些很小的改动。第5d章节，<i>端到端测试</i> 利用了Cypress.io 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。 <br><br> 第6章是讲Redux的，主要介绍了新的基于hook的redux API。第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。<br><br> 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。第9章是全新的内容。<br><br> 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。"
-      ]
-    },
-    {
       "title": "我是从去年的课程开始学习的，我应该怎么续接今年的课程呢？",
       "text": [
         "阅读更多 <a href='/zh/part0/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86#expanding-on-a-previously-completed-course'>这一章节</a>的内容。"
