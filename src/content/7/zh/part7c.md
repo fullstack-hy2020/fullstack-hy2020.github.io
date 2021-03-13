@@ -49,7 +49,7 @@ npm install react-bootstrap
   <link
     rel="stylesheet"
     href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
     crossorigin="anonymous"
   />
   // ...
@@ -267,8 +267,8 @@ const App = () => {
 
 ![](../../images/7/12ea.png)
 
-<!-- You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js). -->
-你可以在这里找到应用的完整代码[点击这里](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js)。
+<!-- You can find the complete code for the application [here](https://github.com/fullstack-hy/misc/blob/master/notes-bootstrap.js). -->
+你可以在这里找到应用的完整代码[点击这里](https://github.com/fullstack-hy/misc/blob/master/notes-bootstrap.js)。
 
 ### Material UI
 
@@ -565,8 +565,8 @@ _Button_ 组件渲染为这样，它的根组件是 react-router-dom _Link_ ，�
 
 
 
-<!-- The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js). -->
-这个应用的代码可以在这里[here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js)找到。
+<!-- The code of the application can be found from [here](https://github.com/fullstack-hy/misc/blob/master/notes-materialui.js). -->
+这个应用的代码可以在这里[here](https://github.com/fullstack-hy/misc/blob/master/notes-materialui.js)找到。
 
 ### Closing thoughts
 【封闭的思想】
@@ -576,9 +576,11 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 <!-- I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.  -->
 我自己并没有使用很多MaterialUI，但我的第一印象是积极的。 它的文档比起React引导程序要好一点。
 <!-- According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018: -->
-根据追踪不同 npm 流行程度的 https://www.npmtrends.com/ 数据库, MaterialUI 在2018年底超过了 react-bootstrap:
+<!-- The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.  I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018 and has since that widened the gap: -->
 
-![](../../images/7/68ea.png)
+react-bootstrap 与 MaterialUI 的差别并不大。取决于你更喜欢那种样式。我自己使用MaterialUI比较少，但是我的第一印象是正面的。它的文档比react-bootstrap要好一些。根据追踪不同 npm 流行程度的 https://www.npmtrends.com/ 数据库, MaterialUI 在2018年底超过了 react-bootstrap，并且从那时起差距在拉大:
+
+![](../../images/7/2021.png)
 
 <!-- In the two previous examples, we used the UI frameworks with the help of React-integration libraries. -->
 在前面的两个示例中，我们借助于 React-integration 库使用了 UI 框架。
@@ -631,8 +633,8 @@ React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得�
 <!-- There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at. -->
 还有一些我们还[没有看过](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b)的React 应用的样式。
 
-<!-- The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) that were introduced in ES6. -->
-[样式化组件](https://www.styled-components.com/)库提供了一种有趣的方法，可以通过在 ES6中引入的[带标记的模板文字](https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals)定义样式。
+<!-- The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates)) that were introduced in ES6. -->
+[样式化组件](https://www.styled-components.com/)库提供了一种有趣的方法，可以通过在 ES6中引入的[带标记的模板文字](https://developer.mozilla.org/en-us/docs/web/javascript/reference/template_literals#tagged_templates))定义样式。
 
 <!-- Let's make a few changes to the styles of our application with the help of styled components. First, let's define two components with styles: -->
 让我们借助样式化组件对应用的样式进行一些更改。 首先，用如下命令安装包：
@@ -750,7 +752,7 @@ const App = () => {
       </Switch>
       
       <Footer> // highlight-line
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </Footer> // highlight-line
     </Page> // highlight-line
   )

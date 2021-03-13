@@ -892,6 +892,7 @@ module.exports = {
 ```bash
 node_modules
 build
+.eslintrc.js
 ```
 
 <!-- Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting. -->

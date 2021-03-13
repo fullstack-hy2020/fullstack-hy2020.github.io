@@ -92,13 +92,12 @@ npm install --save-dev cross-env
 ```js
 require('dotenv').config()
 
-let PORT = process.env.PORT
-let MONGODB_URI = process.env.MONGODB_URI
+const PORT = process.env.PORT
 
 // highlight-start
-if (process.env.NODE_ENV === 'test') {
-  MONGODB_URI = process.env.TEST_MONGODB_URI
-}
+const MONGODB_URI = process.env.NODE_ENV === 'test' 
+  ? process.env.TEST_MONGODB_URI
+  : process.env.MONGODB_URI
 // highlight-end
 
 module.exports = {
@@ -280,7 +279,11 @@ const info = (...params) => {
 }
 
 const error = (...params) => {
-  console.error(...params)
+  // highlight-start
+  if (process.env.NODE_ENV !== 'test') { 
+    console.error(...params)
+  }
+  // highlight-end  
 }
 
 module.exports = {
@@ -1185,7 +1188,7 @@ beforeEach(async () => {
   const noteObjects = helper.initialNotes
     .map(note => new Note(note))
   const promiseArray = noteObjects.map(note => note.save())
-  await Promise.all(promiseArray)
+  await Note.insertMany(helper.initialNotes)
 })
 
 describe('when there is initially some notes saved', () => {

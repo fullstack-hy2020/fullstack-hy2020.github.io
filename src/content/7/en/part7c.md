@@ -657,7 +657,7 @@ const App = () => {
       </Switch>
       
       <Footer> // highlight-line
-        <em>Note app, Department of Computer Science 1</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </Footer> // highlight-line
     </Page> // highlight-line
   )

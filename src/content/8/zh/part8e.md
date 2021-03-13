@@ -252,8 +252,8 @@ Subscriptions ready at ws://localhost:4000/graphql
 <!-- When you press "play" on a subscription, the playground waits for notifications from the subscription.  -->
 当您按下订阅上的“ play”键时，playground就会等待订阅的通知。
 
-<!-- The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>. -->
-后端代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
+<!-- The backend code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>. -->
+后端代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Subscriptions on the client
 【客户端的订阅】
@@ -296,7 +296,9 @@ const wsLink = new WebSocketLink({
     reconnect: true
   }
 })
+// highlight-end
 
+// highlight-start
 const splitLink = split(
   ({ query }) => {
     const definition = getMainDefinition(query)
@@ -445,8 +447,8 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 } 
 ```
 
-<!-- The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>. -->
-客户端的最终代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
+<!-- The final code of the client can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>. -->
+客户端的最终代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9) ，branch<i>part8-9</i> 上找到。
 
 ### n+1-problem
 【n + 1-问题】
@@ -627,7 +629,7 @@ query {
 ```
 
 <!-- If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it.  -->
-如果我们修改 allPersons 来执行连接查询，因为它有时会导致 n + 1问题，当我们不需要相关人员的信息时，它会变得更重。 通过使用解析器函数的[第四个参数](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) ，我们可以进一步优化查询。 第四个参数可以用来检查查询本身，所以我们在预计会出现n+1问题时可以做join查询。 然而，在我们评估这是否值得，否则不应该进入这个优化级别。
+如果我们修改 allPersons 来执行连接查询，因为它有时会导致 n + 1问题，当我们不需要相关人员的信息时，它会变得更重。 通过使用解析器函数的[第四个参数](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-type-signature) ，我们可以进一步优化查询。 第四个参数可以用来检查查询本身，所以我们在预计会出现n+1问题时可以做join查询。 然而，在我们评估这是否值得，否则不应该进入这个优化级别。
 
 <!-- [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth): -->
 [用 Donald Knuth 的话来说](https://en.wikiquote.org/wiki/donald_knuth) :
@@ -688,8 +690,8 @@ query {
 }
 ```
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>
 
