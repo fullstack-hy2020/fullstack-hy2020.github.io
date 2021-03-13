@@ -186,16 +186,17 @@ setTimeout(() => {
 
 ```json
 {
-  "name": "notes",
+  "name": "part2-notes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -204,7 +205,10 @@ setTimeout(() => {
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
@@ -242,13 +246,14 @@ Axios 现在被包含在依赖中了:
 ```json
 {
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.4.0",
-    "@testing-library/user-event": "^7.2.1",
-    "axios": "^0.19.2", // highlight-line
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
-    "react-scripts": "3.3.0"
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.3",
+    "@testing-library/user-event": "^12.6.0",
+    "axios": "^0.21.1", // highlight-line
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-scripts": "4.0.1",
+    "web-vitals": "^0.2.4"
   },
   // ...
 }
@@ -346,6 +351,8 @@ console.log(promise2)
 如果你打开浏览器访问<http://localhost:3000>， 此时如下信息会打印到控制台
 
 ![](../../images/2/16b.png)
+<!-- **Note:** when the content of the file <i>index.js</i> changes, React does not notice the automatiaclly so you must refresh the browser to see your changes! -->
+注意，当  <i>index.js</i>  变化时， React 并不会自动感知，因此你必须刷新浏览器来看到变化！
 
 <!-- Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). -->
 Axios 的 _get_ 方法会返回一个[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。 

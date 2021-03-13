@@ -33,6 +33,9 @@ h1 {
 }
 ```
 
+<!-- **Note:** when the content of the file <i>index.js</i> changes, React does not notice the automatiaclly so you must refresh the browser to see your changes! -->
+注意，当  <i>index.js</i>  变化时， React 并不会自动感知，因此你必须刷新浏览器来看到变化！
+
 <!-- CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application. -->
 CSS  规则由<i>选择器</i> 和<i>声明</i> 组成。 选择器定义规则应该应用于哪些元素。 上面的选择器是<i>h1</i>，它将匹配我们应用中的所有<i>h1</i> 头标记。 
 
@@ -293,7 +296,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2020</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2021</em>
     </div> 
   )
 }

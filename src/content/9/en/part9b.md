@@ -726,7 +726,7 @@ The response is a json of the form
 
 ```js
 {
-  weigth: 72,
+  weight: 72,
   height: 180,
   bmi: "Normal (healthy weight)"
 }

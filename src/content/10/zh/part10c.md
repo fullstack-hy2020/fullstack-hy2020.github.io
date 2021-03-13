@@ -204,37 +204,41 @@ GraphQL 与 Apollo 客户端
 
 ![GraphQL Playground](../../images/10/11.png)
 
-<!-- In our React Native application, we will be using the [Apollo Boost](https://www.npmjs.com/package/apollo-boost) library which is a zero-config way to start using Apollo Client. As a React integration, we will be using the [@apollo/react-hooks](https://www.apollographql.com/docs/react/api/react-hooks/) library, which provides hooks such as [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) and [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) for using the Apollo Client. Let's get started by installing the dependencies: -->
+<!-- In our React Native application, we will be using the  same [@apollo/client](https://www.npmjs.com/package/@apollo/client) library as in part 8. Let's get started by installing the library along with the [graphql](https://www.npmjs.com/package/graphql) library which is required as a peer dependency: -->
 
-在我们的React Native 应用中，我们会使用[Apollo Boost](https://www.npmjs.com/package/apollo-boost) 库，这是一个0配置的启动Apollo 客户端的方法。为了React 的集成，我们会使用[@apollo/react-hooks](https://www.apollographql.com/docs/react/api/react-hooks/)  库，提供了类似[useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) 的hook和 [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) 来使用Apollo Client 。 让我先来安装这些应用：
+在我们的React Native 应用中，我们将使用与第8章相同的 [@apollo/client](https://www.npmjs.com/package/@apollo/client) 库。我们先来安装 [graphql](https://www.npmjs.com/package/graphql)  库以及依赖库，
 
 ```shell
-npm install apollo-boost @apollo/react-hooks graphql
+npm install @apollo/client graphql
 ```
 
 <!-- Next, let's create a utility function for creating the Apollo Client with the required configuration. Create a <i>utils</i> directory in the <i>src</i> directory and in that <i>utils</i> directory create a file <i>apolloClient.js</i>. In that file configure the Apollo Client to connect to the Apollo Server: -->
 接下来，让我创建一个工具函数，利用需要的配置来创建Apllo Client。 在<i>src</i> 目录中创建一个 <i>utils</i> 文件夹并新建一个 <i>apolloClient.js</i> 文件， 在文件中配置 Apollo Client 来连接Apollo Server：
 
 ```javascript
-import ApolloClient from 'apollo-boost';
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+
+const httpLink = createHttpLink({
+  // Replace the IP address part with your own IP address!
+  uri: 'http://192.168.100.16:5000/graphql',
+});
 
 const createApolloClient = () => {
-  return new ApolloClient({
-    // Replace the IP address part with your own IP address!
-    uri: 'http://192.168.100.16:5000/graphql',
-  });
+    new ApolloClient({
+    link: httpLink,
+    cache: new InMemoryCache(),
 };
 
 export default createApolloClient;
 ```
 
 <!-- The URL used to connect to the Apollo Server is otherwise the same as the one you used with the Fetch API expect the path is <i>/graphql</i>. Lastly, we need to provide the Apollo Client using the [ApolloProvider](https://www.apollographql.com/docs/react/api/react-hooks/#apolloprovider) context. We will add it to the <em>App</em> component in the <i>App.js</i> file: -->
-URL 用来连接 Apollo Server， 就像之前使用Fetch API的方法相同，只不过路径变为了 <i>/graphql</i>。 最后，我们需要利用 [ApolloProvider](https://www.apollographql.com/docs/react/api/react-hooks/#apolloprovider) 上下文来提供Apollo 客户端。我们把它放到 <i>App.js</i> 文件的<em>App</em> 组件中：
+URL 用来连接 Apollo Server， 就像之前使用Fetch API的方法相同，只不过路径变为了 <i>/graphql</i>。 最后，我们需要利用 [ApolloProvider](https://www.apollographql.com/docs/react/api/react/hooks/#the-apolloprovider-component)上下文来提供Apollo 客户端。我们把它放到 <i>App.js</i> 文件的<em>App</em> 组件中：
 
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks'; // highlight-line
+import { ApolloProvider } from '@apollo/client'; // highlight-line
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient'; // highlight-line
@@ -263,10 +267,10 @@ export default App;
 ![GraphQL structure](../../images/10/12.png)
 
 <!-- You can import the [gql](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#gql) template literal tag used to define GraphQL queries from the Apollo Boost library. If we follow the structure suggested above, we could have a <i>queries.js</i> file in the <i>graphql</i> directory for our application's GraphQL queries. Each of the queries can be stored in a variable and exported like this: -->
-你可以引入[gql](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#gql) 模版，利用Apollo Boost 库来使用文本化tag 来定义GraphQL 查询。如果我们遵循了上面的应用架构，我们会在<i>graphql</i> 文件夹中有一个<i>queries.js</i> 文件，来存放我们应用的GraphQL查询。每一个查询可以存放到变量，并导出，如下所示：
+你可以引入[gql](https://www.apollographql.com/docs/apollo-server/api/apollo-server/#gql) 模版，利用 <i>@apollo/client</i>  库来使用文本化tag 来定义GraphQL 查询。如果我们遵循了上面的应用架构，我们会在<i>graphql</i> 文件夹中有一个<i>queries.js</i> 文件，来存放我们应用的GraphQL查询。每一个查询可以存放到变量，并导出，如下所示：
 
 ```javascript
-import { gql } from 'apollo-boost';
+import { gql } from '@apollo/client';
 
 export const GET_REPOSITORIES = gql`
 query {
@@ -283,7 +287,7 @@ query {
 我们可以利用 <em>useQuery</em> hook 来导入这些变量，如下所示：
 
 ```javascript
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 
 import { GET_REPOSITORIES } from '../graphql/queries';
 
@@ -341,7 +345,7 @@ components/
 我们希望利用 GraphQL query 在<em>useRepositories</em> 中替换Fetch API 的实现。 在  [http://localhost:5000/graphql](http://localhost:5000/graphql) 打开GraphQL Playground，并点击<i>docs</i>  tab页面打开文档。 查找<em>repositories</em> 的查询。该查询有一些蚕食，但是所有的参数都是可选的，不需要额外指定它们。在GraphQL Playground 中生成一个应用中用于展示信息的查询，包含仓库列表和其中对应的字段。结果是份好页的，默认包含了前30条记录。目前，你可以完全忽略分页技术。
 
 <!-- Once the query is working in the GraphQL Playground, use it to replace the Fetch API implementation in the <em>useRepositories</em> hook. This can be achieved using the [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook. The <em>gql</em> template literal tag can be imported from the Apollo Boost as instructed earlier. Consider using the structure recommended earlier for the GraphQL related code. To avoid future caching issues, use the _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/api/react-apollo/#optionsfetchpolicy) in the query. It can be used with the <em>useQuery</em> hook like this: -->
-一旦查询在GraphQL Playground 中运转良好，用它在 <em>useRepositories</em> hook中来替换掉 Fetch API 的实现。可以通过使用 [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook 来达到这个目的。<em>gql</em> 模版语义标签可以按之前所讲的那样从Apollo Boost 中引入。考虑使用之前建议的应用架构来组织GraphQL 相关的代码。为了避免将来的缓存问题，在查询中使用 _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) 。可以利用  <em>useQuery</em> hook 来搭配使用，用法如下：
+一旦查询在GraphQL Playground 中运转良好，用它在 <em>useRepositories</em> hook中来替换掉 Fetch API 的实现。可以通过使用 [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) hook 来达到这个目的。<em>gql</em> 模版语义标签可以按之前所讲的那样从<i>@apollo/client</i> 中引入。考虑使用之前建议的应用架构来组织GraphQL 相关的代码。为了避免将来的缓存问题，在查询中使用 _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) 。可以利用  <em>useQuery</em> hook 来搭配使用，用法如下：
 
 ```javascript
 useQuery(MY_QUERY, {
@@ -374,7 +378,7 @@ useQuery(MY_QUERY, {
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 import Constants from 'expo-constants'; // highlight-line
 
 import Main from './src/components/Main';
@@ -520,15 +524,15 @@ export default {
 在用户设备中排序
 
 <!-- There are times when we need to store some persisted pieces of data in the user's device. One such common scenario is storing the user's authentication token so that we can retrieve it even if the user closes and reopens our application. In web development, we have used the browser's <em>localStorage</em> object to achieve such functionality. React Native provides similar persistent storage, the [AsyncStorage](https://react-native-community.github.io/async-storage/docs/usage). -->
-我们常常会将一些数据持久化到用户的设备中。一个典型的场景时存储用户的认证token ，这样我们在重新开启应用时就可以重复获取它。在Web 开发中，我们已经使用过浏览器的  <em>localStorage</em>  对象来实现相关的功能。React Native 提供了类似的持久化存储， 那就是[AsyncStorage](https://react-native-community.github.io/async-storage/docs/usage)。
+我们常常会将一些数据持久化到用户的设备中。一个典型的场景时存储用户的认证token ，这样我们在重新开启应用时就可以重复获取它。在Web 开发中，我们已经使用过浏览器的  <em>localStorage</em>  对象来实现相关的功能。React Native 提供了类似的持久化存储， 那就是[AsyncStorage](https://react-native-community.github.io/async-storage/docs/usage/)。
 
 
 <!-- We can use the <em>expo install</em> command to install the version of the <i>@react-native-community/async-storage</i> package that is suitable for our Expo SDK version: -->
 
-我们可以使用<em>expo install</em> 命令来安装适合Expo SDK 版本的 <i>@react-native-community/async-storage</i> 安装包：
+我们可以使用<em>expo install</em> 命令来安装适合Expo SDK 版本的 <i>@react-native-async-storage/async-storage</i> 安装包：
 
 ```shell
-expo install @react-native-community/async-storage
+expo install @react-native-async-storage/async-storage
 ```
 
 <!-- The API of the <em>AsyncStorage</em> is in many ways same as the <em>localStorage</em> API. They are both key-value storages with similar methods. The biggest difference between the two is that, as the name implies, the operations of <em>AsyncStorage</em> are <i>asynchronous</i>. -->
@@ -613,7 +617,7 @@ doShopping();
 
 <!-- Once you know how the authorization queries are supposed to work, create a file _useSignIn.js_ file in the <i>hooks</i> directory. In that file implement a <em>useSignIn</em> hook that sends the <em>authorize</em> mutation using the [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook. Note that the <em>authorize</em> mutation has a <i>single</i> argument called <em>credentials</em>, which is of type <em>AuthorizeInput</em>. This [input type](https://graphql.org/graphql-js/mutations-and-input-types) contains <em>username</em> and <em>password</em> fields. -->
 
-如果你知道认证查询是如何运用的，在<i>hooks</i> 文件夹中创建一个  _useSignIn.js_ 文件。 在文件中实现一个 <em>useSignIn</em>  hook ，能够使用 [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation)  hook发送 <em>authorize</em>  变化。注意 变化有一个 <i>唯一</i>的参数叫做  <em>credentials</em> ，是一种  <em>AuthorizeInput</em> 类型， 这种  [input type](https://graphql.org/graphql-js/mutations-and-input-types)  类型包含了 两个字段。
+如果你知道认证查询是如何运用的，在<i>hooks</i> 文件夹中创建一个  _useSignIn.js_ 文件。 在文件中实现一个 <em>useSignIn</em>  hook ，能够使用 [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation)  hook发送 <em>authorize</em>  变化。注意 变化有一个 <i>唯一</i>的参数叫做  <em>credentials</em> ，是一种  <em>AuthorizeInput</em> 类型， 这种  [input type](https://graphql.org/graphql-js/mutations-and-input-types)  类型包含了 两个字段。
 
 <!-- The return value of the hook should be a tuple <em>[signIn, result]</em> where <em>result</em> is the mutations result as it is returned by the <em>useMutation</em> hook and <em>signIn</em> a function that runs the mutation with a <em>{ username, password }</em> object argument. Hint: don't pass the mutation function to the return value directly. Instead, return a function that calls the mutation function like this: -->
 
@@ -702,7 +706,7 @@ export default AuthStorage;
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
@@ -728,26 +732,46 @@ export default App;
 我们同时为 <em>createApolloClient</em> 函数作为参数提供了存储实例。因为下一步，我们在每一次请求时，要将访问token 发送到Apollo Server。Apollo Server 会假定访问tokens 存在于 <i>Authorization</i> 头中，格式为  <i>Bearer <ACCESS_TOKEN></i> 。 我们可以通过使用 [request](https://www.apollographql.com/docs/react/get-started/#configuration-options) 选项来增强Apollo 客户端的操作。让我们在Apollo Client 中改变 <i>apolloClient.js</i>文件中的 <em>createApolloClient</em> 函数来发送访问token：
 
 ```javascript
-const createApolloClient = (authStorage) => { // highlight-line
-  return new ApolloClient({
-    // highlight-start
-    request: async (operation) => {
-      try {
-        const accessToken = await authStorage.getAccessToken();
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import Constants from 'expo-constants';
+import { setContext } from '@apollo/client/link/context'; // highlight-line
 
-        operation.setContext({
-          headers: {
-            authorization: accessToken ? `Bearer ${accessToken}` : '',
-          },
-        });
-      } catch (e) {
-        console.log(e);
-      }
-    },
-    // highlight-end
-    // uri and other options...
+// You might need to change this depending on how you have configured the Apollo Server's URI
+const { apolloUri } = Constants.manifest.extra;
+
+const httpLink = createHttpLink({
+  uri: apolloUri,
+});
+
+// highlight-start
+const createApolloClient = (authStorage) => {
+  const authLink = setContext(async (_, { headers }) => {
+    try {
+      const accessToken = await authStorage.getAccessToken();
+
+      return {
+        headers: {
+          ...headers,
+          authorization: accessToken ? `Bearer ${accessToken}` : '',
+        },
+      };
+    } catch (e) {
+      console.log(e);
+
+      return {
+        headers,
+      };
+    }
+  });
+
+  return new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache: new InMemoryCache(),
   });
 };
+// highlight-end
+
+export default createApolloClient;
 ```
 
 ### Using React Context for dependency injection
@@ -770,7 +794,7 @@ export default AuthStorageContext;
 ```javascript
 import React from 'react';
 import { NativeRouter } from 'react-router-native';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 
 import Main from './src/components/Main';
 import createApolloClient from './src/utils/apolloClient';
@@ -799,8 +823,8 @@ export default App;
 现在就可以使用React 的 [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) 在 <em>useSignIn</em> hook 中访问存储实例了，hook 内容如下：
 
 ```javascript
-import { useContext } from 'react'; // highlight-line
 // ...
+import { useContext } from 'react'; // highlight-line
 
 import AuthStorageContext from '../contexts/AuthStorageContext'; //highlight-line
 
@@ -812,6 +836,34 @@ const useSignIn = () => {
 
 <!-- Note that accessing a context's value using the <em>useContext</em> hook only works if the <em>useContext</em> hook is used in a component that is a <i>descendant</i> of the [Context.Provider](https://reactjs.org/docs/context.html#contextprovider) component. -->
 注意使用 <em>useContext</em> hook 访问上下文的值仅仅在该组件使用<em>useContext</em> hook ，且该组件是  [Context.Provider](https://reactjs.org/docs/context.html#contextprovider) 组件的子组件时生效。
+
+<!-- Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> in the <i>hooks</i> directory: -->
+使用 <em>useContext(AuthStorageContext)</em> 访问 <em>AuthStorage</em>实例十分繁琐而且会显示实现细节，让我们在 <i>hooks</i> 文件夹的 <i>useAuthStorage.js</i> 文件中通过实现 <em>useAuthStorage</em>  hook来改进一下
+
+```javascript
+import { useContext } from 'react'; 
+
+import AuthStorageContext from '../contexts/AuthStorageContext';
+
+const useAuthStorage = () => {
+  return useContext(AuthStorageContext);
+};
+
+export default useAuthStorage;
+```
+
+<!-- The hook's implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this: -->
+hook 的实现十分简单但却提高了hooks 以及使用它的组件的可读性和可维护性。我们可以使用这个hook 来重构一下  <em>useSignIn</em> hook：
+
+```javascript
+// ...
+import useAuthStorage from '../hooks/useAuthStorage'; // highlight-line
+
+const useSignIn = () => {
+  const authStorage = useAuthStorage(); //highlight-line
+  // ...
+};
+```
 
 <!-- The ability to provide data to component's descendants opens tons of use cases for React Context. To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises. -->
 能够向组件的后代提供数据，这个能力对React Context 来说有大量的用例。如果想学习更多关于这些的用例，可以阅读 Kent C. Dodds 的启发式文章，[How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively)，可以习得如何结合[useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook 与上下文来实现状态管理。你在接下来的练习中可能会用到这个知识。
@@ -830,7 +882,7 @@ const useSignIn = () => {
 
 <!-- After the <i>authorize</i> mutation has been executed and you have stored the user's access token to the storage, you should reset the Apollo Client's store. This will clear the Apollo Client's cache and re-execute all active queries. You can do this by using the Apollo Client's [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) method. You can access the Apollo Client in the <em>useSignIn</em> hook using the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook. Note that the order of the execution is crucial and should be the following: -->
 
-在 <i>认证</i> 变化执行后，并且你已经存储了用户的访问token，你可以重置Apollo Client 的存储了。这会清空Apollo Client 的缓存，并重新执行所有活跃的查询。你可以利用Apollo Client 的 [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) 方法，并在 <em>useSignIn</em> hook 中使用 [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook 来访问Apollo Client 。注意执行的顺序至关重要，它应该看起来像这样：
+在 <i>认证</i> 变化执行后，并且你已经存储了用户的访问token，你可以重置Apollo Client 的存储了。这会清空Apollo Client 的缓存，并重新执行所有活跃的查询。你可以利用Apollo Client 的 [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient#ApolloClient.resetStore) 方法，并在 <em>useSignIn</em> hook 中使用 [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook 来访问Apollo Client 。注意执行的顺序至关重要，它应该看起来像这样：
 
 ```javascript
 const { data } = await mutate(/* options */);
@@ -860,9 +912,9 @@ apolloClient.resetStore();
 打开 <i>AppBar.jsx</i> 文件的 <em>AppBar</em>  组件，现在组件里有 "Repositories" 和 "Sign in"两个tab页。修改tab页，当用户登录后，显示 “登出” tab 页，否则展示 “登录” tab 页。你可以使用 <em>authorizedUser</em> 查询配合 [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook来完成这个功能。
 
 <!-- Pressing the "Sign out" tab should remove the user's access token from the storage and reset the Apollo Client's store with the [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) method. Calling the <em>resetStore</em> method should automatically re-execute all active queries which means that the <em>authorizedUser</em> query should be re-executed. Note that the order of execution is crucial: access token must be removed from the storage <i>before</i> the Apollo Client's store is reset. -->
-点击“登出” tab 应当从存储中删除用户的访问token，并利用[resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) 方法重置Apollo Client 的存储。 调用  <em>resetStore</em> 方法会自动重新执行所有活跃的查询，也就意味着 <em>authorizedUser</em>  查询应当被重新执行了。注意执行的顺序至关重要，访问token从存储中删除必须 <i>优先于</i> Apollo Client 存储重置。
+点击“登出” tab 应当从存储中删除用户的访问token，并利用[resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) 方法重置Apollo Client 的存储。 调用  <em>resetStore</em> 方法会自动重新执行所有活跃的查询，也就意味着 <em>authorizedUser</em>  查询应当被重新执行了。注意执行的顺序至关重要，访问token从存储中删除必须 <i>优先于</i> Apollo Client 存储重置。
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 3 in the exercise submission system.
 
-这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第三节中。
+这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第三节中。
 </div>

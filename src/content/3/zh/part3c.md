@@ -878,7 +878,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 ```js
 .catch(error => {
-  console.log(error)
+  console.log(error) // highlight-line
   response.status(400).send({ error: 'malformatted id' })
 })
 ```
@@ -931,11 +931,15 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
+// 这是最后加载的中间件
 app.use(errorHandler)
 ```
 
 <!-- The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.  -->
 错误处理程序检查错误是否是<i>CastError</i> 异常，在这种情况下，我们知道错误是由 Mongo 的无效对象 id 引起的。 在这种情况下，错误处理程序将向浏览器发送响应，并将response对象作为参数传递。 在所有其他错误情况下，中间件将错误转发给缺省的 Express 错误处理程序。
+
+<!-- Note that the error handling middleware has to be the last loaded middleware! -->
+注意处理错误的中间件是最后加载的中间件
 
 ### The order of middleware loading 
 【中间件加载顺序】
@@ -948,7 +952,7 @@ app.use(errorHandler)
 ```js
 app.use(express.static('build'))
 app.use(express.json())
-app.use(logger)
+app.use(requestLogger)
 
 app.post('/api/notes', (request, response) => {
   const body = request.body
@@ -974,7 +978,7 @@ app.use(errorHandler)
 Json-parser 中间件应该是最早加载到 Express 中的中间件之一，如果顺序变成了下面这样: 
 
 ```js
-app.use(logger) // request.body is undefined!
+app.use(requestLogger) // request.body is undefined!
 
 app.post('/api/notes', (request, response) => {
   // request.body is undefined!

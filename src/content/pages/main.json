@@ -58,10 +58,7 @@
     "mainTitle": "深入浅出现代Web编程",
     "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 编程技术。重点是利用 ReactJS 搭配Node.js开发的REST API，来搭建单页面应用程序（SPA：Single Page Application）",
     "current": [
-      "<strong>任务提交的截止日期延期到了2021年的3月1日</strong>。在此之后，提交系统会关闭两个周，2021版本会在2021年3月15日启动。2021版本不会有太大的变化，所以你可以接着敲代码啦。",
-      "注意赫尔辛基大学获得学分的考试最终截止日期仍然还是2021年1月10日。更多的信息参考<a href='/zh/part0'>第0章</a>",
-      "今年的新课程加入了一个新的章节——<a href='/part9'>TypeScript</a>。这个章节的内容是由<a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>提供的",
-      "阅读<a href='/zh/part0/基础知识#changed-since-the-last-year'>这里</a>了解相比去年的课程增加了什么新内容！",
+      "2021版本的课程在3月15日开启",
       "你可以加入我们的Telegram 群组<a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>来讨论课程以及相关的内容。快来加入我们吧！"
     ],
     "telegram": "Telegram是一个类似 whatsapp / messenger（国内的微信【译者注】） 讨论组应用，是一个多端应用，你可以在浏览器、手机设备以及Windows / Linux / OSX 客户端使用它。",

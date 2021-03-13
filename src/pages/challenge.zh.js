@@ -6,7 +6,7 @@ const Challenge = () => {
   return (
     <ChallengePage
       lang="zh"
-      title="全栈——挑战 | 全栈公开课2020"
+      title="全栈——挑战 | 全栈公开课2021"
       seoDescription="The University of Helsinki and Houston Inc. have partnered up to challenge both individual developers and companies alike to learn and build upon their expertise in true Full Stack development. The course is built by coders for coders, and offers something for both newcomers and seasoned industry veterans alike. "
       aboutContent={[
         '这个世界迫切地需要软件开发人员。 我们希望帮助培育下一代程序员ーー我们提供的方法之一是就报名参加全栈 MOOC 公开课',

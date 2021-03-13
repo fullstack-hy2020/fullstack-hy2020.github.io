@@ -202,8 +202,8 @@ Mutation: {
 }
 ```
 
-<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>. -->
-后端的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4) ，branch<i>part8-4</i> 上找到。
+<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>. -->
+后端的代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4) ，branch<i>part8-4</i> 上找到。
 
 
 ### User and log in
@@ -459,9 +459,23 @@ addAsFriend: async (root, args, context) => {
 ```js
 addAsFriend: async (root, args, { currentUser }) => {
 ```
+<!-- The following query now returns the user's friendlist -->
+如下的查询返回了用户的朋友列表
 
-<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>. -->
-后端的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i> 上找到。
+```js
+query {
+  me {
+    username
+    friends{
+      name
+      phone
+    }
+  }
+}
+```
+
+<!-- The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>. -->
+后端的代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5)分支<i>part8-5</i> 上找到。
 
 
 </div>
@@ -471,9 +485,14 @@ addAsFriend: async (root, args, { currentUser }) => {
 
 
 ### Exercises 8.13.-8.16.
+
+<!-- The following exercises are guite likely breaking your frontend. Do not worry it yet, the fronend shall be fixed and expanded in next chapter.  -->
+
+下面的几个练习可能会破坏你的前端。不要担心，前端会在下几个章节进行修复。
+
 #### 8.13: Database, 步骤 1
-<!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md). -->
-更改库应用，以便将数据保存到数据库中。 你可以在[这里](https://github.com/fullstack-hy2020/misc/blob/master/library-schema.md)找到书籍和作者的<i>mongoose schema</i>。
+<!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/master/library-schema.md). -->
+更改库应用，以便将数据保存到数据库中。 你可以在[这里](https://github.com/fullstack-hy/misc/blob/master/library-schema.md)找到书籍和作者的<i>mongoose schema</i>。
 
 <!-- Let's change the book graphql schema a little -->
 让我们稍微修改一下图书的 graphql 模式
@@ -569,10 +588,6 @@ type Mutation {
 
 <!-- Make the mutations _addBook_ and _editAuthor_ possible only if the request includes a valid token.  -->
 只有在请求包含有效token的情况下，才能使Mutation addBook 和 editAuthor 成为可能。
-
-<!-- (Don't worry about fixing the frontend for the moment.) -->
-（现在不用担心修改前端）
-
 
 </div>
 
