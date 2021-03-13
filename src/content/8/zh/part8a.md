@@ -20,7 +20,7 @@ Graphql 哲学与 REST 非常不同。 Rest 是基于资源的。 每个资源(�
 <!-- The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes.  -->
 Rest 的资源基本上在大多数情况下都能很好地工作，但有些时候也有些尴尬。 
 
-<!-- Let's assume our bloglist application contains social media like functionality, and we would i.e want to show a list of all the blogs the users who have commented on the blogs we follow have added.  -->
+<!-- Let's assume our bloglist application contains social media like functionality, and we would e.g. want to show a list of all the blogs the users who have commented on the blogs we follow have added.  -->
 让我们假设我们的博客列表应用包含类似社交媒体的功能，并且我们想显示一个所有博客的列表，这些博客的用户已经在我们关注的博客上添加了评论。
 
 <!-- If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated.  -->
@@ -56,7 +56,9 @@ query FetchBlogsQuery {
 }
 ```
 
+The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them. 
 
+`FetchBlogsQuery`的内容可以粗略的解释为：查找一个叫`"mluukkai"` 的用户以及每一个`followedUsers`， 查找所有他的`blogs`， 以及所有博客的`comments`， 还有每个评论的`user`，找到他们的`blogs` ，并返回每一个博客的`title`
 
 <!-- The servers response would be about the following JSON-object:  -->
 服务器响应将是如下 json 对象:
@@ -252,7 +254,7 @@ query {
 
 ```js
 query {
-  findPerson(name: "Donald Trump") {
+  findPerson(name: "Joe Biden") {
     phone 
   }
 }
@@ -946,7 +948,7 @@ type Mutation {
 ```
 
 <!-- and is done by a resolver: -->
-而且是由一个解析器完成的:
+而且是由一个resolver完成的:
 
 ```js
 Mutation: {
@@ -965,8 +967,8 @@ Mutation: {
 ```
 
 
-<!-- The mutation finds the person to be by the field <i>name</i>. -->
-这个Mutation通过字段<i>name</i> 找到这个人。
+<!-- The mutation finds the person to be updated by the field <i>name</i>. -->
+mutations 发现person 被 <i>name</i> 字段更新掉了。
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>. -->
 当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3) ，branch<i>part8-3</i> 上找到。

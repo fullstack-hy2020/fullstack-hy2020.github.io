@@ -89,12 +89,11 @@ Let's make some changes to the module that defines the application's configurati
 require('dotenv').config()
 
 const PORT = process.env.PORT
-let MONGODB_URI = process.env.MONGODB_URI
 
 // highlight-start
-if (process.env.NODE_ENV === 'test') {
-  MONGODB_URI = process.env.TEST_MONGODB_URI
-}
+const MONGODB_URI = process.env.NODE_ENV === 'test' 
+  ? process.env.TEST_MONGODB_URI
+  : process.env.MONGODB_URI
 // highlight-end
 
 module.exports = {
@@ -118,7 +117,7 @@ The _config_ module that we have implemented slightly resembles the [node-config
 
 These are the only changes we need to make to our application's code.
 
-You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2).
+You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2).
 
 
 ### supertest
@@ -154,7 +153,7 @@ afterAll(() => {
 
 The test imports the Express application from the <i>app.js</i> module and wraps it with the <i>supertest</i> function into a so-called [superagent](https://github.com/visionmedia/superagent) object. This object is assigned to the <i>api</i> variable and tests can use it for making HTTP requests to the backend.
 
-Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format.
+Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format. (If you're not familiar with the RegEx syntax of `/application\/json/`, you can learn more [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).)
 
 The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code.
 
@@ -244,8 +243,6 @@ const response = await api.get('/api/notes')
 expect(response.body).toHaveLength(2)
 ```
 
-<!-- HTTP-pyyntöjen tiedot konsoliin kirjoittava middleware häiritsee hiukan testien tulostusta. Muutetaan loggeria siten, että testausmoodissa lokiviestit eivät tulostu konsoliin: -->
-
 The middleware that outputs information about the HTTP requests is obstructing the test execution output. Let us modify the logger so that it does not print to console in test mode:
 
 ```js
@@ -258,7 +255,11 @@ const info = (...params) => {
 }
 
 const error = (...params) => {
-  console.error(...params)
+  // highlight-start
+  if (process.env.NODE_ENV !== 'test') { 
+    console.error(...params)
+  }
+  // highlight-end  
 }
 
 module.exports = {
@@ -457,7 +458,7 @@ notesRouter.get('/', async (request, response) => {
 
 We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.
 
-You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).
+You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-3).
 
 ### More tests and refactoring the backend
 
@@ -766,7 +767,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).
+You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-4).
 
 ### Eliminating the try-catch
 
@@ -872,8 +873,8 @@ notesRouter.get('/:id', async (request, response) => {
 })
 ```
 
-<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>.  -->
-The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
+<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>.  -->
+The code for our application can be found from [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 
 ### Optimizing the beforeEach function
 
@@ -1006,41 +1007,24 @@ module.exports = {
 }
 ```
 
-
-
-
 **NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on. Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
-
 
 #### 4.9*: Blog list tests, step2
 
-
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
 
-
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
-
-
 #### 4.10: Blog list tests, step3
-
 
 Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> url successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
 
-
 Once the test is finished, refactor the operation to use async/await instead of promises.
-
-
 #### 4.11*: Blog list tests, step4
-
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
 
-
 Make the required changes to the code so that it passes the test.
-
-
 #### 4.12*: Blog list tests, step5
-
 
 Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
@@ -1050,7 +1034,6 @@ Make the required changes to the code so that it passes the test.
 </div>
 
 <div class="content">
-
 
 ### Refactoring tests
 
@@ -1070,11 +1053,7 @@ const Note = require('../models/note')
 
 beforeEach(async () => {
   await Note.deleteMany({})
-
-  const noteObjects = helper.initialNotes
-    .map(note => new Note(note))
-  const promiseArray = noteObjects.map(note => note.save())
-  await Promise.all(promiseArray)
+  await Note.insertMany(helper.initialNotes)
 })
 
 describe('when there is initially some notes saved', () => {
@@ -1213,7 +1192,7 @@ There is still room for improvement, but it is time to move forward.
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
 
 
-You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).
+You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6).
 
 </div>
 

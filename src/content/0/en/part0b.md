@@ -9,7 +9,7 @@ lang: en
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
-The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
+The application exists only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
 On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
 
 Coding in the recommended style begins in [part 1](/en/part1).
@@ -19,7 +19,7 @@ Use the Chrome browser <i>now and for the rest of the course</i>.
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) on your browser. Sometimes this takes a while. 
 
 **The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
-On Windows, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
+On Windows or Linux, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
 
 Before continuing, find out how to open the Developer Console on your computer (search from Google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
 
@@ -401,9 +401,9 @@ The <i>Elements</i> tab of the console can be used to change the styles of the e
 Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server. 
 
 
-### Loading a page containing JavaScript - revised
+### Loading a page containing JavaScript - review
 
-Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
+Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
 
 ![](../../images/0/19e.png)
 
@@ -418,7 +418,7 @@ Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleap
 
 Next let's examine how adding a new note is done. 
 
-The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)
+The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
 ![](../../images/0/20e.png)
 
@@ -700,7 +700,7 @@ Create a diagram depicting the situation where the user goes to the [single page
 
   <h4>0.6: New note</h4>
 
-Create a diagram depicting the situation where user creates a new note using the single page version of the app. 
+Create a diagram depicting the situation where the user creates a new note using the single page version of the app. 
 
 This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

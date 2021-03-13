@@ -46,25 +46,34 @@ Chrome这时应该会自动启动。 别忘了，**立即**打开浏览器控制
 应用的代码位于<i>src</i> 文件夹中。 让我们简化一下默认代码，将文件<i>index.js</i> 的内容改成:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App'
 
+ReactDOM.render(
+  <App />,
+  document.getElementById('root')
+)
+```
+
+<i>App.js</i> 看起来像这样
+
+```js
+import React from 'react'
 const App = () => (
   <div>
-    <p>Hello world</p>
+    <p>Hello world lo23</p>
   </div>
 )
 
-ReactDOM.render(<App />, document.getElementById('root'))
+export default App
 ```
-
-<!-- The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>serviceWorker.js</i> may be deleted as they are not needed in our application right now. -->
-文件<i>App.js</i>、<i>App.css</i>、<i>App.test.js</i>、<i>logo.svg</i>、, <i>setupTests.js</i>  和<i>serviceWorker.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
+<!-- The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now. -->
+文件 <i>App.css</i>、<i>App.test.js</i>、<i>logo.svg</i>、, <i>setupTests.js</i>  和<i>reportWebVitals.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
 
 ### Component
 【组件】
 <!-- The file <i>index.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i> and the command on the final line -->
-文件<i>index.js</i> 定义了一个 React-[组件component](https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>，最后一行代码为：
+文件<i>App.js</i> 定义了一个 React-[组件component](https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>， <i>index.js</i> 的最后一行代码为：
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -180,8 +189,6 @@ const App = () => {
 编译后，我们的应用如下所示:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom'
 
 const App = () => {
   const now = new Date()
@@ -199,10 +206,6 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
-  React.createElement(App, null),
-  document.getElementById('root')
-)
 ```
 
 <!-- The compiling is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [第7章](/zh/part7) of this course. -->
@@ -234,6 +237,9 @@ JSX 是一种“类[XML](https://developer.mozilla.org/en-us/docs/web/XML/xml_in
 <!-- Let's modify the application as follows (NB: imports at the top of the file are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work): -->
 
 让我们按照如下方式修改应用(注意: 文件顶部的imports在这些示例中被省略了，以后也会这么处理。 但它们是代码正常运行必需的) :
+
+<!-- Let's modify the file <i>App.js</i> as follows (NB: import at the top of the file and export at the bottom are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work): -->
+让我们按照如下方式修改 <i>App.js</i> (注意: 文件顶部的import 在这些示例中被省略了，以后也会这么处理。 但它们是代码正常运行必需的) :
 
 ```js
 // highlight-start
@@ -376,7 +382,7 @@ const App = () => {
 最好记住，在 React 的代码中编写 <em>console.log()</em>  命令(打印到控制台)是可行的，而且是提倡的。
 
 <!-- Also keep in mind that **React component names must be capitalized**. If you try defining a component as follows -->
-还要记住 **React 组件名称必须大写**。 如果你像如下这么定义：
+还要记住 **React 组件名称首字母必须大写**。 如果你像如下这么定义：
 
 ```js
 const footer = () => {
@@ -469,8 +475,8 @@ const App = () => {
 <div class="tasks">
 <h3>Exercises 1.1.-1.2.</h3>
 
-<!-- Exercises are submitted through GitHub and by marking completed exercises in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-练习通过 GitHub 提交，并在[提交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中标记练习为已完成。
+<!-- Exercises are submitted through GitHub and by marking completed exercises in the [submission application](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+练习通过 GitHub 提交，并在[提交应用](https://study.cs.helsinki.fi/stats/courses/fullstack2021) 中标记练习为已完成。
 
 <!-- You may submit all the exercises of this course into the same repository, or use multiple repositories. If you submit exercises of different parts into the same repository, please use a sensible naming scheme for the directories. -->
 您可以将本课程的所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请使用一个合理的目录命名方案。 
@@ -490,7 +496,7 @@ part2
 ```
 
 <!-- See [this](https://github.com/fullstack-hy2020/example-submission-repository)! -->
-参考 [这里](https://github.com/fullstack-hy2020/example-submission-repository)!
+参考 [这里](https://github.com/FullStack-HY/example-submission-repository)!
 
 <!-- For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1. -->
 为课程的每一章节都创建一个目录，它进一步分支成一系列练习的目录，如第1章节的“ unicafe”。
@@ -515,8 +521,19 @@ part2
 使用 create-react-app 来初始化一个新的应用，将<i>index.js</i> 的内容修改如下：
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById('root')
+)
+```
+
+<i>App.js</i> 内容如下
+
+```js
+import React from 'react'
 
 const App = () => {
   const course = 'Half Stack application development'
@@ -544,15 +561,18 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+export default App
 ```
 
-<!-- and remove extra files (App.js, App.css, App.test.js, logo.svg, serviceWorker.js). -->
-并删除额外的文件(App.js、 App.css、 App.test.js、logo.svg、setupTests.js、serviceWorker.js)。
+<!-- and remove extra files (App.js, App.css, App.test.js, logo.svg, reportWebVitals.js). -->
+并删除额外的文件( App.css、 App.test.js、logo.svg、setupTests.js、reportWebVitals.js 、setupTests.js))。
 
 <!-- Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises. -->
 
 不幸的是，目前整个应用都在同一个组件中。 重构代码，使其由三个新组件组成:<i>Header</i>、<i>Content</i> 和<i>Total</i>。 所有数据仍然耦合在<i>App</i> 组件中，让该组件使用<i>props</i> 将必要的数据传递给每个组件。<i>Header</i> 负责显示课程的名称，<i>Content</i>显示课程的章节及其练习的数量， <i>Total</i> 显示练习的总数。
+
+<!-- Define the new components in file <i>App.js</i>. -->
+在 <i>App.js</i> 中定义新的组件。
 
 <!-- The <i>App</i> component's body will approximately be as follows: -->
 <i>App</i> 组件的body大致如下:

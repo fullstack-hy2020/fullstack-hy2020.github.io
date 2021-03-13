@@ -9,6 +9,9 @@
     "noMatches": "没有匹配的结果",
     "matchesTitle": "找到 {{count}} 条关于 \"{{query}}\" 的结果"
   },
+  "aboutPage": {
+    "generalTitle": "课程简介"
+  },
   "navigation": {
     "aboutCourse": "关于课程",
     "courseContents": "课程内容",
@@ -18,6 +21,8 @@
     "searchLinkSrLabel": "从教程中搜索"
   },
   "challengePage": {
+    "aboutTitle": "这就是全栈！——挑战内容",
+    "joinTitle": "贵司，接受挑战吧！",
     "registerButton": "将您的公司注册到全栈挑战中",
     "nameLabel": "姓名",
     "namePlaceholder": "小明",
@@ -31,5 +36,17 @@
     "submitSuccessMessage": "谢谢，我们会尽快联系您",
     "participantsTitle": "参加全栈挑战",
     "infoButton": "了解更多挑战信息"
+  },
+  "companiesPage": {
+    "storiesTitle": "来自合作伙伴中全栈开发的故事"
+  },
+  "faqPage": {
+    "faqTitle": "常见问题"
+  },
+  "homePage": {
+    "startCourseButton": "开始课程",
+    "announcementsTitle": "公告",
+    "authorsTitle": "著作权与版权",
+    "courseNameTitle": "全栈公开课 2021"
   }
 }

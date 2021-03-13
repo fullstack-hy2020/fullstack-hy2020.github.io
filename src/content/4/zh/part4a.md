@@ -368,8 +368,8 @@ module.exports = mongoose.model('Note', noteSchema)
 <!-- There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet. -->
 对于 Express 应用，没有严格的目录结构或文件命名原则。 与此相对的，Ruby on Rails 就需要一个特定的结构。 我们目前的结构只是遵循一些你可以在互联网上遇到的最佳实践。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1). -->
-您可以在 [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1)的<i>part4-1</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1). -->
+您可以在 [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1)的<i>part4-1</i> 分支中找到我们当前应用的全部代码。
 
 <!-- If you clone the project for yourself, run the _npm install_ command before starting the application with _npm start_. -->
 如果您自己克隆项目，请在启动应用之前运行 npm install 命令。
@@ -491,7 +491,7 @@ module.exports = {
 > _average_ 函数使用 array的 [reduce](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/reduce)方法。 如果你对这个方法还不熟悉，是时候在 Youtube 上观看3个视频了，这3个视频来自[Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)系列。
 
 <!-- There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), that resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/). Other alternatives do exist, like [ava](https://github.com/avajs/ava) that has gained popularity in some circles. -->
-有许多不同的测试库或者<i>test runner</i> 可用于 JavaScript。 在本课程中，我们将使用一个由 Facebook 内部开发和使用的测试库，这个测试库名为[jest](https://jestjs.io/) ，类似于之前 JavaScript 测试库之王[Mocha](https://mochajs.org/)。 其他替代品也确实存在，比如在某些圈子里受欢迎的[ava](https://github.com/avajs/ava)。
+有许多不同的测试库或者<i>test runner</i> 可用于 JavaScript。 在本课程中，我们将使用一个由 Facebook 内部开发和使用的测试库，这个测试库名为[jest](https://jestjs.io/) ，类似于之前 JavaScript 测试库之王[Mocha](https://mochajs.org/)。
 
 <!-- Jest is a natural choice for this course, as it works well for testing backends, and it shines when it comes to testing React applications.  -->
 对于本课程来说，Jest 是一个自然的选择，因为它可以很好地测试后端，并且在测试 React 应用时表现出色。
@@ -578,17 +578,20 @@ test('palindrome of releveler', () => {
 
 ```js
 module.exports = {
-  "env": {
-    "commonjs": true 
-    "es6": true,
-    "node": true,
-    "jest": true, // highlight-line
+  'env': {
+    'commonjs': true,
+    'es2021': true,
+    'node': true,
+    'jest': true, // highlight-line
   },
-  "extends": "eslint:recommended",
+  'extends': 'eslint:recommended',
+  'parserOptions': {
+    'ecmaVersion': 12
+  },
   "rules": {
     // ...
   },
-};
+}
 ```
 
 <!-- In the first row, the test file imports the function to be tested and assigns it to a variable called _palindrome_: -->
@@ -790,8 +793,8 @@ describe('total likes', () => {
 })
 ```
 
-<!-- If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md). -->
-如果觉得定义自己的博客测试列表用例工作量太大，可以使用现成的列表,[在这里](https://github.com/fullstack-hy2020/misc/blob/master/blogs_for_test.md)。
+<!-- If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://raw.githubusercontent.com/FullStack-HY/misc/main/blogs_for_test.md). -->
+如果觉得定义自己的博客测试列表用例工作量太大，可以使用现成的列表,[在这里](https://raw.githubusercontent.com/FullStack-HY/misc/main/blogs_for_test.md)。
 
 <!-- You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/zh/part3/将数据存入_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting). -->
 在编写测试时，您肯定会遇到问题。 还记得我们在第3章节中学到的关于[debugging](/zh/part3/将数据存入_mongo_db#debugging-node-applications)的知识吗。 即使在测试执行期间，也可以使用 console.log 将内容打印到控制台。 你甚至可以在运行测试的时候使用调试器，你可以在这里找到相关的指示 [here](https://jestjs.io/docs/en/troubleshooting)。
@@ -852,7 +855,7 @@ npm test -- -t 'when list has only one blog, equals the likes of that'
 4.7 * : helper function and unit tests，步骤5
 
 <!-- Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received: -->
-定义一个名为 mostlike 的函数，该函数接收一个 blog 数组作为参数。 该函数返回其所有博客点赞最多的作者。 返回值还包含作者收到的赞总数:
+定义一个名为 mostLikes 的函数，该函数接收一个 blog 数组作为参数。 该函数返回其所有博客点赞最多的作者。 返回值还包含作者收到的赞总数:
 
 ```js
 {

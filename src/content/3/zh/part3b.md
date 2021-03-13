@@ -92,6 +92,14 @@ app.use(cors())
 <!-- You can read more about CORS from [Mozillas page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS). -->
 你可以 从[Mozillas 页面](https://developer.mozilla.org/en-us/docs/web/http/CORS)阅读更多关于 CORS的内容。
 
+<!-- The setup of our app looks now as follows: -->
+我们的应用搭建起来应该显示如下：
+
+![](../../images/3/100.png)
+
+<!-- The react app that runs in browser fetches now the data from node/express-server that runs in localhost:3001. -->
+跑在浏览器中的React app现在从 node/express-server 的localhost:3001中获取数据
+
 ### Application to the Internet
 【将应用部署到网上】
 <!-- Now that the whole stack is ready, let's move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this. -->
@@ -129,8 +137,8 @@ Heroku 会在环境变量的基础上配置应用端口。
 node_modules
 ```
 
-<!-- Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku master</i>. -->
-使用命令<i>heroku create</i>创建一个 Heroku 应用，将你的代码提交到仓库并将其推送到Heroku，<i>git push Heroku master</i>。
+<!-- Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku main</i>. -->
+使用命令<i>heroku create</i>创建一个 Heroku 应用，将你的代码提交到仓库并将其推送到Heroku，<i>git push Heroku main</i>。
 
 <!-- If everything went well, the application works: -->
 如果一切顺利，应用就能正常工作:
@@ -143,8 +151,8 @@ node_modules
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server. 
 注意：至少在开始的时候，随时关注 heroku 日志是有好处的。 实现这一点的最佳方法是使用命令 <i>heroku logs -t</i> ，该命令会让服务器上发生任何事情时将日志打印到控制台。
 
->**NB** If you are deploying from a git repository where your code is not on the master branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:master --force_.
-如果你从Git 仓库中拉取，所部署的代码不是master分支（比如，如果你正在修改上节课的 [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)，你需要运行 _git push heroku HEAD:master_ . 如果你已经推送到了heroku， 你可能需要运行 _git push heroku HEAD:master --force_ ）
+>**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
+如果你从Git 仓库中拉取，所部署的代码不是master分支（比如，如果你正在修改上节课的 [notes repo](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2)，你需要运行 _git push heroku HEAD:master_ . 如果你已经推送到了heroku， 你可能需要运行 _git push heroku HEAD:main --force_ ）
 
 <!-- The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>. -->
 前端也与 Heroku 的后端一起工作。 你可以通过更改前端的后端地址，更改为后端在 Heroku 的地址http://localhost:3001</i>。
@@ -186,7 +194,7 @@ node_modules
 我们从将前端的生产构建复制到后端的根目录。 使用一台Mac 或 Linux 计算机，可以通过命令从前端目录进行复制
 
 ```bash
-cp -r build ../../../osa3/notes-backend
+cp -r build ../notes-backend
 ```
 
 
@@ -267,6 +275,16 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
 
 ![](../../images/3/29ea.png)
 
+<!-- The setup that is ready for product deployment looks as follows: -->
+生产部署的构建如下所示：
+
+![](../../images/3/101.png)
+
+<!-- Unlike when runnig app in development environment, now everything is in the same node/express-backend that runs in localhost:3001. When brower goes to the page, the file  <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes. -->
+不像跑在开发环境那样，现在所有内容都跑在与node/express-backend 相同的localhost:3001 。 当浏览器访问到这个页面，  <i>index.html</i> 会被渲染。从而导致浏览器获取React app 的生产版本，一旦启动，会从localhost:3001/api/notes 中获取json数据。
+
+### The whole app to internet
+
 <!-- After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again.  -->
 确保应用的生产版本在本地正常工作之后，将前端的生产构建提交到后端存储库，并将代码再次推送到 Heroku。
 
@@ -281,6 +299,14 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
 <!-- The application needs a database. Before we introduce one, let's go through a few things.  -->
 应用需要一个数据库。在我们引入数据库之前，让我们先了解几个知识点。
 
+<!-- The setup looks like now as follows: -->
+启动如下所示
+
+![](../../images/3/102.png)
+
+<!-- The node/express-backend resides now in Heroku server. When the root address that is of the from https://glacial-ravine-74819.herokuapp.com/ is accessed, browser loads and executes the React app that fetches the json-data from the Heroku server. -->
+现在 node/express-backend 部署在了Heroku 服务器中。当访问到根地址https://glacial-ravine-74819.herokuapp.com/  ， 浏览器加载并执行React 应用，并从Heroku server 中获取json数据。
+
 ###  Streamlining deploying of the frontend
 【流程化前端部署】
 <!-- To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository:  -->
@@ -290,9 +316,9 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
 {
   "scripts": {
      //...
-    "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
+    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build --prod && cp -r build ../notes-backend",
     "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy",    
+    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
   }
 }
@@ -350,7 +376,7 @@ const baseUrl = '/api/notes'
 }
 ```
 
-<!-- After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>.  -->
+<!-- After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>.  -->
 在重新启动之后，React 开发环境将作为一个[代理](https://create-React-app.dev/docs/proxying-api-requests-in-development/)工作。 如果 React 代码对服务器地址<i>http://localhost:3000</i>发出了一个 HTTP 请求，而不是 React 应用本身管理的地址(即当请求不是为了获取应用的 CSS 或 JavaScript) ，那么该请求将被重定向到<i> HTTP://localhost:3001</i> 的服务器。
 
 <!-- Now the frontend is also fine, working with the server both in development- and production mode.  -->
@@ -365,8 +391,8 @@ const baseUrl = '/api/notes'
 <!-- In some situations it may be sensible to deploy the frontend code as it's own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack). -->
 在某些情况下，将前端代码部署为它自己的应用可能是合理的。 通过create-react-app 创建的应用是[简单的](https://github.com/mars/create-react-app-buildpack)。
 
-<!-- Current code of the backend can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1). -->
-后端的当前代码可以在分支<i>part3-3</i> 中的[Github](https://Github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3)上找到。 前端代码的更改位于 [前端仓库frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1)的<i>part3-1</i> 分支。
+<!-- Current code of the backend can be found on [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy/part2-notes/tree/part3-1). -->
+后端的当前代码可以在分支<i>part3-3</i> 中的[Github](https://Github.com/fullstack-hy/part3-notes-backend/tree/part3-3)上找到。 前端代码的更改位于 [前端仓库frontend repository](https://github.com/fullstack-hy/part2-notes/tree/part3-1)的<i>part3-1</i> 分支。
 
 </div>
 

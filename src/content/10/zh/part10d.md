@@ -340,8 +340,8 @@ describe('RepositoryList', () => {
   describe('RepositoryListContainer', () => {
     it('renders repository information correctly', () => {
       const repositories = {
+        totalCount: 8,
         pageInfo: {
-          totalCount: 8,
           hasNextPage: true,
           endCursor:
             'WyJhc3luYy1saWJyYXJ5LnJlYWN0LWFzeW5jIiwxNTg4NjU2NzUwMDc2XQ==',
@@ -577,7 +577,7 @@ export default SingleRepository;
 
 <!-- You can create a review using the <em>createReview</em> mutation. Check this mutation's arguments in the _docs_ tab in the GraphQL playground. You can use the [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation) hook to send a mutation to the Apollo Server. -->
 
-你可以利用  <em>createReview</em>  变化来创建一个评论。在GraphQL playground 的 _docs_  tab页检查变化的入参。你可以使用 [useMutation](https://www.apollographql.com/docs/react/api/react-hooks/#usemutation)  hook来发送变化到Apollo Server。
+你可以利用  <em>createReview</em>  变化来创建一个评论。在GraphQL playground 的 _docs_  tab页检查变化的入参。你可以使用 [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation)  hook来发送变化到Apollo Server。
 
 <!-- After a successful <em>createReview</em> mutation, redirect the user to the repository's view you implemented in the previous exercise. This can be done with the <em>history.push</em> method after you have obtained the history object using the [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook. The created review has a <em>repositoryId</em> field which you can use to construct the route's path. -->
 在成功地创建了  <em>createReview</em>  变化之后，重定向用户到仓库视图，我们之前的练习实现过它。可以在使用  [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory)  hook 获得history 对象后，通过 <em>history.push</em> 方法来实现这个功能。创建好的评论有一个 <em>repositoryId</em> 字段，可以用来创建route路径。
@@ -663,7 +663,7 @@ useQuery(GET_REPOSITORY, {
 
 <!-- You can use for example [react-native-picker](https://www.npmjs.com/package/react-native-picker-select) library, or [React Native Paper](https://callstack.github.io/react-native-paper/) library's [Menu](https://callstack.github.io/react-native-paper/menu.html) component to implement the ordering principle's selection. You can use the <em>FlatList</em> component's [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) prop to provide the list with a header containing the selection component. -->
 
-你可以使用类似 [react-native-picker](https://www.npmjs.com/package/react-native-picker-select) 类库，或者 [React Native Paper](https://callstack.github.io/react-native-paper/)  类库的  [Menu](https://callstack.github.io/react-native-paper/menu.html)组件来实现排序策略的选择，你可以使用 <em>FlatList</em> 组件的  [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) 属性来提供给列表一个表头，并包含选择的组件。
+你可以使用类似  [@react-native-picker/picker](https://docs.expo.io/versions/latest/sdk/picker/)  类库，或者 [React Native Paper](https://callstack.github.io/react-native-paper/)  类库的  [Menu](https://callstack.github.io/react-native-paper/menu.html)组件来实现排序策略的选择，你可以使用 <em>FlatList</em> 组件的  [ListHeaderComponent](https://reactnative.dev/docs/flatlist#listheadercomponent) 属性来提供给列表一个表头，并包含选择的组件。
 
 <!-- The final version of the feature, depending on the selection component in use, should look something like this: -->
 该功能的最终版本，取决于使用的选择组件，应当按如下所示：
@@ -706,9 +706,7 @@ export class RepositoryListContainer extends React.Component {
   renderHeader = () => {
     // this.props contains the component's props
     const props = this.props;
-    
     // ...
-  
     return (
       <RepositoryListHeader
       // ...
@@ -750,6 +748,7 @@ export class RepositoryListContainer extends React.Component {
 ```javascript
 {
   repositories(first: 2) {
+    totalCount
     edges {
       node {
         id
@@ -761,7 +760,6 @@ export class RepositoryListContainer extends React.Component {
     pageInfo {
       endCursor
       startCursor
-      totalCount
       hasNextPage
     }
   }
@@ -776,6 +774,7 @@ export class RepositoryListContainer extends React.Component {
 {
   "data": {
     "repositories": {
+      "totalCount": 10,
       "edges": [
         {
           "node": {
@@ -797,13 +796,16 @@ export class RepositoryListContainer extends React.Component {
       "pageInfo": {
         "endCursor": "WyJ6ZWl0LnN3ciIsMTU4OTU0MzkzMzg2N10=",
         "startCursor": "WyJ6ZWl0Lm5leHQuanMiLDE1ODk1NDM5OTc1NTdd",
-        "totalCount": 10,
         "hasNextPage": true
       }
     }
   }
 }
 ```
+
+<!-- The format of the result object and the arguments are based on the [Relay's GraphQL Cursor Connections Specification](https://relay.dev/graphql/connections.htm), which has become a quite common pagination specification and has been widely adopted for example in the [GitHub's GraphQL API](https://docs.github.com/en/graphql).  -->
+
+结果对象的格式以及参数遵循了[Relay's GraphQL Cursor Connections Specification](https://relay.dev/graphql/connections.htm) ，它已经成为了一个通用的分页规范了，并且已经广泛地应用到例如[GitHub's GraphQL API](https://docs.github.com/en/graphql) 中了。
 
 <!-- In the result object, we have the <em>edges</em> array containing items with <em>node</em> and <em>cursor</em> attributes. As we know, the <em>node</em> contains the repository itself. The <em>cursor</em> on the other is a Base64 encoded representation of the node. It contains the repository's id and date of repository's creation as a timestamp. This is the information we need to point to the item when they are ordered by the creation time of the repository. The <em>pageInfo</em> contains information such as the cursor of the first and the last item in the array. -->
 
@@ -816,6 +818,7 @@ export class RepositoryListContainer extends React.Component {
 ```javascript
 {
   repositories(first: 2, after: "WyJ6ZWl0LnN3ciIsMTU4OTU0MzkzMzg2N10=") {
+    totalCount
     edges {
       node {
         id
@@ -827,7 +830,6 @@ export class RepositoryListContainer extends React.Component {
     pageInfo {
       endCursor
       startCursor
-      totalCount
       hasNextPage
     }
   }
@@ -907,8 +909,73 @@ export default RepositoryList;
 <!-- Try scrolling to the end of the reviewed repositories list and you should the message in the logs. -->
 尝试滚动到评论仓库列表的末尾，你应当能在日志中看到信息。
 
+<!-- Next, we need to fetch more repositories once the end of the list is reached. This can be achieved using the [fetchMore](https://www.apollographql.com/docs/react/data/pagination/#cursor-based) function provided by the <em>useQuery</em> hook. To describe Apollo Client, how to merge the existing repositories in the cache with the next set of repositories, we can use a [field policy](https://www.apollographql.com/docs/react/caching/cache-field-behavior/). In general, field policies can be used to customize the cache behavior during read and write operations with [read](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function) and [merge](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function) functions.  -->
+接下来一旦到达列表尾部我们需要fetch 更多的仓库。可以使用 <em>useQuery</em> 提供的 [fetchMore](https://www.apollographql.com/docs/react/data/pagination/#cursor-based) 来实现。 为了描述Apollo Client， 如何将已经存在的仓库merge 到 下一组仓库的缓存中，我们可以使用[field policy](https://www.apollographql.com/docs/react/caching/cache-field-behavior/) 。 一般来说， field 策略可以在使用 [read](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function) 和 [merge](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function) 读写操时作用在自定义缓存行为上。
+
+<!-- Let's add a field policy for the <em>repositories</em> query in the <i>apolloClient.js</i> file: -->
+让我们为 <i>apolloClient.js</i>  文件的  <em>repositories</em> 查询增加一个field 策略
+
+```javascript
+import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
+import Constants from 'expo-constants';
+import { relayStylePagination } from '@apollo/client/utilities'; // highlight-line
+
+const { apolloUri } = Constants.manifest.extra;
+
+const httpLink = createHttpLink({
+  uri: apolloUri,
+});
+
+// highlight-start
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        repositories: relayStylePagination(),
+      },
+    },
+  },
+});
+// highlight-end
+
+const createApolloClient = (authStorage) => {
+  const authLink = setContext(async (_, { headers }) => {
+    try {
+      const accessToken = await authStorage.getAccessToken();
+
+      return {
+        headers: {
+          ...headers,
+          authorization: accessToken ? `Bearer ${accessToken}` : '',
+        },
+      };
+    } catch (e) {
+      console.log(e);
+
+      return {
+        headers,
+      };
+    }
+  });
+
+  return new ApolloClient({
+    link: authLink.concat(httpLink),
+    cache, // highlight-line
+  });
+};
+
+export default createApolloClient;
+```
+
+As mentioned earlier, the format of the pagination's result object and the arguments are based on the Relay's pagination specification. Luckily, Apollo Client provides a predefined field policy, `relayStylePagination`, which can be used in this case.
+如上所如，分页结果对象的格式遵循了 Relay的分写规范。幸运的是， Apollo Client 提供了预定义的filed 策略， `relayStylePagination`， 可以用在这个案例中。
+
 <!-- Next, we need to fetch more repositories once the end of the list is reached. This can be achieved using the [fetchMore](https://www.apollographql.com/docs/react/data/pagination/#cursor-based) function provided by the <em>useQuery</em> hook. Let's alter the <em>useRepositories</em> hook so that it returns a decorated <em>fetchMore</em> function, which calls the actual <em>fetchMore</em> function with the <em>endCursor</em> and updates the query correctly with the fetched data: -->
-接下来，我们需要在列表滚动到末尾时获取更多的仓库。可以使用 <em>useQuery</em> hook提供的 [fetchMore](https://www.apollographql.com/docs/react/data/pagination/#cursor-based)  函数来实现。让我们改变  <em>useRepositories</em> hook 这样它能够返回一个包装的 <em>fetchMore</em>  函数，他会调利用 <em>endCursor</em> 调用真正的 <em>fetchMore</em> 函数，并利用获取到的数据正确地更新查询。
+
+<!-- Next, let's alter the <em>useRepositories</em> hook so that it returns a decorated <em>fetchMore</em> function, which calls the actual <em>fetchMore</em> function with appropriate	arguments so that we can fetch the next set of repositories: -->
+接下来，我们把 <em>useRepositories</em>  hook 改成 修饰好的  <em>fetchMore</em> 函数，它真正调用的是  <em>fetchMore</em> 函数，通过合适的参数我们可以获取下一组仓库。
+<!-- 接下来，我们需要在列表滚动到末尾时获取更多的仓库。可以使用 <em>useQuery</em> hook提供的 [fetchMore](https://www.apollographql.com/docs/react/data/pagination/#cursor-based)  函数来实现。让我们改变  <em>useRepositories</em> hook 这样它能够返回一个包装的 <em>fetchMore</em>  函数，他会调利用 <em>endCursor</em> 调用真正的 <em>fetchMore</em> 函数，并利用获取到的数据正确地更新查询。 -->
 
 ```javascript
 const useRepositories = (variables) => {
@@ -918,37 +985,22 @@ const useRepositories = (variables) => {
   });
 
   const handleFetchMore = () => {
-    const canFetchMore =
-      !loading && data && data.repositories.pageInfo.hasNextPage;
+    const canFetchMore = !loading && data?.repositories.pageInfo.hasNextPage;
 
     if (!canFetchMore) {
       return;
     }
 
     fetchMore({
-      query: GET_REPOSITORIES,
       variables: {
         after: data.repositories.pageInfo.endCursor,
         ...variables,
-      },
-      updateQuery: (previousResult, { fetchMoreResult }) => {
-        const nextResult = {
-          repositories: {
-            ...fetchMoreResult.repositories,
-            edges: [
-              ...previousResult.repositories.edges,
-              ...fetchMoreResult.repositories.edges,
-            ],
-          },
-        };
-
-        return nextResult;
       },
     });
   };
 
   return {
-    repositories: data ? data.repositories : undefined,
+    repositories: data?.repositories,
     fetchMore: handleFetchMore,
     loading,
     ...result,
@@ -956,13 +1008,15 @@ const useRepositories = (variables) => {
 };
 ```
 
+
 <!-- Make sure you have the <em>pageInfo</em> and the <em>cursor</em> fields in your <em>repositories</em> query as described in the pagination examples. You will also need to include the <em>after</em> and <em>first</em> arguments for the query. -->
 
 确保你的  <em>repositories</em> 查询中有 <em>pageInfo</em> 和 <em>cursor</em> 字段，我们在分页的例子中讲到过。你同样会需要 <em>after</em> 和 <em>first</em> 参数来进行查询
 
-<!-- The <em>handleFetchMore</em> function will call the Apollo Client's <em>fetchMore</em> function if there are more items to fetch, which is determined by the <em>hasNextPage</em> property. We also want to prevent fetching more items if fetching is already in process. In this case, <em>loading</em> will be <em>true</em>. In the <em>fetchMore</em> function we are providing the query with an <em>after</em> variable, which receives the latest <em>endCursor</em> value. In the <em>updateQuery</em> we will merge the previous edges with the fetched edges and update the query so that the <em>pageInfo</em> contains the latest information. -->
+<!-- The <em>handleFetchMore</em> function will call the Apollo Client's <em>fetchMore</em> function if there are more items to fetch, which is determined by the <em>hasNextPage</em> property. We also want to prevent fetching more items if fetching is already in process. In this case, <em>loading</em> will be <em>true</em>. In the <em>fetchMore</em> function we are providing the query with an <em>after</em> variable, which receives the latest <em>endCursor</em> value. In the <em>updateQuery</em> we will merge the previous edges with the fetched edges and update the query so that the <em>pageInfo</em> contains the latest information. In the <em>updateQuery</em> we will merge the previous edges with the fetched edges and update the query so that the <em>pageInfo</em> contains the latest information.
+ -->
 
-如果还有更多的结果可以获取，  <em>handleFetchMore</em>函数会调用Apollo 客户端的 <em>fetchMore</em>  函数， 这是由 <em>hasNextPage</em> 属性决定的。我们同样会在获取进行的过程中组织更多的结果获取。在这个例子中  <em>loading</em> 会为 <em>true</em> 。在  <em>fetchMore</em>  函数中，我们提供了一个包含 <em>after</em> 变量的查询，它会接受最新的<em>endCursor</em> 值。在 <em>updateQuery</em> 中我们会利用获取到的edge合并之前的edge，并更新查询结果，这样  <em>pageInfo</em> 就包含了最新的信息了。
+如果还有更多的结果可以获取，  <em>handleFetchMore</em>函数会调用Apollo 客户端的 <em>fetchMore</em>  函数， 这是由 <em>hasNextPage</em> 属性决定的。我们同样会在获取进行的过程中组织更多的结果获取。在这个例子中  <em>loading</em> 会为 <em>true</em> 。在  <em>fetchMore</em>  函数中，我们提供了一个包含 <em>after</em> 变量的查询，它会接受最新的<em>endCursor</em> 值。在 <em>updateQuery</em> 中我们会利用获取到的edge合并之前的edge，并更新查询结果，这样  <em>pageInfo</em> 就包含了最新的信息了。在<em>updateQuery</em>  中，我们会将之前的edge 与获取到的 edge 合并在一起并更新查询，这样 <em>pageInfo</em>  就包含了最新的信息。
 
 The final step is to call the <em>fetchMore</em> function in the <em>onEndReach</em> handler:
 最后一步就是调用  <em>onEndReach</em>  处理器的  <em>fetchMore</em>  函数了：
@@ -1017,6 +1071,7 @@ export default RepositoryList;
     id
     fullName
     reviews(first: 2, after: "WyIxYjEwZTRkOC01N2VlLTRkMDAtODg4Ni1lNGEwNDlkN2ZmOGYuamFyZWRwYWxtZXIuZm9ybWlrIiwxNTg4NjU2NzUwMDgwXQ==") {
+      totalCount
       edges {
         node {
           id
@@ -1034,12 +1089,32 @@ export default RepositoryList;
       pageInfo {
         endCursor
         startCursor
-        totalCount
         hasNextPage
       }
     }
   }
 }
+```
+
+The cache's field policy can be similar as with the <em>repositories</em> query:
+缓存的field 策略可以与 <em>repositories</em> 查询相似：
+```javascript
+const cache = new InMemoryCache({
+  typePolicies: {
+    Query: {
+      fields: {
+        repositories: relayStylePagination(),
+      },
+    },
+    // highlight-start
+    Repository: {
+      fields: {
+        reviews: relayStylePagination(),
+      },
+    },
+    // highlight-end
+  },
+});
 ```
 
 <!-- As with the reviewed repositories list, use a relatively small <em>first</em> argument value while you are trying out the infinite scrolling. You might need to create a few new users and use them to create a few new reviews to make the reviews list long enough to scroll. Set the value of the <em>first</em> argument high enough so that the <em>onEndReach</em> handler isn't called immediately after the view is loaded, but low enough so that you can see that more reviews are fetched once you reach the end of the list. Once everything is working as intended you can use a larger value for the <em>first</em> argument. -->
@@ -1119,8 +1194,8 @@ const GET_AUTHORIZED_USER = gql`
 
 你可以使用 <em>deleteReview</em>  变化来删除一个评论。这个变化有一个入参 也就是待删除的评论id。在变化执行后，最简单的更新评论列表查询的方式就是调用 [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) 函数。
 
-<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本章练习的最后一部分。是时候将你的代码推送到Github 并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中完成你的练习了。
+<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本章练习的最后一部分。是时候将你的代码推送到Github 并在[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021) 中完成你的练习了。
 
 </div>
 
@@ -1222,10 +1297,10 @@ const Main = () => {
 
 <!-- That's it, our application is ready. Good job! We have learned many new concepts during our journey such as setting up our React Native application using Expo, using React Native's core components and adding style to them, communicating with the server, and testing React Native applications. The final piece of the puzzle would be to deploy the application to the Apple iTunes Store and Google Play Store. -->
 
-好啦，我们的应用已经就绪了。干得漂亮！在我们的旅程中我们已经学习了许多新的概念，比如利用Expo 搭建React Native 应用， 使用React Native 的核心组件并向其添加样式，与服务端通信，测试React  Native 应用等。最后一片拼图就是将我们的应用部署到Apple iTunes Store 和 Google Play Store了。
+好啦，我们的应用已经就绪了。干得漂亮！在我们的旅程中我们已经学习了许多新的概念，比如利用Expo 搭建React Native 应用， 使用React Native 的核心组件并向其添加样式，与服务端通信，测试React  Native 应用等。最后一片拼图就是将我们的应用部署到Apple App Store 和 Google Play Store了。
 
 <!-- Deploying the application in entirely <i>optional</i> and it isn't quite trivial, because you also need to fork and deploy the [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api). For the React Native application itself, you first need to create either iOS or Android builds by following Expo's [documentation](https://docs.expo.io/distribution/building-standalone-apps/). Then you can upload these builds to either Apple iTunes Store or Google Play Store. Expo has a [documentation](https://docs.expo.io/distribution/uploading-apps/) for this as well. -->
 
-部署应用是完全 <i>可选的</i>， 并不是十分繁琐，因为你需要fork 和部署 [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) 。对React Native 应用本身来说，你首先需要创建一个iOS或者Android 构建，可以参考Expo 的 [documentation](https://docs.expo.io/distribution/building-standalone-apps/) 。然后你可以将这些构建上传到Apple iTunes Store 或者 Google Play Store。 Expo 也有一个 [documentation](https://docs.expo.io/distribution/uploading-apps/) 来介绍。
+部署应用是完全 <i>可选的</i>， 并不是十分繁琐，因为你需要fork 和部署 [rate-repository-api](https://github.com/fullstack-hy2020/rate-repository-api) 。对React Native 应用本身来说，你首先需要创建一个iOS或者Android 构建，可以参考Expo 的 [documentation](https://docs.expo.io/distribution/building-standalone-apps/) 。然后你可以将这些构建上传到Apple App Store 或者 Google Play Store。 Expo 也有一个 [documentation](https://docs.expo.io/distribution/uploading-apps/) 来介绍。
 
 </div>

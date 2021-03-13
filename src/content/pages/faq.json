@@ -1,5 +1,5 @@
 {
-  "fi": [   
+  "fi": [
     {
       "title": "Miten kurssille ilmoittaudutaan?",
       "text": [
@@ -9,13 +9,13 @@
     {
       "title": "Mikä on kurssin laajuus?",
       "text": [
-        "Kurssin laajuus on <a href='/osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a> 3-9 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisen <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
+        "Kurssin laajuus on <a href='/osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a> 3-12 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisen <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
       ]
-    },    
+    },
     {
       "title": "Milloin on tehtävien ja kokeen deadline?",
       "text": [
-        "Etenemisnopeus on vapaa, kurssilla on ainoastaan yksi deadline sekä tehtäville että kokeelle, 10.1.2021 klo 23.59.59. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadlinea edeltävänä päivänä 9.1.2021."
+        "Etenemisnopeus on vapaa. Jos haluat Avoimen yliopiston opintopisteet, tulee kurssikoe tehdä 10.1.2022 klo 23.59.59 mennessä. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadlinea edeltävänä päivänä 9.1.2022. Tehtävien deadline on 1.3.2022"
       ]
     },
     {
@@ -23,7 +23,7 @@
       "text": [
         "Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät palautussovellukseen, lue lisää <a href='/osa0/yleista#tehtavien-palauttaminen'>täältä</a>."
       ]
-    },    
+    },
     {
       "title": "Pitääkö jokainen osa palauttaa omaan repositorioon?",
       "text": [
@@ -39,15 +39,9 @@
     {
       "title": "Milloin ja miten saan kurssilta suoritusmerkinnän?",
       "text": [
-        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2021. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2022. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
       ]
-    },  
-    {
-      "title": "Mikä kurssilla on muuttunut edellisestä vuodesta?",
-      "text": [
-        "Osiossa 0-4 on ainoastaan vähäisiä muutoksia. Osa 5d eli Cypress.io-kirjastolla tapahtuva <i>end to end -testaus</i> on suurelta osin uusi. Custom hookien käsittely on siirretty osasta 5 hieman laajennettuna osaan 7. <br><br>Reduxia käsittelevä osa 6 keskittyy ensisijaisesti reduxin uuteen hook-perustaiseen apiin. Myös osassa 7 käsiteltävä react-router on uudistunut käyttämään hook-apia. Vähäiselle ylläpidolle jäänyt Semantic UI React -kirjasto on korvattu MaterialUI-kirjastolla. <br><br>GraphQL:ää käsittelevä osa 8 on kokenut paljon päivityksiä erityisesti Apollo Clientin osalta, jonka hook-perustaiset apit ovat vihdoin stabiloituneet. TypeScriptiin keskittyvä osa 9 on kokonaan uusi. <br><br> Viime vuoden kurssimateriaali on nähtävissä osoitteessa <a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>"
-      ]
-    },        
+    },
     {
       "title": "Voinko laajentaa aiempaa kurssisuoritustani?",
       "text": [
@@ -65,19 +59,19 @@
     {
       "title": "How do I sign up for the course?",
       "text": [
-        "You don't have to sign up until you want to do the course exam. The exam is done in the Moodle-system of the Open University. You can find more information <a href='/en/part0/general_info#grading'>here</a>. Please note that only persons with Finnish social security number can take part in exams and get official ECTS credits. For the course certificate signup or Finnish social security number are not needed."
+        "You don't have to sign up until you want to do the course exam. The exam is done in the Moodle-system of the Open University. You can find more information <a href='/en/part0/general_info#grading'>here</a>. <br><br>Please note that only persons with Finnish social security number can take part in exams and get official ECTS credits. <br><br>For the course certificate signup or Finnish social security number are not needed."
       ]
     },
     {
       "title": "How many credits is the course?",
       "text": [
-        "The course is 3-9 ECTS credits <a href='/en/part0/general_info#grading'>depending on the amount of returned exercises</a>. After completing the course you can continue to deepen your knowledge on the subject matter by doing the 1-10 ETCS credit <a href='/en/part0/general_info#full-stack-project'>Full Stack project</a>. Please note that only persons with Finnish social security number can get official ECTS credits. For the course certificate signup or Finnish social security number are not needed."
+        "The course is 3-12 ECTS credits <a href='/en/part0/general_info#grading'>depending on the amount of returned exercises</a>. After completing the course you can continue to deepen your knowledge on the subject matter by doing the 1-10 ETCS credit <a href='/en/part0/general_info#full-stack-project'>Full Stack project</a>. <br><br>Please note that only persons with Finnish social security number can get official ECTS credits. <br><br>For the course certificate signup or Finnish social security number are not needed."
       ]
     },
     {
       "title": "When is the deadline for the exercises and the exam?",
       "text": [
-        "You can complete the course at your own pace. The course has only one deadline for the exercises and the exams 10th January 2021 at 23.59.59. Do keep in mind that you have to sign up for the exam no later than the day before the deadline 9.1.2021."
+        "You can complete the course at your own pace. Deadline for the exercises is 1st March 2022 at 23.59.59. <br><br>If you want Open university credits, the deadline for the exam is 10th January 2022 at 23.59.59. Do keep in mind that you have to sign up for the exam no later than the day before the deadline 9.1.2022. You can also take the exam before the deadline and keep completing any remaining exercises. Once you are done you can claim credits <a href='https://fullstackopen.com/en/part0/general_info#how-to-get-your-credits'> here</a>."
       ]
     },
     {
@@ -101,15 +95,15 @@
     {
       "title": "When and how can I get my credits?",
       "text": [
-        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2021. Read more <a href='/en/part0/general_info/#grading'>here</a>. Please note that only persons with Finnish social security number can get official ECTS credits. For the course certificate signup or Finnish social security number are not needed."
+        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2022. Read more <a href='/en/part0/general_info/#grading'>here</a>. <br><br>Please note that only persons with Finnish social security number can get official ECTS credits. <br><br>For the course certificate signup or Finnish social security number are not needed."
       ]
     },
     {
       "title": "Do I get a certificate after completing the course?",
       "text": [
-        "Yes, certificate is available to all who pass the course by 10th January 2021. You can download the certificate after completing the course from the exercise submission system. For the course certificate signup to Open university and Finnish social security number are not needed."
+        "Yes! You can download the certificate after completing the course from the exercise submission system. For the course certificate signup to Open university and Finnish social security number are not needed."
       ]
-    },    
+    },
     {
       "title": "Do I need a Finnish social security number to get the course certificate?",
       "text": [
@@ -123,17 +117,11 @@
       ]
     },
     {
-      "title": "What has changed since the last year?",
-      "text": [
-        "There are only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content. <br><br> Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript is completely new. <br><br> Last year's course material can be found from <a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>."
-      ]
-    },        
-    {
       "title": "I started the course last year, how should I continue?",
       "text": [
-        "Read more from <a href='/en/part0/general_info#expanding-a-previously-completed-course'>here</a>"
+        "Read more from <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>here</a>"
       ]
-    },    
+    },
     {
       "title": "I heard that I could get a job interview by completing the course.",
       "text": [
@@ -141,23 +129,103 @@
       ]
     }
   ],
+  "es": [
+    {
+      "title" : "¿Cómo me registro en el curso?",
+      "text" : [
+        "No tienes que registrarte hasta que quieras hacer el examen del curso. El examen se realiza en el sistema Moodle de la Open University. Puedes encontrar más información <a href='/en/part0/general_info#grading '>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden participar en los exámenes y obtener créditos ECTS oficiales. Para el certificado del curso, no es necesario registrarse ni número de seguro social finlandés."
+      ]
+    },
+    {
+      "title" : "¿Cuántos créditos tiene el curso?",
+      "text" : [
+        "El curso es de 3-9 créditos ECTS <a href='/en/part0/general_info#grading'> dependiendo de la cantidad de ejercicios devueltos </a>. Después de completar el curso, puede continuar profundizando sus conocimientos sobre el tema importa haciendo <a href='/en/part0/general_info#full-stack-project'>proyecto Full Stack</a> por créditos ETCS 1-10. Tenga en cuenta que solo las personas con número de seguridad social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
+      ]
+    },
+    {
+      "title": "¿Cuándo es la fecha límite para los ejercicios y el examen?",
+      "text" : [
+        "Puedes completar el curso a tu propio ritmo. El curso solo tiene una fecha límite para los ejercicios y los exámenes el 10 de enero de 2022 a las 23.59.59. Ten en cuenta que debes registrarte para el examen a más tardar el día anterior la fecha límite 9.1.2022."
+      ]
+    },
+    {
+      "title" : "¿Cómo envío los ejercicios?",
+      "text" : [
+        "Los ejercicios se envían a GitHub y se marcan los ejercicios como realizados en el sistema de envío de ejercicios. Puede leer más en <a href='/en/part0/general_info#submitting-exercises'>aquí</a>."
+      ]
+    },
+    {
+      "title": "¿Tengo que enviar cada parte a un repositorio separado?",
+      "text" : [
+        "No. Puede usar uno o más repositorios, lo más importante es nombrar todo en un repositorio claramente"
+      ]
+    },
+    {
+      "title": "¿Puedo editar un envío?",
+      "text": [
+        "No. Todos los ejercicios de una parte deben enviarse al mismo tiempo. Si marcó los ejercicios incorrectamente por accidente o escribió el nombre del repositorio incorrectamente, envíe un correo electrónico a matti.luukkainen@helsinki.fi."
+      ]
+    },
+    {
+      "title": "¿Cuándo y cómo puedo obtener mis créditos?",
+      "text": [
+        "Puede obtener sus créditos después de enviar suficientes ejercicios para aprobar el curso, aprobar el examen del curso e informarnos a través del sistema de envío de ejercicios que está listo con el curso. La fecha límite es el 10 de enero de 2022. Leer más <a href='/en/part0/general_info/#grading'>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
+      ]
+    },
+    {
+      "title" : "¿Recibo un certificado después de completar el curso?",
+      "text": [
+        "Sí, el certificado está disponible para todos los que aprueben el curso antes del 10 de enero de 2022. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios. Para el certificado del curso, no es necesario registrarse en la universidad abierta y el número de seguro social finlandés"
+      ]
+    },
+    {
+      "title": "¿Necesito un número de seguro social finlandés para obtener el certificado del curso?",
+      "text": [
+        "Para el certificado del curso no se necesita el número de seguro social finlandés. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios."
+      ]
+    },
+      {
+      "title": "¿Debo registrarme en Open University para obtener el certificado del curso?",
+      "text": [
+        "Para el certificado del curso, no es necesario registrarse en Open University. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios"
+      ]
+    },
+    {
+      "title" : " ¿Qué ha cambiado desde el año pasado? " ,
+      "text " : [
+        "Solo hay cambios menores en las partes 0-4. La parte 5d, <i>prueba de extremo a extremo</i> usando la biblioteca Cypress.io- es material casi completamente nuevo. El uso de ganchos personalizados se ha movido de la parte 5 a la parte 7 con contenido nuevo. <br> <br> La parte 6, que trata sobre Redux, se concentra en la nueva api de redux basada en hook. El material sobre react-router en la parte 7 también se ha actualizado para usar el hook -api. Semantic UI React ha sido reemplazada con la biblioteca MaterialUI debido a la falta de mantenimiento. <br> <br> La parte 8 en GraphQL tiene actualizaciones importantes, especialmente en Apollo Client, que finalmente tiene apis basadas en hook estable. La parte 9 en TypeScript es completamente nuevo. <br><br> El material del curso del año pasado se puede encontrar en <a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</ a>. "
+      ]
+    },
+    {
+      "title" : " Comencé el curso el año pasado, ¿cómo debo continuar? " ,
+      "text " : [
+        "Lea más de eso <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>aquí</a>"
+      ]
+    },
+    {
+      "title": "Escuché que podría obtener una entrevista de trabajo completando el curso",
+      "text " : [
+        "Así es. Si completa el curso con créditos completos y completa el trabajo práctico con 10 créditos, obtendrá una entrevista de trabajo con nuestros socios. Leer más <a href='/en/part0/general_info#interview-promise'>aquí</a>. Tenga en cuenta que sólo las personas con número de seguridad social finlandesa pueden conseguir tomar parte a examen y obtener créditos ECTS oficiales."
+      ]
+    }
+  ],
   "zh": [
     {
       "title": "我如何报名这门课程呢？",
       "text": [
-        "除非你想参加课程考试，否则你并不必报名。 考试是在开放大学的 Moodle 系统中完成的。 在<a href='/zh/part0/general_info#grading'>这里</a>.你可以找到更多资料。请注意，只有拥有芬兰社保账号的人才能参加考试并获得官方的 ECTS 学分。 而对于课程证书，不需要报名或芬兰社保号码。"
+        "除非你想参加课程考试，否则你并不必报名。 考试是在开放大学的 Moodle 系统中完成的。 在<a href='/zh/part0/general_info#grading'>这里</a>.你可以找到更多资料。<br><br>请注意，只有拥有芬兰社保账号的人才能参加考试并获得官方的 ECTS 学分。 <br><br>而对于课程证书，不需要报名或芬兰社保号码。"
       ]
     },
     {
       "title": "这门课多少学分呢？",
       "text": [
-        "该课程为3-9个ECTS学分，这<a href='/zh/part0/general_info#grading'>取决于您提交的练习次数</a>。 完成课程后，您可以通过进行<a href='/zh/part0/general_info#full-stack-project'> Full Stack项目</a>来加深对课程内容的了解，从而获得1-10 ETCS学分。 请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 对于课程证书，不需要注册或芬兰社保号码。"
+        "该课程为3-12个ECTS学分，这<a href='/zh/part0/general_info#grading'>取决于您提交的练习次数</a>。 完成课程后，您可以通过进行<a href='/zh/part0/general_info#full-stack-project'> Full Stack项目</a>来加深对课程内容的了解，从而获得1-10 ETCS学分。 <br><br>请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 <br><br>对于课程证书，不需要注册或芬兰社保号码。"
       ]
     },
     {
       "title": "练习与考试的截止日期是什么时候呢？",
       "text": [
-        "您可以按照自己的进度完成课程。 该课程的练习和考试只有一个截止日期，即2021年1月10日的23点59分59秒。 请记住，您必须在截止日期的前一天，即2020年1月9日报名参加考试。"
+        "您可以按照自己的进度完成课程。 提交联系的截止日期但是2021年3月1日的23点59分59秒，如果你想要获得公开大学的学分，截止日期为2021年1月10日的23点59分59秒。 请记住，您必须在截止日期的前一天，即2020年1月9日报名参加考试。"
       ]
     },
     {
@@ -181,15 +249,15 @@
     {
       "title": "我什么时候，以及如何获得自己的学分呢？",
       "text": [
-        "当你提交足够的练习，达到课程通过标准后，通过了课程考试，并通过练习提交系统告知我们所有准备已经妥当，才能获得学分。 截止日期是2020年1月10日。在<a href='/zh/part0/general_info/#grading'>此处</a>了解更多信息。 请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 对于课程证书，不需要注册或芬兰社保号码。"
+        "当你提交足够的练习，达到课程通过标准后，通过了课程考试，并通过练习提交系统告知我们所有准备已经妥当，才能获得学分。 截止日期是2020年1月10日。在<a href='/zh/part0/general_info/#grading'>此处</a>了解更多信息。 <br><br>请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 <br><br>对于课程证书，不需要注册或芬兰社保号码。"
       ]
     },
     {
       "title": "在我完成这门课程后能够获得结业证书吗？",
       "text": [
-        "是的，所有在2021年1月10日之前通过课程的人都可获得证书。您可以从练习提交系统中完成课程后下载证书。 对于课程证书，不需要注册公开大学和芬兰的社保号码。"
+        "是的！您可以从练习提交系统中完成课程后下载证书。 对于课程证书，不需要注册公开大学和芬兰的社保号码。"
       ]
-    },    
+    },
     {
       "title": "为了获得课程的结业证书，我需要芬兰的社保号码吗？",
       "text": [
@@ -203,15 +271,9 @@
       ]
     },
     {
-      "title": "这门课与去年的内容有什么不同？",
-      "text": [
-        "对于0~4章节，只有一些很小的改动。第5d章节，<i>端到端测试</i> 利用了Cypress.io 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。 <br><br> 第6章是讲Redux的，主要介绍了新的基于hook的redux API。第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。<br><br> 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。第9章是全新的内容。<br><br> 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。"
-      ]
-    },
-    {
       "title": "我是从去年的课程开始学习的，我应该怎么续接今年的课程呢？",
       "text": [
-        "阅读更多 <a href='/zh/part0/general_info#expanding-a-previously-completed-course'>这一章节</a>的内容。"
+        "阅读更多 <a href='/zh/part0/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86#expanding-on-a-previously-completed-course'>这一章节</a>的内容。"
       ]
     }
   ]

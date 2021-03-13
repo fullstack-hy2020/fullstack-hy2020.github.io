@@ -108,7 +108,7 @@ CI=true npm test
 ```
 
 
-**NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be gotten rid of by installing Watchman.
+**NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
 
 Instructions for installing Watchman on different operating systems can be found on the official Watchman website: https://facebook.github.io/watchman/
@@ -300,7 +300,7 @@ const mockHandler = jest.fn()
 The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
 
 ```js
-const button = getByText('make not important')
+const button = component.getByText('make not important')
 fireEvent.click(button)
 ```
 
@@ -558,12 +558,12 @@ CI=true npm test -- --coverage
 
 <!-- Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponenttien testaamattomat koodirivit: -->
 A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory. 
-The report will tell us i.e the lines of untested code in each component:
+The report will tell us the lines of untested code in each component:
 
 ![](../../images/5/19ea.png)
 
 
-You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
+You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-8).
 </div>
 
 
@@ -579,12 +579,12 @@ Make a test which checks that the component displaying a blog renders the blog's
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 Add CSS-classes to the component to help the testing as necessary. 
 
-#### 5.14: Blog list tests, step2
+#### 5.14*: Blog list tests, step2
 
 <!-- Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu. -->
 Make a test which checks that the blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 
-#### 5.15: Blog list tests, step3
+#### 5.15*: Blog list tests, step3
 
 <!-- Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa. -->
 Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 

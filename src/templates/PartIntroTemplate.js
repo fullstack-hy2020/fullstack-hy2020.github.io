@@ -19,6 +19,7 @@ import navigation from '../content/partnavigation/partnavigation';
 import { partColors } from './partColors';
 import path from 'path';
 import snakeCase from 'lodash/fp/snakeCase';
+import getPartTranslationPath from '../utils/getPartTranslationPath';
 
 export default function PartIntroTemplate({ data }) {
   const { markdownRemark } = data;
@@ -44,7 +45,7 @@ export default function PartIntroTemplate({ data }) {
     <Layout>
       <SEO
         lang={lang}
-        title={`Fullstack ${lang === 'en' ? 'part' : lang === 'zh' ? 'part' : 'osa'}${part}`}
+        title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part}`}
         description={mainSEOdescription[lang]}
         keywords={[
           ...mainSEOtags,
@@ -67,11 +68,11 @@ export default function PartIntroTemplate({ data }) {
                 {
                   backgroundColor: colors[partColors[part]],
                   text: 'Fullstack',
-                  link: `/${lang === 'en' ? 'en/' : lang === 'zh' ? 'zh/' :''}#course-contents`,
+                  link: `/${lang === 'fi' ? '' : `${lang}/`}#course-contents`,
                 },
                 {
                   backgroundColor: colors['black'],
-                  text: `${lang === 'en' ? 'Part' : lang === 'zh' ? 'Part' : 'Osa'} ${part}`,
+                  text: `${lang === 'fi' ? 'Osa' : 'Part'} ${part}`,
                 },
               ]}
             />
@@ -88,9 +89,11 @@ export default function PartIntroTemplate({ data }) {
                   return {
                     backgroundColor: colors['white'],
                     letter: n,
-                    path: `/${
-                      lang === 'en' ? 'en/part' :lang === 'zh' ? 'zh/part' : 'osa'
-                    }${part}/${snakeCase(navigation[lang][part][n])}`,
+                    path: getPartTranslationPath(
+                      lang,
+                      part,
+                      `/${snakeCase(navigation[lang][part][n])}`
+                    ),
                     text: `${n} ${navigation[lang][part][n]}`,
                   };
                 })}

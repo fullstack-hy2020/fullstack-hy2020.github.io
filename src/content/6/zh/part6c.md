@@ -99,7 +99,7 @@ const reducer = combineReducers({
   filter: filterReducer,
 })
 
-const store = createStore(reducer)
+const store = createStore(reducer, composeWithDevTools())
 
 // highlight-start
 noteService.getAll().then(notes =>
@@ -167,13 +167,13 @@ import React, {useEffect} from 'react' // highlight-line
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes'
+import noteService from './services/notes' // highlight-line
 import { initializeNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
-  const dispatch = useDispatch()
   // highlight-start
+  const dispatch = useDispatch()
   useEffect(() => {
     noteService
       .getAll().then(notes => dispatch(initializeNotes(notes)))
@@ -323,8 +323,8 @@ export const createNote = (data) => {
 <!-- Changing the importance of notes could be implemented using the same principle, meaning making an asynchronous method call to the server and then dispatching an appropriate action. -->
 更改便笺的重要性可以使用相同的原则实现，这意味着对服务器进行异步方法调用，然后调度适当的action。
 
-<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) in the branch <i>part6-3</i>. -->
-应用代码的当前状态可以在分支<i>part6-3</i> 中的 [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3)上找到。
+<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3) in the branch <i>part6-3</i>. -->
+应用代码的当前状态可以在分支<i>part6-3</i> 中的 [github](https://github.com/fullstack-hy/redux-notes/tree/part6-3)上找到。
 
 </div>
 
@@ -342,7 +342,7 @@ export const createNote = (data) => {
 当应用启动时，从使用 json-server 实现的后端获取八卦。
 
 <!-- As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json). -->
-作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)。
+作为初始的后端数据，你可以使用，例如[this](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json)。
 
 #### 6.14 Anecdotes and the backend, 步骤2
 <!-- Modify the creation of new anecdotes, such that the anecdotes are stored in the backend. -->
@@ -533,8 +533,8 @@ const NewNote = () => {
 }
 ```
 
-<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>. -->
-应用代码的当前状态可以在分支<i>part6-4</i> 中的[github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4)上找到。
+<!-- The current state of the code for the application can be found on [github](https://github.com/fullstack-hy/redux-notes/tree/part6-4) in the branch <i>part6-4</i>. -->
+应用代码的当前状态可以在分支<i>part6-4</i> 中的[github](https://github.com/fullstack-hy/redux-notes/tree/part6-4)上找到。
 
 </div>
 

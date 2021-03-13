@@ -425,10 +425,10 @@ useEffect(() => {
 ```
 
 
-<!-- The hook's second parameter is _result.data_, so function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>.  -->
-Hook的第二个参数是 _result_ <i> person</i> 的详细信息时，作为Hook的第二个参数给定的函数都会被执行。 
-<!-- Would we not handle the update in a controlled way in a hook, returning from a single person view to a list of all persons would cause problems.  -->
-我们不会在Hook中以一种受控的方式来处理更新，从单个人视图返回到所有人的列表会导致问题。
+<!-- The hook's second parameter is _result.data_, so the function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>.  -->
+Hook的第二个参数是 _result.data_ <i>每次查询获取不同人的详细信息时</i>，作为Hook的第二个参数给定的函数都会被执行。 
+<!-- Without handling the update in a controlled way in a hook, returning from a single person view to an all persons view would cause problems.   -->
+在hook 中如果不以受控的方式处理更新，无论是返回单人视图还是所有人的视图都会产生问题。
 
 <!-- If the state _person_ has a value, instead of showing a list of all persons, only the details of one person are shown.  -->
 如果状态 _person_ 有一个值，则不显示所有人员的列表，而只显示一个人的详细信息。
@@ -580,8 +580,8 @@ export default PersonForm
 表单的代码非常简单，并突出显示了有趣的行。
 <!-- We can define mutation function using the _useMutation_-hook. -->
 我们可以使用 useMutation-hook 来定义Mutation函数。
-<!-- The hook returns an <i>array</i>, first element of which contains the result of the mutation. -->
-Hook返回一个<i>数组</i>，其中第一个元素包含Mutation的结果。 
+<!-- The hook returns an <i>array</i>, first element of which contains the function to cause the mutation. -->
+Hook返回一个<i>数组</i>，其中第一个元素包含产生mutation的函数。 
 
 ```js
 const [ createPerson ] = useMutation(CREATE_PERSON)
@@ -770,9 +770,9 @@ const App = () => {
 
   return (
     <div>
-      <Notify errorMessage={errorMessage} />
+      <Notify errorMessage={errorMessage} /> // highlight-line
       <Persons persons = {result.data.allPersons} />
-      <PersonForm setError={notify} />
+      <PersonForm setError={notify} /> // highlight-line
     </div>
   )
 }
@@ -991,7 +991,7 @@ useEffect(() => {
 
 
 
-<!-- However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If its not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on... -->
+<!-- However this solution does not work is the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If it's not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on... -->
 但是这个解决方案不起作用，因为 _notify_-function 没有封装到[useCallback](https://reactjs.org/docs/hooks-reference.html#useCallback)-function 中。 如果不是，这将导致一个无限循环。 当 _App_ 组件在通知被删除后重新渲染，会创建一个<i>new version</i> 的 _notify_ ，这会导致 effect 函数被执行，从而导致一个新的通知等等等等
 
 <!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i> -->
@@ -999,11 +999,11 @@ useEffect(() => {
 
 ### Apollo Client and the applications state
 
-
-<!-- In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL-applications.  -->
+<!-- In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL applications.  -->
 在我们的示例中，应用状态的管理主要由 Apollo Client 负责。 这是适用于 graphql 应用的典型解决方案。
-<!-- Our example uses the state of the React components only to manage the state of a form and to show error notifications. When using GraphQL it can be, that there are no more justifiable reasons to move the management of the applications state to Redux at all.  -->
-我们的示例只使用 React 组件的状态来管理表单的状态并显示错误通知。 当使用 GraphQL 时，根本没有理由将应用状态的管理转移到 Redux。
+
+<!-- Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL. -->
+我们的示例只使用 React 组件中的 state 来管理表单的状态，来显示错误通知。 也就是当使用GraphQL时没有合适的理由来使用Redux 来管理应用状态。
 
 <!-- When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/). -->
 必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/)。

@@ -16,8 +16,8 @@ lang: zh
 <!-- It is beneficial to at least be familiar with Class Components to some extent, since the world contains a lot of old React code, which will probably never be completely rewritten using the updated syntax. -->
 至少在一定程度上熟悉类组件是有益的，因为这个世界包含了很多旧的 React 代码，这些代码可能永远不会使用更新的语法完全重写。
 
-<!-- Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json). -->
-让我们通过生成另一个非常熟悉的八卦应用来了解类组件的主要特性。 我们使用<i>json-server</i> 将八卦存储在文件<i>db.json</i> 中。 文件的内容是从[这里](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json)提取的。
+<!-- Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json). -->
+让我们通过生成另一个非常熟悉的八卦应用来了解类组件的主要特性。 我们使用<i>json-server</i> 将八卦存储在文件<i>db.json</i> 中。 文件的内容是从[这里](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json)提取的。
 
 <!-- The initial version of the Class Component look like this -->
 类组件的初始版本如下所示
@@ -221,8 +221,8 @@ const App = () => {
 <!-- A notable benefit of using Functional components is not having to deal with the self referencing _this_-reference of the Javascript class. -->
 **使用 函数式组件的一个显著好处是不必处理 Javascript 类的 _this_ 引用的自引用。**
 
-<!-- In my opinion, and the opinion of many others, Class Components offer basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (16th February 2020) isn't yet in use by functional components. -->
-在我看来，以及其他许多人的看法中，类组件基本上没有比通过Hook增强的函数组件提供任何好处，除了所谓的[错误边界](https://reactjs.org/docs/error-boundaries.html)机制，它目前(2020年2月16日)还没有被函数组件使用。
+<!-- In my opinion, and the opinion of many others, Class Components offer basically no benefits over Functional components enhanced with hooks, with the exception of the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (15th February 2021) isn't yet in use by functional components. -->
+在我看来，以及其他许多人的看法中，类组件基本上没有比通过Hook增强的函数组件提供任何好处，除了所谓的[错误边界](https://reactjs.org/docs/error-boundaries.html)机制，它目前(2021年2月15日)还没有被函数组件使用。
 
 <!-- When writing fresh code [there is no rational reason to use Class Components](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) if the project is using React with a version number 16.8 or greater. On the other hand, [there is currently no need to rewrite all old React code](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) as Functional components. -->
 在编写新代码时，如果项目使用的是 React 16.8或更高，那么[没有理由使用类组件](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both)。 另一方面，[目前没有必要重写所有旧的React代码](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components)作为函数组件。
@@ -241,8 +241,8 @@ const App = () => {
 <!-- Sometimes there may be a situation where the entire application is to be put into a single repository. In this case a common approach is to put the <i>package.json</i> and <i>webpack.config.js</i> in the root directory, as well as place the frontend and backend code into their own directories, e.g. <i>client</i> and <i>server</i>. -->
 有时可能会出现将整个应用放入单个存储库的情况。 在这种情况下，一种常见的方法是将<i>package.json</i> 和<i>webpack.config.js</i> 放在根目录中，并将前端和后端代码放到它们自己的目录中，例如<i>client</i> 和<i>server</i>。
 
-<!-- [This repository]((https://github.com/fullstack-hy2020/create-app)) provides one possible starting point for the organization of "single-repository-code". -->
-[此存储库](https://github.com/fullstack-hy2020/create-app)为“单一存储库代码”的组织提供了一个可能的起点。
+<!-- [This repository]((https://github.com/fullstack-hy/create-app)) provides one possible starting point for the organization of "single-repository-code". -->
+[此存储库](https://github.com/fullstack-hy/create-app)为“单一存储库代码”的组织提供了一个可能的起点。
 
 ### Changes on the server
 【服务器上的更改】
@@ -317,12 +317,12 @@ ReactDOM.render(
 
 
 
-<!-- As I mentioned at the end of [第6章](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this i.e [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
-正如我在[第6章](/zh/part6/connect方法#redux-and-the-component-state)的结尾所提到的，React [Context-api](https://reactjs.org/docs/context.html)为集中式状态管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以阅读更多关于这个主题的 [这个网站](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [这个网站](https://hswolff.com/blog/how-to-usecontext-with-usereducer/)。
+<!-- As I mentioned at the end of [第6章](/osa6/connect#redux-ja-komponenttien-tila), the React [Context-api](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state menagement without the need for third party libraries such as redux. You can read more about this  [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). -->
+正如我在[第6章](/zh/part6/connect方法#redux-and-the-component-state)的结尾所提到的，React [Context-api](https://reactjs.org/docs/context.html)为集中式状态管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以在[这个网站](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [这个网站](https://hswolff.com/blog/how-to-usecontext-with-usereducer/) 阅读更多关于这个主题的内容。
 
 ### React/node-application security
-<!-- So far during the course we have not touched on information security at all. We do not have much time for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
-到目前为止，我们还没有触及安全。 我们现在也没有太多的时间，但是幸运的是系里有一个 MOOC-course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1)来处理这个重要的话题。
+<!-- So far during the course we have not touched on information security at all. We do not have much time this for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
+到目前为止，我们还没有触及许多的安全知识。 我们现在也没有太多的时间，但是幸运的是系里有一个 MOOC-course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1)来处理这个重要的话题。
 
 <!-- We will, however, take a look at some things specific to this course. -->
 不过，我们还是要看一下这门课程的一些具体内容。
@@ -664,8 +664,8 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 
 
-<!-- If you are handling times and dates, [moment](https://momentjs.com/) and a new(er) release [date-fns](https://github.com/date-fns/date-fns) offer good tools for that. -->
-如果你正在处理时间和日期，[moment](https://momentjs.com/)和一个新版本[date-fns](https://github.com/date-fns/date-fns)提供了很好的工具。
+<!-- If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that. -->
+如果你正在处理时间和日期，[date-fns](https://github.com/date-fns/date-fns) 提供了很好的处理时间和日期的工具。
 
 
 
@@ -683,8 +683,8 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 <!-- For single page applications the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) than for traditional web-applications where the entire page is loaded. The [React Google Analytics](https://github.com/react-ga/react-ga) -library offers a solution. -->
 对于单页应用来说，收集用户和页面交互的分析数据比传统的加载整个页面的网页应用 [更具有挑战性](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications)。 [React Google Analytics](https://github.com/react-ga/react-ga)  数据库提供了一个解决方案。
 
-<!-- You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) -library. -->
-在使用 Facebook 非常流行的 [React Native](https://facebook.github.io/react-native/) 库开发移动应用时，你可以利用你的 React 知道如何开发。
+<!-- You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) -library, that is topic of the [part 10](/en/part10) of the course.-->
+在使用 Facebook 非常流行的 [React Native](https://facebook.github.io/react-native/) 库开发移动应用时，你可以利用你的 React 知道如何开发，这也是本课程[第十章](/zh/part10)的内容。
 
 <!-- When it comes to the tools used for the management and bundling of JavaScript projects the community has been very fickle. Best practices have changed rapidly (the years are approximations, nobody remembers that far back in the past): -->
 当涉及到用于管理和捆绑 JavaScript 项目的工具时，社区变化很大。 最佳实践发生了迅速的变化(年份是近似值，没有人记得那么久以前) :
@@ -699,6 +699,9 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 <!-- Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. Few years ago [Parcel](https://parceljs.org) started to make the rounds marketing itself as simpe (which Webpack absolutely is not) and faster than Webpack. However after a promising start Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack.  -->
 在 webpack 开始主导市场之后，赶时髦的人似乎对工具开发失去了兴趣。 几年前，[Parcel](https://parceljs.org)开始以简单(Webpack 绝对不是)和快于 Webpack 的方式推销自己。 然而，在一个有希望的开始后，Parcel 并没有聚集任何动力，而且它开始看起来将不会是 Webpack 的终结者。
+
+<!-- Another notable mention is the [Rome](https://rome.tools/) library, which aspires to be an all-encompassing toolchain to unify linter, compiler, bundler, and more. It is currently under heavy development since the initial commit earlier this year on Feb 27, but the outlook sure seems promising. -->
+另一个值得注意的是 [Rome](https://rome.tools/)  这个库，它想要将统一规范、编译打包等聚合到一条工具链中，并提供了些其他的特性。它自从今年早期的2月27号首次提交开始，目前一直处在繁重的开发阶段，不过前景是相当看好的。
 
 <!-- The site <https://reactpatterns.com/> provides a concise list of best practices for React, some of which are already familiar from this course. Another similar list is [react bits](https://vasanthk.gitbooks.io/react-bits/). -->
 网站 <https://reactpatterns.com/> 提供了一个简明的React最佳实践列表，其中一些已经在本课程中熟悉了。 另一个类似的列表是[react bits](https://vasanthk.gitbooks.io/react-bits/)。

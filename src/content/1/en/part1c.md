@@ -176,15 +176,26 @@ const Hello = ({ name, age }) => {
 
 So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button?
 
-Let's start with the following:
+Let's start with the following. File <i>App.js</i> becomes:
 
 ```js
+import React from 'react'
+
 const App = (props) => {
   const {counter} = props
   return (
     <div>{counter}</div>
   )
 }
+
+export default App
+```
+
+And file <i>index.js</i> becomes:
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
 
 let counter = 1
 
@@ -193,6 +204,9 @@ ReactDOM.render(
   document.getElementById('root')
 )
 ```
+
+
+**Note** when you change file <i>index.js</i> React does not refresh the page automatically so you need to reload the browser page to get the new content shown.
 
 The App component is given the value of the counter via the _counter_ prop. This component renders the value to the screen. What happens when the value of _counter_ changes? Even if we were to add the following
 
@@ -203,13 +217,6 @@ counter += 1
 the component won't re-render. We can get the component to re-render by calling the _ReactDOM.render_ method a second time, e.g. in the following way:
 
 ```js
-const App = (props) => {
-  const { counter } = props
-  return (
-    <div>{counter}</div>
-  )
-}
-
 let counter = 1
 
 const refresh = () => {
@@ -245,11 +252,20 @@ All of our components up till now have been simple in the sense that they have n
 
 Next, let's add state to our application's <i>App</i> component with the help of React's [state hook](https://reactjs.org/docs/hooks-state.html).
 
-We will change the application to the following:
+We will change the application as follows.  <i>index.js</i> goes back to
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, 
+document.getElementById('root'))
+```
+
+and <i>App.js</i> changes to the following:
 
 ```js
 import React, { useState } from 'react' // highlight-line
-import ReactDOM from 'react-dom'
 
 const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
@@ -266,13 +282,11 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
-In the first row, the application imports the _useState_ function:
+
+In the first row, the file imports the _useState_ function:
 
 ```js
 import React, { useState } from 'react'
@@ -468,7 +482,7 @@ This would completely break our application:
 ![](../../images/1/5b.png)
 
 <!-- Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on -->
-What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write
+What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write:
 
 ```js
 <button onClick={setCounter(counter + 1)}>
@@ -476,10 +490,10 @@ What's going on? An event handler is supposed to be either a <i>function</i> or 
 
 <!-- tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen... -->
 the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the component for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
-This will cause the component to be re-rendered, react will execute the setCounter function call again, and the state will change leading to another rerender...
+This will cause the component to be re-rendered, React will execute the setCounter function call again, and the state will change leading to another rerender...
 
 <!-- Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -->
-Let's define the event handlers like we did before
+Let's define the event handlers like we did before:
 
 ```js
 <button onClick={() => setCounter(counter + 1)}> 
@@ -523,7 +537,7 @@ const App = () => {
 ```
 
 <!-- Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onClick</i>-attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon: -->
-Here the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function:
+Here, the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function:
 
 ```js
 <button onClick={increaseByOne}> 
@@ -595,7 +609,7 @@ const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
-  const decreaseByOne = () => setCounter(counter - 1)
+  const decreaseByOne = () => setCounter(counter - 1)  // highlight-line
   const setToZero = () => setCounter(0)
 
   return (

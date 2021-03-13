@@ -93,9 +93,8 @@ const App = () => {
 export default App
 ```
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
-
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>. -->
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
 
 <!-- The login form is handled the same way we handled forms in -->
 <!-- [第2章](/zh/part2/表单). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state. -->
@@ -344,8 +343,8 @@ return (
 我们的主组件 <i>App</i> 现在看起来十分臃肿。我们现在做的修改意味着，表单应该重构到它自己的组件中。但我们把这个作为可选的练习放到课后。
 
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-2) <i>part5-2</i> 分支上找到。
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-2), branch <i>part5-2</i>. -->
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy/part2-notes/tree/part5-2) <i>part5-2</i> 分支上找到。
 
 ### Creating new notes
 【创建新的 Note】
@@ -593,8 +592,9 @@ window.localStorage.clear()
 ```
 
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/part2-notes/tree/part5-3) <i>part5-3</i> 分支上找到。
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-3), branch <i>part5-3</i>. -->
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy/part2-notes/tree/part5-3) <i>part5-3</i> 分支上找到。
+
 
 </div>
 
@@ -602,8 +602,8 @@ window.localStorage.clear()
 
 
 ### Exercises 5.1.-5.4.
-<!-- We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001.  -->
-现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[这个应用](https://GitHub.com/fullstack-hy2020/bloglist-frontend)作为你的解决方案的基础。 应用期望您的后端在3001端口上运行。
+<!-- We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001.  -->
+现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[这个应用](https://github.com/fullstack-hy/bloglist-frontend/)作为你的解决方案的基础。 应用期望您的后端在3003端口上运行。
 
 <!-- It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.  -->
 只要提交完成的解决方案就足够了。 您可以在每次练习之后进行一次提交，但这并不强制。
@@ -621,11 +621,11 @@ window.localStorage.clear()
 **警告:**如果你注意到你正在混合 async/await 和_then_ 命令，你99.9% 正在做错误的事情。 要么使用其中之一，不要两者都使用。
 
 #### 5.1: bloglist frontend, 步骤1
-<!-- Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command:  -->
-使用如下命令从[Github](https://Github.com/fullstack-hy2020/bloglist-frontend)克隆应用:
+<!-- Clone the application from [Github](https://github.com/fullstack-hy/bloglist-frontend) with the command:  -->
+使用如下命令从[Github](https://Github.com/fullstack-hy/bloglist-frontend)克隆应用:
 
 ```bash
-git clone https://github.com/fullstack-hy2020/bloglist-frontend
+git clone https://github.com/fullstack-hy/bloglist-frontend
 ```
 
 <!-- <i>remove the git configuration of the cloned application</i> -->
@@ -724,6 +724,36 @@ npm start
 
 <!-- The notifications must be visible for a few seconds. It is not compulsory to add colors.  -->
 通知必须可见几秒钟，添加颜色不是强制性的。
+
+</div>
+
+
+<div class="content">
+
+### A note on using local storage
+【关于使用本地存储的一些提示】
+
+<!-- At the [end](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) of the last part we mentioned that the challenge of the token based authentication is how to cope with the situation when the API access of the token holder to the API needs to be revoked. -->
+在上一章节的 [结束](/zh/part4) 我们提到token认证的一些挑战是如何处理当token 持有者的API访问权限被回收的问题。
+
+<!-- There are two solutions to the problem. The first one is to limit the validity period of a token. This forces the user to relogin to the app once the token has expired. The other approach is to save the validity information of each token to the backend database. This solution is often called a <i>server side session</i>. -->
+有两种解决方案。第一种是限制token 验证的时间周期。这回在token过期的时候强迫用户重新登录。另一种方法是为每一个token 在后台数据库保存有效性信息。这种方式通常叫做<i>服务端session</i>。
+
+
+<!-- No matter how the validity of tokens is checked and ensured, saving a token in the local storage might contain a security risk if the application has a security vulnerability that allows [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) attacks. A XSS attack is possible if the application would allow a user to inject arbitrary JavaScript code e.g. using a form that the app would then execute. When using React in a sensible manner it should not be possible since [React sanitizes](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) all text that it renders, meaning that it is not executing the rendered content as JavaScript. -->
+无论token的有效性如何被检查或确认，如果应用有允许  [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) 攻击的安全漏洞，把本地存储的token都有一些安全风险。如果应用允许用户向注入JS代码，比如通过表单注入让app执行，那么XSS攻击就是可能的。如果合理地使用React，那这种可能性很小，因为 [React sanitizes](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) 的存在会净化所有它渲染的文本，也就是它不会将渲染的内容当作JS来执行。
+
+<!-- If one wants to play safe, the best option is to not store a token to the local storage. This might be an option in situations where leaking a token might have tragic consequences. -->
+如果想更安全一些，最好的方式是不将token 保存在本地存储。对于泄漏token 导致灾难结果的场景这是一个可行的方案。
+
+<!-- It has been suggested that  the identity of a signed in user should be saved as [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), so that JavaScript code could not have any access the token. The drawback of this solution is that it would make implementing SPA-applications a bit more complex. One would need at least to implement a separate page for logging in. -->
+一种建议是登录的用户的认证应该保存成 s [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies) ， 这样JavaScrip 代码就不会有任何访问到token的可能。这种方法的缺点是实现SPA 应用会有一些复杂。需要至少为登录实现一个单独的页面。
+
+<!-- However it is good to notice that even the use of a httpOnly cookies does not guarantee anything. It has even been suggested that httpOnly cookies are [not any safer than](https://academind.com/tutorials/localstorage-vs-cookies-xss/) the use of local storage.  -->
+但这是一个不错的提示，也就是即使使用了httpOnly cookie 并不保证任何事情。甚至说使用了httpOnly cookie 与使用本地存储[并不会更安全](https://academind.com/tutorials/localstorage-vs-cookies-xss/) 。
+
+<!-- So no matter the used solution the most important thing is to [minimize the risk](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) of XSS attacks altogether. -->
+所以说不管使用那种解决方案，最重要的事情是应对XSS攻击时来 [最小化风险](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html)
 
 </div>
 
