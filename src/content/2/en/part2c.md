@@ -387,7 +387,7 @@ The <i>App</i> component changes as follows:
 
 ```js
 import React, { useState, useEffect } from 'react' // highlight-line
-import axios from 'axios'
+import axios from 'axios' // highlight-line
 import Note from './components/Note'
 
 const App = () => { // highlight-line
