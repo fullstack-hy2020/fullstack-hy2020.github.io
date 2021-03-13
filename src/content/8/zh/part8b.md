@@ -25,25 +25,25 @@ lang: zh
 <!-- We could take care of the communication between the React-app and GraphQl by using Axios. However most of the time it is not very sensible to do so. It is a better idea to use a higher order library capable of abstracting the unnecessary details of the communication.  -->
 我们可以使用 Axios 来处理 React-app 和 GraphQl 之间的通信。 然而，在大多数情况下，这样做是不明智的。 最好使用能够抽象出通信中不必要的细节的高阶库。
 
-<!-- At the moment there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/). , which is the client side of the same library we used in the previous section. Apollo is absolutely the most popular of the two, and we will use it in this section as well.  -->
-目前有两个不错的选择: Facebook 的 [Relay](https://facebook.github.io/relay/) 和 [Apollo Client](https://www.apollographql.com/docs/react/)。 后者是我们之前章节使用的客户端。Appolo 绝对是最流行的客户端，我们本章节也会接着使用它。
+<!-- At the moment there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/). From these two Apollo is absolutely more popular, and we will also be using it.  -->
+目前有两个不错的选择: Facebook 的 [Relay](https://facebook.github.io/relay/) 和 [Apollo Client](https://www.apollographql.com/docs/react/)。 从这两个中阿波罗是绝对更受欢迎，我们也将使用它。
 
 ### Apollo client
 【阿波罗客户端】
 
 
-<!-- In this course we will use the version [3.0-beta](https://www.apollographql.com/docs/react/) of Apollo Client.  -->
-<!-- 在本课程中，我们将使用 Apollo Client 的版本[3.0-beta](https://www.apollographql.com/docs/react/)。 -->
+<!-- In this course we will use the version [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/) of Apollo Client.  -->
+在本课程中，我们将使用 Apollo Client 的版本[3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/)。
 <!-- At the moment (20.2.2020) 2.6 is the latest officially released version, so when you are reading the documentation remember to select the documentation of 3.0 beta: -->
-<!-- 目前(2020年2月20日) 2.6是官方发布的最新版本，所以当你阅读文档时记得选择3.0 beta 版的文档: -->
+目前(2020年2月20日) 2.6是官方发布的最新版本，所以当你阅读文档时记得选择3.0 beta 版的文档:
 
-<!-- ![](../../images/8/40ea.png) -->
+![](../../images/8/40ea.png)
 
-<!-- Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/). -->
-创建一个新的 React-app 并安装 Apollo 客户端所需的依赖 [Apollo client](https://www.apollographql.com/docs/react/get-started/)。
+<!-- Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation). -->
+创建一个新的 React-app 并安装 Apollo 客户端所需的依赖 [Apollo client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation)。
 
 <!-- We'll create a new React application and install the debendencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/#installation). -->
-<!-- 我们将创建一个新的 React 应用，并按文档要求的那样安装[Apollo 客户端](https://www.apollographql.com/docs/React/get-started/#installation 应用)。 -->
+我们将创建一个新的 React 应用，并按文档要求的那样安装[Apollo 客户端](https://www.apollographql.com/docs/React/get-started/#installation 应用)。
 
 ```bash
 npm install @apollo/client graphql
@@ -88,8 +88,8 @@ client.query({ query })
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-<!-- The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started/#create-a-client) - object, which is then used to send a query to the server:  -->
-代码的开头创建一个新的[客户端](https://www.apollographql.com/docs/react/get-started/#create-a-client)-对象，然后用它向服务器发送一个查询:
+<!-- The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client) - object, which is then used to send a query to the server:  -->
+代码的开头创建一个新的[客户端](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client)-对象，然后用它向服务器发送一个查询:
 
 
 ```js
@@ -104,8 +104,8 @@ client.query({ query })
 
 ![](../../images/8/9a.png)
 
-<!-- The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react). -->
-应用可以使用客户端对象与 GraphQL 服务器通信。 通过用[ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react) 包装<i>App</i> 组件，客户端可以被应用的所有组件访问。
+<!-- The application can communicate with a GraphQL server using the _client_ object. The client can be made accessible for all components of the application by wrapping the <i>App</i> component with [ApolloProvider]https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react). -->
+应用可以使用客户端对象与 GraphQL 服务器通信。 通过用[ApolloProvider](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react) 包装<i>App</i> 组件，客户端可以被应用的所有组件访问。
 
 ```js
 import React from 'react'
@@ -140,10 +140,10 @@ ReactDOM.render(
 
 
 
-<!-- Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/data/queries/).  -->
-阿波罗客户端提供了一些替代方案来进行[查询](https://www.apollographql.com/docs/react/data/queries/)。
-<!-- Currently the use of the hook-function [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) is the dominant practice. -->
-目前，Hook函数[useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#useQuery)的使用是主要的实践。
+<!-- Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/).  -->
+阿波罗客户端提供了一些替代方案来进行[查询](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/)。
+<!-- Currently the use of the hook-function [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) is the dominant practice. -->
+目前，Hook函数[useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useQuery)的使用是主要的实践。
 
 
 <!-- The query is made by the <i>App</i> component, which's code is as follows: -->
@@ -186,8 +186,8 @@ export default App
 
 <!-- When called, _useQuery_ makes the query it receives as a parameter. -->
 调用时，useQuery 将查询作为参数接收。
-<!-- It returns an object with multiple [fields](https://www.apollographql.com/docs/react/api/react/hooks/#result). -->
-它返回一个具有多个[字段](https://www.apollographql.com/docs/react/api/react/hooks/#result)的对象。
+<!-- It returns an object with multiple [fields](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result). -->
+它返回一个具有多个[字段](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result)的对象。
 <!-- The field <i>loading</i> is true if the query has not received a response yet.  -->
 如果查询尚未收到响应，则字段<i>loading</i> 为 true。
 <!-- Then the following code gets rendered: -->
@@ -304,13 +304,13 @@ query findPersonByName($nameToSearch: String!) {
 <!-- The _useQuery_ hook is well suited for situations where the query is done when the component is rendered.  -->
 _useQuery_ hook 非常适合在渲染组件时进行查询的情况。 
 
-<!-- However now we want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually). -->
-然而，现在我们只希望在用户想要查看特定人员的详细信息时才进行查询，因此查询只能[根据需要](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually)完成。
+<!-- However now we want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually). -->
+然而，现在我们只希望在用户想要查看特定人员的详细信息时才进行查询，因此查询只能[根据需要](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually)完成。
 
 
 
-<!-- For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) is a good choice.  -->
-在这种情况下，Hook函数[useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#useLazyQuery)是一个不错的选择。
+<!-- For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) is a good choice.  -->
+在这种情况下，Hook函数[useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useLazyQuery)是一个不错的选择。
 <!-- The <i>Persons</i> component becomes: -->
 <i>Persons</i> 组件变为:
 
@@ -458,8 +458,8 @@ Hook的第二个参数是 _result.data_ <i>每次查询获取不同人的详细�
 
 ![](../../images/8/12.png)
 
-<!-- Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/caching/cache-configuration/). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all.  -->
-Apollo 客户端将查询的响应保存到[缓存](https://www.apollographql.com/docs/react/caching/cache-configuration/)。 为了优化性能，若要在查询的响应已经在缓存中，则根本不将查询发送到服务器。 
+<!-- Apollo client saves the responses of queries to [cache](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/). To optimize performance if the response to a query is already in the cache, the query is not sent to the server at all.  -->
+Apollo 客户端将查询的响应保存到[缓存](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/)。 为了优化性能，若要在查询的响应已经在缓存中，则根本不将查询发送到服务器。 
 
 <!-- It is possible to install [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related) to Chrome to view the state of the cache.  -->
 你可以在 Chrome 中安装[Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related) 来查看缓存的状态。
@@ -504,8 +504,8 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 
 
 
-<!-- The hook-function [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) provides the functionality for making mutations.  -->
-Hook函数[useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#useMutation)提供了进行Mutation的功能。 
+<!-- The hook-function [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation) provides the functionality for making mutations.  -->
+Hook函数[useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useMutation)提供了进行Mutation的功能。 
 
 
 
@@ -602,8 +602,8 @@ createPerson({  variables: { name, phone, street, city } })
 
 ### Updating the cache
 【更新缓存】
-<!-- There are few different solutions for this. One way is to make the query for all persons [poll]((https://www.apollographql.com/docs/react/data/queries/#polling) the server, or make the query repeatedly.  -->
-对此几乎没有不同的解决方案。 一种方法是对所有人进行查询 [poll](https://www.apollographql.com/docs/react/data/queries/#polling)到服务器，或者重复进行查询。
+<!-- There are few different solutions for this. One way is to make the query for all persons [poll]((https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) the server, or make the query repeatedly.  -->
+对此几乎没有不同的解决方案。 一种方法是对所有人进行查询 [poll](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling)到服务器，或者重复进行查询。
 
 
 <!-- The change is small. Let's set the query to poll every two seconds:  -->
@@ -638,8 +638,8 @@ export default App
 
 
 
-<!-- Another easy way to keep the cache in sync is to use the _useMutation_-hook's [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) parameter to define, that the query fetching all persons is done again whenever a new person is created.  -->
-另一种保持缓存同步的简单方法是使用 useMutation-hook 的[refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2)参数来定义，即每当创建一个新的人员时，就会再次执行获取所有人员的查询。
+<!-- Another easy way to keep the cache in sync is to use the _useMutation_-hook's [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) parameter to define, that the query fetching all persons is done again whenever a new person is created.  -->
+另一种保持缓存同步的简单方法是使用 useMutation-hook 的[refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2)参数来定义，即每当创建一个新的人员时，就会再次执行获取所有人员的查询。
 
 ```js
 const ALL_PERSONS = gql`
@@ -720,8 +720,8 @@ const App = () => {
 
 
 
-<!-- We should handle the exception. We can register an error handler function to the mutation using _useMutation_-hook's _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2). -->
-我们应该处理这个异常，我们可以使用 useMutation-hook 的 onError [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2)将一个错误处理函数注册到Mutation中。
+<!-- We should handle the exception. We can register an error handler function to the mutation using _useMutation_-hook's _onError_ [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2). -->
+我们应该处理这个异常，我们可以使用 useMutation-hook 的 onError [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2)将一个错误处理函数注册到Mutation中。
 
 <!-- Let's register the mutation an error handler, which uses the _setError_ -->
 <!-- function it receives as a parameter to set an error message: -->
@@ -770,9 +770,9 @@ const App = () => {
 
   return (
     <div>
-      <Notify errorMessage={errorMessage} />
+      <Notify errorMessage={errorMessage} /> // highlight-line
       <Persons persons = {result.data.allPersons} />
-      <PersonForm setError={notify} />
+      <PersonForm setError={notify} /> // highlight-line
     </div>
   )
 }
@@ -1005,7 +1005,7 @@ useEffect(() => {
 <!-- Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL. -->
 我们的示例只使用 React 组件中的 state 来管理表单的状态，来显示错误通知。 也就是当使用GraphQL时没有合适的理由来使用Redux 来管理应用状态。
 
-<!-- When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/data/local-state/). -->
+<!-- When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/). -->
 必要时，Apollo 允许将应用保存到本地状态[Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/)。
 
 
@@ -1021,8 +1021,8 @@ useEffect(() => {
 <!-- Take [this project](https://github.com/fullstack-hy2020/library-frontend) for a start of your application.  -->
 以[这个项目](https://github.com/fullstack-hy2020/library-frontend)作为你应用的开始。
 
-<!-- You can implement your application either using the render prop -components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0.  -->
-您可以使用 Apollo Client 的 render prop-components<i>Query</i> 和<i>Mutation</i> 来实现应用，或者使用 Apollo Client 3.0  版本提供的Hook。
+<!-- You can implement your application either using the render prop -components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0 beta version.  -->
+您可以使用 Apollo Client 的 render prop-components<i>Query</i> 和<i>Mutation</i> 来实现应用，或者使用 Apollo Client 3.0 beta 版本提供的Hook。
 
 #### 8.8: Authors view
 <!-- Implement an Authors view to show the details of all authors on a page as follows:  -->

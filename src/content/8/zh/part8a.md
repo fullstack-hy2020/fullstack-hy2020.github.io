@@ -56,7 +56,9 @@ query FetchBlogsQuery {
 }
 ```
 
+The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them. 
 
+`FetchBlogsQuery`的内容可以粗略的解释为：查找一个叫`"mluukkai"` 的用户以及每一个`followedUsers`， 查找所有他的`blogs`， 以及所有博客的`comments`， 还有每个评论的`user`，找到他们的`blogs` ，并返回每一个博客的`title`
 
 <!-- The servers response would be about the following JSON-object:  -->
 服务器响应将是如下 json 对象:
@@ -252,7 +254,7 @@ query {
 
 ```js
 query {
-  findPerson(name: "Donald Trump") {
+  findPerson(name: "Joe Biden") {
     phone 
   }
 }
