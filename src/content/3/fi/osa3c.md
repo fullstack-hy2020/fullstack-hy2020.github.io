@@ -523,6 +523,12 @@ Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin 
 
 ![](../../images/3/45ae.png)
 
+Kun .env on gitignorattu ei heroku saa tarvitsemiaan tietoja githubin kautta, vaan ne pitää asettaa itse.
+Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin.
+herokuConfig
+
+![](../../images/3/herokuConfig.png)
+
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
 <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
 
