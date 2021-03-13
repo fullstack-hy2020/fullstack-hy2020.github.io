@@ -13,7 +13,7 @@ The frontend of our application shows the phone directory just fine with the upd
 ### User log in
 
 <!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
-Let's add variable _token_ to the application's state. It will contain user's token when a is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
+Let's add variable _token_ to the application's state. It will contain user's token when one is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
 
 ```js
 const App = () => {
@@ -119,9 +119,7 @@ Use of the effect hook is necessary to avoid an endless rendering loop.
 
 Let's also add a button which enables a logged in user to log out. The button's onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
 
-<!-- Välimuistin nollaaminen tapahtuu Apollon _client_-objektin metodilla [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore), clientiin taas päästään käsiksi hookilla -->
-<!-- [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient): -->
-We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object. 
+We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object. 
 The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook:
 
 ```js
@@ -146,7 +144,7 @@ const App = () => {
 }
 ```
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Adding a token to a header
 
@@ -212,7 +210,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
 
 ### Updating cache, revisited
 
@@ -233,7 +231,7 @@ const PersonForm = ({ setError }) => {
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates. 
 
-It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options)-callback for the mutation, which Apollo runs after the mutation:
+It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/api/react/hooks/#options)-callback for the mutation, which Apollo runs after the mutation:
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -263,7 +261,7 @@ const PersonForm = ({ setError }) => {
 
 The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person. 
 
-The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
+The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
 
 Note that readQuery will throw an error if your cache does not contain all of the data necessary to fulfill the specified query. This can be solved using a try-catch block.
 
@@ -276,7 +274,7 @@ Be diligent with the cache. Old data in cache can cause hard to find bugs. As we
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
 
 </div>
 
@@ -341,14 +339,14 @@ This and the next exercises are quite **challenging** like it should be this lat
 
 Some tips
 
-- Instead of using <i>useQuery</i> it is propably better to do the queries with the <i>useLazyQuery</i>-hook
+- Instead of using <i>useQuery</i> it is probably better to do the queries with the <i>useLazyQuery</i>-hook
 - It is sometimes useful to save the results of a GraphQL query to the state of a component. 
 - Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
 - The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
 
 #### 8.22 Up to date cache and book recommendations
 
-If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
+If you did the previous exercise, that is fetch the books in a genre with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
 
 <i>When new genre selection is not done, the view does not have to be updated. </i>
 

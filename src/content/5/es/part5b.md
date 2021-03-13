@@ -289,7 +289,7 @@ A continuación, definamos el componente de formulario dentro de un componente <
 ```
 
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-4</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-4</i> de [este repositorio de github](https://github.com/fullstack-hy/part2-notes/tree/part5-4).
 
 
 ### Estado de los formularios
@@ -371,7 +371,7 @@ const App = () => {
 
 Podríamos hacer lo mismo con el formulario de inicio de sesión, pero lo dejaremos para un ejercicio opcional.
 
-El código de la aplicación se puede encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), rema <i>part5-5</i>.
+El código de la aplicación se puede encontrar en [github](https://github.com/fullstack-hy/part2-notes/tree/part5-5), rema <i>part5-5</i>.
 
 ### Referencias a componentes con ref
 
@@ -470,7 +470,7 @@ Este truco funciona para cambiar el estado de un componente, pero parece un poco
 
 También [hay otros casos de uso](https://reactjs.org/docs/refs-and-the-dom.html) para las refs además de acceder a los componentes de React.
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-6</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-6</i> de [este repositorio de github](https://github.com/fullstack-hy/part2-notes/tree/part5-6).
 
 
 ### Un punto sobre los componentes
@@ -822,7 +822,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-7</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-7</i> de [este repositorio de github](https://github.com/fullstack-hy/part2-notes/tree/part5-7).
 
 </div>
 

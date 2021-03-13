@@ -36,7 +36,7 @@ lang: zh
 
 #### 7.10: redux, 步骤2
 <!-- _Note_ that this and the next two exercises are quite laborious but incredibly educational. -->
-请注意，这个和接下来的两个练习相当费力，但有令人难以置信的学习价值。
+<i>请注意</i>，这个和接下来的两个练习相当费力，但有令人难以置信的学习价值。
 
 <!-- Store the information about blog posts in the Redux store. In this exercise it is enought that you can see the blogs in backend and create a new blog. -->
 在 Redux store中存储有关博客文章的信息。 在这个练习中，你可以看到后台的博客，并创建一个新的博客。
@@ -162,8 +162,8 @@ const User = () => {
 <!-- How did we do? Give us some feedback for the course in Moodle! -->
 我们做的怎么样? 给我们一些关于 Moodle 课程的反馈！
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>
 

@@ -607,8 +607,8 @@ CI=true npm test -- --coverage
 
 
 
-<!-- You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8)的<i>part5-8</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-8). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-8)的<i>part5-8</i> 分支中找到我们当前应用的全部代码。
 </div>
 
 

@@ -107,7 +107,7 @@ En la siguiente parte del curso aprenderemos a implementar nuestra propia lógic
 > **NB:** En la versión actual de nuestra aplicación, el navegador agrega la propiedad de fecha de creación a la nota. Dado que el reloj de la máquina que ejecuta el navegador puede estar configurado incorrectamente, es mucho más prudente dejar que el servidor backend genere esta marca de tiempo por nosotros. De hecho, esto es lo que haremos en la siguiente parte del curso.
 
 
-El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-5</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
+El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-5</i> en [github](https://github.com/fullstack-hy/part2-notes/tree/part2-5).
 
 
 ### Cambiar la importancia de las notas
@@ -626,6 +626,14 @@ const getAll = () => {
   }
   return request.then(response => response.data.concat(nonExisting))
 }
+
+useEffect(() => {
+  noteService
+    .getAll()
+    .then(response => {
+      setNotes(response)  // highlight-line
+    })
+}, [])
 ```
 
 Cuando intentamos cambiar la importancia de la nota codificada, vemos el siguiente mensaje de error en la consola. El error dice que el servidor backend respondió a nuestra solicitud HTTP PUT con un código de estado 404 <i>no encontrado (not found)</i>.
@@ -714,7 +722,7 @@ notes.filter(n => n.id !== id)
 
 Probablemente no sea una buena idea usar alert en aplicaciones React más serias. Pronto aprenderemos una forma más avanzada de mostrar mensajes y notificaciones a los usuarios. Sin embargo, hay situaciones en las que un método simple y probado en batalla como <em>alert</em> puede funcionar como punto de partida. Siempre se podría agregar un método más avanzado más adelante, dado que hay tiempo y energía para ello.
 
-El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-6</i> en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
+El código para el estado actual de nuestra aplicación se puede encontrar en la rama <i>part2-6</i> en [github](https://github.com/fullstack-hy/part2-notes/tree/part2-6).
 
 </div> 
 

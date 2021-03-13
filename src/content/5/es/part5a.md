@@ -87,7 +87,7 @@ export default App
 ```
 
 
-El código de aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), rama <i>part5-1</i>.
+El código de aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), rama <i>part5-1</i>.
 
 El formulario de inicio de sesión se maneja de la misma manera que manejamos los formularios en la [parte 2](/es/part2/forms). El estado de la aplicación tiene  los campos <i>username</i> y <i>password</i> para almacenar los datos del formulario. Los campos de formulario tienen controladores de eventos, que sincronizan los cambios en el campo con el estado del componente <i>App</i>. Los controladores de eventos son simples: se les da un objeto como parámetro, y desestructuran el campo <i>target</i> del objeto y guardan su valor en el estado.
 
@@ -317,7 +317,7 @@ La solución no es perfecta, pero la dejamos por ahora.
 
 Nuestro componente principal <i>App</i> es demasiado grande en este momento. Los cambios que hicimos ahora son una clara señal de que los formularios deben refactorizarse en sus propios componentes. Sin embargo, lo dejaremos para un ejercicio opcional.
 
-El código de aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), rama <i>part5-2</i>.
+El código de aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-2), rama <i>part5-2</i>.
 
 
 ### Creando nuevas notas
@@ -527,7 +527,7 @@ window.localStorage.clear()
 ```
 
 
-El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), rama <i>part5-3</i>.
+El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-3), rama <i>part5-3</i>.
 
 </div>
 

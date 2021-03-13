@@ -2,7 +2,7 @@
 mainImage: ../../../images/part-2.svg
 part: 2
 letter: a
-lang: en
+lang: es
 ---
 
 <div class="content">
@@ -429,9 +429,13 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-Debido a que este es un componente de React, debemos importar React. 
+Importamos React en la primera línea del módulo.
 
 La última línea del módulo [exporta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) el módulo declarado, la variable <i>Note</i>.
+
+Toma en cuenta que en versiones recientes de React ya no es necesario importar React para usar sintaxis JSX, sin embargo sigue siendo importante conocer su uso, ya que hay miles de millones de líneas de código antiguo de React que aún necesitan importar React. Lo mismo se aplica a la documentación y los ejemplos de React con los que puede tropezar en Internet.
+
+Si necesitamos importar React para usar Hooks y otras funciones exportadas que React provee. Lea más sobre esto [aquí](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html).
 
 Ahora el archivo que está usando el componente - <i>index.js</i> - puede [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import ) el módulo:
 
@@ -497,10 +501,10 @@ ReactDOM.render(
 Los módulos tienen muchos otros usos además de permitir que las declaraciones de componentes se separen en sus propios archivos. Nos pondremos en contacto con ellos más adelante en este curso.
 
 
-El código actual de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
+El código actual de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1).
 
 
-Tenga en cuenta que la rama <i>master</i> del repositorio contiene el código para una versión posterior de la aplicación. El código actual está en la rama [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Tenga en cuenta que la rama <i>master</i> del repositorio contiene el código para una versión posterior de la aplicación. El código actual está en la rama [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 

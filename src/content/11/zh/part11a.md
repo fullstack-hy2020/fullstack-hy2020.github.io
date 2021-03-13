@@ -17,7 +17,7 @@ lang: zh
 <!-- This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finish at least parts 0 to 5 before starting this part. -->
 这一章节会依赖课程前面章节所涉及的许多概念。在开始这个章节之前，建议你至少完成0到5章的学习。
 
-<!-- Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configurations is way more harder, so in this part, you need lots of patience and discipline! -->
+<!-- Unlike the other parts of this course, you do not write many lines of code in this part, it is much more about configuration. Debugging code might be hard but debugging configurations is way harder, so in this part, you need lots of patience and discipline! -->
 与本课程的其他章节不同，在本章节中你不会编写很多行代码，而是更多的是关于配置。调试代码可能很困难，但是调试配置要更困难，所以在这一章节中，你需要很多耐心和纪律！
 
 ### Getting software to production
@@ -346,6 +346,6 @@ GitHub Actions 和其他基于云的解决方案
 <!-- Remember that there are no 'right' answers to the above!  -->
 记住，上面的问题没有正确的答案！
 
-**One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  It is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
-还有一件事: 在练习[11-19](/zh/part11/expanding_further#exercise-11-19)你需要一个 <i>Slack webhook URL</i>。最好是通过电子邮件 matti.luukkainen@helsinhelsinki.fi 或者是 [Telegram](https://t.me/fullstackcourse)中@mluukkai 来询问
+<!-- **One more thing:** in exercise [11-19](/en/part11/expanding_further#exercise-11-19) you will need a <i>Slack webhook URL</i>.  It is better to ask it right away by email matti.luukkainen@helsinki.fi or in course [Telegram](https://t.me/fullstackcourse), ping @mluukkai
+还有一件事: 在练习[11-19](/zh/part11/expanding_further#exercise-11-19)你需要一个 <i>Slack webhook URL</i>。最好是通过电子邮件 matti.luukkainen@helsinhelsinki.fi 或者是 [Telegram](https://t.me/fullstackcourse)中@mluukkai 来询问 -->
 </div>

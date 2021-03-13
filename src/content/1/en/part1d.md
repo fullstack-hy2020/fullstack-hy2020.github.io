@@ -249,6 +249,7 @@ We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Refer
 Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:
 
 ```js
+// highlight-start
 const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
@@ -264,6 +265,7 @@ const History = (props) => {
     </div>
   )
 }
+// highlight-end
 
 const App = () => {
   // ...
@@ -271,8 +273,8 @@ const App = () => {
   return (
     <div>
       {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <button handleClick={handleLeftClick}>left</button>
+      <button handleClick={handleRightClick}>right</button>
       {right}
       <History allClicks={allClicks} /> // highlight-line
     </div>
@@ -318,8 +320,8 @@ const History = (props) => {
 }
 
 // highlight-start
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -344,8 +346,8 @@ const App = () => {
     <div>
       {left}
       // highlight-start
-      <Button onClick={handleLeftClick} text='left' />
-      <Button onClick={handleRightClick} text='right' />
+      <Button handleClick={handleLeftClick} text='left' />
+      <Button handleClick={handleRightClick} text='right' />
       // highlight-end
       {right}
       <History allClicks={allClicks} />
@@ -358,7 +360,7 @@ const App = () => {
 
 In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
 
-In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
+In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the the current and future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
 
 We will learn more about React class components later on in the course.
 
@@ -508,7 +510,7 @@ Event handling has proven to be a difficult topic in previous iterations of this
 
 For this reason we will revisit the topic.
 
-Let's assume that we're developing this simple application:
+Let's assume that we're developing this simple application with the following component <i>App</i>:
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -520,11 +522,6 @@ const App = () => {
     </div>
   )
 }
-
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
 ```
 
 We want the clicking of the button to reset the state stored in the _value_ variable.
@@ -999,7 +996,7 @@ const App = () => {
 
 ### Useful Reading
 
-The internet is full of React-related material. However, we use such a new style of React that a large majority of the material found online is outdated for our purposes.
+The internet is full of React-related material. However, we use the new style of React that still a large majority of the material found online is outdated for our purposes.
 
 You may find the following links useful:
 
@@ -1035,11 +1032,22 @@ The application must display the total number of collected feedback for each cat
 
 Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
 
-You can implement the application in a single <i>index.js</i> file. You can use the code below as a starting point for your application.
+It is advisable to use the same structure that is used in material and previous exercise. File <i>index.js</i> is as follows:
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById('root')
+)
+```
+
+You can use the code below as a starting point for your the file <i>App.js</i>:
 
 ```js
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 
 const App = () => {
   // save clicks of each button to its own state
@@ -1054,9 +1062,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
 <h4>1.7: unicafe step2</h4>
@@ -1149,32 +1155,30 @@ Expand the following application by adding a button that can be clicked to displ
 
 ```js
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 
-const App = (props) => {
+const App = () => {
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+  ]
+   
   const [selected, setSelected] = useState(0)
 
   return (
     <div>
-      {props.anecdotes[selected]}
+      {anecdotes[selected]}
     </div>
   )
 }
 
-const anecdotes = [
-  'If it hurts, do it more often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
-
-ReactDOM.render(
-  <App anecdotes={anecdotes} />,
-  document.getElementById('root')
-)
+export default App
 ```
+
+Content of the file <i>index.js</i> is same as in previous exercises. 
 
 Google will tell you how to generate random numbers in JavaScript. Remember that you can test generating random numbers e.g. straight in the console of your browser.
 
@@ -1222,6 +1226,6 @@ Now implement the final version of the application that displays the anecdote wi
 
 If multiple anecdotes are tied for first place it is sufficient to just show one of them.
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)).
 
 </div>

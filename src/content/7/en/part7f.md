@@ -29,7 +29,7 @@ Change the application's notifications to use Redux at this point of the exercis
 
 #### 7.10: redux, step2
 
-_Note_ that this and the next two exercises are quite laborious but incredibly educational.
+<i>Note</i> that this and the next two exercises are quite laborious but incredibly educational.
 
 Store the information about blog posts in the Redux store. In this exercise it is enough that you can see the blogs in backend and create a new blog.
 
@@ -94,7 +94,7 @@ Users should be able to access the view by clicking the name of the blog post in
 
 ![](../../images/7/46.png)
 
-After you're done with this exercise, the functionality that was implemented in exercise 5.6 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
+After you're done with this exercise, the functionality that was implemented in exercise 5.7 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
 
 #### 7.16: Navigation
 

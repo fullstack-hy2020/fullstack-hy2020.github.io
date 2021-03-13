@@ -518,7 +518,7 @@ El informe nos dirá, por ejemplo, las líneas de código no probado en cada com
 
 ![](../../images/5/19ea.png)
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-8 </i> de [este repositorio de Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-8 </i> de [este repositorio de Github](https://github.com/fullstack-hy/part2-notes/tree/part5-8).
 
 </div>
 
