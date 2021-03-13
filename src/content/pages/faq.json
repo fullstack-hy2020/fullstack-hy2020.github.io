@@ -1,12 +1,6 @@
 {
   "fi": [
     {
-      "title": "Ilmestyykö kurssista uusi versio 2021?",
-      "text": [
-        "Kyllä, uusi versio ilmestyy 15.3.2021.<br><br>Uusi versio ei tule poikkeamaan radikaalisti nykyisestä. <br><br>Vuoden 2020 versiota voi laajentaa 2021 versiossa <a href='/osa0/yleista#aiemmin-suoritetun-kurssin-taydentaminen'>tämän</a> ohjeen mukaisesti."
-      ]
-    },
-    {
       "title": "Miten kurssille ilmoittaudutaan?",
       "text": [
         "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
@@ -21,7 +15,7 @@
     {
       "title": "Milloin on tehtävien ja kokeen deadline?",
       "text": [
-        "Etenemisnopeus on vapaa. Jos haluat Avoimen yliopiston opintopisteet, tulee kurssikoe tehdä 10.1.2021 klo 23.59.59 mennessä. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadlinea edeltävänä päivänä 9.1.2021. Tehtävien deadline on 1.3.2021"
+        "Etenemisnopeus on vapaa. Jos haluat Avoimen yliopiston opintopisteet, tulee kurssikoe tehdä 10.1.2022 klo 23.59.59 mennessä. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadlinea edeltävänä päivänä 9.1.2022. Tehtävien deadline on 1.3.2022"
       ]
     },
     {
@@ -45,7 +39,7 @@
     {
       "title": "Milloin ja miten saan kurssilta suoritusmerkinnän?",
       "text": [
-        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2021. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2022. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
       ]
     },
     {
@@ -63,12 +57,6 @@
   ],
   "en": [
     {
-      "title": "Will there be a new course 2021?",
-      "text": [
-        "Yes, the new version of the course will start 15.3.2021.<br><br>There won't be major changes in the course content.<br><br> The 2020 version can be expanded in the 2021 version, see more <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>here</a>. "
-      ]
-    },
-    {
       "title": "How do I sign up for the course?",
       "text": [
         "You don't have to sign up until you want to do the course exam. The exam is done in the Moodle-system of the Open University. You can find more information <a href='/en/part0/general_info#grading'>here</a>. <br><br>Please note that only persons with Finnish social security number can take part in exams and get official ECTS credits. <br><br>For the course certificate signup or Finnish social security number are not needed."
@@ -83,7 +71,7 @@
     {
       "title": "When is the deadline for the exercises and the exam?",
       "text": [
-        "You can complete the course at your own pace. Deadline for the exercises is 1st March 2021 at 23.59.59. <br><br>If you want Open university credits, the deadline for the exam is 10th January 2021 at 23.59.59. Do keep in mind that you have to sign up for the exam no later than the day before the deadline 9.1.2021. You can also take the exam before the deadline and keep completing any remaining exercises. Once you are done you can claim credits <a href='https://fullstackopen.com/en/part0/general_info#how-to-get-your-credits'> here</a>."
+        "You can complete the course at your own pace. Deadline for the exercises is 1st March 2022 at 23.59.59. <br><br>If you want Open university credits, the deadline for the exam is 10th January 2022 at 23.59.59. Do keep in mind that you have to sign up for the exam no later than the day before the deadline 9.1.2022. You can also take the exam before the deadline and keep completing any remaining exercises. Once you are done you can claim credits <a href='https://fullstackopen.com/en/part0/general_info#how-to-get-your-credits'> here</a>."
       ]
     },
     {
@@ -107,7 +95,7 @@
     {
       "title": "When and how can I get my credits?",
       "text": [
-        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2021. Read more <a href='/en/part0/general_info/#grading'>here</a>. <br><br>Please note that only persons with Finnish social security number can get official ECTS credits. <br><br>For the course certificate signup or Finnish social security number are not needed."
+        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2022. Read more <a href='/en/part0/general_info/#grading'>here</a>. <br><br>Please note that only persons with Finnish social security number can get official ECTS credits. <br><br>For the course certificate signup or Finnish social security number are not needed."
       ]
     },
     {
@@ -143,12 +131,6 @@
   ],
   "es": [
     {
-      "title" : "¿Habrá un nuevo curso en 2021?",
-      "text" : [
-        "Sí, la nueva versión del curso comenzará el 15.3.2021. <br><br> No habrá cambios importantes en el contenido del curso. <br><br> La versión 2020 se puede ampliar en la versión 2021, ver más <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>aquí</a>" 
-      ]
-    },
-    {
       "title" : "¿Cómo me registro en el curso?",
       "text" : [
         "No tienes que registrarte hasta que quieras hacer el examen del curso. El examen se realiza en el sistema Moodle de la Open University. Puedes encontrar más información <a href='/en/part0/general_info#grading '>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden participar en los exámenes y obtener créditos ECTS oficiales. Para el certificado del curso, no es necesario registrarse ni número de seguro social finlandés."
@@ -163,7 +145,7 @@
     {
       "title": "¿Cuándo es la fecha límite para los ejercicios y el examen?",
       "text" : [
-        "Puedes completar el curso a tu propio ritmo. El curso solo tiene una fecha límite para los ejercicios y los exámenes el 10 de enero de 2021 a las 23.59.59. Ten en cuenta que debes registrarte para el examen a más tardar el día anterior la fecha límite 9.1.2021."
+        "Puedes completar el curso a tu propio ritmo. El curso solo tiene una fecha límite para los ejercicios y los exámenes el 10 de enero de 2022 a las 23.59.59. Ten en cuenta que debes registrarte para el examen a más tardar el día anterior la fecha límite 9.1.2022."
       ]
     },
     {
@@ -187,13 +169,13 @@
     {
       "title": "¿Cuándo y cómo puedo obtener mis créditos?",
       "text": [
-        "Puede obtener sus créditos después de enviar suficientes ejercicios para aprobar el curso, aprobar el examen del curso e informarnos a través del sistema de envío de ejercicios que está listo con el curso. La fecha límite es el 10 de enero de 2021. Leer más <a href='/en/part0/general_info/#grading'>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
+        "Puede obtener sus créditos después de enviar suficientes ejercicios para aprobar el curso, aprobar el examen del curso e informarnos a través del sistema de envío de ejercicios que está listo con el curso. La fecha límite es el 10 de enero de 2022. Leer más <a href='/en/part0/general_info/#grading'>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
       ]
     },
     {
       "title" : "¿Recibo un certificado después de completar el curso?",
       "text": [
-        "Sí, el certificado está disponible para todos los que aprueben el curso antes del 10 de enero de 2021. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios. Para el certificado del curso, no es necesario registrarse en la universidad abierta y el número de seguro social finlandés"
+        "Sí, el certificado está disponible para todos los que aprueben el curso antes del 10 de enero de 2022. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios. Para el certificado del curso, no es necesario registrarse en la universidad abierta y el número de seguro social finlandés"
       ]
     },
     {
@@ -228,12 +210,6 @@
     }
   ],
   "zh": [
-    {
-      "title": "2021 年会有新的课程吗?",
-      "text": [
-        "是的，新版本的课程会在2021年3月15号开始。<br><br>课程的主体内容不会有太大的改变。<br><br> 2021年版本的内容会在2020年的基础上做进一步的延伸，可以参考 <a href='/zh/part0/%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86#expanding-on-a-previously-completed-course'>这一章节</a>的内容'>这里</a>. "
-      ]
-    },
     {
       "title": "我如何报名这门课程呢？",
       "text": [

@@ -102,7 +102,7 @@ De lo contrario, el problema se puede encontrar leyendo los registros de heroku 
 
 >**NB** Al menos al principio, es bueno estar atento a los registros de heroku en todo momento. La mejor manera de hacer esto es con el comando <i>heroku logs -t</i> que imprime los registros en la consola cada vez que sucede algo en el servidor.
 
->**NB** Si está implementando desde un repositorio git donde su código no está en la rama principal (es decir, si está alterando el [repositorio de notas](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) de la última lección), deberá ejecutar _git push heroku HEAD:master_. Si ya ha hecho un push a heroku, es posible que deba ejecutar _git push heroku HEAD:main --force_.
+>**NB** Si está implementando desde un repositorio git donde su código no está en la rama principal (es decir, si está alterando el [repositorio de notas](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2) de la última lección), deberá ejecutar _git push heroku HEAD:master_. Si ya ha hecho un push a heroku, es posible que deba ejecutar _git push heroku HEAD:main --force_.
 
 El frontend también funciona con el backend de Heroku. Puede verificar esto cambiando la dirección del backend en el frontend para que sea la dirección del backend en Heroku en lugar de <i>http://localhost:3001</i>.
 
@@ -279,7 +279,7 @@ Hay varias formas de lograr esto (por ejemplo, colocando tanto el código de bac
 
 En algunas situaciones, puede ser sensato implementar el código del frontend como su propia aplicación. Con las aplicaciones creadas con create-react-app es [sencillo](https://github.com/mars/create-react-app-buildpack) .
 
-El código actual del backend se puede encontrar en [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), en la rama <i>part3-3</i>. Los cambios en el código del frontend están en la rama <i>part3-1</i> del [repositorio del frontend](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1).
+El código actual del backend se puede encontrar en [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3), en la rama <i>part3-3</i>. Los cambios en el código del frontend están en la rama <i>part3-1</i> del [repositorio del frontend](https://github.com/fullstack-hy/part2-notes/tree/part3-1).
 
 </div>
 

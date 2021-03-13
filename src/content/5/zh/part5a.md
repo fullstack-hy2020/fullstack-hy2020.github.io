@@ -96,7 +96,6 @@ export default App
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>. -->
 当前的应用代码可以在[Github](https://Github.com/fullstack-hy/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
 
-
 <!-- The login form is handled the same way we handled forms in -->
 <!-- [第2章](/zh/part2/表单). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state. -->
 
@@ -595,6 +594,7 @@ window.localStorage.clear()
 
 <!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-3), branch <i>part5-3</i>. -->
 当前的应用代码可以在[Github](https://Github.com/fullstack-hy/part2-notes/tree/part5-3) <i>part5-3</i> 分支上找到。
+
 
 </div>
 

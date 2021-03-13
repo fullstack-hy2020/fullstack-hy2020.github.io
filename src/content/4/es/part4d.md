@@ -258,7 +258,7 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
+El código de la aplicación actual se puede encontrar en [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-9), rama <i>part4-9</i>.
 
 Si la aplicación tiene múltiples interfaces que requieren identificación, la validación de JWT debe separarse en su propio middleware. También se podría utilizar alguna librería existente como [express-jwt](https://www.npmjs.com/package/express-jwt).
 

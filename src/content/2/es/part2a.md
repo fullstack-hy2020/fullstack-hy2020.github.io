@@ -501,10 +501,10 @@ ReactDOM.render(
 Los módulos tienen muchos otros usos además de permitir que las declaraciones de componentes se separen en sus propios archivos. Nos pondremos en contacto con ellos más adelante en este curso.
 
 
-El código actual de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
+El código actual de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1).
 
 
-Tenga en cuenta que la rama <i>master</i> del repositorio contiene el código para una versión posterior de la aplicación. El código actual está en la rama [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
+Tenga en cuenta que la rama <i>master</i> del repositorio contiene el código para una versión posterior de la aplicación. El código actual está en la rama [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 

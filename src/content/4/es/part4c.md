@@ -392,7 +392,7 @@ La lista se ve así:
 
 ![](../../images/4/9.png)
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-7</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-7</i> de [este repositorio de github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7).
 
 ### Creación de una nueva nota
 
@@ -525,6 +525,6 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-8</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-8</i> de [este repositorio de github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8).
 
 </div>
