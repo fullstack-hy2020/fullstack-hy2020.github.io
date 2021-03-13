@@ -311,8 +311,8 @@ export default NoteForm
 </Togglable>
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4). -->
-您可以在 [这个仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4)5-4分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-4). -->
+您可以在 [这个仓库](https://github.com/fullstack-hy/part2-notes/tree/part5-4)5-4分支中找到我们当前应用的全部代码。
 
 
 ### State of the forms
@@ -418,9 +418,9 @@ const App = () => {
 
 
 
-<!-- The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), -->
+<!-- The application code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-5), -->
 <!-- branch <i>part5-5</i>. -->
-应用代码可以从[github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5)中找到,分支<i>5-5</i> 。
+应用代码可以从[github](https://github.com/fullstack-hy/part2-notes/tree/part5-5)中找到,分支<i>5-5</i> 。
 
 
 ### References to components with ref
@@ -537,8 +537,8 @@ const App = () => {
 <!-- There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components. -->
 还有[其他用例](https://reactjs.org/docs/refs-and-the-dom.html)用于 refs 而不是访问 React 组件。
 
-<!-- You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6). -->
-您可以在[这个仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6)的<i>part5-6</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-6). -->
+您可以在[这个仓库](https://github.com/fullstack-hy/part2-notes/tree/part5-6)的<i>part5-6</i> 分支中找到我们当前应用的全部代码。
 
 ### One point about components
 【关于组件的一个点】
@@ -817,10 +817,10 @@ Create-react-app 已经默认为项目安装好了 ESlint， 所以我们需要�
 注意: 不要运行 eslint-- init 命令。 它将安装与 create-react-app 创建的配置文件不兼容的最新版本的 ESlint！
 
 <!-- Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) package: -->
-下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest) 库：
+下面，我们将开始测试前端，为避免不想要和不相关的 lint 错误，我们先安装[eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) 库：
 
 ```bash
-npm add --save-dev eslint-plugin-jest
+npm install --save-dev eslint-plugin-jest
 ```
 
 <!-- Let's create a <i>.eslintrc.js</i> file with the following contents: -->
@@ -892,6 +892,7 @@ module.exports = {
 ```bash
 node_modules
 build
+.eslintrc.js
 ```
 
 <!-- Now the directories <em>build</em> and <em>node_modules</em> will be skipped when linting. -->
@@ -944,8 +945,8 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7). -->
-您可以在[this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7)的<i>part5-7</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-7). -->
+您可以在[this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-7)的<i>part5-7</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

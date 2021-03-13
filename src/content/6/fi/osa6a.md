@@ -40,7 +40,7 @@ npm install redux
 
 Fluxin tapaan Reduxissa sovelluksen tila talletetaan [storeen](https://redux.js.org/basics/store).
 
-Koko sovelluksen tila talletetaan <i>yhteen</i> storen tallettamaan Javascript-objektiin. Koska sovelluksemme ei tarvitse mitään muuta tilaa kuin laskurin arvon, talletetaan se storeen suoraan. Jos sovelluksen tila olisi monipuolisempi, talletettaisiin "eri asiat" storessa olevaan olioon erillisinä kenttinä.
+Koko sovelluksen tila talletetaan <i>yhteen</i> storen tallettamaan JavaScript-objektiin. Koska sovelluksemme ei tarvitse mitään muuta tilaa kuin laskurin arvon, talletetaan se storeen suoraan. Jos sovelluksen tila olisi monipuolisempi, talletettaisiin "eri asiat" storessa olevaan olioon erillisinä kenttinä.
 
 Storen tilaa muutetaan [actionien](https://redux.js.org/basics/actions) avulla. Actionit ovat olioita, joilla on vähintään actionin <i>tyypin</i> määrittelevä kenttä <i>type</i>. Sovelluksessamme tarvitsemme esimerkiksi seuraavaa actionia:
 
@@ -544,7 +544,7 @@ console.log(loput)  // tulostuu [3, 4, 5, 6]
 
 Tehdään hieman yksinkertaistettu versio osan 1 unicafe-tehtävästä. Hoidetaan sovelluksen tilan käsittely Reduxin avulla.
 
-Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy2020/unicafe-redux  olevan projektin.
+Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy/unicafe-redux  olevan projektin.
 
 <i>Aloita poistamalla kloonatun sovelluksen git-konfiguraatio ja asentamalla riippuvuudet</i>
 
@@ -647,6 +647,8 @@ Reducerin toteutuksessa kannattaa ottaa mallia ylläolevasta [redux-muistiinpano
 
 Toteuta sitten sovellukseen koko sen varsinainen toiminnallisuus. 
 
+Huomaa, että koska kaikki koodi on tiedostossa <i>index.js</i> joudut uudelleenlataamaan selaimen koodiin tehtävien muutosten jälkeen, sillä React ei automaattisesti huomaa tiedostoon <i>index.js</i> tehtyjä muutoksia.
+
 </div>
 
 <div class="content">
@@ -680,7 +682,6 @@ const App = () => {
       data: { id }
     })
   }
-
 
   return (
     <div>
@@ -892,9 +893,7 @@ Komponentin <i>App</i> koodi
 
 ```js
 import React from 'react'
-import { 
-  createNote, toggleImportanceOf
-} from './reducers/noteReducer' 
+import { createNote, toggleImportanceOf } from './reducers/noteReducer' // highlight-line
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
 
 
@@ -1090,7 +1089,7 @@ Yksittäisen muistiinpanon renderöinnistä huolehtiva <i>Note</i> on erittäin 
 
 Palaamme presentational/container-jakoon tarkemmin myöhemmin tässä osassa.
 
-Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branchissa <i>part6-1</i>.
+Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-1), branchissa <i>part6-1</i>.
 
 </div>
 
@@ -1098,7 +1097,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https:
 
 ### Tehtävät 6.3.-6.8.
 
-Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2020/redux-anecdotes oleva projekti.
+Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy/redux-anecdotes oleva projekti.
 
 Jos kloonaat projektin olemassaolevan git-repositorion sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 

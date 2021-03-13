@@ -158,7 +158,7 @@ const App = () => {
       </Switch>
 
       <div>
-        <i>Note app, Department of Computer Science 2020</i>
+        <i>Note app, Department of Computer Science 2021</i>
       </div>
     </Router>
   )
@@ -254,8 +254,8 @@ import {
 
 ### Parameterized route
 【参数化路由】
-<!-- Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js). -->
-让我们检查一下前一个例子中稍微修改过的版本，这个例子的完整代码可以在这里找到 [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js)。
+<!-- Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v1.js). -->
+让我们检查一下前一个例子中稍微修改过的版本，这个例子的完整代码可以在这里找到 [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v1.js)。
 
 <!-- The application now contains five different views, the display of which is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note. -->
 应用现在包含五个不同的视图，其显示由路由控制。 除了前面示例中的组件(<i>Home</i>、<i>Notes</i> 和<i>Users</i>)外，我们还有<i>Login</i> 表示登录视图，<i>Note</i> 表示单个便笺的视图。
@@ -442,9 +442,9 @@ const Login = (props) => {
 关于<i>Users</i> 路由还有一个有趣的细节:
 
 ```js
-<Route path="/users" render={() =>
-  user ? <Users /> : <Redirect to="/login" />
-} />
+<Route path="/users">
+  {user ? <Users /> : <Redirect to="/login" />}
+</Route>
 ```
 
 <!-- If a user isn't logged in, the <i>Users</i> component is not rendered. Instead the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view -->
@@ -507,7 +507,7 @@ const App = () => {
       </Router>      
       <div>
         <br />
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
@@ -608,7 +608,7 @@ const App = () => {
       </Switch>
 
       <div>
-        <em>Note app, Department of Computer Science 2020</em>
+        <em>Note app, Department of Computer Science 2021</em>
       </div>
     </div>
   )
@@ -637,8 +637,8 @@ const note = match
 
 
 
-<!-- The completed code can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js). -->
-完成的代码可以在这里找到[here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js)。
+<!-- The completed code can be found from [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v2.js). -->
+完成的代码可以在这里找到[here](https://github.com/fullstack-hy/misc/blob/master/router-app-v2.js)。
 
 </div>
 
@@ -646,8 +646,8 @@ const note = match
 
 
 ### Exercises 7.1-7.3.
-<!-- Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises. -->
-让我们继续研究八卦应用。 使用仓库 https://github.com/fullstack-hy2020/routed-anecdotes 中的 非redux 八卦应用作为练习的起点。
+<!-- Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy/routed-anecdotes> as the starting point for the exercises. -->
+让我们继续研究八卦应用。 使用仓库 https://github.com/fullstack-hy/routed-anecdotes 中的 非redux 八卦应用作为练习的起点。
 
 <!-- If you clone the project into an existing git repository remember to <i>delete the git configuration of the cloned application:</i> -->
 如果您将该项目克隆到现有的 git 存储库中，请记住我删除克隆应用的 git 配置

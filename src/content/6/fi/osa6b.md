@@ -426,7 +426,7 @@ Konsolin avulla on myös mahdollista dispatchata actioneja storeen
 ![](../../images/6/13ea.png)
 
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2) branchissa </i>part6-2</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-2) branchissa </i>part6-2</i>.
 
 </div>
 

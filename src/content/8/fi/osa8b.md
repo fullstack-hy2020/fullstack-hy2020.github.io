@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-palvelinta. Palvelimen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
@@ -20,11 +20,7 @@ Voisimmekin hoitaa React-sovelluksen ja GraphQL:n kommunikoinnin Axiosilla. Täm
 
 ### Apollo client
 
-Käytetään kurssilla Apollo Clientin versiota [3.0-beta](https://www.apollographql.com/docs/react/v3.0-beta/), tällä hetkellä (20.2.2020) uusin virallisesti julkaistu versio on 2.6. eli kun luet dokumentaatiota, muista vaihtaa näytettävän dokumentaation versio vastaamaan 3.0 betaa:
-
-![](../../images/8/40ea.png)
-
-Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#installation) vaatimat riippuvuudet.
+Luodaan uusi React-sovellus ja asennetaan siihen [Apollo clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
 
 ```bash
 npm install @apollo/client graphql
@@ -68,7 +64,7 @@ client.query({ query })
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-Koodi aloittaa luomalla [client](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#create-a-client)-olion, jonka avulla se lähettää kyselyn palvelimelle:
+Koodi aloittaa luomalla [client](https://www.apollographql.com/docs/react/get-started/#create-a-client)-olion, jonka avulla se lähettää kyselyn palvelimelle:
 
 ```js
 client.query({ query })
@@ -81,7 +77,7 @@ Palvelimen palauttama vastaus tulostuu konsoliin:
 
 ![](../../images/8/9a.png)
 
-Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponentti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/v3.0-beta/get-started/#connect-your-client-to-react) lapseksi:
+Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponentti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react) lapseksi:
 
 ```js
 import React from 'react'
@@ -111,7 +107,7 @@ ReactDOM.render(
 
 Olemme valmiina toteuttamaan sovelluksen päänäkymän, joka listaa kaikkien henkilöiden puhelinnumerot. 
 
-Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö on hook-funktion [useQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usequery) käyttäminen.
+Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apollographql.com/docs/react/data/queries/) tekemiselle. Tämän hetken vallitseva käytäntö on hook-funktion [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) käyttäminen.
 
 Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
@@ -146,7 +142,7 @@ const App = () => {
 export default App
 ```
 
-Hook-funktion _useQuery_ kutsuminen suorittaa parametrina annetun kyselyn. Hookin kutsuminen palauttaa olion, jolla on [useita kenttiä](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#result). Kenttä <i>loading</i> on arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on 
+Hook-funktion _useQuery_ kutsuminen suorittaa parametrina annetun kyselyn. Hookin kutsuminen palauttaa olion, jolla on [useita kenttiä](https://www.apollographql.com/docs/react/api/react/hooks/#result). Kenttä <i>loading</i> on arvoltaan tosi, jos kyselyyn ei ole saatu vielä vastausta. Tässä tilanteessa renderöitävä koodi on 
 
 ```js
 if ( result.loading ) {
@@ -237,9 +233,9 @@ Myös GraphQL Playground mahdollistaa muuttujia sisältävän kyselyjen tekemise
 
 ![](../../images/8/10.png)
 
-Asken käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely on tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#executing-queries-manually). 
+Äsken käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely on tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually). 
 
-Tähän tilanteeseen sopii hook-funktio [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery). Komponentti <i>Persons</i> muuttuu seuraavasti:
+Tähän tilanteeseen sopii hook-funktio [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery). Komponentti <i>Persons</i> muuttuu seuraavasti:
 
 ```js
 // highlight-start
@@ -347,13 +343,13 @@ Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään s
 
 Ratkaisu ei ole ehkä siistein mahdollinen mutta saa kelvata meille.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1), branchissa <i>part8-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-1), branchissa <i>part8-1</i>.
 
 ### Välimuisti ja devtools
 
 Kun haemme monta kertaa esim. Arto Hellaksen tiedot, huomaamme selaimen developer-konsolin välilehteä Network seuraamalla mielenkiintoisen asian: kysely backendiin tapahtuu ainoastaan tietojen ensimmäisellä katsomiskerralla. Tämän jälkeen, siitäkin huolimatta, että koodi tekee saman kyselyn uudelleen, ei kyselyä lähetetä backendille.
 
-Apollo client tallettaa kyselyjen tulokset cacheen eli [välimuistiin](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-configuration/) ja optimoi suoritusta siten, että jos kyselyn vastaus on jo välimuistissa, ei kyselyä lähetetä ollenkaan palvelimelle.
+Apollo client tallettaa kyselyjen tulokset cacheen eli [välimuistiin](https://www.apollographql.com/docs/react/caching/cache-configuration/) ja optimoi suoritusta siten, että jos kyselyn vastaus on jo välimuistissa, ei kyselyä lähetetä ollenkaan palvelimelle.
 
 Chromeen on mahdollista asentaa lisäosa [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related), jonka avulla voidaan tarkastella mm. välimuistin tilaa
 
@@ -388,7 +384,7 @@ const CREATE_PERSON = gql`
 `
 ```
 
-Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#usemutation). 
+Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation). 
 
 Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen:
 
@@ -471,7 +467,7 @@ Lisäys kyllä toimii, mutta sovelluksen näkymä ei päivity. Syynä tälle on 
 
 ### Välimuistin päivitys
 
-Ongelma voidaan ratkaista muutamallakin eri tavalla. Eräs tapa on määritellä kaikki henkilöt hakeva kysely [pollaamaan](https://www.apollographql.com/docs/react/v3.0-beta/data/queries/#polling) palvelinta, eli suorittamaan kysely palvelimelle toistuvasti tietyin väliajoin. 
+Ongelma voidaan ratkaista muutamallakin eri tavalla. Eräs tapa on määritellä kaikki henkilöt hakeva kysely [pollaamaan](https://www.apollographql.com/docs/react/data/queries/#polling) palvelinta, eli suorittamaan kysely palvelimelle toistuvasti tietyin väliajoin. 
 
 Muutos on pieni, määritellään pollausväliksi kaksi sekuntia:
 
@@ -500,7 +496,7 @@ Yksinkertaisuuden lisäksi ratkaisun hyvä puoli on se, että aina kun joku käy
 
 Ikävänä puolena pollauksessa on tietenkin sen aiheuttama turha verkkoliikenne.
 
-Toinen helppo tapa välimuistin synkronoimiseen on määritellä _useMutation_-hookin option [refetchQueries](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen:
+Toinen helppo tapa välimuistin synkronoimiseen on määritellä _useMutation_-hookin option [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen:
 
 ```js
 const ALL_PERSONS = gql`
@@ -528,7 +524,7 @@ Muitakin tapoja välimuistin tilan päivittämiseksi on, niistä lisää myöhem
 Sovellukseen on tällä hetkellä määritelty kyselyjä komponenttien koodin sekaan. Eriytetään kyselyjen määrittely omaan tiedostoonsa <i>queries.js</i>:
 
 ```js 
-import { gql  } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 export const ALL_PERSONS = gql`
   query {
@@ -559,7 +555,7 @@ const App = () => {
 }
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
 
 #### Mutaatioiden virheiden käsittely
 
@@ -567,7 +563,7 @@ Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus ja koko sove
 
 ![](../../images/8/14ea.png)
 
-Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio.
+Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio.
 
 Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla:
 
@@ -611,9 +607,9 @@ const App = () => {
 
   return (
     <div>
-      <Notify errorMessage={errorMessage} />
+      <Notify errorMessage={errorMessage} />  // highlight-line
       <Persons persons = {result.data.allPersons} />
-      <PersonForm setError={notify} />
+      <PersonForm setError={notify} />  // highlight-line
     </div>
   )
 }
@@ -637,7 +633,7 @@ Poikkeuksesta tiedotetaan nyt käyttäjälle yksinkertaisella notifikaatiolla.
 
 ![](../../images/8/15.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Puhelinnumeron päivitys
 
@@ -720,7 +716,7 @@ Ulkoasu on karu mutta toimiva:
 
 Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä. 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 
 Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
 
@@ -786,13 +782,13 @@ useEffect(() => {
 
 Tämä ratkaisu ei kuitenkaan toimi, ellei _setError_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _setError_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
 
-Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
+Sovelluksen tämänhetkinen koodi on [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
 
 ### Apollo Client ja sovelluksen tila
 
 Esimerkissämme sovelluksen tilan käsittely on siirtynyt suurimmaksi osaksi Apollo Clientin vastuulle. Tämä onkin melko tyypillinen ratkaisu GraphQL-sovelluksissa. Esimerkkimme käyttää Reactin komponenttien tilaa ainoastaan lomakkeen tilan hallintaan sekä virhetilanteesta kertovan notifikaation näyttämiseen. GraphQL:ää käytettäessä voikin olla, että ei ole enää kovin perusteltuja syitä siirtää sovelluksen tilaa ollenkaan Reduxiin. 
 
-Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamisen [Apollon välimuistiin](https://www.apollographql.com/docs/react/v3.0-beta/data/local-state/).
+Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamisen [Apollon välimuistiin](https://www.apollographql.com/docs/react/data/local-state/).
 
 </div>
 
@@ -802,7 +798,7 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 
 Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
-Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2020/library-frontend).
+Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy/library-frontend).
 
 #### 8.8: Kirjailijoiden näkymä
 

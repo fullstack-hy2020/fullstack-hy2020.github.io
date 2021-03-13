@@ -105,7 +105,7 @@ describe('Note app', function() {
   it('front page can be opened', function() {
     cy.visit('http://localhost:3000')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2020')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2021')
   })
 })
 ```
@@ -135,7 +135,7 @@ describe('Note app', () => { // highlight-line
   it('front page can be opened', () => { // highlight-line
     cy.visit('http://localhost:3000')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2020')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2021')
   })
 })
 ```
@@ -152,7 +152,7 @@ describe('Note app', function() {
   it('front page can be opened',  function() {
     cy.visit('http://localhost:3000')
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2020')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2021')
   })
 
 // highlight-start
@@ -187,7 +187,7 @@ describe('Note app',  function() {
 
   it('login form can be opened', function() {
     cy.visit('http://localhost:3000')
-    cy.contains('login').click()
+    cy.contains('log in').click()
   })
 })
 ```
@@ -208,11 +208,11 @@ describe('Note app', function() {
 
   it('front page can be opened', function() {
     cy.contains('Notes')
-    cy.contains('Note app, Department of Computer Science, University of Helsinki 2020')
+    cy.contains('Note app, Department of Computer Science, University of Helsinki 2021')
   })
 
   it('login form can be opened', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
   })
 })
 ```
@@ -228,7 +228,7 @@ We can access the first and the last input field on the page, and write to them 
 
 ```js
 it('user can login', function () {
-  cy.contains('login').click()
+  cy.contains('log in').click()
   cy.get('input:first').type('mluukkai')
   cy.get('input:last').type('salainen')
 })  
@@ -283,7 +283,7 @@ The test becomes
 describe('Note app',  function() {
   // ..
   it('user can log in', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')  // highlight-line    
     cy.get('#password').type('salainen')  // highlight-line
     cy.get('#login-button').click()  // highlight-line
@@ -305,7 +305,7 @@ Note that the CSS [id-selector](https://developer.mozilla.org/en-US/docs/Web/CSS
 The test first clicks the button opening the login form like so
 
 ```js
-cy.contains('login').click()
+cy.contains('log in').click()
 ```
 
 <!-- Kun lomake on täytetty, lähetetään lomake klikkaamalla nappia -->
@@ -373,7 +373,7 @@ describe('Note app', function() {
   // highlight-start
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('log in').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -420,7 +420,7 @@ describe('Note app', function() {
   // ...
 
   it('user can log in', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -430,7 +430,7 @@ describe('Note app', function() {
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('log in').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -503,8 +503,8 @@ module.exports = app
 <!-- eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan. -->
 after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database.
 
-<!-- Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>. -->
-The modified backend code can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
+<!-- Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>. -->
+The modified backend code can be found from [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
 
 <!-- Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista. -->
 Next we will change the <i>beforeEach</i> block so that it empties the server's database before tests are run. 
@@ -604,20 +604,17 @@ The first command searches for a component containing the text <i>another note c
 <!-- Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make not important</i>. -->
 The second command checks that the text on the button has changed to <i>make not important</i>.
 
-<!-- Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>. -->
-The tests and the current frontend code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
+<!-- Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-9), branchissa <i>part5-9</i>. -->
+The tests and the current frontend code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-9) branch <i>part5-9</i>.
 
 ### Failed login test
 
-<!-- Tehdään nyt testi joka varmistaa, että kirjautumisyritys epäonnistuu jos salasana on väärä. -->
 Let's make a test to ensure that a login attempt fails if the password is wrong. 
 
-<!-- Cypress suorittaa oletusarvoisesti aina kaikki testit, ja testien määrän kasvaessa se alkaa olla aikaavievää. Uutta testiä kehitellessä tai rikkinäistä testiä debugatessa voidaan määritellä testi komennon <i>it</i> sijaan komennolla <i>it.only</i>, jolloin Cypress suorittaa ainoastaan sen testin. Kun testi on valmiina, voidaan <i>only</i> poistaa. -->
 Cypress will run all tests each time by default, and as the number of tests increases it starts to become quite time consuming. 
 When developing a new test or when debugging a broken test, we can define the test with <i>it.only</i> instead of <i>it</i>, so that Cypress will only run the required test.
 When the test is working, we can remove <i>.only</i>.
 
-<!-- Testin ensimmäinen versio näyttää seuraavalta: -->
 First  version of our tests is as follows:
 
 ```js
@@ -625,7 +622,7 @@ describe('Note app', function() {
   // ...
 
   it.only('login fails with wrong password', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('wrong')
     cy.get('#login-button').click()
@@ -719,12 +716,12 @@ it('login fails with wrong password', function() {
     .and('have.css', 'border-style', 'solid')
 })
 ```
-<!-- Viimeistellään testi vielä siten, että se varmistaa myös, että sovellus ei renderöi onnistuneesta kirjautumista kuvaavaa tekstiä <i>'Matti Luukkainen logged in'</i>: -->
+
 Let's finish the test so that it also checks that the application does not render the success message <i>'Matti Luukkainen logged in'</i>:
 
 ```js
-it.only('login fails with wrong password', function() {
-  cy.contains('login').click()
+it('login fails with wrong password', function() {
+  cy.contains('log in').click()
   cy.get('#username').type('mluukkai')
   cy.get('#password').type('wrong')
   cy.get('#login-button').click()
@@ -738,7 +735,6 @@ it.only('login fails with wrong password', function() {
 })
 ```
 
-<!-- Komentoa <i>should</i> käytetään aina ketjutettuna komennon <i>get</i> (tai muun vastaavan ketjutettavissa olevan komennon) perään. Testissä käytetty <i>cy.get('html')</i> tarkoittaa käytännössä koko sovelluksen näkyvillä olevaa sisältöä. -->
 <i>Should</i> should always be chained with <i>get</i> (or another chainable command).
 We used <i>cy.get('html')</i> to access the whole visible content of the application. 
 
@@ -750,7 +746,7 @@ Currently we have the following tests:
 ```js 
 describe('Note app', function() {
   it('user can login', function() {
-    cy.contains('login').click()
+    cy.contains('log in').click()
     cy.get('#username').type('mluukkai')
     cy.get('#password').type('salainen')
     cy.get('#login-button').click()
@@ -758,13 +754,13 @@ describe('Note app', function() {
     cy.contains('Matti Luukkainen logged in')
   })
 
-  it.only('login fails with wrong password', function() {
+  it('login fails with wrong password', function() {
     // ...
   })
 
   describe('when logged in', function() {
     beforeEach(function() {
-      cy.contains('login').click()
+      cy.contains('log in').click()
       cy.get('input:first').type('mluukkai')
       cy.get('input:last').type('salainen')
       cy.get('#login-button').click()
@@ -940,8 +936,8 @@ describe('Note app', function() {
 })
 ```
 
-<!-- Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), branchissa <i>part5-10</i>. -->
-The tests and the frontend code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
+<!-- Testit ja frontendin koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-10), branchissa <i>part5-10</i>. -->
+The tests and the frontend code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-10) branch <i>part5-10</i>.
 
 ### Changing the importance of a note
 
@@ -1053,7 +1049,7 @@ Unfortunately, we have some copypaste in the tests now, because the code for sea
 In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:
 
 ```js
-it.only('other of those can be made important', function () {
+it('other of those can be made important', function () {
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
   cy.get('@theButton').should('contain', 'make not important')
@@ -1071,7 +1067,7 @@ Finally, some notes on how Cypress works and debugging your tests.
 The form of the Cypress tests gives the impression that the tests are normal JavaScript code, and we could for example try this:
 
 ```js
-const button = cy.contains('login')
+const button = cy.contains('log in')
 button.click()
 debugger() 
 cy.contains('logout').click()
@@ -1100,13 +1096,11 @@ it('then example', function() {
 <!-- Myös testien suorituksen pysäyttäminen debuggeriin on [mahdollista](https://docs.cypress.io/api/commands/debug.html). Debuggeri käynnistyy vain jos Cypress test runnerin developer konsoli on auki.  -->
 Stopping the test execution with the debugger is [possible](https://docs.cypress.io/api/commands/debug.html). The debugger starts only if Cypress test runner's developer console is open. 
 
-<!-- Developer konsoli on monin tavoin hyödyllinen testejä debugatessa. Network-tabilla näkyvät testattavan sovelluksen tekemät HTTP-pyynnöt, ja console-välilehti kertoo testin komentoihin liittyviä tietoja: -->
 The developer console is all sorts of useful when debugging your tests. 
 You can see the HTTP requests done by the tests on the Network tab, and the console tab will show you information about your tests:
 
 ![](../../images/5/38ea.png)
 
-<!-- Olemme toistaiseksi suorittaneet Cypress-testejä ainoastaan graafisen test runnerin kautta. Testit on luonnollisesti mahdollista suorittaa myös [komentoriviltä](https://docs.cypress.io/guides/guides/command-line.html). Lisätään vielä sovellukselle npm-skripti tätä tarkoitusta varten -->
 So far we have run our Cypress tests using the graphical test runner.
 It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
 
@@ -1122,16 +1116,13 @@ It is also possible to run them [from the command line](https://docs.cypress.io/
   },
 ```
 
-<!-- Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run test:e2e</i> -->
 Now we can run our tests from the command line with the command <i>npm run test:e2e</i>
 
 ![](../../images/5/39ea.png)
 
-<!-- Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida. -->
 Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
 
-<!-- Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>. -->
-The frontend- and the test code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
+The frontend- and the test code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-11) branch <i>part5-11</i>.
 
 </div>
 
@@ -1143,23 +1134,20 @@ In the last exercises of this part we will do some E2E tests for our blog applic
 The material of this part should be enough to complete the exercises. 
 You should absolutely also check out the Cypress [documentation](https://docs.cypress.io/guides/overview/why-cypress.html#In-a-nutshell). It is probably the best documentation I have ever seen for an open source project. 
 
-<!-- Erityisesti kannattaa lukea luku [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), joka toteaa -->
 I especially recommend reading [Introduction to Cypress](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Cypress-Can-Be-Simple-Sometimes), which states
 
 > <i>This is the single most important guide for understanding how to test with Cypress. Read it. Understand it.</i>
 
 #### 5.17: bloglist end to end testing, step1
 
-<!-- Konfiguroi Cypress projektiisi. Tee testi, joka varmistaa, että sovellus näyttää oletusarvoisesati kirjautumislomakkeen. -->
 Configure Cypress to your project. Make a test for checking that the application displays the login form by default.
 
-<!-- Testin rungon tulee olla seuraavanlainen -->
 The structure of the test must be as follows
 
 ```js 
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
+    cy.request('POST', 'http://localhost:3003/api/testing/reset')
     cy.visit('http://localhost:3000')
   })
 
@@ -1169,24 +1157,19 @@ describe('Blog app', function() {
 })
 ```
 
-<!-- Testin <i>beforeEach</i>-alustuslohkon tulee nollata tietokannan tilanne esim.  -->
 The <i>beforeEach</i> formatting blog must empty the database using for example the method we used in the [material](/en/part5/end_to_end_testing#controlling-the-state-of-the-database).
-
 
 #### 5.18: bloglist end to end testing, step2
 
-<!-- Tee testit kirjautumiselle, testaa sekä onnistunut että epäonnistunut kirjautuminen. -->
 Make tests for logging in. Test both successful and unsuccessful log in attempts. 
-<!-- Luo testejä varten käyttäjä <i>beforeEach</i>-lohkossa.  -->
 Make a new user in the <i>beforeEach</i> block for the tests.
 
-<!-- Testien runko laajenee seuraavasti -->
 The test structure extends like so
 
 ```js 
 describe('Blog app', function() {
   beforeEach(function() {
-    cy.request('POST', 'http://localhost:3001/api/testing/reset')
+    cy.request('POST', 'http://localhost:3003/api/testing/reset')
     // create here a user to backend
     cy.visit('http://localhost:3000')
   })
@@ -1207,12 +1190,10 @@ describe('Blog app', function() {
 })
 ```
 
-<!-- <i>Vapaaehtoinen bonustehtävä:</i> varmista, että epäonnistuneeseen kirjautumiseen liittyvä notifikaatio näytetään punaisella.  -->
 <i>Optional bonus exercise</i>: Check that the notification shown with unsuccessful login is displayed red. 
 
 #### 5.19: bloglist end to end testing, step3
 
-<!-- Tee testi, joka varmistaa, että kirjaantunut käyttäjä pystyy luomaan blogin. Testin runko voi näyttää seuraavalta -->
 Make a test which checks that a logged in user can create a new blog. 
 The structure of the test could be as follows
 
@@ -1220,7 +1201,7 @@ The structure of the test could be as follows
 describe('Blog app', function() {
   // ...
 
-  describe.only('When logged in', function() {
+  describe('When logged in', function() {
     beforeEach(function() {
       // log in user here
     })
@@ -1233,29 +1214,28 @@ describe('Blog app', function() {
 })
 ```
 
-<!-- Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle. -->
 The test has to ensure that a new blog is added to the list of all blogs. 
 
 #### 5.20: bloglist end to end testing, step4
 
-<!-- Tee testi, joka varmistaa, että blogia voi likettää. -->
 Make a test which checks that user can like a blog. 
 
 #### 5.21: bloglist end to end testing, step5
 
-<!-- Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin. -->
 Make a test for ensuring that the user who created a blog can delete it. 
 
-<!-- <i>Vapaaehtoinen bonustehtävä:</i> varmista myös että poisto ei onnistu muilta kuin blogin lisänneeltä käyttäjältä. -->
 <i>Optional bonus exercise:</i> also check that other users cannot delete the blog. 
 
 #### 5.22: bloglist end to end testing, step6
 
 Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first. 
 
-This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command. 
+This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command.
+
+If you use a `map` on an a selection from cypress, mind that it uses a [jQuery map](https://api.jquery.com/map/#map-callback). This means that the arguments of the callback function are swapped from an [ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (i.e. you use `(i, el) => {...}` instead of `(el, i) => {...}`).
+
+Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait the number of likes to update in between all clicks.
 
 This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
 
 </div>

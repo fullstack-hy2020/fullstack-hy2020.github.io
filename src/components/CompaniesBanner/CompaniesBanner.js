@@ -10,6 +10,7 @@ import { PropTypes } from 'prop-types';
 import React from 'react';
 import snakeCase from 'lodash/fp/snakeCase';
 import { useTranslation } from 'react-i18next';
+import getTranslationPath from '../../utils/getTranslationPath';
 
 const partners = [
   {
@@ -100,6 +101,7 @@ const inChallenge = [
   'Resilient E',
   'Neemia',
   'Bubblin',
+  "Zaibatsu"
 ];
 
 export const CompaniesBanner = ({ isFrontPage, lang }) => {
@@ -168,9 +170,7 @@ export const CompaniesBanner = ({ isFrontPage, lang }) => {
           <Element flex spaceAround className="col-10 spacing">
             <Link
               className="about__challenge-button"
-              to={`${
-                lang === 'en' ? '/en' : lang === 'zh' ? '/zh' : ''
-              }/challenge`}
+              to={getTranslationPath(lang, '/challenge')}
             >
               {t('challengePage:infoButton')}
             </Link>

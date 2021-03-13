@@ -130,8 +130,8 @@ addNote = event => {
 > <!--**NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.-->
 注意: 在当前版本的应用中，浏览器在便笺中添加了创建日期属性。 由于运行浏览器的机器的时钟可能错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一章节课程中要做的。
 
-<!-- The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5). -->
-我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5)上的<i>part2-5</i> 分支中找到。
+<!-- The code for the current state of our application can be found in the  <i>part2-5</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-5). -->
+我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-5)上的<i>part2-5</i> 分支中找到。
 
 
 ### Changing the importance of notes
@@ -807,8 +807,8 @@ notes.filter(n => n.id !== id)
 <!-- It's probably not a good idea to use alert in more serious React applications. We will soon learn a more advanced way of displaying messages and notifications to users. There are situations, however, where a simple, battle-tested method like <em>alert</em> can function as a starting point. A more advanced method could always be added in later, given that there's time and energy for it. -->
 在更严肃的 React 应用中使用alert可能不是一个好主意。 我们很快就会学到一种更先进的向用户显示消息和通知的方式。 然而，在某些情况下，像<em>alert</em>这样简单的、经过实战检验的方法可以作为一个起点。 如果有时间和精力的话，可以在以后添加一个更高级的方法。
 
-<!-- The code for the current state of our application can be found in the  <i>part2-6</i> branch on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6). -->
-我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6)上的<i>part2-6</i> 分支中找到。
+<!-- The code for the current state of our application can be found in the  <i>part2-6</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-6). -->
+我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-6)上的<i>part2-6</i> 分支中找到。
 
 </div>
 

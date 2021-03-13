@@ -83,8 +83,8 @@ const App = () => {
   return (
     <div>
       {clicks.left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <button handleClick={handleLeftClick}>left</button>
+      <button handleClick={handleRightClick}>right</button>
       {clicks.right}
     </div>
   )
@@ -288,6 +288,7 @@ const App = () => {
 让我们修改我们的应用，使得单击历史的渲染由一个新的 <i>History</i>  组件处理:
 
 ```js
+// highlight-start
 const History = (props) => {
   if (props.allClicks.length === 0) {
     return (
@@ -303,6 +304,7 @@ const History = (props) => {
     </div>
   )
 }
+// highlight-end
 
 const App = () => {
   // ...
@@ -310,8 +312,8 @@ const App = () => {
   return (
     <div>
       {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
+      <button handleClick={handleLeftClick}>left</button>
+      <button handleClick={handleRightClick}>right</button>
       {right}
       <History allClicks={allClicks} /> // highlight-line
     </div>
@@ -363,8 +365,8 @@ const History = (props) => {
 }
 
 // highlight-start
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -389,8 +391,8 @@ const App = () => {
     <div>
       {left}
       // highlight-start
-      <Button onClick={handleLeftClick} text='left' />
-      <Button onClick={handleRightClick} text='right' />
+      <Button handleClick={handleLeftClick} text='left' />
+      <Button handleClick={handleRightClick} text='right' />
       // highlight-end
       {right}
       <History allClicks={allClicks} />
@@ -408,7 +410,7 @@ const App = () => {
 
 <!-- In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of old React code that you might end up maintaining some day. The same applies to documentation and examples of React that you may stumble across on the internet. -->
 
-在这个课程中，我们做了一个稍微激进的决定，从第一天开始就完全使用Hook，以确保我们正在学习未来的React风格。 尽管函数式组件是 React 的未来，但学习类语法仍然很重要，因为有数十亿行旧的 React 代码可能会在某一天需要维护。 同样的道理，你可能在互联网上偶然发现React的文档和例子也使用了这些旧代码。
+在这个课程中，我们做了一个稍微激进的决定，从第一天开始就完全使用Hook，以确保我们当前和未来的React风格。 尽管函数式组件是 React 的未来，但学习类语法仍然很重要，因为有数十亿行旧的 React 代码可能会在某一天需要维护。 同样的道理，你可能在互联网上偶然发现React的文档和例子也使用了这些旧代码。
 
 <!-- We will learn more about React class components later on in the course. -->
 我们将在稍后的课程中学习更多关于 React 类组件的知识。
@@ -451,8 +453,8 @@ const App = () => {
 老派的，基于打印的调试总是一个好主意。如果组件如下所示
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -520,8 +522,8 @@ props value is [Object object]
 <!-- Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page. -->
 一旦发现 bug 的原因，您可以删除 _debugger_ 命令并刷新页面。
 
-<!-- The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Source</i> tab. -->
- _debugger_ 还允许我们使用在<i>Source</i> 选项卡右侧找到控件一行一行地执行代码。
+<!-- The debugger also enables us to execute our code line by line with the controls found in the right-hand side of the <i>Sources</i> tab. -->
+ _debugger_ 还允许我们使用在<i>Sources</i> 选项卡右侧找到控件一行一行地执行代码。
 
 <!-- You can also access the debugger without the _debugger_ command by adding break points in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section: -->
 通过在<i>Sources</i> 选项卡中添加断点，您还可以在不使用 _debugger_ 命令的情况下访问调试器。 检查组件变量的值可以在 Scope-部分 中完成:
@@ -609,7 +611,7 @@ const App = () => {
 出于这个原因，我们将再次讨论这个话题。
 
 <!-- Let's assume that we're developing this simple application: -->
-假设我们正在开发这个简单的应用:
+假设我们正在开发这个简单的应用， <i>App</i> 如下所示:
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -622,10 +624,6 @@ const App = () => {
   )
 }
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
 ```
 
 <!-- We want the clicking of the button to reset the state stored in the _value_ variable. -->
@@ -1166,7 +1164,7 @@ const App = () => {
 ### Useful Reading
 【有用的阅读材料】
 <!-- The internet is full of React-related material. However, we use such a new style of React that a large majority of the material found online is outdated for our purposes. -->
-互联网上充满了React相关的材料。 然而，我们使用了这样一种新的React方式，以至于网上发现的绝大多数材料对我们的目的来说都已经过时了。
+互联网上充满了React相关的材料。 然而，我们使用了新的React方式，以至于网上发现的绝大多数材料对我们的目的来说都已经过时了。
 
 <!-- You may find the following links useful: -->
 你可在如下链接中找到有用的资料:
@@ -1185,8 +1183,8 @@ const App = () => {
 
 
 
-<!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)完成的练习标记为已完成。
+<!-- Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+提交你的解决方案，首先把你的代码推送到 GitHub，然后把[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)完成的练习标记为已完成。
 
 <!-- Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**. -->
 记住，在一次提交中提交一章节的所有练习。 一旦你提交了一章节的解决方案，你就不能再向这个章节提交更多的练习了。
@@ -1221,12 +1219,25 @@ rm -rf node_modules/ && npm i
 <!-- Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear. -->
 请注意，您的应用只需要在单个浏览器会话期间工作。 一旦刷新页面，收集到的反馈信息就会消失。
 
+<!-- It is advisable to use the same structure that is used in mateerial and previous exercise. File <i>index.js</i> is as follows: -->
+建议使用与之前课程材料相同的结构，<i>index.js</i> 文件内容如下：
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(
+  <App />, 
+  document.getElementById('root')
+)
+```
+
 <!-- You can implement the application in a single <i>index.js</i> file. You can use the code below as a starting point for your application. -->
-您可以在一个<i>index.js</i> 文件中实现该应用。 您可以使用下面的代码作为应用的起点。
+<!-- You can use the code below as a starting point for your the file <i>App.js</i>: -->
+您可以使用下面的代码作为<i>App.js</i>的起点。
 
 ```js
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 
 const App = () => {
   // save clicks of each button to own state
@@ -1241,9 +1252,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, 
-  document.getElementById('root')
-)
+export default App
 ```
 
 <h4>1.7: unicafe 步骤2</h4>
@@ -1356,31 +1365,27 @@ const Statistics = (props) => {
 
 ```js
 import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
 
-const App = (props) => {
+const App = () => {
+  const anecdotes = [
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
+  ]
+   
   const [selected, setSelected] = useState(0)
 
   return (
     <div>
-      {props.anecdotes[selected]}
+      {anecdotes[selected]}
     </div>
   )
 }
 
-const anecdotes = [
-  'If it hurts, do it more often',
-  'Adding manpower to a late software project makes it later!',
-  'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-  'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
-  'Premature optimization is the root of all evil.',
-  'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'
-]
-
-ReactDOM.render(
-  <App anecdotes={anecdotes} />,
-  document.getElementById('root')
-)
+export default App
 ```
 
 <!-- Google will tell you how to generate random numbers in JavaScript. Remember that you can test generating random numbers e.g. straight in the console of your browser. -->
@@ -1444,8 +1449,8 @@ copy[2] += 1
 <!-- If multiple anecdotes are tied for first place it is sufficient to just show one of them. -->
 如果有多个箴言并列第一，那么只要展示其中一个就足够了。
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 
 </div>
 

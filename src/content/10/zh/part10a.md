@@ -51,7 +51,7 @@ Traditionally, developing native iOS and Android applications has required the d
 提交练习并获得学分
 
 <!-- Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 1-4 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 1 in the submission system. -->
-练习可以像之前章节那样通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020)提交。注意，本章的练习是提交到与0-9章<i>不同的课程单元</i>。提交系统中的1-4部分是指的本章的a-d部分。也就是说你一次提交一个部分，“React Native 介绍”， 是提交系统中的part 1。
+练习可以像之前章节那样通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021)提交。注意，本章的练习是提交到与0-9章<i>不同的课程单元</i>。提交系统中的1-4部分是指的本章的a-d部分。也就是说你一次提交一个部分，“React Native 介绍”， 是提交系统中的part 1。
 
 <!-- During this part you will earn credits based on the number of exercises you complete. Completing <i>at least 19 exercises</i> in this part will earn you <i>1 credit</i>. Completing <i>at least 26 exercises</i> in this part will earn you <i>2 credits</i>. -->
 
@@ -88,7 +88,7 @@ npm install --global expo-cli
 下一步，我们在 <i>rate-repository-app</i> 文件夹中运行如下命令，来初始化我们的项目：
 
 ```shell
-expo init rate-repository-app --template expo-template-blank@sdk-38
+expo init rate-repository-app --template expo-template-blank@sdk-40
 ```
 
 <!-- After running this command Expo will ask you to choose a template for the project. Within the <i>Managed workflow</i> section, choose the <i>blank</i> option (the one with the description "a minimal app as clean as an empty canvas"). -->
@@ -96,7 +96,7 @@ expo init rate-repository-app --template expo-template-blank@sdk-38
 
 <!-- Note, that the <em>@sdk-38</em> sets the project's <i>Expo SDK version to 38</i>, which supports <i>React Native version 0.62</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here](https://docs.expo.io/introduction/why-not-expo/). However, these limitations have no effect on the application implemented in the material.-->
 
-注意， <em>@sdk-38</em> 将项目的Expo SDK 的 版本设置为38，它支持 <i>React Native version 0.62</i>。 使用其他的Expo SDK版本在接下来的教程中可能会导致一些错误。此外，与纯净的React Native 命令行相比，Expo有一些限制，可以参考 [这里](https://docs.expo.io/introduction/why-not-expo/)。但是这些限制对教材中应用的实现来说并没有影响。
+注意， <em>@sdk-40</em> 将项目的Expo SDK 的 版本设置为40，它支持 <i>React Native version 0.63</i>。 使用其他的Expo SDK版本在接下来的教程中可能会导致一些错误。此外，与纯净的React Native 命令行相比，Expo有一些限制，可以参考 [这里](https://docs.expo.io/introduction/why-not-expo/)。但是这些限制对教材中应用的实现来说并没有影响。
 
 <!-- Now that our application has been initialized, open the created <i>rate-repository-app</i> directory with an editor such as [Visual Studio Code](https://code.visualstudio.com/). The structure should be more or less the following: -->
 
@@ -283,8 +283,8 @@ Expo 开发工具可以被用作来展示运行中程序的log信息。错误和
 <!-- Inspecting messages logged from the code with the <em>console.log</em> method can be handy, but sometimes finding bugs or understanding how the application works require us to see the bigger picture. We might, for example, be interested in what is the state and the props of a certain component, or what is the response of a certain network request. In the previous parts, we have used the browser's developer tools for this kind of debugging. [React Native Debugger](https://docs.expo.io/workflow/debugging/#react-native-debugger) is a tool that offers a similar set of debugging features for React Native applications. -->
 使用<em>console.log</em>方法检查一些代码中的信息是十分容易上手的，但有时找bug或理解应用如何运行，需要我们看得更宏观一些。比如说我们可能对某个特定组件的属性和状态感兴趣，或者某一次网络请求的返回。在之前的章节中，我们使用了浏览器的开发者工具来做这种debug。[React Native Debugger](https://docs.expo.io/workflow/debugging/#react-native-debugger) 是一个提供了类似的一系列debug特性的工具集来debug React Native 应用。
 
-<!-- Let's get started by installing React Native Debugger with the help of the [installation instructions](https://github.com/jhen0409/react-native-debugger#installation). Once the installation is complete, start the React Native Debugger, open a new debugger window (shortcuts: <em>Command+T</em> on macOS, <em>Ctrl+T</em> on Linux/Windows) and set the React Native packager port to <em>19001</em>. -->
-让我们参考[installation instructions](https://github.com/jhen0409/react-native-debugger#installation) 来安装React Native Debugger。安装一旦完成，启动React Native Debugger，打开一个新的debug 窗口（快捷键参考：macOS是<em>Command+T</em>，Linux/Windows 是 <em>Ctrl+T</em> ），并将React Native 的packager 端口设置为 <em>19001</em>。
+<!-- Let's get started by installing React Native Debugger with the help of the [installation instructions](https://github.com/jhen0409/react-native-debugger#installation). If you are unsure which installion method to choose, downloading a pre-built binary from the [release page](https://github.com/jhen0409/react-native-debugger/releases) is perhaps the easiest option. In the release page, find the latest release which supports React Native version 0.63 and download the binary suitable for your operating sytem (for example <i>.dmg</i> file for macOS and <i>.exe</i> file for Windows) under the "Assets" section. Once the installation is complete, start the React Native Debugger, open a new debugger window (shortcuts: <em>Command+T</em> on macOS, <em>Ctrl+T</em> on Linux/Windows) and set the React Native packager port to <em>19001</em>. -->
+让我们参考[installation instructions](https://github.com/jhen0409/react-native-debugger#installation) 来安装React Native Debugger。如果你不确定用哪种方式来安装，从[release page](https://github.com/jhen0409/react-native-debugger/releases)下载一个预构建好的二进制包可能是最简单的选项。在发布页面，找到最新的发布，支持React Native 0.63 版本，并在Assets 下查找下载适合自己操作系统的二进制包（例如macOS是<i>.dmg</i> 文件，而Windows 是 <i>.exe</i>  文件），（，安装一旦完成，启动React Native Debugger，打开一个新的debug 窗口（快捷键参考：macOS是<em>Command+T</em>，Linux/Windows 是 <em>Ctrl+T</em> ），并将React Native 的packager 端口设置为 <em>19001</em>。
 
 <!-- Next, we need to start our application and connect to the debugger. Start the application by running <em>npm start</em>. Once the application is running, open it with either an emulator or the Expo mobile app. Inside the emulator or the Expo mobile app, open the developer menu by following the [instructions](https://docs.expo.io/workflow/debugging/#developer-menu) in the Expo's documentation. From the developer menu, select <i>Debug remote JS</i> to connect to the debugger. Now, you should be able to see the application's component tree in the debugger: -->
 接下来，我们需要启动我们的应用，并连接到debugger。通过<em>npm start</em>启动应用。一旦应用启动，在模拟器或Expo 移动app中打开它。在模拟器或Expo 移动app中，根据 [instructions](https://docs.expo.io/workflow/debugging/#developer-menu)  文档的指示打开开发者菜单。在开发者菜单中，选择<i>Debug remote JS</i> 来连接到debugger。现在你可以在debugger中看到应用的组件树了：

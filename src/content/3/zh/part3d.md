@@ -102,8 +102,8 @@ const errorHandler = (error, request, response, next) => {
 
 ### Promise chaining 
 【承诺链】
-<!-- Many of the route handlers changed the response data into the right format by calling the _toJSON_ method. When we created a new note, the _toJSON_ method was called for the object passed as a parameter to _then_: -->
-许多路由处理程序通过调用 toJSON 方法将响应数据更改为正确的格式。 当我们创建一个新的便笺时，toJSON 方法被调用，作为参数传递给下面的对象:
+<!-- Many of the route handlers changed the response data into the right format by implicitly calling the _toJSON_ method from _response.json_. For the sake of an example, we can also perform this operation explicitly by calling the _toJSON_ method on the object passed as a parameter to _then_:-->
+许多的路由处理程序会将响应数据通过隐式地调用 _toJSON_  方法，将  _response.json_ 数据格式转换成正确的格式。为了演示，我们可以在 _then_ 中显示地调用 _toJSON_  方法 到这个对象上：
 
 ```js
 app.post('/api/notes', (request, response, next) => {
@@ -248,8 +248,8 @@ personService
 
 #### 3.21  Deploying the database backend to production
 【将数据库后端部署到生产环境】
-<!-- Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <https://localhost:3001>. -->
-通过创建前端的新生产版本，生成应用的新“完整栈”版本，并将其复制到后端存储库。 通过使用地址 https://localhost:3001 的整个应用来验证所有的东西都能在本地工作。
+<!-- Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address  <http://localhost:3001/>. -->
+通过创建前端的新生产版本，生成应用的新“完整栈”版本，并将其复制到后端存储库。 通过使用地址  <http://localhost:3001/> 的整个应用来验证所有的东西都能在本地工作。
 
 <!-- Push the latest version to Heroku and verify that everything works there as well. -->
 将最新版本推送到 Heroku，并验证那里的工作一切正常。
@@ -304,16 +304,12 @@ node_modules/.bin/eslint --init
 module.exports = {
     'env': {
         'commonjs': true,
-        'es6': true,
+        'es2021': true,
         'node': true
     },
     'extends': 'eslint:recommended',
-    'globals': {
-        'Atomics': 'readonly',
-        'SharedArrayBuffer': 'readonly'
-    },
     'parserOptions': {
-        'ecmaVersion': 2018
+        'ecmaVersion': 12
     },
     'rules': {
         'indent': [
@@ -331,6 +327,14 @@ module.exports = {
         'semi': [
             'error',
             'never'
+        ],
+        'eqeqeq': 'error',
+        'no-trailing-spaces': 'error',
+        'object-curly-spacing': [
+            'error', 'always'
+        ],
+        'arrow-spacing': [
+            'error', { 'before': true, 'after': true }
         ]
     }
 }
@@ -484,25 +488,18 @@ Eslint 有大量的[规则](https://ESlint.org/docs/rules/) ，可以通过编�
 <!-- Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use. -->
 许多公司定义了通过 ESlint 配置文件在整个组织中执行的编码标准。 建议不要一遍又一遍地使用重造轮子，从别人的项目中采用现成的配置到自己的项目中可能是一个好主意。 最近，很多项目都采用了 Airbnb 的 Javascript 风格指南，使用了 Airbnb 的 [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) 。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6). -->
-您可以在 [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7)的<i>part3-7</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-6). -->
+您可以在 [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7)的<i>part3-7</i> 分支中找到我们当前应用的全部代码。
 </div>
-
 
 <div class="tasks">
 
-
-
 ### Exercise 3.22.
 
-
-
 #### 3.22: Lint configuration
-
-
 <!-- Add ESlint to your application and fix all the warnings. -->
 向应用中添加 ESlint 并修复所有警告。
 
-<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
 </div>

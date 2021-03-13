@@ -6,6 +6,7 @@ import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import colors from '../colors';
+import getTranslationPath from '../utils/getPartTranslationPath';
 
 class NotFoundPage extends Component {
   state = {
@@ -45,13 +46,7 @@ class NotFoundPage extends Component {
             className="col-10 arrow__container--with-link"
             bold
             thickBorder
-            link={
-              this.state.siteLanguage === 'en'
-                ? '/en'
-                : this.state.siteLanguage === 'zh'
-                ? '/zh'
-                : '/'
-            }
+            link={getTranslationPath(this.state.siteLanguage, '/')}
             content={[
               { backgroundColor: colors['main'], text: 'Go back home' },
             ]}

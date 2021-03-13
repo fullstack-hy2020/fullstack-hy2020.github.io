@@ -37,7 +37,7 @@ Kyse on asiasta nimeltään CORS eli Cross-origin resource sharing. [Wikipedian]
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
 
-Lyhyesti sanottuna meidän kontekstissa kyse on seuraavasta: websovelluksen selaimessa suoritettava Javascript-koodi saa oletusarvoisesti kommunikoida vain samassa [originissa](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) olevan palvelimen kanssa. Koska palvelin on localhostin portissa 3001 ja frontend localhostin portissa 3000, niiden origin ei ole sama.
+Lyhyesti sanottuna meidän kontekstissa kyse on seuraavasta: websovelluksen selaimessa suoritettava JavaScript-koodi saa oletusarvoisesti kommunikoida vain samassa [originissa](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) olevan palvelimen kanssa. Koska palvelin on localhostin portissa 3001 ja frontend localhostin portissa 3000, niiden origin ei ole sama.
 
 Korostetaan vielä, että [same origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) ja CORS eivät ole mitenkään React- tai Node-spesifisiä asioita, vaan yleismaailmallisia periaatteita Web-sovellusten toiminnasta.
 
@@ -61,6 +61,11 @@ Nyt frontend toimii! Tosin muistiinpanojen tärkeäksi muuttavaa toiminnallisuut
 
 CORS:ista voi lukea tarkemmin esim. [Mozillan sivuilta](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
+Sovelluksen suoritusympäristö näyttää nyt seuraavalta:
+
+![](../../images/3/100.png)
+
+Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 olevalta express-palvelimelta.
 ### Sovellus internettiin
 
 Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus internettiin. Käytetään seuraavassa vanhaa kunnon [Herokua](https://www.heroku.com).
@@ -90,7 +95,7 @@ Tehdään projektihakemistosta git-repositorio ja lisätään <i>.gitignore</i>,
 node_modules
 ```
 
-Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku master_.
+Luodaan heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku main_.
 
 Jos kaikki meni hyvin, sovellus toimii:
 
@@ -100,7 +105,7 @@ Jos ei, vikaa voi selvittää herokun lokeja lukemalla, eli komennolla _heroku l
 
 > **HUOM** ainakin alussa on järkevää tarkkailla Herokussa olevan sovelluksen lokeja koko ajan. Parhaiten tämä onnistuu antamalla komento _heroku logs -t_, jolloin logit tulevat konsoliin sitä mukaan kun palvelimella tapahtuu jotain.
 
-Myös frontend toimii Herokussa olevan backendin avulla. Voit varmistaa asian muuttamalla frontendiin määritellyn backendin osoitteen viittaamaan <i>http://localhost:3001</i>:n sijaan Herokussa olevaan backendiin.
+Myös frontend toimii Herokussa olevan backendin avulla. Voit varmistaa asian muuttamalla frontendiin määritellyn backendin osoitteen viittaamaan <i>http://localhost:3001</i>:n sijaan Herokussa olevaan backendiin
 
 Seuraavaksi herää kysymys: miten saamme myös frontendin internettiin? Vaihtoehtoja on useita, mutta käydään seuraavaksi läpi yksi niistä.
 
@@ -115,7 +120,7 @@ eli tuotantoa varten optimoitu versio.
 
 Suoritetaan nyt komento <i>frontendin projektin juuressa</i>.
 
-Komennon seurauksena syntyy hakemiston <i>build</i> (joka sisältää jo sovelluksen ainoan html-tiedoston <i>index.html</i>) sisään hakemisto <i>static</i>, minkä alle generoituu sovelluksen Javascript-koodin [minifioitu](<https://en.wikipedia.org/wiki/Minification_(programming)>) versio. Vaikka sovelluksen koodi on kirjoitettu useaan tiedostoon, generoituu kaikki Javascript yhteen tiedostoon, samaan tiedostoon tulee itseasiassa myös kaikkien sovelluksen koodin tarvitsemien riippuvuuksien koodi.
+Komennon seurauksena syntyy hakemiston <i>build</i> (joka sisältää jo sovelluksen ainoan html-tiedoston <i>index.html</i>) sisään hakemisto <i>static</i>, minkä alle generoituu sovelluksen JavaScript-koodin [minifioitu](<https://en.wikipedia.org/wiki/Minification_(programming)>) versio. Vaikka sovelluksen koodi on kirjoitettu useaan tiedostoon, generoituu kaikki JavaScript yhteen tiedostoon, samaan tiedostoon tulee itseasiassa myös kaikkien sovelluksen koodin tarvitsemien riippuvuuksien koodi.
 
 Minifioitu koodi ei ole miellyttävää luettavaa. Koodin alku näyttää seuraavalta:
 
@@ -130,7 +135,7 @@ Eräs mahdollisuus frontendin tuotantoon viemiseen on kopioida tuotantokoodi, el
 Aloitetaan kopioimalla frontendin tuotantokoodi backendin alle, projektin juureen. Omalla koneellani kopiointi tapahtuu frontendin hakemistosta käsin komennolla
 
 ```bash
-cp -r build ../../../3/luento/notes-backend
+cp -r build ../notes-backend
 ```
 
 Backendin sisältävän hakemiston tulee nyt näyttää seuraavalta:
@@ -147,7 +152,7 @@ app.use(express.static('build'))
 
 tarkastaa Express GET-tyyppisten HTTP-pyyntöjen yhteydessä ensin löytyykö pyynnön polkua vastaavan nimistä tiedostoa hakemistosta <i>build</i>. Jos löytyy, palauttaa express tiedoston.
 
-Nyt HTTP GET -pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/notes</i> hoitaa backendin koodi.
+Nyt HTTP GET -pyyntö osoitteeseen <i>www.palvelimenosoite.com/index.html</i> tai <i>www.palvelimenosoite.com</i> näyttää Reactilla tehdyn frontendin. GET-pyynnön esim. osoitteeseen <i>www.palvelimenosoite.com/api/notes</i> hoitaa backendin koodi.
 
 Koska tässä tapauksessa sekä frontend että backend toimivat samassa osoitteessa, voidaan React-sovelluksessa eli frontendin koodissa oleva palvelimen _baseUrl_ määritellä [suhteellisena](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL:ina, eli ilman palvelinta yksilöivää osaa:
 
@@ -187,21 +192,35 @@ Kun mennään selaimella osoitteeseen <http://localhost:3001> palauttaa palvelin
 </html>
 ```
 
-Sivu sisältää ohjeen ladata sovelluksen tyylit määrittelevän CSS-tiedoston, sekä kaksi <i>script</i>-tagia, joiden ansiosta selain lataa sovelluksen Javascript-koodin, eli varsinaisen React-sovelluksen.
+Sivu sisältää ohjeen ladata sovelluksen tyylit määrittelevän CSS-tiedoston, sekä kaksi <i>script</i>-tagia, joiden ansiosta selain lataa sovelluksen JavaScript-koodin, eli varsinaisen React-sovelluksen.
 
 React-koodi hakee palvelimelta muistiinpanot osoitteesta <http://localhost:3001/api/notes> ja renderöi ne ruudulle. Selaimen ja palvelimen kommunikaatio selviää tuttuun tapaan konsolin välilehdeltä <i>Network</i>:
 
 ![](../../images/3/29ea.png)
 
+Tuotantoa varten tehty suoritusympäristö näyttää siis seuraavalta:
+
+![](../../images/3/101.png)
+
+Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löytyy nyt node/express-palvelimelta osoitteesta localhost:3001. Kun osoitteeseen mennään, renderöi selain pääsivun <i>index.html</i> joka taas aiheuttaa sen, että React-sovelluksen tuotantoversio haetaan palvelimelta ja selain alkaa suorittamaan sitä. Tämä taas saa aikaan sen, että ruudulla näytettävä json-muotonen data haetaan osoitteesta localhost:3001/api/notes.
+
+### Koko sovellus internettiin
+
 Kun sovelluksen "internettiin vietävä" tuotantoversio todetaan toimivan paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi uudelleen herokuun.
 
-[Sovellus](https://vast-oasis-81447.herokuapp.com/) toimii moitteettomasti lukuunottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
+[Sovellus](https://glacial-ravine-74819.herokuapp.com/) toimii moitteettomasti lukuunottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
 ![](../../images/3/30ea.png)
 
 Sovelluksemme tallettama tieto ei ole ikuisesti pysyvää, sillä sovellus tallettaa muistiinpanot muuttujaan. Jos sovellus kaatuu tai se uudelleenkäynnistetään, kaikki tiedot katoavat.
 
 Tarvitsemme sovelluksellemme tietokannan. Ennen tietokannan käyttöönottoa katsotaan kuitenkin vielä muutamaa asiaa.
+
+Tuotannossa oleva sovellus näyttää seuraavalta:
+
+![](../../images/3/102.png)
+
+Nyt siis node/express-backend sijaitsee Herokun palvelimella. Kun selaimella mennään sovelluksen "juuriosoitteeseen", joka on muotoa https://glacial-ravine-74819.herokuapp.com/, alkaa selain suorittaa React-koodia joka taas hakee json-muotoisen datan Herokusta.
 
 ### Frontendin deployauksen suoraviivaistus
 
@@ -210,7 +229,7 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
 {
   "scripts": {
     // ...
-    "build:ui": "rm -rf build && cd ../../osa2/materiaali/notes-new && npm run build --prod && cp -r build ../../../osa3/notes-backend/",
+    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build --prod && cp -r build ../notes-backend",
     "deploy": "git push heroku master",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
@@ -251,7 +270,7 @@ create-react-app:illa luoduissa projekteissa ongelma on helppo ratkaista. Riitt�
 }
 ```
 
-Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development). Jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:3000</i> johonkin osoitteeseen, joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen Javascript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle.
+Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [proxynä](https://facebook.github.io/create-react-app/docs/proxying-api-requests-in-development). Jos React-koodi tekee HTTP-pyynnön palvelimen <i>http://localhost:3000</i> johonkin osoitteeseen, joka ei ole React-sovelluksen vastuulla (eli kyse ei ole esim. sovelluksen JavaScript-koodin tai CSS:n lataamisesta), lähetetään pyyntö edelleen osoitteessa <i>http://localhost:3001</i> olevalle palvelimelle.
 
 Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
 
@@ -261,9 +280,9 @@ Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendi
 
 Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää. _create-react-app_:in avulla luotujen sovellusten osalta se on [suoraviivaista](https://github.com/mars/create-react-app-buildpack).
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
-Frontendin koodiin tehdyt muutokset ovat the [frontendin repositorion](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1) branchissa <i>part3-1</i>.
+Frontendin koodiin tehdyt muutokset ovat the [frontendin repositorion](https://github.com/fullstack-hy/part2-notes/tree/part3-1) branchissa <i>part3-1</i>.
 
 </div>
 

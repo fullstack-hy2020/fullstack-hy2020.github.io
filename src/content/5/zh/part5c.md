@@ -321,7 +321,7 @@ const mockHandler = jest.fn()
 测试根据渲染组件的文本找到按钮，然后单击元素:
 
 ```js
-const button = getByText('make not important')
+const button = component.getByText('make not important')
 fireEvent.click(button)
 ```
 
@@ -600,15 +600,15 @@ CI=true npm test -- --coverage
 <!-- Quite primitive HTML raport will be generated to the <i>coverage/lcov-report</i> directory.  -->
  <i>coverage/lcov-report</i>目录将生成相当原始的 HTML raport。
 
-<!-- The report will tell us i.e the lines of untested code in each component: -->
-该报告将告诉我们，每个组件中未经测试的代码行:
+<!-- The report will tell us the lines of untested code in each component: -->
+该报告会告诉我们每个组件中未经测试的代码行:
 
 ![](../../images/5/19ea.png)
 
 
 
-<!-- You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8). -->
-您可以在[this Github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8)的<i>part5-8</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this Github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-8). -->
+您可以在[this Github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-8)的<i>part5-8</i> 分支中找到我们当前应用的全部代码。
 </div>
 
 
@@ -627,12 +627,12 @@ CI=true npm test -- --coverage
 <!-- Add CSS-classes to the component to help the testing as necessary.  -->
 向组件中添加 css 类以帮助进行必要的测试。
 
-#### 5.14: Blog list tests, 步骤2
+#### 5.14*: Blog list tests, 步骤2
 
 <!-- Make a test, which checks that blog's url and number of likes are shown when the button controlling the shown details has been clicked.  -->
 做一个测试，当点击控制显示的详细信息的按钮时，检查博客的网址和赞的数量。
 
-#### 5.15: Blog list tests, 步骤3
+#### 5.15*: Blog list tests, 步骤3
 <!-- Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice.  -->
 进行一个测试，确保如果单击<i>like</i> 按钮两次，那么作为props接收的组件的事件处理程序将创建两次。
 

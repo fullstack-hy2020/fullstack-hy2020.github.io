@@ -61,33 +61,33 @@ const HelloWorld = props => {
 <!-- - [Text](https://reactnative.dev/docs/text) component is <i>the only</i> React Native component that can have textual children. It is similar to for example the <em>&lt;strong&gt;</em> and the <em>&lt;h1&gt;</em> elements.
 - [View](https://reactnative.dev/docs/view) component is the basic user interface building block similar to the <em>&lt;div&gt;</em> element.
 - [TextInput](https://reactnative.dev/docs/textinput) component is a text field component similar to the <em>&lt;input&gt;</em> element.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component (and other <i>Touchable\*</i> components) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element. -->
+- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) (and other <i>Touchable\*</i> components) component is for capturing different press events. It is similar to for example the <em>&lt;button&gt;</em> element. -->
 
 - [Text](https://reactnative.dev/docs/text) 组件是 <i>唯一</i> 可以有文本子内容的React Native 组件. 类似 <em>&lt;strong&gt;</em> 以及 <em>&lt;h1&gt;</em> 元素.
 - [View](https://reactnative.dev/docs/view) 组件是基础的用户界面的搭建元素，类似 <em>&lt;div&gt;</em>  元素。
 - [TextInput](https://reactnative.dev/docs/textinput) 组件是类似<em>&lt;input&gt;</em> 元素的文本输入区组件.
-- [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) 组件 (以及其他的形如 <i>Touchable\*</i> 组件) 是用来捕捉不同的点击事件。类似于 <em>&lt;button&gt;</em> 组件。
+- [Pressable](https://reactnative.dev/docs/pressable) 是用来捕捉不同的点击事件。类似于 <em>&lt;button&gt;</em> 组件。
 
 
 <!-- There are a few notable differences between core components and DOM elements. The first difference is that the <em>Text</em> component is <i>the only</i> React Native component that can have textual children. This means that you can't, for example, replace the <em>Text</em> component with the <em>View</em> component in the previous example. -->
 
 核心组件与DOM元素之间有一些显著的不同。第一个不同点就是 <em>Text</em> 组件是 <i>唯一</i> 能够拥有文本子内容的React Native 组件。也就是说，你不能在之前的例子中比如说用 <em>View</em> 元素替换 <em>Text</em> 元素。
 
-<!-- The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the family of ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) provides the capability to capture tapping gestures and can display feedback when a gesture is recognized. One of these components is the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component, which accepts the <em>onPress</em> prop: -->
+<!-- The second notable difference is related to the event handlers. While working with the DOM elements we are used to adding event handlers such as <em>onClick</em> to basically any element such as <em>&lt;div&gt;</em> and <em>&lt;button&gt;</em>. In React Native we have to carefully read the [API documentation](https://reactnative.dev/docs/components-and-apis) to know what event handlers (as well as other props) a component accepts. For example, the [Pressable](https://reactnative.dev/docs/pressable) component provides props for listening to different kind of press events. We can for example use the component's [onPress](https://reactnative.dev/docs/pressable) prop for listening to press events: -->
 
-第二个显著的区别就是相关的事件处理器。在DOM元素中我们会将类似<em>onClick</em> 这种事件处理器，添加到任一元素上，例如 <em>&lt;div&gt;</em> 或是 <em>&lt;button&gt;</em>。在React Native 中我们需要认真阅读 [API documentation](https://reactnative.dev/docs/components-and-apis) 来了解什么组件接收什么事件处理器（就像属性那样）。例如， ["Touchable" components](https://reactnative.dev/docs/handling-touches#touchables) 这一类组件提供了捕捉点击动作的能力，能够在点击动作被识别后做出反馈。这类组件当中有一个[TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback)组件，接收 <em>onPress</em> 属性：
+第二个显著的区别就是相关的事件处理器。在DOM元素中我们会将类似<em>onClick</em> 这种事件处理器，添加到任一元素上，例如 <em>&lt;div&gt;</em> 或是 <em>&lt;button&gt;</em>。在React Native 中我们需要认真阅读 [API documentation](https://reactnative.dev/docs/components-and-apis) 来了解什么组件接收什么事件处理器（就像属性那样）。例如， [Pressable](https://reactnative.dev/docs/pressable) 组件提供了监听不同点击动作的能力，我们可以使用组件的[onPress](https://reactnative.dev/docs/pressable) 属性来监听点击事件：
 
 ```javascript
 import React from 'react';
-import { Text, TouchableWithoutFeedback, Alert } from 'react-native';
+import { Text, Pressable, Alert } from 'react-native';
 
-const TouchableText = props => {
+const PressableText = props => {
   return (
-    <TouchableWithoutFeedback
+    <Pressable
       onPress={() => Alert.alert('You pressed the text!')}
     >
       <Text>You can press me</Text>
-    </TouchableWithoutFeedback>
+    </Pressable>
   );
 };
 ```
@@ -271,9 +271,9 @@ const BigBlueText = () => {
 
 除了属性名称，你应该在例子中还发现了另一个不同点。那就是在CSS中， 数值型属性值一般会使用例如 <i>px</i>, <i>%</i>, <i>em</i> or <i>rem</i> 这种单位。而在React Native中，所有的与维度相关的属性类似<em>width</em>, <em>height</em>, <em>padding</em>, and <em>margin</em> 与文字大小一样都是<i>无单位</i>的。这些没有单位的数值表示的是<i>density-independent pixels</i>（密度独立像素，DIP）。如果你对特定核心组件所能使用的样式属性感兴趣，可以查看[React Native Styling Cheat Sheet](https://github.com/vhpoet/react-native-styling-cheat-sheet)。
 
-<!-- In general, defining styles directly in the <em>style</em> prop is not considered such a great idea, because it makes components bloated and unclear. Instead, we should define styles outside the component's render function using the [StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) method. The <em>StyleSheet.create</em> method accepts a single argument which is an object consisting of named style objects and it creates a StyleSheet style reference from the given object. Here is an example of how to refactor the previous example using the <em>StyleSheet.create</em> method: -->
+<!-- In general, defining styles directly in the <em>style</em> prop is not considered such a great idea, because it makes components bloated and unclear. Instead, we should define styles outside the component's render function using the [StyleSheet.create](https://reactnative.dev/docs/stylesheet#create) method. The <em>StyleSheet.create</em> method accepts a single argument which is an object consisting of named style objects and it creates a StyleSheet style reference from the given object. Here is an example of how to refactor the previous example using the <em>StyleSheet.create</em> method: -->
 
-一般来说，将样式直接定义在<em>style</em> 属性中并不是一个好主意，因为会导致组件膨胀且不易懂。相反，我们可以将样式定义在组件的render 函数之外，利用[StyleSheet.create](https://reactnative.dev/docs/0.53/stylesheet#create) 方法即可。 <em>StyleSheet.create</em>  方法接受一个单一的对象参数， 它包含了命名样式对象并针对该对象创建了样式引用。下面的例子中展示了如何利用<em>StyleSheet.create</em> 方法渲染样式，将之前的例子进行的重构。
+一般来说，将样式直接定义在<em>style</em> 属性中并不是一个好主意，因为会导致组件膨胀且不易懂。相反，我们可以将样式定义在组件的render 函数之外，利用[StyleSheet.create](https://reactnative.dev/docs/stylesheet#create) 方法即可。 <em>StyleSheet.create</em>  方法接受一个单一的对象参数， 它包含了命名样式对象并针对该对象创建了样式引用。下面的例子中展示了如何利用<em>StyleSheet.create</em> 方法渲染样式，将之前的例子进行的重构。
 
 ```javascript
 import React from 'react';
@@ -363,7 +363,7 @@ const Main = () => {
 
 让我们继续关注样式的话题，但是把视野拓宽一些。我们使用过很多不同的应用，并且可能会达成一个共识，那就是好的用户界面要保持一致性。也就是说用户界面的展示，比如说字体大小、字体家族以及颜色遵循一致的模式。为了达到这种目的我们需要 <i>参数化</i> 不同的样式属性。这种方法就是我们所说的 <i>主题</i>。
 
-<!-- Users of popular user interface libraries such as [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/theming/) and [Material UI](https://material-ui.com/customization/theming/) might already be quite familiar with theming. Even though the theming implementations differ the main idea is always to use variables such as <em>colors.primary</em> instead of ["magic numbers"](<https://en.wikipedia.org/wiki/Magic_number_(programming)>) such as <em>#0366d6</em> when defining styles. This leads to increased consistency and flexibility. -->
+<!-- Users of popular user interface libraries such as [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/theming/) and [Material UI](https://material-ui.com/customization/theming/) might already be quite familiar with theming. Even though the theming implementations differ, the main idea is always to use variables such as <em>colors.primary</em> instead of ["magic numbers"](<https://en.wikipedia.org/wiki/Magic_number_(programming)>) such as <em>#0366d6</em> when defining styles. This leads to increased consistency and flexibility. -->
 
 比较受欢迎的用户界面组件库，例如 [Bootstrap](https://getbootstrap.com/docs/4.4/getting-started/theming/) 和 [Material UI](https://material-ui.com/customization/theming/) 的用户应该对主题很熟悉了。虽然主题的具体实现不同，但大体思想都是用例如 <em>colors.primary</em> 的变量，而不是例如<em>#0366d6</em>的[魔法数字"magic numbers"](<https://en.wikipedia.org/wiki/Magic_number_(programming)>) 来定义样式。
 
@@ -551,6 +551,11 @@ flex item 中最常用的属性要数 [flexGrow](https://css-tricks.com/almanac/
 <!-- Next, read the article [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) which has comprehensive visual examples of flexbox. It is also a good idea to play around with the flexbox properties in the [Flexbox Playground](https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/) to see how different flexbox properties affect the layout. Remember that in React Native the property names are the same as the ones in CSS except for the <i>camelCase</i> naming. However, the <i>property values</i> such as <em>flex-start</em> and <em>space-between</em> are exactly the same. -->
 下面，阅读文章 [A Complete Guide to Flexbox](https://css-tricks.com/snippets/css/a-guide-to-flexbox/) ，是一个关于flexbox的更复杂的可视化例子。在[Flexbox Playground](https://demos.scotch.io/visual-guide-to-css3-flexbox-flexbox-playground/demos/) 中来尝试flexbox 属性也是一个不错的选择，你可以看到flexbox 属性是如何影响布局的。记住在React Native 中，属性名就是CSS对应属性名的驼峰形式。但是，属性值例如 <em>flex-start</em> 和 <em>space-between</em> 与CSS是完全一样的。
 
+<!-- **NB:** React Native and CSS has some differences regarding the flexbox. The most important difference is that in React Native the default value for the <em>flexDirection</em> property is <em>column</em>. It is also worth noting that the <em>flex</em> shorthand doesn't accept multiple values in React Native. More on the React Native's flexbox implementation can be read in the [documentation](https://reactnative.dev/docs/flexbox). -->
+
+**注意**： React Native 和 CSS在flexbox 的考虑上有所不同。 二者最大的区别在于React Native 的 <em>flexDirection</em> 属性默认值是 <em>column</em>。 值得注意的是<em> flex</em> 的短板是在React Native中并不接受多个值。 关于在React Native 的flexbox 实现，更多的材料可以参考 [文档](https://reactnative.dev/docs/flexbox)。
+
+
 </div>
 
 <div class="tasks">
@@ -583,7 +588,7 @@ export default AppBar;
 ```
 
 <!-- Now that the <em>AppBar</em> component will prevent the status bar from overlapping the content, you can remove the <em>marginTop</em> style we added for the <em>Main</em> component earlier in the <i>Main.jsx</i> file. The <em>AppBar</em> component should currently contain a tab with text "Repositories". Make the tab touchable by using the [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) component but you don't have to handle the <em>onPress</em> event in any way. Add the <em>AppBar</em> component to the <em>Main</em> component so that it is the uppermost component in the screen. The <em>AppBar</em> component should look something like this: -->
-既然<em>AppBar</em>组件会盖住内容挡住状态栏，你可以删除 <em>marginTop</em> 样式，这是我们之前添加到<i>Main.jsx</i> 文件的 <em>Main</em> 组件中。<em>AppBar</em> 组件应当包含一个叫做"Repositories"的tab 页。通过添加 [TouchableWithoutFeedback](https://reactnative.dev/docs/touchablewithoutfeedback) 组件将tab 变成touchable的，但你还不用处理 <em>onPress</em> 事件。将 <em>AppBar</em> 组件放到<em>Main</em>中，让其成为屏幕最顶部的组件。 <em>AppBar</em> 组件应当看起来像如下所示：
+既然<em>AppBar</em>组件会盖住内容挡住状态栏，你可以删除 <em>marginTop</em> 样式，这是我们之前添加到<i>Main.jsx</i> 文件的 <em>Main</em> 组件中。<em>AppBar</em> 组件应当包含一个叫做"Repositories"的tab 页。通过添加 [Pressable](https://reactnative.dev/docs/pressable) 组件将tab 变成touchable的，但你还不用处理 <em>onPress</em> 事件。将 <em>AppBar</em> 组件放到<em>Main</em>中，让其成为屏幕最顶部的组件。 <em>AppBar</em> 组件应当看起来像如下所示：
 
 ![Application preview](../../images/10/6.jpg)
 
@@ -650,8 +655,6 @@ module.exports = async function(env, argv) {
 
 <!-- Now that the Expo's web browser preview is fixed, open the <i>App.js</i> file and add the <em>NativeRouter</em> component to the <em>App</em> component: -->
 既然Expo 的Web 浏览器预览已经修复了，打开 <i>App.js</i> 文件，并添加<em>NativeRouter</em> 组件到<em>App</em> 组件中：
-
-<!-- TODO: highlight -->
 
 ```javascript
 import React from 'react';
@@ -733,8 +736,8 @@ const SignIn = () => {
 export default SignIn;
 ```
 
-<!-- Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. User should be able to navigate between the two views by pressing the tabs (hint: use the [Link](https://reacttraining.com/react-router/native/api/Link) component and its [component](https://reacttraining.com/react-router/native/api/Link/component-func) prop). -->
-为这个<em>SignIn</em>组件在<em>Main</em>组件中创建一个路由。同时在app工具栏的"Repositories" tab 旁增加一个"Sign in" tab。用户能够通过点击导航中的tab在不同的视图中切换（提示：使用[Link](https://reacttraining.com/react-router/native/api/Link) 组件以及它的 [组件属性](https://reacttraining.com/react-router/native/api/Link/component-func) 
+<!-- Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. User should be able to navigate between the two views by pressing the tabs (hint: you can use the React router's [Link](https://reacttraining.com/react-router/native/api/Link) component).. -->
+为这个<em>SignIn</em>组件在<em>Main</em>组件中创建一个路由。同时在app工具栏的"Repositories" tab 旁增加一个"Sign in" tab。用户能够通过点击导航中的tab在不同的视图中切换。（提示：你可以使用React router 的[Link](https://reacttraining.com/react-router/native/api/Link) 组件）
 
 #### Exercise 10.7: scrollable app bar
 
@@ -778,7 +781,7 @@ Formik 的主要概念就是<i>context上下文</i> 和 <i>field字段</i>。For
 
 ```javascript
 import React from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TextInput, Pressable, View } from 'react-native';
 import { Formik, useField } from 'formik';
 
 const initialValues = {
@@ -806,9 +809,9 @@ const BodyMassIndexForm = ({ onSubmit }) => {
         value={heightField.value}
         onChangeText={text => heightHelpers.setValue(text)}
       />
-      <TouchableWithoutFeedback onPress={onSubmit}>
+      <Pressable onPress={onSubmit}>
         <Text>Calculate</Text>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };
@@ -916,9 +919,9 @@ const BodyMassIndexForm = ({ onSubmit }) => {
     <View>
       <FormikTextInput name="mass" placeholder="Weight (kg)" /> // highlight-line
       <FormikTextInput name="height" placeholder="Height (m)" /> //highlight-line
-      <TouchableWithoutFeedback onPress={onSubmit}>
+      <Pressable onPress={onSubmit}>
         <Text>Calculate</Text>
-      </TouchableWithoutFeedback>
+      </Pressable>
     </View>
   );
 };
@@ -1119,7 +1122,7 @@ const MyComponent = Platform.select({
 ```
 
 <!-- However, a more sophisticated method for implementing and importing platform specific components (or any other piece of code) is to use the <i>.io.jsx</i> and <i>.android.jsx</i> file extensions. Note that the <i>.jsx</i> extension can as well be any extensions recognized by the bundler, such as <i>.js</i>. We can for example have files <i>Button.ios.jsx</i> and <i>Button.android.jsx</i> which we can import like this: -->
-然而，一个更具古老的方法是使用并引入平台特定的组件（或其他什么代码片段），使用<i>.io.jsx</i> 和 <i>.android.jsx</i>文件扩展。注意 <i>.jsx</i> 扩展也可以被bundler 识别到。我们可以使用 <i>Button.ios.jsx</i> 和 <i>Button.android.jsx</i> 按如下方式引入：
+然而，一个更具古老的方法是使用并引入平台特定的组件（或其他什么代码片段），使用<i>.ios.jsx</i> 和 <i>.android.jsx</i>文件扩展。注意 <i>.jsx</i> 扩展也可以被bundler 识别到。我们可以使用 <i>Button.ios.jsx</i> 和 <i>Button.android.jsx</i> 按如下方式引入：
 
 ```javascript
 import React from 'react';
@@ -1149,6 +1152,6 @@ const PlatformSpecificButton = () => {
 
 <!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system. -->
 
-这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
+这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
 
 </div>

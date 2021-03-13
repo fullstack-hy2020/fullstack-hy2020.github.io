@@ -14,7 +14,7 @@ In this part our focus shifts towards the backend: that is, towards implementing
 We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.
 
 
-This course material was written with the version <i>v10.18.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+This course material was written with the version <i>v14.8.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 
 As mentioned in [part 1](/en/part1/java_script), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
@@ -425,7 +425,7 @@ The contents of <i>package.json</i> have also changed:
     "express": "^4.17.1",
   },
   "devDependencies": {
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.7"
   }
 }
 ```
@@ -457,7 +457,7 @@ The command is long and quite unpleasant, so let's define a dedicated <i>npm scr
   // ..
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",
+    "dev": "nodemon index.js",  // highlight-line
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   // ..
@@ -484,10 +484,10 @@ Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run
 Let's expand our application so that it provides the RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes).
 
 
-Representational State Transfer, aka. REST was introduced in 2000 in Roy Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications.
+Representational State Transfer, aka REST, was introduced in 2000 in Roy Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications.
 
 
-We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) by only concerning ourselves with how RESTful APIs are typically understood in web applications. The original definition of REST is in fact not even limited to web applications.
+We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) by only concerning ourselves with how RESTful APIs are typically understood in web applications. The original definition of REST is in fact not even limited to web applications.
 
 
 We mentioned in the [previous part](/en/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address.
@@ -499,7 +499,7 @@ One convention is to create the unique address for resources by combining the na
 Let's assume that the root URL of our service is <i>www.example.com/api</i>.
 
 
-If we define the resource type of notes to be <i>note</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.
+If we define the resource type of note to be <i>notes</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.
 
 
 The URL for the entire collection of all note resources is <i>www.example.com/api/notes</i>.
@@ -730,16 +730,18 @@ Let's activate the json-parser and implement an initial handler for dealing with
 const express = require('express')
 const app = express()
 
-app.use(express.json())
+app.use(express.json())  // highlight-line
 
 //...
 
+// highlight-start
 app.post('/api/notes', (request, response) => {
   const note = request.body
   console.log(note)
 
   response.json(note)
 })
+// highlight-end
 ```
 
 
@@ -796,7 +798,22 @@ If you are using VS Code, then you should install the REST client from the previ
 We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
 
 
-One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects.
+One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. You can also add multiple requests in the same file using `###` separators:
+
+```
+GET http://localhost:3001/api/notes/
+
+###
+POST http://localhost:3001/api/notes/ HTTP/1.1
+content-type: application/json
+
+{
+    "name": "sample",
+    "time": "Wed, 21 Oct 2015 18:27:50 GMT"
+}
+```
+
+Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects.
 
 > **Important sidenote**
 >
@@ -896,10 +913,10 @@ If the data saved in the _body_ variable has the <i>important</i> property, the 
 > To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
 
 
-You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
+You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
 
 
-Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
+Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-11).
 
 ![](../../images/3/21.png)
 
@@ -1107,7 +1124,7 @@ app.use(unknownEndpoint)
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
+You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2).
 
 </div>
 

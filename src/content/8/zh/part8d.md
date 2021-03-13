@@ -136,8 +136,8 @@ export default LoginForm
 
 
 
-<!-- We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object.  -->
-我们可以使用 Apollo 客户端对象的[resetStore](https://www.apollographql.com/docs/react/v3.0-beta/api/core/apolloclient/#apolloclient.resetStore)方法重置缓存。
+<!-- We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object.  -->
+我们可以使用 Apollo 客户端对象的[resetStore]((https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore)方法重置缓存。
 <!-- The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook: -->
 客户端可以通过[useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useApolloClient)Hook访问:
 
@@ -163,8 +163,8 @@ const App = () => {
 }
 ```
 
-<!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>. -->
-当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
+<!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>. -->
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6) ，branch<i>part8-6</i> 上找到。
 
 ### Adding a token to a header
 【在头部添加一个token】
@@ -237,8 +237,8 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7) ，branch<i>part8-7</i> 上找到。
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>. -->
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7) ，branch<i>part8-7</i> 上找到。
 
 ### Updating cache, revisited
 【更新缓存，复习】
@@ -262,8 +262,8 @@ const PersonForm = ({ setError }) => {
 <!-- This approach is pretty good, the drawback being that the query is always rerun with any updates.  -->
 这种方法非常好，缺点是查询总是随着任何更新而重新运行。
 
-<!-- It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation: -->
-通过处理自己更新缓存来优化解决方案是可行的。 这是通过为Mutation定义一个合适的[更新](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#options-)-回调来完成的，Apollo 在Mutation之后运行:
+<!-- It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation: -->
+通过处理自己更新缓存来优化解决方案是可行的。 这是通过为Mutation定义一个合适的[更新](https://www.apollographql.com/docs/react/api/react/hooks/#options-)-回调来完成的，Apollo 在Mutation之后运行:
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -293,8 +293,8 @@ const PersonForm = ({ setError }) => {
 <!-- The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person.  -->
 回调函数被给予一个对缓存的引用，以及作为参数由Mutation返回的数据。 例如，在我们的例子中，这将是被创建的人。
 
-<!-- The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data.  -->
-该代码使用[readQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#readQuery)函数读取<em>ALL\_PERSONS</em> 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/v3.0-beta/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
+<!-- The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery]https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data.  -->
+该代码使用[readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readQuery)函数读取<em>ALL\_PERSONS</em> 查询的缓存状态，并使用[writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writeQuery-and-writefragment) 函数更新缓存，将新人添加到缓存数据中。
 
 Note that readQuery will throw an error if your cache does not contain all of the data necessary to fulfill the specified query. This can be solved using a try-catch block.
 
@@ -315,8 +315,8 @@ Note that readQuery will throw an error if your cache does not contain all of th
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).<br>
 在计算机科学中只有两个难题: 缓存失效和命名。Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science)。
 
-<!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>. -->
-当前应用的代码可以在[Github](https://Github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8) ，branch<i>part8-8</i> 上找到。
+<!-- The current code of the application can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>. -->
+当前应用的代码可以在[Github](https://Github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8) ，branch<i>part8-8</i> 上找到。
 
 </div>
 
@@ -398,8 +398,9 @@ Note that readQuery will throw an error if your cache does not contain all of th
 
 #### 8.22 Up to date cache and book recommendations
 
-<!-- If you fetch the book recommendations with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed.  -->
-如果您使用 GraphQL 获取图书推荐，请以某种方式确保 books 视图是最新的。 因此，当添加一本新书时，至少当按下类型选择按钮时，图书视图会更新。
+<!-- If you did the previous exercise, that is fetch the books in a genre with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed.  -->
+如果您做了之前的练习，使用 GraphQL 获取某个题材的图书，请以某种方式确保 books 视图是最新的。 因此，当添加一本新书时，至少当按下类型选择按钮时，图书视图会更新。
+
 
 <!--<i>When new genre selection is not done, the view does not have to be updated. </i>-->
 当新的类型选择没有完成时，视图不需要更新
