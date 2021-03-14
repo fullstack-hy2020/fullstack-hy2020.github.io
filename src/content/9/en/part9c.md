@@ -375,7 +375,7 @@ place the <i>diaryService.ts</i> file in it.
 The file contains two functions for fetching and saving diary entries:
 
 ```js
-import diaryData from '../../data/diaries.json'
+import diaryData from '../../data/diaries.json';
 
 const getEntries = () => {
   return diaryData;
