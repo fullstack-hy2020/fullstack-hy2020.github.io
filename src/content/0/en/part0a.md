@@ -43,29 +43,13 @@ Exercise completion time statistics can be found via the [submission system](htt
 
 ### Grading
 
-The course can be taken as a shorter course worth 3 credits or as the full course worth 5-9 credits, depending on the number of submitted exercises.
+The course can be taken worth 5-12 credits, depending on the number of submitted exercises.
 
 The number of credits and the final grade are determined by the number of submitted exercises, including those that are not marked with an asterisk.
 
 If you would like university credits, there is also a course exam which does not count towards your final grade, but must be passed. To [register](/en/part0/general_info/#sign-up-for-the-exam) for university credits that are provided by [Open University](https://studies.helsinki.fi/courses/cur/hy-CUR-136061621/Open_uni_Full_Stack_Web_Development_2021_3_12_cr), you must have a Finnish social security number.
 
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required.
-
-#### 3 credits
-
-For three credits, you must submit all compulsory exercises (without asterisks) for parts 0-3.
-
-For university credits, the three credit course also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
-
-The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b> 
-
-Exam results can be found from the <i>my submissions</i> tab of the submission system no later than four weeks after taking the exam, but bear in mind that exams may be corrected slower during July. Remember to save your student number in the submission system!
-
-The three credit course is graded pass/fail.
-
-<i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i>
-
-The three credit course can later be extended to the 5-9 credit version, but if you are working towards 5-9 credits from the beginning, there is no need to take the three credit course exam.
 
 #### 5-7 credits
 
@@ -83,13 +67,11 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-For university credits, the three credit course also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
+The university credits also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
 
 The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b>
 
-You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-9 credits and does not count towards your grade.
-
-Exam results can be found from the <i>my submissions</i> tab of the submission system no later than four weeks after taking the exam, but bear in mind that exams may be corrected slower during July. Remember to save your student number in the submission system!
+You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-12 credits and does not count towards your grade.
 
 <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i>
 

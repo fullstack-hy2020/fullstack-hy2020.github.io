@@ -37,23 +37,11 @@ Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet
 
 ### Arvosteluperusteet
 
-Kurssi voidaan suorittaa joko 3 tai 5-12 opintopisteen laajuisena.
+Kurssi voidaan suorittaa 5-12 opintopisteen laajuisena.
 
 Laajuus ja arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt tehtävät siis vaikuttavat arvosanaan. 
 
 Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan [Avoimen yliopiston](https://studies.helsinki.fi/opintotarjonta/cur/hy-CUR-136055679/Avoin_yo_Full_Stack_websovelluskehitys_2021_3_12_op) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
-
-#### Kolmen opintopisteen suoritus
-
-Kolmen opintopisteen suorituksen edellytyksenä on osien 0-3 kaikkien tähdellä merkitsemättömien tehtävien tekeminen sekä hyväksytty suoritus 3 opintopisteen laajuuden kokeesta.
-
-Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
-
-Kokeen viimeinen suorituspäivä on 10.1.2022. Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt kaikki kolmen opintopisteen suorituksen edellyttämät tehtävät. <b>Huomaa, että viimeinen päivä kurssille ilmoittautumiselle on 9.1.2022.</b> 
- 
-Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 7.5 pistettä. Suoritus rekisteröidään arvosanalla hyväksytty.
-
-Voit halutessasi laajentaa 3 op suorituksen myöhemmin laajempaan 5-8 op suoritukseen. Jos tähtäät suoraan laajempaan suoritukseen, 3 op:n koetta ei kannata suorittaa.
 
 #### Arvosanarajat: 5-7 opintopisteen suoritus
 
@@ -73,13 +61,11 @@ Arvosana/opintopisterajat:
 
 Suoritukseen edellytetään tehtävien lisäksi hyväksytysti suoritettu koe.
 
-Myös 5-7 op:n suorituksen edellytyksenä on hyväksytysti suoritettu koe. 
-
 Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
 Kokeen viimeinen suorituspäivä on 10.1.2022.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.</b>
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-7 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12.5 pistettä.
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-112 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12.5 pistettä.
 #### 8 ja 9 opintopisteen suoritus
 
 Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
