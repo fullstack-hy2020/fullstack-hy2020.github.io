@@ -7,9 +7,9 @@ lang: es
 
 <div class="content">
 
-Este curso es una introducción al desarrollo web moderno con JavaScript. El enfoque principal está en las aplicaciones de una sola página implementadas con React y que las soportan con servicios web RESTful y GraphQL implementados con Node.js. Las novedades del curso de este año son las partes de TypeScript y React Native.
+Este curso es una introducción al desarrollo web moderno con JavaScript. El enfoque principal está en las aplicaciones de una sola página implementadas con React y que las soportan con servicios web RESTful y GraphQL implementados con Node.js. El curso también tiene partes sobre TypeScript, React Native e Integración continua.
 
-Otros temas incluyen depuración de aplicaciones, configuración, gestión de entornos de ejecución y bases de datos NoSQL.
+Otros temas incluyen depuración de  aplicaciones, configuración, administración de entornos de ejecución y bases de datos NoSQL.
 
 ### Requisitos previos
 
@@ -35,7 +35,9 @@ Pasar de la parte <i>n</i> a la parte <i>n + 1</i> no es sensato antes de que se
 
 Se espera que haga <i>al menos</i> todos los ejercicios que no están marcados con un asterisco (\*). Los ejercicios marcados con un asterisco cuentan para su calificación final, pero omitirlos no le impide realizar los ejercicios obligatorios de la siguiente parte.
 
-La velocidad para completar el curso es bastante flexible y los ejercicios se pueden enviar hasta las 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) del 10 de enero de 2021.
+La velocidad para completar el curso es bastante flexible y los ejercicios se pueden enviar hasta las 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) del 1 de marzo de 2022.
+
+Sin embargo, tenga en cuenta que la fecha límite para realizar el examen de créditos de la Universidad de Helsinki es el 10.1.2022.
 
 Las estadísticas del tiempo de finalización del ejercicio se pueden encontrar en el [sistema de presentación](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -53,9 +55,9 @@ Una vez que haya completado suficientes ejercicios para aprobar, puede descargar
 
 Para tres créditos, debe enviar todos los ejercicios obligatorios (sin asteriscos) para las partes 0-3.
 
-Para los créditos universitarios, el curso de tres créditos también requiere aprobar el examen del curso. El examen se realiza en Moodle, al que se puede acceder a través de la [página del curso de Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261) una vez que se haya [registrado](/en/part0/general_info/#sign-up-for-the-exam) para el examen.
+Para los créditos universitarios, el curso de tres créditos también requiere aprobar el examen del curso. El examen se realiza en Moodle, al que se puede acceder a través de la [página del curso de Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261) una vez que se haya [registrado](/es/part0/informacion_general#registrate-para-el-examen) para el examen.
 
-La última fecha posible para realizar el examen es el 10 de enero de 2021. <b>Tenga en cuenta que debe registrarse para el examen a más tardar el 9 de enero de 2021.</b>
+La última fecha posible para realizar el examen es el 10 de enero de 2022. <b>Tenga en cuenta que debe registrarse para el examen a más tardar el 9 de enero de 2022.</b>
 
 Los resultados del examen se pueden encontrar en la pestaña <i>Mis envíos</i> del sistema de envío a más tardar cuatro semanas después de realizar el examen, pero tenga en cuenta que los exámenes pueden corregirse más lentamente durante julio. ¡Recuerde guardar su número de estudiante en el sistema de envío!
 
@@ -81,9 +83,9 @@ Los créditos y las calificaciones se calculan de la siguiente manera:
 | 83         |    5     |   2   |
 | 72         |    5     |   1   |
 
-Para los créditos universitarios, el curso de tres créditos también requiere aprobar el examen del curso. El examen se realiza en Moodle, al que se puede acceder a través de la [página del curso de Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261) una vez que se haya [registrado](/en/part0/general_info/#sign-up-for-the-exam) para el examen.
+Para los créditos universitarios, el curso de tres créditos también requiere aprobar el examen del curso. El examen se realiza en Moodle, al que se puede acceder a través de la [página del curso de Open University](https://courses.helsinki.fi/en/aytkt21009en/131840261) una vez que se haya [registrado](/es/part0/informacion_general#registrate-para-el-examen) para el examen.
 
-La última fecha posible para realizar el examen es el 10 de enero de 2021. <b>Tenga en cuenta que debe inscribirse para el examen a más tardar el 9 de enero de 2021.</b>
+La última fecha posible para realizar el examen es el 10 de enero de 2021. <b>Tenga en cuenta que debe inscribirse para el examen a más tardar el 9 de enero de 2022.</b>
 
 Solo puede realizar el examen después de enviar suficientes ejercicios para cinco créditos. En la práctica, no es aconsejable realizar el examen inmediatamente después de presentar el número crítico de ejercicios. El examen es el mismo para 5-9 créditos y no cuenta para su calificación.
 
@@ -101,7 +103,13 @@ Los ejercicios de las partes 8 y 9 no cuentan para la calificación del curso de
 
 #### Créditos de la parte de React Native
 
-Al enviar ejercicios para la parte 10 de los cursos, React Native, puede obtener uno o dos créditos adicionales. Obtener un crédito requiere que envíe al menos 19 ejercicios, mientras que obtener dos créditos requiere que envíe al menos 26 ejercicios. Puede encontrar más información sobre los requisitos previos de la parte, la presentación de ejercicios y los créditos en la [parte 10](/en/part10/Introduction_to_react_native).
+Al enviar ejercicios para la parte 10 de los cursos, React Native, puede obtener uno o dos créditos adicionales. Obtener un crédito requiere que envíe al menos 19 ejercicios, mientras que obtener dos créditos requiere que envíe al menos 26 ejercicios. Puede encontrar más información sobre los requisitos previos de la parte, la presentación de ejercicios y los créditos en la [parte 10](/es/part10/introduccion_a_react_native).
+
+#### Créditos de la parte de integración continua
+
+Al enviar ejercicios para la parte 11 de los cursos, CI/CD (Integración/Entrega Continua), puede obtener un crédito adicional. Obtener el crédito requiere que envíe los 22 ejercicios de la parte.
+
+Puede encontrar más información sobre los requisitos previos de la parte y el envío de ejercicios en la [parte 11](es/part11/).
 
 ### Cómo obtener tus créditos
 
@@ -112,7 +120,7 @@ Si desea recibir créditos, guarde su número de estudiante de la <b>Universidad
 
 ![](../../images/0/28b.png)
 
-Si no eres un estudiante de la Universidad de Helsinki, puedes obtener un número de estudiante registrándote en el curso a través de [Open University](/en/part0/general_info#sign-up-for-the-exam).
+Si no eres un estudiante de la Universidad de Helsinki, puedes obtener un número de estudiante registrándote en el curso a través de [Open University](/es/part0/informacion_general#registrate-para-el-examen).
 
 Usted recibirá sus créditos después de haber presentado suficientes ejercicios para una calificación aprobatoria, pasado el examen y háganos saber a través del sistema de envío de ejercicios que ha completado el curso:
 
@@ -128,7 +136,7 @@ Incluso si no se registra en Open University para el examen, aún puede descarga
 
 Si ya ha realizado el curso como MOOC o como curso universitario, ahora puede ampliar su curso.
 
-#### Ampliación desde Full stack open 2019
+#### Ampliación desde Full stack open 2019 o 2020
 
 ¡Puede continuar donde lo dejó! Si desea volver a enviar una parte completa, comuníquese con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi) o Telegram [@mluukkai](https://t.me/mluukkai), con su nombre de usuario de Github y las partes que le gustaría eliminar de sus envíos.
 
@@ -142,14 +150,14 @@ La "transferencia de crédito" de las partes completadas anteriormente ocurre en
 
 Si ya aprobó el examen del curso (excluyendo el examen del curso de tres créditos) y ahora está ampliando su curso, no es necesario que vuelva a realizar el examen.
 
-### Cambios desde el año pasado
+### Cambios desde el año 2019
 
 - Solo hay cambios menores en las partes 0-4.
 - La parte 5d, <i>pruebas de extremo a extremo (end-to-end testing)</i> utilizando la biblioteca [Cypress.io](https://www.cypress.io), es material casi completamente nuevo. El uso de hooks personalizados se ha trasladado de la parte 5 a la parte 7 con contenido nuevo.
 - La Parte 6, que trata sobre Redux, se concentra en la nueva API Redux basada en hooks.
 - El material sobre react-router en la parte 7 también se ha actualizado para usar Hook API. Semantic UI React se ha reemplazado con la biblioteca MaterialUI debido a la falta de mantenimiento.
-- La Parte 8 en GraphQL tiene actualizaciones importantes, especialmente en Apollo Client, que finalmente tiene API estables basadas en Hooks.
-- La parte 9 en TypeScript y la parte 10 en React Native es completamente nueva.
+- La Parte 8 de GraphQL tiene actualizaciones importantes, especialmente en Apollo Client, que finalmente tiene API estables basadas en Hooks.
+- La parte 9 de TypeScript, la parte 10 de React Native y la parte 11 de CI/CD es completamente nueva.
 
 El material del curso del año pasado se puede encontrar [aquí](https://fullstackopen-2019.github.io/).
 
@@ -171,7 +179,7 @@ Para los créditos universitarios oficiales es necesario aprobar el examen del c
 
 Siga las instrucciones a continuación para acceder al espacio de Moodle del curso:
 
-- Inscríbase en el curso a través de Open University antes del 9 de enero de 2021 [aquí](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
+- Inscríbase en el curso a través de Open University antes del 9 de enero de 2022 [aquí](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)
 - Recibirá el enlace de Moodle y la clave del curso por correo electrónico dentro de las 24 horas posteriores al registro del curso.
 - Identificación de usuario. ¿Estudias en la Universidad de Helsinki u otra [institución miembro de HAKA](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
   - En caso afirmativo, utilice su nombre de usuario y contraseña para iniciar sesión en Moodle.
