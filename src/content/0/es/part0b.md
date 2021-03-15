@@ -35,7 +35,7 @@ Asegúrese de que la pestaña <i>Network</i> esté abierta y marque la opción <
 
 El servidor y el navegador web se comunican entre sí mediante el protocolo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). La pestaña Network muestra cómo se comunican el navegador y el servidor.
 
-Cuando recargas la página (presiona la tecla F5 o el símbolo &#8634; en tu navegador), la consola muestra que han ocurrido dos eventos:
+Cuando recargas la página (presiona la tecla F5 o el símbolo &#8635; en tu navegador), la consola muestra que han ocurrido dos eventos:
 
 - El navegador recupera el contenido de la página <i>studies.cs.helsinki.fi/exampleapp</i> del servidor
 - Y descarga la imagen <i>kuva.png</i>
@@ -50,11 +50,11 @@ Al hacer clic en el primer evento, se muestra más información sobre lo que est
 
 La parte superior, <i>General</i>, muestra que el navegador hizo una solicitud a la dirección <i>https://studies.cs.helsinki.fi/exampleapp</i> (aunque la dirección ha cambiado ligeramente desde que se tomó esta imagen) usando el método [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET), y que la solicitud fue exitosa, porque la respuesta del servidor tenía el [Código de estado](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
 
-La solicitud y la respuesta del servidor tienen varios [encabezados](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
+La solicitud y la respuesta del servidor tienen varias [cabeceras](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
 ![](../../images/0/4e.png)
 
-Los <i>Encabezados de Respuesta (Response Headers)</i> en la parte superior nos dicen, por ejemplo, el tamaño de la respuesta en bytes y la hora exacta de la respuesta. Un encabezado importante [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) nos dice que la respuesta es un archivo de texto en formato [utf-8](https://en.wikipedia.org/wiki/UTF-8), cuyo contenido se ha formateado con HTML. De esta manera, el navegador sabe que la respuesta es una página [HTML](https://en.wikipedia.org/wiki/HTML) normal y la representa en el navegador "como una página web".
+Las <i>Cabeceras de Respuesta (Response Headers)</i> en la parte superior nos dicen, por ejemplo, el tamaño de la respuesta en bytes y la hora exacta de la respuesta. Una cabecera importante [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) nos dice que la respuesta es un archivo de texto en formato [utf-8](https://en.wikipedia.org/wiki/UTF-8), cuyo contenido se ha formateado con HTML. De esta manera, el navegador sabe que la respuesta es una página [HTML](https://en.wikipedia.org/wiki/HTML) normal y la representa en el navegador "como una página web".
 
 La pestaña <i>Response</i> muestra los datos de la respuesta, una página HTML normal. La sección <i>body</i> determina la estructura de la página renderizada en la pantalla:
 
@@ -66,7 +66,7 @@ Debido a la etiqueta img, el navegador realiza una segunda <i>solicitud HTTP</i>
 
 ![](../../images/0/6e.png)
 
-La solicitud se realizó a la dirección <https://studies.cs.helsinki.fi/exampleapp/kuva.png> y su tipo es HTTP GET. Los Encabezados de Respuesta nos dicen que el tamaño de la respuesta es 89350 bytes y su [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) es <i>image/png</i>, por lo que es una imagen png. El navegador utiliza esta información para mostrar la imagen correctamente en la pantalla.
+La solicitud se realizó a la dirección <https://studies.cs.helsinki.fi/exampleapp/kuva.png> y su tipo es HTTP GET. Las Cabeceras de Respuesta nos dicen que el tamaño de la respuesta es 89350 bytes y su [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) es <i>image/png</i>, por lo que es una imagen png. El navegador utiliza esta información para mostrar la imagen correctamente en la pantalla.
 
 La cadena de eventos causada por abrir la página https://studies.cs.helsinki.fi/exampleapp en un navegador forma el siguiente [diagrama de secuencia](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
@@ -524,11 +524,11 @@ La solicitud POST a la dirección <i>new_note_spa</i> contiene la nueva nota com
 }
 ```
 
-El encabezado <i>Content-Type</i> de la solicitud le dice al servidor que los datos incluidos están representados en formato JSON.
+La cabecera <i>Content-Type</i> de la solicitud le dice al servidor que los datos incluidos están representados en formato JSON.
 
 ![](../../images/0/27e.png)
 
-Sin este encabezado, el servidor no sabría cómo analizar correctamente los datos.
+Sin esta cabecera, el servidor no sabría cómo analizar correctamente los datos.
 
 El servidor responde con el código de estado [201 Created](https://httpstatuses.com/201). Esta vez, el servidor no solicita una redirección, el navegador permanece en la misma página y no envía más solicitudes HTTP.
 
@@ -571,7 +571,7 @@ var sendToServer = function(note) {
 }
 ```
 
-El código determina que los datos se enviarán con una solicitud HTTP POST y el tipo de datos será JSON. El tipo de datos se determina con un encabezado <i>Content-type</i>. Luego, los datos se envían como JSON-string.
+El código determina que los datos se enviarán con una solicitud HTTP POST y el tipo de datos será JSON. El tipo de datos se determina con una cabecera <i>Content-type</i>. Luego, los datos se envían como JSON-string.
 
 El código de la aplicación está disponible en <https://github.com/mluukkai/example_app>.
 Vale la pena recordar que la aplicación solo está destinada a demostrar los conceptos del curso. El código sigue un estilo de desarrollo deficiente en cierta medida y no debe usarse como ejemplo al crear sus propias aplicaciones. Lo mismo ocurre con las URL utilizadas. La URL <i>new_note_spa</i>, a la que se envían las nuevas notas, no cumple con las mejores prácticas actuales.
@@ -588,8 +588,8 @@ El auge de la aplicación de una sola página trajo varias formas más "modernas
 
 Sin embargo, la popularidad de Angular se desplomó después de que el equipo de Angular [anunció](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) en octubre de 2014 que el soporte para la versión 1 terminará, y Angular 2 no será retrocompatible con la primera versión. Angular 2 y las versiones más nuevas no han recibido una bienvenida muy cálida.
 
-Actualmente, la herramienta más popular para implementar la lógica del lado del navegador de las aplicaciones web es la librería [React](https://reactjs.org/) de Facebook.
-Durante este curso, nos familiarizaremos con React y la librería [Redux](https://github.com/reactjs/redux), que se usan juntos con frecuencia.
+Actualmente, la herramienta más popular para implementar la lógica del lado del navegador de las aplicaciones web es la biblioteca [React](https://reactjs.org/) de Facebook.
+Durante este curso, nos familiarizaremos con React y la biblioteca [Redux](https://github.com/reactjs/redux), que se usan juntos con frecuencia.
 
 El estado de React parece sólido, pero el mundo de JavaScript cambia constantemente. Por ejemplo, recientemente un recién llegado -[VueJS](https://vuejs.org/)- ha estado captando cierto interés.
 
@@ -605,7 +605,7 @@ En el contexto de este curso, el desarrollo web full stack significa que nos enf
 
 Codificaremos el backend con JavaScript, utilizando el entorno de ejecución [Node.js](https://nodejs.org/en/). El uso del mismo lenguaje de programación en múltiples capas de la pila le da al desarrollo web full stack una dimensión completamente nueva. Sin embargo, no es un requisito del desarrollo web full stack utilizar el mismo lenguaje de programación (JavaScript) para todas las capas del stack.
 
-Solía ​​ser más común que los desarrolladores se especializaran en una capa del stack, por ejemplo, el backend. Las tecnologías en el backend y el frontend eran bastante diferentes. Con la tendencia full stack, se ha vuelto común que los desarrolladores dominen todas las capas de la aplicación y la base de datos. A menudo, los desarrolladores full stack también deben tener suficientes habilidades de configuración y administración para operar su aplicación, por ejemplo, en la nube.
+Solía ser más común que los desarrolladores se especializaran en una capa del stack, por ejemplo, el backend. Las tecnologías en el backend y el frontend eran bastante diferentes. Con la tendencia full stack, se ha vuelto común que los desarrolladores dominen todas las capas de la aplicación y la base de datos. A menudo, los desarrolladores full stack también deben tener suficientes habilidades de configuración y administración para operar su aplicación, por ejemplo, en la nube.
 
 ### Fatiga de JavaScript
 
@@ -700,7 +700,7 @@ La idea de estos ejercicios es leer el texto una vez más y pensar en lo que est
 
 Cree un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos-de-las-aplicaciones-web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
-  <h4>0.6: Nueva nota</h4>
+<h4>0.6: Nueva nota</h4>
 
 Cree un diagrama que represente la situación en la que el usuario crea una nueva nota utilizando la versión de una sola página de la aplicación.
 
