@@ -217,7 +217,7 @@ module.exports = {
   es: {
     '0': {
       a: 'Información general',
-      b: 'Fundamentos de las aplicaiones web',
+      b: 'Fundamentos de las aplicaciones web',
     },
     '1': {
       a: 'Introducción a React',
