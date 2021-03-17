@@ -65,7 +65,7 @@ Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/1
 
 Kokeen viimeinen suorituspäivä on 10.1.2022.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.</b>
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-112 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12.5 pistettä.
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-12 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12.5 pistettä.
 #### 8 ja 9 opintopisteen suoritus
 
 Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
