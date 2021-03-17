@@ -531,7 +531,7 @@ Tälläkin kertaa tapahtumankäsittelijät on määritelty oikein, sillä <i>onC
 </button>
 ```
 
-### Tilan vieminen alikomponenttiin
+### Vie tila alakomponenttiin
 
 Reactissa suositaan pieniä komponentteja, joita on mahdollista uusiokäyttää monessa osissa sovellusta ja jopa useissa eri sovelluksissa. Refaktoroidaan koodiamme vielä siten, että yhden komponentin sijaan koostamme laskurin näytöstä ja kahdesta painikkeesta.
 
