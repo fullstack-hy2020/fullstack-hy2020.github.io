@@ -1044,7 +1044,7 @@ ReactDOM.render(
 )
 ```
 
-You can use the code below as a starting point for your the file <i>App.js</i>:
+You can use the code below as a starting point for the <i>App.js</i> file:
 
 ```js
 import React, { useState } from 'react'
