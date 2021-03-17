@@ -170,7 +170,7 @@ The second very important React Native Testing Library concept is firing events.
 
 ```javascript
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TextInput, Pressable, View } from 'react-native';
 import { render, fireEvent } from '@testing-library/react-native';
 
 const Form = ({ onSubmit }) => {
@@ -200,9 +200,9 @@ const Form = ({ onSubmit }) => {
         />
       </View>
       <View>
-        <TouchableWithoutFeedback onPress={handleSubmit} testID="submitButton">
+        <Pressable onPress={handleSubmit} testID="submitButton">
           <Text>Submit</Text>
-        </TouchableWithoutFeedback>
+        </Pressable>
       </View>
     </View>
   );
@@ -419,7 +419,7 @@ As always, test your queries in the GraphQL playground first before using them i
 
 To learn how to open a URL in a browser, read the Expo's [Linking API documentation](https://docs.expo.io/workflow/linking/). You will need this feature while implementing the button for opening the repository in GitHub.
 
-The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reacttraining.com/react-router/native/api/Hooks/useparams) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [TouchableOpacity](https://reactnative.dev/docs/touchableopacity) component in the <em>RepositoryList</em> component and using <em>history.push</em> method to change the route in an <em>onPress</em> event handler. You can access the <em>history</em> object with the [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook.
+The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reacttraining.com/react-router/native/api/Hooks/useparams) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [Pressable](https://reactnative.dev/docs/pressable) component in the <em>RepositoryList</em> component and using <em>history.push</em> method to change the route in an <em>onPress</em> event handler. You can access the <em>history</em> object with the [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook.
 
 The final version of the single repository view should look something like this:
 

@@ -196,7 +196,7 @@ describe('Greeting', () => {
 
 ```javascript
 import React, { useState } from 'react';
-import { Text, TextInput, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TextInput, Pressable, View } from 'react-native';
 import { render, fireEvent } from '@testing-library/react-native';
 
 const Form = ({ onSubmit }) => {
@@ -226,9 +226,9 @@ const Form = ({ onSubmit }) => {
         />
       </View>
       <View>
-        <TouchableWithoutFeedback onPress={handleSubmit} testID="submitButton">
+        <Pressable onPress={handleSubmit} testID="submitButton">
           <Text>Submit</Text>
-        </TouchableWithoutFeedback>
+        </Pressable>
       </View>
     </View>
   );
@@ -477,7 +477,7 @@ await act(async () => {
 学习如何在浏览器中打开一个URL，阅读Expo的  [Linking API documentation](https://docs.expo.io/workflow/linking/) 。你需要在实现在Github中打开仓库的功能中用到这个特性。
 
 <!-- The view should have its own route. It would be a good idea to define the repository's id in the route's path as a path parameter, which you can access by using the [useParams](https://reacttraining.com/react-router/native/api/Hooks/useparams) hook. The user should be able to access the view by pressing a repository in the reviewed repositories list. You can achieve this by for example wrapping the <em>RepositoryItem</em> with a [TouchableOpacity](https://reactnative.dev/docs/touchableopacity) component in the <em>RepositoryList</em> component and using <em>history.push</em> method to change the route in an <em>onPress</em> event handler. You can access the <em>history</em> object with the [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook. -->
-视图应当都含有自己的路由。最好将仓库的ID作为路径参数放到路由中，你可以通过使用 [useParams](https://reacttraining.com/react-router/native/api/Hooks/useparams) hook 来访问路由参数。用户应当能够通过点击仓库列表中的仓库访问视图。你可以在  <em>RepositoryList</em> 组件中通过利用 [TouchableOpacity](https://reactnative.dev/docs/touchableopacity) 组件包装一下 <em>RepositoryItem</em> 组件，并使用  <em>history.push</em>  方法在 <em>onPress</em>  事件处理中改变路由。你可以利用 [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook访问  <em>history</em> 对象。
+视图应当都含有自己的路由。最好将仓库的ID作为路径参数放到路由中，你可以通过使用 [useParams](https://reacttraining.com/react-router/native/api/Hooks/useparams) hook 来访问路由参数。用户应当能够通过点击仓库列表中的仓库访问视图。你可以在  <em>RepositoryList</em> 组件中通过利用 [Pressable](https://reactnative.dev/docs/pressable) 组件包装一下 <em>RepositoryItem</em> 组件，并使用  <em>history.push</em>  方法在 <em>onPress</em>  事件处理中改变路由。你可以利用 [useHistory](https://reacttraining.com/react-router/native/api/Hooks/usehistory) hook访问  <em>history</em> 对象。
 
 <!-- The final version of the single repository view should look something like this: -->
 单个仓库视图的最终版本应当看起来如下：
