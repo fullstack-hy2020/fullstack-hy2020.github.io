@@ -530,7 +530,9 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 </div>
 
 <div class="tasks">
+   
 ### Exercises 5.5.-5.10.
+
 #### 5.5 Blog list frontend, step5
 
 Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
@@ -544,6 +546,7 @@ It expands when button <i>new note</i> is clicked
 ![](../../images/5/13be.png)
 
 The form closes when a new blog is created.
+
 #### 5.6 Blog list frontend, step6
 
 Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component. 
