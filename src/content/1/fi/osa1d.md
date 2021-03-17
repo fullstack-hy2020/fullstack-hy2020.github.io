@@ -7,13 +7,13 @@ lang: fi
 
 <div class="content">
 
-### Monimutkaisempi tila
+### Monimutkaisempi osavaltio
 
-Edellisessä esimerkissä sovelluksen tila oli yksinkertainen, se koostui ainoastaan yhdestä kokonaisluvusta. Entä jos sovellus tarvitsee monimutkaisemman tilan?
+Edellisessä esimerkissä sovelluksen osavaltio oli yksinkertainen, se koostui ainoastaan yhdestä kokonaisluvusta. Entä jos sovellus tarvitsee monimutkaisemman osavaltio?
 
-Helpoin ja useimmiten paras tapa on luoda sovellukselle useita erillisiä tiloja tai tilan "osia" kutsumalla funktiota _useState_ useampaan kertaan.
+Helpoin ja useimmiten paras tapa on luoda sovellukselle useita erillisiä tiloja tai osavaltio "osia" kutsumalla funktiota _useState_ useampaan kertaan.
 
-Seuraavassa sovellukselle luodaan kaksi alkuarvon 0 saavaa tilaa _left_ ja _right_:
+Seuraavassa sovellukselle luodaan kaksi alkuarvon 0 saavaa osavaltio _left_ ja _right_:
 
 ```js
 const App = () => {
@@ -37,9 +37,9 @@ const App = () => {
 }
 ```
 
-Komponentti saa käyttöönsä tilan alustuksen yhteydessä funktiot _setLeft_ ja _setRight_ joiden avulla se voi päivittää tilan osia.
+Komponentti saa käyttöönsä osavaltio alustuksen yhteydessä funktiot _setLeft_ ja _setRight_ joiden avulla se voi päivittää osavaltio osia.
 
-Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla nappien <i>left</i> ja <i>right</i> painallukset yhteen olioon
+Komponentin osavaltio tai yksittäinen osavaltio pala voi olla minkä tahansa tyyppinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla nappien <i>left</i> ja <i>right</i> painallukset yhteen olioon
 
 ```js
 {
@@ -85,7 +85,7 @@ const App = () => {
 }
 ```
 
-Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteydessä on nyt huolehdittava <i>koko tilan</i> muutoksesta.
+Nyt komponentilla on siis ainoastaan yksi osavaltio. Näppäinten painallusten yhteydessä on nyt huolehdittava <i>koko osavaltio</i> muutoksesta.
 
 Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun nappia <i>left</i> painetaan, suoritetaan seuraava funktio:
 
@@ -99,7 +99,7 @@ const handleLeftClick = () => {
 }
 ```
 
-uudeksi tilaksi siis asetetaan seuraava olio
+uudeksi osavaltio siis asetetaan seuraava olio
 
 ```js
 {
@@ -108,9 +108,9 @@ uudeksi tilaksi siis asetetaan seuraava olio
 }
 ```
 
-eli kentän <i>left</i> arvo on sama kuin alkuperäisen tilan kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen tilan kenttä <i>right</i>.
+eli kentän <i>left</i> arvo on sama kuin alkuperäisen osavaltio kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen osavaltio kenttä <i>right</i>.
 
-Uuden tilan määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
+Uuden osavaltio määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
 
 ```js
 const handleLeftClick = () => {
@@ -150,7 +150,7 @@ const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
-Lukijalle voi tässä vaiheessa herätä kysymys miksi emme hoitaneet tilan päivitystä seuraavalla tavalla
+Lukijalle voi tässä vaiheessa herätä kysymys miksi emme hoitaneet osavaltio päivitystä seuraavalla tavalla
 
 ```js
 const handleLeftClick = () => {
@@ -159,15 +159,15 @@ const handleLeftClick = () => {
 }
 ```
 
-Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa tilaa suoraan</i>, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
+Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa osavaltio suoraan</i>, sillä voi olla arvaamattomat seuraukset. Osavaltio muutos tulee aina tehdä asettamalla uudeksi osavaltio vanhan perusteella tehty kopio!
 
-Kaiken tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu; etuja siinä ei juuri ole, mutta sovellus monimutkaistuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
+Kaiken osavaltio pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu; etuja siinä ei juuri ole, mutta sovellus monimutkaistuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin osavaltio paloihin.
 
-On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemman tietorakenteen sisällä. [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
+On kuitenkin tilanteita, joissa jokin osa osavaltio kannattaa pitää monimutkaisemman tietorakenteen sisällä. [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) on hieman ohjeistusta aiheeseen liityen.
 
 ### Taulukon käsittelyä
 
-Tehdään sovellukseen vielä laajennus, lisätään sovelluksen tilaan taulukko _allClicks_, joka muistaa kaikki näppäimenpainallukset.
+Tehdään sovellukseen vielä laajennus, lisätään sovelluksen osavaltio taulukko _allClicks_, joka muistaa kaikki näppäimenpainallukset.
 
 ```js
 const App = () => {
@@ -203,13 +203,13 @@ const App = () => {
 }
 ```
 
-Kaikki klikkaukset siis talletetaan omaan tilaan _allClicks_, joka alustetaan tyhjäksi taulukoksi
+Kaikki klikkaukset siis talletetaan omaan osavaltio _allClicks_, joka alustetaan tyhjäksi taulukoksi
 
 ```js
 const [allClicks, setAll] = useState([])
 ```
 
-Kun esim. nappia <i>left</i> painetaan, lisätään tilan taulukkoon _allClicks_ kirjain <i>L</i>:
+Kun esim. nappia <i>left</i> painetaan, lisätään osavaltio taulukkoon _allClicks_ kirjain <i>L</i>:
 
 ```js
 const handleLeftClick = () => {
@@ -218,9 +218,9 @@ const handleLeftClick = () => {
 }
 ```
 
-Tila _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
+Osavaltio _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
 
-Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä taulukkoon metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten että _allClicks_-tilaa muutetaan pushaamalla siihen alkio ja sitten päivitetään tila:
+Kuten jo aiemmin mainittiin, Javascriptissa on myös mahdollista lisätä taulukkoon metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten että _allClicks_-osavaltio muutetaan pushaamalla siihen alkio ja sitten päivitetään osavaltio:
 
 ```js
 const handleLeftClick = () => {
@@ -230,7 +230,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissakin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
+Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin osavaltio, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka osavaltio muuttaminen näyttääkin toimivan joissakin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
 
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 
@@ -372,7 +372,7 @@ const App = () => {
 
 ### Vanha React
 
-Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä alkuvuodesta 2019 ilmestyneestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja JavaScript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, tilaa edellyttävät komponentit oli pakko määritellä [class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen.
+Tällä kurssilla käyttämämme tapa React-komponenttien osavaltio määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä alkuvuodesta 2019 ilmestyneestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja JavaScript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada osavaltio ollenkaan, osavaltio edellyttävät komponentit oli pakko määritellä [class](https://reactjs.org/docs/react-component.html)-komponentteina Javascriptin luokkasyntaksia hyödyntäen.
 
 Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan tämän päivän Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat Reactin nykypäivä ja tulevaisuus, on maailmassa miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja internetistä löytyvien esimerkkien suhteen tilanne on sama, törmäät class-komponentteihin välittömästi.
 
@@ -452,7 +452,7 @@ Koodi pysähtyy kun suoritus etenee sellaiseen pisteeseen, missä komento _debug
 
 ![](../../images/1/7a.png)
 
-Menemällä välilehdelle <i>Console</i> on helppo tutkia muuttujien tilaa:
+Menemällä välilehdelle <i>Console</i> on helppo tutkia muuttujien osavaltio:
 
 ![](../../images/1/8a.png)
 
@@ -464,11 +464,11 @@ Debuggeriin pääsee myös ilman komentoa _debugger_, lisäämällä <i>Sources<
 
 ![](../../images/1/9a.png)
 
-Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden tabin _Components_. Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
+Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden tabin _Components_. Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden osavaltio ja propseja:
 
 ![](../../images/1/10ea.png)
 
-Komponentin _App_ tila on määritelty seuraavasti:
+Komponentin _App_ osavaltio on määritelty seuraavasti:
 
 ```js
 const [left, setLeft] = useState(0)
@@ -476,15 +476,15 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-React dev tools näyttää hookeilla luodut tilan osat siinä järjestyksessä kun ne on määritelty koodissa: 
+React dev tools näyttää hookeilla luodut osavaltio osat siinä järjestyksessä kun ne on määritelty koodissa: 
 
 ![](../../images/1/11ea.png)
 
-Ylimpänä oleva <i>State</i> siis vastaa tilan <i>left</i> arvoa, seuraava tilan <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
+Ylimpänä oleva <i>State</i> siis vastaa osavaltio <i>left</i> arvoa, seuraava osavaltio <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
 
 ### Hookien säännöt
 
-Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen.
+Jotta hookeilla muodostettu sovelluksen osavaltio toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen.
 
 Funktiota _useState_ (eikä seuraavassa osassa esiteltävää funktiota _useEffect_) <i>ei saa kutsua</i> loopissa, ehtolausekkeiden sisältä tai muista kun komponentin määrittelevästä funktioista. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä. Jos näin ei ole, sovellus toimii miten sattuu.
 
@@ -538,7 +538,7 @@ const App = (props) => {
 }
 ```
 
-Haluamme, että napin avulla tilan tallettava muuttuja _value_ saadaan nollattua.
+Haluamme, että napin avulla osavaltio tallettava muuttuja _value_ saadaan nollattua.
 
 Jotta saamme napin reagoimaan, on sille lisättävä <i>tapahtumankäsittelijä</i>.
 
@@ -577,7 +577,7 @@ Myöskään seuraava ei toimi
 <button onClick={value = 0}>button</button>
 ```
 
-taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konsoliin tulee valitus. Tämä tapa on myös toisella tavalla väärin. Tilan muuttaminen ei onnistu suoraan tilan arvon tallentavaa muuttujaa muuttamalla.
+taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konsoliin tulee valitus. Tämä tapa on myös toisella tavalla väärin. Osavaltio muuttaminen ei onnistu suoraan osavaltio arvon tallentavaa muuttujaa muuttamalla.
 
 Entä seuraava:
 
@@ -878,7 +878,7 @@ Kasvatusnapin generoima rivi on seuraava
 <button onClick={setToValue(value + 1)}>increment</button>
 ```
 
-Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka saa parametrikseen tilan tallettavan muuttujan _value_ nykyisen arvon kasvatettuna yhdellä. Jos _value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio
+Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka saa parametrikseen osavaltio tallettavan muuttujan _value_ nykyisen arvon kasvatettuna yhdellä. Jos _value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio
 
 ```js
 () => {
@@ -886,7 +886,7 @@ Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka sa
 }
 ```
 
-Funktioita palauttavia funktioita ei tässäkään tapauksessa olisi ollut pakko käyttää. Muutetaan tilan päivittämisestä huolehtiva funktio _setToValue_ normaaliksi funktioksi:
+Funktioita palauttavia funktioita ei tässäkään tapauksessa olisi ollut pakko käyttää. Muutetaan osavaltio päivittämisestä huolehtiva funktio _setToValue_ normaaliksi funktioksi:
 
 ```js
 const App = (props) => {
@@ -1199,7 +1199,7 @@ Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista ää
 
 ![](../../images/1/19a.png)
 
-**Huom:** kunkin anekdootin äänet kannattanee tallettaa komponentin tilassa olevan olion kenttiin tai taulukkoon. Muista, että tilan oikeaoppinen päivittäminen edellyttää olion tai taulukon <i>kopioimista</i>.
+**Huom:** kunkin anekdootin äänet kannattanee tallettaa komponentin osavaltio olevan olion kenttiin tai taulukkoon. Muista, että osavaltio oikeaoppinen päivittäminen edellyttää olion tai taulukon <i>kopioimista</i>.
 
 Olio voidaan kopioida esim. seuraavasti:
 
