@@ -63,17 +63,17 @@ Your notifications may look like the following:
 
 2. Now make a group on telegram, say "My CI-CD Notifications" using your personal telegram account on mobile app or desktop web app of telegram. After that you'll be prompted to add users, just enter your bot's username there(e.g., `@my_responsible_bot1`) to add bot to the group.
 
-Any bot needs a `chat id` to send any sort of message to a user, group or channel. In telegram, `chat id` is a unique identifier for any user/group/channel and our bot will use it to send message to the group we just created. Since we added our bot to the group, the backend api of telegram has recorded the event for it and we can see that event's details to fetch the `chat id` our group.
+Any bot needs a `chat id` to send any sort of message to a user, group or channel. In telegram, `chat id` is a unique identifier for any user/group/channel and our bot will use it to send message to the group we just created. Since we added our bot to the group, the backend api of telegram has recorded the event for it and we can see that event's details to fetch the `chat id` of our group.
 
-3. Now browse `https://api.telegram.org/bot<BOT_TOKEN>/getUpdates` to view the event log for our bot, and look for something `title: "My CI-CD Notifications"` you'll notice there is the `id` for the group. That is our `chat id` for the group, it looks something like `-123456789`.
+3. Now browse `https://api.telegram.org/bot<BOT_TOKEN>/getUpdates` to view the event log of our bot, and look for something `title: "My CI-CD Notifications"` you'll notice there is the `id` for the group in there too. That is our `chat id` for the group, it looks something like `-123456789`.
 
 4. Add two secrets to github repo i.e., `TELEGRAM_TO` and `TELEGRAM_TOKEN` by navigating to `Settings > Secrets > New Repository Secret` in your github repo.
 
-5. Create a new workflow file say `TelegramNotifcation.yml` and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can default message which includes basic log of the workflow event by omitting the `args` from the job's definition.
+5. Create a new workflow file say `TelegramNotifcation.yml` and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can have a default message which includes basic log of the workflow event simply by omitting the `args` from the [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job's definition.
 
-#### 11.19B: Deliver worflow related messsage directly to user/client's account:
+#### 11.19B: Deliver worflow related messsage directly to user/client's telegram account:
 
-Add another step to your job in existing `TelegramNotifcation.yml` workflow file to deliver message directly to you by using `chat id` associated with your account for `TELEGRAM_TO_ME` secret.
+Add another step to your job in existing `TelegramNotifcation.yml` workflow file to deliver message directly to yourself by using `chat id` associated with your own account, set another secret for that say `TELEGRAM_TO_ME` secret.
 
 Tip: You can get the `chat id` of your personal telegram account by sending a "Hello" message to `@userinfobot` simply.
 
