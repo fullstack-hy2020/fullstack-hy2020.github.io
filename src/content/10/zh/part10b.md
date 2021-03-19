@@ -1152,6 +1152,6 @@ const PlatformSpecificButton = () => {
 
 <!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 2 in the exercise submission system. -->
 
-这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
+这是该节的最后一个练习。是时候将自己的代码提交到Github 并在[exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) 中，将完成的练习标注为已完成。注意本节的练习应当提交到练习提交系统的第二节中。
 
 </div>

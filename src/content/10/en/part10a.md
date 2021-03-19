@@ -31,7 +31,7 @@ This part will heavily rely on concepts covered in the previous parts. Before st
 
 ### Submitting exercises and earning credits
 
-Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 1-4 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 1 in the submission system.
+Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i> than in parts 0-9. The parts 1-4 in the submission system refer to the sections a-d in this part. This means that you will be submitting exercises a single section at a time starting with this section, "Introduction to React Native", which is part 1 in the submission system.
 
 During this part you will earn credits based on the number of exercises you complete. Completing <i>at least 19 exercises</i> in this part will earn you <i>1 credit</i>. Completing <i>at least 26 exercises</i> in this part will earn you <i>2 credits</i>.
 
@@ -187,7 +187,7 @@ The provided ESLint configuration contains only the basis for the configuration.
 
 Set up ESLint in your project so that you can perform linter checks by running <em>npm run lint</em>. To get most of linting it is also recommended to integrate ESLint with your editor.
 
-This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2021). Note that exercises in this section should be submitted to the part 1 in the exercise submission system.
+This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 1 in the exercise submission system.
 </div>
 
 <div class="content">
