@@ -392,7 +392,7 @@ The CSS rule defines that elements with the <i>container</i> class will be outli
 
 The second CSS rule sets the text color of the notes as blue. 
 
-HTML elements can also have other attributes than classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element. 
+HTML elements can also have other attributes apart from classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element. 
 
 The <i>Elements</i> tab of the console can be used to change the styles of the elements. 
 
