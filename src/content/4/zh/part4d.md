@@ -492,9 +492,8 @@ npm uninstall bcrypt
 <!-- The operation must respond with a suitable status code and some kind of an error message if invalid user is created.  -->
 如果创建了无效用户，操作必须使用适当的状态代码和某种错误消息进行响应。
 
-<!-- **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [第3章](/zh/part3/es_lint与代码检查) before using Mongoose validation.  -->
-**注意**不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在 [第3章](/zh/part3/es_lint与代码检查)中那样在控制器中验证密码长度。
-
+<!-- **NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [第3章](/zh/part3/node_js_%E4%B8%8E_express) before using Mongoose validation.  -->
+**注意**不要用 Mongoose 验证测试密码限制。 这不是一个好主意，因为后端接收到的密码和保存到数据库的密码散列不是一回事。 在使用 Mongoose 验证之前，应该像在 [第3章](/zh/part3/node_js_%E4%B8%8E_express)中那样在控制器中验证密码长度。
 <!-- Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message.  -->
 此外，实现一些测试，测试可以检查未被创建的无效用户，以及无效的添加用户操作，并返回合适的状态码和错误消息。
 
