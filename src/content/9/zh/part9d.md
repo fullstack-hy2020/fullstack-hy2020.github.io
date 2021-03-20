@@ -1086,14 +1086,24 @@ interface HealthCheckEntry extends BaseEntry {
 }
 ```
 
-<!-- Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine and export them as the Entry type like this: -->
-现在我们只需要创建<i>OccupationalHealthCareEntry</i> 和<i>HospitalEntry</i> 类型，这样我们就可以将它们组合并导出为 Entry 类型，如下所示:
+<!-- Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine them in an union and export them as the Entry type like this: -->
+现在我们只需要创建<i>OccupationalHealthCareEntry</i> 和<i>HospitalEntry</i> 类型，这样我们就可以将它们组合并，并导出为 Entry 类型，如下所示:
 
 ```js
 export type Entry =
   | HospitalEntry
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
+```
+
+An important point concerning unions is that, when you use them with `Omit` to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the `id` from each `Entry`, we could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type, would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
+一个关于union 的重点是，当你使用 `Omit` 来排除一个属性，它会以一种意料不到的方式工作。假设我们想要从 `Entry` 删除 `id` 属性，我们可能会想要使用 `Omit<Entry, 'id'>` ， 但是[这并不会按预期运行](https://github.com/microsoft/TypeScript/issues/42680) ，实际上，结果的类型，只会包含常见的属性， 不包含他们不共享的。一个可能的解决方案是定义一个特殊的 Omit-like  函数，按如下方式来处理：
+
+```ts
+// Define special omit for unions
+type UnionOmit<T, K extends string | number | symbol> = T extends unknown ? Omit<T, K> : never;
+// Define Entry without the 'id' property
+type EntryWithoutId = UnionOmit<Entry, 'id'>;
 ```
 
 </div>

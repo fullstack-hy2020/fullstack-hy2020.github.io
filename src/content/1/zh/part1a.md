@@ -496,7 +496,7 @@ part2
 ```
 
 <!-- See [this](https://github.com/fullstack-hy2020/example-submission-repository)! -->
-参考 [这里](https://github.com/FullStack-HY2020/example-submission-repository)!
+参考 [这里](https://github.com/fullstack-hy2020/example-submission-repository)!
 
 <!-- For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1. -->
 为课程的每一章节都创建一个目录，它进一步分支成一系列练习的目录，如第1章节的“ unicafe”。
@@ -565,7 +565,7 @@ export default App
 ```
 
 <!-- and remove extra files (App.js, App.css, App.test.js, logo.svg, reportWebVitals.js). -->
-并删除额外的文件( App.css、 App.test.js、logo.svg、setupTests.js、reportWebVitals.js 、setupTests.js))。
+并删除额外的文件(App.css, App.test.js, logo.svg, setupTests.js, reportWebVitals.js)。
 
 <!-- Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises. -->
 

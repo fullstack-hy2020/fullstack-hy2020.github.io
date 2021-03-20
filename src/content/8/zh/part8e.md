@@ -535,8 +535,22 @@ query {
 }
 ```
 
-<!-- There is however one issue with our solution, it does an unreasonable amount of queries to the database. If we log every query to the database, and we have 5 persons saved, we see the following: -->
-但是，我们的解决方案有一个问题，它对数据库执行的查询数量不合理。 如果我们将每个查询记录到数据库中，并保存了5个人，我们会看到如下结果:
+<!-- There is however one issue with our solution, it does an unreasonable amount of queries to the database. If we log every query to the database, just like this for example, -->
+但是，我们的解决方案有一个问题，它对数据库执行的查询数量不合理。 如果我们将每个查询记录到数据库中，比如
+
+```js
+friendOf: async (root) => {
+// highlight-start
+  console.log("Person.find")
+  const friends = await User.find({ friends: { $in: [root._id] } })
+  console.log("User.find")
+  // highlight-end
+  return friends
+},
+```
+
+<!-- and we have 5 persons saved, we see an absurd amount of queries. -->
+我们保存了5个人，会看到如下荒唐的结果:
 
 <pre>
 Person.find

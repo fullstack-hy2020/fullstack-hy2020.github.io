@@ -242,7 +242,7 @@ const App = () => {
 
 
 
-<!-- The code for the current state of our application can be found in the  <i>part2-7</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-7). -->
+<!-- The code for the current state of our application can be found in the  <i>part2-7</i> branch on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-7). -->
 我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-7)上的<i>part2-7</i> 分支中找到。
 
 
@@ -324,7 +324,7 @@ const App = () => {
 
 
 
-<!-- Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally, it has been considered the best practice to entirely separate CSS from the content (HTML) and functionality (JavaScript). According to this older school of thought, the goal was to write CSS, HTML, and JavaScript into their separate files. -->
+<!-- Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally, it has been considered best practice to entirely separate CSS from the content (HTML) and functionality (JavaScript). According to this older school of thought, the goal was to write CSS, HTML, and JavaScript into their separate files. -->
 内联样式和其他一些将样式添加到 React 组件的方法完全违背了旧的惯例。 传统上，将 CSS 与内容(HTML)和功能(JavaScript)解耦被认为是最佳实践。 根据这个古老的思想流派，我们的目标是将 CSS、 HTML 和 JavaScript 编写到它们各自的文件中。
 
 <!-- The philosophy of React is, in fact, the polar opposite of this. Since the separation of CSS, HTML, and JavaScript into separate files did not seem to scale well in larger applications, React bases the division of the application along the lines of its logical functional entities. -->
@@ -333,8 +333,8 @@ React的哲学，事实上，是这个极端的对立面。 由于将 CSS、 HTM
 <!-- The structural units that make up the application's functional entities are React components. A React component defines the HTML for structuring the content, the JavaScript functions for determining functionality, and also the component's styling; all in one place. This is to create individual components that are as independent and reusable as possible. -->
 构成应用功能实体的结构单元是 React 组件。 React 组件定义了组织内容的 HTML，确定功能的 JavaScript 函数，以及组件的样式; 所有这些都放在一个地方。 这是为了创建尽可能独立和可重用的单个组件。
 
-<!-- The code of the final version of our application can be found in the  <i>part2-8</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-8). -->
-我们应用最终版本的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-8)上的<i>part2-8</i> 分支中找到。
+<!-- The code of the final version of our application can be found in the  <i>part2-8</i> branch on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-8). -->
+我们应用最终版本的代码可以在[GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-8)上的<i>part2-8</i> 分支中找到。
 
 </div>
 

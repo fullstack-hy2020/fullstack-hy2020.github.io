@@ -19,6 +19,10 @@ lang: zh
 
 我们现在将实现前台的用户管理功能的一部分。首先从用户登录开始，在这一章节中，我们假设还不会从前端来添加用户。
 
+
+### Handling login
+【处理登录逻辑】
+
 <!-- A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. -->
 
 登录表单已经添加到了页面顶端。添加 Note 的表单也已经移到了 Note 列表的顶部。

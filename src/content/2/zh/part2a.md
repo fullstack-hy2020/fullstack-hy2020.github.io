@@ -16,9 +16,9 @@ lang: zh
 
 一个JavaScript 老鸟和菜鸟有什么区别? 老鸟使用 console.log的次数是菜鸟的数十倍甚至数百倍。
 
-<!-- Paradoxically, this seems to be true even though a rookie programmer would need console.log (or any debugging method) more than an experienced one. -->
+<!-- Paradoxically, this seems to be true even though a rookie programmer would need <i>console.log</i> (or any debugging method) more than an experienced one. -->
 
-矛盾的是，实际上，菜鸟比老鸟更需要 console.log (或任何其他调试方法)。
+矛盾的是，实际上，菜鸟比老鸟更需要 <i>console.log</i> (或任何其他调试方法)。
 
 <!-- When something does not work, don't just guess what's wrong. Instead, log or use some other way of debugging.  -->
 当某些事情不能正常工作时，不要只是猜测错误，而应记录或使用其他调试方法。
@@ -47,20 +47,20 @@ props value is [Object object]
 
 而当您将对象用逗号分隔，将不同参数传递给 console.log 时，就像在上面的第二个例子中一样，对象的内容将作为有意义的字符串打印到开发者控制台中。
 
-<!-- If necessary, read more about debugging React-applications [here](/zh/part1/深入_react_应用调试#debugging-react-applications). -->
-如果有必要，请阅读更多关于React 应用调试的内容[here](/zh/part1/深入_react_应用调试#debugging-react-applications)。
+<!-- If necessary, read more about [debugging React-applications](/en/part1/a_more_complex_state_debugging_react_apps#debugging-react-applications). -->
+如果有必要，请阅读更多关于[React 应用调试](/zh/part1/深入_react_应用调试#debugging-react-applications)的内容。
 
 ### Protip: Visual Studio Code snippets 
 【高级技巧: Visual Studio Code 的代码片段】
-<!-- With  Visual Studio Code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.  -->
+<!-- With  Visual Studio Code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.-->
 
 使用 Visual Studio Code能够很容易创建“代码片段（snippets）” ，即快速生成常用代码块的快捷方式，很像 Netbeans 中的“ sout”。
 
 <!-- Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets). -->
 创建代码片段的说明可以在这里找到 [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).。
 
-<!-- Useful, ready-made snippets can also be found as VS Code plugins, for example [here](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets). -->
-有用的、现成的代码片段也可以在 VS 代码插件中找到，例如[这里](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
+<!-- Useful, ready-made snippets can also be found as VS Code plugins, in the [marketplace](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets). -->
+有用的、现成的代码片段也可以在 VS 代码插件中找到，在[插件市场](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
 
 <!-- The most important snippet is the one for the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so:  -->
 最重要的片段是用于 <em>console.log()</em>  命令的片段，例如<em>clog</em>:
@@ -94,20 +94,20 @@ props value is [Object object]
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
 - [Reduce 基础](https://www.youtube.com/watch?v=Wl98eZpkp-c&t=31s)
 
-  
 
 ### Event handlers revisited
 【事件处理复习】
+
 <!-- Based on last year's course, event handling has proven to be difficult.  -->
 基于去年的课程，事件处理证明是一个难点内容。
-<!-- It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/zh/part1/深入_react_应用调试#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up.  -->
 
+<!-- It's worth reading the revision chapter at the end of the previous part [event handlers revisited](/zh/part1/深入_react_应用调试#event-handling-revisited), if it feels like your own knowledge on the topic needs some brushing up.  -->
 如果你觉得自己关于这个议题的知识需要复习一下，那么应该阅读上一章节结尾的复习章节 [事件处理复习](/zh/part1/深入_react_应用调试#event-handling-revisited)。
 
 <!-- Passing event handlers to the child components of the <i>App</i> component has raised some questions. A small revision on the topic can be found [here](/zh/part1/深入_react_应用调试#passing-event-handlers-to-child-components). -->
 将事件处理传递给<i>App</i> 组件的子组件引发了一些问题。 关于这个议题的一个小复习[在这里](/zh/part1/深入_react_应用调试#passing-event-handlers-to-child-components)。
 
-### Rendering collections
+### Rendering Collections
 【渲染集合】
 <!-- We will now do the 'frontend', or the browser-side application logic, in React for an application that's similar to the example application from [第0章](/zh/part0) -->
 
@@ -179,7 +179,7 @@ ReactDOM.render(
 <!-- Every note contains its textual content and a timestamp as well as a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>. -->
 每个便笺都包含其文本内容、时间戳以及一个布尔值，用于标记该便笺是否重要，便笺还包含一个惟一的<i>id</i>。
 
-<!-- The code functions due to the fact that there are exactly three notes in the array.  -->
+<!-- The example above works due to the fact that there are exactly three notes in the array.  -->
 由于数组中仅有三个便笺，因此代码可以运行。
 
 <!-- A single note is rendered by accessing the objects in the array by referring to a hard-coded index number: -->
@@ -261,9 +261,9 @@ const App = (props) => {
 
 ![](../../images/2/1a.png)
 
-<!-- As the linked [page](https://reactjs.org/docs/lists-and-keys.html#keys) in the error message instructs, the list items, i.e. the elements generated by the _map_ method, must each have a unique key value:  an attribute called <i>key</i>. -->
+<!-- As the linked [React page](https://reactjs.org/docs/lists-and-keys.html#keys) in the error message suggests, the list items, i.e. the elements generated by the _map_ method, must each have a unique key value:  an attribute called <i>key</i>. -->
 
-正如错误消息中的链接 [page](https://reactjs.org/docs/lists-and-keys.html#keys) 所说明的，列表项，即 map 方法生成的每个元素，都必须有一个唯一的键值: 一个名为<i>key</i> 的属性。
+正如错误消息中的链接 [React page](https://reactjs.org/docs/lists-and-keys.html#keys) 所建议的，列表项，即 map 方法生成的每个元素，都必须有一个唯一的键值: 一个名为<i>key</i> 的属性。
 
 <!-- Let's add the keys: -->
 让我们添加上key:
@@ -292,8 +292,8 @@ const App = (props) => {
 <!-- And the error message disappears.  -->
 错误就消失了。
 
-<!-- React uses the key attributes of objects in an array to determine how to update the view generated by a component when the component is re-rendered. More about this [here](https://reactjs.org/docs/reconciliation.html#recursing-on-children). -->
-React 使用数组中对象的key属性来确定组件在重新渲染时，如何更新组件生成的视图。 更多的说明在[这里](https://reactjs.org/docs/reconciliation.html#recursing-on-children)。 
+<!-- React uses the key attributes of objects in an array to determine how to update the view generated by a component when the component is re-rendered. More about this in the [React documentation](https://reactjs.org/docs/reconciliation.html#recursing-on-children). -->
+React 使用数组中对象的key属性来确定组件在重新渲染时，如何更新组件生成的视图。 更多的说明在[React 文档](https://reactjs.org/docs/reconciliation.html#recursing-on-children)。 
 
 ### Map
 <!-- Understanding how the array method [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course.  -->
@@ -380,7 +380,7 @@ notes.map(note =>
 )
 ```
 
-<!-- which generates a <i>li</i> tag containing the contents of the note from each note object.  -->
+<!-- which generates an <i>li</i> tag containing the contents of the note from each note object.  -->
 它生成一个<i>li</i> 标签，其中包含每个便笺对象的便笺内容。
 
 <!-- Because the function parameter of the _map_ method -->
@@ -390,11 +390,12 @@ notes.map(note =>
 note => <li key={note.id}>{note.content}</li>
 ```
 
-<!-- The use of curly braces will cause some headaches in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. -->
-一开始使用花括号会让你头疼，但是你很快就会习惯的。 因为来自 React 的图形反馈是即时的。
+<!-- The use of curly braces will cause some pain in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate. -->
+一开始使用花括号会让你痛苦，但是你很快就会习惯的。 因为来自 React 的图形反馈是即时的。
 
-### Anti-pattern: array indexes as keys 
+### Anti-pattern: Array Indexes as Keys
 【反模式: 将数组的索引作为键】
+
 <!-- We could have made the error message on our console disappear by using the array indexes as keys. The indexes can be retrieved by passing a second parameter to the callback function of the _map_ method:  -->
 通过使用数组的索引作为键，我们可以使控制台上的错误消息消失。可以通过向 _map_ 方法 的回调函数传递的第二个参数来获取索引:
 
@@ -420,8 +421,9 @@ notes.map((note, i) => ...)
 
 <!-- This is, however, **not recommended** and can cause undesired problems even if it seems to be working just fine.  -->
 然而，这是**不推荐的**，因为可能导致意想不到的问题，即使它似乎能正常工作。
-<!-- Read more [from here](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318). -->
-更多内容请点击 [这里](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)。
+
+<!-- Read more in [this article](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318). -->
+更多内容请点击 [](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)。
 
 ### Refactoring modules 
 【重构模块】
@@ -445,8 +447,8 @@ const App = ({ notes }) => { //highlight-line
 }
 ```
 
-<!-- If you have forgotten what destructuring means and how it works, review [this](/zh/part1/组件状态，事件处理#destructuring). -->
-如果您忘记了解构的含义以及它是如何工作的，请复习 [这里](/zh/part1/组件状态，事件处理#destructuring)
+<!-- If you have forgotten what destructuring means and how it works,  please review the [section on destructuring](/en/part1/component_state_event_handlers#destructuring). -->
+如果您忘记了解构的含义以及它是如何工作的，请复习 [关于解构](/zh/part1/组件状态，事件处理#destructuring)的知识。
 
 <!-- We'll separate displaying a single note into its own component <i>Note</i>:  -->
 我们将单独显示一个便笺到它自己的<i>Note</i>组件:
@@ -502,7 +504,7 @@ import App from './App.js'
 <!-- In smaller applications, components are usually placed in a directory called <i>components</i> , which is in turn placed within the <i>src</i> directory. The convention is to name the file after the component.  -->
 在较小型的应用中，组件通常放在一个名为<i>components</i> 的目录中，而这个<i>components</i>目录又放在<i>src</i> 目录中。 约定是：按照组件的名称来命名文件。
 
-<!-- Now we'll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside.  -->
+<!-- Now, we'll create a directory called <i>components</i> for our application and place a file named <i>Note.js</i> inside.  -->
 现在，我们将为应用创建一个名为<i>components</i> 的目录，并在其中放置一个名为<i>Note.js</i> 的文件。
 
 <!-- The contents of the Note.js file are as follows:  -->
@@ -548,7 +550,7 @@ const App = ({ notes }) => {
 './components/Note'
 ```
 
-<!-- The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory. The filename extension can be omitted. -->
+<!-- The period in the beginning refers to the current directory, so the module's location is a file called <i>Note.js</i> in a sub-directory of the current <i>components</i>. directory.  The filename extension _.js_ can be omitted. -->
 开头的 _句点_ 指的是当前工作目录，因此模块的位置是当前<i>components</i> 的子目录中的一个名为<i>Note.js</i> 的文件。 文件扩展名(_.js_)可以省略。
 
 <!--<i>App</i> is a component as well, so let's declare it in its own module as well. Since it is the root component of the application, we'll place it in the <i>src</i> directory. The contents of the file are as follows:--> 
@@ -612,7 +614,7 @@ ReactDOM.render(
 <!-- If you clone the project, run the command _npm install_ before starting the application with _npm start_. -->
 如果您克隆了项目，请在启动应用之前运行命令_npm install_ 。
 
-### When the application breaks 
+### When the Application Breaks
 【当应用挂掉了】
 <!-- Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type of, for instance, function variables or return values.  -->
 
@@ -626,7 +628,7 @@ ReactDOM.render(
 
 
 <!-- In these situations your best way out is the <em>console.log</em>. -->
-在这些情况下，你最好的方案就是  <em>console.log</em>.。
+在这些情况下，你最好的方案就是  <em>console.log</em>。
 
 <!-- The piece of code causing the explosion is this:  -->
 引起崩溃的代码是长这样的:
@@ -673,14 +675,14 @@ const App = () => {
 
 
 
-<!-- To see the printing on the console, we must scroll up over the long red wall of errors. -->
+<!-- To see the printing in the console, we must scroll up over the long red wall of errors. -->
 要在控制台上看到打印结果，我们必须翻过长长的红色报错墙。
 
 ![](../../images/2/4b.png)
 
 
 
-<!-- When one thing is found to be working, it's time to log deeper. If the component has been declared as a single statement, or a function without a return, it makes printing to the console harder.  -->
+<!-- When one thing is found to be working, it's time to log deeper. If the component has been declared as a single statement, or a function without a return, it makes printing to the console harder.-->
 当打印被发现是有效时，就是时候往更深入的地方打印记录了。 如果组件声明是单个语句，或者声明为了函数而没有返回，则会增加打印到控制台的难度。
 
 ```js

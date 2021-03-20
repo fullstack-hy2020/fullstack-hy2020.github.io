@@ -236,8 +236,8 @@ const App = () => {
       </Nav.Link>
       <Nav.Link href="#" as="span">
         {user
-          ? <em>{user} logged in</em>
-          : <Link to="/login">login</Link>
+          ? <em style={padding}>{user} logged in</em>
+          : <Link style={padding} to="/login">login</Link>
         }
     </Nav.Link>
     </Nav>

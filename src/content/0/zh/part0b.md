@@ -585,11 +585,11 @@ Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元�
 
 在控制台上所做的更改也不是永久性的。 如果要进行持久的更改，必须将更改保存到服务器上的 CSS 样式表中。
 
-### Loading a page containing JavaScript - revised 
+### Loading a page containing JavaScript - review 
 
 【加载一个包含 JavaScript 的页面-复习】
 
-<!-- Let's revise what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. -->
+<!-- Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. -->
 
 让我们复习一下在浏览器上打开页面 https://studies.cs.helsinki.fi/exampleapp/notes 时会发生什么。
 

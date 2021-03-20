@@ -1233,7 +1233,7 @@ ReactDOM.render(
 ```
 
 <!-- You can implement the application in a single <i>index.js</i> file. You can use the code below as a starting point for your application. -->
-<!-- You can use the code below as a starting point for your the file <i>App.js</i>: -->
+<!-- You can use the code below as a starting point for the <i>App.js</i> file: -->
 您可以使用下面的代码作为<i>App.js</i>的起点。
 
 ```js
