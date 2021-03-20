@@ -456,11 +456,11 @@ const router = express.Router();
 
 router.get('/', (_req, res) => {
   res.send('Fetching all diaries!');
-})
+});
 
 router.post('/', (_req, res) => {
   res.send('Saving a diary!');
-})
+});
 
 export default router;
 ```
@@ -520,7 +520,7 @@ app.listen(PORT, () => {
 
 
 ```js
-import diaryData from '../../data/diaries.json'
+import diaryData from '../../data/diaries.json';
 
 const getEntries = () => {
   return diaryData;
@@ -1725,8 +1725,13 @@ const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   return newEntry;
 };
 ```
-<!-- we notice that the code does not compile. Thie is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. We can fix this by destructuring the fields to variables of the type unknown as follows: -->
-我们注意到代码没有编译。这是由于[unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type)  类型不允许任何操作符，所以访问字段也是不行的。我们可以通过解构字段成变量来修复这个问题：
+<!-- we notice that the code does not compile. Thie is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. 
+
+We can fix this by destructuring the fields to variables of the type unknown as follows: -->
+
+我们注意到代码没有编译。这是由于[unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type)  类型不允许任何操作符，所以访问字段也是不行的。
+
+我们可以通过解构字段成变量来修复这个问题：
 
 ```js
 type Fields = { comment : unknown, date: unknown, weather: unknown, visibility: unknown };
@@ -1745,6 +1750,23 @@ const toNewDiaryEntry = ({ comment, date, weather, visibility } : Fields): NewDi
 
 <!-- The first version of our flight diary application is now completed!  -->
 我们的飞行日志应用的第一个版本现在已经完成！
+
+<!-- The other option to bypass the problem would be to use the type <i>any</i> for the parameter and disable the lint rule for that line: -->
+另一个解决该问题的选择是使用<i>any</i>来定义该参数，并为该行关闭lint 规则检查：
+
+```js
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const toNewDiaryEntry = (object: any): NewDiaryEntry => {
+  const newEntry: NewDiaryEntry = {
+    comment: parseComment(object.comment),
+    date: parseDate(object.date),
+    weather: parseWeather(object.weather),
+    visibility: parseVisibility(object.visibility)
+  };
+
+  return newEntry;
+};
+```
 
 <!-- If we now try to create a new diary entry with invalid or missing fields we are getting an appropriate error message -->
 如果我们现在尝试创建一个包含无效或缺少字段的新日记条目，我们将得到一个适当的错误消息
