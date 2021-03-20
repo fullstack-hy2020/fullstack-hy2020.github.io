@@ -7,9 +7,9 @@ lang: zh
 
 <div class="content">
 
-<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. New for this year's course are parts on TypeScript,  React Native and Continuous integration.-->
+<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. Course has also  parts on TypeScript,  React Native and Continuous integration.-->
 
-本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 今年还推出了三门全新的的课程——TypeScript、React Native以及持续集成。
+本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 课程内容还包括 TypeScript、React Native以及持续集成。
 
 <!-- Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases. -->
 
@@ -59,14 +59,17 @@ lang: zh
 
 你<i>至少</i>要完成没有带星号(\*)的练习。 带星号的练习虽然对标你的期末成绩，但跳过它们并不妨碍你做下一章节的必选练习。
 
-<!-- The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 15 February 2021.  -->
-课程的完成速度是十分弹性的，练习在[欧洲时间](https://en.wikipedia.org/wiki/Eastern_European_Time) 的2021年3月1日前都可以进行提交。
+<!-- The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022.  -->
+课程的完成速度是十分弹性的，练习在[欧洲时间](https://en.wikipedia.org/wiki/Eastern_European_Time) 的2022年3月1日前都可以进行提交。
+
+However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2022. 
+不过注意，赫尔辛基大学的学分考试截止日期是2022年1月10号。
 
 <!-- After that, submission system shall be closed for two weeks until 2021 edition will start 15.3.2021. There will not be much changes, so you can just keep coding!  -->
-在此之后，提交系统会关闭两个周，2021版本会在2021年3月15日启动。2021版本不会有太大的变化，所以你可以接着敲代码啦。
+<!-- 在此之后，提交系统会关闭两个周，2021版本会在2021年3月15日启动。2021版本不会有太大的变化，所以你可以接着敲代码啦。 -->
 
 <!-- However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2020.  -->
-不过注意，赫尔辛基大学的学分考试截止日期是2021年1月10号。
+<!-- 不过注意，赫尔辛基大学的学分考试截止日期是2021年1月10号。 -->
 
 <!-- Statistics on the time used for exercises which have already been submitted on different parts of this course can be found from [the submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
@@ -78,52 +81,52 @@ lang: zh
 ### Grading 
 【课程成绩】
 
-<!-- The course can be taken as a shorter course worth 3 credits, or as the full course worth 5-9 credits depending on the number of submitted exercises. -->
+<!-- The course can be taken worth 5-12 credits, depending on the number of submitted exercises.-->
 
-课程可以当做 3 个学分的短期课程选修，也可以作为 5-9 个学分的完整课程进行学习，这取决于所提交的练习的数量。
+课程包含 5-12 个学分，这取决于所提交的练习的数量。
 
 <!-- The number of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. -->
 
 学分的数量和最终成绩是由提交练习的数量决定的，也就是说没有星号的练习也会计入你的最终成绩。
 
-<!-- If you want university credits there is also a course exam, which must be passed. The exam does not count towards your grade. To [register](/zh/part0/基础知识/#sign-up-for-the-exam) for university credits that are provided by [Open university](https://courses.helsinki.fi/en/aytkt21009en/131840261), you must have a Finnish social security number. -->
+<!-- If you want university credits there is also a course exam, which must be passed. The exam does not count towards your grade. To [register](/zh/part0/基础知识/#sign-up-for-the-exam) for university credits that are provided by [Open university](https://studies.helsinki.fi/courses/cur/hy-CUR-136061621/Open_uni_Full_Stack_Web_Development_2021_3_12_cr), you must have a Finnish social security number. -->
 
-如果你想获得大学学分，还有一个必须通过的课程考试。 这次考试不会计入你的成绩。 学分是[开放大学](https://courses.helsinki.fi/en/aytkt21009en/131840261)所提供的，如果要 [申请](/zh/part0/基础知识/#sign-up-for-the-exam)大学学分，你必须有一个芬兰的社保号码。
+如果你想获得大学学分，还有一个必须通过的课程考试。 这次考试不会计入你的成绩。 学分是[开放大学](https://studies.helsinki.fi/courses/cur/hy-CUR-136061621/Open_uni_Full_Stack_Web_Development_2021_3_12_cr)所提供的，如果要 [申请](/zh/part0/基础知识/#sign-up-for-the-exam)大学学分，你必须有一个芬兰的社保号码。
 
 <!-- You can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade. For getting the course certificate, a Finnish social security number is not needed. -->
 
 一旦你完成了足够的练习后，满足成绩通过的条件，你可以从 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)下载课程证书。 获得课程证书，不需要芬兰社保号码。
 
-#### 3 credits 
-【如何获得3学分】
+<!-- #### 3 credits  -->
+<!-- 【如何获得3学分】 -->
 
 <!-- For three credits, you must submit all compulsory exercises (without stars) for parts 0-3. -->
 
-想要获得三个学分，你必须提交 0-3 章节的所有必修(不带星号)练习。
+<!-- 想要获得三个学分，你必须提交 0-3 章节的所有必修(不带星号)练习。 -->
 
 <!-- For university credits the 3 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/zh/part0/基础知识/#sign-up-for-the-exam). -->
 
-想要获得大学学分的话，3 个学分的课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦已经[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
+<!-- 想要获得大学学分的话，3 个学分的课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦已经[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。 -->
 
 <!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest. It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.</b> -->
 
-最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。 您也可以参加2021学年的考试，2021年的开课时间是2021年3月15日。
+<!-- 最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。 您也可以参加2021学年的考试，2021年的开课时间是2021年3月15日。 -->
 
 <!-- Exam results can be found from the "my submissions" tab of the submission system no later than 4 weeks after taking the exam (exams might be marked slower during July). Remember to save your student number to the submission system! -->
 
-考试结果可以在考试后 4 周内从提交系统的“我的提交”标签中找到(7 月份的考试可能会较晚)。 记得在提交系统中保存你的学号！
+<!-- 考试结果可以在考试后 4 周内从提交系统的“我的提交”标签中找到(7 月份的考试可能会较晚)。 记得在提交系统中保存你的学号！ -->
 
 <!-- The three credit course is graded pass/fail. -->
 
-3学分的课程只有及格/不及格两种状态。
+<!-- 3学分的课程只有及格/不及格两种状态。 -->
 
 <!-- <i>For the course certificate, you do not need to attend the course exam or register to the open university course.</i> -->
 
-如果只想获得课程证书，你不需要参加课程考试或注册公开大学课程。
+<!-- 如果只想获得课程证书，你不需要参加课程考试或注册公开大学课程。 -->
 
 <!-- The three credit course can later be extended to the 5-9 credit version. If you are working towards 5-9 credits from the beginning, there is no need to take the 3 credit course exam. -->
 
-这 3 学分课程以后可以拓展到 5-9 学分的版本。 如果你从一开始就是朝着 5-9 学分努力的，那就没有必要参加 3 学分的课程考试。
+<!-- 这 3 学分课程以后可以拓展到 5-9 学分的版本。 如果你从一开始就是朝着 5-9 学分努力的，那就没有必要参加 3 学分的课程考试。 -->
 
 #### 5-7 credits
 【如何获得5-7学分】
@@ -146,22 +149,21 @@ lang: zh
 | 83               |       5        |     2      |
 | 72               |       5        |     1      |
 
-<!-- For university credits the 5-9 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/zh/part0/基础知识/#sign-up-for-the-exam) for the exam. -->
+<!-- The university credits also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam. -->
 
 如果想要获得大学学分，5-9 学分课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
 
-<!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest.</b>  It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.
--->
+<!-- The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b> -->
 
-最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。您也可以参加2021学年的考试，2021年的开课时间是2021年3月15日。
+最后一次的考试时间是 2022 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2022 年 1 月 9 日报名参加考试**。
 
-<!-- You can take the exam only after submitting enough exercises for 5 credits. In practice it is not wise to take the course exam immediately after the critical number of exercises has been submitted. The exam is the same for 5-9 credits. The exam does not count towards your grade. -->
+<!-- You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-12 credits and does not count towards your grade. -->
 
-你必须提交 5 学分的足够的练习数才能参加考试。 实践说明，在提交了刚满足数量的练习之后就立即参加课程考试是十分不明智的。 5-9 学分的考试也是一样，不计入你的成绩。
+你必须提交 5 学分的足够的练习数才能参加考试。 实践说明，在提交了刚满足数量的练习之后就立即参加课程考试是十分不明智的。 5-12 学分的考试也是一样，不计入你的成绩。
 
 <!-- Exam results can be found from the "my submissions" tab of the submission system not later than 4 weeks after taking the exam (exams might be marked slower during July). Remember to save your student number to the submission system. -->
 
-考试结果可以在考试后 4 周内从提交系统的“我的提交”标签中找到(7 月份的考试可能会较晚)。 记得在提交系统中保存你的学号！
+<!-- 考试结果可以在考试后 4 周内从提交系统的“我的提交”标签中找到(7 月份的考试可能会较晚)。 记得在提交系统中保存你的学号！ -->
 
 <!-- <i>For the course certificate, you do not need to attend to the course exam or register to the open university.</i> -->
 
@@ -236,8 +238,8 @@ React Native 章节的学分
 
 如果你已经参与过这门课程，无论是在大学课程还是公开课，你都可以基于之前的课来进行拓展。
 
-#### Expanding on Full stack open 2019 
-【拓展全栈公开课 2019】
+#### Expanding on Full stack open 2019 or 2020
+【扩展你的 2019 或2020 的全公开课程】
 
 <!-- You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel. -->
 
@@ -262,20 +264,20 @@ React Native 章节的学分
 
 如果你已经通过了课程考试(不包括 3 学分的课程考试) ，并且正在拓展你的课程，你就不需要再做考一次试了。
 
-### Changed since the last year
-【与去年相比课程的改变】
+<!-- ### Changed since the last year -->
+<!-- 【与去年相比课程的改变】 -->
 <!-- There is only minor changes to parts 0-4. Part 5d, <i>end to end -testing</i> using the Cypress.io- library is almost completely new material.  Using custom hooks has been moved from part 5 to part 7 with some new content. -->
-* 对于0~4章节，只有一些很小的改动。
-* 第5d章节，<i>端到端测试</i> 利用了[Cypress.io](https://www.cypress.io) 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。
+<!-- * 对于0~4章节，只有一些很小的改动。 -->
+<!-- * 第5d章节，<i>端到端测试</i> 利用了[Cypress.io](https://www.cypress.io) 这个库，这几乎是全新的内容。使用自定义钩子（custom hook）的内容已经从第5章节转移到了第7章节，并添加了一些新的内容。 -->
 
 <!-- Part 6, which is about Redux, concentrates on the new, hook-based, redux api. The material on react-router in part 7 has also been updated to use the hook-api. Semantic UI React has been replaced with the MaterialUI library due to lack of maintenance. <br><br> Part 8 on GraphQL has major updates especially on Apollo Client, which finally has stable hook based apis. Part 9 on TypeScript, part 10 on React Native and part 11 on CI/CD are completely new. -->
-* 第6章是讲Redux的，主要介绍了新的基于hook的redux API。
-* 第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。
-* 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。
-* 第9章的TypeScript 和第10 章的React Native 以及第11章的 CI/CD 是全新的内容。
+<!-- * 第6章是讲Redux的，主要介绍了新的基于hook的redux API。 -->
+<!-- * 第7章的react-router 也更新为使用hook-api。由于Semantic UI React 缺乏维护，其内容已经被替换为了 MaterialUI library 的内容。 -->
+<!-- * 第8章 GraphQL有了较大版本的升级，尤其引入了Apollo Client，它终于有了稳定的基于hook的api。 -->
+<!-- * 第9章的TypeScript 和第10 章的React Native 以及第11章的 CI/CD 是全新的内容。 -->
 
 <!-- Last year's course material can be found from https://fullstackopen-2019.github.io/ -->
-去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。
+<!-- 去年的课程内容可以通过<a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</a>进行访问。 -->
 
 ### Submitting exercises 
 【练习提交】
@@ -312,8 +314,8 @@ React Native 章节的学分
 按照下面的指引进入本课程的 Moodle 系统:
 
 <!-- - Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261) 
-Enroll on the course through Open University by 9 Jan 2021 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)-->
-- 在2021年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261)来加入这门课程。
+Enroll on the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)-->
+- 在2022年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)来加入这门课程。
 <!-- - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day.  - 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration. 3. User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.-->
@@ -381,16 +383,16 @@ Enroll on the course through Open University by 9 Jan 2021 [here](https://www.av
 
 通过结对编程来参与这个项目是可行的。
 
-<!-- For more information, see [the open university page](https://courses.helsinki.fi/fi/aytkt21010en/133171897). -->
+<!-- For more information, see the [here](https://github.com/FullStack-HY/misc/blob/main/project.md). -->
 
-有关更多信息，请参见 [开放大学](https://courses.helsinki.fi/fi/aytkt21010en/133171897)的网页。
+有关更多信息，请参见 [这里](https://github.com/FullStack-HY/misc/blob/main/project.md)的网页。
 
 ### Interview promise  
 【面试保证】
 
-<!-- Our collaborators Houston Inc, Terveystalo, Elisa, Konecranes and Smartly.io have given a <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (9 + 10). -->
+<!-- Our collaborators Houston Inc, Terveystalo, Elisa, Konecranes and Smartly.io have given a <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10). -->
 
-我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(9 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(12 + 10)的人都可以获得工作面试。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 
@@ -419,9 +421,9 @@ Enroll on the course through Open University by 9 Jan 2021 [here](https://www.av
 
 不要使用 nano、 Notepad 或 Gedit 来进行开发。 NetBeans 对于 web 开发来说也不是很好。 与 Visual Studio Code 相比，它也显得有些重。
 
-<!-- Also install [Node.js](https://nodejs.org/en/). The material has been done with version 10.18, so don't install anything older than that. Installation instructions are [here](https://nodejs.org/en/download/package-manager/). -->
+<!-- Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install anything older than that. Installation instructions are [here](https://nodejs.org/en/download/package-manager/). -->
 
-同时记得安装  [Node.js](https://nodejs.org/en/)。 课程材料已经在 10.18 版本中验证过了，所以不要安装任何更老的版本。 安装说明在 [这里](https://nodejs.org/en/download/package-manager/)。
+同时记得安装  [Node.js](https://nodejs.org/en/)。 课程材料已经在 14.8.0 版本中验证过了，所以不要安装任何更老的版本。 安装说明在 [这里](https://nodejs.org/en/download/package-manager/)。
 
 <!-- Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node. We will be using npm actively throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times. -->
 
