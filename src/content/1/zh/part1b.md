@@ -327,7 +327,7 @@ const result = average(2, 5)
 <div class="tasks">
   <h3>Exercises1.3-1.5</h3>
 
-<i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project, since we are only interested in the final state of the submitted application.</i>
+<!-- <i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project, since we are only interested in the final state of the submitted application.</i> -->
 我们继续构建我们在前面的练习中开始的应用。 您可以将代码编写到同一个项目中，因为我们只关心提交的应用的最终状态。 
 
 <!-- **Pro-tip:** you may run into issues when it comes to the structure of the <i>props</i> that components receive. A good way to make things more clear is by printing the props to the console, e.g. as follows: -->
