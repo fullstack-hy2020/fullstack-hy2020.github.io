@@ -540,8 +540,8 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 <!-- Let's assume that the root URL of our service is <i>www.example.com/api</i>. -->
 假设我们的服务的根 URL 是<i> www.example.com/api </i>。
 
-<!-- If we define the resource type of notes to be <i>note</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>. -->
-如果我们将便笺的资源类型定义为<i>note</i>，那么标识为10的便笺资源的地址就是唯一的地址<i>www.example.com/api/notes/10</i>。
+<!-- If we define the resource type of notes to be <i>notes</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>. -->
+如果我们将便笺的资源类型定义为<i>notes</i>，那么标识为10的便笺资源的地址就是唯一的地址<i>www.example.com/api/notes/10</i>。
 
 <!-- The URL for the entire collection of all note resources is <i>www.example.com/api/notes</i>. -->
 所有便笺资源的整个集合的 URL 是<i> www.example.com/api/notes </i>。
