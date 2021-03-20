@@ -224,7 +224,8 @@ const handleLeftClick = () => {
 
 However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
-Let's take a closer look at how the clicking history is rendered to the page:
+Let's take a closer look at how the clicking 
+is rendered to the page:
 
 ```js
 const App = () => {
@@ -273,8 +274,8 @@ const App = () => {
   return (
     <div>
       {left}
-      <button handleClick={handleLeftClick}>left</button>
-      <button handleClick={handleRightClick}>right</button>
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
       {right}
       <History allClicks={allClicks} /> // highlight-line
     </div>
