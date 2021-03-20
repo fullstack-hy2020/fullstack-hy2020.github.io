@@ -755,7 +755,7 @@ describe('unicafe reducer', () => {
 
 ```js
 const generateId = () =>
-  Number((Math.random() * 1000000).toFixed(0))
+  Math.floor(Math.random() * 1000000)
 
 const App = () => {
   const addNote = (event) => {

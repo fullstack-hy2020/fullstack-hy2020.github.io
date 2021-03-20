@@ -273,7 +273,8 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew, // highlight-line
+}
 }
 ```
 
@@ -403,7 +404,7 @@ npm install redux-thunk
 Redux-thunk-库 是所谓的<i>redux-中间件</i>，它必须在store的初始化过程中初始化。 在这里，让我们将store的定义提取到它自己的文件 <i>src/store.js</i> 中。: 
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux'
+import { createStore, combineReducers, applyMiddleware } from 'redux' // highlight-line
 import thunk from 'redux-thunk' // highlight-line
 import { composeWithDevTools } from 'redux-devtools-extension'
 
