@@ -659,7 +659,7 @@ Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first f
 
   <h4>0.4: new note</h4>
 
-In chapter [Loading a page containing JavaScript - revised](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+In chapter [Loading a page containing JavaScript - review](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
 The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows: 
 
