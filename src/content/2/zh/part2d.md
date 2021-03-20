@@ -64,7 +64,7 @@ addNote = event => {
 <!-- The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console. -->
 使用 axios <em>post</em> 方法将对象发送到服务器。 已注册的事件处理函数从服务器发送回控制台的响应记录。
 
-<!-- When we try to create a new note, the following output pops up in console: -->
+<!-- When we try to create a new note, the following output pops up in the console: -->
 当我们尝试创建一个新的便笺时，控制台会弹出如下输出:
 
 ![](../../images/2/20e.png)
@@ -125,7 +125,7 @@ addNote = event => {
 这样就可以验证我们打算发送的所有数据是否实际上已经被服务器接收。
 
 <!-- In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) that help us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs. -->
-在本课程的下一章节中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) ，这些工具可以帮助我们调试服务器应用。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
+在本课程的下一章节中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) ，这些工具可以帮助我们调试服务器应用。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
 
 > <!--**NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.-->
 注意: 在当前版本的应用中，浏览器在便笺中添加了创建日期属性。 由于运行浏览器的机器的时钟可能错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一章节课程中要做的。
@@ -134,7 +134,7 @@ addNote = event => {
 我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-5)上的<i>part2-5</i> 分支中找到。
 
 
-### Changing the importance of notes
+### Changing the Importance of Notes
 【改变便笺的重要性】
 
 <!-- Let's add a button to every note that can be used for toggling its importance. -->
@@ -251,16 +251,15 @@ const toggleImportanceOf = id => {
 <!-- Almost every line of code in the function body contains important details. The first line defines the unique url for each note resource based on its id. -->
 函数体中几乎每一行代码都包含重要的细节。 第一行根据每个便笺资源的 id 定义其唯一的 url。
 
-<!-- The array [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method is used to find the note we want to modify, and we then assign it to the _note_ variable. -->
-数组的 [find](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/find)方法用于查找要修改的便笺，然后将其分配给note变量。
+<!-- The array [find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method is used to find the note we want to modify, and we then assign it to the _note_ variable. -->
+数组的 [find method](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/find)用于查找要修改的便笺，然后将其分配给note变量。
 
 <!-- After this we create a <i>new object</i> that is an exact copy of the old note, apart from the important property.  -->
 在此之后，我们创建一个<i>新对象</i>，除了重要性属性，它完全是旧便笺的副本。
 
-<!-- The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax  -->
-使用[对象展开object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)语法创建新对象的代码
-<!-- may seem a bit strange: -->
-可能看起来有点奇怪:
+<!-- The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax may seem a bit strange at first: -->
+使用[对象展开object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)语法创建新对象的代码可能看起来有点奇怪:
+
 
 ```js
 const changedNote = { ...note, important: !note.important }
@@ -553,7 +552,7 @@ const App = () => {
 这一切都相当复杂，试图解释它可能只会让它更难理解。 互联网上充满了讨论这个话题的材料，比如这个[this](https://javascript.info/promise-chaining)。
 
 <!-- The "Async and performance" book from the [You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) book series explains the topic [well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), but the explanation is many pages long. -->
-在[You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) 一书中，对这个议题进行了很好的解释[well](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md)，但是解释有很多页
+在[You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) 一书中，对[这个议题](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md)进行了很好的解释，但是解释有很多页
 
 <!-- Promises are central to modern JavaScript development and it is highly recommended to invest a reasonable amount of time into understanding them. -->
 承诺Promise是现代 JavaScript 开发的核心，强烈建议投入合理的时间来理解它们。
@@ -682,7 +681,7 @@ const person = { name, age }
 两个表达式的结果是相同的。 它们都创建了一个值为<i>Leevi</i> 的<i>name</i> 属性和值为<i>0</i> 的<i>age</i> 属性的对象。
 
 
-### Promises and errors 
+### Promises and Errors 
 【承诺和错误】
 
 <!-- If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system. -->
@@ -807,8 +806,8 @@ notes.filter(n => n.id !== id)
 <!-- It's probably not a good idea to use alert in more serious React applications. We will soon learn a more advanced way of displaying messages and notifications to users. There are situations, however, where a simple, battle-tested method like <em>alert</em> can function as a starting point. A more advanced method could always be added in later, given that there's time and energy for it. -->
 在更严肃的 React 应用中使用alert可能不是一个好主意。 我们很快就会学到一种更先进的向用户显示消息和通知的方式。 然而，在某些情况下，像<em>alert</em>这样简单的、经过实战检验的方法可以作为一个起点。 如果有时间和精力的话，可以在以后添加一个更高级的方法。
 
-<!-- The code for the current state of our application can be found in the  <i>part2-6</i> branch on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-6). -->
-我们应用当前状态的代码可以在[github](https://github.com/fullstack-hy/part2-notes/tree/part2-6)上的<i>part2-6</i> 分支中找到。
+<!-- The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-6). -->
+我们应用当前状态的代码可以在[GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-6)上的<i>part2-6</i> 分支中找到。
 
 </div>
 
@@ -821,7 +820,7 @@ notes.filter(n => n.id !== id)
 <!-- Let's return to our phonebook application. -->
 让我们回到我们的电话簿应用。
 
-<!-- Currently the numbers that are added to the phonebook are not saved to a backend server. Fix this situation. -->
+<!-- Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation. -->
 目前，添加到电话簿中的号码没有保存到后端服务器中。修复这种情况
 
 <h4>2.16: Phonebook 步骤8</h4>
