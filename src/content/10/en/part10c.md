@@ -576,7 +576,7 @@ This exercise is completed once you can log the user's <i>authorize</i> mutation
 Now that we can obtain the access token we need to store it. Create a file <i>authStorage.js</i> in the <i>utils</i> directory with the following content:
 
 ```javascript
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class AuthStorage {
   constructor(namespace = 'auth') {
