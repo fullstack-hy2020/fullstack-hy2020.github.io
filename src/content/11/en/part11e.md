@@ -73,7 +73,7 @@ Any bot needs a `chat id` to send any sort of message to a user, group or channe
 
 #### 11.19B: Deliver worflow related messsage directly to user/client's telegram account:
 
-Add another step to your job in existing `TelegramNotifcation.yml` workflow file to deliver message directly to yourself by using `chat id` associated with your own account, set another secret for that say `TELEGRAM_TO_ME` secret.
+Add another step to your job in existing `TelegramNotifcation.yml` workflow file to deliver message directly to yourself by using `chat id` associated with your own account, set another secret for that say `TELEGRAM_TO_ME` secret. Probably doing this exercise, you would see an error which would break your workflow saying "chat not found", this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your workflow will succeed. This security concern ensures that any chatbot might not end up sending spams to any user otherwise anybody could span you too.
 
 Tip: You can get the `chat id` of your personal telegram account by sending a "Hello" message to `@userinfobot` simply.
 
