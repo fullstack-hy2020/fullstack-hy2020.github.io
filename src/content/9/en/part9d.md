@@ -431,7 +431,7 @@ interface CoursePartBase {
 }
 
 interface CourseNormalPart extends CoursePartBase {
-  type: "described";
+  type: "normal";
   description: string;
 }
 interface CourseProjectPart extends CoursePartBase {
