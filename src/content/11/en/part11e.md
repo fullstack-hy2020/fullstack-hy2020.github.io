@@ -71,7 +71,7 @@ Any bot needs a `chat id` to send any sort of message to a user, group or channe
 
 5. Create a new workflow file say `TelegramNotifcation.yml` and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can have a default message which includes basic log of the workflow event simply by omitting the `args` from the [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job's definition.
 
-#### 11.19B: Deliver worflow related messsage directly to user/client's telegram account:
+#### 11.19B: Deliver worflow report messsage directly to user/client's telegram account:
 
 Add another step to your job in existing `TelegramNotifcation.yml` workflow file to deliver message directly to yourself by using `chat id` associated with your own account, set another secret for that say `TELEGRAM_TO_ME` secret. Probably doing this exercise, you would see an error which would break your workflow saying ["chat not found"](https://stackoverflow.com/a/41291666), this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your workflow will succeed. This security concern ensures that any chatbot might not end up sending spams to any user otherwise anybody could span you too.
 
