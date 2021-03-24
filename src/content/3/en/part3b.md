@@ -213,7 +213,7 @@ The setup that is ready for product deployment looks as follows:
 
 ![](../../images/3/101.png)
 
-Unlike when runnig app in development environment, now everything is in the same node/express-backend that runs in localhost:3001. When brower goes to the page, the file  <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes.
+Unlike when running the app in a development environment, everything is now in the same node/express-backend that runs in localhost:3001. When the browser goes to the page, the file <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes.
 
 ### The whole app to internet
 
@@ -231,7 +231,7 @@ The setup looks like now as follows:
 
 ![](../../images/3/102.png)
 
-The node/express-backend resides now in Heroku server. When the root address that is of the from https://glacial-ravine-74819.herokuapp.com/ is accessed, browser loads and executes the React app that fetches the json-data from the Heroku server.
+The node/express-backend now resides in the Heroku server. When the root address that is of the form https://glacial-ravine-74819.herokuapp.com/ is accessed, the browser loads and executes the React app that fetches the json-data from the Heroku server.
 
 ###  Streamlining deploying of the frontend 
 
