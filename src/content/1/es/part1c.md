@@ -130,8 +130,8 @@ const Hello = (props) => {
 }
 ```
 
-<!-- Eli koska -->
-If the object we are destructuring has the values
+Si el objeto que estamos desestructurando tiene los valores
+
 ```js
 props = {
   name: 'Arto Hellas',
@@ -139,9 +139,10 @@ props = {
 }
 ```
 
-la expresión <em>const {name, age} = props</em> asigna los valores 'Arto Hellas'a _nombre_ y 35 a _edad_.
+la expresión <em>const {name, age} = props</em> asigna los valores 'Arto Hellas'a _name_ y 35 a _age_.
 
 Podemos llevar la desestructuración un paso más allá:
+
 ```js
 const Hello = ({ name, age }) => { // highlight-line
   const bornYear = () => new Date().getFullYear() - age
@@ -438,12 +439,8 @@ const App = () => {
 
 Nuestra aplicación ya está lista!
 
-
-<!-- ### Tapahtumankäsittelijä en funktio -->
-
 ### El controlador de eventos es una función
 
-<!-- Nappien tapahtumankäsittelijät en siis määritelty suoraan <i> onClick </i> -attribuuttien määrittelyn yhteydessä seuraavasti: -->
 Definimos los controladores de eventos para nuestros botones donde declaramos sus atributos <i>onClick</i>:
 
 ```js
@@ -452,7 +449,6 @@ Definimos los controladores de eventos para nuestros botones donde declaramos su
 </button>
 ```
 
-<!-- Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa: --> 
 ¿Qué pasaría si intentáramos definir los controladores de eventos de una forma más simple? 
 
 ```js
@@ -461,24 +457,19 @@ Definimos los controladores de eventos para nuestros botones donde declaramos su
 </button>
 ```
 
-<! - Tämä muutos kuitenkin hajottaa sovelluksemme täysin: -> 
 Esto rompería completamente nuestra aplicación:
 
 ![](../../images/1/5b.png)
-
-<!-- Mistä en kyse? Tapahtumankäsittelijäksi sobre tarkoitus määritellä joko <i> funktio </i> tai <i> viite funktioon </i>. Kun koodissa en --> 
+ 
 ¿Qué está pasando? Se supone que un controlador de eventos es una <i>función</i> o una <i>referencia de función</i>, y cuando escribimos
 
 ```js
 <button onClick={setCounter(counter + 1)}>
 ```
 
-<!-- tapahtumankäsittelijäksi tulee määriteltyä <i> funktiokutsu </i>. Sekin en monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i> contador </i> arvo on 0, se suorittaa kutsun <em> setCounter (0 + 1) </em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taenas aiheuttaa komponentin umisa. Ja sama toistuu uudelleen ...-->
-
 el controlador de eventos es en realidad una <i>llamada a función</i>. En muchas situaciones esto está bien, pero no en esta situación particular. Al principio, el valor de la variable <i>counter</i> es 0. Cuando React renderiza el componente por primera vez, ejecuta la llamada de función <em>setCounter(0 + 1)</em> y cambia el valor del estado del componente en 1. 
 Esto hará que el componente se vuelva a renderizar, react ejecutará la llamada a la función setCounter nuevamente, y el estado cambiará dando lugar a otra repetición...
 
-<! - Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -> 
 Definamos los controladores de eventos como lo hicimos antes
 
 ```js
@@ -487,15 +478,12 @@ Definamos los controladores de eventos como lo hicimos antes
 </button>
 ```
 
-<!-- Nyt napin tapahtumankäsittelijän määrittelevä atributti <i> onClick </i> saa arvokseen funktion _ () => setCounter (contador + 1) _, ja ​​funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäppia. --> 
-Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón - <i> onClick </i> - tiene el valor _ () => setCounter (contador + 1) _. 
+Ahora el atributo del botón que define lo que sucede cuando se hace clic en el botón - <i>onClick</i> - tiene el valor _() => setCounter (counter + 1)_. 
 La función setCounter se llama solo cuando un usuario hace clic en el botón. 
 
-<!-- Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia. -->
 Por lo general, definir controladores de eventos dentro de las plantillas JSX no es una buena idea.
 Aquí está bien, porque nuestros controladores de eventos son muy simples.
 
-<!-- Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen: -->
 Vamos a separar a los controladores de eventos en funciones separadas de todas formas: 
 
 ```js
@@ -521,8 +509,6 @@ const App = () => {
   )
 }
 ```
-
-<!-- Tälläkin kertaa tapahtumankäsittelijät en määritelty oikein, sillä <i> onClick </i> -attribuutit saavat arvokseen muuttujan, joka tallettaa viitteen funktioon: -->
 Aquí los controladores de eventos se han definido correctamente. El valor del atributo <i>onClick</i> es una variable que contiene una referencia a una función:
 
 ```js
@@ -622,42 +608,36 @@ const App = () => {
 
 Dado que ahora tenemos un componente <i>Button</i> fácilmente reutilizable, también hemos implementado una nueva funcionalidad en nuestra aplicación agregando un botón que se puede usar para disminuir el contador.
 
-El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre del prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria. El propio [tutorial](https://reactjs.org/tutorial/tutorial.html) oficial de React  sugiere esta convención.
+El controlador de eventos se pasa al componente <i>Button</i> a través de la propiedad _handleClick_. El nombre del prop en sí no es tan significativo, pero nuestra elección de nombre no fue completamente aleatoria. El propio [tutorial](https://reactjs.org/tutorial/tutorial.html) oficial de React sugiere esta convención.
 
 ### Los cambios en el estado provocan re-renderizado
 
-<!-- Kerrataan vielä sovelluksen toiminnan pääperiaatteet. -->
 Repasemos los principios fundamentales de cómo funciona una aplicación una vez más.
 
-<!-- Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState] (https://reactjs.org/docs/hooks-reference.html#usestate) -hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät. -->
 Cuando se inicia la aplicación, se ejecuta el código en _App_. Este código usa un hook [useState](https://reactjs.org/docs/hooks-reference.html#usestate) para crear el estado de la aplicación, estableciendo un valor inicial de la variable _counter_.
 Este componente contiene el componente _Display_, que muestra el valor del contador, 0, y tres componentes _Button_. Todos los botones tienen controladores de eventos, que se utilizan para cambiar el estado del contador.
 
-<!-- Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. ** Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen. ** --> 
 Cuando se hace clic en uno de los botones, se ejecuta el controlador de eventos. El controlador de eventos cambia el estado del componente _App_ con la función _setCounter_. 
 **Llamar a una función que cambia el estado hace que el componente se vuelva a procesar.**
 
-<!-- Eli jos painetaan nappia <i> plus </i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät. -->
 Entonces, si un usuario hace clic en el botón <i>plus</i>, el controlador de eventos del botón cambia el valor de _counter_ a 1, y el componente _App_ se vuelve a generar.
 Esto hace que sus subcomponentes _Display_ y _Button_ también se vuelvan arenderizar.
-_Display_ recibe el nuevo valor del contador, 1, como accesorios. Los componentes _Button_ reciben controladores de eventos que pueden usarse para cambiar el estado del contador.
+_Display_ recibe el nuevo valor del contador, 1, como prop. Los componentes _Button_ reciben controladores de eventos que pueden usarse para cambiar el estado del contador.
 
 ### Refactorización de los componentes 
 
-<!-- Laskimen arvon näyttävä komponentti on siis seuraava -->
 El componente que muestra el valor del contador es el siguiente: 
 
 ```js
-const Display = ({ counter }) => {
+const Display = (props) => {
   return (
-    <div>{counter}</div>
+    <div>{props.counter}</div>
   )
 }
 ```
 
-<!-- Komponentti tarvitsee ainoastaan ​​<i> propsin </i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin] (/ osa1 / komponentin_tila_ja_tapa seotoonkasittely destruye) : -->
 El componente solo usa el campo _counter_ de sus <i>props</i>.
-Esto significa que podemos simplificar el componente usando [desestructuración](/es/part1/controladores-de-eventos-de-estado-de-componentes#desestructuración), así:
+Esto significa que podemos simplificar el componente usando [desestructuración](/es/part1/estado_del_componente_controladores_de_eventos#desestructuracion), así:
 
 ```js
 const Display = ({ counter }) => {
@@ -667,14 +647,12 @@ const Display = ({ counter }) => {
 }
 ```
 
-<!-- Koska komponentin määrittelevä metodi ei sisällä muuta kuin returnin, voimme määritellä sen hyödyntäen nuolifunktioiden tiiviimpää ilmaisumuotoa -->
 La función que define el componente contiene solo la declaración return, por lo que podemos definir la forma más compacta de funciones de flecha:
 
 ```js
 const Display = ({ counter }) => <div>{counter}</div>
 ```
 
-<!-- Vastaava suoraviivaistus voidaan tehdä myös nappia edustavalle komponentille -->
 También podemos simplificar el componente Button.
 
 ```js
@@ -687,7 +665,6 @@ const Button = (props) => {
 }
 ```
 
-<!-- Eli destrukturoidaan <i> props < / i>: ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa -->
 Podemos usar la desestructuración para obtener solo los campos requeridos de <i>props</i>, y usar la forma más compacta de funciones de flecha:
 
 ```js
