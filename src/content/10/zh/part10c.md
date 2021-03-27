@@ -543,7 +543,7 @@ expo install @react-native-async-storage/async-storage
 由于 <em>AsyncStorage</em> 对string key 的操作是全局的命名空间，因此对其操作进行一些简单的抽象是非常好的。这种抽象可以通过例如[class](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) 来完成。举个例子，我们可以实现一个购物车来存储用户希望购买的商品：
 
 ```javascript
-import AsyncStorage from '@react-native-community/async-storage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 class ShoppingCartStorage {
   constructor(namespace = 'shoppingCart') {
