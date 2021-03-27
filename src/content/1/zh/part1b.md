@@ -90,7 +90,7 @@ t.forEach(value => {
 })                    
 ```
 
-<!-- Notable in this example is the fact that the contents of the array can be modified even though it is defined as a _const_. Because the array is an object the variable always points to the same object. The content of the array changes as new items are added to it. -->
+<!-- Notable in this example is the fact that the contents of the array can be modified even though it is defined as a _const_. Because the array is an object, the variable always points to the same object. The content of the array changes as new items are added to it. -->
 
 在这个示例中值得注意的是，即使将数组用 const 定义，也可以修改该数组中的内容。 因为数组是一个对象，而数组变量总是指向这同一个对象。 当添加新的元素时，数组的内容也将发生变化。
 
@@ -104,7 +104,7 @@ value => {
 }
 ```
 
-<!-- forEach calls the function <i>for each of the items in the array</i>, always passing the individual item as a parameter. The function as the parameter of forEach may also receive [other parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). -->
+<!-- forEach calls the function <i>for each of the items in the array</i>, always passing the individual item as an argument. The function as the argument of forEach may also receive [other argument](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach). -->
 
 forEach 为数组中的每个元素调用了这个函数，并总是将这单个项作为参数传递。 作为 forEach 的入参函数，也可以接收[一些其他参数](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/forEach)。 
 

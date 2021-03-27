@@ -261,7 +261,6 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 <!-- We have defined a new component <i>Hello</i> and used it inside the component <i>App</i>. Naturally, a component can be used multiple times: -->
