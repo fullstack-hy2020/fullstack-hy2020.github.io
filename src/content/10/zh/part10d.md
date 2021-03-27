@@ -1176,8 +1176,8 @@ const GET_AUTHORIZED_USER = gql`
 #### Exercise 10.27: review actions
 评论管理
 
-<!-- Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository review implemented in the previous exercise. The other button is for deleting the repository. Pressing this button should delete the review. Here is what the actions should roughly look like: -->
-现在用户可以看到自己的评论了，让我们增加一些对评论的操作。在每一个评论列表的评论中，应当有两个按钮。一个是查看评论的仓库。点击这个按钮可以将用户带到该仓库中，可以复习我们之前实现的练习。另一个按钮是删除仓库。点击这个按钮可以删除评论。最终应当看起来如下：
+<!-- Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository review implemented in the previous exercise. The other button is for deleting the review. Pressing this button should delete the review. Here is what the actions should roughly look like: -->
+现在用户可以看到自己的评论了，让我们增加一些对评论的操作。在每一个评论列表的评论中，应当有两个按钮。一个是查看评论的仓库。点击这个按钮可以将用户带到该仓库中，可以复习我们之前实现的练习。另一个按钮是删除评论。点击这个按钮可以删除评论。最终应当看起来如下：
 
 ![Application preview](../../images/10/21.jpg)
 

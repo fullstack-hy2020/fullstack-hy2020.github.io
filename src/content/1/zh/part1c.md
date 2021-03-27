@@ -743,10 +743,8 @@ const App = () => {
 
 当应用启动时，执行 App 中的代码。 此代码使用[useState](https://reactjs.org/docs/hooks-reference.html#useState) hook 创建了计数器的应用状态初始值 _counter_。
 
-<!-- The component renders the _Display_ component. It displays the counter's value (0), and three _Button_ components. The buttons have event handlers, which are used to change the state of the counter. -->
-该组件渲染了 Display 组件。 它显示计数器的值(0)和三个 Button 组件。 这些按钮具有用于更改计数器状态的事件处理程序。
-
-
+<!-- This component contains the _Display_ component - which displays the counter's value, 0 - and two _Button_ components. The buttons all have event handlers, which are used to change the state of the counter. -->
+该组件包含  _Display_  组件， 显示了当前的计数为0 ， 以及两个  _Button_  组件。button 都包含事件处理，用来改变计数器的状态。
 
 <!-- When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function.  -->
 当单击其中一个按钮时，将执行事件处理程序。 事件处理程序使用 setCounter 函数更改 App 组件的状态。

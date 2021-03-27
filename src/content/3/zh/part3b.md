@@ -280,7 +280,7 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
 
 ![](../../images/3/101.png)
 
-<!-- Unlike when runnig app in development environment, now everything is in the same node/express-backend that runs in localhost:3001. When brower goes to the page, the file  <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes. -->
+<!-- Unlike when running the app in a development environment, everything is now in the same node/express-backend that runs in localhost:3001. When the browser goes to the page, the file <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes. -->
 不像跑在开发环境那样，现在所有内容都跑在与node/express-backend 相同的localhost:3001 。 当浏览器访问到这个页面，  <i>index.html</i> 会被渲染。从而导致浏览器获取React app 的生产版本，一旦启动，会从localhost:3001/api/notes 中获取json数据。
 
 ### The whole app to internet
@@ -304,7 +304,7 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
 
 ![](../../images/3/102.png)
 
-<!-- The node/express-backend resides now in Heroku server. When the root address that is of the from https://glacial-ravine-74819.herokuapp.com/ is accessed, browser loads and executes the React app that fetches the json-data from the Heroku server. -->
+<!-- The node/express-backend now resides in the Heroku server. When the root address that is of the form https://glacial-ravine-74819.herokuapp.com/ is accessed, the browser loads and executes the React app that fetches the json-data from the Heroku server. -->
 现在 node/express-backend 部署在了Heroku 服务器中。当访问到根地址https://glacial-ravine-74819.herokuapp.com/  ， 浏览器加载并执行React 应用，并从Heroku server 中获取json数据。
 
 ###  Streamlining deploying of the frontend
@@ -317,7 +317,7 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
   "scripts": {
      //...
     "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build --prod && cp -r build ../notes-backend",
-    "deploy": "git push heroku master",
+    "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
   }

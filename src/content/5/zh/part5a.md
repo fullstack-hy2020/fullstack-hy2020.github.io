@@ -23,9 +23,9 @@ lang: zh
 ### Handling login
 【处理登录逻辑】
 
-<!-- A login form has now been added to the top of the page. The form for adding new notes has also been moved to the top of the list of notes. -->
+<!-- A login form has now been added to the top of the page. The form for adding new notes has also been moved to the bottom of the list of notes. -->
 
-登录表单已经添加到了页面顶端。添加 Note 的表单也已经移到了 Note 列表的顶部。
+登录表单已经添加到了页面顶端。添加 Note 的表单也已经移到了 Note 列表的底部。
 
 ![](../../images/5/1e.png)
 

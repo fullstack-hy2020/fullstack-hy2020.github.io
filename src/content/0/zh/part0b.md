@@ -383,17 +383,14 @@ xhttp.send();
 
 发送到服务器的请求放在了最后一行，但是处理响应的代码却在上面定义了。这是怎么回事？
 
-<!-- On this line, -->
-
-这一行中，
 
 ```js
 xhttp.onreadystatechange = function () {
 ```
 
-<!-- an <i>event handler</i> for event <i>onreadystatechange</i> is defined for the <em>xhttp</em> object doing the request. When the state of the object changes, the browser calls the event handler function. The function code checks that the [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) equals 4 (which depicts the situation <i>The operation is complete</i>) and that the HTTP status code of the response is 200. -->
+<!-- On this line, an <i>event handler</i> for event <i>onreadystatechange</i> is defined for the <em>xhttp</em> object doing the request. When the state of the object changes, the browser calls the event handler function. The function code checks that the [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) equals 4 (which depicts the situation <i>The operation is complete</i>) and that the HTTP status code of the response is 200. -->
 
-onreadystatechange 这个事件处理程序是定义在 xhttp 对象上的，xhttp对象是用于执行请求的。当这个对象的状态发生改变时，浏览器调用了这个事件处理函数。 这个函数代码检查了 [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) 是否等于 4(它描述了操作已完成的状态) ，以及响应的 HTTP 状态码是否为 200。
+这一行中，onreadystatechange 这个事件处理程序是定义在 xhttp 对象上的，xhttp对象是用于执行请求的。当这个对象的状态发生改变时，浏览器调用了这个事件处理函数。 这个函数代码检查了 [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) 是否等于 4(它描述了操作已完成的状态) ，以及响应的 HTTP 状态码是否为 200。
 
 ```js
 xhttp.onreadystatechange = function() {
@@ -571,7 +568,7 @@ CSS 规则定义了 container 类的元素，将用一个像素宽的边框 [bor
 
 第二个 CSS 规则将文本颜色设置为蓝色。
 
-<!-- HTML elements can also have other attributes than classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element. -->
+<!-- HTML elements can also have other attributes apart from classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element. -->
 
 Html 元素也可以有 class 以外的其他属性。 包含 Note 的 div 元素有一个 id 属性。 JavaScript 代码使用 id 来查找元素。
 
@@ -984,9 +981,9 @@ part2
 
   <h4>0.4: new note</h4>
 
-<!-- In chapter [Loading a page containing JavaScript - revised](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-revised) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/) -->
+<!-- In chapter [Loading a page containing JavaScript - review](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-review) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/) -->
 
-在  [加载一个包含 JavaScript 的页面 - 复习](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-revised)这一章中，页面打开 https://studies.cs.helsinki.fi/exampleapp/notes 时引起的事件链被描述为一个时序图
+在  [加载一个包含 JavaScript 的页面 - 复习](/zh/part0/web_应用的基础设施#loading-a-page-containing-java-script-review)这一章中，页面打开 https://studies.cs.helsinki.fi/exampleapp/notes 时引起的事件链被描述为一个时序图
 
 <!-- The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows: -->
 
