@@ -790,6 +790,9 @@ Api [https://restcountries.eu](https://restcountries.eu) 以机器可读的格�
 ![](../../images/2/19ba.png)
 
 
+<!-- **NB:** In some browsers (such as Firefox) weatherstack API sends an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome. -->
+** 注意：** 在一些浏览器中（比如火狐） weatherstack API 会返回一个错误响应，说明不支持HTTPS 加密，虽然请求的URL 是 http://_。 这个问题可以通过换做谷歌浏览器来解决
+
 
 <!-- **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key. -->
 注意: 几乎所有气象服务都需要 api-key。 不要将 api-key 保存到源代码管理Git中！ 也不能将 api-key 硬编码到源代码中。 取而代之的是使用[环境变量](https://create-react-app.dev/docs/adding-custom-environment-variables/)来保存密钥。
