@@ -158,7 +158,7 @@ The properties of an object are referenced by using the "dot" notation, or by us
 
 ```js
 console.log(object1.name)         // Arto Hellas is printed
-const fieldName = 'age' 
+object1.fieldName = object1.age 
 console.log(object1[fieldName])    // 35 is printed
 ```
 
