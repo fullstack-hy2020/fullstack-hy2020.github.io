@@ -93,7 +93,8 @@ const handleLeftClick = () => {
 }
 ```
 
-The following object is set as the new state of the application:
+El siguiente objeto se establece como el nuevo estado de la aplicación:
+
 ```js
 {
   left: clicks.left + 1,
@@ -103,7 +104,7 @@ The following object is set as the new state of the application:
 
 El nuevo valor de la propiedad <i>left</i> ahora es el mismo que el valor de <i>left + 1</i> del estado anterior, y el valor de la propiedad <i>right</i> es el mismo que el valor de la propiedad <i>right</i> del estado anterior.
 
-Podemos definir el nuevo objeto de estado un poco más claramente utilizando la sintaxis de [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) que se agregó a la especificación del lenguaje en el verano de 2018:
+Podemos definir el nuevo objeto de estado un poco más claramente utilizando la sintaxis de [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) que se agregó a la especificación del lenguaje en el verano boreal de 2018:
 
 ```js
 const handleLeftClick = () => {
@@ -160,7 +161,7 @@ Hay situaciones en las que puede resultar beneficioso almacenar una parte del es
 
 ### Manejo de matrices
 
-Agreguemos un fragmento de estado a nuestra aplicación que contenga una matriz _allClicks_ que recuerda cada clic que ha ocurrido en la aplicación.
+Agreguemos un fragmento de estado a nuestra aplicación que contenga un array _allClicks_ que recuerda cada clic que ha ocurrido en la aplicación.
 
 ```js
 const App = () => {
@@ -209,9 +210,9 @@ const handleLeftClick = () => {
 }
 ```
 
-La parte del estado almacenada en _allClicks_ ahora está configurada para ser una matriz que contiene todos los elementos de la matriz de estado anterior más la letra <i>L</i>. La adición del nuevo elemento a la matriz se logra con el método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que no muta la matriz existente, sino que devuelve una <i>nueva copia de la matriz</i> con el elemento agregado.
+La parte del estado almacenada en _allClicks_ ahora está configurada para ser un array que contiene todos los elementos del array de estado anterior más la letra <i>L</i>. La adición del nuevo elemento al array se logra con el método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que no muta el array existente, sino que devuelve una <i>nueva copia del array</i> con el elemento agregado.
 
-Como se mencionó anteriormente, también es posible en JavaScript agregar elementos a una matriz con el método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Si agregamos el elemento empujándolo a la matriz _allClicks_ y luego actualizando el estado, la aplicación aún parecería funcionar:
+Como se mencionó anteriormente, también es posible en JavaScript agregar elementos a un array con el método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Si agregamos el elemento empujándolo al array _allClicks_ y luego actualizando el estado, la aplicación aún parecería funcionar:
 
 ```js
 const handleLeftClick = () => {
@@ -241,7 +242,7 @@ const App = () => {
 }
 ```
 
-Llamamos al método [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) en la matriz _allClicks_ que une todos los elementos en una sola cadena, separados por la cadena pasada como parámetro de función,que en nuestro caso es un espacio vacío.
+Llamamos al método [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) en el array _allClicks_ que une todos los elementos en una sola cadena, separados por la cadena pasada como parámetro de función,que en nuestro caso es un espacio vacío.
 
 ### Renderizado condicional
 
@@ -279,7 +280,7 @@ const App = () => {
 }
 ```
 
-Ahora el comportamiento del componente depende de si se ha hecho clic en cualquier botón. Si no es así, lo que significa que la matriz <em>allClicks</em> está vacía, el componente muestra un elemento div con algunas instrucciones en su lugar:
+Ahora el comportamiento del componente depende de si se ha hecho clic en cualquier botón. Si no es así, lo que significa que el array <em>allClicks</em> está vacío, el componente muestra un elemento div con algunas instrucciones en su lugar:
 
 ```js
 <div>the app is used by pressing the buttons</div>
@@ -447,10 +448,9 @@ También puede acceder al depurador sin el comando _debugger_ agregando puntos d
 
 ![](../../images/1/9a.png)
 
-Se recomienda encarecidamente agregar las [herramientas de desarrollo de React](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) para Chrome. Agrega una nueva pestaña _Components_ a las herramientas de desarrollo. La nueva pestaña de herramientas de desarrollador se puede usar para inspeccionar los diferentes elementos de React en la aplicación, junto con su estado y accesorios:
+Se recomienda encarecidamente agregar las [herramientas de desarrollo de React](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) para Chrome. Agrega una nueva pestaña _Components_ a las herramientas de desarrollo. La nueva pestaña de herramientas de desarrollador se puede usar para inspeccionar los diferentes elementos de React en la aplicación, junto con su estado y props:
 
 ![](../../images/1/10ea.png)
-
 
 El estado del componente _App_ se define así: 
 
@@ -470,7 +470,7 @@ El primer <i>State</i> contiene el valor del estado <i>left</i>, el siguiente co
 
 Hay algunas limitaciones y reglas que debemos seguir para asegurarnos de que nuestra aplicación utilice correctamente las funciones de estado basadas en hooks.
 
-La función _useState_ (así como la función _useEffect_ presentada más adelante en el curso) <i>no se debe llamar</i> desde dentro de un ciclo, una expresión condicional o cualquier lugar que no sea una función que defina un componente. Esto debe hacerse para garantizar que los hooks siempre se llamen en el mismo orden y, si este no es el caso, la aplicación se comportará de manera errática.
+La función _useState_ (así como la función _useEffect_ presentada más adelante en el curso) <i>no se debe llamar</i> desde dentro de un ciclo, una expresión condicional o cualquier lugar que no sea una función que defina un componente. Esto debe hacerse para garantizar que los hooks siempre se llamen en el mismo orden o, si este no es el caso, la aplicación se comportará de manera errática.
 
 En resumen, los hooks solo se pueden llamar desde el interior de un cuerpo de función que define un componente de React:
 
@@ -508,6 +508,7 @@ El manejo de eventos ha demostrado ser un tema difícil en iteraciones anteriore
 Por esta razón volveremos a tratar el tema.
 
 Supongamos que estamos desarrollando esta sencilla aplicación: 
+
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -914,7 +915,7 @@ Elegir entre las dos formas presentadas de definir sus controladores de eventos 
 
 ### Pasando controladores de eventos a componentes secundarios
 
-Extraigaremos el botón en su propio componente: 
+Extraigamos el botón en su propio componente: 
 
 ```js
 const Button = (props) => (
@@ -1002,7 +1003,7 @@ Internet está lleno de material relacionado con React. Sin embargo, utilizamos 
 
 Puede encontrar útiles los siguientes enlaces:
 
-- Vale la pena echarle un vistazo a la[documentación oficial](https://reactjs.org/docs/hello-world.html) de React en algún momento, aunque la mayor parte será relevante solo más adelante en el curso. Además, todo lo relacionado con los componentes basados ​​en clases es irrelevante para nosotros;
+- Vale la pena echarle un vistazo a la [documentación oficial](https://reactjs.org/docs/hello-world.html) de React en algún momento, aunque la mayor parte será relevante solo más adelante en el curso. Además, todo lo relacionado con los componentes basados en clases es irrelevante para nosotros;
 - Algunos cursos en [Egghead.io](https://egghead.io) como [Start learning React](https://egghead.io/courses/start-learning-react) son de alta calidad y la actualizada recientemente [Guía para principiantes de React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) también es relativamente buena; Ambos cursos introducen conceptos que también se presentarán más adelante en este curso. **NB** El primero usa componentes de clase pero el segundo usa los nuevos funcionales.
 
 </div> 
@@ -1024,7 +1025,7 @@ En algunas situaciones, es posible que también deba ejecutar el siguiente coman
 rm -rf node_modules/ && npm i
 ```
 
-  <h4>1.6: unicafe paso1</h4>
+  <h4>1.6: unicafe, paso 1</h4>
 
 Como la mayoría de las empresas, [Unicafe](https://www.unicafe.fi/#/9/4) recopila comentarios de sus clientes. Su tarea es implementar una aplicación web para recopilar comentarios de los clientes. Solo hay tres opciones para los comentarios: <i>good (bueno)</i>, <i>neutral</i> y <i>bad(malo)</i>.
 
@@ -1058,13 +1059,13 @@ ReactDOM.render(<App />,
 )
 ```
 
-<h4>1.7: unicafe paso2</h4>
+<h4>1.7: unicafe, paso 2</h4>
 
 Amplíe su aplicación para que muestre más estadísticas sobre los comentarios recopilados: el número total de comentarios recopilados, la puntuación promedio (buena: 1, neutral: 0, mala: -1) y el porcentaje de comentarios positivos.
 
 ![](../../images/1/14e.png)
 
-<h4>1.8: unicafe paso3</h4>
+<h4>1.8: unicafe, paso 3</h4>
 
 Refactorice su aplicación para que la visualización de las estadísticas se extraiga en su propio componente <i>Statistics</i>. El estado de la aplicación debe permanecer en el componente raíz <i>App</i>.
 
@@ -1124,7 +1125,7 @@ const Statistics = (props) => {
 
 El estado de la aplicación aún debe mantenerse en el componente raíz <i>App</i>.
 
-<h4>1.11*: unicafe paso6</h4> 
+<h4>1.11*: unicafe, paso 6</h4> 
 
 Muestra las estadísticas en una [tabla](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) HTML, de modo que su la aplicación se ve más o menos así:
 
@@ -1136,11 +1137,11 @@ Recuerde mantener la consola abierta en todo momento. Si ve esta advertencia en 
 
 Luego realice las acciones necesarias para que la advertencia desaparezca. Intente buscar en Google el mensaje de error si se queda atascado.
 
-<i> Fuente típica de un error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` es la extensión de Chrome. Intente ir a `chrome://extensions/` e intente deshabilitarlos uno por uno y actualizar la página de la aplicación React; el error debería desaparecer eventualmente.</i>
+<i>Una fuente típica de un error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` es la extensión de Chrome. Intente ir a `chrome://extensions/` e intente deshabilitarlos uno por uno y actualizar la página de la aplicación React; el error debería desaparecer eventualmente.</i>
 
 **¡Asegúrate de que a partir de ahora no veas ninguna advertencia en tu consola!**
 
-<h4>1.12 *: anécdotes paso1</h4>
+<h4>1.12*: anécdotes, paso 1</h4>
 
 El mundo de la ingeniería de software está lleno con [anécdotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que destilan verdades atemporales de nuestro campo en breves frases.
 
@@ -1183,7 +1184,7 @@ Su aplicación finalizada podría verse así
 
 **ADVERTENCIA** create-react-app convertirá automáticamente su proyecto en un repositorio git a menos que cree su aplicación dentro de un repositorio git existente. **Lo más probable es que no desee que cada uno de sus proyectos sea un repositorio separado**, así que simplemente ejecute el comando _rm -rf .git_ en la raíz de su aplicación.
 
-<h4>1.13*: anecdotes paso2 </h4>
+<h4>1.13*: anecdotes, paso 2</h4>
 
 Expande tu aplicación para que puedas votar por la anécdota mostrada.
 
@@ -1212,7 +1213,7 @@ copy[2] += 1
 ```
 El uso de una matriz podría ser la opción más sencilla en este caso. Buscar en Google te proporcionará muchos consejos sobre cómo crear una matriz llena de ceros de la longitud deseada, como [esto](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
-<h4>1,14*: anecdotes paso 3</h4>
+<h4>1,14*: anecdotes, paso 3</h4>
 
 Ahora implemente la versión final de la aplicación que muestra la anécdota con el mayor número de votos 
 

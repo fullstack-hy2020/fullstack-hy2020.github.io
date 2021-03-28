@@ -7,7 +7,7 @@ lang: es
 
 <div class="content"> 
 
-Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la librería [React](https://reactjs.org/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React. 
+Ahora comenzaremos a familiarizarnos con probablemente el tema más importante de este curso, es decir, la biblioteca [React](https://reactjs.org/). Comencemos con la creación de una aplicación React simple y con el conocimiento de los conceptos básicos de React. 
 
 La forma más fácil de empezar es utilizando una herramienta llamada [create-react-app](https://github.com/facebook/create-react-app). Es posible (pero no necesario) instalar <i>create-react-app</i> en su máquina si la herramienta <i>npm</i> que se instaló junto con Node tiene un número de versión de al menos <i>5.3</i>.
 
@@ -191,7 +191,7 @@ pero al escribir JSX, la etiqueta debe estar cerrada:
 <br />
 ```
 
-### Componentes mútiples
+### Componentes múltiples
 
 Modifiquemos la aplicación de la siguiente manera (NB: las importaciones en la parte superior del archivo se omiten en estos <i>ejemplos</i>, ahora y en el futuro. Todavía son necesarias para que el código funcione):
 
@@ -324,7 +324,7 @@ const footer = () => {
 }
 ```
 
-and use it like this
+y usada de esta manera
 
 ```js
 const App = () => {
@@ -422,11 +422,11 @@ Los ejercicios se envían **una parte a la vez**. Cuando haya enviado los ejerci
 
 Tenga en cuenta que en esta parte, hay más ejercicios además de los que se encuentran a continuación. <i>No envíe su trabajo</i> hasta que haya completado todos los ejercicios que desea enviar para la parte.
 
-  <h4>1.1: información del curso, paso1</h4> 
+  <h4>1.1: información del curso, paso 1</h4> 
 
-<i>La aplicación en la que comenzaremos a trabajar en este ejercicio se desarrollará más a fondo en algunos de los siguientes ejercicios. En este y otros conjuntos de ejercicios futuros de este curso, es suficiente enviar solo el estado final de la aplicación. Si lo desea, también puede crear una confirmación para cada ejercicio de la serie, pero esto es completamente opcional.</i>
+<i>La aplicación en la que comenzaremos a trabajar en este ejercicio se desarrollará más a fondo en algunos de los siguientes ejercicios. En este y otros conjuntos de ejercicios futuros de este curso, es suficiente enviar solo el estado final de la aplicación. Si lo desea, también puede crear un commit para cada ejercicio de la serie, pero esto es completamente opcional.</i>
 
-Use create-react-app para inicializar una nueva aplicación. Modifique <i>index.js</i> para que coincida con el siguiente 
+Use create-react-app para inicializar una nueva aplicación. Modifique <i>index.js</i> para que coincida con lo siguiente 
 
 ```js
 import React from 'react'
@@ -483,7 +483,7 @@ const App = () => {
 
 **ADVERTENCIA** create-react-app convierte automáticamente el proyecto en un repositorio de git a menos que la aplicación se cree dentro de un repositorio ya existente. Lo más probable es que **no quieras** que el proyecto se convierta en un repositorio, así que ejecuta el comando _rm -rf .git_ en la raíz del proyecto. 
 
-<h4>1.2: información del curso, paso2</h4>
+<h4>1.2: información del curso, paso 2</h4>
 
 Refactorice el componente <i>Content</i> para que no represente ningún nombre de partes o su número de ejercicios por sí mismo. En su lugar, solo representa tres componentes <i>Part</i> de los cuales cada uno representa el nombre y el número de ejercicios de una parte. 
 

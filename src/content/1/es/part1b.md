@@ -9,7 +9,7 @@ lang: es
 
 Durante el curso, tenemos un objetivo y la necesidad de aprender una cantidad suficiente de JavaScript además del desarrollo web. 
 
-JavaScript ha avanzado rápidamente en los últimos años y en este curso usamos características de las versiones más nuevas. El nombre oficial del estándar JavaScript es [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). En este momento, la última versión es la lanzada en junio de 2019 con el nombre [ECMAScript® 2019](http://www.ecma-international.org/ecma-262/10.0/index.html), también conocido como ES10.
+JavaScript ha avanzado rápidamente en los últimos años y en este curso usamos características de las versiones más nuevas. El nombre oficial del estándar JavaScript es [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). En este momento, la última versión es la lanzada en junio de 2020 con el nombre [ECMAScript® 2020](https://262.ecma-international.org/11.0/, también conocido como ES11.
 
 Los navegadores aún no son compatibles con todas las funciones más nuevas de JavaScript. Debido a este hecho, una gran cantidad de código que se ejecuta en los navegadores ha sido <i>transpilado</i> de una versión más nueva de JavaScript a una versión más antigua y compatible. 
 
@@ -24,7 +24,7 @@ También es posible escribir código JavaScript en la consola de Node.js, que se
 
 JavaScript recuerda, tanto en nombre como en sintaxis, a Java. Pero cuando se trata del mecanismo central del lenguaje, no podrían ser más diferentes. Viniendo de un entorno de Java, el comportamiento de JavaScript puede parecer un poco extraño, especialmente si uno no hace el esfuerzo de buscar sus características.
 
-En ciertos círculos también ha sido popular intentar "simular" características de Java y patrones de diseño en JavaScript. No recomendamos hacer esto ya que los idiomas y los ecosistemas respectivos son, en última instancia, muy diferentes. 
+En ciertos círculos también ha sido popular intentar "simular" características de Java y patrones de diseño en JavaScript. No recomendamos hacer esto ya que los lenguajes y los ecosistemas respectivos son, en última instancia, muy diferentes. 
 
 ### Variables
 
@@ -47,7 +47,7 @@ x = 4 // provoca un error
 En el ejemplo anterior, también vemos que el tipo de datos asignados a la variable puede cambiar durante la ejecución. Al principio _y_ almacena un número entero y al final un string.
 
 También es posible definir variables en JavaScript usando la palabra clave [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). var fue, durante mucho tiempo, la única forma de definir variables. const y let se agregaron recientemente en la versión ES6. En situaciones específicas, var funciona de una [diferente](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [manera](http://www.jstips.co/en/javascript/keyword-var-vs-let/) en comparación con las definiciones de variables en la mayoría de los idiomas. Durante este curso, el uso de var es desaconsejado y debe seguir usando const y let!
-Puede encontrar más sobre este tema en YouTube, por ejemplo, [var, let y const - Características de JavaScript de ES6](https://youtu.be/sjyJBL5fkp8)
+Puede encontrar más sobre este tema en YouTube, por ejemplo, [var, let y const - Qué, por qué y cómo - Características de JavaScript de ES6](https://youtu.be/sjyJBL5fkp8)
 
 ### Arrays
 
@@ -66,9 +66,9 @@ t.forEach(value => {
 })
 ```
 
-En este ejemplo, cabe destacar el hecho de que el contenido de la matriz se puede modificar aunque esté definido como _const_. Como la matriz es un objeto, la variable siempre apunta al mismo objeto. Sin embargo, el contenido de la matriz cambia a medida que se le agregan nuevos elementos.
+En este ejemplo, cabe destacar el hecho de que el contenido de el array se puede modificar aunque esté definido como _const_. Como el array es un objeto, la variable siempre apunta al mismo objeto. Sin embargo, el contenido del array cambia a medida que se le agregan nuevos elementos.
 
-Una forma de iterar a través de los elementos de la matriz es usar _forEach_ como se ve en el ejemplo. _forEach_ recibe una <i>función</i> definida usando la sintaxis de flecha como parámetro.
+Una forma de iterar a través de los elementos del array es usar _forEach_ como se ve en el ejemplo. _forEach_ recibe una <i>función</i> definida usando la sintaxis de flecha como parámetro.
 
 ```js
 value => {
@@ -76,9 +76,9 @@ value => {
 }
 ```
 
-forEach llama a la función <i>para cada uno de los elementos de la matriz</i>, siempre pasando el elemento individual como parámetro. La función como parámetro de forEach también puede recibir [otros parámetros](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+forEach llama a la función <i>para cada uno de los elementos del array</i>, siempre pasando el elemento individual como parámetro. La función como parámetro de forEach también puede recibir [otros parámetros](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
-En el ejemplo anterior, se agregó un nuevo elemento a la matriz usando el método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Cuando se usa React, a menudo se usan técnicas de programación funcional. Una característica del paradigma de programación funcional es el uso de estructuras de datos [inmutables](https://en.wikipedia.org/wiki/Immutable_object). En el código de React, es preferible usar el método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que no agrega el elemento a la matriz, pero crea una nueva matriz en la que se incluyen el contenido de la matriz anterior y el nuevo elemento.
+En el ejemplo anterior, se agregó un nuevo elemento al array usando el método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Cuando se usa React, a menudo se usan técnicas de programación funcional. Una característica del paradigma de programación funcional es el uso de estructuras de datos [inmutables](https://en.wikipedia.org/wiki/Immutable_object). En el código de React, es preferible usar el método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que no agrega el elemento al array, pero crea un nuevo array en la que se incluyen el contenido del array anterior y el nuevo elemento.
 
 ```js
 const t = [1, -1, 3]
@@ -89,9 +89,9 @@ console.log(t)  // [1, -1, 3] es impreso
 console.log(t2) // [1, -1, 3, 5] es impreso
 ```
 
-La llamada al método _t.concat(5)_ no agrega un nuevo elemento a la matriz anterior, pero devuelve una nueva matriz que, además de contener los elementos de la matriz anterior, también contiene el elemento nuevo.
+La llamada al método _t.concat(5)_ no agrega un nuevo elemento al array anterior, pero devuelve un nuevo array que, además de contener los elementos del array anterior, también contiene el elemento nuevo.
 
-Hay muchos métodos útiles definidos para matrices. Veamos un breve ejemplo del uso del método [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map). 
+Hay muchos métodos útiles definidos para arrays. Veamos un breve ejemplo del uso del método [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map). 
 
 ```js
 const t = [1, 2, 3] 
@@ -100,9 +100,9 @@ const m1 = t.map(value => value * 2)
 console.log(m1) // [2, 4, 6] es impreso
 ```
 
-Basado en la matriz anterior, map crea una <i>nueva matriz</i>, para la cual la función dada como parámetro se usa para crear los elementos. En el caso de este ejemplo, el valor original se multiplica por dos.
+Basado en el array anterior, map crea un <i>nuevo array</i>, para la cual la función dada como parámetro se usa para crear los elementos. En el caso de este ejemplo, el valor original se multiplica por dos.
 
-Map también puede transformar la matriz en algo completamente diferente: 
+Map también puede transformar el array en algo completamente diferente: 
 
 ```js
 const m2 = t.map(value => '<li>' + value + '</li>')
@@ -110,9 +110,9 @@ console.log(m2)
 // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] es impreso
 ```
 
-Aquí una matriz llena de valores enteros se transforma en una matriz que contiene cadenas de HTML utilizando el método map. En la [parte 2](/es/part2) de este curso, veremos que map se usa con bastante frecuencia en React.
+Aquí un array llena de valores enteros se transforma en un array que contiene cadenas de HTML utilizando el método map. En la [parte 2](/es/part2) de este curso, veremos que map se usa con bastante frecuencia en React.
 
-Los elementos individuales de una matriz son fáciles de asignar a variables con la ayuda de la [asignación de desestructuración](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). 
+Los elementos individuales de un array son fáciles de asignar a variables con la ayuda de la [asignación de desestructuración](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment). 
 
 ```js
 const t = [1, 2, 3, 4, 5]
@@ -123,7 +123,7 @@ console.log(first, second)  // 1, 2 es impreso
 console.log(rest)          // [3, 4 ,5] es impreso
 ```
 
-Gracias a la asignación, las variables _first_ y _second_ recibirán los dos primeros enteros del array como sus valores. Los enteros restantes se "recopilan" en una matriz propia que luego se asigna a la variable _rest_. 
+Gracias a la asignación, las variables _first_ y _second_ recibirán los dos primeros enteros del array como sus valores. Los enteros restantes se "recopilan" en un array propio que luego se asigna a la variable _rest_. 
 
 ### Objetos
 
@@ -152,7 +152,7 @@ const object3 = {
 }
 ```
 
-Los valores de las propiedades pueden ser de cualquier tipo, como enteros, strings, matrices, objetos... 
+Los valores de las propiedades pueden ser de cualquier tipo, como enteros, strings, arrays, objetos... 
 
 Se hace referencia a las propiedades de un objeto usando la notación "de punto", o usando corchetes:
 
@@ -209,7 +209,7 @@ Si la función solo contiene una expresión, entonces las llaves no son necesari
 const square = p => p * p
 ```
 
-Esta forma es particularmente útil cuando se manipulan matrices, por ejemplo, cuando se usa el método map:
+Esta forma es particularmente útil cuando se manipulan arrays, por ejemplo, cuando se usa el método map:
 
 ```js
 const t = [1, 2, 3]
@@ -248,9 +248,9 @@ Durante este curso definiremos todas las funciones usando la sintaxis de flecha.
 <div class="tasks"> 
   <h3>Ejercicios 1.3.-1.5.</h3>
 
-<i>Seguimos construyendo la aplicación en la que empezamos a trabajar en los ejercicios anteriores. Puede escribir el código en el mismo proyecto, ya que solo estamos interesados ​​en el estado final de la aplicación enviada.</i> 
+<i>Seguimos construyendo la aplicación en la que empezamos a trabajar en los ejercicios anteriores. Puede escribir el código en el mismo proyecto, ya que solo estamos interesados en el estado final de la aplicación enviada.</i> 
 
-**Pro-tip:** puede tener problemas cuando se trata de la estructura de la < i>props</i> que reciben los componentes. Una buena manera de aclarar las cosas es imprimiendo los props en la consola, por ejemplo, de la siguiente manera: 
+**Pro-tip:** puede tener problemas cuando se trata de la estructura de los <i>props</i> que reciben los componentes. Una buena manera de aclarar las cosas es imprimiendo los props en la consola, por ejemplo, de la siguiente manera: 
 
 ```js
 const Header = (props) => {
@@ -259,7 +259,7 @@ const Header = (props) => {
 }
 ```
 
-  <h4>1.3: información del curso, paso3</h4>
+  <h4>1.3: información del curso, paso 3</h4>
 
 Avancemos para usar objetos en nuestra aplicación. Modifique las definiciones de las variables del componente <i>App</i> de la siguiente manera y también refactorice la aplicación para que siga funcionando: 
 
@@ -289,7 +289,7 @@ const App = () => {
 
   <h4>1.4: información del curso paso 4</h4> 
 
-Y luego coloque los objetos en una matriz. Modifique las definiciones de variables de <i>App</i> de la siguiente forma y modifique las otras partes de la aplicación en consecuencia: 
+Y luego coloque los objetos en un array. Modifique las definiciones de variables de <i>App</i> de la siguiente forma y modifique las otras partes de la aplicación en consecuencia: 
 
 ```js
 const App = () => {
@@ -317,7 +317,7 @@ const App = () => {
 }
 ```
 
-**NB** en este punto <i>puede asumir que siempre hay tres elementos</i>, por lo que no es necesario pasar por las matrices usando bucles. Volveremos al tema de la representación de componentes basados ​​en elementos dentro de matrices con una exploración más profunda en la [siguiente parte del curso](../part2). 
+**NB** en este punto <i>puede asumir que siempre hay tres elementos</i>, por lo que no es necesario pasar por las matrices usando bucles. Volveremos al tema de la representación de componentes basados en elementos dentro de arrays con una exploración más profunda en la [siguiente parte del curso](../part2). 
 
 Sin embargo, no pase diferentes objetos como props separados del componente <i>App</i> a los componentes <i>Content</i> y <i>Total</i>. En su lugar, páselos directamente como una matriz:
 
@@ -512,7 +512,7 @@ const janja = new Person('Janja Garnbret', 22)
 janja.greet()
 ```
 
-Cuando se trata de sintaxis, las clases y los objetos creados a partir de ellos recuerdan mucho a las clases y objetos de Java. Su comportamiento también es bastante similar al de los objetos Java. En el núcleo, siguen siendo objetos basados ​​en la [herencia prototípica](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript. El tipo de ambos objetos es en realidad _Object_, ya que JavaScript esencialmente solo define los tipos [Boolean, Null, Undefined, Number, String, Symbol, BigInt y Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+Cuando se trata de sintaxis, las clases y los objetos creados a partir de ellos recuerdan mucho a las clases y objetos de Java. Su comportamiento también es bastante similar al de los objetos Java. En el núcleo, siguen siendo objetos basados en la [herencia prototípica](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript. El tipo de ambos objetos es en realidad _Object_, ya que JavaScript esencialmente solo define los tipos [Boolean, Null, Undefined, Number, String, Symbol, BigInt y Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
 La introducción de la sintaxis de clases fue una adición controvertida. Consulte [No es impresionante: clases de ES6](https://github.com/petsel/not-awesome-es6-classes) o [¿Es la "clase" en ES6 la nueva parte "mala"?](Https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) para obtener más detalles.
 
@@ -520,7 +520,7 @@ La sintaxis de la clase ES6 se usa mucho en React "antiguo" y también en Node.j
 
 ### Materiales JavaScript
 
-Existen guías buenas y malas para JavaScript en Internet. La mayoría de los enlaces de esta página relacionados con la referencia de características de JavaScript [Guía de JavaScript de Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+Existen guías buenas y malas para JavaScript en Internet. La mayoría de los enlaces de esta página relacionados con de características de JavaScript se refieren a la [Guía de JavaScript de Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
 Se recomienda leer inmediatamente [Una reintroducción a JavaScript (tutorial de JS)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) en el sitio web de Mozilla.
 
