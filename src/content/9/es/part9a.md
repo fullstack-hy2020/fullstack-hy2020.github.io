@@ -147,8 +147,6 @@ Por último, a continuación, enumeramos algunos problemas que muchos tienen con
 
 Al usar librerías externas, es posible que algunas librerías tengan declaraciones de tipos faltantes o no válidas de alguna manera. La mayoría de las veces, esto se debe a que la biblioteca no está escrita en TypeScript y la persona que agrega las declaraciones de tipo manualmente no está haciendo un buen trabajo con ella. En estos casos, es posible que deba definir las declaraciones de tipo usted mismo. Sin embargo, es muy probable que alguien ya haya agregado mecanografía para el paquete que está utilizando. Siempre verifique [DefinitelyTyped](https://definitelytyped.org/) o [sus páginas de GitHub primero](https://github.com/DefinitelyTyped/DefinitelyTyped). Probablemente sean las fuentes más populares para los archivos de declaración de tipos. De lo contrario, es posible que desee comenzar familiarizándose con la propia [documentación](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) de TypeScript con respecto a las declaraciones de tipos.
 
-Incomplete, invalid or missing types in external libraries
-
 
 #### A veces, la inferencia de tipos necesita ayuda
 
