@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Sovelluksen frontend toimii puhelinluettelon näyttämisen osalta päivitetyn palvelimen kanssa. Jotta luetteloon voitaisiin lisätä henkilöitä, tulee backendiin toteuttaa kirjautuminen.
+Sovelluksen frontend toimii puhelinluettelon näyttämisen osalta päivitetyn palvelimen kanssa. Jotta luetteloon voitaisiin lisätä henkilöitä, tulee frontendiin toteuttaa kirjautuminen.
 
 ### Käyttäjän kirjautuminen
 
