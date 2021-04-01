@@ -422,6 +422,21 @@ The final code of the client can be found on [Github](https://github.com/fullsta
 
 ### n+1-problem
 
+First of all  you'll need to enable a debugging option via `mongoose` in your backend project directory, by add a line of code as shown below:
+
+
+```js
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+mongoose.set('debug', true); // highlight-line
+```
+
 Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on. 
 
 ```js
