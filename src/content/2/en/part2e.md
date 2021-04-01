@@ -26,7 +26,7 @@ h1 {
 }
 ```
 
-**Note:** when the content of the file <i>index.js</i> changes, React does not notice the automatiaclly so you must refresh the browser to see your changes!
+**Note:** when the content of the file <i>index.js</i> changes, React does not notice the automatically so you must refresh the browser to see your changes!
 
 CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application.
 
