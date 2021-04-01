@@ -422,7 +422,7 @@ The final code of the client can be found on [Github](https://github.com/fullsta
 
 ### n+1-problem
 
-First of all  you'll need to enable a debugging option via `mongoose` in your backend project directory, by add a line of code as shown below:
+First of all  you'll need to enable a debugging option via `mongoose` in your backend project directory, by adding a line of code as shown below:
 
 
 ```js
