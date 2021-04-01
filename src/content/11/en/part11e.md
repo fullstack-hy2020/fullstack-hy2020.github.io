@@ -59,6 +59,10 @@ Your notifications may look like the following:
 
 #### 11.19A: Use a telegram bot to deliver a message on successful or failure buid message to any user, group or channel as required:
 
+NB: In case you end up having a lot of workflows running simultaneously (when you push a commit) in your github actions tab, you can disable all workflows except the one you are currently working on, as shown in the figure.
+
+![](https://i.imgur.com/MJ6QBZF.png)
+
 1. To get started, you need to create a telegram bot and to do so you have to start by sending a message `/start` to `@BotFather` which is itself a bot to assigt users in creating and managing their own custom bots. Further, you need to send `/newbot` to create a new bot of your own, and follow the process. Though the process only consists of asking for name and username (must be unique, e.g., `my_responsible_bot1`) for our bot. After creating the bot we can request the token for the bot using `/token` message.
 
 2. Now make a group on telegram, say "My CI-CD Notifications" using your personal telegram account on mobile app or desktop web app of telegram. After that you'll be prompted to add users, just enter your bot's username there(e.g., `@my_responsible_bot1`) to add bot to the group.
