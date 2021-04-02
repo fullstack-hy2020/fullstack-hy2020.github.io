@@ -364,7 +364,7 @@ app.listen(PORT, () => {
 
 And now if we make a HTTP GET request to http://localhost:3000/api/diaries we should see the message <i>Fetching all diaries!</i>.
 
-Next we need to start serving the seed data (found [here](https://github.com/fullstack-hy/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
+Next we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
 
 We won't be writing the code for the actual data manipulations on the router. We will create a <i>service</i> which takes care of the data manipulation instead.
 It is quite common practice to separate the "business logic" from the router code into its own modules, which are quite often called <i>services</i>.
