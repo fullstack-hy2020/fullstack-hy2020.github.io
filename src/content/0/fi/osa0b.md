@@ -113,7 +113,7 @@ Perinteisissä websovelluksissa selain on "tyhmä", se ainoastaan pyytää palve
 
 ### Selaimessa suoritettava sovelluslogiikka
 
-Pidä konsoli edelleen auki. Tyhjennä konsolin näkymä painamalla vasemmalla olevaa &empty;-symbolia.
+Pidä konsoli edelleen auki. Tyhjennä konsolin näkymä painamalla vasemmalla olevaa &#x29B8;-symbolia.
 
 Kun menet nyt [muistiinpanojen](https://studies.cs.helsinki.fi/exampleapp/notes) sivulle eli klikkaat linkkiä <i>notes</i>, selain tekee 4 HTTP-pyyntöä:
 
@@ -502,7 +502,7 @@ HTML-koodi on lähes samanlainen, erona on ladattava JavaScript-tiedosto (<i>spa
 
 Lomakkeelle ei ole nyt määritelty ollenkaan <i>action</i>- eikä <i>method</i>-attribuutteja, jotka määräävät minne ja miten selain lähettää lomakkeelle syötetyn datan.
 
-Avaa nyt <i>Network</i>-välilehti ja tyhjennä se &empty;-symbolilla. Kun luot uuden muistiinpanon, huomaat, että selain lähettää ainoastaan yhden pyynnön palvelimelle:
+Avaa nyt <i>Network</i>-välilehti ja tyhjennä se &#x29B8;-symbolilla. Kun luot uuden muistiinpanon, huomaat, että selain lähettää ainoastaan yhden pyynnön palvelimelle:
 
 ![](../../images/0/26e.png)
 
