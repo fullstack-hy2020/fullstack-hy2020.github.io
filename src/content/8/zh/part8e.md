@@ -452,6 +452,23 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 
 ### n+1-problem
 【n + 1-问题】
+
+<!-- First of all  you'll need to enable a debugging option via `mongoose` in your backend project directory, by adding a line of code as shown below: -->
+首先你需要增加如下内容来通过 `mongoose` 在后台项目中开启调试选项：
+
+```js
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+mongoose.set('debug', true); // highlight-line
+```
+
+
 <!-- Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on.  -->
 让我们在后端添加一些东西。 让我们修改模式，使<i>Person</i> 类型有一个 friendOf 字段，该字段告诉该人所在的好友列表。
 

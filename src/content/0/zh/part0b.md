@@ -78,7 +78,7 @@ Windows 系统或Linux 系统，可以按 `F12` 或 `ctrl-shift-i`打开控制�
 
 ![](../../images/0/3e.png)
 
-<!-- The upper part, <i>General</i>, shows that the browser did a request to the address <i>https://studies.cs.helsinki.fi/exampleapp/</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
+<!-- The upper part, <i>General</i>, shows that the browser made a request to the address <i>https://studies.cs.helsinki.fi/exampleapp/</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
 
 上半部分，General 中的内容，说明了浏览器使用 [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) 方法向地址 https://studies.cs.helsinki.fi/exampleapp/ 发送了一个请求（虽然在截图的时候还不是这个地址），并且请求成功，因为服务器响应的状态码为 200。
 

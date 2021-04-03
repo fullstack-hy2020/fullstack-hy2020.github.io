@@ -488,9 +488,9 @@ query {
 
 ### Exercises 8.13.-8.16.
 
-<!-- The following exercises are guite likely breaking your frontend. Do not worry it yet, the fronend shall be fixed and expanded in next chapter.  -->
+<!-- The following exercises are quite likely to break your frontend. Do not worry about it yet, the frontend shall be fixed and expanded in the next chapter. -->
 
-下面的几个练习可能会破坏你的前端。不要担心，前端会在下几个章节进行修复。
+下面的几个练习可能会破坏你的前端界面。先不要担心，前端界面会在下个章节进行修复。
 
 #### 8.13: Database, 步骤 1
 <!-- Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/master/library-schema.md). -->
