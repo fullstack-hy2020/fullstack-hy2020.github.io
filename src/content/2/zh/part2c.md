@@ -351,8 +351,8 @@ console.log(promise2)
 如果你打开浏览器访问<http://localhost:3000>， 此时如下信息会打印到控制台
 
 ![](../../images/2/16b.png)
-<!-- **Note:** when the content of the file <i>index.js</i> changes, React does not notice the automatiaclly so you must refresh the browser to see your changes! -->
-注意，当  <i>index.js</i>  变化时， React 并不会自动感知，因此你必须刷新浏览器来看到变化！
+<!-- **Note:** when the content of the file <i>index.js</i> changes, React does not notice that automatically so you must refresh the browser to see your changes! A simple workaround to make React notice the change automatically, is to create a file named <i>.env</i> in the root directory of the project and add this line `FAST_REFRESH=false`. Restart the app for the applied changes to take effect.-->
+注意，当  <i>index.js</i>  变化时， React 并不会自动感知，因此你必须刷新浏览器来看到变化！一个简单的方式来让React 自动感知到变化，是在项目的根目录创建一个  <i>.env</i> 文件，并加上 `FAST_REFRESH=false` 。重启应用来让变化生效。
 
 <!-- Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises). -->
 Axios 的 _get_ 方法会返回一个[promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises)。 

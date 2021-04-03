@@ -64,7 +64,7 @@ GitHub Actions 比自我托管的解决方案有很大的优势: 代码库托管
 在本部分的大多数练习中，我们将为[这个示例项目代码库](https://github.com/smartlyio/fullstackopen-cicd)中的一个小项目构建 CI/CD 管道。
 
 
-<!-- Note that the code <i>might not work</i> with node version 15. If you happen to have that version, and the project does not eve start, please downgrade to 14 or you are on your own.  -->
+<!-- Note that the code <i>might not work</i> with node version 15. If you happen to have that version, and the project does not even start, please downgrade to 14 or you are on your own.  -->
 请注意，该代码可能不适用于版本为15的node。如果你碰巧有那个版本，而且项目还没开始，请自行降级到14。
 
 #### 11.2 the example project

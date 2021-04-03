@@ -497,8 +497,8 @@ app.listen(PORT, () => {
 
 
 
-<!-- Next wee need to start serving the seed data (found [here](https://github.com/fullstack-hy/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>. -->
-接下来我们需要开始提供应用的种子数据(点击 [here](https://github.com/fullstack-hy/misc/blob/master/diaryentries.json))。 我们将获取数据并将其保存到<i>data/diaries.json</i>中。
+<!-- Next we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>. -->
+接下来我们需要开始提供应用的种子数据(点击 [这里](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json))。 我们获取数据并将其保存到<i>data/diaries.json</i>中。
 
 
 
