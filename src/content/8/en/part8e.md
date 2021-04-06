@@ -559,7 +559,7 @@ User.find_v1
 User.find_v1
 </pre>
 
-NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see User.find_v2 or User.find_v1 logs in your console respectively.
+NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 
