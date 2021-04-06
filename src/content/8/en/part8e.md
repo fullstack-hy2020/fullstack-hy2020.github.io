@@ -519,9 +519,25 @@ query {
 
 There is however one issue with our solution, it does an unreasonable amount of queries to the database. If we log every query to the database, just like this for example,
 ```js
+
+Query: {
+  allPersons: (root, args) => {    
+    console.log('Person.find') // highlight-line
+    if (!args.phone) {
+      return Person.find({})
+    }
+
+    return Person.find({ phone: { $exists: args.phone === 'YES' } })
+  }
+
+// ..
+
+},    
+
+// ..
+
 friendOf: async (root) => {
 // highlight-start
-  console.log("Person.find")
   const friends = await User.find({ friends: { $in: [root._id] } })
   console.log("User.find")
   // highlight-end
