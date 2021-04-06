@@ -523,11 +523,12 @@ There is however one issue with our solution, it does an unreasonable amount of 
 Query: {
   allPersons: (root, args) => {    
     // highlight-start
-    console.log('Person.find')
     if (!args.phone) {
+      console.log('Person.find_v1')
       return Person.find({})
     }
 
+    console.log('Person.find_v2')
     return Person.find({ phone: { $exists: args.phone === 'YES' } })
     // highlight-end
   }
@@ -547,19 +548,21 @@ friendOf: async (root) => {
 },
 ```
 
-and we have 5 persons saved, we see an absurd amount of queries.
+and considering we have 5 persons saved, and we query `allPersons` without `phone` as argument, we see an absurd amount of queries like below.
 
 <pre>
 Person.find
-User.find
-User.find
-User.find
-User.find
-User.find
+User.find_v1
+User.find_v1
+User.find_v1
+User.find_v1
+User.find_v1
 </pre>
 
 
-So even though we primarily do one query for all persons, every person causes one more query in their resolver. 
+So even though we primarily do one query for all persons, every person causes one more query in their resolver.
+
+NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see User.find_v2 or User.find_v1 logs in your console respectively.
 
 
 This is a manifestation of the famous [n+1-problem](https://www.google.com/search?q=n%2B1+problem), which appears every once in a while in different contexts, and sometimes sneaks up on developers without them noticing. 
