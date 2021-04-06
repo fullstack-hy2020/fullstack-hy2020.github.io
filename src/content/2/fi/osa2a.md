@@ -360,7 +360,7 @@ Eli eräs konsoliin tulostuvaa virheilmoitusta aiheuttamaton tapa määritellä 
 </ul>
 ```
 
-Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan aiheuttaa joissakin tilanteissa pahoja ongelmia. Lue lisää esimerkiksi [täältä](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
+Tämä **ei kuitenkaan ole suositeltavaa** ja voi näennäisestä toimimisestaan huolimatta aiheuttaa joissakin tilanteissa pahoja ongelmia. Lue lisää esimerkiksi [täältä](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
 
 ### Refaktorointia - moduulit
 
