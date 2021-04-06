@@ -559,10 +559,9 @@ User.find_v1
 User.find_v1
 </pre>
 
+NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see User.find_v2 or User.find_v1 logs in your console respectively.
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
-
-NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see User.find_v2 or User.find_v1 logs in your console respectively.
 
 
 This is a manifestation of the famous [n+1-problem](https://www.google.com/search?q=n%2B1+problem), which appears every once in a while in different contexts, and sometimes sneaks up on developers without them noticing. 
