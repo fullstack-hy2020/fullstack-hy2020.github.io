@@ -683,7 +683,7 @@ Kaikki oleellinen tämän ja seuraavien kahden tehtävän tekemiseen liittyvä i
 
   <h4>0.5: Single Page App</h4>
 
-Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/spa> eli muistiinpanojen [Single Page App](../osa0/#single-page-app)-versioon
+Tee kaavio tilanteesta, missä käyttäjä menee selaimella osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/spa> eli muistiinpanojen [Single Page App](../osa0/web_sovelluksen_toimintaperiaatteita#single-page-app)-versioon
 
   <h4>0.6: Uusi muistiinpano</h4>
 
