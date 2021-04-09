@@ -746,9 +746,9 @@ const Course = (props) => { // highlight-line
 
 <h3>Exercises 2.1.-2.5.</h3>
 
-<!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
+<!-- The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
-这些练习是通过 GitHub 提交的，并在[提交系统submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021)那样将练习标记为 done。
+这些练习是通过 GitHub 提交的，并在[提交系统submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)那样将练习标记为 done。
 
 <!-- You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. -->
 您可以将本课程的所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请使用一个合理的目录命名方案。 
@@ -767,8 +767,8 @@ const Course = (props) => { // highlight-line
 <h4>2.1: Course information 步骤6</h4>
 
 <!-- Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers.  -->
-<!-- The model answers for part 1 can be found by going to the [submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info<i/> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info"). -->
-让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。第一章中的模型答案可以到 [提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)来找到，单击顶部的<i>my submissions</i>，在对应第一章中下面<i>solutions</i>列，点击<i>show</i>。 如果要查看<i>course info</i> 练习，点击 <i>kurssitiedot</i> 下的_index.js_ ("kurssitiedot" 表示课程信息)
+<!-- The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), click on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column click on <i>show</i>. To see the solution to the <i>course info<i/> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info"). -->
+让我们完成练习 1.1 - 1.5中，用于渲染课程内容的代码。 您可以从模型答案的代码开始。第一章中的模型答案可以到 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)来找到，单击顶部的<i>my submissions</i>，在对应第一章中下面<i>solutions</i>列，点击<i>show</i>。 如果要查看<i>course info</i> 练习，点击 <i>kurssitiedot</i> 下的_index.js_ ("kurssitiedot" 表示课程信息)
 
 
 <!-- It might not be good to copy a project or to put the  <i>node\_modules</i> directory into the version control per se.  -->

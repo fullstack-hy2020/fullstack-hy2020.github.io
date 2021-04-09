@@ -650,8 +650,8 @@ router.post('/', userExtractor, async (request, response) => {
 <!-- [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix. -->
 在进行修复时，[这个](https://github.com/visionmedia/supertest/issues/398)很可能是最有用的。
 
-<!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
-这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021)。
+<!-- This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
+这是本课程这一章节的最后一个练习，是时候将你的代码推送到 GitHub，并将所有已完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
 <!-- -
 <!-- note left of user -->

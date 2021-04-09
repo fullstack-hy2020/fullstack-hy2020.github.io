@@ -1194,8 +1194,8 @@ const GET_AUTHORIZED_USER = gql`
 
 你可以使用 <em>deleteReview</em>  变化来删除一个评论。这个变化有一个入参 也就是待删除的评论id。在变化执行后，最简单的更新评论列表查询的方式就是调用 [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) 函数。
 
-<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
-这是本章练习的最后一部分。是时候将你的代码推送到Github 并在[练习提交系统](https://study.cs.helsinki.fi/stats/courses/fullstack2021) 中完成你的练习了。
+<!-- This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
+这是本章练习的最后一部分。是时候将你的代码推送到Github 并在[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中完成你的练习了。
 
 </div>
 

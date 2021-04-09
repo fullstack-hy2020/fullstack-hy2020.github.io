@@ -474,8 +474,8 @@ const App = () => {
 <div class="tasks">
 <h3>Exercises 1.1.-1.2.</h3>
 
-<!-- Exercises are submitted through GitHub and by marking completed exercises in the [submission application](https://study.cs.helsinki.fi/stats/courses/fullstack2021). -->
-练习通过 GitHub 提交，并在[提交应用](https://study.cs.helsinki.fi/stats/courses/fullstack2021) 中标记练习为已完成。
+<!-- Exercises are submitted through GitHub and by marking completed exercises in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
+练习通过 GitHub 提交，并在[提交应用](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 中标记练习为已完成。
 
 <!-- You may submit all the exercises of this course into the same repository, or use multiple repositories. If you submit exercises of different parts into the same repository, please use a sensible naming scheme for the directories. -->
 您可以将本课程的所有练习提交到同一个仓库，或者使用多个不同的仓库。 如果您将来自不同章节的练习提交到同一个仓库中，请使用一个合理的目录命名方案。 
