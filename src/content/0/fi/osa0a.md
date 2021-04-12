@@ -74,7 +74,7 @@ Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScript
 
 #### React Native -osan suoritus
 
-Suorittamalla tehtäviä kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi yhdellä tai kahdella opintopisteella. Yhden opintopisteen suoritukseen tulee suorittaa osassa vähintään 19 tehtävää, kun taas kahden opintopisteen suoritukseen vähintään 26 tehtävää. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
+Suorittamalla tehtäviä kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteella. Kahden opintopisteen suoritusta varten tulee osassa suorittaa vähintään 25 tehtävää. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
 
 #### Continuous integration -osan suoritus
 
