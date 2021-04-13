@@ -388,7 +388,7 @@ describe('<Togglable />', () => {
 ```
 
 
-The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component into the _component_ variable 
+The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component into the _component_ variable.
 
 
 The first test verifies that the <i>Togglable</i> component renders its child component `<div className="testDiv" />`.
@@ -461,7 +461,7 @@ In practice we used the <i>fireEvent</i> to create a <i>click</i> event for the 
 We can also simulate text input with <i>fireEvent</i>.
 
 <!-- Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta -->
-Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows
+Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows.
 
 ```js
 import React, { useState } from 'react'
@@ -547,8 +547,7 @@ The second expectation checks, that the event handler is called with the right p
 
 <!-- [Testauskattavuus](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting) saadaan helposti selville suorittamalla testit komennolla -->
 We can easily find out the [coverage](https://github.com/facebookincubator/create-react-app/blob/ed5c48c81b2139b4414810e1efe917e04c96ee8d/packages/react-scripts/template/README.md#coverage-reporting)
-of our tests by running them with the command
-
+of our tests by running them with the command.
 
 ```js
 CI=true npm test -- --coverage
@@ -574,7 +573,7 @@ You can find the code for our current application in its entirety in the <i>part
 #### 5.13: Blog list tests, step1
 
 <!-- Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää. -->
-Make a test which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default
+Make a test which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default.
 
 <!-- Lisää komponenttiin tarvittaessa testausta helpottavia CSS-luokkia. -->
 Add CSS-classes to the component to help the testing as necessary. 
@@ -606,7 +605,7 @@ If, for example, you set an <i>input</i> element's id attribute as 'author':
 ```
 
 <!-- saat haettua kentän testissä seuraavasti -->
-You can access the contents of the field with
+You can access the contents of the field with:
 
 ```js
 const author = component.container.querySelector('#author')
