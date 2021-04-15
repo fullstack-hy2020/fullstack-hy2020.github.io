@@ -33,7 +33,7 @@
     {
       "title": "Voinko muokata tekemääni palautusta?",
       "text": [
-        "Et. Kaikki osan tehtävät on palautettava kerralla. Jos merkkasit tehtäviä vahingossa väärin tai typotit repositorion nimen, lähetä mailia osoitteeseen matti.luukkainen@helsinki.fi"
+        "Et. Kaikki osan tehtävät on palautettava kerralla. Jos merkkasit tehtäviä vahingossa väärin tai typotit repositorion nimen, lähetä mailia osoitteeseen matti.luukkainen@helsinki.fi, kerro mailissa github-käyttäjätunnuksesi."
       ]
     },
     {
@@ -89,7 +89,7 @@
     {
       "title": "Can I edit a submission?",
       "text": [
-        "No. All exercises for a part must be submitted at the same time. If you marked exercises wrong by accident, or wrote the repository name wrong, send an e-mail to matti.luukkainen@helsinki.fi."
+        "No. All exercises for a part must be submitted at the same time. If you marked exercises wrong by accident, or wrote the repository name wrong, send an e-mail to matti.luukkainen@helsinki.fi, tell your github username in the mail."
       ]
     },
     {
