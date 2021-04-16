@@ -705,7 +705,7 @@ example above.
 
 Now implement the actual functionality of the application. 
 
-Note that since all the code is in the file <i>index.js</i> and you have to manually reload the page after each change since the automatic reloading of the browser content does not work for that page!
+Note that since all the code is in the file <i>index.js</i>, you have to manually reload the page after each change because the automatic reloading of the browser content does not work for that page!
 
 </div>
 
