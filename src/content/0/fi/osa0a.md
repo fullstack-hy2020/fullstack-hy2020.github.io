@@ -7,13 +7,13 @@ lang: fi
 
 <div class="content">
 
-Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST ja GraphQL-rajapinnoissa. Kurssi sisältää myös osat, joissa tutustutaan TypeScriptiin, React Nativeen ja jatkuvaan integraatioon.
+Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin web-sovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST- ja GraphQL-rajapinnoissa. Kurssi sisältää myös osat, joissa tutustutaan TypeScriptiin, React Nativeen ja jatkuvaan integraatioon.
 
 Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
 
 ### Oletetut esitiedot
 
-Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.
+Osallistujilta edellytetään vahvaa ohjelmointirutiinia, web-ohjelmoinnin ja tietokantojen perustuntemusta, Git-versionhallintajärjestelmän peruskäytön hallintaa, kykyä pitkäjänteiseen työskentelyyn sekä valmiutta omatoimiseen tiedonhakuun ja ongelmanratkaisuun.
 
 Osallistuminen ei kuitenkaan edellytä kurssilla käsiteltävien tekniikoiden tai JavaScript-kielen hallintaa.
 
@@ -31,7 +31,7 @@ Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä en
 
 Oletuksena on, että teet kunkin osan tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen. 
 
-Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2022. klo 23:59 asti. Jos haluat kurssista Avoimen yliopiston kautta opintopisteet, tulee kurssin koe suorittaa viimeistään 10.1.2022 .
+Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2022. klo 23:59 asti. Jos haluat kurssista Avoimen yliopiston kautta opintopisteet, tulee kurssin koe suorittaa viimeistään 10.1.2022.
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -65,7 +65,7 @@ Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/1
 
 Kokeen viimeinen suorituspäivä on 10.1.2022.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.</b>
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-12 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12.5 pistettä.
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-12 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
 #### 8 ja 9 opintopisteen suoritus
 
 Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
@@ -100,21 +100,22 @@ Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön j�
 
 ### Kurssitodistus
 
-Riippumatta siitä ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen.
+Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen.
 
 ![](../../images/0/29.png)
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
-Jos olet jo suorittanut kurssin joko MOOC:ina tai Yliopiston kurssina, voit täydentää nyt suoritustasi.
+Jos olet jo suorittanut kurssin joko MOOC:ina tai yliopiston kurssina, voit täydentää suoritustasi.
 
 #### Full stack open 2019 tai 2020-suorituksen täydentäminen
 
 Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä 
-email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro github-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
+email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
+
 #### Kurssin jonkin muun version täydentäminen
 
-Käytännössä täydentäminen tapahtuu siten, että voit korvata tämän kurssin <i>osia</i> aiemmin suorittamasi kurssin aikana palauttamillasi osilla. Eli jos olet suorittanut kurssin esim. avoimen yliopiston kautta kolmen opintopisteen laajuisena, voit korvata vanhan suorituksesi osilla 0-3 tämän kurssin osat 0-3. Ainoastaan peräkkäisten osien korvaaminen onnistuu, eli et voi korvata esim. osia 0 ja 2 mutta tehdä nyt osaa 1.
+Täydentäminen tapahtuu siten, että voit korvata tämän kurssin <i>osia</i> aiemmin suorittamasi kurssin aikana palauttamillasi osilla. Eli jos olet suorittanut kurssin esim. avoimen yliopiston kautta kolmen opintopisteen laajuisena, voit korvata vanhan suorituksesi osilla 0-3 tämän kurssin osat 0-3. Ainoastaan peräkkäisten osien korvaaminen onnistuu, eli et voi korvata esim. osia 0 ja 2 mutta tehdä nyt osaa 1.
 
 Voit korvata ainoastaan kokonaisia osia, eli jos teit aiemmalla kurssilla esim. 50% jonkin osan tehtävistä, et voi tällä kurssilla jatkaa samaa osaa.
 
@@ -138,22 +139,17 @@ Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia k
 
 Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla: 
 
-- Tee Avoimen yliopiston kurssi-ilmoittautuminen 9.1.2022 mennessä [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136055679) 
+- Tee Avoimen yliopiston kurssi-ilmoittautuminen 9.1.2022 mennessä [täällä](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136055679).
 - Linkin ja kurssiavaimen opintojakson Moodleen saat sähköpostitse 24 tunnin sisään kurssi-ilmoittautumisesi jälkeen.
 - Käyttäjätunnus. Opiskeletko Helsingin yliopistossa tai jossain muussa [HAKA-verkoston](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners) jäseninstituutiossa? 
   - Kyllä: Käytä omaa käyttäjätunnustasi Moodleen kirjautumiseen. 
   - En: Aktivoi Helsingin yliopiston käyttäjätunnuksesi ja käytä sitä Moodleen kirjautumiseen. Saat käyttäjätunnusta koskevaa lisätietoa sähköpostiisi ilmoittautumisesi jälkeen. 
-- Käytä Helsingin yliopiston / [HAKA-korkeakoulun](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners) käyttäjätunnusta Moodleen kirjautumiseen.  
-- Kurssi-ilmoittautumisen jälkeen: Tallenna Helsingin yliopiston opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/myinfo) välilehdellä "my submissions". 
-  - Mikäli käytit muun kuin Helsingin yliopiston HAKA-tunnuksia kirjautumiseen, pyydä Helsingin yliopiston opiskelijanumerosi avoin-student@helsinki.fi -osoitteesta.  
-    - Lähetä viesti samasta osoitteesta, jota käytit kurssi-ilmoittautumiseen. 
-    - Ilmoita nimesi, syntymäaikasi, kurssin nimi.  
 
 HUOM! 
 
 - Vain niiden opiskelijoiden opintosuoritukset voidaan kirjata Helsingin yliopiston opintorekisteriin, jotka ovat tehneet kurssi-ilmoittautumisen Avoimeen yliopistoon ja suorittaneet kurssin loppuun ohjeiden mukaisesti. 
 
-Kurssi-ilmoittautumisen jälkeen: Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/myinfo)  välilehdellä "my submissions". Mikäli käytit HAKA-tunnuksia kirjautumiseen, pyydä Helsingin yliopiston opiskelijanumerosi avoin-student@helsinki.fi -osoitteesta. Ilmoita sähköpostissa nimesi, kurssi-ilmoittautumisessa käyttämäsi sähköpostiosoite, syntymäaikasi sekä kurssin nimi.  
+Kurssi-ilmoittautumisen jälkeen: Muista tallettaa opiskelijanumerosi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/myinfo) välilehdellä "my submissions". Mikäli käytit HAKA-tunnuksia kirjautumiseen, pyydä Helsingin yliopiston opiskelijanumerosi osoitteesta avoin-student@helsinki.fi. Ilmoita sähköpostissa nimesi, kurssi-ilmoittautumisessa käyttämäsi sähköpostiosoite, syntymäaikasi sekä kurssin nimi. Lähetä viesti samasta osoitteesta, jota käytit kurssi-ilmoittautumiseen.
 
 ### Full stack -harjoitustyö
 
@@ -161,11 +157,11 @@ Avoimen yliopiston tarjonnassa on 1-10 opintopisteen laajuinen Full Stack -harjo
 
 Harjoitustyössä toteutetaan vapaavalintainen sovellus Reactilla ja/tai Nodella. Myös React Nativella toteutettu mobiilisovellus on mahdollinen.
 
-Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, yksi opintopiste vastaa 17.5 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
+Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, yksi opintopiste vastaa 17,5 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
 
 Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
-Lisää tietoa harjoitustyöstä avoimen yliopiston [täällä](https://github.com/FullStack-HY/misc/blob/main/harjoitustyo.md).
+Harjoitustyöstä on lisää tietoa [täällä](https://github.com/FullStack-HY/misc/blob/main/harjoitustyo.md).
 
 ### Haastattelulupaus
 
@@ -181,15 +177,15 @@ Kurssin tehtävät palautetaan GitHubiin, joten Git tulee olla asennettuna ja si
 
 Asenna myös joku järkevä web-devausta tukeva tekstieditori, enemmän kuin suositeltava valinta on [Visual Studio Code](https://code.visualstudio.com/).
 
-Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan Web-devauksessa ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
+Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 14.8.0, älä asenna mitään sitä vanhempaa versiota. Asennusohjeita löytyy [Node.js:n sivulta](https://nodejs.org/en/download/package-manager/).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 14.8.0, älä asenna sitä vanhempaa versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> -nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 
 ### Typoja materiaalissa
 
-Jos löydät kirjoitusvirheen tai jokin asia on ilmaistu epäselvästi tai kielioppisääntöjen vastaisesti, tee <i>pull request</i> repositoriossa <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io> olevaan kurssimateriaaliin. Esim. tämän sivun Markdown-muotoinen lähdekoodi löytyy repositoryn alta osoitteesta <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/source/src/content/0/fi/osa0a.md>
+Jos löydät kirjoitusvirheen tai jokin asia on ilmaistu epäselvästi tai kielioppisääntöjen vastaisesti, tee <i>pull request</i> repositoriossa <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io> olevaan kurssimateriaaliin. Esim. tämän sivun Markdown-muotoinen lähdekoodi on osoitteessa <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/source/src/content/0/fi/osa0a.md>
 
 Materiaalin jokaisen osan alalaidassa on linkki <em>Ehdota muutosta materiaalin sisältöön</em>, jota klikkaamalla pääset suoraan editoimaan sivun lähdekoodia.
 
