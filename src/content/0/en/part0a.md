@@ -187,7 +187,7 @@ The number of credits is based on hours of work done. One credit is approximatel
 
 It is possible to complete the project as a pair or a group.
 
-For more information, see the [here](https://github.com/FullStack-HY/misc/blob/main/project.md).
+For more information, see [here](https://github.com/FullStack-HY/misc/blob/main/project.md).
 
 ### Interview promise
 
