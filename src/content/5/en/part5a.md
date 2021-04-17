@@ -679,7 +679,7 @@ The notifications must be visible for a few seconds. It is not compulsory to add
 
 ### A note on using local storage
 
-At the [end](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) of the last part we mentioned that the challenge of the token based authentication is how to cope with the situation when the API access of the token holder to the API needs to be revoked.
+At the [end](/en/part4/token_authentication#problems-of-token-based-authentication) of the last part we mentioned that the challenge of the token based authentication is how to cope with the situation when the API access of the token holder to the API needs to be revoked.
 
 There are two solutions to the problem. The first one is to limit the validity period of a token. This forces the user to relogin to the app once the token has expired. The other approach is to save the validity information of each token to the backend database. This solution is often called a <i>server side session</i>.
 
