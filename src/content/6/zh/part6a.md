@@ -739,8 +739,8 @@ describe('unicafe reducer', () => {
 <!-- Now implement the actual functionality of the application.  -->
 现在实现应用的实际功能。
 
-<!-- Note that since all the code is in the file <i>index.js</i> and you have to manually reload the page after each change since the automatic reloading of the browser content does not work for that page! -->
-注意由于所有的代码都在  <i>index.js</i> 文件，你需要手动重新加载页面因为自动加载浏览器内容对这个页面并不起作用。
+<!-- Note that since all the code is in the file <i>index.js</i>, you have to manually reload the page after each change because the automatic reloading of the browser content does not work for that page! -->
+注意由于所有的代码都在  <i>index.js</i> 文件，你需要手动重新加载页面因为，自动加载浏览器内容对这个页面并不起作用。
 
 </div>
 
