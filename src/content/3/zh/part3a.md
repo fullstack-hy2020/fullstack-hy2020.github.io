@@ -882,8 +882,6 @@ app.post('/api/notes', (request, response) => {
 <!-- We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage). -->
 我们为这个请求创建了一个新的<i>create\_note.rest</i>文件，这个请求是根据[文档中的说明](https://github.com/huachao/vscode-restclient/blob/master/readme.md#usage)格式化的。
 
-<!-- One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects. -->
-Rest 客户端相对于 Postman 的一个好处是，请求可以在项目仓库的根部轻松获得，并且可以分发给开发团队中的每个人。 Postman也允许用户保存请求，但是当你在处理多个不相关的项目时，情况会变得非常混乱。 
 
 <!-- One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. You can also add multiple requests in the same file using `###` separators: -->
 Rest 客户端相对于 Postman 的一个好处是，请求可以在项目仓库的根目录轻松获得，并且可以分发给开发团队中的每个人。也可以添加利用 `###` 分割符向相同文件中添加多个请求：
