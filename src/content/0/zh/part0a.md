@@ -187,9 +187,9 @@ However, note that the deadline for taking exam for University of Helsinki credi
 #### React Native part's credits
 React Native 章节的学分
 
-<!-- By submitting exercises for part 10 of the courses, React Native, you can earn either one or two additional credits. Earning one credit requires you to submit at least 19 exercises whereas earning two credits requires you to submit at least 26 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native). -->
+<!-- By submitting exercises for part 10 of the courses, React Native, you can earn two additional credits. Earning two credits requires you to submit at least 25 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native). -->
 
-通过提交第10章的练习，React Native， 你可以获得1-2学分。获得1学分需要你提交至少19个练习，获得2学分需要你提交至少26个练习。关于该章节更多的前置要求，练习提交和学分获取规则可以参考 [part 10](/zh/part10/introduction_to_react_native)。
+通过提交第10章的练习，React Native， 你可以获得 2学分。获得2学分需要你提交至少25个练习。关于该章节更多的前置要求，练习提交和学分获取规则可以参考 [part 10](/zh/part10/introduction_to_react_native)。
 
 #### Continuous integration part's credits
 持续集成章节的学分
