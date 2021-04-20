@@ -707,7 +707,7 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 网站 <https://reactpatterns.com/> 提供了一个简明的React最佳实践列表，其中一些已经在本课程中熟悉了。 另一个类似的列表是[react bits](https://vasanthk.gitbooks.io/react-bits/)。
 
 <!-- [Reactiflux](https://www.reactiflux.com/) is a big chat community of React developers on Discord. It could be one possible place to get support after the course has concluded. For example numerous libraries have their own channels. -->
-[Reactiflux](https://www.reactiflux.com/)  一个很大的React开发者不和谐的聊天社区。 在课程结束后，它可能是一个可能的获得支持的地方。 例如，许多库都有自己的频道。
+[Reactiflux](https://www.reactiflux.com/)  一个Discord上的很大的React开发者聊天社区。 在课程结束后，它可能是一个可能的获得支持的地方。 例如，许多库都有自己的频道。
 
 <!-- If you know some recommendable links or libraries, make a pull request! -->
 如果您知道一些可推荐的链接或库，请提出PR！
