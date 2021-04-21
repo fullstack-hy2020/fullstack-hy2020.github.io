@@ -506,7 +506,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-As can be seen, this happens by chainig multiple middlewares as the parameter of function  <i>use</i>. It would also be possible to register a middleware only for a specific operation:
+As can be seen, this happens by chaining multiple middlewares as the parameter of function  <i>use</i>. It would also be possible to register a middleware only for a specific operation:
 
 ```js
 router.post('/', userExtractor, async (request, response) => {
