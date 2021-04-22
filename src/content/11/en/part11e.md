@@ -78,7 +78,7 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 
 - Way 2 (**easy way**): Add <i>@getidsbot</i> using <i>Add Member</i> option in group settings and you'll see the <i>chat id</i> of the group as response from this bot along with other details of the group i.e., title, username, etc. After getting <i>chat id</i> of the group you can remove the <i>@getidsbot</i> from the group.
 
-- Add two secrets to github repo i.e., <i>TELEGRAM\_TO</i> and <i>TELEGRAM\_TOKEN</i> by navigating to <i>Settings > Secrets > New Repository Secret</i> in your github repo.
+- Add two environment variables to github repo i.e., <i>TELEGRAM\_TO</i> for <i>chat id</i> of the group and <i>TELEGRAM\_TOKEN</i> for the bot's token which we fetched earlier while creating the bot with botfather. You can navigate to <i>Settings > Secrets > New Repository Secret</i> in your github repo to add these environment variables.
 
 - Create a new workflow file say <i>TelegramNotifcation.yml</i> and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can have a default message which includes basic log of the workflow event simply by omitting the <i>args</i> from the [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job's definition.
 
