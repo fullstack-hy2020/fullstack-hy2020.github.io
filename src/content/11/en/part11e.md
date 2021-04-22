@@ -66,7 +66,7 @@ NB: In case you end up having a lot of workflows running simultaneously (when yo
 
 ![](https://i.imgur.com/MJ6QBZF.png)
 
-- To get started, you need to create a telegram bot and to do so you have to start by sending a message <i>/start</i> to <i>@BotFather</i> which is itself a bot to assigt users in creating and managing their own custom bots. Further, you need to send <i>/newbot</i> to create a new bot of your own, and follow the process. Though the process only consists of asking for name and username (must be unique, e.g., <i>my\_responsible_bot1</i>) for our bot. After creating the bot we can request the token for the bot using <i>/token</i> message.
+- To get started, you need to create a telegram bot and to do so you have to start by sending a message <i>/start</i> to <i>@BotFather</i> which is itself a bot to help users in creating and managing their own custom bots. Further, you need to send <i>/newbot</i> to create a new bot of your own, and follow the process. Though the process only consists of asking for name and username (must be unique, e.g., <i>my\_responsible_bot1</i>) for our bot. After creating the bot we can request the token for the bot using <i>/token</i> message.
 
 - Now make a group on telegram, say "My CI-CD Notifications" using your personal telegram account on mobile app or desktop web app of telegram. After that you'll be prompted to add users, just enter your bot's username there (e.g., <i>@my\_responsible_bot1</i>) to add bot to the group.
 
@@ -82,7 +82,7 @@ Any bot needs a <i>chat id</i> to send any sort of message to a user, group or c
 
 Add another step to your job in existing <i>TelegramNotifcation.yml</i> workflow file to deliver message directly to yourself by using <i>chat id</i> associated with your own account. To do this add  another secret say <i>TELEGRAM\_TO\_ME</i> to your github repo settings. Probably doing this exercise, you would see an error which would break your workflow saying [chat not found](https://stackoverflow.com/a/41291666), this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your new workflow events will succeed. This security concern ensures that any chatbot might not end up sending spams to any user otherwise anybody could span you too.
 
-Tip: You can get the <i>chat id</i> of your personal telegram account by sending a "Hello" message to <i>@userinfobot</i> simply.
+Tip: You can get the <i>chat id</i> of your personal telegram account by sending a "Hello" message to <i>@userinfobot</i> simply. If you are using [web version of telegram](https://web.telegram.org/) on your desktop, you can use the link [@userinfobot](https://t.me/userinfobot) as well.
 
 </div>
 
