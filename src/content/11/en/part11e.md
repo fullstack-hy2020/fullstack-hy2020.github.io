@@ -86,7 +86,7 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 
 Add another step to your job in existing <i>TelegramNotifcation.yml</i> workflow file to deliver message directly to yourself by using <i>chat id</i> associated with your own account. To do this add  another secret say <i>TELEGRAM\_TO\_ME</i> to your github repo settings. Probably doing this exercise, you would see an error which would break your workflow saying [chat not found](https://stackoverflow.com/a/41291666), this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your new workflow events will succeed. This security concern ensures that any chatbot might not end up sending spams to any user otherwise anybody could span you too.
 
-Tip: You can get the <i>chat id</i> of your personal telegram account by sending a "Hello" message to <i>@userinfobot</i> simply. You can also use [@userinfobot](https://t.me/userinfobot) link to message the bot directly from mobile or using [web version of telegram](https://web.telegram.org/) on your desktop.
+Tip: You can get the <i>chat id</i> of your personal telegram account by sending a "Hello" message to <i>@userinfobot</i> simply. You can also use [@userinfobot](https://t.me/userinfobot) link to message the bot directly from mobile or using [web version of telegram](https://web.telegram.org/) on your desktop to send the "Hello" message.
 
 </div>
 
