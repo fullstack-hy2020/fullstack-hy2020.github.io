@@ -57,6 +57,30 @@ Your notifications may look like the following:
 
 ![Releases](../../images/11/20a.png)
 
+#### 11.19A: Use a telegram bot to deliver a message on successful or failure buid message to any user, group or channel as required:
+
+NB: In case you end up having a lot of workflows running simultaneously (when you push a commit) in your github actions tab, you can disable all workflows except the one you are currently working on, as shown in the figure.
+
+![](https://i.imgur.com/MJ6QBZF.png)
+
+1. To get started, you need to create a telegram bot and to do so you have to start by sending a message `/start` to `@BotFather` which is itself a bot to assigt users in creating and managing their own custom bots. Further, you need to send `/newbot` to create a new bot of your own, and follow the process. Though the process only consists of asking for name and username (must be unique, e.g., `my_responsible_bot1`) for our bot. After creating the bot we can request the token for the bot using `/token` message.
+
+2. Now make a group on telegram, say "My CI-CD Notifications" using your personal telegram account on mobile app or desktop web app of telegram. After that you'll be prompted to add users, just enter your bot's username there(e.g., `@my_responsible_bot1`) to add bot to the group.
+
+Any bot needs a `chat id` to send any sort of message to a user, group or channel. In telegram, `chat id` is a unique identifier for any user/group/channel and our bot will use it to send message to the group we just created. Since we added our bot to the group, the backend api of telegram has recorded the event for it and we can see that event's details to fetch the `chat id` of our group.
+
+3. Now browse `https://api.telegram.org/bot<BOT_TOKEN>/getUpdates` to view the event log of our bot, and look for something `title: "My CI-CD Notifications"` you'll notice there is the `id` for the group in there too. That is our `chat id` for the group, it looks something like `-123456789`.
+
+4. Add two secrets to github repo i.e., `TELEGRAM_TO` and `TELEGRAM_TOKEN` by navigating to `Settings > Secrets > New Repository Secret` in your github repo.
+
+5. Create a new workflow file say `TelegramNotifcation.yml` and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can have a default message which includes basic log of the workflow event simply by omitting the `args` from the [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job's definition.
+
+#### 11.19B: Deliver worflow report messsage directly to user/client's telegram account:
+
+Add another step to your job in existing `TelegramNotifcation.yml` workflow file to deliver message directly to yourself by using `chat id` associated with your own account. To do this add  another secret say `TELEGRAM_TO_ME` to your github repo settings. Probably doing this exercise, you would see an error which would break your workflow saying ["chat not found"](https://stackoverflow.com/a/41291666), this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your new workflow events will succeed. This security concern ensures that any chatbot might not end up sending spams to any user otherwise anybody could span you too.
+
+Tip: You can get the `chat id` of your personal telegram account by sending a "Hello" message to `@userinfobot` simply.
+
 </div>
 
 <div class="content">
