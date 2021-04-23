@@ -62,13 +62,10 @@ The contents of the <i>index.js</i> file used for starting the application gets 
 
 ```js
 const app = require('./app') // the actual Express application
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
