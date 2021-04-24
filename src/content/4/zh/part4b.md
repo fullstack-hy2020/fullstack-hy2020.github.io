@@ -384,7 +384,7 @@ npm test -- tests/note_api.test.js
  <i>-t</i> 选项可用于运行具有特定名称的测试:
 
 ```js
-npm test -- -t 'a specific note is within the returned notes'
+npm test -- -t "a specific note is within the returned notes"
 ```
 
 <!-- The provided parameter can refer to the name of the test or the describe block. The parameter can also contain just a part of the name. The following command will run all of the tests that contain <i>notes</i> in their name: -->

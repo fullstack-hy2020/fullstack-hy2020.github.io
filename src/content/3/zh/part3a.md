@@ -117,8 +117,8 @@ echo "Error: no test specified" && exit 1
 ### Simple web server 
 【简单的 web 服务器】
 
-<!-- Let's change the application into a web server: -->
-让我们把这个应用改成一个 web 服务器:
+<!-- Let's change the application into a web server by editing the _index.js_ files as follow: -->
+让我们通过编辑 _index.js_ 把这个应用改成一个 web 服务器:
 
 ```js
 const http = require('http')
