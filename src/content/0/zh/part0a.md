@@ -383,7 +383,7 @@ Enroll on the course through Open University by 9 Jan 2022 [here](https://www.av
 
 通过结对编程来参与这个项目是可行的。
 
-<!-- For more information, see the [here](https://github.com/FullStack-HY/misc/blob/main/project.md). -->
+<!-- For more information, see [here](https://github.com/FullStack-HY/misc/blob/main/project.md). -->
 
 有关更多信息，请参见 [这里](https://github.com/FullStack-HY/misc/blob/main/project.md)的网页。
 
