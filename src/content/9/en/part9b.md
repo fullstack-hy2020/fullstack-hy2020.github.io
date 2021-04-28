@@ -190,7 +190,7 @@ const calculator = (a: number, b: number, op: Operation): number | string =>  {
 or we could create a return type which includes both possible types, much like our Operation type
 
 ```js
-type Result = string | number:
+type Result = string | number;
 
 const calculator = (a: number, b: number, op: Operation): Result =>  {
   // ...
