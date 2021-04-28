@@ -635,7 +635,7 @@ Modify the application to list the blog posts by the number of <i>likes</i>. Sor
 
 #### 5.10*: Blog list frontend, step10
 
-Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend.
+Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the frontend.
 
 Your application could look something like this:
 
