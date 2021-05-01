@@ -517,6 +517,8 @@ MONGODB_URI=mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?r
 PORT=3001
 ```
 
+Huomaa, että sinun tulee sisällyttää salasanasi osaksi url:ia, sanan 'sekred' tilalle.
+
 Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin eli ympäristömuuttujan <em>PORT</em>.
 
 **Tiedosto <i>.env</i> tulee heti gitignorata, sillä emme halua julkaista tiedoston sisältöä verkkoon!**
