@@ -90,8 +90,11 @@ export default App
 ```
 
 
-Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run `npm install` before attempting to run the frontend.
 
+The frontend will not display any notes if it's not connected to the backend. You can start the backend with `npm run dev` in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with `npm start`, and now you can see the notes that are saved in your MongoDB database from Part 4.
+
+Keep this in mind from now on.
 
 The login form is handled the same way we handled forms in 
 [part 2](/en/part2/forms). The app state has fields for  <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronize changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state.
