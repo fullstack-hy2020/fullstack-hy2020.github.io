@@ -718,6 +718,10 @@ By clicking the <i>Send Request</i> text, the REST client will execute the HTTP 
 
 ![](../../images/3/13ea.png)
 
+### The WebStorm HTTP Client
+
+If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its builtin HTTP Client. Create a new file with extension `.rest` and the editor will display you options to create and run your requests. You can learn more about it by following [this guide](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
+
 ### Receiving data
 
 Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address http://localhost:3001/api/notes, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in the JSON format.
