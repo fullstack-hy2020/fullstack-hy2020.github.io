@@ -362,7 +362,7 @@ npm test -- -t 'notes'
 
 <!-- *HUOM*: yksittäisiä testejä suoritettaessa saattaa mongoose-yhteys  jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota. -->
 **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
-The problem might be due to the fact that supertest primes the connection, but jest does not run the afterAll portion of the code. 
+The problem might be due to the fact that supertest primes the connection, but Jest does not run the afterAll portion of the code. 
 
 ### async/await
 
