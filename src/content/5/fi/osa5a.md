@@ -452,7 +452,7 @@ Kirjautumisen yhteyteen tehtävä muutos on seuraava:
   }
 ```
 
-Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista:
+Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista (kirjoittamalla konsoliin `window.localStorage`):
 
 ![](../../images/5/3e.png)
 
