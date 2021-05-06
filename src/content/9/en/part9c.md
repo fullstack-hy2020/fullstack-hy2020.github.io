@@ -1084,7 +1084,7 @@ const parseComment = (comment: unknown): string => {
 }
 ```
 
-The function gets a parameter of type <i>any</i> and returns it as type <i>string</i> if it exists and is of the right type.
+The function gets a parameter of type <i>unknown</i> and returns it as type <i>string</i> if it exists and is of the right type.
 
 The string validation function looks like this
 
