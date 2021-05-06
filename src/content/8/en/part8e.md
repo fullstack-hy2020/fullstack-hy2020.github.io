@@ -519,9 +519,28 @@ query {
 
 There is however one issue with our solution, it does an unreasonable amount of queries to the database. If we log every query to the database, just like this for example,
 ```js
+
+Query: {
+  allPersons: (root, args) => {    
+    // highlight-start
+    if (!args.phone) {
+      console.log('Person.find_v1')
+      return Person.find({})
+    }
+
+    console.log('Person.find_v2')
+    return Person.find({ phone: { $exists: args.phone === 'YES' } })
+    // highlight-end
+  }
+
+// ..
+
+},    
+
+// ..
+
 friendOf: async (root) => {
-// highlight-start
-  console.log("Person.find")
+  // highlight-start
   const friends = await User.find({ friends: { $in: [root._id] } })
   console.log("User.find")
   // highlight-end
@@ -529,19 +548,20 @@ friendOf: async (root) => {
 },
 ```
 
-and we have 5 persons saved, we see an absurd amount of queries.
+and considering we have 5 persons saved, and we query `allPersons` without `phone` as argument, we see an absurd amount of queries like below.
 
 <pre>
 Person.find
-User.find
-User.find
-User.find
-User.find
-User.find
+User.find_v1
+User.find_v1
+User.find_v1
+User.find_v1
+User.find_v1
 </pre>
 
+NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
 
-So even though we primarily do one query for all persons, every person causes one more query in their resolver. 
+So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 
 
 This is a manifestation of the famous [n+1-problem](https://www.google.com/search?q=n%2B1+problem), which appears every once in a while in different contexts, and sometimes sneaks up on developers without them noticing. 
