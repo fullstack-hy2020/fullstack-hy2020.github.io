@@ -179,7 +179,7 @@ Include your full name, email address used for enrollment, date of birth, and th
 
 ### Full stack project
 
-A full stack project worth 1-10 credits will be available through Open University.
+A full stack project worth 5, 7 or 10 credits will be available through Open University.
 
 For the project, an application is implemented in React and/or Node, though implementing a mobile application in React Native is also possible.
 

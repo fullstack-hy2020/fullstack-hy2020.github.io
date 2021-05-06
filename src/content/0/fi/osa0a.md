@@ -153,7 +153,7 @@ Kurssi-ilmoittautumisen jälkeen: Muista tallettaa opiskelijanumerosi [palautuss
 
 ### Full stack -harjoitustyö
 
-Avoimen yliopiston tarjonnassa on 1-10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
+Avoimen yliopiston tarjonnassa on 5, 7 tai 10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
 
 Harjoitustyössä toteutetaan vapaavalintainen sovellus Reactilla ja/tai Nodella. Myös React Nativella toteutettu mobiilisovellus on mahdollinen.
 
