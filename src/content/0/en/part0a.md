@@ -67,7 +67,7 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-The university credits also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
+The university credits also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
 
 The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b>
 
