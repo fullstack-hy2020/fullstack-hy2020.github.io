@@ -51,7 +51,7 @@ Keep in mind, that [same origin policy](https://developer.mozilla.org/en-US/docs
 
 We can allow requests from other <i>origins</i> by using Node's [cors](https://github.com/expressjs/cors) middleware.
 
-Install <i>cors</i> with the command
+In your backend repository, install <i>cors</i> with the command
 
 ```bash
 npm install cors
