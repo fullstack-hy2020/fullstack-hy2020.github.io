@@ -401,7 +401,7 @@ There are many ways to implement closing the form from the parent component, but
 Let's make the following changes to the <i>App</i> component:
 
 ```js
-import React, { useState, useRef } from 'react' // highlight-line
+import React, { useState, useEffect, useRef } from 'react' // highlight-line
 
 const App = () => {
   // ...
