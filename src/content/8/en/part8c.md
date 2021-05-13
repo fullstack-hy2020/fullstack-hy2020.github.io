@@ -482,7 +482,7 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 The following exercises are quite likely to break your frontend. Do not worry about it yet, the frontend shall be fixed and expanded in the next chapter.
 #### 8.13: Database, part 1
 
-Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
+Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).
 
 
 Let's change the book graphql schema a little
