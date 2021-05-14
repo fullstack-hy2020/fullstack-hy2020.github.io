@@ -70,8 +70,8 @@ Cross-origin resource sharing (CORS)是一种机制，它允许一个网页上�
 <!-- We can allow requests from other <i>origins</i> by using Node's [cors](https://github.com/expressjs/cors) middleware. -->
 我们可以通过使用 Node 的[cors](https://github.com/expressjs/cors) 中间件来允许来自其他源的请求。
 
-<!-- Install <i>cors</i> with the command -->
-使用命令安装<i>cors</i>
+<!-- In your backend repository, install <i>cors</i> with the command -->
+在你的后台仓库中，使用命令安装<i>cors</i>
 
 ```bash
 npm install cors

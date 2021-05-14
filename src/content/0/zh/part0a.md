@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. Course has also  parts on TypeScript,  React Native and Continuous integration.-->
+<!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The Course has also  parts on TypeScript,  React Native and Continuous integration.-->
 
 本课程的主要内容，是介绍如何使用 Javascript 进行现代 Web 应用的开发 。 主要议题是使用 React 实现单页应用，以及使用 Node.js 实现 RESTful 和 GraphQL web 服务，来支撑 React 应用。 课程内容还包括 TypeScript、React Native以及持续集成。
 
@@ -151,7 +151,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 <!-- The university credits also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam. -->
 
-如果想要获得大学学分，5-9 学分课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。
+如果想要获得大学学分，5-9 学分课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021)访问 Moodle 系统。
 
 <!-- The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b> -->
 
@@ -367,9 +367,9 @@ Enroll on the course through Open University by 9 Jan 2022 [here](https://www.av
 ### Full stack project  
 【全栈项目】
 
-<!-- A Full stack project worth 1-10 credits will be available through the Open University. -->
+<!-- A full stack project worth 5, 7 or 10 credits will be available through Open University. -->
 
-开放大学将提供价值 1-10 学分的全栈项目。
+开放大学将提供价值 5、7或10 学分的全栈项目。
 
 <!-- For the project, an application is implemented in React and/or Node. Implementing a mobile application in React Native is also possible. -->
 

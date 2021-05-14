@@ -522,8 +522,8 @@ npm run dev
 
 
 ### REST
-<!-- Let's expand our application so that it provides the RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes). -->
-让我们扩展我们的应用，使它提供像[json-server](https://github.com/typicode/json-server#routes 服务器)那样的 RESTful HTTP API 。
+<!-- Let's expand our application so that it provides the same RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes). -->
+让我们扩展我们的应用，使它提供与[json-server](https://github.com/typicode/json-server#routes) 相同的 RESTful HTTP API 。
 
 <!-- Representational State Transfer, aka. REST was introduced in 2000 in Roy Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications. -->
 Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[论文](https://www.ics.uci.edu/~Fielding/pubs/dissertation/rest_arch_style.htm)中引入的。 Rest 是一种架构风格，用于构建可伸缩的 web 应用。 
@@ -783,6 +783,10 @@ app.delete('/api/notes/:id', (request, response) => {
 
 ![](../../images/3/13ea.png)
 
+### The WebStorm HTTP Client
+
+<!-- If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its builtin HTTP Client. Create a new file with extension `.rest` and the editor will display you options to create and run your requests. You can learn more about it by following [this guide](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html). -->
+如果你是使用的 *IntelliJ WebStorm* ，你也可以使用内建好的的HTTP 客户端。创建一个新的以 `.rest` 为扩展的文件，编辑器会展示给你选项来创建和运行你的请求。你可以通过阅读[这个文档](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html)来探索更多。
 
 ### Receiving data
 【接受数据】

@@ -556,9 +556,28 @@ query {
 但是，我们的解决方案有一个问题，它对数据库执行的查询数量不合理。 如果我们将每个查询记录到数据库中，比如
 
 ```js
+
+Query: {
+  allPersons: (root, args) => {    
+    // highlight-start
+    if (!args.phone) {
+      console.log('Person.find_v1')
+      return Person.find({})
+    }
+
+    console.log('Person.find_v2')
+    return Person.find({ phone: { $exists: args.phone === 'YES' } })
+    // highlight-end
+  }
+
+// ..
+
+},    
+
+// ..
+
 friendOf: async (root) => {
-// highlight-start
-  console.log("Person.find")
+  // highlight-start
   const friends = await User.find({ friends: { $in: [root._id] } })
   console.log("User.find")
   // highlight-end
@@ -566,19 +585,20 @@ friendOf: async (root) => {
 },
 ```
 
-<!-- and we have 5 persons saved, we see an absurd amount of queries. -->
-我们保存了5个人，会看到如下荒唐的结果:
+<!-- and considering we have 5 persons saved, and we query `allPersons` without `phone` as argument, we see an absurd amount of queries like below.-->
+假设我们保存了5个人，并且我们查询 `allPersons` ，不带  `phone`  参数，会看到如下荒唐的结果:
 
 <pre>
 Person.find
-User.find
-User.find
-User.find
-User.find
-User.find
+User.find_v1
+User.find_v1
+User.find_v1
+User.find_v1
+User.find_v1
 </pre>
 
-
+NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
+注意：取决于你查询 `allPersons` 时是否带了`phone`参数，你会在console中看到  _User.find_v2_ 或者 _User.find_v1_ 。
 
 <!-- So even though we primarily do one query for all persons, every person causes one more query in their resolver.  -->
 因此，即使我们主要对所有人进行一次查询，每个人在他们的解析器中还会导致另一次查询。

@@ -890,7 +890,7 @@ React 的势头看起来很猛，但是 JavaScript 的世界是不断变化的�
 
 在本课程的上下文中，全栈 web 开发意味着我们关注应用的所有部分: 从前端、后端到数据库。 有时候，服务器上的软件及其操作系统会被看作是全栈的一部分，但我们不会深入讨论这部分内容。
 
-<!-- We will code the backend with JavaScript, using [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack. -->
+<!-- We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack. -->
 
 我们将使用 JavaScript 编写后端代码，使用 [Node.js](https://nodejs.org/en/) 运行时环境。 在全栈的多个层次上使用相同的编程语言，给全栈 web 开发提供了一个全新的维度。 然而，对于所有层次的栈，使用相同的编程语言(JavaScript)并不是全栈 web 开发的必要条件。
 
