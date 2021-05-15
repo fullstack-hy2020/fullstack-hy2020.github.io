@@ -398,8 +398,8 @@ npm test -- -t 'notes'
 
 <!-- **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run.  -->
 **注意**: 当运行单个测试时，如果运行的测试没有使用该连接，则 mongoose 连接可能保持打开状态。
-<!-- The problem might be due to the fact that supertest primes the connection, but jest does not run the afterAll portion of the code.  -->
-这个问题可能是因为 supertest 为连接优先，但是 jest 并不运行代码的 afterAll 部分。
+<!-- The problem might be due to the fact that supertest primes the connection, but Jest does not run the afterAll portion of the code.  -->
+这个问题可能是因为 supertest 为连接优先，但是 Jest 并不运行代码的 afterAll 部分。
 
 ### async/await
 

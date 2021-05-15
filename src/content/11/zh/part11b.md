@@ -457,7 +457,7 @@ push您的代码并导航到“Actions”标签，然后点击左侧新创建的
 当前的测试集使用 [jest](https://jestjs.io/) 来确保 React 组件按预期的方式工作。这和第5章[测试 React 应用](/zh/part5/testing_react_apps)一模一样。
 
 <!-- Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end -tests with the [Cypress](https://www.cypress.io/) library simillarly what we do in section [End to end testing](/en/part5/end_to_end_testing) of part 5.  -->
-隔离测试组件是非常有用的，但是这仍然不能确保系统作为一个整体按照我们希望的那样工作。为了对此有更多的信心，让我们用 [Cypress](https://www.cypress.io/) 库简单地编写几个非常简单的端到端测试，就像我们在第5部分的 [End-To-End 测试](/zh/part5/end_to_end_testing)一样。
+隔离测试组件是非常有用的，但是这仍然不能确保系统作为一个整体按照我们希望的那样工作。为了对此有更多的信心，让我们用 [Cypress](https://www.cypress.io/) 库简单地编写几个非常简单的端到端测试，就像我们在第5部分的 [End-To-End 端到端测试](/zh/part5/end_to_end_testing)一样。
 
 
 

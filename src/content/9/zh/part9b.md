@@ -278,7 +278,7 @@ const calculator = (a: number, b: number, op: Operation): number | string =>  {
 或者我们可以创建一个返回类型，它包含两种可能的类型，非常类似于我们的 Operation 类型
 
 ```js
-type Result = string | number
+type Result = string | number;
 
 const calculator = (a: number, b: number, op: Operation): Result =>  {
   // ...

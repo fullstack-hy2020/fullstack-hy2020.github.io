@@ -97,8 +97,15 @@ const App = () => {
 export default App
 ```
 
-<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>. -->
-当前的应用代码可以在[Github](https://Github.com/fullstack-hy/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到。
+<!-- Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>. . If you clone the repo, don't forget to run `npm install` before attempting to run the frontend.
+
+The frontend will not display any notes if it's not connected to the backend. You can start the backend with `npm run dev` in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with `npm start`, and now you can see the notes that are saved in your MongoDB database from Part 4.
+
+Keep this in mind from now on.-->
+
+当前的应用代码可以在[Github](https://Github.com/fullstack-hy/part2-notes/tree/part5-1) ，branch<i>part5-1</i> 上找到，clone 这个仓库后，在运行前端项目前，不要忘了运行 `npm install`。
+
+如果它没有连接到后台服务， 前台不会展示任何信息。你可以使用 `npm run dev` 来启动后端服务，参考第四章的代码即可。这会在后台启动一个服务绑定3001端口，激活后，开启一个单独的终端窗口通过 `npm start` 来启动前台，这时你就可以看到第四章中我们保存到MongoDB的便签了。
 
 <!-- The login form is handled the same way we handled forms in -->
 <!-- [第2章](/zh/part2/表单). The app state has fields for <i>username</i> and <i>password</i> to store the data from the form. The form fields have event handlers, which synchronizes changes in the field to the state of the <i>App</i> component. The event handlers are simple: An object is given to them as a parameter, and they destructure the field <i>target</i> from the object and save its value to the state. -->

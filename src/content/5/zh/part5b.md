@@ -442,7 +442,7 @@ const App = () => {
 
 
 ```js
-import React, { useState, useRef } from 'react' // highlight-line
+import React, { useState, useEffect, useRef } from 'react' // highlight-line
 
 const App = () => {
   // ...
@@ -710,8 +710,8 @@ const Blog = ({ blog }) => {
 根据<i>like</i> 的数量修改应用以列出博客文章。 对博客文章进行排序可以使用数组[sort](https://developer.mozilla.org/en-us/docs/web/javascript/reference/global_objects/array/sort)方法。
 
 #### 5.10*: Blog list frontend, 步骤10
-<!-- Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the backend. -->
-添加一个新的按钮用于删除博客文章。还可以在后端实现删除博客文章的逻辑。
+<!-- Add a new button for deleting blog posts. Also implement the logic for deleting blog posts in the frontend. -->
+添加一个新的按钮用于删除博客文章。还可以在前端实现删除博客文章的逻辑。
 
 <!-- Your application could look something like this: -->
 您的应用可以是这样的:
