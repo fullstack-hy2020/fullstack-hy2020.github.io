@@ -1227,7 +1227,7 @@ Make sure that the anecdotes are ordered by the number of votes.
 #### 6.6: anecdotes, step4
 
 
-If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
+If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, as we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
 
 #### 6.7: anecdotes, step5
 
