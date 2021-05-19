@@ -13,29 +13,29 @@ Other topics include debugging applications, configuration, managing runtime env
 
 ### Prerequisites
 
-Participants are expected to have good programming skills, basic knowledge of web programming and databases, and mastery of basic use of the Git version management system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently.
+Participants are expected to have good programming skills, basic knowledge of web programming and databases, and have mastery of the Git version management system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently.
 
 Previous knowledge of JavaScript or other course topics is not required.
 
 ### Course material
 
-The course material is meant to be read one part at a time, reading each part all the way through before moving on to the next one.
+The course material is meant to be read one part at a time and in order.
 
 The material contains exercises, which are placed so that the preceding material provides enough information for solving each exercise. You can do the exercises as you encounter them in the material, but it can also be beneficial to read all of the material in the part before starting with the exercises.
 
 In many parts of the course, the exercises build one larger application one small piece at a time. Some of the exercise applications are developed through multiple parts.
 
-The course material is based on incrementally expanding example applications, which change from part to part. It's probably best to follow the code along while making small modifications independently. The code of the example applications for each step of each part can be found on GitHub.
+The course material is based on incrementally expanding example applications, which change from part to part. It's best to follow the code along while making small modifications independently. The code of the example applications for each step of each part can be found on GitHub.
 
 ### Taking the course
 
-The course contains eleven parts, the first of which is numbered 0 for historical reasons. A part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible.
+The course contains eleven parts, the first of which is numbered 0 for consistency with past iterations. One part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible.
 
-Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i>  has been achieved. In pedagogic terms, the course uses [mastery learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
+Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
 You are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part.
 
-The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022. 
+The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022. 
 
 However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2022. 
 
@@ -85,13 +85,13 @@ Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit cou
 
 #### React Native part's credits
 
-By submitting exercises for part 10 of the courses, React Native, you can earn two additional credits. Earning two credits requires you to submit at least 25 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native).
+By submitting exercises for part 10 of the course on React Native, you can earn two additional credits. Earning two credits requires you to submit at least 25 exercises. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
 
 #### Continuous integration part's credits
 
-By submitting exercises for part 11 of the courses, Continuous integration/delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of the part.
+By submitting exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of this part.
 
-More information about the part's prerequisites and exercise submission can be found in the [part 11](/en/part11).
+More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 
 ### How to get your credits
 
@@ -136,7 +136,7 @@ If you have previously passed the course exam (excluding the exam for the three 
 
 The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-If you are submitting exercises from different parts to the same repository, use some sensible system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.
+If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.
 
 Exercises are submitted **one part at a time**. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.
 
@@ -150,7 +150,7 @@ For official university credits you need to pass the course exam that is done in
 
 Follow the instructions below to gain access to the course Moodle space:
 
-- Enroll on the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)
+- Enroll in the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration.
 - User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.
@@ -168,12 +168,11 @@ Please note!
 
 Electronic enrollment is available if you meet one of the following criteria:
 
-You have a Finnish personal identity number (format: xxxxxxxx-xxxx), or an online banking ID, or
+- You have a Finnish personal identity number (format: xxxxxxxx-xxxx) or an online banking ID.
+- You are a student at the University of Helsinki.
+- You are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners).
 
-- you are a student at the University of Helsinki, or 
-- you are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners).
-
-After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo) . If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
+After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
 
 Include your full name, email address used for enrollment, date of birth, and the name of the course in the email.
 
@@ -191,7 +190,7 @@ For more information, see [here](https://github.com/FullStack-HY/misc/blob/main/
 
 ### Interview promise
 
-Our collaborators, [Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10).
+Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10).
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
