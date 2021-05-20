@@ -738,6 +738,15 @@ it('login fails with wrong password', function() {
 <i>Should</i> should always be chained with <i>get</i> (or another chainable command).
 We used <i>cy.get('html')</i> to access the whole visible content of the application. 
 
+**NOTE:** Some CSS properties [behave differently on Firefox](https://github.com/cypress-io/cypress/issues/9349). If you run the tests with Firefox:
+  
+  ![running](https://user-images.githubusercontent.com/4255997/119015927-0bdff800-b9a2-11eb-9234-bb46d72c0368.png)
+  
+  then tests that involve, for example, `border-style`, `border-radius` and `padding`, will pass in Chrome or Electron, but fail in Firefox:
+  
+  ![borderstyle](https://user-images.githubusercontent.com/4255997/119016340-7b55e780-b9a2-11eb-82e0-bab0418244c0.png)
+
+
 ### Bypassing the UI
 
 <!-- Sovelluksemme testit näyttävät tällä hetkellä seuraavalta: -->
