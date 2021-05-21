@@ -111,7 +111,7 @@ Skeema määrittelee kaksi [tyyppiä](https://graphql.org/learn/schema/#type-sys
 
 Toinen skeeman määrittelemistä tyypeistä on [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Käytännössä jokaisessa GraphQL-skeemassa määritellään tyyppi Query, joka kertoo mitä kyselyjä API:iin voidaan tehdä. 
 
-Puhelinluettelo määrittelee kolme erilaista kyselyä. Näistä ensimmäinen, eli _personCount_ palauttaa kokonaisluvu, _allPersons_ palauttaa listan <i>Person</i>-tyyppisiä olioita. Kysely <i>findPerson</i> saa merkkijonomuotoisen parametrin ja palauttaa <i>Person</i>-olion. 
+Puhelinluettelo määrittelee kolme erilaista kyselyä. Näistä ensimmäinen, eli _personCount_ palauttaa kokonaisluvun, _allPersons_ palauttaa listan <i>Person</i>-tyyppisiä olioita. Kysely <i>findPerson</i> saa merkkijonomuotoisen parametrin ja palauttaa <i>Person</i>-olion. 
 
 Queryjen paluuarvon ja parametrin määrittelyssä on jälleen käytetty välillä huutomerkkiä merkkaamaan <i>pakollisuutta</i>, eli _personCount_ palauttaa varmasti kokonaisluvun. Kyselylle _findPerson_ on pakko antaa parametriksi merkkijono. Kysely palauttaa <i>Person</i>-olion tai arvon <i>null</i>. _allPersons_ palauttaa listan <i>Person</i>-olioita, listalla ei ole <i>null</i>-arvoja. 
 
