@@ -695,9 +695,9 @@ Note 对象包含两个字段: 包含 Note 实际内容的 content，以及包�
 
 ### AJAX
 
-<!-- The Notes page of the application follows an early-noughties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology. -->
+<!-- TThe Notes page of the application follows an early-nineties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology. -->
 
-应用的 Notes 页面遵循本世纪初的 web 开发风格，并且“使用了 Ajax”。 这种技术在当时，2000 年初正处于 web 技术浪潮的顶峰。
+应用的 Notes 页面遵循90年代初期的 web 开发风格，并且“使用了 Ajax”。 这种技术在当时，2000 年初正处于 web 技术浪潮的顶峰。
 
 <!-- [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to webpages using JavaScript included within the HTML, without the need to rerender the page. -->
 

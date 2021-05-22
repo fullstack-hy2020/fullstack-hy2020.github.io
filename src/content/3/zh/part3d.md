@@ -38,7 +38,7 @@ const noteSchema = new mongoose.Schema({
   // highlight-start
   content: {
     type: String,
-    minlength: 5,
+    minLength: 5,
     required: true
   },
   date: { 
@@ -53,8 +53,8 @@ const noteSchema = new mongoose.Schema({
 <!-- The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also applied to the <i>content</i> field, since the minimum length constraint allows the field to be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed. -->
 现在要求<i>content</i> 字段至少有五个字符长。<i>date</i> 字段被设置为必需的，这意味着它不能丢失。 同样的约束也适用于<i>content</i> 字段，因为最小长度限制允许字段为空。 我们没有向<i>important</i> 字段添加任何约束，因此模式中的定义没有更改。
 
-<!-- The <i>minlength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators, if none of the built-in ones cover our needs. -->
- <i>minlength</i> 和 <i> required</i> 验证器是[内置的](https://mongoosejs.com/docs/validation.html#built-in-validators) ，由 Mongoose 提供。 Mongoose允许我们创建新的验证器[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)，如果没有一个内置的验证器满足我们的需求的话。
+<!-- The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators, if none of the built-in ones cover our needs. -->
+ <i>minLength</i> 和 <i> required</i> 验证器是[内置的](https://mongoosejs.com/docs/validation.html#built-in-validators) ，由 Mongoose 提供。 Mongoose允许我们创建新的验证器[自定义验证器](https://mongoosejs.com/docs/validation.html#custom-validators)，如果没有一个内置的验证器满足我们的需求的话。
 
 <!-- If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware: -->
 如果我们尝试在数据库中存储一个打破其中一个约束的对象，操作将引发异常。 让我们改变我们的处理程序来创建一个新的便笺，这样它就可以将任何潜在的异常传递给错误处理中间件:

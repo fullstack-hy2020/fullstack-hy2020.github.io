@@ -1317,7 +1317,7 @@ npm start
 确保这些八卦是按票数排序的。
 
 #### 6.6: anecdotes, 步骤4
-<!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, so do like we have been doing since the chapter [action creators](/zh/part6/flux架构与_redux#action-creators). -->
+<!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, as we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators). -->
 如果你还没有这样做，将action对象的创建分离到[action创建器](https://redux.js.org/basics/actions#action-creators)-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[action创建器](https://redux.js.org/basics/actions#action-creators)中所做的那样。
 
 #### 6.7: anecdotes, 步骤5

@@ -1725,7 +1725,7 @@ const toNewDiaryEntry = (object: any): NewDiaryEntry => {
   return newEntry;
 };
 ```
-<!-- we notice that the code does not compile. Thie is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. 
+<!-- we notice that the code does not compile. This is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. 
 
 We can fix this by destructuring the fields to variables of the type unknown as follows: -->
 

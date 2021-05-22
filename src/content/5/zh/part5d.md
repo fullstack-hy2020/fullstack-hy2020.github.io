@@ -885,6 +885,19 @@ it('login fails with wrong password', function() {
 
 <i>Should</i> 应当总是与get 链接（或其他某个可链接命令）
 
+<!-- **NOTE:** Some CSS properties [behave differently on Firefox](https://github.com/cypress-io/cypress/issues/9349). If you run the tests with Firefox: -->
+
+**注意：** 一些CSS属性 [在Firefox中的行为有些不同](https://github.com/cypress-io/cypress/issues/9349)。 如果你用Firefox运行测试：
+  
+  ![running](https://user-images.githubusercontent.com/4255997/119015927-0bdff800-b9a2-11eb-9234-bb46d72c0368.png)
+  
+  <!-- then tests that involve, for example, `border-style`, `border-radius` and `padding`, will pass in Chrome or Electron, but fail in Firefox: -->
+  那么测试会包括，例如 `border-style`, `border-radius` 以及 `padding` ，这些在Chrome 或者 Electron 是通过的，但是在Firefox中就会失败：
+  
+  ![borderstyle](https://user-images.githubusercontent.com/4255997/119016340-7b55e780-b9a2-11eb-82e0-bab0418244c0.png)
+
+
+
 <!-- We used <i>cy.get('html')</i> to access the whole visible content of the application.  -->
 我们使用<i>cy.get('html')</i> 访问应用的所有可见内容。
 
@@ -1503,11 +1516,11 @@ describe('Blog app', function() {
 <!-- This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command.  -->
 这项工作可能有点棘手。 一个解决方案是找到所有的博客，然后在[then](https://docs.cypress.io/api/commands/then.html#dom-element)命令的回调函数中对它们进行比较。
 
-<!-- If you use a `map` on an a selection from cypress, mind that it uses a [jQuery map](https://api.jquery.com/map/#map-callback). This means that the arguments of the callback function are swapped from an [ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (i.e. you use `(i, el) => {...}` instead of `(el, i) => {...}`). -->
+<!-- If you use a `map` on a selection from cypress, mind that it uses a [jQuery map](https://api.jquery.com/map/#map-callback). This means that the arguments of the callback function are swapped from an [ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (i.e. you use `(i, el) => {...}` instead of `(el, i) => {...}`). -->
 
 如果你是从cypress 使用的 `map` ， 记住它实际上是使用的  [jQuery map](https://api.jquery.com/map/#map-callback) 。 也就是说回调函数的入参与[ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) 相比是颠倒的。（比如说，你应该使用`(i, el) => {...}` 而不是`(el, i) => {...}` ）。
 
-<!-- Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait the number of likes to update in between all clicks. -->
+<!-- Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks. -->
 
 注意如果你点击一行中的喜欢按钮多次，可能出现一些问题。可能是由于cypress 不能点击那么快，以致于在两次点击直接没有时间更新状态。一个改进方法是在所有点击之中等待状态更新。
 
