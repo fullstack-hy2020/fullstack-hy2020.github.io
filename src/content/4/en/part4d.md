@@ -265,7 +265,7 @@ If the application has multiple interfaces requiring identification, JWT's valid
 
 ### Problems of Token-based authentication
 
-Token authentication is pretty easy to implement, but it contains one problem. Once the API user, eg. a React app gets a token, the API has a blind trust to the token holder. What if the access rights of the token holder should be revoken?
+Token authentication is pretty easy to implement, but it contains one problem. Once the API user, eg. a React app gets a token, the API has a blind trust to the token holder. What if the access rights of the token holder should be revoked?
 
 There are two solutions to the problem. Easier one is to limit the validity period of a token:
 
@@ -332,7 +332,7 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoken, token is usable only a limited amount of time. On the other hand, a short expiration time forces is a potential pain to a user, one must login to the system more frequently.
+The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoked, the token is usable only a limited amount of time. On the other hand, a short expiration time forces is a potential pain to a user, one must login to the system more frequently.
 
 The other solution is to save info about each token to backend database and to check for each API request if the access right corresponding to the token is still valid. With this scheme, the access rights can be revoked at any time. This kind of solution is often called a <i>server side session</i>.
 
