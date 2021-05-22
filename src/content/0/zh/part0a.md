@@ -18,7 +18,7 @@ lang: zh
 ### Prerequisites
 【所需基础】
 
-<!-- Participants are expected to have good programming skills, basic knowledge of web programming and databases, and mastery of basic use of the Git version management system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently. -->
+<!-- Participants are expected to have good programming skills, basic knowledge of web programming and databases, and have mastery of the Git version management system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently. -->
 
 课程参与者需要具有良好的编程技能，基本的网络编程知识和数据库知识，能够掌握 Git 这个版本管理系统的基本使用。 你当然还要有坚持不懈的精神、独立解决问题和搜寻信息的能力。
 
@@ -29,7 +29,7 @@ lang: zh
 ### Course material 
 【课程材料】
 
-<!-- The course material is meant to be read one part at a time, reading each part all the way through before moving on to the next one. -->
+<!-- The course material is meant to be read one part at a time and in order. -->
 课程是这么设计的，你应该一次只学习一章节，并在继续学习下一章节之前，把之前的章节都学透彻。
 
 <!-- The material contains exercises, which are placed so that the preceeding material provides enough information for solving each exercise. You can do the exercises as you encounter them in the material. It can also be beneficial to read all of the material in the part before starting with the exercises. -->
@@ -47,19 +47,19 @@ lang: zh
 ### Taking the course 
 【参加课程】
 
-<!-- The course contains ten parts, the first of which is numbered 0 for historical reasons. A part loosely corresponds to one week (averaging 15-20 hours) of studying but the speed of completing the course is flexible. -->
+<!-- The course contains eleven parts, the first of which is numbered 0 for consistency with past iterations. One part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible. -->
 
 本课程共分十一个章节，由于历史原因，第一章节被编号为 0。 课程每一章节的内容，大概需要一周(平均 15-20 小时)的学习时间，但完成课程的进度是十分灵活的。
 
-<!-- Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before good enough know-how of the topics of part <i>n</i> has been achieved. In pedagogic terms, the course uses [mastery learning](https://en.wikipedia.org/wiki/Mastery_learning), and the intent is for you to proceed to the next part only after doing enough of the exercises of the previous part. -->
+<!-- Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part. -->
 
-从第 <i>n</i> 章跳转到第 <i>n + 1</i> 章之前，最好对第 n 章的议题有足够的了解。 在教学方法论上，本课程使用了 [掌握学习法（mastery learning）](https://en.wikipedia.org/wiki/Mastery_learning)，其精髓就是让你在完成上一章节足够的练习之后再进入下一章节。
+从第 <i>n</i> 章跳转到第 <i>n + 1</i> 章之前，最好对第 n 章的议题有足够的了解。 在教学方法论上，本课程使用了 [掌握学习法（Mastery Learning）](https://en.wikipedia.org/wiki/Mastery_learning)，其精髓就是让你在完成上一章节足够的练习之后再进入下一章节。
 
 <!-- You are expected to do <i>at least</i> all of the exercises that are not marked with a star(\*). Exercises marked with a star count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part. -->
 
 你<i>至少</i>要完成没有带星号(\*)的练习。 带星号的练习虽然对标你的期末成绩，但跳过它们并不妨碍你做下一章节的必选练习。
 
-<!-- The speed of completing the course is quite flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022.  -->
+<!-- The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022.   -->
 课程的完成速度是十分弹性的，练习在[欧洲时间](https://en.wikipedia.org/wiki/Eastern_European_Time) 的2022年3月1日前都可以进行提交。
 
 However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2022. 
@@ -187,17 +187,17 @@ However, note that the deadline for taking exam for University of Helsinki credi
 #### React Native part's credits
 React Native 章节的学分
 
-<!-- By submitting exercises for part 10 of the courses, React Native, you can earn two additional credits. Earning two credits requires you to submit at least 25 exercises. More information about the part's prerequisites, exercise submission and credits can be found in the [part 10](/en/part10/introduction_to_react_native). -->
+<!-- By submitting exercises for part 10 of the course on React Native, you can earn two additional credits. Earning two credits requires you to submit at least 25 exercises. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native). -->
 
 通过提交第10章的练习，React Native， 你可以获得 2学分。获得2学分需要你提交至少25个练习。关于该章节更多的前置要求，练习提交和学分获取规则可以参考 [part 10](/zh/part10/introduction_to_react_native)。
 
 #### Continuous integration part's credits
 持续集成章节的学分
 
-<!-- By submitting exercises for part 11 of the courses, Continuous integration/delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of the part. -->
+<!-- By submitting exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of this part. -->
 通过提交11章的练习，持续集成与持续交付，你可以获得额外的一个学分。获得学分需要你提交该章节的所有22个章节。
 
-<!-- More information about the part's prerequisites and exercise submission can be found in the [part 11](/en/part11). -->
+<!-- More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11). -->
 其他关于该章节的要求和练习提交可以查看[第11章](/zh/part11)
 
 
@@ -286,9 +286,9 @@ React Native 章节的学分
 
 练习是通过 GitHub 提交的，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中将练习标记为已完成。
 
-<!-- If you are submitting exercises from different parts to the same repository, use some sensible system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator. -->
+<!-- If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator. -->
 
-如果要将来自不同章节的练习提交到同一个代码仓库，那么可以使用一些合理的命名规范来命名自己的目录。 您当然可以为每个章节创建一个新的仓库。 如果您使用私有仓库，需要添加 mluukkai 作为 collaborator合作者。
+如果要将来自不同章节的练习提交到同一个代码仓库，那么可以使用一个合理的命名规范来命名自己的目录。 您当然可以为每个章节创建一个新的仓库。 如果您使用私有仓库，需要添加 mluukkai 作为 collaborator合作者。
 
 <!-- Exercises are submitted **one part at a time**. When you have once submitted exercises for a part, you can no longer submit any more exercises for that part. -->
 
@@ -314,7 +314,7 @@ React Native 章节的学分
 按照下面的指引进入本课程的 Moodle 系统:
 
 <!-- - Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261) 
-Enroll on the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)-->
+Enroll in the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)-->
 - 在2022年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)来加入这门课程。
 <!-- - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day.  - 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration. 3. User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
@@ -347,14 +347,14 @@ Enroll on the course through Open University by 9 Jan 2022 [here](https://www.av
 <!-- Electronic enrollment is available if you meet one of the following criteria: -->
 如果你满足以下某一条件，同样可以注册课程：
 
-<!-- You have a Finnish personal identity number (format: xxxxxxxx-xxxx), or an online banking ID, or -->
-你拥有芬兰的身份证ID（格式如：xxxxxxxx-xxxx），或者在线银行的ID，或者
-<!-- - you are a student at the University of Helsinki, or  -->
-- 你是赫尔辛基大学的学生，或者
-<!-- - you are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners). -->
+<!-- You have a Finnish personal identity number (format: xxxxxxxx-xxxx) or an online banking ID. -->
+- 你拥有芬兰的身份证ID（格式如：xxxxxxxx-xxxx），或者在线银行的ID，
+<!-- - You are a student at the University of Helsinki.  -->
+- 你是赫尔辛基大学的学生
+<!-- - You are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners). -->
 - 你是一个在另一个[HAKA 成员学院](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)的学生。
 
-<!-- After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo) . If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID. -->
+<!-- After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID. -->
 注册完课程后：注意你还需要将你的学生ID保存到[提交系统的](https://studies.cs.helsinki.fi/stats/myinfo)我的提交标签页面。如果你使用你的学院的HAKA认证来登录Moodle，请发送信息到 avoin-student@helsinki.fi 来询问你的赫尔辛基大学的学生ID。
 
 <!-- Note that you also have to save your student ID number to the "my submissions" view in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
@@ -390,9 +390,9 @@ Enroll on the course through Open University by 9 Jan 2022 [here](https://www.av
 ### Interview promise  
 【面试保证】
 
-<!-- Our collaborators Houston Inc, Terveystalo, Elisa, Konecranes and Smartly.io have given a <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10). -->
+<!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10).-->
 
-我们的合作伙伴包括[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(12 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(12 + 10)的人都可以获得工作面试。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 
