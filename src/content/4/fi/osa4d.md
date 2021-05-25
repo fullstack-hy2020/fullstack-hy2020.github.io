@@ -530,7 +530,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-Tämä siis tapahtuu ketjuttamalla useampi middlware funktion <i>use</i> parametriksi. Middlewareja voitaisiin samaan tapaan rekisteröidä myös ainoastaan yksittäisten routejen yhteyteen:
+Tämä siis tapahtuu ketjuttamalla useampi middleware funktion <i>use</i> parametriksi. Middlewareja voitaisiin samaan tapaan rekisteröidä myös ainoastaan yksittäisten routejen yhteyteen:
 
 ```js
 router.post('/', userExtractor, async (request, response) => {
