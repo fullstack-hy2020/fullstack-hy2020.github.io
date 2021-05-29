@@ -21,7 +21,7 @@ Open the [example application](https://studies.cs.helsinki.fi/exampleapp) on you
 **The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
 On Windows or Linux, open the console by pressing `F12` or `ctrl-shift-i` simultaneously. 
 
-Before continuing, find out how to open the Developer Console on your computer (search from Google if necessary) and remember to <i>always</i> keep it open when developing web applications. 
+Before continuing, find out how to open the Developer Console on your computer (Google it if necessary) and remember to <i>always</i> keep it open when developing web applications. 
 
 The console looks like this: 
 
@@ -121,7 +121,7 @@ In traditional web applications the browser is "dumb". It only fetches HTML data
 The example uses [Express](https://expressjs.com/) from Node.js. 
 This course will use Node.js and Express to create web servers. 
 
-### Running application logic on the browser
+### Running application logic in the browser
 
 Keep the Developer Console open. Empty the console by clicking the 🚫 symbol. 
 Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests: 
@@ -159,7 +159,7 @@ xhttp.onreadystatechange = function() {
   }
 }
 
-xhttp.open('GET', '/data.json', true)
+xhttp.open('GET', '/exampleapp/data.json', true)
 xhttp.send()
 ```
 The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course. 
@@ -303,7 +303,7 @@ The same treelike structure can be seen on the console tab <i>Elements</i>.
 
 The functioning of the browser is based on the idea of depicting HTML elements as a tree. 
 
-Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Model) is an Application Programming Interface, (an <i>API</i>), which enables programmatic modification of the <i>element trees</i> corresponding to web-pages.
+Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), is an Application Programming Interface (an <i>API</i>), which enables programmatic modification of the <i>element trees</i> corresponding to web-pages.
 
 The JavaScript code introduced in the previous chapter used the DOM-API to add a list of notes to the page. 
 
@@ -381,7 +381,7 @@ A class selector definition always starts with a period, and contains the name o
 
 The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements. 
 
-CSS attributes can be examined on the <i>elements</i> tab on the console:  
+CSS attributes can be examined in the <i>elements</i> tab of the console:  
 
 ![](../../images/0/17e.png)
 
