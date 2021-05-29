@@ -17,7 +17,7 @@ lang: zh
 <!-- The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful. -->
 Json-server 与 REST API 的教科书[定义](https://en.wikipedia.org/wiki/representational_state_transfer)提供的描述不完全匹配，但是自称是 RESTful 的大多数服务都不完全匹配。 
 
-<!-- We will take a closer look at REST in the [next part](/zh/part3) of the course, but it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST. -->
+<!-- We will take a closer look at REST in the [next part](/zh/part3) of the course, but it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST. -->
 我们将在本课程的[下一章节](/zh/part3)中进一步了解 REST，但是熟悉 json-server 和 REST api 经常使用的一些[约定](https://en.wikipedia.org/wiki/representational_state_transfer#applied_to_web_services)是很重要的。 特别是，我们将会看到在 REST 中常规使用[路由](https://github.com/typicode/json-server#routes) ，即 url 和 HTTP 请求类型。
 
 ### REST

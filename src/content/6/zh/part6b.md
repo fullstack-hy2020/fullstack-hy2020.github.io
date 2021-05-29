@@ -448,14 +448,15 @@ const notes = useSelector(({ filter, notes }) => {
 npm install --save-dev redux-devtools-extension
 ```
 
-<!-- We'll have to slightly change the definition of the store to get the library up and running: -->
-我们将不得不稍微改变store的定义，以使库开始运行:
+<!-- We'll have to slightly change the definition of the store in `index.js` to get the library up and running: -->
+我们不得不稍微改变`index.js` 文件中 store 的定义，以使库开始运行:
 
 ```js
 // ...
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
 
+// ...
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
 
@@ -470,8 +471,8 @@ const store = createStore(
   composeWithDevTools()
   // highlight-end
 )
-
-export default store
+      
+// ...
 ```
 
 <!-- Now when you open the console, the <i>redux</i> tab looks like this: -->
