@@ -1325,7 +1325,7 @@ app.listen(PORT, () => {
 
 
 
-<!-- The disabled eslint rule was actually giving us a hint the the following assignment is a risky one: -->
+<!-- The disabled eslint rule was actually giving us a hint that the following assignment is a risky one: -->
 关闭 eslint 规则实际上使如下赋值变成了一个风险项：
 ```js
 const diary = diaryService.findById(Number(req.params.id));

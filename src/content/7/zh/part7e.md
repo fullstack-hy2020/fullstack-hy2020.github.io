@@ -652,8 +652,7 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 
 <!-- The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substancial, it is worth it to check if existing solutions are already available.  -->
 开发者社区已经产生了大量有用的库。 如果你正在开发更实质性的东西，那么检查一下现有的解决方案是否已经可用是值得的。
-<!-- One good place to find libraries is https://applibslist.xyz/. -->
-找到库的一个好地方是 https://applibslist.xyz/ 。
+
 <!-- Below is listed some libraries recommended by trustworthy parties. -->
 下面列出了一些可信任方推荐的库。
 

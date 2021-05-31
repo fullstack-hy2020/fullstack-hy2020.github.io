@@ -362,7 +362,7 @@ const noteReducer = (state = [], action) => {
 该状态现在是一个数组。 <i>NEW\_NOTE</i> 类型的 action 将使用 [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) 方法向状态添加一个新的 Note。
 
 <!-- The application seems to be working, but the reducer we have declared is bad. It breaks the [basic assumption](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions) of Redux reducer that reducers must be [pure functions](https://en.wikipedia.org/wiki/Pure_function). -->
-应用程序似乎正常工作，但我们声明的 reducer 并不优雅。 它打破了 Redux 的 reducer 必须是[纯函数](https://en.wikipedia.org/wiki/Pure_function)的[基本假设](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions)
+应用程序似乎正常工作，但我们声明的 reducer 并不优雅。 它打破了 Redux 的 reducer 必须是[纯函数](https://en.wikipedia.org/wiki/Pure_function)的[基本假设](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#rules-of-reducers)
 <!-- Pure functions are such, that they <i>do not cause any side effects</i> and they must always return the same response when called with the same parameters. -->
 纯函数是这样的，它们不会引起任何副作用，当使用相同的参数调用时，它们必须始终返回相同的结果。
 

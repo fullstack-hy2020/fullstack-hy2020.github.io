@@ -598,8 +598,8 @@ const Togglable = () => ...
 
 ![](../../images/5/13ae.png)
 
-<!-- It expands when button <i>new note</i> is clicked -->
-当单击<i>new note</i> 按钮时，它会展开
+<!-- It expands when button <i>create new blog</i> is clicked -->
+当单击<i>create new blog</i> 按钮时，它会展开
 
 ![](../../images/5/13be.png)
 
