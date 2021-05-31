@@ -35,17 +35,13 @@ Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2022. klo 23:59 
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-### Arvosteluperusteet
+### Osat ja suorittaminen
 
-Kurssi voidaan suorittaa 5-12 opintopisteen laajuisena.
+Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-12 opintopisteen laajuisena. 
 
-Laajuus ja arvosana määräytyy kaikkien tehtyjen tehtävien perusteella, myös tähdellä merkityt tehtävät siis vaikuttavat arvosanaan. 
+#### Osat 0-5 (ydinkurssi) - Full Stack -websovelluskehitys (5 op, AYCSM141081)
 
-Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan [Avoimen yliopiston](https://studies.helsinki.fi/opintotarjonta/cur/hy-CUR-136055679/Avoin_yo_Full_Stack_websovelluskehitys_2021_3_12_op) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
-
-#### Arvosanarajat: 5-7 opintopisteen suoritus
-
-5-7 opintopisteen laajuisen suorituksen opintopistemäärä ja arvosana määräytyy kurssin <b>osien 0-7</b> kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
+Suorituksen opintopistemäärä ja arvosana määräytyvät kurssin osien 0-7 kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
 
 Arvosana/opintopisterajat:
 
@@ -59,28 +55,51 @@ Arvosana/opintopisterajat:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-Suoritukseen edellytetään tehtävien lisäksi hyväksytysti suoritettu koe.
+Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan Avoimen yliopiston [Moodle-järjestelmässä](https://courses.helsinki.fi/fi/aytkt21009/129171256), ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
-Koe suoritetaan [Avoimen yliopiston](https://courses.helsinki.fi/fi/aytkt21009/129171256) Moodle-järjestelmässä, ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
+Kokeen viimeinen suorituspäivä on 10.1.2022. Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.
 
-Kokeen viimeinen suorituspäivä on 10.1.2022.  <b>Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.</b>
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-12 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta onko suorituksesi laajuus 5-12 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
-#### 8 ja 9 opintopisteen suoritus
+#### Osa 6 - Full Stack -websovelluskehitys, lisäosa 1 (1 op, AYCSM141082)
+Suorittamalla vähintään 127 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
+-	Tee vähintään 127 tehtävää osista 0-7. 
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143237161)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
+#### Osa 7 - Full Stack -websovelluskehitys, lisäosa 2 (1 op, AYCSM141083)
+Suorittamalla vähintään 138 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
+-	Tee vähintään 138 tehtävää osista 0-7. 
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143240127)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+
+#### Osa 8 - Full Stack -websovelluskehitys: GraphQL (1 op, AYCSM14113)
 Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
+-	Tee vähintään 22/26 tehtävää osasta 8. 
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
+#### Osa 9 - Full Stack -websovelluskehitys: TypeScript (1 op, AYCSM14110, englanniksi)
 Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen kun olet tehnyt osat 0-7.
 
-#### React Native -osan suoritus
+-	Tee vähintään 24/27 tehtävää osasta 9.
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-Suorittamalla tehtäviä kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteella. Kahden opintopisteen suoritusta varten tulee osassa suorittaa vähintään 25 tehtävää. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
+#### Osa 10 - Full Stack -websovelluskehitys: React Native (2 op, AYCSM14111, englanniksi)
+Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteella. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native)).
 
-#### Continuous integration -osan suoritus
+-	Tee vähintään 25 tehtävää osasta 10. 
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+
+#### Osa 11 - Full Stack -websovelluskehitys: jatkuva integraatio (1 op, AYCSM14112, englanniksi)
 
 Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
-
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 11](/en/part11).
+-	Tee kaikki tehtävät osasta 11.
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 ### Suoritusmerkinnän pyytäminen
 
@@ -97,6 +116,8 @@ Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suorituk
 Paina siis sinistä nappia "I have completed the course ..."!
 
 Arvosana siirtyy Weboodiin neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
+
+**Huomaa**, että suoritusmerkintää ei voida kirjata jos et ole ilmoittanutunut kaikkiin suorittamiisi osiin, katso [täältä](/osa0/yleista#osat-ja-suorittaminen) ohjeet ilmoittautumiseen.
 
 ### Kurssitodistus
 
