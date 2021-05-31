@@ -43,7 +43,7 @@ Exercise completion time statistics can be found via the [submission system](htt
 
 ### Grading
 
-The course can be taken worth 5-12 credits, depending on the number of submitted exercises.
+The course can be worth 5-12 credits, depending on the number of submitted exercises.
 
 The number of credits and the final grade are determined by the number of submitted exercises, including those that are not marked with an asterisk.
 
