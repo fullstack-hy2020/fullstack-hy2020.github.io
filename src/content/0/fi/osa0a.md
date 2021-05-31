@@ -57,7 +57,7 @@ Arvosana/opintopisterajat:
 
 Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan Avoimen yliopiston [Moodle-järjestelmässä](https://courses.helsinki.fi/fi/aytkt21009/129171256), ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
-Kokeen viimeinen suorituspäivä on 10.1.2022. Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.
+Kokeen viimeinen suorituspäivä on 10.1.2022. **Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.**
 
 Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-12 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
 

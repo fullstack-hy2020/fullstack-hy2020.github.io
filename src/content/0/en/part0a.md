@@ -41,21 +41,15 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-### Grading
+### Parts and completion
 
-The course can be taken worth 5-12 credits, depending on the number of submitted exercises.
+Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 12 credits. 
 
-The number of credits and the final grade are determined by the number of submitted exercises, including those that are not marked with an asterisk.
-
-If you would like university credits, there is also a course exam which does not count towards your final grade, but must be passed. To [register](/en/part0/general_info/#sign-up-for-the-exam) for university credits that are provided by [Open University](https://studies.helsinki.fi/courses/cur/hy-CUR-136061621/Open_uni_Full_Stack_Web_Development_2021_3_12_cr), you must have a Finnish social security number.
-
-Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required.
-
-#### 5-7 credits
-
-For 5-7 credits the number of credits and the grade are based on the total number of submitted exercises for <b>parts 0-7</b> (including exercises marked with an asterisk).
+#### Parts 0-5 (core course) - Full Stack Web Development (5 cr, AYCSM141081en)
+The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk).
 
 Credits and grades are calculated as follows:
+
 
 | exercises    | credits        | grade    |
 | ------------ | :------------: | :------: |
@@ -67,31 +61,53 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-The university credits also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam.
+If wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam. A Finnish social security number is required. 
 
-The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b>
+Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required.
+
+The last possible date for taking the exam is 10 January 2022. **Note that you must sign up for the exam by 9 January 2022, at the latest.**
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-12 credits and does not count towards your grade.
 
 <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i>
 
-#### 8 and 9 credits
+#### Part 6 - Full Stack Web Development, extension 1 (1 cr, AYCSM141082en)
+By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
+-	Submit at least 127 exercises for parts 0-7. 
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097) 
+-	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
 
+#### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
+By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
+- Submit at least 138 exercises for parts 0-7. 
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
+-	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
+
+#### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7.
+-	Submit at least 22/26 exercises for part 8.
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
+-	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
 
+#### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
 By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
+-	Submit at least 24/27 exercises for part 9.
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
+-	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
 
-Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course.
+#### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
+By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native).
+-	Submit at least 25 exercises for part 10. 
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
+-	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
 
-#### React Native part's credits
+#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
 
-By submitting exercises for part 10 of the course on React Native, you can earn two additional credits. Earning two credits requires you to submit at least 25 exercises. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
-
-#### Continuous integration part's credits
-
-By submitting exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of this part.
-
+By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. 
 More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
+- Submit all exercises for part 11. 
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
+-	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
 
 ### How to get your credits
 
@@ -109,6 +125,8 @@ You will receive your credits after you have submitted enough exercise for a pas
 ![](../../images/0/28a.png)
 
 You can view your grade in Weboodi approximately four weeks after notifying us.
+
+**Please note** that in order to get university credits you need a registration for each completed part, please see [here](/en/part0/general_info#parts-and-completion) for more info about registration.
 
 ### Course certificate
 
