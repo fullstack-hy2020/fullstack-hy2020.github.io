@@ -13,8 +13,8 @@ lang: zh
 
 ### Debugging Node applications 
 【调试Node应用】
-<!-- Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. There are people who think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633). -->
-调试 Node 应用比调试在浏览器中运行的 JavaScript 稍微困难一些。 将数据打印到控制台是一种可靠的方法，而且总是值得一试。 有些人认为应该用更复杂的方法来代替，但我不同意。 即使是世界上最顶尖的开源开发者也会使用 [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) 这种方法[method](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633)。
+<!-- Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. There are people who think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/). -->
+调试 Node 应用比调试在浏览器中运行的 JavaScript 稍微困难一些。 将数据打印到控制台是一种可靠的方法，而且总是值得一试。 有些人认为应该用更复杂的方法来代替，但我不同意。 即使是世界上最顶尖的开源开发者也会使用 [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) 这种方法[method](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/)。
 
 #### Visual Studio Code
 

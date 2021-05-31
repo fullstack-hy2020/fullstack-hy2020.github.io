@@ -9,7 +9,7 @@ lang: fi
 
 ### Monimutkaisempi tila
 
-Edellisessä esimerkissä sovelluksen tila oli yksinkertainen, se koostui ainoastaan yhdestä kokonaisluvusta. Entä jos sovellus tarvitsee monimutkaisemman tilan?
+Edellisessä esimerkissä sovelluksen tila oli yksinkertainen, sillä se koostui ainoastaan yhdestä kokonaisluvusta. Entä jos sovellus tarvitsee monimutkaisemman tilan?
 
 Helpoin ja useimmiten paras tapa on luoda sovellukselle useita erillisiä tiloja tai tilan "osia" kutsumalla funktiota _useState_ useampaan kertaan.
 
@@ -37,7 +37,7 @@ const App = () => {
 }
 ```
 
-Komponentti saa käyttöönsä tilan alustuksen yhteydessä funktiot _setLeft_ ja _setRight_ joiden avulla se voi päivittää tilan osia.
+Komponentti saa käyttöönsä tilan alustuksen yhteydessä funktiot _setLeft_ ja _setRight_, joiden avulla se voi päivittää tilan osia.
 
 Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. Voisimme toteuttaa saman toiminnallisuuden tallentamalla nappien <i>left</i> ja <i>right</i> painallukset yhteen olioon
 
@@ -48,7 +48,7 @@ Komponentin tila tai yksittäinen tilan pala voi olla minkä tahansa tyyppinen. 
 }
 ```
 
-sovellus muuttuisi seuraavasti:
+jolloin sovellus muuttuisi seuraavasti:
 
 ```js
 const App = () => {
@@ -87,7 +87,7 @@ const App = () => {
 
 Nyt komponentilla on siis ainoastaan yksi tila. Näppäinten painallusten yhteydessä on nyt huolehdittava <i>koko tilan</i> muutoksesta.
 
-Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun nappia <i>left</i> painetaan, suoritetaan seuraava funktio:
+Tapahtumankäsittelijä vaikuttaa hieman sotkuiselta. Kun nappia <i>left</i> painetaan, suoritetaan seuraava funktio
 
 ```js
 const handleLeftClick = () => {
@@ -99,7 +99,7 @@ const handleLeftClick = () => {
 }
 ```
 
-uudeksi tilaksi siis asetetaan seuraava olio
+ja uudeksi tilaksi asetetaan siis seuraava olio
 
 ```js
 {
@@ -108,7 +108,7 @@ uudeksi tilaksi siis asetetaan seuraava olio
 }
 ```
 
-eli kentän <i>left</i> arvo on sama kuin alkuperäisen tilan kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen tilan kenttä <i>right</i>.
+jolloin kentän <i>left</i> arvo on sama kuin alkuperäisen tilan kentän <i>left + 1</i> ja kentän <i>right</i> arvo on sama kuin alkuperäisen tilan kentän <i>right</i>.
 
 Uuden tilan määrittelevän olion muodostaminen onnistuu hieman tyylikkäämmin hyödyntämällä kesällä 2018 kieleen tuotua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia:
 
@@ -138,7 +138,7 @@ Esimerkissä siis
 { ...clicks, right: clicks.right + 1 }
 ```
 
-luo oliosta _clicks_ kopion, missä kentän _right_ arvoa kasvatetaan yhdellä.
+luo oliosta _clicks_ kopion, jossa kentän _right_ arvoa kasvatetaan yhdellä.
 
 Apumuuttujat ovat oikeastaan turhat, ja tapahtumankäsittelijät voidaan määritellä seuraavasti:
 
@@ -150,7 +150,7 @@ const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
-Lukijalle voi tässä vaiheessa herätä kysymys miksi emme hoitaneet tilan päivitystä seuraavalla tavalla
+Miksi emme hoitaneet tilan päivitystä näin:
 
 ```js
 const handleLeftClick = () => {
@@ -158,8 +158,9 @@ const handleLeftClick = () => {
   setClicks(clicks)
 }
 ```
+?
 
-Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa tilaa suoraan</i>, sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
+Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa tilaa suoraan</i>, koska sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
 
 Kaiken tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu; etuja siinä ei juuri ole, mutta sovellus monimutkaistuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
 
@@ -167,7 +168,7 @@ On kuitenkin tilanteita, joissa jokin osa tilaa kannattaa pitää monimutkaisemm
 
 ### Taulukon käsittelyä
 
-Tehdään sovellukseen vielä laajennus, lisätään sovelluksen tilaan taulukko _allClicks_, joka muistaa kaikki näppäimenpainallukset.
+Tehdään sovellukseen laajennus lisäämällä sovelluksen tilaan taulukko _allClicks_, joka muistaa kaikki näppäimenpainallukset:
 
 ```js
 const App = () => {
@@ -203,13 +204,13 @@ const App = () => {
 }
 ```
 
-Kaikki klikkaukset siis talletetaan omaan tilaan _allClicks_, joka alustetaan tyhjäksi taulukoksi
+Kaikki painallukset siis talletetaan omaan tilaan _allClicks_, joka alustetaan tyhjäksi taulukoksi:
 
 ```js
 const [allClicks, setAll] = useState([])
 ```
 
-Kun esim. nappia <i>left</i> painetaan, lisätään tilan taulukkoon _allClicks_ kirjain <i>L</i>:
+Kun esim. nappia <i>left</i> painetaan, tilan taulukkoon _allClicks_ lisätään kirjain <i>L</i>:
 
 ```js
 const handleLeftClick = () => {
@@ -218,9 +219,9 @@ const handleLeftClick = () => {
 }
 ```
 
-Tila _allClicks_ saa nyt arvokseen taulukon, missä on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, mihin uusi alkio on lisätty.
+Tila _allClicks_ saa nyt arvokseen taulukon, jossa on entisen taulukon alkiot ja <i>L</i>. Uuden alkion liittäminen on tehty metodilla [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka toimii siten, että se ei muuta olemassaolevaa taulukkoa vaan luo <i>uuden taulukon</i>, johon uusi alkio on lisätty.
 
-Kuten jo aiemmin mainittiin, JavaScriptissa on myös mahdollista lisätä taulukkoon metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten että _allClicks_-tilaa muutetaan pushaamalla siihen alkio ja sitten päivitetään tila:
+Kuten jo aiemmin mainittiin, JavaScriptissa on mahdollista lisätä taulukkoon myös metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) ja sovellus näyttäisi tässä tilanteessa toimivan myös jos lisäys hoidettaisiin siten, että _allClicks_-tilaa muutetaan pushaamalla siihen alkio ja sitten päivitetään tila:
 
 ```js
 const handleLeftClick = () => {
@@ -230,7 +231,7 @@ const handleLeftClick = () => {
 }
 ```
 
-Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_ ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissakin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
+Älä kuitenkaan tee näin. Kuten jo mainitsimme, React-komponentin tilaa, eli esimerkiksi muuttujaa _allClicks_, ei saa muuttaa. Vaikka tilan muuttaminen näyttääkin toimivan joissakin tilanteissa, voi seurauksena olla hankalasti havaittavia ongelmia.
 
 Katsotaan vielä tarkemmin, miten kaikkien painallusten historia renderöidään ruudulle:
 
@@ -252,11 +253,11 @@ const App = () => {
 }
 ```
 
-Taulukolle _allClicks_ kutsutaan metodia [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join), joka muodostaa taulukosta merkkijonon, joka sisältää taulukon alkiot erotettuina parametrina olevalla merkillä, eli välilyönnillä.
+Taulukolle _allClicks_ kutsutaan metodia [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join), joka muodostaa taulukosta merkkijonon, joka sisältää taulukon alkiot erotettuina parametrina olevalla merkillä eli välilyönnillä.
 
 ### Ehdollinen renderöinti
 
-Muutetaan sovellusta siten, että näppäilyhistorian renderöinnistä vastaa komponentti _History_:
+Muutetaan sovellusta siten, että painallushistorian renderöinnistä vastaa komponentti _History_:
 
 ```js
 // highlight-start
@@ -294,7 +295,7 @@ const App = () => {
 }
 ```
 
-Nyt komponentin toiminta riippuu siitä, onko näppäimiä jo painettu. Jos ei, eli taulukko <em>allClicks</em> on tyhjä, renderöi komponentti "käyttöohjeen" sisältävän divin.
+Nyt komponentin toiminta riippuu siitä, onko näppäimiä jo painettu. Jos ei, eli taulukko <em>allClicks</em> on tyhjä, komponentti renderöi "käyttöohjeen" sisältävän divin.
 
 ```js
 <div>the app is used by pressing the buttons</div>
@@ -308,7 +309,7 @@ ja muussa tapauksessa näppäilyhistorian:
 </div>
 ```
 
-Komponentin _History_ ulkoasun muodostamat React-elementit siis ovat erilaisia riippuen sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
+Komponentin _History_ ulkoasun muodostamat React-elementit riippuvat siis sovelluksen tilasta, eli komponentissa on <i>ehdollista renderöintiä</i>.
 
 Reactissa on monia muitakin tapoja [ehdolliseen renderöintiin](https://reactjs.org/docs/conditional-rendering.html). Katsotaan niitä tarkemmin [seuraavassa osassa](/osa2).
 
@@ -374,13 +375,13 @@ const App = () => {
 
 Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä alkuvuodesta 2019 ilmestyneestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja JavaScript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, ja tilaa edellyttävät komponentit oli pakko määritellä [class](https://reactjs.org/docs/react-component.html)-komponentteina JavaScriptin luokkasyntaksia hyödyntäen.
 
-Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan tämän päivän Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat Reactin nykypäivä ja tulevaisuus, on maailmassa miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja internetistä löytyvien esimerkkien suhteen tilanne on sama; törmäät class-komponentteihin välittömästi.
+Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan modernia Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat modernia Reactia, maailmassa on miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja Internetistä löytyvien esimerkkien suhteen tilanne on sama; törmäät class-komponentteihin välittömästi.
 
 Tutustummekin riittävällä tasolla class-komponentteihin kurssin [seitsemännessä](/osa7) osassa.
 
 ### React-sovellusten debuggaus
 
-Ohjelmistokehittäjän elämä koostuu pääosin debuggaamisesta (ja olemassaolevan koodin lukemisesta). Silloin tällöin syntyy toki muutama rivi uuttakin koodia, mutta suuri osa ajasta ihmetellään miksi joku on rikki tai miksi joku asia ylipäätään toimii. Hyvät debuggauskäytänteet ja työkalut ovatkin todella tärkeitä.
+Ohjelmistokehittäjän työ sisältää monesti debuggaamista ja olemassaolevan koodin lukemista. Silloin tällöin syntyy toki muutama rivi uuttakin koodia, mutta suuri osa ajasta ihmetellään, miksi joku on rikki tai miksi joku asia ylipäätään toimii. Hyvät debuggauskäytännöt ja -työkalut ovatkin todella tärkeitä.
 
 Onneksi React on debuggauksen suhteen jopa harvinaisen kehittäjäystävällinen kirjasto.
 
@@ -392,15 +393,15 @@ Muistutetaan vielä tärkeimmästä web-sovelluskehitykseen liittyvästä asiast
 >
 > Välilehdistä tulee olla auki nimenomaan <i>Console</i>, jollei ole erityistä syytä käyttää jotain muuta välilehteä.
 
-Pidä myös koodi ja web-sivu **koko ajan** molemmat yhtä aikaa näkyvillä.
+Pidä myös koodi ja web-sivu **koko ajan** yhtä aikaa näkyvillä.
 
-Jos ja kun koodi ei käänny, eli selaimessa alkaa näkyä punaista
+Jos ja kun koodi ei käänny eli selaimessa alkaa näkyä punaista
 
 ![](../../images/1/6e.png)
 
-älä kirjoita enää lisää koodia vaan selvitä ongelma **välittömästi**. Koodauksen historia ei tunne tilannetta, missä kääntymätön koodi alkaisi ihmeenomaisesti toimimaan kirjoittamalla suurta määrää lisää koodia, enkä usko että sellaista ihmettä nähdään tälläkään kurssilla.
+älä kirjoita lisää koodia, vaan selvitä ongelma. Koodauksen historia ei tunne tilannetta, jossa kääntymätön koodi alkaa ihmeen voimalla toimimaan kirjoittamalla suuri määrää lisää koodia, emmekä usko tällaista ihmettä nähtävän tälläkään kurssilla.
 
-Vanha kunnon printtaukseen perustuva debuggaus kannattaa aina. Eli jos esim. komponentissa
+Vanha kunnon printtaukseen perustuva debuggaus on monesti toimiva tapa. Eli jos esim. komponentissa
 
 ```js
 const Button = ({ handleClick, text }) => (
@@ -410,7 +411,7 @@ const Button = ({ handleClick, text }) => (
 )
 ```
 
-olisi jotain ongelmia, kannattaa komponentista alkaa printtailla konsoliin. Pystyäksemme printtaamaan, tulee funktio muuttaa pitempään muotoon ja propsit kannattaa kenties vastaanottaa ilman destrukturointia:
+olisi ongelma, kannattaa komponentista alkaa printtailla konsoliin. Pystyäksemme printtaamaan tulee funktio muuttaa pitempään muotoon ja propsit kannattaa kenties vastaanottaa ilman destrukturointia:
 
 ```js
 const Button = (props) => { 
@@ -424,7 +425,7 @@ const Button = (props) => {
 }
 ```
 
-näin selviää heti onko esim. joku propsia vastaava attribuutti nimetty väärin komponenttia käytettäessä.
+näin selviää heti, onko esim. joku propsia vastaava attribuutti nimetty väärin komponenttia käytettäessä.
 
 **HUOM** kun käytät komentoa _console.log_ debuggaukseen, älä yhdistele asioita "javamaisesti" plussalla, eli sen sijaan että kirjoittaisit
 
@@ -448,23 +449,23 @@ kun taas pilkulla tulostettavat asiat erotellessa saat developer-konsoliin olion
 
 Konsoliin tulostus ei ole suinkaan ainoa keino debuggaamiseen. Koodin suorituksen voi pysäyttää Chromen developer-konsolin <i>debuggeriin</i> kirjoittamalla mihin tahansa kohtaa koodia komennon [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger).
 
-Koodi pysähtyy kun suoritus etenee sellaiseen pisteeseen, missä komento _debugger_ suoritetaan:
+Koodi pysähtyy, kun suoritus etenee sellaiseen pisteeseen, jossa komento _debugger_ suoritetaan:
 
 ![](../../images/1/7a.png)
 
-Menemällä välilehdelle <i>Console</i> on helppo tutkia muuttujien tilaa:
+Muuttujien tilaa voi tutkia <i>Console</i>-välilehdellä:
 
 ![](../../images/1/8a.png)
 
-Kun bugi selviää, voi komennon _debugger_ poistaa ja uudelleenladata sivun.
+Kun bugi selviää, _debugger_-komennon voi poistaa ja ladata sivun uudelleen.
 
 Debuggerissa on mahdollista suorittaa koodia tarvittaessa rivi riviltä <i>Sources</i>-välilehden oikealta laidalta.
 
-Debuggeriin pääsee myös ilman komentoa _debugger_, lisäämällä <i>Sources</i>-välilehdellä sopiviin kohtiin koodia <i>breakpointeja</i>. Komponentin muuttujien arvojen tarkkailu on mahdollista _Scope_-osassa:
+Debuggeriin pääsee myös ilman komentoa _debugger_ lisäämällä <i>Sources</i>-välilehdellä sopiviin kohtiin koodia <i>breakpointeja</i>. Komponentin muuttujien arvojen tarkkailu on mahdollista _Scope_-osassa:
 
 ![](../../images/1/9a.png)
 
-Chromeen kannattaa ehdottomasti asentaa [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden tabin _Components_. Uuden konsolitabin avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
+Chromeen kannattaa ehdottomasti asentaa [React Developer Tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) -lisäosa, joka tuo konsoliin uuden välilehden _Components_. Uuden välilehden avulla voidaan tarkkailla sovelluksen React-komponentteja ja niiden tilaa ja propseja:
 
 ![](../../images/1/10ea.png)
 
@@ -476,17 +477,17 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-React dev tools näyttää hookeilla luodut tilan osat siinä järjestyksessä kun ne on määritelty koodissa: 
+React Developer Tools näyttää hookeilla luodut tilan osat siinä järjestyksessä kuin ne on määritelty koodissa: 
 
 ![](../../images/1/11ea.png)
 
-Ylimpänä oleva <i>State</i> siis vastaa tilan <i>left</i> arvoa, seuraava tilan <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
+Ylimpänä oleva <i>State</i> vastaa siis tilan <i>left</i> arvoa, seuraava tilan <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
 
 ### Hookien säännöt
 
 Jotta hookeilla muodostettu sovelluksen tila toimisi oikein, on hookeja käytettävä tiettyjä [rajoituksia](https://reactjs.org/docs/hooks-rules.html) noudattaen.
 
-Funktiota _useState_ (eikä seuraavassa osassa esiteltävää funktiota _useEffect_) <i>ei saa kutsua</i> loopissa, ehtolausekkeiden sisältä tai muista kun komponentin määrittelevästä funktioista. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä. Jos näin ei ole, sovellus toimii miten sattuu.
+Funktiota _useState_ <i>ei saa kutsua</i> loopissa (sama koskee  seuraavassa osassa esiteltävää funktiota _useEffect_), ehtolausekkeiden sisältä tai muista kuin komponentin määrittelevästä funktiosta. Tämä takaa sen, että hookeja kutsutaan aina samassa järjestyksessä. Jos näin ei ole, sovellus saattaaa toimia miten sattuu.
 
 Hookeja siis kuuluu kutsua ainoastaan React-komponentin määrittelevän funktion rungosta:
 
@@ -519,11 +520,11 @@ const App = (props) => {
 
 ### Tapahtumankäsittely revisited
 
-Edellisten vuosien kurssin perusteella tapahtumankäsittely on osoittautunut monelle tässä vaiheessa haastavaksi aiheeksi.
+Tapahtumankäsittely on osoittautunut aiempien vuosien kursseilla haastavaksi aiheeksi.
 
 Tarkastellaan asiaa vielä uudelleen.
 
-Oletetaan, että käytössä on äärimmäisen yksinkertainen sovellus, jonka komponentti <i>App</i> on määritelty seuraavasti:
+Oletetaan, että käytössä on yksinkertainen sovellus, jonka komponentti <i>App</i> on määritelty seuraavasti:
 
 ```js
 const App = (props) => {
@@ -540,17 +541,17 @@ const App = (props) => {
 
 Haluamme, että napin avulla tilan tallettava muuttuja _value_ saadaan nollattua.
 
-Jotta saamme napin reagoimaan, on sille lisättävä <i>tapahtumankäsittelijä</i>.
+Jotta saamme napin reagoimaan, on napille lisättävä <i>tapahtumankäsittelijä</i>.
 
-Tapahtumankäsittelijän tulee aina olla <i>funktio</i> tai viite funktioon. Jos tapahtumankäsittelijän paikalle yritetään laittaa jotain muuta, ei nappi toimi.
+Tapahtumankäsittelijän tulee aina olla <i>funktio</i> tai viite funktioon. Jos tapahtumankäsittelijän paikalle yritetään laittaa jotain muuta, nappi ei toimi.
 
-Jos esim. antaisimme tapahtumankäsittelijäksi merkkijonon:
+Jos annamme tapahtumankäsittelijäksi esimerkiksi merkkijonon
 
 ```js
 <button onClick={'crap...'}>button</button>
 ```
 
-React varoittaa asiasta konsolissa
+React varoittaa asiasta konsolissa:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
@@ -559,13 +560,13 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
     in App (at index.js:27)
 ```
 
-myös seuraavanlainen yritys olisi tuhoon tuomittu
+Myös seuraavanlainen yritys olisi tuhoon tuomittu:
 
 ```js
 <button onClick={value + 1}>button</button>
 ```
 
-nyt tapahtumankäsittelijäksi on yritetty laittaa _value + 1_ mikä tarkoittaa laskuoperaation tulosta. React varoittaa tästäkin konsolissa
+Nyt tapahtumankäsittelijäksi on yritetty laittaa _value + 1_, joka tarkoittaa laskuoperaation tulosta. React varoittaa tästäkin konsolissa:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
@@ -577,7 +578,7 @@ Myöskään seuraava ei toimi
 <button onClick={value = 0}>button</button>
 ```
 
-taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konsoliin tulee valitus. Tämä tapa on myös toisella tavalla väärin: tilan muuttaminen ei onnistu suoraan tilan arvon tallentavaa muuttujaa muuttamalla.
+sillä taaskaan tapahtumankäsittelijänä ei ole funktio vaan sijoitusoperaatio. Konsoliin tulee valitus. Tämä tapa on myös toisella tavalla väärin: tilan muuttaminen ei onnistu suoraan tilan arvon tallentavaa muuttujaa muuttamalla.
 
 Entä seuraava:
 
@@ -586,22 +587,23 @@ Entä seuraava:
   button
 </button>
 ```
+?
 
-konsoliin tulostuu kertaalleen <i>clicked the button</i>, mutta nappia painellessa ei tapahdu mitään. Miksi tämä ei toimi vaikka tapahtumankäsittelijänä on nyt funktio _console.log_?
+Konsoliin tulostuu kertaalleen <i>clicked the button</i>, mutta nappia painellessa ei tapahdu mitään. Miksi tämä ei toimi vaikka tapahtumankäsittelijänä on nyt funktio _console.log_?
 
-Ongelma on nyt siinä, että tapahtumankäsittelijänä on <i>funktion kutsu</i>, eli varsinaiseksi tapahtumankäsittelijäksi tulee funktion kutsun paluuarvo, joka on tässä tapauksessa määrittelemätön arvo <i>undefined</i>.
+Ongelma on siinä, että tapahtumankäsittelijänä on <i>funktion kutsu</i>, eli varsinaiseksi tapahtumankäsittelijäksi tulee funktion kutsun paluuarvo, joka on tässä tapauksessa määrittelemätön arvo <i>undefined</i>.
 
-Funktiokutsu _console.log('clicked the button')_ suoritetaan siinä vaiheessa kun komponentti renderöidään, ja tämän takia konsoliin tulee tulostus kertalleen.
+Funktiokutsu _console.log('clicked the button')_ suoritetaan siinä vaiheessa kun komponentti renderöidään, minkä takia konsoliin tulee kuitenkin yksi tulostus.
 
-Myös seuraava yritys on virheellinen
+Myös seuraava yritys on virheellinen:
 
 ```js
 <button onClick={setValue(0)}>button</button>
 ```
 
-jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei toimi. Tämä yritys aiheuttaa myös toisen ongelman: kun komponenttia renderöidään, suoritetaan tapahtumankäsittelijänä oleva funktiokutsu _setValue(0)_ joka taas saa aikaan komponentin uudelleenrenderöinnin. Ja uudelleenrenderöinnin yhteydessä funktiota kutsutaan uudelleen käynnistäen jälleen uusi uudelleenrenderöinti, ja joudutaan päättymättömään rekursioon.
+Jälleen olemme yrittäneet laittaa tapahtumankäsittelijäksi funktiokutsun. Ei toimi. Tämä yritys aiheuttaa myös toisen ongelman: kun komponenttia renderöidään, suoritetaan tapahtumankäsittelijänä oleva funktiokutsu _setValue(0)_ mikä taas saa aikaan komponentin uudelleenrenderöinnin. Ja uudelleenrenderöinnin yhteydessä funktiota kutsutaan uudelleen käynnistäen jälleen uusi uudelleenrenderöinti ja joudutaan päättymättömään rekursioon.
 
-Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, toimii seuraava
+Jos haluamme suorittaa tietyn funktiokutsun tapahtuvan nappia painettaessa, seuraava toimii:
 
 ```js
 <button onClick={() => console.log('clicked the button')}>
@@ -619,7 +621,7 @@ Saamme myös nollauksen toimimaan samalla tekniikalla
 
 eli nyt tapahtumankäsittelijä on funktio _() => setValue(0)_.
 
-Tapahtumakäsittelijäfunktioiden määrittely suoraan napin määrittelyn yhteydessä ei välttämättä ole paras mahdollinen idea.
+Tapahtumankäsittelijäfunktioiden määrittely suoraan napin määrittelyn yhteydessä ei ole välttämättä paras mahdollinen tapa.
 
 Usein tapahtumankäsittelijä määritelläänkin jossain muualla. Seuraavassa määritellään funktio ja sijoitetaan se muuttujaan _handleClick_ komponentin rungossa:
 
@@ -645,7 +647,7 @@ Muuttujassa _handleClick_ on nyt talletettuna viite itse funktioon. Viite anneta
 <button onClick={handleClick}>button</button>
 ```
 
-Tapahtumankäsittelijäfunktio voi luonnollisesti koostua useista komennoista, tällöin käytetään nuolifunktion aaltosulullista muotoa:
+Tapahtumankäsittelijäfunktio voi luonnollisesti koostua useista komennoista, jolloin käytetään nuolifunktion aaltosulullista muotoa:
 
 ```js
 const App = (props) => {
@@ -667,12 +669,12 @@ const App = (props) => {
 }
 ```
 
-###  Funktio, joka palauttaa funktion
+###  Funktion palauttava funktio
 
 Näytetään vielä eräs tapa määritellä tapahtumankäsittelijöitä: <i>funktion palauttava funktio</i>.
 Tällä kurssilla ei tätä tyyliä tulla käyttämään, joten **voit huoletta hypätä seuraavan ohi** jos asia tuntuu nyt hankalalta. Funktioita palauttavat funktiot ovat kuitenkin melko yleisiä funktionaalista ohjelmointityyliä käytettäessä, joten tarkastellaan tekniikkaa hieman vaikka selviämmekin kurssilla ilman sitä.
 
-Muutetaan koodia seuraavasti
+Muutetaan koodia seuraavasti:
 
 ```js
 const App = (props) => {
@@ -695,9 +697,9 @@ const App = (props) => {
 }
 ```
 
-Koodi näyttää hankalalta, mutta se ihme kyllä toimii.
+Koodi näyttää hankalalta, mutta se toimii.
 
-Tapahtumankäsittelijäksi on nyt "rekisteröity" funktiokutsu:
+Tapahtumankäsittelijäksi on nyt asetettu funktiokutsu:
 
 ```js
 <button onClick={hello()}>button</button>
@@ -715,15 +717,15 @@ const hello = () => {
 }
 ```
 
-funktion <i>paluuarvona</i> on nyt toinen, muuttujaan _handler_ määritelty funktio.
+Funktion <i>paluuarvona</i> on nyt toinen, muuttujaan _handler_ määritelty funktio.
 
-eli kun react renderöi seuraavan rivin
+Eli kun React renderöi rivin
 
 ```js
 <button onClick={hello()}>button</button>
 ```
 
-sijoittaa se onClick-käsittelijäksi funktiokutsun _hello()_ paluuarvon. Eli oleellisesti ottaen rivi "muuttuu" seuraavaksi
+se sijoittaa onClick-käsittelijäksi funktiokutsun _hello()_ paluuarvon. Eli oleellisesti ottaen rivi "muuttuu" seuraavaksi:
 
 ```js
 <button onClick={() => console.log('hello world')}>
@@ -731,9 +733,9 @@ sijoittaa se onClick-käsittelijäksi funktiokutsun _hello()_ paluuarvon. Eli ol
 </button>
 ```
 
-koska funktio _hello_ palautti funktion, on tapahtumankäsittelijä nyt funktio.
+Koska funktio _hello_ palautti funktion, tapahtumankäsittelijäkin on nyt funktio.
 
-Mitä järkeä tässä konseptissa on?
+Mitä hyötyä tällaisesta on?
 
 Muutetaan koodia hiukan:
 
@@ -764,15 +766,15 @@ const App = (props) => {
 }
 ```
 
-Nyt meillä on kolme nappia joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _hello_ avulla.
+Nyt meillä on kolme nappia, joiden tapahtumankäsittelijät määritellään parametrin saavan funktion _hello_ avulla.
 
-Ensimmäinen nappi määritellään seuraavasti
+Ensimmäinen nappi määritellään seuraavasti:
 
 ```js
 <button onClick={hello('world')}>button</button>
 ```
 
-Tapahtumankäsittelijä siis saadaan <i>suorittamalla</i> funktiokutsu _hello('world')_. Funktiokutsu palauttaa funktion
+Tapahtumankäsittelijä siis saadaan <i>suorittamalla</i> funktiokutsu _hello('world')_. Funktiokutsu palauttaa funktion:
 
 ```js
 () => {
@@ -780,7 +782,7 @@ Tapahtumankäsittelijä siis saadaan <i>suorittamalla</i> funktiokutsu _hello('w
 }
 ```
 
-Toinen nappi määritellään seuraavasti
+Toinen nappi määritellään seuraavasti:
 
 ```js
 <button onClick={hello('react')}>button</button>
@@ -794,9 +796,9 @@ Tapahtumankäsittelijän määrittelevä funktiokutsu _hello('react')_ palauttaa
 }
 ```
 
-eli molemmat napit saavat oman, yksilöllisen tapahtumankäsittelijänsä.
+eli molemmat napit saavat omat, yksilölliset tapahtumankäsittelijänsä.
 
-Funktioita palauttavia funktioita voikin hyödyntää määrittelemään geneeristä toiminnallisuutta, jota voi tarkentaa parametrien avulla. Tapahtumankäsittelijöitä luovan funktion _hello_ voikin ajatella olevan eräänlainen tehdas, jota voi pyytää valmistamaan sopivia tervehtimiseen tarkoitettuja tapahtumankäsittelijäfunktioita.
+Funktioita palauttavia funktioita voikin hyödyntää määrittelemään geneeristä toiminnallisuutta, jota voi tarkentaa parametrien avulla. Tapahtumankäsittelijöitä luovan funktion _hello_ voikin ajatella olevan eräänlainen tehdas, jota voi pyytää valmistamaan sopivia tervehtimiseen sopivia tapahtumankäsittelijäfunktioita.
 
 Käyttämämme määrittelytapa
 
@@ -810,7 +812,7 @@ const hello = (who) => {
 }
 ```
 
-on hieman verboosi. Eliminoidaan apumuuttuja, ja määritellään palautettava funktio suoraan returnin yhteydessä:
+on hieman verboosi. Eliminoidaan apumuuttuja ja määritellään palautettava funktio suoraan returnin yhteydessä:
 
 ```js
 const hello = (who) => {
@@ -820,7 +822,7 @@ const hello = (who) => {
 }
 ```
 
-ja koska funktio _hello_ sisältää ainoastaan yhden komennon, eli returnin, voidaan käyttää aaltosulutonta muotoa
+Koska funktio _hello_ sisältää ainoastaan yhden komennon, returnin, voimme käyttää aaltosulutonta muotoa
 
 ```js
 const hello = (who) =>
@@ -829,7 +831,7 @@ const hello = (who) =>
   }
 ```
 
-ja tuodaan vielä "kaikki nuolet" samalle riville
+ja tuoda vielä "kaikki nuolet" samalle riville:
 
 ```js
 const hello = (who) => () => {
@@ -837,7 +839,7 @@ const hello = (who) => () => {
 }
 ```
 
-Voimme käyttää samaa kikkaa myös muodostamaan tapahtumankäsittelijöitä, jotka asettavat komponentin tilalle halutun arvon. Muutetaan koodi muotoon:
+Voimme käyttää samaa kikkaa myös muodostamaan tapahtumankäsittelijöitä, jotka asettavat komponentin tilan halutuksi. Muutetaan koodi muotoon:
 
 ```js
 const App = (props) => {
@@ -864,7 +866,7 @@ Kun komponentti renderöidään, ja tehdään nappia <i>thousand</i>
 <button onClick={setToValue(1000)}>thousand</button>
 ```
 
-tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli seuraava funktio
+tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli seuraava funktio:
 
 ```js
 () => {
@@ -872,14 +874,13 @@ tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli 
 }
 ```
 
-Kasvatusnapin generoima rivi on seuraava
+Kasvatusnapin generoima rivi on seuraava:
 
 ```js
 <button onClick={setToValue(value + 1)}>increment</button>
 ```
 
-Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka saa parametrikseen tilan tallettavan muuttujan _value_ nykyisen arvon kasvatettuna yhdellä. Jos _value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio
-
+Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka saa parametrikseen tilan tallettavan muuttujan _value_ nykyisen arvon kasvatettuna yhdellä. Jos _value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio:
 ```js
 () => {
   setValue(11)
@@ -913,17 +914,17 @@ const App = (props) => {
 }
 ```
 
-Voimme nyt määritellä tapahtumankäsittelijän funktioksi, joka kutsuu funktiota _setToValue_ sopivalla parametrilla, esim. nollaamisen tapahtumankäsittelijä:
+Voimme nyt määritellä tapahtumankäsittelijän funktioksi, joka kutsuu funktiota _setToValue_ sopivalla parametrilla. Esim. nollaamisen tapahtumankäsittelijä voidaan kirjoittaa muotoon:
 
 ```js
 <button onClick={() => setToValue(0)}>reset</button>
 ```
 
-On makuasia käyttääkö tapahtumankäsittelijänä funktioita palauttavia funktioita vai nuolifunktioita. Tällä kurssilla emme kuitenkaan selvyyden vuoksi käytä funktioita palauttavia funktioita.
+On makuasia käyttääkö tapahtumankäsittelijöinä funktioita palauttavia funktioita vai nuolifunktioita. Tällä kurssilla emme kuitenkaan selvyyden vuoksi käytä funktioita palauttavia funktioita.
 
 ### Tapahtumankäsittelijän vieminen alikomponenttiin
 
-Eriytetään vielä painike omaksi komponentikseen
+Eriytetään vielä painike omaksi komponentikseen:
 
 ```js
 const Button = (props) => (
@@ -935,7 +936,7 @@ const Button = (props) => (
 
 Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon, jonka se renderöi painikkeen tekstiksi.
 
-Komponentin <i>Button</i> käyttö on helppoa, on toki pidettävä huolta siitä, että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
+Komponentin <i>Button</i> käyttö on helppoa, mutta on toki pidettävä huolta siitä, että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
 
 ![](../../images/1/12e.png)
 
@@ -943,7 +944,7 @@ Komponentin <i>Button</i> käyttö on helppoa, on toki pidettävä huolta siitä
 
 Eriytetään vielä sovelluksestamme luvun näyttäminen omaan komponenttiin <i>Display</i>.
 
-Muutetaan ohjelmaa seuraavasti, eli määritelläänkin uusi komponentti <i>App</i>-komponentin sisällä:
+Määritellään uusi komponentti <i>App</i>-komponentin sisällä:
 
 ```js
 // tämä on oikea paikka määritellä komponentti!
@@ -974,9 +975,9 @@ const App = props => {
 }
 ```
 
-Kaikki näyttää toimivan. Mutta **älä tee koskaan näin**, eli määrittele komponenttia toisen komponentin sisällä. Tapa on hyödytön ja johtaa useissa tilanteissa ikäviin ongelmiin. Suurimmat ongelmat johtuvat siitä, että toisen komponentin sisällä määritelty komponentti on Reactin näkökulmasta jokaisen renderöinnin yhteydessä aina uusi komponentti. Tämä tekee komponentin optimoinnista Reactille mahdotonta.
+Kaikki näyttää toimivan, mutta **älä koskaan määrittele komponenttia toisen komponentin sisällä**. Tapa on hyödytön ja johtaa usein ongelmiin. Suurimmat ongelmat johtuvat siitä, että toisen komponentin sisällä määritelty komponentti on Reactin näkökulmasta jokaisen renderöinnin yhteydessä aina uusi komponentti. Tämä tekee komponentin optimoinnista Reactille mahdotonta.
 
-Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan, eli komponentin <i>App</i> määrittelevän funktion ulkopuolelle:
+Siirretäänkin komponentin <i>Display</i> määrittely oikeaan paikkaan eli komponentin <i>App</i> määrittelevän funktion ulkopuolelle:
 
 ```js
 const Display = props => <div>{props.value}</div>
@@ -1007,13 +1008,13 @@ const App = props => {
 
 ### Hyödyllistä materiaalia
 
-Internetissä on todella paljon Reactiin liittyvää materiaalia. Välillä ongelman muodostaa kuitenkin se, että käytämme kurssilla uutta Reactia, ja edelleen aika suuri osa internetistä löytyvästä tavarasta on meidän kannaltamme vanhentunutta ja käyttää <i>Class</i>-syntaksia komponenttien määrittelyyn.
+Internetissä on todella paljon Reactiin liittyvää materiaalia. Välillä ongelman muodostaa kuitenkin se, että käytämme kurssilla uutta Reactia, ja edelleen aika suuri osa Internetistä löytyvästä materiaalista on meidän kannaltamme vanhentunutta ja käyttää <i>Class</i>-syntaksia komponenttien määrittelyyn.
 
-Seuraavassa muutamia linkkejä:
+Linkkejä:
 
-- Reactin [dokumentaatio](https://reactjs.org/docs/getting-started.html) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia
-- Reactin sivuilla oleva [tutoriaali](https://reactjs.org/tutorial/tutorial.html) sen sijaan on aika huono
-- [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Molemmissa toki se ongelma, että ne käyttävät Class-komponentteja
+- Reactin [dokumentaatio](https://reactjs.org/docs/getting-started.html) kannattaa ehdottomasti käydä jossain vaiheessa läpi, ei välttämättä kaikkea nyt, osa on ajankohtaista vasta kurssin myöhemmissä osissa ja kaikki Class-komponentteihin liittyvä on kurssin kannalta epärelevanttia.
+- Reactin sivuilla oleva [tutoriaali](https://reactjs.org/tutorial/tutorial.html) sen sijaan on aika huono.
+- [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita, jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Molemmissa on toki se ongelma, että ne käyttävät Class-komponentteja.
 
 </div>
 
@@ -1026,7 +1027,7 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 <i>Samaa ohjelmaa kehittelevissä tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.</i>
 
-**VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
+**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4> 1.6: unicafe step1</h4>
 
@@ -1036,7 +1037,7 @@ Sovelluksen tulee näyttää jokaisen palautteen lukumäärä. Sovellus voi näy
 
 ![](../../images/1/13e.png)
 
-Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran ajan, esim. kun selain refreshataan, tilastot saavat hävitä.
+Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran ajan. Esim. kun sivu refreshataan, tilastot saavat hävitä.
 
 Kannattaa noudattaa samaa rakennetta kuin materiaalissa ja edellisessä tehtävässä, eli tiedoston <i>index.js</i> sisältö on seuraava:
 
@@ -1050,7 +1051,7 @@ ReactDOM.render(
 )
 ```
 
-Muun sovelluksen voi tehdä tiedostoon <i>App.js</i>. Tiedoston sisältö voi olla aluksi seuraava
+Muun sovelluksen voi tehdä tiedostoon <i>App.js</i>. Tiedoston sisältö voi olla aluksi seuraava:
 
 ```js
 import React, { useState } from 'react'
@@ -1108,7 +1109,7 @@ const App = () => {
 
 <h4>1.9: unicafe step4</h4>
 
-Muuta sovellusta siten, että numeeriset tilastot näytetään ainoastaan jos palautteita on jo annettu:
+Muuta sovellusta siten, että numeeriset tilastot näytetään ainoastaan, jos palautteita on jo annettu:
 
 ![](../../images/1/15e.png)
 
@@ -1192,7 +1193,7 @@ Sovellus voi näyttää esim. seuraavalta:
 
 ![](../../images/1/18a.png)
 
-**VAROITUS** create-react-app tekee projektista automaattisesti git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
+**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>1.13*: anekdootit step2</h4>
 
@@ -1202,7 +1203,7 @@ Laajenna sovellusta siten, että näytettävää anekdoottia on mahdollista ää
 
 **Huom:** kunkin anekdootin äänet kannattanee tallettaa komponentin tilassa olevan olion kenttiin tai taulukkoon. Muista, että tilan oikeaoppinen päivittäminen edellyttää olion tai taulukon <i>kopioimista</i>.
 
-Olio voidaan kopioida esim. seuraavasti:
+Olio voidaan kopioida esim. seuraavasti
 
 ```js
 const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
@@ -1222,7 +1223,7 @@ const copy = [...points]
 copy[2] += 1     
 ```
 
-Yksinkertaisempi ratkaisu lienee nyt taulukon käyttö. Googlaamalla löydät paljon vihjeitä sille, miten kannattaa luoda halutun mittainen taulukko, joka on täytetty nollilla esim. [tämän](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+Yksinkertaisempi ratkaisu lienee nyt taulukon käyttö. Googlaamalla löydät paljon vihjeitä sille, miten kannattaa luoda halutun mittainen taulukko, joka on täytetty nollilla, esim. [tämän](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
 
 <h4>1.14*: anekdootit step3</h4>
 
@@ -1232,6 +1233,6 @@ Ja sitten vielä lopullinen versio, joka näyttää eniten ääniä saaneen anek
 
 Jos suurimman äänimäärän saaneita anekdootteja on useita, riittää että niistä näytetään yksi.
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä, ja on aika pushata koodi GitHubiin ja merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

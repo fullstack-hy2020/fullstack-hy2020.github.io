@@ -172,7 +172,7 @@ const reducer = combineReducers({
 
 const store = createStore(reducer, composeWithDevTools())
 
-console.log(store.getState())
+console.log(store.getState()) // highlight-line
 
 ReactDOM.render(
   /*

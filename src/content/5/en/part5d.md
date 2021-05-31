@@ -738,6 +738,15 @@ it('login fails with wrong password', function() {
 <i>Should</i> should always be chained with <i>get</i> (or another chainable command).
 We used <i>cy.get('html')</i> to access the whole visible content of the application. 
 
+**NOTE:** Some CSS properties [behave differently on Firefox](https://github.com/cypress-io/cypress/issues/9349). If you run the tests with Firefox:
+  
+  ![running](https://user-images.githubusercontent.com/4255997/119015927-0bdff800-b9a2-11eb-9234-bb46d72c0368.png)
+  
+  then tests that involve, for example, `border-style`, `border-radius` and `padding`, will pass in Chrome or Electron, but fail in Firefox:
+  
+  ![borderstyle](https://user-images.githubusercontent.com/4255997/119016340-7b55e780-b9a2-11eb-82e0-bab0418244c0.png)
+
+
 ### Bypassing the UI
 
 <!-- Sovelluksemme testit näyttävät tällä hetkellä seuraavalta: -->
@@ -1232,9 +1241,9 @@ Make a test which checks that the blogs are ordered according to likes with the 
 
 This exercise might be a bit trickier. One solution is to find all of the blogs and then compare them in the callback function of a [then](https://docs.cypress.io/api/commands/then.html#DOM-element) command.
 
-If you use a `map` on an a selection from cypress, mind that it uses a [jQuery map](https://api.jquery.com/map/#map-callback). This means that the arguments of the callback function are swapped from an [ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (i.e. you use `(i, el) => {...}` instead of `(el, i) => {...}`).
+If you use a `map` on a selection from cypress, mind that it uses a [jQuery map](https://api.jquery.com/map/#map-callback). This means that the arguments of the callback function are swapped from an [ordinary Javascript map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) (i.e. you use `(i, el) => {...}` instead of `(el, i) => {...}`).
 
-Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait the number of likes to update in between all clicks.
+Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks.
 
 This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

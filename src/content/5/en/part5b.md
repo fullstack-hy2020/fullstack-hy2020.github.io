@@ -541,7 +541,7 @@ By default the form is not visible
 
 ![](../../images/5/13ae.png)
 
-It expands when button <i>new note</i> is clicked
+It expands when button <i>create new blog</i> is clicked
 
 ![](../../images/5/13be.png)
 

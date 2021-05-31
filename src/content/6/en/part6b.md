@@ -168,7 +168,7 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
-console.log(store.getState())
+console.log(store.getState()) // highlight-line
 
 ReactDOM.render(
   /*
@@ -422,13 +422,14 @@ When debugging, in addition to the browser extension we also have the software l
 npm install --save-dev redux-devtools-extension
 ```
 
-We'll have to slightly change the definition of the store to get the library up and running:
+We'll have to slightly change the definition of the store in `index.js` to get the library up and running:
 
 ```js
 // ...
 import { createStore, combineReducers } from 'redux'
 import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
 
+// ...
 import noteReducer from './reducers/noteReducer'
 import filterReducer from './reducers/filterReducer'
 
@@ -443,8 +444,8 @@ const store = createStore(
   composeWithDevTools()
   // highlight-end
 )
-
-export default store
+      
+// ...
 ```
 
 Now when you open the console, the <i>redux</i> tab looks like this:

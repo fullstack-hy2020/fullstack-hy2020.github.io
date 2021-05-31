@@ -991,7 +991,7 @@ There are plenty of things which can go wrong when we accept data from outside s
 Applications rarely work completely on their own, and we are forced to live with the fact that data from sources outside of our system cannot be fully trusted.
 When we receive data from an outside source, there is no way it can be already typed when we receive it. We need to make decisions on how to handle the uncertainty that comes with this.
 
-The disabled eslint rule was actually giving us a hint the the following assignment is a risky one:
+The disabled eslint rule was actually giving us a hint that the following assignment is a risky one:
 
 ```js
 const diary = diaryService.findById(Number(req.params.id));
