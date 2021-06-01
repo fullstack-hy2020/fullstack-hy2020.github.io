@@ -39,6 +39,8 @@ During this part you will earn credits based on the number of exercises you comp
 
 Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam), which <i>has to be completed</i> before you can earn credits from this part.
 
+**Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information.
+
 You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. Note that you must have completed at least one credit worth of exercises before you can download the certificate.
 
 ### Initializing the application

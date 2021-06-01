@@ -692,7 +692,18 @@ query {
 }
 ```
 
+### Submitting exercises and getting the credits
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-graphql) just like in the previous parts, but unlike previous parts, the submission goes to different "course instance". Remember that you have to finish at least 22 exercises to pass this part!
+
+Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
+
+![Submissions](../../images/11/21.png)
+
+Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
+
+**Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information.
+
+You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
 
 </div>

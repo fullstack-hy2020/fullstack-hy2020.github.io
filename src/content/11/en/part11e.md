@@ -159,7 +159,7 @@ Then you are done!
 
 ### Submitting exercises and getting the credits
 
-Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part!
+Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 7, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part!
 
 Your solutions are in two repositories (pokedex and your own project), and since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form!
 
@@ -168,6 +168,8 @@ Once you have completed the exercises and want to get the credits, let us know t
 ![Submissions](../../images/11/21.png)
 
 Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
+
+**Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information.
 
 You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
 
