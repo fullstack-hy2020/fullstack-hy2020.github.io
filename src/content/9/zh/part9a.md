@@ -126,8 +126,8 @@ func((result) => {
 
 <!-- First we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) called <i>CallsFunction</i>. -->
 首先，我们有一个名为<i>CallsFunction</i> 的[type 别名](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)声明。
-<!-- CallsFunction is a function type with one parameter <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameters and returns [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) value.  As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type. -->
-Callsfunction 是带有一个参数<i>callback</i> 的函数类型。 参数<i>callback</i> 是一个类型为 function 的函数，它接受一个字符串参数并返回[any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any)值。 正如我们将在本章节后面了解到的，<i>any</i> 是一种可以表示任何类型的“通配符”类型。 
+<!-- CallsFunction is a function type with one parameter <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameters and returns [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) value.  As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type. Also CallsFunction returns [void](https://www.typescriptlang.org/docs/handbook/basic-types.html#void) type.-->
+Callsfunction 是带有一个参数<i>callback</i> 的函数类型。 参数<i>callback</i> 是一个类型为 function 的函数，它接受一个字符串参数并返回[any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any)值。 正如我们将在本章节后面了解到的，<i>any</i> 是一种可以表示任何类型的“通配符”类型。 同时，CallFunctions 返回了 [void](https://www.typescriptlang.org/docs/handbook/basic-types.html#void) 类型。
 
 
 

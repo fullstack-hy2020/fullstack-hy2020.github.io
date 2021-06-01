@@ -349,7 +349,7 @@ const errorHandler = (error, request, response, next) => {
 ### Problems of Token-based authentication
 【基于Token 认证带来的问题】
 
-<!-- Token authentication is pretty easy to implement, but it contains one problem. Once the API user, eg. a React app gets a token, the API has a blind trust to the token holder. What if the access rights of the token holder should be revoken? -->
+<!-- Token authentication is pretty easy to implement, but it contains one problem. Once the API user, eg. a React app gets a token, the API has a blind trust to the token holder. What if the access rights of the token holder should be revoked? -->
 Token 认证实现起来十分容易，但是包含一个问题。一旦API 用户， 比如说React app 获得了一个token， API 会盲目地信任这个token的持有者。万一这个token 持有者的访问权限被回收了呢？
 
 <!-- There are two solutions to the problem. Easier one is to limit the validity period of a token: -->
@@ -420,7 +420,7 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-<!-- The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoken, token is usable only a limited amount of time. On the other hand, a short expiration time forces is a potential pain to a user, one must login to the system more frequently. -->
+<!-- The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoked, the token is usable only a limited amount of time. On the other hand, a short expiration time forces is a potential pain to a user, one must login to the system more frequently. -->
 过期时间设置得越短，该方案就越安全。所以如果token 给错了人， 或者用户对系统的访问权限需要被回收，token 需要给一个限定的时间。另一方面来说，较短的过期时间会给用户带来潜在的痛苦，因为他们需要更频繁地登录系统。
 
 <!-- The other solution is to save info about each token to backend database and to check for each API request if the access right corresponding to the token is still valid. With this scheme, the access rights can be revoked at any time. This kind of solution is often called a <i>server side session</i>. -->
