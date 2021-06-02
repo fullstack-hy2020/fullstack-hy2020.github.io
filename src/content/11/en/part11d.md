@@ -183,7 +183,7 @@ As you can see from the documentation by default your releases will receive a *m
 
 Modify the configuration above so that each new version is by default a _patch_ bump in the version number, so that by default, the last number is increased. 
 
-Remember that we want only to bump the version when the change happens to master branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-15)
+Remember that we want only to bump the version when the change happens to master branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-11-15)
  to prevent deployment on pull request releated events.
 
 Complete the workflow and try it out! 
