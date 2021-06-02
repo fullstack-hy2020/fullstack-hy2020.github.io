@@ -75,31 +75,31 @@ You can only take the exam after submitting enough exercises for five credits. I
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 -	Submit at least 127 exercises for parts 0-7. 
 - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097) 
--	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 138 exercises for parts 0-7. 
 - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
--	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7.
 -	Submit at least 22/26 exercises for part 8.
 - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
--	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
 By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
 -	Submit at least 24/27 exercises for part 9.
 - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
--	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
 By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native).
 -	Submit at least 25 exercises for part 10. 
 - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
--	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
 
@@ -107,7 +107,7 @@ By submitting all exercises for part 11 of the course on Continuous Integration/
 More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 - Submit all exercises for part 11. 
 - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
--	[Request credits for this part.](http://localhost:8000/en/part0/general_info/#how-to-get-your-credits)
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 ### How to get your credits
 
