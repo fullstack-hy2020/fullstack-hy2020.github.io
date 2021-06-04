@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 
-So far, we have followed the state management conventions recommended by React. We have placed the state and the methods for handling it to [the root component](https://reactjs.org/docs/lifting-state-up.html) of the application. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging. 
+So far, we have followed the state management conventions recommended by React. We have placed the state and the methods for handling it in [the root component](https://reactjs.org/docs/lifting-state-up.html) of the application. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging. 
 
 ### Flux-architecture
 
