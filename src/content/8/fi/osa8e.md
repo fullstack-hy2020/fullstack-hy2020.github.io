@@ -293,13 +293,13 @@ npm install @apollo/client subscriptions-transport-ws
 Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:
 
 ```js
+const httpLink = new HttpLink({
+  uri: 'http://localhost:4000',
+})
+
 const wsLink = new WebSocketLink({
   uri: `ws://localhost:4000/graphql`,
   options: { reconnect: true }
-})
-
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
 })
 ```
 
