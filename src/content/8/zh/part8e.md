@@ -741,8 +741,26 @@ query {
 }
 ```
 
-<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
-这是本课程这一章节的最后一个练习，现在是时候把你的代码推送到 GitHub，并将所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
+### Submitting exercises and getting the credits
+【提交练习并获得学分】
+
+<!-- Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-graphql) just like in the previous parts, but unlike previous parts, the submission goes to different "course instance". Remember that you have to finish at least 22 exercises to pass this part! -->
+这一章节的练习通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-graphql) 进行提交，就像前几个章节一样，但也有不同，这次提交会指向不同的“课程实例”。记住你需要完成至少22个练习来通过这个章节。
+
+<!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course: -->
+一旦你完成了练习，并想获得学分，通过练习提交系统让我们知道你已经完成了课程。
+
+![Submissions](../../images/11/21.png)
+
+Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
+注意“通过Moodle 完成考试” 是指的 [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam) ， 你需要完成后才能通过这章获得学分。
+
+<!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information. -->
+**注意** 你需要注册对应的课程章节来获得注册学分，查阅[这里](/zh/part0/general_info#parts-and-completion) 来获取更多信息
+
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.  -->
+完成这一章节，你可以下载认证，点击小旗图标即可。小旗图标代表认证的语言。
+
 
 </div>
 
