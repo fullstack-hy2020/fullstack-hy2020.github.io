@@ -78,66 +78,31 @@ However, note that the deadline for taking exam for University of Helsinki credi
 <!-- Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 练习完成的时间统计可以通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)进行查看。
 
-### Grading 
-【课程成绩】
+### Parts and completion
+【章节介绍与完成标准】
 
-<!-- The course can be taken worth 5-12 credits, depending on the number of submitted exercises.-->
+<!-- Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 12 credits.  -->
+全栈课程的学习包括核心课程部分以及多种扩展部分 。你可以通过完成这些内容的学习获得5-12个学分
 
-课程包含 5-12 个学分，这取决于所提交的练习的数量。
 
-<!-- The number of credits and the grade are determined by the number of submitted exercises, so also the exercises without stars count towards your final grade. -->
-
-学分的数量和最终成绩是由提交练习的数量决定的，也就是说没有星号的练习也会计入你的最终成绩。
-
-<!-- If you want university credits there is also a course exam, which must be passed. The exam does not count towards your grade. To [register](/zh/part0/基础知识/#sign-up-for-the-exam) for university credits that are provided by [Open university](https://studies.helsinki.fi/courses/cur/hy-CUR-136061621/Open_uni_Full_Stack_Web_Development_2021_3_12_cr), you must have a Finnish social security number. -->
-
-如果你想获得大学学分，还有一个必须通过的课程考试。 这次考试不会计入你的成绩。 学分是[开放大学](https://studies.helsinki.fi/courses/cur/hy-CUR-136061621/Open_uni_Full_Stack_Web_Development_2021_3_12_cr)所提供的，如果要 [申请](/zh/part0/基础知识/#sign-up-for-the-exam)大学学分，你必须有一个芬兰的社保号码。
-
-<!-- You can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade. For getting the course certificate, a Finnish social security number is not needed. -->
-
-一旦你完成了足够的练习后，满足成绩通过的条件，你可以从 [提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)下载课程证书。 获得课程证书，不需要芬兰社保号码。
-
-<!-- #### 3 credits  -->
-<!-- 【如何获得3学分】 -->
-
-<!-- For three credits, you must submit all compulsory exercises (without stars) for parts 0-3. -->
-
-<!-- 想要获得三个学分，你必须提交 0-3 章节的所有必修(不带星号)练习。 -->
-
-<!-- For university credits the 3 credit course also requires passing the course exam. The exam is done on Moodle. You can access Moodle through [the course page of the open university](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/zh/part0/基础知识/#sign-up-for-the-exam). -->
-
-<!-- 想要获得大学学分的话，3 个学分的课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦已经[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://courses.helsinki.fi/en/aytkt21009en/131840261)访问 Moodle 系统。 -->
-
-<!-- The last possible date for taking the exam is 10th January 2021. <b>Note that you must sign up for the exam on 9th January 2021 at the latest. It is also possible to take the exam in the 2021 edition of the course starting 15th March 2021.</b> -->
-
-<!-- 最后一次的考试时间是 2021 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2021 年 1 月 9 日报名参加考试**。 您也可以参加2021学年的考试，2021年的开课时间是2021年3月15日。 -->
-
-<!-- Exam results can be found from the "my submissions" tab of the submission system no later than 4 weeks after taking the exam (exams might be marked slower during July). Remember to save your student number to the submission system! -->
-
-<!-- 考试结果可以在考试后 4 周内从提交系统的“我的提交”标签中找到(7 月份的考试可能会较晚)。 记得在提交系统中保存你的学号！ -->
-
-<!-- The three credit course is graded pass/fail. -->
-
-<!-- 3学分的课程只有及格/不及格两种状态。 -->
-
-<!-- <i>For the course certificate, you do not need to attend the course exam or register to the open university course.</i> -->
-
-<!-- 如果只想获得课程证书，你不需要参加课程考试或注册公开大学课程。 -->
-
-<!-- The three credit course can later be extended to the 5-9 credit version. If you are working towards 5-9 credits from the beginning, there is no need to take the 3 credit course exam. -->
-
-<!-- 这 3 学分课程以后可以拓展到 5-9 学分的版本。 如果你从一开始就是朝着 5-9 学分努力的，那就没有必要参加 3 学分的课程考试。 -->
-
-#### 5-7 credits
-【如何获得5-7学分】
-
-<!-- For 5-7 credits the number of credits and the grade are based on the total number of submitted exercises for <b>parts 0-7</b> (this includes the starred exercises). -->
-
-如果想获得 5-7 学分，学分数和最终成绩是根据第 0-7 章节提交的练习(包括标星练习)总数计算的。
+#### Parts 0-5 (core course) - Full Stack Web Development (5 cr, AYCSM141081en)
+【0-5章（核心课程）-全栈 Web 开发(5 cr, AYCSM141081en)
+<!-- The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk). -->
+本课程取得的学分以及成绩是依照提交0-7章中练习的数量（包括带星号的练习题）。
 
 <!-- Credits and grades are calculated as follows: -->
+学分以及成绩的计算标准如下：
 
-学分和最终成绩计算方法如下表所示:
+
+<!-- | exercises    | credits        | grade    |
+| ------------ | :------------: | :------: |
+| 138          |       7        | 5        |
+| 127          |       6        | 5        |
+| 116          |       5        | 5        |
+| 105          |       5        | 4        |
+| 94           |       5        | 3        |
+| 83           |       5        | 2        |
+| 72           |       5        | 1        | -->
 
 | 完成练习数 | 学分数 | 成绩 |
 | ---------------- | :------------: | :--------: |
@@ -149,57 +114,107 @@ However, note that the deadline for taking exam for University of Helsinki credi
 | 83               |       5        |     2      |
 | 72               |       5        |     1      |
 
-<!-- The university credits also requires passing the course exam. The exam is done on Moodle, which can be accessed via the [Open University course page](https://courses.helsinki.fi/en/aytkt21009en/131840261) once you have [signed up](/en/part0/general_info/#sign-up-for-the-exam) for the exam. -->
+<!-- If wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam. A Finnish social security number is required.  -->
 
-如果想要获得大学学分，5-9 学分课程也要求通过课程考试。 考试是在 Moodle 上完成的。 一旦[注册](/zh/part0/基础知识/#sign-up-for-the-exam)，就可以通过[开放大学的课程页面](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021)访问 Moodle 系统。
+如果你想要获得大学的学分，必须通过考试。考试不直接算到你的期末成绩，但你必须通过。通过Moodle 学习环境来完成考试，Moodle 可以通过 [开放大学](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) 页面进入，前提是要[注册](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) 这场考试。芬兰的社保号码也是需要的。
 
-<!-- The last possible date for taking the exam is 10 January 2022. <b>Note that you must sign up for the exam by 9 January 2022, at the latest.</b> -->
+<!-- Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required. -->
+如果你完成了足够的练习来通过等级认证，你可以通过[提交系统]](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) 下载课程认证书。不需要芬兰社保号码。
 
-最后一次的考试时间是 2022 年 1 月 10 日。 请注意，这也就是说您**最晚必须在 2022 年 1 月 9 日报名参加考试**。
+<!-- The last possible date for taking the exam is 10 January 2022. **Note that you must sign up for the exam by 9 January 2022, at the latest.** -->
+参加考试的最终时间是2022 年1月10日。**注意也就是说你必须在2022年1月9日前注册考试**。
 
 <!-- You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-12 credits and does not count towards your grade. -->
+你只有在提交了足够的练习获得5学分后才能参加考试。不推荐提交了恰好数量的 练习后立即参加考试。考试同样和5-12学分一样，并不会算到你的最终成绩中。
 
-你必须提交 5 学分的足够的练习数才能参加考试。 实践说明，在提交了刚满足数量的练习之后就立即参加课程考试是十分不明智的。 5-12 学分的考试也是一样，不计入你的成绩。
+<!-- <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i> -->
+如果只是想要获得课程的认证证书，不必参加考试或者注册开放大学。
 
-<!-- Exam results can be found from the "my submissions" tab of the submission system not later than 4 weeks after taking the exam (exams might be marked slower during July). Remember to save your student number to the submission system. -->
+#### Part 6 - Full Stack Web Development, extension 1 (1 cr, AYCSM141082en)
+【第六章-全栈Web开发，扩展1(1 cr, AYCSM141082en)】
 
-<!-- 考试结果可以在考试后 4 周内从提交系统的“我的提交”标签中找到(7 月份的考试可能会较晚)。 记得在提交系统中保存你的学号！ -->
+<!-- By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.  -->
+在提交了0-7章的关于核心课程的至少127个练习后，你可以通过这个扩展来获得一个额外的学分。
 
-<!-- <i>For the course certificate, you do not need to attend to the course exam or register to the open university.</i> -->
+<!-- -	Submit at least 127 exercises for parts 0-7.  -->
+<!-- - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097)  -->
+<!-- -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
-如果只想获得课程证书，你不需要参加课程考试或注册公开大学课程。
+- 提交0-7章的至少127个练习
+- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097) 
+-	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-#### 8 and 9 credits
-【如何获得8-9个学分】
+#### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
+【第七章 - 全栈Web开发，扩展2(1 cr, AYCSM141083en)】
+<!-- By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. -->
+在提交了0-7章的关于核心课程的至少138个练习后，你可以通过这个扩展来获得一个额外的学分。
 
+
+<!-- - Submit at least 138 exercises for parts 0-7. 
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
+
+- 提交0-7章的关于核心课程的至少138个练习
+- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
+-	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+
+#### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
+【第八章 - 全栈Web开发，GraphQL(1 cr, AYCSM14113)】
 <!-- By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7. -->
+通过提交第八章的至少22/26个练习，关于GraphQL ，你可以获得一个额外的学分。第八章可以在第五章学习完后随时学习，因为它是独立于第6和第7章的。
 
-通过提交第 8 章节 GraphQL 的至少 22/26 个练习，就可以获得一个额外的学分。 第 8 章节可以在学完第 5 章节之后的任何时候完成，因为其内容独立于第 6 章节和第 7 章节。
+<!-- -	Submit at least 22/26 exercises for part 8.
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
+- 提交第8章的至少22/26个练习。
+- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
+-	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+
+#### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
+【第九章-全栈Web开发：TypeScript (1 cr, AYCSM14110)】
 <!-- By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9. -->
+通过提交第九章的至少24/27个练习，关于TypeScript ，你可以获得一个额外的学分。推荐在学习完0-7章后再学习第9章。
 
-通过提交第 9 章节 TypeScript 的至少 24/27 个练习，就可以获得一个额外的学分。 建议在完成 0-7 章节的所有内容后，再学习第 9 章节。
+-	Submit at least 24/27 exercises for part 9.
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-<!-- Exercises in parts 8 and 9 do not count towards the grade for the 5-7 credit course. -->
+-	提交第9章的至少24/27个练习。
+- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
+-	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-第 8 和章节第 9 章节的练习不计入 5-7 学分课程的成绩。
+#### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
+【第十章-全栈Web开发： React Native (2 cr, AYCSM14111)】
+<!-- By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native). -->
 
-#### React Native part's credits
-React Native 章节的学分
+通过提交第十章的25个练习，关于 React Native ，你可以获得两个额外的学分。这个章节的预备知识以及学分可以在[第10章](/zh/part10/introduction_to_react_native) 中找到。
 
-<!-- By submitting exercises for part 10 of the course on React Native, you can earn two additional credits. Earning two credits requires you to submit at least 25 exercises. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native). -->
 
-通过提交第10章的练习，React Native， 你可以获得 2学分。获得2学分需要你提交至少25个练习。关于该章节更多的前置要求，练习提交和学分获取规则可以参考 [part 10](/zh/part10/introduction_to_react_native)。
+<!-- -	Submit at least 25 exercises for part 10. 
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
-#### Continuous integration part's credits
-持续集成章节的学分
+-	提交第10章的至少25个练习. 
+- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
+-	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-<!-- By submitting exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. Earning the credit requires you to submit all of the 22 exercises of this part. -->
-通过提交11章的练习，持续集成与持续交付，你可以获得额外的一个学分。获得学分需要你提交该章节的所有22个章节。
+#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
+【第11章-全栈Web开发：持续集成/持续交付(1 cr, AYCSM14112)】
+
+<!-- By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit.  -->
+通过提交11章的所有练习，关于持续集成与持续交付，你可以获得额外的1个学分。
 
 <!-- More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11). -->
-其他关于该章节的要求和练习提交可以查看[第11章](/zh/part11)
+这个章节的预备知识以及学分可以在[第11章](/zh/part11) 中找到。
 
+<!-- - Submit all exercises for part 11. 
+- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
+
+- 提交11章的所有练习
+- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
+-	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 ### How to get your credits 
 【如何获得学分】
@@ -223,6 +238,10 @@ React Native 章节的学分
 
 <!-- You can view your grade in Weboodi approximately four weeks after notifying us. -->
 提醒我们后，你在大约四周的时间就能在网页上看到你的成绩了。
+
+<!-- **Please note** that in order to get university credits you need a registration for each completed part, please see [here](/en/part0/general_info#parts-and-completion) for more info about registration. -->
+
+**请注意** ， 为了获得大学的学分，你需要为每个章节进行注册，请看 [这里](/zh/part0/general_info#parts-and-completion) 来阅读注册的详细信息。
 
 ### Course certificate 
 【结业证书】
@@ -315,7 +334,7 @@ React Native 章节的学分
 
 <!-- - Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261) 
 Enroll in the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)-->
-- 在2022年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)来加入这门课程。
+- 在2022年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=hy-CUR-143228359)来加入这门课程。
 <!-- - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day.  - 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration. 3. User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.-->
