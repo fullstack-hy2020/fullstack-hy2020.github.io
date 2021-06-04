@@ -269,7 +269,7 @@ if: ${{ github.event_name == 'push' }}
 
 
 <!-- Remember that we want only to bump the version when the change happens to main branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-15) to prevent deployment on pull request releated events. -->
- 请记住，我们只想在主分支发生变化时撞版本！所以像[练习11.15](/zh/part11/keeping_green#exercises-11-14-15)中那样，添加一个类似的<code>if</code>条件来防止版本冲突以防止对PR进行部署时发生的相关事件。
+ 请记住，我们只想在主分支发生变化时撞版本！所以像[练习11.15](/zh/part11/keeping_green#exercises-11-14-11-15)中那样，添加一个类似的<code>if</code>条件来防止版本冲突以防止对PR进行部署时发生的相关事件。
 
 
 <!-- Complete the workflow and try it out!  -->

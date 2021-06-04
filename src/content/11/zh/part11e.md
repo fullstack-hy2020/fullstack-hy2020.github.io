@@ -240,8 +240,8 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 ### Submitting exercises and getting the credits
 提交练习并获得学分
 
-<!-- Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 9, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part! -->
-这一部分的练习和前面的部分一样是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd)提交的，但是结合0到9部分，提交的是不同的“课程实例”。记住，你必须完成所有的练习才能通过这一部分！
+<!-- Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unike parts 0 to 7, the submission goes to different "course instance". Remember that you have to finish <i>all the exercises</i> to pass this part! -->
+这一部分的练习和前面的部分一样是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd)提交的，但是结合0到7章节，提交的是不同的“课程实例”。记住，你必须完成所有的练习才能通过这一部分！
 
 <!-- Your solutions are in two repositories (pokedex and your own project), and since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form! -->
 您的解决方案位于两个代码库(pokedex 和您自己的项目)中，由于您只能向提交系统返回一个代码库，因此将另一个代码库与您填写的代码库的链接放到提交表单中！
@@ -254,6 +254,10 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 
 <!-- Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part. -->
 请注意，“在 Moodle 完成的考试”指的是全堆栈公开课程的考试 [Full Stack Open course's exam](/zh/part0/general_info#sign-up-for-the-exam)，必须完成后，你才能从这一部分获得学分。
+
+
+<!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information. -->
+**注意** 你需要注册对应的课程章节来获得注册学分，查阅[这里](/zh/part0/general_info#parts-and-completion) 来获取更多信息
 
 <!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.  -->
 您可以通过单击其中一个标志图标来下载完成此部分的证书。标志图标对应于证书的语言。

@@ -1576,3 +1576,23 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 扩展您的解决方案，使其支持所有的条目类型，并显示错误消息，如果一些必需的值丢失或格式不正确。 您不需要关心服务器响应中可能出现的错误。
 
 </div>
+
+### Submitting exercises and getting the credits
+
+Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-typescript) just like in the previous parts, but unlike previous parts, the submission goes to different "course instance". Remember that you have to finish at least 24 exercises to pass this part!
+
+这一章节的练习通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-typescript) 进行提交，就像前几个章节一样，但也有不同，这次提交会指向不同的“课程实例”。记住你需要完成至少24个练习来通过这个章节。
+
+<!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course: -->
+一旦你完成了练习，并想获得学分，通过练习提交系统让我们知道你已经完成了课程。
+
+![Submissions](../../images/11/21.png)
+
+<!-- Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part. -->
+注意“通过Moodle 完成考试” 是指的 [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam) ， 你需要完成后才能通过这章获得学分。
+
+<!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information. -->
+**注意** 你需要注册对应的课程章节来获得注册学分，查阅[这里](/zh/part0/general_info#parts-and-completion) 来获取更多信息
+
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.  -->
+完成这一章节，你可以下载认证，点击小旗图标即可。小旗图标代表认证的语言。
