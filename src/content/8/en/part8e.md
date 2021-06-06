@@ -551,12 +551,12 @@ friendOf: async (root) => {
 and considering we have 5 persons saved, and we query `allPersons` without `phone` as argument, we see an absurd amount of queries like below.
 
 <pre>
-Person.find
-User.find_v1
-User.find_v1
-User.find_v1
-User.find_v1
-User.find_v1
+Person.find_v1
+User.find
+User.find
+User.find
+User.find
+User.find
 </pre>
 
 NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
