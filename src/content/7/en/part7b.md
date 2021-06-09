@@ -325,7 +325,7 @@ We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-
 
 Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier.
 
-One natural place to save the custom hooks of your application is in the <i>/src/hooks/index.js</i> file.
+One natural place to save the custom hooks of your application is in the <i>/src/hooks.js</i> file.
 
 
 If you use the [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) instead of the default export:
