@@ -249,6 +249,11 @@ To create a new production build of the frontend without extra manual work, let'
 }
 ```
 
+If your remote repository is not on GitHub, omit the `&& git push` part in this line:
+```json
+"deploy:full": "npm run build:ui && git add . && git commit -m uibuild && npm run deploy", 
+```
+
 The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to heroku. 
 
 _npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository. 
