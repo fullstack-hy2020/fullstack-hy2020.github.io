@@ -66,7 +66,7 @@ Asennetaan myös axios projektiin
 npm install axios
 ```
 
-Muutetaan <i>noteReducer</i>:issa tapahtuva muistiinpanojen tilan alustusta, siten että oletusarvoisesti muistiinpanoja ei ole:
+Muutetaan <i>noteReducer</i>:issa tapahtuvaa muistiinpanojen tilan alustusta siten, että oletusarvoisesti muistiinpanoja ei ole:
 
 ```js
 const noteReducer = (state = [], action) => {
