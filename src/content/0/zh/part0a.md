@@ -114,7 +114,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 | 83               |       5        |     2      |
 | 72               |       5        |     1      |
 
-<!-- If wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam. A Finnish social security number is required.  -->
+<!-- If you wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam. A Finnish social security number is required.  -->
 
 如果你想要获得大学的学分，必须通过考试。考试不直接算到你的期末成绩，但你必须通过。通过Moodle 学习环境来完成考试，Moodle 可以通过 [开放大学](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) 页面进入，前提是要[注册](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) 这场考试。芬兰的社保号码也是需要的。
 
@@ -137,7 +137,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 在提交了0-7章的关于核心课程的至少127个练习后，你可以通过这个扩展来获得一个额外的学分。
 
 <!-- -	Submit at least 127 exercises for parts 0-7.  -->
-<!-- - [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097)  -->
+<!-- - [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097)  -->
 <!-- -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交0-7章的至少127个练习
@@ -151,7 +151,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 
 <!-- - Submit at least 138 exercises for parts 0-7. 
-- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
+- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交0-7章的关于核心课程的至少138个练习
@@ -164,7 +164,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 通过提交第八章的至少22/26个练习，关于GraphQL ，你可以获得一个额外的学分。第八章可以在第五章学习完后随时学习，因为它是独立于第6和第7章的。
 
 <!-- -	Submit at least 22/26 exercises for part 8.
-- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
+- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交第8章的至少22/26个练习。
@@ -177,7 +177,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 通过提交第九章的至少24/27个练习，关于TypeScript ，你可以获得一个额外的学分。推荐在学习完0-7章后再学习第9章。
 
 -	Submit at least 24/27 exercises for part 9.
-- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
+- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 -	提交第9章的至少24/27个练习。
@@ -192,7 +192,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 
 <!-- -	Submit at least 25 exercises for part 10. 
-- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
+- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 -	提交第10章的至少25个练习. 
@@ -209,7 +209,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 这个章节的预备知识以及学分可以在[第11章](/zh/part11) 中找到。
 
 <!-- - Submit all exercises for part 11. 
-- [Enrol in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
+- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交11章的所有练习
@@ -342,7 +342,7 @@ Enroll in the course through Open University by 9 Jan 2022 [here](https://www.av
 - 用户ID：你是否在赫尔辛基大学或其他的[HAKA 成员学院](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)学习？
   - 如果答案是yes，使用你的用户名和密码登录Moodle。
  <!-- - If no, please activate your University of Helsinki user ID to access Moodle. You will receive more information on the user ID after registration through email.
-- Sign into the Moodle space with your University of Helsinki / HAKA user ID and the enrolment key. -->
+- Sign into the Moodle space with your University of Helsinki / HAKA user ID and the enrollment key. -->
   - 如果答案是no，请激活你的赫尔辛基大学用户ID来访问Moodle。你会在邮箱注册后收到更多关于用户ID的信息。
 - 通过你的赫尔辛基大学/HAKA用户名ID与密码登录Moodle 空间。
 <!-- - After course enrollment, save your University of Helsinki student ID number to the [my submissions tab](https://studies.cs.helsinki.fi/stats/myinfo) in the submission system. -->

@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- So far, we have followed the state management conventions recommended by React. We have placed the state and the methods for handling it to [the root component](https://reactjs.org/docs/lifting-state-up.html) of the application. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging. -->
+<!-- So far, we have followed the state management conventions recommended by React. We have placed the state and the methods for handling it in to [the root component](https://reactjs.org/docs/lifting-state-up.html) of the application. The state and its handler methods have then been passed to other components with props. This works up to a certain point, but when applications grow larger, state management becomes challenging. -->
 
 到目前为止，我们已经遵循了 React 推荐的状态管理约定。 我们已经将状态和处理它的方法放置到应用程序的[根组件](https://reactjs.org/docs/lifting-state-up.html) 中。 然后，状态及其处理程序方法通过属性传递给其他组件。 这在一定程度上是可行的，但是当应用程序变得更大时，状态管理就变得极具挑战性。
 
