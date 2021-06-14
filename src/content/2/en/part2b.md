@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Let's continue expanding our application by allowing users to add new notes. 
+Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy/part2-notes/tree/part2-1). 
 
 In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
 
