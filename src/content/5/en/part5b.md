@@ -549,7 +549,7 @@ The form closes when a new blog is created.
 
 #### 5.6 Blog list frontend, step6
 
-Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component. 
+Separate the form for creating a new blog into its own component (if you have not already done so), and pass all the states required for creating a new blog as props to this component. 
 
 The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
