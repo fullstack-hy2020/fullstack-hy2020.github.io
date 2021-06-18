@@ -62,9 +62,7 @@ Hagamos un pequeño cambio en el objeto <i>scripts</i>:
 ```
 
 
-A continuación, creemos la primera versión de nuestra aplicación agregando un archivo index.js a la raíz del proyecto con el siguiente código:
-
-Next, let's create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:
+A continuación, creemos la primera versión de nuestra aplicación agregando un archivo <i>index.js</i> a la raíz del proyecto con el siguiente código:
 
 ```js
 console.log('hello world')
