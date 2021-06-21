@@ -21,7 +21,7 @@ JavaScript 在过去的几年里发展非常迅速，在本课程中，我们将
 如今，最流行的转译方法是使用 [Babel](https://babeljs.io/)。 在使用 create-React-app 创建的 React 应用中转译是自动配置好的。 我们将在本课程的[第7章节](/zh/part7)中仔细研究转译的配置。
 
 <!-- [Node.js](https://nodejs.org/en/) is a JavaScript runtime environment based on Google's [chrome V8](https://developers.google.com/v8/) JavaScript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some JavaScript using Node. It is expected that the version of Node.js installed on your machine is at least version <i>10.18.0.</i>. The latest versions of Node already understand the latest versions of JavaScript, so the code does not need to be transpiled. -->
-[Node.js](https://nodejs.org/en/)是一个基于谷歌的 [chrome V8](https://developers.google.com/v8/) 引擎的 JavaScript 运行时环境，可以在任何地方工作，从服务端到移动端。 让我们练习使用 Node 编写一些 JavaScript 您机器上安装的 Node.js 版本至少是  v14.8.0。 最新版本的 Node 能够理解 JavaScript 最新版本的特性，因此代码不需要被转译。
+[Node.js](https://nodejs.org/en/)是一个基于谷歌的 [chrome V8](https://developers.google.com/v8/) 引擎的 JavaScript 运行时环境，可以在任何地方工作，从服务端到移动端。 让我们练习使用 Node 编写一些 JavaScript。 您机器上安装的 Node.js 版本至少是  v14.8.0。 最新版本的 Node 能够理解 JavaScript 最新版本的特性，因此代码不需要被转译。
 
 <!-- The code is written into files ending with <i>.js</i> and are run by issuing the command <em>node name\_of\_file.js</em> -->
 
