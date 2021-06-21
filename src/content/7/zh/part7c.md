@@ -32,7 +32,7 @@ lang: zh
 
 
 <!-- Let's start by taking a look at Bootstrap with the help of the [react-bootstrap](https://react-bootstrap.github.io/) package. -->
-让我们首先来看一下通过[react-Bootstrap](https://react-Bootstrap.github.io/)包的帮助引导程序。
+让我们首先来看看以 [react-Bootstrap] (https://react-Bootstrap.github.io/) 包的形式封装的 Bootstrap。
 
 <!-- Let's install the package with the command: -->
 让我们用如下命令来安装这个包:
@@ -260,7 +260,7 @@ const App = () => {
 
 
 <!-- Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes. -->
-引导程序和大多数现有的 UI 框架产生[响应式](https://en.wikipedia.org/wiki/responsive_web_design)设计，这意味着产生的应用可以在各种不同的屏幕尺寸上渲染良好的效果。
+Bootstrap 和大多数现有的 UI 框架产生[响应式](https://en.wikipedia.org/wiki/responsive_web_design)设计，这意味着产生的应用可以在各种不同的屏幕尺寸上渲染良好的效果。
 
 <!-- Chrome developer tools makes it possible to simulate using our application in the browser of different mobile clients: -->
 开发工具可以在不同移动客户端的浏览器中模拟使用我们的应用:
@@ -574,7 +574,7 @@ _Button_ 组件渲染为这样，它的根组件是 react-router-dom _Link_ ，�
 <!-- The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.  -->
 React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得哪个更好看。 
 <!-- I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.  -->
-我自己并没有使用很多MaterialUI，但我的第一印象是积极的。 它的文档比起React引导程序要好一点。
+我自己并没有使用很多MaterialUI，但我的第一印象是积极的。 它的文档比起React-bootstrap的要好一点。
 <!-- According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018: -->
 <!-- The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.  I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018 and has since that widened the gap: -->
 
@@ -607,7 +607,7 @@ react-bootstrap 与 MaterialUI 的差别并不大。取决于你更喜欢那种�
 从这个例子来看，使用 React Bootstrap 库的好处并不明显。
 
 <!-- In addition to making the frontend code more compact and readable, another benefit of using React UI framework libraries is that they include the JavaScript that is needed to make specific components work. Some Bootstrap components require a few unpleasant [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) that we would prefer not to include in our React applications. -->
-除了使前端代码更加紧凑和可读，使用 React UI 框架库的另一个好处是它们包含了使特定组件工作所需的 JavaScript。 一些引导程序组件需要一些讨厌的依赖项(JavaScript 依赖项 [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js)) ，我们不希望在 React 应用中包含这些。
+除了使前端代码更加紧凑和可读，使用 React UI 框架库的另一个好处是它们包含了使特定组件工作所需的 JavaScript。 一些 Bootstrap 组件需要一些讨厌的依赖项(JavaScript 依赖项 [JavaScript dependencies](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js)) ，我们不希望在 React 应用中包含这些。
 
 <!-- Some potential downsides to using UI frameworks through integration libraries instead of using them "directly", are that integration libraries may have unstable API's and poor documentation. The situation with [Semantic UI React](https://react.semantic-ui.com) is a lot better than with many other UI frameworks, as it is an official React integration library. -->
 通过集成库而不是“直接”使用 UI 框架的一些潜在缺点是，集成库可能具有不稳定的 API 和糟糕的文档。 与其他 UI 框架相比，[Semantic UI React](https://React.Semantic-UI.com)的情况要好得多，因为它是一个官方的 React 集成库。
