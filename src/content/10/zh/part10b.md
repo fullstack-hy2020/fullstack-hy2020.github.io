@@ -144,7 +144,7 @@ export default App;
 
 你可以通过摇一摇你的设备来访问开发者目录，或者选择IOS模拟器中硬件目录的“摇一摇动作”。你也可以在运行中的iOS模拟器中通过键盘快捷键 <em>⌘D</em>，或者运行中的Android 模拟器中使用 <em>⌘M</em> 快捷键，当然这是Mac 系统， Windows 和Linux 系统使用 <em>Ctrl+M</em> 。
 
-Once the developer menu is open, simply press "Reload" to reload the application. After the application has been reloaded, automatic reloads should work without the need for a manual reload.
+<!-- Once the developer menu is open, simply press "Reload" to reload the application. After the application has been reloaded, automatic reloads should work without the need for a manual reload.-->
 当开发者目录打开后，只需要点击"Reload" 来重加载应用即可。在应用重加载后，自动重加载功能应该又开始生效了，而不需要手动重加载了。
 
 </div>
