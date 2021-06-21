@@ -1189,7 +1189,7 @@ const App = () => {
 <!-- Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**. -->
 记住，在一次提交中提交一章节的所有练习。 一旦你提交了一章节的解决方案，你就不能再向这个章节提交更多的练习了。
 
-<i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i>
+<!-- <i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i> -->
 有些练习是针对同一个应用的。 在这些情况下，只提交应用的最终版本就足够了。 如果您愿意，您可以在每次完成练习后进行commit，但这不是强制性的。 
 
 <!-- **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application. -->
