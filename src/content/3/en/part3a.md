@@ -967,9 +967,40 @@ What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> cr
 #### 3.1: Phonebook backend step1
 
 
-Implement a Node application that returns a hardcoded list of phonebook entries from the address <http://localhost:3001/api/persons>:
+Implement a Node application that returns a hardcoded list of phonebook entries from the address <http://localhost:3001/api/persons>.
+  
 
+Data:
+  
+```js
+[
+    { 
+      "id": 1,
+      "name": "Arto Hellas", 
+      "number": "040-123456"
+    },
+    { 
+      "id": 2,
+      "name": "Ada Lovelace", 
+      "number": "39-44-5323523"
+    },
+    { 
+      "id": 3,
+      "name": "Dan Abramov", 
+      "number": "12-43-234345"
+    },
+    { 
+      "id": 4,
+      "name": "Mary Poppendieck", 
+      "number": "39-23-6423122"
+    }
+]
+```
+
+Output in browser after GET request:
+  
 ![](../../images/3/22e.png)
+
 
 
 Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string. 
@@ -979,6 +1010,7 @@ The application must be started with the command _npm start_.
 
 
 The application must also offer an _npm run dev_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
+ 
 
 
 #### 3.2: Phonebook backend step2
