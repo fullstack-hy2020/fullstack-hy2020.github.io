@@ -612,8 +612,8 @@ const palindrome = require('../utils/for_testing').palindrome
 }
 ```
 
-<!-- First we execute the code to be tested, meaning that we generate a palindrome for the string <i>react</i>. Next we verify the results with the [expect](https://facebook.github.io/jest/docs/en/expect.html#content) function. Expect wraps the resulting value into an object that offers a collection of <i>matcher</i> functions, that can be used for verifying the correctness of the result. Since in this test case we are comparing two strings, we can use the [toBe](https://facebook.github.io/jest/docs/en/expect.html#tobevalue) matcher. -->
-首先执行要测试的代码，这意味着为字符串<i>react</i> 生成一个回文。 接下来，我们用[expect](https://facebook.github.io/jest/docs/en/expect.html#content)函数验证结果。 Expect 将结果值封装到一个对象中，该对象提供一组<i>matcher</i> 函数，可用于验证结果的正确性。 因为在这个测试用例中，我们要比较两个字符串，所以我们可以使用[toBe](https://facebook.github.io/jest/docs/en/expect.html#tobevalue)匹配器。
+<!-- First we execute the code to be tested, meaning that we generate a palindrome for the string <i>react</i>. Next we verify the results with the [expect](https://jestjs.io/docs/expect#expectvalue) function. Expect wraps the resulting value into an object that offers a collection of <i>matcher</i> functions, that can be used for verifying the correctness of the result. Since in this test case we are comparing two strings, we can use the [toBe](https://jestjs.io/docs/expect#tobevalue) matcher. -->
+首先执行要测试的代码，这意味着为字符串<i>react</i> 生成一个回文。 接下来，我们用[expect](https://jestjs.io/docs/expect#expectvalue)函数验证结果。 Expect 将结果值封装到一个对象中，该对象提供一组<i>matcher</i> 函数，可用于验证结果的正确性。 因为在这个测试用例中，我们要比较两个字符串，所以我们可以使用[toBe](https://jestjs.io/docs/expect#tobevalue)匹配器。
 
 <!-- As expected, all of the tests pass: -->
 正如所料，所有的测试都通过了:
@@ -799,11 +799,11 @@ describe('total likes', () => {
 <!-- You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/zh/part3/将数据存入_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting). -->
 在编写测试时，您肯定会遇到问题。 还记得我们在第3章节中学到的关于[debugging](/zh/part3/将数据存入_mongo_db#debugging-node-applications)的知识吗。 即使在测试执行期间，也可以使用 console.log 将内容打印到控制台。 你甚至可以在运行测试的时候使用调试器，你可以在这里找到相关的指示 [here](https://jestjs.io/docs/en/troubleshooting)。
 
-<!-- **NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout) method. -->
+<!-- **NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://jestjs.io/docs/api#testonlyname-fn-timeout) method. -->
 注意: 如果某个测试失败，那么建议在修复问题时只运行该测试。 您可以使用[only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout)方法运行单个测试。
 
 <!-- Another way of running a single test (or describe block) is to specify the name of the test to be run with the [-t](https://jestjs.io/docs/en/cli.html) flag: -->
-运行单个测试(或描述块)的另一种方法是指定使用[-t](https://jestjs.io/docs/en/cli.html)标志运行，后面跟上测试的名称:
+运行单个测试(或描述块)的另一种方法是指定使用[-t](https://jestjs.io/docs/api#testonlyname-fn-timeout)标志运行，后面跟上测试的名称:
 
 ```js
 npm test -- -t 'when list has only one blog, equals the likes of that'
