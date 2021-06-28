@@ -501,7 +501,10 @@ module.exports = app
 ```
 
 <!-- eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan. -->
-after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database.
+after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):
+```js
+  npm run start:test
+```
 
 <!-- Backendin testejä varten muokattu koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>. -->
 The modified backend code can be found from [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
