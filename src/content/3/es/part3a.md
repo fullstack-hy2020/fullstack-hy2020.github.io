@@ -268,9 +268,7 @@ La dependencia también se agrega a nuestro archivo <i>package.json</i>:
 ```
 
 
-El código fuente de la dependencia se instala en el directorio node_modules ubicado en la raíz del proyecto. Además de express, puede encontrar una gran cantidad de otras dependencias en el directorio:
-
-The source code for the dependency is installed to the <i>node\_modules</i> directory located in the root of the project. In addition to express, you can find a great amount of other dependencies in the directory:
+El código fuente de la dependencia se instala en el directorio <i>node_modules</i> ubicado en la raíz del proyecto. Además de express, puede encontrar una gran cantidad de otras dependencias en el directorio:
 
 ![](../../images/3/4.png)
 
