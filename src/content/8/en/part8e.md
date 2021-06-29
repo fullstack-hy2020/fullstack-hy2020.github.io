@@ -305,12 +305,6 @@ ReactDOM.render(
 )
 ```
 
-For this to work, we have to install some dependencies:
-
-```bash
-npm install @apollo/client subscriptions-transport-ws
-```
-
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
 
 ```js
