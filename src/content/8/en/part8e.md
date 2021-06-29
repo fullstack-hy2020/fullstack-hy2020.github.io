@@ -248,7 +248,7 @@ import {
   ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
   split  // highlight-line
 } from '@apollo/client'
-import { setContext } from 'apollo-link-context'
+import { setContext } from '@apollo/client/link/context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
