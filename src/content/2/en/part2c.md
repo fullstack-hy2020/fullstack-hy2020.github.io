@@ -529,7 +529,7 @@ The code for the application, as described so far, can be found in full on [gith
 
 ### The development runtime environment 
 
-The configuration for the whole of our application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application
+The configuration for the whole application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application
 
 ![](../../images/2/18e.png)
 
