@@ -443,7 +443,7 @@ These development dependencies are not needed when the application is run in pro
 We can start our application with <i>nodemon</i> like this:
 
 ```bash
-node_modules/.bin/nodemon index.js
+node_modules/.bin/nodemon ../../index.js
 ```
 
 
@@ -457,7 +457,7 @@ The command is long and quite unpleasant, so let's define a dedicated <i>npm scr
   // ..
   "scripts": {
     "start": "node index.js",
-    "dev": "nodemon index.js",  // highlight-line
+    "dev": "nodemon ../../index.js",  // highlight-line
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   // ..
