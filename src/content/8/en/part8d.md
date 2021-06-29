@@ -151,7 +151,7 @@ The current code of the application can be found on [Github](https://github.com/
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little. 
 
 ```js
-import { setContext } from 'apollo-link-context' // highlight-line
+import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
 const authLink = setContext((_, { headers }) => {
@@ -175,13 +175,6 @@ const client = new ApolloClient({
 
 <!-- _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määrittelee, miten apollo on yhteydessä palvelimeen. Nyt normaalia [httpLink](https://www.apollographql.com/docs/link/links/http.htm)-yhteyttä muokataan siten, että, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token. -->
 The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
-
-<!-- Asennetaan vielä muutoksen tarvitsema kirjasto -->
-We also need to install the library required by this modification
-
-```bash
-npm install apollo-link-context
-```
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 
 
