@@ -313,7 +313,7 @@ const wsLink = new WebSocketLink({
   options: { reconnect: true }
 })
 
-const httpLink = createHttpLink({
+const httpLink = new HttpLink({
   uri: 'http://localhost:4000',
 })
 ```
