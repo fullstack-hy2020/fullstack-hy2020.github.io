@@ -125,24 +125,24 @@ const MyComp1 = () => {
 }
 
 const MyComp2 = (): JSX.Element => {
-  // We are explicityle defining the return type of a function here 
+  // We are explicitly defining the return type of a function here 
   // (i.e., a react component).
   return <div>Typescript React is easy.</div>
 }
 
 interface MyProps{
-  lable: string;
+  label: string;
   price?: number;
 }
 
-const MyComp3 = ({lable, price}: MyProps): JSX.Element => {
-  // We are explicityle defining the parameter types using interface `MyProps` 
+const MyComp3 = ({label, price}: MyProps): JSX.Element => {
+  // We are explicitly defining the parameter types using interface `MyProps` 
   // and return types as `JSX.Element` in this function (i.e., a react component).
   return <div>Typescript is great.</div>
 }
 
-const MyComp4 = ({lable, price}: {lable: string, price: number}) => {
-  // We are explicityle defining the parameter types using an inline interface 
+const MyComp4 = ({label, price}: {label: string, price: number}) => {
+  // We are explicitly defining the parameter types using an inline interface 
   // and typescript automatically infers the return type as JSX.Element of the function (i.e., a react component).
   return <div>There is nothing like typescript.</div>
 }
