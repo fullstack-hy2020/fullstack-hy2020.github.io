@@ -104,7 +104,7 @@ Response 标签页展示了响应数据，这是一个常规的 html 页面。 <
 
 <!-- Because of the img tag, the browser does a second <i>HTTP-request</i> to fetch the image <i>kuva.png</i> from the server. The details of the request are as follows: -->
 
-由于有一个 img 标签，浏览器会执行第二个 http 请求，从服务器获取图像 kuba.png。 请求的详情如下:
+由于有一个 img 标签，浏览器会执行第二个 http 请求，从服务器获取图像 kuva.png。 请求的详情如下:
 
 ![](../../images/0/6e.png)
 
@@ -120,7 +120,7 @@ Response 标签页展示了响应数据，这是一个常规的 html 页面。 <
 
 <!-- First, the browser does a HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen. -->
 
-首先，浏览器向服务器发出 HTTP GET 请求，以获取页面的 HTML 代码。 Html 中的 img 标签提示浏览器还要去获取图像 kuba.png。 浏览器将 HTML 页面和图像渲染到屏幕上。
+首先，浏览器向服务器发出 HTTP GET 请求，以获取页面的 HTML 代码。 Html 中的 img 标签提示浏览器还要去获取图像 kuva.png。 浏览器将 HTML 页面和图像渲染到屏幕上。
 
 <!-- Even though it is difficult to notice, the HTML page begins to render before the image has been fetched from the server. -->
 
