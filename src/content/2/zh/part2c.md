@@ -645,9 +645,9 @@ useEffect(() => {
 
 ### The development runtime environment  
 【开发的运行时环境】
-<!-- The configuration for the whole of our application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application -->
+<!-- The configuration for the whole application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application -->
 
-我们整个应用的配置已经逐渐变得更加复杂。 让我们回顾一下发生了什么，在哪里发生的。 下图描述了应用的组成
+整个应用的配置已经逐渐变得更加复杂。 让我们回顾一下发生了什么，在哪里发生的。 下图描述了应用的组成
 
 ![](../../images/2/18e.png)
 

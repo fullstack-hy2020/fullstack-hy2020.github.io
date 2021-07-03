@@ -172,7 +172,7 @@ const App = () => {
 在后端更改之后，创建新的人员需要随请求一起发送一个有效的用户令牌。 为了发送令牌，我们必须稍微改变在<i>index.js</i> 中定义 ApolloClient-object 的方式。
 
 ```js
-import { setContext } from 'apollo-link-context' // highlight-line
+import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
 const authLink = setContext((_, { headers }) => {
@@ -197,15 +197,6 @@ const client = new ApolloClient({
 
 <!-- The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage.  -->
 给定客户端对象的 link 参数定义了 apollo 如何连接到服务器。 在这里，正常的[httpLink](https://www.apollographql.com/docs/link/links/http.htm)连接被修改，以便请求的<i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header)包含令牌(如果已经保存到 localStorage 的话)。
-
-
-
-<!-- We also need to install the library required by this modification -->
-我们还需要安装修改所需的库
-
-```bash
-npm install apollo-link-context
-```
 
 <!-- Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible.  -->
 创造新的人员和更改数字再次起作用。 然而，还有一个问题。 如果我们试图添加一个没有电话号码的人，这是不可能的。

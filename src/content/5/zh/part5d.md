@@ -600,9 +600,14 @@ module.exports = app
 
 
 
-<!-- after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. -->
-更改之后，对<i>/api/testing/reset</i> 接口的 HTTP POST 请求将清空数据库。
+<!-- after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):
 
+ -->
+更改之后，对<i>/api/testing/reset</i> 接口的 HTTP POST 请求将清空数据库。确认你的后台服务通过如下命令启动以进入测试模式（事先配置好package.json文件）：
+
+```js
+  npm run start:test
+```
 
 <!-- The modified backend code can be found from [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>. -->
 修改后的后端代码可以在[github](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1)分支<i>part5-1</i> 中找到。
