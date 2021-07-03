@@ -13,21 +13,21 @@ Kun sovelluksella luodaan uusia muistiinpanoja, täytyy ne luonnollisesti tallen
 
 Ihan alkuperäisen [määritelmän](https://en.wikipedia.org/wiki/Representational_state_transfer) mukainen RESTful API json-server ei ole, mutta ei ole kovin moni muukaan itseään REST:iksi kutsuva rajapinta.
 
-Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) json-server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes), eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
+Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) json-server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes) eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
 
 ### REST
 
-REST:issä yksittäisiä asioita esim. meidän tapauksessamme muistiinpanoja kutsutaan <i>resursseiksi</i>. Jokaisella resurssilla on yksilöivä osoite eli URL. json-serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa <i>notes/3</i>, missä 3 on resurssin tunniste. Osoite <i>notes</i> taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
+REST:issä yksittäisiä asioita, esim. meidän tapauksessamme muistiinpanoja, kutsutaan <i>resursseiksi</i>. Jokaisella resurssilla on yksilöivä osoite eli URL. json-serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa <i>notes/3</i>, missä 3 on resurssin tunniste. Osoite <i>notes</i> taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
 
-Resursseja haetaan palvelimelta HTTP GET -pyynnöillä. Esim. HTTP GET osoitteeseen <i>notes/3</i> palauttaa muistiinpanon, jonka id-kentän arvo on 3. Kun taas HTTP GET -pyyntö osoitteeseen <i>notes</i> palauttaa kaikki muistiinpanot.
+Resursseja haetaan palvelimelta HTTP GET -pyynnöillä. Esim. HTTP GET osoitteeseen <i>notes/3</i> palauttaa muistiinpanon, jonka id-kentän arvo on 3. HTTP GET -pyyntö osoitteeseen <i>notes</i> palauttaa kaikki muistiinpanot.
 
 Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu json-serverin noudattamassa REST-konventiossa tekemällä HTTP POST -pyyntö, joka kohdistuu myös samaan osoitteeseen <i>notes</i>. Pyynnön mukana sen runkona eli <i>bodynä</i> lähetetään luotavan muistiinpanon tiedot.
 
-json-server vaatii, että tiedot lähetetään JSON-muodossa, eli käytännössä sopivasti muotoiltuna merkkijonona ja asettamalla headerille <i>Content-Type</i> arvo <i>application/json</i>.
+json-server vaatii, että tiedot lähetetään JSON-muodossa eli käytännössä sopivasti muotoiltuna merkkijonona ja asettamalla headerille <i>Content-Type</i>:ksi arvo <i>application/json</i>.
 
 ### Datan lähetys palvelimelle
 
-Muutetaan nyt uuden muistiinpanon lisäämisestä huolehtivaa tapahtumankäsittelijää seuraavasti:
+Muutetaan nyt uuden muistiinpanon lisäämisestä huolehtivaa tapahtumankäsittelijää seuraavasti
 
 ```js
 const addNote = event => {
@@ -48,23 +48,23 @@ const addNote = event => {
 }
 ```
 
-eli luodaan muistiinpanoa vastaava olio, ei kuitenkaan lisätä sille kenttää <i>id</i>, sillä on parempi jättää id:n generointi palvelimen vastuulle!
+eli luodaan muistiinpanoa vastaava olio. Ei kuitenkaan lisätä sille kenttää <i>id</i>, sillä on parempi jättää id:n generointi palvelimen vastuulle!
 
-Olio lähetetään palvelimelle käyttämällä axiosin metodia <em>post</em>. Rekisteröity tapahtumankäsittelijä tulostaa konsoliin palvelimen vastauksen.
+Olio lähetetään palvelimelle käyttämällä Axiosin metodia <em>post</em>. Rekisteröity tapahtumankäsittelijä tulostaa konsoliin palvelimen vastauksen.
 
 Kun nyt kokeillaan luoda uusi muistiinpano, konsoliin tulostus näyttää seuraavalta:
 
 ![](../../images/2/20e.png)
 
-Uusi muistiinpano on siis _response_-olion kentän <i>data</i> arvona. Palvelin on lisännyt muistiinpanolle tunnisteen, eli <i>id</i>-kentän.
+Uusi muistiinpano on siis _response_-olion kentän <i>data</i> arvona. Palvelin on lisännyt muistiinpanolle tunnisteen eli <i>id</i>-kentän.
 
 Joskus on hyödyllistä tarkastella HTTP-pyyntöjä [osan 0 alussa](/osa0/web_sovelluksen_toimintaperiaatteita#http-get) paljon käytetyn konsolin <i>Network</i>-välilehden kautta:
 
 ![](../../images/2/21e.png)
 
-Voimme esim. tarkastaa onko POST-pyynnön mukana menevä data juuri se mitä oletimme, onko headerit asetettu oikein ym.
+Voimme tarkastaa esim. onko POST-pyynnön mukana menevä data juuri se mitä oletimme, onko headerit asetettu oikein ym.
 
-Koska POST-pyynnössä lähettämämme data oli JavaScript-olio, osasi axios automaattisesti asettaa pyynnön <i>Content-type</i> headerille oikean arvon eli <i>application/json</i>.
+Koska POST-pyynnössä lähettämämme data oli JavaScript-olio, osasi Axios automaattisesti asettaa pyynnön <i>Content-type</i>-headerille oikean arvon eli <i>application/json</i>.
 
 Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentille <i>App</i> uutta tilaa muistiinpanon luomisen yhteydessä. Viimeistellään sovellus vielä tältä osin:
 
@@ -90,25 +90,25 @@ addNote = event => {
 
 Palvelimen palauttama uusi muistiinpano siis lisätään tuttuun tapaan funktiolla <em>setNotes</em> tilassa olevien muiden muistiinpanojen joukkoon (kannattaa [muistaa tärkeä detalji](/osa1/monimutkaisempi_tila_reactin_debuggaus#taulukon-kasittelya) siitä, että metodi <em>concat</em> ei muuta komponentin alkuperäistä tilaa, vaan luo uuden taulukon) ja tyhjennetään lomakkeen teksti. 
 
-Kun palvelimella oleva data alkaa vaikuttaa web-sovelluksen toimintalogiikkaan, tulee sovelluskehitykseen heti iso joukko uusia haasteita, joita tuo mukanaan mm. kommunikoinnin asynkronisuus. Debuggaamiseenkin tarvitaan uusia strategiota, debug-printtaukset ym. muuttuvat vain tärkeämmäksi, myös Javascriptin runtimen periaatteita ja React-komponenttien toimintaa on pakko tuntea riittävällä tasolla, arvaileminen ei riitä.
+Kun palvelimella oleva data alkaa vaikuttaa web-sovelluksen toimintalogiikkaan, tulee sovelluskehitykseen heti iso joukko uusia haasteita, joita tuo mukanaan mm. kommunikoinnin asynkronisuus. Debuggaamiseenkin tarvitaan uusia strategiota, debug-printtaukset ym. muuttuvat vain tärkeämmiksi, myös JavaScriptin runtimen periaatteita ja React-komponenttien toimintaa on pakko tuntea riittävällä tasolla, arvaileminen ei riitä.
 
-Palvelimen tilaa kannattaa tarkastella myös suoraan, esim. selaimella:
+Palvelimen tilaa kannattaa tarkastella myös suoraan esim. selaimella:
 
 ![](../../images/2/22e.png)
 
-näin on mahdollista varmistua, mm. siirtyykö kaikki oletettu data palvelimelle.
+Näin on mahdollista varmistua mm. siitä, siirtyykö kaikki oletettu data palvelimelle.
 
-Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovelluslogiikan, tutustumme silloin tarkemmin palvelimen debuggausta auttaviin työkaluihin, mm. [postmaniin](https://www.postman.com/). Tässä vaiheessa json-server-palvelimen tilan tarkkailuun riittänee selain.
+Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovelluslogiikan. Tutustumme silloin tarkemmin palvelimen debuggausta auttaviin työkaluihin kuten [Postmaniin](https://www.postman.com/). Tässä vaiheessa json-server-palvelimen tilan tarkkailuun riittänee selain.
 
-> **HUOM:** sovelluksen nykyisessä versiossa selain lisää uudelle muistiinpanolle sen luomishetkeä kuvaavan kentän. Koska koneen oma kello voi näyttää periaatteessa mitä sattuu, on aikaleimojen generointi todellisuudessa viisaampaa hoitaa palvelimella ja tulemmekin tekemään tämän muutoksen kurssin seuraavassa osassa.
+> **HUOM:** sovelluksen nykyisessä versiossa selain lisää uudelle muistiinpanolle sen luomishetkeä kuvaavan kentän. Koska koneen oma kello voi näyttää mitä sattuu, on aikaleimojen generointi todellisuudessa viisaampaa hoitaa palvelimella ja tulemmekin tekemään tämän muutoksen kurssin seuraavassa osassa.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-5), branchissa <i>part2-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-5), branchissa <i>part2-5</i>.
 
 ### Muistiinpanon tärkeyden muutos
 
-Lisätään muistiinpanojen yhteyteen painike, millä niiden tärkeyttä voi muuttaa.
+Lisätään muistiinpanojen yhteyteen painikkeet, joilla muistiipanojen tärkeyttä voi muuttaa.
 
-Muistiinpanon määrittelevän komponentin muutos on seuraavat:
+Muistiinpanon määrittelevän komponentin muutos on seuraava:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -181,19 +181,19 @@ Pieni muistutus tähän väliin. Tapahtumankäsittelijän koodin tulostuksessa m
 console.log('importance of ' + id + ' needs to be toggled')
 ```
 
-ES6:n [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -ominaisuuden ansiosta Javascriptissa vastaavat merkkijonot voidaan kirjottaa hieman mukavammin:
+ES6:n [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -ominaisuuden ansiosta JavaScriptissa vastaavat merkkijonot voidaan kirjottaa hieman mukavammin:
 
 ```js
 console.log(`importance of ${id} needs to be toggled`)
 ```
 
-Merkkijonon sisälle voi nyt määritellä "dollari-aaltosulku"-syntaksilla kohtia, minkä sisälle evaluoidaan JavaScript-lausekkeita, esim. muuttujan arvo. Huomaa, että template stringien hipsutyyppi poikkeaa Javascriptin normaaleista merkkijonojen käyttämistä hipsuista.
+Merkkijonon sisälle voi nyt määritellä "dollari-aaltosulku"-syntaksilla kohtia, joiden sisälle evaluoidaan JavaScript-lausekkeita, esim. muuttujan arvo. Huomaa, että template stringien hipsutyyppi poikkeaa JavaScriptin normaalien merkkijonojen käyttämistä hipsuista.
 
-Yksittäistä json-serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla, joko <i>korvaamalla</i> sen tekemällä HTTP PUT -pyyntö muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH -pyynnöllä.
+Yksittäistä json-serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla: joko <i>korvaamalla</i> sen tekemällä HTTP PUT -pyynnön muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH -pyynnöllä.
 
-Korvaamme nyt muistiinpanon kokonaan, sillä samalla tulee esille muutama tärkeä React:iin ja Javascriptiin liittyvä seikka.
+Korvaamme nyt muistiinpanon kokonaan, sillä samalla tulee esille muutama tärkeä Reactiin ja JavaScriptiin liittyvä seikka.
 
-Tapahtumankäsittelijäfunktion lopullinen muoto on seuraavassa:
+Tapahtumankäsittelijäfunktion lopullinen muoto on seuraava:
 
 ```js
 const toggleImportanceOf = id => {
@@ -219,9 +219,9 @@ Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaS
 const changedNote = { ...note, important: !note.important }
 ```
 
-Käytännössä <em>{ ... note}</em> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeisiin lisätään asioita, esim. <em>{ ...note, important: true }</em>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme <em>important</em> saa uudessa oliossa vanhan arvonsa käänteisarvon.
+Käytännössä <em>{ ... note}</em> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeiden sisän lisätään asioita, esim. <em>{ ...note, important: true }</em>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme <em>important</em> saa uudessa oliossa vanhan arvonsa käänteisarvon.
 
-Pari huomioita. Miksi teimme muutettavasta oliosta kopion vaikka myös seuraava koodi näyttää toimivan:
+Miksi teimme muutettavasta oliosta kopion vaikka myös seuraava koodi näyttää toimivan:
 
 ```js
 const note = notes.find(n => n.id === id)
@@ -231,13 +231,13 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-Näin ei ole suositetavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme tilaa ei Reactissa saa muuttaa suoraan!
+Näin ei ole suositetavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, tilaa ei Reactissa saa muuttaa suoraan!
 
-Kannattaa myös huomata, että uusi olio _changedNote_ on ainoastaan ns. [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
+Kannattaa huomata myös, että uusi olio _changedNote_ on ainoastaan ns. [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
 
 Uusi muistiinpano lähetetään sitten PUT-pyynnön mukana palvelimelle, jossa se korvaa aiemman muistiinpanon.
 
-Takaisinkutsufunktiossa asetetaan komponentin <i>App</i> tilaan <em>notes</em>  kaikki vanhat muistiinpanot paitsi muuttuneen, josta tilaan asetetaan palvelimen palauttama versio:
+Takaisinkutsufunktiossa asetetaan komponentin <i>App</i> tilaan <em>notes</em> kaikki vanhat muistiinpanot paitsi muuttunut, josta tilaan asetetaan palvelimen palauttama versio:
 
 ```js
 axios.put(url, changedNote).then(response => {
@@ -251,7 +251,7 @@ Tämä saadaan aikaan metodilla <em>map</em>:
 notes.map(note => note.id !== id ? note : response.data)
 ```
 
-Operaatio siis luo uuden taulukon vanhan taulukon perusteella. Jokainen uuden taulukon alkio luodaan ehdollisesti siten, että jos ehto <em>note.id !== id</em> on tosi, otetaan uuteen taulukkoon suoraan vanhan taulukon kyseinen alkio. Jos ehto on epätosi, eli kyseessä on muutettu muistiinpano, otetaan uuteen taulukkoon palvelimen palauttama olio.
+Operaatio siis luo uuden taulukon vanhan taulukon perusteella. Jokainen uuden taulukon alkio luodaan ehdollisesti siten, että jos ehto <em>note.id !== id</em> on tosi, otetaan uuteen taulukkoon suoraan vanhan taulukon kyseinen alkio. Jos ehto on epätosi eli kyseessä on muutettu muistiinpano, otetaan uuteen taulukkoon palvelimen palauttama olio.
 
 Käytetty <em>map</em>-kikka saattaa olla aluksi hieman hämmentävä. Asiaa kannattaakin miettiä tovi. Tapaa tullaan käyttämään kurssilla vielä kymmeniä kertoja.
 
@@ -284,9 +284,9 @@ export default {
 }
 ```
 
-Moduuli palauttaa nyt olion, jonka kenttinä (<i>getAll</i>, <i>create</i> ja <i>update</i>) on kolme muistiinpanojen käsittelyä hoitavaa funktiota. Funktiot palauttavat suoraan axiosin metodien palauttaman promisen.
+Moduuli palauttaa nyt olion, jonka kenttinä (<i>getAll</i>, <i>create</i> ja <i>update</i>) on kolme muistiinpanojen käsittelyä hoitavaa funktiota. Funktiot palauttavat suoraan Axiosin metodien palauttaman promisen.
 
-Komponentti <i>App</i> saa moduulin käyttöön <em>import</em>-lauseella
+Komponentti <i>App</i> saa moduulin käyttöön <em>import</em>-lauseella:
 
 ```js
 import noteService from './services/notes' // highlight-line
@@ -294,7 +294,7 @@ import noteService from './services/notes' // highlight-line
 const App = () => {
 ```
 
-moduulin funktioita käytetään importatun muuttujan _noteService_ kautta seuraavasti:
+Moduulin funktioita käytetään importatun muuttujan _noteService_ kautta seuraavasti:
 
 ```js
 const App = () => {
@@ -357,9 +357,9 @@ noteService
   })
 ```
 
-Eli asia mistä <i>App</i> on kiinnostunut on parametrin kentässä <i>response.data</i>.
+Eli kiinnostava asia on parametrin kentässä <i>response.data</i>.
 
-Moduulia olisi miellyttävämpi käyttää, jos se HTTP-pyynnön vastauksen sijaan palauttaisi suoraan muistiinpanot sisältävän taulukon. Tällöin moduulin käyttö näyttäisi seuraavalta
+Moduulia olisi miellyttävämpi käyttää, jos se HTTP-pyynnön vastauksen sijaan palauttaisi suoraan muistiinpanot sisältävän taulukon. Tällöin moduulin käyttö näyttäisi seuraavalta:
 
 ```js
 noteService
@@ -368,6 +368,7 @@ noteService
     setNotes(initialNotes)
   })
 ```
+
 Tämä onnistuu muuttamalla moduulin koodia seuraavasti (koodiin jää ikävästi copy-pastea, emme kuitenkaan nyt välitä siitä):
 
 ```js
@@ -396,7 +397,7 @@ export default {
 }
 ```
 
-eli enää ei palautetakaan suoraan axiosin palauttamaa promisea, vaan otetaan promise ensin muuttujaan <em>request</em> ja kutsutaan sille metodia <em>then</em>:
+Enää ei palautetakaan suoraan Axiosin palauttamaa promisea, vaan otetaan promise ensin muuttujaan <em>request</em> ja kutsutaan sille metodia <em>then</em>:
 
 ```js
 const getAll = () => {
@@ -418,7 +419,7 @@ const getAll = () => {
 }
 ```
 
-Myös nyt funktio <em>getAll</em>  palauttaa promisen, sillä promisen metodi <em>then</em> [palauttaa promisen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).
+Myös nyt funktio <em>getAll</em> palauttaa promisen, sillä promisen metodi <em>then</em> [palauttaa promisen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).
 
 Koska <em>then</em>:in parametri palauttaa suoraan arvon <i>response.data</i>, on funktion <em>getAll</em> palauttama promise sellainen, että jos HTTP-kutsu onnistuu, antaa promise takaisinkutsulleen HTTP-pyynnön mukana olleen datan, eli se toimii juuri niin kuin haluamme.
 
@@ -473,11 +474,11 @@ const App = () => {
 }
 ```
 
-Tämä kaikki on hieman monimutkaista ja asian selittäminen varmaan vain vaikeuttaa sen ymmärtämistä. Internetistä löytyy paljon vaihtelevatasoista materiaalia aiheesta, esim. [tämä](https://javascript.info/promise-chaining).
+Tämä kaikki on hieman monimutkaista, ja asian selittäminen varmaan vain vaikeuttaa sen ymmärtämistä. Internetistä löytyy paljon vaihtelevatasoista materiaalia aiheesta, esim. [tämä](https://javascript.info/promise-chaining).
 
-[You do not know JS](https://github.com/getify/You-Dont-Know-JS) sarjan kirja "Async and performance" selittää asian [hyvin](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md) mutta tarvitsee selitykseen kohtuullisen määrän sivuja.
+[You do not know JS](https://github.com/getify/You-Dont-Know-JS) sarjan kirja "Async and performance" selittää asian [hyvin](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), mutta tarvitsee selitykseen kohtuullisen määrän sivuja.
 
-Promisejen ymmärtäminen on erittäin keskeistä modernissa JavaScript-sovelluskehityksessä, joten asiaan kannattaa uhrata kohtuullisessa määrin aikaa.
+Promisejen ymmärtäminen on erittäin keskeistä modernissa JavaScript-sovelluskehityksessä, joten asiaan kannattaa uhrata aikaa.
 
 ### Kehittyneempi tapa olioliteraalien määrittelyyn
 
@@ -557,16 +558,16 @@ const update = (id, newObject) => {
 export default { getAll, create, update } // highlight-line
 ```
 
-Tässä tiiviimmässä olioiden määrittelytavassa hyödynnetään ES6:n myötä Javascriptiin  tullutta [uutta ominaisuutta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions), joka mahdollistaa hieman tiiviimmän tavan muuttujien avulla tapahtuvaan olioiden määrittelyyn.
+Tässä tiiviimmässä olioiden määrittelytavassa hyödynnetään ES6:n myötä JavaScriptiin tullutta [uutta ominaisuutta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions), joka mahdollistaa hieman tiiviimmän tavan muuttujien avulla tapahtuvaan olioiden määrittelyyn.
 
-Havainnollistaaksemme asiaa tarkastellaan tilannetta, jossa meillä on muuttujissa arvoja
+Havainnollistaaksemme asiaa tarkastellaan tilannetta, jossa meillä on muuttujissa arvoja:
 
 ```js 
 const name = 'Leevi'
 const age = 0
 ```
 
-Vanhassa Javascriptissä olio täytyi määritellä seuraavaan tyyliin
+Vanhassa JavaScriptissä olio täytyi määritellä seuraavaan tyyliin:
 
 ```js 
 const person = {
@@ -575,17 +576,17 @@ const person = {
 }
 ```
 
-koska muuttujien ja luotavan olion kenttien nimi nyt on sama, riittää ES6:ssa kirjoittaa:
+Koska muuttujien ja luotavan olion kenttien nimi nyt on sama, riittää ES6:ssa kirjoittaa:
 
 ```js 
 const person = { name, age }
 ```
 
-lopputulos molemmissa on täsmälleen sama, eli ne luovat olion jonka kentän <i>name</i> arvo on <i>Leevi</i> ja kentän <i>age</i> arvo <i>0</i>.
+Lopputulos molemmissa on täsmälleen sama, eli ne luovat olion, jonka kentän <i>name</i> arvo on <i>Leevi</i> ja kentän <i>age</i> arvo <i>0</i>.
 
 ### Promise ja virheet
 
-Jos sovelluksemme mahdollistaisi muistiinpanojen poistamisen, voisi syntyä tilanne, missä käyttäjä yrittää muuttaa sellaisen muistiinpanon tärkeyttä, joka on jo poistettu järjestelmästä.
+Jos sovelluksemme mahdollistaisi muistiinpanojen poistamisen, voisi syntyä tilanne, jossa käyttäjä yrittää muuttaa sellaisen muistiinpanon tärkeyttä, joka on jo poistettu järjestelmästä.
 
 Simuloidaan tälläistä tilannetta "kovakoodaamalla" noteServiceen funktioon <em>getAll</em> muistiinpano, jota ei ole todellisuudessa (eli palvelimella) olemassa:
 
@@ -610,11 +611,11 @@ Sovelluksen tulisi pystyä käsittelemään tilanne hallitusti. Jos konsoli ei o
 
 Jo [aiemmin](/osa2/palvelimella_olevan_datan_hakeminen#axios-ja-promiset) mainittiin, että promisella voi olla kolme tilaa. Kun HTTP-pyyntö epäonnistuu, menee pyyntöä vastaava promise tilaan <i>rejected</i>. Emme tällä hetkellä käsittele koodissamme promisen epäonnistumista mitenkään.
 
-Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla <em>then</em>-metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan siinä tapauksessa jos promise epäonnistuu.
+Promisen epäonnistuminen [käsitellään](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) antamalla <em>then</em>-metodille parametriksi myös toinen takaisinkutsufunktio, jota kutsutaan promisen epäonnistuessa.
 
 Ehkä yleisempi tapa kuin kahden tapahtumankäsittelijän käyttö on liittää promiseen epäonnistumistilanteen käsittelijä kutsumalla metodia [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch).
 
-Käytännössä virhetilanteen käsittelijän rekisteröiminen tapahtuisi seuraavasti
+Käytännössä virhetilanteen käsittelijän rekisteröiminen tapahtuisi seuraavasti:
 
 ```js
 axios
@@ -631,7 +632,7 @@ Jos pyyntö epäonnistuu, kutsutaan <em>catch</em>-metodin avulla rekisteröity�
 
 Metodia <em>catch</em> hyödynnetään usein siten, että se sijoitetaan syvemmälle promiseketjuun.
 
-Kun sovelluksemme tekee HTTP-operaation syntyy oleellisesti ottaen [promiseketju](https://javascript.info/promise-chaining):
+Kun sovelluksemme tekee HTTP-operaation, syntyy oleellisesti ottaen [promiseketju](https://javascript.info/promise-chaining):
 
 ```js
 axios
@@ -642,7 +643,7 @@ axios
   })
 ```
 
-Metodilla <em>catch</em> voidaan määritellä ketjun lopussa käsittelijäfunktio, jota kutsutaan siinä vaiheessa jos mikä tahansa ketjun promisesta epäonnistuu, eli menee tilaan <i>rejected</i>:
+Metodilla <em>catch</em> voidaan määritellä ketjun lopussa käsittelijäfunktio, jota kutsutaan, jos mikä tahansa ketjun promiseista epäonnistuu eli menee tilaan <i>rejected</i>:
 
 ```js
 axios
@@ -656,7 +657,7 @@ axios
   })
 ```
 
-Hyödynnetään tätä ominaisuutta, ja sijoitetaan virheenkäsittelijä komponenttiin <i>App</i>:
+Hyödynnetään tätä ominaisuutta ja sijoitetaan virheenkäsittelijä komponenttiin <i>App</i>:
 
 ```js
 const toggleImportanceOf = id => {
@@ -680,7 +681,7 @@ const toggleImportanceOf = id => {
 
 Virheilmoitus annetaan vanhan kunnon [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert)-dialogin avulla ja palvelimelta poistettu muistiinpano poistetaan tilasta.
 
-Olemattoman muistiinpanon poistaminen siis tapahtuu metodilla [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), joka muodostaa uuden taulukon, jonka sisällöksi tulee alkuperäisen taulukon sisällöstä ne alkiot, joille parametrina oleva funktio palauttaa arvon true:
+Olemattoman muistiinpanon poistaminen tapahtuu siis metodilla [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter), joka muodostaa uuden taulukon, jonka sisällöksi tulee alkuperäisen taulukon sisällöstä ne alkiot, joille parametrina oleva funktio palauttaa arvon true:
 
 ```js
 notes.filter(n => n.id !== id)
@@ -688,7 +689,7 @@ notes.filter(n => n.id !== id)
 
 Alertia tuskin kannattaa käyttää todellisissa React-sovelluksissa. Opimme kohta kehittyneemmän menetelmän käyttäjille tarkoitettujen tiedotteiden antamiseen. Toisaalta on tilanteita, joissa simppeli battle tested -menetelmä kuten <em>alert</em> riittää aluksi aivan hyvin. Hienomman tavan voi sitten tehdä myöhemmin jos aikaa ja intoa riittää.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-6), branchissa <i>part2-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-6), branchissa <i>part2-6</i>.
 
 </div>
 
@@ -712,11 +713,11 @@ Tee ohjelmaan mahdollisuus yhteystietojen poistamiseen. Poistaminen voi tapahtua
 
 ![](../../images/2/24e.png)
 
-Palvelimelta tiettyä henkilöä vastaava resurssi tuhotaan tekemällä HTTP DELETE -pyyntö resurssia vastaavaan <i>URL</i>:iin, eli jos poistaisimme esim. käyttäjän, jonka <i>id</i> on 2, tulisi tapauksessamme tehdä HTTP DELETE osoitteeseen <i>localhost:3001/persons/2</i>. Pyynnön mukana ei lähetetä mitään dataa.
+Tiettyä henkilöä vastaava resurssi tuhotaan palvelimelta tekemällä HTTP DELETE -pyyntö resurssia vastaavaan <i>URL</i>:iin. Eli jos poistaisimme esim. käyttäjän, jonka <i>id</i> on 2, tulisi tapauksessamme tehdä HTTP DELETE osoitteeseen <i>localhost:3001/persons/2</i>. Pyynnön mukana ei lähetetä mitään dataa.
 
 [Axios](https://github.com/axios/axios)-kirjaston avulla HTTP DELETE -pyyntö tehdään samaan tapaan kuin muutkin pyynnöt.
 
-**Huom:** et voi käyttää Javascriptissa muuttujan nimeä <em>delete</em> sillä kyseessä on kielen varattu sana, eli seuraava ei onnistu:
+**Huom:** et voi käyttää JavaScriptissa muuttujan nimeä <em>delete</em>, sillä kyseessä on kielen varattu sana. Eli seuraava ei onnistu:
 
 ```js
 // käytä jotain muuta muuttujan nimeä
@@ -729,7 +730,7 @@ const delete = (id) => {
 
 Muuta toiminnallisuutta siten, että jos jo olemassaolevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT -pyynnöllä.
 
-Jos henkilön tiedot löytyvät jo luettelosta, voi ohjelma kysyä käyttäjältä varmistuksen korvataanko numero:
+Jos henkilön tiedot löytyvät jo luettelosta, voi ohjelma kysyä käyttäjältä varmistuksen:
 
 ![](../../images/teht/16e.png)
 
