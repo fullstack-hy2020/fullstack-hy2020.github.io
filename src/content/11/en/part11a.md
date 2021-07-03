@@ -69,7 +69,7 @@ Deployments can be significantly more complex, especially if we add requirements
 
 ### What is CI?
 
-The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different. One influental but quite early (from year 2006) discussion of the topic is in [Martin Fowler's blog](https://www.martinfowler.com/articles/continuousIntegration.html).
+The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different. One influential but quite early (from year 2006) discussion of the topic is in [Martin Fowler's blog](https://www.martinfowler.com/articles/continuousIntegration.html).
 
 Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens.
 
