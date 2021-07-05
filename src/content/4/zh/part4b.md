@@ -168,10 +168,10 @@ afterAll(() => {
 我们的测试向<i>api/notes</i> url 发出 HTTP GET 请求，并验证请求是否用状态码200响应。 测试还验证<i>Content-Type</i> 头是否设置为 <i>application/json</i>，表明数据是所需的格式。(如果你不熟悉正则语法 `/application\/json/` ， 你可以在[这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) 进行学习)
 
 <!-- The test contains some details that we will explore [a bit later on](/zh/part4/测试后端应用#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code. -->
-该测试包含一些细节，我们将在[稍后讨论](/zh/part4/测试后端应用#async-await)。 定义测试的箭头函数的前面是<i>async</i> 关键字，对<i>api</i> 对象的方法调用的前面是<i>await</i> 关键字。 我们将编写一些测试，然后仔细研究这个 async/await 黑魔法。 现在不要关心它们，只要确保示例测试正确工作就可以了。 async/await 语法与向 API 发出的请求是<i>异步</i> 操作这一事实相关。 [Async/await 语法](https://facebook.github.io/jest/docs/en/asynchronous.html)可以用于编写具有同步代码外观的异步代码 。
+该测试包含一些细节，我们将在[稍后讨论](/zh/part4/测试后端应用#async-await)。 定义测试的箭头函数的前面是<i>async</i> 关键字，对<i>api</i> 对象的方法调用的前面是<i>await</i> 关键字。 我们将编写一些测试，然后仔细研究这个 async/await 黑魔法。 现在不要关心它们，只要确保示例测试正确工作就可以了。 async/await 语法与向 API 发出的请求是<i>异步</i> 操作这一事实相关。 [Async/await 语法](https://jestjs.io/docs/asynchronous)可以用于编写具有同步代码外观的异步代码 。
 
 <!-- Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) method: -->
-一旦所有的测试(目前只有一个)已经完成运行，我们必须使用Mongoose关闭数据库连接的。这可以很容易地通过[afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout)方法来实现:
+一旦所有的测试(目前只有一个)已经完成运行，我们必须使用Mongoose关闭数据库连接的。这可以很容易地通过[afterAll](https://jestjs.io/docs/api#afterallfn-timeout)方法来实现:
 
 ```js
 afterAll(() => {
@@ -251,7 +251,7 @@ test('the first note is about HTTP methods', async () => {
 ```
 
 <!-- Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://facebook.github.io/jest/docs/en/expect.html#content) method of Jest. -->
-这两个测试都存储了请求对响应变量的响应，并且与前面的测试不同，前面的测试使用 supertest 提供的方法来验证状态代码和报头，这次我们检查存储在 <i>response.body</i> 属性中的响应数据。 我们的测试使用 Jest 的[expect](https://facebook.github.io/Jest/docs/en/expect.html#content)方法验证响应数据的格式和内容。
+这两个测试都存储了请求对响应变量的响应，并且与前面的测试不同，前面的测试使用 supertest 提供的方法来验证状态代码和报头，这次我们检查存储在 <i>response.body</i> 属性中的响应数据。 我们的测试使用 Jest 的[expect](https://jestjs.io/docs/expect#expectvalue)方法验证响应数据的格式和内容。
 
 <!-- The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable: -->
 使用async/await 语法的好处开始变得明显。 通常情况下，我们必须使用回调函数来访问由 promises 返回的数据，但是使用新的语法会更加方便:
@@ -297,7 +297,7 @@ module.exports = {
 测试看起来很简单，我们的测试目前正在通过。 但是，我们的测试很糟糕，因为它们依赖于数据库的状态(这在我的测试数据库中恰好是正确的)。 为了使我们的测试更加健壮，在运行测试之前，我们必须重置数据库并以可控的方式生成所需的测试数据。
 
 <!-- Our tests are already using the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://facebook.github.io/jest/docs/en/setup-teardown.html#content) that can be used for executing operations once before any test is run, or every time before a test is run. -->
-我们的测试已经使用 Jest 的[afterAll](https://facebook.github.io/Jest/docs/en/api.html#afterallfn-timeout)函数在测试执行完成后关闭到数据库的连接。 Jest 提供了许多其他的[函数](https://facebook.github.io/Jest/docs/en/setup-teardown.html#content) ，可以在运行任何测试之前或每次运行测试之前执行一次操作。
+我们的测试已经使用 Jest 的[afterAll](https://jestjs.io/docs/api#afterallfn-timeout)函数在测试执行完成后关闭到数据库的连接。 Jest 提供了许多其他的[函数](https://jestjs.io/docs/setup-teardown) ，可以在运行任何测试之前或每次运行测试之前执行一次操作。
 
 <!-- Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function: -->
 让我们在<i>每个  test</i> 之前使用[beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout)函数初始化数据库 i:
@@ -363,7 +363,7 @@ test('a specific note is within the returned notes', async () => {
 ```
 
 <!-- Pay special attention to the expect in the latter test. The <code>response.body.map(r => r.content)</code> command is used to create an array containing the content of every note returned by the API. The [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) method is used for checking that the note given to it as a parameter is in the list of notes returned by the API. -->
-在后一个测试中要特别注意expect。 代码<code>response.body.map(r => r.content)</code> 命令用于创建一个数组，该数组包含 API 返回的每个便笺的内容。 方法用于检查作为参数传给它的便笺是否在 API 返回的便笺列表中。
+在后一个测试中要特别注意expect。 代码<code>response.body.map(r => r.content)</code> 命令用于创建一个数组，该数组包含 API 返回的每个便笺的内容。[toContain](https://jestjs.io/docs/expect#tocontainitem) 方法用于检查作为参数传给它的便笺是否在 API 返回的便笺列表中。
 
 ### Running tests one by one
 【一个接一个的测试】
@@ -1085,7 +1085,7 @@ Javascript 的异步特性可能会导致令人惊讶的行为，因此，在使
 
 ### Exercises 4.8.-4.12.
 <!-- **NB:** the material uses the [toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises. -->
-**注意:** 教材在几个地方使用[toContain](https://facebook.github.io/jest/docs/en/expect.html#tocontainitem)匹配器来验证数组是否包含特定元素。 值得注意的是，该方法使用 === 运算符来比较和匹配元素，这意味着它通常不适合匹配对象。 在大多数情况下，验证数组中对象的合适方法是[toContainEqual](https://facebook.github.io/jest/docs/en/expect.html#tocontainequalitem) 匹配器。 然而，模型解决方案不检查数组中与匹配器有关的对象，因此不需要使用该方法来解决练习。
+**注意:** 教材在几个地方使用[toContain](https://jestjs.io/docs/expect#tocontainitem)匹配器来验证数组是否包含特定元素。 值得注意的是，该方法使用 === 运算符来比较和匹配元素，这意味着它通常不适合匹配对象。 在大多数情况下，验证数组中对象的合适方法是[toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem) 匹配器。 然而，模型解决方案不检查数组中与匹配器有关的对象，因此不需要使用该方法来解决练习。
 
 <!-- **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two. -->
 **警告:**如果您发现自己在同一代码中使用 async/await 和<i>then</i> 方法，那么几乎可以肯定您正在做一些错误的事情。 使用其中之一，不要混淆两者。

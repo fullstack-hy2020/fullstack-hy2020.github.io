@@ -459,7 +459,7 @@ usersRouter.get('/', async (request, response) => {
   response.json(users)
 })
 ```
-<!-- For making new user in production or development environemnt, you may send POST request to ```/api/users/``` via Postman or REST Client in following format: -->
+<!-- For making new users in a production or development environment, you may send a POST request to ```/api/users/``` via Postman or REST Client in the following format: -->
 为了在生产或者开发环境中创建新的用户，你可以通过Postman 或者 REST 客户端用如下信息发送POST 请求到 ```/api/users/``` ：
 ```js
 {
