@@ -108,7 +108,7 @@ const counterReducer = (state = 0, action) => {
 ```
 
 
-Reducer is never supposed to be called directly from the applications code. Reducer is only given as a parameter to the _createStore_-function which creates the store: 
+Reducer is never supposed to be called directly from the application's code. Reducer is only given as a parameter to the _createStore_-function which creates the store: 
 
 ```js
 import { createStore } from 'redux'
