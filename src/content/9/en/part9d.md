@@ -1101,7 +1101,7 @@ Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint
 
 Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
 
-You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) component the get appropriate visuals for your listing.
+You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) component to get appropriate visuals for your listing.
 
 You should use a _switch case_ based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten. 
 
