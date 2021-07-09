@@ -116,7 +116,7 @@ const counterReducer = (state = 0, action) => {
 }
 ```
 
-<!-- Reducer is never supposed to be called directly from the applications code. Reducer is only given as a parameter to the _createStore_-function which creates the store: -->
+<!-- Reducer is never supposed to be called directly from the application's code. Reducer is only given as a parameter to the _createStore_-function which creates the store: -->
 Reducer 不应该直接从应用程序中调用。 Reducer 只作为创建store，即 _createStore_ 的一个参数给出: 
 
 ```js

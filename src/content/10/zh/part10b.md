@@ -597,13 +597,13 @@ app bar 的背景色是 <em>#24292e</em> ，但你也可以使用其他的颜色
 
 #### Exercise 10.5: polished reviewed repositories list
 
-<!-- The current version of the reviewed repositories list looks quite grim. Modify the <i>RepositoryListItem</i> component so that it also displays repository author's avatar image. You can implement this by using the [Image](https://reactnative.dev/docs/image) component. Counts, such as number of stars and forks, larger than or equal to 1000 should be displayed in thousands with precision of one decimal and with a "k" suffix. This means that for example fork count of 8439 should be displayed as "8.4k". Also polish the overall look of the component so that the reviewed repositories list looks something like this: -->
-当前版本的仓库查看列表看起来十分死板。修改<i>RepositoryListItem</i> 组件，让它展示仓库的作者头像图片。你可以利用 [Image](https://reactnative.dev/docs/image) 组件来实现。计数功能，例如star 的数量和fork 的数量，大于等于1000应当展示为以千作为计数精读的小数，并以 "k" 结尾。也就是说比如你的fork 总数为8349，那就应该展示为"8.4k"，用同样的方式修饰下组件的总体样式，因此仓库的查看列表应当如下所示：
+<!-- The current version of the reviewed repositories list looks quite grim. Modify the <i>RepositoryItem</i> component so that it also displays repository author's avatar image. You can implement this by using the [Image](https://reactnative.dev/docs/image) component. Counts, such as number of stars and forks, larger than or equal to 1000 should be displayed in thousands with precision of one decimal and with a "k" suffix. This means that for example fork count of 8439 should be displayed as "8.4k". Also polish the overall look of the component so that the reviewed repositories list looks something like this: -->
+当前版本的仓库查看列表看起来十分死板。修改<i>RepositoryItem</i> 组件，让它展示仓库的作者头像图片。你可以利用 [Image](https://reactnative.dev/docs/image) 组件来实现。计数功能，例如star 的数量和fork 的数量，大于等于1000应当展示为以千作为计数精读的小数，并以 "k" 结尾。也就是说比如你的fork 总数为8349，那就应该展示为"8.4k"，用同样的方式修饰下组件的总体样式，因此仓库的查看列表应当如下所示：
 
 ![Application preview](../../images/10/7.jpg)
 
-<!-- In the image, the <em>Main</em> component's background color is set to <em>#e1e4e8</em> whereas <em>RepositoryListItem</em> component's background color is set to <em>white</em>. The language tag's background color is <em>#0366d6</em> which is the value of the <em>colors.primary</em> variable in the theme configuration. Remember to exploit the <em>Text</em> component we implemented earlier. Also when needed, split the <em>RepositoryListItem</em> component into smaller components. -->
-在图片中，<em>Main</em> 组件的背景色设置为 <em>#e1e4e8</em> ，而<em>RepositoryListItem</em> 组件的背景色设置为<em>white</em>。语言标签的背景色为<em>#0366d6</em> ， 也是同主题下<em>colors.primary</em> 变量的值。记住挖掘我们之前实现的<em>Text</em> 组件。如果需要，将<em>RepositoryListItem</em> 分割成更小的组件。
+<!-- In the image, the <em>Main</em> component's background color is set to <em>#e1e4e8</em> whereas <em>RepositoryItem</em> component's background color is set to <em>white</em>. The language tag's background color is <em>#0366d6</em> which is the value of the <em>colors.primary</em> variable in the theme configuration. Remember to exploit the <em>Text</em> component we implemented earlier. Also when needed, split the <em>RepositoryItem</em> component into smaller components. -->
+在图片中，<em>Main</em> 组件的背景色设置为 <em>#e1e4e8</em> ，而<em>RepositoryItem</em> 组件的背景色设置为<em>white</em>。语言标签的背景色为<em>#0366d6</em> ， 也是同主题下<em>colors.primary</em> 变量的值。记住挖掘我们之前实现的<em>Text</em> 组件。如果需要，将<em>RepositoryItem</em> 分割成更小的组件。
 </div>
 
 <div class="content">

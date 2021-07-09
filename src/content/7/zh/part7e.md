@@ -321,7 +321,7 @@ ReactDOM.render(
 正如我在[第6章](/zh/part6/connect方法#redux-and-the-component-state)的结尾所提到的，React [Context-api](https://reactjs.org/docs/context.html)为集中式状态管理提供了一种替代方案，无需 redux 之类的第三方库。 你可以在[这个网站](https://www.simplethread.com/cant-replace-redux-with-hooks/)  和 [这个网站](https://hswolff.com/blog/how-to-usecontext-with-usereducer/) 阅读更多关于这个主题的内容。
 
 ### React/node-application security
-<!-- So far during the course we have not touched on information security at all. We do not have much time this for now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
+<!-- So far during the course we have not touched on information security at all. We do not have much time for this now either, but fortunately the department has a MOOC-course [Securing Software](https://cybersecuritybase.github.io/securing/) for this important topic. -->
 到目前为止，我们还没有触及许多的安全知识。 我们现在也没有太多的时间，但是幸运的是系里有一个 MOOC-course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1)来处理这个重要的话题。
 
 <!-- We will, however, take a look at some things specific to this course. -->

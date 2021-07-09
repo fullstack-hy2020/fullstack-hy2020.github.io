@@ -195,6 +195,24 @@ module.exports = {
 }
 ```
 
+<!-- Another error you may come across is your test takes longer than the default Jest test timeout of 5000 ms. This can be solved by adding a third parameter to the test function: -->
+
+另一个你可能遇到的错误是测试比默认的Jest 超时时间5000ms要长。可以通过添加如下的第三个参数来测试函数。
+
+```js
+test('notes are returned as json', async () => {
+  await api
+    .get('/api/notes')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+}, 100000)
+```
+  
+<!-- This third parameter sets the timeout to be 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests). -->
+
+第三个参数将超时时间设置为100000ms。 较长的超时确保了我们的测试不会因为运行时间过长而失败掉。（过长的测试可能会违背我们测试性能和速度的初衷，但对我们的例子来说这么做是没问题的。
+
+
 <!-- One tiny but important detail: at the [beginning](/zh/part4/从后端结构到测试入门#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object: -->
 一个很小但很重要的细节是: 在这一章节的 [开始](/zh/part4/从后端结构到测试入门#project-structure) ，我们将 Express 应用提取到<i>app.js</i> 文件中，并且改变了<i>index.js</i> 文件的角色，使用 Node 的内置<i>http</i> 对象在指定端口启动应用:
 

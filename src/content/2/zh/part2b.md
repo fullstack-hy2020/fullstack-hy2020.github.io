@@ -113,7 +113,7 @@ const addNote = (event) => {
  <em>event</em> 参数是触发对事件处理函数需要调用的[event](https://reactjs.org/docs/handling-events.html) :
 
 <!-- The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, among other things, cause the page to reload. -->
-事件处理立即调用 <em>event.preventDefault()</em>  方法，它会阻止提交表单的默认操作。 因为默认操作会导致页面重新加载。
+事件处理立即调用 <em>event.preventDefault()</em>  方法，它会阻止提交表单的[默认操作](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event)。 因为默认操作会导致页面重新加载。
 
 <!-- The target of the event stored in _event.target_ is logged to the console -->
 将_event.target_ 中存储的事件的记录到控制台。

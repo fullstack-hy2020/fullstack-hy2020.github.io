@@ -104,7 +104,7 @@ Git 允许代码的多个副本、流或版本共存，而不会相互覆盖。�
 ### What is CI?
 什么是 CI？
 
-<!-- The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different. One influental but quite early (from year 2006) discussion of the topic is in . -->
+<!-- The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different. One influential but quite early (from year 2006) discussion of the topic is in . -->
 持续集成的严格定义和行业中使用该术语的方式是完全不同的。马丁 · 福勒(Martin Fowler)的[博客](https://www.martinfowler.com/articles/continuousIntegration.html)中有一个有影响但相当早(从2006年开始)的关于此话题的讨论。
 
 <!-- Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens. -->
