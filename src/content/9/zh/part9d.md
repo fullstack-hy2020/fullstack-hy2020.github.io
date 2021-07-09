@@ -1149,7 +1149,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 <!-- Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other.  -->
 扩展患者页面中的条目列表，以包含条目的详细信息，并使用一个新组件显示患者条目的其余信息，以区分不同的类型。
 
-<!-- You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) components the get appropriate visuals for your listing. -->
+<!-- You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) components to get appropriate visuals for your listing. -->
 你可以使用例如. [图标](图标 https://react.semantic-ui.com/elements/Icon/)或者其他的[SemanticUI](https://react.semantic-ui.com/)组件为你的清单提供合适的视觉效果。
 
 <!-- You should use a _switch case_ based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten.  -->
