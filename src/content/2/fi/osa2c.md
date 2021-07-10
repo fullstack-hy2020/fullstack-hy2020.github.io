@@ -288,7 +288,7 @@ Konsoliin tulostuu:
 
 **Huom:** kun tiedostoon <i>index.js</i> lisätään sisältöä, React ei havaitse muutosta automaattisesti eli joudut refreshaamaan selaimen, jotta näet muutokset! 
 
-Axios-metodi _get_ palauttaa [promisen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
+Axiosin metodi _get_ palauttaa [promisen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
 Mozillan dokumentaatio kertoo promisesta seuraavaa:
 
@@ -318,7 +318,7 @@ Konsoliin tulostuu:
 
 JavaScriptin suoritusympäristö kutsuu <em>then</em>-metodin avulla rekisteröityä takaisinkutsufunktiota antaen sille parametriksi olion <em>response</em>, joka sisältää kaiken oleellisen HTTP GET -pyynnön vastaukseen liittyvän, eli palautetun <i>datan</i>, <i>statuskoodin</i> ja <i>headerit</i>.
 
-Promise-oliota ei ole yleensä tarvetta tallettaa muuttujaan, ja onkin tapana ketjuttaa metodin <em>then</em> kutsu suoraan Axios-metodin kutsun perään:
+Promise-oliota ei ole yleensä tarvetta tallettaa muuttujaan, ja onkin tapana ketjuttaa metodin <em>then</em> kutsu suoraan Axiosin metodin kutsun perään:
 
 ```js
 axios.get('http://localhost:3001/notes').then(response => {
@@ -509,7 +509,7 @@ useEffect(() => {
 }, [])
 ```
 
-Muuttujaan <em>eventHandler</em> on sijoitettu viite tapahtumankäsittelijäfunktioon. Axios-metodin <em>get</em> palauttama promise on talletettu muuttujaan <em>promise</em>. Takaisinkutsun rekisteröinti tapahtuu antamalla promisen then-metodin parametrina muuttuja <em>eventHandler</em>, joka viittaa käsittelijäfunktioon. Useimmiten funktioiden ja promisejen sijoittaminen muuttujiin ei ole tarpeen, ja ylempänä käyttämämme kompaktimpi esitystapa riittää:
+Muuttujaan <em>eventHandler</em> on sijoitettu viite tapahtumankäsittelijäfunktioon. Axiosin metodin <em>get</em> palauttama promise on talletettu muuttujaan <em>promise</em>. Takaisinkutsun rekisteröinti tapahtuu antamalla promisen then-metodin parametrina muuttuja <em>eventHandler</em>, joka viittaa käsittelijäfunktioon. Useimmiten funktioiden ja promisejen sijoittaminen muuttujiin ei ole tarpeen, ja ylempänä käyttämämme kompaktimpi esitystapa riittää:
 
 ```js
 useEffect(() => {
@@ -547,7 +547,7 @@ Kaikki sovelluksen osat ovat sovelluskehitysvaiheessa siis ohjelmoijan koneella 
 
 <h4>2.11: puhelinluettelo step6</h4>
 
-Jatketaan puhelinluettelon kehittämistä. Talleta sovelluksen pohjadata projektin juureen sijoitettavaan tiedostoon <i>db.json</i>:
+Jatketaan puhelinluettelon kehittämistä. Talleta sovelluksen alkutila projektin juureen sijoitettavaan tiedostoon <i>db.json</i>:
 
 ```json
 {
@@ -592,7 +592,7 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 
 on portti 3001 jo jonkin muun sovelluksen, esim. jo käynnissä olevan JSON Serverin käytössä. Sulje toinen sovellus tai jos se ei onnistu, vaihda porttia.
 
-Muuta sovellusta siten, että pohjadata haetaan Axios-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect hookilla](https://reactjs.org/docs/hooks-effect.html)).
+Muuta sovellusta siten, että alkutila haetaan Axios-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect hookilla](https://reactjs.org/docs/hooks-effect.html)).
 
 <h4>2.12* maiden tiedot, step1</h4>
 
