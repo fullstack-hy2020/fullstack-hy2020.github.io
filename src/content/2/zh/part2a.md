@@ -423,7 +423,7 @@ notes.map((note, i) => ...)
 然而，这是**不推荐的**，因为可能导致意想不到的问题，即使它似乎能正常工作。
 
 <!-- Read more in [this article](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318). -->
-更多内容请点击 [Index as a key is an anti-pattern](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)。
+更多内容请阅读 [这篇文章](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)。
 
 ### Refactoring modules 
 【重构模块】
