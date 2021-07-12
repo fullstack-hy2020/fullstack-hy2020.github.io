@@ -7,23 +7,23 @@ lang: fi
 
 <div class="content">
 
-Kun sovelluksella luodaan uusia muistiinpanoja, täytyy ne luonnollisesti tallentaa palvelimelle. [json-server](https://github.com/typicode/json-server) mainitsee dokumentaatiossaan olevansa ns. REST- tai RESTful-API
+Kun sovelluksella luodaan uusia muistiinpanoja, täytyy ne luonnollisesti tallentaa palvelimelle. [JSON Server](https://github.com/typicode/json-server) mainitsee dokumentaatiossaan olevansa ns. REST- tai RESTful-API
 
 > <i>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</i>
 
-Ihan alkuperäisen [määritelmän](https://en.wikipedia.org/wiki/Representational_state_transfer) mukainen RESTful API json-server ei ole, mutta ei ole kovin moni muukaan itseään REST:iksi kutsuva rajapinta.
+Ihan alkuperäisen [määritelmän](https://en.wikipedia.org/wiki/Representational_state_transfer) mukainen RESTful API JSON Server ei ole, mutta ei ole kovin moni muukaan itseään REST:iksi kutsuva rajapinta.
 
-Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) json-server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes) eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
+Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) JSON Server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes) eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
 
 ### REST
 
-REST:issä yksittäisiä asioita, esim. meidän tapauksessamme muistiinpanoja, kutsutaan <i>resursseiksi</i>. Jokaisella resurssilla on yksilöivä osoite eli URL. json-serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa <i>notes/3</i>, missä 3 on resurssin tunniste. Osoite <i>notes</i> taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
+REST:issä yksittäisiä asioita, esim. meidän tapauksessamme muistiinpanoja, kutsutaan <i>resursseiksi</i>. Jokaisella resurssilla on yksilöivä osoite eli URL. JSON Serverin noudattaman yleisen konvention mukaan yksittäistä muistiinpanoa kuvaavan resurssin URL on muotoa <i>notes/3</i>, missä 3 on resurssin tunniste. Osoite <i>notes</i> taas vastaa kaikkien yksittäisten muistiinpanojen kokoelmaa.
 
 Resursseja haetaan palvelimelta HTTP GET -pyynnöillä. Esim. HTTP GET osoitteeseen <i>notes/3</i> palauttaa muistiinpanon, jonka id-kentän arvo on 3. HTTP GET -pyyntö osoitteeseen <i>notes</i> palauttaa kaikki muistiinpanot.
 
-Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu json-serverin noudattamassa REST-konventiossa tekemällä HTTP POST -pyyntö, joka kohdistuu myös samaan osoitteeseen <i>notes</i>. Pyynnön mukana sen runkona eli <i>bodynä</i> lähetetään luotavan muistiinpanon tiedot.
+Uuden muistiinpanoa vastaavan resurssin luominen tapahtuu JSON Serverin noudattamassa REST-konventiossa tekemällä HTTP POST -pyyntö, joka kohdistuu myös samaan osoitteeseen <i>notes</i>. Pyynnön mukana sen runkona eli <i>bodynä</i> lähetetään luotavan muistiinpanon tiedot.
 
-json-server vaatii, että tiedot lähetetään JSON-muodossa eli käytännössä sopivasti muotoiltuna merkkijonona ja asettamalla headerille <i>Content-Type</i>:ksi arvo <i>application/json</i>.
+JSON Server vaatii, että tiedot lähetetään JSON-muodossa eli käytännössä sopivasti muotoiltuna merkkijonona ja asettamalla headerille <i>Content-Type</i>:ksi arvo <i>application/json</i>.
 
 ### Datan lähetys palvelimelle
 
@@ -98,7 +98,7 @@ Palvelimen tilaa kannattaa tarkastella myös suoraan esim. selaimella:
 
 Näin on mahdollista varmistua mm. siitä, siirtyykö kaikki oletettu data palvelimelle.
 
-Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovelluslogiikan. Tutustumme silloin tarkemmin palvelimen debuggausta auttaviin työkaluihin kuten [Postmaniin](https://www.postman.com/). Tässä vaiheessa json-server-palvelimen tilan tarkkailuun riittänee selain.
+Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovelluslogiikan. Tutustumme silloin tarkemmin palvelimen debuggausta auttaviin työkaluihin kuten [Postmaniin](https://www.postman.com/). Tässä vaiheessa JSON Server -palvelimen tilan tarkkailuun riittänee selain.
 
 > **HUOM:** sovelluksen nykyisessä versiossa selain lisää uudelle muistiinpanolle sen luomishetkeä kuvaavan kentän. Koska koneen oma kello voi näyttää mitä sattuu, on aikaleimojen generointi todellisuudessa viisaampaa hoitaa palvelimella ja tulemmekin tekemään tämän muutoksen kurssin seuraavassa osassa.
 
@@ -189,7 +189,7 @@ console.log(`importance of ${id} needs to be toggled`)
 
 Merkkijonon sisälle voi nyt määritellä "dollari-aaltosulku"-syntaksilla kohtia, joiden sisälle evaluoidaan JavaScript-lausekkeita, esim. muuttujan arvo. Huomaa, että template stringien hipsutyyppi poikkeaa JavaScriptin normaalien merkkijonojen käyttämistä hipsuista.
 
-Yksittäistä json-serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla: joko <i>korvaamalla</i> sen tekemällä HTTP PUT -pyynnön muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH -pyynnöllä.
+Yksittäistä JSON Serverillä olevaa muistiinpanoa voi muuttaa kahdella tavalla: joko <i>korvaamalla</i> sen tekemällä HTTP PUT -pyynnön muistiinpanon yksilöivään osoitteeseen tai muuttamalla ainoastaan joidenkin muistiinpanon kenttien arvoja HTTP PATCH -pyynnöllä.
 
 Korvaamme nyt muistiinpanon kokonaan, sillä samalla tulee esille muutama tärkeä Reactiin ja JavaScriptiin liittyvä seikka.
 
