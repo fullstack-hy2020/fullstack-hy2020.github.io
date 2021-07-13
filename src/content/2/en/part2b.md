@@ -416,7 +416,7 @@ You can use the code below as a starting point for the <i>App</i> component of y
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
+  const [ people, setPeople ] = useState([
     { name: 'Arto Hellas' }
   ]) 
   const [ newName, setNewName ] = useState('')
@@ -521,7 +521,7 @@ You can implement the search field as an <i>input</i> element that is placed out
 
 ```js
 const App = () => {
-  const [persons, setPersons] = useState([
+  const [people, setPeople] = useState([
     { name: 'Arto Hellas', number: '040-123456' },
     { name: 'Ada Lovelace', number: '39-44-5323523' },
     { name: 'Dan Abramov', number: '12-43-234345' },
@@ -560,7 +560,7 @@ const App = () => {
 
       <h3>Numbers</h3>
 
-      <Persons ... />
+      <People ... />
     </div>
   )
 }
