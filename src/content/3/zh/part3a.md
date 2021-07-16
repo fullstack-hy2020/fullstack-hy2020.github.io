@@ -487,7 +487,7 @@ npm install --save-dev nodemon
 node_modules/.bin/nodemon index.js
 ```
 
-<!-- Changes to the application code now causes the server to restart automatically. It's worth noting, that even though the backend server restarts automatically, the browser still has to be manually refreshed. This is because unlike when working in React, we could not even have the [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) functionality needed to automatically reload the browser. -->
+<!-- Changes to the application code now causes the server to restart automatically. It's worth noting, that even though the backend server restarts automatically, the browser still has to be manually refreshed. This is because unlike when working in React, we don't have the [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) functionality needed to automatically reload the browser. -->
 对应用代码的更改现在会导致服务器自动重新启动。 值得注意的是，即使后端服务器自动重启，浏览器仍然需要手动刷新。 这是因为不像在 React 中工作，我们甚至没有自动重新加载浏览器所需的[热加载hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) 方法。
 
 <!-- The command is long and quite unpleasant, so let's define a dedicated <i>npm script</i> for it in the <i>package.json</i> file: -->

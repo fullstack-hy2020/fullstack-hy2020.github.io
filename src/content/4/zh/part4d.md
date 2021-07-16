@@ -420,8 +420,8 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-<!-- The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoked, the token is usable only a limited amount of time. On the other hand, a short expiration time forces is a potential pain to a user, one must login to the system more frequently. -->
-过期时间设置得越短，该方案就越安全。所以如果token 给错了人， 或者用户对系统的访问权限需要被回收，token 需要给一个限定的时间。另一方面来说，较短的过期时间会给用户带来潜在的痛苦，因为他们需要更频繁地登录系统。
+<!-- The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoked, the token is usable only a limited amount of time. On the other hand, a short expiration time forces a potential pain to a user, one must login to the system more frequently. -->
+过期时间设置得越短，该方案就越安全。所以如果token 给错了人， 或者用户对系统的访问权限需要被回收，token 需要给一个限定的时间。另一方面来说，过短的过期时间会给用户带来潜在的痛苦，因为他们需要更频繁地登录系统。
 
 <!-- The other solution is to save info about each token to backend database and to check for each API request if the access right corresponding to the token is still valid. With this scheme, the access rights can be revoked at any time. This kind of solution is often called a <i>server side session</i>. -->
 另一种解决方案是为每一个token在后台数据库中保存信息，并在每个API请求时都去后台查询该token 是否有对应的访问权限。通过这种方式，访问权限可以随意收回。这种方式通常被叫做<i>服务器端的session</i>。
