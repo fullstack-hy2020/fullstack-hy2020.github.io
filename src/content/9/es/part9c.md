@@ -1027,7 +1027,7 @@ const isString = (text: any): text is string => {
 };
 ```
 
-La función es un [tipo de protección](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards). Eso significa que es una función que devuelve un booleano <i>y</i> que tiene un <i>predicado</i> de tipo como tipo de retorno. En nuestro caso, el tipo de predicado es
+La función es un [tipo de protección](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). Eso significa que es una función que devuelve un booleano <i>y</i> que tiene un <i>predicado</i> de tipo como tipo de retorno. En nuestro caso, el tipo de predicado es
 
 
 ```js
