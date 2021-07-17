@@ -484,7 +484,7 @@ Your first task is to to declare a new interface, that includes the <i>descripti
 
 Then create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
-Lastly, add your another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following:
+Lastly, add another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following:
 
 ```js
 {
