@@ -1159,9 +1159,9 @@ Data:
 <!-- Implement error handling for creating new entries. The request is not allowed to succeed, if: -->
 为创建新条目实现错误处理。以下情况，请求不允许成功，如:
 
-- <!--The name or number is missing--> 
+<!--The name or number is missing--> 
 - 姓名或电话号码遗失
-- <!--The name already exists in the phonebook-->
+<!--The name already exists in the phonebook-->
 - 电话簿里已经有这个名字了
 
 
