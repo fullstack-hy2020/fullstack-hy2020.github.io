@@ -829,7 +829,7 @@ notes.filter(n => n.id !== id)
 
 <h4>2.17: Phonebook 步骤9</h4>
 <!-- Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method: -->
-使用户可以从电话簿中删除条目。 删除可以通过电话簿列表中每个人的专用按钮来完成。 你可以通过使用[window.confirm](https://developer.mozilla.org/en-us/docs/web/api/window/confirm)方法来确认用户的操作:
+  使用户可以从电话簿中删除条目。 删除可以通过电话簿列表中每个人的专用按钮来完成。 你可以通过使用 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm">window.confirm</a> 方法来确认用户的操作:
 
 ![](../../images/2/24e.png)
 
