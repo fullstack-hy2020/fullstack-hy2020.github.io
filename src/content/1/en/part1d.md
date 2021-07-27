@@ -1111,18 +1111,18 @@ Change your application to display statistics only once feedback has been gather
 Let's continue refactoring the application. Extract the following two components:
 
 - <i>Button</i> for defining the buttons used for submitting feedback
-- <i>Statistic</i> for displaying a single statistic, e.g. the average score.
+- <i>StatisticLine</i> for displaying a single statistic, e.g. the average score.
 
-To be clear: the <i>Statistic</i> component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics:
+To be clear: the <i>StatisticLine</i> component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics:
 
 ```js
 const Statistics = (props) => {
   /// ...
   return(
     <div>
-      <Statistic text="good" value ={...} />
-      <Statistic text="neutral" value ={...} />
-      <Statistic text="bad" value ={...} />
+      <StatisticLine text="good" value ={...} />
+      <StatisticLine text="neutral" value ={...} />
+      <StatisticLine text="bad" value ={...} />
       // ...
     </div>
   )
