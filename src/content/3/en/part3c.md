@@ -76,7 +76,7 @@ Read now the chapters on [collections](https://docs.mongodb.com/manual/core/data
 
 Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-Once you've created and logged into your account, Atlas will recommend creating a cluster:
+Once you've created and logged into your account, Atlas will recommend creating a cluster (In later versions of MongoDB Atlas, you may see create a database):
 
 ![](../../images/3/57.png)
 
