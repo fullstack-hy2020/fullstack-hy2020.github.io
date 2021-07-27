@@ -204,7 +204,7 @@ We wrap the components to be rendered based on the url with a [Switch](https://r
 <!-- Switch saa aikaan sen, että renderöitävä komponentti on ensimmäinen, jonka <i>path</i> vastaa osoiterivin polkua. -->
 The switch works by rendering the first component whose <i>path</i> matches the url in the browser's address bar.
 
-Note that the order of the components is important. If we would put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, the rest components would never get a chance to render because every path start with "/" will consider matched with first component:
+Note that the order of the components is important. If we put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, the rest components would never get a chance to render because every path start with "/" will consider matched with first component:
 
 ```js 
 <Switch>
