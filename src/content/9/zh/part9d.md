@@ -356,18 +356,18 @@ interface CoursePartThree {
 }
 ```
 
-<!-- Next we will create a type [union](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) of all these types, which we can use to define a type for our array, that should accept any of these course part types: -->
-接下来，我们将创建一个所有这些类型的[union](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types)类型 ，我们可以用它来为数组定义一个类型，它应该接受如下任何一个课程部分类型:
+<!-- Next we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types, which we can use to define a type for our array, that should accept any of these course part types: -->
+接下来，我们将创建一个所有这些类型的[union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types)类型 ，我们可以用它来为数组定义一个类型，它应该接受如下任何一个课程部分类型:
 
 ```js
 type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
-<!-- Now we can set the type for our <i>courseParts</i> variable and after that our editor will automatically give an error if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. You can test this by commenting out any attribute for any course part. Thanks to the <i>name</i> [string literal](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union. -->
-现在我们可以为<i>courseParts</i> 变量设置类型，之后，如果我们对属性使用了错误的类型，或者使用了额外的属性，或者忘记设置预期的属性，我们的编辑器将自动给出一个错误。 您可以通过注释掉任何课程部分的任何属性来测试这一点。 多亏了<i>name</i> [string literal字符串字面量](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) TypeScript 可以识别哪个课程部分需要哪些附加属性，即使变量被定义为使用类型联合。
+<!-- Now we can set the type for our <i>courseParts</i> variable and after that our editor will automatically give an error if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. You can test this by commenting out any attribute for any course part. Thanks to the <i>name</i> [string literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union. -->
+现在我们可以为<i>courseParts</i> 变量设置类型，之后，如果我们对属性使用了错误的类型，或者使用了额外的属性，或者忘记设置预期的属性，我们的编辑器将自动给出一个错误。 您可以通过注释掉任何课程部分的任何属性来测试这一点。 多亏了<i>name</i> [string literal字符串字面量](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) TypeScript 可以识别哪个课程部分需要哪些附加属性，即使变量被定义为使用类型联合。
 
-<!-- But we're not satisfied yet! There is still a lot of duplication in the types that we have created, and that is something we want to avoid. We start off by identifying the attributes in common for all course parts and define a base type containing them, and then we will [extend](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) that base type to create our part specific types: -->
-但是我们还不满意！ 在我们创建的类型中仍然存在大量的重复，这是我们希望避免的。 我们首先确定所有课程部分的公共属性，并定义包含它们的基类型，然后我们将[扩展](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces)这个基类型来创建我们的部分特定类型:
+<!-- But we're not satisfied yet! There is still a lot of duplication in the types that we have created, and that is something we want to avoid. We start off by identifying the attributes in common for all course parts and define a base type containing them, and then we will [extend](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) that base type to create our part specific types: -->
+但是我们还不满意！ 在我们创建的类型中仍然存在大量的重复，这是我们希望避免的。 我们首先确定所有课程部分的公共属性，并定义包含它们的基类型，然后我们将[扩展](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types)这个基类型来创建我们的部分特定类型:
 
 ```js
 interface CoursePartBase {
@@ -408,8 +408,8 @@ interface CoursePartThree extends CoursePartBase {
 <!-- What about new types? If we were to add a new course part, wouldn't it be nice to know if we haven't yet implemented handling of that type in our code? With the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. Sometimes this is of course totally acceptable, e.g. if you only want to handle specific (not all) cases of a type union, but in most cases it is recommended to handle all variations separately.  -->
 那么新的类型呢？ 如果我们要添加一个新的课程章节，如果我们还没有在代码中实现这种类型的处理，那会怎样？ 对于上面的示例，新类型将转到<i>default</i> 块，并且不会为新类型打印任何内容。 有时这当然是完全可以接受的，例如，如果您只想处理类型联合的特定(并非全部)情况，但在大多数情况下，建议分别处理所有变体。
 
-<!-- With TypeScript we can use a method that is called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) and also has the return type <i>never</i>. -->
-对于TypeScript，我们可以使用一个名为<i>穷举类型检查</i> 的方法。 它的基本原理是，如果遇到意外值，我们调用一个函数，该函数接受类型为[never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never)的值，并且返回类型为<i>never</i>。
+<!-- With TypeScript we can use a method that is called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type) and also has the return type <i>never</i>. -->
+对于TypeScript，我们可以使用一个名为<i>穷举类型检查</i> 的方法。 它的基本原理是，如果遇到意外值，我们调用一个函数，该函数接受类型为[never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type)的值，并且返回类型为<i>never</i>。
 
 <!-- A straight forward version of the function could look like this: -->
 这个函数的一个简单版本可以是这样的:
@@ -547,8 +547,8 @@ The end result might look like the following
 
 ### A note about defining object types
 【关于定义对象类型的注意事项】
-<!-- We have used [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html) to define object types, eg. diary entries in previous section -->
-我们已经使用[接口](http://www.typescriptlang.org/docs/handbook/interfaces.html)来定义对象类型，例如前面部分的日记条目
+<!-- We have used [interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) to define object types, eg. diary entries in previous section -->
+我们已经使用[接口](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces)来定义对象类型，例如前面部分的日记条目
 
 ```js
 interface DiaryEntry {
@@ -570,8 +570,8 @@ interface CoursePartBase {
 }
 ```
 
-<!-- We actually could have had the same effect by using a [type alias](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases) -->
-我们实际上可以通过使用[type alias](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)来达到同样的效果
+<!-- We actually could have had the same effect by using a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) -->
+我们实际上可以通过使用[type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)来达到同样的效果
 
 ```js
 type DiaryEntry = {
@@ -586,8 +586,8 @@ type DiaryEntry = {
 <!-- In most cases you can use either <i>type</i> or <i>interface</i>, which ever syntax you prefer, but there are still a few things to keep in mind. For instance if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to create multiple types with the same name, it will result in an error stating that one with the same name is already declared.  -->
 在大多数情况下，您可以使用<i>type</i> 或<i>interface</i>，无论您喜欢的哪种语法，但仍有一些事情需要记住。 例如，如果您使用相同的名称定义多个接口，它们将导致一个合并的接口，而如果您尝试使用相同的名称创建多个类型，它将导致一个错误声明，即一个相同的名称已经声明过了。
 
-<!-- TypeScript documentation [recommends to use interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases. -->
-TypeScript文档[建议在大多数情况下使用接口](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases)。 
+<!-- TypeScript documentation [recommends to use interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) in most cases. -->
+TypeScript文档[建议在大多数情况下使用接口](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces)。 
 
 ### Working with an existing codebase
 【与现有的代码库一起工作】
@@ -658,8 +658,8 @@ export type State = {
 };
 ```
 
-<!-- The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state.  -->
-状态是一个具有一个 key <i>patients</i> 的对象，该对象具有一个[字典](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) ，或者简单地将一个具有字符串键的对象和一个<i>Patient</i> 对象作为值。 索引只能是<i>string</i> 或<i>number</i>，因为您可以使用它们访问对象值。 这强制状态以我们想要的方式呈现，并防止开发人员滥用状态。
+<!-- The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with a <i>Patient</i> object as value. Index can only be <i>string</i> or <i>number</i> as you can access the object values using those. This enforces that the state conforms in the way we want, and prevents developers from misusing the state.  -->
+状态是一个具有一个 key <i>patients</i> 的对象，该对象具有一个[字典](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) ，或者简单地将一个具有字符串键的对象和一个<i>Patient</i> 对象作为值。 索引只能是<i>string</i> 或<i>number</i>，因为您可以使用它们访问对象值。 这强制状态以我们想要的方式呈现，并防止开发人员滥用状态。
 
 
 <!-- You can also think of a scenario where we may have state as a union. Eg. using states type as an indicator whether user has logged in: -->

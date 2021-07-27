@@ -328,7 +328,7 @@ interface CoursePartThree {
 }
 ```
 
-Next we will create a type [union](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) of all these types. 
+Next we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. 
 We can then use it to define a type for our array, which should accept any of these course part types:
 
 ```js
@@ -338,11 +338,11 @@ type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 Now we can set the type for our <i>courseParts</i> variable. 
 Now our editor will automatically warn us if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute.
 You can test this by commenting out any attribute for any course part.
-Thanks to the <i>name</i> [string literal](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
+Thanks to the <i>name</i> [string literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
 
 But we're not satisfied yet! There is still a lot of duplication in our types, and we want to avoid that. 
 We start off by identifying the attributes all course parts have in common, and defining a base type which contains them.
-Then we will [extend](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) that base type to create our part specific types:
+Then we will [extend](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) that base type to create our part specific types:
 
 ```js
 interface CoursePartBase {
@@ -383,7 +383,7 @@ What about adding new types? If we were to add a new course part, wouldn't it be
 In the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. 
 Of course sometimes this is totally acceptable, for example if you want to handle only specific (not all) cases of a type union, but in most cases it is recommended to handle all variations separately.
 
-With TypeScript we can use a method called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) and also has the return type <i>never</i>.
+With TypeScript we can use a method called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type) and also has the return type <i>never</i>.
 
 A straight forward version of the function could look like this:
 
@@ -484,7 +484,7 @@ Your first task is to to declare a new interface, that includes the <i>descripti
 
 Then create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case -based exhaustive type checking! Use the new component in component <i>Content</i>.
 
-Lastly, add your another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following:
+Lastly, add another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following:
 
 ```js
 {
@@ -508,7 +508,7 @@ The end result might look like the following
 
 ### A note about defining object types
 
-We have used [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html) to define object types, e.g. diary entries, in previous section
+We have used [interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) to define object types, e.g. diary entries, in previous section
 
 ```js
 interface DiaryEntry {
@@ -529,7 +529,7 @@ interface CoursePartBase {
 }
 ```
 
-We actually could have had the same effect by using a [type alias](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)
+We actually could have had the same effect by using a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
 
 ```js
 type DiaryEntry = {
@@ -544,7 +544,7 @@ type DiaryEntry = {
 In most cases you can use either <i>type</i> or <i>interface</i>, whichever syntax you prefer. However there are a few things to keep in mind. 
 For example if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to define multiple types with the same name, it will result in an error stating that a type with the same name is already declared. 
 
-TypeScript documentation [recommends using interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) in most cases.
+TypeScript documentation [recommends using interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) in most cases.
 
 ### Working with an existing codebase
 
@@ -625,7 +625,7 @@ export type State = {
 };
 ```
 
-The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) or simply put an object with string keys and with a <i>Patient</i> objects as values. The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
+The state is an object with one key <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with a <i>Patient</i> objects as values. The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
 
 But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not.
 So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
