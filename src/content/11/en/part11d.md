@@ -42,9 +42,9 @@ So let us change events that [trigger](https://docs.github.com/en/free-pro-team@
 on:
   push:
     branches:
-      - main
+      - master
   pull_request: // highlight-line
-    branches: [main] // highlight-line
+    branches: [master] // highlight-line
     types: [opened, synchronize] // highlight-line
 ```
 
