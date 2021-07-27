@@ -208,19 +208,57 @@ _personAdded_ subscriptions resolver registers all of the subscribers by returni
 Let's do the following changes to the code which starts the server
 ```js
 // ...
+  
+const { createServer } = require("http") // highlight-line
+const { execute, subscribe } = require("graphql") // highlight-line
+const { SubscriptionServer } = require("subscriptions-transport-ws") // highlight-line
+const { makeExecutableSchema } = require("@graphql-tools/schema") // highlight-line
+const express = require ("express") // highlight-line
+const { ApolloServer, UserInputError, gql, AuthenticationError} = require("apollo-server-express") // highlight-line
+  
+// ...
+  // In Apollo version > 3.0 apollo-server package no longer supports subscriptions
+  // So for functional implementation express and apollo-server-express are needed
+// ...
+};
+  
+ (async function () { // highlight-line
+  const app = express(); // highlight-line
 
-server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
-  console.log(`Server ready at ${url}`)
-  console.log(`Subscriptions ready at ${subscriptionsUrl}`) // highlight-line
-})
+  const httpServer = createServer(app); // highlight-line
+
+  const schema = makeExecutableSchema({ // highlight-line
+    typeDefs, // highlight-line
+    resolvers, // highlight-line
+  }); // highlight-line
+
+  const server = new ApolloServer({ // highlight-line
+    schema, // highlight-line
+    context: async ({ req }) => {
+        //...
+      }
+  });
+  await server.start(); // highlight-line
+  server.applyMiddleware({ app }); // highlight-line
+
+  SubscriptionServer.create( // highlight-line
+    { schema, execute, subscribe }, // highlight-line
+    { server: httpServer, path: server.graphqlPath } // highlight-line
+  );
+
+  const PORT = 4000; // highlight-line
+  httpServer.listen(PORT, () => // highlight-line
+    console.log(`Server is now running on http://localhost:${PORT}/graphql`) // highlight-line
+  );
+})();
+
 ```
 
 
 We see, that the server listens for subscriptions in the address _ws://localhost:4000/graphql_
 
 ```js
-Server ready at http://localhost:4000/
-Subscriptions ready at ws://localhost:4000/graphql
+Server is now running on http://localhost:4000/graphql // highlight-line
 ```
 
 
@@ -266,7 +304,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:4000',
+  uri: 'http://localhost:4000/graphql', // highlight-line
 })
 
 // highlight-start
