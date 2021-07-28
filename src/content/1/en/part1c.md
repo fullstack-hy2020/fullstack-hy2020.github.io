@@ -595,7 +595,7 @@ Next, let's make a <i>Button</i> component for the buttons of our application. W
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}>
       {props.text}
     </button>
   )
@@ -619,15 +619,15 @@ const App = () => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={increaseByOne}
+        onClick={increaseByOne}
         text='plus'
       />
       <Button
-        handleClick={setToZero}
+        onClick={setToZero}
         text='zero'
       />     
       <Button
-        handleClick={decreaseByOne}
+        onClick={decreaseByOne}
         text='minus'
       />           
       // highlight-end
@@ -638,7 +638,7 @@ const App = () => {
 
 Since we now have an easily reusable <i>Button</i> component, we've also implemented new functionality into our application by adding a button that can be used to decrement the counter.
 
-The event handler is passed to the <i>Button</i> component through the _handleClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention.
+The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention.
 
 ### Changes in state cause rerendering
 
@@ -697,7 +697,7 @@ We can simplify the Button component as well.
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}>
       {props.text}
     </button>
   )
@@ -708,8 +708,8 @@ const Button = (props) => {
 We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
