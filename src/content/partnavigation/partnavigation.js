@@ -291,4 +291,81 @@ module.exports = {
       e: 'Expandiéndose aún más'
     },
   },
+  id: {
+    '0': {
+      a: 'Info umum',
+      b: 'Dasar-dasar aplikasi web',
+    },
+    '1': {
+      a: 'Pengenalan React',
+      b: 'JavaScript',
+      c: 'Component state, event handlers',
+      d: 'Detail lebih lengkap mengenai state, debugging Aplikasi React',
+    },
+    '2': {
+      a: 'Proses me-render collection, modules',
+      b: 'Forms',
+      c: 'Mendapatkan data dari server',
+      d: 'Edit data di server',
+      e: 'Menambahkan styles ke aplikasi React',
+    },
+    '3': {
+      a: 'Node.js and Express',
+      b: 'Men-deploy aplikasi ke internet',
+      c: 'Menyimpan data to MongoDB',
+      d: 'Validasi dan ESLint',
+    },
+    '4': {
+      a: 'Struktur aplikasi backend, Pengelanan testing',
+      b: 'Proses testing the backend',
+      c: 'User administration',
+      d: 'Token authentication',
+    },
+    '5': {
+      a: 'Login di frontend',
+      b: 'props.children and proptypes',
+      c: 'Testing React apps',
+      d: 'End to end testing',
+    },
+    '6': {
+      a: 'Flux-architecture and Redux',
+      b: 'Banyak reducers',
+      c: 'Komunikasi dengan server di a redux application',
+      d: 'connect',
+    },
+    '7': {
+      a: 'React-router',
+      b: 'Custom hooks',
+      c: 'Lebih detail mengenai styles',
+      d: 'Webpack',
+      e: 'Class components dan Ragam-ragamnya',
+      f: 'Ujian: Melanjutkan the bloglist',
+    },
+    '8': {
+      a: 'GraphQL-server',
+      b: 'React dan GraphQL',
+      c: 'Database dan user administration',
+      d: 'Login dan Meng-update cache',
+      e: 'Fragments dan subscriptions',
+    },
+    '9': {
+      a: 'Latar Belakang dan Pengenalan',
+      b: 'Langkah pertama bersama TypeScript',
+      c: 'Membuat aplikasi express',
+      d: 'React dengan types',
+    },
+    '10': {
+      a: 'Pengenalan React Native',
+      b: 'React Native dasar',
+      c: 'Komunikasi dengan server',
+      d: 'Testing and melanjutkan aplikasi kita',
+    },
+    '11': {
+      a: 'Pengenalan CI/CD',
+      b: 'Memulai menggunakan GitHub Actions',
+      c: 'Deployment',
+      d: 'Tetap setia',
+      e: 'Langkah Selanjutnya',
+    },
+  },
 };

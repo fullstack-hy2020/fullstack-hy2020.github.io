@@ -31,5 +31,13 @@ module.exports = [
   'web',
   'web application',
   'single page app',
-  'programming'
+  'programming',
+  'belajar reactjs',
+  'belajar expressjs',
+  'belajar fullstack',
+  'belajar CI/CD',
+  'belajar typescript',
+  'belajar typescript dengan mudah',
+  'belajar javascript dari dasar',
+  'belajar javascript mudah dan mengasyikan'
 ];
