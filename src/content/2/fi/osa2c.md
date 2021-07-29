@@ -42,8 +42,8 @@ JSON server on mahdollista [asentaa](https://github.com/typicode/json-server#ins
 
 Globaali asennus ei kuitenkaan ole tarpeen, voimme käynnistää <i>json-serverin</i> komennon _npx_ avulla:
 
-```js
-npx json-server --port=3001 --watch db.json
+```bash
+$ npx json-server --port=3001 --watch db.json
 ```
 
 Oletusarvoisesti <i>json-server</i> käynnistyy porttiin 3000, mutta create-react-app:illa luodut projektit varaavat portin 3000, joten joudumme nyt määrittelemään json-serverille vaihtoehtoisen portin 3001.
@@ -187,8 +187,8 @@ Tässä vaiheessa meitä kiinnostaa osa <i>dependencies</i>, joka määrittelee 
 
 Haluamme nyt käyttöömme axioksen. Voisimme määritellä kirjaston suoraan tiedostoon <i>package.json</i>, mutta on parempi asentaa se komentoriviltä
 
-```js
-npm install axios
+```bash
+$ npm install axios
 ```
 
 **Huomaa, että _npm_-komennot tulee antaa aina projektin juurihakemistossa**, eli siinä minkä sisältä tiedosto <i>package.json</i> löytyy.
@@ -215,8 +215,8 @@ Sen lisäksi, että komento <em>npm install</em> lisäsi axiosin riippuvuuksien 
 
 Tehdään toinenkin pieni lisäys. Asennetaan myös <i>json-server</i> projektin <i>sovelluskehityksen aikaiseksi</i> riippuvuudeksi komennolla
 
-```js
-npm install json-server --save-dev
+```bash
+$ npm install json-server --save-dev
 ```
 
 ja tehdään tiedoston <i>package.json</i> osaan <i>scripts</i> pieni lisäys
@@ -236,8 +236,8 @@ ja tehdään tiedoston <i>package.json</i> osaan <i>scripts</i> pieni lisäys
 
 Nyt voimme käynnistää  json-serverin projektin hakemistosta mukavasti ilman tarvetta parametrien määrittelylle komennolla
 
-```js
-npm run server
+```bash
+$ npm run server
 ```
 
 Tutustumme _npm_-työkaluun tarkemmin kurssin [kolmannessa osassa](/osa3).
@@ -254,9 +254,9 @@ eli sovellus ei onnistu käynnistyessään kytkemään itseään [porttiin](http
 
 Käytimme komentoa _npm install_ kahteen kertaan hieman eri tavalla
 
-```js
-npm install axios
-npm install json-server --save-dev
+```bash
+$ npm install axios
+$ npm install json-server --save-dev
 ```
 
 Parametrissa oli siis hienoinen ero. <i>axios</i> tallennettiin sovelluksen suoritusaikaiseksi riippuvuudeksi, sillä ohjelman suoritus edellyttää kirjaston olemassaoloa. <i>json-server</i> taas asennettiin sovelluskehityksen aikaiseksi riippuvuudeksi (_--save-dev_), sillä ohjelma itse ei varsinaisesti kirjastoa tarvitse, se on ainoastaan apuna sovelluksehityksen aikana. Erilaisista riippuvuuksista lisää kurssin seuraavassa osassa.
@@ -265,8 +265,8 @@ Parametrissa oli siis hienoinen ero. <i>axios</i> tallennettiin sovelluksen suor
 
 Olemme nyt valmiina käyttämään axiosia. Jatkossa oletetaan että <i>json-server</i> on käynnissä portissa 3001. Lisäksi varsinainen React-sovellus tulee käynnistää erikseen, erilliseen komentorivi-ikkunaan komennolla:
 
-```
-npm start
+```bash
+$ npm start
 ```
 
 Kirjaston voi ottaa käyttöön samaan tapaan kuin esim. React otetaan käyttöön, eli sopivalla <em>import</em>-lauseella.
