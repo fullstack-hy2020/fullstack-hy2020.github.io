@@ -145,6 +145,11 @@ Technically speaking the HTTP-protocol is not well suited for communication from
 ### Subscriptions on the server
 
 Let's implement subscriptions for subscribing for notifications about new persons added.
+First, we have to install the package for adding subscriptions to GraphQL:
+
+```bash
+npm install graphql-subscriptions
+```
 
 There are not many changes to the server. The schema changes like so:
 
@@ -163,7 +168,7 @@ The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also h
 The required changes are as follows:
 
 ```js
-const { PubSub } = require('apollo-server') // highlight-line
+const { PubSub } = require('graphql-subscriptions') // highlight-line
 const pubsub = new PubSub() // highlight-line
 
   Mutation: {
