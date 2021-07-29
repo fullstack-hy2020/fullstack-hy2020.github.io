@@ -144,14 +144,14 @@ Technically speaking the HTTP-protocol is not well suited for communication from
 
 ### Subscriptions on the server
 
-Let's implement subscriptions for subscribing for notifications about new persons added.
-First, we have to install the package for adding subscriptions to GraphQL:
+Let's implement subscriptions for subscribing for notifications about new persons added. Starting from Apollo 3.0, built-in support for subscriptions has been removed. To enable subscriptions, we have to use Apollo server alongside an HTTP server. For this example, we will use Express as recommended in Apollo's document. 
+First, we have to install all the dependencies for adding subscriptions to GraphQL:
 
 ```bash
-npm install graphql-subscriptions
+npm install express apollo-server-express graphql-subscriptions subscriptions-transport-ws @graphql-tools/schema
 ```
 
-There are not many changes to the server. The schema changes like so:
+The schema changes like so:
 
 ```js
 type Subscription {
@@ -212,12 +212,51 @@ _personAdded_ subscriptions resolver registers all of the subscribers by returni
 
 Let's do the following changes to the code which starts the server
 ```js
-// ...
+const { createServer } = require('http')
+const express = require('express')
+const { execute, subscribe } = require('graphql')
+const { ApolloServer, gql } = require('apollo-server-express')
+const { SubscriptionServer } = require('subscriptions-transport-ws')
+const { makeExecutableSchema } = require('@graphql-tools/schema')
+  
+// Other imports...
+  
+(async () => {
+  const PORT = 4000
+  const app = express()
+  const httpServer = createServer(app);
 
-server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
-  console.log(`Server ready at ${url}`)
-  console.log(`Subscriptions ready at ${subscriptionsUrl}`) // highlight-line
-})
+  // typeDefs & resolvers declaration...
+  
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+
+  const server = new ApolloServer({
+    schema,
+  });
+  await server.start();
+  server.applyMiddleware({ app });
+
+  const subscriptionServer = SubscriptionServer.create({
+    schema,
+    execute,
+    subscribe,
+  }, {
+      server: httpServer,
+      path: server.graphqlPath
+  });
+
+  httpServer.listen(PORT, () => {
+    console.log(
+      `Server ready at http://localhost:${PORT}${server.graphqlPath}`
+    )
+    console.log(
+      `Subscription ready at ws://localhost:${PORT}${server.graphqlPath}`
+    )
+  })
+})()
+  
+//The logic for creating the previous Apollo Server should be removed.
+
 ```
 
 
@@ -232,12 +271,7 @@ Subscriptions ready at ws://localhost:4000/graphql
 No other changes to the server are needed.
 
 
-It's possible to test the subscriptions with the GraphQL playground like this:
-
-![](../../images/8/31.png)
-
-
-When you press "play" on a subscription, the playground waits for notifications from the subscription. 
+It's possible to test the subscriptions with the GraphQL playground by opening the playground in 2 browser tabs. When you press "Run" on a subscription, the playground waits for notifications from the subscription. You can switch to the second tab to add the new data, then switch back and see the received response.
 
 
 The backend code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
