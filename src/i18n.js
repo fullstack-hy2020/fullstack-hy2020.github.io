@@ -4,12 +4,14 @@ import en from './locales/en';
 import fi from './locales/fi';
 import zh from './locales/zh';
 import es from './locales/es';
+import id from './locales/id';
 
 const resources = {
   en,
   fi,
   zh,
   es,
+  id
 };
 
 i18n.init({

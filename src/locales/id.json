@@ -1,0 +1,54 @@
+{
+    "common": {
+      "nextPart": "Bagian Selanjutnya",
+      "previousPart": "Bagian Sebelumnya",
+      "readMore": "Lebih Lengkap",
+      "proposeChanges": "Mengusulkan perubahan pada materi"
+    },
+    "searchPage": {
+      "noMatches": "Hasil tidak ditemukan",
+      "matchesTitle": "Ditemukan {{count}} hasil untuk query \"{{query}}\""
+    },
+    "aboutPage": {
+      "generalTitle": "Umum"
+    },
+    "navigation": {
+      "aboutCourse": "Tentang kursus",
+      "courseContents": "Konten kursus",
+      "faq": "FAQ",
+      "partners": "Partners",
+      "challenge": "Challenge",
+      "searchLinkSrLabel": "Cari materi"
+    },
+    "challengePage": {
+      "aboutTitle": "Ini adalah Full Stack -challenge",
+      "joinTitle": "Perusahaan, Perhatikan ini!",
+      "registerButton": "Daftarkan perusahaanmu ke Full Stack challenge",
+      "nameLabel": "Nama",
+      "namePlaceholder": "Jono",
+      "titleLabel": "Judul",
+      "companyLabel": "Perusahaan",
+      "companyPlaceholder": "PT Perusahaan",
+      "phoneLabel": "Nomor Handphone",
+      "emailLabel": "ALamat Email",
+      "whereDidYouHearLabel": "Dari mana kamu mendengar challenge ini",
+      "submitButton": "Submit",
+      "submitSuccessMessage": "Terima kasih! Kita akan menghubungimu naait!",
+      "participantsTitle": "Perusahan-perusahaan tersebut telah bergabung bersama Full Stack challenge",
+      "coOperationTitle": "Ber kooperasi dengan",
+      "infoButton": "Lebih detail mengenai challenge"
+    },
+    "companiesPage": {
+      "storiesTitle": "Cerita-cerita developer dari partner kami"
+    },
+    "faqPage": {
+      "faqTitle": "Frequently asked questions"
+    },
+    "homePage": {
+      "startCourseButton": "Mulai kursus",
+      "announcementsTitle": "Pengumuman",
+      "authorsTitle": "Penulis and Lisensi",
+      "courseNameTitle": "Full Stack open 2021"
+    }
+  }
+  
