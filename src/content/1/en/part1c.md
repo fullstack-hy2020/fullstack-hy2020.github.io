@@ -60,7 +60,7 @@ const Hello = (props) => {
 }
 ```
 
-The logic for guessing the year of birth is separated into its own function that is called when the component is rendered.
+The logic for guessing the year of birth is separated into a function of its own that is called when the component is rendered.
 
 The person's age does not have to be passed as a parameter to the function, since it can directly access all props that are passed to the component.
 
@@ -368,13 +368,13 @@ It's easy to follow and track the calls made to the <i>App</i> component's rende
 
 ### Event handling
 
-We have already mentioned <i>event handlers</i> a few times in [part 0](/en/part0), that are registered to be called when specific events occur. E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered.
+We have already mentioned <i>event handlers</i> that are registered to be called when specific events occur a few times in [part 0](/en/part0). E.g. a user's interaction with the different elements of a web page can cause a collection of various different kinds of events to be triggered.
 
 Let's change the application so that increasing the counter happens when a user clicks a button, which is implemented with the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) element.
 
-Button elements support so-called [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), of which [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) is the most common event.
+Button elements support so-called [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), of which [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) is the most common event. The click event on a button can also be triggered with the keyboard or a touch screen despite the name <i>mouse event</i>.
 
-In React, registering an event handler function to the <i>click</i> event [happens](https://reactjs.org/docs/handling-events.html) like this:
+In React, [registering an event handler function](https://reactjs.org/docs/handling-events.html) to the <i>click</i> event happens like this:
 
 ```js
 const App = () => {
@@ -468,7 +468,7 @@ We define the event handlers for our buttons where we declare their <i>onClick</
 ```
 
 <!-- Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa: -->
-What if we'd try to define the event handlers in a simpler form?
+What if we tried to define the event handlers in a simpler form?
 
 ```js
 <button onClick={setCounter(counter + 1)}> 
