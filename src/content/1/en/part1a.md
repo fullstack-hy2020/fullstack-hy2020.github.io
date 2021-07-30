@@ -28,7 +28,7 @@ $ npm start
 
 By default, the application runs in localhost port 3000 with the address <http://localhost:3000>
 
-Chrome should launch automatically. Open the browser console **immediately**. Also open a text editor so that you can view the code as well as the web-page at the same time on the screen:
+Your default browser should launch automatically. Open the browser console **immediately**. Also open a text editor so that you can view the code as well as the web-page at the same time on the screen:
 
 ![](../../images/1/1e.png)
 
@@ -61,7 +61,7 @@ The files <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i>, <i>setupTests.js<
 
 ### Component
 
-The file <i>App.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i> 
+The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i> 
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -338,7 +338,7 @@ const App = () => {
 }
 ```
 
-the page is not going to display the content defined within the Footer component, and instead React only creates an empty <i>footer</i> element. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page.
+the page is not going to display the content defined within the Footer component, and instead React only creates an empty [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) element, i.e. the built-in HTML element instead of the custom React element of the same name. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page.
 
 Note that the content of a React component (usually) needs to contain **one root element**. If we, for example, try to define the component <i>App</i> without the outermost <i>div</i>-element:
 
@@ -412,7 +412,7 @@ part2
   countries
 ```
 
-See [this](https://github.com/fullstack-hy2020/example-submission-repository)!
+See this [example submission repository](https://github.com/fullstack-hy2020/example-submission-repository)!
 
 For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
 
