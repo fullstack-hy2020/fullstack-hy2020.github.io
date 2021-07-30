@@ -1311,16 +1311,16 @@ const App = () => {
 - <!--<i>Statistic</i> for displaying a single statistic, e.g. the average score.--><i>显示单一统计数字的 statistics</i>，例如平均分数。
 
 <!-- To be clear: the <i>Statistic</i> component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics: -->
-需要明确的是:<i>statistics</i> 组件总是显示一个统计信息，这意味着应用需要使用多个组件来渲染所有的统计信息:
+需要明确的是:<i>StatisticLine</i> 组件总是显示一个统计信息，这意味着应用需要使用多个组件来渲染所有的统计信息:
 
 ```js
 const Statistics = (props) => {
   /// ...
   return(
     <div>
-      <Statistic text="good" value ={...} />
-      <Statistic text="neutral" value ={...} />
-      <Statistic text="bad" value ={...} />
+      <StatisticLine text="good" value ={...} />
+      <StatisticLine text="neutral" value ={...} />
+      <StatisticLine text="bad" value ={...} />
       // ...
     </div>
   )

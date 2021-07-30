@@ -684,7 +684,7 @@ const App = () => {
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}}>
       {props.text}
     </button>
   )
@@ -709,15 +709,15 @@ const App = () => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={increaseByOne}
+        onClick={increaseByOne}
         text='plus'
       />
       <Button
-        handleClick={setToZero}
+        onClick={setToZero}
         text='zero'
       />     
       <Button
-        handleClick={decreaseByOne}
+        onClick={decreaseByOne}
         text='minus'
       />           
       // highlight-end
@@ -809,7 +809,7 @@ const Display = ({ counter }) => <div>{counter}</div>
 ```js
 const Button = (props) => {
   return (
-    <button onClick={props.handleClick}>
+    <button onClick={props.onClick}>
       {props.text}
     </button>
   )
@@ -822,8 +822,8 @@ const Button = (props) => {
 我们可以使用解构，只从<i>props</i> 获取所需的字段，并使用更紧凑的箭头函数:
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
+const Button = ({ onClick, text }) => (
+  <button onClick={onClick}>
     {text}
   </button>
 )
