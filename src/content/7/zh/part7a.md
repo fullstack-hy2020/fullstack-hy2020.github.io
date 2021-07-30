@@ -234,7 +234,7 @@ import {
 <!-- The switch works by rendering the first component whose <i>path</i> matches the url in the browser's address bar. -->
 这个开关的工作原理是，我们渲染第一个组件，它的<i>path</i> 匹配浏览器地址栏中的 url。
 
-<!-- Note that the order of the components is important. If we would put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, the rest components would never get a chance to render because every path start with "/" will consider matched with first component: -->
+<!-- Note that the order of the components is important. If we put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, the rest components would never get a chance to render because every path start with "/" will consider matched with first component: -->
 注意，组件的顺序很重要。 如果我们使用<i>Home</i>-组件，它的路径是<i> path="/"</i>，那么剩下的组件将不会有机会去渲染，因为每一个以 "/"开头的路径都会匹配成第一个组件。
 
 ```js 

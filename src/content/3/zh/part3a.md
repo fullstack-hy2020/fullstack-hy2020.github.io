@@ -549,6 +549,7 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 <!-- We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>: -->
 我们可以对资源执行不同的操作。要执行的操作由 HTTP<i>动词verb</i> 定义:
 
+<!--  
 | URL                   | verb                | functionality                                                    |
 | --------------------- | ------------------- | -----------------------------------------------------------------|
 | notes/10              | GET                 | fetches a single resource                                        |
@@ -558,6 +559,18 @@ Representational State Transfer，又名REST， 是在2000年 Roy Fielding 的[�
 | notes/10              | PUT                 | replaces the entire identified resource with the request data    |
 | notes/10              | PATCH               | replaces a part of the identified resource with the request data |
 |                       |                     |                                                                  |
+-->  
+  
+  
+| URL                   | 动词verb            | 功能                                                              |
+| --------------------- | ------------------- | -----------------------------------------------------------------|
+| notes/10              | GET                 | 获取单一资源                                                      |
+| notes                 | GET                 | 获取集合中的所有资源                                               |
+| notes                 | POST                | 依据请求数据创建一个新的资源                                        |
+| notes/10              | DELETE              | 删除指定资源                                                      |
+| notes/10              | PUT                 | 使用请求数据替换指定资源                                           |
+| notes/10              | PATCH               | 使用请求数据替换指定资源的一部分                                    |
+
 
 <!-- This is how we manage to roughly define what REST refers to as a [uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints), which means a consistent way of defining interfaces that makes it possible for systems to co-operate. -->
 这就是我们如何粗略地定义 REST 所指的 [统一接口 uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) ，这意味着一种一致的定义接口的方式，使系统能够进行合作。
@@ -1159,9 +1172,9 @@ Data:
 <!-- Implement error handling for creating new entries. The request is not allowed to succeed, if: -->
 为创建新条目实现错误处理。以下情况，请求不允许成功，如:
 
-- <!--The name or number is missing--> 
+<!--The name or number is missing--> 
 - 姓名或电话号码遗失
-- <!--The name already exists in the phonebook-->
+<!--The name already exists in the phonebook-->
 - 电话簿里已经有这个名字了
 
 

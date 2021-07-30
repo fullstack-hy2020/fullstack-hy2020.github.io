@@ -518,9 +518,10 @@ const courseParts: CoursePart[] = [
 然后创建一个组件<i>Part</i>，它渲染每种类型的课程章节的所有属性。 使用基于switch case的详尽类型检查！ 在组件<i>Content</i> 中使用新组件。
 
 <!-- Lastly, add your own course part interface with at least the following attributes: <i>name</i>, <i>exerciseCount</i> and <i>description</i>. Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now if you have not modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors. -->
-最后，添加您自己的课程章节接口，至少包含如下属性:<i>name</i>、<i>exerisecount</i> 和<i>description</i>。 然后将该接口添加到类型 union<i>CoursePart</i>，并将相应的数据添加到<i>courseets</i> 变量。 现在，如果您没能正确地修改了您的<i>Content</i> 组件，您应该会得到一个错误，因为您还没有添加对第四个课程部分类型的支持。 对<i>Content</i> 进行必要的更改，这样新课程部分的所有属性都会得到渲染，编译器也不会产生任何错误。
+<!-- 最后，添加您自己的课程章节接口，至少包含如下属性:<i>name</i>、<i>exerisecount</i> 和<i>description</i>。 然后将该接口添加到类型 union<i>CoursePart</i>，并将相应的数据添加到<i>courseets</i> 变量。 现在，如果您没能正确地修改了您的<i>Content</i> 组件，您应该会得到一个错误，因为您还没有添加对第四个课程部分类型的支持。 对<i>Content</i> 进行必要的更改，这样新课程部分的所有属性都会得到渲染，编译器也不会产生任何错误。 -->
 
-Lastly, add your another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following:
+<!-- Lastly, add another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>,  <i>description</i> and <i>requirements</i> that is an string array. The objects of this type look like the following: -->
+最后，添加另一个课程章节接口，至少包含如下属性:<i>name</i>、<i>exerisecount</i> 和<i>description</i>，以及一个数组<i>requirements</i>。 该对象的类型看起来如下：
 
 ```js
 {

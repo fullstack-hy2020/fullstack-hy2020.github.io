@@ -100,8 +100,8 @@ node --inspect index.js
 <!-- Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). -->
 当然，您可以在自己的计算机上安装和运行 MongoDB。 然而，互联网上也充满了你可以使用的 Mongo 数据库服务。 在本课程中，我们首选的 MongoDB 提供者将是[MongoDB Atlas](https://www.MongoDB.com/cloud/Atlas)。
 
-<!-- Once you've created and logged into your account, Atlas will recommend creating a cluster: -->
-一旦你创建并登录到你的账户，Atlas 会建议你创建一个集群:
+<!-- Once you've created and logged into your account, Atlas will recommend creating a cluster(In later versions of MongoDB Atlas, you may see create a database): -->
+一旦你创建并登录到你的账户，Atlas 会建议你创建一个集群(在新版本的MongoDB Atlas 中，你可能看到的是创建一个数据库):
 
 ![](../../images/3/57.png)
 

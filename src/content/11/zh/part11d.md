@@ -60,9 +60,9 @@ GitHub 的 pull 请求接口提供了描述和讨论接口。在底部，它显�
 on:
   push:
     branches:
-      - main
+      - master
   pull_request: // highlight-line
-    branches: [main] // highlight-line
+    branches: [master] // highlight-line
     types: [opened, synchronize] // highlight-line
 ```
 

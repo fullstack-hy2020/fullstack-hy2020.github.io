@@ -107,8 +107,9 @@ lang: zh
 <!-- Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>. -->
 确保现在已经安装了  [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)，并使用 <code>heroku login</code> 的 CLI 登录到 Heroku。
 
-<!-- Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your\_app\_name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location! -->
-使用 CLI: <code>heroku create --region eu {your\_app\_name}</code> 在 Heroku 创建一个新的应用程序，选择一个靠近你定位的地区！
+<!-- Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your\_app\_name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location! (You can also leave 'your_app_name' blank and Heroku will create an app name for you.)
+-->
+使用 CLI: <code>heroku create --region eu {your\_app\_name}</code> 在 Heroku 创建一个新的应用程序，选择一个靠近你定位的地区！（你也可以填写'your_app_name' ，Heroku会帮你创建应用。
 
 <!-- Generate an API token for your Heroku profile using command <code>heroku authorizations:create</code>, and save the credentials to a local file but <i>**do not push those to GitHub**</i>! -->
 使用 <code>heroku authorizations:create</code> 命令为您的 Heroku 配置文件生成一个 API 令牌，并将凭证保存到本地文件中，但是<i>不要将这些文件推送到 GitHub</i>！

@@ -157,6 +157,14 @@ const ALL_PERSONS = gql`
 <!-- Let's implement subscriptions for subscribing for notifications about new persons added. -->
 让我们实现订阅，以订阅关于添加的新用户的通知。
 
+<!-- First, we have to install the package for adding subscriptions to GraphQL: -->
+首先，我们要安装额外的包来支持订阅GraphQL：
+
+```bash
+npm install graphql-subscriptions
+```
+
+
 <!-- There are not many changes to the server. The schema changes like so: -->
 服务器没有太多变化，模式变化如下:
 
@@ -176,7 +184,7 @@ type Subscription {
 所需的修改如下:
 
 ```js
-const { PubSub } = require('apollo-server') // highlight-line
+const { PubSub } = require('graphql-subscriptions') // highlight-line
 const pubsub = new PubSub() // highlight-line
 
   Mutation: {
