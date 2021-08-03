@@ -212,8 +212,15 @@ A quick (but perhaps a bit dirty) way to solve the problem was to checkout the r
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
-
 A better option would perhaps be another job that takes care of tagging.
+
+There's another error you may encounter when using tags action:
+```
+  Bumping tag 0.0.0. 
+	New tag 0.0.1-beta.1
+fatal: tag '0.0.1-beta.1' already exists
+```
+A quick way to solve this is to add `0.0.0` tag manually using command line like so `git tag 0.0.0`. Then, push the tag to remote using `git push origin --tags`.
 
 #### 11.17 Skipping a commit for tagging and deployment
 
