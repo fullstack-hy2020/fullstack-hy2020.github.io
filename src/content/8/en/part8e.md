@@ -144,7 +144,7 @@ Technically speaking the HTTP-protocol is not well suited for communication from
 
 ### Subscriptions on the server
 
-**NB!** This subscription setup is based on the apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed the apollo-server version 2 (for example by running `npm i apollo-server@2.25.2`) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
+**NB!** This subscription setup is based on the apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed the apollo-server version 2 (for example by running _npm i apollo-server@2.25.2_) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
   
 Let's implement subscriptions for subscribing for notifications about new persons added.
 First, we have to install the package for adding subscriptions to GraphQL:
