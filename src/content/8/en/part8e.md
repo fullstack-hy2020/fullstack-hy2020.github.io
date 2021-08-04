@@ -144,7 +144,7 @@ Technically speaking the HTTP-protocol is not well suited for communication from
 
 ### Subscriptions on the server
 
-**NB!** This subscription setup is based on the `apollo-server` version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed the `apollo-server` version 2 (for example by running `npm i apollo-server@2.25.2`) _or_ follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
+**NB!** This subscription setup is based on the apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed the apollo-server version 2 (for example by running `npm i apollo-server@2.25.2`) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
   
 Let's implement subscriptions for subscribing for notifications about new persons added.
 First, we have to install the package for adding subscriptions to GraphQL:
@@ -429,7 +429,7 @@ The final code of the client can be found on [Github](https://github.com/fullsta
 
 ### n+1-problem
 
-First of all  you'll need to enable a debugging option via `mongoose` in your backend project directory, by adding a line of code as shown below:
+First of all  you'll need to enable a debugging option via _mongoose_ in your backend project directory, by adding a line of code as shown below:
 
 
 ```js
@@ -555,7 +555,7 @@ friendOf: async (root) => {
 },
 ```
 
-and considering we have 5 persons saved, and we query `allPersons` without `phone` as argument, we see an absurd amount of queries like below.
+and considering we have 5 persons saved, and we query _allPersons_ without _phone_ as argument, we see an absurd amount of queries like below.
 
 <pre>
 Person.find_v1
@@ -566,7 +566,7 @@ User.find
 User.find
 </pre>
 
-NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
+NOTE: Depending upon if you provided _phone_ parameter or not when querying _allPersons_, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 
