@@ -233,7 +233,7 @@ app.use('/api/notes', notesRouter)
 ```
 
 <!-- The router we defined earlier is used <i>if</i> the URL of the request starts with <i>/api/notes</i>. For this reason, the notesRouter object must only define the relative parts of the routes, i.e. the empty path <i>/</i> or just the parameter <i>/:id</i>. -->
-如果请求的 URL 以 <i>/api/notes</i>开头，则会使用之前定义的路由。 由于这个原因，notesRouter 对象必须只定义路由的相对部分，即空路径<i>/</i>或仅仅定义参数<i>/:id</i>。【TODO】
+如果请求的 URL 以 <i>/api/notes</i>开头，则会使用之前定义的路由。 由于这个原因，notesRouter 对象必须只定义路由的相对部分，即空路径<i>/</i>或仅仅定义参数<i>/:id</i>。
 
 
 <!-- After making these changes, our <i>app.js</i> file looks like this: -->
