@@ -307,6 +307,19 @@ if: ${{ github.event_name == 'push' }}
 
 <!-- A better option would perhaps be another job that takes care of tagging. -->
 
+There's another error you may encounter when using tags action:
+你还有可能遇到一些其他的错误：
+
+```
+  Bumping tag 0.0.0. 
+	New tag 0.0.1-beta.1
+fatal: tag '0.0.1-beta.1' already exists
+```
+<!-- A quick way to solve this is to add `0.0.0` tag manually using command line like so `git tag 0.0.0`. Then, push the tag to remote using `git push origin --tags`. -->
+
+快速解决该错误的方法是使用类似 `git tag 0.0.0` 命令手动增加 `0.0.0` 标签。然后利用 `git push origin --tags` 推送到远程仓库。
+
+
 #### 11.17 Skipping a commit for tagging and deployment
 跳过标签和部署的提交
 

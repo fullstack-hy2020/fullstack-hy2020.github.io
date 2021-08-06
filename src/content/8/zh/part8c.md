@@ -56,7 +56,7 @@ schema.plugin(uniqueValidator)
 module.exports = mongoose.model('Person', schema)
 ```
 
-<!-- We also included a few validations. _required: true_, which ensures that value exists, is actually redundant as just using GraphQL ensures that the fields exist. However it is good to also keep validation in the database.  -->
+<!-- We also included a few validations. _required: true_, which ensures that value exists, which is actually redundant by using GraphQL we ensure that the fields exist. However it is good to also keep validation in the database.  -->
 我们还包括了一些验证。 Required: true，它确保值的存在，实际上是冗余的，因为仅使用 GraphQL 就可以确保字段的存在。 不过，最好还是在数据库中保持验证。
 
 <!-- We can get the application to mostly work with the following changes:  -->

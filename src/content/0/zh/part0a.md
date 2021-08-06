@@ -141,8 +141,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 <!-- -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交0-7章的至少127个练习
-- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097) 
--	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [通过开放大学开启第六章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097) 
+-	[申请第六章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
 【第七章 - 全栈Web开发，扩展2(1 cr, AYCSM141083en)】
@@ -155,8 +155,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交0-7章的关于核心课程的至少138个练习
-- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
--	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [通过开放大学开启第七章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
+-	[申请第七章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
 【第八章 - 全栈Web开发，GraphQL(1 cr, AYCSM14113)】
@@ -168,8 +168,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交第8章的至少22/26个练习。
-- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
--	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [通过开放大学开启第八章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
+-	[申请第八章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
 【第九章-全栈Web开发：TypeScript (1 cr, AYCSM14110)】
@@ -181,8 +181,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 -	提交第9章的至少24/27个练习。
-- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
--	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [通过开放大学开启第九章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
+-	[申请第九章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
 【第十章-全栈Web开发： React Native (2 cr, AYCSM14111)】
@@ -196,8 +196,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 -	提交第10章的至少25个练习. 
-- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
--	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [通过开放大学开启第十章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
+-	[申请第十章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
 【第11章-全栈Web开发：持续集成/持续交付(1 cr, AYCSM14112)】
@@ -213,8 +213,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交11章的所有练习
-- [通过开放大学开启这一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
--	[申请这一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [通过开放大学开启第十一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
+-	[申请第十一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 ### How to get your credits 
 【如何获得学分】
@@ -241,7 +241,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 <!-- **Please note** that in order to get university credits you need a registration for each completed part, please see [here](/en/part0/general_info#parts-and-completion) for more info about registration. -->
 
-**请注意** ， 为了获得大学的学分，你需要为每个章节进行注册，请看 [这里](/zh/part0/general_info#parts-and-completion) 来阅读注册的详细信息。
+**请注意** ， 为了获得大学的学分，你需要为每个章节进行注册，请 [阅读注册的详细信息](/zh/part0/general_info#parts-and-completion) 。
 
 ### Course certificate 
 【结业证书】
@@ -374,7 +374,7 @@ Enroll in the course through Open University by 9 Jan 2022 [here](https://www.av
 - 你是一个在另一个[HAKA 成员学院](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)的学生。
 
 <!-- After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID. -->
-注册完课程后：注意你还需要将你的学生ID保存到[提交系统的](https://studies.cs.helsinki.fi/stats/myinfo)我的提交标签页面。如果你使用你的学院的HAKA认证来登录Moodle，请发送信息到 avoin-student@helsinki.fi 来询问你的赫尔辛基大学的学生ID。
+注册完课程后：注意你还需要将你的学生ID保存到[提交系统的](https://studies.cs.helsinki.fi/stats/myinfo)<i>我的提交</i>标签页面。如果你使用你的学院的HAKA认证来登录Moodle，请发送信息到 avoin-student@helsinki.fi 来询问你的赫尔辛基大学的学生ID。
 
 <!-- Note that you also have to save your student ID number to the "my submissions" view in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). -->
 
