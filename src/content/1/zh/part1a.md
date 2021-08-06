@@ -35,9 +35,9 @@ $ npm start
 <!-- By default, the application runs in localhost port 3000 with the address <http://localhost:3000> -->
 默认情况下，应用在本地localhost，3000端口运行，地址为 http://localhost:3000
 
-<!-- Chrome should launch automatically. Open the browser console **immediately**. Also open a text editor so that you can view the code as well as the web-page at the same time on the screen: -->
+<!-- Your default browser should launch automatically. Open the browser console **immediately**. Also open a text editor so that you can view the code as well as the web-page at the same time on the screen: -->
 
-Chrome这时应该会自动启动。 别忘了，**立即**打开浏览器控制台。 还可以打开一个文本编辑器，这样你就可以同时在屏幕上查看代码和网页了： 
+默认浏览器这时应该会自动启动。 别忘了，**立即**打开浏览器控制台。 还可以打开一个文本编辑器，这样你就可以同时在屏幕上查看代码和网页了： 
 
 ![](../../images/1/1e.png)
 
@@ -73,7 +73,7 @@ export default App
 ### Component
 【组件】
 <!-- The file <i>index.js</i> now defines a React-[component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i> and the command on the final line -->
-文件<i>App.js</i> 定义了一个 React-[组件component](https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>， <i>index.js</i> 的最后一行代码为：
+文件<i>App.js</i> 定义了一个 [React component](https://reactjs.org/docs/components-and-props.html) ，命名为<i>App</i>， <i>index.js</i> 的最后一行代码为：
 
 ```js
 ReactDOM.render(<App />, document.getElementById('root'))
@@ -409,9 +409,9 @@ const App = () => {
 }
 ```
 
-<!-- the page is not going to display the content defined within the Footer component, and instead React only creates an empty <i>footer</i> element. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page. -->
+<!-- the page is not going to display the content defined within the Footer component, and instead React only creates an empty  [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) element, i.e. the built-in HTML element instead of the custom React element of the same name. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page. -->
 
-页面是不会显示 Footer 组件中定义的内容，React 只会创建一个空的<i>Footer</i> 元素。 只有您将组件名称的第一个字母更改为大写字母， React 才会创建在 Footer 组件中定义的<i>div</i>-元素，并将该元素渲染在页面上。
+页面是不会显示 Footer 组件中定义的内容，React 只会创建一个空的[footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) 元素，例如， 这种行为与内置的HTML 元素不同，和React 元素只是同名。 只有您将组件名称的第一个字母更改为大写字母， React 才会创建在 Footer 组件中定义的<i>div</i>-元素，并将该元素渲染在页面上。
 
 <!-- Note that the content of a React component (usually) needs to contain **one root element**. If we, for example, try to define the component <i>App</i> without the outermost <i>div</i>-element: -->
 注意 React 组件的内容(通常)需要包含 **一个根元素** 。 例如，如果我们尝试定义<i>App</i>组件而不使用最外面的<i>div</i>-元素:
@@ -494,8 +494,8 @@ part2
   countries
 ```
 
-<!-- See [this](https://github.com/fullstack-hy2020/example-submission-repository)! -->
-参考 [这里](https://github.com/fullstack-hy2020/example-submission-repository)!
+<!-- See this [example submission repository](https://github.com/fullstack-hy2020/example-submission-repository)! -->
+参考这个 [样例提交仓库](https://github.com/fullstack-hy2020/example-submission-repository)!
 
 <!-- For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1. -->
 为课程的每一章节都创建一个目录，它进一步分支成一系列练习的目录，如第1章节的“ unicafe”。

@@ -64,7 +64,7 @@ const Hello = (props) => {
 
 
 
-<!-- The logic for guessing the year of birth is separated into its own function that is called when the component is rendered. -->
+<!-- The logic for guessing the year of birth is separated into its a function of  function that is called when the component is rendered. -->
 猜测出生年份的逻辑被放到了它自己的函数中，这个函数会在渲染组件时被调用。
 
 <!-- The person's age does not have to be passed as a parameter to the function, since it can directly access all props that are passed to the component. -->
@@ -424,8 +424,8 @@ const App = () => {
 <!-- Let's change the application so that increasing the counter happens when a user clicks a button, which is implemented with the [button](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button)-element. -->
 让我们修改一下应用，这样当用户单击一个按钮时，计数器就会增加，这可以通过[button](https://developer.mozilla.org/en-us/docs/web/html/element/button)-元素实现的。
 
-<!-- Button-elements support so-called [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), of which [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) is the most common event. -->
-button-元素支持所谓的[鼠标事件](https://developer.mozilla.org/en-us/docs/web/api/mouseevent 事件) ，其中[点击](https://developer.mozilla.org/en-us/docs/web/events/click 事件)是最常见的事件。
+<!-- Button-elements support so-called [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), of which [click](https://developer.mozilla.org/en-US/docs/Web/Events/click) is the most common event.  The click event on a button can also be triggered with the keyboard or a touch screen despite the name <i>mouse event</i>.-->
+button-元素支持所谓的[鼠标事件](https://developer.mozilla.org/en-us/docs/web/api/mouseevent 事件) ，其中[点击](https://developer.mozilla.org/en-us/docs/web/events/click 事件)是最常见的事件。点击事件同样可能被键盘或者触屏设备所触发，虽然名字叫<i>鼠标事件</i>
 
 <!-- In React, registering an event handler function to the <i>click</i> event [happens](https://reactjs.org/docs/handling-events.html) like this: -->
 在 React 中，将一个事件处理函数注册到<i>click</i> 事件 [发生](https://reactjs.org/docs/handling-events.html) 时，如下：
