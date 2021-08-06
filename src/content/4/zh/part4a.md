@@ -832,7 +832,7 @@ npm test -- -t 'when list has only one blog, equals the likes of that'
 
 #### 4.6*: helper functions and unit tests, 步骤4
 <!-- This and the next exercise are a little bit more challenging. Finishing these two exercises is not required in order to advance in the course material, so it may be a good idea to return to these once you're done going through the material for this part in its entirety. -->
-这个练习和下一个练习更有挑战性。 完成这两个练习并不是为了提前学习课程材料，所以一旦你完成了这一章节的全部材料，回到这些练习可能是一个好主意。
+这个练习和下一个练习更有挑战性。为继续学习课程材料，并不一定要完成这两个练习，所以等你学习了这一章节的全部材料，再回到这些练习可能是一个好主意。
 
 <!-- Finishing this exercise can be done without the use of additional libraries. However, this exercise is a great opportunity to learn how to use the [Lodash](https://lodash.com/) library. -->
 可以在不使用其他库的情况下完成这个练习。 然而，这个练习是一个很好的机会来学习如何使用[Lodash](https://lodash.com/)。
