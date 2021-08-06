@@ -1345,7 +1345,7 @@ const Statistics = (props) => {
 ![](../../images/1/17a.png)
 
 <!-- Then perform the necessary actions to make the warning disappear. Try Googling the error message if you get stuck. -->
-执行必要的操作使警告消失。如果卡住了，尝试用谷歌搜索错误消息。
+执行必要的操作使警告消失。如果卡住了，尝试用搜索引擎搜索错误消息。
 
 <!--<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>-->
 典型的错误来用来源: `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.`  是 Chrome 扩展导致的。 尝试在 `chrome://extensions/`中  ，逐个禁用它们并刷新 React app 页面; 错误最终应该会消失。 
