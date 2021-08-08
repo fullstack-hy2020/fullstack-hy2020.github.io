@@ -49,7 +49,7 @@ To use the eslint-plugin-jest plugin in ESLint, we need to include it in the plu
 {
   "plugins": ["react", "jest"],
   "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"], // highlight-line
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true
   },
