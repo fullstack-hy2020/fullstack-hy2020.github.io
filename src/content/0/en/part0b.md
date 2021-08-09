@@ -692,14 +692,37 @@ The diagram does not have to be a sequence diagram. Any sensible way of presenti
 All necessary information for doing this, and the next two exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
 The idea of these exercises is to read the text through once more, and to think through what is going on there. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible. 
 
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+server-->browser: HTTP status code 302
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
+server-->browser: html code
+browser->server: HTTP GET https://studies.cs/helsinki.fi/exampleapp/main.css
+server-->browser: css code
+browser->server: HTTP GET https://studies.cs/helsinki.fi/exampleapp/main.js
+server-->browser: javascript code
+browser->server: HTTP GET https://studies.cs/helsinki.fi/exampleapp/data.json
+server-->browser: json raw data
+  
   <h4>0.5: Single page app</h4>
 
 Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
+
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa
+server-->browser: html file
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
+server-->browser: css file
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/spa.js
+server-->browser: js code file
+browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
+server-->browser: json data 
+  
   <h4>0.6: New note</h4>
 
 Create a diagram depicting the situation where the user creates a new note using the single page version of the app. 
-
+browser->server: HTTP POST https://studies.cs.helsinki.fi/exampleapp/new_note
+  
+  
 This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
