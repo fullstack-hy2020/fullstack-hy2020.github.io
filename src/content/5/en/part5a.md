@@ -488,7 +488,7 @@ Changes to the login method are as follows:
 ```
 
 
-The details of a logged-in user are now saved to the local storage, and they can be viewed on the console: 
+The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing `window.localStorage` to the console): 
 
 ![](../../images/5/3e.png)
 
