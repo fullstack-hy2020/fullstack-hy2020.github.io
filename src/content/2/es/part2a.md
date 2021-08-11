@@ -23,7 +23,7 @@ Cuando algo no funciona, no adivine qué está mal. En su lugar, use la consola 
 console.log('props value is' + props)
 ```
 
-separa las cosas que se van a imprimir con una coma:
+Separa las cosas que se van a imprimir con una coma:
 
 ```js
 console.log('props value is', props)
@@ -282,7 +282,7 @@ La función es
 note => note.id
 ```
 
-que es una función de flecha escrita en forma compacta. La forma completa sería:
+Que es una función de flecha escrita en forma compacta. La forma completa sería:
 
 ```js
 note => {
@@ -298,7 +298,7 @@ Cambiar el comando a:
 const result = notes.map(note => note.content)
 ```
 
-da como resultado una matriz que contiene el contenido de las notas.
+Da como resultado una matriz que contiene el contenido de las notas.
 
 Esto ya está bastante cerca del código de React que usamos:
 
@@ -306,7 +306,7 @@ Esto ya está bastante cerca del código de React que usamos:
 notes.map(note => <li key={note.id}>{note.content}</li>)
 ```
 
-que genera una etiqueta <i>li</i> que contiene el contenido de la nota de cada objeto de nota.
+Que genera una etiqueta <i>li</i> que contiene el contenido de la nota de cada objeto de nota.
 
 Porque el parámetro de función pasado al método _map_ -
 
