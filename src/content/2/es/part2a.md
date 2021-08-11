@@ -470,7 +470,7 @@ const App = ({ notes }) => {
 export default App // highlight-line
 ```
 
-What's left in the <i>index.js</i> file is:
+Lo que queda en el archivo <i>index.js</i> es:
 
 ```js
 import React from 'react'
