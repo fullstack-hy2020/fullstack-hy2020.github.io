@@ -20,13 +20,13 @@ Cuando algo no funciona, no adivine qué está mal. En su lugar, use la consola 
 **NB** Como se explicó en la parte 1, cuando use el comando _console.log_ para depurar, no concatene cosas 'al estilo Java' con un plus. En lugar de escribir:
 
 ```js
-console.log('props value is' + props);
+console.log('props value is' + props)
 ```
 
 separa las cosas que se van a imprimir con una coma:
 
 ```js
-console.log('props value is', props);
+console.log('props value is', props)
 ```
 
 Si concatenas un objeto con una cadena y lo registras en la consola (como en nuestro primer ejemplo), el resultado será bastante inútil:
@@ -85,8 +85,8 @@ Ahora haremos el 'frontend', o la lógica de la aplicación del lado del navegad
 Comencemos con lo siguiente:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 
 const notes = [
   {
@@ -107,10 +107,10 @@ const notes = [
     date: '2019-05-30T19:20:14.298Z',
     important: true,
   },
-];
+]
 
 const App = props => {
-  const { notes } = props;
+  const { notes } = props
 
   return (
     <div>
@@ -121,10 +121,10 @@ const App = props => {
         <li>{notes[2].content}</li>
       </ul>
     </div>
-  );
-};
+  )
+}
 
-ReactDOM.render(<App notes={notes} />, document.getElementById('root'));
+ReactDOM.render(<App notes={notes} />, document.getElementById('root'))
 ```
 
 Cada nota contiene su contenido textual y una marca de tiempo, así como un valor _booleano_ para marcar si la nota ha sido categorizada como importante o no, y también un <i>id</i> único.
@@ -139,7 +139,7 @@ Se representa una sola nota al acceder a los objetos de la matriz haciendo refer
 Esto, por supuesto, no es práctico. Podemos mejorar esto generando elementos React a partir de los objetos de la matriz usando la función [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 
 ```js
-notes.map(note => <li>{note.content}</li>);
+notes.map(note => <li>{note.content}</li>)
 ```
 
 El resultado es una matriz de elementos <i>li</i>.
@@ -149,14 +149,14 @@ El resultado es una matriz de elementos <i>li</i>.
   <li>HTML is easy</li>,
   <li>Browser can execute only JavaScript</li>,
   <li>GET and POST are the most important methods of HTTP protocol</li>,
-];
+]
 ```
 
 Que luego se puede colocar dentro de las etiquetas <i>ul</i>:
 
 ```js
 const App = props => {
-  const { notes } = props;
+  const { notes } = props
 
   return (
     <div>
@@ -169,8 +169,8 @@ const App = props => {
       </ul>
       // highlight-end
     </div>
-  );
-};
+  )
+}
 ```
 
 Debido a que el código que genera las etiquetas <i>li</i> es JavaScript, debe incluirse entre llaves en una plantilla JSX al igual que todos los demás códigos JavaScript.
@@ -181,7 +181,7 @@ También haremos que el código sea más legible separando la declaración de la
 
 ```js
 const App = props => {
-  const { notes } = props;
+  const { notes } = props
 
   return (
     <div>
@@ -196,8 +196,8 @@ const App = props => {
         )}
       </ul>
     </div>
-  );
-};
+  )
+}
 ```
 
 ### Atributo key
@@ -212,7 +212,7 @@ Agreguemos las keys (claves):
 
 ```js
 const App = props => {
-  const { notes } = props;
+  const { notes } = props
 
   return (
     <div>
@@ -227,8 +227,8 @@ const App = props => {
         )}
       </ul>
     </div>
-  );
-};
+  )
+}
 ```
 
 Y el mensaje de error desaparece.
@@ -261,7 +261,7 @@ const notes = [
     date: '2019-05-30T19:20:14.298Z',
     important: true,
   },
-];
+]
 ```
 
 Hagamos una pausa por un momento y examinemos cómo funciona _map_.
@@ -269,8 +269,8 @@ Hagamos una pausa por un momento y examinemos cómo funciona _map_.
 Si se agrega el siguiente código, digamos, al final del archivo:
 
 ```js
-const result = notes.map(note => note.id);
-console.log(result);
+const result = notes.map(note => note.id)
+console.log(result)
 ```
 
 <i>[1, 2, 3]</i> se imprimirá en la consola.
@@ -279,15 +279,15 @@ _map_ siempre crea una nueva matriz, cuyos elementos se han creado a partir de l
 La función es
 
 ```js
-note => note.id;
+note => note.id
 ```
 
 que es una función de flecha escrita en forma compacta. La forma completa sería:
 
 ```js
 note => {
-  return note.id;
-};
+  return note.id
+}
 ```
 
 La función obtiene un objeto de nota como parámetro, y <i>devuelve</i> el valor de su campo <i>id</i>.
@@ -295,7 +295,7 @@ La función obtiene un objeto de nota como parámetro, y <i>devuelve</i> el valo
 Cambiar el comando a:
 
 ```js
-const result = notes.map(note => note.content);
+const result = notes.map(note => note.content)
 ```
 
 da como resultado una matriz que contiene el contenido de las notas.
@@ -303,7 +303,7 @@ da como resultado una matriz que contiene el contenido de las notas.
 Esto ya está bastante cerca del código de React que usamos:
 
 ```js
-notes.map(note => <li key={note.id}>{note.content}</li>);
+notes.map(note => <li key={note.id}>{note.content}</li>)
 ```
 
 que genera una etiqueta <i>li</i> que contiene el contenido de la nota de cada objeto de nota.
@@ -311,10 +311,10 @@ que genera una etiqueta <i>li</i> que contiene el contenido de la nota de cada o
 Porque el parámetro de función pasado al método _map_ -
 
 ```js
-note => <li key={note.id}>{note.content}</li>;
+note => <li key={note.id}>{note.content}</li>
 ```
 
-&nbsp; - se utiliza para crear elementos de vista, el valor de la variable debe representarse dentro de llaves. Trate de ver qué sucede si se quitan las llaves.
+&nbsp - se utiliza para crear elementos de vista, el valor de la variable debe representarse dentro de llaves. Trate de ver qué sucede si se quitan las llaves.
 
 El uso de llaves te causará dolor de cabeza al principio, pero pronto te acostumbrarás. La respuesta visual de React es inmediata.
 
@@ -357,8 +357,8 @@ const App = ({ notes }) => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 ```
 
 Si ha olvidado lo que significa la desestructuración y cómo funciona, revise [esto](/es/part1/manejadores-de-eventos-de-componentes#desestructuración).
@@ -368,8 +368,8 @@ Separamos la visualización de una sola nota en su propio componente <i>Note</i>
 ```js
 // highlight-start
 const Note = ({ note }) => {
-  return <li>{note.content}</li>;
-};
+  return <li>{note.content}</li>
+}
 // highlight-end
 
 const App = ({ notes }) => {
@@ -384,8 +384,8 @@ const App = ({ notes }) => {
         // highlight-end
       </ul>
     </div>
-  );
-};
+  )
+}
 ```
 
 Tenga en cuenta que el atributo <i>key</i> ahora debe definirse para los componentes <i>Note</i>, y no para las etiquetas <i>li</i> como antes.
@@ -395,8 +395,8 @@ Se puede escribir una aplicación React completa en un solo archivo. Aunque eso,
 Hemos estado usando módulos todo el tiempo. Las primeras líneas del archivo:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React from 'react'
+import ReactDOM from 'react-dom'
 ```
 
 [importan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) dos módulos, lo que les permite ser utilizados en ese archivo. El módulo <i>React</i> se coloca en una variable llamada _React_ y <i>React-DOM</i> en la variable _ReactDOM_.
@@ -409,13 +409,13 @@ Ahora crearemos un directorio llamado <i>components</i> para nuestra aplicación
 El contenido del archivo Note.js es el siguiente:
 
 ```js
-import React from 'react';
+import React from 'react'
 
 const Note = ({ note }) => {
-  return <li>{note.content}</li>;
-};
+  return <li>{note.content}</li>
+}
 
-export default Note;
+export default Note
 ```
 
 Importamos React en la primera línea del módulo.
@@ -429,13 +429,13 @@ Si necesitamos importar React para usar Hooks y otras funciones exportadas que R
 Ahora el archivo que está usando el componente - <i>index.js</i> - puede [importar](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) el módulo:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import Note from './components/Note'; // highlight-line
+import React from 'react'
+import ReactDOM from 'react-dom'
+import Note from './components/Note' // highlight-line
 
 const App = ({ notes }) => {
   // ...
-};
+}
 ```
 
 El componente exportado por el módulo ahora está disponible para su uso en la variable <i>Note</i>, al igual que antes.
@@ -443,7 +443,7 @@ El componente exportado por el módulo ahora está disponible para su uso en la 
 Tenga en cuenta que al importar nuestros propios componentes, se debe dar su ubicación <i>en relación con el archivo de importación</i>:
 
 ```js
-'./components/Note';
+'./components/Note'
 ```
 
 El punto - <i>.</i> - al principio se refiere al directorio actual, por lo que la ubicación del módulo es un archivo llamado <i>Note.js</i> en el subdirectorio <i>components</i> del directorio actual. La extensión del nombre de archivo - _.js_ - se puede omitir.
@@ -451,8 +451,8 @@ El punto - <i>.</i> - al principio se refiere al directorio actual, por lo que l
 <i>App</i> también es un componente, así que vamos a declararlo también en su propio módulo. Dado que es el componente raíz de la aplicación, lo colocaremos en el directorio <i>src</i>. El contenido del archivo es el siguiente:
 
 ```js
-import React from 'react';
-import Note from './components/Note';
+import React from 'react'
+import Note from './components/Note'
 
 const App = ({ notes }) => {
   return (
@@ -464,24 +464,24 @@ const App = ({ notes }) => {
         ))}
       </ul>
     </div>
-  );
-};
+  )
+}
 
-export default App; // highlight-line
+export default App // highlight-line
 ```
 
 What's left in the <i>index.js</i> file is:
 
 ```js
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App'; // highlight-line
+import React from 'react'
+import ReactDOM from 'react-dom'
+import App from './App' // highlight-line
 
 const notes = [
   // ...
-];
+]
 
-ReactDOM.render(<App notes={notes} />, document.getElementById('root'));
+ReactDOM.render(<App notes={notes} />, document.getElementById('root'))
 ```
 
 Los módulos tienen muchos otros usos además de permitir que las declaraciones de componentes se separen en sus propios archivos. Nos pondremos en contacto con ellos más adelante en este curso.
@@ -510,19 +510,19 @@ const Course = ({ course }) => (
   <div>
     <Header course={course} />
   </div>
-);
+)
 
 const App = () => {
   const course = {
     // ...
-  };
+  }
 
   return (
     <div>
       <Course course={course} />
     </div>
-  );
-};
+  )
+}
 ```
 
 Nos centraremos en el motivo del desglose agregando comandos <em>console.log</em> al código. Como lo primero que se renderiza es el componente <i>App</i>, Vale la pena poner el primer <em>console.log</em> allí:
@@ -552,20 +552,20 @@ const Course = ({ course }) => (
   <div>
     <Header course={course} />
   </div>
-);
+)
 ```
 
 El componente debe cambiarse a su forma más larga para que agreguemos la impresión:
 
 ```js
 const Course = ({ course }) => {
-  console.log(course); // highlight-line
+  console.log(course) // highlight-line
   return (
     <div>
       <Header course={course} />
     </div>
-  );
-};
+  )
+}
 ```
 
 Muy a menudo, la raíz del problema es que se espera que los props sean de un tipo diferente, o que se llamen con un nombre diferente al que realmente son, y la desestructuración falla como resultado. El problema a menudo comienza a resolverse por sí mismo cuando se elimina la desestructuración y vemos lo que realmente contienen los <em>props</em>.
@@ -573,14 +573,14 @@ Muy a menudo, la raíz del problema es que se espera que los props sean de un ti
 ```js
 const Course = props => {
   // highlight-line
-  console.log(props); // highlight-line
-  const { course } = props;
+  console.log(props) // highlight-line
+  const { course } = props
   return (
     <div>
       <Header course={course} />
     </div>
-  );
-};
+  )
+}
 ```
 
 Si el problema aún no se ha resuelto, realmente no hay mucho que hacer aparte de continuar la búsqueda de errores esparciendo más declaraciones _console.log_ alrededor de su código.
@@ -634,10 +634,10 @@ const App = () => {
         id: 3,
       },
     ],
-  };
+  }
 
-  return <Course course={course} />;
-};
+  return <Course course={course} />
+}
 ```
 
 Defina un componente responsable de formatear un solo curso llamado <i>Course</i>.
@@ -679,16 +679,16 @@ Si aún no lo ha hecho, calcule la suma de ejercicios con el método de matriz [
 **Consejo profesional:** cuando su código tiene el siguiente aspecto:
 
 ```js
-const total = parts.reduce((s, p) => someMagicHere);
+const total = parts.reduce((s, p) => someMagicHere)
 ```
 
 y no funciona, vale la pena usar <i>console.log</i>, que requiere que la función de flecha se escriba en su forma más larga:
 
 ```js
 const total = parts.reduce((s, p) => {
-  console.log('what is happening', s, p);
-  return someMagicHere;
-});
+  console.log('what is happening', s, p)
+  return someMagicHere
+})
 ```
 
 **Consejo profesional 2:** Hay un [complemento para VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) que cambia automáticamente las funciones de flecha de forma corta a su forma más larga, y viceversa.
@@ -744,10 +744,10 @@ const App = () => {
         },
       ],
     },
-  ];
+  ]
 
-  return <div>// ...</div>;
-};
+  return <div>// ...</div>
+}
 ```
 
 La aplicación puede, por ejemplo, verse así:
