@@ -957,14 +957,3 @@ If you eject an application created with create-react-app, there is no return an
 Going through and reading the configuration files of an ejected application is still recommended and extremely educational.
 
 </div>
-
-<div class="tasks">
-
-
-### Exercises
-
-
-One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
-
-
-</div>
