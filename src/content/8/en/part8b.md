@@ -247,7 +247,7 @@ It is also possible to do queries with parameters with the GraphQL Playground. T
 The _useQuery_ hook is well suited for situations where the query is done when the component is rendered. 
 However now we want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
-For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) is a good choice. 
+For this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) is a good choice. 
 The <i>Persons</i> component becomes:
 
 ```js
