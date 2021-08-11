@@ -103,9 +103,9 @@ const app = http.createServer((request, response) => {
   response.end('Hello World')
 })
 
-const port = 3001
-app.listen(port)
-console.log(`Server running on port ${port}`)
+const PORT = 3001
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
 ```
 
 Kun sovellus käynnistuu, konsoliin tulostuu
@@ -172,9 +172,9 @@ Pyyntöön vastataan statuskoodilla 200, asettamalla <i>Content-Type</i>-headeri
 Viimeiset rivit sitovat muuttujaan _app_ sijoitetun http-palvelimen kuuntelemaan porttiin 3001 tulevia HTTP-pyyntöjä:
 
 ```js
-const port = 3001
-app.listen(port)
-console.log(`Server running on port ${port}`)
+const PORT = 3001
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
 ```
 
 Koska tällä kurssilla palvelimen rooli on pääasiassa tarjota frontille JSON-muotoista "raakadataa", muutetaan palvelinta siten, että se palauttaa kovakoodatun listan JSON-muotoisia muistiinpanoja:
@@ -210,9 +210,9 @@ const app = http.createServer((request, response) => {
 })
 // highlight-end
 
-const port = 3001
-app.listen(port)
-console.log(`Server running on port ${port}`)
+const PORT = 3001
+app.listen(PORT)
+console.log(`Server running on port ${PORT}`)
 ```
 
 Käynnistetään palvelin uudelleen (palvelin suljetaan painamalla konsolissa yhtä aikaa _ctrl_ + _c_) ja refreshataan selain.
