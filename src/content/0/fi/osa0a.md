@@ -98,7 +98,7 @@ Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevä
 Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 11](/en/part11).
 -	Tee kaikki tehtävät osasta 11.
--	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042)
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.]https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 ### Suoritusmerkinnän pyytäminen

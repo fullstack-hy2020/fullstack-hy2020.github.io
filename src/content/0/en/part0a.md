@@ -106,7 +106,7 @@ By submitting 25 exercises for part 10 of the course on React Native, you can ea
 By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. 
 More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 - Submit all exercises for part 11. 
-- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042). 
+- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33). 
 - [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 ### How to get your credits
