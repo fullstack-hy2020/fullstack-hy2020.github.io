@@ -665,6 +665,8 @@ The if-condition leverages the fact that all JavaScript objects are [truthy](htt
 
 
 Our application works and sends the error status code if no note is found. However, the application doesn't return anything to show to the user, like web applications normally do when we visit a page that does not exist. We do not actually need to display anything in the browser because REST APIs are interfaces that are intended for programmatic use, and the error status code is all that is needed.
+  
+Anyway it's possible to give a clue about reason of sending 404 error by [overriding default NOT FOUND message](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614).
 
 
 ### Deleting resources
