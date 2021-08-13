@@ -734,6 +734,8 @@ If-condition 基于了这样一个事实，即所有的 JavaScript 对象都是[
 <!-- Our application works and sends the error status code if no note is found. However, the application doesn't return anything to show to the user, like web applications normally do when we visit a page that does not exist. We do not actually need to display anything in the browser because REST API's are interfaces that are intended for programmatic use, and the error status code is all that is needed. -->
 我们的应用正常工作，如果没有找到便笺，则发送错误状态代码。 然而，应用不会返回任何东西显示给用户，就像我们 在web 应用访问一个不存在的页面时所做的那样。 我们实际上不需要在浏览器中显示任何内容，因为 REST API 是用于编程使用的接口，只需要错误状态代码就行了。
 
+Anyway it's possible to give a clue about reason of sending 404 error by [overriding default NOT FOUND message](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614).
+但不管怎么说，我们应该提供一个404错误的解释页面来[重写原有的404信息](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614)
 
 ### Deleting resources
 【删除资源】
