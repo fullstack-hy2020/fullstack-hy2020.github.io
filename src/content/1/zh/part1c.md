@@ -201,7 +201,7 @@ const Hello = ({ name, age }) => {
 ### Page re-rendering 
 【页面重渲染】
 <!-- So far all of our applications have been such that their appearance remains the same after the initial rendering. What if we wanted to create a counter where the value increased as a function of time or at the click of a button? -->
-到目前为止，我们的所有应用都是这样的，即在最初的渲染之后，它们的外观一直是相同的。 如果我们想要创建一个计数器，在这个计数器中的值随着时间的变化而增加，或者点通过击一个按钮而增加，会是什么样呢？
+到目前为止，我们的所有应用都是这样的，即在最初的渲染之后，它们的外观一直是相同的。 如果我们想要创建一个计数器，在这个计数器中的值随着时间的变化而增加，或者通过点击一个按钮而增加，会是什么样呢？
 
 <!-- Let's start with the following body: -->
 让我们从下面的代码开始, <i>App.js</i> 内容变成了:
