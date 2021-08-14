@@ -33,8 +33,7 @@ To open a new pull request, open your branch in GitHub and click on the green "C
 
 GitHub's pull request interface presents a description and the discussion interface. At the bottom, it displays all the CI checks (in our case each of our Github Actions) that are configured to run for each PR and the statuses of these checks. A green board is what you aim for! You can click on Details of each check to view details and run logs.
 
-
-All the workflows we looked at so far were triggered by commits to main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "main" and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into main is opened or updated.
+All the workflows we looked at so far were triggered by commits to the main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "master" (our main branch) and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into the main branch is opened or updated.
 
 So let us change events that [trigger](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) of the workflow as follows:
 
@@ -48,7 +47,7 @@ on:
     types: [opened, synchronize] // highlight-line
 ```
 
-We shall soon make it impossible to push the code directly to main, but in the meantime, let us still run the workflow also for all the possible direct pushes to main.
+We shall soon make it impossible to push the code directly to the main branch, but in the meantime, let us still run the workflow also for all the possible direct pushes to the main branch.
 
 </div>
 
@@ -56,13 +55,13 @@ We shall soon make it impossible to push the code directly to main, but in the m
 
 ### Exercises 11.14-11.15.
 
-Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to main, it's catching the problems too late!
+Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to the main branch, it's catching the problems too late!
 
-#### 11.14 pull request
+#### 11.14 Pull request
 
-Update the trigger of the existing workflow as suggested above to run on new pull requests to main.
+Update the trigger of the existing workflow as suggested above to run on new pull requests to your main branch.
 
-Create a new branch, commit your changes, and open a pull request to main.
+Create a new branch, commit your changes, and open a pull request to your main branch.
 
 If you have not worked with branches before, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get started.
 
@@ -76,11 +75,11 @@ In the "Conversation" tab of the pull request you should see your latest commit(
 
 Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
-#### 11.15 run deployment step only for main branch
+#### 11.15 Run deployment step only for the main branch
 
 All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment, are run also for pull requests. This is surely something we do not want!
 
-Fortunately, there is an easy solution for the problem! We can add an [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when the code is being merged or pushed to main.
+Fortunately, there is an easy solution for the problem! We can add an [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when the code is being merged or pushed to the main branch.
 
 The workflow [context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contexts) gives various kinds of information about the code the workflow is run.
 
@@ -90,7 +89,7 @@ The relevant information is found in [github context](https://docs.github.com/en
 if: ${{ github.event_name == 'push' }}
 ```
 
-Push some more code to your branch, and ensure that the deployment step <i>is not executed</i> anymore. Then merge the branch to main and make sure that the deployment happens.
+Push some more code to your branch, and ensure that the deployment step <i>is not executed</i> anymore. Then merge the branch to the main branch and make sure that the deployment happens.
 
 </div>
 
@@ -152,7 +151,7 @@ Think of it this way: versioning boils down to a technique that points to a spec
 
 There is a catch. We discussed at the beginning of this part that we always have to know exactly what is happening with our code, for example, we need to be sure that we have tested the code we want to deploy. Having two parallel versioning (or naming) conventions can make this a little more difficult.
 
-For example, when we have a project that uses hash-based artifact builds for testing, it's always possible to track the result of every build, lint, and test to a specific commit and developers know the state their code is in. This is all automated and transparent to the developers. They never need to be aware of the fact that the CI system is using the commit hash underneath to name build and test artifacts. When the developers merge their code to master, again the CI takes over. This time, it will build and test all the code and give it a semantic version number all in one go. It attaches the version number to the relevant commit with a git tag.
+For example, when we have a project that uses hash-based artifact builds for testing, it's always possible to track the result of every build, lint, and test to a specific commit and developers know the state their code is in. This is all automated and transparent to the developers. They never need to be aware of the fact that the CI system is using the commit hash underneath to name build and test artifacts. When the developers merge their code to the main branch, again the CI takes over. This time, it will build and test all the code and give it a semantic version number all in one go. It attaches the version number to the relevant commit with a git tag.
 
 In the case above, the software we release is tested because the CI system makes sure that tests are run on the code it is about to tag. It would not be incorrect to say that the project uses semantic versioning and simply ignore that the CI system tests individual developer branches/PRs with a hash-based naming system. We do this because the version we care about (the one that is released) is given a semantic version.
 
@@ -162,7 +161,7 @@ In the case above, the software we release is tested because the CI system makes
 
 ### Exercises 11.16-11.17.
 
-Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into master and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
+Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
 
 #### 11.16 Adding versioning
 
@@ -183,8 +182,7 @@ As you can see from the documentation by default your releases will receive a *m
 
 Modify the configuration above so that each new version is by default a _patch_ bump in the version number, so that by default, the last number is increased. 
 
-Remember that we want only to bump the version when the change happens to master branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-11-15)
- to prevent deployment on pull request releated events.
+Remember that we want only to bump the version when the change happens to the main branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-11-15) to prevent deployment on pull request releated events.
 
 Complete the workflow and try it out! 
 
@@ -224,7 +222,7 @@ A quick way to solve this is to add `0.0.0` tag manually using command line like
 
 #### 11.17 Skipping a commit for tagging and deployment
 
-In general the more often you deploy the master to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production.
+In general the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production.
 
 Modify your setup so that if a commit message in a pull request contains _#skip_, the merge will not be deployed to production and it is not tagged with a version number.
 
@@ -263,7 +261,7 @@ jobs:
 
 See what gets printed in the workflow log!
 
-Note that you can access the commits and commit messages <i>only when pushing or merging to master</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests. 
+Note that you can access the commits and commit messages <i>only when pushing or merging to the main branch</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests. 
 
 You most likely need functions [contains](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contains) and [join](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#join) for your if condition.
 
@@ -298,15 +296,15 @@ In the case of third-party actions, the code might end up being buggy or even ma
 
 By pointing to the hash of a specific commit we can be sure that the code we use when running the workflow will not change because changing the underlying commit and its contents would also change the hash.
 
-### Keep master protected
+### Keep the main branch protected
 
-GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: master. In repository settings, you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into master is one of the options we mentioned earlier.
+GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: <i>master</i>/<i>main</i>. In repository settings, you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into the main branch is one of the options we mentioned earlier.
 
-From CI point of view, the most important protection is requiring status checks to pass before a PR can be merged into master. This means that if you have set up GitHub actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged. Because you are the administrator for your repository, you will see an option to override the restriction. However, non-administrators will not have this option.
+From CI point of view, the most important protection is requiring status checks to pass before a PR can be merged into the main branch. This means that if you have set up GitHub actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged. Because you are the administrator for your repository, you will see an option to override the restriction. However, non-administrators will not have this option.
 
 ![Unmergeable PR](../../images/11/part11d_03.png)
 
-To set up protection for your master branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilize the power of GitHub Actions. Under it, you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. 
+To set up protection for your main branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" or "main" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilize the power of GitHub Actions. Under it, you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. 
 
 
 ![Branch protection rule](../../images/11/part11d_04.png)
@@ -318,9 +316,9 @@ To set up protection for your master branch, navigate to repository "Settings" f
 
 ### Exercise 11.18
 
-#### 11.18 Adding master protection
+#### 11.18 Adding protection to your main branch
 
-Add protection to your master branch.
+Add protection to your <i>master</i> (or <i>main</i>) branch.
 
 You should protect it to:
 - Require all pull request to be approved before merging
