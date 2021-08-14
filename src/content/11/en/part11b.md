@@ -13,7 +13,7 @@ GitHub Actions work on a basis of [workflows](https://docs.github.com/en/free-pr
 
 A typical execution of a workflow looks like this:
 
-- Triggering event happens (for example, there is a push to master branch).
+- Triggering event happens (for example, there is a push to the main branch).
 - The workflow with that trigger is executed.
 - Cleanup
 
@@ -127,7 +127,7 @@ jobs:
           echo "Hello World!"
 ```
 
-In this example, the trigger is a push to the master branch. There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
+In this example, the trigger is a push to the main branch, which in our project is called <i>master</i>. (Your main branch could be called <i>main</i> or <i>master</i>).  There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
 
 So you may ask, when does GitHub trigger a workflow to be started? There are plenty of [options](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) to choose from, but generally speaking, you can configure a workflow to start once:
 
