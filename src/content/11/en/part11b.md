@@ -42,7 +42,7 @@ GitHub Actions have a great advantage over self-hosted solutions: the repository
 In most exercises of this part, we are building a CI/CD pipeline for a small project found in [this example project repository](https://github.com/smartlyio/fullstackopen-cicd).
 
 Note that the code <i>might not work</i> with node version 15. If you happen to have that version, and the project does not even start, please downgrade to 14 or you are on your own. 
-#### 11.2 the example project
+#### 11.2 The example project
 
 The first thing you'll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your use. 
 
@@ -158,7 +158,7 @@ You should see the "Hello World!" message as an output. If that's the case then 
 
 Note that GitHub Actions also gives you information what is the exact environment (operating system, and it's [setup](https://github.com/actions/virtual-environments/blob/ubuntu18/20201129.1/images/linux/Ubuntu1804-README.md)) where your workflow is run. This is important since if something surprising happens, it makes debugging so much easier if you can reproduce all the steps in your machine!
 
-#### 11.4 date and directory contents
+#### 11.4 Date and directory contents
 
 Extend the workflow with steps that print the date and current directory content in long format. 
 

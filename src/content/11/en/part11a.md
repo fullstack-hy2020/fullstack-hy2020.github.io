@@ -204,7 +204,7 @@ Besides being easy to take into use, GitHub Actions is a good choice in other re
 
 Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit on what we have read. 
 
-#### 11.1 warming up
+#### 11.1 Warming up
 
 Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon.
 
