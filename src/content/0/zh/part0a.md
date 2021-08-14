@@ -213,7 +213,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交11章的所有练习
-- [通过开放大学开启第十一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
+- [通过开放大学开启第十一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33
+) 
 -	[申请第十一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 ### How to get your credits 

@@ -1031,17 +1031,3 @@ Create-react-app 工具在幕后使用 webpack。 如果缺省配置不够，可
 </div>
 
 
-<div class="tasks">
-
-
-
-### Exercises
-练习
-
-
-<!-- One exercise related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/zh/part7/练习：扩展你的博客列表). -->
-一个与这里提到的议题相关的练习，可以在本课程材料部分的练习集[for extending the blog list application](/zh/part7/练习：扩展你的博客列表)的最后找到。
-
-
-</div>
-

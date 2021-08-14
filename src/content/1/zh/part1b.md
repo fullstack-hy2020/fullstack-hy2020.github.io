@@ -10,7 +10,7 @@ lang: zh
 在本课程中，除了网页开发，我们还有一个目标和需求，就是学习足量的 JavaScript 知识。
 <!-- JavaScript has advanced rapidly the last few years and in this course we use features from the newer versions. The official name of the JavaScript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2019 with the name [ECMAScript® 2019](http://www.ecma-international.org/ecma-262/10.0/index.html), otherwise known as ES10. -->
 
-JavaScript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 JavaScript 标准的正式名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。 目前（2021年1月，译者注），最新的版本是2020年6月发布的，名为[ECMAScript®2020](https://www.ecma-international.org/ecma-262/) ，即ES11。 
+JavaScript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 JavaScript 标准的正式名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。 目前（2021年1月，译者注），最新的版本是2021年6月发布的，名为[ECMAScript®2021](https://www.ecma-international.org/ecma-262/) ，即ES12。 
 
 <!-- Browsers do not yet support all of JavaScript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of JavaScript to an older, more compatible version. -->
 

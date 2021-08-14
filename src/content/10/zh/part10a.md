@@ -187,7 +187,7 @@ Android 和iOS 设备，比如平板或者手机，可以通过电脑中特定�
 现在我们多少熟悉了开发环境，让我们通过配置代码格式化，来增强一下我们的开发体验。我们会使用[ESLint](https://eslint.org/) 在之前的几个项目中，我们已经对它很熟悉了。让我们用如下方式来安装依赖。
 
 ```shell
-npm install --save-dev eslint babel-eslint eslint-plugin-react
+npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react
 ```
 
 <!-- Next, let's add the ESLint configuration into a <i>.eslintrc</i> file into the <i>rate-repository-app</i> directory with the following content: -->
@@ -202,7 +202,7 @@ npm install --save-dev eslint babel-eslint eslint-plugin-react
     }
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true
   },

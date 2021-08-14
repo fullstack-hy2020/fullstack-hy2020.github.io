@@ -56,7 +56,7 @@ npm install --save-dev jest jest-expo eslint-plugin-jest
 {
   "plugins": ["react", "jest"],
   "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"], // highlight-line
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true
   },
