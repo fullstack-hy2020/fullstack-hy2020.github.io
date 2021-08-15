@@ -370,7 +370,7 @@ const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA githubiin!
 const url =
-  'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
+  'mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
 mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
@@ -513,11 +513,11 @@ npm install dotenv
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, minne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 PORT=3001
 ```
 
-Huomaa, että sinun tulee sisällyttää salasanasi osaksi url:ia, sanan 'sekred' tilalle.
+Huomaa, että sinun tulee sisällyttää salasanasi osaksi url:ia, &lt;password&gt; kohtaan.
 
 Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin eli ympäristömuuttujan <em>PORT</em>.
 
