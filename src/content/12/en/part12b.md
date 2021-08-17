@@ -99,10 +99,10 @@ COPY . .
 CMD DEBUG=playground:* npm start
 ```
 
-Let's build the image from that, `docker build -t express-server .` and run it with `docker run -p 3000:3000 express-server`:
+Let's build the image from that, `docker build -t express-server .` and run it with `docker run -p 3123:3000 express-server`. The _-p_ flag will inform docker that a port from the host machine should be opened and directed to a port in the container. So the format is _-p host:application_.
 
 ```
-$ docker run -p 3000:3000 express-server
+$ docker run -p 3123:3000 express-server
 
 > playground@0.0.0 start
 > node ./bin/www
@@ -112,18 +112,22 @@ Tue, 29 Jun 2021 10:55:10 GMT playground:server Listening on port 3000
 
 > If yours doesn't work, skip to the next section where I explain why it doesn't work (even if you followed the steps).
 
-Looks like it is working! Let's test it by sending a GET request to `http://localhost:3000/`.
+Looks like it is working! Let's test it by sending a GET request to `http://localhost:3123/`.
 
 Shutting it down is a headache at the moment, use another terminal and `docker kill` command to kill the application. The `docker kill` will send a kill signal (SIGKILL) to the application to force it to shut down. As an argument it needs the name or id of the container.
+
+Here I choose to kill it with the ID. The beginning of the ID is enough for docker to know which container I mean.
 
 ```
 $ docker container ls
   CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                       NAMES
-  48096ca3ffec   express-server   "docker-entrypoint.s…"   9 seconds ago   Up 6 seconds   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   infallible_booth
+  48096ca3ffec   express-server   "docker-entrypoint.s…"   9 seconds ago   Up 6 seconds   0.0.0.0:3123->3000/tcp, :::3123->3000/tcp   infallible_booth
 
 $ docker kill 48
   48
 ```
+
+In the future let's just use the same port outside of the container as the application runs in. This is just so we don't have to remember which one we happened to choose.
 
 #### Fixing potential issues we created by copy-pasting
 
