@@ -50,7 +50,8 @@ const partNameTranslations = {
 };
 
 export const PartBanner = ({ lang }) => {
-  const parts = Object.keys(navigation[lang]);
+  // TODO: show part 11 when published
+  const parts = Object.keys(navigation[lang]).filter(p => p !== '33');
 
   return (
     <Banner
