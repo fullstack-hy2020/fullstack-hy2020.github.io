@@ -131,7 +131,9 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
 
 Now we have declared the build stage and only move the relevant files, the build directory with static content, into an image that is ready to serve the static content.
 
-The default port will be 80 for nginx, so something like `-p 8000:80` will work.
+The default port will be 80 for nginx, so something like _-p 8000:80_ will work.
+
+Multi-stage builds also include some internal optimizations that may affect your builds. As an example, multi-stage builds skip stages that are not used. If we wish to use a stage to replace a part of a build pipeline, like testing or notifications, we must pass **some** data to the following stages. In some cases this is justified: copy the code from testing stage to build stage ensuring that you are building the tested code.
 
 </div>
 
@@ -355,9 +357,16 @@ Add a new location to the nginx.conf so that requests to /api are proxied to the
   }
 ```
 
+The `proxy_pass` directive has an interesting feature with a trailing slash. As we are using the path _/api_ for location but the backend application only answers in paths _/_ or _/todos_ we will want the _/api_ to be removed from the request. In other words even though the browser will send a GET request to _/api/todos/1_ we want the nginx to proxy the request to _/todos/1_. This is done by adding a trailing slash _/_ to the url at the end of `proxy_pass`.
+
+This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-the-path-with-an-nginx-proxy-pass)
+
+![](../../images/12/nginx_trailing_slash_stackoverflow.png)
+
+
 #### Exercise 12.15: Connect todo-front to todo-back
 
-Make sure that the todo-front works with todo-back. It will require changes to the REACT_APP_BACKEND_URL.
+Make sure that the todo-front works with todo-back. It will require changes to the `REACT_APP_BACKEND_URL` environmental variable.
 
 If you already got this working during a previous exercise you may skip this.
 
