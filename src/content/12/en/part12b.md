@@ -213,9 +213,9 @@ COPY --chown=node:node . .
 
 <div class="tasks">
 
-### Exercise 12.3.
+### Exercise 12.4.
 
-#### Exercise 12.3: Containerizing a node application
+#### Exercise 12.4: Containerizing a node application
 
 The following repository contains an express application in the express-app directory. You do not need the other directory yet. Copy the contents into your own repository. The express-app directory includes a README on how to start the application.
 
@@ -261,9 +261,9 @@ Creating files like this that *declare* what you want instead of script files th
 
 <div class="tasks">
 
-### Exercise 12.4.
+### Exercise 12.5.
 
-#### Exercise 12.4: docker-compose
+#### Exercise 12.5: docker-compose
 
 Create a docker-compose file that works with the node application from the previous exercise.
 
@@ -422,9 +422,9 @@ Now the volume is created, but managed by docker. After starting the application
 
 <div class="tasks">
 
-### Exercise 12.4.
+### Exercise 12.6.
 
-#### Exercise 12.4: Code something mongo related
+#### Exercise 12.6: Code something mongo related
 
 The todo express application is missing both get one and update. 
 
@@ -446,9 +446,9 @@ An excellent use case for Redis is to use it as a cache. Caches are often used t
 
 <div class="tasks">
 
-### Exercises 12.5. - 12.7.
+### Exercises 12.7. - 12.9.
 
-#### Exercise 12.5: Setup redis to project
+#### Exercise 12.7: Setup redis to project
 
 The application will be able to use redis by giving it the REDIS_URL environment variable. Find and read through the Docker Hub page for redis, add it to the docker-compose.yml by defining another service after mongo:
 ```yml
@@ -471,7 +471,7 @@ const redis = require('../redis')
 
 to the express server  
   
-#### Exercise 12.6:
+#### Exercise 12.8:
 
 The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) installed and two functions "promisified" - getAsync and setAsync.
 
@@ -490,7 +490,7 @@ Implement a todo counter:
 }
 ```
 
-#### Exercise 12.7:
+#### Exercise 12.9:
   
 **TODO**  
  
@@ -530,9 +530,9 @@ In addition to the key-value features Redis can also be used to Publish messages
 
 <div class="tasks">
 
-### Exercises 12.8.
+### Exercises 12.10.
   
-#### Exercise 12.8: Persisting data in redis
+#### Exercise 12.10: Persisting data in redis
   
 Do not yet create volume for redis. Ensure that the data is not persisted by default, that is, after running after running `docker-compose down` and `docker-compose up` the the counter value is not anymore set.
   

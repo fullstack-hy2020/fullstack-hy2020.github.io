@@ -11,7 +11,7 @@ According to wikipedia software development includes the whole lifecycle from en
 
 Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application so that each container can run isolated from each other.
 
-Containers can be compared to virtual machines (VM) which are used to run multiple operating systems on a single physical machine. Containers are OS-level virtualization which means, among other things, that they allow applications to access only the container's contents and resources given to that container. The biggest difference to remember between containers and VMs is that while VMs run operating systems, containers only run a single process.
+Containers can be compared to virtual machines (VM) which are used to run multiple operating systems on a single physical machine. Containers are OS-level virtualization which means, among other things, that they allow applications to access only the container's contents and resources given to that container. Whereas VMs run an entire operating system a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is little overhead when running containers; they only need to run a single process.
 
 As containers are relatively lightweight, at least compared to virtual machines, they can be quick to scale. And they isolate the software running inside enabling the software to run identically almost anywhere. As such they are the go to option in any cloud environment or application with more than a handful of users.
 
@@ -312,8 +312,8 @@ $ docker container run -it --name hello-node node:16 bash
 
 While we are inside the container on this terminal, open another terminal and use the `container cp` command to copy file from your own machine to the container.
 
-```
-$ docker cp ./index.js hello-node:/usr/src/app
+```bash
+$ docker cp ./index.js hello-node:/usr/src/app/index.js
 ```
 
 And now we can run `node /usr/src/app/index.js` in the container.
