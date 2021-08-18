@@ -144,7 +144,7 @@ describe('Note app', () => { // highlight-line
 However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow functions are not used, because they might cause some issues in certain situations. 
 
 <!-- Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti -->
-If <i>cy.contains</i> does not find the text is it searching for, the test does not pass. 
+If <i>cy.contains</i> does not find the text it is searching for, the test does not pass. 
 So if we extend our test like so
 
 ```js
