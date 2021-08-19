@@ -139,9 +139,9 @@ Multi-stage builds also include some internal optimizations that may affect your
 
 <div class="tasks">
 
-### Exercises 12.11 - 12.12.
+### Exercises 12.12 - 12.13.
 
-#### Exercise 12.11: Todo application frontend
+#### Exercise 12.12: Todo application frontend
 
 The following repository contains an react application in the react-app directory. Copy the contents into your own repository. The react-app directory includes a README on how to start the application.
   
@@ -149,7 +149,7 @@ The following repository contains an react application in the react-app director
 
 Use ENV to pass REACT_APP_BACKEND_URL to the application and run it with the backend. Backend can be running outside a container.
 
-#### Exercise 12.12: Testing during build process
+#### Exercise 12.13: Testing during build process
 
 We can use multiple stages to do testing during the build process. The build process will fail as the tests fail.
 
@@ -321,15 +321,15 @@ That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
 <div class="tasks">
 
-### Exercises 12.13. - 12.15.
+### Exercises 12.14. - 12.16.
 
-#### Exercise 12.13: Setup nginx in front of todo-front
+#### Exercise 12.14: Setup nginx in front of todo-front
 
 Create a development docker-compose yml with nginx and our todo react-app.
 
 You can use *-f* flag to specify a file in case you want to have multiple, e.g. *docker-compose -f docker-compose.dev.yml up*
 
-#### Exercise 12.14: Setup nginx in front of todo-back
+#### Exercise 12.15: Setup nginx in front of todo-back
 
 Add the express-app to the development docker-compose yml in development mode.
 
@@ -364,7 +364,7 @@ This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-
 ![](../../images/12/nginx_trailing_slash_stackoverflow.png)
 
 
-#### Exercise 12.15: Connect todo-front to todo-back
+#### Exercise 12.16: Connect todo-front to todo-back
 
 Make sure that the todo-front works with todo-back. It will require changes to the `REACT_APP_BACKEND_URL` environmental variable.
 
@@ -386,9 +386,9 @@ If you are interested in learning more in depth about containers come to the [De
 
 <div class="tasks">
 
-### Exercises 12.16.
+### Exercises 12.17.
 
-#### Exercise 12.16:
+#### Exercise 12.17:
 
 Create a production docker-compose.yml with all of the services, nginx, react-app, express-app, mongodb and redis.
 
