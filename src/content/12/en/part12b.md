@@ -215,6 +215,8 @@ WORKDIR /usr/src/app
 COPY --chown=node:node . .
 ```
 
+</div>
+  
 <div class="tasks">
 
 ### Exercise 12.4.
@@ -226,6 +228,8 @@ The following repository contains an express application in the express-app dire
 Get the visit counter in root of the application working inside the container.
 
 </div>
+  
+<div class="content">
 
 #### Using docker-compose
 
