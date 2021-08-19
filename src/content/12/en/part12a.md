@@ -85,7 +85,7 @@ For managing the docker containers, there is also [Docker Compose](https://docs.
 
 There are a number of concepts we need to go over, but we will skip those for now and learn about Docker first! One of my favorite features is the capability to handle running containers even if they are not yet downloaded on our device.
 
-The command structure is the following: `container run <image-name>`. So we will tell docker to create a container from an image.
+The command structure is the following: _container run <i>IMAGE-NAME</i>_. So we will tell docker to create a container from an image.
 
 ```bash
 § docker container run hello-world
@@ -104,18 +104,19 @@ There will be a lot of output but I will split it into multiple sections that we
 It's downloaded a new image for hello-world from "Docker Hub". You can see the docker hub page for the image with your browser here: [https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world)
 
 The first part of the message states that we did not have "hello-world:latest" yet. This reveals a bit of detail about images themselves; image names consist of multiple parts, kind of like an url. An image name is in the following format: 
-- `registry/organisation/image:tag`. 
+
+- _registry/organisation/image:tag_
 
 In this case the 3 missing fields defaulted to: 
-- `index.docker.io/library/hello-world:latest`
+- _index.docker.io/library/hello-world:latest_
 
 Second row shows the organisation name, "library" where it will get the image. In the Docker Hub url the "library" is shortened to _.
 
 The 3rd and 5th rows only show the status. But 4th row may be interesting: each image has a unique digest based on the layers. The digest is used by docker to identify that an image is the same if you try to pull it again.
 
-So it did some pulling and then output information about the **image**. It then gave the status that a new version of hello-world:latest was indeed downloaded. You can try pulling the image with `docker image pull hello-world`.
+So it did some pulling and then output information about the **image**. It then gave the status that a new version of hello-world:latest was indeed downloaded. You can try pulling the image with _docker image pull hello-world_.
 
-The following output was from the container itself. It also explains what happened when we ran `docker container run hello-world`.
+The following output was from the container itself. It also explains what happened when we ran _docker container run hello-world_.
 
 ```bash
 Hello from Docker!
@@ -170,7 +171,7 @@ Google should be able to help you with creating directories and files.
 
 ### Ubuntu image
 
-The command you just used to run the ubuntu container, `docker container run -it ubuntu bash`, contains a few additions to our hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.
+The command you just used to run the ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to our hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.
 
 ```bash
 $ docker container run --help
@@ -185,9 +186,9 @@ Options:
   ...
 ```
 
-The options, or flags, *-it* make sure we can interact with the container. And after the image, in this case ubuntu, we have the command to be executed inside the container when we start it. You can try other commands that the ubuntu image might have the tools for, for example, try *docker container run --rm ubuntu ls*. *ls* will list all of the files in the directory and --rm will remove the container after execution.
+The options, or flags, _-it_ make sure we can interact with the container. And after the image, in this case ubuntu, we have the command to be executed inside the container when we start it. You can try other commands that the ubuntu image might have the tools for, for example, try _docker container run --rm ubuntu ls_. The *ls* command will list all of the files in the directory and _--rm_ will remove the container after execution.
 
-Let's continue with our first ubuntu container with the **index.js** file inside of it. It has stopped running since we exited it. We can list all of the containers with `container ls -a`, the *-a* (or --all) will list containers that have already been exited.
+Let's continue with our first ubuntu container with the **index.js** file inside of it. It has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
 
 ```bash
 $ docker container ls -a
@@ -195,16 +196,16 @@ CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      
 b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago               hopeful_clarke
 ```
 
-The identifier can be used to interact with the container. Although most commands accept the container name as well. The name of the container was automatically generated to be `hopeful_clarke` in my case.
+The identifier can be used to interact with the container. Although most commands accept the container name as well. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.
 
-The container has already exited, but we can start it again with `start <container-id or container-name>`.
+The container has already exited, but we can start it again with the start command that will accept the id or name of the container as parameter: _start <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_.
 
 ```bash
 $ docker start hopeful_clarke
 root@b8548b9faec3:/#
 ```
 
-The start command runs the same container. Unfortunately we forgot to start it with the --interactive so we can not interact with it. Let's kill it with the `kill <container-id or container-name>` command and try again.
+The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ so we can not interact with it. Let's kill it with the _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ command and try again.
 
 ```bash
 $ docker container ls -a
@@ -235,11 +236,11 @@ Now we have nano installed and can start editing files!
 
 <div class="tasks">
 
-### Exercise 12.2
+### Exercise 12.2 - 12.3
 
 #### Exercise 12.2: Ubuntu 101
 
-Edit the `/usr/src/app/index.js` file with the now installed nano and add the following line
+Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line
 
 ```javascript
 console.log('Hello World')
@@ -247,11 +248,9 @@ console.log('Hello World')
 
 If Nano isn't familiar you can ask in the chat or google.
 
-### Exercise 12.3
-
 #### Exercise 12.3: Ubuntu 102
 
-Install Node while inside the container and run the index file with `node /usr/src/app/index.js` in the container.
+Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container.
 
 The instructions for installing Node are sometimes hard to find so here is something you can copy-paste:
 
@@ -266,15 +265,15 @@ apt install -y nodejs
 
 ### Other docker commands
 
-Now that we have node installed in the container we can execute `node /usr/src/app/index.js` in the container! Let's create a new image from the container. The `commit <container-id or container-name> <image>` will create a new image that includes the changes we have made. You can use `container diff` to check for the changes between the original image and container before doing so.
+Now that we have node installed in the container we can execute _node /usr/src/app/index.js_ in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
 
-```
+```console
 $ docker commit hopeful_clarke hello-node-world
 ```
 
-You can list your images with `image ls`:
+You can list your images with _image ls_:
  
- ```
+```console
 $ docker-fs docker image ls
 REPOSITORY                                      TAG         IMAGE ID       CREATED         SIZE
 hello-node-world                                latest      eef776183732   9 minutes ago   252MB
@@ -284,12 +283,12 @@ hello-world                                     latest      d1165f221234   5 mon
  
 You can now run the new image as follows:
  
-```bash
+```console
 docker run -it hello-node-world bash
 root@4d1b322e1aff:/# node /usr/src/app/index.js
 ```
 
-There are multiple ways to achieve the same conclusion. Let's go through a better solution starting by running `container rm` to remove the old container.
+There are multiple ways to achieve the same conclusion. Let's go through a better solution starting by running _container rm_ to remove the old container.
 
 ```bash
 $ docker container ls -a
@@ -300,22 +299,22 @@ $ docker container rm hopeful_clarke
 hopeful_clarke
 ```
 
-Create the index.js file and write *console.log('Hello, World')* inside it. No need for containers yet.
+Create the index.js file and write _console.log('Hello, World')_ inside it. No need for containers yet.
 
 Next let's skip installing node altogether. Since docker images are found in Docker Hub we can use this [https://hub.docker.com/_/node](https://hub.docker.com/_/node). That image has node already installed, and we only need to pick a version. 
 
-The `container run` accepts *--name* flag that we can use to give a name for the container.
+By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container.
 
 ```bash
 $ docker container run -it --name hello-node node:16 bash
 ```
 
-While we are inside the container on this terminal, open another terminal and use the `container cp` command to copy file from your own machine to the container.
+While we are inside the container on this terminal, open another terminal and use the _container cp_ command to copy file from your own machine to the container.
 
 ```bash
 $ docker cp ./index.js hello-node:/usr/src/app/index.js
 ```
 
-And now we can run `node /usr/src/app/index.js` in the container.
+And now we can run _node /usr/src/app/index.js_ in the container.
 
 </div>
