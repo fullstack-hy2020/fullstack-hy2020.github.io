@@ -444,13 +444,76 @@ Fix get one to return one todo with and id, and update to update one todo with a
 
 <div class="content">
 
-### Debugging tips and tricks
+### Debugging issues in containers
 
-TODO: new section
+> When coding you most likely end up to the situation when everything is fucked up. 
+
+> \- Matti Luukkainen
+
+We need to learn new tools for debugging. When code has a bug you may often be in a state where at least something works so you can work forward from that. Configuration most often is in either of the two states: 1. working or 2. broken. We'll go over a few tools to help when your application is in the latter state.
+
+The most difficult thing about this is that configuration is often broken when it's not finished. So when you write a long docker-compose.yml or Dockerfile and it does not work, you really need to take a moment and think about the various ways you could confirm something is working.
+
+<i>Question Everything</i> is still applicable here. As said in part 3: The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one.
+
+For myself the most important method of debugging is stopping and really thinking about what I'm trying to accomplish instead of just bashing my head at the problem. Often there is a simple alternate solution or quick google search that will get me moving forward. 
 
 #### exec
 
-#### busybox
+The docker command _exec_ is a heavy hitter. It can be used to jump right into a container when it's running. That's it.
+
+Let's start a web server, nginx, in the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Nginx is, among other things, a server capable of serving static html files. It has a default index.html that we can replace.
+
+```console
+$ docker container run -d nginx
+```
+
+Ok, now where should we go with our browser? Is it even running? We know how to answer the latter.
+
+```console
+$ docker container ls
+CONTAINER ID   IMAGE           COMMAND                  CREATED              STATUS                      PORTS     NAMES
+3f831a57b7cc   nginx           "/docker-entrypoint.…"   About a minute ago   Up About a minute           80/tcp    keen_darwin
+```
+
+Yes! It seems to listen on port 80, as output by the previous command.
+
+Let's shut it down and restart with the _-p_ flag to have our browser access it.
+
+```console
+$ docker container stop keen_darwin
+$ docker container rm keen_darwin
+
+$ docker container run -d -p 8080:80 nginx
+```
+
+Let's see the app in http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix the message. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
+
+```console
+$ docker container ls
+CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                   NAMES
+7edcb36aff08   nginx     "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp, :::8080->80/tcp   wonderful_ramanujan
+
+$ docker exec -it wonderful_ramanujan bash
+root@7edcb36aff08:/#
+```
+
+Now that we are in, we need to find the faulty file and replace it. Quick Google tells us that file itself is _/usr/share/nginx/html/index.html_.
+
+Let's move to the directory and delete the file
+
+```console
+root@7edcb36aff08:/# cd /usr/share/nginx/html/
+root@7edcb36aff08:/# rm index.html
+```
+
+Now if we go to http://localhost:8080/ we know that we deleted the correct file. Let's replace it with one containing the correct contents:
+
+```console
+root@7edcb36aff08:/# echo "Hello, exec!" > index.html
+```
+
+Refresh the page and our message is displayed!
 
 </div>
 
@@ -458,7 +521,50 @@ TODO: new section
 
 ### Exercise 12.7.
 
-#### Exercise 12.7: mongo cli
+#### Exercise 12.7: Mongo command-line interface
+
+While the mongodb from the previous exercise is running access the database with mongo command-line interface (cli) using docker exec and add a new todo using the cli.
+
+The command to open cli when inside the container is simply "mongo"
+
+The mongo cli will require the username and password flags to authenticate correctly: -u root -p example, the values are from the docker-compose.yml.
+
+* Step 1: Run mongodb
+* Step 2: Use docker exec to get inside the container
+* Step 3: Open mongo cli
+
+When you have connected to the mongo cli you can ask it to show dbs inside:
+
+```console
+> show dbs
+admin         0.000GB
+config         0.000GB
+local         0.000GB
+the_database  0.000GB
+```
+
+To access the correct database:
+
+```console
+> use the_database
+```
+
+And finally to find out the collections:
+
+```console
+> show collections
+todos
+```
+
+We can now access the data in those collections:
+
+```
+> db.todos.find({})
+{ "_id" : ObjectId("611e54b688ddbb7e84d3c46b"), "text" : "Write code", "done" : true }
+{ "_id" : ObjectId("611e54b688ddbb7e84d3c46c"), "text" : "Learn about containers", "done" : false }
+```
+
+Use the documentation [here](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false!
 
 </div>
 
@@ -522,13 +628,17 @@ Implement a todo counter:
 
 #### Exercise 12.10:
   
-**TODO**  
- 
-When coding you most likely end up to the situation when everything is fucked up. 
-  
-Use `docker exec` and execute `redis-cli` in the redis container. Ensure that
-- you see the counter value that the application is increasing
-- change the counter value and ensure that the change is visible in application 
+Like we did with mongo we can do with redis. Use redis command-line interface to edit the value in the database. 
+
+The command to open the redis cli is "redis-cli".
+
+You can find the key you used with _[KEYS *](https://redis.io/commands/keys)_
+
+And set the value with _[SET](https://redis.io/commands/set)_, giving it the key and then the value
+
+And finally set the value of the counter to 9001.
+
+Make sure that the new value works by using your application. Refresh the application and see that it has the new number, and the redis cli shows new number when asking with _[GET](https://redis.io/commands/get)_, giving it the key
   
 </div>
 
