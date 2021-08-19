@@ -14,7 +14,7 @@ In the previous section we used two different base images: ubuntu and node and d
 
 Instead of modifying a container by copying files inside there we can create a new image that contains the "Hello, World!" application. The tool for this is the Dockerfile. Dockerfile is a simple text file that contains all of the instructions for creating an image. Let's create an example Dockerfile from the "Hello, World!" application.
 
-Create a file called Dockerfile, put it next to the index.js containing `console.log('Hello, World!')` your directory structure should look like this:
+If you did not already, create a directory on your own machine and create a file called Dockerfile. Let's also put a index.js containing `console.log('Hello, World!')` next to the Dockerfile. Your directory structure should look like this:
 
 ```
 ├── index.js
