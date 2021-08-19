@@ -185,7 +185,7 @@ Options:
   ...
 ```
 
-The options, or flags, *-it* make sure we can interact with the container. And after the image, in this case ubuntu, we have the command to be executed inside the container when we start it. You can try other commands that the ubuntu image might have the tools for, for example, try `container run --rm ubuntu ls`. *ls* will list all of the files in the directory and --rm will remove the container after execution.
+The options, or flags, *-it* make sure we can interact with the container. And after the image, in this case ubuntu, we have the command to be executed inside the container when we start it. You can try other commands that the ubuntu image might have the tools for, for example, try *docker container run --rm ubuntu ls*. *ls* will list all of the files in the directory and --rm will remove the container after execution.
 
 Let's continue with our first ubuntu container with the **index.js** file inside of it. It has stopped running since we exited it. We can list all of the containers with `container ls -a`, the *-a* (or --all) will list containers that have already been exited.
 
