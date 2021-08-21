@@ -141,7 +141,7 @@ Docker version 20.10.5, build 55c4c88
 ```
 
 <!-- It's downloaded a new image for hello-world from "Docker Hub". You can see the docker hub page for the image with your browser here: [https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world) -->
-它从“Docker Hub”下载了一个新的 hello-world 镜像。您可以在此处使用浏览器查看图像的 docker hub 页面：[https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world) 
+它从“Docker Hub”下载了一个新的 hello-world 镜像。您可以在此处使用浏览器查看镜像的 docker hub 页面：[https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world) 
 
 <!-- The first part of the message states that we did not have "hello-world:latest" yet. This reveals a bit of detail about images themselves; image names consist of multiple parts, kind of like an url. An image name is in the following format:  -->
 消息的第一部分指出我们还没有“hello-world:latest”。这揭示了镜像本身的一些细节；镜像名称由多个部分组成，有点像 url。镜像名称采用以下格式：
