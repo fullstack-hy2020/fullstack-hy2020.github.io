@@ -289,7 +289,7 @@ Internetistä alkaa löytyä yhä enenevissä määrin valmiita hookeja sekä mu
 
 ### Lisää hookeista
 
-* [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
+* [Awesome React Hooks Resources](https://github.com/rehooks/awesome-react-hooks)
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
 * [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 
