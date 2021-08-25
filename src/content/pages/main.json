@@ -4,7 +4,7 @@
     "intro": "Ota haltuusi React, Redux, Node.js, MongoDB, GraphQL ja TypeScript! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
     "current": [
       "Vuoden 2021 versio kurssista käynnissä!",
-      "Kurssiin liittyvää keskustelua Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
+      "Kurssiin liittyvää keskustelua Discordissa, kanavalla <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
       "Kurssin tehtävien tekoon on tarjolla apua viikottaisessa <a href='https://zoom.us/'>Zoom</a>-ohjauksessa, jota järjestetään torstaisin klo 14 - 16 välillä 6.5. - 24.6. Ohjaukseen pääsee <a href='https://helsinki.zoom.us/j/65341175992?pwd=UVI3dGZQLzVsa1NSWHFvZHFNS3NzUT09'>tällä</a> linkillä.",
       "Yhteistyökumppaneina kurssilla on <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a>, <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a> ja <a href='https://www.smartly.io/'>Smartly.io</a>. Katso <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>täältä</a> yhteistyökumppaniemme asiantuntijoiden vierailuluentoja kurssin aihepiireistä."
     ],
@@ -24,7 +24,7 @@
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
       "2021 version of the course has started!", 
-      "You can discuss the course and related topics in our dedicated group on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
+      "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
     "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",
