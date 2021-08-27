@@ -376,15 +376,6 @@ describe('SignIn', () => {
   });
 });
 ```
-
-You might face the following warning messages: <em>Warning: An update to Formik inside a test was not wrapped in act(...)</em>. This happens because <em>fireEvent</em> method calls cause asynchronous calls in Formik's internal logic. You can get rid of these messages by wrapping each of the <em>fireEvent</em> method calls with the [act](https://www.native-testing-library.com/docs/next/api-main#act) function like this:
-
-```javascript
-await act(async () => {
-  // call the fireEvent method here
-});
-```
-
 </div>
 
 <div class="content">
