@@ -83,8 +83,8 @@ const App = () => {
   return (
     <div>
       {clicks.left}
-      <button handleClick={handleLeftClick}>left</button>
-      <button handleClick={handleRightClick}>right</button>
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
       {clicks.right}
     </div>
   )
