@@ -45,7 +45,7 @@ Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
 #### 7.13: käyttäjien näkymä
 
-Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät perustietot:
+Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät perustiedot:
 
 ![](../../images/7/41.png)
 
