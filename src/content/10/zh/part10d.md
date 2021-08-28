@@ -424,7 +424,8 @@ describe('SignIn', () => {
 });
 ```
 
-<!-- You might face the following warning messages: <em>Warning: An update to Formik inside a test was not wrapped in act(...)</em>. This happens because <em>fireEvent</em> method calls cause asynchronous calls in Formik's internal logic. You can get rid of these messages by wrapping each of the <em>fireEvent</em> method calls with the [act](https://www.native-testing-library.com/docs/next/api-main#act) function like this: -->
+<!-- 
+You might face the following warning messages: <em>Warning: An update to Formik inside a test was not wrapped in act(...)</em>. This happens because <em>fireEvent</em> method calls cause asynchronous calls in Formik's internal logic. You can get rid of these messages by wrapping each of the <em>fireEvent</em> method calls with the [act](https://www.native-testing-library.com/docs/next/api-main#act) function like this: 
 你可能会遇到下述警告信息 <em>Warning: An update to Formik inside a test was not wrapped in act(...)</em> 。当 <em>fireEvent</em> 方法调用产生了一个Formik内部逻辑的异步调用时，就会产生这个警告。你可以通过 [act](https://www.native-testing-library.com/docs/next/api-main#act) 函数封装所有的 <em>fireEvent</em> 方法调用，警告信息就消失了。
 
 ```javascript
@@ -432,6 +433,7 @@ await act(async () => {
   // call the fireEvent method here
 });
 ```
+-->
 
 </div>
 
