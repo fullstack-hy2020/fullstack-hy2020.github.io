@@ -300,7 +300,7 @@ Joudut todennäköisesti tekemään frontendiin erinäisiä pieniä muutoksia ai
 
 Vie sovelluksen backend Internetiin, esim. Herokuun. 
 
-**Huom.** komento _heroku_ toimii laitoksen koneilla ja fuksikannettavilla. Jos et jostain syystä saa [asennettua](https://devcenter.heroku.com/articles/heroku-cli) herokua koneellesi, voit käyttää komentoa [npx heroku-cli](https://www.npmjs.com/package/heroku-cli).
+**Huom.** komento _heroku_ toimii laitoksen koneilla ja fuksikannettavilla. Jos et jostain syystä saa [asennettua](https://devcenter.heroku.com/articles/heroku-cli) herokua koneellesi, voit käyttää komentoa [npx heroku](https://www.npmjs.com/package/heroku).
 
 Testaa selaimen ja Postmanin tai VS Coden REST-clientin avulla, että Internetissä oleva backend toimii.
 
