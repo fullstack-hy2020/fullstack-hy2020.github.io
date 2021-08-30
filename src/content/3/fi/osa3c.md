@@ -28,6 +28,8 @@ Seuraavassa screenshot, jossa koodi on pysäytetty kesken uuden muistiinpanon li
 Koodi on pysähtynyt rivillä 63 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
 
 Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
+  
+Itse en jostain syystä juurikaan käytä Visual Studio Coden debuggeria.
 
 #### Chromen DevTools
 
@@ -69,7 +71,7 @@ Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin da
 
 Lue nyt linkitetty [johdanto](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD). Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
-MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista yksi vaihtoehto on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
 Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehoittaa luomaan klusterin:
 
