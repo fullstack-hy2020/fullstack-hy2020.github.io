@@ -7,59 +7,59 @@ lang: fi
 
 <div class="content">
 
-Ennen kuin siirrymme osan varsinaiseen aiheeseen, eli tiedon tallettamiseen tietokantaan, tarkastellaan muutamaa tapaa Node-sovellusten debuggaamiseen.
+Ennen kuin siirrymme osan varsinaiseen aiheeseen eli tiedon tallettamiseen tietokantaan, tarkastellaan muutamaa tapaa Node-sovellusten debuggaamiseen.
 
 ### Node-sovellusten debuggaaminen
 
-Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan Javascriptin. Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta en ole ollenkaan samaa mieltä. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633).
+Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan JavaScriptin. Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta se ei ole koko totuus. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633).
 
 #### Visual Studio Code
 
-Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti
+Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti:
 
 ![](../../images/3/35.png)
 
 Huomaa, että sovellus ei saa olla samalla käynnissä "normaalisti" konsolista, sillä tällöin sovelluksen käyttämä portti on varattu.
 
-Seuraavassa screenshot, missä koodi on pysäytetty kesken uuden muistiinpanon lisäyksen
+Seuraavassa screenshot, jossa koodi on pysäytetty kesken uuden muistiinpanon lisäyksen:
 
 ![](../../images/3/36e.png)
 
 Koodi on pysähtynyt rivillä 63 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
 
 Ylhäällä olevista nuolista yms. voidaan kontrolloida debuggauksen etenemistä.
-
+  
 Itse en jostain syystä juurikaan käytä Visual Studio Coden debuggeria.
 
-#### Chromen dev tools
+#### Chromen DevTools
 
-Debuggaus onnistuu myös Chromen developer-konsolilla, käynnistämällä sovellus komennolla:
+Debuggaus onnistuu myös Chromen developer-konsolilla käynnistämällä sovellus komennolla:
 
 ```bash
 node --inspect index.js
 ```
 
-Debuggeriin pääsee käsiksi klikkaamalla chromen developer-konsoliin ilmestyneestä vihreästä ikonista
+Debuggeriin pääsee käsiksi klikkaamalla Chromen developer-konsoliin ilmestyneestä vihreästä ikonista:
 
 ![](../../images/3/37.png)
 
-Debuggausnäkymä toimii kuten React-koodia debugattaessa, <i>Sources</i>-välilehdelle voidaan esim. asettaa breakpointeja, eli kohtia joihin suoritus pysähtyy:
+Debuggausnäkymä toimii kuten React-koodia debugattaessa. <i>Sources</i>-välilehdelle voidaan esim. asettaa breakpointeja eli kohtia joihin suoritus pysähtyy:
 
 ![](../../images/3/38eb.png)
 
 Ohjelman muuttujien arvoja voi evaluoida oikealla olevaan <i>watch</i>-ikkunaan.
 
-Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit myös tutkia siellä muuttujien arvoja ja suorittaa mielivaltaista JavaScript-koodia:
+Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit tutkia siellä myös muuttujien arvoja ja suorittaa mielivaltaista JavaScript-koodia:
 
 ![](../../images/3/39ea.png)
 
 #### Epäile kaikkea
 
-Full Stack -sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun kohta kuvaan tulee myös tietokanta ja frontend on yhdistetty backendiin, on potentiaalisia virhelähteitä todella paljon.
+Full Stack -sovellusten debuggaaminen vaikuttaa alussa erittäin hankalalta. Kun kohta kuvaan tulee myös tietokanta, ja frontend on yhdistetty backendiin, on potentiaalisia virhelähteitä todella paljon.
 
-Kun sovellus "ei toimi", onkin selvitettävä missä vika on. On erittäin yleistä, että vika on sellaisessa paikassa, mitä ei osaa ollenkaan epäillä, ja menee minuutti-, tunti- tai jopa päiväkausia ennen kuin oikea ongelmien lähde löytyy.
+Kun sovellus "ei toimi", onkin selvitettävä missä vika on. On erittäin yleistä, että vika on sellaisessa paikassa, jota ei osaa ollenkaan epäillä, ja menee minuutti-, tunti- tai jopa päiväkausia ennen kuin oikea ongelmien lähde löytyy.
 
-Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vain, <i>kaikkea pitää epäillä</i>, ja tulee pyrkiä poissulkemaan ne osat tarkastelusta, missä virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
+Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vain, <i>kaikkea pitää epäillä</i>, ja tulee pyrkiä poissulkemaan ne osat, joissa virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
 
 Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) toimii tässäkin yhteydessä paremmin kuin hyvin.
 
@@ -67,11 +67,11 @@ Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin 
 
 Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla Tietojenkäsittelytieteen osaston kursseilla on käytetty relaatiotietokantoja. Tällä kurssilla käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokannoihin lyöytyy [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
+Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokantoihin on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
 Lue nyt linkitetty [johdanto](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD). Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
-MongoDB:n voi luonnollisesti asentaa omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
 Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehoittaa luomaan klusterin:
 
@@ -81,21 +81,21 @@ Valitaan <i>AWS</i> ja <i>Frankfurt</i> ja luodaan klusteri.
 
 ![](../../images/3/58.png)
 
-Odotetaan että klusteri on valmiina, tähän menee noin 10 minuuttia.
+Odotetaan että klusteri on valmiina, mihin menee noin kymmenen minuuttia.
 
-**HUOM** älä jatka eteenpäin ennen kun klusteri on valmis!
+**HUOM:** Älä jatka eteenpäin ennen kun klusteri on valmis!
 
-Luodaan <i>security</i> välilehdeltä tietokantakäyttäjätunnus joka on siis eri tunnus kuin se, jonka avulla kirjaudutaan MongoDB Atlasiin:
+Luodaan <i>security</i>-välilehdeltä tietokantakäyttäjätunnus joka on siis eri tunnus kuin se, jonka avulla kirjaudutaan MongoDB Atlasiin:
 
 ![](../../images/3/59.png)
 
-annetaan käyttäjälle luku- ja kirjoitusoikeus kaikkiin tietokantoihin
+Annetaan käyttäjälle luku- ja kirjoitusoikeus kaikkiin tietokantoihin:
 
 ![](../../images/3/60.png)
 
-**HUOM** muutamissa tapauksissa uusi käyttäjä ei ole toiminut heti luomisen jälkeen. On saattanut kestää jopa useita minuutteja ennen kuin käyttäjätunnus on ruvennut toimimaan.
+**HUOM:** Muutamissa tapauksissa uusi käyttäjä ei ole toiminut heti luomisen jälkeen. On saattanut kestää jopa useita minuutteja ennen kuin käyttäjätunnus on ruvennut toimimaan.
 
-Seuraavaksi tulee määritellä ne ip-osoitteet, joista tietokantaan pääsee käsiksi
+Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee käsiksi:
 
 ![](../../images/3/61ea.png)
 
@@ -103,7 +103,7 @@ Sallitaan yksinkertaisuuden vuoksi yhteydet kaikkialta:
 
 ![](../../images/3/62.png)
 
-Lopultakin ollaan valmiina ottamaan tietokantayhteyden. Klikataan <i>connect</i>
+Lopulta ollaan valmiina ottamaan tietokantayhteys. Klikataan <i>connect</i>:
 
 ![](../../images/3/63ea.png)
 
@@ -121,10 +121,9 @@ mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/test?retryWrites=t
 
 Olemme nyt valmiina kannan käyttöön.
 
-Voisimme käyttää kantaa JavaScript-koodista suoraan Mongon virallisen
-[MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) -kirjaston avulla, mutta se on ikävän työlästä. Käytämmekin hieman korkeammalla tasolla toimivaa [Mongoose](http://mongoosejs.com/index.html)-kirjastoa.
+Voisimme käyttää kantaa JavaScript-koodista suoraan Mongon virallisen [MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) -kirjaston avulla, mutta se on ikävän työlästä. Käytämmekin hieman korkeammalla tasolla toimivaa [Mongoose](http://mongoosejs.com/index.html)-kirjastoa.
 
-Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), ja sen avulla JavaScript-olioiden tallettaminen mongon dokumenteiksi on suoraviivaista.
+Mongoosesta voisi käyttää luonnehdintaa <i>object document mapper</i> (ODM), ja sen avulla JavaScript-olioiden tallettaminen MongoDB:n dokumenteiksi on suoraviivaista.
 
 Asennetaan Mongoose:
 
@@ -132,7 +131,7 @@ Asennetaan Mongoose:
 npm install mongoose
 ```
 
-Ei lisätä mongoa käsittelevää koodia heti backendin koodin sekaan, vaan tehdään erillinen kokeilusovellus tiedostoon <i>mongo.js</i>:
+Ei lisätä MongoDB:tä käsittelevää koodia heti backendin koodin sekaan, vaan tehdään erillinen kokeilusovellus tiedostoon <i>mongo.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -169,7 +168,7 @@ note.save().then(response => {
 })
 ```
 
-Koodi siis olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti
+Koodi siis olettaa, että sille annetaan parametrina MongoDB Atlasissa luodulle käyttäjälle määritelty salasana. Komentoriviparametriin se pääsee käsiksi seuraavasti:
 
 ```js
 const password = process.argv[2]
@@ -177,25 +176,25 @@ const password = process.argv[2]
 
 Kun koodi suoritetaan komennolla <i>node mongo.js salasana</i> lisää Mongoose tietokantaan uuden dokumentin.
 
-Voimme tarkastella tietokannan tilaa MongoDB Atlasin hallintanäkymän <i>collections</i>-osasta
+Voimme tarkastella tietokannan tilaa MongoDB Atlasin hallintanäkymän <i>collections</i>-osasta:
 
 ![](../../images/3/65.png)
 
-Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>test</i> kokoelmaan (collection) nimeltään <i>notes</i>.
+Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>test</i> kokoelmaan (collection) nimeltään <i>notes</i>:
 
 ![](../../images/3/66a.png)
 
-Tuhotaan kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>note-app</i> muutetaan siis tietokanta-URI muotoon
+Tuhotaan kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>note-app</i>, joten muutetaan siis tietokanta-URI muotoon
 
 ```bash
 mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
-Suoritetaan ohjelma uudelleen.
+Suoritetaan ohjelma uudelleen:
 
 ![](../../images/3/68.png)
 
-Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>create database</i>, joka mahdollistaa uusien tietokantojenluomisen hallintanäkymän kautta. Kannan luominen etukäteen hallintanäkymässä ei kuitenkaan ole tarpeen, sillä MongoDB Atlas osaa luoda kannan automaattisesti, jos sovellus yrittää yhdistää kantaan, jota ei ole vielä olemassa.
+Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>create database</i>, joka mahdollistaa uusien tietokantojen luomisen hallintanäkymän kautta. Kannan luominen etukäteen hallintanäkymässä ei kuitenkaan ole tarpeen, sillä MongoDB Atlas osaa luoda kannan automaattisesti jos sovellus yrittää yhdistää kantaan, jota ei ole vielä olemassa.
 
 ### Skeema
 
@@ -213,9 +212,9 @@ const Note = mongoose.model('Note', noteSchema)
 
 Ensin muuttujaan _noteSchema_ määritellään muistiinpanon [skeema](http://mongoosejs.com/docs/guide.html), joka kertoo Mongooselle, miten muistiinpano-oliot tulee tallettaa tietokantaan.
 
-Modelin _Note_ määrittelyssä ensimmäisenä parametrina oleva merkkijono <i>Note</i> määrittelee, että mongoose tallettaa muistiinpanoa vastaavat oliot kokoelmaan nimeltään <i>notes</i>, sillä [Mongoosen konventiona](http://mongoosejs.com/docs/models.html) on määritellä kokoelmien nimet monikossa (esim. <i>notes</i>), kun niihin viitataan skeeman määrittelyssä yksikkömuodossa (esim. <i>Note</i>).
+Modelin _Note_ määrittelyssä ensimmäisenä parametrina oleva merkkijono <i>Note</i> määrittelee, että Mongoose tallettaa muistiinpanoa vastaavat oliot kokoelmaan nimeltään <i>notes</i>, sillä [Mongoosen konventiona](http://mongoosejs.com/docs/models.html) on määritellä kokoelmien nimet monikossa (esim. <i>notes</i>), kun niihin viitataan skeeman määrittelyssä yksikkömuodossa (esim. <i>Note</i>).
 
-Dokumenttikannat, kuten Mongo ovat <i>skeemattomia</i>, eli tietokanta itsessään ei välitä mitään sinne talletettavan tiedon muodosta. Samaan kokoelmaankin on mahdollista tallettaa olioita joilla on täysin eri kentät.
+Dokumenttikannat, kuten MongoDB ovat <i>skeemattomia</i>, eli tietokanta itsessään ei välitä mitään sinne talletettavan tiedon muodosta. Jopa samaan kokoelmaan on mahdollista tallettaa olioita, joilla on täysin eri kentät.
 
 Mongoosea käytettäessä periaatteena on kuitenkin se, että tietokantaan talletettavalle tiedolle määritellään <i>sovelluksen koodin tasolla skeema</i>, joka määrittelee minkä muotoisia olioita kannan eri kokoelmiin talletetaan.
 
@@ -231,7 +230,7 @@ const note = new Note({
 })
 ```
 
-Modelit ovat ns. <i>konstruktorifunktioita</i>, jotka luovat parametrien perusteella JavaScript-olioita. Koska oliot on luotu modelien konstruktorifunktiolla, niillä on kaikki modelien ominaisuudet, eli joukko metodeja, joiden avulla olioita voidaan mm. tallettaa tietokantaan.
+Modelit ovat ns. <i>konstruktorifunktioita</i>, jotka luovat parametrien perusteella JavaScript-olioita. Koska oliot on luotu modelien konstruktorifunktiolla, niillä on kaikki modelien ominaisuudet eli joukko metodeja, joiden avulla olioita voidaan mm. tallettaa tietokantaan.
 
 Tallettaminen tapahtuu metodilla _save_. Metodi palauttaa <i>promisen</i>, jolle voidaan rekisteröidä _then_-metodin avulla tapahtumankäsittelijä:
 
@@ -244,15 +243,15 @@ note.save().then(result => {
 
 Kun olio on tallennettu kantaan, kutsutaan _then_:in parametrina olevaa tapahtumankäsittelijää, joka sulkee tietokantayhteyden komennolla <code>mongoose.connection.close()</code>. Ilman yhteyden sulkemista ohjelman suoritus ei pääty.
 
-Tallennusoperaation tulos on takaisinkutsun parametrissa _result_. Yhtä olioa tallentaessamme tulos ei ole kovin mielenkiintoinen, olion sisällön voi esim. tulostaa konsoliin, jos haluaa tutkia sitä tarkemmin sovelluslogiikassa tai esim. debugatessa.
+Tallennusoperaation tulos on takaisinkutsun parametrissa _result_. Yhtä olioa tallentaessamme tulos ei ole kovin mielenkiintoinen. Olion sisällön voi esim. tulostaa konsoliin, jos haluaa tutkia sitä tarkemmin sovelluslogiikassa tai esim. debugatessa.
 
 Talletetaan kantaan myös pari muuta muistiinpanoa muokkaamalla dataa koodista ja suorittamalla ohjelma uudelleen.
 
-**HUOM:** Valitettavasti Mongoosen dokumentaatiossa käytetään joka paikassa promisejen _then_-metodien sijaan takaisinkutsufunktioita, joten sieltä ei kannata suoraan copypasteta koodia, sillä promisejen ja vanhanaikaisten callbackien sotkeminen samaan koodiin ei ole kovin järkevää.
+**HUOM:** Valitettavasti Mongoosen dokumentaatiossa käytetään joka paikassa promisejen _then_-metodien sijaan takaisinkutsufunktioita, joten sieltä ei kannata suoraan copy-pasteta koodia, sillä promisejen ja vanhanaikaisten callbackien sotkeminen samaan koodiin ei ole kovin järkevää.
 
 ### Olioiden hakeminen tietokannasta
 
-Kommentoidaan koodista uusia muistiinpanoja generoiva osa, ja korvataan se seuraavalla:
+Kommentoidaan koodista uusia muistiinpanoja generoiva osa ja korvataan se seuraavalla:
 
 ```js
 Note.find({}).then(result => {
@@ -269,7 +268,7 @@ Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat:
 
 Oliot haetaan kannasta _Note_-modelin metodilla [find](https://mongoosejs.com/docs/api.html#model_Model.find). Metodin parametrina on hakuehto. Koska hakuehtona on tyhjä olio <code>{}</code>, saimme kannasta kaikki _notes_-kokoelmaan talletetut oliot.
 
-Hakuehdot noudattavat mongon [syntaksia](https://docs.mongodb.com/manual/reference/operator/).
+Hakuehdot noudattavat MongoDB:n [syntaksia](https://docs.mongodb.com/manual/reference/operator/).
 
 Voisimme hakea esim. ainoastaan tärkeät muistiinpanot seuraavasti:
 
@@ -287,19 +286,19 @@ Note.find({ important: true }).then(result => {
 
 #### 3.12: tietokanta komentoriviltä
 
-Luo puhelinluettelo-sovellukselle pilvessä oleva mongo Mongo DB Atlaksen avulla.
+Luo puhelinluettelosovellukselle pilvessä oleva MongoDB-tietokanta Mongo DB Atlaksen avulla.
 
 Tee projektihakemistoon tiedosto <i>mongo.js</i>, jonka avulla voit lisätä tietokantaan puhelinnumeroja sekä listata kaikki kannassa olevat numerot.
 
-**HUOM.** Jos/kun laitat tiedoston Githubiin, älä laita tietokannan salasanaa mukaan!
+**HUOM:** Jos/kun laitat tiedoston GitHubiin, älä laita tietokannan salasanaa mukaan!
 
-Ohjelma toimii siten, että jos sille annetaan käynnistäessä kolme komentoriviparametria (joista ensimmäinen on salasana), esim:
+Ohjelma toimii siten, että jos sille annetaan käynnistettäessä kolme komentoriviparametria (joista ensimmäinen on salasana), esim:
 
 ```bash
 node mongo.js yourpassword Anna 040-1234556
 ```
 
-Ohjelma tulostaa
+niin ohjelma tulostaa
 
 ```bash
 added Anna number 040-1234556 to phonebook
@@ -311,7 +310,7 @@ ja lisää uuden yhteystiedon tietokantaan. Huomaa, että jos nimi sisältää v
 node mongo.js yourpassword "Arto Vihavainen" 040-1234556
 ```
 
-Jos komentoriviparametreina ei ole muuta kuin salasana, eli ohjelma suoritetaan komennolla
+Jos komentoriviparametreina ei ole muuta kuin salasana eli ohjelma suoritetaan komennolla
 
 ```bash
 node mongo.js yourpassword
@@ -326,9 +325,9 @@ Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
 </pre>
 
-Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv)
+Saat selville ohjelman komentoriviparametrit muuttujasta [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv).
 
-**HUOM. Älä sulje tietokantayhteyttä väärässä kohdassa**. Esim. seuraava koodi ei toimi
+**HUOM: Älä sulje tietokantayhteyttä väärässä kohdassa**. Esim. seuraava koodi ei toimi:
 
 ```js
 Person
@@ -353,7 +352,7 @@ Person
   })
 ```
 
-**HUOM.** Jos määrittelet modelin nimeksi <i>Person</i>, muuttaa mongoose sen monikkomuotoon <i>people</i>, jota se käyttää vastaavan kokoelman nimenä.
+**HUOM:** Jos määrittelet modelin nimeksi <i>Person</i>, muuttaa Mongoose sen monikkomuotoon <i>people</i>, jota se käyttää vastaavan kokoelman nimenä.
 
 </div>
 
@@ -361,14 +360,14 @@ Person
 
 ### Tietokantaa käyttävä backend
 
-Nyt meillä on periaatteessa hallussamme riittävä tietämys ottaa mongo käyttöön sovelluksessamme.
+Nyt meillä on periaatteessa hallussamme riittävä tietämys ottaa MongoDB käyttöön sovelluksessamme.
 
-Aloitetaan nopean kaavan mukaan, copypastetaan tiedostoon <i>index.js</i> Mongoosen määrittelyt, eli
+Aloitetaan nopean kaavan mukaan, copy-pastetaan tiedostoon <i>index.js</i> Mongoosen määrittelyt eli
 
 ```js
 const mongoose = require('mongoose')
 
-// ÄLÄ KOSKAAN TALLETA SALASANOJA githubiin!
+// ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
 const url =
   'mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
@@ -383,7 +382,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-ja muutetaan kaikkien muistiinpanojen hakemisesta vastaava käsittelijä seuraavaan muotoon
+ja muutetaan kaikkien muistiinpanojen hakemisesta vastaava käsittelijä seuraavaan muotoon:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -397,7 +396,7 @@ Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämis
 
 ![](../../images/3/44ea.png)
 
-Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille mongon versiointiin käyttämää kenttää <i>\_\_v</i>.
+Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille MongoDB:n versiointiin käyttämää kenttää <i>\_\_v</i>.
 
 Eräs tapa muotoilla Mongoosen palauttamat oliot haluttuun muotoon on [muokata](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) kannasta haettavilla olioilla olevan _toJSON_-metodin palauttamaa muotoa. Metodin muokkaus onnistuu seuraavasti:
 
@@ -423,11 +422,11 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Nyt siis muuttujassa _notes_ on taulukollinen mongon palauttamia olioita. Kun taulukko lähetetään JSON-muotoisena vastauksena, jokaisen taulukon olion _toJSON_-metodia kutsutaan automaattisesti [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)-metodin toimesta.
+Nyt siis muuttujassa _notes_ on taulukollinen MongoDB:n palauttamia olioita. Kun taulukko lähetetään JSON-muotoisena vastauksena, jokaisen taulukon olion _toJSON_-metodia kutsutaan automaattisesti [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)-metodin toimesta.
 
 ### Tietokantamäärittelyjen eriyttäminen moduuliksi
 
-Ennen kuin täydennämme backendin muutkin osat käyttämään tietokantaa, eriytetään Mongoose-spesifinen koodi omaan moduuliin.
+Ennen kuin täydennämme backendin muutkin osat käyttämään tietokantaa, eriytetään Mongoose-spesifinen koodi omaan moduuliinsa.
 
 Tehdään moduulia varten hakemisto <i>models</i> ja sinne tiedosto <i>note.js</i>:
 
@@ -468,7 +467,7 @@ Noden [moduulien](https://nodejs.org/docs/latest-v8.x/api/modules.html) määrit
 
 Moduulin ulos näkyvä osa määritellään asettamalla arvo muuttujalle _module.exports_. Asetamme arvoksi modelin <i>Note</i>. Muut moduulin sisällä määritellyt asiat, esim. muuttujat _mongoose_ ja _url_ eivät näy moduulin käyttäjälle.
 
-Moduulin käyttöönotto tapahtuu lisäämällä tiedostoon <i>index.js</i> seuraava rivi
+Moduulin käyttöönotto tapahtuu lisäämällä tiedostoon <i>index.js</i> seuraava rivi:
 
 ```js
 const Note = require('./models/note')
@@ -494,11 +493,11 @@ mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFind
 
 Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovellukselle ympäristömuuttujan <em>MONGODB_URI</em> välityksellä.
 
-Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuuko yhteyden muodostaminen:
+Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuiko yhteyden muodostaminen:
 
 ![](../../images/3/45e.png)
 
-On useita tapoja määritellä ympäristömuuttujan arvo, voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti
+On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
 
 ```bash
 MONGODB_URI=osoite_tahan npm run watch
@@ -510,7 +509,7 @@ Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dote
 npm install dotenv
 ```
 
-Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, minne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta
+Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -525,16 +524,14 @@ Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin 
 
 ![](../../images/3/45ae.png)
 
-Kun .env on gitignorattu ei heroku saa tarvitsemiaan tietoja githubin kautta, vaan ne pitää asettaa itse.
-Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin.
-herokuConfig
+Kun .env on gitignorattu, ei Heroku saa tarvitsemiaan tietoja GitHubin kautta, vaan ne pitää asettaa itse.
+Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin:
 
 ![](../../images/3/herokuConfig.png)
 
-dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla
-<em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
+dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
 
-Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti
+Muutetaan nyt tiedostoa <i>index.js</i> seuraavasti:
 
 ```js
 require('dotenv').config() // highlight-line
@@ -550,7 +547,7 @@ app.listen(PORT, () => {
 })
 ```
 
-On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista, tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
+On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
 ### Tietokannan käyttö reittien käsittelijöissä
 
@@ -578,7 +575,7 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastataan _save_-operaation takaisinkutsufunktion sisällä. Näin varmistutaan, että operaation vastaus tapahtuu vain jos operaatio on onnistunut. Palaamme virheiden käsittelyyn myöhemmin.
+Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastataan _save_-operaation takaisinkutsufunktion sisällä. Näin varmistutaan, että operaation vastaus tapahtuu vain, jos operaatio on onnistunut. Palaamme virheiden käsittelyyn myöhemmin.
 
 Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin siitä metodilla _toJSON_ formatoitu muoto:
 
@@ -598,17 +595,17 @@ app.get('/api/notes/:id', (request, response) => {
 
 ### Frontendin ja backendin yhteistoiminnallisuuden varmistaminen
 
-Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti selaimella, postmanilla tai VS Coden REST clientillä**. Seuraavassa kokeillaan uuden muistiinpanon luomista tietokannan käyttöönoton jälkeen:
+Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti selaimella, Postmanilla tai VS Coden REST Clientillä**. Seuraavassa kokeillaan uuden muistiinpanon luomista tietokannan käyttöönoton jälkeen:
 
 ![](../../images/3/46e.png)
 
 Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan, että muutosten jälkeinen backend toimii yhdessä myös frontendin kanssa. Kaikkien kokeilujen tekeminen ainoastaan frontendin kautta on todennäköisesti varsin tehotonta.
 
-Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa toiminnallisuus kerrallaan, eli ensin voidaan toteuttaa esim. kaikkien muistiinpanojen näyttäminen backendiin ja testata että toiminnallisuus toimii selaimella. Tämän jälkeen varmistetaan, että frontend toimii yhteen muutetun backendin kanssa. Kun kaikki on todettu olevan kunnossa, siirrytään seuraavan ominaisuuden toteuttamiseen.
+Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa toiminnallisuus kerrallaan, eli ensin voidaan toteuttaa esim. kaikkien muistiinpanojen näyttäminen backendiin ja testata, että toiminnallisuus toimii selaimella. Tämän jälkeen varmistetaan, että frontend toimii yhteen muutetun backendin kanssa. Kun kaiken on todettu olevan kunnossa, siirrytään seuraavan ominaisuuden toteuttamiseen.
 
-Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atlasin hallintanäkymästä varsin hyödyllistä, usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
+Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atlasin hallintanäkymästä varsin hyödyllistä. Usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
 
 </div>
 
@@ -616,22 +613,21 @@ Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [Githubissa](https://git
 
 ### Tehtävät 3.13.-3.14.
 
-Seuraavat tehtävät saattavat olla melko suoraviivaisia, tosin jos frontend-koodissasi sattuu olemaan bugeja tai epäyhteensopivuutta backendin kanssa, voi seurauksena olla myös mielenkiintoisia bugeja.
+Seuraavat tehtävät saattavat olla melko suoraviivaisia, mutta jos frontend-koodissasi sattuu olemaan bugeja tai epäyhteensopivuutta backendin kanssa, voi seurauksena olla myös mielenkiintoisia bugeja.
 
 #### 3.13: puhelinluettelo ja tietokanta, step1
 
-Muuta backendin kaikkien puhelintietojen näyttämistä siten, että se <i>hakee näytettävät puhelintiedot tietokannasta</i>.
+Muuta backendin kaikkien puhelintietojen näyttämistä siten, että backend <i>hakee näytettävät puhelintiedot tietokannasta</i>.
 
 Varmista, että frontend toimii muutosten jälkeen.
 
-Tee tässä ja seuraavissa tehtävissä Mongoose-spesifinen koodi omaan moduuliin samaan tapaan kuin luvussa [Tietokantamäärittelyjen eriyttäminen moduuliksi](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantamaarittelyjen-eriyttaminen-moduuliksi).
+Tee tässä ja seuraavissa tehtävissä Mongoose-spesifinen koodi omaan moduuliinsa samaan tapaan kuin kohdassa [Tietokantamäärittelyjen eriyttäminen moduuliksi](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#tietokantamaarittelyjen-eriyttaminen-moduuliksi).
 
 #### 3.14: puhelinluettelo ja tietokanta, step2
 
-Muuta backendiä siten, että uudet numerot <i>tallennetaan tietokantaan</i>.
-Varmista, että frontend toimii muutosten jälkeen.
+Muuta backendiä siten, että uudet numerot <i>tallennetaan tietokantaan</i>. Varmista, että frontend toimii muutosten jälkeen.
 
-<i>**Tässä vaiheessa voit olla välittämättä siitä, onko tietokannassa jo henkilöä jolla on sama nimi kuin lisättävällä.**</i>
+<i>**Tässä vaiheessa voit olla välittämättä siitä, onko tietokannassa jo henkilöä, jolla on sama nimi kuin lisättävällä.**</i>
 
 </div>
 
@@ -639,9 +635,9 @@ Varmista, että frontend toimii muutosten jälkeen.
 
 ### Virheiden käsittely
 
-Jos yritämme mennä selaimella sellaisen yksittäisen muistiinpanon sivulle, jota ei ole olemassa, eli esim. urliin <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> missä <i>5c41c90e84d891c15dfa3431</i> ei ole minkään tietokannassa olevan muistiinpanon tunniste, on palvelimelta saatu vastaus <em>null</em>.
+Jos yritämme hakea selaimella sellaista yksittäistä muistiinpanoa, jota ei ole olemassa (eli esim. urliin <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431>, jossa <i>5c41c90e84d891c15dfa3431</i> ei ole minkään tietokannassa olevan muistiinpanon tunniste, on palvelimelta saatu vastaus <em>null</em>.
 
-Muutetaan koodia niin, että tapauksessa, jossa muistiinpanoa ei ole olemassa, lähetään vastauksena HTTP-statuskoodi 404 not found. Toteutetaan lisäksi yksinkertainen <em>catch</em>-lohko, jossa käsitellään tapaukset, joissa <em>findById</em>-metodin palauttama promise päätyy <i>rejected</i>-tilaan:
+Muutetaan koodia niin, että tapauksessa, jossa muistiinpanoa ei ole olemassa, lähetään vastauksena HTTP-statuskoodi <i>404 Not Found</i>. Toteutetaan lisäksi yksinkertainen <em>catch</em>-lohko, jossa käsitellään tapaukset, joissa <em>findById</em>-metodin palauttama promise päätyy <i>rejected</i>-tilaan:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -664,11 +660,11 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _null_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn statuskoodilla <i>404 not found</i>. Jos <em>findById</em>-metodin palauttama promise päätyy rejected-tilaan, kyselyyn vastataan statuskoodilla <i>500 internal server error</i>. Konsoliin tulostetaan tarkempi tieto virheestä.
+Jos kannasta ei löydy haettua olioa, muuttujan _note_ arvo on _null_ ja koodi ajautuu _else_-haaraan. Siellä vastataan kyselyyn statuskoodilla <i>404 Not Found</i>. Jos <em>findById</em>-metodin palauttama promise päätyy rejected-tilaan, kyselyyn vastataan statuskoodilla <i>500 Internal Server Error</i>. Konsoliin tulostetaan tarkempi tieto virheestä.
 
-Olemattoman muistiinpanon lisäksi koodista löytyy myös toinen virhetilanne, joka täytyy käsitellä. Tässä virhetilanteessa muistiinpanoa yritetään hakea virheellisen muotoisella _id_:llä, eli sellaisella mikä ei vastaa mongon id:iden muotoa.
+Olemattoman muistiinpanon lisäksi koodista löytyy myös toinen virhetilanne, joka täytyy käsitellä. Tässä virhetilanteessa muistiinpanoa yritetään hakea virheellisen muotoisella _id_:llä eli sellaisella, joka ei vastaa MongoDB:n id:iden muotoa.
 
-Jos teemme näin tulostuu konsoliin:
+Jos teemme näin, tulostuu konsoliin:
 
 <pre>
 Method: GET
@@ -702,7 +698,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) koska kyse on juuri siitä:
+Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) koska kyse on juuri siitä:
 
 > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
 
@@ -721,7 +717,7 @@ Ei ole koskaan huono idea tulostaa poikkeuksen aiheuttanutta olioa konsoliin vir
 
 Virheenkäsittelijään joutumisen syy voi olla joku ihan muu kuin mitä on tullut alunperin ajatelleeksi. Jos virheen tulostaa konsoliin, voi säästyä pitkiltä ja turhauttavilta väärää asiaa debuggaavilta sessioilta.
 
-Aina kun ohjelmoit ja projektissa on mukana backend <i>**tulee ehdottomasti koko ajan pitää silmällä backendin konsolin tulostuksia**</i>. Jos työskentelet pienellä näytöllä, riittää että konsolista on näkyvissä edes pieni kaistale:
+Aina kun ohjelmoit ja projektissa on mukana backend, <i>**tulee ehdottomasti koko ajan pitää silmällä backendin konsolin tulostuksia**</i>. Jos työskentelet pienellä näytöllä, riittää että konsolista on näkyvissä edes pieni kaistale:
 
 ![](../../images/3/15b.png)
 
@@ -729,7 +725,7 @@ Aina kun ohjelmoit ja projektissa on mukana backend <i>**tulee ehdottomasti koko
 
 Olemme kirjoittaneet poikkeuksen aiheuttavan virhetilanteen käsittelevän koodin muun koodin sekaan. Se on välillä ihan toimiva ratkaisu, mutta on myös tilanteita, joissa on järkevämpää keskittää virheiden käsittely yhteen paikkaan. Tästä on huomattava etu esim. jos virhetilanteiden yhteydessä virheen aiheuttaneen pyynnön tiedot logataan tai lähetetään johonkin virhediagnostiikkajärjestelmään, esim. [Sentryyn](https://sentry.io/welcome/).
 
-Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em>, jonka se saa <i>kolmantena</i> parametrina:
+Muutetaan routen <i>/api/notes/:id</i> käsittelijää siten, että se <i>siirtää virhetilanteen käsittelyn eteenpäin</i> funktiolla <em>next</em>, jonka se saa <i>kolmantena</i> parametrinaan:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -764,15 +760,15 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-Virhekäsittelijä tarkastaa onko kyse <i>CastError</i>-poikkeuksesta, eli virheellisestä olioid:stä, jos on, se lähettää pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavavksi.
+Virheenkäsittelijä tarkastaa, onko kyse <i>CastError</i>-poikkeuksesta eli virheellisestä olio-id:stä. Jos on, käsittelijä lähettää pyynnön tehneelle selaimelle vastauksen käsittelijän parametrina olevan response-olion avulla. Muussa tapauksessa se siirtää funktiolla <em>next</em> virheen käsittelyn Expressin oletusarvoisen virheidenkäsittelijän hoidettavaksi.
 
 Huomaa, että virheidenkäsittelijämiddleware tulee rekisteröidä muiden middlewarejen rekisteröinnin jälkeen.
 
 ### Middlewarejen käyttöönottojärjestys
 
-Koska middlewaret suoritetaan siinä järjestyksessä, missä ne on otettu käyttöön funktiolla _app.use_ on niiden määrittelyn kanssa oltava tarkkana.
+Koska middlewaret suoritetaan siinä järjestyksessä, missä ne on otettu käyttöön funktiolla _app.use_, on niiden määrittelyn kanssa oltava tarkkana.
 
-Oikeaoppinen järjestys seuraavassa:
+Oikeaoppinen järjestys on tämä:
 
 ```js
 app.use(express.static('build'))
@@ -799,7 +795,7 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-Json-parseri on syytä ottaa käyttöön melkeimpä ensimmäisenä. Jos järjestys olisi seuraava
+JSON-parseri on syytä ottaa käyttöön melkeinpä ensimmäisenä. Jos järjestys olisi seuraava
 
 ```js
 app.use(requestLogger) // request.body on tyhjä
@@ -813,11 +809,11 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, kentässä _request.body_ olisi tyhjä olio.
+ei HTTP-pyynnön mukana oleva data olisi loggerin eikä POST-pyynnön käsittelyn aikana käytettävissä, vaan kentässä _request.body_ olisi tyhjä olio.
 
 Tärkeää on myös ottaa käyttöön olemattomien osoitteiden käsittely viimeisenä.
 
-Myös seuraava järjestys aiheuttaisi ongelman
+Myös seuraava järjestys aiheuttaisi ongelman:
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -832,7 +828,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET -pyynnön käsittelyä</i>. Koska olemattomien osoitteiden käsittelijä vastaa kaikkiin pyyntöihin <i>404 unknown endpoint</i>, ei mihinkään sen jälkeen määriteltyyn reittiin tai middlewareen (poikkeuksena virheenkäsittelijä) enää mennä.
+Nyt olemattomien osoitteiden käsittely on sijoitettu <i>ennen HTTP GET -pyynnön käsittelyä</i>. Koska olemattomien osoitteiden käsittelijä vastaa kaikkiin pyyntöihin <i>404 Unknown Endpoint</i>, ei mihinkään sen jälkeen määriteltyyn reittiin tai middlewareen (poikkeuksena virheenkäsittelijä) enää mennä.
 
 ### Muut operaatiot
 
@@ -850,9 +846,9 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-Vastauksena on statuskoodi <i>204 no content</i> molemmissa "onnistuneissa" tapauksissa, eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi, jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
+Vastauksena on molemmissa "onnistuneissa" tapauksissa statuskoodi <i>204 No Content</i> eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi, jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
 
-Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate).
+Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate):
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -873,13 +869,13 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin. Päivämäärän muuttaminen ei ole mahdollista.
 
-Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali JavaScript-olio, eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
+Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali JavaScript-olio eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
 
-Pieni, mutta tärkeä detalji liittyen operaatioon <em>findByIdAndUpdate</em>. Oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code>, jotta saamme muuttuneen olion palautetuksi kutsujalle.
+Huomioi operaatioon <em>findByIdAndUpdate</em> liittyen, että oletusarvoisesti tapahtumankäsittelijä saa parametrikseen <em>updatedNote</em> päivitetyn olion [ennen muutosta](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) olleen tilan. Lisäsimme operaatioon parametrin <code>{ new: true }</code>, jotta saamme muuttuneen olion palautetuksi kutsujalle.
 
-Backend vaikuttaa toimivan postmanista ja VS Coden REST-clientistä tehtyjen kokeilujen perusteella, ja myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
+Backend vaikuttaa toimivan Postmanista ja VS Coden REST Clientistä tehtyjen kokeilujen perusteella. Myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
 
 </div>
 
@@ -909,7 +905,7 @@ Varmista, että frontend toimii muutosten jälkeen.
 
 #### 3.18*: puhelinluettelo ja tietokanta, step6
 
-Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely, ja varmista niiden toimivuus suoraan selaimella, postmanilla tai VS Coden REST clientillä.
+Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely ja varmista niiden toimivuus suoraan selaimella, Postmanilla tai VS Coden REST Clientillä.
 
 Selaimella tarkastellen yksittäisen numerotiedon tulisi näyttää seuraavalta:
 
