@@ -27,6 +27,10 @@ inside that Dockerfile we will tell the image 3 things:
 2. Include the index.js inside the image, so we don't need to manually copy it into the container
 3. When we run a container from the image, use node to execute the index.js file.
 
+This will translate into a basic Dockerfile.
+
+`Dockerfile`
+
 ```Dockerfile
 FROM node:16
 
@@ -89,6 +93,8 @@ Containerizing that should be easy based on the previous example.
 3. Copy ALL of the files in this directory to the image
 4. Start with DEBUG=playground:* npm start
 
+`Dockerfile`
+
 ```Dockerfile
 FROM node:16
 
@@ -148,6 +154,8 @@ Dockerfile
 
 However, in our case dockerignore isn't the only thing required. We will need to install the dependencies during the build step.
 
+`Dockerfile`
+
 ```Dockerfile
 COPY . .
 
@@ -170,6 +178,8 @@ So in short: _ci_ creates realiable builds, while _install_ is the one to use wh
 
 As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_
 
+`Dockerfile`
+
 ```Dockerfile
 COPY . .
 
@@ -185,6 +195,8 @@ Even better, we can use _npm ci --only-production_ to not waste time installing 
 Now the Dockerfile should work again, try it with _docker build -t express-server . && docker run -p 3000:3000 express-server_
 
 We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that.
+
+`Dockerfile`
 
 ```Dockerfile
 ENV DEBUG=playground:*
@@ -206,6 +218,8 @@ Smaller images are more secure by having less attack surface area. And smaller i
 Snyk has a great list of 10 best practices, read them [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
 One big neglection we did was having the application running as root instead of using an user. Let's do a final fix to the Dockerfile:
+
+`Dockerfile`
 
 ```Dockerfile
 USER node
@@ -248,6 +262,8 @@ docker-compose version 1.29.2, build 5becea4c
 
 And now we can turn the spell into a yaml file:
 
+`docker-compose.yml`
+
 ```yaml
 services:
   app:                    # The name of the service, can be anything
@@ -289,6 +305,8 @@ It may not be the best option to move your entire development environment into a
 
 The application we met in the previous exercises can use MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a mongodb image. Docker Hub is the default place where docker pulls the images from, you can use other registries as well, but since we are already knee-deep in docker I chose that one. With a quick search there I found [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
+`docker-compose.yml`
+
 ```yml
 version: '3.8'
 
@@ -327,7 +345,8 @@ In the MongoDB Docker Hub page under "Initializing a fresh instance" is the info
 
 Let's create a file _mongo-init.js_ and place it in the mongo directory of the express project.
 
-**mongo-init.js:**
+`mongo-init.js`
+
 ```javascript
 db.createUser({
   user: 'the_username',
@@ -351,6 +370,8 @@ It will initialize the database with an user and a few todos. Now we just need t
 We could create a new image FROM mongo and COPY the file inside or we can use a bind mount to mount the init-mongo.js to the container. Let's do the latter.
 
 With _container run_ we can add _-v_ flag with the syntax _-v FILE-IN-HOST:FILE-IN-CONTAINER_, but let's skip that and add it to the docker-compose.yml. The format is the same, first host and then container:
+
+`docker-compose.yml`
 
 ```yml
   mongo:
@@ -389,6 +410,8 @@ There are two distinct methods to store the data:
 
 I prefer the first choice in most cases whenever you really need to avoid deleting the data. Let's see both in action with docker-compose;
 
+`docker-compose.yml`
+
 ```yml
 services:
   mongo:
@@ -407,6 +430,8 @@ services:
 The above will create a directory called _mongo_data_ to your local filesystem, and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
 
 Another great method is by using a named volume:
+
+`docker-compose.yml`
 
 ```yml
 services:
@@ -446,7 +471,7 @@ Fix get one to return one todo with and id, and update to update one todo with a
 
 ### Debugging issues in containers
 
-> When coding you most likely end up to the situation when everything is fucked up. 
+> When coding you most likely end up in a situation where everything is broken. 
 
 > \- Matti Luukkainen
 
@@ -587,6 +612,9 @@ An excellent use case for Redis is to use it as a cache. Caches are often used t
 #### Exercise 12.8: Setup redis to project
 
 The application will be able to use redis by giving it the REDIS_URL environment variable. Find and read through the Docker Hub page for redis, add it to the docker-compose.yml by defining another service after mongo:
+
+`docker-compose.yml`
+
 ```yml
 services:
   mongo:
@@ -648,7 +676,7 @@ Make sure that the new value works by using your application. Refresh the applic
 
 In the previous section I said that <i>by default</i> Redis does not persist the data. However, the persistence is easy to toggle on. We will only need to start the redis with a different command, as instructed by the docker hub page:
 
-**docker-compose.yml**
+`docker-compose.yml`
 ```yml
 services:
   redis:

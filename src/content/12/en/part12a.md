@@ -7,6 +7,10 @@ lang: en
 
 <div class="content">
 
+TODO: Guide what should be submitted in each exercise.
+
+TODO: Better guidance on where the files should be placed
+
 According to wikipedia software development includes the whole lifecycle from envisioning software to programming to releasing the software and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
 
 Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application so that each container can run isolated from each other.

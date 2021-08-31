@@ -34,6 +34,8 @@ $ npm run build
 
 Great! Final step is figuring a way to use a server to serve the static files. As you may know we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the express server to serve static files. I'll leave that as an exercise, instead we are going to go ahead and start writing our Dockerfile.
 
+`Dockerfile`
+
 ```Dockerfile
 FROM node:16
 
@@ -80,14 +82,17 @@ root@98fa9483ee85:/usr/src/app# serve build
 
 ```
 
-Great! Let's ctrl+c and exit out and add those to our Dockerfile.
+Great! Let's ctrl+c and exit out and then add those to our Dockerfile.
 
 ```
   ^C
   INFO: Gracefully shutting down. Please wait...
+
 root@98fa9483ee85:/usr/src/app# exit
   exit
 ```
+
+`Dockerfile`
 
 ```Dockerfile
 ...
@@ -96,17 +101,19 @@ RUN npm install -g serve
 CMD ["serve", "build"]
 ```
 
-And then build `docker build -t hello-front .` and run it `docker run -p 5000:5000 hello-front`. The app will be available in http://localhost:5000.
+And then build _docker build -t hello-front ._ and run it _docker run -p 5000:5000 hello-front_. The app will then be available in http://localhost:5000.
 
 ### Using multiple stages
 
-While serve is a *valid* option we can do better. With containers a good goal is to create the containers so that they do not contain anything irrelevant so that they have a small number of dependencies and are less likely to break or become vulnerable over time. 
+While serve is a <i>valid</i> option we can do better. With containers a good goal is to create the containers so that they do not contain anything irrelevant so that they have a small number of dependencies and are less likely to break or become vulnerable over time. 
 
 Multi-stage builds are designed for splitting the build process into multiple stages. Conventional options for stages are build stage and test stage.
 
 With multi-stage builds a tried and true solution like [nginx](https://en.wikipedia.org/wiki/Nginx), can be used to serve static files without a lot of headache. The docker hub [page for nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
 
 Let's use the previous Dockerfile but change the FROM to include the name of the stage:
+
+`Dockerfile`
 
 ```Dockerfile
 # The first FROM is now a stage called build-stage
@@ -143,11 +150,13 @@ Multi-stage builds also include some internal optimizations that may affect your
 
 #### Exercise 12.12: Todo application frontend
 
-The following repository contains an react application in the react-app directory. Copy the contents into your own repository. The react-app directory includes a README on how to start the application.
-  
-**TODO** there is no README in app
+The following repository contains an react application in the react-app directory. 
 
-Use ENV to pass REACT_APP_BACKEND_URL to the application and run it with the backend. Backend can be running outside a container.
+<https://github.com/fullstack-hy2020/part12-containers-applications/tree/main/react-app>
+
+Copy the contents into your own repository. The react-app directory includes a README on how to start the application.
+
+Use ENV to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. Backend can be running outside a container.
 
 #### Exercise 12.13: Testing during build process
 
@@ -162,18 +171,21 @@ Extract a component `Todo` that represents a single todo. Write a test for the n
 ### Developing in containers
 
 Let's move the todo application development to a container. There are a few reasons why you would want to do that:
+
 1. To keep the environment similar between development and production to avoid bugs that appear only in production environment
 2. To avoid differences between developers and their own environments that lead difficulties in application development
 3. To help new team members hop in by having them only be required to install container runtime
 
-We will need to do at least two things to move the application to a container:
+These are great reasons. The tradeoff is that we may encounter some unconventional behavior when we aren't running the applications like we are used to. We will need to do at least two things to move the application to a container:
 
 1. Start the application in development mode
 2. Access the files with vscode
 
-And let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called `dev.Dockerfile`.
+And let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called _dev.Dockerfile_. Let's just place this new file in the root of the project.
 
 Starting the create-react-app in development mode should be easy, lets start with the following:
+
+`dev.Dockerfile`
 
 ```Dockerfile
 FROM node:16
@@ -189,14 +201,13 @@ RUN npm install
 CMD ["npm", "start"]
 ```
  
+During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so _docker build -f ./dev.Dockerfile -t hello-front-dev ._ will build the image. The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
 
-The flag `-f` will be used to tell which file to use, it would otherwise default to Dockerfile: `docker build -f ./dev.Dockerfile -t hello-front-dev .`. The create-react-app will be served in port 3000, so you can test that it works. 
-  
-The second task, Access the files with vscode, is not done yet. There are at least two ways of doing this: 
+The second task, accessing the files with vscode, is not done yet. There are at least two ways of doing this: 
   1. [The Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) 
   2. Volumes, the same thing we used to preserve data with the database
 
-Let's go over the latter since not everyone is using vscode. Let's do a trial run with the flag `-v` and if that works then we will move the configuration to a docker-compose file. To use the -v we will need to tell it the current directory. pwd should do that for you, try with `echo $(pwd)`. Use that as the left side for -v to map current directory to the inside of the container.
+Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_ and if that works then we will move the configuration to a docker-compose file. To use the _-v_ we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for you. Try this with _echo $(pwd)_ in your command line. We can use that as the left side for _-v_ to map current directory to the inside of the container or you can use the full directory path.
 
 ```
 $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
@@ -206,10 +217,39 @@ $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
   You can now view hello-front in the browser.
 ```
 
-Now edit the src/App.js and the changes should be hot-loaded to the browser.
+Now we can simply edit the src/App.js and the changes should be hot-loaded to the browser.
 
-Next let's move that config to a docker-compose.yml.
+Next let's move that config to a docker-compose.yml. That file should be at the root of the project as well.
 
+`docker-compose.yml`
+
+```yml
+services:
+  app:
+    image: hello-front-dev
+    build:
+      context: . # The context will pick this directory as the "build context"
+      dockerfile: dev.Dockerfile # This will simply tell which dockerfile to read
+    volumes:
+      - ./:/usr/src/app # The path can be relative, so ./ is enough to say "the same location as the docker-compose.yml"
+    ports:
+      - 3000:3000
+    container_name: hello-front-dev # This will name the container hello-front-dev
+```
+
+With this _docker-compose up_ can run the application in development mode. You don't even need node installed to develop it!
+
+Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_. Or add it to the package.json and run _docker build_ again.
+
+### Communication between containers in a docker network
+
+The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers to one another. Let's add a new service to the docker-compose and we can see how the network and DNS work.
+
+<i>Busybox</i> is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux" and we definitely can use it to our advantage.
+
+It can be used to debug our configurations. So if you get lost in the later exercises of this section you should use BusyBox to find out what works and what doesn't. Let's use it to explore what I just said. That containers are inside a network and you can easily connect between them.
+
+`docker-compose.yml`
 ```yml
 services:
   app:
@@ -221,22 +261,25 @@ services:
       - ./:/usr/src/app
     ports:
       - 3000:3000
-    container_name: hello-front-dev # This will name the container hello-front-dev
+    container_name: hello-front-dev
+
+  debug-helper:
+    image: busybox
 ```
 
-With this `docker-compose up` can run the application in development mode. You don't even need node installed to develop it!
+TODO: this
 
-Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. `npm install axios`, you have to do it in the running container e.g. `docker exec hello-front-dev npm install axios`. Or add it to the package.json and run `docker build` again.
 
-#### Communication between containers in a docker network
+Now we can remove the debug-helper from our _docker-compose.yml_.
 
-The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers to one another. Let's add a new service to the docker-compose and we can see how the network and DNS work.
+#### Communications between containers in a more ambitious environment
 
 Next we will add a reverse proxy to our docker-compose. A reverse proxy will be the single point of entry to our application and we can hide multiple servers behind it. The final goal will be to set both the react application and the express application behind the reverse proxy. There are multiple different options, here are some examples ordered by initial release from newer to older: Traefik, Caddy, Nginx and Apache.
 
 Let's pick Nginx, the docker hub page is [here](https://hub.docker.com/_/nginx). Create a file nginx.conf in the project root and take this template for a configuration. We will need to do minor edits to have our application running:
 
-**nginx.conf**
+`nginx.conf`
+
 ```conf
 # events is required, but defaults are ok
 events { }
@@ -260,7 +303,9 @@ http {
 }
 ```
 
-And next add Nginx to the docker-compose file. Add a volume as instructed in the docker hub page where the right side is `:/etc/nginx/nginx.conf:ro`, the final ro declares that the volume will be _read-only_.
+And next add Nginx to the docker-compose file. Add a volume as instructed in the docker hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>.
+
+`docker-compose.yml`
 
 ```yml
   nginx:
@@ -315,7 +360,7 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
-> If you are still encountering 503, make sure that the create-react-app has been built first.
+If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the docker-compose up.
 
 </div>
 
@@ -327,7 +372,7 @@ That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
 Create a development docker-compose yml with nginx and our todo react-app.
 
-You can use *-f* flag to specify a file in case you want to have multiple, e.g. *docker-compose -f docker-compose.dev.yml up*
+You can use _-f_ flag to specify a file in case you want to have multiple, e.g. _docker-compose -f docker-compose.dev.yml up_
 
 #### Exercise 12.15: Setup nginx in front of todo-back
 
@@ -357,7 +402,7 @@ Add a new location to the nginx.conf so that requests to /api are proxied to the
   }
 ```
 
-The `proxy_pass` directive has an interesting feature with a trailing slash. As we are using the path _/api_ for location but the backend application only answers in paths _/_ or _/todos_ we will want the _/api_ to be removed from the request. In other words even though the browser will send a GET request to _/api/todos/1_ we want the nginx to proxy the request to _/todos/1_. This is done by adding a trailing slash _/_ to the url at the end of `proxy_pass`.
+The *proxy\_pass* directive has an interesting feature with a trailing slash. As we are using the path _/api_ for location but the backend application only answers in paths _/_ or _/todos_ we will want the _/api_ to be removed from the request. In other words even though the browser will send a GET request to _/api/todos/1_ we want the nginx to proxy the request to _/todos/1_. This is done by adding a trailing slash _/_ to the url at the end of *proxy\_pass_.
 
 This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-the-path-with-an-nginx-proxy-pass)
 
@@ -366,7 +411,7 @@ This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-
 
 #### Exercise 12.16: Connect todo-front to todo-back
 
-Make sure that the todo-front works with todo-back. It will require changes to the `REACT_APP_BACKEND_URL` environmental variable.
+Make sure that the todo-front works with todo-back. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable.
 
 If you already got this working during a previous exercise you may skip this.
 
@@ -380,7 +425,7 @@ Containers are fun tools to use in development, but the best use case for them i
 
 Tools like Kubernetes allow us to manage containers on a completely new level. It basically hides away the physical machines and allows us developers to worry less about the infrastructure.
 
-If you are interested in learning more in depth about containers come to the [DevOps with Docker](https://devopswithdocker.com) course and you can find more about Kubernetes in the 5 credit [DevOps with Kubernetes](https://devopswithkubernetes.com). You should now have the skills to complete both of them.
+If you are interested in learning more in depth about containers come to the [DevOps with Docker](https://devopswithdocker.com) course and you can find more about Kubernetes in the advanced 5 credit [DevOps with Kubernetes](https://devopswithkubernetes.com) course. You should now have the skills to complete both of them.
 
 </div>
 
