@@ -1,5 +1,5 @@
 ---
-mainImage: ../../../images/part-10.svg
+mainImage: ../../../images/part-12.svg
 part: 12
 lang: zh
 ---
