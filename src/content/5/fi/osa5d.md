@@ -317,8 +317,8 @@ describe('Note app', function() {
   describe('when logged in', function() {
     beforeEach(function() {
       cy.contains('log in').click()
-      cy.get('input:first').type('mluukkai')
-      cy.get('input:last').type('salainen')
+      cy.get('#username').type('mluukkai')
+      cy.get('#password').type('salainen')
       cy.get('#login-button').click()
     })
     // highlight-end
