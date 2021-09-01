@@ -327,6 +327,8 @@ services:
 
 With _docker-compose up_ the application is available in <http://localhost:3210>. But still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works.
 
+TODO: Add image to illustrate
+
 Now that you know how easy it is to find other services in a docker-compose.yml and have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
 
 #### Communications between containers in a more ambitious environment
