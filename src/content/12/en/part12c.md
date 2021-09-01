@@ -267,10 +267,67 @@ services:
     image: busybox
 ```
 
-TODO: this
+The busybox won't have any process running inside so that we could exec in there. Because of that the output of _docker-compose up_ will also look like this:
 
+```
+$ docker-compose up
+  Pulling debug-helper (busybox:)...
+  latest: Pulling from library/busybox
+  8ec32b265e94: Pull complete
+  Digest: sha256:b37dd066f59a4961024cf4bed74cae5e68ac26b48807292bd12198afa3ecb778
+  Status: Downloaded newer image for busybox:latest
+  Starting hello-front-dev          ... done
+  Creating react-app_debug-helper_1 ... done
+  Attaching to react-app_debug-helper_1, hello-front-dev
+  react-app_debug-helper_1 exited with code 0
+  
+  hello-front-dev | 
+  hello-front-dev | > react-app@0.1.0 start
+  hello-front-dev | > react-scripts start
+```
 
-Now we can remove the debug-helper from our _docker-compose.yml_.
+This is completely expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running I'll use [wget](https://en.wikipedia.org/wiki/Wget) since it's simple and included in busybox to send a request from the debug-helper to hello-front-dev.
+
+Wget requires the flag _-O_ with _-_ will output the response to the stdout. And then we'll just add the url: _wget -O - URL_. With docker-compose we can use _docker-compose run SERVICE COMMAND_ to run a service with a specific command.
+
+```
+$ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
+
+  Creating react-app_debug-helper_run ... done
+  Connecting to hello-front-dev:3000 (172.26.0.2:3000)
+  writing to stdout
+  <!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="utf-8" />
+      ...
+```
+
+The URL is really the interesting part here. We simply said to connect to the other service and to that port. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in docker-compose.yml is only for external access.
+
+Let's do a few alterations to the docker-compose to emphasize this:
+
+`docker-compose.yml`
+```yml
+services:
+  app:
+    image: hello-front-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3210:3000
+    container_name: hello-front-dev
+
+  debug-helper:
+    image: busybox
+```
+
+With _docker-compose up_ the application is available in <http://localhost:3210>. But still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works.
+
+Now that you know how easy it is to find other services in a docker-compose.yml and have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
 
 #### Communications between containers in a more ambitious environment
 
@@ -330,7 +387,7 @@ Connecting to http://localhost:8080 will lead to a familiar looking page with 50
 
 This is because directing requests to http://localhost:3000 leads to nowhere as the nginx container does not have any application running in port 3000. By definition localhost refers to the current computer used to access it. With containers localhost is unique for each container, leading to the container itself.
 
-Let's test this by going inside the nginx container and using curl to send a request to the application itself:
+Let's test this by going inside the nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.
 
 ```
 $ docker exec -it reverse-proxy bash  
