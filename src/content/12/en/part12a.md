@@ -41,7 +41,7 @@ Only the core parts, 1 through 5, are required to be completed before this part.
 
 # Warning
 
-Since we are stepping right outside of our comfort zone as JavaScript developers this part may require you to do a detour and familiarize yourself with shell / command line / command prompt / terminal before gettings started.
+Since we are stepping right outside of our comfort zone as JavaScript developers this part may require you to do a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started.
 
 If you've only ever used a graphical user interface and never touched e.g. linux or terminal on mac or get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise it includes everything you're going to need to get started here! 
 
