@@ -39,6 +39,12 @@ In this part, the focus of our attention will not be on the software code. Inste
 
 Only the core parts, 1 through 5, are required to be completed before this part. As you will need basic knowledge of Node, Express and React.
 
+# Warning
+
+Since we are stepping right outside of our comfort zone as JavaScript developers this part may require you to do a detour and familiarize yourself with shell / command line / command prompt / terminal before gettings started.
+
+If you've only ever used a graphical user interface and never touched e.g. linux or terminal on mac or get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise it includes everything you're going to need to get started here! 
+
 ### Submitting exercises and earning credits ###
 
 Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i>.
