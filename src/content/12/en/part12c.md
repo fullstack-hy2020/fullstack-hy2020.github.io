@@ -92,6 +92,8 @@ root@98fa9483ee85:/usr/src/app# exit
   exit
 ```
 
+The installation of serve turns into a RUN so that the dependency is installed during the build process. And the command to serve build directory will be the command to start the software with.
+
 `Dockerfile`
 
 ```Dockerfile
@@ -107,7 +109,7 @@ And then build _docker build -t hello-front ._ and run it _docker run -p 5000:50
 
 While serve is a <i>valid</i> option we can do better. With containers a good goal is to create the containers so that they do not contain anything irrelevant so that they have a small number of dependencies and are less likely to break or become vulnerable over time. 
 
-Multi-stage builds are designed for splitting the build process into multiple stages. Conventional options for stages are build stage and test stage.
+Multi-stage builds are designed for splitting the build process into multiple stages. Conventional options for stages are build stage and test stage. The main goal for using stages is to limit the size of the image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
 
 With multi-stage builds a tried and true solution like [nginx](https://en.wikipedia.org/wiki/Nginx), can be used to serve static files without a lot of headache. The docker hub [page for nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
 
