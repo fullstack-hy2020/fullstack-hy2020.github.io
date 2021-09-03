@@ -471,7 +471,7 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 首先你需要增加如下内容来通过 `mongoose` 在后台项目中开启调试选项：
 
 ```js
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })

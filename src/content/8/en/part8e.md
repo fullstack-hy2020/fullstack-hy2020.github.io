@@ -433,7 +433,7 @@ First of all  you'll need to enable a debugging option via _mongoose_ in your ba
 
 
 ```js
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })

@@ -63,7 +63,7 @@ const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.ne
 
 console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })
