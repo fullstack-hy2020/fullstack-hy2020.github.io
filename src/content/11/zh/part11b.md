@@ -19,7 +19,7 @@ GitHub Actions 在工作流[workflows](https://docs.github.com/en/free-pro-team@
 <!-- - Triggering event happens (for example, there is a push to master branch).
 - The workflow with that trigger is executed.
 - Cleanup -->
-- 触发事件发生(例如，有一个push 到 master 的分支)。
+- 触发事件发生(例如，有一个push 到 main 的分支)。
 - 执行带有该触发器的工作流。
 - 清理
 
@@ -67,7 +67,7 @@ GitHub Actions 比自我托管的解决方案有很大的优势: 代码库托管
 <!-- Note that the code <i>might not work</i> with node version 15. If you happen to have that version, and the project does not even start, please downgrade to 14 or you are on your own.  -->
 请注意，该代码可能不适用于版本为15的node。如果你碰巧有那个版本，而且项目还没开始，请自行降级到14。
 
-#### 11.2 the example project
+#### 11.2 The example project
 
 <!-- The first thing you'll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your use.  -->
 您要做的第一件事情是在您的名字下fork 示例代码库。它实际上做的是在你的 GitHub 用户配置文件下创建一个代码库的副本供你使用。
@@ -202,9 +202,9 @@ jobs:
           echo "Hello World!"
 ```
 
-<!-- In this example, the trigger is a push to the master branch. There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell. -->
+<!-- In this example, the trigger is a push to the main branch, which in our project is called <i>master</i>. (Your main branch could be called <i>main</i> or <i>master</i>).  There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell. -->
 
-在这个示例中，触发器是master分支的push。有一个工作叫 <i>hello\_world\_job</i>，它将在 Ubuntu 18.04的虚拟环境中运行。这个作业只有一个名为“ Say Hello”的步骤，它将在shell中运行 <code>echo "Hello World!"</code> 命令。
+在这个示例中，触发器是main分支的push，本项目中叫做 <i>master</i>（你的主分支可能叫 <i>main</i> 或者<i>master</i>）。会有一个叫 <i>hello\_world\_job</i> 的job ，它将在 Ubuntu 18.04的虚拟环境中运行。这个job只有一个名为“ Say Hello”的步骤，它将在shell中运行 <code>echo "Hello World!"</code> 命令。
 
 <!-- So you may ask, when does GitHub trigger a workflow to be started? There are plenty of [options](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) to choose from, but generally speaking, you can configure a workflow to start once: -->
 所以你可能会问，GitHub 什么时候触发工作流启动？有很多选项可供[选择](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) ，但是一般来说，你可以配置一个工作流来启动一次:
@@ -249,7 +249,7 @@ jobs:
 注意，GitHub Actions 还向您提供了运行工作流的确切环境(操作系统及其设置[setup](https://github.com/actions/virtual-environments/blob/ubuntu18/20201129.1/images/linux/Ubuntu1804-README.md))的信息。这一点非常重要，因为如果发生了意料之外的事情，如果能够在机器中重复所有步骤，那么调试就会变得非常容易！
 
 
-#### 11.4 date and directory contents
+#### 11.4 Date and directory contents
 日期和目录内容
 
 <!-- Extend the workflow with steps that print the date and current directory content in long format.  -->

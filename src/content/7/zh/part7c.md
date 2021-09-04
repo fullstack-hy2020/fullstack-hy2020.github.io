@@ -526,8 +526,9 @@ import { Alert } from '@material-ui/lab'
 ```
 
 
-<!-- the _Button_ component is rendered so, that its root component is react-redux _Link_ which receives its path as prop field _to_. -->
-_Button_ 组件渲染为这样，它的根组件是 react-router-dom _Link_ ，它接收它的路径作为 prop 字段 _to_。 
+<!-- the _Button_ component is rendered so that its root component is react-redux _Link_ which receives its path as prop field _to_. -->
+
+_Button_ 组件被渲染，其根组件都是 react-redux 的 _Link_ ，其 _to_ 属性可以存放跳转的路径
 
 
 
