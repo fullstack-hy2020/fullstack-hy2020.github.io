@@ -36,6 +36,8 @@ In the previous section we used two different base images: ubuntu and node and d
 2. 将 index.js 包含在镜像中，这样我们就不需要手动复制到容器中了
 3. 当我们从镜像运行容器时，使用 node 执行 index.js 文件。
 
+`Dockerfile`
+
 ```Dockerfile
 FROM node:16
 
@@ -116,6 +118,8 @@ $ DEBUG=playground:* npm start
 3. 将这个目录下的所有文件复制到镜像中
 4. 从 DEBUG=playground:* npm start 开始
 
+`Dockerfile`
+
 ```Dockerfile
 FROM node:16
 
@@ -192,6 +196,8 @@ Dockerfile
 <!-- However, in our case dockerignore isn't the only thing required. We will need to install the dependencies during the build step. -->
 然而，在我们的例子中 dockerignore 并不是唯一需要的东西。我们需要在构建步骤中安装依赖项。
 
+`Dockerfile`
+
 ```Dockerfile
 COPY . .
 
@@ -224,6 +230,8 @@ ci 和 install 的区别：
 <!-- As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_ -->
 由于我们在构建步骤中没有安装任何新的东西，而且我们不希望版本突然改变，我们将使用 _ci_
 
+`Dockerfile`
+
 ```Dockerfile
 COPY . .
 
@@ -247,6 +255,8 @@ CMD DEBUG=playground:* npm start
 <!-- We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that. -->
 
 我们在 npm start 的 CMD 期间设置了一个环境变量 _DEBUG=playground:*_。但是，使用 Dockerfiles 我们也可以使用指令 ENV 来设置环境变量。让我们这样做。
+
+`Dockerfile`
 
 ```Dockerfile
 ENV DEBUG=playground:*
@@ -281,6 +291,8 @@ Snyk 列出了 10 个最佳实践，请在 [此处](https://snyk.io/blog/10-best
 
 <!-- One big neglection we did was having the application running as root instead of using an user. Let's do a final fix to the Dockerfile: -->
 我们所做的一大漏洞是让应用程序以 root 身份运行，而不是使用用户身份运行。 让我们对 Dockerfile 做最后的修复：
+
+`Dockerfile`
 
 ```Dockerfile
 USER node
@@ -333,6 +345,8 @@ docker-compose version 1.29.2, build 5becea4c
 
 <!-- And now we can turn the spell into a yaml file: -->
 现在我们可以将这些“咒语”转换为 yaml 文件：
+
+`docker-compose.yml`
 
 ```yaml
 services:
@@ -388,6 +402,8 @@ services:
 <!-- The application we met in the previous exercises can use MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a mongodb image. Docker Hub is the default place where docker pulls the images from, you can use other registries as well, but since we are already knee-deep in docker I chose that one. With a quick search there I found [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo) -->
 我们在前面练习中的应用程序可以使用 MongoDB。 让我们探索 [Docker Hub](https://hub.docker.com/) 以找到一个 mongodb 镜像。 Docker Hub 是 docker 从中提取镜像的默认位置，您也可以使用其他注册表，但由于我们已经深入了解 docker，因此我选择了那个。 通过快速搜索，我找到了 [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
+`docker-compose.yml`
+
 ```yml
 version: '3.8'
 
@@ -436,7 +452,8 @@ $ MONGO_URL=mongodb://localhost:3456/the_database npm run dev
 <!-- Let's create a file _mongo-init.js_ and place it in the mongo directory of the express project. -->
 让我们创建一个文件 _mongo-init.js_ 并将其放在 express 项目的 mongo 目录中。
 
-**mongo-init.js:**
+`mongo-init.js`
+
 ```javascript
 db.createUser({
   user: 'the_username',
@@ -464,6 +481,8 @@ db.todos.insert({ text: 'Learn about containers', done: false });
 <!-- With _container run_ we can add _-v_ flag with the syntax _-v FILE-IN-HOST:FILE-IN-CONTAINER_, but let's skip that and add it to the docker-compose.yml. The format is the same, first host and then container: -->
 
 使用 _container run_，我们可以使用语法 _-v FILE-IN-HOST:FILE-IN-CONTAINER_ 添加 _-v_ 标志，但让我们跳过它并将其添加到 docker-compose.yml。 格式是一样的，先是主机，然后是容器：
+
+`docker-compose.yml`
 
 ```yml
   mongo:
@@ -514,6 +533,8 @@ $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm 
 <!-- I prefer the first choice in most cases whenever you really need to avoid deleting the data. Let's see both in action with docker-compose; -->
 在大多数情况下，当您确实需要避免删除数据时，我更喜欢第一个选择。让我们看看两者在 docker-compose 中的作用；
 
+`docker-compose.yml`
+
 ```yml
 services:
   mongo:
@@ -534,6 +555,8 @@ services:
 
 <!-- Another great method is by using a named volume: -->
 另一个很好的方法是使用命名卷：
+
+`docker-compose.yml`
 
 ```yml
 services:
@@ -580,7 +603,7 @@ todo express 应用程序缺少 get one 和 update。
 ### Debugging issues in containers
 调试容器中的问题
 
-<!-- > When coding you most likely end up to the situation when everything is fucked up. 
+<!-- >  When coding you most likely end up in a situation where everything is broken. 
 
 > \- Matti Luukkainen -->
 
@@ -759,6 +782,8 @@ Redis 的一个很好的用例是将其用作缓存。缓存通常用于存储�
 <!-- The application will be able to use redis by giving it the REDIS_URL environment variable. Find and read through the Docker Hub page for redis, add it to the docker-compose.yml by defining another service after mongo: -->
 应用程序将能够通过给它 REDIS_URL 环境变量来使用 redis。查找并通读redis的Docker Hub页面，通过在mongo之后定义另一个服务将其添加到docker-compose.yml中：
 
+`docker-compose.yml`
+
 ```yml
 services:
   mongo:
@@ -843,7 +868,8 @@ const redis = require('../redis')
 <!-- In the previous section I said that <i>by default</i> Redis does not persist the data. However, the persistence is easy to toggle on. We will only need to start the redis with a different command, as instructed by the docker hub page: -->
 在上一节中，我说<i>默认</i> Redis 不会持久化数据。但是，持久性很容易切换。我们只需要按照 docker hub 页面的指示使用不同的命令启动 redis：
 
-**docker-compose.yml**
+`docker-compose.yml`
+
 ```yml
 services:
   redis:

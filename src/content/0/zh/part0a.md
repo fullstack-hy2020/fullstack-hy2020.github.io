@@ -141,7 +141,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 <!-- -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交0-7章的至少127个练习
-- [通过开放大学开启第六章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097) 
+- [通过开放大学开启第六章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-2c09d93d-4f75-4359-85a3-5f8e2c2c5ce6) 
 -	[申请第六章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
@@ -155,7 +155,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交0-7章的关于核心课程的至少138个练习
-- [通过开放大学开启第七章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
+- [通过开放大学开启第七章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51f0edb4-c137-4871-a1e0-d93ca9b47bdf) 
 -	[申请第七章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
@@ -168,7 +168,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 - 提交第8章的至少22/26个练习。
-- [通过开放大学开启第八章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
+- [通过开放大学开启第八章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-5f475a66-7d83-4b0e-9413-65e83be3dd7e) 
 -	[申请第八章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
@@ -176,12 +176,12 @@ However, note that the deadline for taking exam for University of Helsinki credi
 <!-- By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9. -->
 通过提交第九章的至少24/27个练习，关于TypeScript ，你可以获得一个额外的学分。推荐在学习完0-7章后再学习第9章。
 
--	Submit at least 24/27 exercises for part 9.
+<!-- -	Submit at least 24/27 exercises for part 9.
 - [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
--	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+-	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 -	提交第9章的至少24/27个练习。
-- [通过开放大学开启第九章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
+- [通过开放大学开启第九章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f62d31aa-e737-4060-b930-373b5236fa08) 
 -	[申请第九章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
@@ -196,7 +196,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 -	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits) -->
 
 -	提交第10章的至少25个练习. 
-- [通过开放大学开启第十章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
+- [通过开放大学开启第十章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b2475f8c-e911-4a07-9993-549955381936) 
 -	[申请第十章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
@@ -335,7 +335,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 <!-- - Register for the course through the [Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=131840261) 
 Enroll in the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=136061621)-->
-- 在2022年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=hy-CUR-143228359)来加入这门课程。
+- 在2022年1月9日之前通过注册[开放大学](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-eeffe055-8b94-42d0-9167-50476ad32133)来加入这门课程。
 <!-- - Wait for 24 hours and activate your University of Helsinki user ID. You will receive instructions on the activation process the following day.  - 等待 24 小时，激活你的赫尔辛基大学用户 ID。 您将在第二天收到关于激活流程的说明
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration. 3. User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.-->
