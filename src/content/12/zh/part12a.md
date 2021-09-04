@@ -51,6 +51,15 @@ lang: zh
 <!-- Only the core parts, 1 through 5, are required to be completed before this part. As you will need basic knowledge of Node, Express and React. -->
 只有核心的 章节，也就是1到5章是本章节的前置章节。因为你需要Node、Express 和React的 基础知识。
 
+# Warning
+注意
+
+<!-- Since we are stepping right outside of our comfort zone as JavaScript developers this part may require you to do a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started. -->
+由于我们正在慢慢走出JavaScript 开发者的舒适区，本章节开始前需要你了解一些 shell/命令行/命令语句/终端 等知识。
+
+<!-- If you've only ever used a graphical user interface and never touched e.g. linux or terminal on mac or get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise it includes everything you're going to need to get started here!  -->
+如果你一直是一个图形界面的使用者，并没有接触过任何类似Linux 或者Mac 里终端的概念，或者在第一个练习就卡壳了，我建议你首先学一下 “CS学习中的计算工具” <https://tkt-lapio.github.io/en/>这门课，可以跳过11章的“SSH 连接”这一章。这里面包含了所有你会遇到的所有内容。
+
 ### Submitting exercises and earning credits ###
 提交联系并获得学分
 
