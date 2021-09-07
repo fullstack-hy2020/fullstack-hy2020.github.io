@@ -237,9 +237,15 @@ COPY --chown=node:node . .
 
 #### Exercise 12.4: Containerizing a node application
 
+> In this exercise, submit <i>at least</i> the Dockerfile you created.
+
 The following repository contains an express application in the express-app directory: [part12-containers-applications](https://github.com/fullstack-hy2020/part12-containers-applications). You do not need the other directory yet. Copy the contents into your own repository. The express-app directory includes a README on how to start the application.
 
-Get the visit counter in root of the application working while the application is running inside the container.
+Step 1. Containerize the application by creating a Dockerfile and building an image.
+
+Step 2. Run the image with the correct ports open. Make sure the visit counter increases when used through a browser.
+
+Tip: Run the application outside of a container to examine it before starting to containerize.
 
 </div>
   
@@ -288,6 +294,8 @@ Creating files like this that <i>declare</i> what you want instead of script fil
 ### Exercise 12.5.
 
 #### Exercise 12.5: docker-compose
+
+> In this exercise, submit <i>at least</i> the docker-compose.yml you created.
 
 Create a docker-compose file that works with the node application from the previous exercise.
 
@@ -461,6 +469,8 @@ Now the volume is created, but managed by docker. After starting the application
 
 #### Exercise 12.6: Little bit of mongodb coding
 
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+
 The todo express application is missing both get one and update. 
 
 Fix get one to return one todo with and id, and update to update one todo with an id.
@@ -548,6 +558,8 @@ Refresh the page and our message is displayed!
 
 #### Exercise 12.7: Mongo command-line interface
 
+> Use _script_ to record what you do, save the generated file into the repository as your answer.
+
 While the mongodb from the previous exercise is running access the database with mongo command-line interface (cli) using docker exec and add a new todo using the cli.
 
 The command to open cli when inside the container is simply "mongo"
@@ -611,6 +623,8 @@ An excellent use case for Redis is to use it as a cache. Caches are often used t
 
 #### Exercise 12.8: Setup redis to project
 
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+
 The application will be able to use redis by giving it the REDIS_URL environment variable. Find and read through the Docker Hub page for redis, add it to the docker-compose.yml by defining another service after mongo:
 
 `docker-compose.yml`
@@ -637,6 +651,8 @@ to the express server. The next exercise will require redis to be available and 
   
 #### Exercise 12.9:
 
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+
 The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) installed and two functions "promisified" - getAsync and setAsync.
 
 - setAsync function takes in key and value, using the key to store the value.
@@ -655,7 +671,9 @@ Implement a todo counter:
 ```
 
 #### Exercise 12.10:
-  
+
+> Use _script_ to record what you do, save the generated file into the repository as your answer.
+
 Like we did with mongo we can do with redis. Use redis command-line interface to edit the value in the database. 
 
 The command to open the redis cli is "redis-cli".
@@ -701,9 +719,11 @@ In addition to the key-value features Redis can also be used to Publish messages
 ### Exercises 12.11.
   
 #### Exercise 12.11: Persisting data in redis
-  
-Do not yet create volume for redis. Ensure that the data is not persisted by default, that is, after running after running _docker-compose down_ and _docker-compose up_ the the counter value is not anymore set.
-  
-Create a volume for redis data and make sure that the data survives after running _docker-compose down_ and _docker-compose up_
+
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+
+Check that the data is not persisted by default: after running _docker-compose down_ and _docker-compose up_ the counter value is reset to 0.
+
+Then create a volume for redis data and make sure that the data survives after running _docker-compose down_ and _docker-compose up_.
 
 </div>

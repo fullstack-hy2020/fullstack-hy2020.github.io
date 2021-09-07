@@ -152,15 +152,19 @@ Multi-stage builds also include some internal optimizations that may affect your
 
 #### Exercise 12.12: Todo application frontend
 
+> In this exercise, submit <i>at least</i> the Dockerfile you created.
+
 The following repository contains an react application in the react-app directory. 
 
 <https://github.com/fullstack-hy2020/part12-containers-applications/tree/main/react-app>
 
 Copy the contents into your own repository. The react-app directory includes a README on how to start the application.
 
-Use ENV to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. Backend can be running outside a container.
+Containerize the application and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. Backend can be running outside a container.
 
 #### Exercise 12.13: Testing during build process
+
+> In this exercise, submit the entire React application, with the Dockerfile.
 
 We can use multiple stages to do testing during the build process. The build process will fail as the tests fail.
 
@@ -434,11 +438,15 @@ If you are still encountering 503, make sure that the create-react-app has been 
 
 #### Exercise 12.14: Setup nginx in front of todo-front
 
+> In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
+
 Create a development docker-compose yml with nginx and our todo react-app.
 
 You can use _-f_ flag to specify a file in case you want to have multiple, e.g. _docker-compose -f docker-compose.dev.yml up_
 
 #### Exercise 12.15: Setup nginx in front of todo-back
+
+> In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
 
 Add the express-app to the development docker-compose yml in development mode.
 
@@ -475,6 +483,8 @@ This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-
 
 #### Exercise 12.16: Connect todo-front to todo-back
 
+> In this exercise, submit the entire development environment, including both express and react applications, Dockerfiles and docker-compose.yml.
+
 Make sure that the todo-front works with todo-back. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable.
 
 If you already got this working during a previous exercise you may skip this.
@@ -498,6 +508,8 @@ If you are interested in learning more in depth about containers come to the [De
 ### Exercises 12.17.
 
 #### Exercise 12.17:
+
+> In this exercise, submit the entire production environment, including both express and react applications, Dockerfiles and docker-compose.yml.
 
 Create a production docker-compose.yml with all of the services, nginx, react-app, express-app, mongodb and redis.
 

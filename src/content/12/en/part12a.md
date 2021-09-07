@@ -7,10 +7,6 @@ lang: en
 
 <div class="content">
 
-TODO: Guide what should be submitted in each exercise.
-
-TODO: Better guidance on where the files should be placed
-
 According to wikipedia software development includes the whole lifecycle from envisioning software to programming to releasing the software and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
 
 Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application so that each container can run isolated from each other.
@@ -159,7 +155,19 @@ The output contains a few new things for us to learn. Docker daemon is a backgro
 
 ### Exercise 12.1
 
+#### Before exercises
+
+Some of these exercises do not generate anything for you to submit.
+
+Instead use [script](https://man7.org/linux/man-pages/man1/script.1.html) to record commands you have used; try it yourself with _script -r_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".
+
+You can playback the "typescript" file with _script -p typescript_. 
+
+If script does not work or you can't get the playback working, just copypaste all commands you used into a text file.
+
 #### Exercise 12.1: Running your second container
+
+> Use _script_ to record what you do, save the generated file into the repository as your answer.
 
 The hello-world output gave us an "ambitious" task to do. Do the following
 
@@ -250,6 +258,8 @@ Now we have nano installed and can start editing files!
 
 #### Exercise 12.2: Ubuntu 101
 
+> Use _script_ to record what you do, save the generated file into the repository as your answer.
+
 Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line
 
 ```javascript
@@ -259,6 +269,8 @@ console.log('Hello World')
 If Nano isn't familiar you can ask in the chat or google.
 
 #### Exercise 12.3: Ubuntu 102
+
+> Use _script_ to record what you do, save the generated file into the repository as your answer.
 
 Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container.
 
