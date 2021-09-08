@@ -281,6 +281,8 @@ curl -sL https://deb.nodesource.com/setup_16.x | bash
 apt install -y nodejs
 ```
 
+You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_.
+
 </div>
 
 <div class="content">
