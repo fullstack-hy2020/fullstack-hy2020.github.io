@@ -566,7 +566,7 @@ While the mongodb from the previous exercise is running access the database with
 
 The command to open cli when inside the container is simply "mongo"
 
-The mongo cli will require the username and password flags to authenticate correctly: -u root -p example, the values are from the docker-compose.yml.
+The mongo cli will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.yml.
 
 * Step 1: Run mongodb
 * Step 2: Use docker exec to get inside the container
