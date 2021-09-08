@@ -271,6 +271,8 @@ And now we can turn the spell into a yaml file:
 `docker-compose.yml`
 
 ```yaml
+version: '3.8'            # Version 3.8 is quite new and should work
+
 services:
   app:                    # The name of the service, can be anything
     image: express-server # Declares which image to use
