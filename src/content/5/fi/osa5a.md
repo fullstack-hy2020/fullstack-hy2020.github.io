@@ -589,7 +589,6 @@ Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa
       )}
     </div>
   )
-}
 ```
 
 #### 5.2: blogilistan frontend, step2
