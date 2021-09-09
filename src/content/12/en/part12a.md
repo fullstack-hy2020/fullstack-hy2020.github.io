@@ -35,11 +35,26 @@ In this part, the focus of our attention will not be on the software code. Inste
 
 Only the core parts, 1 through 5, are required to be completed before this part. As you will need basic knowledge of Node, Express and React.
 
+</div>
+
+<div class="tasks">
+
 # Warning
 
 Since we are stepping right outside of our comfort zone as JavaScript developers this part may require you to do a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started.
 
 If you've only ever used a graphical user interface and never touched e.g. linux or terminal on mac or get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise it includes everything you're going to need to get started here! 
+
+### Exercise 12.0
+
+#### Exercise 12.0: Using a computer (without graphical user interface)
+
+Step 1: Read the text below the Warning header.
+
+Step 2: Run _curl http://helsinki.fi_ and save the output into a file. Submit that file into your repository.
+
+</div>
+<div class="content">
 
 ### Submitting exercises and earning credits ###
 
@@ -155,15 +170,11 @@ The output contains a few new things for us to learn. Docker daemon is a backgro
 
 ### Exercise 12.1
 
-#### Before exercises
-
 Some of these exercises do not generate anything for you to submit.
 
-Instead use [script](https://man7.org/linux/man-pages/man1/script.1.html) to record commands you have used; try it yourself with _script -r_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".
+Instead use [script](https://man7.org/linux/man-pages/man1/script.1.html) to record commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".
 
-You can playback the "typescript" file with _script -p typescript_. 
-
-If script does not work or you can't get the playback working, just copypaste all commands you used into a text file.
+If _script_ does not work, you can just copypaste all commands you used into a text file.
 
 #### Exercise 12.1: Running your second container
 
