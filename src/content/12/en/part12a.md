@@ -68,6 +68,14 @@ Once you have completed the exercises and want to get the credits, let us know t
 
 You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.
 
+### Tools of the trade
+
+The material and the exercises can be completed with
+
+* [WSL 2 terminal](https://docs.microsoft.com/en-us/windows/wsl/install-win10) on Windows
+* Terminal on Mac
+* Command Line on a Linux
+
 ### Installing everything required for this part ###
 
 To make sure that you are ready to start with this part let's begin by installing the required software. This will be one of the largest obstacle for us, since the tools will require superuser access on the computer. This is due to the fact that the tools will have access to your operating systems kernel. We will talk more about what this means in the next section.
