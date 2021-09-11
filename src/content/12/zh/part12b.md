@@ -312,9 +312,21 @@ COPY --chown=node:node . .
 #### Exercise 12.4: Containerizing a node application
 练习 12.4：容器化node应用程序
 
+> In this exercise, submit <i>at least</i> the Dockerfile you created.
+本练习中，至少提交你创建的Dockerfile。
+
 <!-- The following repository contains an express application in the express-app directory: [part12-containers-applications](https://github.com/fullstack-hy2020/part12-containers-applications). You do not need the other directory yet. Copy the contents into your own repository. The express-app directory includes a README on how to start the application. -->
 
 以下存储库在 express-app 目录中包含一个 express 应用程序：[part12-containers-applications](https://github.com/fullstack-hy2020/part12-containers-applications)。 您还不需要其他目录。 将内容复制到您自己的存储库中。 express-app 目录包含关于如何启动应用程序的 README。
+
+Step 1. Containerize the application by creating a Dockerfile and building an image.
+步骤一 容器化你的应用，创建Dockerfile 并构建镜像。
+
+Step 2. Run the image with the correct ports open. Make sure the visit counter increases when used through a browser.
+步骤二 运行镜像并开放正确的端口。确保使用浏览器访问计数器会正确增加。
+
+Tip: Run the application outside of a container to examine it before starting to containerize.
+技巧：启动容器前，在容器外运行应用来检查。
 
 <!-- Get the visit counter in root of the application working while the application is running inside the container. -->
 当应用程序在容器内运行时，获取应用程序根目录中的访问计数器。
@@ -349,6 +361,8 @@ docker-compose version 1.29.2, build 5becea4c
 `docker-compose.yml`
 
 ```yaml
+version: '3.8'            # Version 3.8 is quite new and should work
+
 services:
   app:                    # The name of the service, can be anything
     image: express-server # Declares which image to use
@@ -379,6 +393,9 @@ services:
 
 #### Exercise 12.5: docker-compose
 练习12.5： docker-compose
+
+> In this exercise, submit <i>at least</i> the Dockerfile you created.
+本练习中，至少提交你创建的Dockerfile。
 
 <!-- Create a docker-compose file that works with the node application from the previous exercise. -->
 创建一个 docker-compose 文件，该文件适用于上一个练习中的node应用程序。
@@ -590,6 +607,9 @@ volumes:
 #### Exercise 12.6: Little bit of mongodb coding
 练习 12.6：一点点 mongodb 编码
 
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+本练习中，提交整个express应用，并提交Dockerfile 和 docker-compose.yml
+
 <!-- The todo express application is missing both get one and update.  -->
 todo express 应用程序缺少 get one 和 update。
 
@@ -698,15 +718,16 @@ root@7edcb36aff08:/# echo "Hello, exec!" > index.html
 
 #### Exercise 12.7: Mongo command-line interface
 练习 12.7：Mongo 命令行界面
-
+> Use _script_ to record what you do, save the generated file into the repository as your answer.
+使用_script_ 来记录你的操作，将生成的文件保存到你答案的仓库中。
 <!-- While the mongodb from the previous exercise is running access the database with mongo command-line interface (cli) using docker exec and add a new todo using the cli. -->
 当上一个练习中的 mongodb 正在运行时，使用 mongo 命令行界面 (cli) 使用 docker exec 访问数据库，并使用 cli 添加新的待办事项。
 
 <!-- The command to open cli when inside the container is simply "mongo" -->
 在容器内打开 cli 的命令只是简单的“mongo”
 
-<!-- The mongo cli will require the username and password flags to authenticate correctly: -u root -p example, the values are from the docker-compose.yml. -->
-mongo cli 将需要用户名和密码标志才能正确验证： -u root -p ，值来自 docker-compose.yml。
+<!--The mongo cli will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.yml. -->
+mongo cli 将需要用户名和密码标志才能正确验证：Flags _-u root -p example_ 应该好用，值来自 docker-compose.yml。
 
 <!-- * Step 1: Run mongodb
 * Step 2: Use docker exec to get inside the container
@@ -779,6 +800,9 @@ Redis 的一个很好的用例是将其用作缓存。缓存通常用于存储�
 #### Exercise 12.8: Setup redis to project
 练习 12.8：设置 redis 到项目
 
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+本练习中，提交整个express应用，并提交Dockerfile 和 docker-compose.yml
+
 <!-- The application will be able to use redis by giving it the REDIS_URL environment variable. Find and read through the Docker Hub page for redis, add it to the docker-compose.yml by defining another service after mongo: -->
 应用程序将能够通过给它 REDIS_URL 环境变量来使用 redis。查找并通读redis的Docker Hub页面，通过在mongo之后定义另一个服务将其添加到docker-compose.yml中：
 
@@ -809,7 +833,8 @@ const redis = require('../redis')
 
 #### Exercise 12.9:
 练习 12.9：
-
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+本练习中，提交整个express应用，并提交Dockerfile 和 docker-compose.yml
 <!-- The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) installed and two functions "promisified" - getAsync and setAsync. -->
 该项目已经安装了 [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) 和两个函数“promisified”——getAsync 和 setAsync。
 
@@ -900,10 +925,14 @@ Redis 的其他功能
 #### Exercise 12.11: Persisting data in redis
 在 redis 中持久化数据
 
-<!-- Do not yet create volume for redis. Ensure that the data is not persisted by default, that is, after running after running _docker-compose down_ and _docker-compose up_ the the counter value is not anymore set. -->
-还没有为 redis 创建卷。确保数据默认不持久化，即运行_docker-compose down_和_docker-compose up_后运行后不再设置计数器值。
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+本练习中，提交整个express应用，并提交Dockerfile 和 docker-compose.yml
 
-<!-- Create a volume for redis data and make sure that the data survives after running _docker-compose down_ and _docker-compose up_ -->
-为 redis 数据创建一个卷，并确保在运行 _docker-compose down_ 和 _docker-compose up_ 后数据仍然存在
+<!-- Check that the data is not persisted by default: after running _docker-compose down_ and _docker-compose up_ the counter value is reset to 0. -->
+
+注意数据默认不持久化，即运行_docker-compose down_和_docker-compose up_后运行后计数器的值重置为0。
+
+<!-- Then create a volume for redis data and make sure that the data survives after running _docker-compose down_ and _docker-compose up_.-->
+下面为 redis 数据创建一个卷，并确保在运行 _docker-compose down_ 和 _docker-compose up_ 后数据仍然存在
 
 </div>

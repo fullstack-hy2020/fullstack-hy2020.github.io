@@ -15,6 +15,9 @@ lang: zh
 我们会使用容器来为我们的Nodejs和React创建一个稳定不变的执行环境。利用容器也可以方便地向我们的项目引入多种服务。我们会利用多种不同的流行工具来操作我们的容器，来探索和实验这些便利性。
 
 <!-- This part is by Jami Kousa and the Services Foundation Team of Unity Helsinki. Unity ... -->
-这一章是由Jami Kousa 和 赫尔辛基大学的基础服务团队维护的。
+<!-- 这一章是由Jami Kousa 和 赫尔辛基大学的基础服务团队维护的。 -->
+
+<!-- This section has been created by Jami Kousa and in collaboration with the Helsinki-based Services Foundation team at Unity. The Services Foundation team works on providing platforms for other teams at Unity to succeed in their mission of building great services for their customers. The team is passionate about improving Unity’s developer experience and works on tools like the Unity Dashboard, the Unity Editor, and Unity.com. -->
+这一章节是由 Jami Kousa 创作的，并由位于赫尔辛基的Unity的基础服务团队共同维护。基础服务团队在Unity负责为其他团队提供平台，从而为他们的客户成功构建伟大的服务。团队致力于改善Unity 的开发体验，并开发诸如Unity Dashboard、Unity Editor 的工具, 当然还有Unity.com。
 
 </div>
