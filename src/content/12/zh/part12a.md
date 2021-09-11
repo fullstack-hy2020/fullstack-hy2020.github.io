@@ -51,6 +51,10 @@ lang: zh
 <!-- Only the core parts, 1 through 5, are required to be completed before this part. As you will need basic knowledge of Node, Express and React. -->
 只有核心的 章节，也就是1到5章是本章节的前置章节。因为你需要Node、Express 和React的 基础知识。
 
+</div>
+
+<div class="tasks">
+
 # Warning
 注意
 
@@ -59,6 +63,20 @@ lang: zh
 
 <!-- If you've only ever used a graphical user interface and never touched e.g. linux or terminal on mac or get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise it includes everything you're going to need to get started here!  -->
 如果你一直是一个图形界面的使用者，并没有接触过任何类似Linux 或者Mac 里终端的概念，或者在第一个练习就卡壳了，我建议你首先学一下 “CS学习中的计算工具” <https://tkt-lapio.github.io/en/>这门课，可以跳过11章的“SSH 连接”这一章。这里面包含了所有你会遇到的所有内容。
+
+### Exercise 12.0
+
+#### Exercise 12.0: Using a computer (without graphical user interface)
+联系12：使用计算机（不使用图形化用户界面）
+
+Step 1: Read the text below the Warning header.
+步骤一：阅读警告头下面的文字。
+
+Step 2: Run _curl http://helsinki.fi_ and save the output into a file. Submit that file into your repository.
+运行 _curl http://helsinki.fi_ 并将输出存储成文件。将文件提交到你的仓库中。
+
+</div>
+<div class="content">
 
 ### Submitting exercises and earning credits ###
 提交联系并获得学分
@@ -76,6 +94,21 @@ This part on containers is 1 credit.
 
 <!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. -->
 你可以通过单击小旗图标来下载完成此章节的认证。小旗图标代表了认证通过。
+
+### Tools of the trade
+商业版本的工具
+
+<!-- The material and the exercises can be completed with -->
+教材和联系可以使用如下工具：
+
+<!-- * [WSL 2 terminal](https://docs.microsoft.com/en-us/windows/wsl/install-win10) on Windows
+* Terminal on Mac
+* Command Line on a Linux -->
+
+* Windows 的 [WSL 2 terminal](https://docs.microsoft.com/en-us/windows/wsl/install-win10)  
+* Mac 的 Terminal
+* Linux 的 命令行Command Line
+
 
 ### Installing everything required for this part ###
 安装本章节所需要的所有内容
@@ -207,8 +240,22 @@ For more examples and ideas, visit:
 ### Exercise 12.1
 练习12.1
 
+
+<!-- Some of these exercises do not generate anything for you to submit. -->
+某些联系并不会为你的提交生成任何内容
+
+<!-- Instead use [script](https://man7.org/linux/man-pages/man1/script.1.html) to record commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript". -->
+除了使用 [script](https://man7.org/linux/man-pages/man1/script.1.html) 来记录你使用的命令，你可以使用_script_ 来记录 ，_echo "hello"_  来生成一些输出，_exit_  来停止记录。他会将你的行为保存到一个文件，名叫“typescript”。
+
+<!-- If _script_ does not work, you can just copypaste all commands you used into a text file. -->
+如果 _script_ 不起作用，你可以使用 复制粘贴所有的命令到一个文本文件中。
+
 #### Exercise 12.1: Running your second container
 练习12.1： 运行你的第二个容器
+
+<!-- > Use _script_ to record what you do, save the generated file into the repository as your answer. -->
+> 使用 _script_ 来记录你的行为，将生成的文件保存到你答案的仓库中。
+
 
 <!-- The hello-world output gave us an "ambitious" task to do. Do the following -->
 hello-word 的输出为我们衍生出了“雄心勃勃”的任务。执行以下操作：
@@ -326,6 +373,9 @@ Now we have nano installed and can start editing files!
 #### Exercise 12.2: Ubuntu 101
 练习12.2 Ubuntu 101
 
+<!-- > Use _script_ to record what you do, save the generated file into the repository as your answer. -->
+> 使用 _script_ 来记录你的行为，将生成的文件保存到你答案的仓库中。
+
 <!-- Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line -->
 使用刚安装的nono编辑容器中的 _/usr/src/app/index.js_  文件，添加如下行。
 
@@ -339,6 +389,9 @@ console.log('Hello World')
 #### Exercise 12.3: Ubuntu 102
 练习12.3 Ubuntu 102
 
+<!-- > Use _script_ to record what you do, save the generated file into the repository as your answer. -->
+> 使用 _script_ 来记录你的行为，将生成的文件保存到你答案的仓库中。
+
 <!-- Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container. -->
 在容器中安装Node 并运行index 文件：_node /usr/src/app/index.js_ 
 
@@ -349,6 +402,9 @@ console.log('Hello World')
 curl -sL https://deb.nodesource.com/setup_16.x | bash
 apt install -y nodejs
 ```
+
+You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_.
+你需要将_curl_  安装到容器中。和安装 _nano_ 的方法是一样的。
 
 </div>
 
