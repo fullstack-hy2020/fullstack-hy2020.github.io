@@ -414,7 +414,7 @@ One way to format the objects returned by Mongoose is to [modify](https://stacko
 ```js
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
+    returnedObject._id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
@@ -466,7 +466,7 @@ const noteSchema = new mongoose.Schema({
 
 noteSchema.set('toJSON', {
   transform: (document, returnedObject) => {
-    returnedObject.id = returnedObject._id.toString()
+    returnedObject._id = returnedObject._id.toString()
     delete returnedObject._id
     delete returnedObject.__v
   }
