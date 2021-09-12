@@ -27,7 +27,7 @@ inside that Dockerfile we will tell the image 3 things:
 2. Include the index.js inside the image, so we don't need to manually copy it into the container
 3. When we run a container from the image, use node to execute the index.js file.
 
-This will translate into a basic Dockerfile.
+This will translate into a basic Dockerfile. The file is usually placed at the root of the project.
 
 `Dockerfile`
 
@@ -92,6 +92,8 @@ Containerizing that should be easy based on the previous example.
 2. Set working directory so we don't interfere with the contents of the base image
 3. Copy ALL of the files in this directory to the image
 4. Start with DEBUG=playground:* npm start
+
+The Dockerfile can again be placed at the root of the project.
 
 `Dockerfile`
 
@@ -627,7 +629,7 @@ An excellent use case for Redis is to use it as a cache. Caches are often used t
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
-The application will be able to use redis by giving it the REDIS_URL environment variable. Find and read through the Docker Hub page for redis, add it to the docker-compose.yml by defining another service after mongo:
+The application will be able to use redis by giving it the *REDIS_URL* environment variable. Find and read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add it to the docker-compose.yml by defining another service after mongo:
 
 `docker-compose.yml`
 
