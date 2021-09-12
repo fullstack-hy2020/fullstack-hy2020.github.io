@@ -179,6 +179,9 @@ nginx 的默认端口是 80，所以像 _-p 8000:80_ 这样的操作会起作用
 #### Exercise 12.12: Todo application frontend
 练习12.12 Todo 应用前端
 
+> In this exercise, submit <i>at least</i> the Dockerfile you created.
+本练习中，至少提交你创建的Dockerfile。
+
 <!-- The following repository contains an react application in the react-app directory. 
 
 <https://github.com/fullstack-hy2020/part12-containers-applications/tree/main/react-app>
@@ -192,12 +195,13 @@ Copy the contents into your own repository. The react-app directory includes a R
 
 将内容复制到您自己的存储库中。 react-app 目录包含一个关于如何启动应用程序的README。  
 
-<!-- Use ENV to pass REACT_APP_BACKEND_URL to the application and run it with the backend. Backend can be running outside a container. -->
-使用 ENV 将 *REACT\_APP\_BACKEND\_URL* 传递给应用程序并与后端一起运行。 后端可以在容器外运行。
+<!-- Containerize the application and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. Backend can be running outside a container. -->
+容器化应用，使用 [ENV](https://docs.docker.com/engine/reference/builder/#env) 指导，将 *REACT\_APP\_BACKEND\_URL* 传递给应用程序并与后端一起运行。 后端可以在容器外运行。
 
 #### Exercise 12.13: Testing during build process
 练习 12.13：构建过程中的测试
-
+> In this exercise, submit the entire React application, with the Dockerfile.
+在本练习中，提交整个React应用，附带上Dockerfile
 <!-- We can use multiple stages to do testing during the build process. The build process will fail as the tests fail. -->
 我们可以在构建过程中使用多阶段进行测试。 由于测试失败，构建过程将失败。
 
@@ -416,10 +420,16 @@ services:
 
 有了这个 _docker-compose up_  应用可以在 <http://localhost:3210> 访问。 同样，_docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ 也就好使了。
 
+![](../../images/12/busybox_networking_drawio.png)
+
+As above image illustrates the _docker-compose run_ asks debug-helper to send the request within the network. While the browser would send the request from outside of the network.
+
+如上图所示， _docker-compose run_ 会询问debug-helper 使用网络发送请求。浏览器会在网络外发送请求。 
+
 <!-- Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. `npm install axios`, you have to do it in the running container e.g. `docker exec hello-front-dev npm install axios`. Or add it to the package.json and run `docker build` again. -->
 对于像这样的开发设置，安装新的依赖项是一件令人头疼的事情。 更好的选择之一是在容器中安装新的 **内置** 依赖项。 所以，而不是做例如 `npm install axios`，你必须在正在运行的容器中进行，例如 `docker exec hello-front-dev npm install axios`。 或者将其添加到 package.json 并再次运行 `docker build`。
 
-Now that you know how easy it is to find other services in a docker-compose.yml and have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
+Now that you know how easy it is to find other services in a docker-compose.yml and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
 现在你就了解了在  docker-compose.yml 中找到其他服务是多么简单，如果没有什么需要debug， 我们可以在 _docker-compose.yml_ 移除debug-helper 并回滚端口配置 3000:3000
 
 #### Communications between containers in a more ambitious environment
@@ -540,6 +550,9 @@ If you are still encountering 503, make sure that the create-react-app has been 
 #### Exercise 12.14: Setup nginx in front of todo-front
 练习 12.14：在 todo-front 前面设置 nginx
 
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+本练习中，提交整个express应用，并提交Dockerfile 和 docker-compose.yml
+
 Create a development docker-compose yml with nginx and our todo react-app.
 使用 nginx 和我们的 todo react-app 创建一个开发 docker-compose yml文件。
 
@@ -548,6 +561,9 @@ You can use _-f_ flag to specify a file in case you want to have multiple, e.g. 
 
 #### Exercise 12.15: Setup nginx in front of todo-back
 练习 12.15：在 todo-back 前面设置 nginx
+
+> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+本练习中，提交整个express应用，并提交Dockerfile 和 docker-compose.yml
 
 Add the express-app to the development docker-compose yml in development mode.
 在开发模式下将 express-app 添加到开发 docker-compose yml 中。

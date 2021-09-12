@@ -1283,7 +1283,7 @@ const Main = () => {
 
 <!-- [React-spring](https://www.react-spring.io/) is a library that provides a clean [hook API](https://www.react-spring.io/docs/hooks/basics) for animating React Native components. -->
 
-[React-spring](https://www.react-spring.io/) 是一个库，提供了简明的 [hook API](https://www.react-spring.io/docs/hooks/basics) 来实现React Native 组件的动画效果。
+[React-spring](https://www.react-spring.io/) 是一个库，提供了简明的 [hook API](https://react-spring.io/hooks/use-chain) 来实现React Native 组件的动画效果。
 
 #### React Navigation
 
