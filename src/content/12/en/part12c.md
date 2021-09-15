@@ -148,9 +148,9 @@ Multi-stage builds also include some internal optimizations that may affect your
 
 <div class="tasks">
 
-### Exercises 12.12 - 12.13.
+### Exercises 12.13 - 12.14.
 
-#### Exercise 12.12: Todo application frontend
+#### Exercise 12.13: Todo application frontend
 
 > In this exercise, submit <i>at least</i> the Dockerfile you created.
 
@@ -162,7 +162,7 @@ Copy the contents into your own repository. The react-app directory includes a R
 
 Containerize the application and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. Backend can be running outside a container.
 
-#### Exercise 12.13: Testing during build process
+#### Exercise 12.14: Testing during build process
 
 > In this exercise, submit the entire React application, with the Dockerfile.
 
@@ -434,9 +434,9 @@ If you are still encountering 503, make sure that the create-react-app has been 
 
 <div class="tasks">
 
-### Exercises 12.14. - 12.16.
+### Exercises 12.15. - 12.17.
 
-#### Exercise 12.14: Setup nginx in front of todo-front
+#### Exercise 12.15: Setup nginx in front of todo-front
 
 > In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
 
@@ -444,7 +444,7 @@ Create a development docker-compose yml with nginx and our todo react-app.
 
 You can use _-f_ flag to specify a file in case you want to have multiple, e.g. _docker-compose -f docker-compose.dev.yml up_
 
-#### Exercise 12.15: Setup nginx in front of todo-back
+#### Exercise 12.16: Setup nginx in front of todo-back
 
 > In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
 
@@ -481,7 +481,7 @@ This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-
 ![](../../images/12/nginx_trailing_slash_stackoverflow.png)
 
 
-#### Exercise 12.16: Connect todo-front to todo-back
+#### Exercise 12.17: Connect todo-front to todo-back
 
 > In this exercise, submit the entire development environment, including both express and react applications, Dockerfiles and docker-compose.yml.
 
@@ -505,9 +505,9 @@ If you are interested in learning more in depth about containers come to the [De
 
 <div class="tasks">
 
-### Exercises 12.17.
+### Exercises 12.18.
 
-#### Exercise 12.17:
+#### Exercise 12.18:
 
 > In this exercise, submit the entire production environment, including both express and react applications, Dockerfiles and docker-compose.yml.
 

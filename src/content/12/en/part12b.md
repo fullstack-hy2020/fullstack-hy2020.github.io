@@ -235,9 +235,9 @@ COPY --chown=node:node . .
   
 <div class="tasks">
 
-### Exercise 12.4.
+### Exercise 12.5.
 
-#### Exercise 12.4: Containerizing a node application
+#### Exercise 12.5: Containerizing a node application
 
 > In this exercise, submit <i>at least</i> the Dockerfile you created.
 
@@ -295,9 +295,9 @@ Creating files like this that <i>declare</i> what you want instead of script fil
 
 <div class="tasks">
 
-### Exercise 12.5.
+### Exercise 12.6.
 
-#### Exercise 12.5: docker-compose
+#### Exercise 12.6: docker-compose
 
 > In this exercise, submit <i>at least</i> the docker-compose.yml you created.
 
@@ -469,9 +469,9 @@ Now the volume is created, but managed by docker. After starting the application
 
 <div class="tasks">
 
-### Exercise 12.6.
+### Exercise 12.7.
 
-#### Exercise 12.6: Little bit of mongodb coding
+#### Exercise 12.7: Little bit of mongodb coding
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
@@ -558,9 +558,9 @@ Refresh the page and our message is displayed!
 
 <div class="tasks">
 
-### Exercise 12.7.
+### Exercise 12.8.
 
-#### Exercise 12.7: Mongo command-line interface
+#### Exercise 12.8: Mongo command-line interface
 
 > Use _script_ to record what you do, save the generated file into the repository as your answer.
 
@@ -623,9 +623,9 @@ An excellent use case for Redis is to use it as a cache. Caches are often used t
 
 <div class="tasks">
 
-### Exercises 12.8. - 12.10.
+### Exercises 12.9. - 12.11.
 
-#### Exercise 12.8: Setup redis to project
+#### Exercise 12.9: Setup redis to project
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
@@ -653,7 +653,7 @@ const redis = require('../redis')
 
 to the express server. The next exercise will require redis to be available and configured correctly.
   
-#### Exercise 12.9:
+#### Exercise 12.10:
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
@@ -674,7 +674,7 @@ Implement a todo counter:
 }
 ```
 
-#### Exercise 12.10:
+#### Exercise 12.11:
 
 > Use _script_ to record what you do, save the generated file into the repository as your answer.
 
@@ -720,9 +720,9 @@ In addition to the key-value features Redis can also be used to Publish messages
 
 <div class="tasks">
 
-### Exercises 12.11.
+### Exercise 12.12.
   
-#### Exercise 12.11: Persisting data in redis
+#### Exercise 12.12: Persisting data in redis
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
