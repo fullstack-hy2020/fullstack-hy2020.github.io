@@ -291,7 +291,7 @@ const notes = useSelector(state => state)
 ```
 
 <!-- Nyt siis palautetaan tilasta ainoastaan sen kenttä <i>notes</i> -->
-And now it returns only its field <i>notes</i>
+And now it returns only its field <i>notes</i>:
 
 ```js
 const notes = useSelector(state => state.notes)
@@ -414,7 +414,7 @@ There is a slight cosmetic flaw in our application. Even though the filter is se
 
 ### Redux DevTools
 
-There is an extension [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) that can be installed on Chrome, in which the state of the Redux-store and the action that changes it can be monitored from the console of the browser.
+There is an extension that can be installed on Chrome, [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd), which allows the state of the Redux store and the action that changes it to be monitored from the console of the browser.
 
 When debugging, in addition to the browser extension we also have the software library [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Let's install it using the command:
 
@@ -452,11 +452,11 @@ Now when you open the console, the <i>redux</i> tab looks like this:
 
 ![](../../images/6/11ea.png)
 
-The effect of each action to the store can be easily observed 
+The effect of each action to the store can be easily observed:
 
 ![](../../images/6/12ea.png)
 
-It's also possible to dispatch actions to the store using the console
+It's also possible to dispatch actions to the store using the console:
 
 ![](../../images/6/13ea.png)
 
@@ -476,7 +476,7 @@ Let's continue working on the anecdote application using redux that we started i
 #### 6.9 Better anecdotes, step7
 
 <!-- Ota sovelluksessasi käyttöön Redux DevTools. Siirrä Redux-storen määrittely omaan tiedostoon <i>store.js</i>. -->
-Start using Redux DevTools. Move defining the Redux-store into its own file <i>store.js</i>.
+Start using Redux DevTools. Move defining the Redux store into its own file <i>store.js</i>.
 
 #### 6.10 Better anecdotes, step8
 
@@ -502,7 +502,7 @@ export default Notification
 ```
 
 
-Extend the component so that it renders the message stored in the redux store, making the component to take the form:
+Extend the component so that it renders the message stored in the redux store, making the component take the form:
 
 ```js
 import React from 'react'
