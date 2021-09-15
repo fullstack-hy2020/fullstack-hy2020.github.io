@@ -521,7 +521,7 @@ Make an asynchronous action creator, which enables one to provide the notificati
 dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
 ```
 
-the first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds. 
+The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds. 
 
 Implement the use of this improved notification in your application.
 
