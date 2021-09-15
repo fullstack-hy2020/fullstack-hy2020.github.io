@@ -45,9 +45,9 @@ Since we are stepping right outside of our comfort zone as JavaScript developers
 
 If you've only ever used a graphical user interface and never touched e.g. linux or terminal on mac or get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise it includes everything you're going to need to get started here! 
 
-### Exercise 12.0
+### Exercise 12.1
 
-#### Exercise 12.0: Using a computer (without graphical user interface)
+#### Exercise 12.1: Using a computer (without graphical user interface)
 
 Step 1: Read the text below the Warning header.
 
@@ -176,7 +176,7 @@ The output contains a few new things for us to learn. Docker daemon is a backgro
 
 <div class="tasks">
 
-### Exercise 12.1
+### Exercise 12.2
 
 Some of these exercises do not generate anything for you to submit.
 
@@ -184,7 +184,7 @@ Instead use [script](https://man7.org/linux/man-pages/man1/script.1.html) to rec
 
 If _script_ does not work, you can just copypaste all commands you used into a text file.
 
-#### Exercise 12.1: Running your second container
+#### Exercise 12.2: Running your second container
 
 > Use _script_ to record what you do, save the generated file into the repository as your answer.
 
@@ -273,9 +273,9 @@ Now we have nano installed and can start editing files!
 
 <div class="tasks">
 
-### Exercise 12.2 - 12.3
+### Exercise 12.3 - 12.4
 
-#### Exercise 12.2: Ubuntu 101
+#### Exercise 12.3: Ubuntu 101
 
 > Use _script_ to record what you do, save the generated file into the repository as your answer.
 
@@ -287,7 +287,7 @@ console.log('Hello World')
 
 If Nano isn't familiar you can ask in the chat or google.
 
-#### Exercise 12.3: Ubuntu 102
+#### Exercise 12.4: Ubuntu 102
 
 > Use _script_ to record what you do, save the generated file into the repository as your answer.
 

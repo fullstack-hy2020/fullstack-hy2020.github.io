@@ -148,9 +148,9 @@ Multi-stage builds also include some internal optimizations that may affect your
 
 <div class="tasks">
 
-### Exercises 12.12 - 12.13.
+### Exercises 12.13 - 12.14.
 
-#### Exercise 12.12: Todo application frontend
+#### Exercise 12.13: Todo application frontend
 
 > In this exercise, submit <i>at least</i> the Dockerfile you created.
 
@@ -162,7 +162,7 @@ Copy the contents into your own repository. The react-app directory includes a R
 
 Containerize the application and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. Backend can be running outside a container.
 
-#### Exercise 12.13: Testing during build process
+#### Exercise 12.14: Testing during build process
 
 > In this exercise, submit the entire React application, with the Dockerfile.
 
@@ -340,6 +340,39 @@ network. While the browser would send the request from outside of the network.
 
 Now that you know how easy it is to find other services in a docker-compose.yml and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
 
+</div>
+<div class="tasks">
+
+### Exercise 12.15
+
+#### Exercise 12.15: Run todo-back in a development container
+
+Use the volumes and nodemon to enable development of the backend while it is running inside a container.
+
+You will also need to rethink the connections between backend and mongo / redis. Thankfully docker-compose can include environment variables that will be passed to the application:
+
+```yaml
+services:
+  server:
+    image: ...
+    volumes:
+      - ...
+    ports:
+      - ...
+    environment: 
+      - REDIS_URL=//localhost:3000
+      - MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database
+```
+
+> The urls (localhost) are purposefully wrong, you will need to set the correct values
+
+Here is a possibly helpful image:
+
+![](../../images/12/ex_12_15_backend_drawio.png)
+
+</div>
+<div class="content">
+
 #### Communications between containers in a more ambitious environment
 
 Next we will add a reverse proxy to our docker-compose. A reverse proxy will be the single point of entry to our application and we can hide multiple servers behind it. The final goal will be to set both the react application and the express application behind the reverse proxy. There are multiple different options, here are some examples ordered by initial release from newer to older: Traefik, Caddy, Nginx and Apache.
@@ -434,17 +467,26 @@ If you are still encountering 503, make sure that the create-react-app has been 
 
 <div class="tasks">
 
-### Exercises 12.14. - 12.16.
+### Exercises 12.16. - 12.18.
 
-#### Exercise 12.14: Setup nginx in front of todo-front
+#### Exercise 12.16: Setup nginx in front of todo-front
 
 > In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
 
 Create a development docker-compose yml with nginx and our todo react-app.
 
+![](../../images/12/ex_12_16_nginx_front.png)
+
+You should use the following structure to make the next exercise easier:
+
+```console
+├── react-app
+└── docker-compose.dev.yml
+```
+
 You can use _-f_ flag to specify a file in case you want to have multiple, e.g. _docker-compose -f docker-compose.dev.yml up_
 
-#### Exercise 12.15: Setup nginx in front of todo-back
+#### Exercise 12.17: Setup nginx in front of todo-back
 
 > In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
 
@@ -480,8 +522,19 @@ This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-
 
 ![](../../images/12/nginx_trailing_slash_stackoverflow.png)
 
+This illustratrates what we are looking for:
 
-#### Exercise 12.16: Connect todo-front to todo-back
+![](../../images/12/ex_12_17_nginx_back.png)
+
+Please use the following structure for this exercise:
+
+```console
+├── express-app
+├── react-app
+└── docker-compose.dev.yml
+```
+
+#### Exercise 12.18: Connect todo-front to todo-back
 
 > In this exercise, submit the entire development environment, including both express and react applications, Dockerfiles and docker-compose.yml.
 
@@ -505,13 +558,21 @@ If you are interested in learning more in depth about containers come to the [De
 
 <div class="tasks">
 
-### Exercises 12.17.
+### Exercises 12.19.
 
-#### Exercise 12.17:
+#### Exercise 12.19:
 
 > In this exercise, submit the entire production environment, including both express and react applications, Dockerfiles and docker-compose.yml.
 
 Create a production docker-compose.yml with all of the services, nginx, react-app, express-app, mongodb and redis.
+
+Please use the following structure for this exercise:
+
+```console
+├── express-app
+├── react-app
+└── docker-compose.yml
+```
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats).
 
