@@ -524,7 +524,7 @@ This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-
 
 This illustratrates what we are looking for:
 
-![](../../images/12/ex_12_16_nginx_back.png)
+![](../../images/12/ex_12_17_nginx_back.png)
 
 Please use the following structure for this exercise:
 
