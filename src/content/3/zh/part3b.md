@@ -416,8 +416,8 @@ const baseUrl = '/api/notes'
 <!-- Deploy the backend to the internet, for example to Heroku.  -->
 将后端部署到互联网，例如 Heroku。
 
-<!-- **NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku to your computer, you can use the command [npx heroku-cli](https://www.npmjs.com/package/heroku-cli). -->
-注意：命令 heroku 在部门的电脑和新生的笔记本电脑上可以工作。 如果由于某种原因不能[安装](https://devcenter.Heroku.com/articles/Heroku-cli) Heroku 到你的计算机，你可以使用命令[npx heroku-cli](https://www.npmjs.com/package/heroku-cli)。
+<!-- **NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku to your computer, you can use the command [npx heroku](https://www.npmjs.com/package/heroku). -->
+注意：命令 heroku 在部门的电脑和新生的笔记本电脑上可以工作。 如果由于某种原因不能[安装](https://devcenter.Heroku.com/articles/Heroku-cli) Heroku 到你的计算机，你可以使用命令[npx heroku](https://www.npmjs.com/package/heroku)。
 
 <!-- Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.  -->
 使用浏览器和Postman或 VS Code REST 客户端测试已部署的后端，以确保其工作正常。

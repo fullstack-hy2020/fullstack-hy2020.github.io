@@ -321,7 +321,7 @@ You will probably have to do some small changes to the frontend, at least to the
 
 Deploy the backend to the internet, for example to Heroku. 
 
-**NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku to your computer, you can use the command [npx heroku-cli](https://www.npmjs.com/package/heroku-cli).
+**NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku to your computer, you can use the command [npx heroku](https://www.npmjs.com/package/heroku).
 
 Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works. 
 
