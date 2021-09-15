@@ -645,13 +645,13 @@ Since the Docker Hub page doesn't have all info we can use Google to aid us. The
 
 ![](../../images/12/redis_port_by_google.png)
 
-The application will not start using redis by itself. You will need to require the config by adding
-  
+We won't have any idea if the configuration works unless we try it. The application will not start using redis by itself. You will need to require the config by adding something along the lines of
+
 ```js
 const redis = require('../redis')
 ```
 
-to the express server. The next exercise will require redis to be available and configured correctly.
+to the express server. You may also move to the next exercise, the next exercise will require redis to be available and configured correctly.
   
 #### Exercise 12.10:
 
