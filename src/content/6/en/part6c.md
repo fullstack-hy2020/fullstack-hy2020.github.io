@@ -40,7 +40,7 @@ npm install json-server --save-dev
 
 
 
-and add the following line to the <i>scripts</i> part of the file <i>package.json</i>
+and add the following line to the <i>scripts</i> part of the file <i>package.json</i>:
 
 ```js
 "scripts": {
@@ -51,7 +51,7 @@ and add the following line to the <i>scripts</i> part of the file <i>package.jso
 
 Now let's launch json-server with the command _npm run server_.
 
-Next we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend
+Next we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend:
 
 ```js
 import axios from 'axios'
@@ -66,7 +66,7 @@ const getAll = async () => {
 export default { getAll }
 ```
 
-We'll add axios to the project
+We'll add axios to the project:
 
 ```bash
 npm install axios
@@ -106,7 +106,7 @@ noteService.getAll().then(notes =>
 
 
 
-Let's add support in the reducer for the action <i>INIT\_NOTES</i>, using which the initialization can be done by dispatching a single action. Let's also create an action creator function _initializeNotes_.
+Let's add support in the reducer for the action <i>INIT\_NOTES</i>, the initialization of which can be done by dispatching a single action. Let's also create the action creator function _initializeNotes_.
 
 ```js
 // ...
@@ -144,7 +144,7 @@ noteService.getAll().then(notes =>
 ```
 
 
-> **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
+> **NB:** why didn't we use await in place of promises and event handlers (registered to _then_ methods)?
 >
 > Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
 
@@ -201,9 +201,9 @@ const App = () => {
 ```
 
 <!-- Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton. -->
-Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux-store, has been added to the array useEffect receives as a parameter.
-**If** the value of the dispatch-variable would change during runtime, 
-the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
+Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux store, has been added to the array useEffect received as a parameter.
+**If** the value of the dispatch variable changes during runtime, 
+the effect will be executed again. This however cannot happen in our application, so the warning is unnecessary.
 
 <!-- Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta: -->
 Another way to get rid of the warning would be to disable eslint on that line:
@@ -223,7 +223,7 @@ const App = () => {
 ```
 
 <!-- Yleisesti ottaen eslint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen eslint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa.  -->
-Generally disabling eslint when it throws a warning is not a good idea. Even though the eslint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
+Generally, disabling eslint when it throws a warning is not a good idea. Even though the eslint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
 
 <!-- Lisää hookien riippuvuuksien määrittelyn tarpeesta [reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies). -->
 More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
@@ -282,7 +282,7 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-Because the backend generates ids for the notes, we'll change the action creator _createNote_
+Because the backend generates ids for the notes, we'll change the action creator _createNote_:
 
 ```js
 export const createNote = (data) => {
@@ -352,13 +352,13 @@ const NewNote = () => {
 
 Both components would only use the function provided to them as a prop without caring about the communication with the server that is happening in the background.
 
-Now let's install the [redux-thunk](https://github.com/gaearon/redux-thunk)-library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
+Now let's install the [redux thunk](https://github.com/gaearon/redux-thunk) library, which enables us to create <i>asynchronous actions</i>. Installation is done with the command:
 
 ```bash
 npm install redux-thunk
 ```
 
-The redux-thunk-library is a so-called <i>redux-middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
+The redux thunk library is a so-called <i>redux middleware</i>, which must be initialized along with the initialization of the store. While we're here, let's extract the definition of the store into its own file <i>src/store.js</i>:
 
 ```js
 import { createStore, combineReducers, applyMiddleware } from 'redux' // highlight-line
@@ -383,7 +383,7 @@ const store = createStore(
 export default store
 ```
 
-After the changes the file <i>src/index.js</i> looks like this
+After the changes the file <i>src/index.js</i> looks like this:
 
 ```js
 import React from 'react'
@@ -400,7 +400,7 @@ ReactDOM.render(
 )
 ```
 
-Thanks to redux-thunk, it is possible to define <i>action creators</i> so that they return a function having the <i>dispatch</i>-method of redux-store as its parameter. As a result of this, one can make asynchronous action creators, which first wait for some operation to finish, after which they then dispatch the real action.
+Thanks to redux thunk, it is possible to define <i>action creators</i> so that they return a function having the <i>dispatch</i> method of redux store as its parameter. As a result of this, one can make asynchronous action creators, which first wait for some operation to finish, after which they then dispatch the real action.
 
 
 
@@ -444,7 +444,7 @@ const App = () => {
 
 The solution is elegant. The initialization logic for the notes has been completely separated to outside the React component.
 
-The action creator _createNote_, which adds a new note looks like this
+The action creator _createNote_, which adds a new note, looks like this:
 
 ```js
 export const createNote = content => {
@@ -493,16 +493,16 @@ The current state of the code for the application can be found on [github](https
 
 #### 6.15 Anecdotes and the backend, step3
 
-Modify the initialization of redux-store to happen using asynchronous action creators, which are made possible by the <i>redux-thunk</i>-library.
+Modify the initialization of the redux store to make use of asynchronous action creators, which are made possible by the <i>redux thunk</i> library.
 
 #### 6.16 Anecdotes and the backend, step4
 
-Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the <i>redux-thunk</i>-library.
+Also, modify the creation of a new anecdote so that it uses asynchronous action creators, made possible by the <i>redux thunk</i> library.
 
 
 #### 6.17 Anecdotes and the backend, step5
 
-Voting does not yet save changes to the backend. Fix the situation with the help of the <i>redux-thunk</i>-library.
+Voting does not yet save changes to the backend. Fix the situation with the help of the <i>redux thunk</i> library.
 
 #### 6.18 Anecdotes and the backend, step6
 
