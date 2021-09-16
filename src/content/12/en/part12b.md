@@ -402,6 +402,15 @@ Mounting the file will mean that the mongo-init file in the mongo folder is the 
 
 Run _docker-compose down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose up_ to initialize the database.
 
+If you see an error like this:
+
+```
+mongo_database | failed to load: /docker-entrypoint-initdb.d/mongo-init.js
+mongo_database | exiting with code -3
+```
+
+you may have a read permission problem. They are not uncommon when dealing with volumes. In the above case, you can use _chmod a+r mongo-init.js_, which will give everyone read access to that file. Be careful when using chmod since granting more privileges can be a security issue. Use the chmod on the mongo-init.js on your computer, not inside the container.
+
 Now starting the express application with the correct environment variable should work:
 
 ```
