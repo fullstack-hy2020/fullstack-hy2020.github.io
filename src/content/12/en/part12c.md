@@ -377,7 +377,7 @@ Here is a possibly helpful image:
 
 Next we will add a reverse proxy to our docker-compose. A reverse proxy will be the single point of entry to our application and we can hide multiple servers behind it. The final goal will be to set both the react application and the express application behind the reverse proxy. There are multiple different options, here are some examples ordered by initial release from newer to older: Traefik, Caddy, Nginx and Apache.
 
-Let's pick Nginx, the docker hub page is [here](https://hub.docker.com/_/nginx). Create a file nginx.conf in the project root and take this template for a configuration. We will need to do minor edits to have our application running:
+Let's pick [Nginx](https://hub.docker.com/_/nginx). Create a file nginx.conf in the project root and take this template for a configuration. We will need to do minor edits to have our application running:
 
 `nginx.conf`
 
