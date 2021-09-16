@@ -7,25 +7,25 @@ lang: en
 
 <div class="content">
 
-Software development includes the whole lifecycle from envisioning the software to programming and to releasing the software to the end users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
+Software development includes the whole lifecycle from envisioning the software to programming and to releasing the software to the end-users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
 
-Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application so that each container can run isolated from each other.
+Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application. As a result, each container can run isolated from the other containers.
 
-Containers can be compared to virtual machines (VM) which are used to run multiple operating systems on a single physical machine. Containers are OS-level virtualization which means, among other things, that they allow applications to access only the container's contents and resources given to that container. Whereas VMs run an entire operating system a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is little overhead when running containers; they only need to run a single process.
+Containers allow the applications within to **only** access the contents of the container and the resources given to that container. More accurately, they are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, and a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is little overhead when running containers; they only need to run a single process.
 
-As containers are relatively lightweight, at least compared to virtual machines, they can be quick to scale. And they isolate the software running inside enabling the software to run identically almost anywhere. As such they are the go to option in any cloud environment or application with more than a handful of users.
+As containers are relatively lightweight, at least compared to virtual machines, they can be quick to scale. And as they isolate the software running inside, it enables the software to run identically almost anywhere. As such, they are the go-to option in any cloud environment or application with more than a handful of users.
 
-Cloud services like AWS, Google Cloud and Microsoft Azure all support containers in multiple different forms. As an example, AWS Fargate and Google Cloud Run run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your personal machine. 
+Cloud services like AWS, Google Cloud, and Microsoft Azure all support containers in multiple different forms. These include AWS Fargate and Google Cloud Run, both of which run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your personal machine. 
 
-So containers are used in clouds and development. What are the benefits of using one? Here are two fairly relatable and common scenarios:
+So containers are used in clouds and development. What are the benefits of using one? Here are two relatable and common scenarios:
 
 > Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed.
 
-You can probably use nvm, virtual machines or some sort of dark magic to get them running at the same time. However, containers are an excellent solution as you can run both applications in their respective containers. They are isolated from each other and do not interfere.
+You can probably use nvm, virtual machines, or dark magic to get them running at the same time. However, containers are an excellent solution as you can run both applications in their respective containers. They are isolated from each other and do not interfere.
 
 > Scenario 2: Your application runs on your machine. You need to move the application to a server.
 
-It is not uncommon that the application just does not run there. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same environment (container) both on your machine and on the server. It is not perfect: different machines may have different hardware, but you can limit the number of differences between environments.
+It is not uncommon that the application just does not run there. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
 
 Sometimes you may hear about the “Works in my container” issue - this is often a usage error.
 
@@ -33,7 +33,7 @@ Sometimes you may hear about the “Works in my container” issue - this is oft
 
 In this part, the focus of our attention will not be on the software code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and configuration you do during this part.
 
-Only the core parts, 1 through 5, are required to be completed before this part. As you will need basic knowledge of Node, Express and React.
+You will need basic knowledge of Node, Express, and React. Only the core parts, 1 through 5, are required to be completed before this part.
 
 </div>
 
@@ -41,9 +41,9 @@ Only the core parts, 1 through 5, are required to be completed before this part.
 
 # Warning
 
-Since we are stepping right outside of our comfort zone as JavaScript developers this part may require you to do a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started.
+Since we are stepping right outside of our comfort zone as JavaScript developers, this part may require you to take a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started.
 
-If you've only ever used a graphical user interface and never touched e.g. linux or terminal on mac or get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise it includes everything you're going to need to get started here! 
+If you have only ever used a graphical user interface and never touched e.g. Linux or terminal on Mac, or if you get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise, it includes everything you are going to need to get started here!
 
 ### Exercise 12.1
 
@@ -58,19 +58,19 @@ Step 2: Run _curl http://helsinki.fi_ and save the output into a file. Submit th
 
 ### Submitting exercises and earning credits ###
 
-Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Note that, exercises in this part are submitted <i>to a different course instance</i>.
+Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to a different course instance</i>.
 
-This part on containers is 1 credit.
+Completing this part on containers will get you 1 credit.
 
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
 ![Submitting exercises for credits](../../images/10/23.png)
 
-You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.
+You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the language of the certificate.
 
 ### Tools of the trade
 
-The material and the exercises can be completed with
+The basic tools you are going to need vary between operating systems:
 
 * [WSL 2 terminal](https://docs.microsoft.com/en-us/windows/wsl/install-win10) on Windows
 * Terminal on Mac
@@ -78,15 +78,16 @@ The material and the exercises can be completed with
 
 ### Installing everything required for this part ###
 
-To make sure that you are ready to start with this part let's begin by installing the required software. This will be one of the largest obstacle for us, since the tools will require superuser access on the computer. This is due to the fact that the tools will have access to your operating systems kernel. We will talk more about what this means in the next section.
+We will begin by installing the required software. The installation step will be one of the possible obstacles. As we are dealing with OS-level virtualization, the tools will require superuser access on the computer. They will have access to your operating systems kernel.
 
-The material is built around Docker, a set of products that we will use for containerization and for the management of containers.
+The material is built around Docker, a set of products that we will use for containerization and the management of containers. Unfortunately, if you can not install Docker you probably can not complete this part.
 
-Depending on your operating system choose install instructions from the link below. Note that they may have multiple different options for your operating system. 
+As the install instructions depend on your operating system, you will have to find the correct install instructions from the link below. Note that they may have multiple different options for your operating system. 
+
 
 - [Get Docker](https://docs.docker.com/get-docker/)
 
-Now that that headache is hopefully over let's make sure that our versions match. Yours might be a bit higher than here:
+Now that that headache is hopefully over, let's make sure that our versions match. Yours may have a bit higher numbers than here:
 
 ```bash
 $ docker -v
@@ -95,13 +96,18 @@ Docker version 20.10.5, build 55c4c88
 
 ### Containers and images
 
-There are two core concepts when starting with containers and they are easy to confuse:
+There are two core concepts when starting with containers and they are easy to confuse with one another:
 
-**Container** is a runtime instance of an **image**.
+A **container** is a runtime instance of an **image**.
 
-So while we can say "Containers package software into standardized units" we can also say "Images include all of the code, dependencies and instructions on how to run the application" which sounds a lot like "Images package software" as well.
+Both of the following statements are true:
 
-To help with the confusion everyone just talks about containers. But you can never **actually** build a container or download one, since they only exist runtime. Images on the other hand are **immutable** files. They can not be changed but they can be created and they can be used to create new images by adding new **layers** on top of the existing ones.
+- Containers package software into standardized units 
+- Images include all of the code, dependencies and instructions on how to run the application 
+
+It is no wonder they are easily confused.
+
+To help with the confusion, most everyone uses the word container to describe both. But you can never actually build a container or download one since containers only exist during runtime. Images, on the other hand, are **immutable** files. As a result of the immutability, you can not edit them after you create them. However, you can use existing images to create a new image by adding new layers on top of the existing ones.
 
 Cooking metaphor:
 
@@ -110,7 +116,7 @@ Cooking metaphor:
 
 [Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standard most use now. It will enable us to leverage all of the benefits of containers. Docker is a set of products that help us manage images and containers. The docker engine will take care of turning the immutable files, images, into containers.
 
-For managing the docker containers, there is also [Docker Compose](https://docs.docker.com/compose/). It is used to **orchestrate** (control) multiple containers at the same time. We will use Docker Compose to set up complex local development environments quickly. For the final version of our node development environment, we will try to eliminate the need to install Node.
+For managing the docker containers, there is also [Docker Compose](https://docs.docker.com/compose/). It is used to **orchestrate** (control) multiple containers at the same time. We will use Docker Compose to set up complex local development environments quickly. For the final version of our Node development environment, we will try to eliminate the need to install Node.
 
 There are a number of concepts we need to go over, but we will skip those for now and learn about Docker first! One of my favorite features is the capability to handle running containers even if they are not yet downloaded on our device.
 
@@ -308,10 +314,10 @@ You will need to install the _curl_ into the container. It is installed in the s
 
 ### Other docker commands
 
-Now that we have node installed in the container we can execute _node /usr/src/app/index.js_ in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
+Now that we have Node installed in the container we can execute _Node /usr/src/app/index.js_ in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
 
 ```console
-$ docker commit hopeful_clarke hello-node-world
+$ docker commit hopeful_clarke hello-Node-world
 ```
 
 You can list your images with _image ls_:
@@ -319,7 +325,7 @@ You can list your images with _image ls_:
 ```console
 $ docker-fs docker image ls
 REPOSITORY                                      TAG         IMAGE ID       CREATED         SIZE
-hello-node-world                                latest      eef776183732   9 minutes ago   252MB
+hello-Node-world                                latest      eef776183732   9 minutes ago   252MB
 ubuntu                                          latest      1318b700e415   2 weeks ago     72.8MB
 hello-world                                     latest      d1165f221234   5 months ago    13.3kB
 ``` 
@@ -327,8 +333,8 @@ hello-world                                     latest      d1165f221234   5 mon
 You can now run the new image as follows:
  
 ```console
-docker run -it hello-node-world bash
-root@4d1b322e1aff:/# node /usr/src/app/index.js
+docker run -it hello-Node-world bash
+root@4d1b322e1aff:/# Node /usr/src/app/index.js
 ```
 
 There are multiple ways to achieve the same conclusion. Let's go through a better solution starting by running _container rm_ to remove the old container.
@@ -344,7 +350,7 @@ hopeful_clarke
 
 Create the index.js file and write _console.log('Hello, World')_ inside it. No need for containers yet.
 
-Next let's skip installing node altogether. Since docker images are found in Docker Hub we can use this [https://hub.docker.com/_/node](https://hub.docker.com/_/node). That image has node already installed, and we only need to pick a version. 
+Next let's skip installing Node altogether. Since docker images are found in Docker Hub we can use this [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node). That image has Node already installed, and we only need to pick a version. 
 
 By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container.
 
