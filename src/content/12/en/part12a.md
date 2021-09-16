@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-According to wikipedia software development includes the whole lifecycle from envisioning software to programming to releasing the software and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
+Software development includes the whole lifecycle from envisioning the software to programming and to releasing the software to the end users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
 
 Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application so that each container can run isolated from each other.
 
