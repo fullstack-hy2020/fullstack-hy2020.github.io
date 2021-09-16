@@ -8,26 +8,26 @@ lang: en
 <div class="content">
 
 
-In the previous section we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The basic tools we learned during that process are extremely useful. In this section, we will learn how to build containers and configure environments for our own applications. How these can be managed for both React frontend and node backend applications and in addition take a quick peek at other possible backend options you may encounter.
+In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Node.js backend that has Express. We will build on top of that with a few services like a database.
 
 ### Dockerfile
 
-Instead of modifying a container by copying files inside there we can create a new image that contains the "Hello, World!" application. The tool for this is the Dockerfile. Dockerfile is a simple text file that contains all of the instructions for creating an image. Let's create an example Dockerfile from the "Hello, World!" application.
+Instead of modifying a container by copying files inside, we can create a new image that contains the "Hello, World!" application. The tool for this is the Dockerfile. Dockerfile is a simple text file that contains all of the instructions for creating an image. Let's create an example Dockerfile from the "Hello, World!" application.
 
-If you did not already, create a directory on your own machine and create a file called Dockerfile. Let's also put a index.js containing _console.log('Hello, World!')_ next to the Dockerfile. Your directory structure should look like this:
+If you did not already, create a directory on your machine and create a file called Dockerfile inside that directory. Let's also put an index.js containing _console.log('Hello, World!')_ next to the Dockerfile. Your directory structure should look like this:
 
 ```
 ├── index.js
 └── Dockerfile
 ```
 
-inside that Dockerfile we will tell the image 3 things:
+inside that Dockerfile we will tell the image three things:
 
 1. Use the node:16 as the base for our image, we want everything node 16 contains to be available for this image.
 2. Include the index.js inside the image, so we don't need to manually copy it into the container
 3. When we run a container from the image, use node to execute the index.js file.
 
-This will translate into a basic Dockerfile. The file is usually placed at the root of the project.
+The wishes above will translate into a basic Dockerfile. The best location to place this file is usually at the root of the project.
 
 `Dockerfile`
 
@@ -41,11 +41,11 @@ COPY ./index.js ./index.js
 CMD node index.js
 ```
 
-FROM instruction will tell us that the base is node:16. COPY instruction will copy the file to the file. And CMD instructs what will be executed when _docker run_ is used. CMD is the _default_ command that can then be overwritten with the parameter given after image name. See _docker run --help_ if you forgot.
+FROM instruction will tell us that the base is node:16. COPY instruction will copy the file to the file. And CMD instruction tells what happens when _docker run_ is used. CMD is the _default_ command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
 
-I included one additional instruction, WORKDIR makes sure we don't interfere with the contents that the image already had. It will ensure all of the following commands will be in the container in directory /usr/src/app, if the directory doesn't exist it will create it. 
+I included one additional instruction, WORKDIR, to make sure we don't interfere with the contents that the image already had. It will ensure all of the following commands will be in the container in the directory /usr/src/app. If the directory doesn't exist it will create it. 
 
-If we do not specify a WORKDIR we risk overwriting unrelated, but important files by accident. If you check the root (_/_) of the node:16 with _docker run node:16 ls_ image you can notice all of the directories and files that are already included in the image. That is due to the fact that we use node as the base image. The node image already contained all of those files, we just added our own. 
+If we do not specify a WORKDIR we risk overwriting important files by accident. If you check the root (_/_) of the node:16 with _docker run node:16 ls_ image you can notice all of the directories and files that are already included in the image. That is because we use node as the base image. The node image already contained all of those files, we just added our own. 
 
 Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:
 
@@ -55,9 +55,9 @@ $ docker build -t fs-hello-world .
 ...
 ```
 
-So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case simple dot will mean the Dockerfile in this directory. After the build finished you can run it with _docker run fs-hello-world_.
+So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, simple dot will mean the Dockerfile in this directory. After the build is finished you can run it with _docker run fs-hello-world_.
 
-Images are just files. They can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.
+As images are just files, they can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.
 
 ### More meaningful image
 
@@ -86,14 +86,14 @@ $ DEBUG=playground:* npm start
 
 Great, so now we can navigate to [http://localhost:3000](http://localhost:3000) and the app is running there.
 
-Containerizing that should be easy based on the previous example.
+Containerizing that should be relatively for us easy based on the previous example.
 
 1. Use node as base
 2. Set working directory so we don't interfere with the contents of the base image
 3. Copy ALL of the files in this directory to the image
 4. Start with DEBUG=playground:* npm start
 
-The Dockerfile can again be placed at the root of the project.
+Let's place the Dockerfile at the root of the project.
 
 `Dockerfile`
 
@@ -107,7 +107,7 @@ COPY . .
 CMD DEBUG=playground:* npm start
 ```
 
-Let's build the image from that, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform docker that a port from the host machine should be opened and directed to a port in the container. And the format is _-p host:application_.
+Let's build the image from that, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. And the format is _-p host:application_.
 
 ```console
 $ docker run -p 3123:3000 express-server
@@ -118,11 +118,11 @@ $ docker run -p 3123:3000 express-server
 Tue, 29 Jun 2021 10:55:10 GMT playground:server Listening on port 3000
 ```
 
-> If yours doesn't work, skip to the next section where I explain why it doesn't work (even if you followed the steps).
+> If yours doesn't work, skip to the next section. There I explain why it doesn't work even if you followed the steps correctly.
 
-Looks like it is working! Let's test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).
+The application is now running! Let's test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).
 
-Shutting it down is a headache at the moment, use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. As an argument it needs the name or id of the container.
+Shutting it down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. As an argument it needs the name or id of the container.
 
 Here I choose to kill it with the ID. The beginning of the ID is enough for docker to know which container I mean.
 
@@ -135,17 +135,17 @@ $ docker kill 48
   48
 ```
 
-In the future let's just use the same port outside of the container as the application runs in. This is just so we don't have to remember which one we happened to choose.
+In the future, let's use the same port on both sides of _-p_. Just so we don't have to remember which one we happened to choose.
 
 #### Fixing potential issues we created by copy-pasting
 
 There are a few steps we need to change to create a more comprehensive Dockerfile. It may even be that the above example doesn't work in all cases because we skipped a step.
 
-We ran npm install on our machines, **node package manager** may install operating system specific dependencies during install step. As we use the COPY instruction to copy all of the node_modules into the image we may move non-functional parts as well.
+We ran npm install on our machines, **node package manager** may install operating system specific dependencies during the install step. We may move non-functional parts with the COPY instruction. This can easily happen if we copy all of the node_modules into the image.
 
-This is critical to think about when we build our images. It's best to do most things such as to run _npm install_ inside the container.
+This is critical to think about when we build our images. It's best to do most things, such as to run _npm install_ during the build process / inside the container rather than preparing them. The easy rule of thumb is to only copy the files that make sense to push into Github, no build artefacts or dependencies since those can be installed during the process.
 
-The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. For example the contents could be
+We can use .dockerignore to solve this. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. You place this file next to the Dockerfile. Here are example contents:
 
 ```
 .dockerignore
@@ -154,7 +154,7 @@ node_modules
 Dockerfile
 ```
 
-However, in our case dockerignore isn't the only thing required. We will need to install the dependencies during the build step.
+However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step.
 
 `Dockerfile`
 
@@ -166,19 +166,20 @@ RUN npm install
 CMD DEBUG=playground:* npm start
 ```
 
-Instead of using npm install, npm offers a much better tool for installing dependencies, the _ci_ command.
+The npm install can be risky. Instead of using npm install, npm offers a much better tool for installing dependencies, the _ci_ command.
 
 Differences between ci and install:
 
 - install may update the package-lock.json
-- install may install different version of a dependency if you have ^ or ~ in the version of the dependency.
+- install may install a different version of a dependency if you have ^ or ~ in the version of the dependency.
 
 - ci will delete the node_modules folder before installing anything
 - ci will follow the package-lock.json and does not alter any files
 
-So in short: _ci_ creates realiable builds, while _install_ is the one to use when you want to install new dependencies.
+So in short: _ci_ creates reliable builds, while _install_ is the one to use when you want to install new dependencies.
 
 As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_
+
 
 `Dockerfile`
 
@@ -219,7 +220,7 @@ Smaller images are more secure by having less attack surface area. And smaller i
 
 Snyk has a great list of 10 best practices, read them [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
-One big neglection we did was having the application running as root instead of using an user. Let's do a final fix to the Dockerfile:
+One big carelessness we have left is having the application running as root instead of using a user. Let's do a final fix to the Dockerfile:
 
 `Dockerfile`
 
@@ -255,9 +256,9 @@ Tip: Run the application outside of a container to examine it before starting to
 
 #### Using docker-compose
 
-In the previous section we created express-server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately docker offers us a better solution.
+In the previous section, we created express-server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
 
-Docker-compose is another amazing tool, which can help us manage containers. We are going to start using docker-compose as we learn more about containers as it will help us save some time with the configuration.
+Docker-compose is another fantastic tool, which can help us manage containers. Let's start using docker-compose as we learn more about containers as it will help us save some time with the configuration.
 
 Install the docker-compose tool from this link: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
 
@@ -268,7 +269,7 @@ $ docker-compose -v
 docker-compose version 1.29.2, build 5becea4c
 ```
 
-And now we can turn the spell into a yaml file:
+And now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
 
 `docker-compose.yml`
 
@@ -283,9 +284,9 @@ services:
       - 3000:3000
 ```
 
-Save this file as **docker-compose.yml** and place it next to the Dockerfile, at the root of the project.
+Save this file as **docker-compose.yml** and place it next to the Dockerfile, at the root of the project. Each line has a meaning, the best way to learn is just by doing, but if you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/).
 
-Now we can use _docker-compose up_ to build and run the application. If we want to rebuild the image we can use _docker-compose up --build_.
+Now we can use _docker-compose up_ to build and run the application. If we want to rebuild the images we can use _docker-compose up --build_.
 
 You can also run the application in the background with _docker-compose up -d_ (_-d_ for detached) and close it with _docker-compose down_.
 
@@ -315,7 +316,7 @@ When you are developing software, containerization can be used in various ways t
 
 It may not be the best option to move your entire development environment into a container, but if that's what you want it's possible. We will revisit this idea at the end of this part. But until then, <i>run the node application itself outside of containers</i>.
 
-The application we met in the previous exercises can use MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a mongodb image. Docker Hub is the default place where docker pulls the images from, you can use other registries as well, but since we are already knee-deep in docker I chose that one. With a quick search there I found [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
+The application we met in the previous exercises can use MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a mongodb image. Docker Hub is the default place where docker pulls the images from, you can use other registries as well, but since we are already knee-deep in docker I chose that one. With a quick search I found [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
 `docker-compose.yml`
 
@@ -337,7 +338,7 @@ The environment variables defined here are explained in the docker hub page:
 
 > These variables, used in conjunction, create a new user and set that user's password. This user is created in the admin authentication database and given the role of root, which is a "superuser" role.
 
-And since we're only using it in development at the moment we can leave them like that. The last environment variable *MONGO\_INITDB\_DATABASE* will tell mongo to create a database with that name. Let's save that as the docker-compose.yml in the directory.
+And since we're only using it in development currently we can leave them like that. The last environment variable *MONGO\_INITDB\_DATABASE* will tell mongo to create a database with that name. Let's save that as the docker-compose.yml in the directory.
 
 Now start the mongo with _docker-compose up -d_, it will run it in the background and you can view the logs with _docker-compose logs -f_, the _-f will ensure we <i>follow</i> the logs.
 
