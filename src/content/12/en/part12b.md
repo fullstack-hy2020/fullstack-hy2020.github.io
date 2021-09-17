@@ -334,17 +334,17 @@ services:
       MONGO_INITDB_DATABASE: the_database
 ```
 
-The environment variables defined here are explained in the docker hub page:
+The environment variables defined above are explained on the Docker Hub page:
 
 > These variables, used in conjunction, create a new user and set that user's password. This user is created in the admin authentication database and given the role of root, which is a "superuser" role.
 
-And since we're only using it in development currently we can leave them like that. The last environment variable *MONGO\_INITDB\_DATABASE* will tell mongo to create a database with that name. Let's save that as the docker-compose.yml in the directory.
+And since we are only using it in development we can leave them like that. The last environment variable *MONGO\_INITDB\_DATABASE* will tell mongo to create a database with that name. Let's save that as the docker-compose.yml in the directory.
 
 Now start the mongo with _docker-compose up -d_, it will run it in the background and you can view the logs with _docker-compose logs -f_, the _-f will ensure we <i>follow</i> the logs.
 
-As said previously, now we do not want to run the node application inside a container. We'll explore that option in the future but for now it's easier to develop the application if it's not in a container.
+As said previously, now we do not want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option in the future.
 
-Run the good old npm install first and let's start the application with the relevant environment variable, you can modify the code to set them as the defaults or use .env file. I'll just throw them in with the start to help you copy-paste.
+Run the good old _npm install_ first on your own machine. Then let's start the application with the relevant environment variable. You can modify the code to set them as the defaults or use the .env file. There is no hurt in putting these keys to GitHub since they are only used in your local development environment. I'll just throw them in with the _npm run dev_ to help you copy-paste.
 
 ```
 $ MONGO_URL=mongodb://localhost:3456/the_database npm run dev
@@ -378,11 +378,11 @@ db.todos.insert({ text: 'Write code', done: true });
 db.todos.insert({ text: 'Learn about containers', done: false });
 ```
 
-It will initialize the database with an user and a few todos. Now we just need to get it inside the container at startup.
+It will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.
 
-We could create a new image FROM mongo and COPY the file inside or we can use a bind mount to mount the init-mongo.js to the container. Let's do the latter.
+We could create a new image FROM mongo and COPY the file inside. Or we can use a bind mount to mount the init-mongo.js to the container. Let's do the latter.
 
-With _container run_ we can add _-v_ flag with the syntax _-v FILE-IN-HOST:FILE-IN-CONTAINER_, but let's skip that and add it to the docker-compose.yml. The format is the same, first host and then container:
+Bind mount is the act of binding a file on the host machine to a file in the container. We can add a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. But since we already learned about Docker Compose let's skip that. The bind mount is declared under "volumes" in docker-compose. Otherwise the format is the same, first host and then container:
 
 `docker-compose.yml`
 
@@ -399,7 +399,7 @@ With _container run_ we can add _-v_ flag with the syntax _-v FILE-IN-HOST:FILE-
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
 ```
 
-Mounting the file will mean that the mongo-init file in the mongo folder is the same as the mongo-init file in the containers /docker-entrypoint-initdb.d directory. Changes to either file will be available in the other.
+The result is that the mongo-init file in the mongo folder is the same as the mongo-init file in the containers /docker-entrypoint-initdb.d directory. Changes to either file will be available in the other. We don't need to make any changes during runtime. But this will be the key to software development in containers.
 
 Run _docker-compose down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose up_ to initialize the database.
 
@@ -410,7 +410,7 @@ mongo_database | failed to load: /docker-entrypoint-initdb.d/mongo-init.js
 mongo_database | exiting with code -3
 ```
 
-you may have a read permission problem. They are not uncommon when dealing with volumes. In the above case, you can use _chmod a+r mongo-init.js_, which will give everyone read access to that file. Be careful when using chmod since granting more privileges can be a security issue. Use the chmod on the mongo-init.js on your computer, not inside the container.
+you may have a read permission problem. They are not uncommon when dealing with volumes. In the above case, you can use _chmod a+r mongo-init.js_, which will give everyone read access to that file. Be careful when using _chmod_ since granting more privileges can be a security issue. Use the _chmod_ only on the mongo-init.js on your computer.
 
 Now starting the express application with the correct environment variable should work:
 
@@ -418,19 +418,19 @@ Now starting the express application with the correct environment variable shoul
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
-Let's check that the http://localhost:8000/todos returns all todos. It should return the two todos we initialized. We can use postman to test the basic functionality for todos like delete todo.
+Let's check that the http://localhost:8000/todos returns all todos. It should return the two todos we initialized. We can use Postman to test the basic functionality for todos like delete todo.
 
 #### Persisting data with volumes
 
-By default containers are not going to persist our data. When you close the mongo container you may or may not be able to get the data back.
+By default, containers are not going to preserve our data. When you close the mongo container you may or may not be able to get the data back.
 
-This is a rare case in which it actually does preserve the data as the developers who made the docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct docker to preserve the data in those directories.
+This is a rare case in which it does preserve the data as the developers who made the docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories.
 
 There are two distinct methods to store the data: 
   1. Declaring a location in your filesystem (called bind mount)
-  2. Letting docker decide where to store the data (volume)
+  2. Letting Docker decide where to store the data (volume)
 
-I prefer the first choice in most cases whenever you really need to avoid deleting the data. Let's see both in action with docker-compose;
+I prefer the first choice in most cases whenever you **really** need to avoid deleting the data. Let's see both in action with docker-compose;
 
 `docker-compose.yml`
 
@@ -449,9 +449,9 @@ services:
       - ./mongo_data:/data/db
 ```
 
-The above will create a directory called _mongo_data_ to your local filesystem, and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
+The above will create a directory called _mongo_data_ to your local filesystem and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
 
-Another great method is by using a named volume:
+A similiar outcome can be had with a named volume:
 
 `docker-compose.yml`
 
@@ -473,7 +473,7 @@ volumes:
   mongo_data:
 ```
 
-Now the volume is created, but managed by docker. After starting the application (_docker-compose up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
+Now the volume is created but managed by Docker. After starting the application (_docker-compose up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
 
 </div>
 
@@ -483,11 +483,11 @@ Now the volume is created, but managed by docker. After starting the application
 
 #### Exercise 12.7: Little bit of mongodb coding
 
-> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+> In this exercise, submit the entire express application with the Dockerfile AND docker-compose.yml.
 
-The todo express application is missing both get one and update. 
+The todo express application is missing both _get one_ and _update_. 
 
-Fix get one to return one todo with and id, and update to update one todo with an id.
+Fix _get one_ to return one todo with and id, and _update_ to update one todo with an id.
 
 </div>
 
@@ -495,29 +495,35 @@ Fix get one to return one todo with and id, and update to update one todo with a
 
 ### Debugging issues in containers
 
-> When coding you most likely end up in a situation where everything is broken. 
+> When coding, you most likely end up in a situation where everything is broken. 
 
 > \- Matti Luukkainen
 
 We need to learn new tools for debugging. When code has a bug you may often be in a state where at least something works so you can work forward from that. Configuration most often is in either of the two states: 1. working or 2. broken. We'll go over a few tools to help when your application is in the latter state.
 
-The most difficult thing about this is that configuration is often broken when it's not finished. So when you write a long docker-compose.yml or Dockerfile and it does not work, you really need to take a moment and think about the various ways you could confirm something is working.
+The most difficult thing about this is that configuration is often broken when it's not finished. So when you write a long docker-compose.yml or Dockerfile and it does not work, you need to take a moment and think about the various ways you could confirm something is working.
 
 <i>Question Everything</i> is still applicable here. As said in part 3: The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one.
 
-For myself the most important method of debugging is stopping and really thinking about what I'm trying to accomplish instead of just bashing my head at the problem. Often there is a simple alternate solution or quick google search that will get me moving forward. 
+For myself the most important method of debugging is stopping and thinking about what I'm trying to accomplish instead of just bashing my head at the problem. Often there is a simple alternate solution or quick google search that will get me moving forward. 
+
 
 #### exec
 
 The docker command _exec_ is a heavy hitter. It can be used to jump right into a container when it's running. That's it.
 
-Let's start a web server, nginx, in the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Nginx is, among other things, a server capable of serving static html files. It has a default index.html that we can replace.
+Let's start a web serverin the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Let's choose Nginx. Nginx is, among other things, a server capable of serving static HTML files. It has a default index.html that we can replace.
 
 ```console
 $ docker container run -d nginx
 ```
 
-Ok, now where should we go with our browser? Is it even running? We know how to answer the latter.
+Ok, now the questions are:
+
+1. Where should we go with our browser? 
+2. Is it even running? 
+
+We know how to answer the latter: by listing the running containers.
 
 ```console
 $ docker container ls
@@ -525,7 +531,7 @@ CONTAINER ID   IMAGE           COMMAND                  CREATED              STA
 3f831a57b7cc   nginx           "/docker-entrypoint.…"   About a minute ago   Up About a minute           80/tcp    keen_darwin
 ```
 
-Yes! It seems to listen on port 80, as output by the previous command.
+Yes! We got the first question answered as well. It seems to listen on port 80, as seen on the output above.
 
 Let's shut it down and restart with the _-p_ flag to have our browser access it.
 
@@ -536,7 +542,7 @@ $ docker container rm keen_darwin
 $ docker container run -d -p 8080:80 nginx
 ```
 
-Let's see the app in http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix the message. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
+Let's look at the app by going to http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix the it. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
 
 ```console
 $ docker container ls
@@ -556,13 +562,13 @@ root@7edcb36aff08:/# cd /usr/share/nginx/html/
 root@7edcb36aff08:/# rm index.html
 ```
 
-Now if we go to http://localhost:8080/ we know that we deleted the correct file. Let's replace it with one containing the correct contents:
+Now if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let's replace it with one containing the correct contents:
 
 ```console
 root@7edcb36aff08:/# echo "Hello, exec!" > index.html
 ```
 
-Refresh the page and our message is displayed!
+Refresh the page and our message is displayed! So exec can be used to interact with the containers. Remember that all of the changes are lost when the container is deleted so if you want to preserve them you can use _commit_.
 
 </div>
 
@@ -574,11 +580,11 @@ Refresh the page and our message is displayed!
 
 > Use _script_ to record what you do, save the generated file into the repository as your answer.
 
-While the mongodb from the previous exercise is running access the database with mongo command-line interface (cli) using docker exec and add a new todo using the cli.
+While the MongoDB from the previous exercise is running access the database with mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
 
-The command to open cli when inside the container is simply "mongo"
+The command to open CLI when inside the container is _mongo_
 
-The mongo cli will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.yml.
+The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.yml.
 
 * Step 1: Run mongodb
 * Step 2: Use docker exec to get inside the container
@@ -625,7 +631,7 @@ Use the documentation [here](https://docs.mongodb.com/v4.4/reference/method/db.c
 
 Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one.
 
-Redis is a data store. So just like mongo it can be used to store data. The difference is that Redis stores key-value data. And it is by default in-memory which means that it does not store data persistently.
+Redis is a data store. So just like MongoDB, it can be used to store data. The difference is that Redis stores key-value data. And it is by default in-memory, which means that it does not store data persistently.
 
 An excellent use case for Redis is to use it as a cache. Caches are often used to store data that is otherwise slow to fetch, and save it until it's no longer valid and then fetch the data and store it to the cache.
 
@@ -635,11 +641,11 @@ An excellent use case for Redis is to use it as a cache. Caches are often used t
 
 ### Exercises 12.9. - 12.11.
 
-#### Exercise 12.9: Setup redis to project
+#### Exercise 12.9: Setup Redis to project
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
-The application will be able to use redis by giving it the *REDIS_URL* environment variable. Find and read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add it to the docker-compose.yml by defining another service after mongo:
+The application will be able to use Redis by giving it the *REDIS_URL* environment variable. Find and read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add it to the docker-compose.yml by defining another service after mongo:
 
 `docker-compose.yml`
 
@@ -651,21 +657,21 @@ services:
     ???
 ```
 
-Since the Docker Hub page doesn't have all info we can use Google to aid us. The default port for redis is found by doing so:
+Since the Docker Hub page doesn't have all info we can use Google to aid us. The default port for Redis is found by doing so:
 
 ![](../../images/12/redis_port_by_google.png)
 
-We won't have any idea if the configuration works unless we try it. The application will not start using redis by itself. You will need to require the config by adding something along the lines of
+We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself. You will need to require the config by adding something along the lines of
 
 ```js
 const redis = require('../redis')
 ```
 
-to the express server. You may also move to the next exercise, the next exercise will require redis to be available and configured correctly.
+to the express server. You may also move to the next exercise. The next exercise will require Redis to be available and configured correctly.
   
 #### Exercise 12.10:
 
-> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+> In this exercise, submit the entire express application with the Dockerfile AND docker-compose.yml.
 
 The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) installed and two functions "promisified" - getAsync and setAsync.
 
@@ -688,15 +694,15 @@ Implement a todo counter:
 
 > Use _script_ to record what you do, save the generated file into the repository as your answer.
 
-Like we did with mongo we can do with redis. Use redis command-line interface to edit the value in the database. 
+Like we did with MongoDB we can do with Redis. Use Redis command-line interface to edit the value in the database. 
 
-The command to open the redis cli is "redis-cli".
+The command to open the Redis CLI is _redis-cli_.
 
 You can find the key you used with _[KEYS *](https://redis.io/commands/keys)_
 
 And set the value with _[SET](https://redis.io/commands/set)_, giving it the key and then the value
 
-And finally set the value of the counter to 9001.
+As the last step, set the value of the counter to 9001.
 
 Make sure that the new value works by using your application. Refresh the application and see that it has the new number, and the redis cli shows new number when asking with _[GET](https://redis.io/commands/get)_, giving it the key
   
@@ -706,7 +712,7 @@ Make sure that the new value works by using your application. Refresh the applic
 
 #### Persisting data with Redis
 
-In the previous section I said that <i>by default</i> Redis does not persist the data. However, the persistence is easy to toggle on. We will only need to start the redis with a different command, as instructed by the docker hub page:
+In the previous section, I said that <i>by default</i> Redis does not persist the data. However, the persistence is easy to toggle on. We will only need to start the Redis with a different command, as instructed by the docker hub page:
 
 `docker-compose.yml`
 ```yml
@@ -722,9 +728,9 @@ Remember to add the directory to .gitignore.
 
 #### Other functionality Redis has
 
-In addition to the most basic get & set Redis can automatically expire keys. And manage multiple key value pairs at the same time.
+In addition to the most basic get & set, Redis can automatically expire keys. And manage multiple key-value pairs at the same time.
 
-In addition to the key-value features Redis can also be used to Publish messages and Subscribe to messages (PubSub or Publish-subscribe pattern). Publish-subscribe is great for having multiple applications communicate with each other. Redis works as the message broker between two or more applications, where one of them is publishing messages by sending them to redis, and the other is subscribed to those messages.
+Redis can also be used to Publish messages and Subscribe to messages (PubSub or Publish-subscribe pattern). Publish-subscribe is great for having multiple applications communicate with each other. Redis works as the message broker between two or more applications, where one of them is publishing messages by sending them to Redis, and the other one is subscribed to those messages. We will not explore messaging further in this part.
 
 </div>
 
