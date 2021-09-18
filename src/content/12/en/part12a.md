@@ -11,7 +11,7 @@ Software development includes the whole lifecycle from envisioning the software 
 
 Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application. As a result, each container can run isolated from the other containers.
 
-Containers allow the that the contained applications can  access **only** the contents of the container and the resources given to that container. More accurately, containers are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, where as a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is far much less overhead when running containers; they only need to run a single process.
+Containers allow the that the contained applications can **only** access the contents of the container and the resources given to that container. More accurately, containers are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, where as a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is far much less overhead when running containers; they only need to run a single process.
 
 As containers are relatively lightweight, at least compared to virtual machines, they can be quick to scale. And as they isolate the software running inside, it enables the software to run identically almost anywhere. As such, they are the go-to option in any cloud environment or application with more than a handful of users.
 
@@ -31,7 +31,7 @@ Sometimes you may hear about the <i>"Works in my container"</i> issue, that is, 
 
 ### About this part ###
 
-In this part, the focus of our attention will not be on the software code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and configuration you do during this part.
+In this part, the focus of our attention will not be on the JavaScript code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and configuration you do during this part.
 
 You will need basic knowledge of Node, Express, and React. Only the core parts, 1 through 5, are required to be completed before this part.
 
@@ -39,26 +39,25 @@ You will need basic knowledge of Node, Express, and React. Only the core parts, 
 
 <div class="tasks">
 
-# Warning
+### Exercise 12.1
+### <i>Warning</i>
 
 Since we are stepping right outside of our comfort zone as JavaScript developers, this part may require you to take a detour and familiarize yourself with shell / command line / command prompt / terminal before getting started.
 
-If you have only ever used a graphical user interface and never touched e.g. Linux or terminal on Mac, or if you get stuck in the first exercises I recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise, it includes everything you are going to need to get started here!
-
-### Exercise 12.1
+If you have only ever used a graphical user interface and never touched e.g. Linux or terminal on Mac, or if you get stuck in the first exercises we recommend doing the Part 1 of "Computing tools for CS studies" first: <https://tkt-lapio.github.io/en/>. Skip the section for "SSH connection" and Exercise 11. Otherwise, it includes everything you are going to need to get started here!
 
 #### Exercise 12.1: Using a computer (without graphical user interface)
 
 Step 1: Read the text below the Warning header.
 
-Step 2: Run _curl http://helsinki.fi_ and save the output into a file. Submit that file into your repository.
+Step 2: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save that file into your repository as file <i>curl_output.txt</i>.
 
 </div>
 <div class="content">
 
 ### Submitting exercises and earning credits ###
 
-Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to a different course instance</i>.
+Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to a [own course instance](https://studies.cs.helsinki.fi/stats/fs-containers)</i>.
 
 Completing this part on containers will get you 1 credit.
 
@@ -80,7 +79,7 @@ The basic tools you are going to need vary between operating systems:
 
 We will begin by installing the required software. The installation step will be one of the possible obstacles. As we are dealing with OS-level virtualization, the tools will require superuser access on the computer. They will have access to your operating systems kernel.
 
-The material is built around Docker, a set of products that we will use for containerization and the management of containers. Unfortunately, if you can not install Docker you probably can not complete this part.
+The material is built around [Docker](https://www.docker.com/), a set of products that we will use for containerization and the management of containers. Unfortunately, if you can not install Docker you probably can not complete this part.
 
 As the install instructions depend on your operating system, you will have to find the correct install instructions from the link below. Note that they may have multiple different options for your operating system. 
 
@@ -107,20 +106,22 @@ Both of the following statements are true:
 
 It is no wonder they are easily mixed up.
 
-To help with the confusion, most everyone uses the word container to describe both. But you can never actually build a container or download one since containers only exist during runtime. Images, on the other hand, are **immutable** files. As a result of the immutability, you can not edit them after you create them. However, you can use existing images to create a new image by adding new layers on top of the existing ones.
+To help with the confusion, almost everyone uses the word container to describe both. But you can never actually build a container or download one since containers only exist during runtime. Images, on the other hand, are **immutable** files. As a result of the immutability, you can not edit a image after you have created one. However, you can use existing images to create <i>a new image</i> by adding new layers on top of the existing ones.
 
 Cooking metaphor:
 
 * Image is pre-cooked, frozen treat.
 * Container is the delicious treat.
 
-[Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standard most others use now. In actuality, Docker is a set of products that help us manage images and containers. They will enable us to leverage all of the benefits of containers. The docker engine will take care of turning the immutable files called images into containers.
+[Docker](https://www.docker.com/) is the most popular containerization technology that pioneered the standards most containerization technologies use today. In practice, Docker is a set of products that help us to manage images and containers. The set of products enable us to leverage all of the benefits of containers. The docker engine will take care of turning the immutable files called images into containers.
 
-For managing the docker containers, there is also [Docker Compose](https://docs.docker.com/compose/). We can use it to **orchestrate** (control) multiple containers at the same time. We will use Docker Compose to set up complex local development environments quickly. In the final version of our Node development environment, even Node isn't a requirement anymore.
+For managing the docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing the Node to our machine is not a requirement anymore.
 
-There are several concepts we need to go over. But we will skip those for now and learn about Docker first! One of my favourite features is the capability to handle the command for running containers, even if the image is not downloaded on our device yet.
+There are several concepts we need to go over. But we will skip those for now and learn about Docker first! 
 
-The command structure is the following: _container run <i>IMAGE-NAME</i>_. So we will tell Docker to create a container from an image.
+Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particulary nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.
+
+Let us run the command
 
 ```bash
 § docker container run hello-world
@@ -136,7 +137,8 @@ There will be a lot of output, but I will split it into multiple sections, which
 5. Status: Downloaded newer image for hello-world:latest
 ```
 
-It has downloaded a new image for hello-world from a place called Docker Hub. Docker Hub is a free registry. And a registry is a place to store images. You can see the Docker Hub page for the image with your browser here: [https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world)
+Since the image to run <i>hello-world</i> was not found form our machine, the
+command started by downloading it from [Docker Hub](https://hub.docker.com/), which is a free Docker registry that stores Docker images. You can see the Docker Hub page for the image with your browser here: [https://hub.docker.com/_/hello-world](https://hub.docker.com/_/hello-world)
 
 The first part of the message states that we did not have the image "hello-world:latest" yet. This reveals a bit of detail about images themselves; image names consist of multiple parts, kind of like an URL. An image name is in the following format: 
 
@@ -147,9 +149,9 @@ In this case the 3 missing fields defaulted to:
 
 The second row shows the organisation name, "library" where it will get the image. In the Docker Hub url, the "library" is shortened to _.
 
-The 3rd and 5th rows only show the status. But the 4th row may be interesting: each image has a unique digest based on the layers. The digest is used by Docker to identify that an image is the same. This is done when you try to pull the same image again.
+The 3rd and 5th rows only show the status. But the 4th row may be interesting: each image has a unique digest based on the <i>layers</i> using which the image is build of (in practice each step or command that was used in building the image creates a unique layer). The digest is used by Docker to identify that an image is the same. This is done when you try to pull the same image again.
 
-So it did some pulling and then output information about the **image**. After that the status told us that a new version of hello-world:latest was indeed downloaded. You can try pulling the image with _docker image pull hello-world_ and see what happens.
+So the command did some pulling and then output information about the **image**. After that the status told us that a new version of hello-world:latest was indeed downloaded. You can try pulling the image with _docker image pull hello-world_ and see what happens.
 
 The following output was from the container itself. It also explains what happened when we ran _docker container run hello-world_.
 
@@ -176,7 +178,7 @@ For more examples and ideas, visit:
  https://docs.docker.com/get-started/
 ```
 
-The output contains a few new things for us to learn. Docker daemon is a background service that makes sure the containers are running, and we use the docker client to interact with the daemon. We now have interacted with the first image and created a container from the image. During the execution of that container, we received the output.
+The output contains a few new things for us to learn. <i>Docker daemon</i> is a background service that makes sure the containers are running, and we use the <i>Docker client</i> to interact with the daemon. We now have interacted with the first image and created a container from the image. During the execution of that container, we received the output.
 
 </div>
 
