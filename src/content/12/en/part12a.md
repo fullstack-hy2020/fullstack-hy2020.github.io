@@ -11,13 +11,13 @@ Software development includes the whole lifecycle from envisioning the software 
 
 Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application. As a result, each container can run isolated from the other containers.
 
-Containers allow the applications within to **only** access the contents of the container and the resources given to that container. More accurately, they are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, and a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is little overhead when running containers; they only need to run a single process.
+Containers allow the that the contained applications can  access **only** the contents of the container and the resources given to that container. More accurately, containers are OS-level virtualization. The easiest-to-compare technology is a virtual machine (VM). VMs are used to run multiple operating systems on a single physical machine. They have to run the whole operating system, where as a container runs the software using the host operating system. The resulting difference between VMs and containers is that there is far much less overhead when running containers; they only need to run a single process.
 
 As containers are relatively lightweight, at least compared to virtual machines, they can be quick to scale. And as they isolate the software running inside, it enables the software to run identically almost anywhere. As such, they are the go-to option in any cloud environment or application with more than a handful of users.
 
-Cloud services like AWS, Google Cloud, and Microsoft Azure all support containers in multiple different forms. These include AWS Fargate and Google Cloud Run, both of which run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your personal machine. 
+Cloud services like AWS, Google Cloud, and Microsoft Azure all support containers in multiple different forms. These include AWS Fargate and Google Cloud Run, both of which run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your own machine. 
 
-So containers are used in clouds and development. What are the benefits of using one? Here are two relatable and common scenarios:
+So containers are used in clouds and development. What are the benefits of using those? Here are two common scenarios:
 
 > Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed.
 
@@ -25,9 +25,9 @@ You can probably use nvm, virtual machines, or dark magic to get them running at
 
 > Scenario 2: Your application runs on your machine. You need to move the application to a server.
 
-It is not uncommon that the application just does not run there. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
+It is not uncommon that the application just does not run in the server despite it works just fine in your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
 
-Sometimes you may hear about the “Works in my container” issue - this is often a usage error.
+Sometimes you may hear about the <i>"Works in my container"</i> issue, that is, the application works fine in your container, but when moved to server, it does not work despite all the promises that containers will eliminate the unfamous <i>"Works in my machine"</i> issue. This is however most likely a usage error.
 
 ### About this part ###
 
