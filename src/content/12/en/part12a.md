@@ -194,13 +194,13 @@ If _script_ does not work, you can just copy-paste all commands you used into a 
 
 #### Exercise 12.2: Running your second container
 
-> Use _script_ to record what you do, save the generated file into the repository as your answer.
+> Use _script_ to record what you do, save the generated file into the repository as your answer (with name exercise12_2.txt).
 
 The hello-world output gave us an ambitious task to do. Do the following
 
 Step 1. Run an Ubuntu container with the command given by hello-world
 
-The step 1 will connect you straight into the container with bash. You will have access to all of the files and tools inside of the container.
+The step 1 will connect you straight into the container with bash. You will have access to all of the files and tools inside of the container. The following steps are run within the container:
 
 Step 2. Create directory `/usr/src/app`
 
@@ -216,7 +216,7 @@ Google should be able to help you with creating directories and files.
 
 ### Ubuntu image
 
-The command you just used to run the ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to our hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.
+The command you just used to run the ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to the previously run hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.
 
 ```bash
 $ docker container run --help
@@ -231,14 +231,16 @@ Options:
   ...
 ```
 
-The two options, or flags, in _-it_ make sure we can interact with the container. And after the image we used was ubuntu. Then we have the command to be executed inside the container when we start it. You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.
+The two options, or flags, in _-it_ make sure we can interact with the container.  After the optinons we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it. 
 
-Let's continue with our first ubuntu container with the **index.js** file inside of it. It has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
+You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.
+
+Let's continue with our first ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
 
 ```bash
 $ docker container ls -a
-CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                       PORTS     NAMES
-b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago               hopeful_clarke
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                            NAMES
+b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago          hopeful_clarke
 ```
 
 We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.
@@ -247,32 +249,58 @@ The container has already exited, yet we can start it again with the start comma
 
 ```bash
 $ docker start hopeful_clarke
-root@b8548b9faec3:/#
+hopeful_clarke
 ```
 
-The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ so we can not interact with it. Let's kill it with the _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ command and try again. Killing sends a SIGKILL signal to the process forcing it to exit. We could have used the safer SIGTERM version, _stop <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_, instead if we wanted to.
+
+The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ so we can not interact with it.
+
+
+The container is actually up and running as the command _container ls -a_ shows, but we just can not communicate it:
 
 ```bash
 $ docker container ls -a
-CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                      PORTS     NAMES
-b8548b9faec3   ubuntu    "bash"    13 minutes ago   Up 47 seconds                         hopeful_clarke
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                            NAMES
+b8548b9faec3   ubuntu    "bash"    7 minutes ago    Up (0) 15 seconds ago            hopeful_clarke
+```
 
+Note that we can also execute the command without the flag _-a_ to see just those containers that are running:
+
+```bash
+$ docker container ls
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS             NAMES
+8f5abc55242a   ubuntu    "bash"    8 minutes ago    Up 1 minutes       hopeful_clarke             
+```
+
+Let's kill it with the _kill <i>CONTAINER-ID-OR-CONTAINER-NAME</i>_ command and try again. 
+
+```bash
 $ docker kill hopeful_clarke
 hopeful_clarke
+```
 
+_docker kill_ sends a [signal SIGKILL](https://man7.org/linux/man-pages/man7/signal.7.html) to the process forcing it to exit, and that causes the container to stop. We can check it's status with _container ls -a_:
+
+```bash
+$ docker container ls -a
+CONTAINER ID   IMAGE     COMMAND   CREATED             STATUS                     NAMES
+b8548b9faec3   ubuntu     "bash"   26 minutes ago      Exited 2 seconds ago       hopeful_clarke
+```
+
+Now let us start the container again, but this time in interactive mode:
+
+```bash
 $ docker start -i hopeful_clarke
 root@b8548b9faec3:/#
 ```
 
-Let's edit the index.js and add something to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. I found the install instructions from Google. We will omit using sudo since we are already root.
+
+Let's edit the file <i>index.js</i> and add it some JavaScript code to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. I found the install instructions from Google. We will omit using sudo since we are already root.
+
 
 ```
 root@b8548b9faec3:/# apt-get update
-...
-
 root@b8548b9faec3:/# apt-get -y install nano
-...
-
 root@b8548b9faec3:/# nano /usr/src/app/index.js
 ```
 
@@ -285,11 +313,11 @@ Now we have nano installed and can start editing files!
 
 #### Exercise 12.3: Ubuntu 101
 
-> Use _script_ to record what you do, save the generated file into the repository as your answer.
+> Use _script_ to record what you do, save the generated file into the repository as your answer (with name exercise12_3.txt).
 
 Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line
 
-```javascript
+```js
 console.log('Hello World')
 ```
 
@@ -297,7 +325,7 @@ If you are not familiar with Nano you can ask for help in the chat or Google.
 
 #### Exercise 12.4: Ubuntu 102
 
-> Use _script_ to record what you do, save the generated file into the repository as your answer.
+> Use _script_ to record what you do, save the generated file into the repository as your answer (with name exercise12_4.txt).
 
 Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container.
 
@@ -310,13 +338,20 @@ apt install -y nodejs
 
 You will need to install the _curl_ into the container. It is installed in the same way as you did with _nano_.
 
+After the installation, ensure that you can run your code inside the container with command
+
+```
+root@b8548b9faec3:/# node /usr/src/app/index.js
+Hello World
+```
+
 </div>
 
 <div class="content">
 
 ### Other docker commands
 
-Now that we have Node installed in the container we can execute _Node /usr/src/app/index.js_ in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
+Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
 
 ```console
 $ docker commit hopeful_clarke hello-node-world
@@ -343,16 +378,16 @@ There are multiple ways to achieve the same conclusion. Let's go through a bette
 
 ```bash
 $ docker container ls -a
-CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                       PORTS     NAMES
+CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                  NAMES
 b8548b9faec3   ubuntu    "bash"    31 minutes ago   Exited (0) 9 seconds ago               hopeful_clarke
 
 $ docker container rm hopeful_clarke
 hopeful_clarke
 ```
 
-Create the index.js file and write _console.log('Hello, World')_ inside it. No need for containers yet.
+Create the a file <i>index.js</i> to your current directory and write _console.log('Hello, World')_ inside it. No need for containers yet.
 
-Next, let's skip installing Node altogether. Since Docker images are found in Docker Hub we can use this: [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node). That image has Node already installed, and we only need to pick a version.
+Next, let's skip installing Node altogether. There are plenty of useful Docker images in Docker Hub ready for our use. Let us use now [https://hub.docker.com/_/Node](https://hub.docker.com/_/Node), a image that has Node readily installed. We only need to pick a version.
 
 By the way, the _container run_ accepts _--name_ flag that we can use to give a name for the container.
 
@@ -360,12 +395,18 @@ By the way, the _container run_ accepts _--name_ flag that we can use to give a 
 $ docker container run -it --name hello-node node:16 bash
 ```
 
+Let us create a directory for the code inside the container:
+
+```
+root@77d1023af893:/# mkdir /usr/src/app
+```
+
 While we are inside the container on this terminal, open another terminal and use the _container cp_ command to copy file from your own machine to the container.
 
 ```bash
-$ docker cp ./index.js hello-node:/usr/src/app/index.js
+$ docker container cp ./index.js hello-node:/usr/src/app/index.js
 ```
 
-And now we can run _node /usr/src/app/index.js_ in the container. We can commit this as another new image, but there is an even better solution. The next page will be all about building your images like a pro.
+And now we can run _node /usr/src/app/index.js_ in the container. We can commit this as another new image, but there is an even better solution. The next section will be all about building your images like a pro.
 
 </div>
