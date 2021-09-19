@@ -271,7 +271,7 @@ Tip: Run the application outside of a container to examine it before starting to
 
 In the previous section, we created express-server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
 
-Docker-compose is another fantastic tool, which can help us manage containers. Let's start using docker-compose as we learn more about containers as it will help us save some time with the configuration.
+[Docker-compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us manage containers. Let's start using docker-compose as we learn more about containers as it will help us save some time with the configuration.
 
 Install the docker-compose tool from this link: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
 
@@ -284,7 +284,7 @@ docker-compose version 1.29.2, build 5becea4c
 
 And now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
 
-`docker-compose.yml`
+Create file **docker-compose.yml** and place it next to the Dockerfile, at the root of the project. The file content is
 
 ```yaml
 version: '3.8'            # Version 3.8 is quite new and should work
@@ -297,7 +297,7 @@ services:
       - 3000:3000
 ```
 
-Save this file as **docker-compose.yml** and place it next to the Dockerfile, at the root of the project. Each line has a meaning, the best way to learn is just by doing, but if you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/).
+The meaning of each line is explained as a comment. If you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/).
 
 Now we can use _docker-compose up_ to build and run the application. If we want to rebuild the images we can use _docker-compose up --build_.
 
@@ -313,7 +313,7 @@ Creating files like this that <i>declare</i> what you want instead of script fil
 
 #### Exercise 12.6: docker-compose
 
-> In this exercise, submit <i>at least</i> the docker-compose.yml you created.
+> For this exercise, submit <i>at least</i> the docker-compose.yml you created.
 
 Create a docker-compose file that works with the node application from the previous exercise.
 
