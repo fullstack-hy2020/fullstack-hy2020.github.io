@@ -61,9 +61,9 @@ As images are just files, they can be moved around, downloaded and deleted. You 
 
 ### More meaningful image
 
-Moving an express server to a container should be as simple as moving the "Hello, World!" application. The only difference is that there are more files. Thankfully _COPY_ instruction can handle all that. Let's delete the index.js and create a new express server. Lets use express-generator to create a basic express application.
+Moving an Express server to a container should be as simple as moving the "Hello, World!" application inside a container. The only difference is that there are more files. Thankfully _COPY_ instruction can handle all that. Let's delete the index.js and create a new express server. Lets use [express-generator](https://expressjs.com/en/starter/generator.html) to create a basic Express application skeleton.
 
-```console
+```bash
 $ npx express-generator
   ...
   
@@ -76,26 +76,22 @@ $ npx express-generator
 
 First, let's run the application to get an idea of what we just created. Note that the command to run the application may be different from you, my directory was called playground.
 
-```console
+```bash
 $ npm install
-
 $ DEBUG=playground:* npm start
-
   playground:server Listening on port 3000 +0ms
 ```
 
 Great, so now we can navigate to [http://localhost:3000](http://localhost:3000) and the app is running there.
 
-Containerizing that should be relatively for us easy based on the previous example.
+Containerizing that should be relatively easy based on the previous example.
 
-1. Use node as base
-2. Set working directory so we don't interfere with the contents of the base image
-3. Copy ALL of the files in this directory to the image
-4. Start with DEBUG=playground:* npm start
+- Use node as base
+- Set working directory so we don't interfere with the contents of the base image
+- Copy ALL of the files in this directory to the image
+- Start with DEBUG=playground:* npm start
 
-Let's place the Dockerfile at the root of the project.
-
-`Dockerfile`
+Let's place the following Dockerfile at the root of the project:
 
 ```Dockerfile
 FROM node:16
@@ -107,7 +103,7 @@ COPY . .
 CMD DEBUG=playground:* npm start
 ```
 
-Let's build the image from that, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. And the format is _-p host:application_.
+Let's build the image from that with command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container, the format is _-p host:application_.
 
 ```console
 $ docker run -p 3123:3000 express-server
