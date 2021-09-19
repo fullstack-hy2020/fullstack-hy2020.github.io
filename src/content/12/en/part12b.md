@@ -135,13 +135,13 @@ In the future, let's use the same port on both sides of _-p_. Just so we don't h
 
 #### Fixing potential issues we created by copy-pasting
 
-There are a few steps we need to change to create a more comprehensive Dockerfile. It may even be that the above example doesn't work in all cases because we skipped a step.
+There are a few steps we need to change to create a more comprehensive Dockerfile. It may even be that the above example doesn't work in all cases because we skipped an important step.
 
-We ran npm install on our machines, **node package manager** may install operating system specific dependencies during the install step. We may move non-functional parts with the COPY instruction. This can easily happen if we copy all of the node_modules into the image.
+When we ran npm install on our machine, in some cases **node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.
 
-This is critical to think about when we build our images. It's best to do most things, such as to run _npm install_ during the build process / inside the container rather than preparing them. The easy rule of thumb is to only copy the files that make sense to push into Github, no build artefacts or dependencies since those can be installed during the process.
+This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those in host macihne. The easy rule of thumb is to only copy the files that make sense to push into Github. Build artefacts or dependencies should not be copied since those can be installed during the build process.
 
-We can use .dockerignore to solve this. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. You place this file next to the Dockerfile. Here are example contents:
+We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of <i>.dockerignore</i>
 
 ```
 .dockerignore
@@ -150,14 +150,16 @@ node_modules
 Dockerfile
 ```
 
-However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step.
+However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step. _Dockerfile_ changes to:
 
-`Dockerfile`
+```bash
+FROM node:16
 
-```Dockerfile
+WORKDIR /usr/src/app
+
 COPY . .
 
-RUN npm install
+RUN npm install // highlight-line
 
 CMD DEBUG=playground:* npm start
 ```
@@ -174,15 +176,16 @@ Differences between ci and install:
 
 So in short: _ci_ creates reliable builds, while _install_ is the one to use when you want to install new dependencies.
 
-As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_
+As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_:
 
+```bash
+FROM node:16
 
-`Dockerfile`
+WORKDIR /usr/src/app
 
-```Dockerfile
 COPY . .
 
-RUN npm ci
+RUN npm ci // highlight-line
 
 CMD DEBUG=playground:* npm start
 ```
@@ -193,14 +196,22 @@ Even better, we can use _npm ci --only-production_ to not waste time installing 
 
 Now the Dockerfile should work again, try it with _docker build -t express-server . && docker run -p 3000:3000 express-server_
 
-We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that.
+> Note that we are here chaining two bash commands with &&. We could get (nearly) the same effect by running both commands separately. When chaining commands with && if one command fails, the next ones in the chain will not be executed.
 
-`Dockerfile`
+We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that:
 
-```Dockerfile
-ENV DEBUG=playground:*
+```bash
+FROM node:16
 
-CMD npm start
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm ci 
+
+ENV DEBUG=playground:* // highlight-line
+
+CMD npm start // highlight-line
 ```
 
 > <i>If you're wondering what the DEBUG environment variable does, read [here](http://expressjs.com/en/guide/debugging.html#debugging-express).</i>
@@ -209,23 +220,29 @@ CMD npm start
 
 There are 2 rules of thumb you should follow when creating images:
 
-1. Try to create as **secure** of an image as possible
-2. Try to create as **small** of an image as possible
+- Try to create as **secure** of an image as possible
+- Try to create as **small** of an image as possible
 
-Smaller images are more secure by having less attack surface area. And smaller images move faster in deployment pipelines.
+Smaller images are more secure by having less attack surface area, and smaller images also move faster in deployment pipelines.
 
-Snyk has a great list of 10 best practices, read them [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
+Snyk has a great list of 10 best practices for node/express containerization, read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
-One big carelessness we have left is having the application running as root instead of using a user. Let's do a final fix to the Dockerfile:
+One big carelessness we have left is having the application running as root instead of using a user with less priviledges. Let's do a final fix to the Dockerfile:
 
-`Dockerfile`
+```bash
+FROM node:16
 
-```Dockerfile
-USER node
+USER node // highlight-line
   
 WORKDIR /usr/src/app
 
-COPY --chown=node:node . .
+COPY --chown=node:node . .  // highlight-line
+
+RUN npm ci 
+
+ENV DEBUG=playground:*
+
+CMD npm start
 ```
 
 </div>
@@ -250,7 +267,7 @@ Tip: Run the application outside of a container to examine it before starting to
   
 <div class="content">
 
-#### Using docker-compose
+### Using docker-compose
 
 In the previous section, we created express-server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
 
