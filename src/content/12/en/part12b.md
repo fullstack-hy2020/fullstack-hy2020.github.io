@@ -8,13 +8,13 @@ lang: en
 <div class="content">
 
 
-In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Node.js backend that has Express. We will build on top of that with a few services like a database.
+In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Express/Node.js backend. We will build on top of that with a few services such as a database.
 
 ### Dockerfile
 
 Instead of modifying a container by copying files inside, we can create a new image that contains the "Hello, World!" application. The tool for this is the Dockerfile. Dockerfile is a simple text file that contains all of the instructions for creating an image. Let's create an example Dockerfile from the "Hello, World!" application.
 
-If you did not already, create a directory on your machine and create a file called Dockerfile inside that directory. Let's also put an index.js containing _console.log('Hello, World!')_ next to the Dockerfile. Your directory structure should look like this:
+If you did not already, create a directory on your machine and create a file called <i>Dockerfile</i> inside that directory. Let's also put an <i>index.js</i> containing _console.log('Hello, World!')_ next to the Dockerfile. Your directory structure should look like this:
 
 ```
 ├── index.js
@@ -23,13 +23,13 @@ If you did not already, create a directory on your machine and create a file cal
 
 inside that Dockerfile we will tell the image three things:
 
-1. Use the node:16 as the base for our image, we want everything node 16 contains to be available for this image.
-2. Include the index.js inside the image, so we don't need to manually copy it into the container
-3. When we run a container from the image, use node to execute the index.js file.
+- Use the node:16 as the base for our image
+- Include the index.js inside the image, so we don't need to manually copy it into the container
+- When we run a container from the image, use node to execute the index.js file.
 
-The wishes above will translate into a basic Dockerfile. The best location to place this file is usually at the root of the project.
+The wishes above will translate into a basic Dockerfile. The best location to place this file is usually at the root of the project. 
 
-`Dockerfile`
+The resulting <i>Dockerfile</i> looks like this:
 
 ```Dockerfile
 FROM node:16
@@ -41,11 +41,11 @@ COPY ./index.js ./index.js
 CMD node index.js
 ```
 
-FROM instruction will tell us that the base is node:16. COPY instruction will copy the file to the file. And CMD instruction tells what happens when _docker run_ is used. CMD is the _default_ command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
+FROM instruction tells us that the base image is node:16. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
 
-I included one additional instruction, WORKDIR, to make sure we don't interfere with the contents that the image already had. It will ensure all of the following commands will be in the container in the directory /usr/src/app. If the directory doesn't exist it will create it. 
+I included one additional instruction, WORKDIR, to make sure we don't interfere with the contents that the image already had. It will ensure all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the image, it will be created. 
 
-If we do not specify a WORKDIR we risk overwriting important files by accident. If you check the root (_/_) of the node:16 with _docker run node:16 ls_ image you can notice all of the directories and files that are already included in the image. That is because we use node as the base image. The node image already contained all of those files, we just added our own. 
+If we do not specify a WORKDIR we risk overwriting important files by accident. If you check the root (_/_) of the node:16 with _docker run node:16 ls_ image you can notice all of the directories and files that are already included in the image since we use the node:16 as the base image.
 
 Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:
 
@@ -55,7 +55,7 @@ $ docker build -t fs-hello-world .
 ...
 ```
 
-So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, simple dot will mean the Dockerfile in this directory. After the build is finished you can run it with _docker run fs-hello-world_.
+So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, simple dot will mean the Dockerfile in <i>this</i> directory, that is why the command ends with a dot. After the build is finished you can run it with _docker run fs-hello-world_.
 
 As images are just files, they can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.
 
