@@ -769,9 +769,9 @@ Remember to add the directory to .gitignore!
 
 #### Other functionality of Redis
 
-In addition to the most basic GET, SET and DEL operations on keys, Redis can automatically expire keys, and manage multiple key-value pairs at the same time.
+In addition to the GET, SET and DEL operations on keys and values, Redis can do also a quite a lot more. It can for example automatically expire keys, that is a very useful feature when Redis is used as a cache.
 
-Redis can also be used to Publish messages and Subscribe to messages (PubSub or Publish-subscribe pattern). Publish-subscribe is great for having multiple applications communicate with each other. Redis works as the message broker between two or more applications, where one of them is publishing messages by sending them to Redis, and the other one is subscribed to those messages. We will not explore messaging further in this part.
+Redis can also be used to implement so called [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (or PubSub) pattern that is a asynchronous communication mechanism for distributed applications. In this scenario Redis works as a <i>message broker</i> between two or more applications. Some of the applications are <i>publishing</i> messages by sending those to Redis, that on arrival of a message, informs the parties that have <i>subscribed</i> to those messages. 
 
 </div>
 
@@ -779,7 +779,7 @@ Redis can also be used to Publish messages and Subscribe to messages (PubSub or 
 
 ### Exercise 12.12.
   
-#### Exercise 12.12: Persisting data in redis
+#### Exercise 12.12: Persisting data in Redis
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
