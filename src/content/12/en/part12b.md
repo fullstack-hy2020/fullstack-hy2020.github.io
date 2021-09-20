@@ -747,6 +747,7 @@ If the application does not behave as expected, a direct access to database may 
 - Set the value of the counter to 9001, find the right command from [here](https://redis.io/commands/) 
 - Make sure that the new value works by refreshing the page http://localhost:3000/statistics
 - Create a new todo with postman and ensure from redis-cli that the counter has increased accordingly
+- Delete the key from cli and ensure that counter works when new todos are added
 
 </div>
 
