@@ -647,11 +647,15 @@ Ensure that you see the new todo both in the express app and when querying from 
 
 ### Redis
 
+
+[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
+
+
+By default Redis works <i>in-memory</i>, which means that it does not store data persistently. 
+
+An excellent use case for Redis is to use it as a <i>cache</i>. Caches are often used to store data that is otherwise slow to fetch, and save it until it's no longer valid and then fetch the data and store it to the cache.
+
 Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one.
-
-Redis is a data store. So just like MongoDB, it can be used to store data. The difference is that Redis stores key-value data. And it is by default in-memory, which means that it does not store data persistently.
-
-An excellent use case for Redis is to use it as a cache. Caches are often used to store data that is otherwise slow to fetch, and save it until it's no longer valid and then fetch the data and store it to the cache.
 
 </div>
 
@@ -663,9 +667,7 @@ An excellent use case for Redis is to use it as a cache. Caches are often used t
 
 > In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
 
-The application will be able to use Redis by giving it the *REDIS_URL* environment variable. Find and read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add it to the docker-compose.yml by defining another service after mongo:
-
-`docker-compose.yml`
+The express server has already been defined to use Redis by giving it the *REDIS_URL* environment variable. Read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add Redis to the docker-compose.yml by defining another service after mongo:
 
 ```yml
 services:
@@ -679,14 +681,39 @@ Since the Docker Hub page doesn't have all info we can use Google to aid us. The
 
 ![](../../images/12/redis_port_by_google.png)
 
-We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself. You will need to require the config by adding something along the lines of
+We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself, that shall happen in next exercise.
+
+You can now test the configuration by adding the line
 
 ```js
 const redis = require('../redis')
 ```
 
-to the express server. You may also move to the next exercise. The next exercise will require Redis to be available and configured correctly.
-  
+to the express server eg. in file <i>routes/index.js</i>. If noting happens, the configuration is done right. If not, the server crashes:
+
+```bash
+events.js:291
+      throw er; // Unhandled 'error' event
+      ^
+
+Error: Redis connection to localhost:637 failed - connect ECONNREFUSED 127.0.0.1:6379
+    at TCPConnectWrap.afterConnect [as oncomplete] (net.js:1144:16)
+Emitted 'error' event on RedisClient instance at:
+    at RedisClient.on_error (/Users/mluukkai/opetus/docker-fs/container-app/express-app/node_modules/redis/index.js:342:14)
+    at Socket.<anonymous> (/Users/mluukkai/opetus/docker-fs/container-app/express-app/node_modules/redis/index.js:223:14)
+    at Socket.emit (events.js:314:20)
+    at emitErrorNT (internal/streams/destroy.js:100:8)
+    at emitErrorCloseNT (internal/streams/destroy.js:68:3)
+    at processTicksAndRejections (internal/process/task_queues.js:80:21) {
+  errno: -61,
+  code: 'ECONNREFUSED',
+  syscall: 'connect',
+  address: '127.0.0.1',
+  port: 6379
+}
+[nodemon] app crashed - waiting for file changes before starting...
+```
+
 #### Exercise 12.10:
 
 > In this exercise, submit the entire express application with the Dockerfile AND docker-compose.yml.
@@ -710,20 +737,17 @@ Implement a todo counter:
 
 #### Exercise 12.11:
 
-> Use _script_ to record what you do, save the generated file into the repository as your answer.
+> Use _script_ to record what you do, save the generated file (with name exercise12_11.txt) into the repository as your answer.
 
-Like we did with MongoDB we can do with Redis. Use Redis command-line interface to edit the value in the database. 
+If the application does not behave as expected, a direct access to database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
 
-The command to open the Redis CLI is _redis-cli_.
+- Go to the redis container with _docker exec_ and open the redis-cli.
+- Find the key you used with _[KEYS *](https://redis.io/commands/keys)_ 
+- Check the value of the key with command [GET](https://redis.io/commands/get)
+- Set the value of the counter to 9001, find the right command from [here](https://redis.io/commands/) 
+- Make sure that the new value works by refreshing the page http://localhost:3000/statistics
+- Create a new todo with postman and ensure from redis-cli that the counter has increased accordingly
 
-You can find the key you used with _[KEYS *](https://redis.io/commands/keys)_
-
-And set the value with _[SET](https://redis.io/commands/set)_, giving it the key and then the value
-
-As the last step, set the value of the counter to 9001.
-
-Make sure that the new value works by using your application. Refresh the application and see that it has the new number, and the redis cli shows new number when asking with _[GET](https://redis.io/commands/get)_, giving it the key
-  
 </div>
 
 <div class="content">
