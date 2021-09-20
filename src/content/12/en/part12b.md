@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 
-In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Express/Node.js backend. We will build on top of that with a few services such as a database.
+In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Express/Node.js backend. And build on top of that with other services, including a MongoDB database.
 
 ### Dockerfile
 
@@ -41,11 +41,11 @@ COPY ./index.js ./index.js
 CMD node index.js
 ```
 
-FROM instruction tells us that the base image is node:16. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
+FROM instruction will tell Docker that the base for the image should be node:16. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with the same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
 
-I included one additional instruction, WORKDIR, to make sure we don't interfere with the contents that the image already had. It will ensure all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the image, it will be created. 
+I included one additional instruction, WORKDIR, to make sure we don't interfere with the contents that the image already had. It will ensure all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the base image, it will be automatically created. 
 
-If we do not specify a WORKDIR we risk overwriting important files by accident. If you check the root (_/_) of the node:16 with _docker run node:16 ls_ image you can notice all of the directories and files that are already included in the image since we use the node:16 as the base image.
+If we do not specify a WORKDIR we risk overwriting important files by accident. If you check the root (_/_) of the node:16 image with _docker run node:16 ls_, you can notice all of the directories and files that are already included in the image.
 
 Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:
 
@@ -55,7 +55,7 @@ $ docker build -t fs-hello-world .
 ...
 ```
 
-So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, simple dot will mean the Dockerfile in <i>this</i> directory, that is why the command ends with a dot. After the build is finished you can run it with _docker run fs-hello-world_.
+So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_.
 
 As images are just files, they can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.
 
@@ -103,7 +103,7 @@ COPY . .
 CMD DEBUG=playground:* npm start
 ```
 
-Let's build the image from that with command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container, the format is _-p host:application_.
+Let's build the image from the Dockerfile with a command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.
 
 ```console
 $ docker run -p 3123:3000 express-server
@@ -120,7 +120,7 @@ The application is now running! Let's test it by sending a GET request to [http:
 
 Shutting it down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. As an argument it needs the name or id of the container.
 
-Here I choose to kill it with the ID. The beginning of the ID is enough for docker to know which container I mean.
+Here I choose to kill it with the ID. The beginning of the ID is enough for Docker to know which container I mean.
 
 ```
 $ docker container ls
@@ -139,9 +139,9 @@ There are a few steps we need to change to create a more comprehensive Dockerfil
 
 When we ran npm install on our machine, in some cases **node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.
 
-This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those in host macihne. The easy rule of thumb is to only copy the files that make sense to push into Github. Build artefacts or dependencies should not be copied since those can be installed during the build process.
+This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to Github. Build artefacts or dependencies should not be copied since those can be installed during the build process.
 
-We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of <i>.dockerignore</i>
+We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of a <i>.dockerignore</i>
 
 ```
 .dockerignore
@@ -150,7 +150,7 @@ node_modules
 Dockerfile
 ```
 
-However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step. _Dockerfile_ changes to:
+However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step. The _Dockerfile_ changes to:
 
 ```bash
 FROM node:16
@@ -225,9 +225,9 @@ There are 2 rules of thumb you should follow when creating images:
 
 Smaller images are more secure by having less attack surface area, and smaller images also move faster in deployment pipelines.
 
-Snyk has a great list of 10 best practices for node/express containerization, read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
+Snyk has a great list of 10 best practices for node/express containerization. Read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
-One big carelessness we have left is having the application running as root instead of using a user with less priviledges. Let's do a final fix to the Dockerfile:
+One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let's do a final fix to the Dockerfile:
 
 ```bash
 FROM node:16
@@ -284,7 +284,7 @@ docker-compose version 1.29.2, build 5becea4c
 
 And now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
 
-Create file **docker-compose.yml** and place it next to the Dockerfile, at the root of the project. The file content is
+Create file **docker-compose.yml** and place it at the root of the project, next to the Dockerfile. The file content is
 
 ```yaml
 version: '3.8'            # Version 3.8 is quite new and should work
@@ -329,7 +329,7 @@ When you are developing software, containerization can be used in various ways t
 
 It may not be the best option to move your entire development environment into a container, but if that's what you want it's possible. We will revisit this idea at the end of this part. But until then, <i>run the node application itself outside of containers</i>.
 
-The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a mongodb image. Docker Hub is the default place where docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker I chose that one. With a quick search I found [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
+The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a mongodb image. Docker Hub is the default place where Docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker I chose that one. With a quick search I found [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
 Rename the <i>docker-compose.yml</i> you did for previous exercise and create another <i>docker-compose.yml</i> that looks like following:
 
@@ -347,13 +347,13 @@ services:
       MONGO_INITDB_DATABASE: the_database
 ```
 
-Meaning of the two first environment variables defined above are explained on the Docker Hub page:
+The meaning of the two first environment variables defined above is explained on the Docker Hub page:
 
 > <i>These variables, used in conjunction, create a new user and set that user's password. This user is created in the admin authentication database and given the role of root, which is a "superuser" role.</i>
 
 The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name. 
 
-Now start the MongoDB with _docker-compose up -d_. It will run it in the background and you can view the logs with _docker-compose logs -f_, the _-f will ensure we <i>follow</i> the logs.
+Now start the MongoDB with _docker-compose up -d_. It will run it in the background, and you can view the logs with _docker-compose logs -f_. The _-f_ will ensure we <i>follow</i> the logs.
 
 As said previously, currently we <strong>do not</strong> want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option in the later in this part.
 
@@ -400,7 +400,7 @@ db.todos.insert({ text: 'Write code', done: true });
 db.todos.insert({ text: 'Learn about containers', done: false });
 ```
 
-This file shall initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.
+This file will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.
 
 We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file init-mongo.js to the container. Let's do the latter.
 
@@ -440,7 +440,7 @@ Now starting the express application with the correct environment variable shoul
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
-Let's check that the http://localhost:8000/todos returns all todos. It should return the two todos we initialized. We can and should also use Postman to test the basic functionality of the app such as adding or deleting a todo.
+Let's check that the http://localhost:8000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo.
 
 ### Persisting data with volumes
 
@@ -503,7 +503,7 @@ Now the volume is created but managed by Docker. After starting the application 
 
 > In this exercise, submit the entire express application with the Dockerfile AND the docker-compose.yml.
 
-The todo application has no proper implementation of routes for getting one todo (GET <i>/todos/:id</i>) and updateing one todo (PUT <i>/todos/:id</i>). Fix the code.
+The todo application has no proper implementation of routes for getting one todo (GET <i>/todos/:id</i>) and updating one todo (PUT <i>/todos/:id</i>). Fix the code.
 
 </div>
 
@@ -515,13 +515,13 @@ The todo application has no proper implementation of routes for getting one todo
 
 > \- Matti Luukkainen
 
-When developing with containers, we need to learn new tools for debugging since we can not just "console.log" everything. When code has a bug you may often be in a state where at least something works so you can work forward from that. Configuration most often is in either of the two states: 1. working or 2. broken. We'll go over a few tools to help when your application is in the latter state.
+When developing with containers, we need to learn new tools for debugging since we can not just "console.log" everything. When code has a bug, you may often be in a state where at least something works so you can work forward from that. Configuration most often is in either of the two states: 1. working or 2. broken. We will go over a few tools that can help when your application is in the latter state.
 
-When developing software, you can safely progress step by step, all the time verifying that what you have coded, behaves as expeced. This is often not the case when doing configurations, the configuration one is writing is often broken until when it is finished. So when you write a long docker-compose.yml or Dockerfile and it does not work, you need to take a moment and think about the various ways you could confirm something is working.
+When developing software, you can safely progress step by step, all the time verifying that what you have coded behaves as expected. Often, this is not the case when doing configurations. The configuration you may be writing can be broken until the moment it is finished. So when you write a long docker-compose.yml or Dockerfile and it does not work, you need to take a moment and think about the various ways you could confirm something is working.
 
 <i>Question Everything</i> is still applicable here. As said in [part 3](/en/part3/saving_data_to_mongo_db): The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possible sources of error one by one.
 
-For myself the most important method of debugging is stopping and thinking about what I'm trying to accomplish instead of just bashing my head at the problem. Often there is a simple alternate solution or quick google search that will get me moving forward. 
+For myself, the most valuable method of debugging is stopping and thinking about what I'm trying to accomplish instead of just bashing my head at the problem. Often there is a simple, alternate, solution or quick google search that will get me moving forward. 
 
 #### exec
 
@@ -577,13 +577,13 @@ root@7edcb36aff08:/# cd /usr/share/nginx/html/
 root@7edcb36aff08:/# rm index.html
 ```
 
-Now if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let's replace it with one containing the correct contents:
+Now, if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let's replace it with one containing the correct contents:
 
 ```console
 root@7edcb36aff08:/# echo "Hello, exec!" > index.html
 ```
 
-Refresh the page and our message is displayed! So exec can be used to interact with the containers. Remember that all of the changes are lost when the container is deleted so if you want to preserve them you can use _commit_ just as we did in [previous section](/en/part12/introduction_to_containers#other-docker-commands).
+Refresh the page, and our message is displayed! Now we know how exec can be used to interact with the containers. Remember that all of the changes are lost when the container is deleted. To preserve the changes, you must use _commit_ just as we did in [previous section](/en/part12/introduction_to_containers#other-docker-commands).
 
 </div>
 
@@ -601,7 +601,7 @@ The command to open CLI when inside the container is _mongo_
 
 The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.yml.
 
-* Step 1: Run mongodb
+* Step 1: Run MongoDB
 * Step 2: Use docker exec to get inside the container
 * Step 3: Open mongo cli
 
@@ -647,13 +647,11 @@ Ensure that you see the new todo both in the express app and when querying from 
 
 ### Redis
 
-
 [Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
-
 
 By default Redis works <i>in-memory</i>, which means that it does not store data persistently. 
 
-An excellent use case for Redis is to use it as a <i>cache</i>. Caches are often used to store data that is otherwise slow to fetch, and save it until it's no longer valid and then fetch the data and store it to the cache.
+An excellent use case for Redis is to use it as a <i>cache</i>. Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
 
 Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one.
 
@@ -665,9 +663,9 @@ Redis has nothing to do with containers. But since we are already able to add <i
 
 #### Exercise 12.9: Setup Redis to project
 
-> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+> In this exercise, submit the entire Express application, with the Dockerfile AND docker-compose.yml.
 
-The express server has already been defined to use Redis by giving it the *REDIS_URL* environment variable. Read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add Redis to the docker-compose.yml by defining another service after mongo:
+The Express server has already been configured to use Redis, and it is only missing the *REDIS_URL* environment variable. The application will use that environment variable to connect to the Redis. Read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add Redis to the docker-compose.yml by defining another service after mongo:
 
 ```yml
 services:
@@ -677,7 +675,7 @@ services:
     ???
 ```
 
-Since the Docker Hub page doesn't have all info we can use Google to aid us. The default port for Redis is found by doing so:
+Since the Docker Hub page doesn't have all info, we can use Google to aid us. The default port for Redis is found by doing so:
 
 ![](../../images/12/redis_port_by_google.png)
 
