@@ -9,7 +9,7 @@ lang: en
 
 ### React
 
-Let's create and containerize a React application next. I'll choose npm as the package manager even though create-react-app defaults to yarn.
+Let's create and containerize a React application next. Let us choose npm as the package manager even though create-react-app defaults to yarn.
 
 ```
 $ npx create-react-app hello-front --use-npm
@@ -20,7 +20,7 @@ $ npx create-react-app hello-front --use-npm
 
 The create-react-app already installed all dependencies for us, so we did not need to run npm install here.
 
-The next step is to turn the code, js and modules, into production-ready static files. The create-react-app already has _build_ as an npm script so let's use that:
+The next step is to turn the JavaScript code and CSS, into production-ready static files. The create-react-app already has _build_ as an npm script so let's use that:
 
 ```
 $ npm run build
@@ -32,9 +32,7 @@ $ npm run build
   ...
 ```
 
-Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile.
-
-`Dockerfile`
+Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
 
 ```Dockerfile
 FROM node:16
@@ -50,7 +48,7 @@ RUN npm run build
 
 That looks about right. Let's build it and see if we are on the right track. Our goal is to have the build succeed without errors. Then we will use bash to check inside of the container to see if the files are there.
 
-```
+```bash
 $ docker build . -t hello-front
   [+] Building 172.4s (10/10) FINISHED 
 
@@ -65,7 +63,7 @@ root@98fa9483ee85:/usr/src/app# ls build/
 
 A valid option for serving static files now that we already have Node in the container is [serve](https://www.npmjs.com/package/serve). Let's try installing serve and serving the static files while we are inside the container.
 
-```
+```bash
 root@98fa9483ee85:/usr/src/app# npm install -g serve
 
   added 88 packages, and audited 89 packages in 6s
@@ -84,44 +82,41 @@ root@98fa9483ee85:/usr/src/app# serve build
 
 Great! Let's ctrl+c and exit out and then add those to our Dockerfile.
 
-```
-  ^C
-  INFO: Gracefully shutting down. Please wait...
-
-root@98fa9483ee85:/usr/src/app# exit
-  exit
-```
-
-The installation of serve turns into a RUN in the Dockerfile. This way the dependency is installed during the build process. And the command to serve build directory will become the command to start the container.
-
-`Dockerfile`
+The installation of serve turns into a RUN in the Dockerfile. This way the dependency is installed during the build process. The command to serve build directory will become the command to start the container:
 
 ```Dockerfile
-...
-RUN npm install -g serve
+FROM node:16
 
-CMD ["serve", "build"]
+WORKDIR /usr/src/app
+
+COPY . .
+
+RUN npm ci
+
+RUN npm run build
+
+RUN npm install -g serve # highlight-line
+
+CMD ["serve", "build"] # highlight-line
 ```
 
-Our CMD now includes square brackets and as a result we now used the exec form of CMD. The truth is that CMD actually has **three** different forms. The exec form is preferred and you can read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info about them.
+Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
 
-And then build _docker build -t hello-front ._ and run it _docker run -p 5000:5000 hello-front_. The app will then be available in http://localhost:5000.
+When we now build the image with _docker build -t hello-front_ and run it with _docker run -p 5000:5000 hello-front_, the app will be available in http://localhost:5000.
 
 ### Using multiple stages
 
-While serve is a <i>valid</i> option we can do better. With containers, a good goal is to create the containers so that they do not contain anything irrelevant so that they have a small number of dependencies and are less likely to break or become vulnerable over time. 
+While serve is a <i>valid</i> option we can do better. A good goal is to create Docker images so that they do not contain anything irrelevant. With a minimal number of dependencies, images are less likely to break or become vulnerable over time. 
 
-Multi-stage builds are designed for splitting the build process into multiple stages. Conventional options for stages are the build stage and test stage. The main goal for using stages is to limit the size of the image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
+[Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) are designed for splitting the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
 
 With multi-stage builds, a tried and true solution like [nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
 
 Let's use the previous Dockerfile but change the FROM to include the name of the stage:
 
-`Dockerfile`
-
 ```Dockerfile
 # The first FROM is now a stage called build-stage
-FROM node:16 AS build-stage
+FROM node:16 AS build-stage # highlight-line
 
 WORKDIR /usr/src/app
 
@@ -132,17 +127,16 @@ RUN npm ci
 RUN npm run build
 
 # This is a new stage, everything before this is gone, except the files we want to COPY
-FROM nginx:1.20-alpine
+FROM nginx:1.20-alpine # highlight-line
 
 # COPY the directory build from build-stage to /usr/share/nginx/html
 # The target location here was found from the docker hub page
-COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html
-
+COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-line
 ```
 
-Now we have declared the build stage and only moved the relevant files, the build directory with static content, into an image. And that image is ready to serve the static content.
+We have declared also <i>another stage</i> where only the relevant files of the first stage (the <i>build</i> directory, that contains the static content) are moved.
 
-The default port will be 80 for Nginx, so something like _-p 8000:80_ will work.
+Aftew we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the run command need to be changed a bit.
 
 Multi-stage builds also include some internal optimizations that may affect your builds. As an example, multi-stage builds skip stages that are not used. If we wish to use a stage to replace a part of a build pipeline, like testing or notifications, we must pass **some** data to the following stages. In some cases this is justified: copy the code from the testing stage to the build stage. This ensures that you are building the tested code.
 
