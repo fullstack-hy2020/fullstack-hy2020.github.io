@@ -753,9 +753,8 @@ If the application does not behave as expected, a direct access to database may 
 
 ### Persisting data with Redis
 
-In the previous section, I said that <i>by default</i> Redis does not persist the data. However, the persistence is easy to toggle on. We will only need to start the Redis with a different command, as instructed by the docker hub page:
+In the previous section, it was mentioned that <i>by default</i> Redis does not persist the data. However, the persistence is easy to toggle on. We only need to start the Redis with a different command, as instructed by the [Docker hub page](https://hub.docker.com/_/redis):
 
-`docker-compose.yml`
 ```yml
 services:
   redis:
@@ -765,11 +764,12 @@ services:
       - ./redis_data:/data
 ```
 
-Remember to add the directory to .gitignore.
+The data will now be persisted to directory <i>redis_data</i> of the host machine. 
+Remember to add the directory to .gitignore!
 
-#### Other functionality Redis has
+#### Other functionality of Redis
 
-In addition to the most basic get & set, Redis can automatically expire keys. And manage multiple key-value pairs at the same time.
+In addition to the most basic GET, SET and DEL operations on keys, Redis can automatically expire keys, and manage multiple key-value pairs at the same time.
 
 Redis can also be used to Publish messages and Subscribe to messages (PubSub or Publish-subscribe pattern). Publish-subscribe is great for having multiple applications communicate with each other. Redis works as the message broker between two or more applications, where one of them is publishing messages by sending them to Redis, and the other one is subscribed to those messages. We will not explore messaging further in this part.
 
