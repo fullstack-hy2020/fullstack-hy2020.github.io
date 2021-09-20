@@ -43,9 +43,9 @@ CMD node index.js
 
 FROM instruction will tell Docker that the base for the image should be node:16. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with the same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
 
-I included one additional instruction, WORKDIR, to make sure we don't interfere with the contents that the image already had. It will ensure all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the base image, it will be automatically created. 
+The WORKDIR instruction was slipped in to ensure we don't interfere with the contents of the image. It will guarantee all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the base image, it will be automatically created.
 
-If we do not specify a WORKDIR we risk overwriting important files by accident. If you check the root (_/_) of the node:16 image with _docker run node:16 ls_, you can notice all of the directories and files that are already included in the image.
+If we do not specify a WORKDIR, we risk overwriting important files by accident. If you check the root (_/_) of the node:16 image with _docker run node:16 ls_, you can notice all of the directories and files that are already included in the image.
 
 Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:
 
@@ -114,13 +114,13 @@ $ docker run -p 3123:3000 express-server
 Tue, 29 Jun 2021 10:55:10 GMT playground:server Listening on port 3000
 ```
 
-> If yours doesn't work, skip to the next section. There I explain why it doesn't work even if you followed the steps correctly.
+> If yours doesn't work, skip to the next section. There is an explanation why it may not work even if you followed the steps correctly.
 
 The application is now running! Let's test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).
 
-Shutting it down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. As an argument it needs the name or id of the container.
+Shutting it down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. It needs the name or id of the container as an argument.
 
-Here I choose to kill it with the ID. The beginning of the ID is enough for Docker to know which container I mean.
+By the way, when using id as the argument, the beginning of the ID is enough for Docker to know which container we mean.
 
 ```
 $ docker container ls
@@ -329,7 +329,7 @@ When you are developing software, containerization can be used in various ways t
 
 It may not be the best option to move your entire development environment into a container, but if that's what you want it's possible. We will revisit this idea at the end of this part. But until then, <i>run the node application itself outside of containers</i>.
 
-The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a mongodb image. Docker Hub is the default place where Docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker I chose that one. With a quick search I found [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
+The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a MongoDB image. Docker Hub is the default place where Docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker it's a good choice. With a quick search, we can find [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
 Rename the <i>docker-compose.yml</i> you did for previous exercise and create another <i>docker-compose.yml</i> that looks like following:
 
@@ -452,7 +452,7 @@ There are two distinct methods to store the data:
 - Declaring a location in your filesystem (called bind mount)
 - Letting Docker decide where to store the data (volume)
 
-I prefer the first choice in most cases whenever you **really** need to avoid deleting the data. Let's see both in action with docker-compose:
+I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let's see both in action with docker-compose:
 
 ```yml
 services:
@@ -471,7 +471,7 @@ services:
 
 The above will create a directory called *mongo\_data* to your local filesystem and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
 
-A similiar outcome can be had with a named volume:
+A similar outcome can be had with a named volume:
 
 ```yml
 services:

@@ -251,11 +251,11 @@ Installing new dependencies is a headache for a development setup like this. One
 
 ### Communication between containers in a docker network
 
-The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we can see how the network and DNS work.
+The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we shall see how the network and DNS work.
 
-<i>Busybox</i> is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux" and we definitely can use it to our advantage.
+<i>Busybox</i> is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
 
-Busybox can help us debug our configurations. So if you get lost in the later exercises of this section you should use Busybox to find out what works and what doesn't. Let's use it to explore what I just said. That containers are inside a network and you can easily connect between them.
+Busybox can help us debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That containers are inside a network and you can easily connect between them.
 
 `docker-compose.yml`
 ```yml
