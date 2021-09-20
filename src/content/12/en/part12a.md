@@ -127,7 +127,7 @@ Let us run the command
 § docker container run hello-world
 ```
 
-There will be a lot of output, but I will split it into multiple sections, which we can decipher together. The lines are numbered by me so that it is easier to follow the explanation. Your output will not have the numbers.
+There will be a lot of output, but let's split it into multiple sections, which we can decipher together. The lines are numbered by me so that it is easier to follow the explanation. Your output will not have the numbers.
 
 ```bash
 1. Unable to find image 'hello-world:latest' locally
@@ -291,7 +291,7 @@ $ docker start -i hopeful_clarke
 root@b8548b9faec3:/#
 ```
 
-Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. I found the install instructions from Google. We will omit using sudo since we are already root.
+Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root.
 
 ```console
 root@b8548b9faec3:/# apt-get update
