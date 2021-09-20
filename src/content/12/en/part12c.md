@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-### React
+### React in container
 
 Let's create and containerize a React application next. Let us choose npm as the package manager even though create-react-app defaults to yarn.
 
@@ -136,7 +136,7 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-lin
 
 We have declared also <i>another stage</i> where only the relevant files of the first stage (the <i>build</i> directory, that contains the static content) are moved.
 
-Aftew we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the run command need to be changed a bit.
+After we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the run command need to be changed a bit.
 
 Multi-stage builds also include some internal optimizations that may affect your builds. As an example, multi-stage builds skip stages that are not used. If we wish to use a stage to replace a part of a build pipeline, like testing or notifications, we must pass **some** data to the following stages. In some cases this is justified: copy the code from the testing stage to the build stage. This ensures that you are building the tested code.
 
@@ -150,11 +150,11 @@ Multi-stage builds also include some internal optimizations that may affect your
 
 > In this exercise, submit <i>at least</i> the Dockerfile you created.
 
-The following repository contains a React application in the react-app directory. 
-
-<https://github.com/fullstack-hy2020/part12-containers-applications/tree/main/react-app>
+The repository <https://github.com/fullstack-hy2020/part12-containers-applications> contains a frontend for the todo backend in the react-app directory. 
 
 Copy the contents into your repository. The react-app directory includes a README on how to start the application.
+
+Try first to run the fronend outside the container and ensure that it works with the backend.
 
 Containerize the application and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container.
 
@@ -162,15 +162,18 @@ Containerize the application and use [ENV](https://docs.docker.com/engine/refere
 
 > In this exercise, submit the entire React application, with the Dockerfile.
 
-We can use multiple stages to do testing during the build process. The build process will fail as the tests fail.
+One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the 
+whole build process will also fail. Note that it is perhaps not in general the best idea to move <i>all testing</i> to be done during building an image but there may be <i>some</i> containerization related tests when this might be a good idea. 
 
-Extract a component `Todo` that represents a single todo. Write a test for the new component and add running tests into the build process. You can add a new stage for the test if you wish to do so.
+Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
+
+You can add a new build stage for the test if you wish to do so. If you do so, remember to read again the last paragraph before the exercise 12.13!
 
 </div>
 
 <div class="content">
 
-### Developing in containers
+### Development in containers
 
 Let's move the todo application development to a container. There are a few reasons why you would want to do that:
 
@@ -368,7 +371,7 @@ Here is a possibly helpful image illustrating the connections within the docker 
 </div>
 <div class="content">
 
-#### Communications between containers in a more ambitious environment
+### Communications between containers in a more ambitious environment
 
 Next, we will add a reverse proxy to our docker-compose.yml. A reverse proxy will be the single point of entry to our application, and we can hide multiple servers behind it. The final goal will be to set both the react application and the express application behind the reverse proxy. There are multiple different options, here are some examples ordered by initial release from newer to older: Traefik, Caddy, Nginx and Apache.
 
