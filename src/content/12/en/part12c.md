@@ -338,7 +338,9 @@ Now that you know how easy it is to find other services in netword debined with 
 
 #### Exercise 12.15: Run todo-back in a development container
 
-Use the volumes and Nodemon to enable the development of the backend while it is running inside a container.
+Use the volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container.
+
+> This exercise is done by modifying the <i>docker-compose.yml</i> in the express-app directory
 
 You will also need to rethink the connections between backend and MongoDB / Redis. Thankfully docker-compose can include environment variables that will be passed to the application:
 
@@ -355,7 +357,7 @@ services:
       - MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database
 ```
 
-> The URLs (localhost) are purposefully wrong, you will need to set the correct values
+The URLs (localhost) are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console,</i> if and when things blow up, the error messages give you hint what is broken.
 
 Here is a possibly helpful image illustrating the connections within the docker network:
 
