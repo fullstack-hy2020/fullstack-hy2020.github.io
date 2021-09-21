@@ -537,6 +537,10 @@ Make sure that the todo-front works with todo-back. It will require changes to t
 
 If you already got this working during a previous exercise you may skip this.
 
+Make sure that the development environment is now fully functionat, that is
+- all features of the todo app wod
+- you can edit the source files <i>and</i> the changes take effect through hot reload in case of frontend and by reloading the app in case of backend
+
 </div>
 
 <div class="content">
@@ -545,15 +549,15 @@ If you already got this working during a previous exercise you may skip this.
 
 Containers are fun tools to use in development, but the best use case for them is in the production environment. There are many more powerful tools than docker-compose to run containers in production.
 
-Tools like Kubernetes allow us to manage containers on a completely new level. It hides away the physical machines and allows us, developers, to worry less about the infrastructure.
+Heavy weight container orchestration tools like [Kubernetes](https://kubernetes.io/) allow us to manage containers on a completely new level. Theese tools hide away the physical machines and allows us, the developers, to worry less about the infrastructure.
 
-If you are interested in learning more in-depth about containers come to the [DevOps with Docker](https://devopswithdocker.com) course and you can find more about Kubernetes in the advanced 5 credit [DevOps with Kubernetes](https://devopswithkubernetes.com) course. You should now have the skills to complete both of them.
+If you are interested in learning more in-depth about containers come to the [DevOps with Docker](https://devopswithdocker.com) course and you can find more about Kubernetes in the advanced 5 credit [DevOps with Kubernetes](https://devopswithkubernetes.com) course. You should now have the skills to complete both of them!
 
 </div>
 
 <div class="tasks">
 
-### Exercises 12.19.
+### Exercises 12.19.-12.21.
 
 #### Exercise 12.19:
 
@@ -567,6 +571,38 @@ Please use the following structure for this exercise:
 ├── express-app
 ├── react-app
 └── docker-compose.yml
+```
+
+#### Exercise 12.20:
+
+Do a simillar containerized development environment to one of <i>your own</i> full stack apps that you have created during the course or at your freetime. You should structure the app to submission repository as follows:
+
+```console
+└── my-app
+    ├── frontend
+    |    └── dev.Dockerfile
+    ├── backend
+    |    └── dev.Dockerfile
+    └── docker-compose.dev.yml
+```
+
+#### Exercise 12.21:
+
+Do a simillar containerized development environment to one of <i>your own</i> full stack apps that you have created during the course or at your freetime. 
+
+Finish this part by creating a contanerized <i>production setup</i> to your own full stack app.
+Structure the app to submission repository as follows:
+
+```console
+└── my-app
+    ├── frontend
+    |    ├── dev.Dockerfile
+    |    └── Dockerfile
+    ├── backend
+    |    └── dev.Dockerfile
+    |    └── Dockerfile
+    ├── docker-compose.dev.yml
+    └── docker-compose.yml
 ```
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats).
