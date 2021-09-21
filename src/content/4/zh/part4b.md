@@ -1345,8 +1345,8 @@ afterAll(() => {
 <!-- This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources. -->
 这种通过发出 HTTP 请求和用 Mongoose 检查数据库来测试 API 的方法，绝不是对服务器应用进行 API 集成测试的唯一或最佳方法。 没有通用的编写测试的最佳方法，因为这完全取决于被测试的应用和可用资源。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6). -->
-您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6). -->
+您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

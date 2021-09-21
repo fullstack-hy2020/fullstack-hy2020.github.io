@@ -1161,7 +1161,7 @@ Todavía hay margen de mejora, pero es hora de seguir adelante.
 
 Esta forma de probar la API, al realizar solicitudes HTTP e inspeccionar la base de datos con Mongoose, no es de ninguna manera la única ni la mejor forma de realizar pruebas de integración a nivel de API para aplicaciones de servidor. No existe una mejor forma universal de escribir pruebas, ya que todo depende de la aplicación que se esté probando y de los recursos disponibles.
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-6</i> de [este repositorio de Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part4-6</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).
 
 </div>
 
