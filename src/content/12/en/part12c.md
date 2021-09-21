@@ -340,8 +340,6 @@ Now that you know how easy it is to find other services in netword debined with 
 
 Use the volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container.
 
-> This exercise is done by modifying the <i>docker-compose.yml</i> in the express-app directory
-
 You will also need to rethink the connections between backend and MongoDB / Redis. Thankfully docker-compose can include environment variables that will be passed to the application:
 
 ```yaml
@@ -369,13 +367,18 @@ Here is a possibly helpful image illustrating the connections within the docker 
 
 ### Communications between containers in a more ambitious environment
 
-Next, we will add a reverse proxy to our docker-compose.yml. A reverse proxy will be the single point of entry to our application, and we can hide multiple servers behind it. The final goal will be to set both the react application and the express application behind the reverse proxy. There are multiple different options, here are some examples ordered by initial release from newer to older: Traefik, Caddy, Nginx and Apache.
+Next, we will add a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to our docker-compose.yml. According to wikipedia
 
-Let's pick [Nginx](https://hub.docker.com/_/nginx). Create a file nginx.conf in the project root and take this template for a configuration. We will need to do minor edits to have our application running:
+> <i>A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the reverse proxy server itself.</i>
 
-`nginx.conf`
+So in our case the reverse proxy will be the single point of entry to our application, and 
+the final goal will be to set both the React frontend and the Express backend behind the reverse proxy. 
 
-```conf
+There are multiple different options for a reverse proxy implementation. such as  Traefik, Caddy, Nginx and Apache (ordered by initial release from newer to older).
+
+Our pick is [Nginx](https://hub.docker.com/_/nginx). Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running:
+
+```bash
 # events is required, but defaults are ok
 events { }
 
