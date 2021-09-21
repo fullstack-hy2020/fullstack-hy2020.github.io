@@ -50,7 +50,7 @@ If you have only ever used a graphical user interface and never touched e.g. Lin
 
 Step 1: Read the text below the Warning header.
 
-Step 2: Clone this [repository](https://github.com/fullstack-hy2020/part12-containers-applications) into your own submission repository into part12.
+Step 2: Download this [repository](https://github.com/fullstack-hy2020/part12-containers-applications) and make it your submission repository for this part.
 
 Step 3: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save that file into your repository as file <i>script-answers/exercise12_1.txt</i>. The directory <i>script-answers</i> was created in the previous step.
 
@@ -59,9 +59,9 @@ Step 3: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save
 
 ### Submitting exercises and earning credits ###
 
-Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/fs-containers)</i>.
+Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>.
 
-Completing this part on containers will get you 1 credit.
+Completing this part on containers will get you 1 credit. Note that you need to do ell the exercises for earning the credit or the certificate.
 
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
@@ -187,9 +187,8 @@ The output contains a few new things for us to learn. <i>Docker daemon</i> is a 
 
 ### Exercise 12.2
 
-Some of these exercises do not generate anything for you to submit.
-
-Instead, use [script](https://man7.org/linux/man-pages/man1/script.1.html) to record commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".
+Some of these exercises do not require you to write any code or configurations to a file.
+In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".
 
 If _script_ does not work, you can just copy-paste all commands you used into a text file.
 
@@ -203,11 +202,11 @@ Step 1. Run an Ubuntu container with the command given by hello-world
 
 The step 1 will connect you straight into the container with bash. You will have access to all of the files and tools inside of the container. The following steps are run within the container:
 
-Step 2. Create directory `/usr/src/app`
+Step 2. Create directory <i>/usr/src/app</i>
 
-Step 3. Create a file `/usr/src/app/index.js`
+Step 3. Create a file <i>/usr/src/app/index.js</i>
 
-Step 4. Run `exit` to quit from the container
+Step 4. Run <i>exit</i> to quit from the container
 
 Google should be able to help you with creating directories and files.
 
