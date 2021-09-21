@@ -175,22 +175,20 @@ You can add a new build stage for the test if you wish to do so. If you do so, r
 
 ### Development in containers
 
-Let's move the todo application development to a container. There are a few reasons why you would want to do that:
+Let's move the whole todo application development to a container. There are a few reasons why you would want to do that:
 
-1. To keep the environment similar between development and production to avoid bugs that appear only in the production environment
-2. To avoid differences between developers and their personal environments that lead to difficulties in application development
-3. To help new team members hop in by having them install container runtime - and requiring nothing else.
+- To keep the environment similar between development and production to avoid bugs that appear only in the production environment
+- To avoid differences between developers and their personal environments that lead to difficulties in application development
+- To help new team members hop in by having them install container runtime - and requiring nothing else.
 
-These are great reasons. The tradeoff is that we may encounter some unconventional behavior when we aren't running the applications like we are used to. We will need to do at least two things to move the application to a container:
+These all are great reasons. The tradeoff is that we may encounter some unconventional behavior when we aren't running the applications like we are used to. We will need to do at least two things to move the application to a container:
 
-1. Start the application in development mode
-2. Access the files with VSCode
+- Start the application in development mode
+- Access the files with VSCode
 
-And let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called _dev.Dockerfile_. Let's just place this new file in the root of the project.
+Let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called _dev.Dockerfile_ ansd place the new file in the root of the project.
 
 Starting the create-react-app in development mode should be easy. Let's start with the following:
-
-`dev.Dockerfile`
 
 ```Dockerfile
 FROM node:16
@@ -209,12 +207,13 @@ CMD ["npm", "start"]
 During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so _docker build -f ./dev.Dockerfile -t hello-front-dev ._ will build the image. The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
 
 The second task, accessing the files with VSCode, is not done yet. There are at least two ways of doing this: 
-  1. [The Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) 
-  2. Volumes, the same thing we used to preserve data with the database
+
+- [The Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) 
+- Volumes, the same thing we used to preserve data with the database
 
 Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_ and if that works then we will move the configuration to a docker-compose file. To use the _-v_ we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for you. Try this with _echo $(pwd)_ in your command line. We can use that as the left side for _-v_ to map the current directory to the inside of the container or you can use the full directory path.
 
-```
+```bash
 $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
 
   Compiled successfully!
@@ -222,11 +221,9 @@ $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
   You can now view hello-front in the browser.
 ```
 
-Now we can edit the src/App.js, and the changes should be hot-loaded to the browser.
+Now we can edit the file <i>src/App.js</i>, and the changes should be hot-loaded to the browser!
 
-Next, let's move that config to a docker-compose.yml. That file should be at the root of the project as well.
-
-`docker-compose.yml`
+Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:
 
 ```yml
 services:
@@ -242,19 +239,18 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-With this _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!
+With this configuration, _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!
 
-Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_. Or add it to the package.json and run _docker build_ again.
+Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
 ### Communication between containers in a docker network
 
 The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we shall see how the network and DNS work.
 
-<i>Busybox</i> is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
+[Busybox](https://www.busybox.net/) is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
 
-Busybox can help us debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That containers are inside a network and you can easily connect between them.
+Busybox can help us to debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That containers are inside a network and you can easily connect between them. Busybox can be added to the mix by changing <i>docker-compose.yml</i> to:
 
-`docker-compose.yml`
 ```yml
 services:
   app:
@@ -267,14 +263,13 @@ services:
     ports:
       - 3000:3000
     container_name: hello-front-dev
-
-  debug-helper:
-    image: busybox
+  debug-helper: # highlight-line
+    image: busybox # highlight-line
 ```
 
 The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this:
 
-```
+```bash
 $ docker-compose up
   Pulling debug-helper (busybox:)...
   latest: Pulling from library/busybox
@@ -291,11 +286,11 @@ $ docker-compose up
   hello-front-dev | > react-scripts start
 ```
 
-This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running I'll use [wget](https://en.wikipedia.org/wiki/Wget) since it's simple and included in Busybox to send a request from the debug-helper to hello-front-dev.
+This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running we can do the requiest with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.
 
-Wget requires the flag _-O_ with _-_ will output the response to the stdout. And then we'll just add the URL: _wget -O - URL_. With Docker Compose we can use _docker-compose run SERVICE COMMAND_ to run a service with a specific command.
+With Docker Compose we can use _docker-compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
 
-```
+```bash
 $ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
 
   Creating react-app_debug-helper_run ... done
@@ -308,11 +303,10 @@ $ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to the other service and to that port. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in docker-compose.yml are only for external access.
+The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in docker-compose.yml are only for external access.
 
-Let's do a few alterations to the docker-compose to emphasize this:
+Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
 
-`docker-compose.yml`
 ```yml
 services:
   app:
@@ -323,20 +317,19 @@ services:
     volumes:
       - ./:/usr/src/app
     ports:
-      - 3210:3000
+      - 3210:3000 # highlight-line
     container_name: hello-front-dev
-
   debug-helper:
     image: busybox
 ```
 
-With _docker-compose up_ the application is available in <http://localhost:3210>. But still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works.
+With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works since the port is still 3000 within the docker network.
 
 ![](../../images/12/busybox_networking_drawio.png)
 
-As the above image illustrates the _docker-compose run_ asks debug-helper to send the request within the network. While the browser would send the request from outside of the network.
+As the above image illustrates _docker-compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
 
-Now that you know how easy it is to find other services in a docker-compose.yml and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
+Now that you know how easy it is to find other services in netword debined with <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
 
 </div>
 <div class="tasks">
@@ -369,6 +362,7 @@ Here is a possibly helpful image illustrating the connections within the docker 
 ![](../../images/12/ex_12_15_backend_drawio.png)
 
 </div>
+
 <div class="content">
 
 ### Communications between containers in a more ambitious environment
