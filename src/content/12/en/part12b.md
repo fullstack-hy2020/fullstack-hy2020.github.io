@@ -49,7 +49,7 @@ If we do not specify a WORKDIR, we risk overwriting important files by accident.
 
 Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:
 
-```
+```bash
 $ docker build -t fs-hello-world . 
 [+] Building 3.9s (8/8) FINISHED
 ...
@@ -122,7 +122,7 @@ Shutting it down is a headache at the moment. Use another terminal and _docker k
 
 By the way, when using id as the argument, the beginning of the ID is enough for Docker to know which container we mean.
 
-```
+```bash
 $ docker container ls
   CONTAINER ID   IMAGE            COMMAND                  CREATED         STATUS         PORTS                                       NAMES
   48096ca3ffec   express-server   "docker-entrypoint.s…"   9 seconds ago   Up 6 seconds   0.0.0.0:3123->3000/tcp, :::3123->3000/tcp   infallible_booth
@@ -253,11 +253,11 @@ CMD npm start
 
 #### Exercise 12.5: Containerizing a node application
 
-The repository you cloned in the previous exercise contains a todo-app. View the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
+The repository you cloned or copied in the first exercise contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
 
 Step 1. Containerize the todo-backend by creating a <i>todo-app/todo-backend/Dockerfile</i> and building an image.
 
-Step 2. Run the todo-backend image with the correct ports open. Make sure the visit counter increases when used through a browser.
+Step 2. Run the todo-backend image with the correct ports open. Make sure the visit counter increases when used through a browser in http://localhost:3000/ (or some other port if you configure so)
 
 Tip: Run the application outside of a container to examine it before starting to containerize.
 
@@ -275,7 +275,7 @@ Install the docker-compose tool from this link: [https://docs.docker.com/compose
 
 Let's check that it works:
 
-```
+```bash
 $ docker-compose -v
 docker-compose version 1.29.2, build 5becea4c
 ```
@@ -311,7 +311,7 @@ Creating files like this that <i>declare</i> what you want instead of script fil
 
 #### Exercise 12.6: docker-compose
 
-Create a todo-app/todo-backend/docker-compose.yml file that works with the node application from the previous exercise.
+Create a <i>todo-app/todo-backend/docker-compose.yml</i> file that works with the node application from the previous exercise.
 
 The visit counter is the only feature that is required to be working.
 
@@ -357,7 +357,7 @@ As said previously, currently we <strong>do not</strong> want to run the Node ap
 
 Run the good old _npm install_ first on your machine to set up the Node application. Then start the application with the relevant environment variable. You can modify the code to set them as the defaults or use the .env file. There is no hurt in putting these keys to GitHub since they are only used in your local development environment. I'll just throw them in with the _npm run dev_ to help you copy-paste.
 
-```
+```bash
 $ MONGO_URL=mongodb://localhost:3456/the_database npm run dev
 ```
 
@@ -378,7 +378,7 @@ This won't be enough; we need to create a user to be authorized inside of the co
 
 In the [MongoDB Docker Hub](https://hub.docker.com/_/mongo) page under "Initializing a fresh instance" is the info on how to execute JavaScript to initialize the database and an user for it.
 
-Let's create a file <i>mongo-init.js</i> and place it in the mongo directory of the express project.
+The exercise project has file <i>todo-app/todo-backend/mongo/mongo-init.js</i> with contents:
 
 ```js
 db.createUser({
@@ -425,7 +425,7 @@ Run _docker-compose -f docker-compose.dev.yml down --volumes_ to ensure that not
 
 If you see an error like this:
 
-```
+```bash
 mongo_database | failed to load: /docker-entrypoint-initdb.d/mongo-init.js
 mongo_database | exiting with code -3
 ```
@@ -434,7 +434,7 @@ you may have a read permission problem. They are not uncommon when dealing with 
 
 Now starting the express application with the correct environment variable should work:
 
-```
+```bash
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
@@ -499,6 +499,8 @@ Now the volume is created but managed by Docker. After starting the application 
 
 #### Exercise 12.7: Little bit of MongoDB coding
 
+Note that this exercise assumes that you have done all the configurations made in material after the exercise 12.5. You should still run the todo-app backend <i>outside a container</i> just the MongoDB is containerized for now.
+
 The todo application has no proper implementation of routes for getting one todo (GET <i>/todos/:id</i>) and updating one todo (PUT <i>/todos/:id</i>). Fix the code.
 
 </div>
@@ -525,7 +527,7 @@ The docker command [exec](https://docs.docker.com/engine/reference/commandline/e
 
 Let's start a web server in the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Let's choose [Nginx](https://www.nginx.com/) which is, among other things, a server capable of serving static HTML files. It has a default index.html that we can replace.
 
-```console
+```bash
 $ docker container run -d nginx
 ```
 
@@ -536,7 +538,7 @@ Ok, now the questions are:
 
 We know how to answer the latter: by listing the running containers.
 
-```console
+```bash
 $ docker container ls
 CONTAINER ID   IMAGE           COMMAND                  CREATED              STATUS                      PORTS     NAMES
 3f831a57b7cc   nginx           "/docker-entrypoint.…"   About a minute ago   Up About a minute           80/tcp    keen_darwin
@@ -546,7 +548,7 @@ Yes! We got the first question answered as well. It seems to listen on port 80, 
 
 Let's shut it down and restart with the _-p_ flag to have our browser access it.
 
-```console
+```bash
 $ docker container stop keen_darwin
 $ docker container rm keen_darwin
 
@@ -555,7 +557,7 @@ $ docker container run -d -p 8080:80 nginx
 
 Let's look at the app by going to http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix the it. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
 
-```console
+```bash
 $ docker container ls
 CONTAINER ID   IMAGE     COMMAND                  CREATED              STATUS              PORTS                                   NAMES
 7edcb36aff08   nginx     "/docker-entrypoint.…"   About a minute ago   Up About a minute   0.0.0.0:8080->80/tcp, :::8080->80/tcp   wonderful_ramanujan
@@ -568,14 +570,14 @@ Now that we are in, we need to find the faulty file and replace it. Quick Google
 
 Let's move to the directory and delete the file
 
-```console
+```bash
 root@7edcb36aff08:/# cd /usr/share/nginx/html/
 root@7edcb36aff08:/# rm index.html
 ```
 
 Now, if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let's replace it with one containing the correct contents:
 
-```console
+```bash
 root@7edcb36aff08:/# echo "Hello, exec!" > index.html
 ```
 
@@ -603,7 +605,7 @@ The mongo CLI will require the username and password flags to authenticate corre
 
 When you have connected to the mongo cli you can ask it to show dbs inside:
 
-```console
+```bash
 > show dbs
 admin         0.000GB
 config         0.000GB
@@ -613,20 +615,20 @@ the_database  0.000GB
 
 To access the correct database:
 
-```console
+```>bash
 > use the_database
 ```
 
 And finally to find out the collections:
 
-```console
+```bash
 > show collections
 todos
 ```
 
 We can now access the data in those collections:
 
-```
+```bash
 > db.todos.find({})
 { "_id" : ObjectId("611e54b688ddbb7e84d3c46b"), "text" : "Write code", "done" : true }
 { "_id" : ObjectId("611e54b688ddbb7e84d3c46c"), "text" : "Learn about containers", "done" : false }
@@ -659,7 +661,7 @@ Redis has nothing to do with containers. But since we are already able to add <i
 
 #### Exercise 12.9: Setup Redis to project
 
-The Express server has already been configured to use Redis, and it is only missing the *REDIS_URL* environment variable. The application will use that environment variable to connect to the Redis. Read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add Redis to the <i>todo-app/todo-backend/docker-compose.dev.yml<> by defining another service after mongo:
+The Express server has already been configured to use Redis, and it is only missing the *REDIS_URL* environment variable. The application will use that environment variable to connect to the Redis. Read through the [Docker Hub page for Redis](https://hub.docker.com/_/redis), add Redis to the <i>todo-app/todo-backend/docker-compose.dev.yml</i> by defining another service after mongo:
 
 ```yml
 services:
@@ -721,7 +723,7 @@ Implement a todo counter:
 
 ```json
 {
-  added_todos: 0,
+  "added_todos": 0,
 }
 ```
 
@@ -775,6 +777,6 @@ Redis can also be used to implement so called [publish-subscribe](https://en.wik
 
 Check that the data is not persisted by default: after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
 
-Then create a volume for redis data and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
+Then create a volume for Redis data (by mofifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
 
 </div>
