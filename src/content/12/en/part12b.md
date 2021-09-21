@@ -152,14 +152,14 @@ Dockerfile
 
 However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step. The _Dockerfile_ changes to:
 
-```bash
+```Dockerfile
 FROM node:16
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm install // highlight-line
+RUN npm install # highlight-line
 
 CMD DEBUG=playground:* npm start
 ```
@@ -178,14 +178,14 @@ So in short: _ci_ creates reliable builds, while _install_ is the one to use whe
 
 As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_:
 
-```bash
+```Dockerfile
 FROM node:16
 
 WORKDIR /usr/src/app
 
 COPY . .
 
-RUN npm ci // highlight-line
+RUN npm ci # highlight-line
 
 CMD DEBUG=playground:* npm start
 ```
@@ -200,7 +200,7 @@ Now the Dockerfile should work again, try it with _docker build -t express-serve
 
 We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that:
 
-```bash
+```Dockerfile
 FROM node:16
 
 WORKDIR /usr/src/app
@@ -209,9 +209,9 @@ COPY . .
 
 RUN npm ci 
 
-ENV DEBUG=playground:* // highlight-line
+ENV DEBUG=playground:* # highlight-line
 
-CMD npm start // highlight-line
+CMD npm start # highlight-line
 ```
 
 > <i>If you're wondering what the DEBUG environment variable does, read [here](http://expressjs.com/en/guide/debugging.html#debugging-express).</i>
@@ -229,14 +229,14 @@ Snyk has a great list of 10 best practices for node/express containerization. Re
 
 One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let's do a final fix to the Dockerfile:
 
-```bash
+```Dockerfile
 FROM node:16
 
-USER node // highlight-line
+USER node # highlight-line
   
 WORKDIR /usr/src/app
 
-COPY --chown=node:node . .  // highlight-line
+COPY --chown=node:node . .  # highlight-line
 
 RUN npm ci 
 
