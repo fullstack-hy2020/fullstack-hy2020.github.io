@@ -50,7 +50,9 @@ If you have only ever used a graphical user interface and never touched e.g. Lin
 
 Step 1: Read the text below the Warning header.
 
-Step 2: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save that file into your repository as file <i>curl_output.txt</i>.
+Step 2: Clone this [repository](https://github.com/fullstack-hy2020/part12-containers-applications) into your own submission repository into part12.
+
+Step 3: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save that file into your repository as file <i>script-answers/exercise12_1.txt</i>. The directory <i>script-answers</i> was created in the previous step.
 
 </div>
 <div class="content">
@@ -193,7 +195,7 @@ If _script_ does not work, you can just copy-paste all commands you used into a 
 
 #### Exercise 12.2: Running your second container
 
-> Use _script_ to record what you do, save the generated file into the repository as your answer (with name exercise12_2.txt).
+> Use _script_ to record what you do, save the file as script-answers/exercise12_2.txt
 
 The hello-world output gave us an ambitious task to do. Do the following
 
@@ -309,7 +311,7 @@ Now we have nano installed and can start editing files!
 
 #### Exercise 12.3: Ubuntu 101
 
-> Use _script_ to record what you do, save the generated file into the repository as your answer (with name exercise12_3.txt).
+> Use _script_ to record what you do, save the file as script-answers/exercise12_3.txt
 
 Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line
 
@@ -321,7 +323,7 @@ If you are not familiar with Nano you can ask for help in the chat or Google.
 
 #### Exercise 12.4: Ubuntu 102
 
-> Use _script_ to record what you do, save the generated file into the repository as your answer (with name exercise12_4.txt).
+> Use _script_ to record what you do, save the file as script-answers/exercise12_4.txt
 
 Install Node while inside the container and run the index file with _node /usr/src/app/index.js_ in the container.
 

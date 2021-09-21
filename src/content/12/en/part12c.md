@@ -148,26 +148,19 @@ Multi-stage builds also include some internal optimizations that may affect your
 
 #### Exercise 12.13: Todo application frontend
 
-> In this exercise, submit <i>at least</i> the Dockerfile you created.
+Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read through the README.
 
-The repository <https://github.com/fullstack-hy2020/part12-containers-applications> contains a frontend for the todo backend in the react-app directory. 
+Start by running the frontend outside the container and ensure that it works with the backend.
 
-Copy the contents into your repository. The react-app directory includes a README on how to start the application.
-
-Try first to run the fronend outside the container and ensure that it works with the backend.
-
-Containerize the application and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container.
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container.
 
 #### Exercise 12.14: Testing during the build process
 
-> In this exercise, submit the entire React application, with the Dockerfile.
-
-One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the 
-whole build process will also fail. Note that it is perhaps not in general the best idea to move <i>all testing</i> to be done during building an image but there may be <i>some</i> containerization related tests when this might be a good idea. 
+One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests when this might be a good idea. 
 
 Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
 
-You can add a new build stage for the test if you wish to do so. If you do so, remember to read again the last paragraph before the exercise 12.13!
+You can add a new build stage for the test if you wish to do so. If you do so, remember to read the last paragraph before exercise 12.13 again!
 
 </div>
 
@@ -186,7 +179,7 @@ These all are great reasons. The tradeoff is that we may encounter some unconven
 - Start the application in development mode
 - Access the files with VSCode
 
-Let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called _dev.Dockerfile_ ansd place the new file in the root of the project.
+Let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.
 
 Starting the create-react-app in development mode should be easy. Let's start with the following:
 
@@ -211,7 +204,7 @@ The second task, accessing the files with VSCode, is not done yet. There are at 
 - [The Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) 
 - Volumes, the same thing we used to preserve data with the database
 
-Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_ and if that works then we will move the configuration to a docker-compose file. To use the _-v_ we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for you. Try this with _echo $(pwd)_ in your command line. We can use that as the left side for _-v_ to map the current directory to the inside of the container or you can use the full directory path.
+Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_, and if that works, then we will move the configuration to a docker-compose file. To use the _-v_, we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for you. Try this with _echo $(pwd)_ in your command line. We can use that as the left side for _-v_ to map the current directory to the inside of the container or you can use the full directory path.
 
 ```bash
 $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
@@ -239,9 +232,22 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-With this configuration, _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!
+With this configuration, _docker-compose -f docker-compose.dev.yml up_ can run the application in development mode. You don't even need Node installed to develop it!
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
+
+</div>
+<div class="tasks">
+
+### Exercise 12.15
+
+#### Exercise 12.15: Setup a frontend development environment
+
+Create <i>todo-frontend/docker-compose.dev.yml</i> and use the volumes to enable the development of the todo-frontend while it is running <i>inside</i> a container.
+
+</div>
+
+<div class="content">
 
 ### Communication between containers in a docker network
 
@@ -267,7 +273,7 @@ services:
     image: busybox # highlight-line
 ```
 
-The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this:
+The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose -f docker-compose.dev.yml up_ will also look like this:
 
 ```bash
 $ docker-compose up
@@ -286,7 +292,7 @@ $ docker-compose up
   hello-front-dev | > react-scripts start
 ```
 
-This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running we can do the requiest with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.
+This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running, we can do the request with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.
 
 With Docker Compose we can use _docker-compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
 
@@ -303,9 +309,9 @@ $ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in docker-compose.yml are only for external access.
+The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
-Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
+Let's change the port configuration in the <i>docker-compose.dev.yml</i> to emphasize this:
 
 ```yml
 services:
@@ -327,18 +333,18 @@ With _docker-compose up_ the application is available in <http://localhost:3210>
 
 ![](../../images/12/busybox_networking_drawio.png)
 
-As the above image illustrates _docker-compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
+As the above image illustrates, _docker-compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
 
-Now that you know how easy it is to find other services in netword debined with <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our _docker-compose.yml_.
+Now that you know how easy it is to find other services in the <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our <i>docker-compose.yml</i>.
 
 </div>
 <div class="tasks">
 
-### Exercise 12.15
+### Exercise 12.16
 
-#### Exercise 12.15: Run todo-back in a development container
+#### Exercise 12.16: Run todo-back in a development container
 
-Use the volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container.
+Use the volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container. Create a <i>todo-backend/dev.Dockerfile</i> and edit the <i>todo-backend/docker-compose.dev.yml</i>.
 
 You will also need to rethink the connections between backend and MongoDB / Redis. Thankfully docker-compose can include environment variables that will be passed to the application:
 
@@ -355,7 +361,7 @@ services:
       - MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database
 ```
 
-The URLs (localhost) are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console,</i> if and when things blow up, the error messages give you hint what is broken.
+The URLs (localhost) are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console</i>. If and when things blow up, the error messages hint at what might be broken.
 
 Here is a possibly helpful image illustrating the connections within the docker network:
 
@@ -371,10 +377,10 @@ Next, we will add a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy)
 
 > <i>A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the reverse proxy server itself.</i>
 
-So in our case the reverse proxy will be the single point of entry to our application, and 
+So in our case, the reverse proxy will be the single point of entry to our application, and 
 the final goal will be to set both the React frontend and the Express backend behind the reverse proxy. 
 
-There are multiple different options for a reverse proxy implementation. such as  Traefik, Caddy, Nginx and Apache (ordered by initial release from newer to older).
+There are multiple different options for a reverse proxy implementation, such as Traefik, Caddy, Nginx, and Apache (ordered by initial release from newer to older).
 
 Our pick is [Nginx](https://hub.docker.com/_/nginx). Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running:
 
@@ -413,7 +419,7 @@ Next, add Nginx to the <i>docker-compose.yml</i> file. Add a volume as instructe
     container_name: reverse-proxy
 ```
 
-with that added we can run docker-compose up and see what happens.
+with that added we can run _docker-compose up_ and see what happens.
 
 ```bash
 $ docker container ls
@@ -462,32 +468,29 @@ If you are still encountering 503, make sure that the create-react-app has been 
 
 <div class="tasks">
 
-### Exercises 12.16. - 12.18.
+### Exercises 12.17. - 12.19.
 
-#### Exercise 12.16: Setup nginx in front of todo-front
+#### Exercise 12.17: Setup Nginx in front of todo-front
 
-> In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
+We are going to move the nginx in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
 
-Create a development docker-compose yml with nginx and our todo react-app.
+```bash
+todo-app
+├── todo-frontend
+├── todo-backend
+├── nginx.conf // highlight-line
+└── docker-compose.dev.yml // highlight-line
+```
+
+Add nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the docker-compose.dev.yml.
 
 ![](../../images/12/ex_12_16_nginx_front.png)
 
-You should use the following structure to make the next exercise easier:
+#### Exercise 12.18: Setup Nginx in front of todo-back
 
-```console
-├── react-app
-└── docker-compose.dev.yml
-```
+Add the todo-backend to the development <i>todo-app/docker-compose.dev.yml</i> in development mode.
 
-You can use _-f_ flag to specify a file to run the Docker Compose command with e.g. _docker-compose -f docker-compose.dev.yml up_. Now that we may have multiple it's useful.
-
-#### Exercise 12.17: Setup nginx in front of todo-back
-
-> In this exercise, submit the entire development environment, including the development Dockerfile AND docker-compose.yml.
-
-Add the express-app to the development docker-compose.yml in development mode.
-
-Add a new location to the nginx.conf so that requests to /api are proxied to the backend. Something like this should do the trick:
+Add a new location to the <i>nginx.conf</i> so that requests to /api are proxied to the backend. Something like this should do the trick:
 
 ```conf
   server {
@@ -521,15 +524,7 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 ![](../../images/12/ex_12_17_nginx_back.png)
 
-Please use the following structure for this exercise:
-
-```console
-├── express-app
-├── react-app
-└── docker-compose.dev.yml
-```
-
-#### Exercise 12.18: Connect todo-front to todo-back
+#### Exercise 12.19: Connect todo-front to todo-back
 
 > In this exercise, submit the entire development environment, including both express and react applications, Dockerfiles and docker-compose.yml.
 
@@ -557,23 +552,23 @@ If you are interested in learning more in-depth about containers come to the [De
 
 <div class="tasks">
 
-### Exercises 12.19.-12.21.
+### Exercises 12.20.-12.22.
+#### Exercise 12.20:
 
-#### Exercise 12.19:
-
-> In this exercise, submit the entire production environment. This includes the express and the react applications, Dockerfiles and docker-compose.yml.
-
-Create a production docker-compose.yml with all of the services, Nginx, react-app, express-app, MongoDB and Redis.
+Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use the Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
 
 Please use the following structure for this exercise:
 
-```console
-├── express-app
-├── react-app
-└── docker-compose.yml
+```bash
+todo-app
+├── todo-frontend
+├── todo-backend
+├── nginx.conf
+├── docker-compose.dev.yml
+└── docker-compose.yml // highlight-line
 ```
 
-#### Exercise 12.20:
+#### Exercise 12.21:
 
 Do a simillar containerized development environment to one of <i>your own</i> full stack apps that you have created during the course or at your freetime. You should structure the app to submission repository as follows:
 
@@ -586,7 +581,7 @@ Do a simillar containerized development environment to one of <i>your own</i> fu
     └── docker-compose.dev.yml
 ```
 
-#### Exercise 12.21:
+#### Exercise 12.22:
 
 Do a simillar containerized development environment to one of <i>your own</i> full stack apps that you have created during the course or at your freetime. 
 
