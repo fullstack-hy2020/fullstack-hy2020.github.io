@@ -236,6 +236,19 @@ With this configuration, _docker-compose -f docker-compose.dev.yml up_ can run t
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
+</div>
+<div class="tasks">
+
+### Exercise 12.15
+
+#### Exercise 12.15: Setup a frontend development environment
+
+Create <i>todo-frontend/docker-compose.dev.yml</i> and use the volumes to enable the development of the todo-frontend while it is running <i>inside</i> a container.
+
+</div>
+
+<div class="content">
+
 ### Communication between containers in a docker network
 
 The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we shall see how the network and DNS work.
@@ -327,9 +340,9 @@ Now that you know how easy it is to find other services in the <i>docker-compose
 </div>
 <div class="tasks">
 
-### Exercise 12.15
+### Exercise 12.16
 
-#### Exercise 12.15: Run todo-back in a development container
+#### Exercise 12.16: Run todo-back in a development container
 
 Use the volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container. Create a <i>todo-backend/dev.Dockerfile</i> and edit the <i>todo-backend/docker-compose.dev.yml</i>.
 
@@ -455,9 +468,9 @@ If you are still encountering 503, make sure that the create-react-app has been 
 
 <div class="tasks">
 
-### Exercises 12.16. - 12.18.
+### Exercises 12.17. - 12.19.
 
-#### Exercise 12.16: Setup Nginx in front of todo-front
+#### Exercise 12.17: Setup Nginx in front of todo-front
 
 We are going to move the nginx in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
 
@@ -473,7 +486,7 @@ Add nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile<
 
 ![](../../images/12/ex_12_16_nginx_front.png)
 
-#### Exercise 12.17: Setup Nginx in front of todo-back
+#### Exercise 12.18: Setup Nginx in front of todo-back
 
 Add the todo-backend to the development <i>todo-app/docker-compose.dev.yml</i> in development mode.
 
@@ -511,7 +524,7 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 ![](../../images/12/ex_12_17_nginx_back.png)
 
-#### Exercise 12.18: Connect todo-front to todo-back
+#### Exercise 12.19: Connect todo-front to todo-back
 
 > In this exercise, submit the entire development environment, including both express and react applications, Dockerfiles and docker-compose.yml.
 
@@ -535,9 +548,9 @@ If you are interested in learning more in-depth about containers come to the [De
 
 <div class="tasks">
 
-### Exercises 12.19.
+### Exercises 12.20.
 
-#### Exercise 12.19:
+#### Exercise 12.20:
 
 Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use the Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
 
