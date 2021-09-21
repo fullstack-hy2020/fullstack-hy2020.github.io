@@ -253,13 +253,11 @@ CMD npm start
 
 #### Exercise 12.5: Containerizing a node application
 
-> In this exercise, submit <i>at least</i> the Dockerfile you created.
+The repository you cloned in the previous exercise contains a todo-app. View the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
 
-The following repository contains an express application in the express-app directory: [part12-containers-applications](https://github.com/fullstack-hy2020/part12-containers-applications). You do not need the other directory yet. Copy the contents into your own repository. The express-app directory includes a README on how to start the application.
+Step 1. Containerize the todo-backend by creating a <i>todo-app/todo-backend/Dockerfile</i> and building an image.
 
-Step 1. Containerize the application by creating a Dockerfile and building an image.
-
-Step 2. Run the image with the correct ports open. Make sure the visit counter increases when used through a browser.
+Step 2. Run the todo-backend image with the correct ports open. Make sure the visit counter increases when used through a browser.
 
 Tip: Run the application outside of a container to examine it before starting to containerize.
 
@@ -313,9 +311,7 @@ Creating files like this that <i>declare</i> what you want instead of script fil
 
 #### Exercise 12.6: docker-compose
 
-> For this exercise, submit <i>at least</i> the docker-compose.yml you created.
-
-Create a docker-compose file that works with the node application from the previous exercise.
+Create a todo-app/todo-backend/docker-compose.yml file that works with the node application from the previous exercise.
 
 The visit counter is the only feature that is required to be working.
 
@@ -331,7 +327,7 @@ It may not be the best option to move your entire development environment into a
 
 The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a MongoDB image. Docker Hub is the default place where Docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker it's a good choice. With a quick search, we can find [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
-Rename the <i>docker-compose.yml</i> you did for previous exercise and create another <i>docker-compose.yml</i> that looks like following:
+Create a new yaml called <i>todo-app/todo-backend/docker-compose.dev.yml</i> that looks like following:
 
 ```yml
 version: '3.8'
@@ -353,7 +349,9 @@ The meaning of the two first environment variables defined above is explained on
 
 The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name. 
 
-Now start the MongoDB with _docker-compose up -d_. It will run it in the background, and you can view the logs with _docker-compose logs -f_. The _-f_ will ensure we <i>follow</i> the logs.
+You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g. _docker-compose -f docker-compose.dev.yml up_. Now that we may have multiple it's useful.
+
+Now start the MongoDB with _docker-compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker-compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
 
 As said previously, currently we <strong>do not</strong> want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option in the later in this part.
 
@@ -423,7 +421,7 @@ Bind mount is the act of binding a file on the host machine to a file in the con
 
 The result of the bind mount is that the file <i>mongo-init.js</i> in the mongo folder of the host machine is the same as the <i>mongo-init.js</i> file in the container's /docker-entrypoint-initdb.d directory. Changes to either file will be available in the other. We don't need to make any changes during runtime. But this will be the key to software development in containers.
 
-Run _docker-compose down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose up_ to initialize the database.
+Run _docker-compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose -f docker-compose.dev.yml up_ to initialize the database.
 
 If you see an error like this:
 
@@ -491,7 +489,7 @@ volumes:
   mongo_data:
 ```
 
-Now the volume is created but managed by Docker. After starting the application (_docker-compose up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
+Now the volume is created but managed by Docker. After starting the application (_docker-compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
 
 </div>
 
@@ -500,8 +498,6 @@ Now the volume is created but managed by Docker. After starting the application 
 ### Exercise 12.7.
 
 #### Exercise 12.7: Little bit of MongoDB coding
-
-> In this exercise, submit the entire express application with the Dockerfile AND the docker-compose.yml.
 
 The todo application has no proper implementation of routes for getting one todo (GET <i>/todos/:id</i>) and updating one todo (PUT <i>/todos/:id</i>). Fix the code.
 
@@ -593,13 +589,13 @@ Refresh the page, and our message is displayed! Now we know how exec can be used
 
 #### Exercise 12.8: Mongo command-line interface
 
-> Use _script_ to record what you do, save the generated file (with name exercise12_8.txt) into the repository as your answer .
+> Use _script_ to record what you do, save the file as script-answers/exercise12_8.txt
 
 While the MongoDB from the previous exercise is running, access the database with mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
 
 The command to open CLI when inside the container is _mongo_
 
-The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.yml.
+The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
 
 * Step 1: Run MongoDB
 * Step 2: Use docker exec to get inside the container
@@ -663,9 +659,7 @@ Redis has nothing to do with containers. But since we are already able to add <i
 
 #### Exercise 12.9: Setup Redis to project
 
-> In this exercise, submit the entire Express application, with the Dockerfile AND docker-compose.yml.
-
-The Express server has already been configured to use Redis, and it is only missing the *REDIS_URL* environment variable. The application will use that environment variable to connect to the Redis. Read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add Redis to the docker-compose.yml by defining another service after mongo:
+The Express server has already been configured to use Redis, and it is only missing the *REDIS_URL* environment variable. The application will use that environment variable to connect to the Redis. Read through the [Docker Hub page for redis](https://hub.docker.com/_/redis), add Redis to the <i>todo-app/todo-backend/docker-compose.dev.yml<> by defining another service after mongo:
 
 ```yml
 services:
@@ -714,8 +708,6 @@ Emitted 'error' event on RedisClient instance at:
 
 #### Exercise 12.10:
 
-> In this exercise, submit the entire express application with the Dockerfile AND docker-compose.yml.
-
 The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) installed and two functions "promisified" - getAsync and setAsync.
 
 - setAsync function takes in key and value, using the key to store the value.
@@ -735,7 +727,7 @@ Implement a todo counter:
 
 #### Exercise 12.11:
 
-> Use _script_ to record what you do, save the generated file (with name exercise12_11.txt) into the repository as your answer.
+> Use _script_ to record what you do, save the file as script-answers/exercise12_11.txt
 
 If the application does not behave as expected, a direct access to database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
 
@@ -781,10 +773,8 @@ Redis can also be used to implement so called [publish-subscribe](https://en.wik
   
 #### Exercise 12.12: Persisting data in Redis
 
-> In this exercise, submit the entire express application, with the Dockerfile AND docker-compose.yml.
+Check that the data is not persisted by default: after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
 
-Check that the data is not persisted by default: after running _docker-compose down_ and _docker-compose up_ the counter value is reset to 0.
-
-Then create a volume for redis data and make sure that the data survives after running _docker-compose down_ and _docker-compose up_.
+Then create a volume for redis data and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
 
 </div>
