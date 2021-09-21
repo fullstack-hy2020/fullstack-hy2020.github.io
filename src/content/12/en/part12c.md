@@ -401,9 +401,7 @@ http {
 }
 ```
 
-Next, add Nginx to the docker-compose.yml file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>.
-
-`docker-compose.yml`
+Next, add Nginx to the <i>docker-compose.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
 
 ```yml
   nginx:
@@ -417,8 +415,8 @@ Next, add Nginx to the docker-compose.yml file. Add a volume as instructed in th
 
 with that added we can run docker-compose up and see what happens.
 
-```
-$ docker ps
+```bash
+$ docker container ls
 CONTAINER ID   IMAGE             COMMAND                  CREATED         STATUS         PORTS                                       NAMES
 a02ae58f3e8d   nginx:1.20.1      "/docker-entrypoint.…"   4 minutes ago   Up 4 minutes   0.0.0.0:8080->80/tcp, :::8080->80/tcp       reverse-proxy
 5ee0284566b4   hello-front-dev   "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hello-front-dev
@@ -430,7 +428,7 @@ This is because directing requests to http://localhost:3000 leads to nowhere as 
 
 Let's test this by going inside the Nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.
 
-```
+```bash
 $ docker exec -it reverse-proxy bash  
 
 root@374f9e62bfa8:/# curl http://localhost:80
