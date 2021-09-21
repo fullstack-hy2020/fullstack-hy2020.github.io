@@ -18,6 +18,7 @@ const partNameTranslations = {
     'TypeScript',
     'React Native',
     'CI/CD',
+    'Konttiteknologia',
   ],
   en: [
     'Fundamentals of Web apps',
@@ -32,6 +33,7 @@ const partNameTranslations = {
     'TypeScript',
     'React Native',
     'CI/CD',
+    'Containers',
   ],
   zh: [
     'Web 应用的基础设施',
@@ -46,12 +48,12 @@ const partNameTranslations = {
     'TypeScript',
     'React Native',
     'CI/CD',
+    'Containers',
   ],
 };
 
 export const PartBanner = ({ lang }) => {
-  // TODO: show part 12 when published
-  const parts = Object.keys(navigation[lang]).filter(p => p !== '12');
+  const parts = Object.keys(navigation[lang]);
 
   return (
     <Banner

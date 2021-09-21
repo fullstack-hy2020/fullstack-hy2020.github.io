@@ -67,7 +67,7 @@ Once you have completed enough exercises for a passing grade, you can download t
 
 The last possible date for taking the exam is 10 January 2022. **Note that you must sign up for the exam by 9 January 2022, at the latest.**
 
-You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-12 credits and does not count towards your grade.
+You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-13 credits and does not count towards your grade.
 
 <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i>
 
@@ -108,6 +108,16 @@ More information about this part's prerequisites and exercise submission can be 
 - Submit all exercises for part 11. 
 - [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33). 
 - [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 12 - Full Stack Web Development: Containers (1 cr, AYCSM14112)
+
+By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. 
+More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
+- Submit all exercises for part 12. 
+- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60
+). 
+- [Request credits for part 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
 
 ### How to get your credits
 
