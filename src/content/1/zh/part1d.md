@@ -83,8 +83,8 @@ const App = () => {
   return (
     <div>
       {clicks.left}
-      <button handleClick={handleLeftClick}>left</button>
-      <button handleClick={handleRightClick}>right</button>
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
       {clicks.right}
     </div>
   )
@@ -1311,16 +1311,16 @@ const App = () => {
 - <!--<i>Statistic</i> for displaying a single statistic, e.g. the average score.--><i>显示单一统计数字的 statistics</i>，例如平均分数。
 
 <!-- To be clear: the <i>Statistic</i> component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics: -->
-需要明确的是:<i>statistics</i> 组件总是显示一个统计信息，这意味着应用需要使用多个组件来渲染所有的统计信息:
+需要明确的是:<i>StatisticLine</i> 组件总是显示一个统计信息，这意味着应用需要使用多个组件来渲染所有的统计信息:
 
 ```js
 const Statistics = (props) => {
   /// ...
   return(
     <div>
-      <Statistic text="good" value ={...} />
-      <Statistic text="neutral" value ={...} />
-      <Statistic text="bad" value ={...} />
+      <StatisticLine text="good" value ={...} />
+      <StatisticLine text="neutral" value ={...} />
+      <StatisticLine text="bad" value ={...} />
       // ...
     </div>
   )
@@ -1345,7 +1345,7 @@ const Statistics = (props) => {
 ![](../../images/1/17a.png)
 
 <!-- Then perform the necessary actions to make the warning disappear. Try Googling the error message if you get stuck. -->
-执行必要的操作使警告消失。如果卡住了，尝试用谷歌搜索错误消息。
+执行必要的操作使警告消失。如果卡住了，尝试用搜索引擎搜索错误消息。
 
 <!--<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>-->
 典型的错误来用来源: `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.`  是 Chrome 扩展导致的。 尝试在 `chrome://extensions/`中  ，逐个禁用它们并刷新 React app 页面; 错误最终应该会消失。 
@@ -1370,11 +1370,11 @@ const App = () => {
   const anecdotes = [
     'If it hurts, do it more often',
     'Adding manpower to a late software project makes it later!',
-    'The first 90 percent of the code accounts for the first 90 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
-    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blod tests when dianosing patients'
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
   ]
    
   const [selected, setSelected] = useState(0)

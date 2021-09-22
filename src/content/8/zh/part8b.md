@@ -309,7 +309,7 @@ _useQuery_ hook 非常适合在渲染组件时进行查询的情况。
 
 
 
-<!-- For this this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) is a good choice.  -->
+<!-- For this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#uselazyquery) is a good choice.  -->
 在这种情况下，Hook函数[useLazyQuery](https://www.apollographql.com/docs/react/v3.0-beta/api/react/hooks/#useLazyQuery)是一个不错的选择。
 <!-- The <i>Persons</i> component becomes: -->
 <i>Persons</i> 组件变为:

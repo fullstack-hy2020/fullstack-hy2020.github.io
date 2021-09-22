@@ -88,7 +88,7 @@ If you want to avoid using slack, you can do the [telegram version](/en/part11/e
 
 ![Releases](../../images/11/20a.png)
 
-### Exercise 11.19 alternative version for Telegram
+### Exercise 11.19 Alternative version for Telegram
 
 <!-- The Telegram version of this exercise is provided by [Sahil Rajput](https://github.com/sahilrajput03) -->
 这个练习的Telegram 版本是由[Sahil Rajput](https://github.com/sahilrajput03) 提供的。
@@ -219,14 +219,14 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 显然，这个练习不是在与前面练习相同的代码库中完成的。由于您只能向提交系统返回一个代码库，因此将<i>另一个</i>代码库的链接与您在提交表单中填写的代码库链接起来。
 
 
-#### 11.22 Protect master and ask for pull request
+#### 11.22 Protect your main branch and ask for pull request
 保护主分支并请求PR
 
-<!-- Protect the master branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review. -->
+<!-- Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review. -->
 保护代码库的主分支，前面的练习就是在这个分支中进行的。这一次也防止了管理员在没有检查的情况下合并代码。
 
 
-<!-- Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to master.  -->
+<!-- Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in telegram/slack to get the review.  -->
 执行一个 pull 请求，并要求任何 GitHub 用户[mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) 或 [jakousa](https://github.com/jakousa) 检查您的代码。一旦评审完成，将你的代码合并到主分支中。
 
 <!-- Then you are done! -->

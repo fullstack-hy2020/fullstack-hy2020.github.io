@@ -21,9 +21,7 @@ lang: zh
 
 我们将在[第1章](/zh/part1)正式讲推荐的编码风格。
 
-<!-- Use the Chrome browser <i>now and for the rest of the course</i>. -->
 
-现在以及接下来的课程都使用 Chrome 浏览器。
 
 <!-- Open the [example application](https://studies.cs.helsinki.fi/exampleapp/) on your browser. Sometimes this takes a while. -->
 
@@ -35,9 +33,15 @@ lang: zh
 Web 开发第一规则: 始终在浏览器上打开你的开发者控制台。 在 macOS 上，按 `F12` 或者 `option-cmd-i` 打开控制台。 
 Windows 系统或Linux 系统，可以按 `F12` 或 `ctrl-shift-i`打开控制台。
 
+<!-- The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key). -->
+console 也可以通过 [context menu](https://en.wikipedia.org/wiki/Menu_key) 打开
+
 <!-- Before continuing, find out how to open the Developer Console on your computer (google if necessary) and remember to <i>always</i> keep it open when developing web applications. -->
 
-在继续课程之前，确保搞清楚如何在你的电脑上打开开发者控制台(如果必要的话请谷歌) ，并记得在开发 web 应用时始终保持它是开着的。
+<!-- 在继续课程之前，确保搞清楚如何在你的电脑上打开开发者控制台(如果必要的话请谷歌) ，并记得在开发 web 应用时始终保持它是开着的。 -->
+
+<!-- Remember to <i>always</i> keep the Developer Console open when developing web applications.  -->
+记住，开发web应用时 <i>总是</i> 打开着开发者控制台
 
 <!-- The console looks like this:  -->
 开发者控制台长这样：
@@ -279,9 +283,11 @@ xhttp.send();
 ![](../../images/0/10e.png)
 
 <!-- There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". -->
-<!-- By default, the browser is not too good at displaying JSON-data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to Chrome, and reload the page. The data is now much more nicely formatted: -->
+<!--By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted:  -->
 
-在这里我们找到了以 JSON 格式展示的 Note ，这就是Note的 “原始数据”。 默认配置下，浏览器不太擅长显示 json 格式的数据。 可以使用插件来处理 Json 格式。 例如，将 [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) 安装到 Chrome，然后重新加载页面。 数据现在可以被更好地格式化展示出来了:
+在这里我们找到了以 JSON 格式展示的 Note ，这就是Note的 “原始数据”。 
+
+默认配置下，基于Chrome 的浏览器不太擅长显示 json 格式的数据。 可以使用插件来处理 Json 格式。 例如，将 [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) 安装到 Chrome，然后重新加载页面。 数据现在可以被更好地格式化展示出来了:
 
 ![](../../images/0/11e.png)
 
@@ -754,7 +760,7 @@ Notes 页面为浏览器提供了一些职责，为现有的 Note 生成 HTML �
 
 <!-- Open the <i>Network</i>-tab and empty it by clicking the &empty; symbol. When you now create a new note, you'll notice that the browser sends only one request to the server. -->
 
-打开 Network-选项卡并通过单击 🚫 按钮清空它。 当您现在创建一个新的便笺时，您会注意到浏览器只向服务器发送了一个请求。
+打开 Network-选项卡并清空它。 当您现在创建一个新的便笺时，您会注意到浏览器只向服务器发送了一个请求。
 
 ![](../../images/0/26e.png)
 
@@ -843,7 +849,7 @@ var sendToServer = function(note) {
 
 <!-- The sample app is done with so called [vanilla JavaScript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) using only the DOM-API and JavaScript to manipulate the structure of the pages. -->
 
-这个示例应用是通过所谓的[vanilla JavaScript](https://medium.freecodecamp.org/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) 来完成的，只使用了 DOM-API 和 JavaScript 来操作页面的结构。
+这个示例应用是通过所谓的[vanilla JavaScript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34) 来完成的，只使用了 DOM-API 和 JavaScript 来操作页面的结构。
 
 <!-- Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [jQuery](https://jquery.com/). -->
 
@@ -851,7 +857,7 @@ var sendToServer = function(note) {
 
 <!-- jQuery was developed back when web-pages mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of VanillaJS, and the most popular browsers generally support basic functionalities well. -->
 
-当时，在 web 应用主要遵循服务器生成 HTML 页面的传统风格，jQuery 当时是在这种情况下发展起来的。这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 jQuery 来增强。 jQuery 成功的原因之一是它所谓的跨浏览器兼容性。 不管是哪家公司的哪个浏览器，这个库都能正常工作，所以不需要特定于浏览器的解决方案。 如今，由于 VanillaJS 的进步，使用 jQuery 已经不那么合理了，而且最流行的浏览器通常都能很好地支持基本功能。
+当时，在 web 应用主要遵循服务器生成 HTML 页面的传统风格，jQuery 当时是在这种情况下发展起来的。这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 jQuery 来增强。 jQuery 成功的原因之一是它所谓的跨浏览器兼容性。 不管是哪家公司的哪个浏览器，这个库都能正常工作，所以不需要特定于浏览器的解决方案。 如今，由于 Vanilla JS 的进步，使用 jQuery 已经不那么合理了，而且最流行的浏览器通常都能很好地支持基本功能。
 
 <!-- The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. -->
 
@@ -882,9 +888,9 @@ React 的势头看起来很猛，但是 JavaScript 的世界是不断变化的�
 
 几乎所有的 web 应用都有(至少)两个“层” : 最接近最终用户的浏览器是最顶层，而服务器是最底层。 在服务器下面通常还有一个数据库层。 因此，我们可以将 web 应用的体系结构看作是一层层的堆栈。
 
-<!-- Often, we also talk about the [frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) and the [backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript run on the browser is frontend code. The server on the other hand is the backend. -->
+<!-- Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends) a. The browser is the frontend, and JavaScript run on the browser is frontend code. The server on the other hand is the backend. -->
 
-通常，我们也会讨论[前端frontend](https://en.wikipedia.org/wiki/Front_and_back_ends) 和 [后端backend](https://en.wikipedia.org/wiki/Front_and_back_ends)。 浏览器是前端，运行在浏览器上的 JavaScript 是前端代码。 另一方面，服务器是后端。
+通常，我们也会讨论[前端frontend 和 后端backend](https://en.wikipedia.org/wiki/Front_and_back_ends) 。 浏览器是前端，运行在浏览器上的 JavaScript 是前端代码。 另一方面，服务器是后端。
 
 <!-- In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those. -->
 
@@ -905,9 +911,9 @@ React 的势头看起来很猛，但是 JavaScript 的世界是不断变化的�
 
 全栈 web 开发在许多方面都具有挑战性。 在许多地方会有突发情况，并且调试起来比普通桌面应用要困难得多。 JavaScript (与许多其他语言相比) 并不总是像你期望的那样工作 ，其运行时环境的异步工作方式带来了各种各样的挑战。 网络中的通信需要对 http 协议的知识储备。 还必须处理数据库、服务器管理和配置。 了解足够的 CSS 至少在一定程度上能够使应用显得好看。
 
-<!-- The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: [JavaScript](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) [fatigue](https://auth0.com/blog/how-to-manage-javascript-fatigue/). -->
+<!-- The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: <em>JavaScript fatigue</em>. See [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) or [JavaScript fatigue on Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4). -->
 
-JavaScript 的世界发展得很快，也带来了一系列的挑战。 工具、库和语言本身都在不断发展。 有些人已经开始厌倦了这种不断的变化，并为此创造了一个新词: JavaScript 疲劳。
+JavaScript 的世界发展得很快，也带来了一系列的挑战。 工具、库和语言本身都在不断发展。 有些人已经开始厌倦了这种不断的变化，并为此创造了一个新词: JavaScript 疲劳。可以阅读[How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) 或者 [JavaScript fatigue on Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4) 
 
 <!-- You will suffer from JavaScript fatigue yourself during this course. Fortunately for us, there are a few ways to smooth the learning curve, and we can start with coding instead of configuration. We can't avoid configuration completely, but we can merrily push ahead in the next few weeks while avoiding the worst of configuration hells. -->
 

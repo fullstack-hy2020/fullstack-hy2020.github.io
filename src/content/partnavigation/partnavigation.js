@@ -59,6 +59,7 @@ module.exports = {
     '9': {},
     '10': {},
     '11': {},
+    '12': {},
   },
   en: {
     '0': {
@@ -135,6 +136,11 @@ module.exports = {
       c: 'Deployment',
       d: 'Keeping green',
       e: 'Expanding Further',
+    },
+    '12': {
+      a: 'Introduction to Containers',
+      b: 'Building and configuring environments',
+      c: 'Basics of Orchestration'
     },
   },
   zh: {
@@ -213,6 +219,11 @@ module.exports = {
       d: '保持健康状态',
       e: '再扩展一下',
     },
+    '12': {
+      a: '容器介绍',
+      b: '构建配置环境',
+      c: '编排基础'
+    },
   },
   es: {
     '0': {
@@ -290,6 +301,7 @@ module.exports = {
       d: 'Manteniéndose verde',
       e: 'Expandiéndose aún más'
     },
+    '12': {},
   },
   id: {
     '0': {

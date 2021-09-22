@@ -507,7 +507,7 @@ Lomake ei ole oletusarvoisesti näkyvillä
 
 ![](../../images/5/13ae.png)
 
-Klikkaamalla nappia <i>new note</i> lomake aukeaa
+Klikkaamalla nappia <i>create new blog</i> lomake aukeaa
 
 ![](../../images/5/13be.png)
 

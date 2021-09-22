@@ -98,7 +98,7 @@ npm run cypress:open
 ```
 
 <!-- Ensimmäisen käynnistyksen yhteydessä sovellukselle syntyy hakemisto <i>cypress</i>, jonka alihakemistoon <i>integrations</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä, poistetaan ne ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>: -->
-When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in the <i>integration/examples</i> directory. We can delete the <i>examples</i> directory and make our own test in file <i>note\_app.spec.js</i>:
+When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two subdirectories: the <i>integration/1-getting-started</i> and the <i>integration/2-advanced-examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:
 
 ```js
 describe('Note app', function() {
@@ -121,7 +121,7 @@ Running the test opens your browser and shows how the application behaves as the
 ![](../../images/5/32ae.png)
 
 The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method. 
-Cypress borrowed these parts from [Mocha](https://mochajs.org/) testing library it uses under the hood. 
+Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library it uses under the hood. 
 
 <!-- [cy.visit](https://docs.cypress.io/api/commands/visit.html) ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) taas ovat Cypressin komentoja, joiden merkitys on aika ilmeinen. [cy.visit](https://docs.cypress.io/api/commands/visit.html) avaa testin käyttämään selaimeen parametrina määritellyn osoitteen ja [cy.contains](https://docs.cypress.io/api/commands/contains.html) etsii sivun sisältä parametrina annetun tekstin.  -->
 [cy.visit](https://docs.cypress.io/api/commands/visit.html) and [cy.contains](https://docs.cypress.io/api/commands/contains.html) are Cypress commands, and their purpose is quite obvious.
@@ -144,7 +144,7 @@ describe('Note app', () => { // highlight-line
 However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow functions are not used, because they might cause some issues in certain situations. 
 
 <!-- Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti -->
-If <i>cy.contains</i> does not find the text is it searching for, the test does not pass. 
+If <i>cy.contains</i> does not find the text it is searching for, the test does not pass. 
 So if we extend our test like so
 
 ```js
@@ -175,7 +175,7 @@ Let's remove the failing code from the test.
 ### Writing to a form
 
 <!-- Laajennetaan testejä siten, että testi yrittää kirjautua sovellukseen. Oletetaan että backendin tietokantaan on tallennettu käyttäjä, jonka käyttäjätunnus on <i>mluukkai</i> ja salasana <i>salainen</i>.  -->
-Let's extend our tests so, that the test tries to log in to our application. 
+Let's extend our tests so that the test tries to log in to our application. 
 We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>.
 
 <!-- Aloitetaan kirjautumislomakkeen avaamisella. -->
@@ -239,7 +239,7 @@ The test works. The problem is if we later add more input fields, the test will 
 
 <!-- Parempi ratkaisu on määritellä kentille yksilöivät <i>id</i>-attribuutit ja hakea kentät testeissä niiden perusteella. Eli laajennetaan kirjautumislomaketta seuraavasti -->
 It would be better to give our inputs unique <i>ids</i> and use those to find them. 
-We change our login form like so
+We change our login form like so:
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -277,7 +277,7 @@ const LoginForm = ({ ... }) => {
 We also added an id to our submit button so we can access it in our tests. 
 
 <!-- Testi muuttuu muotoon -->
-The test becomes
+The test becomes:
 
 ```js
 describe('Note app',  function() {
@@ -322,7 +322,7 @@ Actually both buttons are in the application's DOM the whole time, but only one 
 <!-- Jos haemme nappia tekstin perusteella, palauttaa komento [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) aina napeista ensimmäisen, eli lomakkeen avaavan napin. Näin tapahtuu siis vaikka nappi ei olisikaan näkyvillä. Tämän takia lomakkeen lähettävään nappiin on lisätty id <i>login-button</i>, jonka perusteella testi pääsee nappiin käsiksi. -->
 If we search for a button by its text, [cy.contains](https://docs.cypress.io/api/commands/contains.html#Syntax) will return the first of them, or the one opening the login form. 
 This will happen even if the button is not visible. 
-To avoid name conflicts, we gave submit button the id <i>login-button</i> we can use to access it.
+To avoid name conflicts, we gave the submit button the id <i>login-button</i> we can use to access it.
 
 <!-- Huomaamme, että testeissä käytetty muuttuja _cy_ aiheuttaa ikävän ESlint-virheen -->
 Now we notice that the variable _cy_ our tests use gives us a nasty Eslint error
@@ -365,7 +365,7 @@ module.exports = {
 ### Testing new note form
 
 <!-- Luodaan seuraavaksi testi, joka lisää sovellukseen uuden muistiinpanon: -->
-Let's next add tests which test the new note functionality: 
+Let's next add tests which test the "new note" functionality: 
 
 ```js
 describe('Note app', function() {
@@ -395,10 +395,10 @@ describe('Note app', function() {
 
 <!-- Testi on määritelty omana <i>describe</i>-lohkonaan. Muistiinpanon luominen edellyttää että käyttäjä on kirjaantuneena, ja kirjautuminen hoidetaan <i>beforeEach</i>-lohkossa.  -->
 The test has been defined in its own <i>describe</i> block. 
-Only logged in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block. 
+Only logged-in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block. 
 
 <!-- Testi luottaa siihen, että uutta muistiinpanoa luotaessa sivulla on ainoastaan yksi input-kenttä, eli se hakee kentän seuraavasti -->
-The test trusts that when creating a new note the page contains only one input, so it searches for it like so
+The test trusts that when creating a new note the page contains only one input, so it searches for it like so:
 
 ```js
 cy.get('input')
@@ -444,7 +444,7 @@ describe('Note app', function() {
 ```
 
 <!-- Cypress suorittaa testit siinä järjestyksessä, missä ne ovat testikoodissa. Eli ensin suoritetaan testi <i>user can log in</i>, missä käyttäjä kirjautuu sovellukseen, ja tämän jälkeen suoritetaan testi <i>a new note can be created</i>, jonka <i>beforeEach</i>-lohkossa myös suoritetaan kirjautuminen. Miksi näin tehdään, eikö käyttäjä jo ole kirjaantuneena aiemman testin ansiosta? Ei, sillä <i>jokaisen</i> testin suoritus alkaa selaimen kannalta "nollatilanteesta", kaikki edellisten testien selaimen tilaan tekemät muutokset nollaantuvat. -->
-Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> which's <i>beforeEach</i> block logs in as well. 
+Cypress runs the tests in the order they are in the code. So first it runs <i>user can log in</i>, where the user logs in. Then cypress will run <i>a new note can be created</i> for which a <i>beforeEach</i> block logs in as well. 
 Why do this? Isn't the user logged in after the first test? 
 No, because <i>each</i> test starts from zero as far as the browser is concerned. 
 All changes to the browser's state are reversed after each test.
@@ -501,7 +501,7 @@ module.exports = app
 ```
 
 <!-- eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan. -->
-after the changes a HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):
+After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoint empties the database. Make sure your backend is running in test mode by starting it with this command (previously configured in the package.json file):
 ```js
   npm run start:test
 ```
@@ -614,7 +614,7 @@ The tests and the current frontend code can be found from [github](https://githu
 
 Let's make a test to ensure that a login attempt fails if the password is wrong. 
 
-Cypress will run all tests each time by default, and as the number of tests increases it starts to become quite time consuming. 
+Cypress will run all tests each time by default, and as the number of tests increases it starts to become quite time-consuming. 
 When developing a new test or when debugging a broken test, we can define the test with <i>it.only</i> instead of <i>it</i>, so that Cypress will only run the required test.
 When the test is working, we can remove <i>.only</i>.
 
@@ -658,7 +658,7 @@ const Notification = ({ message }) => {
 ```
 
 <!-- Voisimmekin tarkentaa testiä varmistamaan, että virheilmoitus tulostuu nimenomaan oikeaan paikkaan, eli CSS-luokan <i>error</i> sisältävään elementtiin: -->
-We could make the test ensure, that the error message is rendered to the correct component, or the component with the CSS class <i>error</i>:
+We could make the test ensure that the error message is rendered to the correct component, that is, the component with the CSS class <i>error</i>:
 
 
 ```js
@@ -688,7 +688,7 @@ it('login fails with wrong password', function() {
 Using should is a bit trickier than using <i>contains</i>, but it allows for more diverse tests than <i>contains</i> which works based on text content only. 
 
 <!-- Lista yleisimmistä shouldin kanssa käytettävistä assertioista on [täällä](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions). -->
-List of the most common assertions which can be used with should can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
+A list of the most common assertions which can be used with should can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
 
 <!-- Voimme esim. varmistaa, että virheilmoituksen väri on punainen, ja että sen ympärillä on border: -->
 We can, for example, make sure that the error message is red and it has a border:
@@ -794,7 +794,7 @@ As we said above, each test starts from zero! Tests do not start from the state 
 
 <!-- Cypressin dokumentaatio neuvoo meitä seuraavasti: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). Eli sen sijaan että tekisimme <i>beforeEach</i>-lohkossa kirjaantumisen lomaketta käyttäen, suosittelee Cypress että kirjaantuminen tehdään [UI:n ohi](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI), tekemällä suoraan backendiin kirjaantumista vastaava HTTP-operaatio. Syynä tälle on se, että suoraan backendiin tehtynä kirjautuminen on huomattavasti nopeampi kuin lomakkeen täyttämällä.  -->
 The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). 
-So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do a HTTP request to the backend to log in. The reason for this is that logging in with a HTTP request is much faster than filling a form. 
+So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling a form. 
 
 
 <!-- Tilanteemme on hieman monimutkaisempi kuin Cypressin dokumentaation esimerkissä, sillä kirjautumisen yhteydessä sovelluksemme tallettaa kirjautuneen käyttäjän tiedot localStorageen. Sekin toki onnistuu. Koodi on seuraavassa -->
@@ -825,8 +825,8 @@ describe('when logged in', function() {
 
 <!-- Komennon [cy.request](https://docs.cypress.io/api/commands/request.html) tulokseen päästään käsiksi _then_-metodin avulla sillä sisäiseltä toteutukseltaan <i>cy.request</i> kuten muutkin Cypressin komennot ovat [eräänlaisia promiseja](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises). Käsittelijäfunktio tallettaa kirjautuneen käyttäjän tiedot localStorageen ja lataa sivun uudelleen. Tämän jälkeen käyttäjä on kirjautuneena sovellukseen samalla tavalla kuin jos kirjautuminen olisi tapahtunut kirjautumislomakkeen täyttämällä. -->
 We can access the response to a [cy.request](https://docs.cypress.io/api/commands/request.html) with the _then_ method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises).
-The callback function saves the details of a logged in user to localStorage, and reloads the page. 
-Now there is no difference to user logging in with the login form. 
+The callback function saves the details of a logged-in user to localStorage, and reloads the page. 
+Now there is no difference to a user logging in with the login form. 
 
 <!-- Jos ja kun sovellukselle kirjoitetaan lisää testejä, joudutaan kirjautumisen hoitavaa koodia soveltamaan useassa paikassa. Koodi kannattaakin eristää itse määritellyksi [komennoksi](https://docs.cypress.io/api/cypress-api/custom-commands.html). -->
 If and when we write new tests to our application, we have to use the login code in multiple places.
@@ -898,7 +898,7 @@ describe('Note app', function() {
 ```
 
 <!-- Eristetään myös muistiinpanon lisääminen omaksi komennoksi, joka tekee lisäämisen suoraan HTTP POST:lla: -->
-Let's make a new custom command for making a new note. The command will make a new note with a HTTP POST request: 
+Let's make a new custom command for making a new note. The command will make a new note with an HTTP POST request: 
 
 ```js
 Cypress.Commands.add('createNote', ({ content, important }) => {
@@ -916,7 +916,7 @@ Cypress.Commands.add('createNote', ({ content, important }) => {
 ```
 
 <!-- Komennon suoritus edellyttää, että käyttäjä on kirjaantuneena sovelluksessa ja käyttäjän tiedot talletettuna sovelluksen localStorageen. -->
-The command expects user to be logged in and the user's details to be saved to localStorage. 
+The command expects the user to be logged in and the user's details to be saved to localStorage. 
 
 <!-- Testin alustuslohko yksinkertaistuu seuraavasti: -->
 Now the formatting block becomes:
@@ -1000,7 +1000,7 @@ the 'make important' button corresponding to <i>second note</i>:
 When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command. 
 
 <!-- Jos emme ketjuttaisi komentoja, eli olisimme kirjoittaneet  -->
-If we had not chained the commands, and instead wrote
+If we had not chained the commands, and instead wrote:
 
 ```js
 cy.contains('second note')
@@ -1041,7 +1041,7 @@ Our tests break! As the test runner reveals,  _cy.contains('second note')_ now r
 One way to fix this is the following:
 
 ```js
-it('other of those can be made important', function () {
+it('one of those can be made important', function () {
   cy.contains('second note').parent().find('button').click()
   cy.contains('second note').parent().find('button')
     .should('contain', 'make not important')
@@ -1056,12 +1056,12 @@ Then we click the button, and check that the text on it changes.
 Note that we use the command [find](https://docs.cypress.io/api/commands/find.html#Syntax) to search for the button. We cannot use [cy.get](https://docs.cypress.io/api/commands/get.html) here, because it always searches from the <i>whole</i> page and would return all 5 buttons on the page. 
 
 <!-- Testissä on ikävästi copypastea, rivien alku eli napin etsivä koodi on sama.  -->
-Unfortunately, we have some copypaste in the tests now, because the code for searching for the right button is always the same. 
+Unfortunately, we have some copy-paste in the tests now, because the code for searching for the right button is always the same. 
 <!-- Tälläisissä tilanteissa on mahdollista hyödyntää komentoa [as](https://docs.cypress.io/api/commands/as.html):  -->
 In these kinds of situations, it is possible to use the [as](https://docs.cypress.io/api/commands/as.html) command:
 
 ```js
-it('other of those can be made important', function () {
+it('one of those can be made important', function () {
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
   cy.get('@theButton').should('contain', 'make not important')
@@ -1069,7 +1069,7 @@ it('other of those can be made important', function () {
 ```
 
 <!-- Nyt ensimmäinen rivi etsii oikean napin, ja tallentaa sen komennon <i>as</i> avulla nimellä <i>theButton</i>. Seuraavat rivit pääsevät nimettyyn elementtiin käsiksi komennolla <i>cy.get('@theButton')</i>. -->
-Now the first line finds the right button, and uses <i>as</i> to save it as <i>theButton</i>. The followings lines can use the named element with <i>cy.get('@theButton')</i>.
+Now the first line finds the right button, and uses <i>as</i> to save it as <i>theButton</i>. The following lines can use the named element with <i>cy.get('@theButton')</i>.
 
 ### Running and debugging the tests
 
@@ -1132,9 +1132,9 @@ Now we can run our tests from the command line with the command <i>npm run test:
 
 ![](../../images/5/39ea.png)
 
-Note that video of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
+Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
 
-The frontend- and the test code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-11) branch <i>part5-11</i>.
+The frontend and the test code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-11) branch <i>part5-11</i>.
 
 </div>
 
@@ -1154,7 +1154,7 @@ I especially recommend reading [Introduction to Cypress](https://docs.cypress.io
 
 Configure Cypress to your project. Make a test for checking that the application displays the login form by default.
 
-The structure of the test must be as follows
+The structure of the test must be as follows:
 
 ```js 
 describe('Blog app', function() {
@@ -1173,10 +1173,10 @@ The <i>beforeEach</i> formatting blog must empty the database using for example 
 
 #### 5.18: bloglist end to end testing, step2
 
-Make tests for logging in. Test both successful and unsuccessful log in attempts. 
+Make tests for logging in. Test both successful and unsuccessful login attempts. 
 Make a new user in the <i>beforeEach</i> block for the tests.
 
-The test structure extends like so
+The test structure extends like so:
 
 ```js 
 describe('Blog app', function() {
@@ -1206,8 +1206,8 @@ describe('Blog app', function() {
 
 #### 5.19: bloglist end to end testing, step3
 
-Make a test which checks that a logged in user can create a new blog. 
-The structure of the test could be as follows
+Make a test which checks that a logged-in user can create a new blog. 
+The structure of the test could be as follows:
 
 ```js 
 describe('Blog app', function() {
@@ -1230,7 +1230,7 @@ The test has to ensure that a new blog is added to the list of all blogs.
 
 #### 5.20: bloglist end to end testing, step4
 
-Make a test which checks that user can like a blog. 
+Make a test which checks that users can like a blog. 
 
 #### 5.21: bloglist end to end testing, step5
 
@@ -1248,6 +1248,6 @@ If you use a `map` on a selection from cypress, mind that it uses a [jQuery map]
 
 Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks.
 
-This was the last exercise of this part, and its time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise of this part, and it's time to push your code to github and mark the exercises you completed in the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

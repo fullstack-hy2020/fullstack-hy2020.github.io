@@ -18,6 +18,7 @@ const partNameTranslations = {
     'TypeScript',
     'React Native',
     'CI/CD',
+    'Konttiteknologia',
   ],
   en: [
     'Fundamentals of Web apps',
@@ -32,6 +33,7 @@ const partNameTranslations = {
     'TypeScript',
     'React Native',
     'CI/CD',
+    'Containers',
   ],
   zh: [
     'Web 应用的基础设施',
@@ -46,6 +48,7 @@ const partNameTranslations = {
     'TypeScript',
     'React Native',
     'CI/CD',
+    'Containers',
   ],
 };
 

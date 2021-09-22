@@ -39,6 +39,12 @@ As we remember from [part 3](/en/part3) an npm project is set by running the com
 ```
 npm install --save-dev ts-node typescript
 ```
+  
+In some cases, you should install this package as well
+
+```
+npm install -D tslib @types/node
+```
 
 and set up <i>scripts</i> within the package.json: 
 

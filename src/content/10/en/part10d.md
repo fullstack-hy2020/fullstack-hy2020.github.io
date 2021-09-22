@@ -49,7 +49,7 @@ To use the eslint-plugin-jest plugin in ESLint, we need to include it in the plu
 {
   "plugins": ["react", "jest"],
   "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"], // highlight-line
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true
   },
@@ -376,15 +376,6 @@ describe('SignIn', () => {
   });
 });
 ```
-
-You might face the following warning messages: <em>Warning: An update to Formik inside a test was not wrapped in act(...)</em>. This happens because <em>fireEvent</em> method calls cause asynchronous calls in Formik's internal logic. You can get rid of these messages by wrapping each of the <em>fireEvent</em> method calls with the [act](https://www.native-testing-library.com/docs/next/api-main#act) function like this:
-
-```javascript
-await act(async () => {
-  // call the fireEvent method here
-});
-```
-
 </div>
 
 <div class="content">
@@ -1028,7 +1019,7 @@ As we are getting closer to the end of this part, let's take a moment to look at
 
 > Paper is a collection of customizable and production-ready components for React Native, following Google’s Material Design guidelines.
 
-[React Native Paper](https://callstack.github.io/react-native-paper/) is for React Native what [Material-UI](https://material-ui.com/) is for React web applications. It offers a wide range of high-quality UI components and support for [custom themes](https://callstack.github.io/react-native-paper/theming.html). [Setting up](https://callstack.github.io/react-native-paper/getting-started.html) React Native Paper for Expo based React Native applications is quite simple, which makes it possible to use it in the upcoming exercises if want to give it a go.
+[React Native Paper](https://callstack.github.io/react-native-paper/) is for React Native what [Material-UI](https://material-ui.com/) is for React web applications. It offers a wide range of high-quality UI components, support for [custom themes](https://callstack.github.io/react-native-paper/theming.html) and a fairly simple [setup](https://callstack.github.io/react-native-paper/getting-started.html) for Expo based React Native applications.
 
 #### Styled-components
 
@@ -1081,7 +1072,7 @@ Because styled-components processes the style definitions, it is possible to use
 
 > react-spring is a spring-physics based animation library that should cover most of your UI related animation needs. It gives you tools flexible enough to confidently cast your ideas into moving interfaces.
 
-[React-spring](https://www.react-spring.io/) is a library that provides a clean [hook API](https://www.react-spring.io/docs/hooks/basics) for animating React Native components.
+[React-spring](https://www.react-spring.io/) is a library that provides a clean [hook API](https://react-spring.io/hooks/use-chain) for animating React Native components.
 
 #### React Navigation
 

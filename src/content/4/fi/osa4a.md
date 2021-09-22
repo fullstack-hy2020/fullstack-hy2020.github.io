@@ -11,9 +11,9 @@ Jatketaan [osassa 3](/osa3) tehdyn muistiinpanosovelluksen backendin kehittämis
 
 ### Sovelluksen rakenne
 
-Ennen osan ensimmäistä isoa teemaa eli testaamista, muutetaan sovelluksen rakennetta noudattamaan paremmin Noden yleisiä konventioita.
+Ennen osan ensimmäistä isoa teemaa eli testaamista muutetaan sovelluksen rakennetta noudattamaan paremmin Noden yleisiä konventioita.
 
-Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne näyttää seuraavalta
+Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne näyttää seuraavalta:
 
 ```bash
 ├── index.js
@@ -32,7 +32,7 @@ Seuraavassa läpikäytävien muutosten jälkeen sovelluksemme hakemistorakenne n
 │   └── middleware.js  
 ```
 
-Olemme toistaiseksi tulostelleet koodista erilaista logaustietoa komennoilla <i>console.log</i> ja <i>console.error</i>, tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
+Olemme toistaiseksi tulostelleet koodista erilaista loggaustietoa komennoilla <i>console.log</i> ja <i>console.error</i>, mutta tämä ei ole kovin järkevä käytäntö. Eristetään kaikki konsoliin tulostelu omaan moduliinsa <i>utils/logger.js</i>:
 
 ```js
 const info = (...params) => {
@@ -48,11 +48,11 @@ module.exports = {
 }
 ```
 
-Loggeri tarjoaa kaksi funktiota, normaalien logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_.
+Loggeri tarjoaa kaksi funktiota: normaaleihin logiviesteihin tarkoitetun funktion _info_ sekä virhetilanteisiin tarkoitetun funktion _error_.
 
-Loggauksen eristäminen oman moduulinsa vastuulle on monellakin tapaa järkevää. Jos esim. päätämme ruveta kirjoittamaan logeja tiedostoon tai keräämään ne johonkin ulkoiseen palveluun kuten [graylog](https://www.graylog.org/) tai [papertrail](https://papertrailapp.com), on muutos helppo tehdä yhteen paikkaan.
+Loggauksen eristäminen omaan moduuliinsa on monellakin tapaa järkevää. Jos esim. päätämme ruveta kirjoittamaan logeja tiedostoon tai keräämään niitä johonkin ulkoiseen palveluun kuten [Graylog](https://www.graylog.org/) tai [Papertrail](https://papertrailapp.com), on muutos helppo tehdä yhteen paikkaan.
 
-Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavaan muotoon:
+Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavasti:
 
 ```js
 const app = require('./app') // varsinainen Express-sovellus
@@ -67,7 +67,7 @@ server.listen(config.PORT, () => {
 })
 ```
 
-<i>index.js</i> ainoastaan importaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Sovelluksen käynnistäminen tapahtuu nyt <em>server</em>-muuttujassa olevan olion kautta. Käynnistymisestä kertova konsolitulostus tehtään logger-moduulin funktion _info_ avulla.
+<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Sovelluksen käynnistäminen tapahtuu nyt <em>server</em>-muuttujassa olevan olion kautta. Käynnistymisestä kertova konsolitulostus tehtään logger-moduulin funktion _info_ avulla.
 
 Ympäristömuuttujien käsittely on eriytetty moduulin <i>utils/config.js</i> vastuulle:
 
@@ -83,17 +83,15 @@ module.exports = {
 }
 ```
 
-Sovelluksen muut osat pääsevät ympäristömuuttujiin käsiksi importtaamalla konfiguraatiomoduulin
+Sovelluksen muut osat pääsevät ympäristömuuttujiin käsiksi importtaamalla konfiguraatiomoduulin:
 
 ```js
 const config = require('./utils/config')
 
-console.log(`Server running on port ${config.PORT}`)
+logger.info(`Server running on port ${config.PORT}`)
 ```
 
-Routejen määrittely siirretään omaan tiedostoonsa, eli myös siitä tehdään moduuli. Routejen tapahtumankäsittelijöitä kutsutaan usein <i>kontrollereiksi</i>. Sovellukselle onkin luotu hakemisto <i>controllers</i> ja sinne tiedosto <i>notes.js</i>, johon kaikki muistiinpanoihin liittyvien reittien määrittelyt on siirretty.
-
-Tiedoston sisältö on seuraava:
+Routejen määrittely siirretään omaan tiedostoonsa, eli myös siitä tehdään moduuli. Routejen tapahtumankäsittelijöitä kutsutaan usein <i>kontrollereiksi</i>. Sovellukselle onkin luotu hakemisto <i>controllers</i> ja sinne tiedosto <i>notes.js</i>, johon kaikki muistiinpanoihin liittyvien reittien määrittelyt on siirretty:
 
 ```js
 const notesRouter = require('express').Router()
@@ -159,7 +157,7 @@ notesRouter.put('/:id', (request, response, next) => {
 module.exports = notesRouter
 ```
 
-Kyseessä on käytännössä melkein suora copypaste edellisen osan materiaalin tiedostosta <i>index.js</i>.
+Kyseessä on käytännössä melkein suora copy-paste edellisen osan materiaalin tiedostosta <i>index.js</i>.
 
 Muutoksia on muutama. Tiedoston alussa luodaan [router](http://expressjs.com/en/api.html#router)-olio:
 
@@ -175,19 +173,19 @@ Tiedosto eksporttaa moduulin käyttäjille määritellyn routerin.
 
 Kaikki määriteltävät routet liitetään router-olioon, samaan tapaan kuin aiemmassa versiossa routet liitettiin sovellusta edustavaan olioon.
 
-Huomioinarvoinen seikka routejen määrittelyssä on se, että polut ovat typistyneet, aiemmin määrittelimme esim.
+Huomioinarvoinen seikka routejen määrittelyssä on se, että polut ovat typistyneet. Aiemmin määrittelimme esim.
 
 ```js
 app.delete('/api/notes/:id', (request, response) => {
 ```
 
-nyt riittää määritellä
+Nyt riittää määritellä
 
 ```js
 notesRouter.delete('/:id', (request, response) => {
 ```
 
-Mistä routereissa oikeastaan on kyse? Expressin manuaalin sanoin
+Mistä routereissa oikeastaan on kyse? Expressin manuaalin sanoin:
 
 > <i>A router object is an isolated instance of middleware and routes. You can think of it as a “mini-application,” capable only of performing middleware and routing functions. Every Express application has a built-in app router.</i>
 
@@ -200,7 +198,7 @@ const notesRouter = require('./controllers/notes')
 app.use('/api/notes', notesRouter)
 ```
 
-Näin määrittelemäämme routeria käytetään <i>jos</i> polun alkuosa on <i>/api/notes</i>. notesRouter-olion sisällä täytyy tämän takia käyttää ainoastaan polun loppuosia, eli tyhjää polkua <i>/</i> tai pelkkää parametria <i>/:id</i>.
+Näin määrittelemäämme routeria käytetään <i>jos</i> polun alkuosa on <i>/api/notes</i>. notesRouter-olion sisällä täytyy tämän takia käyttää ainoastaan polun loppuosia eli tyhjää polkua <i>/</i> tai pelkkää parametria <i>/:id</i>.
 
 Sovelluksen määrittelevä <i>app.js</i> näyttää muutosten jälkeen seuraavalta:
 
@@ -216,7 +214,7 @@ const mongoose = require('mongoose')
 
 logger.info('connecting to', config.MONGODB_URI)
 
-mongoose.connect(config.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(config.MONGODB_URI)
   .then(() => {
     logger.info('connected to MongoDB')
   })
@@ -237,9 +235,9 @@ app.use(middleware.errorHandler)
 module.exports = app
 ```
 
-Tiedostossa siis otetaan käyttöön joukko middlewareja, näistä yksi on polkuun <i>/api/notes</i> kiinnitettävä <i>notesRouter</i> (tai notes-kontrolleri niin kuin jotkut sitä kutsuisivat).
+Tiedostossa siis otetaan käyttöön joukko middlewareja, joista yksi on polkuun <i>/api/notes</i> kiinnitettävä <i>notesRouter</i> (tai notes-kontrolleri niin kuin jotkut sitä kutsuisivat).
 
-Itse toteutettujen middlewarejen määritelty on siirretty tiedostoon <i>utils/middleware.js</i>:
+Itse toteutettujen middlewarejen määrittely on siirretty tiedostoon <i>utils/middleware.js</i>:
 
 ```js
 const logger = require('./logger')
@@ -275,7 +273,7 @@ module.exports = {
 }
 ```
 
-Koska tietokantayhteyden muodostaminen on siirretty tiedoston <i>app.js</i>:n vastuulle. Hakemistossa <i>models</i> oleva tiedosto <i>note.js</i> sisältää nyt ainoastaan muistiinpanojen skeeman määrittelyn.
+Tietokantayhteyden muodostaminen on siirretty tiedoston <i>app.js</i>:n vastuulle. Hakemistossa <i>models</i> oleva tiedosto <i>note.js</i> sisältää nyt ainoastaan muistiinpanojen skeeman määrittelyn.
 
 ```js
 const mongoose = require('mongoose')
@@ -301,7 +299,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema)
 ```
 
-Sovelluksen hakemistorakenne siis näyttää refaktoroinnin jälkeen seuraavalta:
+Sovelluksen hakemistorakenne näyttää siis refaktoroinnin jälkeen seuraavalta:
 
 ```bash
 ├── index.js
@@ -320,11 +318,11 @@ Sovelluksen hakemistorakenne siis näyttää refaktoroinnin jälkeen seuraavalta
 │   └── middleware.js  
 ```
 
-Jos sovellus on pieni, ei rakenteella ole kovin suurta merkitystä. Sovelluksen kasvaessa kannattaa sille muodostaa jonkinlainen rakenne eli arkkitehtuuri, ja jakaa erilaisten vastuut omiin moduuleihin. Tämä helpottaa huomattavasti ohjelman jatkokehitystä.
+Jos sovellus on pieni, ei rakenteella ole kovin suurta merkitystä. Sovelluksen kasvaessa sille kannattaa muodostaa jonkinlainen rakenne eli arkkitehtuuri ja jakaa erilaiset vastuut omiin moduuleihinsa. Tämä helpottaa huomattavasti ohjelman jatkokehitystä.
 
-Express-sovelluksien rakenteelle, eli hakemistojen ja tiedostojen nimennälle ei ole olemassa mitään yleismaailmallista standardia samaan tapaan kuin esim. Ruby on Railsissa. Tässä käyttämämme malli noudattaa eräitä internetissä vastaan tulevia hyviä käytäntöjä.
+Express-sovelluksien rakenteelle eli hakemistojen ja tiedostojen nimeämiselle ei ole olemassa mitään yleismaailmallista standardia samaan tapaan kuin esim. Ruby on Railsissa. Tässä käyttämämme malli noudattaa eräitä Internetissä vastaan tulevia hyviä käytäntöjä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1), branchissa <i>part4-1</i>:
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-1) branchissa <i>part4-1</i>.
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
 
@@ -334,7 +332,7 @@ Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnist�
 
 ### Tehtävät 4.1.-4.2.
 
-Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
+Rakennamme tämän osan tehtävissä <i>blogilistasovellusta</i>, jonka avulla käyttäjien on mahdollista tallettaa tietoja Internetistä löytämistään mielenkiintoisista blogeista. Kustakin blogista talletetaan sen kirjoittaja (author), aihe (title), url sekä blogilistasovelluksen käyttäjien antamien äänien määrä.
 
 
 #### 4.1 blogilista, step1
@@ -358,7 +356,7 @@ const blogSchema = mongoose.Schema({
 const Blog = mongoose.model('Blog', blogSchema)
 
 const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(mongoUrl)
 
 app.use(cors())
 app.use(express.json())
@@ -389,15 +387,15 @@ app.listen(PORT, () => {
 
 Tee sovelluksesta toimiva <i>npm</i>-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi <i>nodemonilla</i>. Voit luoda sovellukselle uuden tietokannan MongoDB Atlasiin tai käyttää edellisen osan sovelluksen tietokantaa.
 
-Varmista, että sovellukseen on mahdollista lisätä blogeja Postmanilla tai VS Code REST clientilla, ja että sovellus näyttää lisätyt blogit.
+Varmista, että sovellukseen on mahdollista lisätä blogeja Postmanilla tai VS Code REST Clientilla ja että sovellus näyttää lisätyt blogit.
 
 #### 4.2 blogilista, step2
 
 Jaa sovelluksen koodi tämän osan alun tapaan useaan moduuliin.
 
-**HUOM** etene todella pienin askelin, varmistaen että kaikki toimii koko ajan. Jos yrität "oikaista" tekemällä monta asiaa kerralla, on [Murphyn lain](https://fi.wikipedia.org/wiki/Murphyn_laki) perusteella käytännössä varmaa, että jokin menee pahasti pieleen ja "oikotien" takia maaliin päästään paljon myöhemmin kuin systemaattisin pienin askelin.
+**HUOM:** Etene todella pienin askelin ja varmistaen, että kaikki toimii koko ajan. Jos yrität "oikaista" tekemällä monta asiaa kerralla, on [Murphyn lain](https://fi.wikipedia.org/wiki/Murphyn_laki) perusteella käytännössä varmaa, että jokin menee pahasti pieleen ja "oikotien" takia maaliin päästään paljon myöhemmin kuin systemaattisin pienin askelin.
 
-Paras käytänne on commitoida koodi aina stabiilissa tilanteessa, tällöin on helppo palata aina toimivaan tilanteeseen jos koodi menee liian solmuun.
+Paras käytänne on commitoida koodi aina stabiilissa tilanteessa. Tällöin on helppo palata aina toimivaan tilanteeseen jos koodi menee liian solmuun.
 
 </div>
 
@@ -431,9 +429,9 @@ module.exports = {
 }
 ```
 
-> Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa Youtubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) -sarjasta ainakin kolme ensimmäistä videoa.
+> Metodi _average_ käyttää taulukoiden metodia [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce). Jos metodi ei ole vieläkään tuttu, on korkea aika katsoa YouTubesta [Functional JavaScript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) -sarjasta ainakin kolme ensimmäistä videoa.
 
-Javascriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>. Käytämme tällä kurssilla Facebookin kehittämää ja sisäisesti käyttämää [Jest](https://jestjs.io/):iä, joka on toiminnaltaan ja syntaksiltaankin hyvin samankaltainen kuin testikirjastojen entinen kuningas [Mocha](https://mochajs.org/).
+JavaScriptiin on tarjolla runsaasti erilaisia testikirjastoja eli <i>test runnereita</i>. Käytämme tällä kurssilla Facebookin kehittämää ja sisäisesti käyttämää [Jest](https://jestjs.io/):iä, joka on toiminnaltaan ja syntaksiltaankin hyvin samankaltainen kuin testikirjastojen entinen kuningas [Mocha](https://mochajs.org/).
 
 Jest on tälle kurssille luonteva valinta, sillä se sopii hyvin backendien testaamiseen, mutta suorastaan loistaa Reactilla tehtyjen frontendien testauksessa.
 
@@ -445,7 +443,7 @@ Koska testejä on tarkoitus suorittaa ainoastaan sovellusta kehitettäessä, ase
 npm install --save-dev jest
 ```
 
-määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
+Määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja raportoimaan testien suorituksesta <i>verbose</i>-tyylillä:
 
 ```bash
 {
@@ -464,7 +462,7 @@ määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja rapor
 }
 ```
 
-Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node. Tämä tapahtuu esim. lisäämällä <i>package.json</i> tiedoston loppuun:
+Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node. Tämä tapahtuu esim. lisäämällä <i>package.json</i> tiedoston loppuun seuraavaa:
 
 ```js
 {
@@ -475,7 +473,7 @@ Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node
 }
 ```
 
-Tai vaihtoehtoisesti Jest löytää myös oletuksena asetustiedoston nimellä <i>jest.config.js</i>, jonne suoritusympäristön määrittely tapahtuu seuraavasti:
+Vaihtoehtoisesti Jest löytää oletuksena asetukset tiedostosta <i>jest.config.js</i>, jonne suoritusympäristön määrittely tapahtuu seuraavasti:
 
 ```js
 module.exports = {
@@ -483,7 +481,7 @@ module.exports = {
 };
 ```
 
-Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>palindrome.test.js</i>, jonka sisältö on seuraava
+Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>palindrome.test.js</i>, jonka sisältö on seuraava:
 
 ```js
 const palindrome = require('../utils/for_testing').palindrome
@@ -543,15 +541,15 @@ Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäise
 }
 ```
 
-Ensin suoritetaan testattava koodi, eli generoidaan merkkijonon <i>react</i> palindromi. Seuraavaksi varmistetaan tulos metodin [expect](https://facebook.github.io/jest/docs/en/expect.html#content) avulla. Expect käärii tuloksena olevan arvon olioon, joka tarjoaa joukon <i>matcher</i>-funktioita, joiden avulla tuloksen oikeellisuutta voidaan tarkastella. Koska kyse on kahden merkkijonon samuuden vertailusta, sopii tilanteeseen matcheri [toBe](https://facebook.github.io/jest/docs/en/expect.html#tobevalue).
+Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> palindromi. Seuraavaksi varmistetaan tulos metodin [expect](https://facebook.github.io/jest/docs/en/expect.html#content) avulla. Expect käärii tuloksena olevan arvon olioon, joka tarjoaa joukon <i>matcher</i>-funktioita, joiden avulla tuloksen oikeellisuutta voidaan tarkastella. Koska kyse on kahden merkkijonon samuuden vertailusta, sopii tilanteeseen matcheri [toBe](https://facebook.github.io/jest/docs/en/expect.html#tobevalue).
 
 Kuten odotettua, testit menevät läpi:
 
 ![](../../images/4/1.png)
 
-Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, millä testitiedostojen nimen loppu on <i>.test.js</i>
+Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
 
-Jestin antamat virheilmoitukset ovat hyviä, rikotaan testi
+Jestin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
 
 ```js
 test('palindrome of react', () => {
@@ -561,11 +559,11 @@ test('palindrome of react', () => {
 })
 ```
 
-seurauksena on seuraava virheilmoitus
+Seurauksena on seuraava virheilmoitus:
 
 ![](../../images/4/2e.png)
 
-Lisätään muutama testi metodille _average_, tiedostoon <i>tests/average.test.js</i>.
+Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
 
 ```js
 const average = require('../utils/for_testing').average
@@ -585,11 +583,11 @@ describe('average', () => {
 })
 ```
 
-Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollallajaon tulos on Javascriptissä <i>NaN</i>):
+Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollallajaon tulos on JavaScriptissä <i>NaN</i>):
 
 ![](../../images/4/3.png)
 
-Metodi on helppo korjata
+Metodi on helppo korjata:
 
 ```js
 const average = array => {
@@ -604,7 +602,7 @@ const average = array => {
 
 Eli jos taulukon pituus on 0, palautetaan 0 ja muussa tapauksessa palautetaan metodin _reduce_ avulla laskettu keskiarvo.
 
-Pari huomiota keskiarvon testeistä. Määrittelimme testien ympärille nimellä _average_ varustetun <i>describe</i>-lohkon.
+Pari huomiota keskiarvon testeistä. Määrittelimme testien ympärille nimellä _average_ varustetun <i>describe</i>-lohkon:
 
 ```js
 describe('average', () => {
@@ -616,7 +614,7 @@ Describejen avulla yksittäisessä tiedostossa olevat testit voidaan jaotella lo
 
 ![](../../images/4/4.png)
 
-Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia siinä vaiheessa, jos haluamme osalle yksittäisen testitiedoston testitapauksista jotain yhteisiä alustus- tai lopetustoimenpiteitä.
+Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia, jos haluamme osalle yksittäisen testitiedoston testitapauksista joitain yhteisiä alustus- tai lopetustoimenpiteitä.
 
 Toisena huomiona se, että kirjoitimme testit aavistuksen tiiviimmässä muodossa, ottamatta testattavan metodin tulosta erikseen apumuuttujaan:
 
@@ -636,7 +634,7 @@ Tehdään joukko blogilistan käsittelyyn tarkoitettuja apufunktioita. Tee funkt
 
 #### 4.3: apufunktioita ja yksikkötestejä, step1
 
-Määrittele ensin funktio _dummy_ joka saa parametrikseen taulukollisen blogeja ja palauttaa aina luvun 1. Tiedoston <i>list_helper.js</i> sisällöksi siis tulee tässä vaiheessa
+Määrittele ensin funktio _dummy_, joka saa parametrikseen taulukollisen blogeja ja palauttaa aina luvun 1. Tiedoston <i>list_helper.js</i> sisällöksi siis tulee tässä vaiheessa:
 
 ```js
 const dummy = (blogs) => {
@@ -663,7 +661,7 @@ test('dummy returns one', () => {
 
 #### 4.4: apufunktioita ja yksikkötestejä, step2
 
-Määrittele funktio _totalLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio palauttaa blogien yhteenlaskettujen tykkäysten eli <i>likejen</i> määrän.
+Määrittele funktio _totalLikes_, joka saa parametrikseen taulukollisen blogeja. Funktio palauttaa blogien yhteenlaskettujen tykkäysten eli <i>likejen</i> määrän.
 
 Määrittele funktiolle sopivat testit. Funktion testit kannattaa laittaa <i>describe</i>-lohkoon jolloin testien tulostus ryhmittyy miellyttävästi:
 
@@ -693,9 +691,9 @@ describe('total likes', () => {
 
 Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä](https://raw.githubusercontent.com/FullStack-HY/misc/main/blogs_for_test.md).
 
-Törmäät varmasti testien tekemisen yhteydessä erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat, voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje [täällä](https://jestjs.io/docs/en/troubleshooting).
+Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat. Voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje on [täällä](https://jestjs.io/docs/en/troubleshooting).
 
-**HUOM:** jos jokin testi ei mene läpi, ei ongelmaa korjatessa kannata suorittaa kaikkia testejä, vaan ainoastaan rikkinäistä testiä hyödyntäen [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout)-metodia. 
+**HUOM:** Jos jokin testi ei mene läpi, ei ongelmaa korjatessa kannata suorittaa kaikkia testejä, vaan ainoastaan rikkinäistä testiä hyödyntäen [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout)-metodia. 
 
 Toinen tapa suorittaa yksittäinen testi (tai describe-lohko) on määritellä suoritettava testi argumentin [-t](https://jestjs.io/docs/en/cli.html) avulla:
 
@@ -705,7 +703,7 @@ npm test -- -t 'when list has only one blog, equals the likes of that'
 
 #### 4.5*: apufunktioita ja yksikkötestejä, step3
 
-Määrittele funktio _favoriteBlog_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
+Määrittele funktio _favoriteBlog_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää millä blogilla on eniten tykkäyksiä. Jos suosikkeja on monta, riittää että funktio palauttaa niistä jonkun.
 
 Paluuarvo voi olla esim. seuraavassa muodossa:
 
@@ -717,9 +715,9 @@ Paluuarvo voi olla esim. seuraavassa muodossa:
 }
 ```
 
-**Huomaa**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää sillä [toBe](https://jestjs.io/docs/en/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältöisyys ei riitä.
+**Huomaa**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää. [toBe](https://jestjs.io/docs/en/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun, vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältö ei riitä.
 
-Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkon sisälle.
+Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkonsa sisälle.
 
 #### 4.6*: apufunktioita ja yksikkötestejä, step4
 
@@ -727,7 +725,7 @@ Tämä ja seuraava tehtävä ovat jo hieman haastavampia. Tehtävien tekeminen e
 
 Tehtävän tekeminen onnistuu hyvin ilman mitään kirjastojakin, mutta tämä saattaa olla hyvä paikka tutustua kokoelmien käsittelyä suuresti helpottavaan [Lodash](https://lodash.com/)-kirjastoon.
 
-Määrittele funktio _mostBlogs_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää <i>kirjoittajan</i>, kenellä on eniten blogeja. Funktion paluuarvo kertoo myös ennätysbloggaajan blogien määrän:
+Määrittele funktio _mostBlogs_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää <i>kirjoittajan</i>, jolla on eniten blogeja. Funktion paluuarvo kertoo myös ennätysbloggaajan blogien määrän:
 
 ```js
 {
@@ -740,7 +738,7 @@ Jos ennätysbloggaajia on monta, riittää että funktio palauttaa niistä jonku
 
 #### 4.7*: apufunktioita ja yksikkötestejä, step5
 
-Määrittele funktio _mostLikes_ joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, kenen blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkibloggaajan likejen yhteenlasketun määrän:
+Määrittele funktio _mostLikes_, joka saa parametrikseen taulukollisen blogeja. Funktio selvittää kirjoittajan, jonka blogeilla on eniten tykkäyksiä. Funktion paluuarvo kertoo myös suosikkibloggaajan likejen yhteenlasketun määrän:
 
 ```js
 {

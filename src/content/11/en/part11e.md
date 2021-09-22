@@ -58,7 +58,7 @@ Your notifications may look like the following:
 
 ![Releases](../../images/11/20a.png)
 
-### Exercise 11.19 alternative version for Telegram
+### Exercise 11.19 Alternative version for Telegram
 
 The Telegram version of this exercise is provided by [Sahil Rajput](https://github.com/sahilrajput03)
 
@@ -144,11 +144,11 @@ This is a long and perhaps quite a tough exercise, but this kind of situation wh
 
 Obviously, this exercise is not done in the same repository as the previous exercises. Since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form.
 
-#### 11.22 Protect master and ask for pull request
+#### 11.22 Protect your main branch and ask for pull request
 
-Protect the master branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.
+Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.
 
-Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to master. Note that the reviewer needs to be a collaborator in the repository. Ping us in telegram/slack to get the review.
+Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in telegram/slack to get the review.
 
 Then you are done!
 

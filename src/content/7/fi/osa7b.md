@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/custom_hookit#tehtavat-7-4-7-6).
+Kurssin seitsemännen osan tehtävät poikkeavat jossain määrin. Edellisessä ja tässä luvussa on normaaliin tapaan [luvun teoriaan liittyviä tehtäviä](/osa7/custom_hookit#tehtavat-7-4-7-8).
 
 Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaavan ja soveltavan [tehtäväsarjan](/osa7/tehtavia_blogilistan_laajennus), jossa laajennetaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.
 
@@ -289,7 +289,7 @@ Internetistä alkaa löytyä yhä enenevissä määrin valmiita hookeja sekä mu
 
 ### Lisää hookeista
 
-* [Awesome React Hooks Resouces](https://github.com/rehooks/awesome-react-hooks)
+* [Awesome React Hooks Resources](https://github.com/rehooks/awesome-react-hooks)
 * [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
 * [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 

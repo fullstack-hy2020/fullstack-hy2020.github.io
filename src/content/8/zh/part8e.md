@@ -154,8 +154,22 @@ const ALL_PERSONS = gql`
 
 ### Subscriptions on the server
 【服务器上的订阅】
+
+<!-- **NB!** This subscription setup is based on the apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed the apollo-server version 2 (for example by running _npm i apollo-server@2.25.2_) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/).  -->
+  
+**注意！**  该订阅的步骤是基于apollo-server 的V2 版本构建的，而在V3 版本已经不再适用了。你可以参考本章的材料，但确保自己使用的是apollo-server V2 版本（也就是通过 _npm i apollo-server@2.25.2_ 安装的） 或者跟着Apollo Server 的[官方文档](https://www.apollographql.com/docs/apollo-server/data/subscriptions/)
+  
+
 <!-- Let's implement subscriptions for subscribing for notifications about new persons added. -->
 让我们实现订阅，以订阅关于添加的新用户的通知。
+
+<!-- First, we have to install the package for adding subscriptions to GraphQL: -->
+首先，我们要安装额外的包来支持订阅GraphQL：
+
+```bash
+npm install graphql-subscriptions
+```
+
 
 <!-- There are not many changes to the server. The schema changes like so: -->
 服务器没有太多变化，模式变化如下:
@@ -176,7 +190,7 @@ type Subscription {
 所需的修改如下:
 
 ```js
-const { PubSub } = require('apollo-server') // highlight-line
+const { PubSub } = require('graphql-subscriptions') // highlight-line
 const pubsub = new PubSub() // highlight-line
 
   Mutation: {
@@ -457,7 +471,7 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 首先你需要增加如下内容来通过 `mongoose` 在后台项目中开启调试选项：
 
 ```js
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })

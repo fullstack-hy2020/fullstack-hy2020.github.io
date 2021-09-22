@@ -127,7 +127,7 @@ Now that the repository is created, run <em>git init</em> within your applicatio
 Now that we are somewhat familiar with the development environment let's enhance our development experience even further by configuring a linter. We will be using [ESLint](https://eslint.org/) which is already familiar to us from the previous parts. Let's get started by installing the dependencies:
 
 ```shell
-npm install --save-dev eslint babel-eslint eslint-plugin-react
+npm install --save-dev eslint @babel/eslint-parser eslint-plugin-react
 ```
 
 Next, let's add the ESLint configuration into a <i>.eslintrc</i> file into the <i>rate-repository-app</i> directory with the following content:
@@ -141,7 +141,7 @@ Next, let's add the ESLint configuration into a <i>.eslintrc</i> file into the <
     }
   },
   "extends": ["eslint:recommended", "plugin:react/recommended"],
-  "parser": "babel-eslint",
+  "parser": "@babel/eslint-parser",
   "env": {
     "browser": true
   },
