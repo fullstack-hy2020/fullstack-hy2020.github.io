@@ -615,7 +615,7 @@ Let's fix the issue by changing the id parameter from a string into a [number](h
 ```js
 app.get('/api/notes/:id', (request, response) => {
   const id = Number(request.params.id)
-  const note = notes.find(note => note.id === id)
+  const note = notes.find(note => note.id == id)
   response.json(note)
 })
 ```
