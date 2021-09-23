@@ -94,7 +94,7 @@ const getFrontPageHtml = noteCount => {
       </head>
       <body>
         <div class='container'>
-          <h1>
+          <h1>Aplicación de ejemplo de pila completa</h1>
           <p>number of notes created ${noteCount}</p>
           <a href='/notes'>notes</a>
           <img src='kuva.png' width='200' />
