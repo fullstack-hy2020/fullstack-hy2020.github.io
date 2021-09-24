@@ -48,7 +48,7 @@ const partNameTranslations = {
     'TypeScript',
     'React Native',
     'CI/CD',
-    'Containers',
+    '容器',
   ],
 };
 
