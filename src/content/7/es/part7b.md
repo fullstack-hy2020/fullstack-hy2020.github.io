@@ -422,7 +422,7 @@ Volvamos a los ejercicios [2.12-14].
 
 Utilice el código de https://github.com/fullstack-hy2020/country-hook como punto de partida.
 
-La aplicación se puede utilizar para buscar detalles de países desde la interfaz https://restcountries.eu/. Si se encuentra el país, se muestran los detalles del país
+La aplicación se puede utilizar para buscar detalles de países desde la interfaz https://restcountries.com/. Si se encuentra el país, se muestran los detalles del país
 
 ![](../../images/7/69ea.png)
 
@@ -432,7 +432,7 @@ Si no se encuentra el país, se muestra un mensaje al usuario
 
 Por lo demás, la aplicación está completa, pero en este ejercicio debe implementar un hook personalizado _useCountry_, que se puede usar para buscar los detalles del país dado al hook como parámetro.
 
-Use el endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) de la api  para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
+Use el endpoint [full name](https://restcountries.com/#api-endpoints-full-name) de la api  para obtener los detalles del país en un hook _useEffect_ dentro de su hook personalizado.
 
 Tenga en cuenta que en este ejercicio es esencial utilizar el [segundo parámetro](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) de useEffect para controlar cuándo se ejecuta la función de efecto.
 
