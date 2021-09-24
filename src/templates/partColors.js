@@ -10,5 +10,6 @@ export const partColors = {
   8: 'turquoise',
   9: 'light-green',
   10: 'part10-light-blue',
-  11: 'purple'
+  11: 'purple',
+  12: 'pale-pink'
 };

@@ -57,7 +57,7 @@ module.exports = mongoose.model('Person', schema)
 ```
 
 
-We also included a few validations. _required: true_, which ensures that value exists, is actually redundant as just using GraphQL ensures that the fields exist. However it is good to also keep validation in the database. 
+We also included a few validations. _required: true_, which ensures that value exists, which is actually redundant by using GraphQL we ensure that the fields exist. However it is good to also keep validation in the database. 
 
 
 We can get the application to mostly work with the following changes: 
@@ -71,7 +71,7 @@ const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.ne
 
 console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })

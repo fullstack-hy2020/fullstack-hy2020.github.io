@@ -104,7 +104,7 @@ const Notes = (props) => { // highlight-line
 
 // highlight-start
   const notesToShow = () => {
-    if ( props.filter === 'ALL ') {
+    if ( props.filter === 'ALL') {
       return props.notes
     }
     
@@ -144,7 +144,7 @@ export default ConnectedNotes
 ```
 
 <!-- The <i>Notes</i> component can access the state of the store directly, e.g. through <i>props.notes</i> that contains the list of notes.  Similarly, <i>props.filter</i> references the value of the filter. -->
-Notes组件可以直接访问存储的状态，例如通过包含便笺列表的 propss.Notes。 类似地，props.filter 引用了过滤器的值。 
+Notes组件可以直接访问存储的状态，例如通过包含便笺列表的 props.Notes。 类似地，props.filter 引用了过滤器的值。 
 
 <!-- The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this: -->
 使用<i>connect</i> 和我们定义的<i>mapStateToProps</i> 函数的结果可以这样可视化:

@@ -325,15 +325,15 @@ interface CoursePartThree {
 }
 ```
 
-A continuación, crearemos una [unión de tipos](http://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types) de todos estos tipos. Luego podemos usarlo para definir un tipo para nuestro array, que debería aceptar cualquiera de estos tipos de partes del curso:
+A continuación, crearemos una [unión de tipos](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) de todos estos tipos. Luego podemos usarlo para definir un tipo para nuestro array, que debería aceptar cualquiera de estos tipos de partes del curso:
 
 ```js
 type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
-Ahora podemos establecer el tipo de nuestra variable <i>courseParts</i>. Ahora nuestro editor nos advertirá automáticamente si usamos un tipo incorrecto para un atributo, usamos un atributo adicional u olvidamos establecer un atributo esperado. Puede probar esto comentando cualquier atributo de cualquier parte del curso. Gracias al [string literal](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types) de <i>name</i>, TypeScript puede identificar qué parte del curso requiere qué atributos adicionales, incluso si la variable está definida para usar la unión de tipos.
+Ahora podemos establecer el tipo de nuestra variable <i>courseParts</i>. Ahora nuestro editor nos advertirá automáticamente si usamos un tipo incorrecto para un atributo, usamos un atributo adicional u olvidamos establecer un atributo esperado. Puede probar esto comentando cualquier atributo de cualquier parte del curso. Gracias al [string literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) de <i>name</i>, TypeScript puede identificar qué parte del curso requiere qué atributos adicionales, incluso si la variable está definida para usar la unión de tipos.
 
-¡Pero todavía no estamos satisfechos! Todavía hay mucha duplicación en nuestros tipos y queremos evitar eso. Comenzamos identificando los atributos que todas las partes del curso tienen en común y definiendo un tipo base que los contiene. Luego, [ampliaremos](http://www.typescriptlang.org/docs/handbook/interfaces.html#extending-interfaces) ese tipo base para crear nuestros tipos específicos de partes:
+¡Pero todavía no estamos satisfechos! Todavía hay mucha duplicación en nuestros tipos y queremos evitar eso. Comenzamos identificando los atributos que todas las partes del curso tienen en común y definiendo un tipo base que los contiene. Luego, [ampliaremos](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) ese tipo base para crear nuestros tipos específicos de partes:
 
 ```js
 interface CoursePartBase {
@@ -368,7 +368,7 @@ En el ejemplo anterior, TypeScript sabe que un <i>coursePart</i> tiene el tipo <
 
 ¿Qué hay de agregar nuevos tipos? Si tuviéramos que agregar una nueva parte del curso, ¿no sería bueno saber si ya hemos implementado el manejo de ese tipo en nuestro código? En el ejemplo anterior, un nuevo tipo iría al bloque <i>default</i> y no se imprimiría nada para un nuevo tipo. Por supuesto, a veces esto es totalmente aceptable, por ejemplo, si desea manejar solo casos específicos (no todos) de una unión de tipos, pero en la mayoría de los casos se recomienda manejar todas las variaciones por separado.
 
-Con TypeScript podemos utilizar un método llamado <i>comprobación exhaustiva de tipos</i>. Su principio básico es que si encontramos un valor inesperado, llamamos a una función que acepta un valor con el tipo [never](https://www.typescriptlang.org/docs/handbook/basic-types.html#never) y también tiene el tipo de retorno <i>never</i>.
+Con TypeScript podemos utilizar un método llamado <i>comprobación exhaustiva de tipos</i>. Su principio básico es que si encontramos un valor inesperado, llamamos a una función que acepta un valor con el tipo [never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type) y también tiene el tipo de retorno <i>never</i>.
 
 Una versión sencilla de la función podría verse así:
 
@@ -467,7 +467,7 @@ Por último, agregue su propia interfaz de parte del curso con al menos los sigu
 <div class="content">
 
 ### Una nota sobre la definición de tipos de objetos
-Hemos utilizado [interfaces](http://www.typescriptlang.org/docs/handbook/interfaces.html) para definir tipos de objetos, por ejemplo, entradas de diario, en la sección anterior.
+Hemos utilizado [interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) para definir tipos de objetos, por ejemplo, entradas de diario, en la sección anterior.
 
 ```js
 interface DiaryEntry {
@@ -487,7 +487,7 @@ interface CoursePartBase {
 }
 ```
 
-De hecho, podríamos haber tenido el mismo efecto usando un [alias de tipo](http://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases)
+De hecho, podríamos haber tenido el mismo efecto usando un [alias de tipo](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases)
 
 
 ```js
@@ -502,7 +502,7 @@ type DiaryEntry = {
 
 En la mayoría de los casos, puede utilizar la sintaxis que prefiera, <i>type</i> or <i>interface</i>. Sin embargo, hay algunas cosas a tener en cuenta. Por ejemplo, si define varias interfaces con el mismo nombre, darán como resultado una interfaz fusionada, mientras que si intenta definir varios tipos con el mismo nombre, dará como resultado un error que indica que un tipo con el mismo nombre ya está declarado.
 
-La documentación de TypeScript [recomienda el uso de interfaces](http://www.typescriptlang.org/docs/handbook/advanced-types.html#interfaces-vs-type-aliases) en la mayoría de los casos.
+La documentación de TypeScript [recomienda el uso de interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) en la mayoría de los casos.
 
 ### Trabajar con una base de código existente
 
@@ -555,7 +555,7 @@ export type State = {
 };
 ```
 
-El estado es un objeto con una key <i>patients</i>, que tiene un [diccionario](https://www.typescriptlang.org/docs/handbook/advanced-types.html#index-types-and-index-signatures) o simplemente pone un objeto con keys de strings y con un objeto <i>Patient</i> como valores. El índice solo puede ser un <i>string</i> o un <i>number</i> ya que puede acceder a los valores del objeto usando esos. Esto obliga a que el estado se ajuste a la forma que queremos y evita que los desarrolladores hagan un mal uso del estado.
+El estado es un objeto con una key <i>patients</i>, que tiene un [diccionario](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) o simplemente pone un objeto con keys de strings y con un objeto <i>Patient</i> como valores. El índice solo puede ser un <i>string</i> o un <i>number</i> ya que puede acceder a los valores del objeto usando esos. Esto obliga a que el estado se ajuste a la forma que queremos y evita que los desarrolladores hagan un mal uso del estado.
 
 ¡Pero ten en cuenta una cosa! Cuando un tipo se declara como el tipo para <i>patients</i>, TypeScript en realidad no tiene ninguna forma de saber si la key a la que está intentando acceder realmente existe o no. Entonces, si intentáramos acceder a un paciente mediante una identificación no existente, el compilador pensaría que el valor devuelto es de tipo <i>Patient</i> y no se produciría ningún error al intentar acceder a sus propiedades:
 

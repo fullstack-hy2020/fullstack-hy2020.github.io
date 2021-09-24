@@ -130,7 +130,7 @@ const ALL_PERSONS = gql`
 ```
 
 ### Subscriptions
-
+  
 Along with query- and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions clients can <i>subscribe to</i> updates about changes in the server. 
 
 
@@ -144,7 +144,14 @@ Technically speaking the HTTP-protocol is not well suited for communication from
 
 ### Subscriptions on the server
 
+**NB!** This subscription setup is based on the apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed the apollo-server version 2 (for example by running _npm i apollo-server@2.25.2_) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
+  
 Let's implement subscriptions for subscribing for notifications about new persons added.
+First, we have to install the package for adding subscriptions to GraphQL:
+
+```bash
+npm install graphql-subscriptions
+```
 
 There are not many changes to the server. The schema changes like so:
 
@@ -163,7 +170,7 @@ The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also h
 The required changes are as follows:
 
 ```js
-const { PubSub } = require('apollo-server') // highlight-line
+const { PubSub } = require('graphql-subscriptions') // highlight-line
 const pubsub = new PubSub() // highlight-line
 
   Mutation: {
@@ -422,11 +429,11 @@ The final code of the client can be found on [Github](https://github.com/fullsta
 
 ### n+1-problem
 
-First of all  you'll need to enable a debugging option via `mongoose` in your backend project directory, by adding a line of code as shown below:
+First of all  you'll need to enable a debugging option via _mongoose_ in your backend project directory, by adding a line of code as shown below:
 
 
 ```js
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })
@@ -548,7 +555,7 @@ friendOf: async (root) => {
 },
 ```
 
-and considering we have 5 persons saved, and we query `allPersons` without `phone` as argument, we see an absurd amount of queries like below.
+and considering we have 5 persons saved, and we query _allPersons_ without _phone_ as argument, we see an absurd amount of queries like below.
 
 <pre>
 Person.find_v1
@@ -559,7 +566,7 @@ User.find
 User.find
 </pre>
 
-NOTE: Depending upon if you provided `phone` parameter or not when querying `allPersons`, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
+NOTE: Depending upon if you provided _phone_ parameter or not when querying _allPersons_, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 
@@ -702,7 +709,7 @@ Once you have completed the exercises and want to get the credits, let us know t
 
 Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
-**Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information.
+**Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 
 You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
 

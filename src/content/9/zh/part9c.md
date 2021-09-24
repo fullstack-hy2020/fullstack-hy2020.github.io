@@ -1451,8 +1451,8 @@ const isString = (text: unknown): text is string => {
 
 
 
-<!-- The function is a so called [type guard](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards). That means it is a function which returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is -->
-这个函数是一个所谓的[类型保护](https://www.typescriptlang.org/docs/handbook/advanced-types.html#user-defined-type-guards)。 这意味着它是一个返回布尔型的函数，它的返回类型是<i>类型谓词</i>。 在我们的示例中，类型谓词是
+<!-- The function is a so called [type guard](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). That means it is a function which returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is -->
+这个函数是一个所谓的[类型保护](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates)。 这意味着它是一个返回布尔型的函数，它的返回类型是<i>类型谓词</i>。 在我们的示例中，类型谓词是
 
 ```js
 text is string

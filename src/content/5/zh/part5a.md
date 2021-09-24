@@ -526,8 +526,8 @@ _JSON.stringify_ 方法转换成 JSON。相应的，当从本地存储读取 JSO
   }
 ```
 
-<!-- The details of a logged-in user are now saved to the local storage, and they can be viewed on the console: -->
-现在用户的详细信息被存储到本地存储了，并且能够在控制台看到。
+<!-- The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing `window.localStorage` to the console): : -->
+现在用户的详细信息被存储到本地存储了，并且能够在控制台看到（可以通过在控制台键入`window.localStorage`看到）。
 
 ![](../../images/5/3e.png)
 

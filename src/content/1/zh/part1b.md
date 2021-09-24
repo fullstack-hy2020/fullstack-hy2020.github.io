@@ -10,7 +10,7 @@ lang: zh
 在本课程中，除了网页开发，我们还有一个目标和需求，就是学习足量的 JavaScript 知识。
 <!-- JavaScript has advanced rapidly the last few years and in this course we use features from the newer versions. The official name of the JavaScript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2019 with the name [ECMAScript® 2019](http://www.ecma-international.org/ecma-262/10.0/index.html), otherwise known as ES10. -->
 
-JavaScript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 JavaScript 标准的正式名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。 目前（2021年1月，译者注），最新的版本是2020年6月发布的，名为[ECMAScript®2020](https://www.ecma-international.org/ecma-262/) ，即ES11。 
+JavaScript 在过去的几年里发展非常迅速，在本课程中，我们将使用新版本的特性。 JavaScript 标准的正式名称是[ECMAScript](https://en.wikipedia.org/wiki/ECMAScript)。 目前（2021年1月，译者注），最新的版本是2021年6月发布的，名为[ECMAScript®2021](https://www.ecma-international.org/ecma-262/) ，即ES12。 
 
 <!-- Browsers do not yet support all of JavaScript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of JavaScript to an older, more compatible version. -->
 
@@ -29,7 +29,7 @@ JavaScript 在过去的几年里发展非常迅速，在本课程中，我们将
 
 <!-- It is also possible to write JavaScript code into the Node.js console, which is opened by typing _node_ in the command-line, as well as into the browser's developer tool console. The newest revisions of Chrome handle the newer features of JavaScript [pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code.Alternatively you can use a tool like [JS Bin](https://jsbin.com/?js,console). -->
 
-还可以将 JavaScript 代码编写到 Node.js 控制台(通过在命令行中键入 _node_ 打开)，或者浏览器的开发工具控制台中。 最新版本的 Chrome 能 [很好地](http://kangax.github.io/compat-table/es2016plus/) 处理 JavaScript 的新特性，而且不需要转译代码。作为替代品，你也可以选择 [JS Bin](https://jsbin.com/?js,console)这样的工具。
+还可以将 JavaScript 代码编写到 Node.js 控制台(通过在命令行中键入 _node_ 打开)，或者浏览器的开发工具控制台中。 [最新版本的 Chrome 能很好地处理 JavaScript 的新特性](http://kangax.github.io/compat-table/es2016plus/) ，而且不需要转译代码。作为替代品，你也可以选择 [JS Bin](https://jsbin.com/?js,console)这样的工具。
 
 <!-- JavaScript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of JavaScript can seem a bit alien, especially if one does not make the effort to look up its features. -->
 
@@ -65,9 +65,9 @@ x = 4               // causes an error
 
 在示例中，我们还可以看到，分配给变量的数据类型，在执行过程中可以发生更改。 例如开头的 y 存储了一个整数，但最后存储一个字符串。
 
-<!-- It is also possible to define variables in JavaScript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). Var was for a long time the only way to define variables. Const and let were only recently added in version ES6. In specific situations, var works in a [different](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) [way](http://www.jstips.co/en/javascript/keyword-var-vs-let/) compared to variable definitions in most languages. During this course the use of var is ill-advised and you should stick with using const and let! -->
+<!-- It is also possible to define variables in JavaScript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). var was, for a long time, the only way to define variables. const and let were only recently added in version ES6. In specific situations, var works in a different way compared to variable definitions in most languages - see [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) or [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) for more information. During this course the use of var is ill-advised and you should stick with using const and let! -->
 
-也可以使用关键字[var](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/statements/var)在 JavaScript 中定义变量。 在很长一段时间里，var 是定义变量的唯一方法。 const 和 let 是最近才在 ES6版本中添加的。 在一些特定情况，var 的工作方式与大多数语言中的变量定义相比是[十分不同的](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f)。 在本课程中明确不建议使用var，你应该坚持使用 const 和 let！
+也可以使用关键字[var](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/statements/var)在 JavaScript 中定义变量。 在很长一段时间里，var 是定义变量的唯一方法。 const 和 let 是最近才在 ES6版本中添加的。 在一些特定情况，var 的工作方式与大多数语言中的变量定义相比是十分不同的， 可以阅读[JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) 或者[Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/)。 在本课程中明确不建议使用var，你应该坚持使用 const 和 let！
 
 <!-- You can find more on this topic on e.g. YouTube - [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8) -->
 你可以在 YouTube中找到更多关于这个 [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)议题的讨论
@@ -631,7 +631,7 @@ janja.greet()
 在语法方面，类以及由它们创建的对象非常类似于 Java 的类和对象。 它们的行为也非常类似于 Java 对象。 但在本质上，它们仍然是基于 JavaScript 的[原型继承](https://developer.mozilla.org/en-us/docs/learn/JavaScript/objects/inheritance)的对象。 这两个对象的类型实际上都是 Object，因为 JavaScript 实质上只定义了[Boolean，Null，Undefined，Number，String，Symbol，BigInt，以及 Object](https://developer.mozilla.org/en-us/docs/web/JavaScript/data_structures)几种类型。
 
 <!-- Introduction of the class syntax is a controversial addition, e.g. check out [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) -->
-类语法的引入是一个有争议的新特性，例如[Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) 或者[Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)这两篇文章所讨论的。
+类语法的引入是一个有争议的新特性，例如[Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) 或者[Is “Class” In ES6 The New “Bad” Part? on Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65)这两篇文章所讨论的。
 
 <!-- The ES6 class syntax is used a lot in "old" React and also in Node.js hence an understanding of it is beneficial even in this course. But since we are using the new [hook](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course we have no concrete use for JavaScript's class syntax. -->
 ES6的类语法在“老的” React 和 Node.js 中被广泛使用，因此即使在本课程中，对它有所了解也是有益的。 但是因为我们在整个课程中都使用了 React 的新的[hooks](https://reactjs.org/docs/hooks-intro.html)特性，所以我们没有具体使用 JavaScript 的类语法。 

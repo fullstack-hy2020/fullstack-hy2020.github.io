@@ -98,7 +98,7 @@ npm run cypress:open
 ```
 
 <!-- Ensimmäisen käynnistyksen yhteydessä sovellukselle syntyy hakemisto <i>cypress</i>, jonka alihakemistoon <i>integrations</i> on tarkoitus sijoittaa testit. Cypress luo valmiiksi joukon esimerkkitestejä, poistetaan ne ja luodaan ensimmäinen oma testi tiedostoon <i>note\_app.spec.js</i>: -->
-When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in the <i>integration/examples</i> directory. We can delete the <i>examples</i> directory and make our own test in file <i>note\_app.spec.js</i>:
+When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two sub directories the <i>integration/1-getting-statrted</i> and the <i>integration/2-advanced examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:
 
 ```js
 describe('Note app', function() {
@@ -144,7 +144,7 @@ describe('Note app', () => { // highlight-line
 However, Mocha [recommends](https://mochajs.org/#arrow-functions) that arrow functions are not used, because they might cause some issues in certain situations. 
 
 <!-- Jos komento <i>cy.contains</i> ei löydä sivulta etsimäänsä tekstiä, testi ei mene läpi. Eli jos laajennamme testiä seuraavasti -->
-If <i>cy.contains</i> does not find the text is it searching for, the test does not pass. 
+If <i>cy.contains</i> does not find the text it is searching for, the test does not pass. 
 So if we extend our test like so
 
 ```js

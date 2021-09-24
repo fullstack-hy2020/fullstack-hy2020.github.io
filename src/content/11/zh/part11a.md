@@ -52,7 +52,7 @@ lang: zh
 Git 允许代码的多个副本、流或版本共存，而不会相互覆盖。当你第一次创建代码库时，你将看到主分支(通常在 git 中，我们称之为<i>master</i> 或 <i>main</i>，但是在旧的项目中这是不同的)。如果一个项目只有一个开发人员，而且开发人员一次只处理一个特性，那么这样做是没有问题的。
 
 
-<!-- Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from the master. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready.  -->
+<!-- Branches are useful when this environment becomes more complex. In this context, each developer can have one or more branches. Each branch is effectively a copy of the main branch with some changes that make it diverge from it. Once the feature or change in the branch is ready it can be <i>merged</i> back into the main branch, effectively making that feature or change part of the main software. In this way, each developer can work on their own set of changes and not affect any other developer until the changes are ready.  -->
 当这个环境变得更复杂时，分支就派上了用场。在这种情况下，每个开发人员可以有一个或多个分支。每个分支实际上都是主分支的一个副本，但有一些修改使其偏离主分支。一旦分支中的特性或更改准备就绪，它就可以合并<i>merged</i>回主分支，能有效地使该特性或更改成为主软件的一部分。通过这种方式，每个开发人员可以处理自己的一组更改，并且在更改准备就绪之前不会影响其他开发人员。
 
 <!-- But once one developer has merged their changes into the main branch, what happens to the other developers' branches? They are now diverging from an older copy of the main branch. How will the developer on the later branch know if their changes are compatible with the current state of the main branch? That is one of the fundamental questions we will be trying to answer in this part. -->
@@ -141,17 +141,17 @@ CI 的一部分——打包和部署
 <!-- The packaging is often an area where issues crop up in CI as this isn't something that's usually tested locally. It makes sense to test the packaging of a project during the CI workflow even if we don't do anything with the resulting package. With some workflows, we may even be testing the already built packages. This assures us that we have tested the code in the same form as what will be deployed to production. -->
 打包通常是 CI 中突然出现问题的地方，因为这通常不是在本地测试的东西。在 CI 工作流程中测试项目的打包是有意义的，即使我们不对产生的包做任何事情。通过一些工作流，我们甚至可以测试已经构建的包。这向我们保证，我们已经测试了将部署到生产环境中的代码的相同形式。
 
-<!-- What about deployment then? We'll talk about consistency and repeatability at length in the coming sections but we'll mention here that we want a process that always looks the same, whether we're running tests on a development branch or the master. In fact, the process may <i>literally</i> be the same with only a check at the end to determine if we are on the master branch and need to do a deployment. In this context, it makes sense to include deployment in the CI process since we'll be maintaining it at the same time we work on CI. -->
+<!-- What about deployment then? We'll talk about consistency and repeatability at length in the coming sections but we'll mention here that we want a process that always looks the same, whether we're running tests on a development branch or the main. In fact, the process may <i>literally</i> be the same with only a check at the end to determine if we are on the main branch and need to do a deployment. In this context, it makes sense to include deployment in the CI process since we'll be maintaining it at the same time we work on CI. -->
 那部署怎么办？在接下来的部分中，我们将详细讨论一致性和可重复性，但在这里我们将提到，无论是在开发分支上还是在主分支上运行测试，我们都希望流程看起来总是相同的。实际上，这个过程可能<i>完全</i> 相同，只是在结尾处有一个检查，以确定我们是否在主分支上，是否需要进行部署。在这种情况下，将部署包含在 CI 流程中是有意义的，因为我们将在处理 CI 的同时维护它。
 
 #### Is this CD thing related?
 CD 是指的什么？
 
-<!-- The terms <i>Continuous Delivery</i> and <i>Continuous Deployment</i> (both of which have the acronym CD) are often used when one talks about CI that also takes care of deployments. We won't bore you with the exact definition (you can use e.g. [Wikipedia](https://en.wikipedia.org/wiki/Continuous_delivery) or [Martin Fowler's another blog post](https://martinfowler.com/bliki/ContinuousDelivery.html)) but in general, we refer to CD as the practice where the master branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges into the master/base branch. -->
+<!-- The terms <i>Continuous Delivery</i> and <i>Continuous Deployment</i> (both of which have the acronym CD) are often used when one talks about CI that also takes care of deployments. We won't bore you with the exact definition (you can use e.g. [Wikipedia](https://en.wikipedia.org/wiki/Continuous_delivery) or [Martin Fowler's another blog post](https://martinfowler.com/bliki/ContinuousDelivery.html)) but in general, we refer to CD as the practice where the main branch is kept deployable at all times. In general, this is also frequently coupled with automated deployments triggered from merges into the master/base branch. -->
 持续交付<i>Continuous Delivery</i>和持续部署<i>Continuous Deployment</i>(两者的首字母缩写都是 CD)这两个术语经常被用来指代负责部署的 CI。我们不会给出确切的定义(你可以使用维基百科[Wikipedia](https://en.wikipedia.org/wiki/Continuous_delivery)或者 Martin Fowler 的另一篇[博客文章](https://martinfowler.com/bliki/ContinuousDelivery.html)) ，但是一般来说，我们把 CD 称为主分支在任何时候都可以部署的实践。通常，这也经常与从合并到主/基分支中触发的自动部署相结合。
 
-<!-- What about the murky area between CI and CD? If we, for example, have tests that must be run before any new code can be merged to master, is this CI because we're making frequent merges to master, or is it CD because we're making sure that master is always deployable? -->
-CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代码可以被合并到 master 之前必须运行测试，那么这个 CI 是因为我们要经常合并到 master 中，还是 CD 是因为我们要确保 master 总是可部署的？
+<!-- What about the murky area between CI and CD? If we, for example, have tests that must be run before any new code can be merged to master, is this CI because we're making frequent merges to master, or is it CD because we're making sure that main is always deployable? -->
+CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代码可以被合并到 main 之前必须运行测试，那么这个 CI 是因为我们要经常合并到 main 中，还是 CD 是因为我们要确保 main 总是可部署的？
 
 <!-- So, some concepts frequently cross the line between CI and CD and, as we discussed above, deployment sometimes makes sense to consider CD as part of CI. This is why you'll often see references to CI/CD to describe the entire process. We'll use the terms "CI" and "CI/CD" interchangeably in this part.  -->
 因此，一些概念经常跨越 CI 和 CD 之间的界限，正如我们上面讨论的，部署有时候将 CD 视为 CI 的一部分是有意义的。这就是为什么你经常会看到对 CI/CD 的引用来描述整个过程。在本章节中，我们将交替使用“ CI”和“ CI/CD”这两个术语。
@@ -165,7 +165,7 @@ CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代�
 <!-- With the use of continuous integration and systematic ways of working, we can avoid these.  -->
 通过使用持续集成和系统的工作方式，我们可以避免这些问题。
  <!-- - We can disallow commits directly to master
- - We can have our CI process run on all Pull Requests (PRs) against master and allow merges only when our desired conditions are met e.g. tests pass
+ - We can have our CI process run on all Pull Requests (PRs) against mai nand allow merges only when our desired conditions are met e.g. tests pass
  - We can build our packages for production in the known environment of the CI system -->
 - 我们可以禁止直接向master的提交
 - 我们可以让我们的 CI 程序在所有针对master的PR请求上运行，并且只有当我们所需的条件(如测试通过)得到满足时才允许合并
@@ -173,9 +173,9 @@ CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代�
 
 <!-- There are other advantages to extending this setup: -->
 扩展这种还有其他好处:
- <!-- - If we use CD with deployment every time there is a merge to master then we know that master is always running in production
+ <!-- - If we use CD with deployment every time there is a merge to main then we know that main is always running in production
  - If we only allow merges when the branch has an up to date master, then we can be sure that different developers don't overwrite each other's changes -->
- - 如果我们每次在合并到 master 时使用 CD 部署，那么我们就知道 master 总是在生产中运行
+ - 如果我们每次在合并到 main 时使用 CD 部署，那么我们就知道 main 总是在生产中运行
  - 如果我们只允许在具有最新的master分支时进行合并，那么我们可以确保不同的开发人员不会覆盖彼此的更改
 
 <!-- Note that in this part we are assuming that <i>master</i> or <i>main</i> branch contains the code that is running in production. The numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code which is running in production. -->
@@ -191,7 +191,7 @@ CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代�
 <!-- To that end, CI should always be configured to the task at hand and the project itself. The end goal should be kept in mind at all times. You can think of CI as the answer to these questions: -->
 为此，CI 应该始终配置为手头的任务和项目本身。任何时候都应该牢记最终目标。你可以把 CI 看作是这些问题的答案:
  <!-- - How to make sure that tests run on all code that will be deployed?
- - How to make sure that the master branch is deployable at all times?
+ - How to make sure that the main branch is deployable at all times?
  - How to ensure that builds will be consistent and will always work on the platform it'd be deploying to?
  - How to make sure that the changes don't overwrite each other?
  - How to make deployments happen at the click of a button or automatically when one merges to master? -->
@@ -225,8 +225,8 @@ CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代�
 <!-- We might have the best tests imaginable for our software, tests that catch every possible issue. That's great, but they're useless if we don't run them on the code before it's deployed. -->
 对于我们的软件，我们可能有最好的可以想象的测试，这些测试可以捕捉到所有可能的问题。这很好，但是如果我们在部署之前不在代码上运行它们，它们就毫无用处。
 
-<!-- We need to guarantee that the tests will run and we need to be sure that they run against the code that will actually be deployed. For example, it's no use if the tests are <i>only</i> run against Alice's branch if they would fail after merging to master. We're deploying from the master so we need to make sure that the tests are run against a copy of master with Alice's changes merged in. -->
-我们需要保证测试能够运行，并且我们需要确保测试能够针对实际部署的代码运行。例如，如果测试<i>只</i>针对 Alice 的分支运行，而且在合并为 master 后会失败，那么测试就毫无用处。我们正在从master部署测试，所以我们需要确保测试是针对一个master副本运行的，并将 Alice 的更改合并到master中。
+<!-- We need to guarantee that the tests will run and we need to be sure that they run against the code that will actually be deployed. For example, it's no use if the tests are <i>only</i> run against Alice's branch if they would fail after merging to master. We're deploying from the main so we need to make sure that the tests are run against a copy of main with Alice's changes merged in. -->
+我们需要保证测试能够运行，并且我们需要确保测试能够针对实际部署的代码运行。例如，如果测试<i>只</i>针对 Alice 的分支运行，而且在合并为 main 后会失败，那么测试就毫无用处。我们正在从master部署测试，所以我们需要确保测试是针对一个master副本运行的，并将 Alice 的更改合并到master中。
 
 
 <!-- This brings us to a critical concept. We need to make sure that the same thing happens every time. Or rather that the required tasks are all performed and in the right order. -->
@@ -235,17 +235,17 @@ CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代�
 #### Code always kept deployable
 代码总是可部署的
 
-<!-- Having code that's always deployable (and provably so) makes life easier. This is especially so when the master branch contains the code running in the production environment. For example, if a bug is found and it needs to be fixed, you can pull a copy of master (knowing it is the code running in production), fix the bug, and make a pull request back to master. This is relatively straight forward.  -->
-拥有总是可部署的代码(并且可以证明是可部署的)会让生活变得更容易。当主分支包含在生产环境中运行的代码时尤其如此。例如，如果发现了一个 bug 并且需要修复，你可以提取 master 的一个副本(知道它是正在生产中运行的代码) ，修复该 bug，并向 master 发出一个提取请求。这是相对直接的。
+<!-- Having code that's always deployable (and provably so) makes life easier. This is especially so when the main branch contains the code running in the production environment. For example, if a bug is found and it needs to be fixed, you can pull a copy of main (knowing it is the code running in production), fix the bug, and make a pull request back to master. This is relatively straight forward.  -->
+拥有总是可部署的代码(并且可以证明是可部署的)会让生活变得更容易。当主分支包含在生产环境中运行的代码时尤其如此。例如，如果发现了一个 bug 并且需要修复，你可以提取 main 的一个副本(知道它是正在生产中运行的代码) ，修复该 bug，并向 main 发出一个提取请求。这是相对直接的。
 
-<!-- If, on the other hand, master and production are very different and master is not deployable, then you would have to find out what code <i>is</i> running in production, pull a copy of that, fix the bug, figure out a way to push it back, then work out how to deploy that specific commit. That's not great and would have to be a completely different workflow from a normal deployment. -->
+<!-- If, on the other hand, main and production are very different and main is not deployable, then you would have to find out what code <i>is</i> running in production, pull a copy of that, fix the bug, figure out a way to push it back, then work out how to deploy that specific commit. That's not great and would have to be a completely different workflow from a normal deployment. -->
 另一方面，如果master和生产非常不同，master不可部署，那么你就必须找出生产中运行的代码，提取其副本，修复错误，找到推回错误的方法，然后研究如何部署特定的提交。这不是很好，而且必然是一个与正常部署完全不同的工作流。
 
 #### Knowing what code is deployed (sha sum/version)
 知道部署了哪些代码(sha sum/version)
 
-<!-- It's often important to know what is actually running in production. Ideally, as we discussed above, we'd have master running in production. This is not always possible. Sometimes we intend to have master in production but a build fails, sometimes we batch together several changes and want to have them all deployed at once.  -->
-了解生产过程中实际运行的内容通常很重要。理想情况下，正如我们上面所讨论的，我们生产中运行的是master 分支。这并不总是可能的。有时候我们想要将master跑到生产，但是构建失败了，有时候我们有一批变更并且希望同时部署它们。
+<!-- It's often important to know what is actually running in production. Ideally, as we discussed above, we'd have main running in production. This is not always possible. Sometimes we intend to have main in production but a build fails, sometimes we batch together several changes and want to have them all deployed at once.  -->
+了解生产过程中实际运行的内容通常很重要。理想情况下，正如我们上面所讨论的，我们生产中运行的是主分支。这并不总是可能的。有时候我们想要将master跑到生产，但是构建失败了，有时候我们有一批变更并且希望同时部署它们。
 
 <!-- What we need in these cases (and is a good idea in general) is to know exactly <i>what code is running in production</i>. Sometimes this can be done with a version number, sometimes it's useful to have the commit SHA sum (uniquely identifying hash of that particular commit in git) attached to the code. We will discuss versioning further [a bit later in this part](/en/part11/keeping_green#versioning). -->
 在这些情况下，我们需要的(通常是一个好主意)是准确地知道<i>生产环境中运行的代码是什么</i>。有时可以使用版本号来完成，有时将提交 SHA sum (git 中特定提交的唯一标识散列)附加到代码中是有用的。我们将在本章节后面进一步讨论版本控制。
@@ -320,7 +320,7 @@ GitHub Actions 和其他基于云的解决方案
 <!-- Before getting our hands dirty with setting up the CI/CD pipeline let us reflect a bit on what we have read.  -->
 在开始设置 CI/CD 管道之前，让我们先回顾一下我们所读到的内容。
 
-#### 11.1 warming up
+#### 11.1 Warming up
 热身
 
 <!-- Think about a hypothetical situation where we have an application being worked on by a team of about 6 people. The application is in active development and will be released soon. -->

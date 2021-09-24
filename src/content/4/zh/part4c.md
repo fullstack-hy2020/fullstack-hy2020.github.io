@@ -209,9 +209,9 @@ Note 的 ID 以数组的形式存储在了 User 当中，定义如下：
 type 字段 是<i>ObjectId</i>，引用了 <i>note</i> 的文档类型。Mongo 
 本质上并不知道这是一个引用 Note 的字段，这种语法完全是与 Mongoose 的定义有关。
 
-<!-- Let's expand the schema of the note defined in the <i>model/note.js</i> file so that the note contains information about the user who created it: -->
+<!-- Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it: -->
 
-让我们展开 <i>model/note.js</i> 文件中 note 的 schema，让 note 包含其创建者的信息。
+让我们展开 <i>models/note.js</i> 文件中 note 的 schema，让 note 包含其创建者的信息。
 
 ```js
 const noteSchema = new mongoose.Schema({

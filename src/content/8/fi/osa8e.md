@@ -125,6 +125,9 @@ export const ALL_PERSONS = gql`
 
 ### Subscriptiot eli tilaukset
 
+
+**HUOM:** tuki subscriptioille ei ole enää oletusarvoisesti mukana Apollo Serverin versiossa 3. Allaolevt ohjeet olettavat että käytät versiota 2, (voit asentaa sen komennolla <i>npm install apollo-server@2.25.2</i>). Jos haluat käyttää versiota 3, katso[dokumentaatiosta](https://www.apollographql.com/docs/apollo-server/data/subscriptions/) miten saat subscriptiot toimimaan.
+
 GraphQL tarjoaa query- ja mutation-tyyppien lisäksi kolmannenkin operaatiotyypin, [subscriptionin](https://www.apollographql.com/docs/react/data/subscriptions/), jonka avulla clientit voivat <i>tilata</i> palvelimelta tiedotuksia palvelimella tapahtuneista muutoksista.
 
 Subscriptionit poikkeavatkin radikaalisti kaikesta, mitä kurssilla on tähän mennessä nähty. Toistaiseksi kaikki interaktio on koostunut selaimessa olevan React-sovelluksen palvelimelle tekemistä HTTP-pyynnöistä. Myös GraphQL:n queryt ja mutaatiot on hoidettu näin. Subscriptionien myötä tilanne kääntyy päinvastaiseksi. Sen jälkeen kun selaimessa oleva sovellus on tehnyt tilauksen muutostiedoista, alkaa selain kuunnella palvelinta. Muutosten tullessa palvelin lähettää muutostiedon <i>kaikille sitä kuunteleville</i> selaimille.

@@ -50,8 +50,8 @@ lang: zh
 GitHub 的 pull 请求接口提供了描述和讨论接口。在底部，它显示了所有的 CI 检查(在我们的例子中，每个 Github Actions) ，这些检查被配置为为每个 PR 和这些检查的状态运行。一个绿色的板是你的目标！您可以单击每次检查的详细信息以查看详细信息并运行日志。
 
 
-<!-- All the workflows we looked at so far were triggered by commits to main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "main" and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into main is opened or updated. -->
-到目前为止我们看到的所有工作流都是由提交到 main 分支触发的。要使工作流为每个请求运行，我们必须更新工作流的触发器部分。我们对分支“main”使用“pull_request”触发器，并将触发器限制为“ opened”和“synchronize”事件。基本上，这意味着，工作流在 PR 到main 打开或更新时将运行。
+<!-- All the workflows we looked at so far were triggered by commits to the main branch. To make the workflow run for each pull request we would have to update the trigger part of the workflow. We use the "pull_request" trigger for branch "master" (our main branch) and limit the trigger to events "opened" and "synchronize". Basically, this means, that the workflow will run when a PR into the main branch is opened or updated. -->
+到目前为止我们看到的所有工作流都是由提交到 main 分支触发的。要使工作流为每个请求运行，我们必须更新工作流的触发器部分。我们对“主分支”（我们的main分支）使用“pull_request”触发器，并将触发器限制为“ opened”和“synchronize”事件。基本上，这意味着，工作流在 PR 到main 打开或更新时将运行。
 
 <!-- So let us change events that [trigger](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) of the workflow as follows: -->
 因此，让我们将触发[trigger](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows)工作流的事件更改如下:
@@ -60,13 +60,13 @@ GitHub 的 pull 请求接口提供了描述和讨论接口。在底部，它显�
 on:
   push:
     branches:
-      - main
+      - master
   pull_request: // highlight-line
-    branches: [main] // highlight-line
+    branches: [master] // highlight-line
     types: [opened, synchronize] // highlight-line
 ```
 
-<!-- We shall soon make it impossible to push the code directly to main, but in the meantime, let us still run the workflow also for all the possible direct pushes to main. -->
+<!-- We shall soon make it impossible to push the code directly to the main branch, but in the meantime, let us still run the workflow also for all the possible direct pushes to the main branch. -->
 我们很快就不可能把代码直接推给main 分支，但同时，让我们仍然运行工作流以及为所有可能的直接推给main 分支。
 
 
@@ -76,16 +76,16 @@ on:
 
 ### Exercises 11.14-11.15.
 
-<!-- Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to main, it's catching the problems too late! -->
-我们的工作流在确保良好的代码质量方面做得很好，但是由于它是在提交到 main 上运行的，因此它发现问题的时间太晚了！
+<!-- Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to the main branch, it's catching the problems too late! -->
+我们的工作流在保证代码质量方面做得很好，但是由于它是在提交到 main 上运行的，因此发现问题的时间略晚！
 
-#### 11.14 pull request
+#### 11.14 Pull request
 
-<!-- Update the trigger of the existing workflow as suggested above to run on new pull requests to main. -->
+<!-- Update the trigger of the existing workflow as suggested above to run on new pull requests to your main branch. -->
 按照上面的建议更新现有工作流的触发器，以便在新的请求上运行。
 
 
-<!-- Create a new branch, commit your changes, and open a pull request to main. -->
+<!-- Create a new branch, commit your changes, and open a pull request to your main branch. -->
 创建一个新的分支，提交您的更改，并打开一个PR到main。
 
 <!-- If you have not worked with branches before, check [e.g. this tutorial](https://www.atlassian.com/git/tutorials/using-branches) to get started. -->
@@ -105,12 +105,12 @@ on:
 <!-- Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline. -->
 一旦检查已经运行，状态应该转为绿色。确保所有的检查都通过。先不要合并您的分支，还有一件事情，我们需要改善我们的管道。
 
-#### 11.15 run deployment step only for main branch
+#### 11.15  Run deployment step only for the main branch
 
 <!-- All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment, are run also for pull requests. This is surely something we do not want! -->
 看起来都不错，但实际上当前的工作流程存在一个相当严重的问题。所有的步骤，包括部署，都是针对PR运行的。这肯定是我们不想要的东西！
 
-<!-- Fortunately, there is an easy solution for the problem! We can add an [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when the code is being merged or pushed to main. -->
+<!-- Fortunately, there is an easy solution for the problem! We can add an [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif) condition to the deployment step, which ensures that the step is executed only when the code is being merged or pushed to the main branch. -->
 幸运的是，这个问题有一个简单的解决方案！我们可以在部署步骤中添加一个 [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idif)  条件，这样可以确保只有当代码被合并或推送到main 时才执行该步骤。
 
 <!-- The workflow [context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contexts) gives various kinds of information about the code the workflow is run. -->
@@ -125,7 +125,7 @@ on:
 if: ${{ github.event_name == 'push' }}
 ```
 
-<!-- Push some more code to your branch, and ensure that the deployment step <i>is not executed</i> anymore. Then merge the branch to main and make sure that the deployment happens. -->
+<!-- Push some more code to your branch, and ensure that the deployment step <i>is not executed</i> anymore. Then merge the branch to the main branch and make sure that the deployment happens. -->
 将更多的代码推送到分支，并确保 <i>不再执行</i>部署步骤。然后将分支合并到 main 中，并确保发生部署。
 
 </div>
@@ -224,7 +224,7 @@ if: ${{ github.event_name == 'push' }}
 <!-- There is a catch. We discussed at the beginning of this part that we always have to know exactly what is happening with our code, for example, we need to be sure that we have tested the code we want to deploy. Having two parallel versioning (or naming) conventions can make this a little more difficult. -->
 这里有一个陷阱。我们在本部分的开头讨论了我们总是需要知道我们的代码到底发生了什么，例如，我们需要确保我们已经测试了我们想要部署的代码。有两个并行的版本控制(或者命名)约定会使这个过程更加困难一些。
 
-<!-- For example, when we have a project that uses hash-based artifact builds for testing, it's always possible to track the result of every build, lint, and test to a specific commit and developers know the state their code is in. This is all automated and transparent to the developers. They never need to be aware of the fact that the CI system is using the commit hash underneath to name build and test artifacts. When the developers merge their code to main, again the CI takes over. This time, it will build and test all the code and give it a semantic version number all in one go. It attaches the version number to the relevant commit with a git tag. -->
+<!-- For example, when we have a project that uses hash-based artifact builds for testing, it's always possible to track the result of every build, lint, and test to a specific commit and developers know the state their code is in. This is all automated and transparent to the developers. They never need to be aware of the fact that the CI system is using the commit hash underneath to name build and test artifacts. When the developers merge their code to the main branch, again the CI takes over. This time, it will build and test all the code and give it a semantic version number all in one go. It attaches the version number to the relevant commit with a git tag. -->
 例如，当我们的项目使用基于散列的工件构建进行测试时，总是可以跟踪每个构建、 lint 和测试到特定提交的结果，开发人员知道他们的代码所处的状态。这对于开发人员来说是完全自动化和透明的。他们永远不需要知道 CI 系统使用底层的提交散列来命名构建和测试工件。当开发人员将他们的代码合并到掌握中时，CI 再次接管了一切。这一次，它将构建和测试所有的代码，并一次性给它一个语义版本号。它使用 git 标记将版本号附加到相关的提交。
 
 
@@ -237,7 +237,7 @@ if: ${{ github.event_name == 'push' }}
 
 ### Exercises 11.16-11.17.
 
-<!-- Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into main and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action).  -->
+<!-- Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action).   -->
 让我们扩展我们的工作流，这样当一个PR被合并到主版本中时，它将自动增加(碰撞)版本，并用版本号[tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag)发行版。我们将使用第三方开发的开源操作:[anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action)。
 
 #### 11.16 Adding versioning
@@ -268,8 +268,8 @@ if: ${{ github.event_name == 'push' }}
 修改上面的配置，使每个新版本在缺省情况下都是版本号上的 _补丁_ 冲突，这样，在缺省情况下，最后一个版本号会增加。
 
 
-<!-- Remember that we want only to bump the version when the change happens to main branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-15) to prevent deployment on pull request releated events. -->
- 请记住，我们只想在主分支发生变化时撞版本！所以像[练习11.15](/zh/part11/keeping_green#exercises-11-14-11-15)中那样，添加一个类似的<code>if</code>条件来防止版本冲突以防止对PR进行部署时发生的相关事件。
+<!-- Remember that we want only to bump the version when the change happens to the main branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-11-15) to prevent deployment on pull request releated events. -->
+ 请记住，我们只想在主分支发生变化时处理冲突版本！所以像[练习11.15](/zh/part11/keeping_green#exercises-11-14-11-15)中那样，添加一个类似的<code>if</code>条件来防止版本冲突以防止对PR进行部署时发生的相关事件。
 
 
 <!-- Complete the workflow and try it out!  -->
@@ -307,10 +307,23 @@ if: ${{ github.event_name == 'push' }}
 
 <!-- A better option would perhaps be another job that takes care of tagging. -->
 
+There's another error you may encounter when using tags action:
+你还有可能遇到一些其他的错误：
+
+```
+  Bumping tag 0.0.0. 
+	New tag 0.0.1-beta.1
+fatal: tag '0.0.1-beta.1' already exists
+```
+<!-- A quick way to solve this is to add `0.0.0` tag manually using command line like so `git tag 0.0.0`. Then, push the tag to remote using `git push origin --tags`. -->
+
+快速解决该错误的方法是使用类似 `git tag 0.0.0` 命令手动增加 `0.0.0` 标签。然后利用 `git push origin --tags` 推送到远程仓库。
+
+
 #### 11.17 Skipping a commit for tagging and deployment
 跳过标签和部署的提交
 
-<!-- In general the more often you deploy the main to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production. -->
+<!-- In general the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production. -->
 一般来说，越经常地将主控程序部署到生产环境中，效果就越好。但是，有时可能有一些正当的理由跳过特定的提交或合并的PR，以便成为标记并发布到生产环境中。
 
 
@@ -325,7 +338,7 @@ if: ${{ github.event_name == 'push' }}
 实现这一点的最简单方法是修改相关步骤的 [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) 配置。与[练习11-15](/en/part11/keeping_green#exercises-11-14-15)类似，您可以从工作流的 [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) 中获得相关信息。
 
 
-You might take this as a starting point:
+<!-- You might take this as a starting point: -->
 你可以把这个作为一个起点:
 
 ```js
@@ -358,7 +371,7 @@ jobs:
 <!-- See what gets printed in the workflow log! -->
 看看在工作流日志中打印了什么！
 
-<!-- Note that you can access the commits and commit messages <i>only when pushing or merging to main</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests.  -->
+<!-- Note that you can access the commits and commit messages <i>only when pushing or merging to the main branch</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests.   -->
 请注意，<i>只有在将提交和提交消息推送或合并到 main 时</i>，才能访问提交和提交消息，因此对于 pull request，<code>github.event.commits</code> 是空的。无论如何，这是不需要的，因为我们希望跳过这一步完全为PR。
 
 <!-- You most likely need functions [contains](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contains) and [join](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#join) for your if condition. -->
@@ -408,19 +421,19 @@ jobs:
 通过指向特定提交的散列，我们可以确保我们在运行工作流时使用的代码不会发生更改，因为更改基本提交及其内容也会更改散列。
 
 
-### Keep main protected
+### Keep the main branch protected
 保护好main 分支
 
-<!-- GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: main. In repository settings, you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into main is one of the options we mentioned earlier. -->
+<!-- GitHub allows you to set up protected branches. It is important to protect your most important branch that should never be broken: <i>master</i>/<i>main</i>. In repository settings, you can choose between several levels of protection. We will not go over all of the protection options, you can learn more about them in GitHub documentation. Requiring pull request approval when merging into the main branch is one of the options we mentioned earlier. -->
 GitHub 允许你设置受保护的分支。保护你最重要的一个分支是非常重要的，这个分支永远不会被打破: main 分支。在代码库设置中，您可以在多个级别的保护之间进行选择。我们不会介绍所有的保护选项，您可以在 GitHub 文档中了解更多关于它们的信息。在合并到主服务器时需要PR批准是我们前面提到的选项之一。
 
 
-<!-- From CI point of view, the most important protection is requiring status checks to pass before a PR can be merged into main. This means that if you have set up GitHub actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged. Because you are the administrator for your repository, you will see an option to override the restriction. However, non-administrators will not have this option. -->
+<!-- From CI point of view, the most important protection is requiring status checks to pass before a PR can be merged into the main branch. This means that if you have set up GitHub actions to run e.g. linting and testing tasks, then until all the lint errors are fixed and all the tests pass the PR cannot be merged. Because you are the administrator for your repository, you will see an option to override the restriction. However, non-administrators will not have this option. -->
 从 CI 的角度来看，最重要的保护是要求状态检查通过之前，PR可以合并到main 。这意味着，如果你已经设置了 GitHub 的操作来运行，例如: linting 和 testing tasks，那么直到所有的 lint 错误都被修复并且所有的测试都通过了 PR 才能合并。因为您是代码库的管理员，所以您将看到一个覆盖限制的选项。但是，非管理员将不会有这个选项。
 
 ![Unmergeable PR](../../images/11/part11d_03.png)
 
-<!-- To set up protection for your main branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("main" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilize the power of GitHub Actions. Under it, you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged.  -->
+<!-- To set up protection for your main branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" or "main" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilize the power of GitHub Actions. Under it, you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged.   -->
 若要为主分支设置保护，请从代码库内的顶部菜单导航到代码库“设置”。在左侧菜单中选择“分支”。单击“分支保护规则”旁边的“添加规则”按钮。键入一个分支名称模式(“ main”将很好) ，并选择您想要设置的保护。至少“在合并之前需要通过状态检查”对于你充分利用 GitHub Actions 的能力是必要的。在这个选项下，你还应该选中“要求分支在合并之前是最新的” ，并选择所有在合并 PR 之前应该通过的状态检查。
 
 
@@ -433,10 +446,10 @@ GitHub 允许你设置受保护的分支。保护你最重要的一个分支是�
 
 ### Exercise 11.18
 
-#### 11.18 Adding main protection
+#### 11.18 Adding protection to your main branch
 添加主分支的保护
 
-<!-- Add protection to your main branch. -->
+<!-- Add protection to your <i>master</i> (or <i>main</i>) branch. -->
 为你的主分支添加保护。
 
 <!-- You should protect it to: -->

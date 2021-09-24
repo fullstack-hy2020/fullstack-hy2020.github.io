@@ -76,7 +76,7 @@ Read now the chapters on [collections](https://docs.mongodb.com/manual/core/data
 
 Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
 
-Once you've created and logged into your account, Atlas will recommend creating a cluster:
+Once you've created and logged into your account, Atlas will recommend creating a cluster (In later versions of MongoDB Atlas, you may see create a database):
 
 ![](../../images/3/57.png)
 
@@ -149,7 +149,7 @@ const password = process.argv[2]
 const url =
   `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -382,7 +382,7 @@ const mongoose = require('mongoose')
 const url =
   'mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -448,7 +448,7 @@ const url = process.env.MONGODB_URI // highlight-line
 
 console.log('connecting to', url) // highlight-line
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(url)
 // highlight-start
   .then(result => {
     console.log('connected to MongoDB')
@@ -494,7 +494,7 @@ const url = process.env.MONGODB_URI
 
 console.log('connecting to', url)
 
-mongoose.connect(url, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+mongoose.connect(url)
   .then(result => {
     console.log('connected to MongoDB')
   })

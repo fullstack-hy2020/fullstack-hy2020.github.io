@@ -73,41 +73,41 @@ You can only take the exam after submitting enough exercises for five credits. I
 
 #### Part 6 - Full Stack Web Development, extension 1 (1 cr, AYCSM141082en)
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
--	Submit at least 127 exercises for parts 0-7. 
-- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143243097) 
--	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- Submit at least 127 exercises for parts 0-7. 
+- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-2c09d93d-4f75-4359-85a3-5f8e2c2c5ce6). 
+- [Request credits for part 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 138 exercises for parts 0-7. 
-- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=143244490) 
--	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51f0edb4-c137-4871-a1e0-d93ca9b47bdf). 
+- [Request credits for part 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7.
--	Submit at least 22/26 exercises for part 8.
-- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142630573) 
--	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- Submit at least 22/26 exercises for part 8.
+- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-5f475a66-7d83-4b0e-9413-65e83be3dd7e). 
+- [Request credits for part 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
 By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
--	Submit at least 24/27 exercises for part 9.
-- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142647725) 
--	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- Submit at least 24/27 exercises for part 9.
+- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f62d31aa-e737-4060-b930-373b5236fa08). 
+- [Request credits for part 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
 By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native).
--	Submit at least 25 exercises for part 10. 
-- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142654760) 
--	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- Submit at least 25 exercises for part 10. 
+- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b2475f8c-e911-4a07-9993-549955381936). 
+- [Request credits for part 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
 
 By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. 
 More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 - Submit all exercises for part 11. 
-- [Enroll in this part through the Open University.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?o=142659042) 
--	[Request credits for this part.](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33). 
+- [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 ### How to get your credits
 
@@ -126,7 +126,7 @@ You will receive your credits after you have submitted enough exercise for a pas
 
 You can view your grade in Weboodi approximately four weeks after notifying us.
 
-**Please note** that in order to get university credits you need a registration for each completed part, please see [here](/en/part0/general_info#parts-and-completion) for more info about registration.
+**Please note** that in order to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
 
 ### Course certificate
 
@@ -168,7 +168,7 @@ For official university credits you need to pass the course exam that is done in
 
 Follow the instructions below to gain access to the course Moodle space:
 
-- Enroll in the course through Open University by 9 Jan 2022 [here](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=hy-CUR-143228359)
+- [Enroll in the course](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-eeffe055-8b94-42d0-9167-50476ad32133) through Open University by 9 Jan 2022
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration.
 - User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.
@@ -190,7 +190,7 @@ Electronic enrollment is available if you meet one of the following criteria:
 - You are a student at the University of Helsinki.
 - You are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners).
 
-After course enrollment: Note that you also have to save your student ID number to the my submissions tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
+After course enrollment: Note that you also have to save your student ID number to the <i>my submissions</i> tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
 
 Include your full name, email address used for enrollment, date of birth, and the name of the course in the email.
 
@@ -204,7 +204,7 @@ The number of credits is based on hours of work done. One credit is approximatel
 
 It is possible to complete the project as a pair or a group.
 
-For more information, see [here](https://github.com/FullStack-HY/misc/blob/main/project.md).
+See [more information on the project](https://github.com/FullStack-HY/misc/blob/main/project.md).
 
 ### Interview promise
 
@@ -218,13 +218,13 @@ You need to be a resident of Finland in order to participate in these interviews
 
 Using the [Chrome browser](https://www.google.com/chrome/) is recommended for this course, because it provides the best tools for web development. Another alternative is the [Developer Edition of Firefox](https://www.mozilla.org/en-US/firefox/developer/), which provides the same range of features.
 
-The course exercises are submitted to GitHub, so Git must be installed and you should know how to use it. Instructions for Git can be found [in this tutorial](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
+The course exercises are submitted to GitHub, so Git must be installed and you should know how to use it. For instructions, see [Git and GitHub tutorial for beginners](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
 Install some sensible text editor that supports web development. [Visual Studio Code](https://code.visualstudio.com/) is highly recommended.
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
 
-Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install anything older than that. Installation instructions are [here](https://nodejs.org/en/download/package-manager/).
+Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install anything older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 
