@@ -959,7 +959,7 @@ There is still a complain in our code:
 
 The cause is eslint rule [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md) that prevents us assigning the fields of request body to variables. 
 
-For the time being, let us just ignore the eslint-rule from the whole file by addin following as the first line of the file:
+For the time being, let us just ignore the eslint-rule from the whole file by adding following as the first line of the file:
 
 ``` js
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
