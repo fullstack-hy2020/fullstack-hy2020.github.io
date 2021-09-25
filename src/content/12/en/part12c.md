@@ -160,6 +160,8 @@ One interesting possibility to utilize multi-stage builds is to use a separate b
 
 Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
 
+Run the tests with _CI=true npm test_, or create-react-app will start watching for changes and your pipeline will get stuck.
+
 You can add a new build stage for the test if you wish to do so. If you do so, remember to read the last paragraph before exercise 12.13 again!
 
 </div>
