@@ -19,7 +19,7 @@ lang: zh
 
 基于令牌认证的原理在下面的时序图中进行了描述：
 
-![](../../images/4/16e.png)
+![](../../images/4/16zh.png)
 
 <!--User starts by logging in using a login form implemented with React-->
 

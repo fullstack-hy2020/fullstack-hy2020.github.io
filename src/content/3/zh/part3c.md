@@ -86,7 +86,7 @@ node --inspect index.js
 
 ### MongoDB
 <!-- In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database). -->
-为了永久地存储我们保存的便笺，我们需要一个数据库。 赫尔辛基大学教授的大多数课程都使用关系数据库。 在本课程中，我们将使用[MongoDB](https://www.MongoDB.com/ 数据库) ，这是一个所谓的[文档数据库](https://en.wikipedia.org/wiki/document-oriented_database)。
+为了永久地存储我们保存的便笺，我们需要一个数据库。 赫尔辛基大学教授的大多数课程都使用关系数据库。 在本课程中，我们将使用[MongoDB](https://www.MongoDB.com/) 数据库 ，这是一个所谓的[文档数据库](https://en.wikipedia.org/wiki/document-oriented_database)。
 
 <!-- Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term. -->
 文档数据库在组织数据的方式以及它们所支持的查询语言方面不同于关系数据库。 文档数据库通常被归类为[NoSQL](https://en.wikipedia.org/wiki/NoSQL)的术语集。

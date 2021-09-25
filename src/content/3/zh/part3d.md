@@ -238,7 +238,7 @@ personService
 <!-- You can display the default error message returned by Mongoose, even though they are not as readable as they could be: -->
 你可以显示 Mongoose 返回的默认错误消息，即使它们并不具有可读性:
 
-**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
+<!--**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.-->
 
 注意，在更新操作中，mongoose 验证默认是关闭的， [阅读文档](https://mongoosejs.com/docs/validation.html) 来确定如何开启。
 
