@@ -420,7 +420,7 @@ root@b8548b9faec3:/#
 
 让我们编辑 <i>index.js</i> 并添加些要执行的JavaScript 代码。我们现在缺少编辑文件的工具。Nono 目前是一个不错的选择。Google 能够查到安装指引。我们已经是root 用户，会省略使用sudo。
 
-```console
+```bash
 root@b8548b9faec3:/# apt-get update
 root@b8548b9faec3:/# apt-get -y install nano
 root@b8548b9faec3:/# nano /usr/src/app/index.js
@@ -491,14 +491,14 @@ Hello World
 <!-- Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so. -->
 目前我们已经在容器中安装了node ，并可以在容器中运行 JavaScript 了！ 让我们从容器中创建一个新的镜像。 命令 _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ 会创建一个新的镜像，镜像里包含了我们的修改。你可以使用 _container diff_ 来检查原始镜像和容器的不同。
 
-```console
+```bash
 $ docker commit hopeful_clarke hello-node-world
 ```
 
 <!-- You can list your images with _image ls_: -->
  你可以利用 _image ls_ 来列出你的镜像。
 
-```console
+```bash
 $ docker-fs docker image ls
 REPOSITORY                                      TAG         IMAGE ID       CREATED         SIZE
 hello-node-world                                latest      eef776183732   9 minutes ago   252MB
@@ -509,7 +509,7 @@ hello-world                                     latest      d1165f221234   5 mon
 <!-- You can now run the new image as follows: -->
  现在你可以用如下命令来运行一个新的镜像了：
 
-```console
+```bash
 docker run -it hello-node-world bash
 root@4d1b322e1aff:/# node /usr/src/app/index.js
 ```
