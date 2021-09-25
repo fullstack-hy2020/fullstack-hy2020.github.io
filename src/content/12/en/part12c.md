@@ -509,8 +509,8 @@ Add a new location to the <i>nginx.conf</i> so that requests to /api are proxied
       proxy_pass http://localhost:3000;
     }
 
-    # Requests starting with /api are handled
-    location /api {
+    # Requests starting with /api/ are handled
+    location /api/ {
       ...
     }
   }
