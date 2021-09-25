@@ -35,7 +35,8 @@
     "submitButton": "提交",
     "submitSuccessMessage": "谢谢，我们会尽快联系您",
     "participantsTitle": "参加全栈挑战",
-    "infoButton": "了解更多挑战信息"
+    "infoButton": "了解更多挑战信息",
+    "coOperationTitle": "与"
   },
   "companiesPage": {
     "storiesTitle": "来自合作伙伴中全栈开发的故事"

@@ -574,7 +574,7 @@ todo-app
 
 Do a simillar containerized development environment to one of <i>your own</i> full stack apps that you have created during the course or at your freetime. You should structure the app to submission repository as follows:
 
-```console
+```bash
 └── my-app
     ├── frontend
     |    └── dev.Dockerfile
@@ -590,7 +590,7 @@ Do a simillar containerized development environment to one of <i>your own</i> fu
 Finish this part by creating a contanerized <i>production setup</i> to your own full stack app.
 Structure the app to submission repository as follows:
 
-```console
+```bash
 └── my-app
     ├── frontend
     |    ├── dev.Dockerfile

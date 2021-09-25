@@ -61,6 +61,14 @@ npm install -g ts-node typescript
 npm install --save-dev ts-node typescript
 ```
 
+In some cases, you should install this package as well
+在一些情况下，你应该像如下安装依赖包
+
+```
+npm install -D tslib @types/node
+```
+
+
 <!-- and set up <i>scripts</i> within the package.json:  -->
 在 package.json 中设置一下<i>scripts</i>:
 
