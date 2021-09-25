@@ -10,7 +10,7 @@ lang: zh
 
 在这一章中，我们会学习如何将代码打包成为标准工件，在软件领域，它就叫做容器。容器与以前的开发方式相比，可以帮助我们开发软件更简单。通过这种方式，我们也会探索全新的web开发方式，这与我们熟悉的Nodejs 后台开发和React 的前台开发不太一样。
 
-<!-- We will utilize containers to create immutable execution environments for our Node.js and React projects. Containers also make it easy to include multiple services with our projects. With the flexibility we will explore and experiment with many different and popular tools by utilizing containers. -->
+<!-- We will utilize containers to create immutable execution environments for our Node.js and React projects. Containers also make it easy to include multiple services with our projects. With the flexibility, we will explore and experiment with many different and popular tools by utilizing containers. -->
 
 我们会使用容器来为我们的Nodejs和React创建一个稳定不变的执行环境。利用容器也可以方便地向我们的项目引入多种服务。我们会利用多种不同的流行工具来操作我们的容器，来探索和实验这些便利性。
 
