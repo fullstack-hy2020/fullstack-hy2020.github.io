@@ -61,7 +61,7 @@ Step 3: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save
 
 Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>.
 
-Completing this part on containers will get you 1 credit. Note that you need to do ell the exercises for earning the credit or the certificate.
+Completing this part on containers will get you 1 credit. Note that you need to do all the exercises for earning the credit or the certificate.
 
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
