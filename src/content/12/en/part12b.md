@@ -105,7 +105,7 @@ CMD DEBUG=playground:* npm start
 
 Let's build the image from the Dockerfile with a command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.
 
-```console
+```bash
 $ docker run -p 3123:3000 express-server
 
 > playground@0.0.0 start
@@ -615,7 +615,7 @@ the_database  0.000GB
 
 To access the correct database:
 
-```>bash
+```bash
 > use the_database
 ```
 
@@ -637,7 +637,7 @@ We can now access the data in those collections:
 Use the documentation [here](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false!
 
 
-Ensure that you see the new todo both in the express app and when querying from mongo cli.
+Ensure that you see the new todo both in the express app and when querying from mongo CLI.
 
 </div>
 

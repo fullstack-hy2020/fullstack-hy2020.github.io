@@ -294,7 +294,7 @@ root@b8548b9faec3:/#
 
 Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root.
 
-```console
+```bash
 root@b8548b9faec3:/# apt-get update
 root@b8548b9faec3:/# apt-get -y install nano
 root@b8548b9faec3:/# nano /usr/src/app/index.js
@@ -350,13 +350,13 @@ Hello World
 
 Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
 
-```console
+```bash
 $ docker commit hopeful_clarke hello-node-world
 ```
 
 You can list your images with _image ls_:
  
-```console
+```bash
 $ docker-fs docker image ls
 REPOSITORY                                      TAG         IMAGE ID       CREATED         SIZE
 hello-node-world                                latest      eef776183732   9 minutes ago   252MB
@@ -366,7 +366,7 @@ hello-world                                     latest      d1165f221234   5 mon
  
 You can now run the new image as follows:
  
-```console
+```bash
 docker run -it hello-node-world bash
 root@4d1b322e1aff:/# node /usr/src/app/index.js
 ```
