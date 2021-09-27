@@ -365,17 +365,25 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 ![](../../images/7/22.png)
 
 
-It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. We have to install one more missing dependency, that is [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
+It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. With [previous solution](https://babeljs.io/docs/en/babel-polyfill/) being deprecated we now have to install two more missing dependencies, that is [core-js](https://www.npmjs.com/package/core-js) and [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
 
 ```bash
-npm install @babel/polyfill
+npm install core-js regenerator-runtime
 ```
 
 
-Let's make the following changes to the <i>entry</i> property of the webpack configuration object in the <i>webpack.config.js</i> file:
+You need to import those dependencies at the top of <i>index.js</i> file. If you're already using ES6 import syntax it will look like this:
 
 ```js
-  entry: ['@babel/polyfill', './src/index.js']
+  import 'core-js/stable/index.js'
+  import 'regenerator-runtime/runtime.js'
+```
+    
+Otherwise, require them in the same place:
+    
+```js
+  require('core-js/stable/index.js')
+  require('regenerator-runtime/runtime.js')
 ```
 
 Our configuration contains nearly everything that we need for React development.
