@@ -207,6 +207,13 @@ Let's run our code again.
 
 The data is now stored in the right database. The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website. Creating the database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet.
 
+You might encounter following error when running node mongo.js <password> command: 
+  ```bash
+const utf8Encoder = new TextEncoder();
+ReferenceError: TextEncoder is not defined
+```
+Above problem is caused by the known  [node bug](https://github.com/Automattic/mongoose/issues/10638) affecting older node versions 10.x (which might be still used  used as default in some distributions for example Ubuntu 20.04LTS). You might either upgrade node on your OS to newer version or deploy  code to heroku which already uses latest node version.
+  
 ### Schema
 
 After establishing the connection to the database, we define the [schema](http://mongoosejs.com/docs/guide.html) for a note and the matching [model](http://mongoosejs.com/docs/models.html):
