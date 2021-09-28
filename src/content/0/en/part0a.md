@@ -43,7 +43,7 @@ Exercise completion time statistics can be found via the [submission system](htt
 
 ### Parts and completion
 
-Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 12 credits. 
+Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 13 credits. 
 
 #### Parts 0-5 (core course) - Full Stack Web Development (5 cr, AYCSM141081en)
 The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk).
@@ -218,7 +218,7 @@ See [more information on the project](https://github.com/FullStack-HY/misc/blob/
 
 ### Interview promise
 
-Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10).
+Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (13 + 10).
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
