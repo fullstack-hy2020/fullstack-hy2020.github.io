@@ -733,7 +733,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 npm install express
 ```
 
-<!-- add then add the <i>start</i> script to package.json: -->
+<!-- and then add the <i>start</i> script to package.json: -->
 然后将<i>start</i> script 添加到 package.json:
 
 ```json

@@ -81,8 +81,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 ### Parts and completion
 【章节介绍与完成标准】
 
-<!-- Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 12 credits.  -->
-全栈课程的学习包括核心课程部分以及多种扩展部分 。你可以通过完成这些内容的学习获得5-12个学分
+<!-- Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 13 credits.  -->
+全栈课程的学习包括核心课程部分以及多种扩展部分 。你可以通过完成这些内容的学习获得5-13个学分
 
 
 #### Parts 0-5 (core course) - Full Stack Web Development (5 cr, AYCSM141081en)
@@ -433,9 +433,9 @@ Enroll in the course through Open University by 9 Jan 2022 [here](https://www.av
 ### Interview promise  
 【面试保证】
 
-<!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10).-->
+<!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (13 + 10).-->
 
-我们的合作伙伴包括[Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(12 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(13 + 10)的人都可以获得工作面试。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 

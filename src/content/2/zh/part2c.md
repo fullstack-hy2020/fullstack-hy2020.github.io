@@ -754,9 +754,12 @@ Api [https://restcountries.com](https://restcountries.com) 以机器可读的格
 
 ![](../../images/2/19b3.png)
 
-<!-- **NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
+<!-- **NB1**: the API has chaged recently and do not contain anymore population of the countries, you may replace that with some other data found in API.  -->
+<!-- **NB2**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
 
-注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会很难支持，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
+注意1: API 最近进行了修改，因此不再包含国家的人口了，你可以使用API中提供的其他数据。
+
+注意2: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会很难支持，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
 
 <!-- **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application. -->
 
