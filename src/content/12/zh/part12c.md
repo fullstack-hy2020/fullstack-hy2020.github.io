@@ -197,6 +197,10 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-lin
 <!-- Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process. -->
 提取出一个 <i>Todo</i> 组件来代表单独的todo。为该组件写一个测试放到构建流程中。
 
+<!-- Run the tests with _CI=true npm test_, or create-react-app will start watching for changes and your pipeline will get stuck. -->
+
+利用 _CI=true npm test_ 来运行测试， 否则 create-react-app 会开始监控你的修改，整个工作流会卡住。
+
 <!-- You can add a new build stage for the test if you wish to do so. If you do so, remember to read the last paragraph before exercise 12.13 again! -->
 你可以增加一个新的构建阶段来测试。如果这么做了，记得阅读练习12.13前的最后一段。
 
