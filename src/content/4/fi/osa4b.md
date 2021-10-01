@@ -922,7 +922,7 @@ beforeEach(async () => {
 
 JavaScriptin asynkroninen suoritusmalli aiheuttaakin siis helposti yllätyksiä, ja myös async/await-syntaksin kanssa pitää olla koko ajan tarkkana. Vaikka async/await peittää monia promisejen käsittelyyn liittyviä seikkoja, promisejen toiminta on syytä tuntea mahdollisimman hyvin!
 
-Kaikkein helpoimmalla tilanteesta selvitään lyödyntämällä Mongoosen valmista metodia _insertMany_:
+Kaikkein helpoimmalla tilanteesta selvitään hyödyntämällä Mongoosen valmista metodia _insertMany_:
 
 ```js
 beforeEach(async () => {
@@ -949,7 +949,7 @@ Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async
 
 Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_testaaminen#test-ymparisto) hieman muutoksia (mm. testausympäristön määrittely), jotta saat järkevästi tehtyä omaa tietokantaa käyttäviä API-tason testejä.
 
-**HUOM #1:** Testejä suorittaessa saatat törmätä seuraavaan varoitukseen:
+**HUOM 1:** Testejä suorittaessa saatat törmätä seuraavaan varoitukseen:
 
 ![](../../images/4/8a.png)
 
@@ -961,7 +961,7 @@ module.exports = {
 }
 ```
 
-**HUOM #2:** Testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
+**HUOM 2:** Testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
 
 #### 4.9*: blogilistan testit, step2
 
