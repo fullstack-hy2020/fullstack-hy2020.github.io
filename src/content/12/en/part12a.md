@@ -357,7 +357,7 @@ $ docker commit hopeful_clarke hello-node-world
 You can list your images with _image ls_:
  
 ```bash
-$ docker-fs docker image ls
+$ docker image ls
 REPOSITORY                                      TAG         IMAGE ID       CREATED         SIZE
 hello-node-world                                latest      eef776183732   9 minutes ago   252MB
 ubuntu                                          latest      1318b700e415   2 weeks ago     72.8MB
