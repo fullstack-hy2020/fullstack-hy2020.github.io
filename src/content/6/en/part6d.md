@@ -618,7 +618,7 @@ The <i>redux store</i> is currently being accessed by the components through the
 Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks. 
 #### 6.20 anecdotes and connect, step2
 
-Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
+Do the same for the <i>Filter</i>, <i>AnecdoteForm</i>, and <i>AnecdoteList</i> components.
 #### 6.21 anecdotes, the grand finale
 
 You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example, if a user votes twice in three seconds, 
