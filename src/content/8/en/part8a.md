@@ -407,7 +407,24 @@ has a resolver which returns <i>all</i> objects from the _persons_ array.
 ### GraphQL-playground
 
 When Apollo-server is run on development mode (_node filename.js_), it starts a [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to address [http://localhost:4000/graphql](http://localhost:4000/graphql). This is very useful for a developer, and can be used to make queries to the server. 
-
+To set it up, you should first of all install `apollo-server-core` like so:
+```bash
+npm install apollo-server-core
+```
+after which you import it to the file where you create the ApolloServer, like this:
+```js
+const { ApolloServerPluginLandingPageGraphQLPlayground } = require("apollo-server-core");
+```
+once you've installed it, you can put it to use by calling it in when passing plugins to the ApolloServer constructor function, like this:
+```js
+const server = new ApolloServer({
+	typeDefs,
+	resolvers,
+	plugins: [
+		ApolloServerPluginLandingPageGraphQLPlayground(),
+	],
+});
+```
 Let's try it out
 
 ![](../../images/8/1.png)
