@@ -89,7 +89,8 @@ Containerizing that should be relatively easy based on the previous example.
 - Use node as base
 - Set working directory so we don't interfere with the contents of the base image
 - Copy ALL of the files in this directory to the image
-- Start with DEBUG=playground:* npm start
+- Start with DEBUG=playground:* npm startaterial
+
 
 Let's place the following Dockerfile at the root of the project:
 
@@ -190,7 +191,7 @@ RUN npm ci # highlight-line
 CMD DEBUG=playground:* npm start
 ```
 
-Even better, we can use _npm ci --only-production_ to not waste time installing development dependencies.
+Even better, we can use _npm ci --only=production_ to not waste time installing development dependencies.
 
 > As you noticed in the comparison list; npm ci will delete the node_modules folder so creating the .dockerignore did not matter. However, .dockerignore is an amazing tool when you want to optimize your build process. We will talk briefly about these optimizations later.
 
