@@ -19,6 +19,7 @@ const partNameTranslations = {
     'React Native',
     'CI/CD',
     'Konttiteknologia',
+    'Relaatiotietokannan käyttö',
   ],
   en: [
     'Fundamentals of Web apps',
@@ -53,7 +54,8 @@ const partNameTranslations = {
 };
 
 export const PartBanner = ({ lang }) => {
-  const parts = Object.keys(navigation[lang]);
+  // TODO change on release
+  const parts = Object.keys(navigation[lang]).filter(p => p !== '13');
 
   return (
     <Banner
