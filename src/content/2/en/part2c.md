@@ -619,7 +619,7 @@ When there is only one country matching the query, then the basic data of the co
 
 ![](../../images/2/19b3.png)
 
-**NB1**: the API has chaged recently and do not contain anymore population of the countries, you may replace that with some other data found in API. 
+**NB1**: the API has changed recently and do not contain anymore population of the countries, you may replace that with some other data found in API. 
 
 **NB2**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can be hard to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not to worry about these edge cases.
 
