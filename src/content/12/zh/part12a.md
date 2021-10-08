@@ -499,7 +499,7 @@ $ docker commit hopeful_clarke hello-node-world
  你可以利用 _image ls_ 来列出你的镜像。
 
 ```bash
-$ docker-fs docker image ls
+$ docker docker image ls
 REPOSITORY                                      TAG         IMAGE ID       CREATED         SIZE
 hello-node-world                                latest      eef776183732   9 minutes ago   252MB
 ubuntu                                          latest      1318b700e415   2 weeks ago     72.8MB
