@@ -400,7 +400,7 @@ db.todos.insert({ text: 'Learn about containers', done: false });
 
 This file will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.
 
-We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file init-mongo.js to the container. Let's do the latter.
+We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.
 
 Bind mount is the act of binding a file on the host machine to a file in the container. We could add a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose. Otherwise the format is the same, first host and then container:
 
@@ -438,7 +438,7 @@ Now starting the express application with the correct environment variable shoul
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
-Let's check that the http://localhost:8000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo.
+Let's check that the http://localhost:3000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo.
 
 ### Persisting data with volumes
 
@@ -461,7 +461,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: database
+      MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./mongo_data:/data/db # highlight-line
@@ -480,7 +480,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: database
+      MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - mongo_data:/data/db # highlight-line
