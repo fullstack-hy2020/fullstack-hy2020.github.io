@@ -594,7 +594,7 @@ Let's simulate this situation by making the <em>getAll</em> function of the note
 
 ```js
 const getAll = () => {
-  const request = axios.get(baseUrl)
+  const request = axios.put(baseUrl)
   const nonExisting = {
     id: 10000,
     content: 'This note is not saved to server',
