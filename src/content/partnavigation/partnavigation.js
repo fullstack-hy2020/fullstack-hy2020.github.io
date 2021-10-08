@@ -60,6 +60,11 @@ module.exports = {
     '10': {},
     '11': {},
     '12': {},
+    '13': {
+      a: 'Relaatiotietokannan käyttö Sequelize-kirjastolla',
+      b: 'Liitostaulut ja -kyselyt',
+      c: 'Migraatiot, monen suhde moneen -yhteydet'
+    },
   },
   en: {
     '0': {

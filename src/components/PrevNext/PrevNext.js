@@ -11,7 +11,8 @@ import getTranslationPath from '../../utils/getTranslationPath';
 
 const prevChar = c => String.fromCharCode(c.charCodeAt(0) - 1);
 const nextChar = c => String.fromCharCode(c.charCodeAt(0) + 1);
-const hasPart = (part, lang) =>
+// TODO change on release
+const hasPart = (part, lang) => part<13 &&
   Object.keys(navigation[lang]).includes(part.toString());
 const nextLetterExists = (letter, part, lang) =>
   nextChar(letter) in navigation[lang][part];
@@ -106,6 +107,7 @@ const PrevNext = ({ part, letter, lang }) => {
 
   const getNext = () => {
     if (!letter && hasPart(part + 1, lang)) {
+      console.log('a', hasPart(part + 1, lang))
       return (
         <Link
           to={`${langUrl(lang)}${part + 1}`}
