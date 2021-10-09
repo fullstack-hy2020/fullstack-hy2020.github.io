@@ -7,15 +7,15 @@ lang: fi
 
 <div class="content">
 
-Tässä osassa tutustutaan relaatiotietokantoja käyttäviin node-sovelluksiin. Osassa rakennetaan osista 3-5 tutulle muistiinpanosovellukselle relaatiotietokantaa käyttävä node-backend. Osan suorittaminen edellyttää kohtuullista relaatiotietokantojen ja SQL:n osaamista.Eräs paikka hankkia riittävä osaaminen on kurssi [Tietokantojen perusteet](https://tikape.mooc.fi/).
+Tässä osassa tutustutaan relaatiotietokantoja käyttäviin node-sovelluksiin. Osassa rakennetaan osista 3-5 tutulle muistiinpanosovellukselle relaatiotietokantaa käyttävä node-backend. Osan suorittaminen edellyttää kohtuullista relaatiotietokantojen ja SQL:n osaamista. Eräs paikka hankkia riittävä osaaminen on kurssi [Tietokantojen perusteet](https://tikape.mooc.fi/).
 
 ### Dokumenttitietokantojen edut ja haitat
 
-Olemme käyttäneet kaikissa kurssin aiemmissa osissa MongoDB-tietokantaa. Mongo on tyypiltään [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database) ja eräs sen ominaisimmista piirteistä on _skeemattomuus_, eli tietokanta ei ole kuin hyvin rajallisesti tietoinen siitä, minkälaista dataa sen kokoelmiin on talletettu. Tietokannan skeema on olemassa ainoastaan ohjelmakoodissa, joka tulkitsee datan tietyllä tavalla, esim. tunnistaen että jotkut kentät ovat viittauksia toisen kokoelman objekteihin.
+Olemme käyttäneet kaikissa kurssin aiemmissa osissa MongoDB-tietokantaa. Mongo on tyypiltään [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database) ja eräs sen ominaisimmista piirteistä on <i>skeemattomuus</i>, eli tietokanta ei ole kuin hyvin rajallisesti tietoinen siitä, minkälaista dataa sen kokoelmiin on talletettu. Tietokannan skeema on olemassa ainoastaan ohjelmakoodissa, joka tulkitsee datan tietyllä tavalla, esim. tunnistaen että jotkut kentät ovat viittauksia toisen kokoelman objekteihin.
 
 Osien 3 ja 4 esimerkkisovelluksessa tietokantaan on talletettu muistiinpanoja ja käyttäjiä. 
 
-Muistiinpanoja tallettava kokoelma 'notes' näyttää seuraavanlaiselta
+Muistiinpanoja tallettava kokoelma <i>notes</i> näyttää seuraavanlaiselta
 
 ```js
 [
@@ -36,7 +36,7 @@ Muistiinpanoja tallettava kokoelma 'notes' näyttää seuraavanlaiselta
 ]
 ```
 
-Käyttäjät tallettava kokoelma 'users' seuraavalta:
+Käyttäjät tallettava kokoelma <i>users</i> seuraavalta:
 
 ```js
 [
@@ -47,8 +47,8 @@ Käyttäjät tallettava kokoelma 'users' seuraavalta:
     "passwordHash" : "$2b$10$Df1yYJRiQuu3Sr4tUrk.SerVz1JKtBHlBOARfY0PBn/Uo7qr8Ocou",
     "__v": 9,
     notes: [
-      600c0edde86c7264ace9bb78,
-      600c0e410d10256466898a6c
+      "600c0edde86c7264ace9bb78",
+      "600c0e410d10256466898a6c"
     ]
   },
 ]
@@ -56,21 +56,21 @@ Käyttäjät tallettava kokoelma 'users' seuraavalta:
 
 MongoDB tuntee kyllä talletettujen olioiden kenttien tyypit, mutta sillä ei ole mitään tietoa siitä, minkä kokoelman olioihin käyttäjiin liittyvät muistiinpanojen id:t viittaavat. MongoDB ei myöskään välitä siitä, mitä kenttiä kokoelmiin talletettavilla olioilla on. MongoDB jättääkin täysin ohjelmoijan vastuulle sen, että tietokantaan talletetaan oikeanlaista tietoa.
 
-Skeemattomuudesta on sekä etua että haittaa. Eräänä etuna on skeemattomuuden tuoma joustavuus, koska skeemaa ei tarvitse tietokantatasolla määritellä, voi sovelluskehitys olla tietyissä tapauksissa nopeampaa, ja helpompaa, skeeman määrittelyssä ja sen muutoksissa on jokatapauksessa nähtävä pieni määrä vaivaa. Skeemattomuuden ongelmat liittyvät virhealttiuteen, kaikki jää ohjelmoijan vastuulle, tietokannalla ei ole mitään mahdollisuuksia tarkistaa onko siihen talletettu data _eheää_, eli onko kaikilla pakollisilla kentillä arvot, viittaavatko viitetyyppiset kentät olemassaoleviin ja ylipäätään oikean tyyppisiin olioihin jne.
+Skeemattomuudesta on sekä etua että haittaa. Eräänä etuna on skeemattomuuden tuoma joustavuus: koska skeemaa ei tarvitse tietokantatasolla määritellä, voi sovelluskehitys olla tietyissä tapauksissa nopeampaa, ja helpompaa, skeeman määrittelyssä ja sen muutoksissa on jokatapauksessa nähtävä pieni määrä vaivaa. Skeemattomuuden ongelmat liittyvät virhealttiuteen, kaikki jää ohjelmoijan vastuulle, tietokannalla ei ole mitään mahdollisuuksia tarkistaa onko siihen talletettu data <i>eheää</i>, eli onko kaikilla pakollisilla kentillä arvot, viittaavatko viitetyyppiset kentät olemassaoleviin ja ylipäätään oikean tyyppisiin olioihin jne.
 
 Tämän osan fokuksessa olevat relaatiotietokannat taas nojaavat vahvasti skeeman olemassaoloon, ja skeemallisten tietokantojen edut ja haitat ovat lähes päinvastaiset skeemattomiin verrattuna.
 
-Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri sen skeemattomuuteen, jonka ansiosta tietokannan käyttö on ollut relaatiotietokantoja käyttämättömälle hieman helpompaa. Useimpiin tämänkin kurssin käyttötapauksiin olisin itse valinnut relaatiotietokannan.
+Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri sen skeemattomuuteen, jonka ansiosta tietokannan käyttö on ollut relaatiotietokantoja heikosti tuntevalle jossain määrin helpompaa. Useimpiin tämänkin kurssin käyttötapauksiin olisin itse valinnut relaatiotietokannan.
 
 ### Sovelluksen tietokanta
 
-Tarvitsemme sovellustamme varten reelaatiotietokannan tietokannan. Vaihtoehtoja on monia, käytämmä tällä kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi, helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/). Voit myös hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla.
+Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/). Voit myös hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla.
 
-Käytämme nyt kuitenkin hyväkseen sitä, että osista 3 ja 4 tuttu pilvipalvelualusta Herokuun on mahdollista luoda sovellukselle Postgres-tietokanta. 
+Käytämme nyt kuitenkin hyväkseen sitä, että osista 3 ja 4 tuttuun pilvipalvelualusta Herokuun on mahdollista luoda sovellukselle Postgres-tietokanta. 
 
 Tämän osan teoriamateriaalissa rakennetaan oissa 3 ja 4 rakennetun muistiinpanoja tallettavan sovelluksen backendendistä Postgresia käyttävä versio.
 
-Luodaan nyt sopivan hakemiston sisällä heroku-sovellus, lisätään sille tietokanta ja katsotaan komennolla `heroku config` mikä on tietokantayhteyden muodostamiseen tarvittava <i>connect string</i>:
+Luodaan nyt sopivan hakemiston sisällä Heroku-sovellus, lisätään sille tietokanta ja katsotaan komennolla _heroku config_ mikä on tietokantayhteyden muodostamiseen tarvittava <i>connect string:</i>
 
 ```bash
 heroku create
@@ -82,13 +82,13 @@ DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazo
 
 Erityisesti relaatiotietokantaa käytettäessä on oleellista päästä tietokantaan käsiksi myös suoraan. Tapoja tähän on monia, on olemasa mm. useita erilaisia graafisia käyttöliittymiä, kuten [pgAdmin](https://www.pgadmin.org/). Käytetään kuitenkin postgresin [pqsl](https://www.postgresql.org/docs/current/app-psql.html)-komentorivityökalua.
 
-Tietokantaan päästään käsiksi suorittamalla `psql` herokun palvelimella seuraavasti (huomaa, että komennon parametrit riippuvat heroku-sovelluksen connect urlista):
+Tietokantaan päästään käsiksi suorittamalla _psql_ Herokun palvelimella seuraavasti (huomaa, että komennon parametrit riippuvat Heroku-sovelluksen connect urlista):
 
 ```bash
 heroku run psql -h ec2-44-199-83-229.compute-1.amazonaws.com -p 5432 -U <username> <dbname>
 ```
 
-Salasanan antamisen jälkeen kokeillaan pslq:n tärkeintä komentoa `\d`, joka kertoo tietokannan sisällön:
+Salasanan antamisen jälkeen kokeillaan pslq:n tärkeintä komentoa _\d_, joka kertoo tietokannan sisällön:
 
 ```bash
 Password for user <username>:
@@ -113,11 +113,9 @@ CREATE TABLE notes (
 );
 ```
 
-_TODO: ehkä important kentälle DEFAULT FALSE, niin oletusarvojen määrittely tulee tutuksi_
-  
-Muutama huomio: sarake id on määritelty <i>pääavaimeksi</i> (engl. primary key), eli sarakkeen arvo tulee olla jokaisella taulun rivillä uniikki ja arvo ei saa olla tyhjä. Tyypiksi sarakkeelle on määritelty [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), joka ei ole todellinen tyyppi vaan lyhennysmerkintä sille, että kyseessä on kokonaislukuarvoinen sarake, jolle Postgres antaa automaattisesti uniikin, kasvavan arvon rivejä luotaessa. Tekstiarvoiselle sarakkeelle <i>content</i> on määritelty siten, että sille on pakko antaa arvo.
+Muutama huomio: sarake  <i>id </i> on määritelty <i>pääavaimeksi</i> (engl. primary key), eli sarakkeen arvon tulee olla jokaisella taulun rivillä uniikki ja arvo ei saa olla tyhjä. Tyypiksi sarakkeelle on määritelty [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), joka ei ole todellinen tyyppi vaan lyhennysmerkintä sille, että kyseessä on kokonaislukuarvoinen sarake, jolle Postgres antaa automaattisesti uniikin, kasvavan arvon rivejä luotaessa. Tekstiarvoiselle sarakkeelle <i>content</i> on määritelty siten, että sille on pakko antaa arvo.
 
-Katsotaan tilannetta konsolista käsin. Ensin komento `\d`, joka kertoo mitä tauluja kannasa on:
+Katsotaan tilannetta konsolista käsin. Ensin komento _\d_, joka kertoo mitä tauluja kannasa on:
 
 ```sql
 username=> \d
@@ -129,9 +127,9 @@ username=> \d
 (2 rows)
 ```
 
-Taulun `notes` lisäksi Postgres loi aputaulun `notes_id_seq`, joka pitää kirjaa siitä, mikä arvo sarakkeelle `id` annetaan seuraavaksi. 
+Taulun <i>notes</i> lisäksi Postgres loi aputaulun <i>not\_id\_seq</i>, joka pitää kirjaa siitä, mikä arvo sarakkeelle <i>id</i> annetaan seuraavaa muistiinpanoa luotaessa. 
 
-Komennolla `\d notes` näemme miten taulu `notes` on määritelty:
+Komennolla _\d notes_ näemme miten taulu <i>notes</i> on määritelty:
 
 ```sql
 username=> \d notes;
@@ -146,7 +144,7 @@ Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 ```
 
-Sarakkeella `id` on siis oletusarvo (default), joka saadaan kutsumalla postgresin sisäistä funktiota `nextval`. 
+Sarakkeella <i>id</i> on siis oletusarvo (default), joka saadaan kutsumalla postgresin sisäistä funktiota <i>nextval</i>. 
 
 Lisätään tauluun hieman sisältöä:
 
@@ -155,8 +153,6 @@ insert into notes (content, important) values ('Relational databases rule the wo
 insert into notes (content, important) values ('MongoDB is webscale', false);
 ```
   
-_TODO: kentän lisääminen, joka ei ole skeemassa. Näkyisi selkeesti skeema vs. ei-skeemaa_
-
 Ja katsotaan miltä luotu sisältö näyttää:
 
 ```sql
@@ -168,19 +164,43 @@ username=> select * from notes;
 (2 rows)
 ```
 
+Jos yritämme tallentaa tietokantaan dataa, joka ei ole skeeman mukaista, se ei onnistu. Pakollisen sarakkeen arvo ei voi puuttua
+
+```sql
+username=> insert into notes (important) values (true);
+ERROR:  null value in column "content" of relation "notes" violates not-null constraint
+DETAIL:  Failing row contains (9, null, t, null).
+```
+
+Sarakkeen arvo ei voi olla väärää tyyppiä:
+
+```sql
+username=> insert into notes (content, important) values ('only valid data can be saved', 1);
+ERROR:  column "important" is of type boolean but expression is of type integer
+LINE 1: ...tent, important) values ('only valid data can be saved', 1);                                                                 ^
+```
+
+Skeemassa olemattomia sarakkeita ei hyväksytä:
+
+```sql
+username=> insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
+ERROR:  column "value" of relation "notes" does not exist
+LINE 1: insert into notes (content, important, value) values ('only ...
+```
+
 Seuraavaksi on aika siirtyä käyttämään tietokantaa sovelluksesta käsin.
 
 ### Relaatiotietokantaa käyttävä node-sovellus
 
-Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan sille kehitysaikaiseksi riippuvuudeksi 'nodemon' seka seuraavat suoritusaikaiset riippuvuudet:
+Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan sille kehitysaikaiseksi riippuvuudeksi <i> nodemon</i>  seka seuraavat suoritusaikaiset riippuvuudet:
 
 ```bash
 npm install express dotenv pg sequelize
 ```
 
-Näistä jälkimmäinen [sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) -kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose-kirjasto.
+Näistä jälkimmäinen [sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) -kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
 
-Testataan että yhteyden muodostaminen onnistuu. Luodaan tiedosto `index.js` ja sille seuraava sisältö:
+Testataan että yhteyden muodostaminen onnistuu. Luodaan tiedosto <i>index.js</i> ja sille seuraava sisältö:
 
 ```js
 require('dotenv').config()
@@ -208,7 +228,7 @@ const main = async () => {
 main()
 ```
 
-Komennon `heroku config` paljastama tietokannan <i>connect string</i> tulee tallentaa tiedostoon `.env`, jonka sisällön pitää siis olla suunilleen seuraava
+Komennon _heroku config_ paljastama tietokannan <i>connect string</i> tulee tallentaa tiedostoon <i>.env</i>, jonka sisällön pitää siis olla suunilleen seuraava
 
 ```bash
 $ cat .env
@@ -273,7 +293,7 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-Vaikka sequelize on ORM-kirjasto, jota käyttämällä SQL:ää ei juurikaan ole tarvetta itse kirjoittaa, käytimme nyt [suoraan SQL:ää](https://sequelize.org/master/manual/raw-queries.html) sequelizen metodin [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query) avulla.
+Vaikka Sequelize on ORM-kirjasto, jota käyttämällä SQL:ää ei juurikaan ole tarvetta itse kirjoittaa, käytimme nyt [suoraan SQL:ää](https://sequelize.org/master/manual/raw-queries.html) sequelizen metodin [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query) avulla.
 
 Koska kaikki näyttää toimivan, muutetaan sovellus web-sovellukseksi.
 
@@ -305,11 +325,11 @@ app.listen(PORT, () => {
 // highlight-end
 ```
 
-Sovellus näyttää toimivan. Siirrytään kuitenkin nyt käyttämään Sequelizeä SQL:n sijaan siten kuin sitä on tarkoitettu käyttää.
+Sovellus näyttää toimivan. Siirrytään kuitenkin nyt käyttämään Sequelizeä SQL:n sijaan siten kuin sitä on tarkoitus käyttää.
 
 ### Model
 
-Sequelizea käytettäessä, jokaista tietokannan taulua edustaa [model](https://sequelize.org/master/manual/model-basics.html), joka on käytännössä oma JavaScript-luokkansa. Määritellän nyt sovellukselle taulua `notes` vastaava model `Note` muuttamalla koodi seuraavaan muotoon:
+Sequelizea käytettäessä, jokaista tietokannan taulua edustaa [model](https://sequelize.org/master/manual/model-basics.html), joka on käytännössä oma JavaScript-luokkansa. Määritellän nyt sovellukselle taulua <i>notes</i> vastaava model <i>Note</i> muuttamalla koodi seuraavaan muotoon:
 
 ```js
 require('dotenv').config()
@@ -364,15 +384,26 @@ app.listen(PORT, () => {
 })
 ```
 
-Muutama kommentti koodista. Modelin `Note` määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää `sequelize`-olion sekä muuta konfiguraatiotietoa. Märittelimme, että taululla ei ole usein käytettykä aikaleimasarakkeita (created\_at ja updated\_at).
+Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Märittelimme, että taululla ei ole usein käytettykä aikaleimasarakkeita (created\_at ja updated\_at).
 
-_TODO: underscored: true ja sarakkeiden nimet_
-  
-Määrittelmimme myös, että taulujen nimet päätellään modelien nimistä "underscored"-tekniikalla. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on kuten tapauksessamme `Note` päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli `notes`. Jos taas modelin nimi olisi "kaksiosainen" esim. `StudyGroup` olisi taulun nimi `study_groups`. Sequelize mahdollistaa automaattisen taulujen nimien päättelun sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
+Määrittelmimme myös, että taulujen nimet päätellään modelien nimistä "underscored"-tekniikalla. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on kuten tapauksessamme <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelun sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
 
-Olemme myös määritelleet `modelName: 'note'`, oletusarvoinen "modelin nimi" olisi isolla kirjoitettu `Note`, haluamme kuitenkin pienen alkukirjaimen, se tekee muutaman asian jatkossa hieman mukavammaksi.
+Sama nimentäkäytänne koskiee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
 
-Tietokantaoperaatio on helppo tehdä modelien tarjoaman [kyselyrajapinnan](https://sequelize.org/master/manual/model-querying-basics.html) avulla, metodi `findAll` toimii juuri kuten sen nimen perusteella olettaa toimivan:
+```js
+Note.init({
+  // ...
+  creationYear: {
+    type: DataTypes.INTEGER,
+  },
+})
+```
+
+Vastaavan sarakkeen nimi tietokannassa olisi <i>creation_year</i>. Koodissa viittaus sarakkeeseen tapahtuu aina samassa muodossa mikä on modelissa, eli "camel case"-formaatissa. 
+
+Olemme myös määritelleet <i>modelName: 'note'</i>, oletusarvoinen "modelin nimi" olisi isolla kirjoitettu <i>Note</i>, haluamme kuitenkin pienen alkukirjaimen, se tekee muutaman asian jatkossa hieman mukavammaksi.
+
+Tietokantaoperaatio on helppo tehdä modelien tarjoaman [kyselyrajapinnan](https://sequelize.org/master/manual/model-querying-basics.html) avulla, metodi [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) toimii juuri kuten sen nimen perusteella olettaa toimivan:
 
 ```js
 app.get('/api/notes', async (req, res) => {
@@ -401,7 +432,7 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
-Uuden muistiinpanon luominen siis tapahtuu kutsumalla modelin `Note` metodia [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) ja antamalla sille parametriksi sarakkeiden arvot määrittelevän olion.
+Uuden muistiinpanon luominen siis tapahtuu kutsumalla modelin <i>Note</i> metodia [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) ja antamalla sille parametriksi sarakkeiden arvot määrittelevän olion.
 
 Metodin <i>create</i> sijaan tietokantaan tallentaminen [olisi mahdollista tehdä](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) käyttäen ensin metodia [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) luomaan halutusta datasta Model-olio, ja kutsumalla sille metodia [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save):
 
