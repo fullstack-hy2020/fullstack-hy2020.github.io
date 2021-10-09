@@ -623,7 +623,7 @@ query {
 }
 ```
 
-<!-- and the response now is a person object, which <i>contains</i> an address object.  -->
+<!-- and the response is now a person object, which <i>contains</i> an address object.   -->
 现在的响应是一个 person 对象，它包含一个地址对象。
 
 ```js
@@ -656,15 +656,15 @@ let persons = [
 ]
 ```
 
-<!-- So the person-objects saved in the server are not exactly the same as GraphQL type <i>Person</i> objects described in the schema.  -->
+<!-- The person-objects saved in the server are not exactly the same as the GraphQL type <i>Person</i> objects described in the schema.   -->
 因此，保存在服务器中的 Person-objects 与模式中描述的 GraphQL type<i>Person</i> 对象并不完全相同。
 
-<!-- Contrary to the type <i>Person</i>, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own data structure in the server.  -->
+<!-- Contrary to the <i>Person</i> type, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own separate data structure in the server.   -->
 与<i>Person</i> 类型相反， <i>Address</i> 类型没有 <i>id</i> 字段，因为它们没有保存到服务器中自己的数据结构中。
 
-<!-- Because the objects saved in the array do not have a field <i>address</i>, the default resolver is not sufficient enough.  -->
+<!-- Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient.  -->
 因为数组中保存的对象没有字段<i>address</i>，所以默认解析程序是不够的。
-<!-- Let's add a resolver for the field <i>address</i> of type <i>Person</i>:  -->
+<!-- Let's add a resolver for the <i>address</i> field  of <i>Person</i> type :   -->
 让我们为类型<i>Person</i> 的字段<i>address</i> 添加一个解析器:
 
 ```js
