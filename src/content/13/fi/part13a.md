@@ -480,11 +480,11 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tehtävät 13.1.-13.3.
 
-Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen blogi-sovelluksen backendin, jonka pitäisi olla virheenkäsittelyä lukuunottamatta yhteensopiva [osan 5](/osa5) frontendin kanssa. Teemme backendiin myös joukon ominaisuuksia, joita osassa 5 tehty fronend ei osaa hyödyntää.
+Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen blogi-sovelluksen backendin, jonka pitäisi olla virheenkäsittelyä lukuunottamatta yhteensopiva [osan 5](/osa5) frontendin kanssa. Teemme backendiin myös joukon ominaisuuksia, joita osassa 5 tehty frontend ei osaa hyödyntää.
 
 #### Tehtävä 13.1.
 
-Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten Heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovellusken tietokantaan.
+Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten Heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovelluksen tietokantaan.
 
 #### Tehtävä 13.2.
 
@@ -660,7 +660,7 @@ Nyt lopputulos on juuri se mitä haluamme.
   date: 2021-10-09T13:52:58.693Z }
 ```
 
-Jos kyse on kokoelmallisesta olioita, ei metodi toJSON toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliota: 
+Jos kyse on kokoelmallisesta olioita, ei metodi toJSON toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliolle: 
 
 ```js
 router.get('/', async (req, res) => {
@@ -730,7 +730,7 @@ Tulostus seuraavassa:
 
 #### Tehtävä 13.4.
 
-Muuta sovelluksesi web-sovellukseksi, joka seuraavia operaatioita
+Muuta sovelluksesi web-sovellukseksi, joka tukee seuraavia operaatioita
 
 - GET api/blogs (kaikkien blogien listaus)
 - POST api/blogs (uuden blogin lisäys)
