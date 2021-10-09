@@ -685,7 +685,7 @@ Tulostus näyttää seuraavalta:
     date: 2021-10-09T13:53:10.710Z } ]
 ```
 
-Ehkä parempi ratkaisu on kuitenkin muuttaa kokoelma JSON:iksi tulostamista varten: 
+Ehkä parempi ratkaisu on kuitenkin muuttaa kokoelma JSON:iksi tulostamista varten metodilla [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify): 
 
 ```js
 router.get('/', async (req, res) => {
