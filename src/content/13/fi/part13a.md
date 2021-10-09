@@ -473,6 +473,9 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
+</div>
+
+
 <div class="tasks">
 
 ### Tehtävät 13.1.-13.3.
@@ -481,22 +484,22 @@ Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen b
 
 #### Tehtävä 13.1.
 
-Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovellusken tietokantaan.
+Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten Heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovellusken tietokantaan.
 
 #### Tehtävä 13.2.
 
-Luo sovellukselle komentoriviltä taulu <i>blogs</i> jolla on seuraavat sarakkeet
+Luo sovellukselle komentoriviltä taulu <i>blogs,</i> jolla on seuraavat sarakkeet
 - id (uniikki, kasvava id)
 - author (merkkijono)
 - url (merkkijono joka ei voi olla tyhjä)
 - title (merkkijono joka ei voi olla tyhjä)
-- likes (kokonaisluku jolla oletusarvo nolla)
+- likes (kokonaisluku, jolla oletusarvo nolla)
 
-Lisää tietokantaan ainakin kaksi blogia
+Lisää tietokantaan ainakin kaksi blogia.
 
 #### Tehtävä 13.3.
 
-Tee sovellukseen komentoriviltä käytettävä toiminnallisuus, joka tulostaa tietokannassa olevat blogit, esim. seuraavasti:
+Tee sovellukseen komentoriviltä käytettävä toiminnallisuus, joka tulostaa tietokannassa olevat blogit esimerkiksi seuraavasti:
 
 ```bash
 $ node cli.js
@@ -511,26 +514,26 @@ Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
 
 ### Tietokantataulujen automaattinen luominen
 
-Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean skeeman omaava tietokanta on olemassa, eli että taulu `notes` on luotu sopivalla `create table` -komennolla.
+Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean skeeman omaava tietokanta on olemassa, eli että taulu <i>notes</i> on luotu sopivalla _create table_ -komennolla.
 
-Koska ohjelmakoodi säilytetään Githubissa, olisi järkevää säilyttää myös tietokannan luovat komennot ohjelmakoodin yhteydessä, jotta tietokannan skeema on varmasti sama mitä ohjelmakoodi odottaa. Sequelize pystyy itseasiassa generoimaan skeeman automaattisesti modelien määritelmästä modelien metodin [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) avulla. 
+Koska ohjelmakoodi säilytetään GitHubissa, olisi järkevää säilyttää myös tietokannan luovat komennot ohjelmakoodin yhteydessä, jotta tietokannan skeema on varmasti sama mitä ohjelmakoodi odottaa. Sequelize pystyy itseasiassa generoimaan skeeman automaattisesti modelien määritelmästä modelien metodin [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) avulla. 
 
 Tuhotaan nyt tietokanta konsolista käsin antamalla seuraava komento:
 
-```
+```sql
 drop table notes;
 ```
 
-Koment `\d` paljastaa että taulu on hävinnyt tietokannasta:
+Koment _\d_ paljastaa että taulu on hävinnyt tietokannasta:
 
-```
+```sql
 username=> \d
 Did not find any relations.
 ```
 
 Sovellus ei enää toimi. 
 
-Lisätään sovellukseen seuraava komento heti modelin `Note` määrittelyn jälkeen:
+Lisätään sovellukseen seuraava komento heti modelin <i>Note</i> määrittelyn jälkeen:
 
 ```js
 Note.sync()
@@ -538,17 +541,17 @@ Note.sync()
 
 Kun sovellus käynnistyy, tulostuu konsoliin seuraava:
 
-```
+```bash
 Executing (default): CREATE TABLE IF NOT EXISTS "notes" ("id"  SERIAL , "content" TEXT NOT NULL, "important" BOOLEAN, "date" TIMESTAMP WITH TIME ZONE, PRIMARY KEY ("id"));
 ```
 
-Eli sovelluksen käynnistyessä suoritetaan komento `CREATE TABLE IF NOT EXISTS "notes"...` joka luo taulun `notes` jos se ei jo ole olemassa.
+Eli sovelluksen käynnistyessä suoritetaan komento <i>CREATE TABLE IF NOT EXISTS "notes"...</i> joka luo taulun <i>notes</i> jos se ei jo ole olemassa.
 
 ### Muut operaatiot
 
 Täydennetään sovellusta vielä muutamalla operaatiolla. 
 
-Yksittäisen muistiinpanon etsiminen onnistuu metodilla [findByPk](https://sequelize.org/master/manual/model-querying-finders.html) koska se haetaan pääavaimena toimivan id:n perusteella:
+Yksittäisen muistiinpanon etsiminen onnistuu metodilla [findByPk](https://sequelize.org/master/manual/model-querying-finders.html), koska se haetaan pääavaimena toimivan id:n perusteella:
 
 ```js
 app.get('/api/notes/:id', async (req, res) => {
@@ -563,13 +566,13 @@ app.get('/api/notes/:id', async (req, res) => {
 
 Yksittäisen muistiinpanon hakeminen aiheuttaa seuraavanlaisen SQL-komennon:
 
-```
+```bash
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note"."id" = '1';
 ```
 
-Jos muistiinpanoa ei löydy, palauttaa operaation `null`, ja tässä tapauksessa annetaan asiaan kuuluva statuskoodi.
+Jos muistiinpanoa ei löydy, palauttaa operaation <i>null</i>, ja tässä tapauksessa annetaan asiaan kuuluva statuskoodi.
 
-Muistiinpanon muuttaminen tapahtuu seuraavasti. Tuetaan ainoastaan kentän `important` muutosta, sillä sovelluksen frontend ei muuta tarvitse:
+Muistiinpanon muuttaminen tapahtuu seuraavasti. Tuetaan ainoastaan kentän <i>important</i> muutosta, sillä sovelluksen frontend ei muuta tarvitse:
 
 ```js
 app.put('/api/notes/:id', async (req, res) => {
@@ -584,9 +587,9 @@ app.put('/api/notes/:id', async (req, res) => {
 })
 ```
 
-Tietokantariviä vastaava olio haetaan kannasta `findByPk`-metodilla, olioon tehdään muutos ja lopputulos tallennetaan kutsumalla tietokantariviä vastaavan olion metodia `save`.
+Tietokantariviä vastaava olio haetaan kannasta <i>findByPk</i>-metodilla, olioon tehdään muutos ja lopputulos tallennetaan kutsumalla tietokantariviä vastaavan olion metodia <i>save</i>.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part122-notes/tree/part12-1), branchissa <i>part12-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branchissa <i>part12-1</i>.
 
 ### Sequelizen palauttamien olioiden tulostaminen konsoliin
 
@@ -611,14 +614,14 @@ Huomaamme, että lopputulos ei ole ihan se mitä odotimme:
 note {
   dataValues: {
     id: 1,
-    content: 'Notes are attached to a user',
-    important: true,
+    content: 'MongoDB is webscale',
+    important: false,
     date: 2021-10-03T15:00:24.582Z,
   },
   _previousDataValues: {
     id: 1,
-    content: 'Notes are attached to a user',
-    important: true,
+    content: 'MongoDB is webscale',
+    important: false,
     date: 2021-10-03T15:00:24.582Z,
   },
   _changed: Set(0) {},
@@ -651,16 +654,13 @@ app.get('/api/notes/:id', async (req, res) => {
 Nyt lopputulos on juuri se mitä haluamme.
 
 ```js
-{
-  id: 1,
-  content: 'Notes are attached to a user',
-  important: true,
-  date: 2021-10-03T15:00:24.582Z,
-  userId: 1
-}
+{ id: 1,
+  content: 'MongoDB is webscale',
+  important: false,
+  date: 2021-10-09T13:52:58.693Z }
 ```
 
-Jos kyse on kokoelmallisesta olioita, ei metodi toJson toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliota: 
+Jos kyse on kokoelmallisesta olioita, ei metodi toJSON toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliota: 
 
 ```js
 router.get('/', async (req, res) => {
@@ -670,6 +670,19 @@ router.get('/', async (req, res) => {
 
   res.json(notes)
 })
+```
+
+Tulostus näyttää seuraavalta:
+
+```js
+[ { id: 1,
+    content: 'MongoDB is webscale',
+    important: false,
+    date: 2021-10-09T13:52:58.693Z },
+  { id: 2,
+    content: 'Relational databases rule the world',
+    important: true,
+    date: 2021-10-09T13:53:10.710Z } ]
 ```
 
 Ehkä parempi ratkaisu on kuitenkin muuttaa kokoelma JSON:iksi tulostamista varten: 
@@ -684,10 +697,29 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Tämä tapa on parempi erityisesti jos kokoelman oliot sisältävät muita olioita. Usein on myös hyödyllistä muotoilla oliot ruudulle hieman lukijaystävällisempään muotoon. Tämä onnistuu komennolla:
+Tämä tapa on parempi erityisesti jos kokoelman oliot sisältävät muita olioita. Usein on myös hyödyllistä muotoilla oliot ruudulle sisennetysti lukijaystävällisempään muotoon. Tämä onnistuu komennolla:
 
 ```json
 console.log(JSON.stringify(notes, null, 2)) 
+```
+
+Tulostus seuraavassa:
+
+```js
+[
+  {
+    "id": 1,
+    "content": "MongoDB is webscale",
+    "important": false,
+    "date": "2021-10-09T13:52:58.693Z"
+  },
+  {
+    "id": 2,
+    "content": "Relational databases rule the world",
+    "important": true,
+    "date": "2021-10-09T13:53:10.710Z"
+  }
+]
 ```
 
 </div>
