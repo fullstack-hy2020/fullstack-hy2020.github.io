@@ -56,7 +56,7 @@ Käyttäjät tallettava kokoelma <i>users</i> seuraavalta:
 
 MongoDB tuntee kyllä talletettujen olioiden kenttien tyypit, mutta sillä ei ole mitään tietoa siitä, minkä kokoelman olioihin käyttäjiin liittyvät muistiinpanojen id:t viittaavat. MongoDB ei myöskään välitä siitä, mitä kenttiä kokoelmiin talletettavilla olioilla on. MongoDB jättääkin täysin ohjelmoijan vastuulle sen, että tietokantaan talletetaan oikeanlaista tietoa.
 
-Skeemattomuudesta on sekä etua että haittaa. Eräänä etuna on skeemattomuuden tuoma joustavuus: koska skeemaa ei tarvitse tietokantatasolla määritellä, voi sovelluskehitys olla tietyissä tapauksissa nopeampaa, ja helpompaa, skeeman määrittelyssä ja sen muutoksissa on jokatapauksessa nähtävä pieni määrä vaivaa. Skeemattomuuden ongelmat liittyvät virhealttiuteen, kaikki jää ohjelmoijan vastuulle, tietokannalla ei ole mitään mahdollisuuksia tarkistaa onko siihen talletettu data <i>eheää</i>, eli onko kaikilla pakollisilla kentillä arvot, viittaavatko viitetyyppiset kentät olemassaoleviin ja ylipäätään oikean tyyppisiin olioihin jne.
+Skeemattomuudesta on sekä etua että haittaa. Eräänä etuna on skeemattomuuden tuoma joustavuus: koska skeemaa ei tarvitse tietokantatasolla määritellä, voi sovelluskehitys olla tietyissä tapauksissa nopeampaa, ja helpompaa, skeeman määrittelyssä ja sen muutoksissa on joka tapauksessa nähtävä pieni määrä vaivaa. Skeemattomuuden ongelmat liittyvät virhealttiuteen: kaikki jää ohjelmoijan vastuulle. Tietokannalla ei ole mitään mahdollisuuksia tarkistaa onko siihen talletettu data <i>eheää</i>, eli onko kaikilla pakollisilla kentillä arvot, viittaavatko viitetyyppiset kentät olemassaoleviin ja ylipäätään oikean tyyppisiin olioihin jne.
 
 Tämän osan fokuksessa olevat relaatiotietokannat taas nojaavat vahvasti skeeman olemassaoloon, ja skeemallisten tietokantojen edut ja haitat ovat lähes päinvastaiset skeemattomiin verrattuna.
 
@@ -66,9 +66,9 @@ Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri se
 
 Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/). Voit myös hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla.
 
-Käytämme nyt kuitenkin hyväkseen sitä, että osista 3 ja 4 tuttuun pilvipalvelualusta Herokuun on mahdollista luoda sovellukselle Postgres-tietokanta. 
+Käytämme nyt kuitenkin hyväksemme sitä, että osista 3 ja 4 tuttuun pilvipalvelualusta Herokuun on mahdollista luoda sovellukselle Postgres-tietokanta. 
 
-Tämän osan teoriamateriaalissa rakennetaan oissa 3 ja 4 rakennetun muistiinpanoja tallettavan sovelluksen backendendistä Postgresia käyttävä versio.
+Tämän osan teoriamateriaalissa rakennetaan osissa 3 ja 4 rakennetun muistiinpanoja tallettavan sovelluksen backendendistä Postgresia käyttävä versio.
 
 Luodaan nyt sopivan hakemiston sisällä Heroku-sovellus, lisätään sille tietokanta ja katsotaan komennolla _heroku config_ mikä on tietokantayhteyden muodostamiseen tarvittava <i>connect string:</i>
 
@@ -113,7 +113,7 @@ CREATE TABLE notes (
 );
 ```
 
-Muutama huomio: sarake  <i>id </i> on määritelty <i>pääavaimeksi</i> (engl. primary key), eli sarakkeen arvon tulee olla jokaisella taulun rivillä uniikki ja arvo ei saa olla tyhjä. Tyypiksi sarakkeelle on määritelty [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), joka ei ole todellinen tyyppi vaan lyhennysmerkintä sille, että kyseessä on kokonaislukuarvoinen sarake, jolle Postgres antaa automaattisesti uniikin, kasvavan arvon rivejä luotaessa. Tekstiarvoiselle sarakkeelle <i>content</i> on määritelty siten, että sille on pakko antaa arvo.
+Muutama huomio: sarake  <i>id </i> on määritelty <i>pääavaimeksi</i> (engl. primary key), eli sarakkeen arvon tulee olla jokaisella taulun rivillä uniikki ja arvo ei saa olla tyhjä. Tyypiksi sarakkeelle on määritelty [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), joka ei ole todellinen tyyppi vaan lyhennysmerkintä sille, että kyseessä on kokonaislukuarvoinen sarake, jolle Postgres antaa automaattisesti uniikin, kasvavan arvon rivejä luotaessa. Tekstiarvoinen sarakke <i>content</i> on määritelty siten, että sille on pakko antaa arvo.
 
 Katsotaan tilannetta konsolista käsin. Ensin komento _\d_, joka kertoo mitä tauluja kannasa on:
 
@@ -192,7 +192,7 @@ Seuraavaksi on aika siirtyä käyttämään tietokantaa sovelluksesta käsin.
 
 ### Relaatiotietokantaa käyttävä node-sovellus
 
-Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan sille kehitysaikaiseksi riippuvuudeksi <i> nodemon</i>  seka seuraavat suoritusaikaiset riippuvuudet:
+Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan sille kehitysaikaiseksi riippuvuudeksi <i> nodemon</i>  sekä seuraavat suoritusaikaiset riippuvuudet:
 
 ```bash
 npm install express dotenv pg sequelize
@@ -228,7 +228,7 @@ const main = async () => {
 main()
 ```
 
-Komennon _heroku config_ paljastama tietokannan <i>connect string</i> tulee tallentaa tiedostoon <i>.env</i>, jonka sisällön pitää siis olla suunilleen seuraava
+Komennon _heroku config_ paljastama tietokannan <i>connect string</i> tulee tallentaa tiedostoon <i>.env</i>, jonka sisällön pitää olla suunnilleen seuraava:
 
 ```bash
 $ cat .env
@@ -384,11 +384,11 @@ app.listen(PORT, () => {
 })
 ```
 
-Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Märittelimme, että taululla ei ole usein käytettykä aikaleimasarakkeita (created\_at ja updated\_at).
+Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Märittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
 
-Määrittelmimme myös, että taulujen nimet päätellään modelien nimistä "underscored"-tekniikalla. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on kuten tapauksessamme <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelun sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
+Määrittelimme myös, että taulujen nimet päätellään modelien nimistä "underscored"-tekniikalla. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
 
-Sama nimentäkäytänne koskiee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
+Sama nimentäkäytänne koskee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
 
 ```js
 Note.init({
@@ -401,7 +401,7 @@ Note.init({
 
 Vastaavan sarakkeen nimi tietokannassa olisi <i>creation_year</i>. Koodissa viittaus sarakkeeseen tapahtuu aina samassa muodossa mikä on modelissa, eli "camel case"-formaatissa. 
 
-Olemme myös määritelleet <i>modelName: 'note'</i>, oletusarvoinen "modelin nimi" olisi isolla kirjoitettu <i>Note</i>, haluamme kuitenkin pienen alkukirjaimen, se tekee muutaman asian jatkossa hieman mukavammaksi.
+Olemme myös määritelleet <i>modelName: 'note'</i>, oletusarvoinen "modelin nimi" olisi isolla kirjoitettu <i>Note</i>. Haluamme kuitenkin pienen alkukirjaimen, se tekee muutaman asian jatkossa hieman mukavammaksi.
 
 Tietokantaoperaatio on helppo tehdä modelien tarjoaman [kyselyrajapinnan](https://sequelize.org/master/manual/model-querying-basics.html) avulla, metodi [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) toimii juuri kuten sen nimen perusteella olettaa toimivan:
 
@@ -449,7 +449,7 @@ note.important = true // highlight-line
 await note.save()
 ```
 
-Esimerkkikoodin käyttötapaukseen metodi [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) sopii paremmin, joten pidättäydytää siinä.
+Esimerkkikoodin käyttötapaukseen metodi [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) sopii paremmin, joten pidättäydytään siinä.
 
 Jos luotava olio ei ole validi, on seurauksena virheilmoitus. Esim. yritettäessä luoda muistiinpano ilman sisältöä
 operaatio epäonnistuu, ja konsoli paljastaa syyn olevan `SequelizeValidationError: notNull Violation Note.content cannot be null`:
@@ -480,11 +480,11 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tehtävät 13.1.-13.3.
 
-Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen blogi-sovelluksen backendin, jonka pitäisi olla virheenkäsittelyä lukuunottamatta yhteensopiva [osan 5](/osa5) frontendin kanssa. Teemme backendiin myös joukon ominaisuuksia, joita osassa 5 tehty fronend ei osaa hyödyntää.
+Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen blogi-sovelluksen backendin, jonka pitäisi olla virheenkäsittelyä lukuunottamatta yhteensopiva [osan 5](/osa5) frontendin kanssa. Teemme backendiin myös joukon ominaisuuksia, joita osassa 5 tehty frontend ei osaa hyödyntää.
 
 #### Tehtävä 13.1.
 
-Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten Heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovellusken tietokantaan.
+Tee sovellukselle GitHub-repositorio ja luo sen sisällä sovellusta varten Heroku-sovellus sekä Postgres-tietokanta. Varmista, että saat luotua yhteyden sovelluksen tietokantaan.
 
 #### Tehtävä 13.2.
 
@@ -660,7 +660,7 @@ Nyt lopputulos on juuri se mitä haluamme.
   date: 2021-10-09T13:52:58.693Z }
 ```
 
-Jos kyse on kokoelmallisesta olioita, ei metodi toJSON toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliota: 
+Jos kyse on kokoelmallisesta olioita, ei metodi toJSON toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliolle: 
 
 ```js
 router.get('/', async (req, res) => {
@@ -730,7 +730,7 @@ Tulostus seuraavassa:
 
 #### Tehtävä 13.4.
 
-Muuta sovelluksesi web-sovellukseksi, joka seuraavia operaatioita
+Muuta sovelluksesi web-sovellukseksi, joka tukee seuraavia operaatioita
 
 - GET api/blogs (kaikkien blogien listaus)
 - POST api/blogs (uuden blogin lisäys)
