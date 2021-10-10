@@ -554,7 +554,7 @@ Let us start by installing express:
 npm install express
 ```
 
-add then add the <i>start</i> script to package.json:
+and then add the <i>start</i> script to package.json:
 
 ```json
 {

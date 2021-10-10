@@ -728,11 +728,11 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 <h4>2.12* Data for countries, 步骤1</h4>
 <!-- H42.12 * 国家数据，步骤1 / h4 -->
 
-<!-- The API [https://restcountries.eu](https://restcountries.eu) provides a lot data for different countries in a machine readable format, a so-called REST API. -->
-Api [https://restcountries.eu](https://restcountries.eu) 以机器可读的格式，提供了不同国家的大量数据。即所谓的 REST API。 
+<!-- The API [https://restcountries.com](https://restcountries.com) provides a lot data for different countries in a machine readable format, a so-called REST API. -->
+Api [https://restcountries.com](https://restcountries.com) 以机器可读的格式，提供了不同国家的大量数据。即所谓的 REST API。 
 
-<!-- Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.eu/#api-endpoints-all). -->
-创建一个应用，可以查看不同国家的数据。 应用能从[all](https://restcountries.eu/#api-endpoints-all)中获取数据。
+<!-- Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/#api-endpoints-all). -->
+创建一个应用，可以查看不同国家的数据。 应用能从[all](https://restcountries.com/#api-endpoints-all)中获取数据。
 
 <!-- The user interface is very simple. The country to be shown is found by typing a search query into the search field. -->
 用户界面非常简单。 通过在搜索字段中键入搜索查询，可以找到要显示的国家。
@@ -754,9 +754,12 @@ Api [https://restcountries.eu](https://restcountries.eu) 以机器可读的格�
 
 ![](../../images/2/19b3.png)
 
-<!-- **NB**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
+<!-- **NB1**: the API has changed recently and do not contain anymore population of the countries, you may replace that with some other data found in API.  -->
+<!-- **NB2**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
 
-注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会很难支持，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
+注意1: API 最近进行了修改，因此不再包含国家的人口了，你可以使用API中提供的其他数据。
+
+注意2: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会很难支持，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
 
 <!-- **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application. -->
 

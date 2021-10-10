@@ -96,7 +96,7 @@ Tehdään projektihakemistosta Git-repositorio ja lisätään <i>.gitignore</i>,
 node_modules
 ```
 
-Luodaan Heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta Git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku main_.
+Luodaan Heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemistosta Git-repositorio, commitoidaan koodi ja siirretään se Herokuun komennolla _git push heroku main_ (tai komennolla _git push heroku master_).
 
 Jos kaikki meni hyvin, sovellus toimii:
 

@@ -48,8 +48,8 @@ Node 中的约定是用 <i>NODE\_ENV</i> 环境变量定义应用的执行模式
 }
 ```
 
-<!-- We also added the [runInBand](https://jestjs.io/docs/en/cli.html#runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database. -->
-我们还在执行测试的 npm 脚本中添加了[runInBand](https://jestjs.io/docs/en/cli.html#--runinband)选项。 这个选项将防止 Jest 并行运行测试; 一旦我们的测试开始使用数据库，我们将讨论它的重要性。
+<!-- We also added the [runInBand](https://jestjs.io/docs/cli#--runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database. -->
+我们还在执行测试的 npm 脚本中添加了[runInBand](https://jestjs.io/docs/cli#--runinband)选项。 这个选项将防止 Jest 并行运行测试; 一旦我们的测试开始使用数据库，我们将讨论它的重要性。
 
 <!-- We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>. -->
 我们在使用 nodemon 的  _npm run dev_ 脚本中指定了应用的模式为 <i>development</i> 。 我们还指定了默认的 npm start 命令将模式定义为<i>production</i>。
@@ -168,7 +168,7 @@ afterAll(() => {
 我们的测试向<i>api/notes</i> url 发出 HTTP GET 请求，并验证请求是否用状态码200响应。 测试还验证<i>Content-Type</i> 头是否设置为 <i>application/json</i>，表明数据是所需的格式。(如果你不熟悉正则语法 `/application\/json/` ， 你可以在[这里](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) 进行学习)
 
 <!-- The test contains some details that we will explore [a bit later on](/zh/part4/测试后端应用#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://facebook.github.io/jest/docs/en/asynchronous.html) can be used for writing asynchronous code with the appearance of synchronous code. -->
-该测试包含一些细节，我们将在[稍后讨论](/zh/part4/测试后端应用#async-await)。 定义测试的箭头函数的前面是<i>async</i> 关键字，对<i>api</i> 对象的方法调用的前面是<i>await</i> 关键字。 我们将编写一些测试，然后仔细研究这个 async/await 黑魔法。 现在不要关心它们，只要确保示例测试正确工作就可以了。 async/await 语法与向 API 发出的请求是<i>异步</i> 操作这一事实相关。 [Async/await 语法](https://jestjs.io/docs/asynchronous)可以用于编写具有同步代码外观的异步代码 。
+该测试包含一些细节，我们将在[稍后讨论](/zh/part4/测试后端应用#async-await)。 定义测试的箭头函数的前面是<i>async</i> 关键字，对<i>api</i> 对象的方法调用的前面是<i>await</i> 关键字。 我们将编写一些测试，然后仔细研究这个 async/await 黑魔法。 现在不要关心它们，只要确保示例测试正确工作就可以了。 async/await 语法与向 API 发出的请求是<i>异步</i> 操作这一事实相关。 [Async/await 语法](https://jestjs.io/docs/asynchronous)可以用同步代码的语法来编写异步代码。
 
 <!-- Once all the tests (there is currently only one) have finished running we have to close the database connection used by Mongoose. This can be easily achieved with the [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout) method: -->
 一旦所有的测试(目前只有一个)已经完成运行，我们必须使用Mongoose关闭数据库连接的。这可以很容易地通过[afterAll](https://jestjs.io/docs/api#afterallfn-timeout)方法来实现:
@@ -1345,8 +1345,8 @@ afterAll(() => {
 <!-- This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources. -->
 这种通过发出 HTTP 请求和用 Mongoose 检查数据库来测试 API 的方法，绝不是对服务器应用进行 API 集成测试的唯一或最佳方法。 没有通用的编写测试的最佳方法，因为这完全取决于被测试的应用和可用资源。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6). -->
-您可以在[this Github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6). -->
+您可以在[this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6)的<i>part4-6</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

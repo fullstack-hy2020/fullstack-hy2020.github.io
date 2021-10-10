@@ -1279,7 +1279,7 @@ const addDiary = ( entry: NewDiaryEntry ): DiaryEntry => {  // highlight-line
 原因是eslint 的规则 [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md)  阻止我们将请求体赋给一个变量
 
 
-<!-- For the time being, let us just ignore the eslint-rule from the whole file by addin following as the first line of the file: -->
+<!-- For the time being, let us just ignore the eslint-rule from the whole file by adding following as the first line of the file: -->
 目前我们先忽略这个规则，在文件中加入如下内容：
 
 ``` js

@@ -37,7 +37,7 @@ Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet
 
 ### Osat ja suorittaminen
 
-Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-12 opintopisteen laajuisena. 
+Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-13 opintopisteen laajuisena. 
 
 #### Osat 0-5 (ydinkurssi) - Full Stack -websovelluskehitys (5 op, AYCSM141081)
 
@@ -59,7 +59,7 @@ Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. H
 
 Kokeen viimeinen suorituspäivä on 10.1.2022. **Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.**
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-12 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-13 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
 
 #### Osa 6 - Full Stack -websovelluskehitys, lisäosa 1 (1 op, AYCSM141082)
 Suorittamalla vähintään 127 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
@@ -99,6 +99,15 @@ Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelev�
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 11](/en/part11).
 -	Tee kaikki tehtävät osasta 11.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+
+
+#### Osa 12 - Full Stack -containers (1 op, AYCSM14114, englanniksi)
+
+Suorittamalla kaikki kurssin kahdennentoista, konttiteknologiaa käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
+Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 12](/en/part12).
+-	Tee kaikki tehtävät osasta 12.
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 ### Suoritusmerkinnän pyytäminen

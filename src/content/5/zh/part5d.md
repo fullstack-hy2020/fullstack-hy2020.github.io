@@ -118,8 +118,8 @@ npm run cypress:open
 
 
 <!-- When we first run Cypress, it creates a <i>cypress</i> directory. It contains a <i>integrations</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us, but we will delete all those and make our own test in file <i>note\_app.speck.js</i>: -->
-<!-- When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two sub directories the <i>integration/1-getting-statrted</i> and the <i>integration/2-advanced examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:-->
-当我们第一次运行 Cypress 时，它会创建一个<i>Cypress</i> 目录。 它包含一个<i>集成</i> 子目录，我们将在其中放置测试。 Cypress 为我们在 两个子目录<i>integration/1-getting-statrted</i> 和 <i>integration/2-advanced examples</i> 中创建了一系列测试示例，我们可以将这两个目录删除，并在文件<i>note\_app.spec.js</i> 中创建我们自己的测试:
+<!-- When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectories, where we will place our tests. Cypress creates a bunch of example tests for us in two sub directories the <i>integration/1-getting-started</i> and the <i>integration/2-advanced examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:-->
+当我们第一次运行 Cypress 时，它会创建一个<i>Cypress</i> 目录。 它包含一个<i>集成</i> 子目录，我们将在其中放置测试。 Cypress 为我们在 两个子目录<i>integration/1-getting-started</i> 和 <i>integration/2-advanced examples</i> 中创建了一系列测试示例，我们可以将这两个目录删除，并在文件<i>note\_app.spec.js</i> 中创建我们自己的测试:
 
 ```js
 describe('Note app', function() {
@@ -149,7 +149,7 @@ describe('Note app', function() {
 
 <!-- The structure of the test should look faimiliar. They use <i>describe</i> blocks to group different test cases like Jest does. The test cases have been defined with the <i>it</i> method.  -->
 测试的结构应该看起来很熟悉。 他们使用<i>describe</i> 块对不同的测试用例进行分组，就像 Jest 那样。 测试用例已经用<i>it</i> 方法定义了。
-<!-- Cypress borrowed these parts from [Mocha](https://mochajs.org/) testing library it uses under the hood.  -->
+<!-- Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library it uses under the hood.  -->
 Cypress从[Mocha](https://mochajs.org/)测试库中借用了这些部件，并在底层使用。 
 
 
@@ -216,8 +216,8 @@ describe('Note app', function() {
 ### Writing to a form
 【写入表单】
 
-<!-- Let's extend our tests so, that the test tries to log in to our application.  -->
-让我们扩展测试，测试登录功能，登录到我们的应用。
+<!-- Let's extend our tests so that the test tries to log in to our application.  -->
+让我们扩展测试用例，测试尝试登录到我们的应用。
 <!-- We assume our backend contains a user with the username <i>mluukkai</i> and password <i>salainen</i>. -->
 我们假设后端包含一个用户名为<i>mluukkai</i> 和密码<i>salainen</i> 的用户。
 
@@ -298,8 +298,8 @@ it('user can login', function () {
 
 <!-- It would be better to give our inputs unique <i>ids</i> and find them by them.  -->
 最好是给我们的input提供唯一的 id 并通过id找到它们。
-<!-- We change our login form like so -->
-我们更改登录表单，如下所示
+<!-- We change our login form like so： -->
+我们更改登录表单，如下所示：
 
 ```js
 const LoginForm = ({ ... }) => {
@@ -340,8 +340,8 @@ const LoginForm = ({ ... }) => {
 
 
 
-<!-- The test becomes -->
-测试变成了
+<!-- The test becomes： -->
+测试变成了：
 
 ```js
 describe('Note app',  function() {
@@ -396,7 +396,7 @@ cy.get('#login-button').click()
 如果我们通过文本搜索按钮，[cy.contains](https://docs.cypress.io/api/commands/contains.html#syntax)将返回第一个按钮，或者打开登录表单的按钮。
 <!-- This will happen even if the button is not visible.  -->
 即使按钮不可见，也会发生这种情况。
-<!-- Because of this we gave the submit button id <i>login-button</i> we can use to access it. -->
+<!-- To avoid name conflicts, we gave the submit button the id <i>login-button</i> we can use to access it. -->
 为了防止名称冲突，我们给出了提交按钮 id <i>login-button</i>，我们可以用它来访问它。
 
 
@@ -444,7 +444,7 @@ module.exports = {
 
 ### Testing new note form 
 【测试新建便笺的表单】
-<!-- Let's next add tests which test the new note functionality:  -->
+<!-- Let's next add tests which test the "new note" functionality:   -->
 下面让我们添加测试来测试新建便笺的功能:
 
 ```js
@@ -477,11 +477,11 @@ describe('Note app', function() {
 
 <!-- The test has been defined in its own <i>describe</i> block.  -->
 测试已经在它自己的<i>describe</i> 块中定义了。
-<!-- Only logged in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block.  -->
+<!-- Only logged-in users can create new notes, so we added logging in to the application to a <i>beforeEach</i> block. -->
 只有登录的用户才能创建新的便笺，因此我们将登录添加到应用的<i>beforeEach</i> 块中。
 
-<!-- The test trusts that when creating a new note the page contains only one input, so it searches for it like so -->
-测试相信，在创建新便笺时，页面只包含一个input，因此它会像这样搜索该便笺
+<!-- The test trusts that when creating a new note the page contains only one input, so it searches for it like so： -->
+测试相信，在创建新便笺时，页面只包含一个input，因此它会像这样搜索该便笺：
 
 ```js
 cy.get('input')
@@ -1251,7 +1251,7 @@ const Note = ({ note, toggleImportance }) => {
 解决这个问题的方法如下:
 
 ```js
-it('other of those can be made important', function () {
+it('one of those can be made important', function () {
   cy.contains('second note').parent().find('button').click()
   cy.contains('second note').parent().find('button')
     .should('contain', 'make not important')
@@ -1279,7 +1279,7 @@ it('other of those can be made important', function () {
 在这种情况下，可以使用[as](https://docs.cypress.io/api/commands/as.html)命令:
 
 ```js
-it('other of those can be made important', function () {
+it('one of those can be made important', function () {
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
   cy.get('@theButton').should('contain', 'make not important')

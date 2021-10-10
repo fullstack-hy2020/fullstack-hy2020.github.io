@@ -472,8 +472,8 @@ input元素不应该被赋予 reset 属性。
 
 
 
-<!-- The application can be used to search for country details from the https://restcountries.eu/ interface. If country is found, the details of the country are displayed -->
-该应用可以用来搜索国家的详细信息，从 https://restcountries.eu/ 的界面。 如果找到国家，则显示该国的详细信息
+<!-- The application can be used to search for country details from the https://restcountries.com/ interface. If country is found, the details of the country are displayed -->
+该应用可以用来搜索国家的详细信息，从 https://restcountries.com/ 的界面。 如果找到国家，则显示该国的详细信息
 
 ![](../../images/7/69ea.png)
 
@@ -489,8 +489,8 @@ input元素不应该被赋予 reset 属性。
 <!-- The application is otherwise complete, but in this exercise you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter. -->
 除此之外，应用是完整的，但是在这个练习中，您必须实现一个自定义的 hook useCountry，它可以用来搜索作为参数提供给 hook 的国家的详细信息。
 
-<!-- Use the api endpoint [full name](https://restcountries.eu/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook. -->
-使用 api 接口[full name](https://restcountries.eu/#api-endpoints-full-name)在自定义Hook内的 useEffect-hook 中获取国家详细信息。
+<!-- Use the api endpoint [full name](https://restcountries.com/#api-endpoints-full-name) to fetch country details in a _useEffect_-hook within your custom hook. -->
+使用 api 接口[full name](https://restcountries.com/#api-endpoints-full-name)在自定义Hook内的 useEffect-hook 中获取国家详细信息。
 
 
 

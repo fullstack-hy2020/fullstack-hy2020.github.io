@@ -596,9 +596,9 @@ Modifique la aplicación de modo que el estado inicial de los datos se obtenga d
 
 <h4>2.12* Datos para países, paso1</h4> 
 
-La API [https://restcountries.eu](https://restcountries.eu) proporciona datos para diferentes países en un formato legible para máquinas, llamada API REST.
+La API [https://restcountries.com](https://restcountries.com) proporciona datos para diferentes países en un formato legible para máquinas, llamada API REST.
 
-Cree una aplicación en la que se puedan ver datos de varios países. La aplicación probablemente debería obtener los datos del endpoint [all](https://restcountries.eu/#api-endpoints-all). 
+Cree una aplicación en la que se puedan ver datos de varios países. La aplicación probablemente debería obtener los datos del endpoint [all](https://restcountries.com/#api-endpoints-all). 
 
 La interfaz de usuario es muy sencilla. El país que se mostrará se encuentra escribiendo una consulta de búsqueda en el campo de búsqueda.
 

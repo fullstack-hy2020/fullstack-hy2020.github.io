@@ -61,6 +61,14 @@ npm install -g ts-node typescript
 npm install --save-dev ts-node typescript
 ```
 
+In some cases, you should install this package as well
+在一些情况下，你应该像如下安装依赖包
+
+```
+npm install -D tslib @types/node
+```
+
+
 <!-- and set up <i>scripts</i> within the package.json:  -->
 在 package.json 中设置一下<i>scripts</i>:
 
@@ -725,7 +733,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
 npm install express
 ```
 
-<!-- add then add the <i>start</i> script to package.json: -->
+<!-- and then add the <i>start</i> script to package.json: -->
 然后将<i>start</i> script 添加到 package.json:
 
 ```json

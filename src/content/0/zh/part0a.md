@@ -81,8 +81,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 ### Parts and completion
 【章节介绍与完成标准】
 
-<!-- Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 12 credits.  -->
-全栈课程的学习包括核心课程部分以及多种扩展部分 。你可以通过完成这些内容的学习获得5-12个学分
+<!-- Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 13 credits.  -->
+全栈课程的学习包括核心课程部分以及多种扩展部分 。你可以通过完成这些内容的学习获得5-13个学分
 
 
 #### Parts 0-5 (core course) - Full Stack Web Development (5 cr, AYCSM141081en)
@@ -124,8 +124,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 <!-- The last possible date for taking the exam is 10 January 2022. **Note that you must sign up for the exam by 9 January 2022, at the latest.** -->
 参加考试的最终时间是2022 年1月10日。**注意也就是说你必须在2022年1月9日前注册考试**。
 
-<!-- You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-12 credits and does not count towards your grade. -->
-你只有在提交了足够的练习获得5学分后才能参加考试。不推荐提交了恰好数量的 练习后立即参加考试。考试同样和5-12学分一样，并不会算到你的最终成绩中。
+<!-- You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-13 credits and does not count towards your grade. -->
+你只有在提交了足够的练习获得5学分后才能参加考试。不推荐提交了恰好数量的 练习后立即参加考试。考试同样和5-13学分一样，并不会算到你的最终成绩中。
 
 <!-- <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i> -->
 如果只是想要获得课程的认证证书，不必参加考试或者注册开放大学。
@@ -216,6 +216,29 @@ However, note that the deadline for taking exam for University of Helsinki credi
 - [通过开放大学开启第十一章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33
 ) 
 -	[申请第十一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+
+
+
+#### Part 12 - Full Stack Web Development: Containers (1 cr, AYCSM14112)
+
+<!-- By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit.  -->
+
+通过提交12章的所有练习，关于容器技术，你可以获得额外的1个学分。
+
+<!-- More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12). -->
+这个章节的预备知识以及学分可以在[第12章](/zh/part12) 中找到。
+
+<!-- - Submit all exercises for part 12. 
+- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60
+). 
+- [Request credits for part 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits). -->
+
+- 提交12章的所有练习
+- [通过开放大学开启第十二章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60
+) 
+-	[申请第十一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+
+
 
 ### How to get your credits 
 【如何获得学分】
@@ -410,9 +433,9 @@ Enroll in the course through Open University by 9 Jan 2022 [here](https://www.av
 ### Interview promise  
 【面试保证】
 
-<!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10).-->
+<!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (13 + 10).-->
 
-我们的合作伙伴包括[Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(12 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(13 + 10)的人都可以获得工作面试。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 

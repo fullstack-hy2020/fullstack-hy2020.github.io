@@ -565,7 +565,7 @@ query {
 ```
 
 
-and the response now is a person object, which <i>contains</i> an address object. 
+and the response is now a person object, which <i>contains</i> an address object. 
 
 ```js
 {
@@ -598,14 +598,14 @@ let persons = [
 ```
 
 
-So the person-objects saved in the server are not exactly the same as GraphQL type <i>Person</i> objects described in the schema. 
+The person-objects saved in the server are not exactly the same as the GraphQL type <i>Person</i> objects described in the schema. 
 
 
-Contrary to the type <i>Person</i>, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own data structure in the server. 
+Contrary to the <i>Person</i> type, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own separate data structure in the server. 
 
 
-Because the objects saved in the array do not have a field <i>address</i>, the default resolver is not sufficient enough. 
-Let's add a resolver for the field <i>address</i> of type <i>Person</i>: 
+Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient. 
+Let's add a resolver for the <i>address</i> field  of <i>Person</i> type : 
 
 ```js
 const resolvers = {

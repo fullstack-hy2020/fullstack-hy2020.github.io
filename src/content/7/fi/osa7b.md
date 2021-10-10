@@ -401,7 +401,7 @@ Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hake
 
 Ota pohjaksi repositoriossa https://github.com/fullstack-hy/country-hook oleva koodi. 
 
-Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.eu/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot
+Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.com/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot
 
 ![](../../images/7/69ea.png)
 
@@ -411,7 +411,7 @@ jos maata ei löydy, kerrotaan siitä käyttäjälle
 
 Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot.
 
-Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.eu/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa.
+Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.com/#api-endpoints-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa.
 
 Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa. 
 
