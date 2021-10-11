@@ -570,6 +570,7 @@ Finally, restart Expo's development tools so that our new Webpack configuration 
 Now that the Expo's web browser preview is fixed, open the <i>App.js</i> file and add the <em>NativeRouter</em> component to the <em>App</em> component:
 
 ```javascript
+import { StatusBar } from 'expo-status-bar';
 import React from 'react';
 import { NativeRouter } from 'react-router-native'; // highlight-line
 
@@ -577,9 +578,14 @@ import Main from './src/components/Main';
 
 const App = () => {
   return (
-    <NativeRouter> // highlight-line
-      <Main />
-    </NativeRouter> // highlight-line
+    // highlight-start
+    <>
+      <NativeRouter>
+        <Main />
+      </NativeRouter>
+      <StatusBar style="auto" />
+    </>
+    // highlight-end
   );
 };
 
