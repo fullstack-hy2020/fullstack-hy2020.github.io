@@ -589,7 +589,7 @@ app.put('/api/notes/:id', async (req, res) => {
 
 Tietokantariviä vastaava olio haetaan kannasta <i>findByPk</i>-metodilla, olioon tehdään muutos ja lopputulos tallennetaan kutsumalla tietokantariviä vastaavan olion metodia <i>save</i>.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branchissa <i>part12-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branchissa <i>part13-1</i>.
 
 ### Sequelizen palauttamien olioiden tulostaminen konsoliin
 

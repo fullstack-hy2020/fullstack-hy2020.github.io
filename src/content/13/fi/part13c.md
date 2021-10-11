@@ -197,7 +197,7 @@ username=> select * from migrations;
 
 Luodaan tietokantaan muutama käyttäjä sekä joukko muistiinpanoja, ja sen jälkeen olemme valmiina laajentamaan sovellusta.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-6), branchissa <i>part12-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-6), branchissa <i>part13-6</i>.
 ### Admin-käyttäjä ja käyttäjien disablointi
 
 Haluamme siis lisätä tauluun <i>users</i> kaksi boolean-arvoista kenttää 
@@ -492,7 +492,7 @@ Voimme nyt siis perua edellisen migraation suorittamalla komentorivltä _npm run
 
 Migraatiot suoritetaan automaattisesti kun ohjelma käynnistetään. Ohjelman kehitysvaiheessa saattaisi välillä olla markoituksenmukaisempaa poistaa migraatioiden automaattinen suoritus ja tehdä migraatiot komentoriviltä käsin. 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-7), branchissa <i>part12-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-7), branchissa <i>part13-7</i>.
 
 
 </div>
@@ -748,7 +748,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-8), branchissa <i>part12-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-8), branchissa <i>part13-8</i>.
 
 ### Huomio Sequelizen model-olioiden ominaisuuksista
 
@@ -1036,7 +1036,7 @@ Lopputulos on halutun kaltainen:
 
 KUVA
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-9), branchissa <i>part12-9</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-9), branchissa <i>part13-9</i>.
 
 
 </div>

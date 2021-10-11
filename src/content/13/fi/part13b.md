@@ -232,7 +232,7 @@ router.put('/:id', noteFinder, async (req, res) => { // highlight-line
 
 Reitinkäsittelijät saavat nyt <i>kolme</i> parametria, näistä ensimmäinen on reitin märittelevä merkkijono ja toisena on määrittelemämme middleware <i>noteFinder</i>, joka hakee muistiinpanon tietokannasta ja sijoittaa sen <i>req</i> olion kenttään <i>note</i>. Pieni määrä copypastea poistuu ja olemme tyyvytäisiä!
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part122-notes/tree/part12-2), branchissa <i>part12-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part132-notes/tree/part13-2), branchissa <i>part13-2</i>.
 
 </div>
 
@@ -300,7 +300,7 @@ User.init({
 module.exports = User
 ```
 
-Käyttäjätunnukseen on asetettu ehdoksi että se on uniikki. Käyttäjätunnusta olisi periaatteessa voitu käyttää taulun pääavaimena. Päätimme kuitenkin luoda pääavaimen erillisenä kenttänä kokonaislukuarvoisena kenttänä <i>id</i>.
+Käyttäjätunnukseen on asetettu ehdoksi että se on uniikki. Käyttäjätunnusta olisi periaatteessa voitu käyttää taulun pääavaimena. Päätimme kuitenkin luoda pääavaimen erillisenä kokonaislukuarvoisena kenttänä <i>id</i>.
 
 
 Tiedosto <i>models/index.js</i> laajenee hieman
@@ -309,6 +309,7 @@ Tiedosto <i>models/index.js</i> laajenee hieman
 const Note = require('./note')
 const User = require('./user') // highlight-line
 
+Note.sync()
 User.sync() // highlight-line
 
 module.exports = {
@@ -367,7 +368,8 @@ router.post('/', async (request, response) => {
     }
   })
   
-const passwordCorrect = body.password === 'salainen'
+  const passwordCorrect = body.password === 'salainen'
+
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
       error: 'invalid username or password'
@@ -407,28 +409,28 @@ FROM "users" AS "User"
 WHERE "User"."username" = 'mluukkai';
 ```
 
-Jos käyttäjä löytyy ja salasana on oikein (eli kaikkien käyttäjien tapauksessa _salainen_), palautetaan kutsujalle `jsonwebtoken`, joka sisältää käyttäjän tietot. Tätä varten asennamme 
+Jos käyttäjä löytyy ja salasana on oikein (eli kaikkien käyttäjien tapauksessa _salainen_), palautetaan kutsujalle <i>jsonwebtoken</i>, joka sisältää käyttäjän tietot. Tätä varten asennamme 
 riippuvuuden
 
 ```js
 npm install jsonwebtoken
 ```
 
-Tiedosto `index.js` laajenee hiukan
+Tiedosto <i>index.js</i> laajenee hiukan
 
 ```js
 const notesRouter = require('./controllers/notes')
-const usersRouter = require('./controllers/users')
-const loginRouter = require('./controllers/login')
+const usersRouter = require('./controllers/users') // highlight-line
+const loginRouter = require('./controllers/login') // highlight-line
 
 app.use(express.json())
 
 app.use('/api/notes', notesRouter)
-app.use('/api/users', usersRouter)
-app.use('/api/login', loginRouter)
+app.use('/api/users', usersRouter) // highlight-line
+app.use('/api/login', loginRouter) // highlight-line
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-3), branchissa <i>part12-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-3), branchissa <i>part13-3</i>.
 
 ### Taulujen välinen liitos
 
@@ -440,20 +442,22 @@ Sequelizeä käyttäessä viiteavaimen märittely onnistuu muuttamalla tiedostoa
 const Note = require('./note')
 const User = require('./user')
 
-// hightlight-start
+// highlight-start
 User.hasMany(Note)
 Note.belongsTo(User)
+// highlight-end
 
+// highlight-start
 Note.sync({ alter: true })
 User.sync({ alter: true })
-// hightlight-end
+// highlight-end
 
 module.exports = {
   Note, User
 }
 ```
 
-Näin siis [määritellään](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) että <i>users</i> ja <i>notes</i> rivien välillä on _yhden suhde moneen_ -yhteys. Muutimme myös `sync`-kutsuja siten että ne muuttavat taulut jos taulujen määrittelyyn on tullut muutoksia. Kun nyt katsotaan tietokannan skeemaa konsolista, se näyttää seuraavalta:
+Näin siis [määritellään](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) että <i>users</i> ja <i>notes</i> rivien välillä on <i>yhden suhde moneen</i> -yhteys. Muutimme myös <i>sync</i>-kutsuja siten että ne muuttavat taulut jos taulujen määrittelyyn on tullut muutoksia. Kun nyt katsotaan tietokannan skeemaa konsolista, se näyttää seuraavalta:
 
 ```js
 username=> \d users
@@ -491,10 +495,10 @@ Tehdään nyt uuden muistiinpanon lisäämiseen sellainen muutos, että muistiin
 
 router.post('/', async (req, res) => {
   try {
-    // hightlight-start
+    // highlight-start
     const user = await User.findOne()
-    const note = await Note.create({...req.body, userId: user.id})
-    // hightlight-end
+    const note = await Note.create({ ...req.body, userId: user.id })
+    // highlight-end
     res.json(note)
   } catch(error) {
     return res.status(400).json({ error })
@@ -502,7 +506,7 @@ router.post('/', async (req, res) => {
 })
 ```
 
-Huomioinarvoista koodissa on se, että vaikka tietokannan tasolla muistiinpanoilla on sarake `user\_id`, tietokantariviä vastaavassa oliossa siihen viitataan camel case muodossa <i>userId</i>.
+Huomioinarvoista koodissa on se, että vaikka tietokannan tasolla muistiinpanoilla on sarake <i>user_id</i>, tietokantariviä vastaavassa oliossa siihen viitataan Sequelizen nimentäkonvention takia camel case muodossa <i>userId</i>.
 
 Yksinkertaisen liitoskyselyn tekeminen on erittäin helppoa. Muutetaan kaikki käyttäjät näyttävää routea siten, että se näyttää myös jokaisen käyttäjän muistiinpanot:
 
@@ -530,27 +534,31 @@ FROM "users" AS "User" LEFT OUTER JOIN "notes" AS "Notes" ON "User"."id" = "Note
 
 Lopputulos on myös sen kaltainen kuin odottaa saattaa
 
-KUVA
-
-_TODO: where include:ssa esimerkki (esim. notet, joissa `important: true`)?_
+![](../../images/13/1.png)
 
 ### Muistiinpanojen kunnollinen lisääminen
 
-Muutenaan muistiinpanojen lisäys toimimaan samoin kuin [osassa 4](/osa4), eli muistiinpanon luominen onnistuu ainoastaan jos luomista vastaavan pyynnön mukana on validi token. Muistiinpano talletetaan tokenin identifioiman käyttäjän tekemien muistiinpanojen listaan:
+Muutenaan muistiinpanojen lisäys toimimaan samoin kuin [osassa 4](/osa4), eli muistiinpanon luominen onnistuu ainoastaan jos luomista vastaavan pyynnön mukana on validi, kirjautumisen yhteydessä saatava token. Muistiinpano talletetaan tokenin identifioiman käyttäjän tekemien muistiinpanojen listaan:
 
 ```js
+const jwt = require('jsonwebtoken') // highlight-line
+const { SECRET } = require('../util/config') // highlight-line
+
 // highlight-start
 const tokenExtractor = (req, res, next) => {
   const authorization = req.get('authorization')
   if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
     try {
+      console.log(authorization.substring(7))
       req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
-    } catch{
-      res.status(401).json({ error: 'token invalid' })
+    } catch (error){
+      console.log(error)
+      return res.status(401).json({ error: 'token invalid' })
     }
   } else {
-    res.status(401).json({ error: 'token missing' })
+    return res.status(401).json({ error: 'token missing' })
   }
+  
   next()
 }
 // highlight-end
@@ -578,6 +586,7 @@ Lisätään muistiinpanojen yhteyteen tieto sen lisänneestä käyttäjästä:
 
 ```js
 router.get('/', async (req, res) => {
+  // highlight-start
   const notes = await Note.findAll({ 
     attributes: { exclude: ['userId'] },
     include: {
@@ -585,6 +594,7 @@ router.get('/', async (req, res) => {
       attributes: ['name']
     }
   })
+  // highlight-end
   res.json(notes)
 })
 ```
@@ -605,7 +615,92 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-4), branchissa <i>part12-4</i>.'
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-4), branchissa <i>part13-4</i>.
+
+
+### Huomio modelien määrittelystä
+
+Tarkkasilmäisimmät huomasivat, että sarakkeen <i>user_id</i> lisäämisestä huolimatta emme tehneet muutosta muistiinpanot määrittelevään modeliin, mutta voimme lisätä muistinpano-olioille käyttäjän:
+
+```js
+const user = await User.findByPk(req.decodedToken.id)
+const note = await Note.create({ ...req.body, userId: user.id, date: new Date() })
+```
+
+Syynä tälle on se, että kun määrittelimme tiedostossa <i>models/index.js</i>, että käyttäjien ja muistiinpanojen välillä on yhdestä moneen -yhteys:
+
+```js
+const Note = require('./note')
+const User = require('./user')
+
+User.hasMany(Note)
+Note.belongsTo(User)
+
+// ...
+```
+
+luo Sequelize automaattisesti modeliin <i>Note</i> attribuutin <i>userId</i>, johon viittaamalla päästään käsiksi tietokannan sarakkeeseen <i>user_id</i>.
+
+Huomaa, että voisimme luoda muistiinpanon myös seuraavasti metodin [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) avulla:
+
+```js
+const user = await User.findByPk(req.decodedToken.id)
+
+// luodaan muistiinpano tallettamatta sitä vielä
+const note = Note.build({ ...req.body, date: new Date() })
+ // sijoitetaan käyttäjän id mustiinpanolle
+note.userId = user.id
+// talletetaan muistiinpano-olio tietokantaan
+await note.save()
+```
+
+Näin näemme eksplisiittisesti sen, että <i>userId</i> on mustiinpano-olion attribuutti. 
+
+
+Voisimme määritellä saman <i>myös</i> modeliin:
+
+```js
+Note.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  important: {
+    type: DataTypes.BOOLEAN
+  },
+  date: {
+    type: DataTypes.DATE
+  },
+  // highlight-start
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  }
+  // highlight-end
+}, {
+  sequelize,
+  underscored: true,
+  timestamps: false,
+  modelName: 'note'
+})
+
+module.exports = Note
+```
+
+tämä ei kuitenkaan ole välttämätöntä. Model-luokkien tasolla tapahtuva määrittely
+
+```js
+User.hasMany(Note)
+Note.belongsTo(User)
+```
+
+sensijaan on välttämätön, muuten Sequelize ei osaa koodin tasolla liittää tauluja toisiinsa.
 
 </div>
 
@@ -630,7 +725,7 @@ Toteuta seuraavat routet
 - GET api/users (kaikkien käyttäjien listaus)
 - PUT api/users/:username (käyttäjän nimen muutos, huomaa että parametrina ei ole id vaan käyttäjätunnus)
 
-Varmista, että Sequelizen automaattisesti asettamat aikaleimat <i>created_at</i> ja <i>updated_at</i> toimivat oikein kun luot käyttäjän ja muutat käyttäjän nimeä.
+Varmista, että Sequelizen automaattisesti asettamat aikaleimat <i>created\_at</i> ja <i>updated\_at</i> toimivat oikein kun luot käyttäjän ja muutat käyttäjän nimeä.
 
 #### Tehtävä 13.9.
 
@@ -639,7 +734,7 @@ Sequelize tarjoa joukon valmiiksi määriteltyjä
 
 Päätetään muuttaa käyttäjätunnuksen luontiperiaatetta siten, että käyttäjätunnukseksi kelpaa ainoastaan validi emailosoite. Tee tunnuksen luomisen yhteyteen validointi, joka tarkastaa asian.
 
-Muuta virheidenkäsittelymiddlewarea siten, että se antaa tilanteessa kuvaavamman virheilmoituksen (hyödyntäen Sequelizen virheeseen liittyvää viestiä), esim.
+Muuta virheidenkäsittelymiddlewarea siten, että se antaa tilanteessa kuvaavamman virheilmoituksen (esim. hyödyntäen Sequelizen virheeseen liittyvää viestiä):
 
 ```js
 {
@@ -659,7 +754,7 @@ Tee blogin poisto mahdolliseksi ainoastaan blogin lisänneelle käyttäjälle.
 
 #### Tehtävä 13.12.
 
-Muokkaa blogien ja käyttäjien routea siten, että blogien yhteydessä näytetään tieto blogin lisänneestä käyttäjästä ja käyttäjän yhteydessä tiedot käyttäjien blogeista.
+Muokkaa blogien ja käyttäjien routea siten, että blogien yhteydessä näytetään tieto blogin lisänneestä käyttäjästä, ja käyttäjän yhteydessä tiedot käyttäjien blogeista.
 
 </div>
 
@@ -849,7 +944,7 @@ SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user".
 FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id";
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-5), branchissa <i>part12-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-5), branchissa <i>part13-5</i>.
 
 </div>
 
