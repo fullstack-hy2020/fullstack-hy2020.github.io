@@ -732,8 +732,8 @@ Tulostus seuraavassa:
 
 Muuta sovelluksesi web-sovellukseksi, joka tukee seuraavia operaatioita
 
-- GET api/blogs (kaikkien blogien listaus)
-- POST api/blogs (uuden blogin lisäys)
-- DELETE api/blogs/:id (blogin poisto)
+- _GET /api/blogs_ (kaikkien blogien listaus)
+- _POST /api/blogs_ (uuden blogin lisäys)
+- _DELETE /api/blogs/:id_ (blogin poisto)
 
 </div>

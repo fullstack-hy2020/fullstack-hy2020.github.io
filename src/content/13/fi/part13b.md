@@ -248,7 +248,7 @@ Muuta sovelluksesi rakenne edellä olevan esimerkin mukaiseksi, tai noudattamaan
 
 Toteuta sovellukseen myös tuki blogien like-määrän muuttamiselle, eli operaatio
 
-_PUT api/blogs/:id_ (blogin like-määrän muokkaus)
+_PUT /api/blogs/:id_ (blogin like-määrän muokkaus)
 
 #### Tehtävä 13.7.
 
@@ -721,9 +721,9 @@ Kaikilla käyttäjillä voi olla sama salasana materiaalin tapaan. Voit myös ha
 
 Toteuta seuraavat routet 
 
-- POST api/users (uuden käyttäjän lisäys)
-- GET api/users (kaikkien käyttäjien listaus)
-- PUT api/users/:username (käyttäjän nimen muutos, huomaa että parametrina ei ole id vaan käyttäjätunnus)
+- _POST api/users_ (uuden käyttäjän lisäys)
+- _GET api/users_ (kaikkien käyttäjien listaus)
+- _PUT api/users/:username_ (käyttäjän nimen muutos, huomaa että parametrina ei ole id vaan käyttäjätunnus)
 
 Varmista, että Sequelizen automaattisesti asettamat aikaleimat <i>created\_at</i> ja <i>updated\_at</i> toimivat oikein kun luot käyttäjän ja muutat käyttäjän nimeä.
 
@@ -762,7 +762,7 @@ Muokkaa blogien ja käyttäjien routea siten, että blogien yhteydessä näytet�
 
 ### Lisää kyselyitä
 
-Toistaiseksi sovelluksemme on ollut kyselyiden suhteen hyvin yksinkertainen, kyselyt ovat hakeneet joko yksittäisen rivin pääavaimeen perustuen METODIA [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) käyttäen tai ne ovat hakeet metodilla [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) taulun kaikki rivit. Nämä riittävät sovellukselle osassa 5 tehdylle frontendille, mutta laajennetaan backendia siten, että pääsemme myös harjoittelemaan hieman monimutkaisempien kyselyjen tekemistä.
+Toistaiseksi sovelluksemme on ollut kyselyiden suhteen hyvin yksinkertainen, kyselyt ovat hakeneet joko yksittäisen rivin pääavaimeen perustuen metodia [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) käyttäen tai ne ovat hakeet metodilla [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) taulun kaikki rivit. Nämä riittävät sovellukselle osassa 5 tehdylle frontendille, mutta laajennetaan backendia siten, että pääsemme myös harjoittelemaan hieman monimutkaisempien kyselyjen tekemistä.
 
 Toteutetaan ensin mahdollisuus hakea ainoastaan tärkeät tai ei-tärkeät muistiinpanot. Toteutetaan nämä [query-parametrin](http://expressjs.com/en/5x/api.html#req.query) important avulla:
 
@@ -784,7 +784,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Nyt backendilta voidaan hakea tärkeät muistiinpanot pyynnöllä http://localhost:3001/api/notes?important=true ja ei-tärkeät pyynnöllä http://localhost:3001/api/notes?important=false
+Nyt backendilta voidaan hakea tärkeät muistiinpanot osoitteesta http://localhost:3001/api/notes?important=true ja ei-tärkeät osoitteesta http://localhost:3001/api/notes?important=false
 
 Sequelizen generoima SQL-kysely sisältää luonnollisesti palautettavia rivejä rajaavan where-määreen: 
 
@@ -794,13 +794,13 @@ FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "
 WHERE "note"."important" = true;
 ```
 
-Ikävä kyllä tämä toteutus ei toimi jos haettaessa ei olla kiinnostuneita onko muistiinpano tärkeä vai ei eli jos pyyntö tehdään osoitteeseen http://localhost:3001/api/notes. Korjaus voidaan tehdä monella tapaa. Eräs, mutta ei kenties paras tapa tehdä korjaus olisi seuraavassa:
+Ikävä kyllä tämä toteutus ei toimi jos haettaessa ei olla kiinnostuneita onko muistiinpano tärkeä vai ei, eli jos pyyntö tehdään osoitteeseen http://localhost:3001/api/notes. Korjaus voidaan tehdä monella tapaa. Eräs, mutta ei kenties paras tapa tehdä korjaus olisi seuraava:
 
 ```js
-const { Op } = require('sequelize')
+const { Op } = require('sequelize') // highlight-line
 
 router.get('/', async (req, res) => {
-  //highlight-line
+  // highlight-start 
   let important = {
     [Op.in]: [true, false]
   }
@@ -808,7 +808,7 @@ router.get('/', async (req, res) => {
   if ( req.query.important ) {
     important = req.query.important === "true"
   }
-  //highlight-end
+  // highlight-end
   
   const notes = await Note.findAll({ 
     attributes: { exclude: ['userId'] },
@@ -834,7 +834,7 @@ where: {
 }
 ```
 
-eli sarake <i>important</i> voi olla arvoltaan <i>true</i> tai <i>false</i>, käytössä on yksi monista Sequelizen operaatioista [Op.in](https://sequelize.org/master/manual/model-querying-basics.html#operators). Jos query-parametri <i>req.query.important</i> on määritelty, muuttuu kysely jompaan kumpaan muotoon
+eli sarake <i>important</i> voi olla arvoltaan <i>true</i> tai <i>false</i>. Käytössä on yksi monista Sequelizen operaatioista [Op.in](https://sequelize.org/master/manual/model-querying-basics.html#operators). Jos query-parametri <i>req.query.important</i> on määritelty, muuttuu kysely jompaan kumpaan muotoon
 
 ```js
 where: {
@@ -884,7 +884,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Sequelizen [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) muodostaa haluamme kyselyn SQL:n like-avainsanaa käyttäen. Jos esim. teemme pyynnönö http://localhost:3001/api/notes?search=database&important=true näemme että sen aikaansaama SQL-kysely on juuri olettamamme kaltainen.
+Sequelizen [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) muodostaa haluamme kyselyn SQL:n like-avainsanaa käyttäen. Jos esim. teemme pyynnön http://localhost:3001/api/notes?search=database&important=true näemme että sen aikaansaama SQL-kysely on juuri olettamamme kaltainen.
 
 ```sql
 SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name" 
@@ -892,7 +892,7 @@ FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "
 WHERE "note"."important" = true AND "note"."content" LIKE '%database%';
 ```
 
-Sovelluksessamme on vielä sellainen kauneusvirhe, että jos teemme pyynnön http://localhost:3001/api/notes eli haluamme kaikki muistiinpanot toteutuksemme aiheuttaa kyselyyn turhan wheren, joka saattaa (riippuen tietokantamoottorin toteutuksesta) vaikuttaa tarpeettomasti kyselyn suoritusaikaan:
+Sovelluksessamme on vielä sellainen kauneusvirhe, että jos teemme pyynnön http://localhost:3001/api/notes eli haluamme kaikki muistiinpanot, toteutuksemme aiheuttaa kyselyyn turhan wheren, joka saattaa (riippuen tietokantamoottorin toteutuksesta) vaikuttaa tarpeettomasti kyselyn tehokkuuteen:
 
 ```sql
 SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name" 
@@ -955,8 +955,8 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 #### Tehtävä 13.13.
 
 Toteuta sovellukseen kaikki blogit palauttavaan reittiin filtteröinti hakusanan perusteella. Filtteröinti toimii seuraavasti
-- GET http://localhost:3003/api/blogs?serch=react palauttaa ne blogit joiden kentässä <i>title</i> esiintyy hakusana <i>react</i>, hakusana on epäcasesensitiivinen
-- GET http://localhost:3003/api/blogs palauttaa kaikki blogit
+- _GET /api/blogs?serch=react_ palauttaa ne blogit joiden kentässä <i>title</i> esiintyy hakusana <i>react</i>, hakusana on epäcasesensitiivinen
+- _GET /api/blogs_ palauttaa kaikki blogit
 
 
 [Tämä](https://sequelize.org/master/manual/model-querying-basics.html#operators) lienee hyödyksi tässä ja seuraavassa tehtävässä.
@@ -964,20 +964,18 @@ Toteuta sovellukseen kaikki blogit palauttavaan reittiin filtteröinti hakusanan
 
 Laajenna filtteriä siten, että se etsii hakusanaa kentistä <i>title</i> ja author <i>author</i>, eli
 
-- GET http://localhost:3003/api/blogs?serch=jami palauttaa ne blogit joiden kentässä <i>title</i> tai kentässä <i>author</i> esiintyy hakusana <i>jami</i>
+_GET /api/blogs?serch=jami_ palauttaa ne blogit joiden kentässä <i>title</i> tai kentässä <i>author</i> esiintyy hakusana <i>jami</i>
 #### Tehtävä 13.15.
 
 Muokkaa blogien reittiä siten, että se palauttaa blogit tykkäysten perusteella laskevassa järjestyksessä. Etsi [dokumentaatiosta](https://sequelize.org/master/manual/model-querying-basics.html) ohjeet järjestämiselle.
 
 #### Tehtävä 13.16.
 
-Tee sovellukselle reitti http://localhost:3003/api/authors, joka palauttaa kustakin authorista blogien määrän sekä tykkäyaten yhteenlasketun määrän. Toteuta operaatio suoraan tietokannan tasolla. Tarvitset suurella todennäköisyydellä [group by](https://sequelize.org/master/manual/model-querying-basics.html#grouping)-toiminnallisuutta, sekä [sequelize.fn](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries)-aggregaattorifunktiota.
+Tee sovellukselle reitti /api/authors, joka palauttaa kustakin authorista blogien lukumäärän sekä tykkäysten yhteenlasketun määrän. Toteuta operaatio suoraan tietokannan tasolla. Tarvitset suurella todennäköisyydellä [group by](https://sequelize.org/master/manual/model-querying-basics.html#grouping)-toiminnallisuutta, sekä [sequelize.fn](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries)-aggregaattorifunktiota.
 
 Reitin palauttama JSON voi näyttää esim. seuraavalta:
 
-KUVA
-
-```
+```js
 [
   {
     author: "Jami Kousa",
