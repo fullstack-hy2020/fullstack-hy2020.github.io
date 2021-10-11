@@ -515,7 +515,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 #### Tehtävä 13.17.
 
-Poista sovelluksen tietokannasta kaikki taulut. 
+Poista sovelluksesi tietokannasta kaikki taulut. 
 
 Tee migraatio, joka asettaa tietokannan nykyiseen tämänhetkiseen tilaan. Luo <i>created\_at</i> ja <i>updated\_at</i> [aikaleimat](https://sequelize.org/master/manual/model-basics.html#timestamps) molemmille tauluille. Huomaa, että joudut luomaan ne migratiossa itse.
 
