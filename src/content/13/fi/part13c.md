@@ -687,7 +687,7 @@ await queryInterface.createTable('memberships', {
 })
 ```
 
-modelissa taas samat määritellään camelcasena:
+modelissa taas samat määritellään camel casena:
 
 ```js
 Membership.init({
@@ -715,6 +715,7 @@ insert into teams (name) values ('mosa climbers');
 insert into memberships (user_id, team_id) values (1, 1);
 insert into memberships (user_id, team_id) values (1, 2);
 insert into memberships (user_id, team_id) values (2, 1);
+insert into memberships (user_id, team_id) values (3, 2);
 ```
 
 Lisätään sitten kaikkien käyttäjien reittiin tieto käyttäjän joukkueista
@@ -727,12 +728,12 @@ router.get('/', async (req, res) => {
         model: Note,
         attributes: { exclude: ['userId'] } 
       }, 
-      // hihhlight-start
+      // highlight-start
       {
         model: Team,
         attributes: ['name', 'id'],
       }
-      // hihhlight-end
+      // highlight-end
     ]
   })
   res.json(users)
@@ -743,34 +744,8 @@ Tarkkasilmäisimmät huomaavat, että konsoliin tulostuva kysely yhdistää nyt 
 
 Ratkaisu on aika hyvä, mutta siinä on eräs kauneusvirhe. Tuloksen mukana ovat myös liitostaulun rivin attribuutit vaikka emme niitä halua:
 
-KUVA TÄHÄN
+![](../../images/13/3.png)
 
-```js
-teams: [
-  {
-  name: "toska",
-  id: 2,
-  membership: {
-      id: 2,
-      user_id: 1,
-      team_id: 2,
-      userId: 1,
-      teamId: 2
-    }
-  },
-  {
-    name: "mosa climbers",
-    id: 3,
-    membership: {
-      id: 3,
-      user_id: 1,
-      team_id: 3,
-      userId: 1,
-      teamId: 3
-    }
-  }
-]
-```
 
 Dokumentaatiota tarkkaan lukemalla löytyy [ratkaisu](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table):
 
@@ -797,7 +772,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-8), branchissa <i>part13-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-8), branchissa <i>part13-8</i>.
 
 ### Huomio Sequelizen model-olioiden ominaisuuksista
 
