@@ -89,7 +89,7 @@ Migraatiotiedostossa on [määriteltynä](https://sequelize.org/master/manual/mi
 
 Migraatiomme sisältää kolme operaatiota, ensimmäinen luo taulun <i>notes</i>, toinen taulun <i>users</i> ja kolmas lisää tauluun <i>notes</i> viiteavaimen muistiinpanon luojaan. Skeeman muutokset määritellän [queryInterface](https://sequelize.org/master/manual/query-interface.html)-olion metodeja kutsumalla.
 
-Migraatioiden määrittelyssä on oleellista muistaa, että toisin muin modeleissa, sarakkeiden ja taulujen nimet kirjoitetaan underscore-muodossa:
+Migraatioiden määrittelyssä on oleellista muistaa, että toisin muin modeleissa, sarakkeiden ja taulujen nimet kirjoitetaan snake case -muodossa:
 
 ```js
 await queryInterface.addColumn('notes', 'user_id', { // highlight-line
@@ -519,11 +519,11 @@ Poista sovelluksesi tietokannasta kaikki taulut.
 
 Tee migraatio, joka asettaa tietokannan nykyiseen tämänhetkiseen tilaan. Luo <i>created\_at</i> ja <i>updated\_at</i> [aikaleimat](https://sequelize.org/master/manual/model-basics.html#timestamps) molemmille tauluille. Huomaa, että joudut luomaan ne migratiossa itse.
 
-**HUOM:** jos joudut poistamaan tauluja komentoriviltä (etkä siis tee poistoa migraation perumisen avulla), joudut poistamaan taulun <i>migrations</i> sisällön jos haluat että ohjelmasi pystyy suorittamaan migraatiot uudelleen.
+**HUOM:** jos joudut poistamaan tauluja komentoriviltä (etkä siis tee poistoa migraation perumisen avulla), joudut poistamaan taulun <i>migrations</i> sisällön, jos haluat että ohjelmasi pystyy suorittamaan migraatiot uudelleen.
 
 #### Tehtävä 13.18.
 
-Laajenna sovellusta (migraation avulla) siten, että blogeille tulee kirjoitusvuosi, eli kenttä <i>year</i> joka on kokonaisluku jonka suuruus on vähintään 1991 mutta ei suurempi kuin menossa oleva vuosi. Varmista että sovellus antaa asiaankuuluvan virheilmoituksen jos kirjoitusvuodelle yritetään antaa virheellinen arvo.
+Laajenna sovellusta (migraation avulla) siten, että blogeille tulee kirjoitusvuosi, eli kenttä <i>year</i> joka on kokonaisluku, jonka suuruus on vähintään 1991 mutta ei suurempi kuin menossa oleva vuosi. Varmista että sovellus antaa asiaankuuluvan virheilmoituksen jos kirjoitusvuodelle yritetään antaa virheellinen arvo.
  
 </div>
 
@@ -579,7 +579,7 @@ module.exports = {
 }
 ```
 
-Modelit sisältävät lähes saman koodin kuin migraatio. Tiimin modeli `models/team.js`
+Modelit sisältävät lähes saman koodin kuin migraatio. Tiimin modeli <i>models/team.js</i>:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -609,7 +609,7 @@ Team.init({
 module.exports = Team
 ```
 
-Liitostaulun modeli `models/membership.js`:
+Liitostaulun modeli <i>models/membership.js</i>:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -624,12 +624,12 @@ Membership.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
-  team_id: {
+  teamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'teams', key: 'id' },
@@ -644,9 +644,9 @@ Membership.init({
 module.exports = Membership
 ```
 
-Olemme siis antaneet liitostaululle kuvaavan nimen, <i>membership</i>. Liitostauluille ei aina löydy yhtä osuvaa nimeä, tällöin liitostaulun nimi voidaan muodostaa yhdistelmänä liitettävien taulujien nimistä esim. <i>user_\teamas</i> voisi sopia tilanteeseemme.
+Olemme siis antaneet liitostaululle kuvaavan nimen, <i>membership</i>. Liitostauluille ei aina löydy yhtä osuvaa nimeä, tällöin liitostaulun nimi voidaan muodostaa yhdistelmänä liitettävien taulujien nimistä esim. <i>user\_teams</i> voisi sopia tilanteeseemme.
 
-Tiedostoon <i>models/index.js</i> tulee pieni lisäys, joka liittä metodin [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) avulla tiimit ja käyttäjät toisiinsa myös koodin tasolla.
+Tiedostoon <i>models/index.js</i> tulee pieni lisäys, joka liittää metodin [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) avulla tiimit ja käyttäjät toisiinsa myös koodin tasolla.
 
 ```js
 const Note = require('./note')
@@ -665,10 +665,47 @@ Team.belongsToMany(User, { through: Membership })
 // highlight-end
 
 module.exports = {
-  Note, User, Team, Membership
+  Note, User, Team, Membership // highlight-line
 }
-
 ```
+
+Huomaa eroavaisuus liitostaulun migraation ja modelin välillä viiteavainkenttien määrittelyssä. Migraatiossa kentät määritellään snake case -muodossa:
+
+```js
+await queryInterface.createTable('memberships', {
+  // ...
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  },
+  team_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'teams', key: 'id' },
+  }
+})
+```
+
+modelissa taas samat määritellään camelcasena:
+
+```js
+Membership.init({
+  // ...
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  },
+  teamId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'teams', key: 'id' },
+  },
+  // ...
+})
+```
+
 
 Luodaan nyt konsolista pari tiimiä sekä muutama jäsenyys:
 

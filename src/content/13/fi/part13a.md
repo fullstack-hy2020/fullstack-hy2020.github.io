@@ -386,7 +386,8 @@ app.listen(PORT, () => {
 
 Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Märittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
 
-Määrittelimme myös, että taulujen nimet päätellään modelien nimistä "underscored"-tekniikalla. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
+Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) -versiona. 
+Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
 
 Sama nimentäkäytänne koskee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
 
