@@ -788,7 +788,7 @@ Team.belongsToMany(User, { through: Membership })
 
 Näiden ansiosta Sequelize osaa tehdä kyselyt, jotka hakevat esim. käyttäjien kaikki muistiinpanot, tai joukkueen kaikki jäsenet.
 
-Määrittelyjen ansiosta pääsemme myös koodissa suoraan käsiksi esim. käyttäjän muistiinpanoihin. Seuraavassa haetaan käyttäjä jonka id on 1 ja tulostetaan käyttäjään liittyvät muistiinpanot:
+Määrittelyjen ansiosta pääsemme myös koodissa suoraan käsiksi esim. käyttäjän muistiinpanoihin. Seuraavassa haetaan käyttäjä, jonka id on 1 ja tulostetaan käyttäjään liittyvät muistiinpanot:
 
 ```js
 const user = await User.findByPk(1, {
@@ -828,7 +828,7 @@ router.get('/:id', async (req, res) => {
   )
 
   if (user) {
-    user.note_count = user.notes.length // highlight-line
+    user.noteCount = user.notes.length // highlight-line
     delete user.notes // highlight-line
     res.json(user)
 
@@ -838,7 +838,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Eli yritimme liittää Sequelizen palauttamaan olioon kentän <i>note_\count</i> sekä poistaa siitä muistiinpanot sisältävän kentän <i>notes</i>. Tämä lähestymistapa ei kuitenkaan toimi, sillä Sequelizen palauttamat oliot eivät ole normaaleja olioita, joihin uusien kenttien lisääminen toimii siten kuin haluamme. 
+Eli yritimme liittää Sequelizen palauttamaan olioon kentän <i>noteCount</i> sekä poistaa siitä muistiinpanot sisältävän kentän <i>notes</i>. Tämä lähestymistapa ei kuitenkaan toimi, sillä Sequelizen palauttamat oliot eivät ole normaaleja olioita, joihin uusien kenttien lisääminen toimii siten kuin haluamme. 
 
 Parempi ratkaisu onkin luoda tietokannasta haetun datan perusteella kokonaan uusi olio:
 
@@ -855,7 +855,7 @@ router.get('/:id', async (req, res) => {
     res.json({
       username: user.username, // highlight-line
       name: user.name, // highlight-line
-      note_count: user.notes.length // highlight-line
+      noteCount: user.notes.length // highlight-line
     })
 
   } else {
@@ -867,7 +867,7 @@ router.get('/:id', async (req, res) => {
 
 Tehdään sovellukseen vielä toinen monesta moneen -yhteys. Jokaiseen mustiinpanoon liittyy sen luonut käyttäjä viiteavaimen kautta. Päätetään, että sovellus tukee myös sitä, että muistiinpanon voidaan liittää muitakin käyttäjiä, ja että käyttäjään voi liittyä mielivaltainen määrä jonkun muun käyttäjän tekemiä muistiinpanoja. Ajatellaan että nämä muistiinpanot ovat sellaisia, jotka käyttäjä on <i>merkinnyt</i> itselleen.
 
-Tehdään tilannetta varten liitostaulu `user_notes`. Migraatio on suoraviivainen:
+Tehdään tilannetta varten liitostaulu <i>user_notes</i>. Migraatio on suoraviivainen:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -913,12 +913,12 @@ UserNotes.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
-  note_id: {
+  noteId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'notes', key: 'id' },
@@ -927,13 +927,13 @@ UserNotes.init({
   sequelize,
   underscored: true,
   timestamps: false,
-  modelName: 'user_notes'
+  modelName: 'userNotes'
 })
 
 module.exports = UserNotes
 ```
 
-Tiedostoon `models/index.js` sensijaan tulee hienoinen muutos aiemmin näkemäämme:
+Tiedostoon <i>models/index.js</i> sensijaan tulee hienoinen muutos aiemmin näkemäämme:
 
 ```js
 const Note = require('./note')
@@ -949,8 +949,8 @@ User.belongsToMany(Team, { through: Membership })
 Team.belongsToMany(User, { through: Membership })
 
 // highlight-start
-User.belongsToMany(Note, { through: UserNotes, as: 'marked_notes' })
-Note.belongsToMany(User, { through: UserNotes, as: 'users_marked' })
+User.belongsToMany(Note, { through: UserNotes, as: 'markedNotes' })
+Note.belongsToMany(User, { through: UserNotes, as: 'usersMarked' })
 // highlight-end
 
 module.exports = {
@@ -958,7 +958,7 @@ module.exports = {
 }
 ```
 
-Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinnoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päälekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa. 
+Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinpanoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päälekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa. 
 
 Laajennetaan yksittäisen käyttäjän routea siten, että se palauttaa käyttäjän joukkueet, omat muistiinpanot sekä käyttäjään liitetyt muut muistiinpanot:
 
@@ -970,18 +970,16 @@ router.get('/:id', async (req, res) => {
         model: Note,
         attributes: { exclude: ['userId'] } 
       },
+      // highlight-start
       { 
         model: Note, 
-        as: 'marked_notes',
+        as: 'markedNotes',
         attributes: { exclude: ['userId']},
         through: {
           attributes: []
         },
-        include: {
-          model: User, 
-          attributes: ['name']
-        }
       },
+      // highlight-end
       {
         model: Team,
         attributes: ['name', 'id'],
@@ -1000,20 +998,20 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Includen yhteydessä on nyt mainittava `as`-määrettä käyttäen äsken määrittelemämme aliasnimeä <i>marked\_notes</i>. 
+Includen yhteydessä on nyt mainittava <i>as</i>-määrettä käyttäen äsken määrittelemämme aliasnimeä <i>markedNotes</i>. 
 
 Jotta ominaisuutta päästään testaamaan, luodaan tietokantaan hieman testidataa:
 
 ```sql
-insert into user_notes (user_id, note_id) values (1, 4);
-insert into user_notes (user_id, note_id) values (1, 5);
+insert into user_notes (user_id, note_id) values (2, 1);
+insert into user_notes (user_id, note_id) values (2, 2);
 ```
 
 Lopputulos on toimiva:
 
-KUVA
+![](../../images/13/5.png)
 
-Entä jos haluaisimme, että käyttäjän merkitsemissä muistiinpanoissa olisi myös tieto muistiinpanon tekijästä? Tämä onnistuu lisäämällä lisäämällä liiteytille muistiinpanoille oma `include`.
+Entä jos haluaisimme, että käyttäjän merkitsemissä muistiinpanoissa olisi myös tieto muistiinpanon tekijästä? Tämä onnistuu lisäämällä liiteytille muistiinpanoille oma <i>include:</i>
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -1058,9 +1056,9 @@ router.get('/:id', async (req, res) => {
 
 Lopputulos on halutun kaltainen:
 
-KUVA
+![](../../images/13/4.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-9), branchissa <i>part13-9</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-9), branchissa <i>part13-9</i>.
 
 
 </div>
