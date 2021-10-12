@@ -1077,7 +1077,7 @@ Tässä tehtävässä lukulistalle lisäämisen ja listan näyttämisen ei tarvi
 
 Lisätään nyt lukulistaa tukeva toiminnallisuus sovellukseen.
 
-Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST polulle <i>/api/readinglists</i>, pyynnön mukana lähetettään blogin ja käyttäjän id:
+Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST reitille _/api/readinglists_, pyynnön mukana lähetettään blogin ja käyttäjän id:
 
 ```js
 {
@@ -1086,7 +1086,7 @@ Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST polulle <i>/api/
 }
 ```
 
-Toteuta yksittäisen käyttäjän palauttava reitti <i>/api/users/:id</i>, joka palauttaa käyttäjän muiden tietojen lisäksi myös lukulistan, esim. seuraavassa muodossa:
+Toteuta myös yksittäisen käyttäjän palauttava reitti _GET /api/users/:id_, joka palauttaa käyttäjän muiden tietojen lisäksi myös lukulistan, esim. seuraavassa muodossa:
 
 ```js
 {
@@ -1113,7 +1113,7 @@ Toteuta yksittäisen käyttäjän palauttava reitti <i>/api/users/:id</i>, joka 
 }
 ```
 
-Tässä vaiheessa tietoa siitä onko kirja luettu vai ei, ei tarvitse olla saatavilla.
+Tässä vaiheessa tietoa siitä onko blogi luettu vai ei, ei tarvitse olla saatavilla.
 
 #### Tehtävä 13.21.
 
@@ -1150,7 +1150,7 @@ Tieto voi olla esim. seuraavassa muodossa:
       readinglists: [
         {
           read: false,
-          id: 2
+          id: 3
         }
       ]
     }
@@ -1162,7 +1162,7 @@ Huom: tapoja toteuttaa tämä toiminnallisuus on useita. [Tästä](https://seque
 
 #### Tehtävä 13.22.
 
-Tee sovellukseen mahdollisuus merkata lukulistalla oleva blogi luetuksi. Luetuksi merkkaaminen tapahtuu tekemällä pyyntö HTTP PUT reitille /api/readinglists/:id, ja lähettämällä pyynnon mukana
+Tee sovellukseen mahdollisuus merkata lukulistalla oleva blogi luetuksi. Luetuksi merkkaaminen tapahtuu tekemällä pyyntö _PUT /api/readinglists/:id_, ja lähettämällä pyynnon mukana
 
 ```js
 { read: true }
@@ -1172,11 +1172,11 @@ Käyttäjä voi merkata luetuksi ainoastaan omalla lukulistallaan olevia blogeja
 
 #### Tehtävä 13.23.
 
-Muuta yhden käyttäjän tiedot palauttavaa reittiä, siten että pyynnön mukana voidaan säädellä sitä mitkä lukulistan blogeista palautetaan
+Muuta yhden käyttäjän tiedot palauttavaa reittiä, siten että pyynnön mukana voidaan säädellä mitkä lukulistan blogeista palautetaan:
 
-- GET /api/users/:id palauttaa koko lukulistan
-- GET /api/users/:id?read=true palauttaa lukulistalta ne blogit jotka on luettu
-- GET /api/users/:id?read=false palauttaa lukulistalta ne blogit jotka ovat lukematta
+- _GET /api/users/:id_ palauttaa koko lukulistan
+- _GET /api/users/:id?read=true_ palauttaa luetut blogit
+- _GET /api/users/:id?read=false_ palauttaa lukemattomat blogit
 
 </div>
 
