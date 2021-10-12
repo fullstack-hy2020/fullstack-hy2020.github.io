@@ -9,9 +9,9 @@ lang: fi
 
 ### Migraatiot
 
-Jatketaan backendin laajentamista. Haluamme toteuttaa tuen sille, että <i>admin-statuksen</i> omaavat käyttäjät voivat asettaa haluamiaan käyttäjiä epäaktiiviseen tilaan, estäen heidän kirjautumisen ja uusien muistiinpanojen luomisen. Toteuttaaksemme nämä, meidä tulee lisätä käyttäjien tietokantariville boolean-arvoinen tiedon siitä onko käyttäjä admin sekä siitä onko käyttäjätunnus epäaktiivinen. 
+Jatketaan backendin laajentamista. Haluamme toteuttaa tuen sille, että <i>admin-statuksen</i> omaavat käyttäjät voivat asettaa haluamiaan käyttäjiä epäaktiiviseen tilaan, estäen heiltä kirjautumisen ja uusien muistiinpanojen luomisen. Toteuttaaksemme nämä, meidä tulee lisätä käyttäjien tietokantatauluun boolean-arvoinen tiedon siitä, onko käyttäjä admin sekä siitä onko käyttäjätunnus epäaktiivinen. 
 
-Voisimme edetä kuten aiemmin, eli muuttaa taulun määrittelevää modelia ja luottaa, että Sequelize synkronoi muutokset tietokantaan. Tämänhän saa aikaan tiedostossa `models/index.js` olevat rivit
+Voisimme edetä kuten aiemmin, eli muuttaa taulun määrittelevää modelia ja luottaa, että Sequelize synkronoi muutokset tietokantaan. Tämänhän savat aikaan tiedostossa <i>models/index.js</i> olevat rivit
 
 ```js
 const Note = require('./note')
@@ -30,7 +30,7 @@ module.exports = {
 
 Tämä toimintatapa ei kuitenkaan ole pitkässä juoksussa järkevä. Poistetaan synkronoinnin tekevät rivit ja siirrytään käyttämään paljon robustimpaa tapaa, Sequelizen (ja monien muiden kirjastojen) tarjoamia [migraatioita](https://sequelize.org/master/manual/migrations.html).
 
-Käytännössä migraatio on yksittäinen JavaScript-tiedosto, joka kuvaa jonkin tietokantaan tehtävän muutoksen. Jokaista yksittäistä tai kerralla tapahtuvaa useampaa muutosta varten tehdään oma migraatio-tiedosto. Sequelize pitää kirjaa siitä, mitkä migraatioista on suoritettu, eli minkä migratioiden aiheuttama muutos on synkronoitu tietokannan skeemaan. Uusien migraatioiden luomisen myötä Sequelize pysyy ajantasalla siitä, mitkä muutokset kannan skeemaan on vielä tekemättä. Näin muutokset tehdään hallitusti, versionhallintaan talletetulla ohjelmakoodilla.
+Käytännössä migraatio on yksittäinen JavaScript-tiedosto, joka kuvaa jonkin tietokantaan tehtävän muutoksen. Jokaista yksittäistä tai useampaa kerralla tapahtuvaa muutosta varten tehdään oma migraatio-tiedosto. Sequelize pitää kirjaa siitä, mitkä migraatioista on suoritettu, eli minkä migratioiden aiheuttama muutos on synkronoitu tietokannan skeemaan. Uusien migraatioiden luomisen myötä Sequelize pysyy ajantasalla siitä, mitkä muutokset kannan skeemaan on vielä tekemättä. Näin muutokset tehdään hallitusti, versionhallintaan talletetulla ohjelmakoodilla.
 
 Luodaan aluksi migraatio, joka vie tietokannan sen nykyiseen tilaansa. Migraation koodi on seuraavassa
 
@@ -85,11 +85,23 @@ module.exports = {
 }
 ```
 
-Migraatiotiedostossa on [määriteltynä](https://sequelize.org/master/manual/migrations.html#migration-skeleton) funktiot <i>up</i> ja <i>down</i> joista ensimmäinen määrittelee miten tietokantaa tulee muuttaa migraatiota suorittaessa. Funktio <i>down</i> kertoo ohjeen miten migraatio perutaan jos näin on tarvetta tehdä.
+Migraatiotiedostossa on [määriteltynä](https://sequelize.org/master/manual/migrations.html#migration-skeleton) funktiot <i>up</i> ja <i>down</i> joista ensimmäinen määrittelee miten tietokantaa tulee muuttaa migraatiota suorittaessa. Funktio <i>down</i> kertoo taas sen miten migraatio perutaan jos näin on tarvetta tehdä.
 
-Migraatiomme sisältää kolme operaatiota, ensimmäinen luo taulun <i>notes</i>, toinen taulun<i>users</i> ja kolmas lisää tauluun <i>notes</i> viiteavaimen muistiinpanon luojaan. Skeeman muutokset määritellän [queryInterface](https://sequelize.org/master/manual/query-interface.html)-olion metodeja kutsumalla.
+Migraatiomme sisältää kolme operaatiota, ensimmäinen luo taulun <i>notes</i>, toinen taulun <i>users</i> ja kolmas lisää tauluun <i>notes</i> viiteavaimen muistiinpanon luojaan. Skeeman muutokset määritellän [queryInterface](https://sequelize.org/master/manual/query-interface.html)-olion metodeja kutsumalla.
 
-Talletetaan migraation koodi tiedostoon <i>migrations/20211209_00_initialize_notes_and_users.js</i>. Migraatiotiedostojen nimien tulee olla aakkosjärjestyksessä siten, että aiempi muutos on aina aakkosissa uudempaa muutosta edellä. Eräs hyvä tapa saada tämä järjestys aikaan on aloittaa migraatiotiedoston nimi päivämäärällä sekä järjestysnumerolla. 
+Migraatioiden määrittelyssä on oleellista muistaa, että toisin muin modeleissa, sarakkeiden ja taulujen nimet kirjoitetaan snake case -muodossa:
+
+```js
+await queryInterface.addColumn('notes', 'user_id', { // highlight-line
+  type: DataTypes.INTEGER,
+  allowNull: false,
+  references: { model: 'users', key: 'id' },
+})
+```
+
+Migraatioissa siis taulujen sekä sarakkeiden nimet kirjoitetaan juuri niin kuin ne tietokantaan tulevat, kun taas modeleissa on käytössä Sequelizen oletusarvoinen camelCase-nimentä.
+
+Talletetaan migraation koodi tiedostoon <i>migrations/20211209\_00\_initialize\_notes\_and\_users.js</i>. Migraatiotiedostojen nimien tulee olla aakkosjärjestyksessä siten, että aiempi muutos on aina aakkosissa uudempaa muutosta edellä. Eräs hyvä tapa saada tämä järjestys aikaan on aloittaa migraatiotiedoston nimi päivämäärällä sekä järjestysnumerolla. 
 
 Voisimme suorittaa migraatiot komentoriviltä käsin [Sequelizen komentorivityökalun](https://github.com/sequelize/cli) avulla. Päätämme kuitenkin suorittaa migraatiot ohjelmakoodista käsin [Umzug](https://github.com/sequelize/umzug)-kirjastoa käyttäen. Asennetaan kirjasto
 
@@ -164,7 +176,7 @@ Did not find any relations.
 
 Kännistetään sovellus. Lokiin tulostuu migraatioiden statuksesta kertova viesti
 
-```
+```bash
 INSERT INTO "migrations" ("name") VALUES ($1) RETURNING "name";
 Migrations up to date { files: [ '20211209_00_initialize_notes_and_users.js' ] }
 database connected
@@ -174,21 +186,21 @@ Jos käynnistämme sovelluksen uudelleen, lokistakin on pääteltävissä että 
 
 Sovelluksen tietokantaskeema näyttää nyt seuraavalta
 
-```js
+```sql
 username=> \d
                  List of relations
  Schema |     Name     |   Type   |     Owner
 --------+--------------+----------+----------------
- public | migrations   | table    | owxxgvitdspkma
- public | notes        | table    | owxxgvitdspkma
- public | notes_id_seq | sequence | owxxgvitdspkma
- public | users        | table    | owxxgvitdspkma
- public | users_id_seq | sequence | owxxgvitdspkma
+ public | migrations   | table    | username
+ public | notes        | table    | username
+ public | notes_id_seq | sequence | username
+ public | users        | table    | username
+ public | users_id_seq | sequence | username
 ```
 
 Sequelize on siis luonut taulun <i>migrations</i> jonka avulla se pitää kirjaa suoritetuista migraatiosta. Taulun sisältö näyttää seuraavalta:
 
-```js
+```sql
 username=> select * from migrations;
                    name
 -------------------------------------------
@@ -197,14 +209,14 @@ username=> select * from migrations;
 
 Luodaan tietokantaan muutama käyttäjä sekä joukko muistiinpanoja, ja sen jälkeen olemme valmiina laajentamaan sovellusta.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-6), branchissa <i>part12-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-6), branchissa <i>part13-6</i>.
 ### Admin-käyttäjä ja käyttäjien disablointi
 
 Haluamme siis lisätä tauluun <i>users</i> kaksi boolean-arvoista kenttää 
 - _admin_ kertoo onko käyttäjä admin
 - _disabled_ taas kertoo sen onko käyttäjätunnus asetettu käyttökieltoon
 
-Luodaan tietokantaskeeman tekevä migraatio tiedostoon <i>migrations/20211209_01_admin_and_disabled_to_users.js</i>:
+Luodaan tietokantaskeeman tekevä migraatio tiedostoon <i>migrations/20211209\_01\_admin\_and\_disabled\_to\_users.js</i>:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -227,7 +239,7 @@ module.exports = {
 }
 ```
 
-Tehdään vastaavat muutokset taulua<i>users</i> vastaavaan modeliin:
+Tehdään vastaavat muutokset taulua <i>users</i> vastaavaan modeliin:
 
 ```js
 User.init({
@@ -282,7 +294,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Laajennetaan nyt kontrollereita seuraavasti. Estetään kirjaanutuminen jo käyttäjän kentän `disabled` arvona on `true`:
+Laajennetaan nyt kontrollereita seuraavasti. Estetään kirjaanutuminen jo käyttäjän kentän <i>disabled</i> arvona on <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -323,25 +335,26 @@ loginRouter.post('/', async (request, response) => {
 })
 ```
 
-Disabloidaan käyttäjän `jakousa` tunnus:
+Disabloidaan käyttäjän <i>jakousa</i> tunnus:
 
 ```sql
-username => update users set disabled=true where id=2;
+username => update users set disabled=true where id=3;
 UPDATE 1
 username => update users set admin=true where id=1;
 UPDATE 1
 username => select * from users;
  id | username |       name       | admin | disabled
 ----+----------+------------------+-------+----------
-  2 | jakousa  | Jami Kousa       |       | t
+  2 | lynx     | Kalle Ilves      |       |
+  3 | jakousa  | Jami Kousa       | f     | t
   1 | mluukkai | Matti Luukkainen | t     |
 ```
 
 Ja varmistetaan että kirjautuminen ei enää onnistu:
 
-KUVA
+![](../../images/13/2.png)
 
-Tehdään vieöä route, jonka avulla admin pystyy muuttamaan käyttäjän tunnuksen statusta
+Tehdään vielä route, jonka avulla admin pystyy muuttamaan käyttäjän tunnuksen statusta
 
 ```js
 const isAdmin = async (req, res, next) => {
@@ -396,7 +409,7 @@ const tokenExtractor = (req, res, next) => {
 module.exports = { tokenExtractor }
 ```
 
-Admin voin nyt enabloida jakousan tunnuksen tekemällä osoitteeseen http://localhost:3001/api/users/jakousa PUT-pyynnön, missä pyynnön mukana on seuraava data:
+Admin voin nyt enabloida jakousan tunnuksen tekemällä routeen /api/users/jakousa PUT-pyynnön, missä pyynnön mukana on seuraava data:
 
 ```js
 {
@@ -404,9 +417,9 @@ Admin voin nyt enabloida jakousan tunnuksen tekemällä osoitteeseen http://loca
 }
 ```
 
-Kuten [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todetaan, tässä toteuttamamme tapa käyttäjätunnusten disablointiin on ongelmallinen. Se onko tunnus disabloitu tarkastetaan ainoastaan _kirjautumisen yhteydessä_, jos käyttäjällä on token hallussaan siinä vaiheessa kun tunnus disabloidaan, voi käyttäjä jatkaa saman tokenin käyttöä, sillä tokenille ei ole asetettu elinikää eikä sitä seikkaa että käyttäjän tunnus on disabloitu tarkasteta muistiinpanojen luomisen yhteydessä. 
+Kuten [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todetaan, tässä toteuttamamme tapa käyttäjätunnusten disablointiin on ongelmallinen. Se onko tunnus disabloitu tarkastetaan ainoastaan <i>kirjautumisen yhteydessä</i>, jos käyttäjällä on token hallussaan siinä vaiheessa kun tunnus disabloidaan, voi käyttäjä jatkaa saman tokenin käyttöä, sillä tokenille ei ole asetettu elinikää eikä sitä seikkaa, että käyttäjän tunnus on disabloitu tarkasteta muistiinpanojen luomisen yhteydessä. 
 
-Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti jonka auvulla edelinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessa. 
+Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti, jonka auvulla edelinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessa. 
 
 Muutetaan tiedostoa <i>util/db.js</i> seuraavasti:
 
@@ -490,10 +503,9 @@ ja itse skripti:
 
 Voimme nyt siis perua edellisen migraation suorittamalla komentorivltä _npm run migration:down_. 
 
-Migraatiot suoritetaan automaattisesti kun ohjelma käynnistetään. Ohjelman kehitysvaiheessa saattaisi välillä olla markoituksenmukaisempaa poistaa migraatioiden automaattinen suoritus ja tehdä migraatiot komentoriviltä käsin. 
+Migraatiot suoritetaan automaattisesti kun ohjelma käynnistetään. Ohjelman kehitysvaiheessa saattaisi välillä olla tarkoituksenmukaisempaa poistaa migraatioiden automaattinen suoritus ja tehdä migraatiot komentoriviltä käsin. 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-7), branchissa <i>part12-7</i>.
-
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-7), branchissa <i>part13-7</i>.
 
 </div>
 
@@ -503,15 +515,15 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 #### Tehtävä 13.17.
 
-Poista sovelluksen tietokannasta kaikki taulut. 
+Poista sovelluksesi tietokannasta kaikki taulut. 
 
 Tee migraatio, joka asettaa tietokannan nykyiseen tämänhetkiseen tilaan. Luo <i>created\_at</i> ja <i>updated\_at</i> [aikaleimat](https://sequelize.org/master/manual/model-basics.html#timestamps) molemmille tauluille. Huomaa, että joudut luomaan ne migratiossa itse.
 
-**HUOM:** jos joudut poistamaan tauluja komentoriviltä (etkä siis tee poistoa migraation perumisen avulla), joudut poistamaan taulun <i>migrations</i> sisällön jos haluat että ohjelmasi pystyy suorittamaan migraatiot uudelleen.
+**HUOM:** jos joudut poistamaan tauluja komentoriviltä (etkä siis tee poistoa migraation perumisen avulla), joudut poistamaan taulun <i>migrations</i> sisällön, jos haluat että ohjelmasi pystyy suorittamaan migraatiot uudelleen.
 
 #### Tehtävä 13.18.
 
-Laajenna sovellusta (migraation avulla) siten, että blogeille tulee kirjoitusvuosi, eli kenttä <i>year</i> joka on kokonaisluku jonka suuruus on vähintään 1991 mutta ei suurempi kuin menossa oleva vuosi. Varmista että sovellus antaa asiaankuuluvan virheilmoituksen jos kirjoitusvuodelle yritetään antaa virheellinen arvo.
+Laajenna sovellusta (migraation avulla) siten, että blogeille tulee kirjoitusvuosi, eli kenttä <i>year</i> joka on kokonaisluku, jonka suuruus on vähintään 1991 mutta ei suurempi kuin menossa oleva vuosi. Varmista että sovellus antaa asiaankuuluvan virheilmoituksen jos kirjoitusvuodelle yritetään antaa virheellinen arvo.
  
 </div>
 
@@ -567,7 +579,7 @@ module.exports = {
 }
 ```
 
-Modelit sisältävät lähes saman koodin kuin migraatio. Tiimin modeli `models/team.js`
+Modelit sisältävät lähes saman koodin kuin migraatio. Tiimin modeli <i>models/team.js</i>:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -597,7 +609,7 @@ Team.init({
 module.exports = Team
 ```
 
-Liitostaulun modeli `models/membership.js`:
+Liitostaulun modeli <i>models/membership.js</i>:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -612,12 +624,12 @@ Membership.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
-  team_id: {
+  teamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'teams', key: 'id' },
@@ -632,9 +644,9 @@ Membership.init({
 module.exports = Membership
 ```
 
-Olemme siis antaneet liitostaululle kuvaavan nimen, <i>membership</i>. Liitostauluille ei aina löydy yhtä osuvaa nimeä, tällöin liitostaulun nimi voidaan muodostaa yhdistelmänä liitettävien taulujien nimistä esim. <i>user_\teamas</i> voisi sopia tilanteeseemme.
+Olemme siis antaneet liitostaululle kuvaavan nimen, <i>membership</i>. Liitostauluille ei aina löydy yhtä osuvaa nimeä, tällöin liitostaulun nimi voidaan muodostaa yhdistelmänä liitettävien taulujien nimistä esim. <i>user\_teams</i> voisi sopia tilanteeseemme.
 
-Tiedostoon <i>models/index.js</i> tulee pieni lisäys, joka liittä metodin [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) avulla tiimit ja käyttäjät toisiinsa myös koodin tasolla.
+Tiedostoon <i>models/index.js</i> tulee pieni lisäys, joka liittää metodin [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) avulla tiimit ja käyttäjät toisiinsa myös koodin tasolla.
 
 ```js
 const Note = require('./note')
@@ -653,10 +665,47 @@ Team.belongsToMany(User, { through: Membership })
 // highlight-end
 
 module.exports = {
-  Note, User, Team, Membership
+  Note, User, Team, Membership // highlight-line
 }
-
 ```
+
+Huomaa eroavaisuus liitostaulun migraation ja modelin välillä viiteavainkenttien määrittelyssä. Migraatiossa kentät määritellään snake case -muodossa:
+
+```js
+await queryInterface.createTable('memberships', {
+  // ...
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  },
+  team_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'teams', key: 'id' },
+  }
+})
+```
+
+modelissa taas samat määritellään camel casena:
+
+```js
+Membership.init({
+  // ...
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  },
+  teamId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'teams', key: 'id' },
+  },
+  // ...
+})
+```
+
 
 Luodaan nyt konsolista pari tiimiä sekä muutama jäsenyys:
 
@@ -666,6 +715,7 @@ insert into teams (name) values ('mosa climbers');
 insert into memberships (user_id, team_id) values (1, 1);
 insert into memberships (user_id, team_id) values (1, 2);
 insert into memberships (user_id, team_id) values (2, 1);
+insert into memberships (user_id, team_id) values (3, 2);
 ```
 
 Lisätään sitten kaikkien käyttäjien reittiin tieto käyttäjän joukkueista
@@ -678,12 +728,12 @@ router.get('/', async (req, res) => {
         model: Note,
         attributes: { exclude: ['userId'] } 
       }, 
-      // hihhlight-start
+      // highlight-start
       {
         model: Team,
         attributes: ['name', 'id'],
       }
-      // hihhlight-end
+      // highlight-end
     ]
   })
   res.json(users)
@@ -694,34 +744,8 @@ Tarkkasilmäisimmät huomaavat, että konsoliin tulostuva kysely yhdistää nyt 
 
 Ratkaisu on aika hyvä, mutta siinä on eräs kauneusvirhe. Tuloksen mukana ovat myös liitostaulun rivin attribuutit vaikka emme niitä halua:
 
-KUVA TÄHÄN
+![](../../images/13/3.png)
 
-```js
-teams: [
-  {
-  name: "toska",
-  id: 2,
-  membership: {
-      id: 2,
-      user_id: 1,
-      team_id: 2,
-      userId: 1,
-      teamId: 2
-    }
-  },
-  {
-    name: "mosa climbers",
-    id: 3,
-    membership: {
-      id: 3,
-      user_id: 1,
-      team_id: 3,
-      userId: 1,
-      teamId: 3
-    }
-  }
-]
-```
 
 Dokumentaatiota tarkkaan lukemalla löytyy [ratkaisu](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table):
 
@@ -748,7 +772,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-8), branchissa <i>part12-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-8), branchissa <i>part13-8</i>.
 
 ### Huomio Sequelizen model-olioiden ominaisuuksista
 
@@ -764,7 +788,7 @@ Team.belongsToMany(User, { through: Membership })
 
 Näiden ansiosta Sequelize osaa tehdä kyselyt, jotka hakevat esim. käyttäjien kaikki muistiinpanot, tai joukkueen kaikki jäsenet.
 
-Määrittelyjen ansiosta pääsemme myös koodissa suoraan käsiksi esim. käyttäjän muistiinpanoihin. Seuraavassa haetaan käyttäjä jonka id on 1 ja tulostetaan käyttäjään liittyvät muistiinpanot:
+Määrittelyjen ansiosta pääsemme myös koodissa suoraan käsiksi esim. käyttäjän muistiinpanoihin. Seuraavassa haetaan käyttäjä, jonka id on 1 ja tulostetaan käyttäjään liittyvät muistiinpanot:
 
 ```js
 const user = await User.findByPk(1, {
@@ -804,7 +828,7 @@ router.get('/:id', async (req, res) => {
   )
 
   if (user) {
-    user.note_count = user.notes.length // highlight-line
+    user.noteCount = user.notes.length // highlight-line
     delete user.notes // highlight-line
     res.json(user)
 
@@ -814,7 +838,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Eli yritimme liittää Sequelizen palauttamaan olioon kentän <i>note_\count</i> sekä poistaa siitä muistiinpanot sisältävän kentän <i>notes</i>. Tämä lähestymistapa ei kuitenkaan toimi, sillä Sequelizen palauttamat oliot eivät ole normaaleja olioita, joihin uusien kenttien lisääminen toimii siten kuin haluamme. 
+Eli yritimme liittää Sequelizen palauttamaan olioon kentän <i>noteCount</i> sekä poistaa siitä muistiinpanot sisältävän kentän <i>notes</i>. Tämä lähestymistapa ei kuitenkaan toimi, sillä Sequelizen palauttamat oliot eivät ole normaaleja olioita, joihin uusien kenttien lisääminen toimii siten kuin haluamme. 
 
 Parempi ratkaisu onkin luoda tietokannasta haetun datan perusteella kokonaan uusi olio:
 
@@ -831,7 +855,7 @@ router.get('/:id', async (req, res) => {
     res.json({
       username: user.username, // highlight-line
       name: user.name, // highlight-line
-      note_count: user.notes.length // highlight-line
+      noteCount: user.notes.length // highlight-line
     })
 
   } else {
@@ -843,7 +867,7 @@ router.get('/:id', async (req, res) => {
 
 Tehdään sovellukseen vielä toinen monesta moneen -yhteys. Jokaiseen mustiinpanoon liittyy sen luonut käyttäjä viiteavaimen kautta. Päätetään, että sovellus tukee myös sitä, että muistiinpanon voidaan liittää muitakin käyttäjiä, ja että käyttäjään voi liittyä mielivaltainen määrä jonkun muun käyttäjän tekemiä muistiinpanoja. Ajatellaan että nämä muistiinpanot ovat sellaisia, jotka käyttäjä on <i>merkinnyt</i> itselleen.
 
-Tehdään tilannetta varten liitostaulu `user_notes`. Migraatio on suoraviivainen:
+Tehdään tilannetta varten liitostaulu <i>user_notes</i>. Migraatio on suoraviivainen:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -889,12 +913,12 @@ UserNotes.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
-  note_id: {
+  noteId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'notes', key: 'id' },
@@ -903,13 +927,13 @@ UserNotes.init({
   sequelize,
   underscored: true,
   timestamps: false,
-  modelName: 'user_notes'
+  modelName: 'userNotes'
 })
 
 module.exports = UserNotes
 ```
 
-Tiedostoon `models/index.js` sensijaan tulee hienoinen muutos aiemmin näkemäämme:
+Tiedostoon <i>models/index.js</i> sensijaan tulee hienoinen muutos aiemmin näkemäämme:
 
 ```js
 const Note = require('./note')
@@ -925,8 +949,8 @@ User.belongsToMany(Team, { through: Membership })
 Team.belongsToMany(User, { through: Membership })
 
 // highlight-start
-User.belongsToMany(Note, { through: UserNotes, as: 'marked_notes' })
-Note.belongsToMany(User, { through: UserNotes, as: 'users_marked' })
+User.belongsToMany(Note, { through: UserNotes, as: 'markedNotes' })
+Note.belongsToMany(User, { through: UserNotes, as: 'usersMarked' })
 // highlight-end
 
 module.exports = {
@@ -934,7 +958,7 @@ module.exports = {
 }
 ```
 
-Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinnoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päälekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa. 
+Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinpanoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päälekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa. 
 
 Laajennetaan yksittäisen käyttäjän routea siten, että se palauttaa käyttäjän joukkueet, omat muistiinpanot sekä käyttäjään liitetyt muut muistiinpanot:
 
@@ -946,18 +970,16 @@ router.get('/:id', async (req, res) => {
         model: Note,
         attributes: { exclude: ['userId'] } 
       },
+      // highlight-start
       { 
         model: Note, 
-        as: 'marked_notes',
+        as: 'markedNotes',
         attributes: { exclude: ['userId']},
         through: {
           attributes: []
         },
-        include: {
-          model: User, 
-          attributes: ['name']
-        }
       },
+      // highlight-end
       {
         model: Team,
         attributes: ['name', 'id'],
@@ -976,20 +998,20 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Includen yhteydessä on nyt mainittava `as`-määrettä käyttäen äsken määrittelemämme aliasnimeä <i>marked\_notes</i>. 
+Includen yhteydessä on nyt mainittava <i>as</i>-määrettä käyttäen äsken määrittelemämme aliasnimeä <i>markedNotes</i>. 
 
 Jotta ominaisuutta päästään testaamaan, luodaan tietokantaan hieman testidataa:
 
 ```sql
-insert into user_notes (user_id, note_id) values (1, 4);
-insert into user_notes (user_id, note_id) values (1, 5);
+insert into user_notes (user_id, note_id) values (2, 1);
+insert into user_notes (user_id, note_id) values (2, 2);
 ```
 
 Lopputulos on toimiva:
 
-KUVA
+![](../../images/13/5.png)
 
-Entä jos haluaisimme, että käyttäjän merkitsemissä muistiinpanoissa olisi myös tieto muistiinpanon tekijästä? Tämä onnistuu lisäämällä lisäämällä liiteytille muistiinpanoille oma `include`.
+Entä jos haluaisimme, että käyttäjän merkitsemissä muistiinpanoissa olisi myös tieto muistiinpanon tekijästä? Tämä onnistuu lisäämällä liiteytille muistiinpanoille oma <i>include:</i>
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -1034,9 +1056,9 @@ router.get('/:id', async (req, res) => {
 
 Lopputulos on halutun kaltainen:
 
-KUVA
+![](../../images/13/4.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part12-notes/tree/part12-9), branchissa <i>part12-9</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-9), branchissa <i>part13-9</i>.
 
 
 </div>
@@ -1055,7 +1077,7 @@ Tässä tehtävässä lukulistalle lisäämisen ja listan näyttämisen ei tarvi
 
 Lisätään nyt lukulistaa tukeva toiminnallisuus sovellukseen.
 
-Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST polulle <i>/api/readinglists</i>, pyynnön mukana lähetettään blogin ja käyttäjän id:
+Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST reitille _/api/readinglists_, pyynnön mukana lähetettään blogin ja käyttäjän id:
 
 ```js
 {
@@ -1064,7 +1086,7 @@ Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST polulle <i>/api/
 }
 ```
 
-Toteuta yksittäisen käyttäjän palauttava reitti <i>/api/users/:id</i>, joka palauttaa käyttäjän muiden tietojen lisäksi myös lukulistan, esim. seuraavassa muodossa:
+Toteuta myös yksittäisen käyttäjän palauttava reitti _GET /api/users/:id_, joka palauttaa käyttäjän muiden tietojen lisäksi myös lukulistan, esim. seuraavassa muodossa:
 
 ```js
 {
@@ -1091,7 +1113,7 @@ Toteuta yksittäisen käyttäjän palauttava reitti <i>/api/users/:id</i>, joka 
 }
 ```
 
-Tässä vaiheessa tietoa siitä onko kirja luettu vai ei, ei tarvitse olla saatavilla.
+Tässä vaiheessa tietoa siitä onko blogi luettu vai ei, ei tarvitse olla saatavilla.
 
 #### Tehtävä 13.21.
 
@@ -1128,7 +1150,7 @@ Tieto voi olla esim. seuraavassa muodossa:
       readinglists: [
         {
           read: false,
-          id: 2
+          id: 3
         }
       ]
     }
@@ -1140,7 +1162,7 @@ Huom: tapoja toteuttaa tämä toiminnallisuus on useita. [Tästä](https://seque
 
 #### Tehtävä 13.22.
 
-Tee sovellukseen mahdollisuus merkata lukulistalla oleva blogi luetuksi. Luetuksi merkkaaminen tapahtuu tekemällä pyyntö HTTP PUT reitille /api/readinglists/:id, ja lähettämällä pyynnon mukana
+Tee sovellukseen mahdollisuus merkata lukulistalla oleva blogi luetuksi. Luetuksi merkkaaminen tapahtuu tekemällä pyyntö _PUT /api/readinglists/:id_, ja lähettämällä pyynnon mukana
 
 ```js
 { read: true }
@@ -1150,11 +1172,11 @@ Käyttäjä voi merkata luetuksi ainoastaan omalla lukulistallaan olevia blogeja
 
 #### Tehtävä 13.23.
 
-Muuta yhden käyttäjän tiedot palauttavaa reittiä, siten että pyynnön mukana voidaan säädellä sitä mitkä lukulistan blogeista palautetaan
+Muuta yhden käyttäjän tiedot palauttavaa reittiä, siten että pyynnön mukana voidaan säädellä mitkä lukulistan blogeista palautetaan:
 
-- GET /api/users/:id palauttaa koko lukulistan
-- GET /api/users/:id?read=true palauttaa lukulistalta ne blogit jotka on luettu
-- GET /api/users/:id?read=false palauttaa lukulistalta ne blogit jotka ovat lukematta
+- _GET /api/users/:id_ palauttaa koko lukulistan
+- _GET /api/users/:id?read=true_ palauttaa luetut blogit
+- _GET /api/users/:id?read=false_ palauttaa lukemattomat blogit
 
 </div>
 

@@ -386,7 +386,8 @@ app.listen(PORT, () => {
 
 Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Märittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
 
-Määrittelimme myös, että taulujen nimet päätellään modelien nimistä "underscored"-tekniikalla. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
+Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) -versiona. 
+Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
 
 Sama nimentäkäytänne koskee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
 
@@ -589,7 +590,7 @@ app.put('/api/notes/:id', async (req, res) => {
 
 Tietokantariviä vastaava olio haetaan kannasta <i>findByPk</i>-metodilla, olioon tehdään muutos ja lopputulos tallennetaan kutsumalla tietokantariviä vastaavan olion metodia <i>save</i>.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branchissa <i>part12-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branchissa <i>part13-1</i>.
 
 ### Sequelizen palauttamien olioiden tulostaminen konsoliin
 
@@ -732,8 +733,8 @@ Tulostus seuraavassa:
 
 Muuta sovelluksesi web-sovellukseksi, joka tukee seuraavia operaatioita
 
-- GET api/blogs (kaikkien blogien listaus)
-- POST api/blogs (uuden blogin lisäys)
-- DELETE api/blogs/:id (blogin poisto)
+- _GET /api/blogs_ (kaikkien blogien listaus)
+- _POST /api/blogs_ (uuden blogin lisäys)
+- _DELETE /api/blogs/:id_ (blogin poisto)
 
 </div>
