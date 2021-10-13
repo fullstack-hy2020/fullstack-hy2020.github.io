@@ -9,9 +9,9 @@ lang: fi
 
 ### Migraatiot
 
-Jatketaan backendin laajentamista. Haluamme toteuttaa tuen sille, että <i>admin-statuksen</i> omaavat käyttäjät voivat asettaa haluamiaan käyttäjiä epäaktiiviseen tilaan, estäen heiltä kirjautumisen ja uusien muistiinpanojen luomisen. Toteuttaaksemme nämä, meidä tulee lisätä käyttäjien tietokantatauluun boolean-arvoinen tiedon siitä, onko käyttäjä admin sekä siitä onko käyttäjätunnus epäaktiivinen. 
+Jatketaan backendin laajentamista. Haluamme toteuttaa tuen sille, että <i>admin-statuksen</i> omaavat käyttäjät voivat asettaa haluamiaan käyttäjiä epäaktiiviseen tilaan, estäen heiltä kirjautumisen ja uusien muistiinpanojen luomisen. Toteuttaaksemme nämä, meidän tulee lisätä käyttäjien tietokantatauluun boolean-arvoinen tieto siitä, onko käyttäjä admin sekä siitä onko käyttäjätunnus epäaktiivinen. 
 
-Voisimme edetä kuten aiemmin, eli muuttaa taulun määrittelevää modelia ja luottaa, että Sequelize synkronoi muutokset tietokantaan. Tämänhän savat aikaan tiedostossa <i>models/index.js</i> olevat rivit
+Voisimme edetä kuten aiemmin, eli muuttaa taulun määrittelevää modelia ja luottaa, että Sequelize synkronoi muutokset tietokantaan. Tämänhän saavat aikaan tiedostossa <i>models/index.js</i> olevat rivit
 
 ```js
 const Note = require('./note')
@@ -32,7 +32,7 @@ Tämä toimintatapa ei kuitenkaan ole pitkässä juoksussa järkevä. Poistetaan
 
 Käytännössä migraatio on yksittäinen JavaScript-tiedosto, joka kuvaa jonkin tietokantaan tehtävän muutoksen. Jokaista yksittäistä tai useampaa kerralla tapahtuvaa muutosta varten tehdään oma migraatio-tiedosto. Sequelize pitää kirjaa siitä, mitkä migraatioista on suoritettu, eli minkä migratioiden aiheuttama muutos on synkronoitu tietokannan skeemaan. Uusien migraatioiden luomisen myötä Sequelize pysyy ajantasalla siitä, mitkä muutokset kannan skeemaan on vielä tekemättä. Näin muutokset tehdään hallitusti, versionhallintaan talletetulla ohjelmakoodilla.
 
-Luodaan aluksi migraatio, joka vie tietokannan sen nykyiseen tilaansa. Migraation koodi on seuraavassa
+Luodaan aluksi migraatio, joka vie tietokannan sen nykyiseen tilaansa. Migraation koodi on seuraavassa:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -87,9 +87,9 @@ module.exports = {
 
 Migraatiotiedostossa on [määriteltynä](https://sequelize.org/master/manual/migrations.html#migration-skeleton) funktiot <i>up</i> ja <i>down</i> joista ensimmäinen määrittelee miten tietokantaa tulee muuttaa migraatiota suorittaessa. Funktio <i>down</i> kertoo taas sen miten migraatio perutaan jos näin on tarvetta tehdä.
 
-Migraatiomme sisältää kolme operaatiota, ensimmäinen luo taulun <i>notes</i>, toinen taulun <i>users</i> ja kolmas lisää tauluun <i>notes</i> viiteavaimen muistiinpanon luojaan. Skeeman muutokset määritellän [queryInterface](https://sequelize.org/master/manual/query-interface.html)-olion metodeja kutsumalla.
+Migraatiomme sisältää kolme operaatiota, ensimmäinen luo taulun <i>notes</i>, toinen taulun <i>users</i> ja kolmas lisää tauluun <i>notes</i> viiteavaimen muistiinpanon luojaan. Skeeman muutokset määritellään [queryInterface](https://sequelize.org/master/manual/query-interface.html)-olion metodeja kutsumalla.
 
-Migraatioiden määrittelyssä on oleellista muistaa, että toisin muin modeleissa, sarakkeiden ja taulujen nimet kirjoitetaan snake case -muodossa:
+Migraatioiden määrittelyssä on oleellista muistaa, että toisin kuin modeleissa, sarakkeiden ja taulujen nimet kirjoitetaan snake case -muodossa:
 
 ```js
 await queryInterface.addColumn('notes', 'user_id', { // highlight-line
@@ -109,7 +109,7 @@ Voisimme suorittaa migraatiot komentoriviltä käsin [Sequelizen komentorivityö
 npm install umzug
 ```
 
-Muuteaan tietokantayhteyden muodostavaa tiedostoa <i>utils/db.js</i> seuraavasti
+Muutetaan tietokantayhteyden muodostavaa tiedostoa <i>utils/db.js</i> seuraavasti:
 
 ```js
 const Sequelize = require('sequelize')
@@ -294,7 +294,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Laajennetaan nyt kontrollereita seuraavasti. Estetään kirjaanutuminen jo käyttäjän kentän <i>disabled</i> arvona on <i>true</i>:
+Laajennetaan nyt kontrollereita seuraavasti. Estetään kirjaantuminen jos käyttäjän kentän <i>disabled</i> arvona on <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -354,7 +354,7 @@ Ja varmistetaan että kirjautuminen ei enää onnistu:
 
 ![](../../images/13/2.png)
 
-Tehdään vielä route, jonka avulla admin pystyy muuttamaan käyttäjän tunnuksen statusta
+Tehdään vielä route, jonka avulla admin pystyy muuttamaan käyttäjän tunnuksen statusta:
 
 ```js
 const isAdmin = async (req, res, next) => {
@@ -382,9 +382,9 @@ router.put('/:username', tokenExtractor, isAdmin, async (req, res) => {
 })
 ```
 
-Käytössä on kaksi middlewarea, ensin kutsuttu <i>tokenExtractor</i> on sama mitä myös muistiinpanoja luova route käyttää, eli se asettaa dekoodatun tokenin request-olion kenttään <i>decodedToken</i>. Järjestyksessään toisen suoritettava middleware <i>isAdmin</i> tarkastaa onko käyttäjä admin, ja jos ei, pyynnön statukseksi asetetaan 401 ja annetaan asiaan kuuluva virheilmoitus.
+Käytössä on kaksi middlewarea, ensin kutsuttu <i>tokenExtractor</i> on sama mitä myös muistiinpanoja luova route käyttää, eli se asettaa dekoodatun tokenin request-olion kenttään <i>decodedToken</i>. Toisena suoritettava middleware <i>isAdmin</i> tarkastaa onko käyttäjä admin, ja jos ei, pyynnön statukseksi asetetaan 401 ja annetaan asiaan kuuluva virheilmoitus.
 
-Huomaa, miten reitinkäsittelijään on siis ketjutettu <i>kaksi middlewarea</i> jotka molemmat suoritetaan ennen varsinaista reitinkäsittelijää. Middlewareja on mahdollista ketjuttaa pyyntöhen yhteyteen mielivaltainen määrä.
+Huomaa, miten reitinkäsittelijään on siis ketjutettu <i>kaksi middlewarea</i> jotka molemmat suoritetaan ennen varsinaista reitinkäsittelijää. Middlewareja on mahdollista ketjuttaa pyyntöjen yhteyteen mielivaltainen määrä.
 
 Middleware <i>tokenExtractor</i> on nyt siirretty tiedostoon <i>util/middleware.js</i> koska sitä käytetään useasta paikasta.
 
@@ -409,7 +409,7 @@ const tokenExtractor = (req, res, next) => {
 module.exports = { tokenExtractor }
 ```
 
-Admin voin nyt enabloida jakousan tunnuksen tekemällä routeen /api/users/jakousa PUT-pyynnön, missä pyynnön mukana on seuraava data:
+Admin voi nyt enabloida <i>jakousa</i>n tunnuksen tekemällä routeen /api/users/jakousa PUT-pyynnön, missä pyynnön mukana on seuraava data:
 
 ```js
 {
@@ -417,9 +417,9 @@ Admin voin nyt enabloida jakousan tunnuksen tekemällä routeen /api/users/jakou
 }
 ```
 
-Kuten [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todetaan, tässä toteuttamamme tapa käyttäjätunnusten disablointiin on ongelmallinen. Se onko tunnus disabloitu tarkastetaan ainoastaan <i>kirjautumisen yhteydessä</i>, jos käyttäjällä on token hallussaan siinä vaiheessa kun tunnus disabloidaan, voi käyttäjä jatkaa saman tokenin käyttöä, sillä tokenille ei ole asetettu elinikää eikä sitä seikkaa, että käyttäjän tunnus on disabloitu tarkasteta muistiinpanojen luomisen yhteydessä. 
+Kuten [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todetaan, tässä toteuttamamme tapa käyttäjätunnusten disablointiin on ongelmallinen. Se onko tunnus disabloitu tarkastetaan ainoastaan <i>kirjautumisen yhteydessä</i>. Jos käyttäjällä on token hallussaan siinä vaiheessa kun tunnus disabloidaan, voi käyttäjä jatkaa saman tokenin käyttöä, sillä tokenille ei ole asetettu elinikää eikä sitä seikkaa, että käyttäjän tunnus on disabloitu tarkasteta muistiinpanojen luomisen yhteydessä. 
 
-Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti, jonka auvulla edelinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessa. 
+Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti, jonka avulla edellinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessa. 
 
 Muutetaan tiedostoa <i>util/db.js</i> seuraavasti:
 
@@ -501,7 +501,7 @@ ja itse skripti:
 }
 ```
 
-Voimme nyt siis perua edellisen migraation suorittamalla komentorivltä _npm run migration:down_. 
+Voimme nyt siis perua edellisen migraation suorittamalla komentoriviltä _npm run migration:down_. 
 
 Migraatiot suoritetaan automaattisesti kun ohjelma käynnistetään. Ohjelman kehitysvaiheessa saattaisi välillä olla tarkoituksenmukaisempaa poistaa migraatioiden automaattinen suoritus ja tehdä migraatiot komentoriviltä käsin. 
 
@@ -535,7 +535,7 @@ Jatketaan sovelluksen laajentamista siten, että jokainen käyttäjä voidaan li
 
 Koska yhteen tiimiin voi liittyä mielivaltainen määrä käyttäjiä, ja yksi käyttäjä voi liittyä mielivaltaiseen määrään tiimejä, on kysessä [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships) eli monen-suhde-moneen tyyppinen yhteys, joka perinteisesti toteutetaan relaatiotietokannoissa <i>liitostaulun</i> avulla.
 
-Luodaan nyt tiimin sekä liitostaulun tarvitsema koodi. Migraatio on seuraavassa
+Luodaan nyt tiimin sekä liitostaulun tarvitsema koodi. Migraatio on seuraavassa:
 
 ```js
 const { DataTypes } = require('sequelize')
