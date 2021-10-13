@@ -1188,7 +1188,7 @@ Sovelluksemme alkaa olla vähintään kelvollisessa kunnossa. Ennen osan loppua 
 
 #### Eager vs lazy fetch
 
-Kun teemme kyselyt käyttäen `include`-määrettä:
+Kun teemme kyselyt käyttäen <i>include</i>-määrettä:
 
 ```js
 User.findOne({
@@ -1198,38 +1198,19 @@ User.findOne({
 })
 ```
 
-Tapahtuu niin sanottu [eager fetch](https://sequelize.org/master/manual/assocs.html#basics-of-queries-involving-associations) eli kaikki riviin liittyvät liitettävien taulujen rivit, esimerkin tapauksessa käyttäjään liittyvät muistiinpanot, haetaan samalla tietokannasta. Tämä on usein se mitä haluamme, mutta on myös tilanteita joissa haluttaisiin tehdä _lazy fetch_ eli hakea vaikkapa käyttäjään liittyvät joukkueet ainoastaan jos niitä tarvitaan.
+tapahtuu niin sanottu [eager fetch](https://sequelize.org/master/manual/assocs.html#basics-of-queries-involving-associations) eli kaikki haettavaan käyttäjään liitoskyselyllä liitettävien taulujen rivit, esimerkin tapauksessa käyttäjän tekemät muistiinpanot, haetaan samalla tietokannasta. Tämä on usein se mitä haluamme, mutta on myös tilanteita joissa haluttaisiin tehdä ns. <i>lazy fetch</i> eli hakea vaikkapa käyttäjään liittyvät joukkueet ainoastaan jos niitä tarvitaan.
 
-Muutetaan nyt yksittäisen käyttäjän routea siten, että se hakee kannasta käyttäjän joukkueet ainoastaan jos pyynnölle on asetettu query parametri `teams`:
+Muutetaan nyt yksittäisen käyttäjän routea siten, että se hakee kannasta käyttäjän joukkueet ainoastaan jos pyynnölle on asetettu query parametri <i>teams</i>:
 
 ```js
 router.get('/:id', async (req, res) => {
-  const user = await User.findByPk(req.params.id, { 
-    attributes: { exclude: [''] } ,
-    include:[{
-        model: Note,
-        attributes: { exclude: ['userId'] } 
-      },
-      { 
-        model: Note, 
-        as: 'marked_notes',
-        attributes: { exclude: ['userId']},
-        through: {
-          attributes: []
-        },
-        include: {
-          model: User, 
-          attributes: ['name']
-        }
-      },
-    ]
-  })
-  
+  const user = await User.findByPk(req.params.id)
+    
+  // highlight-start
   if (!user) {
     return res.status(404).end()
   }
 
-  // hightlight-start
   let teams = undefined
 
   if (req.query.teams) {
@@ -1240,7 +1221,7 @@ router.get('/:id', async (req, res) => {
   }
 
   res.json({ ...user.toJSON(), teams })
-  // hightlight-end
+  // highlight-end
 })
 ```
 
@@ -1266,18 +1247,6 @@ User.init({
       disabled: false
     }
   },
-  scopes: {
-    admin: {
-      where: {
-        admin: true
-      }
-    },
-    disabled: {
-      where: {
-        disabled: true
-      }
-    }
-  }
   // highlight-end
 })
 
@@ -1355,23 +1324,21 @@ Koska Sequelizen modelit ovat normaaleja [JavaScript-luokkia](https://sequelize.
 
 Seuraavassa kaksi esimerkkiä:
 
-_TODO: pitäisi ehkä käyttää camelCase metodien nimissä?_
-
-_TODO: numberOfNotes vois olla hyvä esimerkki count-metodille: https://sequelize.org/master/manual/model-querying-basics.html#-code-count--code-_
-
 ```js
-const { Model, DataTypes, Op } = require('sequelize') // hightlight-line
+const { Model, DataTypes, Op } = require('sequelize') // highlight-line
 
 const Note = require('./note')
 const { sequelize } = require('../util/db')
 
 class User extends Model {
-  // hightlight-start
-  async number_of_notes() {
+  // highlight-start
+  async numberOfNotes() {
     return (await this.getNotes()).length
   }
+  // highlight-end
 
-  static async with_notes(limit){
+  // highlight-start
+  static async withNotes(limit){
     return await User.findAll({
       attributes: {
         include: [[ sequelize.fn("COUNT", sequelize.col("notes.id")), "note_count" ]] 
@@ -1386,7 +1353,7 @@ class User extends Model {
       having: sequelize.literal(`COUNT(notes.id) > ${limit}`)
     })
   }
-  // hightlight-end
+  // highlight-end
 }
 
 User.init({
@@ -1396,20 +1363,18 @@ User.init({
 module.exports = User
 ```
 
-Ensimmäinen metodeista <i>note_count</i> on <i>instanssimetodi</i>, eli sitä voidaan kutsua modelin instansseille:
-
-_TODO: camelCase?_
+Ensimmäinen metodeista <i>numberOfNotes</i> on <i>instanssimetodi</i>, eli sitä voidaan kutsua modelin instansseille:
 
 ```js
 const jami = await User.findOne({ name: 'Jami Kousa'})
-const cnt = await jami.number_of_notes()
+const cnt = await jami.numberOfNotes()
 console.log(`Jami has created ${cnt} notes`)
 ```
 
 Instanssimetodin sisällä avainsanalla <i>this</i> siis viitataan instanssiin itseensä:
 
 ```js
-async number_of_notes() {
+async numberOfNotes() {
   return (await this.getNotes()).length
 }
 ```
@@ -1417,7 +1382,7 @@ async number_of_notes() {
 Metodeista toinen, joka palauttaa ne käyttäjät, joilla on vähintään parametrin verran muistiinpanoja, on taas <i>luokkametodi</i> eli sitä kutsutaan suoraan modelille:
 
 ```js
-const users = await User.with_notes(2)
+const users = await User.withNotes(2)
 console.log(JSON.stringify(users, null, 2)) 
 users.forEach(u => {
   console.log(u.name)
@@ -1480,11 +1445,11 @@ module.exports = {
 
 Emmekö voisi optimoida koodia siten, että esim. model exporttaisi jaetut osat migraation käyttöön?
 
-Ongelman muodostaa kuitenkin se, että modelin määritelmä voi muuttua ajan myötä, esimerkiksi kenttä `name` voi muuttaa niemä tai sen datatyyppi voi vaihtua. Migraatiot tulee pystyä suorittamaan milloin tahansa onnistuneesti alusta loppuun, ja jos migraatiot luottavat että modelilla on tietty sisältö, ei asia enää välttämättä pidä paikkaansa kuukauden tai vuoden kuluttua. Siispä migraatioiden koodin on syytä olla "copy pastesta" huolimatta täysin erillään modelien koodista.
+Ongelman muodostaa kuitenkin se, että modelin määritelmä voi muuttua ajan myötä, esimerkiksi kenttä <i>name</i> voi muuttaa nimeä tai sen datatyyppi voi vaihtua. Migraatiot tulee pystyä suorittamaan milloin tahansa onnistuneesti alusta loppuun, ja jos migraatiot luottavat että modelilla on tietty sisältö, ei asia enää välttämättä pidä paikkaansa kuukauden tai vuoden kuluttua. Siispä migraatioiden koodin on syytä olla "copy pastesta" huolimatta täysin erillään modelien koodista.
 
-Eräs ratkaisu asiaan olisi Sequelizen [komentorivityökalun](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-) käyttö, joka luo sekä modelit että migratiotiedostot komentorivillä annettujen komentojen perusteella. Esim. seuraava komento loisi modelin `User`, jolla on attribuutteina `name`, `username` ja `admin` sekä tietokantataulun luomisesta hoitavan migraation:
+Eräs ratkaisu asiaan olisi Sequelizen [komentorivityökalun](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-) käyttö, joka luo sekä modelit että migratiotiedostot komentorivillä annettujen komentojen perusteella. Esim. seuraava komento loisi modelin <i>User</i>, jolla on attribuutteina <i>name</i>, <i>username</i> ja <i>admin</i> sekä tietokantataulun luomisen hoitavan migraation:
 
-```
+```bash
 npx sequelize-cli model:generate --name User --attributes name:string,username:string,admin:boolean
 ```
 
@@ -1498,11 +1463,11 @@ Komentoriviltä käsin voi myös suorittaa sekä rollbackata eli perua migraatio
 
 #### Tehtävä 13.24.
 
-Grande finale: [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) oli maininta token-krijautumiseen liittyvistä ongelmasta: jos jonkin käyttäjän käyttöoikeus järjestelmään päätetään poistaa, voi käyttäjä edelleen käyttää hallussaan olevaa tokenia järjestemän käyttämiseen. 
+Grande finale: [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) oli maininta token-kirjautumiseen liittyvistä ongelmasta: <i>jos jonkin käyttäjän käyttöoikeus järjestelmään päätetään poistaa, voi käyttäjä edelleen käyttää hallussaan olevaa tokenia järjestemän käyttämiseen.</i> 
 
-Tavanomainen ratkaisu tähän on tallettaa backendin tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tälläista ratkaisua kutsutaan usein <i>palvelinpuolen sessioksi</i>.
+Tavanomainen ratkaisu tähän on tallentaa backendin tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tälläista ratkaisua kutsutaan usein <i>palvelinpuolen sessioksi</i>.
 
-Laajenna järjestelmää nyt siten ,että käyttöoikeuden menettänyt käyttäjä ei pysty tekemään mitään kirjaantumista edellyttäviä toimenpiteitä. 
+Laajenna järjestelmää nyt siten, että käyttöoikeuden menettänyt käyttäjä ei pysty tekemään mitään kirjaantumista edellyttäviä toimenpiteitä. 
 
 Tarvitset toteutukseen todennäköisesti ainakin seuraavat
 - käyttäjien tauluun boolean-arvoisen sarakkeen, joka kertoo onko tunnus disabloitu 
