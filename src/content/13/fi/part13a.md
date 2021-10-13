@@ -453,9 +453,9 @@ await note.save()
 Esimerkkikoodin käyttötapaukseen metodi [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) sopii paremmin, joten pidättäydytään siinä.
 
 Jos luotava olio ei ole validi, on seurauksena virheilmoitus. Esim. yritettäessä luoda muistiinpano ilman sisältöä
-operaatio epäonnistuu, ja konsoli paljastaa syyn olevan `SequelizeValidationError: notNull Violation Note.content cannot be null`:
+operaatio epäonnistuu, ja konsoli paljastaa syyn olevan <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>
 
-```
+```bash
 (node:39109) UnhandledPromiseRejectionWarning: SequelizeValidationError: notNull Violation: Note.content cannot be null
     at InstanceValidator._validate (/Users/mluukkai/opetus/fs-psql/node_modules/sequelize/lib/instance-validator.js:78:13)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
@@ -498,15 +498,17 @@ Luo sovellukselle komentoriviltä taulu <i>blogs,</i> jolla on seuraavat sarakke
 
 Lisää tietokantaan ainakin kaksi blogia.
 
+Tallenna käyttämäsi SQL-lauseet sovelluksen repositorion juureen tiedostoon <i>commands.sql</i>
+
 #### Tehtävä 13.3.
 
 Tee sovellukseen komentoriviltä käytettävä toiminnallisuus, joka tulostaa tietokannassa olevat blogit esimerkiksi seuraavasti:
 
 ```bash
 $ node cli.js
-Executing (default): SELECT * FROM blogs
-Dan Abramov: 'On let vs const', 0 likes
-Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
+Dan Abramov: 'Writing Resilient Components', 0 likes
+Martin Fowler: 'Is High Quality Software Worth the Cost?', 0 likes
+Robert C. Martin: 'FP vs. OO List Processing', 0 likes
 ```
 
 </div>
