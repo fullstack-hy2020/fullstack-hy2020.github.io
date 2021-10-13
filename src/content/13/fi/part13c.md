@@ -517,7 +517,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 Poista sovelluksesi tietokannasta kaikki taulut. 
 
-Tee migraatio, joka asettaa tietokannan nykyiseen tämänhetkiseen tilaan. Luo <i>created\_at</i> ja <i>updated\_at</i> [aikaleimat](https://sequelize.org/master/manual/model-basics.html#timestamps) molemmille tauluille. Huomaa, että joudut luomaan ne migratiossa itse.
+Tee migraatio, joka asettaa tietokannan tämänhetkiseen tilaan. Luo <i>created\_at</i> ja <i>updated\_at</i> [aikaleimat](https://sequelize.org/master/manual/model-basics.html#timestamps) molemmille tauluille. Huomaa, että joudut luomaan ne migraatiossa itse.
 
 **HUOM:** jos joudut poistamaan tauluja komentoriviltä (etkä siis tee poistoa migraation perumisen avulla), joudut poistamaan taulun <i>migrations</i> sisällön, jos haluat että ohjelmasi pystyy suorittamaan migraatiot uudelleen.
 
@@ -644,7 +644,7 @@ Membership.init({
 module.exports = Membership
 ```
 
-Olemme siis antaneet liitostaululle kuvaavan nimen, <i>membership</i>. Liitostauluille ei aina löydy yhtä osuvaa nimeä, tällöin liitostaulun nimi voidaan muodostaa yhdistelmänä liitettävien taulujien nimistä esim. <i>user\_teams</i> voisi sopia tilanteeseemme.
+Olemme siis antaneet liitostaululle kuvaavan nimen, <i>membership</i>. Liitostauluille ei aina löydy yhtä osuvaa nimeä, tällöin liitostaulun nimi voidaan muodostaa yhdistelmänä liitettävien taulujen nimistä esim. <i>user\_teams</i> voisi sopia tilanteeseemme.
 
 Tiedostoon <i>models/index.js</i> tulee pieni lisäys, joka liittää metodin [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) avulla tiimit ja käyttäjät toisiinsa myös koodin tasolla.
 
@@ -802,7 +802,7 @@ user.notes.forEach(note => {
 })
 ```
 
-Määrittely <i>User.hasMany(Note)</i> siis liittää <i>user</i>-olioille attribuutin <i>notes</i>, jonka kautta päästän käsiksi käyttäjän tekemiin muistiinpanoihin. Määrittely <i>User.belongsToMany(Team, { through: Membership }))</i> liittää vastaavasti käyttäjille attribuutin <i>teams</i> jota on myös mahdollisuus hyödyntää koodissa:
+Määrittely <i>User.hasMany(Note)</i> siis liittää <i>user</i>-olioille attribuutin <i>notes</i>, jonka kautta päästään käsiksi käyttäjän tekemiin muistiinpanoihin. Määrittely <i>User.belongsToMany(Team, { through: Membership }))</i> liittää vastaavasti käyttäjille attribuutin <i>teams</i> jota on myös mahdollisuus hyödyntää koodissa:
 
 ```js
 const user = await User.findByPk(1, {
@@ -816,7 +816,7 @@ user.teams.forEach(team => {
 })
 ```
 
-Oletetaan että haluaisimme palauttaa yksittäisen käyttäjän reitiltä jsonin, joka sisältää käyttäjän nimen, käyttäjätunnuksen sekä luotujen muistiinpanojen määrän. Voisimme yrittää seuravaa
+Oletetaan että haluaisimme palauttaa yksittäisen käyttäjän reitiltä jsonin, joka sisältää käyttäjän nimen, käyttäjätunnuksen sekä luotujen muistiinpanojen määrän. Voisimme yrittää seuravaa:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -933,7 +933,7 @@ UserNotes.init({
 module.exports = UserNotes
 ```
 
-Tiedostoon <i>models/index.js</i> sensijaan tulee hienoinen muutos aiemmin näkemäämme:
+Tiedostoon <i>models/index.js</i> sen sijaan tulee hienoinen muutos aiemmin näkemäämme:
 
 ```js
 const Note = require('./note')
@@ -958,7 +958,7 @@ module.exports = {
 }
 ```
 
-Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinpanoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päälekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa. 
+Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinpanoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päällekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa. 
 
 Laajennetaan yksittäisen käyttäjän routea siten, että se palauttaa käyttäjän joukkueet, omat muistiinpanot sekä käyttäjään liitetyt muut muistiinpanot:
 
@@ -998,7 +998,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Includen yhteydessä on nyt mainittava <i>as</i>-määrettä käyttäen äsken määrittelemämme aliasnimeä <i>markedNotes</i>. 
+Includen yhteydessä on nyt mainittava <i>as</i>-määrettä käyttäen äsken määrittelemämme aliasnimi <i>markedNotes</i>. 
 
 Jotta ominaisuutta päästään testaamaan, luodaan tietokantaan hieman testidataa:
 
@@ -1011,7 +1011,7 @@ Lopputulos on toimiva:
 
 ![](../../images/13/5.png)
 
-Entä jos haluaisimme, että käyttäjän merkitsemissä muistiinpanoissa olisi myös tieto muistiinpanon tekijästä? Tämä onnistuu lisäämällä liiteytille muistiinpanoille oma <i>include:</i>
+Entä jos haluaisimme, että käyttäjän merkitsemissä muistiinpanoissa olisi myös tieto muistiinpanon tekijästä? Tämä onnistuu lisäämällä liitetyille muistiinpanoille oma <i>include:</i>
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -1069,9 +1069,9 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 #### Tehtävä 13.19.
 
-Toeuta käyttäjille mahdollisuus lisätä järjestelmässä olevia blogeja <i>lukulistalle</i>. Lisättäessä lukulistalle, blogi on tilassa <i>lukematon</i>. Blogi voidaan merkata myöhemmin <i>luetuksi</i>. Toteuta lukulista liitostaulun avulla.
+Toteuta käyttäjille mahdollisuus lisätä järjestelmässä olevia blogeja <i>lukulistalle</i>. Lisättäessä lukulistalle, blogi on tilassa <i>lukematon</i>. Blogi voidaan merkata myöhemmin <i>luetuksi</i>. Toteuta lukulista liitostaulun avulla.
 
-Tässä tehtävässä lukulistalle lisäämisen ja listan näyttämisen ei tarvitse onnistua muuten kuin suoraan tietetokantaa käyttämällä.
+Tässä tehtävässä lukulistalle lisäämisen ja listan näyttämisen ei tarvitse onnistua muuten kuin suoraan tietokantaa käyttämällä.
 
 #### Tehtävä 13.20.
 
@@ -1162,7 +1162,7 @@ Huom: tapoja toteuttaa tämä toiminnallisuus on useita. [Tästä](https://seque
 
 #### Tehtävä 13.22.
 
-Tee sovellukseen mahdollisuus merkata lukulistalla oleva blogi luetuksi. Luetuksi merkkaaminen tapahtuu tekemällä pyyntö _PUT /api/readinglists/:id_, ja lähettämällä pyynnon mukana
+Tee sovellukseen mahdollisuus merkata lukulistalla oleva blogi luetuksi. Luetuksi merkkaaminen tapahtuu tekemällä pyyntö _PUT /api/readinglists/:id_, ja lähettämällä pyynnön mukana
 
 ```js
 { read: true }
@@ -1172,7 +1172,7 @@ Käyttäjä voi merkata luetuksi ainoastaan omalla lukulistallaan olevia blogeja
 
 #### Tehtävä 13.23.
 
-Muuta yhden käyttäjän tiedot palauttavaa reittiä, siten että pyynnön mukana voidaan säädellä mitkä lukulistan blogeista palautetaan:
+Muuta yhden käyttäjän tiedot palauttavaa reittiä siten, että pyynnön mukana voidaan säädellä mitkä lukulistan blogeista palautetaan:
 
 - _GET /api/users/:id_ palauttaa koko lukulistan
 - _GET /api/users/:id?read=true_ palauttaa luetut blogit
@@ -1225,7 +1225,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Nyt siis <i>User.findByPk</i>-kysely ei hae joukkueita, vaan ne haetaan tarvittaessa tietokantariviä vastaavan olion <i>user</i> metodilla <i>getTeams</i>, jonka Sequelize on generoinut modelin oliolle automaattisesti. Vastaava <i>get</i>- ja muutamia muitakin hyödyllisiä metodela [generoituu automaattisesti](https://sequelize.org/master/manual/assocs.html#special-methods-mixins-added-to-instances) kun tauluille määritellään Sequelizen tasolla assosiaatioita.
+Nyt siis <i>User.findByPk</i>-kysely ei hae joukkueita, vaan ne haetaan tarvittaessa tietokantariviä vastaavan olion <i>user</i> metodilla <i>getTeams</i>, jonka Sequelize on generoinut modelin oliolle automaattisesti. Vastaava <i>get</i>- ja muutamia muitakin hyödyllisiä metodeja [generoituu automaattisesti](https://sequelize.org/master/manual/assocs.html#special-methods-mixins-added-to-instances) kun tauluille määritellään Sequelizen tasolla assosiaatioita.
 
 #### Modelien ominaisuuksia
 
@@ -1253,7 +1253,7 @@ User.init({
 module.exports = User
 ```
 
-Nyt funktiokutsun <i>User.findAll()</i> aiheuttamassa kyselyssä on seuraava where-ehto
+Nyt funktiokutsun <i>User.findAll()</i> aiheuttamassa kyselyssä on seuraava where-ehto:
 
 ```
 WHERE "user"."disabled" = false;
@@ -1300,7 +1300,7 @@ User.init({
 })
 ```
 
-Scopeja käytetään seuraavasti
+Scopeja käytetään seuraavasti:
 
 ```js
 // kaikki adminit
@@ -1313,7 +1313,7 @@ const disabledUsers = await User.scope('disabled').findAll()
 const jamiUsers =  User.scope({ method: ['name', '%jami%'] }).findAll()
 ```
 
-Scopeja on myös mahdollista ketjuttaa
+Scopeja on myös mahdollista ketjuttaa:
 
 ```js
 // adminit, joiden nimessä merkkijono jami
@@ -1453,7 +1453,7 @@ Eräs ratkaisu asiaan olisi Sequelizen [komentorivityökalun](https://sequelize.
 npx sequelize-cli model:generate --name User --attributes name:string,username:string,admin:boolean
 ```
 
-Komentoriviltä käsin voi myös suorittaa sekä rollbackata eli perua migraatioita. Komentorivin dokumentaatio on valitettavan ohkaista ja tällä kurssilla päätimmekin tehdä sekä modelit että migratiot käsin. Ratkaisu saattoi olla viisas tai sitten en.
+Komentoriviltä käsin voi myös suorittaa sekä rollbackata eli perua migraatioita. Komentorivin dokumentaatio on valitettavan ohkaista ja tällä kurssilla päätimmekin tehdä sekä modelit että migratiot käsin. Ratkaisu saattoi olla viisas tai sitten ei.
 
 </div>
 
@@ -1474,10 +1474,10 @@ Tarvitset toteutukseen todennäköisesti ainakin seuraavat
   - riittää että tunnusten disablointi ja enablointi onnistuu suoraan tietokannasta
 - taulun, joka muistaa aktiiviset sessiot
   - sessio tallennetaan tauluun kun käyttäjä tekee kirjautumisen eli operaation POST /api/login
-  - session olemassaolo (ja validiteetti) tarkastataan aina käyttäjän tehdessä kirjautumista edellyttävän operaation
+  - session olemassaolo (ja validiteetti) tarkastetaan aina käyttäjän tehdessä kirjautumista edellyttävän operaation
 - reitin, jonka avulla käyttäjä voi "kirjautua ulos" järjestelmästä, eli käytännössä poistaa tietokannasta aktiiviset sessiot, reitti voi olla esim DELETE /api/logout
 
-Huomaa, että kirjautumisen ei tule onnistua "vanhentuneella tokenilla", eli samalla tokenilla ulosirjautumisen jälkeen.
+Huomaa, että kirjautumisen ei tule onnistua "vanhentuneella tokenilla", eli samalla tokenilla uloskirjautumisen jälkeen.
 
 Voit myös halutessasi käyttää jotain tarkoitukseen tehtyä npm-kirjastoa sessioiden hoitamiseen.
 
