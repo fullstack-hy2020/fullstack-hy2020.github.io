@@ -67,7 +67,7 @@ server.listen(config.PORT, () => {
 })
 ```
 
-<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Sovelluksen käynnistäminen tapahtuu nyt <em>server</em>-muuttujassa olevan olion kautta. Käynnistymisestä kertova konsolitulostus tehtään logger-moduulin funktion _info_ avulla.
+<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Sovelluksen käynnistäminen tapahtuu nyt <em>server</em>-muuttujassa olevan olion kautta. Käynnistymisestä kertova konsolitulostus tehdään logger-moduulin funktion _info_ avulla.
 
 Ympäristömuuttujien käsittely on eriytetty moduulin <i>utils/config.js</i> vastuulle:
 

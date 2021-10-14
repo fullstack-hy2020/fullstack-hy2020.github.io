@@ -7,6 +7,8 @@ lang: fi
 
 <div class="content">
 
+# Sovelluksen stukturointi
+
 Olemme toistaiseksi kirjottaneet kaiken koodin samaan tiedostoon. Strukturoidaan nyt sovellus hieman paremmin. Luodaan seuraava hakemistorakenne ja tiedostot:
 
 ```bash
@@ -249,6 +251,14 @@ Muuta sovelluksesi rakenne edellä olevan esimerkin mukaiseksi, tai noudattamaan
 Toteuta sovellukseen myös tuki blogien like-määrän muuttamiselle, eli operaatio
 
 _PUT /api/blogs/:id_ (blogin like-määrän muokkaus)
+
+Likejen päivitetty määrä välitetään pyynnön mukana:
+
+```js
+{
+  likes: 3
+}
+```
 
 #### Tehtävä 13.7.
 
@@ -617,7 +627,6 @@ router.get('/', async (req, res) => {
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-4), branchissa <i>part13-4</i>.
 
-
 ### Huomio modelien määrittelystä
 
 Tarkkasilmäisimmät huomasivat, että sarakkeen <i>user_id</i> lisäämisestä huolimatta emme tehneet muutosta muistiinpanot määrittelevään modeliin, mutta voimme lisätä muistinpano-olioille käyttäjän:
@@ -746,7 +755,7 @@ Muuta virheidenkäsittelymiddlewarea siten, että se antaa tilanteessa kuvaavamm
 
 #### Tehtävä 13.10.
 
-Laajenna sovellusta siten, että blogi liitetään tokenin perusteella identifioitavalle kirjautuneelle käyttäjälle.
+Laajenna sovellusta siten, että blogi liitetään tokenin perusteella identifioitavalle kirjautuneelle käyttäjälle. Joudut siis toteuttamaan myös tokenin palauttavan kirjaantumisesta huolehtivan endpointin _POST api/login_
 
 #### Tehtävä 13.11.
 

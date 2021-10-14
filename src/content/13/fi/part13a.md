@@ -80,7 +80,7 @@ heroku config
 DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazonaws.com:5432/<db-name>
 ```
 
-Erityisesti relaatiotietokantaa käytettäessä on oleellista päästä tietokantaan käsiksi myös suoraan. Tapoja tähän on monia, on olemasa mm. useita erilaisia graafisia käyttöliittymiä, kuten [pgAdmin](https://www.pgadmin.org/). Käytetään kuitenkin postgresin [pqsl](https://www.postgresql.org/docs/current/app-psql.html)-komentorivityökalua.
+Erityisesti relaatiotietokantaa käytettäessä on oleellista päästä tietokantaan käsiksi myös suoraan. Tapoja tähän on monia, on olemassa mm. useita erilaisia graafisia käyttöliittymiä, kuten [pgAdmin](https://www.pgadmin.org/). Käytetään kuitenkin postgresin [psql](https://www.postgresql.org/docs/current/app-psql.html)-komentorivityökalua.
 
 Tietokantaan päästään käsiksi suorittamalla _psql_ Herokun palvelimella seuraavasti (huomaa, että komennon parametrit riippuvat Heroku-sovelluksen connect urlista):
 
@@ -88,7 +88,7 @@ Tietokantaan päästään käsiksi suorittamalla _psql_ Herokun palvelimella seu
 heroku run psql -h ec2-44-199-83-229.compute-1.amazonaws.com -p 5432 -U <username> <dbname>
 ```
 
-Salasanan antamisen jälkeen kokeillaan pslq:n tärkeintä komentoa _\d_, joka kertoo tietokannan sisällön:
+Salasanan antamisen jälkeen kokeillaan psql:n tärkeintä komentoa _\d_, joka kertoo tietokannan sisällön:
 
 ```bash
 Password for user <username>:
@@ -164,7 +164,7 @@ username=> select * from notes;
 (2 rows)
 ```
 
-Jos yritämme tallentaa tietokantaan dataa, joka ei ole skeeman mukaista, se ei onnistu. Pakollisen sarakkeen arvo ei voi puuttua
+Jos yritämme tallentaa tietokantaan dataa, joka ei ole skeeman mukaista, se ei onnistu. Pakollisen sarakkeen arvo ei voi puuttua:
 
 ```sql
 username=> insert into notes (important) values (true);
@@ -384,7 +384,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Märittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
+Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Määrittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
 
 Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) -versiona. 
 Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
@@ -453,9 +453,9 @@ await note.save()
 Esimerkkikoodin käyttötapaukseen metodi [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) sopii paremmin, joten pidättäydytään siinä.
 
 Jos luotava olio ei ole validi, on seurauksena virheilmoitus. Esim. yritettäessä luoda muistiinpano ilman sisältöä
-operaatio epäonnistuu, ja konsoli paljastaa syyn olevan `SequelizeValidationError: notNull Violation Note.content cannot be null`:
+operaatio epäonnistuu, ja konsoli paljastaa syyn olevan <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>
 
-```
+```bash
 (node:39109) UnhandledPromiseRejectionWarning: SequelizeValidationError: notNull Violation: Note.content cannot be null
     at InstanceValidator._validate (/Users/mluukkai/opetus/fs-psql/node_modules/sequelize/lib/instance-validator.js:78:13)
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
@@ -498,15 +498,17 @@ Luo sovellukselle komentoriviltä taulu <i>blogs,</i> jolla on seuraavat sarakke
 
 Lisää tietokantaan ainakin kaksi blogia.
 
+Tallenna käyttämäsi SQL-lauseet sovelluksen repositorion juureen tiedostoon <i>commands.sql</i>
+
 #### Tehtävä 13.3.
 
 Tee sovellukseen komentoriviltä käytettävä toiminnallisuus, joka tulostaa tietokannassa olevat blogit esimerkiksi seuraavasti:
 
 ```bash
 $ node cli.js
-Executing (default): SELECT * FROM blogs
-Dan Abramov: 'On let vs const', 0 likes
-Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
+Dan Abramov: 'Writing Resilient Components', 0 likes
+Martin Fowler: 'Is High Quality Software Worth the Cost?', 0 likes
+Robert C. Martin: 'FP vs. OO List Processing', 0 likes
 ```
 
 </div>
