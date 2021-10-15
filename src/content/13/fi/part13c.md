@@ -519,7 +519,9 @@ Poista sovelluksesi tietokannasta kaikki taulut.
 
 Tee migraatio, joka asettaa tietokannan tämänhetkiseen tilaan. Luo <i>created\_at</i> ja <i>updated\_at</i> [aikaleimat](https://sequelize.org/master/manual/model-basics.html#timestamps) molemmille tauluille. Huomaa, että joudut luomaan ne migraatiossa itse.
 
-**HUOM:** jos joudut poistamaan tauluja komentoriviltä (etkä siis tee poistoa migraation perumisen avulla), joudut poistamaan taulun <i>migrations</i> sisällön, jos haluat että ohjelmasi pystyy suorittamaan migraatiot uudelleen.
+**HUOM:** muista poistaa koodistasi modelien skeemat synkronoivat komennot <i>User.sync()</i> ja <i>Blog.sync()</i> muuten migraatioiden suorittaminen ei onnistu.
+
+**HUOM2:** jos joudut poistamaan tauluja komentoriviltä (etkä siis tee poistoa migraation perumisen avulla), joudut poistamaan taulun <i>migrations</i> sisällön, jos haluat että ohjelmasi pystyy suorittamaan migraatiot uudelleen.
 
 #### Tehtävä 13.18.
 
@@ -1069,7 +1071,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 #### Tehtävä 13.19.
 
-Toteuta käyttäjille mahdollisuus lisätä järjestelmässä olevia blogeja <i>lukulistalle</i>. Lisättäessä lukulistalle, blogi on tilassa <i>lukematon</i>. Blogi voidaan merkata myöhemmin <i>luetuksi</i>. Toteuta lukulista liitostaulun avulla.
+Toteuta käyttäjille mahdollisuus lisätä järjestelmässä olevia blogeja <i>lukulistalle</i>. Lisättäessä lukulistalle, blogi on tilassa <i>lukematon</i>. Blogi voidaan merkata myöhemmin <i>luetuksi</i>. Toteuta lukulista liitostaulun avulla. Tee tietokantamuutokset migraatioiden avulla.
 
 Tässä tehtävässä lukulistalle lisäämisen ja listan näyttämisen ei tarvitse onnistua muuten kuin suoraan tietokantaa käyttämällä.
 
@@ -1480,5 +1482,7 @@ Tarvitset toteutukseen todennäköisesti ainakin seuraavat
 Huomaa, että kirjautumisen ei tule onnistua "vanhentuneella tokenilla", eli samalla tokenilla uloskirjautumisen jälkeen.
 
 Voit myös halutessasi käyttää jotain tarkoitukseen tehtyä npm-kirjastoa sessioiden hoitamiseen.
+
+Tee tämän tehtävän edellyttämät tietokantamuutokset migraatioiden avulla.
 
 </div>
