@@ -13,7 +13,7 @@ If you do not want to use your own Bloglist application, you are free to use the
 
 Many of the exercises in this part of the course material will require the refactoring of existing code. This is a common reality of extending existing applications, meaning that refactoring is an important and necessary skill even if it may feel difficult and unpleasant at times.
 
-One good piece of advice for both refactoring and writing new code is to take <i> baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods of time while refactoring.
+One good piece of advice for both refactoring and writing new code is to take <i>baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods of time while refactoring.
 
 </div>
 
@@ -31,7 +31,7 @@ Change the application's notifications to use Redux at this point of the exercis
 
 <i>Note</i> that this and the next two exercises are quite laborious but incredibly educational.
 
-Store the information about blog posts in the Redux store. In this exercise it is enough that you can see the blogs in backend and create a new blog.
+Store the information about blog posts in the Redux store. In this exercise, it is enough that you can see the blogs in the backend and create a new blog.
 
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 
@@ -41,7 +41,7 @@ Expand your solution so that it is again possible to like and delete a blog.
 
 #### 7.12: redux, step4
 
-Store the information about the signed in user in the Redux store.
+Store the information about the signed-in user in the Redux store.
 
 #### 7.13: Users view
 
@@ -51,7 +51,7 @@ Implement a view to the application that displays all of the basic information r
 
 #### 7.14: Individual user view
 
-Implement a view for individual users, that displays all of the blog posts added by that user:
+Implement a view for individual users that displays all of the blog posts added by that user:
 
 ![](../../images/7/44.png)
 
@@ -65,7 +65,7 @@ You can access the view by clicking the name of the user in the view that lists 
 
 The error message will occur if you refresh the page for an individual user.
 
-The cause of the issue is that when we navigate directly to the page of an individual user, the React application has not yet received the data from the backend. One solution for fixing the problem is to use conditional rendering:
+The cause of the issue is that, when we navigate directly to the page of an individual user, the React application has not yet received the data from the backend. One solution for fixing the problem is to use conditional rendering:
 
 ```js
 const User = () => {
@@ -90,7 +90,7 @@ Implement a separate view for blog posts. You can model the layout of your view 
 
 ![](../../images/7/45.png)
 
-Users should be able to access the view by clicking the name of the blog post in the view that lists of all of the blog posts.
+Users should be able to access the view by clicking the name of the blog post in the view that lists all of the blog posts.
 
 ![](../../images/7/46.png)
 
@@ -110,7 +110,7 @@ Implement the functionality for commenting on blog posts:
 
 Comments should be anonymous, meaning that they are not associated to the user who left the comment.
 
-In this exercise it is enough for the frontend to only display the comments that the application receives from the backend.
+In this exercise, it is enough for the frontend to only display the comments that the application receives from the backend.
 
 An appropriate mechanism for adding comments to a blog post would be an HTTP POST request to the <i>api/blogs/:id/comments</i> endpoint.
 
