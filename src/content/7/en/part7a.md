@@ -9,13 +9,13 @@ lang: en
 
 The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
 
-In addition to the exercises in this and the next chapter, there are a series of exercises which we'll be revising what we've learned during the whole course by expanding the Bloglist application, which we worked on during parts 4 and 5.
+In addition to the exercises in this and the next chapter, there are a series of exercises in which we'll be revising what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5.
 
 ### Application navigation structure
 
 Following part 6, we return to React without Redux.
 
-It is very common for web-applications to have a navigation bar, which enables switching the view of the application.
+It is very common for web applications to have a navigation bar, which enables switching the view of the application.
 
 Our app could have a main page
 
@@ -27,7 +27,7 @@ and separate pages for showing information on notes and users:
 
 In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making an HTTP GET request to the server and rendering the HTML representing the view that was returned.
 
-In single page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching view, they are only for fetching JSON formatted data, which the new view might require for it to be shown.
+In single page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching view, they are only for fetching JSON-formatted data, which the new view might require for it to be shown.
 
 The navigation bar and an application containing multiple views is very easy to implement using React.
 
@@ -95,10 +95,10 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 Each view is implemented as its own component. We store the view component information in the application state called <i>page</i>. This information tells us which component, representing a view, should be shown below the menu bar.
 
-However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
+However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self-made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
 
 <!-- Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTraining/react-router) joka tarjoaa erinomaisen ratkaisun React-sovelluksen navigaation hallintaan. -->
-Luckily, React has the [React router](https://github.com/ReactTraining/react-router)-library, which provides an excellent solution for managing navigation in a React-application.
+Luckily, React has the [React router](https://github.com/ReactTraining/react-router) library which provides an excellent solution for managing navigation in a React application.
 
 Let's change the above application to use React router. First, we install React router with the command
 
@@ -148,7 +148,7 @@ const App = () => {
 }
 ```
 
-Routing, or the conditional rendering of components <i>based on the url</i> in the browser, is used by placing components as children of the <i>Router</i> component, meaning inside <i>Router</i>-tags.
+Routing, or the conditional rendering of components <i>based on the url</i> in the browser, is used by placing components as children of the <i>Router</i> component, meaning inside <i>Router</i> tags.
 
 Notice that, even though the component is referred to by the name <i>Router</i>, we are in fact talking about [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), because here the import happens by renaming the imported object:
 
@@ -163,9 +163,9 @@ According to the [manual](https://reacttraining.com/react-router/web/api/Browser
 
 > <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
-Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React-application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
+Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
-Inside the router we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. For example,
+Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. For example,
 
 ```js
 <Link to="/notes">notes</Link>
@@ -182,10 +182,10 @@ Components rendered based on the URL of the browser are defined with the help of
 ```
 
 <!-- määrittelee, että jos selaimen osoiteena on <i>/notes</i>, renderöidään komponentti <i>Notes</i>. -->
-defines, that if the browser address is <i>/notes</i>, we render the <i>Notes</i> component.
+defines that, if the browser address is <i>/notes</i>, we render the <i>Notes</i> component.
 
 <!-- Urliin perustuen renderöitävät komponentit on sijoitettu [Swithch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi -->
-We wrap the components to be rendered based on the url with a [Switch](https://reacttraining.com/react-router/web/api/Switch)-component
+We wrap the components to be rendered based on the url with a [Switch](https://reacttraining.com/react-router/web/api/Switch) component
 
 ```js 
 <Switch>
@@ -204,7 +204,7 @@ We wrap the components to be rendered based on the url with a [Switch](https://r
 <!-- Switch saa aikaan sen, että renderöitävä komponentti on ensimmäinen, jonka <i>path</i> vastaa osoiterivin polkua. -->
 The switch works by rendering the first component whose <i>path</i> matches the url in the browser's address bar.
 
-Note that the order of the components is important. If we put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, the rest components would never get a chance to render because every path start with "/" will consider matched with first component:
+Note that the order of the components is important. If we put the <i>Home</i> component, whose path is <i> path="/"</i>, first, the rest of the components would never get a chance to render because every path start with "/" will consider matched with first component:
 
 ```js 
 <Switch>
@@ -247,7 +247,7 @@ const Notes = ({notes}) => (
 ```
 
 <!-- Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reititykseen seuraavasti: -->
-We define parametrized urls in the routing in <i>App</i>-component as follows:
+We define parameterized urls in the routing in <i>App</i> component as follows:
 
 ```js
 <Router>
@@ -303,14 +303,14 @@ const Note = ({ notes }) => {
 }
 ```
 
-The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react-router.
+The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react router.
 
 ### useHistory
 
 <!-- Sovellukseen on myös toteutettu erittäin yksinkertainen kirjautumistoiminto. Jos sovellukseen ollaan kirjautuneena, talletetaan tieto kirjautuneesta käyttäjästä komponentin <i>App</i> tilaan <i>user</i>. -->
-We have also implemented a simple log in function in our application. If a user is logged in, information about a logged in user is saved to the <i>user</i> field of the state of the <i>App</i> component.
+We have also implemented a simple login function in our application. If a user is logged in, information about a logged-in user is saved to the <i>user</i> field of the state of the <i>App</i> component.
 
-The option to navigate to the <i>Login</i>-view is rendered conditionally in the menu.
+The option to navigate to the <i>Login</i> view is rendered conditionally in the menu.
 
 ```js
 <Router>
@@ -369,14 +369,14 @@ const Login = (props) => {
 ```
 
 <!-- Mielenkiinoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti. -->
-What is interesting about this component is the use of the [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) function of the react-router.
+What is interesting about this component is the use of the [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) function of the react router.
 With this function, the component can access a [history](https://reacttraining.com/react-router/web/api/history) object. The history object can be used to modify the browser's url programmatically.
 
 <!-- Kirjautumisen yhteydessä kutsutaan history-olion metodia push. Komento _history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>. -->
-With user log in, we call the push method of the history object. The  _history.push('/')_ call causes the browser's url to change to _/_ and the application renders the corresponding component <i>Home</i>.
+With user login, we call the push method of the history object. The  _history.push('/')_ call causes the browser's url to change to _/_ and the application renders the corresponding component <i>Home</i>.
 
 
-Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook-functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook-function from a conditional statement.
+Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.
 
 ### redirect
 
@@ -388,7 +388,7 @@ There is one more interesting detail about the <i>Users</i> route:
 </Route>
 ```
 
-If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view
+If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the <i>Redirect</i> component to the login view:
 
 ```js
 <Redirect to="/login" />
@@ -482,9 +482,9 @@ const Note = ({ note }) => {
 }
 ```
 
-One way to do this would be to use react-router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component.
+One way to do this would be to use react router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component.
 
-It is not possible to use <i>useRouteMatch</i>-hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
+It is not possible to use the <i>useRouteMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 
 ```js
 ReactDOM.render(
@@ -545,7 +545,7 @@ Every time the component is rendered, so practically every time the browser's ur
 const match = useRouteMatch('/notes/:id')
 ```
 
-If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
+If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parameterized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
 
 ```js
 const note = match 
@@ -562,7 +562,7 @@ The completed code can be found [here](https://github.com/fullstack-hy/misc/blob
 
 Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy/routed-anecdotes> as the starting point for the exercises.
 
-If you clone the project into an existing git repository remember to <i>delete the git configuration of the cloned application:</i>
+If you clone the project into an existing git repository, remember to <i>delete the git configuration of the cloned application:</i>
 
 ```bash
 cd routed-anecdotes   // go first to directory of the cloned repository
@@ -578,13 +578,13 @@ npm start
 
 #### 7.1: routed anecdotes, step1
 
-Add React Router to the application so that by clicking links in the <i>Menu</i>-component the view can be changed.
+Add React Router to the application so that by clicking links in the <i>Menu</i> component the view can be changed.
 
 At the root of the application, meaning the path _/_, show the list of anecdotes:
 
 ![](../../assets/teht/40.png)
 
-The <i>Footer</i>-component should always be visible at the bottom.
+The <i>Footer</i> component should always be visible at the bottom.
 
 The creation of a new anecdote should happen e.g. in the path <i>create</i>:
 
@@ -596,7 +596,7 @@ Implement a view for showing a single anecdote:
 
 ![](../../assets/teht/42.png)
 
-Navigating to the page showing the single anecdote is done by clicking the name of that anecdote
+Navigating to the page showing the single anecdote is done by clicking the name of that anecdote:
 
 ![](../../assets/teht/43.png)
 
