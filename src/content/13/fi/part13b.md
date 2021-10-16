@@ -755,7 +755,7 @@ Muuta virheidenkäsittelymiddlewarea siten, että se antaa tilanteessa kuvaavamm
 
 #### Tehtävä 13.10.
 
-Laajenna sovellusta siten, että blogi liitetään tokenin perusteella identifioitavalle kirjautuneelle käyttäjälle. Joudut siis toteuttamaan myös tokenin palauttavan kirjaantumisesta huolehtivan endpointin _POST api/login_
+Laajenna sovellusta siten, että blogi liitetään tokenin perusteella identifioitavalle kirjautuneelle käyttäjälle. Joudut siis toteuttamaan myös tokenin palauttavan kirjaantumisesta huolehtivan endpointin _POST /api/login_
 
 #### Tehtävä 13.11.
 
@@ -987,21 +987,28 @@ Reitin palauttama JSON voi näyttää esim. seuraavalta:
 ```js
 [
   {
-    author: "Jami Kousa",
-    articles: "3",
+    author: "Martin Fowler",
+    blogs: "2",
     likes: "10"
   },
   {
-    author: "Kalle Ilves",
-    articles: "1",
+    author: "Robert C. Martin",
+    blogs: "1",
+    likes: "0"
+  },
+  {
+    author: "Cam Jackson",
+    blogs: "1",
     likes: "2"
   },
   {
     author: "Dan Abramov",
-    articles: "1",
-    likes: "4"
+    blogs: "3",
+    likes: "7"
   }
 ]
 ```
+
+Bonustehtävä: järjestä palautettava data likejen perusteella, tee järjestäminen tietokantakyselyssä.
 
 </div>
