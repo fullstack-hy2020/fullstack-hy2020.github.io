@@ -534,8 +534,8 @@ Make sure that the todo-front works with todo-back. It will require changes to t
 
 If you already got this working during a previous exercise you may skip this.
 
-Make sure that the development environment is now fully functionat, that is
-- all features of the todo app wod
+Make sure that the development environment is now fully functional, that is
+- all features of the todo app works
 - you can edit the source files <i>and</i> the changes take effect through hot reload in case of frontend and by reloading the app in case of backend
 
 </div>
