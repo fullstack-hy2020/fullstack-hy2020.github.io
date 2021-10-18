@@ -387,6 +387,10 @@ The test case obviously will not pass at this point. We are essentially practici
 
 Let's validate the uniqueness of the username with the help of Mongoose validators. As we mentioned in exercise [3.19](/en/part3/validation_and_es_lint#exercises-3-19-3-21), Mongoose does not have a built-in validator for checking the uniqueness of a field. We can find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package. Let's install it:
 
+  //There are few issues with updated mongoose-unique-validator, a recommended version is 2.0.1. Tested various versions before concluding. 
+  //Error with other versions: "User validation failed: _id: Error, expected `_id` to be unique"
+  //Link to the issue: https://github.com/blakehaswell/mongoose-unique-validator/issues/88#issuecomment-429189084
+  
 ```bash
 npm install mongoose-unique-validator
 ```
