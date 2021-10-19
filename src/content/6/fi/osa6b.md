@@ -227,7 +227,7 @@ ReactDOM.render(
 )
 ```
 
-Korjataan sitten bugi, joka johtuu siitä, että koodi olettaa storen tilan olevan mustiinpanot tallettava taulukko:
+Korjataan sitten bugi, joka johtuu siitä, että koodi olettaa storen tilan olevan muistiinpanot tallettava taulukko:
 
 ![](../../images/6/7ea.png)
 

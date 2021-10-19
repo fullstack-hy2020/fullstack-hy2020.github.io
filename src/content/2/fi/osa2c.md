@@ -63,7 +63,7 @@ Tutustumme palvelinpuolen toteuttamisen periaatteisiin tarkemmin kurssin [osassa
 
 ### Selain suoritusympäristönä
 
-Ensimmäisenä tehtävänämme on siis hakea React-sovellukseen jo olemassaolevat mustiinpanot osoitteesta <http://localhost:3001/notes>.
+Ensimmäisenä tehtävänämme on siis hakea React-sovellukseen jo olemassaolevat muistiinpanot osoitteesta <http://localhost:3001/notes>.
 
 Osan 0 [esimerkkiprojektissa](/osa0/web_sovelluksen_toimintaperiaatteita#selaimessa-suoritettava-sovelluslogiikka) nähtiin jo eräs tapa hakea JavaScript-koodista palvelimella olevaa dataa. Esimerkin koodissa data haettiin [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest)- eli XHR-olion avulla muodostetulla HTTP-pyynnöllä. Kyseessä on vuonna 1999 lanseerattu tekniikka, jota kaikki web-selaimet ovat jo pitkään tukeneet.
 
