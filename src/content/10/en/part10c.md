@@ -522,6 +522,8 @@ Because <em>AsyncStorage</em> keys are global, it is usually a good idea to add 
 
 We can add an item to the storage using the [AsyncStorage.setItem](https://react-native-async-storage.github.io/async-storage/docs/api#setitem) method. The first argument of the method is the item's key and the second argument its value. The value <i>must be a string</i>, so we need to serialize non-string values as we did with the <em>JSON.stringify</em> method. The [AsyncStorage.getItem](https://react-native-async-storage.github.io/async-storage/docs/api/#getitem) method can be used to get an item from the storage. The argument of the method is the item's key, of which value will be resolved. The [AsyncStorage.removeItem](https://react-native-async-storage.github.io/async-storage/docs/api/#removeitem) method can be used to remove the item with the provided key from the storage.
 
+Note: AsyncStorage is not suitable for storing sensitive information, for example an authentication token. A good alternative for storing sensitive information is expo's [SecureStorage](https://docs.expo.dev/versions/latest/sdk/securestore/). SecureStorage works similarly to AsyncStorage, the main exception is that SecureStorage encrypts the key-value pairs before storing them.
+
 </div>
 
 <div class="tasks">
