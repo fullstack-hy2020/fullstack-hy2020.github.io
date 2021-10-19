@@ -683,7 +683,7 @@ You can now test the configuration by adding the line
 const redis = require('../redis')
 ```
 
-to the express server eg. in file <i>routes/index.js</i>. If noting happens, the configuration is done right. If not, the server crashes:
+to the express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes:
 
 ```bash
 events.js:291
