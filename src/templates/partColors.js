@@ -11,5 +11,6 @@ export const partColors = {
   9: 'light-green',
   10: 'part10-light-blue',
   11: 'purple',
-  12: 'pale-pink'
+  12: 'pale-pink',
+  13: 'sqlgreen'
 };
