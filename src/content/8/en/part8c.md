@@ -423,7 +423,9 @@ And the mutations resolver:
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
     const nonFriendAlready = (person) => 
-      !currentUser.friends.map(f => f._id).includes(person._id)
+      !currentUser.friends.map(f => f._id).includes(person._id)\
+      //Based on my experience and a quick Google, utilizing .includes() to compare these ObjectIds won't work (always getting false)
+      // f._id.equals(person._id) works for me in a reducer or for loop; or simply converting them toString() in mapping before .includes(person._id.toString())
 
     if (!currentUser) {
       throw new AuthenticationError("not authenticated")
