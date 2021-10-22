@@ -321,11 +321,11 @@ const History = (props) => {
 }
 
 // highlight-start
-const Button = ({ handleClick, text }) => (
+const Button = ({ handleClick, text }) => {
   <button onClick={handleClick}>
     {text}
   </button>
-)
+}
 // highlight-end
 
 const App = () => {
@@ -390,11 +390,11 @@ don't write more code but rather find and fix the problem **immediately**. There
 Old school, print-based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ onClick, text }) => (
+const Button = ({ onClick, text }) => {
   <button onClick={onClick}>
     {text}
   </button>
-)
+}
 ```
 
 is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:
@@ -916,11 +916,11 @@ Choosing between the two presented ways of defining your event handlers is mostl
 Let's extract the button into its own component:
 
 ```js
-const Button = (props) => (
+const Button = (props) => {
   <button onClick={props.handleClick}>
     {props.text}
   </button>
-)
+}
 ```
 
 The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop.
@@ -937,11 +937,11 @@ We will change the application by defining a new component inside of the <i>App<
 
 ```js
 // This is the right place to define a component
-const Button = (props) => (
+const Button = (props) => {
   <button onClick={props.handleClick}>
     {props.text}
   </button>
-)
+}
 
 const App = () => {
   const [value, setValue] = useState(10)
@@ -971,11 +971,11 @@ Let's instead move the <i>Display</i> component function to its correct place, w
 ```js
 const Display = props => <div>{props.value}</div>
 
-const Button = (props) => (
+const Button = (props) => {
   <button onClick={props.handleClick}>
     {props.text}
   </button>
-)
+}
 
 const App = () => {
   const [value, setValue] = useState(10)
