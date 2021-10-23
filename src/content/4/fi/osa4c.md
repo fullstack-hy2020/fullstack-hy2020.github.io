@@ -7,29 +7,29 @@ lang: fi
 
 <div class="content">
 
-Haluamme toteuttaa sovellukseemme käyttäjien hallinnan. Käyttäjät tulee tallettaa tietokantaan ja jokaisesta muistiinpanosta tulee tietää sen luonut käyttäjä. Muistiinpanojen poisto ja editointi tulee olla sallittua ainoastaan muistiinpanot tehneelle käyttäjälle.
+Haluamme toteuttaa sovellukseemme käyttäjien hallinnan. Käyttäjät tulee tallettaa tietokantaan, ja jokaisesta muistiinpanosta tulee tietää sen luonut käyttäjä. Muistiinpanojen poiston ja editoinnin tulee olla sallittua ainoastaan muistiinpanot tehneelle käyttäjälle.
 
 Aloitetaan lisäämällä tietokantaan tieto käyttäjistä. Käyttäjän <i>User</i> ja muistiinpanojen <i>Note</i> välillä on yhden suhde moneen -yhteys:
 
 ![](https://yuml.me/a187045b.png)
 
-Relaatiotietokantoja käytettäessä ratkaisua ei tarvitsisi juuri miettiä. Molemmille olisi oma taulunsa ja muistiinpanoihin liitettäisiin sen luonutta käyttäjää vastaava id vierasavaimeksi (foreign key).
+Relaatiotietokantoja käytettäessä ratkaisua ei tarvitsisi juuri miettiä. Molemmille olisi oma taulunsa, ja muistiinpanoihin liitettäisiin sen luonutta käyttäjää vastaava id vierasavaimeksi (foreign key).
 
-Dokumenttitietokantoja käytettäessä tilanne on kuitenkin toinen, erilaisia tapoja mallintaa tilanne on useita.
+Dokumenttitietokantoja käytettäessä tilanne on kuitenkin toinen ja erilaisia tapoja mallintaa tilanne on useita.
 
-Olemassaoleva ratkaisumme tallentaa jokaisen luodun muistiinpanon tietokantaan <i>notes</i>-kokoelmaan eli <i>collectioniin</i>. Jos emme halua muuttaa tätä, lienee luontevinta tallettaa käyttäjät omaan kokoelmaansa, esim. nimeltään <i>users</i>.
+Olemassaoleva ratkaisumme tallentaa jokaisen luodun muistiinpanon tietokantaan <i>notes</i>-kokoelmaan eli <i>collectioniin</i>. Jos emme halua muuttaa tätä, lienee luontevinta tallettaa käyttäjät omaan kokoelmaansa, nimeltään vaikkapa <i>users</i>.
 
 Mongossa voidaan kaikkien dokumenttitietokantojen tapaan käyttää olioiden id:itä viittaamaan muissa kokoelmissa talletettaviin dokumentteihin, vastaavasti kuten viiteavaimia käytetään relaatiotietokannoissa.
 
-Dokumenttitietokannat kuten Mongo eivät kuitenkaan tue relaatiotietokantojen <i>liitoskyselyitä</i> vastaavaa toiminnallisuutta, joka mahdollistaisi useaan kokoelmaan kohdistuvan tietokantahaun. Tämä ei tarkalleen ottaen enää pidä paikkaansa, sillä versiosta 3.2. alkaen Mongo on tukenut useampaan kokoelmaan kohdistuvia [lookup-aggregaattikyselyitä](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). Emme kuitenkaan käsittele niitä kurssilla.
+Dokumenttitietokannat kuten Mongo eivät kuitenkaan tue relaatiotietokantojen <i>liitoskyselyitä</i> vastaavaa toiminnallisuutta, joka mahdollistaisi useaan kokoelmaan kohdistuvan tietokantahaun. Tämä ei tarkalleen ottaen enää pidä paikkaansa, sillä versiosta 3.2 alkaen Mongo on tukenut useampaan kokoelmaan kohdistuvia [lookup-aggregaattikyselyitä](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). Emme kuitenkaan käsittele niitä kurssilla.
 
-Jos tarvitsemme liitoskyselyitä vastaavaa toiminnallisuutta, tulee se toteuttaa sovelluksen tasolla, eli käytännössä tekemällä tietokantaan useita kyselyitä. Tietyissä tilanteissa mongoose-kirjasto osaa hoitaa liitosten tekemisen, jolloin kysely näyttää mongoosen käyttäjälle toimivan liitoskyselyn tapaan. Mongoose tekee kuitenkin näissä tapauksissa taustalla useamman kyselyn tietokantaan.
+Jos tarvitsemme liitoskyselyitä vastaavaa toiminnallisuutta, tulee se toteuttaa sovelluksen tasolla eli käytännössä tekemällä tietokantaan useita kyselyitä. Tietyissä tilanteissa Mongoose-kirjasto osaa hoitaa liitosten tekemisen, jolloin kysely näyttää Mongoosen käyttäjälle toimivan liitoskyselyn tapaan. Mongoose tekee kuitenkin näissä tapauksissa taustalla useamman kyselyn tietokantaan.
 
 ### Viitteet kokoelmien välillä
 
 Jos käyttäisimme relaatiotietokantaa, muistiinpano sisältäisi <i>viiteavaimen</i> sen tehneeseen käyttäjään. Dokumenttitietokannassa voidaan toimia samoin.
 
-Oletetaan että kokoelmassa <i>users</i> on kaksi käyttäjää:
+Oletetaan, että kokoelmassa <i>users</i> on kaksi käyttäjää:
 
 ```js
 [
@@ -44,7 +44,7 @@ Oletetaan että kokoelmassa <i>users</i> on kaksi käyttäjää:
 ]
 ```
 
-Kokoelmassa <i>notes</i> on kolme muistiinpanoa, kaikkien kenttä <i>user</i> viittaa <i>users</i>-kentässä olevaan käyttäjään:
+Kokoelmassa <i>notes</i> on kolme muistiinpanoa, joiden kaikkien kenttä <i>user</i> viittaa <i>users</i>-kokoelmassa olevaan käyttäjään:
 
 ```js
 [
@@ -69,7 +69,7 @@ Kokoelmassa <i>notes</i> on kolme muistiinpanoa, kaikkien kenttä <i>user</i> vi
 ]
 ```
 
-Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on talletettava muistiinpanoihin, ne voivat olla <i>myös</i> (tai ainoastaan) käyttäjien yhteydessä:
+Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on talletettava muistiinpanoihin, vaan ne voivat olla <i>myös</i> (tai ainoastaan) käyttäjien yhteydessä:
 
 ```js
 [
@@ -120,15 +120,15 @@ Dokumenttitietokannat tarjoavat myös radikaalisti erilaisen tavan datan organis
 ]
 ```
 
-Muistiinpanot olisivat tässä skeemaratkaisussa siis yhteen käyttäjään alisteisia kenttiä, niillä ei olisi edes omaa identiteettiä, eli id:tä tietokannan tasolla.
+Muistiinpanot olisivat tässä skeemaratkaisussa siis yhteen käyttäjään alisteisia kenttiä, eikä niillä olisi edes omaa identiteettiä eli id:tä tietokannan tasolla.
 
-Dokumenttitietokantojen yhteydessä skeeman rakenne ei siis ole ollenkaan samalla tavalla ilmeinen kuin relaatiotietokannoissa, ja valittava ratkaisu kannattaa määritellä siten että se tukee parhaalla tavalla sovelluksen käyttötapauksia. Tämä ei luonnollisestikaan ole helppoa, sillä järjestelmän kaikki käyttötapaukset eivät yleensä ole selvillä kun projektin alkuvaiheissa mietitään datan organisointitapaa.
+Dokumenttitietokantojen yhteydessä skeeman rakenne ei siis ole ollenkaan samalla tavalla ilmeinen kuin relaatiotietokannoissa, ja valittava ratkaisu kannattaa määritellä siten, että se tukee parhaalla tavalla sovelluksen käyttötapauksia. Tämä ei luonnollisestikaan ole helppoa, sillä järjestelmän kaikki käyttötapaukset eivät yleensä ole selvillä kun projektin alkuvaiheissa mietitään datan organisointitapaa.
 
 Hieman paradoksaalisesti tietokannan tasolla skeematon Mongo edellyttääkin projektin alkuvaiheissa jopa radikaalimpien datan organisoimiseen liittyvien ratkaisujen tekemistä kuin tietokannan tasolla skeemalliset relaatiotietokannat, jotka tarjoavat keskimäärin kaikkiin tilanteisiin melko hyvin sopivan tavan organisoida dataa.
 
-### Käyttäjien mongoose-skeema
+### Käyttäjien Mongoose-skeema
 
-Päätetään tallettaa käyttäjän yhteyteen myös tieto käyttäjän luomista muistiinpanoista, eli käytännössä muistiinpanojen id:t. Määritellään käyttäjää edustava model tiedostoon <i>models/user.js</i>
+Päätetään tallettaa käyttäjän yhteyteen myös tieto käyttäjän luomista muistiinpanoista eli käytännössä muistiinpanojen id:t. Määritellään käyttäjää edustava model tiedostoon <i>models/user.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -160,7 +160,7 @@ const User = mongoose.model('User', userSchema)
 module.exports = User
 ```
 
-Muistiinpanojen id:t on talletettu käyttäjien sisälle taulukkona mongo-id:itä. Määrittely on seuraava
+Muistiinpanojen id:t on talletettu käyttäjien sisälle taulukkona Mongo-id:itä. Määrittely on seuraava:
 
 ```js
 {
@@ -169,9 +169,9 @@ Muistiinpanojen id:t on talletettu käyttäjien sisälle taulukkona mongo-id:it�
 }
 ```
 
-kentän tyyppi on <i>ObjectId</i> joka viittaa <i>note</i>-tyyppisiin dokumentteihin. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä, joka viittaa nimenomaan muistiinpanoihin, kyseessä onkin puhtaasti mongoosen syntaksi.
+Kentän tyyppi on <i>ObjectId</i>, joka viittaa <i>note</i>-tyyppisiin dokumentteihin. Mongo ei itsessään tiedä mitään siitä, että kyse on kentästä, joka viittaa nimenomaan muistiinpanoihin, vaan kyseessä on puhtaasti Mongoosen syntaksi.
 
-Laajennetaan tiedostossa <i>model/note.js</i> olevaa muistiinpanon skeemaa siten, että myös muistiinpanossa on tieto sen luoneesta käyttäjästä
+Laajennetaan tiedostossa <i>model/note.js</i> olevaa muistiinpanon skeemaa siten, että myös muistiinpanossa on tieto sen luoneesta käyttäjästä:
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -191,11 +191,11 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-Relaatiotietokantojen käytänteistä poiketen <i>viitteet on nyt talletettu molempiin dokumentteihin</i>, muistiinpano viittaa sen luoneeseen käyttäjään ja käyttäjä sisältää taulukollisen viitteitä sen luomiin muistiinpanoihin.
+Relaatiotietokantojen käytänteistä poiketen <i>viitteet on nyt talletettu molempiin dokumentteihin</i>. Muistiinpano viittaa sen luoneeseen käyttäjään ja käyttäjä sisältää taulukollisen viitteitä sen luomiin muistiinpanoihin.
 
 ### Käyttäjien luominen
 
-Toteutetaan seuraavaksi route käyttäjien luomista varten. Käyttäjällä on siis <i>username</i> jonka täytyy olla järjestelmässä yksikäsitteinen, nimi eli <i>name</i> sekä <i>passwordHash</i>, eli salasanasta [yksisuuntaisen funktion](https://en.wikipedia.org/wiki/Cryptographic_hash_function) perusteella laskettu tunniste. Salasanojahan ei ole koskaan viisasta tallentaa tietokantaan selväsanaisena!
+Toteutetaan seuraavaksi route käyttäjien luomista varten. Käyttäjällä on siis <i>username</i> (jonka täytyy olla järjestelmässä yksikäsitteinen), nimi eli <i>name</i> sekä <i>passwordHash</i> eli salasanasta [yksisuuntaisen funktion](https://en.wikipedia.org/wiki/Cryptographic_hash_function) perusteella laskettu tunniste. <b>Salasanojahan ei ole koskaan viisasta tallentaa tietokantaan selväsanaisena!</b>
 
 Asennetaan salasanojen hashaamiseen käyttämämme [bcrypt](https://github.com/kelektiv/node.bcrypt.js)-kirjasto:
 
@@ -246,9 +246,9 @@ Tietokantaan siis <i>ei</i> talleteta pyynnön mukana tulevaa salasanaa, vaan fu
 
 Materiaalin tilamäärä ei valitettavasti riitä käsittelemään sen tarkemmin salasanojen [tallennuksen perusteita](https://codahale.com/how-to-safely-store-a-password/), esim. mitä maaginen luku 10 muuttujan [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) arvona tarkoittaa. Lue linkkien takaa lisää.
 
-Koodissa ei tällä hetkellä ole mitään virheidenkäsittelyä eikä validointeja, eli esim. käyttäjätunnuksen ja salasanan halutun muodon tarkastuksia.
+Koodissa ei tällä hetkellä ole mitään virheidenkäsittelyä eikä validointeja eli esim. käyttäjätunnuksen ja salasanan muodon tarkastuksia.
 
-Uutta ominaisuutta voidaan ja kannattaakin joskus testailla käsin esim. postmanilla. Käsin tapahtuva testailu muuttuu kuitenkin nopeasti työlääksi, etenkin kun tulemme pian vaatimaan, että samaa käyttäjätunnusta ei saa tallettaa kantaan kahteen kertaan.
+Uutta ominaisuutta voi ja kannattaakin joskus testailla käsin esim. Postmanilla. Käsin tapahtuva testailu muuttuu kuitenkin nopeasti työlääksi, etenkin kun tulemme pian vaatimaan, että samaa käyttäjätunnusta ei saa tallettaa kantaan kahteen kertaan.
 
 Pienellä vaivalla voimme tehdä automaattisesti suoritettavat testit, jotka helpottavat sovelluksen kehittämistä merkittävästi.
 
@@ -343,10 +343,9 @@ describe('when there is initially one user at db', () => {
 })
 ```
 
-Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt oleellisesti [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, uuden ominaisuuden testi on kirjoitettu ennen ominaisuuden ohjelmointia.
+Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, eli uuden ominaisuuden testi kirjoitetaan ennen ominaisuuden ohjelmointia.
 
-Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellisen osan tehtävässä [3.19](/osa3/validointi_ja_es_lint#tehtavat-3-19-3-21) mainittiin, Mongoose ei tarjoa valmista validaattoria kentän uniikkiuden tarkastamiseen. Tilanteeseen ratkaisun tarjoaa npm-pakettina asennettava
-[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus
+Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellisen osan tehtävässä [3.19](/osa3/validointi_ja_es_lint#tehtavat-3-19-3-21) mainittiin, Mongoose ei tarjoa valmista validaattoria kentän uniikkiuden tarkastamiseen. Tilanteeseen ratkaisun tarjoaa npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus:
 
 ```bash
 npm install mongoose-unique-validator
@@ -390,11 +389,11 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-Lista näyttää seuraavalta
+Lista näyttää seuraavalta:
 
 ![](../../images/4/9.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7), branchissä <i>part4-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-7), branchissä <i>part4-7</i>.
 
 ### Muistiinpanon luominen
 
@@ -438,7 +437,7 @@ user.notes = user.notes.concat(savedNote._id)
 await user.save()
 ```
 
-Kokeillaan nyt lisätä uusi muistiinpano
+Kokeillaan nyt lisätä uusi muistiinpano:
 
 ![](../../images/4/10e.png)
 
@@ -469,7 +468,7 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa <i>find</i> perään. Populaten parametri määrittelee, että <i>user</i>-dokumenttien <i>notes</i>-kentässä olevat <i>note</i>-olioihin viittaavat <i>id</i>:t korvataan niitä vastaavilla dokumenteilla.
+Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjutetaan kyselyä vastaavan metodikutsun (tässä tapauksessa <i>find</i>) perään. Populaten parametri määrittelee, että <i>user</i>-dokumenttien <i>notes</i>-kentässä olevat <i>note</i>-olioihin viittaavat <i>id</i>:t korvataan niitä vastaavilla dokumenteilla.
 
 Lopputulos on jo melkein haluamamme kaltainen:
 
@@ -486,7 +485,7 @@ usersRouter.get('/', async (request, response) => {
 });
 ```
 
-Tulos on täsmälleen sellainen kuin haluamme
+Tulos on täsmälleen sellainen kuin haluamme:
 
 ![](../../images/4/14ea.png)
 
@@ -501,11 +500,11 @@ notesRouter.get('/', async (request, response) => {
 });
 ```
 
-Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>.
+Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>:
 
 ![](../../images/4/15ea.png)
 
-Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä siitä, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat käyttäjä-kokoelman dokumentteihin.
+Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä sille, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat <i>users</i>-kokoelman dokumentteihin.
 
 Mongoosen <i>populate</i>-funktion toiminnallisuus perustuu siihen, että olemme määritelleet viitteiden "tyypit" olioiden Mongoose-skeemaan <i>ref</i>-kentän avulla:
 
@@ -525,6 +524,6 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8), branchissä <i>part4-8</i>.
 
 </div>
