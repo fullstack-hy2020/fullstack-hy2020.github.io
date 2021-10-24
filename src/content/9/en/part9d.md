@@ -842,7 +842,7 @@ React.useEffect(() => {
       dispatch({ type: "SET_PATIENT_LIST", payload: patients });
     } catch (error: unknown) {
       let errorMessage = 'Something went wrong.'
-      if(axios.isAxiosError(error)) {
+      if(axios.isAxiosError(error) && error.response) {
         errorMessage += ' Error: ' + error.response.data.message;
       }
       console.error(errorMessage);
