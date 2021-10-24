@@ -236,12 +236,18 @@ const calculator = (a: number, b: number, op : Operation) : Result => {
 
 try {
   console.log(calculator(1, 5 , 'divide'))
-} catch (e) {
-  console.log('Something went wrong, error message: ', e.message);
+} catch (error: unknown) {
+  let errorMessage = 'Something went wrong.'
+  if(error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
 }
 ```
 
 <!-- The programs we've written are alright, but it sure would be better if there were a way to use command line arguments instead of always having to change the code to calculate different things. Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. But something is not right: -->
+As of TypeScript 4.0, <i>catch</i> blocks allow you to specify the type of catch clause variables. Pre-4.4, all <i>catch</i> clause variables were of type <i>any</i>. However, with the release of 4.4, the default type is <i>unknown</i>. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type.
+
 The programs we have written are alright, but it sure would be better if we could use command line arguments instead of always having to change the code to calculate different things.  
 Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>.
 But something is not right:
@@ -363,9 +369,12 @@ const multiplicator = (a: number, b: number, printText: string) => {
 try {
   const { value1, value2 } = parseArguments(process.argv);
   multiplicator(value1, value2, `Multiplied ${value1} and ${value2}, the result is:`);
-} catch (e) {
-  console.log('Error, something bad happened, message: ', e.message);
-}
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.'
+  if(error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
 ```
 
 When we now run the program 
