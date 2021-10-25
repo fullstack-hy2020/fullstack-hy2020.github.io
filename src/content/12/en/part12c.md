@@ -234,7 +234,7 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-With this configuration, _docker-compose -f docker-compose.dev.yml up_ can run the application in development mode. You don't even need Node installed to develop it!
+With this configuration, _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
