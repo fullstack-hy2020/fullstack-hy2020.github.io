@@ -275,7 +275,7 @@ services:
     image: busybox # highlight-line
 ```
 
-The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose -f docker-compose.dev.yml up_ will also look like this:
+The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this:
 
 ```bash
 $ docker-compose up
