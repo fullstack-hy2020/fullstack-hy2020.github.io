@@ -601,7 +601,22 @@ Structure the app to submission repository as follows:
     ├── docker-compose.dev.yml
     └── docker-compose.yml
 ```
+### Submitting exercises and getting the credits
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers).
+
+Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers). Remember that you have to finish <i>all the exercises</i> to pass this part!
+
+Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
+
+![Submissions](../../images/11/21.png)
+
+Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
+
+**Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information.
+
+You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
+
+</div>
 
 </div>
