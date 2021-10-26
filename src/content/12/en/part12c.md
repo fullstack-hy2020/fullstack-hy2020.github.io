@@ -275,7 +275,7 @@ services:
     image: busybox # highlight-line
 ```
 
-The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose -f docker-compose.dev.yml up_ will also look like this:
+The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this:
 
 ```bash
 $ docker-compose up
@@ -313,7 +313,7 @@ $ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
 
 The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
-Let's change the port configuration in the <i>docker-compose.dev.yml</i> to emphasize this:
+Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
 
 ```yml
 services:
@@ -445,7 +445,7 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-To help us, docker-compose set up a network when we ran docker-compose up. It also added all of the containers in the docker-compose.yml to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
+To help us, docker-compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
 
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000
 
@@ -464,7 +464,7 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
-If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the docker-compose up.
+If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
 
 </div>
 
