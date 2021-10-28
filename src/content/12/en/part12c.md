@@ -311,7 +311,7 @@ $ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
+The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The <i>hello-front-dev</i> is the name of the container, which was given by us using _container\_name_ in the docker-compose file. And the port used is the port from which the application is available in that container. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
 Let's change the port configuration in the <i>docker-compose.dev.yml</i> to emphasize this:
 
