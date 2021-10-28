@@ -313,7 +313,7 @@ $ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
 
 The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The <i>hello-front-dev</i> is the name of the container, which was given by us using _container\_name_ in the docker-compose file. And the port used is the port from which the application is available in that container. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
-Let's change the port configuration in the <i>docker-compose.dev.yml</i> to emphasize this:
+Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
 
 ```yml
 services:
@@ -445,7 +445,7 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-To help us, docker-compose set up a network when we ran docker-compose up. It also added all of the containers in the docker-compose.yml to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
+To help us, docker-compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
 
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000
 
@@ -464,7 +464,7 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
-If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the docker-compose up.
+If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
 
 </div>
 
@@ -601,7 +601,22 @@ Structure the app to submission repository as follows:
     ├── docker-compose.dev.yml
     └── docker-compose.yml
 ```
+### Submitting exercises and getting the credits
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers).
+
+Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers). Remember that you have to finish <i>all the exercises</i> to pass this part!
+
+Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
+
+![Submissions](../../images/11/21.png)
+
+Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
+
+**Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information.
+
+You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
+
+</div>
 
 </div>

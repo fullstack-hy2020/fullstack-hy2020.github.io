@@ -1485,4 +1485,18 @@ Voit myös halutessasi käyttää jotain tarkoitukseen tehtyä npm-kirjastoa ses
 
 Tee tämän tehtävän edellyttämät tietokantamuutokset migraatioiden avulla.
 
+### Tehtävien palautus ja suoritusmerkinnän pyytäminen
+
+Tämän osat palautetaan osista 0-7 poiketen [palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-psql) omaan kurssi-instanasiinsa. Huomaa, että tarviset suoritusmerkintään osan kaikki tehtävät.
+
+Jos haluat suoritusmerkinnän, merkitse kurssi suoritetuksi:
+
+![Submissions](../../images/11/21.png)
+
+Huomautus "exam done in Moodle" viittaa [Full Stack Open kurssin kokeeseen](/en/part0/general_info#sign-up-for-the-exam), joka tulee olla suoritettuna ennen kun voit saada tästä osasta opintopisteet.
+
+**Huomaa**, että suoritusmerkintää ei voida kirjata, ellet ole ilmoittautunut tätä osaa vastaavaan "kurssiin palaan", katso lisätietoja ilmoittautumisesta [täältä](/osa0/yleista#osat-ja-suorittaminen).
+
+**Huomaa myös että**, suoritusmerkintöjä tästä osasta ei anneta ennen kuin betatestausvaihe on lopussa.
+
 </div>
