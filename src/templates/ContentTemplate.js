@@ -46,9 +46,9 @@ export default class ContentTemplate extends Component {
 
     links.map(i => {
       i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
-      i.classList.contains('language-switcher__language')
-        ? (i.target = i.target)
-        : (i.target = '_blank');
+      i.target = i.classList.contains('language-switcher__language')
+        ? i.target
+        : '_blank';
 
       function over() {
         i.style.backgroundColor = colors[partColors[frontmatter.part]];
@@ -149,9 +149,8 @@ export default class ContentTemplate extends Component {
       <Layout>
         <SEO
           lang={lang}
-          title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part} | ${
-            this.state.h1Title
-          }`}
+          title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part} | ${this.state.h1Title
+            }`}
           description={mainSEOdescription[lang]}
           keywords={[
             ...mainSEOtags,
