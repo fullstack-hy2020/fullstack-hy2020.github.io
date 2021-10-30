@@ -11,7 +11,7 @@ lang: zh
 <!-- The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter there is, as usual [exercises related to the theory in the chapter](/zh/part7/react_router#exercises-7-1-7-3). -->
 本课程第七章节的练习与以前的有一点不同。 在本章和下一章中，像往常一样有[与本章理论相关的练习](/zh/part7/react_router#exercises-7-1-7-3)。
 
-<!-- In addition to the exercises in this and the chapter, there is a series of exercises which revise what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5. -->
+<!-- In addition to the exercises in this and the next chapter, there are a series of exercises in which we'll be revising what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5. -->
 除了本章的练习外，还有一系列的练习，通过扩展我们在第4和第5章节中使用的 Bloglist 应用来复习我们在整个课程中学到的知识。
 
 ### Application navigation structure 
@@ -19,7 +19,7 @@ lang: zh
 <!-- Following part 6, we return to React without Redux. -->
 在学完第6章节后，我们回到没有 Redux 的 React。
 
-<!-- It is very common for web-applications to have a navigation bar, which enables switching the view of the application. -->
+<!-- It is very common for web applications to have a navigation bar, which enables switching the view of the application. -->
 对于 web 应用来说，有一个导航条是很常见的，它可以切换应用的视图。
 
 <!-- Our app could have a main page -->
@@ -35,7 +35,7 @@ lang: zh
 <!-- In an [old school web app](/zh/part0/web_应用的基础设施#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making a HTTP GET request to the server and rendering the HTML representing the view that was returned. -->
 在[老派的web应用](/zh/part0/web_应用的基础设施#traditional-web-applications)中，更改应用显示的页面将由浏览器向服务器发出 HTTP GET 请求并显示表示返回视图的 HTML 来完成。
 
-<!-- In single page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching view, they are only for fetching JSON formatted data, which the new view might require for it to be shown. -->
+<!-- In single page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching view, they are only for fetching JSON-formatted data, which the new view might require for it to be shown. -->
 在单页应用中，我们实际上总是在同一页上。 浏览器运行的 Javascript 代码会产生不同“页面”的错觉。 如果 HTTP 请求是在切换视图时发出的，那么它们只用于获取 JSON 格式的数据，新视图可能需要这些数据才能显示出来。
 
 <!-- The navigation bar and an application containing multiple views is very easy to implement using React. -->
@@ -107,12 +107,12 @@ ReactDOM.render(<App />, document.getElementById('root'))
 <!-- Each view is implemented as its own component. We store the view component information in the application state called <i>page</i>. This information tells us which component, representing a view, should be shown below the menu bar. -->
 每个视图都作为自己的组件实现。 我们将视图组件信息存储在名为<i>page</i> 的应用状态中。 这个信息告诉我们，表示视图的哪个组件应该显示在菜单栏下面。
 
-<!-- However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self made <i>routing</i>, which means the navigation management of the application, would get overly complicated. -->
+<!-- However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self-made <i>routing</i>, which means the navigation management of the application, would get overly complicated. -->
 然而，这种方法并不十分理想。 正如我们从图片中看到的，即使有时我们处于不同的视角，地址仍然保持不变。 每个视图最好都有自己的地址，例如使浏览器书签成为可能。<i>后退</i>-按钮 对于我们的应用也不能正常工作，这意味着<i>后退</i> 不会将您移动到以前显示的应用视图，而是移动到完全不同的位置。 如果应用变得更大，例如，我们希望为每个用户添加单独的视图和便笺，那么这个自制的<i>routing</i> (这意味着应用的导航管理)将变得过于复杂。
 
 
 
-<!-- Luckily React has the [React router](https://github.com/ReactTraining/react-router)-library, which provides an excellent solution for managing navigation in a React-application. -->
+<!-- Luckily React has the [React router](https://github.com/ReactTraining/react-router) library, which provides an excellent solution for managing navigation in a React application. -->
 幸运的是 React 有[React router](https://github.com/reacttraining/React-router)-库，它为管理 React-application 中的导航提供了一个很好的解决方案。
 
 <!-- Let's change the above application to use React router. First, we install React router with the command -->
@@ -165,7 +165,7 @@ const App = () => {
 }
 ```
 
-<!-- Routing, or the conditional rendering of components <i>based on the url</i> in the browser, is used by placing components as children of the <i>Router</i> component, meaning inside <i>Router</i>-tags. -->
+<!-- Routing, or the conditional rendering of components <i>based on the url</i> in the browser, is used by placing components as children of the <i>Router</i> component, meaning inside <i>Router</i> tags. -->
 路由，或基于浏览器中的 <i>url</i><i>的组件的条件渲染，通过将组件放置为Router</i> 组件的子组件来使用，也就是在<i>Router</i>-tags 内部。
 
 <!-- Notice that, even though the component is referred to by the name <i>Router</i>, we are in fact talking about [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), because here the import happens by renaming the imported object: -->
@@ -184,10 +184,10 @@ import {
 > <!--<i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.-->
 <i>BrowserRouter</i> 是一个 <i>Router</i>，它使用 HTML5的history API  (pushState、 replaceState 和 popState 事件)保持 UI 与 URL 同步。 
 
-<!-- Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/) <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React-application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content form the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page. -->
+<!-- Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page. -->
 通常，当地址栏中的 URL 发生更改时，浏览器会加载一个新页面。 然而，借助于[HTML5 history API](https://css-tricks.com/using-the-HTML5-history-API/)<i>BrowserRouter</i>，我们可以使用浏览器地址栏中的 URL 在 React-application 中进行内部“路由”。 因此，即使地址栏中的 URL 发生了变化，页面的内容也可以通过 Javascript 来操作，浏览器也不会从服务器加载新的内容。 使用后退和前进操作，以及制作书签，仍然像在传统网页上一样合乎逻辑。
 
-<!-- Inside the router we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. For example, -->
+<!-- Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reacttraining.com/react-router/web/api/Link) component. For example, -->
 在路由内部，我们定义了<i>links</i>，这个<i>links</i> 借助于[Link](https://reacttraining.com/react-router/web/api/Link)组件来修改地址栏,
 
 ```js
@@ -208,12 +208,12 @@ import {
 
 
 
-<!-- defines, that if the browser address is <i>/notes</i>, we render the <i>Notes</i> component. -->
-定义，如果浏览器地址是<i>/notes</i>，则渲染<i>Notes</i> 组件。
+<!-- defines that, if the browser address is <i>/notes</i>, we render the <i>Notes</i> component. -->
+设置后，如果浏览器地址是<i>/notes</i>，则渲染<i>Notes</i> 组件。
 
 
 
-<!-- We wrap the components to be rendered based on the url with a [Swithch](https://reacttraining.com/react-router/web/api/Switch)-component -->
+<!-- We wrap the components to be rendered based on the url with a [Swithch](https://reacttraining.com/react-router/web/api/Switch) component -->
 我们用一个[Switch](https://reacttraining.com/react-router/web/api/Switch)-组件包装要基于 url 渲染的组件
 
 ```js 
@@ -234,7 +234,7 @@ import {
 <!-- The switch works by rendering the first component whose <i>path</i> matches the url in the browser's address bar. -->
 这个开关的工作原理是，我们渲染第一个组件，它的<i>path</i> 匹配浏览器地址栏中的 url。
 
-<!-- Note that the order of the components is important. If we put the <i>Home</i>-component, whose path is <i> path="/"</i>, first, the rest components would never get a chance to render because every path start with "/" will consider matched with first component: -->
+<!-- Note that the order of the components is important. If we put the <i>Home</i> component, whose path is <i> path="/"</i>, first, the rest of the components would never get a chance to render because every path start with "/" will consider matched with first component: -->
 注意，组件的顺序很重要。 如果我们使用<i>Home</i>-组件，它的路径是<i> path="/"</i>，那么剩下的组件将不会有机会去渲染，因为每一个以 "/"开头的路径都会匹配成第一个组件。
 
 ```js 
@@ -283,7 +283,7 @@ const Notes = ({notes}) => (
 
 
 
-<!-- We define parametrized urls in the routing in <i>App</i>-component as follows: -->
+<!-- We define parameterized urls in the routing in <i>App</i>-component as follows: -->
 我们在<i>App</i>-component 的路由中定义参数化 url 如下:
 
 ```js
@@ -346,16 +346,16 @@ const Note = ({ notes }) => {
 
 
 
-<!-- The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react-router. -->
+<!-- The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) function of the react router. -->
 Note 组件接收所有的便笺作为 props <i>notes</i>，它可以通过 react-router 的[useParams](https://reacttraining.com/react-router/web/api/hooks/useParams)函数访问 url 参数(要显示的便笺的 id)。 
 
 ### useHistory
 
 
-<!-- We have also implemented a simple log in function in our application. If a user is logged in, information about a logged in user is saved to the <i>user</i> field of the state of the <i>App</i> component. -->
+<!-- We have also implemented a simple login function in our application. If a user is logged in, information about a logged in user is saved to the <i>user</i> field of the state of the <i>App</i> component. -->
 我们还在应用中实现了一个简单的登录函数。 如果用户登录，则关于登录用户的信息将保存到<i>App</i> 组件状态的<i>user</i> 字段中。
 
-<!-- The option to navigate to the <i>Login</i>-view is rendered conditionally in the menu. -->
+<!-- The option to navigate to the <i>Login</i> view is rendered conditionally in the menu. -->
 导航到<i>Login</i>-视图 的选项在菜单中有条件地渲染。
 
 ```js
@@ -418,7 +418,7 @@ const Login = (props) => {
 
 
 
-<!-- What is interesting about this component is the use of the [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) function of the react-router. -->
+<!-- What is interesting about this component is the use of the [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) function of the react router. -->
 这个组件的有趣之处在于它使用了React路由的[useHistory](https://reacttraining.com/react-router/web/api/hooks/useHistory 路由)功能。
 
 <!-- With this function the component can access a [history](https://reacttraining.com/react-router/web/api/history) object. The history object can be used to i.a modify the browser url programmatically. -->
@@ -426,12 +426,12 @@ const Login = (props) => {
 
 
 
-<!-- With user log in we call the push method of the history object. The  _history.push('/')_ call causes the browser url to change to _/_ and the application renders the corresponding component <i>Home</i>. -->
+<!-- With user login we call the push method of the history object. The  _history.push('/')_ call causes the browser url to change to _/_ and the application renders the corresponding component <i>Home</i>. -->
 对于用户登录，我们调用历史对象的 push 方法。 _history.push('/')_ 调用导致浏览器的 url 更改为/，应用渲染相应的组件<i>Home</i>。
 
 
 
-<!-- Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook-functions, just like useState and useEffect we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook-functions. Create-react-app has been configured to warn you, if you break these rules e.g by calling a hook-function from a conditional statement. -->
+<!-- Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) are hook functions, just like useState and useEffect we have used many times now.  As you remember from part 1, there are some [rules](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) to using hook functions. Create-react-app has been configured to warn you, if you break these rules e.g by calling a hook function from a conditional statement. -->
 [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)和 [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory)  都是Hook函数，就像我们已经多次使用的 useState 和 useEffect 一样。 正如您在第1章节中记得的，使用hook函数有一些[原则](/zh/part1/深入_react_应用调试/#rules-of-hooks) 。 Create-react-app 已经配置为警告，如果你打破这些规则，例如从一个 If判断语句中调用一个Hook函数，你就会收到警告。
 
 ### redirect
@@ -445,7 +445,7 @@ const Login = (props) => {
 </Route>
 ```
 
-<!-- If a user isn't logged in, the <i>Users</i> component is not rendered. Instead the user is <i>redirected</i> using the <i>Redirect</i>-component to the login view -->
+<!-- If a user isn't logged in, the <i>Users</i> component is not rendered. Instead the user is <i>redirected</i> using the <i>Redirect</i> component to the login view： -->
 如果用户未登录，则不渲染<i>Users</i> 组件。 相反，用户<i>使用<i>Redirect</i>组件重定向到登录视图
 
 ```js
@@ -550,13 +550,13 @@ const Note = ({ note }) => {
 
 
 
-<!-- One way to do this would be to use react-router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component. -->
-一种方法是使用 react-router 的[useRouteMatch](https://reacttraining.com/react-router/web/api/hooks/useRouteMatch)Hook来计算出应用组件中显示的便笺的 id。
+<!-- One way to do this would be to use react router's [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) hook to figure out the id of the note to be displayed in the _App_ component. -->
+一种方法是使用 react router 的[useRouteMatch](https://reacttraining.com/react-router/web/api/hooks/useRouteMatch)Hook来计算出应用组件中显示的便笺的 id。
 
 
 
-<!-- It is not possible to use <i>useRouteMatch</i>-hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_: -->
-在定义应用路由部分的组件中不可能使用<i>useRouteMatch</i>-hook。 让我们把路由组件的使用从 App 中移除:
+<!-- It is not possible to use <i>useRouteMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_: -->
+在定义应用路由部分的组件中不可能使用<i>useRouteMatch</i> hook。 让我们把路由组件的使用从 App 中移除:
 
 ```js
 ReactDOM.render(
@@ -624,7 +624,7 @@ const match = useRouteMatch('/notes/:id')
 
 
 
-<!-- If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parametrized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display -->
+<!-- If the url matches _/notes/:id_, the match variable will contain an object from which we can access the parameterized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display -->
 如果 url 匹配 _/notes/:id_，match 变量将包含一个对象，我们可以从该对象访问路径的参数化部分，即要显示便笺的 id，然后我们可以获取要显示的正确便笺
 
 ```js
@@ -647,7 +647,7 @@ const note = match
 <!-- Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy/routed-anecdotes> as the starting point for the exercises. -->
 让我们继续研究八卦应用。 使用仓库 https://github.com/fullstack-hy/routed-anecdotes 中的 非redux 八卦应用作为练习的起点。
 
-<!-- If you clone the project into an existing git repository remember to <i>delete the git configuration of the cloned application:</i> -->
+<!-- If you clone the project into an existing git repository， remember to <i>delete the git configuration of the cloned application:</i> -->
 如果您将该项目克隆到现有的 git 存储库中，请记住我删除克隆应用的 git 配置
 
 ```bash
@@ -664,7 +664,7 @@ npm start
 ```
 
 #### 7.1: routed anecdotes, 步骤1
-<!-- Add React Router to the application so that by clicking links in the <i>Menu</i>-component the view can be changed. -->
+<!-- Add React Router to the application so that by clicking links in the <i>Menu</i> component the view can be changed. -->
 向应用添加 React Router，以便通过单击<i>Menu</i>-组件 中的链接可以更改视图。
 
 <!-- At the root of the application, meaning the path _/_, show the list of anecdotes: -->
@@ -672,7 +672,7 @@ npm start
 
 ![](../../assets/teht/40.png)
 
-<!-- The <i>Footer</i>-component should always be visible at the bottom. -->
+<!-- The <i>Footer</i> component should always be visible at the bottom. -->
 <i>Footer</i>-组件 应该始终在底部可见。
 
 <!-- The creation of a new anecdote should happen e.g. in the path <i>create</i>: -->

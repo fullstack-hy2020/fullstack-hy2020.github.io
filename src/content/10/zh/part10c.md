@@ -602,6 +602,9 @@ doShopping();
 
 我们可以使用 [AsyncStorage.setItem](https://react-native-community.github.io/async-storage/docs/api#setitem) 来向存储添加存储项。方法的第一个参数是该项的key ，第二个参数是值。 值 <i>必须是字符串</i>， 所以我们需要序列化非字符串的值，就像我们使用  <em>JSON.stringify</em>  方法一样。 [AsyncStorage.getItem](https://react-native-community.github.io/async-storage/docs/api#getitem)  方法可以用来从存储中获得一个项。该方法的第一个参数是项目的key ， 这样它的值就被处理到了。 [AsyncStorage.removeItem](https://react-native-community.github.io/async-storage/docs/api#removeitem) 方法可以用来从storage 中移除相关的key 。
 
+<!-- Note: AsyncStorage is not suitable for storing sensitive information, for example an authentication token. A good alternative for storing sensitive information is expo's [SecureStorage](https://docs.expo.dev/versions/latest/sdk/securestore/). SecureStorage works similarly to AsyncStorage, the main exception is that SecureStorage encrypts the key-value pairs before storing them. -->
+注意： AsyncStorage 并不适用于存储敏感信息，比如验证密钥。一个好的替代方案是使用expo的  [SecureStorage](https://docs.expo.dev/versions/latest/sdk/securestore/) 来存储敏感信息。 SecureStorage 和 AsyncStorage 工作机制类似，主要的区别是 SecureStorage 在存储键值对之前会先加密。
+
 </div>
 
 <div class="tasks">

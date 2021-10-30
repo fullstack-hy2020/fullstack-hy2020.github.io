@@ -413,6 +413,10 @@ describe('when there is initially one user in db', () => {
 
 让我们在 Mongoose validator 的帮助下验证用户名的唯一性。正如我们在练习 [3.19](/zh/part3/es_lint与代码检查#exercises)中提到的，Mongoose 并没有内置的 validator 来检查某个字段的唯一性。我们可以使用一个现成的解决方案[mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) 这个 npm 包，先安装一下：
 
+//There are few issues with updated mongoose-unique-validator, a recommended version is 2.0.1. Tested various versions before concluding. 
+//Error with other versions: "User validation failed: _id: Error, expected `_id` to be unique"
+//Link to the issue: https://github.com/blakehaswell/mongoose-unique-validator/issues/88#issuecomment-429189084
+
 ```bash
 npm install mongoose-unique-validator
 ```

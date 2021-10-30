@@ -853,8 +853,12 @@ React.useEffect(() => {
         `${apiBaseUrl}/patients`
       );
       dispatch({ type: "SET_PATIENT_LIST", payload: patients });
-    } catch (e) {
-      console.error(e);
+    } catch (error: unknown) {
+      let errorMessage = 'Something went wrong.'
+      if(axios.isAxiosError(error) && error.response) {
+        errorMessage += ' Error: ' + error.response.data.message;
+      }
+      console.error(errorMessage);
     }
   };
   fetchPatientList();
@@ -1461,9 +1465,13 @@ const submitNewPatient = async (values: FormValues) => {
     );
     dispatch({ type: "ADD_PATIENT", payload: newPatient });
     closeModal();
-  } catch (e) {
-    console.error(e.response.data);
-    setError(e.response.data.error);
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong.'
+    if(axios.isAxiosError(error) && error.response) {
+      console.error(error.response.data);
+      errorMessage = error.response.data.error;
+    }
+    setError(errorMessage);
   }
 };
 ```
