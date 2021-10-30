@@ -1348,8 +1348,12 @@ router.post('/', (req, res) => {
       
     const addedEntry = diaryService.addDiary(newDiaryEntry); // highlight-line
     res.json(addedEntry);
-  } catch (e) {
-    res.status(400).send(e.message); 
+  } catch (error: unknown) {
+    let errorMessage = 'Something went wrong.'
+    if(error instanceof Error) {
+      errorMessage += ' Error: ' + error.message;
+    }
+    res.status(400).send(errorMessage);
   }
 })
 ```
@@ -1395,8 +1399,8 @@ export default toNewDiaryEntry;
 ![](../../images/9/44.png)
 
 
-We could ignore these rules but a better idea is to follow the advice the editor gives when trying the <i>quick fix</i> and give the parameter type [unknown](https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown): 
-我们可以忽略这些规则，但更好的方式是遵循编辑器给我们的建议，通过 <i>quick fix</i> 给一个参数类型[unknown](https://www.typescriptlang.org/docs/handbook/basic-types.html#unknown): 
+<!-- We could ignore these rules but a better idea is to follow the advice the editor gives when trying the <i>quick fix</i> and give the parameter type unknown.  -->
+我们可以忽略这些规则，但更好的方式是遵循编辑器给我们的建议，通过 <i>quick fix</i> 给一个参数类型unknown: 
 
 ```js
 import { NewDiaryEntry } from './types';
@@ -1411,12 +1415,13 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => { // highlight-line
 
 export default toNewDiaryEntry;
 ```
-
+<!-- 
 [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type)
-is a new kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type.
+is a new kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type. -->
 
-<i>unknown</i> is the ideal type for our kind of situation of input validation, since we don't yet need to define the type to match <i>any</i> type, but can first verify the type and then confirm the expected type. With the use of <i>unknown</i> we also don't need to worry about the <i>@typescript-eslint/no-explicit-any</i> eslint rule, since we are not using <i>any</i>. However, we might still need to use <i>any</i> in some cases where we are not yet sure about the type and need to access properties of an <i>any</i> object in order to validate or type check the property values themselves.
+<!-- <i>unknown</i> is the ideal type for our kind of situation of input validation, since we don't yet need to define the type to match <i>any</i> type, but can first verify the type and then confirm the expected type. With the use of <i>unknown</i> we also don't need to worry about the <i>@typescript-eslint/no-explicit-any</i> eslint rule, since we are not using <i>any</i>. However, we might still need to use <i>any</i> in some cases where we are not yet sure about the type and need to access properties of an <i>any</i> object in order to validate or type check the property values themselves. -->
 
+ 在input 验证这种场景来说 <i>unknown</i> 是一个理想类型，因为我们还不需要定义任何类型来匹配 <i>any</i> 类型，但可以先验证类型并确认期望的类型。利用 <i>unknown</i> ，我们也不用担心 <i>@typescript-eslint/no-explicit-any</i> eslint规则，因为我们不使用 <i>any</i> 。但是，我们在某些场景下仍然需要使用 <i>any</i> ，例如我们不确定类型，并且需要访问 <i>any</i> 对象的属性来验证属性值的类型检查。
 
 <!-- Let us start creating the parsers for each of the fields of <i>object</i>.  -->
 让我们开始为<i>object</i> 的每个字段创建解析器。
