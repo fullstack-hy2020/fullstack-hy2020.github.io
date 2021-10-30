@@ -10,11 +10,11 @@ lang: en
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
 The application exists only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
-On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
+On the contrary, they demonstrate some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
 
-Coding in the recommended style begins in [part 1](/en/part1).
+Code will conform to contemporary best practices from  [part 1](/en/part1) onwards.
 
-Open the [example application](https://studies.cs.helsinki.fi/exampleapp) on your browser. Sometimes this takes a while. 
+Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while. 
 
 **The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
 On Windows or Linux, open the console by pressing `F12` or `ctrl-shift-i` simultaneously.
@@ -24,7 +24,7 @@ Remember to <i>always</i> keep the Developer Console open when developing web ap
 
 The console looks like this: 
 
-![](../../images/0/1e.png)
+![A screenshot of the developer tools open in a browser](../../images/0/1e.png)
 
 Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded. 
 
@@ -34,18 +34,18 @@ Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i
 
 The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) protocol. The Network tab shows how the browser and the server communicate.
 
-When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened:
+When you reload the page (press the F5 key or the &#8634; symbol on your browser), and the console will show that two events have happened:
 
-- The browser fetches the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
-- And downloads the image <i>kuva.png</i>
+- The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
+- And has downloaded the image <i>kuva.png</i>
 
-![](../../images/0/2e.png)
+![Screenshot of the developer console  showing these two events](../../images/0/2e.png)
 
 On a small screen you might have to widen the console window to see these. 
 
 Clicking the first event reveals more information on what's happening: 
 
-![](../../images/0/3e.png)
+![Detail view of a single event](../../images/0/3e.png)
 
 The upper part, <i>General</i>, shows that the browser made a request to the address <i>https://studies.cs.helsinki.fi/exampleapp</i> (though the address has changed slightly since this picture was taken) using the  [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
 
@@ -58,21 +58,21 @@ The <i>Response headers</i> on top tell us e.g. the size of the response in byte
 
 The <i>Response</i> tab shows the response data, a regular HTML-page. The <i>body</i> section determines the structure of the page rendered to the screen: 
 
-![](../../images/0/5e.png)
+![Screenshot of the response tab](../../images/0/5e.png)
 
 The page contains a [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) element, which in turn contains a heading, a link to the page <i>notes</i>, and an [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag, and displays the number of notes created.
 
 Because of the img tag, the browser does a second <i>HTTP-request</i> to fetch the image <i>kuva.png</i> from the server. The details of the request are as follows: 
 
-![](../../images/0/6e.png)
+![Detail view of the second event](../../images/0/6e.png)
 
 The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. 
 
 The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
-![](../../images/0/7e.png)
+![Sequence diagram of the flow covered above](../../images/0/7e.png)
 
-First, the browser does an HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen. 
+First, the browser sends an HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen. 
 
 Even though it is difficult to notice, the HTML page begins to render before the image has been fetched from the server. 
 
@@ -125,11 +125,11 @@ This course will use Node.js and Express to create web servers.
 Keep the Developer Console open. Empty the console by clicking the 🚫 symbol, or by typing clear() in the console. 
 Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests: 
 
-![](../../images/0/8e.png)
+![Screenshot of the developer console with the 4 requests visible](../../images/0/8e.png)
 
 All of the requests have <i>different</i> types. The first request's type is <i>document</i>. It is the HTML code of the page, and it looks as follows: 
 
-![](../../images/0/9e.png)
+![Detail view of the first request](../../images/0/9e.png)
 
 When we compare the page shown on the browser and the HTML code returned by the server, we notice that the code does not contain the list of notes. 
 The [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)-section of the HTML contains a [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)-tag, which causes the browser to fetch a JavaScript file called <i>main.js</i>.
@@ -182,7 +182,7 @@ We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.
 There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". 
 By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted: 
 
-![](../../images/0/11e.png)
+![Formatted JSON output](../../images/0/11e.png)
 
 So, the JavaScript code of the notes page above downloads the JSON-data containing the notes, and forms a bullet-point list from the note contents: 
 
@@ -223,11 +223,11 @@ data.forEach(function(note) {
 Now open the <i>Console</i>-tab on your Developer Console:
 
 
-![](../../images/0/12e.png)
+![Screenshot of the console tab on the developer console](../../images/0/12e.png)
 
 By clicking the little triangle at the beginning of the line, you can expand the text on the console.
 
-![](../../images/0/13e.png)
+![Screenshot of one of the previously collapsed entries expanded](../../images/0/13e.png)
 
 This output on the console is caused by the <em>console.log</em> command in the code:
 
@@ -298,7 +298,7 @@ html
 
 The same treelike structure can be seen on the console tab <i>Elements</i>.
 
-![](../../images/0/14e.png)
+![A screenshot of the Elements tab of the developer console](../../images/0/14e.png)
 
 The functioning of the browser is based on the idea of depicting HTML elements as a tree. 
 
@@ -352,7 +352,7 @@ And add the new li-element to the list:
 list.appendChild(newElement)
 ```
 
-![](../../images/0/16e.png)
+![Screenshot of the page with the new note added to the list](../../images/0/16e.png)
 
 Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from the address <https://studies.cs.helsinki.fi/exampleapp/data.json>.
 
@@ -382,7 +382,7 @@ The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/G
 
 CSS attributes can be examined on the <i>elements</i> tab on the console:  
 
-![](../../images/0/17e.png)
+![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
 
 The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.
 
@@ -422,12 +422,12 @@ The Notes page contains a [form-element](https://developer.mozilla.org/en-US/doc
 
 When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like: 
 
-![](../../images/0/21e.png)
+![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
 
-Surprisingly, submitting the form causes altogether <i>five</i> HTTP requests. 
+Surprisingly, submitting the form causes no less than  <i>five</i> HTTP requests. 
 The first one is the form submit event. Let's zoom into it: 
 
-![](../../images/0/22e.png)
+![Detail view of the first request](../../images/0/22e.png)
 
 It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
 
@@ -498,7 +498,7 @@ In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Sin
 
 The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
 
-A single page app version of our example application can be found from <https://studies.cs.helsinki.fi/exampleapp/spa>.
+A single page app version of our example application can be found at <https://studies.cs.helsinki.fi/exampleapp/spa>.
 At first glance, the application looks exactly the same as the previous one. 
 The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined: 
 
