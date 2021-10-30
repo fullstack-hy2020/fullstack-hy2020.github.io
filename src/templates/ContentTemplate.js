@@ -160,7 +160,7 @@ export default class ContentTemplate extends Component {
         />
 
         {this.state.showArrowUp && (
-          <div
+          <button
             className="arrow-go-up"
             onClick={() =>
               window.scrollTo({
@@ -171,7 +171,7 @@ export default class ContentTemplate extends Component {
             }
           >
             <img src={ArrowToTop} alt="arrow-up" />
-          </div>
+          </button>
         )}
 
         <div className="course-container spacing--after">

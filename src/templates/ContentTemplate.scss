@@ -163,6 +163,9 @@ pre[class*='language-'] {
   right: 5%;
   z-index: 99999;
   cursor: pointer;
+  background-color: transparent;
+  border: none;
+  padding: 0;
 
   @include to($tablet) {
     right: 10%;
