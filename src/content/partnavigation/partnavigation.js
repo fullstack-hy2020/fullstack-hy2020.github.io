@@ -147,6 +147,11 @@ module.exports = {
       b: 'Building and configuring environments',
       c: 'Basics of Orchestration'
     },
+    '13': {
+      a: 'Using relational databases with Sequelize',
+      b: 'Join tables and queries',
+      c: 'Migrations, many-to-many relationships'
+    },
   },
   zh: {
     '0': {
