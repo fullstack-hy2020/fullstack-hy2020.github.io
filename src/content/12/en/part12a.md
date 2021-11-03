@@ -348,7 +348,7 @@ Hello World
 
 ### Other docker commands
 
-Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
+Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _docker diff_ to check for the changes between the original image and container before doing so.
 
 ```bash
 $ docker commit hopeful_clarke hello-node-world
