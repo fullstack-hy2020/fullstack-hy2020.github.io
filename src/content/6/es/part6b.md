@@ -516,7 +516,7 @@ const Notification = () => {
 }
 ```
 
-Tendrá que realizar cambios en el reducer existente de la aplicación. Cree un reducer separado para la nueva funcionalidad y refactorice la aplicación para que utilice un reducer combinado como se muestra en esta parte del material del curso.
+Tendrá que realizar cambios en el reducer existente de la aplicación. Cree un reducer separado para la nueva funcionalidad y refactorice la aplicación para que utilice un [reducer combinado](https://fullstackopen.com/es/part6/muchos_reducers#reducers-combinados) como se muestra en esta parte del material del curso.
 
 La aplicación no tiene que utilizar el componente <i>Notification</i> de forma inteligente en este punto de los ejercicios. Es suficiente que la aplicación muestre el valor inicial establecido para el mensaje en el <i>notificationReducer</i>.
 
