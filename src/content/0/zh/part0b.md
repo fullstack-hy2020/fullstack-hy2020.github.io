@@ -13,17 +13,17 @@ lang: zh
 <!-- 该应用的芬兰语版本可以在 <https://fullstack-example.now.sh> 网站上找到。 你可以使用任何一种。 -->
 
 <!-- The applications exist only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. -->
-<!-- On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays. -->
+<!-- On the contrary, they demonstrate some old techniques of web development, which could even be considered <i>bad practices</i> nowadays. -->
 
 这些应用只是为了演示本课程需要讲到的一些基本概念，绝不是 web 应用的开发标杆。 相反，它展示了一些陈旧的 web 开发技术，而这些技术在今天甚至可以被视作糟糕的实践。
 
-<!-- Coding in the recommended style begins in [第1章](/zh/part1). -->
+<!-- Code will conform to contemporary best practices from  [part 1](/en/part1) onwards. -->
 
 我们将在[第1章](/zh/part1)正式讲推荐的编码风格。
 
 
 
-<!-- Open the [example application](https://studies.cs.helsinki.fi/exampleapp/) on your browser. Sometimes this takes a while. -->
+<!-- Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while.  -->
 
 在浏览器上打开这个[示例应用](https://studies.cs.helsinki.fi/exampleapp)。应用加载通常需要等一会儿。
 
@@ -46,7 +46,7 @@ console 也可以通过 [context menu](https://en.wikipedia.org/wiki/Menu_key) �
 <!-- The console looks like this:  -->
 开发者控制台长这样：
 
-![](../../images/0/1e.png)
+![A screenshot of the developer tools open in a browser](../../images/0/1e.png)
 
 <!-- Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded. -->
 
@@ -62,15 +62,15 @@ console 也可以通过 [context menu](https://en.wikipedia.org/wiki/Menu_key) �
 
 服务器和 web 浏览器使用 [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) 协议相互通信。 “网络（Network）”选项卡能够显示浏览器和服务器之间是如何通信的。
 
-<!-- When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened: -->
+<!-- When you reload the page (press the F5 key or the &#8634; symbol on your browser), and the console will show that two events have happened: -->
 
 当你重新加载页面(在浏览器中按 F5 键或者 &#8634; 按钮) ，控制台会显示两个事件:
-<!-- - The browser fetches the contents of the page <i>studies.cs.helsinki.fi/exampleapp/</i> from the server -->
-<!-- - And downloads the image <i>kuva.png</i> -->
+<!-- - The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server -->
+<!-- - And has downloaded the image <i>kuva.png</i> -->
 - 浏览器会从服务器中获取<i>studies.cs.helsinki.fi/exampleapp</i> 页面的内容
 - 然后下载图像 <i>kuva.png</i>
 
-![](../../images/0/2e.png)
+![Screenshot of the developer console  showing these two events](../../images/0/2e.png)
 
 <!-- On a small screen you might have to widen the console window to see these. -->
 
@@ -80,7 +80,7 @@ console 也可以通过 [context menu](https://en.wikipedia.org/wiki/Menu_key) �
 
 点击第一个事件会显示更多关于本次请求的细节
 
-![](../../images/0/3e.png)
+![Detail view of a single event](../../images/0/3e.png)
 
 <!-- The upper part, <i>General</i>, shows that the browser made a request to the address <i>https://studies.cs.helsinki.fi/exampleapp/</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. -->
 
@@ -90,7 +90,7 @@ console 也可以通过 [context menu](https://en.wikipedia.org/wiki/Menu_key) �
 
 浏览器的请求（request）和服务器的响应（response）有一些[Headers头](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields)信息:
 
-![](../../images/0/4e.png)
+![Screenshot of the response tab](../../images/0/4e.png)
 
 <!-- The <i>Response headers</i> on top tell us e.g. the size of the response in bytes, and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML)-page, and to render it to the browser 'like a web page'. -->
 
@@ -100,7 +100,7 @@ console 也可以通过 [context menu](https://en.wikipedia.org/wiki/Menu_key) �
 
 Response 标签页展示了响应数据，这是一个常规的 html 页面。 <i>body</i>部分决定了其渲染在屏幕上的页面结构:
 
-![](../../images/0/5e.png)
+![Detail view of the second event](../../images/0/5e.png)
 
 <!-- The page contains a [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) element, which in turn contains a heading, a link to the page <i>notes</i>, and an [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag, and displays the number of notes created. -->
 
@@ -110,7 +110,7 @@ Response 标签页展示了响应数据，这是一个常规的 html 页面。 <
 
 由于有一个 img 标签，浏览器会执行第二个 http 请求，从服务器获取图像 kuva.png。 请求的详情如下:
 
-![](../../images/0/6e.png)
+![Sequence diagram of the flow covered above](../../images/0/6e.png)
 
 <!-- The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen. -->
 
@@ -122,7 +122,7 @@ Response 标签页展示了响应数据，这是一个常规的 html 页面。 <
 
 ![](../../images/0/7e.png)
 
-<!-- First, the browser does a HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen. -->
+<!-- First, the browser sends an HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen.  -->
 
 首先，浏览器向服务器发出 HTTP GET 请求，以获取页面的 HTML 代码。 Html 中的 img 标签提示浏览器还要去获取图像 kuva.png。 浏览器将 HTML 页面和图像渲染到屏幕上。
 
@@ -209,13 +209,13 @@ Html 页面的内容被保存为 template 模板字符串，或者说是一个�
 
 现在当你进入 [notes](https://studies.cs.helsinki.fi/exampleapp/notes)页面时，浏览器会执行 4 个 HTTP 请求:
 
-![](../../images/0/8e.png)
+![Screenshot of the developer console with the 4 requests visible](../../images/0/8e.png)
 
 <!-- All of the requests have <i>different</i> types. The first request's type is <i>document</i>. It is the HTML code of the page, and it looks as follows: -->
 
 所有的请求都请求了不同的类型。 第一个请求的类型是 document。 也就是页面的 HTML 代码，看起来如下:
 
-![](../../images/0/9e.png)
+![Detail view of the first request](../../images/0/9e.png)
 
 <!-- When we compare the page shown on the browser and the HTML code returned by the server, we notice that the code does not contain the list of notes. -->
 <!-- The [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)-section of the HTML contains a [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)-tag, which causes the browser to fetch a JavaScript file called <i>main.js</i>. -->
@@ -289,7 +289,7 @@ xhttp.send();
 
 默认配置下，基于Chrome 的浏览器不太擅长显示 json 格式的数据。 可以使用插件来处理 Json 格式。 例如，将 [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) 安装到 Chrome，然后重新加载页面。 数据现在可以被更好地格式化展示出来了:
 
-![](../../images/0/11e.png)
+![Formatted JSON output](../../images/0/11e.png)
 
 <!-- So, the JavaScript code of the notes page above downloads the JSON-data containing the notes, and forms a bullet-point list from the note contents: -->
 
@@ -342,13 +342,13 @@ data.forEach(function(note) {
 
 现在打开控制台上的 Console 标签:
 
-![](../../images/0/12e.png)
+![Screenshot of the console tab on the developer console](../../images/0/12e.png)
 
 <!-- By clicking the little triangle at the beginning of the line, you can expand the text on the console. -->
 
 通过单击行首的小三角形，可以展开控制台上的文本。
 
-![](../../images/0/13e.png)
+![Screenshot of one of the previously collapsed entries expanded](../../images/0/13e.png)
 
 <!-- This output on the console is caused by <em>console.log</em> command in the code: -->
 
@@ -482,7 +482,7 @@ document.getElementById('notes').appendChild(ul);
 
 Html 文档 DOM 树的最顶层节点称为文档<em>document</em>对象。 我们可以使用 DOM-API 在网页上执行各种操作。 您可以通过在控制台中键入 document 来访问文档对象:
 
-![](../../images/0/15e.png)
+![A screenshot of the Elements tab of the developer console](../../images/0/15e.png)
 
 <!-- Let's add a new note to the page from the console. -->
 
@@ -513,7 +513,7 @@ newElement.textContent = 'Page manipulation from console is easy';
 list.appendChild(newElement);
 ```
 
-![](../../images/0/16e.png)
+![Screenshot of the page with the new note added to the list](../../images/0/16e.png)
 
 <!-- Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from address <https://studies.cs.helsinki.fi/exampleapp/data.json>. -->
 
@@ -560,7 +560,7 @@ Notes 页面的 HTML 代码中 head 元素包含了一个 [link](https://develop
 
 CSS 属性可以在控制台的 element 标签上查看:
 
-![](../../images/0/17e.png)
+![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
 
 <!-- The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>. -->
 
@@ -626,9 +626,9 @@ Notes 页面包含一个 [form 元素](https://developer.mozilla.org/en-US/docs/
 
 当单击表单上的按钮时，浏览器将向服务器发送用户的输入。 让我们打开 Network 标签页，看看提交表单时发生了什么:
 
-![](../../images/0/21e.png)
+![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
 
-<!-- Surprisingly, submitting the form causes altogether <i>five</i> HTTP requests. -->
+<!-- Surprisingly, submitting the form causes no less than  <i>five</i> HTTP requests.  -->
 
 很惊奇吧，提交表单总共会导致 5 个 HTTP 请求。
 
@@ -636,7 +636,7 @@ Notes 页面包含一个 [form 元素](https://developer.mozilla.org/en-US/docs/
 
 第一个是表单提交事件。 让我们放大一下:
 
-![](../../images/0/22e.png)
+![Detail view of the first request](../../images/0/22e.png)
 
 <!-- It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>. -->
 
@@ -746,7 +746,7 @@ Notes 页面为浏览器提供了一些职责，为现有的 Note 生成 HTML �
 
 我们的应用的 Notes 页面与 SPA 风格的应用有一些相似之处，但它还没有完全到位。 尽管显示Note 的逻辑是在浏览器上运行的，但页面仍然使用传统的方式添加新Note 。 数据通过表单提交发送到服务器，服务器指示浏览器重新加载带有重定向的 Notes 页面。
 
-<!-- A single page app version of our example application can be found from <https://studies.cs.helsinki.fi/exampleapp/spa>. -->
+<!-- A single page app version of our example application can be found at <https://studies.cs.helsinki.fi/exampleapp/spa>. -->
 <!-- At first glance, the application looks exactly the same as the previous one. -->
 <!-- The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined: -->
 
