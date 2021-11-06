@@ -24,7 +24,7 @@ TypeScript consists of three separate, but mutually fulfilling parts:
 
 ![](../../images/9/1.png)
 
-<i>The language</i> consists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript programmers have the most direct contact with the language. 
+<i>The language</i> consists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript, programmers have the most direct contact with the language. 
 
 <i>The compiler</i> is responsible for type information erasure (i.e. removing the typing information) and the code transformations. The code transformations enable TypeScript code to be transpiled into executable JavaScript. Everything related to the types is removed at compile-time, so TypeScript isn't actually genuine statically typed code. 
 
