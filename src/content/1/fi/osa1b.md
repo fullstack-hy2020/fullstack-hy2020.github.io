@@ -9,7 +9,7 @@ lang: fi
 
 Kurssin aikana on web-sovelluskehityksen rinnalla tavoite ja tarve oppia riittävässä määrin JavaScriptiä.
 
-JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2020 julkaistu [ES11](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2020.
+JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2021 julkaistu [ES12](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2021.
 
 Selaimet eivät vielä osaa kaikkia JavaScriptin uusimpien versioiden ominaisuuksia. Tämän takia selaimessa suoritetaan useimmiten koodia, joka on käännetty (englanniksi <i>transpiled</i>) uudemmasta JavaScriptin versiosta johonkin vanhempaan, laajemmin tuettuun versioon.
 
