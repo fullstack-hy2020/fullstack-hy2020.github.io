@@ -7,19 +7,19 @@ lang: en
 
 <div class="content">
 
-We will next implement a React-app which uses the GraphQL server we created.
+We will next implement a React app which uses the GraphQL server we created.
 
 The current code of the server can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
-In theory, we could use GraphQL with HTTP POST -requests. The following shows an example of this with Postman. 
+In theory, we could use GraphQL with HTTP POST requests. The following shows an example of this with Postman:
 
 ![](../../images/8/8.png)
 
-The communication works by sending HTTP POST -requests to http://localhost:4000/graphql. The query itself is a string sent as the value of the key <i>query</i>.
+The communication works by sending HTTP POST requests to http://localhost:4000/graphql. The query itself is a string sent as the value of the key <i>query</i>.
 
-We could take care of the communication between the React-app and GraphQl by using Axios. However most of the time it is not very sensible to do so. It is a better idea to use a higher order library capable of abstracting the unnecessary details of the communication. 
+We could take care of the communication between the React app and GraphQL by using Axios. However, most of the time, it is not very sensible to do so. It is a better idea to use a higher-order library capable of abstracting the unnecessary details of the communication. 
 
-At the moment there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/), which is the client side of the same library we used in the previous section. Apollo is absolutely the most popular of the two, and we will use it in this section as well.
+At the moment, there are two good options: [Relay](https://facebook.github.io/relay/) by Facebook and [Apollo Client](https://www.apollographql.com/docs/react/), which is the client side of the same library we used in the previous section. Apollo is absolutely the most popular of the two, and we will use it in this section as well.
 
 ### Apollo client
 
@@ -29,7 +29,7 @@ Create a new React-app and install the dependencies required by [Apollo client](
 npm install @apollo/client graphql
 ```
 
-We'll start with the following code for our application. 
+We'll start with the following code for our application:
 
 ```js
 import React from 'react'
@@ -47,7 +47,7 @@ const client = new ApolloClient({
 
 const query = gql`
 query {
-  allPersons  {
+  allPersons {
     name,
     phone,
     address {
@@ -67,7 +67,7 @@ client.query({ query })
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started/#create-a-client) - object, which is then used to send a query to the server: 
+The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started/#create-a-client) object, which is then used to send a query to the server: 
 
 
 ```js
@@ -77,7 +77,7 @@ client.query({ query })
   })
 ```
 
-The servers response is printed to the console: 
+The server's response is printed to the console: 
 
 ![](../../images/8/9a.png)
 
@@ -112,17 +112,17 @@ ReactDOM.render(
 We are ready to implement the main view of the application, which shows a list of phone numbers. 
 
 Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/data/queries/). 
-Currently the use of the hook-function [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) is the dominant practice.
+Currently, the use of the hook function [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) is the dominant practice.
 
-The query is made by the <i>App</i> component, which's code is as follows:
+The query is made by the <i>App</i> component, the code of which is as follows:
 
 ```js
 import React from 'react'
-import { gql, useQuery } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client'
 
 const ALL_PERSONS = gql`
 query {
-  allPersons  {
+  allPersons {
     name
     phone
     id
@@ -133,7 +133,7 @@ query {
 const App = () => {
   const result = useQuery(ALL_PERSONS)
 
-  if (result.loading)  {
+  if (result.loading) {
     return <div>loading...</div>
   }
 
@@ -153,12 +153,12 @@ The field <i>loading</i> is true if the query has not received a response yet.
 Then the following code gets rendered:
 
 ```js
-if ( result.loading ) {
+if (result.loading) {
   return <div>loading...</div>
 }
 ```
 
-When response is received, the result of the <i>allPersons</i> query can be found from the <i>data</i> field, and we can render the list of names to the screen.
+When a response is received, the result of the <i>allPersons</i> query can be found from the <i>data</i> field, and we can render the list of names to the screen.
 
 ```js
 <div>
@@ -167,7 +167,7 @@ When response is received, the result of the <i>allPersons</i> query can be foun
 ```
 
 <!-- Eriytetään henkilöiden näyttäminen omaan komponenttiin -->
-Let's separate displaying the list of persons into its own component
+Let's separate displaying the list of persons into its own component:
 
 ```js
 const Persons = ({ persons }) => {
@@ -203,7 +203,7 @@ const App = () => {
 
 ### Named queries and variables
 
-Let's implement functionality for viewing the address details of a person. The <i>findPerson</i> query is well suited for this. 
+Let's implement functionality for viewing the address details of a person. The <i>findPerson</i> query is well-suited for this. 
 
 The queries we did in the last chapter had the parameter hardcoded into the query:
 
@@ -220,7 +220,7 @@ query {
 
 When we do queries programmatically, we must be able to give them parameters dynamically. 
 
-GraphQL [variables](https://graphql.org/learn/queries/#variables) are well suited for this. To be able to use variables, we must also name our queries. 
+GraphQL [variables](https://graphql.org/learn/queries/#variables) are well-suited for this. To be able to use variables, we must also name our queries. 
 
 <!-- Sopiva muoto kyselylle on seuraava: -->
 A good format for the query is this:
@@ -244,10 +244,10 @@ It is also possible to do queries with parameters with the GraphQL Playground. T
 
 ![](../../images/8/10.png)
 
-The _useQuery_ hook is well suited for situations where the query is done when the component is rendered. 
-However now we want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
+The _useQuery_ hook is well-suited for situations where the query is done when the component is rendered. 
+However, we now want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
-For this situation the hook-function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) is a good choice. 
+For this situation, the hook function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) is a good choice. 
 The <i>Persons</i> component becomes:
 
 ```js
@@ -324,7 +324,7 @@ export default Persons
 The code has changed quite a lot, and all of the changes are not completely apparent. 
 
 When a person's "show address" button is clicked, its event handler 
-_showPerson_ is executed, and makes a GraphQL query to fetch the persons details: 
+_showPerson_ is executed, and makes a GraphQL query to fetch the person's details: 
 
 ```js
 const [getPerson, result] = useLazyQuery(FIND_PERSON) 
@@ -350,7 +350,7 @@ useEffect(() => {
 ```
 
 The hook's second parameter is _result_, so the function given to the hook as its second parameter is executed <i>every time the query fetches the details of a different person</i>. 
-Without handling the update in a controlled way in a hook, returning from a single person view to an all persons view would cause problems. 
+Without handling the update in a controlled way in a hook, returning from a single person view to an all-persons view would cause problems. 
 
 If the state _person_ has a value, instead of showing a list of all persons, only the details of one person are shown. 
 
@@ -366,7 +366,7 @@ The current code of the application can be found on [Github](https://github.com/
 
 ### Cache
 
-When we do multiple queries for example the address details of Arto Hellas, we notice something interesting: The query to the backend is done only the first time around. After this, despite of the same query being done again by the code, the query is not sent to the backend. 
+When we do multiple queries, for example with the address details of Arto Hellas, we notice something interesting: the query to the backend is done only the first time around. After this, despite the same query being done again by the code, the query is not sent to the backend. 
 
 ![](../../images/8/12.png)
 
@@ -383,7 +383,7 @@ Because of this, doing <i>findPerson</i> queries for the address details of Arto
 
 Let's implement functionality for adding new persons. 
 
- In the previous chapter we hardcoded the parameters for mutations. Now we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):
+ In the previous chapter, we hardcoded the parameters for mutations. Now, we need a version of the addPerson mutation which uses [variables](https://graphql.org/learn/queries/#variables):
 
 ```js
 const CREATE_PERSON = gql`
@@ -406,7 +406,7 @@ mutation createPerson($name: String!, $street: String!, $city: String!, $phone: 
 `
 ```
 
-The hook-function [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) provides the functionality for making mutations. 
+The hook function [useMutation](https://www.apollographql.com/docs/react/api/react/hooks/#usemutation) provides the functionality for making mutations. 
 
 <!-- Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen: -->
 Let's create a new component for adding a new person to the directory:
@@ -475,8 +475,8 @@ export default PersonForm
 
 <!-- Lomakkeen koodi on suoraviivainen, mielenkiintoiset rivit on korostettu. Mutaation suorittava funktio saadaan luotua _useMutation_-hookin avulla. Hook palauttaa kyselyfunktion <i>taulukon</i> ensimmäisenä alkiona: -->
 The code of the form is straightforward and the interesting lines have been highlighted. 
-We can define mutation function using the _useMutation_-hook.
-The hook returns an <i>array</i>, first element of which contains the function to cause the mutation.
+We can define mutation functions using the _useMutation_ hook.
+The hook returns an <i>array</i>, the first element of which contains the function to cause the mutation.
 
 ```js
 const [ createPerson ] = useMutation(CREATE_PERSON)
@@ -489,13 +489,13 @@ The query variables receive values when the query is made:
 createPerson({  variables: { name, phone, street, city } })
 ```
 
-New persons are added just fine, but the screen is not updated. The reason being that Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation. 
-We could update the screen by reloading the page, as the cache is emptied when the page is reloaded. However there must be a better way to do this. 
+New persons are added just fine, but the screen is not updated. This is because Apollo Client cannot automatically update the cache of an application, so it still contains the state from before the mutation. 
+We could update the screen by reloading the page, as the cache is emptied when the page is reloaded. However, there must be a better way to do this. 
 
 
 ### Updating the cache
 
-There are few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/data/queries/#polling) the server, or make the query repeatedly. 
+There are a few different solutions for this. One way is to make the query for all persons [poll](https://www.apollographql.com/docs/react/data/queries/#polling) the server, or make the query repeatedly. 
 
 
 The change is small. Let's set the query to poll every two seconds: 
@@ -525,7 +525,7 @@ The solution is simple, and every time a user adds a new person, it appears imme
 
 The bad side of the solution is all the pointless web traffic. 
 
-Another easy way to keep the cache in sync is to use the _useMutation_-hook's [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) parameter to define, that the query fetching all persons is done again whenever a new person is created. 
+Another easy way to keep the cache in sync is to use the _useMutation_ hook's [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) parameter to define that the query fetching all persons is done again whenever a new person is created. 
 
 ```js
 const ALL_PERSONS = gql`
@@ -546,12 +546,12 @@ const PersonForm = (props) => {
   })
 ```
 
-The pros and cons of this solution are almost opposite of the previous one. There is no extra web traffic, because queries are not done just in case.  However if one user now updates the state of the server, the changes do not show to other users immediately. 
+The pros and cons of this solution are almost opposite of the previous one's. There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately. 
 
 There are other ways to update the cache. More about those later in this part. 
 
 <!-- Sovellukseen on tällä hetkellä määritelty kyselyjä komponenttien koodin sekaan. Eriytetään kyselyjen määrittely omaan tiedostoonsa <i>queries.js</i>: -->
-At the moment in our code queries and component are defined in the same place. 
+At the moment, queries and components are defined in the same place in our code. 
 Let's separate the query definitions into their own file <i>queries.js</i>:
 
 ```js 
@@ -592,15 +592,15 @@ The current code of the application can be found on [Github](https://github.com/
 #### Handling mutation errors
 
 <!-- Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus ja koko sovellus hajoaa -->
-Trying to create a person with invalid data causes an error, and the whole application breaks
+Trying to create a person with invalid data causes an error, and the whole application breaks:
 
 ![](../../images/8/14ea.png)
 
 <!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
-We should handle the exception. We can register an error handler function to the mutation using _useMutation_-hook's _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
+We should handle the exception. We can register an error handler function to the mutation using the _useMutation_ hook's _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
 <!-- Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla: -->
-Let's register the mutation an error handler, which uses the _setError_
+Let's register the mutation with an error handler which uses the _setError_
 function it receives as a parameter to set an error message:
 
 ```js
@@ -621,7 +621,7 @@ const PersonForm = ({ setError }) => {
 ```
 
 <!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
-We can then render the error message on the screen as necessary
+We can then render the error message on the screen as necessary:
 
 ```js
 const App = () => {
@@ -673,14 +673,14 @@ The current code of the application can be found on [Github](https://github.com/
 
 ### Updating a phone number
 
-Let's add the possibility to change the phone numbers of persons to our application. The solutions is almost identical to the one we used for adding new persons. 
+Let's add the possibility to change the phone numbers of persons to our application. The solution is almost identical to the one we used for adding new persons. 
 
 Again, the mutation requires parameters.
 
 ```js
 export const EDIT_NUMBER = gql`
   mutation editNumber($name: String!, $phone: String!) {
-    editNumber(name: $name, phone: $phone)  {
+    editNumber(name: $name, phone: $phone) {
       name
       phone
       address {
@@ -693,7 +693,7 @@ export const EDIT_NUMBER = gql`
 `
 ```
 
-The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_-hook. 
+The <i>PhoneForm</i> component responsible for the change is straightforward. The form has fields for the person's name and new phone number, and calls the _changeNumber_ function. The function is done using the _useMutation_ hook. 
 Interesting lines on the code have been highlighted.
 
 ```js
@@ -752,7 +752,7 @@ It looks bleak, but it works:
 ![](../../images/8/22a.png)
 
 <!-- Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä.  -->
-Surprisingly, when person's number is changed the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
+Surprisingly, when a person's number is changed, the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
 This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation. 
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
@@ -765,10 +765,10 @@ the mutation response is <i>null</i>:
 ![](../../images/8/23ea.png)
 
 <!-- Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä. -->
-For GraphQL this is not an error, so registering an _onError_ error handler is not useful. 
+For GraphQL, this is not an error, so registering an _onError_ error handler is not useful. 
 
 <!-- Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla. -->
-We can use the _result_ field returned by the _useMutation_-hook as its second parameter to generate an error message. 
+We can use the _result_ field returned by the _useMutation_ hook as its second parameter to generate an error message. 
 
 ```js 
 const PhoneForm = ({ setError }) => {
@@ -795,9 +795,9 @@ const PhoneForm = ({ setError }) => {
 ```
 
 <!-- Jos henkilöä ei löytynt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan jälleen useEffect-hookin avulla, eli virheviesti halutaan asetaa ainoastaan jos mutaation tulos _result.data_ muuttuu. -->
-If a person cannot be found, or the _result.data.editNumber_ is _null_, the component uses the callback-function it received as props to set a suitable error message. 
+If a person cannot be found, or the _result.data.editNumber_ is _null_, the component uses the callback function it received as props to set a suitable error message. 
 We want to set the error message only when the result of the mutation 
-_result.data_ changes, so we use the useEffect-hook to control setting the error message. 
+_result.data_ changes, so we use the useEffect hook to control setting the error message. 
 
 <!-- useEffect aiheuttaa ESLint-virheilmoituksen: -->
 Using useEffect causes an ESLint warning:
@@ -831,16 +831,16 @@ useEffect(() => {
 ```
 
 <!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
-However this solution does not work if the _notify_-function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-function.  If it's not, this results to an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed which causes a new notification and so on an so on...
+However, this solution does not work if the _notify_ function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
 
 The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
 ### Apollo Client and the applications state
 
-In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is quite typical solution for GraphQL applications. 
+In our example, management of the applications state has mostly become the responsibility of Apollo Client. This is a quite typical solution for GraphQL applications. 
 Our example uses the state of the React components only to manage the state of a form and to show error notifications. As a result, it could be that there are no justifiable reasons to use Redux to manage application state when using GraphQL.
 
-When necessary Apollo enables saving the applications local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).
+When necessary, Apollo enables saving the application's local state to [Apollo cache](https://www.apollographql.com/docs/react/local-state/local-state-management/).
 
 </div>
 
@@ -848,11 +848,11 @@ When necessary Apollo enables saving the applications local state to [Apollo cac
 
 ### Exercises 8.8.-8.12.
 
-Through these exercises we'll implement a frontend for the GraphQL-library. 
+Through these exercises, we'll implement a frontend for the GraphQL library. 
 
-Take [this project](https://github.com/fullstack-hy2020/library-frontend) for a start of your application. 
+Take [this project](https://github.com/fullstack-hy2020/library-frontend) as a start for your application. 
 
-You can implement your application either using the render prop -components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0. 
+You can implement your application either using the render prop components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0. 
 
 #### 8.8: Authors view
 
@@ -874,7 +874,7 @@ Implement a possibility to add new books to your application. The functionality 
 
 Make sure that the Authors and Books views are kept up to date after a new book is added. 
 
-In case of problems when making queries or mutations, check from developer console what the server response is:
+In case of problems when making queries or mutations, check from the developer console what the server response is:
 
 ![](../../images/8/42ea.png)
 
@@ -891,10 +891,10 @@ Make sure that the Authors view is kept up to date after setting a birth year.
 #### 8.12: Authors birth year advanced
 
 
-Change the birth year form so that a birth year can be set only for an existing author. Use [select-tag](https://reactjs.org/docs/forms.html#the-select-tag), [react-select](https://github.com/JedWatson/react-select) library or some other mechanism. 
+Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://reactjs.org/docs/forms.html#the-select-tag), [react select](https://github.com/JedWatson/react-select), or some other mechanism. 
 
 
-A solution using the react-select -library looks as follows: 
+A solution using the react select library looks as follows: 
 
 ![](../../images/8/21.png)
 
