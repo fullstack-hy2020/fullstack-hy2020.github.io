@@ -130,7 +130,7 @@ If you want to receive credits, save your <b>University of Helsinki</b> student 
 
 If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam).
 
-You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
+You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
 ![](../../images/0/28a.png)
 
