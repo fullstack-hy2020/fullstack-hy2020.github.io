@@ -9,7 +9,7 @@ lang: en
 
 Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project with a bit more realistic use cases in mind.
 
-One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advicable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node.
+One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advisable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node.
 
 ### Setting up the project
 
@@ -47,7 +47,7 @@ We can now initialise our tsconfig.json settings by running:
  **Note** the extra <i>--</i> before the actual argument! Arguments before <i>--</i>  are interpreted as being for the <i>npm</i> command, while the ones after that are meant for the command that is run through the script (i.e. <i>tsc</i> in this case).
 
 The <i>tsconfig.json</i> file we just created contains a lengthy list of every configuration available to us. However, most of them are commented out.
-Studying this file can help you finding some configuration options you might need.
+Studying this file can help you find some configuration options you might need.
 It is also completely okay to keep the commented lines, in case you might need them someday.
 
 At the moment, we want the following to be active:
@@ -166,7 +166,7 @@ So, let's install <i>ts-node-dev</i>
 npm install --save-dev ts-node-dev
 ```
 
-We finally define a few more npm script, and voilà, we are ready to begin:
+We finally define a few more npm scripts, and voilà, we are ready to begin:
 
 ```json
 {
@@ -180,7 +180,7 @@ We finally define a few more npm script, and voilà, we are ready to begin:
 }
 ```
 
-As you can notice, there is a lot of stuff to go through before beginning actual coding. When you are working with a real project, careful preparations support your development process. Take the needed time to create a good setup for yourself and your team, so that everything runs smoothly in the long run.
+As you can notice, there is a lot of stuff to go through before beginning the actual coding. When you are working with a real project, careful preparations support your development process. Take the needed time to create a good setup for yourself and your team, so that everything runs smoothly in the long run.
 
 ### Let there be code
 
@@ -212,7 +212,7 @@ The development mode is not suitable at all when we later operate the app in pro
 
 Let's try to create a <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do but run the script <i>npm run tsc</i>.
 
-Just like magic a native runnable JavaScript production build of the express backend is created into the directory <i>build</i>.
+Just like magic, a native runnable JavaScript production build of the express backend is created in the directory <i>build</i>.
 
 Currently, if we run eslint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler generated. We can prevent this by creating a  <i>.eslintignore</i> file  which lists the content we want eslint to ignore, just like we do with git and <i>gitignore</i>.
 
@@ -231,12 +231,12 @@ Let's add an npm script for running the application in production mode:
 }
 ```
 
-When we run app with <i>npm start</i> we can verify that also the production build works
+When we run the app with <i>npm start</i> we can verify that the production build also works
 
 ![](../../images/9/15a.png)
 
 Now we have a minimal working pipeline for developing our project.
-With the help of our compiler and eslint it also ensures that a good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment.
+With the help of our compiler and eslint it also ensures that good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment.
 
 </div>
 

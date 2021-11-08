@@ -338,8 +338,12 @@ const calculator = (a: number, b: number, op : Operation) : Result => {
 
 try {
   console.log(calculator(1, 5 , 'divide'))
-} catch (e) {
-  console.log('Something went wrong, error message: ', e.message);
+} catch (error: unknown) {
+  let errorMessage = 'Something went wrong.'
+  if(error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
 }
 ```
 
@@ -347,7 +351,12 @@ try {
 
 <!-- The programs we have written are alright, but it sure would be better if we could use command line arguments instead of always having to change the code to calculate different things.   -->
 
-我们编写的程序是正确的，但是如果我们可以使用命令行参数，而不必总是需要改变代码来计算不同的东西，那肯定会更好。
+<!-- 我们编写的程序是正确的，但是如果我们可以使用命令行参数，而不必总是需要改变代码来计算不同的东西，那肯定会更好。 -->
+
+<!-- As of TypeScript 4.0, <i>catch</i> blocks allow you to specify the type of catch clause variables. Pre-4.4, all <i>catch</i> clause variables were of type <i>any</i>. However, with the release of 4.4, the default type is <i>unknown</i>. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type. -->
+
+对于TypeScript 4.0来说， <i>catch</i> 块允许你指定catch 变量的类型。在4.4版本前， 所有的 <i>catch</i> 变量类型都是 <i>any</i> 。 但是随着4.4版本的发布，默认类型变成了  <i>unknown</i> 。  [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type)  类型是顶级类型，在版本3 中被引入，是安全类型， <i>any</i> 的返例。任何都可以赋予 <i>unknown</i> 类型，但是 <i>unknown</i> 不能赋予任何类型，只有自己类型和  <i>any</i> 除外。在没有类型断言或者控制流限制的情况下。类似的，没有操作能够在不事先断言和限制更具体的类型的情况下作用在  <i>unknown</i>  类型
+
 
 <!-- Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. -->
 让我们通过访问<i>process.argv</i> 来尝试一下，就像在常规的 Node 应用中一样。
@@ -492,9 +501,12 @@ const multiplicator = (a: number, b: number, printText: string) => {
 try {
   const { value1, value2 } = parseArguments(process.argv);
   multiplicator(value1, value2, `Multiplied ${value1} and ${value2}, the result is:`);
-} catch (e) {
-  console.log('Error, something bad happened, message: ', e.message);
-}
+} catch (error: unknown) {
+  let errorMessage = 'Something bad happened.'
+  if(error instanceof Error) {
+    errorMessage += ' Error: ' + error.message;
+  }
+  console.log(errorMessage);
 ```
 
 <!-- When we now run the program  -->

@@ -566,8 +566,8 @@ mongo_database | exiting with code -3
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
-<!-- Let's check that the http://localhost:8000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo. -->
-我们检查 http://localhost:8000/todos 是否能返回所有待办事项。它应该返回我们初始化的两个 todos。我们可以，并且应当使用 Postman 来测试 todos 的基本功能，比如添加或删除 一个todo。
+<!-- Let's check that the http://localhost:3000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo. -->
+我们检查 http://localhost:3000/todos 是否能返回所有待办事项。它应该返回我们初始化的两个 todos。我们可以，并且应当使用 Postman 来测试 todos 的基本功能，比如添加或删除 一个todo。
 
 ### Persisting data with volumes
 使用卷持久化数据
@@ -878,7 +878,7 @@ services:
 const redis = require('../redis')
 ```
 
-<!-- to the express server eg. in file <i>routes/index.js</i>. If noting happens, the configuration is done right. If not, the server crashes: -->
+<!-- to the express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes: -->
 到express服务器，例如在文件  <i>routes/index.js</i> 中。如果啥也没发生，配置就是正确的，否则服务器就挂了。
 
 ```bash

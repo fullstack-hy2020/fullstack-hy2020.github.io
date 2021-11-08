@@ -147,6 +147,11 @@ module.exports = {
       b: 'Building and configuring environments',
       c: 'Basics of Orchestration'
     },
+    '13': {
+      a: 'Using relational databases with Sequelize',
+      b: 'Join tables and queries',
+      c: 'Migrations, many-to-many relationships'
+    },
   },
   zh: {
     '0': {
@@ -228,6 +233,11 @@ module.exports = {
       a: '容器介绍',
       b: '构建配置环境',
       c: '编排基础'
+    },
+    '13': {
+      a: '用 Sequelize 使用关系型数据库',
+      b: '加入表与查询',
+      c: '迁移，多对多关系'
     },
   },
   es: {

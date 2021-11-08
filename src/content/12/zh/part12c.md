@@ -302,9 +302,9 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-<!-- With this configuration, _docker-compose -f docker-compose.dev.yml up_ can run the application in development mode. You don't even need Node installed to develop it! -->
+<!-- With this configuration, _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!-->
 
-通过这个配置，此时我们运行 _docker-compose -f docker-compose.dev.yml up_ ，会启动一个应用，处于开发模式。你不用安装node 来开发了。
+通过这个配置，此时我们运行 _docker-compose up_ ，会启动一个应用，处于开发模式。你不用安装node 来开发了。
 
 <!-- Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again. -->
 
@@ -356,9 +356,9 @@ services:
     image: busybox # highlight-line
 ```
 
-<!-- The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose -f docker-compose.dev.yml up_ will also look like this: -->
+<!-- The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this: -->
 
-Busybox 容器不会有任何进程在运行，所以我们可以在那里 _exec_ 。也由于此，_docker-compose -f docker-compose.dev.yml up_ 的输出会类似如下内容
+Busybox 容器不会有任何进程在运行，所以我们可以在那里 _exec_ 。也由于此，_docker-compose up_ 的输出会类似如下内容
 
 ```
 $ docker-compose up
@@ -399,12 +399,14 @@ $ docker-compose run debug-helper wget -O - http://hello-front-dev:3000
       ...
 ```
 
-<!-- The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access. -->
+<!-- The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The <i>hello-front-dev</i> is the name of the container, which was given by us using *container\_name* in the docker-compose file. And the port used is the port from which the application is available in that container. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
-该URL 是很有趣的一部分。我们简单地说连接到另一个  <i>hello-front-dev</i> 服务的某个端口 3000。该端口不必暴露给网络中的其他服务。 docker-compose 文件中的 "ports" 仅仅是为了外部访问
+Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this: -->
 
-<!-- Let's change the port configuration in the <i>docker-compose.dev.yml</i> to emphasize this: -->
-让我们对 <i>docker-compose.dev.yml</i> 中的端口配置做一些修改来验证这一点：
+该URL 是很有趣的一部分。我们简单地说连接到另一个  <i>hello-front-dev</i> 服务的某个端口 3000。  <i>hello-front-dev</i> 是容器的名字，是在 docker-compose 文件中的被我们定义的 *container\_name* 。端口是容器中可使用的端口，该端口不必暴露给网络中的其他服务。 docker-compose 文件中的 "ports" 仅仅是为了外部访问
+
+<!-- Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this: -->
+让我们对 <i>docker-compose.yml</i> 中的端口配置做一些修改来验证这一点：
 
 ```yml
 services:
@@ -563,8 +565,8 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-<!-- To help us, docker-compose set up a network when we ran docker-compose up. It also added all of the containers in the docker-compose.yml to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name. -->
-为了帮助我们，docker-compose 在运行 docker-compose up 时创建了一个网络。并将  docker-compose.yml 中所有的容器加到了这个网络中。DNS 确保我们可以找到其他容器。容器被给了两个名字：服务名和容器名。
+<!-- To help us, docker-compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name. -->
+为了帮助我们，docker-compose 在运行 _docker-compose up_ 时创建了一个网络。并将 <i>docker-compose.yml</i> 中所有的容器加到了这个网络中。DNS 确保我们可以找到其他容器。容器被给了两个名字：服务名和容器名。
 
 
 <!-- Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000 -->
@@ -585,7 +587,7 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 <!-- That is it! Let's replace the proxy_pass address in nginx.conf with that one. -->
 
-<!-- If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the docker-compose up. -->
+<!-- If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_. -->
 
 就是这样！ 让我们用那个替换 nginx.conf 中的 proxy_pass 地址。
 
@@ -672,8 +674,8 @@ todo-app
 <!-- If you already got this working during a previous exercise you may skip this. -->
 如果您在之前的练习中已经完成了这项工作，则可以跳过此部分。
 
-<!-- Make sure that the development environment is now fully function at, that is -->
-<!-- - all features of the todo app wod -->
+<!-- Make sure that the development environment is now fully functional, that is -->
+<!-- - all features of the todo app works -->
 <!-- - you can edit the source files <i>and</i> the changes take effect through hot reload in case of frontend and by reloading the app in case of backend -->
 确保开发环境当前完全可用：
 - 所有todo 的功能可用
@@ -758,7 +760,34 @@ Structure the app to submission repository as follows:
     └── docker-compose.yml
 ```
 
+### Submitting exercises and getting the credits
+提交练习并获得积分
+
 <!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers). -->
 这是本章节的最后一个练习。是时候将你的代码提交到Github 并在 [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers) 将你所完成的练习标记为已完成了
+
+
+<!-- Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers). Remember that you have to finish <i>all the exercises</i> to pass this part! -->
+向之前的章节那样提交练习，但与0到7章不同，该提交到自己的 [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers) 。记住完成 <i>所有的练习</i> 来通过本章。
+
+<!-- Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course: -->
+
+一旦你完成了练习的提交并希望获得积分。在完成课程的提交后通过练习提交系统让我们知道。
+
+![Submissions](../../images/11/21.png)
+
+<!-- Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part. -->
+
+注意  "exam done in Moodle" 提示是指的 [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam)，需要在获得本章积分之前完成。
+
+<!-- **Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information. -->
+
+**注意** 你需要注册相关的课程章节来获得积分，可以查看 [这里](/en/part0/general_info#parts-and-completion) 来获得更多信息。
+
+<!-- You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.  -->
+你可以点击小旗图标下载认证证书来完成本章节。小旗图标代表认证的语言。
+
+</div>
+
 
 </div>
