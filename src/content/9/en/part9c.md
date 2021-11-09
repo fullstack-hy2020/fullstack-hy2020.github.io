@@ -953,13 +953,13 @@ const addDiary = ( entry: NewDiaryEntry ): DiaryEntry => {  // highlight-line
 
 Now the code looks much cleaner!
 
-There is still a complain in our code:
+There is still a complaint from our code:
 
 ![](../../images/9/43.png)
 
-The cause is eslint rule [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md) that prevents us assigning the fields of request body to variables. 
+The cause is the eslint rule [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md) that prevents us assigning the fields of a request body to variables. 
 
-For the time being, let us just ignore the eslint-rule from the whole file by adding following as the first line of the file:
+For the time being, let us just ignore the eslint-rule from the whole file by adding the following as the first line of the file:
 
 ``` js
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
@@ -989,7 +989,7 @@ Now the application is ready to receive HTTP POST requests for new diary entries
 
 There are plenty of things which can go wrong when we accept data from outside sources.
 Applications rarely work completely on their own, and we are forced to live with the fact that data from sources outside of our system cannot be fully trusted.
-When we receive data from an outside source, there is no way it can be already typed when we receive it. We need to make decisions on how to handle the uncertainty that comes with this.
+When we receive data from an outside source, there is no way it can already be typed when we receive it. We need to make decisions on how to handle the uncertainty that comes with this.
 
 The disabled eslint rule was actually giving us a hint that the following assignment is a risky one:
 
@@ -997,7 +997,7 @@ The disabled eslint rule was actually giving us a hint that the following assign
 const diary = diaryService.findById(Number(req.params.id));
 ```
 
-We certainly would like to have a certainty that the object in a post request is of a right type so let us define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i> object. The function shall be defined in the file <i>utils.ts</i>.
+We certainly would like to have certainty that the object in a post request is of the right type so let us define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly typed <i>NewDiaryEntry</i> object. The function shall be defined in the file <i>utils.ts</i>.
 
 The route definition uses the function as follows
 
@@ -1024,7 +1024,7 @@ router.post('/', (req, res) => {
 
 We can now also remove first line that ignores the eslint rule <i>no-unsafe-assignment</i>.
 
-Since we are now making secure code and trying to ensure that we are getting exactly the data we want from the requests, we should get started with parsing and validating each field we are expecting to receive.
+Since we are now writing secure code and trying to ensure that we are getting exactly the data we want from the requests, we should get started with parsing and validating each field we are expecting to receive.
 
 The skeleton of the function <i>toNewDiaryEntry</i> looks like the following:
 
@@ -1050,7 +1050,7 @@ However if we type the object as <i>any</i>, eslint gives us two complaints:
 
 ![](../../images/9/44.png)
 
-We could ignore these rules but a better idea is to follow the advice the editor gives when trying the <i>quick fix</i> and give the parameter type unknown.
+We could ignore these rules but a better idea is to follow the advice the editor gives in the <i>Quick Fix</i> and set the parameter type to unknown.
 ```js
 import { NewDiaryEntry } from './types';
 
@@ -1094,7 +1094,7 @@ const isString = (text: unknown): text is string => {
 };
 ```
 
-The function is a so called [type guard](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). That means it is a function which returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
+The function is a so-called [type guard](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). That means it is a function which returns a boolean <i>and</i> which has a <i>type predicate</i> as the return type. In our case the type predicate is
 
 ```js
 text is string
@@ -1108,7 +1108,7 @@ Before the type guard is called, the actual type of the variable <i>comment</i> 
 
 ![](../../images/9/28e-21.png)
 
-But after the call, if the code proceeds past the exception (that is the type guard returned true), compiler knows that <i>comment</i> is of the type <i>string</i>:
+But after the call, if the code proceeds past the exception (that is the type guard returned true), then the compiler knows that <i>comment</i> is of type <i>string</i>:
 
 ![](../../images/9/29e-21.png)
 
@@ -1120,7 +1120,7 @@ const isString = (text: unknown): text is string => {
 }
 ```
 
-would it not be enough to write the guard like this
+Would it not be enough to write the guard like this?
 
 ```js
 const isString = (text: unknown): text is string => {
@@ -1165,7 +1165,7 @@ const parseDate = (date: unknown): string => {
 ```
 
 The code is really nothing special. The only thing is, that we can't use a type guard here since a date in this case is only considered to be a <i>string</i>.
-Note, that even though the <i>parseDate</i> function accepts the <i>date</i> variable as unknown, after we check the type with <i>isString</i> its type is set as string, which is why we can give the variable to the <i>isDate</i> function requiring a string without any problems.
+Note, that even though the <i>parseDate</i> function accepts the <i>date</i> variable as unknown, after we check the type with <i>isString</i> then its type is set as string, which is why we can give the variable to the <i>isDate</i> function requiring a string without any problems.
 
 Finally we are ready to move on to the last two types, Weather and Visibility.
 
@@ -1189,7 +1189,7 @@ const isWeather = (str: string): str is Weather => {
 };
 ```
 
-This would work just fine, but the problem is that the list of possible weathers does not necessarily stay in sync with the type definitions if the type is altered.
+This would work just fine, but the problem is that the list of possible values for Weather does not necessarily stay in sync with the type definitions if the type is altered.
 This is most certainly not good, since we would like to have just one source for all possible weather types.
 
 In our case a better solution would be to improve the actual Weather type. Instead of a type alias we should use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html), which allows us to use the actual values in our code in runtime, not only in the compilation phase.
@@ -1259,12 +1259,12 @@ const diaryEntries: DiaryEntry [] = data.map(obj => {
 
 export default diaryEntries;
 ```
-Note that since <i>toNewDiaryEntry</i> returns an object of the type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
+Note that since <i>toNewDiaryEntry</i> returns an object of type <i>NewDiaryEntry</i> we need to assert it to be <i>DiaryEntry</i> with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
 
 Enums are usually used when there is a set of predetermined values which are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example weekdays, months, directions) but since they offer us a great way to validate our incoming values we might as well use them in our case.
 
-We still need to give the same treatment to <i>visibility</i>. The enum looks following
+We still need to give the same treatment to <i>visibility</i>. The enum looks as follows
 
 ```js
 export enum Visibility {
@@ -1291,7 +1291,7 @@ const parseVisibility = (visibility: unknown): Visibility => {
 };
 ```
 
-And finally we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data. There is however one more thing to take care of. If we try to access the fields of the parameter <i>object</i> as follows:
+And finally, we can finalize the  <i>toNewDiaryEntry</i> function that takes care of validating and parsing the fields of the post data. There is however one more thing to take care of. If we try to access the fields of the parameter <i>object</i> as follows:
 
 ```js
 const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
@@ -1306,7 +1306,7 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 };
 ```
 
-we notice that the code does not compile. This is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so also accessing the fields is not possible. 
+we notice that the code does not compile. This is due to the fact that the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so accessing the fields is not possible. 
 
 We can fix this by destructuring the fields to variables of the type unknown as follows:
 
