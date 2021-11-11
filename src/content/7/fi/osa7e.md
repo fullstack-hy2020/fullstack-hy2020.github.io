@@ -284,7 +284,11 @@ eli nimi sisältäisi hipsun <code>'</code>, jonka on SQL:ssä merkkijonon aloit
 SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
 ```
 
-SQL-injektiot estetään [sanitoimalla](https://security.stackexchange.com/questions/172297/sanitizing-input-for-parameterized-queries) syöte, eli tarkastamalla, että kyselyjen parametrit eivät sisällä kiellettyjä merkkejä, kuten tässä tapauksessa hipsuja. Jos kiellettyjä merkkejä löytyy, ne korvataan turvallisilla vastineilla [escapettamalla](https://en.wikipedia.org/wiki/Escape_character#JavaScript).
+SQL-injektiot estetään [parametrisoiduilla kyselyillä](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). Niissä käyttäjän syötettä ei lisätä lainkaan SQL-kyselyn sekaan, vaan tietokanta itse lisää syötearvot turvallisesti kyselyssä olevien paikkamerkkien (yleensä <code>?</code>) paikalle.
+  
+```js
+execute("SELECT * FROM Users WHERE name = ?", [userName])
+```
 
 Myös NoSQL-kantoihin tehtävät injektiohyökkäykset ovat mahdollisia. Mongoose kuitenkin estää ne [sanitoimalla](https://zanon.io/posts/nosql-injection-in-mongodb) kyselyt. Lisää aiheesta esim. [täällä](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
 
