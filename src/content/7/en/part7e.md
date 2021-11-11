@@ -313,7 +313,12 @@ SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
 
 
 
-SQL injections are prevented by [sanitizing](https://security.stackexchange.com/questions/172297/sanitizing-input-for-parameterized-queries) the input, which would entail checking that the parameters of the query do not contain any forbidden characters, in this case single quotes. If forbidden characters are found, they are replaced with safe alternatives by [escaping](https://en.wikipedia.org/wiki/Escape_character#JavaScript) them.
+
+SQL injections are prevented using [parameterized queries](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). With them, user input isn't mixed with the SQL query, but the database itself inserts the input values at placeholders in the query (usually <code>?</code>).
+
+```js
+execute("SELECT * FROM Users WHERE name = ?", [userName])
+```
 
 
 
