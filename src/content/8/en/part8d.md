@@ -8,12 +8,12 @@ lang: en
 <div class="content">
 
 
-The frontend of our application shows the phone directory just fine with the updated server. However if we want to add new persons, we have to add login functionality to the frontend. 
+The frontend of our application shows the phone directory just fine with the updated server. However, if we want to add new persons, we have to add login functionality to the frontend. 
 
-### User log in
+### User login
 
 <!-- Lisätään sovelluksen tilaan muuttuja _token_, joka tallettaa tokenin siinä vaiheessa kun käyttäjä on kirjautunut. Jos _token_ ei ole määritelty, näytetään kirjautumisesta huolehtiva komponentti <i>LoginForm</i>, joka saa parametriksi virheenkäsittelijän sekä funktion _setToken_: -->
-Let's add variable _token_ to the application's state. It will contain user's token when one is logged in. If _token_ is undefined, we render the <i>LoginForm</i>-component responsible for user login. The component receives an error handler and the _setToken_-function as parameters:
+Let's add the variable _token_ to the application's state. When a user is logged in, it will contain a user token. If _token_ is undefined, we render the <i>LoginForm</i> component responsible for user login. The component receives an error handler and the _setToken_ function as parameters:
 
 ```js
 const App = () => {
@@ -41,7 +41,7 @@ const App = () => {
 ```
 
 <!-- Määritellään kirjautumisen suorittava mutaatio -->
-Next we define a mutation for logging in
+Next, we define a mutation for logging in:
 
 ```js
 export const LOGIN = gql`
@@ -54,7 +54,7 @@ export const LOGIN = gql`
 ```
 
 <!-- Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa: -->
-The _LoginForm_-component works pretty much just like all other components doing mutations we have previously created. 
+The _LoginForm_ component works pretty much just like all the other components doing mutations that we have previously created. 
 Interesting lines in the code have been highlighted:
 
 ```js
@@ -114,10 +114,10 @@ export default LoginForm
 ```
 
 <!-- Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin. -->
-We are using an effect hook again. Here it's used to save the token's value to the state of the _App_ component and the local storage after the server has responded to the mutation. 
+We are using an effect hook again. Here, it's used to save the token's value to the state of the _App_ component and the local storage after the server has responded to the mutation. 
 Use of the effect hook is necessary to avoid an endless rendering loop.
 
-Let's also add a button which enables a logged in user to log out. The button's onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged in users should have access to. 
+Let's also add a button which enables a logged-in user to log out. The button's onClick handler sets the _token_ state to null, removes the token from local storage and resets the cache of the Apollo client. The last step is [important](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), because some queries might have fetched data to cache, which only logged-in users should have access to. 
 
 We can reset the cache using the [resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) method of an Apollo _client_ object. 
 The client can be accessed with the [useApolloClient](https://www.apollographql.com/docs/react/api/react-hooks/#useapolloclient) hook:
@@ -148,7 +148,7 @@ The current code of the application can be found on [Github](https://github.com/
 
 ### Adding a token to a header
 
-After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_-object in <i>index.js</i> a little. 
+After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_ object in <i>index.js</i> a little. 
 
 ```js
 import { setContext } from '@apollo/client/link/context' // highlight-line
@@ -174,7 +174,7 @@ const client = new ApolloClient({
 ```
 
 <!-- _client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määrittelee, miten apollo on yhteydessä palvelimeen. Nyt normaalia [httpLink](https://www.apollographql.com/docs/link/links/http.htm)-yhteyttä muokataan siten, että, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token. -->
-The link parameter given to the _client_-object defines how apollo connects to the server. Here the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
+The link parameter given to the _client_ object defines how apollo connects to the server. Here, the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 
 
@@ -224,7 +224,7 @@ const PersonForm = ({ setError }) => {
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates. 
 
-It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/api/react/hooks/#options)-callback for the mutation, which Apollo runs after the mutation:
+It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/api/react/hooks/#options) callback for the mutation, which Apollo runs after the mutation:
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -252,18 +252,18 @@ const PersonForm = ({ setError }) => {
 }  
 ```
 
-The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case this would be the created person. 
+The callback function is given a reference to the cache and the data returned by the mutation as parameters. For example, in our case, this would be the created person. 
 
-The code reads the cached state of <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
+The code reads the cached state of the <em>ALL\_PERSONS</em> query using [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) function and updates the cache with [writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) function adding the new person to the cached data. 
 
 Note that readQuery will throw an error if your cache does not contain all of the data necessary to fulfill the specified query. This can be solved using a try-catch block.
 
 <!-- On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys.  -->
-In some situations the only sensible way to keep the cache up to date is using the _update_-callback.
+In some situations, the only sensible way to keep the cache up to date is using the _update_ callback.
 
-When necessary it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) as <em>no-cache</em>.
+When necessary, it is possible to disable cache for the whole application or [single queries](https://www.apollographql.com/docs/react/api/react/hooks/#options) by setting the field managing the use of cache, [fetchPolicy](https://www.apollographql.com/docs/react/data/queries/#configuring-fetch-logic) as <em>no-cache</em>.
 
-Be diligent with the cache. Old data in cache can cause hard to find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
+Be diligent with the cache. Old data in cache can cause hard-to-find bugs. As we know, keeping the cache up to date is very challenging. According to a coder proverb:
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
@@ -278,12 +278,12 @@ The current code of the application can be found on [Github](https://github.com/
 #### 8.17 Listing books
 
 
-After the backend changes the list of books does not work anymore. Fix it. 
+After the backend changes, the list of books does not work anymore. Fix it. 
 
 #### 8.18 Log in
 
 
-Adding new books and changing the birth year of an author do not work because they require user to be logged in. 
+Adding new books and changing the birth year of an author do not work because they require a user to be logged in. 
 
 
 Implement login functionality and fix the mutations. 
@@ -292,7 +292,7 @@ Implement login functionality and fix the mutations.
 It is not necessary yet to handle validation errors. 
 
 
-You can decide how the log in looks on the user interface. One possible solution is to make the login form into a separate view which can be accessed through a navigation menu: 
+You can decide how the login looks on the user interface. One possible solution is to make the login form into a separate view which can be accessed through a navigation menu: 
 
 ![](../../images/8/26.png)
 
@@ -302,7 +302,7 @@ The login form:
 ![](../../images/8/27.png)
 
 
-When a user is logged in, the navigation changes to show the functionalities which can only be done by a logged in user:
+When a user is logged in, the navigation changes to show the functionalities which can only be done by a logged-in user:
 
 ![](../../images/8/28.png)
 
@@ -313,33 +313,33 @@ Complete your application to filter the book list by genre. Your solution might 
 
 ![](../../images/8/30.png)
 
-In this exercise the filtering can be done using just React.
+In this exercise, the filtering can be done using just React.
 
 #### 8.20 Books by genre, part 2
 
 
-Implement a view which shows all the books based on the logged in user's favourite genre.
+Implement a view which shows all the books based on the logged-in user's favourite genre.
 
 ![](../../images/8/29.png)
 
 #### 8.21 books by genre with GraphQL
 
 
-In the previous exercise 8.20, the filtering could have been done using just React. To complete this exercise, you should filter the books in the recommendations page using a GraphQL query to the server. The query created in exercise 8.5 could be useful here. 
+In previous exercise 8.20, the filtering could have been done using just React. To complete this exercise, you should filter the books in the recommendations page using a GraphQL query to the server. The query created in exercise 8.5 could be useful here. 
 
 
-This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in [next part](/en/part8/fragments_and_subscriptions).
+This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in the [next part](/en/part8/fragments_and_subscriptions).
 
-Some tips
+Some tips:
 
-- Instead of using <i>useQuery</i> it is probably better to do the queries with the <i>useLazyQuery</i>-hook
+- Instead of using <i>useQuery</i>, it is probably better to do the queries with the <i>useLazyQuery</i> hook.
 - It is sometimes useful to save the results of a GraphQL query to the state of a component. 
-- Note, that you can do GraphQL queries in a <i>useEffect</i>-hook.
-- The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> - hook can become handy depending on your approach. 
+- Note that you can do GraphQL queries in a <i>useEffect</i> hook.
+- The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> hook can become handy depending on your approach. 
 
-#### 8.22 Up to date cache and book recommendations
+#### 8.22 Up-to-date cache and book recommendations
 
-If you did the previous exercise, that is fetch the books in a genre with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
+If you did the previous exercise, that is, fetch the books in a genre with GraphQL, ensure somehow that the books view is kept up to date. So when a new book is added, the books view is updated **at least** when a genre selection button is pressed. 
 
 <i>When new genre selection is not done, the view does not have to be updated. </i>
 
