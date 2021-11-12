@@ -7,15 +7,15 @@ lang: en
 
 <div class="content">
 
-This section introduces node applications using relational databases. In this section, a relational database node-backend is built for the note-taking application familiar from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. One place to acquire sufficient knowledge is the course [Fundamentals of Databases](https://tikape.mooc.fi/).
+On this section we will explore the node applications that use relation databases. During section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. One place to acquire sufficient knowledge is the course called [Fundamentals of Databases](https://tikape.mooc.fi/).
 
 ### Advantages and disadvantages of document databases
 
-We have used the MongoDB database in all the previous parts of the course. Mongo is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database) and one of its most characteristic features is its <i>skepticity</i>, i.e. the database has only a very limited awareness of what kind of data is stored in its collections. The schema of the database exists only in the program code, which interprets the data in a particular way, e.g. by recognizing that some fields are references to objects in another collection.
+We have used the MongoDB database in all the previous sections of the course. Mongo is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database) and one of its most characteristic features is its <i>skepticity</i>, i.e. the database has only a very limited awareness of what kind of data is stored in its collections. The schema of the database exists only in the program code, which interprets the data in a specific way, e.g. by identifying that some of the fields are references to objects in another collection.
 
-In the example application of parts 3 and 4, the database stores notes and users. 
+In the example application of parts 3 and 4, the database stores notes and users.
 
-The collection <i>notes</i> that stores notes looks like this
+A collection of <i>notes</i> that stores notes looks like the following:
 
 ```js
 [
@@ -54,19 +54,19 @@ Users saving collection <i>users</i> looks like the following:
 ]
 ```
 
-MongoDB does know the types of the fields of the stored entities, but it has no information about which collection of entities the user record ids refer to. MongoDB also does not care what fields the entities stored in the collections have. MongoDB therefore leaves it entirely up to the programmer to ensure that the correct information is stored in the database.
+MongoDB does know the types of the fields of the stored entities, but it has no information about which collection of entities the user record ids are referring to. MongoDB also does not care what fields the entities stored in the collections have. Therefore MongoDB leaves it entirely up to the programmer to ensure that the correct information is being stored in the database.
 
-There are both advantages and disadvantages to not having a schema. One advantage is the flexibility that schema agnosticism brings: since the schema does not need to be defined at the database level, application development can be faster and easier in some cases, with little effort required to define and modify the schema in any case. The problems with schema-lessness are related to the error-proneness, everything is left to the programmer, the database has no way of checking whether the data stored in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether fields of reference type refer to existing entities of the right type in general, etc.
+There are both advantages and disadvantages to not having a schema. One of the advantages is the flexibility that schema agnosticism brings: since schema does not need to be defined at the database level, application development may be faster in a certain cases, and easier, with little of effort must be made in defining the schema and its changes in any case. Problems with not having a schema are related to the error-proneness: everything is left up to the programmer. The database itself has no way of checking whether the data in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether the reference type fields refer to existing entities of the right type in general, etc.
 
-The relational databases that are the focus of this section, on the other hand, rely heavily on the existence of a schema, and the advantages and disadvantages of schema databases are almost the opposite of those of non-schema databases.
+The relational databases that are the focus of this section, on the other hand, lean heavily on the existence of a schema, and the advantages and disadvantages of schema databases are almost the opposite compared of the non-schema databases.
 
-The reason why the earlier parts of the course used MongoDB is precisely because of its schema-less nature, which has made the database somewhat easier to use for someone with little knowledge of relational databases. For most of the use cases in this course I would have chosen a relational database myself.
+The reason why the the previous sections of the course used MongoDB is precisely because of its schema-less nature, which has made it easier to use the database for someone with little knowledge of relational databases. For most of the use cases of this course, I would have chosen the relational database myself.
 
 ### Application database
 
 We need a relational database for our application. There are many options, we will use the currently most popular Open Source solution [PostgreSQL](https://www.postgresql.org/). If you wish, you can install Postgres (as the database is often called) on your machine. An easier way is to use one of the cloud-based Postgres, e.g. [ElephantSQL](https://www.elephantsql.com/). You can also use the lessons learned in the course [part 12](/en/part12) to run Postgres locally using Docker.
 
-However, we will now take advantage of the fact that it is possible to create a Postgres database for your application on the Heroku cloud platform, familiar from parts 3 and 4. 
+However, we will now take advantage of the fact that it is possible to create a Postgres database for your application on the Heroku cloud platform, familiar from parts 3 and 4.
 
 In the theoretical material in this section, we build a Postgres-enabled version of the backend of the notes-storage application built in sections 3 and 4.
 
@@ -100,7 +100,7 @@ username=> \d
 Did not find any relations.
 ```
 
-As you might guess, there is nothing in the database. 
+As you might guess, there is nothing in the database.
 
 Let's create a table for notes:
 
@@ -127,7 +127,7 @@ username=> \d
 (2 rows)
 ```
 
-In addition to the <i>notes</i> table, Postgres created a subtable <i>not\_id\_seq</i> that keeps track of what value is assigned to the <i>id</i> column when the next note is created. 
+In addition to the <i>notes</i> table, Postgres created a subtable <i>not\_id\_seq</i> that keeps track of what value is assigned to the <i>id</i> column when the next note is created.
 
 With the _\d notes_ command we can see how the <i>notes</i> table is defined:
 
@@ -144,7 +144,7 @@ Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 ```
 
-The column <i>id</i> thus has a default value, which is obtained by calling the postgres internal function <i>nextval</i>. 
+The column <i>id</i> thus has a default value, which is obtained by calling the postgres internal function <i>nextval</i>.
 
 Add some content to the table:
 
@@ -152,7 +152,7 @@ Add some content to the table:
 insert into notes (content, important) values ('Relational databases rule the world', true);
 insert into notes (content, important) values ('MongoDB is webscale', false);
 ```
-  
+
 And let's see what the generated content looks like:
 
 ```sql
@@ -223,7 +223,7 @@ const main = async () => {
   } catch (error) {
     console.error('Unable to connect to the database:', error)
   }
-} 
+}
 
 main()
 ```
@@ -268,7 +268,7 @@ const main = async () => {
   } catch (error) {
     console.error('Unable to connect to the database:', error)
   }
-} 
+}
 
 main()
 ```
@@ -386,7 +386,7 @@ app.listen(PORT, () => {
 
 A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each column has a type defined, plus other properties if needed, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute and other configuration information. We noted that the table does not have frequently used timestamp columns (created\_at and updated\_at).
 
-We also specified that table names are inferred from model names using the "underscored" technique. In practice, this means that if a model name is <i>Note</i>, as in our case, the name of the corresponding table is inferred from the lowercase plural of <i>notes</i>. If, on the other hand, the name of the model were "two-part", e.g. <i>StudyGroup</i>, the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names. 
+We also specified that table names are inferred from model names using the "underscored" technique. In practice, this means that if a model name is <i>Note</i>, as in our case, the name of the corresponding table is inferred from the lowercase plural of <i>notes</i>. If, on the other hand, the name of the model were "two-part", e.g. <i>StudyGroup</i>, the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
 
 The same naming convention applies to columns. If we had specified that a note is associated with <i>creationYear</i>, i.e. information about the year it was created, we would define it in the model as follows:
 
@@ -399,7 +399,7 @@ Note.init({
 })
 ```
 
-The name of the corresponding column in the database would be <i>creation_year</i>. In the code, the reference to the column is always in the same format as in the model, i.e. in "camel case" format. 
+The name of the corresponding column in the database would be <i>creation_year</i>. In the code, the reference to the column is always in the same format as in the model, i.e. in "camel case" format.
 
 We have also specified <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>, however we want a lower case initial, it will make a few things a bit more convenient in the future.
 
@@ -513,7 +513,7 @@ Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
 
 Our application now has one annoying aspect, it assumes that a database with exactly the right schema exists, i.e. that the table `notes` has been created with the appropriate `create table` command.
 
-Since the program code is stored on Github, it would make sense to also store the commands that create the database in the program code, so that the schema of the database is definitely what the program code expects. Sequelize can actually generate the schema automatically from the model definition using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization). 
+Since the program code is stored on Github, it would make sense to also store the commands that create the database in the program code, so that the schema of the database is definitely what the program code expects. Sequelize can actually generate the schema automatically from the model definition using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
 
 Let's now destroy the database from the console by issuing the following command:
 
@@ -528,7 +528,7 @@ username=> \d
 Did not find any relations.
 ```
 
-The application no longer works. 
+The application no longer works.
 
 Add the following command to the application immediately after the model `Note` is defined:
 
@@ -546,7 +546,7 @@ That is, when the application starts, the command `CREATE TABLE IF NOT EXISTS "n
 
 ### Other operations
 
-Let's complete the application with a few more operations. 
+Let's complete the application with a few more operations.
 
 The search for a single note is possible with the method [findByPk](https://sequelize.org/master/manual/model-querying-finders.html) because it is searched by the id of the primary key:
 
@@ -660,7 +660,7 @@ Now the end result is exactly what we want.
 }
 ```
 
-In the case of a collection of entities, the method toJson does not work directly, the method must be called separately for each entity in the collection: 
+In the case of a collection of entities, the method toJson does not work directly, the method must be called separately for each entity in the collection:
 
 ```js
 router.get('/', async (req, res) => {
@@ -672,7 +672,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-However, perhaps a better solution is to convert the collection to JSON for printing: 
+However, perhaps a better solution is to convert the collection to JSON for printing:
 
 ```js
 router.get('/', async (req, res) => {
@@ -687,7 +687,7 @@ router.get('/', async (req, res) => {
 This way is better especially if the entities in the collection contain other entities. It is also often useful to format the entities on the screen in a slightly more reader-friendly format. This can be done with the command:
 
 ```json
-console.log(JSON.stringify(notes, null, 2)) 
+console.log(JSON.stringify(notes, null, 2))
 ```
 
 </div>
