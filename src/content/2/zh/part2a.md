@@ -76,9 +76,9 @@ props value is [Object object]
   }
 }
 ```
-<!-- Debugging your code using _console.log()_ is so common that  Visual Studio Code has that snippet built in. To use it, type _log_ and hit tab to autocomplete.  -->
+<!--Debugging your code using _console.log()_ is so common that Visual Studio Code has that snippet built in. To use it, type _log_ and hit tab to autocomplete. More fully featured _console.log()_ snippet extensions can be found in the [marketplace](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance).  -->
 
-使用  _console.log()_  来debug 你的代码十分常见， Visual Studio Code 有内置的snippet。可以使用  _log_  和tab键来自动补全
+使用  _console.log()_  来debug 你的代码十分常见， Visual Studio Code 有内置的snippet。可以使用  _log_  和tab键来自动补全。功能更全的 _console.log()_  snippet 插件可以在 [软件市场](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance).中找到。
 
 ### JavaScript Arrays 
 【JavaScript 数组】

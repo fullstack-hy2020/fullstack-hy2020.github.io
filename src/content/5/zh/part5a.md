@@ -757,7 +757,7 @@ npm start
 <!-- If one wants to play safe, the best option is to not store a token to the local storage. This might be an option in situations where leaking a token might have tragic consequences. -->
 如果想更安全一些，最好的方式是不将token 保存在本地存储。对于泄漏token 导致灾难结果的场景这是一个可行的方案。
 
-<!-- It has been suggested that  the identity of a signed in user should be saved as [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), so that JavaScript code could not have any access the token. The drawback of this solution is that it would make implementing SPA-applications a bit more complex. One would need at least to implement a separate page for logging in. -->
+<!-- It has been suggested that  the identity of a signed in user should be saved as [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies), so that JavaScript code could not have any access to the token. The drawback of this solution is that it would make implementing SPA-applications a bit more complex. One would need at least to implement a separate page for logging in. -->
 一种建议是登录的用户的认证应该保存成 s [httpOnly cookies](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies) ， 这样JavaScrip 代码就不会有任何访问到token的可能。这种方法的缺点是实现SPA 应用会有一些复杂。需要至少为登录实现一个单独的页面。
 
 <!-- However it is good to notice that even the use of a httpOnly cookies does not guarantee anything. It has even been suggested that httpOnly cookies are [not any safer than](https://academind.com/tutorials/localstorage-vs-cookies-xss/) the use of local storage.  -->

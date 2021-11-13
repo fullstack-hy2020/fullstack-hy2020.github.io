@@ -553,8 +553,8 @@ const Notification = () => {
 }
 ```
 
-<!-- You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality and refactor the application so that it uses a combined reducer as shown in this part of the course material. -->
-您必须对应用现有的 reducer 进行更改。 为新的功能创建一个单独的reducer，并重构应用，以便它使用一个组合的reducer，如教材的这一章节所教的那样。
+<!-- You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality and refactor the application so that it uses a [combined reducer](https://fullstackopen.com/en/part6/many_reducers#combined-reducers) as shown in this part of the course material. -->
+您必须对应用现有的 reducer 进行更改。 为新的功能创建一个[combined reducer](https://fullstackopen.com/en/part6/many_reducers#combined-reducers) ，并重构应用，以便它使用一个组合的reducer，如教材的这一章节所教的那样。
 
 <!-- The application does not have to use the <i>Notification</i> component in any intelligent way at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>. -->
 在练习的这一点上，应用不必以任何智能方式使用<i>Notification</i> 组件。 应用只需在<i>notificationReducer</i> 中显示消息的初始值集即可。

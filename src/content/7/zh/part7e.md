@@ -362,10 +362,12 @@ SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
 
 
 
-<!-- SQL-injections are prevented by [sanitizing](https://security.stackexchange.com/questions/172297/sanitizing-input-for-parameterized-queries) the input, which would entail checking that the parameters of the query do not contain any forbidden characters, in this case single quotes. If forbidden characters are found they are replaced with safe alternatives by [escaping](https://en.wikipedia.org/wiki/Escape_character#JavaScript) them. -->
-Sql-injections 可以通过[sanitizing](https://security.stackexchange.com/questions/172297/sanitizing-input-for-parameterized-queries)输入来阻止，这将需要检查查询的参数不包含任何禁止的字符，在这里是单引号。 如果发现被禁止的字符，它们将被替换为安全的替代字符，即[逃逸](https://en.wikipedia.org/wiki/escape_character#javascript)字符。 
+<!-- SQL injections are prevented using [parameterized queries](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). With them, user input isn't mixed with the SQL query, but the database itself inserts the input values at placeholders in the query (usually <code>?</code>). -->
+SQL 注入可以通过[parameterized queries](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f) 来阻止。利用这个方法，用户的输入与SQL并不是耦合在一起的，而是数据库自己来利用占位符在查询中插入input 数据（通常是 <code>?</code>）
 
-
+```js
+execute("SELECT * FROM Users WHERE name = ?", [userName])
+```
 
 <!-- Injection attacks are also possible in NoSQL-databases. However, mongoose prevents them by [sanitizing](https://zanon.io/posts/nosql-injection-in-mongodb) the queries. More on the topic can be found e.g. [here](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html). -->
 注射攻击在 NoSQL-databases 也是可行的。 然而，mongoose 通过[sanitizing](https://zanon.io/posts/nosql-injection-in-mongodb)查询来阻止它们。 你可以在[这里](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html)找到更多关于这个话题的讨论。

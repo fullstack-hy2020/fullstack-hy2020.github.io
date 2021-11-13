@@ -27,6 +27,18 @@ const getAll = () => {
 
 export default { getAll, create, update }
 ```
+  
+We will also need to change the url specified in the effect in <i>App.js</i>:
+  
+```js
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/notes')
+      .then(res => {
+        setNotes(res.data)
+      })
+  }, [])
+```
 
 <!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
 Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
