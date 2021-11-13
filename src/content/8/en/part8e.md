@@ -9,10 +9,10 @@ lang: en
 
 We are approaching the end of the course. Let's finish by having a look at a few more details of GraphQL. 
 
-### fragments
+### Fragments
 
 
-It is pretty common in GraphQL that multiple queries return similar results. For example the query for the details of a person
+It is pretty common in GraphQL that multiple queries return similar results. For example, the query for the details of a person
 
 ```js
 query {
@@ -60,7 +60,7 @@ fragment PersonDetails on Person {
 ```
 
 
-With the fragment we can do the queries in a compact form:
+With the fragment, we can do the queries in a compact form:
 
 ```js
 query {
@@ -131,20 +131,20 @@ const ALL_PERSONS = gql`
 
 ### Subscriptions
   
-Along with query- and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions clients can <i>subscribe to</i> updates about changes in the server. 
+Along with query and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions, clients can <i>subscribe</i> to updates about changes in the server. 
 
 
-Subscriptions are radically different from anything we have seen in this course so far. Until now all interaction between browser and the server has been React application in the browser making HTTP-requests to the server. GraphQL queries and mutations have also been done this way. 
-With subscriptions the situation is the opposite. After an application has made a subscription, it starts to listen to the server. 
+Subscriptions are radically different from anything we have seen in this course so far. Until now, all interaction between browser and server was due to a React application in the browser making HTTP requests to the server. GraphQL queries and mutations have also been done this way. 
+With subscriptions, the situation is the opposite. After an application has made a subscription, it starts to listen to the server. 
 When changes occur on the server, it sends a notification to all of its <i>subscribers</i>.
 
 
 
-Technically speaking the HTTP-protocol is not well suited for communication from the server to the browser, so under the hood Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication. 
+Technically speaking, the HTTP protocol is not well-suited for communication from the server to the browser. So, under the hood, Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication. 
 
 ### Subscriptions on the server
 
-**NB!** This subscription setup is based on the apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed the apollo-server version 2 (for example by running _npm i apollo-server@2.25.2_) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
+**NB!** This subscription setup is based on apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed apollo-server version 2 (for example by running _npm i apollo-server@2.25.2_) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
   
 Let's implement subscriptions for subscribing for notifications about new persons added.
 First, we have to install the package for adding subscriptions to GraphQL:
@@ -212,7 +212,7 @@ With subscriptions, the communication happens using the [publish-subscribe](http
 _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
 
 
-Let's do the following changes to the code which starts the server
+Let's do the following changes to the code which starts the server:
 ```js
 // ...
 
@@ -223,7 +223,7 @@ server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
 ```
 
 
-We see, that the server listens for subscriptions in the address _ws://localhost:4000/graphql_
+We see that the server listens for subscriptions in the address _ws://localhost:4000/graphql_
 
 ```js
 Server ready at http://localhost:4000/
@@ -370,7 +370,7 @@ When a new person is now added to the phonebook, no matter where it's done, the 
 ![](../../images/8/32e.png)
 
 
-When a new person is added, the server sends a notification to the client, and the callback-function defined in the _onSubscriptionData_ attribute is called and given the details of the new person as parameters. 
+When a new person is added, the server sends a notification to the client, and the callback function defined in the _onSubscriptionData_ attribute is called and given the details of the new person as parameters. 
 
 Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately. 
 
@@ -389,7 +389,7 @@ const App = () => {
     if (!includedIn(dataInStore.allPersons, addedPerson)) {
       client.writeQuery({
         query: ALL_PERSONS,
-        data: { allPersons : dataInStore.allPersons.concat(addedPerson) }
+        data: { allPersons: dataInStore.allPersons.concat(addedPerson) }
       })
     }   
   }
@@ -427,9 +427,9 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 
 The final code of the client can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
 
-### n+1-problem
+### n+1 problem
 
-First of all  you'll need to enable a debugging option via _mongoose_ in your backend project directory, by adding a line of code as shown below:
+First of all, you'll need to enable a debugging option via _mongoose_ in your backend project directory, by adding a line of code as shown below:
 
 
 ```js
@@ -468,7 +468,7 @@ query {
 }
 ```
 
-Because _friendOf_ is not a field of <i>Person</i>-objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list: 
+Because _friendOf_ is not a field of <i>Person</i> objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list: 
 
 ```js
 Person: {
@@ -489,7 +489,7 @@ Person: {
 ```
 
 
-The parameter _root_ is the person object for which friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list: 
+The parameter _root_ is the person object for which a friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list: 
 
 ```js
   Person: {
@@ -524,7 +524,7 @@ query {
 ```
 
 
-There is however one issue with our solution, it does an unreasonable amount of queries to the database. If we log every query to the database, just like this for example,
+There is however one issue with our solution: it does an unreasonable amount of queries to the database. If we log every query to the database, just like this for example,
 ```js
 
 Query: {
@@ -566,18 +566,18 @@ User.find
 User.find
 </pre>
 
-NOTE: Depending upon if you provided _phone_ parameter or not when querying _allPersons_, you'll see _User.find_v2_ or _User.find_v1_ logs in your console respectively.
+NOTE: Depending upon if you provided _phone_ parameter or not when querying _allPersons_, you'll see _User.find\_v2_ or _User.find\_v1_ logs in your console respectively.
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 
 
-This is a manifestation of the famous [n+1-problem](https://www.google.com/search?q=n%2B1+problem), which appears every once in a while in different contexts, and sometimes sneaks up on developers without them noticing. 
+This is a manifestation of the famous [n+1 problem](https://www.google.com/search?q=n%2B1+problem), which appears every once in a while in different contexts, and sometimes sneaks up on developers without them noticing. 
 
 
-Good solution for n+1 problem depends on the situation. Often it requires using some kind of a join query instead of multiple separate queries. 
+The right solution for the n+1 problem depends on the situation. Often, it requires using some kind of a join query instead of multiple separate queries. 
 
 
-In our situation the easiest solution would be to save whose friends list they are on on each _Person_-object:
+In our situation, the easiest solution would be to save whose friends list they are on on each _Person_ object:
 
 ```js
 const schema = new mongoose.Schema({
@@ -613,7 +613,7 @@ const schema = new mongoose.Schema({
 ```
 
 
-Then we could do a "join query", or populate the _friendOf_-fields of persons when we fetch the _Person_-objects:
+Then we could do a "join query", or populate the _friendOf_ fields of persons when we fetch the _Person_ objects:
 
 ```js
 Query: {
@@ -631,7 +631,7 @@ Query: {
 ```
 
 
-After the change we would not need a separate resolver for the _friendOf_ field. 
+After the change, we would not need a separate resolver for the _friendOf_ field. 
 
 
 The allPersons query <i>does not cause</i> an n+1 problem, if we only  fetch the name and the phone number: 
@@ -646,7 +646,7 @@ query {
 ```
 
 
-If we modify _allPersons_ to do a join query because it sometimes causes n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with predicted threat for n+1 problem. However, we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify _allPersons_ to do a join query because it sometimes causes an n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions, we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with a predicted threat of n+1 problems. However, we should not jump into this level of optimization before we are sure it's worth it. 
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 
@@ -665,7 +665,7 @@ The application we created in this part is not optimally structured: the schema,
 [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 
-GraphQL is already a pretty old technology, having been used by Facebook since 2012, so we can see it as "battle tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
+GraphQL is already a pretty old technology, having been used by Facebook since 2012, so we can see it as "battle-tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 
 </div>
 
@@ -688,7 +688,7 @@ Keep the application's view updated when the server notifies about new books. Yo
 
 #### 8.26: n+1
 
-Solve the n+1 problem of the following query using any method you like
+Solve the n+1 problem of the following query using any method you like.
 
 ```js
 query {
