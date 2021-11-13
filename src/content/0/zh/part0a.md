@@ -254,7 +254,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 如果你不是赫尔辛基大学的学生，你可以通过[公开大学](/zh/part0/基础知识#sign-up-for-the-exam)注册这门课程来获得一个学号。
 
-<!-- You will receive your credits after you have submitted enough exercise for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course: -->
+<!-- You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course: -->
 
 当你提交了足够的练习、成绩合格、通过考试并经由练习提交系统让我们知晓你已完成课程后，你就会获得学分:
 
