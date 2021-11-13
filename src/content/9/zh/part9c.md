@@ -15,7 +15,7 @@ lang: zh
 
 
 
-<!-- One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advicable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node.  -->
+<!-- One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advisable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node.  -->
 与前一章节相比的一个主要变化是<i>我们不再使用 ts-node</i>。 这是一个方便的工具，可以帮助您入门，但是从长远来看，使用<i>typescript</i> npm-package 附带的官方TypeScript编译器是一个很好的选择。 官方编译器从 .ts文件生成和打包 JavaScript 文件。 这样，构建的<i>生产版本</i> 就不会再包含任何TypeScript代码了。 这正是我们想要的结果，因为TypeScript本身不能被浏览器或 Node 执行。
 
 ### Setting up the project
@@ -74,7 +74,7 @@ TypeScript的原生<i>tsc</i> 编译器可以帮助我们使用命令<i>tsc -- i
 <!-- The <i>tsconfig.json</i> file we just created contains a lengthy list of every configuration available to us. However, most of them are commented out. -->
 刚创建的<i>tsconfig.json</i> 文件，其中包含一个冗长的列表，列出了我们可以使用的所有配置。 然而，大部分被注释掉了。
 
-<!-- Studying this file can help you finding some configuration options you might need. -->
+<!-- Studying this file can help you find some configuration options you might need. -->
 研究初始的<i>tsconfig.json</i> 文件可能有助于找到您可能需要的一些配置选项。
 
 <!-- It is also completely okay to keep the commented lines, in case you might need them someday. -->
