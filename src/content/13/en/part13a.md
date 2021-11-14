@@ -485,7 +485,7 @@ Create a GitHub repository for the application and create a Heroku application w
 
 #### Task 13.2.
 
-On the command line, create a <i>blogs</i> table for the application with the following columns
+On the command-line, create a <i>blogs</i> table for the application with the following columns
 - id (unique, incrementing id)
 - author (string)
 - url (string that cannot be empty)
@@ -498,7 +498,7 @@ Save the SQL-commands you used at the root of the application repository in the 
 
 #### Exercise 13.3.
 
-Create a command-line functionality in your application that prints the blogs in the database, e.g. as follows:
+On the command-line, create functionality in your application, which prints the blogs in the database, e.g. as follows:
 
 ```bash
 $ node cli.js
@@ -511,13 +511,13 @@ Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
 
 <div class="content">
 
-### Automatic creation of database tables
+### Creating database tables automatically
 
-Our application now has one annoying aspect, it assumes that a database with exactly the right schema exists, i.e. that the table `notes` has been created with the appropriate `create table` command.
+Our application now has one unpleasant side, it assumes that a database with exactly the right schema exists, i.e. that the table <i>notes</i> has been created with the appropriate <i>create table</i> command.
 
-Since the program code is stored on Github, it would make sense to also store the commands that create the database in the program code, so that the schema of the database is definitely what the program code expects. Sequelize can actually generate the schema automatically from the model definition using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
+Since the program code is being stored on GitHub, it would make sense to also store the commands that create the database in the context of the program code, so that the database schema is definitely the same as what the program code is expecting. Sequelize is actually able to generate a schema automatically from the model definition by using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
 
-Let's now destroy the database from the console by issuing the following command:
+Let's now destroy the database from the console by entering the following command:
 
 ```
 drop table notes;
@@ -532,25 +532,25 @@ Did not find any relations.
 
 The application no longer works.
 
-Add the following command to the application immediately after the model `Note` is defined:
+Let's add the following command to the application immediately after the model <i>Note</i> is defined:
 
 ```js
 Note.sync()
 ```
 
-When the application starts, the following is printed to the console:
+When the application starts, the following is printed on the console:
 
 ```
 Executing (default): CREATE TABLE IF NOT EXISTS "notes" ("id" SERIAL , "content" TEXT NOT NULL, "important" BOOLEAN, "date" TIMESTAMP WITH TIME ZONE, PRIMARY KEY ("id"));
 ```
 
-That is, when the application starts, the command `CREATE TABLE IF NOT EXISTS "notes"...` is executed which creates the table `notes` if it does not already exist.
+That is, when the application starts, the command <i>CREATE TABLE IF NOT EXISTS "notes"...</i> is executed which creates the table <i>notes</i> if it does not already exist.
 
 ### Other operations
 
 Let's complete the application with a few more operations.
 
-The search for a single note is possible with the method [findByPk](https://sequelize.org/master/manual/model-querying-finders.html) because it is searched by the id of the primary key:
+Searching for a single note is possible with the method [findByPk](https://sequelize.org/master/manual/model-querying-finders.html), because it is retrieved based on the id of the primary key:
 
 ```js
 app.get('/api/notes/:id', async (req, res) => {
@@ -563,15 +563,15 @@ app.get('/api/notes/:id', async (req, res) => {
 })
 ```
 
-Retrieving a single note will cause the following SQL command:
+Retrieving a single note causes the following SQL command:
 
 ```
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note". "id" = '1';
 ```
 
-If no note is found, returns `null`, in which case the relevant status code is given.
+If no note is found, return the operation <i>null</i>, and in this case the relevant status code is given.
 
-The modification of a note is done as follows. Only the modification of the `important` field is supported, since the application frontend does not need anything else:
+Modifying the note is done as follows. Only the modification of the <i>important</i> field is supported, since the application's frontend does not need anything else:
 
 ```js
 app.put('/api/notes/:id', async (req, res) => {
@@ -586,13 +586,13 @@ app.put('/api/notes/:id', async (req, res) => {
 })
 ```
 
-The object corresponding to the database row is retrieved from the repository using the `findByPk` method, the object is modified and the result is saved by calling the `save` method of the object corresponding to the database row.
+The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row.
 
-The current code for the application is available in full at [github](https://github.com/fullstack-hy/part122-notes/tree/part12-1), branch <i>part12-1</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1), branch <i>part13-1</i>.
 
-### Printing objects returned by Sequelize to the console
+### Printing the objects returned by Sequelize to a console
 
-The JavaScript programmer's most important tool is <i>console.log</i>, the aggressive use of which will get even the worst bugs under control. Add console printing to the single note path:
+The JavaScript programmer's most important tool is <i>console.log</i>, whose aggressive use gets even the worst bugs under control. Let's add console printing to the single note path:
 
 
 ```js
@@ -607,7 +607,7 @@ app.get('/api/notes/:id', async (req, res) => {
 })
 ```
 
-We see that the end result is not quite what we expected:
+We can see that the end result is not exactly what we expected:
 
 ```js
 note {
@@ -635,7 +635,7 @@ note {
 }
 ```
 
-In addition to the information in the note, all sorts of other things are printed on the console. We can get the desired result by calling the model-olio method [toJSON](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-toJSON):
+In addition to the note information, all sorts of other things are printed on the console. We can reach the desired result by calling the model-object method [toJSON](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-toJSON):
 
 
 ```js
@@ -650,19 +650,16 @@ app.get('/api/notes/:id', async (req, res) => {
 })
 ```
 
-Now the end result is exactly what we want.
+Now the result is exactly what we want.
 
 ```js
-{
-  id: 1,
-  content: 'Notes are attached to a user',
-  important: true,
-  date: 2021-10-03T15:00:24.582Z,
-  userId: 1
-}
+{ id: 1,
+  content: 'MongoDB is webscale',
+  important: false,
+  date: 2021-10-09T13:52:58.693Z }
 ```
 
-In the case of a collection of entities, the method toJson does not work directly, the method must be called separately for each entity in the collection:
+In the case of a collection of objects, the method toJSON does not work directly, the method must be called separately for each object in the collection:
 
 ```js
 router.get('/', async (req, res) => {
@@ -674,7 +671,20 @@ router.get('/', async (req, res) => {
 })
 ```
 
-However, perhaps a better solution is to convert the collection to JSON for printing:
+The print looks like the following:
+
+```js
+[ { id: 1,
+    content: 'MongoDB is webscale',
+    important: false,
+    date: 2021-10-09T13:52:58.693Z },
+  { id: 2,
+    content: 'Relational databases rule the world',
+    important: true,
+    date: 2021-10-09T13:53:10.710Z } ]
+```
+
+However, perhaps a better solution is to turn the collection into JSON for printing by using the method [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify):
 
 ```js
 router.get('/', async (req, res) => {
@@ -686,10 +696,29 @@ router.get('/', async (req, res) => {
 })
 ```
 
-This way is better especially if the entities in the collection contain other entities. It is also often useful to format the entities on the screen in a slightly more reader-friendly format. This can be done with the command:
+This way is better especially if the objects in the collection contain other objects. It is also often useful to format the objects on the screen in a slightly more reader-friendly format. This can be done with the following command:
 
 ```json
 console.log(JSON.stringify(notes, null, 2))
+```
+
+The print looks like the following:
+
+```js
+[
+  {
+    "id": 1,
+    "content": "MongoDB is webscale",
+    "important": false,
+    "date": "2021-10-09T13:52:58.693Z"
+  },
+  {
+    "id": 2,
+    "content": "Relational databases rule the world",
+    "important": true,
+    "date": "2021-10-09T13:53:10.710Z"
+  }
+]
 ```
 
 </div>
@@ -700,7 +729,7 @@ console.log(JSON.stringify(notes, null, 2))
 
 #### Task 13.4.
 
-Transform your application into a web application that performs the following operations
+Transform your application into a web application that supports the following operations
 
 - GET api/blogs (list all blogs)
 - POST api/blogs (add a new blog)
