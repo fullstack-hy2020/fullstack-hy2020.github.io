@@ -330,7 +330,7 @@ The application seems to be working. However, let's now switch to using Sequeliz
 
 ### Model
 
-When using Sequelize, each table in the database is represented by a [model](https://sequelize.org/master/manual/model-basics.html), which is effectively its own JavaScript class. Let's now define the model <i>Note</i> corresponding to the table <i>notes</i> for the application by changing the code to the following format:
+When using Sequelize, each table in the database is represented by a [model](https://sequelize.org/master/manual/model-basics.html), which is effectively it's own JavaScript class. Let's now define the model <i>Note</i> corresponding to the table <i>notes</i> for the application by changing the code to the following format:
 
 ```js
 require('dotenv').config()
@@ -385,11 +385,11 @@ app.listen(PORT, () => {
 })
 ```
 
-A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each column has a type defined, plus other properties if needed, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute and other configuration information. We noted that the table does not have frequently used timestamp columns (created\_at and updated\_at).
+A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each columm has a type defined, as well as other properties if necessary, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute as well as other configuration information. We also defined that the table does not have frequently used timestamp columns (created\_at and updated\_at).
 
-We also specified that table names are inferred from model names using the "underscored" technique. In practice, this means that if a model name is <i>Note</i>, as in our case, the name of the corresponding table is inferred from the lowercase plural of <i>notes</i>. If, on the other hand, the name of the model were "two-part", e.g. <i>StudyGroup</i>, the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
+We also defined <i>underscored: true</i>, which means that table names are derived from model names as plural [snake case](https://en.wikipedia.org/wiki/Snake_case) versions. Practically this means that, if the name of the model, as in our case is "Note", then the name of the corresponding table is the plural of the name written in a small initial letter, i.e. <i>notes</i>. If, on the other hand, the name of the model would be "two-part", e.g. <i>StudyGroup</i>, then the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
 
-The same naming convention applies to columns. If we had specified that a note is associated with <i>creationYear</i>, i.e. information about the year it was created, we would define it in the model as follows:
+The same naming policy applies to columns as well. If we had defined that a note is associated with <i>creationYear</i>, i.e. information about the year it was created, we would define it in the model as follows:
 
 ```js
 Note.init({
@@ -400,11 +400,11 @@ Note.init({
 })
 ```
 
-The name of the corresponding column in the database would be <i>creation_year</i>. In the code, the reference to the column is always in the same format as in the model, i.e. in "camel case" format.
+The name of the corresponding column in the database would be <i>creation_year</i>. In code, reference to the column is always in the same format as in the model, i.e. in "camel case" format.
 
-We have also specified <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>, however we want a lower case initial, it will make a few things a bit more convenient in the future.
+We have also defined <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>. However we want to have a lowercase initial, it will make a few things a bit more convenient going forward.
 
-The database operation is easily done using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as you would expect it to from its name:
+The database operation is easy to do using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as it is assumed by it's name to work:
 
 ```js
 app.get('/api/notes', async (req, res) => {
@@ -413,7 +413,7 @@ app.get('/api/notes', async (req, res) => {
 })
 ```
 
-The console tells you that the method call <i>Note.findAll()</i> will cause the following query:
+The console tells you that the method call <i>Note.findAll()</i> causes the following query:
 
 ```js
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note";
@@ -433,16 +433,16 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
-The new note is thus created by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter the entity that defines the values of the columns.
+Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter the entity that defines the values of the columns.
 
-Instead of the <i>create</i> method, saving to the database [could be done](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) by first using the [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) method to create a Model-olio from the desired data, and calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
+Instead of the <i>create</i> method, it [would be possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save in a database using first method [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) to create a Model-object from the desired data, and calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
 
 ```js
 const note = Note.build(req.body)
 await note.save()
 ```
 
-Calling the <i>build</i> method does not yet save the object to the database, so it is still possible to edit the object before the actual save event:
+Calling the <i>build</i> method does not save the object in the database yet, so it is still possible to edit the object before the actually save event:
 
 ```js
 const note = Note.build(req.body)
@@ -450,10 +450,9 @@ note.important = true // highlight-line
 await note.save()
 ```
 
-For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is more appropriate, so we'll refrain from using it.
+For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's refrain from it.
 
-If the entity being created is not valid, an error message will result. For example, when trying to create a note without content
-the operation will fail, and the console will reveal the reason as `SequelizeValidationError: notNull Violation Note.content cannot be null`:
+If the object being created is not valid, there is an error message as a result. For example, when trying to create a note without content, the operation fails, and the console reveals the reason to be <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>:   
 
 ```
 (node:39109) UnhandledPromiseRejectionWarning: SequelizeValidationError: notNull Violation: Note.content cannot be null
@@ -461,7 +460,7 @@ the operation will fail, and the console will reveal the reason as `SequelizeVal
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
 ```
 
-Add a simple error handling to the addition of the new note:
+Let's add a simple error handling when adding a new note:
 
 ```js
 app.post('/api/notes', async (req, res) => {
@@ -478,22 +477,24 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tasks 13.1.-13.3.
 
-In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5), except for error handling. We will also add a set of features to the backend that the frontend in part 5 cannot exploit.
+In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit.
 
 #### Task 13.1.
 
-Create a GitHub repository for the application and create a Heroku application and a Postgres database for the application within it. Make sure to establish a connection to the application database.
+Create a GitHub repository for the application and create a Heroku application within in, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
 
 #### Task 13.2.
 
 On the command line, create a <i>blogs</i> table for the application with the following columns
 - id (unique, incrementing id)
 - author (string)
-- url (a string that cannot be empty)
-- title (non-empty string)
+- url (string that cannot be empty)
+- title (string that cannot be empty)
 - likes (integer with default value zero)
 
-Add at least two blogs to the database
+Add at least two blogs to the database.
+
+Save the SQL-commands you used at the root of the application repository in the file called <i>commands.sql</i>
 
 #### Exercise 13.3.
 
