@@ -190,17 +190,17 @@ LINE 1: insert into notes (content, important, value) values ('only ...
 
 Next it's time to move on to accessing the database from the application.
 
-### A node application using a relational database
+### Node application using a relational database
 
-Start the application as usual with <i>npm init</i> and install <i>npm init</i> as the development-time dependency <i>nodemon</i> and the following runtime dependencies:
+Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as the development-time dependency and also the following runtime dependencies:
 
 ```bash
 npm install express dotenv pg sequelize
 ```
 
-The latter [sequelize](https://sequelize.org/master/) is the library through which we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using SQL, similar to the Mongoose we use for MongoDB.
+Of these, the latter [sequelize](https://sequelize.org/master/) is the library through we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to the Mongoose we use with MongoDB.
 
-Let's test that the connection is successful. Create the file <i>index.js</i> and the following content:
+Let's test that the connection is successful. Create the file <i>index.js</i> and add the following content:
 
 ```js
 require('dotenv').config()
@@ -228,21 +228,22 @@ const main = async () => {
 main()
 ```
 
-The database <i>connect string</i> revealed by _heroku config_ should be stored in a file <i>.env</i>, whose contents should be something like the following
+The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in <i>.env</i> file, whose contents should be something like the following:
 
 ```bash
 $ cat .env
 DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
-Let's see if a connection is established:
+Let's try if a connection is successful:
 
 ```bash
 $ node index.js
 Executing (default): SELECT 1+1 AS result
 Connection has been established successfully.
 ```
-If and when the connection works, we can run the first query. Let's modify the program as follows:
+
+If and when the connection works, we can then run the first query. Let's modify the program as follows:
 
 ```js
 require('dotenv').config()
@@ -273,7 +274,7 @@ const main = async () => {
 main()
 ```
 
-The application execution should print as follows:
+Executing the application should print as follows:
 
 ```js
 Executing (default): SELECT * FROM notes
@@ -293,9 +294,9 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-Although Sequelize is an ORM library, and there is little need to write SQL yourself using it, we now used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
+Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we now directly used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
 
-Since everything seems to work, let's convert the application into a web application.
+Since everything seems to be working, let's change the application into a web application.
 
 ```js
 require('dotenv').config()
@@ -325,7 +326,7 @@ app.listen(PORT, () => {
 // highlight-end
 ```
 
-The app seems to work. However, let's now switch to using Sequelize instead of SQL as it is intended to be used.
+The application seems to be working. However, let's now switch to using Sequelize instead of SQL as it is intended to be used.
 
 ### Model
 
