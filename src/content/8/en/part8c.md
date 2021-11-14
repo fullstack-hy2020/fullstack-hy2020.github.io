@@ -57,7 +57,7 @@ module.exports = mongoose.model('Person', schema)
 ```
 
 
-We also included a few validations. _required: true_, which makes sures that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database. 
+We also included a few validations. _required: true_, which makes sure that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database. 
 
 
 We can get the application to mostly work with the following changes: 
