@@ -988,7 +988,7 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
