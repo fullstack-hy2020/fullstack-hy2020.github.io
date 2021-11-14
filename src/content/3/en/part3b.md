@@ -92,7 +92,7 @@ Now that the whole stack is ready, let's move our application to the internet. W
 
 >If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
 
-Add a file called  <i>Procfile</i> to the project's root to tell Heroku how to start the application. 
+Add a file called  <i>Procfile</i> to the backend project's root to tell Heroku how to start the application. 
 
 ```bash
 web: npm start
