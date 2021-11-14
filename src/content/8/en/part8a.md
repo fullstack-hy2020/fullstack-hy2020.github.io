@@ -11,28 +11,28 @@ lang: en
 REST, familiar to us from the previous parts of the course, has long been the most prevalent way to implement the interfaces servers offer for browsers, and in general the integration between different applications on the web. 
 
 
-In the recent years [GraphQL](http://graphql.org/), developed by Facebook, has become popular for communication between web applications and servers. 
+In recent years, [GraphQL](http://graphql.org/), developed by Facebook, has become popular for communication between web applications and servers. 
 
 
-The GraphQL philosophy is very different from REST. REST is <i>resource based</i>. Every resource, for example a <i>user</i> has its own address which identifies it, for example <i>/users/10</i>. All operations done to the resource are done with HTTP requests to its URL. The action depends on the used HTTP-method. 
+The GraphQL philosophy is very different from REST. REST is <i>resource-based</i>. Every resource, for example a <i>user</i>, has its own address which identifies it, for example <i>/users/10</i>. All operations done to the resource are done with HTTP requests to its URL. The action depends on the HTTP method used. 
 
 
-The resource basedness of REST works well in most situations. However, it can be a bit awkward sometimes. 
+The resource-basedness of REST works well in most situations. However, it can be a bit awkward sometimes. 
 
 
 Let's consider the following example: our bloglist application contains some kind of social media functionality, and we would like to show a list of all the blogs that were added by users who have commented on any of the blogs we follow. 
 
 
-If the server implemented a REST API, we would probably have to do multiple HTTP-requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated. 
+If the server implemented a REST API, we would probably have to do multiple HTTP requests from the browser before we had all the data we wanted. The requests would also return a lot of unnecessary data, and the code on the browser would probably be quite complicated. 
 
 
-If this was an often used functionality, there could be a REST-endpoint for it. If there were a lot of these kinds of scenarios however, it would become very laborious to implement REST-endpoints for all of them. 
+If this was an often-used functionality, there could be a REST endpoint for it. If there were a lot of these kinds of scenarios however, it would become very laborious to implement REST endpoints for all of them. 
 
 
-A GraphQL server is well suited for these kinds of situations. 
+A GraphQL server is well-suited for these kinds of situations. 
 
 
-The main principle of GraphQL is, that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST.
+The main principle of GraphQL is that the code on the browser forms a <i>query</i> describing the data wanted, and sends it to the API with an HTTP POST request. Unlike REST, all GraphQL queries are sent to the same address, and their type is POST.
 
 
 The data described in the above scenario could be fetched with (roughly) the following query: 
@@ -55,9 +55,9 @@ query FetchBlogsQuery {
 }
 ```
 
-The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them. 
+The content of the `FetchBlogsQuery` can be roughly interpreted as: find a user named `"mluukkai"` and for each of his `followedUsers`, find all their `blogs`, and for each blog, all its `comments`, and for each `user` who wrote each comment, find their `blogs`, and return the `title` of each of them. 
 
-The server's response would be about the following JSON-object: 
+The server's response would be about the following JSON object: 
 
 ```bash
 {
@@ -132,7 +132,7 @@ The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mut
 
 The phonebook describes three different queries. _personCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object. 
 
-Again exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _personCount_ will, for sure, return an integer. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _allPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i>-values. 
+Again, exclamation marks are used to mark which return values and parameters are <i>Non-Null</i>. _personCount_ will, for sure, return an integer. The query _findPerson_ must be given a string as a parameter. The query returns a <i>Person</i>-object or <i>null</i>. _allPersons_ returns a list of <i>Person</i> objects, and the list does not contain any <i>null</i> values. 
 
 So the schema describes what queries the client can send to the server, what kind of parameters the queries can have, and what kind of data the queries return. 
 
@@ -145,7 +145,7 @@ query {
 }
 ```
 
-Assuming our applications has saved the information of three people, the response would look like this: 
+Assuming our application has saved the information of three people, the response would look like this: 
 
 ```js
 {
@@ -155,7 +155,7 @@ Assuming our applications has saved the information of three people, the respons
 }
 ```
 
-The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i>-objects, the query must describe 
+The query fetching the information of all of the people, _allPersons_, is a bit more complicated. Because the query returns a list of <i>Person</i> objects, the query must describe 
 <i>which [fields](https://graphql.org/learn/queries/#fields)</i> of the objects the query returns:
 ```js
 query {
@@ -189,7 +189,7 @@ The response could look like this:
 }
 ```
 
-A query can be made to return any field described in the schema. For example the following would also be possible: 
+A query can be made to return any field described in the schema. For example, the following would also be possible: 
 
 ```js
 query {
@@ -214,7 +214,7 @@ query {
 }
 ```
 
-So first the parameter is described in round brackets, and then the fields of the return value object are listed in curly brackets. 
+So, first, the parameter is described in round brackets, and then the fields of the return value object are listed in curly brackets. 
 
 The response is like this: 
 
@@ -252,20 +252,20 @@ the return value is <i>null</i>.
 ```
 
 As you can see, there is a direct link between a GraphQL query and  the returned JSON object. One can think that the query describes what kind of data it wants as a response. 
-The difference to REST queries is stark. With REST, the URL and the type of the request have nothing to do with the form of the return data. 
+The difference to REST queries is stark. With REST, the URL and the type of the request have nothing to do with the form of the returned data. 
 
 
-GraphQL query describes only the data moving between a server and the client. On the server the data can be organized and saved any way we like. 
+GraphQL query describes only the data moving between a server and the client. On the server, the data can be organized and saved any way we like. 
 
 
 Despite its name, GraphQL does not actually have anything to do with databases. It does not care how the data is saved. 
-The data a GraphQL API uses can be saved into a relational database, document database, or to other servers which GraphQL-server can access with for example REST. 
+The data a GraphQL API uses can be saved into a relational database, document database, or to other servers which a GraphQL server can access with for example REST. 
 
 ### Apollo server
 
-Let's implement a GraphQL-server with today's leading library [Apollo -server](https://www.apollographql.com/docs/apollo-server/).
+Let's implement a GraphQL server with today's leading library: [Apollo server](https://www.apollographql.com/docs/apollo-server/).
 
-Create a new npm-project with _npm init_ and install the required dependencies.
+Create a new npm project with _npm init_ and install the required dependencies.
 
 ```bash
 npm install apollo-server graphql
@@ -334,7 +334,7 @@ server.listen().then(({ url }) => {
 })
 ```
 
-The heart of the code is an _ApolloServer_, which is given two parameters
+The heart of the code is an _ApolloServer_, which is given two parameters:
 
 ```js
 const server = new ApolloServer({
@@ -406,19 +406,19 @@ has a resolver which returns <i>all</i> objects from the _persons_ array.
 
 ### GraphQL-playground
 
-When Apollo-server is run on development mode (_node filename.js_), it starts a [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to address [http://localhost:4000/graphql](http://localhost:4000/graphql). This is very useful for a developer, and can be used to make queries to the server. 
+When Apollo server is run in development mode (_node filename.js_), it starts a [GraphQL playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/) to address [http://localhost:4000/graphql](http://localhost:4000/graphql). This is very useful for a developer, and can be used to make queries to the server. 
 
-Let's try it out
+Let's try it out:
 
 ![](../../images/8/1.png)
 
-Sometimes the Playground requires you to be quite pedantic. If the syntax of a query is wrong, the error message is quite unnoticeable and nothing happens when you press go. 
+Sometimes, the Playground requires you to be quite pedantic. If the syntax of a query is wrong, the error message is quite unnoticeable and nothing happens when you press go. 
 
 ![](../../images/8/2.png)
 
 The result from the previous query stays visible on the right side of the playground even when the current query is faulty. 
 
-By pointing at the right place on the line with the errors, you can see the error message
+By pointing at the right place on the line with the errors, you can see the error message:
 
 ![](../../images/8/3.png)
 
@@ -457,7 +457,7 @@ The resolver does not need the first parameter _root_.
  
 
  
- In fact all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript the parameters don't have to be defined, if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
+ In fact, all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript, the parameters don't have to be defined if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
 
 ### The default resolver
 
@@ -476,7 +476,7 @@ query {
 
 the server knows to send back exactly the fields required by the query. How does that happen?
 
-A GraphQL-server must define resolvers for <i>each</i> field of each  type in the schema. 
+A GraphQL server must define resolvers for <i>each</i> field of each  type in the schema. 
 We have so far only defined resolvers for fields of the type <i>Query</i>, so for each query of the application. 
 
 Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.graphql-tools.com/docs/resolvers/#default-resolver) for them. 
@@ -509,8 +509,8 @@ The default resolver returns the value of the corresponding field of the object.
 If the functionality of the default resolver is enough, you don't need to define your own. It is also possible to define resolvers for only some fields of a type, and let the default resolvers handle the rest. 
 
 
-We could for example define, that the address of all persons is 
-<i>Manhattan New York</i> by hard coding the following to the resolvers of the street and city fields of the type <i>Person</i>.
+We could for example define that the address of all persons is 
+<i>Manhattan New York</i> by hard-coding the following to the resolvers of the street and city fields of the type <i>Person</i>:
 
 ```js
 Person: {
@@ -628,7 +628,7 @@ const resolvers = {
 }
 ```
 
-So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields. 
+So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields. 
 
 The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
 
@@ -701,7 +701,7 @@ mutation {
 ```
 
 
-Note, that the person is saved to the _persons_ array as 
+Note that the person is saved to the _persons_ array as 
 
 ```js
 {
@@ -741,7 +741,7 @@ If we try to create a new person, but the parameters do not correspond with the 
 
 So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
 
-However GraphQL cannot handle everything automatically. For example stricter rules for data sent to a Mutation have to be added manually.
+However, GraphQL cannot handle everything automatically. For example, stricter rules for data sent to a Mutation have to be added manually.
 The errors from those rules are handled by [the error handling mechanism of Apollo Server](https://www.apollographql.com/docs/apollo-server/data/errors).
 
 
@@ -783,7 +783,7 @@ The current code of the application can be found on [ Github](https://github.com
 ### Enum
 
 
-Let's add a possibility to filter the query returning all persons with the parameter <i>phone</i> so, that it returns only persons with a phone number
+Let's add a possibility to filter the query returning all persons with the parameter <i>phone</i> so that it returns only persons with a phone number
 
 ```js
 query {
@@ -824,7 +824,7 @@ type Query {
 ```
 
 
-The type <i>YesNo</i> is GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values <i>YES</i> or <i>NO</i>. In the query _allPersons_ the parameter _phone_  has the type <i>YesNo</i>, but is nullable. 
+The type <i>YesNo</i> is a GraphQL [enum](https://graphql.org/learn/schema/#enumeration-types), or an enumerable, with two possible values: <i>YES</i> or <i>NO</i>. In the query _allPersons_, the parameter _phone_  has the type <i>YesNo</i>, but is nullable. 
 
 
 The resolver changes like so:
@@ -898,7 +898,7 @@ The current code of the application can be found on [Github](https://github.com/
 ### More on queries
 
 
-With GraphQL it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example the following query returns both the amount of persons in the phonebook and their names: 
+With GraphQL, it is possible to combine multiple fields of type <i>Query</i>, or "separate queries" into one query. For example, the following query returns both the amount of persons in the phonebook and their names: 
 
 ```js
 query {
@@ -910,7 +910,7 @@ query {
 ```
 
 
-The response looks as follows
+The response looks as follows:
 
 ```js
 {
@@ -932,7 +932,7 @@ The response looks as follows
 ```
 
 
-Combined query can also use the same query multiple times. You must however give the queries alternative names like so
+Combined query can also use the same query multiple times. You must however give the queries alternative names like so:
 
 ```js
 query {
@@ -946,7 +946,7 @@ query {
 ```
 
 
-The response looks like
+The response looks like:
 
 ```js
 {
@@ -969,7 +969,7 @@ The response looks like
 ```
 
 
-In some cases it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will get into parameters soon. 
+In some cases, it might be beneficial to name the queries. This is the case especially when the queries or mutations have [parameters](https://graphql.org/learn/queries/#variables). We will get into parameters soon. 
 
 
 If there are multiple queries, Playground asks you to choose which of them to run:
@@ -1085,7 +1085,7 @@ should return
 #### 8.4: Books of an author
 
 
-Modify the _allBooks_ query so, that a user can give an optional parameter <i>author</i>. The response should include only books written by that author. 
+Modify the _allBooks_ query so that a user can give an optional parameter <i>author</i>. The response should include only books written by that author. 
 
 For example query
 
@@ -1240,7 +1240,7 @@ returns
 #### 8.7: Updating the birth year of an author
 
 
-Implement mutation _editAuthor_, which can be used to set a birth year for an author. The mutation is used like so
+Implement mutation _editAuthor_, which can be used to set a birth year for an author. The mutation is used like so:
 
 ```js
 mutation {

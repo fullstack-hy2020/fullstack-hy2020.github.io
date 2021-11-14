@@ -57,7 +57,7 @@ module.exports = mongoose.model('Person', schema)
 ```
 
 
-We also included a few validations. _required: true_, which ensures that value exists, which is actually redundant by using GraphQL we ensure that the fields exist. However it is good to also keep validation in the database. 
+We also included a few validations. _required: true_, which makes sure that a value exists, is actually redundant: we already ensure that the fields exist with GraphQL. However, it is good to also keep validation in the database. 
 
 
 We can get the application to mostly work with the following changes: 
@@ -115,14 +115,14 @@ const resolvers = {
 ```
 
 
-The changes are pretty straightforward. However there are a few noteworthy things. As we remember, in Mongo the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically. 
+The changes are pretty straightforward. However, there are a few noteworthy things. As we remember, in Mongo, the identifying field of an object is called <i>_id</i> and we previously had to parse the name of the field to <i>id</i> ourselves. Now GraphQL can do this automatically. 
 
 
 Another noteworthy thing is that the resolver functions now return a <i>promise</i>, when they previously returned normal objects. When a resolver returns a promise, Apollo server [sends back](https://www.apollographql.com/docs/apollo-server/data/data/#resolver-results) the value which the promise resolves to. 
 
 
 
-For example if the following resolver function is executed, 
+For example, if the following resolver function is executed, 
 
 ```js
 allPersons: (root, args) => {
@@ -150,7 +150,7 @@ Query: {
       return Person.find({})
     }
 
-    return Person.find({ phone: { $exists: args.phone === 'YES'  }})
+    return Person.find({ phone: { $exists: args.phone === 'YES' } })
   },
 },
 ```
@@ -172,7 +172,7 @@ Person.find({ phone: { $exists: false }})
 ### Validation
 
 
-As well as in GraphQL, the input is now validated using the validations defined in the mongoose-schema. For handling possible validation errors in the schema, we must add an error handling _try/catch_-block to the _save_-method. When we end up in the catch, we throw a suitable exception: 
+As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling _try/catch_ block to the _save_ method. When we end up in the catch, we throw a suitable exception: 
 
 ```js
 Mutation: {
@@ -237,7 +237,7 @@ module.exports = mongoose.model('User', schema)
 ```
 
 
-Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way logged in users can have their own, personalized, view in the application. 
+Every user is connected to a bunch of other persons in the system through the _friends_ field. The idea is that when a user, e.g. <i>mluukkai</i>, adds a person, e.g. <i>Arto Hellas</i>, to the list, the person is added to their _friends_ list. This way, logged-in users can have their own personalized view in the application. 
 
 
 Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens. 
@@ -274,7 +274,7 @@ type Mutation {
 ```
 
 
-The query _me_ returns the currently logged in user. New users are created with the _createUser_ mutation, and logging in happens with _login_ -mutation.
+The query _me_ returns the currently logged-in user. New users are created with the _createUser_ mutation, and logging in happens with the _login_ mutation.
 
 
 The resolvers of the mutations are as follows: 
@@ -314,13 +314,13 @@ Mutation: {
 ```
 
 
-The new user mutation is straightforward. The log in mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt-token familiar from [part 4](/en/part4/token_authentication).
+The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication).
 
 
-Just like in the previous case with REST, the idea now is that a logged in user adds a token they receive upon log in to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.
+Just like in the previous case with REST, the idea now is that a logged-in user adds a token they receive upon login to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.
 
 
-In the GraphQL-playground the header is added to a query like so
+In the GraphQL playground, the header is added to a query like so:
 
 ![](../../images/8/24.png)
 
@@ -354,7 +354,7 @@ The object returned by context is given to all resolvers as their <i>third param
 So our code sets the object corresponding to the user who made the request to the _currentUser_ field of the context. If there is no user connected to the request, the value of the field is undefined. 
 
 
-The resolver of the _me_ query is very simple, it just returns the logged in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:
+The resolver of the _me_ query is very simple: it just returns the logged-in user it receives in the _currentUser_ field of the third parameter of the resolver, _context_. It's worth noting that if there is no logged-in user, i.e. there is no valid token in the header attached to the request, the query returns <i>null</i>:
 
 ```js
 Query: {
@@ -403,7 +403,7 @@ Mutation: {
 ```
 
 
-If a logged in user cannot be found from the context, an _AuthenticationError_ is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user. 
+If a logged-in user cannot be found from the context, an _AuthenticationError_ is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user. 
 
 
 Let's also add functionality for adding an existing user to your friends list. The mutation is as follows: 
@@ -418,7 +418,7 @@ type Mutation {
 ```
 
 
-And the mutations resolver:
+And the mutation's resolver:
 
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
@@ -441,7 +441,7 @@ And the mutations resolver:
 ```
 
 
-Note how the resolver <i>destructures</i> the logged in user from the context. So instead of saving _currentUser_ to a separate variable in a function
+Note how the resolver <i>destructures</i> the logged-in user from the context. So instead of saving _currentUser_ to a separate variable in a function
 
 ```js
 addAsFriend: async (root, args, context) => {
@@ -455,7 +455,7 @@ it is received straight in the parameter definition of the function:
 addAsFriend: async (root, args, { currentUser }) => {
 ```
 
-The following query now returns the user's friendlist
+The following query now returns the user's friends list:
 
 ```js
 query {
@@ -479,7 +479,7 @@ The code of the backend can be found on [Github](https://github.com/fullstack-hy
 
 ### Exercises 8.13.-8.16.
 
-The following exercises are quite likely to break your frontend. Do not worry about it yet, the frontend shall be fixed and expanded in the next chapter.
+The following exercises are quite likely to break your frontend. Do not worry about it yet; the frontend shall be fixed and expanded in the next chapter.
 #### 8.13: Database, part 1
 
 Change the library application so that it saves the data to a database. You can find the <i>mongoose schema</i> for books and authors from [here](https://github.com/fullstack-hy/misc/blob/main/library-schema.md).
@@ -501,7 +501,7 @@ so that instead of just the author's name, the book object contains all the deta
 
 You can assume that the user will not try to add faulty books or authors, so you don't have to care about validation errors. 
 
-The following things do <i>not</i> have to work just yet
+The following things do <i>not</i> have to work just yet:
 
  - _allBooks_ query with parameters
  -  <i>bookCount</i> field of an author object
@@ -516,7 +516,7 @@ You might find [this](https://docs.mongodb.com/manual/reference/operator/query/i
 
 #### 8.15 Database, part 3
 
-Complete the program so that database validation errors (e.g. too short book title or author name) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
+Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
 
 #### 8.16 user and logging in
 
