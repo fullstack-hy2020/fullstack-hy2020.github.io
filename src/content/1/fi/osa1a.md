@@ -57,7 +57,7 @@ const App = () => (
 export default App
 ```
 
-Tiedostot <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> ja <i>reportWebVitals.js</i> voi poistaa, sillä emme tarvitse niitä.
+Tiedostot <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>reportWebVitals.js</i> ja <i>setupTests.js</i> voi poistaa, sillä emme tarvitse niitä.
 
 ### Komponentti
 
@@ -483,7 +483,7 @@ const App = () => {
 export default App
 ```
 
-ja poista ylimääräiset tiedostot (App.css, App.test.js, logo.svg, reportWebVitals.js, setupTests.js).
+ja poista ylimääräiset tiedostot (App.css, App.test.js, index.css, logo.svg, reportWebVitals.js, setupTests.js).
 
 Koko sovellus on nyt ikävästi yhdessä komponentissa. Refaktoroi sovelluksen koodi siten, että se koostuu kolmesta uudesta komponentista: <i>Header</i>, <i>Content</i> ja <i>Total</i>. Kaikki data pidetään edelleen komponentissa <i>App</i>, joka välittää tarpeelliset tiedot kullekin komponentille <i>props:ien</i> avulla. <i>Header</i> huolehtii kurssin nimen renderöimisestä, <i>Content</i> osista ja niiden tehtävämääristä ja <i>Total</i> tehtävien yhteismäärästä.
 
