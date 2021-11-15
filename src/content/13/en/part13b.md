@@ -542,7 +542,7 @@ _TODO: where in include is an example (e.g. notes where `important: true`)?_
 
 ### Proper insertion of notes
 
-Incidentally, note insertion should work as in [section 4](/section4), i.e. note creation will only succeed if a valid token accompanies the request for creation. The note is stored in the list of notes created by the user identified by the token:
+Let's change the note insertion by making it work the same as in [section 4](/section4), i.e. the creation of a note can only be successful if the request corresponding to the creation is accompanied by a valid token on login. The note is stored in the list of noted created by the user identified by the token:
 
 ```js
 // highlight-start
@@ -574,11 +574,11 @@ router.post('/', tokenExtractor, async (req, res) => {
 })
 ```
 
-The token is taken and decoded from the request headers and placed in the <i>req</i> token by the <i>tokenExtractor</i> middleware. When a token is created, the <i>date</i> field indicating the time of its creation is also given a value.
+Token is taken and decoded to the request from the headers and placed in the <i>req</i> token by the <i>tokenExtractor</i> middleware. When creating a note, a <i>date</i> is also given to the field indicating the time it was created.
 
 ### Fine-tuning
 
-Except for error handling, our backend currently works almost identically to the Part 4 version of the same application. Before we make some extensions to the backend, let's change the routes of all notes and all users slightly.
+Our backend currently works almost the same way as Part 4 version of the same application, expect for error handling. Before we make a few extensions to backend, let's change the routes of all notes and all users slightly.
 
 We will add a note with information about the user who added it:
 
@@ -595,9 +595,9 @@ router.get('/', async (req, res) => {
 })
 ```
 
-We have also [constrained](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) which field values we want. For notes, we take all fields except `userId` and for the user associated with the note, only `name`.
+We have also [restricted](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) the values of which fields we want. From the notes, we take all fields expect <i>userId</i> and for the user associated with the note, only <i>name</i>.
 
-Let's make a similar change to the route for all users, removing the unnecessary field `userId` from the notes associated with the user:
+Let's make a similar change to the route of all users, remove the unnecessary field <i>userId</i> from the notes associated with the user:
 
 ```js
 router.get('/', async (req, res) => {
@@ -611,7 +611,90 @@ router.get('/', async (req, res) => {
 })
 ```
 
-The current code for the application is available in its entirety on [github](https://github.com/fullstack-hy/part12-notes/tree/part12-4), branch <i>part12-4</i>.''
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-4), branch <i>part13-4</i>.
+
+### Attention on the definition of models
+
+The most perceptible noticed that despite of added column <i>user_id</i>, we did not make a change to the model that defined notes, but we can add a user for notes objects:
+
+```js
+const user = await User.findByPk(req.decodedToken.id)
+const note = await Note.create({ ...req.body, userId: user.id, date: new Date() })
+```
+
+The reason for this is that when we defined in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:
+
+```js
+const Note = require('./note')
+const User = require('./user')
+
+User.hasMany(Note)
+Note.belongsTo(User)
+
+// ...
+```
+
+Sequelize will automatically create in the module <i>Note</i> attribute called <i>userId</i> to which, when referenced we get access to the database column <i>user_id</i>.
+
+Keep in mind, that we could also create a note as follows using method [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build):
+
+```js
+const user = await User.findByPk(req.decodedToken.id)
+
+// luodaan muistiinpano tallettamatta sitä vielä
+const note = Note.build({ ...req.body, date: new Date() })
+ // sijoitetaan käyttäjän id mustiinpanolle
+note.userId = user.id
+// talletetaan muistiinpano-olio tietokantaan
+await note.save()
+```
+
+This is how we explicitly see the fact that <i>userId</i> is an attribute of the notes object.
+
+We could define the same for model <i>as well</i>:
+
+```js
+Note.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  important: {
+    type: DataTypes.BOOLEAN
+  },
+  date: {
+    type: DataTypes.DATE
+  },
+  // highlight-start
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  }
+  // highlight-end
+}, {
+  sequelize,
+  underscored: true,
+  timestamps: false,
+  modelName: 'note'
+})
+
+module.exports = Note
+```
+
+however this is not necessary. Definition at the level of model classes
+
+```js
+User.hasMany(Note)
+Note.belongsTo(User)
+```
+
+instead is necessary, otherwise Sequelize does not know how at the code level to attach tables to each other.
 
 </div>
 
