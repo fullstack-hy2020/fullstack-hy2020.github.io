@@ -272,9 +272,9 @@ At this point, the situations that require error handling by the application are
 
 ### User management
 
-Next, add a database table `users` to the application to store the users of the application. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we will now implement the implementation so that all users have the same password `secret`.
+Next, let's add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we now make make the implementation so that all users will have the same password <i>secret</i>.
 
-The user-defining model in `models/user.js` is fairly straightforward
+The user-defining model in the file <i>models/user.js</i> is straightforward
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -308,10 +308,9 @@ User.init({
 module.exports = User
 ```
 
-The username is conditioned to be unique. The user ID could in principle have been used as the main key of the table. However, we decided to create the master key as a separate field with integer value <i>id</i>.
+The username is conditioned to be unique. The username could have basically been used as the master key of the table. However, we decided to create the master key as a separate field with integer value <i>id</i>.
 
-
-The file <i>models/index.js</i> expands slightly
+The file <i>models/index.js</i> expands slightly:
 
 ```js
 const Note = require('./note')
@@ -324,7 +323,7 @@ module.exports = {
 }
 ```
 
-The route handlers in <i>controllers/users.js</i> that create a new user and display all users do not contain anything dramatic
+The route handlers that take care of creating a new user in the <i>controllers/users.js</i> file and displaying all users do not contain anything dramatic
 
 ```js
 const router = require('express').Router()
@@ -357,7 +356,7 @@ router.get('/:id', async (req, res) => {
 module.exports = router
 ```
 
-The router handler (file <i>controllers/login.js</i>) that handles logging is as follows:
+The router handler that handles the login (file <i>controllers/login.js</i>) is as follows:
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -397,7 +396,7 @@ const passwordCorrect = body.password === 'secret'
 module.exports = router
 ```
 
-The mail request will be accompanied by a user name (<i>username</i>) and password (<i>password</i>). First, the entity corresponding to the user is retrieved from the database using the `User` method of the model [findOne](https://sequelize.org/master/manual/model-querying-finders.html#-code-findone--code-):
+The POST request request will be accompanied by a users name (<i>username</i>) and users password (<i>password</i>). First, the object corresponding to the user is retrieved from the database using the model <i>User</i> with method [findOne](https://sequelize.org/master/manual/model-querying-finders.html#-code-findone--code-):
 
 ```js
 const user = await User.findOne({
@@ -407,7 +406,7 @@ const user = await User.findOne({
 })
 ```
 
-In the console, we see the SQL statement corresponding to the method call
+From the console, we can see that SQL statement is corresponding to the method call
 
 ```sql
 SELECT "id", "username", "name"
@@ -415,14 +414,13 @@ FROM "users" AS "User"
 WHERE "User". "username" = 'mluukkai';
 ```
 
-If the user is found and the password is correct (i.e. _secret_ for all users), `jsonwebtoken` is returned to the caller containing the user's information. To do this, we install
-dependency
+If the user is found and the password is correct (i.e. _secret_ for all the users), <i>jsonwebtoken</i> is returned to the called containing the user's information. To do this, we install a dependency
 
 ```js
 npm install jsonwebtoken
 ```
 
-The `index.js` file will expand slightly
+The file <i>index.js</i> expands slightly
 
 ```js
 const notesRouter = require('./controllers/notes')
@@ -436,7 +434,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-The current code for the app is available in full at [github](https://github.com/fullstack-hy/part12-notes/tree/part12-3), branch <i>part12-3</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-3), branch <i>part13-3</i>.
 
 ### Inter-table join
 
