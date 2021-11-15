@@ -436,11 +436,11 @@ app.use('/api/login', loginRouter)
 
 The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-3), branch <i>part13-3</i>.
 
-### Inter-table join
+### Connection between the tables
 
-Users can now be added to the application and users can log in, but by itself this is not yet a very useful feature. The idea is that only a logged in user can add notes, and that each note is associated with the user who created it. To do this, we need a <i>reference key</i> to store the notes in the `notes` table.
+Users can now be added to the application and users can log in, but in itself this is not a very useful feature. The idea is that only a logged user can add notes, and that each note is associated with the user who created it. To do this, we need the notes of the <i>reference key</i> to the stored table <i>notes</i>.
 
-When using Sequelize, the reference key can be specified by modifying the `models/index.js` file as follows
+When using Sequelize, the reference key can be defined by modifying the <i>models/index.js</i> file as follows
 
 ```js
 const Note = require('./note')
@@ -459,7 +459,7 @@ module.exports = {
 }
 ```
 
-So this [defines](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) that there is a _one to many_ relationship between the `users` and `notes` lines. We also changed the `sync` calls to change the tables if there are changes to the table definition. Now looking at the database schema from the console, it looks like this:
+So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
 
 ```js
 username=> \d users
@@ -489,9 +489,9 @@ Foreign-key constraints:
     "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 ```
 
-That is, a reference key `user_id` has been created in the `notes` table, which refers to the `users` row of the table.
+That is, the reference key <i>user_id</i> has been created in the <i>notes</i> table, which refers to the <i>users</i> rows on the table.
 
-Let us now make a change to the insertion of a new note to associate the note with a user. Before we do a proper implementation (where the join is done with a token to the user who is logged in), let's join the note to the first user found in the database:
+Now let's make a change to the insertion of a new note that the note is associated to the user. Before we make a proper implementation (where the join occurs using token to the user who is logged in), attach the note to the first user found in the database:
 
 ```js
 
@@ -508,9 +508,9 @@ router.post('/', async (req, res) => {
 })
 ```
 
-What is noteworthy in the code is that although there is a column `user\_id` in the notes at the database level, in the corresponding entity in the database row it is referred to in the camel case as `userId`.
+What is worthy of attention in the code is that although there is a column <i>user\_id</i> in the notes at the database level, in the corresponding object in the database row it is referred to by Sequelize naming convention due to to camel case as <i>userId</i>.
 
-Making a simple connection query is very easy. Let's change the route that shows all users so that it also shows the notes of each user:
+Making a simple join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes:
 
 ```js
 router.get('/', async (req, res) => {
@@ -527,7 +527,7 @@ router.get('/', async (req, res) => {
 
 So the join query is done using the [include](https://sequelize.org/master/manual/assocs.html#eager-loading-example) wrapper on the query parameter.
 
-The sql statement generated from the query is seen in the console:
+The sql statement generated from the query is seen on the console:
 
 ```
 SELECT "User". "id", "User". "username", "User". "name", "Notes". "id" AS "Notes.id", "Notes". "content" AS "Notes.content", "Notes". "important" AS "Notes.important", "Notes". "date" AS "Notes.date", "Notes". "user_id" AS "Notes.UserId"
@@ -536,7 +536,7 @@ FROM "users" AS "User" LEFT OUTER JOIN "notes" AS "Notes" ON "User". "id" = "Not
 
 The end result is also as you might expect
 
-IMAGE
+![](../../images/13/1.png)
 
 _TODO: where in include is an example (e.g. notes where `important: true`)?_
 
