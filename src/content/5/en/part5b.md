@@ -471,7 +471,7 @@ We can now hide the form by calling <i>noteFormRef.current.toggleVisibility()</i
 const App = () => {
   // ...
   const addNote = (noteObject) => {
-    noteFormRef.current.toggleVisibility() // highlight-line
+    noteFormRef.current() // highlight-line
     noteService
       .create(noteObject)
       .then(returnedNote => {     
