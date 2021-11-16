@@ -190,17 +190,17 @@ LINE 1: insert into notes (content, important, value) values ('only ...
 
 Next it's time to move on to accessing the database from the application.
 
-### A node application using a relational database
+### Node application using a relational database
 
-Start the application as usual with <i>npm init</i> and install <i>npm init</i> as the development-time dependency <i>nodemon</i> and the following runtime dependencies:
+Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as the development-time dependency and also the following runtime dependencies:
 
 ```bash
 npm install express dotenv pg sequelize
 ```
 
-The latter [sequelize](https://sequelize.org/master/) is the library through which we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using SQL, similar to the Mongoose we use for MongoDB.
+Of these, the latter [sequelize](https://sequelize.org/master/) is the library through we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to the Mongoose we use with MongoDB.
 
-Let's test that the connection is successful. Create the file <i>index.js</i> and the following content:
+Let's test that the connection is successful. Create the file <i>index.js</i> and add the following content:
 
 ```js
 require('dotenv').config()
@@ -228,21 +228,22 @@ const main = async () => {
 main()
 ```
 
-The database <i>connect string</i> revealed by _heroku config_ should be stored in a file <i>.env</i>, whose contents should be something like the following
+The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in <i>.env</i> file, whose contents should be something like the following:
 
 ```bash
 $ cat .env
 DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
-Let's see if a connection is established:
+Let's try if a connection is successful:
 
 ```bash
 $ node index.js
 Executing (default): SELECT 1+1 AS result
 Connection has been established successfully.
 ```
-If and when the connection works, we can run the first query. Let's modify the program as follows:
+
+If and when the connection works, we can then run the first query. Let's modify the program as follows:
 
 ```js
 require('dotenv').config()
@@ -273,7 +274,7 @@ const main = async () => {
 main()
 ```
 
-The application execution should print as follows:
+Executing the application should print as follows:
 
 ```js
 Executing (default): SELECT * FROM notes
@@ -293,9 +294,9 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-Although Sequelize is an ORM library, and there is little need to write SQL yourself using it, we now used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
+Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we now directly used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
 
-Since everything seems to work, let's convert the application into a web application.
+Since everything seems to be working, let's change the application into a web application.
 
 ```js
 require('dotenv').config()
@@ -325,11 +326,11 @@ app.listen(PORT, () => {
 // highlight-end
 ```
 
-The app seems to work. However, let's now switch to using Sequelize instead of SQL as it is intended to be used.
+The application seems to be working. However, let's now switch to using Sequelize instead of SQL as it is intended to be used.
 
 ### Model
 
-When using Sequelize, each table in the database is represented by a [model](https://sequelize.org/master/manual/model-basics.html), which is effectively its own JavaScript class. Let's now define the model <i>Note</i> corresponding to the table <i>notes</i> for the application by changing the code to the following format:
+When using Sequelize, each table in the database is represented by a [model](https://sequelize.org/master/manual/model-basics.html), which is effectively it's own JavaScript class. Let's now define the model <i>Note</i> corresponding to the table <i>notes</i> for the application by changing the code to the following format:
 
 ```js
 require('dotenv').config()
@@ -384,11 +385,11 @@ app.listen(PORT, () => {
 })
 ```
 
-A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each column has a type defined, plus other properties if needed, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute and other configuration information. We noted that the table does not have frequently used timestamp columns (created\_at and updated\_at).
+A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each columm has a type defined, as well as other properties if necessary, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute as well as other configuration information. We also defined that the table does not have frequently used timestamp columns (created\_at and updated\_at).
 
-We also specified that table names are inferred from model names using the "underscored" technique. In practice, this means that if a model name is <i>Note</i>, as in our case, the name of the corresponding table is inferred from the lowercase plural of <i>notes</i>. If, on the other hand, the name of the model were "two-part", e.g. <i>StudyGroup</i>, the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
+We also defined <i>underscored: true</i>, which means that table names are derived from model names as plural [snake case](https://en.wikipedia.org/wiki/Snake_case) versions. Practically this means that, if the name of the model, as in our case is "Note", then the name of the corresponding table is the plural of the name written in a small initial letter, i.e. <i>notes</i>. If, on the other hand, the name of the model would be "two-part", e.g. <i>StudyGroup</i>, then the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
 
-The same naming convention applies to columns. If we had specified that a note is associated with <i>creationYear</i>, i.e. information about the year it was created, we would define it in the model as follows:
+The same naming policy applies to columns as well. If we had defined that a note is associated with <i>creationYear</i>, i.e. information about the year it was created, we would define it in the model as follows:
 
 ```js
 Note.init({
@@ -399,11 +400,11 @@ Note.init({
 })
 ```
 
-The name of the corresponding column in the database would be <i>creation_year</i>. In the code, the reference to the column is always in the same format as in the model, i.e. in "camel case" format.
+The name of the corresponding column in the database would be <i>creation_year</i>. In code, reference to the column is always in the same format as in the model, i.e. in "camel case" format.
 
-We have also specified <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>, however we want a lower case initial, it will make a few things a bit more convenient in the future.
+We have also defined <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>. However we want to have a lowercase initial, it will make a few things a bit more convenient going forward.
 
-The database operation is easily done using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as you would expect it to from its name:
+The database operation is easy to do using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as it is assumed by it's name to work:
 
 ```js
 app.get('/api/notes', async (req, res) => {
@@ -412,7 +413,7 @@ app.get('/api/notes', async (req, res) => {
 })
 ```
 
-The console tells you that the method call <i>Note.findAll()</i> will cause the following query:
+The console tells you that the method call <i>Note.findAll()</i> causes the following query:
 
 ```js
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note";
@@ -432,16 +433,16 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
-The new note is thus created by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter the entity that defines the values of the columns.
+Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter the entity that defines the values of the columns.
 
-Instead of the <i>create</i> method, saving to the database [could be done](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) by first using the [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) method to create a Model-olio from the desired data, and calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
+Instead of the <i>create</i> method, it [would be possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save in a database using first method [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) to create a Model-object from the desired data, and calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
 
 ```js
 const note = Note.build(req.body)
 await note.save()
 ```
 
-Calling the <i>build</i> method does not yet save the object to the database, so it is still possible to edit the object before the actual save event:
+Calling the <i>build</i> method does not save the object in the database yet, so it is still possible to edit the object before the actually save event:
 
 ```js
 const note = Note.build(req.body)
@@ -449,10 +450,9 @@ note.important = true // highlight-line
 await note.save()
 ```
 
-For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is more appropriate, so we'll refrain from using it.
+For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's refrain from it.
 
-If the entity being created is not valid, an error message will result. For example, when trying to create a note without content
-the operation will fail, and the console will reveal the reason as `SequelizeValidationError: notNull Violation Note.content cannot be null`:
+If the object being created is not valid, there is an error message as a result. For example, when trying to create a note without content, the operation fails, and the console reveals the reason to be <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>:   
 
 ```
 (node:39109) UnhandledPromiseRejectionWarning: SequelizeValidationError: notNull Violation: Note.content cannot be null
@@ -460,7 +460,7 @@ the operation will fail, and the console will reveal the reason as `SequelizeVal
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
 ```
 
-Add a simple error handling to the addition of the new note:
+Let's add a simple error handling when adding a new note:
 
 ```js
 app.post('/api/notes', async (req, res) => {
@@ -477,26 +477,28 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tasks 13.1.-13.3.
 
-In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5), except for error handling. We will also add a set of features to the backend that the frontend in part 5 cannot exploit.
+In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit.
 
 #### Task 13.1.
 
-Create a GitHub repository for the application and create a Heroku application and a Postgres database for the application within it. Make sure to establish a connection to the application database.
+Create a GitHub repository for the application and create a Heroku application within in, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
 
 #### Task 13.2.
 
-On the command line, create a <i>blogs</i> table for the application with the following columns
+On the command-line, create a <i>blogs</i> table for the application with the following columns
 - id (unique, incrementing id)
 - author (string)
-- url (a string that cannot be empty)
-- title (non-empty string)
+- url (string that cannot be empty)
+- title (string that cannot be empty)
 - likes (integer with default value zero)
 
-Add at least two blogs to the database
+Add at least two blogs to the database.
+
+Save the SQL-commands you used at the root of the application repository in the file called <i>commands.sql</i>
 
 #### Exercise 13.3.
 
-Create a command-line functionality in your application that prints the blogs in the database, e.g. as follows:
+On the command-line, create functionality in your application, which prints the blogs in the database, e.g. as follows:
 
 ```bash
 $ node cli.js
@@ -509,13 +511,13 @@ Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
 
 <div class="content">
 
-### Automatic creation of database tables
+### Creating database tables automatically
 
-Our application now has one annoying aspect, it assumes that a database with exactly the right schema exists, i.e. that the table `notes` has been created with the appropriate `create table` command.
+Our application now has one unpleasant side, it assumes that a database with exactly the right schema exists, i.e. that the table <i>notes</i> has been created with the appropriate <i>create table</i> command.
 
-Since the program code is stored on Github, it would make sense to also store the commands that create the database in the program code, so that the schema of the database is definitely what the program code expects. Sequelize can actually generate the schema automatically from the model definition using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
+Since the program code is being stored on GitHub, it would make sense to also store the commands that create the database in the context of the program code, so that the database schema is definitely the same as what the program code is expecting. Sequelize is actually able to generate a schema automatically from the model definition by using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
 
-Let's now destroy the database from the console by issuing the following command:
+Let's now destroy the database from the console by entering the following command:
 
 ```
 drop table notes;
@@ -530,25 +532,25 @@ Did not find any relations.
 
 The application no longer works.
 
-Add the following command to the application immediately after the model `Note` is defined:
+Let's add the following command to the application immediately after the model <i>Note</i> is defined:
 
 ```js
 Note.sync()
 ```
 
-When the application starts, the following is printed to the console:
+When the application starts, the following is printed on the console:
 
 ```
 Executing (default): CREATE TABLE IF NOT EXISTS "notes" ("id" SERIAL , "content" TEXT NOT NULL, "important" BOOLEAN, "date" TIMESTAMP WITH TIME ZONE, PRIMARY KEY ("id"));
 ```
 
-That is, when the application starts, the command `CREATE TABLE IF NOT EXISTS "notes"...` is executed which creates the table `notes` if it does not already exist.
+That is, when the application starts, the command <i>CREATE TABLE IF NOT EXISTS "notes"...</i> is executed which creates the table <i>notes</i> if it does not already exist.
 
 ### Other operations
 
 Let's complete the application with a few more operations.
 
-The search for a single note is possible with the method [findByPk](https://sequelize.org/master/manual/model-querying-finders.html) because it is searched by the id of the primary key:
+Searching for a single note is possible with the method [findByPk](https://sequelize.org/master/manual/model-querying-finders.html), because it is retrieved based on the id of the primary key:
 
 ```js
 app.get('/api/notes/:id', async (req, res) => {
@@ -561,15 +563,15 @@ app.get('/api/notes/:id', async (req, res) => {
 })
 ```
 
-Retrieving a single note will cause the following SQL command:
+Retrieving a single note causes the following SQL command:
 
 ```
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note". "id" = '1';
 ```
 
-If no note is found, returns `null`, in which case the relevant status code is given.
+If no note is found, return the operation <i>null</i>, and in this case the relevant status code is given.
 
-The modification of a note is done as follows. Only the modification of the `important` field is supported, since the application frontend does not need anything else:
+Modifying the note is done as follows. Only the modification of the <i>important</i> field is supported, since the application's frontend does not need anything else:
 
 ```js
 app.put('/api/notes/:id', async (req, res) => {
@@ -584,13 +586,13 @@ app.put('/api/notes/:id', async (req, res) => {
 })
 ```
 
-The object corresponding to the database row is retrieved from the repository using the `findByPk` method, the object is modified and the result is saved by calling the `save` method of the object corresponding to the database row.
+The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row.
 
-The current code for the application is available in full at [github](https://github.com/fullstack-hy/part122-notes/tree/part12-1), branch <i>part12-1</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1), branch <i>part13-1</i>.
 
-### Printing objects returned by Sequelize to the console
+### Printing the objects returned by Sequelize to a console
 
-The JavaScript programmer's most important tool is <i>console.log</i>, the aggressive use of which will get even the worst bugs under control. Add console printing to the single note path:
+The JavaScript programmer's most important tool is <i>console.log</i>, whose aggressive use gets even the worst bugs under control. Let's add console printing to the single note path:
 
 
 ```js
@@ -605,7 +607,7 @@ app.get('/api/notes/:id', async (req, res) => {
 })
 ```
 
-We see that the end result is not quite what we expected:
+We can see that the end result is not exactly what we expected:
 
 ```js
 note {
@@ -633,7 +635,7 @@ note {
 }
 ```
 
-In addition to the information in the note, all sorts of other things are printed on the console. We can get the desired result by calling the model-olio method [toJSON](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-toJSON):
+In addition to the note information, all sorts of other things are printed on the console. We can reach the desired result by calling the model-object method [toJSON](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-toJSON):
 
 
 ```js
@@ -648,19 +650,16 @@ app.get('/api/notes/:id', async (req, res) => {
 })
 ```
 
-Now the end result is exactly what we want.
+Now the result is exactly what we want.
 
 ```js
-{
-  id: 1,
-  content: 'Notes are attached to a user',
-  important: true,
-  date: 2021-10-03T15:00:24.582Z,
-  userId: 1
-}
+{ id: 1,
+  content: 'MongoDB is webscale',
+  important: false,
+  date: 2021-10-09T13:52:58.693Z }
 ```
 
-In the case of a collection of entities, the method toJson does not work directly, the method must be called separately for each entity in the collection:
+In the case of a collection of objects, the method toJSON does not work directly, the method must be called separately for each object in the collection:
 
 ```js
 router.get('/', async (req, res) => {
@@ -672,7 +671,20 @@ router.get('/', async (req, res) => {
 })
 ```
 
-However, perhaps a better solution is to convert the collection to JSON for printing:
+The print looks like the following:
+
+```js
+[ { id: 1,
+    content: 'MongoDB is webscale',
+    important: false,
+    date: 2021-10-09T13:52:58.693Z },
+  { id: 2,
+    content: 'Relational databases rule the world',
+    important: true,
+    date: 2021-10-09T13:53:10.710Z } ]
+```
+
+However, perhaps a better solution is to turn the collection into JSON for printing by using the method [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify):
 
 ```js
 router.get('/', async (req, res) => {
@@ -684,10 +696,29 @@ router.get('/', async (req, res) => {
 })
 ```
 
-This way is better especially if the entities in the collection contain other entities. It is also often useful to format the entities on the screen in a slightly more reader-friendly format. This can be done with the command:
+This way is better especially if the objects in the collection contain other objects. It is also often useful to format the objects on the screen in a slightly more reader-friendly format. This can be done with the following command:
 
 ```json
 console.log(JSON.stringify(notes, null, 2))
+```
+
+The print looks like the following:
+
+```js
+[
+  {
+    "id": 1,
+    "content": "MongoDB is webscale",
+    "important": false,
+    "date": "2021-10-09T13:52:58.693Z"
+  },
+  {
+    "id": 2,
+    "content": "Relational databases rule the world",
+    "important": true,
+    "date": "2021-10-09T13:53:10.710Z"
+  }
+]
 ```
 
 </div>
@@ -698,7 +729,7 @@ console.log(JSON.stringify(notes, null, 2))
 
 #### Task 13.4.
 
-Transform your application into a web application that performs the following operations
+Transform your application into a web application that supports the following operations
 
 - GET api/blogs (list all blogs)
 - POST api/blogs (add a new blog)
