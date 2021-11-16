@@ -8,8 +8,8 @@ lang: en
 <div class="content">
 
 After the brief introduction to the main principles of TypeScript, we are now ready to start our journey towards becoming FullStack TypeScript developers. 
-Rather than giving you a thorough introduction to all aspects of TypeScript, in this part we will focus on the most common issues that arise when developing express backends or React frontends with TypeScript. 
-In addition to language features we will also have a strong emphasis in tooling.
+Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing express backends or React frontends with TypeScript. 
+In addition to language features, we will also have a strong emphasis on tooling.
 
 ### Setting things up
 
@@ -20,13 +20,13 @@ As mentioned earlier, TypeScript code is not executable by itself but it has to 
 When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript. 
 
 <!-- In a production environment this need for compilation often means that you have to setup a "build step", where all TypeScript code is compiled into JavaScript in a separate folder, and the production enviroment then runs the code from that folder. In a development environment it is often more handy to take use of real-time compilation and auto-reloading, in order to be able to see the resulting changes faster. -->
-In a production environment the need for compilation often means that you have to setup a "build step". During the build step all TypeScript code is compiled into JavaScript in a separate folder, and the production environment then runs the code from that folder. In a development environment it is often more handy to make use of real-time compilation and auto-reloading in order to be able to see the resulting changes faster.
+In a production environment, the need for compilation often means that you have to setup a "build step". During the build step, all TypeScript code is compiled into JavaScript in a separate folder, and the production environment then runs the code from that folder. In a development environment, it is often more handy to make use of real-time compilation and auto-reloading in order to be able to see the resulting changes faster.
 
 <!-- Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node), that compiles and executes the desired TypeScript file immediately, so that there is no need for the separate compilation step. -->
-Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node).
+Let's start writing our first TypeScript app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node).
 It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step.
 
-You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running 
+You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running:
 ```
 npm install -g ts-node typescript
 ```
@@ -34,7 +34,7 @@ npm install -g ts-node typescript
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
 We will also take this approach. 
 
-As we remember from [part 3](/en/part3) an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
+As we remember from [part 3](/en/part3), an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
 
 ```
 npm install --save-dev ts-node typescript
@@ -58,7 +58,7 @@ and set up <i>scripts</i> within the package.json:
 }
 ```
 
-Now within this directory you can use <i>ts-node</i> by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all  command line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: 
+You can now use <i>ts-node</i> within this directory by running <i>npm run ts-node</i>. Note that if you are using ts-node through package.json, all command-line arguments for the script need to be prefixed with <i>--</i>. So if you want to run file.ts with <i>ts-node</i>, the whole command is: 
 
 ```shell
 npm run ts-node -- file.ts
@@ -70,7 +70,7 @@ It is worth mentioning that TypeScript also provides an online playground, where
 
 #### A note about the coding style
 
-JavaScript on itself is quite relaxed language, and things can often be done in multiple different ways. For example we have named vs anonymous functions, using const and let or var and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt ones coding habits to the existing codebase, in the exercises of this part it is expected to use semicolons and to adjust to the coding style of the part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming.
+JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and to adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming.
 
 Let's start by creating a simple Multiplier. It looks exactly as it would in JavaScript.
 
@@ -125,9 +125,9 @@ The VSCode plugin is so efficient, that it informs you immediately when you are 
 
 ### Creating your first own types
 
-Let's expand our multiplicator into a bit more versatile calculator that also supports addition and division. The calculator should accept three arguments: two numbers and the operation, either <i>multiply</i>, <i>add</i> or <i>divide</i>, which tells it what to do with the numbers 
+Let's expand our multiplicator into a slightly more versatile calculator that also supports addition and division. The calculator should accept three arguments: two numbers and the operation, either <i>multiply</i>, <i>add</i> or <i>divide</i>, which tells it what to do with the numbers.
 
-In JavaScript the code would require additional validation to make sure the last argument is indeed a string. TypeScript offers a way to define specific types for inputs, which describe exactly what type of input is acceptable. On top of that, TypeScript can also show the info of the accepted values already on editor level. 
+In JavaScript, the code would require additional validation to make sure the last argument is indeed a string. TypeScript offers a way to define specific types for inputs, which describe exactly what type of input is acceptable. On top of that, TypeScript can also show the info of the accepted values already at editor level. 
 
 We can create a <i>type</i> using the TypeScript native keyword <i>type</i>. Let's describe our type <i>Operation</i>:
 
@@ -137,9 +137,9 @@ type Operation = 'multiply' | 'add' | 'divide';
 
 Now the <i>Operation</i> type accepts only three kinds of input; exactly the three strings we wanted. 
 Using the OR operator _|_ we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types).
-In this case we used exact strings (that in technical terms are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions you could also make the compiler to accept for example both string and number: _string | number_.
+In this case, we used exact strings (that, in technical terms, are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions, you could also make the compiler accept for example both string and number: _string | number_.
 
-The <i>type</i> keyword defines a new name for a type, [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
+The <i>type</i> keyword defines a new name for a type: [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
 
 Let's look at our calculator now:
 
@@ -158,7 +158,7 @@ const calculator = (a: number, b: number, op : Operation) => {
 }
 ```
 
-Now when we hover on top of the <i>Operation</i> type in the calculator function, we can immediately see suggestions on what to do with it:
+Now, when we hover on top of the <i>Operation</i> type in the calculator function, we can immediately see suggestions on what to do with it:
 
 ![](../../images/9/3.png)
 
@@ -166,7 +166,7 @@ And if we try to use a value that is not within the <i>Operation</i> type, we ge
 
 ![](../../images/9/4.png)
 
-This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually you want to know what a function returns, and it would be nice to have a guarantee that it actually returns what it says it does. Let's add a return value <i>number</i> to the calculator function:
+This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually, you want to know what a function returns, and it would be nice to have a guarantee that it actually returns what it says it does. Let's add a return value <i>number</i> to the calculator function:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
@@ -184,8 +184,8 @@ const calculator = (a: number, b: number, op: Operation): number => {
 }
 ```
 
-The compiler complains straight away, because in one case the function returns a string. There are couple of ways to fix this: 
-we could extend the return type to allow string values, like so
+The compiler complains straight away because, in one case, the function returns a string. There are couple of ways to fix this: 
+we could extend the return type to allow string values, like so:
 
 ```js
 const calculator = (a: number, b: number, op: Operation): number | string =>  {
@@ -193,7 +193,7 @@ const calculator = (a: number, b: number, op: Operation): number | string =>  {
 }
 ```
 
-or we could create a return type which includes both possible types, much like our Operation type
+Or we could create a return type which includes both possible types, much like our Operation type:
 
 ```js
 type Result = string | number;
@@ -210,7 +210,7 @@ When you are deciding to return values you weren't originally expecting, the war
 
 
 One more thing to consider is, that even though we have defined types for our parameters, the generated JavaScript used at runtime does not contain the type checks.
-So if for example the <i>operation</i>-parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore it's still better to include error handling and be prepared for the unexpected to happen. 
+So if, for example, the <i>operation</i> parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore, it's still better to include error handling and be prepared for the unexpected to happen. 
 In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
 
 The code of our calculator should actually look something like this:
@@ -220,12 +220,12 @@ type Operation = 'multiply' | 'add' | 'divide';
 
 type Result = number;
 
-const calculator = (a: number, b: number, op : Operation) : Result => {
+const calculator = (a: number, b: number, op: Operation) : Result => {
   switch(op) {
     case 'multiply':
       return a * b;
     case 'divide':
-      if( b === 0) throw new Error('Can\'t divide by 0!');
+      if (b === 0) throw new Error('Can\'t divide by 0!');
       return a / b;
     case 'add':
       return a + b;
@@ -235,10 +235,10 @@ const calculator = (a: number, b: number, op : Operation) : Result => {
 }
 
 try {
-  console.log(calculator(1, 5 , 'divide'))
+  console.log(calculator(1, 5 , 'divide'));
 } catch (error: unknown) {
   let errorMessage = 'Something went wrong.'
-  if(error instanceof Error) {
+  if (error instanceof Error) {
     errorMessage += ' Error: ' + error.message;
   }
   console.log(errorMessage);
@@ -246,9 +246,9 @@ try {
 ```
 
 <!-- The programs we've written are alright, but it sure would be better if there were a way to use command line arguments instead of always having to change the code to calculate different things. Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. But something is not right: -->
-As of TypeScript 4.0, <i>catch</i> blocks allow you to specify the type of catch clause variables. Pre-4.4, all <i>catch</i> clause variables were of type <i>any</i>. However, with the release of 4.4, the default type is <i>unknown</i>. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type.
+As of TypeScript 4.0, <i>catch</i> blocks allow you to specify the type of catch clause variables. Pre-4.4, all <i>catch</i> clause variables were of type <i>any</i>. However, with the release of 4.4, the default type is <i>unknown</i>. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow-based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type.
 
-The programs we have written are alright, but it sure would be better if we could use command line arguments instead of always having to change the code to calculate different things.  
+The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.  
 Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>.
 But something is not right:
 
@@ -256,16 +256,16 @@ But something is not right:
 
 ### @types/{npm_package}
 
-Let's return to the basic idea of TypeScript. TypeScript expects all globally used code to be typed, as it does for your own code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is almost never needed - since the TypeScript community has done it for us!
+Let's return to the basic idea of TypeScript. TypeScript expects all globally-used code to be typed, as it does for your own code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is almost never needed - since the TypeScript community has done it for us!
 
 <!-- As in the world of npm, TypeScript also celebrates open source code and the community around it is active and continuously reacting to updates and changes in commonly used npm-packages. That is why the typings for npm-packages are almost always to be found, so that you won't be alone creating types for all of your thousands of dependencies. -->
-As with npm, the TypeScript world also celebrates open source code. The community is active and continuously reacting to updates and changes in commonly used npm-packages.  
-You can almost always find the typings for npm-packages, so you don't have to create types for all of your thousands of dependencies alone.
+As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages.  
+You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
 <!-- Usually types for existing packages can be found by under the <i>@types</i>-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example:<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and the list goes on and on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to maintaining types of everything in one place. -->
-Usually types for existing packages can be found from the <i>@types</i>-organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with @types/ - prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to maintaining types of everything in one place.
+Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal of maintaining types of everything in one place.
 
-Sometimes an npm package can also include its types within the code and in that case installing the corresponding <i>@types/*</i> is not necessary.
+Sometimes, an npm package can also include its types within the code and, in that case, installing the corresponding <i>@types/*</i> is not necessary.
 
 > **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should <i>always</i> be in the devDependencies of the package.json.
 
@@ -280,7 +280,7 @@ After installing the types, our compiler does not complain about the variable <i
 ### Improving the project
 
 <!-- Let us now add npm scripts with which we can run our two programs <i>multiplier</i> and <i>calculator</i>: -->
-Next let's add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>:
+Next, let's add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>:
 
 ```json
 {
@@ -303,7 +303,7 @@ Next let's add npm scripts to run our two programs <i>multiplier</i> and <i>calc
 ```
 
 <!-- We can now get the multipier to work with command line parameters with the following changes -->
-We can get the multiplier to work with command line parameters with the following changes
+We can get the multiplier to work with command-line parameters with the following changes:
 
 ```js
 const multiplicator = (a: number, b: number, printText: string) => {
@@ -315,19 +315,19 @@ const b: number = Number(process.argv[3])
 multiplicator(a, b, `Multiplied ${a} and ${b}, the result is:`);
 ```
 
-and we can run it with
+And we can run it with:
 
 ```shell
 npm run multiply 5 2
 ```
 
-if the program is run with parameters that are not of the right type, e.g.
+If the program is run with parameters that are not of the right type, e.g.
 
 ```shell
 npm run multiply 5 lol
 ```
 
-it "works" but gives us the answer
+it "works" but gives us the answer:
 
 ```shell
 Multiplied 5 and NaN, the result is: NaN
@@ -340,7 +340,7 @@ which is actually type <i>number</i>, so TypeScript has no power to rescue  us f
 <!-- In order to save us from this kind of behavior, we have to validate the data that is given to us as in command line.  -->
 In order to prevent this kind of behaviour, we have to validate the data given to us from the command line.
 
-Improved version of the multiplicator looks like this:
+The improved version of the multiplicator looks like this:
 
 ```js
 interface MultiplyValues {
@@ -371,13 +371,14 @@ try {
   multiplicator(value1, value2, `Multiplied ${value1} and ${value2}, the result is:`);
 } catch (error: unknown) {
   let errorMessage = 'Something bad happened.'
-  if(error instanceof Error) {
+  if (error instanceof Error) {
     errorMessage += ' Error: ' + error.message;
   }
   console.log(errorMessage);
+}
 ```
 
-When we now run the program 
+When we now run the program:
 
 ```shell
 npm run multiply 1 lol
@@ -386,10 +387,10 @@ npm run multiply 1 lol
 we get a proper error message:
 
 ```shell
-Error, something bad happened, message:  Provided values were not numbers!
+Something bad happened. Error: Provided values were not numbers!
 ```
 
-Definition of the function <i>parseArguments</i> has a couple of interesting things:
+The definition of the function <i>parseArguments</i> has a couple of interesting things:
 
 ```js
 const parseArguments = (args: Array<string>): MultiplyValues => {
@@ -406,9 +407,9 @@ interface MultiplyValues {
 }
 ```
 
-<!-- Definition utilizes TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) that is one way to define what "shape" an object should have. In our case it is quite obvious that return values should be objects that have properties <i>value1</i> and <i>value2</i> that both have type number. -->
+<!-- Definition utilizes TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) that is one way to define what "shape" an object should have. In our case, it is quite obvious that return values should be objects that have properties <i>value1</i> and <i>value2</i> that both have type number. -->
 The definition utilizes TypeScript's [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) keyword, which is one way to define the "shape" an object should have. 
-In our case it is quite obvious that the return value should be an object with two properties <i>value1</i> and <i>value2</i>, which should both be of type number. 
+In our case it is quite obvious that the return value should be an object with the two properties <i>value1</i> and <i>value2</i>, which should both be of type number. 
 
 </div>
 
@@ -418,7 +419,7 @@ In our case it is quite obvious that the return value should be an object with t
 
 #### setup
 
-Exercises 9.1.-9.7. will be all made to the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Create also the file <i>tsconfig.json</i> to the directory with the following content:
+Exercises 9.1.-9.7. will all be made in the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Create also the file <i>tsconfig.json</i> in the directory with the following content:
 
 ```json
 {
@@ -433,9 +434,9 @@ For now we will only use the compiler option [noImplicitAny](https://www.typescr
 
 #### 9.1 Body mass index
 
-Create the code of this exercise to file <i>bmiCalculator.ts</i>
+Create the code of this exercise in file <i>bmiCalculator.ts</i>.
 
-Write a function <i>calculateBmi</i> that counts [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on given height (in centimeters) and weight (in kilograms) and then returns a message that suits the results. 
+Write a function <i>calculateBmi</i> that calculates a [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on a given height (in centimeters) and weight (in kilograms) and then returns a message that suits the results. 
 
 Call the function in the same file with hard-coded parameters and print out the result. The code
 
@@ -443,17 +444,17 @@ Call the function in the same file with hard-coded parameters and print out the 
 console.log(calculateBmi(180, 74))
 ```
 
-should print the following message
+should print the following message:
 
 ```shell
 Normal (healthy weight)
 ```
 
-Create a npm script for running the program with command <i>npm run calculateBmi</i>
+Create a npm script for running the program with command <i>npm run calculateBmi</i>.
 
 #### 9.2 Exercise calculator
 
-Create the code of this exercise to file <i>exerciseCalculator.ts</i>
+Create the code of this exercise in file <i>exerciseCalculator.ts</i>.
 
 Write a function <i>calculateExercises</i> that calculates the average time of <i>daily exercise hours</i> and compares it to the <i>target amount</i> of daily hours and returns an object that includes the following values:
 
@@ -471,9 +472,9 @@ The daily exercise hours are given to the function as an [array](https://www.typ
 [3, 0, 2, 4.5, 0, 3, 1]
 ```
 
-For the Result object you should create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
+For the Result object, you should create an [interface](https://www.typescriptlang.org/docs/handbook/interfaces.html).
 
-If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> and <i>2</i> it could return
+If you call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> and <i>2</i>, it should return:
 
 ```js
 { periodLength: 7,
@@ -485,11 +486,11 @@ If you would call the function with parameters <i>[3, 0, 2, 4.5, 0, 3, 1]</i> an
   average: 1.9285714285714286 }
 ```
 
-Create a npm script <i>npm run calculateExercises</i> for calling the function with hard coded values.
+Create a npm script, <i>npm run calculateExercises</i>, to call the function with hard-coded values.
 
 #### 9.3 Command line
 
-Change the previous exercises so that you can give the parameters of <i>bmiCalculator</i> and <i>exerciseCalculator</i> as command line arguments.
+Change the previous exercises so that you can give the parameters of <i>bmiCalculator</i> and <i>exerciseCalculator</i> as command-line arguments.
 
 Your program could work eg. as follows:
 
@@ -499,7 +500,7 @@ $ npm run calculateBmi 180 91
 Overweight
 ```
 
-and
+and:
 
 ```shell
 $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
@@ -513,7 +514,7 @@ $ npm run calculateExercises 2 1 0 2 4.5 0 3 1 0 4
   average: 1.7222222222222223 }
 ```
 
-In the example the <i>first argument</i> is the target value.
+In the example, the <i>first argument</i> is the target value.
 
 Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
