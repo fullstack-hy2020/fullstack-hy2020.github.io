@@ -524,8 +524,8 @@ Handle exceptions and errors appropriately. The exerciseCalculator should accept
 
 ### More about tsconfig
 
-<!-- In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) which is a good place to start but now it is time to start looking into the file a little bit deeper. -->
-In the exercises we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper.
+<!-- In the exercises we used only one tsconfig rule: [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) which is a good place to start but now it is time to start looking into the file a little bit deeper. -->
+In the exercises, we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper.
 
 <!-- [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) includes all your core configurations on how you want TypeScript to work in your project. In tsconfig.json you can define how strictly you want the code to be inspected, what files to include, what files to exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later).  -->
 The [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project. 
@@ -549,14 +549,14 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 }
 ```
 
-Do not worry too much about the <i>compilerOptions</i>, they will be under closer inspection later on.
+Do not worry too much about the <i>compilerOptions</i>; they will be under closer inspection later on.
 
-You can find explanations for each of the configurations from the TypeScript documentation, or the really handy [tsconfig page](https://www.staging-typescript.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
+You can find explanations for each of the configurations from the TypeScript documentation, or from the really handy [tsconfig page](https://www.staging-typescript.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
 
 ### Adding express to the mix
 
-Right now we are at a pretty good place. Our project is set up and we have two executable calculators in it. 
-However, since our aim is to learn FullStack development, it is time to start working with some HTTP-requests.
+Right now, we are in a pretty good place. Our project is set up and we have two executable calculators in it. 
+However, since our aim is to learn FullStack development, it is time to start working with some HTTP requests.
 
 Let us start by installing express:
 
@@ -596,23 +596,23 @@ app.listen(PORT, () => {
 });
 ```
 
-Everything else seems to be working just fine, but as you'd expect the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing.
-If you look carefully, VSCode is also complaining something about importing express. You can see a short yellow line of dots under the <i>require</i>. Let's hover over the problem:
+Everything else seems to be working just fine but, as you'd expect, the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing.
+If you look carefully, VSCode is also complaining about something to do with importing express. You can see a short yellow line of dots under the <i>require</i>. Let's hover over the problem:
 
 ![](../../images/9/6.png)
 
-The complaint is that the <i>'require' call may be converted to an import</i>. Let us follow the advice and write the import as follows
+The complaint is that the <i>'require' call may be converted to an import</i>. Let us follow the advice and write the import as follows:
 
 ```js
 import express from 'express';
 ```
 
-**NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick fix...</i> button.
+**NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick Fix...</i> button.
 Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. 
 The automatic fixes for issues can be a major time saver as well. 
 
 Now we run into another problem - the compiler complains about the import statement. 
-Once again the editor is our best friend when trying to find out what the issue is:
+Once again, the editor is our best friend when trying to find out what the issue is:
 
 ![](../../images/9/7.png)
 
@@ -625,11 +625,11 @@ npm install --save-dev @types/express
 
 And no more errors! Let's take a look at what changed.
 
-When we hover over the <i>require</i> statement, we can see the compiler interprets everything express related to be of type <i>any</i>.
+When we hover over the <i>require</i> statement, we can see the compiler interprets everything express-related to be of type <i>any</i>.
 
 ![](../../images/9/8a.png)
 
-Whereas when we use <i>import</i>, the editor knows the actual types
+Whereas when we use <i>import</i>, the editor knows the actual types:
 
 ![](../../images/9/9a.png)
 
@@ -640,11 +640,11 @@ If  <i>import</i> does not work, try a combined method: <i>import ... = require(
 
 We strongly suggest you read more about TypeScript modules [here](https://www.typescriptlang.org/docs/handbook/modules.html).
 
-There is one more problem with the code 
+There is one more problem with the code:
 
 ![](../../images/9/9b.png)
 
-This is because we banned unused parameters in our <i>tsconfig.json</i>
+This is because we banned unused parameters in our <i>tsconfig.json</i>:
 
 ```js
 {
@@ -660,15 +660,15 @@ This is because we banned unused parameters in our <i>tsconfig.json</i>
 }
 ```
 
-<!-- This configuration might create problems when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved on configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button:  -->
+<!-- This configuration might create problems when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved at the configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button:  -->
 This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it's not used at all, as is the case here. 
-Fortunately this issue has already been solved on configuration level. 
+Fortunately, this issue has already been solved on configuration level. 
 Once again hovering over the issue gives us a solution. This time we can just click the quick fix button:
 
 ![](../../images/9/14a.png)
 
 <!-- If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it.  -->
-If it absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do. 
+If it is absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do. 
 
 Let's rename the <i>req</i> variable to <i>_req</i>.
  <!-- Now we are finally ready to start up the application, and it seems to work fine: -->
@@ -677,15 +677,15 @@ Let's rename the <i>req</i> variable to <i>_req</i>.
 ![](../../images/9/11a.png)
 
 <!-- Now to simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i> which is meant only for development environment that takes care of recompilation on every change so restarting the application won't be necessary. -->
-To simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i>. It is meant to be used only with a development environment which takes care of recompilation on every change, so restarting the application won't be necessary.
+To simplify the development, we should enable <i>auto-reloading</i> to improve our workflow. In this course, you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i>. It is meant to be used only with a development environment which takes care of recompilation on every change, so restarting the application won't be necessary.
 
-Let's install <i>ts-node-dev</i> to our development dependencies
+Let's install <i>ts-node-dev</i> to our development dependencies:
 
 ```
 npm install --save-dev ts-node-dev
 ```
 
-add a script to <i>package.json</i>
+Add a script to <i>package.json</i>:
 
 ```json
 {
@@ -698,7 +698,7 @@ add a script to <i>package.json</i>
 }
 ```
 
-And now by running <i>npm run dev</i> we have a working, auto-reloading development environment for our project!
+And now, by running <i>npm run dev</i>, we have a working, auto-reloading development environment for our project!
 
 </div>
 
@@ -708,9 +708,9 @@ And now by running <i>npm run dev</i> we have a working, auto-reloading developm
 
 #### 9.4 Express
 
-Add express to your dependencies and create a HTTP GET endpoint <i>hello</i> that answers 'Hello Full Stack!'
+Add express to your dependencies and create an HTTP GET endpoint <i>hello</i> that answers 'Hello Full Stack!'
 
-The web app should be started with command <i>npm start</i> in production mode and <i>npm run dev</i> in development mode that should use <i>ts-node-dev</i> to run the app.
+The web app should be started with commands <i>npm start</i> in production mode and <i>npm run dev</i> in development mode. The latter should also use <i>ts-node-dev</i> to run the app.
 
 Replace also your existing <i>tsconfig.json</i> file with the  following content:
 
@@ -732,13 +732,13 @@ Replace also your existing <i>tsconfig.json</i> file with the  following content
 }
 ```
 
-make sure there are not any errors!
+Make sure there aren't any errors!
 
 #### 9.5 WebBMI
 
-Add an endpoint for BMI-calculator that can be used by doing a HTTP GET request to endpoint <i>bmi</i> and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). For example to get bmi for a person having height 180 and weight 72, the url is http://localhost:3002/bmi?height=180&weight=72
+Add an endpoint for the BMI calculator that can be used by doing an HTTP GET request to endpoint <i>bmi</i> and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). For example, to get the BMI of a person having height 180 and weight 72, the url is http://localhost:3002/bmi?height=180&weight=72.
 
-The response is a json of the form
+The response is a json of the form:
 
 ```js
 {
@@ -748,9 +748,9 @@ The response is a json of the form
 }
 ```
 
-See the [express documentation](http://expressjs.com/en/5x/api.html#req.query) for info how to access the query parameters.
+See the [express documentation](http://expressjs.com/en/5x/api.html#req.query) for info on how to access the query parameters.
 
-If the query parameters of the request are of the wrong type or missing, response with proper status code and error message are given
+If the query parameters of the request are of the wrong type or missing, a response with proper status code and error message is given:
 
 ```js
 {
@@ -758,7 +758,7 @@ If the query parameters of the request are of the wrong type or missing, respons
 }
 ```
 
-Do not copy the calculator code to file <i>index.ts</i>, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>.
+Do not copy the calculator code to file <i>index.ts</i>; instead, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>.
 
 </div>
 
@@ -770,7 +770,7 @@ Now that we have our first endpoints completed, you might notice we have used ba
 When examining the code a bit closer, we can see a few dangers lurking there.
 
 
-Let's add an HTTP POST endpoint <i>calculate</i> to our app:
+Let's add the HTTP POST endpoint <i>calculate</i> to our app:
 
 ```js
 import { calculator } from './calculator'
@@ -794,25 +794,25 @@ But if you hover over the values parsed from the request, an issue arises:
 
 ![](../../images/9/13a21.png)
 
-All of the variables have type <i>any</i>. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but the first we have to consider why this is accepted and where did the type <i>any</i> come from?
+All of the variables have type <i>any</i>. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but first, we have to consider why this is accepted and where the type <i>any</i> came from.
 
-In TypeScript every untyped variable whose type cannot be inferred, becomes implicitly [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any) type. Any is a kind of a "wild card" type which literally stands for <i>whatever type</i>. 
+In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). Any is a kind of "wild card" type which literally stands for <i>whatever</i> type. 
 Things become implicitly any type quite often when one forgets to type functions. 
 
-We can also explicitly type things <i>any</i>. The only difference between implicit and explicit any type is how the code looks, the compiler does not care about the difference. 
+We can also explicitly type things <i>any</i>. The only difference between implicit and explicit any type is how the code looks; the compiler does not care about the difference. 
 
-Programmers however see the code differently when <i>any</i> is explicitly enforced than when it implicitly inferred. 
+Programmers however see the code differently when <i>any</i> is explicitly enforced than when it is implicitly inferred. 
 Implicit <i>any</i> typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited. 
 
 This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) exists on compiler level, and it is highly recommended to keep it on at all times. 
-In the rare occasions you seriously cannot know what the type of a variable is, you should explicitly state that in the code
+In the rare occasions when you truly cannot know what the type of a variable is, you should explicitly state that in the code:
 
 ```js
 const a : any = /* no clue what the type will be! */.
 ```
 
 We already have <i>noImplicitAny</i> configured in our example, so why does the compiler not complain about the implicit <i>any</i> types?
-The reason is, that the <i>query</i> field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed <i>any</i>.  Same is true for the <i>request.body</i> field we use to post data to an app. 
+The reason is that the <i>query</i> field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed <i>any</i>. The same is true for the <i>request.body</i> field we use to post data to an app. 
 
 
 What if we would like to prevent developers from using <i>any</i> type at all? Fortunately we have other methods than <i>tsconfig.json</i> to enforce coding style. What we can do is  use <i>eslint</i> to manage
@@ -861,8 +861,8 @@ Now lint will complain if we try to define a variable of type <i>any</i>:
 ![](../../images/9/13b.png)
 
 
-The [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript specific eslint rules, but you can also use all basic eslint rules in TypeScript projects. 
-For now we should probably go with the recommended settings and modify the rules as we go along whenever we find something we want to behave differently. 
+[@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific eslint rules, but you can also use all basic eslint rules in TypeScript projects. 
+For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.
 
 On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to required</i>.
 
@@ -916,7 +916,7 @@ Configure your project to use the above eslint settings and fix all the warnings
 
 #### 9.7 WebExercises
 
-Add an endpoint to your app for the exercise calculator. It should be used by doing a HTTP POST request to endpoint <i>exercises</i> with the input in the request body
+Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to endpoint <i>exercises</i> with the input in the request body:
 
 ```js
 {
@@ -925,7 +925,7 @@ Add an endpoint to your app for the exercise calculator. It should be used by do
 }
 ```
 
-Response is a json of the following form
+The response is a json of the following form:
 
 ```js
 {
@@ -939,7 +939,7 @@ Response is a json of the following form
 }
 ```
 
-If the body of the request is not of the right form, response with proper status code and error message is given. The error message is either
+If the body of the request is not of the right form, a response with proper status code and error message is given. The error message is either
 
 ```js
 {
@@ -957,14 +957,14 @@ or
 
 depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertable to numbers.
 
-In this exercise you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:
+In this exercise, you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 ```
 
-You might also get in trouble with rules <i>no-unsafe-member-access</i> an <i>no-unsafe-assignment </i>. These rules may be ignored in this exercise.
+You might also get in trouble with rules <i>no-unsafe-member-access</i> and <i>no-unsafe-assignment </i>. These rules may be ignored in this exercise.
 
-Note that you need to have a correct setup in order to get hold to the request body, see [part 3](/en/part3/node_js_and_express#receiving-data).
+Note that you need to have a correct setup in order to get hold of the request body; see [part 3](/en/part3/node_js_and_express#receiving-data).
 
 </div>
