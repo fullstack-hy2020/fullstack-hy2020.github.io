@@ -7,22 +7,22 @@ lang: en
 
 <div class="content">
 
-Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project with a bit more realistic use cases in mind.
+Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project that will introduce use cases that are a little more realistic.
 
 One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advisable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node.
 
 ### Setting up the project
 
-We will create a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. He is a coder himself, so he doesn't necessarily need a user interface, but he'd like to use a software with HTTP-requests and retain the possibility of later adding a web-based user interface to the application.
+We will create a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. He is a coder himself, so he doesn't necessarily need a user interface, but he'd like to use a software with HTTP requests and retain the possibility of later adding a web-based user interface to the application.
 
-Let's start by creating our first real project: *Ilari's flight diaries*. As usual run <i>npm init</i> and install the <i>typescript</i> package as a dev dependency. 
+Let's start by creating our first real project: *Ilari's flight diaries*. As usual, run <i>npm init</i> and install the <i>typescript</i> package as a dev dependency. 
 
 ```shell
  npm install typescript --save-dev
 ```
 
-TypeScript's Native Compiler (<i>tsc</i>) can help us to initialize our project, generating our <i>tsconfig.json</i> file.
-First, we need to add the <i>tsc</i> command to the list of executable scripts in <i>package.json</i> (unless you have installed *typescript* globally). Even if you installed TypeScript globally, you should always add it as a dev-dependency to your project.
+TypeScript's Native Compiler (<i>tsc</i>) can help us initialize our project by generating our <i>tsconfig.json</i> file.
+First, we need to add the <i>tsc</i> command to the list of executable scripts in <i>package.json</i> (unless you have installed *typescript* globally). Even if you installed TypeScript globally, you should always add it as a dev dependency to your project.
 
 The npm script for running <i>tsc</i> is set as follows:
 
@@ -75,12 +75,12 @@ The <i>target</i> configuration tells the compiler which *ECMAScript* version to
 <i>outDir</i> tells where the compiled code should be placed.
 
 
-<i>module</i> tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old <i>require</i> syntax instead of the <i>import</i> one, which is not supported in older versions of *Node*, such as the version 10.
+<i>module</i> tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old <i>require</i> syntax instead of the <i>import</i> one, which is not supported in older versions of *Node*, such as version 10.
 
 <i>strict</i> is actually a shorthand for multiple separate options:
 <i>noImplicitAny, noImplicitThis, alwaysStrict, strictBindCallApply, strictNullChecks, strictFunctionTypes and strictPropertyInitialization</i>.
 They guide our coding style to use the TypeScript features more strictly.
-For us perhaps the most important is the already familiar [noImplicitAny](https://www.staging-typescript.org/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can for example happen if you don't type the parameters of a function.
+For us, perhaps the most important is the already-familiar [noImplicitAny](https://www.staging-typescript.org/tsconfig#noImplicitAny). It prevents implicitly setting type <i>any</i>, which can for example happen if you don't type the parameters of a function.
 Details about the rest of the configurations can be found in the [tsconfig documentation](https://www.staging-typescript.org/tsconfig#strict).
 Using <i>strict</i> is suggested by the official documentation.
 
@@ -160,7 +160,7 @@ We also create an <i>.eslintrc</i> file with the following content:
 
 Now we just need to set up our development environment, and we are ready to start writing some serious code.
 There are many different options for this. One option could be to use the familiar <i>nodemon</i> with </i>ts-node</i>. However, as we saw earlier, </i>ts-node-dev</i> does the exact same thing, so we will use that instead.
-So, let's install <i>ts-node-dev</i>
+So, let's install <i>ts-node-dev</i>:
 
 ```shell
 npm install --save-dev ts-node-dev
@@ -180,11 +180,11 @@ We finally define a few more npm scripts, and voilà, we are ready to begin:
 }
 ```
 
-As you can notice, there is a lot of stuff to go through before beginning the actual coding. When you are working with a real project, careful preparations support your development process. Take the needed time to create a good setup for yourself and your team, so that everything runs smoothly in the long run.
+As you can see, there is a lot of stuff to go through before beginning the actual coding. When you are working with a real project, careful preparations support your development process. Take the time needed to create a good setup for yourself and your team, so that everything runs smoothly in the long run.
 
 ### Let there be code
 
-Now we can finally start coding! As always, we start by creating a ping-endpoint, just to make sure everything is working.
+Now we can finally start coding! As always, we start by creating a ping endpoint, just to make sure everything is working.
 
 The contents of the <i>index.ts</i> file:
 
@@ -205,7 +205,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Now if we run the app with <i>npm run dev</i> we can verify that a request to http://localhost:3000/ping gives a response <i>pong</i>, so our configuration is set!
+Now, if we run the app with <i>npm run dev</i>, we can verify that a request to http://localhost:3000/ping gives the response <i>pong</i>, so our configuration is set!
 
 When starting the app with <i>npm run dev</i>, it runs in development mode.
 The development mode is not suitable at all when we later operate the app in production.
@@ -214,7 +214,7 @@ Let's try to create a <i>production build</i> by running the TypeScript compiler
 
 Just like magic, a native runnable JavaScript production build of the express backend is created in the directory <i>build</i>.
 
-Currently, if we run eslint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler generated. We can prevent this by creating a  <i>.eslintignore</i> file  which lists the content we want eslint to ignore, just like we do with git and <i>gitignore</i>.
+Currently, if we run eslint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler-generated. We can prevent this by creating a  <i>.eslintignore</i> file  which lists the content we want eslint to ignore, just like we do with git and <i>gitignore</i>.
 
 Let's add an npm script for running the application in production mode:
 
@@ -231,12 +231,12 @@ Let's add an npm script for running the application in production mode:
 }
 ```
 
-When we run the app with <i>npm start</i> we can verify that the production build also works
+When we run the app with <i>npm start</i>, we can verify that the production build also works:
 
 ![](../../images/9/15a.png)
 
 Now we have a minimal working pipeline for developing our project.
-With the help of our compiler and eslint it also ensures that good code quality is maintained. With this base we can actually start creating an app that we could later on deploy into a production environment.
+With the help of our compiler and eslint, it also ensures that good code quality is maintained. With this base, we can actually start creating an app that we could later on deploy into a production environment.
 
 </div>
 
@@ -264,7 +264,7 @@ Ensure that backend answers to the ping request that <i>frontend</i> has made on
 
 ![](../../images/9/16a.png)
 
-You might also want to have a look at the tab <i>console</i>. If something fails [part 3](/en/part3) of the course shows how the problem can be solved.
+You might also want to have a look at the <i>console</i> tab. If something fails, [part 3](/en/part3) of the course shows how the problem can be solved.
 
 </div>
 
@@ -272,7 +272,7 @@ You might also want to have a look at the tab <i>console</i>. If something fails
 
 ### Implementing the functionality
 
-Finally we are ready to start writing some code.
+Finally, we are ready to start writing some code.
 
 <!-- Let's start from basics. Ilari wants to keep track of his experiences on his flight journeys. -->
 Let's start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys.
@@ -290,7 +290,7 @@ He wants to be able to save </i>diary entries</i> which contain:
 We have obtained some sample data, which we will use as a base to build on.
 The data is saved in json format, and can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).
 
-The data looks like the following
+The data looks like the following:
 
 ```json
 [
@@ -314,7 +314,7 @@ The data looks like the following
 
 Let's start by creating an endpoint which returns all flight diary entries.
 
-First we need to make some decisions on how to structure our source code. It is better to place all source code under <i>src</i> directory, so source code is not mixed with configuration files.
+First, we need to make some decisions on how to structure our source code. It is better to place all source code under <i>src</i> directory, so source code is not mixed with configuration files.
 We will move <i>index.ts</i> there and make the necessary changes to the npm scripts.
 
 We will place all [routers](/en/part4/structure_of_backend_application_introduction_to_testing), modules which are responsible for handling a set of specific resources such as <i>diaries</i>, under the directory <i>src/routes</i>.
@@ -362,13 +362,13 @@ app.listen(PORT, () => {
 });
 ```
 
-And now if we make a HTTP GET request to http://localhost:3000/api/diaries we should see the message <i>Fetching all diaries!</i>.
+And now, if we make an HTTP GET request to http://localhost:3000/api/diaries, we should see the message <i>Fetching all diaries!</i>.
 
-Next we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
+Next, we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
 
-We won't be writing the code for the actual data manipulations on the router. We will create a <i>service</i> which takes care of the data manipulation instead.
-It is quite common practice to separate the "business logic" from the router code into its own modules, which are quite often called <i>services</i>.
-The name service originates from [Domain driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
+We won't be writing the code for the actual data manipulations in the router. We will create a <i>service</i> which takes care of the data manipulation instead.
+It is quite a common practice to separate the "business logic" from the router code into its own modules, which are quite often called <i>services</i>.
+The name service originates from [Domain-driven design](https://en.wikipedia.org/wiki/Domain-driven_design) and was made popular by the [Spring](https://spring.io/) framework.
 
 Let's create a <i>src/services</i> directory and
 place the <i>diaryService.ts</i> file in it.
@@ -391,7 +391,7 @@ export default {
 };
 ```
 
-But something is not right
+But something is not right:
 
 ![](../../images/9/17c.png)
 
@@ -416,16 +416,16 @@ The hint says we might want to use <i>resolveJsonModule</i>. Let's add it to our
 
 And our problem is solved.
 
-> **NB**: For some reason VSCode tends to complain it cannot find the file <i>../../data/diaries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.
+> **NB**: For some reason, VSCode tends to complain that it cannot find the file <i>../../data/diaries.json</i> from the service despite the file existing. That is a bug in the editor, and goes away when the editor is restarted.
 
-Earlier we saw how the compiler can decide the type of a variable by the value it is assigned.
-Similarly the compiler can interpret large data sets consisting of objects and arrays.
-Due to this the compiler can actually warn us if we try to do something suspicious with the json data we are handling.
-For example if we are handling an array containing objects of specific type, and we try to add an object which does not have all the fields the other objects have, or has type conflicts (for example a number where there should be a string), the compiler can give us a warning.
-
+Earlier, we saw how the compiler can decide the type of a variable by the value it is assigned.
+Similarly, the compiler can interpret large data sets consisting of objects and arrays.
+Due to this, the compiler can actually warn us if we try to do something suspicious with the json data we are handling.
+For example, if we are handling an array containing objects of a specific type, and we try to add an object which does not have all the fields the other objects have, or has type conflicts (for example, a number where there should be a string), the compiler can give us a warning.
+k
 Even though the compiler is pretty good at making sure we don't do anything unwanted, it is safer to define the types for the data ourselves.
 
-Currently we have a basic working TypeScript express app, but there are barely any actual <i>typings</i> in the code.
+Currently, we have a basic working TypeScript express app, but there are barely any actual <i>typings</i> in the code.
 Since we know what type of data should be accepted for the weather and visibility fields, there is no reason for us not to include their types to the code.
 
 Let's create a file for our types, <i>types.ts</i>, where we'll define all our types for this project.
@@ -438,7 +438,7 @@ export type Weather = 'sunny' | 'rainy' | 'cloudy' | 'windy' | 'stormy';
 export type Visibility = 'great' | 'good' | 'ok' | 'poor';
 ```
 
-And from there we can continue by creating a DiaryEntry type, which will be an [interface](http://www.typescriptlang.org/docs/handbook/interfaces.html):
+And, from there, we can continue by creating a DiaryEntry type, which will be an [interface](http://www.typescriptlang.org/docs/handbook/interfaces.html):
 
 ```js
 export interface DiaryEntry {
@@ -477,8 +477,8 @@ But since the json already has its values declared, assigning a type for the dat
 
 ![](../../images/9/19b.png)
 
-The end of the error message reveals the problem: the <i>weather</i> fields are incompatible. In <i>DiaryEntry</i> we specified that its type is  <i>Weather</i>, but
-TypeScript compiler had inferred its type to be <i>string</i>.
+The end of the error message reveals the problem: the <i>weather</i> fields are incompatible. In <i>DiaryEntry</i>, we specified that its type is <i>Weather</i>, but
+the TypeScript compiler had inferred its type to be <i>string</i>.
 
 We can fix the problem by doing [type assertion](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). This should be done only if we are certain we know what we are doing.
 If we assert the type of the variable <i>diaryData</i> to be <i>DiaryEntry</i> with the keyword <i>as</i>, everything should work:
@@ -505,10 +505,10 @@ export default {
 ```
 
 We should never use type assertion unless there is no other way to proceed, as there is always the danger we assert an unfit type to an object and cause a nasty runtime error.
-While the compiler trusts you to know what you are doing when using <i>as</i>, doing this we are not using the full power of TypeScript but relying on the coder to secure the code.
+While the compiler trusts you to know what you are doing when using <i>as</i>, by doing this, we are not using the full power of TypeScript but relying on the coder to secure the code.
 
-In our case we could change how we export our data so we can type it within the data file.
-Since we cannot use typings in a JSON-file, we should convert the json-file to a ts-file which exports the typed data like so:
+In our case, we could change how we export our data so we can type it within the data file.
+Since we cannot use typings in a JSON file, we should convert the json file to a ts file which exports the typed data like so:
 
 ```js
 import { DiaryEntry } from "../src/types";
@@ -527,7 +527,7 @@ const diaryEntries: Array<DiaryEntry> = [
 export default diaryEntries;
 ```
 
-Now when we import the array, the compiler interprets it correctly and the <i>weather</i> and <i>visibility</i> fields are understood right:
+Now, when we import the array, the compiler interprets it correctly and the <i>weather</i> and <i>visibility</i> fields are understood right:
 
 
 ```js
@@ -549,7 +549,7 @@ export default {
 };
 ```
 
-Note, that if we want to be able to save entries without a certain field,  e.g. <i>comment</i>, we could set the type of the field as [optional](http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) by adding <i>?</i> to the type declaration:
+Note that, if we want to be able to save entries without a certain field, e.g. <i>comment</i>, we could set the type of the field as [optional](http://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) by adding <i>?</i> to the type declaration:
 
 ```js
 export interface DiaryEntry {
@@ -610,20 +610,20 @@ Looking closely at the order of node module extensions:
 
 We notice that the <i>.json</i> file extension takes precedence over <i>.ts</i> and so <i>myModule.json</i> will be imported and not <i>myModule.ts</i>.
 
-In order to avoid time eating bugs, it is recommended that within a flat directory, each file with a valid node module extension has a unique filename.
+In order to avoid time-eating bugs, it is recommended that within a flat directory, each file with a valid node module extension has a unique filename.
 
 ### Utility Types
 
-Sometimes we might want to use a specific modification of a type.
+Sometimes, we might want to use a specific modification of a type.
 For example, consider a page for listing some data, some of which is sensitive and some of which is non-sensitive.
 We might want to be sure that no sensitive data is used or displayed. We could <i>pick</i> the fields of a type we allow to be used to enforce this.
 We can do that by using the utility type [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk).
 
-In our project we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field, since during a very scary flight he might end up writing something he wouldn't necessarily want to show anyone else.
+In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn't necessarily want to show anyone else.
 
 The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose which fields of an existing type we want to use.
 Pick can be used to either construct a completely new type, or to inform a function what it should return on runtime.
-Utility types are a special kinds of type tools, but they can be used just like regular types.
+Utility types are a special kind of type tools, but they can be used just like regular types.
 
 In our case, in order to create a "censored" version of the  <i>DiaryEntry</i> for public displays, we can use Pick in the function declaration:
 
@@ -646,8 +646,8 @@ const getNonSensitiveEntries =
   }
 ```
 
-In this case we want to exclude only one field,
-so even better would be to use the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type, which we can use to declare which fields to exclude:
+In this case, we want to exclude only one field,
+so it would be even better to use the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type, which we can use to declare which fields to exclude:
 
 ```js
 const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
@@ -660,7 +660,7 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
-The code now becomes
+The code now becomes:
 
 ```js
 import diaries from '../../data/diaries';
@@ -685,11 +685,11 @@ export default {
 };
 ```
 
-One thing in our application is a cause for concern. In the <i>getNonSensitiveEntries</i> we are returning the complete diary entries, and <i>no error is given</i> despite typing!
+One thing in our application is a cause for concern. In <i>getNonSensitiveEntries</i>, we are returning the complete diary entries, and <i>no error is given</i> despite typing!
 
-This happens because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all of the required fields or not, but excess fields are not prohibited. In our case this means that it is <i>not prohibited</i> to return an object of type <i>DiaryEntry[]</i>, but if we were to try to access the <i>comment</i> field, it would not be possible because we would be accessing a field that TypeScript is unaware of even though it exists.
+This happens because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all of the required fields or not, but excess fields are not prohibited. In our case, this means that it is <i>not prohibited</i> to return an object of type <i>DiaryEntry[]</i>, but if we were to try to access the <i>comment</i> field, it would not be possible because we would be accessing a field that TypeScript is unaware of even though it exists.
 
-Unfortunately this can lead to unwanted behaviour if you are not aware of what you are doing; the situation is valid as long as TypeScript is concerned, but you are most likely allowing use that is not wanted.
+Unfortunately, this can lead to unwanted behaviour if you are not aware of what you are doing; the situation is valid as far as TypeScript is concerned, but you are most likely allowing use that is not wanted.
 If we were now to return all of the diaryEntries from the <i>getNonSensitiveEntries</i> function to the <i>frontend</i>, we would actually be leaking the unwanted fields to the requesting browser even though our types seem to imply otherwise!
 
 Because TypeScript doesn't modify the actual data but only its type, we need to exclude the fields ourselves:
@@ -704,7 +704,7 @@ const getEntries = () : DiaryEntry[] => {
 }
 
 // highlight-start
-const getNonSensitiveEntries = (): NonSensitiveDiaryEntry [] => {
+const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => {
   return diaries.map(({ id, date, weather, visibility }) => ({
     id,
     date,
@@ -725,18 +725,18 @@ export default {
 }
 ```
 
-If we now would try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we would type the function as follows
+If we now try to return this data with the basic <i>DiaryEntry</i> type, i.e. if we type the function as follows:
 
 
 ```js
-const getNonSensitiveEntries = () : DiaryEntry[] => {
+const getNonSensitiveEntries = (): DiaryEntry[] => {
 ```
 
 we would get the following error:
 
 ![](../../images/9/22b.png)
 
-Again the last line of the error message is the most helpful one. Let's undo this undesired modification.
+Again, the last line of the error message is the most helpful one. Let's undo this undesired modification.
 
 Utility types include many handy tools, and it is definitely worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
@@ -759,7 +759,7 @@ router.post('/', (_req, res) => {
 export default router;
 ```
 
-The response is what we expect it to be
+The response is what we expect it to be:
 
 ![](../../images/9/26.png)
 
@@ -769,23 +769,23 @@ The response is what we expect it to be
 
 ### Exercises 9.10.-9.11.
 
-Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data, that is in the files [diagnoses.json](https://github.com/fullstack-hy/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
+Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.json](https://github.com/fullstack-hy/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy/misc/blob/master/patients.json). Get the files and store those into a directory called <i>data</i> under your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.10: Patientor backend, step3
 
 Create a type <i>Diagnose</i> and use it to create endpoint <i>/api/diagnoses</i> for fetching all diagnoses with HTTP GET.
 
-Structure your code properly by using meaningfully named directories and files.
+Structure your code properly by using meaningfully-named directories and files.
 
 **Note** that <i>diagnoses</i> may or may not contain the field <i>latin</i>. You might want to use [optional properties](https://www.typescriptlang.org/docs/handbook/interfaces.html#optional-properties) in the type definition.
 
 #### 9.11: Patientor backend, step4
 
-Create data type <i>Patient</i> and set up a GET-endpoint <i>/api/patients</i> that returns all patients to the frontend excluding field <i>ssn</i>. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted fields.
+Create data type <i>Patient</i> and set up the GET endpoint <i>/api/patients</i> which returns all patients to the frontend, excluding field <i>ssn</i>. Use a [utility type](https://www.typescriptlang.org/docs/handbook/utility-types.html) to make sure you are selecting and returning only the wanted fields.
 
-In this exercise you may assume that field <i>gender</i> has type <i>string</i>.
+In this exercise, you may assume that field <i>gender</i> has type <i>string</i>.
 
-Try the endpoint with browser and ensure that <i>ssn</i> is not included in the response:
+Try the endpoint with your browser and ensure that <i>ssn</i> is not included in the response:
 
 ![](../../images/9/22g.png)
 
