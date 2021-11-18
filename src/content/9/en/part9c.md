@@ -422,7 +422,7 @@ Earlier, we saw how the compiler can decide the type of a variable by the value 
 Similarly, the compiler can interpret large data sets consisting of objects and arrays.
 Due to this, the compiler can actually warn us if we try to do something suspicious with the json data we are handling.
 For example, if we are handling an array containing objects of a specific type, and we try to add an object which does not have all the fields the other objects have, or has type conflicts (for example, a number where there should be a string), the compiler can give us a warning.
-k
+
 Even though the compiler is pretty good at making sure we don't do anything unwanted, it is safer to define the types for the data ourselves.
 
 Currently, we have a basic working TypeScript express app, but there are barely any actual <i>typings</i> in the code.
