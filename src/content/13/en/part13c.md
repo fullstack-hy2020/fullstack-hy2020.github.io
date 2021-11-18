@@ -515,27 +515,29 @@ The current code for the application is in its entirety in [GitHub](https://gith
 
 #### Task 13.17.
 
-Delete all tables from the application database.
+Delete all tables from your application database.
 
-Perform a migration that sets the database to its current state. Create <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Note that you will have to create them yourself in the migration.
+Make a migration that sets the database to its current state. Create <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to create them in migration yourself.
 
-**NOTE:** if you have to delete tables from the command line (i.e. you don't do the deletion by undoing the migration), you will have to delete the contents of the <i>migrations</i> table if you want your program to be able to run the migrations again.
+**NOTE:** be sure to remove the commands <i>User.sync()</i> and <i>Blog.sync()</i>, which synchronizes models' schemes from your code otherwise you will not succeed in executing migrations.
+
+**NOTE2:** if you have to delete tables from the command line (i.e. you don't do the deletion by undoing the migration), you will have to delete the contents of the table <i>migrations</i> if you want your program to be able to perform the migrations again.
 
 #### Task 13.18.
 
-Extend your application (via migration) so that the blogs have a writing year, i.e., a field <i>year</i> which is an integer at least equal to 1991 but not greater than the current year. Make sure the application gives the appropriate error message if an attempt is made to assign an invalid value to the year of writing.
+Expand your application (by migration) so that the blogs have a year of writing, i.e. a field <i>year</i> which is an integer at least equal to 1991 but not greater than the current year. Make sure the application gives the appropriate error message if an incorrect value is attempted to be given for the year of writing.
 
 </div>
 
 <div class="content">
 
-### Many to many connections
+### Many-to-many connections
 
-Continue to extend the application so that each user can be added to one or more <i>tribes</i>.
+Continue to expand the application so that each user can be added to one or more <i>teams</i>.
 
 Since an arbitrary number of users can join one team, and one user can join an arbitrary number of teams, we are dealing with [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships), a many-to-many type of connection, which is traditionally implemented in relational databases using a <i>connection table</i>.
 
-Let's now generate the code required by the team and the connection table. The migration is as follows
+Let's now create the code needed for the team as well as the connection table. Migration is as follows:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -579,7 +581,7 @@ module.exports = {
 }
 ```
 
-The models contain almost the same code as the migration. The team model `models/team.js`
+Models contain almost the same code as migration. The team model <i>models/team.js</i>
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -609,7 +611,7 @@ Team.init({
 module.exports = Team
 ```
 
-Dashboard model `models/membership.js`:
+Model for connection table <i>models/membership.js</i>:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -644,9 +646,9 @@ Membership.init({
 module.exports = Membership
 ```
 
-So we have given the dashboard a descriptive name, <i>membership</i>. There is not always an apt name for a join table, in which case the name of the join table can be a combination of the names of the tables to be joined, e.g. <i>user_\teamas</i> might suit our situation.
+So we have given the name that describes the connection table, <i>membership</i>. There is not always an relevant name for a connection table, in which case the name of the connection table can be a combination of the names of the tables to be joined, e.g. <i>user\_teams</i> could fit our situation.
 
-A small addition to the file <i>models/index.js</i> will be made to link teams and users with the method [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) also at code level.
+The file <i>models/index.js</i> comes with a small addition that links the method [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) to allow teams and users to each other also at the code level.
 
 ```js
 const Note = require('./note')
@@ -670,7 +672,44 @@ module.exports = {
 
 ```
 
-Now let's create a couple of teams and a couple of memberships in the console:
+Note the difference between the migration of the connection table and the model when defining reference key fields. During the migration, fields are defined in snake case form:
+
+```js
+await queryInterface.createTable('memberships', {
+  // ...
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  },
+  team_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'teams', key: 'id' },
+  }
+})
+```
+
+in the model, while the same are defined as camel case:
+
+```js
+Membership.init({
+  // ...
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  },
+  teamId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'teams', key: 'id' },
+  },
+  // ...
+})
+```
+
+Now let's create a couple of teams from the console, as well as a few memberships:
 
 ```js
 insert into teams (name) values ('toska');
@@ -678,6 +717,7 @@ insert into teams (name) values ('mosa climbers');
 insert into memberships (user_id, team_id) values (1, 1);
 insert into memberships (user_id, team_id) values (1, 2);
 insert into memberships (user_id, team_id) values (2, 1);
+insert into memberships (user_id, team_id) values (3, 2);
 ```
 
 Then insert in the route of all users the information about the user's teams
@@ -704,38 +744,12 @@ router.get('/', async (req, res) => {
 
 The most observant will notice that the query that comes to the console now combines three tables.
 
-The solution is pretty good, but there is one flaw. The result also includes the attributes of the join table row even though we don't want them:
+The solution is pretty good, but there's a beauty flaw in it. The result also comes with the attributes of the line of the connection table, although we do not want them:
 
-IMAGE HERE
+![](../../images/13/3.png)
 
-````js
-teams: [
-  {
-  name: "toska",
-  id: 2,
-  membership: {
-      id: 2,
-      user_id: 1,
-      team_id: 2,
-      userId: 1,
-      teamId: 2
-    }
-  },
-  {
-    name: "mosa climbers",
-    id: 3,
-    membership: {
-      id: 3,
-      user_id: 1,
-      team_id: 3,
-      userId: 1,
-      teamId: 3
-    }
-  }
-]
-```
 
-A careful reading of the documentation will find [solution](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table):
+By carefully reading the documentation, you can find a [solution](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table):
 
 ````js
 router.get('/', async (req, res) => {
@@ -760,7 +774,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-The current code for the application is available in its entirety on [github](https://github.com/fullstack-hy/part12-notes/tree/part12-8), in branch <i>part12-8</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-8), branch <i>part13-8</i>.
 
 ### Note on the properties of Sequelize model objects
 
@@ -774,9 +788,9 @@ User.belongsToMany(Team, { through: Membership })
 Team.belongsToMany(User, { through: Membership })
 ```
 
-These allow Sequelize to make queries that retrieve, for example, all notes of a user, or all members of a team.
+These allow Sequelize to make queries that retrieve, for example, all the notes of users, or all members of the team.
 
-The definitions also allow us to directly access the user's notes, for example, in code. In the following, we will retrieve a user with id 1 and print the notes associated with that user:
+The definitions also allow us to access directly in the code, e.g. user notes. In the following, we will search a user with id 1 and print the the notes associated with the user:
 
 ```js
 const user = await User.findByPk(1, {
@@ -790,7 +804,7 @@ user.notes.forEach(note => {
 })
 ```
 
-The definition <i>User.hasMany(Note)</i> thus associates an attribute <i>notes</i> with <i>user</i>, which gives access to the notes made by the user. The definition <i>User.belongsToMany(Team, { through: Membership }))</i> similarly associates the <i>teams</i> attribute to users, which is also accessible in code:
+The definition <i>User.hasMany(Note)</i> therefore attaches an attribute <i>notes</i> to <i>user</i> object, which gives access to the notes made by the user. Definition <i>User.belongsToMany(Team, { through: Membership }))</i> similarly attaches users attribute <i>teams</i> which also have the ability to exploit in the code:
 
 ```js
 const user = await User.findByPk(1, {
@@ -804,7 +818,7 @@ user.teams.forEach(team => {
 })
 ```
 
-Suppose we wanted to return a json from a single user route containing the user name, username, and the number of notes created. We could try the following
+Suppose we would like to return a json from an single user's route containing the user's name, username and number of notes created. We could try the following:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -826,9 +840,9 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-So, we tried to include the <i>note_\count</i> field in the returned object by Sequelize and remove the <i>notes</i> field from it. However, this approach does not work, because the objects returned by Sequelize are not normal objects, and adding new fields to them works the way we want.
+So, we tried to include the <i>noteCount</i> field in the returned object by Sequelize and remove the <i>notes</i> field from it. However, this approach does not work, as the things returned by Sequelize are not normal things to which the addition of new fields works as we want.
 
-A better solution is to create a completely new entity based on the data retrieved from the database:
+A better solution is to create a completely new object based on the data retrieved from the database:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -851,11 +865,11 @@ router.get('/:id', async (req, res) => {
   }
 })
 ```
-### Many to many again
+### Many-to-many again
 
-Let's make another many-to-many relation in the application. Each black mark is associated with the user who created it via a reference key. It is decided that the application also supports that a note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by another user. It is assumed that these notes are those that the user has <i>marked</i> for himself.
+Let's make another many-to-many relation in the application. Each note is with the reference key by the user who created it. It is decided that the application also supports that the note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by another user. It is thought that these notes are those that the user has <i>marked</i> for himself.
 
-Let's make a chalkboard `user_notes` for this situation. The migration is straightforward:
+Let's make a connection table <i>user_notes</i> for the situation. Migration is straightforward:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -886,7 +900,7 @@ module.exports = {
 }
 ```
 
-There is nothing special about the model either:
+Also, there is nothing special about the model:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -921,7 +935,7 @@ UserNotes.init({
 module.exports = UserNotes
 ```
 
-The `models/index.js` file, on the other hand, is a slight change from what we saw earlier:
+The file <i>models/index.js</i>, on the other hand, comes with a slight change to what we saw before:
 
 ```js
 const Note = require('./note')
@@ -946,9 +960,9 @@ module.exports = {
 }
 ```
 
-In use again is <i>belongsToMany</i> which links to the user notes via the model <i>UserNotes</i> corresponding to the dashboard. However, this time we give the attribute formed using the keyword [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) an <i>aliasname</i>, the default name (for users <i>notes</i>) would overlap with its previous meaning, i.e. user-generated notes.
+There is again <i>belongsToMany</i> which links to the user notes via the model <i>UserNotes</i> corresponding to the connection table. However, this time we give an <i>alias name</i> for the attribute formed using the keyword [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names), the default name (for users <i>notes</i>) would overlap with its previous meaning, i.e. user-generated notes.
 
-Extend the route for an individual user to return the user's teams, his own notes, and any other notes associated with the user:
+Extend the route for an individual user to return the user's teams, their own notes, and other notes attached to the user:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -988,9 +1002,9 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-The include must now mention the `as` parameter using the alias we just defined <i>marked\_notes</i>.
+In the context of the include, you must now mention the alias name <i>marked\_notes</i> which we have just defined by the <i>as</i> attribute.
 
-In order to test the property, let's create some test data in the database:
+In order to test the feature, let's create some test data in the database:
 
 ```sql
 insert into user_notes (user_id, note_id) values (1, 4);
@@ -999,9 +1013,9 @@ insert into user_notes (user_id, note_id) values (1, 5);
 
 The end result is functional:
 
-IMAGE
+![](../../images/13/5.png)
 
-What if we wanted the notes entered by the user to also contain information about the note author? This can be done by adding an `include` to the appendix kernel for notes.
+What if we wanted to have information about the author of the note in the notes marked by the user as well? This can be done by adding your own <i>include</i> to the attached notes:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -1046,9 +1060,9 @@ router.get('/:id', async (req, res) => {
 
 The end result is as desired:
 
-IMAGE
+![](../../images/13/4.png)
 
-The current code of the application is available in full at [github](https://github.com/fullstack-hy/part12-notes/tree/part12-9), branch <i>part12-9</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-9), branch <i>part13-9</i>.
 
 
 </div>
