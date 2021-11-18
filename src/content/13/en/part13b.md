@@ -9,7 +9,7 @@ lang: en
 
 ### Application structuring
 
-So far, we have written all the code in the same file. Now let's structure the application a bit better. Let's create the following directory structure and files
+So far, we have written all the code in the same file. Now let's structure the application a little better. Let's create the following directory structure and files:
 
 ```
 index.js
@@ -23,7 +23,7 @@ controllers
   notes.js
 ```
 
-The content of the files is as follows. The file `util/config.js` handles the environment variables:
+The contents of the files are as follows. The file <i>util/config.js</i> takes care of handling the environment variables:
 
 ```js
 require('dotenv').config()
@@ -34,7 +34,7 @@ module.exports = {
 }
 ```
 
-The role of the `index.js` file is to configure and launch the application:
+The role of the file <i>index.js</i> is to configure and launch the application:
 
 ```js
 const express = require('express')
@@ -59,9 +59,9 @@ const start = async () => {
 start()
 ```
 
-The application startup is slightly different from what we saw earlier, as we want to make sure that the database connection is established before the actual startup.
+Starting the application is slightly different from what we have seen before, because we want to make sure that the dabase connection is established successfully before the actual startup.
 
-The file `util/db.js` contains the code to initialize the database:
+The file <i>util/db.js</i> contains the code to initialize the database:
 
 ```js
 const Sequelize = require('sequelize')
@@ -91,7 +91,7 @@ const connectToDatabase = async () => {
 module.exports = { connectToDatabase, sequelize }
 ```
 
-The model corresponding to the table to be stored in the notes is stored in the file `models/note.js`:
+The notes in the model corresponding to the table to be stored are saved in the file <i>models/note.js</i>
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -126,7 +126,7 @@ Note.init({
 module.exports = Note
 ```
 
-The file `models/index.js` is almost useless at this point as there is only one model in the application. As we add more models to the application, the file will become more useful because it will eliminate the need to import files defining individual models from the rest of the application.
+The file <i>models/index.js</i> is almost useless at this point, as there is only model in the application. When we start adding other models to the application, the file will become more useful because it will eliminate the need to import files defining individual models from the rest of the application.
 
 ```js
 const Note = require('./note')
@@ -138,7 +138,7 @@ module.exports = {
 }
 ```
 
-The route handlers for notes can be found in the file `controllers/notes.js`
+The routers handling associated with the notes can be found the file <i>controllers/notes.js</i>:
 
 ```js
 const router = require('express').Router()
@@ -190,9 +190,9 @@ router.put('/:id', async (req, res) => {
 module.exports = router
 ```
 
-The application structure is now good. However, we note that the router handlers that handle a single note contain a bit of repetitive code, since they all start with the line that searches for the note to be handled:
+The structure of the application is good now. However, we note that the router handlers that handle a single note contain a bit of repetitive code, as all of them begin with the line that searches for the note to be handled:
 
-````js
+```js
 const note = await Note.findByPk(req.params.id)
 ```
 
@@ -202,7 +202,7 @@ Let's refactor this into our own <i>middleware</i> and implement it in route han
 const noteFinder = async (req, res, next) => {
   req.note = await Note.findByPk(req.params.id)
   next()
-} 
+}
 
 router.get('/:id', noteFinder, async (req, res) => {
   if (req.note) {
@@ -230,9 +230,9 @@ router.put('/:id', noteFinder, async (req, res) => {
 })
 ```
 
-The route handlers now receive <i>three</i> parameters, the first being a string indicating the route and the second being the middleware `noteFinder` we defined, which retrieves the note from the database and places it in the `note` field of the `req` entity. A small amount of copypaste is eliminated and we are satisfied!
+The route handlers now receive <i>three</i> parameters, the first being a string defining the route and second being the middleware <i>noteFinder</i> we defined earlier, which retrieves the note from the database and places it in the field of the <i>req</i> object in the <i>note</i>. A small amount of copypaste is eliminated and we are satisfied!
 
-The current code for the application is available in full at [github](https://github.com/fullstack-hy/part122-notes/tree/part12-2), branch <i>part12-2</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part132-notes/tree/part13-2), branch <i>part13-2</i>.
 
 </div>
 
@@ -246,16 +246,25 @@ Change the structure of your application to match the example above, or to follo
 
 #### Task 13.6.
 
-Also implement support for changing the number of blogs' likes, i.e. the operation
+Also, implement in the application support for changing the number of blog's likes, i.e. the operation
 
-- PUT api/blogs/:id (modify the like count of a blog)
+_PUT /api/blogs/:id_ (modifying the like count of a blog)
+
+The updated number of likes will be relayed with the request:
+
+```js
+{
+  likes: 3
+}
+```
+
 #### Task 13.7.
 
-Centralize the error handling of the application in middleware as in [part 3](/part3/data_storage_in_mongo_db_database#debugging_centralization_in_middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/part4/backend_testing#try-catchin-elimination).
+Centralize the application error handling in middleware as in [part 3](/part3/data_storage_in_mongo_db_database#debugging_centralization_in_middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/part4/backend_testing#try-catchin-elimination).
 
-The data returned with the error message is of little importance. However, it is likely that the frontend cannot interpret it correctly.
+The data returned in the context of an error message is not very important.
 
-At this point, the situations that require error handling by the application are creating a new blog and changing the number of likes on a blog. Make sure that the error handler handles both of these appropriately.
+At this point, the situations that require error handling by the application are creating a new blog and changing the number of likes on the blog. Make sure the error handler handles both of these appropriately.
 
 </div>
 
@@ -263,9 +272,9 @@ At this point, the situations that require error handling by the application are
 
 ### User management
 
-Next, add a database table `users` to the application to store the users of the application. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we will now implement the implementation so that all users have the same password `secret`.
+Next, let's add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we now make make the implementation so that all users will have the same password <i>secret</i>.
 
-The user-defining model in `models/user.js` is fairly straightforward
+The user-defining model in the file <i>models/user.js</i> is straightforward
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -299,10 +308,9 @@ User.init({
 module.exports = User
 ```
 
-The username is conditioned to be unique. The user ID could in principle have been used as the main key of the table. However, we decided to create the master key as a separate field with integer value <i>id</i>.
+The username is conditioned to be unique. The username could have basically been used as the master key of the table. However, we decided to create the master key as a separate field with integer value <i>id</i>.
 
-
-The file <i>models/index.js</i> expands slightly
+The file <i>models/index.js</i> expands slightly:
 
 ```js
 const Note = require('./note')
@@ -315,7 +323,7 @@ module.exports = {
 }
 ```
 
-The route handlers in <i>controllers/users.js</i> that create a new user and display all users do not contain anything dramatic
+The route handlers that take care of creating a new user in the <i>controllers/users.js</i> file and displaying all users do not contain anything dramatic
 
 ```js
 const router = require('express').Router()
@@ -348,7 +356,7 @@ router.get('/:id', async (req, res) => {
 module.exports = router
 ```
 
-The router handler (file <i>controllers/login.js</i>) that handles logging is as follows:
+The router handler that handles the login (file <i>controllers/login.js</i>) is as follows:
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -360,12 +368,12 @@ const User = require('../models/user')
 router.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findOne({ 
-    where: { 
+  const user = await User.findOne({
+    where: {
       username: body.username
     }
   })
-  
+
 const passwordCorrect = body.password === 'secret'
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
@@ -374,7 +382,7 @@ const passwordCorrect = body.password === 'secret'
   }
 
   const userForToken = {
-    username: user.username, 
+    username: user.username,
     id: user.id,
   }
 
@@ -388,32 +396,31 @@ const passwordCorrect = body.password === 'secret'
 module.exports = router
 ```
 
-The mail request will be accompanied by a user name (<i>username</i>) and password (<i>password</i>). First, the entity corresponding to the user is retrieved from the database using the `User` method of the model [findOne](https://sequelize.org/master/manual/model-querying-finders.html#-code-findone--code-): 
+The POST request request will be accompanied by a users name (<i>username</i>) and users password (<i>password</i>). First, the object corresponding to the user is retrieved from the database using the model <i>User</i> with method [findOne](https://sequelize.org/master/manual/model-querying-finders.html#-code-findone--code-):
 
 ```js
-const user = await User.findOne({ 
-  where: { 
+const user = await User.findOne({
+  where: {
     username: body.username
   }
 })
 ```
 
-In the console, we see the SQL statement corresponding to the method call
+From the console, we can see that SQL statement is corresponding to the method call
 
 ```sql
-SELECT "id", "username", "name" 
-FROM "users" AS "User" 
+SELECT "id", "username", "name"
+FROM "users" AS "User"
 WHERE "User". "username" = 'mluukkai';
 ```
 
-If the user is found and the password is correct (i.e. _secret_ for all users), `jsonwebtoken` is returned to the caller containing the user's information. To do this, we install 
-dependency
+If the user is found and the password is correct (i.e. _secret_ for all the users), <i>jsonwebtoken</i> is returned to the called containing the user's information. To do this, we install a dependency
 
 ```js
 npm install jsonwebtoken
 ```
 
-The `index.js` file will expand slightly
+The file <i>index.js</i> expands slightly
 
 ```js
 const notesRouter = require('./controllers/notes')
@@ -427,13 +434,13 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-The current code for the app is available in full at [github](https://github.com/fullstack-hy/part12-notes/tree/part12-3), branch <i>part12-3</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-3), branch <i>part13-3</i>.
 
-### Inter-table join
+### Connection between the tables
 
-Users can now be added to the application and users can log in, but by itself this is not yet a very useful feature. The idea is that only a logged in user can add notes, and that each note is associated with the user who created it. To do this, we need a <i>reference key</i> to store the notes in the `notes` table. 
+Users can now be added to the application and users can log in, but in itself this is not a very useful feature. The idea is that only a logged user can add notes, and that each note is associated with the user who created it. To do this, we need the notes of the <i>reference key</i> to the stored table <i>notes</i>.
 
-When using Sequelize, the reference key can be specified by modifying the `models/index.js` file as follows
+When using Sequelize, the reference key can be defined by modifying the <i>models/index.js</i> file as follows
 
 ```js
 const Note = require('./note')
@@ -452,7 +459,7 @@ module.exports = {
 }
 ```
 
-So this [defines](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) that there is a _one to many_ relationship between the `users` and `notes` lines. We also changed the `sync` calls to change the tables if there are changes to the table definition. Now looking at the database schema from the console, it looks like this:
+So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
 
 ```js
 username=> \d users
@@ -482,9 +489,9 @@ Foreign-key constraints:
     "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 ```
 
-That is, a reference key `user_id` has been created in the `notes` table, which refers to the `users` row of the table.
+That is, the reference key <i>user_id</i> has been created in the <i>notes</i> table, which refers to the <i>users</i> rows on the table.
 
-Let us now make a change to the insertion of a new note to associate the note with a user. Before we do a proper implementation (where the join is done with a token to the user who is logged in), let's join the note to the first user found in the database:
+Now let's make a change to the insertion of a new note that the note is associated to the user. Before we make a proper implementation (where the join occurs using token to the user who is logged in), attach the note to the first user found in the database:
 
 ```js
 
@@ -501,14 +508,14 @@ router.post('/', async (req, res) => {
 })
 ```
 
-What is noteworthy in the code is that although there is a column `user\_id` in the notes at the database level, in the corresponding entity in the database row it is referred to in the camel case as `userId`.
+What is worthy of attention in the code is that although there is a column <i>user\_id</i> in the notes at the database level, in the corresponding object in the database row it is referred to by Sequelize naming convention due to to camel case as <i>userId</i>.
 
-Making a simple connection query is very easy. Let's change the route that shows all users so that it also shows the notes of each user:
+Making a simple join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes:
 
 ```js
 router.get('/', async (req, res) => {
   // highlight-start
-  const users = await User.findAll({ 
+  const users = await User.findAll({
     include: {
       model: Note
     }
@@ -520,22 +527,22 @@ router.get('/', async (req, res) => {
 
 So the join query is done using the [include](https://sequelize.org/master/manual/assocs.html#eager-loading-example) wrapper on the query parameter.
 
-The sql statement generated from the query is seen in the console:
+The sql statement generated from the query is seen on the console:
 
 ```
-SELECT "User". "id", "User". "username", "User". "name", "Notes". "id" AS "Notes.id", "Notes". "content" AS "Notes.content", "Notes". "important" AS "Notes.important", "Notes". "date" AS "Notes.date", "Notes". "user_id" AS "Notes.UserId" 
+SELECT "User". "id", "User". "username", "User". "name", "Notes". "id" AS "Notes.id", "Notes". "content" AS "Notes.content", "Notes". "important" AS "Notes.important", "Notes". "date" AS "Notes.date", "Notes". "user_id" AS "Notes.UserId"
 FROM "users" AS "User" LEFT OUTER JOIN "notes" AS "Notes" ON "User". "id" = "Notes". "user_id";
 ```
 
 The end result is also as you might expect
 
-IMAGE
+![](../../images/13/1.png)
 
 _TODO: where in include is an example (e.g. notes where `important: true`)?_
 
 ### Proper insertion of notes
 
-Incidentally, note insertion should work as in [section 4](/section4), i.e. note creation will only succeed if a valid token accompanies the request for creation. The note is stored in the list of notes created by the user identified by the token:
+Let's change the note insertion by making it work the same as in [section 4](/section4), i.e. the creation of a note can only be successful if the request corresponding to the creation is accompanied by a valid token on login. The note is stored in the list of noted created by the user identified by the token:
 
 ```js
 // highlight-start
@@ -567,17 +574,17 @@ router.post('/', tokenExtractor, async (req, res) => {
 })
 ```
 
-The token is taken and decoded from the request headers and placed in the <i>req</i> token by the <i>tokenExtractor</i> middleware. When a token is created, the <i>date</i> field indicating the time of its creation is also given a value.
+Token is taken and decoded to the request from the headers and placed in the <i>req</i> token by the <i>tokenExtractor</i> middleware. When creating a note, a <i>date</i> is also given to the field indicating the time it was created.
 
 ### Fine-tuning
 
-Except for error handling, our backend currently works almost identically to the Part 4 version of the same application. Before we make some extensions to the backend, let's change the routes of all notes and all users slightly.
+Our backend currently works almost the same way as Part 4 version of the same application, expect for error handling. Before we make a few extensions to backend, let's change the routes of all notes and all users slightly.
 
 We will add a note with information about the user who added it:
 
 ```js
 router.get('/', async (req, res) => {
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: user,
@@ -588,13 +595,13 @@ router.get('/', async (req, res) => {
 })
 ```
 
-We have also [constrained](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) which field values we want. For notes, we take all fields except `userId` and for the user associated with the note, only `name`.
+We have also [restricted](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) the values of which fields we want. From the notes, we take all fields expect <i>userId</i> and for the user associated with the note, only <i>name</i>.
 
-Let's make a similar change to the route for all users, removing the unnecessary field `userId` from the notes associated with the user: 
+Let's make a similar change to the route of all users, remove the unnecessary field <i>userId</i> from the notes associated with the user:
 
 ```js
 router.get('/', async (req, res) => {
-  const users = await User.findAll({ 
+  const users = await User.findAll({
     include: {
       model: note,
       attributes: { exclude: ['userId'] } // highlight-line
@@ -604,7 +611,90 @@ router.get('/', async (req, res) => {
 })
 ```
 
-The current code for the application is available in its entirety on [github](https://github.com/fullstack-hy/part12-notes/tree/part12-4), branch <i>part12-4</i>.''
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-4), branch <i>part13-4</i>.
+
+### Attention on the definition of models
+
+The most perceptible noticed that despite of added column <i>user_id</i>, we did not make a change to the model that defined notes, but we can add a user for notes objects:
+
+```js
+const user = await User.findByPk(req.decodedToken.id)
+const note = await Note.create({ ...req.body, userId: user.id, date: new Date() })
+```
+
+The reason for this is that when we defined in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:
+
+```js
+const Note = require('./note')
+const User = require('./user')
+
+User.hasMany(Note)
+Note.belongsTo(User)
+
+// ...
+```
+
+Sequelize will automatically create in the module <i>Note</i> attribute called <i>userId</i> to which, when referenced we get access to the database column <i>user_id</i>.
+
+Keep in mind, that we could also create a note as follows using method [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build):
+
+```js
+const user = await User.findByPk(req.decodedToken.id)
+
+// luodaan muistiinpano tallettamatta sitä vielä
+const note = Note.build({ ...req.body, date: new Date() })
+ // sijoitetaan käyttäjän id mustiinpanolle
+note.userId = user.id
+// talletetaan muistiinpano-olio tietokantaan
+await note.save()
+```
+
+This is how we explicitly see the fact that <i>userId</i> is an attribute of the notes object.
+
+We could define the same for model <i>as well</i>:
+
+```js
+Note.init({
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  content: {
+    type: DataTypes.TEXT,
+    allowNull: false
+  },
+  important: {
+    type: DataTypes.BOOLEAN
+  },
+  date: {
+    type: DataTypes.DATE
+  },
+  // highlight-start
+  userId: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+    references: { model: 'users', key: 'id' },
+  }
+  // highlight-end
+}, {
+  sequelize,
+  underscored: true,
+  timestamps: false,
+  modelName: 'note'
+})
+
+module.exports = Note
+```
+
+however this is not necessary. Definition at the level of model classes
+
+```js
+User.hasMany(Note)
+Note.belongsTo(User)
+```
+
+instead is necessary, otherwise Sequelize does not know how at the code level to attach tables to each other.
 
 </div>
 
@@ -614,29 +704,28 @@ The current code for the application is available in its entirety on [github](ht
 
 #### Task 13.8.
 
-Add support for users to the application. Users have the following fields in addition to their ID:
+Add support for users to the application. In addition to the ID, users have the following fields:
 
 - name (string, must not be empty)
 - username (string, must not be empty)
 
 Unlike in the material, do not now prevent Sequelize from creating [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) <i>created\_at</i> and <i>updated\_at</i> for users
 
-All users can have the same password as the material. You can also choose to implement the password properly as in [part 4](/part4/user_management).
+All users can have the same password as the material. You can also choose to properly implement the password as in [part 4](/part4/user_management).
 
-Implement the following routines 
+Implement the following routes
 
-- POST api/users (add new user)
-- GET api/users (list all users)
-- PUT api/users/:username (change user name, note that the parameter is not id but username)
+- _POST api/users_ (adding new user)
+- _GET api/users_ (listing of all users)
+- _PUT api/users:/:username_ (change of user name, keep in mind that the parameters is not id but username)
 
-Make sure that the timestamps <i>created_at</i> and <i>updated_at</i> automatically set by Sequelize work correctly when creating a user and changing the user name.
+Make sure that the timestamps <i>created_at</i> and <i>updated_at</i> automatically set by Sequelize work correctly when creating creating a new user and changing the user's name.
 
 #### Exercise 13.9.
 
-Sequelize provide a set of predefined
-[validations](https://sequelize.org/master/manual/validations-and-constraints.html) for model fields, which it performs before storing the entities in the database.
+Sequelize provide a set of pre-defined [validations](https://sequelize.org/master/manual/validations-and-constraints.html) for the model fields, which it performs before storing the objects in the database.
 
-It is decided to change the username creation policy so that only a valid email address is valid as username. Make a validation in connection with the creation of the ID to check this.
+It is decided to change the user name creation policy so that only a valid email address is valid as username. Make a validation in during with the creation of the the ID to check this.
 
 Modify the error handling middleware to provide a more descriptive error message in the situation (using the Sequelize error message), e.g.
 
@@ -650,15 +739,15 @@ Modify the error handling middleware to provide a more descriptive error message
 
 #### Exercise 13.10.
 
-Extend the application so that the blog is attached to a logged-in user identified by a token.
+Expand the application so that the blog is attached to the logged user to be identified by a token. So you will also need to implement a login endpoint _POST /api/login_, which then returns the token.
 
 #### Exercise 13.11.
 
-Make it possible to delete a blog only for the user who added the blog.
+Make deletion of the blog only possible for the user who added the blog.
 
 #### Task 13.12.
 
-Modify the route for blogs and users so that the blogs show the user who added the blog and the user shows the user's blogs.
+Modify the route for blogs and users so that the blogs show the user who added the blog and the user shows the users's blogs.
 
 </div>
 
@@ -666,13 +755,13 @@ Modify the route for blogs and users so that the blogs show the user who added t
 
 ## More queries
 
-So far our application has been very simple in terms of queries, queries have either retrieved a single row based on the master key using the METHOD [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) or they have retrieved all rows in the table using the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll). These are sufficient for the frontend of the application made in Section 5, but let's extend the backend so that we can also practice making slightly more complex queries.
+So far our application has been very simple in terms of queries, queries have searched either a single row based on the master key using the METHOD [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) or they have searched for all rows in the table using the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll). These are sufficient for the frontend of the application made in Section 5, but let's expand the backend so that we can also practice making slightly more complex queries.
 
 Let's first implement the possibility to retrieve only important or non-important notes. Let's implement these using the [query-parameter](http://expressjs.com/en/5x/api.html#req.query) important:
 
 ```js
 router.get('/', async (req, res) => {
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: user,
@@ -690,15 +779,15 @@ router.get('/', async (req, res) => {
 
 Now the backend can retrieve important notes with a request to http://localhost:3001/api/notes?important=true and non-important notes with a request to http://localhost:3001/api/notes?important=false
 
-The SQL query generated by Sequelize naturally contains a where clause delimiting the rows to be returned: 
+The SQL query generated by Sequelize contains a where clause that delimits naturally returning rows:
 
 ```sql
-SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name" 
-FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id" 
+SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
+FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id"
 WHERE "note". "important" = true;
 ```
 
-Unfortunately, this implementation will not work if the request is not interested in whether the note is important or not, i.e. if the request is made to http://localhost:3001/api/notes. The fix can be done in several ways. One, but perhaps not the best way to do the correction would be as follows:
+Unfortunately, this implementation will not work if the request is not interested in whether the note is important or not, i.e. if the request is made to http://localhost:3001/api/notes. The correction can be done in several ways. One, but perhaps not the best way to do the correction would be as follows:
 
 ```js
 const { Op } = require('sequelize')
@@ -708,13 +797,13 @@ router.get('/', async (req, res) => {
   let important = {
     [Op.in]: [true, false]
   }
-  
+
   if ( req.query.important ) {
     important = req.query.important === "true"
   }
   //highlight-end
-  
-  const notes = await Note.findAll({ 
+
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: user,
@@ -728,7 +817,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-The `important` object now stores the query condition. It defaults to 
+The <i>important</i> object now stores the query condition. It's by default
 
 ```js
 where: {
@@ -738,7 +827,7 @@ where: {
 }
 ```
 
-i.e. the column `important` can be `true` or `false`, using one of the many Sequelize operations [Op.in](https://sequelize.org/master/manual/model-querying-basics.html#operators). If the query parameter `req.query.important` is specified, the query will take one of two forms
+i.e. the column <i>important</i> can be <i>true</i> or <i>false</i>, using one of the many Sequelize operations [Op.in](https://sequelize.org/master/manual/model-querying-basics.html#operators). If the query parameter <i>req.query.important</i> is defined, turns query into either form
 
 ```js
 where: {
@@ -756,19 +845,19 @@ where: {
 
 depending on the value of the query parameter.
 
-Extend the functionality further by allowing you to specify the required keyword when retrieving notes, e.g. a request to http://localhost:3001/api/notes?search=database will return all notes with `database` or a request to http://localhost:3001/api/notes?search=javascript&important=true will return all marked notes with `javascript`. The implementation is as follows
+Extend the functionality further by allowing you to specify the required keyword when retrieving notes, e.g. a request to http://localhost:3001/api/notes?search=database will return all notes with mentioning <i>database</i> or a request to http://localhost:3001/api/notes?search=javascript&important=true will return all notes marked as important with mentioning <i>javascript</i>. Implementation is as follows
 
 ```js
 router.get('/', async (req, res) => {
   let important = {
     [Op.in]: [true, false]
   }
-  
+
   if ( req.query.important ) {
     important = req.query.important === "true"
   }
 
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: user,
@@ -783,28 +872,28 @@ router.get('/', async (req, res) => {
       // highlight-end
     }
   })
-  
+
   res.json(notes)
 })
 ```
 
-Sequelizen [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) constructs the query we want using the like keyword in SQL. For example, if we make a query to http://localhost:3001/api/notes?search=database&important=true we will see that the SQL query it generates is exactly as we assumed.
+Sequelize's [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) generates the query we want using the like keyword in SQL. For example, if we make a query to http://localhost:3001/api/notes?search=database&important=true we will see that the SQL query it generates is exactly as we assumed.
 
 ```sql
-SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name" 
-FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id" 
+SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
+FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id"
 WHERE "note". "important" = true AND "note". "content" LIKE '%database%';
 ```
 
-Another bug in our application is that if we make a request to http://localhost:3001/api/notes, i.e. we want all the notes, our implementation will cause the query to cause an unnecessary wheren, which (depending on the implementation of the database engine) may unnecessarily affect the query execution time:
+There is still such a beauty flaw in our application that if we make a request http://localhost:3001/api/notes, i.e. we want all the notes, our implementation will cause a unnecessary where in the query, which may (depending on the implementation of the database engine) unnecessarily affect the query efficiency:
 
 ```sql
-SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name" 
-FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id" 
+SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
+FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id"
 WHERE "note". "important" IN (true, false) AND "note". "content" LIKE '%%';
 ```
 
-Let's further optimize the code so that the where-conditions are used only when necessary:
+Let's optimize the code so that the where-conditions are used only if necessary:
 
 ```js
 router.get('/', async (req, res) => {
@@ -812,7 +901,7 @@ router.get('/', async (req, res) => {
 
   if (req.query.important) {
     where.important = req.query.important === "true"
-  } 
+  }
 
   if (req.query.search) {
     where.content = {
@@ -820,7 +909,7 @@ router.get('/', async (req, res) => {
     }
   }
 
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: user,
@@ -833,22 +922,22 @@ router.get('/', async (req, res) => {
 })
 ```
 
-If the query contains search conditions, e.g. http://localhost:3001/api/notes?search=database&important=true, a query containing wheren is generated
+If the request has search conditions e.g. http://localhost:3001/api/notes?search=database&important=true, a query containing where is formed
 
 ```sql
-SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name" 
+SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
 FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id"
 WHERE "note". "important" = true AND "note". "content" LIKE '%database%';
 ```
 
-If the request is not searchable http://localhost:3001/api/notes there is no unnecessary where in the query
+If the request is unconditional http://localhost:3001/api/notes, then the query does not have unnecessary where
 
 ```sql
-SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name" 
+SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
 FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id";
 ```
 
-The current code of the application is available in its entirety on [github](https://github.com/fullstack-hy/part12-notes/tree/part12-5), branch <i>part12-5</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-5), branch <i>part13-5</i>.
 
 </div>
 
@@ -859,27 +948,25 @@ The current code of the application is available in its entirety on [github](htt
 #### Task 13.13.
 
 Implement filtering by keyword in the application for the route returning all blogs. The filtering works as follows
-- GET http://localhost:3003/api/blogs?serch=react returns all blogs with the search term <i>react</i> in the <i>title</i> field, the search term is not case sensitive
-- GET http://localhost:3003/api/blogs returns all blogs
+- _GET /api/blogs?serch=react_ returns all blogs with the search word <i>react</i> in the <i>title</i> field, the search word is not case sensitive
+- _GET /api/blogs_ returns all blogs
 
 
-[This](https://sequelize.org/master/manual/model-querying-basics.html#operators) should be useful for this and the next task.
+[This](https://sequelize.org/master/manual/model-querying-basics.html#operators) should be useful for this task and the next one.
 #### Exercise 13.14.
 
-Extend the filter to search for a keyword in the <i>title</i> and author <i>author</i> fields, i.e.
+Expand the filter to search for a keyword in the <i>title</i> and author <i>author</i> fields, i.e.
 
-- GET http://localhost:3003/api/blogs?serch=jami returns blogs with the search term <i>jami</i> in the <i>title</i> field or <i>author</i> in the <i>author</i> field
+_GET /api/blogs?serch=jami_ returns blogs with the search word <i>jami</i> in the <i>title</i> field or <i>author</i> in the <i>author</i> field
 #### Exercise 13.15.
 
-Modify the blog route so that it returns blogs in descending order of likes. Look in [documentation](https://sequelize.org/master/manual/model-querying-basics.html) for instructions on ordering.
+Modify the blog route so that it returns blogs based on likes in descending order. Search in [documentation](https://sequelize.org/master/manual/model-querying-basics.html) for instructions on ordering,
 
 #### Task 13.16.
 
-Make a route for the application http://localhost:3003/api/authors that returns the number of blogs for each author and the total number of likes. Implement the operation directly at the database level. You will most likely need the [group by](https://sequelize.org/master/manual/model-querying-basics.html#grouping) functionality, and the [sequelize.fn](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) aggregator function.
+Make a route for the application /api/authors that returns the number of blogs for each author and the total number of likes. Implement the operation directly at the database level. You will most likely need the [group by](https://sequelize.org/master/manual/model-querying-basics.html#grouping) functionality, and the [sequelize.fn](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) aggregator function.
 
 The JSON returned by the route might look like the following, for example:
-
-IMAGE
 
 ```
 [
@@ -900,5 +987,7 @@ IMAGE
   }
 ]
 ```
+
+Bonus task: order the data to be returned based on the likes, do the ordering in the database query.
 
 </div>
