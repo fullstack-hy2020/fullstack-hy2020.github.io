@@ -70,9 +70,9 @@ Ehkä kätevin kaikista snippeteistä on komennon <em>console.log()</em> nopeast
 
 ### Taulukkojen käyttö JavaScriptissä
 
-Tästä osasta lähtien käytämme runsaasti JavaScriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo vuosien ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa. Operaattoreihin tutustutaan myös Ohjelmoinnin jatkokurssin Python-versiossa, [osassa 12](https://python-s20.now.sh/osa-12/3-funktionaalista-ohjelmointia).
+Tästä osasta lähtien käytämme runsaasti JavaScriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo vuosien ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa. Operaattoreihin tutustutaan myös Ohjelmoinnin jatkokurssin Python-versiossa, [osassa 12](https://python-s20.vercel.app/osa-12/3-funktionaalista-ohjelmointia).
 
-Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katsoa YouTubessa olevasta videosarjasta <i>Functional Programming in JavaScript</i> ainakin kolme ensimmäistä osaa:
+Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katsoa YouTubessa olevasta videosarjasta [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ainakin kolme ensimmäistä osaa:
 
 - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
