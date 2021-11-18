@@ -213,10 +213,10 @@ The current code for the application is in its entirety in [GitHub](https://gith
 ### Admin user and user disabling
 
 So we want to add two boolean fields to the <i>users</i> table
-- _admin_ tells whether the user is admin
-- _disabled_ tells us if the user is disabled
+- _admin_ tells you whether the user is admin
+- _disabled_ again tells you whether the username is set to be banned
 
-Let's create a migration that creates a database instance in the file <i>migrations/20211209_01_admin_and_disabled_to_users.js</i>:
+Let's create the migration that makes the database instance in the file <i>migrations/20211209_01_admin_and_disabled_to_users.js</i>:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -239,7 +239,7 @@ module.exports = {
 }
 ```
 
-Make the corresponding changes to the model corresponding to the table<i>users</i>:
+Make corresponding changes to the model corresponding to the table <i>users</i>:
 
 ```js
 User.init({
@@ -275,18 +275,18 @@ User.init({
 })
 ```
 
-When the new migration is performed on code restart, the schema will change as desired:
+When a new migration is performed when code restarts, the schema is changed as desired:
 
 ```sql
 username-> \d users
                                      Table "public.users"
-  Column | Type | Collation | Nullable | Default
+  Column  |          Type          | Collation | Nullable |              Default
 ----------+------------------------+-----------+----------+-----------------------------------
- id | integer | not null | nextval('users_id_seq'::regclass)
- username | character varying(255) | | not null |
- name | character varying(255) | | not null |
- admin | boolean | | | |
- disabled | boolean | | | |
+ id       | integer                |           | not null | nextval('users_id_seq'::regclass)
+ username | character varying(255) |           | not null |
+ name     | character varying(255) |           | not null |
+ admin    | boolean                |           |          |
+ disabled | boolean                |           |          |
 Indexes:
     "users_pkey" PRIMARY KEY, btree (id)
     "users_username_key" UNIQUE CONSTRAINT, btree (username)
@@ -294,7 +294,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Now let's extend the controllers as follows. Prevent logging if the user field `disabled` is already set to `true`:
+Now let's expand the controllers as follows. Prevent logging if the user field <i>disabled</i> is already set to <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -335,25 +335,26 @@ loginRouter.post('/', async (request, response) => {
 })
 ```
 
-Disabloys the user's `jacket` token:
+Let's disable the user's <i>jakousa</i> ID:
 
 ```sql
-username => update users set disabled=true where id=2;
+username => update users set disabled=true where id=3;
 UPDATE 1
 username => update users set admin=true where id=1;
 UPDATE 1
 username => select * from users;
- id | username | name | admin | disabled
+ id | username |       name       | admin | disabled
 ----+----------+------------------+-------+----------
-  2 | jakousa | Jami Kousa | | t
-  1 | mluukkai | Matti Luukkainen | t
+  2 | lynx     | Kalle Ilves      |       |
+  3 | jakousa  | Jami Kousa       | f     | t
+  1 | mluukkai | Matti Luukkainen | t     |
 ```
 
-And make sure that the login is no longer successful:
+And make sure that the login is no longer successful
 
-PICTURE
+![](../../images/13/2.png)
 
-Let's make a message route that allows the admin to change the status of the user's account
+Let's create a route that will allow admin to change the status of the user's account:
 
 ```js
 const isAdmin = async (req, res, next) => {
@@ -381,11 +382,11 @@ router.put('/:username', tokenExtractor, isAdmin, async (req, res) => {
 })
 ```
 
-There are two middleware, the first called <i>tokenExtractor</i> is the same as the one used by the note-generating route, i.e. it places the decoded token in the request-olio field <i>decodedToken</i>. The second in sequence middleware <i>isAdmin</i> checks if the user is admin, and if not, the request is set to 401 and an appropriate error message is returned.
+There are two middleware used, the first called <i>tokenExtractor</i> is the same as the one used by the note-generating route, i.e. it places the decoded token in the request-object field <i>decodedToken</i>. As the second middleware <i>isAdmin</i> checks whether the user is admin and if not, the request is set to 401 and an appropriate error message is returned.
 
-Note how the route handler thus has <i>two middlewares</i> chained together, both of which are executed before the actual route handler. It is possible to chain an arbitrary number of middleware to a request.
+Note how <i>two middlewares</i> is chained together to the router, both of which are executed before the actual route handler. It is possible to chain middleware to the connection of requests an arbitrary number.
 
-The middleware <i>tokenExtractor</i> is now moved to <i>util/middleware.js</i> because it is used from multiple locations.
+The middleware <i>tokenExtractor</i> is now moved to <i>util/middleware.js</i> as it is used from multiple locations.
 
 ```js
 const jwt = require('jsonwebtoken')
@@ -408,7 +409,7 @@ const tokenExtractor = (req, res, next) => {
 module.exports = { tokenExtractor }
 ```
 
-The admin can now enablethe token for the java by making a PUT request to http://localhost:3001/api/users/jakousa with the following data included in the request:
+Admin can now enable the <i>jakousa</i> ID by making a PUT request to /api/users, where the request comes with the following data:
 
 ```js
 {
@@ -416,9 +417,9 @@ The admin can now enablethe token for the java by making a PUT request to http:/
 }
 ```
 
-As noted in [the end of Part 4](/part4/token_based_login#token-based_login_problems), the way we implement disabling usernames here is problematic. Whether or not the token is disablocked is only checked at _login_, if the user is in possession of a token at the time the token is disablocked, the user can continue to use the same token, since there is no lifetime set for the token and the fact that the user's token is disablocked is not checked at note creation.
+As noted in [the end of Part 4](/part4/token_based_login#token-based_login_problems), the way we implement disabling usernames here is problematic. Whether or not the token is disabled is only checked at _login_, if the user is in possession of a token at the time the token is disabled, the user may continue to use the same token, since no lifetime has been set for the token and the fact that the user ID has been disabled is not checked when the notes are being created.
 
-Before proceeding further, an npm script will be created for the application to undo the previous migration. After all, not everything always goes right the first time when developing migrations.
+Before we proceed, let's make an npm script for the application, which allows us to cancel the previous migration. Not everything always goes right at the first time when developing migrations.
 
 Let's modify the file <i>util/db.js</i> as follows:
 
@@ -481,7 +482,7 @@ const rollbackMigration = async () => {
 module.exports = { connectToDatabase, sequelize, rollbackMigrations } // highlight-line
 ```
 
-Let's create a file <i>util/rollback.js</i> that will allow the npm script to execute the specified migration rollback function:
+Let's create a file <i>util/rollback.js</i>, which will allow the npm script to execute the specified migration rollback function:
 
 ```js
 const { rollbackMigrations } = require('./db')
@@ -500,12 +501,11 @@ and the script itself:
 }
 ```
 
-So now we can undo the previous migration by running _npm run migration:down_ from the command line.
+So we can now undo the previous migration by running _npm run migration:down_ from the command line.
 
-Migrations are automatically executed when the program is started. In the development phase of a program, it might sometimes be more appropriate to disable the automatic execution of migrations and do the migrations manually from the command line.
+Migrations are executed automatically when the program is started. In the development phase of the program, it might sometimes be more appropriate to disable the automatic execution of migrations and make migrations manually from the command line.
 
-The current code for the application can be found in full at [github](https://github.com/fullstack-hy/part12-notes/tree/part12-7), branch <i>part12-7</i>.
-
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-7), branch <i>part13-7</i>.
 
 </div>
 
