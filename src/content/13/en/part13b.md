@@ -704,29 +704,28 @@ instead is necessary, otherwise Sequelize does not know how at the code level to
 
 #### Task 13.8.
 
-Add support for users to the application. Users have the following fields in addition to their ID:
+Add support for users to the application. In addition to the ID, users have the following fields:
 
 - name (string, must not be empty)
 - username (string, must not be empty)
 
 Unlike in the material, do not now prevent Sequelize from creating [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) <i>created\_at</i> and <i>updated\_at</i> for users
 
-All users can have the same password as the material. You can also choose to implement the password properly as in [part 4](/part4/user_management).
+All users can have the same password as the material. You can also choose to properly implement the password as in [part 4](/part4/user_management).
 
-Implement the following routines
+Implement the following routes
 
-- POST api/users (add new user)
-- GET api/users (list all users)
-- PUT api/users/:username (change user name, note that the parameter is not id but username)
+- _POST api/users_ (adding new user)
+- _GET api/users_ (listing of all users)
+- _PUT api/users:/:username_ (change of user name, keep in mind that the parameters is not id but username)
 
-Make sure that the timestamps <i>created_at</i> and <i>updated_at</i> automatically set by Sequelize work correctly when creating a user and changing the user name.
+Make sure that the timestamps <i>created_at</i> and <i>updated_at</i> automatically set by Sequelize work correctly when creating creating a new user and changing the user's name.
 
 #### Exercise 13.9.
 
-Sequelize provide a set of predefined
-[validations](https://sequelize.org/master/manual/validations-and-constraints.html) for model fields, which it performs before storing the entities in the database.
+Sequelize provide a set of pre-defined [validations](https://sequelize.org/master/manual/validations-and-constraints.html) for the model fields, which it performs before storing the objects in the database.
 
-It is decided to change the username creation policy so that only a valid email address is valid as username. Make a validation in connection with the creation of the ID to check this.
+It is decided to change the user name creation policy so that only a valid email address is valid as username. Make a validation in during with the creation of the the ID to check this.
 
 Modify the error handling middleware to provide a more descriptive error message in the situation (using the Sequelize error message), e.g.
 
@@ -740,15 +739,15 @@ Modify the error handling middleware to provide a more descriptive error message
 
 #### Exercise 13.10.
 
-Extend the application so that the blog is attached to a logged-in user identified by a token.
+Expand the application so that the blog is attached to the logged user to be identified by a token. So you will also need to implement a login endpoint _POST /api/login_, which then returns the token.
 
 #### Exercise 13.11.
 
-Make it possible to delete a blog only for the user who added the blog.
+Make deletion of the blog only possible for the user who added the blog.
 
 #### Task 13.12.
 
-Modify the route for blogs and users so that the blogs show the user who added the blog and the user shows the user's blogs.
+Modify the route for blogs and users so that the blogs show the user who added the blog and the user shows the users's blogs.
 
 </div>
 
@@ -756,7 +755,7 @@ Modify the route for blogs and users so that the blogs show the user who added t
 
 ## More queries
 
-So far our application has been very simple in terms of queries, queries have either retrieved a single row based on the master key using the METHOD [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) or they have retrieved all rows in the table using the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll). These are sufficient for the frontend of the application made in Section 5, but let's extend the backend so that we can also practice making slightly more complex queries.
+So far our application has been very simple in terms of queries, queries have searched either a single row based on the master key using the METHOD [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) or they have searched for all rows in the table using the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll). These are sufficient for the frontend of the application made in Section 5, but let's expand the backend so that we can also practice making slightly more complex queries.
 
 Let's first implement the possibility to retrieve only important or non-important notes. Let's implement these using the [query-parameter](http://expressjs.com/en/5x/api.html#req.query) important:
 
@@ -780,7 +779,7 @@ router.get('/', async (req, res) => {
 
 Now the backend can retrieve important notes with a request to http://localhost:3001/api/notes?important=true and non-important notes with a request to http://localhost:3001/api/notes?important=false
 
-The SQL query generated by Sequelize naturally contains a where clause delimiting the rows to be returned:
+The SQL query generated by Sequelize contains a where clause that delimits naturally returning rows:
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
@@ -788,7 +787,7 @@ FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = 
 WHERE "note". "important" = true;
 ```
 
-Unfortunately, this implementation will not work if the request is not interested in whether the note is important or not, i.e. if the request is made to http://localhost:3001/api/notes. The fix can be done in several ways. One, but perhaps not the best way to do the correction would be as follows:
+Unfortunately, this implementation will not work if the request is not interested in whether the note is important or not, i.e. if the request is made to http://localhost:3001/api/notes. The correction can be done in several ways. One, but perhaps not the best way to do the correction would be as follows:
 
 ```js
 const { Op } = require('sequelize')
@@ -818,7 +817,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-The `important` object now stores the query condition. It defaults to
+The <i>important</i> object now stores the query condition. It's by default
 
 ```js
 where: {
@@ -828,7 +827,7 @@ where: {
 }
 ```
 
-i.e. the column `important` can be `true` or `false`, using one of the many Sequelize operations [Op.in](https://sequelize.org/master/manual/model-querying-basics.html#operators). If the query parameter `req.query.important` is specified, the query will take one of two forms
+i.e. the column <i>important</i> can be <i>true</i> or <i>false</i>, using one of the many Sequelize operations [Op.in](https://sequelize.org/master/manual/model-querying-basics.html#operators). If the query parameter <i>req.query.important</i> is defined, turns query into either form
 
 ```js
 where: {
@@ -846,7 +845,7 @@ where: {
 
 depending on the value of the query parameter.
 
-Extend the functionality further by allowing you to specify the required keyword when retrieving notes, e.g. a request to http://localhost:3001/api/notes?search=database will return all notes with `database` or a request to http://localhost:3001/api/notes?search=javascript&important=true will return all marked notes with `javascript`. The implementation is as follows
+Extend the functionality further by allowing you to specify the required keyword when retrieving notes, e.g. a request to http://localhost:3001/api/notes?search=database will return all notes with mentioning <i>database</i> or a request to http://localhost:3001/api/notes?search=javascript&important=true will return all notes marked as important with mentioning <i>javascript</i>. Implementation is as follows
 
 ```js
 router.get('/', async (req, res) => {
@@ -878,7 +877,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Sequelizen [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) constructs the query we want using the like keyword in SQL. For example, if we make a query to http://localhost:3001/api/notes?search=database&important=true we will see that the SQL query it generates is exactly as we assumed.
+Sequelize's [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) generates the query we want using the like keyword in SQL. For example, if we make a query to http://localhost:3001/api/notes?search=database&important=true we will see that the SQL query it generates is exactly as we assumed.
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
@@ -886,7 +885,7 @@ FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = 
 WHERE "note". "important" = true AND "note". "content" LIKE '%database%';
 ```
 
-Another bug in our application is that if we make a request to http://localhost:3001/api/notes, i.e. we want all the notes, our implementation will cause the query to cause an unnecessary wheren, which (depending on the implementation of the database engine) may unnecessarily affect the query execution time:
+There is still such a beauty flaw in our application that if we make a request http://localhost:3001/api/notes, i.e. we want all the notes, our implementation will cause a unnecessary where in the query, which may (depending on the implementation of the database engine) unnecessarily affect the query efficiency:
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
@@ -894,7 +893,7 @@ FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = 
 WHERE "note". "important" IN (true, false) AND "note". "content" LIKE '%%';
 ```
 
-Let's further optimize the code so that the where-conditions are used only when necessary:
+Let's optimize the code so that the where-conditions are used only if necessary:
 
 ```js
 router.get('/', async (req, res) => {
@@ -923,7 +922,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-If the query contains search conditions, e.g. http://localhost:3001/api/notes?search=database&important=true, a query containing wheren is generated
+If the request has search conditions e.g. http://localhost:3001/api/notes?search=database&important=true, a query containing where is formed
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
@@ -931,14 +930,14 @@ FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = 
 WHERE "note". "important" = true AND "note". "content" LIKE '%database%';
 ```
 
-If the request is not searchable http://localhost:3001/api/notes there is no unnecessary where in the query
+If the request is unconditional http://localhost:3001/api/notes, then the query does not have unnecessary where
 
 ```sql
 SELECT "note". "id", "note". "content", "note". "important", "note". "date", "user". "id" AS "user.id", "user". "name" AS "user.name"
 FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note". "user_id" = "user". "id";
 ```
 
-The current code of the application is available in its entirety on [github](https://github.com/fullstack-hy/part12-notes/tree/part12-5), branch <i>part12-5</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-5), branch <i>part13-5</i>.
 
 </div>
 
@@ -949,27 +948,25 @@ The current code of the application is available in its entirety on [github](htt
 #### Task 13.13.
 
 Implement filtering by keyword in the application for the route returning all blogs. The filtering works as follows
-- GET http://localhost:3003/api/blogs?serch=react returns all blogs with the search term <i>react</i> in the <i>title</i> field, the search term is not case sensitive
-- GET http://localhost:3003/api/blogs returns all blogs
+- _GET /api/blogs?serch=react_ returns all blogs with the search word <i>react</i> in the <i>title</i> field, the search word is not case sensitive
+- _GET /api/blogs_ returns all blogs
 
 
-[This](https://sequelize.org/master/manual/model-querying-basics.html#operators) should be useful for this and the next task.
+[This](https://sequelize.org/master/manual/model-querying-basics.html#operators) should be useful for this task and the next one.
 #### Exercise 13.14.
 
-Extend the filter to search for a keyword in the <i>title</i> and author <i>author</i> fields, i.e.
+Expand the filter to search for a keyword in the <i>title</i> and author <i>author</i> fields, i.e.
 
-- GET http://localhost:3003/api/blogs?serch=jami returns blogs with the search term <i>jami</i> in the <i>title</i> field or <i>author</i> in the <i>author</i> field
+_GET /api/blogs?serch=jami_ returns blogs with the search word <i>jami</i> in the <i>title</i> field or <i>author</i> in the <i>author</i> field
 #### Exercise 13.15.
 
-Modify the blog route so that it returns blogs in descending order of likes. Look in [documentation](https://sequelize.org/master/manual/model-querying-basics.html) for instructions on ordering.
+Modify the blog route so that it returns blogs based on likes in descending order. Search in [documentation](https://sequelize.org/master/manual/model-querying-basics.html) for instructions on ordering,
 
 #### Task 13.16.
 
-Make a route for the application http://localhost:3003/api/authors that returns the number of blogs for each author and the total number of likes. Implement the operation directly at the database level. You will most likely need the [group by](https://sequelize.org/master/manual/model-querying-basics.html#grouping) functionality, and the [sequelize.fn](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) aggregator function.
+Make a route for the application /api/authors that returns the number of blogs for each author and the total number of likes. Implement the operation directly at the database level. You will most likely need the [group by](https://sequelize.org/master/manual/model-querying-basics.html#grouping) functionality, and the [sequelize.fn](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) aggregator function.
 
 The JSON returned by the route might look like the following, for example:
-
-IMAGE
 
 ```
 [
@@ -990,5 +987,7 @@ IMAGE
   }
 ]
 ```
+
+Bonus task: order the data to be returned based on the likes, do the ordering in the database query.
 
 </div>
