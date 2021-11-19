@@ -1073,15 +1073,15 @@ The current code for the application is in its entirety in [GitHub](https://gith
 
 #### Task 13.19.
 
-Enable users to add blogs in the system to the <i>reading list</i>. When added to the reading list, the blog is in the state <i>unread</i>. The blog can later be marked as <i>read</i>. Implement a reading list using a chalkboard.
+Enable users the ability to add blogs on the system to the <i>reading list</i>. When added to the reading, the blog is in a state of <i>unread</i>. The blog can later be marked as <i>read</i>. Implement the reading list using a connection table. Make database changes using migrations.
 
-In this task, adding to the reading list and displaying the list need not be done other than directly using the database.
+In this task, adding to a reading list and displaying the list need not be successful other than directly using the database.
 
 #### Exercise 13.20.
 
 Now add functionality to the application to support the reading list.
 
-Adding a blog to the reading list is done by making an HTTP POST to the path <i>/api/readinglists</i>, the request is accompanied by the blog and user id:
+Adding a blog to the reading list is done by making an HTTP POST to the path <i>/api/readinglists</i>, the request will be accompanied with the blog and user id:
 
 ```js
 {
@@ -1090,7 +1090,7 @@ Adding a blog to the reading list is done by making an HTTP POST to the path <i>
 }
 ```
 
-Implement a single-user return path <i>/api/users/:id</i> that returns not only the user's other information but also a reading list, e.g. in the following format:
+Also implement the individual user's return route _GET /api/users/:id_ which returns not only the user's other information but also the reading list, e.g. in the following format:
 
 ```js
 {
@@ -1117,13 +1117,13 @@ Implement a single-user return path <i>/api/users/:id</i> that returns not only 
 }
 ```
 
-At this point, information about whether the book has been read or not need not be available.
+At this point, information about whether the blog is read or not does not need to be available.
 
 #### Task 13.21.
 
-Extend the single-user view so that for each blog in the reading list, it also tells you whether the blog has been read <i>and</i> the id of the corresponding chalkboard row.
+Expand the single-user view so that for each blog in the reading list also whether the blog has been read <i>and</i> the id of the corresponding connection table row.
 
-For example, the information could be in the following format:
+For example, the information can be in the following form:
 
 ```js
 {
@@ -1166,33 +1166,35 @@ Note: there are several ways to implement this functionality. [This](https://seq
 
 #### Exercise 13.22.
 
-Make it possible for the application to mark a blog on the reading list as read. To mark it as read, make a HTTP PUT request to the /api/readinglists/:id path, and send the request with
+Make it possible for the application to mark the blog on the reading list as read. Marking the reading is done by making a request to the _PUT /api/readinglists/:id_ path, and sending the request with
 
 ```js
 { read: true }
 ```
 
-A user can only mark as read blogs in their own reading list. The user is identified by the token that accompanies the request, as usual.
+The user can only mark the blogs as read in their own reading list. The user is identified as usual from the token accompanying the request.
 
 #### Exercise 13.23.
 
-Modify the route for returning single user information, so that the request can be accompanied by a control of which blogs in the reading list are returned
+Modify the route that returns single user information, so that the request can be controlled which of the blogs in the reading list are returned:
 
-- GET /api/users/:id returns the entire reading list
-- GET /api/users/:id?read=true returns those blogs from the reading list that have been read
-- GET /api/users/:id?read=false returns the blogs in the reading list that have not been read
+returns blogs that have not been read
+
+- _GET /api/users/:id_ returns entire reading list
+- _GET /api/users/:id?read=true_ returns blogs that have been read
+- _GET /api/users/:id?read=false_ returns blogs that have not been read
 
 </div>
 
 <div class="content">
 
-### Final remarks
+### Concluding remarks
 
-Our application is starting to be in at least decent shape. However, before the end of the section, let's look at a few more points.
+Our application is starting to be in at least valid condition. However, before the end of the section, let's look at a few more points.
 
 #### Eager vs lazy fetch
 
-When doing queries using the `include` attribute:
+When we make queries using the <i>include</i> attribute:
 
 ```js
 User.findOne({
@@ -1202,9 +1204,9 @@ User.findOne({
 })
 ```
 
-A so-called [eager fetch](https://sequelize.org/master/manual/assocs.html#basics-of-queries-involving-associations) takes place, i.e. all rows of the tables to be joined to the row, in the example the notes related to the user, are fetched from the database at the same time. This is often what we want, but there are also situations where we want to do a _lazy fetch_, i.e. fetch, say, the user's associated teams only if they are needed.
+The so-called [eager fetch](https://sequelize.org/master/manual/assocs.html#basics-of-queries-involving-associations) occurs, i.e. all the rows of table attached to the user by connection query, in the case of example, the notes taken by the user, are fetched from the database at the same time. This is often what we want, but there are also situations where you want to do a so-called _lazy fetch_, i.e. search for user related teams only if they are needed.
 
-Let's now modify the route for an individual user so that it will fetch the user's teams from the database only if the query parameter `teams` is set for the request:
+Let's now modify the route for an individual user's route so that it fetches the user's teams only if the query parameter <i>teams</i> is set for the request:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -1248,11 +1250,11 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-So now the <i>User.findByPk</i> query does not retrieve teams, but they are retrieved as needed by the <i>getTeams</i> method of the <i>user</i> object corresponding to the database row, which is automatically generated by Sequelize for the model object. The corresponding <i>get</i> and a few other useful methods [are automatically generated](https://sequelize.org/master/manual/assocs.html#special-methods-mixins-added-to-instances) when defining associations for tables at the Sequelize level.
+So now, the <i>User.findByPk</i> query does not retrieve teams, but they are retrieved if necessary by the <i>user</i> method <i>getTeams</i>, which is automatically generated by Sequelize for the model object. Similar <i>get</i>- and a few other useful methods [are automatically generated](https://sequelize.org/master/manual/assocs.html#special-methods-mixins-added-to-instances) when defining associations for tables at the Sequelize level.
 
-#### Model properties
+#### Features of models
 
-There are some situations where by default we don't want to handle all rows in a given table. One such case could be that we don't normally want to display in our application those users whose ID is disabled (<i>disabled</i>). In this situation, we could specify a default [scopen](https://sequelize.org/master/manual/scopes.html) for the model:
+There are some situations where, by default we do not want to handle with all the rows of a particular table. One such case could be that we don't normally want to display users with disabled (<i>disabled</i>) ID in our application. In such situation, we could define the default [scopen](https://sequelize.org/master/manual/scopes.html) for the model:
 
 ```js
 class User extends Model {}
@@ -1288,13 +1290,13 @@ User.init({
 module.exports = User
 ```
 
-Now the query raised by the function call <i>User.findAll()</i> has the following where-condition
+Now the query caused by the function call <i>User.findAll()</i> has the following where-condition:
 
 ```
 WHERE "user". "disabled" = false;
 ```
 
-It is also possible to define other scopes for models:
+For models, it is possible to define other scopes as well:
 
 ```js
 User.init({
@@ -1335,7 +1337,7 @@ User.init({
 })
 ```
 
-Scopes are used as follows
+Scopes are used as follows:
 
 ```js
 // all admins
@@ -1348,7 +1350,7 @@ const disabledUsers = await User.scope('disabled').findAll()
 const jamiUsers = User.scope({ method: ['name', '%jami%'] }).findAll()
 ```
 
-It is also possible to chain scopes
+It is also possible to chain scopes:
 
 ```js
 // admins with the string jami in their name
@@ -1400,7 +1402,7 @@ User.init({
 module.exports = User
 ```
 
-The first of the methods <i>note_count</i> is an <i>instance method</i>, meaning that it can be called on instances of the model:
+The first of the methods <i>numberOfNotes</i> is an <i>instance method</i>, meaning that it can be called on instances of the model:
 
 _TODO: camelCase?_
 
@@ -1410,7 +1412,7 @@ const cnt = await jami.number_of_notes()
 console.log(`Jami has created ${cnt} notes`)
 ```
 
-Thus, within an instance method, the keyword <i>this</i> refers to the instance itself:
+Within the instance method, the keyword <i>this</i> therefore refers to the instance itself:
 
 ```js
 async number_of_notes() {
@@ -1418,7 +1420,7 @@ async number_of_notes() {
 }
 ```
 
-The second of the methods, which returns those users with at least a parameter's worth of notes, is again the <i>class method</i>, i.e. it is called directly on the model:
+The second of the methods, which returns those users who have at least a parameter's worth of notes is again the <i>class method</i>, i.e. it is called directly to the model:
 
 ```js
 const users = await User.with_notes(2)
@@ -1428,9 +1430,9 @@ users.forEach(u => {
 })
 ```
 
-#### Repetition of models and migrations
+#### Repeatability of models and migrations
 
-We have noticed that the code for models and migrations is very repetitive. For example, the model
+We have noticed that the code for models and migrations is very repetitive. For example, the model of teams
 
 ````js
 class Team extends Model {}
@@ -1456,7 +1458,7 @@ Team.init({
 module.exports = Team
 ```
 
-and migration contain much the same
+and migration contain much of the same
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -1482,17 +1484,17 @@ module.exports = {
 }
 ```
 
-Couldn't we optimize the code so that e.g. the model exports the shared parts for migration?
+Couldn't we optimize the code so that, e.g. the model would export shared parts for migration?
 
-However, the problem is that the definition of the model may change over time, for example the field `name` may change its name or its data type may change. Migrations must be able to be performed successfully from start to finish at any time, and if migrations rely on the model having a certain content, this may no longer be the case after a month or a year. Therefore, the code for migrations should be completely separate from the code for models, despite the "copy paste".
+However, the problem is that the definition of the model may change over time, for example a field <i>name</i> may change the name or its data type may change. Migrations must be able to be performed successfully at any time from start to end, and if migrations rely the model has a certain content, it will no longer be true in a month or a year's time. Therefore, despite the "copy paste", the migration code should be completely separate from the model code.
 
-One solution would be to use Sequelize [command line tool](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-), which creates both models and migration files based on commands given on the command line. For example, the following command would create a model `User` with attributes `name`, `username` and `admin` and a migration file to create the database table:
+One solution would be to use Sequelize's [command line tool](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-), which generates both models and migration files based on commands given at the command line. For example, the following command would create a model <i>User</i> with <i>name</i>, <i>username</i>, and <i>admin</i> as attributes, as well as the migration that manages the creation of the databse table:  
 
 ```
 npx sequelize-cli model:generate --name User --attributes name:string,username:string,admin:boolean
 ```
 
-From the command line, you can also perform and rollback migrations. Command line documentation is unfortunately thin and in this course we decided to do both models and migrations manually. The decision may or may not have been a wise one.
+From the command line, you can also run as well as rollback, i.e. cancel migrations. The command line documentation is unfortunately thin and in this course we decided to do both models and migrations manually. The solution may or may not have been a wise one.
 
 </div>
 
@@ -1502,22 +1504,38 @@ From the command line, you can also perform and rollback migrations. Command lin
 
 #### Task 13.24.
 
-Grande finale: [towards the end of part 4](/part4/token_based_login#token_based_login_problems) there was mention of a token-criticality problem: if a user's access to the system is decided to be revoked, the user can still use the token he or she holds to access the system.
+Grande finale: [towards the end of part 4](/part4/token_based_login#token_based_login_problems) there was mention of a token-criticality problem: if a user's access to the system is decided to be revoked, the user may still use the token in possession to use the system.
 
-The usual solution to this is to store a record of each token issued to a customer in the backend database, and check with each request whether the access is still valid. In this case, the validity of the token can be removed immediately if necessary. This solution is often called a <i>server-side session</i>.
+The usual solution to this is to store a record of each token issued to the customer in the backend database, and check with each request whether the access is still valid at each request. In this case, if necessary, the validity of the token can be removed immediately. Such a solution is often referred to as <i>server-side session</i>.
 
-Extend the system now so that a user who has lost access cannot perform any action requiring logon.
+Now expand the system so that the user who has lost access will not be able to perform any actions that require logging.
 
-You will probably need at least the following
+You will probably need at least the following for implementation
 - a boolean value column in the user table to indicate whether the ID is disabled
-  - it is sufficient to disable and unenable IDs directly from the database
+  - it is sufficient to disable and enable IDs directly from the database
 - a table that remembers active sessions
-  - the session is stored in the table when the user logs in, i.e. when the POST /api/login operation is performed
-  - the existence (and validity) of the session is checked each time the user performs an operation requiring logon
-- a path that allows the user to "log out" of the system, i.e. in practice to delete active sessions from the database, e.g. DELETE /api/logout
+  - session is stored on the table when the user makes a login, i.e. operation POST /api/login
+  - the existence (and validity) of the session is always checked when the user makes a login operation
+- a route that allows the user to "log out" of the system, i.e. to practically remove active sessions from the database, the route can be e.g. DELETE /api/logout
 
-Note that logging out should not be possible with an "expired token", i.e. the same token after logging out.
+Keep in mind that the login should not be successful with an "expired token", i.e. with the same token after logging out.
 
-You may also want to use a purpose-built npm library to handle sessions.
+You may also choose to use some purpose-built npm library to handle sesssions.
+
+Make the database changes required for this task using migrations.
+
+### Submitting exercises and getting the credits
+
+Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-psql). Remember that you have to finish all the exercises to pass this part!
+
+Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
+
+![Submissions](../../images/11/21.png)
+
+Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
+
+**Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/part0/general_info#parts-and-completion) for more information.
+
+**Keep in mind also that**, credits from this part will not be provided until the beta testing phase is at the end.
 
 </div>
