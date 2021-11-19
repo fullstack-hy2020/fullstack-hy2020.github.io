@@ -620,8 +620,11 @@ app bar 的背景色是 <em>#24292e</em> ，但你也可以使用其他的颜色
 通过React Native 我们可以使用React router 的核心，包括hooks 钩子和components 组件。相比浏览器环境，主要区别是我们要将<em>BrowserRouter</em>替换为React Native 适配的 [NativeRouter](https://reacttraining.com/react-router/native/api/NativeRouter)， 这是由[react-router-native](https://reacttraining.com/react-router/native/guides/quick-start) 这个类库提供的。让我们从安装这个 <i>react-router-native</i> 类库开始吧：
 
 ```shell
-npm install react-router-native
+npm install react-router-native@5.2.1
 ```
+  
+**NB:** This material has instructions on how to use React router version 5, which is a bit different than version 6.
+注意：教材里教授的是如何使用React Router 5， 与 6 版本有些不同。
 
 <!-- Using the react-router-native library will break Expo's web browser preview. However, other previews will work just like before. We can fix the issue by extending the Expo's Webpack configuration so that it transpiles the react-router-native library's sources with Babel. To extend the Webpack configuration we need to install the <i>@expo/webpack-config</i> library: -->
 使用react-router-native 类库会破坏Expo的web 浏览器预览功能。但是其他的预览还是像之前那样工作。我们可以通过扩展Expo的Webpack 配置来修复这个问题，这样就可以使用Babel 来转译react-router-native 类库的源码了。为了扩展Webpack 配置我们需要安装<i>@expo/webpack-config</i> 类库：
