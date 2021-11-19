@@ -38,7 +38,7 @@ A collection of <i>notes</i> that stores notes looks like the following:
 
 Users saving collection <i>users</i> looks like the following:
 
-````js
+```js
 [
   {
     "_id": "600c0e410d10256466883a6a",
