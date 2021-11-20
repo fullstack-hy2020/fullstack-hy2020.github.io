@@ -7,9 +7,9 @@ lang: fi
 
 <div class="content">
 
-# Sovelluksen stukturointi
+# Sovelluksen strukturointi
 
-Olemme toistaiseksi kirjottaneet kaiken koodin samaan tiedostoon. Strukturoidaan nyt sovellus hieman paremmin. Luodaan seuraava hakemistorakenne ja tiedostot:
+Olemme toistaiseksi kirjoittaneet kaiken koodin samaan tiedostoon. Strukturoidaan nyt sovellus hieman paremmin. Luodaan seuraava hakemistorakenne ja tiedostot:
 
 ```bash
 index.js
@@ -372,12 +372,12 @@ const User = require('../models/user')
 router.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findOne({ 
-    where: { 
+  const user = await User.findOne({
+    where: {
       username: body.username
     }
   })
-  
+
   const passwordCorrect = body.password === 'salainen'
 
   if (!(user && passwordCorrect)) {
@@ -387,7 +387,7 @@ router.post('/', async (request, response) => {
   }
 
   const userForToken = {
-    username: user.username, 
+    username: user.username,
     id: user.id,
   }
 
@@ -401,11 +401,11 @@ router.post('/', async (request, response) => {
 module.exports = router
 ```
 
-Post-pyynnön mukana vastaanotetaan käyttäjätunnus (<i>username</i>) sekä salasana (<i>password</i>). Ensin käyttäjää vastaava olio haetaan tietokannasta modelin <i>User</i> metodilla [findOne](https://sequelize.org/master/manual/model-querying-finders.html#-code-findone--code-): 
+Post-pyynnön mukana vastaanotetaan käyttäjätunnus (<i>username</i>) sekä salasana (<i>password</i>). Ensin käyttäjää vastaava olio haetaan tietokannasta modelin <i>User</i> metodilla [findOne](https://sequelize.org/master/manual/model-querying-finders.html#-code-findone--code-):
 
 ```js
-const user = await User.findOne({ 
-  where: { 
+const user = await User.findOne({
+  where: {
     username: body.username
   }
 })
@@ -414,13 +414,12 @@ const user = await User.findOne({
 Konsolista näemme metodikutsua vastaavan SQL-lauseen
 
 ```sql
-SELECT "id", "username", "name" 
-FROM "users" AS "User" 
+SELECT "id", "username", "name"
+FROM "users" AS "User"
 WHERE "User"."username" = 'mluukkai';
 ```
 
-Jos käyttäjä löytyy ja salasana on oikein (eli kaikkien käyttäjien tapauksessa _salainen_), palautetaan kutsujalle <i>jsonwebtoken</i>, joka sisältää käyttäjän tietot. Tätä varten asennamme 
-riippuvuuden
+Jos käyttäjä löytyy ja salasana on oikein (eli kaikkien käyttäjien tapauksessa _salainen_), palautetaan kutsujalle <i>jsonwebtoken</i>, joka sisältää käyttäjän tietot. Tätä varten asennamme riippuvuuden
 
 ```js
 npm install jsonwebtoken
@@ -444,9 +443,9 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### Taulujen välinen liitos
 
-Sovellukseen voi nyt lisätä käyttäjiä ja käyttäjät voivat kirjautua, mutta itsessään tämä ei ole vielä kovin hyödyllinen ominaisuus. Ideana on se, että ainoastaan kirjaantunut käyttäjä voi lisätä muistiinpanoja, ja että jokaiseen muistiinpanoon liitetään sen luonut käyttäjä. Tarvitsemme tätä varten <i>viiteavaimen</i> muistiinpanot tallettavaan tauluun <i>notes</i>. 
+Sovellukseen voi nyt lisätä käyttäjiä ja käyttäjät voivat kirjautua, mutta itsessään tämä ei ole vielä kovin hyödyllinen ominaisuus. Ideana on se, että ainoastaan kirjautunut käyttäjä voi lisätä muistiinpanoja, ja että jokaiseen muistiinpanoon liitetään sen luonut käyttäjä. Tarvitsemme tätä varten <i>viiteavaimen</i> muistiinpanot tallettavaan tauluun <i>notes</i>.
 
-Sequelizeä käytettäessä viiteavaimen märittely onnistuu muuttamalla tiedostoa <i>models/index.js</i> seuraavasti
+Sequelizeä käytettäessä viiteavaimen määrittely onnistuu muuttamalla tiedostoa <i>models/index.js</i> seuraavasti
 
 ```js
 const Note = require('./note')
@@ -516,14 +515,14 @@ router.post('/', async (req, res) => {
 })
 ```
 
-Huomioinarvoista koodissa on se, että vaikka tietokannan tasolla muistiinpanoilla on sarake <i>user_id</i>, tietokantariviä vastaavassa oliossa siihen viitataan Sequelizen nimentäkonvention takia camel case muodossa <i>userId</i>.
+Huomionarvoista koodissa on se, että vaikka tietokannan tasolla muistiinpanoilla on sarake <i>user_id</i>, tietokantariviä vastaavassa oliossa siihen viitataan Sequelizen nimentäkonvention takia camel case muodossa <i>userId</i>.
 
 Yksinkertaisen liitoskyselyn tekeminen on erittäin helppoa. Muutetaan kaikki käyttäjät näyttävää routea siten, että se näyttää myös jokaisen käyttäjän muistiinpanot:
 
 ```js
 router.get('/', async (req, res) => {
   // highlight-start
-  const users = await User.findAll({ 
+  const users = await User.findAll({
     include: {
       model: Note
     }
@@ -538,7 +537,7 @@ Liitoskysely siis tehdään kyselyn parametrina olevaan olioon [include](https:/
 Kyselystä muodostuva sql-lause nähdään konsolissa:
 
 ```
-SELECT "User"."id", "User"."username", "User"."name", "Notes"."id" AS "Notes.id", "Notes"."content" AS "Notes.content", "Notes"."important" AS "Notes.important", "Notes"."date" AS "Notes.date", "Notes"."user_id" AS "Notes.UserId" 
+SELECT "User"."id", "User"."username", "User"."name", "Notes"."id" AS "Notes.id", "Notes"."content" AS "Notes.content", "Notes"."important" AS "Notes.important", "Notes"."date" AS "Notes.date", "Notes"."user_id" AS "Notes.UserId"
 FROM "users" AS "User" LEFT OUTER JOIN "notes" AS "Notes" ON "User"."id" = "Notes"."user_id";
 ```
 
@@ -568,7 +567,7 @@ const tokenExtractor = (req, res, next) => {
   } else {
     return res.status(401).json({ error: 'token missing' })
   }
-  
+
   next()
 }
 // highlight-end
@@ -590,14 +589,14 @@ Token otetaan ja dekoodataan pyyntöön headereista ja sijoitetaan <i>req</i>-ol
 
 ### Hienosäätöä
 
-Backendimme toimii tällä hetkellä virheidenkäsittelyä lukuunottamatta lähes samalla tavalla kuin osan 4 versio samasta sovelluksesta. Ennen kun teemme backendiin muutamia laajennuksia, muutetaan kaikkien muistiinpanojen sekä kaikkien käyttäjien routeja hieman.
+Backendimme toimii tällä hetkellä virheidenkäsittelyä lukuun ottamatta lähes samalla tavalla kuin osan 4 versio samasta sovelluksesta. Ennen kun teemme backendiin muutamia laajennuksia, muutetaan kaikkien muistiinpanojen sekä kaikkien käyttäjien routeja hieman.
 
 Lisätään muistiinpanojen yhteyteen tieto sen lisänneestä käyttäjästä:
 
 ```js
 router.get('/', async (req, res) => {
   // highlight-start
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: User,
@@ -611,11 +610,11 @@ router.get('/', async (req, res) => {
 
 Olemme myös [rajoittaneet](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) minkä kenttien arvot haluamme. Muistiinpanoista otetaan kaikki muut kentät paitsi <i>userId</i> ja muistiinpanoon liittyvästä käyttäjästä ainoastaan <i>name</i> eli nimi.
 
-Tehdään samantapainen muutos kaikkien käyttäjien reittiin, poistetaan käyttäjään liittyvistä muistiinpanoista turha kenttä <i>userId</i>: 
+Tehdään samantapainen muutos kaikkien käyttäjien reittiin, poistetaan käyttäjään liittyvistä muistiinpanoista turha kenttä <i>userId</i>:
 
 ```js
 router.get('/', async (req, res) => {
-  const users = await User.findAll({ 
+  const users = await User.findAll({
     include: {
       model: Note,
       attributes: { exclude: ['userId'] } // highlight-line
@@ -663,7 +662,7 @@ note.userId = user.id
 await note.save()
 ```
 
-Näin näemme eksplisiittisesti sen, että <i>userId</i> on mustiinpano-olion attribuutti. 
+Näin näemme eksplisiittisesti sen, että <i>userId</i> on muistiinpano-olion attribuutti.
 
 
 Voisimme määritellä saman <i>myös</i> modeliin:
@@ -719,7 +718,7 @@ sen sijaan on välttämätön, muuten Sequelize ei osaa koodin tasolla liittää
 
 #### Tehtävä 13.8.
 
-Lisää sovellukseen tuki käyttäjille. Käyttäjillä on tunnisteen lisäksi seuraava kentät:
+Lisää sovellukseen tuki käyttäjille. Käyttäjillä on tunnisteen lisäksi seuraavat kentät:
 
 - name (merkkijono, ei saa olla tyhjä)
 - username (merkkijono, ei saa olla tyhjä)
@@ -728,7 +727,7 @@ Toisin kuin materiaalissa älä nyt estä Sequelizea luomasta käyttäjille [aik
 
 Kaikilla käyttäjillä voi olla sama salasana materiaalin tapaan. Voit myös halutessasi toteuttaa salasanan kunnolla [osan 4](/osa4/kayttajien_hallinta) tapaan.
 
-Toteuta seuraavat routet 
+Toteuta seuraavat routet
 
 - _POST api/users_ (uuden käyttäjän lisäys)
 - _GET api/users_ (kaikkien käyttäjien listaus)
@@ -738,8 +737,7 @@ Varmista, että Sequelizen automaattisesti asettamat aikaleimat <i>created\_at</
 
 #### Tehtävä 13.9.
 
-Sequelize tarjoa joukon valmiiksi määriteltyjä
-[validointeja](https://sequelize.org/master/manual/validations-and-constraints.html) modelien kentille, jotka se suorittaa ennen olioiden tallentamista tietokantaan.
+Sequelize tarjoaa joukon valmiiksi määriteltyjä [validointeja](https://sequelize.org/master/manual/validations-and-constraints.html) modelien kentille, jotka se suorittaa ennen olioiden tallentamista tietokantaan.
 
 Päätetään muuttaa käyttäjätunnuksen luontiperiaatetta siten, että käyttäjätunnukseksi kelpaa ainoastaan validi emailosoite. Tee tunnuksen luomisen yhteyteen validointi, joka tarkastaa asian.
 
@@ -755,7 +753,7 @@ Muuta virheidenkäsittelymiddlewarea siten, että se antaa tilanteessa kuvaavamm
 
 #### Tehtävä 13.10.
 
-Laajenna sovellusta siten, että blogi liitetään tokenin perusteella identifioitavalle kirjautuneelle käyttäjälle. Joudut siis toteuttamaan myös tokenin palauttavan kirjaantumisesta huolehtivan endpointin _POST /api/login_
+Laajenna sovellusta siten, että blogi liitetään tokenin perusteella identifioitavalle kirjautuneelle käyttäjälle. Joudut siis toteuttamaan myös tokenin palauttavan kirjautumisesta huolehtivan endpointin _POST /api/login_
 
 #### Tehtävä 13.11.
 
@@ -771,13 +769,13 @@ Muokkaa blogien ja käyttäjien routea siten, että blogien yhteydessä näytet�
 
 ### Lisää kyselyitä
 
-Toistaiseksi sovelluksemme on ollut kyselyiden suhteen hyvin yksinkertainen, kyselyt ovat hakeneet joko yksittäisen rivin pääavaimeen perustuen metodia [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) käyttäen tai ne ovat hakeet metodilla [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) taulun kaikki rivit. Nämä riittävät sovellukselle osassa 5 tehdylle frontendille, mutta laajennetaan backendia siten, että pääsemme myös harjoittelemaan hieman monimutkaisempien kyselyjen tekemistä.
+Toistaiseksi sovelluksemme on ollut kyselyiden suhteen hyvin yksinkertainen, kyselyt ovat hakeneet joko yksittäisen rivin pääavaimeen perustuen metodia [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) käyttäen tai ne ovat hakeneet metodilla [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) taulun kaikki rivit. Nämä riittävät sovellukselle osassa 5 tehdylle frontendille, mutta laajennetaan backendia siten, että pääsemme myös harjoittelemaan hieman monimutkaisempien kyselyjen tekemistä.
 
 Toteutetaan ensin mahdollisuus hakea ainoastaan tärkeät tai ei-tärkeät muistiinpanot. Toteutetaan nämä [query-parametrin](http://expressjs.com/en/5x/api.html#req.query) important avulla:
 
 ```js
 router.get('/', async (req, res) => {
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: User,
@@ -795,11 +793,11 @@ router.get('/', async (req, res) => {
 
 Nyt backendilta voidaan hakea tärkeät muistiinpanot reitiltä /api/notes?important=true ja ei-tärkeät reitiltä /api/notes?important=false
 
-Sequelizen generoima SQL-kysely sisältää luonnollisesti palautettavia rivejä rajaavan where-määreen: 
+Sequelizen generoima SQL-kysely sisältää luonnollisesti palautettavia rivejä rajaavan where-määreen:
 
 ```sql
-SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name" 
-FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id" 
+SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name"
+FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id"
 WHERE "note"."important" = true;
 ```
 
@@ -809,17 +807,17 @@ Ikävä kyllä tämä toteutus ei toimi jos haettaessa ei olla kiinnostuneita on
 const { Op } = require('sequelize') // highlight-line
 
 router.get('/', async (req, res) => {
-  // highlight-start 
+  // highlight-start
   let important = {
     [Op.in]: [true, false]
   }
-  
+
   if ( req.query.important ) {
     important = req.query.important === "true"
   }
   // highlight-end
-  
-  const notes = await Note.findAll({ 
+
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: User,
@@ -833,7 +831,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Olio <i>important</i> tallettaa nyt kyselyn ehdon. Se on oletusarvoisesti 
+Olio <i>important</i> tallettaa nyt kyselyn ehdon. Se on oletusarvoisesti
 
 ```js
 where: {
@@ -861,19 +859,19 @@ where: {
 
 riippuen query-parametrin arvosta.
 
-Laajennetaan toiminnallisuutta vielä siten, että muistiinpanoja haettaessa voidaan määritellä vaadittu hakusana, eli esim. tekemällä pyyntö http://localhost:3001/api/notes?search=database saadaan kaikki muistiinpanot, joissa mainitaan <i>database</i> tai pyynnöllä http://localhost:3001/api/notes?search=javascript&important=true saadaan kaikki tärkäksi merkityt muistiinpanot, joissa mainitaan <i>javascript</i>. Toteutus on seuraavassa
+Laajennetaan toiminnallisuutta vielä siten, että muistiinpanoja haettaessa voidaan määritellä vaadittu hakusana, eli esim. tekemällä pyyntö http://localhost:3001/api/notes?search=database saadaan kaikki muistiinpanot, joissa mainitaan <i>database</i> tai pyynnöllä http://localhost:3001/api/notes?search=javascript&important=true saadaan kaikki tärkeäksi merkityt muistiinpanot, joissa mainitaan <i>javascript</i>. Toteutus on seuraavassa
 
 ```js
 router.get('/', async (req, res) => {
   let important = {
     [Op.in]: [true, false]
   }
-  
+
   if ( req.query.important ) {
     important = req.query.important === "true"
   }
 
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: User,
@@ -888,7 +886,7 @@ router.get('/', async (req, res) => {
       // highlight-end
     }
   })
-  
+
   res.json(notes)
 })
 ```
@@ -896,16 +894,16 @@ router.get('/', async (req, res) => {
 Sequelizen [Op.substring](https://sequelize.org/master/manual/model-querying-basics.html#operators) muodostaa haluamamme kyselyn SQL:n like-avainsanaa käyttäen. Jos esim. teemme pyynnön http://localhost:3001/api/notes?search=database&important=true näemme että sen aikaansaama SQL-kysely on juuri olettamamme kaltainen.
 
 ```sql
-SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name" 
-FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id" 
+SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name"
+FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id"
 WHERE "note"."important" = true AND "note"."content" LIKE '%database%';
 ```
 
 Sovelluksessamme on vielä sellainen kauneusvirhe, että jos teemme pyynnön http://localhost:3001/api/notes eli haluamme kaikki muistiinpanot, toteutuksemme aiheuttaa kyselyyn turhan wheren, joka saattaa (riippuen tietokantamoottorin toteutuksesta) vaikuttaa tarpeettomasti kyselyn tehokkuuteen:
 
 ```sql
-SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name" 
-FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id" 
+SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name"
+FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id"
 WHERE "note"."important" IN (true, false) AND "note"."content" LIKE '%%';
 ```
 
@@ -917,7 +915,7 @@ router.get('/', async (req, res) => {
 
   if (req.query.important) {
     where.important = req.query.important === "true"
-  } 
+  }
 
   if (req.query.search) {
     where.content = {
@@ -925,7 +923,7 @@ router.get('/', async (req, res) => {
     }
   }
 
-  const notes = await Note.findAll({ 
+  const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
       model: User,
@@ -941,7 +939,7 @@ router.get('/', async (req, res) => {
 Jos pyynnössä on hakuehtoja esim. http://localhost:3001/api/notes?search=database&important=true muodostuu wheren sisältävä kysely
 
 ```sql
-SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name" 
+SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name"
 FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id"
 WHERE "note"."important" = true AND "note"."content" LIKE '%database%';
 ```
@@ -949,7 +947,7 @@ WHERE "note"."important" = true AND "note"."content" LIKE '%database%';
 Jos pyyntö on hakuehdoton http://localhost:3001/api/notes ei kyselyssä ole turhaa whereä
 
 ```sql
-SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name" 
+SELECT "note"."id", "note"."content", "note"."important", "note"."date", "user"."id" AS "user.id", "user"."name" AS "user.name"
 FROM "notes" AS "note" LEFT OUTER JOIN "users" AS "user" ON "note"."user_id" = "user"."id";
 ```
 
@@ -1009,6 +1007,6 @@ Reitin palauttama JSON voi näyttää esim. seuraavalta:
 ]
 ```
 
-Bonustehtävä: järjestä palautettava data likejen perusteella, tee järjestäminen tietokantakyselyssä.
+Bonustehtävä: järjestä palautettava data tykkäysten perusteella, tee järjestäminen tietokantakyselyssä.
 
 </div>
