@@ -121,7 +121,8 @@ The address looks like this:
 ```bash
 mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/test?retryWrites=true
 ```
-
+N.B. If later in this section you experience repeated troubles connecting and making requests to MongoDB, it may be necessary to use an older connection string. To configure your connection string in MongoDb Atlas, go to 'Connect', then 'Connect your application.' Under 'Select your driver and application,' change the Node.js version to '2.2.12 or later'. Your connection string will look different from the examples in this course, but replacing the <password> and database name fields will work the same.
+  
 We are now ready to use the database.
 
 We could use the database directly from our JavaScript code with the [official MongoDb Node.js driver](https://mongodb.github.io/node-mongodb-native/) library, but it is quite cumbersome to use. We will instead use the [Mongoose](http://mongoosejs.com/index.html) library that offers a higher level API.

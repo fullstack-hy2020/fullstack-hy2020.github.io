@@ -34,7 +34,18 @@ const getAll = () => {
 export default { getAll, create, update }
 ```
 
+<!-- We will also need to change the url specified in the effect in <i>App.js</i>: -->
+我们还需要修改 <i>App.js</i> 文件中的url。
 
+```js
+  useEffect(() => {
+    axios
+      .get('http://localhost:3001/api/notes')
+      .then(res => {
+        setNotes(res.data)
+      })
+  }, [])
+```
 
 <!-- Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason: -->
 现在前端的 GET 请求由于某些原因不能工作:  http://localhost:3001/api/notes:
@@ -108,8 +119,8 @@ app.use(cors())
 ><!--If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.-->
 如果您以前从未使用过 Heroku，您可以从[Heroku 文档](https://devcenter.heroku.com/articles/getting-started-with-nodejs)或通过谷歌搜索找到指令。
 
-<!-- Add a file called  <i>Procfile</i> to the project's root to tell Heroku how to start the application.  -->
-向项目的根目录添加一个名为  <i>Procfile</i>的文件，告诉 Heroku 如何启动应用。
+<!-- Add a file called  <i>Procfile</i> to the backend project's root to tell Heroku how to start the application.  -->
+向后台项目的根目录添加一个名为  <i>Procfile</i>的文件，告诉 Heroku 如何启动应用。
 
 ```bash
 web: npm start

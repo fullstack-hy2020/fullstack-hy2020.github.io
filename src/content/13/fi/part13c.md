@@ -9,7 +9,7 @@ lang: fi
 
 ### Migraatiot
 
-Jatketaan backendin laajentamista. Haluamme toteuttaa tuen sille, että <i>admin-statuksen</i> omaavat käyttäjät voivat asettaa haluamiaan käyttäjiä epäaktiiviseen tilaan, estäen heiltä kirjautumisen ja uusien muistiinpanojen luomisen. Toteuttaaksemme nämä, meidän tulee lisätä käyttäjien tietokantatauluun boolean-arvoinen tieto siitä, onko käyttäjä admin sekä siitä onko käyttäjätunnus epäaktiivinen. 
+Jatketaan backendin laajentamista. Haluamme toteuttaa tuen sille, että <i>admin-statuksen</i> omaavat käyttäjät voivat asettaa haluamiaan käyttäjiä epäaktiiviseen tilaan, estäen heiltä kirjautumisen ja uusien muistiinpanojen luomisen. Toteuttaaksemme nämä, meidän tulee lisätä käyttäjien tietokantatauluun boolean-arvoinen tieto siitä, onko käyttäjä admin sekä siitä onko käyttäjätunnus epäaktiivinen.
 
 Voisimme edetä kuten aiemmin, eli muuttaa taulun määrittelevää modelia ja luottaa, että Sequelize synkronoi muutokset tietokantaan. Tämänhän saavat aikaan tiedostossa <i>models/index.js</i> olevat rivit
 
@@ -101,7 +101,7 @@ await queryInterface.addColumn('notes', 'user_id', { // highlight-line
 
 Migraatioissa siis taulujen sekä sarakkeiden nimet kirjoitetaan juuri niin kuin ne tietokantaan tulevat, kun taas modeleissa on käytössä Sequelizen oletusarvoinen camelCase-nimentä.
 
-Talletetaan migraation koodi tiedostoon <i>migrations/20211209\_00\_initialize\_notes\_and\_users.js</i>. Migraatiotiedostojen nimien tulee olla aakkosjärjestyksessä siten, että aiempi muutos on aina aakkosissa uudempaa muutosta edellä. Eräs hyvä tapa saada tämä järjestys aikaan on aloittaa migraatiotiedoston nimi päivämäärällä sekä järjestysnumerolla. 
+Talletetaan migraation koodi tiedostoon <i>migrations/20211209\_00\_initialize\_notes\_and\_users.js</i>. Migraatiotiedostojen nimien tulee olla aakkosjärjestyksessä siten, että aiempi muutos on aina aakkosissa uudempaa muutosta edellä. Eräs hyvä tapa saada tämä järjestys aikaan on aloittaa migraatiotiedoston nimi päivämäärällä sekä järjestysnumerolla.
 
 Voisimme suorittaa migraatiot komentoriviltä käsin [Sequelizen komentorivityökalun](https://github.com/sequelize/cli) avulla. Päätämme kuitenkin suorittaa migraatiot ohjelmakoodista käsin [Umzug](https://github.com/sequelize/umzug)-kirjastoa käyttäen. Asennetaan kirjasto
 
@@ -150,7 +150,7 @@ const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
     await runMigrations() // highlight-line
-    console.log('database connected') 
+    console.log('database connected')
   } catch (err) {
     console.log('connecting database failed')
     console.log(err)
@@ -163,7 +163,7 @@ const connectToDatabase = async () => {
 module.exports = { connectToDatabase, sequelize }
 ```
 
-Migraatiot suorittava funktio <i>runMigrations</i> suoritetaan nyt joka kerta kun sovellus käynnistyessään avaa tietokantayhteyden. Sequelize pitää kirjaa siitä mitkä migraatiot on jo suoritettu, eli jos uusia migratioita ei ole, ei funktion <i>runMigrations</i> suorittaminen tee mitään. 
+Migraatiot suorittava funktio <i>runMigrations</i> suoritetaan nyt joka kerta kun sovellus käynnistyessään avaa tietokantayhteyden. Sequelize pitää kirjaa siitä mitkä migraatiot on jo suoritettu, eli jos uusia migratioita ei ole, ei funktion <i>runMigrations</i> suorittaminen tee mitään.
 
 Aloitetaan nyt puhtaalta pöydältä ja poistataan sovelluksesta kaikki olemassaolevat tietokantataulut:
 
@@ -212,7 +212,7 @@ Luodaan tietokantaan muutama käyttäjä sekä joukko muistiinpanoja, ja sen jä
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-6), branchissa <i>part13-6</i>.
 ### Admin-käyttäjä ja käyttäjien disablointi
 
-Haluamme siis lisätä tauluun <i>users</i> kaksi boolean-arvoista kenttää 
+Haluamme siis lisätä tauluun <i>users</i> kaksi boolean-arvoista kenttää
 - _admin_ kertoo onko käyttäjä admin
 - _disabled_ taas kertoo sen onko käyttäjätunnus asetettu käyttökieltoon
 
@@ -300,12 +300,12 @@ Laajennetaan nyt kontrollereita seuraavasti. Estetään kirjaantuminen jos käyt
 loginRouter.post('/', async (request, response) => {
   const body = request.body
 
-  const user = await User.findOne({ 
-    where: { 
+  const user = await User.findOne({
+    where: {
       username: body.username
     }
   })
-  
+
   const passwordCorrect = body.password === 'salainen'
 
   if (!(user && passwordCorrect)) {
@@ -323,7 +323,7 @@ loginRouter.post('/', async (request, response) => {
   // highlight-end
 
   const userForToken = {
-    username: user.username, 
+    username: user.username,
     id: user.id,
   }
 
@@ -367,7 +367,7 @@ const isAdmin = async (req, res, next) => {
 
 router.put('/:username', tokenExtractor, isAdmin, async (req, res) => {
   const user = await User.findOne({ 
-    where: { 
+    where: {
       username: req.params.username
     }
   })
@@ -417,9 +417,9 @@ Admin voi nyt enabloida <i>jakousa</i>n tunnuksen tekemällä routeen /api/users
 }
 ```
 
-Kuten [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todetaan, tässä toteuttamamme tapa käyttäjätunnusten disablointiin on ongelmallinen. Se onko tunnus disabloitu tarkastetaan ainoastaan <i>kirjautumisen yhteydessä</i>. Jos käyttäjällä on token hallussaan siinä vaiheessa kun tunnus disabloidaan, voi käyttäjä jatkaa saman tokenin käyttöä, sillä tokenille ei ole asetettu elinikää eikä sitä seikkaa, että käyttäjän tunnus on disabloitu tarkasteta muistiinpanojen luomisen yhteydessä. 
+Kuten [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todetaan, tässä toteuttamamme tapa käyttäjätunnusten disablointiin on ongelmallinen. Se onko tunnus disabloitu tarkastetaan ainoastaan <i>kirjautumisen yhteydessä</i>. Jos käyttäjällä on token hallussaan siinä vaiheessa kun tunnus disabloidaan, voi käyttäjä jatkaa saman tokenin käyttöä, sillä tokenille ei ole asetettu elinikää eikä sitä seikkaa, että käyttäjän tunnus on disabloitu tarkasteta muistiinpanojen luomisen yhteydessä.
 
-Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti, jonka avulla edellinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessa. 
+Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti, jonka avulla edellinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessa.
 
 Muutetaan tiedostoa <i>util/db.js</i> seuraavasti:
 
@@ -501,9 +501,9 @@ ja itse skripti:
 }
 ```
 
-Voimme nyt siis perua edellisen migraation suorittamalla komentoriviltä _npm run migration:down_. 
+Voimme nyt siis perua edellisen migraation suorittamalla komentoriviltä _npm run migration:down_.
 
-Migraatiot suoritetaan automaattisesti kun ohjelma käynnistetään. Ohjelman kehitysvaiheessa saattaisi välillä olla tarkoituksenmukaisempaa poistaa migraatioiden automaattinen suoritus ja tehdä migraatiot komentoriviltä käsin. 
+Migraatiot suoritetaan automaattisesti kun ohjelma käynnistetään. Ohjelman kehitysvaiheessa saattaisi välillä olla tarkoituksenmukaisempaa poistaa migraatioiden automaattinen suoritus ja tehdä migraatiot komentoriviltä käsin.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-7), branchissa <i>part13-7</i>.
 
@@ -515,7 +515,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 #### Tehtävä 13.17.
 
-Poista sovelluksesi tietokannasta kaikki taulut. 
+Poista sovelluksesi tietokannasta kaikki taulut.
 
 Tee migraatio, joka asettaa tietokannan tämänhetkiseen tilaan. Luo <i>created\_at</i> ja <i>updated\_at</i> [aikaleimat](https://sequelize.org/master/manual/model-basics.html#timestamps) molemmille tauluille. Huomaa, että joudut luomaan ne migraatiossa itse.
 
@@ -526,7 +526,7 @@ Tee migraatio, joka asettaa tietokannan tämänhetkiseen tilaan. Luo <i>created\
 #### Tehtävä 13.18.
 
 Laajenna sovellusta (migraation avulla) siten, että blogeille tulee kirjoitusvuosi, eli kenttä <i>year</i> joka on kokonaisluku, jonka suuruus on vähintään 1991 mutta ei suurempi kuin menossa oleva vuosi. Varmista että sovellus antaa asiaankuuluvan virheilmoituksen jos kirjoitusvuodelle yritetään antaa virheellinen arvo.
- 
+
 </div>
 
 <div class="content">
@@ -724,12 +724,12 @@ Lisätään sitten kaikkien käyttäjien reittiin tieto käyttäjän joukkueista
 
 ```js
 router.get('/', async (req, res) => {
-  const users = await User.findAll({ 
+  const users = await User.findAll({
     include: [
       {
         model: Note,
-        attributes: { exclude: ['userId'] } 
-      }, 
+        attributes: { exclude: ['userId'] }
+      },
       // highlight-start
       {
         model: Team,
@@ -742,7 +742,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Tarkkasilmäisimmät huomaavat, että konsoliin tulostuva kysely yhdistää nyt kolme taulua. 
+Tarkkasilmäisimmät huomaavat, että konsoliin tulostuva kysely yhdistää nyt kolme taulua.
 
 Ratkaisu on aika hyvä, mutta siinä on eräs kauneusvirhe. Tuloksen mukana ovat myös liitostaulun rivin attribuutit vaikka emme niitä halua:
 
@@ -753,12 +753,12 @@ Dokumentaatiota tarkkaan lukemalla löytyy [ratkaisu](https://sequelize.org/mast
 
 ```js
 router.get('/', async (req, res) => {
-  const users = await User.findAll({ 
+  const users = await User.findAll({
     include: [
       {
         model: Note,
-        attributes: { exclude: ['userId'] } 
-      }, 
+        attributes: { exclude: ['userId'] }
+      },
       {
         model: Team,
         attributes: ['name', 'id'],
@@ -840,7 +840,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Eli yritimme liittää Sequelizen palauttamaan olioon kentän <i>noteCount</i> sekä poistaa siitä muistiinpanot sisältävän kentän <i>notes</i>. Tämä lähestymistapa ei kuitenkaan toimi, sillä Sequelizen palauttamat oliot eivät ole normaaleja olioita, joihin uusien kenttien lisääminen toimii siten kuin haluamme. 
+Eli yritimme liittää Sequelizen palauttamaan olioon kentän <i>noteCount</i> sekä poistaa siitä muistiinpanot sisältävän kentän <i>notes</i>. Tämä lähestymistapa ei kuitenkaan toimi, sillä Sequelizen palauttamat oliot eivät ole normaaleja olioita, joihin uusien kenttien lisääminen toimii siten kuin haluamme.
 
 Parempi ratkaisu onkin luoda tietokannasta haetun datan perusteella kokonaan uusi olio:
 
@@ -960,7 +960,7 @@ module.exports = {
 }
 ```
 
-Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinpanoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päällekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa. 
+Käytössä on taas <i>belongsToMany</i> joka liittää käyttäjän muistiinpanoihin liitostaulua vastaavan modelin <i>UserNotes</i> kautta. Annamme kuitenkin tällä kertaa avainsanaa [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names) käyttäen muodostuvalle attribuutille <i>aliasnimen</i>, oletusarvoinen nimi (käyttäjillä <i>notes</i>) menisi päällekkäin sen aiemman merkityksen, eli käyttäjän luomien muistiinpanojen kanssa.
 
 Laajennetaan yksittäisen käyttäjän routea siten, että se palauttaa käyttäjän joukkueet, omat muistiinpanot sekä käyttäjään liitetyt muut muistiinpanot:
 
@@ -970,11 +970,11 @@ router.get('/:id', async (req, res) => {
     attributes: { exclude: [''] } ,
     include:[{
         model: Note,
-        attributes: { exclude: ['userId'] } 
+        attributes: { exclude: ['userId'] }
       },
       // highlight-start
-      { 
-        model: Note, 
+      {
+        model: Note,
         as: 'markedNotes',
         attributes: { exclude: ['userId']},
         through: {
@@ -987,7 +987,7 @@ router.get('/:id', async (req, res) => {
         attributes: ['name', 'id'],
         through: {
           attributes: []
-        } 
+        }
       },
     ]
   })
@@ -1000,7 +1000,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-Includen yhteydessä on nyt mainittava <i>as</i>-määrettä käyttäen äsken määrittelemämme aliasnimi <i>markedNotes</i>. 
+Includen yhteydessä on nyt mainittava <i>as</i>-määrettä käyttäen äsken määrittelemämme aliasnimi <i>markedNotes</i>.
 
 Jotta ominaisuutta päästään testaamaan, luodaan tietokantaan hieman testidataa:
 
@@ -1021,10 +1021,10 @@ router.get('/:id', async (req, res) => {
     attributes: { exclude: [''] } ,
     include:[{
         model: Note,
-        attributes: { exclude: ['userId'] } 
+        attributes: { exclude: ['userId'] }
       },
-      { 
-        model: Note, 
+      {
+        model: Note,
         as: 'marked_notes',
         attributes: { exclude: ['userId']},
         through: {
@@ -1032,7 +1032,7 @@ router.get('/:id', async (req, res) => {
         },
         // highlight-start
         include: {
-          model: User, 
+          model: User,
           attributes: ['name']
         }
         // highlight-end
@@ -1042,7 +1042,7 @@ router.get('/:id', async (req, res) => {
         attributes: ['name', 'id'],
         through: {
           attributes: []
-        } 
+        }
       },
     ]
   })
@@ -1186,7 +1186,7 @@ Muuta yhden käyttäjän tiedot palauttavaa reittiä siten, että pyynnön mukan
 
 ### Loppuhuomioita
 
-Sovelluksemme alkaa olla vähintään kelvollisessa kunnossa. Ennen osan loppua tarkastellaan kuitenkin vielä muutamaa seikkaa. 
+Sovelluksemme alkaa olla vähintään kelvollisessa kunnossa. Ennen osan loppua tarkastellaan kuitenkin vielä muutamaa seikkaa.
 
 #### Eager vs lazy fetch
 
@@ -1207,7 +1207,7 @@ Muutetaan nyt yksittäisen käyttäjän routea siten, että se hakee kannasta k�
 ```js
 router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id)
-    
+
   // highlight-start
   if (!user) {
     return res.status(404).end()
@@ -1233,7 +1233,7 @@ Nyt siis <i>User.findByPk</i>-kysely ei hae joukkueita, vaan ne haetaan tarvitta
 
 On joitain tilanteita, missä emme oletusarvoisesti halua käsitellä kaikkia tietyn taulun rivejä. Eräs tälläinen tapaus voisi olla se, että emme normaalisti haluasi näyttää sovelluksessamme niitä käyttäjiä joiden tunnus on suljettu (<i>disabled</i>). Tälläisessä tilanteessa voisimme määritellä modelille oletusarvoisen [scopen](https://sequelize.org/master/manual/scopes.html):
 
-```js 
+```js
 class User extends Model {}
 
 User.init({
@@ -1263,7 +1263,7 @@ WHERE "user"."disabled" = false;
 
 Modeleille on mahdollista määritellä myös muita scopeja:
 
-```js 
+```js
 User.init({
   // kenttien määrittely
 }, {
@@ -1343,13 +1343,13 @@ class User extends Model {
   static async withNotes(limit){
     return await User.findAll({
       attributes: {
-        include: [[ sequelize.fn("COUNT", sequelize.col("notes.id")), "note_count" ]] 
+        include: [[ sequelize.fn("COUNT", sequelize.col("notes.id")), "note_count" ]]
       },
       include: [
         {
           model: Note,
-          attributes: [] 
-        }, 
+          attributes: []
+        },
       ],
       group: ['user.id'],
       having: sequelize.literal(`COUNT(notes.id) > ${limit}`)
@@ -1385,7 +1385,7 @@ Metodeista toinen, joka palauttaa ne käyttäjät, joilla on vähintään parame
 
 ```js
 const users = await User.withNotes(2)
-console.log(JSON.stringify(users, null, 2)) 
+console.log(JSON.stringify(users, null, 2))
 users.forEach(u => {
   console.log(u.name)
 })
@@ -1465,14 +1465,14 @@ Komentoriviltä käsin voi myös suorittaa sekä rollbackata eli perua migraatio
 
 #### Tehtävä 13.24.
 
-Grande finale: [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) oli maininta token-kirjautumiseen liittyvistä ongelmasta: <i>jos jonkin käyttäjän käyttöoikeus järjestelmään päätetään poistaa, voi käyttäjä edelleen käyttää hallussaan olevaa tokenia järjestemän käyttämiseen.</i> 
+Grande finale: [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) oli maininta token-kirjautumiseen liittyvistä ongelmasta: <i>jos jonkin käyttäjän käyttöoikeus järjestelmään päätetään poistaa, voi käyttäjä edelleen käyttää hallussaan olevaa tokenia järjestemän käyttämiseen.</i>
 
 Tavanomainen ratkaisu tähän on tallentaa backendin tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tälläista ratkaisua kutsutaan usein <i>palvelinpuolen sessioksi</i>.
 
-Laajenna järjestelmää nyt siten, että käyttöoikeuden menettänyt käyttäjä ei pysty tekemään mitään kirjaantumista edellyttäviä toimenpiteitä. 
+Laajenna järjestelmää nyt siten, että käyttöoikeuden menettänyt käyttäjä ei pysty tekemään mitään kirjaantumista edellyttäviä toimenpiteitä.
 
 Tarvitset toteutukseen todennäköisesti ainakin seuraavat
-- käyttäjien tauluun boolean-arvoisen sarakkeen, joka kertoo onko tunnus disabloitu 
+- käyttäjien tauluun boolean-arvoisen sarakkeen, joka kertoo onko tunnus disabloitu
   - riittää että tunnusten disablointi ja enablointi onnistuu suoraan tietokannasta
 - taulun, joka muistaa aktiiviset sessiot
   - sessio tallennetaan tauluun kun käyttäjä tekee kirjautumisen eli operaation POST /api/login
