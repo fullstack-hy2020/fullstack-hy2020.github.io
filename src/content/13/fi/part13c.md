@@ -30,7 +30,7 @@ module.exports = {
 
 Tämä toimintatapa ei kuitenkaan ole pitkässä juoksussa järkevä. Poistetaan synkronoinnin tekevät rivit ja siirrytään käyttämään paljon robustimpaa tapaa, Sequelizen (ja monien muiden kirjastojen) tarjoamia [migraatioita](https://sequelize.org/master/manual/migrations.html).
 
-Käytännössä migraatio on yksittäinen JavaScript-tiedosto, joka kuvaa jonkin tietokantaan tehtävän muutoksen. Jokaista yksittäistä tai useampaa kerralla tapahtuvaa muutosta varten tehdään oma migraatio-tiedosto. Sequelize pitää kirjaa siitä, mitkä migraatioista on suoritettu, eli minkä migratioiden aiheuttama muutos on synkronoitu tietokannan skeemaan. Uusien migraatioiden luomisen myötä Sequelize pysyy ajantasalla siitä, mitkä muutokset kannan skeemaan on vielä tekemättä. Näin muutokset tehdään hallitusti, versionhallintaan talletetulla ohjelmakoodilla.
+Käytännössä migraatio on yksittäinen JavaScript-tiedosto, joka kuvaa jonkin tietokantaan tehtävän muutoksen. Jokaista yksittäistä tai useampaa kerralla tapahtuvaa muutosta varten tehdään oma migraatio-tiedosto. Sequelize pitää kirjaa siitä, mitkä migraatioista on suoritettu, eli minkä migraatioiden aiheuttama muutos on synkronoitu tietokannan skeemaan. Uusien migraatioiden luomisen myötä Sequelize pysyy ajan tasalla siitä, mitkä muutokset kannan skeemaan on vielä tekemättä. Näin muutokset tehdään hallitusti, versionhallintaan talletetulla ohjelmakoodilla.
 
 Luodaan aluksi migraatio, joka vie tietokannan sen nykyiseen tilaansa. Migraation koodi on seuraavassa:
 
@@ -165,7 +165,7 @@ module.exports = { connectToDatabase, sequelize }
 
 Migraatiot suorittava funktio <i>runMigrations</i> suoritetaan nyt joka kerta kun sovellus käynnistyessään avaa tietokantayhteyden. Sequelize pitää kirjaa siitä mitkä migraatiot on jo suoritettu, eli jos uusia migratioita ei ole, ei funktion <i>runMigrations</i> suorittaminen tee mitään.
 
-Aloitetaan nyt puhtaalta pöydältä ja poistataan sovelluksesta kaikki olemassaolevat tietokantataulut:
+Aloitetaan nyt puhtaalta pöydältä ja poistetaan sovelluksesta kaikki olemassaolevat tietokantataulut:
 
 ```sql
 username => drop table notes;
@@ -174,7 +174,7 @@ username => \d
 Did not find any relations.
 ```
 
-Kännistetään sovellus. Lokiin tulostuu migraatioiden statuksesta kertova viesti
+Käynnistetään sovellus. Lokiin tulostuu migraatioiden statuksesta kertova viesti
 
 ```bash
 INSERT INTO "migrations" ("name") VALUES ($1) RETURNING "name";
@@ -198,7 +198,7 @@ username=> \d
  public | users_id_seq | sequence | username
 ```
 
-Sequelize on siis luonut taulun <i>migrations</i> jonka avulla se pitää kirjaa suoritetuista migraatiosta. Taulun sisältö näyttää seuraavalta:
+Sequelize on siis luonut taulun <i>migrations</i>, jonka avulla se pitää kirjaa suoritetuista migraatiosta. Taulun sisältö näyttää seuraavalta:
 
 ```sql
 username=> select * from migrations;
@@ -294,7 +294,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Laajennetaan nyt kontrollereita seuraavasti. Estetään kirjaantuminen jos käyttäjän kentän <i>disabled</i> arvona on <i>true</i>:
+Laajennetaan nyt kontrollereita seuraavasti. Estetään kirjautuminen jos käyttäjän kentän <i>disabled</i> arvona on <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -419,7 +419,7 @@ Admin voi nyt enabloida <i>jakousa</i>n tunnuksen tekemällä routeen /api/users
 
 Kuten [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todetaan, tässä toteuttamamme tapa käyttäjätunnusten disablointiin on ongelmallinen. Se onko tunnus disabloitu tarkastetaan ainoastaan <i>kirjautumisen yhteydessä</i>. Jos käyttäjällä on token hallussaan siinä vaiheessa kun tunnus disabloidaan, voi käyttäjä jatkaa saman tokenin käyttöä, sillä tokenille ei ole asetettu elinikää eikä sitä seikkaa, että käyttäjän tunnus on disabloitu tarkasteta muistiinpanojen luomisen yhteydessä.
 
-Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti, jonka avulla edellinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessa.
+Ennen kuin jatkamme eteenpäin, tehdään sovellukselle npm-skripti, jonka avulla edellinen migraatio on mahdollista perua. Kaikki ei nimittäin mene aina ensimmäisellä kerralla oikein migraatioita kehitettäessä.
 
 Muutetaan tiedostoa <i>util/db.js</i> seuraavasti:
 
@@ -482,7 +482,7 @@ const rollbackMigration = async () => {
 module.exports = { connectToDatabase, sequelize, rollbackMigrations } // highlight-line
 ```
 
-Tehdään tiedosto <i>util/rollback.js</i> jonka kautta npm-skripti pääsee suorittamaan määritellyn migraation peruvan funktion:
+Tehdään tiedosto <i>util/rollback.js</i>, jonka kautta npm-skripti pääsee suorittamaan määritellyn migraation peruvan funktion:
 
 ```js
 const { rollbackMigrations } = require('./db')
@@ -867,7 +867,7 @@ router.get('/:id', async (req, res) => {
 ```
 ### Monen suhde moneen uudelleen
 
-Tehdään sovellukseen vielä toinen monesta moneen -yhteys. Jokaiseen mustiinpanoon liittyy sen luonut käyttäjä viiteavaimen kautta. Päätetään, että sovellus tukee myös sitä, että muistiinpanon voidaan liittää muitakin käyttäjiä, ja että käyttäjään voi liittyä mielivaltainen määrä jonkun muun käyttäjän tekemiä muistiinpanoja. Ajatellaan että nämä muistiinpanot ovat sellaisia, jotka käyttäjä on <i>merkinnyt</i> itselleen.
+Tehdään sovellukseen vielä toinen monesta moneen -yhteys. Jokaiseen muistiinpanoon liittyy sen luonut käyttäjä viiteavaimen kautta. Päätetään, että sovellus tukee myös sitä, että muistiinpanoon voidaan liittää muitakin käyttäjiä, ja että käyttäjään voi liittyä mielivaltainen määrä jonkun muun käyttäjän tekemiä muistiinpanoja. Ajatellaan että nämä muistiinpanot ovat sellaisia, jotka käyttäjä on <i>merkinnyt</i> itselleen.
 
 Tehdään tilannetta varten liitostaulu <i>user_notes</i>. Migraatio on suoraviivainen:
 
@@ -1079,7 +1079,7 @@ Tässä tehtävässä lukulistalle lisäämisen ja listan näyttämisen ei tarvi
 
 Lisätään nyt lukulistaa tukeva toiminnallisuus sovellukseen.
 
-Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST reitille _/api/readinglists_, pyynnön mukana lähetettään blogin ja käyttäjän id:
+Blogin lisääminen lukulistalle tapahtuu tekemällä HTTP POST reitille _/api/readinglists_, pyynnön mukana lähetetään blogin ja käyttäjän id:
 
 ```js
 {
@@ -1465,9 +1465,9 @@ Komentoriviltä käsin voi myös suorittaa sekä rollbackata eli perua migraatio
 
 #### Tehtävä 13.24.
 
-Grande finale: [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) oli maininta token-kirjautumiseen liittyvistä ongelmasta: <i>jos jonkin käyttäjän käyttöoikeus järjestelmään päätetään poistaa, voi käyttäjä edelleen käyttää hallussaan olevaa tokenia järjestemän käyttämiseen.</i>
+Grande finale: [osan 4 loppupuolella](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) oli maininta token-kirjautumiseen liittyvistä ongelmista: <i>jos jonkin käyttäjän käyttöoikeus järjestelmään päätetään poistaa, voi käyttäjä edelleen käyttää hallussaan olevaa tokenia järjestemän käyttämiseen.</i>
 
-Tavanomainen ratkaisu tähän on tallentaa backendin tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tälläista ratkaisua kutsutaan usein <i>palvelinpuolen sessioksi</i>.
+Tavanomainen ratkaisu tähän on tallentaa backendin tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tällaista ratkaisua kutsutaan usein <i>palvelinpuolen sessioksi</i>.
 
 Laajenna järjestelmää nyt siten, että käyttöoikeuden menettänyt käyttäjä ei pysty tekemään mitään kirjaantumista edellyttäviä toimenpiteitä.
 
@@ -1476,7 +1476,7 @@ Tarvitset toteutukseen todennäköisesti ainakin seuraavat
   - riittää että tunnusten disablointi ja enablointi onnistuu suoraan tietokannasta
 - taulun, joka muistaa aktiiviset sessiot
   - sessio tallennetaan tauluun kun käyttäjä tekee kirjautumisen eli operaation POST /api/login
-  - session olemassaolo (ja validiteetti) tarkastetaan aina käyttäjän tehdessä kirjautumista edellyttävän operaation
+  - session olemassaolo (ja validiteetti) tarkistetaan aina käyttäjän tehdessä kirjautumista edellyttävän operaation
 - reitin, jonka avulla käyttäjä voi "kirjautua ulos" järjestelmästä, eli käytännössä poistaa tietokannasta aktiiviset sessiot, reitti voi olla esim DELETE /api/logout
 
 Huomaa, että kirjautumisen ei tule onnistua "vanhentuneella tokenilla", eli samalla tokenilla uloskirjautumisen jälkeen.
@@ -1487,7 +1487,7 @@ Tee tämän tehtävän edellyttämät tietokantamuutokset migraatioiden avulla.
 
 ### Tehtävien palautus ja suoritusmerkinnän pyytäminen
 
-Tämän osat palautetaan osista 0-7 poiketen [palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-psql) omaan kurssi-instanasiinsa. Huomaa, että tarviset suoritusmerkintään osan kaikki tehtävät.
+Tämän osat palautetaan osista 0-7 poiketen [palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-psql) omaan kurssi-instanssiinsa. Huomaa, että tarvitset suoritusmerkintään osan kaikki tehtävät.
 
 Jos haluat suoritusmerkinnän, merkitse kurssi suoritetuksi:
 
