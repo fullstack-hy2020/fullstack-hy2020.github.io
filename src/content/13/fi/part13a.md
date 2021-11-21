@@ -13,7 +13,7 @@ Tässä osassa tutustutaan relaatiotietokantoja käyttäviin node-sovelluksiin. 
 
 Olemme käyttäneet kaikissa kurssin aiemmissa osissa MongoDB-tietokantaa. Mongo on tyypiltään [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database) ja eräs sen ominaisimmista piirteistä on <i>skeemattomuus</i>, eli tietokanta ei ole kuin hyvin rajallisesti tietoinen siitä, minkälaista dataa sen kokoelmiin on talletettu. Tietokannan skeema on olemassa ainoastaan ohjelmakoodissa, joka tulkitsee datan tietyllä tavalla, esim. tunnistaen että jotkut kentät ovat viittauksia toisen kokoelman objekteihin.
 
-Osien 3 ja 4 esimerkkisovelluksessa tietokantaan on talletettu muistiinpanoja ja käyttäjiä. 
+Osien 3 ja 4 esimerkkisovelluksessa tietokantaan on talletettu muistiinpanoja ja käyttäjiä.
 
 Muistiinpanoja tallettava kokoelma <i>notes</i> näyttää seuraavanlaiselta
 
@@ -56,7 +56,7 @@ Käyttäjät tallettava kokoelma <i>users</i> seuraavalta:
 
 MongoDB tuntee kyllä talletettujen olioiden kenttien tyypit, mutta sillä ei ole mitään tietoa siitä, minkä kokoelman olioihin käyttäjiin liittyvät muistiinpanojen id:t viittaavat. MongoDB ei myöskään välitä siitä, mitä kenttiä kokoelmiin talletettavilla olioilla on. MongoDB jättääkin täysin ohjelmoijan vastuulle sen, että tietokantaan talletetaan oikeanlaista tietoa.
 
-Skeemattomuudesta on sekä etua että haittaa. Eräänä etuna on skeemattomuuden tuoma joustavuus: koska skeemaa ei tarvitse tietokantatasolla määritellä, voi sovelluskehitys olla tietyissä tapauksissa nopeampaa, ja helpompaa, skeeman määrittelyssä ja sen muutoksissa on joka tapauksessa nähtävä pieni määrä vaivaa. Skeemattomuuden ongelmat liittyvät virhealttiuteen: kaikki jää ohjelmoijan vastuulle. Tietokannalla ei ole mitään mahdollisuuksia tarkistaa onko siihen talletettu data <i>eheää</i>, eli onko kaikilla pakollisilla kentillä arvot, viittaavatko viitetyyppiset kentät olemassaoleviin ja ylipäätään oikean tyyppisiin olioihin jne.
+Skeemattomuudesta on sekä etua että haittaa. Eräänä etuna on skeemattomuuden tuoma joustavuus: koska skeemaa ei tarvitse tietokantatasolla määritellä, voi sovelluskehitys olla tietyissä tapauksissa nopeampaa, ja helpompaa, skeeman määrittelyssä ja sen muutoksissa on joka tapauksessa nähtävä pieni määrä vaivaa. Skeemattomuuden ongelmat liittyvät virhealttiuteen: kaikki jää ohjelmoijan vastuulle. Tietokannalla ei ole mitään mahdollisuuksia tarkistaa onko siihen talletettu data <i>eheää</i>, eli onko kaikilla pakollisilla kentillä arvot, viittaavatko viitetyyppiset kentät olemassa oleviin ja ylipäätään oikean tyyppisiin olioihin jne.
 
 Tämän osan fokuksessa olevat relaatiotietokannat taas nojaavat vahvasti skeeman olemassaoloon, ja skeemallisten tietokantojen edut ja haitat ovat lähes päinvastaiset skeemattomiin verrattuna.
 
@@ -66,7 +66,7 @@ Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri se
 
 Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/). Voit myös hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla.
 
-Käytämme nyt kuitenkin hyväksemme sitä, että osista 3 ja 4 tuttuun pilvipalvelualusta Herokuun on mahdollista luoda sovellukselle Postgres-tietokanta. 
+Käytämme nyt kuitenkin hyväksemme sitä, että osista 3 ja 4 tuttuun pilvipalvelualusta Herokuun on mahdollista luoda sovellukselle Postgres-tietokanta.
 
 Tämän osan teoriamateriaalissa rakennetaan osissa 3 ja 4 rakennetun muistiinpanoja tallettavan sovelluksen backendendistä Postgresia käyttävä versio.
 
@@ -100,7 +100,7 @@ username=> \d
 Did not find any relations.
 ```
 
-Kuten arvata saattaa, tietokannassa ei ole mitään. 
+Kuten arvata saattaa, tietokannassa ei ole mitään.
 
 Luodaan taulu muistiinpanoja varten:
 
@@ -115,7 +115,7 @@ CREATE TABLE notes (
 
 Muutama huomio: sarake  <i>id </i> on määritelty <i>pääavaimeksi</i> (engl. primary key), eli sarakkeen arvon tulee olla jokaisella taulun rivillä uniikki ja arvo ei saa olla tyhjä. Tyypiksi sarakkeelle on määritelty [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), joka ei ole todellinen tyyppi vaan lyhennysmerkintä sille, että kyseessä on kokonaislukuarvoinen sarake, jolle Postgres antaa automaattisesti uniikin, kasvavan arvon rivejä luotaessa. Tekstiarvoinen sarakke <i>content</i> on määritelty siten, että sille on pakko antaa arvo.
 
-Katsotaan tilannetta konsolista käsin. Ensin komento _\d_, joka kertoo mitä tauluja kannasa on:
+Katsotaan tilannetta konsolista käsin. Ensin komento _\d_, joka kertoo mitä tauluja kannassa on:
 
 ```sql
 username=> \d
@@ -127,7 +127,7 @@ username=> \d
 (2 rows)
 ```
 
-Taulun <i>notes</i> lisäksi Postgres loi aputaulun <i>not\_id\_seq</i>, joka pitää kirjaa siitä, mikä arvo sarakkeelle <i>id</i> annetaan seuraavaa muistiinpanoa luotaessa. 
+Taulun <i>notes</i> lisäksi Postgres loi aputaulun <i>not\_id\_seq</i>, joka pitää kirjaa siitä, mikä arvo sarakkeelle <i>id</i> annetaan seuraavaa muistiinpanoa luotaessa.
 
 Komennolla _\d notes_ näemme miten taulu <i>notes</i> on määritelty:
 
@@ -144,7 +144,7 @@ Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 ```
 
-Sarakkeella <i>id</i> on siis oletusarvo (default), joka saadaan kutsumalla postgresin sisäistä funktiota <i>nextval</i>. 
+Sarakkeella <i>id</i> on siis oletusarvo (default), joka saadaan kutsumalla postgresin sisäistä funktiota <i>nextval</i>.
 
 Lisätään tauluun hieman sisältöä:
 
@@ -152,7 +152,7 @@ Lisätään tauluun hieman sisältöä:
 insert into notes (content, important) values ('Relational databases rule the world', true);
 insert into notes (content, important) values ('MongoDB is webscale', false);
 ```
-  
+
 Ja katsotaan miltä luotu sisältö näyttää:
 
 ```sql
@@ -192,7 +192,7 @@ Seuraavaksi on aika siirtyä käyttämään tietokantaa sovelluksesta käsin.
 
 ### Relaatiotietokantaa käyttävä node-sovellus
 
-Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan sille kehitysaikaiseksi riippuvuudeksi <i> nodemon</i>  sekä seuraavat suoritusaikaiset riippuvuudet:
+Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan sille kehitysaikaiseksi riippuvuudeksi <i>nodemon</i>  sekä seuraavat suoritusaikaiset riippuvuudet:
 
 ```bash
 npm install express dotenv pg sequelize
@@ -200,7 +200,7 @@ npm install express dotenv pg sequelize
 
 Näistä jälkimmäinen [sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) -kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
 
-Testataan että yhteyden muodostaminen onnistuu. Luodaan tiedosto <i>index.js</i> ja sille seuraava sisältö:
+Testataan, että yhteyden muodostaminen onnistuu. Luodaan tiedosto <i>index.js</i> ja sille seuraava sisältö:
 
 ```js
 require('dotenv').config()
@@ -223,7 +223,7 @@ const main = async () => {
   } catch (error) {
     console.error('Unable to connect to the database:', error)
   }
-} 
+}
 
 main()
 ```
@@ -268,7 +268,7 @@ const main = async () => {
   } catch (error) {
     console.error('Unable to connect to the database:', error)
   }
-} 
+}
 
 main()
 ```
@@ -293,7 +293,7 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-Vaikka Sequelize on ORM-kirjasto, jota käyttämällä SQL:ää ei juurikaan ole tarvetta itse kirjoittaa, käytimme nyt [suoraan SQL:ää](https://sequelize.org/master/manual/raw-queries.html) sequelizen metodin [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query) avulla.
+Vaikka Sequelize on ORM-kirjasto, jota käyttämällä SQL:ää ei juurikaan ole tarvetta itse kirjoittaa, käytimme nyt [suoraan SQL:ää](https://sequelize.org/master/manual/raw-queries.html) Sequelizen metodin [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query) avulla.
 
 Koska kaikki näyttää toimivan, muutetaan sovellus web-sovellukseksi.
 
@@ -329,7 +329,7 @@ Sovellus näyttää toimivan. Siirrytään kuitenkin nyt käyttämään Sequeliz
 
 ### Model
 
-Sequelizea käytettäessä, jokaista tietokannan taulua edustaa [model](https://sequelize.org/master/manual/model-basics.html), joka on käytännössä oma JavaScript-luokkansa. Määritellän nyt sovellukselle taulua <i>notes</i> vastaava model <i>Note</i> muuttamalla koodi seuraavaan muotoon:
+Sequelizea käytettäessä, jokaista tietokannan taulua edustaa [model](https://sequelize.org/master/manual/model-basics.html), joka on käytännössä oma JavaScript-luokkansa. Määritellään nyt sovellukselle taulua <i>notes</i> vastaava model <i>Note</i> muuttamalla koodi seuraavaan muotoon:
 
 ```js
 require('dotenv').config()
@@ -386,10 +386,9 @@ app.listen(PORT, () => {
 
 Muutama kommentti koodista. Modelin <i>Note</i> määrittelyssä ei ole mitään kovin yllättävää, jokaiselle sarakkeelle on määritelty tyyppi, sekä tarvittaessa muut ominaisuudet, kuten se onko kyseessä taulun pääavain. Modelin määrittelyssä oleva toinen parametri sisältää <i>sequelize</i>-olion sekä muuta konfiguraatiotietoa. Määrittelimme, että taululla ei ole usein käytettyjä aikaleimasarakkeita (created\_at ja updated\_at).
 
-Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) -versiona. 
-Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellän siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet. 
+Määrittelimme myös <i>underscored: true</i>, joka tarkoittaa sitä, että taulujen nimet johdetaan modelien nimistä monikkomuotoisina [snake case](https://en.wikipedia.org/wiki/Snake_case) -versiona. Käytännössä tämä tarkoittaa sitä, että jos modelin nimi on, kuten tapauksessamme, <i>Note</i> päätellään siitä, että vastaavan taulun nimi on pienellä alkukirjaimella kirjoitettu nimen monikko eli <i>notes</i>. Jos taas modelin nimi olisi "kaksiosainen" esim. <i>StudyGroup</i> olisi taulun nimi <i>study_groups</i>. Sequelize mahdollistaa automaattisen taulujen nimien päättelyn sijaan myös eksplisiittisesti määriteltävät taulujen nimet.
 
-Sama nimentäkäytänne koskee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
+Sama käytäntöä nimityksien osalta koskee myös sarakkeita. Jos olisimme määritelleet, että muistiinpanoon liittyy <i>creationYear</i>, eli tieto sen luomisvuodesta, määrittelisimme sen modeliin seuraavasti:
 
 ```js
 Note.init({
@@ -400,7 +399,7 @@ Note.init({
 })
 ```
 
-Vastaavan sarakkeen nimi tietokannassa olisi <i>creation_year</i>. Koodissa viittaus sarakkeeseen tapahtuu aina samassa muodossa mikä on modelissa, eli "camel case"-formaatissa. 
+Vastaavan sarakkeen nimi tietokannassa olisi <i>creation_year</i>. Koodissa viittaus sarakkeeseen tapahtuu aina samassa muodossa mikä on modelissa, eli "camel case"-formaatissa.
 
 Olemme myös määritelleet <i>modelName: 'note'</i>, oletusarvoinen "modelin nimi" olisi isolla kirjoitettu <i>Note</i>. Haluamme kuitenkin pienen alkukirjaimen, se tekee muutaman asian jatkossa hieman mukavammaksi.
 
@@ -442,7 +441,7 @@ const note = Note.build(req.body)
 await note.save()
 ```
 
-Metodin <i>build</i> kutsuminen ei tallenna vielä olioa tietokantaan, joten olioa on vielä mahdollista muokata ennen varsinaista talletustapahtumaa:
+Metodin <i>build</i> kutsuminen ei tallenna vielä olioata tietokantaan, joten olio on vielä mahdollista muokata ennen varsinaista talletustapahtumaa:
 
 ```js
 const note = Note.build(req.body)
@@ -452,7 +451,7 @@ await note.save()
 
 Esimerkkikoodin käyttötapaukseen metodi [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) sopii paremmin, joten pidättäydytään siinä.
 
-Jos luotava olio ei ole validi, on seurauksena virheilmoitus. Esim. yritettäessä luoda muistiinpano ilman sisältöä
+Jos luotava olio ei ole validi, on seurauksena virheilmoitus. Esim. yritettäessä luoda muistiinpanoa ilman sisältöä
 operaatio epäonnistuu, ja konsoli paljastaa syyn olevan <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>
 
 ```bash
@@ -481,7 +480,7 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tehtävät 13.1.-13.3.
 
-Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen blogi-sovelluksen backendin, jonka pitäisi olla virheenkäsittelyä lukuunottamatta yhteensopiva [osan 5](/osa5) frontendin kanssa. Teemme backendiin myös joukon ominaisuuksia, joita osassa 5 tehty frontend ei osaa hyödyntää.
+Teemme tämän osan tehtävissä [osan 4](/osa4) tehtävien kanssa samanlaisen blogi-sovelluksen backendin, jonka pitäisi olla virheenkäsittelyä lukuun ottamatta yhteensopiva [osan 5](/osa5) frontendin kanssa. Teemme backendiin myös joukon ominaisuuksia, joita osassa 5 tehty frontend ei osaa hyödyntää.
 
 #### Tehtävä 13.1.
 
@@ -519,7 +518,7 @@ Robert C. Martin: 'FP vs. OO List Processing', 0 likes
 
 Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean skeeman omaava tietokanta on olemassa, eli että taulu <i>notes</i> on luotu sopivalla _create table_ -komennolla.
 
-Koska ohjelmakoodi säilytetään GitHubissa, olisi järkevää säilyttää myös tietokannan luovat komennot ohjelmakoodin yhteydessä, jotta tietokannan skeema on varmasti sama mitä ohjelmakoodi odottaa. Sequelize pystyy itseasiassa generoimaan skeeman automaattisesti modelien määritelmästä modelien metodin [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) avulla. 
+Koska ohjelmakoodi säilytetään GitHubissa, olisi järkevää säilyttää myös tietokannan luovat komennot ohjelmakoodin yhteydessä, jotta tietokannan skeema on varmasti sama mitä ohjelmakoodi odottaa. Sequelize pystyy itse asiassa generoimaan skeeman automaattisesti modelien määritelmästä modelien metodin [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) avulla.
 
 Tuhotaan nyt tietokanta konsolista käsin antamalla seuraava komento:
 
@@ -527,14 +526,14 @@ Tuhotaan nyt tietokanta konsolista käsin antamalla seuraava komento:
 drop table notes;
 ```
 
-Koment _\d_ paljastaa että taulu on hävinnyt tietokannasta:
+Komento _\d_ paljastaa että taulu on hävinnyt tietokannasta:
 
 ```sql
 username=> \d
 Did not find any relations.
 ```
 
-Sovellus ei enää toimi. 
+Sovellus ei enää toimi.
 
 Lisätään sovellukseen seuraava komento heti modelin <i>Note</i> määrittelyn jälkeen:
 
@@ -548,11 +547,11 @@ Kun sovellus käynnistyy, tulostuu konsoliin seuraava:
 Executing (default): CREATE TABLE IF NOT EXISTS "notes" ("id"  SERIAL , "content" TEXT NOT NULL, "important" BOOLEAN, "date" TIMESTAMP WITH TIME ZONE, PRIMARY KEY ("id"));
 ```
 
-Eli sovelluksen käynnistyessä suoritetaan komento <i>CREATE TABLE IF NOT EXISTS "notes"...</i> joka luo taulun <i>notes</i> jos se ei jo ole olemassa.
+Eli sovelluksen käynnistyessä suoritetaan komento <i>CREATE TABLE IF NOT EXISTS "notes"...</i>, joka luo taulun <i>notes</i>, jos se ei ole jo olemassa.
 
 ### Muut operaatiot
 
-Täydennetään sovellusta vielä muutamalla operaatiolla. 
+Täydennetään sovellusta vielä muutamalla operaatiolla.
 
 Yksittäisen muistiinpanon etsiminen onnistuu metodilla [findByPk](https://sequelize.org/master/manual/model-querying-finders.html), koska se haetaan pääavaimena toimivan id:n perusteella:
 
@@ -573,7 +572,7 @@ Yksittäisen muistiinpanon hakeminen aiheuttaa seuraavanlaisen SQL-komennon:
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note"."id" = '1';
 ```
 
-Jos muistiinpanoa ei löydy, palauttaa operaation <i>null</i>, ja tässä tapauksessa annetaan asiaan kuuluva statuskoodi.
+Jos muistiinpanoa ei löydy, palauttaa operaatio <i>null</i>, ja tässä tapauksessa annetaan asiaan kuuluva statuskoodi.
 
 Muistiinpanon muuttaminen tapahtuu seuraavasti. Tuetaan ainoastaan kentän <i>important</i> muutosta, sillä sovelluksen frontend ei muuta tarvitse:
 
@@ -663,7 +662,7 @@ Nyt lopputulos on juuri se mitä haluamme.
   date: 2021-10-09T13:52:58.693Z }
 ```
 
-Jos kyse on kokoelmallisesta olioita, ei metodi toJSON toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliolle: 
+Jos kyse on kokoelmallisesta oliosta, ei metodi toJSON toimi suoraan, metodia on kutsuttava erikseen jokaiselle kokoelman oliolle:
 
 ```js
 router.get('/', async (req, res) => {
@@ -688,7 +687,7 @@ Tulostus näyttää seuraavalta:
     date: 2021-10-09T13:53:10.710Z } ]
 ```
 
-Ehkä parempi ratkaisu on kuitenkin muuttaa kokoelma JSON:iksi tulostamista varten metodilla [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify): 
+Ehkä parempi ratkaisu on kuitenkin muuttaa kokoelma JSON:iksi tulostamista varten metodilla [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify):
 
 ```js
 router.get('/', async (req, res) => {
@@ -700,10 +699,10 @@ router.get('/', async (req, res) => {
 })
 ```
 
-Tämä tapa on parempi erityisesti jos kokoelman oliot sisältävät muita olioita. Usein on myös hyödyllistä muotoilla oliot ruudulle sisennetysti lukijaystävällisempään muotoon. Tämä onnistuu komennolla:
+Tämä tapa on parempi erityisesti, jos kokoelman oliot sisältävät muita olioita. Usein on myös hyödyllistä muotoilla oliot ruudulle sisennetysti lukijaystävällisempään muotoon. Tämä onnistuu komennolla:
 
 ```json
-console.log(JSON.stringify(notes, null, 2)) 
+console.log(JSON.stringify(notes, null, 2))
 ```
 
 Tulostus seuraavassa:

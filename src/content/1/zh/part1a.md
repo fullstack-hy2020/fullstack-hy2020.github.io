@@ -67,8 +67,8 @@ const App = () => (
 
 export default App
 ```
-<!-- The files <i>App.js</i>, <i>App.css</i>, <i>App.test.js</i>, <i>logo.svg</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now. -->
-文件 <i>App.css</i>、<i>App.test.js</i>、<i>logo.svg</i>、, <i>setupTests.js</i>  和<i>reportWebVitals.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
+<!-- The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> may be deleted as they are not needed in our application right now. -->
+文件 <i>App.css</i>、<i>App.test.js</i>、<i>index.css</i> 、<i>logo.svg</i>、 <i>setupTests.js</i>  和<i>reportWebVitals.js</i> 可以删除，因为它们目前在我们的应用中不并需要。
 
 ### Component
 【组件】
@@ -563,8 +563,8 @@ const App = () => {
 export default App
 ```
 
-<!-- and remove extra files (App.js, App.css, App.test.js, logo.svg, reportWebVitals.js). -->
-并删除额外的文件(App.css, App.test.js, logo.svg, setupTests.js, reportWebVitals.js)。
+<!-- and remove extra files (App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js). -->
+并删除额外的文件(App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js)。
 
 <!-- Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises. -->
 

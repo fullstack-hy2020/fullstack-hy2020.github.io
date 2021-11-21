@@ -537,8 +537,10 @@ Routing in a React Native application is a bit different to routing in a web app
 With React Native we can use the entire React router's core, including the hooks and components. The only difference to the browser environment is that we must replace the <em>BrowserRouter</em> with React Native compatible [NativeRouter](https://reacttraining.com/react-router/native/api/NativeRouter), provided by the [react-router-native](https://reacttraining.com/react-router/native/guides/quick-start) library. Let's get started by installing the <i>react-router-native</i> library:
 
 ```shell
-npm install react-router-native
+npm install react-router-native@5.2.1
 ```
+  
+**NB:** This material has instructions on how to use React router version 5, which is a bit different than version 6.
 
 Using the react-router-native library will break Expo's web browser preview. However, other previews will work just like before. We can fix the issue by extending the Expo's Webpack configuration so that it transpiles the react-router-native library's sources with Babel. To extend the Webpack configuration we need to install the <i>@expo/webpack-config</i> library:
 
