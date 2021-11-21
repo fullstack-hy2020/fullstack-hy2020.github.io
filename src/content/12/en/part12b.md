@@ -231,8 +231,6 @@ One big carelessness we have left is running the application as root instead of 
 
 ```Dockerfile
 FROM node:16
-
-USER node # highlight-line
   
 WORKDIR /usr/src/app
 
@@ -241,6 +239,8 @@ COPY --chown=node:node . .  # highlight-line
 RUN npm ci 
 
 ENV DEBUG=playground:*
+  
+USER node # highlight-line
 
 CMD npm start
 ```
