@@ -45,13 +45,13 @@ npm install redux
 ```
 
 
-As in Flux, in Redux the state is also stored in a [store](https://redux.js.org/basics/store).
+As in Flux, in Redux the state is also stored in a [store](https://redux.js.org/tutorials/fundamentals/part-4-store).
 
 
 The whole state of the application is stored into <i>one</i> JavaScript-object in the store. Because our application only needs the value of the counter, we will save it straight to the store. If the state was more complicated, different things in the state would be saved as separate fields of the object. 
 
 
-The state of the store is changed with [actions](https://redux.js.org/basics/actions). Actions are objects which have at least a field determining the <i>type</i> of the action. 
+The state of the store is changed with [actions](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#designing-actions). Actions are objects which have at least a field determining the <i>type</i> of the action. 
 Our application needs for example the following action: 
 
 ```js
@@ -64,7 +64,7 @@ Our application needs for example the following action:
 If there is data involved with the action, other fields can be declared as needed.  However, our counting app is so simple that the actions are fine with just the type field. 
 
 
-The impact of the action to the state of the application is defined using a [reducer](https://redux.js.org/basics/reducers). In practice, a reducer is a function which is given the current state and an action as parameters. It <i>returns</i> a new state. 
+The impact of the action to the state of the application is defined using a [reducer](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#writing-reducers). In practice, a reducer is a function which is given the current state and an action as parameters. It <i>returns</i> a new state. 
 
 
 Let's now define a reducer for our application: 
@@ -836,7 +836,7 @@ const toggleImportanceOf = (id) => {
 }
 ```
 
-Functions that create actions are called [action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
+Functions that create actions are called [action creators](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators).
 
 The <i>App</i> component does not have to know anything about the inner representation of the actions anymore, it just gets the right action by calling the creator function: 
 
@@ -1227,7 +1227,7 @@ Make sure that the anecdotes are ordered by the number of votes.
 #### 6.6: anecdotes, step4
 
 
-If you haven't done so already, separate the creation of action objects to [action creator](https://redux.js.org/basics/actions#action-creators) functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, as we have been doing since chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
+If you haven't done so already, separate the creation of action objects to [action creator](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators) functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, as we have been doing since chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators).
 
 #### 6.7: anecdotes, step5
 
