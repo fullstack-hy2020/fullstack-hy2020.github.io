@@ -534,7 +534,7 @@ Extend the application so that it uses the <i>Notification</i> component to disp
 ![](../../images/6/8ea.png)
 
 
-It's recommended to create separate [action creators](https://redux.js.org/basics/actions#action-creators) for setting and removing notifications.
+It's recommended to create separate [action creators](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators) for setting and removing notifications.
 
 
 #### 6.12* Better anecdotes, step10

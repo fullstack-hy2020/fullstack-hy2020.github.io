@@ -109,7 +109,7 @@ Tiedosto <i>index.js</i> on muuten samanlainen kuin se on ollut toistaiseksi kai
 
 ```js
 import ReactDOM from 'react-dom'
-import App from './App.js'
+import App from './App'
 
 const notes = [
   {
@@ -360,7 +360,7 @@ Eräs tapa päästä eroon konsoliin tulostuvasta virheilmoituksesta olisi siis:
 </ul>
 ```
 
-Tämä **ei kuitenkaan ole suositeltavaa** ja voi aiheuttaa ongelmia. Lue lisää esimerkiksi [täältä](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
+Tämä **ei kuitenkaan ole suositeltavaa** ja voi aiheuttaa ongelmia. Lue lisää esimerkiksi [täältä](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318).
 
 ### Refaktorointia - moduulit
 
@@ -420,7 +420,7 @@ Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>index.js</i> ensimmä
 
 ```js
 import ReactDOM from 'react-dom'
-import App from './App.js'
+import App from './App'
 ```
 
 [importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli <i>react-dom</i> sijoitetaan muuttujaan _ReactDOM_ ja sovelluksen pääkomponentin määrittelevä moduuli muuttujaan _App_.
@@ -470,9 +470,9 @@ Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston
 
 Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-1)
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-1).
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
+Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
 
 ![](../../images/2/2b.png)
 
@@ -581,15 +581,15 @@ Voit palauttaa kurssin kaikki tehtävät samaan repositorioon, tai käyttää us
 
 Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
 
-Huomaa, että tässä osassa on muitakin tehtäviä kuin allaolevat, eli <i>älä tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki mitkä haluat palauttaa.
+Huomaa, että tässä osassa on muitakin tehtäviä kuin alla olevat, eli <i>älä tee palautusta</i> ennen kun olet tehnyt osan tehtävistä kaikki mitkä haluat palauttaa.
 
-**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassaolevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
+**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
 <h4>2.1: kurssitiedot step6</h4>
 
 Viimeistellään nyt tehtävien 1.1-1.5 kurssin sisältöjä renderöivän ohjelman koodi. Voit ottaa tarvittaessa pohjaksi mallivastauksen koodin.
 
-**Huomaa, että jos kopioit projektin paikasta toiseen, saattaa olla tarpeen ensin tuhota hakemisto <i>node\_modules</i> ja antaa sen jälkeen asentaa riippuvuudet uudelleen, eli komento _npm install_ ennen kuin saat kopioidun projektin käynnistettyä.** Lähtökohtaisesti toki kannattaa olla kokonaan kopioimatta tai laittamatta versionhallintaan hakemistoa <i>node\_modules</i>
+**Huomaa, että jos kopioit projektin paikasta toiseen, saattaa olla tarpeen ensin tuhota hakemisto <i>node\_modules</i> ja antaa sen jälkeen asentaa riippuvuudet uudelleen, eli komento _npm install_ ennen kuin saat kopioidun projektin käynnistettyä.** Lähtökohtaisesti toki kannattaa olla kokonaan kopioimatta tai laittamatta versionhallintaan hakemistoa <i>node\_modules</i>.
 
 Muutetaan komponenttia <i>App</i> seuraavasti:
 
@@ -661,7 +661,7 @@ Ilmoita myös kurssin yhteenlaskettu tehtävien lukumäärä:
 
 Jos et jo niin tehnyt, laske koodissasi tehtävien määrä taulukon metodilla [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 
-**Pro tip:** Kun koodisi joka näyttää esimerkisi seuraavalta 
+**Pro tip:** Kun koodisi joka näyttää esimerkiksi seuraavalta 
 
 ```js
 const total = 
@@ -677,11 +677,11 @@ const total = parts.reduce( (s, p) => {
 })
 ```
 
-**Pro tip2:** VS Codeen on asennettavissa laajennus, ilmeisesti [tämä](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor), jonka avulla nuolifunktion lyhyen muodon voi muuttaa automaattisesti pidemmäksi muodoksi ja päinvastoin:
+**Pro tip 2:** VS Codeen on asennettavissa [laajennus](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor), jonka avulla nuolifunktion lyhyen muodon voi muuttaa automaattisesti pidemmäksi muodoksi ja päinvastoin:
 
 ![](../../images/2/5b.png)
 
-**Pro tip3:** Mikäli console.login haluaa vain pikaisesti ujuttaa koodiin nuolifunktiota muuttamatta, voi sen tehdä näppärästi myös tällä tapaa:
+**Pro tip 3:** Mikäli console.login haluaa vain pikaisesti ujuttaa koodiin nuolifunktiota muuttamatta, voi sen tehdä näppärästi myös tällä tapaa:
 
 ```js
 const total = 
@@ -747,7 +747,7 @@ const App = () => {
 }
 ```
 
-Sovelluksen ulkoasu voi olla esim seuraava:
+Sovelluksen ulkoasu voi olla esim. seuraava:
 
 ![](../../images/teht/10e.png)
 
