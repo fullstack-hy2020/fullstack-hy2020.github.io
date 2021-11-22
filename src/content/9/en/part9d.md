@@ -919,7 +919,7 @@ The result could look like this:
 
 ![](../../images/9/39a.png)
 
-The gender is shown with react-semantic-ui component [Icon](https://react.semantic-ui.com/elements/icon/#gendersicons-can-represent-genders-or-types-of-sexuality) 
+The gender is shown with react-semantic-ui component [Icon](https://react.semantic-ui.com/elements/icon/#gendersicons-can-represent-genders-or-types-of-sexuality).
 
 **Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument:
 
@@ -962,7 +962,7 @@ Let's add an <i>Entry</i> field to our patient data so that a patient's data con
 
 Let's ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy/misc/blob/master/patients.ts).
 
-**Notice:** This time the data is not in .json format but instead in the .ts-format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented so only correct the paths where they are imported from if needed.
+**Notice:** This time, the data is not in the .json format but instead in the .ts format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented, so only correct the paths where they are imported from if needed.
 
 Let us now create a proper <i>Entry</i> type based on the data we have.
 
@@ -999,13 +999,13 @@ If we take a closer look at the data, we can see that the entries are actually q
 }
 ```
 
-Immediately we can see that while the first few fields are the same, the first entry has a <i>discharge</i> field and the second entry has <i>employerName</i> and <i>sickLeave</i> fields. 
-All the entries seem to have some fields in common, but some fields are entry specific. 
+Immediately, we can see that while the first few fields are the same, the first entry has a <i>discharge</i> field and the second entry has <i>employerName</i> and <i>sickLeave</i> fields. 
+All the entries seem to have some fields in common, but some fields are entry-specific. 
 
 When looking at the <i>type</i>, we can see that there are actually three kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>.
 This indicates we need three separate types. Since they all have some fields in common, we might just want to create a base entry interface that we can extend with the different fields in each type. 
 
-When looking at the data, it seems that the fields <i>id</i>, <i>description</i>, <i>date</i> and <i>specialist</i> are something that can be found from each entry. On top of that, it seems that the <i>diagnosisCodes</i> is only found in one <i>OccupationalHealthCare</i> and one <i>Hospital</i> type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the <i>HealthCheck</i> type as well, 
+When looking at the data, it seems that the fields <i>id</i>, <i>description</i>, <i>date</i> and <i>specialist</i> are something that can be found in each entry. On top of that, it seems that the <i>diagnosisCodes</i> is only found in one <i>OccupationalHealthCare</i> and one <i>Hospital</i> type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the <i>HealthCheck</i> type as well, 
 since it might just not be used in these specific entries.
 
 So our <i>BaseEntry</i> from which each type could be extended from would be the following:
@@ -1033,7 +1033,7 @@ interface BaseEntry {
 }
 ```
 
-As you might remember <i>Array&lt;Type&gt;</i> is just an alternative way to say <i>Type[]</i>. In cases like this it is just much more clear to use the array convention since the other option would be to define the type by saying <i>Diagnosis['code'][]</i> which starts to look a bit strange.
+As you might remember, <i>Array&lt;Type&gt;</i> is just an alternative way to say <i>Type[]</i>. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying <i>Diagnosis['code'][]</i> which starts to look a bit strange.
 
 Now that we have the <i>BaseEntry</i> defined, we can start creating the extended entry types we will actually be using. Let's start by creating the <i>HealthCheckEntry</i> type.
 
@@ -1054,7 +1054,7 @@ interface HealthCheckEntry extends BaseEntry {
 }
 ```
 
-Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine them in an union and export them as an Entry type like this:
+Now we only need to create the <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> types so we can combine them in a union and export them as an Entry type like this:
 
 ```js
 export type Entry =
@@ -1062,7 +1062,7 @@ export type Entry =
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
 ```
-An important point concerning unions is that, when you use them with `Omit` to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the `id` from each `Entry`, we could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type, would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
+An important point concerning unions is that, when you use them with `Omit` to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the `id` from each `Entry`. We could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
 
 ```ts
 // Define special omit for unions
@@ -1079,17 +1079,17 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 #### 9.19: patientor, step4
 
-Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to a individual patient's route
+Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
 ![](../../images/9/40.png)
-
-Use types properly in the backend! For now there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
+hj
+Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 
 #### 9.20: patientor, step5
 
 Extend a patient's page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of the patient's entries. 
 
-You can use the same type definition for an <i>Entry</i> in the frontend. For these exercises it is enough just to copy/paste the definitions from the backend to the frontend.
+You can use the same type definition for an <i>Entry</i> in the frontend. For these exercises, it is enough to just copy/paste the definitions from the backend to the frontend.
 
 Your solution could look like this:
 
@@ -1097,17 +1097,17 @@ Your solution could look like this:
 
 #### 9.21: patientor, step6
 
-Fetch and add diagnoses to application state from <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
+Fetch and add diagnoses to the application state from the <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
 ![](../../images/9/42.png)
 
 #### 9.22: patientor, step7
 
-Extend the entry-listing in the patient page to include the Entry's details with a new component that shows rest of the information of the patients entries distinguishing different types from each other. 
+Extend the entry listing in the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other. 
 
 You could use eg. [Icon](https://react.semantic-ui.com/elements/icon/) or some other [SemanticUI](https://react.semantic-ui.com/) component to get appropriate visuals for your listing.
 
-You should use a _switch case_ based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten. 
+You should use a _switch case_-based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten. 
 
 Like this:
 
@@ -1123,7 +1123,7 @@ The resulting entries in the listing <i>could</i> look something like this:
 
 ### Add patient form
 
-Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our add patient form in our app. Here's a small intro from the Formiks's documentation:
+Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our app's add patient form. Here's a small intro from the Formik's documentation:
 
 > Formik is a small library that helps you with the 3 most annoying parts:
 >
@@ -1135,13 +1135,13 @@ Form handling can sometimes be quite a nuisance in React. That's why we have dec
 
 The code for the form can be found from <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found from <i>src/AddPatientModal/FormField.tsx</i>.
 
-Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, called simply <i>PatientFormValues</i>. The type is a modified version of the <i>Patient</i> type, with the <i>id</i> and <i>entries</i> properties omitted. We don't want the user to be able to submit those when creating a new patient. The <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
+Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, which we have simply called <i>PatientFormValues</i>. The type is a modified version of the <i>Patient</i> type with the <i>id</i> and <i>entries</i> properties omitted. We don't want the user to be able to submit those when creating a new patient. The <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
 
 ```js
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
 ```
 
-Next we declare the props for our form component:
+Next, we declare the props for our form component:
 
 ```js
 interface Props {
@@ -1166,7 +1166,7 @@ Now before we continue, let's take a look at our form helpers in <i>FormField.ts
 If you check what is exported from the file, you'll find the type <i>GenderOption</i> and the function components <i>SelectField</i> and <i>TextField</i>.
 
 Let's take a closer look at <i>SelectField</i> and the types around it.
-First we create a generic type for each option object, that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field.
+First, we create a generic type for each option object that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field.
 Since the only options we want to allow are different genders, we set that the <i>value</i> should be of type <i>Gender</i>.
 
 ```js
@@ -1176,7 +1176,7 @@ export type GenderOption = {
 };
 ```
 
-In <i>AddPatientForm.tsx</i> we use the <i>GenderOption</i> type for the <i>genderOptions</i> variable, declaring it to be an array containing objects of type <i>GenderOption</i>:
+In <i>AddPatientForm.tsx</i>, we use the <i>GenderOption</i> type for the <i>genderOptions</i> variable, declaring it to be an array containing objects of type <i>GenderOption</i>:
 
 ```js
 const genderOptions: GenderOption[] = [
@@ -1186,7 +1186,7 @@ const genderOptions: GenderOption[] = [
 ];
 ```
 
-Next look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There you can see that options is an array of <i>GenderOption</i> types.
+Next, look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There, you can see that <i>options</i> is an array of <i>GenderOption</i> types.
 
 ```js
 type SelectFieldProps = {
@@ -1196,7 +1196,7 @@ type SelectFieldProps = {
 };
 ```
 
-The function component <i>SelectField</i> in itself is pretty straight forward. It renders the label, a select element, and all given option elements (or actually their labels and values).
+The function component <i>SelectField</i> in itself is pretty straightforward. It renders the label, a select element, and all given option elements (or, actually, their labels and values).
 
 ```jsx
 export const SelectField = ({
@@ -1238,7 +1238,7 @@ export const TextField = ({ field, label, placeholder }: TextProps) => (
 );
 ```
 
-Note, that we use the Formik [ErrorMessage](https://jaredpalmer.com/formik/docs/api/errormessage) component to render an error message for the input when needed. 
+Note that we use the Formik [ErrorMessage](https://jaredpalmer.com/formik/docs/api/errormessage) component to render an error message for the input when needed. 
 The component does everything under the hood, and we don't need to specify what it should do.
 
 It would also be possible to get hold of the error messages within the component by using the prop <i>form</i>: 
@@ -1251,12 +1251,12 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
 ```
 
 Now, back to the  actual form component in <i>AddPatientForm.tsx</i>.
-The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: <i>initialValues</i> and <i>onSubmit</i>. The function of the props is quite self explanatory.
+The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: <i>initialValues</i> and <i>onSubmit</i>. The function of the props is quite self-explanatory.
 The Formik wrapper keeps a track of your form's state, and then exposes it and a few resuable methods and event handlers to your form via props.
 
-We are also using an optional <i>validate</i> prop, that expects a validation function and returns an object containing possible errors. Here we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component. 
+We are also using an optional <i>validate</i> prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component. 
  
-First have a look at the entire component. We will later discuss the different parts in detail.
+First, have a look at the entire component. We will later discuss the different parts in detail.
 
 ```jsx
 interface Props {
@@ -1353,11 +1353,11 @@ export default AddPatientForm;
 ```
 
 As a child of our Formik wrapper, we have a <i>function</i> which returns the form contents.
-We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element. Inside of the Form element we use our <i>TextField</i> and <i>SelectField</i> components, that we created in <i>FormField.tsx</i>.
+We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element. Inside of the Form element, we use our <i>TextField</i> and <i>SelectField</i> components that we created in <i>FormField.tsx</i>.
 
-Lastly we create two buttons: one for cancelling the form submission and one for submitting the form.
+Lastly, we create two buttons: one for cancelling the form submission and one for submitting the form.
 The cancel button calls the <i>onCancel</i> callback straight away when clicked. 
-The submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. The submit button is enabled only if the form is <i>valid</i> and <i>dirty</i>, which means that user has edited some of the fields.
+The submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. The submit button is enabled only if the form is <i>valid</i> and <i>dirty</i>, which means that the user has edited some of the fields.
 
 We handle form submission through Formik, because it allows us to call the validation function before 
 performing the actual submission. If the validation function returns any errors, the submission is cancelled.
@@ -1380,7 +1380,7 @@ The buttons are set inside a SemanticUI [Grid](https://react.semantic-ui.com/col
 ```
 
 The <i>onSubmit</i> callback has been passed down all the way from our patient list page.
-Basically it sends a HTTP POST request to our backend, adds the patient returned from the backend to our app's state and closes the modal. 
+Basically, it sends an HTTP POST request to our backend, adds the patient returned from the backend to our app's state and closes the modal. 
 If the backend returns an error, the error is displayed on the form.
 
 Here is our submit function:
@@ -1405,7 +1405,7 @@ const submitNewPatient = async (values: FormValues) => {
 };
 ```
 
-With this material you should be able to complete the rest of this part's exercises. When in doubt, try reading the existing code to find clues on how to proceed!
+With this material, you should be able to complete the rest of this part's exercises. When in doubt, try reading the existing code to find clues on how to proceed!
 
 </div>
 
@@ -1415,23 +1415,23 @@ With this material you should be able to complete the rest of this part's exerci
 
 #### 9.23: patientor, step8
 
-We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so at the moment it is pretty useless as an electronic medical record.
+We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
 
-Your next task is to add an endpoint <i>/api/patients/:id/entries</i> to your backend, through which you can POST an entry for a patient. 
+Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backend, through which you can POST an entry for a patient. 
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
 #### 9.24: patientor, step9
 
-Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page. 
+Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page. 
 
-In this exercise it is enough to **support <i>one</i> entry type**, and you do not have to handle any errors. It is enough if a new entry can be created when the form is filled with valid data.
+In this exercise, it is enough to **support <i>one</i> entry type**, and you do not have to handle any errors. It is enough if a new entry can be created when the form is filled with valid data.
 
-Upon a successful submit the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
+Upon a successful submit, the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready made component _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
+Note that the file [FormField.tsx](https://github.com/fullstack-hy/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
 
 It can be used as follows:
 
@@ -1472,7 +1472,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 };
 ```
 
-There is also ready-made component _NumberField_ for the numeric values with a limited range
+There is also ready-made component _NumberField_ for the numeric values with a limited range:
 
 ```js
 <Field
