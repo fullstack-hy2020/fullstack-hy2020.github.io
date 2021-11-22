@@ -103,6 +103,8 @@ Muutetaan ylläoleva sovellus käyttämään React routeria. Asennetaan React ro
 npm install react-router-dom@5.3.0
 ```
 
++**HUOM:** Materiaalin ohjeet ovat React routerin versiolle 5, joka eroaa hieman versiosta 6.
+
 React routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:
 
 ```js

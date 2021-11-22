@@ -106,6 +106,8 @@ Let's change the above application to use React router. First, we install React 
 npm install react-router-dom@5.3.0
 ```
 
++**NB:** This material has instructions on how to use React router version 5, which is a bit different than version 6.
+
 The routing provided by React Router is enabled by changing the application as follows:
 
 ```js
