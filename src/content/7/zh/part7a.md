@@ -119,7 +119,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 让我们将上面的应用改为使用 React 路由
 
 ```bash
-npm install react-router-dom
+npm install react-router-dom@5.3.0
 ```
 
 <!-- The routing provided by React Router is enabled by changing the application as follows: -->
