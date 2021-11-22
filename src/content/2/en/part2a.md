@@ -110,7 +110,7 @@ The file <i>index.js</i> looks like:
 
 ```js
 import ReactDOM from 'react-dom'
-import App from './App.js'
+import App from './App'
 
 const notes = [
   {
@@ -357,7 +357,7 @@ As such, one way to define the row generation without getting errors is:
 
 This is; however, **not recommended** and can create undesired problems even if it seems to be working just fine.
 
-Read more about this in [this article](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318).
+Read more about this in [this article](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318).
 
 ### Refactoring Modules
 
@@ -417,7 +417,7 @@ We have been using modules the whole time. The first few lines of the file <i>in
 
 ```js
 import ReactDOM from 'react-dom'
-import App from './App.js'
+import App from './App'
 ```
 
 [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The module <i>react-dom</i> is placed into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_
@@ -470,7 +470,7 @@ Modules have plenty of other uses other than enabling component declarations to 
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1).
 
-Note that the <i>master</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
+Note that the <i>main</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 
@@ -675,7 +675,7 @@ const total = parts.reduce((s, p) => {
 })
 ```
 
-**Pro tip2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) that automatically changes short form arrow functions into their longer form, and vice versa. 
+**Pro tip 2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) that automatically changes short form arrow functions into their longer form, and vice versa. 
 
 ![](../../images/2/5b.png)
 
