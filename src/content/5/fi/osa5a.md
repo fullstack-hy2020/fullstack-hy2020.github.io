@@ -13,7 +13,7 @@ Frontend näyttää tällä hetkellä olemassaolevat muistiinpanot ja antaa muut
 
 Toteutetaan nyt osa käyttäjienhallinnan edellyttämästä toiminnallisuudesta frontendiin. Aloitetaan käyttäjän kirjautumisesta. Oletetaan vielä tässä osassa, että käyttäjät luodaan suoraan backendiin.
 
-Sovelluksen yläosaan on nyt lisätty kirjautumislomake, myös uuden muistiinpanon lisäämisestä huolehtiva lomake on siirretty muistiinpanojen alapuolelle:
+Sovelluksen yläosaan on nyt lisätty kirjautumislomake, ja uuden muistiinpanon lisäämisestä huolehtiva lomake on siirretty muistiinpanojen alapuolelle:
 
 ![](../../images/5/1e.png)
 
@@ -87,9 +87,9 @@ export default App
 
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branchissa <i>part5-1</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branchissa <i>part5-1</i>.
 
-Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa2#lomakkeet). Lomakkeen kenttiä varten on lisätty komponentin tilaan  <i>username</i> ja <i>password</i>. Molemmille kentille on määritelty muutoksenkäsittelijä, joka synkronoi kenttään tehdyt muutokset komponentin <i>App</i> tilaan. Muutoksenkäsittelijä on yksinkertainen, se destrukturoi parametrina tulevasta oliosta kentän <i>target</i> ja asettaa sen arvon vastaavaan tilaan:
+Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa2#lomakkeet). Lomakkeen kenttiä varten on lisätty komponentin tilaan <i>username</i> ja <i>password</i>. Molemmille kentille on määritelty muutoksenkäsittelijä, joka synkronoi kenttään tehdyt muutokset komponentin <i>App</i> tilaan. Muutoksenkäsittelijä on yksinkertainen, se destrukturoi parametrina tulevasta oliosta kentän <i>target</i> ja asettaa sen arvon vastaavaan tilaan:
 
 ```js
 ({ target }) => setUsername(target.value)
@@ -97,9 +97,9 @@ Kirjautumislomakkeen käsittely noudattaa samaa periaatetta kuin [osassa 2](/osa
 
 Kirjautumislomakkeen lähettämisestä vastaava metodi _handleLogin_ ei tee vielä mitään.
 
-Kirjautuminen tapahtuu tekemällä HTTP POST -pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliin, tiedostoon <i>services/login.js</i>.
+Kirjautuminen tapahtuu tekemällä HTTP POST -pyyntö palvelimen osoitteeseen <i>api/login</i>. Eristetään pyynnön tekevä koodi omaan moduuliinsa, tiedostoon <i>services/login.js</i>.
 
-Käytetään nyt promisejen sijaan <i>async/await</i>-syntaksia HTTP-pyynnön tekemiseen:
+Käytetään HTTP-pyynnön tekemiseen nyt promisejen sijaan <i>async/await</i>-syntaksia:
 
 ```js
 import axios from 'axios'
@@ -203,7 +203,7 @@ const App = () => {
 }
 ```
 
-ja renderöidään ne ehdollisesti komponenttiin <i>App</i> :
+Renderöidään funktiot ehdollisesti komponenttiin <i>App</i>:
 
 ```js
 const App = () => {
@@ -311,7 +311,7 @@ Ratkaisu näyttää hieman rumalta, mutta jätämme sen koodiin toistaiseksi.
 Sovelluksemme pääkomponentti <i>App</i> on tällä hetkellä jo aivan liian laaja ja nyt tekemämme muutokset ovat ilmeinen signaali siitä, että lomakkeet olisi syytä refaktoroida omiksi komponenteikseen. Jätämme sen kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-2), branchissa <i>part5-2</i>. 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-2), branchissa <i>part5-2</i>. 
 
 
 ### Muistiinpanojen luominen
@@ -335,7 +335,7 @@ const handleLogin = async (event) => {
 }
 ```
 
-Korjataan uusien muistiinpanojen luominen siihen muotoon, mitä backend edellyttää, eli lisätään kirjautuneen käyttäjän token HTTP-pyynnön Authorization-headeriin.
+Korjataan uusien muistiinpanojen luominen backendin edellyttämään muotoon, eli lisätään kirjautuneen käyttäjän token HTTP-pyynnön Authorization-headeriin.
 
 <i>noteService</i>-moduuli muuttuu seuraavasti:
 
@@ -401,11 +401,11 @@ Uusien muistiinpanojen luominen onnistuu taas!
 
 ### Tokenin tallettaminen selaimen local storageen
 
-Sovelluksessamme on ikävä piirre: kun sivu uudelleenladataan, tieto käyttäjän kirjautumisesta katoaa. Tämä hidastaa melkoisesti myös sovelluskehitystä, esim. testatessamme uuden muistiinpanon luomista, joudumme joka kerta kirjautumaan järjestelmään.
+Sovelluksessamme on ikävä piirre: kun sivu uudelleenladataan, tieto käyttäjän kirjautumisesta katoaa. Tämä hidastaa melkoisesti myös sovelluskehitystä, sillä esim. testatessamme uuden muistiinpanon luomista, joudumme joka kerta kirjautumaan järjestelmään.
 
 Ongelma korjaantuu helposti tallettamalla kirjautumistiedot [local storageen](https://developer.mozilla.org/en-US/docs/Web/API/Storage) eli selaimessa olevaan avain-arvo- eli [key-value](https://en.wikipedia.org/wiki/Key-value_database)-periaatteella toimivaan tietokantaan.
 
-Local storage on erittäin helppokäyttöinen. Metodilla [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem) talletetaan tiettyä <i>avainta</i> vastaava <i>arvo</i>, esim:
+Local storage on erittäin helppokäyttöinen. Metodilla [setItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/setItem) talletetaan tiettyä <i>avainta</i> vastaava <i>arvo</i>. Esim.
 
 ```js
 window.localStorage.setItem('name', 'juha tauriainen')
@@ -419,7 +419,7 @@ Avaimen arvo selviää metodilla [getItem](https://developer.mozilla.org/en-US/d
 window.localStorage.getItem('name')
 ```
 
-ja [removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) poistaa avaimen.
+[removeItem](https://developer.mozilla.org/en-US/docs/Web/API/Storage/removeItem) poistaa avaimen.
 
 Storageen talletetut arvot säilyvät vaikka sivu uudelleenladattaisiin. Storage on ns. [origin](https://developer.mozilla.org/en-US/docs/Glossary/Origin)-kohtainen, eli jokaisella selaimella käytettävällä web-sovelluksella on oma storagensa.
 
@@ -458,8 +458,7 @@ Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voida
 
 Sovellusta on vielä laajennettava siten, että kun sivulle tullaan uudelleen, esim. selaimen uudelleenlataamisen yhteydessä, tulee sovelluksen tarkistaa löytyykö local storagesta tiedot kirjautuneesta käyttäjästä. Jos löytyy, asetetaan ne sovelluksen tilaan ja <i>noteServicelle</i>.
 
-
-Oikea paikka asian hoitamiselle on [effect hook](https://reactjs.org/docs/hooks-effect.html), eli [osasta 2](/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit) tuttu mekanismi, jonka avulla haemme frontendiin palvelimelle talletetut muistiinpanot. 
+Oikea paikka asian hoitamiselle on [effect hook](https://reactjs.org/docs/hooks-effect.html) eli [osasta 2](/osa2/palvelimella_olevan_datan_hakeminen#effect-hookit) tuttu mekanismi, jonka avulla haemme palvelimelle talletetut muistiinpanot frontendiin. 
 
 Effect hookeja voi olla useita, joten tehdään oma hoitamaan kirjautuneen käyttäjän ensimmäinen sivun lataus:
 
@@ -499,19 +498,19 @@ Efektin parametrina oleva tyhjä taulukko varmistaa sen, että efekti suoritetaa
 
 Nyt käyttäjä pysyy kirjautuneena sovellukseen ikuisesti. Sovellukseen olisikin kenties syytä lisätä <i>logout</i>-toiminnallisuus, joka poistaisi kirjautumistiedot local storagesta. Jätämme kuitenkin uloskirjautumisen harjoitustehtäväksi.
 
-Meille riittää se, että sovelluksesta on mahdollista kirjautua ulos kirjoittamalla konsoliin
+Meille riittää se, että sovelluksesta on mahdollista kirjautua ulos kirjoittamalla konsoliin:
 
 ```js
 window.localStorage.removeItem('loggedNoteappUser')
 ```
 
-tai local storagen tilan kokonaan nollaavan komennon
+Toinen tapa on käyttää local storagen tilan kokonaan nollaavaa komentoa:
 
 ```js
 window.localStorage.clear()
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-3), branchissa <i>part5-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-3), branchissa <i>part5-3</i>.
 
 </div>
 
@@ -521,32 +520,32 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://gith
 
 Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. 
 
-Voit ottaa tehtävien pohjaksi [Githubista](https://github.com/fullstack-hy/bloglist-frontend/) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
+Voit ottaa tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy/bloglist-frontend/) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
 
-Lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
+Lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
-Tämän osan alun tehtävät käytännössä kertaavat kaiken oleellisen tämän kurssin puitteissa Reactista läpikäydyn asian ja voivat siinä mielessä olla kohtuullisen haastavia, erityisesti jos edellisen osan tehtävissä toteuttamasi backend toimii puutteellisesti. Saattaakin olla varminta siirtyä käyttämään osan 4 mallivastauksen backendia.
+Tämän osan alun tehtävät kertaavat käytännössä kaiken oleellisen tämän kurssin puitteissa Reactista läpikäydyn asian ja voivat siinä mielessä olla kohtuullisen haastavia, erityisesti jos edellisen osan tehtävissä toteuttamasi backend toimii puutteellisesti. Saattaakin olla varminta siirtyä käyttämään osan 4 mallivastauksen backendia.
 
 Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erityisesti konsolin tarkkailu.
 
-**Varoitus:** jos huomaat kirjoittavasi samaan funktioon sekaisin async/awaitia ja _then_-kutsuja, on 99.9% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
+**Varoitus:** Jos huomaat kirjoittavasi samaan funktioon sekaisin async/awaitia ja _then_-kutsuja, on 99.9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy/bloglist-frontend) olevan sovellusrunko kloonaamalla se sopivaan paikkaan komennolla
+Ota tehtävien pohjaksi [GitHubissa](https://github.com/fullstack-hy/bloglist-frontend) oleva sovellusrunko kloonaamalla se sopivaan paikkaan:
 
 ```bash
 git clone https://github.com/fullstack-hy/bloglist-frontend
 ```
 
-<i>Poista kloonatun sovelluksen git-konfiguraatio</i>
+Seuraavaksi poista kloonatun sovelluksen Git-konfiguraatio:
 
 ```bash
 cd bloglist-frontend   // mene kloonatun repositorion hakemistoon
 rm -rf .git
 ```
 
-Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan sovelluksen riippuvuudet:
+Sovellus käynnistyy normaaliin tapaan, mutta joudut ensin asentamaan riippuvuudet:
 
 ```bash
 npm install
@@ -561,7 +560,7 @@ Jos käyttäjä ei ole kirjautunut, sivulla näytetään <i>pelkästään</i> ki
 
 ![](../../images/5/4e.png)
 
-Kirjautuneelle käyttäjälle näytetään kirjautuneen käyttäjän nimi sekä blogien lista
+Kirjautuneelle käyttäjälle näytetään kirjautuneen käyttäjän nimi sekä blogien lista:
 
 ![](../../images/5/5e.png)
 
@@ -593,7 +592,7 @@ Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa
 
 #### 5.2: blogilistan frontend, step2
 
-Tee kirjautumisesta "pysyvä" local storagen avulla. Tee sovellukseen myös mahdollisuus uloskirjautumiseen
+Tee kirjautumisesta "pysyvä" local storagen avulla. Tee sovellukseen myös mahdollisuus uloskirjautumiseen:
 
 ![](../../images/5/6e.png)
 
@@ -607,11 +606,11 @@ Laajenna sovellusta siten, että kirjautunut käyttäjä voi luoda uusia blogeja
 
 #### 5.4*: blogilistan frontend, step4
 
-Toteuta sovellukseen notifikaatiot, jotka kertovat sovelluksen yläosassa onnistuneista ja epäonnistuneista toimenpiteistä. Esim. blogin lisäämisen yhteydessä voi antaa seuraavan notifikaation
+Toteuta sovellukseen notifikaatiot, jotka kertovat sovelluksen yläosassa onnistuneista ja epäonnistuneista toimenpiteistä. Esim. blogin lisäämisen yhteydessä voi antaa seuraavan notifikaation:
 
 ![](../../images/5/8e.png)
 
-epäonnistunut kirjautuminen taas johtaa notifikaatioon
+Epäonnistunut kirjautuminen taas johtaa virhenotifikaatioon:
 
 ![](../../images/5/9e.png)
 
@@ -624,16 +623,16 @@ Notifikaation tulee olla näkyvillä muutaman sekunnin ajan. Värien lisäämine
 
 ### Huomio local storagen käytöstä
 
-Edellisen osan [lopussa](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todettiin että token-perustaisen kirjautumisen haasteena on se, miten toimia tilanteissa, joissa tokenin haltijalta pitäisi poistaa pääsy API:n tarjoamaan dataan. 
+Edellisen osan [lopussa](/osa4/token_perustainen_kirjautuminen#token-perustaisen-kirjautumisen-ongelmat) todettiin, että token-perustaisen kirjautumisen haasteena on se, miten toimia tilanteissa, joissa tokenin haltijalta pitäisi poistaa pääsy API:n tarjoamaan dataan. 
 
-Ratkaisuja ongelmaan on kaksi. Tokenille voidaan asettaa voimassaoloaika, jonka päätyttyä käyttäjä pakotetaan kirjautumaan järjestelmään uudelleen. Toinen ratkaisu taas on tallentaa tokeniin liittyvät tiedot palvelimen tietokantaan, ja tarkastaa jokaisen API-kutsun yhteydessä onko tokeniin liittyvä käyttöoikeus tai "sessio" edelleen voimassa. Jälkimmäistä tapaa kutsutaan usein palvelinpuolen sessioksi.
+Ratkaisuja ongelmaan on kaksi. Tokenille voidaan asettaa voimassaoloaika, jonka päätyttyä käyttäjä pakotetaan kirjautumaan järjestelmään uudelleen. Toinen ratkaisu on tallentaa tokeniin liittyvät tiedot palvelimen tietokantaan ja tarkastaa jokaisen API-kutsun yhteydessä, onko tokeniin liittyvä käyttöoikeus tai "sessio" edelleen voimassa. Jälkimmäistä tapaa kutsutaan usein palvelinpuolen sessioksi.
 
-Riippumatta siitä miten palvelin hoitaa tokenin voimassaolon tarkastuksen, saattaa tokenin tallentaminen local storageen olla pienimuotoinen turvallisuusriski jos sovelluksessa on ns. [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) -hyökkäyksen mahdollistava tietoturva-aukko. XSS-hyökkäys mahdollistuu jos sovelluksen suoritettavaksi on mahdollista ujuttaa mielivaltaista JavaScript-koodia, minkä taas ei pitäisi olla "normaalisti" Reactia käyttäen mahdollista sillä [React sanitoi](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) renderöimänsä sisällön, eli ei suorita sitä koodina. 
+Riippumatta siitä miten palvelin hoitaa tokenin voimassaolon tarkastuksen, saattaa tokenin tallentaminen local storageen olla pienimuotoinen turvallisuusriski jos sovelluksessa on ns. [Cross Site Scripting (XSS)](https://owasp.org/www-community/attacks/xss/) -hyökkäyksen mahdollistava tietoturva-aukko. XSS-hyökkäys mahdollistuu, jos sovelluksen suoritettavaksi on mahdollista ujuttaa mielivaltaista JavaScript-koodia, minkä taas ei pitäisi olla "normaalisti" Reactia käyttäen mahdollista sillä [React sanitoi](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks) renderöimänsä sisällön, eli ei suorita sitä koodina. 
 
 Toki jos haluaa pelata varman päälle, ei tokenia kannata tallettaa local storageen ainakaan niissä tapauksissa, joissa potentiaalisella tokenin vääriin käsiin joutumisella olisi traagisia seurauksia. 
 
-Erääksi turvallisemmaksi ratkaisuksi kirjautuneen käyttäjän muistamiseen on tarjottu [httpOnly-evästeitä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies) (engl. httpOnly cookies), joita käytettäessä JavaScipt-koodi ei pääse ollenkaan käsiksi session muistavaan tunnisteeseen. Pelkästään yhden sivun renderöivien SPA-sovellusten toteuttaminen HttpOnly-evästeiden avulla ei kuitenkaan ole helppoa. Niiden käyttö edellyttäisi erillistä näkymää kirjautumista varten. 
+Erääksi turvallisemmaksi ratkaisuksi kirjautuneen käyttäjän muistamiseen on tarjottu [httpOnly-evästeitä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Cookies#restrict_access_to_cookies) (engl. httpOnly cookies), joita käytettäessä JavaScript-koodi ei pääse ollenkaan käsiksi session muistavaan tunnisteeseen. Pelkästään yhden sivun renderöivien SPA-sovellusten toteuttaminen HttpOnly-evästeiden avulla ei kuitenkaan ole helppoa. Niiden käyttö edellyttäisi erillistä näkymää kirjautumista varten. 
 
-Täytyy kuitenkin huomata, että httpOnly-evästeisiinkään perustuva ratkaisu ei ole vedenpitävä, joidenkin mukaan se on itseasiassa [yhtä "turvaton"](https://academind.com/tutorials/localstorage-vs-cookies-xss/) kuin local strorage. Tärkeintä on siis jokatapauksessa ohjelmoida sovellukset  [tavoilla](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html) jotka minimoivat XSS-hyökkäysten riskit.
+Täytyy kuitenkin huomata, että httpOnly-evästeisiinkään perustuva ratkaisu ei ole vedenpitävä. Joidenkin mukaan se on itse asiassa [yhtä "turvaton"](https://academind.com/tutorials/localstorage-vs-cookies-xss/) kuin local strorage. Tärkeintä on siis joka tapauksessa ohjelmoida sovellukset [tavoilla](https://cheatsheetseries.owasp.org/cheatsheets/DOM_based_XSS_Prevention_Cheat_Sheet.html), jotka minimoivat XSS-hyökkäysten riskit.
 
 </div>
