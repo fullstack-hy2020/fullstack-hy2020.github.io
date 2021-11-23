@@ -110,7 +110,7 @@ console.log(m2)
 // tulostuu [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ]
 ```
 
-Yllä lukuja sisältävästä taulukosta tehdään map-metodin avulla HTML-koodia sisältävä taulukko. Tulemmekin kurssin [osassa2](/osa2) näkemään, että mapia käytetään Reactissa todella usein.
+Yllä lukuja sisältävästä taulukosta tehdään map-metodin avulla HTML-koodia sisältävä taulukko. Tulemmekin kurssin [osassa 2](/osa2) näkemään, että mapia käytetään Reactissa todella usein.
 
 Taulukon yksittäisiä alkioita on helppo sijoittaa muuttujiin [destrukturoivan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) sijoituslauseen avulla:
 
