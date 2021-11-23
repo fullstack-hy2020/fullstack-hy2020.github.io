@@ -62,7 +62,7 @@ TypeScript is a structurally typed language. In structural typing, two elements 
 
 #### Type inference
 
-The TypeScript compiler can attempt to infer the type information if no type has been specified. Variable's type can be inferred based on its assigned value and its usage. The type inference take place when initializing variables and members, setting parameter default values, and determining function return types.
+The TypeScript compiler can attempt to infer the type information if no type has been specified. Variables' type can be inferred based on its assigned value and its usage. The type inference take place when initializing variables and members, setting parameter default values, and determining function return types.
 
 For example consider the function <i>add</i>
 
@@ -76,7 +76,7 @@ const add = (a: number, b: number) => {
 
 The function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type <i>number</i>.
 
-As a more complex example let's consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip it for now.
+As a more complex example, let's consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip it for now.
 
 ```js
 type CallsFunction = (callback: (result: string) => any) => void;
@@ -94,9 +94,9 @@ func((result) => {
 First we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) called <i>CallsFunction</i>.
 CallsFunction is a function type with one parameter <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameter and returns [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) value.  As we will learn later in this part <i>any</i> is a kind of "wildcard" type that can represent any type. Also CallsFunction returns [void](https://www.typescriptlang.org/docs/handbook/basic-types.html#void) type.
 
-Next we define the function <i>func</i> of  type <i>CallsFunction</i>. From the function's type we can infer that its parameter function cb will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, which will cause an error in TypeScript. 
+Next we define the function <i>func</i> of type <i>CallsFunction</i>. From the function's type we can infer that its parameter function cb will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, which will cause an error in TypeScript. 
 
-Lastly we call <i>func</i> giving it the following function as a parameter
+Lastly we call <i>func</i>, giving it the following function as a parameter
 
 ```js
 (result) => {
@@ -134,7 +134,7 @@ On different forums you may stumble upon a lot of different arguments either for
 
 
 <!-- First of all, probably the most noticeable feature with TypeScript is that it offers **type checking and static code analysis**. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond it's scope etc. With the help of a sufficient linter settings, it's hard to even think of runtime errors that you may be able to produce. -->
-First of all, TypeScript offers <i>type checking and static code analysis</i>. We can require values to be of a certain type, and have the compiler warn about using them wrong. This can reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests.
+First of all, TypeScript offers <i>type checking and static code analysis</i>. We can require values to be of a certain type, and have the compiler warn about using them incorrectly. This can reduce runtime errors, and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests.
 The static code analysis doesn't only warn about wrongful type usage, but also other mistakes such as misspelling a variable or function name or trying to use a variable beyond its scope. 
 
 
