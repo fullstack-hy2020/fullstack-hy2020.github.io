@@ -119,15 +119,15 @@ For example:
 
 ```jsx
 const MyComp1 = () => {
-  // Typescript automatically infers the return type of this function 
+  // TypeScript automatically infers the return type of this function 
   // (i.e., a react component) as `JSX.Element`.
-  return <div>Typescript has auto inference!</div>
+  return <div>TypeScript has auto inference!</div>
 }
 
 const MyComp2 = (): JSX.Element => {
   // We are explicitly defining the return type of a function here 
   // (i.e., a react component).
-  return <div>Typescript React is easy.</div>
+  return <div>TypeScript React is easy.</div>
 }
 
 interface MyProps{
@@ -138,7 +138,7 @@ interface MyProps{
 const MyComp3 = ({label, price}: MyProps): JSX.Element => {
   // We are explicitly defining the parameter types using interface `MyProps` 
   // and return types as `JSX.Element` in this function (i.e., a react component).
-  return <div>Typescript is great.</div>
+  return <div>TypeScript is great.</div>
 }
 
 const MyComp4 = ({label, price}: {label: string, price: number}) => {
