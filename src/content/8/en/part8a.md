@@ -268,7 +268,7 @@ Let's implement a GraphQL server with today's leading library: [Apollo server](h
 Create a new npm project with _npm init_ and install the required dependencies.
 
 ```bash
-npm install apollo-server graphql
+npm install apollo-server graphql apollo-server-core
 ```
 
 The initial code is as follows: 
@@ -340,6 +340,9 @@ The heart of the code is an _ApolloServer_, which is given two parameters:
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+   plugins: [
+    ApolloServerPluginLandingPageGraphQLPlayground(),
+  ],
 })
 ```
 
