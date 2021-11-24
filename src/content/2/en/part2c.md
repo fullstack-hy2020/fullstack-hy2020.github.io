@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the third part of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how code executing in the browser communicates with the backend.
+For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the [third part](/en/part3) of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how code executing in the browser communicates with the backend.
 
 Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.
 
@@ -299,7 +299,7 @@ In other words, a promise is an object that represents an asynchronous operation
 2. The promise is <i>fulfilled</i>: It means that the operation has completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
-The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
+The first promise in our example is <i>fulfilled</i>, representing a successful `axios.get('http://localhost:3001/notes')` request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
 
 If, and when, we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:
 
