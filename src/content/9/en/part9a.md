@@ -14,7 +14,7 @@ TypeScript is a programming language designed for large-scale JavaScript develop
 ### Main principle
 
 TypeScript is a typed superset of JavaScript, and eventually it's compiled into plain JavaScript code. The programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. TypeScript being a superset of JavaScript means that it includes all the features of JavaScript and 
-its own additional features as well. In fact, all existing JavaScript code is actually valid TypeScript.
+its own additional features as well. In other words, all existing JavaScript code is actually valid TypeScript.
 
 TypeScript consists of three separate, but mutually fulfilling parts: 
 
