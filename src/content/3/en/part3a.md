@@ -346,7 +346,7 @@ const app = express()
 ```
 
 
-Next, we define two <i>routes</i> to the application. The first one defines an event handler, that is used to handle HTTP GET requests made to the application's <i>/</i> root:
+Next, we define two <i>routes</i> to the application. The first one defines an event handler that is used to handle HTTP GET requests made to the application's <i>/</i> root:
 
 ```js
 app.get('/', (request, response) => {
