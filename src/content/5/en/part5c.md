@@ -367,7 +367,7 @@ describe('<Togglable />', () => {
   test('renders its children', () => {
     expect(
       component.container.querySelector('.testDiv')
-    ).toBeDefined()
+    ).not.toBe(null)
   })
 
   test('at start the children are not displayed', () => {
