@@ -751,7 +751,7 @@ The solution is pretty good, but there's a beauty flaw in it. The result also co
 
 By carefully reading the documentation, you can find a [solution](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table):
 
-````js
+```js
 router.get('/', async (req, res) => {
   const users = await User.findAll({
     include: [
@@ -1434,7 +1434,7 @@ users.forEach(u => {
 
 We have noticed that the code for models and migrations is very repetitive. For example, the model of teams
 
-````js
+```js
 class Team extends Model {}
 
 Team.init({
