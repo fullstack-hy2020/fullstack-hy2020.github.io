@@ -476,6 +476,8 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
+</div>
+
 <div class="tasks">
 
 ### Tasks 13.1.-13.3.

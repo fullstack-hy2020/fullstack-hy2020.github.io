@@ -753,7 +753,7 @@ Modify the route for blogs and users so that the blogs show the user who added t
 
 <div class="content">
 
-## More queries
+### More queries
 
 So far our application has been very simple in terms of queries, queries have searched either a single row based on the master key using the METHOD [findByPk](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findByPk) or they have searched for all rows in the table using the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll). These are sufficient for the frontend of the application made in Section 5, but let's expand the backend so that we can also practice making slightly more complex queries.
 
