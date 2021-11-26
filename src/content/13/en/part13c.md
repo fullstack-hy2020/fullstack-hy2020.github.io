@@ -1536,6 +1536,4 @@ Note that the "exam done in Moodle" note refers to the [Full Stack Open course's
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/part0/general_info#parts-and-completion) for more information.
 
-**Keep in mind also that**, credits from this part will not be provided until the beta testing phase is at the end.
-
 </div>

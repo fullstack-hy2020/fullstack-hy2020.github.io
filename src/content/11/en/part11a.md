@@ -9,7 +9,7 @@ lang: en
 
 During this part, you will build a robust deployment pipeline to a ready made [example project](https://github.com/smartlyio/full-stack-open-pokedex) starting in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2). You will [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the example project and that will create you a personal copy of the repository. In the [last two](/en/part11/expanding_further#exercises-11-20-22) exercises, you will build another deployment pipeline for some of <i>your own</i> previously created app!
 
-There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 9, the submission goes to a different "course instance". 
+There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance". 
 
 This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finish at least parts 0 to 5 before starting this part.
 

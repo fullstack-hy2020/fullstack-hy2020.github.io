@@ -43,9 +43,9 @@ Exercise completion time statistics can be found via the [submission system](htt
 
 ### Parts and completion
 
-Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 13 credits. 
+Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 14 credits. 
 
-#### Parts 0-5 (core course) - Full Stack Web Development (5 cr, AYCSM141081en)
+#### Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
 The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk).
 
 Credits and grades are calculated as follows:
@@ -67,41 +67,41 @@ Once you have completed enough exercises for a passing grade, you can download t
 
 The last possible date for taking the exam is 10 January 2022. **Note that you must sign up for the exam by 9 January 2022, at the latest.**
 
-You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-13 credits and does not count towards your grade.
+You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count towards your grade.
 
 <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i>
 
-#### Part 6 - Full Stack Web Development, extension 1 (1 cr, AYCSM141082en)
+#### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 127 exercises for parts 0-7. 
 - [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-2c09d93d-4f75-4359-85a3-5f8e2c2c5ce6). 
 - [Request credits for part 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
+#### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 138 exercises for parts 0-7. 
 - [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51f0edb4-c137-4871-a1e0-d93ca9b47bdf). 
 - [Request credits for part 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
+#### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7.
 - Submit at least 22/26 exercises for part 8.
 - [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-5f475a66-7d83-4b0e-9413-65e83be3dd7e). 
 - [Request credits for part 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
+#### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
 By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
 - Submit at least 24/27 exercises for part 9.
 - [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f62d31aa-e737-4060-b930-373b5236fa08). 
 - [Request credits for part 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
+#### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
 By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native).
 - Submit at least 25 exercises for part 10. 
 - [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b2475f8c-e911-4a07-9993-549955381936). 
 - [Request credits for part 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
+#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
 By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. 
 More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
@@ -109,7 +109,7 @@ More information about this part's prerequisites and exercise submission can be 
 - [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33). 
 - [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 12 - Full Stack Web Development: Containers (1 cr, AYCSM14112)
+#### Part 12 - Full Stack Web Development: Containers (1 cr, CSM14113)
 
 By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. 
 More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
@@ -118,6 +118,14 @@ More information about this part's prerequisites and exercise submission can be 
 ). 
 - [Request credits for part 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
+#### Part 13 - Full Stack Web Development: relational databases (1 cr, CSM14114)
+
+By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. 
+More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
+- Submit all exercises for part 13. 
+- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-136d0c67-5348-468f-aa94-7e0b72197d91
+). 
+- [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 ### How to get your credits
 
@@ -218,7 +226,7 @@ See [more information on the project](https://github.com/FullStack-HY/misc/blob/
 
 ### Interview promise
 
-Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (13 + 10).
+Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10).
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 

@@ -37,9 +37,9 @@ Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet
 
 ### Osat ja suorittaminen
 
-Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-13 opintopisteen laajuisena. 
+Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
 
-#### Osat 0-5 (ydinkurssi) - Full Stack -websovelluskehitys (5 op, AYCSM141081)
+#### Osat 0-5 (ydinkurssi) - Full Stack -websovelluskehitys (5 op, CSM141081)
 
 Suorituksen opintopistemäärä ja arvosana määräytyvät kurssin osien 0-7 kaikkien tehtyjen tehtävien (myös tähdellä merkittyjen) perusteella.
 
@@ -59,41 +59,41 @@ Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. H
 
 Kokeen viimeinen suorituspäivä on 10.1.2022. **Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.**
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-13 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-14 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
 
-#### Osa 6 - Full Stack -websovelluskehitys, lisäosa 1 (1 op, AYCSM141082)
+#### Osa 6 - Full Stack -websovelluskehitys, lisäosa 1 (1 op, CSM141082)
 Suorittamalla vähintään 127 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
 -	Tee vähintään 127 tehtävää osista 0-7. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-2c09d93d-4f75-4359-85a3-5f8e2c2c5ce6)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 7 - Full Stack -websovelluskehitys, lisäosa 2 (1 op, AYCSM141083)
+#### Osa 7 - Full Stack -websovelluskehitys, lisäosa 2 (1 op, CSM141083)
 Suorittamalla vähintään 138 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
 -	Tee vähintään 138 tehtävää osista 0-7. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51f0edb4-c137-4871-a1e0-d93ca9b47bdf)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 8 - Full Stack -websovelluskehitys: GraphQL (1 op, AYCSM14113)
+#### Osa 8 - Full Stack -websovelluskehitys: GraphQL (1 op, CSM14113)
 Suorittamalla vähintään 22/26 tehtävää kurssin kahdeksannesta, GraphQL:ää käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Voit tehdä GraphQL:ää käsittelevän osuuden periaatteessa jo osan 5 jälkeen sillä sen sisältö ei riipu osista 6 ja 7.
 -	Tee vähintään 22/26 tehtävää osasta 8. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-5f475a66-7d83-4b0e-9413-65e83be3dd7e)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 9 - Full Stack -websovelluskehitys: TypeScript (1 op, AYCSM14110, englanniksi)
+#### Osa 9 - Full Stack -websovelluskehitys: TypeScript (1 op, CSM14110, englanniksi)
 Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScriptiä käsittelevästä osasta, voit laajentaa suoritustasi yhdellä opintopisteellä. Osa kannattaa suorittaa vasta sen jälkeen kun olet tehnyt osat 0-7.
 
 -	Tee vähintään 24/27 tehtävää osasta 9.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f62d31aa-e737-4060-b930-373b5236fa08)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 10 - Full Stack -websovelluskehitys: React Native (2 op, AYCSM14111, englanniksi)
+#### Osa 10 - Full Stack -websovelluskehitys: React Native (2 op, CSM14111, englanniksi)
 Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteella. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native)).
 
 -	Tee vähintään 25 tehtävää osasta 10. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b2475f8c-e911-4a07-9993-549955381936)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-#### Osa 11 - Full Stack -websovelluskehitys: jatkuva integraatio (1 op, AYCSM14112, englanniksi)
+#### Osa 11 - Full Stack -websovelluskehitys: jatkuva integraatio (1 op, CSM14112, englanniksi)
 
 Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 11](/en/part11).
@@ -101,14 +101,22 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-
-#### Osa 12 - Full Stack -containers (1 op, AYCSM14114, englanniksi)
+#### Osa 12 - Full Stack  -websovelluskehitys: konttiteknologia (1 op, CSM14113, englanniksi)
 
 Suorittamalla kaikki kurssin kahdennentoista, konttiteknologiaa käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 12](/en/part12).
 -	Tee kaikki tehtävät osasta 12.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+
+#### Osa 13 - Full Stack  -websovelluskehitys: relaatiotietokannat (1 op, CSM14113)
+
+Suorittamalla kaikki kurssin kolmannentoista, relaatiotietokantojen käyttöä käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
+Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 13](/osa13).
+-	Tee kaikki tehtävät osasta 13.
+-	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-136d0c67-5348-468f-aa94-7e0b72197d91)
+-	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
+
 
 ### Suoritusmerkinnän pyytäminen
 

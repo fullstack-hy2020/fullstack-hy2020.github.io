@@ -35,6 +35,7 @@ const partNameTranslations = {
     'React Native',
     'CI/CD',
     'Containers',
+    'Using relational databases'
   ],
   zh: [
     'Web 应用的基础设施',
@@ -55,7 +56,7 @@ const partNameTranslations = {
 
 export const PartBanner = ({ lang }) => {
   // TODO change on release
-  const parts = Object.keys(navigation[lang]).filter(p => p !== '13');
+  const parts = Object.keys(navigation[lang]);
 
   return (
     <Banner
