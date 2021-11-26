@@ -145,7 +145,7 @@ export default App
 
 ```js
 import ReactDOM from 'react-dom'
-import App from './App.js'
+import App from './App'
 
 const notes = [
   {
@@ -422,8 +422,8 @@ notes.map((note, i) => ...)
 <!-- This is, however, **not recommended** and can cause undesired problems even if it seems to be working just fine.  -->
 然而，这是**不推荐的**，因为可能导致意想不到的问题，即使它似乎能正常工作。
 
-<!-- Read more in [this article](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318). -->
-更多内容请阅读 [这篇文章](https://medium.com/@robinpokorny/index-as-a-key-is-an-anti-pattern-e0349aece318)。
+<!-- Read more in [this article](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318). -->
+更多内容请阅读 [这篇文章](https://robinpokorny.medium.com/index-as-a-key-is-an-anti-pattern-e0349aece318)。
 
 ### Refactoring modules 
 【重构模块】
@@ -489,7 +489,7 @@ const App = ({ notes }) => {
 
 ```js
 import ReactDOM from 'react-dom'
-import App from './App.js'
+import App from './App'
 ```
 
 <!-- [imports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in the code. The <i>react</i> module is placed into a variable called _React_ and <i>react-dom</i> to variable _ReactDOM_. -->

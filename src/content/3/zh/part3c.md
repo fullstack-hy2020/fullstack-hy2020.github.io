@@ -159,6 +159,10 @@ node --inspect index.js
 mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/test?retryWrites=true
 ```
 
+<!-- N.B. If later in this section you experience repeated troubles connecting and making requests to MongoDB, it may be necessary to use an older connection string. To configure your connection string in MongoDb Atlas, go to 'Connect', then 'Connect your application.' Under 'Select your driver and application,' change the Node.js version to '2.2.12 or later'. Your connection string will look different from the examples in this course, but replacing the <password> and database name fields will work the same. -->
+
+注意，如果后期在本节中你持续遇到连接MongoDB出错的问题，你可能需要使用一个老一些的连接字符串。在MongoDb Atlas 中配置你的连接字符串，点击 Connect， 然后 Connect your application。在 'selsect your driver and application 中，将Nodejs的版本选择2.2.12 or later。 你的连接信息会与课程中的字符串看起来不同，但是替换掉<password> 以及数据库名就会工作良好。
+
 <!-- We are now ready to use the database. -->
 我们现在可以使用数据库了。
 

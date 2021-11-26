@@ -47,9 +47,9 @@ lang: zh
 ### Taking the course 
 【参加课程】
 
-<!-- The course contains eleven parts, the first of which is numbered 0 for consistency with past iterations. One part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible. -->
+<!-- The course contains tweleve parts, the first of which is numbered 0 for consistency with past iterations. One part corresponds loosely to one week (averaging 15-20 hours) of studying, but the speed of completing the course is flexible. -->
 
-本课程共分十一个章节，由于历史原因，第一章节被编号为 0。 课程每一章节的内容，大概需要一周(平均 15-20 小时)的学习时间，但完成课程的进度是十分灵活的。
+本课程共分十二个章节，由于历史原因，第一章节被编号为 0。 课程每一章节的内容，大概需要一周(平均 15-20 小时)的学习时间，但完成课程的进度是十分灵活的。
 
 <!-- Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part. -->
 

@@ -623,7 +623,7 @@ app bar 的背景色是 <em>#24292e</em> ，但你也可以使用其他的颜色
 npm install react-router-native@5.2.1
 ```
   
-**NB:** This material has instructions on how to use React router version 5, which is a bit different than version 6.
+<!-- **NB:** This material has instructions on how to use React router version 5, which is a bit different than version 6. -->
 注意：教材里教授的是如何使用React Router 5， 与 6 版本有些不同。
 
 <!-- Using the react-router-native library will break Expo's web browser preview. However, other previews will work just like before. We can fix the issue by extending the Expo's Webpack configuration so that it transpiles the react-router-native library's sources with Babel. To extend the Webpack configuration we need to install the <i>@expo/webpack-config</i> library: -->
