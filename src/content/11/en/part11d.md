@@ -53,11 +53,11 @@ We shall soon make it impossible to push the code directly to the main branch, b
 
 <div class="tasks">
 
-### Exercises 11.14-11.15.
+### Exercises 11.13-11.14.
 
 Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to the main branch, it's catching the problems too late!
 
-#### 11.14 Pull request
+#### 11.13 Pull request
 
 Update the trigger of the existing workflow as suggested above to run on new pull requests to your main branch.
 
@@ -75,7 +75,7 @@ In the "Conversation" tab of the pull request you should see your latest commit(
 
 Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
-#### 11.15 Run deployment step only for the main branch
+#### 11.14 Run deployment step only for the main branch
 
 All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment, are run also for pull requests. This is surely something we do not want!
 
@@ -159,11 +159,11 @@ In the case above, the software we release is tested because the CI system makes
 
 <div class="tasks">
 
-### Exercises 11.16-11.17.
+### Exercises 11.15-11.16.
 
 Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
 
-#### 11.16 Adding versioning
+#### 11.15 Adding versioning
 
 We will extend our workflow with one step:
 
@@ -220,7 +220,7 @@ fatal: tag '0.0.1-beta.1' already exists
 ```
 A quick way to solve this is to add `0.0.0` tag manually using command line like so `git tag 0.0.0`. Then, push the tag to remote using `git push origin --tags`.
 
-#### 11.17 Skipping a commit for tagging and deployment
+#### 11.16 Skipping a commit for tagging and deployment
 
 In general the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production.
 
@@ -314,9 +314,9 @@ To set up protection for your main branch, navigate to repository "Settings" fro
 
 <div class="tasks">
 
-### Exercise 11.18
+### Exercise 11.17
 
-#### 11.18 Adding protection to your main branch
+#### 11.17 Adding protection to your main branch
 
 Add protection to your <i>master</i> (or <i>main</i>) branch.
 
