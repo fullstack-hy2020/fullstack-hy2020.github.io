@@ -62,13 +62,10 @@ The contents of the <i>index.js</i> file used for starting the application gets 
 
 ```js
 const app = require('./app') // the actual Express application
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
@@ -354,7 +351,6 @@ In the exercises for this part we will be building a <i>blog list application</i
 Let's imagine a situation, where you receive an email that contains the following application body:
 
 ```js
-const http = require('http')
 const express = require('express')
 const app = express()
 const cors = require('cors')
