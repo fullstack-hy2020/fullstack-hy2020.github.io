@@ -603,7 +603,7 @@ Modify the application such that the initial state of the data is fetched from t
 
 The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
 
-Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/#api-endpoints-all).
+Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/#api-endpoints-v3-all).
 
 The user interface is very simple. The country to be shown is found by typing a search query into the search field.
 
@@ -619,9 +619,7 @@ When there is only one country matching the query, then the basic data of the co
 
 ![](../../images/2/19b3.png)
 
-**NB1**: As the API has changed recently and no longer contains population of the countries, you may replace that with some other data found in the API. 
-
-**NB2**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can be hard to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not to worry about these edge cases.
+**NB**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can be hard to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not to worry about these edge cases.
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
