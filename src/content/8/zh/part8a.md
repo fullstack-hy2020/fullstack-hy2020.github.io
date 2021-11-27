@@ -294,7 +294,7 @@ Graphql 查询只描述在服务器和客户端之间移动的数据。 在服�
 使用 npm init 创建一个新的 npm-project，并安装所需的依赖项。
 
 ```bash
-npm install apollo-server graphql
+npm install apollo-server graphql apollo-server-core
 ```
 
 <!-- The initial code is as follows:  -->
@@ -368,6 +368,9 @@ server.listen().then(({ url }) => {
 const server = new ApolloServer({
   typeDefs,
   resolvers,
+   plugins: [
+    ApolloServerPluginLandingPageGraphQLPlayground(),
+  ],
 })
 ```
 

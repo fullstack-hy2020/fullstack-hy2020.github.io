@@ -124,8 +124,8 @@ addNote = event => {
 <!-- This makes it possible to verify that all the data we intended to send was actually received by the server. -->
 这样就可以验证我们打算发送的所有数据是否实际上已经被服务器接收。
 
-<!-- In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) that help us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs. -->
-在本课程的下一章节中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) ，这些工具可以帮助我们调试服务器应用。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
+<!-- In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [postman](https://www.postman.com/downloads/) that help us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs. -->
+在本课程的下一章节中，我们将学习如何在后端实现我们自己的逻辑。 然后，我们将进一步研究一些工具，如[Postman](https://www.postman.com/downloads/) ，这些工具可以帮助我们调试服务器应用。 但是，通过浏览器检查 json-server 的状态就足以满足我们当前的需求。
 
 > <!--**NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.-->
 注意: 在当前版本的应用中，浏览器在便笺中添加了创建日期属性。 由于运行浏览器的机器的时钟可能错误地配置，所以让后端服务器为我们生成这个时间戳要明智得多。 这实际上就是我们在下一章节课程中要做的。
