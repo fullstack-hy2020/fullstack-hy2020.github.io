@@ -371,12 +371,12 @@ Ei ole kuitenkaan ihan selvää, mihin kohtaan komponentin koodia komento <em>ax
 ### Effect-hookit
 
 Olemme jo käyttäneet Reactin version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) mukanaan tuomia [state hookeja](https://reactjs.org/docs/hooks-state.html) tuomaan funktioina määriteltyihin React-komponentteihin tilan. Versio 16.8.0 tarjoaa kokonaan uutena ominaisuutena myös
-[effect hookit](https://reactjs.org/docs/hooks-effect.html), dokumentaation sanoin
+[effect-hookit](https://reactjs.org/docs/hooks-effect.html), dokumentaation sanoin
 
 > <i>The Effect Hook lets you perform side effects in function components.</i>
 > <i><strong>Data fetching</strong>, setting up a subscription, and manually changing the DOM in React components are all examples of side effects. </i>
 
-Eli effect hookit ovat juuri oikea tapa hakea dataa palvelimelta.
+Eli effect-hookit ovat juuri oikea tapa hakea dataa palvelimelta.
 
 Poistetaan nyt datan hakeminen tiedostosta <i>index.js</i>. Komponentille <i>App</i> ei ole enää tarvetta välittää dataa propseina. Eli  <i>index.js</i> pelkistyy seuraavaan muotoon
 
@@ -594,13 +594,13 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 
 on portti 3001 jo jonkin muun sovelluksen, esim. jo käynnissä olevan json-serverin käytössä. Sulje toinen sovellus tai jos se ei onnistu, vaihda porttia.
 
-Muuta sovellusta siten, että datan alkutila haetaan <i>axios</i>-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect hookilla](https://reactjs.org/docs/hooks-effect.html)).
+Muuta sovellusta siten, että datan alkutila haetaan <i>axios</i>-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect-hookilla](https://reactjs.org/docs/hooks-effect.html)).
 
 <h4>2.12* maiden tiedot, step1</h4>
 
 Rajapinta [https://restcountries.com](https://restcountries.com) tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST-apina.
 
-Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja. Sovelluksen kannattaa hakea tiedot endpointista [all](https://restcountries.com/#api-endpoints-all).
+Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja. Sovelluksen kannattaa hakea tiedot endpointista [all](https://restcountries.com/#api-endpoints-v3-all).
 
 Sovelluksen käyttöliittymä on yksinkertainen. Näytettävä maa haetaan kirjoittamalla hakuehto etsintäkenttään.
 
