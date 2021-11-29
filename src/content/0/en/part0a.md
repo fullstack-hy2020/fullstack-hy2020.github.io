@@ -109,7 +109,7 @@ More information about this part's prerequisites and exercise submission can be 
 - [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33). 
 - [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 12 - Full Stack Web Development: Containers (1 cr, CSM14113)
+#### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
 By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. 
 More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
