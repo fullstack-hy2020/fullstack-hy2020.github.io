@@ -776,7 +776,7 @@ Jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kentt
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
 
-Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1):
+Tämän hetken koodi on branchissa [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1):
 
 ![](../../images/3/21.png)
 
