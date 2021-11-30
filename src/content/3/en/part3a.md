@@ -922,7 +922,7 @@ If the data saved in the _body_ variable has the <i>important</i> property, the 
 You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
 
 
-Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
+The code for the current state of the application is specifically in branch [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
 
 ![](../../images/3/21.png)
 
