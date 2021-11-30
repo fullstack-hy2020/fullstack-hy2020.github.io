@@ -12,7 +12,7 @@ import getTranslationPath from '../../utils/getTranslationPath';
 const prevChar = c => String.fromCharCode(c.charCodeAt(0) - 1);
 const nextChar = c => String.fromCharCode(c.charCodeAt(0) + 1);
 // TODO change on release
-const hasPart = (part, lang) => part<13 &&
+const hasPart = (part, lang) =>
   Object.keys(navigation[lang]).includes(part.toString());
 const nextLetterExists = (letter, part, lang) =>
   nextChar(letter) in navigation[lang][part];

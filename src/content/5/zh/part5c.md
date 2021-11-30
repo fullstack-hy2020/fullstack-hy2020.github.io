@@ -677,7 +677,7 @@ const author = component.container.querySelector('#author')
 <!-- We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server.  -->
 我们也可以对前端进行集成测试。集成测试可测试多组件的协作。这比单元测试要困难得多，因为我们必须（例如）从服务器模拟数据。
 
-<!-- We chose to concentrate making end to end tests to test the whole application, which we will work on in the last chapter of this part. -->
+<!-- We chose to concentrate on making end to end tests in order to test the whole application. We will work on the end to end tests in the last chapter of this part. -->
 我们决定集中采用端到端的测试以测试整个应用程序，我们将在本章的最后一节中进行研究。
 
 ### Snapshot testing

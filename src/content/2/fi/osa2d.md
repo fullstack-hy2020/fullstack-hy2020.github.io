@@ -13,7 +13,7 @@ Kun sovelluksella luodaan uusia muistiinpanoja, täytyy ne luonnollisesti tallen
 
 Ihan alkuperäisen [määritelmän](https://en.wikipedia.org/wiki/Representational_state_transfer) mukainen RESTful API JSON Server ei ole, mutta ei ole kovin moni muukaan itseään REST:iksi kutsuva rajapinta.
 
-Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) JSON Server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes) eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
+Tutustumme REST:iin tarkemmin kurssin [seuraavassa osassa](/osa3), mutta jo nyt on tärkeä ymmärtää minkälaista [konventiota](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) JSON Server ja yleisemminkin REST API:t käyttävät [reittien](https://github.com/typicode/json-server#routes) eli URL:ien ja käytettävien HTTP-pyyntöjen tyyppien suhteen.
 
 ### REST
 
@@ -106,7 +106,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 ### Muistiinpanon tärkeyden muutos
 
-Lisätään muistiinpanojen yhteyteen painikkeet, joilla muistiipanojen tärkeyttä voi muuttaa.
+Lisätään muistiinpanojen yhteyteen painikkeet, joilla muistiinpanojen tärkeyttä voi muuttaa.
 
 Muistiinpanon määrittelevän komponentin muutos on seuraava:
 
@@ -181,7 +181,7 @@ Pieni muistutus tähän väliin. Tapahtumankäsittelijän koodin tulostuksessa m
 console.log('importance of ' + id + ' needs to be toggled')
 ```
 
-ES6:n [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -ominaisuuden ansiosta JavaScriptissa vastaavat merkkijonot voidaan kirjottaa hieman mukavammin:
+ES6:n [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) -ominaisuuden ansiosta JavaScriptissa vastaavat merkkijonot voidaan kirjoittaa hieman mukavammin:
 
 ```js
 console.log(`importance of ${id} needs to be toggled`)
@@ -211,7 +211,7 @@ Melkein jokaiselle riville sisältyy tärkeitä yksityiskohtia. Ensimmäinen riv
 
 Taulukon metodilla [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) etsitään muutettava muistiinpano ja talletetaan muuttujaan _note_ viite siihen.
 
-Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö poislukien kenttä important. 
+Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö pois lukien kenttä important. 
 
 Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia hyödyntävä uuden olion luominen näyttää hieman erikoiselta:
 
@@ -219,7 +219,7 @@ Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaS
 const changedNote = { ...note, important: !note.important }
 ```
 
-Käytännössä <em>{ ... note}</em> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeiden sisän lisätään asioita, esim. <em>{ ...note, important: true }</em>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme <em>important</em> saa uudessa oliossa vanhan arvonsa käänteisarvon.
+Käytännössä <em>{ ... note}</em> luo olion, jolla on kenttinään kopiot olion _note_ kenttien arvoista. Kun aaltosulkeiden sisään lisätään asioita, esim. <em>{ ...note, important: true }</em>, tulee uuden olion kenttä _important_ saamaan arvon _true_. Eli esimerkissämme <em>important</em> saa uudessa oliossa vanhan arvonsa käänteisarvon.
 
 Miksi teimme muutettavasta oliosta kopion vaikka myös seuraava koodi näyttää toimivan:
 
@@ -231,7 +231,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-Näin ei ole suositetavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, tilaa ei Reactissa saa muuttaa suoraan!
+Näin ei ole suositeltavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, tilaa ei Reactissa saa muuttaa suoraan!
 
 Kannattaa huomata myös, että uusi olio _changedNote_ on ainoastaan ns. [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
 
@@ -512,7 +512,7 @@ export default {
 }
 ```
 
-Exportattava asia on siis seuraava, hieman erikoiselta näyttävä olio:
+Eksportattava asia on siis seuraava, hieman erikoiselta näyttävä olio:
 
 ```js
 { 
@@ -524,7 +524,7 @@ Exportattava asia on siis seuraava, hieman erikoiselta näyttävä olio:
 
 Olion määrittelyssä vasemmalla puolella kaksoispistettä olevat nimet tarkoittavat eksportoitavan olion <i>kenttiä</i>, kun taas oikealla puolella olevat nimet ovat moduulin sisällä <i>määriteltyjä muuttujia</i>. 
 
-Koska olion kenttien nimet ovat samat kuin niiden arvon määrittelevien muuttujien nimet, voidaan olion määrittely kirjoittaa tiivimmässä muodossa:
+Koska olion kenttien nimet ovat samat kuin niiden arvon määrittelevien muuttujien nimet, voidaan olion määrittely kirjoittaa tiiviimmässä muodossa:
 
 ```js
 { 
@@ -588,7 +588,7 @@ Lopputulos molemmissa on täsmälleen sama, eli ne luovat olion, jonka kentän <
 
 Jos sovelluksemme mahdollistaisi muistiinpanojen poistamisen, voisi syntyä tilanne, jossa käyttäjä yrittää muuttaa sellaisen muistiinpanon tärkeyttä, joka on jo poistettu järjestelmästä.
 
-Simuloidaan tälläistä tilannetta "kovakoodaamalla" noteServiceen funktioon <em>getAll</em> muistiinpano, jota ei ole todellisuudessa (eli palvelimella) olemassa:
+Simuloidaan tällaista tilannetta "kovakoodaamalla" noteServiceen funktioon <em>getAll</em> muistiinpano, jota ei ole todellisuudessa (eli palvelimella) olemassa:
 
 ```js
 const getAll = () => {
@@ -728,7 +728,7 @@ const delete = (id) => {
 
 <h4>2.18*: puhelinluettelo step10</h4>
 
-Muuta toiminnallisuutta siten, että jos jo olemassaolevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT -pyynnöllä.
+Muuta toiminnallisuutta siten, että jos jo olemassa olevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT -pyynnöllä.
 
 Jos henkilön tiedot löytyvät jo luettelosta, voi ohjelma kysyä käyttäjältä varmistuksen:
 

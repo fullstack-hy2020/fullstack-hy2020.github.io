@@ -569,8 +569,8 @@ const Notification = () => {
 
 
 
-<!-- It's recommended to create separate [action creators](https://redux.js.org/basics/actions#action-creators) for setting and removing notifications. -->
-建议创建单独的[action creators](https://redux.js.org/basics/actions#action-creators) 来设置和删除通知 
+<!-- It's recommended to create separate [action creators](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators) for setting and removing notifications. -->
+建议创建单独的[action creators](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators) 来设置和删除通知 
 
 
 #### 6.12* Better anecdotes, 步骤10

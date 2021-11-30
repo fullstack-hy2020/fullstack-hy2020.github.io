@@ -50,17 +50,17 @@ Facebook 有一个 Flux 的实现，但是我们会使用 Redux 库。 它使用
 npm install redux
 ```
 
-<!-- As in Flux, in Redux the state is also stored in a [store](https://redux.js.org/basics/store). -->
-正如在 Flux 中一样，在 Redux 中，状态也存储在[store](https://redux.js.org/basics/store)中。
+<!-- As in Flux, in Redux the state is also stored in a [store](https://redux.js.org/tutorials/fundamentals/part-4-store). -->
+正如在 Flux 中一样，在 Redux 中，状态也存储在[store](https://redux.js.org/tutorials/fundamentals/part-4-store)中。
 
 <!-- The whole state of the application is stored into <i>one</i> JavaScript-object in the store. Because our application only needs the value of the counter, we will save it straight to the store. If the state was more complicated, different things in the state would be saved as separate fields of the object. -->
 
 应用程序的整个状态存储在 store 中的一个 javascript 对象中。 因为我们的应用程序只需要计数器的值，所以我们将它直接保存到存储中。 如果状态更复杂，那么状态中的不同内容将被保存为对象的不同字段
 
-<!-- The state of the store is changed with [actions](https://redux.js.org/basics/actions). Actions are objects, which have at least a field determining the <i>type</i> of the action. -->
+<!-- The state of the store is changed with [actions](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#designing-actions). Actions are objects, which have at least a field determining the <i>type</i> of the action. -->
 <!-- Our application needs for example the following action: -->
 
-存储的状态通过 [actions](https://redux.js.org/basics/actions)改变。 Action 是对象，它至少有一个字段确定操作的类型。 例如，我们的应用程序需要以下操作:
+存储的状态通过 [actions](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#designing-actions)改变。 Action 是对象，它至少有一个字段确定操作的类型。 例如，我们的应用程序需要以下操作:
 
 ```js
 {
@@ -72,8 +72,8 @@ npm install redux
 
 如果操作涉及数据，则可以根据需要声明其他字段。 然而，我们的计数应用程序很简单，只需要类型字段就可以了。
 
-<!-- The impact of the action to the state of the application is defined using a [reducer](https://redux.js.org/basics/reducers). In practice, a reducer is a function which is given the current state and an action as parameters. It <i>returns</i> a new state. -->
-Action 对应用程序状态的影响是通过使用一个 [reducer](https://redux.js.org/basics/reducers) 来定义的。 实际上，reducer 是一个函数，它以当前状态和 action 为参数。 它返回一个新的状态。 
+<!-- The impact of the action to the state of the application is defined using a [reducer](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#writing-reducers). In practice, a reducer is a function which is given the current state and an action as parameters. It <i>returns</i> a new state. -->
+Action 对应用程序状态的影响是通过使用一个 [reducer](https://redux.js.org/tutorials/fundamentals/part-3-state-actions-reducers#writing-reducers) 来定义的。 实际上，reducer 是一个函数，它以当前状态和 action 为参数。 它返回一个新的状态。 
 
 <!-- Let's now define a reducer for our application: -->
 现在让我们为我们的应用程序定义一个 reducer:
@@ -881,8 +881,8 @@ const toggleImportanceOf = (id) => {
 }
 ```
 
-<!-- Functions that create actions are called [action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators). -->
-创建action的函数称为action创建器[action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators)。
+<!-- Functions that create actions are called [action creators](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators). -->
+创建action的函数称为action创建器[action creators](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators)。
 
 <!-- The <i>App</i> component does not have to know anything about the inner representation of the actions anymore, it just gets the right action by calling the creator-function: -->
 App 组件不再需要知道任何关于 action 的内部表示，它只需要调用 creator-函数就可以获得正确的操作: 
@@ -1317,8 +1317,8 @@ npm start
 确保这些八卦是按票数排序的。
 
 #### 6.6: anecdotes, 步骤4
-<!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/basics/actions#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, as we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators). -->
-如果你还没有这样做，将action对象的创建分离到[action创建器](https://redux.js.org/basics/actions#action-creators)-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[action创建器](https://redux.js.org/basics/actions#action-creators)中所做的那样。
+<!-- If you haven't done so already, separate the creation of action-objects to [action creator](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators)-functions and place them in the <i>src/reducers/anecdoteReducer.js</i> file, as we have been doing since the chapter [action creators](/en/part6/flux_architecture_and_redux#action-creators). -->
+如果你还没有这样做，将action对象的创建分离到[action创建器](https://redux.js.org/tutorials/fundamentals/part-7-standard-patterns#action-creators)-函数中，并将它们放在 <i>src/reducers/anecdoteReducer.js</i> 文件，就像我们在[action创建器](/zh/part6/flux_architecture_and_redux#action-creators)中所做的那样。
 
 #### 6.7: anecdotes, 步骤5
 <!-- Separate the creation of new anecdotes into its own component called <i>AnecdoteForm</i>. Move all logic for creating a new anecdote into this new component.  -->

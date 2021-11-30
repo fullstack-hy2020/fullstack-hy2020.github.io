@@ -754,7 +754,7 @@ Api [https://restcountries.com](https://restcountries.com) 以机器可读的格
 
 ![](../../images/2/19b3.png)
 
-<!-- **NB1**: the API has changed recently and do not contain anymore population of the countries, you may replace that with some other data found in API.  -->
+<!-- **NB1**:  As the API has changed recently and no longer contains population of the countries, you may replace that with some other data found in the API.  -->
 <!-- **NB2**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
 
 注意1: API 最近进行了修改，因此不再包含国家的人口了，你可以使用API中提供的其他数据。

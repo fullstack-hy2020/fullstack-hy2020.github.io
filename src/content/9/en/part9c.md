@@ -9,7 +9,7 @@ lang: en
 
 Now that we have a basic understanding of how TypeScript works and how to create small projects with it, it's time to start creating something actually useful. We are now going to create a new project that will introduce use cases that are a little more realistic.
 
-One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool and helps you get started, but in the long run it is advisable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node.
+One major change from the previous part is that <i>we're not going to use ts-node anymore</i>. It is a handy tool that helps you get started, but in the long run it is advisable to use the official TypeScript compiler that comes with the <i>typescript</i> npm-package. The official compiler generates and packages JavaScript files from the .ts files so that the built <i>production version</i> won't contain any TypeScript code anymore. This is the exact outcome we are aiming for, since TypeScript itself is not executable by browsers or Node.
 
 ### Setting up the project
 
@@ -288,7 +288,7 @@ He wants to be able to save </i>diary entries</i> which contain:
 - Free text detailing the experience
 
 We have obtained some sample data, which we will use as a base to build on.
-The data is saved in json format, and can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).
+The data is saved in json format, and can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json).
 
 The data looks like the following:
 
@@ -1262,7 +1262,7 @@ export default diaryEntries;
 Note that since <i>toNewDiaryEntry</i> returns an object of type <i>NewDiaryEntry</i>, we need to assert it to be <i>DiaryEntry</i> with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
 
-Enums are usually used when there is a set of predetermined values which are not expected to change in the future. Usually, enums are used for much tighter unchanging values (for example, weekdays, months, directions) but since they offer us a great way to validate our incoming values, we might as well use them in our case.
+Enums are typically used when there is a set of predetermined values that are not expected to change in the future. Usually enums are used for much tighter unchanging values (for example, weekdays, months, cardinal directions), but since they offer us a great way to validate our incoming values, we might as well use them in our case.
 
 We still need to give the same treatment to <i>visibility</i>. The enum looks as follows:
 

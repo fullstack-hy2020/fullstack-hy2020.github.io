@@ -99,7 +99,7 @@ It's beneficial to inspect the state of the backend server, e.g. through the bro
 
 This makes it possible to verify that all the data we intended to send was actually received by the server.
 
-In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://chrome.google.com/webstore/detail/postman/fhbjgbiflinjbdggehcddcbncdddomop) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
+In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
 
 > **NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
 

@@ -9,6 +9,9 @@ lang: fi
 
 Tässä osassa tutustutaan relaatiotietokantoja käyttäviin node-sovelluksiin. Osassa rakennetaan osista 3-5 tutulle muistiinpanosovellukselle relaatiotietokantaa käyttävä node-backend. Osan suorittaminen edellyttää kohtuullista relaatiotietokantojen ja SQL:n osaamista. Eräs paikka hankkia riittävä osaaminen on kurssi [Tietokantojen perusteet](https://tikape.mooc.fi/).
 
+Osassa on 24 tehtävää, ja suoritusmerkintä edellyttää kaikkien tekemistä. Toisin kuin osat 0-7, tämä tehtävä palautetaan 
+[palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-psql) omaan kurssi-instanssiinsa.
+
 ### Dokumenttitietokantojen edut ja haitat
 
 Olemme käyttäneet kaikissa kurssin aiemmissa osissa MongoDB-tietokantaa. Mongo on tyypiltään [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database) ja eräs sen ominaisimmista piirteistä on <i>skeemattomuus</i>, eli tietokanta ei ole kuin hyvin rajallisesti tietoinen siitä, minkälaista dataa sen kokoelmiin on talletettu. Tietokannan skeema on olemassa ainoastaan ohjelmakoodissa, joka tulkitsee datan tietyllä tavalla, esim. tunnistaen että jotkut kentät ovat viittauksia toisen kokoelman objekteihin.

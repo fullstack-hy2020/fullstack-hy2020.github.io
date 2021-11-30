@@ -751,7 +751,7 @@ The solution is pretty good, but there's a beauty flaw in it. The result also co
 
 By carefully reading the documentation, you can find a [solution](https://sequelize.org/master/manual/advanced-many-to-many.html#specifying-attributes-from-the-through-table):
 
-````js
+```js
 router.get('/', async (req, res) => {
   const users = await User.findAll({
     include: [
@@ -1434,7 +1434,7 @@ users.forEach(u => {
 
 We have noticed that the code for models and migrations is very repetitive. For example, the model of teams
 
-````js
+```js
 class Team extends Model {}
 
 Team.init({
@@ -1535,7 +1535,5 @@ Once you have completed the exercises and want to get the credits, let us know t
 Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/part0/general_info#parts-and-completion) for more information.
-
-**Keep in mind also that**, credits from this part will not be provided until the beta testing phase is at the end.
 
 </div>

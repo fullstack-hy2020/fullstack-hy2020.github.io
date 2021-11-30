@@ -416,10 +416,10 @@ You can use the code below as a starting point for the <i>App</i> component of y
 import React, { useState } from 'react'
 
 const App = () => {
-  const [ persons, setPersons ] = useState([
+  const [persons, setPersons] = useState([
     { name: 'Arto Hellas' }
   ]) 
-  const [ newName, setNewName ] = useState('')
+  const [newName, setNewName] = useState('')
 
   return (
     <div>
