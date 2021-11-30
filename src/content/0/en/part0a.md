@@ -158,6 +158,8 @@ If you have already taken the course either as a MOOC or as a university course,
 
 You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Telegram [@mluukkai](https://t.me/mluukkai), with your GitHub username and which parts you would like to have deleted from your submissions.
 
+The same will apply for the 2022, you can continue seamlesly if you have started the course 2019-2021
+
 #### Expanding on other instances of this course
 
 You can substitute <i>parts</i> of this course with parts you have previously submitted.  For example, if you have previously completed the three credit course, you can substitute parts 0-3 of this course with the parts you have previously completed.  You can only substitute parts in sequence, so you cannot substitute, for example, parts 0 and 2 but not complete part 1.
@@ -226,7 +228,7 @@ See [more information on the project](https://github.com/FullStack-HY/misc/blob/
 
 ### Interview promise
 
-Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10).
+Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10). The parts 12 and 13 that where released during 2021 are not required if you finnish the project by 15.3.2022.
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 

@@ -117,7 +117,6 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-136d0c67-5348-468f-aa94-7e0b72197d91)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
-
 ### Suoritusmerkinnän pyytäminen
 
 Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen): 
@@ -150,6 +149,8 @@ Jos olet jo suorittanut kurssin joko MOOC:ina tai yliopiston kurssina, voit täy
 
 Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä 
 email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
+
+Sama tulee koskemaan vuoden 2021-version täydentämistä vuoden 2022 kurssilla.
 
 #### Kurssin jonkin muun version täydentäminen
 
@@ -203,7 +204,7 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/FullStack-HY/
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille projektin täydessä laajuudessa (12+10 op) suorittaville.
+Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (12+10 op) suorittaville. Vuoden 2021 aikana ilmestyneiden osien 12 ja 13 suorittamista ei edellytetä 15.3.2022 mennessä harjoitustyön suorittavilta.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 
