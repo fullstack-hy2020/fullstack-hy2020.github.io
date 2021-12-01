@@ -714,7 +714,7 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassaolevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
+Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassa olevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
 
 Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentille <i>important</i> ja <i>date</i> asetetaan oletusarvot. Kaikki muut kentät hylätään:
 
@@ -776,7 +776,7 @@ Jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kentt
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
 
-Huomaa, että repositorion master-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1):
+Tämän hetken koodi on branchissa [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1):
 
 ![](../../images/3/21.png)
 
