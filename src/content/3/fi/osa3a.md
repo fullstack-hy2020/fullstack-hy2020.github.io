@@ -219,7 +219,7 @@ Käynnistetään palvelin uudelleen (palvelin suljetaan painamalla konsolissa yh
 
 Headerin <i>Content-Type</i> arvolla <i>application/json</i> kerrotaan, että kyse on JSON-muotoisesta datasta. Muuttujassa _notes_ oleva taulukko muutetaan JSON-muotoon metodilla <em>JSON.stringify(notes)</em>.
 
-Kun avaamme selaimen, on tulostusasu sama kuin [osassa 2](/osa2#datan-haku-palvelimelta) käytetyn [json-serverin](https://github.com/typicode/json-server) tarjoamalla muistiinpanojen listalla:
+Kun avaamme selaimen, on tulostusasu sama kuin [osassa 2](/osa2/palvelimella_olevan_datan_hakeminen) käytetyn [json-serverin](https://github.com/typicode/json-server) tarjoamalla muistiinpanojen listalla:
 
 ![](../../images/3/2e.png)
 
@@ -428,7 +428,7 @@ Laajennetaan sovellusta siten, että se toteuttaa samanlaisen RESTful-periaattee
 
 Representational State Transfer eli REST on Roy Fieldingin vuonna 2000 ilmestyneessä [väitöskirjassa](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) määritelty skaalautuvien web-sovellusten rakentamiseksi tarkoitettu arkkitehtuurityyli.
 
-Emme nyt rupea määrittelemään REST:iä fieldingiläisittäin tai rupea väittelemään siitä mitä REST on tai mitä se ei ole. Otamme hieman [kapeamman näkökulman](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), jonka mukaan REST tai RESTful API:t yleensä tulkitaan web-sovelluksissa. Alkuperäinen REST-periaate ei sinänsä rajoitu web-sovelluksiin.
+Emme nyt rupea määrittelemään REST:iä fieldingiläisittäin tai rupea väittelemään siitä mitä REST on tai mitä se ei ole. Otamme hieman [kapeamman näkökulman](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services), jonka mukaan REST tai RESTful API:t yleensä tulkitaan web-sovelluksissa. Alkuperäinen REST-periaate ei sinänsä rajoitu web-sovelluksiin.
 
 Mainitsimme jo [edellisessä osassa](/osa2/palvelimella_olevan_datan_muokkaaminen#rest), että yksittäisiä asioita, meidän tapauksessamme muistiinpanoja kutsutaan RESTful-ajattelussa <i>resursseiksi</i>. Jokaisella resurssilla on URL eli sen yksilöivä osoite.
 
