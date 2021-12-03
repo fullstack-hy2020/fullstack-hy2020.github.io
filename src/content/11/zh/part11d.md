@@ -374,7 +374,7 @@ jobs:
 <!-- Note that you can access the commits and commit messages <i>only when pushing or merging to the main branch</i>, so for pull requests the <code>github.event.commits</code> is empty. It is anyway not needed, since we want to skip the step altogether for pull requests.   -->
 请注意，<i>只有在将提交和提交消息推送或合并到 main 时</i>，才能访问提交和提交消息，因此对于 pull request，<code>github.event.commits</code> 是空的。无论如何，这是不需要的，因为我们希望跳过这一步完全为PR。
 
-<!-- You most likely need functions [contains](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contains) and [join](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#join) for your if condition. -->
+<!-- You most likely need functions [contains](https://docs.github.com/en/actions/learn-github-actions/expressions#contains) and [join](https://docs.github.com/en/actions/learn-github-actions/expressions#join) for your if condition. -->
 对于 if 条件，您很可能需要 [contains](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contains) 和 [join](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#join) 函数。
 
 
