@@ -8,16 +8,24 @@ lang: zh
 <div class="content">
 
 On this section we will explore the node applications that use relation databases. During section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you should have a reasonable knowledge of relational databases and SQL. There are many oneline courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and [Into to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql).
+这一章，我们会探索node 应用如何使用关系型数据库。我们会构建一个node后台，使用关系型数据库，构建一个笔记应用，我们在3-5章学过你应该已经很熟悉了。为了完成这一章，你应该具备一些关系型数据库和SQL的知识。网上有许多在线课程教SQL数据库，比如 [SQLbolt](https://sqlbolt.com/) 和 [Into to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql)。
 
 There are 24 exercises in this part, and you need to complete each exercise for completing the course. Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-psql) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".
 
+这一章节中有24个联系，你需要完成所有练习来完成课程。课程可以通过 [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-psql)  提交，和之前的章节一样，但是与0-7章不同，提交的地方是在一个不同的“课程实例”中。
+
 ### Advantages and disadvantages of document databases
+【文档数据库的优势和劣势】
 
 We have used the MongoDB database in all the previous sections of the course. Mongo is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database) and one of its most characteristic features is its <i>skepticity</i>, i.e. the database has only a very limited awareness of what kind of data is stored in its collections. The schema of the database exists only in the program code, which interprets the data in a specific way, e.g. by identifying that some of the fields are references to objects in another collection.
 
+我们在之前的章节中一直使用的是MongoDB 数据库。 Mongo 是一个 [文档数据库document database](https://en.wikipedia.org/wiki/Document-oriented_database) ，它其中一个典型的特点是它的  <i>不可知性skepticity</i> 。 比如说， 数据库对存入到自己集合中的数据类型是没有感知的。数据库的schema 仅仅存在于程序的代码中，对数据的解释采用了一种特定的方式，比如，通过一些字段所引用的对象来判断。
+
 In the example application of parts 3 and 4, the database stores notes and users.
+在第三和第四章的例子中，应用中的数据库存放了 notes  和 users。
 
 A collection of <i>notes</i> that stores notes looks like the following:
+ <i>notes</i> 的集合存储的notes 类似这样：
 
 ```js
 [
@@ -39,6 +47,7 @@ A collection of <i>notes</i> that stores notes looks like the following:
 ```
 
 Users saving collection <i>users</i> looks like the following:
+<i>users</i>集合中存储 Users 的类似这样：
 
 ```js
 [
@@ -57,12 +66,16 @@ Users saving collection <i>users</i> looks like the following:
 ```
 
 MongoDB does know the types of the fields of the stored entities, but it has no information about which collection of entities the user record ids are referring to. MongoDB also does not care what fields the entities stored in the collections have. Therefore MongoDB leaves it entirely up to the programmer to ensure that the correct information is being stored in the database.
+MongoDB 知道字段所存储的类型，但无法知道实体集合，例如user 的ids 是什么类型的。Mongo DB 也不关心字段中集合里的实体的是什么类型。因此MongoDB 将其整个实体交给类程序来确保信息是被正确存放到数据库的。
 
 There are both advantages and disadvantages to not having a schema. One of the advantages is the flexibility that schema agnosticism brings: since schema does not need to be defined at the database level, application development may be faster in a certain cases, and easier, with little of effort must be made in defining the schema and its changes in any case. Problems with not having a schema are related to the error-proneness: everything is left up to the programmer. The database itself has no way of checking whether the data in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether the reference type fields refer to existing entities of the right type in general, etc.
+这种对schema 无感知的模式有其优势和劣势。其中一个优势是其灵活的schema 不可知性所带来的：由于在数据库层面不需要对数据进行schema 定义，应用开发在某些场景下会加速，而且更简单，只需要很少的努力来定义schema，以及scheme的改变。没有Schema所带来的问题都被延后了：也就是都留给了编程阶段。数据库本身无法判断所存入的数据是否是 <i>合法的</i>。 比如说，是否所有的主键字段都有值，是否引用类型的字段所引用的实体是类型正确的等等。
 
 The relational databases that are the focus of this section, on the other hand, lean heavily on the existence of a schema, and the advantages and disadvantages of schema databases are almost the opposite compared of the non-schema databases.
+关系型数据库所关注的就是这一部分，换句话说，严重依赖schema 信息，因此其优势和劣势刚好与non-schema 的数据库所相反了。
 
 The reason why the the previous sections of the course used MongoDB is precisely because of its schema-less nature, which has made it easier to use the database for someone with little knowledge of relational databases. For most of the use cases of this course, I would have chosen the relational database myself.
+为什么之前的章节用MongoDB ，就是因为它弱schema 的特性，即使不知道关系型数据库的知识，也能使它用起来更简单。本课程的大多数用例，我自己会选择关系型数据库。
 
 ### Application database
 

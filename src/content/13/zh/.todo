@@ -1,0 +1,29 @@
+### [*] Advantages and disadvantages of document databases
+### [ ] Application database
+### [ ] Node application using a relational database
+### [ ] Model
+### [ ] Tasks 13.1.-13.3.
+### [ ] Creating database tables automatically
+### [ ] Other operations
+### [ ] Printing the objects returned by Sequelize to a console
+### [ ] Task 13.4.
+### [ ] Application structuring
+### [ ] Tasks 13.5.-13.7.
+### [ ] User management
+### [ ] Connection between the tables
+### [ ] Proper insertion of notes
+### [ ] Fine-tuning
+### [ ] Attention on the definition of models
+### [ ] Tasks 13.8.-13.11.
+### [ ] More queries
+### [ ] Tasks 13.13.-13.16
+### [ ] Migrations
+### [ ] Admin user and user disabling
+### [ ] Tasks 13.17-13.18.
+### [ ] Many-to-many connections
+### [ ] Note on the properties of Sequelize model objects
+### [ ] Many-to-many again
+### [ ] Tasks 13.19.-13.23.
+### [ ] Concluding remarks
+### [ ] Task 13.24.
+### [ ] Submitting exercises and getting the credits
