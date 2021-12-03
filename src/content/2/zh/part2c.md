@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 
 
-<!-- For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the third part of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how code executing in the browser communicates with the backend. -->
-到目前为止，我们一直致力于“前端” ，即客户端(浏览器)功能。 我们将在本课程的第三章节开始研究“后端” ，即服务器端功能。 尽管如此，我们现在将向这个方向迈出一步，熟悉在浏览器中执行的代码如何与后端通信。
+<!-- For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the  [third part](/en/part3)  of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how code executing in the browser communicates with the backend. -->
+到目前为止，我们一直致力于“前端” ，即客户端(浏览器)功能。 我们将在本课程的第三章节[/zh/part3]开始研究“后端” ，即服务器端功能。 尽管如此，我们现在将向这个方向迈出一步，熟悉在浏览器中执行的代码如何与后端通信。
 
 
 
@@ -374,8 +374,8 @@ The promise is <i>fulfilled兑现</i>: 这意味着操作已经完成，最终�
 3. <!--The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.-->
 The promise is <i>rejected拒绝</i>:它意味着一个错误阻止了最终值，这通常表示一个失败操作。 
 
-<!-- The first promise in our example is <i>fulfilled</i>, representing a successful <em>axios.get('http://localhost:3001/notes')</em> request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address. -->
-我们示例中的第一个承诺是<i>fulfilled</i>，表示一个成功的<em>axios.get('http://localhost:3001/notes')</em>  请求。 而第二个是<i>rejected</i>，控制台告诉我们原因。 看起来我们试图向一个不存在的地址发出了 HTTP GET 请求。
+<!-- The first promise in our example is <i>fulfilled</i>, representing a successful `axios.get('http://localhost:3001/notes')` request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address. -->
+我们示例中的第一个承诺是<i>fulfilled</i>，表示一个成功的 `axios.get('http://localhost:3001/notes')`  请求。 而第二个是<i>rejected</i>，控制台告诉我们原因。 看起来我们试图向一个不存在的地址发出了 HTTP GET 请求。
 
 <!-- If, and when, we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>: -->
 如果我们想要访问承诺表示的操作的结果，那么必须为承诺注册一个事件处理。 这是通过 <em>then</em>方法实现的:
@@ -731,8 +731,8 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 <!-- The API [https://restcountries.com](https://restcountries.com) provides a lot data for different countries in a machine readable format, a so-called REST API. -->
 Api [https://restcountries.com](https://restcountries.com) 以机器可读的格式，提供了不同国家的大量数据。即所谓的 REST API。 
 
-<!-- Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/#api-endpoints-all). -->
-创建一个应用，可以查看不同国家的数据。 应用能从[all](https://restcountries.com/#api-endpoints-all)中获取数据。
+<!-- Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/#api-endpoints-v3-all). -->
+创建一个应用，可以查看不同国家的数据。 应用能从[all](https://restcountries.com/#api-endpoints-v3-all)中获取数据。
 
 <!-- The user interface is very simple. The country to be shown is found by typing a search query into the search field. -->
 用户界面非常简单。 通过在搜索字段中键入搜索查询，可以找到要显示的国家。
@@ -754,12 +754,9 @@ Api [https://restcountries.com](https://restcountries.com) 以机器可读的格
 
 ![](../../images/2/19b3.png)
 
-<!-- **NB1**:  As the API has changed recently and no longer contains population of the countries, you may replace that with some other data found in the API.  -->
-<!-- **NB2**: it is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can cause trouble, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not worry about these edge cases. -->
+<!-- **NB**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can be hard to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not to worry about these edge cases. -->
 
-注意1: API 最近进行了修改，因此不再包含国家的人口了，你可以使用API中提供的其他数据。
-
-注意2: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会很难支持，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
+注意: 你的应用在大多数国家能好用就可以了。 有些国家，如苏丹，可能会很难支持，因为国名是另一个国家名称的一部分，即南苏丹。 你不必担心这些边缘情况edge cases。
 
 <!-- **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application. -->
 
@@ -787,14 +784,14 @@ Api [https://restcountries.com](https://restcountries.com) 以机器可读的格
 
 
 
-<!-- Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. I used [https://weatherstack.com/](https://weatherstack.com/). -->
-在显示单个国家数据的视图中添加该国首都的天气报告。 有几十个天气数据提供商。 我用了[https://weatherstack.com/](https://weatherstack.com/)。
+<!-- Add to the view showing the data of a single country the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org). -->
+在显示单个国家数据的视图中添加该国首都的天气报告。 有几十个天气数据提供商。 推荐的一个API 是 [https://openweathermap.org](https://openweathermap.org)。
 
 ![](../../images/2/19ba.png)
 
 
-<!-- **NB:** In some browsers (such as Firefox) weatherstack API sends an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome. -->
-** 注意：** 在一些浏览器中（比如火狐） weatherstack API 会返回一个错误响应，说明不支持HTTPS 加密，虽然请求的URL 是 http://_。 这个问题可以通过换做谷歌浏览器来解决
+<!-- **NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome. -->
+** 注意：** 在一些浏览器中（比如火狐） API 可能会返回一个错误响应，说明不支持HTTPS 加密，虽然请求的URL 是 http://_。 这个问题可以通过换做谷歌浏览器来解决
 
 
 <!-- **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key. -->
