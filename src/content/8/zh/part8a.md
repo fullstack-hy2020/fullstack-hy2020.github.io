@@ -366,7 +366,7 @@ server.listen().then(({ url }) => {
 
 ```js
 const server = new ApolloServer({
-  typeDefs,
+  typeDefs, 
   resolvers,
    plugins: [
     ApolloServerPluginLandingPageGraphQLPlayground(),

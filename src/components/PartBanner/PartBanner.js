@@ -51,6 +51,7 @@ const partNameTranslations = {
     'React Native',
     'CI/CD',
     '容器',
+    '使用关系型数据库'
   ],
 };
 
