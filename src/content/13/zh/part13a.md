@@ -78,14 +78,20 @@ The reason why the the previous sections of the course used MongoDB is precisely
 为什么之前的章节用MongoDB ，就是因为它弱schema 的特性，即使不知道关系型数据库的知识，也能使它用起来更简单。本课程的大多数用例，我自己会选择关系型数据库。
 
 ### Application database
+【应用数据库】
 
 For our application we need a relational database. There are many options, but we will be using the currently most popular Open Source solution [PostgreSQL](https://www.postgresql.org/). You can install Postgres (as the database is often called) on your machine, if you wish to do so. An easier option would be using Postgres as a cloud service, e.g. [ElephantSQL](https://www.elephantsql.com/). You could also take advantage of the course [part 12](/en/part12) lessons and use Postgres locally using Docker.
 
+对我们的应用来说，我们需要关系型数据库。有许多的选项，但我们会用开源领域最为流行的 [PostgreSQL](https://www.postgresql.org/) 。 你可以安装Postgres（作为数据库通常这么叫） 到你的机器上，如果你希望这么做。一个更简单的选项是使用 Postgres 作为云服务， 例如 [ElephantSQL](https://www.elephantsql.com/) 。 你也可以使用 [part 12](/zh/part12)  课程中学到的Postgres  的Docker。
+
 However, we will be taking advantage of the fact that it is possible to create a Postgres database for the application on the Heroku cloud service platform, which is familiar from the parts 3 and 4.
+不过，我们会利用这个优势，我们可以在Heroku 云服务上创建Postgres 数据库 ，这在我们的第3和第4章已经非常熟悉了。
 
 In the theory material of this section, we will be building a Postgres-enabled version from the backend of the notes-storage application, which was built in sections 3 and 4.
+在本章的教材中，我们会构建一个 Postgres 开启版本的后台系统，给我们的notes 存储应用，我们在3到4章构建过了。
 
 Now let's create a suitable directory inside the Heroku application, add a database to it and use the _heroku config_ command to see what is <i>connect string</i>, which is required to connect to the database:
+现在，让我们在Heroku 应用中创建一个合适的文件夹，给他添加一个数据库，并 使用 _heroku config_ 命令 来看看是否连接上了，这对连接到数据库来说是必须的。
 
 ```bash
 heroku create
@@ -97,13 +103,19 @@ DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazo
 
 Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [pqsl](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
 
+尤其是使用关系型数据库的时候，直接连接到数据库是十分 重要的。有许多方式可以做到这点，有许多不同的图形操作界面，类似 [pgAdmin](https://www.pgadmin.org/) 。 我们会使用 [pqsl](https://www.postgresql.org/docs/current/app-psql.html)  命令行工具
+
+
 The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on connect url of the Heroku application):
+数据库可以通过 _psql_ 命令进行访问，在Heroku 服务器照如下操作（注意命令 的 参数取决于你的Heroku 应用的 url）
+
 
 ```bash
 heroku run psql -h ec2-44-199-83-229.compute-1.amazonaws.com -p 5432 -U <username> <dbname>
 ```
 
 After entering the password, let's try the main psql command _\d_, which tells you the contents of the database:
+输入密码后，我们尝试主要 的psql 命令 _\d_，可以告诉你数据库的 信息：
 
 ```bash
 Password for user <username>:
@@ -116,8 +128,10 @@ Did not find any relations.
 ```
 
 As you might guess, there is currently nothing in the database.
+你已经猜到了，数据库中并没有信息
 
 Let's create a table for notes:
+让我们为note 创建一个表：
 
 ```sql
 CREATE TABLE notes (
@@ -129,8 +143,12 @@ CREATE TABLE notes (
 ```
 
 A few points: column <i>id</i> is defined as a <i>primary key</i>, which means the value of the column must be unique for each row in the table and the value must not be empty. The type for column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for the fact it is an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. Text-worthy column called <i>content</i> is defined in such a way that it must be assigned a value.
+一些关键点：
+列 <i>id</i> 定义为 <i>primary key</i> ， 也就是说这一列的值对该表每一行来说必须是唯一的，并且不能为空。
+列的类型是 [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL) ，这并不是一个真实的类型，而是一个缩写，实际上它是一个整数型列，Postgres 自动设置为唯一的 ，当创建 一行时，该值就增加。字符型的列叫做 <i>content</i>  ，如此定义，说明它必须赋予一个值。
 
 Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the deck:
+让我们从命令行看一下当前的情况，首先  _\d_ 命令，告诉我们当前都有哪些表。
 
 ```sql
 username=> \d
@@ -143,8 +161,10 @@ username=> \d
 ```
 
 In addition to the <i>notes</i> table, Postgres created a subtable called <i>not\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note.
+此外， <i>notes</i> 表，Postgres 创建了一个子表叫做 <i>not\_id\_seq</i> ，用来跟踪当创建新的note时，<i>id</i> 列的值
 
 With the command _\d notes_, we can see how the <i>notes</i> table is defined:
+通过命令 _\d notes_ ， 我们可以可看到  <i>notes</i> 是如何定义的
 
 ```sql
 username=> \d notes;
@@ -160,8 +180,10 @@ Indexes:
 ```
 
 Therefore the column <i>id</i> has a default value, which is obtained by calling the internal function of Postgres <i>nextval</i>.
+因此， 列  <i>id</i> 有一个默认值，通过调用内部的 函数，即Postgres 的 <i>nextval</i> 来获得
 
 Let's add little content to the table:
+让我们向表中添加一些内容：
 
 ```sql
 insert into notes (content, important) values ('Relational databases rule the world', true);
@@ -169,6 +191,7 @@ insert into notes (content, important) values ('MongoDB is webscale', false);
 ```
 
 And let's see what the created content looks like:
+下面让我们来看看添加的内容长什么样：
 
 ```sql
 username=> select * from notes;
@@ -180,6 +203,7 @@ username=> select * from notes;
 ```
 
 If we try to store data in the database that is not according to the schema, it will not succeed. The value of the mandatory column cannot be missing:
+如果我们尝试将数据存储到数据库，并且不是按照Schema 来的，是不会成功的。主键列的值是不能缺失的：
 
 ```sql
 username=> insert into notes (important) values (true);
@@ -188,6 +212,7 @@ DETAIL: Failing row contains (9, null, t, null).
 ```
 
 The column value cannot be of the wrong type:
+列的值类型不能错：
 
 ```sql
 username=> insert into notes (content, important) values ('only valid data can be saved', 1);
@@ -196,6 +221,7 @@ LINE 1: ...tent, important) values ('only valid data can be saved', 1); ^
 ```
 
 Non-existent columns in the schema are not accepted either:
+schema中不存在的列也是不允许的：
 
 ```sql
 username=> insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
@@ -204,18 +230,23 @@ LINE 1: insert into notes (content, important, value) values ('only ...
 ```
 
 Next it's time to move on to accessing the database from the application.
+接下来，是时候从应用中访问数据库了。
 
 ### Node application using a relational database
+【使用关系型数据库的 Node  应用】
 
 Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as the development-time dependency and also the following runtime dependencies:
+让我们像原来一样使用 <i>npm init</i> 和 <i>nodemon</i> 作为开发时的依赖，以及如下的运行时依赖：
 
 ```bash
 npm install express dotenv pg sequelize
 ```
 
 Of these, the latter [sequelize](https://sequelize.org/master/) is the library through we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to the Mongoose we use with MongoDB.
+这些 依赖当中，最后的  [sequelize](https://sequelize.org/master/) 是我们用来连接Postgres 的库。Sequelize 也叫做 [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) 库，可以让你将JS 对象存储到关系型数据库中，而不是用SQL语言，类似  Mongoose 之于  Mongo DB。
 
 Let's test that the connection is successful. Create the file <i>index.js</i> and add the following content:
+让我们测试一下连接是成功的。创建一个 <i>index.js</i> 文件，并添加如下内容 ：
 
 ```js
 require('dotenv').config()
@@ -244,6 +275,7 @@ main()
 ```
 
 The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in <i>.env</i> file, whose contents should be something like the following:
+数据库中的 <i>connect string</i> ， 与 _heroku config_ 命令相关，内容应该类似下面这样，存储到<i>.env</i>文件中：
 
 ```bash
 $ cat .env
@@ -251,6 +283,7 @@ DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazon
 ```
 
 Let's try if a connection is successful:
+让我们尝试是否连接成功：
 
 ```bash
 $ node index.js
@@ -259,6 +292,7 @@ Connection has been established successfully.
 ```
 
 If and when the connection works, we can then run the first query. Let's modify the program as follows:
+当连接成功，我们可以跑第一个查询。
 
 ```js
 require('dotenv').config()
@@ -290,6 +324,7 @@ main()
 ```
 
 Executing the application should print as follows:
+执行应用的输出应当如下所示：
 
 ```js
 Executing (default): SELECT * FROM notes
@@ -310,8 +345,10 @@ Executing (default): SELECT * FROM notes
 ```
 
 Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we now directly used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
+虽然Sequelize 是一个ORM 库，也就是说使用的时候不需要写太多SQL，我们现在使用直连的方式 [direct SQL](https://sequelize.org/master/manual/raw-queries.html) ，使用sequelize 方法 [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query)。
 
 Since everything seems to be working, let's change the application into a web application.
+既然所有的看起来运行不错，我们改变应用，让他变成web应用 。
 
 ```js
 require('dotenv').config()
@@ -342,10 +379,12 @@ app.listen(PORT, () => {
 ```
 
 The application seems to be working. However, let's now switch to using Sequelize instead of SQL as it is intended to be used.
+应用看起来运行不错。但是让我们切换到使用Sequelize  而不是SQL，就想它的常规用法那样。
 
 ### Model
 
 When using Sequelize, each table in the database is represented by a [model](https://sequelize.org/master/manual/model-basics.html), which is effectively it's own JavaScript class. Let's now define the model <i>Note</i> corresponding to the table <i>notes</i> for the application by changing the code to the following format:
+使用Sequelize 时，数据库中的每一个表都代表了一个 [model](https://sequelize.org/master/manual/model-basics.html) ， 也就是一个独立的 JavaScript  类。我们现在定义模型 <i>Note</i>  ，代表应用中的 <i>notes</i> 表，将代码改变成如下格式：
 
 ```js
 require('dotenv').config()
@@ -401,10 +440,13 @@ app.listen(PORT, () => {
 ```
 
 A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each columm has a type defined, as well as other properties if necessary, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute as well as other configuration information. We also defined that the table does not have frequently used timestamp columns (created\_at and updated\_at).
+代码上有一些注释。<i>Note</i> 的模型定义并没有什么神奇的地方，每个列都有一个类型定义，以及其他的属性，例如是否为该表的主键。模型定义中的第二个参数包括 <i>sequelize</i> 属性，和其他的 配置信息。我们同样定义了该表中不常用的时间戳列（created\_at 和 updated\_at）。
 
 We also defined <i>underscored: true</i>, which means that table names are derived from model names as plural [snake case](https://en.wikipedia.org/wiki/Snake_case) versions. Practically this means that, if the name of the model, as in our case is "Note", then the name of the corresponding table is the plural of the name written in a small initial letter, i.e. <i>notes</i>. If, on the other hand, the name of the model would be "two-part", e.g. <i>StudyGroup</i>, then the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
+我们同样定义了 <i>underscored: true</i> ， 表示表名来自于模型名，并且是  [snake case](https://en.wikipedia.org/wiki/Snake_case)  版本的。实际上也就是说，如果模型的名字叫  <i>notes</i> ，我们这里就是 “Note”，那么代表该 表 的模型就写作小写开头的复数形式，例如 <i>notes</i> 。另一种情况，模型名如果是“两部分” ， 例如 <i>StudyGroup</i> ，那么表名就是<i>study_groups</i>。与直接引用表名不同，Sequelize 允许显示地定义表名。
 
 The same naming policy applies to columns as well. If we had defined that a note is associated with <i>creationYear</i>, i.e. information about the year it was created, we would define it in the model as follows:
+同样的命名策略对列也是适用的。如果我们定义了note 的列为 <i>creationYear</i> ， 代表信息创建的年份，我们会将其定义的model 如下所示：
 
 ```js
 Note.init({
