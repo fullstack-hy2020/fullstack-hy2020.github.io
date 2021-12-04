@@ -459,9 +459,15 @@ Note.init({
 
 The name of the corresponding column in the database would be <i>creation_year</i>. In code, reference to the column is always in the same format as in the model, i.e. in "camel case" format.
 
+数据库中相关列的名字是<i>creation_year</i> 。在代码中，所引用的列与model中的格式相同，比如说是“驼峰式”的。
+
 We have also defined <i>modelName: 'note'</i>, the default "model name" would be capitalized <i>Note</i>. However we want to have a lowercase initial, it will make a few things a bit more convenient going forward.
 
+我们同样定义了 <i>modelName: 'note'</i>，默认“model name”是大写的 <i>Note</i>.但是我们想要小写字母开头，需要更方便的 方法。
+
 The database operation is easy to do using the [query interface](https://sequelize.org/master/manual/model-querying-basics.html) provided by models, the method [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) works exactly as it is assumed by it's name to work:
+
+使用模型提供的查询接口 [query interface](https://sequelize.org/master/manual/model-querying-basics.html) ，数据库操作很容易完成， 方法  [findAll](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-findAll) 的工作按照其名称所假定的那样:
 
 ```js
 app.get('/api/notes', async (req, res) => {
@@ -471,12 +477,14 @@ app.get('/api/notes', async (req, res) => {
 ```
 
 The console tells you that the method call <i>Note.findAll()</i> causes the following query:
+命令行告诉你方法 <i>Note.findAll()</i> 的调用会产生如下查询 ：
 
 ```js
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note";
 ```
 
 Next, let's implement an endpoint for creating new notes:
+接下来，让我们实现一个接口，创建一个新的 note：
 
 ```js
 app.use(express.json())
@@ -491,8 +499,10 @@ app.post('/api/notes', async (req, res) => {
 ```
 
 Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter the entity that defines the values of the columns.
+创建一个 新的Note，是通过调用模型  <i>Note</i> 的方法 [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) 并传递一个实体，定义了各列的值。
 
 Instead of the <i>create</i> method, it [would be possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save in a database using first method [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) to create a Model-object from the desired data, and calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
+不同于 <i>create</i> 方法， 可以 [would be possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance)   使用第一个方法 [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build)  保存想要的数据，并调用  [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) 方法：
 
 ```js
 const note = Note.build(req.body)
@@ -500,6 +510,7 @@ await note.save()
 ```
 
 Calling the <i>build</i> method does not save the object in the database yet, so it is still possible to edit the object before the actually save event:
+调用 <i>build</i> 方法并没有将对象存储到数据库中，所以仍 可能在真正执行保存操作前编辑对象：
 
 ```js
 const note = Note.build(req.body)
@@ -508,8 +519,10 @@ await note.save()
 ```
 
 For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's refrain from it.
+对样例代码的使用用例来说， [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) 方法更合适，让我们来优化一下。
 
 If the object being created is not valid, there is an error message as a result. For example, when trying to create a note without content, the operation fails, and the console reveals the reason to be <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>:   
+如果创建的对象不是合法的 ，结果会有报错信息。例如，当我们尝试创建一个空note 时，操作会失败 ，命令行的报警 信息会是<i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>:
 
 ```
 (node:39109) UnhandledPromiseRejectionWarning: SequelizeValidationError: notNull Violation: Note.content cannot be null
@@ -518,6 +531,7 @@ If the object being created is not valid, there is an error message as a result.
 ```
 
 Let's add a simple error handling when adding a new note:
+让我们在添加一个新note 时添加一个简单的错误处理：
 
 ```js
 app.post('/api/notes', async (req, res) => {
@@ -538,13 +552,20 @@ app.post('/api/notes', async (req, res) => {
 
 In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit.
 
+在本节的任务中，我们将构建一个博客应用程序后端，类似于第4节中的任务，它应该与第5节中的前端兼容，以便进行错误处理。我们还将为后端制作一组特性，这些特性在第5节中的前端可能不知道如何利用。
+
 #### Task 13.1.
 
 Create a GitHub repository for the application and create a Heroku application within in, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
 
+为应用程序创建一个 GitHub 仓库，并创建一个 Heroku 应用程序，以及一个 Postgres 数据库。确保您能够建立一个应用程序到数据库的连接。
+
 #### Task 13.2.
 
 On the command-line, create a <i>blogs</i> table for the application with the following columns
+
+在命令行中，为应用程序创建blog 表，使其有如下列
+
 - id (unique, incrementing id)
 - author (string)
 - url (string that cannot be empty)
@@ -553,11 +574,17 @@ On the command-line, create a <i>blogs</i> table for the application with the fo
 
 Add at least two blogs to the database.
 
+向数据库中添加至少两个blog
+
 Save the SQL-commands you used at the root of the application repository in the file called <i>commands.sql</i>
+
+在  <i>commands.sql</i> 文件中将你在根应用使用过的SQL命令保存下来。
 
 #### Exercise 13.3.
 
 On the command-line, create functionality in your application, which prints the blogs in the database, e.g. as follows:
+
+在命令行中，创建一个函数，能打印出数据库中的blog，如下所示：
 
 ```bash
 $ node cli.js
@@ -574,15 +601,21 @@ Laurenz Albe: 'Gaps in sequences in PostgreSQL', 0 likes
 
 Our application now has one unpleasant side, it assumes that a database with exactly the right schema exists, i.e. that the table <i>notes</i> has been created with the appropriate <i>create table</i> command.
 
+我们的应用现在有一个令人不快的方面，它假设存在具有完全正确的schema的数据库，也就是说，已经使用了适当的 <i>create table</i> 命令创建了 <i>notes</i> 表。
+
 Since the program code is being stored on GitHub, it would make sense to also store the commands that create the database in the context of the program code, so that the database schema is definitely the same as what the program code is expecting. Sequelize is actually able to generate a schema automatically from the model definition by using the models method [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization).
 
+因为程序代码存储在 GitHub 上，所以把创建数据库的命令也存储在程序代码的上下文中是有意义的，这样数据库schema就肯定和程序代码期望的是一样的。Sequelize 实际上能够通过使用 models 方法  [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) 从模型定义自动生成schema。
+
 Let's now destroy the database from the console by entering the following command:
+我们现在销毁掉数据库，在命令行执行：
 
 ```
 drop table notes;
 ```
 
 The `\d` command reveals that the table has been lost from the database:
+利用  `\d` 命令检查，发现表已经从数据库删除了。
 
 ```
 username=> \d
@@ -590,26 +623,32 @@ Did not find any relations.
 ```
 
 The application no longer works.
+应用目前不好使了。
 
 Let's add the following command to the application immediately after the model <i>Note</i> is defined:
+在model  <i>Note</i> 定义后，我们添加如下的命令：
 
 ```js
 Note.sync()
 ```
 
 When the application starts, the following is printed on the console:
+应用启动后，会打印如下信息：
 
 ```
 Executing (default): CREATE TABLE IF NOT EXISTS "notes" ("id" SERIAL , "content" TEXT NOT NULL, "important" BOOLEAN, "date" TIMESTAMP WITH TIME ZONE, PRIMARY KEY ("id"));
 ```
 
 That is, when the application starts, the command <i>CREATE TABLE IF NOT EXISTS "notes"...</i> is executed which creates the table <i>notes</i> if it does not already exist.
+也就是说，当应用启动时，命令  <i>CREATE TABLE IF NOT EXISTS "notes"...</i> 会被执行，如果 <i>notes</i> 不存在会创建一个表。
 
 ### Other operations
 
 Let's complete the application with a few more operations.
+让我们为应用完成一些更多的操作。
 
 Searching for a single note is possible with the method [findByPk](https://sequelize.org/master/manual/model-querying-finders.html), because it is retrieved based on the id of the primary key:
+查找一个单独的note，可以通过方法 [findByPk](https://sequelize.org/master/manual/model-querying-finders.html) ， 因为它时通过主键来查询的：
 
 ```js
 app.get('/api/notes/:id', async (req, res) => {
@@ -623,14 +662,17 @@ app.get('/api/notes/:id', async (req, res) => {
 ```
 
 Retrieving a single note causes the following SQL command:
+查询一个单独的note 会产生如下的SQL命令：
 
 ```
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note". "id" = '1';
 ```
 
 If no note is found, return the operation <i>null</i>, and in this case the relevant status code is given.
+如果找到了note， 会返回 <i>null</i> ，这个用例中相关的状态码就返回了。
 
 Modifying the note is done as follows. Only the modification of the <i>important</i> field is supported, since the application's frontend does not need anything else:
+修改note 的动作就完成了。只要修改  <i>important</i>  字段是支持的就行，因为前台并不需要其他的字段：
 
 ```js
 app.put('/api/notes/:id', async (req, res) => {
@@ -646,12 +688,15 @@ app.put('/api/notes/:id', async (req, res) => {
 ```
 
 The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row.
+与数据库行相关的对象通过 <i>findByPk</i> 方法获取到了，对象的修改和结果的保存通过 <i>save</i>  方法实现了。
 
 The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1), branch <i>part13-1</i>.
+当前应用的所有代码，可以在  [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1)  中找到，处于分支  <i>part13-1</i>
 
 ### Printing the objects returned by Sequelize to a console
 
 The JavaScript programmer's most important tool is <i>console.log</i>, whose aggressive use gets even the worst bugs under control. Let's add console printing to the single note path:
+JavaScript 程序员最重要的工具就是，好好使用可以控制严重的bug。让我们在控制台中打印单个note 的路径：
 
 
 ```js
@@ -667,6 +712,7 @@ app.get('/api/notes/:id', async (req, res) => {
 ```
 
 We can see that the end result is not exactly what we expected:
+我们可以看到最终结果不是我们想要的：
 
 ```js
 note {
@@ -695,6 +741,7 @@ note {
 ```
 
 In addition to the note information, all sorts of other things are printed on the console. We can reach the desired result by calling the model-object method [toJSON](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-toJSON):
+除了Note 的信息外，控制台还打印了许多其他内容，我们可以通过调用 model-object 的 [toJSON](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-toJSON) 方法来获得想要的结果：
 
 
 ```js
@@ -710,6 +757,7 @@ app.get('/api/notes/:id', async (req, res) => {
 ```
 
 Now the result is exactly what we want.
+现在结果是我们想要的了。
 
 ```js
 { id: 1,
@@ -719,6 +767,7 @@ Now the result is exactly what we want.
 ```
 
 In the case of a collection of objects, the method toJSON does not work directly, the method must be called separately for each object in the collection:
+对于对象集合，toJson方法并不能直接工作，必须为集合中每个对象调用该方法：
 
 ```js
 router.get('/', async (req, res) => {
@@ -731,6 +780,7 @@ router.get('/', async (req, res) => {
 ```
 
 The print looks like the following:
+打印结果如下图所示：
 
 ```js
 [ { id: 1,
@@ -744,6 +794,7 @@ The print looks like the following:
 ```
 
 However, perhaps a better solution is to turn the collection into JSON for printing by using the method [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify):
+但是，一个更好的解决方案是通过 [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify): 方法将集合转换成JSON 进行打印：
 
 ```js
 router.get('/', async (req, res) => {
@@ -756,12 +807,14 @@ router.get('/', async (req, res) => {
 ```
 
 This way is better especially if the objects in the collection contain other objects. It is also often useful to format the objects on the screen in a slightly more reader-friendly format. This can be done with the following command:
+这种方式更好，尤其是当集合中的对象包含其他对象的时候。此外，将屏幕上的对象格式化为更易读的格式是十分有用的，可以通过一下命令实现：
 
 ```json
 console.log(JSON.stringify(notes, null, 2))
 ```
 
 The print looks like the following:
+打印结果如下所示：
 
 ```js
 [
@@ -789,6 +842,7 @@ The print looks like the following:
 #### Task 13.4.
 
 Transform your application into a web application that supports the following operations
+将你的应用转换为支持以下操作的Web应用程序：
 
 - GET api/blogs (list all blogs)
 - POST api/blogs (add a new blog)
