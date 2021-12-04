@@ -25,7 +25,7 @@
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
       "The last day to do the exam for the current course version is 10.1.2022. Exercises can be submitted until 28.2.2022.",
-      "2022 edition will start 15.3.2022. There will not be much changes. You can continue the current course in the new edition, see  <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>this</a> for more see <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>this</a>.",
+      "2022 edition will start 15.3.2022. There will not be much changes. You can continue the current course in the new edition, see  <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>this</a> for more details.",
       "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
@@ -61,7 +61,8 @@
     "mainTitle": "深入浅出现代Web编程",
     "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 编程技术。重点是利用 ReactJS 搭配Node.js开发的REST API，来搭建单页面应用程序（SPA：Single Page Application）",
     "current": [
-      "2021版本的课程已经开始啦！",
+      "当前课程的考试截止日期为2022年1月10日。联系的提交可以在2022年2月20日前完成。",
+      "2022年的课程会在2022年3月15日开始。课程主体内容不会有大的改变。2022年的课程可以在2021年的课程上延续, <a href='/zh/part0/general_info#expanding-on-a-previously-completed-course'>在这里</a>阅读更多.",
       "你可以加入我们的Telegram 群组<a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>来讨论课程以及相关的内容。快来加入我们吧！"
     ],
     "telegram": "Telegram是一个类似 whatsapp / messenger（国内的微信【译者注】） 讨论组应用，是一个多端应用，你可以在浏览器、手机设备以及Windows / Linux / OSX 客户端使用它。",

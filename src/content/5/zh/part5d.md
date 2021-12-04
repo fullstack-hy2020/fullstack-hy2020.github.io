@@ -1499,13 +1499,13 @@ describe('Blog app', function() {
 <!-- The test has to ensure, that a new blog is added to the list of all blogs.  -->
 这个测试必须确保，一个新的博客被添加到所有的博客列表中。
 
-#### 5.20: bloglist end to end testing, 步骤4
+#### 5.20*: bloglist end to end testing, 步骤4
 
 
 <!-- Make a test which checks that user can like a blog.  -->
 做一个测试，检查用户是否能点赞博客。
 
-#### 5.21: bloglist end to end testing, 步骤5
+#### 5.21*: bloglist end to end testing, 步骤5
 <!-- Make a test for ensuring, that the user who created a blog can delete it.  -->
 做一个测试来确保，创建博客的用户可以删除它。
 
@@ -1514,7 +1514,7 @@ describe('Blog app', function() {
 <!--<i>Optional bonus exercise:</i> also check that other users cannot delete the blog. -->
 <i>可选附加练习Optional bonus exercise</i>:  检查其他用户不能删除的博客。
 
-#### 5.22: bloglist end end testing, 步骤 6
+#### 5.22*: bloglist end end testing, 步骤 6
 <!-- Make a test which checks, that the blogs are ordered according to likes with the blog with the most likes being first.  -->
 先做一个检查，看看博客是否按照喜好排序，最喜欢的博客放最前面。
 

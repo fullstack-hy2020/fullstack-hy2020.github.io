@@ -46,9 +46,7 @@ export default class ContentTemplate extends Component {
 
     links.map(i => {
       i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
-      i.classList.contains('language-switcher__language')
-        ? (i.target = i.target)
-        : (i.target = '_blank');
+      ! i.classList.contains('language-switcher__language') && (i.target = '_blank');
 
       function over() {
         i.style.backgroundColor = colors[partColors[frontmatter.part]];
@@ -160,6 +158,7 @@ export default class ContentTemplate extends Component {
           ]}
         />
 
+{/* eslint-disable */}
         {this.state.showArrowUp && (
           <div
             className="arrow-go-up"
@@ -174,6 +173,7 @@ export default class ContentTemplate extends Component {
             <img src={ArrowToTop} alt="arrow-up" />
           </div>
         )}
+{/* eslint-enable */}
 
         <div className="course-container spacing--after">
           <Banner

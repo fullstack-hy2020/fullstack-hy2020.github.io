@@ -11,8 +11,8 @@ lang: zh
 
 在本章中，你将构建一个健壮的部署管道pipeline，以便从[练习11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2)开始构建一个现成的[示例项目](https://github.com/smartlyio/full-stack-open-pokedex) 。你将为示例项目创建一个[fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)，这将为您创建一个仓库的私人副本。在最后两个练习中，你将为自己以前创建的应用程序构建另一个部署管道！
 
-<!-- There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 9, the submission goes to a different "course instance".  -->
-本章共有22个练习，你需要完成<i>每个</i>练习才能完成课程。与前面的章节一样，练习是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) 提交的，但与0到9章节不同，提交的是一个不同的“课程实例”。
+<!-- There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".  -->
+本章共有22个练习，你需要完成<i>每个</i>练习才能完成课程。与前面的章节一样，练习是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) 提交的，但与0到7章节不同，提交的是一个不同的“课程实例”。
 
 <!-- This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finish at least parts 0 to 5 before starting this part. -->
 这一章节会依赖课程前面章节所涉及的许多概念。在开始这个章节之前，建议你至少完成0到5章的学习。

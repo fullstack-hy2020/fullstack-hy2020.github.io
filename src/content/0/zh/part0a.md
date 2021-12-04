@@ -81,12 +81,12 @@ However, note that the deadline for taking exam for University of Helsinki credi
 ### Parts and completion
 【章节介绍与完成标准】
 
-<!-- Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 13 credits.  -->
-全栈课程的学习包括核心课程部分以及多种扩展部分 。你可以通过完成这些内容的学习获得5-13个学分
+<!-- Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 14 credits.  -->
+全栈课程的学习包括核心课程部分以及多种扩展部分 。你可以通过完成这些内容的学习获得5-14个学分
 
 
-#### Parts 0-5 (core course) - Full Stack Web Development (5 cr, AYCSM141081en)
-【0-5章（核心课程）-全栈 Web 开发(5 cr, AYCSM141081en)
+#### Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
+【0-5章（核心课程）-全栈 Web 开发(5 cr, CSM141081)
 <!-- The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk). -->
 本课程取得的学分以及成绩是依照提交0-7章中练习的数量（包括带星号的练习题）。
 
@@ -130,8 +130,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 <!-- <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i> -->
 如果只是想要获得课程的认证证书，不必参加考试或者注册开放大学。
 
-#### Part 6 - Full Stack Web Development, extension 1 (1 cr, AYCSM141082en)
-【第六章-全栈Web开发，扩展1(1 cr, AYCSM141082en)】
+#### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
+【第六章-全栈Web开发，扩展1(1 cr, CSM141082)】
 
 <!-- By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension.  -->
 在提交了0-7章的关于核心课程的至少127个练习后，你可以通过这个扩展来获得一个额外的学分。
@@ -144,8 +144,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 - [通过开放大学开启第六章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-2c09d93d-4f75-4359-85a3-5f8e2c2c5ce6) 
 -	[申请第六章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-#### Part 7 - Full Stack Web Development, extension 2 (1 cr, AYCSM141083en)
-【第七章 - 全栈Web开发，扩展2(1 cr, AYCSM141083en)】
+#### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
+【第七章 - 全栈Web开发，扩展2(1 cr, CSM141083)】
 <!-- By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. -->
 在提交了0-7章的关于核心课程的至少138个练习后，你可以通过这个扩展来获得一个额外的学分。
 
@@ -158,8 +158,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 - [通过开放大学开启第七章](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51f0edb4-c137-4871-a1e0-d93ca9b47bdf) 
 -	[申请第七章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-#### Part 8 - Full Stack Web Development: GraphQL (1 cr, AYCSM14113)
-【第八章 - 全栈Web开发，GraphQL(1 cr, AYCSM14113)】
+#### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
+【第八章 - 全栈Web开发，GraphQL(1 cr, CSM14113)】
 <!-- By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7. -->
 通过提交第八章的至少22/26个练习，关于GraphQL ，你可以获得一个额外的学分。第八章可以在第五章学习完后随时学习，因为它是独立于第6和第7章的。
 
@@ -171,8 +171,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 - [通过开放大学开启第八章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-5f475a66-7d83-4b0e-9413-65e83be3dd7e) 
 -	[申请第八章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-#### Part 9 - Full Stack Web Development: TypeScript (1 cr, AYCSM14110)
-【第九章-全栈Web开发：TypeScript (1 cr, AYCSM14110)】
+#### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
+【第九章-全栈Web开发：TypeScript (1 cr, CSM14110)】
 <!-- By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9. -->
 通过提交第九章的至少24/27个练习，关于TypeScript ，你可以获得一个额外的学分。推荐在学习完0-7章后再学习第9章。
 
@@ -184,8 +184,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 - [通过开放大学开启第九章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f62d31aa-e737-4060-b930-373b5236fa08) 
 -	[申请第九章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-#### Part 10 - Full Stack Web Development: React Native (2 cr, AYCSM14111)
-【第十章-全栈Web开发： React Native (2 cr, AYCSM14111)】
+#### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
+【第十章-全栈Web开发： React Native (2 cr, CSM14111)】
 <!-- By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native). -->
 
 通过提交第十章的25个练习，关于 React Native ，你可以获得两个额外的学分。这个章节的预备知识以及学分可以在[第10章](/zh/part10/introduction_to_react_native) 中找到。
@@ -199,8 +199,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 - [通过开放大学开启第十章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b2475f8c-e911-4a07-9993-549955381936) 
 -	[申请第十章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
-#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, AYCSM14112)
-【第11章-全栈Web开发：持续集成/持续交付(1 cr, AYCSM14112)】
+#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
+【第11章-全栈Web开发：持续集成/持续交付(1 cr, CSM14112)】
 
 <!-- By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit.  -->
 通过提交11章的所有练习，关于持续集成与持续交付，你可以获得额外的1个学分。
@@ -219,7 +219,7 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 
 
-#### Part 12 - Full Stack Web Development: Containers (1 cr, AYCSM14112)
+#### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
 <!-- By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit.  -->
 
@@ -236,7 +236,23 @@ However, note that the deadline for taking exam for University of Helsinki credi
 - 提交12章的所有练习
 - [通过开放大学开启第十二章节](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60
 ) 
--	[申请第十一章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+-	[申请第十二章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
+
+#### Part 13 - Full Stack Web Development: relational databases (1 cr, CSM14114)
+
+<!-- By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit.  -->
+通过提交13章，关于关系型数据库的所有练习，你可以获得额外的1个学分。
+<!-- More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13). -->
+这个章节的预备知识以及学分可以在[第13章](/zh/part13) 中找到。
+<!-- - Submit all exercises for part 13. 
+- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-136d0c67-5348-468f-aa94-7e0b72197d91
+). 
+- [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits). -->
+
+- 提交13章的所有练习
+- [通过开放大学开启第十三章节](ttps://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-136d0c67-5348-468f-aa94-7e0b72197d91
+) 
+-	[申请第十三章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)
 
 
 
@@ -282,11 +298,15 @@ However, note that the deadline for taking exam for University of Helsinki credi
 如果你已经参与过这门课程，无论是在大学课程还是公开课，你都可以基于之前的课来进行拓展。
 
 #### Expanding on Full stack open 2019 or 2020
-【扩展你的 2019 或2020 的全公开课程】
+【延续你的 2019 或2020 的全公开课程】
 
-<!-- You can just pick up where you left! If you wish to resubmit a whole part, please contact the course personel. -->
+<!-- You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Telegram [@mluukkai](https://t.me/mluukkai), with your GitHub username and which parts you would like to have deleted from your submissions. -->
 
-你可以续接你上次学习的进度！ 如果您希望重新提交整个章节的内容，请与课程负责人联系。
+你可以延续你上次学习的进度！ 如果您希望重新提交整个章节的内容，请与课程负责人联系，可以通过[email](mailto:matti.luukkainen@helsinki.fi) 或者 Telegram [@mluukkai](https://t.me/mluukkai), 附上你的用户名，以及希望删除的章节。
+
+<!-- The same will apply for the 2022, you can continue seamlesly if you have started the course 2019-2021 -->
+
+同样的，在2022年，你可以按照这种方式来延续你2019-2021的课程。
 
 #### Expanding on other instances of this course
 【拓展其他课程】
@@ -433,9 +453,9 @@ Enroll in the course through Open University by 9 Jan 2022 [here](https://www.av
 ### Interview promise  
 【面试保证】
 
-<!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (13 + 10).-->
+<!-- Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits  (12 + 10). The parts 12 and 13 that where released during 2021 are not required if you finish the project by 15.3.2022.-->
 
-我们的合作伙伴包括[Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(13 + 10)的人都可以获得工作面试。
+我们的合作伙伴包括[Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) 和  [Smartly.io](https://www.smartly.io/) 它们承诺每个完成课程和项目作业，并获得最高学分(12 + 10)的人都可以获得工作面试。如果你能在2022年3月15日前完成项目，那么12章和13章，这两个于2021年发布的章节并不是强制的。
 
 <!-- This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits. -->
 
