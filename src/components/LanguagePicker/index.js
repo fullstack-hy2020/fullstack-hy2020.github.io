@@ -22,7 +22,8 @@ const LanguagePicker = ({
   const className = cn(classNameProp, styles.select);
 
   return (
-    <select value={value} onBlur={selectOnChange} className={className}>
+    /*eslint jsx-a11y/no-onchange: "off" */
+    <select value={value} onChange={selectOnChange} className={className}>
       {options.map(({ value: optionValue, label }) => (
         <option value={optionValue} key={optionValue}>
           {label}
