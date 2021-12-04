@@ -22,7 +22,7 @@ const LanguagePicker = ({
   const className = cn(classNameProp, styles.select);
 
   return (
-    <select value={value} onChange={selectOnChange} className={className}>
+    <select value={value} onBlur={selectOnChange} className={className}>
       {options.map(({ value: optionValue, label }) => (
         <option value={optionValue} key={optionValue}>
           {label}

@@ -7,7 +7,6 @@ import React from 'react';
 import navigation from '../../content/partnavigation/partnavigation';
 import snakeCase from 'lodash/fp/snakeCase';
 import { useTranslation } from 'react-i18next';
-import getTranslationPath from '../../utils/getTranslationPath';
 
 const prevChar = c => String.fromCharCode(c.charCodeAt(0) - 1);
 const nextChar = c => String.fromCharCode(c.charCodeAt(0) + 1);
