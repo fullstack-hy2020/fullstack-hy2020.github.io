@@ -19,7 +19,7 @@ Tavoitteenamme on tehdä [osan 2](/osa2) muistiinpanosovellukseen sopiva backend
 
 **Huomaa**, että tässä osassa ja sen tehtävissä luotavat sovellukset eivät ole Reactia, eli emme käytä <i>create-react-app</i>-sovellusta tämän osan sovellusten rungon alustamiseen.
 
-Osassa 2 oli jo puhe [npm](/osa2/palvelimella_olevan_datan_hakeminen#npm):stä, eli JavaScript-projektien hallintaan liittyvästä, alunperin Node-ekosysteemistä kotoisin olevasta työkalusta. 
+Osassa 2 oli jo puhe [npm](/osa2/palvelimella_olevan_datan_hakeminen#npm):stä, eli JavaScript-projektien hallintaan liittyvästä, alun perin Node-ekosysteemistä kotoisin olevasta työkalusta. 
 
 Mennään sopivaan hakemistoon ja luodaan projektimme runko komennolla _npm init_. Vastaillaan kysymyksiin sopivasti, ja tuloksena on hakemiston juureen sijoitettu projektin tietoja kuvaava tiedosto <i>package.json</i>:
 
@@ -61,13 +61,13 @@ console.log('hello world')
 Voimme suorittaa ohjelman joko "suoraan" nodella, komentorivillä
 
 ```bash
-node index.js
+$ node index.js
 ```
 
 tai [npm-skriptinä](https://docs.npmjs.com/misc/scripts)
 
 ```bash
-npm start
+$ npm start
 ```
 
 npm-skripti <i>start</i> toimii koska määrittelimme sen tiedostoon <i>package.json</i>:
@@ -108,7 +108,7 @@ app.listen(PORT)
 console.log(`Server running on port ${PORT}`)
 ```
 
-Kun sovellus käynnistuu, konsoliin tulostuu
+Kun sovellus käynnistyy, konsoliin tulostuu
 
 ```bash
 Server running on port 3001
@@ -232,7 +232,7 @@ Nodella tapahtuvaa web-sovellusten ohjelmointia helpottamaan onkin kehitelty use
 Otetaan Express käyttöön määrittelemällä se projektimme riippuvuudeksi komennolla
 
 ```bash
-npm install express
+$ npm install express
 ```
 
 Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
@@ -264,13 +264,13 @@ npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.
 Voimme päivittää projektin riippuvuudet komennolla
 
 ```bash
-npm update
+$ npm update
 ```
 
 Jos aloitamme projektin koodaamisen toisella koneella, saamme haettua ajantasaiset, <i>package.json</i>:in määrittelyn kanssa yhteensopivat riippuvuudet komennolla
 
 ```bash
-npm install
+$ npm install
 ```
 
 Jos riippuvuuden <i>major</i>-versionumero ei muutu, uudempien versioiden pitäisi olla [taaksepäin yhteensopivia](https://en.wikipedia.org/wiki/Backward_compatibility), eli jos ohjelmamme käyttäisi tulevaisuudessa esim. Expressin versiota 4.99.175, tässä osassa tehtävän koodin pitäisi edelleen toimia ilman muutoksia. Sen sijaan tulevaisuudessa joskus julkaistava Express 5.0.0 [voi sisältää](https://expressjs.com/en/guide/migrating-5.html) sellaisia muutoksia, että koodimme ei enää toimisi.
@@ -320,7 +320,7 @@ app.get('/', (request, response) => {
 
 Tapahtumankäsittelijäfunktiolla on kaksi parametria. Näistä ensimmäinen eli [request](http://expressjs.com/en/4x/api.html#req) sisältää kaikki HTTP-pyynnön tiedot ja toisen parametrin [response](http://expressjs.com/en/4x/api.html#res):n avulla määritellään, miten pyyntöön vastataan.
 
-Koodissa pyyntöön vastataan käyttäen _response_-olion metodia [send](http://expressjs.com/en/4x/api.html#res.send), jonka kutsumisen seurauksena palvelin vastaa HTTP-pyyntöön lähettämällä selaimelle vastaukseksi _send_:in parametrina olevan merkkijonon <code>\<h1>Hello World!\</h1></code>. Koska parametri on merkkijono, asettaa Express vastauksessa <i>content-type</i>-headerin arvoksi <i>text/html</i>. Statuskoodiksi tulee oletusarvoisesti 200. 
+Koodissa pyyntöön vastataan käyttäen _response_-olion metodia [send](http://expressjs.com/en/4x/api.html#res.send), jonka kutsumisen seurauksena palvelin vastaa HTTP-pyyntöön lähettämällä selaimelle vastaukseksi _send_:in parametrina olevan merkkijonon <code>\<h1>Hello World!\</h1></code>. Koska parametri on merkkijono, asettaa Express vastauksessa <i>Content-Type</i>-headerin arvoksi <i>text/html</i>. Statuskoodiksi tulee oletusarvoisesti 200. 
 
 Asian voi varmistaa konsolin välilehdeltä <i>Network</i>:
 
@@ -334,7 +334,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa JavaScript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-type</i> arvoksi <i>application/json</i>.
+Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa JavaScript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-Type</i> arvoksi <i>application/json</i>.
 
 ![](../../images/3/6ea.png)
 
@@ -367,7 +367,7 @@ Ongelmaan on ratkaisu nimeltä [nodemon](https://github.com/remy/nodemon):
 Asennetaan nodemon määrittelemällä se <i>kehitysaikaiseksi riippuvuudeksi</i> (development dependency) komennolla:
 
 ```bash
-npm install --save-dev nodemon
+$ npm install --save-dev nodemon
 ```
 
 Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
@@ -393,7 +393,7 @@ Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorit
 Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
 
 ```bash
-node_modules/.bin/nodemon index.js
+$ node_modules/.bin/nodemon index.js
 ```
 
 Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenkäynnistymisen. Kannattaa huomata, että vaikka palvelin uudelleenkäynnistyy automaattisesti, selain täytyy kuitenkin refreshata, sillä toisin kuin Reactin yhteydessä, meillä ei nyt ole eikä tässä skenaariossa (jossa palautamme JSON-muotoista dataa) edes voisikaan olla selainta päivittävää [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) -toiminnallisuutta.
@@ -417,7 +417,7 @@ Skriptissä ei ole tarvetta käyttää nodemonin polusta sen täydellistä muoto
 Voimme nyt käynnistää palvelimen sovelluskehitysmoodissa komennolla
 
 ```bash
-npm run dev
+$ npm run dev
 ```
 
 Toisin kuin skriptejä <i>start</i> tai <i>test</i> suoritettaessa, komennon tulee sisältää myös <i>run</i>.
@@ -649,7 +649,7 @@ app.post('/api/notes', (request, response) => {
 
 Tapahtumankäsittelijäfunktio pääsee dataan käsiksi olion _request_ kentän <i>body</i> avulla.
 
-Ilman json-parserin lisäämistä eli komentoa _app.use(express.json())_ pyynnön kentän <i>body</i> arvo olisi ollut määrittelemätön. json-parserin toimintaperiaatteena on, että se ottaa pyynnön mukana olevan JSON-muotoisen datan, muuttaa sen JavaScript-olioksi ja sijoittaa _request_-olion kenttään <i>body</i> ennen kuin routen käsittelijää kutsutaan.
+Ilman json-parserin lisäämistä eli komentoa _app.use(express.json())_ pyynnön kentän <i>body</i> arvo olisi ollut määrittelemätön. Json-parserin toimintaperiaatteena on, että se ottaa pyynnön mukana olevan JSON-muotoisen datan, muuttaa sen JavaScript-olioksi ja sijoittaa _request_-olion kenttään <i>body</i> ennen kuin routen käsittelijää kutsutaan.
 
 Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin tulostaa sen konsoliin ja palauttaa sen pyynnön vastauksessa.
 
@@ -695,7 +695,7 @@ REST clientin eräs suuri etu Postmaniin verrattuna on se, että pyynnöt saa k�
 >
 > Ongelmia voi syntyä esim., jos jätät vahingossa VS Coden REST clientillä ylimmän rivin ja headerit määrittelevien rivien väliin tyhjän rivin. Tällöin REST client tulkitsee, että millekään headerille ei aseteta arvoa ja näin backend ei osaa tulkita pyynnön mukana olevaa dataa JSON:iksi.
 >
-> Puuttuvan <i>content-type</i>-headerin ongelma selviää, kun backendissa tulostaa pyynnön headerit esim. komennolla _console.log(request.headers)_.
+> Puuttuvan <i>Content-Type</i>-headerin ongelma selviää, kun backendissa tulostaa pyynnön headerit esim. komennolla _console.log(request.headers)_.
 
 Palataan taas sovelluksen pariin. Kun tiedämme, että sovellus vastaanottaa tiedon oikein, voimme viimeistellä sovelluslogiikan:
 
@@ -858,7 +858,7 @@ Tee uuden numeron lisäykseen virheiden käsittely. Pyyntö ei saa onnistua, jos
 - nimi tai numero puuttuu
 - lisättävä nimi on jo luettelossa
 
-Vastaa asiaankuuluvalla statuskoodilla ja liitä vastaukseen mukaan myös tieto, joka kertoo virheen syyn, esim:
+Vastaa asiaankuuluvalla statuskoodilla ja liitä vastaukseen mukaan myös tieto, joka kertoo virheen syyn, esim.:
 
 ```js
 { error: 'name must be unique' }
