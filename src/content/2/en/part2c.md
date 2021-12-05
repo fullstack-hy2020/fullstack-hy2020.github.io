@@ -281,7 +281,7 @@ const promise2 = axios.get('http://localhost:3001/foobar')
 console.log(promise2)
 ```
 
-If you open <http://localhost:3000> in the browser, this should be printed to the console
+If you open <http://localhost:3001> in the browser, this should be printed to the console
 
 ![](../../images/2/16b.png)
 
