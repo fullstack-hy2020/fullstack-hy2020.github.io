@@ -208,7 +208,7 @@ Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löyty
 
 Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi uudelleen Herokuun.
 
-[Sovellus](https://glacial-ravine-74819.herokuapp.com/) toimii moitteettomasti lukuunottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
+[Sovellus](https://glacial-ravine-74819.herokuapp.com/) toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
 ![](../../images/3/30ea.png)
 
