@@ -479,15 +479,15 @@ const rollbackMigration = async () => {
 }
 // highlight-end
 
-module.exports = { connectToDatabase, sequelize, rollbackMigrations } // highlight-line
+module.exports = { connectToDatabase, sequelize, rollbackMigration } // highlight-line
 ```
 
 Tehdään tiedosto <i>util/rollback.js</i>, jonka kautta npm-skripti pääsee suorittamaan määritellyn migraation peruvan funktion:
 
 ```js
-const { rollbackMigrations } = require('./db')
+const { rollbackMigration } = require('./db')
 
-rollbackMigrations()
+rollbackMigration()
 ```
 
 ja itse skripti:
