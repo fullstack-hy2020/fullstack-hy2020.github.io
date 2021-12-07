@@ -130,7 +130,7 @@ username=> \d
 (2 rows)
 ```
 
-Taulun <i>notes</i> lisäksi Postgres loi aputaulun <i>not\_id\_seq</i>, joka pitää kirjaa siitä, mikä arvo sarakkeelle <i>id</i> annetaan seuraavaa muistiinpanoa luotaessa.
+Taulun <i>notes</i> lisäksi Postgres loi aputaulun <i>notes\_id\_seq</i>, joka pitää kirjaa siitä, mikä arvo sarakkeelle <i>id</i> annetaan seuraavaa muistiinpanoa luotaessa.
 
 Komennolla _\d notes_ näemme miten taulu <i>notes</i> on määritelty:
 
