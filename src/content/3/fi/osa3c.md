@@ -11,7 +11,7 @@ Ennen kuin siirrymme osan varsinaiseen aiheeseen eli tiedon tallettamiseen tieto
 
 ### Node-sovellusten debuggaaminen
 
-Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan JavaScriptin. Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta se ei ole koko totuus. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-console-log/swizec/6633).
+Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin selaimessa toimivan JavaScriptin. Vanha hyvä keino on tietysti konsoliin tulostelu. Se kannattaa aina. On mielipiteitä, joiden mukaan konsoliin tulostelun sijaan olisi syytä suosia jotain kehittyneempää menetelmää, mutta se ei ole koko totuus. Jopa maailman aivan eliittiin kuuluvat open source -kehittäjät [käyttävät](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) tätä [menetelmää](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
 
 #### Visual Studio Code
 
@@ -61,7 +61,7 @@ Kun sovellus "ei toimi", onkin selvitettävä missä vika on. On erittäin yleis
 
 Avainasemassa onkin systemaattisuus. Koska virhe voi olla melkein missä vain, <i>kaikkea pitää epäillä</i>, ja tulee pyrkiä poissulkemaan ne osat, joissa virhe ei ainakaan ole. Konsoliin kirjoitus, Postman, debuggeri ja kokemus auttavat.
 
-Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) toimii tässäkin yhteydessä paremmin kuin hyvin.
+Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin kirjoittamista. Se on tae siitä, että koodissa on pian kymmenen ongelmaa lisää ja niiden syyn selvittäminen on entistäkin vaikeampaa. Toyota Production Systemin periaate [Stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) toimii tässäkin yhteydessä paremmin kuin hyvin.
 
 ### MongoDB
 
@@ -71,9 +71,9 @@ Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin da
 
 Lue nyt linkitetty [johdanto](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD). Jatkossa oletetaan, että hallitset käsitteet <i>dokumentti</i> ja <i>kokoelma</i> (collection).
 
-MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/cloud/atlas).
+MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
-Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehoittaa luomaan klusterin:
+Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehottaa luomaan klusterin:
 
 ![](../../images/3/57.png)
 
@@ -292,7 +292,7 @@ Tee projektihakemistoon tiedosto <i>mongo.js</i>, jonka avulla voit lisätä tie
 
 **HUOM:** Jos/kun laitat tiedoston GitHubiin, älä laita tietokannan salasanaa mukaan!
 
-Ohjelma toimii siten, että jos sille annetaan käynnistettäessä kolme komentoriviparametria (joista ensimmäinen on salasana), esim:
+Ohjelma toimii siten, että jos sille annetaan käynnistettäessä kolme komentoriviparametria (joista ensimmäinen on salasana), esim.:
 
 ```bash
 node mongo.js yourpassword Anna 040-1234556
@@ -715,7 +715,7 @@ Ei ole koskaan huono idea tulostaa poikkeuksen aiheuttanutta olioa konsoliin vir
 })
 ```
 
-Virheenkäsittelijään joutumisen syy voi olla joku ihan muu kuin mitä on tullut alunperin ajatelleeksi. Jos virheen tulostaa konsoliin, voi säästyä pitkiltä ja turhauttavilta väärää asiaa debuggaavilta sessioilta.
+Virheenkäsittelijään joutumisen syy voi olla joku ihan muu kuin mitä on tullut alun perin ajatelleeksi. Jos virheen tulostaa konsoliin, voi säästyä pitkiltä ja turhauttavilta väärää asiaa debuggaavilta sessioilta.
 
 Aina kun ohjelmoit ja projektissa on mukana backend, <i>**tulee ehdottomasti koko ajan pitää silmällä backendin konsolin tulostuksia**</i>. Jos työskentelet pienellä näytöllä, riittää että konsolista on näkyvissä edes pieni kaistale:
 
@@ -848,7 +848,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 
 Vastauksena on molemmissa "onnistuneissa" tapauksissa statuskoodi <i>204 No Content</i> eli jos olio poistettiin tai olioa ei ollut mutta <i>id</i> oli periaatteessa oikea. Takaisinkutsun parametrin _result_ perusteella olisi mahdollisuus haarautua ja palauttaa tilanteissa eri statuskoodi, jos sille on tarvetta. Mahdollinen poikkeus siirretään jälleen virheenkäsittelijälle.
 
-Muistiinpanon tärkeyden muuttamisen mahdollistava olemassaolevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate):
+Muistiinpanon tärkeyden muuttamisen mahdollistava olemassa olevan muistiinpanon päivitys onnistuu helposti metodilla [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate):
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
