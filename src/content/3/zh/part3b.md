@@ -327,7 +327,7 @@ React代码从服务器地址 <http://localhost:3001/api/notes>  获取便笺，
 {
   "scripts": {
      //...
-    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build --prod && cp -r build ../notes-backend",
+    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build && cp -r build ../notes-backend",
     "deploy": "git push heroku main",
     "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",    
     "logs:prod": "heroku logs --tail"
