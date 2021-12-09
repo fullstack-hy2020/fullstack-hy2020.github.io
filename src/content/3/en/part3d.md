@@ -263,7 +263,7 @@ npm install eslint --save-dev
 After this we can initialize a default ESlint configuration with the command:
 
 ```bash
-node_modules/.bin/eslint --init
+npx eslint --init
 ```
 
 
@@ -328,7 +328,7 @@ Let's immediately change the rule concerning indentation, so that the indentatio
 Inspecting and validating a file like _index.js_ can be done with the following command:
 
 ```bash
-node_modules/.bin/eslint index.js
+npx eslint index.js
 ```
 
 It is recommended to create a separate _npm script_ for linting:
