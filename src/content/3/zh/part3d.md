@@ -287,7 +287,7 @@ npm install eslint --save-dev
 在这之后，我们可以使用如下命令初始化默认的 ESlint 配置:
 
 ```bash
-node_modules/.bin/eslint --init
+npx eslint --init
 ```
 
 <!-- We will answer all of the questions: -->
@@ -354,7 +354,7 @@ module.exports = {
 检查和验证像 index.js 这样的文件可以通过如下命令完成:
 
 ```bash
-node_modules/.bin/eslint index.js
+npx eslint index.js
 ```
 
 <!-- It is recommended to create a separate _npm script_ for linting: -->

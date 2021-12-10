@@ -7,7 +7,8 @@ lang: zh
 
 <div class="content">
 
-<!-- On this section we will explore the node applications that use relation databases. During section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you should have a reasonable knowledge of relational databases and SQL. There are many oneline courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and [Into to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql). -->
+<!-- On this section we will explore the node applications that use relation databases. During section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. There are many online courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and 
+[Intro to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql).-->
 这一章，我们会探索node 应用如何使用关系型数据库。我们会构建一个node后台，使用关系型数据库，构建一个笔记应用，我们在3-5章学过你应该已经很熟悉了。为了完成这一章，你应该具备一些关系型数据库和SQL的知识。网上有许多在线课程教SQL数据库，比如 [SQLbolt](https://sqlbolt.com/) 和 [Into to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql)。
 
 <!-- There are 24 exercises in this part, and you need to complete each exercise for completing the course. Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-psql) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance". -->
