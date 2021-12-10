@@ -81,8 +81,8 @@ node --inspect index.js
 <!-- The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one. Logging to the console, Postman, debuggers, and experience will help. -->
 关键是要有系统性。 既然问题可以存在于任何地方，你就必须质疑每一件事，并逐一排除所有的可能性。 登录到控制台、Postman、调试器和经验都将有所帮助。
 
-<!-- When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have ten more bugs, and debugging them will be even more difficult. The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) principle from Toyota Production Systems is very effective in this situation as well. -->
-当出现 bug 时，所有可能的策略中最糟糕的就是继续编写代码。 这将保证你的代码很快会有更多的bug，并且调试它们将会更加困难。 在这种情况下，丰田生产系统公司(Toyota Production Systems)的 [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/#.Wjv9axP1WCQ) 原则也非常有效。
+<!-- When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have ten more bugs, and debugging them will be even more difficult. The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) principle from Toyota Production Systems is very effective in this situation as well. -->
+当出现 bug 时，所有可能的策略中最糟糕的就是继续编写代码。 这将保证你的代码很快会有更多的bug，并且调试它们将会更加困难。 在这种情况下，丰田生产系统公司(Toyota Production Systems)的 [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) 原则也非常有效。
 
 ### MongoDB
 <!-- In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database). -->
@@ -97,8 +97,8 @@ node --inspect index.js
 <!-- Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea on how a document database stores the data. -->
 现在阅读 MongoDB 手册中关于[集合](https://docs.MongoDB.com/manual/core/databases-and-collections/)和[文档](https://docs.MongoDB.com/manual/core/document/)的章节，了解文档数据库如何存储数据的基本概念。
 
-<!-- Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/cloud/atlas). -->
-当然，您可以在自己的计算机上安装和运行 MongoDB。 然而，互联网上也充满了你可以使用的 Mongo 数据库服务。 在本课程中，我们首选的 MongoDB 提供者将是[MongoDB Atlas](https://www.MongoDB.com/cloud/Atlas)。
+<!-- Naturally, you can install and run MongoDB on your own computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/atlas/database). -->
+当然，您可以在自己的计算机上安装和运行 MongoDB。 然而，互联网上也充满了你可以使用的 Mongo 数据库服务。 在本课程中，我们首选的 MongoDB 提供者将是[MongoDB Atlas](https://www.mongodb.com/atlas/database)。
 
 <!-- Once you've created and logged into your account, Atlas will recommend creating a cluster(In later versions of MongoDB Atlas, you may see create a database): -->
 一旦你创建并登录到你的账户，Atlas 会建议你创建一个集群(在新版本的MongoDB Atlas 中，你可能看到的是创建一个数据库):

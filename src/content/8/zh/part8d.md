@@ -253,8 +253,8 @@ const PersonForm = ({ setError }) => {
 <!-- This approach is pretty good, the drawback being that the query is always rerun with any updates.  -->
 这种方法非常好，缺点是查询总是随着任何更新而重新运行。
 
-<!-- It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/api/react/hooks/#options-)-callback for the mutation, which Apollo runs after the mutation: -->
-通过处理自己更新缓存来优化解决方案是可行的。 这是通过为Mutation定义一个合适的[更新](https://www.apollographql.com/docs/react/api/react/hooks/#options-)-回调来完成的，Apollo 在Mutation之后运行:
+<!-- It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/data/mutations/#update)-callback for the mutation, which Apollo runs after the mutation: -->
+通过处理自己更新缓存来优化解决方案是可行的。 这是通过为Mutation定义一个合适的[更新](https://www.apollographql.com/docs/react/data/mutations/#update)-回调来完成的，Apollo 在Mutation之后运行:
 
 ```js 
 const PersonForm = ({ setError }) => {

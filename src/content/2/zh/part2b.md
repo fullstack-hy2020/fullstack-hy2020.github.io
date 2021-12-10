@@ -537,8 +537,8 @@ export default App
 
 
 
-<!-- Prevent the user from being able to add names that already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task. -->
-防止用户添加已经存在于电话簿中的名称。 Javascript 数组有许多合适的[方法](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array)来完成这个任务。
+<!-- Prevent the user from being able to add names that already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task. Keep in mind [how object equality works](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) in Javascript.-->
+防止用户添加已经存在于电话簿中的名称。 Javascript 数组有许多合适的[方法](https://developer.mozilla.org/en-us/docs/web/JavaScript/reference/global_objects/array)来完成这个任务。始终留意Javascript中[对象的相等是如何运作的](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) 
 
 <!-- Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted: -->
 尝试添加同名电话时，使用[alert](https://developer.mozilla.org/en-us/docs/web/api/window/alert)命令发出警告:
