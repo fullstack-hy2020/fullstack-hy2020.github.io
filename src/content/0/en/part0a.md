@@ -7,9 +7,9 @@ lang: en
 
 <div class="content">
 
-This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The course also has parts on TypeScript,  React Native and Continuous integration.
+This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The course also has parts on TypeScript,  React Native, and Continuous integration.
 
-Other topics include debugging applications, configuration, managing runtime environments and NoSQL databases.
+Other topics include debugging applications, configuration, managing runtime environments, and NoSQL databases.
 
 ### Prerequisites
 
@@ -244,7 +244,7 @@ Install some sensible text editor that supports web development. [Visual Studio 
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
 
-Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install anything older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
+Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 
