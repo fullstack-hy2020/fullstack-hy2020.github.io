@@ -595,7 +595,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-We have also [restricted](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) the values of which fields we want. From the notes, we take all fields expect <i>userId</i> and for the user associated with the note, only <i>name</i>.
+We have also [restricted](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) the values of which fields we want. From the notes, we take all fields except <i>userId</i> and for the user associated with the note, only <i>name</i>.
 
 Let's make a similar change to the route of all users, remove the unnecessary field <i>userId</i> from the notes associated with the user:
 
