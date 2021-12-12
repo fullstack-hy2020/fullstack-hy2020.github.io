@@ -275,7 +275,10 @@ The initial code is as follows:
 
 ```js
 const { ApolloServer, gql } = require('apollo-server')
-
+const {
+  ApolloServerPluginLandingPageGraphQLPlayground
+} = require("apollo-server-core");
+  
 let persons = [
   {
     name: "Arto Hellas",
