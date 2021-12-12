@@ -288,7 +288,7 @@ Muutetaan heti konfiguraatioista sisennystä määrittelevä sääntö siten, et
 Esim tiedoston _index.js_ tarkastus tapahtuu komennolla:
 
 ```bash
-node_modules/.bin/eslint index.js
+npx eslint index.js
 ```
 
 Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
