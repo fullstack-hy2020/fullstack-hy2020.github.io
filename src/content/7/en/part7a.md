@@ -97,14 +97,15 @@ Each view is implemented as its own component. We store the view component infor
 
 However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i>-button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self-made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
 
-<!-- Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTraining/react-router) joka tarjoaa erinomaisen ratkaisun React-sovelluksen navigaation hallintaan. -->
 Luckily, React has the [React router](https://github.com/ReactTraining/react-router) library which provides an excellent solution for managing navigation in a React application.
 
 Let's change the above application to use React router. First, we install React router with the command
 
 ```bash
-npm install react-router-dom
+npm install react-router-dom5.3.0
 ```
+
+**Note:** the material assumes that you have React router version 5. The version 6 of React router has some breaking changes.
 
 The routing provided by React Router is enabled by changing the application as follows:
 

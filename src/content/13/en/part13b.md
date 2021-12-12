@@ -272,7 +272,7 @@ At this point, the situations that require error handling by the application are
 
 ### User management
 
-Next, let's add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we now make make the implementation so that all users will have the same password <i>secret</i>.
+Next, let's add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we now make the implementation so that all users will have the same password <i>secret</i>.
 
 The user-defining model in the file <i>models/user.js</i> is straightforward
 
