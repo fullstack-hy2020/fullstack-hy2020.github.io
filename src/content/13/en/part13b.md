@@ -554,7 +554,7 @@ const tokenExtractor = (req, res, next) => {
     } catch{
       res.status(401).json({ error: 'token invalid' })
     }
-  } } else {
+  }  else {
     res.status(401).json({ error: 'token missing' })
   }
   next()
