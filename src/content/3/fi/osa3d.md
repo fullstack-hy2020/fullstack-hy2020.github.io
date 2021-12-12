@@ -91,7 +91,7 @@ Validoinnin epäonnistuessa palautetaan validaattorin oletusarvoinen virheviesti
 
 ### Promisejen ketjutus
 
-Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla palautetuille olioille niiden metodia _toJSON_. Esimimerkiksi uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttamalle oliolle:
+Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla palautetuille olioille niiden metodia _toJSON_. Esimerkiksi uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttamalle oliolle:
 
 ```js
 app.post('/api/notes', (request, response, next) => {
@@ -222,7 +222,7 @@ Ennen osan lopetusta katsomme vielä nopeasti paitsioon jäänyttä tärkeää t
 
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
 
-Staattisesti tyypitetyissä, käännettävissä kielissä (esim. Javassa) ohjelmointiympäristöt, kuten NetBeans osaavat huomautella monista koodiin liittyvistä asioista, sellaisistakin, jotka eivät ole välttämättä käännösvirheitä. Erilaisten [staattisen analyysin](https://en.wikipedia.org/wiki/Static_program_analysis) lisätyökalujen, kuten [checkstylen](http://checkstyle.sourceforge.net/) avulla voidaan vielä laajentaa Javassa huomautettavien asioiden määrää koskemaan koodin tyylillisiä seikkoja, esim. sisentämistä.
+Staattisesti tyypitetyissä, käännettävissä kielissä (esim. Javassa) ohjelmointiympäristöt, kuten NetBeans osaavat huomautella monista koodiin liittyvistä asioista, sellaisistakin, jotka eivät ole välttämättä käännösvirheitä. Erilaisten [staattisen analyysin](https://en.wikipedia.org/wiki/Static_program_analysis) lisätyökalujen, kuten [checkstylen](https://checkstyle.sourceforge.io/) avulla voidaan vielä laajentaa Javassa huomautettavien asioiden määrää koskemaan koodin tyylillisiä seikkoja, esim. sisentämistä.
 
 JavaScript-maailmassa tämän hetken johtava työkalu staattiseen analyysiin eli "linttaukseen" on [ESlint](https://eslint.org/).
 
@@ -308,7 +308,7 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
 
 Nyt komento _npm run lint_ suorittaa tarkastukset koko projektille.
 
-Myös hakemistossa <em>build</em> oleva frontendin tuotantoversio tulee näin tarkastettua. Sitä emme kuitenkaan halua, eli tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) ja sille seuraava sisältö:
+Myös hakemistossa <em>build</em> oleva frontendin tuotantoversio tulee näin tarkastettua. Sitä emme kuitenkaan halua, eli tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring/ignoring-code#the-eslintignore-file) ja sille seuraava sisältö:
 
 ```bash
 build
@@ -373,7 +373,7 @@ Oletusarvoinen konfiguraatiomme ottaa käyttöön joukon valmiiksi määriteltyj
 
 Mukana on myös _console.log_-komennoista varoittava sääntö.
   
-Yksittäinen sääntö on helppo kytkeä [pois päältä](https://eslint.org/docs/user-guide/configuring#configuring-rules) määrittelemällä sen "arvoksi" konfiguraatiossa 0. Tehdään toistaiseksi näin säännölle <i>no-console</i>:
+Yksittäinen sääntö on helppo kytkeä [pois päältä](https://eslint.org/docs/user-guide/configuring/rules#configuring-rules) määrittelemällä sen "arvoksi" konfiguraatiossa 0. Tehdään toistaiseksi näin säännölle <i>no-console</i>:
 
 ```js
 {
