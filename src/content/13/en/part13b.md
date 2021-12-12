@@ -446,13 +446,13 @@ When using Sequelize, the reference key can be defined by modifying the <i>model
 const Note = require('./note')
 const User = require('./user')
 
-// hightlight-start
+// highlight-start
 User.hasMany(Note)
 Note.belongsTo(User)
 
 Note.sync({ alter: true })
 User.sync({ alter: true })
-// hightlight-end
+// highlight-end
 
 module.exports = {
   Note, User
@@ -497,10 +497,10 @@ Now let's make a change to the insertion of a new note that the note is associat
 
 router.post('/', async (req, res) => {
   try {
-    // hightlight-start
+    // highlight-start
     const user = await User.findOne()
     const note = await Note.create({...req.body, userId: user.id})
-    // hightlight-end
+    // highlight-end
     res.json(note)
   } catch(error) {
     return res.status(400).json({ error })
