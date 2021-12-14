@@ -7,82 +7,83 @@ lang: it
 
 <div class="content">
 
-Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
+Prima di iniziare a programmare, esamineremo alcuni principi dello sviluppo web esaminando un'applicazione di esempio su <https://studies.cs.helsinki.fi/exampleapp>.
 
-The application exists only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made.
-On the contrary, they demonstrate some old techniques of web development, which can even be seen as <i>bad practice</i> nowadays.
+L'applicazione esiste solo per dimostrare alcuni concetti base del corso e non sono in alcun modo esempi di <i>come</i> le applicazioni web dovrebbero essere realizzate.
+Al contrario, dimostrano alcune vecchie tecniche di sviluppo web, che al giorno d'oggi possono anche essere viste come una <i>cattiva pratica</i>.
 
-Coding in the recommended style begins in [part 1](/en/part1).
+La programmazione nello stile consigliato comincia in [parte 1](/it/part1).
 
-Open the [example application](https://studies.cs.helsinki.fi/exampleapp) on your browser. Sometimes this takes a while.
+Apri l'[applicazione esempio](https://studies.cs.helsinki.fi/exampleapp) nel tuo browser. A volte questo richiede un po' di tempo.
 
-**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously.
-On Windows or Linux, open the console by pressing `F12` or `ctrl-shift-i` simultaneously.
-The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
+**La prima regola dello sviluppo web**: Tieni sempre aperta la Developer Console nel tuo browser. In macOS, apri la console premendo `F12` o `option-cmd-i` contemporaneamente.
+Su Windows o Linux, apri la console premendo `F12` o `ctrl-shift-i` contemporaneamente.
+La console puo' anche essere aperta attraverso il [tasto menu](https://it.wikipedia.org/wiki/Tasto_Menu).
 
-Remember to <i>always</i> keep the Developer Console open when developing web applications.
+Ricordati di tenere <i>sempre</i> aperta la Developer Console durante lo sviluppo di applicazioni web.
 
-The console looks like this:
+La console si presenta così:
 
 ![](../../images/0/1e.png)
 
-Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded.
+Assicurati che la tab <i>Network</i> sia aperta e seleziona l'opzione <i>Disable cache</i> come mostrato. Anche <i>Preserve log</i> può essere utile: salva i log stampati dall'applicazione quando la pagina viene ricaricata.
 
-**NB:** The most important tab is the <i>Console</i>. However, in the introduction we will be using the <i>Network</i> tab quite a bit.
+**NB:** La tab più importante è la <i>Console</i>. Tuttavia, nell'introduzione utilizzeremo un po' la tab <i>Network</i>.
 
 ### HTTP GET
 
-The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) protocol. The Network tab shows how the browser and the server communicate.
+Il server e il browser web comunicano tra loro utilizzando il protocollo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). La tab Network mostra come comunicano il browser e il server.
 
-When you reload the page (press the F5 key or the &#8634; symbol on your browser), the console shows that two events have happened:
+Quando ricarichi la pagina (premi il tasto F5 o il simbolo &#8634; sul tuo browser), la console mostra che si sono verificati due eventi:
 
-- The browser fetches the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
-- And downloads the image <i>kuva.png</i>
+- Il browser prende i contenuti della pagina <i>studies.cs.helsinki.fi/exampleapp</i> dal server
+- E scarica l'immagine <i>kuva.png</i>
 
 ![](../../images/0/2e.png)
 
-On a small screen you might have to widen the console window to see these.
+Su uno schermo piccolo potresti dover allargare la finestra della console per vederli.
 
-Clicking the first event reveals more information on what's happening:
+Facendo clic sul primo evento vengono visualizzate ulteriori informazioni su ciò che sta accadendo:
 
 ![](../../images/0/3e.png)
 
-The upper part, <i>General</i>, shows that the browser made a request to the address <i>https://studies.cs.helsinki.fi/exampleapp</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
+La parte superiore, <i>General</i>, mostra che il browser ha effettuato una richiesta all'indirizzo <i>https://studies.cs.helsinki.fi/exampleapp</i> (sebbene l'indirizzo sia leggermente cambiato da quando è stata scattata questa foto) utilizzando il metodo [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) e che la richiesta è andata a buon fine, perché la risposta del server presenta lo [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
 
-The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
+La richiesta e la risposta del server hanno diversi [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
 ![](../../images/0/4e.png)
 
-The <i>Response headers</i> on top tell us e.g. the size of the response in bytes, and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML)-page, and to render it to the browser 'like a web page'.
+La <i>Response headers</i> in alto mostra alcune informazioni come ad esempio la dimensione della risposta in byte e l'ora esatta della risposta. Un header importante [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) mostra che la risposta e' un file di testo in formato [utf-8](https://en.wikipedia.org/wiki/UTF-8), i cui contenuti sono stati formattati in HTML.
+In questo modo il browser sa che la risposta è una normale pagina [HTML](https://en.wikipedia.org/wiki/HTML) che deve essere mostrata 'come una pagina web'.
 
-The <i>Response</i> tab shows the response data, a regular HTML-page. The <i>body</i> section determines the structure of the page rendered to the screen:
+La scheda <i>Response</i> mostra i dati della risposta, una normale pagina HTML. La sezione <i>body</i> determina la struttura della pagina visualizzata sullo schermo:
 
 ![](../../images/0/5e.png)
 
-The page contains a [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) element, which in turn contains a heading, a link to the page <i>notes</i>, and an [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag, and displays the number of notes created.
+La pagina contiene un elemento [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), che a sua volta contiene un heading, un link alla pagina <i>notes</i> e un tag [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), e visualizza il numero di note create.
 
-Because of the img tag, the browser does a second <i>HTTP-request</i> to fetch the image <i>kuva.png</i> from the server. The details of the request are as follows:
+A causa del tag img, il browser esegue una seconda <i>richiesta HTTP</i> per ottenere l'immagine <i>kuva.png</i> dal server. I dettagli della richiesta sono i seguenti:
 
 ![](../../images/0/6e.png)
 
-The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen.
+La richiesta è stata effettuata all'indirizzo <https://studies.cs.helsinki.fi/exampleapp/kuva.png> ed è di tipo HTTP GET. Gli headers di risposta dicono che la dimensione della risposta è 89350 byte e che il suo [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) è <i >image/png</i>, quindi è un'immagine png. Il browser utilizza queste informazioni per visualizzare correttamente l'immagine sullo schermo.
 
-The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+La catena di eventi causata dall'apertura della pagina https://studies.cs.helsinki.fi/exampleapp su un browser crea il seguente [diagramma di sequenza](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
 ![](../../images/0/7e.png)
 
-First, the browser does an HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen.
+Innanzitutto, il browser esegue una richiesta HTTP GET al server per recuperare il codice HTML della pagina. Il tag <i>img</i> nell'HTML richiede al browser di recuperare l'immagine <i>kuva.png</i>. Il browser esegue il rendering della pagina HTML e dell'immagine sullo schermo.
 
-Even though it is difficult to notice, the HTML page begins to render before the image has been fetched from the server.
+Anche se è difficile da notare, la pagina HTML inizia a essere visualizzata prima che l'immagine sia stata scaricata dal server.
 
-### Traditional web applications
+### Applicazioni web tradizionali
 
-The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server.
+La homepage dell'applicazione di esempio funziona come un' <i>applicazione web tradizionale</i>. Quando si accede alla pagina, il browser preleva dal server il documento HTML che dettaglia la struttura e il contenuto testuale della pagina.
 
-The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i> according to the application code, using, for example, data from a database.
-The HTML code of the example application has been formed dynamically, because it contains information on the number of created notes.
+In qualche modo, il server ha creato questo documento. Il documento può essere un file di testo <i>statico</i> salvato nella directory del server. In base al codice, il server può anche creare documenti HTML in maniera <i>dinamica</i> utilizzando, ad esempio, i dati provenienti da un database.
+Il codice HTML dell'applicazione di esempio è stato formato in maniera dinamica, perché contiene informazioni sul numero di note create.
 
-The HTML code of the homepage is as follows:
+Il codice HTML della homepage è il seguente:
 
 ```js
 const getFrontPageHtml = noteCount => {
@@ -109,32 +110,32 @@ app.get('/', (req, res) => {
 });
 ```
 
-You don't have to understand the code just yet.
+Per ora non e' necessario capire il codice.
 
-The content of the HTML page has been saved as a template string, or a string which allows for evaluating, for example, variables in the midst of it. The dynamically changing part of the homepage, the number of saved notes (in the code <em>noteCount</em>), is replaced by the current number of notes (in the code <em>notes.length</em>) in the template string.
+Il contenuto della pagina HTML è stato salvato come stringa modello, ossia una stringa che consente di valutare, ad esempio, le variabili al suo interno. La parte della homepage che cambia dinamicamente, il numero di note salvate (nel codice <em>noteCount</em>), è sostituita dal numero di note attuale (nel codice <em>notes.length</em>) all'interno della stringa modello.
 
-Writing HTML in the midst of the code is of course not smart, but for old-school PHP-programmers it was a normal practice.
+Ovviamente, scrivere HTML nel mezzo del codice non è intelligente, ma per i programmatori PHP della vecchia scuola era una pratica normale.
 
-In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created, for example, using Java Spring like on the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask (like on the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) or with [Ruby on Rails](http://rubyonrails.org/).
+Nelle applicazioni web tradizionali il browser è "stupido". Semplicemente recupera i dati HTML dal server ma tutta la logica dell'applicazione rimane sul server. Un server può essere creato, ad esempio, utilizzando Java Spring come nel corso dell'Università di Helsinki [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask (come nel corso [ tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) o con [Ruby on Rails](http://rubyonrails.org/).
 
-The example uses [Express](https://expressjs.com/) from Node.js.
-This course will use Node.js and Express to create web servers.
+L'esempio usa[Express](https://expressjs.com/) di Node.js.
+Questo corso utilizzerà Node.js ed Express per creare server web.
 
-### Running application logic on the browser
+### Esecuzione della logica dell'applicazione nel browser
 
-Keep the Developer Console open. Empty the console by clicking the 🚫 symbol, or by typing clear() in the console.
-Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests:
+Tieni aperta la Developer Console. Svuota la console facendo clic sul simbolo 🚫 o digitando clear() nella console.
+Ora, quando vai alla pagina [notes](https://studies.cs.helsinki.fi/exampleapp/notes), il browser esegue 4 richieste HTTP:
 
 ![](../../images/0/8e.png)
 
-All of the requests have <i>different</i> types. The first request's type is <i>document</i>. It is the HTML code of the page, and it looks as follows:
+Tutte le richieste hanno tipi <i>diversi</i>. Il primo tipo di richiesta è <i>document</i>. È il codice HTML della pagina e ha il seguente aspetto:
 
 ![](../../images/0/9e.png)
 
-When we compare the page shown on the browser and the HTML code returned by the server, we notice that the code does not contain the list of notes.
-The [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head)-section of the HTML contains a [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)-tag, which causes the browser to fetch a JavaScript file called <i>main.js</i>.
+Quando confrontiamo la pagina mostrata sul browser e il codice HTML restituito dal server, notiamo che il codice non contiene l'elenco delle note.
+La sezione [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) dell'HTML contiene un tag [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) che fa sì che il browser recuperi un file JavaScript chiamato <i>main.js</i>.
 
-The JavaScript code looks as follows:
+Il codice JavaScript ha il seguente aspetto:
 
 ```js
 var xhttp = new XMLHttpRequest();
@@ -162,33 +163,33 @@ xhttp.open('GET', '/data.json', true);
 xhttp.send();
 ```
 
-The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course.
+I dettagli del codice non sono importanti in questo momento, ma il codice è stato incluso per ravvivare le immagini e il testo. Inizieremo a programmare correttamente in [parte 1](/it/part1). In realtà, il codice di esempio in questa parte non è affatto rilevante per le tecniche di programmazione di questo corso.
 
-> Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2.
+> Alcuni potrebbero chiedersi perché viene utilizzato xhttp-object invece del moderno fetch. Ciò è dovuto al fatto che non si vuole ancora entrare nelle promesse (promises), e il codice ha un ruolo secondario in questa parte. Torneremo ai modi moderni per effettuare richieste al server nella parte 2.
 
-Immediately after fetching the <i>script</i> tag, the browser begins to execute the code.
+Immediatamente dopo aver recuperato il tag <i>script</i>, il browser inizia a eseguire il codice.
 
-The last two lines define that the browser does an HTTP GET request to the server's address <i>/data.json</i>:
+Le ultime due righe fanno si che il browser esegua una richiesta HTTP GET all'indirizzo del server <i>/data.json</i>:
 
 ```js
 xhttp.open('GET', '/data.json', true);
 xhttp.send();
 ```
 
-This is the bottom-most request shown on the Network tab.
+Questa è la richiesta più in basso mostrata nella scheda Network.
 
-We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.json> straight from the browser:
+Possiamo provare ad andare all'indirizzo <https://studies.cs.helsinki.fi/exampleapp/data.json> direttamente dal browser:
 
 ![](../../images/0/10e.png)
 
-There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data".
-By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted:
+Lì troviamo le note nel "formato grezzo" [JSON](https://it.wikipedia.org/wiki/JavaScript_Object_Notation).
+Per impostazione predefinita, i browser basati su Chromium non sono molto bravi a visualizzare i dati in formato JSON. I plugin possono essere usati per gestire la formattazione. Installa, ad esempio, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) su Chrome e ricarica la pagina. I dati ora sono ben formattati:
 
 ![](../../images/0/11e.png)
 
-So, the JavaScript code of the notes page above downloads the JSON-data containing the notes, and forms a bullet-point list from the note contents:
+Quindi, il codice JavaScript della pagina delle note mostrato sopra scarica i dati JSON contenenti le note.
 
-This is done by the following code:
+Successivamente, il seguente codice JavaScript crea un elenco puntato in base al contenuto delle note:
 
 ```js
 const data = JSON.parse(this.responseText);
@@ -207,14 +208,14 @@ data.forEach(function(note) {
 document.getElementById('notes').appendChild(ul);
 ```
 
-The code first creates an unordered list with a [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)-tag...
+Inizialmente, il codice crea una lista non ordinata con un tag [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)...
 
 ```js
 var ul = document.createElement('ul');
 ul.setAttribute('class', 'notes');
 ```
 
-...and then adds one [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)-tag for each note. Only the <i>content</i> field of each note becomes the contents of the li-tag. The timestamps found in the raw data are not used for anything here.
+...e successivamente aggiunge un tag [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li) per ogni nota. Solo il campo <i>content</i> di ogni nota diventa il contenuto del tag li. I timestamp trovati nei dati grezzi non vengono nemmeno utilizzati.
 
 ```js
 data.forEach(function(note) {
@@ -225,47 +226,47 @@ data.forEach(function(note) {
 });
 ```
 
-Now open the <i>Console</i>-tab on your Developer Console:
+Ora apri la tab <i>Console</i> nella Developer Console:
 
 ![](../../images/0/12e.png)
 
-By clicking the little triangle at the beginning of the line, you can expand the text on the console.
+Cliccando sul triangolino all'inizio della riga, è possibile espandere il testo sulla console.
 
 ![](../../images/0/13e.png)
 
-This output on the console is caused by the <em>console.log</em> command in the code:
+Questo output sulla console è causato dal comando <em>console.log</em> nel codice:
 
 ```js
 const data = JSON.parse(this.responseText);
 console.log(data);
 ```
 
-So, after receiving data from the server, the code prints it to the console.
+Quindi, dopo aver ricevuto i dati dal server, il codice li stampa sulla console.
 
-The <i>Console</i> tab and the <em>console.log</em> command will become very familiar to you during the course.
+La tab <i>Console</i> e il comando <em>console.log</em> ti diventeranno molto familiari durante il corso.
 
-### Event handlers and Callback functions
+### Event handlers e funzioni di callback
 
-The structure of this code is a bit odd:
+La struttura di questo codice è un po' strana:
 
 ```js
 var xhttp = new XMLHttpRequest();
 
 xhttp.onreadystatechange = function() {
-  // code that takes care of the server response
+  // codice che si occupa della risposta del server
 };
 
 xhttp.open('GET', '/data.json', true);
 xhttp.send();
 ```
 
-The request to the server is sent on the last line, but the code to handle the response can be found further up. What's going on?
+La richiesta al server viene inviata nell'ultima riga, ma il codice per gestire la risposta si trova più in alto. Cosa sta succedendo?
 
 ```js
 xhttp.onreadystatechange = function () {
 ```
 
-On this line, an <i>event handler</i> for event <i>onreadystatechange</i> is defined for the <em>xhttp</em> object doing the request. When the state of the object changes, the browser calls the event handler function. The function code checks that the [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) equals 4 (which depicts the situation <i>The operation is complete</i>) and that the HTTP status code of the response is 200.
+Su questa riga, è definito un <i>event handler</i> (gestore di eventi) per l'evento <i>onreadystatechange</i> per l'oggetto <em>xhttp</em> che esegue la richiesta. Quando lo stato dell'oggetto cambia, il browser chiama la funzione gestore eventi. Il codice della funzione verifica che [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) sia uguale a 4 (che rappresenta la situazione <i>L'operazione è completa</i>) e che il codice di stato della risposta HTTP sia 200.
 
 ```js
 xhttp.onreadystatechange = function() {
@@ -275,11 +276,11 @@ xhttp.onreadystatechange = function() {
 };
 ```
 
-The mechanism of invoking event handlers is very common in JavaScript. Event handler functions are called [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) functions. The application code does not invoke the functions itself, but the runtime environment - the browser, invokes the function at an appropriate time, when the <i>event</i> has occurred.
+Il modo di invocare event handlers è molto comune in JavaScript. Le funzioni event handlers sono chiamate funzioni [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). Il codice dell'applicazione non richiama le funzioni in sé, ma l'ambiente di runtime, il browser, richiama la funzione al momento opportuno, quando si è verificato l'<i>evento</i>.
 
-### Document Object Model or DOM
+### Document Object Model o DOM
 
-We can think of HTML-pages as implicit tree structures.
+Possiamo pensare alle pagine HTML come strutture ad albero.
 
 <pre>
 html
@@ -299,17 +300,17 @@ html
         input
 </pre>
 
-The same treelike structure can be seen on the console tab <i>Elements</i>.
+La stessa struttura ad albero può essere vista nella scheda della console <i>Elements</i>.
 
 ![](../../images/0/14e.png)
 
-The functioning of the browser is based on the idea of depicting HTML elements as a tree.
+Il funzionamento del browser si basa sull'idea di rappresentare gli elementi HTML come un albero.
 
-Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), is an Application Programming Interface (<i>API</i>) which enables programmatic modification of the <i>element trees</i> corresponding to web-pages.
+Document Object Model, o [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), è un'Application Programming Interface (<i>API</i>) che consente la modifica programmatica degli <i>alberi degli elementi </i> corrispondenti alle pagine web.
 
-The JavaScript code introduced in the previous chapter used the DOM-API to add a list of notes to the page.
+Il codice JavaScript introdotto nel capitolo precedente utilizzava l'API DOM per aggiungere un elenco di note alla pagina.
 
-The following code creates a new node to the variable <em>ul</em>, and adds some child nodes to it:
+Il codice seguente crea un nuovo nodo nella variabile <em>ul</em> e vi aggiunge alcuni nodi child:
 
 ```js
 var ul = document.createElement('ul');
@@ -322,34 +323,34 @@ data.forEach(function(note) {
 });
 ```
 
-Finally, the tree branch of the <em>ul</em> variable is connected to its proper place in the HTML tree of the whole page:
+Infine, il ramo della variabile <em>ul</em> è collegato al suo posto nell'albero HTML dell'intera pagina:
 
 ```js
 document.getElementById('notes').appendChild(ul);
 ```
 
-### Manipulating the document-object from console
+### Manipolazione dell'oggetto documento dalla console
 
-The topmost node of the DOM tree of an HTML document is called the <em>document</em> object. We can perform various operations on a web-page using the DOM-API. You can access the <em>document</em> object by typing <em>document</em> into the Console-tab:
+Il nodo più in alto dell'albero DOM di un documento HTML è chiamato oggetto <em>documento</em>. Possiamo eseguire varie operazioni su una pagina web utilizzando l'API DOM. Puoi accedere all'oggetto <em>documento</em> digitando <em>document</em> nella tab Console:
 
 ![](../../images/0/15e.png)
 
-Let's add a new note to the page from the console.
+Aggiungiamo una nuova nota alla pagina dalla console.
 
-First, we'll get the list of notes from the page. The list is in the first ul-element of the page:
+Per prima cosa, otterremo l'elenco delle note dalla pagina. L'elenco è nel primo elemento ul della pagina:
 
 ```js
 list = document.getElementsByTagName('ul')[0];
 ```
 
-Then create a new li-element and add some text content to it:
+Quindi crea un nuovo elemento li e aggiungi del contenuto di testo:
 
 ```js
 newElement = document.createElement('li');
-newElement.textContent = 'Page manipulation from console is easy';
+newElement.textContent = 'La manipolazione della pagina dalla console è facile';
 ```
 
-And add the new li-element to the list:
+E aggiungi il nuovo elemento li all'elenco:
 
 ```js
 list.appendChild(newElement);
@@ -357,15 +358,15 @@ list.appendChild(newElement);
 
 ![](../../images/0/16e.png)
 
-Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON-data from the address <https://studies.cs.helsinki.fi/exampleapp/data.json>.
+Anche se la pagina viene aggiornata sul tuo browser, le modifiche non sono permanenti. Se la pagina viene ricaricata, la nuova nota scomparirà perché le modifiche non sono state inviate al server. Il codice JavaScript recuperato dal browser creerà sempre l'elenco di note basato sui dati JSON dall'indirizzo <https://studies.cs.helsinki.fi/exampleapp/data.json>.
 
 ### CSS
 
-The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
+L'elemento <i>head</i> del codice HTML della pagina Note contiene un tag [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link), che determina che il browser deve recuperare un foglio di stile [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) dall'indirizzo [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
-Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web pages.
+I Cascading Style Sheets, o CSS, sono un linguaggio di markup utilizzato per determinare l'aspetto delle pagine web.
 
-The fetched CSS-file looks as follows:
+Il file CSS recuperato ha il seguente aspetto:
 
 ```css
 .container {
@@ -378,29 +379,29 @@ The fetched CSS-file looks as follows:
 }
 ```
 
-The file defines two [class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors). These are used to select certain parts of the page and to define styling rules to style them.
+Il file definisce due [class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors). Questi sono usati per selezionare alcune parti della pagina e per definire le regole di stile per modellare la pagina stessa.
 
-A class selector definition always starts with a period, and contains the name of the class.
+Una definizione di selettore di classe (class selector) inizia sempre con un punto e contiene il nome della classe.
 
-The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
+Le classi sono [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), che possono essere aggiunti agli elementi HTML.
 
-CSS attributes can be examined on the <i>elements</i> tab on the console:
+Gli attributi (attributes) CSS possono essere esaminati nella tab <i>elements</i> della console:
 
 ![](../../images/0/17e.png)
 
-The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.
+L'elemento <i>div</i> più esterno ha la classe <i>container</i>. L'elemento <i>ul</i> che contiene l'elenco delle note ha la classe <i>notes</i>.
 
-The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border.
+La regola CSS definisce che gli elementi con la classe <i>container</i> saranno delineati con un [border] di un pixel di larghezza (https://developer.mozilla.org/en-US/docs/Web/CSS/border ). Imposta anche 10 pixel di [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) sull'elemento. Questo aggiunge uno spazio vuoto tra il contenuto dell'elemento e il bordo.
 
-The second CSS rule sets the text color of the notes as blue.
+La seconda regola CSS imposta il colore del testo delle note come blu.
 
-HTML elements can also have other attributes apart from classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element.
+Gli elementi HTML possono anche avere altri attributi oltre alle classi. L'elemento <i>div</i> che contiene le note ha un attributo [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id). Il codice JavaScript utilizza l'id per trovare l'elemento.
 
-The <i>Elements</i> tab of the console can be used to change the styles of the elements.
+La scheda <i>Elements</i> della console può essere utilizzata per modificare gli stili degli elementi.
 
 ![](../../images/0/18e.png)
 
-Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server.
+Le modifiche apportate sulla console non saranno permanenti. Se vuoi apportare modifiche durature, queste devono essere salvate nel foglio di stile CSS sul server.
 
 ### Loading a page containing JavaScript - review
 
