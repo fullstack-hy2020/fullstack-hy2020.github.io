@@ -167,7 +167,7 @@ notesRouter.post('/', async (request, response) => {
   const token = getTokenFrom(request)
 
   const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken.id) {
+  if (!decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
 
@@ -189,7 +189,7 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on: 
+The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return error <i>"jwt must be provided"</i>.
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -197,10 +197,10 @@ const decodedToken = jwt.verify(token, process.env.SECRET)
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. 
 
-If there is no token, or the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
+If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
 
 ```js
-if (!token || !decodedToken.id) {
+if (!decodedToken.id) {
   return response.status(401).json({
     error: 'token missing or invalid'
   })
