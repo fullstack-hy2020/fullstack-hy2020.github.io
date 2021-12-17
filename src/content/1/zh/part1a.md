@@ -234,9 +234,6 @@ JSX 是一种“类[XML](https://developer.mozilla.org/en-us/docs/web/XML/xml_in
 ```
 ### Multiple components
 【多组件】
-<!-- Let's modify the application as follows (NB: imports at the top of the file are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work): -->
-
-让我们按照如下方式修改应用(注意: 文件顶部的imports在这些示例中被省略了，以后也会这么处理。 但它们是代码正常运行必需的) :
 
 <!-- Let's modify the file <i>App.js</i> as follows (NB: import at the top of the file and export at the bottom are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work): -->
 让我们按照如下方式修改 <i>App.js</i> (注意: 文件顶部的import 在这些示例中被省略了，以后也会这么处理。 但它们是代码正常运行必需的) :
