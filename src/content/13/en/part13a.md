@@ -132,7 +132,7 @@ username=> \d
 (2 rows)
 ```
 
-In addition to the <i>notes</i> table, Postgres created a subtable called <i>not\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note.
+In addition to the <i>notes</i> table, Postgres created a subtable called <i>notes\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note.
 
 With the command _\d notes_, we can see how the <i>notes</i> table is defined:
 
