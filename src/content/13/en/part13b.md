@@ -459,7 +459,7 @@ module.exports = {
 }
 ```
 
-So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
+So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
 
 ```js
 username=> \d users
