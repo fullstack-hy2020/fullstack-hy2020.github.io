@@ -292,7 +292,7 @@ _PUT /api/blogs/:id_ （更改喜欢的数量）
 
 ### User management
 
-<!-- Next, let's add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we now make make the implementation so that all users will have the same password <i>secret</i>. -->
+<!-- Next, let's add a database table <i>users</i> to the application, where the users of the application will be stored. In addition, the possibility of creating users and token-based login as in [part 4](/part4/token_based_login) is implemented. For simplicity, we now make the implementation so that all users will have the same password <i>secret</i>. -->
 接下来，让我们向应用程序添加一个数据库表用户，应用程序的用户将存储在该表中。此外，还实现了在[part 4](/part4/token_based_login) 中创建用户和基于token的登录的可能性。为了简单起见，我们现在使实现使所有用户都拥有相同的密码<i>secret</i>。
 
 <!-- The user-defining model in the file <i>models/user.js</i> is straightforward -->
