@@ -77,10 +77,12 @@ Now let's create a suitable directory inside the Heroku application, add a datab
 
 ```bash
 heroku create
-heroku addons:create heroku-postgresql:hobby-dev
-heroku config
+# You get a app-name for the app you just created in heroku.
+
+heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
+heroku config -a <app-name>
 === cryptic-everglades-76708 Config Vars
-DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazonaws.com:5432/<db-name>
+DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
 ```
 
 Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [pqsl](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
@@ -88,7 +90,7 @@ Particularly when using a relational database, it is essential to access the dat
 The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on connect url of the Heroku application):
 
 ```bash
-heroku run psql -h ec2-44-199-83-229.compute-1.amazonaws.com -p 5432 -U <username> <dbname>
+heroku run psql -h <host-of-postgres-addon> -p 5432 -U <username> <dbname> -a <app-name>
 ```
 
 After entering the password, let's try the main psql command _\d_, which tells you the contents of the database:
@@ -130,7 +132,7 @@ username=> \d
 (2 rows)
 ```
 
-In addition to the <i>notes</i> table, Postgres created a subtable called <i>not\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note.
+In addition to the <i>notes</i> table, Postgres created a subtable called <i>notes\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note.
 
 With the command _\d notes_, we can see how the <i>notes</i> table is defined:
 
