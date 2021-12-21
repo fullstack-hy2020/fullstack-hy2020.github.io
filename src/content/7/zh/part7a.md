@@ -119,8 +119,11 @@ ReactDOM.render(<App />, document.getElementById('root'))
 让我们将上面的应用改为使用 React 路由
 
 ```bash
-npm install react-router-dom
+npm install react-router-dom5.3.0
 ```
+<!-- **Note:** the material assumes that you have React router version 5. The version 6 of React router has some breaking changes. -->
+
+注意：本教材假定你的React router的版本为5。版本6的React router 有一些突破性的改变。
 
 <!-- The routing provided by React Router is enabled by changing the application as follows: -->
 React Router 提供的路由通过更改应用启用，如下所示: 
