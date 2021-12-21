@@ -85,7 +85,7 @@ heroku config -a <app-name>
 DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
 ```
 
-Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [pqsl](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
+Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
 
 The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on connect url of the Heroku application):
 
@@ -484,7 +484,7 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tasks 13.1.-13.3.
 
-In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit.
+In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/en/part4), which should be compatible with the frontend in [section 5](/en/part5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit.
 
 #### Task 13.1.
 
