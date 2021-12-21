@@ -157,7 +157,7 @@ In this example, Promise chaining does not provide much of a benefit. The situat
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
+The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our backend. 
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
 
