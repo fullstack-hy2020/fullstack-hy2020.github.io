@@ -494,7 +494,7 @@ Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin a
 
 ![](../../images/6/8ea.png)
 
-Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux.js.org/basics/actions#action-creators).
+Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux.js.org/usage/reducing-boilerplate#action-creators).
 
 #### 6.12* paremmat anekdootit, step10
 
