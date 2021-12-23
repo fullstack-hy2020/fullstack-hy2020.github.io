@@ -403,49 +403,48 @@ La scheda <i>Elements</i> della console può essere utilizzata per modificare gl
 
 Le modifiche apportate sulla console non saranno permanenti. Se vuoi apportare modifiche durature, queste devono essere salvate nel foglio di stile CSS sul server.
 
-### Loading a page containing JavaScript - review
+### Caricare una pagina contenente JavaScript - review
 
-Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser.
+Rivediamo cosa succede quando si apre la pagina https://studies.cs.helsinki.fi/exampleapp/notes sul browser.
 
 ![](../../images/0/19e.png)
 
-- The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
-- Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
-- ...and a JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://studies.cs.helsinki.fi/exampleapp/data.json, which
-  returns the notes as JSON data.
-- When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API.
+- Il browser preleva il codice HTML che definisce il contenuto e la struttura della pagina tramite una richiesta HTTP GET verso il server.
+- I link nel codice HTML fanno sì che il browser recuperi anche il foglio di stile CSS <i>main.css</i>...
+- ...e un file JavaScript <i>main.js</i>
+- Il browser esegue il codice JavaScript. Il codice effettua una richiesta HTTP GET all'indirizzo https://studies.cs.helsinki.fi/exampleapp/data.json, che restituisce le note nel formato JSON data.
+- Quando i dati sono stati recuperati, il browser esegue un <i>gestore di eventi</i> (event handler), che restituisce le note alla pagina utilizzando l'API DOM.
 
 ### Forms and HTTP POST
 
-Next let's examine how adding a new note is done.
+Esaminiamo come viene aggiunta una nuova nota.
 
-The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
+La pagina Note contiene un [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)(elemento modulo).
 
 ![](../../images/0/20e.png)
 
-When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like:
+Quando si fa clic sul pulsante nel modulo, il browser invierà l'input dell'utente al server. Apriamo la scheda <i>Network</i> e vediamo come si presenta l'invio del modulo:
 
 ![](../../images/0/21e.png)
 
-Surprisingly, submitting the form causes altogether <i>five</i> HTTP requests.
-The first one is the form submit event. Let's zoom into it:
+Sorprendentemente, l'invio del form causa in tutto <i>cinque</i> richieste HTTP.
+Il primo è il form di invio dell'evento. Ingrandiamolo:
 
 ![](../../images/0/22e.png)
 
-It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
+E' una richiesta [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) all'indirizzo del server <i>new_note</i>. Il server risponde con il codice di stato HTTP 302. Si tratta di un [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), con il quale il server chiede al browser di effettuare una nuova richiesta HTTP GET all'indirizzo definito nell'intestazione <i>Location</i> - l'indirizzo <i>notes</i>.
 
-So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).
+Quindi, il browser ricarica la pagina Notes. Il ricaricamento provoca altre tre richieste HTTP: il recupero del foglio di stile (main.css), il codice JavaScript (main.js) e i dati grezzi delle note (data.json).
 
-The network tab also shows the data submitted with the form:
+La scheda network mostra anche i dati inviati con il modulo:
 
 ![](../../images/0/23e.png)
 
-The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>.
+Il tag Form ha gli attributi <i>action</i> e <i>method</i> che definiscono che l'invio del form viene eseguito come una richiesta HTTP POST all'indirizzo <i>new_note</i>.
 
 ![](../../images/0/24e.png)
 
-The code on the server responsible for the POST request is quite simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
+Il codice sul server responsabile della richiesta POST è abbastanza semplice (NB: questo codice è sul server e non sul codice JavaScript recuperato dal browser):
 
 ```js
 app.post('/new_note', (req, res) => {
@@ -458,11 +457,11 @@ app.post('/new_note', (req, res) => {
 });
 ```
 
-Data is sent as the [body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) of the POST-request.
+I dati vengono inviati come [body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) della richiesta POST.
 
-The server can access the data by accessing the <em>req.body</em> field of the request object <em>req</em>.
+Il server può accedere ai dati accedendo al campo <em>req.body</em> dell'oggetto richiesta <em>req</em>.
 
-The server creates a new note object, and adds it to an array called <em>notes</em>.
+Il server crea un nuovo oggetto nota e lo aggiunge a un array chiamato <em>notes</em>.
 
 ```js
 notes.push({
@@ -471,25 +470,25 @@ notes.push({
 });
 ```
 
-The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created.
+Gli oggetti Nota hanno due campi: <i>content</i> che contiene il contenuto effettivo della nota e <i>date</i> che contiene la data e l'ora in cui è stata creata la nota.
 
-The server does not save new notes to a database, so new notes disappear when the server is restarted.
+Il server non salva le nuove note in un database, quindi le nuove note scompaiono quando il server viene riavviato.
 
 ### AJAX
 
-The Notes page of the application follows an early-nineties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.
+La pagina Note dell'applicazione segue uno stile di sviluppo web dei primi anni novanta e usa "Ajax". In quanto tale, è sulla cresta dell'onda della tecnologia web dei primi anni 2000.
 
-[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to web pages using JavaScript included within the HTML, without the need to rerender the page.
+[AJAX](https://it.wikipedia.org/wiki/AJAX) (Asynchronous JavaScript and XML) è un termine introdotto nel febbraio 2005 sulla scia dei progressi nella tecnologia dei browser per descrivere un nuovo approccio rivoluzionario che ha consentito il recupero di contenuti nelle pagine Web utilizzando JavaScript incluso nell'HTML, senza la necessità di eseguire nuovamente il rendering della pagina.
 
-Prior to the AJAX era, all web pages worked like the [traditional web application](/en/part0/fundamentals_of_web_apps#traditional-web-applications) we saw earlier in this chapter.
-All of the data shown on the page was fetched with the HTML-code generated by the server.
+Prima dell'era AJAX, tutte le pagine web funzionavano come l'[applicazione web tradizionale](/it/part0/fundamentals_of_web_apps#traditional-web-applications) che abbiamo visto in precedenza in questo capitolo.
+Tutti i dati mostrati nella pagina sono stati recuperati con il codice HTML generato dal server.
 
-The Notes page uses AJAX to fetch the notes data. Submitting the form still uses the traditional mechanism of submitting web-forms.
+La pagina Note utilizza AJAX per recuperare i dati delle note. L'invio del form utilizza ancora il meccanismo tradizionale di invio di form web.
 
-The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.  
-Nowadays URLs like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/en/part3)
+Gli URL dell'applicazione riflettono i vecchi tempi spensierati. I dati JSON vengono recuperati dall'URL <https://studies.cs.helsinki.fi/exampleapp/data.json> e le nuove note vengono inviate all'URL <https://studies.cs.helsinki.fi/exampleapp/new_note >.
+Al giorno d'oggi URL come questi non sarebbero considerati accettabili, in quanto non seguono le convenzioni generalmente riconosciute delle API [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), che esamineremo di più in [parte 3](/it/parte3)
 
-The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.
+La cosa chiamata AJAX è ora così comune da essere data per scontata. Il termine è sbiadito nell'oblio e la nuova generazione non ne ha nemmeno sentito parlare.
 
 ### Single page app
 
