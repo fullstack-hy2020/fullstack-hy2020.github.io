@@ -96,15 +96,17 @@ The relational databases that are the focus of this section, on the other hand, 
 
 ```bash
 heroku create
-heroku addons:create heroku-postgresql:hobby-dev
-heroku config
+# 此时你可以获得一个App 名称，也就是你刚刚在heroku中创建的。
+
+heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
+heroku config -a <app-name>
 === cryptic-everglades-76708 Config Vars
-DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazonaws.com:5432/<db-name>
+DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
 ```
 
-<!-- Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [pqsl](https://www.postgresql.org/docs/current/app-psql.html) command-line tool. -->
+<!-- Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool. -->
 
-尤其是使用关系型数据库的时候，直接连接到数据库是十分 重要的。有许多方式可以做到这点，有许多不同的图形操作界面，类似 [pgAdmin](https://www.pgadmin.org/) 。 我们会使用 [pqsl](https://www.postgresql.org/docs/current/app-psql.html)  命令行工具
+尤其是使用关系型数据库的时候，直接连接到数据库是十分 重要的。有许多方式可以做到这点，有许多不同的图形操作界面，类似 [pgAdmin](https://www.pgadmin.org/) 。 我们会使用 [psql](https://www.postgresql.org/docs/current/app-psql.html)  命令行工具
 
 
 <!-- The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on connect url of the Heroku application): -->
@@ -112,7 +114,7 @@ DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazo
 
 
 ```bash
-heroku run psql -h ec2-44-199-83-229.compute-1.amazonaws.com -p 5432 -U <username> <dbname>
+heroku run psql -h <host-of-postgres-addon> -p 5432 -U <username> <dbname> -a <app-name>
 ```
 
 <!-- After entering the password, let's try the main psql command _\d_, which tells you the contents of the database: -->
@@ -161,8 +163,8 @@ username=> \d
 (2 rows)
 ```
 
-<!-- In addition to the <i>notes</i> table, Postgres created a subtable called <i>not\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note. -->
-此外， <i>notes</i> 表，Postgres 创建了一个子表叫做 <i>not\_id\_seq</i> ，用来跟踪当创建新的note时，<i>id</i> 列的值
+<!-- In addition to the <i>notes</i> table, Postgres created a subtable called <i>notes\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note. -->
+此外， <i>notes</i> 表，Postgres 创建了一个子表叫做 <i>notes\_id\_seq</i> ，用来跟踪当创建新的note时，<i>id</i> 列的值
 
 <!-- With the command _\d notes_, we can see how the <i>notes</i> table is defined: -->
 通过命令 _\d notes_ ， 我们可以可看到  <i>notes</i> 是如何定义的
