@@ -102,7 +102,7 @@ Luckily, React has the [React router](https://github.com/ReactTraining/react-rou
 Let's change the above application to use React router. First, we install React router with the command
 
 ```bash
-npm install react-router-dom5.3.0
+npm install react-router-dom@5.3.0
 ```
 
 **Note:** the material assumes that you have React router version 5. The version 6 of React router has some breaking changes.
