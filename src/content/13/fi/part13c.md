@@ -106,7 +106,7 @@ Talletetaan migraation koodi tiedostoon <i>migrations/20211209\_00\_initialize\_
 Voisimme suorittaa migraatiot komentoriviltä käsin [Sequelizen komentorivityökalun](https://github.com/sequelize/cli) avulla. Päätämme kuitenkin suorittaa migraatiot ohjelmakoodista käsin [Umzug](https://github.com/sequelize/umzug)-kirjastoa käyttäen. Asennetaan kirjasto
 
 ```js
-npm install umzug
+npm install umzug@2.3.0
 ```
 
 Muutetaan tietokantayhteyden muodostavaa tiedostoa <i>utils/db.js</i> seuraavasti:

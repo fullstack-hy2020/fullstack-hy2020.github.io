@@ -100,7 +100,7 @@ Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTr
 Muutetaan ylläoleva sovellus käyttämään React routeria. Asennetaan React router komennolla
 
 ```bash
-npm install react-router-dom5.3.0
+npm install react-router-dom@5.3.0
 ```
 
 **Huom:** materiaali olettaa että React routerista on käytössä versio 5, uusin versio sisältää jonkin verran muutoksia jotka ovat epäyhteensopivia materiaalin koodin kanssa.
