@@ -492,27 +492,27 @@ La cosa chiamata AJAX è ora così comune da essere data per scontata. Il termin
 
 ### Single page app
 
-In our example app, the home page works like a traditional web-page: All of the logic is on the server, and the browser only renders the HTML as instructed.
+Nella nostra app di esempio, la home page funziona come una pagina Web tradizionale: tutta la logica è sul server e il browser esegue solo il rendering dell'HTML come indicato.
 
-The Notes page gives some of the responsibility, generating the HTML code for existing notes, to the browser. The browser tackles this task by executing the JavaScript code it fetched from the server. The code fetches the notes from the server as JSON-data and adds HTML elements for displaying the notes to the page using the [DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).
+La pagina Notes delega parte della responsabilità al browser che genera il codice HTML per le note esistenti. Il browser affronta questo compito eseguendo il codice JavaScript che ha recuperato dal server. Il codice recupera le note dal server come dati JSON e aggiunge elementi HTML per visualizzare le note sulla pagina utilizzando [DOM-API](/it/part0/fundamentals_of_web_apps#document-object-model-or-dom).
 
-In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web-applications has emerged. SPA-style websites don't fetch all of their pages separately from the server like our sample application does, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.
+Negli ultimi anni è emerso lo stile di creazione di applicazioni web [Single-page application](https://en.wikipedia.org/wiki/Applicazione a pagina singola) (SPA). I siti web in stile SPA non recuperano tutte le loro pagine separatamente dal server come fa la nostra applicazione di esempio, ma comprendono invece solo una pagina HTML recuperata dal server, i cui contenuti vengono manipolati con JavaScript che viene eseguito nel browser.
 
-The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
+La pagina Notes della nostra applicazione ha alcune somiglianze con le app in stile SPA, ma non è ancora una SPA. Anche se la logica per il rendering delle note viene eseguita nel browser, la pagina utilizza ancora il modo tradizionale di aggiungere nuove note. I dati vengono inviati al server con l'invio del modulo e il server indica al browser di ricaricare la pagina Notes con un <i>reindirizzamento</i>.
 
-A single page app version of our example application can be found from <https://studies.cs.helsinki.fi/exampleapp/spa>.
-At first glance, the application looks exactly the same as the previous one.
-The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined:
+Una versione dell'app a pagina singola della nostra applicazione di esempio può essere trovata da <https://studies.cs.helsinki.fi/exampleapp/spa>.
+A prima vista, l'applicazione sembra esattamente la stessa della precedente.
+Il codice HTML è quasi identico, ma il file JavaScript è diverso (<i>spa.js</i>) e c'è un piccolo cambiamento nel modo in cui è definito il tag form:
 
 ![](../../images/0/25e.png)
 
-The form has no <i>action</i> or <i>method</i> attributes to define how and where to send the input data.
+Il form non ha attributi <i>action</i> o <i>method</i> per definire come e dove inviare i dati di input.
 
-Open the <i>Network</i>-tab and empty it. When you now create a new note, you'll notice that the browser sends only one request to the server.
+Apri la scheda <i>Network</i> e svuotala. Quando ora crei una nuova nota, noterai che il browser invia solo una richiesta al server.
 
 ![](../../images/0/26e.png)
 
-The POST request to the address <i>new_note_spa</i> contains the new note as JSON-data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):
+La richiesta POST all'indirizzo <i>new_note_spa</i> contiene la nuova nota come dati JSON contenenti sia il contenuto della nota (<i>content</i>) che il timestamp (<i>date</i >):
 
 ```js
 {
@@ -521,16 +521,16 @@ The POST request to the address <i>new_note_spa</i> contains the new note as JSO
 }
 ```
 
-The <i>Content-Type</i> header of the request tells the server that the included data is represented in the JSON format.
+Il <i>Content-Type</i> header della richiesta comunica al server che i dati inclusi sono rappresentati nel formato JSON.
 
 ![](../../images/0/27e.png)
 
-Without this header, the server would not know how to correctly parse the data.
+Senza questo header, il server non saprebbe come analizzare correttamente i dati.
 
-The server responds with status code [201 created](https://httpstatuses.com/201). This time the server does not ask for a redirect, the browser stays on the same page, and it sends no further HTTP requests.
+Il server risponde con il codice di stato [201 created](https://httpsstatuses.com/201). Questa volta il server non richiede un reindirizzamento, il browser rimane sulla stessa pagina e non invia ulteriori richieste HTTP.
 
-The SPA version of the app does not send the form data in the traditional way, but instead uses the JavaScript code it fetched from the server.
-We'll look into this code a bit, even though understanding all the details of it is not important just yet.
+La versione SPA dell'app non invia i dati del modulo in modo tradizionale, ma utilizza invece il codice JavaScript recuperato dal server.
+Esamineremo un po' questo codice, anche se comprenderne tutti i dettagli non è ancora importante.
 
 ```js
 var form = document.getElementById('notes_form');
@@ -549,11 +549,11 @@ form.onsubmit = function(e) {
 };
 ```
 
-The command <em>document.getElementById('notes_form')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen.
+Il comando <em>document.getElementById('notes_form')</em> indica al codice di recuperare l'elemento form dalla pagina e di registrare un <i>event handler</i> per gestire l'evento di invio del form. Il gestore di eventi (event handler) chiama immediatamente il metodo <em>e.preventDefault()</em> per impedire la gestione predefinita dell'invio del modulo. Il metodo predefinito invierebbe i dati al server e causerebbe una nuova richiesta GET, cosa che non vogliamo che accada.
 
-Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server.
+Quindi il gestore di eventi (event handler) crea una nuova nota, la aggiunge all'elenco delle note con il comando <em>notes.push(note)</em>, restituisce l'elenco delle note sulla pagina e invia la nuova nota al server.
 
-The code for sending the note to the server is as follows:
+Il codice per inviare la nota al server è il seguente:
 
 ```js
 var sendToServer = function(note) {
@@ -566,27 +566,27 @@ var sendToServer = function(note) {
 };
 ```
 
-The code determines that the data is to be sent with an HTTP POST request and the data type is to be JSON. The data type is determined with a <i>Content-type</i> header. Then the data is sent as JSON-string.
+Il codice determina che i dati devono essere inviati con una richiesta HTTP POST e il tipo di dati deve essere JSON. Il tipo di dati è determinato con un header <i>Content-type</i>. Quindi i dati vengono inviati come stringa JSON.
 
-The application code is available at <https://github.com/mluukkai/example_app>.
-It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new_note_spa</i>, which new notes are sent to, does not adhere to current best practices.
+Il codice dell'applicazione è disponibile su <https://github.com/mluukkai/example_app>.
+Vale la pena ricordare che l'applicazione ha il solo scopo di dimostrare i concetti del corso. Il codice segue uno stile di sviluppo inadeguato e non dovrebbe essere usato come esempio quando si creano le proprie applicazioni. Lo stesso vale per gli URL utilizzati. L'URL <i>new_note_spa</i>, a cui vengono inviate le nuove note, non aderisce alle migliori pratiche correnti.
 
-### JavaScript-libraries
+### Librerie JavaScript
 
-The sample app is done with so called [vanilla JavaScript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/), using only the DOM-API and JavaScript to manipulate the structure of the pages.
+L'app di esempio viene eseguita con il cosiddetto [vanilla JavaScript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/), utilizzando solo DOM-API e JavaScript per manipolare la struttura delle pagine.
 
-Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [jQuery](https://jquery.com/).
+Al giorno d'oggi, invece di utilizzare solo JavaScript e l'API DOM, per manipolare le pagine vengono spesso utilizzate diverse librerie contenenti strumenti con cui è più facile lavorare rispetto all'API DOM. Una di queste librerie è la popolarissima [jQuery](https://jquery.com/).
 
-jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of vanilla JS, and the most popular browsers generally support basic functionalities well.
+jQuery è stato sviluppato quando le applicazioni web seguivano principalmente lo stile tradizionale del server che genera pagine HTML, la cui funzionalità è stata migliorata dal lato browser utilizzando JavaScript scritto con jQuery. Uno dei motivi del successo di jQuery è stata la sua cosiddetta compatibilità cross-browser. La libreria funzionava indipendentemente dal browser o dall'azienda che la produceva, quindi non c'era bisogno di soluzioni specifiche per browser. Al giorno d'oggi l'utilizzo di jQuery non è così giustificato dato l'avanzamento di vanilla JS e i browser più popolari generalmente supportano bene le funzionalità di base.
 
-The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.
+L'ascesa delle single-page app ha portato molti modi più "moderni" di sviluppo web rispetto a jQuery. Uno dei primi preferiti e' stato [BackboneJS](http://backbonejs.org/). Dopo il suo [lancio](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) nel 2012, [AngularJS](https: //angularjs.org/) è diventato rapidamente quasi lo standard de facto dello sviluppo web moderno.
 
-However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.
+Tuttavia, la popolarità di Angular è crollata nell'ottobre 2014 dopo che [il team di Angular ha annunciato che il supporto per la versione 1 terminerà](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html) e Angular 2 non sarà retrocompatibile con la prima versione. Angular 2 e le versioni più recenti non hanno ricevuto un caloroso benvenuto.
 
-Currently the most popular tool for implementing the browser-side logic of web-applications is Facebook's [React](https://reactjs.org/) library.
-During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together.
+Attualmente lo strumento più popolare per implementare la logica lato browser delle applicazioni web è la libreria [React](https://reactjs.org/) di Facebook.
+Durante questo corso, acquisiremo familiarità con React e la libreria [Redux](https://github.com/reactjs/redux), che vengono spesso utilizzate insieme.
 
-The status of React seems strong, but the world of JavaScript is ever changing. For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been capturing some interest.
+Lo stato di React sembra forte, ma il mondo di JavaScript è in continua evoluzione. Ad esempio, recentemente un nuovo arrivato - [VueJS](https://vuejs.org/) - ha suscitato un certo interesse.
 
 ### Full stack web development
 
