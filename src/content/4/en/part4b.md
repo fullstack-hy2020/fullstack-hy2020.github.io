@@ -951,7 +951,7 @@ beforeEach(async () => {
 
   const noteObjects = helper.initialNotes
     .map(note => new Note(note))
-  const promiseArray = noteObjects.map(note => note.save())
+  const promiseArray = noteObjects.map(async note => await note.save())
   await Promise.all(promiseArray)
 })
 ```
