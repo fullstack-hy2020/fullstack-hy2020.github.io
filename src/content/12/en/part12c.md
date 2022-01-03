@@ -102,7 +102,7 @@ CMD ["serve", "build"] # highlight-line
 
 Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
 
-When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:5000 hello-front_, the app will be available in http://localhost:5000.
+When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:3000.
 
 ### Using multiple stages
 
