@@ -446,20 +446,20 @@ When using Sequelize, the reference key can be defined by modifying the <i>model
 const Note = require('./note')
 const User = require('./user')
 
-// hightlight-start
+// highlight-start
 User.hasMany(Note)
 Note.belongsTo(User)
 
 Note.sync({ alter: true })
 User.sync({ alter: true })
-// hightlight-end
+// highlight-end
 
 module.exports = {
   Note, User
 }
 ```
 
-So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
+So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
 
 ```js
 username=> \d users
@@ -497,10 +497,10 @@ Now let's make a change to the insertion of a new note that the note is associat
 
 router.post('/', async (req, res) => {
   try {
-    // hightlight-start
+    // highlight-start
     const user = await User.findOne()
     const note = await Note.create({...req.body, userId: user.id})
-    // hightlight-end
+    // highlight-end
     res.json(note)
   } catch(error) {
     return res.status(400).json({ error })
@@ -595,7 +595,7 @@ router.get('/', async (req, res) => {
 })
 ```
 
-We have also [restricted](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) the values of which fields we want. From the notes, we take all fields expect <i>userId</i> and for the user associated with the note, only <i>name</i>.
+We have also [restricted](https://sequelize.org/master/manual/model-querying-basics.html#specifying-attributes-for-select-queries) the values of which fields we want. From the notes, we take all fields except <i>userId</i> and for the user associated with the note, only <i>name</i>.
 
 Let's make a similar change to the route of all users, remove the unnecessary field <i>userId</i> from the notes associated with the user:
 
