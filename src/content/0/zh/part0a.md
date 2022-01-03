@@ -276,8 +276,8 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 ![](../../images/0/28a.png)
 
-<!-- You can view your grade in Weboodi approximately four weeks after notifying us. -->
-提醒我们后，你在大约四周的时间就能在网页上看到你的成绩了。
+<!-- You can view your grade in Sisu approximately four weeks after notifying us. -->
+提醒我们后，你在大约四周的时间就能在学校的Sisu系统上看到你的成绩了。
 
 <!-- **Please note** that in order to get university credits you need a registration for each completed part, please see [here](/en/part0/general_info#parts-and-completion) for more info about registration. -->
 
