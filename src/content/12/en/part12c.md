@@ -331,7 +331,7 @@ services:
     image: busybox
 ```
 
-With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works since the port is still 3000 within the docker network.
+With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still `docker-compose run debug-helper wget -O - http://hello-front-dev:3000` works since the port is still 3000 within the docker network.
 
 ![](../../images/12/busybox_networking_drawio.png)
 
