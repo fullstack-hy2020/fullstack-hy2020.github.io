@@ -590,36 +590,39 @@ Lo stato di React sembra forte, ma il mondo di JavaScript è in continua evoluzi
 
 ### Full stack web development
 
-What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, while no one really knows what it means. Or at least, there is no agreed-upon definition for the term.
+Cosa significa il nome del corso, <i>Full stack web development</i>? Full stack è qualcosa di cui tutti parlano, mentre nessuno sa davvero cosa significhi. O almeno, non esiste una definizione concordata per il termine.
 
-Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of <i>stack</i> of layers.
+Praticamente tutte le applicazioni web hanno (almeno) due "livelli": il browser, essendo più vicino all'utente finale, è il livello superiore e il server quello inferiore. Spesso c'è anche un livello di database sotto il server. Possiamo quindi pensare all'<i>architettura</i> di un'applicazione web come una sorta di <i>stack</i> di livelli.
 
-Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend.
+Spesso si parla anche di [frontend e backend](https://en.wikipedia.org/wiki/Front_and_back_ends). Il browser è il frontend e JavaScript che viene eseguito sul browser è codice frontend. Il server è il backend.
 
-In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those.
+Nel contesto di questo corso, lo sviluppo web full stack significa che ci concentriamo su tutte le parti dell'applicazione: il frontend, il backend e il database. A volte il software sul server e il suo sistema operativo sono visti come parti dello stack, ma non li esamineremo.
 
-We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack.
+Codificheremo il backend con JavaScript, utilizzando l'ambiente runtime [Node.js](https://nodejs.org/en/). L'utilizzo dello stesso linguaggio di programmazione su più livelli dello stack offre allo sviluppo web full stack una dimensione completamente nuova. Tuttavia, non è un requisito per lo sviluppo Web full stack utilizzare lo stesso linguaggio di programmazione (JavaScript) per tutti i livelli dello stack.
 
-It used to be more common for developers to specialize in one layer of the stack, for example the backend. Technologies on the backend and the frontend were quite different. With the Full stack trend, it has become common for developers to be proficient on all layers of the application and the database. Oftentimes, full stack developers must also have enough configuration and administration skills to operate their application, for example, in the cloud.
+In passato era più comune per gli sviluppatori specializzarsi in un livello dello stack, ad esempio il backend. Le tecnologie sul backend e sul frontend erano piuttosto diverse. Con la tendenza full stack, è diventato comune per gli sviluppatori essere esperti su tutti i livelli dell'applicazione e del database. Spesso, gli sviluppatori full stack devono anche avere sufficienti capacità di configurazione e amministrazione per far funzionare la loro applicazione, ad esempio, nel cloud.
 
 ### JavaScript fatigue
 
-Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating on the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable.
+Lo sviluppo web full stack è impegnativo in molti modi. Molte cose accadono in molte aree e contemporaneamente. Il debug è un po' più difficile rispetto alle normali applicazioni desktop. JavaScript non funziona sempre come ti aspetteresti (rispetto a molti altri linguaggi) e il modo asincrono in cui funzionano i suoi ambienti di runtime causa ogni tipo di sfida.
 
-The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: <em>JavaScript fatigue</em>. See [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) or [JavaScript fatigue on Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
+Comunicare sul web richiede la conoscenza del protocollo HTTP. È inoltre necessario gestire i database e l'amministrazione e la configurazione del server. Infine, sarebbe bene conoscere abbastanza CSS per rendere le applicazioni presentabili.
 
-You will suffer from JavaScript fatigue yourself during this course. Fortunately for us, there are a few ways to smooth the learning curve, and we can start with coding instead of configuration. We can't avoid configuration completely, but we can merrily push ahead in the next few weeks while avoiding the worst of configuration hells.
+Il mondo di JavaScript si sviluppa rapidamente, il che comporta una serie di sfide. Strumenti, librerie e il linguaggio stesso sono in costante sviluppo. Alcuni stanno iniziando a stancarsi del costante cambiamento e hanno coniato un termine per descrivere questo fenomeno: <em>JavaScript fatigue</em>. Vedi [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) o [JavaScript fatigue on Medium](https://medium.com/@ericclemmons /javascript-fatigue-48d4011b6fc4).
+
+Durante questo corso soffrirai di JavaScript Fatigue. Fortunatamente, ci sono alcuni modi per smussare la curva di apprendimento e possiamo iniziare con la programmazione invece che con la configurazione.
+Non possiamo evitare completamente la configurazione, ma possiamo tranquillamente andare avanti nelle prossime settimane evitando le parti peggiori della configurazione.
 
 </div>
 
 <div class="tasks"> 
-  <h3>Exercises 0.1.-0.6.</h3>
+  <h3>Esercizi 0.1.-0.6.</h3>
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Gli esercizi vengono inviati tramite GitHub e contrassegnandoli come eseguiti nel [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mluukkai_ as a collaborator to it.
+Puoi inviare tutti gli esercizi nella stesso repository o utilizzare più repository diverse. Se invii esercizi da parti diverse nella stessa repository, nomina bene le tue cartelle. Se utilizzi una repository privata per inviare gli esercizi, aggiungi _mluukkai_ come collaboratore.
 
-One good way to name the directories in your submission repository is as follows:
+Un buon modo per denominare le cartelle nella repository di invio è il seguente:
 
 ```
 part0
@@ -632,33 +635,33 @@ part2
   countries
 ```
 
-So, each part has its own directory, which contains a directory for each exercise set (like the unicafe exercises in part 1).
+Quindi, ogni parte ha la sua cartella, che contiene una cartella per ogni set di esercizi (come gli esercizi unicafe nella parte 1).
 
-The exercises are submitted **one part at a time**. When you have submitted the exercises for a part, you can no longer submit any missed exercises for that part.
+Gli esercizi vengono presentati **una parte alla volta**. Dopo aver inviato gli esercizi per una parte, non è più possibile inviare gli esercizi persi per quella parte.
 
   <h4>0.1: HTML</h4>
 
-Review the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).
+Rivedere le basi dell'HTML leggendo questo tutorial da Mozilla: [tutorial HTML](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<i>Questo esercizio non è inviato a GitHub, è sufficiente leggere il tutorial</i>
 
   <h4>0.2: CSS</h4>
 
-Review the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+Rivedere le basi dei CSS leggendo questo tutorial da Mozilla: [Tutorial CSS](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<i>Questo esercizio non è inviato a GitHub, è sufficiente leggere il tutorial</i>
 
   <h4>0.3: HTML forms</h4>
 
-Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
+Scopri le basi dei forms HTML leggendo il tutorial di Mozilla [Il tuo primo modulo](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<i>Questo esercizio non è inviato a GitHub, è sufficiente leggere il tutorial</i>
 
-  <h4>0.4: new note</h4>
+  <h4>0.4: nuova nota</h4>
 
-In chapter [Loading a page containing JavaScript - review](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+Nel capitolo [Caricamento di una pagina contenente JavaScript - recensione](/it/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review) la catena di eventi causata dall'apertura della pagina <https://studies.cs .helsinki.fi/exampleapp/notes> è rappresentato come un [diagramma di sequenza](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
-The diagram was made using [websequencediagrams](https://www.websequencediagrams.com) service as follows:
+Il diagramma è stato realizzato utilizzando il servizio [websequencediagrams](https://www.websequencediagrams.com) come segue:
 
 ```
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
@@ -668,37 +671,37 @@ server-->browser: main.css
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
 server-->browser: main.js
 
-note over browser:
-browser starts executing js-code
-that requests JSON data from server
-end note
+nota sul browser:
+il browser avvia l'esecuzione del codice JavaScript
+che richiede i dati in formato JSON dal server
+nota finale
 
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
 server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
 
-note over browser:
-browser executes the event handler
-that renders notes to display
-end note
+nota sul browser:
+il browser esegue il gestore di eventi (event handler)
+che rende le note da visualizzare
+nota finale
 ```
 
-**Create a similar diagram** depicting the situation where the user creates a new note on page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button.
+**Crea un diagramma simile** raffigurante la situazione in cui l'utente crea una nuova nota sulla pagina <https://studies.cs.helsinki.fi/exampleapp/notes> scrivendo qualcosa nel campo di testo e facendo clic su <i> submit</i>.
 
-If necessary, show operations on the browser or on the server as comments on the diagram.
+Se necessario, mostra le operazioni sul browser o sul server come commenti sul diagramma.
 
-The diagram does not have to be a sequence diagram. Any sensible way of presenting the events is fine.
+Il diagramma non deve essere un diagramma di sequenza. Qualsiasi modo ragionevole di presentare gli eventi va bene.
 
-All necessary information for doing this, and the next two exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
-The idea of these exercises is to read the text through once more, and to think through what is going on there. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible.
+Tutte le informazioni necessarie per farlo, e per i prossimi due esercizi, possono essere trovate nel testo di [questa parte](/it/part0/fundamentals_of_web_apps#forms-and-http-post).
+L'idea di questi esercizi è di rileggere il testo ancora una volta e di pensare a cosa sta succedendo. La lettura del [codice] dell'applicazione (https://github.com/mluukkai/example_app) non è necessaria, ma è ovviamente possibile.
 
   <h4>0.5: Single page app</h4>
 
-Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.
+Crea un diagramma che rappresenti la situazione in cui l'utente accede alla versione [single page app](/it/part0/fundamentals_of_web_apps#app a pagina singola) dell'app per le note su <https://studies.cs.helsinki.fi/ esempioapp/spa>.
 
-  <h4>0.6: New note</h4>
+   <h4>0.6: Nuova nota</h4>
 
-Create a diagram depicting the situation where the user creates a new note using the single page version of the app.
+Crea un diagramma che rappresenti la situazione in cui l'utente crea una nuova nota utilizzando la versione a pagina singola dell'app.
 
-This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Questo è stato l'ultimo esercizio ed è ora di inviare le tue risposte e contrassegnare gli esercizi come eseguiti nella [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
