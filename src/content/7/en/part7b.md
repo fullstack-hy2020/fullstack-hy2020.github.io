@@ -7,7 +7,6 @@ lang: en
 
 <div class="content">
 
-
 The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/en/part7/custom_hooks#exercises-7-4-7-8).
 
 
