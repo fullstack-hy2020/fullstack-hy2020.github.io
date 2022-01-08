@@ -115,9 +115,9 @@ CMD ["serve", "build"] # highlight-line
 
 我们的CMD 现在用中括号，结果是我们使用了所谓的CMD中的<i>执行表单exec form</i> 。实际上有 **三种** 不同的CMD表单，执行表单是常用的，阅读 [documentation](https://docs.docker.com/engine/reference/builder/#cmd) 获取更多信息。
 
-<!-- When we now build the image with  _docker build . -t hello-front_  and run it with _docker run -p 5000:5000 hello-front_, the app will be available in http://localhost:5000.
+<!-- When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:3000.
  -->
-我们构建镜像时运行  _docker build . -t hello-front_ ， 并运行_docker run -p 5000:5000 hello-front_ 。应用会在浏览器中 http://localhost:5000 看到 。
+我们构建镜像时运行  _docker build . -t hello-front_ ， 并运行_docker run -p 5000:3000 hello-front_ 。应用会在浏览器中 http://localhost:3000 看到 。
 
 ### Using multiple stages
 使用多阶段构建

@@ -119,7 +119,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 让我们将上面的应用改为使用 React 路由
 
 ```bash
-npm install react-router-dom5.3.0
+npm install react-router-dom@5.3.0
 ```
 <!-- **Note:** the material assumes that you have React router version 5. The version 6 of React router has some breaking changes. -->
 
