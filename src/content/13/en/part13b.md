@@ -459,7 +459,7 @@ module.exports = {
 }
 ```
 
-So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
+So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables when changes are made to the table definition. The database schema looks like the following from the console:
 
 ```js
 username=> \d users
@@ -491,7 +491,7 @@ Foreign-key constraints:
 
 That is, the reference key <i>user_id</i> has been created in the <i>notes</i> table, which refers to the <i>users</i> rows on the table.
 
-Now let's make a change to the insertion of a new note that the note is associated to the user. Before we make a proper implementation (where the join occurs using token to the user who is logged in), attach the note to the first user found in the database:
+Now let's make every insertion of a new note be associated to a user. Before we make a proper implementation (where the join occurs using the logged in users' token), hard code the note to be attached to the first user found in the database:
 
 ```js
 
@@ -508,9 +508,9 @@ router.post('/', async (req, res) => {
 })
 ```
 
-What is worthy of attention in the code is that although there is a column <i>user\_id</i> in the notes at the database level, in the corresponding object in the database row it is referred to by Sequelize naming convention due to to camel case as <i>userId</i>.
+Pay attention to how there is now a <i>user\_id</i> column in the notes at the database level. The corresponding object in each database row is referred to by Sequelize's naming convention as opposed to camel case (<i>userId</i>) as typed in the source code.
 
-Making a simple join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes:
+Making a join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes:
 
 ```js
 router.get('/', async (req, res) => {
