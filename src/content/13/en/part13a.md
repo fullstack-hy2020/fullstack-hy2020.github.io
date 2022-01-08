@@ -595,7 +595,7 @@ app.put('/api/notes/:id', async (req, res) => {
 
 The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row.
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1), branch <i>part13-1</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>.
 
 ### Printing the objects returned by Sequelize to a console
 
