@@ -492,8 +492,8 @@ module.exports = {
 }
 ```
 
-<!-- So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following: -->
-这就是我们如何定义 [define](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships)，用户<i>users</i> 和 <i>notes</i>  行之间有一对多的关系连接。我们还修改了<i>sync</i> 调用，以便在表定义有任何更改时修改表。现在从控制台查看数据库schema，它看起来如下所示:
+<!-- So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following: -->
+这就是我们如何定义 [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships)，用户<i>users</i> 和 <i>notes</i>  行之间有一对多的关系连接。我们还修改了<i>sync</i> 调用，以便在表定义有任何更改时修改表。现在从控制台查看数据库schema，它看起来如下所示:
 
 ```js
 username=> \d users

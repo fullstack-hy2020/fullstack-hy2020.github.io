@@ -233,7 +233,7 @@ notesRouter.post('/', async (request, response) => {
 
 
   const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken.id) {
+  if (!decodedToken.id) {
     return response.status(401).json({ error: 'token missing or invalid' })
   }
 
@@ -255,9 +255,9 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-<!-- The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on: -->
+<!-- The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return error <i>"jwt must be provided"</i>. -->
 
-_getTokenFrom_ 这个 辅助函数将 token 与认证头信息相分离。token 的有效性通过 _jwt.verify_ 进行检查。这个方法同样解码了 token， 或者返回了一个 token 所基于的对象
+_getTokenFrom_ 这个 辅助函数将 token 与认证头信息相分离。token 的有效性通过 _jwt.verify_ 进行检查。这个方法同样解码了 token， 或者返回了一个 token 所基于的对象。如果没有token通过，会返回错误信息 <i>"jwt must be provided"</i>。
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -266,12 +266,12 @@ const decodedToken = jwt.verify(token, process.env.SECRET)
 <!-- The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. -->
 这个对象通过 token 解码后得到<i>username</i> 和 <i>id</i> ，用来告诉 server 谁创建了这次 request。
 
-<!-- If there is no token, or the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. -->
+<!-- If the object decoded from the token does not contain the users identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. -->
 
-如果没有 token， 或者对象解析后没有获得用户认证 (_decodedToken.id_ is undefined)， 错误码[401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) 就会返回，并在 response 的 body 体中包含了失败的原因
+如果对象解析后没有获得用户认证 (_decodedToken.id_ is undefined)， 错误码[401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) 就会返回，并在 response 的 body 体中包含了失败的原因
 
 ```js
-if (!token || !decodedToken.id) {
+if (!decodedToken.id) {
   return response.status(401).json({
     error: 'token missing or invalid'
   })
