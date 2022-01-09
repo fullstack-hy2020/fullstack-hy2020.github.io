@@ -232,7 +232,7 @@ router.put('/:id', noteFinder, async (req, res) => {
 
 The route handlers now receive <i>three</i> parameters, the first being a string defining the route and second being the middleware <i>noteFinder</i> we defined earlier, which retrieves the note from the database and places it in the field of the <i>req</i> object in the <i>note</i>. A small amount of copypaste is eliminated and we are satisfied!
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part132-notes/tree/part13-2), branch <i>part13-2</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-2), branch <i>part13-2</i>.
 
 </div>
 
