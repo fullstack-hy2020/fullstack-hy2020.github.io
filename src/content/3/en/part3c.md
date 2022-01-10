@@ -536,6 +536,12 @@ We also added the hardcoded port of the server into the <em>PORT</em> environmen
 ![](../../images/3/45ae.png)
 
 The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
+  
+  **NB:** Our Heroku application will not work with MongoDB as the URI variable will be ignored by git. To fix this, define config vars on the Heroku site or via the command line: 
+```bash
+  heroku config:set MONGODB_URI='mongodb+srv://fullstack:sekred@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
+  heroku config:set PORT=3001
+```
 
 Let's change the <i>index.js</i> file in the following way:
 
