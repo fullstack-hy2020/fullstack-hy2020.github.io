@@ -587,7 +587,7 @@ router.get('/', async (req, res) => {
   const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
-      model: user,
+      model: User,
       attributes: ['name']
     }
   })
@@ -603,7 +603,7 @@ Let's make a similar change to the route of all users, remove the unnecessary fi
 router.get('/', async (req, res) => {
   const users = await User.findAll({
     include: {
-      model: note,
+      model: Note,
       attributes: { exclude: ['userId'] } // highlight-line
     }
   })
