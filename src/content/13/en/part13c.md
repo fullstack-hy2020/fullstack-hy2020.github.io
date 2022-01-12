@@ -28,7 +28,7 @@ module.exports = {
 }
 ```
 
-However, this approach does not make sense in the long run. Let's remove the lines that do the synchronization and move to using a much more robussive way, [migrations](https://sequelize.org/master/manual/migrations.html) provided by Sequelize (and many other libraries).
+However, this approach does not make sense in the long run. Let's remove the lines that do the synchronization and move to using a much more robust way, [migrations](https://sequelize.org/master/manual/migrations.html) provided by Sequelize (and many other libraries).
 
 In practice, a migration is a single JavaScript file that describes some modification to a database. A separate migration file is created for each single or multiple changes at once. Sequelize keeps a record of which migrations have been performed, i.e. which change caused by the migrations is synchronized to the database schema. With the creation of new migrations, Sequelize keeps up to date on which changes to the database schema are yet to be made. In this way, changes are made in a controlled manner, with the program code stored in the version control.
 
@@ -106,7 +106,7 @@ Save the migration code in the file <i>migrations/20211209_00_initialize_notes_a
 We could run the migrations from the command line using the [Sequelize command line tool](https://github.com/sequelize/cli). However, we choose to perform the migrations manually from the program code using the [Umzug](https://github.com/sequelize/umzug) library. Let's install the library
 
 ```js
-npm install umzug
+npm install umzug@'^2.x.x'
 ```
 
 Let's change the file <i>utils/db.js</i> that handles the connection to the database as follows:
@@ -114,7 +114,7 @@ Let's change the file <i>utils/db.js</i> that handles the connection to the data
 ```js
 const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
-const move = require('move') // highlight-line
+const Umzug = require('umzug') // highlight-line
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialectOptions: {
@@ -127,7 +127,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
 
 // highlight-start
 const runMigrations = async () => {
-  const migrator = new move({
+  const migrator = new Umzug({
     storage: 'sequelize',
     storageOptions: {
       sequelize,
