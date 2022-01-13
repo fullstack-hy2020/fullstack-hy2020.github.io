@@ -294,7 +294,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Now let's expand the controllers as follows. Prevent logging if the user field <i>disabled</i> is already set to <i>true</i>:
+Now let's expand the controllers as follows. Prevent logging in if the user field <i>disabled</i> is already set to <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -426,7 +426,7 @@ Let's modify the file <i>util/db.js</i> as follows:
 ```js
 const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
-const move = require('move')
+const Umzug = require('umzug')
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialectOptions: {
@@ -465,7 +465,7 @@ const migrationConf = {
 }
 
 const runMigrations = async () => {
-  const migrator = new migration(migrationConf)
+  const migrator = new Umzug(migrationConf)
   const migrations = await migrator.up()
   console.log('Migrations up to date', {
     files: migrations.map((mig) => mig.file),
@@ -474,20 +474,20 @@ const runMigrations = async () => {
 
 const rollbackMigration = async () => {
   await sequelize.authenticate()
-  const migrator = new move(migrationConf)
+  const migrator = new Umzug(migrationConf)
   await migrator.down()
 }
 // highlight-end
 
-module.exports = { connectToDatabase, sequelize, rollbackMigrations } // highlight-line
+module.exports = { connectToDatabase, sequelize, rollbackMigration } // highlight-line
 ```
 
 Let's create a file <i>util/rollback.js</i>, which will allow the npm script to execute the specified migration rollback function:
 
 ```js
-const { rollbackMigrations } = require('./db')
+const { rollbackMigration } = require('./db')
 
-rollbackMigrations()
+rollbackMigration()
 ```
 
 and the script itself:
