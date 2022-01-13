@@ -91,6 +91,7 @@ Let's add an npm-script to <i>the backend</i> which starts it in test mode, or s
 ```
 
 <!-- Kun backend ja frontend ovat käynnissä, voidaan käynnistää Cypress komennolla -->
+NB! In order to get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
 When both backend and frontend are running, we can start Cypress with the command
 
 ```js
