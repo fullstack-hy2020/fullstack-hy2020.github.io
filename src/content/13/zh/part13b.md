@@ -243,8 +243,8 @@ router.put('/:id', noteFinder, async (req, res) => {
 <!-- The route handlers now receive <i>three</i> parameters, the first being a string defining the route and second being the middleware <i>noteFinder</i> we defined earlier, which retrieves the note from the database and places it in the field of the <i>req</i> object in the <i>note</i>. A small amount of copypaste is eliminated and we are satisfied! -->
 路由处理现在接受三个参数，第一个是一个定义路由的字符串，第二个是我们前面定义的中间件   <i>noteFinder</i>， 它会从数据库中检索note， 并将其放置在 <i>note</i> 中的<i>req</i> 对象中。我们删除了部分冗余代码，看起来不错！
 
-<!-- The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part132-notes/tree/part13-2), branch <i>part13-2</i>. -->
-当前的应用可以在  [GitHub](https://github.com/fullstack-hy/part132-notes/tree/part13-2) 中找到，处于 <i>part13-2</i> 分支。
+<!-- The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-2), branch <i>part13-2</i>. -->
+当前的应用可以在  [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-2) 中找到，处于 <i>part13-2</i> 分支。
 
 </div>
 
@@ -276,9 +276,9 @@ _PUT /api/blogs/:id_ （更改喜欢的数量）
 
 #### Task 13.7.
 
-<!-- Centralize the application error handling in middleware as in [part 3](/part3/data_storage_in_mongo_db_database#debugging_centralization_in_middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/part4/backend_testing#try-catchin-elimination). -->
+<!-- Centralize the application error handling in middleware as in [part 3](/en/part3/saving_data_to_mongo_db#moving-error-handling-into-middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/en/part4/testing_the_backend#eliminating-the-try-catch). -->
 
-在中间件中集中处理应用程序错误，如第3部分[part 3](/part3/data_storage_in_mongo_db_database#debugging_centralization_in_middleware)所示。您还可以启用中间件  [express-async-errors](https://github.com/davidbanham/express-async-errors) ，就像我们在第4部分[part 4](/part4/backend_testing#try-catchin-elimination)中所做的那样。
+在中间件中集中处理应用程序错误，如第3部分[part 3](/en/part3/saving_data_to_mongo_db#moving-error-handling-into-middleware)所示。您还可以启用中间件  [express-async-errors](https://github.com/davidbanham/express-async-errors) ，就像我们在第4部分[part 4](/en/part4/testing_the_backend#eliminating-the-try-catch)中所做的那样。
 
 <!-- The data returned in the context of an error message is not very important. -->
 在错误消息的上下文中返回的数据并不十分重要。
@@ -492,7 +492,7 @@ module.exports = {
 }
 ```
 
-<!-- So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following: -->
+<!-- So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables when changes are made to the table definition. The database schema looks like the following from the console: -->
 这就是我们如何定义 [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships)，用户<i>users</i> 和 <i>notes</i>  行之间有一对多的关系连接。我们还修改了<i>sync</i> 调用，以便在表定义有任何更改时修改表。现在从控制台查看数据库schema，它看起来如下所示:
 
 ```js
@@ -526,7 +526,7 @@ Foreign-key constraints:
 <!-- That is, the reference key <i>user_id</i> has been created in the <i>notes</i> table, which refers to the <i>users</i> rows on the table. -->
 也就是说，引用键 <i>user_id</i> 已经在  <i>notes</i> 表中创建，该表引用表中的用户<i>users</i> 的行。
 
-<!-- Now let's make a change to the insertion of a new note that the note is associated to the user. Before we make a proper implementation (where the join occurs using token to the user who is logged in), attach the note to the first user found in the database: -->
+<!-- Now let's make every insertion of a new note be associated to a user. Before we make a proper implementation (where the join occurs using the logged in users' token), hard code the note to be attached to the first user found in the database: -->
 现在，让我们更改插入的新note，该note与用户相关联。在我们进行适当的实现之前(在联接发生时，使用 token 将note附加到登录的用户) ，将note附加到数据库中找到的第一个用户:
 
 ```js
@@ -544,11 +544,12 @@ router.post('/', async (req, res) => {
 })
 ```
 
-<!-- What is worthy of attention in the code is that although there is a column <i>user\_id</i> in the notes at the database level, in the corresponding object in the database row it is referred to by Sequelize naming convention due to to camel case as <i>userId</i>. -->
-在代码中值得注意的是，尽管在数据库级别的note中有一个列  <i>user\_id</i>，但是在数据库行的相应对象中，由于驼峰式大小写为 <i>userId</i>，这使用了 Sequelize 变量命名原则。
+<!-- Pay attention to how there is now a <i>user\_id</i> column in the notes at the database level. The corresponding object in each database row is referred to by Sequelize's naming convention as opposed to camel case (<i>userId</i>) as typed in the source code. -->
 
-<!-- Making a simple join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes: -->
-制作一个简单的连接查询非常简单。我们改变像所有用户的路由，这样也可以显示每个用户的note:
+注意这里有一个列 <i>user\_id</i> 位于数据库级别的notes中。Sequelize 的命名转换会将数据库中每一行对应的对象转换为驼峰式(<i>userId</i>) ，就像源码里那样。
+
+<!-- Making a join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes: -->
+制作一个连接查询非常简单。我们改变像所有用户的路由，这样也可以显示每个用户的note:
 
 ```js
 router.get('/', async (req, res) => {

@@ -553,13 +553,13 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tasks 13.1.-13.3.
 
-<!-- In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit. -->
+<!-- In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/en/part4), which should be compatible with the frontend in [section 5](/en/part5) except for error handling. We will also add various features to the backend that the frontend in section 5 will not know how to use. -->
 
-在本节的任务中，我们将构建一个博客应用程序后端，类似于第4节中的任务，它应该与第5节中的前端兼容，以便进行错误处理。我们还将为后端制作一组特性，这些特性在第5节中的前端可能不知道如何利用。
+在本节的任务中，我们将构建一个博客应用程序后端，类似于第4节中的任务，它应该与第5节中的前端兼容，以便进行错误处理。我们还将为后端制作多种特性，这些特性在第5节中的前端可能不知道如何利用。
 
 #### Task 13.1.
 
-<!-- Create a GitHub repository for the application and create a Heroku application within in, as well as a Postgres database. Make sure you are able to establish a connection to the application database. -->
+<!-- Create a GitHub repository for the application and create a new Heroku application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database. -->
 
 为应用程序创建一个 GitHub 仓库，并创建一个 Heroku 应用程序，以及一个 Postgres 数据库。确保您能够建立一个应用程序到数据库的连接。
 
@@ -693,8 +693,8 @@ app.put('/api/notes/:id', async (req, res) => {
 <!-- The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row. -->
 与数据库行相关的对象通过 <i>findByPk</i> 方法获取到了，对象的修改和结果的保存通过 <i>save</i>  方法实现了。
 
-<!-- The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1), branch <i>part13-1</i>. -->
-当前应用的所有代码，可以在  [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1)  中找到，处于分支  <i>part13-1</i>
+<!-- The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>. -->
+当前应用的所有代码，可以在  [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1)  中找到，处于分支  <i>part13-1</i>
 
 ### Printing the objects returned by Sequelize to a console
 
