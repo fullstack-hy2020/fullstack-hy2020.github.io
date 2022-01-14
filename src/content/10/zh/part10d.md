@@ -1133,15 +1133,15 @@ const cache = new InMemoryCache({
 
 <!-- Remember that you can fetch the authorized user from the Apollo Server with the <em>authorizedUser</em> query. This query returns a <em>User</em> type, which has a field <em>reviews</em>. If you have already implemented a reusable <em>authorizedUser</em> query in your code, you can customize this query to fetch the <em>reviews</em> field conditionally. This can be done using GraphQL's [include](https://graphql.org/learn/queries/#directives) directive. -->
 
-记住你可以通过Apollo Servers的  <em>authorizedUser</em> 查询来获取授权用户。这个查询会返回一个 <em>User</em> 的类型，有一个 <em>reviews</em> 字段。如果你已经实现了可复用的 <em>authorizedUser</em> 查询代码，你可以定制化这个查询，来按条件获取 <em>reviews</em> 字段。这个可以通过GraphQL 的 [include](https://graphql.org/learn/queries/#directives) 指令完成。
+记住你可以通过Apollo Servers的  <em>me</em> 查询来获取授权用户。这个查询会返回一个 <em>User</em> 的类型，有一个 <em>reviews</em> 字段。如果你已经实现了可复用的 <em>me</em> 查询代码，你可以定制化这个查询，来按条件获取 <em>reviews</em> 字段。这个可以通过GraphQL 的 [include](https://graphql.org/learn/queries/#directives) 指令完成。
 
 <!-- Let's say that the current query is implemented roughly in the following manner: -->
 当前的查询可以大体上实现为如下形式：
 
 ```javascript
-const GET_AUTHORIZED_USER = gql`
+const GET_CURRENT_USER = gql`
   query {
-    authorizedUser {
+    me {
       # user fields...
     }
   }
@@ -1152,9 +1152,9 @@ const GET_AUTHORIZED_USER = gql`
 你可以在使用 <em>include</em> 指令时提供一个  <em>includeReviews</em> 查询参数，
 
 ```javascript
-const GET_AUTHORIZED_USER = gql`
-  query getAuthorizedUser($includeReviews: Boolean = false) {
-    authorizedUser {
+const GET_CURRENT_USER = gql`
+  query getCurrentUser($includeReviews: Boolean = false) {
+    me {
       # user fields...
       reviews @include(if: $includeReviews) {
         edges {
@@ -1283,7 +1283,7 @@ const Main = () => {
 
 <!-- [React-spring](https://www.react-spring.io/) is a library that provides a clean [hook API](https://www.react-spring.io/docs/hooks/basics) for animating React Native components. -->
 
-[React-spring](https://www.react-spring.io/) 是一个库，提供了简明的 [hook API](https://react-spring.io/hooks/use-chain) 来实现React Native 组件的动画效果。
+[React-spring](https://www.react-spring.io/) 是一个库，提供了简明的 [hook API](https://www.react-spring.io/docs/hooks/basics) 来实现React Native 组件的动画效果。
 
 #### React Navigation
 
