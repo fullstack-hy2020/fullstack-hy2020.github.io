@@ -7,8 +7,6 @@ lang: zh
 
 <div class="content">
 
-
-
 <!-- The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/osa7/custom_hookit#tehtavat-7-4-7-6). -->
 这一章节的练习与前几章节有点不同。 前一章节的练习和这一章节的练习都是[关于这一章节提出的理论](/zh/part7/自定义_hooks#exercises-7-4-7-8).。
 

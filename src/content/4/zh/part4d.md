@@ -587,8 +587,8 @@ if ( blog.user.toString() === userid.toString() ) ...
 <!-- Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who is the user holding a specific token. -->
 无论是博客的创建和删除都需要找到用户的唯一标识，来确定是谁在做相关操作。我们在 4.20 练习中的 _tokenExtractor_ 中间件能够帮上忙，但  <i>post</i> 和  <i>delete</i> 操作仍需要找到哪个用户拥有这个特定的token。
 
-<!-- Do now a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i> -->
-现在使用一个新的中间件 _userExtractor_ ， 来找到这个用户并将它包装成请求对象。在 <i>app.js</i> 中注册这个中间件。
+<!-- Now create a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i> -->
+现在创建一个新的中间件 _userExtractor_ ， 来找到这个用户并将它包装成请求对象。在 <i>app.js</i> 中注册这个中间件。
 
 ```js
 app.use(middleware.userExtractor)
