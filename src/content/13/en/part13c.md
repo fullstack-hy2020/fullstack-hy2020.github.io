@@ -1366,13 +1366,13 @@ _TODO: should perhaps use camelCase in the names of the methods?_
 _TODO: numberOfNotes could be a good example for a count method: https://sequelize.org/master/manual/model-querying-basics.html#-code-count--code-_
 
 ```js
-const { Model, DataTypes, Op } = require('sequelize') // hightlight-line
+const { Model, DataTypes, Op } = require('sequelize') // highlight-line
 
 const Note = require('./note')
 const { sequelize } = require('../util/db')
 
 class User extends Model {
-  // hightlight-start
+  // highlight-start
   async number_of_notes() {
     return (await this.getNotes()).length
   }
@@ -1392,7 +1392,7 @@ class User extends Model {
       having: sequelize.literal(`COUNT(notes.id) > ${limit}`)
     })
   }
-  // hightlight-end
+  // highlight-end
 }
 
 User.init({
