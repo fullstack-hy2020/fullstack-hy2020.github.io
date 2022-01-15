@@ -1235,7 +1235,7 @@ router.get('/:id', async (req, res) => {
     return res.status(404).end()
   }
 
-  // hightlight-start
+  // highlight-start
   let teams = undefined
 
   if (req.query.teams) {
@@ -1246,7 +1246,7 @@ router.get('/:id', async (req, res) => {
   }
 
   res.json({ ...user.toJSON(), teams })
-  // hightlight-end
+  // highlight-end
 })
 ```
 
