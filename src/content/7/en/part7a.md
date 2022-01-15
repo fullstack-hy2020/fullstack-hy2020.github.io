@@ -222,7 +222,7 @@ Note that the order of the components is important. If we put the <i>Home</i> co
 
 ### Parameterized route
 
-Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v1.js).
+Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy/misc/blob/main/router-app-v1.js).
 
 The application now contains five different views whose display is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
@@ -554,7 +554,7 @@ const note = match
   : null
 ```
 
-The completed code can be found [here](https://github.com/fullstack-hy/misc/blob/master/router-app-v2.js).
+The completed code can be found [here](https://github.com/fullstack-hy/misc/blob/main/router-app-v2.js).
 
 </div>
 <div class="tasks">
