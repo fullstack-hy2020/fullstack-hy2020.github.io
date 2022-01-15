@@ -602,9 +602,6 @@ doShopping();
 
 我们可以使用 [AsyncStorage.setItem](https://react-native-community.github.io/async-storage/docs/api#setitem) 来向存储添加存储项。方法的第一个参数是该项的key ，第二个参数是值。 值 <i>必须是字符串</i>， 所以我们需要序列化非字符串的值，就像我们使用  <em>JSON.stringify</em>  方法一样。 [AsyncStorage.getItem](https://react-native-community.github.io/async-storage/docs/api#getitem)  方法可以用来从存储中获得一个项。该方法的第一个参数是项目的key ， 这样它的值就被处理到了。 [AsyncStorage.removeItem](https://react-native-community.github.io/async-storage/docs/api#removeitem) 方法可以用来从storage 中移除相关的key 。
 
-<!-- Note: AsyncStorage is not suitable for storing sensitive information, for example an authentication token. A good alternative for storing sensitive information is expo's [SecureStorage](https://docs.expo.dev/versions/latest/sdk/securestore/). SecureStorage works similarly to AsyncStorage, the main exception is that SecureStorage encrypts the key-value pairs before storing them. -->
-注意： AsyncStorage 并不适用于存储敏感信息，比如验证密钥。一个好的替代方案是使用expo的  [SecureStorage](https://docs.expo.dev/versions/latest/sdk/securestore/) 来存储敏感信息。 SecureStorage 和 AsyncStorage 工作机制类似，主要的区别是 SecureStorage 在存储键值对之前会先加密。
-
 </div>
 
 <div class="tasks">
@@ -897,11 +894,11 @@ apolloClient.resetStore();
 登出
 
 <!-- The final step in completing the sign in feature is to implement a sign out feature. The <em>authorizedUser</em> query can be used to check the authorized user's information. If the query's result is <em>null</em>, that means that the user is not authorized. Open the GraphQL playground and run the following query: -->
-完成登录特性的最后一步就是登出功能。 <em>authorizedUser</em> 查询能够用来检查验证的用户信息，如果查询结果为 <em>null</em> ， 也就意味着用户没有被认证。打开GraphQL playground 并运行如下查询：
+完成登录特性的最后一步就是登出功能。 <em>me</em> 查询能够用来检查验证的用户信息，如果查询结果为 <em>null</em> ， 也就意味着用户没有被认证。打开GraphQL playground 并运行如下查询：
 
 ```javascript
 {
-  authorizedUser {
+  me {
     id
     username
   }
@@ -909,13 +906,13 @@ apolloClient.resetStore();
 ```
 
 <!-- You will probably end up with the <em>null</em> result. This is because the GraphQL Playground is not authorized, meaning that it doesn't send a valid access token with the request. Revise the [authorization documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authorization) and retrieve an access token using the <em>authorize</em> mutation. Use this access token in the _Authorization_ header as instructed in the documentation. Now, run the <em>authorizedUser</em> query again and you should be able to see the authorized user's information. -->
-你可能最终的结果为 <em>null</em> 。 这是因为GraphQL Playground 并没有验证，也就是说它在请求中没有发送一个合法的访问token。 复习 [authorization documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authorization)， 并使用 <em>authorize</em> 变化来获取访问token。按照指导文档使用这个访问token放到  _Authorization_  头中。现在，再次运行  <em>authorizedUser</em> 查询，你应当能够看到认证的用户信息了。
+你可能最终的结果为 <em>null</em> 。 这是因为GraphQL Playground 并没有验证，也就是说它在请求中没有发送一个合法的访问token。 复习 [authorization documentation](https://github.com/fullstack-hy2020/rate-repository-api#-authorization)， 并使用 <em>authorize</em> 变化来获取访问token。按照指导文档使用这个访问token放到  _Authorization_  头中。现在，再次运行  <em>me</em> 查询，你应当能够看到认证的用户信息了。
 
 <!-- Open the <em>AppBar</em> component in the <i>AppBar.jsx</i> file where you currently have the tabs "Repositories" and "Sign in". Change the tabs so that if the user is signed in the tab "Sign out" is displayed, otherwise show the "Sign in" tab. You can achieve this by using the <em>authorizedUser</em> query with the [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook. -->
-打开 <i>AppBar.jsx</i> 文件的 <em>AppBar</em>  组件，现在组件里有 "Repositories" 和 "Sign in"两个tab页。修改tab页，当用户登录后，显示 “登出” tab 页，否则展示 “登录” tab 页。你可以使用 <em>authorizedUser</em> 查询配合 [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook来完成这个功能。
+打开 <i>AppBar.jsx</i> 文件的 <em>AppBar</em>  组件，现在组件里有 "Repositories" 和 "Sign in"两个tab页。修改tab页，当用户登录后，显示 “登出” tab 页，否则展示 “登录” tab 页。你可以使用 <em>me</em> 查询配合 [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery) hook来完成这个功能。
 
 <!-- Pressing the "Sign out" tab should remove the user's access token from the storage and reset the Apollo Client's store with the [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore) method. Calling the <em>resetStore</em> method should automatically re-execute all active queries which means that the <em>authorizedUser</em> query should be re-executed. Note that the order of execution is crucial: access token must be removed from the storage <i>before</i> the Apollo Client's store is reset. -->
-点击“登出” tab 应当从存储中删除用户的访问token，并利用[resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) 方法重置Apollo Client 的存储。 调用  <em>resetStore</em> 方法会自动重新执行所有活跃的查询，也就意味着 <em>authorizedUser</em>  查询应当被重新执行了。注意执行的顺序至关重要，访问token从存储中删除必须 <i>优先于</i> Apollo Client 存储重置。
+点击“登出” tab 应当从存储中删除用户的访问token，并利用[resetStore](https://www.apollographql.com/docs/react/api/core/ApolloClient/#ApolloClient.resetStore) 方法重置Apollo Client 的存储。 调用  <em>resetStore</em> 方法会自动重新执行所有活跃的查询，也就意味着 <em>me</em>  查询应当被重新执行了。注意执行的顺序至关重要，访问token从存储中删除必须 <i>优先于</i> Apollo Client 存储重置。
 
 <!-- This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 3 in the exercise submission system. -->
 

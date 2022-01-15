@@ -47,6 +47,12 @@ Node 中的约定是用 <i>NODE\_ENV</i> 环境变量定义应用的执行模式
   // ...
 }
 ```
+<!-- **NB**: If you are deploying this aplication to heroku, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server. To fix this, change cross-env to a production dependency by running this in the command line: -->
+注意：如果你的应用是部署在 heroku上，记住如果 cross-env 是开发依赖，可能在你的 web 服务器上报错。如果想要修复这个错误，将 cross-env 保存为生产依赖，运行如下命令：
+
+```bash
+npm i cross-env -P
+```
 
 <!-- We also added the [runInBand](https://jestjs.io/docs/cli#--runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database. -->
 我们还在执行测试的 npm 脚本中添加了[runInBand](https://jestjs.io/docs/cli#--runinband)选项。 这个选项将防止 Jest 并行运行测试; 一旦我们的测试开始使用数据库，我们将讨论它的重要性。

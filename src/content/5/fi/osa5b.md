@@ -60,7 +60,7 @@ const LoginForm = ({
 export default LoginForm
 ```
 
-Tila ja tilaa käsittelevät funktiot on kaikki määritelty komponentin ulkopuolella ja välitetään komponentille propseina.
+Tila ja tilaa käsittelevät funktiot on kaikki määritelty komponentin ulkopuolella ja ne välitetään komponentille propseina.
 
 Huomaa, että propsit otetaan vastaan <i>destrukturoimalla</i>, eli sen sijaan että määriteltäisiin
 
@@ -123,9 +123,9 @@ const App = () => {
 }
 ```
 
-Komponentin <i>App</i> tilaan on nyt lisätty totuusarvo <i>loginVisible</i> joka määrittelee sen, näytetäänkö kirjautumislomake.
+Komponentin <i>App</i> tilaan on nyt lisätty totuusarvo <i>loginVisible</i>, joka määrittelee sen, näytetäänkö kirjautumislomake.
 
-Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, molempiin on kirjoitettu tapahtumankäsittelijän koodi suoraan:
+Näkyvyyttä säätelevää tilaa vaihdellaan kahden napin avulla, joihin molempiin on kirjoitettu tapahtumankäsittelijän koodi suoraan:
 
 ```js
 <button onClick={() => setLoginVisible(true)}>log in</button>
@@ -148,17 +148,17 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-Käytössä on kysymysmerkkioperaattori, eli jos _loginVisible_ on <i>true</i>, tulee napin CSS-määrittelyksi
+Käytössä on kysymysmerkkioperaattori eli jos _loginVisible_ on <i>true</i>, tulee napin CSS-määrittelyksi
 
 ```css
 display: 'none';
 ```
 
-jos _loginVisible_ on <i>false</i>, ei <i>display</i> saa mitään napin näkyvyyteen liittyvää arvoa.
+Jos _loginVisible_ on <i>false</i>, ei <i>display</i> saa mitään napin näkyvyyteen liittyvää arvoa.
 
-### Komponentin lapset, eli props.children
+### Komponentin lapset eli props.children
 
-Kirjautumislomakkeen näkyvyyttä ympäröivän koodin voi ajatella olevan oma looginen kokonaisuutensa ja se onkin hyvä eristää pois komponentista <i>App</i> omaksi komponentikseen.
+Kirjautumislomakkeen näkyvyyttä ympäröivän koodin voi ajatella olevan oma looginen kokonaisuutensa, ja se onkin hyvä eristää pois komponentista <i>App</i> omaksi komponentikseen.
 
 Tavoitteena on luoda komponentti <i>Togglable</i>, jota käytetään seuraavalla tavalla:
 
@@ -185,7 +185,7 @@ Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä o
 </Togglable>
 ```
 
-Komponentin koodi on seuraavassa:
+Komponentin koodi on tällainen:
 
 ```js
 import React, { useState } from 'react'
@@ -216,7 +216,7 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-Mielenkiintoista ja meille uutta on [props.children](https://reactjs.org/docs/glossary.html#propschildren), jonka avulla koodi viittaa komponentin lapsiin, eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
+Mielenkiintoista ja meille uutta on [props.children](https://reactjs.org/docs/glossary.html#propschildren), jonka avulla koodi viittaa komponentin lapsiin eli avaavan ja sulkevan tagin sisällä määriteltyihin React-elementteihin.
 
 Tällä kertaa lapset ainoastaan renderöidään komponentin oman renderöivän koodin seassa:
 
@@ -239,7 +239,7 @@ Toisin kuin "normaalit" propsit, <i>children</i> on Reactin automaattisesti mä�
 
 on <i>props.children</i> tyhjä taulukko.
 
-Komponentti <i>Togglable</i> on uusiokäytettävä ja voimme käyttää sitä tekemään myös uuden muistiinpanon luomisesta huolehtivan formin vastaavalla tavalla tarpeen mukaan näytettäväksi.
+Komponentti <i>Togglable</i> on uusiokäytettävä, ja voimme käyttää sitä tekemään myös uuden muistiinpanon luomisesta huolehtivan formin vastaavalla tavalla tarpeen mukaan näytettäväksi.
 
 Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 
@@ -277,7 +277,7 @@ ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sis
 </Togglable>
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
 
 ### Lomakkeiden tila
 
@@ -287,7 +287,7 @@ Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-
 
 > <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 
-Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
+Jos mietitään lomakkeiden tilaa eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin.
 
 Muistiinpanon luomisesta huolehtiva komponentti muuttuu seuraavasti:
 
@@ -331,9 +331,9 @@ export default NoteForm
 
 Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
 
-Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.
+Propseja on enää yksi eli funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.
 
-Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle:
+Komponentti _App_ yksintertaistuu, koska tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle:
 
 ```js
 const App = () => {
@@ -358,18 +358,15 @@ const App = () => {
 
 Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
 
 ### ref eli viite komponenttiin
 
-Ratkaisu on melko hyvä, haluaisimme kuitenkin parantaa sitä erään seikan osalta.
+Ratkaisu on melko hyvä, mutta haluamme kuitenkin parantaa sitä. Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
 
-Kun uusi muistiinpano luodaan, olisi loogista jos luomislomake menisi piiloon. Nyt lomake pysyy näkyvillä. Lomakkeen piilottamiseen sisältyy kuitenkin pieni ongelma, sillä näkyvyyttä kontrolloidaan <i>Togglable</i>-komponentin tilassa olevalla muuttujalla <i>visible</i>. Miten pääsemme tilaan käsiksi komponentin ulkopuolelta?
+On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta. Käytetään nyt Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
 
-On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuolelta, käytetään nyt 
-Reactin [ref](https://reactjs.org/docs/refs-and-the-dom.html)-mekanismia, joka tarjoaa eräänlaisen viitteen komponenttiin.
-
-Tehdään komponenttiin <i>App</i> seuraavat muutokset
+Tehdään komponenttiin <i>App</i> seuraavat muutokset:
 
 ```js
 import React, { useState, useRef } from 'react' // highlight-line
@@ -428,10 +425,9 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
 export default Togglable
 ```
 
-Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, näin komponentti pääsee käsiksi sille määriteltyyn refiin.
+Komponentin luova funktio on kääritty funktiokutsun [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) sisälle, jolloin komponentti pääsee käsiksi sille määriteltyyn refiin.
 
-Komponentti tarjoaa [useImperativeHandle
-](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
+Komponentti tarjoaa [useImperativeHandle ](https://reactjs.org/docs/hooks-reference.html#useimperativehandle)-hookin avulla sisäisesti määritellyn funktionsa <i>toggleVisibility</i> ulkopuolelta kutsuttavaksi.
 
 Voimme nyt piilottaa lomakkeen kutsumalla <i>noteFormRef.current.toggleVisibility()</i> samalla kun uuden muistiinpanon luominen tapahtuu:
 
@@ -450,26 +446,25 @@ const App = () => {
 }
 ```
 
-Käyttämämme [useImperativeHandle
-](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta.
+Käyttämämme [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) on siis React hook, jonka avulla funktiona määritellylle komponentille voidaan määrittää funktioita, joita on mahdollista kutsua sen ulkopuolelta.
 
-Käyttämämme kikka komponentin tilan muuttamiseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-perustaisilla komponenteilla, joihin tutustumme osassa 7. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
+Käyttämämme kikka komponentin tilan muuttamiseksi toimii, mutta se vaikuttaa hieman ikävältä. Saman olisi saanut aavistuksen siistimmin toteutettua "vanhan Reactin" class-komponenteilla, joihin tutustumme osassa 7. Tämä on toistaiseksi ainoa tapaus, jossa Reactin hook-syntaksiin nojaava ratkaisu on aavistuksen likaisemman oloinen kuin class-komponenttien tarjoama ratkaisu.
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
 
 ### Huomio komponenteista
 
 Kun Reactissa määritellään komponentti
 
 ```js
-const Togglable = () => ...
+const Togglable = () => {
   // ...
 }
 ```
 
-ja otetaan se käyttöön seuraavasti,
+ja otetaan se käyttöön
 
 ```js
 <div>
@@ -503,11 +498,11 @@ syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
 Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näytettävä osan 5 luvun [Kirjautumislomakkeen näyttäminen vain tarvittaessa](/osa5/props_children_ja_proptypet#kirjautumislomakkeen-nayttaminen-vain-tarvittaessa) tapaan. Voit halutessasi hyödyntää osassa 5 määriteltyä komponenttia <i>Togglable</i>.
 
-Lomake ei ole oletusarvoisesti näkyvillä
+Lomake ei ole oletusarvoisesti näkyvillä:
 
 ![](../../images/5/13ae.png)
 
-Klikkaamalla nappia <i>create new blog</i> lomake aukeaa
+Klikkaamalla nappia <i>create new blog</i> lomake aukeaa:
 
 ![](../../images/5/13be.png)
 
@@ -521,9 +516,9 @@ Komponentin tulee siis toimia samaan tapaan kuin tämän osan [materiaalin](http
 
 #### 5.7* blogilistan frontend, step7
 
-Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot.
+Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida, näytetäänkö kaikki blogiin liittyvät tiedot.
 
-Klikkaamalla nappia sen täydelliset tiedot aukeavat.
+Klikkaamalla nappia sen täydelliset tiedot aukeavat:
 
 ![](../../images/5/13ea.png)
 
@@ -555,15 +550,15 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**Huom1:** voit tehdä blogin nimestä klikattavan korostetun koodirivin tapaan.
+**Huom 1:** Voit tehdä blogin nimestä klikattavan korostetun koodirivin tapaan.
 
-**Huom2:** vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
+**Huom 2:** Vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
 
 #### 5.8*: blogilistan frontend, step8
 
 Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
 
-Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaation mukana blogin kaikki kentät, eli jos seuraavaa blogia liketetään,
+Koska backendin operaatio korvaa aina koko blogin, joudut lähettämään operaation mukana blogin kaikki kentät. Eli jos seuraavaa blogia liketetään,
 
 ```js
 {
@@ -592,7 +587,7 @@ tulee palvelimelle tehdä PUT-pyyntö osoitteeseen <i>/api/blogs/5a43fde2cbd20b1
 }
 ```
 
-**Varoitus vielä kerran:** jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9% varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
+**Varoitus vielä kerran:** Jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
 #### 5.9*: blogilistan frontend, step9
 
@@ -606,8 +601,7 @@ Ohjelmasi voi näyttää esim. seuraavalta:
 
 ![](../../images/5/14ea.png)
 
-Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla
-[window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
+Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
 
 Näytä poistonappi ainoastaan jos kyseessä on kirjautuneen käyttäjän lisäämä blogi.
 
@@ -625,9 +619,9 @@ Komponentti <i>Togglable</i> olettaa, että sille määritellään propsina <i>b
 
 sovellus kyllä toimii, mutta selaimeen renderöityy hämäävästi nappi, jolla ei ole mitään tekstiä.
 
-Haluaisimmekin varmistaa että jos <i>Togglable</i>-komponenttia käytetään, on propsille "pakko" antaa arvo.
+Haluaisimmekin varmistaa, että jos <i>Togglable</i>-komponenttia käytetään, on propsille "pakko" antaa arvo.
 
-Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto
+Komponentin olettamat ja edellyttämät propsit ja niiden tyypit voidaan määritellä kirjaston [prop-types](https://github.com/facebook/prop-types) avulla. Asennetaan kirjasto:
 
 ```bash
 npm install prop-types
@@ -647,7 +641,7 @@ Togglable.propTypes = {
 }
 ```
 
-Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus
+Jos propsia ei määritellä, seurauksena on konsoliin tulostuva virheilmoitus:
 
 ![](../../images/5/15.png)
 
@@ -677,19 +671,19 @@ LoginForm.propTypes = {
 }
 ```
 
-Jos propsin tyyppi on väärä, esim. yritetään määritellä propsiksi <i>handleSubmit</i> merkkijono, seurauksena on varoitus:
+Jos propsin tyyppi on väärä, eli jos esimerkiksi yritetään määritellä propsiksi <i>handleSubmit</i> merkkijono, seurauksena on varoitus:
 
 ![](../../images/5/16.png)
 
-### ESlint
+### ESLint
 
-Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESlintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESlint käyttöön myös frontendissa.
+Konfiguroimme osassa 3 koodin tyylistä huolehtivan [ESLintin](/osa3/validointi_ja_es_lint) backendiin. Otetaan nyt ESLint käyttöön myös frontendissa.
 
-Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kuin sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
+Create-react-app on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kuin sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
 
-**HUOM:** älä suorita komentoa _eslint --init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
+**HUOM:** Älä suorita komentoa _eslint --init_. Se asentaa ESLintistä uuden version, joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 
-Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest)
+Aloitamme seuraavaksi testaamisen, ja jotta pääsemme eroon testeissä olevista turhista huomautuksista asennetaan plugin [eslint-jest-plugin](https://www.npmjs.com/package/eslint-plugin-jest):
 
 ```js
 npm install --save-dev eslint-plugin-jest
@@ -754,7 +748,7 @@ module.exports = {
 }
 ```
 
-Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) ja sille seuraava sisältö
+Tehdään projektin juureen tiedosto [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) ja sille seuraava sisältö:
 
 ```bash
 node_modules
@@ -786,11 +780,11 @@ Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component d
 
 ![](../../images/5/25ea.png)
 
-Komponentin "nimettömyys" käy ilmi myös react-devtoolsilla:
+Komponentin "nimettömyys" käy ilmi myös React Development Toolsilla:
 
 ![](../../images/5/26ea.png)
 
-Korjaus on onneksi hyvin helppo tehdä
+Korjaus on onneksi hyvin helppo tehdä:
 
 ```js
 import React, { useState, useImperativeHandle } from 'react'
@@ -805,7 +799,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
 
 </div>
 
@@ -819,10 +813,10 @@ Määrittele joillekin sovelluksesi komponenteille PropTypet.
 
 #### 5.12: blogilistan frontend, step12
 
-Ota projektiin käyttöön ESlint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
+Ota projektiin käyttöön ESLint. Määrittele haluamasi kaltainen konfiguraatio. Korjaa kaikki lint-virheet.
 
-Create-react-app on asentanut projektille eslintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
+Create-react-app on asentanut projektille ESLintin valmiiksi, joten ei tarvita muuta kun sopiva konfiguraatio tiedostoon <i>.eslintrc.js</i>.
 
-**HUOM:** älä suorita komentoa _eslint --init_. Se asentaa uuden version eslintistä joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
+**HUOM:** Älä suorita komentoa _eslint --init_. Se asentaa ESLintistä uuden version, joka on epäsopiva create-react-app:in konfiguraatioiden kanssa!
 
 </div>

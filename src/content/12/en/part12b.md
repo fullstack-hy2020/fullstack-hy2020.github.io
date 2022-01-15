@@ -659,7 +659,7 @@ Redis has nothing to do with containers. But since we are already able to add <i
 
 ### Exercises 12.9. - 12.11.
 
-#### Exercise 12.9: Setup Redis to project
+#### Exercise 12.9: Set up Redis for the project
 
 The Express server has already been configured to use Redis, and it is only missing the *REDIS_URL* environment variable. The application will use that environment variable to connect to the Redis. Read through the [Docker Hub page for Redis](https://hub.docker.com/_/redis), add Redis to the <i>todo-app/todo-backend/docker-compose.dev.yml</i> by defining another service after mongo:
 

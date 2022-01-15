@@ -484,11 +484,11 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tasks 13.1.-13.3.
 
-In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/en/part4), which should be compatible with the frontend in [section 5](/en/part5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit.
+In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/en/part4), which should be compatible with the frontend in [section 5](/en/part5) except for error handling. We will also add various features to the backend that the frontend in section 5 will not know how to use.
 
 #### Task 13.1.
 
-Create a GitHub repository for the application and create a Heroku application within in, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
+Create a GitHub repository for the application and create a new Heroku application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database.
 
 #### Task 13.2.
 
@@ -595,7 +595,7 @@ app.put('/api/notes/:id', async (req, res) => {
 
 The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row.
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1), branch <i>part13-1</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>.
 
 ### Printing the objects returned by Sequelize to a console
 

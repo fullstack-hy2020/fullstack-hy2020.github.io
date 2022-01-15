@@ -173,7 +173,7 @@ Tiedosto eksporttaa moduulin käyttäjille määritellyn routerin.
 
 Kaikki määriteltävät routet liitetään router-olioon, samaan tapaan kuin aiemmassa versiossa routet liitettiin sovellusta edustavaan olioon.
 
-Huomioinarvoinen seikka routejen määrittelyssä on se, että polut ovat typistyneet. Aiemmin määrittelimme esim.
+Huomionarvoinen seikka routejen määrittelyssä on se, että polut ovat typistyneet. Aiemmin määrittelimme esim.
 
 ```js
 app.delete('/api/notes/:id', (request, response) => {
@@ -505,7 +505,7 @@ test('palindrome of saippuakauppias', () => {
 })
 ```
 
-Edellisessä osassa käyttöön ottamamme ESlint valittaa testien käyttämistä komennoista _test_ ja _expect_ sillä käyttämämme konfiguraatio kieltää <i>globaalina</i> määriteltyjen asioiden käytön. Poistetaan valitus lisäämällä <i>.eslintrc.js</i>-tiedoston kenttään <i>env</i> arvo <i>"jest": true</i>. Näin kerromme ESlintille, että käytämme projektissamme Jestiä ja sen globaaleja muuttujia.
+Edellisessä osassa käyttöön ottamamme ESLint valittaa testien käyttämistä komennoista _test_ ja _expect_ sillä käyttämämme konfiguraatio kieltää <i>globaalina</i> määriteltyjen asioiden käytön. Poistetaan valitus lisäämällä <i>.eslintrc.js</i>-tiedoston kenttään <i>env</i> arvo <i>"jest": true</i>. Näin kerromme ESLintille, että käytämme projektissamme Jestiä ja sen globaaleja muuttujia.
 
 ```js
 module.exports = {
@@ -541,7 +541,7 @@ Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäise
 }
 ```
 
-Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> palindromi. Seuraavaksi varmistetaan tulos metodin [expect](https://facebook.github.io/jest/docs/en/expect.html#content) avulla. Expect käärii tuloksena olevan arvon olioon, joka tarjoaa joukon <i>matcher</i>-funktioita, joiden avulla tuloksen oikeellisuutta voidaan tarkastella. Koska kyse on kahden merkkijonon samuuden vertailusta, sopii tilanteeseen matcheri [toBe](https://facebook.github.io/jest/docs/en/expect.html#tobevalue).
+Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> palindromi. Seuraavaksi varmistetaan tulos metodin [expect](https://jestjs.io/docs/expect#expectvalue) avulla. Expect käärii tuloksena olevan arvon olioon, joka tarjoaa joukon <i>matcher</i>-funktioita, joiden avulla tuloksen oikeellisuutta voidaan tarkastella. Koska kyse on kahden merkkijonon samuuden vertailusta, sopii tilanteeseen matcheri [toBe](https://jestjs.io/docs/expect#tobevalue).
 
 Kuten odotettua, testit menevät läpi:
 
@@ -583,7 +583,7 @@ describe('average', () => {
 })
 ```
 
-Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollallajaon tulos on JavaScriptissä <i>NaN</i>):
+Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
 
 ![](../../images/4/3.png)
 
@@ -691,9 +691,9 @@ describe('total likes', () => {
 
 Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä](https://raw.githubusercontent.com/FullStack-HY/misc/main/blogs_for_test.md).
 
-Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat. Voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje on [täällä](https://jestjs.io/docs/en/troubleshooting).
+Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat. Voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje on [täällä](https://jestjs.io/docs/troubleshooting).
 
-**HUOM:** Jos jokin testi ei mene läpi, ei ongelmaa korjatessa kannata suorittaa kaikkia testejä, vaan ainoastaan rikkinäistä testiä hyödyntäen [only](https://facebook.github.io/jest/docs/en/api.html#testonlyname-fn-timeout)-metodia. 
+**HUOM:** Jos jokin testi ei mene läpi, ei ongelmaa korjatessa kannata suorittaa kaikkia testejä, vaan ainoastaan rikkinäistä testiä hyödyntäen [only](https://jestjs.io/docs/api#testonlyname-fn-timeout)-metodia. 
 
 Toinen tapa suorittaa yksittäinen testi (tai describe-lohko) on määritellä suoritettava testi argumentin [-t](https://jestjs.io/docs/en/cli.html) avulla:
 
@@ -715,7 +715,7 @@ Paluuarvo voi olla esim. seuraavassa muodossa:
 }
 ```
 
-**Huomaa**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/en/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää. [toBe](https://jestjs.io/docs/en/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun, vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältö ei riitä.
+**Huomaa**, että kun vertailet olioita, metodi [toEqual](https://jestjs.io/docs/expect#toequalvalue) on todennäköisesti se mitä haluat käyttää. [toBe](https://jestjs.io/docs/expect#tobevalue)-vertailu, joka sopii esim. lukujen ja merkkijonojen vertailuun, vaatisi olioiden vertailussa, että oliot ovat samat, pelkkä sama sisältö ei riitä.
 
 Tee myös tämän ja seuraavien kohtien testit kukin oman <i>describe</i>-lohkonsa sisälle.
 

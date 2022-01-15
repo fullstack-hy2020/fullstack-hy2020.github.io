@@ -232,7 +232,7 @@ router.put('/:id', noteFinder, async (req, res) => {
 
 The route handlers now receive <i>three</i> parameters, the first being a string defining the route and second being the middleware <i>noteFinder</i> we defined earlier, which retrieves the note from the database and places it in the field of the <i>req</i> object in the <i>note</i>. A small amount of copypaste is eliminated and we are satisfied!
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part132-notes/tree/part13-2), branch <i>part13-2</i>.
+The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-2), branch <i>part13-2</i>.
 
 </div>
 
@@ -260,7 +260,7 @@ The updated number of likes will be relayed with the request:
 
 #### Task 13.7.
 
-Centralize the application error handling in middleware as in [part 3](/part3/data_storage_in_mongo_db_database#debugging_centralization_in_middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/part4/backend_testing#try-catchin-elimination).
+Centralize the application error handling in middleware as in [part 3](/en/part3/saving_data_to_mongo_db#moving-error-handling-into-middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/en/part4/testing_the_backend#eliminating-the-try-catch).
 
 The data returned in the context of an error message is not very important.
 
@@ -459,7 +459,7 @@ module.exports = {
 }
 ```
 
-So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables if there were any changes to the table definition. Now looking at the database schema from the console, it looks like the following:
+So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one to many_ relationship connection between the <i>users</i> and <i>notes</i> lines. We also changed <i>sync</i> calls so that they change the tables when changes are made to the table definition. The database schema looks like the following from the console:
 
 ```js
 username=> \d users
@@ -491,7 +491,7 @@ Foreign-key constraints:
 
 That is, the reference key <i>user_id</i> has been created in the <i>notes</i> table, which refers to the <i>users</i> rows on the table.
 
-Now let's make a change to the insertion of a new note that the note is associated to the user. Before we make a proper implementation (where the join occurs using token to the user who is logged in), attach the note to the first user found in the database:
+Now let's make every insertion of a new note be associated to a user. Before we make a proper implementation (where the join occurs using the logged in users' token), hard code the note to be attached to the first user found in the database:
 
 ```js
 
@@ -508,9 +508,9 @@ router.post('/', async (req, res) => {
 })
 ```
 
-What is worthy of attention in the code is that although there is a column <i>user\_id</i> in the notes at the database level, in the corresponding object in the database row it is referred to by Sequelize naming convention due to to camel case as <i>userId</i>.
+Pay attention to how there is now a <i>user\_id</i> column in the notes at the database level. The corresponding object in each database row is referred to by Sequelize's naming convention as opposed to camel case (<i>userId</i>) as typed in the source code.
 
-Making a simple join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes:
+Making a join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes:
 
 ```js
 router.get('/', async (req, res) => {
@@ -587,7 +587,7 @@ router.get('/', async (req, res) => {
   const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
-      model: user,
+      model: User,
       attributes: ['name']
     }
   })
@@ -603,7 +603,7 @@ Let's make a similar change to the route of all users, remove the unnecessary fi
 router.get('/', async (req, res) => {
   const users = await User.findAll({
     include: {
-      model: note,
+      model: Note,
       attributes: { exclude: ['userId'] } // highlight-line
     }
   })

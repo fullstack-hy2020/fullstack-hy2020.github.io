@@ -733,22 +733,22 @@ apolloClient.resetStore();
 
 #### Ejercicio 10.16: cerrar sesión
 
-El paso final para completar la función de inicio de sesión es implementar una función de cierre de sesión. La consulta <em>AuthorizedUser</em> se puede utilizar para verificar la información del usuario autorizado. Si el resultado de la consulta es <em>null</em>, eso significa que el usuario no está autorizado. Abra el patio de juegos de GraphQL y ejecute la siguiente consulta:
+El paso final para completar la función de inicio de sesión es implementar una función de cierre de sesión. La consulta <em>me</em> se puede utilizar para verificar la información del usuario autorizado. Si el resultado de la consulta es <em>null</em>, eso significa que el usuario no está autorizado. Abra el patio de juegos de GraphQL y ejecute la siguiente consulta:
 
 ```javascript
 {
-  authorizedUser {
+  me {
     id
     username
   }
 }
 ```
 
-Probablemente terminará con el resultado <em>null</em>. Esto se debe a que GraphQL Playground no está autorizado, lo que significa que no envía un token de acceso válido con la solicitud. Revise la [documentación de autorización](https://github.com/fullstack-hy2020/rate-repository-api#-authorization) y recupere un token de acceso utilizando la mutación <em>authorize</em>. Utilice este token de acceso en el encabezado _Authorization_ como se indica en la documentación. Ahora, ejecute la consulta <em>AuthorizedUser</em> nuevamente y debería poder ver la información del usuario autorizado.
+Probablemente terminará con el resultado <em>null</em>. Esto se debe a que GraphQL Playground no está autorizado, lo que significa que no envía un token de acceso válido con la solicitud. Revise la [documentación de autorización](https://github.com/fullstack-hy2020/rate-repository-api#-authorization) y recupere un token de acceso utilizando la mutación <em>authorize</em>. Utilice este token de acceso en el encabezado _Authorization_ como se indica en la documentación. Ahora, ejecute la consulta <em>me</em> nuevamente y debería poder ver la información del usuario autorizado.
 
-Abra el componente <em>AppBar</em> en el archivo <i>AppBar.jsx</i> donde actualmente tiene las pestañas "Repositories" e "Sign in". Cambie las pestañas para que si el usuario está registrado en la pestaña "Sign out" se muestra, de lo contrario, muestre la pestaña "Sign in". Puede lograr esto usando la consulta <em>AuthorizedUser</em> con el hook [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery).
+Abra el componente <em>AppBar</em> en el archivo <i>AppBar.jsx</i> donde actualmente tiene las pestañas "Repositories" e "Sign in". Cambie las pestañas para que si el usuario está registrado en la pestaña "Sign out" se muestra, de lo contrario, muestre la pestaña "Sign in". Puede lograr esto usando la consulta <em>me</em> con el hook [useQuery](https://www.apollographql.com/docs/react/api/react-hooks/#usequery).
 
-Al presionar la pestaña "Sign out" se debe eliminar el token de acceso del usuario del almacenamiento y restablecer la tienda del Cliente Apollo con [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore). Llamar al método <em>resetStore</em> debería volver a ejecutar automáticamente todas las consultas activas, lo que significa que la consulta <em>AuthorizedUser</em> debería volver a ejecutarse. Tenga en cuenta que el orden de ejecución es crucial: el token de acceso debe eliminarse del almacenamiento <i>antes</i> que se restablezca la tienda del cliente Apollo.
+Al presionar la pestaña "Sign out" se debe eliminar el token de acceso del usuario del almacenamiento y restablecer la tienda del Cliente Apollo con [resetStore](https://www.apollographql.com/docs/react/v2.5/api/apollo-client/#ApolloClient.resetStore). Llamar al método <em>resetStore</em> debería volver a ejecutar automáticamente todas las consultas activas, lo que significa que la consulta <em>me</em> debería volver a ejecutarse. Tenga en cuenta que el orden de ejecución es crucial: el token de acceso debe eliminarse del almacenamiento <i>antes</i> que se restablezca la tienda del cliente Apollo.
 
 Este fue el último ejercicio de esta sección. Es hora de enviar tu código a GitHub y marcar todos tus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Tenga en cuenta que los ejercicios de esta sección deben enviarse a la parte 3 del sistema de envío de ejercicios.
 

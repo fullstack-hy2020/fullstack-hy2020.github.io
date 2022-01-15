@@ -922,7 +922,7 @@ If the data saved in the _body_ variable has the <i>important</i> property, the 
 You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
 
 
-Notice that the master branch of the repository contains the code from a later version of the application. The code for the current state of the application is specifically in branch [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
+The code for the current state of the application is specifically in branch [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
 
 ![](../../images/3/21.png)
 
@@ -1097,7 +1097,7 @@ All HTTP requests except POST should be <i>idempotent</i>:
 > <i>Methods can also have the property of "idempotence" in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request. The methods GET, HEAD, PUT and DELETE share this property</i>
 
 
-This means that if a request has side-effects, then the result should be same regardless of how many times the request is sent.
+This means that if a request has side-effects, then the result should be the same regardless of how many times the request is sent.
 
 
 If we make an HTTP PUT request to the url <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of how many times the request is sent.

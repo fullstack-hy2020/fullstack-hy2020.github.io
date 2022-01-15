@@ -96,15 +96,17 @@ The relational databases that are the focus of this section, on the other hand, 
 
 ```bash
 heroku create
-heroku addons:create heroku-postgresql:hobby-dev
-heroku config
+# 此时你可以获得一个App 名称，也就是你刚刚在heroku中创建的。
+
+heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
+heroku config -a <app-name>
 === cryptic-everglades-76708 Config Vars
-DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazonaws.com:5432/<db-name>
+DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
 ```
 
-<!-- Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [pqsl](https://www.postgresql.org/docs/current/app-psql.html) command-line tool. -->
+<!-- Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool. -->
 
-尤其是使用关系型数据库的时候，直接连接到数据库是十分 重要的。有许多方式可以做到这点，有许多不同的图形操作界面，类似 [pgAdmin](https://www.pgadmin.org/) 。 我们会使用 [pqsl](https://www.postgresql.org/docs/current/app-psql.html)  命令行工具
+尤其是使用关系型数据库的时候，直接连接到数据库是十分 重要的。有许多方式可以做到这点，有许多不同的图形操作界面，类似 [pgAdmin](https://www.pgadmin.org/) 。 我们会使用 [psql](https://www.postgresql.org/docs/current/app-psql.html)  命令行工具
 
 
 <!-- The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on connect url of the Heroku application): -->
@@ -112,7 +114,7 @@ DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazo
 
 
 ```bash
-heroku run psql -h ec2-44-199-83-229.compute-1.amazonaws.com -p 5432 -U <username> <dbname>
+heroku run psql -h <host-of-postgres-addon> -p 5432 -U <username> <dbname> -a <app-name>
 ```
 
 <!-- After entering the password, let's try the main psql command _\d_, which tells you the contents of the database: -->
@@ -161,8 +163,8 @@ username=> \d
 (2 rows)
 ```
 
-<!-- In addition to the <i>notes</i> table, Postgres created a subtable called <i>not\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note. -->
-此外， <i>notes</i> 表，Postgres 创建了一个子表叫做 <i>not\_id\_seq</i> ，用来跟踪当创建新的note时，<i>id</i> 列的值
+<!-- In addition to the <i>notes</i> table, Postgres created a subtable called <i>notes\_id\_seq</i>, which keeps track of what value is assigned to the <i>id</i> column when creating the next note. -->
+此外， <i>notes</i> 表，Postgres 创建了一个子表叫做 <i>notes\_id\_seq</i> ，用来跟踪当创建新的note时，<i>id</i> 列的值
 
 <!-- With the command _\d notes_, we can see how the <i>notes</i> table is defined: -->
 通过命令 _\d notes_ ， 我们可以可看到  <i>notes</i> 是如何定义的
@@ -551,13 +553,13 @@ app.post('/api/notes', async (req, res) => {
 
 ### Tasks 13.1.-13.3.
 
-<!-- In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/section 4), which should be compatible with the frontend in [section 5](/section 5) expect for error handling. We will also make a set of features to the backend that the frontend in section 5 does not know how to exploit. -->
+<!-- In the tasks of this section, we will build a blog application backend similar to the tasks in [section 4](/en/part4), which should be compatible with the frontend in [section 5](/en/part5) except for error handling. We will also add various features to the backend that the frontend in section 5 will not know how to use. -->
 
-在本节的任务中，我们将构建一个博客应用程序后端，类似于第4节中的任务，它应该与第5节中的前端兼容，以便进行错误处理。我们还将为后端制作一组特性，这些特性在第5节中的前端可能不知道如何利用。
+在本节的任务中，我们将构建一个博客应用程序后端，类似于第4节中的任务，它应该与第5节中的前端兼容，以便进行错误处理。我们还将为后端制作多种特性，这些特性在第5节中的前端可能不知道如何利用。
 
 #### Task 13.1.
 
-<!-- Create a GitHub repository for the application and create a Heroku application within in, as well as a Postgres database. Make sure you are able to establish a connection to the application database. -->
+<!-- Create a GitHub repository for the application and create a new Heroku application for it, as well as a Postgres database. Make sure you are able to establish a connection to the application database. -->
 
 为应用程序创建一个 GitHub 仓库，并创建一个 Heroku 应用程序，以及一个 Postgres 数据库。确保您能够建立一个应用程序到数据库的连接。
 
@@ -691,8 +693,8 @@ app.put('/api/notes/:id', async (req, res) => {
 <!-- The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row. -->
 与数据库行相关的对象通过 <i>findByPk</i> 方法获取到了，对象的修改和结果的保存通过 <i>save</i>  方法实现了。
 
-<!-- The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1), branch <i>part13-1</i>. -->
-当前应用的所有代码，可以在  [GitHub](https://github.com/fullstack-hy/part122-notes/tree/part13-1)  中找到，处于分支  <i>part13-1</i>
+<!-- The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>. -->
+当前应用的所有代码，可以在  [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1)  中找到，处于分支  <i>part13-1</i>
 
 ### Printing the objects returned by Sequelize to a console
 

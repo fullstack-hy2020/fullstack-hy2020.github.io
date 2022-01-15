@@ -72,7 +72,11 @@ We can then achieve cross-platform compatibility by using the cross-env library 
   // ...
 }
 ```
+**NB**: If you are deploying this aplication to heroku, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server. To fix this, change cross-env to a production dependency by running this in the command line:
 
+```bash
+npm i cross-env -P
+```
 
 Now we can modify the way that our application runs in different modes. As an example of this, we could define the application to use a separate test database when it is running tests.
 
@@ -488,7 +492,7 @@ test('a valid note can be added', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(200)
+    .expect(201)
     .expect('Content-Type', /application\/json/)
 
   const response = await api.get('/api/notes')
@@ -620,7 +624,7 @@ test('a valid note can be added ', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(200)
+    .expect(201)
     .expect('Content-Type', /application\/json/)
 
   const notesAtEnd = await helper.notesInDb() // highlight-line
@@ -1138,7 +1142,7 @@ describe('addition of a new note', () => {
     await api
       .post('/api/notes')
       .send(newNote)
-      .expect(200)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
 
 

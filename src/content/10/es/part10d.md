@@ -895,14 +895,14 @@ Implemente una función que permita al usuario ver sus reseñas. Una vez que hay
 
 ![Application preview](../../images/10/20.jpg)
 
-Recuerde que puede buscar al usuario autorizado del servidor Apollo con la consulta <em>autorizadoUser</em>. Esta consulta devuelve un tipo <em>User</em>, que tiene un campo <em>reviews</em>. Si ya ha implementado una consulta <em>authorizedUser</em> reutilizable en su código, puede personalizar esta consulta para obtener el campo <em>reviews</em> de forma condicional. Esto se puede hacer usando la directiva de GraphQL [include](https://graphql.org/learn/queries/#directives).
+Recuerde que puede buscar al usuario autorizado del servidor Apollo con la consulta <em>autorizadoUser</em>. Esta consulta devuelve un tipo <em>User</em>, que tiene un campo <em>reviews</em>. Si ya ha implementado una consulta <em>me</em> reutilizable en su código, puede personalizar esta consulta para obtener el campo <em>reviews</em> de forma condicional. Esto se puede hacer usando la directiva de GraphQL [include](https://graphql.org/learn/queries/#directives).
 
 Digamos que la consulta actual se implementa aproximadamente de la siguiente manera:
 
 ```javascript
-const GET_AUTHORIZED_USER = gql`
+const GET_CURRENT_USER = gql`
   query {
-    authorizedUser {
+    me {
       # user fields...
     }
   }
@@ -912,9 +912,9 @@ const GET_AUTHORIZED_USER = gql`
 Puede proporcionar la consulta con un argumento <em>includeReviews</em> y utilizarlo con la directiva <em>include</em>:
 
 ```javascript
-const GET_AUTHORIZED_USER = gql`
-  query getAuthorizedUser($includeReviews: Boolean = false) {
-    authorizedUser {
+const GET_CURRENT_USER = gql`
+  query getCurrentUser($includeReviews: Boolean = false) {
+    me {
       # user fields...
       reviews @include(if: $includeReviews) {
         edges {

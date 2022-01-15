@@ -1224,7 +1224,7 @@ Http 标准还定义了应该是安全的请求类型[HEAD](https://www.w3.org/p
 方法也可以具有“幂等”属性，即(除了错误或过期问题) N > 0 相同请求的副作用与单个请求相同。 方法 GET、 HEAD、 PUT 和 DELETE 都具有此属性
 
 
-<!-- This means that if a request has side-effects, then the result should be same regardless of how many times the request is sent. -->
+<!-- This means that if a request has side-effects, then the result should be the same regardless of how many times the request is sent. -->
 这意味着，如果一个请求有副作用，那么无论发送多少次请求，结果都应该是相同的。
 
 <!-- If we make an HTTP PUT request to the url <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of many times the request is sent. -->
