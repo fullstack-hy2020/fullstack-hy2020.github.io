@@ -730,12 +730,12 @@ router.get('/', async (req, res) => {
         model: Note,
         attributes: { exclude: ['userId'] }
       },
-      // hihhlight-start
+      // highlight-start
       {
         model: team,
         attributes: ['name', 'id'],
       }
-      // hihhlight-end
+      // highlight-end
     ]
   })
   res.json(users)
