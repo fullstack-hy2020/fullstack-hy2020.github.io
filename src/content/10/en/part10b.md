@@ -582,7 +582,7 @@ const Main = () => {
 export default Main;
 ```
 
-That's it! The last <em>Route<em> inside the <em>Routes</em> is for catching paths that don't match any previously defined path. In this case we want to navigate to the home view.
+That's it! The last <em>Route</em> inside the <em>Routes</em> is for catching paths that don't match any previously defined path. In this case we want to navigate to the home view.
 
 </div>
 
