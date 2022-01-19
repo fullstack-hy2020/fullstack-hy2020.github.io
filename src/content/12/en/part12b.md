@@ -671,7 +671,7 @@ services:
     ???
 ```
 
-Since the Docker Hub page doesn't have all info, we can use Google to aid us. The default port for Redis is found by doing so:
+Since the Docker Hub page doesn't have all the info, we can use Google to aid us. The default port for Redis is found by doing so:
 
 ![](../../images/12/redis_port_by_google.png)
 
