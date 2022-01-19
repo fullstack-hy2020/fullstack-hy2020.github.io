@@ -488,7 +488,7 @@ Add the services nginx and todo-frontend built with <i>todo-app/todo-frontend/de
 
 ![](../../images/12/ex_12_16_nginx_front.png)
 
-#### Exercise 12.18: Set up an Nginx reverse proxy server in front of todo-backend
+#### Exercise 12.18: Configure the Nginx server to be in front of todo-backend
 
 Add the service todo-backend to the docker-compose file <i>todo-app/docker-compose.dev.yml</i> in development mode.
 
