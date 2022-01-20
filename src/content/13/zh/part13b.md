@@ -778,7 +778,7 @@ Note.belongsTo(User)
 
 - _POST api/users_ (adding new user)
 - _GET api/users_ (listing of all users)
-- _PUT api/users:/:username_ (change of user name, keep in mind that the parameters is not id but username)
+- _PUT api/users/:username_ (change of user name, keep in mind that the parameters is not id but username)
 
 <!-- Make sure that the timestamps <i>created_at</i> and <i>updated_at</i> automatically set by Sequelize work correctly when creating creating a new user and changing the user's name. -->
 在创建新用户和更改用户名称时，确保 <i>created_at</i> 和 <i>updated_at</i> Sequelize 工作自动创建的正确性。

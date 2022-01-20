@@ -717,7 +717,7 @@ Implement the following routes
 
 - _POST api/users_ (adding new user)
 - _GET api/users_ (listing of all users)
-- _PUT api/users:/:username_ (change of user name, keep in mind that the parameters is not id but username)
+- _PUT api/users/:username_ (change of user name, keep in mind that the parameters is not id but username)
 
 Make sure that the timestamps <i>created_at</i> and <i>updated_at</i> automatically set by Sequelize work correctly when creating creating a new user and changing the user's name.
 
