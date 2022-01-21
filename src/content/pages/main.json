@@ -62,10 +62,10 @@
     "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 编程技术。重点是利用 ReactJS 搭配Node.js开发的REST API，来搭建单页面应用程序（SPA：Single Page Application）",
     "current": [
       "当前课程的考试截止日期为2022年1月10日。联系的提交可以在2022年2月20日前完成。",
-      "2022年的课程会在2022年3月15日开始。课程主体内容不会有大的改变。2022年的课程可以在2021年的课程上延续, <a href='/zh/part0/general_info#expanding-on-a-previously-completed-course'>在这里</a>阅读更多.",
+      "2022年的课程会在2022年3月15日开始。课程主体内容不会有大的改变。2022年的课程可以在2021年的课程上延续, <a href='/zh/part0/基础知识#expanding-on-a-previously-completed-course'>在这里</a>阅读更多.",
       "你可以加入我们的Telegram 群组<a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>来讨论课程以及相关的内容。快来加入我们吧！"
     ],
-    "telegram": "Telegram是一个类似 whatsapp / messenger（国内的微信【译者注】） 讨论组应用，是一个多端应用，你可以在浏览器、手机设备以及Windows / Linux / OSX 客户端使用它。",
+    "telegram": "Telegram是一个类似 whatsapp / messenger（国内的微信【译者注】） 讨论组应用，是一个多端应用，你可以在浏览器、手机设备以及 Windows / Linux / OSX 客户端使用它。",
     "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",
     "licence": [
       "课程材料的0-8章节是<a href='https://github.com/mluukkai'>Matti Luukkainen</a> 所写的。第9章节的内容是由开发者<a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>所著。很多<a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>开发者</a>为了改进和修订课程材料做出了贡献，无论是课程内容还是拼写问题^_^。你也可以为这门课程的材料做出自己的贡献。这门课程的网站是由<a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>设计和创建的，它们同样审阅了这门课程的内容。英文版是由Ava Heinonen, Ilkka Kuisma, Harri Mehtälä and Jesper Pettersson 翻译的。中文版是由<a target='_blank' href='https://zhangwei.online/blog'>ZhangWei(微信wechat:richardzhangv)</a>翻译的。西班牙语是由<a target='_blank' href='https://github.com/sebastiantorres86'>Sebastian Torres</a> 和 <a target='_blank' href='https://github.com/cynthiamv'>Cynthia Vico Vacca</a>翻译的.",
