@@ -54,14 +54,20 @@ npm install --save-dev jest jest-expo eslint-plugin-jest
 
 ```javascript
 {
-  "plugins": ["react", "jest"],
+  "plugins": ["react", "react-native"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  },
   "extends": ["eslint:recommended", "plugin:react/recommended", "plugin:jest/recommended"], // highlight-line
   "parser": "@babel/eslint-parser",
   "env": {
-    "browser": true
+    "react-native/react-native": true
   },
   "rules": {
-    "react/prop-types": "off"
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off"
   }
 }
 ```
@@ -185,6 +191,10 @@ describe('Greeting', () => {
   });
 });
 ```
+
+React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
+
+React Native 测试库文档有一些不错的提示[如何查询不同的元素](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query) 。另一个值得读的指引是Kent C. Dodds article 的文章[让你的UI 测试适应弹性变化](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change)
 
 <!-- The <em>render</em> function returns the queries and additional helpers, such as the <em>debug</em> function. The [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) function prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like. We acquire the <em>Text</em> node tagged with the <em>testID</em> prop by using the <em>getByTestId</em> function. For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The <em>toHaveTextContent</em> matcher is used to assert that the node's textual content is correct. The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher. -->
 
@@ -328,9 +338,37 @@ export default RepositoryList;
 
 #### Exercise 10.17: testing the reviewed repositories list
 
-Implement a test that ensures that the <em>RepositoryListContainer</em> component renders repository's name, description, language, forks count, stargazers count, rating average, and review count correctly. Remember that you can use the [toHaveTextContent](https://github.com/testing-library/jest-native#tohavetextcontent) matcher to check whether a node has certain textual content. You can use the [getAllByTestId](https://callstack.github.io/react-native-testing-library/docs/api-queries#getallby) query to get all nodes with a certain <em>testID</em> prop as an array. If you are unsure what is being rendered, use the [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) function to see the serialized rendering result.
 
-实现一个测试能确保 <em>RepositoryListContainer</em> 组件渲染正确的仓库的名称、描述、语言、fork数量、star 数量、投票平均分以及查看数量。记住你可以使用 [toHaveTextContent](https://github.com/testing-library/jest-native#tohavetextcontent) 适配器来检查一个节点是否包含特定的文本内容。你可以使用 [getAllByTestId](https://callstack.github.io/react-native-testing-library/docs/api-queries#getallby) 查询来获得所有的节点，利用 <em>testID</em> 属性获得一个数组。如果不确定渲染了什么，使用 [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) 函数来查看序列化的渲染结果。
+<!-- Implement a test that ensures that the <em>RepositoryListContainer</em> component renders repository's name, description, language, forks count, stargazers count, rating average, and review count correctly. One approach in implementing this test is to add a [testID](https://reactnative.dev/docs/view#testid) prop for the element wrapping a single repository's information: -->
+
+实现一个测试能确保 <em>RepositoryListContainer</em> 组件渲染正确的仓库的名称、描述、语言、fork数量、star 数量、投票平均分以及查看数量。一种方法是实通过添加一个[testID](https://reactnative.dev/docs/view#testid) 属性来实现这个测试，让元素包装一个仓库的信息：
+
+```javascript
+const RepositoryItem = (/* ... */) => {
+  // ...
+
+  return (
+    <View testID="repositoryItem" {/* ... */}>
+      {/* ... */}
+    </View>
+  )
+};
+```
+
+<!-- Once the <em>testID</em> prop is added, you can use the [getAllByTestId](https://callstack.github.io/react-native-testing-library/docs/api-queries#getallby) query to get those elements: -->
+只要 <em>testID</em> 添加了，你就可以使用  [getAllByTestId](https://callstack.github.io/react-native-testing-library/docs/api-queries#getallby) 查询来获得那些元素：
+
+```javascript
+const repositoryItems = getAllByTestId('repositoryItem');
+const [firstRepositoryItem, secondRepositoryItem] = repositoryItems;
+
+// expect something from the the first and the second repository item
+```
+
+Having those elements you can use the [toHaveTextContent](https://github.com/testing-library/jest-native#tohavetextcontent) matcher to check whether an element has certain textual content. You might also find the [Querying Within Elements](https://testing-library.com/docs/dom-testing-library/api-within/) guide useful. If you are unsure what is being rendered, use the [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) function to see the serialized rendering result.
+
+
+你可以使用 [toHaveTextContent](https://github.com/testing-library/jest-native#tohavetextcontent) 适配器来检查一个节点是否包含特定的文本内容。你可以查阅 [Querying Within Elements](https://testing-library.com/docs/dom-testing-library/api-within/)  获得有用的信息。如果不确定渲染了什么，使用 [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) 函数来查看序列化的渲染结果。
 
 Use this as a base for your test:
 用如下代码作为测试的基石：

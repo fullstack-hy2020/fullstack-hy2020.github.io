@@ -212,6 +212,29 @@ GraphQL 与 Apollo 客户端
 npm install @apollo/client graphql
 ```
 
+<!-- Before we can start using Apollo Client, we will need to slightly configure the Metro bundler so that it handles the <i>.cjs</i> file extensions used by the Apollo Client. First, let's install the <i>@expo/metro-config</i> package which has the default Metro configuration: -->
+在我们开始使用 Apollo Client 之前，我们需要简单配置一下 ， 让它能够处理 <i>.cjs</i> 扩展文件，这种文件是用在 Apollo Client 中的。首先，我们安装 <i>@expo/metro-config</i> 包，里面有默认的Metro 配置
+
+```shell
+npm install @expo/metro-config
+```
+
+<!-- Then, we can add the following configuration to a <i>metro.config.js</i> in the root directory of our project: -->
+接下来，我们在项目的根目录中往 <i>metro.config.js</i> 文件中增加如下配置。
+
+```javascript
+const { getDefaultConfig } = require('@expo/metro-config');
+
+const defaultConfig = getDefaultConfig(__dirname);
+
+defaultConfig.resolver.sourceExts.push('cjs');
+
+module.exports = defaultConfig;
+```
+
+<!-- Restart the Expo development tools so that changes in the configuration are applied. -->
+重启Expo 开发工具，让配置生效。
+
 <!-- Next, let's create a utility function for creating the Apollo Client with the required configuration. Create a <i>utils</i> directory in the <i>src</i> directory and in that <i>utils</i> directory create a file <i>apolloClient.js</i>. In that file configure the Apollo Client to connect to the Apollo Server: -->
 接下来，让我创建一个工具函数，利用需要的配置来创建Apllo Client。 在<i>src</i> 目录中创建一个 <i>utils</i> 文件夹并新建一个 <i>apolloClient.js</i> 文件， 在文件中配置 Apollo Client 来连接Apollo Server：
 
