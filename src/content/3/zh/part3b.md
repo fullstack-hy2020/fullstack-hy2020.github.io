@@ -147,6 +147,11 @@ Heroku 会在环境变量的基础上配置应用端口。
 ```bash
 node_modules
 ```
+<!-- Create Heroku account in https://devcenter.heroku.com/ -->
+在 https://devcenter.heroku.com/ 中创建Heroku 账号
+
+<!-- Install Heroku package using the command: npm install -g heroku -->
+利用命令安装Heroku包：npm install -g heroku
 
 <!-- Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku main</i>. -->
 使用命令<i>heroku create</i>创建一个 Heroku 应用，将你的代码提交到仓库并将其推送到Heroku，<i>git push Heroku main</i>。
