@@ -258,7 +258,13 @@ The project should be runnable with npm scripts, both in development mode and, a
 
 #### 9.9: Patientor backend, step2
 
-Fork and clone the project [patientor](https://github.com/fullstack-hy/patientor). Start the project with the help of the README file. You should be able to use the frontend without a functioning backend.
+Fork and clone the project [patientor](https://github.com/fullstack-hy/patientor). Start the project with the help of the README file.
+ 
+You can run this command if you get error message when trying to start the fronend:
+ ```shell
+npm update chokidar
+``` 
+ You should be able to use the frontend without a functioning backend.
 
 Ensure that backend answers to the ping request that <i>frontend</i> has made on startup. Check developer tool to make sure it really works:
 
