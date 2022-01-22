@@ -83,6 +83,9 @@ multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 ```
 
 As you can see, this is still ordinary basic JavaScript with no additional TS features. It compiles and runs nicely with  <i>npm run ts-node -- multiplier.ts</i>, as it would with Node.
+  
+**NB:** You might have to run <i>npm run ts-node -- -O '{""noImplicitAny"": false}' .\multiplier.ts</i> or turn of strict mode using tsconfig.json
+  
 But what happens if we end up passing wrong <i>types</i> of arguments to the multiplicator function?
 
 Let's try it out!
