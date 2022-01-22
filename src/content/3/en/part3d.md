@@ -186,27 +186,13 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-
 ### Exercises 3.19.-3.21.
 
+#### 3.19*: Phonebook database, step7
 
-#### 3.19: Phonebook database, step7
-
-
-Add validation to your phonebook application, that will make sure that a newly added person has a unique name. Our current frontend won't allow users to try and create duplicates, but we can attempt to create them directly with Postman or the VS Code REST client.
-
-
-Mongoose does not offer a built-in validator for this purpose. Install the [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) package with npm and use it instead.
-
-If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
-
-#### 3.20*: Phonebook database, step8
-
-Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits.
-
+Expand the validation so that the name stored in the database has to be at least three characters long.
 
 Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a <em>catch</em> block as shown below:
-
 
 ```js
 personService
@@ -220,25 +206,34 @@ personService
     })
 ```
 
-
 You can display the default error message returned by Mongoose, even though they are not as readable as they could be:
 
 ![](../../images/3/56e.png)
 
 **NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
 
+#### 3.20*: Phonebook database, step8
+
+Add validation to your phonebook application, that will make sure that phone numbers are of the correct form. A phone number must 
+- has length of 8 or more
+- if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
+  - eg. 09-1234556 and 040-22334455 are valid phone numbers
+  - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
+
+Use a [Custom validatior](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
+
+If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
+
 #### 3.21 Deploying the database backend to production
 
 
 Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
-
 
 Push the latest version to Heroku and verify that everything works there as well.
 
 </div>
 
 <div class="content">
-
 
 ### Lint
 
