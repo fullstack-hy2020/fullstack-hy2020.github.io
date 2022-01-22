@@ -243,9 +243,9 @@ Installing new dependencies is a headache for a development setup like this. One
 
 ### Exercise 12.15
 
-#### Exercise 12.15: Setup a frontend development environment
+#### Exercise 12.15: Set up a frontend development environment
 
-Create <i>todo-frontend/docker-compose.dev.yml</i> and use the volumes to enable the development of the todo-frontend while it is running <i>inside</i> a container.
+Create <i>todo-frontend/docker-compose.dev.yml</i> and use volumes to enable the development of the todo-frontend while it is running <i>inside</i> a container.
 
 </div>
 
@@ -344,9 +344,9 @@ Now that you know how easy it is to find other services in the <i>docker-compose
 
 ### Exercise 12.16
 
-#### Exercise 12.16: Run todo-back in a development container
+#### Exercise 12.16: Run todo-backend in a development container
 
-Use the volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container. Create a <i>todo-backend/dev.Dockerfile</i> and edit the <i>todo-backend/docker-compose.dev.yml</i>.
+Use volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container. Create a <i>todo-backend/dev.Dockerfile</i> and edit the <i>todo-backend/docker-compose.dev.yml</i>.
 
 You will also need to rethink the connections between backend and MongoDB / Redis. Thankfully docker-compose can include environment variables that will be passed to the application:
 
@@ -409,7 +409,7 @@ http {
 }
 ```
 
-Next, add Nginx to the <i>docker-compose.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
+Next, create an Nginx service in the <i>docker-compose.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
 
 ```yml
   nginx:
@@ -472,9 +472,9 @@ If you are still encountering 503, make sure that the create-react-app has been 
 
 ### Exercises 12.17. - 12.19.
 
-#### Exercise 12.17: Setup Nginx in front of todo-front
+#### Exercise 12.17: Set up an Nginx reverse proxy server in front of todo-frontend
 
-We are going to move the nginx in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
+We are going to put the nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
 
 ```bash
 todo-app
@@ -484,13 +484,13 @@ todo-app
 └── docker-compose.dev.yml // highlight-line
 ```
 
-Add nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the docker-compose.dev.yml.
+Add the services nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
 
 ![](../../images/12/ex_12_16_nginx_front.png)
 
-#### Exercise 12.18: Setup Nginx in front of todo-back
+#### Exercise 12.18: Configure the Nginx server to be in front of todo-backend
 
-Add the todo-backend to the development <i>todo-app/docker-compose.dev.yml</i> in development mode.
+Add the service todo-backend to the docker-compose file <i>todo-app/docker-compose.dev.yml</i> in development mode.
 
 Add a new location to the <i>nginx.conf</i> so that requests to /api are proxied to the backend. Something like this should do the trick:
 
@@ -526,16 +526,16 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 ![](../../images/12/ex_12_17_nginx_back.png)
 
-#### Exercise 12.19: Connect todo-front to todo-back
+#### Exercise 12.19: Connect the services, todo-frontend with todo-backend
 
-> In this exercise, submit the entire development environment, including both express and react applications, Dockerfiles and docker-compose.yml.
+> In this exercise, submit the entire development environment, including both Express and React applications, Dockerfiles and docker-compose.yml.
 
-Make sure that the todo-front works with todo-back. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable.
+Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable.
 
 If you already got this working during a previous exercise you may skip this.
 
-Make sure that the development environment is now fully functional, that is
-- all features of the todo app works
+Make sure that the development environment is now fully functional, that is:
+- all features of the todo app work
 - you can edit the source files <i>and</i> the changes take effect through hot reload in case of frontend and by reloading the app in case of backend
 
 </div>
@@ -546,7 +546,7 @@ Make sure that the development environment is now fully functional, that is
 
 Containers are fun tools to use in development, but the best use case for them is in the production environment. There are many more powerful tools than docker-compose to run containers in production.
 
-Heavy weight container orchestration tools like [Kubernetes](https://kubernetes.io/) allow us to manage containers on a completely new level. Theese tools hide away the physical machines and allows us, the developers, to worry less about the infrastructure.
+Heavyweight container orchestration tools like [Kubernetes](https://kubernetes.io/) allow us to manage containers on a completely new level. These tools hide away the physical machines and allow us, the developers, to worry less about the infrastructure.
 
 If you are interested in learning more in-depth about containers come to the [DevOps with Docker](https://devopswithdocker.com) course and you can find more about Kubernetes in the advanced 5 credit [DevOps with Kubernetes](https://devopswithkubernetes.com) course. You should now have the skills to complete both of them!
 
@@ -557,7 +557,7 @@ If you are interested in learning more in-depth about containers come to the [De
 ### Exercises 12.20.-12.22.
 #### Exercise 12.20:
 
-Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use the Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
+Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
 
 Please use the following structure for this exercise:
 
@@ -572,7 +572,7 @@ todo-app
 
 #### Exercise 12.21:
 
-Do a simillar containerized development environment to one of <i>your own</i> full stack apps that you have created during the course or at your freetime. You should structure the app to submission repository as follows:
+Create a similar containerized development environment of one of <i>your own</i> full stack apps that you have created during the course or in your free time. You should structure the app in your submission repository as follows:
 
 ```bash
 └── my-app
@@ -585,10 +585,8 @@ Do a simillar containerized development environment to one of <i>your own</i> fu
 
 #### Exercise 12.22:
 
-Do a simillar containerized development environment to one of <i>your own</i> full stack apps that you have created during the course or at your freetime. 
-
-Finish this part by creating a contanerized <i>production setup</i> to your own full stack app.
-Structure the app to submission repository as follows:
+Finish this part by creating a containerized <i>production setup</i> of your own full stack app.
+Structure the app in your submission repository as follows:
 
 ```bash
 └── my-app
