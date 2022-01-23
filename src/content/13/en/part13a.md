@@ -7,14 +7,14 @@ lang: en
 
 <div class="content">
 
-On this section we will explore the node applications that use relation databases. During section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. There are many online courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and 
+In this section we will explore node applications that use relational databases. During the section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. There are many online courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and 
 [Intro to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql).
 
 There are 24 exercises in this part, and you need to complete each exercise for completing the course. Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-psql) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".
 
 ### Advantages and disadvantages of document databases
 
-We have used the MongoDB database in all the previous sections of the course. Mongo is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database) and one of its most characteristic features is its <i>skepticity</i>, i.e. the database has only a very limited awareness of what kind of data is stored in its collections. The schema of the database exists only in the program code, which interprets the data in a specific way, e.g. by identifying that some of the fields are references to objects in another collection.
+We have used the MongoDB database in all the previous sections of the course. Mongo is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database) and one of its most characteristic features is its <i>skepticism</i>, i.e. the database has only a very limited awareness of what kind of data is stored in its collections. The schema of the database exists only in the program code, which interprets the data in a specific way, e.g. by identifying that some of the fields are references to objects in another collection.
 
 In the example application of parts 3 and 4, the database stores notes and users.
 
@@ -39,7 +39,7 @@ A collection of <i>notes</i> that stores notes looks like the following:
 ]
 ```
 
-Users saving collection <i>users</i> looks like the following:
+Users saved in the <i>users</i> collection looks like the following:
 
 ```js
 [
@@ -59,11 +59,11 @@ Users saving collection <i>users</i> looks like the following:
 
 MongoDB does know the types of the fields of the stored entities, but it has no information about which collection of entities the user record ids are referring to. MongoDB also does not care what fields the entities stored in the collections have. Therefore MongoDB leaves it entirely up to the programmer to ensure that the correct information is being stored in the database.
 
-There are both advantages and disadvantages to not having a schema. One of the advantages is the flexibility that schema agnosticism brings: since schema does not need to be defined at the database level, application development may be faster in a certain cases, and easier, with little of effort must be made in defining the schema and its changes in any case. Problems with not having a schema are related to the error-proneness: everything is left up to the programmer. The database itself has no way of checking whether the data in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether the reference type fields refer to existing entities of the right type in general, etc.
+There are both advantages and disadvantages to not having a schema. One of the advantages is the flexibility that schema agnosticism brings: since the schema does not need to be defined at the database level, application development may be faster in certain cases, and easier, with less effort needed in defining and modifying the schema in any case. Problems with not having a schema are related to error-proneness: everything is left up to the programmer. The database itself has no way of checking whether the data in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether the reference type fields refer to existing entities of the right type in general, etc.
 
 The relational databases that are the focus of this section, on the other hand, lean heavily on the existence of a schema, and the advantages and disadvantages of schema databases are almost the opposite compared of the non-schema databases.
 
-The reason why the the previous sections of the course used MongoDB is precisely because of its schema-less nature, which has made it easier to use the database for someone with little knowledge of relational databases. For most of the use cases of this course, I would have chosen the relational database myself.
+The reason why the the previous sections of the course used MongoDB is precisely because of its schema-less nature, which has made it easier to use the database for someone with little knowledge of relational databases. For most of the use cases of this course, I personally would have chosen to use a relational database.
 
 ### Application database
 
@@ -73,11 +73,11 @@ However, we will be taking advantage of the fact that it is possible to create a
 
 In the theory material of this section, we will be building a Postgres-enabled version from the backend of the notes-storage application, which was built in sections 3 and 4.
 
-Now let's create a suitable directory inside the Heroku application, add a database to it and use the _heroku config_ command to see what is <i>connect string</i>, which is required to connect to the database:
+Now let's create a suitable directory inside the Heroku application, add a database to it and use the _heroku config_ command to get the <i>connect string</i>, which is required to connect to the database:
 
 ```bash
 heroku create
-# You get a app-name for the app you just created in heroku.
+# Returns an app-name for the app you just created in heroku.
 
 heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
 heroku config -a <app-name>
@@ -87,7 +87,7 @@ DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db
 
 Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
 
-The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on connect url of the Heroku application):
+The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on the connection url of the Heroku database):
 
 ```bash
 heroku run psql -h <host-of-postgres-addon> -p 5432 -U <username> <dbname> -a <app-name>
@@ -118,9 +118,9 @@ CREATE TABLE notes (
 );
 ```
 
-A few points: column <i>id</i> is defined as a <i>primary key</i>, which means the value of the column must be unique for each row in the table and the value must not be empty. The type for column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for the fact it is an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. Text-worthy column called <i>content</i> is defined in such a way that it must be assigned a value.
+A few points: column <i>id</i> is defined as a <i>primary key</i>, which means the value of the column must be unique for each row in the table and the value must not be empty. The type for this column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. The column named <i>content</i> with type text is defined in such a way that it must be assigned a value.
 
-Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the deck:
+Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the database:
 
 ```sql
 username=> \d
@@ -151,7 +151,7 @@ Indexes:
 
 Therefore the column <i>id</i> has a default value, which is obtained by calling the internal function of Postgres <i>nextval</i>.
 
-Let's add little content to the table:
+Let's add some content to the table:
 
 ```sql
 insert into notes (content, important) values ('Relational databases rule the world', true);
@@ -169,7 +169,7 @@ username=> select * from notes;
 (2 rows)
 ```
 
-If we try to store data in the database that is not according to the schema, it will not succeed. The value of the mandatory column cannot be missing:
+If we try to store data in the database that is not according to the schema, it will not succeed. The value of a mandatory column cannot be missing:
 
 ```sql
 username=> insert into notes (important) values (true);
@@ -185,7 +185,7 @@ ERROR: column "important" is of type boolean but expression is of type integer
 LINE 1: ...tent, important) values ('only valid data can be saved', 1); ^
 ```
 
-Non-existent columns in the schema are not accepted either:
+Columns that don't exist in the schema are not accepted either:
 
 ```sql
 username=> insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
@@ -197,15 +197,15 @@ Next it's time to move on to accessing the database from the application.
 
 ### Node application using a relational database
 
-Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as the development-time dependency and also the following runtime dependencies:
+Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as a development dependency and also the following runtime dependencies:
 
 ```bash
 npm install express dotenv pg sequelize
 ```
 
-Of these, the latter [sequelize](https://sequelize.org/master/) is the library through we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to the Mongoose we use with MongoDB.
+Of these, the latter [sequelize](https://sequelize.org/master/) is the library through which we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to Mongoose that we used with MongoDB.
 
-Let's test that the connection is successful. Create the file <i>index.js</i> and add the following content:
+Let's test that we can connect successfully. Create the file <i>index.js</i> and add the following content:
 
 ```js
 require('dotenv').config()
@@ -233,14 +233,14 @@ const main = async () => {
 main()
 ```
 
-The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in <i>.env</i> file, whose contents should be something like the following:
+The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in a <i>.env</i> file, the contents should be something like the following:
 
 ```bash
 $ cat .env
 DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
-Let's try if a connection is successful:
+Let's test for a successful connection:
 
 ```bash
 $ node index.js
@@ -299,7 +299,7 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we now directly used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
+Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we just used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
 
 Since everything seems to be working, let's change the application into a web application.
 
@@ -438,16 +438,16 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
-Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter the entity that defines the values of the columns.
+Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter an object that defines the values of the columns.
 
-Instead of the <i>create</i> method, it [would be possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save in a database using first method [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) to create a Model-object from the desired data, and calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
+Instead of the <i>create</i> method, it [is also possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save to a database using the [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) method first to create a Model-object from the desired data, and then calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
 
 ```js
 const note = Note.build(req.body)
 await note.save()
 ```
 
-Calling the <i>build</i> method does not save the object in the database yet, so it is still possible to edit the object before the actually save event:
+Calling the <i>build</i> method does not save the object in the database yet, so it is still possible to edit the object before the actual save event:
 
 ```js
 const note = Note.build(req.body)
@@ -455,7 +455,7 @@ note.important = true // highlight-line
 await note.save()
 ```
 
-For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's refrain from it.
+For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's stick to that.
 
 If the object being created is not valid, there is an error message as a result. For example, when trying to create a note without content, the operation fails, and the console reveals the reason to be <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>:   
 
@@ -465,7 +465,7 @@ If the object being created is not valid, there is an error message as a result.
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
 ```
 
-Let's add a simple error handling when adding a new note:
+Let's add some simple error handling when adding a new note:
 
 ```js
 app.post('/api/notes', async (req, res) => {
@@ -505,7 +505,7 @@ Save the SQL-commands you used at the root of the application repository in the 
 
 #### Exercise 13.3.
 
-On the command-line, create functionality in your application, which prints the blogs in the database, e.g. as follows:
+Create functionality in your application, which prints the blogs in the database using the command-line, e.g. as follows:
 
 ```bash
 $ node cli.js
@@ -576,7 +576,7 @@ Retrieving a single note causes the following SQL command:
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note". "id" = '1';
 ```
 
-If no note is found, return the operation <i>null</i>, and in this case the relevant status code is given.
+If no note is found, the operation returns <i>null</i>, and in this case the relevant status code is given.
 
 Modifying the note is done as follows. Only the modification of the <i>important</i> field is supported, since the application's frontend does not need anything else:
 
@@ -593,11 +593,11 @@ app.put('/api/notes/:id', async (req, res) => {
 })
 ```
 
-The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row.
+The object corresponding to the database row is retrieved from the database using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row.
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>.
+The current code for the application is in its entirety on [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>.
 
-### Printing the objects returned by Sequelize to a console
+### Printing the objects returned by Sequelize to the console
 
 The JavaScript programmer's most important tool is <i>console.log</i>, whose aggressive use gets even the worst bugs under control. Let's add console printing to the single note path:
 
