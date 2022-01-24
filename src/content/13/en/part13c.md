@@ -114,7 +114,7 @@ Let's change the file <i>utils/db.js</i> that handles the connection to the data
 ```js
 const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
-const move = require('move') // highlight-line
+const { Umzug } = require('umzug') // highlight-line
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialectOptions: {
@@ -127,7 +127,7 @@ const sequelize = new Sequelize(DATABASE_URL, {
 
 // highlight-start
 const runMigrations = async () => {
-  const migrator = new move({
+  const migrator = new Umzug({
     storage: 'sequelize',
     storageOptions: {
       sequelize,
