@@ -89,7 +89,7 @@ Containerizing that should be relatively easy based on the previous example.
 - Use node as base
 - Set working directory so we don't interfere with the contents of the base image
 - Copy ALL of the files in this directory to the image
-- Start with DEBUG=playground:* npm startaterial
+- Start with DEBUG=playground:* npm start
 
 
 Let's place the following Dockerfile at the root of the project:
