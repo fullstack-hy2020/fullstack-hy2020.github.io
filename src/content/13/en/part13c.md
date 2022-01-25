@@ -38,7 +38,7 @@ First, a migration is created that takes the database to its current state. The 
 const { DataTypes } = require('sequelize')
 
 module.exports = {
-  up: async (queryInterface) => {
+  up: async ({ context: queryInterface }) => {
     await queryInterface.createTable('notes', {
       id: {
         type: DataTypes.INTEGER,
@@ -78,7 +78,7 @@ module.exports = {
       references: { model: 'users', key: 'id' },
     })
   },
-  down: async (queryInterface) => {
+  down: async ({ context: queryInterface }) => {
     await queryInterface.dropTable('notes')
     await queryInterface.dropTable('users')
   },
@@ -114,7 +114,7 @@ Let's change the file <i>utils/db.js</i> that handles the connection to the data
 ```js
 const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
-const { Umzug } = require('umzug') // highlight-line
+const { Umzug, SequelizeStorage } = require('umzug') // highlight-line
 
 const sequelize = new Sequelize(DATABASE_URL, {
   dialectOptions: {
@@ -128,20 +128,18 @@ const sequelize = new Sequelize(DATABASE_URL, {
 // highlight-start
 const runMigrations = async () => {
   const migrator = new Umzug({
-    storage: 'sequelize',
-    storageOptions: {
-      sequelize,
-      tableName: 'migrations',
-    },
     migrations: {
-      params: [sequelize.getQueryInterface()],
-      path: `${process.cwd()}/migrations`,
-      pattern: /\.js$/,
+      glob: 'migrations/*.js',
     },
+    storage: new SequelizeStorage({ sequelize, tableName: 'migrations' }),
+    context: sequelize.getQueryInterface(),
+    logger: console,
   })
+  
   const migrations = await migrator.up()
+
   console.log('Migrations up to date', {
-    files: migrations.map((mig) => mig.file),
+    files: migrations.map((mig) => mig.name),
   })
 }
 // highlight-end
@@ -222,7 +220,7 @@ Let's create the migration that makes the database instance in the file <i>migra
 const { DataTypes } = require('sequelize')
 
 module.exports = {
-  up: async (queryInterface) => {
+  up: async ({ context: queryInterface }) => {
     await queryInterface.addColumn('users', 'admin', {
       type: DataTypes.BOOLEAN,
       default: false
@@ -232,7 +230,7 @@ module.exports = {
       default: false
     })
   },
-  down: async (queryInterface) => {
+  down: async ({ context: queryInterface }) => {
     await queryInterface.removeColumn('users', 'admin')
     await queryInterface.removeColumn('users', 'disabled')
   },
@@ -543,7 +541,7 @@ Let's now create the code needed for the team as well as the connection table. M
 const { DataTypes } = require('sequelize')
 
 module.exports = {
-  up: async (queryInterface) => {
+  up: async ({ context: queryInterface }) => {
     await queryInterface.createTable('teams', {
       id: {
         type: DataTypes.INTEGER,
@@ -574,7 +572,7 @@ module.exports = {
       },
     })
   },
-  down: async (queryInterface) => {
+  down: async ({ context: queryInterface }) => {
     await queryInterface.dropTable('teams')
     await queryInterface.dropTable('memberships')
   },
@@ -875,7 +873,7 @@ Let's make a connection table <i>user_notes</i> for the situation. Migration is 
 const { DataTypes } = require('sequelize')
 
 module.exports = {
-  up: async (queryInterface) => {
+  up: async ({ context: queryInterface }) => {
     await queryInterface.createTable('user_notes', {
       id: {
         type: DataTypes.INTEGER,
@@ -894,7 +892,7 @@ module.exports = {
       },
     })
   },
-  down: async (queryInterface) => {
+  down: async ({ context: queryInterface }) => {
     await queryInterface.dropTable('user_notes')
   },
 }
@@ -1464,7 +1462,7 @@ and migration contain much of the same
 const { DataTypes } = require('sequelize')
 
 module.exports = {
-  up: async (queryInterface) => {
+  up: async ({ context: queryInterface }) => {
     await queryInterface.createTable('teams', {
       id: {
         type: DataTypes.INTEGER,
@@ -1478,7 +1476,7 @@ module.exports = {
       },
     })
   },
-  down: async (queryInterface) => {
+  down: async ({ context: queryInterface }) => {
     await queryInterface.dropTable('teams')
   },
 }
