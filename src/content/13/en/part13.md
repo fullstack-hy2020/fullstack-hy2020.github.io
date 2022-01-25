@@ -6,9 +6,9 @@ lang: en
 
 <div class="intro">
 
-On the course previous sections we used MongoDB for storing data, which is so called NoSQL database. NoSQL databases became very common in just over 10 years ago, when internet scaling started to produce problems for relational databases that utilized the older generation SQL query language.
+In the previous sections of the course we used MongoDB for storing data, which is a so called NoSQL database. NoSQL databases became very common just over 10 years ago, when the scaling of the internet started to produce problems for relational databases that utilized the older generation SQL query language.
 
-Relational databases have since then experienced the new beginning. Problem with scalability have been partially resolved and have also adopted some of the features from NoSQL database. On this section we explore different NodeJS applications that use relational databases, the database is the number one PostgreSQL in the open source world.
+Relational databases have since then experienced a new beginning. Problems with scalability have been partially resolved and they have also adopted some of the features of NoSQL databases. In this section we explore different NodeJS applications that use relational databases, we will focus on using the database PostgreSQL which is the number one in the open source world.
 
 English translation of this part is by [Aarni Pavlidi](https://github.com/aarnipavlidi).
 
