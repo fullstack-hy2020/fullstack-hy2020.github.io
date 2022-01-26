@@ -292,7 +292,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Now let's expand the controllers as follows. Prevent logging if the user field <i>disabled</i> is already set to <i>true</i>:
+Now let's expand the controllers as follows. Prevent logging in if the user field <i>disabled</i> is already set to <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
