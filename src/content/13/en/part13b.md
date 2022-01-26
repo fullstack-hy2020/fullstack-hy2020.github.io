@@ -510,7 +510,7 @@ router.post('/', async (req, res) => {
 
 Pay attention to how there is now a <i>user\_id</i> column in the notes at the database level. The corresponding object in each database row is referred to by Sequelize's naming convention as opposed to camel case (<i>userId</i>) as typed in the source code.
 
-Making a join query is very easy. Let's change the route that looks like all users so that is also shows each user's notes:
+Making a join query is very easy. Let's change the route that looks up all users so that it also shows each user's notes:
 
 ```js
 router.get('/', async (req, res) => {
