@@ -473,15 +473,15 @@ const rollbackMigration = async () => {
 }
 // highlight-end
 
-module.exports = { connectToDatabase, sequelize, rollbackMigrations } // highlight-line
+module.exports = { connectToDatabase, sequelize, rollbackMigration } // highlight-line
 ```
 
 Let's create a file <i>util/rollback.js</i>, which will allow the npm script to execute the specified migration rollback function:
 
 ```js
-const { rollbackMigrations } = require('./db')
+const { rollbackMigration } = require('./db')
 
-rollbackMigrations()
+rollbackMigration()
 ```
 
 and the script itself:
