@@ -252,7 +252,6 @@ We define parameterized urls in the routing in <i>App</i> component as follows:
 
 ```js
 <Router>
-  <div>
     <div>
       <Link style={padding} to="/">home</Link>
       <Link style={padding} to="/notes">notes</Link>
