@@ -195,7 +195,7 @@ app.use(express.json());
 
 const PORT = 3000;
 
-app.get('/ping', (_req, res) => {
+app.get('/api/ping', (_req, res) => {
   console.log('someone pinged here');
   res.send('pong');
 });
@@ -205,7 +205,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Now, if we run the app with <i>npm run dev</i>, we can verify that a request to http://localhost:3000/ping gives the response <i>pong</i>, so our configuration is set!
+Now, if we run the app with <i>npm run dev</i>, we can verify that a request to http://localhost:3000/api/ping gives the response <i>pong</i>, so our configuration is set!
 
 When starting the app with <i>npm run dev</i>, it runs in development mode.
 The development mode is not suitable at all when we later operate the app in production.
@@ -252,7 +252,7 @@ The [frontend](https://github.com/fullstack-hy/patientor) has already been built
 
 #### 9.8: Patientor backend, step1
 
-Initialise a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers to HTTP GET requests to route <i>/ping</i>.
+Initialise a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers to HTTP GET requests to route <i>/api/ping</i>.
 
 The project should be runnable with npm scripts, both in development mode and, as compiled code, in production mode.
 
@@ -355,7 +355,7 @@ app.use(express.json());
 
 const PORT = 3000;
 
-app.get('/ping', (_req, res) => {
+app.get('/api/ping', (_req, res) => {
   console.log('someone pinged here');
   res.send('pong');
 });
