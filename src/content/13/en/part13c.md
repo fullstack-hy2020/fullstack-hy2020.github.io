@@ -9,9 +9,9 @@ lang: en
 
 ### Migrations
 
-Let's keep expanding the backend. We want to implement support for allowing users with <i>admin status</i> to put users of their choice in inactive mode, preventing them from logging in and creating new notes. In order to implement these, we need to add a boolean value to the users' database table indicating whether the user is admin and whether the username is inactive.
+Let's keep expanding the backend. We want to implement support for allowing users with <i>admin status</i> to put users of their choice in disabled mode, preventing them from logging in and creating new notes. In order to implement this, we need to add boolean fields to the users' database table indicating whether the user is an admin and whether the user is disabled.
 
-We could proceed as before, i.e. change the model that defines the table and rely on Sequelize to synchronize the changes to the database. This is what causes the lines in the file <i>models/index.js</i>
+We could proceed as before, i.e. change the model that defines the table and rely on Sequelize to synchronize the changes to the database. This is specified by these lines in the file <i>models/index.js</i>
 
 ```js
 const Note = require('./note')
@@ -30,9 +30,9 @@ module.exports = {
 
 However, this approach does not make sense in the long run. Let's remove the lines that do the synchronization and move to using a much more robust way, [migrations](https://sequelize.org/master/manual/migrations.html) provided by Sequelize (and many other libraries).
 
-In practice, a migration is a single JavaScript file that describes some modification to a database. A separate migration file is created for each single or multiple changes at once. Sequelize keeps a record of which migrations have been performed, i.e. which change caused by the migrations is synchronized to the database schema. With the creation of new migrations, Sequelize keeps up to date on which changes to the database schema are yet to be made. In this way, changes are made in a controlled manner, with the program code stored in the version control.
+In practice, a migration is a single JavaScript file that describes some modification to a database. A separate migration file is created for each single or multiple changes at once. Sequelize keeps a record of which migrations have been performed, i.e. which changes caused by the migrations are synchronized to the database schema. When creating new migrations, Sequelize keeps up to date on which changes to the database schema are yet to be made. In this way, changes are made in a controlled manner, with the program code stored in version control.
 
-First, a migration is created that takes the database to its current state. The code for the migration is as follows
+First, let's create a migration that initializes the database. The code for the migration is as follows
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -85,11 +85,11 @@ module.exports = {
 }
 ```
 
-The migration file [defines](https://sequelize.org/master/manual/migrations.html#migration-skeleton) functions <i>up</i> and <i>down</i>, the first of which defines how the database should be modified when the migration is performed. The function <i>down</i> again tells you how to cancel the migration if there is a need to do so.
+The migration file [defines](https://sequelize.org/master/manual/migrations.html#migration-skeleton) the functions <i>up</i> and <i>down</i>, the first of which defines how the database should be modified when the migration is performed. The function <i>down</i> tells you how to undo the migration if there is a need to do so.
 
-Our migration contains three operations, the first creates a table <i>notes</i>, the second creates a table <i>users</i> and the third adds a reference key to the table <i>notes</i> for the creator of the note. Changes in the schema are defined by calling the [queryInterface](https://sequelize.org/master/manual/query-interface.html) object methods.
+Our migration contains three operations, the first creates a <i>notes</i> table, the second creates a <i>users</i> table and the third adds a foreign key to the <i>notes</i> table referencing the creator of the note. Changes in the schema are defined by calling the [queryInterface](https://sequelize.org/master/manual/query-interface.html) object methods.
 
-In defining migrations, it is essential to remember that unlike models, column and table names are written in snake case form:
+When defining migrations, it is essential to remember that unlike models, column and table names are written in snake case form:
 
 ```js
 await queryInterface.addColumn('notes', 'user_id', { // highlight-line
@@ -99,9 +99,9 @@ await queryInterface.addColumn('notes', 'user_id', { // highlight-line
 })
 ```
 
-So in migrations, the names of the tables and columns are written exactly as they enter the database, while models use Sequelize's default camelCase name.
+So in migrations, the names of the tables and columns are written exactly as they appear in the database, while models use Sequelize's default camelCase naming convention.
 
-Save the migration code in the file <i>migrations/20211209_00_initialize_notes_and_users.js</i>. Migration file names should be in alphabetical order so that the previous change is always ahead of a newer change in the alphabet. One good way to achieve this order is to start the migration file name with a data and a sequence number.
+Save the migration code in the file <i>migrations/20211209\_00\_initialize\_notes\_and\_users.js</i>. Migration file names should always be named alphabetically when created so that previous changes are always before newer changes. One good way to achieve this order is to start the migration file name with the date and a sequence number.
 
 We could run the migrations from the command line using the [Sequelize command line tool](https://github.com/sequelize/cli). However, we choose to perform the migrations manually from the program code using the [Umzug](https://github.com/sequelize/umzug) library. Let's install the library
 
@@ -148,9 +148,9 @@ const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
     await runMigrations() // highlight-line
-    console.log('database connected')
+    console.log('connected to the database')
   } catch (err) {
-    console.log('connecting database failed')
+    console.log('failed to connect to the database')
     console.log(err)
     return process.exit(1)
   }
@@ -172,7 +172,7 @@ username => \d
 Did not find any relations.
 ```
 
-Let's start up the application. A message about migrations status is printed on the log
+Let's start up the application. A message about the migrations status is printed on the log
 
 ```bash
 INSERT INTO "migrations" ("name") VALUES ($1) RETURNING "name";
@@ -180,7 +180,7 @@ Migrations up to date { files: [ '20211209_00_initialize_notes_and_users.js' ] }
 database connected
 ```
 
-If we restart the application, the log also shows that the migration is not being performed.
+If we restart the application, the log also shows that the migration was not repeated.
 
 The database schema of the application now looks like this
 
@@ -196,7 +196,7 @@ username=> \d
  public | users_id_seq | sequence | username
 ```
 
-So Sequelize has created a table <i>migrations</i> that allows it to keep track of the migrations that have been performed. The contents of the table look as follows:
+So Sequelize has created a <i>migrations</i> table that allows it to keep track of the migrations that have been performed. The contents of the table look as follows:
 
 ```js
 username=> select * from migrations;
@@ -207,14 +207,14 @@ username=> select * from migrations;
 
 Let's create a few users in the database, as well as a set of notes, and after that we are ready to expand the application.
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-6), branch <i>part13-6</i>.
+The current code for the application is in its entirety on [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-6), branch <i>part13-6</i>.
 ### Admin user and user disabling
 
 So we want to add two boolean fields to the <i>users</i> table
-- _admin_ tells you whether the user is admin
-- _disabled_ again tells you whether the username is set to be banned
+- _admin_ tells you whether the user is an admin
+- _disabled_ tells you whether the user is disabled from actions
 
-Let's create the migration that makes the database instance in the file <i>migrations/20211209_01_admin_and_disabled_to_users.js</i>:
+Let's create the migration that modifies the database in the file <i>migrations/20211209\_01\_admin\_and\_disabled\_to\_users.js</i>:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -237,7 +237,7 @@ module.exports = {
 }
 ```
 
-Make corresponding changes to the model corresponding to the table <i>users</i>:
+Make corresponding changes to the model corresponding to the <i>users</i> table:
 
 ```js
 User.init({
@@ -273,7 +273,7 @@ User.init({
 })
 ```
 
-When a new migration is performed when code restarts, the schema is changed as desired:
+When the new migration is performed when the code restarts, the schema is changed as desired:
 
 ```sql
 username-> \d users
@@ -292,7 +292,7 @@ Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id)
 ```
 
-Now let's expand the controllers as follows. Prevent logging in if the user field <i>disabled</i> is already set to <i>true</i>:
+Now let's expand the controllers as follows. We prevent logging in if the user field <i>disabled</i> is set to <i>true</i>:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -333,7 +333,7 @@ loginRouter.post('/', async (request, response) => {
 })
 ```
 
-Let's disable the user's <i>jakousa</i> ID:
+Let's disable the user <i>jakousa</i> using his ID:
 
 ```sql
 username => update users set disabled=true where id=3;
@@ -348,11 +348,11 @@ username => select * from users;
   1 | mluukkai | Matti Luukkainen | t     |
 ```
 
-And make sure that the login is no longer successful
+And make sure that logging in is no longer possible
 
 ![](../../images/13/2.png)
 
-Let's create a route that will allow admin to change the status of the user's account:
+Let's create a route that will allow an admin to change the status of a user's account:
 
 ```js
 const isAdmin = async (req, res, next) => {
@@ -380,9 +380,9 @@ router.put('/:username', tokenExtractor, isAdmin, async (req, res) => {
 })
 ```
 
-There are two middleware used, the first called <i>tokenExtractor</i> is the same as the one used by the note-generating route, i.e. it places the decoded token in the request-object field <i>decodedToken</i>. As the second middleware <i>isAdmin</i> checks whether the user is admin and if not, the request is set to 401 and an appropriate error message is returned.
+There are two middleware used, the first called <i>tokenExtractor</i> is the same as the one used by the note-creation route, i.e. it places the decoded token in the <i>decodedToken</i> field of the request-object. The second middleware <i>isAdmin</i> checks whether the user is an admin and if not, the request status is set to 401 and an appropriate error message is returned.
 
-Note how <i>two middlewares</i> is chained together to the router, both of which are executed before the actual route handler. It is possible to chain middleware to the connection of requests an arbitrary number.
+Note how <i>two middleware</i> are chained to the route, both of which are executed before the actual route handler. It is possible to chain an arbitrary number of middleware to a request.
 
 The middleware <i>tokenExtractor</i> is now moved to <i>util/middleware.js</i> as it is used from multiple locations.
 
@@ -407,7 +407,7 @@ const tokenExtractor = (req, res, next) => {
 module.exports = { tokenExtractor }
 ```
 
-Admin can now enable the <i>jakousa</i> ID by making a PUT request to /api/users, where the request comes with the following data:
+An admin can now re-enable the user <i>jakousa</i> by making a PUT request to _/api/users/jakousa_, where the request comes with the following data:
 
 ```js
 {
@@ -415,9 +415,9 @@ Admin can now enable the <i>jakousa</i> ID by making a PUT request to /api/users
 }
 ```
 
-As noted in [the end of Part 4](/part4/token_based_login#token-based_login_problems), the way we implement disabling usernames here is problematic. Whether or not the token is disabled is only checked at _login_, if the user is in possession of a token at the time the token is disabled, the user may continue to use the same token, since no lifetime has been set for the token and the fact that the user ID has been disabled is not checked when the notes are being created.
+As noted in [the end of Part 4](/en/part4/token_authentication#problems-of-token-based-authentication), the way we implement disabling users here is problematic. Whether or not the user is disabled is only checked at _login_, if the user has a token at the time the user is disabled, the user may continue to use the same token, since no lifetime has been set for the token and the disabled status of the user is not checked when creating notes.
 
-Before we proceed, let's make an npm script for the application, which allows us to cancel the previous migration. Not everything always goes right at the first time when developing migrations.
+Before we proceed, let's make an npm script for the application, which allows us to undo the previous migration. After all, not everything always goes right the first time when developing migrations.
 
 Let's modify the file <i>util/db.js</i> as follows:
 
@@ -439,9 +439,9 @@ const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
     await runMigrations()
-    console.log('database connected')
+    console.log('connected to the database')
   } catch (err) {
-    console.log('connecting database failed')
+    console.log('failed to connect to the database')
     return process.exit(1)
   }
 
@@ -497,9 +497,9 @@ and the script itself:
 
 So we can now undo the previous migration by running _npm run migration:down_ from the command line.
 
-Migrations are executed automatically when the program is started. In the development phase of the program, it might sometimes be more appropriate to disable the automatic execution of migrations and make migrations manually from the command line.
+Migrations are currently executed automatically when the program is started. In the development phase of the program, it might sometimes be more appropriate to disable the automatic execution of migrations and make migrations manually from the command line.
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-7), branch <i>part13-7</i>.
+The current code for the application is in its entirety on [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-7), branch <i>part13-7</i>.
 
 </div>
 
@@ -509,29 +509,29 @@ The current code for the application is in its entirety in [GitHub](https://gith
 
 #### Task 13.17.
 
-Delete all tables from your application database.
+Delete all tables from your application's database.
 
-Make a migration that sets the database to its current state. Create <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to create them in migration yourself.
+Make a migration that intializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.
 
-**NOTE:** be sure to remove the commands <i>User.sync()</i> and <i>Blog.sync()</i>, which synchronizes models' schemes from your code otherwise you will not succeed in executing migrations.
+**NOTE:** be sure to remove the commands <i>User.sync()</i> and <i>Blog.sync()</i>, which synchronizes the models' schemas from your code, otherwise your migrations will fail.
 
-**NOTE2:** if you have to delete tables from the command line (i.e. you don't do the deletion by undoing the migration), you will have to delete the contents of the table <i>migrations</i> if you want your program to be able to perform the migrations again.
+**NOTE2:** if you have to delete tables from the command line (i.e. you don't do the deletion by undoing the migration), you will have to delete the contents of the <i>migrations</i> table if you want your program to perform the migrations again.
 
 #### Task 13.18.
 
-Expand your application (by migration) so that the blogs have a year of writing, i.e. a field <i>year</i> which is an integer at least equal to 1991 but not greater than the current year. Make sure the application gives the appropriate error message if an incorrect value is attempted to be given for the year of writing.
+Expand your application (by migration) so that the blogs have a year written attribute, i.e. a field <i>year</i> which is an integer at least equal to 1991 but not greater than the current year. Make sure the application gives an appropriate error message if an incorrect value is attempted to be given for a year written.
 
 </div>
 
 <div class="content">
 
-### Many-to-many connections
+### Many-to-many relationships
 
-Continue to expand the application so that each user can be added to one or more <i>teams</i>.
+We will continue to expand the application so that each user can be added to one or more <i>teams</i>.
 
-Since an arbitrary number of users can join one team, and one user can join an arbitrary number of teams, we are dealing with [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships), a many-to-many type of connection, which is traditionally implemented in relational databases using a <i>connection table</i>.
+Since an arbitrary number of users can join one team, and one user can join an arbitrary number of teams, we are dealing with a [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships) relationship, which is traditionally implemented in relational databases using a <i>connection table</i>.
 
-Let's now create the code needed for the team as well as the connection table. Migration is as follows:
+Let's now create the code needed for the teams table as well as the connection table. The migration is as follows:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -575,7 +575,7 @@ module.exports = {
 }
 ```
 
-Models contain almost the same code as migration. The team model <i>models/team.js</i>
+The models contain almost the same code as the migration. The team model in <i>models/team.js</i>:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -605,7 +605,7 @@ Team.init({
 module.exports = Team
 ```
 
-Model for connection table <i>models/membership.js</i>:
+The model for the connection table in <i>models/membership.js</i>:
 
 ```js
 const { Model, DataTypes } = require('sequelize')
@@ -640,9 +640,9 @@ Membership.init({
 module.exports = Membership
 ```
 
-So we have given the name that describes the connection table, <i>membership</i>. There is not always an relevant name for a connection table, in which case the name of the connection table can be a combination of the names of the tables to be joined, e.g. <i>user\_teams</i> could fit our situation.
+So we have given the connection table a name that describes it well, <i>membership</i>. There is not always a relevant name for a connection table, in which case the name of the connection table can be a combination of the names of the tables that are joined, e.g. <i>user\_teams</i> could fit our situation.
 
-The file <i>models/index.js</i> comes with a small addition that links the method [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) to allow teams and users to each other also at the code level.
+We make a small addition to the <i>models/index.js</i> file to connect teams and users at the code level using the [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) method.
 
 ```js
 const Note = require('./note')
@@ -666,7 +666,7 @@ module.exports = {
 
 ```
 
-Note the difference between the migration of the connection table and the model when defining reference key fields. During the migration, fields are defined in snake case form:
+Note the difference between the migration of the connection table and the model when defining foreign key fields. During the migration, fields are defined in snake case form:
 
 ```js
 await queryInterface.createTable('memberships', {
@@ -684,7 +684,7 @@ await queryInterface.createTable('memberships', {
 })
 ```
 
-in the model, while the same are defined as camel case:
+in the model, the same fields are defined in camel case:
 
 ```js
 Membership.init({
@@ -714,7 +714,7 @@ insert into memberships (user_id, team_id) values (2, 1);
 insert into memberships (user_id, team_id) values (3, 2);
 ```
 
-Then insert in the route of all users the information about the user's teams
+Information about users' teams is then added to route for retrieving all users
 
 ```js
 router.get('/', async (req, res) => {
@@ -736,9 +736,9 @@ router.get('/', async (req, res) => {
 })
 ```
 
-The most observant will notice that the query that comes to the console now combines three tables.
+The most observant will notice that the query printed to the console now combines three tables.
 
-The solution is pretty good, but there's a beauty flaw in it. The result also comes with the attributes of the line of the connection table, although we do not want them:
+The solution is pretty good, but there's a beautiful flaw in it. The result also comes with the attributes of the corresponding row of the connection table, although we do not want this:
 
 ![](../../images/13/3.png)
 
@@ -768,23 +768,23 @@ router.get('/', async (req, res) => {
 })
 ```
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-8), branch <i>part13-8</i>.
+The current code for the application is in its entirety on [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-8), branch <i>part13-8</i>.
 
 ### Note on the properties of Sequelize model objects
 
-The specification of our models included the following lines:
+The specification of our models is shown by the following lines:
 
 ```js
 User.hasMany(Note)
-User.hasMany(Note)
+Note.belongsTo(User)
 
 User.belongsToMany(Team, { through: Membership })
 Team.belongsToMany(User, { through: Membership })
 ```
 
-These allow Sequelize to make queries that retrieve, for example, all the notes of users, or all members of the team.
+These allow Sequelize to make queries that retrieve, for example, all the notes of users, or all members of a team.
 
-The definitions also allow us to access directly in the code, e.g. user notes. In the following, we will search a user with id 1 and print the the notes associated with the user:
+Thanks to the definitions, we also have direct access to, for example, the user's notes in the code. In the following code, we will search for a user with id 1 and print the notes associated with the user:
 
 ```js
 const user = await User.findByPk(1, {
@@ -798,7 +798,7 @@ user.notes.forEach(note => {
 })
 ```
 
-The definition <i>User.hasMany(Note)</i> therefore attaches an attribute <i>notes</i> to <i>user</i> object, which gives access to the notes made by the user. Definition <i>User.belongsToMany(Team, { through: Membership }))</i> similarly attaches users attribute <i>teams</i> which also have the ability to exploit in the code:
+The <i>User.hasMany(Note)</i> definition therefore attaches a <i>notes</i> property to the <i>user</i> object, which gives access to the notes made by the user. The <i>User.belongsToMany(Team, { through: Membership }))</i> definition similarly attaches a <i>teams</i> property to the <i>user</i> object, which can also be used in the code:
 
 ```js
 const user = await User.findByPk(1, {
@@ -812,7 +812,7 @@ user.teams.forEach(team => {
 })
 ```
 
-Suppose we would like to return a json from an single user's route containing the user's name, username and number of notes created. We could try the following:
+Suppose we would like to return a JSON object from the single user's route containing the user's name, username and number of notes created. We could try the following:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -834,7 +834,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-So, we tried to include the <i>noteCount</i> field in the returned object by Sequelize and remove the <i>notes</i> field from it. However, this approach does not work, as the things returned by Sequelize are not normal things to which the addition of new fields works as we want.
+So, we tried to add the <i>noteCount</i> field on the object returned by Sequelize and remove the <i>notes</i> field from it. However, this approach does not work, as the objects returned by Sequelize are not normal objects where the addition of new fields works as we intend.
 
 A better solution is to create a completely new object based on the data retrieved from the database:
 
@@ -859,11 +859,11 @@ router.get('/:id', async (req, res) => {
   }
 })
 ```
-### Many-to-many again
+### Revisiting many-to-many relationships
 
-Let's make another many-to-many relation in the application. Each note is with the reference key by the user who created it. It is decided that the application also supports that the note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by another user. It is thought that these notes are those that the user has <i>marked</i> for himself.
+Let's make another many-to-many relationship in the application. Each note is associated to the user who created it by a foreign key. It is now decided that the application also supports that the note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by other users. The idea is that these notes are those that the user has <i>marked</i> for himself.
 
-Let's make a connection table <i>user_notes</i> for the situation. Migration is straightforward:
+Let's make a connection table <i>user_notes</i> for the situation. The migration is straightforward:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -909,12 +909,12 @@ UserNotes.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
-  note_id: {
+  noteId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'notes', key: 'id' },
@@ -954,9 +954,9 @@ module.exports = {
 }
 ```
 
-There is again <i>belongsToMany</i> which links to the user notes via the model <i>UserNotes</i> corresponding to the connection table. However, this time we give an <i>alias name</i> for the attribute formed using the keyword [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names), the default name (for users <i>notes</i>) would overlap with its previous meaning, i.e. user-generated notes.
+Once again <i>belongsToMany</i> is used, which now links users to notes via the <i>UserNotes</i> model corresponding to the connection table. However, this time we give an <i>alias name</i> for the attribute formed using the keyword [as](https://sequelize.org/master/manual/advanced-many-to-many.html#aliases-and-custom-key-names), the default name (a user's <i>notes</i>) would overlap with its previous meaning, i.e. notes created by the user.
 
-Extend the route for an individual user to return the user's teams, their own notes, and other notes attached to the user:
+We extend the route for an individual user to return the user's teams, their own notes, and other notes marked by the user:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -996,7 +996,7 @@ router.get('/:id', async (req, res) => {
 })
 ```
 
-In the context of the include, you must now mention the alias name <i>marked\_notes</i> which we have just defined by the <i>as</i> attribute.
+In the context of the include, we must now use the alias name <i>marked\_notes</i> which we have just defined with the <i>as</i> attribute.
 
 In order to test the feature, let's create some test data in the database:
 
@@ -1009,7 +1009,7 @@ The end result is functional:
 
 ![](../../images/13/5.png)
 
-What if we wanted to have information about the author of the note in the notes marked by the user as well? This can be done by adding your own <i>include</i> to the attached notes:
+What if we wanted to include information about the author of the note in the notes marked by the user as well? This can be done by adding an <i>include</i> to the marked notes:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -1056,7 +1056,7 @@ The end result is as desired:
 
 ![](../../images/13/4.png)
 
-The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-9), branch <i>part13-9</i>.
+The current code for the application is in its entirety on [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-9), branch <i>part13-9</i>.
 
 
 </div>
@@ -1067,7 +1067,7 @@ The current code for the application is in its entirety in [GitHub](https://gith
 
 #### Task 13.19.
 
-Enable users the ability to add blogs on the system to the <i>reading list</i>. When added to the reading, the blog is in a state of <i>unread</i>. The blog can later be marked as <i>read</i>. Implement the reading list using a connection table. Make database changes using migrations.
+Give users the ability to add blogs on the system to a <i>reading list</i>. When added to the reading list, the blog should be in the <i>unread</i> state. The blog can later be marked as <i>read</i>. Implement the reading list using a connection table. Make database changes using migrations.
 
 In this task, adding to a reading list and displaying the list need not be successful other than directly using the database.
 
@@ -1079,12 +1079,12 @@ Adding a blog to the reading list is done by making an HTTP POST to the path <i>
 
 ```js
 {
-  blog_id: 10,
-  user_id: 3
+  "blogId": 10,
+  "userId": 3
 }
 ```
 
-Also implement the individual user's return route _GET /api/users/:id_ which returns not only the user's other information but also the reading list, e.g. in the following format:
+Also modify the individual user route _GET /api/users/:id_ to return not only the user's other information but also the reading list, e.g. in the following format:
 
 ```js
 {
@@ -1115,7 +1115,7 @@ At this point, information about whether the blog is read or not does not need t
 
 #### Task 13.21.
 
-Expand the single-user view so that for each blog in the reading list also whether the blog has been read <i>and</i> the id of the corresponding connection table row.
+Expand the single-user route so that each blog in the reading list shows also whether the blog has been read <i>and</i> the id of the corresponding connection table row.
 
 For example, the information can be in the following form:
 
@@ -1160,21 +1160,19 @@ Note: there are several ways to implement this functionality. [This](https://seq
 
 #### Exercise 13.22.
 
-Make it possible for the application to mark the blog on the reading list as read. Marking the reading is done by making a request to the _PUT /api/readinglists/:id_ path, and sending the request with
+Implement functionality in the application to mark a blog in the reading list as read. Marking as read is done by making a request to the _PUT /api/readinglists/:id_ path, and sending the request with
 
 ```js
-{ read: true }
+{ "read": true }
 ```
 
-The user can only mark the blogs as read in their own reading list. The user is identified as usual from the token accompanying the request.
+The user can only mark the blogs in their own reading list as read. The user is identified as usual from the token accompanying the request.
 
 #### Exercise 13.23.
 
-Modify the route that returns single user information, so that the request can be controlled which of the blogs in the reading list are returned:
+Modify the route that returns a single user's information so that the request can control which of the blogs in the reading list are returned:
 
-returns blogs that have not been read
-
-- _GET /api/users/:id_ returns entire reading list
+- _GET /api/users/:id_ returns the entire reading list
 - _GET /api/users/:id?read=true_ returns blogs that have been read
 - _GET /api/users/:id?read=false_ returns blogs that have not been read
 
@@ -1184,7 +1182,7 @@ returns blogs that have not been read
 
 ### Concluding remarks
 
-Our application is starting to be in at least valid condition. However, before the end of the section, let's look at a few more points.
+The state of our application is starting to be at least acceptable. However, before the end of the section, let's look at a few more points.
 
 #### Eager vs lazy fetch
 
@@ -1198,9 +1196,9 @@ User.findOne({
 })
 ```
 
-The so-called [eager fetch](https://sequelize.org/master/manual/assocs.html#basics-of-queries-involving-associations) occurs, i.e. all the rows of table attached to the user by connection query, in the case of example, the notes taken by the user, are fetched from the database at the same time. This is often what we want, but there are also situations where you want to do a so-called _lazy fetch_, i.e. search for user related teams only if they are needed.
+The so-called [eager fetch](https://sequelize.org/master/manual/assocs.html#basics-of-queries-involving-associations) occurs, i.e. all the rows of the tables attached to the user by the join query, in the example the notes made by the user, are fetched from the database at the same time. This is often what we want, but there are also situations where you want to do a so-called _lazy fetch_, e.g. search for user related teams only if they are needed.
 
-Let's now modify the route for an individual user's route so that it fetches the user's teams only if the query parameter <i>teams</i> is set for the request:
+Let's now modify the route for an individual user so that it fetches the user's teams only if the query parameter <i>teams</i> is set in the request:
 
 ```js
 router.get('/:id', async (req, res) => {
@@ -1248,7 +1246,7 @@ So now, the <i>User.findByPk</i> query does not retrieve teams, but they are ret
 
 #### Features of models
 
-There are some situations where, by default we do not want to handle with all the rows of a particular table. One such case could be that we don't normally want to display users with disabled (<i>disabled</i>) ID in our application. In such situation, we could define the default [scopen](https://sequelize.org/master/manual/scopes.html) for the model:
+There are some situations where, by default, we do not want to handle all the rows of a particular table. One such case could be that we don't normally want to display users that have been <i>disabled</i> in our application. In such a situation, we could define the default [scopes](https://sequelize.org/master/manual/scopes.html) for the model like this:
 
 ```js
 class User extends Model {}
@@ -1284,7 +1282,7 @@ User.init({
 module.exports = User
 ```
 
-Now the query caused by the function call <i>User.findAll()</i> has the following where-condition:
+Now the query caused by the function call <i>User.findAll()</i> has the following WHERE condition:
 
 ```
 WHERE "user". "disabled" = false;
@@ -1355,10 +1353,6 @@ Since Sequelize models are normal [JavaScript classes](https://sequelize.org/mas
 
 Here are two examples:
 
-_TODO: should perhaps use camelCase in the names of the methods?_
-
-_TODO: numberOfNotes could be a good example for a count method: https://sequelize.org/master/manual/model-querying-basics.html#-code-count--code-_
-
 ```js
 const { Model, DataTypes, Op } = require('sequelize') // highlight-line
 
@@ -1398,8 +1392,6 @@ module.exports = User
 
 The first of the methods <i>numberOfNotes</i> is an <i>instance method</i>, meaning that it can be called on instances of the model:
 
-_TODO: camelCase?_
-
 ```js
 const jami = await User.findOne({ name: 'Jami Kousa'})
 const cnt = await jami.number_of_notes()
@@ -1414,7 +1406,7 @@ async number_of_notes() {
 }
 ```
 
-The second of the methods, which returns those users who have at least a parameter's worth of notes is again the <i>class method</i>, i.e. it is called directly to the model:
+The second of the methods, which returns those users who have at least <i>X</i>, the number specified by the parameter, amount of notes is a <i>class method</i>, i.e. it is called directly on the model:
 
 ```js
 const users = await User.with_notes(2)
@@ -1452,7 +1444,7 @@ Team.init({
 module.exports = Team
 ```
 
-and migration contain much of the same
+and migration contain much of the same code
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -1478,17 +1470,17 @@ module.exports = {
 }
 ```
 
-Couldn't we optimize the code so that, e.g. the model would export shared parts for migration?
+Couldn't we optimize the code so that, for example, the model exports the shared parts needed for the migration?
 
-However, the problem is that the definition of the model may change over time, for example a field <i>name</i> may change the name or its data type may change. Migrations must be able to be performed successfully at any time from start to end, and if migrations rely the model has a certain content, it will no longer be true in a month or a year's time. Therefore, despite the "copy paste", the migration code should be completely separate from the model code.
+However, the problem is that the definition of the model may change over time, for example the <i>name</i> field may change or its data type may change. Migrations must be able to be performed successfully at any time from start to end, and if the migrations are relying on the model to have certain content, it may no longer be true in a month or a year's time. Therefore, despite the "copy paste", the migration code should be completely separate from the model code.
 
-One solution would be to use Sequelize's [command line tool](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-), which generates both models and migration files based on commands given at the command line. For example, the following command would create a model <i>User</i> with <i>name</i>, <i>username</i>, and <i>admin</i> as attributes, as well as the migration that manages the creation of the databse table:  
+One solution would be to use Sequelize's [command line tool](https://sequelize.org/master/manual/migrations.html#creating-the-first-model--and-migration-), which generates both models and migration files based on commands given at the command line. For example, the following command would create a <i>User</i> model with <i>name</i>, <i>username</i>, and <i>admin</i> as attributes, as well as the migration that manages the creation of the database table:  
 
 ```
 npx sequelize-cli model:generate --name User --attributes name:string,username:string,admin:boolean
 ```
 
-From the command line, you can also run as well as rollback, i.e. cancel migrations. The command line documentation is unfortunately thin and in this course we decided to do both models and migrations manually. The solution may or may not have been a wise one.
+From the command line, you can also run rollbacks, i.e. undo migrations. The command line documentation is unfortunately incomplete and in this course we decided to do both models and migrations manually. The solution may or may not have been a wise one.
 
 </div>
 
@@ -1498,21 +1490,21 @@ From the command line, you can also run as well as rollback, i.e. cancel migrati
 
 #### Task 13.24.
 
-Grande finale: [towards the end of part 4](/part4/token_based_login#token_based_login_problems) there was mention of a token-criticality problem: if a user's access to the system is decided to be revoked, the user may still use the token in possession to use the system.
+Grand finale: [towards the end of part 4](/en/part4/token_authentication#problems-of-token-based-authentication) there was mention of a token-criticality problem: if a user's access to the system is decided to be revoked, the user may still use the token in possession to use the system.
 
-The usual solution to this is to store a record of each token issued to the customer in the backend database, and check with each request whether the access is still valid at each request. In this case, if necessary, the validity of the token can be removed immediately. Such a solution is often referred to as <i>server-side session</i>.
+The usual solution to this is to store a record of each token issued to the client in the backend database, and to check with each request whether access is still valid. In this case, the validity of the token can be removed immediately if necessary. Such a solution is often referred to as a <i>server-side session</i>.
 
-Now expand the system so that the user who has lost access will not be able to perform any actions that require logging.
+Now expand the system so that the user who has lost access will not be able to perform any actions that require login.
 
-You will probably need at least the following for implementation
-- a boolean value column in the user table to indicate whether the ID is disabled
-  - it is sufficient to disable and enable IDs directly from the database
-- a table that remembers active sessions
-  - session is stored on the table when the user makes a login, i.e. operation POST /api/login
-  - the existence (and validity) of the session is always checked when the user makes a login operation
-- a route that allows the user to "log out" of the system, i.e. to practically remove active sessions from the database, the route can be e.g. DELETE /api/logout
+You will probably need at least the following for the implementation
+- a boolean value column in the user table to indicate whether the user is disabled
+  - it is sufficient to disable and enable users directly from the database
+- a table that stores active sessions
+  - a session is stored in the table when a user logs in, i.e. operation _POST /api/login_
+  - the existence (and validity) of the session is always checked when the user makes an operation that requires login
+- a route that allows the user to "log out" of the system, i.e. to practically remove active sessions from the database, the route can be e.g. _DELETE /api/logout_
 
-Keep in mind that the login should not be successful with an "expired token", i.e. with the same token after logging out.
+Keep in mind that actions requiring login should not be successful with an "expired token", i.e. with the same token after logging out.
 
 You may also choose to use some purpose-built npm library to handle sesssions.
 
