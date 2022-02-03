@@ -360,7 +360,7 @@ Even though the page updates on your browser, the changes are not permanent. If 
 
 The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
-Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web pages. 
+Cascading Style Sheets, or CSS, is a style sheet language used to determine the appearance of web pages. 
 
 The fetched CSS-file looks as follows: 
 
