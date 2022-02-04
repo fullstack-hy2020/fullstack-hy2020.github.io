@@ -113,6 +113,7 @@ $ DEBUG=playground:* npm start
 - Copy ALL of the files in this directory to the image
 - Start with DEBUG=playground:* npm start
 
+
 Let's place the following Dockerfile at the root of the project:-->
 
 基于前面的示例，容器化相对应该很容易。
@@ -121,6 +122,7 @@ Let's place the following Dockerfile at the root of the project:-->
 - 设置工作目录，这样我们就不会干扰基础镜像的内容
 - 将这个目录下的所有文件复制到镜像中
 - 从 DEBUG=playground:* npm start 开始
+
 
 让我们将下面的Dockerfile 放到项目的根目录中：
 

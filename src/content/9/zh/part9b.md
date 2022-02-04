@@ -121,6 +121,11 @@ multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 
 <!-- As you can see, this is still ordinary basic JavaScript with no additional TS features. It compiles and runs nicely with  <i>npm run ts-node -- multiplier.ts</i>, as it would with Node. -->
 如您所见，这仍然是普通的基础 JavaScript，没有任何附加的 TS 特性。 它可以很好地编译和运行<i>npm run ts-node -- multiplier.ts</i>，就像使用 Node 一样。
+
+<!-- **NB:** You might have to run <i>npm run ts-node -- -O '{""noImplicitAny"": false}' .\multiplier.ts</i> or turn of strict mode using tsconfig.json -->
+
+**注意：** 你可能需要运行 <i>npm run ts-node -- -O '{""noImplicitAny"": false}' .\multiplier.ts</i> 或者使用 tsconfig.json 打开严格模式
+
 <!-- But what happens if we end up passing wrong <i>types</i> of arguments to the multiplicator function? -->
 但是，如果我们最终将错误的<i>类型</i> 参数传递给这个乘法函数会发生什么呢？
 

@@ -315,7 +315,7 @@ services:
 
 ### Exercise 12.15
 练习 12.15
-#### Exercise 12.15: Setup a frontend development environment
+#### Exercise 12.15: Set up a frontend development environment
 练习 12.15: 构建一个前端开发环境
 
 <!-- Create <i>todo-frontend/docker-compose.dev.yml</i> and use the volumes to enable the development of the todo-frontend while it is running <i>inside</i> a container. -->

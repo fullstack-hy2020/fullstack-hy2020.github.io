@@ -126,8 +126,8 @@ import { Table } from 'react-bootstrap'
 <!-- Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/). -->
 让我们在 Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/)的帮助下改进<i>Login</i> 视图中的表单。
 
-<!-- React Bootstrap provides built-in [components](https://react-bootstrap.github.io/components/forms/) for creating forms (although the documentation for them is slightly lacking): -->
-React Bootstrap 为创建表单提供了内置的[组件](https://React-Bootstrap.github.io/components/forms/)(尽管缺少相关的文档) : 
+<!-- React Bootstrap provides built-in [components](https://react-bootstrap.github.io/forms/overview/) for creating forms (although the documentation for them is slightly lacking): -->
+React Bootstrap 为创建表单提供了内置的[组件](https://react-bootstrap.github.io/forms/overview/)(尽管缺少相关的文档) : 
 
 ```js
 let Login = (props) => {
