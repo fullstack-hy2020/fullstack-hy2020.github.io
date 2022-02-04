@@ -142,7 +142,7 @@ You will receive your credits after you have submitted enough exercises for a pa
 
 ![](../../images/0/28a.png)
 
-You can view your grade in Sisu approximately four weeks after notifying us.
+You can view your grade in University of Helsinki Sisu and and to [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
 
 **Please note** that in order to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
 
