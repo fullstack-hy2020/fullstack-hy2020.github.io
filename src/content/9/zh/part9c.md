@@ -355,10 +355,17 @@ app.listen(PORT, () => {
 项目应该在开发模式和生产模式下以编译代码的形式通过npm 脚本运行。
 
 #### 9.9: Patientor backend, 步骤2
-<!-- Fork and clone the project [patientor](https://github.com/fullstack-hy/patientor). Start the project with the help of the README file. You should be able to use the frontend without a functioning backend. -->
-Fork和clone项目[patientor](https://github.com/fullstack-hy/patientor)。 在 README 文件的帮助下启动项目。 您应该能够使用没有后端功能的前端。 
+<!-- Fork and clone the project [patientor](https://github.com/fullstack-hy/patientor). Start the project with the help of the README file. -->
+Fork和clone项目[patientor](https://github.com/fullstack-hy/patientor)。 在 README 文件的帮助下启动项目。
 
+<!-- You can run this command if you get error message when trying to start the fronend: -->
+如果遇到错误信息，你可以使用如下命令启动前端：
 
+ ```shell
+npm update chokidar
+``` 
+ <!-- You should be able to use the frontend without a functioning backend. -->
+你应该使用前端，无需后端功能。
 
 <!-- Ensure that backend answers to the ping request that <i>frontend</i> has made on startup. Check developer tool to make sure it really works:  -->
 确保后端应答前端在启动时发出的 ping 请求。 检查开发者工具，确保它真正工作良好:

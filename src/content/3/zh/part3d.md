@@ -206,18 +206,9 @@ $ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@clus
 
 
 #### 3.19: Phonebook database, 步骤7
-<!-- Add validation to your phonebook application, that will make sure that a newly added person has a unique name. Our current frontend won't allow users to try and create duplicates, but we can attempt to create them directly with Postman or the VS Code REST client. -->
-为您的电话本应用添加验证，确保您所添加的人名字是唯一的。 我们当前的前端不允许用户尝试创建副本，但我们可以尝试直接使用Postman或 VS Code REST 客户端创建副本。
 
-<!-- Mongoose does not offer a built-in validator for this purpose. Install the [mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) package with npm and use it instead. -->
-Mongoose 没有为此提供内置的验证器，可以使用 npm 安装[mongoose-unique-validator](https://github.com/blakehaswell/mongoose-unique-validator#readme) 并使用它。 
-
-<!-- If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message. -->
-如果 HTTP POST 请求试图添加电话簿中已有的名称，服务器必须用适当的状态码和错误消息作出响应。
-
-#### 3.20*: Phonebook database, 步骤8
-<!-- Expand the validation so that the name stored in the database has to be at least three characters long, and the phone number must have at least 8 digits. -->
-扩展验证，以便存储在数据库中的名称必须至少有三个字符长，电话号码必须至少有8个数字。
+<!-- Expand the validation so that the name stored in the database has to be at least three characters long. -->
+扩展验证，以便存储在数据库中的名称必须至少有三个字符长。
 
 <!-- Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a <em>catch</em> block as shown below: -->
 扩展前端，以便在发生验证错误时显示某种形式的错误消息。 错误处理可以通过添加 <em>catch</em> 块来实现，如下所示:
@@ -238,11 +229,35 @@ personService
 <!-- You can display the default error message returned by Mongoose, even though they are not as readable as they could be: -->
 你可以显示 Mongoose 返回的默认错误消息，即使它们并不具有可读性:
 
+![](../../images/3/56e.png)
+
 <!--**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.-->
 
 注意，在更新操作中，mongoose 验证默认是关闭的， [阅读文档](https://mongoosejs.com/docs/validation.html) 来确定如何开启。
 
-![](../../images/3/56e.png)
+
+#### 3.20*: Phonebook database, 步骤8
+
+<!-- Add validation to your phonebook application, that will make sure that a newly added person has a unique name. Our current frontend won't allow users to try and create duplicates, but we can attempt to create them directly with Postman or the VS Code REST client. -->
+<!-- 为您的电话本应用添加验证，确保您所添加的人名字是唯一的。 我们当前的前端不允许用户尝试创建副本，但我们可以尝试直接使用Postman或 VS Code REST 客户端创建副本。 -->
+
+<!-- Add validation to your phonebook application, that will make sure that phone numbers are of the correct form. A phone number must  -->
+为您的电话本应用添加验证，确保您所添加的电话号码是正确格式的。一个正确的电话号码必须：
+
+<!-- - has length of 8 or more
+- if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
+  - eg. 09-1234556 and 040-22334455 are valid phone numbers
+  - eg. 1234556, 1-22334455 and 10-22-334455 are invalid -->
+
+- 具有8位或者更长
+- 如果电话号码被 - 分割成了两部分，第一部分有2到3个数字，第二部分也必须由数字组成
+  - 例如 09-1234556 以及 040-22334455 是合法的电话号码
+  - 例如 1234556, 1-22334455 以及 10-22-334455 就是非法的
+
+<!-- If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message. -->
+如果 HTTP POST 请求试图添加电话簿中已有的名称，服务器必须用适当的状态码和错误消息作出响应。
+
+
 
 
 

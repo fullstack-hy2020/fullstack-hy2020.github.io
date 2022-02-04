@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 
-<!-- On this section we will explore the node applications that use relation databases. During section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. There are many online courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and 
+<!-- In this section we will explore node applications that use relational databases. During the section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. There are many online courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and 
 [Intro to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql).-->
 这一章，我们会探索node 应用如何使用关系型数据库。我们会构建一个node后台，使用关系型数据库，构建一个笔记应用，我们在3-5章学过你应该已经很熟悉了。为了完成这一章，你应该具备一些关系型数据库和SQL的知识。网上有许多在线课程教SQL数据库，比如 [SQLbolt](https://sqlbolt.com/) 和 [Into to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql)。
 
@@ -18,9 +18,9 @@ lang: zh
 ### Advantages and disadvantages of document databases
 【文档数据库的优势和劣势】
 
-<!-- We have used the MongoDB database in all the previous sections of the course. Mongo is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database) and one of its most characteristic features is its <i>skepticity</i>, i.e. the database has only a very limited awareness of what kind of data is stored in its collections. The schema of the database exists only in the program code, which interprets the data in a specific way, e.g. by identifying that some of the fields are references to objects in another collection. -->
+<!-- We have used the MongoDB database in all the previous sections of the course. Mongo is a [document database](https://en.wikipedia.org/wiki/Document-oriented_database) and one of its most characteristic features is that it is <i>schemaless</i>, i.e. the database has only a very limited awareness of what kind of data is stored in its collections. The schema of the database exists only in the program code, which interprets the data in a specific way, e.g. by identifying that some of the fields are references to objects in another collection. -->
 
-我们在之前的章节中一直使用的是MongoDB 数据库。 Mongo 是一个 [文档数据库document database](https://en.wikipedia.org/wiki/Document-oriented_database) ，它其中一个典型的特点是它的  <i>不可知性skepticity</i> 。 比如说， 数据库对存入到自己集合中的数据类型是没有感知的。数据库的schema 仅仅存在于程序的代码中，对数据的解释采用了一种特定的方式，比如，通过一些字段所引用的对象来判断。
+我们在之前的章节中一直使用的是MongoDB 数据库。 Mongo 是一个 [文档数据库document database](https://en.wikipedia.org/wiki/Document-oriented_database) ，它其中一个典型的特点是它的  <i>无结构性schemaless</i> 。 比如说， 数据库对存入到自己集合中的数据类型是没有感知的。数据库的schema 仅仅存在于程序的代码中，对数据的解释采用了一种特定的方式，比如，通过一些字段所引用的对象来判断。
 
 <!-- In the example application of parts 3 and 4, the database stores notes and users. -->
 在第三和第四章的例子中，应用中的数据库存放了 notes  和 users。
@@ -47,7 +47,7 @@ lang: zh
 ]
 ```
 
-<!-- Users saving collection <i>users</i> looks like the following: -->
+<!-- Users saved in the <i>users</i> collection looks like the following: -->
 <i>users</i>集合中存储 Users 的类似这样：
 
 ```js
@@ -69,13 +69,13 @@ lang: zh
 <!-- MongoDB does know the types of the fields of the stored entities, but it has no information about which collection of entities the user record ids are referring to. MongoDB also does not care what fields the entities stored in the collections have. Therefore MongoDB leaves it entirely up to the programmer to ensure that the correct information is being stored in the database. -->
 MongoDB 知道字段所存储的类型，但无法知道实体集合，例如user 的ids 是什么类型的。Mongo DB 也不关心字段中集合里的实体的是什么类型。因此MongoDB 将其整个实体交给类程序来确保信息是被正确存放到数据库的。
 
-<!-- There are both advantages and disadvantages to not having a schema. One of the advantages is the flexibility that schema agnosticism brings: since schema does not need to be defined at the database level, application development may be faster in a certain cases, and easier, with little of effort must be made in defining the schema and its changes in any case. Problems with not having a schema are related to the error-proneness: everything is left up to the programmer. The database itself has no way of checking whether the data in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether the reference type fields refer to existing entities of the right type in general, etc. -->
+<!-- There are both advantages and disadvantages to not having a schema. One of the advantages is the flexibility that schema agnosticism brings: since the schema does not need to be defined at the database level, application development may be faster in certain cases, and easier, with less effort needed in defining and modifying the schema in any case. Problems with not having a schema are related to error-proneness: everything is left up to the programmer. The database itself has no way of checking whether the data in it is <i>honest</i>, i.e. whether all mandatory fields have values, whether the reference type fields refer to existing entities of the right type in general, etc. -->
 这种对schema 无感知的模式有其优势和劣势。其中一个优势是其灵活的schema 不可知性所带来的：由于在数据库层面不需要对数据进行schema 定义，应用开发在某些场景下会加速，而且更简单，只需要很少的努力来定义schema，以及scheme的改变。没有Schema所带来的问题都被延后了：也就是都留给了编程阶段。数据库本身无法判断所存入的数据是否是 <i>合法的</i>。 比如说，是否所有的主键字段都有值，是否引用类型的字段所引用的实体是类型正确的等等。
 
-The relational databases that are the focus of this section, on the other hand, lean heavily on the existence of a schema, and the advantages and disadvantages of schema databases are almost the opposite compared of the non-schema databases.
+<!-- The relational databases that are the focus of this section, on the other hand, lean heavily on the existence of a schema, and the advantages and disadvantages of schema databases are almost the opposite compared of the non-schema databases. -->
 关系型数据库所关注的就是这一部分，换句话说，严重依赖schema 信息，因此其优势和劣势刚好与non-schema 的数据库所相反了。
 
-<!-- The reason why the the previous sections of the course used MongoDB is precisely because of its schema-less nature, which has made it easier to use the database for someone with little knowledge of relational databases. For most of the use cases of this course, I would have chosen the relational database myself. -->
+<!-- The reason why the the previous sections of the course used MongoDB is precisely because of its schema-less nature, which has made it easier to use the database for someone with little knowledge of relational databases. For most of the use cases of this course, I personally would have chosen to use a relational database. -->
 为什么之前的章节用MongoDB ，就是因为它弱schema 的特性，即使不知道关系型数据库的知识，也能使它用起来更简单。本课程的大多数用例，我自己会选择关系型数据库。
 
 ### Application database
@@ -91,7 +91,7 @@ The relational databases that are the focus of this section, on the other hand, 
 <!-- In the theory material of this section, we will be building a Postgres-enabled version from the backend of the notes-storage application, which was built in sections 3 and 4. -->
 在本章的教材中，我们会构建一个 Postgres 开启版本的后台系统，给我们的notes 存储应用，我们在3到4章构建过了。
 
-<!-- Now let's create a suitable directory inside the Heroku application, add a database to it and use the _heroku config_ command to see what is <i>connect string</i>, which is required to connect to the database: -->
+<!-- Now let's create a suitable directory inside the Heroku application, add a database to it and use the _heroku config_ command to get the <i>connect string</i>, which is required to connect to the database:-->
 现在，让我们在Heroku 应用中创建一个合适的文件夹，给他添加一个数据库，并 使用 _heroku config_ 命令 来看看是否连接上了，这对连接到数据库来说是必须的。
 
 ```bash
@@ -109,7 +109,7 @@ DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db
 尤其是使用关系型数据库的时候，直接连接到数据库是十分 重要的。有许多方式可以做到这点，有许多不同的图形操作界面，类似 [pgAdmin](https://www.pgadmin.org/) 。 我们会使用 [psql](https://www.postgresql.org/docs/current/app-psql.html)  命令行工具
 
 
-<!-- The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on connect url of the Heroku application): -->
+<!-- The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on the connection url of the Heroku database): -->
 数据库可以通过 _psql_ 命令进行访问，在Heroku 服务器照如下操作（注意命令 的 参数取决于你的Heroku 应用的 url）
 
 
@@ -145,12 +145,12 @@ CREATE TABLE notes (
 );
 ```
 
-<!-- A few points: column <i>id</i> is defined as a <i>primary key</i>, which means the value of the column must be unique for each row in the table and the value must not be empty. The type for column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for the fact it is an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. Text-worthy column called <i>content</i> is defined in such a way that it must be assigned a value. -->
+<!-- A few points: column <i>id</i> is defined as a <i>primary key</i>, which means the value of the column must be unique for each row in the table and the value must not be empty. The type for this column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. The column named <i>content</i> with type text is defined in such a way that it must be assigned a value. -->
 一些关键点：
 列 <i>id</i> 定义为 <i>primary key</i> ， 也就是说这一列的值对该表每一行来说必须是唯一的，并且不能为空。
 列的类型是 [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL) ，这并不是一个真实的类型，而是一个缩写，实际上它是一个整数型列，Postgres 自动设置为唯一的 ，当创建 一行时，该值就增加。字符型的列叫做 <i>content</i>  ，如此定义，说明它必须赋予一个值。
 
-<!-- Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the deck: -->
+<!-- Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the database: -->
 让我们从命令行看一下当前的情况，首先  _\d_ 命令，告诉我们当前都有哪些表。
 
 ```sql
@@ -185,7 +185,7 @@ Indexes:
 <!-- Therefore the column <i>id</i> has a default value, which is obtained by calling the internal function of Postgres <i>nextval</i>. -->
 因此， 列  <i>id</i> 有一个默认值，通过调用内部的 函数，即Postgres 的 <i>nextval</i> 来获得
 
-<!-- Let's add little content to the table: -->
+<!-- Let's add some content to the table: -->
 让我们向表中添加一些内容：
 
 ```sql
@@ -205,7 +205,7 @@ username=> select * from notes;
 (2 rows)
 ```
 
-<!-- If we try to store data in the database that is not according to the schema, it will not succeed. The value of the mandatory column cannot be missing: -->
+<!-- If we try to store data in the database that is not according to the schema, it will not succeed. The value of a mandatory column cannot be missing: -->
 如果我们尝试将数据存储到数据库，并且不是按照Schema 来的，是不会成功的。主键列的值是不能缺失的：
 
 ```sql
@@ -223,7 +223,7 @@ ERROR: column "important" is of type boolean but expression is of type integer
 LINE 1: ...tent, important) values ('only valid data can be saved', 1); ^
 ```
 
-<!-- Non-existent columns in the schema are not accepted either: -->
+<!-- Columns that don't exist in the schema are not accepted either: -->
 schema中不存在的列也是不允许的：
 
 ```sql
@@ -238,17 +238,17 @@ LINE 1: insert into notes (content, important, value) values ('only ...
 ### Node application using a relational database
 【使用关系型数据库的 Node  应用】
 
-<!-- Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as the development-time dependency and also the following runtime dependencies: -->
+<!-- Let's start the application as usual with the <i>npm init</i> and install <i>nodemon</i> as a development dependency and also the following runtime dependencies: -->
 让我们像原来一样使用 <i>npm init</i> 和 <i>nodemon</i> 作为开发时的依赖，以及如下的运行时依赖：
 
 ```bash
 npm install express dotenv pg sequelize
 ```
 
-<!-- Of these, the latter [sequelize](https://sequelize.org/master/) is the library through we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to the Mongoose we use with MongoDB. -->
+<!-- Of these, the latter [sequelize](https://sequelize.org/master/) is the library through which we use Postgres. Sequelize is a so-called [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) library that allows you to store JavaScript objects in a relational database without using the SQL language itself, similar to Mongoose that we used with MongoDB. -->
 这些 依赖当中，最后的  [sequelize](https://sequelize.org/master/) 是我们用来连接Postgres 的库。Sequelize 也叫做 [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) 库，可以让你将JS 对象存储到关系型数据库中，而不是用SQL语言，类似  Mongoose 之于  Mongo DB。
 
-<!-- Let's test that the connection is successful. Create the file <i>index.js</i> and add the following content: -->
+<!-- Let's test that we can connect successfully. Create the file <i>index.js</i> and add the following content:-->
 让我们测试一下连接是成功的。创建一个 <i>index.js</i> 文件，并添加如下内容 ：
 
 ```js
@@ -277,7 +277,7 @@ const main = async () => {
 main()
 ```
 
-<!-- The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in <i>.env</i> file, whose contents should be something like the following: -->
+<!-- The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in a <i>.env</i> file, the contents should be something like the following: -->
 数据库中的 <i>connect string</i> ， 与 _heroku config_ 命令相关，内容应该类似下面这样，存储到<i>.env</i>文件中：
 
 ```bash
@@ -285,7 +285,7 @@ $ cat .env
 DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
-<!-- Let's try if a connection is successful: -->
+<!-- Let's test for a successful connection: -->
 让我们尝试是否连接成功：
 
 ```bash
@@ -347,7 +347,7 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-<!-- Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we now directly used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query). -->
+<!-- Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we just used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query). -->
 虽然Sequelize 是一个ORM 库，也就是说使用的时候不需要写太多SQL，我们现在使用直连的方式 [direct SQL](https://sequelize.org/master/manual/raw-queries.html) ，使用sequelize 方法 [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query)。
 
 <!-- Since everything seems to be working, let's change the application into a web application. -->
@@ -501,18 +501,18 @@ app.post('/api/notes', async (req, res) => {
 })
 ```
 
-<!-- Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter the entity that defines the values of the columns. -->
+<!-- Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter an object that defines the values of the columns.-->
 创建一个 新的Note，是通过调用模型  <i>Note</i> 的方法 [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) 并传递一个实体，定义了各列的值。
 
-<!-- Instead of the <i>create</i> method, it [would be possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save in a database using first method [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) to create a Model-object from the desired data, and calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it: -->
-不同于 <i>create</i> 方法， 可以 [would be possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance)   使用第一个方法 [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build)  保存想要的数据，并调用  [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) 方法：
+<!-- Instead of the <i>create</i> method, it [is also possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save to a database using the [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) method first to create a Model-object from the desired data, and then calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it: -->
+不同于 <i>create</i> 方法， [同样可以](https://sequelize.org/master/manual/model-instances.html#creating-an-instance)   使用第一个方法 [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build)  保存想要的数据，并调用  [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) 方法：
 
 ```js
 const note = Note.build(req.body)
 await note.save()
 ```
 
-<!-- Calling the <i>build</i> method does not save the object in the database yet, so it is still possible to edit the object before the actually save event: -->
+<!-- Calling the <i>build</i> method does not save the object in the database yet, so it is still possible to edit the object before the actual save event: -->
 调用 <i>build</i> 方法并没有将对象存储到数据库中，所以仍 可能在真正执行保存操作前编辑对象：
 
 ```js
@@ -521,7 +521,7 @@ note.important = true // highlight-line
 await note.save()
 ```
 
-<!-- For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's refrain from it. -->
+<!-- For the use case of the example code, the [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) method is better suited, so let's stick to that. -->
 对样例代码的使用用例来说， [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) 方法更合适，让我们来优化一下。
 
 <!-- If the object being created is not valid, there is an error message as a result. For example, when trying to create a note without content, the operation fails, and the console reveals the reason to be <i>SequelizeValidationError: notNull Violation Note.content cannot be null</i>:    -->
@@ -533,7 +533,7 @@ await note.save()
     at processTicksAndRejections (internal/process/task_queues.js:93:5)
 ```
 
-<!-- Let's add a simple error handling when adding a new note: -->
+<!-- Let's add some simple error handling when adding a new note: -->
 让我们在添加一个新note 时添加一个简单的错误处理：
 
 ```js
@@ -585,9 +585,9 @@ app.post('/api/notes', async (req, res) => {
 
 #### Exercise 13.3.
 
-<!-- On the command-line, create functionality in your application, which prints the blogs in the database, e.g. as follows: -->
+<!-- Create functionality in your application, which prints the blogs in the database using the command-line, e.g. as follows: -->
 
-在命令行中，创建一个函数，能打印出数据库中的blog，如下所示：
+在应用中创建一个函数，能打印出数据库中的blog，如下所示：
 
 ```bash
 $ node cli.js
@@ -671,7 +671,7 @@ app.get('/api/notes/:id', async (req, res) => {
 Executing (default): SELECT "id", "content", "important", "date" FROM "notes" AS "note" WHERE "note". "id" = '1';
 ```
 
-<!-- If no note is found, return the operation <i>null</i>, and in this case the relevant status code is given. -->
+<!-- If no note is found, the operation returns <i>null</i>, and in this case the relevant status code is given. -->
 如果找到了note， 会返回 <i>null</i> ，这个用例中相关的状态码就返回了。
 
 <!-- Modifying the note is done as follows. Only the modification of the <i>important</i> field is supported, since the application's frontend does not need anything else: -->
@@ -690,13 +690,13 @@ app.put('/api/notes/:id', async (req, res) => {
 })
 ```
 
-<!-- The object corresponding to the database row is retrieved from the repository using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row. -->
+<!-- The object corresponding to the database row is retrieved from the database using the <i>findByPk</i> method, the object is modified and the result is saved by calling the <i>save</i> method of the object corresponding to the database row. -->
 与数据库行相关的对象通过 <i>findByPk</i> 方法获取到了，对象的修改和结果的保存通过 <i>save</i>  方法实现了。
 
-<!-- The current code for the application is in its entirety in [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>. -->
+<!-- The current code for the application is in its entirety on [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1), branch <i>part13-1</i>. -->
 当前应用的所有代码，可以在  [GitHub](https://github.com/fullstack-hy/part13-notes/tree/part13-1)  中找到，处于分支  <i>part13-1</i>
 
-### Printing the objects returned by Sequelize to a console
+### Printing the objects returned by Sequelize to the console
 
 <!-- The JavaScript programmer's most important tool is <i>console.log</i>, whose aggressive use gets even the worst bugs under control. Let's add console printing to the single note path: -->
 JavaScript 程序员最重要的工具就是，好好使用可以控制严重的bug。让我们在控制台中打印单个note 的路径：
