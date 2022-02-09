@@ -1082,7 +1082,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 Define the types <i>OccupationalHealthCareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
 ![](../../images/9/40.png)
-hj
+
 Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 
 #### 9.20: patientor, step5
