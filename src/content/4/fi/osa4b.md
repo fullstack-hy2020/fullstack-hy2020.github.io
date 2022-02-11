@@ -9,7 +9,7 @@ lang: fi
 
 Ruvetaan nyt tekemään testejä backendille. Koska backend ei sisällä monimutkaista laskentaa, ei yksittäisiä funktioita testaavia [yksikkötestejä](https://en.wikipedia.org/wiki/Unit_testing) oikeastaan kannata tehdä. Ainoa potentiaalinen yksikkötestattava asia olisi muistiinpanojen metodi _toJSON_. 
 
-Joissain tilanteissa voisi olla mielekästä suorittaa ainakin osa backendin testauksesta siten, että oikea tietokanta eristettäisiin testeistä ja korvattaisiin "valekomponentilla" eli mockilla. Eräs tähän sopiva ratkaisu olisi [mongo-mock](https://github.com/williamkapke/mongo-mock).
+Joissain tilanteissa voisi olla mielekästä suorittaa ainakin osa backendin testauksesta siten, että oikea tietokanta eristettäisiin testeistä ja korvattaisiin "valekomponentilla" eli mockilla. Eräs tähän sopiva ratkaisu olisi [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).
 
 Koska sovelluksemme backend on koodiltaan kuitenkin suhteellisen yksinkertainen, päätämme testata sitä kokonaisuudessaan sen tarjoaman REST API:n tasolta ja siten, että myös testeissä käytetään tietokantaa. Tämän kaltaisia, useita sovelluksen komponentteja yhtä aikaa käyttäviä testejä voi luonnehtia [integraatiotesteiksi](https://en.wikipedia.org/wiki/Integration_testing).
 
@@ -91,11 +91,11 @@ module.exports = {
 Tiedostossa <i>.env</i> on nyt määritelty <i>erikseen</i> sekä sovelluskehitysympäristön että testausympäristön tietokannan osoite:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 
 // highlight-start
-TEST_MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app-test?retryWrites=true
+TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/testNoteApp?retryWrites=true&w=majority
 // highlight-end
 ```
 
@@ -150,15 +150,24 @@ afterAll(() => {
 })
 ```
 
-Testejä suorittaessa saattaa tulla seuraava ilmoitus:
+Testejä suorittaessa tulee seuraava ilmoitus:
 
 ![](../../images/4/8.png)
 
-Jos näin käy, toimitaan [ohjeen](https://mongoosejs.com/docs/jest.html) mukaan ja lisätään projektin hakemiston juureen tiedosto <i>jest.config.js</i> jolla on seuraava sisältö:
+Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
 
-```js
-module.exports = {
-  testEnvironment: 'node'
+Virheilmoituksesta pääsee eroon lisäämällä testien suoritukseen option <i>--forceExit</i>:
+
+```json
+{
+  // ..
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "lint": "eslint .",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
+  },
+  // ...
 }
 ```
 
@@ -263,7 +272,9 @@ const app = require('../app')
 const api = supertest(app)
 // highlight-start
 const Note = require('../models/note')
+// highlight-end
 
+// highlight-start
 const initialNotes = [
   {
     content: 'HTML is easy',
@@ -276,7 +287,9 @@ const initialNotes = [
     important: true,
   },
 ]
+// highlight-end
 
+// highlight-start
 beforeEach(async () => {
   await Note.deleteMany({})
 
@@ -416,14 +429,14 @@ Koodi määrittelee ensin asynkronisen funktion, joka sijoitetaan muuttujaan _ma
 
 ### async/await backendissä
 
-Muutetaan nyt backend käyttämään asyncia ja awaitia. Koska kaikki asynkroniset operaatiot tehdään joka tapauksessa funktioiden sisällä, awaitin käyttämiseen riittää, että muutamme routejen käsittelijät async-funktioiksi.
+Muutetaan seuraavaksi backend käyttämään asyncia ja awaitia. Koska kaikki asynkroniset operaatiot tehdään joka tapauksessa funktioiden sisällä, awaitin käyttämiseen riittää, että muutamme routejen käsittelijät async-funktioiksi.
 
 Kaikkien muistiinpanojen hakemisesta vastaava route muuttuu seuraavasti:
 
 ```js
 notesRouter.get('/', async (request, response) => { 
   const notes = await Note.find({})
-  response.json(notes.map(note => note.toJSON()))
+  response.json(notes)
 })
 ```
 
@@ -447,7 +460,7 @@ test('a valid note can be added ', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(200)
+    .expect(201)
     .expect('Content-Type', /application\/json/)
 
   const response = await api.get('/api/notes')
@@ -461,7 +474,25 @@ test('a valid note can be added ', async () => {
 })
 ```
 
-Kuten odotimme ja toivoimme, menee testi läpi.
+Testi ei itseasiassa mene läpi, sillä olemme vahingossa palauttaneet statuskoodin <i>200 OK</i> uuden muistiinpanon luomisen yhteydessä, parempi statuskoodi on <i>201 CREATED</i>. Muutetaan koodia siten että testi menee läpi: 
+
+```js
+notesRouter.post('/', (request, response, next) => {
+  const body = request.body
+
+  const note = new Note({
+    content: body.content,
+    important: body.important || false,
+    date: new Date(),
+  })
+
+  note.save()
+    .then(savedNote => {
+      response.status(201).json(savedNote) // highlight-line
+    })
+    .catch(error => next(error))
+})
+```
 
 Tehdään myös testi, joka varmistaa, että muistiinpanoa, jolle ei ole asetettu sisältöä, ei talleteta:
 
@@ -550,7 +581,7 @@ beforeEach(async () => {
 test('notes are returned as json', async () => {
   await api
     .get('/api/notes')
-    .expect(200)
+    .expect(201)
     .expect('Content-Type', /application\/json/)
 })
 
@@ -626,7 +657,7 @@ notesRouter.post('/', async (request, response, next) => {
   })
 
   const savedNote = await note.save()
-  response.json(savedNote.toJSON())
+  response.status(201).json(savedNote)
 })
 ```
 
@@ -652,9 +683,9 @@ notesRouter.post('/', async (request, response, next) => {
     date: new Date(),
   })
   // highlight-start
-  try { 
+  try {
     const savedNote = await note.save()
-    response.json(savedNote.toJSON())
+    response.status(201).json(savedNote)
   } catch(exception) {
     next(exception)
   }
@@ -708,18 +739,18 @@ test('a note can be deleted', async () => {
 })
 ```
 
-Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsemisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em>-objektista merkkijonoksi. Tämän seurauksena emme voi suoraan verrata <em>resultNote.body</em>-muuttujaa ja <em>noteToView</em>-muuttujaa. Sen sijaan meidän täytyy ensin suorittaa <em>noteToView</em>-muuttujalle samanlainen JSON-serialisointi ja -parseminen kuin minkä palvelin suorittaa note-objektille.
-
 Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
+
+Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsimisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em>-objektista merkkijonoksi. Tämän takia emme voi suoraan verrata <em>resultNote.body</em>-muuttujaa ja suoraan tietokannasta luettua <em>noteToView</em>-muuttujaa. Sen sijaan meidän täytyy ensin suorittaa <em>noteToView</em>-muuttujalle samanlainen JSON-serialisointi ja -parsiminen kuin minkä palvelin suorittaa note-objektille.
 
 Testit menevät läpi, joten voimme turvallisesti refaktoroida testatut routet käyttämään async/awaitia:
 
 ```js
 notesRouter.get('/:id', async (request, response, next) => {
-  try{
+  try {
     const note = await Note.findById(request.params.id)
     if (note) {
-      response.json(note.toJSON())
+      response.json(note)
     } else {
       response.status(404).end()
     }
@@ -817,20 +848,18 @@ notesRouter.post('/', async (request, response) => {
   })
 
   const savedNote = await note.save()
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 
 notesRouter.get('/:id', async (request, response) => {
   const note = await Note.findById(request.params.id)
   if (note) {
-    response.json(note.toJSON())
+    response.json(note)
   } else {
     response.status(404).end()
   }
 })
 ```
-
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
 
 ### Testin beforeEach-metodin optimointi
 
@@ -931,6 +960,8 @@ beforeEach(async () => {
 })
 ```
 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
+
 </div>
 
 <div class="tasks">
@@ -949,15 +980,25 @@ Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async
 
 Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_testaaminen#test-ymparisto) hieman muutoksia (mm. testausympäristön määrittely), jotta saat järkevästi tehtyä omaa tietokantaa käyttäviä API-tason testejä.
 
-**HUOM 1:** Testejä suorittaessa saatat törmätä seuraavaan varoitukseen:
+**HUOM 1:** Testejä suorittaessa törmät ehkä seuraavaan varoitukseen:
 
 ![](../../images/4/8a.png)
 
-Jos näin käy, toimi [ohjeen](https://mongoosejs.com/docs/jest.html) mukaan ja lisää projektin hakemiston juureen tiedosto <i>jest.config.js</i> jolla on seuraava sisältö:
 
-```js
-module.exports = {
-  testEnvironment: 'node'
+Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
+
+Virheilmoituksesta pääsee eroon lisäämällä testien suoritukseen option <i>--forceExit</i>:
+
+```json
+{
+  // ..
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "lint": "eslint .",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
+  },
+  // ...
 }
 ```
 
@@ -1080,9 +1121,8 @@ describe('when there is initially some notes saved', () => {
       await api
         .post('/api/notes')
         .send(newNote)
-        .expect(200)
+        .expect(201)
         .expect('Content-Type', /application\/json/)
-
 
       const notesAtEnd = await helper.notesInDb()
       expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
@@ -1158,7 +1198,7 @@ Toteuta sovellukseen mahdollisuus yksittäisen blogin poistoon.
 
 Käytä async/awaitia. Noudata operaation HTTP-rajapinnan suhteen [RESTful](/osa3/node_js_ja_express#rest)-käytänteitä.
 
-Saat toteuttaa ominaisuudelle testit jos haluat. Jos et, varmista ominaisuuden toimivuus esim. Postmanilla.
+Toteuttaa ominaisuudelle myös testit.
 
 #### 4.14* blogilistan laajennus, step2
 
@@ -1168,6 +1208,6 @@ Käytä async/awaitia.
 
 Tarvitsemme muokkausta lähinnä <i>likejen</i> lukumäärän päivittämiseen. Toiminnallisuuden voi toteuttaa samaan tapaan kuin muistiinpanon päivittäminen toteutettiin [osassa 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#muut-operaatiot).
 
-Saat toteuttaa ominaisuudelle testit jos haluat. Jos et, varmista ominaisuuden toimivuus esim. Postmanilla.
+Toteuttaa ominaisuudelle myös testit.
 
 </div>

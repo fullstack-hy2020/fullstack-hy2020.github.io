@@ -223,20 +223,20 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.post('/', async (request, response) => {
-  const body = request.body
+  const { username, name, password } = request.body
 
   const saltRounds = 10
-  const passwordHash = await bcrypt.hash(body.password, saltRounds)
+  const passwordHash = await bcrypt.hash(password, saltRounds)
 
   const user = new User({
-    username: body.username,
-    name: body.name,
+    username,
+    name,
     passwordHash,
   })
 
   const savedUser = await user.save()
 
-  response.json(savedUser)
+  response.status(201).json(savedUser)
 })
 
 module.exports = usersRouter
@@ -282,7 +282,7 @@ describe('when there is initially one user at db', () => {
     await api
       .post('/api/users')
       .send(newUser)
-      .expect(200)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.usersInDb()
@@ -335,7 +335,7 @@ describe('when there is initially one user at db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('`username` to be unique')
+    expect(result.body.error).toContain('username must be unique')
 
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
@@ -345,47 +345,44 @@ describe('when there is initially one user at db', () => {
 
 Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, eli uuden ominaisuuden testi kirjoitetaan ennen ominaisuuden ohjelmointia.
 
-Hoidetaan uniikkiuden tarkastaminen Mongoosen validoinnin avulla. Kuten edellisen osan tehtävässä [3.19](/osa3/validointi_ja_es_lint#tehtavat-3-19-3-21) mainittiin, Mongoose ei tarjoa valmista validaattoria kentän uniikkiuden tarkastamiseen. Tilanteeseen ratkaisun tarjoaa npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Suoritetaan asennus:
-
-```bash
-npm install mongoose-unique-validator
-```
-
-Käyttäjän skeemaa tiedostossa <i>models/user.js</i> tulee muuttaa seuraavasti:
+Mongoosen validoinnit eivät tarjoa valmista mahdollisuutta kentän arvon uniikkiuden tarkastamiseen.  Ongelmaan on tuonut ratkaisun npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator), valitettavasti mongoose-unique-validator ei kuitenkaan tällä hetkellä (24.1.2022) toimi mongoosen version 6.x kanssa. Joudumme siis toteuttamaan uniikkiuden tarkastuksen itse kontorollerin koodissa.
 
 ```js
-const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator') // highlight-line
+usersRouter.post('/', async (request, response) => {
+  const { username, name, password } = request.body
 
-const userSchema = mongoose.Schema({
-  username: {
-    type: String,
-    unique: true  // highlight-line
-  },
-  name: String,
-  passwordHash: String,
-  notes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Note'
-    }
-  ],
+// highlight-start
+  const existingUser = await User.findOne({ username })
+  if (existingUser) {
+    return response.status(400).json({
+      error: 'username must be unique'
+    })
+  }
+  // highlight-end
+
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
+  const user = new User({
+    username,
+    name,
+    passwordHash,
+  })
+
+  const savedUser = await user.save()
+
+  response.status(201).json(savedUser)
 })
-
-userSchema.plugin(uniqueValidator) // highlight-line
-
-// ...
 ```
 
 Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
-
 
 Ennen kuin menemme eteenpäin, lisätään sovellukseen alustava versio kaikki käyttäjät palauttavasta käsittelijäfunktiosta:
 
 ```js
 usersRouter.get('/', async (request, response) => {
   const users = await User.find({})
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 })
 ```
 
@@ -422,7 +419,7 @@ notesRouter.post('/', async (request, response, next) => {
   user.notes = user.notes.concat(savedNote._id) //highlight-line
   await user.save()  //highlight-line
 
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 ```
 
@@ -464,7 +461,7 @@ usersRouter.get('/', async (request, response) => {
   const users = await User  // highlight-line
     .find({}).populate('notes') // highlight-line
 
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 })
 ```
 
@@ -481,7 +478,7 @@ usersRouter.get('/', async (request, response) => {
   const users = await User
     .find({}).populate('notes', { content: 1, date: 1 })
 
-  response.json(users.map(u => u.toJSON()))
+  response.json(users)
 });
 ```
 
@@ -496,7 +493,7 @@ notesRouter.get('/', async (request, response) => {
   const notes = await Note
     .find({}).populate('user', { username: 1, name: 1 })
 
-  response.json(notes.map(note => note.toJSON()))
+  response.json(notes)
 });
 ```
 

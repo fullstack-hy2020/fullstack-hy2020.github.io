@@ -141,12 +141,9 @@ In this schema notes would be tightly nested under users and the database would 
 
 The structure and schema of the database is not as self-evident as it was with relational databases. The chosen schema must be one which supports the use cases of the application the best. This is not a simple design decision to make, as all use cases of the applications are not known when the design decision is made.
 
-
 Paradoxically, schema-less databases like Mongo require developers to make far more radical design decisions about data organization at the beginning of the project than relational databases with schemas. On average, relational databases offer a more-or-less suitable way of organizing data for many applications.
 
-
 ### Mongoose schema for users
-
 
 In this case, we make the decision to store the ids of the notes created by the user in the user document. Let's define the model for representing a user in the <i>models/user.js</i> file:
 
@@ -180,7 +177,6 @@ const User = mongoose.model('User', userSchema)
 module.exports = User
 ```
 
-
 The ids of the notes are stored within the user document as an array of Mongo ids. The definition is as follows:
 
 ```js
@@ -190,9 +186,7 @@ The ids of the notes are stored within the user document as an array of Mongo id
 }
 ```
 
-
 The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
-
 
 Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:
 
@@ -214,15 +208,11 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-
 In stark contrast to the conventions of relational databases, <i>references are now stored in both documents</i>: the note references the user who created it, and the user has an array of references to all of the notes created by them.
-
 
 ### Creating users
 
-
 Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plain text passwords in the database!
-
 
 Let's install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package for generating the password hashes:
 
@@ -230,9 +220,7 @@ Let's install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package f
 npm install bcrypt
 ```
 
-
 Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/en/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path.
-
 
 Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
 
@@ -244,7 +232,6 @@ const usersRouter = require('./controllers/users')
 app.use('/api/users', usersRouter)
 ```
 
-
 The contents of the file that defines the router are as follows:
 
 ```js
@@ -253,40 +240,34 @@ const usersRouter = require('express').Router()
 const User = require('../models/user')
 
 usersRouter.post('/', async (request, response) => {
-  const body = request.body
+  const { username, name, password } = request.body
 
   const saltRounds = 10
-  const passwordHash = await bcrypt.hash(body.password, saltRounds)
+  const passwordHash = await bcrypt.hash(password, saltRounds)
 
   const user = new User({
-    username: body.username,
-    name: body.name,
+    username,
+    name,
     passwordHash,
   })
 
   const savedUser = await user.save()
 
-  response.json(savedUser)
+  response.status(201).json(savedUser)
 })
 
 module.exports = usersRouter
 ```
 
-
 The password sent in the request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the _bcrypt.hash_ function.
-
 
 The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
 
-
 Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.
-
 
 The new feature can and should initially be tested manually with a tool like Postman. However testing things manually will quickly become too cumbersome, especially once we implement functionality that enforces usernames to be unique.
 
-
 It takes much less effort to write automated tests, and it will make the development of our application much easier.
-
 
 Our initial tests could look like this:
 
@@ -318,7 +299,7 @@ describe('when there is initially one user in db', () => {
     await api
       .post('/api/users')
       .send(newUser)
-      .expect(200)
+      .expect(201)
       .expect('Content-Type', /application\/json/)
 
     const usersAtEnd = await helper.usersInDb()
@@ -329,7 +310,6 @@ describe('when there is initially one user in db', () => {
   })
 })
 ```
-
 
 The tests use the <i>usersInDb()</i> helper function that we implemented in the <i>tests/test_helper.js</i> file. The function is used to help us verify the state of the database after a user is created:
 
@@ -373,7 +353,7 @@ describe('when there is initially one user in db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('`username` to be unique')
+    expect(result.body.error).toContain('username must be unique')
 
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
@@ -381,45 +361,37 @@ describe('when there is initially one user in db', () => {
 })
 ```
 
-
 The test case obviously will not pass at this point. We are essentially practicing [test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), where tests for new functionality are written before the functionality is implemented.
 
-
-Let's validate the uniqueness of the username with the help of Mongoose validators. As we mentioned in exercise [3.19](/en/part3/validation_and_es_lint#exercises-3-19-3-21), Mongoose does not have a built-in validator for checking the uniqueness of a field. We can find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package. Let's install it:
-
-  //There are few issues with updated mongoose-unique-validator, a recommended version is 2.0.1. Tested various versions before concluding. 
-  //Error with other versions: "User validation failed: _id: Error, expected `_id` to be unique"
-  //Link to the issue: https://github.com/blakehaswell/mongoose-unique-validator/issues/88#issuecomment-429189084
-  
-```bash
-npm install mongoose-unique-validator
-```
-
-
-We must make the following changes to the schema defined in the <i>models/user.js</i> file:
+Mongoose does not have a built-in validator for checking the uniqueness of a field. In principle we could find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package but unfortunately at the time of writing (24th Jan 2022)
+mongoose-unique-validator does not work with Mongoose version 6.x, so we have to implement the uniqueness check by ourselves in the controller:
 
 ```js
-const mongoose = require('mongoose')
-const uniqueValidator = require('mongoose-unique-validator') // highlight-line
+usersRouter.post('/', async (request, response) => {
+  const { username, name, password } = request.body
 
-const userSchema = new mongoose.Schema({
-  username: {
-    type: String,
-    unique: true  // highlight-line
-  },
-  name: String,
-  passwordHash: String,
-  notes: [
-    {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: 'Note'
-    }
-  ],
+// highlight-start
+  const existingUser = await User.findOne({ username })
+  if (existingUser) {
+    return response.status(400).json({
+      error: 'username must be unique'
+    })
+  }
+  // highlight-end
+
+  const saltRounds = 10
+  const passwordHash = await bcrypt.hash(password, saltRounds)
+
+  const user = new User({
+    username,
+    name,
+    passwordHash,
+  })
+
+  const savedUser = await user.save()
+
+  response.status(201).json(savedUser)
 })
-
-userSchema.plugin(uniqueValidator) // highlight-line
-
-// ...
 ```
 
 We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.

@@ -99,7 +99,7 @@ const Note = require('../models/note')
 
 notesRouter.get('/', (request, response) => {
   Note.find({}).then(notes => {
-    response.json(notes.map(note => note.toJSON()))
+    response.json(notes)
   })
 })
 
@@ -107,7 +107,7 @@ notesRouter.get('/:id', (request, response, next) => {
   Note.findById(request.params.id)
     .then(note => {
       if (note) {
-        response.json(note.toJSON())
+        response.json(note)
       } else {
         response.status(404).end()
       }
@@ -126,7 +126,7 @@ notesRouter.post('/', (request, response, next) => {
 
   note.save()
     .then(savedNote => {
-      response.json(savedNote.toJSON())
+      response.json(savedNote)
     })
     .catch(error => next(error))
 })
@@ -149,7 +149,7 @@ notesRouter.put('/:id', (request, response, next) => {
 
   Note.findByIdAndUpdate(request.params.id, note, { new: true })
     .then(updatedNote => {
-      response.json(updatedNote.toJSON())
+      response.json(updatedNote)
     })
     .catch(error => next(error))
 })
@@ -326,6 +326,70 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli komentoa _npm start_.
 
+### Huomio eksporteista
+
+Olemme käyttäneet tässä osassa kahta eri tapaa eksporttaukseen. Esimerkiksi tiedostossa <i>utils/logger.js</i> eksporttaus tapahtuu seuraavasti:
+
+```js
+const info = (...params) => {
+  console.log(...params)
+}
+
+const error = (...params) => {
+  console.error(...params)
+}
+
+// highlight-start
+module.exports = {
+  info, error
+}
+// highlight-end
+```
+
+Tiedosto eksporttaa olion, joka sisältää kenttinään kaksi funktiota. Funktioihin päästään käsiksi kahdella vaihtoehtoisella tavalla. Voidaan joko ottaa käyttöön koko eksportoitava olio, jolloin funktioihin viitataan olion kautta:
+
+```js
+const logger = require('./utils/logger')
+
+logger.info('message')
+
+logger.error('error message')
+```
+
+Toinen vaihoehto on destrukturoida funktiot omiin muuttujiin <i>require</i>-kutsun yhteydessä:
+
+```js
+const { info, error } = require('./utils/logger')
+
+info('message')
+error('error message')
+```
+
+Jälkimäinen tapa voi olla selkeämpi erityisesti jos ollaan kiinnostunut ainoastaan joistain eksportatuista funktioista.
+
+Tiedostossa <i>controller/notes.js</i> eksporttaus taas tapahtuu seuraavasti
+
+```js
+const notesRouter = require('express').Router()
+const Note = require('../models/note')
+
+// ...
+
+module.exports = notesRouter // highlight-line
+```
+
+Tässä tapauksessa exportataan ainoastaan yksi "asia", joten mahdollisia käyttötapojakin on vain yksi:
+
+```js
+const notesRouter = require('./controllers/notes')
+
+// ...
+
+app.use('/api/notes', notesRouter)
+```
+
+Eli eksportoitava asia (tässä tilanteessa router-olio) sijoitetaan muuttujaan ja käytetään sitä sellaisenaan.
+
 </div>
 
 <div class="tasks">
@@ -408,7 +472,7 @@ Olemme laiminlyöneet ikävästi yhtä oleellista ohjelmistokehityksen osa-aluet
 Aloitamme yksikkötestauksesta. Sovelluksemme logiikka on sen verran yksinkertaista, että siinä ei ole juurikaan mielekästä yksikkötestattavaa. Luodaan tiedosto <i>utils/for_testing.js</i> ja määritellään sinne pari yksinkertaista funktiota testattavaksi:
 
 ```js
-const palindrome = (string) => {
+const reverse = (string) => {
   return string
     .split('')
     .reverse()
@@ -424,7 +488,7 @@ const average = (array) => {
 }
 
 module.exports = {
-  palindrome,
+  reverse,
   average,
 }
 ```
@@ -478,28 +542,28 @@ Vaihtoehtoisesti Jest löytää oletuksena asetukset tiedostosta <i>jest.config.
 ```js
 module.exports = {
   testEnvironment: 'node',
-};
+}
 ```
 
-Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>palindrome.test.js</i>, jonka sisältö on seuraava:
+Tehdään testejä varten hakemisto <i>tests</i> ja sinne tiedosto <i>reverse.test.js</i>, jonka sisältö on seuraava:
 
 ```js
-const palindrome = require('../utils/for_testing').palindrome
+const reverse = require('../utils/for_testing').reverse
 
-test('palindrome of a', () => {
-  const result = palindrome('a')
+test('reverse of a', () => {
+  const result = reverse('a')
 
   expect(result).toBe('a')
 })
 
-test('palindrome of react', () => {
-  const result = palindrome('react')
+test('reverse of react', () => {
+  const result = reverse('react')
 
   expect(result).toBe('tcaer')
 })
 
-test('palindrome of saippuakauppias', () => {
-  const result = palindrome('saippuakauppias')
+test('reverse of saippuakauppias', () => {
+  const result = reverse('saippuakauppias')
 
   expect(result).toBe('saippuakauppias')
 })
@@ -525,17 +589,17 @@ module.exports = {
 }
 ```
 
-Testi ottaa ensimmäisellä rivillä käyttöön testattavan funktion sijoittaen sen muuttujaan _palindrome_:
+Testi ottaa ensimmäisellä rivillä käyttöön testattavan funktion sijoittaen sen muuttujaan _reverse_:
 
 ```js
-const palindrome = require('../utils/for_testing').palindrome
+const reverse = require('../utils/for_testing').reverse
 ```
 
 Yksittäiset testitapaukset määritellään funktion _test_ avulla. Ensimmäisenä parametrina on merkkijonomuotoinen testin kuvaus. Toisena parametrina on <i>funktio</i>, joka määrittelee testitapauksen toiminnallisuuden. Esim. toisen testitapauksen toiminnallisuus näyttää seuraavalta:
 
 ```js
 () => {
-  const result = palindrome('react')
+  const result = reverse('react')
 
   expect(result).toBe('tcaer')
 }
@@ -545,15 +609,15 @@ Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> pali
 
 Kuten odotettua, testit menevät läpi:
 
-![](../../images/4/1.png)
+![](../../images/4/1x.png)
 
 Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
 
 Jestin antamat virheilmoitukset ovat hyviä. Rikotaan testi:
 
 ```js
-test('palindrome of react', () => {
-  const result = palindrome('react')
+test('reverse of react', () => {
+  const result = reverse('react')
 
   expect(result).toBe('tkaer')
 })
@@ -561,7 +625,7 @@ test('palindrome of react', () => {
 
 Seurauksena on seuraava virheilmoitus:
 
-![](../../images/4/2e.png)
+![](../../images/4/2x.png)
 
 Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
 
@@ -612,7 +676,7 @@ describe('average', () => {
 
 Describejen avulla yksittäisessä tiedostossa olevat testit voidaan jaotella loogisiin kokonaisuuksiin. Testituloste hyödyntää myös describe-lohkon nimeä:
 
-![](../../images/4/4.png)
+![](../../images/4/4x.png)
 
 Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia, jos haluamme osalle yksittäisen testitiedoston testitapauksista joitain yhteisiä alustus- tai lopetustoimenpiteitä.
 
@@ -689,7 +753,7 @@ describe('total likes', () => {
 })
 ```
 
-Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä](https://raw.githubusercontent.com/FullStack-HY/misc/main/blogs_for_test.md).
+Jos et viitsi itse määritellä testisyötteenä käytettäviä blogeja, saat valmiin listan [täältä](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
 
 Törmäät testien tekemisen yhteydessä varmasti erinäisiin ongelmiin. Pidä mielessä osassa 3 käsitellyt [debuggaukseen](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#node-sovellusten-debuggaaminen) liittyvät asiat. Voit testejäkin suorittaessasi printtailla konsoliin komennolla _console.log_. Myös debuggerin käyttö testejä suorittaessa on mahdollista, ohje on [täällä](https://jestjs.io/docs/troubleshooting).
 

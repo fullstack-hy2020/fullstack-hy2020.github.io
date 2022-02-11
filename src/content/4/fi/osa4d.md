@@ -40,12 +40,12 @@ const loginRouter = require('express').Router()
 const User = require('../models/user')
 
 loginRouter.post('/', async (request, response) => {
-  const body = request.body
+  const { username, password } = request.body
 
-  const user = await User.findOne({ username: body.username })
+  const user = await User.findOne({ username })
   const passwordCorrect = user === null
     ? false
-    : await bcrypt.compare(body.password, user.passwordHash)
+    : await bcrypt.compare(password, user.passwordHash)
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
@@ -264,12 +264,12 @@ Ratkaisuja tähän on kaksi. Yksinkertaisempi on asettaa tokenille voimassaoloai
 
 ```js
 loginRouter.post('/', async (request, response) => {
-  const body = request.body
+  const { username, password } = request.body
 
-  const user = await User.findOne({ username: body.username })
+  const user = await User.findOne({ username })
   const passwordCorrect = user === null
     ? false
-    : await bcrypt.compare(body.password, user.passwordHash)
+    : await bcrypt.compare(password, user.passwordHash)
 
   if (!(user && passwordCorrect)) {
     return response.status(401).json({
@@ -544,6 +544,6 @@ Token-kirjautumisen lisääminen valitettavasti hajotti blogien lisäämiseen li
 
 Tarvitset luultavasti [tätä](https://github.com/visionmedia/supertest/issues/398) tietoa tehtävää tehdessä.
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

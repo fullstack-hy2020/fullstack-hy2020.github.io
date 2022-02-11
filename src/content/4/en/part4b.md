@@ -7,21 +7,15 @@ lang: en
 
 <div class="content">
 
-
 We will now start writing tests for the backend. Since the backend does not contain any complicated logic, it doesn't make sense to write [unit tests](https://en.wikipedia.org/wiki/Unit_testing) for it. The only potential thing we could unit test is the _toJSON_ method that is used for formatting notes.
 
-
-In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongo-mock](https://github.com/williamkapke/mongo-mock).
-
+In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).
 
 Since our application's backend is still relatively simple, we will make the decision to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group, is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing).
 
-
 ### Test environment
 
-
 In one of the previous chapters of the course material, we mentioned that when your backend server is running in Heroku, it is in <i>production</i> mode.
-
 
 The convention in Node is to define the execution mode of the application with the <i>NODE\_ENV</i> environment variable. In our current application, we only load the environment variables defined in the <i>.env</i> file if the application is <i>not</i> in production mode.
 
@@ -109,11 +103,11 @@ module.exports = {
 The <i>.env</i> file has <i>separate variables</i> for the database addresses of the development and test databases:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:secred@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 
 // highlight-start
-TEST_MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-app-test?retryWrites=true
+TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/testNoteApp?retryWrites=true&w=majority
 // highlight-end
 ```
 
@@ -157,7 +151,7 @@ afterAll(() => {
 
 The test imports the Express application from the <i>app.js</i> module and wraps it with the <i>supertest</i> function into a so-called [superagent](https://github.com/visionmedia/superagent) object. This object is assigned to the <i>api</i> variable and tests can use it for making HTTP requests to the backend.
 
-Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format. (If you're not familiar with the RegEx syntax of `/application\/json/`, you can learn more [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).)
+Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200. The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format. (If you're not familiar with the RegEx syntax of <i>/application\/json/</i>, you can learn more [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).)
 
 The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await). The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword. We will write a few tests and then take a closer look at this async/await magic. Do not concern yourself with them for now, just be assured that the example tests work correctly. The async/await syntax is related to the fact that making a request to the API is an <i>asynchronous</i> operation. The [Async/await syntax](https://jestjs.io/docs/asynchronous) can be used for writing asynchronous code with the appearance of synchronous code.
 
@@ -173,14 +167,23 @@ When running your tests you may run across the following console warning:
 
 ![](../../images/4/8.png)
 
+The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when the version 5.x is used. Actually [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
-If this occurs, let's follow the [instructions](https://mongoosejs.com/docs/jest.html) and add a <i>jest.config.js</i> file at the root of the project with the following content:
+One way to get rid of this is to run tests with option <i>--forceExit</i>:
 
-```js
-module.exports = {
-  testEnvironment: 'node'
+```json
+{
+  // ..
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "lint": "eslint .",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
+  },
+  // ...
 }
 ```
+
 Another error you may come across is your test takes longer than the default Jest test timeout of 5000 ms. This can be solved by adding a third parameter to the test function:
   
 ```js
@@ -298,7 +301,9 @@ const app = require('../app')
 const api = supertest(app)
 // highlight-start
 const Note = require('../models/note')
+// highlight-end
 
+// highlight-start
 const initialNotes = [
   {
     content: 'HTML is easy',
@@ -311,7 +316,9 @@ const initialNotes = [
     important: true,
   },
 ]
+// highlight-end
 
+// highlight-start
 beforeEach(async () => {
   await Note.deleteMany({})
 
@@ -353,7 +360,6 @@ Pay special attention to the expect in the latter test. The <code>response.body.
 
 ### Running tests one by one
 
-
 The _npm test_ command executes all of the tests of the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
 
 A better option is to specify the tests that need to be run as parameter of the  <i>npm test</i> command.
@@ -376,7 +382,6 @@ The provided parameter can refer to the name of the test or the describe block. 
 npm test -- -t 'notes'
 ```
 
-<!-- *HUOM*: yksittäisiä testejä suoritettaessa saattaa mongoose-yhteys  jäädä auki, mikäli yhtään yhteyttä hyödyntävää testiä ei ajeta. Ongelma seurannee siitä, että supertest alustaa yhteyden, mutta jest ei suorita afterAll-osiota. -->
 **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
 The problem might be due to the fact that supertest primes the connection, but Jest does not run the afterAll portion of the code. 
 
@@ -394,12 +399,9 @@ Note.find({}).then(notes => {
 })
 ```
 
-
 The _Note.find()_ method returns a promise and we can access the result of the operation by registering a callback function with the _then_ method.
 
-
 All of the code we want to execute once the operation finishes is written in the callback function. If we wanted to make several asynchronous function calls in sequence, the situation would soon become painful. The asynchronous calls would have to be made in the callback. This would likely lead to complicated code and could potentially give birth to a so-called [callback hell](http://callbackhell.com/).
-
 
 By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of _then_ method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:
 
@@ -461,7 +463,7 @@ The code declares that the function assigned to _main_ is asynchronous. After th
 
 ### async/await in the backend
 
-Let's change the backend to async and await. As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions.
+Let's start to change the backend to async and await. As all of the asynchronous operations are currently done inside of a function, it is enough to change the route handler functions into async functions.
 
 The route for fetching all notes gets changed to the following:
 
@@ -506,7 +508,25 @@ test('a valid note can be added', async () => {
 })
 ```
 
-The test passes just like we hoped and expected it to.
+Test actually fails since we are by accident returning the status code <i>200 OK</i> when a new note is created. Let us change that to <i>201 CREATED</i>:
+
+```js
+notesRouter.post('/', (request, response, next) => {
+  const body = request.body
+
+  const note = new Note({
+    content: body.content,
+    important: body.important || false,
+    date: new Date(),
+  })
+
+  note.save()
+    .then(savedNote => {
+      response.status(201).json(savedNote) // highlight-line
+    })
+    .catch(error => next(error))
+})
+```
 
 Let's also write a test that verifies that a note without content will not be saved into the database.
 
@@ -671,7 +691,7 @@ notesRouter.post('/', async (request, response, next) => {
   })
 
   const savedNote = await note.save()
-  response.json(savedNote)
+  response.status(201).json(savedNote)
 })
 ```
 
@@ -697,9 +717,9 @@ notesRouter.post('/', async (request, response, next) => {
     date: new Date(),
   })
   // highlight-start
-  try { 
+  try {
     const savedNote = await note.save()
-    response.json(savedNote)
+    response.status(201).json(savedNote)
   } catch(exception) {
     next(exception)
   }
@@ -753,15 +773,15 @@ test('a note can be deleted', async () => {
 })
 ```
 
-In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em>. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView</em> as the server is performing for the note object.
-
 Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
+
+In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare equality of the <em>resultNote.body</em> and <em>noteToView</em> that is read from the database. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView</em> as the server is performing for the note object.
 
 The tests pass and we can safely refactor the tested routes to use async/await:
 
 ```js
 notesRouter.get('/:id', async (request, response, next) => {
-  try{
+  try {
     const note = await Note.findById(request.params.id)
     if (note) {
       response.json(note)
@@ -889,9 +909,6 @@ notesRouter.get('/:id', async (request, response) => {
 })
 ```
 
-<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>.  -->
-The code for our application can be found from [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
-
 ### Optimizing the beforeEach function
 
 Let's return to writing our tests and take a closer look at the _beforeEach_ function that sets up the tests:
@@ -964,9 +981,7 @@ The solution is quite advanced despite its compact appearance. The _noteObjects_
 
 The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits that every promise for saving a note is finished, meaning that the database has been initialized.
 
-
 > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
-
 
 Promise.all executes the promises it receives in parallel. If the promises need to be executed in a particular order, this will be problematic. In situations like this, the operations can be executed inside of a [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) block, that guarantees a specific execution order.
 
@@ -981,45 +996,46 @@ beforeEach(async () => {
 })
 ```
 
-
 The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!
+
+The code for our application can be found from [github](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 
 </div>
 
 <div class="tasks">
 
-
 ### Exercises 4.8.-4.12.
-
 
 **NB:** the material uses the [toContain](https://jestjs.io/docs/expect#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
 
-
 **Warning:** If you find yourself using async/await and <i>then</i> methods in the same code, it is almost guaranteed that you are doing something wrong. Use one or the other and don't mix the two.
-
 
 #### 4.8: Blog list tests, step1
 
-
 Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> url. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
-
 
 Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.
 
-
 Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use their own separate database.
-
 
 **NB:** When running the tests, you may run into the following warning:
 
 ![](../../images/4/8a.png)
 
+The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when the version 5.x is used. Actually [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
-If this happens, follow the [instructions](https://mongoosejs.com/docs/jest.html) and create a new <i>jest.config.js</i> file at the root of the project with the following contents:
+One way to get rid of this is to run tests with option <i>--forceExit</i>:
 
-```js
-module.exports = {
-  testEnvironment: 'node'
+```json
+{
+  // ..
+  "scripts": {
+    "start": "cross-env NODE_ENV=production node index.js",
+    "dev": "cross-env NODE_ENV=development nodemon index.js",
+    "lint": "eslint .",
+    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
+  },
+  // ...
 }
 ```
 
@@ -1145,7 +1161,6 @@ describe('addition of a new note', () => {
       .expect(201)
       .expect('Content-Type', /application\/json/)
 
-
     const notesAtEnd = await helper.notesInDb()
     expect(notesAtEnd).toHaveLength(helper.initialNotes.length + 1)
 
@@ -1202,7 +1217,6 @@ The test output is grouped according to the <i>describe</i> blocks:
 
 ![](../../images/4/7.png)
 
-
 There is still room for improvement, but it is time to move forward.
 
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
@@ -1214,34 +1228,24 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-
 ### Exercises 4.13.-4.14.
-
 
 #### 4.13 Blog list expansions, step1
 
-
 Implement functionality for deleting a single blog post resource.
-
 
 Use the async/await syntax. Follow [RESTful](/en/part3/node_js_and_express#rest) conventions when defining the HTTP API.
 
-
-Feel free to implement tests for the functionality if you want to. Otherwise verify that the functionality works with Postman or some other tool.
-
+Implement tests for the functionality.
 
 #### 4.14 Blog list expansions, step2
 
-
 Implement functionality for updating the information of an individual blog post.
-
 
 Use async/await.
 
-
 The application mostly needs to update the amount of <i>likes</i> for a blog post. You can implement this functionality the same way that we implemented updating notes in [part 3](/en/part3/saving_data_to_mongo_db#other-operations).
 
-
-Feel free to implement tests for the functionality if you want to. Otherwise verify that the functionality works with Postman or some other tool.
+Implement tests for the functionality.
 
 </div>
