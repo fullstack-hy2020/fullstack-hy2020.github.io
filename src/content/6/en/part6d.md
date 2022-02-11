@@ -7,20 +7,19 @@ lang: en
 
 <div class="content">
 
-So far, we have used our redux store with the help of the [hook](https://react-redux.js.org/api/hooks) api from react redux.
+So far we have used our redux-store with the help of the [hook](https://react-redux.js.org/api/hooks)-api from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
 
-To finish this part we will look into another older and more complicated way to use redux, the [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md) function provided by react redux.
+To finish this part we will look into another older and  more complicated way to use redux, the [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-function provided by react-redux.
 
-In new applications you should absolutely use the hook api, but knowing how to use connect is useful when maintaining older projects using redux.
+<i>**In new applications you should absolutely use the hook-api**</i>, but knowing how to use connect is useful when maintaining older projects using redux.
 
-### Using the connect function to share the redux store to components
+### Using the connect-function to share the redux store to components
 
-Let's modify the <i>Notes</i> component so that, instead of using the hook api (the _useDispatch_ and  _useSelector_ functions), it uses the _connect_ function. 
+Let's modify the <i>Notes</i> component so that instead of using the hook-api (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_-function. 
 We have to modify the following parts of the component:
 
 ````js
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer'
 
@@ -60,7 +59,6 @@ The _connect_ function can be used for transforming "regular" React components s
 Let's first use the connect function to transform our <i>Notes</i> component into a <i>connected component</i>:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer'
 
@@ -110,14 +108,12 @@ const Notes = (props) => { // highlight-line
   )
 }
 
-// highlight-start
 const mapStateToProps = (state) => {
   return {
     notes: state.notes,
     filter: state.filter,
   }
 }
-// highlight-end
 
 const ConnectedNotes = connect(mapStateToProps)(Notes) // highlight-line
 
@@ -134,7 +130,7 @@ The situation that results from using <i>connect</i> with the <i>mapStateToProps
 The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
 
 The _NoteList_ component actually does not need the information about which filter is selected, so we can move the filtering logic elsewhere.
-We just have to give it correctly-filtered notes in the _notes_ prop:
+We just have to give it correctly filtered notes in the _notes_ prop:
 
 ```js
 const Notes = (props) => {
@@ -205,17 +201,9 @@ The second parameter of the _connect_ function can be used for defining [mapDisp
 
 ```js
 const mapStateToProps = (state) => {
-  if ( state.filter === 'ALL' ) {
-    return {
-      notes: state.notes
-    }
-  }
-
   return {
-    notes: (state.filter  === 'IMPORTANT' 
-    ? state.notes.filter(note => note.important)
-    : state.notes.filter(note => !note.important)
-    )
+    notes: state.notes,
+    filter: state.filter,
   }
 }
 
@@ -271,12 +259,11 @@ The resulting situation from using _connect_ can be visualized like this:
 
 ![](../../images/6/25b.png)
 
-In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>TOGGLE\_IMPORTANCE</i>-type actions via its <i>toggleImportanceOf</i> prop.
+In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>notes/toggleImportanceOf</i>-type actions via its <i>toggleImportanceOf</i> prop.
 
-The code for the newly-refactored <i>Notes</i> component looks like this:
+The code for the newly refactored <i>Notes</i> component looks like this:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' 
 import { toggleImportanceOf } from '../reducers/noteReducer'
 
@@ -322,7 +309,6 @@ export default connect(
 Let's also use _connect_ to create new notes:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'
 
@@ -354,14 +340,13 @@ export default connect(
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy/redux-notes/tree/part6-5).
+You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
 
 ### Referencing action creators passed as props
 
 Let's direct our attention to one interesting detail in the <i>NewNote</i> component:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'  // highlight-line
 
@@ -390,9 +375,7 @@ export default connect(
 
 Developers who are new to connect may find it puzzling that there are two versions of the <i>createNote</i> action creator in the component.
 
-
 The function must be referenced as <i>props.createNote</i> through the component's props, as this is the version that <i>contains the automatic dispatch</i> added by _connect_.
-
 
 Due to the way that the action creator is imported:
 
@@ -425,7 +408,7 @@ We can see the difference between the two functions:
 
 The first function is a regular <i>action creator</i> whereas the second function contains the additional dispatch to the store that was added by connect.
 
-Connect is an incredibly useful tool, although it may seem difficult at first due to its level of abstraction.
+Connect is an incredibly useful tool although it may seem difficult at first due to its level of abstraction.
 
 ### Alternative way of using mapDispatchToProps
 
@@ -491,7 +474,7 @@ export default connect(
 ```
 
 
-In this alternative definition, <i>mapDispatchToProps</i> is a function that _connect_ will invoke by passing it the _dispatch_ function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:
+In this alternative definition, <i>mapDispatchToProps</i> is a function that _connect_ will invoke by passing it the _dispatch_-function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:
 
 ```js
 value => {
@@ -585,23 +568,22 @@ Abramov attributes the following [benefits](https://medium.com/@dan_abramov/smar
 
 Abramov mentions the term [high order component](https://reactjs.org/docs/higher-order-components.html). The <i>Notes</i> component is an example of a regular component, whereas the <i>connect</i> method provided by React-Redux is an example of a <i>high order component</i>. Essentially, a high order component is a function that accept a "regular" component as its parameter, that then returns a new "regular" component as its return value.
 
-High order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object-oriented programming.
+High order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object oriented programming.
 
 HOCs are in fact a generalization of the [High Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have actually been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs. 
 
 <!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
-After the React hook api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook-based apis are a lot simpler than HOC-based ones, as is the case with redux as well. 
+After the React hook-api was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook based apis are a lot simpler than HOC based ones, as is the case with redux as well. 
 
 ### Redux and the component state
 
 We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is separated completely from the React components and passed on to Redux, its actions, and its reducers.
 
-What about the _useState_ hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
+What about the _useState_-hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the _useState_ function. One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 
-<!-- Kannattaako reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367) -->
 Should we always use redux? Probably not. Dan Abramov, the developer of redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
-Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html) api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook. 
+Nowadays it is possible to implement redux-like state management without redux by using the React [context](https://reactjs.org/docs/context.html)-api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hook. 
 More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in 
 [part 9](/en/part9).
 
@@ -621,10 +603,9 @@ Modify the <i>Notification</i> component so that it uses the _connect_ function 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
 #### 6.21 anecdotes, the grand finale
 
-You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example, if a user votes twice in three seconds, 
+You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example if a user votes twice in three seconds, 
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
 
-<!-- Korjaa bugi, siten että usean peräkkäisen äänestyksen viimeistä notifikaatiota näytetään aina viiden sekunnin ajan. Korjaus tapahtuu siten, että uuden notifikaation tullessa edellisen notifikaation nollaus tarvittaessa perutaan, ks. funktion setTimeout [dokumentaatio](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout). -->
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. 
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.

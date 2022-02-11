@@ -176,7 +176,6 @@ aiheuttaisi tulostuksen
 Laskurisovelluksemme koodi on seuraavassa. Kaikki koodi on kirjoitettu samaan tiedostoon, joten <i>store</i> on suoraan React-koodin käytettävissä. Tutustumme React/Redux-koodin parempiin strukturointitapoihin myöhemmin.
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
 
@@ -315,7 +314,7 @@ const noteReducer = (state = [], action) => {
 
 Tila on nyt taulukko. <i>NEW\_NOTE</i>-tyyppisen actionin seurauksena tilaan lisätään uusi muistiinpano metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push).
 
-Sovellus näyttää toimivan, mutta määrittelemämme reduceri on huono, se rikkoo Reduxin reducerien [perusolettamusta](https://github.com/reactjs/redux/blob/master/docs/basics/Reducers.md#handling-actions) siitä, että reducerien tulee olla [puhtaita funktioita](https://en.wikipedia.org/wiki/Pure_function).
+Sovellus näyttää toimivan, mutta määrittelemämme reduceri on huono, se rikkoo Reduxin reducerien [perusolettamusta](https://redux.js.org/tutorials/essentials/part-1-overview-concepts#reducers) siitä, että reducerien tulee olla [puhtaita funktioita](https://en.wikipedia.org/wiki/Pure_function).
 
 Puhtaat funktiot ovat sellaisia, että ne <i>eivät aiheuta mitään sivuvaikutuksia</i> ja niiden tulee aina palauttaa sama vastaus samoilla parametreilla kutsuttaessa.
 
@@ -487,7 +486,7 @@ state.map(note =>
 
 Koska reducerilla on nyt suhteellisen hyvät testit, voimme refaktoroida koodia turvallisesti.
 
-Uuden muistiinpanon lisäys luo palautettavan tilan taulukon _concat_-funktiolla. Katsotaan nyt miten voimme toteuttaa saman hyödyntämällä Javascriptin [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) -syntaksia:
+Uuden muistiinpanon lisäys luo palautettavan tilan taulukon _concat_-funktiolla. Katsotaan nyt miten voimme toteuttaa saman hyödyntämällä JavaScriptin [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) -syntaksia:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -544,7 +543,7 @@ console.log(loput)  // tulostuu [3, 4, 5, 6]
 
 Tehdään hieman yksinkertaistettu versio osan 1 unicafe-tehtävästä. Hoidetaan sovelluksen tilan käsittely Reduxin avulla.
 
-Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy/unicafe-redux  olevan projektin.
+Voit ottaa sovelluksesi pohjaksi repositoriossa https://github.com/fullstack-hy2020/unicafe-redux  olevan projektin.
 
 <i>Aloita poistamalla kloonatun sovelluksen git-konfiguraatio ja asentamalla riippuvuudet</i>
 
@@ -647,7 +646,7 @@ Reducerin toteutuksessa kannattaa ottaa mallia ylläolevasta [redux-muistiinpano
 
 Toteuta sitten sovellukseen koko sen varsinainen toiminnallisuus. 
 
-Huomaa, että koska kaikki koodi on tiedostossa <i>index.js</i> joudut uudelleenlataamaan selaimen koodiin tehtävien muutosten jälkeen, sillä React ei automaattisesti huomaa tiedostoon <i>index.js</i> tehtyjä muutoksia.
+Huomaa, että koska kaikki koodi on tiedostossa <i>index.js</i> saatat joutua uudelleenlataamaan selaimen koodiin tehtävien muutosten jälkeen, sillä React ei välttämättä automaattisesti huomaa tiedostoon <i>index.js</i> tehtyjä muutoksia.
 
 </div>
 
@@ -773,11 +772,9 @@ const toggleImportanceOf = (id) => {
 }
 ```
 
-Actioneja luovia funktioita kutsutaan [action creatoreiksi](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
-
+Actioneja luovia funktioita kutsutaan [action creatoreiksi](https://read.reduxbook.com/markdown/part1/04-action-creators.html).
 
 Komponentin <i>App</i> ei tarvitse enää tietää mitään actionien sisäisestä esitystavasta, se saa sopivan actionin kutsumalla creator-funktiota:
-
 
 ```js
 const App = () => {
@@ -813,7 +810,6 @@ Eriytetään komponentti _App_ omaan tiedostoon _App.js_. Tarkastellaan ensin mi
 Tiedosto _index.js_ näyttää seuraavalta
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
 import { createStore } from 'redux'
 import { Provider } from 'react-redux' // highlight-line
@@ -830,7 +826,7 @@ ReactDOM.render(
 )
 ```
 
-Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://github.com/reactjs/react-redux/blob/master/docs/api.md#provider-store)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
+Uutta tässä on se, että sovellus on määritelty react redux -kirjaston tarjoaman [Provider](https://react-redux.js.org/api/provider)-komponentin lapsena ja että sovelluksen käyttämä store on annettu Provider-komponentin attribuutiksi <i>store</i>. 
 
 Action creator -funktioiden määrittely on siirretty reducerin kanssa samaan tiedostoon <i>reducers/noteReducer.js</i> joka näyttää seuraavalta
 
@@ -892,7 +888,6 @@ import { createNote } from './../reducers/noteReducer'
 Komponentin <i>App</i> koodi 
 
 ```js
-import React from 'react'
 import { createNote, toggleImportanceOf } from './reducers/noteReducer' // highlight-line
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
 
@@ -1002,7 +997,6 @@ const importantNotes = useSelector(state => state.filter(note => note.important)
 Eriytetään uuden muistiinpanon luominen omaksi komponentiksi. 
 
 ```js
-import React from 'react'
 import { useDispatch } from 'react-redux' // highlight-line
 import { createNote } from '../reducers/noteReducer' // highlight-line
 
@@ -1032,7 +1026,6 @@ Toisin kuin aiemmin ilman Reduxia tekemässämme React-koodissa, sovelluksen til
 Eriytetään vielä muistiinpanojen lista ja yksittäisen muistiinpanon esittäminen omiksi komponenteikseen (jotka molemmat sijoitetaan tiedostoon <i>Notes.js</i>):
 
 ```js
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer' // highlight-line
 
@@ -1089,7 +1082,7 @@ Yksittäisen muistiinpanon renderöinnistä huolehtiva <i>Note</i> on erittäin 
 
 Palaamme presentational/container-jakoon tarkemmin myöhemmin tässä osassa.
 
-Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-1), branchissa <i>part6-1</i>.
+Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-1), branchissa <i>part6-1</i>.
 
 </div>
 
@@ -1097,7 +1090,7 @@ Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https:
 
 ### Tehtävät 6.3.-6.8.
 
-Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy/redux-anecdotes oleva projekti.
+Toteutetaan nyt versio toisesta ensimmäisen osan anekdoottien äänestyssovelluksesta. Ota ratkaisusi pohjaksi repositoriossa https://github.com/fullstack-hy2020/redux-anecdotes oleva projekti.
 
 Jos kloonaat projektin olemassaolevan git-repositorion sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 
@@ -1146,7 +1139,6 @@ Eriytä anekdoottilistan näyttäminen omaksi komponentikseen nimeltään <i>Ane
 Tämän tehtävän jälkeen komponentin <i>App</i> pitäisi näyttää seuraavalta:
 
 ```js
-import React from 'react'
 import AnecdoteForm from './components/AnecdoteForm'
 import AnecdoteList from './components/AnecdoteList'
 

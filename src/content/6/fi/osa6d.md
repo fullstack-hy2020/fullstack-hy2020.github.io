@@ -11,14 +11,13 @@ Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redu
 
 Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
 
-Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettäessä.
+<i>**Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia**</i>, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettäessä.
 
 ### Redux Storen välittäminen komponentille connect-funktiolla
 
 Muutetaan sovelluksen komponenttia <i>Notes</i>, siten että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktioilla _connect_. Komponentin seuraavat osat tulee siis muuttaa:
 
 ````js
-import React from 'react'
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer'
 
@@ -58,7 +57,6 @@ Funktiota _connect_ käyttämällä "normaaleista" React-komponenteista saadaan 
 Muodostetaan ensin komponentista <i>Notes</i> connectin avulla <i>yhdistetty komponentti</i>:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' // highlight-line
 import { toggleImportanceOf } from '../reducers/noteReducer'
 
@@ -171,7 +169,7 @@ export default ConnectedNotes
 
 ### mapDispatchToProps
 
-Olemme nyt päässeet eroon hookista _useSelector_, mutta <i>Notes</i> käyttää edelleen hookia _useDispatch_ ja sen palauttavaa funktiota _dispatch_:
+Olemme nyt korvanneet hookin _useSelector_, mutta <i>Notes</i> käyttää edelleen hookia _useDispatch_ ja sen palauttavaa funktiota _dispatch_:
 
 ```js
 const Notes = (props) => {
@@ -255,12 +253,11 @@ Connectin aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
 
 ![](../../images/6/25b.png)
 
-eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsin <i>props.notes</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>TOGGLE\_IMPORTANCE</i>-tyyppisiä actioneja.
+eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsin <i>props.notes</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>notes/toggleImportanceOf</i>-tyyppisiä actioneja.
 
 Connectia käyttämään refaktoroitu komponentti <i>Notes</i> on kokonaisuudessaan seuraava:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' 
 import { toggleImportanceOf } from '../reducers/noteReducer'
 
@@ -307,7 +304,6 @@ export default connect(
 Otetaan _connect_ käyttöön myös uuden muistiinpanon luomisessa:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'
 
@@ -338,14 +334,13 @@ export default connect(
 
 Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri <i>null</i>.
 
-Sovelluksen koodi on [githubissa](https://github.com/fullstack-hy/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+Sovelluksen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
 ### Huomio propsina välitettyyn action creatoriin viittaamisesta
 
 Tarkastellaan vielä erästä mielenkiintoista seikkaa komponentista <i>NewNote</i>:
 
 ```js
-import React from 'react'
 import { connect } from 'react-redux' 
 import { createNote } from '../reducers/noteReducer'  // highlight-line
 
