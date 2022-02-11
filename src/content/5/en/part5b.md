@@ -22,8 +22,6 @@ The user can close the login form by clicking the <i>cancel</i> button.
 Let's start by extracting the login form into its own component:
 
 ```js
-import React from 'react'
-
 const LoginForm = ({
    handleSubmit,
    handleUsernameChange,
@@ -203,7 +201,7 @@ We can add any React elements we want between the opening and closing tags of <i
 The code for the <i>Togglable</i> component is shown below:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const Togglable = (props) => {
   const [visible, setVisible] = useState(false)
@@ -255,12 +253,9 @@ Unlike the "normal" props we've seen before, <i>children</i> is automatically ad
 />
 ```
 
-
 Then <i>props.children</i> is an empty array.
 
-
 The <i>Togglable</i> component is reusable and we can use it to add similar visibility toggling functionality to the form that is used for creating new notes.
-
 
 Before we do that, let's extract the form for creating notes into its own component:
 
@@ -299,23 +294,19 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### State of the forms
 
-<!-- Koko sovelluksen tila on nyt sijoitettu komponenttiin _App_.  -->
 The state of the application currently is in the _App_ component.
 
-<!-- Reactin dokumentaatio antaa seuraavan [ohjeen](https://reactjs.org/docs/lifting-state-up.html) tilan sijoittamisesta: -->
 React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
 
-> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+<i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 
-<!-- Jos mietitään lomakkeiden tilaa, eli esimerkiksi uuden muistiinpanon sisältöä sillä hetkellä kun muistiinpanoa ei vielä ole luotu, ei komponentti _App_ oikeastaan tarvitse niitä mihinkään, ja voisimme aivan hyvin siirtää tilan lomakkeisiin liittyvän tilan niitä vastaaviin komponentteihin. -->
 If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not actually need it for anything. 
 We could just as well move the state of the forms to the corresponding components. 
 
-<!-- Muistiinpanosta huolehtiva komponentti muuttuu seuraavasti: -->
 The component for a note changes like so: 
 
 ```js
-import React, {useState} from 'react' 
+import { useState } from 'react' 
 
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('') 
@@ -401,7 +392,7 @@ There are many ways to implement closing the form from the parent component, but
 Let's make the following changes to the <i>App</i> component:
 
 ```js
-import React, { useState, useEffect, useRef } from 'react' // highlight-line
+import { useState, useEffect, useRef } from 'react' // highlight-line
 
 const App = () => {
   // ...
@@ -417,16 +408,14 @@ const App = () => {
 }
 ```
 
-
 The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) is kept throughout re-renders of the component.
-
 
 We also make the following changes to the <i>Togglable</i> component:
 
 ```js
-import React, { useState, useImperativeHandle } from 'react' // highlight-line
+import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = React.forwardRef((props, ref) => { // highlight-line
+const Togglable = forwardRef((props, ref) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -555,15 +544,12 @@ The component must work like the <i>NoteForm</i> component from the [material](/
 
 #### 5.7* Blog list frontend, step7
 
-<!-- Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida näytetäänkö kaikki blogiin liittyvät tiedot. -->
 Let's add a button to each blog, which controls whether all of the details about the blog are shown or not.
 
-<!-- Klikkaamalla nappia sen täydelliset tiedot aukeavat. -->
 Full details of the blog open when the button is clicked.
 
 ![](../../images/5/13ea.png)
 
-<!-- Uusi napin klikkaus pienentää näkymän. -->
 And the details are hidden when the button is clicked again. 
 
 At this point the <i>like</i> button does not need to do anything.
@@ -780,7 +766,8 @@ module.exports = {
           "error", { "before": true, "after": true }
       ],
       "no-console": 0,
-      "react/prop-types": 0
+      "react/prop-types": 0,
+      "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {
@@ -822,7 +809,7 @@ Let us also create a npm script to run the lint:
 
 Component _Togglable_ causes a nasty looking warning <i>Component definition is missing display name</i>: 
 
-![](../../images/5/25ea.png)
+![](../../images/5/25x.png)
 
 The react-devtools also reveals that the component does not have name:
 
@@ -831,7 +818,7 @@ The react-devtools also reveals that the component does not have name:
 Fortunately this is easy to fix
 
 ```js
-import React, { useState, useImperativeHandle } from 'react'
+import { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 
 const Togglable = React.forwardRef((props, ref) => {
@@ -844,6 +831,9 @@ export default Togglable
 ```
 
 You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-7).
+
+Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overriden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage to that:
+ <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
 
 </div>
 

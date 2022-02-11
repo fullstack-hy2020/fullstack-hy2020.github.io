@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kaksi edellistä osaa keskittyivät lähinnä backendin toiminnallisuuteen. Edellisessä osassa backendiin toteutettua käyttäjänhallintaa ei ole tällä hetkellä tuettuna frontendissa millään tavalla.
+Kaksi edellistä osaa keskittyivät lähinnä backendin toiminnallisuuteen. Edellisessä osassa backendiin toteutettua käyttäjänhallintaa ei ole tällä hetkellä tuettuna [osassa 2](/osa2)  kehitetyssä frontendissa millään tavalla.
 
 Frontend näyttää tällä hetkellä olemassaolevat muistiinpanot ja antaa muuttaa niiden tilaa. Uusia muistiinpanoja ei kuitenkaan voi lisätä, sillä osan 4 muutosten myötä backend edellyttää, että lisäyksen mukana on käyttäjän identiteetin varmistava token.
 
@@ -84,7 +84,6 @@ const App = () => {
 }
 
 export default App
-
 ```
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branchissa <i>part5-1</i>.
@@ -116,7 +115,7 @@ export default { login }
 Kirjautumisen käsittelystä huolehtiva metodi voidaan toteuttaa seuraavasti:
 
 ```js
-import loginService from './services/login' 
+import loginService from './services/login' // highlight-line
 
 const App = () => {
   // ...
@@ -452,7 +451,7 @@ Kirjautumisen yhteyteen tehtävä muutos on seuraava:
   }
 ```
 
-Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista (kirjoittamalla konsoliin `window.localStorage`):
+Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista (kirjoittamalla konsoliin _window.localStorage_):
 
 ![](../../images/5/3e.png)
 
@@ -520,7 +519,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 Teemme nyt edellisen osan tehtävissä tehtyä bloglist-backendia käyttävän frontendin. 
 
-Voit ottaa tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy/bloglist-frontend/) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
+Voit ottaa tehtävien pohjaksi [Githubissa](https://github.com/fullstack-hy2020/bloglist-frontend) olevan sovellusrungon. Sovellus olettaa, että backend on käynnissä koneesi portissa 3003.
 
 Lopullisen version palauttaminen riittää. Voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 

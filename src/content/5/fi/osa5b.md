@@ -22,8 +22,6 @@ Napilla <i>cancel</i> käyttäjä saa tarvittaessa suljettua lomakkeen.
 Aloitetaan eristämällä kirjautumislomake omaksi komponentikseen:
 
 ```js
-import React from 'react'
-
 const LoginForm = ({
    handleSubmit,
    handleUsernameChange,
@@ -188,7 +186,7 @@ Komponentin käyttö poikkeaa aiemmin näkemistämme siinä, että käytössä o
 Komponentin koodi on tällainen:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const Togglable = (props) => {
   const [visible, setVisible] = useState(false)
@@ -244,9 +242,7 @@ Komponentti <i>Togglable</i> on uusiokäytettävä, ja voimme käyttää sitä t
 Eristetään ensin muistiinpanojen luominen omaksi komponentiksi
 
 ```js
-import React from 'react'
-
-const NoteForm = ({ onSubmit, handleChange, value}) => {
+const NoteForm = ({ onSubmit, handleChange, value }) => {
   return (
     <div>
       <h2>Create a new note</h2>
@@ -292,7 +288,7 @@ Jos mietitään lomakkeiden tilaa eli esimerkiksi uuden muistiinpanon sisältö�
 Muistiinpanon luomisesta huolehtiva komponentti muuttuu seuraavasti:
 
 ```js
-import React, {useState} from 'react' 
+import { useState } from 'react' 
 
 const NoteForm = ({ createNote }) => {
   const [newNote, setNewNote] = useState('') 
@@ -346,13 +342,19 @@ const App = () => {
       })
   }
   // ...
-  const noteForm = () => (
-    <Togglable buttonLabel='new note'>
-      <NoteForm createNote={addNote} />
-    </Togglable>
-  )
+  return (
+    <div>
+      <h1>Notes</h1>
+      // ...
 
-  // ...
+      <Togglable buttonLabel="new note">
+        <NoteForm createNote={addNote} /> // highlight-line
+      </Togglable>
+
+      // ...
+      <Footer />
+    </div>
+  )
 }
 ```
 
@@ -369,7 +371,7 @@ On useita erilaisia tapoja toteuttaa pääsy komponentin funktioihin sen ulkopuo
 Tehdään komponenttiin <i>App</i> seuraavat muutokset:
 
 ```js
-import React, { useState, useRef } from 'react' // highlight-line
+import { useState, useEffect, useRef } from 'react' // highlight-line
 
 const App = () => {
   // ...
@@ -389,9 +391,9 @@ const App = () => {
 Komponenttia <i>Togglable</i> laajennetaan seuraavasti
 
 ```js
-import React, { useState, useImperativeHandle } from 'react' // highlight-line
+import { useState, useImperativeHandle, forwardRef } from 'react' // highlight-line
 
-const Togglable = React.forwardRef((props, ref) => { // highlight-line
+const Togglable = forwardRef((props, ref) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -738,7 +740,8 @@ module.exports = {
           "error", { "before": true, "after": true }
       ],
       "no-console": 0,
-      "react/prop-types": 0
+      "react/prop-types": 0,
+      "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {
@@ -778,7 +781,7 @@ Tehdään lintausta varten npm-skripti:
 
 Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component definition is missing display name</i>: 
 
-![](../../images/5/25ea.png)
+![](../../images/5/25x.png)
 
 Komponentin "nimettömyys" käy ilmi myös React Development Toolsilla:
 
@@ -787,7 +790,7 @@ Komponentin "nimettömyys" käy ilmi myös React Development Toolsilla:
 Korjaus on onneksi hyvin helppo tehdä:
 
 ```js
-import React, { useState, useImperativeHandle } from 'react'
+import { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 
 const Togglable = React.forwardRef((props, ref) => {
@@ -800,6 +803,8 @@ export default Togglable
 ```
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
+
+Kannattaa huomata, että create-react-appilla on myös [oletusarvoinen ESLint-konfiguraatio](https://www.npmjs.com/package/eslint-config-react-app), jonka korvasimme nyt kokonaan omalla konfiguraatiolla. [Dokumentaatio](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) toteaa, että oletusarvoisen konfiguraation korvaaminen on ok, mutta suosittelee mielummin <i>laajentamaan</i> oletusarvoista konfiguraatiota: <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
 
 </div>
 
