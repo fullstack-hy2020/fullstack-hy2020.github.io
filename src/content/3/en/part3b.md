@@ -125,7 +125,7 @@ If not, the issue can be found by reading heroku logs with command <i>heroku log
 
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server. 
 
->**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
+>**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
 
 The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>.
 
@@ -138,6 +138,30 @@ So far we have been running React code in <i>development mode</i>. In developmen
 When the application is deployed, we must create a [production build](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) or a version of the application which is optimized for production. 
 
 A production build of applications created with <i>create-react-app</i> can be created with command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
+
+**NOTE:** at the time of writing (20th January 2022) create-react-app had a bug that causes the wollowing error _TypeError: MiniCssExtractPlugin is not a constructor_
+
+A possible fix is found from [here](https://github.com/facebook/create-react-app/issues/11930). Add the following to the file <i>package.json</i> 
+
+```json
+{
+  // ...
+  "resolutions": {
+    "mini-css-extract-plugin": "2.4.5"
+  }
+}
+```
+
+and run commands
+
+```
+rm -rf package-lock.json
+rm -rf node_modules
+npm cache clean --force
+npm install
+```
+
+After these _npm run build_ should work.
 
 Let's run this command from the <i>root of the frontend project</i>.
 
@@ -159,7 +183,7 @@ We begin by copying the production build of the frontend to the root of the back
 cp -r build ../notes-backend
 ```
 
-If you are using a Windows computer, you may use either [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) or [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) command instead. Otherwise, simply do a copy and paste.
+If you are using a Windows computer, you may use either [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) or [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) command instead. Otherwise, simply do a copy and paste. 
 
 The backend directory should now look as follows:
 
@@ -230,7 +254,7 @@ Unlike when running the app in a development environment, everything is now in t
 
 After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. 
 
-[The application](https://glacial-ravine-74819.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
+[The application](https://obscure-harbor-49797.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
 
 ![](../../images/3/30ea.png)
 
@@ -274,6 +298,8 @@ Note that the directory paths in the script <i>build:ui</i> depend on the locati
 npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
+Another opstion is the use of [shx](https://www.npmjs.com/package/shx).
+
 ### Proxy
 
 Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work. 
@@ -306,13 +332,13 @@ After a restart, the React development environment will work as a [proxy](https:
 
 Now the frontend is also fine, working with the server both in development- and production mode. 
 
-A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. 
+A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. Building a deployment pipeline is the topic of [part 11](https://fullstackopen.com/en/part11) of this course.
 
 There are multiple ways to achieve this (for example placing both backend and frontend code [to the same repository](https://github.com/mars/heroku-cra-node) ) but we will not go into those now. 
 
 In some situations it may be sensible to deploy the frontend code as its own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack).
 
-Current code of the backend can be found on [Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy/part2-notes/tree/part3-1).
+Current code of the backend can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy/part2-notes/tree/part3-1).
 
 </div>
 
@@ -357,5 +383,7 @@ Generate a production build of your frontend, and add it to the internet applica
 **NB** Make sure the directory <i>build</i> is not gitignored
 
 Also make sure that the frontend still works locally. 
+
+If you have problems to get the app working make sure that your directory structure matches the one of [the example app](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
 </div>

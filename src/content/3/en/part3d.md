@@ -70,7 +70,7 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
 
   note.save()
     .then(savedNote => {
-      response.json(savedNote.toJSON())
+      response.json(savedNote)
     })
     .catch(error => next(error)) // highlight-line
 })
@@ -93,67 +93,30 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-
 When validating an object fails, we return the following default error message from Mongoose:
 
 ![](../../images/3/50.png)
 
-### Promise chaining
+We notice that the backend has now a problem: validations are not done when editing a note.
+The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explains what is the problem, validations are not run by default when <i>findOneAndUpdate</i> is executed.
 
-Many of the route handlers changed the response data into the right format by implicitly calling the _toJSON_ method from _response.json_. For the sake of an example, we can also perform this operation explicitly by calling the _toJSON_ method on the object passed as a parameter to _then_:
+The fix is easy. Let us also reformulate the route code a bit:
 
 ```js
-app.post('/api/notes', (request, response, next) => {
-  // ...
+app.put('/api/notes/:id', (request, response, next) => {
+  const { content, important } = request.body // highlight-line
 
-  note.save()
-    .then(savedNote => {
-      response.json(savedNote.toJSON())
+  Note.findByIdAndUpdate(
+    request.params.id, 
+    { content, important }, // highlight-line
+    { new: true, runValidators: true, context: 'query' } // highlight-line
+  ) 
+    .then(updatedNote => {
+      response.json(updatedNote)
     })
-    .catch(error => next(error)) 
+    .catch(error => next(error))
 })
 ```
-
-We can accomplish the same functionality in a much cleaner way with [promise chaining](https://javascript.info/promise-chaining):
-
-```js
-app.post('/api/notes', (request, response, next) => {
-  // ...
-
-  note
-    .save()
-    // highlight-start
-    .then(savedNote => {
-      return savedNote.toJSON()
-    })
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote)
-    }) 
-    // highlight-end
-    .catch(error => next(error)) 
-})
-```
-
-
-In the first _then_ we receive _savedNote_ object returned by Mongoose and format it. The result of the operation is returned. Then as [we discussed earlier](/en/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), the _then_ method of a promise also returns a promise and we can access the formatted note by registering a new callback function with the _then_ method.
-
-We can clean up our code even more by using the more compact syntax for arrow functions:
-
-```js
-app.post('/api/notes', (request, response, next) => {
-  // ...
-
-  note
-    .save()
-    .then(savedNote => savedNote.toJSON()) // highlight-line
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote)
-    }) 
-    .catch(error => next(error)) 
-})
-```
-
-In this example, Promise chaining does not provide much of a benefit. The situation would change if there were many asynchronous operations that had to be done in sequence. We will not dive further into the topic. In the next part of the course we will learn about the <i>async/await</i> syntax in JavaScript, that will make writing subsequent asynchronous operations a lot easier.
 
 ### Deploying the database backend to production
 
@@ -164,13 +127,13 @@ The environment variables defined in dotenv will only be used when the backend i
 We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
 
 ```bash
-$ heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
 ```
 
 **NB:** if the command causes an error, give the value of MONGODB_URI in apostrophes:
 
 ```bash
-$ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
 The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
@@ -180,7 +143,6 @@ The application should now work. Sometimes things don't go according to plan. If
 For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable, when the code expected it to be in <em>MONGODB\_URI</em>.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
-</div>
 
 </div>
 
@@ -226,7 +188,6 @@ If an HTTP POST request tries to add a name that is already in the phonebook, th
 
 #### 3.21 Deploying the database backend to production
 
-
 Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
 
 Push the latest version to Heroku and verify that everything works there as well.
@@ -237,11 +198,9 @@ Push the latest version to Heroku and verify that everything works there as well
 
 ### Lint
 
-
 Before we move onto the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:
 
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
-
 
 In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
@@ -254,18 +213,15 @@ Let's install ESlint as a development dependency to the backend project with the
 npm install eslint --save-dev
 ```
 
-
 After this we can initialize a default ESlint configuration with the command:
 
 ```bash
 npx eslint --init
 ```
 
-
 We will answer all of the questions:
 
 ![](../../images/3/52be.png)
-
 
 The configuration will be saved in the _.eslintrc.js_ file:
 
@@ -278,7 +234,7 @@ module.exports = {
     },
     'extends': 'eslint:recommended',
     'parserOptions': {
-        'ecmaVersion': 12
+        'ecmaVersion': 'latest'
     },
     'rules': {
         'indent': [
@@ -296,19 +252,10 @@ module.exports = {
         'semi': [
             'error',
             'never'
-        ],
-        'eqeqeq': 'error',
-            'no-trailing-spaces': 'error',
-    'object-curly-spacing': [
-        'error', 'always'
-    ],
-    'arrow-spacing': [
-        'error', { 'before': true, 'after': true }
-    ]
+        ]
     }
 }
 ```
-
 
 Let's immediately change the rule concerning indentation, so that the indentation level is two spaces.
 
@@ -318,7 +265,6 @@ Let's immediately change the rule concerning indentation, so that the indentatio
     2
 ],
 ```
-
 
 Inspecting and validating a file like _index.js_ can be done with the following command:
 
@@ -335,12 +281,11 @@ It is recommended to create a separate _npm script_ for linting:
     "start": "node index.js",
     "dev": "nodemon index.js",
     // ...
-    "lint": "eslint ."
+    "lint": "eslint ." // highlight-line
   },
   // ...
 }
 ```
-
 
 Now the _npm run lint_ command will check every file in the project.
 
@@ -443,7 +388,7 @@ If there is something wrong in your configuration file, the lint plugin can beha
 
 Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
-You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7).
+You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
 </div>
 
 <div class="tasks">

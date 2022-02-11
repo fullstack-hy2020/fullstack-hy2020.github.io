@@ -17,13 +17,13 @@ Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin 
 
 Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti:
 
-![](../../images/3/35.png)
+![](../../images/3/35x.png)
 
 Huomaa, että sovellus ei saa olla samalla käynnissä "normaalisti" konsolista, sillä tällöin sovelluksen käyttämä portti on varattu.
 
 Seuraavassa screenshot, jossa koodi on pysäytetty kesken uuden muistiinpanon lisäyksen:
 
-![](../../images/3/36e.png)
+![](../../images/3/36x.png)
 
 Koodi on pysähtynyt rivillä 63 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
 
@@ -65,7 +65,9 @@ Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin 
 
 ### MongoDB
 
-Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla Tietojenkäsittelytieteen osaston kursseilla on käytetty relaatiotietokantoja. Tällä kurssilla käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database).
+Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla Tietojenkäsittelytieteen osaston kursseilla on käytetty relaatiotietokantoja. Melkein kaikissa tämän kurssin osissa käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database). 
+
+Tärkein syy Mongon käytölle kurssilla on se, että Mongon on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien node-sovellusten tekemiseen.
 
 Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokantoihin on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
@@ -73,50 +75,40 @@ Lue nyt linkitetty [johdanto](https://github.com/fullstack-hy2020/misc/blob/mast
 
 MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuitenkin myös palveluna toimivia Mongoja, joista tämän hetken paras valinta on [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
-Kun käyttäjätili on luotu ja kirjauduttu, Atlas kehottaa luomaan klusterin:
+Kun käyttäjätili on luotu ja kirjauduttu, Aloitetaan valitsemalla kokeiluihin sopiva ilmainen vaihtoehto
 
-![](../../images/3/57.png)
+![](../../images/3/mongo1.png)
 
-Valitaan <i>AWS</i> ja <i>Frankfurt</i> ja luodaan klusteri.
+Valitaan sopiva pilvipalvelu ja konesali, ja luodaan klusteri:
 
-![](../../images/3/58.png)
+![](../../images/3/mongo2.png)
 
-Odotetaan että klusteri on valmiina, mihin menee noin kymmenen minuuttia.
+Odotetaan että klusteri on valmiina, mihin menee noin useita minuutteja.
 
 **HUOM:** Älä jatka eteenpäin ennen kun klusteri on valmis!
 
 Luodaan <i>security</i>-välilehdeltä tietokantakäyttäjätunnus joka on siis eri tunnus kuin se, jonka avulla kirjaudutaan MongoDB Atlasiin:
 
-![](../../images/3/59.png)
+![](../../images/3/mongo3.png)
 
-Annetaan käyttäjälle luku- ja kirjoitusoikeus kaikkiin tietokantoihin:
+Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee käsiksi ja sallitaan yksinkertaisuuden vuoksi yhteydet kaikkialta:
 
-![](../../images/3/60.png)
-
-**HUOM:** Muutamissa tapauksissa uusi käyttäjä ei ole toiminut heti luomisen jälkeen. On saattanut kestää jopa useita minuutteja ennen kuin käyttäjätunnus on ruvennut toimimaan.
-
-Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee käsiksi:
-
-![](../../images/3/61ea.png)
-
-Sallitaan yksinkertaisuuden vuoksi yhteydet kaikkialta:
-
-![](../../images/3/62.png)
+![](../../images/3/mongo4.png)
 
 Lopulta ollaan valmiina ottamaan tietokantayhteys. Klikataan <i>connect</i>:
 
-![](../../images/3/63ea.png)
+![](../../images/3/mongo5.png)
 
 Valitaan <i>Connect your application</i>:
 
-![](../../images/3/64ea.png)
+![](../../images/3/mongo6.png)
 
 Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
 
 Osoite näyttää seuraavalta:
 
 ```bash
-mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/test?retryWrites=true&w=majority
+mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -144,7 +136,7 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0-ostce.mongodb.net/test?retryWrites=true`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
 
 mongoose.connect(url)
 
@@ -178,21 +170,21 @@ Kun koodi suoritetaan komennolla <i>node mongo.js salasana</i> lisää Mongoose 
 
 Voimme tarkastella tietokannan tilaa MongoDB Atlasin hallintanäkymän <i>collections</i>-osasta:
 
-![](../../images/3/65.png)
+![](../../images/3/mongo7.png)
 
-Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>test</i> kokoelmaan (collection) nimeltään <i>notes</i>:
+Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>myFirstDatabase</i> kokoelmaan (collection) nimeltään <i>notes</i>:
 
-![](../../images/3/66a.png)
+![](../../images/3/mongo8.png)
 
-Tuhotaan kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>note-app</i>, joten muutetaan siis tietokanta-URI muotoon
+Tuhotaan oletusarvoisen nimen saanut kanta <i>myFirstDatabase</i>. Päätetään käyttää tietokannasta nimeä <i>noteApp</i>, joten muutetaan tietokanta-URI muotoon
 
 ```bash
-mongodb+srv://fullstack:<PASSWORD>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 ```
 
 Suoritetaan ohjelma uudelleen:
 
-![](../../images/3/68.png)
+![](../../images/3/mongo9.png)
 
 Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>create database</i>, joka mahdollistaa uusien tietokantojen luomisen hallintanäkymän kautta. Kannan luominen etukäteen hallintanäkymässä ei kuitenkaan ole tarpeen, sillä MongoDB Atlas osaa luoda kannan automaattisesti jos sovellus yrittää yhdistää kantaan, jota ei ole vielä olemassa.
 
@@ -369,7 +361,7 @@ const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
 const url =
-  'mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
+  `mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 
 mongoose.connect(url)
 
@@ -512,7 +504,7 @@ npm install dotenv
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+MONGODB_URI=mongodb+srv://fullstack:<pasdsword>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
@@ -523,11 +515,6 @@ Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin 
 **Tiedosto <i>.env</i> tulee heti gitignorata, sillä emme halua julkaista tiedoston sisältöä verkkoon!**
 
 ![](../../images/3/45ae.png)
-
-Kun .env on gitignorattu, ei Heroku saa tarvitsemiaan tietoja GitHubin kautta, vaan ne pitää asettaa itse.
-Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin:
-
-![](../../images/3/herokuConfig.png)
 
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
 
@@ -548,6 +535,18 @@ app.listen(PORT, () => {
 ```
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
+
+Kannattaa huomata että kun .env on gitignorattu, ei Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
+
+Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin:
+
+![](../../images/3/herokuConfig.png)
+
+Toinen vaihtoehto on kertoa ympäristömuuttujan herokulle arvo komentoriviltä
+
+```
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:<pasdsword>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
 
 ### Tietokannan käyttö reittien käsittelijöissä
 
@@ -605,7 +604,7 @@ Todennäköisesti voi olla kannattavaa edetä frontin ja backin integroinnissa t
 
 Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atlasin hallintanäkymästä varsin hyödyllistä. Usein myös suoraan tietokantaa käyttävät Node-apuohjelmat, kuten tiedostoon <i>mongo.js</i> kirjoittamamme koodi auttavat sovelluskehityksen edetessä.
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
 
 </div>
 
@@ -875,7 +874,7 @@ Huomioi operaatioon <em>findByIdAndUpdate</em> liittyen, että oletusarvoisesti 
 
 Backend vaikuttaa toimivan Postmanista ja VS Coden REST Clientistä tehtyjen kokeilujen perusteella. Myös frontend toimii moitteettomasti tietokantaa käyttävän backendin kanssa.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5), branchissa <i>part3-5</i>.
 
 </div>
 

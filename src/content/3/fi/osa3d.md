@@ -63,7 +63,7 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
 
   note.save()
     .then(savedNote => {
-      response.json(savedNote.toJSON())
+      response.json(savedNote)
     })
     .catch(error => next(error)) // highlight-line
 })
@@ -89,61 +89,25 @@ Validoinnin epäonnistuessa palautetaan validaattorin oletusarvoinen virheviesti
 
 ![](../../images/3/50.png)
 
-### Promisejen ketjutus
+Huomaamme kuitenkin että sovelluksessa on pieni ongelma, validaatiota ei suoriteta muistiinpanojen päivityksen yhteydessä. [Dokumentaatio](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) kertoo mistä on kyse, validaatiota ei suoriteta oletusarvoisesti metodin <i>findOneAndUpdate</i> suorituksen yhteydessä.
 
-Useat routejen tapahtumankäsittelijöistä muuttivat palautettavan datan oikeaan formaattiin kutsumalla palautetuille olioille niiden metodia _toJSON_. Esimerkiksi uuden muistiinpanon luomisessa metodia kutsutaan _then_:in parametrina palauttamalle oliolle:
+Korjaus on onneksi helppo. Muotoillaan routea muutenkin hieman siistimmäksi:
 
 ```js
-app.post('/api/notes', (request, response, next) => {
-  // ...
+app.put('/api/notes/:id', (request, response, next) => {
+  const { content, important } = request.body // highlight-line
 
-  note.save()
-    .then(savedNote => {
-      response.json(savedNote.toJSON())
+  Note.findByIdAndUpdate(
+    request.params.id, 
+    { content, important }, // highlight-line
+    { new: true, runValidators: true, context: 'query' } // highlight-line
+  ) 
+    .then(updatedNote => {
+      response.json(updatedNote)
     })
-    .catch(error => next(error)) 
+    .catch(error => next(error))
 })
 ```
-
-Voisimme tehdä saman myös hieman tyylikkäämmin [promiseja ketjuttamalla](https://javascript.info/promise-chaining):
-
-```js
-app.post('/api/notes', (request, response, next) => {
-  // ...
-
-  note
-    .save()
-    // highlight-start
-    .then(savedNote => {
-      return savedNote.toJSON()
-    })
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote)
-    }) 
-    // highlight-end
-    .catch(error => next(error)) 
-})
-```
-
-Eli ensimmäisen _then_:in takaisinkutsussa otamme Mongoosen palauttaman olion _savedNote_ ja formatoimme sen. Operaation tulos palautetaan returnilla. Kuten osassa 2 [todettiin](/osa2/palvelimella_olevan_datan_muokkaaminen#palvelimen-kanssa-tapahtuvan-kommunikoinnin-eristaminen-omaan-moduuliin), promisen then-metodi palauttaa myös promisen. Eli kun palautamme _savedNote.toJSON()_:n takaisinkutsufunktiosta, syntyy promise, jonka arvona on formatoitu muistiinpano. Pääsemme käsiksi arvoon rekisteröimällä _then_-kutsulla uuden tapahtumankäsittelijän.
-
-Selviämme vieläkin tiiviimmällä koodilla käyttämällä nuolifunktion lyhempää muotoa:
-
-```js
-app.post('/api/notes', (request, response, next) => {
-  // ...
-
-  note
-    .save()
-    .then(savedNote => savedNote.toJSON()) // highlight-line
-    .then(savedAndFormattedNote => {
-      response.json(savedAndFormattedNote)
-    }) 
-    .catch(error => next(error)) 
-})
-```
-
-Esimerkkimme tapauksessa promisejen ketjutuksesta ei ole suurta hyötyä. Tilanne alkaa muuttua, jos joudumme tekemään useita peräkkäisiä asynkronisia operaatiota. Emme kuitenkaan mene asiaan sen tarkemmin. Tutustumme seuraavassa osassa JavaScriptin <i>async/await</i>-syntaksiin, jota käyttämällä peräkkäisten asynkronisten operaatioiden tekeminen helpottuu oleellisesti.
 
 ### Tietokantaa käyttävän version vieminen tuotantoon
 
@@ -167,14 +131,13 @@ Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mu
 
 Tietokannan osoite olikin siis jostain syystä määrittelemätön. Komento <i>heroku config</i> paljasti, että olin vahingossa määritellyt ympäristömuuttujan <em>MONGO\_URL</em> kun koodi oletti sen olevan nimeltään <em>MONGODB\_URI</em>.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-6), branchissä <i>part3-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6), branchissä <i>part3-6</i>.
 
 </div>
 
 <div class="tasks">
 
 ### Tehtävät 3.19.-3.21.
-
 #### 3.19: puhelinluettelo ja tietokanta, step7
 
 Laajenna validaatiota siten, että tietokantaan talletettavan nimen on oltava pituudeltaan vähintään kolme merkkiä. 
@@ -197,7 +160,6 @@ Voit näyttää frontendissa käyttäjälle Mongoosen validoinnin oletusarvoisen
 
 ![](../../images/3/56e.png)
 
-
 #### 3.20*: puhelinluettelo ja tietokanta, step8
 
 Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi tallettaa ainoastaan oikeassa muodossa olevia puhelinnumeroita. Puhelinnumeron täytyy olla
@@ -209,7 +171,6 @@ Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi tallett
 Toteuta validoinnin toinen osa [Custom validationina](https://mongoosejs.com/docs/validation.html#custom-validators).
 
 Jos HTTP POST -pyyntö yrittää lisätä virheellistä numeroa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
-
 #### 3.21 tietokantaa käyttävä versio Internetiin
 
 Generoi päivitetystä sovelluksesta "full stack" -versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista, että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <http://localhost:3001>.
@@ -257,7 +218,7 @@ module.exports = {
     },
     'extends': 'eslint:recommended',
     'parserOptions': {
-        'ecmaVersion': 12
+        'ecmaVersion': 'latest'
     },
     'rules': {
         'indent': [
@@ -278,6 +239,7 @@ module.exports = {
         ]
     }
 }
+
 ```
 Muutetaan heti konfiguraatioista sisennystä määrittelevä sääntö siten, että sisennystaso on kaksi välilyöntiä:
 
@@ -304,7 +266,7 @@ Kannattaa ehkä tehdä linttaustakin varten _npm-skripti_:
     "start": "node index.js",
     "dev": "nodemon index.js",
     // ...
-    "lint": "eslint ."
+    "lint": "eslint ." // highlight-line
   },
   // ...
 }
@@ -405,7 +367,7 @@ Jos konfiguraatiossa on jotain vikaa, voi editorin lint-plugin näyttää mitä 
 
 Monissa yrityksissä on tapana määritellä yrityksen laajuiset koodausstandardit ja näiden käyttöä valvova ESLint-konfiguraatio. Pyörää ei kannata välttämättä keksiä uudelleen, ja voi olla hyvä idea ottaa omaan projektiin käyttöön joku jossain muualla hyväksi havaittu konfiguraatio. Viime aikoina monissa projekteissa on omaksuttu AirBnB:n [JavaScript](https://github.com/airbnb/javascript)-tyyliohjeet ottamalla käyttöön firman määrittelemä [ESLint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)-konfiguraatio.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7), branchissa <i>part3-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7), branchissa <i>part3-7</i>.
 
 </div>
 

@@ -71,7 +71,7 @@ Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 
 
 Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus Internetiin. Käytetään seuraavassa vanhaa kunnon [Herokua](https://www.heroku.com).
 
-> <i>Jos et ole koskaan käyttänyt Herokua, löydät käyttöohjeita kurssin [Tietokantasovellus](https://materiaalit.github.io/tsoha-18/viikko1/)-materiaalista ja googlaamalla...</i>
+> <i>Jos et ole koskaan käyttänyt Herokua, löydät käyttöohjeita kurssin [Tietokantasovellus](https://hy-tsoha.github.io/materiaali/osa-3/#sovellus-tuotantoon)-materiaalista ja googlaamalla...</i>
 
 Lisätään backendin projektin juureen tiedosto <i>Procfile</i>, joka kertoo Herokulle, miten sovellus käynnistetään:
 
@@ -119,6 +119,28 @@ Kun sovellus viedään tuotantoon, täytyy siitä tehdä [production build](http
 <i>create-react-app</i>:in avulla tehdyistä sovelluksista saadaan tehtyä tuotantoversio komennolla [_npm run build_](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
 Suoritetaan nyt komento <i>frontendin projektin juuressa</i>.
+
+**HUOM:** tätä kirjoitettaessa (20.1.2022) create-react-app:issa on pieni bugi, ja jos komento aiheuttaa virheilmoituksen _TypeError: MiniCssExtractPlugin is not a constructor_, korjaus ongelmaan löytyy [täältä](https://github.com/facebook/create-react-app/issues/11930), eli lisää tiedostoon <i>package.json</i> 
+
+```json
+{
+  // ...
+  "resolutions": {
+    "mini-css-extract-plugin": "2.4.5"
+  }
+}
+```
+
+ja suorita komennot
+
+```bash
+rm -rf package-lock.json
+rm -rf node_modules
+npm cache clean --force
+npm install
+```
+
+Komennon _npm run build_ pitäisi taas toimia.
 
 Komennon seurauksena syntyy hakemiston <i>build</i> (joka sisältää jo sovelluksen ainoan html-tiedoston <i>index.html</i>) sisään hakemisto <i>static</i>, jonka alle generoituu sovelluksen JavaScript-koodin [minifioitu](<https://en.wikipedia.org/wiki/Minification_(programming)>) versio. Vaikka sovelluksen koodi on kirjoitettu useaan tiedostoon, generoituu kaikki JavaScript yhteen tiedostoon. Samaan tiedostoon tulee  myös kaikkien sovelluksen koodin tarvitsemien riippuvuuksien koodi.
 
@@ -208,7 +230,7 @@ Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löyty
 
 Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paikallisesti, commitoidaan frontendin tuotantoversio backendin repositorioon ja pushataan koodi uudelleen Herokuun.
 
-[Sovellus](https://glacial-ravine-74819.herokuapp.com/) toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
+[Sovellus](https://obscure-harbor-49797.herokuapp.com/) toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
 ![](../../images/3/30ea.png)
 
@@ -274,11 +296,11 @@ Uudelleenkäynnistyksen jälkeen Reactin sovelluskehitysympäristö toimii [prox
 
 Nyt myös frontend on kunnossa. Se toimii sekä sovelluskehitysmoodissa että tuotannossa yhdessä palvelimen kanssa.
 
-Eräs negatiivinen puoli käyttämässämme lähestymistavassa on, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoimista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön.
+Eräs negatiivinen puoli käyttämässämme lähestymistavassa on, että sovelluksen uuden version tuotantoon vieminen edellyttää erillisessä repositoriossa olevan frontendin koodin tuotantoversion generoimista. Tämä taas hankaloittaa automatisoidun [deployment pipelinen](https://martinfowler.com/bliki/DeploymentPipeline.html) toteuttamista. Deployment pipelinellä tarkoitetaan automatisoitua ja hallittua tapaa viedä koodi sovelluskehittäjän koneelta erilaisten testien ja laadunhallinnallisten vaiheiden kautta tuotantoympäristöön. Aiheeseen tutustutaan kurssin [osassa 11](https://fullstackopen.com/osa11).
 
 Tähänkin on useita erilaisia ratkaisuja (esim. sekä frontendin että backendin [sijoittaminen samaan repositorioon](https://github.com/mars/heroku-cra-node)), emme kuitenkaan nyt mene niihin. Myös frontendin koodin deployaaminen omana sovelluksenaan voi joissain tilanteissa olla järkevää. _create-react-app_:in avulla luotujen sovellusten osalta se on [suoraviivaista](https://github.com/mars/create-react-app-buildpack).
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), branchissa <i>part3-3</i>.
 
 Frontendin koodiin tehdyt muutokset ovat [frontendin repositorion](https://github.com/fullstack-hy/part2-notes/tree/part3-1) branchissa <i>part3-1</i>.
 
@@ -325,5 +347,7 @@ Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellu
 **HUOM:** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi?
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
+
+Jotta kaikki toimisi, tulee repositoriosi näyttää hakemisttorakenteen suhteen samalta kuin [esimerkkisovelluksen repositorion](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
 </div>

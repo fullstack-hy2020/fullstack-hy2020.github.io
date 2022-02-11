@@ -14,7 +14,7 @@ In this part our focus shifts towards the backend: that is, towards implementing
 We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.
 
 
-This course material was written with the version <i>v14.8.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+This course material was written with the version <i>16.13.2</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 
 As mentioned in [part 1](/en/part1/java_script), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
@@ -174,7 +174,7 @@ import http from 'http'
 
 These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the language specification. At the time of writing this material, Node does not support ES6 modules, but support for them [is coming](https://nodejs.org/api/esm.html) somewhere down the road.
+However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the language specification. Node supports now also the use of ES6 modules, but since the support is yet [not quite perfect](https://nodejs.org/api/esm.html#modules-ecmascript-modules) we'll stick to CommonJS modules.
 
 CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
 
@@ -212,19 +212,19 @@ let notes = [
   {
     id: 1,
     content: "HTML is easy",
-    date: "2019-05-30T17:30:31.098Z",
+    date: "2022-05-30T17:30:31.098Z",
     important: true
   },
   {
     id: 2,
     content: "Browser can execute only Javascript",
-    date: "2019-05-30T18:39:34.091Z",
+    date: "2022-05-30T18:39:34.091Z",
     important: false
   },
   {
     id: 3,
     content: "GET and POST are the most important methods of HTTP protocol",
-    date: "2019-05-30T19:20:14.298Z",
+    date: "2022-05-30T19:20:14.298Z",
     important: true
   }
 ]
@@ -266,7 +266,7 @@ The dependency is also added to our <i>package.json</i> file:
 {
   // ...
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.2"
   }
 }
 
@@ -281,17 +281,17 @@ The source code for the dependency is installed to the <i>node\_modules</i> dire
 These are in fact the dependencies of the express library, and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
 
-The version 4.17.1. of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+The version 4.17.2. of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
 ```json
-"express": "^4.17.1"
+"express": "^4.17.2"
 ```
 
 
 The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/getting-started/semantic-versioning).
 
 
-The caret in the front of <i>^4.17.1</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.17.1</i>. However, the installed version of express can also be one that has a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
+The caret in the front of <i>^4.17.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.17.2</i>. However, the installed version of express can also be one that has a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
 
 We can update the dependencies of the project with the command:
@@ -422,10 +422,10 @@ The contents of <i>package.json</i> have also changed:
 {
   //...
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.2",
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.15"
   }
 }
 ```
@@ -614,7 +614,7 @@ Let's fix the issue by changing the id parameter from a string into a [number](h
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
+  const id = Number(request.params.id) // highlight-line
   const note = notes.find(note => note.id === id)
   response.json(note)
 })
@@ -683,7 +683,6 @@ app.delete('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 If deleting the resource is successful, meaning that the note exists and it is removed, we respond to the request with the status code [204 no content](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5) and return no data with the response.
 
 
@@ -691,14 +690,13 @@ There's no consensus on what status code should be returned to a DELETE request 
 
 ### Postman
 
-
 So how do we test the delete operation? HTTP GET requests are easy to make from the browser. We could write some JavaScript for testing deletion, but writing test code is not always the best solution in every situation.
 
-Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se). However, instead of curl, we will take a look at using [Postman](https://www.getpostman.com/) for testing the application.
+Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se). However, instead of curl, we will take a look at using [Postman](https://www.postman.com) for testing the application.
 
-Let's install Postman and try it out:
+Let's install the Postman destop client [from here](https://www.postman.com/downloads/)  and try it out:
 
-![](../../images/3/11ea.png)
+![](../../images/3/11x.png)
 
 Using Postman is quite easy in this situation. It's enough to define the url and then select the correct request type (DELETE).
 
@@ -753,56 +751,43 @@ app.post('/api/notes', (request, response) => {
 
 The event handler function can access the data from the <i>body</i> property of the _request_ object.
 
-
 Without the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
-
 
 For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.
 
-
 Before we implement the rest of the application logic, let's verify with Postman that the data is actually received by the server. In addition to defining the URL and request type in Postman, we also have to define the data sent in the <i>body</i>:
 
-![](../../images/3/14ea.png)
-
+![](../../images/3/14x.png)
 
 The application prints the data that we sent in the request to the console:
 
 ![](../../images/3/15e.png)
 
-
 **NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:
 
 ![](../../images/3/16.png)
 
-
 Similarly, it is useful to check the console for making sure that the backend behaves like we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.
-
 
 A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:
 
-![](../../images/3/17e.png)
-
+![](../../images/3/17x.png)
 
 The <i>Content-Type</i> header is set to <i>text/plain</i>:
 
-![](../../images/3/18e.png)
-
+![](../../images/3/18x.png)
 
 The server appears to only receive an empty object:
 
 ![](../../images/3/19.png)
 
-
 The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data, since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.
-
 
 If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:
 
 ![](../../images/3/20eb.png)
 
-
 We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
-
 
 One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. You can also add multiple requests in the same file using `###` separators:
 
@@ -919,10 +904,10 @@ If the data saved in the _body_ variable has the <i>important</i> property, the 
 > To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
 
 
-You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
+You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
 
-The code for the current state of the application is specifically in branch [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
+The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
 ![](../../images/3/21.png)
 
@@ -1003,37 +988,27 @@ Output in browser after GET request:
   
 ![](../../images/3/22e.png)
 
-
-
 Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string. 
-
 
 The application must be started with the command _npm start_.
 
-
 The application must also offer an _npm run dev_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
  
-
-
 #### 3.2: Phonebook backend step2
-
 
 Implement a page at the address <http://localhost:3001/info> that looks roughly like this:
 
-![](../../images/3/23ea.png)
+![](../../images/3/23x.png)
 
 
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
-
 
 #### 3.3: Phonebook backend step3
 
 
 Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be <http://localhost:3001/api/persons/5>
 
-
 If an entry for the given id is not found, the server has to respond with the appropriate status code.
-
 
 #### 3.4: Phonebook backend step4
 
@@ -1162,7 +1137,7 @@ app.use(unknownEndpoint)
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2).
+You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
 
 </div>
 

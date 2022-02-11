@@ -11,7 +11,7 @@ Siirrämme tässä osassa fokuksen backendiin eli palvelimella olevaan toiminnal
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva Googlen [V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v14.8.0</i>. Huolehdi, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v16.13.2</i>. Huolehdi, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Kuten [osassa 1](/osa1/javascriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
@@ -61,13 +61,13 @@ console.log('hello world')
 Voimme suorittaa ohjelman joko "suoraan" nodella, komentorivillä
 
 ```bash
-$ node index.js
+node index.js
 ```
 
 tai [npm-skriptinä](https://docs.npmjs.com/misc/scripts)
 
 ```bash
-$ npm start
+npm start
 ```
 
 npm-skripti <i>start</i> toimii koska määrittelimme sen tiedostoon <i>package.json</i>:
@@ -152,7 +152,7 @@ import http from 'http'
 
 Selaimen puolella käytetään (nykyään) ES6:n moduuleita, eli moduulit määritellään [exportilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) ja otetaan käyttöön [importilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Node.js kuitenkin käyttää ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Node ei toistaiseksi tue ES-moduuleja, mutta tuki on todennäköisesti jossain vaiheessa [tulossa](https://nodejs.org/api/esm.html).
+Node.js kuitenkin käyttää ns. [CommonJS](https://en.wikipedia.org/wiki/CommonJS)-moduuleja. Syy tälle on siinä, että Node-ekosysteemillä oli tarve moduuleihin jo kauan ennen kuin JavaScript tuki moduuleja kielen tasolla. Node tukee myös ES-moduuleja, mutta koska tuki ei ole vielä kaikilta osin [täydellinen](https://nodejs.org/api/esm.html#modules-ecmascript-modules), pitäydymme CommonJS-moduuleissa.
 
 CommonJS-moduulit toimivat melko samaan tapaan kuin ES6-moduulit, ainakin tämän kurssin tarpeiden puitteissa.
 
@@ -165,7 +165,7 @@ const app = http.createServer((request, response) => {
 })
 ```
 
-Koodi luo [http](https://nodejs.org/docs/latest-v8.x/api/http.html)-palvelimen metodilla _createServer_ web-palvelimen, jolle se rekisteröi <i>tapahtumankäsittelijän</i>, joka suoritetaan <i>jokaisen</i> osoitteen http://localhost:3001 alle tulevan HTTP-pyynnön yhteydessä.
+Koodi luo [http](https://nodejs.org/docs/latest-v8.x/api/http.html)-moduulin metodilla _createServer_ web-palvelimen, jolle se rekisteröi <i>tapahtumankäsittelijän</i>, joka suoritetaan <i>jokaisen</i> osoitteen http://localhost:3001 alle tulevan HTTP-pyynnön yhteydessä.
 
 Pyyntöön vastataan statuskoodilla 200, asettamalla <i>Content-Type</i>-headerille arvo <i>text/plain</i> ja asettamalla palautettavan sivun sisällöksi merkkijono <i>Hello World</i>.
 
@@ -187,19 +187,19 @@ let notes = [
   {
     id: 1,
     content: "HTML is easy",
-    date: "2020-01-10T17:30:31.098Z",
+    date: "2022-01-10T17:30:31.098Z",
     important: true
   },
   {
     id: 2,
     content: "Browser can execute only Javascript",
-    date: "2020-01-10T18:39:34.091Z",
+    date: "2022-01-10T18:39:34.091Z",
     important: false
   },
   {
     id: 3,
     content: "GET and POST are the most important methods of HTTP protocol",
-    date: "2020-01-10T19:20:14.298Z",
+    date: "2022-01-10T19:20:14.298Z",
     important: true
   }
 ]
@@ -232,7 +232,7 @@ Nodella tapahtuvaa web-sovellusten ohjelmointia helpottamaan onkin kehitelty use
 Otetaan Express käyttöön määrittelemällä se projektimme riippuvuudeksi komennolla
 
 ```bash
-$ npm install express
+npm install express
 ```
 
 Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
@@ -241,7 +241,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 {
   // ...
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.2"
   }
 }
 
@@ -253,24 +253,24 @@ Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin ju
 
 Kyseessä ovat Expressin riippuvuudet ja niiden riippuvuudet jne. eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
-Projektiin asentui Expressin versio 4.17.1. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
+Projektiin asentui Expressin versio 4.17.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
 
 ```json
-"express": "^4.17.1"
+"express": "^4.17.2"
 ```
   
-npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.17.1</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.17.1</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
+npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.17.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.17.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
 
 Voimme päivittää projektin riippuvuudet komennolla
 
 ```bash
-$ npm update
+npm update
 ```
 
 Jos aloitamme projektin koodaamisen toisella koneella, saamme haettua ajantasaiset, <i>package.json</i>:in määrittelyn kanssa yhteensopivat riippuvuudet komennolla
 
 ```bash
-$ npm install
+npm install
 ```
 
 Jos riippuvuuden <i>major</i>-versionumero ei muutu, uudempien versioiden pitäisi olla [taaksepäin yhteensopivia](https://en.wikipedia.org/wiki/Backward_compatibility), eli jos ohjelmamme käyttäisi tulevaisuudessa esim. Expressin versiota 4.99.175, tässä osassa tehtävän koodin pitäisi edelleen toimia ilman muutoksia. Sen sijaan tulevaisuudessa joskus julkaistava Express 5.0.0 [voi sisältää](https://expressjs.com/en/guide/migrating-5.html) sellaisia muutoksia, että koodimme ei enää toimisi.
@@ -367,7 +367,7 @@ Ongelmaan on ratkaisu nimeltä [nodemon](https://github.com/remy/nodemon):
 Asennetaan nodemon määrittelemällä se <i>kehitysaikaiseksi riippuvuudeksi</i> (development dependency) komennolla:
 
 ```bash
-$ npm install --save-dev nodemon
+npm install --save-dev nodemon
 ```
 
 Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
@@ -376,10 +376,10 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
 {
   //...
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.7"
+    "nodemon": "^2.0.15"
   }
 }
 ```
@@ -393,7 +393,7 @@ Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorit
 Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
 
 ```bash
-$ node_modules/.bin/nodemon index.js
+node_modules/.bin/nodemon index.js
 ```
 
 Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenkäynnistymisen. Kannattaa huomata, että vaikka palvelin uudelleenkäynnistyy automaattisesti, selain täytyy kuitenkin refreshata, sillä toisin kuin Reactin yhteydessä, meillä ei nyt ole eikä tässä skenaariossa (jossa palautamme JSON-muotoista dataa) edes voisikaan olla selainta päivittävää [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) -toiminnallisuutta.
@@ -417,7 +417,7 @@ Skriptissä ei ole tarvetta käyttää nodemonin polusta sen täydellistä muoto
 Voimme nyt käynnistää palvelimen sovelluskehitysmoodissa komennolla
 
 ```bash
-$ npm run dev
+npm run dev
 ```
 
 Toisin kuin skriptejä <i>start</i> tai <i>test</i> suoritettaessa, komennon tulee sisältää myös <i>run</i>.
@@ -532,7 +532,7 @@ Korjataan ongelma muuttamalla parametrina oleva merkkijonomuotoinen id [numeroks
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
-  const id = Number(request.params.id)
+  const id = Number(request.params.id) // highlight-line
   const note = notes.find(note => note.id === id)
   response.json(note)
 })
@@ -596,9 +596,9 @@ HTTP GET -pyyntöjä on helppo testata selaimessa, mutta miten voimme testata po
 
 On olemassa useita backendin testaamista helpottavia työkaluja, eräs näistä on [Postman](https://www.postman.com/), jota käytämme tällä kurssilla.
 
-Asennetaan Postman ja kokeillaan:
+Asennetaan Postmanin desktop sovellus [täältä](https://www.postman.com/downloads/)  ja kokeillaan:
 
-![](../../images/3/11ea.png)
+![](../../images/3/11x.png) 
 
 Postmanin käyttö on tässä tilanteessa suhteellisen yksinkertaista, riittää määritellä url ja valita oikea pyyntötyyppi.
 
@@ -655,7 +655,7 @@ Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin 
 
 Ennen toimintalogiikan viimeistelyä varmistetaan ensin Postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli <i>body</i>:
 
-![](../../images/3/14ea.png)
+![](../../images/3/14x.png)
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
@@ -669,11 +669,11 @@ Konsolista kannattaa seurata myös, reagoiko backend odotetulla tavalla esim. ku
 
 Eräs ongelmanlähde on se, että dataa lähettäessä headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyyppiä ei määritellä oikein:
 
-![](../../images/3/17e.png)
+![](../../images/3/17x.png)
 
 Headerin <i>Content-Type</i> arvoksi asettuu <i>text/plain</i>:
 
-![](../../images/3/18e.png)
+![](../../images/3/18x.png)
 
 Palvelin näyttää vastaanottavan ainoastaan tyhjän olion:
 
@@ -774,9 +774,9 @@ Jos sovelluksen vastaanottamassa muuttujaan _body_ talletetussa datassa on kentt
 
 > Jos ollaan tarkkoja, niin kentän <i>important</i> arvon ollessa <i>false</i>, tulee lausekkeen <em>body.important || false</em> arvoksi oikean puoleinen <i>false</i>...
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1).
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
-Tämän hetken koodi on branchissa [part3-1](https://github.com/FullStack-HY/part3-notes-backend/tree/part3-1):
+Tämän hetken koodi on branchissa [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1):
 
 ![](../../images/3/21.png)
 
@@ -820,8 +820,6 @@ Tee Node-sovellus, joka tarjoaa osoitteessa <http://localhost:3001/api/persons> 
 
 ![](../../images/3/22e.png)
 
-Huomaa, että Noden routejen määrittelyssä merkkijonon <i>api/persons</i> vinoviiva käyttäytyy kuten mikä tahansa muu merkki.
-
 Sovellus pitää pystyä käynnistämään komennolla _npm start_.
 
 Komennolla _npm run dev_ käynnistettäessa sovelluksen tulee käynnistyä uudelleen, kun koodiin tehdään muutoksia.
@@ -830,7 +828,7 @@ Komennolla _npm run dev_ käynnistettäessa sovelluksen tulee käynnistyä uudel
 
 Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
 
-![](../../images/3/23ea.png)
+![](../../images/3/23x.png)
 
 Sivun tulee siis kertoa pyynnön tekohetki sekä se, kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
 
@@ -940,7 +938,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2), branchissa <i>part3-2</i>.
+Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2), branchissa <i>part3-2</i>.
 
 </div>
 
