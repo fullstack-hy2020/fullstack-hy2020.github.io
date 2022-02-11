@@ -15,7 +15,6 @@ It is beneficial to at least be familiar with Class Components to some extent, s
 
 Let's get to know the main features of Class Components by producing yet another very familiar anecdote application. We store the anecdotes in the file <i>db.json</i> using <i>json-server</i>. The contents of the file are lifted from [here](https://github.com/fullstack-hy/misc/blob/master/anecdotes.json).
 
-
 The initial version of the Class Component look like this
 
 ```js
@@ -38,11 +37,7 @@ class App extends React.Component {
 export default App
 ```
 
-
-
 The component now has a [constructor](https://reactjs.org/docs/react-component.html#constructor), in which nothing happens at the moment, and contains the method [render](https://reactjs.org/docs/react-component.html#render). As one might guess, render defines how and what is rendered to the screen.
-
-
 
 Let's define a state for the list of anecdotes and the currently-visible anecdote. In contrast to when using the [useState](https://reactjs.org/docs/hooks-state.html) hook, Class Components only contain one state. So if the state is made up of multiple "parts", they should be stored as properties of the state. The state is initialized in the constructor:
 
@@ -77,15 +72,9 @@ class App extends React.Component {
 }
 ```
 
-
-
 The component state is in the instance variable _this.state_. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently-shown anecdote.
 
-
-
 In Functional components, the right place for fetching data from a server is inside an [effect hook](https://reactjs.org/docs/hooks-effect.html), which is executed when a component renders or less frequently if necessary, e.g. only in combination with the first render.
-
-
 
 The [lifecycle methods](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) of Class Components offer corresponding functionality. The correct place to trigger the fetching of data from a server is inside the lifecycle method [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), which is executed once right after the first time a component renders:
 
@@ -112,15 +101,9 @@ class App extends React.Component {
 }
 ```
 
-
-
 The callback function of the HTTP request updates the component state using the method [setState](https://reactjs.org/docs/react-component.html#setstate). The method only touches the keys that have been defined in the object passed to the method as an argument. The value for the key <i>current</i> remains unchanged.
 
-
-
 Calling the method setState always triggers the rerender of the Class Component, i.e. calling the method _render_.
-
-
 
 We'll finish off the component with the ability to change the shown anecdote. The following is the code for the entire component with the addition highlighted:
 
@@ -165,8 +148,6 @@ class App extends React.Component {
   }
 }
 ```
-
-
 
 For comparison, here is the same application as a Functional component:
 
@@ -213,10 +194,9 @@ When writing fresh code, [there is no rational reason to use Class Components](h
 
 In most applications, we followed the principle by which components were placed in the directory <i>components</i>, reducers were placed in the directory <i>reducers</i>, and the code responsible for communicating with the server was placed in the directory <i>services</i>. This way of organizing fits a smaller application just fine, but as the amount of components increase, better solutions are needed. There is no one correct way to organize a project. The article [The 100% correct way to structure a React app (or why there’s no such thing)](https://medium.com/hackernoon/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) provides some perspective on the issue.
 
-
 ### Frontend and backend in the same repository
 
-During the course, we have created the frontend and backend into separate repositories. This is a very typical approach. However, we did the deployment by [copying](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend) the bundled frontend code into the backend repository. A possibly better approach would have been to deploy the frontend code separately. Especially with applications created using create-react-app it is very straightforward thanks to the included [buildpack](https://github.com/mars/create-react-app-buildpack).
+During the course, we have created the frontend and backend into separate repositories. This is a very typical approach. However, we did the deployment by [copying](/en/part3/deploying_app_to_internet#serving-static-files-from-the-backend) the bundled frontend code into the backend repository. A possibly better approach would have been to deploy the frontend code separately. Especially with applications created using Create React App it is very straightforward thanks to the included [buildpack](https://github.com/mars/create-react-app-buildpack).
 
 Sometimes, there may be a situation where the entire application is to be put into a single repository. In this case, a common approach is to put the <i>package.json</i> and <i>webpack.config.js</i> in the root directory, as well as place the frontend and backend code into their own directories, e.g. <i>client</i> and <i>server</i>.
 
@@ -227,8 +207,6 @@ Sometimes, there may be a situation where the entire application is to be put in
 If there are changes in the state on the server, e.g. when new blogs are added by other users to the bloglist service, the React frontend we implemented during this course will not notice these changes until the page reloads. A similar situation arises when the frontend triggers a time-consuming computation in the backend. How do we reflect the results of the computation to the frontend?
 
 One way is to execute [polling](<https://en.wikipedia.org/wiki/Polling_(computer_science)>) on the frontend, meaning repeated requests to the backend API e.g. using the [setInterval](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setInterval) command.
-
-
 
 A more sophisticated way is to use [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) which allow establishing a two-way communication channel between the browser and the server. In this case, the browser does not need to poll the backend, and instead only has to define callback functions for situations when the server sends data about updating state using a WebSocket.
 
@@ -287,15 +265,11 @@ The Open Web Application Security Project, otherwise known as [OWASP](https://ww
 
 At the top of the list we find <i>injection</i>, which means that e.g. text sent using a form in an application is interpreted completely differently than the software developer had intended. The most famous type of injection is probably the [SQL injection](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work). 
 
-
-
 For example, imagine that the following SQL query is executed in a vulnerable application:
 
 ```js
 let query = "SELECT * FROM Users WHERE name = '" + userName + "';"
 ```
-
-
 
 Now let's assume that a malicious user <i>Arto Hellas</i> would define their name as
 
@@ -303,16 +277,11 @@ Now let's assume that a malicious user <i>Arto Hellas</i> would define their nam
 Arto Hell-as'; DROP TABLE Users; --
 </pre>
 
-
-
 so that the name would contain a single quote <code>'</code>, which is the beginning- and end-character of a SQL-string. As a result of this, two SQL operations would be executed, the second of which would  destroy the database table <i>Users</i>:
 
 ```sql
 SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
 ```
-
-
-
 
 SQL injections are prevented using [parameterized queries](https://security.stackexchange.com/questions/230211/why-are-stored-procedures-and-prepared-statements-the-preferred-modern-methods-f). With them, user input isn't mixed with the SQL query, but the database itself inserts the input values at placeholders in the query (usually <code>?</code>).
 
@@ -320,11 +289,7 @@ SQL injections are prevented using [parameterized queries](https://security.stac
 execute("SELECT * FROM Users WHERE name = ?", [userName])
 ```
 
-
-
 Injection attacks are also possible in NoSQL databases. However, mongoose prevents them by [sanitizing](https://zanon.io/posts/nosql-injection-in-mongodb) the queries. More on the topic can be found e.g. [here](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
-
-
 
 <i>Cross-site scripting (XSS)</i> is an attack where it is possible to inject malicious JavaScript code into a legitimate web application. The malicious code would then be executed in the browser of the victim. If we try to inject the following into e.g. the notes application:
 
@@ -348,81 +313,49 @@ You can check how up to date your dependencies are using the command
 npm outdated --depth 0
 ```
 
-Last year's model answer for the exercises in part 4 already have quite a few outdated dependencies:
+One year old project that is used by the [part 9](/en/part9) of his course already have quite a few outdated dependencies:
 
-![](../../images/7/33ea.png)
+![](../../images/7/33x.png)
 
 The dependencies can be brought up to date by updating the file <i>package.json</i> and running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk. 
 
-<!-- Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin. -->
 The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of dependencies. It compares the version numbers of the dependencies in your application to a list of the version numbers of dependencies containing known security threats in a centralized error database. 
 
-Running _npm audit_ on an exercise from part 4 of last year's course prints a long list of complaints and suggested fixes. 
+Running _npm audit_ on the same project prints a long list of complaints and suggested fixes. 
 Below is a part of the report:
 
 ```js
-$ bloglist-backend npm audit
+$ patientor npm audit
 
-                       === npm audit security report ===
+... many lines removed ...
 
-# Run  npm install --save-dev jest@25.1.0  to resolve 62 vulnerabilities
-SEMVER WARNING: Recommended action is a potentially breaking change
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-config > babel-jest >                 │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+url-parse  <1.5.2
+Severity: moderate
+Open redirect in url-parse - https://github.com/advisories/GHSA-hh27-ffr2-f2jc
+fix available via `npm audit fix`
+node_modules/url-parse
 
+ws  6.0.0 - 6.2.1 || 7.0.0 - 7.4.5
+Severity: moderate
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+fix available via `npm audit fix`
+node_modules/webpack-dev-server/node_modules/ws
+node_modules/ws
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-config > babel-jest >   │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+120 vulnerabilities (102 moderate, 16 high, 2 critical)
 
+To address issues that do not require attention, run:
+  npm audit fix
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-runtime > jest-config > │
-│               │ babel-jest > babel-plugin-istanbul > test-exclude >          │
-│               │ micromatch > braces                                          │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
-
-...
-
-
-found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 scanned packages
-  run `npm audit fix` to fix 354 of them.
-  62 vulnerabilities require semver-major dependency updates.
+To address all issues (including breaking changes), run:
+  npm audit fix --force
 ```
 
-<!-- Reuilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_: -->
-After only one year, the code is full of small security threats. Luckily, there is only 1 critical threat. 
-Let's run _npm audit fix_ as the report suggests:
+After only one year, the code is full of small security threats. Luckily, there are only 2 critical threats.  Let's run _npm audit fix_ as the report suggests:
 
 ```js
-$ bloglist-backend npm audit fix
+$ npm audit fix
 
 + mongoose@5.9.1
 added 19 packages from 8 contributors, removed 8 packages and updated 15 packages in 7.325s
@@ -431,26 +364,19 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
   (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
 ```
 
-<!-- Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se: -->
-62 threats remain because, by default, _audit fix_  does not update dependencies if their <i>major</i> version number has increased. 
-Updating these dependencies could lead to the whole application breaking down. The remaining threats are caused by the testing dependency jest. Our application has the version 23.6.0 when the secure version is 25.0.1. 
-As jest is a development dependency, the threat is actually nonexistent, but let's update it just to be safe:
+62 threats remain because, by default, _audit fix_  does not update dependencies if their <i>major</i> version number has increased.  Updating these dependencies could lead to the whole application breaking down. 
+
+The source for critical bug is the library [immer](https://github.com/immerjs/immer)
 
 ```js
-npm install --save-dev jest@25.1.0 
+immer  <9.0.6
+Severity: critical
+Prototype Pollution in immer - https://github.com/advisories/GHSA-33f9-j839-rf8h
+fix available via `npm audit fix --force`
+Will install react-scripts@5.0.0, which is a breaking change
 ```
 
-<!-- Päivityksen jälkeen tilanne näyttää hyvältä -->
-After the update, the situation looks good:
-
-```js
- $ blogs-backend npm audit
-
-                       === npm audit security report ===
-
-found 0 vulnerabilities
- in 1204443 scanned packages
-```                                                                    
+Running _npm audit fix --force_ would upgrade the library versin but would also upgrade the library _react-scripts_ and that would potetially break down the development environment. So we will leave the library upgrades for later...
 
 One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token-based authentication we have been using is fairly robust, if the application is being used on the traffic-encrypting HTTPS protocol. When implementing access control, one should e.g. remember to not only check a user's identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.
 
@@ -492,7 +418,7 @@ Lately, people have started using the term [progressive web app](https://develop
 
 In short, we are talking about web applications working as well as possible on every platform taking advantage of the best parts of those platforms. The smaller screen of mobile devices must not hamper the usability of the application. PWAs should also work flawlessly in offline-mode or with a slow internet connection. On mobile devices, they must be installable just like any other application. All the network traffic in a PWA should be encrypted.
 
-Applications created using create-react-app are [progressive](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) by default. If the application uses data from a server, making it progressive takes work. The offline functionality is usually implemented with the help of [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
+Applications created using Create React App are [progressive](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) by default. If the application uses data from a server, making it progressive takes work. The offline functionality is usually implemented with the help of [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
 
 #### Microservice architecture
 
@@ -573,7 +499,6 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-<!-- Hipsterien suurin into työkalukehitykseen näytti pysähtyneen webpackin vallattua markkinat. Pari vuotta sitten markkinoille ilmestyi uusi tulokas [Parcel](https://parceljs.org), joka markkinoi olevansa yksinkertainen, sitähän Webpack ei missään nimessä ole, ja paljon nopeampi kuin Webpack. Lupaavan alun jälkeen Parcel ei kuitenkaan ole jatkanut nostettaan, ja vaikuttaa että siitä ei kuitenkaan ole Webpackin tappajaksi. -->
 Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack absolutely is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
 
 Another notable mention is the [Rome](https://rome.tools/) library, which aspires to be an all-encompassing toolchain to unify linter, compiler, bundler, and more. It is currently under heavy development since the initial commit earlier this year on Feb 27, but the outlook sure seems promising.

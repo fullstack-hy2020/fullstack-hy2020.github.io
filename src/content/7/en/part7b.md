@@ -9,7 +9,6 @@ lang: en
 
 The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/en/part7/custom_hooks#exercises-7-4-7-8).
 
-
 This part also contains a [series of exercises](/en/part7/exercises_extending_the_bloglist) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned.
 
 ### Hooks
@@ -18,10 +17,9 @@ React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-refere
 
 In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook which allows for components to provide their functions to other components.
 
-Within the last year many React libraries have begun to offer hook-based apis. [In part 6](/en/part6/flux_architecture_and_redux)
-we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook-based api is a lot easier to use than its older, still available, [connect](/en/part6/connect) api.
+Within the last couple of years many React libraries have begun to offer hook-based apis. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook-based api is a lot easier to use than its older, still available, [connect](/en/part6/connect) API.
 
-The [React-router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based. Its hooks can be used to access url parameters and the history object, which allows for manipulating the browser url programmatically.
+The [React Router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based. Its hooks can be used to access url parameters and the _navigation_ object, which allows for manipulating the browser url programmatically.
 
 As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
@@ -51,7 +49,7 @@ Custom hooks are regular JavaScript functions that can use any other hooks, as l
 We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling) that can have its value incremented, decremented, or reset. The code of the application is as follows:
 
 ```js  
-import React, { useState } from 'react'
+import { useState } from 'react'
 const App = (props) => {
   const [counter, setCounter] = useState(0)
 
@@ -268,7 +266,6 @@ const person = {
 <Greeting {...person} />
 ```
 
-
 The application gets simplified into the following format:
 
 ```js
@@ -297,9 +294,7 @@ const App = () => {
 }
 ```
 
-
 Dealing with forms is greatly simplified when the unpleasant nitty-gritty details related to synchronizing the state of the form is encapsulated inside of our custom hook.
-
 
 Custom hooks are clearly not only a tool for reuse, they also provide a better way for dividing our code into smaller modular parts.
 
@@ -315,7 +310,6 @@ The internet is starting to fill up with more and more helpful material related 
 
 <div class="tasks">
 
-
 ### Exercises 7.4.-7.8.
 
 We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router). 
@@ -325,7 +319,6 @@ We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-
 Simplify the anecdote creation form of your application with the _useField_ custom hook we defined earlier.
 
 One natural place to save the custom hooks of your application is in the <i>/src/hooks/index.js</i> file.
-
 
 If you use the [named export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export#Description) instead of the default export:
 
@@ -352,7 +345,6 @@ export const useAnotherHook = () => { // highlight-line
 }
 ```
 
-
 Then [importing](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) happens in the following way:
 
 ```js
@@ -364,7 +356,6 @@ const App = () => {
   // ...
 }
 ```
-
 
 #### 7.5: anecdotes and hooks step2
 
@@ -392,7 +383,6 @@ The reason for this warning is that after making the changes to your application
 <input {...content}/>
 ```
 
-
 Essentially, is the same as this:
 
 ```js
@@ -404,9 +394,7 @@ Essentially, is the same as this:
 />
 ```
 
-
 The <i>input</i> element should not be given a <i>reset</i> attribute.
-
 
 One simple fix would be to not use the spread syntax and write all of the forms like this:
 
@@ -418,14 +406,13 @@ One simple fix would be to not use the spread syntax and write all of the forms 
 />
 ```
 
-
 If we were to do this, we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
 
 #### 7.7: country hook
 
 Let's return to the exercises [2.12-14](/en/part2/getting_data_from_server#exercises-2-11-2-14).
 
-Use the code from https://github.com/fullstack-hy/country-hook as your starting point.
+Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point.
 
 The application can be used to search for a country's details from the https://restcountries.com/ interface. If a country is found, the details of the country are displayed:
 
@@ -437,7 +424,7 @@ If no country is found, a message is displayed to the user:
 
 The application is otherwise complete, but in this exercise you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
 
-Use the api endpoint [full name (v2)](https://restcountries.com/#api-endpoints-v2-full-name) to fetch a country's details in a _useEffect_ hook within your custom hook.
+Use the api endpoint [full name](https://restcountries.com/#api-endpoints-v3-full-name) to fetch a country's details in a _useEffect_ hook within your custom hook.
 
 Note that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed.
 
@@ -481,7 +468,7 @@ We notice that the code is in no way specific to the fact that our application d
 
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 
-You can do the exercise for the project found in the https://github.com/fullstack-hy/ultimate-hooks repository. The <i>App</i> component for the project is the following:
+You can do the exercise for the project found in the https://github.com/fullstack-hy2020/ultimate-hooks repository. The <i>App</i> component for the project is the following:
 
 ```js
 const App = () => {

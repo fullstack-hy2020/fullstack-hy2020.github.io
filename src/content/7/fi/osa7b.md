@@ -18,10 +18,10 @@ React tarjoaa yhteensä 10 erilaista [valmista hookia](https://reactjs.org/docs/
 Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia
 [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle.
 
-Viimeisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
+Muutaman edellisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
 käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva [connect](/osa6/connect)-api.
 
-Myös edellisessä [luvussa](/osa7/react_router/) käsitellyn [react-routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä history-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
+Myös edellisessä [luvussa](/osa7/react_router/) käsitellyn [React Routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä _navigation_-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
 
 Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  mainittiin, hookit eivät ole mitä tahansa funktiota, niitä on käytettävä tiettyjä [sääntöjä](https://reactjs.org/docs/hooks-rules.html) noudattaen. Seuraavassa vielä hookien käytön säännöt suoraan Reactin dokumentaatiosta kopioituna:
 
@@ -47,7 +47,7 @@ Custom-hookit ovat tavallisia JavaScript-funktioita, jotka voivat kutsua mitä t
 Teimme [osassa 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasittely) laskurin, jonka arvoa voi kasvattaa, vähentää ja nollata. Sovelluksen koodi on seuraava
 
 ```js  
-import React, { useState } from 'react'
+import { useState } from 'react'
 const App = (props) => {
   const [counter, setCounter] = useState(0)
 
@@ -362,7 +362,7 @@ Ei välitetä virheestä vielä tässä tehtävässä.
 
 Jos ratkaisusi ei aiheuttanut warningia, ei sinun tarvitse tehdä tässä tehtävässä mitään.
 
-Muussa tapauksessa tee sovellukseen korjaus, joka poistaa varoituksen `Invalid value for prop reset' on <input> tag`. 
+Muussa tapauksessa tee sovellukseen korjaus, joka poistaa varoituksen _Invalid value for prop reset' on &lt;input&gt; tag_. 
 
 Warningin syynä on siis se, että edellisen tehtävän laajennuksen jälkeen seuraava
 
@@ -395,11 +395,11 @@ Yksinkertainen korjaus olisi tietysti olla käyttämättä spread-syntaksia ja k
 
 Tällöin menettäisimme suurelta osin <i>useField</i>-hookin edut. Eli keksi tähän tehtävään spread-syntaksia edelleen käyttävä helppokäyttöinen ratkaisu ongelman kiertämiseen.
 
-#### 7.7*: country hook
+#### 7.7: country hook
 
 Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hakeminen#tehtavat-2-11-2-14) tunnelmiin.
 
-Ota pohjaksi repositoriossa https://github.com/fullstack-hy/country-hook oleva koodi. 
+Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi. 
 
 Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.com/ rajapinnasta. Jos maa löytyy, näytetään maan perustiedot
 
@@ -411,11 +411,11 @@ jos maata ei löydy, kerrotaan siitä käyttäjälle
 
 Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä toteuttamaan custom hookin _useCountry_, jonka avulla haet hookin parametrina saaman nimisen maan tiedot.
 
-Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name(V2)](https://restcountries.com/#api-endpoints-v2-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa.
+Maan tietojan hakeminen kannattaa hoitaa apin endpointin [full name](https://restcountries.com/#api-endpoints-v3-full-name) avulla, hookin sisällä olevassa _useEffect_-hookissa.
 
 Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa sen kontrolloimiseen milloin efektifunktio kannattaa suorittaa. 
 
-#### 7.8*: ultimate hooks
+#### 7.8: ultimate hooks
 
 Aiempien osien materiaalissa kehitetyn muistiinpanosovelluksen palvelimen kanssa keskusteleva koodi näyttää seuraavalta:
 
@@ -455,7 +455,7 @@ Huomaamme, että koodi ei itseasiassa välitä ollenkaan siitä että se käsitt
 
 Eristä kommunikoiva koodi hookiksi _useResource_. Riittää, että kaikkien olioiden haku ja uuden olion luominen onnistuvat.
 
-Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy/ultimate-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
+Voit tehdä tehtävän repositoriosta https://github.com/fullstack-hy2020/ultimate-hooks löytyvään projektiin. Projektin komponentti <i>App</i> on seuraavassa:
 
 ```js
 const App = () => {

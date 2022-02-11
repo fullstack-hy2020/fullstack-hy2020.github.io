@@ -21,13 +21,21 @@ Hyvä neuvo niin refaktorointiin kuin uudenkin koodin kirjoittamiseen on <i>pien
 
 ### Tehtävät 7.9.-7.21.
 
-#### 7.9: redux, step1
+#### 7.9: koodin automaattinen muotoilu
+
+Käytimme edellisissä osissa ESLintiä valvomaan koodin tyyliä. Hieman toisenlaisen näkökulman koodin tyylin kontrollointiin tarjoaa [Prettier](https://prettier.io/), joka on dokumentaationsa mukaan <i>an opinionated code formatter</i>. Prettier ei ESLintin tavoin ainoastaan valvo koodin laatua, vaan myös haluttaessa <i>muotoilee</i> koodin automaattisesti sääntöjen mukaiseksi.
+
+Prettier on helppo integroida suoraan editoriin siten, että editori muokkaa koodin aina tallennuksen yhteydessä sääntöjen mukaiseksi. 
+
+Ota sovellukseesi käyttöön Prettier, tee sille sopiva konfiguraatio sekä editori-integraatio.
+
+#### 7.10: redux, step1
 
 Siirry käyttämään React-komponenttien tilan sijaan Reduxia sovelluksen tilan hallintaan.
 
 Muuta tässä tehtävässä notifikaatio käyttämään Reduxia.
 
-#### 7.10: redux, step2
+#### 7.11: redux, step2
 
 <i>Tämä ja seuraava kaksi osaa ovat kohtuullisen työläitä, mutta erittäin opettavaisia.</i>
 
@@ -35,21 +43,21 @@ Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa voit halutessasi hallit
 
 Siirrä blogien tietojen talletus Reduxiin. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogin luominen onnistuu.
 
-#### 7.11: redux, step3
+#### 7.12: redux, step3
 
 Laajenna ratkaisua siten, että blogien "liketys" ja poisto toimivat.
 
-#### 7.12: redux, step4
+#### 7.13: redux, step4
 
 Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
-#### 7.13: käyttäjien näkymä
+#### 7.14: käyttäjien näkymä
 
 Tee sovellukseen näkymä, joka näyttää kaikkiin käyttäjiin liittyvät perustiedot:
 
 ![](../../images/7/41.png)
 
-#### 7.14: yksittäisen käyttäjän näkymä
+#### 7.15: yksittäisen käyttäjän näkymä
 
 Tee sovellukseen yksittäisen käyttäjän näkymä, jolta selviää mm. käyttäjän lisäämät blogit
 
@@ -84,7 +92,7 @@ const User = () => {
 }
 ```
 
-#### 7.15: blogin näkymä
+#### 7.16: blogin näkymä
 
 Toteuta sovellukseen oma näkymä yksittäisille blogeille. Näkymä voi näyttää seuraavalta
 
@@ -96,13 +104,13 @@ Näkymään päästään klikkaamalla blogin nimeä kaikkien blogien näkymäst�
 
 Tämän tehtävän jälkeen tehtävässä 5.6 toteutettua toiminnallisuutta ei enää tarvita, eli kaikkien blogien näkymässä yksittäisten blogien detaljien ei enää tarvitse avautua klikattaessa.
 
-#### 7.16: navigointi
+#### 7.17: navigointi
 
 Tee sovellukseen navigaatiomenu
 
 ![](../../images/7/47.png)
 
-#### 7.17: kommentit, step1
+#### 7.18: kommentit, step1
 
 Tee sovellukseen mahdollisuus blogien kommentointiin:
 
@@ -114,25 +122,20 @@ Tässä tehtävässä riittää, että frontend osaa näyttää blogilla olevat 
 
 Sopiva rajapinta kommentin luomiseen on osoitteeseen <i>api/blogs/:id/comments</i> tapahtuva HTTP POST -pyyntö.
 
-#### 7.18: kommentit, step2
+#### 7.19: kommentit, step2
 
 Laajenna sovellusta siten, että kommentointi onnistuu frontendista käsin:
 
 ![](../../images/7/49.png)
 
-#### 7.19: tyylit, step1
+#### 7.20: tyylit, step1
 
 Tee sovelluksesi ulkoasusta tyylikkäämpi jotain kurssilla esiteltyä tapaa käyttäen
 
-#### 7.20: tyylit, step2
+#### 7.21: tyylit, step2
 
 Jos käytät tyylien lisäämiseen noin tunnin aikaa, merkkaa myös tämä tehtävä tehdyksi.
 
-#### 7.21: Kurssipalaute
-
-Anna kurssille palautetta moodlessa.
-
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
 
 </div>

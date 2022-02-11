@@ -9,7 +9,7 @@ lang: fi
 
 ### Luokkakomponentit
 
-Olemme käyttäneet kurssilla ainoastaan JavaScript-funktioina määriteltyjä React-komponentteja. Tämä ei ollut mahdollista ennen Reactiin versiossa 16.8. tullutta [hook](https://reactjs.org/docs/hooks-intro.html)-toiminnallisuutta, tällöin esimerkiksi tilaa käyttävät komponentit oli pakko määritellä käyttäen Javascriptin [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)-syntaksia.
+Olemme käyttäneet kurssilla ainoastaan JavaScript-funktioina määriteltyjä React-komponentteja. Tämä ei ollut mahdollista ennen Reactiin versiossa 16.8. tullutta [hook](https://reactjs.org/docs/hooks-intro.html)-toiminnallisuutta, tällöin esimerkiksi tilaa käyttävät komponentit oli pakko määritellä käyttäen JavaScriptin [Class](https://reactjs.org/docs/state-and-lifecycle.html#converting-a-function-to-a-class)-syntaksia.
 
 Class-, eli luokkakomponentit on syytä tuntea ainakin jossain määrin, sillä maailmassa on suuri määrä vanhaa React-koodia, mitä ei varmaankaan koskaan tulla kokonaisuudessaan uudelleenkirjoittamaan uudella syntaksilla.
 
@@ -184,9 +184,9 @@ Esimerkkimme tapauksessa erot eivät ole suuret. Suurin ero funktionaalisissa ja
 
 Hieman edistyneemmissä käyttöskenaarioissa effect hookit tarjoavat huomattavasti paremman mekanismin sivuvaikutusten hallintaan verrattuna luokkakomponenttien elinkaarimetodeihin.
 
-Merkittävä etu funktionaalisille komponenttien käytössä on se, että paljon harmia tuottavaa Javascriptin olioon itseensä viittaavaa _this_-viitettä ei tarvitse käsitellä ollenkaan.
+Merkittävä etu funktionaalisille komponenttien käytössä on se, että paljon harmia tuottavaa JavaScriptin olioon itseensä viittaavaa _this_-viitettä ei tarvitse käsitellä ollenkaan.
 
-Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi (15.2.2021) funktionaalisten komponenttien käytössä.
+Oman ja suuren enemmistön mielestä luokkakomponenteilla ei ole oikeastaan mitään etuja hookeilla rikastettuihin funktionaalisiin komponentteihin verrattuna, poikkeuksen tähän muodostaa ns. [error boundary](https://reactjs.org/docs/error-boundaries.html) -mekanismi, joka ei ole toistaiseksi funktionaalisten komponenttien käytössä.
 
 Kun kirjoitat uutta koodia, [ei siis ole mitään rationaalista syytä käyttää luokkakomponentteja](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) jos projektissa on käytössä Reactista vähintään versio 16.8. Toisaalta kaikkea vanhaa Reactia [ei ole toistaiseksi mitään syytä uudelleenkirjoittaa](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) funktionaalisina komponentteina.
 
@@ -197,7 +197,7 @@ tarjoaa näkökulmia aiheeseen.
 
 ### Frontti ja backend samassa repositoriossa
 
-Olemme kurssilla tehneet frontendin ja backendin omiin repositorioihinsa. Kyseessä on varsin tyypillinen ratkaisu. Teimme tosin deploymentin [kopioimalla](/osa3#staattisten-tiedostojen-tarjoaminen-backendistä) frontin bundlatun koodin backendin repositorion sisälle. Toinen, ehkä järkevämpi tilanne olisi ollut deployata frontin koodi erikseen, create-react-appilla tehtyjen sovellusten osalta se on todella helppoa oman [buildpackin](https://github.com/mars/create-react-app-buildpack) ansiosta.
+Olemme kurssilla tehneet frontendin ja backendin omiin repositorioihinsa. Kyseessä on varsin tyypillinen ratkaisu. Teimme tosin deploymentin [kopioimalla](/osa3#staattisten-tiedostojen-tarjoaminen-backendistä) frontin bundlatun koodin backendin repositorion sisälle. Toinen, ehkä järkevämpi tilanne olisi ollut deployata frontin koodi erikseen, Create React App:illa tehtyjen sovellusten osalta se on todella helppoa oman [buildpackin](https://github.com/mars/create-react-app-buildpack) ansiosta.
 
 Joskus voi kuitenkin olla tilanteita, missä koko sovellus halutaan samaan repositorioon. Tällöin yleinen ratkaisu on sijoittaa <i>package.json</i> ja <i>webpack.config.js</i> hakemiston juureen ja frontin sekä backendin koodi omiin hakemistoihinsa, esim. <i>client</i> ja <i>server</i>.
 
@@ -229,7 +229,7 @@ Reactia käyttäessä ohjelmoija ei koskaan (tai parempi sanoa yleensä) manipul
 const element = <h1>Hello, world</h1>
 ```
 
-eivät nekään ole HTML:ää vaan pohjimmiltaan Javascriptiä olevia React-elementtejä.
+eivät nekään ole HTML:ää vaan pohjimmiltaan JavaScriptia olevia React-elementtejä.
 
 Sovelluksen komponenttien ulkoasun määrittelevät React-elementit muodostavat [Virtual DOM:in](https://reactjs.org/docs/faq-internals.html#what-is-the-virtual-dom), joka pidetään suorituksen aikana keskusmuistissa.
 
@@ -254,7 +254,7 @@ React-sovellusten yhteydessä ei kuitenkaan yleensä puhuta MVC-arkkitehtuurista
 
 Koska sekä React että [Flux](https://facebook.github.io/flux/docs/in-depth-overview/) ovat Facebookilla syntyneinä, voi ajatella, että Reactin pitäminen ainoastaan käyttöliittymästä huolehtivana kirjastona on sen oikeaoppista käyttöä. Flux-arkkitehtuurin noudattaminen tuo sovelluksiin tietyn overheadin ja jos on kyse pienestä sovelluksesta tai prototyypistä, saattaa Reactin "väärinkäyttäminen" olla järkevää, sillä myöskään [overengineering](https://en.wikipedia.org/wiki/Overengineering) ei yleensä johda optimaaliseen tulokseen.
 
-Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
+Kuten [osan 6](/osa6/connect#redux-ja-komponenttien-tila) lopussa mainittiin, Reactin [Context-api](https://reactjs.org/docs/context.html) tarjoaa erään vaihtoehtoisen tavan keskitetylle tilan hallinnalle ilman tarvetta ulkoisille kirjastoille kuten Reduxille. Katso lisää esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). 
 
 ### React/node-sovellusten tietoturva
 
@@ -314,102 +314,73 @@ Riippuvuuksien ajantasaisuuden voi testata komennolla
 npm outdated --depth 0
 ```
 
-Viime vuoden mallivastaus osan 4 tehtäväsarjaan sisältää jo aika paljon vanhentuneita riippuvuuksia:
+Vuoden vanha [osassa 9](/osa9) käytetty projekti sisältää jo aika paljon vanhentuneita riippuvuuksia:
 
-![](../../images/7/33ea.png)
+![](../../images/7/33x.png)
 
 Riippuvuudet saa ajantasaistettua päivittämällä tiedostoa <i>package.json</i> ja suorittamalla komennon _npm install_. Riippuvuuksien vanhat versiot eivät tietenkään välttämättä ole tietoturvariski.
 
 Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin.
 
-Komennon _npm audit_ suorittaminen viime vuoden osan 4 mallivastaukselle antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista:
+Komennon _npm audit_ suorittaminen samalle projektille antaa pitkän listan valituksia ja korjausehdotuksia. Seuraavassa osa raportista:
 
 
 ```js
-$ bloglist-backend npm audit
+$ npm audit
 
-                       === npm audit security report ===
+... many lines removed ...
 
-# Run  npm install --save-dev jest@25.1.0  to resolve 62 vulnerabilities
-SEMVER WARNING: Recommended action is a potentially breaking change
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-config > babel-jest >                 │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+url-parse  <1.5.2
+Severity: moderate
+Open redirect in url-parse - https://github.com/advisories/GHSA-hh27-ffr2-f2jc
+fix available via `npm audit fix`
+node_modules/url-parse
 
+ws  6.0.0 - 6.2.1 || 7.0.0 - 7.4.5
+Severity: moderate
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+fix available via `npm audit fix`
+node_modules/webpack-dev-server/node_modules/ws
+node_modules/ws
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-config > babel-jest >   │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+120 vulnerabilities (102 moderate, 16 high, 2 critical)
 
+To address issues that do not require attention, run:
+  npm audit fix
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-runtime > jest-config > │
-│               │ babel-jest > babel-plugin-istanbul > test-exclude >          │
-│               │ micromatch > braces                                          │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
-
-...
-
-found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 scanned packages
-  run `npm audit fix` to fix 354 of them.
-  62 vulnerabilities require semver-major dependency updates.
+To address all issues (including breaking changes), run:
+  npm audit fix --force
 ```
 
 
-Reilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 1. Suoritetaan raportin suosittelema operaatio _npm audit fix_:
+Reilun vuoden ikäinen koodi on siis täynnä pieniä tietoturvauhkia, kriittisiä uhkia on onneksi ainoastaan 2. Suoritetaan raportin suosittelema operaatio _npm audit fix_:
 
 ```js
-$ bloglist-backend npm audit fix
+$ npm audit fix
 
-+ mongoose@5.9.1
-added 19 packages from 8 contributors, removed 8 packages and updated 15 packages in 7.325s
-fixed 354 of 416 vulnerabilities in 20047 scanned packages
-  1 package update for 62 vulns involved breaking changes
-  (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
+104 vulnerabilities (93 moderate, 9 high, 2 critical)
+
+To address issues that do not require attention, run:
+  npm audit fix
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
 ```
 
-Haavoittuvuuksia jää vielä 62, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. Ongelmat aiheuttaa testauskirjasto jestin versio, joka on sovelluksessa 23.6.0 kun taas turvallinen versio olisi 25.1.0. Koska jest on ainoastaan kehitysaikainen riippuvuus, ei vaaraa oikeastaan ole, mutta päivitetään myös se:
+Haavoittuvuuksia jää vielä 104, sillä _audit fix_ ei tee oletusarvoisesti versiopäivitystä kirjastolle, jonka <i>major</i>-versionumero on kasvanut. Tälläisen riippuvuuden päivitys saattaa aiheuttaa sovelluksen hajoamisen. 
+
+Kriittisten virheiden lähde on kirjasto [immer](https://github.com/immerjs/immer)
 
 ```js
-npm install --save-dev jest@25.1.0 
+immer  <9.0.6
+Severity: critical
+Prototype Pollution in immer - https://github.com/advisories/GHSA-33f9-j839-rf8h
+fix available via `npm audit fix --force`
+Will install react-scripts@5.0.0, which is a breaking change
 ```
 
-Päivityksen jälkeen tilanne näyttää hyvältä
-
-```js
- $ blogs-backend npm audit
-
-                       === npm audit security report ===
-
-found 0 vulnerabilities
- in 1204443 scanned packages
-```                                                                    
+Komento _npm audit fix --force_ päivittäisi käytetyn kirjastoversion, mutta emme nyt uskalla tehdä päivistystä sillä se aiheuttaisi _react-scripts_-kirjaston uuden versoion asennuksen ja se taas todennäköisesti hajottaisi sovelluskehitysympäristön. Jätämmä siis tällä kertaa mahdollisten haavoittuvuuksien korjaamisen myöhempään kertaan.
 
 Eräs OWASP:in listan mainitsemista uhista on <i>Broken Authentication</i> ja siihen liittyvä <i>Broken Access Control</i>. Käyttämämme token-perustainen autentikointi on kohtuullisen robusti, jos sovellusta käytetään tietoliikenteen salaavalla HTTPS-protokollalla. Access Controlin eli pääsynhallinnan toteuttamisessa on aina syytä muistaa tehdä esim. käyttäjän identiteetin tarkastus selaimen lisäksi myös palvelimella. Huonoa tietoturvaa olisi estää jotkut toimenpiteet ainoastaan piilottamalla niiden suoritusmahdollisuus selaimessa olevasta koodista.
 
@@ -425,11 +396,11 @@ Myös ESlintin [security-pluginin](https://github.com/nodesecurity/eslint-plugin
 
 Katsotaan vielä lopuksi muutamaa huomisen tai oikeastaan jo tämän päivän tekniikkaa, ja suuntia joihin Web-sovelluskehitys on kulkemassa.
 
-#### Javascriptin tyypitetyt versiot
+#### JavaScriptin tyypitetyt versiot
 
-Javascriptin muuttujien [dynaaminen tyypitys](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) aiheuttaa välillä ikäviä bugeja. Osassa 5 käsittelimme lyhyesti [PropTypejä](/osa5/props_children_ja_proptypet#prop-types), eli mekanismia, jonka avulla React-komponenteille välitettävile propseille on mahdollista tehdä tyyppitarkastuksia.
+JavaScriptin muuttujien [dynaaminen tyypitys](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) aiheuttaa välillä ikäviä bugeja. Osassa 5 käsittelimme lyhyesti [PropTypejä](/osa5/props_children_ja_proptypet#prop-types), eli mekanismia, jonka avulla React-komponenteille välitettävile propseille on mahdollista tehdä tyyppitarkastuksia.
 
-Viime aikoina on ollut havaittavissa nousevaa kiinnostusta [staattiseen tyypitykseen](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Tämän hetken suosituin Javascriptin tyypitetty versio on Microsoftin kehittämä [Typescript](https://www.typescriptlang.org/), joka on aiheena kurssin [osassa 9](/osa9).
+Viime aikoina on ollut havaittavissa nousevaa kiinnostusta [staattiseen tyypitykseen](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Tämän hetken suosituin JavaScriptin tyypitetty versio on Microsoftin kehittämä [TypeScript](https://www.typescriptlang.org/), joka on aiheena kurssin [osassa 9](/osa9).
 
 #### Server side rendering, isomorfiset sovellukset ja universaali koodi
 
@@ -451,7 +422,7 @@ Viime aikona on myös ruvettu käyttämään Googlen lanseeraamaa termiä [progr
 
 Tiiviistäen kyse on web-sovelluksista, jotka toimivat mahdollisimman hyvin kaikilla alustoilla ottaen jokaisesta alustasta irti sen parhaat puolet. Mobiililaitteiden pienempi näyttö ei saa heikentää sovellusten käytettävyyttä. PWA-sovellusten tulee myös toimia offline-tilassa tai hitaalla verkkoyhteydellä moitteettomasti. Mobiililaitteilla ne tulee pystyä asentamaan normaalien sovellusten tavoin. Kaiken PWA-sovellusten käyttämän verkkoliikenteen tulee olla salattua.
 
-create-react-app:illa luodut sovellukset ovat oletusarvoisesti [progressiivisia](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app). Jos sovellus käyttää palvelimella olevaa dataa, edellyttää sovelluksen progressiiviseksi tekeminen vaivan näkemistä. Offline-toiminnallisuus toteutetaan yleensä [service workerien](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) avulla.
+Create React App:illa luodut sovellukset ovat oletusarvoisesti [progressiivisia](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app). Jos sovellus käyttää palvelimella olevaa dataa, edellyttää sovelluksen progressiiviseksi tekeminen vaivan näkemistä. Offline-toiminnallisuus toteutetaan yleensä [service workerien](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) avulla.
 
 #### Mikropalveluarkkitehtuuri
 

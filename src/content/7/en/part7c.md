@@ -37,8 +37,8 @@ Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the
 <head>
   <link
     rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
     crossorigin="anonymous"
   />
   // ...
@@ -62,21 +62,19 @@ const App = () => {
 }
 ```
 
-
 We notice that this already has an effect on the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
 
 ![](../../images/7/6ea.png)
 
-
 Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
 ```js
-const Notes = (props) => (
+const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
     <Table striped> // highlight-line
       <tbody>
-        {props.notes.map(note =>
+        {notes.map(note =>
           <tr key={note.id}>
             <td>
               <Link to={`/notes/${note.id}`}>
@@ -258,10 +256,8 @@ Then add the following line to the <i>head</i> tag in the <i>public/index.html</
 </head>
 ```
 
-<!-- Tehdään nyt MaterialUI:n avulla koodiin suunilleen samat muutokset, mitä teimme bootstarpilla. -->
 Now let's use MaterialUI to do the same modifications to the code we did earlier with bootstrap.
 
-<!-- Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle: -->
 Render the contents of the whole application within a [Container](https://material-ui.com/components/container/):
 
 ```js
@@ -277,11 +273,10 @@ const App = () => {
 }
 ```
 
-<!-- Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table): -->
 Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://material-ui.com/components/tables/#simple-table):
 
 ```js
-const Notes = ({notes}) => (
+const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
 
@@ -305,12 +300,10 @@ const Notes = ({notes}) => (
 )
 ```
 
-<!-- Taulukko näyttää seuraavalta: -->
 The table looks like so:
 
 ![](../../images/7/63eb.png)
 
-<!-- Hienoinen ikävä piirre Material UI:ssa on se, että jokainen komponentti on importattava erikseen, muistiinpanojen sivun import-lista on aika pitkä: -->
 One less pleasant feature of Material UI is that each component has to be imported separately. The import list for the notes page is quite long:
 
 ```js
@@ -327,17 +320,16 @@ import {
 
 #### Form
 
-<!-- Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/): -->
 Next, let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components:
 
 ```js 
 const Login = (props) => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const onSubmit = (event) => {
     event.preventDefault()
     props.onLogin('mluukkai')
-    history.push('/')
+    navigate('/')
   }
 
   return (
@@ -361,12 +353,10 @@ const Login = (props) => {
 }
 ```
 
-<!-- Lopputulos on: -->
 The end result is:
 
 ![](../../images/7/64ea.png)
 
-<!-- Bootstrapiin verrattuna pieni ero on nyt se, että MaterialUI ei tarjoa erillistä komponenttia itse lomakkeelle, lomake tehdään normaaliin tapaan HTML:n [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form)-elementtinä. -->
 MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 
 <!-- Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.  -->
@@ -374,7 +364,6 @@ Remember to import all the components used in the form.
 
 #### Notification
 
-<!-- Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponenetti Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti:  -->
 The notification displayed on login can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component:
 
 ```js
@@ -389,31 +378,26 @@ The notification displayed on login can be done using the [Alert](https://materi
 </div>
 ```
 
-<!-- Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen: -->
 The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it:
 
 ```bash
 npm install @material-ui/lab
 ```
 
-<!-- Komponentti importataan seuraavasti -->
 Then we can import the component like so
 
 ```js 
 import { Alert } from '@material-ui/lab'
 ```
 
-<!-- Alert on ulkoasultaan tyylikäs: -->
 Alert is quite stylish:
 
 ![](../../images/7/65ea.png)
 
 #### Navigation structure
 
-<!-- Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla -->
 We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component.
 
-<!-- Jos sovelletaan suoraan dokumentaation esimerkkiä   -->
 If we use the example code from the documentation
 
 ```js
@@ -440,15 +424,12 @@ If we use the example code from the documentation
 </AppBar>
 ```
 
-<!-- saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen -->
 we do get working navigation, but it could look better
 
 ![](../../images/7/66ea.png)
 
-<!-- Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy. -->
 We can find a better way from the [documentation](https://material-ui.com/guides/composition/#routing-libraries). We can use [component props](https://material-ui.com/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
 
-<!-- Määrittelemällä -->
 By defining
 
 ```js
@@ -457,10 +438,8 @@ By defining
 </Button>
 ```
 
-<!-- renderöidään komponentti _Button_, siten että sen juurikomponenttina onkin react-redux-kirjaston komponentti _Link_, jolle siirtyy polun kertova props _to_.   -->
 the _Button_ component is rendered so that its root component is react-router-dom's _Link_ which receives its path as prop field _to_.
 
-<!-- Navigaatiopalkin koodi kokonaisuudessaan on seuraava -->
 The code for the navigation bar is the following:
 
 ```js
@@ -526,9 +505,7 @@ Some potential downsides to using UI frameworks through integration libraries in
 
 There is also the question of whether or not UI framework libraries should be used in the first place. It is up to everyone to form their own opinion, but for people lacking knowledge in CSS and web design, they are very useful tools.
 
-
 ### Other UI frameworks
-
 
 Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material.
 
@@ -542,7 +519,6 @@ Here are some other UI frameworks for your consideration. If you do not see your
 ### Styled components
 
 There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at.
-
 
 The [styled components](https://www.styled-components.com/) library offers an interesting approach for defining styles through [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#tagged_templates) that were introduced in ES6.
 
@@ -574,7 +550,6 @@ const Input = styled.input`
 The code above creates styled versions of the <i>button</i> and <i>input</i> HTML elements and then assigns them to the <i>Button</i> and <i>Input</i> variables.
 
 The syntax for defining the styles is quite interesting, as the CSS rules are defined inside of backticks.
-
 
 The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used the same way:
 
@@ -676,9 +651,6 @@ Styled components have seen a consistent growth in popularity in recent times, a
 
 ### Exercises
 
-
 The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
 
 </div>
-
-

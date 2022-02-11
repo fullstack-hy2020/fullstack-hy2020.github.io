@@ -19,7 +19,7 @@ Monet UI-frameworkit sisältävät web-sovellusten käyttöön valmiiksi määri
 
 Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-frameworkin avulla määritellyistä "komponenteista" on tehty React-komponentteja. Esim. Bootstrapista on olemassa parikin React-versiota joista suosituin on [react-bootstrap](https://react-bootstrap.github.io/).
 
-Katsotaan seuraavaksi kahta UI-frameworkia bootstrapia ja [MaterialUI](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React-router](/osa7/react_router) sovellukseen.
+Katsotaan seuraavaksi kahta UI-frameworkia bootstrapia ja [MaterialUI](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React Router](/osa7/react_router) sovellukseen.
 
 ### react bootstrap
 
@@ -37,8 +37,8 @@ Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head
 <head>
   <link
     rel="stylesheet"
-    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
-    integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
     crossorigin="anonymous"
   />
   // ...
@@ -70,12 +70,12 @@ Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni se
 Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
 ```js
-const Notes = (props) => (
+const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
     <Table striped> // highlight-line
       <tbody>
-        {props.notes.map(note =>
+        {notes.map(note =>
           <tr key={note.id}>
             <td>
               <Link to={`/notes/${note.id}`}>
@@ -274,7 +274,7 @@ const App = () => {
 Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table):
 
 ```js
-const Notes = ({notes}) => (
+const Notes = ({ notes }) => (
   <div>
     <h2>Notes</h2>
 
@@ -322,12 +322,12 @@ Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen 
 
 ```js 
 const Login = (props) => {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const onSubmit = (event) => {
     event.preventDefault()
     props.onLogin('mluukkai')
-    history.push('/')
+    navigate('/')
   }
 
   return (

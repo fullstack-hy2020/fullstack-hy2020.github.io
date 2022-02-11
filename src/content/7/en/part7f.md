@@ -21,13 +21,21 @@ One good piece of advice for both refactoring and writing new code is to take <i
 
 ### Exercises 7.9.-7.21.
 
-#### 7.9: redux, step1
+#### 7.9: automatic code formatting
+
+In the previous parts we used ESLint to ensure that code to follows the defined conventions.  [Prettier](https://prettier.io/) is yet another approach for the same. According to the documentation Prettier is <i>an opinionated code formatter</i>, that is, Prettier does not only control the code style but it also formats the code according to the definition.
+
+Prettier is easy to integrate to the code editor, so that when the code is saved, it is automatically formatted correctly.
+
+Take Prettier to use in your app and configure it to work with your editor.
+
+#### 7.10: redux, step1
 
 Refactor the application from using internal React component state to using Redux for the application's state management.
 
 Change the application's notifications to use Redux at this point of the exercise set.
 
-#### 7.10: redux, step2
+#### 7.11: redux, step2
 
 <i>Note</i> that this and the next two exercises are quite laborious but incredibly educational.
 
@@ -35,21 +43,21 @@ Store the information about blog posts in the Redux store. In this exercise, it 
 
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 
-#### 7.11: redux, step3
+#### 7.12: redux, step3
 
 Expand your solution so that it is again possible to like and delete a blog.
 
-#### 7.12: redux, step4
+#### 7.13: redux, step4
 
 Store the information about the signed-in user in the Redux store.
 
-#### 7.13: Users view
+#### 7.14: Users view
 
 Implement a view to the application that displays all of the basic information related to users:
 
 ![](../../images/7/41.png)
 
-#### 7.14: Individual user view
+#### 7.15: Individual user view
 
 Implement a view for individual users that displays all of the blog posts added by that user:
 
@@ -84,7 +92,7 @@ const User = () => {
 }
 ```
 
-#### 7.15: Blog view
+#### 7.16: Blog view
 
 Implement a separate view for blog posts. You can model the layout of your view after the following example:
 
@@ -96,13 +104,13 @@ Users should be able to access the view by clicking the name of the blog post in
 
 After you're done with this exercise, the functionality that was implemented in exercise 5.7 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
 
-#### 7.16: Navigation
+#### 7.17: Navigation
 
 Implement a navigation menu for the application:
 
 ![](../../images/7/47.png)
 
-#### 7.17: comments, step1
+#### 7.18: comments, step1
 
 Implement the functionality for commenting on blog posts:
 
@@ -114,23 +122,19 @@ In this exercise, it is enough for the frontend to only display the comments tha
 
 An appropriate mechanism for adding comments to a blog post would be an HTTP POST request to the <i>api/blogs/:id/comments</i> endpoint.
 
-#### 7.18: comments, step2
+#### 7.19: comments, step2
 
 Extend your application so that users can add comments to blog posts from the frontend:
 
 ![](../../images/7/49.png)
 
-#### 7.19: Styles, step1
+#### 7.20: Styles, step1
 
 Improve the appearance of your application by applying one of the methods shown in the course material.
 
-#### 7.20: Styles, step2
+#### 7.21: Styles, step2
 
 You can mark this exercise as finished if you use an hour or more for styling your application.
-
-#### 7.21: Course feedback
-
-How did we do? Give us some feedback for the course in Moodle!
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

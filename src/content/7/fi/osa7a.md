@@ -32,7 +32,7 @@ Navigaatiopalkki ja useita näkymiä sisältävä sovellus on erittäin helppo t
 Seuraavassa on eräs tapa:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 import ReactDOM from 'react-dom'
 
 const Home = () => (
@@ -95,26 +95,25 @@ Eli jokainen näkymä on toteutettu omana komponenttinaan ja sovelluksen tilassa
 
 Menetelmä ei kuitenkaan ole optimaalinen. Kuten kuvista näkyy, sivuston osoite pysyy samana vaikka välillä ollaankin eri näkymässä. Jokaisella näkymällä tulisi kuitenkin olla oma osoitteensa, jotta esim. bookmarkien tekeminen olisi mahdollista. Sovelluksessamme ei myöskään selaimen <i>back</i>-painike toimi loogisesti, eli <i>back</i> ei vie edelliseksi katsottuun sovelluksen näkymään vaan jonnekin ihan muualle. Jos sovellus kasvaisi suuremmaksi ja sinne haluttaisiin esim. jokaiselle käyttäjälle sekä muistiinpanolle oma yksittäinen näkymänsä, itse koodattu <i>reititys</i> eli sivuston navigaationhallinta menisi turhan monimutkaiseksi.
 
-Reactissa on onneksi olemassa kirjasto [React router](https://github.com/ReactTraining/react-router) joka tarjoaa erinomaisen ratkaisun React-sovelluksen navigaation hallintaan.
+### React Router
 
-Muutetaan ylläoleva sovellus käyttämään React routeria. Asennetaan React router komennolla
+Reactissa on onneksi olemassa kirjasto [React Router](https://reactrouter.com/) joka tarjoaa erinomaisen ratkaisun React-sovelluksen navigaation hallintaan.
+
+Muutetaan ylläoleva sovellus käyttämään React Routeria. Asennetaan React Router komennolla
 
 ```bash
-npm install react-router-dom@5.3.0
+npm install react-router-dom
 ```
 
-**Huom:** materiaali olettaa että React routerista on käytössä versio 5, uusin versio sisältää jonkin verran muutoksia jotka ovat epäyhteensopivia materiaalin koodin kanssa.
-
-React routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:
+React Routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seuraavasti:
 
 ```js
 import {
   BrowserRouter as Router,
-  Switch, Route, Link
+  Routes, Route, Link
 } from "react-router-dom"
 
 const App = () => {
-
   const padding = {
     padding: 5
   }
@@ -127,20 +126,14 @@ const App = () => {
         <Link style={padding} to="/users">users</Link>
       </div>
 
-      <Switch>
-        <Route path="/notes">
-          <Notes />
-        </Route>
-        <Route path="/users">
-          <Users />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
 
       <div>
-        <i>Note app, Department of Computer Science 2021</i>
+        <i>Note app, Department of Computer Science 2022</i>
       </div>
     </Router>
   )
@@ -149,7 +142,7 @@ const App = () => {
 
 Reititys, eli komponenttien ehdollinen, selaimen <i>urliin perustuva</i> renderöinti otetaan käyttöön sijoittamalla komponentteja <i>Router</i>-komponentin lapsiksi, eli <i>Router</i>-tagien sisälle.
 
-Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i> kyseessä on [BrowserRouter](https://reacttraining.com/react-router/web/api/BrowserRouter), sillä importtaus tapahtuu siten, että importattava olio uudelleennimetään:
+Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i> kyseessä on [BrowserRouter](https://reactrouter.com/docs/en/v6/api#browserrouter), sillä importtaus tapahtuu siten, että importattava olio uudelleennimetään:
 
 ```js
 import {
@@ -158,13 +151,13 @@ import {
 } from "react-router-dom"
 ```
 
-[Manuaalin](https://reacttraining.com/react-router/web/api/BrowserRouter) mukaan
+[Manuaalin](https://reactrouter.com/docs/en/v6/api#browserrouter) mukaan
 
 > <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popstate event) to keep your UI in sync with the URL.
 
-Normaalisti selain lataa uuden sivun osoiterivillä olevan urlin muuttuessa. [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/):n avulla <i>BrowserRouter</i> kuitenkin mahdollistaa sen, että selaimen osoiterivillä olevaa urlia voidaan käyttää React-sovelluksen sisäiseen "reitittämiseen", eli vaikka osoiterivillä oleva url muuttuu, sivun sisältöä manipuloidaan ainoastaan Javascriptillä ja selain ei lataa uutta sisältöä palvelimelta. Selaimen toiminta back- ja forward-toimintojen ja bookmarkien tekemisen suhteen on kuitenkin loogista, eli toimii kuten perinteisillä web-sivuilla.
+Normaalisti selain lataa uuden sivun osoiterivillä olevan urlin muuttuessa. [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/):n avulla <i>BrowserRouter</i> kuitenkin mahdollistaa sen, että selaimen osoiterivillä olevaa urlia voidaan käyttää React-sovelluksen sisäiseen "reitittämiseen", eli vaikka osoiterivillä oleva url muuttuu, sivun sisältöä manipuloidaan ainoastaan JavaScriptillä ja selain ei lataa uutta sisältöä palvelimelta. Selaimen toiminta back- ja forward-toimintojen ja bookmarkien tekemisen suhteen on kuitenkin loogista, eli toimii kuten perinteisillä web-sivuilla.
 
-Routerin sisälle määritellään selaimen osoiteriviä muokkaavia <i>linkkejä</i> komponentin [Link](https://reacttraining.com/react-router/web/api/Link) avulla. Esim.
+Routerin sisälle määritellään selaimen osoiteriviä muokkaavia <i>linkkejä</i> komponentin [Link](https://reactrouter.com/docs/en/v6/api#link) avulla. Esim.
 
 ```js
 <Link to="/notes">notes</Link>
@@ -172,52 +165,29 @@ Routerin sisälle määritellään selaimen osoiteriviä muokkaavia <i>linkkejä
 
 luo sovellukseen linkin, jonka teksti on <i>notes</i> ja jonka klikkaaminen vaihtaa selaimen osoiteriville urliksi <i>/notes</i>.
 
-Selaimen urliin perustuen renderöitävät komponentit määritellään komponentin [Route](https://reacttraining.com/react-router/web/api/Route) avulla. Esim.
+Selaimen urliin perustuen renderöitävät komponentit määritellään komponentin [Route](https://reactrouter.com/docs/en/v6/api#routes-and-route) avulla. Esim.
 
 ```js
-<Route path="/notes">
-  <Notes />
-</Route>
+<Route path="/notes" element={<Notes />} />
 ```
 
 määrittelee, että jos selaimen osoiteena on <i>/notes</i>, renderöidään komponentti <i>Notes</i>.
 
-Urliin perustuen renderöitävät komponentit on sijoitettu [Switch](https://reacttraining.com/react-router/web/api/Switch)-komponentin lapsiksi
+Urliin perustuen renderöitävät komponentit on sijoitettu [Routes](https://reactrouter.com/docs/en/v6/api#routes-and-route)-komponentin lapsiksi
 
 ```js 
-<Switch>
-  <Route path="/notes">
-    <Notes />
-  </Route>
-  <Route path="/users">
-    <Users />
-  </Route>
-  <Route path="/">
-    <Home />
-  </Route>
-</Switch>
+<Routes>
+  <Route path="/notes" element={<Notes />} />
+  <Route path="/users" element={<Users />} />
+  <Route path="/" element={<Home />} />
+</Routes>
 ```
 
-Switch saa aikaan sen, että renderöitävä komponentti on ensimmäinen, jonka <i>path</i> vastaa osoiterivin polkua.
-
-Huomaa, että komponenttien järjestys on tärkeä. Jos laittaisimme ensimmäiseksi komponentin <i>Home</i>, jonka polku on <i> path="/"</i>, ei mitään muuta komponenttia koskaan renderöitäisi, sillä "olematon" polku on minkä tahansa polun alkuosa:
-
-```js 
-<Switch>
-  <Route path="/"> // highlight-line
-    <Home /> // highlight-line
-  </Route> // highlight-line
-  
-  <Route path="/notes">
-    <Notes />
-  </Route>
-  // ...
-</Switch>
-```
+Routes saa aikaan sen, että renderöitävä komponentti on se, jonka <i>path</i> vastaa osoiterivin polkua.
 
 ### Parametroitu route
 
-Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstack-hy/misc/blob/master/router-app-v1.js).
+Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
 
 Sovellus sisältää nyt viisi eri näkymää, joiden näkyvyyttä kontrolloidaan routerin avulla. Edellisestä esimerkistä tuttujen komponenttien <i>Home</i>, <i>Notes</i> ja <i>Users</i> lisäksi mukana on kirjautumisnäkymää vastaava <i>Login</i> ja yksittäisen muistiinpanon näkymää vastaava <i>Note</i>.
 
@@ -246,34 +216,22 @@ Parametrisoitu url määritellään komponentissa <i>App</i> olevaan reitityksee
 
 ```js
 <Router>
-  <div>
-    <div>
-      <Link style={padding} to="/">home</Link>
-      <Link style={padding} to="/notes">notes</Link>
-      <Link style={padding} to="/users">users</Link>
-    </div>
+  // ...
 
-    <Switch>
-    // highlight-start
-      <Route path="/notes/:id">
-        <Note notes={notes} />
-      </Route>
-      // highlight-end
-      <Route path="/notes">
-        <Notes notes={notes} />
-      </Route>
-      <Route path="/">
-        <Home />
-      </Route>
-    </Switch>
-
+  <Routes>
+    <Route path="/notes/:id" element={<Note notes={notes} />} /> // highlight-line
+    <Route path="/notes" element={<Notes notes={notes} />} />   
+    <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+    <Route path="/login" element={<Login onLogin={login} />} />
+    <Route path="/" element={<Home />} />      
+  </Routes>
 </Router>
 ```
 
 Yksittäisen muistiinpanon näkymän renderöivä route siis määritellään "expressin tyyliin" merkkaamalla reitin parametrina oleva osa merkinnällä <i>:id</i>
 
 ```js
-<Route path="/notes/:id">
+<Route path="/notes/:id" element={<Note notes={notes} />} />
 ```
 
 Kun selain siirtyy muistiinpanon yksilöivään osoitteeseen, esim. <i>/notes/3</i>, renderöidään komponentti <i>Note</i>:
@@ -297,9 +255,9 @@ const Note = ({ notes }) => {
 }
 ```
 
-Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee urlin yksilöivään osaan, eli näytettävän muistiinpanon id:hen käsiksi  react-routerin funktion [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) avulla. 
+Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee urlin yksilöivään osaan, eli näytettävän muistiinpanon id:hen käsiksi React Routerin funktion [useParams](https://reactrouter.com/docs/en/v6/api#useparams) avulla. 
 
-### useHistory
+### useNavigate
 
 Sovellukseen on myös toteutettu erittäin yksinkertainen kirjautumistoiminto. Jos sovellukseen ollaan kirjautuneena, talletetaan tieto kirjautuneesta käyttäjästä komponentin <i>App</i> tilaan <i>user</i>.
 
@@ -332,16 +290,16 @@ Kirjautumisesta huolehtivan komponentin koodi seuraavassa
 ```js
 import {
   // ...
-  useHistory // highlight-line
+  useNavigate // highlight-line
 } from 'react-router-dom'
 
 const Login = (props) => {
-  const history = useHistory() // highlight-line
+  const navigate = useNavigate() // highlight-line
 
   const onSubmit = (event) => {
     event.preventDefault()
     props.onLogin('mluukkai')
-    history.push('/') // highlight-line
+    navigate('/') // highlight-line
   }
 
   return (
@@ -361,26 +319,24 @@ const Login = (props) => {
 }
 ```
 
-Mielenkiintoista komponentissa on react-routerin funktion [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) käyttö. Funktion avulla komponentti pääsee käsiksi [history](https://reacttraining.com/react-router/web/api/history)-olioon, joka taas mahdollistaa mm. selaimen osoiterivin muokkaamisen ohjelmallisesti.
+Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaamisen ohjelmallisesti.
 
-Kirjautumisen yhteydessä kutsutaan history-olion metodia push. Komento _history.push('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
+Kirjautumisen yhteydessä suoritetaan komento _navigate('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
-Käyttämämme react-router-kirjaston funktiot [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) ja [useHistory](https://reacttraining.com/react-router/web/api/Hooks/usehistory) ovat molemmat hook-funktiota, samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create-react-app on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
+Käyttämämme React Router -kirjaston funktiot [useParams](https://reactrouter.com/docs/en/v6/api#useparams) ja [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) ovat molemmat hook-funktiota, samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create-react-app on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
 
-### redirect
+### Uudelleenohjaus
 
 Näkymän <i>Users</i> routeen liittyy vielä eräs mielenkiintoinen detalji:
 
 ```js
-<Route path="/users">
-  {user ? <Users /> : <Redirect to="/login" />}
-</Route>
+<Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä <i>Redirect</i>-komponentin avulla kirjautumisnäkymään
+Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä komponentin [Navigate](https://reactrouter.com/docs/en/v6/api#navigate) avulla kirjautumisnäkymään
 
 ```js
-<Redirect to="/login" />
+<Navigate replace to="/login" />
 ```
 
 Todellisessa sovelluksessa olisi kenties parempi olla kokonaan näyttämättä navigaatiovalikossa kirjautumista edellyttäviä näkymiä jos käyttäjä ei ole kirjautunut sovellukseen.
@@ -399,54 +355,45 @@ const App = () => {
     setUser(user)
   }
 
-  const padding = { padding: 5 }
+  const padding = {
+    padding: 5
+  }
 
   return (
     <div>
-      <Router>
-        <div>
-          <Link style={padding} to="/">home</Link>
-          <Link style={padding} to="/notes">notes</Link>
-          <Link style={padding} to="/users">users</Link>
-          {user
-            ? <em>{user} logged in</em>
-            : <Link style={padding} to="/login">login</Link>
-          }
-        </div>
+    <Router>
+      <div>
+        <Link style={padding} to="/">home</Link>
+        <Link style={padding} to="/notes">notes</Link>
+        <Link style={padding} to="/users">users</Link>
+        {user
+          ? <em>{user} logged in</em>
+          : <Link style={padding} to="/login">login</Link>
+        }
+      </div>
 
-        <Switch>
-          <Route path="/notes/:id">
-            <Note notes={notes} />
-          </Route>
-          <Route path="/notes">
-            <Notes notes={notes} />
-          </Route>
-          <Route path="/users">
-            {user ? <Users /> : <Redirect to="/login" />}
-          </Route>
-          <Route path="/login">
-            <Login onLogin={login} />
-          </Route>
-          <Route path="/">
-            <Home />
-          </Route>
-        </Switch>
-      </Router>      
+      <Routes>
+        <Route path="/notes/:id" element={<Note notes={notes} />} />  
+        <Route path="/notes" element={<Notes notes={notes} />} />   
+        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+        <Route path="/login" element={<Login onLogin={login} />} />
+        <Route path="/" element={<Home />} />      
+      </Routes>
+    </Router>      
       <div>
         <br />
-        <em>Note app, Department of Computer Science 2021</em>
+        <em>Note app, Department of Computer Science 2022</em>
       </div>
     </div>
   )
 }
 ```
 
-Komponentti renderöi myös kokonaan <i>Router</i>:in ulkopuolella olevan web-sovelluksille tyypillisen <i>footer</i>-elementin, eli sivuston pohjalla olevan osan, joka on näkyvillä riippumatta siitä mikä komponentti sovelluksen reititetyssä osassa näytetään.
+Komponentti renderöi myös kokonaan komponentin <i>Router</i> ulkopuolella olevan web-sovelluksille tyypillisen <i>footer</i>-elementin, eli sivuston pohjalla olevan osan, joka on näkyvillä riippumatta siitä mikä komponentti sovelluksen reititetyssä osassa näytetään.
 
 ### Parametroitu route revisited
 
 Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina <i>kaikki muistiinpanot</i>, vaikka se näyttää niistä ainoastaan sen, jonka id vastaa urlin parametroitua osaa:
-
 
 ```js
 const Note = ({ notes }) => { 
@@ -470,9 +417,9 @@ const Note = ({ note }) => {
 }
 ```
 
-Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon _id_ komponentissa _App_ react-routerin hook-funktion [useRouteMatch](https://reacttraining.com/react-router/web/api/Hooks/useroutematch) avulla.
+Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon _id_ komponentissa _App_ React Routerin hook-funktion [useMatch](https://reactrouter.com/docs/en/v6/api#usematch) avulla.
 
-<i>useRouteMatch</i>-hookin käyttö [ei ole](https://github.com/ReactTraining/react-router/issues/7015) mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin _Router_-komponenttien käyttö komponentin _App_ ulkopuolelle:
+<i>useMatch</i>-hookin käyttö ei ole mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin _Router_-komponenttien käyttö komponentin _App_ ulkopuolelle:
 
 ```js
 ReactDOM.render(
@@ -488,14 +435,15 @@ Komponentti _App_ muuttuu seuraavasti:
 ```js
 import {
   // ...
-  useRouteMatch  // highlight-line
+  useMatch  // highlight-line
 } from "react-router-dom"
 
 const App = () => {
   // ...
 
  // highlight-start
-  const match = useRouteMatch('/notes/:id')
+  const match = useMatch('/notes/:id')
+
   const note = match 
     ? notes.find(note => note.id === Number(match.params.id))
     : null
@@ -508,18 +456,16 @@ const App = () => {
         // ...
       </div>
 
-      <Switch>
-        <Route path="/notes/:id">
-          <Note note={note} /> // highlight-line
-        </Route>
-        <Route path="/notes">
-          <Notes notes={notes} />
-        </Route>
-         // ...
-      </Switch>
+      <Routes>
+        <Route path="/notes/:id" element={<Note note={note} />} />   // highlight-line
+        <Route path="/notes" element={<Notes notes={notes} />} />   
+        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+        <Route path="/login" element={<Login onLogin={login} />} />
+        <Route path="/" element={<Home />} />      
+      </Routes>   
 
       <div>
-        <em>Note app, Department of Computer Science 2021</em>
+        <em>Note app, Department of Computer Science 2022</em>
       </div>
     </div>
   )
@@ -529,7 +475,7 @@ const App = () => {
 Joka kerta kun komponentti renderöidään, eli käytännössä myös aina kun sovelluksen osoiterivillä oleva url vaihtuu, suoritetaan komento
 
 ```js
-const match = useRouteMatch('/notes/:id')
+const match = useMatch('/notes/:id')
 ```
 
 Jos url on muotoa _/notes/:id_ eli vastaa yksittäisen muistiinpanon urlia, saa muuttuja _match_ arvokseen olion, jonka polun parametroitu osa, eli muistiinpanon id voidaan selvittää, ja näin saadaan haettua renderöitävä muistiinpano
@@ -548,7 +494,7 @@ Lopullinen koodi on kokonaisuudessaan [täällä](https://github.com/fullstack-h
 
 ### Tehtävät 7.1.-7.3.
 
-Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstack-hy/routed-anecdotes> oleva reduxiton anekdoottisovellus.
+Jatketaan anekdoottien parissa. Ota seuraaviin tehtäviin pohjaksi repositoriossa <https://github.com/fullstack-hy2020/routed-anecdotes> oleva reduxiton anekdoottisovellus.
 
 Jos kloonaat projektin olemassaolevan git-reposition sisälle, <i>poista kloonatun sovelluksen git-konfiguraatio:</i>
 
@@ -592,7 +538,7 @@ Yksittäisen anekdootin sivulle navigoidaan klikkaamalla anekdootin nimeä
 
 Luomislomakkeen oletusarvoinen toiminnallisuus on melko hämmentävä, sillä kun lomakkeen avulla luodaan uusi muistiinpano, mitään ei näytä tapahtuvan.
 
-Paranna toiminnallisuutta siten, että luomisen jälkeen siirrytään automaattisesti kaikkien anekdoottien näkymään <i>ja</i> käyttäjälle näytetään 10 sekunnin ajan onnistuneesta lisäyksestä kertova notifikaatio:
+Paranna toiminnallisuutta siten, että luomisen jälkeen siirrytään automaattisesti kaikkien anekdoottien näkymään <i>ja</i> käyttäjälle näytetään viiden sekunnin ajan onnistuneesta lisäyksestä kertova notifikaatio:
 
 ![](../../assets/teht/44.png)
 
