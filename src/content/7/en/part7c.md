@@ -71,12 +71,12 @@ We notice that this already has an effect on the appearance of the application. 
 Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
 ```js
-const Notes = (props) => (
+const Notes = ({notes}) => (
   <div>
     <h2>Notes</h2>
     <Table striped> // highlight-line
       <tbody>
-        {props.notes.map(note =>
+        {notes.map(note =>
           <tr key={note.id}>
             <td>
               <Link to={`/notes/${note.id}`}>
