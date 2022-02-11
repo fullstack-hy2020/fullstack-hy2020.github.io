@@ -356,7 +356,7 @@ describe('when there is initially one user in db', () => {
     expect(result.body.error).toContain('username must be unique')
 
     const usersAtEnd = await helper.usersInDb()
-    expect(usersAtEnd).toHaveLength(usersAtStart.length)
+    expect(usersAtEnd).toEqual(usersAtStart)
   })
 })
 ```
