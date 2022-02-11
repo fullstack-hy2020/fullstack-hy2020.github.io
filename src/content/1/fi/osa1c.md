@@ -64,11 +64,11 @@ Syntymävuoden arvauksen tekevä logiikka on erotettu omaksi funktiokseen, jota 
 
 Tervehdittävän henkilön ikää ei tarvitse välittää funktiolle parametrina, sillä funktio näkee sen sisältävälle komponentille välitettävät propsit.
 
-Syntymävuoden selvittävä funktio on määritelty komponentin toiminnan määrittelevän funktion sisällä. Esim. Javalla ohjelmoitaessa metodien määrittely toisen metodin sisällä ei onnistu. Javascriptissa taas funktioiden sisällä määritellyt funktiot on hyvin yleisesti käytetty tekniikka.
+Syntymävuoden selvittävä funktio on määritelty komponentin toiminnan määrittelevän funktion sisällä. Esim. Javalla ohjelmoitaessa metodien määrittely toisen metodin sisällä ei onnistu. JavaScriptissa taas funktioiden sisällä määritellyt funktiot on hyvin yleisesti käytetty tekniikka.
 
 ### Destrukturointi
 
-Tarkastellaan erästä pientä, mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä Javascriptissä, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Tarkastellaan erästä pientä, mutta käyttökelpoista ES6:n mukanaan tuomaa uutta piirrettä JavaScriptissa, eli muuttujaan sijoittamisen yhteydessä tapahtuvaa [destrukturointia](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
 Jouduimme äskeisessä koodissa viittaamaan propseina välitettyyn dataan hieman ikävästi muodossa _props.name_ ja _props.age_. Näistä _props.age_ pitää toistaa komponentissa kahteen kertaan.
 
@@ -94,7 +94,7 @@ const Hello = (props) => {
 
   return (
     <div>
-      <p>Hello {name}, you are {age} years old</p>
+      <p>Hello {name}, you are {age} years old</p> // highlight-line
       <p>So you were probably born {bornYear()}</p>
     </div>
   )
@@ -181,8 +181,6 @@ Toistaiseksi tekemämme sovellukset ovat olleet sellaisia, että kun niiden komp
 Aloitetaan seuraavasta rungosta. Tiedostoon <i>App.js</i> tulee:
 
 ```js
-import React from 'react'
-
 const App = (props) => {
   const {counter} = props
   return (
@@ -207,7 +205,7 @@ ReactDOM.render(
 )
 ```
 
-**HUOM:** kun tiedoston <i>index.js</i> sisältöä muutetaan, React ei osaa päivittää selaimeen uutta sisältöä ilman, että selaimen koodi ladataan uudelleen refreshaamalla sivu.
+**HUOM:** kun tiedoston <i>index.js</i> sisältöä muutetaan, React ei välttämättä osaa päivittää selaimeen uutta sisältöä ilman, että selaimen koodi ladataan uudelleen refreshaamalla sivu.
 
 Sovelluksen juurikomponentille siis annetaan propsiksi laskurin _counter_ arvo. Juurikomponentti renderöi arvon ruudulle. Entä laskurin arvon muuttuessa? Jos lisäämme ohjelmaan esim. komennon
 
@@ -266,7 +264,7 @@ document.getElementById('root'))
 ja <i>App.js</i> muotoon:
 
 ```js
-import React, { useState } from 'react' // highlight-line
+import { useState } from 'react' // highlight-line
 
 const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
@@ -289,7 +287,7 @@ export default App
 Tiedosto importtaa nyt heti ensimmäisellä rivillä _useState_-funktion:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 ```
 
 Komponentin määrittelevä funktio alkaa funktiokutsulla:
@@ -314,7 +312,7 @@ setTimeout(
 Kun tilaa muuttavaa funktiota _setCounter_ kutsutaan, <i>renderöi React komponentin uudelleen</i>, eli käytännössä suorittaa uudelleen komponentin määrittelevän koodin
 
 ```js
-(props) => {
+() => {
   const [ counter, setCounter ] = useState(0)
 
   setTimeout(
@@ -347,7 +345,7 @@ Ja tämä saa jälleen aikaan sen, että komponentti renderöidään uudelleen. 
 Jos komponenttia ei saa renderöitymään tai komponentti renderöityy "väärään" aikaan, debuggaamista saattaa auttaa komponentin määrittelevään funktioon lisätty konsoliin tulostus. Esim. näin
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   setTimeout(
@@ -378,7 +376,7 @@ Button-elementit tukevat mm. [hiiritapahtumia](https://developer.mozilla.org/en-
 Reactissa funktion rekisteröiminen tapahtumankäsittelijäksi tapahtumalle <i>click</i> [tapahtuu](https://reactjs.org/docs/handling-events.html) seuraavasti:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   // highlight-start
@@ -407,7 +405,7 @@ Nyt jokainen napin <i>plus</i> painallus saa aikaan sen, että funktiota _handle
 Tapahtumankäsittelijäfunktio voidaan määritellä myös suoraan onClick-määrittelyn yhteydessä:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   return (
@@ -434,7 +432,7 @@ saamme aikaan halutun toiminnallisuuden, eli nappia painettaessa tilan _counter_
 Lisätään sovellukseen myös nappi laskurin nollaamiseen:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   return (
@@ -475,7 +473,7 @@ Entä jos yritämme määritellä tapahtumankäsittelijän yksinkertaisemmin:
 
 Tämä ei kuitenkaan toimi:
 
-![](../../images/1/5b.png)
+![](../../images/1/5c.png)
 
 Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on
 
@@ -500,7 +498,7 @@ Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei us
 Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioiksi:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
 // highlight-start
@@ -554,7 +552,7 @@ const Display = (props) => {
 Nyt riittää, että komponentille välitetään laskurin tila eli _counter_:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)
@@ -591,7 +589,7 @@ const Button = (props) => {
 Komponentti <i>App</i> muuttuu nyt muotoon:
 
 ```js
-const App = (props) => {
+const App = () => {
   const [ counter, setCounter ] = useState(0)
 
   const increaseByOne = () => setCounter(counter + 1)

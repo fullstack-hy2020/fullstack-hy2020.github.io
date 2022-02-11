@@ -14,16 +14,14 @@ Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.
 Luodaan sovellus nimeltään <i>part1</i> ja mennään sovelluksen sisältämään hakemistoon:
 
 ```bash
-$ npx create-react-app part1
-$ cd part1
+npx create-react-app part1
+cd part1
 ```
-
-Kaikki tässä (ja jatkossa) annettavat merkillä <em>$</em> alkavat komennot on kirjoitettu terminaaliin eli komentoriville. Merkkiä <em>$</em> ei tule kirjoittaa, sillä se edustaa komentokehotetta.
 
 Sovellus käynnistetään seuraavasti:
 
 ```bash
-$ npm start
+npm start
 ```
 
 Sovellus käynnistyy oletusarvoisesti localhostin porttiin 3000, eli osoitteeseen <http://localhost:3000>.
@@ -47,7 +45,6 @@ ReactDOM.render(
 ja tiedoston <i>App.js</i> sisällöksi
 
 ```js
-import React from 'react'
 const App = () => (
   <div>
     <p>Hello world</p>
@@ -134,7 +131,7 @@ const App = () => {
 export default App
 ```
 
-muuten komponentti ei näy tiedostoon <i>index.js</i>!
+muuten komponentti ei näy tiedostoon <i>index.js!</i>
 
 Komponenttien sisällä on mahdollista renderöidä myös dynaamista sisältöä.
 
@@ -161,7 +158,7 @@ Aaltosulkeiden sisällä oleva JavaScript-koodi evaluoidaan ja evaluoinnin tulos
 
 ### JSX
 
-Näyttää siltä, että React-komponentti palauttaa HTML-koodia. Näin ei kuitenkaan ole. React-komponenttien ulkoasu kirjoitetaan yleensä [JSX](https://reactjs.org/docs/introducing-jsx.html):ää käyttäen. Vaikka JSX näyttää HTML:ltä, kyseessä on kuitenkin tapa kirjoittaa JavaScriptiä. React-komponenttien palauttama JSX käännetään konepellin alla JavaScriptiksi.
+Näyttää siltä, että React-komponentti palauttaa HTML-koodia. Näin ei kuitenkaan ole. React-komponenttien ulkoasu kirjoitetaan yleensä [JSX](https://reactjs.org/docs/introducing-jsx.html):ää käyttäen. Vaikka JSX näyttää HTML:ltä, kyseessä on kuitenkin tapa kirjoittaa JavaScriptia. React-komponenttien palauttama JSX käännetään konepellin alla JavaScriptiksi.
 
 Käännösvaiheen jälkeen komponentin määrittelevä koodi näyttää seuraavalta:
 
@@ -187,7 +184,7 @@ Käännöksen hoitaa [Babel](https://babeljs.io/repl/). Create-react-app:illa lu
 
 Reactia olisi mahdollista kirjoittaa myös "suoraan JavaScriptinä" käyttämättä JSX:ää, mutta tämä ei ole järkevää.
 
-Käytännössä JSX on melkein kuin HTML:ää sillä erotuksella, että mukaan voi upottaa helposti dynaamista sisältöä kirjoittamalla sopivaa JavaScriptiä aaltosulkeiden sisälle. Idealtaan JSX on melko lähellä monia palvelimella käytettäviä templating-kieliä kuten Java Springin yhteydessä käytettävää Thymeleafia.
+Käytännössä JSX on melkein kuin HTML:ää sillä erotuksella, että mukaan voi upottaa helposti dynaamista sisältöä kirjoittamalla sopivaa JavaScriptia aaltosulkeiden sisälle. Idealtaan JSX on melko lähellä monia palvelimella käytettäviä templating-kieliä kuten Java Springin yhteydessä käytettävää Thymeleafia.
 
 JSX on "XML:n kaltainen", eli jokainen tagi tulee sulkea. Esimerkiksi rivinvaihto on tyhjä elementti, joka voidaan kirjoittaa HTML:ssä seuraavasti
 
@@ -316,7 +313,7 @@ React on konfiguroitu antamaan varsin hyviä virheilmoituksia. Kannattaa kuitenk
 
 **Konsolin tulee olla koko ajan auki**. Jos selain ilmoittaa virheestä, ei kannata kirjoittaa sokeasti lisää koodia ja toivoa ihmettä tapahtuvaksi, vaan tulee yrittää ymmärtää virheen syy ja esim. palata edelliseen toimivaan tilaan:
 
-![](../../images/1/2a.png)
+![](../../images/1/2c.png)
 
 Kannattaa muistaa myös, että React-koodissakin on mahdollista ja kannattavaa lisätä koodin sekaan sopivia konsoliin tulostavia <em>console.log()</em>-komentoja. Tulemme hieman [myöhemmin](#react-sovellusten-debuggaus) tutustumaan muutamiin muihinkin tapoihin debugata Reactia.
 
@@ -363,7 +360,7 @@ const App = () => {
 
 seurauksena on virheilmoitus:
 
-![](../../images/1/3a.png)
+![](../../images/1/3c.png)
 
 Juurielementin käyttö ei ole ainoa toimiva vaihtoehto, myös <i>taulukollinen</i> komponentteja on validi tapa:
 
@@ -430,7 +427,7 @@ Huomaa, että tässä osassa on muitakin tehtäviä kuin allaolevat. <i>Älä si
 **Vinkki:** Kun olet avaamassa tehtävääsi Visual Studio Codella, huomaathan avata koko projektin kansion editoriin. Tämä mahdollistaa editorissa helpomman tiedostojen välillä siirtymisen ja paremmat automaattiset täydennykset. Tämä onnistuu siirtymällä terminaalissa projektin kansioon ja komentamalla:
 
 ```bash
-$ code .
+code .
 ```
 
   <h4>1.1: kurssitiedot, step1</h4>
@@ -452,8 +449,6 @@ ReactDOM.render(
 ja tiedosto <i>App.js</i> muotoon
 
 ```js
-import React from 'react'
-
 const App = () => {
   const course = 'Half Stack application development'
   const part1 = 'Fundamentals of React'

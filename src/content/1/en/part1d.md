@@ -383,7 +383,7 @@ Keep both your code and the web page open together **at the same time, all the t
 
 If and when your code fails to compile and your browser lights up like a Christmas tree:
 
-![](../../images/1/6e.png)
+![](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
 
@@ -831,6 +831,7 @@ const App = () => {
   
   // highlight-start
   const setToValue = (newValue) => () => {
+    console.log('value now', newValue)  // print the new value to console
     setValue(newValue)
   }
   // highlight-end
@@ -858,6 +859,7 @@ The event handler is set to the return value of _setToValue(1000)_ which is the 
 
 ```js
 () => {
+  console.log('value now', 1000)
   setValue(1000)
 }
 ```
@@ -872,6 +874,7 @@ The event handler is created by the function call _setToValue(value + 1)_ which 
 
 ```js
 () => {
+  console.log('value now', 11)
   setValue(11)
 }
 ```
@@ -883,6 +886,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -947,6 +951,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -981,6 +986,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -1048,7 +1054,7 @@ ReactDOM.render(
 You can use the code below as a starting point for the <i>App.js</i> file:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const App = () => {
   // save clicks of each button to its own state
@@ -1155,7 +1161,7 @@ The world of software engineering is filled with [anecdotes](http://www.comp.nus
 Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering: 
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const App = () => {
   const anecdotes = [
@@ -1228,6 +1234,6 @@ Now implement the final version of the application that displays the anecdote wi
 
 If multiple anecdotes are tied for first place it is sufficient to just show one of them.
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)).
+This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

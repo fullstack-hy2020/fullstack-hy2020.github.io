@@ -16,9 +16,7 @@ Code will conform to contemporary best practices from  [part 1](/en/part1) onwar
 
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while. 
 
-**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing `F12` or `option-cmd-i` simultaneously. 
-On Windows or Linux, open the console by pressing `F12` or `ctrl-shift-i` simultaneously.
-The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
+**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing _F12_ or _option-cmd-i_ simultaneously.  On Windows or Linux, open the console by pressing _F12_ or _ctrl-shift-i_ simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
 
 Remember to <i>always</i> keep the Developer Console open when developing web applications. 
 
@@ -120,7 +118,7 @@ In traditional web applications the browser is "dumb". It only fetches HTML data
 The example uses [Express](https://expressjs.com/) from Node.js. 
 This course will use Node.js and Express to create web servers. 
 
-### Running application logic on the browser
+### Running application logic in the browser
 
 Keep the Developer Console open. Empty the console by clicking the 🚫 symbol, or by typing clear() in the console. 
 Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests: 
@@ -179,8 +177,7 @@ We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.
 
 ![](../../images/0/10e.png)
 
-There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". 
-By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted: 
+There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted: 
 
 ![Formatted JSON output](../../images/0/11e.png)
 
@@ -360,7 +357,7 @@ Even though the page updates on your browser, the changes are not permanent. If 
 
 The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
-Cascading Style Sheets, or CSS, is a markup language used to determine the appearance of web pages. 
+Cascading Style Sheets, or CSS, is a style sheet language used to determine the appearance of web pages. 
 
 The fetched CSS-file looks as follows: 
 
@@ -380,7 +377,7 @@ A class selector definition always starts with a period, and contains the name o
 
 The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements. 
 
-CSS attributes can be examined on the <i>elements</i> tab on the console:  
+CSS attributes can be examined on the <i>elements</i> tab of the console:  
 
 ![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
 
@@ -397,7 +394,6 @@ The <i>Elements</i> tab of the console can be used to change the styles of the e
 ![](../../images/0/18e.png)
 
 Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server. 
-
 
 ### Loading a page containing JavaScript - review
 
@@ -578,7 +574,7 @@ The sample app is done with so called [vanilla JavaScript](https://www.freecodec
 
 Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [jQuery](https://jquery.com/).
 
-jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of vanilla JS, and the most popular browsers generally support basic functionalities well. 
+jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of JavaScript, and the most popular browsers generally support basic functionalities well. 
 
 The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development. 
 
@@ -700,6 +696,6 @@ Create a diagram depicting the situation where the user goes to the [single page
 
 Create a diagram depicting the situation where the user creates a new note using the single page version of the app. 
 
-This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

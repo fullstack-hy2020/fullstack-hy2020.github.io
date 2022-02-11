@@ -150,7 +150,7 @@ const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
-Miksi emme hoitaneet tilan päivitystä näin:
+Miksi emme hoitaneet tilan päivitystä seuraavasti:
 
 ```js
 const handleLeftClick = () => {
@@ -158,9 +158,8 @@ const handleLeftClick = () => {
   setClicks(clicks)
 }
 ```
-?
 
-Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa tilaa suoraan</i>, koska sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
+Sovellus näyttää toimivan. Reactissa <i>ei kuitenkaan ole sallittua muuttaa tilaa suoraan</i> (kuten komento _clicks.left_ nyt tekee), koska sillä voi olla arvaamattomat seuraukset. Tilan muutos tulee aina tehdä asettamalla uudeksi tilaksi vanhan perusteella tehty kopio!
 
 Kaiken tilan pitäminen yhdessä oliossa on tämän sovelluksen kannalta huono ratkaisu; etuja siinä ei juuri ole, mutta sovellus monimutkaistuu merkittävästi. Onkin ehdottomasti parempi ratkaisu tallettaa nappien klikkaukset erillisiin tilan paloihin.
 
@@ -397,7 +396,7 @@ Pidä myös koodi ja web-sivu **koko ajan** yhtä aikaa näkyvillä.
 
 Jos ja kun koodi ei käänny eli selaimessa alkaa näkyä punaista
 
-![](../../images/1/6e.png)
+![](../../images/1/6x.png)
 
 älä kirjoita lisää koodia, vaan selvitä ongelma. Koodauksen historia ei tunne tilannetta, jossa kääntymätön koodi alkaa ihmeen voimalla toimimaan kirjoittamalla suuri määrää lisää koodia, emmekä usko tällaista ihmettä nähtävän tälläkään kurssilla.
 
@@ -587,7 +586,6 @@ Entä seuraava:
   button
 </button>
 ```
-?
 
 Konsoliin tulostuu kertaalleen <i>clicked the button</i>, mutta nappia painellessa ei tapahdu mitään. Miksi tämä ei toimi vaikka tapahtumankäsittelijänä on nyt funktio _console.log_?
 
@@ -846,6 +844,7 @@ const App = (props) => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => () => {
+    console.log('value now', newValue) // tulostetaan uusi arvo konsoliin
     setValue(newValue)
   }
 
@@ -870,7 +869,8 @@ tulee tapahtumankäsittelijäksi funktiokutsun _setToValue(1000)_ paluuarvo eli 
 
 ```js
 () => {
-    setValue(1000)
+  console.log('value now', 1000)
+  setValue(1000)
 }
 ```
 
@@ -883,6 +883,7 @@ Kasvatusnapin generoima rivi on seuraava:
 Tapahtumankäsittelijän muodostaa funktiokutsu _setToValue(value + 1)_, joka saa parametrikseen tilan tallettavan muuttujan _value_ nykyisen arvon kasvatettuna yhdellä. Jos _value_ olisi 10, tulisi tapahtumankäsittelijäksi funktio:
 ```js
 () => {
+  console.log('value now', 11)
   setValue(11)
 }
 ```
@@ -894,6 +895,7 @@ const App = (props) => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -954,10 +956,11 @@ const Button = (props) => (
   </button>
 )
 
-const App = props => {
+const App = (props) => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -992,6 +995,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -1054,7 +1058,7 @@ ReactDOM.render(
 Muun sovelluksen voi tehdä tiedostoon <i>App.js</i>. Tiedoston sisältö voi olla aluksi seuraava:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const App = () => {
   // tallenna napit omaan tilaansa
@@ -1160,7 +1164,7 @@ Ohjelmistotuotannossa tunnetaan lukematon määrä [anekdootteja](http://www.com
 Laajenna seuraavaa sovellusta siten, että siihen tulee nappi, jota painamalla sovellus näyttää <i>satunnaisen</i> ohjelmistotuotantoon liittyvän anekdootin:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const App = () => {
   const anecdotes = [

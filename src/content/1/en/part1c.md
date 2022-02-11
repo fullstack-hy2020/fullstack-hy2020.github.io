@@ -94,7 +94,7 @@ const Hello = (props) => {
 
   return (
     <div>
-      <p>Hello {name}, you are {age} years old</p>
+      <p>Hello {name}, you are {age} years old</p> // highlight-line
       <p>So you were probably born in {bornYear()}</p>
     </div>
   )
@@ -179,8 +179,6 @@ So far all of our applications have been such that their appearance remains the 
 Let's start with the following. File <i>App.js</i> becomes:
 
 ```js
-import React from 'react'
-
 const App = (props) => {
   const {counter} = props
   return (
@@ -206,7 +204,7 @@ ReactDOM.render(
 ```
 
 
-**Note** when you change file <i>index.js</i> React does not refresh the page automatically so you need to reload the browser page to get the new content shown.
+**Note** when you change file <i>index.js</i> React does not always refresh the page automatically so you possibly need to reload the browser page to get the new content shown.
 
 The App component is given the value of the counter via the _counter_ prop. This component renders the value to the screen. What happens when the value of _counter_ changes? Even if we were to add the following
 
@@ -265,7 +263,7 @@ document.getElementById('root'))
 and <i>App.js</i> changes to the following:
 
 ```js
-import React, { useState } from 'react' // highlight-line
+import { useState } from 'react' // highlight-line
 
 const App = () => {
   const [ counter, setCounter ] = useState(0) // highlight-line
@@ -289,7 +287,7 @@ export default App
 In the first row, the file imports the _useState_ function:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 ```
 
 The function body that defines the component begins with the function call:
@@ -467,7 +465,6 @@ We define the event handlers for our buttons where we declare their <i>onClick</
 </button>
 ```
 
-<!-- Entä jos yritämme määritellä tapahtumankäsittelijän hieman yksinkertaisemmassa muodossa: -->
 What if we tried to define the event handlers in a simpler form?
 
 ```js
@@ -476,19 +473,16 @@ What if we tried to define the event handlers in a simpler form?
 </button>
 ```
 
-<!-- Tämä muutos kuitenkin hajottaa sovelluksemme täysin: -->
 This would completely break our application:
 
-![](../../images/1/5b.png)
+![](../../images/1/5c.png)
 
-<!-- Mistä on kyse? Tapahtumankäsittelijäksi on tarkoitus määritellä joko <i>funktio</i> tai <i>viite funktioon</i>. Kun koodissa on -->
 What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write:
 
 ```js
 <button onClick={setCounter(counter + 1)}>
 ```
 
-<!-- tapahtumankäsittelijäksi tulee määriteltyä <i>funktiokutsu</i>. Sekin on monissa tilanteissa ok, mutta ei nyt. Kun React renderöi metodin ensimmäistä kertaa ja muuttujan <i>counter</i> arvo on 0, se suorittaa kutsun <em>setCounter(0 + 1)</em>, eli muuttaa komponentin tilan arvoksi 1. Tämä taas aiheuttaa komponentin uudelleenrenderöitymisen. Ja sama toistuu uudelleen... -->
 the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning the value of the <i>counter</i> variable is 0. When React renders the component for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
 This will cause the component to be re-rendered, React will execute the setCounter function call again, and the state will change leading to another rerender...
 
@@ -642,25 +636,20 @@ The event handler is passed to the <i>Button</i> component through the _onClick_
 
 ### Changes in state cause rerendering
 
-<!-- Kerrataan vielä sovelluksen toiminnan pääperiaatteet.  -->
 Let's go over the main principles of how an application works once more.
 
-<!-- Kun sovellus käynnistyy, suoritetaan komponentin _App_-koodi, joka luo [useState](https://reactjs.org/docs/hooks-reference.html#usestate)-hookin avulla sovellukselle laskurin tilan _counter_. Komponentti renderöi laskimen alkuarvon 0 näyttävän komponentin _Display_ sekä kolme _Button_-komponenttia, joille se asettaa laskurin tilaa muuttavat tapahtumankäsittelijät. -->
 When the application starts, the code in _App_ is executed. This code uses a [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook to create the application state, setting an initial value of the variable _counter_.
 This component contains the _Display_ component - which displays the counter's value, 0 - and three _Button_ components. The buttons all have event handlers, which are used to change the state of the counter.
 
-<!-- Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tapahtumankäsittelijä muuttaa komponentin _App_ tilaa funktion _setCounter_ avulla. **Tilaa muuttavan funktion kutsuminen aiheuttaa komponentin uudelleenrenderöitymisen.**  -->
 When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function. 
 **Calling a function which changes the state causes the component to rerender.**
 
-<!-- Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät. -->
 So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered. 
 This causes its subcomponents _Display_ and _Button_ to also be re-rendered. 
 _Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter.
 
 ### Refactoring the components
 
-<!-- Laskimen arvon näyttävä komponentti on siis seuraava -->
 The component displaying the value of the counter is as follows:
 
 ```js
@@ -671,7 +660,6 @@ const Display = (props) => {
 }
 ```
 
-<!-- Komponentti tarvitsee ainoastaan <i>propsin</i> kenttää _counter_, joten se voidaan yksinkertaistaa [destrukturoinnin](/osa1/komponentin_tila_ja_tapahtumankasittely#destrukturointi) avulla seuraavaan muotoon: -->
 The component only uses the _counter_ field of its <i>props</i>. 
 This means we can simplify the component by using [destructuring](/en/part1/component_state_event_handlers#destructuring), like so:
 
@@ -704,7 +692,6 @@ const Button = (props) => {
 }
 ```
 
-<!-- Eli destrukturoidaan <i>props</i>:ista tarpeelliset kentät ja käytetään nuolifunktioiden tiiviimpää muotoa  -->
 We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
 
 ```js

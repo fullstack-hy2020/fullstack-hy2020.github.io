@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin aikana on web-sovelluskehityksen rinnalla tavoite ja tarve oppia riittävässä määrin JavaScriptiä.
+Kurssin aikana on web-sovelluskehityksen rinnalla tavoite ja tarve oppia riittävässä määrin JavaScriptia.
 
 JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2021 julkaistu [ES12](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2021.
 
@@ -15,7 +15,7 @@ Selaimet eivät vielä osaa kaikkia JavaScriptin uusimpien versioiden ominaisuuk
 
 Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 
-[Node.js](https://nodejs.org/en/) on melkein missä vaan (mm. palvelimilla) toimiva, Googlen [Chrome V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScript-suoritusympäristö. Harjoitellaan hieman JavaScriptiä Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>14.8.0</i>. Noden tuoreet versiot osaavat suoraan JavaScriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
+[Node.js](https://nodejs.org/en/) on melkein missä vaan (mm. palvelimilla) toimiva, Googlen [Chrome V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScript-suoritusympäristö. Harjoitellaan hieman JavaScriptia Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>16.13.2</i>. Noden tuoreet versiot osaavat suoraan JavaScriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
 
 Koodi kirjoitetaan <i>.js</i>-päätteiseen tiedostoon ja suoritetaan komennolla <em>node tiedosto.js</em>
 
@@ -23,7 +23,7 @@ Koodia on mahdollista kirjoittaa myös Node.js-konsoliin, joka aukeaa kun kirjoi
 
 JavaScript muistuttaa nimensä ja syntaksinsa puolesta läheisesti Javaa. Perusmekanismeiltaan kielet kuitenkin poikkeavat radikaalisti. Java-ohjelmoijalle JavaScriptin käyttäytyminen saattaa aiheuttaa hämmennystä, erityisesti jos kielen piirteistä ei viitsi ottaa selvää.
 
-Tietyissä piireissä on myös ollut suosittua yrittää "simuloida" JavaScriptilla eräitä Javan tai Pythonin piirteitä ja ohjelmointitapoja, mutta se ei ole suositeltavaa.
+Tietyissä piireissä on myös ollut suosittua yrittää "simuloida" JavaScriptilla eräitä Javan, Pythonin tai muiden tavanomaisten olio-ohjelmointikielien piirteitä ja ohjelmointitapoja, mutta se ei ole suositeltavaa.
 
 ### Muuttujat
 
@@ -56,17 +56,19 @@ Lisää aiheesta on esim. YouTubessa: [var, let and const - ES6 JavaScript Featu
 ```js
 const t = [1, -1, 3]
 
-t.push(5)
+console.log(t.length) // tulostuu 3
+console.log(t[1])     // tulostuu -1
+
+t.push(5)             // lisätään taulukkoon luku 5
 
 console.log(t.length) // tulostuu 4
-console.log(t[1])     // tulostuu -1
 
 t.forEach(value => {
   console.log(value)  // tulostuu 1, -1, 3, 5 omille riveilleen
 })                    
 ```
 
-Huomaa, että taulukon sisältöä voi muuttaa, vaikka taulukko on määritelty _const_:ksi. Koska taulukko on olio, muuttuja viittaa koko ajan samaan olioon, jonka sisältö muuttuu kun taulukkoon lisätään uusia alkioita.
+Huomaa, että taulukon sisältöä voi muuttaa, vaikka taulukko on määritelty _const_:ksi. Koska taulukko on <i>olio</i>, muuttuja viittaa koko ajan samaan olioon, jonka sisältö muuttuu kun taulukkoon lisätään uusia alkioita.
 
 Eräs tapa käydä taulukon alkiot läpi on esimerkissä käytetty _forEach_, joka saa parametrikseen nuolisyntaksilla määritellyn <i>funktion</i>
 
@@ -78,7 +80,7 @@ value => {
 
 forEach kutsuu funktiota <i>jokaiselle taulukon alkiolle</i> antaen taulukon yksittäisen alkion yksi kerrallaan funktiolle parametrina. forEachin parametrina oleva funktio voi saada myös [muita parametreja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
-Edellisessä esimerkissä taulukkoon lisättiin uusi alkio metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Reactin yhteydessä sovelletaan usein funktionaalisen ohjelmoinnin tekniikoita, ja eräs piirre on käyttää <i>muuttumattomia</i> (engl. [immutable](https://en.wikipedia.org/wiki/Immutable_object)) tietorakenteita. React-koodissa kannattaakin mieluummin käyttää metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka ei lisää alkiota taulukkoon vaan luo uuden taulukon, jossa on lisättävä alkio sekä vanhan taulukon sisältö:
+Edellisessä esimerkissä taulukkoon lisättiin uusi alkio metodilla [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Reactin yhteydessä sovelletaan usein <i>funktionaalisen ohjelmoinnin</i> tekniikoita, ja eräs piirre on käyttää <i>muuttumattomia</i> (engl. [immutable](https://en.wikipedia.org/wiki/Immutable_object)) tietorakenteita. React-koodissa kannattaakin mieluummin käyttää metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka ei lisää alkiota taulukkoon vaan luo uuden taulukon, jossa on lisättävä alkio sekä vanhan taulukon sisältö:
 
 ```js
 const t = [1, -1, 3]
@@ -169,7 +171,7 @@ object1.address = 'Tapiola'
 object1['secret number'] = 12341
 ```
 
-Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pistenotaatiota käytettäessä <i>secret number</i> ei kelpaa kentän nimeksi.
+Jälkimmäinen lisäyksistä on pakko tehdä hakasulkeiden avulla, sillä pistenotaatiota käytettäessä välilyönnin sisältävä merkkijono <i>secret number</i> ei kelpaa kentän nimeksi.
 
 JavaScriptissä olioilla voi olla myös metodeja. Tällä kurssilla emme kuitenkaan tarvitse itse määriteltyjä metodillisia olioita, joten asiaa ei käsitellä kuin lyhyesti.
 
@@ -217,7 +219,7 @@ const tSquared = t.map(p => p * p)
 // tSquared on nyt [1, 4, 9]
 ```
 
-Nuolifunktio on tullut Javascriptiin vasta muutama vuosi sitten version [ES6](http://es6-features.org/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
+Nuolifunktio on tullut JavaScriptiin vasta muutama vuosi sitten version [ES6](http://es6-features.org/) myötä. Tätä ennen ainoa tapa funktioiden määrittelyyn oli avainsanan _function_ käyttö.
 
 Määrittelytapoja on kaksi, funktiolle voidaan antaa [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) -tyyppisessä määrittelyssä <i>nimi</i>, jonka avulla funktioon voidaan viitata:
 
@@ -239,7 +241,7 @@ const average = function(a, b) {
 const vastaus = average(2, 5)
 ```
 
-Määrittelemme tällä kurssilla kaikki funktiot nuolisyntaksin avulla.
+Määrittelemme tällä kurssilla muutamaa poikkeusta lukuunottamatta kaikki funktiot nuolisyntaksin avulla.
 
 </div>
 
@@ -452,7 +454,7 @@ referenceToGreet() // tulostuu ainoastaan hello, my name is
 
 Kun metodia kutsutaan viitteen kautta, metodi on kadottanut tiedon siitä, mikä alkuperäinen _this_ oli. Toisin kuin melkein kaikissa muissa kielissä, JavaScriptissa [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this):n arvo määrittyy sen mukaan <i>miten metodia on kutsuttu</i>. Kutsuttaessa metodia viitteen kautta, _this_:in arvoksi tulee ns. [globaali objekti](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) ja lopputulos ei ole yleensä ollenkaan se, mitä sovelluskehittäjä olettaa.
 
-This:in kadottaminen saattaa aiheuttaa ongelmia. Eteen tulee usein tilanteita, joissa Reactin/Noden (tai oikeammin ilmaistuna selaimen JavaScript-moottorin) tulee kutsua joitain ohjelmoijan määrittelemien olioiden metodeja. Tällä kurssilla kuitenkin säästymme näiltä ongelmilta, sillä käytämme ainoastaan "thissitöntä" JavaScriptiä.
+This:in kadottaminen saattaa aiheuttaa ongelmia. Eteen tulee usein tilanteita, joissa Reactin/Noden (tai oikeammin ilmaistuna selaimen JavaScript-moottorin) tulee kutsua joitain ohjelmoijan määrittelemien olioiden metodeja. Tällä kurssilla kuitenkin säästymme näiltä ongelmilta, sillä käytämme ainoastaan "thissitöntä" JavaScriptia.
 
 _this_ katoaa esimerkiksi, jos pyydetään Artoa tervehtimään sekunnin kuluttua metodia [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) käyttäen:
 
@@ -509,7 +511,7 @@ const juhq = new Person('Juha Tauriainen', 48)
 juhq.greet()
 ```
 
-Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon esim. Javan luokkia ja olioita. Käyttäytymiseltäänkin ne ovat aika lähellä Javan olioita. Kyse on kuitenkin edelleen JavaScriptin [prototyyppiperintään](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) perustuvista olioista. Molempien olioiden todellinen tyyppi on _Object_ sillä JavaScriptissä ei ole muita tyyppejä kuin [Boolean, Null, Undefined, Number, String, Symbol, BigInt ja Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+Syntaksin osalta luokat ja niistä luodut oliot muistuttavat erittäin paljon esim. Javan tai Pythonin luokkia ja olioita. Käyttäytymiseltäänkin ne ovat aika lähellä tavanomaisten oliokielten olioita. Kyse on kuitenkin edelleen JavaScriptin [prototyyppiperintään](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) perustuvista olioista. Molempien olioiden todellinen tyyppi on _Object_ sillä JavaScriptissä ei ole muita tyyppejä kuin [Boolean, Null, Undefined, Number, String, Symbol, BigInt ja Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
 Luokkasyntaksin tuominen JavaScriptiin on osin kiistelty lisäys, kts. esim. [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) tai [Is “Class” In ES6 The New “Bad” Part?](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65).
 
