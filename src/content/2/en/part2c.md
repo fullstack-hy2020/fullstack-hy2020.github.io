@@ -19,19 +19,19 @@ Create a file named <i>db.json</i> in the root directory of the project with the
     {
       "id": 1,
       "content": "HTML is easy",
-      "date": "2019-05-30T17:30:31.098Z",
+      "date": "2022-1-17T17:30:31.098Z",
       "important": true
     },
     {
       "id": 2,
       "content": "Browser can execute only JavaScript",
-      "date": "2019-05-30T18:39:34.091Z",
+      "date": "2022-1-17T18:39:34.091Z",
       "important": false
     },
     {
       "id": 3,
       "content": "GET and POST are the most important methods of HTTP protocol",
-      "date": "2019-05-30T19:20:14.298Z",
+      "date": "2022-1-17T19:20:14.298Z",
       "important": true
     }
   ]
@@ -143,17 +143,17 @@ Nowadays, practically all JavaScript projects are defined using the node package
 
 ```json
 {
-  "name": "part2-notes",
+  "name": "notes",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.0",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -197,15 +197,18 @@ Axios is now included among the other dependencies:
 
 ```json
 {
+  "name": "notes",
+  "version": "0.1.0",
+  "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.9",
-    "@testing-library/react": "^11.2.3",
-    "@testing-library/user-event": "^12.6.0",
-    "axios": "^0.21.1", // highlight-line
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "@testing-library/jest-dom": "^5.16.1",
+    "@testing-library/react": "^12.1.2",
+    "@testing-library/user-event": "^13.5.0",
+    "axios": "^0.24.0", // highlight-line
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.3"
   },
   // ...
 }
@@ -285,7 +288,7 @@ If you open <http://localhost:3000> in the browser, this should be printed to th
 
 ![](../../images/2/16b.png)
 
-**Note:** when the content of the file <i>index.js</i> changes, React does not notice that automatically so you must refresh the browser to see your changes! A simple workaround to make React notice the change automatically, is to create a file named <i>.env</i> in the root directory of the project and add this line `FAST_REFRESH=false`. Restart the app for the applied changes to take effect.
+**Note:** when the content of the file <i>index.js</i> changes, React does not always notice that automatically so you might need to refresh the browser to see your changes! A simple workaround to make React notice the change automatically, is to create a file named <i>.env</i> in the root directory of the project and add this line <i>FAST_REFRESH=false</i>. Restart the app for the applied changes to take effect.
 
 Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
@@ -299,7 +302,7 @@ In other words, a promise is an object that represents an asynchronous operation
 2. The promise is <i>fulfilled</i>: It means that the operation has completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
-The first promise in our example is <i>fulfilled</i>, representing a successful `axios.get('http://localhost:3001/notes')` request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
+The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
 
 If, and when, we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:
 
@@ -348,7 +351,6 @@ We can finally begin using the data fetched from the server.
 Let's try and request the notes from our local server and render them, initially as the App component. Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfully retrieve a response:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
@@ -386,7 +388,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 The <i>App</i> component changes as follows:
 
 ```js
-import React, { useState, useEffect } from 'react' // highlight-line
+import { useState, useEffect } from 'react' // highlight-line
 import axios from 'axios' // highlight-line
 import Note from './components/Note'
 
@@ -525,7 +527,7 @@ useEffect(() => {
 
 We still have a problem in our application. When adding new notes, they are not stored on the server.
 
-The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
+The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
 
 ### The development runtime environment 
 
@@ -543,13 +545,9 @@ At this point in development, all the parts of the application happen to reside 
 
 <div class="tasks">
 
-
 <h3>Exercises 2.11.-2.14.</h3>
 
-
 <h4>2.11: The Phonebook Step6</h4>
-
-
 
 We continue with developing the phonebook. Store the initial state of the application in the file <i>db.json</i>, which should be placed in the root of the project.
 
@@ -615,9 +613,9 @@ If there are ten or fewer countries, but more than one, then all countries match
 
 ![](../../images/2/19b2.png)
 
-When there is only one country matching the query, then the basic data of the country, its flag and the languages spoken there, are shown:
+When there is only one country matching the query, then the basic data of the country (eg. capital and area), its flag and the languages spoken there, are shown:
 
-![](../../images/2/19b3.png)
+![](../../images/2/19c3.png)
 
 **NB**: It is enough that your application works for most of the countries. Some countries, like <i>Sudan</i>, can be hard to support, since the name of the country is part of the name of another country, <i>South Sudan</i>. You need not to worry about these edge cases.
 
@@ -637,16 +635,16 @@ In this exercise it is also enough that your application works for most of the c
 
 **There is still a lot to do in this part, so don't get stuck on this exercise!**
 
-Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org).
+Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org). Note that it might take some minutes until a generated api key is valid.
 
-![](../../images/2/19ba.png)
+![](../../images/2/19x.png)
+
+If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description how to get weather icons.
 
 **NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome.
 
-<!-- **Huom:** tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi api-avaimen. Älä talleta avainta versionhallintaan, eli älä kirjoita avainta suoraan koodiin.  Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/). -->
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
 
-<!-- Oletetaan että api-avaimen arvo on <i>t0p53cr3t4p1k3yv4lu3</i>. Kun ohjelma käynnistetään seuraavasti -->
 Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
 
 ```bash
@@ -655,7 +653,6 @@ REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' npm start // For Linux/macOS Bash
 set REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' && npm start // For Windows cmd.exe
 ```
 
-<!-- koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta: -->
 you can access the value of the key from the _process.env_ object:
 
 ```js

@@ -7,12 +7,12 @@ lang: en
 
 <div class="content">
 
-Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy/part2-notes/tree/part2-1). 
+Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1). 
 
 In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
 
 ```js
-import React, { useState } from 'react' // highlight-line
+import { useState } from 'react' // highlight-line
 import Note from './components/Note'
 
 const App = (props) => { // highlight-line
@@ -115,6 +115,8 @@ The target of the event stored in _event.target_ is logged to the console:
 The target in this case is the form that we have defined in our component.
 
 How do we access the data contained in the form's <i>input</i> element?
+
+### Controlled component
 
 There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://reactjs.org/docs/forms.html#controlled-components).
 
@@ -259,7 +261,7 @@ The event handler also resets the value of the controlled input element by calli
 setNewNote('')
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy/part2-notes/tree/part2-2).
+You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
 
 ### Filtering Displayed Elements
 
@@ -280,7 +282,7 @@ const App = (props) => {
 Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items of the list depend on the state of the component:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Note from './components/Note'
 
 const App = (props) => {
@@ -349,7 +351,7 @@ Next let's add functionality that enables users to toggle the <em>showAll</em> s
 The relevant changes are shown below:
 
 ```js
-import React, { useState } from 'react' 
+import { useState } from 'react' 
 import Note from './components/Note'
 
 const App = (props) => {
@@ -393,7 +395,7 @@ The text of the button depends on the value of the <em>showAll</em> state:
 show {showAll ? 'important' : 'all'}
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy/part2-notes/tree/part2-3).
+You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">
@@ -413,7 +415,7 @@ Let us start by implementing the addition of a person to phonebook.
 You can use the code below as a starting point for the <i>App</i> component of your application:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([
@@ -566,7 +568,6 @@ const App = () => {
 }
 ```
 
-<!-- **HUOM**: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla). -->
 **NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
 the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
 from last part.

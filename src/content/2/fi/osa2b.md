@@ -12,7 +12,7 @@ Jatketaan sovelluksen laajentamista siten, että se mahdollistaa uusien muistiin
 Jotta saisimme sivun päivittymään uusien muistiinpanojen lisäyksen yhteydessä, on parasta sijoittaa muistiinpanot komponentin <i>App</i> tilaan. Eli importataan funktio [useState](https://reactjs.org/docs/hooks-state.html) ja määritellään sen avulla komponentille tila, joka saa aluksi arvokseen propsina välitettävän muistiinpanot alustavan taulukon: 
 
 ```js
-import React, { useState } from 'react' // highlight-line
+import { useState } from 'react' // highlight-line
 import Note from './components/Note'
 
 const App = (props) => { // highlight-line
@@ -109,6 +109,8 @@ Tapahtuman kohde eli _event.target_ on tulostettu konsoliin:
 Kohteena on siis komponentin määrittelemä lomake.
 
 Miten pääsemme käsiksi lomakkeen <i>input</i>-komponenttiin syötettyyn dataan?
+
+### Kontrolloitu komponentti
 
 Tapoja on useampia, joista tutustumme ensin [kontrolloituina komponentteina](https://reactjs.org/docs/forms.html#controlled-components) toteutettuihin lomakkeisiin.
 
@@ -252,7 +254,7 @@ Tapahtumankäsittelijä tyhjentää myös syötekenttää kontrolloivan tilan <e
 setNewNote('')
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-2), branchissä <i>part2-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2), branchissä <i>part2-2</i>.
 
 ### Näytettävien elementtien filtteröinti
 
@@ -273,7 +275,7 @@ const App = (props) => {
 Muutetaan komponenttia siten, että se tallettaa muuttujaan <em>notesToShow</em> näytettävien muistiinpanojen listan riippuen siitä, tuleeko näyttää kaikki vai vain tärkeät:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Note from './components/Note'
 
 const App = (props) => {
@@ -340,7 +342,7 @@ Filtteröinnin toimivuutta voi jo nyt kokeilla vaihtelemalla sitä, miten tilan 
 Lisätään sitten toiminnallisuus, joka mahdollistaa <em>showAll</em>:in tilan muuttamisen sovelluksesta:
 
 ```js
-import React, { useState } from 'react' 
+import { useState } from 'react' 
 import Note from './components/Note'
 
 const App = (props) => {
@@ -387,7 +389,7 @@ Napin teksti riippuu tilan <em>showAll</em> arvosta:
 show {showAll ? 'important' : 'all' }
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-3) branchissa <i>part2-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3) branchissa <i>part2-3</i>.
 
 </div>
 
@@ -408,7 +410,7 @@ Toteutetaan tässä tehtävässä henkilön lisäys puhelinluetteloon.
 Voit ottaa sovelluksesi komponentin <i>App</i> pohjaksi seuraavan:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const App = () => {
   const [persons, setPersons] = useState([

@@ -25,7 +25,7 @@ h1 {
 }
 ```
 
-**Huom:** kun tiedostoon <i>index.js</i> lisätään sisältöä, React ei havaitse muutosta automaattisesti, eli joudut refreshaamaan selaimen, jotta näet muutokset! 
+**Huom:** kun tiedostoon <i>index.js</i> lisätään sisältöä, React ei välttämättä havaitse muutosta automaattisesti, eli saatat joutua refreshaamaan selaimen, jotta näet muutokset! 
 
 CSS-säännöt koostuvat valitsimesta eli <i>selektorista</i> ja määrittelystä eli <i>deklaraatiosta</i>. Valitsin määrittelee, mihin elementteihin sääntö kohdistuu. Valitsimena on nyt <i>h1</i> eli kaikki sovelluksessa käytetyt <i>h1</i>-otsikkotägit.
 
@@ -201,7 +201,7 @@ Lopputulos näyttää seuraavalta:
 
 ![](../../images/2/26e.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-7), branchissa <i>part2-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7), branchissa <i>part2-7</i>.
 
 ### Inline-tyylit
 
@@ -222,7 +222,7 @@ CSS-säännöt määritellään JavaScriptin avulla hieman eri tavalla kuin norm
 Vastaava tyyli kirjoitetaan Reactin inline-tyylin määrittelevänä oliona seuraavasti:
 
 ```js
- {
+{
   color: 'green',
   fontStyle: 'italic',
   fontSize: 16
@@ -244,7 +244,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2021</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2022</em>
     </div>
   )
 }
@@ -274,7 +274,7 @@ CSS:n, HTML:n ja JavaScriptin erottelu omiin tiedostoihinsa ei kuitenkaan ole v�
 
 Toiminnallisen kokonaisuuden strukturointiyksikkö on React-komponentti, joka määrittelee niin sisällön rakenteen kuvaavan HTML:n, toiminnan määrittelevät JavaScript-funktiot kuin komponentin tyylinkin yhdessä paikassa siten, että komponenteista tulee mahdollisimman riippumattomia ja yleiskäyttöisiä.
 
-Sovelluksen lopullinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-8), branchissa <i>part2-8</i>.
+Sovelluksen lopullinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8), branchissa <i>part2-8</i>.
 
 </div>
 

@@ -86,8 +86,6 @@ We will now do the 'frontend', or the browser-side application logic, in React f
 Let's start with the following (the file <i>App.js</i>):
 
 ```js
-import React from 'react'
-
 const App = (props) => {
   const { notes } = props
 
@@ -230,11 +228,9 @@ const App = (props) => {
       <h1>Notes</h1>
       <ul>
         {notes.map(note => 
-        // highlight-start
-          <li key={note.id}>
+          <li key={note.id}> // highlight-line
             {note.content}
           </li>
-          // highlight-end
         )}
       </ul>
     </div>
@@ -441,14 +437,11 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-Because this is a React-component, we must import React. 
-
 The last line of the module [exports](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) the declared module, the variable <i>Note</i>.
 
 Now the file that is using the component - <i>App.js</i> - can [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) the module: 
 
 ```js
-import React from 'react'
 import Note from './components/Note' // highlight-line
 
 const App = ({ notes }) => {
@@ -468,9 +461,9 @@ The period - <i>.</i> - in the beginning refers to the current directory, so the
 
 Modules have plenty of other uses other than enabling component declarations to be separated into their own files. We will get back to them later in this course. 
 
-The current code of the application can be found on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-1).
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
-Note that the <i>main</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
+Note that the <i>main</i> branch of the repository contains the code for a later version of the application. The current code is in the branch [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
 
 ![](../../images/2/2e.png)
 

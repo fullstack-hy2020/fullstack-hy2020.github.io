@@ -26,7 +26,7 @@ h1 {
 }
 ```
 
-**Note:** when the content of the file <i>index.css</i> changes, React does not notice that automatically so you must refresh the browser to see your changes!
+**Note:** when the content of the file <i>index.css</i> changes, React might not notice that automatically so you may need to refresh the browser to see your changes!
 
 CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application.
 
@@ -219,7 +219,7 @@ The result looks like this:
 ![](../../images/2/26e.png)
 
 
-The code for the current state of our application can be found in the  <i>part2-7</i> branch on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-7).
+The code for the current state of our application can be found in the  <i>part2-7</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
 
 ### Inline styles
 
@@ -240,7 +240,7 @@ CSS rules are defined slightly differently in JavaScript than in normal CSS file
 But as a React inline style object it would look like this:
 
 ```js
- {
+{
   color: 'green',
   fontStyle: 'italic',
   fontSize: 16
@@ -263,7 +263,7 @@ const Footer = () => {
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2021</em>
+      <em>Note app, Department of Computer Science, University of Helsinki 2022</em>
     </div>
   )
 }
@@ -296,7 +296,7 @@ The philosophy of React is, in fact, the polar opposite of this. Since the separ
 
 The structural units that make up the application's functional entities are React components. A React component defines the HTML for structuring the content, the JavaScript functions for determining functionality, and also the component's styling; all in one place. This is to create individual components that are as independent and reusable as possible.
 
-The code of the final version of our application can be found in the  <i>part2-8</i> branch on [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part2-8).
+The code of the final version of our application can be found in the  <i>part2-8</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8).
 
 </div>
 

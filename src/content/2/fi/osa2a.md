@@ -85,8 +85,6 @@ Tehdään nyt Reactilla [osan 0](/osa0) alussa käytettyä esimerkkisovelluksen 
 Aloitetaan seuraavasta (tiedosto <i>App.js</i>):
 
 ```js
-import React from 'react'
-
 const App = (props) => {
   const { notes } = props
 
@@ -225,11 +223,9 @@ const App = (props) => {
       <h1>Notes</h1>
       <ul>
         {notes.map(note => 
-        // highlight-start
-          <li key={note.id}>
+          <li key={note.id}> // highlight-line
             {note.content}
-          </li>
-          // highlight-end
+          </li>       
         )}
       </ul>
     </div>
@@ -323,7 +319,7 @@ Koska _map_-metodin parametrina olevan funktion
 note => <li key={note.id}>{note.content}</li>
 ```
 
-käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujan <i>note.content arvo</i> renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
+käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujien <i>note.id</i> ja <i>note.content </i> arvo renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
 
 Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen feedback on välitön.
 
@@ -432,8 +428,6 @@ Pienissä sovelluksissa komponentit sijoitetaan yleensä <i>src</i>-hakemiston a
 Tehdään nyt sovellukseen hakemisto <i>components</i> ja sinne tiedosto <i>Note.js</i>, jonka sisältö on seuraava:
 
 ```js
-import React from 'react'
-
 const Note = ({ note }) => {
   return (
     <li>{note.content}</li>
@@ -443,17 +437,14 @@ const Note = ({ note }) => {
 export default Note
 ```
 
-Koska kyseessä on React-komponentti, tulee React importata komponentissa.
-
 Moduulin viimeisenä rivinä [eksportataan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) määritelty komponentti, eli muuttuja <i>Note</i>.
 
 Nyt komponenttia käyttävä tiedosto <i>App.js</i> voi [importata](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) moduulin:
 
 ```js
-import React from 'react'
 import Note from './components/Note' // highlight-line
 
-const App = ({notes}) => {
+const App = ({ notes }) => {
   // ...
 }
 ```
@@ -470,9 +461,9 @@ Piste alussa viittaa nykyiseen hakemistoon, eli kyseessä on nykyisen hakemiston
 
 Moduuleilla on paljon muutakin käyttöä kuin mahdollistaa komponenttien määritteleminen omissa tiedostoissaan, palaamme moduuleihin tarkemmin myöhemmin kurssilla.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part2-1).
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
-Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy/part2-notes/tree/part2-1):
+Huomaa, että repositorion main-haarassa on myöhemmän vaiheen koodi. Tämän hetken koodi on branchissa [part2-1](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1):
 
 ![](../../images/2/2b.png)
 
