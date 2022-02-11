@@ -70,7 +70,7 @@ In order to store our saved notes indefinitely, we need a database. Most of the 
 
 Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
-You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately the material is currently only available in Finnish. 
+You can read more about document databases and NoSQL from MongoDB's _[What is NoSQL?](https://www.mongodb.com/nosql-explained)_
 
 Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea on how a document database stores data.
 
