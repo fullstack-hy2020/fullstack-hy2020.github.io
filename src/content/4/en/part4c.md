@@ -409,7 +409,6 @@ usersRouter.get('/', async (request, response) => {
 For making new users in a production or development environment, you may send a POST request to ```/api/users/``` via Postman or REST Client in the following format:
 ```js
 {
-    "notes": [],
     "username": "root",
     "name": "Superuser",
     "password": "salainen"
