@@ -112,7 +112,7 @@ The routing provided by React Router is enabled by changing the application as f
 ```js
 import {
   BrowserRouter as Router,
-  Switch, Route, Link
+  Routes, Route, Link
 } from "react-router-dom"
 
 const App = () => {
@@ -129,17 +129,11 @@ const App = () => {
         <Link style={padding} to="/users">users</Link>
       </div>
 
-      <Switch>
-        <Route path="/notes">
-          <Notes />
-        </Route>
-        <Route path="/users">
-          <Users />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/notes" element={<Notes />} />
+        <Route path="/users" element={<Users />} />
+        <Route path="/" element={<Home />} />
+      </Routes>
 
       <div>
         <i>Note app, Department of Computer Science 2022</i>
@@ -156,7 +150,7 @@ Notice that, even though the component is referred to by the name <i>Router</i>,
 ```js
 import {
   BrowserRouter as Router, // highlight-line
-  Switch, Route, Link
+  Routes, Route, Link
 } from "react-router-dom"
 ```
 
