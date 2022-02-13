@@ -702,7 +702,7 @@ CI=true npm test -- --coverage
 
 ![](../../images/5/18ea.png)
 
-Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisen komponentin testaamattomat koodirivit:
+Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisten komponentin testaamattomat koodirivit:
 
 ![](../../images/5/19ea.png)
 

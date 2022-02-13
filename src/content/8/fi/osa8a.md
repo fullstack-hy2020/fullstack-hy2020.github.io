@@ -381,29 +381,15 @@ resolveri on funktio, joka palauttaa <i>kaikki</i> taulukon _persons_ oliot
 () => persons
 ```
 
-### GraphQL-playground
+### Apollo Studio Explorer
 
-Kun Apollo-serveriä suoritetaan sovelluskehitysmoodissa, käynnistää se osoitteeseen [http://localhost:4000/graphql](http://localhost:4000/graphql) sovelluskehittäjälle erittäin hyödyllisen [GraphQL-playground](https://www.apollographql.com/docs/apollo-server/testing/graphql-playground/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
+Kun Apollo-serveriä suoritetaan sovelluskehitysmoodissa, ja mennään sivulle  [http://localhost:4000](http://localhost:4000) päästään nappia <i>Query your server</i> painamalla  sovelluskehittäjälle erittäin hyödyllisen [Apollo Studio Explorer]https://www.apollographql.com/docs/studio/explorer/explorer/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
 
 Kokeillaan 
 
-![](../../images/8/1.png)
+![](../../images/8/1x.png)
 
-Playgroundin kanssa pitää olla välillä tarkkana. Jos kysely on syntaktisesti virheellinen, on virheilmoitus aika huomaamaton ja kyselyn suoritusnappia painamalla ei tapahdu mitään:
-
-![](../../images/8/2.png)
-
-Edellisen kyselyn tulos näkyy edelleen playgroundin oikeassa osassa kyselyn virheellisyydestä huolimatta. 
-
-Osoittamalla oikeaa kohtaa virheelliseltä riviltä saa virheilmoituksen näkyville
-
-![](../../images/8/3.png)
-
-Jos Playground vaikuttaa olevan jumissa, niin sivun päivittäminen yleensä auttaa.
-
-Klikkaamalla oikean reunan tekstiä <i>DOCS</i> näyttää Playground palvelimen GraphQL-skeeman.
-
-![](../../images/8/4e.png)
+Vasemmassa laidassa Explorer näyttää mukavasti myös automaattisesti skeeman perusteella muodosteutun API-dokumentaation.
 
 ### Resolverin parametrit
 
@@ -428,7 +414,7 @@ resolveri on funktio, joka poikkeaa kahdesta aiemmasta resolverista siinä että
 Parametreista toinen _args_ sisältää kyselyn parametrit. Resolveri siis palauttaa taulukosta
  _persons_ henkilön, jonka nimi on sama kuin <i>args.name</i> arvo. Ensimmäisenä olevaa parametria _root_ resolveri ei tarvitse.
 
-Itse asiassa kaikki resolverifunktiot saavat [neljä parametria](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). Javascriptissa parametrit voidaan kuitenkin jättää määrittelemättä, jos niitä ei tarvita. Tulemme käyttämään resolverien ensimmäistä ja kolmatta parametria vielä myöhemmin tässä osassa.
+Itse asiassa kaikki resolverifunktiot saavat [neljä parametria](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). JavaScriptissa parametrit voidaan kuitenkin jättää määrittelemättä, jos niitä ei tarvita. Tulemme käyttämään resolverien ensimmäistä ja kolmatta parametria vielä myöhemmin tässä osassa.
 
 ### Oletusarvoinen resolveri
 
@@ -585,7 +571,27 @@ const resolvers = {
 
 Eli aina palautettaessa <i>Person</i>-oliota, palautetaan niiden kentät <i>name</i>, <i>phone</i> sekä <i>id</i> käyttäen oletusarvoista resolveria, kenttä <i>address</i> muodostetaan itse määritellyn resolverin avulla. Resolverifunktion parametrina _root_ on käsittelyssä oleva henkilö-olio, eli osoitteen katu ja kaupunki saadaan sen kentistä.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
+Muutetaan kentän _address_ resolveria vielä siten, että se destrukturoi tarvitsemansa kentät saamastaan parametrista:
+
+```js
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: () => persons,
+    findPerson: (root, args) => persons.find((p) => p.name === args.name),
+  },
+  Person: {
+    address: ({ street, city }) => { // highlight-line
+      return {
+        street, // highlight-line
+        city, // highlight-line
+      }
+    },
+  },
+}
+```
+
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branchissa <i>part8-1</i>.
 
 ### Mutaatio
 
@@ -686,7 +692,7 @@ eli tyypin <i>Person</i> kentän <i>address</i> resolveri muotoilee vastauksena 
 
 Jos yritämme luoda uuden henkilön, mutta parametrit eivät vastaa skeemassa määriteltyä (esim. katuosoite puuttuu), antaa palvelin virheilmoituksen: 
 
-![](../../images/8/5.png)
+![](../../images/8/5x.png)
 
 GraphQL:n [validoinnin](https://graphql.org/learn/validation/) avulla pystytään siis jo automaattisesti hoitamaan osa virheenkäsittelyä. 
 
@@ -721,9 +727,9 @@ const resolvers = {
 
 Eli jos lisättävä nimi on jo luettelossa heitetään poikkeus _UserInputError_.
 
-![](../../images/8/6.png)
+![](../../images/8/6x.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branchissa <i>part8-2</i>.
 
 ### Enum
 
@@ -830,7 +836,7 @@ Mutation: {
 
 Mutaatio siis hakee kentän <i>name</i> perusteella henkilön, jonka numero päivitetään.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branchissa <i>part8-3</i>.
 
 ### Lisää kyselyistä
 
@@ -902,10 +908,6 @@ Vastaus on muotoa
 ```
 
 Joissain tilanteissa voi myös olla hyötyä nimetä kyselyt. Näin on erityisesti tilanteissa, joissa kyselyillä tai mutaatiolla on [parametreja](https://graphql.org/learn/queries/#variables). Tutustumme parametreihin pian.
-
-Jos kyselyitä on useita, pyytää Playground valitsemaan mikä niistä suoritetaan:
-
-![](../../images/8/7.png)
 
 </div>
 
