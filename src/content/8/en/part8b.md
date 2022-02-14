@@ -9,11 +9,11 @@ lang: en
 
 We will next implement a React app which uses the GraphQL server we created.
 
-The current code of the server can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
+The current code of the server can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-3), branch <i>part8-3</i>.
 
 In theory, we could use GraphQL with HTTP POST requests. The following shows an example of this with Postman:
 
-![](../../images/8/8.png)
+![](../../images/8/8x.png)
 
 The communication works by sending HTTP POST requests to http://localhost:4000/graphql. The query itself is a string sent as the value of the key <i>query</i>.
 
@@ -32,7 +32,6 @@ npm install @apollo/client graphql
 We'll start with the following code for our application:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
@@ -68,7 +67,6 @@ ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 The beginning of the code creates a new [client](https://www.apollographql.com/docs/react/get-started/#create-a-client) object, which is then used to send a query to the server: 
-
 
 ```js
 client.query({ query })
@@ -356,13 +354,11 @@ If the state _person_ has a value, instead of showing a list of all persons, onl
 
 ![](../../images/8/11.png)
 
-
-<!-- Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _person_ arvoksi _null_. -->
 When a user wants to return to the persons list, the _person_ state is set to _null_.
 
 The solution is not the neatest possible, but it is good enough for us. 
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1) branch <i>part8-1</i>.
 
 ### Cache
 
@@ -575,7 +571,6 @@ export const CREATE_PERSON = gql`
 `
 ```
 
-<!-- Jokainen komponentti importtaa tarvitsemansa kyselyt: -->
 Each component then imports the queries it needs:
 
 ```js 
@@ -587,19 +582,16 @@ const App = () => {
 }
 ```
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2) branch <i>part8-2</i>.
 
 #### Handling mutation errors
 
-<!-- Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus ja koko sovellus hajoaa -->
 Trying to create a person with invalid data causes an error, and the whole application breaks:
 
 ![](../../images/8/14ea.png)
 
-<!-- Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio. -->
 We should handle the exception. We can register an error handler function to the mutation using the _useMutation_ hook's _onError_ [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2).
 
-<!-- Rekisteröidään mutaatiolle virheidenkäsittelijä, joka asettaa virheestä kertovan viestin propsina saaman funktion _setError_ avulla: -->
 Let's register the mutation with an error handler which uses the _setError_
 function it receives as a parameter to set an error message:
 
@@ -669,7 +661,7 @@ Now the user is informed about an error with a simple notification.
 
 ![](../../images/8/15.png)
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-3) branch <i>part8-3</i>.
 
 ### Updating a phone number
 
@@ -751,23 +743,19 @@ It looks bleak, but it works:
 
 ![](../../images/8/22a.png)
 
-<!-- Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä.  -->
 Surprisingly, when a person's number is changed, the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
 This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation. 
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
-<!-- Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>: -->
 Our application still has one small flaw. If we try to change the phone number for a name which does not exist, nothing seems to happen. 
 This happens because if a person with the given name cannot be found, 
 the mutation response is <i>null</i>:
 
 ![](../../images/8/23ea.png)
 
-<!-- Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä. -->
 For GraphQL, this is not an error, so registering an _onError_ error handler is not useful. 
 
-<!-- Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla. -->
 We can use the _result_ field returned by the _useMutation_ hook as its second parameter to generate an error message. 
 
 ```js 
@@ -830,10 +818,9 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- Tämä ratkaisu ei kuitenkaan toimi, ellei _notify_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _notify_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation... -->
 However, this solution does not work if the _notify_ function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
 
 ### Apollo Client and the applications state
 
