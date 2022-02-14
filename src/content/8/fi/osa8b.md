@@ -11,7 +11,7 @@ Toteutetaan seuraavaksi React-sovellus, joka käyttää toteuttamaamme GraphQL-p
 
 GraphQL:ää on periaatteessa mahdollista käyttää HTTP POST -pyyntöjen avulla. Seuraavassa esimerkki Postmanilla tehdystä kyselystä.
 
-![](../../images/8/8.png)
+![](../../images/8/8x.png)
 
 Kommunikointi tapahtuu siis osoitteeseen http://localhost:4000/graphql kohdistuvina POST-pyyntöinä, ja itse kysely lähetetään pyynnön mukana merkkijonona avaimen <i>query</i> arvona.
 
@@ -28,7 +28,6 @@ npm install @apollo/client graphql
 Aloitetaan seuraavalla ohjelmarungolla.
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
@@ -79,7 +78,6 @@ Palvelimen palauttama vastaus tulostuu konsoliin:
 Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponentti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react) lapseksi:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom'
 import App from './App'
 
@@ -111,7 +109,6 @@ Apollo Client tarjoaa muutaman vaihtoehtoisen tavan [kyselyjen](https://www.apol
 Kyselyn tekevän komponentin <i>App</i> koodi näyttää seuraavalta:
 
 ```js
-import React from 'react'
 import { gql, useQuery } from '@apollo/client'
 
 const ALL_PERSONS = gql`
@@ -185,7 +182,7 @@ const App = () => {
   }
 
   return (
-    <Persons persons = {result.data.allPersons}/>
+    <Persons persons={result.data.allPersons}/>
   )
 }
 ```
@@ -228,21 +225,27 @@ query findPersonByName($nameToSearch: String!) {
 
 Kyselyn nimenä on <i>findPersonByName</i>, ja se saa yhden merkkijonomuotoisen parametrin <i>$nameToSearch</i>. 
 
-Myös GraphQL Playground mahdollistaa muuttujia sisältävän kyselyjen tekemisen. Tällöin muuttujille on annettava arvot kohdassa <i>Query variables</i>:
+Myös Apollo Explorer mahdollistaa muuttujia sisältävän kyselyjen tekemisen. Tällöin muuttujille on annettava arvot kohdassa <i>Variables</i>:
 
-![](../../images/8/10.png)
+![](../../images/8/10x.png)
 
 Äsken käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely on tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually). 
 
-Tähän tilanteeseen sopii hook-funktio [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery). Komponentti <i>Persons</i> muuttuu seuraavasti:
+Yksi mahdollisuus olisi käyttää tässä tilanteessa hookia [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) jonka avulla on mahdollista muodostaa kysely joka suoritetaan siinä vaiheessa kun käyttäjä haluaa nähdä yksittäisen henkilön tulokset.
+
+Päädymme kuitenkin nyt siistimpään ratkaisuun hyödyntämällä _useQuery_:n optiota [skip](https://www.apollographql.com/docs/react/data/queries/#skip), jonka avulla voidaan määritellä kyselyjä, joita <i>ei suoriteta</i> jos jokin ehto on tosi. 
+
+Ratkaisu on seuraavassa:
 
 ```js
-// highlight-start
+import { useState } from 'react'
+import { gql, useQuery } from '@apollo/client'
+
 const FIND_PERSON = gql`
   query findPersonByName($nameToSearch: String!) {
     findPerson(name: $nameToSearch) {
       name
-      phone 
+      phone
       id
       address {
         street
@@ -251,54 +254,51 @@ const FIND_PERSON = gql`
     }
   }
 `
-// highlight-end
+
+const Person = ({ person, onClose }) => {
+  return (
+    <div>
+      <h2>{person.name}</h2>
+      <div>
+        {person.address.street} {person.address.city}
+      </div>
+      <div>{person.phone}</div>
+      <button onClick={onClose}>close</button>
+    </div>
+  )
+}
 
 const Persons = ({ persons }) => {
   // highlight-start
-  const [getPerson, result] = useLazyQuery(FIND_PERSON) 
-  const [person, setPerson] = useState(null)
-// highlight-end
-
-// highlight-start
-  const showPerson = (name) => {
-    getPerson({ variables: { nameToSearch: name } })
-  }
+  const [nameToSearch, setNameToSearch] = useState(null)
+  const result = useQuery(FIND_PERSON, {
+    variables: { nameToSearch },
+    skip: !nameToSearch,
+  })
   // highlight-end
 
-// highlight-start
-  useEffect(() => {
-    if (result.data) {
-      setPerson(result.data.findPerson)
-    }
-  }, [result])
-  // highlight-end
-
-// highlight-start
-  if (person) {
-    return(
-      <div>
-        <h2>{person.name}</h2>
-        <div>{person.address.street} {person.address.city}</div>
-        <div>{person.phone}</div>
-        <button onClick={() => setPerson(null)}>close</button>
-      </div>
+  // highlight-start
+  if (nameToSearch && result.data) {
+    return (
+      <Person
+        person={result.data.findPerson}
+        onClose={() => setNameToSearch(null)}
+      />
     )
   }
   // highlight-end
-  
+
   return (
     <div>
       <h2>Persons</h2>
-      {persons.map(p =>
+      {persons.map((p) => (
         <div key={p.name}>
           {p.name} {p.phone}
-          // highlight-start
-          <button onClick={() => showPerson(p.name)} >
-            show address
-          </button> 
-          // highlight-end
-        </div>  
-      )}
+          <button onClick={() => setNameToSearch(p.name)}> // highlight-line
+            show address // highlight-line
+          </button> // highlight-line
+        </div>
+      ))}
     </div>
   )
 }
@@ -306,56 +306,61 @@ const Persons = ({ persons }) => {
 export default Persons
 ```
 
-Koodi on kasvanut paljon, ja kaikki lisäykset eivät ole täysin ilmeisiä.
+Koodi on muuttunut paljon, ja kaikki lisäykset eivät ole täysin ilmeisiä.
 
-Jos henkilön yhteydessä olevaa nappia painetaan, suoritetaan klikkauksenkäsittelijä _showPerson_, joka tekee GraphQL-kyselyn henkilön tiedoista:
+Jos henkilön yhteydessä olevaa nappia <i>show address</i> painetaan, asetetaan henkilön nimi tilan <i>nameToSearch</i> arvoksi:
 
 ```js
-const [getPerson, result] = useLazyQuery(FIND_PERSON) 
+<button onClick={() => setNameToSearch(p.name)}>
+  show address
+</button>
+```
 
-// ...
+Tämä saa aikaan sen, että komponentti renderöidään uudelleen. Renderöinnin yhteydessä suoritetaan kysely <i>FIND_PERSON</i> eli henkilön tarkempien tietojen haku <i>jos muuttujalla nameToSearch</i> on arvo:
 
-const showPerson = (name) => {
-  getPerson({ variables: { nameToSearch: name } })
+```js
+const result = useQuery(FIND_PERSON, {
+  variables: { nameToSearch },
+  skip: !nameToSearch, // highlight-line
+})
+```
+
+Eli jos yksittäisen henkilön osoitetietoja ei haluta näkyviin on <i>nameToSearch</i> arvo null ja kyselyä ei suoriteta.
+
+Jos tilalla <i>nameToSearch</i> on arvo, ja kyselyn suoritus on valmis, renderöidään komponentin <i>Person</i> avulla yksittäisen henkilön tarkemmat tiedot:
+
+```js
+if (nameToSearch && result.data) {
+  return (
+    <Person
+      person={result.data.findPerson}
+      onClose={() => setNameToSearch(null)}
+    />
+  )
 }
 ```
 
-Kyselyn muuttujalle _nameToSearch_ määritellään arvo kutsuttaessa.
-
-Kyselyn vastaus tulee muuttujaan _result_, ja sen arvo sijoitetaan komponentin tilan muuttujaan _person_. Sijoitus tehdään _useEffect_-hookissa:
-
-```js
-useEffect(() => {
-  if (result.data) {
-    setPerson(result.data.findPerson)
-  }
-}, [result])
-```
-
-Hookin toisena parametrina on _result_. Tämä saa aikaan sen, että hookin ensimmäisenä parametrina oleva funktio suoritetaan <i>aina kun kyselyn palauttama olio muuttuu</i>. Lisäksi tarkistamme, että resultin kenttä data ei ole undefined ennen kuin asetamme haetun henkilön tiedot komponentin tilaan. Jos päivitystä ei hoidettaisi kontrolloidusti hookissa, seuraisi ongelmia sen jälkeen kun yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään.
-
-Jos tilan muuttujalla _person_ on arvo, näytetään kaikkien henkilöiden sijaan yhden henkilön tarkemmat tiedot:
+Yksittäisen henkilön näkymä on seuraavanlainen:
 
 ![](../../images/8/11.png)
 
-Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _person_ arvoksi _null_.
-
-Ratkaisu ei ole ehkä siistein mahdollinen mutta saa kelvata meille.
+Yksittäisen henkilön näkymästä palataan kaikkien henkilöiden näkymään sijoittamalla tilan muuttujan _nameToSearch_ arvoksi _null_.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-1), branchissa <i>part8-1</i>.
 
-### Välimuisti ja devtools
+### Välimuisti ja Devtools
 
 Kun haemme monta kertaa esim. Arto Hellaksen tiedot, huomaamme selaimen developer-konsolin välilehteä Network seuraamalla mielenkiintoisen asian: kysely backendiin tapahtuu ainoastaan tietojen ensimmäisellä katsomiskerralla. Tämän jälkeen, siitäkin huolimatta, että koodi tekee saman kyselyn uudelleen, ei kyselyä lähetetä backendille.
 
-Apollo client tallettaa kyselyjen tulokset cacheen eli [välimuistiin](https://www.apollographql.com/docs/react/caching/cache-configuration/) ja optimoi suoritusta siten, että jos kyselyn vastaus on jo välimuistissa, ei kyselyä lähetetä ollenkaan palvelimelle.
+Apollo client tallettaa kyselyjen tulokset cacheen eli [välimuistiin](https://www.apollographql.com/docs/react/caching/overview/) ja optimoi suoritusta siten, että jos kyselyn vastaus on jo välimuistissa, ei kyselyä lähetetä ollenkaan palvelimelle.
 
-Chromeen on mahdollista asentaa lisäosa [Apollo Client devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related), jonka avulla voidaan tarkastella mm. välimuistin tilaa
+Chromeen on mahdollista asentaa lisäosa [Apollo Client Devtools](https://chrome.google.com/webstore/detail/apollo-client-developer-t/jdkknkkbebbapilgoeccciglkfbmbnfm/related), jonka avulla voidaan tarkastella mm. välimuistin tilaa:
 
-![](../../images/8/13a.png)
+![](../../images/8/13x.png)
 
-Tieto on organisoitu välimuistiin kyselykohtaisesti. Koska <i>Person</i>-tyypin olioilla on identifioiva kenttä <i>id</i>, jonka tyypiksi on määritelty <i>ID</i>, osaa Apollo yhdistää kahden eri kyselyn palauttaman saman olion. Tämän ansiosta Arto Hellaksen osoitetietojen hakeminen kyselyllä <i>findPerson</i> on päivittänyt välimuistia Arton osoitetietojen osalta myös kyselyn <i>allPersons</i> alta.
+Välimuisti näyttää Arto Hellaksen osoitetiedot kyselyn <i>findPerson</i> jälkeen:
 
+![](../../images/8/13z.png)
 ### Mutaatioiden tekeminen
 
 Toteutetaan sovellukseen mahdollisuus uusien henkilöiden lisäämiseen. 
@@ -388,7 +393,7 @@ Mutaatioiden tekemiseen sopivan toiminnallisuuden tarjoaa hook-funktio [useMutat
 Tehdään sovellukseen uusi komponentti uuden henkilön lisämiseen:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { gql, useMutation } from '@apollo/client'
 
 const CREATE_PERSON = gql`
@@ -495,7 +500,7 @@ Yksinkertaisuuden lisäksi ratkaisun hyvä puoli on se, että aina kun joku käy
 
 Ikävänä puolena pollauksessa on tietenkin sen aiheuttama turha verkkoliikenne.
 
-Toinen helppo tapa välimuistin synkronoimiseen on määritellä _useMutation_-hookin option [refetchQueries](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen:
+Toinen helppo tapa välimuistin synkronoimiseen on määritellä _useMutation_-hookin option [refetchQueries](https://www.apollographql.com/docs/react/data/refetching/) avulla, että kaikki henkilöt hakeva kysely tulee suorittaa mutaation yhteydessä uudelleen:
 
 ```js
 const ALL_PERSONS = gql`
@@ -556,11 +561,11 @@ const App = () => {
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-2), branchissa <i>part8-2</i>.
 
-#### Mutaatioiden virheiden käsittely
+### Mutaatioiden virheiden käsittely
 
-Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus ja koko sovellus hajoaa
+Jos yritämme luoda epävalidia henkilöä, seurauksena on poikkeus:
 
-![](../../images/8/14ea.png)
+![](../../images/8/14x.png)
 
 Poikkeus on syytä käsitellä. _useMutation_-hookin [option](https://www.apollographql.com/docs/react/api/react/hooks/#params-2) _onError_ avulla on mahdollista rekisteröidä mutaatioille virheenkäsittelijäfunktio.
 
@@ -659,10 +664,10 @@ export const EDIT_NUMBER = gql`
 Muutoksen suorittava komponentti <i>PhoneForm</i> on suoraviivainen, se kysyy lomakkeen avulla henkilön nimeä ja uutta puhelinnumeroa, ja kutsuu _useMutation_-hookilla luotua mutaation suorittavaa funktiota _changeNumber_. Mielenkiintoiset osat koodia korostettuna:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useMutation } from '@apollo/client'
 
-import { EDIT_NUMBER, ALL_PERSONS } from '../queries'
+import { EDIT_NUMBER } from '../queries'
 
 const PhoneForm = () => {
   const [name, setName] = useState('')
@@ -753,7 +758,7 @@ Jos henkilöä ei löytynyt, eli kyselyn tulos _result.data.editNumber_ on _null
 
 useEffect aiheuttaa ESLint-virheilmoituksen:
 
-![](../../images/8/41ea.png)
+![](../../images/8/41x.png)
 
 Varoitus on aiheeton, ja pääsemme helpoimmalla ignoroimalla ESLint-säännön riviltä:
 
