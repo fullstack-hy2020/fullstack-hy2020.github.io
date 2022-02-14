@@ -445,8 +445,6 @@ We already got rid of a few lines codes now that we don't need the <em>combineRe
 
 Let's move on to refactoring the reducers, which really brings forth the benefits of Redux Toolkit. With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function. We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:
 
-Siirrytään seuraavaksi reducereiden refaktorointiin, jossa Redux Toolkitin edut tulevat parhaiten esiin. Redux Toolkitin avulla reducerit ja niihin liittyvät action creatorit voi luoda kätevästi [createSlice](https://redux-toolkit.js.org/api/createSlice)-funktion avulla. Avataan tiedosto <i>reducers/noteReducer.js</i> ja refaktoroidaan se käyttämään <em>createSlice</em>-funktiota:
-
 ```js
 import { createSlice } from '@reduxjs/toolkit' // highlight-line
 
