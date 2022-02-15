@@ -59,7 +59,7 @@ const { ApolloServer, UserInputError, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
 
-const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://databaseurlhere'
 
 console.log('connecting to', MONGODB_URI)
 
@@ -187,7 +187,7 @@ Mutation: {
 }
 ```
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
+The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 
 ### User and log in
 
@@ -430,7 +430,7 @@ query {
 }
 ```
 
-The code of the backend can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
+The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5) branch <i>part8-5</i>.
 
 </div>
 

@@ -157,7 +157,7 @@ const App = () => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### Tokenin lisääminen headeriin
 
@@ -223,7 +223,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
 
 ### Välimuistin päivitys revisited
 
@@ -283,7 +283,7 @@ Välimuistin kanssa kannattaa olla tarkkana. Välimuistissa oleva epäajantasain
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Katso lisää [täältä](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
 
 </div>
 

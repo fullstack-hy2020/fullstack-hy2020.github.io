@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssi lähestyy loppuaan. Katsotaan lopuksi vielä muutamaa GraphQL:ään liittyvää asiaa.
+Osa lähestyy loppuaan. Katsotaan lopuksi vielä muutamaa GraphQL:ään liittyvää asiaa.
 
 ### Fragmentit
 
@@ -77,12 +77,13 @@ Fragmentteja <i><strong>ei määritellä</strong></i> GraphQL:n skeemassa, vaan 
 Voisimme periaatteessa määritellä fragmentin jokaisen kyselyn yhteydessä seuraavasti:
 
 ```js
-export const ALL_PERSONS = gql`
-  {
-    allPersons  {
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
       ...PersonDetails
     }
   }
+
   fragment PersonDetails on Person {
     name
     phone 
@@ -113,20 +114,18 @@ const PERSON_DETAILS = gql`
 Näin määritelty fragmentti voidaan upottaa kaikkiin sitä tarvitseviin kyselyihin ja mutaatioihin "dollariaaltosulku"-operaatiolla:
 
 ```js
-export const ALL_PERSONS = gql`
-  {
-    allPersons  {
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
       ...PersonDetails
     }
   }
-  ${PERSON_DETAILS}  
+  ${PERSON_DETAILS}
 `
 ```
 
 ### Subscriptiot eli tilaukset
 
-
-**HUOM:** tuki subscriptioille ei ole enää oletusarvoisesti mukana Apollo Serverin versiossa 3. Allaolevt ohjeet olettavat että käytät versiota 2, (voit asentaa sen komennolla <i>npm install apollo-server@2.25.2</i>). Jos haluat käyttää versiota 3, katso[dokumentaatiosta](https://www.apollographql.com/docs/apollo-server/data/subscriptions/) miten saat subscriptiot toimimaan.
 
 GraphQL tarjoaa query- ja mutation-tyyppien lisäksi kolmannenkin operaatiotyypin, [subscriptionin](https://www.apollographql.com/docs/react/data/subscriptions/), jonka avulla clientit voivat <i>tilata</i> palvelimelta tiedotuksia palvelimella tapahtuneista muutoksista.
 
@@ -134,11 +133,264 @@ Subscriptionit poikkeavatkin radikaalisti kaikesta, mitä kurssilla on tähän m
 
 Teknisesti ottaen HTTP-protokolla ei taivu hyvin palvelimelta selaimeen päin tapahtuvaan kommunikaatioon. Konepellin alla Apollo käyttääkin [WebSocketeja](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) hoitamaan tilauksista aiheutuvan kommunikaation.
 
+### Backendin refaktorointia
+
+Apollo Server ei ole versiosta 3.0 alkaen enää tarjoa suoraa tukea subscriptiolle ja joudummekin tekemään joukon muutoksia että saamme ne toimimaan. Siistitään samalla myös sovelluksen rakennetta hiukan. 
+
+Aloitetaan eriyttämällä skeeman määrittely omaan tiedostoon <i>schema.js</i>
+
+```js
+const { gql } = require('apollo-server')
+
+const typeDefs = gql`
+  type User {
+    username: String!
+    friends: [Person!]!
+    id: ID!
+  }
+
+  type Token {
+    value: String!
+  }
+
+  type Address {
+    street: String!
+    city: String!
+  }
+
+  type Person {
+    name: String!
+    phone: String
+    address: Address!
+    id: ID!
+  }
+
+  enum YesNo {
+    YES
+    NO
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons(phone: YesNo): [Person!]!
+    findPerson(name: String!): Person
+    me: User
+  }
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+    editNumber(name: String!, phone: String!): Person
+    createUser(username: String!): User
+    login(username: String!, password: String!): Token
+    addAsFriend(name: String!): User
+  }
+`
+module.exports = typeDefs
+```
+
+Siirretään reducereiden määrittely tiedostoon <i>reducers.js</i>
+
+```js
+const { UserInputError, AuthenticationError } = require('apollo-server')
+const jwt = require('jsonwebtoken')
+const Person = require('./models/person')
+const User = require('./models/user')
+
+const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
+
+const resolvers = {
+  Query: {
+    personCount: async () => Person.collection.countDocuments(),
+    allPersons: async (root, args) => {
+      if (!args.phone) {
+        return Person.find({})
+      }
+
+      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+    },
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
+    me: (root, args, context) => {
+      return context.currentUser
+    },
+  },
+  Person: {
+    address: (root) => {
+      return {
+        street: root.street,
+        city: root.city,
+      }
+    },
+  },
+  Mutation: {
+    addPerson: async (root, args, context) => {
+      const currentUser = context.currentUser
+
+      if (!currentUser) {
+        throw new AuthenticationError('not authenticated')
+      }
+
+      const person = new Person({ ...args })
+      try {
+        await person.save()
+        currentUser.friends = currentUser.friends.concat(person)
+        await currentUser.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+
+      return person
+    },
+    editNumber: async (root, args) => {
+      const person = await Person.findOne({ name: args.name })
+      person.phone = args.phone
+
+      try {
+        await person.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+      return person.save()
+    },
+    createUser: async (root, args) => {
+      const user = new User({ username: args.username })
+
+      return user.save().catch((error) => {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      })
+    },
+    login: async (root, args) => {
+      const user = await User.findOne({ username: args.username })
+
+      if (!user || args.password !== 'secret') {
+        throw new UserInputError('wrong credentials')
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user._id,
+      }
+
+      return { value: jwt.sign(userForToken, JWT_SECRET) }
+    },
+    addAsFriend: async (root, args, { currentUser }) => {
+      const nonFriendAlready = (person) =>
+        !currentUser.friends.map((f) => f._id).includes(person._id)
+
+      if (!currentUser) {
+        throw new AuthenticationError('not authenticated')
+      }
+
+      const person = await Person.findOne({ name: args.name })
+      if (nonFriendAlready(person)) {
+        currentUser.friends = currentUser.friends.concat(person)
+      }
+
+      await currentUser.save()
+
+      return currentUser
+    },
+  },
+}
+
+module.exports = resolvers
+```
+
+Siirrytään seuraavaksi käyttämään Apollo Serverin sijan [Apollo Server Expressiä](https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express). Asennetaan kirjastot
+
+```
+npm install apollo-server-express apollo-server-core express @graphql-tools/schema
+```
+
+ja muutetaan tiedosto <i>index.js</i> seuraavaan muotoon:
+
+```js
+const { ApolloServer } = require('apollo-server-express')
+const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core')
+const { makeExecutableSchema } = require('@graphql-tools/schema')
+const express = require('express')
+const http = require('http')
+
+const jwt = require('jsonwebtoken')
+
+const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
+
+const mongoose = require('mongoose')
+
+const User = require('./models/user')
+
+const typeDefs = require('./schema')
+const resolvers = require('./resolvers')
+
+const MONGODB_URI =
+  'mongodb+srv://fullstack:fullstack@cluster0.o1opl.mongodb.net/graphqlPhoneApp?retryWrites=true&w=majority'
+
+console.log('connecting to', MONGODB_URI)
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+const start = async () => {
+  const app = express()
+  const httpServer = http.createServer(app)
+
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+
+  const server = new ApolloServer({
+    schema,
+    context: async ({ req }) => {
+      const auth = req ? req.headers.authorization : null
+      if (auth && auth.toLowerCase().startsWith('bearer ')) {
+        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
+        const currentUser = await User.findById(decodedToken.id).populate(
+          'friends'
+        )
+        return { currentUser }
+      }
+    },
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  })
+
+  await server.start()
+
+  server.applyMiddleware({
+    app,
+    path: '/',
+  })
+
+  const PORT = 4000
+
+  httpServer.listen(PORT, () =>
+    console.log(`Server is now running on http://localhost:${PORT}`)
+  )
+}
+
+start()
+```
+
+Backendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branchissa <i>part8-6</i>.
+
 ### Tilaukset palvelimella
 
 Toteutetaan nyt sovellukseemme subscriptiot, joiden avulla palvelimelta on mahdollista tilata tieto puhelinluetteloon lisätyistä henkilöistä.
 
-Palvelimella ei ole tarvetta kovin monille muutoksille. Skeemaan tarvitaan seuraava lisäys:
+Skeemaan tarvitaan seuraava lisäys:
 
 ```js
 type Subscription {
@@ -148,12 +400,94 @@ type Subscription {
 
 Eli kun uusi henkilö luodaan, palautetaan henkilön tiedot kaikille tilaajille.
 
+Asennetaan tarvittavast kirjastot:
+
+```
+npm install subscriptions-transport-ws graphql-subscriptions
+```
+
+Tiedosto <i>index.js</i> muuttuu seraavasti
+
+```js
+// highlight-start
+const { execute, subscribe } = require('graphql')
+const { SubscriptionServer } = require('subscriptions-transport-ws')
+// highlight-end
+
+// ...
+
+const start = async () => {
+  const app = express()
+  const httpServer = http.createServer(app)
+
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+
+// highlight-start
+  const subscriptionServer = SubscriptionServer.create(
+    {
+      schema,
+      execute,
+      subscribe,
+    },
+    {
+      server: httpServer,
+      path: '',
+    }
+  )
+  // highlight-end
+
+  const server = new ApolloServer({
+    schema,
+    context: async ({ req }) => {
+      const auth = req ? req.headers.authorization : null
+      if (auth && auth.toLowerCase().startsWith('bearer ')) {
+        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
+        const currentUser = await User.findById(decodedToken.id).populate(
+          'friends'
+        )
+        return { currentUser }
+      }
+    },
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      // highlight-start
+      {
+        async serverWillStart() {
+          return {
+            async drainServer() {
+              subscriptionServer.close()
+            },
+          }
+        },
+      },
+      // highlight-end
+    ],
+  })
+
+  await server.start()
+
+  server.applyMiddleware({
+    app,
+    path: '/',
+  })
+
+  const PORT = 4000
+
+  httpServer.listen(PORT, () =>
+    console.log(`Server is now running on http://localhost:${PORT}`)
+  )
+}
+
+start()
+
+```
+
 Määritellylle tilaukselle _personAdded_ tarvitaan resolveri. Myös lisäyksen tekevää resolveria _addPerson_ on muutettava siten, että uuden henkilön lisäys aiheuttaa ilmoituksen tilauksen tehneille.
 
 Muutokset ovat seuraavassa:
 
 ```js
-const { PubSub } = require('apollo-server') // highlight-line
+const { PubSub } = require('graphql-subscriptions') // highlight-line
 const pubsub = new PubSub() // highlight-line
 
   Mutation: {
@@ -193,33 +527,13 @@ Tilausten yhteydessä kommunikaatio tapahtuu [publish-subscribe](https://en.wiki
 
 Subscriptionin _personAdded_ resolveri rekisteröi tiedotteista kiinnostuneet clientit palauttamalla niille sopivan [iteraattoriolion](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html).
 
-Muutetaan palvelimen käynnistävää koodia seuraavasti
+Tilauksia on mahdollista testata Apollo Exploreilla avulla seuraavasti:
 
-```js
-// ...
+![](../../images/8/31x.png)
 
-server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
-  console.log(`Server ready at ${url}`)
-  console.log(`Subscriptions ready at ${subscriptionsUrl}`) // highlight-line
-})
-```
+Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä, tulee tieto niistä Explorerin oikeaan reunaan.
 
-Nyt näemme, että palvelin kuuntelee subscriptioita osoitteessa _ws://localhost:4000/graphql_
-
-```js
-Server ready at http://localhost:4000/
-Subscriptions ready at ws://localhost:4000/graphql
-```
-
-Muita muutoksia palvelimeen ei tarvita. 
-
-Tilauksia on mahdollista testata GraphQL-playgroundin avulla seuraavasti:
-
-![](../../images/8/31.png)
-
-Kun tilauksen "play"-painiketta painetaan, jää playground odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä, tulee tieto niistä playgroundin oikeanpuoleiseen ikkunaan.
-
-Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6), branchissa <i>part8-6</i>.
+Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branchissa <i>part8-7</i>.
 
 ### Tilaukset clientissä
 
@@ -395,7 +709,7 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 } 
 ```
 
-Clientin lopullinen koodi [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9), branchissa <i>part8-9</i>.
+Clientin lopullinen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branchissa <i>part8-9</i>.
 
 ### n+1-ongelma
 

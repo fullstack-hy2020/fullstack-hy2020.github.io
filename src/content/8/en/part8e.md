@@ -7,10 +7,9 @@ lang: en
 <div class="content">
 
 
-We are approaching the end of the course. Let's finish by having a look at a few more details of GraphQL. 
+We are approaching the end of this part. Let's finish by having a look at a few more details of GraphQL. 
 
 ### Fragments
-
 
 It is pretty common in GraphQL that multiple queries return similar results. For example, the query for the details of a person
 
@@ -42,9 +41,7 @@ query {
 }
 ```
 
-
 both return persons. When choosing the fields to return, both queries have to define exactly the same fields. 
-
 
 These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Let's declare a fragment for selecting all fields of a person: 
 
@@ -58,7 +55,6 @@ fragment PersonDetails on Person {
   }
 }
 ```
-
 
 With the fragment, we can do the queries in a compact form:
 
@@ -81,9 +77,9 @@ The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but
 In principle, we could declare the fragment with each query like so:
 
 ```js
-const ALL_PERSONS = gql`
-  {
-    allPersons  {
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
       ...PersonDetails
     }
   }
@@ -115,17 +111,16 @@ const PERSON_DETAILS = gql`
 `
 ```
 
-
 Declared like this, the fragment can be placed to any query or mutation using a [dollar sign and curly braces](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
 ```js
-const ALL_PERSONS = gql`
-  {
-    allPersons  {
+export const FIND_PERSON = gql`
+  query findPersonByName($nameToSearch: String!) {
+    findPerson(name: $nameToSearch) {
       ...PersonDetails
     }
   }
-  ${PERSON_DETAILS}  
+  ${PERSON_DETAILS}
 `
 ```
 
@@ -133,27 +128,271 @@ const ALL_PERSONS = gql`
   
 Along with query and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions, clients can <i>subscribe</i> to updates about changes in the server. 
 
-
 Subscriptions are radically different from anything we have seen in this course so far. Until now, all interaction between browser and server was due to a React application in the browser making HTTP requests to the server. GraphQL queries and mutations have also been done this way. 
 With subscriptions, the situation is the opposite. After an application has made a subscription, it starts to listen to the server. 
 When changes occur on the server, it sends a notification to all of its <i>subscribers</i>.
 
-
-
 Technically speaking, the HTTP protocol is not well-suited for communication from the server to the browser. So, under the hood, Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication. 
+
+### Refactoring the backend
+
+Since version 3.0 Apollo Server has not provided support for subscriptions out of the box so we need to do some changes to get it set up. Let us also clean the app structure a bit.
+
+Let us start by extracting the schema definition to file
+<i>schema.js</i>
+
+```js
+const { gql } = require('apollo-server')
+
+const typeDefs = gql`
+  type User {
+    username: String!
+    friends: [Person!]!
+    id: ID!
+  }
+
+  type Token {
+    value: String!
+  }
+
+  type Address {
+    street: String!
+    city: String!
+  }
+
+  type Person {
+    name: String!
+    phone: String
+    address: Address!
+    id: ID!
+  }
+
+  enum YesNo {
+    YES
+    NO
+  }
+
+  type Query {
+    personCount: Int!
+    allPersons(phone: YesNo): [Person!]!
+    findPerson(name: String!): Person
+    me: User
+  }
+
+  type Mutation {
+    addPerson(
+      name: String!
+      phone: String
+      street: String!
+      city: String!
+    ): Person
+    editNumber(name: String!, phone: String!): Person
+    createUser(username: String!): User
+    login(username: String!, password: String!): Token
+    addAsFriend(name: String!): User
+  }
+`
+module.exports = typeDefs
+```
+
+The reducer definitions are moved to <i>reducers.js</i>
+
+```js
+const { UserInputError, AuthenticationError } = require('apollo-server')
+const jwt = require('jsonwebtoken')
+const Person = require('./models/person')
+const User = require('./models/user')
+
+const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
+
+const resolvers = {
+  Query: {
+    personCount: async () => Person.collection.countDocuments(),
+    allPersons: async (root, args) => {
+      if (!args.phone) {
+        return Person.find({})
+      }
+
+      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+    },
+    findPerson: async (root, args) => Person.findOne({ name: args.name }),
+    me: (root, args, context) => {
+      return context.currentUser
+    },
+  },
+  Person: {
+    address: (root) => {
+      return {
+        street: root.street,
+        city: root.city,
+      }
+    },
+  },
+  Mutation: {
+    addPerson: async (root, args, context) => {
+      const currentUser = context.currentUser
+
+      if (!currentUser) {
+        throw new AuthenticationError('not authenticated')
+      }
+
+      const person = new Person({ ...args })
+      try {
+        await person.save()
+        currentUser.friends = currentUser.friends.concat(person)
+        await currentUser.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+
+      return person
+    },
+    editNumber: async (root, args) => {
+      const person = await Person.findOne({ name: args.name })
+      person.phone = args.phone
+
+      try {
+        await person.save()
+      } catch (error) {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      }
+      return person.save()
+    },
+    createUser: async (root, args) => {
+      const user = new User({ username: args.username })
+
+      return user.save().catch((error) => {
+        throw new UserInputError(error.message, {
+          invalidArgs: args,
+        })
+      })
+    },
+    login: async (root, args) => {
+      const user = await User.findOne({ username: args.username })
+
+      if (!user || args.password !== 'secret') {
+        throw new UserInputError('wrong credentials')
+      }
+
+      const userForToken = {
+        username: user.username,
+        id: user._id,
+      }
+
+      return { value: jwt.sign(userForToken, JWT_SECRET) }
+    },
+    addAsFriend: async (root, args, { currentUser }) => {
+      const nonFriendAlready = (person) =>
+        !currentUser.friends.map((f) => f._id).includes(person._id)
+
+      if (!currentUser) {
+        throw new AuthenticationError('not authenticated')
+      }
+
+      const person = await Person.findOne({ name: args.name })
+      if (nonFriendAlready(person)) {
+        currentUser.friends = currentUser.friends.concat(person)
+      }
+
+      await currentUser.save()
+
+      return currentUser
+    },
+  },
+}
+
+module.exports = resolvers
+```
+
+Next we will replace Apollo Server with [Apollo Server Express](https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express). Following libraries are installed
+
+```
+npm install apollo-server-express apollo-server-core express @graphql-tools/schema
+```
+and the file <i>index.js</i> changes to:
+
+```js
+const { ApolloServer } = require('apollo-server-express')
+const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core')
+const { makeExecutableSchema } = require('@graphql-tools/schema')
+const express = require('express')
+const http = require('http')
+
+const jwt = require('jsonwebtoken')
+
+const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
+
+const mongoose = require('mongoose')
+
+const User = require('./models/user')
+
+const typeDefs = require('./schema')
+const resolvers = require('./resolvers')
+
+const MONGODB_URI =
+  'mongodb+srv://fullstack:fullstack@cluster0.o1opl.mongodb.net/graphqlPhoneApp?retryWrites=true&w=majority'
+
+console.log('connecting to', MONGODB_URI)
+
+mongoose
+  .connect(MONGODB_URI)
+  .then(() => {
+    console.log('connected to MongoDB')
+  })
+  .catch((error) => {
+    console.log('error connection to MongoDB:', error.message)
+  })
+
+const start = async () => {
+  const app = express()
+  const httpServer = http.createServer(app)
+
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+
+  const server = new ApolloServer({
+    schema,
+    context: async ({ req }) => {
+      const auth = req ? req.headers.authorization : null
+      if (auth && auth.toLowerCase().startsWith('bearer ')) {
+        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
+        const currentUser = await User.findById(decodedToken.id).populate(
+          'friends'
+        )
+        return { currentUser }
+      }
+    },
+    plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
+  })
+
+  await server.start()
+
+  server.applyMiddleware({
+    app,
+    path: '/',
+  })
+
+  const PORT = 4000
+
+  httpServer.listen(PORT, () =>
+    console.log(`Server is now running on http://localhost:${PORT}`)
+  )
+}
+
+start()
+```
+
+The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Subscriptions on the server
 
-**NB!** This subscription setup is based on apollo-server version 2 and is no longer supported starting from version 3. You can either follow this material and make sure that you have installed apollo-server version 2 (for example by running _npm i apollo-server@2.25.2_) or follow the Apollo Server's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions/). 
-  
-Let's implement subscriptions for subscribing for notifications about new persons added.
-First, we have to install the package for adding subscriptions to GraphQL:
 
-```bash
-npm install graphql-subscriptions
-```
+Let's implement subscriptions for subscribing for notifications about new persons added. 
 
-There are not many changes to the server. The schema changes like so:
+The schema changes like so:
 
 ```js
 type Subscription {
@@ -161,11 +400,91 @@ type Subscription {
 }    
 ```
 
-So when a new person is added, all of its details are sent to all subscribers. 
+So when a new person is added, all of its details are sent to all subscribers.
 
+First, we have to install the package for adding subscriptions to GraphQL:
+
+```
+npm install subscriptions-transport-ws graphql-subscriptions
+```
+
+The file <i>index.js</i> is changed to
+
+```js
+// highlight-start
+const { execute, subscribe } = require('graphql')
+const { SubscriptionServer } = require('subscriptions-transport-ws')
+// highlight-end
+
+// ...
+
+const start = async () => {
+  const app = express()
+  const httpServer = http.createServer(app)
+
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+
+// highlight-start
+  const subscriptionServer = SubscriptionServer.create(
+    {
+      schema,
+      execute,
+      subscribe,
+    },
+    {
+      server: httpServer,
+      path: '',
+    }
+  )
+  // highlight-end
+
+  const server = new ApolloServer({
+    schema,
+    context: async ({ req }) => {
+      const auth = req ? req.headers.authorization : null
+      if (auth && auth.toLowerCase().startsWith('bearer ')) {
+        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
+        const currentUser = await User.findById(decodedToken.id).populate(
+          'friends'
+        )
+        return { currentUser }
+      }
+    },
+    plugins: [
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      // highlight-start
+      {
+        async serverWillStart() {
+          return {
+            async drainServer() {
+              subscriptionServer.close()
+            },
+          }
+        },
+      },
+      // highlight-end
+    ],
+  })
+
+  await server.start()
+
+  server.applyMiddleware({
+    app,
+    path: '/',
+  })
+
+  const PORT = 4000
+
+  httpServer.listen(PORT, () =>
+    console.log(`Server is now running on http://localhost:${PORT}`)
+  )
+}
+
+start()
+
+```
 
 The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so that it sends a notification to subscribers. 
-
 
 The required changes are as follows:
 
@@ -208,44 +527,17 @@ const pubsub = new PubSub() // highlight-line
 
 With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing an object using a [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interface. Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.
 
-
 _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
 
+It's possible to test the subscriptions with the Apollo Explorer like this:
 
-Let's do the following changes to the code which starts the server:
-```js
-// ...
+![](../../images/8/31x.png)
 
-server.listen().then(({ url, subscriptionsUrl }) => { // highlight-line
-  console.log(`Server ready at ${url}`)
-  console.log(`Subscriptions ready at ${subscriptionsUrl}`) // highlight-line
-})
-```
+When the button PersonAdded is pressed Explorer waits for a new user to be added. On addition the info of a new user appears in the right side of the Explorer.
 
-
-We see that the server listens for subscriptions in the address _ws://localhost:4000/graphql_
-
-```js
-Server ready at http://localhost:4000/
-Subscriptions ready at ws://localhost:4000/graphql
-```
-
-
-No other changes to the server are needed.
-
-
-It's possible to test the subscriptions with the GraphQL playground like this:
-
-![](../../images/8/31.png)
-
-
-When you press "play" on a subscription, the playground waits for notifications from the subscription. 
-
-
-The backend code can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
+The backend code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-6</i>.
 
 ### Subscriptions on the client
-
 
 In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
 The configuration in <i>index.js</i> has to be modified like so: 
@@ -425,7 +717,7 @@ const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
 } 
 ```
 
-The final code of the client can be found on [Github](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
+The final code of the client can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-9), branch <i>part8-9</i>.
 
 ### n+1 problem
 

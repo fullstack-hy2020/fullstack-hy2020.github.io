@@ -58,7 +58,7 @@ const { ApolloServer, UserInputError, gql } = require('apollo-server')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
 
-const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
+const MONGODB_URI = 'mongodb+srv://databaseurlhere'
 
 console.log('connecting to', MONGODB_URI)
 
@@ -190,7 +190,6 @@ Mutation: {
 ```
 
 Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
-
 
 ### Käyttäjä ja kirjautuminen
 

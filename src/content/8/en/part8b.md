@@ -796,7 +796,6 @@ useEffect(() => {
 // highlight-end
 ```
 
-<!-- Voisimme yrittää päästä varoituksesta eroon lisäämällä funktion _notify_ useEffectin toisena parametrina olevaan taulukkoon: -->
 We could try to get rid of the warning by adding the _setError_ function to useEffect's second parameter array:
 
 ```js
