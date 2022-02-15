@@ -322,9 +322,6 @@ The heart of the code is an _ApolloServer_, which is given two parameters:
 const server = new ApolloServer({
   typeDefs,
   resolvers,
-   plugins: [
-    ApolloServerPluginLandingPageGraphQLPlayground(),
-  ],
 })
 ```
 
@@ -390,6 +387,7 @@ has a resolver which returns <i>all</i> objects from the _persons_ array.
 ```
 
 ### Apollo Studio Explorer
+
 When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) has a button <i>Query your server</i> that takes us to  [Apollo Studio Explorer]https://www.apollographql.com/docs/studio/explorer/explorer/).  This is very useful for a developer, and can be used to make queries to the server. 
 
 Let's try it out:
