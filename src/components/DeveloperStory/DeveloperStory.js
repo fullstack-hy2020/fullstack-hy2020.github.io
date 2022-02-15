@@ -31,7 +31,7 @@ export const DeveloperStory = props => {
         {companyLogo && (
           <img
             className="col-5--mobile"
-            style={{ width: 'auto', maxHeight: '60px', objectFit: 'cover' }}
+            style={{ width: '8em', objectFit: 'cover' }}
             src={require(`../../images/story_logos/${companyLogo}`)}
             alt={companyLogo.split('.')[0]}
           />
