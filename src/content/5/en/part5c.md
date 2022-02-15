@@ -68,7 +68,7 @@ test('renders content', () => {
 After the initial configuration, the test renders the component with the [render](https://testing-library.com/docs/react-testing-library/api#render) function provided by the react-testing-library:
 
 ```js
-ender(<Note note={note} />)
+render(<Note note={note} />)
 ```
 
 Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
