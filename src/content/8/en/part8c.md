@@ -61,7 +61,7 @@ const Person = require('./models/person')
 
 const MONGODB_URI = 'mongodb+srv://fullstack:halfstack@cluster0-ostce.mongodb.net/graphql?retryWrites=true'
 
-console.log('connecting to', MONGODB_URI)
+console.log('connecting to', MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
 
 mongoose.connect(MONGODB_URI)
   .then(() => {
