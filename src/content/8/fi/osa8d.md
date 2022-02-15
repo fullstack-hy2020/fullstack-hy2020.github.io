@@ -53,7 +53,7 @@ export const LOGIN = gql`
 Kirjautumisesta huolehtiva komponentti _LoginForm_ toimii melko samalla tavalla kuin aiemmat mutaatioista huolehtivat komponentit. Mielenkiintoiset rivit on korostettu koodissa:
 
 ```js
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useMutation } from '@apollo/client'
 import { LOGIN } from '../queries'
 
@@ -108,7 +108,7 @@ const LoginForm = ({ setError, setToken }) => {
 export default LoginForm
 ```
 
-Käytössä on jälleen efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin.
+Käytössä on efektihookki, jonka avulla asetetaan tokenin arvo komponentin _App_ tilaan sekä local storageen siinä vaiheessa kun palvelin on vastannut mutaatioon. Efektihookki on tarpeen, jotta sovellus ei joutuisi ikuiseen renderöintilooppiin.
 
 Lisätään sovellukselle myös nappi, jonka avulla kirjautunut käyttäjä voi kirjautua ulos. Napin klikkauskäsittelijässä asetetaan  _token_ tilaan null, poistetaan token local storagesta ja resetoidaan Apollo clientin välimuisti. Tämä on [tärkeää](https://www.apollographql.com/docs/react/networking/authentication/#reset-store-on-logout), sillä joissain kyselyissä välimuistiin on saatettu hakea dataa, johon vain kirjaantuneella käyttäjällä on oikeus päästä käsiksi.
 
@@ -134,10 +134,30 @@ const App = () => {
   }
   // highlight-end
 
+  // highlight-start
+  if (!token) {
+    return (
+      <>
+        <Notify errorMessage={errorMessage} />
+        <LoginForm setToken={setToken} setError={notify} />
+      </>
+    )
+  }
+  // highlight-end
+
+  return (
+    <>
+      <Notify errorMessage={errorMessage} />
+      <button onClick={logout}>logout</button> // highlight-line
+      <Persons persons={result.data.allPersons} />
+      <PersonForm setError={notify} />
+      <PhoneForm setError={notify} />
+    </>
+  )
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### Tokenin lisääminen headeriin
 
@@ -182,7 +202,7 @@ Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen 
 
 Validointi epäonnistuu, sillä frontend lähettää kentän _phone_ arvona tyhjän merkkijonon. 
 
-Muutetaan uuden henkilön luovaa funktiota siten, että se asettaa kentälle _phone_  arvon _null_, jos käyttäjä ei ole syöttänyt kenttään mitään:
+Muutetaan uuden henkilön luovaa funktiota siten, että se asettaa kentälle _phone_  arvon _undefined_, jos käyttäjä ei ole syöttänyt kenttään mitään:
 
 ```js
 const PersonForm = ({ setError }) => {
@@ -192,7 +212,7 @@ const PersonForm = ({ setError }) => {
     createPerson({
       variables: { 
         name, street, city,  // highlight-line
-        phone: phone.length > 0 ? phone : null  // highlight-line
+        phone: phone.length > 0 ? phone : undefined  // highlight-line
       }
     })
 
@@ -203,7 +223,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
 
 ### Välimuistin päivitys revisited
 
@@ -236,16 +256,13 @@ const PersonForm = ({ setError }) => {
       setError(error.graphQLErrors[0].message)
     },
     // highlight-start
-    update: (store, response) => {
-      const dataInStore = store.readQuery({ query: ALL_PERSONS })
-      store.writeQuery({
-        query: ALL_PERSONS,
-        data: {
-          ...dataInStore,
-          allPersons: [ ...dataInStore.allPersons, response.data.addPerson ]
+    update: (cache, response) => {
+      cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
+        return {
+          allPersons: allPersons.concat(response.data.addPerson),
         }
       })
-    }
+    },
     // highlight-end
   })
  
@@ -255,7 +272,7 @@ const PersonForm = ({ setError }) => {
 
 Callback-funktio saa parametriksi viitteen välimuistiin sekä mutaation mukana palautetun datan, eli esimerkkimme tapauksessa lisätyn käyttäjän.
 
-Koodi lukee funktion [readQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#readquery) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan ja päivittää välimuistin funktion [writeQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#writequery-and-writefragment) avulla lisäten henkilöiden joukkoon mutaation lisäämän henkilön.
+Koodi päivittää funktion [updateQuery](https://www.apollographql.com/docs/react/caching/cache-interaction/#using-updatequery-and-updatefragment) avulla kyselyn <em>ALL\_PERSONS</em> välimuistiin talletetun tilan lisäämällä henkilöiden joukkoon (jonka se saa parametrinsa välityksellä) mutaation lisäämän henkilön.
 
 On myös olemassa tilanteita, joissa ainoa järkevä tapa saada välimuisti pidettyä ajantasaisena on _update_-callbackillä tehtävä päivitys. 
 
@@ -266,7 +283,7 @@ Välimuistin kanssa kannattaa olla tarkkana. Välimuistissa oleva epäajantasain
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Katso lisää [täältä](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
 
-Sovelluksen tämän vaiheen koodi [githubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
 
 </div>
 
