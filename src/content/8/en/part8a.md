@@ -275,6 +275,7 @@ The initial code is as follows:
 
 ```js
 const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServerPluginLandingPageGraphQLPlayground } = require('apollo-server-core')
 
 let persons = [
   {
@@ -553,6 +554,33 @@ type Query {
 so a person now has a field with the type <i>Address</i>, which contains the street and the city. 
 
 
+Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient. 
+Let's add a resolver for the <i>address</i> field  of <i>Person</i> type : 
+
+```js
+const resolvers = {
+  Query: {
+    personCount: () => persons.length,
+    allPersons: () => persons,
+    findPerson: (root, args) =>
+      persons.find(p => p.name === args.name)
+  },
+  // highlight-start
+  Person: {
+    address: (root) => {
+      return { 
+        street: root.street,
+        city: root.city
+      }
+    }
+  }
+  // highlight-end
+}
+```
+
+So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields.  
+
+
 The queries requiring the address change into
 
 ```js
@@ -607,31 +635,7 @@ The person-objects saved in the server are not exactly the same as the GraphQL t
 Contrary to the <i>Person</i> type, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own separate data structure in the server. 
 
 
-Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient. 
-Let's add a resolver for the <i>address</i> field  of <i>Person</i> type : 
-
-```js
-const resolvers = {
-  Query: {
-    personCount: () => persons.length,
-    allPersons: () => persons,
-    findPerson: (root, args) =>
-      persons.find(p => p.name === args.name)
-  },
-  // highlight-start
-  Person: {
-    address: (root) => {
-      return { 
-        street: root.street,
-        city: root.city
-      }
-    }
-  }
-  // highlight-end
-}
-```
-
-So every time a <i>Person</i> object is returned, the fields <i>name</i>, <i>phone</i> and <i>id</i> are returned using their default resolvers, but the field <i>address</i> is formed by using a self-defined resolver. The parameter _root_ of the resolver function is the person-object, so the street and the city of the address can be taken from its fields. 
+ 
 
 The current code of the application can be found on [ Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-1), branch <i>part8-1</i>.
 
