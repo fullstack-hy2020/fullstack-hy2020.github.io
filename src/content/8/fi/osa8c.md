@@ -189,7 +189,7 @@ Mutation: {
 }
 ```
 
-Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
+Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
 ### Käyttäjä ja kirjautuminen
 
@@ -436,7 +436,7 @@ query {
 }
 ```
 
-Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
+Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
 
 
 </div>

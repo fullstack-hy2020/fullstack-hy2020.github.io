@@ -135,7 +135,7 @@ Teknisesti ottaen HTTP-protokolla ei taivu hyvin palvelimelta selaimeen päin ta
 
 ### Backendin refaktorointia
 
-Apollo Server ei ole versiosta 3.0 alkaen enää tarjoa suoraa tukea subscriptiolle ja joudummekin tekemään joukon muutoksia että saamme ne toimimaan. Siistitään samalla myös sovelluksen rakennetta hiukan. 
+Apollo Server ei versiosta 3.0 alkaen enää tarjoa suoraa tukea subscriptiolle ja joudummekin tekemään joukon muutoksia että saamme ne toimimaan. Siistitään samalla myös sovelluksen rakennetta hiukan. 
 
 Aloitetaan eriyttämällä skeeman määrittely omaan tiedostoon <i>schema.js</i>
 
@@ -346,6 +346,7 @@ mongoose
     console.log('error connection to MongoDB:', error.message)
   })
 
+// setup is now within a function
 const start = async () => {
   const app = express()
   const httpServer = http.createServer(app)
@@ -381,6 +382,7 @@ const start = async () => {
   )
 }
 
+// call the function that does the setup and starts the server
 start()
 ```
 
@@ -523,7 +525,7 @@ const pubsub = new PubSub() // highlight-line
   // highlight-end
 ```
 
-Tilausten yhteydessä kommunikaatio tapahtuu [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-periaatteella käyttäen rajapinnan [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup.html#setup) toteuttavaa olioa. Uuden henkilön lisäys <i>julkaisee</i> tiedon lisäyksestä kaikille muutokset tilanneille PubSubin metodilla _publish_. 
+Tilausten yhteydessä kommunikaatio tapahtuu [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-periaatteella käyttäen olioa [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup.html#setup). Uuden henkilön lisäys <i>julkaisee</i> tiedon lisäyksestä kaikille muutokset tilanneille PubSubin metodilla _publish_. 
 
 Subscriptionin _personAdded_ resolveri rekisteröi tiedotteista kiinnostuneet clientit palauttamalla niille sopivan [iteraattoriolion](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html).
 
