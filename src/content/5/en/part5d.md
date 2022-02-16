@@ -345,6 +345,7 @@ describe('Note app', function() {
       cy.contains('new note').click()
       cy.get('input').type('a note created by cypress')
       cy.contains('save').click()
+      cy.contains('show all').click()
 
       cy.contains('a note created by cypress')
     })
@@ -531,6 +532,7 @@ describe('Note app', function() {
       })
 
       it('it can be made important', function () {
+        cy.contains('show all').click()
         cy.contains('another note cypress')
           .contains('make important')
           .click()
