@@ -474,7 +474,7 @@ const changedNote = {
 }
 ```
 
-Palautetaan uusi tila, joka saadaan ottamalla kaikki vanhan tilan muistiinpanot paitsi uusi juuri luotu olio tärkeydeltään muuttavasta muistiinpanosta:
+Palautetaan uusi tila, joka saadaan ottamalla kaikki vanhan tilan muistiinpanot paitsi uusi juuri luotu olio tärkeydeltään muuttuvasta muistiinpanosta:
 
 ```js
 state.map(note =>
