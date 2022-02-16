@@ -285,7 +285,7 @@ const resolvers = {
     },
     addAsFriend: async (root, args, { currentUser }) => {
       const nonFriendAlready = (person) =>
-        !currentUser.friends.map((f) => f._id).includes(person._id)
+        !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
       if (!currentUser) {
         throw new AuthenticationError('not authenticated')
@@ -539,7 +539,7 @@ Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-h
 
 ### Tilaukset clientissä
 
-Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan hieman enemmän muutoksia, erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
+Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran muutoksia erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
 ```js
 import { 
@@ -661,30 +661,24 @@ Kun puhelinluetteloon nyt lisätään henkilöitä, tapahtuupa se mistä tahansa
 
 Kun luetteloon lisätään uusi henkilö, palvelin lähettää siitä tiedot clientille ja attribuutin _onSubscriptionData_ arvoksi määriteltyä callback-funktiota kutsutaan antaen sille parametriksi palvelimelle lisätty henkilö. 
 
-Laajennetaan ratkaisua vielä siten, että uuden henkilön tietojen saapuessa henkilö lisätään Apollon välimuistiin, jolloin se renderöityy heti ruudulle. Koodissa on jouduttu huomioimaan se, että sovelluksen itsensä lisäämää henkilöä ei saa lisätä välimuistiin kahteen kertaan:
+Laajennetaan ratkaisua vielä siten, että uuden henkilön tietojen saapuessa henkilö lisätään Apollon välimuistiin, jolloin se renderöityy heti ruudulle:
 
 ```js
 const App = () => {
   // ...
 
-  const updateCacheWith = (addedPerson) => {
-    const includedIn = (set, object) => 
-      set.map(p => p.id).includes(object.id)  
-
-    const dataInStore = client.readQuery({ query: ALL_PERSONS })
-    if (!includedIn(dataInStore.allPersons, addedPerson)) {
-      client.writeQuery({
-        query: ALL_PERSONS,
-        data: { allPersons : dataInStore.allPersons.concat(addedPerson) }
-      })
-    }   
-  }
-
   useSubscription(PERSON_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
       const addedPerson = subscriptionData.data.personAdded
       notify(`${addedPerson.name} added`)
-      updateCacheWith(addedPerson)
+
+// highlight-start
+      client.cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
+        return {
+          allPersons: allPersons.concat(addedPerson),
+        }
+      })
+      // highlight-end
     }
   })
 
@@ -692,19 +686,63 @@ const App = () => {
 }
 ```
 
-Funktiota _updateCacheWith_ voidaan hyödyntää myös uuden henkilön lisäyksen yhteydessä tapahtuvassa välimuistin päivityksessä:
+Rarkaisussa on kuitenkin pieni ongelma. Itse lisätty henkilö tulee nyt välimuistiin sekä renderöityy ruudulle kahteen kertaan, sillä myös komponentti PersonForm lisää uuden henkilön välimuistin.
+
+Ratkaistaan ongelma varmistamalla, että sama henkilö ei päädy välimuistiin kahteen kertaan:
 
 ```js
-const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
+// highlight-start
+// function that takes care of manipulating cache
+export const updateCache = (cache, query, addedPerson) => {
+  const uniqByName = (a) => {
+    let seen = new Set()
+    return a.filter((item) => {
+      let k = item.name
+      return seen.has(k) ? false : seen.add(k)
+    })
+  }
+
+  cache.updateQuery(query, ({ allPersons }) => {
+    return {
+      allPersons: uniqByName(allPersons.concat(addedPerson)),
+    }
+  })
+}
+// highlight-end
+
+const App = () => {
+  const result = useQuery(ALL_PERSONS)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [token, setToken] = useState(null)
+  const client = useApolloClient() 
+
+  useSubscription(PERSON_ADDED, {
+    onSubscriptionData: ({ subscriptionData, client }) => {
+      const addedPerson = subscriptionData.data.personAdded
+      notify(`${addedPerson.name} added`)
+      updateCache(client.cache, { query: ALL_PERSONS }, addedPerson) // highlight-line
+    },
+  })
+
+  // ...
+}
+```
+
+Funktiota _updateCache_ voidaan hyödyntää myös uuden henkilön lisäyksen yhteydessä tapahtuvassa välimuistin päivityksessä:
+
+```js
+import { updateCache } from '../App' // highlight-line
+
+const PersonForm = ({ setError }) => { 
   // ...
 
-  const [ createPerson ] = useMutation(CREATE_PERSON, {
+  const [createPerson] = useMutation(CREATE_PERSON, {
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     },
-    update: (store, response) => {
-      updateCacheWith(response.data.addPerson) // highlight-line
-    }
+    update: (cache, response) => {
+      updateCache(cache, { query: ALL_PERSONS }, response.data.addPerson)  // highlight-line
+    },
   })
    
   // ..
@@ -732,7 +770,7 @@ Sovellukseen tulisi siis saada tuki esim. seuraavalle kyselylle:
 ```js
 query {
   findPerson(name: "Leevi Hellas") {
-    friendOf{
+    friendOf {
       username
     }
   }
@@ -884,7 +922,7 @@ Facebookin kehittämä [dataloader](https://github.com/facebook/dataloader)-kirj
 
 ### Loppusanat
 
-Tässä osassa rakentamamme sovellus ei ole optimaalisella tavalla strukturoitu: skeeman, kyselyiden ja mutaatioiden määrittely olisi ainakin syytä siirtää muualle sovelluskoodin seasta. Esimerkkejä GraphQL-sovellusten parempaan strukturointiin löytyy internetistä, esim. serveriin
+Tässä osassa rakentamamme sovellus ei ole optimaalisella tavalla strukturoitu, teimme pientä siivousta siirtämällä skeeman ja resolverit omiin tiedostoihin mutta parantamisen varaa jäi edelleen paljon. Esimerkkejä GraphQL-sovellusten parempaan strukturointiin löytyy internetistä, esim. serveriin
 [täältä](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) ja clientiin [täältä](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 GraphQL on jo melko iäkäs teknologia, se on ollut Facebookin sisäisessä käytössä jo vuodesta 2012 lähtien, teknologian voi siis todeta olevan "battle tested". Facebook julkaisi GraphQL:n vuonna 2015 ja se on pikkuhiljaa saanut enenevissä määrin huomiota ja nousee ehkä lähivuosina uhmaamaan REST:in valta-asemaa. REST:in [kuolemaakin](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest) on jo ennusteltu. Vaikka se ei tulekaan ihan heti tapahtumaan, on GraphQL ehdottomasti [tutustumisen arvoinen](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).

@@ -287,7 +287,7 @@ const resolvers = {
     },
     addAsFriend: async (root, args, { currentUser }) => {
       const nonFriendAlready = (person) =>
-        !currentUser.friends.map((f) => f._id).includes(person._id)
+        !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
       if (!currentUser) {
         throw new AuthenticationError('not authenticated')
@@ -668,30 +668,22 @@ When a new person is added, the server sends a notification to the client, and t
 
 Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately. 
 
-However, we have to keep in mind that when our application creates a new person, it should not be added to the cache twice: 
-
 ```js
 const App = () => {
   // ...
-
-  const updateCacheWith = (addedPerson) => {
-    const includedIn = (set, object) => 
-      set.map(p => p.id).includes(object.id)  
-
-    const dataInStore = client.readQuery({ query: ALL_PERSONS })
-    if (!includedIn(dataInStore.allPersons, addedPerson)) {
-      client.writeQuery({
-        query: ALL_PERSONS,
-        data: { allPersons: dataInStore.allPersons.concat(addedPerson) }
-      })
-    }   
-  }
 
   useSubscription(PERSON_ADDED, {
     onSubscriptionData: ({ subscriptionData }) => {
       const addedPerson = subscriptionData.data.personAdded
       notify(`${addedPerson.name} added`)
-      updateCacheWith(addedPerson)
+
+      // highlight-start
+      client.cache.updateQuery({ query: ALL_PERSONS }, ({ allPersons }) => {
+        return {
+          allPersons: allPersons.concat(addedPerson),
+        }
+      })
+      // highlight-end
     }
   })
 
@@ -699,19 +691,63 @@ const App = () => {
 }
 ```
 
-The function _updateCacheWith_ can also be used in _PersonForm_ for the cache update:
+Our solution has a small problem: a person is added to the cache and also rendered twice since the component _PersonForm_ is also adding it to the cache.
+
+Let us now fix the problem by ensuring that a person is not addded twice in the cache:
 
 ```js
-const PersonForm = ({ setError, updateCacheWith }) => { // highlight-line
+// highlight-start
+// function that takes care of manipulating cache
+export const updateCache = (cache, query, addedPerson) => {
+  const uniqByName = (a) => {
+    let seen = new Set()
+    return a.filter((item) => {
+      let k = item.name
+      return seen.has(k) ? false : seen.add(k)
+    })
+  }
+
+  cache.updateQuery(query, ({ allPersons }) => {
+    return {
+      allPersons: uniqByName(allPersons.concat(addedPerson)),
+    }
+  })
+}
+// highlight-end
+
+const App = () => {
+  const result = useQuery(ALL_PERSONS)
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [token, setToken] = useState(null)
+  const client = useApolloClient() 
+
+  useSubscription(PERSON_ADDED, {
+    onSubscriptionData: ({ subscriptionData, client }) => {
+      const addedPerson = subscriptionData.data.personAdded
+      notify(`${addedPerson.name} added`)
+      updateCache(client.cache, { query: ALL_PERSONS }, addedPerson) // highlight-line
+    },
+  })
+
+  // ...
+}
+```
+
+The function _updateCache_ can also be used in _PersonForm_ for the cache update:
+
+```js
+import { updateCache } from '../App' // highlight-line
+
+const PersonForm = ({ setError }) => { 
   // ...
 
-  const [ createPerson ] = useMutation(CREATE_PERSON, {
+  const [createPerson] = useMutation(CREATE_PERSON, {
     onError: (error) => {
       setError(error.graphQLErrors[0].message)
     },
-    update: (store, response) => {
-      updateCacheWith(response.data.addPerson) // highlight-line
-    }
+    update: (cache, response) => {
+      updateCache(cache, { query: ALL_PERSONS }, response.data.addPerson)  // highlight-line
+    },
   })
    
   // ..
@@ -753,7 +789,7 @@ The application should support the following query:
 ```js
 query {
   findPerson(name: "Leevi Hellas") {
-    friendOf{
+    friendOf {
       username
     }
   }
@@ -820,12 +856,11 @@ There is however one issue with our solution: it does an unreasonable amount of 
 Query: {
   allPersons: (root, args) => {    
     // highlight-start
+    console.log('Person.find')
     if (!args.phone) {
-      console.log('Person.find_v1')
       return Person.find({})
     }
 
-    console.log('Person.find_v2')
     return Person.find({ phone: { $exists: args.phone === 'YES' } })
     // highlight-end
   }
@@ -848,15 +883,13 @@ friendOf: async (root) => {
 and considering we have 5 persons saved, and we query _allPersons_ without _phone_ as argument, we see an absurd amount of queries like below.
 
 <pre>
-Person.find_v1
+Person.find
 User.find
 User.find
 User.find
 User.find
 User.find
 </pre>
-
-NOTE: Depending upon if you provided _phone_ parameter or not when querying _allPersons_, you'll see _User.find\_v2_ or _User.find\_v1_ logs in your console respectively.
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 
@@ -871,7 +904,6 @@ const schema = new mongoose.Schema({
   name: {
     type: String,
     required: true,
-    unique: true,
     minlength: 5
   },
   phone: {
@@ -941,7 +973,7 @@ Facebook's [DataLoader](https://github.com/facebook/dataloader) library offers a
 
 ### Epilogue
 
-The application we created in this part is not optimally structured: the schema, queries and the mutations should at least be moved outside of the application code. Examples for better structuring of GraphQL applications can be found on the internet. For example, for the server
+The application we created in this part is not optimally structured: we did some cleanups but much would still need to be done. Examples for better structuring of GraphQL applications can be found on the internet. For example, for the server
 [here](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) and the client [here](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
 GraphQL is already a pretty old technology, having been used by Facebook since 2012, so we can see it as "battle-tested" already. Since Facebook published GraphQL in 2015, it has slowly gotten more and more attention, and might in the near future threaten the dominance of REST. The death of REST has also already been [predicted](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Even though that will not happen quite yet, GraphQL is absolutely worth [learning](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
