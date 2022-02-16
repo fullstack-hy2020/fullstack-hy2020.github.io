@@ -857,16 +857,13 @@ In case of problems when making queries or mutations, check from the developer c
 
 #### 8.11: Authors birth year
 
-
 Implement a possibility to set authors birth year. You can create a new view for setting the birth year, or place it on the Authors view: 
 
 ![](../../images/8/20.png)
 
-
 Make sure that the Authors view is kept up to date after setting a birth year. 
 
 #### 8.12: Authors birth year advanced
-
 
 Change the birth year form so that a birth year can be set only for an existing author. Use [select tag](https://reactjs.org/docs/forms.html#the-select-tag), [react select](https://github.com/JedWatson/react-select), or some other mechanism. 
 

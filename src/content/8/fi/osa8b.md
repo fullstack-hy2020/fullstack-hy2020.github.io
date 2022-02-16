@@ -802,7 +802,7 @@ Apollo mahdollistaa tarvittaessa myös sovelluksen paikallisen tilan tallettamis
 
 Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille frontend.
 
-Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy/library-frontend).
+Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2020/library-frontend).
 
 #### 8.8: Kirjailijoiden näkymä
 
@@ -826,7 +826,7 @@ Huolehdi siitä, että kirjailijoiden ja kirjojen näkymä pysyy ajantasaisena l
 
 Huom: jos törmäät ongelmiin kyselyjä tai mutaatioita tehdessä, kannattaa katsoa developer consolesta mitä palvelin vastaa
 
-![](../../images/8/42ea.png)
+![](../../images/8/42x.png)
 
 #### 8.11: Kirjailijan syntymävuosi
 
