@@ -883,6 +883,7 @@ describe('when logged in', function() {
     })
 
     it('one of those can be made important', function () {
+      cy.contains('show all').click()
       cy.contains('second note')
         .contains('make important')
         .click()
@@ -944,6 +945,7 @@ One way to fix this is the following:
 
 ```js
 it('one of those can be made important', function () {
+  cy.contains('show all').click()
   cy.contains('second note').parent().find('button').click()
   cy.contains('second note').parent().find('button')
     .should('contain', 'make not important')
@@ -962,6 +964,7 @@ In these kinds of situations, it is possible to use the [as](https://docs.cypres
 
 ```js
 it('one of those can be made important', function () {
+  cy.contains('show all').click()
   cy.contains('second note').parent().find('button').as('theButton')
   cy.get('@theButton').click()
   cy.get('@theButton').should('contain', 'make not important')
