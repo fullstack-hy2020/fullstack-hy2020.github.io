@@ -8,8 +8,8 @@ lang: zh
 <div class="content">
 
 
-<!-- Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy/part2-notes/tree/part2-1).  -->
-让我们继续扩展我们的应用，允许用户添加新的便笺。你可以在此[仓库](https://github.com/fullstack-hy/part2-notes/tree/part2-1)中找到当前的应用代码。
+<!-- Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).  -->
+让我们继续扩展我们的应用，允许用户添加新的便笺。你可以在此[仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1)中找到当前的应用代码。
 
 <!-- In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.  -->
 
@@ -294,8 +294,8 @@ setNotes(notes.concat(noteObject))
 setNewNote('')
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part2-2). -->
-您可以在[Github 仓库](https://github.com/fullstack-hy/part2-notes/tree/part2-2)的<i>part2-2</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2). -->
+您可以在[Github 仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2)的<i>part2-2</i> 分支中找到我们当前应用的全部代码。
 
 ### Filtering Displayed Elements
 【过滤显示的元素】
@@ -446,8 +446,8 @@ const App = (props) => {
 show {showAll ? 'important' : 'all'}
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part2-3). -->
-您可以在[this github repository](https://github.com/fullstack-hy/part2-notes/tree/part2-3)的<i>part2-3</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3). -->
+您可以在[this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3)的<i>part2-3</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

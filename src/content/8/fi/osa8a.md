@@ -238,9 +238,9 @@ GraphQL:n skeema kuvaa ainoastaan palvelimen ja sitä käyttävien clientien vä
 
 Nimestään huolimatta GraphQL:llä ei itseasiassa ole mitään tekemistä tietokantojen kanssa, se ei ota mitään kantaa siihen miten data on tallennettu. GraphQL-periaattella toimivan API:n käyttämä data voi siis olla talletettu relaatiotietokantaan, dokumenttitietokantaan tai muille palvelimille, joita GraphQL-palvelin käyttää vaikkapa REST:in välityksellä. 
 
-### Apollo server
+### Apollo Server
 
-Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo-serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
+Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo Serveriä](https://www.apollographql.com/docs/apollo-server/) käyttäen. 
 
 Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuudet
 
@@ -915,7 +915,7 @@ Joissain tilanteissa voi myös olla hyötyä nimetä kyselyt. Näin on erityises
 
 ### Tehtävät 8.1.-8.7.
 
-Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohdaksi [tämä tiedosto](https://github.com/fullstack-hy/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
+Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohdaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
 Huomaa, että koodin käynnistäminen aiheuttaa alussa virheen, sillä skeeman määrittely on puutteellinen.
 

@@ -103,7 +103,7 @@ Itse tekemämme eri ympäristöjen konfiguroinnista huolehtiva _config_-moduuli 
 
 Muualle koodiin ei muutoksia tarvita.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2), branchissä <i>part4-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2), branchissä <i>part4-2</i>.
 
 ### SuperTest
 
@@ -442,7 +442,7 @@ notesRouter.get('/', async (request, response) => {
 
 Voimme varmistaa refaktoroinnin onnistumisen selaimella sekä suorittamalla juuri määrittelemämme testit.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-3), branchissa <i>part4-3</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3), branchissa <i>part4-3</i>.
 
 ### Lisää testejä ja backendin refaktorointia
 
@@ -769,7 +769,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-4), haarassa <i>part4-4</i>. 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4), haarassa <i>part4-4</i>. 
 
 ### Try-catchin eliminointi
 
@@ -960,7 +960,7 @@ beforeEach(async () => {
 })
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
 
 </div>
 

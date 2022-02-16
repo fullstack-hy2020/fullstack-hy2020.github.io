@@ -706,7 +706,7 @@ Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/l
 
 ![](../../images/5/19ea.png)
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
 
 </div>
 

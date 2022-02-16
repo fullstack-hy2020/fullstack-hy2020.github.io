@@ -634,7 +634,7 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8). -->
-你可以在这个[分支](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-8).中找到本节课的代码。
+<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8). -->
+你可以在这个[分支](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).中找到本节课的代码。
 
 </div>

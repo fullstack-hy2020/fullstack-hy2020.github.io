@@ -87,7 +87,7 @@ const App = () => {
 export default App
 ```
 
-Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
 
 The frontend will not display any notes if it's not connected to the backend. You can start the backend with _npm run dev_ in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with _npm start_, and now you can see the notes that are saved in your MongoDB database from Part 4.
 
@@ -316,7 +316,7 @@ The solution isn't perfect, but we'll leave it for now.
 
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise. 
 
-Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-2), branch <i>part5-2</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
 
 ### Creating new notes
 
@@ -517,7 +517,7 @@ or with the command which empties <i>localstorage</i> completely:
 window.localStorage.clear()
 ```
 
-Current application code can be found on [Github](https://github.com/fullstack-hy/part2-notes/tree/part5-3), branch <i>part5-3</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-3), branch <i>part5-3</i>.
 
 </div>
 

@@ -431,7 +431,7 @@ module.exports = app
 
 eli lisäyksen jälkeen HTTP POST -operaatio backendin endpointiin <i>/api/testing/reset</i> tyhjentää tietokannan.
 
-Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
+Backendin testejä varten muokattu koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1), branchissä <i>part5-1</i>.
 
 Muutetaan nyt testien <i>beforeEach</i>-alustuslohkoa siten, että se nollaa palvelimen tietokannan aina ennen testien suorittamista.
 
@@ -522,7 +522,7 @@ Ensimmäinen komento etsii ensin komponentin, missä on teksti <i>another note c
 
 Toinen komento varmistaa, että saman napin teksti on vaihtunut muotoon <i>make not important</i>.
 
-Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-9), branchissa <i>part5-9</i>.
+Testit ja frontendin tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), branchissa <i>part5-9</i>.
 
 ### Epäonnistuneen kirjautumisen testi
 
@@ -817,7 +817,7 @@ describe('Note app', function() {
 })
 ```
 
-Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-10), branchissa <i>part5-10</i>.
+Testit ja frontendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), branchissa <i>part5-10</i>.
 
 ### Muistiinpanon tärkeyden muutos
 
@@ -973,7 +973,7 @@ Nyt siis voimme suorittaa Cypress-testit komentoriviltä komennolla <i>npm run t
 
 Huomaa, että testien suorituksesta tallentuu video hakemistoon <i>cypress/videos/</i>, hakemisto lienee syytä gitignoroida.
 
-Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-11), branchissa <i>part5-11</i>.
+Testien ja frontendin koodin lopullinen versio on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), branchissa <i>part5-11</i>.
 
 </div>
 

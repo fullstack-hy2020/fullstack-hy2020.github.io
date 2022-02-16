@@ -273,7 +273,7 @@ ja määritellään lomakkeen näyttävä koodi komponentin <i>Togglable</i> sis
 </Togglable>
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4), branchissa <i>part5-4</i>.
 
 ### Lomakkeiden tila
 
@@ -360,7 +360,7 @@ const App = () => {
 
 Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>.
 
 ### ref eli viite komponenttiin
 
@@ -454,7 +454,7 @@ Käyttämämme kikka komponentin tilan muuttamiseksi toimii, mutta se vaikuttaa 
 
 Refeille on myös [muita käyttötarkoituksia](https://reactjs.org/docs/refs-and-the-dom.html) kuin React-komponentteihin käsiksi pääseminen.
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6), branchissa <i>part5-6</i>.
 
 ### Huomio komponenteista
 
@@ -802,7 +802,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7), branchissa <i>part5-7</i>.
 
 Kannattaa huomata, että create-react-appilla on myös [oletusarvoinen ESLint-konfiguraatio](https://www.npmjs.com/package/eslint-config-react-app), jonka korvasimme nyt kokonaan omalla konfiguraatiolla. [Dokumentaatio](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) toteaa, että oletusarvoisen konfiguraation korvaaminen on ok, mutta suosittelee mielummin <i>laajentamaan</i> oletusarvoista konfiguraatiota: <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
 

@@ -619,7 +619,7 @@ Probablemente sea una buena idea integrar el frontend y el backend una funcional
 
 Una vez que introducimos una base de datos en la mezcla, es útil inspeccionar el estado persistente en la base de datos, por ejemplo, desde el panel de control en MongoDB Atlas. Muy a menudo, los pequeños programas auxiliares de Node como el programa <i>mongo.js</i> que escribimos anteriormente pueden ser muy útiles durante el desarrollo.
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-4</i> de [este repositorio de Github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-4).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-4</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
 </div>
 
@@ -888,7 +888,7 @@ Hay un detalle importante con respecto al uso del método <em>findByIdAndUpdate<
 
 Después de probar el backend directamente con Postman y el cliente REST de VS Code, podemos verificar que parece funcionar. El frontend también parece funcionar con el backend usando la base de datos.
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-5</i> de [este repositorio de github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-5).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-5</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
 </div>
 

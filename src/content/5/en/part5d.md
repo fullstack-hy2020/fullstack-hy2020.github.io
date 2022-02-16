@@ -455,7 +455,7 @@ After the changes, an HTTP POST request to the <i>/api/testing/reset</i> endpoin
   npm run start:test
 ```
 
-The modified backend code can be found from [GitHub](https://github.com/fullstack-hy/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
+The modified backend code can be found from [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part5-1) branch <i>part5-1</i>.
 
 Next we will change the <i>beforeEach</i> block so that it empties the server's database before tests are run. 
 
@@ -547,7 +547,7 @@ The first command searches for a component containing the text <i>another note c
 
 The second command checks that the text on the button has changed to <i>make not important</i>.
 
-The tests and the current frontend code can be found from [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part5-9) branch <i>part5-9</i>.
+The tests and the current frontend code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9) branch <i>part5-9</i>.
 
 ### Failed login test
 
@@ -862,7 +862,7 @@ describe('Note app', function() {
 })
 ```
 
-The tests and the frontend code can be found from [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part5-10) branch <i>part5-10</i>.
+The tests and the frontend code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10) branch <i>part5-10</i>.
 
 ### Changing the importance of a note
 
@@ -1026,7 +1026,7 @@ Now we can run our tests from the command line with the command <i>npm run test:
 
 Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
 
-The frontend and the test code can be found from [GitHub](https://github.com/fullstack-hy/part2-notes/tree/part5-11) branch <i>part5-11</i>.
+The frontend and the test code can be found from [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11) branch <i>part5-11</i>.
 
 </div>
 

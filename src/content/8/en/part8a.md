@@ -243,9 +243,9 @@ GraphQL query describes only the data moving between a server and the client. On
 Despite its name, GraphQL does not actually have anything to do with databases. It does not care how the data is saved. 
 The data a GraphQL API uses can be saved into a relational database, document database, or to other servers which a GraphQL server can access with for example REST.
 
-### Apollo server
+### Apollo Server
 
-Let's implement a GraphQL server with today's leading library: [Apollo server](https://www.apollographql.com/docs/apollo-server/).
+Let's implement a GraphQL server with today's leading library: [Apollo Server](https://www.apollographql.com/docs/apollo-server/).
 
 Create a new npm project with _npm init_ and install the required dependencies.
 

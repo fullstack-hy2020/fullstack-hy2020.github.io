@@ -428,7 +428,7 @@ Si hay algún problema en su archivo de configuración, el plugin lint puede com
 
 Muchas empresas definen estándares de codificación que se aplican en toda la organización a través del archivo de configuración de ESlint. No se recomienda seguir reinventando la rueda una y otra vez, y puede ser una buena idea adoptar una configuración ya hecha del proyecto de otra persona en el suyo. Recientemente, muchos proyectos han adoptado la [guía de estilo Javascript](https://github.com/airbnb/javascript) de Airbnb al utilizar la configuración [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) de Airbnb.
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-7</i> de [este repositorio de github](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-7).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part3-7</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
 </div>
 
 <div class="tasks">

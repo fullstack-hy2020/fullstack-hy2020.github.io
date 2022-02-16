@@ -1024,12 +1024,12 @@ important: body.important || false,
 > <!--To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...-->
 确切地说，当<i>important</i> 属性为<i>false</i> 时，那么<em>body.important || false</em> 表达式实际上将从右侧返回<i>false</i>..。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1). -->
-您可以在[这个 github 仓库](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1)的<i>part3-1</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1). -->
+您可以在[这个 github 仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)的<i>part3-1</i> 分支中找到我们当前应用的全部代码。
 
 
-<!-- The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1). -->
-应用当前状态的代码单独在 branch [part3-1](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-1)中。
+<!-- The code for the current state of the application is specifically in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1). -->
+应用当前状态的代码单独在 branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)中。
 
 ![](../../images/3/21.png)
 
@@ -1296,8 +1296,8 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2). -->
-您可以在[this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part3-2).的<i>part3-2</i> 分支中找到我们当前应用的全部代码。
+<!-- You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2). -->
+您可以在[this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).的<i>part3-2</i> 分支中找到我们当前应用的全部代码。
 
 </div>
 

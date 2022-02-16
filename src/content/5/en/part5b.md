@@ -289,7 +289,7 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-4).
+You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
 
 
 ### State of the forms
@@ -377,8 +377,8 @@ const App = () => {
 <!-- Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi. -->
 We could do the same for the log in form, but we'll leave that for an optional exercise. 
 
-<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
-The application code can be found from [github](https://github.com/fullstack-hy/part2-notes/tree/part5-5),
+<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
+The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
 branch <i>part5-5</i>.
 
 ### References to components with ref
@@ -477,7 +477,7 @@ This trick works for changing the state of a component, but it looks a bit unple
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-6).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
 
 ### One point about components
 
@@ -830,7 +830,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy/part2-notes/tree/part5-7).
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 
 Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overriden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage to that:
  <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
