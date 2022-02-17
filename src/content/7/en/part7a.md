@@ -490,7 +490,7 @@ const note = match
   : null
 ```
 
-The completed code can be found [here](https://github.com/fullstack-hy2020/misc/blob/main/router-app-v2.js).
+The completed code can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v2.js).
 
 </div>
 <div class="tasks">
