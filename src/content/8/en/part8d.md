@@ -300,7 +300,6 @@ You can decide how the login looks on the user interface. One possible solution 
 
 ![](../../images/8/26.png)
 
-
 The login form:
 
 ![](../../images/8/27.png)
@@ -325,16 +324,10 @@ Implement a view which shows all the books based on the logged-in user's favouri
 
 #### 8.21 books by genre with GraphQL
 
-In previous exercise 8.20, the filtering could have been done using just React. To complete this exercise, you should filter the books in the recommendations page using a GraphQL query to the server. The query created in exercise 8.5 could be useful here. 
+In the previous two exercises, the filtering could have been done using just React.
+To complete this exercise, you should redo the filtering the books based on a selected genre (that was done in exercise 8.19) using a GraphQL query to the server. If you already did so then you do not have to do anything.
 
 This and the next exercises are quite **challenging** like it should be this late in the course. You might want to complete first the easier ones in the [next part](/en/part8/fragments_and_subscriptions).
-
-Some tips:
-
-- Instead of using <i>useQuery</i>, it is probably better to do the queries with the <i>useLazyQuery</i> hook.
-- It is sometimes useful to save the results of a GraphQL query to the state of a component. 
-- Note that you can do GraphQL queries in a <i>useEffect</i> hook.
-- The [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) of a <i>useEffect</i> hook can become handy depending on your approach. 
 
 #### 8.22 Up-to-date cache and book recommendations
 

@@ -466,9 +466,23 @@ The following things do <i>not</i> have to work just yet:
  -  _author_ field of a book
  - _editAuthor_ mutation
 
+**Note**: despite the fact that author is now an <i>object </i>  within a book, the schema for adding a book can remain same, only the <i>name</i> of the author is given as a parameter
+
+```js
+type Mutation {
+  addBook(
+    title: String!
+    author: String! // highlight-line
+    published: Int!
+    genres: [String!]!
+  ): Book!
+  editAuthor(name: String!, setBornTo: Int!): Author
+}
+```
+
 #### 8.14: Database, part 2
 
-Complete the program so that all queries (except _allBooks_ with the parameter _author_ ) and mutations work. 
+Complete the program so that all queries (to get _allBooks_ working with the parameter _author_ is not required) and mutations work. 
 
 You might find [this](https://docs.mongodb.com/manual/reference/operator/query/in/) useful.
 

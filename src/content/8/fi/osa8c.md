@@ -438,7 +438,6 @@ query {
 
 Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-5), branchissa <i>part8-5</i>.
 
-
 </div>
 
 <div class="tasks">
@@ -474,9 +473,23 @@ Seuraavien asioiden ei vielä tässä tehtävässä tarvitse toimia.
 - kirjojen kenttä _author_
 - mutaatio _editAuthor_
 
+**Huom**: siitä huolimatta että kirjailijan tiedot ovat nyt <i>oliona</i> kirjan sisällä, kirjan lisäämisen skeema kannattaa säilyttää samana, eli operaation parametrina annetaan kirjailijasta ainoastaan nimi:
+
+```js
+type Mutation {
+  addBook(
+    title: String!
+    author: String! // highlight-line
+    published: Int!
+    genres: [String!]!
+  ): Book!
+  editAuthor(name: String!, setBornTo: Int!): Author
+}
+```
+
 #### 8.14: Tietokanta, osa 2
 
-Täydennä sovellusta siten, että kaikki kyselyt (paitsi kyselyn _allBooks_ parametri _author_) sekä mutaatiot toimivat.
+Täydennä sovellusta siten, että kaikki kyselyt (kyselyn _allBooks_ parametrin _author_ toimintaansaattaminen on vapaaehtoinen lisätehtävä!) sekä mutaatiot toimivat.
 
 Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/reference/operator/query/in/).
 

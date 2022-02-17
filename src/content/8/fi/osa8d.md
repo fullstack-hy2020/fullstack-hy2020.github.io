@@ -329,14 +329,9 @@ Tee sovellukseen näkymä, joka näyttää kirjautuneelle käyttäjälle käytt�
 
 #### 8.21 Genren kirjat GraphQL:llä
 
-Tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Voit merkitä tämän tehtävän, jos rajaat lempigenren kirjojen näkymässä näytettävät kirjat tehtävässä 8.5 palvelimelle toteutetun suoran GraphQL-kyselyn avulla. 
+Tehtävässä 8.19 toteutetun tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Jos toteutit rajauksen frontendin koodissa, muuta toteutustasi siten, että haet näytettävät kirjat GraphQL-kyselyillä. Jos teit jo rajauksen GrapGL:llä, ei sinun tarvitse tehdä mitään.
 
-Tämä **tehtävä on haastava** ja niin kurssin tässä vaiheessa jo kuuluukin olla. Muutama vihje
-
-- Hookin <i>useQuery</i> käytön sijaan saattaa olla parempi tehdä kyselyitä <i>useLazyQuery</i>-hookin avulla
-- GraphQL-kyselyjen tuloksia kannattaa joskus tallentaa komponentin tilaan
-- Huomaa, että voit tehdä GraphQL-kyselyjä <i>useEffect</i>-hookissa (muunkinlaiset ratkaisut ovat mahdollisia...)
-- <i>useEffect</i>-hookin [toisesta parametrista](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) voi olla tehtävässä apua, se tosin riippuu käyttämästäsi lähestymistavasta
+Tämä **tehtävä on haastava** ja niin kurssin tässä vaiheessa jo kuuluukin olla.
 
 #### 8.22 Välimuistin ajantasaisuus
 
