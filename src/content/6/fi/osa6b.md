@@ -189,10 +189,10 @@ import { filterChange } from './reducers/filterReducer'
 //...
 store.subscribe(() => console.log(store.getState()))
 store.dispatch(filterChange('IMPORTANT'))
-store.dispatch(createNote('combineReducers forms one reduces from many simple reducers'))
+store.dispatch(createNote('combineReducers forms one reducer from many simple reducers'))
 ```
 
-Kun simuloimme näin filtterin tilan muutosta ja muistiinpanon luomista Konsoliin tulostuu storen tila jokaisen muutoksen jälkeen:
+Kun simuloimme näin filtterin tilan muutosta ja muistiinpanon luomista, konsoliin tulostuu storen tila jokaisen muutoksen jälkeen:
 
 ![](../../images/6/5e.png)
 
