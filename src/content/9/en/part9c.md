@@ -695,6 +695,15 @@ One thing in our application is a cause for concern. In <i>getNonSensitiveEntrie
 
 This happens because [TypeScript only checks](http://www.typescriptlang.org/docs/handbook/type-compatibility.html) whether we have all of the required fields or not, but excess fields are not prohibited. In our case, this means that it is <i>not prohibited</i> to return an object of type <i>DiaryEntry[]</i>, but if we were to try to access the <i>comment</i> field, it would not be possible because we would be accessing a field that TypeScript is unaware of even though it exists.
 
+
+// example how we can prohibit fields in an object. the utility type is not hard to understand and it's nicer than just Omit for this example because the intent here is to disallow sensitive fields and not 'unrequire' existing fields ('comment')
+
+https://www.typescriptlang.org/play?#code/MYewdgzgLgBAJgSwIYCcEFMIwLwwNoBQMxMA3kSZQEQJxUBcMAjADQWXFVxJToMxUATAAYmAdgC0oqUypsOJKgHd0PABboU-KiiQIwATznsOVAG4IICAEYIANgihHGVAA4gQW+QoGgAtn7oYFDaAAoo6FBOMBDAqAYwAGYOAOZqUCwwAJIA5H4wKXZIcNl5MEgOZnwmAL7exOQ+ArT8gvWm3LzaIuJSACwyxk3KqlAaWi4QAK5ghkM+5pY29o7OAikedO3U-oHB2gCiVSgGY-opMCrBMNaRvCgwY0hgMOgAHq7owLxwmbn5dlUKDA5xgfimwDUVFq7UaCxajAAzNtFJ0+C4epJhAMmABWeYKEbqTTaJT6OBGFGcCxWWwOJzaDYgLYmHYgAJBEIuf4FO6g1wRKIJUBgRK0TnlOxjEBTNLZGBqRzlJJ2EDAADWMBAiRuCBQcAg0ModRMcMJCJgfSpAjR3VEWNxEiYsmtRLGJJcwFVUwpBNMNOW9LWVCZLOGu052iykr8IGgST0gJK7pgRTAiDAF2sU1g0emKAsVTotQIAF0ANwEAjvdwoWD6e6JJDAdAwAAiyBOB2CJzIFFojDAUz8txQleIaMY0DQmfHl1G4ynUBnKTnAbpqyXK7nEeCW-OlZqVYA9MecNgL5er9eb7e7-eH4+n8-79WPp5YE5Pu3LBVVUoADEMDsA0AB4ABUDE+TIOwgP8QBUOAgPQECsHeXh0ywdV0AMbUYEgz4AD4cBgAB5PxHAgqD0Bg387H-dAkOAg1iIAMj7Sg8GQkCYH0H84PohDGO4g1SwAfkYGY4HQMUwEYggakrN9a0-aiYAAOXAABlIIrCgBAqg7eJu2XBJcFg+DAOYiBQKMrsewMTIcl3KAckIytT3PF9vJ83y-P8qsRXjFJIk0sAdMgRwDPQEy0EwCzBMQkiAAoAEpGDCiK9OiuyDFigw8FLHBiLhQUpmBeBOwwCAADo-CQVxkuS0heN+eAeBo+diRQTJ1xWaIalS4qYGakxaHaNF2hUbr2j6oN2hcxgckQASGLgHIKEG1LDyUoLYBCqBMt0qKqli6qAEFEsYlL0o07Tjv0wzOzyhzCuG0rInKl5EFQaq6oapqWvG9reEyab3R6mA5tWGBBuG0bKHGkxJpMcHxlmpYNycTbUu2hTKyAA
+
+
+
+
+
 Unfortunately, this can lead to unwanted behaviour if you are not aware of what you are doing; the situation is valid as far as TypeScript is concerned, but you are most likely allowing use that is not wanted.
 If we were now to return all of the diaryEntries from the <i>getNonSensitiveEntries</i> function to the <i>frontend</i>, we would actually be leaking the unwanted fields to the requesting browser even though our types seem to imply otherwise!
 
