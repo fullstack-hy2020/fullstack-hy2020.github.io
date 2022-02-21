@@ -383,7 +383,7 @@ Otetaan Redux Toolkit käyttöön sovelluksessamme refaktoroimalla nykyistä koo
 npm install @reduxjs/toolkit
 ```
 
-Avataan sen jälkeen <i>index.js</i>-tiedosto, jossa nykyinen Redux-store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan luonnissa Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
+Avataan sen jälkeen <i>index.js</i>-tiedosto, jossa nykyinen Redux-store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
 
 ```js
 import ReactDOM from 'react-dom'
@@ -603,7 +603,7 @@ Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen
 
 #### 6.9 anekdootit, step7
 
-Asenne projektiin Redux Toolkit. Siirrä tämän jälkeen Redux-storen määrittely omaan tiedostoon <i>store.js</i> ja hyödynnä sen luonnissa Redux Toolkitin <em>configureStore</em>-funktiota. Ota myös käyttöön Redux DevTools sovelluksen tilan debuggaamisen helpottamiseksi.
+Asenna projektiin Redux Toolkit. Siirrä tämän jälkeen Redux-storen määrittely omaan tiedostoon <i>store.js</i> ja hyödynnä sen luonnissa Redux Toolkitin <em>configureStore</em>-funktiota. Ota myös käyttöön Redux DevTools sovelluksen tilan debuggaamisen helpottamiseksi.
 
 #### 6.10 anekdootit, step8
 
