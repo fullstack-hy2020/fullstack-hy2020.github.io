@@ -937,7 +937,7 @@ dispatch({
 });
 ```
 
-Define [action creator functions](/en/part6/flux_architecture_and_redux#action-creators) in the file `src/state/reducer.tsx` and refactor the code to use them.
+Define [action creator functions](/en/part6/flux_architecture_and_redux#action-creators) in the file `src/state/reducer.ts` and refactor the code to use them.
 
 For example, the <i>App</i> should become like the following:
 
