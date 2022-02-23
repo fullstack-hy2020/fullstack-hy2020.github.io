@@ -182,7 +182,7 @@ Add validation to your phonebook application, that will make sure that phone num
   - eg. 09-1234556 and 040-22334455 are valid phone numbers
   - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
 
-Use a [Custom validatior](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
+Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
 If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
 
