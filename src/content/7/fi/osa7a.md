@@ -319,9 +319,9 @@ const Login = (props) => {
 }
 ```
 
-Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaamisen ohjelmallisesti.
+Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaaminen ohjelmallisesti.
 
-Kirjautumisen yhteydessä suoritetaan komento _navigate('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
+Kirjautumisen yhteydessä suoritettava komento _navigate('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
 Käyttämämme React Router -kirjaston funktiot [useParams](https://reactrouter.com/docs/en/v6/api#useparams) ja [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) ovat molemmat hook-funktiota, samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create-react-app on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
 
