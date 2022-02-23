@@ -271,7 +271,7 @@ The [frontend](https://github.com/fullstack-hy/patientor) has already been built
 
 #### 9.8: Patientor backend, step1
 
-Initialise a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers to HTTP GET requests to route <i>/ping</i>.
+Initialise a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers to HTTP GET requests to route <i>/api/ping</i>.
 
 The project should be runnable with npm scripts, both in development mode and, as compiled code, in production mode.
 
@@ -299,13 +299,8 @@ You might also want to have a look at the <i>console</i> tab. If something fails
 
 Finally, we are ready to start writing some code.
 
-<!-- Let's start from basics. Ilari wants to keep track of his experiences on his flight journeys. -->
 Let's start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys.
-<!-- What he wants to be able to save are </i>diary entries</i> that include:  -->
-<!-- - Date of the entry -->
-<!-- - Weather conditions (either good, windy, rainy or stormy) -->
-<!-- - Visibility (either good, ok or poor) -->
-<!-- - Free text entry of experience -->
+
 He wants to be able to save </i>diary entries</i> which contain:
 - The date of the entry
 - Weather conditions (good, windy, rainy or stormy)
@@ -720,7 +715,7 @@ If we were now to return all of the diaryEntries from the <i>getNonSensitiveEntr
 Because TypeScript doesn't modify the actual data but only its type, we need to exclude the fields ourselves:
 
 ```js
-import diaries from '../../data/entries.js'
+import diaries from '../../data/entries.ts'
 
 import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'
 
