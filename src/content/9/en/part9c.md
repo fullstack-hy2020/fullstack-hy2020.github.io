@@ -279,7 +279,7 @@ The project should be runnable with npm scripts, both in development mode and, a
 
 Fork and clone the project [patientor](https://github.com/fullstack-hy/patientor). Start the project with the help of the README file.
  
-You can run this command if you get error message when trying to start the fronend:
+You can run this command if you get error message when trying to start the frontend:
  ```shell
 npm update chokidar
 ``` 
