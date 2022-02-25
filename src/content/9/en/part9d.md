@@ -582,29 +582,14 @@ When diving into an existing codebase for the first time, it is good to get an o
 If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the <i>package.json</i>. 
 It is always a good idea to start the application and click around to verify you have a functional development environment. 
 
-You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used.
-These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you.
-The [sample project](https://github.com/fullstack-hy/patientor) used in the rest of this part is organized, feature-wise.
-You can see what pages the application has, and some general components, e.g. modals and state.
-Keep in mind that the features may have
-different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic
-and keeps the data organized under the hood for the rest of the app to use. 
+You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have
+different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use. 
 
-TypeScript provides you types which tell you what kind of data structures, functions, components and state to expect. 
-You can try to look for <i>types.ts</i> or something similar to get you started.
-VSCode is a big help and just highlighting variables and parameters can give you quite a lot of insight.
-All this naturally depends on how types are used in the project. 
+TypeScript provides you types which tell you what kind of data structures, functions, components and state to expect.  You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting variables and parameters can give you quite a lot of insight. All this naturally depends on how types are used in the project. 
 
-If the project has unit, integration or end-to-end tests, reading those is most likely beneficial. 
-Test cases are your most important tool when refactoring or creating new features to the application. You want to make sure not to break any existing features when hammering around the code.
-TypeScript can also give you guidance with argument and return types when changing the code.
+If the project has unit, integration or end-to-end tests, reading those is most likely beneficial. Test cases are your most important tool when refactoring or creating new features to the application. You want to make sure not to break any existing features when hammering around the code. TypeScript can also give you guidance with argument and return types when changing the code.
 
-Do remember that reading code is a skill in itself, 
-and don't worry if you don't understand the code on your first readthrough. 
-Code may have a lot of corner cases, and pieces of logic may have been added here and there throughout its development cycle. 
-It is hard to imagine what kind of troubles the previous developer has been wrestling with.
-Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings).
-Understanding all of it requires digging deep into the code and business domain requirements. The more code you read, the better you're going to be at it. You will read more code than you're going to produce.
+Do remember that reading code is a skill in itself, and don't worry if you don't understand the code on your first readthrough.  Code may have a lot of corner cases, and pieces of logic may have been added here and there throughout its development cycle. It is hard to imagine what kind of troubles the previous developer has been wrestling with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding all of it requires digging deep into the code and business domain requirements. The more code you read, the better you're going to be at it. You will read more code than you're going to produce.
 
 ### Patientor frontend
 
@@ -612,18 +597,12 @@ It's time to get our hands dirty finalizing the frontend for the backend we buil
 
 Before diving into the code, let us start both the frontend and the backend.
 
-If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients to the backend.
-As we are using mock data instead of a database, the data will not persist - closing the backend will 
-delete all the data we have added. 
-UI design has clearly not been a strong point of the creators, so let's disregard the UI for now.
+If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients to the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has clearly not been a strong point of the creators, so let's disregard the UI for now.
 
-After verifying that everything works, we can start studying the code. 
-All the interesting stuff resides in the <i>src</i> folder.
-For your convenience, there is already a <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises.
+After verifying that everything works, we can start studying the code. All the interesting stuff resides in the <i>src</i> folder. For your convenience, there is already a <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises.
 
 In principle, we could use the same types for both backend and frontend, but usually the frontend has different data structures and use cases for the data, which causes the types to be different. 
-For example, the frontend has a state, and may want to keep data in objects or maps whereas the backend
-uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
+For example, the frontend has a state, and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
 
 The folder structure looks as follows:
 
@@ -635,8 +614,7 @@ The main functionality of the code in the <i>state</i> folder is to keep our dat
 
 Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
 
-The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer).
-This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similiar libraries for the state management.
+The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similiar libraries for the state management.
 There are a lot of good material, for example  [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe), about this approach to state management.
 
 The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html) that, according to its documentation:
@@ -656,8 +634,7 @@ export type State = {
 
 The state is an object with one key, <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with a <i>Patient</i> objects as values. The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
 
-But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not.
-So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
+But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not. So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
 
 ```js
 const myPatient = state.patients['non-existing-id'];
@@ -1455,7 +1432,7 @@ Upon a successful submit, the new entry should be added to the correct patient a
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
 
 It can be used as follows:
 
