@@ -1388,7 +1388,7 @@ The source code of the application can be found on [GitHub](https://github.com/F
 Create a POST endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend. You can create unique ids of type <i>string</i> using the [uuid](https://github.com/uuidjs/uuid) library:
 
 ```js
-import {v1 as uuid} from 'uuid'
+import { v1 as uuid } from 'uuid'
 const id = uuid()
 ```
 
