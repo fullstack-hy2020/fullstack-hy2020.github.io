@@ -364,7 +364,7 @@ describe('when there is initially one user in db', () => {
 The test case obviously will not pass at this point. We are essentially practicing [test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), where tests for new functionality are written before the functionality is implemented.
 
 Mongoose does not have a built-in validator for checking the uniqueness of a field. In principle we could find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package but unfortunately at the time of writing (24th Jan 2022)
-mongoose-unique-validator does not work with Mongoose version 6.x, so we have to implement the uniqueness check by ourselves in the controller:
+mongoose-unique-validator does not work with Mongoose version 6.x(but mongoose-unique-validator version 2.0.1 will work with Mongoose version 6.x), so we have to implement the uniqueness check by ourselves in the controller:
 
 ```js
 usersRouter.post('/', async (request, response) => {
