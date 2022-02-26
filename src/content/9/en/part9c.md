@@ -267,7 +267,7 @@ With the help of our compiler and eslint, it also ensures that good code quality
 
 For this set of exercises you will be developing a backend for an existing project called **Patientor**, which is a simple medical record application for doctors who handle diagnoses and basic health information of their patients.
 
-The [frontend](https://github.com/fullstack-hy/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
+The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
 
 #### 9.8: Patientor backend, step1
 
@@ -277,7 +277,7 @@ The project should be runnable with npm scripts, both in development mode and, a
 
 #### 9.9: Patientor backend, step2
 
-Fork and clone the project [patientor](https://github.com/fullstack-hy/patientor). Start the project with the help of the README file.
+Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README file.
  
 You can run this command if you get error message when trying to start the fronend:
  ```shell
