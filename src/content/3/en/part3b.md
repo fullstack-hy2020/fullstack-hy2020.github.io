@@ -139,7 +139,7 @@ When the application is deployed, we must create a [production build](https://re
 
 A production build of applications created with <i>create-react-app</i> can be created with command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
-**NOTE:** at the time of writing (20th January 2022) create-react-app had a bug that causes the wollowing error _TypeError: MiniCssExtractPlugin is not a constructor_
+**NOTE:** at the time of writing (20th January 2022) create-react-app had a bug that causes the following error _TypeError: MiniCssExtractPlugin is not a constructor_
 
 A possible fix is found from [here](https://github.com/facebook/create-react-app/issues/11930). Add the following to the file <i>package.json</i> 
 
