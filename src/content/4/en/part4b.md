@@ -880,7 +880,7 @@ notesRouter.delete('/:id', async (request, response) => {
 
 <!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen. -->
 Because of the library, we do not need the _next(exception)_ call anymore. 
-The library handles everything under the hood. If an exception occurs in a <i>async</i> route, the execution is automatically passed to the error handling middleware.
+The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
 
 <!-- Muut routet yksinkertaistuvat seuraavasti: -->
 The other routes become:
