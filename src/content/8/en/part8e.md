@@ -334,7 +334,7 @@ const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
 
 const MONGODB_URI =
-  'mongodb+srv://fullstack:fullstack@cluster0.o1opl.mongodb.net/graphqlPhoneApp?retryWrites=true&w=majority'
+  'MONGODB_URI'
 
 console.log('connecting to', MONGODB_URI)
 
