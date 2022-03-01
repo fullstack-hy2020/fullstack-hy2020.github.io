@@ -195,7 +195,7 @@ const typeDefs = gql`
 module.exports = typeDefs
 ```
 
-The reducer definition is moved to the file <i>reducers.js</i>
+The resolvers definition is moved to the file <i>resolvers.js</i>
 
 ```js
 const { UserInputError, AuthenticationError } = require('apollo-server')
