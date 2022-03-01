@@ -450,7 +450,7 @@ When we remove the comments from the <i>Deeper type usage</i> case block, you wi
 
 #### 9.15.
 
-Let us now continue extendind the app created in exercise 9.14. First, add the type information and replace the variable <i>courseParts</i> with the one from the example below.
+Let us now continue extending the app created in exercise 9.14. First, add the type information and replace the variable <i>courseParts</i> with the one from the example below.
 
 ```js
 // new types
