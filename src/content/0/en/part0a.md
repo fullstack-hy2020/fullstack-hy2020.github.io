@@ -103,16 +103,14 @@ By submitting 25 exercises for part 10 of the course on React Native, you can ea
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
-By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. 
-More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
+By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 - Submit all exercises for part 11. 
 - [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33). 
 - [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
-By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. 
-More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
+By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
 - Submit all exercises for part 12. 
 - [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60
 ). 
@@ -120,8 +118,7 @@ More information about this part's prerequisites and exercise submission can be 
 
 #### Part 13 - Full Stack Web Development: relational databases (1 cr, CSM14114)
 
-By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. 
-More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
+By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
 - Submit all exercises for part 13. 
 - [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-136d0c67-5348-468f-aa94-7e0b72197d91
 ). 

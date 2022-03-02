@@ -31,7 +31,7 @@ There are integrations for example to various messaging applications such as [Sl
 
 <div class="tasks">
 
-### Exercise 11.19
+### Exercise 11.18
 
 We have set up a Slack <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-lz92w8us-CWjVTAFBknqQaEb62p1Ttg). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
 
@@ -42,7 +42,7 @@ Note that you need the Slack webhook URL for doing this exercise. You find the w
 <i>You can also use some other Slack channel in this exercise but then you are on your own with the setup.</i>
 
 If you want to avoid using slack, you can do the [telegram version](/en/part11/expanding_further#exercise-11-19-alternative-version-for-telegram) of this exercise.
-#### 11.19 Build success/failure notification action
+#### 11.18 Build success/failure notification action
 
 You can find dozens of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many stars and a decent documentation.
 
@@ -58,7 +58,7 @@ Your notifications may look like the following:
 
 ![Releases](../../images/11/20a.png)
 
-### Exercise 11.19 Alternative version for Telegram
+### Exercise 11.18 Alternative version for Telegram
 
 The Telegram version of this exercise is provided by [Sahil Rajput](https://github.com/sahilrajput03)
 
@@ -82,7 +82,7 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 
 - Create a new workflow file say <i>TelegramNotifcation.yml</i> and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can have a default message which includes basic log of the workflow event simply by omitting the <i>args</i> from the [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job's definition.
 
-#### 11.19 B: Deliver worflow report messsage directly to user/client's telegram account:
+#### 11.18: Deliver worflow report messsage directly to user/client's telegram account:
 
 Add another step to your job in existing <i>TelegramNotifcation.yml</i> workflow file to deliver message directly to yourself by using <i>chat id</i> associated with your own account. To do this add  another secret say <i>TELEGRAM\_TO\_ME</i> to your github repo settings. Probably doing this exercise, you would see an error which would break your workflow saying [chat not found](https://stackoverflow.com/a/41291666), this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your new workflow events will succeed. This security concern ensures that any chatbot might not end up sending spams to any unauthorized user otherwise any hacker could easily spam you in a variety of way using his/her bot.
 
@@ -116,9 +116,9 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 <div class="tasks">
 
-### Exercises 11.20-11.22
+### Exercises 11.19-11.21
 
-#### 11.20 Periodic health check
+#### 11.19 Periodic health check
 
 We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regularly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.
 
@@ -130,7 +130,7 @@ Use now the action [url-health-check](https://github.com/marketplace/actions/url
 
 **Note also** that once you get this working, it is best to drop the ping frequency (to max once in 24 hours) or disable the rule altogether since otherways your health check may consume [all your](https://devcenter.heroku.com/articles/free-dyno-hours) monthly free hours.
 
-#### 11.21 Your own pipeline
+#### 11.20 Your own pipeline
 
 Build a similar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or the blogapp built in parts 4 and 5, or the redux anecdotes built in part 6. You may also use some app of your own for this exercise.
 
@@ -144,7 +144,7 @@ This is a long and perhaps quite a tough exercise, but this kind of situation wh
 
 Obviously, this exercise is not done in the same repository as the previous exercises. Since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form.
 
-#### 11.22 Protect your main branch and ask for pull request
+#### 11.21 Protect your main branch and ask for pull request
 
 Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.
 
@@ -153,7 +153,6 @@ Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluu
 Then you are done!
 
 </div>
-
 
 <div class="content">
 
