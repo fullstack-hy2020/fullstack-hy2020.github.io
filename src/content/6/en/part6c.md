@@ -411,7 +411,7 @@ const NewNote = () => {
 }
 ```
 
-In this implementation, both components would dispatch an action without the need to know about the communication between the server that happens behind the scenes. These kind <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library. The use of the library doesn't need any additional configuration when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.
+In this implementation, both components would dispatch an action without the need to know about the communication between the server that happens behind the scenes. These kind of <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library. The use of the library doesn't need any additional configuration when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.
 
 Let us now install the library
 
