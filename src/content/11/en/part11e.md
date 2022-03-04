@@ -33,21 +33,21 @@ There are integrations for example to various messaging applications such as [Sl
 
 ### Exercise 11.18
 
-We have set up a channel <i>fullstack\_webhook</i> to the course Discord group of this course [https://study.cs.helsinki.fi/discord/join/fullstack](https://study.cs.helsinki.fi/discord/join/fullstack) for testing a messaging integration.
+We have set up a channel <i>fullstack\_webhook</i> to the course Discord group o[https://study.cs.helsinki.fi/discord/join/fullstack](https://study.cs.helsinki.fi/discord/join/fullstack) for testing a messaging integration.
 
 Register now to Discord if you have not already done that. You will also need a <i>Discord webhook</i> in this exercise. You find the webhook in the pinned message of the channel <i>fullstack\_webhook</i>. Please do not commit the webhook to GitHub!
 
 #### 11.18 Build success/failure notification action
 
-You can find dozens of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-message-notif](https://github.com/marketplace/actions/discord-message-notify) since it has quite many stars and a decent documentation.
+You can find quite a few of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify)](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and a decent documentation.
 
 Setup the action so that it gives two types of notifications:
 - A success indication if a new version gets deployed
 - An error indication if a build fails
 
-In the case of an error, the notification should be a bit more verbose to help developers finding quickly what was the error and which is the commit that caused it.
+In the case of an error, the notification should be a bit more verbose to help developers finding quickly which is the commit that caused it.
 
-See [here](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions) how to check the job status!
+See [here](https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions) how to check the job status!
 
 Your notifications may look like the following:
 
@@ -87,7 +87,7 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regularly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.
 
-It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happen regularly. 
+It is possible to [schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) GitHub actions to happen regularly. 
 
 Use now the action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternative and schedule a periodic health check ping to your deployed software. Try to simulate a situation where your application breaks down and ensure that the check detects the problem. Write this periodic workflow to an own file.
 
