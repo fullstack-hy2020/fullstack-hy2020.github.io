@@ -9,7 +9,7 @@ lang: en
 
 This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The course also has parts on TypeScript,  React Native, and Continuous integration.
 
-Other topics include debugging applications, configuration, managing runtime environments, and NoSQL databases.
+Other topics include debugging applications, container technology, configuration, managing runtime environments, and databases.
 
 ### Prerequisites
 
@@ -33,11 +33,11 @@ The course contains fourteen parts, the first of which is numbered 0 for consist
 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
-You are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part.
+In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no simillar dependency on previous parts.
 
-The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022. 
+The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2023. 
 
-However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2022. 
+However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2023. 
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -65,7 +65,7 @@ If you wish to receive university credits, you must complete an exam. The exam d
 
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required.
 
-The last possible date for taking the exam is 10 January 2022. **Note that you must sign up for the exam by 9 January 2022, at the latest.**
+The last possible date for taking the exam is 10 January 2023. **Note that you must sign up for the exam by 9 January 2023, at the latest.**
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count towards your grade.
 
@@ -149,21 +149,13 @@ Even if you do not register to Open University for the exam, you can still downl
 
 If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
 
-#### Expanding on Full stack open 2019 or 2020
+#### Expanding on Full stack open
 
-You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Telegram [@mluukkai](https://t.me/mluukkai), with your GitHub username and which parts you would like to have deleted from your submissions.
+You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
 
-The same will apply for the 2022, you can continue seamlesly if you have started the course 2019-2021
+#### Expanding on the University oh Helsinki instance of this course
 
-#### Expanding on other instances of this course
-
-You can substitute <i>parts</i> of this course with parts you have previously submitted.  For example, if you have previously completed the three credit course, you can substitute parts 0-3 of this course with the parts you have previously completed.  You can only substitute parts in sequence, so you cannot substitute, for example, parts 0 and 2 but not complete part 1.
-
-You can only substitute whole parts. For example, if you have previously submitted 50% of exercises in a part, you cannot substitute those exercises - you would need to start over on that part of the course.
-
-"Credit transfer" of previously completed parts happens in the <i>my submissions</i> tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
-If you have previously passed the course exam (excluding the exam for the three credit course), and are now expanding your course, you do not have to do the exam again.
+That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
 
 ### Submitting exercises
 
@@ -239,7 +231,7 @@ Install some sensible text editor that supports web development. [Visual Studio 
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
 
-Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
+Also install [Node.js](https://nodejs.org/en/). The material has been done with version 16.13.2, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 

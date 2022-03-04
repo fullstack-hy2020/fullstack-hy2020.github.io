@@ -556,7 +556,7 @@ const Blog = ({ blog }) => {
 
 **Huom 2:** Vaikka tämän tehtävän toiminnallisuus on melkein samanlainen kuin komponentin <i>Togglable</i> tarjoama toiminnallisuus, ei Togglable kuitenkaan sovi tarkoitukseen sellaisenaan. Helpoin ratkaisu lienee lisätä blogille tila, joka kontrolloi sitä missä muodossa blogi näytetään.
 
-#### 5.8*: blogilistan frontend, step8
+#### 5.8: blogilistan frontend, step8
 
 Toteuta like-painikkeen toiminnallisuus. Like lisätään backendiin blogin yksilöivään urliin tapahtuvalla _PUT_-pyynnöllä.
 
@@ -591,11 +591,11 @@ tulee palvelimelle tehdä PUT-pyyntö osoitteeseen <i>/api/blogs/5a43fde2cbd20b1
 
 **Varoitus vielä kerran:** Jos huomaat kirjoittavasi sekaisin async/awaitia ja _then_-kutsuja, on 99.9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
-#### 5.9*: blogilistan frontend, step9
+#### 5.9: blogilistan frontend, step9
 
 Järjestä sovellus näyttämään blogit <i>likejen</i> mukaisessa suuruusjärjestyksessä. Järjestäminen onnistuu taulukon metodilla [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
-#### 5.10*: blogilistan frontend, step10
+#### 5.10: blogilistan frontend, step10
 
 Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka.
 

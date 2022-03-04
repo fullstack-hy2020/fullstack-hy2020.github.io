@@ -1065,17 +1065,17 @@ describe('Blog app', function() {
 
 Testin tulee varmistaa, että luotu blogi tulee näkyville blogien listalle.
 
-#### 5.20*: blogilistan end to end -testit, step4
+#### 5.20: blogilistan end to end -testit, step4
 
 Tee testi, joka varmistaa, että blogia voi likettää.
 
-#### 5.21*: blogilistan end to end -testit, step5
+#### 5.21: blogilistan end to end -testit, step5
 
 Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin.
 
 <i>Vapaaehtoinen bonustehtävä:</i> varmista myös että poisto ei onnistu muilta kuin blogin lisänneeltä käyttäjältä.
 
-#### 5.22*: blogilistan end to end -testit, step6
+#### 5.22: blogilistan end to end -testit, step6
 
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 

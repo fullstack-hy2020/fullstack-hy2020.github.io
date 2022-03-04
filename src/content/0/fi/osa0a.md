@@ -9,7 +9,7 @@ lang: fi
 
 Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin web-sovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST- ja GraphQL-rajapinnoissa. Kurssi sisältää myös osat, joissa tutustutaan TypeScriptiin, React Nativeen ja jatkuvaan integraatioon.
 
-Kurssilla käsitellään myös sovellusten testaamista, konfigurointia ja suoritusympäristöjen hallintaa sekä NoSQL-tietokantoja.
+Kurssilla käsitellään myös sovellusten testaamista, konttitekonologiaa, konfigurointia ja suoritusympäristöjen hallintaa sekä tietokantoja.
 
 ### Oletetut esitiedot
 
@@ -29,9 +29,9 @@ Kurssi koostuu kahdestatoista osasta, joista ensimmäinen on historiallisista sy
 
 Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä ennen kuin riittävä osaaminen osan <i>n</i> asioista on saavutettu. Kurssilla sovelletaankin pedagogisin termein <i>tavoiteoppimista</i>, [engl. mastery learning](https://en.wikipedia.org/wiki/Mastery_learning) ja on tarkoitus, että etenet seuraavaan osaan vasta, kun riittävä määrä edellisen osan tehtävistä on tehty.
 
-Oletuksena on, että teet kunkin osan tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen. 
+Oletuksena on, että teet osien 1-4 tehtävistä <i>ainakin ne</i> jotka eivät ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen. Osissa 5- ei tähtiä ole, sillä osien tehtävillä ei ole suurta riippuvuutta aiempiin osiin. 
 
-Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2022. klo 23:59 asti. Jos haluat kurssista Avoimen yliopiston kautta opintopisteet, tulee kurssin koe suorittaa viimeistään 10.1.2022.
+Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2023. klo 23:59 asti. Jos haluat kurssista Avoimen yliopiston kautta opintopisteet, tulee kurssin koe suorittaa viimeistään 10.1.2023.
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -57,9 +57,9 @@ Arvosana/opintopisterajat:
 
 Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan Avoimen yliopiston [Moodle-järjestelmässä](https://courses.helsinki.fi/fi/aytkt21009/129171256), ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
 
-Kokeen viimeinen suorituspäivä on 10.1.2022. **Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2022.**
+Kokeen viimeinen suorituspäivä on 10.1.2023. **Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2023.**
 
-Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-14 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12,5 pistettä.
+Voit osallistua kokeeseen vasta siinä vaiheessa kun olet tehnyt riittävästi tehtäviä 5 opintopisteen suoritukseen. Käytännössä kokeeseen ei kuitenkaan kannata osallistua heti kun riittävä tehtäväpistemäärä on suoritettu. Koe on sisällöltään sama riippumatta siitä, onko suorituksesi laajuus 5-14 opintopistettä. Koe ei vaikuta kurssilta saamaasi arvosanaan. Kokeen läpipääsyyn riittää 50% kokeen tarjolla olevista pisteistä, eli 12.5 pistettä.
 
 #### Osa 6 - Full Stack -websovelluskehitys, lisäosa 1 (1 op, CSM141082)
 Suorittamalla vähintään 127 tehtävää kurssin osista 0-7 ydinkurssin suorittamisen yhteydessä, voit laajentaa suoritustasi yhdellä opintopisteellä. 
@@ -87,7 +87,7 @@ Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScript
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 #### Osa 10 - Full Stack -websovelluskehitys: React Native (2 op, CSM14111, englanniksi)
-Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteella. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native)).
+Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteella. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
 
 -	Tee vähintään 25 tehtävää osasta 10. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6)
@@ -145,22 +145,13 @@ Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurss
 
 Jos olet jo suorittanut kurssin joko MOOC:ina tai yliopiston kurssina, voit täydentää suoritustasi.
 
-#### Full stack open 2019 tai 2020-suorituksen täydentäminen
+#### Full Stack Open -kurssin aiempien vuosien suorituksen täydentäminen
 
-Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä 
-email matti.luukkainen@helsinki.fi tai Telegram @mluukkai. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
+Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
 
-Sama tulee koskemaan vuoden 2021-version täydentämistä vuoden 2022 kurssilla.
+#### Helsingin yliopiston kurssin täydentäminen
 
-#### Kurssin jonkin muun version täydentäminen
-
-Täydentäminen tapahtuu siten, että voit korvata tämän kurssin <i>osia</i> aiemmin suorittamasi kurssin aikana palauttamillasi osilla. Eli jos olet suorittanut kurssin esim. avoimen yliopiston kautta kolmen opintopisteen laajuisena, voit korvata vanhan suorituksesi osilla 0-3 tämän kurssin osat 0-3. Ainoastaan peräkkäisten osien korvaaminen onnistuu, eli et voi korvata esim. osia 0 ja 2 mutta tehdä nyt osaa 1.
-
-Voit korvata ainoastaan kokonaisia osia, eli jos teit aiemmalla kurssilla esim. 50% jonkin osan tehtävistä, et voi tällä kurssilla jatkaa samaa osaa.
-
-Edellisten kurssien osien "hyväksiluku" tapahtuu tehtävien [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) välilehdellä <i>my submissions</i>.
-
-Jos olet tehnyt jo aiemmin kurssin kokeen (poislukien avoimen yliopiston 3 opintopisteen laajuuden koe) ja laajennat suoritustasi nyt, ei uusi kokeeseen osallistuminen enää ole tarpeen.
+Jos haluat jatkaa Helsingin yliopiston kurssiversion suoritustasi, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. 
 
 ### Tehtävien palauttaminen
 
@@ -218,7 +209,7 @@ Asenna myös joku järkevä web-devausta tukeva tekstieditori, enemmän kuin suo
 
 Älä koodaa nanolla, Notepadilla tai Geditillä. Myöskään NetBeans ei ole omimmillaan web-devauksessa ja se on myös turhan raskas verrattuna esim. Visual Studio Codeen.
 
-Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 14.8.0, älä asenna sitä vanhempaa versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
+Asenna koneeseesi heti myös [Node.js](https://nodejs.org/en/). Materiaali on tehty versiolla 16.13.2, älä asenna sitä vanhempaa versiota. Asennusohjeita on [Node.js:n sivuilla](https://nodejs.org/en/download/package-manager/).
 
 Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunperin lyhennelmä <i>Node Package Manager</i> -nimelle), jota tulemme tarvitsemaan kurssin aikana aktiivisesti. Tuoreen Noden kera asentuu myös [npx](https://www.npmjs.com/package/npx), jota tarvitaan myös muutaman kerran.
 

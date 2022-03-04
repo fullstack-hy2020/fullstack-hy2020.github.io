@@ -603,7 +603,7 @@ Laajenna sovellusta siten, että kirjautunut käyttäjä voi luoda uusia blogeja
 
 ![](../../images/5/7e.png)
 
-#### 5.4*: blogilistan frontend, step4
+#### 5.4: blogilistan frontend, step4
 
 Toteuta sovellukseen notifikaatiot, jotka kertovat sovelluksen yläosassa onnistuneista ja epäonnistuneista toimenpiteistä. Esim. blogin lisäämisen yhteydessä voi antaa seuraavan notifikaation:
 
