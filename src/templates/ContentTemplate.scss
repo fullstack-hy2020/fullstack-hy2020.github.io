@@ -153,6 +153,8 @@
 code[class*='language-'],
 pre[class*='language-'] {
   text-shadow: none;
+  float: left;
+  min-width: 100%;
 }
 
 .arrow-go-up {
