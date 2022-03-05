@@ -488,7 +488,7 @@ and the script itself:
 
 ```json
 {
-    "scripts": {
+  "scripts": {
     "dev": "nodemon index.js",
     "migration:down": "node util/rollback.js" // highlight-line
   },
