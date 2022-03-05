@@ -726,7 +726,7 @@ router.get('/', async (req, res) => {
       },
       // highlight-start
       {
-        model: team,
+        model: Team,
         attributes: ['name', 'id'],
       }
       // highlight-end
