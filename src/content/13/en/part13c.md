@@ -109,7 +109,7 @@ We could run the migrations from the command line using the [Sequelize command l
 npm install umzug
 ```
 
-Let's change the file <i>utils/db.js</i> that handles the connection to the database as follows:
+Let's change the file <i>util/db.js</i> that handles the connection to the database as follows:
 
 ```js
 const Sequelize = require('sequelize')
