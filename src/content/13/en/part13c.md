@@ -661,7 +661,7 @@ Team.belongsToMany(User, { through: Membership })
 // highlight-end
 
 module.exports = {
-  Note, User, Team, Membership
+  Note, User, Team, Membership // highlight-line
 }
 
 ```
