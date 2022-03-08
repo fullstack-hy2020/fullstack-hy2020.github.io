@@ -44,7 +44,7 @@ With Visual Studio Code it's easy to create 'snippets', i.e. shortcuts for quick
 
 Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
-Useful, ready-made snippets can also be found as VS Code plugins, in the [marketplace](https://marketplace.visualstudio.com/items?itemName=xabikos.ReactSnippets).
+Useful, ready-made snippets can also be found as VS Code plugins, in the [marketplace](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets).
 
 The most important snippet is the one for the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so: 
 ```js
