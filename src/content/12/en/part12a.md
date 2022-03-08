@@ -17,13 +17,13 @@ As containers are relatively lightweight, at least compared to virtual machines,
 
 Cloud services like AWS, Google Cloud, and Microsoft Azure all support containers in multiple different forms. These include AWS Fargate and Google Cloud Run, both of which run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your own machine. 
 
-So containers are used in clouds and even during development. What are the benefits of using containers? Here are two common scenarios:
+So containers are used in cloud environment and even during development. What are the benefits of using containers? Here are two common scenarios:
 
-> Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed.
+<i>Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed.</i>
 
 You can probably use nvm, virtual machines, or dark magic to get them running at the same time. However, containers are an excellent solution as you can run both applications in their respective containers. They are isolated from each other and do not interfere.
 
-> Scenario 2: Your application runs on your machine. You need to move the application to a server.
+<i>Scenario 2: Your application runs on your machine. You need to move the application to a server.</i>
 
 It is not uncommon that the application just does not run on the server despite it working just fine in your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
 
@@ -231,7 +231,7 @@ Options:
   ...
 ```
 
-The two options, or flags, in _-it_ make sure we can interact with the container. After the options, we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it.
+The two options, or flags, _-it_ make sure we can interact with the container. After the options, we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it.
 
 You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.
 

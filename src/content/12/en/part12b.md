@@ -140,7 +140,7 @@ There are a few steps we need to change to create a more comprehensive Dockerfil
 
 When we ran npm install on our machine, in some cases **node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.
 
-This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to Github. Build artefacts or dependencies should not be copied since those can be installed during the build process.
+This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artefacts or dependencies should not be copied since those can be installed during the build process.
 
 We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of a <i>.dockerignore</i>
 
@@ -252,7 +252,7 @@ CMD npm start
 
 ### Exercise 12.5.
 
-#### Exercise 12.5: Containerizing a node application
+#### Exercise 12.5: Containerizing a Node application
 
 The repository you cloned or copied in the first exercise contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
 
@@ -445,7 +445,7 @@ Let's check that the http://localhost:3000/todos returns all todos. It should re
 
 By default, containers are not going to preserve our data. When you close the mongo container you may or may not be able to get the data back.
 
-This is a rare case in which it does preserve the data as the developers who made the docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories.
+This is a rare case in which it does preserve the data as the developers who made the Docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories.
 
 There are two distinct methods to store the data: 
 - Declaring a location in your filesystem (called bind mount)
@@ -470,7 +470,7 @@ services:
 
 The above will create a directory called *mongo\_data* to your local filesystem and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
 
-A similar outcome can be had with a named volume:
+A similar outcome can be achieved with a named volume:
 
 ```yml
 services:
@@ -510,7 +510,7 @@ The todo application has no proper implementation of routes for getting one todo
 
 ### Debugging issues in containers
 
-> When coding, you most likely end up in a situation where everything is broken. 
+> <i>When coding, you most likely end up in a situation where everything is broken.</i>
 
 > \- Matti Luukkainen
 
@@ -524,7 +524,7 @@ For myself, the most valuable method of debugging is stopping and thinking about
 
 #### exec
 
-The docker command [exec](https://docs.docker.com/engine/reference/commandline/exec/) is a heavy hitter. It can be used to jump right into a container when it's running. 
+The Docker command [exec](https://docs.docker.com/engine/reference/commandline/exec/) is a heavy hitter. It can be used to jump right into a container when it's running. 
 
 Let's start a web server in the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Let's choose [Nginx](https://www.nginx.com/) which is, among other things, a server capable of serving static HTML files. It has a default index.html that we can replace.
 
@@ -635,10 +635,9 @@ We can now access the data in those collections:
 { "_id" : ObjectId("611e54b688ddbb7e84d3c46c"), "text" : "Learn about containers", "done" : false }
 ```
 
-Use the documentation [here](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false!
+Insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false. Consult the [documentation](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to see how the addition is done.
 
-
-Ensure that you see the new todo both in the express app and when querying from mongo CLI.
+Ensure that you see the new todo both in the Express app and when querying from Mongo CLI.
 
 </div>
 
@@ -678,13 +677,19 @@ Since the Docker Hub page doesn't have all the info, we can use Google to aid us
 
 We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself, that shall happen in next exercise.
 
+Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, that has the form <i>redis://host:port</i>
+
+```bash
+$ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://localhost:3456/the_database npm run dev
+```
+
 You can now test the configuration by adding the line
 
 ```js
 const redis = require('../redis')
 ```
 
-to the express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes:
+to the Express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes:
 
 ```bash
 events.js:291
@@ -717,7 +722,7 @@ The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.
 
 - getAsync function takes in key and returns the value in a promise.
 
-Implement a todo counter:
+Implement a todo counter that saves the number of created todos to Redis:
 
 - Step 1: Whenever a request is sent to add a todo, increment the counter by one.
 - Step 2: Create a GET /statistics endpoint where you can ask the usage metadata. The format should be the following JSON:
@@ -732,7 +737,7 @@ Implement a todo counter:
 
 > Use _script_ to record what you do, save the file as script-answers/exercise12_11.txt
 
-If the application does not behave as expected, a direct access to database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
+If the application does not behave as expected, a direct access to the database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
 
 - Go to the redis container with _docker exec_ and open the redis-cli.
 - Find the key you used with _[KEYS *](https://redis.io/commands/keys)_ 
