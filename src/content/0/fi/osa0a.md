@@ -87,7 +87,7 @@ Suorittamalla vähintään 24/27 tehtävää kurssin yhdeksännestä, TypeScript
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
 #### Osa 10 - Full Stack -websovelluskehitys: React Native (2 op, CSM14111, englanniksi)
-Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteella. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
+Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevästä osasta, voit laajentaa suoritustasi kahdella opintopisteellä. Lisätietoja osan esitietovaatimuksista, tehtävien palauttamisesta ja opintopisteistä löydät [osasta 10](/en/part10/introduction_to_react_native).
 
 -	Tee vähintään 25 tehtävää osasta 10. 
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6)
@@ -95,7 +95,7 @@ Suorittamalla 25 tehtävää kurssin kymmenennestä, React Nativea käsittelevä
 
 #### Osa 11 - Full Stack -websovelluskehitys: jatkuva integraatio (1 op, CSM14112, englanniksi)
 
-Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
+Suorittamalla kaikki kurssin yhdennentoista, jatkuvaa integraatiota käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 11](/en/part11).
 -	Tee kaikki tehtävät osasta 11.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01)
@@ -103,7 +103,7 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 
 #### Osa 12 - Full Stack  -websovelluskehitys: konttiteknologia (1 op, CSM141084, englanniksi)
 
-Suorittamalla kaikki kurssin kahdennentoista, konttiteknologiaa käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
+Suorittamalla kaikki kurssin kahdennentoista, konttiteknologiaa käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 12](/en/part12).
 -	Tee kaikki tehtävät osasta 12.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a)
@@ -111,7 +111,7 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 
 #### Osa 13 - Full Stack  -websovelluskehitys: relaatiotietokannat (1 op, CSM14114)
 
-Suorittamalla kaikki kurssin kolmannentoista, relaatiotietokantojen käyttöä käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteella.
+Suorittamalla kaikki kurssin kolmannentoista, relaatiotietokantojen käyttöä käsittelevän osan tehtävät, voit laajentaa suoritustasi yhdellä opintopisteellä.
 Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [osasta 13](/osa13).
 -	Tee kaikki tehtävät osasta 13.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c)
