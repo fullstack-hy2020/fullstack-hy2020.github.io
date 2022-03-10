@@ -669,7 +669,7 @@ test('renders content', () => {
 Command _getByText_ looks for an element that has exactly the text that it has as parameter, and nothing more. If we want to look for element that <i>contains</i> the text, we could use a extra option:
 
 ```js 
-const element = screenscreen.getByText(
+const element = screen.getByText(
   'Does not work anymore :(', { exact: false }
 )
 ```
