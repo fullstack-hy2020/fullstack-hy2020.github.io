@@ -192,7 +192,7 @@ but when writing JSX, the tag needs to be closed:
 
 ### Multiple components
 
-Let's modify the file <i>App.js</i> as follows (NB: import at the top of the file and export at the bottom are left out in these <i>examples</i>, now and in the future. They are still needed for the code to work):
+Let's modify the file <i>App.js</i> as follows (NB: export at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work):
 
 ```js
 // highlight-start
