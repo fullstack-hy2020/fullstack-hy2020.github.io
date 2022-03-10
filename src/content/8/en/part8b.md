@@ -243,7 +243,7 @@ One possibility for this kind of situatuins is the hook function [useLazyQuery](
  
 However, in our case we can stick to _useQuery_ and use the option [skip](https://www.apollographql.com/docs/react/data/queries/#skip), which makes it possible to do the query only if a set condition is true.
 
-The olution is as follows:
+The solution is as follows:
 
 ```js
 import { useState } from 'react'
