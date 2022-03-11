@@ -277,7 +277,8 @@ return (
       noteForm()
     }
 
-    <h2>Notes</h2>
+    <div>
+        <button onClick={() => setShowAll(!showAll)}>
 
     // ...
 
@@ -304,7 +305,8 @@ return (
       </div>
     }
 
-    <h2>Notes</h2>
+    <div>
+        <button onClick={() => setShowAll(!showAll)}>
 
     // ...
 
