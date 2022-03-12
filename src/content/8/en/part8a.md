@@ -394,7 +394,7 @@ Let's try it out:
 
 ![](../../images/8/1x.png)
 
-At the left side Explorer shows the API-documentation that it has automatically generated based on the scheme.
+At the left side Explorer shows the API-documentation that it has automatically generated based on the schema.
 
 ### Parameters of a resolver
 
