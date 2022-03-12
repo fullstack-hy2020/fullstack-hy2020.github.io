@@ -419,7 +419,7 @@ Let us now install the library
 npm install redux-thunk
 ```
 
-With Redux Thunk it is possible to implement <i>action creators</i> which return a function instead of an object. The function receive's Redux store's <em>dispatch</em> and <em>getState</em> methods as parameters. This allows for example implementations of asynchronous action creators, which first wait for the completion of a certain asynchronous operation and after that dispatch some action, which changes the store's state.
+With Redux Thunk it is possible to implement <i>action creators</i> which return a function instead of an object. The function receives Redux store's <em>dispatch</em> and <em>getState</em> methods as parameters. This allows for example implementations of asynchronous action creators, which first wait for the completion of a certain asynchronous operation and after that dispatch some action, which changes the store's state.
 
 We can define an action creator <em>initializeNotes</em> which initializes the notes based on the data received from the server:
 
