@@ -223,7 +223,7 @@ import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
 import noteService from './services/notes'  // highlight-line
-import { initializeNotes } from './reducers/noteReducer' // highlight-line
+import { setNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
