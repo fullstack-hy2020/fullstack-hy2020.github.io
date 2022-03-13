@@ -1075,7 +1075,7 @@ Your solution could look like this:
 
 #### 9.21: patientor, step6
 
-Fetch and add diagnoses to the application state from the <i>/api/diagnosis</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
+Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
 ![](../../images/9/42.png)
 
