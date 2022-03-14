@@ -694,7 +694,7 @@ So how do we test the delete operation? HTTP GET requests are easy to make from 
 
 Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se). However, instead of curl, we will take a look at using [Postman](https://www.postman.com) for testing the application.
 
-Let's install the Postman destop client [from here](https://www.postman.com/downloads/)  and try it out:
+Let's install the Postman desktop client [from here](https://www.postman.com/downloads/)  and try it out:
 
 ![](../../images/3/11x.png)
 
