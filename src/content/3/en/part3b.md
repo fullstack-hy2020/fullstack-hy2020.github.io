@@ -298,7 +298,7 @@ Note that the directory paths in the script <i>build:ui</i> depend on the locati
 npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
-Another opstion is the use of [shx](https://www.npmjs.com/package/shx).
+Another option is the use of [shx](https://www.npmjs.com/package/shx).
 
 ### Proxy
 
