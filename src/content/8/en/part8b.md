@@ -239,7 +239,7 @@ It is also possible to do queries with parameters with the Apollo Explorer. The 
 
 The _useQuery_ hook is well-suited for situations where the query is done when the component is rendered.  However, we now want to make the query only when a user wants to see the details of a specific person, so the query is done only [as required](https://www.apollographql.com/docs/react/data/queries/#executing-queries-manually).
 
-One possibility for this kind of situatuins is the hook function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) that would make it possible to define a query which is executed <i>when</i> the user wants to see the detailed information of a person.
+One possibility for this kind of situations is the hook function [useLazyQuery](https://www.apollographql.com/docs/react/api/react/hooks/#uselazyquery) that would make it possible to define a query which is executed <i>when</i> the user wants to see the detailed information of a person.
  
 However, in our case we can stick to _useQuery_ and use the option [skip](https://www.apollographql.com/docs/react/data/queries/#skip), which makes it possible to do the query only if a set condition is true.
 
