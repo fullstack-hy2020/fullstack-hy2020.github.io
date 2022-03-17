@@ -80,7 +80,7 @@ $ docker build -t fs-hello-world .
 ### More meaningful image
 更有意义的镜像
 
-<!-- Moving an Express server to a container should be as simple as moving the "Hello, World!" application inside a container. The only difference is that there are more files. Thankfully _COPY_ instruction can handle all that. Let's delete the index.js and create a new express server. Lets use [express-generator](https://expressjs.com/en/starter/generator.html) to create a basic Express application skeleton. -->
+<!-- Moving an Express server to a container should be as simple as moving the "Hello, World!" application inside a container. The only difference is that there are more files. Thankfully _COPY_ instruction can handle all that. Let's delete the index.js and create a new Express server. Lets use [express-generator](https://expressjs.com/en/starter/generator.html) to create a basic Express application skeleton. -->
 将 Express 服务器移动到容器应该就像移动“Hello, World!”应用到容器中一样简单。唯一的区别是有更多的文件。幸运的是 _COPY_ 指令可以处理所有这些。让我们删除 index.js 并创建一个新的 Express 服务器。让我们使用 [express-generator](https://expressjs.com/en/starter/generator.html) 创建一个基本的 Express 骨架应用程序。
 
 ```bash
@@ -187,8 +187,8 @@ $ docker kill 48
 
 当我们在我们的机器上运行 npm install，某些情况下，**node package manager** 可能会在安装步骤中安装操作系统特定的依赖项。我们可能不小心使用 COPY 指令将不相关的内容复制到镜像中，比如常见的我们可能将所有 node_modules 复制到镜像中时。
 
-<!-- This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to Github. Build artefacts or dependencies should not be copied since those can be installed during the build process. -->
-当我们构建镜像时，考虑这一点至关重要。最好在镜像中做大多数事情，例如<i>在容器内</i>运行 _npm install_， 而不是在构建镜像前做这些事情，最简单的衡量标准就是你会把什么文件push 到Github，那就打到镜像中。手动打包结果或依赖不应当拷贝进去，那些可以在构建阶段再去安装。
+<!-- This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artefacts or dependencies should not be copied since those can be installed during the build process. -->
+当我们构建镜像时，考虑这一点至关重要。最好在镜像中做大多数事情，例如<i>在容器内</i>运行 _npm install_， 而不是在构建镜像前做这些事情，最简单的衡量标准就是你会把什么文件push 到GitHub，那就打到镜像中。手动打包结果或依赖不应当拷贝进去，那些可以在构建阶段再去安装。
 
 <!-- We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of a <i>.dockerignore</i> -->
 我们可以使用文件 <i>.dockerignore</i>来解决这个问题。 .dockerignore 与 .gitignore 非常相似，您可以使用它来防止不需要的文件被复制到您的镜像中。文件应当和Dockerfile放到一起，以下可能是 <i>.dockerignore</i> 的内容：
@@ -329,8 +329,8 @@ CMD npm start
 ### Exercise 12.5.
 练习 12.5
 
-#### Exercise 12.5: Containerizing a node application
-练习 12.5：容器化node应用程序
+#### Exercise 12.5: Containerizing a Node application
+练习 12.5：容器化一个Node应用程序
 
 <!-- The repository you cloned or copied in the first exercise contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet. -->
 第一个练习中，你clone 或拷贝的仓库是一个todo 应用，查看 todo-app/todo-backend 并阅读README， 我们暂时不会触及 。
@@ -520,8 +520,8 @@ db.todos.insert({ text: 'Learn about containers', done: false });
 <!-- This file will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup. -->
 该文件将使用用户和一些待办事项初始化数据库。 接下来，我们只需要在启动时将它放入容器中。
 
-<!-- We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file init-mongo.js to the container. Let's do the latter. -->
-我们可以利用 FROM mongo 创建一个新镜像并 COPY 里面的文件，或者我们可以使用<i>绑定挂载</i>将 init-mongo.js 挂载到容器。让我们用后面这个方法。
+<!-- We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file <i>mongo-init.js</i> to the container. Let's do the latter. -->
+我们可以利用 FROM mongo 创建一个新镜像并 COPY 里面的文件，或者我们可以使用<i>绑定挂载</i>将 <i>mongo-init.js</i> 挂载到容器。让我们用后面这个方法。
 
 <!-- Bind mount is the act of binding a file on the host machine to a file in the container. We could add a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose. Otherwise the format is the same, first host and then container: -->
 
@@ -577,9 +577,9 @@ $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm 
 <!-- By default, containers are not going to preserve our data. When you close the mongo container you may or may not be able to get the data back. -->
 默认情况下，容器不会保存我们的数据。当您关闭 mongo 容器时，您可能无法取回数据。
 
-<!-- This is a rare case in which it does preserve the data as the developers who made the docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories. -->
+<!-- This is a rare case in which it does preserve the data as the developers who made the Docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories. -->
 
-这是一种罕见的情况，它实际上确实保留了数据，因为为 Mongo 制作 docker 镜像的开发人员已经定义了一个要使用的卷：[https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/ 4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) 这一行将指示 Docker 保存这些目录中的数据
+这是一种罕见的情况，它实际上确实保留了数据，因为为 Mongo 制作 Docker 镜像的开发人员已经定义了一个要使用的卷：[https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/ 4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) 这一行将指示 Docker 保存这些目录中的数据
 
 <!-- There are two distinct methods to store the data: 
 - Declaring a location in your filesystem (called bind mount)
@@ -602,7 +602,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: database
+      MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - ./mongo_data:/data/db # highlight-line
@@ -612,7 +612,7 @@ services:
 <!-- The above will create a directory called *mongo\_data* to your local filesystem and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore. -->
 以上将创建一个名为 *mongo\_data* 的目录到您的本地文件系统，并将其映射到容器中作为 _/data/db_。 这意味着 _/data/db_ 中的数据存储在容器之外，但容器仍然可以访问！ 请记住将目录添加到.gitignore。
 
-<!-- A similar outcome can be had with a named volume: -->
+<!-- A similar outcome can be achieved with a named volume: -->
 一个类似很好的方法是使用命名卷：
 
 `docker-compose.yml`
@@ -626,7 +626,7 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
-      MONGO_INITDB_DATABASE: database
+      MONGO_INITDB_DATABASE: the_database
     volumes:
       - ./mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js
       - mongo_data:/data/db # highlight-line
@@ -667,7 +667,7 @@ Todo 应用没有合适的实现来获取一个Todo (GET <i>/todos/:id</i>) 或�
 
 > \- Matti Luukkainen -->
 
-> 编码时，您很可能会遇到一切都搞砸的情况。
+> <i>编码时，您很可能会遇到一切都搞砸的情况。</i>
 > \- Matti Luukkainen
 
 <!-- When developing with containers, we need to learn new tools for debugging since we can not just "console.log" everything. When code has a bug, you may often be in a state where at least something works so you can work forward from that. Configuration most often is in either of the two states: 1. working or 2. broken. We will go over a few tools that can help when your application is in the latter state. -->
@@ -684,8 +684,8 @@ Todo 应用没有合适的实现来获取一个Todo (GET <i>/todos/:id</i>) 或�
 
 #### exec
 
-<!-- The docker command [exec](https://docs.docker.com/engine/reference/commandline/exec/) is a heavy hitter. It can be used to jump right into a container when it's running. -->
-docker 命令 [exec](https://docs.docker.com/engine/reference/commandline/exec/) 是一个重武器。它可用于在运行时直接跳入容器。
+<!-- The Docker command [exec](https://docs.docker.com/engine/reference/commandline/exec/) is a heavy hitter. It can be used to jump right into a container when it's running. -->
+Docker 命令 [exec](https://docs.docker.com/engine/reference/commandline/exec/) 是一个重武器。它可用于在运行时直接跳入容器。
 
 <!-- Let's start a web server in the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Let's choose [Nginx](https://www.nginx.com/) which is, among other things, a server capable of serving static HTML files. It has a default index.html that we can replace. -->
 让我们在后台启动 Web 服务器，并进行一些调试以使其运行并显示消息“Hello，exec！”在我们的浏览器中。 我们选择[Nginx](https://www.nginx.com/)，Nginx 是一个能够提供静态 html 文件的服务器。它有一个我们可以替换的默认 index.html。
@@ -821,10 +821,11 @@ todos
 { "_id" : ObjectId("611e54b688ddbb7e84d3c46c"), "text" : "Learn about containers", "done" : false }
 ```
 
-<!-- Use the documentation [here](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false! -->
-使用[这个](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) 文档插入一个带有文本的新待办事项：“增加我工具带中的工具数量”，状态为 false！
+<!-- Insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false. Consult the [documentation](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to see how the addition is done. -->
+插入一个带有文本的新待办事项："增加我工具带中的工具数量"，状态为 false！访问[这个](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) 文档来查看额外信息。
 
-Ensure that you see the new todo both in the express app and when querying from mongo CLI.
+<!-- Ensure that you see the new todo both in the express app and when querying from mongo CLI. -->
+
 确保你能够看到新的todo，在express 应用和利用mongo CLI 访问数据库时都能看到。
 
 </div>
@@ -873,6 +874,13 @@ services:
 <!-- We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself, that shall happen in next exercise. -->
 我们只有尝试，否则没法确定配置是否好用。应用不会自己使用Redis，下个练习中会这么做。
 
+<!-- Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, that has the form <i>redis://host:port</i> -->
+一旦Redis 配置好并且启动了，重启后台并修改 <i>REDIS\_URL</i> ，形式例如<i>redis://host:port</i>
+
+```bash
+$ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://localhost:3456/the_database npm run dev
+```
+
 <!-- You can now test the configuration by adding the line -->
 你现在可以测试配置了，添加如下行
 
@@ -880,8 +888,8 @@ services:
 const redis = require('../redis')
 ```
 
-<!-- to the express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes: -->
-到express服务器，例如在文件  <i>routes/index.js</i> 中。如果啥也没发生，配置就是正确的，否则服务器就挂了。
+<!-- to the Express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes: -->
+到 Express服务器，例如在文件  <i>routes/index.js</i> 中。如果啥也没发生，配置就是正确的，否则服务器就挂了。
 
 ```bash
 events.js:291
@@ -920,8 +928,8 @@ Emitted 'error' event on RedisClient instance at:
 
 - getAsync 函数接受键并在承诺中返回值。
 
-<!-- Implement a todo counter: -->
-实现一个待办事项计数器：
+<!-- Implement a todo counter that saves the number of created todos to Redis: -->
+实现一个待办事项计数器，将创建代办的数量存入Redis：
 
 <!-- - Step 1: Whenever a request is sent to add a todo, increment the counter by one.
 - Step 2: Create a GET /statistics endpoint where you can ask the usage metadata. The format should be the following JSON: -->
@@ -940,7 +948,7 @@ Emitted 'error' event on RedisClient instance at:
 <!-- > Use _script_ to record what you do, save the file as script-answers/exercise12_11.txt -->
 使用 _script_ 来记录你的所得，将文件保存到 script-answers/exercise12_11.txt
 
-<!-- If the application does not behave as expected, a direct access to database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database. -->
+<!-- If the application does not behave as expected, a direct access to the database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database. -->
 如果应用运行情况与预期不同，一个直接访问数据库的方式可能精准地找到问题。我们尝试使用 [redis-cli](https://redis.io/topics/rediscli) 来访问Redis 数据库
 
 <!-- - Go to the redis container with _docker exec_ and open the redis-cli.

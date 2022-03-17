@@ -23,19 +23,19 @@ lang: zh
 <!-- Cloud services like AWS, Google Cloud, and Microsoft Azure all support containers in multiple different forms. These include AWS Fargate and Google Cloud Run, both of which run containers as serverless - where the application container does not even need to be running if it is not used. You can also install container runtime on most machines and run containers there yourself - including your own machine.   -->
 类似AWS、Google 云、微软 Azure 的云服务都不同方式地支持容器。比如AWS Fargate 与Google Cloud Run 会将容器作为serverless服务-也就是应用容器在不需要的时候压根不需要运行。你也可以将容器运行环境安装在大多数的机器中，并自己运行容器——包括能装到你的个人机中。
 
-<!-- So containers are used in clouds and even during development. What are the benefits of using containers? Here are two common scenarios: -->
+<!-- So containers are used in cloud environment and even during development. What are the benefits of using containers? Here are two common scenarios: -->
 
 所以说容器通常运行在云环境甚至开发环境中。容器化的收益是什么呢？有两个典型的场景：
 
 <!-- > Scenario 1: You are developing a new application that needs to run on the same machine as a legacy application. Both require different versions of Node installed. -->
 
-> 场景一： 你正在开发一个新的应用，它需要和你的遗留应用跑在同一个机器中。而且依赖的是不同的Node 版本。
+<i> 场景一： 你正在开发一个新的应用，它需要和你的遗留应用跑在同一个机器中。而且依赖的是不同的Node 版本。</i>
 
 <!-- You can probably use nvm, virtual machines, or dark magic to get them running at the same time. However, containers are an excellent solution as you can run both applications in their respective containers. They are isolated from each other and do not interfere. -->
 你可以使用nvm，虚拟机或者其他一些黑科技来让他们同时运行。但是，容器一个完美的解决方案，因为你可以让应用跑在自己的容器中。他们是互相独立且不会互相干扰。
 
 <!-- > Scenario 2: Your application runs on your machine. You need to move the application to a server. -->
-> 场景2: 你的应用跑在自己的机器中，你需要把它迁移到服务器上。
+<i> 场景2: 你的应用跑在自己的机器中，你需要把它迁移到服务器上。</i>
 
 <!-- It is not uncommon that the application just does not run on the server despite it working just fine in your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments. -->
 应用很常见的一种情况是，在你的机器上跑起来没问题，但迁移到服务器上运转不起来。可能是由于环境缺失了依赖。而容器是一个完美的解决方案，虽然你可以在自己的机器和服务器上创建一个相同的环境（容器环境），但这并不完美：硬件可能会成为问题，但你可以限制不同的环境。
@@ -340,7 +340,7 @@ Options:
   -t, --tty                            Allocate a pseudo-TTY
   ...
 ```
-<!-- The two options, or flags, in _-it_ make sure we can interact with the container. After the options, we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it. -->
+<!-- The two options, or flags, _-it_ make sure we can interact with the container. After the options, we defined that image to run is _ubuntu_. Then we have the command _bash_ to be executed inside the container when we start it. -->
 解释一下这两个参数，或者说标志， _-it_ 会确保我们能够与容器交互，在这些标志之后，我们定义了要运行一个镜像，也就是 _ubuntu_ 。然后我们用命令 _bash_ 来在启动后在容器内部执行。
 
 
