@@ -9,7 +9,7 @@ lang: zh
 
 
 <!-- For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the  [third part](/en/part3)  of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how code executing in the browser communicates with the backend. -->
-到目前为止，我们一直致力于“前端” ，即客户端(浏览器)功能。 我们将在本课程的第三章节[/zh/part3]开始研究“后端” ，即服务器端功能。 尽管如此，我们现在将向这个方向迈出一步，熟悉在浏览器中执行的代码如何与后端通信。
+到目前为止，我们一直致力于“前端” ，即客户端(浏览器)功能。 我们将在本课程的[第三章节](https://fullstackopen.com/zh/part3)开始研究“后端” ，即服务器端功能。 尽管如此，我们现在将向这个方向迈出一步，熟悉在浏览器中执行的代码如何与后端通信。
 
 
 
