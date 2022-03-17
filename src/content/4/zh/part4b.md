@@ -128,7 +128,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:secret@cluster0-ostce.mongodb.net/note-
 我们实现的配置模块有点类似于[node-config](https://github.com/lorenwest/node-config)包。 但编写我们自己的实现是合理的，因为我们的应用很简单，并且因为它能教会我们宝贵的经验教训。
 
 <!-- These are the only changes we need to make to our application's code. -->
-这些是我们需要对应用代码进行的惟一更改。
+这些是我们需要对应用代码进行的唯一更改。
 
 <!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2). -->
 您可以在[this github repository](https://github.com/fullstack-hy/part3-notes-backend/tree/part4-2)的<i>part4-2</i> 分支中找到我们当前应用的全部代码。
