@@ -68,7 +68,7 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 
 In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-The reason for using using Mongo as the database is it's lower complexity with respect to a relational database. [The part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
+The reason for using Mongo as the database is it's lower complexity with respect to a relational database. [The part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
 
 Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
@@ -514,7 +514,7 @@ npm install dotenv
 To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<pasdsword>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
@@ -544,7 +544,7 @@ app.listen(PORT, () => {
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
-Once the file .env has been gitignored, Heroku does not get the database url from the repository, so you have to set it yourself. That can be done throught the heroku dasboard as follows:
+Once the file .env has been gitignored, Heroku does not get the database url from the repository, so you have to set it yourself. That can be done throught the heroku dashboard as follows:
 
 ![](../../images/3/herokuConfig.png)
 

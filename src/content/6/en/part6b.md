@@ -497,7 +497,7 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-The <em>createSlice</em> function's <em>name</em> parameter definites the prefix which use in the action's type values. For example the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer's initial state. The <em>reducers</em> parameter the reducer itself as an object, of which functions handle state changes caused by certain action. Note that the <em>action.payload</em> in the functions contains the the argument provided by calling the action creator:
+The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer's initial state. The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain action. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
 
 ```js
 dispatch(createNote('Redux Toolkit is awesome!'))
@@ -509,7 +509,7 @@ This dispatch call responds to dispatching the following object:
 dispatch({ type: 'notes/createNote', payload: 'Redux Toolkit is awesome!' })
 ```
 
-If you followed closely, you might have noticed that inside the <em>createNote</em> action, there seems to happend something that violates the reducers' immutability principle mentioned earlier:
+If you followed closely, you might have noticed that inside the <em>createNote</em> action, there seems to happen something that violates the reducers' immutability principle mentioned earlier:
 
 ```js
 createNote(state, action) {
@@ -527,7 +527,7 @@ We are mutating <em>state</em> argument's array by calling the <em>push</em> met
 
 Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that state can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case function <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.
 
-The <em>createSlice</em> function returns an object containing the reducer as well as the actions creators defined by the <em>reducers</em> parameter. The reducer can be accessed by the <em>noteSlice.reducer</em> property wehere as the action creators by the <em>noteSlice.actions</em> property. We can produce the file's exports in the following way:
+The <em>createSlice</em> function returns an object containing the reducer as well as the action creators defined by the <em>reducers</em> parameter. The reducer can be accessed by the <em>noteSlice.reducer</em> property wehere as the action creators by the <em>noteSlice.actions</em> property. We can produce the file's exports in the following way:
 
 ```js
 const noteSlice = createSlice(/* ... */)

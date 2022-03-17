@@ -25,68 +25,33 @@ There are several solutions to this problem ranging from simple notifications to
 
 By default, GitHub Actions sends an email on a build failure. This can be changed to send notifications regardless of build status and can also be configured to alert you on the GitHub web interface. Great. But what if we want more. What if for whatever reason this doesn't work for our use case.
 
-There are integrations for example to various messaging applications such as [Slack](https://slack.com/intl/en-fi/), to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub.
+There are integrations for example to various messaging applications such as [Slack](https://slack.com/intl/en-fi/) or [Discord](https://discord.com/), to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub.
 
 </div>
 
 <div class="tasks">
 
-### Exercise 11.19
+### Exercise 11.18
 
-We have set up a Slack <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-lz92w8us-CWjVTAFBknqQaEb62p1Ttg). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>.
+We have set up a channel <i>fullstack\_webhook</i> to the course Discord group o[https://study.cs.helsinki.fi/discord/join/fullstack](https://study.cs.helsinki.fi/discord/join/fullstack) for testing a messaging integration.
 
-Note that you need the Slack webhook URL for doing this exercise. You find the webhook in the topic of the channel #general in <i>fullstackopengroup.slack.com</i>
+Register now to Discord if you have not already done that. You will also need a <i>Discord webhook</i> in this exercise. You find the webhook in the pinned message of the channel <i>fullstack\_webhook</i>. Please do not commit the webhook to GitHub!
 
-![Releases](../../images/11/22.png)
+#### 11.18 Build success/failure notification action
 
-<i>You can also use some other Slack channel in this exercise but then you are on your own with the setup.</i>
-
-If you want to avoid using slack, you can do the [telegram version](/en/part11/expanding_further#exercise-11-19-alternative-version-for-telegram) of this exercise.
-#### 11.19 Build success/failure notification action
-
-You can find dozens of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many stars and a decent documentation.
+You can find quite a few of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify)](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and a decent documentation.
 
 Setup the action so that it gives two types of notifications:
 - A success indication if a new version gets deployed
 - An error indication if a build fails
 
-In the case of an error, the notification should be a bit more verbose to help developers finding quickly what was the error and which is the commit that caused it.
+In the case of an error, the notification should be a bit more verbose to help developers finding quickly which is the commit that caused it.
 
-See [here](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions) how to check the job status!
+See [here](https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions) how to check the job status!
 
 Your notifications may look like the following:
 
-![Releases](../../images/11/20a.png)
-
-### Exercise 11.19 Alternative version for Telegram
-
-The Telegram version of this exercise is provided by [Sahil Rajput](https://github.com/sahilrajput03)
-
-NB: In case you end up having a lot of workflows running simultaneously (when you push a commit) in your github actions tab, you can disable all workflows except the one you are currently working on, as shown in the figure.
-
-![](https://i.imgur.com/MJ6QBZF.png)
-
-- To get started, you need to create a telegram bot and to do so you have to start by sending a message <i>/start</i> to <i>@BotFather</i> which is itself a bot to help users in creating and managing their own custom bots. Further, you need to send <i>/newbot</i> to create a new bot of your own, and follow the process. Though the process only consists of asking for name and username (must be unique, e.g., <i>my\_responsible_bot1</i>) for our bot. After creating the bot we can request the token for the bot using <i>/token</i> message.
-
-- Now make a group on telegram, say "My CI-CD Notifications" using your personal telegram account on mobile app or desktop web app of telegram. After that you'll be prompted to add users, just enter your bot's username there (e.g., <i>@my\_responsible_bot1</i>) to add bot to the group. You can also use any existing telegram group too if you want but you need to be administrator of that group to be able to add a bot to it as per telegram's security policies.
-
-Any bot needs a <i>chat id</i> to send any sort of message to a user, group or channel. In telegram, <i>chat id</i> is a unique identifier for any user/group/channel and our bot will use it to send message to the group we just created. Since we added our bot to the group, the backend api of telegram has recorded the event for it and we can see that event's details to fetch the <i>chat id</i> of our group.
-
-To fetch the <i>chat id</i> of the group we can use either of below ways:
-
-- Way 1: Remove your chat bot manually from the group and add it again and we are good to go(ignore this if you added the chat bot to already existing group). We need to do this because there's some issue with adding a chat bot at the time of creating a new group, read the most rated comment of this [stackoverflow answer](https://stackoverflow.com/a/32572159/10012446). Browse https://api.telegram.org/bot<BOT_TOKEN>/getUpdates to view the event log history of our bot, and look for something <i>title: "My CI-CD Notifications"</i> you'll notice there is the <i>id</i> for the group in there too. That is our <i>chat id</i> for the group, it looks something like -123456789. Note the hyphen(-) as it is part of <i>chat id</i>, telegram uses - for groups and channels ids as to distinguish them from user accounts. If reading from the json is struggling for you, there's a easy way to get <i>chat id</i> of the group using way 2.
-
-- Way 2 (**easy way**): Add <i>@getidsbot</i> using <i>Add Member</i> option in group settings and you'll see the <i>chat id</i> of the group as response from this bot along with other details of the group i.e., title, username, etc. After getting <i>chat id</i> of the group you can remove the <i>@getidsbot</i> from the group.
-
-- Add two environment variables to github repo i.e., <i>TELEGRAM\_TO</i> for <i>chat id</i> of the group and <i>TELEGRAM\_TOKEN</i> for the bot's token which we fetched earlier while creating the bot with botfather. You can navigate to <i>Settings > Secrets > New Repository Secret</i> in your github repo to add these environment variables.
-
-- Create a new workflow file say <i>TelegramNotifcation.yml</i> and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can have a default message which includes basic log of the workflow event simply by omitting the <i>args</i> from the [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job's definition.
-
-#### 11.19 B: Deliver worflow report messsage directly to user/client's telegram account:
-
-Add another step to your job in existing <i>TelegramNotifcation.yml</i> workflow file to deliver message directly to yourself by using <i>chat id</i> associated with your own account. To do this add  another secret say <i>TELEGRAM\_TO\_ME</i> to your github repo settings. Probably doing this exercise, you would see an error which would break your workflow saying [chat not found](https://stackoverflow.com/a/41291666), this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your new workflow events will succeed. This security concern ensures that any chatbot might not end up sending spams to any unauthorized user otherwise any hacker could easily spam you in a variety of way using his/her bot.
-
-Tip: You can get the <i>chat id</i> of your personal telegram account by sending a "Hello" message to <i>@userinfobot</i> simply. You can also use [@userinfobot](https://t.me/userinfobot) link to message the bot directly from mobile or using [web version of telegram](https://web.telegram.org/) on your desktop to send the "Hello" message.
+![Releases](../../images/11/20x.png)
 
 </div>
 
@@ -116,13 +81,13 @@ What about the tasks that don't have a tool? You can automate these yourself wit
 
 <div class="tasks">
 
-### Exercises 11.20-11.22
+### Exercises 11.19-11.21
 
-#### 11.20 Periodic health check
+#### 11.19 Periodic health check
 
 We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regularly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>.
 
-It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happen regularly. 
+It is possible to [schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) GitHub actions to happen regularly. 
 
 Use now the action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternative and schedule a periodic health check ping to your deployed software. Try to simulate a situation where your application breaks down and ensure that the check detects the problem. Write this periodic workflow to an own file.
 
@@ -130,7 +95,7 @@ Use now the action [url-health-check](https://github.com/marketplace/actions/url
 
 **Note also** that once you get this working, it is best to drop the ping frequency (to max once in 24 hours) or disable the rule altogether since otherways your health check may consume [all your](https://devcenter.heroku.com/articles/free-dyno-hours) monthly free hours.
 
-#### 11.21 Your own pipeline
+#### 11.20 Your own pipeline
 
 Build a similar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or the blogapp built in parts 4 and 5, or the redux anecdotes built in part 6. You may also use some app of your own for this exercise.
 
@@ -144,16 +109,15 @@ This is a long and perhaps quite a tough exercise, but this kind of situation wh
 
 Obviously, this exercise is not done in the same repository as the previous exercises. Since you can return only one repository to the submission system, put a link of the <i>other</i> repository to the one you fill into the submission form.
 
-#### 11.22 Protect your main branch and ask for pull request
+#### 11.21 Protect your main branch and ask for pull request
 
 Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.
 
-Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in telegram/slack to get the review.
+Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai) and/or [kaltsoon](https://github.com/kaltsoon) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review, it is best to send a private message and to include the collaboration invite link to the message.  
 
 Then you are done!
 
 </div>
-
 
 <div class="content">
 

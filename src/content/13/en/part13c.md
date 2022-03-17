@@ -109,7 +109,7 @@ We could run the migrations from the command line using the [Sequelize command l
 npm install umzug
 ```
 
-Let's change the file <i>utils/db.js</i> that handles the connection to the database as follows:
+Let's change the file <i>util/db.js</i> that handles the connection to the database as follows:
 
 ```js
 const Sequelize = require('sequelize')
@@ -398,7 +398,7 @@ const tokenExtractor = (req, res, next) => {
     } catch{
       return res.status(401).json({ error: 'token invalid' })
     }
-  } } else {
+  } else {
     return res.status(401).json({ error: 'token missing' })
   }
   next()
@@ -488,7 +488,7 @@ and the script itself:
 
 ```json
 {
-    "scripts": {
+  "scripts": {
     "dev": "nodemon index.js",
     "migration:down": "node util/rollback.js" // highlight-line
   },
@@ -661,7 +661,7 @@ Team.belongsToMany(User, { through: Membership })
 // highlight-end
 
 module.exports = {
-  Note, User, Team, Membership
+  Note, User, Team, Membership // highlight-line
 }
 
 ```
@@ -726,7 +726,7 @@ router.get('/', async (req, res) => {
       },
       // highlight-start
       {
-        model: team,
+        model: Team,
         attributes: ['name', 'id'],
       }
       // highlight-end

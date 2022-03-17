@@ -7,9 +7,7 @@ lang: en
 
 <div class="content">
 
-<!-- TypeScript is a programming language created by Microsoft, designed for the development of large JavaScript applications. For instance, Microsoft has written both the _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) applications using TypeScript. To support building large-scale JavaScript applications, TypeScript offers e.g. better development-time tooling, static code analysis, compile-time type checking and code-level documentation. -->
-
-TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. For example, Microsoft's _Azure Management Portal_ (1,2 million lines of code) and _Visual Studio Code_ (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code level documentation.
+TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. For example, Microsoft's <i>Azure Management Portal</i> (1,2 million lines of code) and <i>Visual Studio Code</i> (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code level documentation.
 
 ### Main principle
 
@@ -74,7 +72,7 @@ const add = (a: number, b: number) => {
 }
 ```
 
-The function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type <i>number</i>.
+Type of the function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type <i>number</i>.
 
 As a more complex example, let's consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip it for now.
 

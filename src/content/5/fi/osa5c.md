@@ -726,7 +726,7 @@ Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun b
 
 Tee testi, joka varmistaa, että jos komponentin <i>like</i>-nappia painetaan kahdesti, komponentin propsina saamaa tapahtumankäsittelijäfunktiota kutsutaan kaksi kertaa.
 
-#### 5.16*: blogilistan testit, step4
+#### 5.16: blogilistan testit, step4
 
 Tee uuden blogin luomisesta huolehtivalle lomakkelle testi, joka varmistaa, että lomake kutsuu propseina saamaansa takaisinkutsufunktiota oikeilla tiedoilla siinä vaiheessa kun blogi luodaan.
 

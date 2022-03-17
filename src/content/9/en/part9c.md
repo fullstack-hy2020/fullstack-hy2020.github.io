@@ -15,7 +15,7 @@ One major change from the previous part is that <i>we're not going to use ts-nod
 
 We will create a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. He is a coder himself, so he doesn't necessarily need a user interface, but he'd like to use a software with HTTP requests and retain the possibility of later adding a web-based user interface to the application.
 
-Let's start by creating our first real project: *Ilari's flight diaries*. As usual, run <i>npm init</i> and install the <i>typescript</i> package as a dev dependency. 
+Let's start by creating our first real project: <i>Ilari's flight diaries</i>. As usual, run <i>npm init</i> and install the <i>typescript</i> package as a dev dependency. 
 
 ```shell
  npm install typescript --save-dev
@@ -111,14 +111,14 @@ Now our <i>package.json</i> should look like this:
   "author": "Jane Doe",
   "license": "ISC",
   "devDependencies": {
-    "@types/express": "^4.17.11",
-    "@typescript-eslint/eslint-plugin": "^4.16.1",
-    "@typescript-eslint/parser": "^4.16.1",
-    "eslint": "^7.21.0",
-    "typescript": "^4.2.2"
+    "@types/express": "^4.17.13",
+    "@typescript-eslint/eslint-plugin": "^5.12.1",
+    "@typescript-eslint/parser": "^5.12.1",
+    "eslint": "^8.9.0",
+    "typescript": "^4.5.5"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "express": "^4.17.3"
   }
 }
 ```
@@ -212,9 +212,28 @@ The development mode is not suitable at all when we later operate the app in pro
 
 Let's try to create a <i>production build</i> by running the TypeScript compiler. Since we have defined the <i>outdir</i> in our tsconfig.json, there's really nothing else to do but run the script <i>npm run tsc</i>.
 
-Just like magic, a native runnable JavaScript production build of the express backend is created in the directory <i>build</i>.
+Just like magic, a native runnable JavaScript production build of the Express backend is created in file <i>index.js</i> inside the directory <i>build</i>. The compiled code looks like this 
 
-Currently, if we run eslint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler-generated. We can prevent this by creating a  <i>.eslintignore</i> file  which lists the content we want eslint to ignore, just like we do with git and <i>gitignore</i>.
+```js
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const express_1 = __importDefault(require("express"));
+const app = (0, express_1.default)();
+app.use(express_1.default.json());
+const PORT = 3000;
+app.get('/ping', (_req, res) => {
+    console.log('someone pinged here');
+    res.send('pong');
+});
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
+});
+```
+
+Currently, if we run eslint it will also interpret the files in the <i>build</i> directory. We don't want that, since the code there is compiler-generated. We can prevent this by creating a  <i>.eslintignore</i> file  which lists the content we want eslint to ignore, just like we do with git and <i>.gitignore</i>.
 
 Let's add an npm script for running the application in production mode:
 
@@ -248,19 +267,19 @@ With the help of our compiler and eslint, it also ensures that good code quality
 
 For this set of exercises you will be developing a backend for an existing project called **Patientor**, which is a simple medical record application for doctors who handle diagnoses and basic health information of their patients.
 
-The [frontend](https://github.com/fullstack-hy/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
+The [frontend](https://github.com/fullstack-hy2020/patientor) has already been built by outsider experts and your task is to create a backend to support the existing code.
 
 #### 9.8: Patientor backend, step1
 
-Initialise a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers to HTTP GET requests to route <i>/ping</i>.
+Initialise a new backend project that will work with the frontend. Configure eslint and tsconfig with the same configurations as proposed in the material. Define an endpoint that answers to HTTP GET requests to route <i>/api/ping</i>.
 
 The project should be runnable with npm scripts, both in development mode and, as compiled code, in production mode.
 
 #### 9.9: Patientor backend, step2
 
-Fork and clone the project [patientor](https://github.com/fullstack-hy/patientor). Start the project with the help of the README file.
+Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README file.
  
-You can run this command if you get error message when trying to start the fronend:
+You can run this command if you get error message when trying to start the frontend:
  ```shell
 npm update chokidar
 ``` 
@@ -280,13 +299,8 @@ You might also want to have a look at the <i>console</i> tab. If something fails
 
 Finally, we are ready to start writing some code.
 
-<!-- Let's start from basics. Ilari wants to keep track of his experiences on his flight journeys. -->
 Let's start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys.
-<!-- What he wants to be able to save are </i>diary entries</i> that include:  -->
-<!-- - Date of the entry -->
-<!-- - Weather conditions (either good, windy, rainy or stormy) -->
-<!-- - Visibility (either good, ok or poor) -->
-<!-- - Free text entry of experience -->
+
 He wants to be able to save </i>diary entries</i> which contain:
 - The date of the entry
 - Weather conditions (good, windy, rainy or stormy)
@@ -387,13 +401,13 @@ const getEntries = () => {
   return diaryData;
 };
 
-const addEntry = () => {
+const addDiary = () => {
   return null;
 };
 
 export default {
   getEntries,
-  addEntry
+  addDiary
 };
 ```
 
@@ -469,13 +483,13 @@ const getEntries = (): Array<DiaryEntry> => { // highlight-line
   return diaries; // highlight-line
 };
 
-const addEntry = () => {
+const addDiary = () => {
   return null;
 };
 
 export default {
   getEntries,
-  addEntry
+  addDiary
 };
 ```
 
@@ -486,7 +500,7 @@ But since the json already has its values declared, assigning a type for the dat
 The end of the error message reveals the problem: the <i>weather</i> fields are incompatible. In <i>DiaryEntry</i>, we specified that its type is <i>Weather</i>, but
 the TypeScript compiler had inferred its type to be <i>string</i>.
 
-We can fix the problem by doing [type assertion](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). This should be done only if we are certain we know what we are doing.
+We can fix the problem by doing a [type assertion](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions). This should be done only if we are certain we know what we are doing.
 If we assert the type of the variable <i>diaryData</i> to be <i>DiaryEntry</i> with the keyword <i>as</i>, everything should work:
 
 ```js
@@ -500,13 +514,13 @@ const getEntries = (): Array<DiaryEntry> => {
   return diaries;
 }
 
-const addEntry = () => {
+const addDiary = () => {
   return null
 }
 
 export default {
   getEntries,
-  addEntry
+  addDiary
 };
 ```
 
@@ -517,9 +531,9 @@ In our case, we could change how we export our data so we can type it within the
 Since we cannot use typings in a JSON file, we should convert the json file to a ts file which exports the typed data like so:
 
 ```js
-import { DiaryEntry } from "../src/types";
+import { DiaryEntry } from "../src/types"; // highlight-line
 
-const diaryEntries: Array<DiaryEntry> = [
+const diaryEntries: Array<DiaryEntry> = [ // highlight-line
   {
       "id": 1,
       "date": "2017-01-01",
@@ -528,9 +542,9 @@ const diaryEntries: Array<DiaryEntry> = [
       "comment": "Pretty scary flight, I'm glad I'm alive"
   },
   // ...
-];
+]; 
 
-export default diaryEntries;
+export default diaryEntries; // highlight-line
 ```
 
 Now, when we import the array, the compiler interprets it correctly and the <i>weather</i> and <i>visibility</i> fields are understood right:
@@ -545,13 +559,13 @@ const getEntries = (): Array<DiaryEntry> => {
   return diaries;
 }
 
-const addEntry = () => {
+const addDiary = () => {
   return null;
 }
 
 export default {
   getEntries,
-  addEntry
+  addDiary
 };
 ```
 
@@ -563,7 +577,7 @@ export interface DiaryEntry {
   date: string;
   weather: Weather;
   visibility: Visibility;
-  comment?: string;
+  comment?: string; // highlight-line
 }
 ```
 
@@ -680,13 +694,13 @@ const getNonSensitiveEntries = (): NonSensitiveDiaryEntry[] => { // highlight-li
   return diaries;
 };
 
-const addEntry = () => {
+const addDiary = () => {
   return null;
 };
 
 export default {
   getEntries,
-  addEntry,
+  addDiary,
   getNonSensitiveEntries // highlight-line
 };
 ```
@@ -701,7 +715,7 @@ If we were now to return all of the diaryEntries from the <i>getNonSensitiveEntr
 Because TypeScript doesn't modify the actual data but only its type, we need to exclude the fields ourselves:
 
 ```js
-import diaries from '../../data/entries.js'
+import diaries from '../../data/entries.ts'
 
 import { NonSensitiveDiaryEntry, DiaryEntry } from '../types'
 
@@ -1000,7 +1014,12 @@ When we receive data from an outside source, there is no way it can already be t
 The disabled eslint rule was actually giving us a hint that the following assignment is a risky one:
 
 ```js
-const diary = diaryService.findById(Number(req.params.id));
+const newDiaryEntry = diaryService.addDiary({
+  date,
+  weather,
+  visibility,
+  comment,
+});
 ```
 
 We certainly would like to have certainty that the object in a post request is of the right type, so let us define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly-typed <i>NewDiaryEntry</i> object. The function shall be defined in the file <i>utils.ts</i>.
@@ -1056,7 +1075,8 @@ However, if we type the object as <i>any</i>, eslint gives us two complaints:
 
 ![](../../images/9/44.png)
 
-We could ignore these rules but a better idea is to follow the advice the editor gives in the <i>Quick Fix</i> and set the parameter type to unknown.
+We could ignore these rules but a better idea is to follow the advice the editor gives in the <i>Quick Fix</i> and set the parameter type to unknown:
+
 ```js
 import { NewDiaryEntry } from './types';
 
@@ -1071,7 +1091,7 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => { // highlight-line
 export default toNewDiaryEntry;
 ```
 
-<i>unknown</i> is the ideal type for our kind of situation of input validation, since we don't yet need to define the type to match <i>any</i> type, but can first verify the type and then confirm the expected type. With the use of <i>unknown</i>, we also don't need to worry about the <i>@typescript-eslint/no-explicit-any</i> eslint rule, since we are not using <i>any</i>. However, we might still need to use <i>any</i> in some cases where we are not yet sure about the type and need to access properties of an <i>any</i> object in order to validate or type check the property values themselves.
+[unknown](https://www.typescriptlang.org/docs/handbook/2/functions.html#unknown) is the ideal type for our kind of situation of input validation, since we don't yet need to define the type to match <i>any</i> type, but can first verify the type and then confirm the expected type. With the use of <i>unknown</i>, we also don't need to worry about the <i>@typescript-eslint/no-explicit-any</i> eslint rule, since we are not using <i>any</i>. However, we might still need to use <i>any</i> in some cases where we are not yet sure about the type and need to access properties of an <i>any</i> object in order to validate or type check the property values themselves.
 
 Let us start creating the parsers for each of the fields of <i>object</i>.
 
@@ -1217,6 +1237,7 @@ Now we can check that a string is one of the accepted values, and the type guard
 ```js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isWeather = (param: any): param is Weather => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return Object.values(Weather).includes(param);
 };
 ```
@@ -1234,7 +1255,7 @@ const parseWeather = (weather: unknown): Weather => {
 };
 ```
 
-One issue arises after these changes. Our data does not conform to our types anymore:
+One issue arises after these changes. Our data in file <i>data/diaries.ts</i> does not conform to our types anymore:
 
 ![](../../images/9/30.png)
 
@@ -1286,6 +1307,7 @@ The type guard and the parser are below:
 ```js
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const isVisibility = (param: any): param is Visibility => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   return Object.values(Visibility).includes(param);
 };
 
@@ -1366,7 +1388,7 @@ The source code of the application can be found on [GitHub](https://github.com/F
 Create a POST endpoint <i>/api/patients</i> for adding patients. Ensure that you can add patients also from the frontend. You can create unique ids of type <i>string</i> using the [uuid](https://github.com/uuidjs/uuid) library:
 
 ```js
-import {v1 as uuid} from 'uuid'
+import { v1 as uuid } from 'uuid'
 const id = uuid()
 ```
 

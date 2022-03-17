@@ -53,11 +53,11 @@ We shall soon make it impossible to push the code directly to the main branch, b
 
 <div class="tasks">
 
-### Exercises 11.14-11.15.
+### Exercises 11.13-11.14.
 
 Our workflow is doing a nice job of ensuring good code quality, but since it is run on commits to the main branch, it's catching the problems too late!
 
-#### 11.14 Pull request
+#### 11.13 Pull request
 
 Update the trigger of the existing workflow as suggested above to run on new pull requests to your main branch.
 
@@ -75,7 +75,7 @@ In the "Conversation" tab of the pull request you should see your latest commit(
 
 Once the checks have been run, the status should turn to green. Make sure all the checks pass. Do not merge your branch yet, there's still one more thing we need to improve on our pipeline.
 
-#### 11.15 Run deployment step only for the main branch
+#### 11.14 Run deployment step only for the main branch
 
 All looks good, but there is actually a pretty serious problem with the current workflow. All the steps, including the deployment, are run also for pull requests. This is surely something we do not want!
 
@@ -83,7 +83,7 @@ Fortunately, there is an easy solution for the problem! We can add an [if](https
 
 The workflow [context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#contexts) gives various kinds of information about the code the workflow is run.
 
-The relevant information is found in [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context), the field <i>event_name</i> tells what is the "name" of the event that triggered the workflow. When a pull request is merged, the name of the event is somehow paradoxically <i>push</i>, the same event that happens when pushing the code to the repository. Thus, we get the desired behavior by adding the following condition to the step that deploys the code:
+The relevant information is found in [GitHub context](https://docs.github.com/en/actions/learn-github-actions/contexts#github-context), the field <i>event_name</i> tells what is the "name" of the event that triggered the workflow. When a pull request is merged, the name of the event is somehow paradoxically <i>push</i>, the same event that happens when pushing the code to the repository. Thus, we get the desired behavior by adding the following condition to the step that deploys the code:
 
 ```js
 if: ${{ github.event_name == 'push' }}
@@ -109,7 +109,7 @@ The first one is [semantic versioning](https://semver.org/), where a version is 
 
 In general, changes that fix the functionality without changing how the application works from the outside are <code>patch</code> changes, changes that make small changes to functionality (as viewed from the outside) are <code>minor</code> changes and changes that completely change the application (or major functionality changes) are <code>major</code> changes. The definitions of each of these terms can vary from project to project. 
 
-For example, npm-libraries are following the semantic versioning. At the time of writing this text (7th December 2020) the most recent version of React is [17.0.1](https://reactjs.org/versions/), so the major version is 17 which is quite recent and it has just been bumped up one patch step, the minor version is still 0.
+For example, npm-libraries are following the semantic versioning. At the time of writing this text (3rd March 2022) the most recent version of React is [17.0.2](https://reactjs.org/versions/), so the major version is 17 which is has been bumped up two patch steps, the minor version is still 0.
 
 <i>Hash versioning</i> (also sometimes known as SHA versioning) is quite different. The version "number" in hash versioning is a hash (that looks like a random string) derived from the contents of the repository and the changes introduced in this commit. In git, this is already done for you as the commit hash that is unique for any change set.
 
@@ -123,7 +123,7 @@ It's a little more complicated when using semantic versioning and there are seve
 
 While we won't cover the last option on the list (since that's a rabbit hole all on its own), it's worth mentioning that this can be as simple as a spreadsheet that lists the Semantic Version and the commit it points to.
 
-For the two repo based approaches, the approach with something in the code usually boils down to a version number in a file and the repo/metadata approach usually relies on [tags](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) or (in the case of GitHub) releases. In the case of tags or releases, this is relatively simple, the tag or release points to a commit, the code in that commit is the code in the release.
+For the two repository based approaches, the approach with something in the code usually boils down to a version number in a file and the repo/metadata approach usually relies on [tags](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) or (in the case of GitHub) releases. In the case of tags or releases, this is relatively simple, the tag or release points to a commit, the code in that commit is the code in the release.
 
 #### Version order
 
@@ -135,7 +135,7 @@ That's not to say that hashes are inconvenient: if you know which commit caused 
 
 We've already touched on some of the advantages and disadvantages of the two versioning methods discussed above but it's perhaps useful to address where they'd each likely be used.
 
-Semantic Versioning works well when deploying services where the version number could be of significance or might actually be looked at. As an example, think of the Javascript libraries that you're using. If you're using version 3.4.6 of a particular library, and there's an update available to 3.4.8, if the library uses semantic versioning, you could (hopefully) safely assume that you're ok to upgrade without breaking anything. If the version jumps to 4.0.1 then maybe it's not such a safe upgrade.
+Semantic Versioning works well when deploying services where the version number could be of significance or might actually be looked at. As an example, think of the JavaScript libraries that you're using. If you're using version 3.4.6 of a particular library, and there's an update available to 3.4.8, if the library uses semantic versioning, you could (hopefully) safely assume that you're ok to upgrade without breaking anything. If the version jumps to 4.0.1 then maybe it's not such a safe upgrade.
 
 Hash versioning is very useful where most commits are being built into artifacts (e.g. runnable binaries or Docker images) that are themselves uploaded or stored. As an example, if your testing requires building your package into an artifact, uploading it to a server, and running tests against it, it would be convenient to have hash versioning as it would prevent accidents. 
 
@@ -159,17 +159,17 @@ In the case above, the software we release is tested because the CI system makes
 
 <div class="tasks">
 
-### Exercises 11.16-11.17.
+### Exercises 11.15-11.16.
 
 Let's extend our workflow so that it will automatically increase (bump) the version when a pull request is merged into the main branch and [tag](https://www.atlassian.com/git/tutorials/inspecting-a-repository/git-tag) the release with the version number. We will use an open source action developed by a third-party: [anothrNick/github-tag-action](https://github.com/anothrNick/github-tag-action). 
 
-#### 11.16 Adding versioning
+#### 11.15 Adding versioning
 
-We will extend our workflow with one step:
+We will extend our workflow with one more step:
 
 ```js
 - name: Bump version and push tag
-  uses: anothrNick/github-tag-action@1.33.0
+  uses: anothrNick/github-tag-action@1.36.0
   env:
     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
@@ -184,7 +184,32 @@ Modify the configuration above so that each new version is by default a _patch_ 
 
 Remember that we want only to bump the version when the change happens to the main branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.15](/en/part11/keeping_green#exercises-11-14-11-15) to prevent deployment on pull request releated events.
 
-Complete the workflow and try it out! 
+Complete now the workflow. Do not just add it as another step, but configure it as a separate job that [depends](https://docs.github.com/en/actions/using-workflows/advanced-workflow-features#creating-dependent-jobs) on the job that takes care of linting, testing and deployment. So change your workflow definition as follows:
+
+```yml
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches: [master]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    runs-on: ubuntu-20.04
+    steps:
+      // steps here
+  tag_release:
+    needs: [simple_deployment_pipeline]
+    runs-on: ubuntu-20.04
+    steps:
+      // steps here
+```
+
+As was mentioned [earlied](/en/part11/getting_started_with_git_hub_actions#getting-started-with-workflows) jobs of a workflow are executed in parallel but since we want the linting, testing and deployment to be done first, we set a dependency that the <i>tag\_release</i> waits the another job to execute first since we do not want to tag the release unless it passes tests and is deployed.
 
 If you're uncertain of the configuration, you can set  <code>DRY_RUN</code> to <code>true</code>, which will make the action output the next version number without creating or tagging the release!
 
@@ -196,31 +221,7 @@ And by clicking it, you can see all the tags (that is the git mechanism to mark 
 
 ![Releases](../../images/11/18.png)
 
-
-**Note:** I ended up having this error in the tagging action:
-
-![Releases](../../images/11/19.png)
-
-A quick (but perhaps a bit dirty) way to solve the problem was to checkout the repository once again just before the tagging step:
-
-```js
-  - uses: actions/checkout@v2 // highlight-line
-  - name: Bump version and push tag
-    uses: anothrNick/github-tag-action@1.33.0
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-```
-A better option would perhaps be another job that takes care of tagging.
-
-There's another error you may encounter when using tags action:
-```
-  Bumping tag 0.0.0. 
-	New tag 0.0.1-beta.1
-fatal: tag '0.0.1-beta.1' already exists
-```
-A quick way to solve this is to add `0.0.0` tag manually using command line like so `git tag 0.0.0`. Then, push the tag to remote using `git push origin --tags`.
-
-#### 11.17 Skipping a commit for tagging and deployment
+#### 11.16 Skipping a commit for tagging and deployment
 
 In general the more often you deploy the main branch to production, the better. However, there might be some valid reasons sometimes to skip a particular commit or a merged pull request to becoming tagged and released to production.
 
@@ -228,7 +229,7 @@ Modify your setup so that if a commit message in a pull request contains _#skip_
 
 **Hints:**  
 
-The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) conditions of the relevant steps. Similarly to [exercise 11-15](/en/part11/keeping_green#exercises-11-14-15) you can get the relevant information from the [github context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
+The easiest way to implement this is to alter the [if](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsif) conditions of the relevant steps. Similarly to [exercise 11-14](/en/part11/keeping_green#exercises-11-13-11-14) you can get the relevant information from the [GitHub context](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#github-context) of the workflow.
 
 You might take this as a starting point:
 
@@ -238,11 +239,11 @@ name: Testing stuff
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   a_test_job:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
       - name: gihub context
@@ -269,7 +270,6 @@ Developing workflows is not easy, and quite often the only option is trial and e
 
 It would also be possible to install a tool such as [act](https://github.com/nektos/act) that makes it possible to run your workflows locally. In case you end up to more involved use cases, e.g. by creating your [own custom actions](https://docs.github.com/en/free-pro-team@latest/actions/creating-actions) going through the burden of setting up a tool such as act is most likely worth the trouble. 
 
-
 </div>
 
 <div class="content">
@@ -289,7 +289,6 @@ The version [1.33.0](https://github.com/anothrNick/github-tag-action/releases) o
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 ```
 
-
 When we use actions provided by GitHub we trust them not to mess with version tags and to thoroughly test their code.
 
 In the case of third-party actions, the code might end up being buggy or even malicious. Even when the author of the open-source code does not have the intention of doing something bad, they might end up leaving their credentials on a post-it note in a cafe, and then who knows what might happen.
@@ -306,17 +305,15 @@ From CI point of view, the most important protection is requiring status checks 
 
 To set up protection for your main branch, navigate to repository "Settings" from the top menu inside the repository. In the left-side menu select "Branches". Click "Add rule" button next to "Branch protection rules". Type a branch name pattern ("master" or "main" will do nicely) and select the protection you would want to set up. At least "Require status checks to pass before merging" is necessary for you to fully utilize the power of GitHub Actions. Under it, you should also check "Require branches to be up to date before merging" and select all of the status checks that should pass before a PR can be merged. 
 
-
 ![Branch protection rule](../../images/11/part11d_04.png)
-
 
 </div>
 
 <div class="tasks">
 
-### Exercise 11.18
+### Exercise 11.17
 
-#### 11.18 Adding protection to your main branch
+#### 11.17 Adding protection to your main branch
 
 Add protection to your <i>master</i> (or <i>main</i>) branch.
 

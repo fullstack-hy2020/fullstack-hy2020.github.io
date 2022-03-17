@@ -388,13 +388,13 @@ has a resolver which returns <i>all</i> objects from the _persons_ array.
 
 ### Apollo Studio Explorer
 
-When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) has a button <i>Query your server</i> that takes us to  [Apollo Studio Explorer]https://www.apollographql.com/docs/studio/explorer/explorer/).  This is very useful for a developer, and can be used to make queries to the server. 
+When Apollo server is run in development mode the page [http://localhost:4000](http://localhost:4000) has a button <i>Query your server</i> that takes us to [Apollo Studio Explorer](https://www.apollographql.com/docs/studio/explorer/explorer/).  This is very useful for a developer, and can be used to make queries to the server. 
 
 Let's try it out:
 
 ![](../../images/8/1x.png)
 
-At the left side Explores shows the API-documentation that it has automatically generated based on the scheme.
+At the left side Explorer shows the API-documentation that it has automatically generated based on the schema.
 
 ### Parameters of a resolver
 

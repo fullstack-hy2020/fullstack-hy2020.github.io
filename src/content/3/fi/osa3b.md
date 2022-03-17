@@ -348,6 +348,6 @@ Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellu
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
 
-Jotta kaikki toimisi, tulee repositoriosi näyttää hakemisttorakenteen suhteen samalta kuin [esimerkkisovelluksen repositorion](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
+Jotta kaikki toimisi, tulee repositoriosi näyttää hakemistorakenteen suhteen samalta kuin [esimerkkisovelluksen repositorion](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
 </div>

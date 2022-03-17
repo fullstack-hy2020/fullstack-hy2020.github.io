@@ -235,7 +235,7 @@ Chrome developer tools makes it possible to simulate using our application in th
 
 ![](../../images/7/12ea.png)
 
-You can find the complete code for the application [here](https://github.com/fullstack-hy/misc/blob/master/notes-bootstrap.js).
+You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 
 ### Material UI
 
@@ -468,7 +468,7 @@ and it looks like we want it to:
 
 ![](../../images/7/67ea.png)
 
-The code of the application can be found from [here](https://github.com/fullstack-hy/misc/blob/master/notes-materialui.js).
+The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
 
 ### Closing thoughts
 

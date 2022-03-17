@@ -15,16 +15,12 @@ In addition to language features, we will also have a strong emphasis on tooling
 
 Install TypeScript support to your editor of choice. [Visual Studio Code](https://code.visualstudio.com/) works natively with TypeScript. 
 
-<!-- As mentioned before, TypeScript code is not runnable by itself, but it first needs to be compiled into runnable JavaScript code. When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed from the code and the result is pure ready-to-run JavaScript. -->
 As mentioned earlier, TypeScript code is not executable by itself. It has to be first compiled into executable JavaScript. 
 When TypeScript is compiled into JavaScript, the code becomes subject for type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed and the result is pure ready-to-run JavaScript. 
 
-<!-- In a production environment this need for compilation often means that you have to setup a "build step", where all TypeScript code is compiled into JavaScript in a separate folder, and the production enviroment then runs the code from that folder. In a development environment it is often more handy to take use of real-time compilation and auto-reloading, in order to be able to see the resulting changes faster. -->
 In a production environment, the need for compilation often means that you have to set up a "build step." During the build step all TypeScript code is compiled into JavaScript in a separate folder, and the production environment then runs the code from that folder. In a development environment, it is often handier to make use of real-time compilation and auto-reloading in order to be able to see the resulting changes more quickly.
 
-<!-- Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node), that compiles and executes the desired TypeScript file immediately, so that there is no need for the separate compilation step. -->
-Let's start writing our first TypeScript app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node).
-It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step.
+Let's start writing our first TypeScript app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node). It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step.
 
 You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running:
 ```
@@ -38,12 +34,6 @@ As we remember from [part 3](/en/part3), an npm project is set by running the co
 
 ```
 npm install --save-dev ts-node typescript
-```
-  
-In some cases, you should install this package as well
-
-```
-npm install -D tslib @types/node
 ```
 
 and set up <i>scripts</i> within the package.json: 
@@ -72,6 +62,19 @@ It is worth mentioning that TypeScript also provides an online playground, where
 
 JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and to adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.
 
+Let us add the project a configuration file _tsconfig.json_ with the following content:
+
+```js
+{
+  "compilerOptions":{
+    "noImplicitAny": false
+  }
+}
+```
+
+The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and [much much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), that does not require to have types for all variables used.
+
 Let's start by creating a simple Multiplier. It looks exactly as it would in JavaScript.
 
 ```js
@@ -83,8 +86,6 @@ multiplicator(2, 4, 'Multiplied numbers 2 and 4, the result is:');
 ```
 
 As you can see, this is still ordinary basic JavaScript with no additional TS features. It compiles and runs nicely with  <i>npm run ts-node -- multiplier.ts</i>, as it would with Node.
-  
-**NB:** You might have to run <i>npm run ts-node -- -O '{""noImplicitAny"": false}' .\multiplier.ts</i> or turn of strict mode using tsconfig.json
   
 But what happens if we end up passing wrong <i>types</i> of arguments to the multiplicator function?
 
@@ -167,14 +168,14 @@ Now, when we hover on top of the <i>Operation</i> type in the calculator functio
 
 And if we try to use a value that is not within the <i>Operation</i> type, we get the familiar red warning signal and extra info from our editor:
 
-![](../../images/9/4.png)
+![](../../images/9/4x.png)
 
 This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually, you want to know what a function returns, and it would be nice to have a guarantee that it actually returns what it says it does. Let's add a return value <i>number</i> to the calculator function:
 
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-const calculator = (a: number, b: number, op: Operation): number => {
+const calculator = (a: number, b: number, op: Operation): number => { // highlight-line
 
   if (op === 'multiply') {
     return a * b;
@@ -187,11 +188,10 @@ const calculator = (a: number, b: number, op: Operation): number => {
 }
 ```
 
-The compiler complains straight away because, in one case, the function returns a string. There are couple of ways to fix this: 
-we could extend the return type to allow string values, like so:
+The compiler complains straight away because, in one case, the function returns a string. There are couple of ways to fix this. We could extend the return type to allow string values, like so:
 
 ```js
-const calculator = (a: number, b: number, op: Operation): number | string =>  {
+const calculator = (a: number, b: number, op: Operation): number | string =>  { 
   // ...
 }
 ```
@@ -221,19 +221,19 @@ The code of our calculator should actually look something like this:
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-type Result = number;
+type Result = number;  // highlight-line
 
-const calculator = (a: number, b: number, op: Operation) : Result => {
+const calculator = (a: number, b: number, op: Operation) : Result => {  // highlight-line
   switch(op) {
     case 'multiply':
       return a * b;
     case 'divide':
-      if (b === 0) throw new Error('Can\'t divide by 0!');
+      if (b === 0) throw new Error('Can\'t divide by 0!');  // highlight-line
       return a / b;
     case 'add':
       return a + b;
     default:
-      throw new Error('Operation is not multiply, add or divide!');
+      throw new Error('Operation is not multiply, add or divide!');  // highlight-line
   }
 }
 
@@ -248,49 +248,49 @@ try {
 }
 ```
 
-<!-- The programs we've written are alright, but it sure would be better if there were a way to use command line arguments instead of always having to change the code to calculate different things. Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. But something is not right: -->
 As of TypeScript 4.0, <i>catch</i> blocks allow you to specify the type of catch clause variables. Pre-4.4, all <i>catch</i> clause variables were of type <i>any</i>. However, with the release of 4.4, the default type is <i>unknown</i>. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of <i>any</i>. Anything is assignable to <i>unknown</i>, but <i>unknown</i> isn’t assignable to anything but itself and <i>any</i> without a type assertion or a control flow-based narrowing. Likewise, no operations are permitted on an <i>unknown</i> without first asserting or narrowing to a more specific type.
 
-The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.  
-Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>.
-But something is not right:
+The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.
+
+Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. If you are using a recent npm-version (7.0 or later), there are no problems but wit an older setup something is not right:
 
 ![](../../images/9/5.png)
+
+So what is the problem in older setups?
 
 ### @types/{npm_package}
 
 Let's return to the basic idea of TypeScript. TypeScript expects all globally-used code to be typed, as it does for your own code when your project has a reasonable configuration. The TypeScript library itself contains only typings for the code of the TypeScript package. It is possible to write your own typings for a library, but that is almost never needed - since the TypeScript community has done it for us!
 
-<!-- As in the world of npm, TypeScript also celebrates open source code and the community around it is active and continuously reacting to updates and changes in commonly used npm-packages. That is why the typings for npm-packages are almost always to be found, so that you won't be alone creating types for all of your thousands of dependencies. -->
-As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages.  
-You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
+As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
-<!-- Usually types for existing packages can be found by under the <i>@types</i>-organization within npm, so that you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ - prefix, for example:<i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and the list goes on and on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal to maintaining types of everything in one place. -->
 Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal of maintaining types of everything in one place.
 
 Sometimes, an npm package can also include its types within the code and, in that case, installing the corresponding <i>@types/*</i> is not necessary.
 
 > **NB:** Since the typings are only used before compilation, the typings are not needed in the production build and they should <i>always</i> be in the devDependencies of the package.json.
 
-Since the global variable <i>process</i> is defined by Node itself, we get its typings by installing the package <i>@types/node</i>:
+Since the global variable <i>process</i> is defined by Node itself, we get its typings by from the package <i>@types/node</i>.
+
+Since version 10.0 <i>ts-node</i> has defined <i>@types/node</i> as a [peer rependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). If the version of npm is at least 7.0, the peer dependencies of a project automatically installed by then npm. If you have an older npm, the peer dependency must be installed explicitly:
+
 
 ```shell
 npm install --save-dev @types/node
 ```
 
-After installing the types, our compiler does not complain about the variable <i>process</i> anymore. Note that there is no need to require the types to the code, the installation of the package is enough!
+When the package @types/node is installed, the compiler does not complain about the variable <i>process</i>. Note that there is no need to require the types to the code, the installation of the package is enough!
 
 ### Improving the project
 
-<!-- Let us now add npm scripts with which we can run our two programs <i>multiplier</i> and <i>calculator</i>: -->
 Next, let's add npm scripts to run our two programs <i>multiplier</i> and <i>calculator</i>:
 
 ```json
 {
-  "name": "part1",
+  "name": "fs-open",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.ts",
   "scripts": {
     "ts-node": "ts-node",
     "multiply": "ts-node multiplier.ts", // highlight-line
@@ -299,13 +299,12 @@ Next, let's add npm scripts to run our two programs <i>multiplier</i> and <i>cal
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "ts-node": "^8.6.2",
-    "typescript": "^3.8.2"
+    "ts-node": "^10.5.0",
+    "typescript": "^4.5.5"
   }
 }
 ```
 
-<!-- We can now get the multipier to work with command line parameters with the following changes -->
 We can get the multiplier to work with command-line parameters with the following changes:
 
 ```js
@@ -336,11 +335,9 @@ it "works" but gives us the answer:
 Multiplied 5 and NaN, the result is: NaN
 ```
 
-<!-- The reason for this is that the <i>Number('lol')</i> returns <i>NaN</i> which actually has the type <i>number</i> so TypeScript has no power to rescue from this kind of situation.  -->
 The reason for this is, that <i>Number('lol')</i> returns <i>NaN</i>, 
 which is actually type <i>number</i>, so TypeScript has no power to rescue  us from this kind of situation.
 
-<!-- In order to save us from this kind of behavior, we have to validate the data that is given to us as in command line.  -->
 In order to prevent this kind of behaviour, we have to validate the data given to us from the command line.
 
 The improved version of the multiplicator looks like this:
@@ -410,7 +407,6 @@ interface MultiplyValues {
 }
 ```
 
-<!-- Definition utilizes TypeScript [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) that is one way to define what "shape" an object should have. In our case, it is quite obvious that return values should be objects that have properties <i>value1</i> and <i>value2</i> that both have type number. -->
 The definition utilizes TypeScript's [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) keyword, which is one way to define the "shape" an object should have. 
 In our case it is quite obvious that the return value should be an object with the two properties <i>value1</i> and <i>value2</i>, which should both be of type number. 
 
@@ -432,8 +428,7 @@ Exercises 9.1.-9.7. will all be made in the same node project. Create the projec
 }
 ```
 
-The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and [much much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
-For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used.
+The compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), that makes it mandatory to have types for all variables used, is actually currently a default, but let us still define it explicitly.
 
 #### 9.1 Body mass index
 
@@ -527,14 +522,10 @@ Handle exceptions and errors appropriately. The exerciseCalculator should accept
 
 ### More about tsconfig
 
-<!-- In the exercises we used only one tsconfig rule: [noImplicitAny](https://www.typescriptlang.org/v2/en/tsconfig#noImplicitAny) which is a good place to start but now it is time to start looking into the file a little bit deeper. -->
-In the exercises, we used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper.
+We have so far used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper.
 
-<!-- [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) includes all your core configurations on how you want TypeScript to work in your project. In tsconfig.json you can define how strictly you want the code to be inspected, what files to include, what files to exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later).  -->
-The [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project. 
-You can define how strictly you want the code to be inspected, what files to include and exclude (<i>node_modules</i> is excluded by default), and where compiled files should be placed (more on this later).
+As mentioned, the [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project. 
 
-<!-- Let us now use <i>tsconfig.json</i> that has the following form: -->
 Let's specify the following configurations in our <i>tsconfig.json</i> file:
 
 ```json
@@ -556,12 +547,12 @@ Do not worry too much about the <i>compilerOptions</i>; they will be under close
 
 You can find explanations for each of the configurations from the TypeScript documentation, or from the really handy [tsconfig page](https://www.staging-typescript.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
 
-### Adding express to the mix
+### Adding Express to the mix
 
 Right now, we are in a pretty good place. Our project is set up and we have two executable calculators in it. 
 However, since our aim is to learn FullStack development, it is time to start working with some HTTP requests.
 
-Let us start by installing express:
+Let us start by installing Express:
 
 ```
 npm install express
@@ -599,8 +590,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Everything else seems to be working just fine but, as you'd expect, the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing.
-If you look carefully, VSCode is also complaining about something to do with importing express. You can see a short yellow line of dots under the <i>require</i>. Let's hover over the problem:
+Everything else seems to be working just fine but, as you'd expect, the <i>req</i> and  <i>res</i> parameters of <i>app.get</i> need typing. If you look carefully, VSCode is also complaining about something to about the importing of Express. You can see a short yellow line of dots under the <i>require</i>. Let's hover over the problem:
 
 ![](../../images/9/6.png)
 
@@ -610,11 +600,9 @@ The complaint is that the <i>'require' call may be converted to an import</i>. L
 import express from 'express';
 ```
 
-**NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick Fix...</i> button.
-Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. 
-The automatic fixes for issues can be a major time saver as well. 
+**NB**: VSCode offers you a possibility to fix the issues automatically by clicking the <i>Quick Fix...</i> button. Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. The automatic fixes for issues can be a major time saver as well. 
 
-Now we run into another problem - the compiler complains about the import statement. 
+Now we run into another problem, the compiler complains about the import statement. 
 Once again, the editor is our best friend when trying to find out what the issue is:
 
 ![](../../images/9/7.png)
@@ -634,7 +622,7 @@ When we hover over the <i>require</i> statement, we can see the compiler interpr
 
 Whereas when we use <i>import</i>, the editor knows the actual types:
 
-![](../../images/9/9a.png)
+![](../../images/9/9x.png)
 
 Which import statement to use depends on the export method used in the imported package. 
 
@@ -663,23 +651,18 @@ This is because we banned unused parameters in our <i>tsconfig.json</i>:
 }
 ```
 
-<!-- This configuration might create problems when we have library-wide predefined functions, that like in this case require declaring a variable, even though in the code it is not necessarily required to use at all. Fortunately this issue has already been solved at the configuration level and once again hovering on the issue gives us a solution for the problem, this time by clicking the quick fix button:  -->
 This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it's not used at all, as is the case here. 
 Fortunately, this issue has already been solved on configuration level. 
 Once again hovering over the issue gives us a solution. This time we can just click the quick fix button:
 
 ![](../../images/9/14a.png)
 
-<!-- If it is absolutely impossible to get rid of an unused variable, you should prefix it with an underscore to inform the compiler that this has been taken into consideration and there is nothing we can do about it.  -->
 If it is absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do. 
 
-Let's rename the <i>req</i> variable to <i>_req</i>.
- <!-- Now we are finally ready to start up the application, and it seems to work fine: -->
- Finally we are ready to start the application. It seems to work fine:
+Let's rename the <i>req</i> variable to <i>_req</i>. Finally we are ready to start the application. It seems to work fine:
 
 ![](../../images/9/11a.png)
 
-<!-- Now to simplify the development we should enable <i>auto reloading</i> to improve our workflow. In this course you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i> which is meant only for development environment that takes care of recompilation on every change so restarting the application won't be necessary. -->
 To simplify the development, we should enable <i>auto-reloading</i> to improve our workflow. In this course, you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i>. It is meant to be used only with a development environment which takes care of recompilation on every change, so restarting the application won't be necessary.
 
 Let's install <i>ts-node-dev</i> to our development dependencies:
@@ -711,7 +694,7 @@ And now, by running <i>npm run dev</i>, we have a working, auto-reloading develo
 
 #### 9.4 Express
 
-Add express to your dependencies and create an HTTP GET endpoint <i>hello</i> that answers 'Hello Full Stack!'
+Add Express to your dependencies and create an HTTP GET endpoint <i>hello</i> that answers 'Hello Full Stack!'
 
 The web app should be started with commands <i>npm start</i> in production mode and <i>npm run dev</i> in development mode. The latter should also use <i>ts-node-dev</i> to run the app.
 
@@ -751,7 +734,7 @@ The response is a json of the form:
 }
 ```
 
-See the [express documentation](http://expressjs.com/en/5x/api.html#req.query) for info on how to access the query parameters.
+See the [Express documentation](http://expressjs.com/en/5x/api.html#req.query) for info on how to access the query parameters.
 
 If the query parameters of the request are of the wrong type or missing, a response with proper status code and error message is given:
 
@@ -761,7 +744,7 @@ If the query parameters of the request are of the wrong type or missing, a respo
 }
 ```
 
-Do not copy the calculator code to file <i>index.ts</i>; instead, make it a [typescript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>.
+Do not copy the calculator code to file <i>index.ts</i>; instead, make it a [TypeScript module](https://www.typescriptlang.org/docs/handbook/modules.html) that can be imported in <i>index.ts</i>.
 
 </div>
 
@@ -769,19 +752,17 @@ Do not copy the calculator code to file <i>index.ts</i>; instead, make it a [typ
 
 ### The horrors of <i>any</i>
 
-Now that we have our first endpoints completed, you might notice we have used barely any TypeScript in these small examples. 
-When examining the code a bit closer, we can see a few dangers lurking there.
-
+Now that we have our first endpoints completed, you might notice we have used barely any TypeScript in these small examples. When examining the code a bit closer, we can see a few dangers lurking there.
 
 Let's add the HTTP POST endpoint <i>calculate</i> to our app:
 
 ```js
-import { calculator } from './calculator'
+import { calculator } from './calculator';
 
 // ...
 
 app.post('/calculate', (req, res) => {
-  const { value1, value2, op } = req.body
+  const { value1, value2, op } = req.body;
 
   const result = calculator(value1, value2, op);
   res.send(result);
@@ -902,10 +883,65 @@ So we will use the following <i>.eslintrc</i>
 }
 ```
 
-<!-- There are quite a few missing semicolons but those are easy to add. -->
-There are quite a few semicolons missing, but those are easy to add.
+There are quite a few semicolons missing, but those are easy to add. We also have to solve the ESlint issues conserning the _any_-type:
 
-And now let's fix everything that needs to be fixed!
+![](../../images/9/50x.png)
+
+We could and propably should disable some ESlint rules to get the data from the request body.
+
+Disabling <i>@typescript-eslint/no-unsafe-assignment</i> for the destructuring assignment is nearly enough:
+
+```js
+app.post('/calculate', (req, res) => {
+  // highlight-start
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment 
+  // highlight-end
+  const { value1, value2, op } = req.body;
+
+  const result = calculator(Number(value1), Number(value2), op);
+  res.send(result);
+});
+```
+
+However this still leaves one problem to deal with, the last parameter in the function call is not safe:
+
+![](../../images/9/51x.png)
+
+We can just disable another ESlint rule to get rid of that:
+
+```js
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // highlight-start
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  // highlight-end
+  const result = calculator(Number(value1), Number(value2), op);
+  res.send(result);
+});
+```
+
+We now got ESlint silenced but we are totally on mercy of the user. We most definitively should do some validation to the post data and give a proper error message if the data is invalid:
+
+```js
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+// highlight-start
+  if ( !value1 || isNaN(Number(value1))) {
+    return res.send({ error: '...'}).status(400);
+  }
+  // highlight-end
+
+  // more validations here...
+
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
+  const result = calculator(Number(value1), Number(value2), op);
+  return res.send(result);
+});
+```
 
 </div>
 

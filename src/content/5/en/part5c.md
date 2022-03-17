@@ -250,7 +250,7 @@ Let us install a library [user-event](https://testing-library.com/docs/ecosystem
 npm install --save-dev @testing-library/user-event
 ```
 
-At the moment of writing (28.1.2022) there is a mismatch between the version of a dependency jest-watch-typeahead that create-react-appin and user-event are using. The problem is fixed by installing a spefic version:
+At the moment of writing (28.1.2022) there is a mismatch between the version of a dependency jest-watch-typeahead that create-react-app and user-event are using. The problem is fixed by installing a specific version:
 
 ```
 npm install -D --exact jest-watch-typeahead@0.6.5
@@ -669,7 +669,7 @@ test('renders content', () => {
 Command _getByText_ looks for an element that has exactly the text that it has as parameter, and nothing more. If we want to look for element that <i>contains</i> the text, we could use a extra option:
 
 ```js 
-const element = screenscreen.getByText(
+const element = screen.getByText(
   'Does not work anymore :(', { exact: false }
 )
 ```
@@ -729,7 +729,7 @@ Make a test which checks that the component displaying a blog renders the blog's
 
 Add CSS-classes to the component to help the testing as necessary. 
 
-#### 5.14*: Blog list tests, step2
+#### 5.14: Blog list tests, step2
 
 Make a test which checks that the blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
 

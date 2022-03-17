@@ -32,7 +32,7 @@ $ npm run build
   ...
 ```
 
-Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
+Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the Express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
 
 ```Dockerfile
 FROM node:16
@@ -102,7 +102,7 @@ CMD ["serve", "build"] # highlight-line
 
 Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
 
-When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:3000.
+When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:5000.
 
 ### Using multiple stages
 
@@ -110,7 +110,7 @@ While serve is a <i>valid</i> option we can do better. A good goal is to create 
 
 [Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) are designed for splitting the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
 
-With multi-stage builds, a tried and true solution like [nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
+With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
 
 Let's use the previous Dockerfile but change the FROM to include the name of the stage:
 
@@ -152,7 +152,7 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container.
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before the frontend is build, othervise it does not get defined in the code!
 
 #### Exercise 12.14: Testing during the build process
 
@@ -251,7 +251,7 @@ Create <i>todo-frontend/docker-compose.dev.yml</i> and use volumes to enable the
 
 <div class="content">
 
-### Communication between containers in a docker network
+### Communication between containers in a Docker network
 
 The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we shall see how the network and DNS work.
 
@@ -331,7 +331,7 @@ services:
     image: busybox
 ```
 
-With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still `docker-compose run debug-helper wget -O - http://hello-front-dev:3000` works since the port is still 3000 within the docker network.
+With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works since the port is still 3000 within the docker network.
 
 ![](../../images/12/busybox_networking_drawio.png)
 
@@ -359,8 +359,8 @@ services:
     ports:
       - ...
     environment: 
-      - REDIS_URL=//localhost:3000
-      - MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database
+      - REDIS_URL=...
+      - MONGO_URL=...
 ```
 
 The URLs (localhost) are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console</i>. If and when things blow up, the error messages hint at what might be broken.
@@ -379,12 +379,15 @@ Next, we will add a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy)
 
 > <i>A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the reverse proxy server itself.</i>
 
-So in our case, the reverse proxy will be the single point of entry to our application, and 
-the final goal will be to set both the React frontend and the Express backend behind the reverse proxy. 
+So in our case, the reverse proxy will be the single point of entry to our application, and the final goal will be to set both the React frontend and the Express backend behind the reverse proxy. 
 
 There are multiple different options for a reverse proxy implementation, such as Traefik, Caddy, Nginx, and Apache (ordered by initial release from newer to older).
 
-Our pick is [Nginx](https://hub.docker.com/_/nginx). Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running:
+Our pick is [Nginx](https://hub.docker.com/_/nginx). 
+
+Let us now put the <i>hello-frontend</i> behind the reverse proxy.
+
+Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running:
 
 ```bash
 # events is required, but defaults are ok
@@ -412,6 +415,9 @@ http {
 Next, create an Nginx service in the <i>docker-compose.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
 
 ```yml
+services:
+  app:
+    # ...
   nginx:
     image: nginx:1.20.1
     volumes:
@@ -419,6 +425,8 @@ Next, create an Nginx service in the <i>docker-compose.yml</i> file. Add a volum
     ports:
       - 8080:80
     container_name: reverse-proxy
+    depends_on:
+      - app # wait for the frontend container to be started
 ```
 
 with that added we can run _docker-compose up_ and see what happens.
@@ -464,7 +472,45 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
-If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
+If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
+
+One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is stared:
+
+```bash
+services:
+  app:
+    # ...
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on: // highlight-line
+      - app // highlight-line
+```
+
+If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to reslove all DNS names that are referred in the config file:
+
+```bash
+http {
+  server {
+    listen 80;
+
+    location / {
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection 'upgrade';
+      
+      proxy_pass http://app:3000; // highlight-line
+    }
+  }
+}
+```
+
+
+ Note that <i>depends\_on</i> does not guarantee that the service in the depended container is ready for action, it just ensures that the container has been started (and the corresponding entry is added to DNS). If a service needs to wait another service to become ready before the startup, [other solutions](https://docs.docker.com/compose/startup-order/) should be used.
 
 </div>
 
@@ -492,7 +538,7 @@ Add the services nginx and todo-frontend built with <i>todo-app/todo-frontend/de
 
 Add the service todo-backend to the docker-compose file <i>todo-app/docker-compose.dev.yml</i> in development mode.
 
-Add a new location to the <i>nginx.conf</i> so that requests to /api are proxied to the backend. Something like this should do the trick:
+Add a new location to the <i>nginx.conf</i> so that requests to _/api_ are proxied to the backend. Something like this should do the trick:
 
 ```conf
   server {

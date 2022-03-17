@@ -9,7 +9,7 @@ lang: en
 
 This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The course also has parts on TypeScript,  React Native, and Continuous integration.
 
-Other topics include debugging applications, configuration, managing runtime environments, and NoSQL databases.
+Other topics include debugging applications, container technology, configuration, managing runtime environments, and databases.
 
 ### Prerequisites
 
@@ -33,11 +33,11 @@ The course contains fourteen parts, the first of which is numbered 0 for consist
 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
-You are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next part.
+In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no simillar dependency on previous parts.
 
-The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2022. 
+The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2023. 
 
-However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2022. 
+However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2023. 
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -61,11 +61,11 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-If you wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/hy-CUR-143228359/Open_uni_Full_Stack_Web_Development_2021) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam. A Finnish social security number is required. 
+If you wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9/_Full_Stack_Web_Development) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam. A Finnish social security number is required. 
 
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required.
 
-The last possible date for taking the exam is 10 January 2022. **Note that you must sign up for the exam by 9 January 2022, at the latest.**
+The last possible date for taking the exam is 10 January 2023. **Note that you must sign up for the exam by 9 January 2023, at the latest.**
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count towards your grade.
 
@@ -74,57 +74,52 @@ You can only take the exam after submitting enough exercises for five credits. I
 #### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 127 exercises for parts 0-7. 
-- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-2c09d93d-4f75-4359-85a3-5f8e2c2c5ce6). 
+- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
 - [Request credits for part 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 138 exercises for parts 0-7. 
-- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51f0edb4-c137-4871-a1e0-d93ca9b47bdf). 
+- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3). 
 - [Request credits for part 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
 By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5, because its contents are independent from parts 6 and 7.
 - Submit at least 22/26 exercises for part 8.
-- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-5f475a66-7d83-4b0e-9413-65e83be3dd7e). 
+- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491). 
 - [Request credits for part 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
 By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
 - Submit at least 24/27 exercises for part 9.
-- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-f62d31aa-e737-4060-b930-373b5236fa08). 
+- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb). 
 - [Request credits for part 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
 By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native).
 - Submit at least 25 exercises for part 10. 
-- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-b2475f8c-e911-4a07-9993-549955381936). 
+- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6). 
 - [Request credits for part 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
-By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. 
-More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
+By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
 - Submit all exercises for part 11. 
-- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-499399bc-1897-460a-ba9e-3b73af4e9d33). 
+- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01). 
 - [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
-By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. 
-More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
+By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
 - Submit all exercises for part 12. 
-- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-30c40872-9c07-4bbf-859a-b206fb598b60
-). 
+- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a). 
 - [Request credits for part 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 13 - Full Stack Web Development: relational databases (1 cr, CSM14114)
 
-By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. 
-More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
+By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
 - Submit all exercises for part 13. 
-- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-136d0c67-5348-468f-aa94-7e0b72197d91
-). 
+- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c). 
 - [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 ### How to get your credits
@@ -154,21 +149,13 @@ Even if you do not register to Open University for the exam, you can still downl
 
 If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
 
-#### Expanding on Full stack open 2019 or 2020
+#### Expanding on Full stack open
 
-You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Telegram [@mluukkai](https://t.me/mluukkai), with your GitHub username and which parts you would like to have deleted from your submissions.
+You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
 
-The same will apply for the 2022, you can continue seamlesly if you have started the course 2019-2021
+#### Expanding on the University oh Helsinki instance of this course
 
-#### Expanding on other instances of this course
-
-You can substitute <i>parts</i> of this course with parts you have previously submitted.  For example, if you have previously completed the three credit course, you can substitute parts 0-3 of this course with the parts you have previously completed.  You can only substitute parts in sequence, so you cannot substitute, for example, parts 0 and 2 but not complete part 1.
-
-You can only substitute whole parts. For example, if you have previously submitted 50% of exercises in a part, you cannot substitute those exercises - you would need to start over on that part of the course.
-
-"Credit transfer" of previously completed parts happens in the <i>my submissions</i> tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
-If you have previously passed the course exam (excluding the exam for the three credit course), and are now expanding your course, you do not have to do the exam again.
+That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
 
 ### Submitting exercises
 
@@ -188,7 +175,7 @@ For official university credits you need to pass the course exam that is done in
 
 Follow the instructions below to gain access to the course Moodle space:
 
-- [Enroll in the course](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-eeffe055-8b94-42d0-9167-50476ad32133) through Open University by 9 Jan 2022
+- [Enroll in the course](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9) through Open University by 9 Jan 2023
 - You will receive the Moodle-link and the course key through email within 24 hours after course registration.
 - User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
     - If yes, use your username and password to log in to Moodle.
@@ -228,7 +215,7 @@ See [more information on the project](https://github.com/FullStack-HY/misc/blob/
 
 ### Interview promise
 
-Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (12 + 10). The parts 12 and 13 that where released during 2021 are not required if you finish the project by 15.3.2022.
+Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10). The parts 12 and 13 that were released during 2021 are not required if you finish the project by 15.3.2022.
 
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
@@ -244,7 +231,7 @@ Install some sensible text editor that supports web development. [Visual Studio 
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
 
-Also install [Node.js](https://nodejs.org/en/). The material has been done with version 14.8.0, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
+Also install [Node.js](https://nodejs.org/en/). The material has been done with version 16.13.2, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
 
 Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
 

@@ -714,7 +714,7 @@ sen sijaan on välttämätön, muuten Sequelize ei osaa koodin tasolla liittää
 
 <div class="tasks">
 
-### Tehtävät 13.8.-13.11.
+### Tehtävät 13.8.-13.12.
 
 #### Tehtävä 13.8.
 

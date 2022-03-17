@@ -609,7 +609,7 @@ Expand your application to allow  a logged-in user to add new blogs:
 
 ![](../../images/5/7e.png)
 
-#### 5.4*: bloglist frontend, step4
+#### 5.4: bloglist frontend, step4
 
 Implement notifications which inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown: 
 

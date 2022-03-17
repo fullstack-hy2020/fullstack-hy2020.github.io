@@ -427,7 +427,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 The code for creating a new note has to be updated so that the note is assigned to the user who created it.
 
-Let's expand our current implementation so, that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
+Let's expand our current implementation, so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
 const User = require('../models/user') //highlight-line

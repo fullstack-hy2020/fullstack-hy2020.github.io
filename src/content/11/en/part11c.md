@@ -62,7 +62,7 @@ In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we
 
 Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>.
 
-Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your\_app\_name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location! (You can also leave 'your_app_name' blank and Heroku will create an app name for you.)
+Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your-app-name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location! (You can also leave the app blank and Heroku will create an app name for you.)
 
 Generate an API token for your Heroku profile using command <code>heroku authorizations:create</code>, and save the credentials to a local file but <i>**do not push those to GitHub**</i>!
 
@@ -76,7 +76,7 @@ The below assumes that you use the ready-made Heroku deploy action [AkhileshNS/h
 
 You need the autorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:
 
-![repo secret](../../images/11/10.png)
+![repo secret](../../images/11/10x.png)
 
 Now the workflow can access the token value as follows:
 
@@ -121,7 +121,7 @@ Look now from the [documentation](https://github.com/marketplace/actions/deploy-
 
 Ensure that Actions notices if a deployment breaks your application. You may simulate this e.g. by writing a wrong startup command to Procfile:
 
-![](../../images/11/12a.png)
+![](../../images/11/12x.png)
 
 Before moving to next exercise, fix your deployment and ensure that the application works again as intended.
 
@@ -131,17 +131,15 @@ If the deployment results in a broken application, the best thing to do is to <i
 
 ```js
 $ heroku releases
-=== cicdtest222 Releases - Current: v29
-v29  Deploy 7fff7150  mluukkai@iki.fi  2020/12/05 18:22:32 +0200
-v28  Deploy 764c37d4  mluukkai@iki.fi  2020/12/05 18:09:04 +0200
-v27  Deploy 1467d514  mluukkai@iki.fi  2020/12/05 16:28:52 +0200
-v26  Deploy ec0ea68b  mluukkai@iki.fi  2020/12/05 15:39:31 +0200
-v25  Deploy a8a88aff  mluukkai@iki.fi  2020/12/05 15:34:55 +0200
-v24  Deploy d0f3ae58  mluukkai@iki.fi  2020/12/05 15:31:45 +0200
-v23  Deploy a348f651  mluukkai@iki.fi  2020/12/05 15:28:19 +0200
-v22  Deploy 254d24d4  mluukkai@iki.fi  2020/12/05 14:27:33 +0200
-v21  Deploy 950f5403  mluukkai@iki.fi  2020/12/05 14:24:44 +0200
-v20  Deploy 9d51da28  mluukkai@iki.fi  2020/12/05 14:22:20 +0200
+=== calm-wildwood-40210 Releases - Current: v8
+v8  Deploy de15fc2b  mluukkai@iki.fi  2022/03/02 19:14:22 +0200 (~ 8m ago)
+v7  Deploy 8748a04e  mluukkai@iki.fi  2022/03/02 19:06:28 +0200 (~ 16m ago)
+v6  Deploy a617a93d  mluukkai@iki.fi  2022/03/02 19:00:02 +0200 (~ 23m ago)
+v5  Deploy 70f9b219  mluukkai@iki.fi  2022/03/02 18:48:47 +0200 (~ 34m ago)
+v4  Deploy 0b2db00d  mluukkai@iki.fi  2022/03/02 17:53:24 +0200 (~ 1h ago)
+v3  Deploy f1cd250b  mluukkai@iki.fi  2022/03/02 17:44:32 +0200 (~ 1h ago)
+v2  Enable Logplex   mluukkai@iki.fi  2022/03/02 17:00:26 +0200 (~ 2h ago)
+v1  Initial release  mluukkai@iki.fi  2022/03/02 17:00:25 +0200 (~ 2h ago)
 ```
 
 One can quickly do a [rollback](https://blog.heroku.com/releases-and-rollbacks#rollbacks) to a release with just a single command from commandline. 
@@ -150,7 +148,7 @@ What is even better, is that the action [deploy-to-heroku](https://github.com/ma
 
 So read again the [documentation](https://github.com/marketplace/actions/deploy-to-heroku) and modify the workflow to prevent a broken deployment altogether. You can again simulate a broken deployment with breaking the Procfile:
 
-![](../../images/11/13.png)
+![](../../images/11/13x.png)
 
 Ensure that the application stays still operational despite a broken deployment. 
 

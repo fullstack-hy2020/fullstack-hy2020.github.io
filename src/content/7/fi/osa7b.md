@@ -21,7 +21,7 @@ Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponentti
 Muutaman edellisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
 käytimme react-redux-kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen api onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva [connect](/osa6/connect)-api.
 
-Myös edellisessä [luvussa](/osa7/react_router/) käsitellyn [React Routerin](https://reacttraining.com/react-router/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä _navigation_-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
+Myös edellisessä [luvussa](/osa7/react_router/) käsitellyn [React Routerin](https://v5.reactrouter.com/web/guides) api perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä _navigation_-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
 
 Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot)  mainittiin, hookit eivät ole mitä tahansa funktiota, niitä on käytettävä tiettyjä [sääntöjä](https://reactjs.org/docs/hooks-rules.html) noudattaen. Seuraavassa vielä hookien käytön säännöt suoraan Reactin dokumentaatiosta kopioituna:
 

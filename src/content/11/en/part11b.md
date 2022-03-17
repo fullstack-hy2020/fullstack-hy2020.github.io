@@ -41,7 +41,6 @@ GitHub Actions have a great advantage over self-hosted solutions: the repository
 
 In most exercises of this part, we are building a CI/CD pipeline for a small project found in [this example project repository](https://github.com/smartlyio/fullstackopen-cicd).
 
-Note that the code <i>might not work</i> with node version 15. If you happen to have that version, and the project does not even start, please downgrade to 14 or you are on your own. 
 #### 11.2 The example project
 
 The first thing you'll want to do is to fork the example repository under your name. What it essentially does is it creates a copy of the repository under your GitHub user profile for your use. 
@@ -120,20 +119,20 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Say hello
         run: |
           echo "Hello World!"
 ```
 
-In this example, the trigger is a push to the main branch, which in our project is called <i>master</i>. (Your main branch could be called <i>main</i> or <i>master</i>).  There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
+In this example, the trigger is a push to the main branch, which in our project is called <i>master</i>. (Your main branch could be called <i>main</i> or <i>master</i>).  There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 20.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell.
 
 So you may ask, when does GitHub trigger a workflow to be started? There are plenty of [options](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) to choose from, but generally speaking, you can configure a workflow to start once:
 
 - An <i>event on GitHub</i> occurs such as when someone pushes a commit to a repository or when an issue or pull request is created
 - A <i>scheduled event</i>, that is specified using the [cron]( https://en.wikipedia.org/wiki/Cron)-syntax, happens
-- An <i>external event</i> occurs, for example, a command is performed in an external application such as [Slack](https://slack.com/) messaging app
+- An <i>external event</i> occurs, for example, a command is performed in an external application such as [Slack](https://slack.com/) or [Discord](https://discord.com/) messaging app
 
 To learn more about which events can be used to trigger workflows, please refer to GitHub Action's [documentation](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows).
 
@@ -197,7 +196,7 @@ Before we can run a command to lint the code, we have to perform a couple of act
 
 #### Setting up the environment
 
-Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-18.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production. 
+Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-20.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production. 
 
 It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI.
 
@@ -215,28 +214,28 @@ on:
 
 jobs:
   simple_deployment_pipeline: // highlight-line
-    runs-on: ubuntu-18.04 // highlight-line
+    runs-on: ubuntu-20.04 // highlight-line
     steps: // highlight-line
-      - uses: actions/checkout@v2  // highlight-line
+      - uses: actions/checkout@v3  // highlight-line
 ```
 
 The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories. 
 
-Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v2</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
+Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v3</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.
 
-Secondly, as the application is written in JavaSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>12.x</code> is selected because it is the version the application is using in the production environment.
+Secondly, as the application is written in JavaSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.
 
 ```js
 # name and trigger not shown anymore...
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1 // highlight-line
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2 // highlight-line
         with: // highlight-line
-          node-version: '12.x' // highlight-line
+          node-version: '16' // highlight-line
 ```
 
 As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to the action. Here the parameter specifies the version of Node.js we want to use.
@@ -247,12 +246,12 @@ Lastly, the dependencies of the application must be installed. Just like on your
 ```js
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16'
       - name: npm install  // highlight-line
         run: npm install  // highlight-line
 ```
@@ -266,12 +265,12 @@ After the environment has been set up we can run all the scripts from <code>pack
 ```js
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16'
       - name: npm install 
         run: npm install  
       - name: lint  // highlight-line
@@ -320,11 +319,11 @@ Once you have fixed all the issues and the Pokedex is bug-free, the workflow run
 
 #### 11.9 Simple end to end -tests
 
-The current set of tests use [jest](https://jestjs.io/) to ensure that the React components work as intended. This is exactly the same thing that is done in section [Testing React apps](/en/part5/testing_react_apps) of part 5. 
+The current set of tests use [Jest](https://jestjs.io/) to ensure that the React components work as intended. This is exactly the same thing that is done in section [Testing React apps](/en/part5/testing_react_apps) of part 5. 
 
 Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end -tests with the [Cypress](https://www.cypress.io/) library similarly what we do in section [End to end testing](/en/part5/end_to_end_testing) of part 5. 
 
-So, setup cypress (you'll find [here](/en/part5/end_to_end_testing/) all info you need) and use this test at first:
+So, setup Cypress (you'll find [here](/en/part5/end_to_end_testing/) all info you need) and use this test at first:
 
 ```js
 describe('Pokedex', function() {
@@ -338,11 +337,11 @@ describe('Pokedex', function() {
 
 Define a npm script <code>test:e2e</code> for running the e2e tests from the command line.
 
-**Note** do not include the word <i>spec</i> in the cypress test file name, that would cause also jest to run it, and it might cause problems. 
+**Note** do not include the word <i>spec</i> in the Cypress test file name, that would cause also Jest to run it, and it might cause problems. 
 
 **Another thing to note** is that despite the page renders the Pokemon names by starting with a capital letter, the names are actually written with lower case letters in the source, so it is <code>ivysaur</code> instead of <code>Ivysaur</code>!
 
-Ensure that the test passes locally. Remember that the cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with cypress.
+Ensure that the test passes locally. Remember that the Cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with Cypress.
 
 Once the end to end test works in your machine, include it in the GitHub Action workflow. By far the easiest way to do that is to use the ready-made action [cypress-io/github-action](https://github.com/cypress-io/github-action). The step that suits us is the following:
 
@@ -355,11 +354,13 @@ Once the end to end test works in your machine, include it in the GitHub Action 
     wait-on: http://localhost:5000
 ```
 
-Three options are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
+Three options are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run Cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>.
 
 Once you are sure that the pipeline works, write another test that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>.
 
-**Note** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
+**Note** also the Pokemon ablilities are written with lower case letters, the caplitalization is done in CSS, so <i>do not</i> search eg. for <i>Chlorophyll</i> but <i>chlorophyll</i>.
+
+**Note2** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...
 
 The end result should be something like this
 
