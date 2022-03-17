@@ -113,7 +113,7 @@ ReactDOM.render(<App />, document.getElementById('root'))
 
 
 <!-- Luckily React has the [React router](https://github.com/ReactTraining/react-router) library, which provides an excellent solution for managing navigation in a React application. -->
-幸运的是 React 有[React-router](https://github.com/reacttraining/React-router)库，它为管理 React-application 中的导航提供了一个很好的解决方案。
+幸运的是 React 有[React router](https://github.com/ReactTraining/react-router)库，它为管理 React-application 中的导航提供了一个很好的解决方案。
 
 <!-- Let's change the above application to use React router. First, we install React router with the command -->
 让我们将上面的应用改为使用 React 路由
