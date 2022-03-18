@@ -427,7 +427,8 @@ const errorHandler = (error, request, response, next) => {
 另一种解决方案是为每一个token在后台数据库中保存信息，并在每个API请求时都去后台查询该token 是否有对应的访问权限。通过这种方式，访问权限可以随意收回。这种方式通常被叫做<i>服务器端的session</i>。
 
 <!-- The negative aspect of server side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request from database. A database access is considerably slower compared to checking the validity from the token itself. That is why it is a quite common to save the session corresponding to a token to a <i>key-value-database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios. -->
-服务器端的session 的弊端是增加了后台的复杂先，并且会由于每个API都要向后台数据库的认证token的合法性而产生性能影响。与只是单纯验证token有效性本身，数据库的访问要慢许多。这就是为什么保存token 对应的session通常是保存到例如 [Redis](https://redis.io/) 的 <i>键值对数据库</i>中， 虽然这种数据库在功能让与例如MongoDB或者关系型数据库相比有些劣势，但是在某些应用场景下是十分高效的。
+
+服务器端的session 的弊端是增加了后台的复杂先，并且会由于每个API都要向后台数据库的认证token的合法性而产生性能影响。与只是单纯验证token有效性本身相比，数据库的访问要慢许多。这就是为什么保存token 对应的session通常是保存到例如 [Redis](https://redis.io/) 的 <i>键值对数据库</i>中， 虽然这种数据库在功能让与例如MongoDB或者关系型数据库相比有些劣势，但是在某些应用场景下是十分高效的。
 
 When server side sessions are used, the token is quite often just a rendom string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request the server fetches the relevant information about the identitity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.
 当使用服务器端的session时，token 通常是一个随机字符串，并不会像jwt-token那样包含任何用户信息。每个API请求向服务器从数据库中获取该用户相关的认证信息。更常规的做法不是用认证头，而是用 <i>cookies</i>  作为客户端与服务端之间传输token 的机制。

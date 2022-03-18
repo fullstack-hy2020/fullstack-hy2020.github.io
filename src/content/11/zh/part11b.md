@@ -65,7 +65,7 @@ GitHub Actions 比自我托管的解决方案有很大的优势: 代码库托管
 
 
 <!-- Note that the code <i>might not work</i> with node version 15. If you happen to have that version, and the project does not even start, please downgrade to 14 or you are on your own.  -->
-请注意，该代码可能不适用于版本为15的node。如果你碰巧有那个版本，而且项目还没开始，请自行降级到14。
+<!-- 请注意，该代码可能不适用于版本为15的node。如果你碰巧有那个版本，而且项目还没开始，请自行降级到14。 -->
 
 #### 11.2 The example project
 
@@ -195,16 +195,16 @@ on:
 
 jobs:
   hello_world_job:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
       - name: Say hello
         run: |
           echo "Hello World!"
 ```
 
-<!-- In this example, the trigger is a push to the main branch, which in our project is called <i>master</i>. (Your main branch could be called <i>main</i> or <i>master</i>).  There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 18.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell. -->
+<!-- In this example, the trigger is a push to the main branch, which in our project is called <i>master</i>. (Your main branch could be called <i>main</i> or <i>master</i>).  There is one job named <i>hello\_world\_job</i>, it will be run in a virtual environment with Ubuntu 20.04. The job has just one step named "Say hello", which will run the <code>echo "Hello World!"</code> command in the shell. -->
 
-在这个示例中，触发器是main分支的push，本项目中叫做 <i>master</i>（你的主分支可能叫 <i>main</i> 或者<i>master</i>）。会有一个叫 <i>hello\_world\_job</i> 的job ，它将在 Ubuntu 18.04的虚拟环境中运行。这个job只有一个名为“ Say Hello”的步骤，它将在shell中运行 <code>echo "Hello World!"</code> 命令。
+在这个示例中，触发器是main分支的push，本项目中叫做 <i>master</i>（你的主分支可能叫 <i>main</i> 或者<i>master</i>）。会有一个叫 <i>hello\_world\_job</i> 的job ，它将在 Ubuntu 20.04的虚拟环境中运行。这个job只有一个名为“ Say Hello”的步骤，它将在shell中运行 <code>echo "Hello World!"</code> 命令。
 
 <!-- So you may ask, when does GitHub trigger a workflow to be started? There are plenty of [options](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) to choose from, but generally speaking, you can configure a workflow to start once: -->
 所以你可能会问，GitHub 什么时候触发工作流启动？有很多选项可供[选择](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows) ，但是一般来说，你可以配置一个工作流来启动一次:
@@ -212,11 +212,11 @@ jobs:
 
 <!-- - An <i>event on GitHub</i> occurs such as when someone pushes a commit to a repository or when an issue or pull request is created -->
 <!-- - A <i>scheduled event</i>, that is specified using the [cron]( https://en.wikipedia.org/wiki/Cron)-syntax, happens -->
-<!-- - An <i>external event</i> occurs, for example, a command is performed in an external application such as [Slack](https://slack.com/) messaging app -->
+<!-- - An <i>external event</i> occurs, for example, a command is performed in an external application such as [Slack](https://slack.com/) or [Discord](https://discord.com/) messaging app -->
 
 - GitHub 上会发生一些<i>事件</i>，比如有人向代码库push了一个提交，或者创建了一个issue或者PR
 - 使用 [cron]( https://en.wikipedia.org/wiki/Cron) 语法指定的计划事件发生
-- 发生<i>外部事件</i>，例如，在外部应用程序(如 Slack 消息应用程序)中执行命令
+- 发生<i>外部事件</i>，例如，在外部应用程序([Slack](https://slack.com/) 或者 [Discord](https://discord.com/)消息应用)中执行命令
 
 
 
@@ -300,8 +300,8 @@ jobs:
 #### Setting up the environment
 搭建环境
 
-<!-- Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-18.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production.  -->
-设置环境是配置工作流时的一项重要任务。我们将使用一个 <code>ubuntu-18.04</code>虚拟环境，因为这是我们将在生产环境中运行的 Ubuntu 版本。
+<!-- Setting up the environment is an important task while configuring a pipeline. We're going to use an <code>ubuntu-20.04</code> virtual environment because this is the version of Ubuntu we're going to be running in production.  -->
+设置环境是配置工作流时的一项重要任务。我们将使用一个 <code>ubuntu-20.04</code>虚拟环境，因为这是我们将在生产环境中运行的 Ubuntu 版本。
 
 <!-- It is important to replicate the same environment in CI as in production as closely as possible, to avoid situations where the same code works differently in CI and production, which would effectively defeat the purpose of using CI. -->
 重要的是在 CI 中尽可能复制与生产相同的环境，以避免出现同一代码在 CI 和生产中工作方式不同的情况，这将极大破坏使用 CI 的目的。
@@ -322,20 +322,20 @@ on:
 
 jobs:
   simple_deployment_pipeline: // highlight-line
-    runs-on: ubuntu-18.04 // highlight-line
+    runs-on: ubuntu-20.04 // highlight-line
     steps: // highlight-line
-      - uses: actions/checkout@v2  // highlight-line
+      - uses: actions/checkout@v3  // highlight-line
 ```
 
 <!-- The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories.  -->
 [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) 关键字告诉工作流程运行特定的<i>操作</i>。操作是一段可重用的代码，就像函数一样。可以在代码库中的单独文件中定义操作，也可以使用公共代码库中可用的操作。
 
-<!-- Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v2</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git. -->
-在这里，我们使用一个公共动作[actions/checkout](https://github.com/actions/checkout) ，并指定一个版本(<code>@v2</code>) ，以避免动作更新时可能发生的中断更改。<code>checkout</code> 操作实现了它的名字所暗示的功能: 它从 git 签出项目源代码。
+<!-- Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v3</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git. -->
+在这里，我们使用一个公共动作[actions/checkout](https://github.com/actions/checkout) ，并指定一个版本(<code>@v3</code>) ，以避免动作更新时可能发生的中断更改。<code>checkout</code> 操作实现了它的名字所暗示的功能: 它从 git 签出项目源代码。
 
 
-<!-- Secondly, as the application is written in JavaSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>12.x</code> is selected because it is the version the application is using in the production environment. -->
-第二步，由于应用程序是用 JavaSript 编写的，Node.js 必须能够使用 <code>package.json</code> 中指定的命令。要设置 Node.js，可以使用[actions/setup-node](https://github.com/actions/setup-node) action。选择<code>12.x 版本</code> 是因为它是应用程序在生产环境中使用的版本。
+<!-- Secondly, as the application is written in JavaSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment. -->
+第二步，由于应用程序是用 JavaSript 编写的，Node.js 必须能够使用 <code>package.json</code> 中指定的命令。要设置 Node.js，可以使用[actions/setup-node](https://github.com/actions/setup-node) action。选择<code>16 版本</code> 是因为它是应用程序在生产环境中使用的版本。
 
 
 ```js
@@ -343,12 +343,12 @@ jobs:
 
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1 // highlight-line
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2 // highlight-line
         with: // highlight-line
-          node-version: '12.x' // highlight-line
+          node-version: '16' // highlight-line
 ```
 
 <!-- As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to the action. Here the parameter specifies the version of Node.js we want to use. -->
@@ -362,12 +362,12 @@ jobs:
 ```js
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16'
       - name: npm install  // highlight-line
         run: npm install  // highlight-line
 ```
@@ -385,12 +385,12 @@ jobs:
 ```js
 jobs:
   simple_deployment_pipeline:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-20.04
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v1
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v2
         with:
-          node-version: '12.x'
+          node-version: '16'
       - name: npm install 
         run: npm install  
       - name: lint  // highlight-line
@@ -453,8 +453,8 @@ push您的代码并导航到“Actions”标签，然后点击左侧新创建的
 #### 11.9 Simple end to end -tests
 简单的端到端测试
 
-<!-- The current set of tests use [jest](https://jestjs.io/) to ensure that the React components work as intended. This is exactly the same thing that is done in section [Testing React apps](/en/part5/testing_react_apps) of part 5.  -->
-当前的测试集使用 [jest](https://jestjs.io/) 来确保 React 组件按预期的方式工作。这和第5章[测试 React 应用](/zh/part5/testing_react_apps)一模一样。
+<!-- The current set of tests use [est](https://jestjs.io/) to ensure that the React components work as intended. This is exactly the same thing that is done in section [Testing React apps](/en/part5/testing_react_apps) of part 5.  -->
+当前的测试集使用 [Jest](https://jestjs.io/) 来确保 React 组件按预期的方式工作。这和第5章[测试 React 应用](/zh/part5/testing_react_apps)一模一样。
 
 <!-- Testing components in isolation is quite useful but that still does not ensure that the system as a whole works as we wish. To have more confidence about this, let us write a couple of really simple end to end -tests with the [Cypress](https://www.cypress.io/) library similarly what we do in section [End to end testing](/en/part5/end_to_end_testing) of part 5.  -->
 隔离测试组件是非常有用的，但是这仍然不能确保系统作为一个整体按照我们希望的那样工作。为了对此有更多的信心，让我们用 [Cypress](https://www.cypress.io/) 库简单地编写几个非常简单的端到端测试，就像我们在第5部分的 [End-To-End 端到端测试](/zh/part5/end_to_end_testing)一样。
@@ -462,7 +462,7 @@ push您的代码并导航到“Actions”标签，然后点击左侧新创建的
 
 
 <!-- So, setup cypress (you'll find [here](/en/part5/end_to_end_testing/) all info you need) and use this test at first: -->
-因此，设置 cypress (你可以在[这里](/zh/part5/end_to_end_testing/)找到所有你需要的信息) ，并首先使用这个测试:
+因此，设置 Cypress (你可以在[这里](/zh/part5/end_to_end_testing/)找到所有你需要的信息) ，并首先使用这个测试:
 
 ```js
 describe('Pokedex', function() {
@@ -478,14 +478,14 @@ describe('Pokedex', function() {
 定义一个 npm 脚本 <code>test:e2e</code> 用于从命令行运行 e2e 测试。
 
 <!-- **Note** do not include the word <i>spec</i> in the cypress test file name, that would cause also jest to run it, and it might cause problems.  -->
-**请注意**，在cypress测试文件名中不要包含 <i>spec</i> 这个词，否则也会导致jest运行它，并且可能会导致问题。
+**请注意**，在Cypress测试文件名中不要包含 <i>spec</i> 这个词，否则也会导致Jest运行它，并且可能会导致问题。
 
 
 <!-- **Another thing to note** is that despite the page renders the Pokemon names by starting with a capital letter, the names are actually written with lower case letters in the source, so it is <code>ivysaur</code> instead of <code>Ivysaur</code>! -->
 另外需要注意的是，尽管这个页面以大写字母开头呈现了口袋妖怪的名字，但是这些名字实际上是以小写字母书写的，所以它是<code>ivysaur</code>而不是<code>Ivysaur</code>！
 
 <!-- Ensure that the test passes locally. Remember that the cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with cypress. -->
-确保测试在本地通过。请记住，cypress 测试 _假定在运行测试时应用程序已经启动并正在运行_ ！如果你已经忘记了细节(这也发生在我身上!)，请参阅 [第5章](/zh/part5/end_to_end_testing) 如何使用 cypress。
+确保测试在本地通过。请记住，Cypress 测试 _假定在运行测试时应用程序已经启动并正在运行_ ！如果你已经忘记了细节(这也发生在我身上!)，请参阅 [第5章](/zh/part5/end_to_end_testing) 如何使用 Cypress。
 
 <!-- Once the end to end test works in your machine, include it in the GitHub Action workflow. By far the easiest way to do that is to use the ready-made action [cypress-io/github-action](https://github.com/cypress-io/github-action). The step that suits us is the following: -->
 一旦端到端测试在你的机器上运行，将其包含在 GitHub Action 工作流中。到目前为止，最简单的方法是使用现成的[cypress-io/github-action](https://github.com/cypress-io/github-action)。适合我们的步骤如下:
@@ -501,14 +501,17 @@ describe('Pokedex', function() {
 ```
 
 <!-- Three options are used. [command](https://github.com/cypress-io/github-action#custom-test-command) specifies how to run cypress tests. [start](https://github.com/cypress-io/github-action#start-server) gives npm script that starts the server and [wait-on](https://github.com/cypress-io/github-action#wait-on) says that before the tests are run, the server should have started in url <http://localhost:5000>. -->
-我们使用了三种选项。[command](https://github.com/cypress-io/github-action#custom-test-command)指定如何运行 cypress 测试。[start](https://github.com/cypress-io/github-action#start-server)  提供的 npm 脚本启动服务器，[wait-on](https://github.com/cypress-io/github-action#wait-on)说在测试运行之前，服务器应该在 url <http://localhost:5000> 中启动。
+我们使用了三种选项。[command](https://github.com/cypress-io/github-action#custom-test-command)指定如何运行 Cypress 测试。[start](https://github.com/cypress-io/github-action#start-server)  提供的 npm 脚本启动服务器，[wait-on](https://github.com/cypress-io/github-action#wait-on)说在测试运行之前，服务器应该在 url <http://localhost:5000> 中启动。
 
 
 <!-- Once you are sure that the pipeline works, write another test that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>. -->
 一旦确定工作流工作正常，编写另一个测试，确保可以从主页导航到特定的 Pokemon 页面，例如 <i>ivysaur</i>。这个测试不需要很复杂，只需要检查当你浏览一个链接时，页面有一些正确的内容，比如 <i>ivysaur</i> 中的 <i>chlorophyll</i> 字符串。
 
+**Note** also the Pokemon ablilities are written with lower case letters, the caplitalization is done in CSS, so <i>do not</i> search eg. for <i>Chlorophyll</i> but <i>chlorophyll</i>.
+还请注意，宠物小精灵的能力是用小写字母写的，大写字母是在CSS中完成的，所以注意<i>不要</i>搜索<i>Chlorophyll</i> ，而应该搜索<i>chlorophyll</i>。
+
 <!-- **Note** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly... -->
-请注意，您不应该尝试 <i>bulbasaur</i>，由于某些原因，该特定的口袋妖怪网页不能正常工作..
+注意2，您不应该尝试 <i>bulbasaur</i>，由于某些原因，该特定的口袋妖怪网页不能正常工作..
 
 <!-- The end result should be something like this -->
 最终的结果应该是这样的

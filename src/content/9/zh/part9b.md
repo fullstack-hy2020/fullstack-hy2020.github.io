@@ -36,8 +36,8 @@ lang: zh
 <!-- Let's start writing our first TypeScript-app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node). -->
 让我们开始编写我们的第一个TypeScript应用，为了保持简单，让我们通过使用[ts-node](https://github.com/typestrong/ts-node)这个 npm 包开始。
 
-<!-- It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step. -->
-它能立即编译并执行指定的 TypeScript 文件，因此不需要单独的编译步骤。
+<!-- Let's start writing our first TypeScript app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node). It compiles and executes the specified TypeScript file immediately, so that there is no need for a separate compilation step. -->
+让我们开始编写我们的第一个TypeScript应用程序。为了保持简单，让我们从使用npm包[ts-node]（https://github.com/TypeStrong/ts-node）开始。它可以立即编译和执行指定的TypeScript文件，因此不需要单独的编译步骤。
 
 
 
@@ -59,13 +59,6 @@ npm install -g ts-node typescript
 
 ```
 npm install --save-dev ts-node typescript
-```
-
-In some cases, you should install this package as well
-在一些情况下，你应该像如下安装依赖包
-
-```
-npm install -D tslib @types/node
 ```
 
 

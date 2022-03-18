@@ -120,8 +120,8 @@ await queryInterface.addColumn('notes', 'user_id', { // highlight-line
 npm install umzug
 ```
 
-<!-- Let's change the file <i>utils/db.js</i> that handles the connection to the database as follows: -->
-让我们更改文件 <i>utils/db.js</i> 来处理到数据库的连接，如下所示:
+<!-- Let's change the file <i>util/db.js</i> that handles the connection to the database as follows: -->
+让我们更改文件 <i>util/db.js</i> 来处理到数据库的连接，如下所示:
 
 ```js
 npm install umzug
@@ -437,7 +437,7 @@ const tokenExtractor = (req, res, next) => {
     } catch{
       return res.status(401).json({ error: 'token invalid' })
     }
-  } } else {
+  } else {
     return res.status(401).json({ error: 'token missing' })
   }
   next()
@@ -534,7 +534,7 @@ rollbackMigration()
 
 ```json
 {
-    "scripts": {
+  "scripts": {
     "dev": "nodemon index.js",
     "migration:down": "node util/rollback.js" // highlight-line
   },
@@ -722,7 +722,7 @@ Team.belongsToMany(User, { through: Membership })
 // highlight-end
 
 module.exports = {
-  Note, User, Team, Membership
+  Note, User, Team, Membership // highlight-line
 }
 
 ```
@@ -791,7 +791,7 @@ router.get('/', async (req, res) => {
       },
       // hihhlight-start
       {
-        model: team,
+        model: Team,
         attributes: ['name', 'id'],
       }
       // hihhlight-end
