@@ -645,6 +645,10 @@ http {
 
 
  Note that <i>depends\_on</i> does not guarantee that the service in the depended container is ready for action, it just ensures that the container has been started (and the corresponding entry is added to DNS). If a service needs to wait another service to become ready before the startup, [other solutions](https://docs.docker.com/compose/startup-order/) should be used.
+
+ 请注意，<i>depends\_on</i>并不保证被依赖的容器中的服务已经准备就绪，它只是确保该容器已经启动（并且相应的条目被添加到 DNS 中）。如果一个服务需要等待另一个服务在启动前做好准备，应该使用[其他解决方案](https://docs.docker.com/compose/startup-order/)。
+
+ 
  注意 <i>depends\_on</i> 参数并不保证依赖服务服务是准备就绪的，它只保证容器是启动的（并且相关入口加入到DNS中）。如果服务启动需要等待另一个服务就绪，需要[其他解决方案](https://docs.docker.com/compose/startup-order/) 
 
 </div>
