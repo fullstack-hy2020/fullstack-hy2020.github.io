@@ -107,9 +107,9 @@ lang: zh
 <!-- Ensure now that you have [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install) installed and login to Heroku using the CLI with <code>heroku login</code>. -->
 确保现在已经安装了  [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli#download-and-install)，并使用 <code>heroku login</code> 的 CLI 登录到 Heroku。
 
-<!-- Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your\_app\_name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location! (You can also leave 'your_app_name' blank and Heroku will create an app name for you.)
+<!-- Create a new app in Heroku using the  CLI: <code>heroku create --region eu {your-app-name}</code>, pick a [region](https://devcenter.heroku.com/articles/regions) close to your own location! (You can also leave 'your_app_name' blank and Heroku will create an app name for you.)
 -->
-使用 CLI: <code>heroku create --region eu {your\_app\_name}</code> 在 Heroku 创建一个新的应用程序，选择一个靠近你定位的地区！（你也可以填写'your_app_name' ，Heroku会帮你创建应用。
+使用 CLI: <code>heroku create --region eu {your-app-name}</code> 在 Heroku 创建一个新的应用程序，选择一个靠近你定位的地区！（你也可以'app'留空 ，Heroku会帮你创建应用。
 
 <!-- Generate an API token for your Heroku profile using command <code>heroku authorizations:create</code>, and save the credentials to a local file but <i>**do not push those to GitHub**</i>! -->
 使用 <code>heroku authorizations:create</code> 命令为您的 Heroku 配置文件生成一个 API 令牌，并将凭证保存到本地文件中，但是<i>不要将这些文件推送到 GitHub</i>！
@@ -130,7 +130,7 @@ lang: zh
 您需要刚刚为部署创建的自动化标记。将它的值传递给 GitHub Actions 的正确方法是使用代码库 secrets:
 
 
-![repo secret](../../images/11/10.png)
+![repo secret](../../images/11/10x.png)
 
 <!-- Now the workflow can access the token value as follows: -->
 现在工作流可以如下方式访问令牌值:
@@ -190,7 +190,7 @@ app.get('/version', (req, res) => {
 <!-- Ensure that Actions notices if a deployment breaks your application. You may simulate this e.g. by writing a wrong startup command to Procfile: -->
 如果部署中断了应用程序，请确保 Actions 会发现。你可以模拟这种情况，比如在 Procfile 中写错启动命令:
 
-![](../../images/11/12a.png)
+![](../../images/11/12x.png)
 
 <!-- Before moving to next exercise, fix your deployment and ensure that the application works again as intended. -->
 在进入下一个练习之前，修复您的部署，并确保应用程序再次按预期的方式工作。
@@ -205,17 +205,15 @@ app.get('/version', (req, res) => {
 
 ```js
 $ heroku releases
-=== cicdtest222 Releases - Current: v29
-v29  Deploy 7fff7150  mluukkai@iki.fi  2020/12/05 18:22:32 +0200
-v28  Deploy 764c37d4  mluukkai@iki.fi  2020/12/05 18:09:04 +0200
-v27  Deploy 1467d514  mluukkai@iki.fi  2020/12/05 16:28:52 +0200
-v26  Deploy ec0ea68b  mluukkai@iki.fi  2020/12/05 15:39:31 +0200
-v25  Deploy a8a88aff  mluukkai@iki.fi  2020/12/05 15:34:55 +0200
-v24  Deploy d0f3ae58  mluukkai@iki.fi  2020/12/05 15:31:45 +0200
-v23  Deploy a348f651  mluukkai@iki.fi  2020/12/05 15:28:19 +0200
-v22  Deploy 254d24d4  mluukkai@iki.fi  2020/12/05 14:27:33 +0200
-v21  Deploy 950f5403  mluukkai@iki.fi  2020/12/05 14:24:44 +0200
-v20  Deploy 9d51da28  mluukkai@iki.fi  2020/12/05 14:22:20 +0200
+=== calm-wildwood-40210 Releases - Current: v8
+v8  Deploy de15fc2b  mluukkai@iki.fi  2022/03/02 19:14:22 +0200 (~ 8m ago)
+v7  Deploy 8748a04e  mluukkai@iki.fi  2022/03/02 19:06:28 +0200 (~ 16m ago)
+v6  Deploy a617a93d  mluukkai@iki.fi  2022/03/02 19:00:02 +0200 (~ 23m ago)
+v5  Deploy 70f9b219  mluukkai@iki.fi  2022/03/02 18:48:47 +0200 (~ 34m ago)
+v4  Deploy 0b2db00d  mluukkai@iki.fi  2022/03/02 17:53:24 +0200 (~ 1h ago)
+v3  Deploy f1cd250b  mluukkai@iki.fi  2022/03/02 17:44:32 +0200 (~ 1h ago)
+v2  Enable Logplex   mluukkai@iki.fi  2022/03/02 17:00:26 +0200 (~ 2h ago)
+v1  Initial release  mluukkai@iki.fi  2022/03/02 17:00:25 +0200 (~ 2h ago)
 ```
 
 <!-- One can quickly do a [rollback](https://blog.heroku.com/releases-and-rollbacks#rollbacks) to a release with just a single command from commandline.  -->
@@ -229,7 +227,7 @@ v20  Deploy 9d51da28  mluukkai@iki.fi  2020/12/05 14:22:20 +0200
 因此，请再次阅读[文档](https://github.com/marketplace/actions/deploy-to-heroku) 并修改工作流以防止部署中断。您可以再次通过破坏 Procfile 来模拟破坏的部署:
 
 
-![](../../images/11/13.png)
+![](../../images/11/13x.png)
 
 <!-- Ensure that the application stays still operational despite a broken deployment.  -->
 确保应用程序在部署中断的情况下仍然可以运行。

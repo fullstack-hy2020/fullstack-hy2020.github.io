@@ -36,36 +36,28 @@ lang: zh
 <!-- By default, GitHub Actions sends an email on a build failure. This can be changed to send notifications regardless of build status and can also be configured to alert you on the GitHub web interface. Great. But what if we want more. What if for whatever reason this doesn't work for our use case. -->
 默认情况下，GitHub Actions 会在构建失败时发送电子邮件。不管构建状态如何，这都可以改为发送通知，也可以配置为在 GitHub web 界面上提醒你。太好了。但如果我们想要更多。如果不管出于什么原因，这对我们的用例不起作用怎么办。
 
-<!-- There are integrations for example to various messaging applications such as [Slack](https://slack.com/intl/en-fi/), to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub. -->
-例如，可以对各种消息传递应用程序(如  [Slack](https://slack.com/intl/en-fi/))进行集成，以发送通知。这些集成仍然基于 GitHub 的逻辑来决定发送什么和什么时候发送。
+<!-- There are integrations for example to various messaging applications such as [Slack](https://slack.com/intl/en-fi/) or [Discord](https://discord.com/), to send notifications. These integrations still decide what to send and when to send it based on logic from GitHub. -->
+例如，可以对各种消息传递应用程序(如  [Slack](https://slack.com/intl/en-fi/) 或者[Discord](https://discord.com/))进行集成，以发送通知。这些集成仍然基于 GitHub 的逻辑来决定发送什么和什么时候发送。
 
 </div>
 
 <div class="tasks">
 
-### Exercise 11.19
+### Exercise 11.18
 
-<!-- We have set up a Slack <i>fullstackopengroup.slack.com</i> for testing a messaging integration. Join the channel by clicking [here](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-jy0669dd-41WHtYNO6WwBujp4djgJTA). Unfortunately, you need an email address for registration. If you are not willing to use your own, you can very well use a temporal email for the purposes. There are lots of options such as <https://tempmail.ninja/>. -->
-我们已经建立了一个 Slack 频道<i>fullstackopengroup.slack.com</i>，用于测试信息整合。点击[这里](https://join.slack.com/t/fullstackopengroup/shared_invite/zt-kjic53k3-KvDSsrV26swkF10WO6bZ0A)加入这个频道。不幸的是，你需要一个电子邮件地址来注册。如果你不愿意使用你自己的，你可以使用一个临时电子邮件。有很多选择，比如<https://tempmail.ninja/>。
+We have set up a channel <i>fullstack\_webhook</i> to the course Discord group [https://study.cs.helsinki.fi/discord/join/fullstack](https://study.cs.helsinki.fi/discord/join/fullstack) for testing a messaging integration.
 
-<!-- Note that you need the Slack webhook URL for doing this exercise. You find the webhook in the topic of the channel #general in <i>fullstackopengroup.slack.com</i>
- -->
-请注意，您需要 Slack webhook URL 来完成这个练习。你可以在<i>fullstackopengroup.slack.com</i> 的 #general频道找到网站链接。
+我们在课程Discord小组[https://study.cs.helsinki.fi/discord/join/fullstack](https://study.cs.helsinki.fi/discord/join/fullstack)设立了一个频道<i>fullstack\_webhook</i>，用于测试信息整合。
 
-![Releases](../../images/11/22.png)
+Register now to Discord if you have not already done that. You will also need a <i>Discord webhook</i> in this exercise. You find the webhook in the pinned message of the channel <i>fullstack\_webhook</i>. Please do not commit the webhook to GitHub!
 
-<!-- <i>You can also use some other Slack channel in this exercise but then you are on your own with the setup.</i> -->
-<i>你也可以在这个练习中使用其他的 Slack 通道，但是你可以自己设置。</i>
+如果你还没有注册，现在就注册到 Discord。在这个练习中，你还需要一个<i>Discord webhook</i>。你可以在<i>fullstack_webhook</i>频道的pinned信息中找到这个webhook。请不要把webhook提交到GitHub!
 
-If you want to avoid using slack, you can do the [telegram version](/en/part11/expanding_further#exercise-11-19-alternative-version-for-telegram) of this exercise.
-
-如果不想使用slack ，你可以使用 [telegram 版本](/zh/part11/expanding_further#exercise-11-19-alternative-version-for-telegram) 完成这个练习。
-
-#### 11.19 Build success/failure notification action
+#### 11.18 Build success/failure notification action
 构建成功/失败通知行动
 
-<!-- You can find dozens of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [slack](https://github.com/marketplace?type=actions&query=slack). Pick one for this exercise. My choice was [action-slack](https://github.com/marketplace/actions/action-slack) since it has quite many stars and a decent documentation. -->
-通过使用搜索词 [slack](https://github.com/marketplace?type=actions&query=slack)，你可以在 [GitHub Action Marketplace](https://github.com/marketplace?type=actions) 上找到几十个第三方操作。选一个做这个练习。我的选择是[action-slack](https://github.com/marketplace/actions/action-slack)，因为它有相当多的星和一个体面的文件。
+<!-- You can find quite a few of third party actions from [GitHub Action Marketplace](https://github.com/marketplace?type=actions) by using the search phrase [discord](https://github.com/marketplace?type=actions&query=discord). Pick one for this exercise. My choice was [discord-webhook-notify)](https://github.com/marketplace/actions/discord-webhook-notify) since it has quite many stars and a decent documentation. -->
+通过使用搜索词 [discord](https://github.com/marketplace?type=actions&query=discord)，你可以在 [GitHub Action Marketplace](https://github.com/marketplace?type=actions) 上找到几十个第三方操作。选一个做这个练习。我的选择是[discord-webhook-notify)](https://github.com/marketplace/actions/discord-webhook-notify)，因为它有相当多的星和一个体面的文件。
 
 
 <!-- Setup the action so that it gives two types of notifications: -->
@@ -76,61 +68,18 @@ If you want to avoid using slack, you can do the [telegram version](/en/part11/e
 - 如果部署了新版本，则提供成功指示
 - 生成失败时的错误指示
 
-<!-- In the case of an error, the notification should be a bit more verbose to help developers finding quickly what was the error and which is the commit that caused it. -->
-在出现错误的情况下，通知应该更详细一些，以帮助开发人员快速查找错误，以及导致错误的提交。
+<!-- In the case of an error, the notification should be a bit more verbose to help developers finding quickly which is the commit that caused it. -->
+在出现错误的情况下，通知应该更详细一些，以帮助开发人员快速找到导致错误的提交。
 
-<!-- See [here](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions) how to check the job status! -->
-看看[这里](https://docs.github.com/en/free-pro-team@latest/actions/reference/context-and-expression-syntax-for-github-actions#job-status-check-functions)如何检查作业状态！
+<!-- See [here](https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions) how to check the job status! -->
+看看[here](https://docs.github.com/en/actions/learn-github-actions/expressions#status-check-functions)如何检查作业状态！
 
 
 <!-- Your notifications may look like the following: -->
 你的提示可能看起来如下:
 
-![Releases](../../images/11/20a.png)
+![Releases](../../images/11/20x.png)
 
-### Exercise 11.19 Alternative version for Telegram
-
-<!-- The Telegram version of this exercise is provided by [Sahil Rajput](https://github.com/sahilrajput03) -->
-这个练习的Telegram 版本是由[Sahil Rajput](https://github.com/sahilrajput03) 提供的。
-
-<!-- NB: In case you end up having a lot of workflows running simultaneously (when you push a commit) in your github actions tab, you can disable all workflows except the one you are currently working on, as shown in the figure. -->
-注意：防止在你的github action tab中有许多的workflow 同时运行（当你push 一个commit 时），你可以关闭其他的workflow， 仅保留你当前正在修改的，如下图所示。
-
-
-![](https://i.imgur.com/MJ6QBZF.png)
-
-<!-- - To get started, you need to create a telegram bot and to do so you have to start by sending a message <i>/start</i> to <i>@BotFather</i> which is itself a bot to help users in creating and managing their own custom bots. Further, you need to send <i>/newbot</i> to create a new bot of your own, and follow the process. Though the process only consists of asking for name and username (must be unique, e.g., <i>my\_responsible_bot1</i>) for our bot. After creating the bot we can request the token for the bot using <i>/token</i> message. -->
-- 在开始前，你需要创建一个telegram 机器人，你可以向 <i>@BotFather</i>  发送一个信息 <i>/start</i> ，它会帮助用户创建和管理自己的自定义机器人。接下来，你需要发送 <i>/newbot</i>  来创建一个自己的机器人，并按如下步骤进行。虽然流程中我们的机器人仅包含名字和用户名（必须是唯一的，比如 <i>my\_responsible_bot1</i> ）。在创建之后我们可以使用 来向机器人请求一个token。
-
-
-<!-- - Now make a group on telegram, say "My CI-CD Notifications" using your personal telegram account on mobile app or desktop web app of telegram. After that you'll be prompted to add users, just enter your bot's username there (e.g., <i>@my\_responsible_bot1</i>) to add bot to the group. You can also use any existing telegram group too if you want but you need to be administrator of that group to be able to add a bot to it as per telegram's security policies. -->
-- 接下来在telegram 上创建一个群组，假设 使用你的个人telegram 账号在手机app 或桌面web app。这之后你会被要求添加一个用户，输入你机器人的用户名（例如 <i>@my\_responsible_bot1</i>），这样将机器人加到组中。你也可以将机器人加入到已经存在的telegram 组中，但你需要是组的管理员，这样按照telegram 的安全政策才能添加机器人。
-
-<!-- Any bot needs a <i>chat id</i> to send any sort of message to a user, group or channel. In telegram, <i>chat id</i> is a unique identifier for any user/group/channel and our bot will use it to send message to the group we just created. Since we added our bot to the group, the backend api of telegram has recorded the event for it and we can see that event's details to fetch the <i>chat id</i> of our group. -->
-每个机器人都需要一个 <i>chat id</i>  来发送用户、组或者频道信息。在telegram 中， <i>chat id</i> 是一个用户/组/频道的唯一标识，我们的机器人会用它来给我们刚创建的组发送信息。由于我们将机器人放入到了组中，telegram 后台的api 记录了这个事件，我们可以从事件的详情中获取这个组的<i>chat id</i> 
-
-To fetch the <i>chat id</i> of the group we can use either of below ways:
-获得组的 <i>chat id</i>  我们可以使用以下两种方法：
-
-<!-- - Way 1: Remove your chat bot manually from the group and add it again and we are good to go(ignore this if you added the chat bot to already existing group). We need to do this because there's some issue with adding a chat bot at the time of creating a new group, read the most rated comment of this [stackoverflow answer](https://stackoverflow.com/a/32572159/10012446). Browse https://api.telegram.org/bot<BOT_TOKEN>/getUpdates to view the event log history of our bot, and look for something <i>title: "My CI-CD Notifications"</i> you'll notice there is the <i>id</i> for the group in there too. That is our <i>chat id</i> for the group, it looks something like -123456789. Note the hyphen(-) as it is part of <i>chat id</i>, telegram uses - for groups and channels ids as to distinguish them from user accounts. If reading from the json is struggling for you, there's a easy way to get <i>chat id</i> of the group using way 2. -->
-- 方法一：从组中手动删除你的聊天机器人，然后重新添加（如果已经添加了聊天机器人就忽略这步）。我们需要这么做因为添加聊天机器人到一个新组中仍存在一些问题，可以阅读这个票数最多的评论，  [stackoverflow answer](https://stackoverflow.com/a/32572159/10012446)。浏览 https://api.telegram.org/bot<BOT_TOKEN>/getUpdates  来查看事件日志历史， 找到 <i>title: "My CI-CD Notifications"</i>，你会发现里面有一个 <i>id</i> ， 这就是我们组的  <i>chat id</i> 了，看起来像是 -123456789 。 注意 hyphen(-)符号是  <i>chat id</i> 的一部分，telegram 利用 来作为组和频道的id，来区分开用户账户。如果阅读json对你来说是一种痛苦，有一种更简便的方法，那就是方法2.
-
-<!-- - Way 2 (**easy way**): Add <i>@getidsbot</i> using <i>Add Member</i> option in group settings and you'll see the <i>chat id</i> of the group as response from this bot along with other details of the group i.e., title, username, etc. After getting <i>chat id</i> of the group you can remove the <i>@getidsbot</i> from the group. -->
-- 方法二（**简单方法**）：在组配置中使用 <i>Add Member</i> 选项，添加 <i>@getidsbot</i>  ，你会看到组的 <i>chat id</i> 会与其他组的细节信息，例如标题、用户名等响应信息。在获得组的 <i>chat id</i>  后你可以从组中删除  <i>@getidsbot</i>  。
-
-- Add two environment variables to github repo i.e., <i>TELEGRAM\_TO</i> for <i>chat id</i> of the group and <i>TELEGRAM\_TOKEN</i> for the bot's token which we fetched earlier while creating the bot with botfather. You can navigate to <i>Settings > Secrets > New Repository Secret</i> in your github repo to add these environment variables.
-
-<!-- - Create a new workflow file say <i>TelegramNotifcation.yml</i> and add a job using [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) github action and try if the messages are delivered to your telegram group. Tip: You can have a default message which includes basic log of the workflow event simply by omitting the <i>args</i> from the [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job's definition. -->
-- 创建一个新的工作流文件，比如说 <i>TelegramNotifcation.yml</i> ， 使用 github action添加一个job，并检查信息是否发送到了telegram组中。注意：你可以通过发送 [actions/telegram-message-notify](https://github.com/marketplace/actions/telegram-message-notify) job中定义的 <i>args</i>，获得默认的信息，包含工作流的基础的日志。
-
-#### 11.19 B: Deliver worflow report messsage directly to user/client's telegram account:
-直接向用户/客户端的telegram账号发送工作流报告信息
-
-<!-- Add another step to your job in existing <i>TelegramNotifcation.yml</i> workflow file to deliver message directly to yourself by using <i>chat id</i> associated with your own account. To do this add  another secret say <i>TELEGRAM\_TO\_ME</i> to your github repo settings. Probably doing this exercise, you would see an error which would break your workflow saying [chat not found](https://stackoverflow.com/a/41291666), this is a security concern made by telegram, so you would first need to send a message to bot first and instantly after that your new workflow events will succeed. This security concern ensures that any chatbot might not end up sending spams to any unauthorized user otherwise any hacker could easily spam you in a variety of way using his/her bot. -->
-在你的job中添加另一个步骤，编辑<i>TelegramNotifcation.yml</i> workflow 文件来使用 和你自己账号关联的直接向你自己发送信息。添加另一个srcret，比如说 <i>TELEGRAM\_TO\_ME</i>  到你的github 仓库配置中。可能做这个练习，你会看到一个错误信息，工作流断掉，报出 [chat not found](https://stackoverflow.com/a/41291666)， 这是telegram出于安全考虑的问题，所以你需要首先发送一个信息到机器人，这样你的工作流就可以成功了。这个安全考虑确保了任何聊天机器人不能发送垃圾信息到未授权的用户那里，否则黑客可能简单利用这个漏洞用各种方式给你发送垃圾信息。
-
-<!-- Tip: You can get the <i>chat id</i> of your personal telegram account by sending a "Hello" message to <i>@userinfobot</i> simply. You can also use [@userinfobot](https://t.me/userinfobot) link to message the bot directly from mobile or using [web version of telegram](https://web.telegram.org/) on your desktop to send the "Hello" message. -->
-提示：你可以通过发送“Hello” 信息给 来获得你自己telegram账户的 。你也可以使用 [@userinfobot](https://t.me/userinfobot)  链接用手机或电脑的 [web 版本](https://web.telegram.org/)  来直接发送”Hello“信息。
 
 
 </div>
@@ -172,17 +121,17 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 
 <div class="tasks">
 
-### Exercises 11.20-11.22
+### Exercises 11.19-11.21
 
-#### 11.20 Periodic health check
+#### 11.19 Periodic health check
 定期健康检查
 
 <!-- We are pretty confident now that our pipeline prevents bad code from being deployed. However, there are many sources of errors. If our application would e.g. depend on a database that would for some reason become unavailable, our application would most likely crash. That's why it would be a good idea to set up <i>a periodic health check</i> that would regularly do an HTTP GET request to our server. We quite often refer to this kind of request as a <i>ping</i>. -->
 我们现在非常有信心，我们的管道可以防止错误代码被部署。然而，错误的来源有很多。如果我们的应用程序依赖于一个数据库，而这个数据库由于某种原因变得不可用，那么我们的应用程序很可能会崩溃。这就是为什么建立一个<i>定期健康检查</i>是一个好主意，它可以定期向我们的服务器发出 HTTP GET 请求。我们经常将这种请求称为 <i>ping</i>。
 
 
-<!-- It is possible to [schedule](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events) GitHub actions to happen regularly.  -->
-可以将 GitHub 的Action 安排成一个[日程表](https://docs.github.com/en/free-pro-team@latest/actions/reference/events-that-trigger-workflows#scheduled-events)。
+<!-- It is possible to [schedule](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule) GitHub actions to happen regularly.  -->
+可以将 GitHub 的Action 安排成一个[日程表](https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule)。
 
 
 <!-- Use now the action [url-health-check](https://github.com/marketplace/actions/url-health-check) or any other alternative and schedule a periodic health check ping to your deployed software. Try to simulate a situation where your application breaks down and ensure that the check detects the problem. Write this periodic workflow to an own file. -->
@@ -196,7 +145,7 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 **还要注意的是**，一旦你得到这个工作，最好是降低 ping 频率(最多24小时一次)或禁用规则，因为其他方式你的健康检查可能[消耗](https://devcenter.heroku.com/articles/free-dyno-hours) 你每月的空闲时间。
 
 
-#### 11.21 Your own pipeline
+#### 11.20 Your own pipeline
 你自己的管道
 
 <!-- Build a similar CI/CD-pipeline for some of your own applications. Some of the good candidates are the phonebook app that was built in parts 2 and 3 of the course, or the blogapp built in parts 4 and 5, or the redux anecdotes built in part 6. You may also use some app of your own for this exercise. -->
@@ -219,15 +168,15 @@ To fetch the <i>chat id</i> of the group we can use either of below ways:
 显然，这个练习不是在与前面练习相同的代码库中完成的。由于您只能向提交系统返回一个代码库，因此将<i>另一个</i>代码库的链接与您在提交表单中填写的代码库链接起来。
 
 
-#### 11.22 Protect your main branch and ask for pull request
+#### 11.21 Protect your main branch and ask for pull request
 保护主分支并请求PR
 
 <!-- Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review. -->
 保护代码库的主分支，前面的练习就是在这个分支中进行的。这一次也防止了管理员在没有检查的情况下合并代码。
 
 
-<!-- Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) or [jakousa](https://github.com/jakousa) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in telegram/slack to get the review.  -->
-执行一个 pull 请求，并要求任何 GitHub 用户[mluukkai](https://github.com/mluukkai), [kaltsoon](https://github.com/kaltsoon) 或 [jakousa](https://github.com/jakousa) 检查您的代码。一旦评审完成，将你的代码合并到主分支中。
+<!-- Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai) and/or [kaltsoon](https://github.com/kaltsoon) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review, it is best to send a private message and to include the collaboration invite link to the message.    -->
+执行一个 pull 请求，并要求任何 GitHub 用户[mluukkai](https://github.com/mluukkai), 或 [kaltsoon](https://github.com/kaltsoon)检查您的代码。一旦评审完成，将你的代码合并到主分支中。注意，审查者需要是版本库中的合作者。在 Discord 中提醒我们以获得审查，最好是发送私人信息，并在信息中加入合作邀请链接。 
 
 <!-- Then you are done! -->
 完事儿！
