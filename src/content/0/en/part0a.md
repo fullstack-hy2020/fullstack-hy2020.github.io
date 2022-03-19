@@ -153,7 +153,7 @@ If you have already taken the course either as a MOOC or as a university course,
 
 You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
 
-#### Expanding on the University oh Helsinki instance of this course
+#### Expanding on the University of Helsinki instance of this course
 
 That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
 
