@@ -794,9 +794,9 @@ const App = () => {
 
 ### Redux-storen välittäminen eri komponenteille
 
-Koko sovellus on toistaiseksi kirjoitettu yhteen tiedostoon minkä ansiosta joka puolelta sovellusta on päästy käsiksi Redux storeen. Entä jos haluamme jakaa sovelluksen useisiin, omiin tiedostoihinsa sijoitettuihin komponentteihin? 
+Koko sovellus on toistaiseksi kirjoitettu yhteen tiedostoon minkä ansiosta joka puolelta sovellusta on päästy käsiksi Redux-storeen. Entä jos haluamme jakaa sovelluksen useisiin, omiin tiedostoihinsa sijoitettuihin komponentteihin? 
 
-Tapoja välittää Redux store sovelluksen komponenteille on useita. Tutustutaan ensin ehkä uusimpaan ja helpoimpaan tapaan eli [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
+Tapoja välittää Redux-store sovelluksen komponenteille on useita. Tutustutaan ensin ehkä uusimpaan ja helpoimpaan tapaan eli [react-redux](https://react-redux.js.org/)-kirjaston tarjoamaan [hooks](https://react-redux.js.org/api/hooks)-rajapintaan.
 
 Asennetaan react-redux:
 
@@ -929,7 +929,7 @@ const App = () => {
 export default App
 ```
 
-Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actionien dispatchaamisen kutsumalla Redux storen metodia dispatch:
+Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti actionien dispatchaamisen kutsumalla Redux-storen metodia dispatch:
 
 ```js
 store.dispatch({
@@ -955,7 +955,7 @@ const App = () => {
 }
 ```
 
-React Redux -kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn Redux storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia Redux storen tilaan.
+React Redux -kirjaston tarjoama <i>useDispatch</i>-hook siis tarjoaa mille tahansa React-komponentille pääsyn tiedostossa <i>index.js</i> määritellyn Redux-storen dispatch-funktioon, jonka avulla komponentti pääsee tekemään muutoksia Redux-storen tilaan.
 
 Storeen talletettuihin muistiinpanoihin komponentti pääsee käsiksi React Redux -kirjaston [useSelector](https://react-redux.js.org/api/hooks#useselector)-hookin kautta:
 
@@ -970,7 +970,7 @@ const App = () => {
 }
 ```
 
-<i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan Redux storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa:
+<i>useSelector</i> saa parametrikseen funktion, joka hakee tai valitsee (engl. select) tarvittavan datan Redux-storesta. Tarvitsemme nyt kaikki muistiinpanot, eli selektorifunktiomme palauttaa koko staten, eli on muotoa:
 
 
 ```js
@@ -985,7 +985,7 @@ joka siis tarkoittaa samaa kuin
 }
 ```
 
-Yleensä selektorifunktiot ovat mielenkiintoisempia ja valitsevat vain osan Redux storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti:
+Yleensä selektorifunktiot ovat mielenkiintoisempia ja valitsevat vain osan Redux-storen sisällöstä. Voisimme esimerkiksi hakea storesta ainoastaan tärkeät muistiinpanot seuraavasti:
 
 ```js
 const importantNotes = useSelector(state => state.filter(note => note.important))  
@@ -1111,7 +1111,7 @@ Kun teet seuraavat tehtävät, tulisi sovelluksen näyttää seuraavalta:
 
 #### 6.3: anekdootit, step1
 
-Toteuta mahdollisuus anekdoottien äänestämiseen. Äänien määrä tulee tallettaa Redux storeen.
+Toteuta mahdollisuus anekdoottien äänestämiseen. Äänien määrä tulee tallettaa Redux-storeen.
 
 #### 6.4: anekdootit, step2
 
