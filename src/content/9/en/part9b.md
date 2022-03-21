@@ -252,7 +252,7 @@ As of TypeScript 4.0, <i>catch</i> blocks allow you to specify the type of catch
 
 The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.
 
-Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. If you are using a recent npm-version (7.0 or later), there are no problems but wit an older setup something is not right:
+Let's try it out, as we would in a regular Node application, by accessing <i>process.argv</i>. If you are using a recent npm-version (7.0 or later), there are no problems but with an older setup something is not right:
 
 ![](../../images/9/5.png)
 
