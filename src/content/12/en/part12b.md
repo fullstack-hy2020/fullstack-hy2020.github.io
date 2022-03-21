@@ -337,7 +337,7 @@ services:
   mongo:
     image: mongo
     ports:
-     - 3456:27017
+      - 3456:27017
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
