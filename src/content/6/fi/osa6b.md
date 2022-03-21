@@ -35,7 +35,7 @@ export default noteReducer
 
 ### Monimutkaisempi tila storessa
 
-Toteutetaan sovellukseen näytettävien muistiinpanojen filtteröinti, jonka avulla näytettäviä muistiinpanoja voidaan rajata. Filtterin toteutus tapahtuu [radio buttoneiden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) avulla:
+Toteutetaan sovellukseen näytettävien muistiinpanojen filtteröinti, jonka avulla näytettäviä muistiinpanoja voidaan rajata. Filtterin toteutus tapahtuu [radiopainikkeiden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) avulla:
 
 ![](../../images/6/01e.png)
 
@@ -302,7 +302,7 @@ const VisibilityFilter = (props) => {
 export default VisibilityFilter
 ```
 
-Toteutus on suoraviivainen - radio buttonin klikkaaminen muuttaa storen kentän <i>filter</i> tilaa.
+Toteutus on suoraviivainen - radiopainikkeen klikkaaminen muuttaa storen kentän <i>filter</i> tilaa.
 
 Komponentti <i>App</i> yksinkertaisuu nyt seuraavasti:
 
@@ -374,11 +374,11 @@ const notes = useSelector(({ filter, notes }) => {
 })
 ```
 
-Sovelluksessa on vielä pieni kauneusvirhe, sillä vaikka oletusarvosesti filtterin arvo on <i>ALL</i> eli näytetään kaikki muistiinpanot, ei vastaava radio button ole valittuna. Ongelma on luonnollisestikin mahdollista korjata, mutta koska kyseessä on ikävä, mutta harmiton feature, jätämme korjauksen myöhemmäksi.
+Sovelluksessa on vielä pieni kauneusvirhe, sillä vaikka oletusarvosesti filtterin arvo on <i>ALL</i> eli näytetään kaikki muistiinpanot, ei vastaava radiopainike ole valittuna. Ongelma on luonnollisestikin mahdollista korjata, mutta koska kyseessä on ikävä, mutta harmiton feature, jätämme korjauksen myöhemmäksi.
 
 ### Redux Toolkit
 
-Kuten olemme jo tähän asti huomanneet, Reduxin konfigurointi ja tilanhallinnan toteutus vaativat melko paljon vaivannäköä. Tämä ilmenee esimerkiksi reducereiden ja action creatorien koodista, jossa on jonkin verran toistoa. [Redux Toolkit](https://redux-toolkit.js.org/) on kirjasto, joka soveltuu näiden yleisten Reduxin käyttöön liittyvien ongelmien ratkaisemiseen. Kirjaston käyttö mm. yksinkertaistaa huomattavasti Redux storen luontia ja tarjoaa suuren määrän tilanhallintaa helpottavia työkaluja.
+Kuten olemme jo tähän asti huomanneet, Reduxin konfigurointi ja tilanhallinnan toteutus vaativat melko paljon vaivannäköä. Tämä ilmenee esimerkiksi reducereiden ja action creatorien koodista, jossa on jonkin verran toistoa. [Redux Toolkit](https://redux-toolkit.js.org/) on kirjasto, joka soveltuu näiden yleisten Reduxin käyttöön liittyvien ongelmien ratkaisemiseen. Kirjaston käyttö mm. yksinkertaistaa huomattavasti Redux-storen luontia ja tarjoaa suuren määrän tilanhallintaa helpottavia työkaluja.
 
 Otetaan Redux Toolkit käyttöön sovelluksessamme refaktoroimalla nykyistä koodia. Aloitetaan kirjaston asennuksella:
 
@@ -386,7 +386,7 @@ Otetaan Redux Toolkit käyttöön sovelluksessamme refaktoroimalla nykyistä koo
 npm install @reduxjs/toolkit
 ```
 
-Avataan sen jälkeen <i>index.js</i>-tiedosto, jossa nykyinen Redux store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
+Avataan sen jälkeen <i>index.js</i>-tiedosto, jossa nykyinen Redux-store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
 
 ```js
 import ReactDOM from 'react-dom'
@@ -579,7 +579,7 @@ describe('noteReducer', () => {
 
 ### Redux DevTools
 
-Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi), jonka avulla Redux storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
+Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi), jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
 
 Kun nyt avaat konsolin, välilehti <i>Redux</i> näyttää seuraavalta:
 
@@ -605,7 +605,7 @@ Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen
 
 #### 6.9 anekdootit, step7
 
-Asenna projektiin Redux Toolkit. Siirrä tämän jälkeen Redux storen määrittely omaan tiedostoon <i>store.js</i> ja hyödynnä sen luonnissa Redux Toolkitin <em>configureStore</em>-funktiota. Ota myös käyttöön Redux DevTools sovelluksen tilan debuggaamisen helpottamiseksi.
+Asenna projektiin Redux Toolkit. Siirrä tämän jälkeen Redux-storen määrittely omaan tiedostoon <i>store.js</i> ja hyödynnä sen luonnissa Redux Toolkitin <em>configureStore</em>-funktiota. Ota myös käyttöön Redux DevTools sovelluksen tilan debuggaamisen helpottamiseksi.
 
 #### 6.10 anekdootit, step8
 
@@ -628,7 +628,7 @@ const Notification = () => {
 export default Notification
 ```
 
-Laajenna komponenttia siten, että se renderöi Redux storeen talletetun viestin, eli renderöitävä komponentti muuttuu muotoon:
+Laajenna komponenttia siten, että se renderöi Redux-storeen talletetun viestin, eli renderöitävä komponentti muuttuu muotoon:
 
 ```js
 import { useSelector } from 'react-redux' // highlight-line
@@ -666,7 +666,7 @@ Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen:
 
 ![](../../images/6/9ea.png)
 
-Säilytä filtterin tila Redux storessa. Käytännössä kannattaa siis jälleen luoda uusi reducer ja action creatorit. Hyödynnä tässä Redux Toolkitin <em>createSlice</em>-funktiota.
+Säilytä filtterin tila Redux-storessa. Käytännössä kannattaa siis jälleen luoda uusi reducer ja action creatorit. Hyödynnä tässä Redux Toolkitin <em>createSlice</em>-funktiota.
 
 Tee filtterin ruudulla näyttämistä varten komponentti <i>Filter</i>. Voit ottaa sen pohjaksi seuraavan koodin:
 
