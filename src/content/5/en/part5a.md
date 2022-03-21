@@ -130,11 +130,11 @@ const App = () => {
 // highlight-start
   const [user, setUser] = useState(null)
 // highlight-end
-
+  
+  // highlight-start
   const handleLogin = async (event) => {
     event.preventDefault()
     
-    // highlight-start
     try {
       const user = await loginService.login({
         username, password,
