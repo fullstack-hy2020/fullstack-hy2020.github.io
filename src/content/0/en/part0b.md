@@ -9,8 +9,8 @@ lang: en
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
-The application exists only to demonstrate some basic concepts of the course, and are by no means examples of <i>how</i> web applications should be made. 
-On the contrary, they demonstrate some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
+The application exists only to demonstrate some basic concepts of the course, and is, by no means, an example of <i>how</i> a modern web application should be made. 
+On the contrary, it demonstrates some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
 
 Code will conform to contemporary best practices from  [part 1](/en/part1) onwards.
 
@@ -26,13 +26,13 @@ The console looks like this:
 
 Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded. 
 
-**NB:** The most important tab is the <i>Console</i>. However, in the introduction we will be using the <i>Network</i> tab quite a bit.
+**NB:** The most important tab is the <i>Console</i> tab. However, in this introduction we will be using the <i>Network</i> tab quite a bit.
 
 ### HTTP GET
 
-The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) protocol. The Network tab shows how the browser and the server communicate.
+The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) protocol. The <i>Network</i> tab shows how the browser and the server communicate.
 
-When you reload the page (press the F5 key or the &#8634; symbol on your browser), and the console will show that two events have happened:
+When you reload the page (press the F5 key or the &#8635; symbol on your browser), and the console will show that two events have happened:
 
 - The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
 - And has downloaded the image <i>kuva.png</i>
