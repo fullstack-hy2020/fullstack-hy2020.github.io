@@ -124,7 +124,7 @@ A quick way to initialize the notes state based on the data received from the se
 ```js
 // ...
 import noteService from './services/notes' // highlight-line
-import noteReducer, { apppendNote } from './reducers/noteReducer' // highlight-line
+import noteReducer, { appendNote } from './reducers/noteReducer' // highlight-line
 
 const store = configureStore({
   reducer: {
