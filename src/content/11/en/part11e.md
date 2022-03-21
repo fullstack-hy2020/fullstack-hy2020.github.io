@@ -33,7 +33,7 @@ There are integrations for example to various messaging applications such as [Sl
 
 ### Exercise 11.18
 
-We have set up a channel <i>fullstack\_webhook</i> to the course Discord group o[https://study.cs.helsinki.fi/discord/join/fullstack](https://study.cs.helsinki.fi/discord/join/fullstack) for testing a messaging integration.
+We have set up a channel <i>fullstack\_webhook</i> to the course Discord group at [https://study.cs.helsinki.fi/discord/join/fullstack](https://study.cs.helsinki.fi/discord/join/fullstack) for testing a messaging integration.
 
 Register now to Discord if you have not already done that. You will also need a <i>Discord webhook</i> in this exercise. You find the webhook in the pinned message of the channel <i>fullstack\_webhook</i>. Please do not commit the webhook to GitHub!
 
@@ -133,7 +133,7 @@ Once you have completed the exercises and want to get the credits, let us know t
 
 Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
-**Note** that you need a registration to the corresponding course part for getting the credits registered, se [here](/en/part0/general_info#parts-and-completion) for more information.
+**Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 
 You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
 

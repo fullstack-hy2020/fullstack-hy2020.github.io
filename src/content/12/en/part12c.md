@@ -152,7 +152,7 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before the frontend is build, othervise it does not get defined in the code!
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before the frontend is build, otherwise it does not get defined in the code!
 
 #### Exercise 12.14: Testing during the build process
 

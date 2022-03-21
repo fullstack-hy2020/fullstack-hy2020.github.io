@@ -191,7 +191,7 @@ Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, 
 
 Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
 
-Harjoitustyöstä on lisää tietoa [täällä](https://github.com/FullStack-HY/misc/blob/main/harjoitustyo.md).
+Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2020/misc/blob/master/harjoitustyo.md).
 
 ### Haastattelulupaus
 

@@ -36,9 +36,9 @@ $ npm run build
   ...
 ```
 
-<!-- Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile: -->
+<!-- Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the Express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile: -->
 
-非常好！最后一步是用一种方法来用服务器提供这些静态文件。你可能知道我们可以使用  [express.static](https://expressjs.com/en/starter/static-files.html) 利用express 服务器来做。这个留作回家的一个练习，我们先继续编写我们的Dockerfile。
+非常好！最后一步是用一种方法来用服务器提供这些静态文件。你可能知道我们可以使用  [express.static](https://expressjs.com/en/starter/static-files.html) 利用 Express 服务器来做。这个留作回家的一个练习，我们先继续编写我们的Dockerfile。
 
 ```Dockerfile
 FROM node:16
@@ -115,9 +115,9 @@ CMD ["serve", "build"] # highlight-line
 
 我们的CMD 现在用中括号，结果是我们使用了所谓的CMD中的<i>执行表单exec form</i> 。实际上有 **三种** 不同的CMD表单，执行表单是常用的，阅读 [documentation](https://docs.docker.com/engine/reference/builder/#cmd) 获取更多信息。
 
-<!-- When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:3000.
+<!-- When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:5000.
  -->
-我们构建镜像时运行  _docker build . -t hello-front_ ， 并运行_docker run -p 5000:3000 hello-front_ 。应用会在浏览器中 http://localhost:3000 看到 。
+我们构建镜像时运行  _docker build . -t hello-front_ ， 并运行_docker run -p 5000:3000 hello-front_ 。应用会在浏览器中 http://localhost:5000 看到 。
 
 ### Using multiple stages
 使用多阶段构建
@@ -131,9 +131,9 @@ CMD ["serve", "build"] # highlight-line
 多阶段构建 [Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/)是设计于将构建流程切分成多个不同的阶段，从而限制镜像文件在不同阶段传递。这就使得限制镜像的大小变得可能，因为并不是结果镜像需要所有生产流水线中的所有构建。较小的镜像会更快地上传和下载，而且能减少你软件的脆弱性。
 
 
-<!-- With multi-stage builds, a tried and true solution like [nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content". -->
+<!-- With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content". -->
 
-利用多阶段构建，像 [nginx](https://en.wikipedia.org/wiki/Nginx) 这样久经考验的真正解决方案可以用于服务静态文件，免除了许多头疼的问题。 Docker Hub [page for nginx](https://hub.docker.com/_/nginx)  告诉我们打开端口并“托管一些简单镜头内容”所需要的信息。
+利用多阶段构建，像 [Nginx](https://en.wikipedia.org/wiki/Nginx) 这样久经考验的真正解决方案可以用于服务静态文件，免除了许多头疼的问题。 Docker Hub [page for Nginx](https://hub.docker.com/_/nginx)  告诉我们打开端口并“托管一些简单镜头内容”所需要的信息。
 
 
 <!-- Let's use the previous Dockerfile but change the FROM to include the name of the stage: -->
@@ -184,8 +184,9 @@ COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-lin
 <!-- Start by running the frontend outside the container and ensure that it works with the backend. -->
 在容器外运行前端，确保它于后端是能工作的。
 
-<!-- Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. -->
-创建 <i>todo-app/todo-frontend/Dockerfile</i>  来容器化应用，并使用 [ENV](https://docs.docker.com/engine/reference/builder/#env) 指令来传递 *REACT\_APP\_BACKEND\_URL* 给应用，与后端进行运行。后端仍然应该在容器外部运行。
+<!-- Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before the frontend is build, othervise it does not get defined in the code!
+-->
+创建 <i>todo-app/todo-frontend/Dockerfile</i>  来容器化应用，并使用 [ENV](https://docs.docker.com/engine/reference/builder/#env) 指令来传递 *REACT\_APP\_BACKEND\_URL* 给应用，与后端进行运行。后端仍然应该在容器外部运行。注意你需要在前台构建之前设置*REACT\_APP\_BACKEND\_URL*，否则代码就不会生效。
 
 #### Exercise 12.14: Testing during the build process
 练习12.14 在构建过程中测试
@@ -325,8 +326,8 @@ services:
 
 <div class="content">
 
-### Communication between containers in a docker network
-容器和docker 网络进行通信
+### Communication between containers in a Docker network
+容器和 Docker 网络进行通信
 
 <!-- The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we shall see how the network and DNS work. -->
 
@@ -426,9 +427,10 @@ services:
 ```
 
 
-<!-- With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works since the port is still 3000 within the docker network. -->
+<!-- 
+With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ works since the port is still 3000 within the docker network. -->
 
-有了这个 _docker-compose up_  应用可以在 <i>宿主机</i> 的 <http://localhost:3210> 访问。 同样，_docker-compose run debug-helper wget -O - http://hello-front-dev:3000_ 也好使，因为在docker 网络中它使用的仍然是3000端口。
+有了这个 _docker-compose up_  应用可以在 <i>宿主机</i> 的 <http://localhost:3210> 访问。 同样，`docker-compose run debug-helper wget -O - http://hello-front-dev:3000` 也好使，因为在docker 网络中它使用的仍然是3000端口。
 
 ![](../../images/12/busybox_networking_drawio.png)
 
@@ -495,8 +497,14 @@ URL(localhost) 是故意写错的，你需要改成正确的。记得 <i>随时�
 <!-- There are multiple different options for a reverse proxy implementation, such as Traefik, Caddy, Nginx, and Apache (ordered by initial release from newer to older). -->
 关于反向代理的实现，有多种不同的选择：例如Traefik、Caddy、Nginx 和 Apache（按初始版本从新到旧排序）。
 
-<!-- Our pick is [Nginx](https://hub.docker.com/_/nginx). Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running: -->
-我们选择 [Nginx](https://hub.docker.com/_/nginx) 。在项目根目录中创建一个文件 <i>nginx.conf</i> 并以此模板进行配置。 我们需要做一些小的编辑才能让我们的应用程序运行：
+<!-- Our pick is [Nginx](https://hub.docker.com/_/nginx).  -->
+我们选择 [Nginx](https://hub.docker.com/_/nginx) 。
+
+<!-- Let us now put the <i>hello-frontend</i> behind the reverse proxy. -->
+现在我们将<i>hello-frontend</i>放到反向代理服务器后面。
+
+<!-- Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running: -->
+在项目根目录中创建一个文件 <i>nginx.conf</i> 并以此模板进行配置。 我们需要做一些小的编辑才能让我们的应用程序运行：
 
 ```bash
 # events is required, but defaults are ok
@@ -526,6 +534,9 @@ http {
 然后将 Nginx 添加到 <i>docker-compose.yml</i> 文件中。 按照 docker hub 页面中的指示添加一个卷，其中右侧是 _:/etc/nginx/nginx.conf:ro_ ，最后的 ro 声明该卷将为 <i>read-only</i>。
 
 ```yml
+services:
+  app:
+    # ...
   nginx:
     image: nginx:1.20.1
     volumes:
@@ -533,6 +544,8 @@ http {
     ports:
       - 8080:80
     container_name: reverse-proxy
+    depends_on:
+      - app # wait for the frontend container to be started
 ```
 
 <!-- with that added we can run _docker-compose up_ and see what happens. -->
@@ -587,11 +600,56 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 <!-- That is it! Let's replace the proxy_pass address in nginx.conf with that one. -->
 
-<!-- If you are still encountering 503, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_. -->
-
 就是这样！ 让我们用那个替换 nginx.conf 中的 proxy_pass 地址。
 
-如果还是遇到503，先确定create-react-app是否已经建好了。你可以检查一下 docker-compose up 的输出日志。
+If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
+
+如果仍然报502错误，检查  create-react-app 已经构建好，你可以检查 _docker-compose up_ 的日志输出。
+
+One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is started:
+此外，我们在配置中增加了一个选项 [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) 确保  _nginx_ 容器在前端容器 _app_ 启动前没有启动
+
+```bash
+services:
+  app:
+    # ...
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80
+    container_name: reverse-proxy
+    depends_on: // highlight-line
+      - app // highlight-line
+```
+
+If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to reslove all DNS names that are referred in the config file:
+如果我们不使用<i>depends\_on</i> 强制启动顺序，Nginx 会有启动失败的风险，因为它会尝试解决配置文件中所有的DNS名称。
+
+```bash
+http {
+  server {
+    listen 80;
+
+    location / {
+      proxy_http_version 1.1;
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection 'upgrade';
+      
+      proxy_pass http://app:3000; // highlight-line
+    }
+  }
+}
+```
+
+
+ Note that <i>depends\_on</i> does not guarantee that the service in the depended container is ready for action, it just ensures that the container has been started (and the corresponding entry is added to DNS). If a service needs to wait another service to become ready before the startup, [other solutions](https://docs.docker.com/compose/startup-order/) should be used.
+
+ 请注意，<i>depends\_on</i>并不保证被依赖的容器中的服务已经准备就绪，它只是确保该容器已经启动（并且相应的条目被添加到 DNS 中）。如果一个服务需要等待另一个服务在启动前做好准备，应该使用[其他解决方案](https://docs.docker.com/compose/startup-order/)。
+
+ 
+ 注意 <i>depends\_on</i> 参数并不保证依赖服务服务是准备就绪的，它只保证容器是启动的（并且相关入口加入到DNS中）。如果服务启动需要等待另一个服务就绪，需要[其他解决方案](https://docs.docker.com/compose/startup-order/) 
 
 </div>
 
@@ -626,7 +684,7 @@ todo-app
 将nginx 和 todo 后端以开发模式添加到开发的 <i>todo-app/docker-compose.dev.yml</i>。
 
 <!-- Add a new location to the <i>nginx.conf</i> so that requests to /api are proxied to the backend. Something like this should do the trick: -->
-向 <i>nginx.conf</i>  添加一个新位置，以便将 /api 的请求代理到后端。 像这样应该可以解决问题：
+向 <i>nginx.conf</i>  添加一个新位置，以便将 _/api_ 的请求代理到后端。 像这样应该可以解决问题：
 
 ```conf
   server {

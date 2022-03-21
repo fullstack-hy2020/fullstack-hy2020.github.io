@@ -33,7 +33,7 @@ The course contains fourteen parts, the first of which is numbered 0 for consist
 
 Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.
 
-In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no simillar dependency on previous parts.
+In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no similar dependency on previous parts.
 
 The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2023. 
 
@@ -153,7 +153,7 @@ If you have already taken the course either as a MOOC or as a university course,
 
 You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
 
-#### Expanding on the University oh Helsinki instance of this course
+#### Expanding on the University of Helsinki instance of this course
 
 That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
 
@@ -211,7 +211,7 @@ The number of credits is based on hours of work done. One credit is approximatel
 
 It is possible to complete the project as a pair or a group.
 
-See [more information on the project](https://github.com/FullStack-HY/misc/blob/main/project.md).
+See [more information on the project](https://github.com/fullstack-hy2020/misc/blob/master/project.md).
 
 ### Interview promise
 

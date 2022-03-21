@@ -281,6 +281,9 @@ Expo 开发工具可以被用作来展示运行中程序的log信息。错误和
 ### Using the debugger
 使用调试器
 
+**NB:** You might face the following error while trying to use React Native Debugger: <i>Uncaught Error: Cannot add node "1" because a node with that id is already in the Store</i>. There's an [issue](https://github.com/jhen0409/react-native-debugger/issues/668) related to this problem in the React Native Debugger's repository which might contain ways to fix it. Nevertheless, don't get stuck trying to fix this problem if it turns out to be difficult. Instead, move on with the material.
+**注意：**在尝试使用React Native调试器时，你可能会面临以下错误。<i>Uncaught Error: Cannot add node "1" because a node with that id is already in the Store</i>.  在React Native Debugger的资源库中，有一个与这个问题相关的[issue](https://github.com/jhen0409/react-native-debugger/issues/668)，其中可能包含了修复它的方法。尽管如此，如果发现这个问题很难解决，也不要困住。相反，要继续学习教材。
+
 <!-- Inspecting messages logged from the code with the <em>console.log</em> method can be handy, but sometimes finding bugs or understanding how the application works require us to see the bigger picture. We might, for example, be interested in what is the state and the props of a certain component, or what is the response of a certain network request. In the previous parts, we have used the browser's developer tools for this kind of debugging. [React Native Debugger](https://docs.expo.io/workflow/debugging/#react-native-debugger) is a tool that offers a similar set of debugging features for React Native applications. -->
 使用<em>console.log</em>方法检查一些代码中的信息是十分容易上手的，但有时找bug或理解应用如何运行，需要我们看得更宏观一些。比如说我们可能对某个特定组件的属性和状态感兴趣，或者某一次网络请求的返回。在之前的章节中，我们使用了浏览器的开发者工具来做这种debug。[React Native Debugger](https://docs.expo.io/workflow/debugging/#react-native-debugger) 是一个提供了类似的一系列debug特性的工具集来debug React Native 应用。
 

@@ -7,12 +7,12 @@ lang: zh
 
 <div class="content">
 
-<!-- During this part, you will build a robust deployment pipeline to a ready made [example project](https://github.com/smartlyio/full-stack-open-pokedex) starting in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2). You will [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the example project and that will create you a personal copy of the repository. In the [last two](/en/part11/expanding_further#exercises-11-20-22) exercises, you will build another deployment pipeline for some of <i>your own</i> previously created app! -->
+<!-- During this part, you will build a robust <i>deployment pipeline</i> to a ready made [example project](https://github.com/smartlyio/full-stack-open-pokedex) starting in [exercise 11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2). You will [fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo) the example project and that will create you a personal copy of the repository. In the [last two](/en/part11/expanding_further#exercises-11-20-22) exercises, you will build another deployment pipeline for some of <i>your own</i> previously created app! -->
 
-在本章中，你将构建一个健壮的部署管道pipeline，以便从[练习11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2)开始构建一个现成的[示例项目](https://github.com/smartlyio/full-stack-open-pokedex) 。你将为示例项目创建一个[fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)，这将为您创建一个仓库的私人副本。在最后两个练习中，你将为自己以前创建的应用程序构建另一个部署管道！
+在本章中，你将构建一个健壮的<i>部署管道pipeline</i>，以便从[练习11.2](/en/part11/getting_started_with_git_hub_actions#exercise-11-2)开始构建一个现成的[示例项目](https://github.com/smartlyio/full-stack-open-pokedex) 。你将为示例项目创建一个[fork](https://docs.github.com/en/free-pro-team@latest/github/getting-started-with-github/fork-a-repo)，这将为您创建一个仓库的私人副本。在最后两个练习中，你将为自己以前创建的应用程序构建另一个部署管道！
 
-<!-- There are 22 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".  -->
-本章共有22个练习，你需要完成<i>每个</i>练习才能完成课程。与前面的章节一样，练习是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) 提交的，但与0到7章节不同，提交的是一个不同的“课程实例”。
+<!-- There are 21 exercises in this part, and you need to complete <i>each</i> exercise for completing the course. Exercises are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".  -->
+本章共有21个练习，你需要完成<i>每个</i>练习才能完成课程。与前面的章节一样，练习是通过[提交系统](https://studies.cs.helsinki.fi/stats/courses/fs-cicd) 提交的，但与0到7章节不同，提交的是一个不同的“课程实例”。
 
 <!-- This part will rely on many concepts covered in the previous parts of the course. It is recommended that you finish at least parts 0 to 5 before starting this part. -->
 这一章节会依赖课程前面章节所涉及的许多概念。在开始这个章节之前，建议你至少完成0到5章的学习。
@@ -98,8 +98,8 @@ Git 允许代码的多个副本、流或版本共存，而不会相互覆盖。�
 <!-- In this part, we'll develop a simple "deployment pipeline" that deploys each commit of your code automatically to Heroku <i>if</i> the committed code does not break anything. -->
 在这一章节中，我们将开发一个简单的“部署管道” ，如果提交的代码没有破坏任何东西，那么将代码的每次提交都自动部署到 Heroku。
 
-<!-- Deployments can be significantly more complex, especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like database migrations into account. We won't cover complex deployments like those in this part but it's important to know that they exist. -->
-部署可能会复杂得多，特别是如果我们添加一些需求，比如“在部署期间，软件必须始终可用”(零停机时间部署) ，或者如果我们必须考虑数据库迁移之类的事情。我们不会在这章节讨论复杂的部署，但是知道它们的存在是很重要的。
+<!-- Deployments can be significantly more complex, especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like [database migrations](/en/part13/migrations_many_to_many_relationships#migrations) into account. We won't cover complex deployments like those in this part but it's important to know that they exist. -->
+部署可能会复杂得多，特别是如果我们添加一些需求，比如“在部署期间，软件必须始终可用”(零停机时间部署) ，或者如果我们必须考虑[数据库迁移](/en/part13/migrations_many_to_many_relationships#migrations)之类的事情。我们不会在这章节讨论复杂的部署，但是知道它们的存在是很重要的。
 
 ### What is CI?
 什么是 CI？
@@ -173,9 +173,9 @@ CI 和 CD 之间的模糊区域是什么？例如，如果我们在任何新代�
 
 <!-- There are other advantages to extending this setup: -->
 扩展这种还有其他好处:
- <!-- - If we use CD with deployment every time there is a merge to main then we know that main is always running in production
+ <!-- - If we use CD with deployment every time there is a merge to the main branch, then we know that it will always work in production
  - If we only allow merges when the branch has an up to date master, then we can be sure that different developers don't overwrite each other's changes -->
- - 如果我们每次在合并到 main 时使用 CD 部署，那么我们就知道 main 总是在生产中运行
+ - 如果我们在每次合并到主分支时都使用CD部署，那么我们就知道它在生产中会一直工作。
  - 如果我们只允许在具有最新的master分支时进行合并，那么我们可以确保不同的开发人员不会覆盖彼此的更改
 
 <!-- Note that in this part we are assuming that <i>master</i> or <i>main</i> branch contains the code that is running in production. The numerous different [workflows](https://www.atlassian.com/git/tutorials/comparing-workflows) one can use with git, e.g. in some cases, it may be a specific <i>release branch</i> that contains the code which is running in production. -->
@@ -268,7 +268,7 @@ Jenkins（以及其他自我托管的配置）
 <!-- Among the self-hosted options, [Jenkins](https://www.jenkins.io/) is the most popular. It's extremely flexible and there are plugins for almost anything (except that one thing you want to do). This is a great option for many applications, using a self-hosted setup means that the entire environment is under your control, the number of resources can be controlled, secrets (we'll elaborate a little more on security in later sections of this part) are never exposed to anyone else and you can do anything you want on the hardware. -->
 在自我托管的配置中， [Jenkins](https://www.jenkins.io/)  是最受欢迎的。它非常灵活并且几乎所有的东西都有插件(除了你想做的一件事)。对于许多应用程序来说，这是一个很好的选择，使用自托管的设置意味着整个环境都在你的控制之下，资源的数量可以控制，secret (我们将在本章节后面的章节详细说明安全性)从不向任何人公开，你可以在硬件上做任何想做的事情。
 
-<!-- Unfortunately, there is a downside. Jenkins is quite complicated to set up. It's very flexible but that means that there's often quite a bit of boilerplate/template code involved to get builds working. With Jenkins specifically, it also means that CI/CD must be set up with Jenkins' own domain-specific language. There are also the risks of hardware failures which can be an issue if the setup sees heavy use. -->
+<!-- Unfortunately, there is also a downside. Jenkins is quite complicated to set up. It's very flexible but that means that there's often quite a bit of boilerplate/template code involved to get builds working. With Jenkins specifically, it also means that CI/CD must be set up with Jenkins' own domain-specific language. There are also the risks of hardware failures which can be an issue if the setup sees heavy use. -->
 不幸的是，这也有不利的一面。Jenkins 的设置相当复杂。它非常灵活，但这意味着要使构建运转起来，通常需要相当多的样板/模板代码。对于 Jenkins 来说，这也意味着 CI/CD 必须使用 Jenkins 自己的领域特定语言。如果配置大量使用，还有硬件故障的风险，这可能会成为一个问题。
 
 <!-- With self-hosted options, the billing is usually based on the hardware. You pay for the server. What you do on the server doesn't change the billing. -->

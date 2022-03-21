@@ -7,7 +7,7 @@ lang: zh
 
 <div class="content">
 <!-- TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. For example Microsoft's _Azure Management Portal_ (1,2 million lines of code) and the _Visual Studio Code_ (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers e.g. better development-time tooling, static code analysis, compile-time type checking and code level documentation. -->
-Typescript 是微软为大规模 JavaScript 开发而设计的一种编程语言。 例如，微软的 Azure 管理门户(120万行代码)和 Visual Studio 代码(30万行代码)都是用TypeScript编写的。 为了支持构建大规模的 JavaScript 应用，TypeScript 提供了更好的开发时工具、开发静态程序分析、编译时类型检查和代码级的文档。
+Typescript 是微软为大规模 JavaScript 开发而设计的一种编程语言。 例如，微软的 <i>Azure Management Portal 管理门户</i> (120万行代码)和 <i>Visual Studio Code</i>(30万行代码)都是用TypeScript编写的。 为了支持构建大规模的 JavaScript 应用，TypeScript 提供了更好的开发时工具、开发静态程序分析、编译时类型检查和代码级的文档。
 
 ### Main principle
 【主要原则】
@@ -101,7 +101,7 @@ const add = (a: number, b: number) => {
 ```
 
 
-<!-- The function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type <i>number</i>. -->
+<!-- Type of the function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type <i>number</i>. -->
 通过将返回值表达式回溯到代码中，可以推断出函数的返回值。 返回表达式执行参数 a 和 b 的加法操作。 我们可以看到 a 和 b 是基于它们的数字类型的。 因此，我们可以推断返回值为<i>number</i> 类型。
 
 
