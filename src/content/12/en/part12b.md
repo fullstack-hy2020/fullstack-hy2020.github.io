@@ -680,7 +680,7 @@ We won't have any idea if the configuration works unless we try it. The applicat
 Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, that has the form <i>redis://host:port</i>
 
 ```bash
-$ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://localhost:3456/the_database npm run dev
+$ REDIS_URL=redis://localhost:6379  MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev 
 ```
 
 You can now test the configuration by adding the line
