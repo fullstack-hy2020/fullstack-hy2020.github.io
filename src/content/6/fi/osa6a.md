@@ -1120,7 +1120,7 @@ Tee sovellukseen mahdollisuus uusien anekdoottien lisäämiselle.
 
 Voit pitää lisäyslomakkeen aiemman esimerkin tapaan [ei-kontrolloituna](/osa6/flux_arkkitehtuuri_ja_redux#ei-kontrolloitu-lomake).
 
-#### 6.5*: anekdootit, step3
+#### 6.5: anekdootit, step3
 
 Huolehdi siitä, että anekdootit pysyvät äänten mukaisessa suuruusjärjestyksessä.
 
