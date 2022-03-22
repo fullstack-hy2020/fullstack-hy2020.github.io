@@ -686,7 +686,7 @@ const App = () => {
 }
 ```
 
-Rarkaisussa on kuitenkin pieni ongelma. Itse lisätty henkilö tulee nyt välimuistiin sekä renderöityy ruudulle kahteen kertaan, sillä myös komponentti PersonForm lisää uuden henkilön välimuistin.
+Ratkaisussa on kuitenkin pieni ongelma. Itse lisätty henkilö tulee nyt välimuistiin sekä renderöityy ruudulle kahteen kertaan, sillä myös komponentti PersonForm lisää uuden henkilön välimuistin.
 
 Ratkaistaan ongelma varmistamalla, että sama henkilö ei päädy välimuistiin kahteen kertaan:
 
