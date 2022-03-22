@@ -497,7 +497,7 @@ The second expectation checks, that the event handler is called with the right p
 
 ### About finding the elements
 
-Let us assume that the form would have two input fields
+Let us assume that the form has two input fields
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -666,7 +666,7 @@ test('renders content', () => {
 })
 ```
 
-Command _getByText_ looks for an element that has exactly the text that it has as parameter, and nothing more. If we want to look for element that <i>contains</i> the text, we could use a extra option:
+Command _getByText_ looks for an element that has exactly the **same text** that it has as parameter, and nothing more. If we want to look for element that <i>contains</i> the text, we could use a extra option:
 
 ```js 
 const element = screen.getByText(
@@ -687,7 +687,7 @@ There are situation where yet another form of the command _queryByText_ is usefu
 We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
 
 ```js 
-test('renders no shit', () => {
+test('does not render this', () => {
   const note = {
     content: 'This is a reminder',
     important: true
@@ -695,7 +695,7 @@ test('renders no shit', () => {
 
   render(<Note note={note} />)
 
-  const element = screen.queryByText('do not want this shit to be rendered')
+  const element = screen.queryByText('do not want this thing to be rendered')
   expect(element).toBeNull()
 })
 ```
