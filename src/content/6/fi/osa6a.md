@@ -1069,7 +1069,7 @@ const App = () => {
   return (
     <div>
       <NewNote />
-      <Notes  />
+      <Notes />
     </div>
   )
 }

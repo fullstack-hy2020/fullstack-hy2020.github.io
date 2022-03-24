@@ -1250,7 +1250,7 @@ const App = () => {
   return (
     <div>
       <NewNote />
-      <Notes  />
+      <Notes />
     </div>
   )
 }
@@ -1342,7 +1342,7 @@ const App = () => {
     <div>
       <h2>Anecdotes</h2>
       <AnecdoteForm />
-      <AnecdoteList  />
+      <AnecdoteList />
     </div>
   )
 }
