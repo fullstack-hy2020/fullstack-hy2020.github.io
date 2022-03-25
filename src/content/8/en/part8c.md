@@ -61,9 +61,9 @@ const Person = require('./models/person')
 
 const MONGODB_URI = 'mongodb+srv://databaseurlhere'
 
-console.log('connecting to', MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false, useCreateIndex: true })
+console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI)
+mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('connected to MongoDB')
   })
