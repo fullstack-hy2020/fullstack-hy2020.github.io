@@ -9,7 +9,7 @@ lang: fi
 
 Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin web-sovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST- ja GraphQL-rajapinnoissa. Kurssi sisältää myös osat, joissa tutustutaan TypeScriptiin, React Nativeen ja jatkuvaan integraatioon.
 
-Kurssilla käsitellään myös sovellusten testaamista, konttitekonologiaa, konfigurointia ja suoritusympäristöjen hallintaa sekä tietokantoja.
+Kurssilla käsitellään myös sovellusten testaamista, konttiteknologiaa, konfigurointia ja suoritusympäristöjen hallintaa sekä tietokantoja.
 
 ### Oletetut esitiedot
 
