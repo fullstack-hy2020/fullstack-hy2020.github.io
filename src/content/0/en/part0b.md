@@ -625,6 +625,7 @@ part1
   unicafe
   anecdotes
 part2
+  courseinfo
   phonebook
   countries
 ```
