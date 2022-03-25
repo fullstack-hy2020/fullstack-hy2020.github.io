@@ -250,7 +250,7 @@ Let's implement a GraphQL server with today's leading library: [Apollo Server](h
 Create a new npm project with _npm init_ and install the required dependencies.
 
 ```bash
-npm install apollo-server graphql apollo-server-core
+npm install apollo-server graphql
 ```
 
 The initial code is as follows: 
