@@ -61,9 +61,9 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-If you wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9/_Full_Stack_Web_Development) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam. A Finnish social security number is required. 
+If you wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9/_Full_Stack_Web_Development) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam.
 
-Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen). A Finnish social security number is not required.
+Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 The last possible date for taking the exam is 10 January 2023. **Note that you must sign up for the exam by 9 January 2023, at the latest.**
 
@@ -124,10 +124,7 @@ By submitting all exercises for part 13 of the course on Relational databases, y
 
 ### How to get your credits
 
-Note that in order to receive university credits, you need a Finnish social security number.
-
-If you want to receive credits, save your <b>University of Helsinki</b> student number to
-[the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
+If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
 ![](../../images/0/28b.png)
 
@@ -143,7 +140,7 @@ You can view your grade in University of Helsinki Sisu and and to [Opintopolku](
 
 ### Course certificate
 
-Even if you do not register to Open University for the exam, you can still download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade. <i>For getting the certificate, a Finnish social security number is not needed.</i>
+Even if you do not register to Open University for the exam, you can still download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
 
 ### Expanding on a previously completed course
 
@@ -171,35 +168,23 @@ Many of the exercises build a larger application bit by bit. In these cases, sub
 
 ### Sign up for the exam
 
-For official university credits you need to pass the course exam that is done in Open University Moodle. Note that it is only possible to register for the exam if you have a Finnish social security number or you are able to register for the course in Helsinki in person!
+For official university credits you need to pass the course exam that is done in Open University Moodle. Follow the instructions below to gain access to the course Moodle space:
+- Enroll in the course through Open University by 9 Jan 2023.
+- You will get the enrollment link through  [ submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
 
-Follow the instructions below to gain access to the course Moodle space:
+![](../../images/0/enroll.png)
 
-- [Enroll in the course](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9) through Open University by 9 Jan 2023
-- You will receive the Moodle-link and the course key through email within 24 hours after course registration.
-- User ID. Do you study at University of Helsinki or other [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners)?
-    - If yes, use your username and password to log in to Moodle.
-    - If no, please activate your University of Helsinki user ID to access Moodle. You will receive more information on the user ID after registration through email.
-- Sign into the Moodle space with your University of Helsinki / HAKA user ID and the enrollment key.
-- After course enrollment, save your University of Helsinki student ID number to the [my submissions tab](https://studies.cs.helsinki.fi/stats/myinfo) in the submission system.
-- If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
-  - Send the message from the same email address you used for course enrollment.
-  - Include your full name, date of birth, name of the course in the email.
+You can access Moodle through [this link](https://moodle.helsinki.fi/course/view.php?id=46197) after you have:
 
-Please note!
+- Successfully enrolled on the course through the Open University, and
+- Activated your University of Helsinki user account.
+- You can activate your user account after you have successfully enrolled on the course. The user account must be activated before attempting the course exam. Read more about activating the user account [here](https://studies.helsinki.fi/instructions/article/university-helsinki-user-account-open-university).
 
+After course enrollment, save your University of Helsinki student ID number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo).
+
+Please note:
 - You only need the Moodle access for the exam, not for accessing the course certificate.
-- Credits for the course are only available to students who have successfully registered for the course through the Open University and completed the course according to the instructions.
-
-Electronic enrollment is available if you meet one of the following criteria:
-
-- You have a Finnish personal identity number (format: xxxxxxxx-xxxx) or an online banking ID.
-- You are a student at the University of Helsinki.
-- You are a student at another [HAKA member institution](https://wiki.eduuni.fi/display/CSCHAKA/Members+and+partners).
-
-After course enrollment: Note that you also have to save your student ID number to the <i>my submissions</i> tab in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). If you used your institution’s HAKA identification to log in to Moodle, please send a message to avoin-student@helsinki.fi and ask for your University of Helsinki student ID.
-
-Include your full name, email address used for enrollment, date of birth, and the name of the course in the email.
+- Credits for the course are only available to students who have successfully registered for the course through the Open University and completed the course according to the instructions
 
 ### Full stack project
 
