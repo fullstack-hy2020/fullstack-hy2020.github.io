@@ -141,6 +141,19 @@ Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurss
 
 ![](../../images/0/29.png)
 
+### Virallisen opintosuoritusotteen tilaaminen
+
+Voit tilata virallisen opintosuoritusotteen heti kun kurssisuorituksesi on rekisteröity (tiedot näkyvät esimerkiksi valtakunnallisessa [Oma Opintopolku](https://opintopolku.fi/oma-opintopolku/) –palvelussa). 
+
+Ohjeet opintosuoritusotteen tilaamiseen:
+- Kun opintopisteet on rekisteröity sinulle, lähetä opintosuoritteen tilauspyyntö opiskelijaneuvontaan sähköpostiosoitteeseen avoin-student@helsinki.fi.
+- Muistathan opintosuoritusotetta tilatessasi ilmoittaa
+  - kurssin nimen,
+  - syntymäaikasi, sekä
+  - kielen, jolla haluat opintosuoritusotteen.
+- Sähköisesti varmennettu opintosuoritusote toimitetaan sinulle sähköpostitse.
+- Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
+
 ### Aiemmin suoritetun kurssin täydentäminen
 
 Jos olet jo suorittanut kurssin joko MOOC:ina tai yliopiston kurssina, voit täydentää suoritustasi.

@@ -142,6 +142,18 @@ You can view your grade in University of Helsinki Sisu and and to [Opintopolku](
 
 Even if you do not register to Open University for the exam, you can still download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
 
+### Request a transcript of studies
+
+You can request a verified transcript of studies <i>after your university credits have been registered</i>. To request for an official transcript of studies, please contact avoin-student@helsinki.fi.
+
+- When requesting an official transcript, remember to mention
+  - the name of the course,
+  - your full name,
+  - your date of birth, and
+  - the language of the transcript.
+
+The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
+
 ### Expanding on a previously completed course
 
 If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
