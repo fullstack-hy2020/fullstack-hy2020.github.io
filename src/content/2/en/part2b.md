@@ -44,7 +44,7 @@ const App = (props) => {
 ```
 
 
-If we wanted to start with an empty list of notes we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
+If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
 
 ```js
 const App = () => { 
@@ -216,7 +216,7 @@ const handleNoteChange = (event) => {
 }
 ```
 
-The <em>target</em> property of the event object now corresponds to the controlled <i>input</i> element and <em>event.target.value</em> refers to the input value of that element.
+The <em>target</em> property of the event object now corresponds to the controlled <i>input</i> element, and <em>event.target.value</em> refers to the input value of that element.
 
 Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because there is no default action that occurs on an input change, unlike on a form submission.
 
@@ -245,7 +245,7 @@ const addNote = (event) => {
 }
 ```
 
-First we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> function, our note has a 50% chance of being marked as important.
+First, we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> function, our note has a 50% chance of being marked as important.
 
 The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method, introduced in [part 1](/en/part1/java_script#arrays):
 
@@ -336,7 +336,7 @@ If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable wil
 notes.filter(note => note.important === true)
 ```
 
-The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i> which means that we can simply write:
+The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i>, which means that we can simply write:
 
 ```js
 notes.filter(note => note.important)
@@ -346,7 +346,7 @@ The reason we showed the comparison operator first was to emphasize an important
 
 You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state.
 
-Next let's add functionality that enables users to toggle the <em>showAll</em> state of the application from the user interface.
+Next, let's add functionality that enables users to toggle the <em>showAll</em> state of the application from the user interface.
 
 The relevant changes are shown below:
 
