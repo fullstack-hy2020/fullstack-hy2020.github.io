@@ -99,7 +99,7 @@ However, the method is not very optimal. As we can see from the pictures, the ad
 
 ### React Router
 
-Luckily, React has the [React Router](https://reactrouter.com/ library which provides an excellent solution for managing navigation in a React application.
+Luckily, React has the [React Router](https://reactrouter.com/) library which provides an excellent solution for managing navigation in a React application.
 
 Let's change the above application to use React Router. First, we install React Router with the command
 
