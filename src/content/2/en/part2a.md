@@ -40,13 +40,13 @@ If necessary, read more about [debugging React-applications](/en/part1/a_more_co
 
 ### Protip: Visual Studio Code snippets
 
-With Visual Studio Code it's easy to create 'snippets', i.e. shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.
+With Visual Studio Code it's easy to create 'snippets', i.e., shortcuts for quickly generating commonly re-used portions of code, much like how 'sout' works in Netbeans.
 
 Instructions for creating snippets can be found [here](https://code.visualstudio.com/docs/editor/userdefinedsnippets#_creating-your-own-snippets).
 
 Useful, ready-made snippets can also be found as VS Code plugins, in the [marketplace](https://marketplace.visualstudio.com/items?itemName=dsznajder.es7-react-js-snippets).
 
-The most important snippet is the one for the <em>console.log()</em> command, for example <em>clog</em>. This can be created like so: 
+The most important snippet is the one for the <em>console.log()</em> command, for example, <em>clog</em>. This can be created like so: 
 ```js
 {
   "console.log": {
@@ -137,7 +137,7 @@ ReactDOM.render(
 )
 ```
 
-Every note contains its textual content and a timestamp as well as a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>.
+Every note contains its textual content and a timestamp, as well as a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>.
 
 The example above works due to the fact that there are exactly three notes in the array. 
 
@@ -325,7 +325,7 @@ Because the function parameter passed to the _map_ method -
 note => <li key={note.id}>{note.content}</li>
 ```
 
-&nbsp;- is used to create view elements, the value of the variable must be rendered inside of curly braces. Try to see what happens if the braces are removed. 
+&nbsp;- is used to create view elements, the value of the variable must be rendered inside curly braces. Try to see what happens if the braces are removed. 
 
 The use of curly braces will cause some pain in the beginning, but you will get used to them soon enough. The visual feedback from React is immediate.
 
@@ -473,7 +473,7 @@ If you clone the project, run the command _npm install_ before starting the appl
 
 Early in your programming career (and even after 30 years of coding like yours truly), what often happens is that the application just completely breaks down. This is even more the case with dynamically typed languages, such as JavaScript, where the compiler does not check the data type. For instance, function variables or return values. 
 
-A "React explosion" can for example look like this:
+A "React explosion" can, for example, look like this:
 
 ![](../../images/2/3b.png)
 
