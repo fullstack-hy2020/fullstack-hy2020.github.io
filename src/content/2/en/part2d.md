@@ -14,7 +14,7 @@ When creating notes in our application, we would naturally want to store them in
 
 The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful.
 
-We will take a closer look at REST in the [next part](/en/part3) of the course, but it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.
+We will take a closer look at REST in the [next part](/en/part3) of the course. But it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.
 
 ### REST
 
@@ -101,7 +101,7 @@ This makes it possible to verify that all the data we intended to send was actua
 
 In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
 
-> **NB:** In the current version of our application the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
+> **NB:** In the current version of our application, the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
 
 
 The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
@@ -171,7 +171,7 @@ const App = () => {
 
 Notice how every note receives its own <i>unique</i> event handler function, since the <i>id</i> of every note is unique.
 
-E.g. if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
+E.g., if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
 
 ```js
 () => { console.log('importance of 3 needs to be toggled') }
@@ -219,7 +219,7 @@ The code for creating the new object that uses the [object spread](https://devel
 const changedNote = { ...note, important: !note.important }
 ```
 
-In practice <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spreaded object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
+In practice, <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spreaded object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
 
 There's a few things to point out. Why did we make a copy of the note object we wanted to modify, when the following code also appears to work?
 
@@ -233,7 +233,7 @@ axios.put(url, note).then(response => {
 
 This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must never mutate state directly in React. 
 
-It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in new object would reference the same objects that were in the old object.
+It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 
 The new note is then sent with a PUT request to the backend where it will replace the old object.
 
@@ -251,7 +251,7 @@ This is accomplished with the <em>map</em> method:
 notes.map(note => note.id !== id ? note : response.data)
 ```
 
-The map method creates a new array by mapping every item from the old array into an item in the new array. In our example, the new array is created conditionally so that if <em>note.id !== id</em> is true, we simply copy the item from the old array into the new array. If the condition is false, then the note object returned by the server is added to the array instead.
+The map method creates a new array by mapping every item from the old array into an item in the new array. In our example, the new array is created conditionally so that if <em>note.id !== id</em> is true; we simply copy the item from the old array into the new array. If the condition is false, then the note object returned by the server is added to the array instead.
 
 This <em>map</em> trick may seem a bit strange at first, but it's worth spending some time wrapping your head around it. We will be using this method many times throughout the course.
 
@@ -484,7 +484,7 @@ Promises are central to modern JavaScript development and it is highly recommend
 
 ### Cleaner Syntax for Defining Object Literals
 
-The module defining note related services currently exports an object with the properties <i>getAll</i>, <i>create</i> and <i>update</i> that are assigned to functions for handling notes.
+The module defining note related services currently exports an object with the properties <i>getAll</i>, <i>create</i>, and <i>update</i> that are assigned to functions for handling notes.
 
 The module definition was:
 
@@ -526,7 +526,7 @@ The module exports the following, rather peculiar looking, object:
 
 The labels to the left of the colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside of the module.
 
-Since the names of the keys and the assigned variables are the same, we can write the object definition with more compact syntax:
+Since the names of the keys and the assigned variables are the same, we can write the object definition with a more compact syntax:
 
 ```js
 { 
@@ -536,7 +536,7 @@ Since the names of the keys and the assigned variables are the same, we can writ
 }
 ```
 
-As a result the module definition gets simplified into the following form:
+As a result, the module definition gets simplified into the following form:
 
 ```js
 import axios from 'axios'
@@ -590,7 +590,7 @@ The result is identical for both expressions. They both create an object with a 
 
 If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system.
 
-Let's simulate this situation by making the <em>getAll</em> function of the note service return a "hardcoded" note that does not actually exist in the backend server:
+Let's simulate this situation by making the <em>getAll</em> function of the note service return a "hardcoded" note that does not actually exist on the backend server:
 
 ```js
 const getAll = () => {
