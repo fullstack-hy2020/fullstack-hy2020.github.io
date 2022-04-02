@@ -592,7 +592,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _content_ object, that is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
+The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _container_ object, that is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
 
 Consider eg. that we would define an unique _id_ to the input field:
 
@@ -624,9 +624,9 @@ const NoteForm = ({ createNote }) => {
 The input element could now be found in the test as follows:
 
 ```js
-const { content } = render(<NoteForm createNote={createNote} />)
+const { container } = render(<NoteForm createNote={createNote} />)
 
-const input = content.querySelector('#note-input')
+const input = container.querySelector('#note-input')
 ```
 
 However we shall stick to a approach using _getByPlaceholderText_ in the test. 
