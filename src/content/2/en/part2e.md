@@ -10,7 +10,7 @@ lang: en
 
 The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. At first, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
+Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
 
 Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:
 
@@ -26,7 +26,7 @@ h1 {
 }
 ```
 
-**Note:** when the content of the file <i>index.css</i> changes, React might not notice that automatically so you may need to refresh the browser to see your changes!
+**Note:** when the content of the file <i>index.css</i> changes, React might not notice that automatically, so you may need to refresh the browser to see your changes!
 
 CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application.
 
@@ -212,7 +212,7 @@ Now we are ready to add the logic for displaying the error message. Let's change
   }
 ```
 
-When the error occurs we add a descriptive error message to the <em>errorMessage</em> state. At the same time we start a timer, that will set the <em>errorMessage</em> state to <em>null</em> after five seconds.
+When the error occurs we add a descriptive error message to the <em>errorMessage</em> state. At the same time, we start a timer, that will set the <em>errorMessage</em> state to <em>null</em> after five seconds.
 
 The result looks like this:
 
@@ -249,7 +249,7 @@ But as a React inline style object it would look like this:
 
 Every CSS property is defined as a separate property of the JavaScript object. Numeric values for pixels can be simply defined as integers. One of the major differences compared to regular CSS, is that hyphenated (kebab case) CSS properties are written in camelCase.
 
-Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and define the following inline styles for it:
+Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and defining the following inline styles for it:
 
 ```js
 // highlight-start
