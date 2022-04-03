@@ -37,6 +37,7 @@ When you reload the page (press the F5 key or the &#8635; symbol on your browser
 - The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
 - And has downloaded the image <i>kuva.png</i>
 
+![The address on screenshot don't match the text. The text "page content received <i>studies.cs.helsinki.fi/exampleapp</i>" - in the screenshots, the address is "fullstack-exampleapp.herokuapp.com"]
 ![Screenshot of the developer console  showing these two events](../../images/0/2e.png)
 
 On a small screen you might have to widen the console window to see these. 
