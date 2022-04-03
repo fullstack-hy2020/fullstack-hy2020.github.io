@@ -38,7 +38,7 @@ Create a file named <i>db.json</i> in the root directory of the project with the
 }
 ```
 
-You can [install](https://github.com/typicode/json-server#getting-started) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on the faculty computers or freshman laptops.
+You can [install](https://github.com/typicode/json-server#getting-started) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.
 
 However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
 
@@ -54,7 +54,7 @@ Let's navigate to the address <http://localhost:3001/notes> in the browser. We c
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 
-Going forward, the idea will be to save the notes to the server, which in this case means saving to the json-server. The React code fetches the notes from the server and renders them to the screen. Whenever a new note is added to the application the React code also sends it to the server to make the new note persist in "memory".
+Going forward, the idea will be to save the notes to the server, which in this case means saving them to the json-server. The React code fetches the notes from the server and renders them to the screen. Whenever a new note is added to the application, the React code also sends it to the server to make the new note persist in "memory".
 
 json-server stores all the data in the <i>db.json</i> file, which resides on the server. In the real world, data would be stored in some kind of database. However, json-server is a handy tool that enables the use of server-side functionality in the development phase without the need to program any of it.
 
@@ -89,7 +89,7 @@ Right at the beginning we register an <i>event handler</i> to the <em>xhttp</em>
 
 It is worth noting that the code in the event handler is defined before the request is sent to the server. Despite this, the code within the event handler will be executed at a later point in time. Therefore, the code does not execute synchronously "from top to bottom", but does so <i>asynchronously</i>. JavaScript calls the event handler that was registered for the request at some point.
 
-A synchronous way of making requests that's common in Java programming, for instance, would play out as follows (NB this is not actually working Java code):
+A synchronous way of making requests that's common in Java programming, for instance, would play out as follows (NB, this is not actually working Java code):
 
 ```java
 HTTPRequest request = new HTTPRequest();
@@ -104,9 +104,9 @@ notes.forEach(m => {
 
 In Java the code executes line by line and stops to wait for the HTTP request, which means waiting for the command _request.get(...)_ to finish. The data returned by the command, in this case the notes, are then stored in a variable, and we begin manipulating the data in the desired manner.
 
-On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO-operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that the code execution continues immediately after calling an IO function, without waiting for it to return.
+On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO-operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that code execution continues immediately after calling an IO function, without waiting for it to return.
 
-When an asynchronous operation is completed, or more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
+When an asynchronous operation is completed, or, more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
 
 Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practice to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
 
@@ -125,7 +125,7 @@ setTimeout(() => {
 
 everything would work normally for 5 seconds. However, when the function defined as the parameter for <em>setTimeout</em> is run, the browser will be stuck for the duration of the execution of the long loop. Even the browser tab cannot be closed during the execution of the loop, at least not in Chrome.
 
-For the browser to remain <i>responsive</i>, i.e. to be able to continuously react to user operations with sufficient speed, the code logic needs to be such that no single computation can take too long.
+For the browser to remain <i>responsive</i>, i.e., to be able to continuously react to user operations with sufficient speed, the code logic needs to be such that no single computation can take too long.
 
 There is a host of additional material on the subject to be found on the internet. One particularly clear presentation of the topic is the keynote by Philip Roberts called [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
 
@@ -245,13 +245,13 @@ npm run server
 
 We will get more familiar with the _npm_ tool in the [third part of the course](/en/part3).
 
-**NB** The previously started json-server must be terminated before starting a new one, otherwise there will be trouble:
+**NB** The previously started json-server must be terminated before starting a new one; otherwise there will be trouble:
 
 ![](../../images/2/15b.png)
 
 The red print in the error message informs us about the issue:
 
-<i>Cannot bind to the port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i> 
+<i>Cannot bind to port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i> 
 
 As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
 
@@ -270,7 +270,7 @@ Now we are ready to use axios. Going forward, json-server is assumed to be runni
 
 NB: To run json-server and your react app simultaneously, you may need to use two terminal windows. One to keep json-server running and the other to run react-app.
 
-The library can be brought into use the same way other libraries, e.g. React, are, i.e. by using an appropriate <em>import</em> statement.
+The library can be brought into use the same way other libraries, e.g. React, are, i.e., by using an appropriate <em>import</em> statement.
 
 Add the following to the file <i>index.js</i>:
 
@@ -288,7 +288,7 @@ If you open <http://localhost:3000> in the browser, this should be printed to th
 
 ![](../../images/2/16b.png)
 
-**Note:** when the content of the file <i>index.js</i> changes, React does not always notice that automatically so you might need to refresh the browser to see your changes! A simple workaround to make React notice the change automatically, is to create a file named <i>.env</i> in the root directory of the project and add this line <i>FAST_REFRESH=false</i>. Restart the app for the applied changes to take effect.
+**Note:** when the content of the file <i>index.js</i> changes, React does not always notice that automatically, so you might need to refresh the browser to see your changes! A simple workaround to make React notice the change automatically, is to create a file named <i>.env</i> in the root directory of the project and add this line <i>FAST_REFRESH=false</i>. Restart the app for the applied changes to take effect.
 
 Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
@@ -299,7 +299,7 @@ The documentation on Mozilla's site states the following about promises:
 In other words, a promise is an object that represents an asynchronous operation. A promise can have three distinct states:
 
 1. The promise is <i>pending</i>: It means that the final value (one of the following two) is not available yet.
-2. The promise is <i>fulfilled</i>: It means that the operation has completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
+2. The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
 The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
@@ -329,7 +329,7 @@ axios.get('http://localhost:3001/notes').then(response => {
 ```
 
 
-The callback function now takes the data contained within the response, stores it in a variable and prints the notes to the console.
+The callback function now takes the data contained within the response, stores it in a variable, and prints the notes to the console.
 
 
 
@@ -372,9 +372,9 @@ What's not immediately obvious, however, is where the command <em>axios.get</em>
 
 ### Effect-hooks
 
-We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces the [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. As per the official docs:
+We have already used [state hooks](https://reactjs.org/docs/hooks-state.html) that were introduced along with React version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), which provide state to React components defined as functions - the so-called <i>functional components</i>. Version 16.8.0 also introduces [effect hooks](https://reactjs.org/docs/hooks-effect.html) as a new feature. As per the official docs:
 
-> <i>The Effect Hook lets you perform side effects in function components.</i>
+> <i>The Effect Hook lets you perform side effects on function components.</i>
 > <i>Data fetching, setting up a subscription, and manually changing the DOM in React components are all examples of side effects.</i>
 
 As such, effect hooks are precisely the right tool to use when fetching data from a server.
@@ -417,7 +417,7 @@ const App = () => { // highlight-line
 
 We have also added a few helpful prints, which clarify the progression of the execution.
 
-This is printed to the console
+This is printed to the console:
 
 <pre>
 render 0 notes
@@ -426,7 +426,7 @@ promise fulfilled
 render 3 notes
 </pre>
 
-First the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
+First, the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
 
 The following function, or effect in React parlance:
 ```js
@@ -495,7 +495,7 @@ There are many possible use cases for an effect hook other than fetching data fr
 
 Think back to the sequence of events we just discussed. Which parts of the code are run? In what order? How often? Understanding the order of events is critical!
 
-Note that we could have also written the code of the effect function this way:
+Note that we could have also written the code for the effect function this way:
 
 ```js
 useEffect(() => {
