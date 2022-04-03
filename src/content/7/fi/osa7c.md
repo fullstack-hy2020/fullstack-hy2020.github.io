@@ -107,7 +107,7 @@ import { Table } from 'react-bootstrap'
 
 Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta Bootstrapin [lomakkeiden](https://getbootstrap.com/docs/4.1/components/forms/) avulla.
 
-React bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/components/forms/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
+React bootstrap tarjoaa valmiit [komponentit](https://react-bootstrap.github.io/forms/overview/) myös lomakkeiden muodostamiseen (dokumentaatio tosin ei ole paras mahdollinen):
 
 ```js
 let Login = (props) => {
