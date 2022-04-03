@@ -83,7 +83,7 @@ The setup of our app looks now as follows:
 
 ![](../../images/3/100.png)
 
-The react app that runs in browser fetches now the data from node/express-server that runs in localhost:3001.
+The react app running in the browser now fetches the data from node/express-server that runs in localhost:3001.
 ### Application to the Internet
 
 Now that the whole stack is ready, let's move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this.
