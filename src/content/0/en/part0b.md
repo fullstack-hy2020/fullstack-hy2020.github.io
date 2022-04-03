@@ -165,7 +165,7 @@ The details of the code are not important right now, but some code has been incl
 
 Immediately after fetching the <i>script</i> tag, the browser begins to execute the code. 
 
-The last two lines define that the browser does an HTTP GET request to the server's address <i>/data.json</i>:
+The last two lines instruct the browser to do an HTTP GET request to the server's address <i>/data.json</i>:
 
 ```js
 xhttp.open('GET', '/data.json', true)
