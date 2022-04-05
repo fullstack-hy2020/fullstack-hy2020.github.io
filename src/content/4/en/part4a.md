@@ -359,7 +359,7 @@ module.exports = {
 // highlight-end
 ```
 
-The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used with two different ways. The first option is to require the whole object and refer to functions throught he object using the dot notation: 
+The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used with two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation: 
 
 ```js
 const logger = require('./utils/logger')
