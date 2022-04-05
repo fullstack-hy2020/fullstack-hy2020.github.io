@@ -7,6 +7,30 @@ lang: en
 
 <div class="content">
 
+### A note on React version
+
+Version 18 of React was released late March 2022. The code in material should work as it is with the new React version. However, some libraries might not yet be compatible with React 18. At the moment of writing (4th April) at least the Apollo client used in [part 8](/en/part8) does not yet work with most recent React.
+
+In case you end up in a situation where your application breaks because of library compatibly problems, <i>downgrade</i> to the older React by changing the file <i>pacgage.json</i> as follows:
+
+```js
+{
+  "dependencies": {
+    "react": "^17.0.2", // highlight-line
+    "react-dom": "^17.0.2", // highlight-line
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  // ...
+}
+```
+
+After the change is made, reinstall dependencies by running
+
+```js
+npm install
+```
+
 ### Complex state
 
 In our previous example the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
@@ -1013,7 +1037,8 @@ You may find the following links useful:
 </div>
 
 <div class="tasks">
-  <h3>Exercises  1.6.-1.14.</h3>
+
+<h3>Exercises  1.6.-1.14.</h3>
 
 Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -1029,7 +1054,7 @@ In some situations you may also have to run the command below from the root of t
 rm -rf node_modules/ && npm i
 ```
 
-  <h4> 1.6: unicafe step1</h4>
+<h4> 1.6: unicafe step1</h4>
 
 Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
 
