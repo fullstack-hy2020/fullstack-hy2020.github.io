@@ -33,13 +33,12 @@ Your default browser should launch automatically. Open the browser console **imm
 The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:
 
 ```js
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+ReactDOM
+  .createRoot(document.getElementById('root'))
+  .render(<App />)
 ```
 
 and file <i>App.js</i> looks like this
@@ -429,10 +428,9 @@ Use create-react-app to initialize a new application. Modify <i>index.js</i> to 
 import ReactDOM from 'react-dom'
 import App from './App'
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+ReactDOM
+  .createRoot(document.getElementById('root'))
+  .render(<App />)
 ```
 
 and <i>App.js</i> to match the following
