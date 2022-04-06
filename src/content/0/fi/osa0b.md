@@ -175,7 +175,7 @@ Voimme kokeilla mennä osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/d
 
 ![](../../images/0/10e.png)
 
-Osoitteesta löytyvät muistiinpanot [JSON](https://en.wikipedia.org/wiki/JSON)-muotoisena "raakadatana". Oletusarvoisesti selain ei osaa näyttää JSON-dataa kovin hyvin, mutta on olemassa lukuisia plugineja, jotka hoitavat muotoilun. Asenna nyt Chromeen esim. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) ja lataa sivu uudelleen. Data on nyt miellyttävämmin muotoiltua:
+Osoitteesta löytyvät muistiinpanot [JSON](https://en.wikipedia.org/wiki/JSON)-muotoisena "raakadatana". Oletusarvoisesti selain ei osaa näyttää JSON-dataa kovin hyvin, mutta on olemassa lukuisia plugineja, jotka hoitavat muotoilun. Asenna nyt Chromeen esim. [JSONView](https://chrome.google.com/webstore/detail/jsonview/gmegofmjomhknnokphhckolhcffdaihd) ja lataa sivu uudelleen. Data on nyt miellyttävämmin muotoiltua:
 
 ![](../../images/0/11e.png)
 
