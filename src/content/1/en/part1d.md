@@ -11,7 +11,7 @@ lang: en
 
 Version 18 of React was released late March 2022. The code in material should work as it is with the new React version. However, some libraries might not yet be compatible with React 18. At the moment of writing (4th April) at least the Apollo client used in [part 8](/en/part8) does not yet work with most recent React.
 
-In case you end up in a situation where your application breaks because of library compatibly problems, <i>downgrade</i> to the older React by changing the file <i>pacgage.json</i> as follows:
+In case you end up in a situation where your application breaks because of library compatibly problems, <i>downgrade</i> to the older React by changing the file <i>package.json</i> as follows:
 
 ```js
 {
