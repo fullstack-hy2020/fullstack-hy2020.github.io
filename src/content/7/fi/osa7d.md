@@ -687,7 +687,7 @@ Tarkoituksena on konfiguroida sovellus webpackin avulla siten, että paikallises
 
 Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://obscure-harbor-49797.herokuapp.com/api/notes> olevaa backendia.
 
-Asennetaan <i>axios</i>, käynnistetään json-server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa5/custom_hookit) _useNotes_ avulla:
+Asennetaan <i>axios</i>, käynnistetään json-server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa7/custom_hookit) _useNotes_ avulla:
 
 ```js
 import React, { useState, useEffect } from 'react'
