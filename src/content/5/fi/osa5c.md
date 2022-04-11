@@ -246,7 +246,7 @@ Asennetaan testiä varten apukirjasto [user-event](https://testing-library.com/d
 npm install --save-dev @testing-library/user-event
 ```
 
-Tällä hetkellä (28.1.2022) create-react-appin ja user-eventin olettamien kirjstojen välillä on pieni yhteensopivuusero joka korjautuu kun asetetaan kirjastosta jest-watch-typeahead tietty verio:
+Tällä hetkellä (28.1.2022) create-react-appin ja user-eventin olettamien kirjastojen välillä on pieni yhteensopivuusero joka korjautuu kun asetetaan kirjastosta jest-watch-typeahead tietty versio:
 
 ```
 npm install -D --exact jest-watch-typeahead@0.6.5
