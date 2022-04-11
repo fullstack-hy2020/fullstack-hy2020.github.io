@@ -37,8 +37,7 @@ When you reload the page (press the F5 key or the &#8635; symbol on your browser
 - The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
 - And has downloaded the image <i>kuva.png</i>
 
-![The address on screenshot don't match the text. The text "page content received <i>studies.cs.helsinki.fi/exampleapp</i>" - in the screenshots, the address is "fullstack-exampleapp.herokuapp.com"]
-![Screenshot of the developer console  showing these two events](../../images/0/2e.png)
+![Screenshot of the developer console showing these two events](../../images/0/2e.png)
 
 On a small screen you might have to widen the console window to see these. 
 
@@ -114,7 +113,7 @@ The content of the HTML page has been saved as a template string, or a string wh
 
 Writing HTML in the midst of the code is of course not smart, but for old-school PHP-programmers it was a normal practice.
 
-In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created, for example, using Java Spring like on the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639), Python Flask (like on the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) or with [Ruby on Rails](http://rubyonrails.org/).
+In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created using Java Spring (like in the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639)), Python Flask (like in the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) or with [Ruby on Rails](http://rubyonrails.org/) to name just a few examples.
 
 The example uses [Express](https://expressjs.com/) from Node.js. 
 This course will use Node.js and Express to create web servers. 
@@ -166,7 +165,7 @@ The details of the code are not important right now, but some code has been incl
 
 Immediately after fetching the <i>script</i> tag, the browser begins to execute the code. 
 
-The last two lines define that the browser does an HTTP GET request to the server's address <i>/data.json</i>:
+The last two lines instruct the browser to do an HTTP GET request to the server's address <i>/data.json</i>:
 
 ```js
 xhttp.open('GET', '/data.json', true)
