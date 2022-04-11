@@ -602,7 +602,7 @@ const App = () => {
   // ...
 
   return (
-    <Page> // highlight-line
+     <Page> // highlight-line
       <Navigation> // highlight-line
         <Link style={padding} to="/">home</Link>
         <Link style={padding} to="/notes">notes</Link>
@@ -612,27 +612,17 @@ const App = () => {
           : <Link style={padding} to="/login">login</Link>
         }
       </Navigation> // highlight-line
-
-      <Switch>
-        <Route path="/notes/:id">
-          <Note note={note} />
-        </Route>
-        <Route path="/notes">
-          <Notes notes={notes} />
-        </Route>
-        <Route path="/users">
-          {user ? <Users /> : <Redirect to="/login" />}
-        </Route>
-        <Route path="/login">
-          <Login onLogin={login} />
-        </Route>
-        <Route path="/">
-          <Home />
-        </Route>
-      </Switch>
       
+      <Routes>
+        <Route path="/notes/:id" element={<Note note={note} />} />  
+        <Route path="/notes" element={<Notes notes={notes} />} />   
+        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+        <Route path="/login" element={<Login onLogin={login} />} />
+        <Route path="/" element={<Home />} />      
+      </Routes>
+
       <Footer> // highlight-line
-        <em>Note app, Department of Computer Science 2021</em>
+        <em>Note app, Department of Computer Science 2022</em>
       </Footer> // highlight-line
     </Page> // highlight-line
   )
