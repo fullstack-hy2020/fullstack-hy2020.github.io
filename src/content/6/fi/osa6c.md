@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Laajennetaan sovellusta siten, että muistiinpanot talletetaan backendiin. Käytetään osasta 2 tuttua [json-serveriä](/osa2/palvelimella_olevan_datan_hakeminen).
+Laajennetaan sovellusta siten, että muistiinpanot talletetaan backendiin. Käytetään osasta 2 tuttua [JSON Serveriä](/osa2/palvelimella_olevan_datan_hakeminen).
 
 Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 
@@ -28,7 +28,7 @@ Tallennetaan projektin juuren tiedostoon <i>db.json</i> tietokannan alkutila:
 }
 ```
 
-Asennetaan projektiin json-server
+Asennetaan projektiin JSON Server
 
 ```bash
 npm install json-server --save-dev
@@ -43,7 +43,7 @@ ja lisätään tiedoston <i>package.json</i> osaan <i>scripts</i> rivi
 }
 ```
 
-Käynnistetään json-server komennolla _npm run server_.
+Käynnistetään JSON Server komennolla _npm run server_.
 
 Tehdään sitten tuttuun tapaan <i>axiosia</i> hyödyntävä backendistä dataa hakeva metodi tiedostoon <i>services/notes.js</i>:
 
@@ -60,7 +60,7 @@ const getAll = async () => {
 export default { getAll }
 ```
 
-Asennetaan myös axios projektiin
+Asennetaan myös axios projektiin:
 
 ```bash
 npm install axios
@@ -144,7 +144,7 @@ noteService.getAll().then(notes =>
 // ...
 ```
 
-Monen actionin dispatchaaminen vaikuttaa hieman epäkäytännölliseltä. Lisätään action creatori <em>setNotes</em>, jonka avulla muistiinpanojen taulukon voi suoraan korvata. Saamme <em>createSlice</em>-funktion avulla haluamamme action creatorin, kun määrittelemme <em>setNotes</em>-actionin:
+Monen actionin dispatchaaminen vaikuttaa hieman epäkäytännölliseltä. Lisätään action creator <em>setNotes</em>, jonka avulla muistiinpanojen taulukon voi suoraan korvata. Saamme <em>createSlice</em>-funktion avulla haluamamme action creatorin, kun määrittelemme <em>setNotes</em>-actionin:
 
 ```js
 // ...
@@ -211,7 +211,7 @@ noteService.getAll().then(notes =>
 )
 ```
 
-> **HUOM:** miksi emme käyttäneet koodissa promisejen ja _then_-metodilla rekisteröidyn tapahtumankäsittelijän sijaan awaitia?
+> **HUOM:** Miksi emme käyttäneet koodissa promisejen ja _then_-metodilla rekisteröidyn tapahtumankäsittelijän sijaan awaitia?
 >
 > await toimii ainoastaan <i>async</i>-funktioiden sisällä, ja <i>index.js</i>:ssä oleva koodi ei ole funktiossa, joten päädyimme tilanteen yksinkertaisuuden takia tällä kertaa jättämään <i>async</i>:in käyttämättä.
 
@@ -219,7 +219,7 @@ Päätetään kuitenkin siirtää muistiinpanojen alustus <i>App</i>-komponentii
 
 ```js
 import { useEffect } from 'react' // highlight-line
-import NewNote from './components/NowNote'
+import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
 import noteService from './services/notes' // highlight-line
@@ -247,7 +247,7 @@ const App = () => {
 export default App
 ```
 
-Hookin useEffect käyttö aiheuttaa eslint-varoituksen:
+Hookin useEffect käyttö aiheuttaa ESLint-varoituksen:
 
 ![](../../images/6/26ea.png)
 
@@ -265,7 +265,7 @@ const App = () => {
 }
 ```
 
-Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä Redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton.
+Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä Redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen. Näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton.
 
 Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta:
 
@@ -283,9 +283,9 @@ const App = () => {
 }
 ```
 
-Yleisesti ottaen eslint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen eslint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa. 
+Yleisesti ottaen ESLint-virheiden disabloiminen ei ole hyvä idea, joten vaikka kyseisen ESLint-säännön tarpeellisuus onkin aiheuttanut [kiistelyä](https://github.com/facebook/create-react-app/issues/6880), pitäydytään ylemmässä ratkaisussa. 
 
-Lisää hookien riippuvuuksien määrittelyn tarpeesta [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
+Lisää hookien riippuvuuksien määrittelyn tarpeesta on [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
 Voimme toimia samoin myös uuden muistiinpanon luomisen suhteen. Laajennetaan palvelimen kanssa kommunikoivaa koodia:
 
@@ -360,7 +360,7 @@ Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-h
 
 #### 6.13 anekdootit ja backend, step1
 
-Hae sovelluksen käynnistyessä anekdootit json-serverillä toteutetusta backendistä.
+Hae sovelluksen käynnistyessä anekdootit JSON Serverillä toteutetusta backendistä.
 
 Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
@@ -372,9 +372,9 @@ Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendii
 
 <div class="content">
 
-### Asynkroniset actionit ja redux thunk
+### Asynkroniset actionit ja Redux Thunk
 
-Lähestymistapamme on melko hyvä, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponentit määrittelevien funktioiden koodissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>, esim. <i>App</i> alustaisi sovelluksen tilan seuraavasti:
+Lähestymistapamme on melko hyvä, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponentit määrittelevien funktioiden koodissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>. Esim. <i>App</i> voisi alustaa sovelluksen tilan seuraavasti:
 
 ```js
 const App = () => {
@@ -382,13 +382,13 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeNotes())
-  },[dispatch]) 
+  }, [dispatch]) 
   
   // ...
 }
 ```
 
-ja <i>NoteForm</i> loisi uuden muistiinpanon seuraavasti:
+<i>NoteForm</i> puolestaan loisi uuden muistiinpanon seuraavasti:
 
 ```js
 const NewNote = () => {
@@ -405,9 +405,9 @@ const NewNote = () => {
 }
 ```
 
-Molemmat komponentit dispatchaisivat ainoastaan actionin, välittämättä siitä, että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia. Tämän kaltaisten <i>asynkronisten actioneiden</i> käyttö onnistuu [Redux Thunk](https://github.com/reduxjs/redux-thunk)-kirjaston avulla. Kirjaston käyttö ei vaadi ylimääräistä konfiguraatiota, kun Redux-store on luotu Redux Toolkitin <em>configureStore</em>-funktiolla.
+Molemmat komponentit dispatchaisivat ainoastaan actionin välittämättä siitä, että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia. Tämän kaltaisten <i>asynkronisten actioneiden</i> käyttö onnistuu [Redux Thunk](https://github.com/reduxjs/redux-thunk)-kirjaston avulla. Kirjaston käyttö ei vaadi ylimääräistä konfiguraatiota, kun Redux-store on luotu Redux Toolkitin <em>configureStore</em>-funktiolla.
 
-Asennetaan kirjasto
+Asennetaan kirjasto:
 
 ```
 npm install redux-thunk
@@ -437,7 +437,7 @@ export const initializeNotes = () => {
 export default noteSlice.reducer
 ```
 
-Sisemmässä funktiossaan, eli <i>asynkronisessa actionissa</i>, operaatio hakee ensin palvelimelta kaikki muistiinpanot ja sen jälkeen <i>dispatchaa</i> muistiinpanot storeen lisäävän actionin, <em>setNotes</em>.
+Sisemmässä funktiossaan eli <i>asynkronisessa actionissa</i> operaatio hakee ensin palvelimelta kaikki muistiinpanot ja sen jälkeen <i>dispatchaa</i> muistiinpanot storeen lisäävän actionin, <em>setNotes</em>.
 
 Komponentti <i>App</i> voidaan nyt määritellä seuraavasti:
 
@@ -448,7 +448,7 @@ const App = () => {
   // highlight-start
   useEffect(() => {
     dispatch(initializeNotes()) 
-  },[dispatch]) 
+  }, [dispatch]) 
   // highlight-end
 
   return (
@@ -461,7 +461,7 @@ const App = () => {
 }
 ```
 
-Ratkaisu on elegantti, muistiinpanojen alustuslogiikka on eriytetty kokonaan React-komponenttien ulkopuolelle.
+Ratkaisu on elegantti, sillä muistiinpanojen alustuslogiikka on eriytetty kokonaan React-komponenttien ulkopuolelle.
 
 Korvataan seuraavaksi <em>createSlice</em>-funktion avulla toteutettu <em>createNote</em> -action creator saman nimisellä asynkronisella action creatorilla:  
 
@@ -519,7 +519,7 @@ export const createNote = content => {
 export default noteSlice.reducer
 ```
 
-Periaate on jälleen sama, ensin suoritetaan asynkroninen operaatio, ja sen valmistuttua <i>dispatchataan</i> storen tilaa muuttava action. Redux Toolkit tarjoaa monia työkaluja asynkronisen tilanhallinnan helpottamiseksi. Tähän käyttötarkoitukseen soveltuvat mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktio ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview)-API.
+Periaate on jälleen sama. Ensin suoritetaan asynkroninen operaatio, ja sen valmistuttua <i>dispatchataan</i> storen tilaa muuttava action. Redux Toolkit tarjoaa monia työkaluja asynkronisen tilanhallinnan helpottamiseksi. Tähän käyttötarkoitukseen soveltuvat mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktio ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) -API.
 
 Komponentti <i>NewNote</i> muuttuu seuraavasti:
 
@@ -537,13 +537,13 @@ const NewNote = () => {
   return (
     <form onSubmit={addNote}>
       <input name="note" />
-      <button type="submit">lisää</button>
+      <button type="submit">add</button>
     </form>
   )
 }
 ```
 
-Siistitään lopuksi vielä hieman <i>index.js</i>-tiedostoa, siirtämällä Redux-storen luontiin liittyvän koodin omaan, <i>store.js</i>-tiedostoonsa:
+Siistitään lopuksi vielä hieman <i>index.js</i>-tiedostoa siirtämällä Redux-storen luontiin liittyvä koodi erilliseen <i>store.js</i>-tiedostoon:
 
 ```js
 import { configureStore } from '@reduxjs/toolkit'
@@ -593,7 +593,6 @@ Muuta Redux-storen alustus tapahtumaan Redux Thunk -kirjaston avulla toteutettuu
 
 Muuta myös uuden anekdootin luominen tapahtumaan Redux Thunk -kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
-
 #### 6.17 anekdootit ja backend, step5
 
 Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne Redux Thunk -kirjastoa hyödyntäen.
@@ -615,7 +614,7 @@ Toteuta action creator, joka mahdollistaa notifikaation antamisen seuraavasti:
 dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
 ```
 
-eli ensimmäisenä parametrina on renderöitävä teksti ja toisena notifikaation näyttöaika sekunneissa.
+Ensimmäisenä parametrina on renderöitävä teksti ja toisena notifikaation näyttöaika sekunneissa.
 
 Ota paranneltu notifikaatiotapa käyttöön sovelluksessasi.
 
