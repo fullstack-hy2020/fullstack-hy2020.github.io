@@ -341,7 +341,7 @@ If you clone the project for yourself, run the _npm install_ command before star
 
 ### Note on exports
 
-We have used two different kinds of exports in this parts. Firstly, eg. the file <i>utils/logger.js</i> does the export as follows:
+We have used two different kinds of exports in this part. Firstly, eg. the file <i>utils/logger.js</i> does the export as follows:
 
 ```js
 const info = (...params) => {
@@ -368,7 +368,7 @@ logger.info('message')
 
 logger.error('error message')
 ```
-The other option is to destructure the functions to own variables in the <i>require</i> statement:
+The other option is to destructure the functions to its own variables in the <i>require</i> statement:
 
 ```js
 const { info, error } = require('./utils/logger')
