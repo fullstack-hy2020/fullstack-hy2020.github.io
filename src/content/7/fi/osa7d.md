@@ -335,7 +335,7 @@ On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await
 npm install core-js regenerator-runtime
 ```
 
-ja importtmalla ne tiedostossa <i>index.js</i>:
+ja importtaamalla ne tiedostossa <i>index.js</i>:
 
 ```js
 import 'core-js/stable/index.js'
