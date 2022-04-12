@@ -123,7 +123,7 @@ Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b
 
 ![](../../images/0/28b.png)
 
-Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) kautta.
+Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) jälkeen [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
 
 Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja *ilmoittanut palautussovelluksessa* olevasi valmis kurssin suorituksen kanssa:
 
@@ -194,7 +194,7 @@ Pääset Moodleen [tämän linkin](https://moodle.helsinki.fi/course/view.php?id
 
 Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Se tulee aktivoida ennen kurssikokeen suorittamista. [Lue lisää käyttäjätunnuksen aktivoinnista](https://studies.helsinki.fi/ohjeet/artikkeli/helsingin-yliopiston-kayttajatunnus-avoin-yliopisto).
 
-HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen!
+HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen! Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
 
 ### Full stack -harjoitustyö
 
@@ -213,6 +213,35 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2
 Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville. Vuoden 2021 aikana ilmestyneiden osien 12 ja 13 suorittamista ei edellytetä 15.3.2022 mennessä harjoitustyön suorittavilta.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
+
+### Miten saan selville Helsingin yliopiston opiskelijanumeroni?
+
+Kun ilmoittaudut ensimmäistä kertaa Avoimen yliopiston kautta jollekin kurssille, sinulle luodaan Helsingin yliopiston opiskelijanumero. Varmista siis että olet ilmoittautunut kurssille ennen kuin alat selvittää opiskelijanumeroasi. 
+
+Voit selvittää oman opiskelijanumerosi seuraavilla tavoilla: 
+
+#### A) Sisu 
+
+  - Jos sinulla on Helsingin yliopiston käyttäjätunnus, löydät opiskelijanumerosi Helsingin yliopiston opintotietojärjestelmä Sisusta omien tietojesi yhteydestä:
+     
+  - Kirjaudu Sisuun Helsingin yliopiston käyttäjätunnuksellasi.  
+  - Valitse: Omat tiedot 
+  - Valitse välilehti: Henkilötiedot 
+
+#### B) Ilmoittautumisen vahvistusviesti 
+
+Kurssi-ilmoittautumisesi yhteydessä sinulle lähetään sähköpostivahvistus ilmoittamaasi sähköpostiosoitteeseen. Tässä viestissä on joko suoraan opiskelijanumerosi tai linkki, jonka kautta pääset sen näkemään.  
+
+#### C) Yhteydenotto opintoneuvontaan 
+
+Jos sinulla on ongelmia selvittää opiskelijanumerosi yllä olevilla tavoilla, voit myös lähettää sähköpostia opintoneuvontaan.  
+
+Kerro sähköpostissa  
+- mille kurssille olet ilmoittautunut, 
+- nimesi ja  
+- syntymäaikasi. 
+
+Opiskelijaneuvonnan sähköpostiosoite: avoin-student@helsinki.fi  
 
 ### Alkutoimet
 

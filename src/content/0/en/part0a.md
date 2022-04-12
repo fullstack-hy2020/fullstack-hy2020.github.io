@@ -128,7 +128,7 @@ If you want to receive University of Helsinki credits, save your <b>University o
 
 ![](../../images/0/28b.png)
 
-If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam).
+If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
 
 You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
@@ -192,7 +192,7 @@ You can access Moodle through [this link](https://moodle.helsinki.fi/course/view
 - Activated your University of Helsinki user account.
 - You can activate your user account after you have successfully enrolled on the course. The user account must be activated before attempting the course exam. Read more about activating the user account [here](https://studies.helsinki.fi/instructions/article/university-helsinki-user-account-open-university).
 
-After course enrollment, save your University of Helsinki student ID number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo).
+After course enrollment, save your University of Helsinki student number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info how you find out your student number.
 
 Please note:
 - You only need the Moodle access for the exam, not for accessing the course certificate.
@@ -217,6 +217,37 @@ Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https
 This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
 
 You need to be a resident of Finland in order to participate in these interviews.
+
+### Where do I get my University of Helsinki Student number 
+
+When and if you enroll on a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. Please make sure you have enrolled on the course before you try find out what your student number is. 
+
+Note also that <strong>you do not need to enroll</strong> to Open University to thet the course certificate!
+
+You can find out what your student number is through one of the options below: 
+
+#### A) Sisu 
+
+If you have a university of Helsinki user account, you can find your student number from your profile in the University of Helsinki’s study information system Sisu: 
+ - Log in to Sisu with your University of Helsinki username and password.   
+ - Select: My profile 
+ - Select: Personal information 
+
+#### B) Enrollment confirmation email 
+
+After course enrollment, you will receive a confirmation email to an email address you have entered on the enrollment form. This message either directly has your student number on it or includes a link that takes you to a page displaying your University of Helsinki student number.  
+
+#### C) Contact Student Services 
+
+If you have trouble finding out your student number through the means listed above, you can send an email to University of Helsinki Student Services 
+
+In your email, include the following information 
+
+- name of the course you have enrolled in, 
+- your name, and 
+- your date of birth. 
+
+Student Services email address: avoin-student@helsinki.fi 
 
 ### Before you start
 
