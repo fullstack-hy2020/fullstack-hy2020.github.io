@@ -1046,13 +1046,11 @@ Huomaa, että sovelluksen tarvitsee toimia vain yhden selaimen käyttökerran aj
 Kannattaa noudattaa samaa rakennetta kuin materiaalissa ja edellisessä tehtävässä, eli tiedoston <i>index.js</i> sisältö on seuraava:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Muun sovelluksen voi tehdä tiedostoon <i>App.js</i>. Tiedoston sisältö voi olla aluksi seuraava:
