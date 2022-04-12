@@ -222,7 +222,7 @@ You need to be a resident of Finland in order to participate in these interviews
 
 When and if you enroll on a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. Please make sure you have enrolled on the course before you try find out what your student number is. 
 
-Note also that <strong>you do not need to enroll</strong> to Open University to thet the course certificate!
+Note also that <strong>you do not need to enroll</strong> to Open University to get the course certificate!
 
 You can find out what your student number is through one of the options below: 
 
