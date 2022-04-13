@@ -107,7 +107,9 @@ export default App
 The file <i>index.js</i> looks like:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
 const notes = [
@@ -131,9 +133,8 @@ const notes = [
   }
 ]
 
-ReactDOM.render(
-  <App notes={notes} />,
-  document.getElementById('root')
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <App notes={notes} />
 )
 ```
 
@@ -412,11 +413,13 @@ A whole React application can be written in a single file. Although that is, of 
 We have been using modules the whole time. The first few lines of the file <i>index.js</i>:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 ```
 
-[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The module <i>react-dom</i> is placed into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) three modules, enabling them to be used in that file. The  module <i>React</i>  is placed into the variable _React_, the module <i>react-dom</i> into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_
 
 Let's move our <i>Note</i> component into its own module. 
 

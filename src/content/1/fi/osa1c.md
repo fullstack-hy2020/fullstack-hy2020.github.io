@@ -194,18 +194,17 @@ export default App
 Tiedoston <i>index.js</i> sisältö on:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
 let counter = 1
 
-ReactDOM.render(
-  <App counter={counter} />, 
-  document.getElementById('root')
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <App counter={counter} />
 )
 ```
-
-**HUOM:** kun tiedoston <i>index.js</i> sisältöä muutetaan, React ei välttämättä osaa päivittää selaimeen uutta sisältöä ilman, että selaimen koodi ladataan uudelleen refreshaamalla sivu.
 
 Sovelluksen juurikomponentille siis annetaan propsiksi laskurin _counter_ arvo. Juurikomponentti renderöi arvon ruudulle. Entä laskurin arvon muuttuessa? Jos lisäämme ohjelmaan esim. komennon
 
@@ -213,14 +212,15 @@ Sovelluksen juurikomponentille siis annetaan propsiksi laskurin _counter_ arvo. 
 counter += 1
 ```
 
-ei komponenttia kuitenkaan renderöidä uudelleen. Voimme saada komponentin renderöitymään uudelleen kutsumalla funktiota _ReactDOM.render_ uudelleen esim. seuraavasti
+ei komponenttia kuitenkaan renderöidä uudelleen. Voimme saada komponentin renderöitymään uudelleen kutsumalla funktiota _render_ uudelleen esim. seuraavasti
 
 ```js
 let counter = 1
 
 const refresh = () => {
-  ReactDOM.render(<App counter={counter} />, 
-  document.getElementById('root'))
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <App counter={counter} />
+  )
 }
 
 refresh()
@@ -243,7 +243,7 @@ setInterval(() => {
 }, 1000)
 ```
 
-_ReactDOM.render_-funktion toistuva kutsuminen ei kuitenkaan ole hyvä tapa päivittää komponentteja, joten tutustutaan seuraavaksi järkevämpään tapaan.
+_render_-funktion toistuva kutsuminen ei kuitenkaan ole hyvä tapa päivittää komponentteja, joten tutustutaan seuraavaksi järkevämpään tapaan.
 
 ### Tilallinen komponentti
 
@@ -254,11 +254,12 @@ Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state 
 Muutetaan <i>index.js</i> muotoon
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
-ReactDOM.render(<App />, 
-document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 ja <i>App.js</i> muotoon:

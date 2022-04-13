@@ -192,19 +192,17 @@ export default App
 And file <i>index.js</i> becomes:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
 let counter = 1
 
-ReactDOM.render(
-  <App counter={counter} />, 
-  document.getElementById('root')
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <App counter={counter} />
 )
 ```
-
-
-**Note** when you change file <i>index.js</i> React does not always refresh the page automatically so you possibly need to reload the browser page to get the new content shown.
 
 The App component is given the value of the counter via the _counter_ prop. This component renders the value to the screen. What happens when the value of _counter_ changes? Even if we were to add the following
 
@@ -212,14 +210,15 @@ The App component is given the value of the counter via the _counter_ prop. This
 counter += 1
 ```
 
-the component won't re-render. We can get the component to re-render by calling the _ReactDOM.render_ method a second time, e.g. in the following way:
+the component won't re-render. We can get the component to re-render by calling the _render_ method a second time, e.g. in the following way:
 
 ```js
 let counter = 1
 
 const refresh = () => {
-  ReactDOM.render(<App counter={counter} />, 
-  document.getElementById('root'))
+  ReactDOM.createRoot(document.getElementById('root')).render(
+    <App counter={counter} />
+  )
 }
 
 refresh()
@@ -242,7 +241,7 @@ setInterval(() => {
 }, 1000)
 ```
 
-Making repeated calls to the _ReactDOM.render_ method is not the recommended way to re-render components. Next, we'll introduce a better way of accomplishing this effect.
+Making repeated calls to the _render_ method is not the recommended way to re-render components. Next, we'll introduce a better way of accomplishing this effect.
 
 ### Stateful component
 
@@ -253,11 +252,12 @@ Next, let's add state to our application's <i>App</i> component with the help of
 We will change the application as follows.  <i>index.js</i> goes back to
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
-ReactDOM.render(<App />, 
-document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 and <i>App.js</i> changes to the following:

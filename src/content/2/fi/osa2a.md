@@ -106,7 +106,9 @@ export default App
 Tiedosto <i>index.js</i> on muuten samanlainen kuin se on ollut toistaiseksi kaikissa ohjelmissa, mutta se määrittelee taulukon, jossa on näytettävä data.
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
 const notes = [
@@ -130,9 +132,8 @@ const notes = [
   }
 ]
 
-ReactDOM.render(
-  <App notes={notes} />,
-  document.getElementById('root')
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <App notes={notes} />
 )
 ```
 
@@ -415,11 +416,13 @@ Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se e
 Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>index.js</i> ensimmäiset rivit
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 ```
 
-[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli <i>react-dom</i> sijoitetaan muuttujaan _ReactDOM_ ja sovelluksen pääkomponentin määrittelevä moduuli muuttujaan _App_.
+[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kolme moduulia. Moduuli <i>React</i> sijoitetaan muuttujaan _React_, moduuli <i>react-dom</i> sijoitetaan muuttujaan _ReactDOM_ ja sovelluksen pääkomponentin määrittelevä moduuli muuttujaan _App_.
 
 Siirretään nyt <i>Note</i>-komponentti omaan moduuliinsa.
 

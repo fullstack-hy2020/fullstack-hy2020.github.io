@@ -7,6 +7,51 @@ lang: fi
 
 <div class="content">
 
+
+### Huomio Reactin versioista
+
+Version 18 of React was released late March 2022. The code in material should work as it is with the new React version. However, some libraries might not yet be compatible with React 18. At the moment of writing (4th April) at least the Apollo client used in [part 8](/en/part8) does not yet work with most recent React.
+
+In case you end up in a situation where your application breaks because of library compatibly problems, <i>downgrade</i> to the older React by changing the file <i>package.json</i> as follows:
+
+```js
+{
+  "dependencies": {
+    "react": "^17.0.2", // highlight-line
+    "react-dom": "^17.0.2", // highlight-line
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  // ...
+}
+```
+
+After the change is made, reinstall dependencies by running
+
+```js
+npm install
+```
+
+Note that also the file <i>index.js</i> needs to be changed a bit. For React 18 it looks like
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+but for React 17 the correct form is
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
 ### Monimutkaisempi tila
 
 Edellisessä esimerkissä sovelluksen tila oli yksinkertainen, sillä se koostui ainoastaan yhdestä kokonaisluvusta. Entä jos sovellus tarvitsee monimutkaisemman tilan?

@@ -6,7 +6,7 @@ module.exports = {
     },
     '1': {
       a: 'Reactin alkeet',
-      b: 'Javascriptiä',
+      b: 'JavaScriptia',
       c: 'Komponentin tila ja tapahtumankäsittely',
       d: 'Monimutkaisempi tila, Reactin debuggaus',
     },
@@ -63,7 +63,7 @@ module.exports = {
     '13': {
       a: 'Relaatiotietokannan käyttö Sequelize-kirjastolla',
       b: 'Liitostaulut ja -kyselyt',
-      c: 'Migraatiot, monen suhde moneen -yhteydet'
+      c: 'Migraatiot, monen suhde moneen -yhteydet',
     },
   },
   en: {
@@ -145,12 +145,12 @@ module.exports = {
     '12': {
       a: 'Introduction to Containers',
       b: 'Building and configuring environments',
-      c: 'Basics of Orchestration'
+      c: 'Basics of Orchestration',
     },
     '13': {
       a: 'Using relational databases with Sequelize',
       b: 'Join tables and queries',
-      c: 'Migrations, many-to-many relationships'
+      c: 'Migrations, many-to-many relationships',
     },
   },
   zh: {
@@ -232,12 +232,12 @@ module.exports = {
     '12': {
       a: '容器介绍',
       b: '构建配置环境',
-      c: '编排基础'
+      c: '编排基础',
     },
     '13': {
       a: '用 Sequelize 使用关系型数据库',
       b: '加入表与查询',
-      c: '迁移，多对多关系'
+      c: '迁移，多对多关系',
     },
   },
   es: {
@@ -314,7 +314,7 @@ module.exports = {
       b: 'Introducción a las acciones de Github',
       c: 'Despliegue',
       d: 'Manteniéndose verde',
-      e: 'Expandiéndose aún más'
+      e: 'Expandiéndose aún más',
     },
     '12': {},
   },

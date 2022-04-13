@@ -351,24 +351,21 @@ We can finally begin using the data fetched from the server.
 Let's try and request the notes from our local server and render them, initially as the App component. Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfully retrieve a response:
 
 ```js
-import ReactDOM from 'react-dom'
-import App from './App'
-
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import axios from 'axios' // highlight-line
+
+import App from './App'
 
 axios.get('http://localhost:3001/notes').then(response => {
   const notes = response.data
-  ReactDOM.render(
-    <App notes={notes} />,
-    document.getElementById('root')
-  )
+  ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes} />)
 })
 ```
 
 This method could be acceptable in some circumstances, but it's somewhat problematic. Let's instead move the fetching of the data into the <i>App</i> component.
 
 What's not immediately obvious, however, is where the command <em>axios.get</em> should be placed within the component.
-
 
 ### Effect-hooks
 
@@ -382,7 +379,7 @@ As such, effect hooks are precisely the right tool to use when fetching data fro
 Let's remove the fetching of data from <i>index.js</i>. Since we're gonna be retrieving the notes from the server, there is no longer a need to pass data as props to the <i>App</i> component. So <i>index.js</i> can be simplified to:
 
 ```js
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 The <i>App</i> component changes as follows:

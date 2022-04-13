@@ -33,13 +33,12 @@ Your default browser should launch automatically. Open the browser console **imm
 The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 and file <i>App.js</i> looks like this
@@ -54,14 +53,35 @@ const App = () => (
 export default App
 ```
 
-  The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.
+The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.
+
+If you end up with the following error
+
+![](../../images/1/r18-error.png)
+
+you for some reason are using a React version older than the current version 18.
+
+The fix is to change <i>index.js</i> as follows
+
+```js
+import ReactDOM from "react-dom"
+import App from "./App"
+
+ReactDOM.render(<App />, document.getElementById("root"))
+```
+
+You quite likely need to do the same for your other projects.
+
+Joudut todennäköisesti tekemään saman jatkossa kaikille projekteillesi.
+
+See [this](/en/part1/a_more_complex_state_debugging_react_apps/#a-note-on-react-version) for more about the version differences.
 
 ### Component
 
 The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i> 
 
 ```js
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'.
@@ -426,13 +446,12 @@ Note that in this part, there are more exercises besides those found below. <i>D
 Use create-react-app to initialize a new application. Modify <i>index.js</i> to match the following
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 and <i>App.js</i> to match the following

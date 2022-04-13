@@ -350,17 +350,15 @@ Voimme vihdoin siirtyä käyttämään sovelluksessamme palvelimelta haettavaa d
 Tehdään se aluksi "huonosti", eli lisätään sovellusta vastaavan komponentin <i>App</i> renderöinti takaisinkutsufunktion sisälle muuttamalla <i>index.js</i> seuraavaan muotoon:
 
 ```js
-import ReactDOM from 'react-dom'
-import App from './App'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import axios from 'axios' // highlight-line
 
-import axios from 'axios'
+import App from './App'
 
 axios.get('http://localhost:3001/notes').then(response => {
   const notes = response.data
-  ReactDOM.render(
-    <App notes={notes} />,
-    document.getElementById('root')
-  )
+  ReactDOM.createRoot(document.getElementById('root')).render(<App notes={notes} />)
 })
 ```
 
@@ -381,8 +379,9 @@ Eli effect-hookit ovat juuri oikea tapa hakea dataa palvelimelta.
 Poistetaan nyt datan hakeminen tiedostosta <i>index.js</i>. Komponentille <i>App</i> ei ole enää tarvetta välittää dataa propseina. Eli <i>index.js</i> pelkistyy seuraavaan muotoon:
 
 ```js
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
+
 Komponentti <i>App</i> muuttuu seuraavasti:
 
 ```js

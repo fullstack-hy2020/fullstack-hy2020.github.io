@@ -33,13 +33,12 @@ Chromen pitäisi aueta automaattisesti. Avaa konsoli **välittömästi**. Avaa m
 Sovelluksen koodi on hakemistossa <i>src</i>. Yksinkertaistetaan valmiina olevaa koodia siten, että tiedoston <i>index.js</i> sisällöksi tulee:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
-ReactDOM.render(
-  <App />,
-  document.getElementById('root')
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 ja tiedoston <i>App.js</i> sisällöksi
@@ -56,12 +55,31 @@ export default App
 
 Tiedostot <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>reportWebVitals.js</i> ja <i>setupTests.js</i> voi poistaa, sillä emme tarvitse niitä.
 
+Jos törmäät tässä kohtaa virheilmoitukseen
+
+![](../../images/1/r18-error.png)
+
+käytössäsi on (jostain syystä) Reactin uusimman versio 18 sijaan jokin vanhempi versio.
+
+Ongelma korjaantuu muuttamalla tiedosto <i>index.js</i> muotoon
+
+```js
+import ReactDOM from "react-dom"
+import App from "./App"
+
+ReactDOM.render(<App />, document.getElementById("root"))
+```
+
+Joudut todennäköisesti tekemään saman jatkossa kaikille projekteillesi.
+
+Lisää versioiden eroista [täällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#huomio-reactin-versioista).
+
 ### Komponentti
 
 Tiedosto <i>App.js</i> määrittelee nyt React-[komponentin](https://reactjs.org/docs/components-and-props.html) nimeltään <i>App</i>. Tiedoston <i>index.js</i> viimeisen rivin komento
 
 ```js
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 renderöi komponentin sisällön tiedoston <i>public/index.html</i> määrittelemään <i>div</i>-elementtiin, jonka <i>id:n</i> arvona on 'root'.
@@ -437,13 +455,10 @@ code .
 Luo create-react-app:illa uusi sovellus. Muuta <i>index.js</i> muotoon
 
 ```js
-import ReactDOM from 'react-dom'
-import App from './App'
+import ReactDOM from "react-dom"
+import App from "./App"
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+ReactDOM.render(<App />, document.getElementById("root"))
 ```
 
 ja tiedosto <i>App.js</i> muotoon

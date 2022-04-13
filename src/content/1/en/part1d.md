@@ -31,6 +31,26 @@ After the change is made, reinstall dependencies by running
 npm install
 ```
 
+Note that also the file <i>index.js</i> needs to be changed a bit. For React 18 it looks like
+
+```js
+import ReactDOM from 'react-dom'
+import App from './App'
+
+ReactDOM.render(<App />, document.getElementById('root'))
+```
+
+but for React 17 the correct form is
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+```
+
 ### Complex state
 
 In our previous example the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
