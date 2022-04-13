@@ -616,9 +616,9 @@ const NoteForm = ({ createNote }) => {
 testi löytäisi elementin seuraavasti:
 
 ```js
-const { content } = render(<NoteForm createNote={createNote} />)
+const { container } = render(<NoteForm createNote={createNote} />)
 
-const input = content.querySelector('#note-input')
+const input = container.querySelector('#note-input')
 ```
 
 Jätämme koodiin placeholderiin perustuvan ratkaisun.
