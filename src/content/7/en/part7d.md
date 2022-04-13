@@ -187,7 +187,7 @@ const config = {
 module.exports = config
 ```
 
-The configuration file has been written in JavaScript and the configuration object is exported by using Node's module syntax. 
+The configuration file has been written in JavaScript and the configuration object is exported using Node's module syntax. 
 
 Our minimal configuration definition almost explains itself. The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application.
 
