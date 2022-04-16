@@ -193,7 +193,7 @@ const typeDefs = gql`
 module.exports = typeDefs
 ```
 
-Siirretään reducereiden määrittely tiedostoon <i>reducers.js</i>
+Siirretään resolverien määrittely tiedostoon <i>resolvers.js</i>
 
 ```js
 const { UserInputError, AuthenticationError } = require('apollo-server')
