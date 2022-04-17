@@ -253,6 +253,8 @@ Create a new npm project with _npm init_ and install the required dependencies.
 npm install apollo-server graphql
 ```
 
+Also create a `index.js` file in your project's root directory.
+
 The initial code is as follows: 
 
 ```js
