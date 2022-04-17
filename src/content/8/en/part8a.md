@@ -385,6 +385,8 @@ has a resolver which returns <i>all</i> objects from the _persons_ array.
 ```js
 () => persons
 ```
+  
+Start the serve by running `node index.js` in the terminal.
 
 ### Apollo Studio Explorer
 
