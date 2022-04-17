@@ -51,7 +51,7 @@ const birthdayGreeter = (name: string, age: number): string => {
 const birthdayHero = "Jane User";
 const age = 22;
 
-console.log(birthdayGreeter(birthdayHero, 22));
+console.log(birthdayGreeter(birthdayHero, age));
 ```
 
 #### Structural typing
