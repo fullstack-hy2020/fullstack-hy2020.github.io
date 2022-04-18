@@ -969,7 +969,7 @@ Toteuta sovellukseen kaikki blogit palauttavaan reittiin filtteröinti hakusanan
 [Tämä](https://sequelize.org/master/manual/model-querying-basics.html#operators) lienee hyödyksi tässä ja seuraavassa tehtävässä.
 #### Tehtävä 13.14.
 
-Laajenna filtteriä siten, että se etsii hakusanaa kentistä <i>title</i> ja author <i>author</i>, eli
+Laajenna filtteriä siten, että se etsii hakusanaa kentistä <i>title</i> ja <i>author</i>, eli
 
 _GET /api/blogs?serch=jami_ palauttaa ne blogit joiden kentässä <i>title</i> tai kentässä <i>author</i> esiintyy hakusana <i>jami</i>
 #### Tehtävä 13.15.
