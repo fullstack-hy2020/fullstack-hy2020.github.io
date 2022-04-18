@@ -32,7 +32,7 @@ After the change is made, reinstall dependencies by running
 npm install
 ```
 
-Note that also the file <i>index.js</i> needs to be changed a bit. For React 18 it looks like
+Note that also the file <i>index.js</i> needs to be changed a bit. For React 17 it looks like
 
 ```js
 import ReactDOM from 'react-dom'
@@ -41,7 +41,7 @@ import App from './App'
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-but for React 17 the correct form is
+but for React 18 the correct form is
 
 ```js
 import React from 'react'
