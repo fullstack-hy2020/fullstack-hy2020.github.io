@@ -598,7 +598,7 @@ Modify the application such that the initial state of the data is fetched from t
 
 The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
 
-Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/#api-endpoints-v3-all).
+Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
 
 The user interface is very simple. The country to be shown is found by typing a search query into the search field.
 
