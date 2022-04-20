@@ -237,12 +237,12 @@ Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/ful
 
 ### Material UI
 
-Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://material-ui.com/). 
+Tarkastellaan toisena esimerkkinä Googlen kehittämän "muotokielen" [Material designin](https://material.io/) toteuttavaa React-kirjastoa [MaterialUI](https://mui.com/). 
 
 Asennetaan kirjasto suorittamalla komento
 
 ```bash
-npm install @material-ui/core
+npm install @mui/material @emotion/react @emotion/styled
 ```
 
 Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään MaterialUI:n css-määrittelyt lataava rivi:
@@ -259,7 +259,7 @@ Tehdään nyt MaterialUI:n avulla koodiin suunnilleen samat muutokset, mitä tei
 Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
 ```js
-import Container from '@material-ui/core/Container'
+import Container from '@mui/material/Container'
 
 const App = () => {
   // ...
@@ -271,7 +271,7 @@ const App = () => {
 }
 ```
 
-Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://material-ui.com/components/tables/#simple-table):
+Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://mui.com/material-ui/react-table/#simple-table):
 
 ```js
 const Notes = ({ notes }) => (
@@ -313,12 +313,12 @@ import {
   TableContainer,
   TableRow,
   Paper,
-} from '@material-ui/core'
+} from '@mui/material'
 ```
 
 #### Lomake
 
-Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://material-ui.com/components/text-fields/) ja [Button](https://material-ui.com/api/button/):
+Parannellaan seuraavaksi näkymän <i>Login</i> kirjautumislomaketta käyttäen komponentteja [TextField](https://mui.com/components/text-fields/) ja [Button](https://mui.com/api/button/):
 
 ```js 
 const Login = (props) => {
@@ -361,7 +361,7 @@ Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.
 
 #### Notifikaatio
 
-Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponentti [Alert](https://material-ui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
+Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponentti [Alert](https://mui.com/components/alert/), joka on lähes samanlainen kuin bootstrapin vastaava komponentti: 
 
 ```js
 <div>
@@ -384,7 +384,7 @@ npm install @material-ui/lab
 Komponentti importataan seuraavasti
 
 ```js 
-import { Alert } from '@material-ui/lab'
+import { Alert } from '@mui/material'
 ```
 
 Alert on ulkoasultaan tyylikäs:
@@ -393,7 +393,7 @@ Alert on ulkoasultaan tyylikäs:
 
 #### Navigaatiorakenne
 
-Navigaatiorakenne toteutetaan komponentin [AppBar](https://material-ui.com/components/app-bar/) avulla
+Navigaatiorakenne toteutetaan komponentin [AppBar](https://mui.com/components/app-bar/) avulla
 
 Jos sovelletaan suoraan dokumentaation esimerkkiä  
 
@@ -425,7 +425,7 @@ saadaan kyllä toimiva ratkaisu, mutta sen ulkonäkö ei ole paras mahdollinen
 
 ![](../../images/7/66ea.png)
 
-Lueskelemalla [dokumentaatiota](https://material-ui.com/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://material-ui.com/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
+Lueskelemalla [dokumentaatiota](https://mui.com/material-ui/guides/composition/#routing-libraries), löytyy parempi tapa eli [component props](https://mui.com/material-ui/guides/composition/#component-prop), jonka avulla voidaan muuttaa se miten MaterialUI-komponentin juurielementti renderöityy.
 
 Määrittelemällä
 
