@@ -128,18 +128,18 @@ By submitting all exercises for part 13 of the course on Relational databases, y
 How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
 
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-  - The course certificate will be available in the submission system
+  - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
   - Enroll on the course. You will get the enrollment link through submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#sign-up-for-the-exam)
   - Activate your University of Helsinki user account. You can activate your user account after you have successfully enrolled on the course. The user account must be activated before attempting the course exam. Read more about activating the user account [here](/en/part0/general_info#sign-up-for-the-exam). 
-  - Do the online exam in Moodle. You can access Moodle through [this]((https://moodle.helsinki.fi/course/view.php?id=46197) link. Log into this course page with your University of Helsinki user account. 
+  - Do the online exam in Moodle. You can access Moodle through [this](https://moodle.helsinki.fi/course/view.php?id=46197) link. Log into Moodle with your University of Helsinki user account. 
   - Save your student number. After course enrollment, save your University of Helsinki student ID number in the submission system.
    - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
 
 How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
 
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that each of the parts 8- have a separate instance in the sumission system 
-  - The course certificate will be available in the submission system
+  - [The course certificate](/en/part0/general_info#course-certificate) e will be available in the submission system
 - If you want to get University of Helsinki credits
   - Enroll on the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately. 
  - Mark the part completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
