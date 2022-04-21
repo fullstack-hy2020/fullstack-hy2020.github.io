@@ -72,8 +72,6 @@ ReactDOM.render(<App />, document.getElementById("root"))
 
 You quite likely need to do the same for your other projects.
 
-Joudut todennäköisesti tekemään saman jatkossa kaikille projekteillesi.
-
 See [this](/en/part1/a_more_complex_state_debugging_react_apps/#a-note-on-react-version) for more about the version differences.
 
 ### Component
