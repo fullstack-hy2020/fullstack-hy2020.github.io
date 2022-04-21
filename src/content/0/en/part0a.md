@@ -122,49 +122,27 @@ By submitting all exercises for part 13 of the course on Relational databases, y
 - [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c). 
 - [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-### How to get your credits
 
-If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
+### Studyin the course in a nutshell
 
-![](../../images/0/28b.png)
+How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
 
-If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+  - The course certificate will be available in the submission system
+- If you want to get University of Helsinki credits
+  - Enroll on the course. You will get the enrollment link through submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#sign-up-for-the-exam)
+  - Activate your University of Helsinki user account. You can activate your user account after you have successfully enrolled on the course. The user account must be activated before attempting the course exam. Read more about activating the user account [here](/en/part0/general_info#sign-up-for-the-exam). 
+  - Do the online exam in Moodle. You can access Moodle through [this]((https://moodle.helsinki.fi/course/view.php?id=46197) link. Log into this course page with your University of Helsinki user account. 
+  - Save your student number. After course enrollment, save your University of Helsinki student ID number in the submission system.
+   - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
 
-You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
+How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
 
-![](../../images/0/28a.png)
-
-You can view your grade in University of Helsinki Sisu and and to [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
-
-**Please note** that in order to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
-
-### Course certificate
-
-Even if you do not register to Open University for the exam, you can still download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
-
-### Request a transcript of studies
-
-You can request a verified transcript of studies <i>after your university credits have been registered</i>. To request for an official transcript of studies, please contact avoin-student@helsinki.fi.
-
-- When requesting an official transcript, remember to mention
-  - the name of the course,
-  - your full name,
-  - your date of birth, and
-  - the language of the transcript.
-
-The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
-
-### Expanding on a previously completed course
-
-If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
-
-#### Expanding on Full stack open
-
-You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
-
-#### Expanding on the University of Helsinki instance of this course
-
-That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that each of the parts 8- have a separate instance in the sumission system 
+  - The course certificate will be available in the submission system
+- If you want to get University of Helsinki credits
+  - Enroll on the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately. 
+ - Mark the part completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
 
 ### Submitting exercises
 
@@ -182,7 +160,7 @@ Many of the exercises build a larger application bit by bit. In these cases, sub
 
 For official university credits you need to pass the course exam that is done in Open University Moodle. Follow the instructions below to gain access to the course Moodle space:
 - Enroll in the course through Open University by 9 Jan 2023.
-- You will get the enrollment link through  [ submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
+- You will get the enrollment link through  [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
 
 ![](../../images/0/enroll.png)
 
@@ -198,25 +176,21 @@ Please note:
 - You only need the Moodle access for the exam, not for accessing the course certificate.
 - Credits for the course are only available to students who have successfully registered for the course through the Open University and completed the course according to the instructions
 
-### Full stack project
+### How to get your credits
 
-A full stack project worth 5, 7 or 10 credits will be available through Open University.
+If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
-For the project, an application is implemented in React and/or Node, though implementing a mobile application in React Native is also possible.
+![](../../images/0/28b.png)
 
-The number of credits is based on hours of work done. One credit is approximately 17.5 hours of work. The work is graded pass/fail.
+If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
 
-It is possible to complete the project as a pair or a group.
+You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
-See [more information on the project](https://github.com/fullstack-hy2020/misc/blob/master/project.md).
+![](../../images/0/28a.png)
 
-### Interview promise
+You can view your grade in University of Helsinki Sisu and and to [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
 
-Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10). The parts 12 and 13 that were released during 2021 are not required if you finish the project by 15.3.2022.
-
-This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
-
-You need to be a resident of Finland in order to participate in these interviews.
+**Please note** that in order to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
 
 ### Where do I get my University of Helsinki Student number 
 
@@ -248,6 +222,54 @@ In your email, include the following information
 - your date of birth. 
 
 Student Services email address: avoin-student@helsinki.fi 
+
+### Course certificate
+
+Even if you do not register to Open University for the exam, you can still download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
+
+### Request a transcript of studies
+
+You can request a verified transcript of studies <i>after your university credits have been registered</i>. To request for an official transcript of studies, please contact avoin-student@helsinki.fi.
+
+- When requesting an official transcript, remember to mention
+  - the name of the course,
+  - your full name,
+  - your date of birth, and
+  - the language of the transcript.
+
+The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
+
+### Expanding on a previously completed course
+
+If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
+
+#### Expanding on Full stack open
+
+You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
+
+#### Expanding on the University of Helsinki instance of this course
+
+That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
+
+### Full stack project
+
+A full stack project worth 5, 7 or 10 credits will be available through Open University.
+
+For the project, an application is implemented in React and/or Node, though implementing a mobile application in React Native is also possible.
+
+The number of credits is based on hours of work done. One credit is approximately 17.5 hours of work. The work is graded pass/fail.
+
+It is possible to complete the project as a pair or a group.
+
+See [more information on the project](https://github.com/fullstack-hy2020/misc/blob/master/project.md).
+
+### Interview promise
+
+Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10). The parts 12 and 13 that were released during 2021 are not required if you finish the project by 15.3.2022.
+
+This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
+
+You need to be a resident of Finland in order to participate in these interviews.
 
 ### Before you start
 

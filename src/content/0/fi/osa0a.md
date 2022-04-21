@@ -117,6 +117,54 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
 
+
+### Suoritusohjeet pähkinänkuoressa
+
+Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081) 
+
+- Tee tehtävät. Palauta vastauksesi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) kautta.
+- Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikoe) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
+- Aktivoi Helsingin yliopiston käyttäjätunnus. Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Käyttäjätunnus tulee aktivoida ennen kurssikokeen suorittamista. Lue lisää [täältä](osa0/yleista/#kurssikokeeseen-ilmoittautuminen). 
+- Tee verkkotentti Moodlessa. Pääset Moodleen [tämän](https://moodle.helsinki.fi/course/view.php?id=46197) linkin kautta. Kirjaudu Moodleen Helsingin yliopiston käyttäjätunnuksella.  
+- Tallenna Helsingin yliopiston opiskelijanumerosi palautussovellukseen. Lue lisää [täältä](/osa0/yleista/#suoritusmerkinnan-pyytaminen)
+- Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
+
+ 
+Kurssin suoritusohjeet pähkinänkuoressa (Osat 6-13) 
+
+- Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8-13 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin.
+- Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
+- Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
+
+### Tehtävien palauttaminen
+
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää. Voit toki tehdä jokaisen osan omaankin repositorioon, kaikki käy. Jos käytät privaattirepositoriota tehtävien palautukseen, liitä repositoriolle collaboratoriksi <i>mluukkai</i>
+
+Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
+
+GitHubiin palautettuja tehtäviä tarkastetaan plagiaattitunnistusjärjestelmän avulla. Jos GitHubista löytyy kurssin mallivastausten koodia tai useammalta opiskelijalta löytyy samaa koodia, käsitellään tilanne yliopiston [vilppikäytäntöjen](https://guide.student.helsinki.fi/fi/artikkeli/mita-ovat-vilppi-ja-plagiointi) mukaan.
+
+Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tällaisissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
+
+### Kurssikokeeseen ilmoittautuminen
+
+Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla:
+
+- Tee Avoimen yliopiston kurssi-ilmoittautuminen 9.1.2023 mennessä.
+- Pääset ilmoittautumaan [palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) löytyvän linkin kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä:
+
+![](../../images/0/enroll.png)
+
+Pääset Moodleen [tämän linkin](https://moodle.helsinki.fi/course/view.php?id=46197) kautta, sen jälkeen kun olet:
+  - Ilmoittautunut Avoimen yliopiston kautta kurssille, ja
+  - aktivoinut Helsingin ylipiston käyttäjätunnuksen.
+
+Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Se tulee aktivoida ennen kurssikokeen suorittamista. [Lue lisää käyttäjätunnuksen aktivoinnista](https://studies.helsinki.fi/ohjeet/artikkeli/helsingin-yliopiston-kayttajatunnus-avoin-yliopisto).
+
+HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen! Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
+
 ### Suoritusmerkinnän pyytäminen
 
 Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b> opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen): 
@@ -134,85 +182,6 @@ Paina siis sinistä nappia "I have completed the course ..."!
 Arvosana siirtyy Helsingin yliopiston opintorekisteriin Sisuun ja [Opintopolkuun](https://opintopolku.fi/oma-opintopolku/) neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
 
 **Huomaa**, että suoritusmerkintää ei voida kirjata jos et ole ilmoittanutunut kaikkiin suorittamiisi osiin, katso [täältä](/osa0/yleista#osat-ja-suorittaminen) ohjeet ilmoittautumiseen.
-
-### Kurssitodistus
-
-Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen.
-
-![](../../images/0/29.png)
-
-### Virallisen opintosuoritusotteen tilaaminen
-
-Voit tilata virallisen opintosuoritusotteen heti kun kurssisuorituksesi on rekisteröity (tiedot näkyvät esimerkiksi valtakunnallisessa [Oma Opintopolku](https://opintopolku.fi/oma-opintopolku/) –palvelussa). 
-
-Ohjeet opintosuoritusotteen tilaamiseen:
-- Kun opintopisteet on rekisteröity sinulle, lähetä opintosuoritteen tilauspyyntö opiskelijaneuvontaan sähköpostiosoitteeseen avoin-student@helsinki.fi.
-- Muistathan opintosuoritusotetta tilatessasi ilmoittaa
-  - kurssin nimen,
-  - syntymäaikasi, sekä
-  - kielen, jolla haluat opintosuoritusotteen.
-- Sähköisesti varmennettu opintosuoritusote toimitetaan sinulle sähköpostitse.
-- Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
-
-### Aiemmin suoritetun kurssin täydentäminen
-
-Jos olet jo suorittanut kurssin joko MOOC:ina tai yliopiston kurssina, voit täydentää suoritustasi.
-
-#### Full Stack Open -kurssin aiempien vuosien suorituksen täydentäminen
-
-Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
-
-#### Helsingin yliopiston kurssin täydentäminen
-
-Jos haluat jatkaa Helsingin yliopiston kurssiversion suoritustasi, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. 
-
-### Tehtävien palauttaminen
-
-Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
-Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää. Voit toki tehdä jokaisen osan omaankin repositorioon, kaikki käy. Jos käytät privaattirepositoriota tehtävien palautukseen, liitä repositoriolle collaboratoriksi <i>mluukkai</i>
-
-Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtävät, et voi enää palauttaa saman osan tekemättä jättämiäsi tehtäviä.
-
-GitHubiin palautettuja tehtäviä tarkastetaan plagiaattitunnistusjärjestelmän avulla. Jos GitHubista löytyy kurssin mallivastausten koodia tai useammalta opiskelijalta löytyy samaa koodia, käsitellään tilanne yliopiston [vilppikäytäntöjen](https://guide.student.helsinki.fi/fi/artikkeli/mita-ovat-vilppi-ja-plagiointi) mukaan.
-
-Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tällaisissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
-
-### Kokeeseen ilmoittautuminen
-
-Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla:
-
-- Tee Avoimen yliopiston kurssi-ilmoittautuminen 9.1.2023 mennessä.
-- Pääset ilmoittautumaan [palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) löytyvän linkin kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä:
-
-
-![](../../images/0/enroll.png)
-
-Pääset Moodleen [tämän linkin](https://moodle.helsinki.fi/course/view.php?id=46197) kautta, sen jälkeen kun olet:
-  - Ilmoittautunut Avoimen yliopiston kautta kurssille, ja
-  - aktivoinut Helsingin ylipiston käyttäjätunnuksen.
-
-Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Se tulee aktivoida ennen kurssikokeen suorittamista. [Lue lisää käyttäjätunnuksen aktivoinnista](https://studies.helsinki.fi/ohjeet/artikkeli/helsingin-yliopiston-kayttajatunnus-avoin-yliopisto).
-
-HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen! Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
-
-### Full stack -harjoitustyö
-
-Avoimen yliopiston tarjonnassa on 5, 7 tai 10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
-
-Harjoitustyössä toteutetaan vapaavalintainen sovellus Reactilla ja/tai Nodella. Myös React Nativella toteutettu mobiilisovellus on mahdollinen.
-
-Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, yksi opintopiste vastaa 17,5 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
-
-Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
-
-Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2020/misc/blob/master/harjoitustyo.md).
-
-### Haastattelulupaus
-
-Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville. Vuoden 2021 aikana ilmestyneiden osien 12 ja 13 suorittamista ei edellytetä 15.3.2022 mennessä harjoitustyön suorittavilta.
-
-Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 
 ### Miten saan selville Helsingin yliopiston opiskelijanumeroni?
 
@@ -242,6 +211,57 @@ Kerro sähköpostissa
 - syntymäaikasi. 
 
 Opiskelijaneuvonnan sähköpostiosoite: avoin-student@helsinki.fi  
+
+
+### Kurssitodistus
+
+Riippumatta siitä, ilmoittaudutko Avoimen yliopiston kurssille ja teetkö kurssikokeen, saat ladattua kurssitodistuksen palautussovelluksesta siinä vaiheessa kun tekemiesi tehtävien lukumäärä oikeuttaisi kurssisuoritukseen.
+
+![](../../images/0/29.png)
+
+### Virallisen opintosuoritusotteen tilaaminen
+
+Voit tilata virallisen opintosuoritusotteen heti kun kurssisuorituksesi on rekisteröity (tiedot näkyvät esimerkiksi valtakunnallisessa [Oma Opintopolku](https://opintopolku.fi/oma-opintopolku/) –palvelussa). 
+
+Ohjeet opintosuoritusotteen tilaamiseen:
+- Kun opintopisteet on rekisteröity sinulle, lähetä opintosuoritteen tilauspyyntö opiskelijaneuvontaan sähköpostiosoitteeseen avoin-student@helsinki.fi.
+- Muistathan opintosuoritusotetta tilatessasi ilmoittaa
+  - kurssin nimen,
+  - syntymäaikasi, sekä
+  - kielen, jolla haluat opintosuoritusotteen.
+- Sähköisesti varmennettu opintosuoritusote toimitetaan sinulle sähköpostitse.
+- Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
+
+
+### Aiemmin suoritetun kurssin täydentäminen
+
+Jos olet jo suorittanut kurssin joko MOOC:ina tai yliopiston kurssina, voit täydentää suoritustasi.
+
+#### Full Stack Open -kurssin aiempien vuosien suorituksen täydentäminen
+
+Voit jatkaa siitä mihin jäit! Jos haluat tehdä kokonaan uudelleen jonkin osan tehtävät, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. Kerro GitHub-tunnuksesi sekä mitkä osat palautuksista haluat poistettavan.
+
+#### Helsingin yliopiston kurssin täydentäminen
+
+Jos haluat jatkaa Helsingin yliopiston kurssiversion suoritustasi, ota yhteyttä email matti.luukkainen@helsinki.fi tai Discord <i>mluukkai</i>. 
+
+### Full stack -harjoitustyö
+
+Avoimen yliopiston tarjonnassa on 5, 7 tai 10 opintopisteen laajuinen Full Stack -harjoitustyö, johon voit halutessasi osallistua suoritettuasi tämän kurssin vähintään 5 opintopisteen laajuisena.
+
+Harjoitustyössä toteutetaan vapaavalintainen sovellus Reactilla ja/tai Nodella. Myös React Nativella toteutettu mobiilisovellus on mahdollinen.
+
+Harjoitustyön opintopistemäärä määrittyy käytettyjen työtuntien mukaan, yksi opintopiste vastaa 17,5 tuntia. Työ arvostellaan skaalalla hyväksytty/hylätty.
+
+Harjoitustyö on mahdollista tehdä myös pari- tai ryhmätyönä.
+
+Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2020/misc/blob/master/harjoitustyo.md).
+
+### Haastattelulupaus
+
+Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville. Vuoden 2021 aikana ilmestyneiden osien 12 ja 13 suorittamista ei edellytetä 15.3.2022 mennessä harjoitustyön suorittavilta.
+
+Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 
 ### Alkutoimet
 
