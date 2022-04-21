@@ -375,12 +375,6 @@ Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponentti [Alert](
 </div>
 ```
 
-Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
-
-```bash
-npm install @material-ui/lab
-```
-
 Komponentti importataan seuraavasti
 
 ```js 
