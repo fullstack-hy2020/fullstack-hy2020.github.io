@@ -272,7 +272,7 @@ Sometimes, an npm package can also include its types within the code and, in tha
 
 Since the global variable <i>process</i> is defined by Node itself, we get its typings by from the package <i>@types/node</i>.
 
-Since version 10.0 <i>ts-node</i> has defined <i>@types/node</i> as a [peer rependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). If the version of npm is at least 7.0, the peer dependencies of a project automatically installed by then npm. If you have an older npm, the peer dependency must be installed explicitly:
+Since version 10.0 <i>ts-node</i> has defined <i>@types/node</i> as a [peer dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). If the version of npm is at least 7.0, the peer dependencies of a project automatically installed by then npm. If you have an older npm, the peer dependency must be installed explicitly:
 
 
 ```shell
