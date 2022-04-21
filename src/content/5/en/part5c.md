@@ -629,9 +629,9 @@ const { container } = render(<NoteForm createNote={createNote} />)
 const input = container.querySelector('#note-input')
 ```
 
-However we shall stick to a approach using _getByPlaceholderText_ in the test. 
+However we shall stick to the approach of using _getByPlaceholderText_ in the test. 
 
-Let us look to couple of details before moving on. Let us assume that a component would render test to an HTML-element as follows:
+Let us look to a couple of details before moving on. Let us assume that a component would render test to an HTML-element as follows:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
