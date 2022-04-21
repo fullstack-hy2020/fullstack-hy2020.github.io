@@ -1087,13 +1087,12 @@ Note that your application needs to work only during a single browser session. O
 It is advisable to use the same structure that is used in material and previous exercise. File <i>index.js</i> is as follows:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import App from './App'
 
-ReactDOM.render(
-  <App />, 
-  document.getElementById('root')
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 You can use the code below as a starting point for the <i>App.js</i> file:
