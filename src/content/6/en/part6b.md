@@ -144,7 +144,8 @@ We can create the actual reducer for our application by combining the two existi
 Let's define the combined reducer in the <i>index.js</i> file:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { createStore, combineReducers } from 'redux' // highlight-line
 import { Provider } from 'react-redux' 
 import App from './App'
@@ -163,14 +164,13 @@ const store = createStore(reducer)
 
 console.log(store.getState())
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   /*
   <Provider store={store}>
     <App />
   </Provider>,
   */
-  <div />,
-  document.getElementById('root')
+  <div />
 )
 ```
 
@@ -239,7 +239,7 @@ Is there a bug in our code? No. The combined reducer works in such a way that ev
 Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:
 
 ```js
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>,
@@ -251,8 +251,6 @@ Next, let's fix a bug that is caused by the code expecting the application store
 
 ![](../../images/6/7ea.png)
 
-
-<!-- Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon: -->
 It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
 
 ```js
@@ -414,7 +412,8 @@ npm install @reduxjs/toolkit
 Next, open the <i>index.js</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit' // highlight-line
 import App from './App'
@@ -433,7 +432,7 @@ const store = configureStore({
 
 console.log(store.getState())
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>,

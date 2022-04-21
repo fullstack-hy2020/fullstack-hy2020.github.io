@@ -176,7 +176,9 @@ tulostaisi
 Laskurisovelluksemme koodi on seuraavassa. Kaikki koodi on kirjoitettu samaan tiedostoon, joten <i>store</i> on suoraan React-koodin käytettävissä. Tutustumme React/Redux-koodin parempiin strukturointitapoihin myöhemmin.
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import { createStore } from 'redux'
 
 const counterReducer = (state = 0, action) => {
@@ -220,7 +222,7 @@ const App = () => {
 }
 
 const renderApp = () => {
-  ReactDOM.render(<App />, document.getElementById('root'))
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 }
 
 renderApp()
@@ -809,7 +811,12 @@ Eriytetään komponentti _App_ tiedostoon _App.js_. Tarkastellaan kuitenkin ensi
 Tiedosto _index.js_ näyttää seuraavalta:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+
 import { createStore } from 'redux'
 import { Provider } from 'react-redux' // highlight-line
 import App from './App'
@@ -817,11 +824,10 @@ import noteReducer from './reducers/noteReducer'
 
 const store = createStore(noteReducer)
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>  // highlight-line
     <App />
-  </Provider>,  // highlight-line
-  document.getElementById('root')
+  </Provider>  // highlight-line
 )
 ```
 

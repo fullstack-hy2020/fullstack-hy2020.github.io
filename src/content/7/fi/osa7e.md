@@ -236,7 +236,7 @@ Sovelluksen komponenttien ulkoasun määrittelevät React-elementit muodostavat 
 [ReactDOM](https://reactjs.org/docs/react-dom.html)-kirjaston avulla komponenttien määrittelevä virtuaalinen DOM renderöidään oikeaksi DOM:iksi eli DOM API:n avulla selaimen näytettäväksi:
 
 ```js
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <App />,
   document.getElementById('root')
 )

@@ -34,8 +34,8 @@ The navigation bar and an application containing multiple views is very easy to 
 Here is one way:
 
 ```js
-import { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState }  from 'react'
+import ReactDOM from 'react-dom/client'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -90,7 +90,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />, document.getElementById('root'))
 ```
 
 Each view is implemented as its own component. We store the view component information in the application state called <i>page</i>. This information tells us which component, representing a view, should be shown below the menu bar.
@@ -426,7 +426,7 @@ One way to do this would be to use React Router's [useMatch](https://reactrouter
 It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 
 ```js
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Router> // highlight-line
     <App />
   </Router>, // highlight-line

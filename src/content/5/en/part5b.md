@@ -374,10 +374,8 @@ const App = () => {
 }
 ```
 
-<!-- Vastaava muutos voitaisiin tehdä myös kirjautumislomakkeelle, mutta jätämme sen vapaaehtoiseksi harjoitustehtäväksi. -->
 We could do the same for the log in form, but we'll leave that for an optional exercise. 
 
-<!-- Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), branchissa <i>part5-5</i>. -->
 The application code can be found from [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
 branch <i>part5-5</i>.
 

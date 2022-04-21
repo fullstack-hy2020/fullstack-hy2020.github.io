@@ -570,12 +570,13 @@ export default store
 After the changes, the content of the <i>index.js</i> is the following:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux' 
 import store from './store' // highlight-line
 import App from './App'
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>,

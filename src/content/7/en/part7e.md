@@ -235,7 +235,7 @@ The React elements defining the appearance of the components of the application 
 With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html) library, the virtual DOM defined by the components is rendered to a real DOM that can be shown by the browser using the DOM API:
 
 ```js
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <App />,
   document.getElementById('root')
 )

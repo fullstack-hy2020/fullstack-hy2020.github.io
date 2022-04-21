@@ -32,8 +32,8 @@ Navigaatiopalkki ja useita näkymiä sisältävä sovellus on erittäin helppo t
 Seuraavassa on eräs tapa:
 
 ```js
-import { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React, { useState }  from 'react'
+import ReactDOM from 'react-dom/client'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -88,7 +88,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />, document.getElementById('root'))
 ```
 
 Eli jokainen näkymä on toteutettu omana komponenttinaan ja sovelluksen tilassa <i>page</i> pidetään tieto siitä, minkä näkymää vastaava komponentti menupalkin alla näytetään.
@@ -422,7 +422,7 @@ Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon _id
 <i>useMatch</i>-hookin käyttö ei ole mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin _Router_-komponenttien käyttö komponentin _App_ ulkopuolelle:
 
 ```js
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Router> // highlight-line
     <App />
   </Router>, // highlight-line

@@ -10,9 +10,9 @@ lang: fi
 
 ### Huomio Reactin versioista
 
-Version 18 of React was released late March 2022. The code in material should work as it is with the new React version. However, some libraries might not yet be compatible with React 18. At the moment of writing (4th April) at least the Apollo client used in [part 8](/en/part8) does not yet work with most recent React.
+Reactin uusin versio 18 julkaistiin maaliskuun 2022 lopussa. Materiaalin koodin pitäisi toimia sellaisenaan uudenkin Reactin kanssa poislukien [osassa 8](/osa8) käytettävää Apollo Clientiä. 
 
-In case you end up in a situation where your application breaks because of library compatibly problems, <i>downgrade</i> to the older React by changing the file <i>package.json</i> as follows:
+Jos törmäät ongelmiin voit downgreidata projektin vanhempaan Reactiin muuttamalla tiedostoa  <i>package.json</i> seuraavasti:
 
 ```js
 {
@@ -26,13 +26,13 @@ In case you end up in a situation where your application breaks because of libra
 }
 ```
 
-After the change is made, reinstall dependencies by running
+ja asentamalla muutoksen jälkeen riippuvuudet uudelleen suorittamalla komento
 
 ```js
 npm install
 ```
 
-Note that also the file <i>index.js</i> needs to be changed a bit. For React 17 it looks like
+Huomaa, että myös tiedosto <i>index.js</i> eroaa hieman eri Reactin versiossa. React 17:lla se näyttää seuraavalta
 
 ```js
 import ReactDOM from 'react-dom'
@@ -41,7 +41,7 @@ import App from './App'
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-but for React 18 the correct form is
+React 18:aa käyttäessä tiedoston muoto on seuraava:
 
 ```js
 import React from 'react'

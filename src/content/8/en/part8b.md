@@ -23,7 +23,27 @@ At the moment, there are two good options: [Relay](https://facebook.github.io/re
 
 ### Apollo client
 
-Create a new React-app and install the dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/).
+Let us create a new React-app. At the time of writing (21th April 2022) Apollo client does not work well with React version 18. So we downgrade the project to previous version by changing the file <i>package.json</i> as follows:
+
+```js
+{
+  "dependencies": {
+    "react": "^17.0.2", // highlight-line
+    "react-dom": "^17.0.2", // highlight-line
+    "react-scripts": "5.0.0",
+    "web-vitals": "^2.1.4"
+  },
+  // ...
+}
+```
+
+After the change is made, reinstall dependencies by running
+
+```js
+npm install
+```
+
+Now we can continue installing dependencies required by [Apollo client](https://www.apollographql.com/docs/react/get-started/).
 
 ```bash
 npm install @apollo/client graphql

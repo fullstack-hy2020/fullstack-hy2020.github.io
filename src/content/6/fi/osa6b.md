@@ -135,7 +135,8 @@ Saamme nyt muodostettua varsinaisen reducerin yhdistämällä kaksi olemassaolev
 Määritellään yhdistetty reducer tiedostossa <i>index.js</i>:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { createStore, combineReducers } from 'redux' // highlight-line
 import { Provider } from 'react-redux' 
 import App from './App'
@@ -154,7 +155,7 @@ const store = createStore(reducer)
 
 console.log(store.getState())
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   /*
   <Provider store={store}>
     <App />
@@ -219,7 +220,7 @@ Onko koodissa bugi? Ei. Yhdistetty reducer toimii siten, että jokainen <i>actio
 Viimeistellään nyt sovellus käyttämään yhdistettyä reduceria, eli palautetaan tiedostossa <i>index.js</i> suoritettava renderöinti seuravaan muotoon:
 
 ```js
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>,
@@ -389,7 +390,8 @@ npm install @reduxjs/toolkit
 Avataan sen jälkeen <i>index.js</i>-tiedosto, jossa nykyinen Redux-store luodaan. Käytetään storen luonnissa Reduxin <em>createStore</em>-funktion sijaan Redux Toolkitin [configureStore](https://redux-toolkit.js.org/api/configureStore)-funktiota:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 import { Provider } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit' // highlight-line
 import App from './App'
@@ -408,7 +410,7 @@ const store = configureStore({
 
 console.log(store.getState())
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
   </Provider>,

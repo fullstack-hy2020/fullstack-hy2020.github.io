@@ -179,7 +179,9 @@ would cause the following to be printed
 The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
 import { createStore } from 'redux'
 
 const counterReducer = (state = 0, action) => {
@@ -223,7 +225,7 @@ const App = () => {
 }
 
 const renderApp = () => {
-  ReactDOM.render(<App />, document.getElementById('root'))
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 }
 
 renderApp()
@@ -829,7 +831,12 @@ Next we move the _App_ component into its own file _App.js_. Let's see how this 
 _index.js_ becomes:
 
 ```js
-import ReactDOM from 'react-dom'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+import App from './App'
+
+
 import { createStore } from 'redux'
 import { Provider } from 'react-redux' // highlight-line
 import App from './App'
@@ -837,7 +844,7 @@ import noteReducer from './reducers/noteReducer'
 
 const store = createStore(noteReducer)
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>  // highlight-line
     <App />
   </Provider>,  // highlight-line

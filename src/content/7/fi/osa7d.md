@@ -199,10 +199,10 @@ Liitetään tavanomaiset loitsut tiedostoon <i>index.js</i>
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />, document.getElementById('root'))
 ```
 
 ja muutetaan <i>App.js</i> muotoon
