@@ -26,7 +26,7 @@ lang: zh
 有许多 UI 框架具有响应友好版本，其中框架的“组件”已经转换为 React 组件。 有几个不同的React Bootstrap版本，像[reactstrap](reactstrap)和[React-Bootstrap](reactstrap  https://React-Bootstrap.github.io/)。
 
 <!-- Next we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://material-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/zh/part7/react_router) section of the course material. -->
-接下来我们将仔细研究两个 UI 框架，Bootstrap 和[MaterialUI](https://material-UI.com/)。 我们将使用这两个框架来为我们在课程教材的[React-router](/zh/part7/react_router) 部分中创建的应用添加类似的样式。
+接下来我们将仔细研究两个 UI 框架，Bootstrap 和[MaterialUI](https://mui.com/)。 我们将使用这两个框架来为我们在课程教材的[React-router](/zh/part7/react_router) 部分中创建的应用添加类似的样式。
 
 ### React Bootstrap
 
@@ -275,7 +275,7 @@ Bootstrap 和大多数现有的 UI 框架产生[响应式](https://en.wikipedia.
 
 
 <!-- As our second example we will look into the [MaterialUI](https://material-ui.com/) React library, which implements the [Material design](https://material.io/) visual language developed by Google. -->
-作为我们的第二个例子，我们将研究[MaterialUI](https://Material-ui.com/)React库，它实现了谷歌开发的[Material design](https://Material.io/)视觉语言。
+作为我们的第二个例子，我们将研究[MaterialUI](https://mui.com/)React库，它实现了谷歌开发的[Material design](https://Material.io/)视觉语言。
 
 
 
@@ -283,7 +283,7 @@ Bootstrap 和大多数现有的 UI 框架产生[响应式](https://en.wikipedia.
 使用如下命令安装库
 
 ```bash
-npm install @material-ui/core
+npm install @mui/material @emotion/react @emotion/styled
 ```
 
 <!-- Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads bootstrap's css-definitions. -->
@@ -304,10 +304,10 @@ npm install @material-ui/core
 
 
 <!-- Render the contents of the whole application within a [Container](https://material-ui.com/components/container/): -->
-在[Container](https://material-ui.com/components/container/)内渲染整个应用的内容:
+在[Container](https://mui.com/material-ui/react-container/)内渲染整个应用的内容:
 
 ```js
-import Container from '@material-ui/core/Container'
+import Container from '@mui/material/Container'
 
 const App = () => {
   // ...
@@ -322,7 +322,7 @@ const App = () => {
 
 
 <!-- Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://material-ui.com/components/tables/#simple-table): -->
-让我们从<i>Notes</i> 组件开始，我们将便笺列表渲染为一个[table](https://material-ui.com/components/tables/#simple-table) :
+让我们从<i>Notes</i> 组件开始，我们将便笺列表渲染为一个[table](https://mui.com/material-ui/react-table/#simple-table) :
 
 ```js
 const Notes = ({notes}) => (
@@ -369,14 +369,14 @@ import {
   TableContainer,
   TableRow,
   Paper,
-} from '@material-ui/core'
+} from '@mui/material'
 ```
 
 #### Form 表单
 
 
 <!-- Next let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components: -->
-接下来让我们在<i>Login</i> 视图中更好地使用[TextField](https://material-ui.com/components/text-fields/)和[Button](https://material-ui.com/api/Button/)组件来创建登录表单:
+接下来让我们在<i>Login</i> 视图中更好地使用[TextField](https://mui.com/material-ui/react-text-field/)和[Button](https://mui.com/material-ui/api/button/)组件来创建登录表单:
 
 ```js 
 const Login = (props) => {
@@ -419,7 +419,7 @@ const Login = (props) => {
 
 
 <!-- MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element. -->
-与 bootstrap 不同的是，MaterialUI 并不为表单本身提供组件。 这里的表单是一个普通的 HTML [form](https://developer.mozilla.org/en-us/docs/web/HTML/element/form)元素。
+与 bootstrap 不同的是，MaterialUI 并不为表单本身提供组件。 这里的表单是一个普通的 HTML [form](https://developer.mozilla.org/zh-CN/docs/web/HTML/element/form)元素。
 
 
 
@@ -428,7 +428,7 @@ const Login = (props) => {
 
 #### Notification
 <!-- The notification displayed on log in can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component: -->
-在登录中显示的通知可以通过使用[Alert](https://material-ui.com/components/Alert/)来完成，这个组件与 bootstrap 的等价组件非常相似:
+在登录中显示的通知可以通过使用[Alert](https://mui.com/material-ui/react-alert/)来完成，这个组件与 bootstrap 的等价组件非常相似:
 
 ```js
 <div>
@@ -442,22 +442,13 @@ const Login = (props) => {
 </div>
 ```
 
-
-
 <!-- The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it: -->
-Alert 组件尚未包含在 MaterialUI 核心包中，因此我们必须安装[lab](https://material-ui.com/components/about-The-lab/)包才能使用它: 
-
-```bash
-npm install @material-ui/lab
-```
-
-
 
 <!-- Then we can import the component like so -->
 然后我们可以像这样导入组件
 
 ```js 
-import { Alert } from '@material-ui/lab'
+import { Alert } from '@mui/material'
 ```
 
 
@@ -473,7 +464,7 @@ import { Alert } from '@material-ui/lab'
 
 
 <!-- We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component. -->
-我们可以使用 [AppBar](https://material-ui.com/components/app-bar/) 组件来实现导航。
+我们可以使用 [AppBar](https://mui.com/material-ui/react-app-bar/) 组件来实现导航。
 
 <!-- If we use the example code from the documentation -->
 如果我们使用文档中的示例代码
@@ -512,7 +503,7 @@ import { Alert } from '@material-ui/lab'
 
 
 <!-- We can find a better way from the [documentation](https://material-ui.com/guides/composition/#routing-libraries). We can use [component props](https://material-ui.com/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered. -->
-我们可以从文档中[documentation](https://material-ui.com/guides/composition/#routing-libraries)找到一个更好的 。 我们可以使用[component props](https://material-ui.com/guides/composition/#component-prop)来定义 MaterialUI 组件的根元素是如何渲染的。
+我们可以从文档中[documentation](https://mui.com/material-ui/guides/composition/#routing-libraries)找到一个更好的 。 我们可以使用[component props](https://mui.com/material-ui/guides/composition/#component-prop)来定义 MaterialUI 组件的根元素是如何渲染的。
 
 
 
