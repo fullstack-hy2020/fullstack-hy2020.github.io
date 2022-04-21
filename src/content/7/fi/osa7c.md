@@ -21,9 +21,9 @@ Monesta UI-frameworkista on tehty React-ystävällisiä versiota, joissa UI-fram
 
 Katsotaan seuraavaksi kahta UI-frameworkia bootstrapia ja [MaterialUI](https://material-ui.com/):ta. Lisätään molempien avulla samantapaiset tyylit luvun [React Router](/osa7/react_router) sovellukseen.
 
-### react bootstrap
+### React Bootstrap
 
-Aloitetaan bootstrapista, käytetään kirjastoa [react-bootstrap](https://react-bootstrap.github.io/).
+Aloitetaan Bootstrapista, käytetään kirjastoa [react-bootstrap](https://react-bootstrap.github.io/).
 
 Asennetaan kirjasto suorittamalla komento
 
@@ -259,7 +259,7 @@ Tehdään nyt MaterialUI:n avulla koodiin suunnilleen samat muutokset, mitä tei
 Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
 
 ```js
-import Container from '@mui/material/Container'
+import { Container } from '@mui/material'
 
 const App = () => {
   // ...
@@ -375,18 +375,6 @@ Kirjautumisen jälkeisen notifikaation näyttämiseen sopii komponentti [Alert](
 </div>
 ```
 
-Alert-komponentti ei ole vielä mukana MaterialUI:n core-pakkauksessa, ja komponentin sisältävä pakkaus [lab](https://material-ui.com/components/about-the-lab/) tulee asentaa sovellukseen:
-
-```bash
-npm install @material-ui/lab
-```
-
-Komponentti importataan seuraavasti
-
-```js 
-import { Alert } from '@mui/material'
-```
-
 Alert on ulkoasultaan tyylikäs:
 
 ![](../../images/7/65ea.png)
@@ -469,13 +457,13 @@ Esimerkin sovelluksen koodi kokonaisuudessaan [täällä](https://github.com/ful
 
 ### Loppuhuomioita
 
-Ero react-bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänyt MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeämmältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella ja on kasvattanut sen jälkeen eroa tasaisesti:
+Ero React Bootstrapin ja MaterialUI:n välillä ei ole suuri. On makuasia kummalla tuotettu ulkoasu on tyylikkäämpi. En ole itse käyttänyt MaterialUI:ta kovin paljoa, mutta ensikosketus on positiivinen. Dokumentaatio vaikuttaa aavistuksen react-bootstrapin dokumentaatiota selkeämmältä. Eri npm-kirjastojen lautausmääriä vertailevan sivuston https://www.npmtrends.com/ mukaan MaterialUI ohitti react-boostrapin suosiossa vuoden 2018 loppupuolella ja on kasvattanut sen jälkeen eroa tasaisesti:
 
 ![](../../images/7/2021.png)
 
 Esimerkeissä käytettiin UI-frameworkeja niiden React-integraatiot tarjoavien kirjastojen kautta.
 
-Sen sijaan että käytämme kirjastoa [react bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää [Bootstrapia](https://getbootstrap.com/) suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
+Sen sijaan että käytämme kirjastoa [React Bootstrap](https://react-bootstrap.github.io/), olisimme voineet aivan yhtä hyvin käyttää [Bootstrapia](https://getbootstrap.com/) suoraan, liittämällä HTML-elementteihin CSS-luokkia. Eli sen sijaan että määrittelimme esim. taulukon komponentin <i>Table</i> avulla
 
 ```js
 <Table striped>

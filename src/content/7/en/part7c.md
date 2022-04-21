@@ -244,7 +244,7 @@ As our second example we will look into the [MaterialUI](https://material-ui.com
 Install the library with the command
 
 ```bash
-npm install @material-ui/core
+npm install @mui/material @emotion/react @emotion/styled
 ```
 
 Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file. The line loads Google's font Roboto.
@@ -261,7 +261,7 @@ Now let's use MaterialUI to do the same modifications to the code we did earlier
 Render the contents of the whole application within a [Container](https://material-ui.com/components/container/):
 
 ```js
-import Container from '@material-ui/core/Container'
+import { Container } from '@mui/material'
 
 const App = () => {
   // ...
@@ -359,12 +359,11 @@ The end result is:
 
 MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 
-<!-- Lomakkeen käyttämät komponentit on luonnollisesti importattava koodissa.  -->
 Remember to import all the components used in the form.
 
 #### Notification
 
-The notification displayed on login can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to bootstrap's equivalent component:
+The notification displayed on login can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to Bootstrap's equivalent component:
 
 ```js
 <div>
@@ -376,18 +375,6 @@ The notification displayed on login can be done using the [Alert](https://materi
   )}
 // highlight-end
 </div>
-```
-
-The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it:
-
-```bash
-npm install @material-ui/lab
-```
-
-Then we can import the component like so
-
-```js 
-import { Alert } from '@material-ui/lab'
 ```
 
 Alert is quite stylish:
