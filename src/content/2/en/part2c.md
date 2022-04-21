@@ -598,7 +598,7 @@ Modify the application such that the initial state of the data is fetched from t
 
 The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
 
-Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/#api-endpoints-v3-all).
+Create an application, in which one can look at data of various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
 
 The user interface is very simple. The country to be shown is found by typing a search query into the search field.
 
@@ -645,9 +645,9 @@ If you use Open weather map, [here](https://openweathermap.org/weather-condition
 Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
 
 ```bash
-REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' npm start // For Linux/macOS Bash
-($env:REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3') -and (npm start) // For Windows PowerShell
-set REACT_APP_API_KEY='t0p53cr3t4p1k3yv4lu3' && npm start // For Windows cmd.exe
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+($env:REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3) -and (npm start) // For Windows PowerShell
+set REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Windows cmd.exe
 ```
 
 you can access the value of the key from the _process.env_ object:
