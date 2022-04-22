@@ -1079,9 +1079,7 @@ Tee testi, joka varmistaa, että blogin lisännyt käyttäjä voi poistaa blogin
 
 Tee testi, joka varmistaa, että blogit järjestetään likejen mukaiseen järjestykseen, eniten likejä saanut blogi ensin.
 
-Tämä tehtävä on edellisiä huomattavasti haastavampi. Eräs ratkaisutapa on tarkastella tulosta [then](https://docs.cypress.io/api/commands/then.html#DOM-element)-komennon takaisinkutsufunktiossa.
-
-Eräs ratkaisutapa on lisätä tietty luokka elementille, joka sisältää blogin sisällön ja käyttää [eq](https://docs.cypress.io/api/commands/eq#Syntax)-metodia tietyssä indeksissä olevan elementin hakemiseen:
+Tämä tehtävä on edellisiä huomattavasti haastavampi. Eräs ratkaisutapa on lisätä tietty luokka elementille, joka sisältää blogin sisällön ja käyttää [eq](https://docs.cypress.io/api/commands/eq#Syntax)-metodia tietyssä indeksissä olevan elementin hakemiseen:
   
 ```js
 cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
