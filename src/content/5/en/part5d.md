@@ -1141,7 +1141,7 @@ This exercise is quite a bit trickier than the previous ones. One solution is to
 ```js
 cy.get('.blog').eq(0).should('contain', 'The title of the first blog')
 cy.get('.blog').eq(1).should('contain', 'The title of the second blog')
-
+```
 
 Note that you might end up having problems if you click a like button many times in row. It might be that cypress does the clicking so fast that it does not have time to update the app state in between the clicks. One remedy for this is to wait for the number of likes to update in between all clicks.
 
