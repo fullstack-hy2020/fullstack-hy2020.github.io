@@ -19,7 +19,7 @@ Many UI frameworks provide developers of web applications with ready-made themes
 
 There are many UI frameworks that have React-friendly versions where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
-Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://material-ui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
+Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://mui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
 
 ### React Bootstrap
 
@@ -239,7 +239,7 @@ You can find the complete code for the application [here](https://github.com/ful
 
 ### Material UI
 
-As our second example we will look into the [MaterialUI](https://material-ui.com/) React library, which implements the [Material design](https://material.io/) visual language developed by Google.
+As our second example we will look into the [MaterialUI](https://mui.com/) React library, which implements the [Material design](https://material.io/) visual language developed by Google.
 
 Install the library with the command
 
@@ -258,7 +258,7 @@ Then add the following line to the <i>head</i> tag in the <i>public/index.html</
 
 Now let's use MaterialUI to do the same modifications to the code we did earlier with bootstrap.
 
-Render the contents of the whole application within a [Container](https://material-ui.com/components/container/):
+Render the contents of the whole application within a [Container](https://mui.com/components/container/):
 
 ```js
 import { Container } from '@mui/material'
@@ -273,7 +273,7 @@ const App = () => {
 }
 ```
 
-Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://material-ui.com/components/tables/#simple-table):
+Let's start with the <i>Notes</i> component. We'll render the list of notes as a [table](https://mui.com/material-ui/react-table/#simple-table):
 
 ```js
 const Notes = ({ notes }) => (
@@ -315,12 +315,12 @@ import {
   TableContainer,
   TableRow,
   Paper,
-} from '@material-ui/core'
+} from '@mui/material'
 ```
 
 #### Form
 
-Next, let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components:
+Next, let's make the login form in the <i>Login</i> view better using the [TextField](https://mui.com/material-ui/react-text-field/) and [Button](https://mui.com/material-ui/api/button/) components:
 
 ```js 
 const Login = (props) => {
@@ -363,7 +363,7 @@ Remember to import all the components used in the form.
 
 #### Notification
 
-The notification displayed on login can be done using the [Alert](https://material-ui.com/components/alert/) component, which is quite similiar to Bootstrap's equivalent component:
+The notification displayed on login can be done using the [Alert](https://mui.com/material-ui/react-alert/) component, which is quite similiar to Bootstrap's equivalent component:
 
 ```js
 <div>
@@ -383,7 +383,7 @@ Alert is quite stylish:
 
 #### Navigation structure
 
-We can implement navigation using the [AppBar](https://material-ui.com/components/app-bar/) component.
+We can implement navigation using the [AppBar](https://mui.com/material-ui/react-app-bar/) component.
 
 If we use the example code from the documentation
 
@@ -415,7 +415,7 @@ we do get working navigation, but it could look better
 
 ![](../../images/7/66ea.png)
 
-We can find a better way from the [documentation](https://material-ui.com/guides/composition/#routing-libraries). We can use [component props](https://material-ui.com/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
+We can find a better way from the [documentation](https://mui.com/material-ui/guides/composition/#routing-libraries). We can use [component props](https://mui.com/material-ui/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
 
 By defining
 
