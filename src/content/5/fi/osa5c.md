@@ -314,7 +314,7 @@ expect(mockHandler.mock.calls).toHaveLength(1)
 
 Esimerkissämme mock-funktio sopi tarkoitukseen erinomaisesti, sillä sen avulla on helppo varmistaa, että metodia on kutsuttu täsmälleen kerran.
 
-### Komponentin <i>Togglable</i> testit
+### Komponentin Togglable testit
 
 Tehdään komponentille <i>Togglable</i> muutama testi. Lisätään komponentin lapset renderöivään div-elementtiin CSS-luokka <i>togglableContent</i>:
 
@@ -384,7 +384,7 @@ Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komp
 
 Ensimmäinen testi tarkastaa, että <i>Togglable</i> renderöi sen lapsikomponentin
 
-```
+```js
 <div className="testDiv" >
   togglable content
 </div>
@@ -493,11 +493,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
 })
 ```
 
-Syötekenttä etsitään metodin [getByRole](https://testing-library.com/docs/queries/byrole) avulla. 
-
-Syötekenttään kirjoitetaan metodin [type](https://testing-library.com/docs/user-event/utility#type) avulla.
-
-Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee samansisältöinen muistiinpano kuin lomakkeelle kirjoitetaan.
+Syötekenttä etsitään metodin [getByRole](https://testing-library.com/docs/queries/byrole) avulla. Syötekenttään kirjoitetaan metodin [type](https://testing-library.com/docs/user-event/utility#type) avulla. Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee samansisältöinen muistiinpano kuin lomakkeelle kirjoitetaan.
 
 ### Lisää elementtien etsimisestä
 
@@ -529,7 +525,7 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-Nyt testissä käytetty syötekentän etsimistapa 
+Nyt testissä käytetty syötekentän etsimistapa:
 
 ```js
 const input = screen.getByRole('textbox')
@@ -549,7 +545,7 @@ await user.type(inputs[0], 'testing a form...')
 
 Metodi <i>getAllByRole</i>  palauttaa taulukon, ja oikea tekstikenttä on taulukossa ensimmäisenä. Testi on kuitenkin hieman epäilyttävä, sillä se luottaa tekstikenttien järjestykseen.
 
-Syötekentille määritellään usein placehoder-teksti, joka ohjaa käyttäjää kirjoittamaan syötekenttään oikean arvon. Lisätään placeholder lomakkeellemme
+Syötekentille määritellään usein placehoder-teksti, joka ohjaa käyttäjää kirjoittamaan syötekenttään oikean arvon. Lisätään placeholder lomakkeellemme:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -597,7 +593,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
 Kaikkein joustavimman tavan tarjoaa aiemmin [tässä luvussa](/osa5/react_sovellusten_testaaminen#sisallon-etsiminen-testattavasta-komponentista) esitellyn _render_-metodin palauttaman olion _content_-kentän metodi <i>querySelector</i>, joka mahdollistaa komponenttien etsimisen mielivaltaisten CSS-selektorien avulla. 
 
-Jos esim. määrittelisimme syötekentälle yksilöivän attribuutin _id_,
+Jos esim. määrittelisimme syötekentälle yksilöivän attribuutin _id_:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -624,7 +620,7 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-testi löytäisi elementin seuraavasti:
+Testi löytäisi elementin seuraavasti:
 
 ```js
 const { container } = render(<NoteForm createNote={createNote} />)
@@ -633,8 +629,8 @@ const input = container.querySelector('#note-input')
 ```
 
 Jätämme koodiin placeholderiin perustuvan ratkaisun.
-
-Vielä muutama tärkeä huomio. Jos komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti
+  
+Vielä muutama tärkeä huomio. Jos komponentti renderöisi samaan HTML-elementtiin tekstiä seuraavasti:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -652,7 +648,7 @@ const Note = ({ note, toggleImportance }) => {
 export default Note
 ```
 
-ei testissä käyttämämme _getByText_ löydä elementtiä
+Ei testissä käyttämämme _getByText_ löydä elementtiä:
 
 ```js 
 test('renders content', () => {
@@ -669,7 +665,7 @@ test('renders content', () => {
 })
 ```
 
-Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan parametrina teksti</i> eikä mitään muuta. Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio 
+Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan parametrina teksti</i> eikä mitään muuta. Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
 
 ```js 
 const element = screenscreen.getByText(
