@@ -4,6 +4,7 @@ import './index.scss';
 import React, { Component } from 'react';
 
 import Header from './Header/Header';
+import InfoBanner from './InfoBanner';
 import PropTypes from 'prop-types';
 
 class Layout extends Component {
@@ -20,14 +21,18 @@ class Layout extends Component {
         ? 'zh'
         : 'fi';
 
+    const visible = !localStorage.getItem('r18_banner_seen');
+
+    console.log(visible);
+
     this.setState({
       siteLanguage: siteLanguage,
-      visible: true,
+      visible,
     });
   }
 
   hideNote() {
-    console.log('yes');
+    localStorage.setItem('r18_banner_seen', 'yes');
     this.setState({
       siteLanguage: this.state.siteLanguage,
       visible: false,
@@ -37,66 +42,11 @@ class Layout extends Component {
   render() {
     const { siteLanguage, visible } = this.state;
 
-    const style = {
-      padding: 10,
-      borderStyle: 'solid',
-      borderWidth: 2,
-      marginLeft: 80,
-      marginRight: 80,
-      position: 'sticky',
-      top: 100,
-      left: 40,
-      display: 'flex',
-      flexWrap: 'wrap',
-      flexDirection: 'row',
-      alignContent: 'space-between',
-      backgroundColor: '#E8E8E8',
-      zIndex: 2147483647,
-    };
-
-    const linkStyle = {
-      color: 'grey',
-      textDecoration: 'underline',
-    };
-
-    const textStyle = {
-      flex: 90,
-    };
-
-    const buttonDiv = {
-      flex: 10,
-      textAlign: 'right',
-    };
-
-    const buttonStyle = {
-      outline: 'none',
-      backgroundColor: 'transparent',
-      border: 'none',
-    };
-
-    console.log(this.state);
-
     return (
       <div className="main-wrapper">
         <Header lang={siteLanguage} />
 
-        {visible && (
-          <div style={style}>
-            <div stule={textStyle}>
-              Note that some libraries might not work with the new React version
-              18. If you run in trouble with library compatibility, read{' '}
-              <a href="/en/part1/a_more_complex_state_debugging_react_apps#a-note-on-react-version">
-                <span style={linkStyle}>this</span>
-              </a>
-              .
-            </div>
-            <div style={buttonDiv}>
-              <button style={buttonStyle} onClick={() => this.hideNote()}>
-                x
-              </button>
-            </div>
-          </div>
-        )}
+        <InfoBanner onHide={() => this.hideNote()} visible={visible} />
 
         {this.props.children}
       </div>
