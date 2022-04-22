@@ -244,7 +244,7 @@ Now the HTML of the wanted element gets printed:
 
 In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called.
 
-Let us install a library [user-event](https://testing-library.com/docs/ecosystem-user-event/) that makes simulating user input a bit easier:
+Let us install a library [user-event](https://testing-library.com/docs/user-event/intro) that makes simulating user input a bit easier:
 
 ```
 npm install --save-dev @testing-library/user-event
@@ -279,8 +279,9 @@ test('clicking the button calls event handler once', async () => {
     <Note note={note} toggleImportance={mockHandler} />
   )
 
+  const user = userEvent.setup()
   const button = screen.getByText('make not important')
-  userEvent.click(button)
+  await user.click(button)
 
   expect(mockHandler.mock.calls).toHaveLength(1)
 })
@@ -293,14 +294,19 @@ There are a few interesting things related to this test. The event handler is a 
 const mockHandler = jest.fn()
 ```
 
+A [session](https://testing-library.com/docs/user-event/setup/) is started to interact with the rendered component:
+```js
+const user = userEvent.setup()
+```
+
 The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
 
 ```js
+await user.click(button)
 const button = screen.getByText('make not important')
-userEvent.click(button)
 ```
 
-Clicking happens with the method [click](https://testing-library.com/docs/ecosystem-user-event/#clickelement-eventinit-options) of the userEvent-library.
+Clicking happens with the method [click](https://testing-library.com/docs/user-event/convenience/#click) of the userEvent-library.
 
 
 The expectation of the test verifies that the <i>mock function</i> has been called exactly once.
@@ -368,9 +374,10 @@ describe('<Togglable />', () => {
     expect(div).toHaveStyle('display: none')
   })
 
-  test('after clicking the button, children are displayed', () => {
+  test('after clicking the button, children are displayed', async () => {
+    const user = userEvent.setup()
     const button = screen.getByText('show...')
-    userEvent.click(button)
+    await user.click(button)
 
     const div = container.querySelector('.togglableContent')
     expect(div).not.toHaveStyle('display: none')
@@ -397,12 +404,13 @@ describe('<Togglable />', () => {
 
   // ...
 
-  test('toggled content can be closed', () => {
+  test('toggled content can be closed', async () => {
+    const user = userEvent.setup()
     const button = screen.getByText('show...')
-    userEvent.click(button)
+    await user.click(button)
 
     const closeButton = screen.getByText('cancel')
-    userEvent.click(closeButton)
+    await user.click(closeButton)
 
     const div = container.querySelector('.togglableContent')
     expect(div).toHaveStyle('display: none')
@@ -412,11 +420,12 @@ describe('<Togglable />', () => {
 
 ### Testing the forms
 
-We already used the _click_ function of the [user-event](https://testing-library.com/docs/ecosystem-user-event/) in our previous tests to click buttons.
+We already used the _click_ function of the [user-event](https://testing-library.com/docs/user-event/intro) in our previous tests to click buttons.
 
 ```js
+const user = userEvent.setup()
 const button = screen.getByText('show...')
-userEvent.click(button)
+await user.click(button)
 ```
 
 We can also simulate text input with <i>userEvent</i>.
@@ -472,16 +481,17 @@ import '@testing-library/jest-dom/extend-expect'
 import NoteForm from './NoteForm'
 import userEvent from '@testing-library/user-event'
 
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
   const createNote = jest.fn()
+  const user = userEvent.setup()
 
   render(<NoteForm createNote={createNote} />)
 
   const input = screen.getByRole('textbox')
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...' )
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...' )
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
@@ -490,7 +500,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
 Tests gets the access to the the input field using the function [getByRole](https://testing-library.com/docs/queries/byrole). 
 
-Method [type](https://testing-library.com/docs/ecosystem-user-event/#typeelement-text-options) of the userEvent is used to write text to the input field.
+Method [type](https://testing-library.com/docs/user-event/utility#type) of the userEvent is used to write text to the input field.
 
 The first test expectation ensures, that submitting the form calls the _createNote_ method. 
 The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled. 
@@ -540,7 +550,7 @@ The error message suggests to use <i>getAllByRole</i>. Test could be fixed as fo
 ```js
 const inputs = screen.getAllByRole('textbox')
 
-userEvent.type(input[0], 'testing a form...' )
+await user.type(inputs[0], 'testing a form...' )
 ```
 
 Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
