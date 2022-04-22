@@ -1136,7 +1136,7 @@ Make a test for ensuring that the user who created a blog can delete it.
 
 Make a test which checks that the blogs are ordered according to likes with the blog with the most likes being first. 
 
-This exercise is quite a bit trickier than the previous ones. One solution is to add a certain class for the element which wraps the blog's content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax)-method to get the blog element in a specific index:
+This exercise is quite a bit trickier than the previous ones. One solution is to add a certain class for the element which wraps the blog's content and use the [eq](https://docs.cypress.io/api/commands/eq#Syntax) method to get the blog element in a specific index:
   
 ```js
 cy.get('.blog').eq(0).should('contain', 'The title with the most likes')
