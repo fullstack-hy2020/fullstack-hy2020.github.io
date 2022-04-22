@@ -275,8 +275,9 @@ test('clicking the button calls event handler once', async () => {
     <Note note={note} toggleImportance={mockHandler} />
   )
 
+  const user = userEvent.setup()
   const button = screen.getByText('make not important')
-  userEvent.click(button)
+  await user.click(button)
 
   expect(mockHandler.mock.calls).toHaveLength(1)
 })
@@ -287,15 +288,21 @@ Testissä on muutama mielenkiintoinen seikka. Tapahtumankäsittelijäksi annetaa
 ```js
 const mockHandler = jest.fn()
 ```
+  
+Jotta renderöidyn komponentin kanssa voi vuorovaikuttaa tapahtumien avulla, tulee ensin aloittaa uusi sessio. Tämä onnistuu userEvent-olion [setup](https://testing-library.com/docs/user-event/setup/)-metodin avulla:
+
+```js
+const user = userEvent.setup()
+```
 
 Testi hakee renderöidystä komponentista napin <i>tekstin perusteella</i> ja klikkaa sitä:
 
 ```js
 const button = screen.getByText('make not important')
-userEvent.click(button)
+await user.click(button)
 ```
 
-Klikkaaminen tapahtuu userEvent-olion metodin [click](https://testing-library.com/docs/ecosystem-user-event/#clickelement-eventinit-options) avulla.
+Klikkaaminen tapahtuu userEvent-olion metodin [click](https://testing-library.com/docs/user-event/convenience/#click) avulla.
 
 Testin ekspektaatio varmistaa, että <i>mock-funktiota</i> on kutsuttu täsmälleen kerran:
 
@@ -362,9 +369,10 @@ describe('<Togglable />', () => {
     expect(div).toHaveStyle('display: none')
   })
 
-  test('after clicking the button, children are displayed', () => {
+  test('after clicking the button, children are displayed', async () => {
+    const user = userEvent.setup()
     const button = screen.getByText('show...')
-    userEvent.click(button)
+    await user.click(button)
 
     const div = container.querySelector('.togglableContent')
     expect(div).not.toHaveStyle('display: none')
@@ -391,12 +399,14 @@ describe('<Togglable />', () => {
 
   // ...
 
-  test('toggled content can be closed', () => {
+  test('toggled content can be closed', async () => {
+    const user = userEvent.setup()
+
     const button = screen.getByText('show...')
-    userEvent.click(button)
+    await user.click(button)
 
     const closeButton = screen.getByText('cancel')
-    userEvent.click(closeButton)
+    await user.click(closeButton)
 
     const div = container.querySelector('.togglableContent')
     expect(div).toHaveStyle('display: none')
@@ -406,14 +416,14 @@ describe('<Togglable />', () => {
 
 ### Lomakkeiden testaus
 
-Käytimme jo edellisissä testeissä [userEvent]([user-event](https://testing-library.com/docs/ecosystem-user-event/))-kirjaston _fireEvent_-funktiota nappien klikkaamiseen:
+Käytimme jo edellisissä testeissä [user-event](https://testing-library.com/docs/user-event/intro)-kirjaston _click_-metodia nappien klikkaamiseen:
 
 ```js
 const button = screen.getByText('show...')
-userEvent.click(button)
+await user.click(button)
 ```
 
-Käytännössä siis loimme <i>userEventin</i> avulla tapahtuman <i>click</i> -nappia vastaavalle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEventin</i> avulla.
+Käytännössä siis loimme metodin avulla <i>click</i>-tapahtuman metodin argumenttina annatulle komponentille. Voimme simuloida myös lomakkeelle kirjoittamista <i>userEventin</i>-olion avulla.
 
 Tehdään testi komponentille <i>NoteForm</i>. Lomakkeen koodi näyttää seuraavalta:
 
@@ -466,7 +476,8 @@ import '@testing-library/jest-dom/extend-expect'
 import NoteForm from './NoteForm'
 import userEvent from '@testing-library/user-event'
 
-test('<NoteForm /> updates parent state and calls onSubmit', () => {
+test('<NoteForm /> updates parent state and calls onSubmit', async () => {
+  const user = userEvent.setup()
   const createNote = jest.fn()
 
   render(<NoteForm createNote={createNote} />)
@@ -474,8 +485,8 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByRole('textbox')
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...')
-  userEvent.click(sendButton)
+  await user.type(input, 'testing a form...')
+  await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
   expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
@@ -484,7 +495,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
 Syötekenttä etsitään metodin [getByRole](https://testing-library.com/docs/queries/byrole) avulla. 
 
-Syötekenttään kirjoitetaan userEvent:in tarjoaman metodin [type](https://testing-library.com/docs/ecosystem-user-event/#typeelement-text-options) avulla.
+Syötekenttään kirjoitetaan metodin [type](https://testing-library.com/docs/user-event/utility#type) avulla.
 
 Testin ensimmäinen ekspektaatio varmistaa, että lomakkeen lähetys on aikaansaanut tapahtumankäsittelijän _createNote_ kutsumisen. Toinen ekspektaatio tarkistaa, että tapahtumankäsittelijää kutsutaan oikealla parametrilla, eli että luoduksi tulee samansisältöinen muistiinpano kuin lomakkeelle kirjoitetaan.
 
@@ -533,7 +544,7 @@ Virheilmoitus ehdottaa käytettäväksi metodia <i>getAllByRole</i> (jos tilanne
 ```js
 const inputs = screen.getAllByRole('textbox')
 
-userEvent.type(input[0], 'testing a form...')
+await user.type(inputs[0], 'testing a form...')
 ```
 
 Metodi <i>getAllByRole</i>  palauttaa taulukon, ja oikea tekstikenttä on taulukossa ensimmäisenä. Testi on kuitenkin hieman epäilyttävä, sillä se luottaa tekstikenttien järjestykseen.
