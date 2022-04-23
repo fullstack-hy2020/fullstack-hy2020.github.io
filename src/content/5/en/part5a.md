@@ -525,7 +525,7 @@ Current application code can be found on [Github](https://github.com/fullstack-h
 
 ### Exercises 5.1.-5.4.
 
-We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
+We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/FullStack-HY/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3003. 
 
 It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary. 
 
