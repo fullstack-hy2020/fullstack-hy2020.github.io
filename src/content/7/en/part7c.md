@@ -198,7 +198,7 @@ Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
   <Navbar.Toggle aria-controls="responsive-navbar-nav" />
   <Navbar.Collapse id="responsive-navbar-nav">
-    <Nav className="mr-auto">
+    <Nav className="me-auto">
       <Nav.Link href="#" as="span">
         <Link style={padding} to="/">home</Link>
       </Nav.Link>
