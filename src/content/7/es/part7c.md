@@ -509,7 +509,7 @@ Aquí hay algunos otros UI frameworks para su consideración. Si no ve su UI fra
 
 También hay [otras formas](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) de diseñar aplicaciones React que aún no hemos analizado.
 
-La librería [styled components](https://www.styled-components.com/) ofrece un enfoque interesante para definir estilos a través [tagged template literals](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals) que se introdujeron en ES6.
+La librería [styled components](https://www.styled-components.com/) ofrece un enfoque interesante para definir estilos a través [tagged template literals](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals#plantillas_etiquetadas) que se introdujeron en ES6.
 
 Hagamos algunos cambios en los estilos de nuestra aplicación con la ayuda de styled components. Primero, instale el paquete con el comando:
 
