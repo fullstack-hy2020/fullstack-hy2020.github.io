@@ -263,7 +263,7 @@ Ahora usemos MaterialUI para hacer las mismas modificaciones al código que hici
 Renderice el contenido de toda la aplicación dentro de un [Container](https://mui.com/material-ui/react-container/):
 
 ```js
-import Container from '@mui/material'
+import Container from '@mui/material/Container'
 
 const App = () => {
   // ...
