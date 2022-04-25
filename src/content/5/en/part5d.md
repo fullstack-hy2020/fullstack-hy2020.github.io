@@ -416,18 +416,18 @@ We can empty the database using these endpoints.
 Let's create a new <i>router</i> for the tests
 
 ```js
-const router = require('express').Router()
+const testingRouter = require('express').Router()
 const Note = require('../models/note')
 const User = require('../models/user')
 
-router.post('/reset', async (request, response) => {
+testingRouter.post('/reset', async (request, response) => {
   await Note.deleteMany({})
   await User.deleteMany({})
 
   response.status(204).end()
 })
 
-module.exports = router
+module.exports = testingRouter
 ```
 
 and add it to the backend only <i>if the application is run on test-mode</i>:
