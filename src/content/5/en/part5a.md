@@ -538,7 +538,7 @@ While doing the exercises, remember all of the debugging methods we have talked 
 
 #### 5.1: bloglist frontend, step1
 
-Clone the application from [Github](https://github.com/fullstack-hy/bloglist-frontend) with the command: 
+Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command: 
 
 ```bash
 git clone https://github.com/fullstack-hy/bloglist-frontend
