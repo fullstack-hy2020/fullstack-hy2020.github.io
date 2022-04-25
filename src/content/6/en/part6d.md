@@ -314,7 +314,7 @@ import { createNote } from '../reducers/noteReducer'
 
 const NewNote = (props) => { // highlight-line
   
-  const addNote = async (event) => {
+  const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
@@ -352,7 +352,7 @@ import { createNote } from '../reducers/noteReducer'  // highlight-line
 
 const NewNote = (props) => {
   
-  const addNote = async (event) => {
+  const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
