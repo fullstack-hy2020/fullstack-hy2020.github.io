@@ -19,7 +19,7 @@ Muchos UI frameworks proporcionan a los desarrolladores de aplicaciones web tema
 
 Hay muchos UI frameworks que tienen versiones compatibles con React, donde los "componentes" del framwork se han transformado en componentes de React. Hay algunas versiones diferentes de React de Bootstrap como [reactstrap](http://reactstrap.github.io/) y [react-bootstrap](https://react-bootstrap.github.io/).
 
-A continuación, analizaremos más de cerca dos UI frameworks, Bootstrap y [MaterialUI](https://material-ui.com/). Usaremos ambos marcos para agregar estilos similares a la aplicación que hicimos en la sección [React-router](/es/part7/react_router) del material del curso.
+A continuación, analizaremos más de cerca dos UI frameworks, Bootstrap y [MaterialUI](https://mui.com/). Usaremos ambos marcos para agregar estilos similares a la aplicación que hicimos en la sección [React-router](/es/part7/react_router) del material del curso.
 
 ### React Bootstrap
 
@@ -241,12 +241,12 @@ Puede encontrar el código completo de la aplicación [aquí](https://github.com
 
 ### UI de material
 
-Como segundo ejemplo, veremos la librería [MaterialUI](https://material-ui.com/) React, que implementa el lenguaje visual de [Material design](https://material.io/) desarrollado por Google.
+Como segundo ejemplo, veremos la librería [MaterialUI](https://mui.com/) React, que implementa el lenguaje visual de [Material design](https://material.io/) desarrollado por Google.
 
 Instale la librería con el comando
 
 ```bash
-npm install @material-ui/core
+npm install @mui/material @emotion/react @emotion/styled
 ```
 
 Luego agregue la siguiente línea a la etiqueta <i>head</i> en el archivo <i>public/index.html</i>. La línea carga la fuente Roboto de Google.
@@ -260,10 +260,10 @@ Luego agregue la siguiente línea a la etiqueta <i>head</i> en el archivo <i>pub
 
 Ahora usemos MaterialUI para hacer las mismas modificaciones al código que hicimos anteriormente con bootstrap.
 
-Renderice el contenido de toda la aplicación dentro de un [Container](https://material-ui.com/components/container/):
+Renderice el contenido de toda la aplicación dentro de un [Container](https://mui.com/material-ui/react-container/):
 
 ```js
-import Container from '@material-ui/core/Container'
+import Container from '@mui/material/Container'
 
 const App = () => {
   // ...
@@ -275,7 +275,7 @@ const App = () => {
 }
 ```
 
-Comencemos con el componente de <i>Notes</i>. Representaremos la lista de notas como una [tabla](https://material-ui.com/components/tables/#simple-table):
+Comencemos con el componente de <i>Notes</i>. Representaremos la lista de notas como una [tabla](https://mui.com/material-ui/react-table/#simple-table):
 
 ```js
 const Notes = ({notes}) => (
@@ -317,12 +317,12 @@ import {
   TableContainer,
   TableRow,
   Paper,
-} from '@material-ui/core'
+} from '@mui/material'
 ```
 
 #### Formulario
 
-A continuación, mejoremos el formulario de inicio de sesión en la vista <i>Login</i> utilizando los componentes [TextField](https://material-ui.com/components/text-fields/) y [Button](https://material-ui.com/api/button/):
+A continuación, mejoremos el formulario de inicio de sesión en la vista <i>Login</i> utilizando los componentes [TextField](https://mui.com/material-ui/react-text-field/) y [Button](https://mui.com/material-ui/api/button/):
 
 ```js 
 const Login = (props) => {
@@ -359,13 +359,13 @@ El resultado final es:
 
 ![](../../images/7/64ea.png)
 
-MaterialUI, a diferencia de Bootstrap, no proporciona un componente para el formulario en sí. El formulario aquí es un elemento [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) HTML ordinario.
+MaterialUI, a diferencia de Bootstrap, no proporciona un componente para el formulario en sí. El formulario aquí es un elemento [form](https://developer.mozilla.org/es/docs/Web/HTML/Element/form) HTML ordinario.
 
 Recuerde importar todos los componentes utilizados en el formulario.
 
 ### Notificación
 
-La notificación que se muestra al iniciar sesión se puede hacer usando el componente [Alert](https://material-ui.com/components/alert/), que es bastante similar al componente equivalente de bootstrap:
+La notificación que se muestra al iniciar sesión se puede hacer usando el componente [Alert](https://mui.com/material-ui/react-alert/), que es bastante similar al componente equivalente de bootstrap:
 
 ```js
 <div>
@@ -379,25 +379,13 @@ La notificación que se muestra al iniciar sesión se puede hacer usando el comp
 </div>
 ```
 
-El componente alert aún no está incluido en el paquete principal de MaterialUI, por lo que tenemos que instalar el paquete [lab](https://material-ui.com/components/about-the-lab/) para usarlo:
-
-```bash
-npm install @material-ui/lab
-```
-
-Luego podemos importar el componente así
-
-```js 
-import { Alert } from '@material-ui/lab'
-```
-
 La alerta es bastante elegante:
 
 ![](../../images/7/65ea.png)
 
 #### Estructura de navegación
 
-Podemos implementar la navegación usando el componente [AppBar](https://material-ui.com/components/app-bar/).
+Podemos implementar la navegación usando el componente [AppBar](https://mui.com/material-ui/react-app-bar/).
 
 Si usamos el código de ejemplo de la documentación
 
@@ -429,7 +417,7 @@ tenemos navegación funcional, pero podría verse mejor
 
 ![](../../images/7/66ea.png)
 
-Podemos encontrar una mejor manera de la [documentación](https://material-ui.com/guides/composition/#routing-libraries). Podemos usar [component props](https://material-ui.com/guides/composition/#component-prop) para definir cómo se renderiza el elemento raíz de un componente MaterialUI.
+Podemos encontrar una mejor manera de la [documentación](https://mui.com/material-ui/guides/composition/#routing-libraries). Podemos usar [component props](https://mui.com/material-ui/guides/composition/#component-prop) para definir cómo se renderiza el elemento raíz de un componente MaterialUI.
 
 Definiendo
 
@@ -521,7 +509,7 @@ Aquí hay algunos otros UI frameworks para su consideración. Si no ve su UI fra
 
 También hay [otras formas](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) de diseñar aplicaciones React que aún no hemos analizado.
 
-La librería [styled components](https://www.styled-components.com/) ofrece un enfoque interesante para definir estilos a través [tagged template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) que se introdujeron en ES6.
+La librería [styled components](https://www.styled-components.com/) ofrece un enfoque interesante para definir estilos a través [tagged template literals](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals#plantillas_etiquetadas) que se introdujeron en ES6.
 
 Hagamos algunos cambios en los estilos de nuestra aplicación con la ayuda de styled components. Primero, instale el paquete con el comando:
 
