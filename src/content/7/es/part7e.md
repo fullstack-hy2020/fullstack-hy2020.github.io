@@ -535,7 +535,7 @@ La biblioteca [immutable.js](https://github.com/facebook/immutable-js/) mantenid
 
 [Redux-saga](https://redux-saga.js.org/) proporciona una forma alternativa de hacer las acciones asincrónicas para [redux thunk](/es/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) que vimos en la parte 6. Algunos abrazan el hype y les gusta. Yo no.
 
-Para las aplicaciones de una sola página, la recopilación de datos analíticos sobre la interacción entre los usuarios y la página es [más desafiante](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) que para las aplicaciones web tradicionales donde se carga toda la página. La biblioteca [React Google Analytics](https://github.com/react-ga/react-ga) ofrece una solución.
+Para las aplicaciones de una sola página, la recopilación de datos analíticos sobre la interacción entre los usuarios y la página es [más desafiante](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) que para las aplicaciones web tradicionales donde se carga toda la página. La biblioteca [React Google Analytics](https://github.com/PriceRunner/react-ga4) ofrece una solución.
 
 Puede aprovechar su conocimiento de React al desarrollar aplicaciones móviles utilizando la extremadamente popular biblioteca [React Native](https://facebook.github.io/react-native/) de Facebook.
 

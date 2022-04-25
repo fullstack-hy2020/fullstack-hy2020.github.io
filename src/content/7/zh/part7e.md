@@ -681,8 +681,8 @@ Lambda 的主要特点是，它支持在云中执行单个函数，如今 Google
 <!-- [Redux-saga](https://redux-saga.js.org/) provides an alternative way to make asynchronous actions for [redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk) familiar from part 6. Some embrace the hype and like it. I don't. -->
 [Redux-saga](https://redux-saga.js.org/)提供了另一种方法，用于为[redux thunk](/zh/part6/在_redux应用中与后端通信#asynchronous-actions-and-redux-thunk)制作异步操作，类似于第6章节。 有些人欣然接受这种炒作，并且喜欢这种炒作。 我不这么认为。
 
-<!-- For single page applications the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) than for traditional web-applications where the entire page is loaded. The [React Google Analytics](https://github.com/react-ga/react-ga) -library offers a solution. -->
-对于单页应用来说，收集用户和页面交互的分析数据比传统的加载整个页面的网页应用 [更具有挑战性](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications)。 [React Google Analytics](https://github.com/react-ga/react-ga)  数据库提供了一个解决方案。
+<!-- For single page applications the gathering of analytics data on the interaction between the users and the page is [more challenging](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) than for traditional web-applications where the entire page is loaded. The [React Google Analytics](https://github.com/PriceRunner/react-ga4) -library offers a solution. -->
+对于单页应用来说，收集用户和页面交互的分析数据比传统的加载整个页面的网页应用 [更具有挑战性](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications)。 [React Google Analytics](https://github.com/PriceRunner/react-ga4)  数据库提供了一个解决方案。
 
 <!-- You can take advantage of your React know-how when developing mobile applications using Facebook's extremely popular [React Native](https://facebook.github.io/react-native/) -library, that is topic of the [part 10](/en/part10) of the course.-->
 在使用 Facebook 非常流行的 [React Native](https://facebook.github.io/react-native/) 库开发移动应用时，你可以利用你的 React 知道如何开发，这也是本课程[第十章](/zh/part10)的内容。
