@@ -531,10 +531,10 @@ Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erit
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [GitHubissa](https://github.com/fullstack-hy/bloglist-frontend) oleva sovellusrunko kloonaamalla se sopivaan paikkaan:
+Ota tehtävien pohjaksi [GitHubissa](https://github.com/fullstack-hy2020/bloglist-frontend) oleva sovellusrunko kloonaamalla se sopivaan paikkaan:
 
 ```bash
-git clone https://github.com/fullstack-hy/bloglist-frontend
+git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
 Seuraavaksi poista kloonatun sovelluksen Git-konfiguraatio:
