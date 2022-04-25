@@ -236,9 +236,8 @@ With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html) library
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <App />,
-  document.getElementById('root')
-)
+  <App />
+  )
 ```
 
 When the state of the application changes, a <i>new virtual DOM</i> gets defined by the components. React has the previous version of the virtual DOM in memory and instead of directly rendering the new virtual DOM using the DOM API, React computes the optimal way to update the DOM (remove, add or modify elements in the DOM) such that the DOM reflects the new virtual DOM.
