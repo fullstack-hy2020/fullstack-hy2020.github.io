@@ -318,7 +318,36 @@ Vuoden vanha [osassa 9](/osa9) käytetty projekti sisältää jo aika paljon van
 
 ![](../../images/7/33x.png)
 
-Riippuvuudet saa ajantasaistettua päivittämällä tiedostoa <i>package.json</i> ja suorittamalla komennon _npm install_. Riippuvuuksien vanhat versiot eivät tietenkään välttämättä ole tietoturvariski.
+Riippuvuudet saa ajantasaistettua päivittämällä tiedostoa <i>package.json</i>. Sitä helpottaa [npm-check-updates](https://www.npmjs.com/package/npm-check-updates)-niminen työkalu, joka asennetaan globaalisti komennolla
+
+```bash
+npm install -g npm-check-updates
+```
+Tämän työkalun avulla tarkistetaan riippuvuuksien ajantasaisuus seuraavasti:
+```console
+$ npm-check-updates
+Checking ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run ncu -u to upgrade package.json
+```
+Tiedosto <i>package.json</i> päivitetään suorittamalla komento _ncu -u_.
+```console
+$ ncu -u
+Upgrading ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run npm install to install new versions.
+```
+Seuraavaksi ajantasaistetaan riippuvuudet suorittamalla komento _npm install_. Riippuvuuksien vanhat versiot eivät tietenkään välttämättä ole tietoturvariski.
 
 Riippuvuuksien turvallisuus voidaan tarkistaa npm:n [audit](https://docs.npmjs.com/cli/audit)-komennolla, joka vertaa käytettyjen riippuvuuksien versioita keskitetyssä virhetietokannassa listattuihin tietoturvauhan sisältäviin riippuvuuksien versioihin.
 
