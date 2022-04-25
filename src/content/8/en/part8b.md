@@ -558,6 +558,13 @@ const PersonForm = (props) => {
 ```
 
 The pros and cons of this solution are almost opposite of the previous one's. There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately. 
+      
+If you want to do multiple queries, you can pass multiple objects inside refetchQueries. This will allow you to updated different parts of your app a the same time. Here is an example:
+```js
+    const [ createPerson ] = useMutation(CREATE_PERSON, {
+    refetchQueries: [ { query: ALL_PERSONS }, { query: OTHER_QUERY }, { query: ... } ] // pass as many queries as you need
+  })
+```
 
 There are other ways to update the cache. More about those later in this part. 
 
