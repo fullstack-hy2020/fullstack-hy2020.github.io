@@ -1,0 +1,53 @@
+{
+  "common": {
+    "nextPart": "Prossima parte",
+    "previousPart": "Parte precedente",
+    "readMore": "Leggi di più",
+    "proposeChanges": "Proponi modifiche al materiale"
+  },
+  "searchPage": {
+    "noMatches": "Nessun risultato trovato",
+    "matchesTitle": "Trovati {{count}} risultati per la ricerca \"{{query}}\""
+  },
+  "aboutPage": {
+    "generalTitle": "Generale"
+  },
+  "navigation": {
+    "aboutCourse": "Riguardo al corso",
+    "courseContents": "Contenuti del corso",
+    "faq": "FAQ",
+    "partners": "Collabolatori",
+    "challenge": "Challenge",
+    "searchLinkSrLabel": "Ricerca nel materiale"
+  },
+  "challengePage": {
+    "aboutTitle": "Questa è la Full Stack -challenge",
+    "joinTitle": "Aziende, Ascoltate La Chiamata!",
+    "registerButton": "Registra la tua azienza alla  Full Stack challenge",
+    "nameLabel": "Nome",
+    "namePlaceholder": "Mario Rossi",
+    "titleLabel": "Titolo",
+    "companyLabel": "Azienda",
+    "companyPlaceholder": "Azienda CO",
+    "phoneLabel": "Telefono",
+    "emailLabel": "Indirizzo email",
+    "whereDidYouHearLabel": "Come sei venuto a conoscenza della challenge",
+    "submitButton": "Invia",
+    "submitSuccessMessage": "Grazie! Ti contatteremo presto!",
+    "participantsTitle": "Queste solo le aziende partecipanti alla Full Stack challenge",
+    "coOperationTitle": "In cooperazione con",
+    "infoButton": "Leggi di più sulla challenge"
+  },
+  "companiesPage": {
+    "storiesTitle": "Storie da sviluppatori dei nostri parter"
+  },
+  "faqPage": {
+    "faqTitle": "Domande frequenti"
+  },
+  "homePage": {
+    "startCourseButton": "Inizia il corso",
+    "announcementsTitle": "Annunci",
+    "authorsTitle": "Autori e licenza",
+    "courseNameTitle": "Full Stack open 2022"
+  }
+}
