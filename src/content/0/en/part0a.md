@@ -123,7 +123,7 @@ By submitting all exercises for part 13 of the course on Relational databases, y
 - [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 
-### Studyin the course in a nutshell
+### Studying the course in a nutshell
 
 How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
 
