@@ -613,8 +613,8 @@ window.localStorage.clear()
 
 
 ### Exercises 5.1.-5.4.
-<!-- We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001.  -->
-现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[这个应用](https://github.com/fullstack-hy/bloglist-frontend/)作为你的解决方案的基础。 应用期望您的后端在3003端口上运行。
+<!-- We will now create a frontend for the bloglist backend we created in the last part. You can use [this application](https://github.com/fullstack-hy2020/bloglist-frontend) from GitHub as the base of your solution. The application expects your backend to be running on port 3001.  -->
+现在我们将为上一章节创建的博客列表后端创建一个前端。 你可以使用 GitHub 上的[这个应用](https://github.com/fullstack-hy2020/bloglist-frontend/)作为你的解决方案的基础。 应用期望您的后端在3003端口上运行。
 
 <!-- It is enough to submit your finished solution. You can do a commit after each exercise, but that is not necessary.  -->
 只要提交完成的解决方案就足够了。 您可以在每次练习之后进行一次提交，但这并不强制。
@@ -632,11 +632,11 @@ window.localStorage.clear()
 **警告:**如果你注意到你正在混合 async/await 和_then_ 命令，你99.9% 正在做错误的事情。 要么使用其中之一，不要两者都使用。
 
 #### 5.1: bloglist frontend, 步骤1
-<!-- Clone the application from [Github](https://github.com/fullstack-hy/bloglist-frontend) with the command:  -->
-使用如下命令从[Github](https://Github.com/fullstack-hy/bloglist-frontend)克隆应用:
+<!-- Clone the application from [Github](https://github.com/fullstack-hy2020/bloglist-frontend) with the command:  -->
+使用如下命令从[Github](https://github.com/fullstack-hy2020/bloglist-frontend)克隆应用:
 
 ```bash
-git clone https://github.com/fullstack-hy/bloglist-frontend
+git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
 <!-- <i>remove the git configuration of the cloned application</i> -->

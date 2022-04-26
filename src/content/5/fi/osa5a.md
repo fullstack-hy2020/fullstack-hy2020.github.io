@@ -527,14 +527,14 @@ Tämän osan alun tehtävät kertaavat käytännössä kaiken oleellisen tämän
 
 Muista tehtäviä tehdessäsi kaikki debuggaukseen liittyvät käytänteet, erityisesti konsolin tarkkailu.
 
-**Varoitus:** Jos huomaat kirjoittavasi samaan funktioon sekaisin async/awaitia ja _then_-kutsuja, on 99.9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
+**Varoitus:** Jos huomaat kirjoittavasi samaan funktioon sekaisin async/awaitia ja _then_-kutsuja, on 99,9-prosenttisen varmaa, että teet jotain väärin. Käytä siis jompaa kumpaa tapaa, älä missään tapauksessa "varalta" molempia.
 
 #### 5.1: blogilistan frontend, step1
 
-Ota tehtävien pohjaksi [GitHubissa](https://github.com/fullstack-hy/bloglist-frontend) oleva sovellusrunko kloonaamalla se sopivaan paikkaan:
+Ota tehtävien pohjaksi [GitHubissa](https://github.com/fullstack-hy2020/bloglist-frontend) oleva sovellusrunko kloonaamalla se sopivaan paikkaan:
 
 ```bash
-git clone https://github.com/fullstack-hy/bloglist-frontend
+git clone https://github.com/fullstack-hy2020/bloglist-frontend
 ```
 
 Seuraavaksi poista kloonatun sovelluksen Git-konfiguraatio:
