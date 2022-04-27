@@ -53,6 +53,22 @@ const partNameTranslations = {
     '容器',
     '使用关系型数据库'
   ],
+  it: [
+    'Fondamenti delle Web App',
+    'Introduzione a React',
+    'Comunicare con il server',
+    'Programmare un server con NodeJS e Express',
+    'Testare server Express, amministrazione utente',
+    'Testare applicazioni React',
+    'State Management con Redux',
+    'React router, hooks personalizzati, stile con CSS e webpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'Containers',
+    'Utilizzare database relazionali'
+  ],
 };
 
 export const PartBanner = ({ lang }) => {
