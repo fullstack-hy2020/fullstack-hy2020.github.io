@@ -51,7 +51,7 @@ Hakemiston juuressa oleva sovelluksen "päätiedosto" <i>index.html</i> lataa <i
 </html>
 ```
 
-Kuten esimerkistä näemme, create-react-app:illa tehdyssä sovelluksessa bundlataan JavScriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon <i>/static/css/main.1becb9f2.css</i>
+Kuten esimerkistä näemme, create-react-app:illa tehdyssä sovelluksessa bundlataan JavaScriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon <i>/static/css/main.1becb9f2.css</i>
 
 Käytännössä bundlaus tapahtuu siten, että sovelluksen JavaScriptille määritellään alkupiste, usein tiedosto <i>index.js</i>, ja bundlauksen yhteydessä webpack ottaa mukaan kaiken koodin mitä alkupiste importtaa, sekä importattujen koodien importtaamat koodit, jne.
 
