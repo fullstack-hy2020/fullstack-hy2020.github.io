@@ -382,7 +382,7 @@ Generate a production build of your frontend, and add it to the internet applica
 
 **NB** Make sure the directory <i>build</i> is not gitignored
 
-Also make sure that the frontend still works locally. 
+Also make sure that the frontend still works locally (in development mode when started with command _npm start_). 
 
 If you have problems to get the app working make sure that your directory structure matches the one of [the example app](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
