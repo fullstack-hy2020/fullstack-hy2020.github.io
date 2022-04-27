@@ -59,7 +59,6 @@
     "mainTitle": "深入浅出现代Web编程",
     "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 编程技术。重点是利用 ReactJS 搭配Node.js开发的REST API，来搭建单页面应用程序（SPA：Single Page Application）",
     "current": [
-
       "2022年课程的官方开始时间为2022年3月15日。但是，所有的课程内容已经更新了，你已经可以开始学习了！你可以使用新的教材继续之前的课程, <a href='/zh/part0/基础知识#expanding-on-a-previously-completed-course'>在这里</a>阅读更多.",
       "你可以加入我们的Telegram 群组<a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>来讨论课程以及相关的内容。快来加入我们吧！"
     ],
@@ -73,5 +72,23 @@
     "houston": "芬兰的Houston Inc. 是一家敏捷型软件公司，成立于2003年。我们为业务的设计和实施提供个性的数字化解决方案。",
     "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
     "licenced": "所有内容基于Creative Commons BY-NC-SA 3.0 License.协议框架。"
+  },
+  "it": {
+    "mainTitle": "Immersione nello Sviluppo Web moderno",
+    "intro": "Impara React, Redux, Node.js, MongoDB, GraphQL e TypeScript in un colpo solo! Questo corso ti introdurrà allo sviluppo web moderno basato su JavaScript. L'obbiettivo principale sarà la creazione di single page application con ReactJS che utilizzano REST APIs creati con NodeJS .",
+    "current": [
+      "L'edizione 2022 è iniziata! Puoi continuare un corso precedente nella nuova edizione, guarda <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>qui</a> per maggiori informazioni.",
+      "Puoi discutere del corso e dei vari argomenti nel nostro gruppo Discord dedicato  <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e su Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Partecipate alle conversazioni!"
+    ],
+    "telegram": "Telegram è un'applicazione forum simile a whatsapp / messanger che può essere utilizzato con un browser, telefono o dispositivi  Windows / Linux / OSX.",
+    "notice": "NB: Commenti inappropriati, degradanti e discriminatori sono strettamente vietati sui canali, e chiunque invii questo tipo di messaggi verrà permanentemente rimosso dalle chat.",
+    "licence": [
+      "Le parti 0-8 e 13 del materiale del corso sono state scritte da <a href='https://github.com/mluukkai'>Matti Luukkainen</a>. Il contenuto della parte 9 è stata scritta dagli sviluppatori di <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. La parte 10 è stata scritta da <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>. Il contenuto della parte 11 è stato scritto dagli sviluppatori di <a href='https://www.smartly.io/'>Smartly</a> mentre la parte 12 da <a href='https://github.com/jakousa'>Jami Kousa</a>. Diverse <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>persone</a> hanno migliorato e corretto il materiale sia nel contenuto che nell'ortografia. Anche tu puoi apportare miglioramenti al materiale. La pagina web del corso è stata progettata e realizzata da <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, che hanno anche verificato il contenuto del materiale del corso. Traduzione cinese da <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>.  Traduzione spagnola da <a target='_blank' href='https://github.com/sebastiantorres86'>Sebastian Torres</a> e <a target='_blank' href='https://github.com/cynthiamv'>Cynthia Vico Vacca</a>.",
+      "Il materiale del corso è concesso con licenza <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>Creative Commons BY-NC-SA 3.0</a>, il che significa che sei libero di distribuire il materiale, fintanto che i nomi degli autori originali non vengono rimossi. Se apporti cambiamenti al materiale e vuoi distribuire la versione modificata, deve essere rilasciata sotto la stessa licenza. L'utilizzo del materiale per scopi commerciali è proibito senza permesso."
+    ],
+    "university": "L'Università di Helsinki è l'università di scienze più antica e più grande della Finlandia, con una comunità scientifica internazionale di oltre 40,000 persone.",
+    "houston": "La Finlandese Houston Inc. è una società software agile fondata nel 2003. Progettiamo e implementiamo servizi digitali customizzati per i nostri clienti.",
+    "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
+    "licenced": "Il materiale è concesso in licenza tramite la licenza Creative Commons BY-NC-SA 3.0."
   }
 }
