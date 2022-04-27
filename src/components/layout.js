@@ -19,6 +19,8 @@ class Layout extends Component {
         ? 'en'
         : window.location.pathname.indexOf('/zh') > -1
         ? 'zh'
+        : window.location.pathname.indexOf('/it') > -1
+        ? 'it'
         : 'fi';
 
     const visible = !localStorage.getItem('r18_banner_seen');
