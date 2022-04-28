@@ -963,7 +963,7 @@ router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id, {
     attributes: { exclude: [''] } ,
     include:[{
-        model: note,
+        model: Note,
         attributes: { exclude: ['userId'] }
       },
       {
@@ -972,10 +972,6 @@ router.get('/:id', async (req, res) => {
         attributes: { exclude: ['userId']},
         through: {
           attributes: []
-        },
-        include: {
-          model: user,
-          attributes: ['name']
         }
       },
       {
@@ -1016,7 +1012,7 @@ router.get('/:id', async (req, res) => {
   const user = await User.findByPk(req.params.id, {
     attributes: { exclude: [''] } ,
     include:[{
-        model: note,
+        model: Note,
         attributes: { exclude: ['userId'] }
       },
       {
@@ -1034,7 +1030,7 @@ router.get('/:id', async (req, res) => {
         // highlight-end
       },
       {
-        model: team,
+        model: Team,
         attributes: ['name', 'id'],
         through: {
           attributes: []
