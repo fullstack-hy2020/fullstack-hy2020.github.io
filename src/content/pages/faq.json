@@ -1,5 +1,5 @@
 {
-  "fi": [  
+  "fi": [
     {
       "title": "Miten kurssille ilmoittaudutaan?",
       "text": [
@@ -104,7 +104,7 @@
         "Yes! You can download the certificate after completing the course from the exercise submission system. For the course certificate signup to Open university and the exam are not needed."
       ]
     },
-      {
+    {
       "title": "Should I signup to Open University to get the course certificate?",
       "text": [
         "For the course certificate signup to Open University is not needed. You can download the certificate after completing the course from the exercise submission system."
@@ -125,32 +125,32 @@
   ],
   "es": [
     {
-      "title" : "¿Cómo me registro en el curso?",
-      "text" : [
+      "title": "¿Cómo me registro en el curso?",
+      "text": [
         "No tienes que registrarte hasta que quieras hacer el examen del curso. El examen se realiza en el sistema Moodle de la Open University. Puedes encontrar más información <a href='/en/part0/general_info#grading '>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden participar en los exámenes y obtener créditos ECTS oficiales. Para el certificado del curso, no es necesario registrarse ni número de seguro social finlandés."
       ]
     },
     {
-      "title" : "¿Cuántos créditos tiene el curso?",
-      "text" : [
+      "title": "¿Cuántos créditos tiene el curso?",
+      "text": [
         "El curso es de 5-14 créditos ECTS <a href='/en/part0/general_info#grading'> dependiendo de la cantidad de ejercicios devueltos </a>. Después de completar el curso, puede continuar profundizando sus conocimientos sobre el tema importa haciendo <a href='/en/part0/general_info#full-stack-project'>proyecto Full Stack</a> por créditos ECTS 1-10. Tenga en cuenta que solo las personas con número de seguridad social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
       ]
     },
     {
       "title": "¿Cuándo es la fecha límite para los ejercicios y el examen?",
-      "text" : [
+      "text": [
         "Puedes completar el curso a tu propio ritmo. El curso solo tiene una fecha límite para los ejercicios y los exámenes el 10 de enero de 2023 a las 23.59.59. Ten en cuenta que debes registrarte para el examen a más tardar el día anterior la fecha límite 9.1.2023."
       ]
     },
     {
-      "title" : "¿Cómo envío los ejercicios?",
-      "text" : [
+      "title": "¿Cómo envío los ejercicios?",
+      "text": [
         "Los ejercicios se envían a GitHub y se marcan los ejercicios como realizados en el sistema de envío de ejercicios. Puede leer más en <a href='/en/part0/general_info#submitting-exercises'>aquí</a>."
       ]
     },
     {
       "title": "¿Tengo que enviar cada parte a un repositorio separado?",
-      "text" : [
+      "text": [
         "No. Puede usar uno o más repositorios, lo más importante es nombrar todo en un repositorio claramente"
       ]
     },
@@ -167,7 +167,7 @@
       ]
     },
     {
-      "title" : "¿Recibo un certificado después de completar el curso?",
+      "title": "¿Recibo un certificado después de completar el curso?",
       "text": [
         "Sí, el certificado está disponible para todos los que aprueben el curso antes del 10 de enero de 2023. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios. Para el certificado del curso, no es necesario registrarse en la universidad abierta y el número de seguro social finlandés"
       ]
@@ -178,27 +178,27 @@
         "Para el certificado del curso no se necesita el número de seguro social finlandés. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios."
       ]
     },
-      {
+    {
       "title": "¿Debo registrarme en Open University para obtener el certificado del curso?",
       "text": [
         "Para el certificado del curso, no es necesario registrarse en Open University. Puede descargar el certificado después de completar el curso desde el sistema de envío de ejercicios"
       ]
     },
     {
-      "title" : " ¿Qué ha cambiado desde el año pasado? " ,
-      "text " : [
+      "title": " ¿Qué ha cambiado desde el año pasado? ",
+      "text ": [
         "Solo hay cambios menores en las partes 0-4. La parte 5d, <i>prueba de extremo a extremo</i> usando la biblioteca Cypress.io- es material casi completamente nuevo. El uso de ganchos personalizados se ha movido de la parte 5 a la parte 7 con contenido nuevo. <br> <br> La parte 6, que trata sobre Redux, se concentra en la nueva api de redux basada en hook. El material sobre react-router en la parte 7 también se ha actualizado para usar el hook -api. Semantic UI React ha sido reemplazada con la biblioteca MaterialUI debido a la falta de mantenimiento. <br> <br> La parte 8 en GraphQL tiene actualizaciones importantes, especialmente en Apollo Client, que finalmente tiene apis basadas en hook estable. La parte 9 en TypeScript es completamente nuevo. <br><br> El material del curso del año pasado se puede encontrar en <a href='https://fullstackopen-2019.github.io/'>https://fullstackopen-2019.github.io/</ a>. "
       ]
     },
     {
-      "title" : " Comencé el curso el año pasado, ¿cómo debo continuar? " ,
-      "text " : [
+      "title": " Comencé el curso el año pasado, ¿cómo debo continuar? ",
+      "text ": [
         "Lea más de eso <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>aquí</a>"
       ]
     },
     {
       "title": "Escuché que podría obtener una entrevista de trabajo completando el curso",
-      "text " : [
+      "text ": [
         "Así es. Si completa el curso con créditos completos y completa el trabajo práctico con 10 créditos, obtendrá una entrevista de trabajo con nuestros socios. Leer más <a href='/en/part0/general_info#interview-promise'>aquí</a>. Tenga en cuenta que sólo las personas con número de seguridad social finlandesa pueden conseguir tomar parte a examen y obtener créditos ECTS oficiales."
       ]
     }
@@ -274,6 +274,74 @@
       "title": "我听说完成这么课程后可以获得工作面试。",
       "text": [
         "没错。如果你活得了本门课程的全部学分，并完成了实践作业的10学分，你可以获得我们合作伙伴的工作面试。阅读<a href='/zh/part0/基础知识#interview-promise'>这里</a>获取更多信息。你必须是芬兰公民才能参与这些面试。"
+      ]
+    }
+  ],
+  "it": [
+    {
+      "title": "Come faccio ad iscrivermi al corso?",
+      "text": [
+        "Non dovrai iscriverti al corso fino a che non vorrai dare l'esame. L'esame si svolge su un sistema Moodle della Open University. Puoi trovare più <a href='/it/part0/general_info#grading'>quì</a>. <br><br>Per il certificato del corso, l'iscrizione e l'esame Moodle non sono necessari."
+      ]
+    },
+    {
+      "title": "Quanti crediti è questo corso?",
+      "text": [
+        "Il corso è di 5-14 crediti ECTS <a href='/it/part0/general_info#grading'>in base al numero degli esercizi svolti</a>. Dopo la fine del corso puoi continuare ad approfondire le tue conoscenze sulla materia facendo il <a href='/it/part0/general_info#full-stack-project'>Full Stack project</a> di 1-10 crediti ECTS."
+      ]
+    },
+    {
+      "title": "Quand'è la data di consegna degli esercizi e dell'esame?",
+      "text": [
+        "Puoi completare il corso al ritmo che fa più comodo a te. La data di consegna degli esercizi è il 1 Marzo 2023 alle 23.59.59. <br><br>Se desideri avere i crediti Open university, la data di scadenza per l'esame è il 10 Gennaio 2023 alle 23.59.59. Ricordati che dovrai effettuare l'iscrizione per l'esame non più tardi del giorno prima della consegna 9.1.2023. Potrai anche svolgere l'esame prima della data di scadenza e continuare a completare i rimanenti esercizi. Una volta terminato potrai ricevere i tuoi creaditi <a href='https://fullstackopen.com/it/part0/general_info#how-to-get-your-credits'> qui</a>.<br><br>Per il certificato del corso, l'iscrizione e l'esame non sono necessari."
+      ]
+    },
+    {
+      "title": "Come consegno gli esercizi?",
+      "text": [
+        "Gli esercizi saranno consegnati su GitHub, e contrassegnandoli come eseguiti nel sistema di consegne. Puoi leggere di più da <a href='/it/part0/general_info#submitting-exercises'>qui</a>. "
+      ]
+    },
+    {
+      "title": "Devo consegnare ogni parte in una repository diversa?",
+      "text": [
+        "No. Puoi usare una o più repository, la cosa più importante è dare un nome ad ogni cosa in maniera concisa all'interno di ogni repository."
+      ]
+    },
+    {
+      "title": "Posso modificare una consegna?",
+      "text": [
+        "No. Tutti gli esercizi rispetto ad una parte devono essere consegnati in una volta sola. Se hai segnato esercizi errati per sbaglio, o scirtto male il nome della repository, manda una mail a matti.luukkainen@helsinki.fi oppure un messaggio su Telegram a <i>mluukkai</i>, scrivi il tuo username GitHub e le modifiche da apportare alla consegna."
+      ]
+    },
+    {
+      "title": "Quando e come posso ottenere i miei crediti?",
+      "text": [
+        "I crediti verranno rilasciati dopo avere consegnato il la soglia minima di esercizi per il superamento del corso, dopo avere superato l'esame del corso e averci informato tramite il sisetma di consegna degli esercizi di avere terminato il corso. La data di consegna finale è il 10 Gennaio 2023. Leggi di più <a href='/it/part0/general_info/#grading'>qui</a>. <br><br>Per il certificato del corso, l'iscrizione o l'esame non sono necessari."
+      ]
+    },
+    {
+      "title": "Ottengo un certificato dopo avere completato il corso?",
+      "text": [
+        "Si! Potrai scaricare il certificato dal sistema di consegna degli esercizi solo dopo avere completato il corso. Per l'ottenimento del certificato, la registrazione ad Open University e l'esame finale non non sono necessari."
+      ]
+    },
+    {
+      "title": "Devo registrarmi ad Open University per l'ottenimento del certificato del corso?",
+      "text": [
+        "Per il certificato del corso, la registrazione ad Open University non è richiesta. Potrai scaricare il certificato dal sistema di consegna degli esercizi solo dopo avere completato il corso."
+      ]
+    },
+    {
+      "title": "Ho iniziato il corso l'anno scorso, come proseguo?",
+      "text": [
+        "Leggi di più <a href='/it/part0/general_info#expanding-on-a-previously-completed-course'>qui</a>"
+      ]
+    },
+    {
+      "title": "Ho sentito che si può ottenere un colloquio di lavoro completando il corso.",
+      "text": [
+        "Esatto. Se completi il corso con il massimo di crediti, e completi il progetto con 10 crediti, otterrai un colloquio di lavoro dalle nostre aziende partner. Leggi di più <a href='/it/part0/general_info#interview-promise'>qui</a>. Devi avere la residenza in Finlandia per partecipare a questi colloqui."
       ]
     }
   ]
