@@ -407,7 +407,7 @@ const NewNote = () => {
 
 Molemmat komponentit dispatchaisivat ainoastaan actionin välittämättä siitä, että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia. Tämän kaltaisten <i>asynkronisten actioneiden</i> käyttö onnistuu [Redux Thunk](https://github.com/reduxjs/redux-thunk)-kirjaston avulla. Kirjaston käyttö ei vaadi ylimääräistä konfiguraatiota, kun Redux-store on luotu Redux Toolkitin <em>configureStore</em>-funktiolla.
 
-Asennetaan kirjasto:
+Asennetaan kirjasto (Huom! Jos olet jo asentanut Redux Toolkitin, Redux Thunkia ei tarvitse asentaa erikseen):
 
 ```
 npm install redux-thunk
