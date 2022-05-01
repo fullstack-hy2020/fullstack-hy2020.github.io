@@ -174,7 +174,7 @@ As mentioned earlier, the rate-repository-api server provides a GraphQL API whic
 In our React Native application, we will be using the same [@apollo/client](https://www.npmjs.com/package/@apollo/client) library as in part 8. Let's get started by installing the library along with the [graphql](https://www.npmjs.com/package/graphql) library which is required as a peer dependency:
 
 ```shell
-npm install @apollo/client graphql
+npm i @apollo/client@3.5.10 graphql
 ```
 
 Before we can start using Apollo Client, we will need to slightly configure the Metro bundler so that it handles the <i>.cjs</i> file extensions used by the Apollo Client. First, let's install the <i>@expo/metro-config</i> package which has the default Metro configuration:
