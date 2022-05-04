@@ -385,15 +385,15 @@ And the mutation's resolver:
 
 ```js
   addAsFriend: async (root, args, { currentUser }) => {
-    const nonFriendAlready = (person) => 
-      !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
+    const isFriend = (person) => 
+      currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
     if (!currentUser) {
       throw new AuthenticationError("not authenticated")
     }
 
     const person = await Person.findOne({ name: args.name })
-    if ( nonFriendAlready(person) ) {
+    if ( !isFriend(person) ) {
       currentUser.friends = currentUser.friends.concat(person)
     }
 
