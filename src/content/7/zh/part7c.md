@@ -11,7 +11,7 @@ lang: zh
 <!-- In part 2 we examined two different ways of adding styles to our application: the old-school [single CSS](/zh/part2/给_react应用加点样式) file and [inline-styles](/zh/part2/给_react应用加点样式#inline-styles). In this part we will take a look at a few other ways.  -->
 在第2章节中，我们研究了向应用添加样式的两种不同方式: 老式的[single CSS](/zh/part2/给_react应用加点样式)文件和[inline-styles](/zh/part2/给_react应用加点样式#inline-styles)。 在这一章节，我们将看看其他一些方法。
 
-### Ready-made UI libraries 
+### Ready-made UI libraries
 【现成的 UI 库】
 <!-- One approach to defining styles for an application is to use a ready-made "UI framework". -->
 为应用定义样式的一种方法是使用现成的“ UI 框架”。
@@ -127,7 +127,7 @@ import { Table } from 'react-bootstrap'
 让我们在 Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/)的帮助下改进<i>Login</i> 视图中的表单。
 
 <!-- React Bootstrap provides built-in [components](https://react-bootstrap.github.io/forms/overview/) for creating forms (although the documentation for them is slightly lacking): -->
-React Bootstrap 为创建表单提供了内置的[组件](https://react-bootstrap.github.io/forms/overview/)(尽管缺少相关的文档) : 
+React Bootstrap 为创建表单提供了内置的[组件](https://react-bootstrap.github.io/forms/overview/)(尽管缺少相关的文档) :
 
 ```js
 let Login = (props) => {
@@ -358,7 +358,7 @@ const Notes = ({notes}) => (
 
 
 <!-- One less pleasant feature of Material UI is, that each component has to be imported separately. The import list for the notes page is quite long: -->
-Material UI 的一个不那么令人愉快的特性是，每个组件都必须单独导入。 便笺页面的导入列表非常长: 
+Material UI 的一个不那么令人愉快的特性是，每个组件都必须单独导入。 便笺页面的导入列表非常长:
 
 ```js
 import {
@@ -378,7 +378,7 @@ import {
 <!-- Next let's make the login form in the <i>Login</i> view better using the [TextField](https://material-ui.com/components/text-fields/) and [Button](https://material-ui.com/api/button/) components: -->
 接下来让我们在<i>Login</i> 视图中更好地使用[TextField](https://mui.com/material-ui/react-text-field/)和[Button](https://mui.com/material-ui/api/button/)组件来创建登录表单:
 
-```js 
+```js
 const Login = (props) => {
   const history = useHistory()
 
@@ -442,6 +442,15 @@ const Login = (props) => {
 </div>
 ```
 
+<!-- The Alert component is not yet included in the MaterialUI core package, so we have to install the [lab](https://material-ui.com/components/about-the-lab/) package to use it: -->
+
+<!-- Then we can import the component like so -->
+然后我们可以像这样导入组件
+
+```js
+import { Alert } from '@mui/material'
+```
+
 
 
 <!-- Alert is quite stylish: -->
@@ -473,13 +482,13 @@ const Login = (props) => {
     </Button>
     <Button color="inherit">
       <Link to="/users">users</Link>
-    </Button>  
+    </Button>
     <Button color="inherit">
       {user
         ? <em>{user} logged in</em>
         : <Link to="/login">login</Link>
       }
-    </Button>                
+    </Button>
   </Toolbar>
 </AppBar>
 ```
@@ -528,13 +537,13 @@ _Button_ 组件被渲染，其根组件都是 react-redux 的 _Link_ ，其 _to_
     </Button>
     <Button color="inherit" component={Link} to="/users">
       users
-    </Button>   
+    </Button>
     {user
       ? <em>{user} logged in</em>
       : <Button color="inherit" component={Link} to="/login">
           login
         </Button>
-    }                              
+    }
   </Toolbar>
 </AppBar>
 ```
@@ -555,7 +564,7 @@ _Button_ 组件被渲染，其根组件都是 react-redux 的 _Link_ ，其 _to_
 【封闭的思想】
 
 <!-- The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.  -->
-React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得哪个更好看。 
+React-bootstrap 和 MaterialUI 之间的区别并不大，这取决于你觉得哪个更好看。
 <!-- I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.  -->
 我自己并没有使用很多MaterialUI，但我的第一印象是积极的。 它的文档比起React-bootstrap的要好一点。
 <!-- According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries MaterialUI passed react-bootstrap in popularity at the end of 2018: -->
@@ -611,7 +620,7 @@ react-bootstrap 与 MaterialUI 的差别并不大。取决于你更喜欢那种�
 - <https://tailwindcss.com/>
 - <https://semantic-ui.com/>
 
-### Styled components 
+### Styled components
 【样式组件】
 <!-- There are also [other ways](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) of styling React applications that we have not yet taken a look at. -->
 还有一些我们还[没有看过](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b)的React 应用的样式。
@@ -733,7 +742,7 @@ const App = () => {
           <Home />
         </Route>
       </Switch>
-      
+
       <Footer> // highlight-line
         <em>Note app, Department of Computer Science 2021</em>
       </Footer> // highlight-line

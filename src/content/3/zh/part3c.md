@@ -878,7 +878,7 @@ app.get('/api/notes/:id', (request, response) => {
 在处理 Promises 时，添加错误和异常处理几乎总是一个好主意，否则您将发现自己正在处理奇怪的 bug。
 
 <!-- It's never a bad idea to print the object that caused the exception to the console in the error handler: -->
-打印导致错误处理程序控制台异常的对象绝不是个坏主意:
+在错误处理程序中把引起异常的对象打印到控制台绝不是个坏主意：
 
 ```js
 .catch(error => {
