@@ -7,15 +7,15 @@ lang: fi
 
 <div class="content">
 
-Olemme käyttäneet redux-storea react-redux-kirjaston [hook](https://react-redux.js.org/api/hooks)-apin, eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla.
+Olemme käyttäneet Redux-storea React Redux -kirjaston [hook](https://react-redux.js.org/api/hooks)-apin eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla.
 
-Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa reduxin käyttöön, eli [react-redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
+Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa Reduxin käyttöön eli [React Redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
 
-<i>**Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia**</i>, mutta connectin tuntemisesta on hyötyä vanhempia reduxia käyttäviä projekteja ylläpidettäessä.
+<i>**Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia**</i>, mutta _connect_-funktion tuntemisesta on hyötyä vanhempia Reduxia käyttäviä projekteja ylläpidettäessä.
 
-### Redux Storen välittäminen komponentille connect-funktiolla
+### Redux-storen välittäminen komponentille connect-funktiolla
 
-Muutetaan sovelluksen komponenttia <i>Notes</i> siten, että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktioilla _connect_. Komponentin seuraavat osat tulee siis muuttaa:
+Muutetaan sovelluksen komponenttia <i>Notes</i> siten, että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktiolla _connect_. Komponentin seuraavat osat tulee siis muuttaa:
 
 ````js
 import { useDispatch, useSelector } from 'react-redux' // highlight-line
@@ -34,7 +34,7 @@ const Notes = () => {
   })
   // highlight-end
 
-  return(
+  return (
     <ul>
       {notes.map(note =>
         <Note
@@ -54,7 +54,7 @@ export default Notes
 
 Funktiota _connect_ käyttämällä "normaaleista" React-komponenteista saadaan muodostettua komponentteja, joiden <i>propseihin</i> on "mäpätty" eli yhdistetty haluttuja osia storen määrittelemästä tilasta.
 
-Muodostetaan ensin komponentista <i>Notes</i> connectin avulla <i>yhdistetty komponentti</i>:
+Muodostetaan ensin komponentista <i>Notes</i> _connect_-funktion avulla <i>yhdistetty komponentti</i>:
 
 ```js
 import { connect } from 'react-redux' // highlight-line
@@ -70,7 +70,7 @@ export default ConnectedNotes           // highlight-line
 
 Moduuli eksporttaa nyt alkuperäisen komponentin sijaan <i>yhdistetyn komponentin</i>, joka toimii toistaiseksi täsmälleen alkuperäisen komponentin kaltaisesti.
 
-Komponentti tarvitsee storesta sekä muistiinpanojen listan, että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters), joka liittää joitakin storen tilan perusteella määriteltyjä asioita connectilla muodostetun <i>yhdistetyn komponentin</i> propseiksi.
+Komponentti tarvitsee storesta sekä muistiinpanojen listan että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters), joka liittää joitakin storen tilan perusteella määriteltyjä asioita _connect_-funktiolla muodostetun <i>yhdistetyn komponentin</i> propseiksi.
 
 Jos määritellään:
 
@@ -90,7 +90,7 @@ const Notes = (props) => { // highlight-line
   }
   // highlight-end
 
-  return(
+  return (
     <ul>
       {notesToShow().map(note => // highlight-line
         <Note
@@ -119,19 +119,19 @@ export default ConnectedNotes
 
 on komponentin <i>Notes</i> sisällä mahdollista viitata storen tilaan, esim. muistiinpanoihin suoraan propsin kautta <i>props.notes</i>. Vastaavasti <i>props.filter</i> viittaa storessa olevaan filter-kentän tilaan.
 
-Connect-komennolla ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
+Komennolla _connect_ ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
 
 ![](../../images/6/24c.png)
 
-eli komponentin <i>Notes</i> sisältä on propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux storen sisällä olevaa tilaa.
+Komponentin <i>Notes</i> sisältä on siis propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux-storen sisällä olevaa tilaa.
 
-Komponentti _Notes_ ei oikeastaan tarvitse mihinkään tietoa siitä mikä filtteri on valittuna, eli filtteröintilogiikka voidaan siirtää kokonaan sen ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
+Komponentti _Notes_ ei oikeastaan tarvitse mihinkään tietoa siitä, mikä filtteri on valittuna. Filtteröintilogiikka voidaan siis siirtää kokonaan komponentin ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
 
 ```js
 const Notes = (props) => {
   const dispatch = useDispatch()
 
-  return(
+  return (
     <ul>
       {props.notes.map(note =>
         <Note
@@ -175,7 +175,7 @@ Olemme nyt korvanneet hookin _useSelector_, mutta <i>Notes</i> käyttää edelle
 const Notes = (props) => {
   const dispatch = useDispatch() // highlight-line
 
-  return(
+  return (
     <ul>
       {props.notes.map(note =>
         <Note
@@ -191,7 +191,7 @@ const Notes = (props) => {
 }
 ```
 
-Connect-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti
+_connect_-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti:
 
 ```js
 const mapStateToProps = (state) => {
@@ -219,7 +219,7 @@ Nyt komponentti voi dispatchata suoraan action creatorin _toggleImportanceOf_ m�
 
 ```js
 const Notes = (props) => {
-  return(
+  return (
     <ul>
       {props.notes.map(note =>
         <Note
@@ -233,13 +233,13 @@ const Notes = (props) => {
 }
 ```
 
-Eli se sijaan että kutsuttaisiin action creator-funktiota dispatch-funktion kanssa
+Eli se sijaan että kutsuttaisiin action creator -funktiota _dispatch_-funktion kanssa
 
 ```js
 dispatch(toggleImportanceOf(note.id))
 ```
 
-_connect_-metodia käytettäessä actionin dispatchaamiseen riittää
+_connect_-funktiota käytettäessä actionin dispatchaamiseen riittää
 
 ```js
 props.toggleImportanceOf(note.id)
@@ -249,20 +249,20 @@ Storen _dispatch_-funktiota ei enää tarvitse kutsua, sillä _connect_ on muoka
 
 _mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen kohta käsiteltävä [vaihtoehtoinen käyttötapa](/osa6/connect#map-dispatch-to-propsin-vaihtoehtoinen-kayttotapa).
 
-Connectin aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
+_connect_-funktion aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
 
 ![](../../images/6/25b.png)
 
-eli sen lisäksi että <i>Notes</i> pääsee storen tilaan propsin <i>props.notes</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>notes/toggleImportanceOf</i>-tyyppisiä actioneja.
+Eli sen lisäksi, että <i>Notes</i> pääsee storen tilaan propsin <i>props.notes</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>notes/toggleImportanceOf</i>-tyyppisiä actioneja.
 
-Connectia käyttämään refaktoroitu komponentti <i>Notes</i> on kokonaisuudessaan seuraava:
+_connect_-funktiota käyttämään refaktoroitu komponentti <i>Notes</i> on kokonaisuudessaan seuraava:
 
 ```js
 import { connect } from 'react-redux' 
 import { toggleImportanceOf } from '../reducers/noteReducer'
 
 const Notes = (props) => {
-  return(
+  return (
     <ul>
       {props.notes.map(note =>
         <Note
@@ -332,7 +332,7 @@ export default connect(
 // highlight-end
 ```
 
-Koska komponentti ei tarvitse storen tilasta mitään, on funktion _connect_ ensimmäinen parametri <i>null</i>.
+Koska komponentti ei tarvitse storen tilasta mitään, on _connect_-funktion ensimmäinen parametri <i>null</i>.
 
 Sovelluksen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
 
@@ -367,9 +367,9 @@ export default connect(
 )(NewNote)
 ```
 
-Aloittelevalle connectin käyttäjälle aiheuttaa joskus ihmetystä se, että action creatorista <i>createNote</i> on komponentin sisällä käytettävissä <i>kaksi eri versiota</i>.
+Aloittelevalle _connect_-funktion käyttäjälle aiheuttaa joskus ihmetystä se, että action creatorista <i>createNote</i> on komponentin sisällä käytettävissä <i>kaksi eri versiota</i>.
 
-Funktioon tulee viitata propsien kautta, eli <i>props.createNote</i>, tällöin kyseessä on _connectin_ muokkaama, <i>dispatchauksen sisältävä</i> versio funktiosta.
+Funktioon tulee viitata propsien kautta, eli <i>props.createNote</i>. Tällöin kyseessä on _connect_-funktion muokkaama, <i>dispatchauksen sisältävä</i> versio funktiosta.
 
 Moduulissa olevan import-lauseen
 
@@ -377,7 +377,7 @@ Moduulissa olevan import-lauseen
 import { createNote } from './../reducers/noteReducer'
 ```
 
-ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan, eli _createNote_. Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator joka <i>ei sisällä dispatchausta</i>.
+ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan (eli _createNote_). Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator, joka <i>ei sisällä dispatchausta</i>.
 
 Jos tulostamme funktiot koodin sisällä (emme olekaan vielä käyttäneet kurssilla tätä erittäin hyödyllistä debug-kikkaa)
 
@@ -401,13 +401,13 @@ näemme eron:
 
 ![](../../images/6/10.png)
 
-Ensimmäinen funktioista siis on normaali <i>action creator</i>, toinen taas connectin muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
+Ensimmäinen funktioista on siis normaali <i>action creator</i>, toinen taas _connect_-funktion muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
 
-Connect on erittäin kätevä työkalu, mutta abstraktisuutensa takia se voi aluksi tuntua hankalalta.
+_connect_ on erittäin kätevä työkalu, mutta abstraktisuutensa takia se voi aluksi tuntua hankalalta.
 
 ### mapDispatchToPropsin vaihtoehtoinen käyttötapa
 
-Määrittelimme siis connectin komponentille <i>NewNote</i> antaman actioneja dispatchaavan funktion seuraavasti:
+Määrittelimme siis _connect_-funktion komponentille <i>NewNote</i> antaman actioneja dispatchaavan funktion seuraavasti:
 
 ```js
 const NewNote = (props) => {
@@ -416,13 +416,13 @@ const NewNote = (props) => {
 
 export default connect(
   null,
-  { createNote }
+  { createNote } // highlight-line
 )(NewNote)
 ```
 
 Eli määrittelyn ansiosta komponentti dispatchaa uuden muistiinpanon lisäyksen suorittavan actionin suoraan komennolla <code>props.createNote('uusi muistiinpano')</code>.
 
-Parametrin <i>mapDispatchToProps</i> kenttinä ei voi antaa mitä tahansa funktiota, vaan funktion on oltava <i>action creator</i>, eli Redux-actionin palauttava funktio.
+Parametrin <i>mapDispatchToProps</i> kenttinä ei voi antaa mitä tahansa funktiota, vaan funktion on oltava <i>action creator</i> eli Redux-actionin palauttava funktio.
 
 Kannattaa huomata, että parametri <i>mapDispatchToProps</i> on nyt <i>olio</i>, sillä määrittely
 
@@ -442,7 +442,7 @@ on lyhempi tapa määritellä olioliteraali
 
 eli olio, jonka ainoan kentän <i>createNote</i> arvona on funktio <i>createNote</i>.
 
-Voimme määritellä saman myös "pitemmän kaavan" kautta, antamalla _connectin_ toisena parametrina seuraavanlaisen <i>funktion</i>:
+Voimme määritellä saman myös pitemmän kaavan kautta, antamalla _connect_-funktion toisena parametrina seuraavanlaisen <i>funktion</i>:
 
 ```js
 const NewNote = (props) => {
@@ -498,11 +498,11 @@ const NewNote = (props) => {
 
 Konsepti on hiukan monimutkainen ja sen selittäminen sanallisesti on haastavaa. Useimmissa tapauksissa onneksi riittää <i>mapDispatchToProps</i>:in yksinkertaisempi muoto. On kuitenkin tilanteita, joissa monimutkaisempi muoto on tarpeen, esim. jos määriteltäessä propseiksi mäpättyjä <i>dispatchattavia actioneja</i> on [viitattava komponentin omiin propseihin](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
 
-Egghead.io:sta löytyy Reduxin kehittäjän Dan Abramovin loistava tutoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux), jonka katsomista voin suositella kaikille. Neljässä viimeisessä videossa käsitellään _connect_-metodia ja nimenomaan sen "hankalampaa" käyttötapaa.
+Egghead.io:sta löytyy Reduxin kehittäjän Dan Abramovin loistava tutoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux), jonka katsomista voin suositella kaikille. Neljässä viimeisessä videossa käsitellään _connect_-funktiota ja nimenomaan sen "hankalampaa" käyttötapaa.
 
 ### Presentational/Container revisited
 
-Connect-funktiota hyödyntävä versio komponentista <i>Notes</i> keskittyy lähes ainoastaan muistiinpanojen renderöimiseen, se on hyvin lähellä sitä minkä sanotaan olevan [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponentti, joita Dan Abramovin [sanoin](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) kuvaillaan seuraavasti:
+_connect_-funktiota hyödyntävä versio komponentista <i>Notes</i> keskittyy lähes ainoastaan muistiinpanojen renderöimiseen, ja se on hyvin lähellä sitä minkä sanotaan olevan [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponentti, joita Dan Abramovin [sanoin](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) kuvaillaan seuraavasti:
 
 - Are concerned with how things look.
 - May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
@@ -513,7 +513,7 @@ Connect-funktiota hyödyntävä versio komponentista <i>Notes</i> keskittyy läh
 - Rarely have their own state (when they do, it’s UI state rather than data).
 - Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
 
-Connect-metodin avulla muodostettu _yhdistetty komponentti_
+_connect_-funktion avulla muodostettu _yhdistetty komponentti_
 
 ```js
 const mapStateToProps = (state) => {
@@ -552,30 +552,29 @@ taas on selkeästi <i>container</i>-komponentti, joita Dan Abramov [luonnehtii](
 
 Komponenttien presentational vs. container -jaottelu on eräs hyväksi havaittu tapa strukturoida React-sovelluksia. Jako voi olla toimiva tai sitten ei, kaikki riippuu kontekstista.
 
-Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) muun muassa seuraavat
+Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) muun muassa seuraavat:
 
 - Better separation of concerns. You understand your app and your UI better by writing components this way.
 - Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
 - Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
 
-Abramov mainitsee termin [higher-order component](https://reactjs.org/docs/higher-order-components.html). Esim. <i>Notes</i> on normaali komponentti, React-reduxin _connect_ metodi taas on <i>higher-order komponentti</i>, eli käytännössä funktio, joka haluaa parametrikseen komponentin muuttuakseen "normaaliksi" komponentiksi.
+Abramov mainitsee termin [higher-order component](https://reactjs.org/docs/higher-order-components.html). Esim. <i>Notes</i> on normaali komponentti, React Reduxin _connect_-funktio taas on <i>higher-order komponentti</i> eli käytännössä funktio, joka haluaa parametrikseen komponentin muuttuakseen "normaaliksi" komponentiksi.
 
 Higher-order componentit eli HOC:t ovat yleinen tapa määritellä geneeristä toiminnallisuutta, joka sitten erikoistetaan esim. renderöitymisen määrittelyn suhteen parametrina annettavan komponentin avulla. Kyseessä on funktionaalisen ohjelmoinnin etäisesti olio-ohjelmoinnin perintää muistuttava käsite.
 
-HOC:it ovat oikeastaan käsitteen [Higher-Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funktiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funktioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin, esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit, kuten _map, filter ja find_ ovat HOF:eja.
+HOC:it ovat oikeastaan käsitteen [Higher-Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funktiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funktioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin. Esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit kuten _map, filter ja find_ ovat HOF:eja.
 
-Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin, ovat saaneet hook-perustaisen apin. Useimmiten, kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia.
+Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin, ovat saaneet hook-perustaisen apin. Useimmiten, kuten myös Reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia.
 
 ### Redux ja komponenttien tila
 
 Kurssi on ehtinyt pitkälle, ja olemme vihdoin päässeet siihen pisteeseen missä käytämme Reactia "oikein", eli React keskittyy pelkästään näkymien muodostamiseen ja sovelluksen tila sekä sovelluslogiikka on eristetty kokonaan React-komponenttien ulkopuolelle, Reduxiin ja action reducereihin.
 
-Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampi jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle.
+Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös Reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampaa jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle.
 
-Kannattaako reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)
+Kannattaako Reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)
 
-Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman reduxia, käyttämällä Reactin [context](https://reactjs.org/docs/context.html)-apia ja [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hookia, lisää asiasta esim
-[täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). Tutustumme tähän tapaan myös kurssin [yhdeksännessä osassa](/en/part9).
+Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman Reduxia käyttämällä Reactin [context](https://reactjs.org/docs/context.html)-apia ja [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hookia, lisää asiasta on esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). Tutustumme tähän tapaan myös kurssin [yhdeksännessä osassa](/en/part9).
 
 </div>
 
@@ -585,19 +584,20 @@ Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman
 
 #### 6.19 anekdootit ja connect, step1
 
-<i>Redux storea</i> käytetään tällä hetkellä <em>useSelector</em> ja <em>useDispatch</em> hookien avulla. Tämä on varmasti paras tapa tehdä asiat, mutta harjoitellaan kuitenkin hieman connectin käyttöä.
+<i>Redux-storea</i> käytetään tällä hetkellä <em>useSelector</em>- ja <em>useDispatch</em>-hookien avulla. Tämä on varmasti paras tapa tehdä asiat, mutta harjoitellaan kuitenkin hieman _connect_-funktion käyttöä.
 
-Muokkaa <i>Notification</i> komponenttia niin, että se käyttää _connect_ funktiota hookien sijaan. 
+Muokkaa <i>Notification</i>-komponenttia niin, että se käyttää _connect_-funktiota hookien sijaan. 
+
 #### 6.20 anekdootit ja connect, step2
 
-Tee sama <i>Filter</i> ja <i>AnecdoteForm</i> komponenteille.
+Tee sama <i>Filter</i>- ja <i>AnecdoteForm</i>-komponenteille.
 
 #### 6.21 anekdootit, loppuhuipennus
 
-Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos vote-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen että notifikaation näyttöaika on 5 sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation.
+Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos "vote"-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen, että notifikaation näyttöaika on viisi sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation.
 
-Korjaa bugi siten, että usean peräkkäisen äänestyksen viimeistä notifikaatiota näytetään aina viiden sekunnin ajan. Korjaus tapahtuu siten, että uuden notifikaation tullessa edellisen notifikaation nollaus tarvittaessa perutaan, ks. funktion setTimeout [dokumentaatio](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
+Korjaa bugi siten, että usean peräkkäisen äänestyksen viimeistä notifikaatiota näytetään aina viiden sekunnin ajan. Korjaus tapahtuu siten, että uuden notifikaation tullessa edellisen notifikaation nollaus tarvittaessa perutaan, ks. funktion _setTimeout_ [dokumentaatio](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
