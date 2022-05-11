@@ -387,7 +387,7 @@ Apollo client saves the responses of queries to [cache](https://www.apollographq
 
 ![](../../images/8/13x.png)
 
-Cache shows the detailed info of Arto Hellas after the query <i>findPerson</i> jälkeen:
+Cache shows the detailed info of Arto Hellas after the query <i>findPerson</i>:
 
 ![](../../images/8/13z.png)
 
