@@ -462,7 +462,7 @@ You can assume that the user will not try to add faulty books or authors, so you
 The following things do <i>not</i> have to work just yet:
 
  - _allBooks_ query with parameters
- -  <i>bookCount</i> field of an author object
+ -  _bookCount_ field of an author object
  -  _author_ field of a book
  - _editAuthor_ mutation
 
@@ -482,7 +482,7 @@ type Mutation {
 
 #### 8.14: Database, part 2
 
-Complete the program so that all queries (to get _allBooks_ working with the parameter _author_ is not required) and mutations work. 
+Complete the program so that all queries (to get _allBooks_ working with the parameter _author_ and _bookCount_ field of an author object is not required) and mutations work. 
 
 You might find [this](https://docs.mongodb.com/manual/reference/operator/query/in/) useful.
 
