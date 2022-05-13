@@ -497,7 +497,7 @@ Add user management to your application. Expand the schema like so:
 ```js
 type User {
   username: String!
-  favoriteGenre: String!
+  favouriteGenre: String!
   id: ID!
 }
 
@@ -514,7 +514,7 @@ type Mutation {
   // ...
   createUser(
     username: String!
-    favoriteGenre: String!
+    favouriteGenre: String!
   ): User
   login(
     username: String!
