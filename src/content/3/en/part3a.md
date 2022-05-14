@@ -855,18 +855,18 @@ app.post('/api/notes', (request, response) => {
     return response.status(400).json({ 
       error: 'content missing' 
     })
+  } else {
+    const note = {
+      id: generateId(),
+      content: body.content,
+      date: new Date(),
+      important: body.important || false,
+    }
+
+    notes = notes.concat(note)
+
+    response.json(note)
   }
-
-  const note = {
-    content: body.content,
-    important: body.important || false,
-    date: new Date(),
-    id: generateId(),
-  }
-
-  notes = notes.concat(note)
-
-  response.json(note)
 })
 ```
 
