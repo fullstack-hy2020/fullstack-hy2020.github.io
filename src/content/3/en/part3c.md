@@ -434,7 +434,7 @@ Let's create a new directory for the module called <i>models</i>, and add a file
 ```js
 const mongoose = require('mongoose')
 
-const url = process.env.MONGODB_URI // highlight-line
+const url = process.env.MONGODB_URL // highlight-line
 
 console.log('connecting to', url) // highlight-line
 
