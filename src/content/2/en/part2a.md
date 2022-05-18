@@ -671,7 +671,7 @@ const total = parts.reduce((s, p) => {
 })
 ```
 
-**Pro tip 2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) that automatically changes short form arrow functions into their longer form, and vice versa. 
+**Pro tip 2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer) that automatically changes short form arrow functions into their longer form, and vice versa. 
 
 ![](../../images/2/5b.png)
 
