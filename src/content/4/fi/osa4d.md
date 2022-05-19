@@ -325,11 +325,11 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-Mitä lyhemmäksi tokenin voimassaolo asetetaan, sitä turvallisempi ratkaisu on. Eli jos token päätyy vääriin käsiin, tai käyttäjän pääsy järjestelmään tulee estää, on token käytettävissä ainoastaan rajallisen ajan. Toistaalta tokenin lyhyt voimassaolo aiheuttaa vaivaa API:n käyttäjälle. Kirjaantuminen pitää tehdä useammin.
+Mitä lyhemmäksi tokenin voimassaolo asetetaan, sitä turvallisempi ratkaisu on. Eli jos token päätyy vääriin käsiin, tai käyttäjän pääsy järjestelmään tulee estää, on token käytettävissä ainoastaan rajallisen ajan. Toisaalta tokenin lyhyt voimassaolo aiheuttaa vaivaa API:n käyttäjälle. Kirjaantuminen pitää tehdä useammin.
 
-Toinen ratkaisu on tallettaa API:ssa tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen API-pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tälläista ratkaisua kutsutaan usein <i>palvelinpuolen sessioksi</i> (engl. server side session).
+Toinen ratkaisu on tallettaa API:ssa tietokantaan tieto jokaisesta asiakkaalle myönnetystä tokenista, ja tarkastaa jokaisen API-pyynnön yhteydessä onko käyttöoikeus edelleen voimassa. Tällöin tokenin voimassaolo voidaan tarvittaessa poistaa välittömästi. Tällaista ratkaisua kutsutaan usein <i>palvelinpuolen sessioksi</i> (engl. server side session).
 
-Tämän ratkaisun negatiivinen puoli on sen backendiin lisäämä monimutkaisuus sekä hienoinen vaikutus suorituskysyyn. Jos tokenin voimassaolo joudutaan tarkastamaan tietokannasta, on se hitaampaa kuin tokenista itsestään tarkastattava voimassaolo. Usein tokeneita vastaava sessio, eli tieto tokenia vastaavasta käyttäjästä, talletetaankin esim. avain-arvo-periaattella toimivaan [Redis](https://redis.io/)-tietokantaan, joka on toiminnallisuudeltaan esim MongoDB:tä tai relaatiotietokantoja rajoittuneempi, mutta toimii tietynlaisissa käyttöskenaarioissa todella nopeasti.
+Tämän ratkaisun negatiivinen puoli on sen backendiin lisäämä monimutkaisuus sekä hienoinen vaikutus suorituskykyyn. Jos tokenin voimassaolo joudutaan tarkastamaan tietokannasta, on se hitaampaa kuin tokenista itsestään tarkastettava voimassaolo. Usein tokeneita vastaava sessio, eli tieto tokenia vastaavasta käyttäjästä, talletetaankin esim. avain-arvo-periaattella toimivaan [Redis](https://redis.io/)-tietokantaan, joka on toiminnallisuudeltaan esim MongoDB:tä tai relaatiotietokantoja rajoittuneempi, mutta toimii tietynlaisissa käyttöskenaarioissa todella nopeasti.
 
 Käytettäessä palvelinpuolen sessioita, token ei useinkaan sisällä jwt-tokenien tapaan mitään tietoa käyttäjästä (esim. käyttäjätunnusta), sen sijaan token on ainoastaan satunnainen merkkijono, jota vastaava käyttäjä haetaan palvelimella sessiot tallettavasta tietokannasta. On myös yleistä, että palvelinpuolen sessiota käytettäessä tieto käyttäjän identiteetistä välitetään Authorization-headerin sijaan evästeiden (engl. cookie) välityksellä. 
 
@@ -485,7 +485,7 @@ kayttaja -> kayttaja:
 
 #### 4.22*:  blogilistan laajennus, step10
 
-Sekä uuden blogin luonnin että blogin poistamisen yhteydessä on selvitettävä operaation tekevän käyttäjän identiteetti. Tätä auttaa jo tehtävässä 4.20 tehty middleware _tokenExtractor_. Tästä huolimatta <i>post</i>- ja <i>delete</i>-käsittelijöissä tulee vielä selvittää tokenia vastava käyttäjä.
+Sekä uuden blogin luonnin että blogin poistamisen yhteydessä on selvitettävä operaation tekevän käyttäjän identiteetti. Tätä auttaa jo tehtävässä 4.20 tehty middleware _tokenExtractor_. Tästä huolimatta <i>post</i>- ja <i>delete</i>-käsittelijöissä tulee vielä selvittää tokenia vastaava käyttäjä.
 
 Tee nyt uusi middleware _userExtractor_, joka selvittää pyyntöön liittyvän käyttäjän ja sijoittaa sen request-olioon. Eli kun rekisteröit middlewaren ennen routeja tiedostossa <i>app.js</i>
 
