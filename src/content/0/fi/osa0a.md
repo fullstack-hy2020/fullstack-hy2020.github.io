@@ -124,7 +124,7 @@ Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081)
 
 - Tee tehtävät. Palauta vastauksesi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) kautta.
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikokeeseen-ilmoittautuminen) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
-- Aktivoi Helsingin yliopiston käyttäjätunnus. Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Käyttäjätunnus tulee aktivoida ennen kurssikokeen suorittamista. Lue lisää [täältä](osa0/yleista/#kurssikokeeseen-ilmoittautuminen). 
+- Aktivoi Helsingin yliopiston käyttäjätunnus. Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Käyttäjätunnus tulee aktivoida ennen kurssikokeen suorittamista. Lue lisää [täältä](/osa0/yleista/#kurssikokeeseen-ilmoittautuminen). 
 - Tee verkkotentti Moodlessa. Pääset Moodleen [tämän](https://moodle.helsinki.fi/course/view.php?id=46197) linkin kautta. Kirjaudu Moodleen Helsingin yliopiston käyttäjätunnuksella.  
 - Tallenna Helsingin yliopiston opiskelijanumerosi palautussovellukseen. Lue lisää [täältä](/osa0/yleista/#suoritusmerkinnan-pyytaminen)
 - Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
