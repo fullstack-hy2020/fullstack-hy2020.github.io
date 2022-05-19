@@ -270,7 +270,7 @@ const Hello = (props) => { // highlight-line
 }
 ```
 
-Now the function defining the component has a parameter <i>props</i>. As an argument, the parameter receives an object, which has fields corresponding to all the "props" the user of the component defines.
+Now the function defining the component has a parameter <i>props</i>, which abbreviates "properties". As an argument, the parameter receives an object, which has fields corresponding to all the "props" the user of the component defines.
 
 The props are defined as follows:
 
