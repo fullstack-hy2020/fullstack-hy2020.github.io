@@ -361,7 +361,7 @@ Fork和clone项目[patientor](https://github.com/fullstack-hy/patientor)。 在 
 <!-- You can run this command if you get error message when trying to start the fronend: -->
 如果遇到错误信息，你可以使用如下命令启动前端：
 
- ```shell
+```shell
 npm update chokidar
 ``` 
  <!-- You should be able to use the frontend without a functioning backend. -->
