@@ -165,7 +165,7 @@ const mapStateToProps = (state) => {
 
 const ConnectedNotes = connect(mapStateToProps)(Notes)
 export default ConnectedNotes  
- ```
+```
 
 ### mapDispatchToProps
 
