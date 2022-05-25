@@ -20,7 +20,7 @@ When something does not work, don't just guess what's wrong. Instead, log or use
 **NB** As explained in part 1, when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing:
 
 ```js
-console.log('props value is' + props)
+console.log('props value is ' + props)
 ```
 
 separate the things to be printed with a comma:
