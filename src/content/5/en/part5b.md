@@ -413,7 +413,7 @@ We also make the following changes to the <i>Togglable</i> component:
 ```js
 import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = forwardRef((props, ref) => { // highlight-line
+const Togglable = forwardRef((props, refs) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -424,7 +424,7 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeHandle(ref, () => {
+  useImperativeHandle(refs, () => {
     return {
       toggleVisibility
     }
