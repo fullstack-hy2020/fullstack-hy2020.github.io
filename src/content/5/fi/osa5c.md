@@ -668,7 +668,7 @@ test('renders content', () => {
 Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan parametrina teksti</i> eikä mitään muuta. Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
 
 ```js 
-const element = screenscreen.getByText(
+const element = screen.getByText(
   'Does not work anymore :(', { exact: false }
 )
 ```
