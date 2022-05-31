@@ -163,7 +163,10 @@ mongoose
 
     return note.save()
   })
-  .then(() => console.log('note saved!'))
+  .then(() => {
+    console.log('note saved!')
+    return mongoose.connection.close()
+  })
   .catch((err) => console.log(err))
 ```
 
