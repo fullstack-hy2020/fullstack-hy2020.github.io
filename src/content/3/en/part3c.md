@@ -146,7 +146,7 @@ const noteSchema = new mongoose.Schema({
   content: String,
   date: Date,
   important: Boolean,
-});
+})
 
 const Note = mongoose.model('Note', noteSchema)
 
@@ -159,7 +159,7 @@ mongoose
       content: 'HTML is Easy',
       date: new Date(),
       important: true,
-    });
+    })
 
     note.save().then((result) => {
       console.log('note saved!')
