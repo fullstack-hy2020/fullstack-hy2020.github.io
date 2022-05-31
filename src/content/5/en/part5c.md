@@ -302,8 +302,8 @@ const user = userEvent.setup()
 The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
 
 ```js
-await user.click(button)
 const button = screen.getByText('make not important')
+await user.click(button)
 ```
 
 Clicking happens with the method [click](https://testing-library.com/docs/user-event/convenience/#click) of the userEvent-library.
