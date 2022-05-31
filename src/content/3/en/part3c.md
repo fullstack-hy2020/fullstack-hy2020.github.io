@@ -131,41 +131,42 @@ npm install mongoose
 Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
 
 ```js
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 if (process.argv.length < 3) {
-  console.log('Please provide the password as an argument: node mongo.js <password>');
-  process.exit(1);
-};
+  console.log('Please provide the password as an argument: node mongo.js <password>')
+  process.exit(1)
+}
 
-const password = process.argv[2];
+const password = process.argv[2]
 
-const url = `mongodb+srv://notes-app-full:${password}@cluster1.lvvbt.mongodb.net/?retryWrites=true&w=majority`;
+const url = `mongodb+srv://notes-app-full:${password}@cluster1.lvvbt.mongodb.net/?retryWrites=true&w=majority`
 
-mongoose.connect(url)
-    .then((result) => {
-        console.log('connected')
-        const noteSchema = new mongoose.Schema({
-            content: String,
-            date: Date,
-            important: Boolean,
-        });
+const noteSchema = new mongoose.Schema({
+  content: String,
+  date: Date,
+  important: Boolean,
+});
 
-        const Note = mongoose.model('Note', noteSchema);
+const Note = mongoose.model('Note', noteSchema)
 
-        const note = new Note({
-            content: 'HTML is Easy',
-            date: new Date(),
-            important: true,
-        });
+mongoose
+  .connect(url)
+  .then((result) => {
+    console.log('connected');
 
-        note.save()
-            .then((result) => {
-                console.log('note saved!')
-                mongoose.connection.close()
-            });
+    const note = new Note({
+      content: 'HTML is Easy',
+      date: new Date(),
+      important: true,
+    });
+
+    note.save().then((result) => {
+      console.log('note saved!')
+      mongoose.connection.close()
     })
-    .catch((err) => console.log(err));
+  })
+  .catch((err) => console.log(err))
 ```
 
 **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
