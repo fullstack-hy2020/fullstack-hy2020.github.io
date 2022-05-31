@@ -153,7 +153,7 @@ const Note = mongoose.model('Note', noteSchema)
 mongoose
   .connect(url)
   .then((result) => {
-    console.log('connected');
+    console.log('connected')
 
     const note = new Note({
       content: 'HTML is Easy',
