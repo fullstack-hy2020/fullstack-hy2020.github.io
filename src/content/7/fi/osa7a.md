@@ -147,7 +147,7 @@ Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i>, kyseessä o
 ```js
 import {
   BrowserRouter as Router, // highlight-line
-  Switch, Route, Link
+  Routes, Route, Link
 } from "react-router-dom"
 ```
 
