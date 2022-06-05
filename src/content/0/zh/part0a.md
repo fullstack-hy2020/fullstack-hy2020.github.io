@@ -228,7 +228,7 @@ lang: zh
  练习是通过GitHub提交的，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)上标记为完成。
 
 <!-- If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.-->
- 如果你要将不同章节的练习提交到同一个仓库，请使用适当的系统来命名你的目录。当然，你可以为每个章节创建一个新的资源库。如果你使用的是一个私人版本库，请添加<i>mluukkai</i>作为合作者。
+ 如果你要将不同章节的练习提交到同一个仓库，请使用适当的系统来命名你的目录。当然，你可以为每个章节创建一个新的仓库。如果你使用的是一个私人版本库，请添加<i>mluukkai</i>作为合作者。
 
 <!-- Exercises are submitted **one part at a time**. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.-->
  练习是**一次提交一个章节的**。一旦你为一个章节提交了练习，你就不能再为该章节提交任何练习。

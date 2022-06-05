@@ -770,10 +770,10 @@ var sendToServer = function(note) {
  练习通过GitHub提交，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记练习完成。
 
 <!-- You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mluukkai_ as a collaborator to it.-->
-你可以将所有的练习提交到同一个仓库，或者使用多个不同的仓库。如果你将不同部分的练习提交到同一个资源库中，请将你的目录命名好。如果你使用一个私人仓库来提交练习，把_mluukkai_作为合作者加入其中。
+你可以将所有的练习提交到同一个仓库，或者使用多个不同的仓库。如果你将不同部分的练习提交到同一个仓库中，请将你的目录命名好。如果你使用一个私人仓库来提交练习，把_mluukkai_作为合作者加入其中。
 
 <!-- One good way to name the directories in your submission repository is as follows:-->
-在你的提交资源库中命名目录的一个好方法如下：
+在你的提交仓库中命名目录的一个好方法如下：
 
 ```
 part0
@@ -788,7 +788,7 @@ part2
 ```
 
 <!-- So, each part has its own directory, which contains a directory for each exercise set (like the unicafe exercises in part 1).-->
- 也就是，每个章节都有自己的目录，其中包含每个练习集的目录（如第一部分的unicafe练习）。
+ 也就是，每个章节都有自己的目录，其中包含每个练习集的目录（如第一章节的unicafe练习）。
 
 <!-- The exercises are submitted **one part at a time**. When you have submitted the exercises for a part, you can no longer submit any missed exercises for that part.-->
  练习是**一次提交一个章节的**。当你提交了一个章节的练习，你就不能再提交该章节任何遗漏的练习。
@@ -865,7 +865,7 @@ end note
  如果有必要，将浏览器或服务器上的操作显示为图中的注释。
 
 <!-- The diagram does not have to be a sequence diagram. Any sensible way of presenting the events is fine.-->
- 该图不一定是一个序列图。任何合理的呈现事件方式都是可以的。
+ 该图不一定是一个序列图。任何合理的渲染事件方式都是可以的。
 
 <!-- All necessary information for doing this, and the next two exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).-->
 所有做这个的必要信息，以及接下来的两个练习，都可以从[本章](/en/part0/fundamentals_of_web_apps#forms-and-http-post)的正文中找到。
