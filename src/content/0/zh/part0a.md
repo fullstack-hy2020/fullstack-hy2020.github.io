@@ -7,10 +7,10 @@ lang: zh
 
 <div class="content">
 <!-- This course is an introduction to modern web development with JavaScript. The main focus is on single page applications implemented with React and supporting them with RESTful and GraphQL web services implemented with Node.js. The course also has parts on TypeScript,  React Native, and Continuous integration.-->
- 本课程是介绍如何使用 JavaScript 进行现代 Web 应用的开发 。重点是用React实现单页应用程序，并用 Node.js 实现 RESTful 和 GraphQL web 服务来支撑 React 应用。该课程也包含关于TypeScript、React Native和持续集成的内容。
+ 本课程是介绍如何使用 JavaScript 进行现代 Web 应用的开发 。重点是用React实现单页应用，并用 Node.js 实现 RESTful 和 GraphQL web 服务来支撑 React 应用。该课程也包含关于TypeScript、React Native和持续集成的内容。
 
 <!-- Other topics include debugging applications, container technology, configuration, managing runtime environments, and databases.-->
-本课程还包含其他的一些内容，包括调试应用程序，容器技术，配置、管理运行时环境以及数据库。
+本课程还包含其他的一些内容，包括调试应用，容器技术，配置、管理运行时环境以及数据库。
 
 ### Prerequisites
 
@@ -217,7 +217,7 @@ lang: zh
 <!-- - If you want to get University of Helsinki credits-->
  - 如果你想获得赫尔辛基大学的学分
   <!--   - Enroll on the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately.-->
-  - 报名参加该课程。你可以通过教材中的链接注册每个章节（[部分和完成](/en/part0/general_info#parts-and-completion)）。分别报名参加每个部分的学习。
+  - 报名参加该课程。你可以通过教材中的链接注册每个章节（[部分和完成](/en/part0/general_info#parts-and-completion)）。分别报名参加每个章节的学习。
     <!--  - Mark the part completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)-->
   - 在提交系统中标记完成的章节，阅读更多，点击[这里](/en/part0/general_info#how-to-get-your-credits)
 
@@ -228,7 +228,7 @@ lang: zh
  练习是通过GitHub提交的，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)上标记为完成。
 
 <!-- If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.-->
- 如果你要将不同章节的练习提交到同一个仓库，请使用适当的系统来命名你的目录。当然，你可以为每个部分创建一个新的资源库。如果你使用的是一个私人版本库，请添加<i>mluukkai</i>作为合作者。
+ 如果你要将不同章节的练习提交到同一个仓库，请使用适当的系统来命名你的目录。当然，你可以为每个章节创建一个新的资源库。如果你使用的是一个私人版本库，请添加<i>mluukkai</i>作为合作者。
 
 <!-- Exercises are submitted **one part at a time**. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.-->
  练习是**一次提交一个章节的**。一旦你为一个章节提交了练习，你就不能再为该章节提交任何练习。
@@ -237,7 +237,7 @@ lang: zh
 一个检测抄袭的系统会用来检查提交到GitHub的练习。如果从模型中检测到了答案代码，或者多个学生提交了相同的代码，这种情况将根据赫尔辛基大学的[抄袭政策](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism)来处理。
 
 <!-- Many of the exercises build a larger application bit by bit. In these cases, submitting only the completed application is enough. You can make a commit after each exercise, but that is not compulsory.-->
- 许多练习都是一点一点地建立一个较大的应用程序。在这些情况下，只提交完成的应用程序就足够了。你可以在每个练习后做一个提交，但这并不强制。
+ 许多练习都是一点一点地建立一个较大的应用。在这些情况下，只提交完成的应用就足够了。你可以在每个练习后做一个提交，但这并不强制。
 
 ### Sign up for the exam
 
@@ -384,7 +384,7 @@ lang: zh
 通过开放大学将提供一个价值5、7或10学分的全栈项目。
 
 <!-- For the project, an application is implemented in React and/or Node, though implementing a mobile application in React Native is also possible.-->
-对于该项目，应用程序是在React和/或Node中实现的，尽管在React Native中实现一个移动应用程序也是可以的。
+对于该项目，应用是在React和/或Node中实现的，尽管在React Native中实现一个移动应用也是可以的。
 
 <!-- The number of credits is based on hours of work done. One credit is approximately 17.5 hours of work. The work is graded pass/fail.-->
 学分的数量是基于所做工作的时间。一个学分大约是17.5小时的工作。工作被评为合格/不合格。
@@ -432,6 +432,6 @@ lang: zh
  如果你发现教材中有错别字，或者有些东西表达不清楚，或者只是语法不好，请向课程教材的[仓库](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io)中提交一个<i>pull request</i>。例如，本页面的markdown源代码可以在仓库中找到，地址是<https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md>。
 
 <!-- At the bottom of each part of the material is a link to <em>propose changes to material</em>. You can edit the source code of the page by clicking on the link.-->
- 在材料的每一部分的底部都有一个链接，用于<em>对材料提出修改意见</em>。你可以通过点击该链接来编辑该页的源代码。
+ 在每一章节的教材底部都有一个链接，用于<em>对材料提出修改意见</em>。你可以通过点击该链接来编辑该页的源代码。
 
 </div>
