@@ -68,7 +68,7 @@ $ npx express-generator
   ...
   
   install dependencies:
-    $ npm install
+    $npm install
 
   run the app:
     $ DEBUG=playground:* npm start
@@ -270,15 +270,15 @@ Tip: Run the application outside of a container to examine it before starting to
 
 In the previous section, we created express-server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
 
-[Docker-compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us manage containers. Let's start using docker-compose as we learn more about containers as it will help us save some time with the configuration.
+[Docker-compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us manage containers. Let's start using docker compose as we learn more about containers as it will help us save some time with the configuration.
 
-Install the docker-compose tool from this link: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
+Install the docker compose tool from this link: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
 
 Let's check that it works:
 
 ```bash
-$ docker-compose -v
-docker-compose version 1.29.2, build 5becea4c
+$ docker compose version
+Docker Compose version v2.5.0
 ```
 
 And now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
@@ -298,9 +298,9 @@ services:
 
 The meaning of each line is explained as a comment. If you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/).
 
-Now we can use _docker-compose up_ to build and run the application. If we want to rebuild the images we can use _docker-compose up --build_.
+Now we can use _docker compose up_ to build and run the application. If we want to rebuild the images we can use _docker compose up --build_.
 
-You can also run the application in the background with _docker-compose up -d_ (_-d_ for detached) and close it with _docker-compose down_.
+You can also run the application in the background with _docker compose up -d_ (_-d_ for detached) and close it with _docker compose down_.
 
 Creating files like this that <i>declare</i> what you want instead of script files that you need to run in a specific order / a specific number of times is often a great practice.
 
@@ -350,9 +350,9 @@ The meaning of the two first environment variables defined above is explained on
 
 The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name. 
 
-You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g. _docker-compose -f docker-compose.dev.yml up_. Now that we may have multiple it's useful.
+You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g. _docker compose -f docker-compose.dev.yml up_. Now that we may have multiple it's useful.
 
-Now start the MongoDB with _docker-compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker-compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
+Now start the MongoDB with _docker compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
 
 As said previously, currently we <strong>do not</strong> want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option in the later in this part.
 
@@ -422,7 +422,7 @@ Bind mount is the act of binding a file on the host machine to a file in the con
 
 The result of the bind mount is that the file <i>mongo-init.js</i> in the mongo folder of the host machine is the same as the <i>mongo-init.js</i> file in the container's /docker-entrypoint-initdb.d directory. Changes to either file will be available in the other. We don't need to make any changes during runtime. But this will be the key to software development in containers.
 
-Run _docker-compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose -f docker-compose.dev.yml up_ to initialize the database.
+Run _docker compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker compose -f docker-compose.dev.yml up_ to initialize the database.
 
 If you see an error like this:
 
@@ -490,7 +490,7 @@ volumes:
   mongo_data:
 ```
 
-Now the volume is created but managed by Docker. After starting the application (_docker-compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
+Now the volume is created but managed by Docker. After starting the application (_docker compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
 
 </div>
 
@@ -556,7 +556,7 @@ $ docker container rm keen_darwin
 $ docker container run -d -p 8080:80 nginx
 ```
 
-Let's look at the app by going to http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix the it. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
+Let's look at the app by going to http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix it. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
 
 ```bash
 $ docker container ls
@@ -781,8 +781,9 @@ Redis can also be used to implement so called [publish-subscribe](https://en.wik
   
 #### Exercise 12.12: Persisting data in Redis
 
-Check that the data is not persisted by default: after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
+Check that the data is not persisted by default: after running _docker compose -f docker-compose.dev.yml down_ and _docker compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
 
-Then create a volume for Redis data (by mofifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
+Then create a volume for Redis data (by mofifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker compose -f docker-compose.dev.yml down_ and _docker compose -f docker-compose.dev.yml up_.
 
 </div>
+ 
