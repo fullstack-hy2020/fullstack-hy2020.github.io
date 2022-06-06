@@ -916,7 +916,7 @@ const App = () => {
 ```
 
 <!-- The event handler is created by <i>executing</i> the function call _hello('world')_. The function call returns the function:-->
- 事件处理程序是通过<i>执行</i>函数调用_hello(''world'')_创建的。该函数调用返回函数。
+ 事件处理程序是通过<i>执行</i>函数调用_hello("world")_创建的。该函数调用返回函数。
 
 ```js
 () => {

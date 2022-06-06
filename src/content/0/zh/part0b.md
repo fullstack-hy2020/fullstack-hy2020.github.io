@@ -681,7 +681,7 @@ form.onsubmit = function(e) {
  然后事件处理函数创建了一个新的笔记，用<em>notes.push(note)</em>命令将其添加到笔记列表中，重新渲染页面上的笔记列表，并将新笔记发送到服务器。
 
 <!-- The code for sending the note to the server is as follows:-->
- 发送注释到服务器的代码如下。
+ 发送笔记到服务器的代码如下。
 
 ```js
 var sendToServer = function(note) {
