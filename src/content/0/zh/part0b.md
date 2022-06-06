@@ -56,7 +56,7 @@ lang: zh
 <!-- On a small screen you might have to widen the console window to see these.-->
  在小屏幕上，你可能要放大控制台窗口才能看到这些。
 
-<!-- Clicking the first event reveals more information on what''s happening:-->
+<!-- Clicking the first event reveals more information on what's happening:-->
  点击第一个事件可以看到更多关于本次请求的细节。
 
 ![Detail view of a single event](../../images/0/3e.png)
@@ -69,7 +69,7 @@ lang: zh
 
 ![](../../images/0/4e.png)
 
-<!-- The <i>Response headers</i> on top tell us e.g. the size of the response in bytes, and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML)-page, and to render it to the browser ''like a web page''.-->
+<!-- The <i>Response headers</i> on top tell us e.g. the size of the response in bytes, and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML)-page, and to render it to the browser 'like a web page'.-->
 上面的<i>响应头Response headers</i>告诉我们，例如，响应的字节大小，以及响应的确切时间。一个重要的头信息[Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)告诉我们，响应是一个[utf-8](https://en.wikipedia.org/wiki/UTF-8)格式的文本文件，其内容已经用HTML格式化。这样，浏览器就知道这个响应是一个普通的[HTML](https://en.wikipedia.org/wiki/HTML)页面，并将其 "像一个网页一样" 渲染到浏览器。
 
 <!-- The <i>Response</i> tab shows the response data, a regular HTML-page. The <i>body</i> section determines the structure of the page rendered to the screen:-->
@@ -104,7 +104,7 @@ lang: zh
 <!-- The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server.-->
 示例应用的主页运行模式类似<i>传统的Web应用</i>。当进入该页面时，浏览器从服务器上获取描述页面结构的HTML文档，以及文本内容。
 
-<!-- The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server''s directory. The server can also form the HTML documents <i>dynamically</i>  according to the application code, using, for example, data from a database.-->
+<!-- The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i>  according to the application code, using, for example, data from a database.-->
 服务器以某种方式生成了这个文档。该文档可以是一个保存在服务器目录中的<i>静态</i>文本文件。服务器也可以根据应用代码，例如使用数据库中的数据，动态地形成HTML文档。
 <!-- The HTML code of the example application has been formed dynamically, because it contains information on the number of created notes.-->
  示例应用的HTML代码是动态形成的，因为它包含了关于已创建的笔记数量的信息。
@@ -120,23 +120,23 @@ const getFrontPageHtml = (noteCount) => {
       <head>
       </head>
       <body>
-        <div class=''container''>
+        <div class='container'>
           <h1>Full stack example app</h1>
           <p>number of notes created ${noteCount}</p>
-          <a href=''/notes''>notes</a>
-          <img src=''kuva.png'' width=''200'' />
+          <a href='/notes'>notes</a>
+          <img src='kuva.png' width='200' />
         </div>
       </body>
     </html>
 `)
 }
 
-app.get(''/'', (req, res) => {
+app.get('/', (req, res) => {
   const page = getFrontPageHtml(notes.length)
   res.send(page)
 })
 ```
-<!-- You don''t have to understand the code just yet.-->
+<!-- You don't have to understand the code just yet.-->
 你还不需要理解这些代码。
 
 <!-- The content of the HTML page has been saved as a template string, or a string which allows for evaluating, for example, variables in the midst of it. The dynamically changing part of the homepage, the number of saved notes (in the code <em>noteCount</em>), is replaced by the current number of notes (in the code <em>notes.length</em>) in the template string.-->
@@ -162,7 +162,7 @@ HTML页面的内容已被保存为一个模板字符串，或一个能够运行�
 
 ![Screenshot of the developer console with the 4 requests visible](../../images/0/8e.png)
 
-<!-- All of the requests have <i>different</i> types. The first request''s type is <i>document</i>. It is the HTML code of the page, and it looks as follows:-->
+<!-- All of the requests have <i>different</i> types. The first request's type is <i>document</i>. It is the HTML code of the page, and it looks as follows:-->
 所有的请求都有<i>不同的</i>类型。第一个请求的类型是<i>document</i>。它是页面的HTML代码，看起来如下：
 
 ![Detail view of the first request](../../images/0/9e.png)
@@ -183,21 +183,21 @@ xhttp.onreadystatechange = function() {
     const data = JSON.parse(this.responseText)
     console.log(data)
 
-    var ul = document.createElement(''ul'')
-    ul.setAttribute(''class'', ''notes'')
+    var ul = document.createElement('ul')
+    ul.setAttribute('class', 'notes')
 
     data.forEach(function(note) {
-      var li = document.createElement(''li'')
+      var li = document.createElement('li')
 
       ul.appendChild(li)
       li.appendChild(document.createTextNode(note.content))
     })
 
-    document.getElementById(''notes'').appendChild(ul)
+    document.getElementById('notes').appendChild(ul)
   }
 }
 
-xhttp.open(''GET'', ''/data.json'', true)
+xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 <!-- The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course.-->
@@ -209,11 +209,11 @@ xhttp.send()
 <!-- Immediately after fetching the <i>script</i> tag, the browser begins to execute the code.-->
  在获取了<i>script</i>标签后，浏览器立即开始执行代码。
 
-<!-- The last two lines instruct the browser to do an HTTP GET request to the server''s address <i>/data.json</i>:-->
+<!-- The last two lines instruct the browser to do an HTTP GET request to the server's address <i>/data.json</i>:-->
  最后两行指示浏览器对服务器的地址<i>/data.json</i>进行HTTP GET请求。
 
 ```js
-xhttp.open(''GET'', ''/data.json'', true)
+xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 <!-- This is the bottom-most request shown on the Network tab.-->
@@ -239,31 +239,31 @@ xhttp.send()
 const data = JSON.parse(this.responseText)
 console.log(data)
 
-var ul = document.createElement(''ul'')
-ul.setAttribute(''class'', ''notes'')
+var ul = document.createElement('ul')
+ul.setAttribute('class', 'notes')
 
 data.forEach(function(note) {
-  var li = document.createElement(''li'')
+  var li = document.createElement('li')
 
   ul.appendChild(li)
   li.appendChild(document.createTextNode(note.content))
 })
 
-document.getElementById(''notes'').appendChild(ul)
+document.getElementById('notes').appendChild(ul)
 ```
 <!-- The code first creates an unordered list with a [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)-tag...-->
  该代码首先创建了一个带有[ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)标签的无序列表...
 
 ```js
-var ul = document.createElement(''ul'')
-ul.setAttribute(''class'', ''notes'')
+var ul = document.createElement('ul')
+ul.setAttribute('class', 'notes')
 ```
 <!-- ...and then adds one [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)-tag for each note. Only the <i>content</i> field of each note becomes the contents of the li-tag. The timestamps found in the raw data are not used for anything here.-->
  ...然后再为每个 Note 加上一个 li-标签。仅将每个 Note 的 content 字段变成了 li-标签 的内容，而原始数据的 timestamps 时间戳在这里并没派上用场。
 
 ```js
 data.forEach(function(note) {
-  var li = document.createElement(''li'')
+  var li = document.createElement('li')
 
   ul.appendChild(li)
   li.appendChild(document.createTextNode(note.content))
@@ -308,10 +308,10 @@ xhttp.onreadystatechange = function() {
   // code that takes care of the server response
 }
 
-xhttp.open(''GET'', ''/data.json'', true)
+xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
-<!-- The request to the server is sent on the last line, but the code to handle the response can be found further up. What''s going on?-->
+<!-- The request to the server is sent on the last line, but the code to handle the response can be found further up. What's going on?-->
 发送到服务器的请求放在了最后一行，但是处理响应的代码却在上面定义了。这是怎么回事？
 
 ```js
@@ -372,10 +372,10 @@ html
  下面的代码为变量<em>ul</em>创建了一个新节点，并为其添加了一些子节点。
 
 ```js
-var ul = document.createElement(''ul'')
+var ul = document.createElement('ul')
 
 data.forEach(function(note) {
-  var li = document.createElement(''li'')
+  var li = document.createElement('li')
 
   ul.appendChild(li)
   li.appendChild(document.createTextNode(note.content))
@@ -385,7 +385,7 @@ data.forEach(function(note) {
  最后，变量<em>ul</em>的树枝被连接到整个页面的HTML树中的适当位置。
 
 ```js
-document.getElementById(''notes'').appendChild(ul)
+document.getElementById('notes').appendChild(ul)
 ```
 
 ### Manipulating the document-object from console
@@ -395,23 +395,23 @@ document.getElementById(''notes'').appendChild(ul)
 
 ![](../../images/0/15e.png)
 
-<!-- Let''s add a new note to the page from the console.-->
+<!-- Let's add a new note to the page from the console.-->
  让我们从控制台向页面添加一个新的笔记。
 
-<!-- First, we''ll get the list of notes from the page. The list is in the first ul-element of the page:-->
+<!-- First, we'll get the list of notes from the page. The list is in the first ul-element of the page:-->
  首先，我们要从页面上获得笔记的列表。列表在页面的第一个ul-元素中。
 
 
 ```js
-list = document.getElementsByTagName(''ul'')[0]
+list = document.getElementsByTagName('ul')[0]
 ```
 
 <!-- Then create a new li-element and add some text content to it:-->
  然后创建一个新的li-元素，并在其中添加一些文本内容。
 
 ```js
-newElement = document.createElement(''li'')
-newElement.textContent = ''Page manipulation from console is easy''
+newElement = document.createElement('li')
+newElement.textContent = 'Page manipulation from console is easy'
 ```
 
 <!-- And add the new li-element to the list:-->
@@ -464,7 +464,7 @@ list.appendChild(newElement)
 <!-- The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.-->
 最外层的<i>div</i>元素有<i>container</i>类。包含笔记列表的<i>ul</i>元素有<i>notes</i>类。
 
-<!-- The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element''s content and the border.-->
+<!-- The CSS rule defines that elements with the <i>container</i> class will be outlined with a one pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10 pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border.-->
  该CSS规则定义了具有<i>container</i>类的元素，将勾勒出一个一像素宽的[边框](https://developer.mozilla.org/en-US/docs/Web/CSS/border)。它还在元素上设置了10像素的[padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding)。这在元素的内容和边框之间增加了一些空隙。
 
 <!-- The second CSS rule sets the text color of the notes as blue.-->
@@ -483,7 +483,7 @@ list.appendChild(newElement)
 
 ### Loading a page containing JavaScript - review
 
-<!-- Let''s review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser.-->
+<!-- Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser.-->
  让我们回顾一下在浏览器上打开https://studies.cs.helsinki.fi/exampleapp/notes，会发生什么。
 
 ![](../../images/0/19e.png)
@@ -503,7 +503,7 @@ list.appendChild(newElement)
 
 ### Forms and HTTP POST
 
-<!-- Next let''s examine how adding a new note is done.-->
+<!-- Next let's examine how adding a new note is done.-->
  接下来让我们来看看如何添加一个新的笔记。
 
 <!-- The Notes page contains a [form-element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).-->
@@ -511,19 +511,19 @@ list.appendChild(newElement)
 
 ![](../../images/0/20e.png)
 
-<!-- When the button on the form is clicked, the browser will send the user input to the server. Let''s open the <i>Network</i> tab and see what submitting the form looks like:-->
+<!-- When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like:-->
 当表单上的按钮被点击时，浏览器将把用户的输入发送到服务器上。让我们打开<i>网络</i>标签，看看提交表单是什么样子。
 
 ![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
 
 <!-- Surprisingly, submitting the form causes no less than  <i>five</i> HTTP requests.-->
  很惊奇吧，提交表单会引起至少<i>5</i>个HTTP请求。
-<!-- The first one is the form submit event. Let''s zoom into it:-->
+<!-- The first one is the form submit event. Let's zoom into it:-->
 第一个是表单提交事件。 让我们放大一下:
 
 ![Detail view of the first request](../../images/0/22e.png)
 
-<!-- It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header''s <i>Location</i> - the address <i>notes</i>.-->
+<!-- It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.-->
 这是一个[HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST)请求，指向服务器地址<i>new_note</i>。服务器回应的是HTTP状态代码302。这是一个[URL重定向](https://en.wikipedia.org/wiki/URL_redirection)，服务器要求浏览器对头信息<i>Location</i>中定义的地址--即地址<i>notes</i>做一个新的HTTP GET请求。
 
 <!-- So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).-->
@@ -543,13 +543,13 @@ list.appendChild(newElement)
 服务器上负责POST请求的代码非常简单（注意：这个代码在服务器上，而不是在浏览器获取的JavaScript代码上）。
 
 ```js
-app.post(''/new_note'', (req, res) => {
+app.post('/new_note', (req, res) => {
   notes.push({
     content: req.body.note,
     date: new Date(),
   })
 
-  return res.redirect(''/notes'')
+  return res.redirect('/notes')
 })
 ```
 
@@ -578,7 +578,7 @@ notes.push({
 
 ### AJAX
 
-<!-- The Notes page of the application follows an early-nineties style of web development and "uses Ajax". As such, it''s on the crest of the wave of early 2000''s web technology.-->
+<!-- The Notes page of the application follows an early-nineties style of web development and "uses Ajax". As such, it's on the crest of the wave of early 2000's web technology.-->
  应用的笔记页面遵循九十年代早期的网络开发风格，"使用Ajax"，它处于2000年初网络技术浪潮的顶峰上。
 
 <!-- [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to web pages using JavaScript included within the HTML, without the need to rerender the page.-->
@@ -594,10 +594,10 @@ notes.push({
 
 <!-- The application URLs reflect the old, carefree times. JSON data is fetched from the url <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.-->
  应用的URL反映了古老的、无忧无虑的时代。JSON数据从URL <https://studies.cs.helsinki.fi/exampleapp/data.json>中获取，新的笔记被发送到URL <https://studies.cs.helsinki.fi/exampleapp/new_note>中。
-<!-- Nowadays URLs like these would not be considered acceptable, as they don''t follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we''ll look into more in [part 3](/en/part3)-->
+<!-- Nowadays URLs like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services) APIs, which we'll look into more in [part 3](/en/part3)-->
  现在像这样的URL是不会被接受的，因为它们不遵循公认的[RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services)API的惯例，我们将在[第三章](/en/part3)中进一步研究。
 
-<!-- The thing termed AJAX is now so commonplace that it''s taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.-->
+<!-- The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.-->
  称为AJAX的东西现在已经非常普遍，以至于被认为是理所当然的。这个词已经被遗忘了，新生代甚至没有听说过它。
 
 ### Single page app
@@ -608,10 +608,10 @@ notes.push({
 <!-- The Notes page gives some of the responsibility, generating the HTML code for existing notes, to the browser. The browser tackles this task by executing the JavaScript code it fetched from the server. The code fetches the notes from the server as JSON-data and adds HTML elements for displaying the notes to the page using the [DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).-->
  笔记页面把生成现有笔记的HTML代码的部分责任交给了浏览器。浏览器通过执行从服务器上获取的JavaScript代码来完成这项任务。这些代码从服务器上获取JSON数据，并使用[DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom)在页面上添加显示笔记的HTML元素。
 
-<!-- In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web-applications has emerged. SPA-style websites don''t fetch all of their pages separately from the server like our sample application does, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.-->
+<!-- In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web-applications has emerged. SPA-style websites don't fetch all of their pages separately from the server like our sample application does, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.-->
 近年来，出现了创建网络应用的[单页应用](https://en.wikipedia.org/wiki/Single-page_application) (SPA)风格。SPA风格的网站并不像我们的样例应用那样从服务器上单独获取所有的页面，而是只由一个从服务器上获取的HTML页面组成，其内容由在浏览器中执行的JavaScript来操作。
 
-<!-- The Notes page of our application bears some resemblance to SPA-style apps, but it''s not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.-->
+<!-- The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server with form submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.-->
  我们应用的笔记页面与SPA风格的应用有一些相似之处，但还没有完全达到目的。尽管渲染笔记的逻辑是在浏览器上运行的，但该页面仍然使用传统的方式来添加新的笔记。数据通过表单提交被发送到服务器，服务器通过<i>redirect</i>指示浏览器重新加载笔记页面。
 
 <!-- A single page app version of our example application can be found at <https://studies.cs.helsinki.fi/exampleapp/spa>.-->
@@ -626,7 +626,7 @@ HTML代码几乎相同，但JavaScript文件不同（<i>spa.js</i>），而且�
 <!-- The form has no <i>action</i> or <i>method</i> attributes to define how and where to send the input data.-->
  这个表单没有<i>action</i>或<i>method</i>属性来定义如何和往哪里发送输入数据。
 
-<!-- Open the <i>Network</i>-tab and empty it. When you now create a new note, you''ll notice that the browser sends only one request to the server.-->
+<!-- Open the <i>Network</i>-tab and empty it. When you now create a new note, you'll notice that the browser sends only one request to the server.-->
  打开<i>网络</i>-标签并清空它。当你现在创建一个新的笔记时，你会发现浏览器只向服务器发送了一个请求。
 
 ![](../../images/0/26e.png)
@@ -654,11 +654,11 @@ HTML代码几乎相同，但JavaScript文件不同（<i>spa.js</i>），而且�
 
 <!-- The SPA version of the app does not send the form data in the traditional way, but instead uses the JavaScript code it fetched from the server.-->
  应用的SPA版本没有以传统方式发送表单数据，而是使用了它从服务器上获取的JavaScript代码。
-<!-- We''ll look into this code a bit, even though understanding all the details of it is not important just yet.-->
+<!-- We'll look into this code a bit, even though understanding all the details of it is not important just yet.-->
  我们将研究一下这段代码，尽管还不重要理解它的所有细节。
 
 ```js
-var form = document.getElementById(''notes_form'')
+var form = document.getElementById('notes_form')
 form.onsubmit = function(e) {
   e.preventDefault()
 
@@ -668,14 +668,14 @@ form.onsubmit = function(e) {
   }
 
   notes.push(note)
-  e.target.elements[0].value = ''''
+  e.target.elements[0].value = ''
   redrawNotes()
   sendToServer(note)
 }
 ```
 
-<!-- The command <em>document.getElementById(''notes\_form'')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to the server and cause a new GET request, which we don''t want to happen.-->
- 命令<em>document.getElementById(''notes\_form'')</em>指示代码从页面上获取表单元素，并注册一个<i>事件处理程序</i>来处理表单提交事件。该事件处理程序立即调用方法<em>e.preventDefault()</em>来阻止表单提交的默认处理。默认方法会将数据发送到服务器并导致一个新的GET请求，这是我们不希望发生的。
+<!-- The command <em>document.getElementById('notes\_form')</em> instructs the code to fetch the form-element from the page, and to register an <i>event handler</i> to handle the form submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen.-->
+ 命令<em>document.getElementById('notes\_form')</em>指示代码从页面上获取表单元素，并注册一个<i>事件处理程序</i>来处理表单提交事件。该事件处理程序立即调用方法<em>e.preventDefault()</em>来阻止表单提交的默认处理。默认方法会将数据发送到服务器并导致一个新的GET请求，这是我们不希望发生的。
 
 <!-- Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server.-->
  然后事件处理函数创建了一个新的笔记，用<em>notes.push(note)</em>命令将其添加到笔记列表中，重新渲染页面上的笔记列表，并将新笔记发送到服务器。
@@ -688,9 +688,9 @@ var sendToServer = function(note) {
   var xhttpForPost = new XMLHttpRequest()
   // ...
 
-  xhttpForPost.open(''POST'', ''/new_note_spa'', true)
+  xhttpForPost.open('POST', '/new_note_spa', true)
   xhttpForPost.setRequestHeader(
-    ''Content-type'', ''application/json''
+    'Content-type', 'application/json'
   )
   xhttpForPost.send(JSON.stringify(note))
 }
@@ -701,7 +701,7 @@ var sendToServer = function(note) {
 
 <!-- The application code is available at <https://github.com/mluukkai/example_app>.-->
  应用代码可在<https://github.com/mluukkai/example_app>中找到。
-<!-- It''s worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i>, which new notes are sent to, does not adhere to current best practices.-->
+<!-- It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measure, and should not be used as an example when creating your own applications. The same is true for the URLs used. The URL <i>new\_note\_spa</i>, which new notes are sent to, does not adhere to current best practices.-->
  值得记住的是，这个应用只是为了演示课程的概念。代码在某种程度上遵循了不良的开发风格，在创建你自己的应用时，不应作为一个例子来使用。所用的URL也是如此。发送新笔记的URL <i>new_note\_spa</i>并不符合当前的最佳实践。
 
 ### JavaScript-libraries
@@ -715,14 +715,14 @@ var sendToServer = function(note) {
 <!-- jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of JavaScript, and the most popular browsers generally support basic functionalities well.-->
  jQuery是早在网络应用主要遵循服务器生成HTML页面的传统风格时开发的，这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 jQuery 来增强。。jQuery成功的原因之一是其所谓的跨浏览器兼容性。这个库无论在哪种浏览器或制造它的公司都能工作，所以不需要针对浏览器的解决方案。如今，考虑到JavaScript的发展，使用jQuery就不那么合理了，最流行的浏览器一般都能很好地支持基本功能。
 
-<!-- The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google''s [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.-->
+<!-- The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.-->
  单页应用的兴起带来了几种比jQuery更 "现代 "的网页开发方式。第一波开发者的最爱是[BackboneJS](http://backbonejs.org/)。在2012年[推出](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13)之后，谷歌的[AngularJS](https://angularjs.org/)迅速成为现代网页开发的事实标准。
 
 <!-- However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.-->
 然而，2014年10月，在[Angular团队宣布对第一版的支持将结束](https://jaxenter.com/angular-2-0-announcement-backfires-112127.html)，Angular 2不会向后兼容第一版后，Angular的人气骤降。Angular 2和较新的版本并没有得到太热烈的欢迎。
 
-<!-- Currently the most popular tool for implementing the browser-side logic of web-applications is Facebook''s [React](https://reactjs.org/) library.-->
-目前最流行的实现网络应用逻辑的浏览器端的工具是Facebook''s [React](https://reactjs.org/)库。
+<!-- Currently the most popular tool for implementing the browser-side logic of web-applications is Facebook's [React](https://reactjs.org/) library.-->
+目前最流行的实现网络应用逻辑的浏览器端的工具是Facebook's [React](https://reactjs.org/)库。
 <!-- During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together.-->
 在本课程中，我们将熟悉React和[Redux](https://github.com/reactjs/redux)库，它们经常被一起使用。
 
@@ -740,10 +740,10 @@ var sendToServer = function(note) {
 <!-- Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend.-->
  通常，我们还谈论[前端和后端](https://en.wikipedia.org/wiki/Front_and_back_ends)。浏览器是前端，在浏览器上运行的JavaScript是前端代码。另一边，服务器则是后端。
 
-<!-- In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won''t go into those.-->
+<!-- In the context of this course, full stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those.-->
 在本课程中，全栈式网络开发意味着我们关注应用的所有部分：前端、后端和数据库。有时，服务器上的软件和它的操作系统也被看作是堆栈的一部分，但我们不会去研究这些。
 
-<!-- We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it''s not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack.-->
+<!-- We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full stack web development a whole new dimension. However, it's not a requirement of full stack web development to use the same programming language (JavaScript) for all layers of the stack.-->
  我们将使用[Node.js](https://nodejs.org/en/)运行环境，用JavaScript对后端进行编码。在堆栈的多个层次上使用相同的编程语言给全栈网络开发带来了一个全新的层面。然而，全栈网络开发并不要求所有的栈都使用相同的编程语言（JavaScript）。
 
 <!-- It used to be more common for developers to specialize in one layer of the stack, for example the backend. Technologies on the backend and the frontend were quite different. With the Full stack trend, it has become common for developers to be proficient on all layers of the application and the database. Oftentimes, full stack developers must also have enough configuration and administration skills to operate their application, for example, in the cloud.-->
@@ -751,13 +751,13 @@ var sendToServer = function(note) {
 
 ### JavaScript fatigue
 
-<!-- Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you''d expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating on the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable.-->
+<!-- Full stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating on the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable.-->
 全栈 web 开发在许多方面都具有挑战性。 在许多地方会有突发情况，并且调试起来比普通桌面应用要困难得多。 JavaScript (与许多其他语言相比) 并不总是像你期望的那样工作 ，其运行时环境的异步工作方式带来了各种各样的挑战。 网络中的通信需要对 http 协议的知识储备。 还必须处理数据库、服务器管理和配置。 了解足够的 CSS 至少在一定程度上能够使应用显得好看。
 
 <!-- The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: <em>JavaScript fatigue</em>. See [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) or [JavaScript fatigue on Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).-->
  JavaScript的世界发展迅速，这带来了它自己的一系列挑战。工具、库和语言本身都在不断发展。有些人开始对这种不断的变化感到厌倦，并为此创造了一个术语。<em>JavaScript 疲劳</em>。可以阅读[auth0上的如何管理JavaScript疲劳](https://auth0.com/blog/how-to-manage-javascript-fatigue/) 或[Medium上的JavaScript疲劳](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4)。
 
-<!-- You will suffer from JavaScript fatigue yourself during this course. Fortunately for us, there are a few ways to smooth the learning curve, and we can start with coding instead of configuration. We can''t avoid configuration completely, but we can merrily push ahead in the next few weeks while avoiding the worst of configuration hells.-->
+<!-- You will suffer from JavaScript fatigue yourself during this course. Fortunately for us, there are a few ways to smooth the learning curve, and we can start with coding instead of configuration. We can't avoid configuration completely, but we can merrily push ahead in the next few weeks while avoiding the worst of configuration hells.-->
 在这个课程中，你自己也会遭受到JavaScript的疲劳。幸运的是，有一些方法可以使学习曲线变得平滑，我们可以从编码而不是配置开始。我们不能完全避免配置，但我们可以在接下来的几周里愉快地推进，同时避开最糟糕的配置地狱。
 
 </div>
@@ -799,7 +799,7 @@ part2
 <!-- Review the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).-->
 通过阅读Mozilla的这个教程来复习HTML的基础知识：[HTML教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)。
 
-<i>This exercise is not submitted to GitHub, it''s enough to just read the tutorial</i>
+<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
 
@@ -809,7 +809,7 @@ part2
 <!-- Review the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).-->
  通过阅读Mozilla的这个教程来复习CSS的基础知识：[CSS教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)。
 
-<i>This exercise is not submitted to GitHub, it''s enough to just read the tutorial</i>
+<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
 
@@ -817,10 +817,10 @@ part2
 
  <h4>0.3: HTML表单</h4> 
 
-<!-- Learn about the basics of HTML forms by reading Mozilla''s tutorial [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).-->
+<!-- Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).-->
  通过阅读Mozilla的教程[你的第一个表单](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form)来了解HTML表单的基础知识。
 
-<i>This exercise is not submitted to GitHub, it''s enough to just read the tutorial</i>
+<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
 
@@ -884,7 +884,7 @@ end note
 <!-- Create a diagram depicting the situation where the user creates a new note using the single page version of the app.-->
  创建一个图表，描述用户使用单页版应用创建新笔记的情况。
 
-<!-- This was the last exercise, and it''s time to push your answers to GitHub and mark the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是最后一个练习，是时候把你的答案推送到GitHub，并在[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)中标记练习完成。
 
 </div>

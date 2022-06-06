@@ -6,13 +6,13 @@ lang: zh
 ---
 
 <div class="content">
-<!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let''s start off with making a simple React application as well as getting to know the core concepts of React.-->
+<!-- We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off with making a simple React application as well as getting to know the core concepts of React.-->
  我们现在将开始入门的可能是本课程最重要的主题，即[React](https://reactjs.org/)-库。让我们从制作一个简单的React应用开始，同时了解React的核心概念。
 
 <!-- The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.-->
  到目前为止，最简单的方法是使用一个叫做[create-react-app](https://github.com/facebook/create-react-app)的工具来开始。如果随Node一起安装的<i>npm</i>工具的版本号是<i>5.3</i>以上，那么在你的机器上安装<i>create-react-app</i>是可行的（但不是必须的）。
 
-<!-- Let''s create an application called <i>part1</i> and navigate to its directory.-->
+<!-- Let's create an application called <i>part1</i> and navigate to its directory.-->
  让我们创建一个名为<i>part1</i>的应用，并进入其目录。
 
 ```bash
@@ -35,16 +35,16 @@ npm start
 
 ![](../../images/1/1e.png)
 
-<!-- The code of the application resides in the <i>src</i> folder. Let''s simplify the default code such that the contents of the file <i>index.js</i> look like:-->
- 应用的代码位于<i>src</i>文件夹中。让我们简化默认代码，使文件<i>index.js</i>的内容看起来像：
+<!-- The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:-->
+ 应用的代码位于<i>src</i>文件夹中。让我们简化默认代码，使文件<i>index.js</i>的内容如下所示：
 
 ```js
-import React from ''react''
-import ReactDOM from ''react-dom/client''
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-import App from ''./App''
+import App from './App'
 
-ReactDOM.createRoot(document.getElementById(''root'')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 <!-- and file <i>App.js</i> looks like this-->
@@ -93,16 +93,16 @@ ReactDOM.render(<App />, document.getElementById("root"))
  文件<i>App.js</i>现在定义了一个名为<i>App</i>的[React组件](https://reactjs.org/docs/components-and-props.html)。在文件<i>index.js</i>的最后一行的命令：
 
 ```js
-ReactDOM.createRoot(document.getElementById(''root'')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-<!-- renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value ''root''.-->
- 将其内容渲染到<i>div</i>-元素中，该元素在文件<i>public/index.html</i>中定义，其<i>id</i>值为''root''。
+<!-- renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'.-->
+ 将其内容渲染到<i>div</i>-元素中，该元素在文件<i>public/index.html</i>中定义，其<i>id</i>值为'root'。
 
-<!-- By default, the file <i>public/index.html</i> doesn''t contain any HTML markup that is visible to us in the browser. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components.-->
+<!-- By default, the file <i>public/index.html</i> doesn't contain any HTML markup that is visible to us in the browser. You can try adding some HTML into the file. However, when using React, all content that needs to be rendered is usually defined as React components.-->
  默认情况下，文件<i>public/index.html</i>不包含任何我们在浏览器中可见的HTML标记。你可以尝试在该文件中添加一些HTML。当使用React时，所有需要渲染的内容通常被定义为React组件。
 
-<!-- Let''s take a closer look at the code defining the component:-->
+<!-- Let's take a closer look at the code defining the component:-->
  让我们仔细看一下定义组件的代码。
 
 ```js
@@ -158,7 +158,7 @@ const App = () => {
 
 ```js
 const App = () => {
-  console.log(''Hello from component'')
+  console.log('Hello from component')
   return (
     <div>
       <p>Hello world</p>
@@ -196,10 +196,10 @@ const App = () => {
 ### JSX
 
 <!-- It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.-->
- 看起来React组件返回的是HTML标记。然而，事实并非如此。React组件的布局大多是用[JSX](https://reactjs.org/docs/introducing-jsx.html)编写的。虽然JSX看起来像HTML，但我们实际上是在处理一种写JavaScript的方式。底层上，由React组件返回的JSX被编译成JavaScript。
+ 看起来React组件返回的是HTML标记。然而，事实并非如此。React组件的布局大多是用[JSX](https://reactjs.org/docs/introducing-jsx.html)编写的。虽然JSX如下所示：HTML，但我们实际上是在处理一种写JavaScript的方式。底层上，由React组件返回的JSX被编译成JavaScript。
 
 <!-- After compiling, our application looks like this:-->
- 编译后，我们的应用看起来像这样。
+ 编译后，我们的应用如下所示：
 
 ```js
 const App = () => {
@@ -207,13 +207,13 @@ const App = () => {
   const a = 10
   const b = 20
   return React.createElement(
-    ''div'',
+    'div',
     null,
     React.createElement(
-      ''p'', null, ''Hello world, it is '', now.toString()
+      'p', null, 'Hello world, it is ', now.toString()
     ),
     React.createElement(
-      ''p'', null, a, '' plus '', b, '' is '', a + b
+      'p', null, a, ' plus ', b, ' is ', a + b
     )
   )
 }
@@ -244,7 +244,7 @@ const App = () => {
 
 ### Multiple components
 
-<!-- Let''s modify the file <i>App.js</i> as follows (NB: export at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work):-->
+<!-- Let's modify the file <i>App.js</i> as follows (NB: export at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work):-->
  让我们修改文件<i>App.js</i>如下（注：在这些<i>示例</i>中，底部的export 部分被省略，现在和将来都是如此。但它仍然是代码正常工作所必须的）。
 
 ```js
@@ -297,7 +297,7 @@ const App = () => {
 <!-- It is possible to pass data to components using so called [props](https://reactjs.org/docs/components-and-props.html).-->
 可以使用所谓的[props](https://reactjs.org/docs/components-and-props.html)向组件传递数据。
 
-<!-- Let''s modify the component <i>Hello</i> as follows-->
+<!-- Let's modify the component <i>Hello</i> as follows-->
  让我们对组件<i>Hello</i>做如下修改
 
 ```js
@@ -331,7 +331,7 @@ const App = () => {
 <!-- There can be an arbitrary number of props and their values can be "hard coded" strings or results of JavaScript expressions. If the value of the prop is achieved using JavaScript it must be wrapped with curly braces.-->
  可以有任意数量的prop，它们的值可以是 "硬编码 "的字符串或JavaScript表达式的结果。如果prop的值是用JavaScript实现的，它必须用大括号来包裹。
 
-<!-- Let''s modify the code so that the component <i>Hello</i> uses two props:-->
+<!-- Let's modify the code so that the component <i>Hello</i> uses two props:-->
  让我们修改代码，让组件<i>Hello</i>使用两个props。
 
 ```js
@@ -346,7 +346,7 @@ const Hello = (props) => {
 }
 
 const App = () => {
-  const name = ''Peter'' // highlight-line
+  const name = 'Peter' // highlight-line
   const age = 10       // highlight-line
 
   return (
@@ -445,7 +445,7 @@ const App = () => {
 
 ```js
 const App = () => {
-  const name = ''Peter''
+  const name = 'Peter'
   const age = 10
 
   return (
@@ -513,12 +513,12 @@ part2
  使用create-react-app来初始化一个新的应用。修改<i>index.js</i>如下：
 
 ```js
-import React from ''react''
-import ReactDOM from ''react-dom/client''
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-import App from ''./App''
+import App from './App'
 
-ReactDOM.createRoot(document.getElementById(''root'')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 <!-- and <i>App.js</i> to match the following-->
@@ -526,12 +526,12 @@ ReactDOM.createRoot(document.getElementById(''root'')).render(<App />)
 
 ```js
 const App = () => {
-  const course = ''Half Stack application development''
-  const part1 = ''Fundamentals of React''
+  const course = 'Half Stack application development'
+  const part1 = 'Fundamentals of React'
   const exercises1 = 10
-  const part2 = ''Using props to pass data''
+  const part2 = 'Using props to pass data'
   const exercises2 = 7
-  const part3 = ''State of a component''
+  const part3 = 'State of a component'
   const exercises3 = 14
 
   return (
@@ -563,7 +563,7 @@ export default App
 <!-- Define the new components in file <i>App.js</i>.-->
  在文件<i>App.js</i>中定义新组件。
 
-<!-- The <i>App</i> component''s body will approximately be as follows:-->
+<!-- The <i>App</i> component's body will approximately be as follows:-->
  <i>App</i>组件的主体将大致如下：
 
 ```js
