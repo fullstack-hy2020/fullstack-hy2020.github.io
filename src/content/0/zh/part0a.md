@@ -31,7 +31,7 @@ lang: zh
 <!-- In many parts of the course, the exercises build one larger application one small piece at a time. Some of the exercise applications are developed through multiple parts.-->
  在本课程的许多章节，是通过练习构建一个较大的应用，一次构建一小块。也有些练习的应用是贯穿多个章节进行构建的。
 
-<!-- The course material is based on incrementally expanding example applications, which change from part to part. It''s best to follow the code along while making small modifications independently. The code of the example applications for each step of each part can be found on GitHub.-->
+<!-- The course material is based on incrementally expanding example applications, which change from part to part. It's best to follow the code along while making small modifications independently. The code of the example applications for each step of each part can be found on GitHub.-->
 课程教材是基于逐步扩展的实例应用，这些实例应用在各个章节中都有变化。最好是跟着代码走，同时独立进行小的修改。在GitHub上可以找到每个章节每一步的示例代码。
 
 ### Taking the course
@@ -136,7 +136,7 @@ lang: zh
  - [申请第九章节的学分](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits)。
 
 #### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
-<!-- By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part''s prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native).-->
+<!-- By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in[part 10](/en/part10/introduction_to_react_native).-->
  通过提交第10章节关于React Native课程的25道练习题，你可以获得两个额外的学分。关于这章节的先决条件、练习提交和学分的更多信息可以在[第10章节](/en/part10/introduction_to_react_native)找到。
 <!-- - Submit at least 25 exercises for part 10.-->
 
@@ -148,7 +148,7 @@ lang: zh
 
 #### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
 
-<!-- By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. More information about this part''s prerequisites and exercise submission can be found in [part 11](/en/part11).-->
+<!-- By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).-->
  通过提交持续集成/交付课程第11章节的所有练习，你可以获得一个额外的学分。关于这部分的先决条件和练习提交的更多信息可以在[第11章节](/en/part11)中找到。
 <!-- - Submit all exercises for part 11.-->
 
@@ -160,7 +160,7 @@ lang: zh
 
 #### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
 
-<!-- By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part''s prerequisites and exercise submission can be found in [part 12](/en/part12).-->
+<!-- By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).-->
  通过提交第12章节关于容器技术课程的所有练习，你可以获得一个额外的学分。关于这部分的先决条件和练习提交的更多信息可以在[第12章节](/en/part12)中找到。
 <!-- - Submit all exercises for part 12.-->
 
@@ -172,7 +172,7 @@ lang: zh
 
 #### Part 13 - Full Stack Web Development: relational databases (1 cr, CSM14114)
 
-<!-- By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part''s prerequisites and exercise submission can be found in [part 13](/en/part13).-->
+<!-- By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).-->
  通过提交关系数据库课程第13章节的所有练习，你可以获得一个额外的学分。关于这章节的先决条件和练习提交的更多信息可以在[第13章节](/en/part13)中找到。
 <!-- - Submit all exercises for part 13.-->
 
@@ -417,13 +417,13 @@ lang: zh
 <!-- Install some sensible text editor that supports web development. [Visual Studio Code](https://code.visualstudio.com/) is highly recommended.-->
  安装一些支持 Web 开发的趁手的文本编辑器。强烈推荐[Visual Studio Code](https://code.visualstudio.com/)。
 
-<!-- Don''t code with nano, Notepad or Gedit. NetBeans isn''t very good for web development either. It is also rather heavy in comparison to Visual Studio Code.-->
+<!-- Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.-->
 不要用nano、Notepad或Gedit编码。NetBeans对于网络开发也不是很好。与Visual Studio Code相比，也是相当重的。
 
-<!-- Also install [Node.js](https://nodejs.org/en/). The material has been done with version 16.13.2, so don''t install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).-->
+<!-- Also install [Node.js](https://nodejs.org/en/). The material has been done with version 16.13.2, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).-->
 同时安装[Node.js](https://nodejs.org/en/)。教材是用16.13.2版本完成的，所以不要安装任何比这更早的版本。参见[Node.js安装说明](https://nodejs.org/en/download/package-manager/)。
 
-<!-- Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we''ll need a few times.-->
+<!-- Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.-->
  Node软件包管理器[npm](https://www.npmjs.com/get-npm)将与Node.js一起自动安装。我们将在整个课程中积极使用npm。Node还带有[npx](https://www.npmjs.com/package/npx)，我们会有几次需要它。
 
 ### Typos in the material

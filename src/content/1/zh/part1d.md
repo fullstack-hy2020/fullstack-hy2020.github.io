@@ -35,25 +35,25 @@ npm install
 ```
 
 <!-- Note that also the file <i>index.js</i> needs to be changed a bit. For React 17 it looks like-->
- 注意，文件<i>index.js</i>也需要做一些改变。对于React 17，它看起来像
+ 注意，文件<i>index.js</i>也需要做一些改变。对于React 17，它如下所示：
 
 ```js
-import ReactDOM from ''react-dom''
-import App from ''./App''
+import ReactDOM from 'react-dom'
+import App from './App'
 
-ReactDOM.render(<App />, document.getElementById(''root''))
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 <!-- but for React 18 the correct form is-->
  但对于React 18，正确的形式是
 
 ```js
-import React from ''react''
-import ReactDOM from ''react-dom/client''
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-import App from ''./App''
+import App from './App'
 
-ReactDOM.createRoot(document.getElementById(''root'')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 ### Complex state
@@ -90,7 +90,7 @@ const App = () => {
 <!-- The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.-->
  该组件可以访问函数_setLeft_和_setRight_，它可以用来更新这两个状态片断。
 
-<!-- The component''s state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:-->
+<!-- The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:-->
  组件的状态或其状态的一部分可以是任何类型。我们可以通过将<i>left</i>和<i>right</i>按钮的点击次数保存在一个对象中来实现同样的功能。
 ```js
 {
@@ -100,7 +100,7 @@ const App = () => {
 ```
 
 <!-- In this case the application would look like this:-->
- 在这种情况下，应用将看起来像这样。
+ 在这种情况下，应用将如下所示：
 
 ```js
 const App = () => {
@@ -209,7 +209,7 @@ const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
-<!-- Some readers might be wondering why we didn''t just update the state directly, like this:-->
+<!-- Some readers might be wondering why we didn't just update the state directly, like this:-->
  有些读者可能想知道为什么我们不直接更新状态，就像这样。
 
 ```js
@@ -222,7 +222,7 @@ const handleLeftClick = () => {
 <!-- The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since [it can result in unexpected side effects](https://stackoverflow.com/a/66799937/10012446). Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object, and setting that as the new state.-->
  该应用似乎可以工作。然而，<i>在React中是禁止直接改变状态的</i>，因为[它可能导致意想不到的副作用](https://stackoverflow.com/a/66799937/10012446)。改变状态必须始终通过将状态设置为一个新的对象来完成。如果前一个状态对象的属性没有改变，它们需要简单地复制，这可以通过将这些属性复制到一个新的对象中，并将其设置为新的状态来完成。
 
-<!-- Storing all of the state in a single state object is a bad choice for this particular application; there''s no apparent benefit and the resulting application is a lot more complex. In this case storing the click counters into separate pieces of state is a far more suitable choice.-->
+<!-- Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case storing the click counters into separate pieces of state is a far more suitable choice.-->
  将所有的状态存储在一个单一的状态对象中，对于这个特殊的应用来说是一个糟糕的选择；没有明显的好处，而且由此产生的应用也更加复杂。在这种情况下，将点击计数器存储在不同的状态中是一个更合适的选择。
 
 <!-- There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.-->
@@ -230,7 +230,7 @@ const handleLeftClick = () => {
 
 ### Handling arrays
 
-<!-- Let''s add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.-->
+<!-- Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.-->
  让我们为我们的应用添加一块状态，其中包含一个数组_allClicks_，它可以记住应用中发生的每一次点击。
 
 ```js
@@ -241,14 +241,14 @@ const App = () => {
 
 // highlight-start
   const handleLeftClick = () => {
-    setAll(allClicks.concat(''L''))
+    setAll(allClicks.concat('L'))
     setLeft(left + 1)
   }
 // highlight-end
 
 // highlight-start
   const handleRightClick = () => {
-    setAll(allClicks.concat(''R''))
+    setAll(allClicks.concat('R'))
     setRight(right + 1)
   }
 // highlight-end
@@ -259,7 +259,7 @@ const App = () => {
       <button onClick={handleLeftClick}>left</button>
       <button onClick={handleRightClick}>right</button>
       {right}
-      <p>{allClicks.join('' '')}</p> // highlight-line
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -277,7 +277,7 @@ const [allClicks, setAll] = useState([])
 
 ```js
 const handleLeftClick = () => {
-  setAll(allClicks.concat(''L''))
+  setAll(allClicks.concat('L'))
   setLeft(left + 1)
 }
 ```
@@ -285,21 +285,21 @@ const handleLeftClick = () => {
 <!-- The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, that does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.-->
  存储在_allClicks_中的那块状态现在被设置为一个数组，它包含了之前状态数组的所有项目和字母<i>L</i>。将新的项目添加到数组中是通过[concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat)方法完成的，该方法并不改变现有的数组，而是返回一个<i>数组的新副本</i>，并将项目添加到其中。
 
-<!-- As mentioned previously, it''s also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:-->
+<!-- As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:-->
  如前所述，在JavaScript中也可以用[push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push)方法向数组中添加项。如果我们通过把项目推送到_allClicks_数组中，然后更新状态来添加项目，这个应用看起来仍然可以工作。
 
 ```js
 const handleLeftClick = () => {
-  allClicks.push(''L'')
+  allClicks.push('L')
   setAll(allClicks)
   setLeft(left + 1)
 }
 ```
 
-<!-- However, __don''t__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.-->
+<!-- However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.-->
  然而，_不要_样做。如前所述，像_allClicks_这样的React组件的状态是不能直接改变的。即使改变状态在某些情况下看起来是有效的，它也会导致很难调试的问题。
 
-<!-- Let''s take a closer look at how the clicking-->
+<!-- Let's take a closer look at how the clicking-->
  让我们仔细看一下点击的情况
 <!-- is rendered to the page:-->
 是如何被渲染到页面上的。
@@ -314,7 +314,7 @@ const App = () => {
       <button onClick={handleLeftClick}>left</button>
       <button onClick={handleRightClick}>right</button>
       {right}
-      <p>{allClicks.join('' '')}</p> // highlight-line
+      <p>{allClicks.join(' ')}</p> // highlight-line
     </div>
   )
 }
@@ -325,7 +325,7 @@ const App = () => {
 
 ### Conditional rendering
 
-<!-- Let''s modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:-->
+<!-- Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:-->
  让我们修改我们的应用，使点击历史的渲染由一个新的<i>History</i>组件来处理。
 
 ```js
@@ -341,7 +341,7 @@ const History = (props) => {
 
   return (
     <div>
-      button press history: {props.allClicks.join('' '')}
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
 }
@@ -374,7 +374,7 @@ const App = () => {
 
 ```js
 <div>
-  button press history: {props.allClicks.join('' '')}
+  button press history: {props.allClicks.join(' ')}
 </div>
 ```
 
@@ -384,7 +384,7 @@ const App = () => {
 <!-- React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).-->
  React还提供了许多其他的方法来进行[条件渲染](https://reactjs.org/docs/conditional-rendering.html)。我们将在[第二章节](/en/part2)中仔细研究。
 
-<!-- Let''s make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:-->
+<!-- Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:-->
  让我们对我们的应用做最后一次修改，使用我们先前定义的_Button_组件重构它。
 
 ```js
@@ -399,7 +399,7 @@ const History = (props) => {
 
   return (
     <div>
-      button press history: {props.allClicks.join('' '')}
+      button press history: {props.allClicks.join(' ')}
     </div>
   )
 }
@@ -418,12 +418,12 @@ const App = () => {
   const [allClicks, setAll] = useState([])
 
   const handleLeftClick = () => {
-    setAll(allClicks.concat(''L''))
+    setAll(allClicks.concat('L'))
     setLeft(left + 1)
   }
 
   const handleRightClick = () => {
-    setAll(allClicks.concat(''R''))
+    setAll(allClicks.concat('R'))
     setRight(right + 1)
   }
 
@@ -431,8 +431,8 @@ const App = () => {
     <div>
       {left}
       // highlight-start
-      <Button handleClick={handleLeftClick} text=''left'' />
-      <Button handleClick={handleRightClick} text=''right'' />
+      <Button handleClick={handleLeftClick} text='left' />
+      <Button handleClick={handleRightClick} text='right' />
       // highlight-end
       {right}
       <History allClicks={allClicks} />
@@ -454,7 +454,7 @@ const App = () => {
 
 ### Debugging React applications
 
-<!-- A large part of a typical developer''s time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.-->
+<!-- A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.-->
  一个典型的开发者的大部分时间都花在调试和阅读现有的代码上。偶尔我们也会写一两行新的代码，但我们的大部分时间都花在试图弄清楚为什么某个东西坏了或某个东西是如何工作的。因此，良好的调试实践和工具是非常重要的。
 
 <!-- Lucky for us, React is an extremely developer-friendly library when it comes to debugging.-->
@@ -465,7 +465,7 @@ const App = () => {
 
 <h4>The first rule of web development</h4>
 
-<!-- >  **Keep the browser''s developer console open at all times.**-->
+<!-- >  **Keep the browser's developer console open at all times.**-->
  > **始终保持浏览器的开发者控制台是打开的**。
 <!-- >-->
  >
@@ -480,7 +480,7 @@ const App = () => {
 
 ![](../../images/1/6x.png)
 
-<!-- don''t write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.-->
+<!-- don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.-->
 不要写更多的代码，而是要**立即**找到并解决这个问题。在编码的历史上，还没有出现过这样的时刻：在编写了大量的额外代码之后，无法编译的代码会奇迹般地开始工作。我非常怀疑在这个课程中是否会发生这样的事情。
 
 <!-- Old school, print-based debugging is always a good idea. If the component-->
@@ -494,7 +494,7 @@ const Button = ({ onClick, text }) => (
 )
 ```
 
-<!-- is not working as intended, it''s useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:-->
+<!-- is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:-->
 不能按预期工作，开始将其变量打印到控制台是很有用的。为了有效地做到这一点，我们必须将我们的函数转化为不太紧凑的形式，并接收整个props对象，而不是立即对其进行解构处理。
 
 ```js
@@ -512,18 +512,18 @@ const Button = (props) => {
 <!-- This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.-->
  这将立即显示出，例如，在使用该组件时，其中一个属性被拼错了。
 
-<!-- **NB** When you use _console.log_ for debugging, don''t combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:-->
+<!-- **NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:-->
  **NB** 当你使用_console.log_进行调试时，不要用加号运算符以类似Java的方式组合_objects_。不是写：
 
 ```js
-console.log(''props value is '' + props)
+console.log('props value is ' + props)
 ```
 
 <!-- Separate the things you want to log to the console with a comma:-->
 而是用逗号把你想记录到控制台的东西分开。
 
 ```js
-console.log(''props value is'', props)
+console.log('props value is', props)
 ```
 
 <!-- If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:-->
@@ -536,7 +536,7 @@ props value is [Object object]
 <!-- Whereas the items separated by a comma will all be available in the browser console for further inspection.-->
  而用逗号分隔的项目将在浏览器控制台中全部可用，以供进一步检查。
 
-<!-- Logging to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console''s <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.-->
+<!-- Logging to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.-->
  记录到控制台决不是调试我们的应用的唯一方法。您可以在Chrome开发者控制台的<i>调试器</i>中暂停应用代码的执行，方法是在代码的任何地方写下[debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger)命令。
 
 <!-- The execution will pause once it arrives at a point where the _debugger_ command gets executed:-->
@@ -555,7 +555,7 @@ props value is [Object object]
 <!-- The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Sources</i> tab.-->
  调试器也使我们能够通过<i>Sources</i>标签右侧的控件来逐行执行我们的代码。
 
-<!-- You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component''s variables can be done in the _Scope_-section:-->
+<!-- You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:-->
 你也可以通过在<i>Sources</i>标签中添加断点来访问调试器，而不用_debugger_命令。检查组件的变量值可以在_Scope_部分完成。
 
 ![](../../images/1/9a.png)
@@ -566,7 +566,7 @@ props value is [Object object]
 ![](../../images/1/10ea.png)
 
 
-<!-- The _App_ component''s state is defined like so:-->
+<!-- The _App_ component's state is defined like so:-->
  _App_组件的状态是这样定义的。
 
 ```js
@@ -588,7 +588,7 @@ const [allClicks, setAll] = useState([])
 <!-- There are a few limitations and rules we have to follow to ensure that our application uses hooks-based state functions correctly.-->
  为了确保我们的应用正确使用基于钩子的状态函数，有一些限制和规则是我们必须遵循的。
 
-<!-- The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn''t the case the application will behave erratically.-->
+<!-- The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.-->
  _useState_函数（以及课程后面介绍的_useEffect_函数）<i>不能从循环、条件表达式或任何不是定义组件的函数的地方调用</i>。这样做是为了确保钩子总是以相同的顺序被调用，如果不是这样的话，应用将表现得不正常。
 
 <!-- To recap, hooks may only be called from the inside of a function body that defines a React component:-->
@@ -598,7 +598,7 @@ const [allClicks, setAll] = useState([])
 const App = () => {
   // these are ok
   const [age, setAge] = useState(0)
-  const [name, setName] = useState(''Juha Tauriainen'')
+  const [name, setName] = useState('Juha Tauriainen')
 
   if ( age > 10 ) {
     // this does not work!
@@ -629,7 +629,7 @@ const App = () => {
 <!-- For this reason we will revisit the topic.-->
 由于这个原因，我们将重新审视这个话题。
 
-<!-- Let''s assume that we''re developing this simple application with the following component <i>App</i>:-->
+<!-- Let's assume that we're developing this simple application with the following component <i>App</i>:-->
  让我们假设我们在开发这个简单的应用时使用以下组件<i>App</i>。
 ```js
 const App = () => {
@@ -697,7 +697,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
  那下面的情况呢。
 
 ```js
-<button onClick={console.log(''clicked the button'')}>
+<button onClick={console.log('clicked the button')}>
   button
 </button>
 ```
@@ -724,13 +724,13 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 当按钮被点击时，执行一个特定的函数调用可以这样完成。
 
 ```js
-<button onClick={() => console.log(''clicked the button'')}>
+<button onClick={() => console.log('clicked the button')}>
   button
 </button>
 ```
 
-<!-- Now the event handler is a function defined with the arrow function syntax _() => console.log(''clicked the button'')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.-->
- 现在事件处理程序是一个用箭头函数语法_() => console.log(''clicked the button'')_定义的函数。当组件被渲染时，没有函数被调用，只有箭头函数的引用被设置为事件处理程序。只有当按钮被点击时才会调用该函数。
+<!-- Now the event handler is a function defined with the arrow function syntax _() => console.log('clicked the button')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.-->
+ 现在事件处理程序是一个用箭头函数语法_() => console.log('clicked the button')_定义的函数。当组件被渲染时，没有函数被调用，只有箭头函数的引用被设置为事件处理程序。只有当按钮被点击时才会调用该函数。
 
 <!-- We can implement resetting the state in our application with this same technique:-->
  我们可以用同样的技术在我们的应用中实现重置状态。
@@ -753,7 +753,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const handleClick = () =>
-    console.log(''clicked the button'')
+    console.log('clicked the button')
 
   return (
     <div>
@@ -780,7 +780,7 @@ const App = () => {
 
   // highlight-start
   const handleClick = () => {
-    console.log(''clicked the button'')
+    console.log('clicked the button')
     setValue(0)
   }
    // highlight-end
@@ -799,10 +799,10 @@ const App = () => {
 <!-- Another way to define an event handler is to use <i>function that returns a function</i>.-->
  另一种定义事件处理程序的方法是使用<i>返回函数的函数</i>。
 
-<!-- You probably won''t need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.-->
+<!-- You probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.-->
  在本课程的任何练习中，你可能都不需要使用返回函数的函数。  如果这个话题看起来特别令人困惑，你可以暂时跳过这一节，以后再来讨论。
 
-<!-- Let''s make the following changes to our code:-->
+<!-- Let's make the following changes to our code:-->
  让我们对我们的代码做如下修改。
 
 ```js
@@ -811,7 +811,7 @@ const App = () => {
 
   // highlight-start
   const hello = () => {
-    const handler = () => console.log(''hello world'')
+    const handler = () => console.log('hello world')
 
     return handler
   }
@@ -844,7 +844,7 @@ const App = () => {
 
 ```js
 const hello = () => {
-  const handler = () => console.log(''hello world'')
+  const handler = () => console.log('hello world')
 
   return handler
 }
@@ -864,7 +864,7 @@ const hello = () => {
  它把_hello()_的返回值分配给onClick属性。本质上，这一行被转化为。
 
 ```js
-<button onClick={() => console.log(''hello world'')}>
+<button onClick={() => console.log('hello world')}>
   button
 </button>
 ```
@@ -872,10 +872,10 @@ const hello = () => {
 <!-- Since the _hello_ function returns a function, the event handler is now a function.-->
  由于_hello_函数返回一个函数，事件处理程序现在是一个函数。
 
-<!-- What''s the point of this concept?-->
+<!-- What's the point of this concept?-->
  这个概念的重点是什么？
 
-<!-- Let''s change the code a tiny bit:-->
+<!-- Let's change the code a tiny bit:-->
  让我们稍微改变一下代码。
 
 ```js
@@ -885,7 +885,7 @@ const App = () => {
   // highlight-start
   const hello = (who) => {
     const handler = () => {
-      console.log(''hello'', who)
+      console.log('hello', who)
     }
 
     return handler
@@ -896,9 +896,9 @@ const App = () => {
     <div>
       {value}
   // highlight-start
-      <button onClick={hello(''world'')}>button</button>
-      <button onClick={hello(''react'')}>button</button>
-      <button onClick={hello(''function'')}>button</button>
+      <button onClick={hello('world')}>button</button>
+      <button onClick={hello('react')}>button</button>
+      <button onClick={hello('function')}>button</button>
   // highlight-end
     </div>
   )
@@ -912,15 +912,15 @@ const App = () => {
  第一个按钮被定义为
 
 ```js
-<button onClick={hello(''world'')}>button</button>
+<button onClick={hello('world')}>button</button>
 ```
 
-<!-- The event handler is created by <i>executing</i> the function call _hello(''world'')_. The function call returns the function:-->
- 事件处理程序是通过<i>执行</i>函数调用_hello(''''world'''')_创建的。该函数调用返回函数。
+<!-- The event handler is created by <i>executing</i> the function call _hello('world')_. The function call returns the function:-->
+ 事件处理程序是通过<i>执行</i>函数调用_hello("world")_创建的。该函数调用返回函数。
 
 ```js
 () => {
-  console.log(''hello'', ''world'')
+  console.log('hello', 'world')
 }
 ```
 
@@ -928,15 +928,15 @@ const App = () => {
  第二个按钮被定义为。
 
 ```js
-<button onClick={hello(''react'')}>button</button>
+<button onClick={hello('react')}>button</button>
 ```
 
-<!-- The function call _hello(''react'')_ that creates the event handler returns:-->
- 创建事件处理程序的函数调用_hello(''react'')_返回。
+<!-- The function call _hello('react')_ that creates the event handler returns:-->
+ 创建事件处理程序的函数调用_hello('react')_返回。
 
 ```js
 () => {
-  console.log(''hello'', ''react'')
+  console.log('hello', 'react')
 }
 ```
 
@@ -952,20 +952,20 @@ const App = () => {
 ```js
 const hello = (who) => {
   const handler = () => {
-    console.log(''hello'', who)
+    console.log('hello', who)
   }
 
   return handler
 }
 ```
 
-<!-- Let''s eliminate the helper variables and directly return the created function:-->
+<!-- Let's eliminate the helper variables and directly return the created function:-->
  让我们去掉辅助变量，直接返回创建的函数。
 
 ```js
 const hello = (who) => {
   return () => {
-    console.log(''hello'', who)
+    console.log('hello', who)
   }
 }
 ```
@@ -976,20 +976,20 @@ const hello = (who) => {
 ```js
 const hello = (who) =>
   () => {
-    console.log(''hello'', who)
+    console.log('hello', who)
   }
 ```
 
-<!-- Lastly, let''s write all of the arrows on the same line:-->
+<!-- Lastly, let's write all of the arrows on the same line:-->
  最后，让我们把所有的箭头写在同一行。
 
 ```js
 const hello = (who) => () => {
-  console.log(''hello'', who)
+  console.log('hello', who)
 }
 ```
 
-<!-- We can use the same trick to define event handlers that set the state of the component to a given value. Let''s make the following changes to our code:-->
+<!-- We can use the same trick to define event handlers that set the state of the component to a given value. Let's make the following changes to our code:-->
  我们可以使用同样的技巧来定义事件处理程序，将组件的状态设置为一个给定的值。让我们对我们的代码做如下修改。
 
 ```js
@@ -998,7 +998,7 @@ const App = () => {
 
   // highlight-start
   const setToValue = (newValue) => () => {
-    console.log(''value now'', newValue)  // print the new value to console
+    console.log('value now', newValue)  // print the new value to console
     setValue(newValue)
   }
   // highlight-end
@@ -1028,7 +1028,7 @@ const App = () => {
 
 ```js
 () => {
-  console.log(''value now'', 1000)
+  console.log('value now', 1000)
   setValue(1000)
 }
 ```
@@ -1045,12 +1045,12 @@ const App = () => {
 
 ```js
 () => {
-  console.log(''value now'', 11)
+  console.log('value now', 11)
   setValue(11)
 }
 ```
 
-<!-- Using functions that return functions is not required to achieve this functionality. Let''s return the _setToValue_ function that is responsible for updating state, into a normal function:-->
+<!-- Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function that is responsible for updating state, into a normal function:-->
  使用返回函数的函数不需要实现这个功能。让我们把负责更新状态的_setToValue_函数，返回成一个普通的函数。
 
 ```js
@@ -1058,7 +1058,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = (newValue) => {
-    console.log(''value now'', newValue)
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -1091,7 +1091,7 @@ const App = () => {
 
 ### Passing Event Handlers to Child Components
 
-<!-- Let''s extract the button into its own component:-->
+<!-- Let's extract the button into its own component:-->
  让我们把按钮提取到它自己的组件中。
 
 ```js
@@ -1112,7 +1112,7 @@ const Button = (props) => (
 
 ### Do Not Define Components Within Components
 
-<!-- Let''s start displaying the value of the application into its own <i>Display</i> component.-->
+<!-- Let's start displaying the value of the application into its own <i>Display</i> component.-->
  让我们开始把应用的值显示到它自己的<i>Display</i>组件中。
 
 <!-- We will change the application by defining a new component inside of the <i>App</i>-component.-->
@@ -1130,7 +1130,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
-    console.log(''value now'', newValue)
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -1148,10 +1148,10 @@ const App = () => {
 }
 ```
 
-<!-- The application still appears to work, but **don''t implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.-->
+<!-- The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.-->
  应用似乎仍在工作，但**不要这样实现组件！**不要在其他组件中定义组件。这种方法没有任何好处，而且会导致许多不愉快的问题。最大的问题是由于React在每次渲染时都将定义在另一个组件内的组件视为一个新的组件。这使得React无法优化该组件。
 
-<!-- Let''s instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:-->
+<!-- Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:-->
  让我们把<i>Display</i>组件函数移到它的正确位置，也就是<i>App</i>组件函数之外。
 
 ```js
@@ -1167,7 +1167,7 @@ const App = () => {
   const [value, setValue] = useState(10)
 
   const setToValue = newValue => {
-    console.log(''value now'', newValue)
+    console.log('value now', newValue)
     setValue(newValue)
   }
 
@@ -1192,8 +1192,8 @@ const App = () => {
 
 <!-- - The [official React documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;-->
  - [官方React文档](https://reactjs.org/docs/hello-world.html)值得在某些时候查看，尽管它的大部分内容在课程的后期才会变得相关。另外，与基于类的组件有关的一切都与我们无关。
-<!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and recently updated [The Beginner''s Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.-->
- - [Egghead.io](https://egghead.io)上的一些课程，如[开始学习React](https://egghead.io/courses/start-learning-react)质量很高，最近更新的[The Beginner''s Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs)也比较好；这两个课程介绍的概念也将在本课程的后面介绍。**NB**前者使用类组件，但后者使用新的功能组件。
+<!-- - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and recently updated [The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.-->
+ - [Egghead.io](https://egghead.io)上的一些课程，如[开始学习React](https://egghead.io/courses/start-learning-react)质量很高，最近更新的[The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs)也比较好；这两个课程介绍的概念也将在本课程的后面介绍。**NB**前者使用类组件，但后者使用新的功能组件。
 
 </div>
 
@@ -1236,19 +1236,19 @@ rm -rf node_modules/ && npm i
  建议使用教材和之前练习中使用的相同结构。文件<i>index.js</i>如下。
 
 ```js
-import React from ''react''
-import ReactDOM from ''react-dom/client''
+import React from 'react'
+import ReactDOM from 'react-dom/client'
 
-import App from ''./App''
+import App from './App'
 
-ReactDOM.createRoot(document.getElementById(''root'')).render(<App />)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 <!-- You can use the code below as a starting point for the <i>App.js</i> file:-->
  你可以用下面的代码作为<i>App.js</i>文件的起点。
 
 ```js
-import { useState } from ''react''
+import { useState } from 'react'
 
 const App = () => {
   // save clicks of each button to its own state
@@ -1312,7 +1312,7 @@ const App = () => {
 
 <h4>1.10: unicafe step5</h4>
 
-<!-- Let''s continue refactoring the application. Extract the following two components:-->
+<!-- Let's continue refactoring the application. Extract the following two components:-->
  让我们继续重构应用。提取以下两个组件。
 
 <!-- - <i>Button</i> for defining the buttons used for submitting feedback-->
@@ -1339,7 +1339,7 @@ const Statistics = (props) => {
 
 ```
 
-<!-- The application''s state should still be kept in the root <i>App</i> component.-->
+<!-- The application's state should still be kept in the root <i>App</i> component.-->
  应用的状态仍应保存在根<i>App</i>组件中。
 
 <h4>1.11*: unicafe step6</h4>
@@ -1359,7 +1359,7 @@ const Statistics = (props) => {
 
 <i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
 
-<!-- **Make sure that from now on you don''t see any warnings in your console!**-->
+<!-- **Make sure that from now on you don't see any warnings in your console!**-->
  **确保从现在开始，你在控制台中不会看到任何警告！**
 
 <h4>1.12*: anecdotes step1</h4>
@@ -1371,17 +1371,17 @@ const Statistics = (props) => {
  通过添加一个按钮来扩展下面的应用，该按钮可以被点击来显示一个<i>随机</i>软件工程领域的名言警句。
 
 ```js
-import { useState } from ''react''
+import { useState } from 'react'
 
 const App = () => {
   const anecdotes = [
-    ''If it hurts, do it more often'',
-    ''Adding manpower to a late software project makes it later!'',
-    ''The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.'',
-    ''Any fool can write code that a computer can understand. Good programmers write code that humans can understand.'',
-    ''Premature optimization is the root of all evil.'',
-    ''Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.'',
-    ''Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients''
+    'If it hurts, do it more often',
+    'Adding manpower to a late software project makes it later!',
+    'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
+    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Premature optimization is the root of all evil.',
+    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients'
   ]
 
   const [selected, setSelected] = useState(0)
@@ -1403,7 +1403,7 @@ export default App
 找出如何在JavaScript中生成随机数，例如通过搜索引擎或在[Mozilla开发者网络](https://developer.mozilla.org)。记住，你可以直接在浏览器的控制台测试生成随机数。
 
 <!-- Your finished application could look something like this:-->
- 你完成的应用可能看起来像这样。
+ 你完成的应用可能如下所示：
 
 ![](../../images/1/18a.png)
 
@@ -1417,7 +1417,7 @@ export default App
 
 ![](../../images/1/19a.png)
 
-<!-- **NB** store the votes of each anecdote into an array or object in the component''s state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.-->
+<!-- **NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.-->
  **NB**将每个名言警句的投票存入组件状态中的一个数组或对象。记住，更新存储在复杂数据结构（如对象和数组）中的状态的正确方法是制作一个状态的副本。
 
 <!-- You can create a copy of an object like this:-->
@@ -1455,7 +1455,7 @@ copy[2] += 1
 <!-- If multiple anecdotes are tied for first place it is sufficient to just show one of them.-->
  如果多个名言警句并列第一，只显示其中一个就足够了。
 
-<!-- This was the last exercise for this part of the course and it''s time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
+<!-- This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 这是本章节课程的最后一个练习，是时候将你的代码推送到GitHub，并将你所有完成的练习标记到[练习提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)。
 
 </div>
