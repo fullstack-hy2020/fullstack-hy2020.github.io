@@ -883,11 +883,11 @@ So we will use the following <i>.eslintrc</i>
 }
 ```
 
-There are quite a few semicolons missing, but those are easy to add. We also have to solve the ESlint issues conserning the _any_-type:
+There are quite a few semicolons missing, but those are easy to add. We also have to solve the ESlint issues concerning the _any_-type:
 
 ![](../../images/9/50x.png)
 
-We could and propably should disable some ESlint rules to get the data from the request body.
+We could and probably should disable some ESlint rules to get the data from the request body.
 
 Disabling <i>@typescript-eslint/no-unsafe-assignment</i> for the destructuring assignment is nearly enough:
 
