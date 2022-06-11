@@ -610,6 +610,7 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
   url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
 }
 ```
+Backend has to be updated too to handle the user reference.
 
 **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case". 
 
