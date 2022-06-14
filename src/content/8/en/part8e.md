@@ -673,7 +673,7 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
+    onSubscriptionData: ({ subscriptionData, client }) => {
       const addedPerson = subscriptionData.data.personAdded
       notify(`${addedPerson.name} added`)
 
