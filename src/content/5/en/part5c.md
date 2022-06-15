@@ -556,7 +556,7 @@ await user.type(inputs[0], 'testing a form...' )
 Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
 
 
-Quite often input fileds have a <i>placehoder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
+Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -690,7 +690,7 @@ or we could use the command _findByText_:
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
-It is important to notice that unlike the othet _ByText_ commands, _findByText_ returns a promise!
+It is important to notice that unlike the other _ByText_ commands, _findByText_ returns a promise!
 
 There are situation where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
 
