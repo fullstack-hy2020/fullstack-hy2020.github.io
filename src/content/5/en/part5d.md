@@ -104,6 +104,8 @@ We start the test from the opened window:
 ![](../../images/5/40x.png)
 
 **NOTE**: you might need to restart Cypress after deleting the example tests.
+  
+**NOTE**: If you are using Cypress ^10.1.0, the <i>integration</i> subdirectory is gone and replaced with <i>e2e</i> subdirectory due to the introduction of component testing. It is also recommended to name E2E test file with this convention <i>note\_app.cy.js</i> but you can specify any pattern using specPattern option in the <i>cypress.config.js</i> file.
 
 Running the test opens your browser and shows how the application behaves as the test is run:
 
