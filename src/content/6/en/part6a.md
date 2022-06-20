@@ -847,8 +847,7 @@ const store = createStore(noteReducer)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>  // highlight-line
     <App />
-  </Provider>,  // highlight-line
-  document.getElementById('root')
+  </Provider>  // highlight-line
 )
 ```
 
