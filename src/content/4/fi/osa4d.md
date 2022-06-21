@@ -13,7 +13,7 @@ Toteutamme nyt backendiin tuen [token-perustaiselle](https://scotch.io/tutorials
 
 Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 
-![](../../images/4/16e.png)
+![Sekvensikaavio, joka sisältää saman datan kuin alla oleva bulletpoint-lista](../../images/4/16e.png)
 
 - Alussa käyttäjä kirjautuu Reactilla toteutettua kirjautumislomaketta käyttäen
   - lisäämme kirjautumislomakkeen frontendiin [osassa 5](/osa5)
@@ -103,7 +103,7 @@ app.use('/api/login', loginRouter)
 
 Kokeillaan kirjautumista, käytetään VS Coden REST-clientiä:
 
-![](../../images/4/17e.png)
+![Tehdään HTTP POST localhost:3001/api/login jossa lähetetään username ja password sopivilla arvoilla](../../images/4/17e.png)
 
 Kirjautuminen ei kuitenkaan toimi, konsoli näyttää seuraavalta:
 
@@ -118,11 +118,11 @@ Ongelman aiheuttaa komento _jwt.sign(userForToken, process.env.SECRET)_ sillä y
 
 Onnistunut kirjautuminen palauttaa kirjautuneen käyttäjän tiedot ja tokenin:
 
-![](../../images/4/18ea.png)
+![VS coden näkymä kertoo onnistuneen HTTP statuskoodin sekä näytää palvelimen palauttaman JSON:in jolla kentät token, user ja username ](../../images/4/18ea.png)
 
 Virheellisellä käyttäjätunnuksella tai salasanalla kirjautuessa annetaan asianmukaisella statuskoodilla varustettu virheilmoitus
 
-![](../../images/4/19ea.png)
+![[VS coden näkymä kertoo pyynnön epäonnistuneen statuskoodilla 401 Unauthorized. Palvelin myös palauttaa virheilmoituksen (invalid username or password) kertovan objektin](../../images/4/19ea.png)
 
 ### Muistiinpanojen luominen vain kirjautuneille
 
@@ -205,11 +205,11 @@ Uuden muistiinpanon luominen onnistuu nyt postmanilla jos <i>authorization</i>-h
 
 Postmanilla luominen näyttää seuraavalta
 
-![](../../images/4/20e.png)
+![Postmanin näkymä, joka kertoo että POST localhost:3001/api/notes pyyntöön mukaan on liitetty Authorization-headeri jonka arvo on bearer tokeninarvo](../../images/4/20e.png)
 
 ja Visual Studio Coden REST clientillä
 
-![](../../images/4/21ea.png)
+![VS coden näkymä, joka kertoo että POST localhost:3001/api/notes pyyntöön mukaan on liitetty Authorization-headeri jonka arvo on bearer tokeninarvo](../../images/4/21ea.png)
 
 ### Poikkeusten käsittely
 
