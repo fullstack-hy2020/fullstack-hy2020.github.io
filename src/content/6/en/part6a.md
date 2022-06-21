@@ -176,7 +176,7 @@ would cause the following to be printed
 -1
 </pre>
 
-The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
+The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
 
 ```js
 import React from 'react'
@@ -836,10 +836,8 @@ import ReactDOM from 'react-dom/client'
 
 import App from './App'
 
-
 import { createStore } from 'redux'
 import { Provider } from 'react-redux' // highlight-line
-import App from './App'
 import noteReducer from './reducers/noteReducer'
 
 const store = createStore(noteReducer)
