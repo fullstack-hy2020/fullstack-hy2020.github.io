@@ -900,6 +900,10 @@ router.get('/', async (req, res) => {
 
   if (req.query.important) {
     where.important = req.query.important === "true"
+  } else {
+    where.important = {
+     [Op.in]: [true, false]
+    }
   }
 
   if (req.query.search) {
