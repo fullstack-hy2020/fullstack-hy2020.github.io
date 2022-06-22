@@ -160,7 +160,7 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 <!-- For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable, when the code expected it to be in <em>MONGODB\_URI</em>.-->
  由于某些原因，数据库的URL未被定义。<i>heroku config</i>命令显示，我不小心将URL定义在<em>MONGO\_URL</em>环境变量中，而代码希望它在<em>MONGODB\_URI</em>。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).-->
+<!-- You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5)的<i>part3-5</i>分支中找到我们当前应用的全部代码。
 
 </div>
@@ -448,7 +448,7 @@ build
 <!-- Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.-->
  许多公司定义了编码标准，并通过ESlint配置文件在整个组织内强制执行。我们不建议一次又一次地重新发明轮子，从别人的项目中采用一个现成的配置到你的项目中是一个好主意。最近，许多项目采用了Airbnb的[Javascript style guide](https://github.com/airbnb/javascript)，将Airbnb的[ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)配置运用到了其中。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).-->
+<!-- You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7)的<i>part3-7</i>分支中找到我们当前应用的全部代码。
 </div>
 

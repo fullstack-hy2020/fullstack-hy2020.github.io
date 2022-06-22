@@ -463,7 +463,7 @@ usersRouter.get('/', async (request, response) => {
 ![](../../images/4/9.png)
 
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).-->
+<!-- You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7)的<i>part4-7</i>分支中找到我们当前应用的全部代码。
 
 ### Creating a new note
@@ -617,7 +617,7 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).-->
+<!-- You can find the code for our current application in its entirety in the <i>part4-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-8)的<i>part4-8</i>分支中找到我们当前应用的全部代码。
 
 </div>

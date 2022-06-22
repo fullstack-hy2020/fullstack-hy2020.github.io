@@ -1065,7 +1065,7 @@ important: body.important || false,
  > 确切地说，当<i>重要</i>属性是<i>false</i>时，那么<em>body.important || false</em>表达式实际上将从右侧返回<i>false</i>...
 
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).-->
+<!-- You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1)的<i>part3-1</i>分支中找到我们当前应用的全部代码。
 
 
@@ -1348,7 +1348,7 @@ app.use(unknownEndpoint)
 ```
 
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).-->
+<!-- You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2)的<i>part3-2</i>分支中找到我们当前应用的全部代码。
 
 </div>

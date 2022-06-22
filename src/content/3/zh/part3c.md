@@ -724,7 +724,7 @@ app.get('/api/notes/:id', (request, response) => {
 <!-- Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.-->
  一旦我们引入数据库，检查数据库中持久化的状态是很有用的，例如从MongoDB Atlas的控制面板中。很多时候，像我们之前写的<i>mongo.js</i>程序这样的小Node辅助程序在开发过程中会很有帮助。
 
-<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).-->
+<!-- You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).-->
  你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4)的<i>part3-4</i>分支中找到我们当前应用的全部代码。
 
 </div>
@@ -1006,7 +1006,7 @@ There is one important detail regarding the use of the <em>findByIdAndUpdate</em
 
 After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
 </div>
 
