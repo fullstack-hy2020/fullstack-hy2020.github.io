@@ -121,7 +121,7 @@ on komponentin <i>Notes</i> sisällä mahdollista viitata storen tilaan, esim. m
 
 Komennolla _connect_ ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
 
-![](../../images/6/24c.png)
+![Sovelluksella on kaksi propsia, notes ja filter. Näistä notes on viite storeen talletettuihin muistiinpanoihin ja filter viite storeen talletettuun filtterimerkkijonoon.](../../images/6/24c.png)
 
 Komponentin <i>Notes</i> sisältä on siis propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux-storen sisällä olevaa tilaa.
 
@@ -251,7 +251,7 @@ _mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen koht
 
 _connect_-funktion aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
 
-![](../../images/6/25b.png)
+![Sovelluksella on nyt propsia, notes, filter ja toggle_importance_of. Näistä notes on viite storeen talletettuihin muistiinpanoihin ja filter viite storeen talletettuun filtterimerkkijonoon. Uutena oleva toggle_importance_of on viite toggle_importance-funktioon, joka on sidottu dispatch-operaatioon](../../images/6/25b.png)
 
 Eli sen lisäksi, että <i>Notes</i> pääsee storen tilaan propsin <i>props.notes</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>notes/toggleImportanceOf</i>-tyyppisiä actioneja.
 
@@ -399,7 +399,7 @@ const NewNote = (props) => {
 
 näemme eron:
 
-![](../../images/6/10.png)
+![Ensin tulostuu pelkkä action creatot -funktion koodi. Tämän jälkeen tulostuu koodi joka sisältää komennon, dispatch(actionCreator.apply(this, arguments)) eli dispatchiin "sidottu" action creator](../../images/6/10.png)
 
 Ensimmäinen funktioista on siis normaali <i>action creator</i>, toinen taas _connect_-funktion muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
 
