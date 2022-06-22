@@ -37,7 +37,7 @@ export default noteReducer
 
 Toteutetaan sovellukseen näytettävien muistiinpanojen filtteröinti, jonka avulla näytettäviä muistiinpanoja voidaan rajata. Filtterin toteutus tapahtuu [radiopainikkeiden](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) avulla:
 
-![](../../images/6/01e.png)
+![Sivun alussa lomake muistiinpanon lisäämiseen (syötekenttä ja nappi add). Tämän jälkeen radiopainikevalinta mitkä muistiinpanot näytetään, vaihtoehdot all, important ja noimportant. Näiden alle renderöidän kaikki muistiinpanot ja niiden yhteyteen teksti important jos muistiinpano merkattu tärkeäksi. ](../../images/6/01e.png)
 
 Aloitetaan todella suoraviivaisella toteutuksella:
 
@@ -170,7 +170,7 @@ Koska sovelluksemme hajoaa tässä vaiheessa täysin, komponentin <i>App</i> sij
 
 Konsoliin tulostuu storen tila:
 
-![](../../images/6/4e.png)
+![Konsolista selviää että store on olio jolla kentät filter (teksti, arvona "ALL") ja notes (taulukollinen muistiinpanoja).](../../images/6/4e.png)
 
 Store on siis juuri siinä muodossa jossa haluammekin sen olevan!
 
@@ -198,7 +198,7 @@ store.dispatch(createNote('combineReducers forms one reducer from many simple re
 
 Kun simuloimme näin filtterin tilan muutosta ja muistiinpanon luomista, konsoliin tulostuu storen tila jokaisen muutoksen jälkeen:
 
-![](../../images/6/5e.png)
+![Storen filter-arvoksi muuttuu ensin IMPORTANT, tämän jäleen storen notesiin tulee uusi muistiinpano](../../images/6/5e.png)
 
 Jo tässä vaiheessa kannattaa laittaa mieleen eräs tärkeä detalji. Lisätään <i>molempien reducerien alkuun</i> konsoliin tulostus:
 
@@ -211,7 +211,7 @@ const filterReducer = (state = 'ALL', action) => {
 
 Nyt konsolin perusteella näyttää siltä, että jokainen action kahdentuu:
 
-![](../../images/6/6.png)
+![Konsolin tulostus paljastaa että sekä noteReducer että filterReducer käsittelevät jokaisen actionin](../../images/6/6.png)
 
 Onko koodissa bugi? Ei. Yhdistetty reducer toimii siten, että jokainen <i>action</i> käsitellään <i>kaikissa</i> yhdistetyn reducerin osissa. Usein tietystä actionista on kiinnostunut vain yksi reducer, mutta on kuitenkin tilanteita, joissa useampi reducer muuttaa hallitsemaansa staten tilaa jonkin actionin seurauksena.
 
@@ -230,7 +230,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Korjataan sitten bugi, joka johtuu siitä, että koodi olettaa storen tilan olevan mustiinpanot tallettava taulukko:
 
-![](../../images/6/7ea.png)
+![komennon notes.map(note => ...) suoritus aiheuttaa virheen TypeError notes.map is not a function)](../../images/6/7ea.png)
 
 Korjaus on helppo. Koska muistiinpanot ovat nyt storen kentässä <i>notes</i>, riittää pieni muutos selektorifunktioon:
 
@@ -585,15 +585,15 @@ Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/d
 
 Kun nyt avaat konsolin, välilehti <i>Redux</i> näyttää seuraavalta:
 
-![](../../images/6/11ea.png)
+![Redux DevToolsin oikea puoli "State" näyttää storen alkutilan](../../images/6/11ea.png)
 
 Kunkin actionin storen tilaan aiheuttamaa muutosta on helppo tarkastella:
 
-![](../../images/6/12ea.png)
+![edux DevToolsin vasen puoli näyttää suoritetut actionit, muuttunut tila heijastuu oikealle puolelle](../../images/6/12ea.png)
 
 Konsolin avulla on myös mahdollista dispatchata actioneja storeen:
 
-![](../../images/6/13ea.png)
+![Mahdollisuus actionien dispatchaamiseen avautuu alalaidan valinnoista](../../images/6/13ea.png)
 
 Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2) branchissa </i>part6-2</i>.
 
@@ -658,7 +658,7 @@ Tässä vaiheessa sovelluksen ei vielä tarvitse osata käyttää <i>Notificatio
 
 Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan, kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
 
-![](../../images/6/8ea.png)
+![Äänestyksen yhteydessä näytetään notifikaatio: you voted 'if it hurts, do it more often'](../../images/6/8ea.png)
 
 Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux-toolkit.js.org/api/createSlice#reducers).
 
@@ -666,7 +666,7 @@ Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action crea
 
 Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen:
 
-![](../../images/6/9ea.png)
+![Yläosaan lisätään tekstikenttä, johon kirjoittamalla voidaan rajoittaa näytettävät anekdootit niihin joihin sisältyy "filtterikenttään" kirjoitettu merkkijono](../../images/6/9ea.png)
 
 Säilytä filtterin tila Redux-storessa. Käytännössä kannattaa siis jälleen luoda uusi reducer ja action creatorit. Hyödynnä tässä Redux Toolkitin <em>createSlice</em>-funktiota.
 

@@ -249,7 +249,7 @@ export default App
 
 Hookin useEffect käyttö aiheuttaa ESLint-varoituksen:
 
-![](../../images/6/26ea.png)
+![Virheilmoitus React Hook useEffect has missing dependency: 'dispatch'](../../images/6/26ea.png)
 
 Pääsemme varoituksesta eroon seuraavasti:
 

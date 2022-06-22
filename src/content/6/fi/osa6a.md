@@ -15,11 +15,11 @@ Facebook kehitti tilan hallinnan ongelmia helpottamaan [Flux](https://facebook.g
 
 Kun action muuttaa storen tilaa, renderöidään näkymät uudelleen:
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
+![Action -> Dispatcher -> Store -> View](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
 
 Jos sovelluksen käyttö (esim. napin painaminen) aiheuttaa tarpeen tilan muutokseen, tehdään muutos actionin avulla. Tämä taas aiheuttaa uuden näytön renderöitymisen:
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
+![Action -> Dispatcher -> Store -> View -> Action -> Dispatcher -> View](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
 
 Flux tarjoaa siis standardin tavan sille miten ja missä sovelluksen tila pidetään sekä tavalle tehdä tilaan muutoksia.
 
@@ -29,8 +29,7 @@ Facebookilla on olemassa valmis toteutus Fluxille, mutta käytämme kuitenkin sa
 
 Tutustutaan Reduxiin tekemällä jälleen kerran laskurin toteuttava sovellus:
 
-![](../../images/6/1.png)
-
+![Renderöity kokonaisluku sekä kolme nappia: plus, minus ja zero](../../images/6/1.png)
 
 Tehdään uusi Create React App -sovellus ja asennetaan siihen <i>Redux</i>:
 
@@ -384,7 +383,7 @@ Testi siis varmistaa, että reducerin palauttama uusi tila on taulukko, joka sis
 
 Komento <i>deepFreeze(state)</i> varmistaa, että reducer ei muuta parametrina olevaa storen tilaa. Jos reducer käyttää tilan manipulointiin komentoa _push_, testi ei mene läpi:
 
-![](../../images/6/2.png)
+![Testi aiheuttaa virheilmoituksen TypeError: Can not add property 0, object is not extensible. Syynä komento state.push(action.data)](../../images/6/2.png)
 
 Tehdään sitten testi actionin <i>TOGGLE\_IMPORTANCE</i> käsittelylle:
 
@@ -1113,7 +1112,7 @@ npm start
 
 Kun teet seuraavat tehtävät, tulisi sovelluksen näyttää seuraavalta:
 
-![](../../images/6/3.png)
+![Sovellus renderöi anekdootit. Jokaisen anekdootin yhteydessä myös tieto sen saamien äänien määrästä sekä nappi "vote" anekdootin äänestämiselle](../../images/6/3.png)
 
 #### 6.3: anekdootit, step1
 
