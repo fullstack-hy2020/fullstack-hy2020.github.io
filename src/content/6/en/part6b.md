@@ -242,8 +242,7 @@ Let's finish the application so that it uses the combined reducer. We start by c
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 )
 ```
 
