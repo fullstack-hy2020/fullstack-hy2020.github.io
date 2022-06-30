@@ -693,7 +693,7 @@ const App = () => {
 
 Our solution has a small problem: a person is added to the cache and also rendered twice since the component _PersonForm_ is also adding it to the cache.
 
-Let us now fix the problem by ensuring that a person is not addded twice in the cache:
+Let us now fix the problem by ensuring that a person is not added twice in the cache:
 
 ```js
 // highlight-start
