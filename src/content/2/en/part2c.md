@@ -11,7 +11,7 @@ For a while now we have only been working on "frontend", i.e. client-side (brows
 
 Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.
 
-Create a file named <i>db.json</i> in the root directory of the project with the following content:
+Create a file named <i>db.json</i> in the root directory of the previous notes project with the following content:
 
 ```json
 {
