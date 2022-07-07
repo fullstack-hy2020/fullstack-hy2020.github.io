@@ -77,7 +77,7 @@ We can use the object [screen](https://testing-library.com/docs/queries/about#sc
 
 
 ```js
- const element = screen.getByText('Component testing is done with react-testing-library')
+  const element = screen.getByText('Component testing is done with react-testing-library')
   expect(element).toBeDefined()
 ```
 
