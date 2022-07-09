@@ -661,7 +661,7 @@ If you haven't done so already, calculate the sum of exercises with the array me
 const total = 
   parts.reduce((s, p) => someMagicHere)
 ```
-
+  
 and does not work, it's worth to use <i>console.log</i>, which requires the arrow function to be written in its longer form:
 
 ```js
@@ -670,6 +670,8 @@ const total = parts.reduce((s, p) => {
   return someMagicHere 
 })
 ```
+ 
+**Not working? :** Use your search engine to look up how reduce is used in an **Object Array**.
 
 **Pro tip 2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) that automatically changes short form arrow functions into their longer form, and vice versa. 
 
