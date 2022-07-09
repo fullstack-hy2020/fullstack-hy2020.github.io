@@ -1047,7 +1047,7 @@ const App = () => {
 
 ### Useful Reading
 
-The internet is full of React-related material. However, we use the new style of React that still a large majority of the material found online is outdated for our purposes.
+The internet is full of React-related material. However, we use the new style of React for which a large majority of the material found online is outdated.
 
 You may find the following links useful:
 
