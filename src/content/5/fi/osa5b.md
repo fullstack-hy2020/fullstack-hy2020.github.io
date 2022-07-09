@@ -11,11 +11,11 @@ lang: fi
 
 Muutetaan sovellusta siten, että kirjautumislomaketta ei oletusarvoisesti näytetä:
 
-![](../../images/5/10e.png)
+![Oletusarvoisesti sovellus näytää ainoastaan muistiinpanojen listan sekä napin "log in"](../../images/5/10e.png)
 
 Lomake aukeaa, jos käyttäjä painaa nappia <i>login</i>:
 
-![](../../images/5/11e.png)
+![Kun nappia "log in" painetaan, avautuu kirjaantumislomake (jolla kentät username ja password sekä nappi kirjautumisen tekemiseen). Näkyviin tulee myös nappi "cancel", jota painamalla kirjaantumislomake suljetaan tekemättä kirjautumista](../../images/5/11e.png)
 
 Napilla <i>cancel</i> käyttäjä saa tarvittaessa suljettua lomakkeen.
 
@@ -486,7 +486,7 @@ ja otetaan se käyttöön
 
 syntyy <i>kolme erillistä komponenttiolioa</i>, joilla on kaikilla oma tilansa:
 
-![](../../images/5/12.png)
+![Kuva havainnollistaa, että selain renderöi kolme erillistä komponenttia, jotka voivat olla toisistaan riippumatta "togglattuina" näkyville](../../images/5/12.png)
 
 <i>ref</i>-attribuutin avulla on talletettu viite jokaiseen komponentin muuttujaan <i>togglable1</i>, <i>togglable2</i> ja <i>togglable3</i>.
 
@@ -502,11 +502,11 @@ Tee blogin luomiseen käytettävästä lomakkeesta ainoastaan tarvittaessa näyt
 
 Lomake ei ole oletusarvoisesti näkyvillä:
 
-![](../../images/5/13ae.png)
+![Oletusarvoisesti näytetään ainoastaan nappi "create new blog"](../../images/5/13ae.png)
 
 Klikkaamalla nappia <i>create new blog</i> lomake aukeaa:
 
-![](../../images/5/13be.png)
+![kun nappia painetaan, avautuu uuden blogin luomisen mahdollistava komponentti joka sisältää napin cancel, jota painamalla lomakkeen voi piilottaa](../../images/5/13be.png)
 
 Lomakkeen tulee sulkeutua kun uusi blogi luodaan.
 
@@ -522,7 +522,7 @@ Lisää yksittäiselle blogille nappi, jonka avulla voi kontrolloida, näytetä�
 
 Klikkaamalla nappia sen täydelliset tiedot aukeavat:
 
-![](../../images/5/13ea.png)
+![Oletusarvoisesti kustakin blogista näytetään nimi ja kirjoittaja sekä nappi view. Nappia painamalla näytetään myös blogin url, sen likejen määrä, nappi "likettämiseen" sekä blogin lisännyt käyttäjä ja nappi tarkempien tietojen piilottamiseen.](../../images/5/13ea.png)
 
 Uusi napin klikkaus pienentää näkymän.
 
@@ -601,7 +601,7 @@ Lisää nappi blogin poistamiselle. Toteuta myös poiston tekevä logiikka.
 
 Ohjelmasi voi näyttää esim. seuraavalta:
 
-![](../../images/5/14ea.png)
+![Blogin tarkemman näkymän (avautuu kun painetaan view) mukana on nappi delete, jota painamalla blogin voi poistaa. Poisto varmistetaan window.confirm:n avulla toteutetulla dialogilla](../../images/5/14ea.png)
 
 Kuvassa näkyvä poiston varmistus on helppo toteuttaa funktiolla [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
 
@@ -781,11 +781,11 @@ Tehdään lintausta varten npm-skripti:
 
 Komponentti _Togglable_ aiheuttaa ikävän näköisen varoituksen <i>Component definition is missing display name</i>: 
 
-![](../../images/5/25x.png)
+![VS codessa näkyy ESLint-varoitus "Component definition is missing display name"](../../images/5/25x.png)
 
 Komponentin "nimettömyys" käy ilmi myös React Development Toolsilla:
 
-![](../../images/5/26ea.png)
+![React Development Tool paljastaa, että komponentin nimi on "Anonymous"](../../images/5/26ea.png)
 
 Korjaus on onneksi hyvin helppo tehdä:
 

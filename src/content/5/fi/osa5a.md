@@ -15,7 +15,7 @@ Toteutetaan nyt osa käyttäjienhallinnan edellyttämästä toiminnallisuudesta 
 
 Sovelluksen yläosaan on nyt lisätty kirjautumislomake, ja uuden muistiinpanon lisäämisestä huolehtiva lomake on siirretty muistiinpanojen alapuolelle:
 
-![](../../images/5/1e.png)
+![Sovellus koostuu syötekentät username ja password koostuvasta kirjautumislomakkeesta, muistiinpanojen listasta, sekä lomakkeesta joka mahdollistaa uuden muistiinpanon luomisen (ainoastaan yksi syötekenttä muistiinpanon sisällölle). Jokaisen listalla olevan muistiinpanon kohdalla on nappi, jonka avulla muistiinpano voidaan merkata tärkeäksi/epätärkeäksi](../../images/5/1e.png)
 
 Komponentin <i>App</i> koodi näyttää seuraavalta:
 
@@ -453,7 +453,7 @@ Kirjautumisen yhteyteen tehtävä muutos on seuraava:
 
 Kirjautuneen käyttäjän tiedot tallentuvat nyt local storageen ja niitä voidaan tarkastella konsolista (kirjoittamalla konsoliin _window.localStorage_):
 
-![](../../images/5/3e.png)
+![Selaimen konsoliin on evaluoitu window.localStorage-objektin arvo](../../images/5/3e.png)
 
 Sovellusta on vielä laajennettava siten, että kun sivulle tullaan uudelleen, esim. selaimen uudelleenlataamisen yhteydessä, tulee sovelluksen tarkistaa löytyykö local storagesta tiedot kirjautuneesta käyttäjästä. Jos löytyy, asetetaan ne sovelluksen tilaan ja <i>noteServicelle</i>.
 
@@ -557,11 +557,11 @@ Kirjautumisen yhteydessä backendin palauttama <i>token</i> tallennetaan sovellu
 
 Jos käyttäjä ei ole kirjautunut, sivulla näytetään <i>pelkästään</i> kirjautumislomake:
 
-![](../../images/5/4e.png)
+![Näkyvillä kirjautumislomake, jolla syötekentät username ja password sekä nappi "login"](../../images/5/4e.png)
 
 Kirjautuneelle käyttäjälle näytetään kirjautuneen käyttäjän nimi sekä blogien lista:
 
-![](../../images/5/5e.png)
+![Blogit listattuna riveittän muodossa "blogin nimi", "kiroittaja", ruudulla lisäksi tieto kirjautuneesta käyttäjästä, esim. "Matti Luukkainen logged in"](../../images/5/5e.png)
 
 Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa local storagen avulla.
 
@@ -593,7 +593,7 @@ Tässä vaiheessa kirjautuneiden käyttäjien tietoja ei vielä tarvitse muistaa
 
 Tee kirjautumisesta "pysyvä" local storagen avulla. Tee sovellukseen myös mahdollisuus uloskirjautumiseen:
 
-![](../../images/5/6e.png)
+![Sovellukseen lisätty nappi "logout"](../../images/5/6e.png)
 
 Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää reloadauksen jälkeen.
 
@@ -601,17 +601,17 @@ Uloskirjautumisen jälkeen selain ei saa muistaa kirjautunutta käyttäjää rel
 
 Laajenna sovellusta siten, että kirjautunut käyttäjä voi luoda uusia blogeja:
 
-![](../../images/5/7e.png)
+![Sovellukseen lisätty lomake uusien blogien luomiseen. Lomakkeella kentät title, author ja url. Lomake näytetään ainoastaan kun käyttäjä on kirjaantunut sovellukseen.](../../images/5/7e.png)
 
 #### 5.4: blogilistan frontend, step4
 
 Toteuta sovellukseen notifikaatiot, jotka kertovat sovelluksen yläosassa onnistuneista ja epäonnistuneista toimenpiteistä. Esim. blogin lisäämisen yhteydessä voi antaa seuraavan notifikaation:
 
-![](../../images/5/8e.png)
+![Sovellus näyttää notifikaation "a new blog ... by ... added"](../../images/5/8e.png)
 
 Epäonnistunut kirjautuminen taas johtaa virhenotifikaatioon:
 
-![](../../images/5/9e.png)
+![Sovellus näyttää notifikaation "wrong username/password"](../../images/5/9e.png)
 
 Notifikaation tulee olla näkyvillä muutaman sekunnin ajan. Värien lisääminen ei ole pakollista.
 

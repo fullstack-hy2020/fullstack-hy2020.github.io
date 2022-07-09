@@ -77,7 +77,7 @@ We can use the object [screen](https://testing-library.com/docs/queries/about#sc
 
 
 ```js
- const element = screen.getByText('Component testing is done with react-testing-library')
+  const element = screen.getByText('Component testing is done with react-testing-library')
   expect(element).toBeDefined()
 ```
 
@@ -302,8 +302,8 @@ const user = userEvent.setup()
 The test finds the button <i>based on the text</i> from the rendered component and clicks the element:
 
 ```js
-await user.click(button)
 const button = screen.getByText('make not important')
+await user.click(button)
 ```
 
 Clicking happens with the method [click](https://testing-library.com/docs/user-event/convenience/#click) of the userEvent-library.
@@ -556,7 +556,7 @@ await user.type(inputs[0], 'testing a form...' )
 Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
 
 
-Quite often input fileds have a <i>placehoder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
+Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -641,7 +641,7 @@ const input = container.querySelector('#note-input')
 
 However we shall stick to the approach of using _getByPlaceholderText_ in the test. 
 
-Let us look to a couple of details before moving on. Let us assume that a component would render test to an HTML-element as follows:
+Let us look to a couple of details before moving on. Let us assume that a component would render text to an HTML-element as follows:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -676,7 +676,7 @@ test('renders content', () => {
 })
 ```
 
-Command _getByText_ looks for an element that has exactly the **same text** that it has as parameter, and nothing more. If we want to look for element that <i>contains</i> the text, we could use a extra option:
+Command _getByText_ looks for an element that has exactly the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
 ```js 
 const element = screen.getByText(
@@ -690,9 +690,9 @@ or we could use the command _findByText_:
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
-It is important to notice that unlike the othet _ByText_ commands, _findByText_ returns a promise!
+It is important to notice that unlike the other _ByText_ commands, _findByText_ returns a promise!
 
-There are situation where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
+There are situations where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
 
 We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
 

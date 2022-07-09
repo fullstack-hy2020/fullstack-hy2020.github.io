@@ -242,8 +242,7 @@ Let's finish the application so that it uses the combined reducer. We start by c
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 )
 ```
 
@@ -435,8 +434,7 @@ console.log(store.getState())
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 )
 ```
 
@@ -615,7 +613,7 @@ It is also possible to dispatch actions to the store using the development tools
 
 ![](../../images/6/13ea.png)
 
-You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
+You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
 
 </div>
 

@@ -316,6 +316,7 @@ The file <i>models/index.js</i> expands slightly:
 const Note = require('./note')
 const User = require('./user') // highlight-line
 
+Note.sync()
 User.sync() // highlight-line
 
 module.exports = {

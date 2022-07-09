@@ -74,7 +74,7 @@ const counterReducer = (state, action) => {
 
 The first parameter is the <i>state</i> in the store. Reducer returns a <i>new state</i> based on the actions type. 
 
-Let's change the code a bit. It is customary to use the [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) -command instead of ifs in a reducer. 
+Let's change the code a bit. We have used if-else statements to respond to an action and change the state. However, the [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement is the most common approach to write a reducer.
 
 Let's also define a [default value](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) of 0 for the parameter <i>state</i>. Now the reducer works even if the store -state has not been primed yet. 
 
@@ -138,7 +138,7 @@ would print the following to the console
 
 because at first the state of the store is 0. After three <i>INCREMENT</i>-actions the state is 3. In the end, after <i>ZERO</i> and <i>DECREMENT</i> actions, the state is -1.
 
-The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create callback functions the store calls when its state is changed.
+The third important method the store has is [subscribe](https://redux.js.org/api/store#subscribelistener), which is used to create callback functions the store calls whenever an action is dispatched to the store.
 
 If, for example, we would add the following function to subscribe, <i>every change in the store</i> would be printed to the console.
 
@@ -176,7 +176,7 @@ would cause the following to be printed
 -1
 </pre>
 
-The code of our counter application is the following. All of the code has been written in the same file, so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
+The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is straight available for the React-code. We will get to know better ways to structure React/Redux-code later.
 
 ```js
 import React from 'react'
@@ -834,9 +834,10 @@ _index.js_ becomes:
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 
+import App from './App'
+
 import { createStore } from 'redux'
 import { Provider } from 'react-redux' // highlight-line
-import App from './App'
 import noteReducer from './reducers/noteReducer'
 
 const store = createStore(noteReducer)
@@ -844,8 +845,7 @@ const store = createStore(noteReducer)
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>  // highlight-line
     <App />
-  </Provider>,  // highlight-line
-  document.getElementById('root')
+  </Provider>  // highlight-line
 )
 ```
 

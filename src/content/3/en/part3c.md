@@ -68,7 +68,7 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 
 In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-The reason for using Mongo as the database is it's lower complexity with respect to a relational database. [The part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
+The reason for using Mongo as the database is its lower complexity with respect to a relational database. [The part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
 
 Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
@@ -140,10 +140,7 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-
-mongoose.connect(url)
+const url = `mongodb+srv://notes-app-full:${password}@cluster1.lvvbt.mongodb.net/?retryWrites=true&w=majority`
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -153,16 +150,24 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 
-const note = new Note({
-  content: 'HTML is Easy',
-  date: new Date(),
-  important: true,
-})
+mongoose
+  .connect(url)
+  .then((result) => {
+    console.log('connected')
 
-note.save().then(result => {
-  console.log('note saved!')
-  mongoose.connection.close()
-})
+    const note = new Note({
+      content: 'HTML is Easy',
+      date: new Date(),
+      important: true,
+    })
+
+    return note.save()
+  })
+  .then(() => {
+    console.log('note saved!')
+    return mongoose.connection.close()
+  })
+  .catch((err) => console.log(err))
 ```
 
 **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
@@ -610,7 +615,7 @@ It's probably a good idea to integrate the frontend and backend one functionalit
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
-You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
+You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
 </div>
 
@@ -880,7 +885,7 @@ There is one important detail regarding the use of the <em>findByIdAndUpdate</em
 
 After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. 
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
 </div>
 

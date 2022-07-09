@@ -27,7 +27,7 @@ export default { getAll, create, update }
 
 Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi:
 
-![](../../images/3/3ae.png)
+![Konsolissa näkyy virhe 'Access ... blocked by CORS policy'](../../images/3/3ae.png)
 
 Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa.
 
@@ -63,7 +63,7 @@ CORS:ista voi lukea tarkemmin esim. [Mozillan sivuilta](https://developer.mozill
 
 Sovelluksen suoritusympäristö näyttää nyt seuraavalta:
 
-![](../../images/3/100.png)
+![Kuvassa localhost:3000 toimiva React dev server ja localhost:3001 toimiva node backend, jotka molemmat käyttävät lokaalilla levylä olevia fs-tiedostoja. Kuvassa myös selaimessa oleva react-sovellus. joka yhteydessä dev-serveriin (mistä se saa js-tiedoston) sekä node-backendiin jonka reitilt /app/notes sen saa json-muotoisen datan](../../images/3/100.png)
 
 Selaimessa toimiva frontendin koodi siis hakee datan osoitteessa localhost:3001 olevalta Express-palvelimelta.
 
@@ -100,7 +100,7 @@ Luodaan Heroku-sovellus komennolla _heroku create_, tehdään sovelluksen hakemi
 
 Jos kaikki meni hyvin, sovellus toimii:
 
-![](../../images/3/25ea.png)
+![Selain renderöi json-muotoisen datan herokussa olevan sovelluksen polulta /api/notes](../../images/3/25ea.png)
 
 Jos ei, vikaa voi selvittää Herokun lokeja lukemalla eli komennolla _heroku logs_.
 
@@ -162,7 +162,7 @@ cp -r build ../notes-backend
 
 Backendin sisältävän hakemiston tulee nyt näyttää seuraavalta:
 
-![](../../images/3/27ea.png)
+![ls-komento näyttää tiedostot index.js, Procfile, package.json, package-lock.json sekä hakemistot build ja node_modules](../../images/3/27ea.png)
 
 Jotta saamme Expressin näyttämään <i>staattista sisältöä</i> eli sivun <i>index.html</i> ja sen lataaman JavaScriptin ym. tarvitsemme Expressiin sisäänrakennettua middlewarea [static](http://expressjs.com/en/starter/static-files.html).
 
@@ -194,7 +194,7 @@ Muutoksen jälkeen frontendistä on luotava uusi production build ja kopioitava 
 
 Sovellusta voidaan käyttää nyt <i>backendin</i> osoitteesta <http://localhost:3001>:
 
-![](../../images/3/28e.png)
+![Mentäessä osoitteeseen localhost:3001 selain renderöi react-sovelluksen, joka listaa muistiinpanot. Jokaisen muistiinpanon yhteydessä on sen tärkeyden muuttava nappi 'make important' tai 'make not important', näkymässä on myös lomake uuden muistiinpanon luomiseen. Tärkeyttä ei lomakkeella tarvitse voida asettaa, ainoastaan muistiinpanon sisältö.](../../images/3/28e.png)
 
 Sovelluksemme toiminta vastaa nyt täysin osan 0 luvussa [Single page app](/osa0/web_sovelluksen_toimintaperiaatteita#single-page-app) läpikäydyn esimerkkisovelluksen toimintaa.
 
@@ -218,11 +218,11 @@ Sivu sisältää ohjeen ladata sovelluksen tyylit määrittelevän CSS-tiedoston
 
 React-koodi hakee palvelimelta muistiinpanot osoitteesta <http://localhost:3001/api/notes> ja renderöi ne ruudulle. Selaimen ja palvelimen kommunikaatio selviää tuttuun tapaan konsolin välilehdeltä <i>Network</i>:
 
-![](../../images/3/29ea.png)
+![Välilehti Network kertoo että on tehty pyyntö GET localhost:3001/api/notes](../../images/3/29ea.png)
 
 Tuotantoa varten tehty suoritusympäristö näyttää siis seuraavalta:
 
-![](../../images/3/101.png)
+![Selain hakee json-muotoisen datan localhost:3001/api/notes reitiltä ja suoritettavan react-sovelluksen js-koodin sekä index.html-tiedoston osoitteesta localhost:3001. Backend hakee tarvitsemansa js-tiedostot ja index.html:n paikalliselta levyltä.](../../images/3/101.png)
 
 Toisin kuin sovelluskehitysympäristössä, kaikki sovelluksen tarvitsema löytyy nyt node/express-palvelimelta osoitteesta localhost:3001. Kun osoitteeseen mennään, renderöi selain pääsivun <i>index.html</i> mikä taas aiheuttaa sen, että React-sovelluksen tuotantoversio haetaan palvelimelta ja selain alkaa suorittamaan sitä. Tämä taas saa aikaan sen, että ruudulla näytettävä JSON-muotoinen data haetaan osoitteesta localhost:3001/api/notes.
 
@@ -232,7 +232,7 @@ Kun sovelluksen "Internetiin vietävä" tuotantoversio todetaan toimivaksi paika
 
 [Sovellus](https://obscure-harbor-49797.herokuapp.com/) toimii moitteettomasti lukuun ottamatta vielä backendiin toteuttamatonta muistiinpanon tärkeyden muuttamista:
 
-![](../../images/3/30ea.png)
+![Selain renderöi sovelluksen frontendin (joka näyttää palvelimella olevan datan) mentäessä sovelluksen heroku-urlin juureen](../../images/3/30ea.png)
 
 Sovelluksemme tallettama tieto ei ole ikuisesti pysyvää, sillä sovellus tallettaa muistiinpanot muuttujaan. Jos sovellus kaatuu tai se uudelleenkäynnistetään, kaikki tiedot katoavat.
 
@@ -240,7 +240,7 @@ Tarvitsemme sovelluksellemme tietokannan. Ennen tietokannan käyttöönottoa kat
 
 Tuotannossa oleva sovellus näyttää seuraavalta:
 
-![](../../images/3/102.png)
+![Selain hakee json-muotoisen datan nameoftheapp.herokuapp.com/api/notes osoitteesta ja suoritettavan react-sovelluksen js-koodin sekä index.html-tiedoston osoitteesta  nameoftheapp.herokuapp.com. Backend hakee tarvitsemansa js-tiedostot ja index.html:n herokun palvelimen levyltä.](../../images/3/102.png)
 
 Nyt siis node/express-backend sijaitsee Herokun palvelimella. Kun selaimella mennään sovelluksen "juuriosoitteeseen", joka on muotoa https://glacial-ravine-74819.herokuapp.com/, alkaa selain suorittaa React-koodia joka taas hakee JSON-muotoisen datan Herokusta.
 
@@ -268,7 +268,7 @@ Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden
 
 Frontendiin tehtyjen muutosten seurauksena on nyt se, että kun suoritamme frontendiä sovelluskehitysmoodissa eli käynnistämällä sen komennolla _npm start_, yhteys backendiin ei toimi:
 
-![](../../images/3/32ea.png)
+![Network-tabi kertoo että pyyntöön localhost:3000/api/notes vastataan statuskoodilla 404](../../images/3/32ea.png)
 
 Syynä tälle on se, että backendin osoite muutettiin suhteellisesti määritellyksi:
 
@@ -330,13 +330,14 @@ Testaa selaimen ja Postmanin tai VS Coden REST-clientin avulla, että Internetis
 
 Seuraavassa loki eräästä tyypillisestä ongelmatilanteesta, jossa Heroku ei löydä sovelluksen riippuvuutena olevaa moduulia <i>express</i>:
 
-![](../../images/3/33.png)
+![herokun logissa näkyy viheilmoitus 'can not find module express'](../../images/3/33.png)
 
 Syynä ongelmalle on se, että <i>Express</i>-kirjastoa ei ole asennettu <em>npm install express</em> komennolla, joka tallentaa tiedon riippuvuudesta tiedostoon <i>package.json</i>. 
 
 Toinen tyypillinen ongelma on se, että sovellusta ei ole konfiguroitu käyttämään ympäristömuuttujana <em>PORT</em> määriteltyä porttia:
 
-![](../../images/3/34.png)
+
+![herokun logissa näkyy viheilmoitus 'web process failed to bind to $PORT within 60 seconds'](../../images/3/34.png)
 
 Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetissä olevaan sovellukseesi.
 

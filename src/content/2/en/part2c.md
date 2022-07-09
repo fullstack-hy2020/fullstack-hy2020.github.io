@@ -11,7 +11,7 @@ For a while now we have only been working on "frontend", i.e. client-side (brows
 
 Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.
 
-Create a file named <i>db.json</i> in the root directory of the project with the following content:
+Create a file named <i>db.json</i> in the root directory of the previous notes project with the following content:
 
 ```json
 {
@@ -646,8 +646,8 @@ Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is sta
 
 ```bash
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
-($env:REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3) -and (npm start) // For Windows PowerShell
-set REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Windows cmd.exe
+($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
+set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
 ```
 
 you can access the value of the key from the _process.env_ object:

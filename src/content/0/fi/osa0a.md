@@ -124,7 +124,7 @@ Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081)
 
 - Tee tehtävät. Palauta vastauksesi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) kautta.
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikokeeseen-ilmoittautuminen) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
-- Aktivoi Helsingin yliopiston käyttäjätunnus. Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Käyttäjätunnus tulee aktivoida ennen kurssikokeen suorittamista. Lue lisää [täältä](osa0/yleista/#kurssikokeeseen-ilmoittautuminen). 
+- Aktivoi Helsingin yliopiston käyttäjätunnus. Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Käyttäjätunnus tulee aktivoida ennen kurssikokeen suorittamista. Lue lisää [täältä](/osa0/yleista/#kurssikokeeseen-ilmoittautuminen). 
 - Tee verkkotentti Moodlessa. Pääset Moodleen [tämän](https://moodle.helsinki.fi/course/view.php?id=46197) linkin kautta. Kirjaudu Moodleen Helsingin yliopiston käyttäjätunnuksella.  
 - Tallenna Helsingin yliopiston opiskelijanumerosi palautussovellukseen. Lue lisää [täältä](/osa0/yleista/#suoritusmerkinnan-pyytaminen)
 - Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
@@ -259,7 +259,7 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville. Vuoden 2021 aikana ilmestyneiden osien 12 ja 13 suorittamista ei edellytetä 15.3.2022 mennessä harjoitustyön suorittavilta.
+Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 

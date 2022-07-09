@@ -129,7 +129,7 @@ For the two repository based approaches, the approach with something in the code
 
 In semantic versioning, even if we have version bumps of different types (major, minor, or patch) it's still quite easy to put the releases in order: 1.3.7 comes before 2.0.0 which itself comes before 2.1.5 which comes before 2.2.0. A list of releases (conveniently provided by a package manager or GitHub) is still needed to know what the last version is but it's easier to look at that list and discuss it: It's easier to say "We need to roll back to 3.2.4" than to try communicate a hash in person.
 
-That's not to say that hashes are inconvenient: if you know which commit caused the particular problem, it's easy enough to look back through a git history and get the hash of the previous commit. But if you have two hashes, say <code>d052aa41edfb4a7671c974c5901f4abe1c2db071</code> and <code>12c6f6738a18154cb1cef7cf0607a681f72eaff3</code>, you really can not say which become earlier in history, you need something more, such as the git log that reveals the ordering.
+That's not to say that hashes are inconvenient: if you know which commit caused the particular problem, it's easy enough to look back through a git history and get the hash of the previous commit. But if you have two hashes, say <code>d052aa41edfb4a7671c974c5901f4abe1c2db071</code> and <code>12c6f6738a18154cb1cef7cf0607a681f72eaff3</code>, you really can not say which came earlier in history, you need something more, such as the git log that reveals the ordering.
 
 #### Comparing the Two
 

@@ -289,7 +289,7 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 ```
 
 
-You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
+You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
 
 
 ### State of the forms
@@ -413,7 +413,7 @@ We also make the following changes to the <i>Togglable</i> component:
 ```js
 import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = forwardRef((props, ref) => { // highlight-line
+const Togglable = forwardRef((props, refs) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -424,7 +424,7 @@ const Togglable = forwardRef((props, ref) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeHandle(ref, () => {
+  useImperativeHandle(refs, () => {
     return {
       toggleVisibility
     }
@@ -475,7 +475,7 @@ This trick works for changing the state of a component, but it looks a bit unple
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
-You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
+You can find the code for our current application in its entirety in the <i>part5-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-6).
 
 ### One point about components
 
@@ -610,6 +610,7 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
   url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
 }
 ```
+Backend has to be updated too to handle the user reference.
 
 **One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case". 
 
@@ -809,7 +810,7 @@ Component _Togglable_ causes a nasty looking warning <i>Component definition is 
 
 ![](../../images/5/25x.png)
 
-The react-devtools also reveals that the component does not have name:
+The react-devtools also reveals that the component does not have a name:
 
 ![](../../images/5/26ea.png)
 
@@ -828,7 +829,7 @@ Togglable.displayName = 'Togglable' // highlight-line
 export default Togglable
 ```
 
-You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
+You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 
 Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overriden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage to that:
  <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.

@@ -81,7 +81,7 @@ Let's also add a new action <em>appendNote</em> for adding a note object:
 ```js
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
       const content = action.payload
@@ -151,7 +151,7 @@ Dispatching multiple actions seems a bit 	impractical. Let's add an action creat
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
       const content = action.payload
@@ -448,6 +448,9 @@ In the inner function, meaning the <i>asynchronous action</i>, the operation fir
 The component <i>App</i> can now be defined as follows:
 
 ```js
+// ...
+import { initializeNotes } from './reducers/noteReducer' // highlight-line
+
 const App = () => {
   const dispatch = useDispatch()
 
@@ -477,7 +480,7 @@ import noteService from '../services/notes'
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     // highlight-start
     toggleImportanceOf(state, action) {
@@ -530,6 +533,9 @@ The principle here is the same: first, an asynchronous operation is executed, af
 The component <i>NewNote</i> changes as follows:
 
 ```js
+// ...
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
 const NewNote = () => {
   const dispatch = useDispatch()
   

@@ -25,18 +25,6 @@ const getAll = () => {
 
 export default { getAll, create, update }
 ```
-  
-We will also need to change the url specified in the effect in <i>App.js</i>:
-  
-```js
-  useEffect(() => {
-    axios
-      .get('http://localhost:3001/api/notes')
-      .then(res => {
-        setNotes(res.data)
-      })
-  }, [])
-```
 
 <!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
 Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
@@ -93,7 +81,7 @@ Now that the whole stack is ready, let's move our application to the internet. W
 Add a file called  <i>Procfile</i> to the backend project's root to tell Heroku how to start the application. 
 
 ```bash
-web: npm start
+web: node index.js
 ```
 
 Change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 

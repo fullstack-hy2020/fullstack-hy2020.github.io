@@ -152,7 +152,7 @@ afterAll(() => {
 
 Testejä suorittaessa tulee seuraava ilmoitus:
 
-![](../../images/4/8.png)
+![Virheilmoitus Jest did not exit one second after the test run has completed](../../images/4/8.png)
 
 Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
 
@@ -667,7 +667,7 @@ Koodiin jää kuitenkin pieni ongelma: virhetilanteita ei nyt käsitellä ollenk
 
 Jos sovellus POST-pyyntöä käsitellessään aiheuttaa jonkinlaisen ajonaikaisen virheen, syntyy jälleen tuttu tilanne:
 
-![](../../images/4/6.png)
+![Konsolissa näkyy virheilmoitus ValidationError joka johtuu siitä että content puuttuu vastaanotetusta datasta](../../images/4/6.png)
 
 Kyseessä on siis käsittelemätön promisen rejektoituminen. Pyyntöön ei vastata tilanteessa mitenkään.
 
@@ -982,8 +982,7 @@ Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_tes
 
 **HUOM 1:** Testejä suorittaessa törmät ehkä seuraavaan varoitukseen:
 
-![](../../images/4/8a.png)
-
+![Virheilmotus Mongoose: looks like you're trying to test Mongoose app with Jest's default jsdomain environment.](../../images/4/8a.png)
 
 Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
 
@@ -1178,7 +1177,7 @@ afterAll(() => {
 
 Testien raportointi tapahtuu <i>describe</i>-lohkojen ryhmittelyn mukaan:
 
-![](../../images/4/7.png)
+![Jest ryhmittelee testitulokset describe-lohkoittain](../../images/4/7.png)
 
 Testeihin jää vielä parannettavaa, mutta on jo aika siirtyä eteenpäin.
 

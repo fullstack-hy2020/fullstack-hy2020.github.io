@@ -3,13 +3,13 @@
     {
       "title": "Miten kurssille ilmoittaudutaan?",
       "text": [
-        "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen ja tarvitset virallisen suoritusmerkinnän. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+        "Kurssille ei tarvitse varsinaisesti ilmoittautua ennen kuin haluat tehdä kurssin kokeen ja tarvitset virallisen suoritusmerkinnän. Koe tehdään Avoimen yliopiston Moodle-järjestelmään. Katso lisää <a href='/osa0/yleista#osat-ja-suorittaminen'>täältä</a>."
       ]
     },
     {
       "title": "Mikä on kurssin laajuus?",
       "text": [
-        "Kurssin laajuus on <a href='/osa0/yleista#arvosteluperusteet'>riippuen tekemiesi tehtävien määrästä</a> 5-14 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisen <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
+        "Kurssin laajuus on <a href='/osa0/yleista#osat-ja-suorittaminen'>riippuen tekemiesi tehtävien määrästä</a> 5-14 opintopistettä. Suoritettuasi kurssin voit jatkaa aihepiiriin syventymistä 1-10 opintopisteen laajuisen <a href='/osa0/yleista#full-stack-harjoitustyo'>Full stack -harjoitustyön</a> parissa."
       ]
     },
     {
@@ -39,7 +39,7 @@
     {
       "title": "Milloin ja miten saan kurssilta suoritusmerkinnän?",
       "text": [
-        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2023. Lue lisää <a href='/osa0/yleista#arvosteluperusteet'>täältä</a>."
+        "Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa. Viimeinen mahdollinen suorituspäivä on 10.1.2023. Lue lisää <a href='/osa0/yleista#osat-ja-suorittaminen'>täältä</a>."
       ]
     },
     {
@@ -59,13 +59,13 @@
     {
       "title": "How do I sign up for the course?",
       "text": [
-        "You don't have to sign up until you want to do the course exam. The exam is done in the Moodle-system of the Open University. You can find more information <a href='/en/part0/general_info#grading'>here</a>. <br><br>For the course certificate signup and Moodle exam are not needed."
+        "You don't have to sign up until you want to do the course exam. The exam is done in the Moodle-system of the Open University. You can find more information <a href='/en/part0/general_info#parts-and-completion'>here</a>. <br><br>For the course certificate signup and Moodle exam are not needed."
       ]
     },
     {
       "title": "How many credits is the course?",
       "text": [
-        "The course is 5-14 ECTS credits <a href='/en/part0/general_info#grading'>depending on the amount of returned exercises</a>. After completing the course you can continue to deepen your knowledge on the subject matter by doing the 1-10 ECTS credit <a href='/en/part0/general_info#full-stack-project'>Full Stack project</a>."
+        "The course is 5-14 ECTS credits <a href='/en/part0/general_info#parts-and-completion'>depending on the amount of returned exercises</a>. After completing the course you can continue to deepen your knowledge on the subject matter by doing the 1-10 ECTS credit <a href='/en/part0/general_info#full-stack-project'>Full Stack project</a>."
       ]
     },
     {
@@ -95,7 +95,7 @@
     {
       "title": "When and how can I get my credits?",
       "text": [
-        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2023. Read more <a href='/en/part0/general_info/#grading'>here</a>. <br><br>For the course certificate signup or the exam are not needed."
+        "You can get your credits after submitting enough exercises for passing the course, passing the course exam and letting us know through the exercise submission system that you are ready with the course. The deadline is 10th January 2023. Read more <a href='/en/part0/general_info/#parts-and-completion'>here</a>. <br><br>For the course certificate signup or the exam are not needed."
       ]
     },
     {
@@ -127,13 +127,13 @@
     {
       "title" : "¿Cómo me registro en el curso?",
       "text" : [
-        "No tienes que registrarte hasta que quieras hacer el examen del curso. El examen se realiza en el sistema Moodle de la Open University. Puedes encontrar más información <a href='/en/part0/general_info#grading '>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden participar en los exámenes y obtener créditos ECTS oficiales. Para el certificado del curso, no es necesario registrarse ni número de seguro social finlandés."
+        "No tienes que registrarte hasta que quieras hacer el examen del curso. El examen se realiza en el sistema Moodle de la Open University. Puedes encontrar más información <a href='/en/part0/general_info#parts-and-completion '>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden participar en los exámenes y obtener créditos ECTS oficiales. Para el certificado del curso, no es necesario registrarse ni número de seguro social finlandés."
       ]
     },
     {
       "title" : "¿Cuántos créditos tiene el curso?",
       "text" : [
-        "El curso es de 5-14 créditos ECTS <a href='/en/part0/general_info#grading'> dependiendo de la cantidad de ejercicios devueltos </a>. Después de completar el curso, puede continuar profundizando sus conocimientos sobre el tema importa haciendo <a href='/en/part0/general_info#full-stack-project'>proyecto Full Stack</a> por créditos ECTS 1-10. Tenga en cuenta que solo las personas con número de seguridad social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
+        "El curso es de 5-14 créditos ECTS <a href='/en/part0/general_info#parts-and-completion'> dependiendo de la cantidad de ejercicios devueltos </a>. Después de completar el curso, puede continuar profundizando sus conocimientos sobre el tema importa haciendo <a href='/en/part0/general_info#full-stack-project'>proyecto Full Stack</a> por créditos ECTS 1-10. Tenga en cuenta que solo las personas con número de seguridad social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
       ]
     },
     {
@@ -163,7 +163,7 @@
     {
       "title": "¿Cuándo y cómo puedo obtener mis créditos?",
       "text": [
-        "Puede obtener sus créditos después de enviar suficientes ejercicios para aprobar el curso, aprobar el examen del curso e informarnos a través del sistema de envío de ejercicios que está listo con el curso. La fecha límite es el 10 de enero de 2023. Leer más <a href='/en/part0/general_info/#grading'>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
+        "Puede obtener sus créditos después de enviar suficientes ejercicios para aprobar el curso, aprobar el examen del curso e informarnos a través del sistema de envío de ejercicios que está listo con el curso. La fecha límite es el 10 de enero de 2023. Leer más <a href='/en/part0/general_info/#parts-and-completion'>aquí</a>. Tenga en cuenta que solo las personas con número de seguro social finlandés pueden obtener créditos ECTS oficiales. Para el certificado del curso, no se necesita registro ni número de seguro social finlandés."
       ]
     },
     {
@@ -207,13 +207,13 @@
     {
       "title": "我如何报名这门课程呢？",
       "text": [
-        "除非你想参加课程考试，否则你并不必报名。 考试是在开放大学的 Moodle 系统中完成的。 在<a href='/zh/part0/基础知识#grading'>这里</a>.你可以找到更多资料。<br><br>请注意，只有拥有芬兰社保账号的人才能参加考试并获得官方的 ECTS 学分。 <br><br>而对于课程证书，不需要报名或芬兰社保号码。"
+        "除非你想参加课程考试，否则你并不必报名。 考试是在开放大学的 Moodle 系统中完成的。 在<a href='/zh/part0/基础知识#parts-and-completion'>这里</a>.你可以找到更多资料。<br><br>请注意，只有拥有芬兰社保账号的人才能参加考试并获得官方的 ECTS 学分。 <br><br>而对于课程证书，不需要报名或芬兰社保号码。"
       ]
     },
     {
       "title": "这门课多少学分呢？",
       "text": [
-        "该课程为5-14个ECTS学分，这<a href='/zh/part0/基础知识#grading'>取决于您提交的练习次数</a>。 完成课程后，您可以通过进行<a href='/zh/part0/基础知识#full-stack-project'> Full Stack项目</a>来加深对课程内容的了解，从而获得1-10 ECTS学分。 <br><br>请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 <br><br>对于课程证书，不需要注册或芬兰社保号码。"
+        "该课程为5-14个ECTS学分，这<a href='/zh/part0/基础知识#parts-and-completion'>取决于您提交的练习次数</a>。 完成课程后，您可以通过进行<a href='/zh/part0/基础知识#full-stack-project'> Full Stack项目</a>来加深对课程内容的了解，从而获得1-10 ECTS学分。 <br><br>请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 <br><br>对于课程证书，不需要注册或芬兰社保号码。"
       ]
     },
     {
@@ -243,7 +243,7 @@
     {
       "title": "我什么时候，以及如何获得自己的学分呢？",
       "text": [
-        "当你提交足够的练习，达到课程通过标准后，通过了课程考试，并通过练习提交系统告知我们所有准备已经妥当，才能获得学分。 截止日期是2023年1月10日。在<a href='/zh/part0/基础知识#grading'>此处</a>了解更多信息。 <br><br>请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 <br><br>对于课程证书，不需要注册或芬兰社保号码。"
+        "当你提交足够的练习，达到课程通过标准后，通过了课程考试，并通过练习提交系统告知我们所有准备已经妥当，才能获得学分。 截止日期是2023年1月10日。在<a href='/zh/part0/基础知识#parts-and-completion'>此处</a>了解更多信息。 <br><br>请注意，只有具有芬兰社保号码的人才能获得ECTS官方积分。 <br><br>对于课程证书，不需要注册或芬兰社保号码。"
       ]
     },
     {

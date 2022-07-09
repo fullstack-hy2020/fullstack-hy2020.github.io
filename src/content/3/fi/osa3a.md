@@ -116,7 +116,7 @@ Server running on port 3001
 
 Voimme avata selaimella osoitteessa <http://localhost:3001> olevan vaatimattoman sovelluksemme:
 
-![](../../images/3/1.png)
+![selaimessa näkyy teksti Hello World](../../images/3/1.png)
 
 Palvelin toimii samalla tavalla riippumatta urlin loppuosasta, eli myös sivun <http://localhost:3001/foo/bar> sisältö on sama.
 
@@ -221,7 +221,7 @@ Headerin <i>Content-Type</i> arvolla <i>application/json</i> kerrotaan, että ky
 
 Kun avaamme selaimen, on tulostusasu sama kuin [osassa 2](/osa2/palvelimella_olevan_datan_hakeminen) käytetyn [json-serverin](https://github.com/typicode/json-server) tarjoamalla muistiinpanojen listalla:
 
-![](../../images/3/2e.png)
+![Selain renderöi json-muotoisen datan](../../images/3/2e.png)
 
 ### Express
 
@@ -249,7 +249,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 
 Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin juuressa olevaan hakemistoon <i>node\_modules</i>. Hakemistosta löytyy Expressin lisäksi suuri määrä muutakin tavaraa:
 
-![](../../images/3/4.png)
+![komennon ls tulostama suuri määrä kirjastoja vastaavia hakemistoja](../../images/3/4.png)
 
 Kyseessä ovat Expressin riippuvuudet ja niiden riippuvuudet jne. eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
@@ -324,7 +324,7 @@ Koodissa pyyntöön vastataan käyttäen _response_-olion metodia [send](http://
 
 Asian voi varmistaa konsolin välilehdeltä <i>Network</i>:
 
-![](../../images/3/5.png)
+![Avattu network-tabi näyttää että palvelin vastaa statuskoodilla 200](../../images/3/5.png)
 
 Routeista toinen määrittelee tapahtumankäsittelijän, joka hoitaa sovelluksen polkuun <i>/api/notes</i> tulevia HTTP GET -pyyntöjä:
 
@@ -336,7 +336,7 @@ app.get('/api/notes', (request, response) => {
 
 Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa JavaScript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-Type</i> arvoksi <i>application/json</i>.
 
-![](../../images/3/6ea.png)
+![Selain renderöi json-muotoiset muistiinpanot](../../images/3/6ea.png)
 
 Pieni huomio JSON-muodossa palautettavasta datasta.
 
@@ -352,7 +352,7 @@ Kannattaa huomata, että [JSON](https://en.wikipedia.org/wiki/JSON) on merkkijon
 
 Seuraava interaktiivisessa [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html):issä suoritettu kokeilu havainnollistaa asiaa:
 
-![](../../assets/3/5.png)
+![js-objekti muuttuu string-tyyppiseksi JSON.stringify-operaation seurauksena](../../assets/3/5.png)
 
 Saat käynnistettyä interaktiivisen node-repl:in kirjoittamalla komentoriville _node_. Komentojen toimivuutta on koodatessa kätevä kokeilla konsolissa, suosittelen!
 
@@ -500,7 +500,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Kun selaimella mennään jälleen osoitteeseen <http://localhost:3001/api/notes/1>, konsoliin (eli siihen terminaaliin, johon sovellus on käynnistetty) tulostuu
 
-![](../../images/3/8.png)
+![Konsoliin on tulostunut 'server running in port 3000' lisäksi 1 ja undefined](../../images/3/8.png)
 
 eli halutun muistiinpanon id välittyy sovellukseen aivan oikein, mutta _find_ komento ei löydä mitään.
 
@@ -540,11 +540,11 @@ app.get('/api/notes/:id', (request, response) => {
 
 Nyt yksittäisen resurssin hakeminen toimii.
 
-![](../../images/3/9ea.png)
+![Yksittäistä muistiinpanoa vastaava json renderöityy](../../images/3/9ea.png)
 
 Toiminnallisuuteen jää kuitenkin pieni ongelma. Jos haemme muistiinpanoa sellaisella indeksillä, jota vastaavaa muistiinpanoa ei ole olemassa, vastaa palvelin seuraavasti:
 
-![](../../images/3/10ea.png)
+![Selaimeen ei renderöidy mitään, network-tab paljastaa että palvelin vastaa statuskoodilla 200](../../images/3/10ea.png)
 
 HTTP-statuskoodi on onnistumisesta kertova 200. Vastaukseen ei liity dataa, sillä headerin <i>content-length</i> arvo on 0, ja samaa todistaa selain: mitään ei näy.
 
@@ -598,7 +598,7 @@ On olemassa useita backendin testaamista helpottavia työkaluja, eräs näistä 
 
 Asennetaan Postmanin desktop sovellus [täältä](https://www.postman.com/downloads/)  ja kokeillaan:
 
-![](../../images/3/11x.png) 
+![tehdään postmanilla operaatio DELETE http://localhost:3000/api/notes/1, huomataan että vastauksessa statuskoodi 204 no content](../../images/3/11x.png) 
 
 Postmanin käyttö on tässä tilanteessa suhteellisen yksinkertaista, riittää määritellä url ja valita oikea pyyntötyyppi.
 
@@ -615,11 +615,11 @@ Kun plugin on asennettu, on sen käyttö erittäin helppoa. Tehdään projektin 
 
 Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_all\_notes.rest</i>:
 
-![](../../images/3/12ea.png)
+![Luodaan tiedosto jonka sisältlö GET http://localhost:3000/api/notes](../../images/3/12ea.png)
 
 Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön, ja palvelimen vastaus avautuu editoriin:
 
-![](../../images/3/13ea.png)
+![VS codeen avautuu näkymä missä palvelimen palauttama json-muotoinen taulukko muistiinpanoja sekä operaatioon vastattu statuskoodi ja palautetut headerit](../../images/3/13ea.png)
 
 ### Datan vastaanottaminen
 
@@ -655,35 +655,35 @@ Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin 
 
 Ennen toimintalogiikan viimeistelyä varmistetaan ensin Postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli <i>body</i>:
 
-![](../../images/3/14x.png)
+![Valitaan postmanissa JSON body-datan tyypiksi](../../images/3/14x.png)
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
-![](../../images/3/15e.png)
+![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15e.png)
 
 **HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
 
-![](../../images/3/16.png)
+![konsoliin tulostuu epävalidista javascriptistä johtuva parse error -virheilmoitus](../../images/3/16.png)
 
 Konsolista kannattaa seurata myös, reagoiko backend odotetulla tavalla esim. kun sovellukselle lähetetään dataa metodilla HTTP POST. Backendiin kannattaa luonnollisesti lisäillä runsaat määrät <em>console.log</em>-komentoja kun sovellus on kehitysvaiheessa. 
 
 Eräs ongelmanlähde on se, että dataa lähettäessä headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyyppiä ei määritellä oikein:
 
-![](../../images/3/17x.png)
+![Valitaan postmanissa text body-datan tyypiksi](../../images/3/17x.png)
 
 Headerin <i>Content-Type</i> arvoksi asettuu <i>text/plain</i>:
 
-![](../../images/3/18x.png)
+![Nähdään postmanin headers-välilehdeltä että content-type on text/plain](../../images/3/18x.png)
 
 Palvelin näyttää vastaanottavan ainoastaan tyhjän olion:
 
-![](../../images/3/19.png)
+![Konsoliin tulostuu tyhjä json](../../images/3/19.png)
 
 Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei edes yritä arvailla missä muodossa data on, sillä potentiaalisia datan siirtomuotoja eli <i>Content-Typejä</i> on olemassa [suuri määrä](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types).
 
 Jos käytät VS Codea, edellisessä luvussa esitelty REST client kannattaa asentaa viimeistään <i>nyt</i>. POST-pyyntö tehdään REST clientillä seuraavasti:
 
-![](../../images/3/20eb.png)
+![VS codeen avautuu näkymä joka näyttää palvelimen palauttaman, luodun json-objektin, sekä siihen liittyvät headerit ja statuskoodin 200](../../images/3/20eb.png)
 
 Pyyntöä varten on siis luotu oma tiedosto <i>create\_note.rest</i>. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
 
@@ -778,7 +778,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 Tämän hetken koodi on branchissa [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1):
 
-![](../../images/3/21.png)
+![Kuva havainnollistaa miten branchi löydetään githubista](../../images/3/21.png)
 
 Jos kloonaat projektin itsellesi, suorita komento _npm install_ ennen käynnistämistä eli ennen komentoa _npm start_ tai _npm run dev_.
 
@@ -818,7 +818,7 @@ Mitä rivillä tapahtuu? <em>notes.map(n => n.id)</em> muodostaa taulukon, joka 
 
 Tee Node-sovellus, joka tarjoaa osoitteessa <http://localhost:3001/api/persons> kovakoodatun taulukon puhelinnumerotietoja:
 
-![](../../images/3/22e.png)
+![Selain renderöi taulukollisen json-muotoisia objekteja joilla kentät id, name ja number](../../images/3/22e.png)
 
 Sovellus pitää pystyä käynnistämään komennolla _npm start_.
 
@@ -828,7 +828,7 @@ Komennolla _npm run dev_ käynnistettäessa sovelluksen tulee käynnistyä uudel
 
 Tee sovelluksen osoitteeseen <http://localhost:3001/info> suunnilleen seuraavanlainen sivu
 
-![](../../images/3/23x.png)
+![Selin renderöi kutsuhetken kellonajan sekä tekstin 'Phonebook has info for 2 people'](../../images/3/23x.png)
 
 Sivun tulee siis kertoa pyynnön tekohetki sekä se, kuinka monta puhelinluettelotietoa sovelluksen muistissa olevassa taulukossa on.
 
@@ -958,7 +958,7 @@ Morgan asennetaan kuten muutkin kirjastot, eli komennolla _npm install_ ja sen k
 
 Konfiguroi morgania siten, että se näyttää myös HTTP POST -pyyntöjen mukana tulevan datan:
 
-![](../../images/3/24.png)
+![Konsoliin tulostuu HTTP-pyntötyyppi, kutsuttu polku, paluuarvon statuskoodi, operaation viemä aika millisekunteina (tämä on morganin defaultina näyttämä) sekä pyynnön mukana mahdollisesti lähetetty data](../../images/3/24.png)
 
 Tämä tehtävä on kohtuullisen haastava, vaikka koodia ei tarvitakaan paljoa. 
 

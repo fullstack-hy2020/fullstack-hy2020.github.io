@@ -533,7 +533,7 @@ const input = screen.getByRole('textbox')
 
 aiheuttaisi virheen:
 
-![](../../images/5/40.png)
+![Konsoli kertoo virheestä TestingLibraryElementError: Found multiple elements with the role "textbox"](../../images/5/40.png)
 
 Virheilmoitus ehdottaa käytettäväksi metodia <i>getAllByRole</i> (jos tilanne ylipäätään on se mitä halutaan). Testi korjautuisi seuraavasti:
 
@@ -668,7 +668,7 @@ test('renders content', () => {
 Komento _getByText_ nimittäin etsii elementtiä missä on <i>ainoastaan parametrina teksti</i> eikä mitään muuta. Jos halutaan etsiä komponenttia joka <i>sisältää</i> tekstin, voidaan joko lisätä komennolle ekstraoptio:
 
 ```js 
-const element = screenscreen.getByText(
+const element = screen.getByText(
   'Does not work anymore :(', { exact: false }
 )
 ```
@@ -707,11 +707,11 @@ test('renders no shit', () => {
 CI=true npm test -- --coverage
 ```
 
-![](../../images/5/18ea.png)
+![Konsoliin tulostuu taulukko joka näyttää kunkin tiedoston testien kattavuusraportin sekä mahdolliset testien kattamattomat rivit](../../images/5/18ea.png)
 
 Melko primitiivinen HTML-muotoinen raportti generoituu hakemistoon <i>coverage/lcov-report</i>. HTML-muotoinen raportti kertoo mm. yksittäisten komponentin testaamattomat koodirivit:
 
-![](../../images/5/19ea.png)
+![Selaimeen renderöityy näkymä tiedostoista jossa värein merkattu ne rivit joita testit eivät kattaneet](../../images/5/19ea.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8), branchissa <i>part5-8</i>.
 

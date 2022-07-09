@@ -78,8 +78,6 @@ Let's add an npm-script to <i>the backend</i> which starts it in test mode, or s
 ```
 
 NB! In order to get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-
-NB! For macbooks with m1 CPU instead of intel ones, cypress wouldn't work since it doesn't support m1 yet. To fix that, installing Rosetta 2 then configuring your terminal is a must. For step by step instructions follow [here](https://www.cypress.io/blog/2021/01/20/running-cypress-on-the-apple-m1-silicon-arm-architecture-using-rosetta-2/).
   
 When both backend and frontend are running, we can start Cypress with the command
 
@@ -104,6 +102,8 @@ We start the test from the opened window:
 ![](../../images/5/40x.png)
 
 **NOTE**: you might need to restart Cypress after deleting the example tests.
+  
+**NOTE**: If you are using Cypress ^10.1.0, the <i>integration</i> subdirectory is gone and replaced with <i>e2e</i> subdirectory due to the introduction of component testing. It is also recommended to name E2E test file with this convention <i>note\_app.cy.js</i> but you can specify any pattern using specPattern option in the <i>cypress.config.js</i> file.
 
 Running the test opens your browser and shows how the application behaves as the test is run:
 

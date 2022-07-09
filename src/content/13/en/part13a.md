@@ -118,7 +118,7 @@ CREATE TABLE notes (
 );
 ```
 
-A few points: column <i>id</i> is defined as a <i>primary key</i>, which means the value of the column must be unique for each row in the table and the value must not be empty. The type for this column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. The column named <i>content</i> with type text is defined in such a way that it must be assigned a value.
+A few points: column <i>id</i> is defined as a <i>primary key</i>, which means that the value in the column id must be unique for each row in the table and the value must not be empty. The type for this column is defined as [SERIAL](https://www.postgresql.org/docs/9.1/datatype-numeric.html#DATATYPE-SERIAL), which is not the actual type but an abbreviation for an integer column to which Postgres automatically assigns a unique, increasing value when creating rows. The column named <i>content</i> with type text is defined in such a way that it must be assigned a value.
 
 Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the database:
 
@@ -299,7 +299,7 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
-Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we just used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query).
+Even though Sequelize is an ORM library, which means there is little need to write SQL yourself when using it, we just used [direct SQL](https://sequelize.org/master/manual/raw-queries.html) with the sequelize method [query](https://sequelize.org/api/v6/class/src/sequelize.js~sequelize#instance-method-query).
 
 Since everything seems to be working, let's change the application into a web application.
 
@@ -390,9 +390,9 @@ app.listen(PORT, () => {
 })
 ```
 
-A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each columm has a type defined, as well as other properties if necessary, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute as well as other configuration information. We also defined that the table does not have frequently used timestamp columns (created\_at and updated\_at).
+A few comments on the code: There is nothing very surprising about the <i>Note</i> definition of the model, each columm has a type defined, as well as other properties if necessary, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute as well as other configuration information. We also defined that the table does not have to use the timestamps columns (created\_at and updated\_at).
 
-We also defined <i>underscored: true</i>, which means that table names are derived from model names as plural [snake case](https://en.wikipedia.org/wiki/Snake_case) versions. Practically this means that, if the name of the model, as in our case is "Note", then the name of the corresponding table is the plural of the name written in a small initial letter, i.e. <i>notes</i>. If, on the other hand, the name of the model would be "two-part", e.g. <i>StudyGroup</i>, then the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
+We also defined <i>underscored: true</i>, which means that table names are derived from model names as plural [snake case](https://en.wikipedia.org/wiki/Snake_case) versions. Practically this means that, if the name of the model, as in our case is "Note", then the name of the corresponding table is its plural version written with a lower case initial letter, i.e. <i>notes</i>. If, on the other hand, the name of the model would be "two-part", e.g. <i>StudyGroup</i>, then the name of the table would be <i>study_groups</i>. Sequelize automatically infers table names, but also allows explicitly defining them.
 
 The same naming policy applies to columns as well. If we had defined that a note is associated with <i>creationYear</i>, i.e. information about the year it was created, we would define it in the model as follows:
 
@@ -440,7 +440,7 @@ app.post('/api/notes', async (req, res) => {
 
 Creating a new note is done by calling the model's <i>Note</i> method [create](https://sequelize.org/master/manual/model-querying-basics.html#simple-insert-queries) and passing as a parameter an object that defines the values of the columns.
 
-Instead of the <i>create</i> method, it [is also possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save to a database using the [build](https://sequelize.org/master/class/lib/model.js~Model.html#static-method-build) method first to create a Model-object from the desired data, and then calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
+Instead of the <i>create</i> method, it [is also possible](https://sequelize.org/master/manual/model-instances.html#creating-an-instance) to save to a database using the [build](https://sequelize.org/api/v6/class/src/model.js~model#static-method-build) method first to create a Model-object from the desired data, and then calling the [save](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-save) method on it:
 
 ```js
 const note = Note.build(req.body)
@@ -492,7 +492,7 @@ Create a GitHub repository for the application and create a new Heroku applicati
 
 #### Task 13.2.
 
-On the command-line, create a <i>blogs</i> table for the application with the following columns
+On the command-line, create a <i>blogs</i> table for the application with the following columns:
 - id (unique, incrementing id)
 - author (string)
 - url (string that cannot be empty)
@@ -557,7 +557,7 @@ That is, when the application starts, the command <i>CREATE TABLE IF NOT EXISTS 
 
 Let's complete the application with a few more operations.
 
-Searching for a single note is possible with the method [findByPk](https://sequelize.org/master/manual/model-querying-finders.html), because it is retrieved based on the id of the primary key:
+Searching for a single note is possible with the method [findByPk](https://sequelize.org/docs/v6/core-concepts/model-querying-finders/#findbypk), because it is retrieved based on the id of the primary key:
 
 ```js
 app.get('/api/notes/:id', async (req, res) => {
@@ -642,7 +642,7 @@ note {
 }
 ```
 
-In addition to the note information, all sorts of other things are printed on the console. We can reach the desired result by calling the model-object method [toJSON](https://sequelize.org/master/class/lib/model.js~Model.html#instance-method-toJSON):
+In addition to the note information, all sorts of other things are printed on the console. We can reach the desired result by calling the model-object method [toJSON](https://sequelize.org/api/v6/class/src/model.js~model#instance-method-toJSON):
 
 
 ```js
@@ -657,7 +657,7 @@ app.get('/api/notes/:id', async (req, res) => {
 })
 ```
 
-Now the result is exactly what we want.
+Now the result is exactly what we want:
 
 ```js
 { id: 1,
