@@ -931,7 +931,7 @@ app.post('/calculate', (req, res) => {
 
 // highlight-start
   if ( !value1 || isNaN(Number(value1))) {
-    return res.send({ error: '...'}).status(400);
+    return res.status(400).send({ error: '...'});
   }
   // highlight-end
 
