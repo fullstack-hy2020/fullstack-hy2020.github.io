@@ -810,7 +810,7 @@ Component _Togglable_ causes a nasty looking warning <i>Component definition is 
 
 ![](../../images/5/25x.png)
 
-The react-devtools also reveals that the component does not have name:
+The react-devtools also reveals that the component does not have a name:
 
 ![](../../images/5/26ea.png)
 
