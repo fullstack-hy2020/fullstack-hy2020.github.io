@@ -367,7 +367,7 @@ export default connect(
  由于该组件不需要访问商店的状态，我们可以简单地传递<i>null</i>作为_connect_的第一个参数。
 
 
-<!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).-->
+<!-- You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).-->
  你可以在[这个Github仓库](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5)的<i>part6-5</i>分支中找到我们当前应用的全部代码。
 
 ### Referencing action creators passed as props

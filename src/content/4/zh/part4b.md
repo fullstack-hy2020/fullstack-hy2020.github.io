@@ -134,7 +134,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/t
 <!-- These are the only changes we need to make to our application's code.-->
  这些是我们需要对我们的应用的代码进行的唯一修改。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2).-->
+<!-- You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2)的<i>part4-2</i>分支中找到我们当前应用的全部代码。
 
 
@@ -549,7 +549,7 @@ notesRouter.get('/', async (request, response) => {
 <!-- We can verify that our refactoring was successful by testing the endpoint through the browser and by running the tests that we wrote earlier.-->
  我们可以通过浏览器测试端点和运行我们之前写的测试来验证我们的重构是否成功。
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).-->
+<!-- You can find the code for our current application in its entirety in the <i>part4-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3).-->
  你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-3)的<i>part4-3</i>分支中找到我们当前应用的全部代码。
 
 ### More tests and refactoring the backend
@@ -897,7 +897,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).-->
+<!-- You can find the code for our current application in its entirety in the <i>part4-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4).-->
  你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-4)的<i>part4-4</i>分支中找到我们当前应用的全部代码。
 
 ### Eliminating the try-catch
@@ -1367,7 +1367,7 @@ afterAll(() => {
  这种测试API的方式，即通过HTTP请求和用Mongoose检查数据库，决不是对服务器应用进行API级集成测试的唯一或最佳方式。编写测试没有通用的最佳方式，因为它完全取决于被测试的应用和可用的资源。
 
 
-<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).-->
+<!-- You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).-->
  你可以在[这个Github仓库](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6)的<i>part4-6</i>分支中找到我们当前应用的全部代码。
 
 </div>
