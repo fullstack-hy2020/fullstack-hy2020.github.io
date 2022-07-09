@@ -81,7 +81,7 @@ Let's also add a new action <em>appendNote</em> for adding a note object:
 ```js
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
       const content = action.payload
@@ -151,7 +151,7 @@ Dispatching multiple actions seems a bit 	impractical. Let's add an action creat
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
       const content = action.payload
@@ -477,7 +477,7 @@ import noteService from '../services/notes'
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     // highlight-start
     toggleImportanceOf(state, action) {
