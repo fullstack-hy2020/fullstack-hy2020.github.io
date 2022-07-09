@@ -448,6 +448,9 @@ In the inner function, meaning the <i>asynchronous action</i>, the operation fir
 The component <i>App</i> can now be defined as follows:
 
 ```js
+// ...
+import { initializeNotes } from './reducers/noteReducer' // highlight-line
+
 const App = () => {
   const dispatch = useDispatch()
 
@@ -530,6 +533,9 @@ The principle here is the same: first, an asynchronous operation is executed, af
 The component <i>NewNote</i> changes as follows:
 
 ```js
+// ...
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
 const NewNote = () => {
   const dispatch = useDispatch()
   
