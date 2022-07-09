@@ -641,7 +641,7 @@ const input = container.querySelector('#note-input')
 
 However we shall stick to the approach of using _getByPlaceholderText_ in the test. 
 
-Let us look to a couple of details before moving on. Let us assume that a component would render test to an HTML-element as follows:
+Let us look to a couple of details before moving on. Let us assume that a component would render text to an HTML-element as follows:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -676,7 +676,7 @@ test('renders content', () => {
 })
 ```
 
-Command _getByText_ looks for an element that has exactly the **same text** that it has as parameter, and nothing more. If we want to look for element that <i>contains</i> the text, we could use a extra option:
+Command _getByText_ looks for an element that has exactly the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
 ```js 
 const element = screen.getByText(
@@ -692,7 +692,7 @@ const element = await screen.findByText('Does not work anymore :(')
 
 It is important to notice that unlike the other _ByText_ commands, _findByText_ returns a promise!
 
-There are situation where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
+There are situations where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
 
 We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
 
