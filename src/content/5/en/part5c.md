@@ -490,11 +490,11 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
   const input = screen.getByRole('textbox')
   const sendButton = screen.getByText('save')
 
-  await user.type(input, 'testing a form...' )
+  await user.type(input, 'testing a form...')
   await user.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
-  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
 })
 ```
 
@@ -550,7 +550,7 @@ The error message suggests to use <i>getAllByRole</i>. Test could be fixed as fo
 ```js
 const inputs = screen.getAllByRole('textbox')
 
-await user.type(inputs[0], 'testing a form...' )
+await user.type(inputs[0], 'testing a form...')
 ```
 
 Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
@@ -594,11 +594,11 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
   const input = screen.getByPlaceholderText('write here note content') // highlight-line 
   const sendButton = screen.getByText('save')
 
-  userEvent.type(input, 'testing a form...' )
+  userEvent.type(input, 'testing a form...')
   userEvent.click(sendButton)
 
   expect(createNote.mock.calls).toHaveLength(1)
-  expect(createNote.mock.calls[0][0].content).toBe('testing a form...' )
+  expect(createNote.mock.calls[0][0].content).toBe('testing a form...')
 })
 ```
 
