@@ -164,7 +164,7 @@ personService
     })
     .catch(error => {
       // this is the way to access the error message
-      console.log(error.response.data)
+      console.log(error.response.data.error)
     })
 ```
 
