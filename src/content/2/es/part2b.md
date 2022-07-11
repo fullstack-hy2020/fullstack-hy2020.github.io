@@ -114,6 +114,8 @@ El objetivo del evento almacenado en _event.target_ se registra en la consola:
 El objetivo (target) en este caso es el formulario que hemos definido en nuestro componente.
 
 ¿Cómo accedemos a los datos contenidos en el elemento <i>input</i> del formulario?
+  
+### Componentes controlados
 
 Hay muchas maneras de lograr esto; el primer método que veremos es mediante el uso de los llamados [componentes controlados](https://reactjs.org/docs/forms.html#controlled-components).
 
