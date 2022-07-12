@@ -176,6 +176,12 @@ Please note:
 - You only need the Moodle access for the exam, not for accessing the course certificate.
 - Credits for the course are only available to students who have successfully registered for the course through the Open University and completed the course according to the instructions
 
+### Doing the exam without University of Helsinki user account
+
+The exam can now be done in the new exam system, that is still in the beta testing state. The new system does not require the use of Helsinki user account.
+
+If you want to do the exam in the new system, please send a message to @mluukkai (Discord) or email to matti.luukkainen@helsinki.fi. Tell your University of Helsinki student number in the message.
+
 ### How to get your credits
 
 If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)

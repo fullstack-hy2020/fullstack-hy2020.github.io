@@ -21,7 +21,7 @@ class Layout extends Component {
         ? 'zh'
         : 'fi';
 
-    const visible = !localStorage.getItem('r18_banner_seen');
+    const visible = !localStorage.getItem('exam_banner_seen');
 
     console.log(visible);
 

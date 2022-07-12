@@ -159,11 +159,18 @@ Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokee
 
 Pääset Moodleen [tämän linkin](https://moodle.helsinki.fi/course/view.php?id=46197) kautta, sen jälkeen kun olet:
   - Ilmoittautunut Avoimen yliopiston kautta kurssille, ja
-  - aktivoinut Helsingin yliopiston käyttäjätunnuksen.
+  - aktivoinut Helsingin yliopiston käyttäjätunnuksen
 
 Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Se tulee aktivoida ennen kurssikokeen suorittamista. [Lue lisää käyttäjätunnuksen aktivoinnista](https://studies.helsinki.fi/ohjeet/artikkeli/helsingin-yliopiston-kayttajatunnus-avoin-yliopisto).
 
 HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen! Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
+
+
+### Kurssikoe ilman yliopiston käyttäjätunnusta
+
+Voit tehdä kurssin kokeen myös uudessa, koekäytössä olevassa kurssikoejärjestelmässä, joka ei edellytä yliopiston käyttäjätunnuksia.
+
+Jos olet tekemässä koetta, ja haluat käyttää moodlen sijaan uutta koejärjestelmää, lähetä viesti Discordissa @mluukkai tai sähköpostitse matti.luukkainen@helsinki.fi, kerro viestissä Helsingin yliopiston opiskelijanumerosi.
 
 ### Suoritusmerkinnän pyytäminen
 
