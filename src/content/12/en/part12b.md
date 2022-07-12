@@ -729,7 +729,7 @@ Implement a todo counter that saves the number of created todos to Redis:
 
 ```json
 {
-  "added_todos": 0,
+  "added_todos": 0
 }
 ```
 
