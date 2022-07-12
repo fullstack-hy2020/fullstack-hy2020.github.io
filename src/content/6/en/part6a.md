@@ -108,7 +108,7 @@ const store = createStore(counterReducer)
 The store now uses the reducer to handle <i>actions</i>, which are <i>dispatched</i> or 'sent' to the store with its [dispatch](https://redux.js.org/api/store#dispatchaction)-method.
 
 ```js
-store.dispatch({type: 'INCREMENT'})
+store.dispatch({ type: 'INCREMENT' })
 ```
 
 
@@ -119,12 +119,12 @@ For example the following code:
 ```js
 const store = createStore(counterReducer)
 console.log(store.getState())
-store.dispatch({type: 'INCREMENT'})
-store.dispatch({type: 'INCREMENT'})
-store.dispatch({type: 'INCREMENT'})
+store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: 'INCREMENT' })
+store.dispatch({ type: 'INCREMENT' })
 console.log(store.getState())
-store.dispatch({type: 'ZERO'})
-store.dispatch({type: 'DECREMENT'})
+store.dispatch({ type: 'ZERO' })
+store.dispatch({ type: 'DECREMENT' })
 console.log(store.getState())
 ```
 
