@@ -509,6 +509,7 @@ En este punto, la aplicación podría verse así. La imagen también muestra el 
 
 ![](../../images/2/12e.png)
 
+<h4>2.9*: La guía telefónica Paso4</h4>
 
 Implemente un campo de búsqueda que pueda usarse para filtrar la lista de personas por nombre:
 
