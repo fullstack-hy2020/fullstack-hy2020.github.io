@@ -161,6 +161,8 @@ Pääset Moodleen [tämän linkin](https://moodle.helsinki.fi/course/view.php?id
   - Ilmoittautunut Avoimen yliopiston kautta kurssille, ja
   - aktivoinut Helsingin yliopiston käyttäjätunnuksen
 
+**HUOM** Koe on mahdollista tehdä myös ilman käyttäjätunnuksen aktivointia, lue [täältä](/osa0/yleista#kurssikoe-ilman-yliopiston-kayttajatunnusta) lisää!
+
 Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Se tulee aktivoida ennen kurssikokeen suorittamista. [Lue lisää käyttäjätunnuksen aktivoinnista](https://studies.helsinki.fi/ohjeet/artikkeli/helsingin-yliopiston-kayttajatunnus-avoin-yliopisto).
 
 HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen! Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
@@ -170,7 +172,7 @@ HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies
 
 Voit tehdä kurssin kokeen myös uudessa, koekäytössä olevassa kurssikoejärjestelmässä, joka ei edellytä yliopiston käyttäjätunnuksia.
 
-Jos olet tekemässä koetta, ja haluat käyttää moodlen sijaan uutta koejärjestelmää, lähetä viesti Discordissa @mluukkai tai sähköpostitse matti.luukkainen@helsinki.fi, kerro viestissä Helsingin yliopiston opiskelijanumerosi.
+Jos olet tekemässä koetta, ja haluat käyttää Moodlen sijaan uutta koejärjestelmää, lähetä viesti Discordissa @mluukkai tai sähköpostitse matti.luukkainen@helsinki.fi, kerro viestissä Helsingin yliopiston opiskelijanumerosi.
 
 ### Suoritusmerkinnän pyytäminen
 

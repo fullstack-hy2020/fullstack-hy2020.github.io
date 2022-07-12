@@ -7,6 +7,8 @@ import Header from './Header/Header';
 import InfoBanner from './InfoBanner';
 import PropTypes from 'prop-types';
 
+const BANNER_TO_KEY = 'exam_banner_seen';
+
 class Layout extends Component {
   state = {
     siteLanguage: 'fi',
@@ -21,7 +23,7 @@ class Layout extends Component {
         ? 'zh'
         : 'fi';
 
-    const visible = !localStorage.getItem('exam_banner_seen');
+    const visible = !localStorage.getItem(BANNER_TO_KEY);
 
     console.log(visible);
 
@@ -32,7 +34,7 @@ class Layout extends Component {
   }
 
   hideNote() {
-    localStorage.setItem('r18_banner_seen', 'yes');
+    localStorage.setItem(BANNER_TO_KEY, 'yes');
     this.setState({
       siteLanguage: this.state.siteLanguage,
       visible: false,
