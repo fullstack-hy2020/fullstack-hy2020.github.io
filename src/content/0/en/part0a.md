@@ -179,7 +179,7 @@ Please note:
 
 ### Doing the exam without University of Helsinki user account
 
-The exam can now be done in the new exam system, that is still in the beta testing state. The new system does not require the use of Helsinki user account.
+The exam can now be done in the new exam system, that is still in the beta testing state. The new system does not require the use of Helsinki user account. 
 
 If you want to do the exam in the new system, please send a message to @mluukkai (Discord) or email to matti.luukkainen@helsinki.fi. Tell your University of Helsinki student number in the message.
 
