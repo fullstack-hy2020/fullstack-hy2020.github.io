@@ -1146,7 +1146,7 @@ For example, the information can be in the following form:
       readinglists: [
         {
           read: false,
-          id: 2
+          id: 3
         }
       ]
     }

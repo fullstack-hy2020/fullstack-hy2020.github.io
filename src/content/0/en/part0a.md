@@ -171,7 +171,6 @@ You can access Moodle through [this link](https://moodle.helsinki.fi/course/view
 - You can activate your user account after you have successfully enrolled on the course. The user account must be activated before attempting the course exam. Read more about activating the user account [here](https://studies.helsinki.fi/instructions/article/university-helsinki-user-account-open-university)
 - **NOTE** you can do the exam also without activating the user account, read [here](/en/part0/general_info/#doing-the-exam-without-university-of-helsinki-user-account) for more!
 
-
 After course enrollment, save your University of Helsinki student number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info how you find out your student number.
 
 Please note:
