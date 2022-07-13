@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
+Let's expand the application, so that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
 
 The initial state of the database is stored into the file <i>db.json</i>, which is placed in the root of the project:
 
@@ -66,7 +66,7 @@ We'll add axios to the project
 npm install axios
 ```
 
-We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
+We'll change the initialization of the state in <i>noteReducer</i>, so that by default there are no notes:
 
 ```js
 const noteSlice = createSlice({
@@ -372,7 +372,7 @@ As the initial backend data, you can use, e.g. [this](https://github.com/fullsta
 
 #### 6.14 Anecdotes and the backend, step2
 
-Modify the creation of new anecdotes, such that the anecdotes are stored in the backend.
+Modify the creation of new anecdotes, so that the anecdotes are stored in the backend.
 
 </div>
 
@@ -380,7 +380,7 @@ Modify the creation of new anecdotes, such that the anecdotes are stored in the 
 
 ### Asynchronous actions and redux thunk
 
-Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
+Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, so that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
 
 ```js
 const App = () => {
