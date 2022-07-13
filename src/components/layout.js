@@ -12,7 +12,7 @@ const BANNER_TO_KEY = 'exam_banner_seen';
 class Layout extends Component {
   state = {
     siteLanguage: 'fi',
-    visible: true,
+    visible: false,
   };
 
   componentDidMount() {
@@ -24,8 +24,6 @@ class Layout extends Component {
         : 'fi';
 
     const visible = !localStorage.getItem(BANNER_TO_KEY);
-
-    console.log(visible);
 
     this.setState({
       siteLanguage: siteLanguage,
