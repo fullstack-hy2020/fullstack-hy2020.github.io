@@ -154,13 +154,13 @@ import {
 } from "react-router-dom"
 ```
 
-According to the [manual](https://reactrouter.com/docs/en/v6/api#browserrouter):
+According to the [manual](https://reactrouter.com/docs/en/v6/routers/browser-router):
 
 > <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
 Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
-Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/docs/en/v6/api#link) component. For example,
+Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/docs/en/v6/components/link) component. For example,
 
 ```js
 <Link to="/notes">notes</Link>
@@ -168,7 +168,7 @@ Inside the router, we define <i>links</i> that modify the address bar with the h
 
 creates a link in the application with the text <i>notes</i>, which when clicked changes the URL in the address bar to <i>/notes</i>.
 
-Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/docs/en/v6/api#routes-and-route). For example, 
+Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/docs/en/v6/components/route). For example, 
 
 ```js
 <Route path="/notes" element={<Notes />} />
@@ -176,7 +176,7 @@ Components rendered based on the URL of the browser are defined with the help of
 
 defines that, if the browser address is <i>/notes</i>, we render the <i>Notes</i> component.
 
-We wrap the components to be rendered based on the url with a [Routes](https://reactrouter.com/docs/en/v6/api#routes-and-route) component
+We wrap the components to be rendered based on the url with a [Routes](https://reactrouter.com/docs/en/v6/components/routes) component
 
 ```js 
 <Routes>
@@ -258,7 +258,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/docs/en/v6/api#useparams) function of the React Router.
+The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/docs/en/v6/hooks/use-params) function of the React Router.
 
 ### useNavigate
 
@@ -322,11 +322,11 @@ const Login = (props) => {
 }
 ```
 
-What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) function of the React Router. With this function the browser's url can be changed programmatically.
+What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/docs/en/v6/hooks/use-navigate) function of the React Router. With this function the browser's url can be changed programmatically.
 
 With user login, we call _navigate('/')_ that causes the browser's url to change to _/_ and the application renders the corresponding component <i>Home</i>.
 
-Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.
+Both [useParams](https://reactrouter.com/docs/en/v6/hooks/use-params) and [useNavigate](https://reactrouter.com/docs/en/v6/hooks/use-navigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.
 
 ### redirect
 
@@ -336,7 +336,7 @@ There is one more interesting detail about the <i>Users</i> route:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/docs/en/v6/api#navigate) to the login view:
+If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) to the login view:
 
 ```js
 <Navigate replace to="/login" />
@@ -364,29 +364,29 @@ const App = () => {
 
   return (
     <div>
-    <Router>
-      <div>
-        <Link style={padding} to="/">home</Link>
-        <Link style={padding} to="/notes">notes</Link>
-        <Link style={padding} to="/users">users</Link>
-        {user
-          ? <em>{user} logged in</em>
-          : <Link style={padding} to="/login">login</Link>
-        }
-      </div>
+      <Router>
+        <div>
+          <Link style={padding} to="/">home</Link>
+          <Link style={padding} to="/notes">notes</Link>
+          <Link style={padding} to="/users">users</Link>
+          {user
+            ? <em>{user} logged in</em>
+            : <Link style={padding} to="/login">login</Link>
+          }
+        </div>
 
-      <Routes>
-        <Route path="/notes/:id" element={<Note notes={notes} />} />  
-        <Route path="/notes" element={<Notes notes={notes} />} />   
-        <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
-        <Route path="/login" element={<Login onLogin={login} />} />
-        <Route path="/" element={<Home />} />      
-      </Routes>
-    </Router>      
-      <div>
+        <Routes>
+          <Route path="/notes/:id" element={<Note notes={notes} />} />  
+          <Route path="/notes" element={<Notes notes={notes} />} />   
+          <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
+          <Route path="/login" element={<Login onLogin={login} />} />
+          <Route path="/" element={<Home />} />      
+        </Routes>
+      </Router>      
+      <footer>
         <br />
         <em>Note app, Department of Computer Science 2022</em>
-      </div>
+      </footer>
     </div>
   )
 }
@@ -421,7 +421,7 @@ const Note = ({ note }) => {
 }
 ```
 
-One way to do this would be to use React Router's [useMatch](https://reactrouter.com/docs/en/v6/api#usematch) hook to figure out the id of the note to be displayed in the _App_ component.
+One way to do this would be to use React Router's [useMatch](https://reactrouter.com/docs/en/v6/hooks/use-match) hook to figure out the id of the note to be displayed in the _App_ component.
 
 It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
 

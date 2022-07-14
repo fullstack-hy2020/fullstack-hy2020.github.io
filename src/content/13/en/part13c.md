@@ -1113,9 +1113,9 @@ At this point, information about whether the blog is read or not does not need t
 
 #### Task 13.21.
 
-Expand the single-user route so that each blog in the reading list shows also whether the blog has been read <i>and</i> the id of the corresponding connection table row.
+Expand the single-user route so that each blog in the reading list shows also whether the blog has been read <i>and</i> the id of the corresponding join table row.
 
-For example, the information can be in the following form:
+For example, the information could be in the following form:
 
 ```js
 {
@@ -1146,7 +1146,7 @@ For example, the information can be in the following form:
       readinglists: [
         {
           read: false,
-          id: 2
+          id: 3
         }
       ]
     }
@@ -1155,6 +1155,8 @@ For example, the information can be in the following form:
 ```
 
 Note: there are several ways to implement this functionality. [This](https://sequelize.org/master/manual/advanced-many-to-many.html#the-best-of-both-worlds--the-super-many-to-many-relationship) should help.
+
+Note also that despite having an array field <i>readinglists</i> in the example, it should always just contain exactly one object, the join table entry that connects the book to the particular user's reading list.
 
 #### Exercise 13.22.
 
