@@ -101,8 +101,8 @@ Create a Git repository in the project directory, and add <i>.gitignore</i> with
 ```bash
 node_modules
 ```
-Create Heroku account in https://devcenter.heroku.com/
-Install Heroku package using the command: npm install -g heroku
+Create a Heroku account in https://devcenter.heroku.com/. 
+Install the Heroku package using the command: npm install -g heroku. 
 Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku main</i>.
 
 If everything went well, the application works:
