@@ -90,7 +90,7 @@ const App = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Each view is implemented as its own component. We store the view component information in the application state called <i>page</i>. This information tells us which component, representing a view, should be shown below the menu bar.
