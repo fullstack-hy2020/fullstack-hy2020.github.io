@@ -545,10 +545,12 @@ const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState() // highlight-line
 
+//highlight-start
   const handleClick = () => {
     setCounter(counter + 1)
-    setValues(values.concat(counter)) // highlight-line
+    setValues(values.concat(counter))
   }
+//highlight-end
 
   return (
     <div className="container">
