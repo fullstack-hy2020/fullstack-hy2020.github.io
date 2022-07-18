@@ -714,7 +714,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 'https://obscure-harbor-49797.herokuapp.com/api/notes'
+  const url = 'https://obscure-harbor-49797.herokuapp.com/api/notes' // highlight-line
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -725,7 +725,7 @@ const App = () => {
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
+      <button onClick={handleClick}>press</button>
       <div>{notes.length} notes on server {url}</div> // highlight-line
     </div>
   )
