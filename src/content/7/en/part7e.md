@@ -237,7 +237,7 @@ With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html) library
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
   <App />
-  )
+)
 ```
 
 When the state of the application changes, a <i>new virtual DOM</i> gets defined by the components. React has the previous version of the virtual DOM in memory and instead of directly rendering the new virtual DOM using the DOM API, React computes the optimal way to update the DOM (remove, add or modify elements in the DOM) such that the DOM reflects the new virtual DOM.
@@ -312,7 +312,7 @@ You can check how up to date your dependencies are using the command
 npm outdated --depth 0
 ```
 
-One year old project that is used by the [part 9](/en/part9) of his course already have quite a few outdated dependencies:
+One year old project that is used by the [part 9](/en/part9) of his course already has quite a few outdated dependencies:
 
 ![](../../images/7/33x.png)
 
