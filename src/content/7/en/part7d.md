@@ -545,10 +545,12 @@ const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState() // highlight-line
 
+//highlight-start
   const handleClick = () => {
     setCounter(counter + 1)
-    setValues(values.concat(counter)) // highlight-line
+    setValues(values.concat(counter))
   }
+//highlight-end
 
   return (
     <div className="container">
@@ -694,10 +696,10 @@ The bundled file will then be configured to use the backend available at the <ht
 We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part7/custom_hooks) called _useNotes_:
 
 ```js
+// highlight-start
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// highlight-start
 const useNotes = (url) => {
   const [notes, setNotes] = useState([])
 
@@ -714,7 +716,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 'https://obscure-harbor-49797.herokuapp.com/api/notes'
+  const url = 'https://obscure-harbor-49797.herokuapp.com/api/notes' // highlight-line
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -725,7 +727,7 @@ const App = () => {
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
+      <button onClick={handleClick}>press</button>
       <div>{notes.length} notes on server {url}</div> // highlight-line
     </div>
   )

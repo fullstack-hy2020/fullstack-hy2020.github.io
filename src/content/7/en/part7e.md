@@ -55,17 +55,21 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.anecdotes.length === 0) { // highlight-line
+  // highlight-start
+    if (this.state.anecdotes.length === 0) {
       return <div>no anecdotes...</div>
     }
+  // highlight-end
 
     return (
       <div>
         <h1>anecdote of the day</h1>
+        // highlight-start
         <div>
-          {this.state.anecdotes[this.state.current].content} // highlight-line
+          {this.state.anecdotes[this.state.current].content}
         </div>
         <button>next</button>
+        // highlight-end
       </div>
     )
   }
@@ -237,7 +241,7 @@ With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html) library
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
   <App />
-  )
+)
 ```
 
 When the state of the application changes, a <i>new virtual DOM</i> gets defined by the components. React has the previous version of the virtual DOM in memory and instead of directly rendering the new virtual DOM using the DOM API, React computes the optimal way to update the DOM (remove, add or modify elements in the DOM) such that the DOM reflects the new virtual DOM.

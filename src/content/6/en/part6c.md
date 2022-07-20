@@ -282,7 +282,7 @@ const App = () => {
     noteService
       .getAll().then(notes => dispatch(setNotes(notes)))   
       // highlight-start
-  },[]) // eslint-disable-line react-hooks/exhaustive-deps  
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps  
   // highlight-end
 
   // ...
@@ -388,7 +388,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeNotes()))  
-  },[dispatch]) 
+  }, [dispatch]) 
 
   // ...
 }
@@ -457,7 +457,7 @@ const App = () => {
   // highlight-start
   useEffect(() => {
     dispatch(initializeNotes()) 
-  },[dispatch]) 
+  }, [dispatch]) 
   // highlight-end
 
   return (
