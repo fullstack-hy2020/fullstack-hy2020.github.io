@@ -52,7 +52,7 @@ const Users = () => (
 const App = () => {
   const [page, setPage] = useState('home')
 
- const toPage = (page) => (event) => {
+  const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
   }
