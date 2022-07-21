@@ -700,7 +700,7 @@ Instead we can achieve the same with this. Using one of the two methods is neces
 
 <div class="tasks">
 
-### Tasks 13.8.-13.11.
+### Tasks 13.8.-13.12.
 
 #### Task 13.8.
 
