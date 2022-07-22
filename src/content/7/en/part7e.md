@@ -316,7 +316,7 @@ You can check how up to date your dependencies are using the command
 npm outdated --depth 0
 ```
 
-One year old project that is used by the [part 9](/en/part9) of his course already has quite a few outdated dependencies:
+The one year old project that is used by the [part 9](/en/part9) of this course already have quite a few outdated dependencies:
 
 ![](../../images/7/33x.png)
 
