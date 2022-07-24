@@ -638,6 +638,8 @@ const App = () => {
 
   return <Course course={course} />
 }
+
+export default App
 ```
 
 Defina un componente responsable de formatear un solo curso llamado <i>Course</i>.

@@ -617,6 +617,8 @@ const App = () => {
 
   return <Course course={course} />
 }
+
+export default App
 ```
 
 Define a component responsible for formatting a single course called <i>Course</i>. 
