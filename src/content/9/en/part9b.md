@@ -418,7 +418,7 @@ In our case it is quite obvious that the return value should be an object with t
 
 #### setup
 
-Exercises 9.1.-9.7. will all be made in the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Create also the file <i>tsconfig.json</i> in the directory with the following content:
+Exercises 9.1.-9.7. will all be made in the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Also create the file <i>tsconfig.json</i> in the directory with the following content:
 
 ```json
 {
