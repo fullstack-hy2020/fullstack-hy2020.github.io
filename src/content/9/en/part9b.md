@@ -150,7 +150,7 @@ Let's look at our calculator now:
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-const calculator = (a: number, b: number, op : Operation) => {
+const calculator = (a: number, b: number, op: Operation) => {
   if (op === 'multiply') {
     return a * b;
   } else if (op === 'add') {
