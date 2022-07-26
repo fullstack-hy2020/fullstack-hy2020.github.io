@@ -398,7 +398,7 @@ const parseArguments = (args: Array<string>): MultiplyValues => {
 }
 ```
 
-Firstly,  the parameter <i>args</i> is an [array](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) of strings. The return value has the type <i>MultiplyValues</i>, which is defined as follows:
+Firstly,  the parameter <i>args</i> is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings. The return value has the type <i>MultiplyValues</i>, which is defined as follows:
 
 ```js
 interface MultiplyValues {
