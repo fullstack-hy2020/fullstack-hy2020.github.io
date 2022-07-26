@@ -201,7 +201,7 @@ You can view your grade in University of Helsinki Sisu and [Opintopolku](https:/
 
 ### Where do I get my University of Helsinki Student number 
 
-When and if you enroll on a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. Please make sure you have enrolled on the course before you try find out what your student number is. 
+When and if you enroll in a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. Please make sure you have enrolled in the course before you try to find out what your student number is. 
 
 Note also that <strong>you do not need to enroll</strong> to Open University to get the course certificate!
 
