@@ -536,7 +536,7 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack absolutely is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
+Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack absolutely is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. Currently, [Vite](https://vitejs.dev) tools, also simpler than Webpack, are gaining popularity - but their success can only be measured in the future.
 
 Another notable mention is the [Rome](https://rome.tools/) library, which aspires to be an all-encompassing toolchain to unify linter, compiler, bundler, and more. It is currently under heavy development since the initial commit earlier this year on Feb 27, but the outlook sure seems promising.
 
