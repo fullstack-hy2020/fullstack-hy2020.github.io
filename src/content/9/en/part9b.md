@@ -62,7 +62,7 @@ It is worth mentioning that TypeScript also provides an online playground, where
 
 JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and to adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.
 
-Let us add the project a configuration file _tsconfig.json_ with the following content:
+Let us add a configuration file _tsconfig.json_ to the project with the following content:
 
 ```js
 {
