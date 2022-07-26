@@ -407,7 +407,7 @@ interface MultiplyValues {
 }
 ```
 
-The definition utilizes TypeScript's [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) keyword, which is one way to define the "shape" an object should have. 
+The definition utilizes TypeScript's Interface [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html) keyword, which is one way to define the "shape" an object should have. 
 In our case it is quite obvious that the return value should be an object with the two properties <i>value1</i> and <i>value2</i>, which should both be of type number. 
 
 </div>
