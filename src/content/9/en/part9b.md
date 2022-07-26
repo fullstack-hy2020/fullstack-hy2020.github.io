@@ -30,7 +30,7 @@ npm install -g ts-node typescript
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
 We will also take this approach. 
 
-As we remember from [part 3](/en/part3), an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
+As we recall from [part 3](/en/part3), an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
 
 ```
 npm install --save-dev ts-node typescript
