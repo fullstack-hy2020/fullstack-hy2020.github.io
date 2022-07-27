@@ -29,7 +29,7 @@ We can use [create-react-app](https://create-react-app.dev) to create a TypeScri
 npx create-react-app my-app --template typescript
 ```
 
-After running the command, you should have a complete basic react app which uses TypeScript.
+After running the command, you should have a complete basic React app which uses TypeScript.
 You can start the app by running <i>npm start</i> in the application's root. 
 
 If you take a look at the files and folders, you'll notice that the app is not that different from 
@@ -102,10 +102,10 @@ We configure eslint in <i>.eslintrc</i> with the following settings:
 }
 ```
 
-Since the return type of basically all React components is <i>JSX.Element</i> or <i>null</i>, we have loosened the default linting rules up a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md). 
-Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is no more needed in every file.
+Since the return type of most React components is generally either <i>JSX.Element</i> or <i>null</i>, we have loosened up the default linting rules a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md). 
+Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.
 
-Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of react's JSX files. 
+Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React's JSX files. 
 We can do that by altering our lint command in <i>.package.json</i> to the following:
 
 ```json
