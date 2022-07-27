@@ -23,7 +23,7 @@ class Layout extends Component {
         ? 'zh'
         : 'fi';
 
-    const visible = !localStorage.getItem(BANNER_TO_KEY);
+    const visible = false; // !localStorage.getItem(BANNER_TO_KEY);
 
     this.setState({
       siteLanguage: siteLanguage,
