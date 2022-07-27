@@ -1022,7 +1022,7 @@ const newDiaryEntry = diaryService.addDiary({
 });
 ```
 
-We certainly would like to have certainty that the object in a post request is of the right type, so let us define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly-typed <i>NewDiaryEntry</i> object. The function shall be defined in the file <i>utils.ts</i>.
+We would like to have assurance that the object in a post request is the correct type, so let us define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly-typed <i>NewDiaryEntry</i> object. The function shall be defined in the file <i>utils.ts</i>.
 
 The route definition uses the function as follows:
 
