@@ -61,9 +61,9 @@ Credits and grades are calculated as follows:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-If you wish to receive university credits, you must complete an exam. The exam does not count towards your final grade, but you must pass it. You do the exam in the Moodle learning environment, which can be accessed via the [Open University course page](https://studies.helsinki.fi/courses/cur/otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9/_Full_Stack_Web_Development) once you have [signed up](https://fullstackopen.com/en/part0/general_info#sign-up-for-the-exam) for the exam.
-
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+If you wish to receive university credits, you must complete the course exam. The exam does not count towards your final grade, but you must pass it. More info about the exam [here](/en/part0/general_info#the-course-exam).
 
 The last possible date for taking the exam is 10 January 2023. **Note that you must sign up for the exam by 9 January 2023, at the latest.**
 
@@ -130,11 +130,10 @@ How to study the course – instructions in a nutshell (5 cr core course CSM1410
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
   - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
-  - Enroll on the course. You will get the enrollment link through submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#sign-up-for-the-exam)
-  - Activate your University of Helsinki user account. You can activate your user account after you have successfully enrolled on the course. The user account must be activated before attempting the course exam. Read more about activating the user account [here](/en/part0/general_info#sign-up-for-the-exam). 
-  - Do the online exam in Moodle. You can access Moodle through [this](https://moodle.helsinki.fi/course/view.php?id=46197) link. Log into Moodle with your University of Helsinki user account. 
+  - Enroll on the course. You will get the enrollment link through submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#the-course-exam)
   - Save your student number. After course enrollment, save your University of Helsinki student ID number in the submission system.
-   - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
+  - Do the online exam in the Submission system. Read more [here](/en/part0/general_info#the-course-exam)
+  - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
 
 How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
 
@@ -156,32 +155,39 @@ A system for detecting plagiarism is used to check exercises submitted to GitHub
 
 Many of the exercises build a larger application bit by bit. In these cases, submitting only the completed application is enough. You can make a commit after each exercise, but that is not compulsory.
 
-### Sign up for the exam
+### The course exam
 
-For official university credits you need to pass the course exam that is done in Open University Moodle. Follow the instructions below to gain access to the course Moodle space:
+For the official university credits you need to pass the course exam that covers parts 1-5 of the course.
+
+The exam is done in the exercise submission system. Follow the instructions below to complete the exam.
 - Enroll in the course through Open University by 9 Jan 2023.
 - You will get the enrollment link through  [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
 
-![](../../images/0/enroll.png)
+![](../../images/0/enroll1.png)
 
-You can access Moodle through [this link](https://moodle.helsinki.fi/course/view.php?id=46197) after you have:
+After the course enrollment, save your University of Helsinki student number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo):
 
-- Successfully enrolled on the course through the Open University, and
-- Activated your University of Helsinki user account
-- You can activate your user account after you have successfully enrolled on the course. The user account must be activated before attempting the course exam. Read more about activating the user account [here](https://studies.helsinki.fi/instructions/article/university-helsinki-user-account-open-university)
-- **NOTE** you can do the exam also without activating the user account, read [here](/en/part0/general_info/#doing-the-exam-without-university-of-helsinki-user-account) for more!
+![](../../images/0/28b.png)
 
-After course enrollment, save your University of Helsinki student number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo). See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info how you find out your student number.
+See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info how you find out your student number.
 
-Please note:
-- You only need the Moodle access for the exam, not for accessing the course certificate.
-- Credits for the course are only available to students who have successfully registered for the course through the Open University and completed the course according to the instructions
+After these steps, you can do the course exam in the submission system:
 
-### Doing the exam without University of Helsinki user account
+![](../../images/0/enroll3.png)
 
-The exam can now be done in the new exam system, that is still in the beta testing state. The new system does not require the use of Helsinki user account. 
+There is 120 minutes time to complete the exam. If all goes well, you should see the following confirmation:
 
-If you want to do the exam in the new system, please send a message to @mluukkai (Discord) or email to matti.luukkainen@helsinki.fi. Tell your University of Helsinki student number in the message.
+![](../../images/0/enroll4.png)
+
+If you fail, you must wait for one week for trying the exam again.
+
+If you passed the exam, and you are not going to complete more exercises, you can go back to my submission tab and ask for the credits:
+
+![](../../images/0/enroll5a.png)
+
+Remember to press the big blue button to ask for the credits to be registered.
+
+Note: if you have already done the course exam in Moodle contact matti.luukkainen@helsinki.fi or @mluukkai in Discord.
 
 ### How to get your credits
 
@@ -189,15 +195,17 @@ If you want to receive University of Helsinki credits, save your <b>University o
 
 ![](../../images/0/28b.png)
 
-If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
+If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#the-course-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
 
 You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
-![](../../images/0/28a.png)
+![](../../images/0/enroll5a.png)
 
-You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
+Remember to press the big blue button to ask for the credits to be registered!
 
 **Please note** that in order to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
+
+You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
 
 ### Where do I get my University of Helsinki Student number 
 

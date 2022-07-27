@@ -1486,8 +1486,6 @@ Jos haluat suoritusmerkinnän, merkitse kurssi suoritetuksi:
 
 ![Submissions](../../images/11/21.png)
 
-Huomautus "exam done in Moodle" viittaa [Full Stack Open kurssin kokeeseen](/en/part0/general_info#sign-up-for-the-exam), joka tulee olla suoritettuna ennen kun voit saada tästä osasta opintopisteet.
-
 **Huomaa**, että suoritusmerkintää ei voida kirjata, ellet ole ilmoittautunut tätä osaa vastaavaan "kurssiin palaan", katso lisätietoja ilmoittautumisesta [täältä](/osa0/yleista#osat-ja-suorittaminen).
 
 </div>

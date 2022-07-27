@@ -55,7 +55,7 @@ Arvosana/opintopisterajat:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan Avoimen yliopiston [Moodle-järjestelmässä](https://studies.helsinki.fi/courses/cur/otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9/_Full_Stack_Web_Development), ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
+Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Lisää tietoa kurssikokeesta [täällä](/osa0/yleista/#kurssikoe).
 
 Kokeen viimeinen suorituspäivä on 10.1.2023. **Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2023.**
 
@@ -123,18 +123,16 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081) 
 
 - Tee tehtävät. Palauta vastauksesi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) kautta.
-- Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikokeeseen-ilmoittautuminen) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
-- Aktivoi Helsingin yliopiston käyttäjätunnus. Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Käyttäjätunnus tulee aktivoida ennen kurssikokeen suorittamista. Lue lisää [täältä](/osa0/yleista/#kurssikokeeseen-ilmoittautuminen). 
-- Tee verkkotentti Moodlessa. Pääset Moodleen [tämän](https://moodle.helsinki.fi/course/view.php?id=46197) linkin kautta. Kirjaudu Moodleen Helsingin yliopiston käyttäjätunnuksella.  
+- Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikoe) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
 - Tallenna Helsingin yliopiston opiskelijanumerosi palautussovellukseen. Lue lisää [täältä](/osa0/yleista/#suoritusmerkinnan-pyytaminen)
-- Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
+- Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
+- Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
- 
 Kurssin suoritusohjeet pähkinänkuoressa (Osat 6-13) 
 
 - Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8-13 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin.
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
-- Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
+- Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
 ### Tehtävien palauttaminen
 
@@ -148,31 +146,41 @@ GitHubiin palautettuja tehtäviä tarkastetaan plagiaattitunnistusjärjestelmän
 
 Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tällaisissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
-### Kurssikokeeseen ilmoittautuminen
+### Kurssikoe
 
-Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla:
+Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssin osia 1-5 käsittelevän kokeen. 
+
+Koe tehdään tehtävien palautusjärjestelmässä. Pääset tekemään kokeen seuraavia ohjeita seuraamalla:
 
 - Tee Avoimen yliopiston kurssi-ilmoittautuminen 9.1.2023 mennessä.
 - Pääset ilmoittautumaan [palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) löytyvän linkin kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä:
 
-![](../../images/0/enroll.png)
 
-Pääset Moodleen [tämän linkin](https://moodle.helsinki.fi/course/view.php?id=46197) kautta, sen jälkeen kun olet:
-  - Ilmoittautunut Avoimen yliopiston kautta kurssille, ja
-  - aktivoinut Helsingin yliopiston käyttäjätunnuksen
+![](../../images/0/enroll1.png)
 
-**HUOM** Koe on mahdollista tehdä myös ilman käyttäjätunnuksen aktivointia, lue [täältä](/osa0/yleista#kurssikoe-ilman-yliopiston-kayttajatunnusta) lisää!
+Tallettaa Helsingin Yliopiston opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen:
 
-Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Se tulee aktivoida ennen kurssikokeen suorittamista. [Lue lisää käyttäjätunnuksen aktivoinnista](https://studies.helsinki.fi/ohjeet/artikkeli/helsingin-yliopiston-kayttajatunnus-avoin-yliopisto).
+![](../../images/0/28b.png)
 
-HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen! Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
+Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
 
+Tämän jälkeen pääset tekemään kokeen palautusjärjestelmässä:
 
-### Kurssikoe ilman yliopiston käyttäjätunnusta
+![](../../images/0/enroll3.png)
 
-Voit tehdä kurssin kokeen myös uudessa, koekäytössä olevassa kurssikoejärjestelmässä, joka ei edellytä yliopiston käyttäjätunnuksia.
+Koeaika on 120 minuuttia. Jos koesuoritus hyväksytään, saat seuraavan vahvistuksen:
 
-Jos olet tekemässä koetta, ja haluat käyttää Moodlen sijaan uutta koejärjestelmää, lähetä viesti Discordissa @mluukkai tai sähköpostitse matti.luukkainen@helsinki.fi, kerro viestissä Helsingin yliopiston opiskelijanumerosi.
+![](../../images/0/enroll4.png)
+
+Jos et pääse kokeesta läpi, voit yrittää uudelleen viikon kuluttua.
+
+Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissons -välilehdelle ja pyytää suorituksen rekisteröintiä:
+
+![](../../images/0/enroll5a.png)
+
+Muista painaa isoa sinistä nappia jotta suorituksesi rekisteröidään!
+
+Huom: jos teit jo kokeen Moodlessa, ota yhteyttä matti.luukkainen@helsinki.fi tai @mluukkai in Discord.
 
 ### Suoritusmerkinnän pyytäminen
 
@@ -184,13 +192,13 @@ Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautuma
 
 Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja *ilmoittanut palautussovelluksessa* olevasi valmis kurssin suorituksen kanssa:
 
-![](../../images/0/28a.png)
+![](../../images/0/enroll5a.png)
 
 Paina siis sinistä nappia "I have completed the course ..."!
 
-Arvosana siirtyy Helsingin yliopiston opintorekisteriin Sisuun ja [Opintopolkuun](https://opintopolku.fi/oma-opintopolku/) neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
-
 **Huomaa**, että suoritusmerkintää ei voida kirjata jos et ole ilmoittautunut kaikkiin suorittamiisi osiin, katso [täältä](/osa0/yleista#osat-ja-suorittaminen) ohjeet ilmoittautumiseen.
+
+Arvosana siirtyy Helsingin yliopiston opintorekisteriin Sisuun ja [Opintopolkuun](https://opintopolku.fi/oma-opintopolku/) neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
 
 ### Miten saan selville Helsingin yliopiston opiskelijanumeroni?
 
