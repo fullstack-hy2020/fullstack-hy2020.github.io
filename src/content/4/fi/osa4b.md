@@ -1207,6 +1207,6 @@ Käytä async/awaitia.
 
 Tarvitsemme muokkausta lähinnä <i>likejen</i> lukumäärän päivittämiseen. Toiminnallisuuden voi toteuttaa samaan tapaan kuin muistiinpanon päivittäminen toteutettiin [osassa 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#muut-operaatiot).
 
-Toteuttaa ominaisuudelle myös testit.
+Toteuta ominaisuudelle myös testit.
 
 </div>
