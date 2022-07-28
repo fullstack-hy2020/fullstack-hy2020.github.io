@@ -774,7 +774,7 @@ It is actually quite common that when you start working on an existing codebase,
 
 ### Patient listing page
 
-Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. 
+Let's go through the <i>PatientListPage/index.tsx</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. 
 <i>PatientListPage</i> uses our custom hook to inject the state, and the dispatcher for updating it. 
 When we list the patients, we only need to destructure the <i>patients</i> property from the state:
 
