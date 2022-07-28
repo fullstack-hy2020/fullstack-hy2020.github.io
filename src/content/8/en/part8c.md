@@ -63,7 +63,7 @@ const MONGODB_URI = 'mongodb+srv://databaseurlhere'
 
 console.log('connecting to', MONGODB_URI)
 
-mongoose.connect(MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connect(MONGODB_URI)
   .then(() => {
     console.log('connected to MongoDB')
   })
