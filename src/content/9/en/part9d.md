@@ -66,7 +66,7 @@ Now, let's take a look at the <i>tsconfig.json</i> file that has been created fo
 }
 ```
 
-Options have now key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes eg. types of browser API's to the project.
+The compilerOptions now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like `document`)."
 
 Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files, because <i>allowJs</i> is set to <i>true</i>.
 That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
