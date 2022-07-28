@@ -224,12 +224,12 @@ Create a new Create React App with TypeScript, and set up eslint for the project
 This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
 
 ```jsx
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App />);
 ```
 
 and <i>App.tsx</i> to the following:
