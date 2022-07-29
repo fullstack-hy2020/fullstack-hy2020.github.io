@@ -884,15 +884,15 @@ The response should look as follows:
 
 Create a page for showing a patient's full information in the frontend. 
 
-The user should be able to access a patient's information e.g. by clicking the patient's name.
+The user should be able to access a patient's information by clicking the patient's name.
 
-Fetch the data from the endpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
+Fetch the data from the endpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state (i.e. if the user is visiting the same patient's information many times). 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
 The Application uses [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles) for styling. You may also use it for the new components but that is up to you since our main focus now is TypeScript.
 
-The Application also uses [React Router](https://reacttraining.com/react-router/web/guides/quick-start)  to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
+The Application also uses [React Router](https://reacttraining.com/react-router/web/guides/quick-start) to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
 
 The result could look like this:
 
