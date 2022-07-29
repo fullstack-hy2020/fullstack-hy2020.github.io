@@ -407,7 +407,7 @@ We can then build a switch case around that attribute and TypeScript will know w
 
 In the above example, TypeScript knows that a <i>part</i> has the type <i>CoursePart</i>. It can then infer that <i>part</i> is of either type <i>CoursePartOne</i>, <i>CoursePartTwo</i> or <i>CoursePartThree</i>. 
 The <i>name</i> is distinct for each type, so we can use it to identify each type and TypeScript can let us know which attributes are available in each case block. 
-TypeScript will then produce an error if you e.g. try to use the <i>part.description</i> within the <i>"Using props to pass data"</i> block.
+Then, TypeScript will produce an error if you try to use the <i>part.description</i> within the <i>"Using props to pass data"</i> block for example.
 
 What about adding new types? If we were to add a new course part, wouldn't it be nice to know if we had already implemented handling that type in our code? 
 In the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. 
