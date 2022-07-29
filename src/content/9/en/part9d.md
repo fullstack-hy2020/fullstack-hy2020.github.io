@@ -686,7 +686,7 @@ export type Action =
     };
 ```
 
-The reducer looks quite similiar to the ones we wrote in [part 6](/en/part6) before we started to use the Redux Toolkit. It changes the state for each type of action:
+The reducer looks quite similiar to the ones we wrote in [part 6](/en/part6/many_reducers#combined-reducers) before we started to use the Redux Toolkit. It changes the state for each type of action:
 
 ```js
 export const reducer = (state: State, action: Action): State => {
@@ -716,7 +716,7 @@ export const reducer = (state: State, action: Action): State => {
 };
 ```
 
-The main difference is  that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6).
+The main difference is  that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
 
 There are a lot of things happening in the file <i>state.ts</i>, which takes care of setting up the context. 
 The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook
