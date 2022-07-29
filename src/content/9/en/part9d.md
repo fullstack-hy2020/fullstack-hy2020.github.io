@@ -718,7 +718,7 @@ export const reducer = (state: State, action: Action): State => {
 
 The main difference is  that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
 
-There are a lot of things happening in the file <i>state.ts</i>, which takes care of setting up the context. 
+There are a lot of things happening in the file <i>state.tsx</i>, which takes care of setting up the context. 
 The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook
 used to create the state and the dispatch function, and pass them on to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
 
