@@ -736,7 +736,7 @@ export const StateProvider = ({
 };
 ```
 
-The provider makes the <i>state</i> and the <i>dispatch</i> functions available in all of the components, thanks to the setup in <i>index.ts</i>:
+The provider makes the <i>state</i> and the <i>dispatch</i> functions available in all of the components, thanks to the setup in <i>index.tsx</i>:
 
 ```js 
 import { reducer, StateProvider } from "./state";
