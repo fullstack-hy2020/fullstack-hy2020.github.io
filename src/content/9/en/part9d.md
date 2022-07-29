@@ -483,13 +483,13 @@ const courseParts: CoursePart[] = [
   {
     name: "Fundamentals",
     exerciseCount: 10,
-    description: "This is the leisured course part",
+    description: "This is the easy course part",
     type: "normal"
   },
   {
     name: "Advanced",
     exerciseCount: 7,
-    description: "This is the harded course part",
+    description: "This is the hard course part",
     type: "normal"
   },
   {
