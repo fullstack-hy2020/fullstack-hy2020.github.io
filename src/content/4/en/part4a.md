@@ -341,7 +341,7 @@ If you clone the project for yourself, run the _npm install_ command before star
 
 ### Note on exports
 
-We have used two different kinds of exports in this part. Firstly, eg. the file <i>utils/logger.js</i> does the export as follows:
+We have used two different kinds of exports in this part. Firstly, e.g. the file <i>utils/logger.js</i> does the export as follows:
 
 ```js
 const info = (...params) => {
@@ -359,7 +359,7 @@ module.exports = {
 // highlight-end
 ```
 
-The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used with two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation: 
+The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used in two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation: 
 
 ```js
 const logger = require('./utils/logger')
@@ -368,7 +368,7 @@ logger.info('message')
 
 logger.error('error message')
 ```
-The other option is to destructure the functions to its own variables in the <i>require</i> statement:
+The other option is to destructure the functions to their own variables in the <i>require</i> statement:
 
 ```js
 const { info, error } = require('./utils/logger')
@@ -377,9 +377,9 @@ info('message')
 error('error message')
 ```
 
-The latter may be preferable way if only small portion of exported functions are used in a file.
+The latter way may be preferable if only a small portion of the exported functions are used in a file.
 
-Eg. in file <i>controller/notes.js</i> exporting happens as follows:
+E.g. in file <i>controller/notes.js</i> exporting happens as follows:
 
 ```js
 const notesRouter = require('express').Router()
