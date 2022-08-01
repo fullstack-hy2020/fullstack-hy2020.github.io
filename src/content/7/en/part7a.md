@@ -429,8 +429,7 @@ It is not possible to use the <i>useMatch</i> hook in the component which define
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router> // highlight-line
     <App />
-  </Router>, // highlight-line
-  document.getElementById('root')
+  </Router> // highlight-line
 )
 ```
 
