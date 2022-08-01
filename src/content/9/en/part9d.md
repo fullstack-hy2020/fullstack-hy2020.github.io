@@ -464,6 +464,7 @@ interface CourseNormalPart extends CoursePartBase {
   type: "normal";
   description: string;
 }
+
 interface CourseProjectPart extends CoursePartBase {
   type: "groupProject";
   groupProjectCount: number;
@@ -476,7 +477,6 @@ interface CourseSubmissionPart extends CoursePartBase {
 }
 
 type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart;
-
 
 // this is the new coursePart variable
 const courseParts: CoursePart[] = [
