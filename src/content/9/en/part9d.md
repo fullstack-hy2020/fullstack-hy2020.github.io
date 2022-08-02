@@ -873,7 +873,7 @@ export interface Patient {
   entries: Entry[] // highlight-line
 }
 
-export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
+export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;  // highlight-line
 ```
 
 The response should look as follows:
