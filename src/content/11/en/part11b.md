@@ -202,7 +202,7 @@ It is important to replicate the same environment in CI as in production as clos
 
 Next, we list the steps in the "build" job that the CI would need to perform. As we noticed in the last exercise, by default the virtual environment does not have any code in it, so we need to <i>checkout the code</i> from the repository. 
 
-This an easy step:
+This is an easy step:
 
 ```js
 name: Deployment pipeline
