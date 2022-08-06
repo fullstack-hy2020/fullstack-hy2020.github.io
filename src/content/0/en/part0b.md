@@ -5,6 +5,8 @@ letter: b
 lang: en
 ---
 
+<!-- update photos -->
+
 <div class="content">
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
