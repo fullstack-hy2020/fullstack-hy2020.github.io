@@ -1443,14 +1443,14 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 
   return (
     <Formik
-    initialValues={{
-      /// ...
-    }}
-    onSubmit={onSubmit}
-    validate={values => {
-      /// ...
-    }}
-  >
+      initialValues={{
+        /// ...
+      }}
+      onSubmit={onSubmit}
+      validate={values => {
+        /// ...
+      }}
+    >
     {({ isValid, dirty, setFieldValue, setFieldTouched }) => { // highlight-line
 
       return (
