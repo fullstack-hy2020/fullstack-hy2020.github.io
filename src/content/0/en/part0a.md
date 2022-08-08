@@ -135,6 +135,8 @@ How to study the course – instructions in a nutshell: 5 cr core course CSM1410
   - Do the online exam in the Submission system. Read more [here](/en/part0/general_info#the-course-exam)
   - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
 
+Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credis, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
+
 How to study the course – instructions in a nutshell: other course parts
 
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that each of the parts 8- have a separate instance in the submission system 
