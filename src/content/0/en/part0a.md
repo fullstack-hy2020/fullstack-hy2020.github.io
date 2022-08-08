@@ -125,7 +125,7 @@ By submitting all exercises for part 13 of the course on Relational databases, y
 
 ### Studying the course in a nutshell
 
-How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
+How to study the course – instructions in a nutshell: 5 cr core course CSM141081
 
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
   - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
@@ -135,7 +135,7 @@ How to study the course – instructions in a nutshell (5 cr core course CSM1410
   - Do the online exam in the Submission system. Read more [here](/en/part0/general_info#the-course-exam)
   - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
 
-How to study the course – instructions in a nutshell (5 cr core course CSM141081) 
+How to study the course – instructions in a nutshell: other course parts
 
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that each of the parts 8- have a separate instance in the submission system 
   - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
