@@ -41,6 +41,11 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
+
+### Course channel in Discord and Telegram
+
+You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!
+
 ### Parts and completion
 
 Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 14 credits. 
