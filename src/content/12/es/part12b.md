@@ -2,34 +2,31 @@
 mainImage: ../../../images/part-12.svg
 part: 12
 letter: b
-lang: en
+lang: es
 ---
 
 <div class="content">
 
-
-In the previous section, we used two different base images: ubuntu and node and did some manual work to get a simple "Hello, World!" running. The tools and commands we learned during that process will be helpful. In this section, we will learn how to build images and configure environments for our applications. We will start with a regular Express/Node.js backend and build on top of that with other services, including a MongoDB database.
+En la sección anterior, usamos dos imágenes base diferentes: ubuntu y node e hicimos un trabajo manual para ejecutar un simple "¡Hola, mundo!". Las herramientas y los comandos que aprendimos durante ese proceso nos serán útiles más adelante. En esta sección, aprenderemos a crear imágenes y configurar entornos para nuestras aplicaciones. Comenzaremos con un backend regular de Express/Node.js y lo desarrollaremos con otros servicios, incluida una base de datos MongoDB.
 
 ### Dockerfile
 
-Instead of modifying a container by copying files inside, we can create a new image that contains the "Hello, World!" application. The tool for this is the Dockerfile. Dockerfile is a simple text file that contains all of the instructions for creating an image. Let's create an example Dockerfile from the "Hello, World!" application.
+En lugar de modificar un contenedor copiando archivos dentro, podemos crear una nueva imagen que contenga la aplicación "¡Hola, mundo!". La herramienta para esto es el Dockerfile. Dockerfile es un archivo de texto simple que contiene todas las instrucciones para crear una imagen. Vamos a crear un Dockerfile de ejemplo a partir de la aplicación "Hello, World!".
 
-If you did not already, create a directory on your machine and create a file called <i>Dockerfile</i> inside that directory. Let's also put an <i>index.js</i> containing _console.log('Hello, World!')_ next to the Dockerfile. Your directory structure should look like this:
-
+Si aún no lo hizo, cree un directorio en su máquina y cree un archivo llamado <i>Dockerfile</i> dentro de ese directorio. También coloquemos un <i>index.js</i> que contenga _console.log('Hello, World!')_ al lado del Dockerfile. La estructura de su directorio debería verse así:
 ```
 ├── index.js
 └── Dockerfile
 ```
+Dentro de ese Dockerfile le diremos a la imagen tres cosas:
 
-inside that Dockerfile we will tell the image three things:
+- Usa node:16 como base para nuestra imagen.
+- Incluya el index.js dentro de la imagen, así no necesitaremos copiarlo manualmente en el contenedor
+- Cuando ejecutemos el contenedor desde la imagen, use node para ejecutar el archivo index.js.
 
-- Use the node:16 as the base for our image
-- Include the index.js inside the image, so we don't need to manually copy it into the container
-- When we run a container from the image, use node to execute the index.js file.
+Las instrucciones anteriores se traducirán en un Dockerfile básico. La mejor ubicación para colocar este archivo suele ser la raíz del proyecto.
 
-The wishes above will translate into a basic Dockerfile. The best location to place this file is usually at the root of the project. 
-
-The resulting <i>Dockerfile</i> looks like this:
+El archivo <i>Dockerfile</i> resultante se ve así:
 
 ```Dockerfile
 FROM node:16
@@ -41,13 +38,13 @@ COPY ./index.js ./index.js
 CMD node index.js
 ```
 
-FROM instruction will tell Docker that the base for the image should be node:16. COPY instruction will copy the file <i>index.js</i> from the host machine to the file with the same name in the image. CMD instruction tells what happens when _docker run_ is used. CMD is the default command that can then be overwritten with the parameter given after the image name. See _docker run --help_ if you forgot.
+La instrucción FROM le dirá a Docker que la base de la imagen debe ser node:16. La instrucción COPY copiará el archivo <i>index.js</i> de la máquina host al archivo con el mismo nombre en la imagen. La instrucción CMD dice lo que sucede cuando se usa _docker run_. CMD es el comando predeterminado que luego se puede sobrescribir con el parámetro dado después del nombre de la imagen. Consulte _docker run --help_ si lo olvidó.
 
-The WORKDIR instruction was slipped in to ensure we don't interfere with the contents of the image. It will guarantee all of the following commands will have <i>/usr/src/app</i> set as the working directory. If the directory doesn't exist in the base image, it will be automatically created.
+La instrucción WORKDIR se introdujo para garantizar que no interfiramos con el contenido de la imagen. Garantizará que todos los siguientes comandos tendrán <i>/usr/src/app</i> configurado como el directorio de trabajo. Si el directorio no existe en la imagen base, se creará automáticamente.
 
-If we do not specify a WORKDIR, we risk overwriting important files by accident. If you check the root (_/_) of the node:16 image with _docker run node:16 ls_, you can notice all of the directories and files that are already included in the image.
+Si no especificamos un WORKDIR, corremos el riesgo de sobrescribir archivos importantes por accidente. Si verifica la raíz (_/_) de la imagen node:16 con _docker run node:16 ls_, puede notar todos los directorios y archivos que ya están incluidos en la imagen.
 
-Now we can use the command _docker build_ to build an image based on the Dockerfile. Let's spice up the command with one additional flag: _-t_, this will help us name the image:
+Ahora podemos usar el comando _docker build_ para construir una imagen basada en el Dockerfile. Vamos a modificar el comando con una bandera adicional: _-t_, esto nos ayudará a nombrar la imagen:
 
 ```bash
 $ docker build -t fs-hello-world . 
@@ -55,13 +52,13 @@ $ docker build -t fs-hello-world .
 ...
 ```
 
-So the result is "docker please build with tag fs-hello-world the Dockerfile in this directory". You can point to any Dockerfile, but in our case, a simple dot will mean the Dockerfile in <i>this</i> directory. That is why the command ends with a period. After the build is finished, you can run it with _docker run fs-hello-world_.
+Entonces, el resultado es "docker, construya el Dockerfile en este directorio con la etiqueta fs-hello-world ". Puede apuntar a cualquier Dockerfile, pero en nuestro caso, un simple punto significará el Dockerfile en <i>este</i> directorio. Es por eso que el comando termina con un punto. Una vez finalizada la compilación, puede ejecutarla con _docker run fs-hello-world_.
 
-As images are just files, they can be moved around, downloaded and deleted. You can list the images you have locally with _docker image ls_, delete them with _docker image rm_. See what other command you have available with _docker image --help_.
+Como las imágenes son solo archivos, se pueden mover, descargar y eliminar. Puede enumerar las imágenes que tiene localmente con _docker image ls_, eliminarlas con _docker image rm_. Vea qué otro comando tiene disponible con _docker image --help_.
 
-### More meaningful image
+### Imagen más significativa
 
-Moving an Express server to a container should be as simple as moving the "Hello, World!" application inside a container. The only difference is that there are more files. Thankfully _COPY_ instruction can handle all that. Let's delete the index.js and create a new Express server. Lets use [express-generator](https://expressjs.com/en/starter/generator.html) to create a basic Express application skeleton.
+Mover un servidor Express a un contenedor debería ser tan simple como mover la aplicación "¡Hola, mundo!" dentro de un contenedor. La única diferencia es que hay más archivos. Afortunadamente, la instrucción _COPY_ puede manejar todo eso. Eliminemos index.js y creemos un nuevo servidor Express. Usemos [express-generator](https://expressjs.com/en/starter/generator.html) para crear un esqueleto de aplicación Express básico.
 
 ```bash
 $ npx express-generator
@@ -74,7 +71,7 @@ $ npx express-generator
     $ DEBUG=playground:* npm start
 ```
 
-First, let's run the application to get an idea of what we just created. Note that the command to run the application may be different from you, my directory was called playground.
+Primero, ejecutemos la aplicación para tener una idea de lo que acabamos de crear. Tenga en cuenta que el comando para ejecutar la aplicación puede ser diferente al suyo, mi directorio se llama playground.
 
 ```bash
 $ npm install
@@ -82,17 +79,16 @@ $ DEBUG=playground:* npm start
   playground:server Listening on port 3000 +0ms
 ```
 
-Great, so now we can navigate to [http://localhost:3000](http://localhost:3000) and the app is running there.
+Genial, ahora podemos navegar a [http://localhost:3000](http://localhost:3000) y la aplicación se está ejecutando allí.
 
-Containerizing that should be relatively easy based on the previous example.
+Poner la aplicación en un contenedor debería ser relativamente fácil según el ejemplo anterior.
 
-- Use node as base
-- Set working directory so we don't interfere with the contents of the base image
-- Copy ALL of the files in this directory to the image
-- Start with DEBUG=playground:* npm start
+- Usar node como base
+- Establecer el directorio de trabajo para que no interfiramos con el contenido de la imagen base
+- Copie TODOS los archivos en este directorio a la imagen
+- Ejecútela con DEBUG=playground:* npm start
 
-
-Let's place the following Dockerfile at the root of the project:
+Coloquemos el siguiente Dockerfile en la raíz del proyecto:
 
 ```Dockerfile
 FROM node:16
@@ -104,7 +100,7 @@ COPY . .
 CMD DEBUG=playground:* npm start
 ```
 
-Let's build the image from the Dockerfile with a command, _docker build -t express-server ._ and run it with _docker run -p 3123:3000 express-server_. The _-p_ flag will inform Docker that a port from the host machine should be opened and directed to a port in the container. The format for is _-p host-port:application-port_.
+Construyamos la imagen desde Dockerfile con un comando, _docker build -t express-server ._ y ejecútelo con _docker run -p 3123:3000 express-server_. El indicador _-p_ informará a Docker que se debe abrir un puerto de la máquina host y dirigirlo a un puerto en el contenedor. El formato para es _-p host-port:application-port_.
 
 ```bash
 $ docker run -p 3123:3000 express-server
@@ -115,13 +111,13 @@ $ docker run -p 3123:3000 express-server
 Tue, 29 Jun 2021 10:55:10 GMT playground:server Listening on port 3000
 ```
 
-> If yours doesn't work, skip to the next section. There is an explanation why it may not work even if you followed the steps correctly.
+> Si el tuyo no funciona, pasa a la siguiente sección. Hay una explicación de por qué puede no funcionar incluso si siguió los pasos correctamente.
 
-The application is now running! Let's test it by sending a GET request to [http://localhost:3123/](http://localhost:3123/).
+¡La aplicación ya se está ejecutando! Probémoslo enviando una solicitud GET a [http://localhost:3123/](http://localhost:3123/).
 
-Shutting it down is a headache at the moment. Use another terminal and _docker kill_ command to kill the application. The _docker kill_ will send a kill signal (SIGKILL) to the application to force it to shut down. It needs the name or id of the container as an argument.
+Cerrarlo es un dolor de cabeza en este momento. Use otro terminal y el comando _docker kill_ para cerrar la aplicación. El _docker kill_ enviará una señal de eliminación (SIGKILL) a la aplicación para obligarla a cerrarse. Necesita el nombre o id del contenedor como argumento.
 
-By the way, when using id as the argument, the beginning of the ID is enough for Docker to know which container we mean.
+Por cierto, cuando se usa id como argumento, el comienzo de la ID es suficiente para que Docker sepa a qué contenedor nos referimos.
 
 ```bash
 $ docker container ls
@@ -132,17 +128,17 @@ $ docker kill 48
   48
 ```
 
-In the future, let's use the same port on both sides of _-p_. Just so we don't have to remember which one we happened to choose.
+En el futuro, usemos el mismo puerto en ambos lados de _-p_. Solo para que no tengamos que recordar cuál elegimos.
 
-#### Fixing potential issues we created by copy-pasting
+#### Solucionar problemas potenciales que creamos al copiar y pegar
 
-There are a few steps we need to change to create a more comprehensive Dockerfile. It may even be that the above example doesn't work in all cases because we skipped an important step.
+Hay algunos cambios que debemos realizar para crear un Dockerfile más completo. Incluso puede ser que el ejemplo anterior no funcione en todos los casos porque nos saltamos un paso importante.
 
-When we ran npm install on our machine, in some cases **node package manager** may install operating system specific dependencies during the install step. We may accidentally move non-functional parts to the image with the COPY instruction. This can easily happen if we copy the <i>node_modules</i> directory into the image.
+Cuando ejecutamos npm install en nuestra máquina, en algunos casos el **administrador de paquetes de node (npm)** puede instalar dependencias específicas del sistema operativo durante el paso de instalación. Es posible que accidentalmente movamos partes no funcionales a la imagen con la instrucción COPY. Esto puede suceder fácilmente si copiamos el directorio <i>node_modules</i> en la imagen.
 
-This is a critical thing to keep in mind when we build our images. It's best to do most things, such as to run _npm install_ during the build process <i>inside the container</i> rather than doing those prior to building. The easy rule of thumb is to only copy files that you would push to GitHub. Build artefacts or dependencies should not be copied since those can be installed during the build process.
+Esto es algo crítico a tener en cuenta cuando construimos nuestras imágenes. Es mejor hacer la mayoría de las cosas, como ejecutar _npm install_ durante el proceso de compilación <i>dentro del contenedor</i> en lugar de hacerlo antes de compilar. La regla general es copiar solo los archivos que enviaría a GitHub. Los artefactos o las dependencias de compilación no se deben copiar, ya que se pueden instalar durante el proceso de compilación.
 
-We can use <i>.dockerignore</i> to solve the problem. The file .dockerignore is very similar to .gitignore, you can use that to prevent unwanted files from being copied to your image. The file should be placed next to the Dockerfile. Here is a possible content of a <i>.dockerignore</i>
+Podemos usar <i>.dockerignore</i> para resolver el problema. El archivo .dockerignore es muy similar a .gitignore, puede usarlo para evitar que se copien archivos no deseados en su imagen. El archivo debe colocarse junto al Dockerfile. Aquí hay un posible contenido de un <i>.dockerignore</i>
 
 ```
 .dockerignore
@@ -151,7 +147,7 @@ node_modules
 Dockerfile
 ```
 
-However, in our case the .dockerignore isn't the only thing required. We will need to install the dependencies during the build step. The _Dockerfile_ changes to:
+Sin embargo, en nuestro caso, .dockerignore no es lo único que se requiere. Tendremos que instalar las dependencias durante el paso de compilación. El _Dockerfile_ cambia a:
 
 ```Dockerfile
 FROM node:16
@@ -165,19 +161,19 @@ RUN npm install # highlight-line
 CMD DEBUG=playground:* npm start
 ```
 
-The npm install can be risky. Instead of using npm install, npm offers a much better tool for installing dependencies, the _ci_ command.
+La instalación de npm puede ser riesgosa. En lugar de usar npm install, npm ofrece una herramienta mucho mejor para instalar dependencias, el comando _ci_.
 
-Differences between ci and install:
+Diferencias entre ci e install:
 
-- install may update the package-lock.json
-- install may install a different version of a dependency if you have ^ or ~ in the version of the dependency.
+- install puede actualizar el paquete-lock.json
+- install puede instalar una versión diferente de una dependencia si tiene ^ o ~ en la versión de la dependencia.
 
-- ci will delete the node_modules folder before installing anything
-- ci will follow the package-lock.json and does not alter any files
+- ci eliminará la carpeta node_modules antes de instalar cualquier cosa
+- ci seguirá el paquete-lock.json y no alterará ningún archivo
 
-So in short: _ci_ creates reliable builds, while _install_ is the one to use when you want to install new dependencies.
+En resumen: _ci_ crea compilaciones confiables, mientras que _install_ es el que se usa cuando desea instalar nuevas dependencias.
 
-As we are not installing anything new during the build step, and we don't want the versions to suddenly change, we will use _ci_:
+Como no estamos instalando nada nuevo durante el paso de compilación y no queremos que las versiones cambien repentinamente, usaremos _ci_:
 
 ```Dockerfile
 FROM node:16
@@ -191,15 +187,15 @@ RUN npm ci # highlight-line
 CMD DEBUG=playground:* npm start
 ```
 
-Even better, we can use _npm ci --only=production_ to not waste time installing development dependencies.
+Aún mejor, podemos usar _npm ci --only=production_ para no perder tiempo instalando dependencias de desarrollo.
 
-> As you noticed in the comparison list; npm ci will delete the node_modules folder so creating the .dockerignore did not matter. However, .dockerignore is an amazing tool when you want to optimize your build process. We will talk briefly about these optimizations later.
+> Como notó en la lista de comparación; npm ci eliminará la carpeta node_modules, por lo que no importó crear el .dockerignore. Sin embargo, .dockerignore es una herramienta increíble cuando desea optimizar su proceso de compilación. Hablaremos brevemente sobre estas optimizaciones más adelante.
 
-Now the Dockerfile should work again, try it with _docker build -t express-server . && docker run -p 3000:3000 express-server_
+Ahora el Dockerfile debería funcionar de nuevo, pruébalo con _docker build -t express-server . && docker run -p 3000:3000 express-server_
 
-> Note that we are here chaining two bash commands with &&. We could get (nearly) the same effect by running both commands separately. When chaining commands with && if one command fails, the next ones in the chain will not be executed.
+> Tenga en cuenta que estamos aquí encadenando dos comandos bash con &&. Podríamos obtener (casi) el mismo efecto ejecutando ambos comandos por separado. Al encadenar comandos con &&, si un comando falla, los siguientes de la cadena no se ejecutarán.
 
-We set an environment variable _DEBUG=playground:*_ during CMD for the npm start. However, with Dockerfiles we could also use the instruction ENV to set environment variables. Let's do that:
+Configuramos una variable de entorno _DEBUG=playground:*_ durante CMD para el inicio de npm. Sin embargo, con Dockerfiles también podríamos usar la instrucción ENV para establecer variables de entorno. Vamos a hacer eso:
 
 ```Dockerfile
 FROM node:16
@@ -215,20 +211,20 @@ ENV DEBUG=playground:* # highlight-line
 CMD npm start # highlight-line
 ```
 
-> <i>If you're wondering what the DEBUG environment variable does, read [here](http://expressjs.com/en/guide/debugging.html#debugging-express).</i>
+> <i>Si se pregunta qué hace la variable de entorno DEBUG, lea [aquí](http://expressjs.com/en/guide/debugging.html#debugging-express).</i>
 
-#### Dockerfile best practices
+#### Mejores prácticas de Dockerfile
 
-There are 2 rules of thumb you should follow when creating images:
+Hay 2 reglas generales que debe seguir al crear imágenes:
 
-- Try to create as **secure** of an image as possible
-- Try to create as **small** of an image as possible
+- Intenta crear una imagen lo más **segura** posible
+- Intenta crear una imagen lo más **pequeña** posible
 
-Smaller images are more secure by having less attack surface area, and smaller images also move faster in deployment pipelines.
+Las imágenes más pequeñas son más seguras al tener menos área de superficie de ataque, y las imágenes más pequeñas también se mueven más rápido en las canalizaciones de implementación.
 
-Snyk has a great list of 10 best practices for node/express containerization. Read those [here](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
+Snyk tiene una excelente lista de 10 mejores prácticas para la creación de contenedores de node/express. Léalos [aquí](https://snyk.io/blog/10-best-practices-to-containerize-nodejs-web-applications-with-docker/).
 
-One big carelessness we have left is running the application as root instead of using a user with lower privileges. Let's do a final fix to the Dockerfile:
+Un gran descuido que debemos resolver es ejecutar la aplicación como root en lugar de usar un usuario con menos privilegios. Hagamos una solución final al Dockerfile:
 
 ```Dockerfile
 FROM node:16
@@ -250,40 +246,40 @@ CMD npm start
   
 <div class="tasks">
 
-### Exercise 12.5.
+### Ejercicio 12.5.
 
-#### Exercise 12.5: Containerizing a Node application
+#### Ejercicio 12.5: Contenedorización de una aplicación de Node.js
 
-The repository you cloned or copied in the first exercise contains a todo-app. See the todo-app/todo-backend and read through the README. We will not touch the todo-frontend yet.
+El repositorio que clonó o copió en el primer ejercicio contiene una aplicación de tareas (todo-app). Consulte todo-app/todo-backend y lea el archivo README. Todavía no tocaremos la interfaz de tareas pendientes.
 
-Step 1. Containerize the todo-backend by creating a <i>todo-app/todo-backend/Dockerfile</i> and building an image.
+Paso 1. Cree un contenedor para el backend de tareas pendientes creando un <i>todo-app/todo-backend/Dockerfile</i> y construyendo una imagen.
 
-Step 2. Run the todo-backend image with the correct ports open. Make sure the visit counter increases when used through a browser in http://localhost:3000/ (or some other port if you configure so)
+Paso 2. Ejecute la imagen de todo-backend con los puertos correctos abiertos. Asegúrese de que el contador de visitas aumente cuando se usa a través de un navegador en http://localhost:3000/ (o algún otro puerto si lo configura)
 
-Tip: Run the application outside of a container to examine it before starting to containerize.
+Sugerencia: Ejecute la aplicación fuera de un contenedor para examinarla antes de comenzar.
 
 </div>
   
 <div class="content">
 
-### Using docker-compose
+### Utilizando docker-compose
 
-In the previous section, we created express-server and knew that it runs in port 3000, and ran it with _docker build -t express-server . && docker run -p 3000:3000 express-server_. This already looks like something you would need to put into a script to remember. Fortunately, Docker offers us a better solution.
+En la sección anterior, creamos express-server y sabíamos que se ejecuta en el puerto 3000, y lo ejecutamos con _docker build -t express-server . && docker run -p 3000:3000 express-server_. Esto ya parece algo que necesitarías poner en un script para recordar. Afortunadamente, Docker nos ofrece una mejor solución.
 
-[Docker-compose](https://docs.docker.com/compose/) is another fantastic tool, which can help us manage containers. Let's start using docker-compose as we learn more about containers as it will help us save some time with the configuration.
+[Docker-compose](https://docs.docker.com/compose/) es otra herramienta fantástica que puede ayudarnos a administrar contenedores. Comencemos a usar docker-compose a medida que aprendemos más sobre los contenedores, ya que nos ayudará a ahorrar algo de tiempo con la configuración.
 
-Install the docker-compose tool from this link: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
+Instale la herramienta docker-compose desde este enlace: [https://docs.docker.com/compose/install/](https://docs.docker.com/compose/install/).
 
-Let's check that it works:
+Comprobemos que funciona:
 
 ```bash
 $ docker-compose -v
 docker-compose version 1.29.2, build 5becea4c
 ```
 
-And now we can turn the previous spell into a yaml file. The best part about yaml files is that you can save these to a Git repository!
+Y ahora podemos convertir el hechizo anterior en un archivo yaml. ¡La mejor parte de los archivos yaml es que puede guardarlos en un repositorio de Git!
 
-Create file **docker-compose.yml** and place it at the root of the project, next to the Dockerfile. The file content is
+Cree el archivo **docker-compose.yml** y colóquelo en la raíz del proyecto, junto al Dockerfile. El contenido del archivo es:
 
 ```yaml
 version: '3.8'            # Version 3.8 is quite new and should work
@@ -296,39 +292,39 @@ services:
       - 3000:3000
 ```
 
-The meaning of each line is explained as a comment. If you want to see the full specification see the [documentation](https://docs.docker.com/compose/compose-file/compose-file-v3/).
+El significado de cada línea se explica como un comentario. Si desea ver la especificación completa, consulte la [documentación] (https://docs.docker.com/compose/compose-file/compose-file-v3/).
 
-Now we can use _docker-compose up_ to build and run the application. If we want to rebuild the images we can use _docker-compose up --build_.
+Ahora podemos usar _docker-compose up_ para compilar y ejecutar la aplicación. Si queremos reconstruir las imágenes podemos usar _docker-compose up --build_.
 
-You can also run the application in the background with _docker-compose up -d_ (_-d_ for detached) and close it with _docker-compose down_.
+También puede ejecutar la aplicación en segundo plano con _docker-compose up -d_ (_-d_ para separado) y cerrarla con _docker-compose down_.
 
-Creating files like this that <i>declare</i> what you want instead of script files that you need to run in a specific order / a specific number of times is often a great practice.
+Crear archivos como este que <i>declaren</i> lo que desea en lugar de archivos de script que necesita ejecutar en un orden específico/un número específico de veces es a menudo una buena práctica.
 
 </div>
 
 <div class="tasks">
 
-### Exercise 12.6.
+### Ejercicio 12.6.
 
-#### Exercise 12.6: docker-compose
+#### Ejercicio 12.6: docker-compose
 
-Create a <i>todo-app/todo-backend/docker-compose.yml</i> file that works with the node application from the previous exercise.
+Cree un archivo <i>todo-app/todo-backend/docker-compose.yml</i> que funcione con la aplicación de node del ejercicio anterior.
 
-The visit counter is the only feature that is required to be working.
+El contador de visitas es la única característica que se requiere para estar funcionando.
 
 </div>
 
 <div class="content">
 
-### Utilizing containers in development
+### Uso de contenedores en desarrollo
 
-When you are developing software, containerization can be used in various ways to improve your quality of life. One of the most useful cases is by bypassing the need to install and configure tools twice.
+Cuando está desarrollando software, la contenedorización se puede utilizar de varias maneras para mejorar su calidad de vida. Uno de los casos más útiles es evitar la necesidad de instalar y configurar las herramientas dos veces.
 
-It may not be the best option to move your entire development environment into a container, but if that's what you want it's possible. We will revisit this idea at the end of this part. But until then, <i>run the node application itself outside of containers</i>.
+Puede que no sea la mejor opción mover todo su entorno de desarrollo a un contenedor, pero si eso es lo que desea, es posible. Retomaremos esta idea al final de esta parte. Pero hasta entonces, <i>ejecuta la propia aplicación de node fuera de los contenedores</i>.
 
-The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a MongoDB image. Docker Hub is the default place where Docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker it's a good choice. With a quick search, we can find [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
+La aplicación que conocimos en los ejercicios anteriores utiliza MongoDB. Exploremos [Docker Hub](https://hub.docker.com/) para encontrar una imagen de MongoDB. Docker Hub es el lugar predeterminado desde donde Docker extrae las imágenes, también puede usar otros registros, pero dado que ya estamos metidos hasta las rodillas en Docker, es una buena opción. Con una búsqueda rápida, podemos encontrar [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 
-Create a new yaml called <i>todo-app/todo-backend/docker-compose.dev.yml</i> that looks like following:
+Crea un nuevo yaml llamado <i>todo-app/todo-backend/docker-compose.dev.yml</i> que se parece a lo siguiente:
 
 ```yml
 version: '3.8'
@@ -344,25 +340,25 @@ services:
       MONGO_INITDB_DATABASE: the_database
 ```
 
-The meaning of the two first environment variables defined above is explained on the Docker Hub page:
+El significado de las dos primeras variables de entorno definidas anteriormente se explica en la página de Docker Hub:
 
-> <i>These variables, used in conjunction, create a new user and set that user's password. This user is created in the admin authentication database and given the role of root, which is a "superuser" role.</i>
+> <i>Estas variables, usadas en conjunto, crean un nuevo usuario y establecen la contraseña de ese usuario. Este usuario se crea en la base de datos de autenticación del administrador y se le otorga el rol de root ("superusuario").</i>
 
-The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name. 
+La última variable de entorno *MONGO\_INITDB\_DATABASE* le indicará a MongoDB que cree una base de datos con ese nombre.
 
-You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g. _docker-compose -f docker-compose.dev.yml up_. Now that we may have multiple it's useful.
+Puede usar el indicador _-f_ para especificar un <i>archivo</i> para ejecutar el comando Docker Compose con, p. _docker-compose -f docker-compose.dev.yml up_. Ahora que podemos tener múltiples, es útil.
 
-Now start the MongoDB with _docker-compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker-compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
+Ahora inicie MongoDB con _docker-compose -f docker-compose.dev.yml up -d_. Con _-d_ lo ejecutará en segundo plano. Puede ver los registros de salida con _docker-compose -f docker-compose.dev.yml logs -f_. Allí, _-f_ se asegurará de que <i>seguimos</i> los registros.
 
-As said previously, currently we <strong>do not</strong> want to run the Node application inside a container. Developing while the application itself is inside a container is a challenge. We will explore that option in the later in this part.
+Como se dijo anteriormente, actualmente <strong>no</strong> queremos ejecutar la aplicación Node dentro de un contenedor. Desarrollar mientras la aplicación en sí está dentro de un contenedor es un desafío. Exploraremos esa opción más adelante en esta parte.
 
-Run the good old _npm install_ first on your machine to set up the Node application. Then start the application with the relevant environment variable. You can modify the code to set them as the defaults or use the .env file. There is no hurt in putting these keys to GitHub since they are only used in your local development environment. I'll just throw them in with the _npm run dev_ to help you copy-paste.
+Ejecute el viejo _npm install_ primero en su máquina para configurar la aplicación Node. Luego inicie la aplicación con la variable de entorno relevante. Puede modificar el código para configurarlos como predeterminados o usar el archivo .env. No pasa nada por poner estas claves en GitHub, ya que solo se usan en su entorno de desarrollo local. Los agregaré con _npm run dev_ para ayudarlo a copiar y pegar.
 
 ```bash
 $ MONGO_URL=mongodb://localhost:3456/the_database npm run dev
 ```
 
-This won't be enough; we need to create a user to be authorized inside of the container. The url http://localhost:3000/todos leads to an authentication error:
+Esto no será suficiente; necesitamos crear un usuario para ser autorizado dentro del contenedor. La url http://localhost:3000/todos genera un error de autenticación:
 
 ```bash
 [nodemon] 2.0.12
@@ -375,11 +371,11 @@ This won't be enough; we need to create a user to be authorized inside of the co
     at MessageStream.emit (events.js:314:20)
 ```
 
-### Bind mount and initializing the database
+### Vincular e inicializar la base de datos
 
-In the [MongoDB Docker Hub](https://hub.docker.com/_/mongo) page under "Initializing a fresh instance" is the info on how to execute JavaScript to initialize the database and an user for it.
+En la página [MongoDB Docker Hub](https://hub.docker.com/_/mongo) en la sección "Inicializar una nueva instancia" se encuentra la información sobre cómo ejecutar JavaScript para inicializar la base de datos y un usuario para ella.
 
-The exercise project has file <i>todo-app/todo-backend/mongo/mongo-init.js</i> with contents:
+El proyecto de ejercicio tiene un archivo <i>todo-app/todo-backend/mongo/mongo-init.js</i> con el contenido:
 
 ```js
 db.createUser({
@@ -399,11 +395,11 @@ db.todos.insert({ text: 'Write code', done: true });
 db.todos.insert({ text: 'Learn about containers', done: false });
 ```
 
-This file will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.
+Este archivo inicializará la base de datos con un usuario y algunas tareas. A continuación, debemos colocarlo dentro del contenedor al inicio.
 
-We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.
+Podríamos crear una nueva imagen DESDE mongo y COPIAR el archivo, o podemos usar un <i>bind mount</i> para montar el archivo <i>mongo-init.js</i> en el contenedor. Hagamos esto último.
 
-Bind mount is the act of binding a file on the host machine to a file in the container. We could add a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose. Otherwise the format is the same, first host and then container:
+Bind mount es el acto de vincular un archivo en la máquina host a un archivo en el contenedor. Podríamos agregar un indicador _-v_ con _container run_. La sintaxis es _-v ARCHIVO-EN-HOST:ARCHIVO-EN-CONTENEDOR_. Como ya aprendimos sobre Docker Compose, omitámoslo. El montaje de enlace se declara bajo la clave <i>volumes</i> en docker-compose. De lo contrario, el formato es el mismo, primero host y luego contenedor:
 
 ```yml
   mongo:
@@ -420,38 +416,38 @@ Bind mount is the act of binding a file on the host machine to a file in the con
       # highlight-end
 ```
 
-The result of the bind mount is that the file <i>mongo-init.js</i> in the mongo folder of the host machine is the same as the <i>mongo-init.js</i> file in the container's /docker-entrypoint-initdb.d directory. Changes to either file will be available in the other. We don't need to make any changes during runtime. But this will be the key to software development in containers.
+El resultado del vínculo es que el archivo <i>mongo-init.js</i> en la carpeta mongo de la máquina host es el mismo que el archivo <i>mongo-init.js</i> en el directorio /docker-entrypoint-initdb.d del contenedor. Los cambios en cualquiera de los archivos estarán disponibles en el otro. No necesitamos hacer ningún cambio durante el tiempo de ejecución. Pero esta será la clave para el desarrollo de software en contenedores.
 
-Run _docker-compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose -f docker-compose.dev.yml up_ to initialize the database.
+Ejecute _docker-compose -f docker-compose.dev.yml down --volumes_ para asegurarse de que no quede nada y comience desde cero con _docker-compose -f docker-compose.dev.yml up_ para inicializar la base de datos.
 
-If you see an error like this:
+Si ve un error como este:
 
 ```bash
 mongo_database | failed to load: /docker-entrypoint-initdb.d/mongo-init.js
 mongo_database | exiting with code -3
 ```
 
-you may have a read permission problem. They are not uncommon when dealing with volumes. In the above case, you can use _chmod a+r mongo-init.js_, which will give everyone read access to that file. Be careful when using _chmod_ since granting more privileges can be a security issue. Use the _chmod_ only on the mongo-init.js on your computer.
+es posible que tenga un problema de permiso de lectura. No son raros cuando se trata de volúmenes. En el caso anterior, puede usar _chmod a+r mongo-init.js_, que les dará a todos acceso de lectura a ese archivo. Tenga cuidado al usar _chmod_ ya que otorgar más privilegios puede ser un problema de seguridad. Use _chmod_ solo en mongo-init.js en su computadora.
 
-Now starting the express application with the correct environment variable should work:
+Ahora, iniciar la aplicación express con la variable de entorno correcta debería funcionar:
 
 ```bash
 $ MONGO_URL=mongodb://the_username:the_password@localhost:3456/the_database npm run dev
 ```
 
-Let's check that the http://localhost:3000/todos returns all todos. It should return the two todos we initialized. We can and should use Postman to test the basic functionality of the app, such as adding or deleting a todo.
+Verifiquemos que http://localhost:3000/todos devuelve las tareas. Debería devolver las dos tareas que inicializamos. Podemos y debemos usar Postman para probar la funcionalidad básica de la aplicación, como agregar o eliminar una tarea.
 
-### Persisting data with volumes
+### Persistir datos con volúmenes
 
-By default, containers are not going to preserve our data. When you close the mongo container you may or may not be able to get the data back.
+Por defecto, los contenedores no conservarán nuestros datos. Cuando cierre el contenedor de mongo, es posible que no pueda recuperar los datos.
 
-This is a rare case in which it does preserve the data as the developers who made the Docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories.
+Este es un caso raro en el que conserva los datos, ya que los desarrolladores que crearon la imagen de Docker para Mongo han definido un volumen para usar: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4 /Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) Esta línea indicará a Docker que conserve los datos en esos directorios.
 
-There are two distinct methods to store the data: 
-- Declaring a location in your filesystem (called bind mount)
-- Letting Docker decide where to store the data (volume)
+Hay dos métodos distintos para almacenar los datos:
+- Declarar una ubicación en su sistema de archivos (llamado montaje de enlace (bind mount) )
+- Dejar que Docker decida dónde almacenar los datos (volumen)
 
-I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let's see both in action with docker-compose:
+Prefiero la primera opción en la mayoría de los casos siempre que <i>realmente</i> necesite evitar eliminar los datos. Veamos ambos en acción con docker-compose:
 
 ```yml
 services:
@@ -468,9 +464,9 @@ services:
       - ./mongo_data:/data/db # highlight-line
 ```
 
-The above will create a directory called *mongo\_data* to your local filesystem and map it into the container as _/data/db_. This means the data in _/data/db_ is stored outside of the container but still accessible by the container! Just remember to add the directory to .gitignore.
+Lo anterior creará un directorio llamado *mongo\_data* en su sistema de archivos local y lo asignará al contenedor como _/data/db_. Esto significa que los datos en _/data/db_ se almacenan fuera del contenedor, ¡pero el contenedor aún puede acceder a ellos! Solo recuerda agregar el directorio a .gitignore.
 
-A similar outcome can be achieved with a named volume:
+Se puede lograr un resultado similar con un volumen con nombre:
 
 ```yml
 services:
@@ -490,54 +486,54 @@ volumes:
   mongo_data:
 ```
 
-Now the volume is created but managed by Docker. After starting the application (_docker-compose -f docker-compose.dev.yml up_) you can list the volumes with _docker volume ls_, inspect one of them with _docker volume inspect_ and even delete them with _docker volume rm_. It's still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
+Ahora, Docker crea y administra el volumen. Después de iniciar la aplicación (_docker-compose -f docker-compose.dev.yml up_) puede enumerar los volúmenes con _docker volume ls_, inspeccionar uno de ellos con _docker volume inspect_ e incluso eliminarlos con _docker volume rm_. Todavía está almacenado en su sistema de archivos local, pero descubrir <i>dónde</i> puede no ser tan trivial como con la opción anterior.
 
 </div>
 
 <div class="tasks">
 
-### Exercise 12.7.
+### Ejercicio 12.7.
 
-#### Exercise 12.7: Little bit of MongoDB coding
+#### Ejercicio 12.7: Un poco de codificación MongoDB
 
-Note that this exercise assumes that you have done all the configurations made in material after the exercise 12.5. You should still run the todo-app backend <i>outside a container</i> just the MongoDB is containerized for now.
+Tenga en cuenta que este ejercicio asume que ha realizado todas las configuraciones realizadas en material después del ejercicio 12.5. Aún debe ejecutar el backend de la aplicación de tareas pendientes <i>fuera de un contenedor</i>, solo MongoDB está en un contenedor por ahora.
 
-The todo application has no proper implementation of routes for getting one todo (GET <i>/todos/:id</i>) and updating one todo (PUT <i>/todos/:id</i>). Fix the code.
+La aplicación de tareas pendientes no tiene una implementación adecuada de las rutas para obtener una tarea pendiente (GET <i>/todos/:id</i>) y actualizar una tarea pendiente (PUT <i>/todos/:id</i>). Arregle el código.
 
 </div>
 
 <div class="content">
 
-### Debugging issues in containers
+### Depuración en contenedores
 
-> <i>When coding, you most likely end up in a situation where everything is broken.</i>
+> <i>Cuando codificas, lo más probable es que termines en una situación en la que todo está roto.</i>
 
 > \- Matti Luukkainen
 
-When developing with containers, we need to learn new tools for debugging since we can not just "console.log" everything. When code has a bug, you may often be in a state where at least something works so you can work forward from that. Configuration most often is in either of the two states: 1. working or 2. broken. We will go over a few tools that can help when your application is in the latter state.
+Al desarrollar con contenedores, necesitamos aprender nuevas herramientas para la depuración, ya que no podemos simplemente usar "console.log" para todo. Cuando el código tiene un error, a menudo puede estar en un estado en el que al menos algo funciona y podemos avanzar a partir de ahí. La configuración suele estar en cualquiera de los dos estados: 1. funcionando o 2. rota. Repasaremos algunas herramientas que pueden ayudar cuando su aplicación se encuentra en este último estado.
 
-When developing software, you can safely progress step by step, all the time verifying that what you have coded behaves as expected. Often, this is not the case when doing configurations. The configuration you may be writing can be broken until the moment it is finished. So when you write a long docker-compose.yml or Dockerfile and it does not work, you need to take a moment and think about the various ways you could confirm something is working.
+Al desarrollar software, puede avanzar paso a paso con seguridad, verificando todo el tiempo que lo que ha codificado se comporta como se espera. A menudo, este no es el caso cuando se realizan configuraciones. La configuración que puede estar escribiendo puede romperse hasta en el momento en que finaliza. Entonces, cuando escribe un docker-compose.yml o Dockerfile largo y no funciona, debe tomarse un momento y pensar en las diversas formas en que podría confirmar que algo funciona.
 
-<i>Question Everything</i> is still applicable here. As said in [part 3](/en/part3/saving_data_to_mongo_db): The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possible sources of error one by one.
+<i>Cuestionar todo</i> sigue siendo aplicable aquí. Como se dijo en la [parte 3](/en/part3/saving_data_to_mongo_db): La clave es ser sistemático. Dado que el problema puede existir en cualquier lugar, <i>debe cuestionar todo</i> y eliminar todas las posibles fuentes de error una por una.
 
-For myself, the most valuable method of debugging is stopping and thinking about what I'm trying to accomplish instead of just bashing my head at the problem. Often there is a simple, alternate, solution or quick google search that will get me moving forward. 
+Para mí, el método más valioso de depuración es detenerme y pensar en lo que estoy tratando de lograr en lugar de simplemente golpearme la cabeza con el problema. A menudo hay una solución simple, alternativa, o una búsqueda rápida en Google que me ayudará a seguir adelante.
 
 #### exec
 
-The Docker command [exec](https://docs.docker.com/engine/reference/commandline/exec/) is a heavy hitter. It can be used to jump right into a container when it's running. 
+El comando Docker [exec](https://docs.docker.com/engine/reference/commandline/exec/) es un gran bateador. Se puede usar para saltar directamente a un contenedor cuando se está ejecutando.
 
-Let's start a web server in the background and do a little bit of debugging to get it running and displaying the message "Hello, exec!" in our browser. Let's choose [Nginx](https://www.nginx.com/) which is, among other things, a server capable of serving static HTML files. It has a default index.html that we can replace.
+Iniciemos un servidor web en segundo plano y hagamos un poco de depuración para que funcione y muestre el mensaje "¡Hola, exec!" en nuestro navegador. Elijamos [Nginx](https://www.nginx.com/) que es, entre otras cosas, un servidor capaz de servir archivos HTML estáticos. Tiene un index.html predeterminado que podemos reemplazar.
 
 ```bash
 $ docker container run -d nginx
 ```
 
-Ok, now the questions are:
+Bien, ahora las preguntas son:
 
-- Where should we go with our browser? 
-- Is it even running? 
+- ¿Dónde debemos ir con nuestro navegador?
+- ¿Está incluso funcionando?
 
-We know how to answer the latter: by listing the running containers.
+Sabemos cómo responder a lo último: enumerando los contenedores en ejecución.
 
 ```bash
 $ docker container ls
@@ -545,9 +541,9 @@ CONTAINER ID   IMAGE           COMMAND                  CREATED              STA
 3f831a57b7cc   nginx           "/docker-entrypoint.…"   About a minute ago   Up About a minute           80/tcp    keen_darwin
 ```
 
-Yes! We got the first question answered as well. It seems to listen on port 80, as seen on the output above.
+¡Sí! También hemos respondido a la primera pregunta. Parece escuchar en el puerto 80, como se ve en la salida anterior.
 
-Let's shut it down and restart with the _-p_ flag to have our browser access it.
+Apaguémoslo y reiniciemos con el indicador _-p_ para que nuestro navegador acceda a él.
 
 ```bash
 $ docker container stop keen_darwin
@@ -556,7 +552,7 @@ $ docker container rm keen_darwin
 $ docker container run -d -p 8080:80 nginx
 ```
 
-Let's look at the app by going to http://localhost:8080. It seems the app is showing the wrong message! Let's hop right into the container and fix the it. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
+Miremos la aplicación en http://localhost:8080. ¡Parece que la aplicación muestra un mensaje incorrecto! Saltemos directamente al contenedor y arreglémoslo. Mantenga su navegador abierto, no necesitaremos cerrar el contenedor para esta corrección. Ejecutaremos bash dentro del contenedor, las banderas _-it_ asegurarán que podamos interactuar con el contenedor:
 
 ```bash
 $ docker container ls
@@ -567,44 +563,44 @@ $ docker exec -it wonderful_ramanujan bash
 root@7edcb36aff08:/#
 ```
 
-Now that we are in, we need to find the faulty file and replace it. Quick Google tells us that file itself is _/usr/share/nginx/html/index.html_.
+Ahora que estamos dentro, necesitamos encontrar el archivo defectuoso y reemplazarlo. Rapidamente Google nos dice que el archivo en sí es _/usr/share/nginx/html/index.html_.
 
-Let's move to the directory and delete the file
+Pasemos al directorio y eliminemos el archivo.
 
 ```bash
 root@7edcb36aff08:/# cd /usr/share/nginx/html/
 root@7edcb36aff08:/# rm index.html
 ```
 
-Now, if we go to http://localhost:8080/ we know that we deleted the correct file. The page shows 404. Let's replace it with one containing the correct contents:
+Ahora, si vamos a http://localhost:8080/ sabemos que eliminamos el archivo correcto. La página muestra 404. Vamos a reemplazarlo con uno que contenga el contenido correcto:
 
 ```bash
 root@7edcb36aff08:/# echo "Hello, exec!" > index.html
 ```
 
-Refresh the page, and our message is displayed! Now we know how exec can be used to interact with the containers. Remember that all of the changes are lost when the container is deleted. To preserve the changes, you must use _commit_ just as we did in [previous section](/en/part12/introduction_to_containers#other-docker-commands).
+¡Actualice la página y se mostrará nuestro mensaje! Ahora sabemos cómo se puede usar exec para interactuar con los contenedores. Recuerde que todos los cambios se pierden cuando se elimina el contenedor. Para conservar los cambios, debe usar _commit_ tal como lo hicimos en la [sección anterior](/es/part12/introduction_to_containers#other-docker-commands).
 
 </div>
 
 <div class="tasks">
 
-### Exercise 12.8.
+### Ejercicio 12.8.
 
-#### Exercise 12.8: Mongo command-line interface
+#### Ejercicio 12.8: Interfaz de linea de comandos (CLI) de Mongo
 
-> Use _script_ to record what you do, save the file as script-answers/exercise12_8.txt
+> Use _script_ para registrar lo que hace, guarde el archivo en script-answers/exercise12_8.txt
 
-While the MongoDB from the previous exercise is running, access the database with mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
+Mientras se ejecuta MongoDB del ejercicio anterior, acceda a la base de datos con la interfaz de línea de comandos (CLI) de mongo. Puedes hacerlo usando docker exec. A continuación, agregue una tarea nueva mediante la CLI.
 
-The command to open CLI when inside the container is _mongo_
+El comando para abrir CLI cuando está dentro del contenedor es _mongo_
 
-The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
+La CLI de mongo requerirá las marcas de nombre de usuario y contraseña para autenticarse correctamente. Las banderas _-u root -p example_ deberían funcionar, los valores corresponden a los que se encuentran en el archivo docker-compose.dev.yml.
 
-* Step 1: Run MongoDB
-* Step 2: Use docker exec to get inside the container
-* Step 3: Open mongo cli
+* Paso 1: Ejecute MongoDB
+* Paso 2: use docker exec para ingresar al contenedor
+* Paso 3: Abrir mongo cli
 
-When you have connected to the mongo cli you can ask it to show dbs inside:
+Cuando se haya conectado a Mongo cli, puede pedirle que muestre dbs dentro:
 
 ```bash
 > show dbs
@@ -614,20 +610,20 @@ local         0.000GB
 the_database  0.000GB
 ```
 
-To access the correct database:
+Para acceder a la base de datos correcta:
 
 ```bash
 > use the_database
 ```
 
-And finally to find out the collections:
+Y finalmente para conocer las colecciones:
 
 ```bash
 > show collections
 todos
 ```
 
-We can now access the data in those collections:
+Ahora podemos acceder a los datos en esas colecciones:
 
 ```bash
 > db.todos.find({})
@@ -635,9 +631,9 @@ We can now access the data in those collections:
 { "_id" : ObjectId("611e54b688ddbb7e84d3c46c"), "text" : "Learn about containers", "done" : false }
 ```
 
-Insert one new todo with the text: "Increase the number of tools in my toolbelt" with status done as false. Consult the [documentation](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) to see how the addition is done.
+Inserte una tarea pendiente nueva con el texto: "Increase the number of tools in my toolbelt" con el estado hecho como falso. Consulte la [documentación](https://docs.mongodb.com/v4.4/reference/method/db.collection.insertOne/#mongodb-method-db.collection.insertOne) para ver cómo se realiza la adición.
 
-Ensure that you see the new todo both in the Express app and when querying from Mongo CLI.
+Asegúrese de ver la nueva tarea tanto en la aplicación Express como al consultar desde la CLI de Mongo.
 
 </div>
 
@@ -645,23 +641,23 @@ Ensure that you see the new todo both in the Express app and when querying from 
 
 ### Redis
 
-[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
+[Redis](https://redis.io/) es una base de datos [clave-valor](https://redis.com/nosql/key-value-databases/). En contraste con por ej. MongoDB, los datos almacenados en un almacenamiento de clave-valor tienen un poco menos de estructura, por ejemplo no contiene colecciones ni tablas, solo contiene pedazos de datos que se pueden obtener en función de la <i>clave</i> que se adjuntó a los datos (el <i>valor</i>).
 
-By default Redis works <i>in-memory</i>, which means that it does not store data persistently. 
+De forma predeterminada, Redis funciona <i>en memoria</i>, lo que significa que no almacena datos de forma persistente.
 
-An excellent use case for Redis is to use it as a <i>cache</i>. Caches are often used to store data that is otherwise slow to fetch and save the data until it's no longer valid. After the cache becomes invalid, you would then fetch the data again and store it in the cache.
+Un caso de uso excelente para Redis es usarlo como <i>caché</i>. Los cachés a menudo se usan para almacenar datos que, de otro modo, serían lentos para obtener y guardar los datos hasta que ya no sean válidos. Después de que la memoria caché se vuelva inválida, recuperará los datos nuevamente y los almacenará en la memoria caché.
 
-Redis has nothing to do with containers. But since we are already able to add <i>any</i> 3rd party service to your applications, why not learn about a new one.
+Redis no tiene nada que ver con los contenedores. Pero dado que ya podemos agregar <i>cualquier</i> servicio de terceros a sus aplicaciones, ¿por qué no conocer uno nuevo?
 
 </div>
 
 <div class="tasks">
 
-### Exercises 12.9. - 12.11.
+### Ejercicios 12.9. - 12.11.
 
-#### Exercise 12.9: Set up Redis for the project
+#### Ejercicio 12.9: Instalando Redis en el proyecto
 
-The Express server has already been configured to use Redis, and it is only missing the *REDIS_URL* environment variable. The application will use that environment variable to connect to the Redis. Read through the [Docker Hub page for Redis](https://hub.docker.com/_/redis), add Redis to the <i>todo-app/todo-backend/docker-compose.dev.yml</i> by defining another service after mongo:
+El servidor Express ya se configuró para usar Redis y solo falta la variable de entorno *REDIS_URL*. La aplicación utilizará esa variable de entorno para conectarse a Redis. Lea la [página de Docker Hub para Redis](https://hub.docker.com/_/redis), agregue Redis a <i>todo-app/todo-backend/docker-compose.dev.yml</ i> definiendo otro servicio después de mongo:
 
 ```yml
 services:
@@ -671,25 +667,25 @@ services:
     ???
 ```
 
-Since the Docker Hub page doesn't have all the info, we can use Google to aid us. The default port for Redis is found by doing so:
+Dado que la página de Docker Hub no tiene toda la información, podemos usar Google para ayudarnos. El puerto predeterminado para Redis se encuentra facilmente al buscarlo:
 
 ![](../../images/12/redis_port_by_google.png)
 
-We won't have any idea if the configuration works unless we try it. The application will not start using Redis by itself, that shall happen in next exercise.
+No sabremos si la configuración funciona a menos que la probemos. La aplicación no comenzará a usar Redis por sí sola, eso sucederá en el próximo ejercicio.
 
-Once Redis is configured and started, restart the backend and give it the <i>REDIS\_URL</i>, that has the form <i>redis://host:port</i>
+Una vez que Redis esté configurado e iniciado, reinicie el backend y asígnele el <i>REDIS\_URL</i>, que tiene la forma <i>redis://host:port</i>
 
 ```bash
 $ REDIS_URL=insert-redis-url-here MONGO_URL=mongodb://localhost:3456/the_database npm run dev
 ```
 
-You can now test the configuration by adding the line
+Ahora puede probar la configuración agregando la línea
 
 ```js
 const redis = require('../redis')
 ```
 
-to the Express server eg. in file <i>routes/index.js</i>. If nothing happens, the configuration is done right. If not, the server crashes:
+al servidor Express, por ejemplo. en el archivo <i>routes/index.js</i>. Si no pasa nada, la configuración se hizo correctamente. Si no, el servidor falla:
 
 ```bash
 events.js:291
@@ -714,18 +710,18 @@ Emitted 'error' event on RedisClient instance at:
 [nodemon] app crashed - waiting for file changes before starting...
 ```
 
-#### Exercise 12.10:
+#### Ejercicio 12.10:
 
-The project already has [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) installed and two functions "promisified" - getAsync and setAsync.
+El proyecto ya tiene [https://www.npmjs.com/package/redis](https://www.npmjs.com/package/redis) instalado y dos funciones "prometidas": getAsync y setAsync.
 
-- setAsync function takes in key and value, using the key to store the value.
+- La función setAsync toma la clave y el valor, usando la clave para almacenar el valor.
 
-- getAsync function takes in key and returns the value in a promise.
+- La función getAsync toma la clave y devuelve el valor en una promesa.
 
-Implement a todo counter that saves the number of created todos to Redis:
+Implemente un contador de tareas pendientes que guarde la cantidad de tareas pendientes creadas en Redis:
 
-- Step 1: Whenever a request is sent to add a todo, increment the counter by one.
-- Step 2: Create a GET /statistics endpoint where you can ask the usage metadata. The format should be the following JSON:
+- Paso 1: cada vez que se envíe una solicitud para agregar una tarea pendiente, incremente el contador en uno.
+- Paso 2: Cree un punto final GET/statistics donde pueda solicitar los metadatos de uso. El formato debe ser el siguiente JSON:
 
 ```json
 {
@@ -733,27 +729,27 @@ Implement a todo counter that saves the number of created todos to Redis:
 }
 ```
 
-#### Exercise 12.11:
+#### Ejercicio 12.11:
 
-> Use _script_ to record what you do, save the file as script-answers/exercise12_11.txt
+> Use _script_ para registrar lo que hace, guarde el archivo como script-answers/exercise12_11.txt
 
-If the application does not behave as expected, a direct access to the database may be beneficial in pinpointing problems. Let us try out how [redis-cli](https://redis.io/topics/rediscli) can be used to access the database.
+Si la aplicación no se comporta como se esperaba, un acceso directo a la base de datos puede ser beneficioso para identificar problemas. Probemos cómo se puede usar [redis-cli](https://redis.io/topics/rediscli) para acceder a la base de datos.
 
-- Go to the redis container with _docker exec_ and open the redis-cli.
-- Find the key you used with _[KEYS *](https://redis.io/commands/keys)_ 
-- Check the value of the key with command [GET](https://redis.io/commands/get)
-- Set the value of the counter to 9001, find the right command from [here](https://redis.io/commands/) 
-- Make sure that the new value works by refreshing the page http://localhost:3000/statistics
-- Create a new todo with postman and ensure from redis-cli that the counter has increased accordingly
-- Delete the key from cli and ensure that counter works when new todos are added
+- Vaya al contenedor de redis con _docker exec_ y abra el archivo redis-cli.
+- Encuentra la clave que usaste con _[KEYS *](https://redis.io/commands/keys)_
+- Verifique el valor de la clave con el comando [GET](https://redis.io/commands/get)
+- Establezca el valor del contador en 9001, encuentre el comando correcto desde [aquí](https://redis.io/commands/)
+- Asegúrese de que el nuevo valor funcione actualizando la página http://localhost:3000/statistics
+- Cree una nueva tarea con Postman y asegúrese de que el contador haya aumentado en consecuencia desde redis-cli
+- Elimine la clave de cli y asegúrese de que el contador funcione cuando se agreguen nuevas tareas
 
 </div>
 
 <div class="content">
 
-### Persisting data with Redis
+### Persistiendo datos con Redis
 
-In the previous section, it was mentioned that <i>by default</i> Redis does not persist the data. However, the persistence is easy to toggle on. We only need to start the Redis with a different command, as instructed by the [Docker hub page](https://hub.docker.com/_/redis):
+En la sección anterior, se mencionó que <i>por defecto</i> Redis no conserva los datos. Sin embargo, la persistencia es fácil de activar. Solo necesitamos iniciar Redis con un comando diferente, como se indica en la [página del centro de Docker](https://hub.docker.com/_/redis):
 
 ```yml
 services:
@@ -764,25 +760,25 @@ services:
       - ./redis_data:/data
 ```
 
-The data will now be persisted to directory <i>redis_data</i> of the host machine. 
-Remember to add the directory to .gitignore!
+Los datos ahora se almacenarán en el directorio <i>redis_data</i> de la máquina host.
+¡Recuerde agregar el directorio a .gitignore!
 
-#### Other functionality of Redis
+#### Otras funcionalidades de Redis
 
-In addition to the GET, SET and DEL operations on keys and values, Redis can do also a quite a lot more. It can for example automatically expire keys, that is a very useful feature when Redis is used as a cache.
+Además de las operaciones GET, SET y DEL en claves y valores, Redis también puede hacer mucho más. Por ejemplo, puede hacer que las claves caduquen automáticamente, lo que es una característica muy útil cuando Redis se usa como caché.
 
-Redis can also be used to implement so called [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (or PubSub) pattern that is a asynchronous communication mechanism for distributed applications. In this scenario Redis works as a <i>message broker</i> between two or more applications. Some of the applications are <i>publishing</i> messages by sending those to Redis, that on arrival of a message, informs the parties that have <i>subscribed</i> to those messages. 
+Redis también se puede utilizar para implementar el patrón denominado [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) (o PubSub), que es un mecanismo de comunicación asincrónica para aplicaciones distribuidas. En este escenario, Redis funciona como un <i>agente de mensajes</i> entre dos o más aplicaciones. Algunas de las aplicaciones están <i>publicando</i> mensajes enviándolos a Redis, que al recibir un mensaje, informa a las partes que se han <i>suscrito</i> a esos mensajes.
 
 </div>
 
 <div class="tasks">
 
-### Exercise 12.12.
+### Ejercicio 12.12.
   
-#### Exercise 12.12: Persisting data in Redis
+#### Ejercicio 12.12: Persistiendo datos en Redis
 
-Check that the data is not persisted by default: after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
+Compruebe que los datos no se conservan de forma predeterminada: después de ejecutar _docker-compose -f docker-compose.dev.yml down_ y _docker-compose -f docker-compose.dev.yml up_ el valor del contador se restablece a 0.
 
-Then create a volume for Redis data (by mofifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
+Luego, cree un volumen para los datos de Redis (modificando <i>todo-app/todo-backend/docker-compose.dev.yml </i>) y asegúrese de que los datos sobrevivan después de ejecutar _docker-compose -f docker-compose .dev.yml down_ y _docker-compose -f docker-compose.dev.yml up_.
 
 </div>
