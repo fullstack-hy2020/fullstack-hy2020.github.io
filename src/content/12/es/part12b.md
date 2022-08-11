@@ -578,7 +578,7 @@ Ahora, si vamos a http://localhost:8080/ sabemos que eliminamos el archivo corre
 root@7edcb36aff08:/# echo "Hello, exec!" > index.html
 ```
 
-¡Actualice la página y se mostrará nuestro mensaje! Ahora sabemos cómo se puede usar exec para interactuar con los contenedores. Recuerde que todos los cambios se pierden cuando se elimina el contenedor. Para conservar los cambios, debe usar _commit_ tal como lo hicimos en la [sección anterior](/es/part12/introduction_to_containers#other-docker-commands).
+¡Actualice la página y se mostrará nuestro mensaje! Ahora sabemos cómo se puede usar exec para interactuar con los contenedores. Recuerde que todos los cambios se pierden cuando se elimina el contenedor. Para conservar los cambios, debe usar _commit_ tal como lo hicimos en la [sección anterior](/es/part12/introduccion_a_los_contenedores#otros-comandos-de-docker).
 
 </div>
 
