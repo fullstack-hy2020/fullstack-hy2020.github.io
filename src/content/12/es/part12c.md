@@ -2,14 +2,14 @@
 mainImage: ../../../images/part-12.svg
 part: 12
 letter: c
-lang: en
+lang: es
 ---
 
 <div class="content">
 
 ### React in container
 
-Let's create and containerize a React application next. Let us choose npm as the package manager even though create-react-app defaults to yarn.
+Vamos a crear y contenerizar una aplicación React a continuación. Elijamos npm como administrador de paquetes aunque create-react-app tenga como valor predeterminado yarn.
 
 ```
 $ npx create-react-app hello-front --use-npm
@@ -18,9 +18,9 @@ $ npx create-react-app hello-front --use-npm
   Happy hacking!
 ```
 
-The create-react-app already installed all dependencies for us, so we did not need to run npm install here.
+create-react-app ya instaló todas las dependencias para nosotros, por lo que no necesitamos ejecutar npm install aquí.
 
-The next step is to turn the JavaScript code and CSS, into production-ready static files. The create-react-app already has _build_ as an npm script so let's use that:
+El siguiente paso es convertir el código JavaScript y CSS en archivos estáticos listos para producción, create-react-app ya tiene _build_ como un script npm, así que usemos eso:
 
 ```
 $ npm run build
@@ -32,7 +32,7 @@ $ npm run build
   ...
 ```
 
-Great! The final step is figuring a way to use a server to serve the static files. As you may know, we could use our [express.static](https://expressjs.com/en/starter/static-files.html) with the Express server to serve the static files. I'll leave that as an exercise for you to do at home. Instead, we are going to go ahead and start writing our Dockerfile:
+¡Excelente! El paso final es encontrar una forma de usar un servidor para servir los archivos estáticos. Como sabrá, podríamos usar nuestro [express.static](https://expressjs.com/en/starter/static-files.html) con el servidor Express para servir los archivos estáticos. Te lo dejo como ejercicio para que lo hagas en casa. En su lugar, seguiremos adelante y comenzaremos a escribir nuestro Dockerfile:
 
 ```Dockerfile
 FROM node:16
@@ -46,7 +46,7 @@ RUN npm ci
 RUN npm run build
 ```
 
-That looks about right. Let's build it and see if we are on the right track. Our goal is to have the build succeed without errors. Then we will use bash to check inside of the container to see if the files are there.
+Eso parece correcto. Construyámoslo y veamos si estamos en el camino correcto. Nuestro objetivo es que la compilación tenga éxito sin errores. Luego usaremos bash para verificar dentro del contenedor para ver si los archivos están allí.
 
 ```bash
 $ docker build . -t hello-front
@@ -61,7 +61,7 @@ root@98fa9483ee85:/usr/src/app# ls build/
   asset-manifest.json  favicon.ico  index.html  logo192.png  logo512.png  manifest.json  robots.txt  static
 ```
 
-A valid option for serving static files now that we already have Node in the container is [serve](https://www.npmjs.com/package/serve). Let's try installing serve and serving the static files while we are inside the container.
+Una opción válida para servir archivos estáticos ahora que ya tenemos Node en el contenedor es [serve](https://www.npmjs.com/package/serve). Intentemos instalar el servicio y servir los archivos estáticos mientras estamos dentro del contenedor.
 
 ```bash
 root@98fa9483ee85:/usr/src/app# npm install -g serve
@@ -80,9 +80,9 @@ root@98fa9483ee85:/usr/src/app# serve build
 
 ```
 
-Great! Let's ctrl+c and exit out and then add those to our Dockerfile.
+¡Excelente! Hagamos ctrl+c y salgamos y luego agréguelos a nuestro Dockerfile.
 
-The installation of serve turns into a RUN in the Dockerfile. This way the dependency is installed during the build process. The command to serve build directory will become the command to start the container:
+La instalación de serve se convierte en RUN en el Dockerfile. De esta manera, la dependencia se instala durante el proceso de compilación. El comando para servir el directorio de compilación se convertirá en el comando para iniciar el contenedor:
 
 ```Dockerfile
 FROM node:16
@@ -100,19 +100,19 @@ RUN npm install -g serve # highlight-line
 CMD ["serve", "build"] # highlight-line
 ```
 
-Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
+Nuestro CMD ahora incluye corchetes y, como resultado, usamos el llamado <i>exec form</i> de CMD. En realidad, hay **tres** formas diferentes para el CMD de las cuales se prefiere la forma exec. Lea la [documentación](https://docs.docker.com/engine/reference/builder/#cmd) para obtener más información.
 
-When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:5000.
+Cuando ahora construimos la imagen con _docker build. -t hello-front_ y la ejecutamos con _docker run -p 5000:3000 hello-front_, la aplicación estará disponible en http://localhost:5000.
 
-### Using multiple stages
+### Usando multiples etapas
 
-While serve is a <i>valid</i> option we can do better. A good goal is to create Docker images so that they do not contain anything irrelevant. With a minimal number of dependencies, images are less likely to break or become vulnerable over time. 
+Si bien serve es una opción <i>válida</i>, podemos hacerlo mejor. Un buen objetivo es crear imágenes de Docker para que no contengan nada irrelevante. Con un número mínimo de dependencias, es menos probable que las imágenes se rompan o se vuelvan vulnerables con el tiempo.
 
-[Multi-stage builds](https://docs.docker.com/develop/develop-images/multistage-build/) are designed for splitting the build process into many separate stages, where it is possible to limit what parts of the image files are moved between the stages. That opens possibilities for limiting the size of the image since not all by-products of the build are necessary for the resulting image. Smaller images are faster to upload and download and they help reduce the number of vulnerabilities your software may have.
+[Compilaciones de varias etapas](https://docs.docker.com/develop/develop-images/multistage-build/) están diseñadas para dividir el proceso de compilación en muchas etapas separadas, donde es posible limitar qué partes del los archivos de imagen se mueven entre las etapas. Eso abre posibilidades para limitar el tamaño de la imagen, ya que no todos los subproductos de la construcción son necesarios para la imagen resultante. Las imágenes más pequeñas son más rápidas de cargar y descargar y ayudan a reducir la cantidad de vulnerabilidades que puede tener su software.
 
-With multi-stage builds, a tried and true solution like [Nginx](https://en.wikipedia.org/wiki/Nginx) can be used to serve static files without a lot of headaches. The Docker Hub [page for Nginx](https://hub.docker.com/_/nginx) tells us the required info to open the ports and "Hosting some simple static content".
+Con compilaciones de varias etapas, se puede usar una solución probada y verdadera como [Nginx](https://en.wikipedia.org/wiki/Nginx) para servir archivos estáticos sin muchos dolores de cabeza. La [página de Nginx](https://hub.docker.com/_/nginx) de Docker Hub nos brinda la información necesaria para abrir los puertos y "Alojamiento de contenido estático simple".
 
-Let's use the previous Dockerfile but change the FROM to include the name of the stage:
+Usemos el Dockerfile anterior pero cambiemos FROM para incluir el nombre de la etapa:
 
 ```Dockerfile
 # The first FROM is now a stage called build-stage
@@ -134,56 +134,56 @@ FROM nginx:1.20-alpine # highlight-line
 COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-line
 ```
 
-We have declared also <i>another stage</i> where only the relevant files of the first stage (the <i>build</i> directory, that contains the static content) are moved.
+Hemos declarado también <i>otra etapa</i> donde solo se mueven los archivos relevantes de la primera etapa (el directorio <i>build</i>, que contiene el contenido estático).
 
-After we build it again, the image is ready to serve the static content. The default port will be 80 for Nginx, so something like _-p 8000:80_ will work, so the parameters of the run command need to be changed a bit.
+Después de que la construimos de nuevo, la imagen está lista para servir el contenido estático. El puerto predeterminado será 80 para Nginx, por lo que algo como _-p 8000:80_ funcionará, por lo que los parámetros del comando de ejecución deben cambiarse un poco.
 
-Multi-stage builds also include some internal optimizations that may affect your builds. As an example, multi-stage builds skip stages that are not used. If we wish to use a stage to replace a part of a build pipeline, like testing or notifications, we must pass **some** data to the following stages. In some cases this is justified: copy the code from the testing stage to the build stage. This ensures that you are building the tested code.
+Las compilaciones de varias etapas también incluyen algunas optimizaciones internas que pueden afectar sus compilaciones. Como ejemplo, las compilaciones de varias etapas se saltan las etapas que no se utilizan. Si deseamos usar una etapa para reemplazar una parte de una canalización de compilación, como pruebas o notificaciones, debemos pasar **algunos** datos a las siguientes etapas. En algunos casos esto está justificado: copie el código de la etapa de prueba a la etapa de construcción. Esto garantiza que está compilando el código probado.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 12.13 - 12.14.
+### Ejercicios 12.13 - 12.14.
 
-#### Exercise 12.13: Todo application frontend
+#### Ejercicio 12.13: Fronted de la aplicación de tareas
 
-Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read through the README.
+Finalmente, llegamos a la interfaz (fronted) de la aplicación de tareas pendientes. Vea todo-app/todo-frontend y lea el LÉAME.
 
-Start by running the frontend outside the container and ensure that it works with the backend.
+Comience ejecutando el frontend fuera del contenedor y asegúrese de que funcione con el backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before the frontend is build, otherwise it does not get defined in the code!
+Contenga la aplicación creando <i>todo-app/todo-frontend/Dockerfile</i> y use la instrucción [ENV](https://docs.docker.com/engine/reference/builder/#env) para pasar * REACT\_APP\_BACKEND\_URL* a la aplicación y ejecútela con el backend. El backend aún debería estar ejecutándose fuera de un contenedor. Tenga en cuenta que debe configurar *REACT\_APP\_BACKEND\_URL* antes de compilar la interfaz, de lo contrario, no quedará definida en el código.
 
-#### Exercise 12.14: Testing during the build process
+#### Ejercicio 12.14: Pruebas durante el proceso de construcción
 
-One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests when this might be a good idea. 
+Una posibilidad interesante de utilizar compilaciones de varias etapas es usar una etapa de compilación separada para [pruebas](https://docs.docker.com/language/nodejs/run-tests/). Si la etapa de prueba falla, todo el proceso de construcción también fallará. Tenga en cuenta que puede que no sea la mejor idea mover <i>todas las pruebas</i> para que se realicen durante la construcción de una imagen, pero puede ser buena idea que existan <i>algunas</i> pruebas relacionadas con la creación de contenedores.
 
-Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
+Extraiga un componente <i>Todo</i> que represente una sola tarea. Escriba una prueba para el nuevo componente y agregue pruebas en ejecución al proceso de compilación.
 
-Run the tests with _CI=true npm test_, or create-react-app will start watching for changes and your pipeline will get stuck.
+Ejecute las pruebas con _CI=true npm test_, o create-react-app comenzará a buscar cambios y su canalización se atascará.
 
-You can add a new build stage for the test if you wish to do so. If you do so, remember to read the last paragraph before exercise 12.13 again!
+Puede agregar una nueva etapa de compilación para la prueba si lo desea. Si lo hace, ¡recuerde leer de nuevo el último párrafo antes del ejercicio 12.13!
 
 </div>
 
 <div class="content">
 
-### Development in containers
+### Desarrollo en contenedores
 
-Let's move the whole todo application development to a container. There are a few reasons why you would want to do that:
+Movamos todo el desarrollo de la aplicación de tareas pendientes a un contenedor. Hay algunas razones por las que querrías hacer eso:
 
-- To keep the environment similar between development and production to avoid bugs that appear only in the production environment
-- To avoid differences between developers and their personal environments that lead to difficulties in application development
-- To help new team members hop in by having them install container runtime - and requiring nothing else.
+- Para mantener el entorno similar entre el desarrollo y la producción para evitar errores que aparecen solo en el entorno de producción.
+- Evitar diferencias entre los desarrolladores y sus entornos personales que generen dificultades en el desarrollo de aplicaciones.
+- Para ayudar a los nuevos miembros del equipo a incorporarse, haciéndoles instalar el tiempo de ejecución del contenedor, sin necesidad de nada más.
 
-These all are great reasons. The tradeoff is that we may encounter some unconventional behavior when we aren't running the applications like we are used to. We will need to do at least two things to move the application to a container:
+Todas estas son buenas razones. La contrapartida es que podemos encontrarnos con algún comportamiento no convencional cuando no estamos ejecutando las aplicaciones a las que estamos acostumbrados. Tendremos que hacer al menos dos cosas para mover la aplicación a un contenedor:
 
-- Start the application in development mode
-- Access the files with VSCode
+- Inicie la aplicación en modo de desarrollo
+- Accede a los archivos con VSCode
 
-Let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.
+Comencemos con la interfaz. Dado que el Dockerfile será significativamente diferente al Dockerfile de producción, creemos uno nuevo llamado <i>dev.Dockerfile</i>.
 
-Starting the create-react-app in development mode should be easy. Let's start with the following:
+Iniciar la aplicación create-react-app en modo de desarrollo debería ser fácil. Comencemos con lo siguiente:
 
 ```Dockerfile
 FROM node:16
@@ -199,14 +199,14 @@ RUN npm install
 CMD ["npm", "start"]
 ```
  
-During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so _docker build -f ./dev.Dockerfile -t hello-front-dev ._ will build the image. The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
+Durante la compilación, se usará el indicador _-f_ para indicar qué archivo usar; de lo contrario, sería Dockerfile predeterminado, por lo que _docker build -f ./dev.Dockerfile -t hello-front-dev ._ compilará la imagen. La aplicación create-react se servirá en el puerto 3000, por lo que puede probar que funciona ejecutando un contenedor con ese puerto publicado.
 
-The second task, accessing the files with VSCode, is not done yet. There are at least two ways of doing this: 
+La segunda tarea, acceder a los archivos con VSCode, aún no se ha realizado. Hay al menos dos formas de hacer esto:
 
-- [The Visual Studio Code Remote - Containers extension](https://code.visualstudio.com/docs/remote/containers) 
-- Volumes, the same thing we used to preserve data with the database
+- [Extensión de Visual Studio Code Remote - Containers](https://code.visualstudio.com/docs/remote/containers)
+- Volúmenes, lo mismo que usamos para conservar los datos con la base de datos.
 
-Let's go over the latter since that will work with other editors as well. Let's do a trial run with the flag _-v_, and if that works, then we will move the configuration to a docker-compose file. To use the _-v_, we will need to tell it the current directory. The command _pwd_ should output the path to the current directory for you. Try this with _echo $(pwd)_ in your command line. We can use that as the left side for _-v_ to map the current directory to the inside of the container or you can use the full directory path.
+Repasemos esto último, ya que también funcionará con otros editores. Hagamos una ejecución de prueba con el indicador _-v_ y, si funciona, moveremos la configuración a un archivo docker-compose. Para usar _-v_, necesitaremos decirle el directorio actual. El comando _pwd_ debería generar la ruta al directorio actual. Intente esto con _echo $(pwd)_ en su línea de comando. Podemos usarlo con _-v_ a la izquierda para asignar el directorio actual al interior del contenedor o puede usar la ruta completa del directorio.
 
 ```bash
 $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
@@ -216,9 +216,9 @@ $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
   You can now view hello-front in the browser.
 ```
 
-Now we can edit the file <i>src/App.js</i>, and the changes should be hot-loaded to the browser!
+Ahora podemos editar el archivo <i>src/App.js</i>, ¡y los cambios deben cargarse de forma instantanea en el navegador!
 
-Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:
+A continuación, movamos la configuración a <i>docker-compose.yml</i>. Ese archivo también debe estar en la raíz del proyecto:
 
 ```yml
 services:
@@ -234,30 +234,30 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-With this configuration, _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!
+Con esta configuración, _docker-compose up_ puede ejecutar la aplicación en modo de desarrollo. ¡Ni siquiera necesita Node instalado para desarrollarlo!
 
-Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
+Instalar nuevas dependencias es un dolor de cabeza para una configuración de desarrollo como esta. Una de las mejores opciones es instalar la nueva dependencia **dentro** del contenedor. Entonces, en lugar de hacer, p. _npm install axios_, debe hacerlo en el contenedor en ejecución, p. _docker exec hello-front-dev npm instale axios_, o agréguelo a package.json y ejecute _docker build_ nuevamente.
 
 </div>
 <div class="tasks">
 
-### Exercise 12.15
+### Ejercicio 12.15
 
-#### Exercise 12.15: Set up a frontend development environment
+#### Ejercicio 12.15: Configurar un entorno de desarrollo frontend
 
-Create <i>todo-frontend/docker-compose.dev.yml</i> and use volumes to enable the development of the todo-frontend while it is running <i>inside</i> a container.
+Cree <i>todo-frontend/docker-compose.dev.yml</i> y use volúmenes para habilitar el desarrollo de todo-frontend mientras se ejecuta <i>dentro</i> de un contenedor.
 
 </div>
 
 <div class="content">
 
-### Communication between containers in a Docker network
+### Comunicación entre contenedores en una red Docker
 
-The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we shall see how the network and DNS work.
+La herramienta docker-compose configura una red entre los contenedores e incluye un DNS para conectar fácilmente dos contenedores. Agreguemos un nuevo servicio a docker-compose y veremos cómo funcionan la red y el DNS.
 
-[Busybox](https://www.busybox.net/) is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
+[Busybox](https://www.busybox.net/) es un pequeño ejecutable con varias herramientas que puede necesitar. Se llama "La navaja suiza de Embedded Linux", y definitivamente podemos usarlo para nuestro beneficio.
 
-Busybox can help us to debug our configurations. So if you get lost in the later exercises of this section, you should use Busybox to find out what works and what doesn't. Let's use it to explore what was just said. That containers are inside a network and you can easily connect between them. Busybox can be added to the mix by changing <i>docker-compose.yml</i> to:
+Busybox puede ayudarnos a depurar nuestras configuraciones. Entonces, si se pierde en los ejercicios posteriores de esta sección, debe usar Busybox para averiguar qué funciona y qué no. Usémoslo para explorar lo que se acaba de decir. Que los contenedores están dentro de una red y puede conectarse fácilmente entre ellos. Busybox se puede agregar a la mezcla cambiando <i>docker-compose.yml</i> a:
 
 ```yml
 services:
@@ -275,7 +275,7 @@ services:
     image: busybox # highlight-line
 ```
 
-The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this:
+El contenedor Busybox no tendrá ningún proceso ejecutándose dentro para que podamos _ejecutar_ allí. Por eso, la salida de _docker-compose up_ también se verá así:
 
 ```bash
 $ docker-compose up
@@ -294,9 +294,9 @@ $ docker-compose up
   hello-front-dev | > react-scripts start
 ```
 
-This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running, we can do the request with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.
+Esto es de esperar ya que es solo una caja de herramientas. Usémoslo para enviar una solicitud a hello-front-dev y ver cómo funciona el DNS. Mientras se ejecuta hello-front-dev, podemos realizar la solicitud con [wget](https://en.wikipedia.org/wiki/Wget) ya que es una herramienta incluida en Busybox para enviar una solicitud desde el asistente de depuración. a hola-front-dev.
 
-With Docker Compose we can use _docker-compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
+Con Docker Compose podemos usar _docker-compose run SERVICE COMMAND_ para ejecutar un servicio con un comando específico. El comando wget requiere la bandera _-O_ con _-_ para generar la respuesta a la salida estándar:
 
 ```bash
 $ docker-compose run debug-helper wget -O - http://app:3000
@@ -311,9 +311,9 @@ $ docker-compose run debug-helper wget -O - http://app:3000
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The <i>hello-front-dev</i> is the name of the container, which was given by us using *container\_name* in the docker-compose file. And the port used is the port from which the application is available in that container. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
+La URL es la parte interesante aquí. Simplemente dijimos que se conectara al servicio <i>hello-front-dev</i> y a ese puerto 3000. El <i>hello-front-dev</i> es el nombre del contenedor, que fue dado por nosotros usando *container\_name* en el archivo docker-compose. Y el puerto utilizado es el puerto desde el cual la aplicación está disponible en ese contenedor. No es necesario publicar el puerto para que otros servicios de la misma red puedan conectarse a él. Los "puertos" en el archivo docker-compose son solo para acceso externo.
 
-Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
+Cambiemos la configuración del puerto en <i>docker-compose.yml</i> para enfatizar esto:
 
 ```yml
 services:
@@ -331,24 +331,24 @@ services:
     image: busybox
 ```
 
-With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://app:3000_ works since the port is still 3000 within the docker network.
+Con _docker-compose up_ la aplicación está disponible en <http://localhost:3210> en la <i>máquina host</i>, pero aun así _docker-compose ejecuta debug-helper wget -O - http://app: 3000_ funciona ya que el puerto sigue siendo 3000 dentro de la red docker.
 
 ![](../../images/12/busybox_networking_drawio.png)
 
-As the above image illustrates, _docker-compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
+Como ilustra la imagen de arriba, _docker-compose run_ le pide a debug-helper que envíe la solicitud dentro de la red. Mientras que el navegador en la máquina host envía la solicitud desde fuera de la red.
 
-Now that you know how easy it is to find other services in the <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our <i>docker-compose.yml</i>.
+Ahora que sabe lo fácil que es encontrar otros servicios en <i>docker-compose.yml</i> y no tenemos nada que depurar, podemos eliminar el asistente de depuración y revertir los puertos a 3000:3000 en nuestro < i>docker-compose.yml</i>.
 
 </div>
 <div class="tasks">
 
-### Exercise 12.16
+### Ejercicio 12.16
 
-#### Exercise 12.16: Run todo-backend in a development container
+#### Ejercicio 12.16: Ejecutar todo-backend en un contenedor de desarrollo
 
-Use volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container. Create a <i>todo-backend/dev.Dockerfile</i> and edit the <i>todo-backend/docker-compose.dev.yml</i>.
+Use volúmenes y Nodemon para permitir el desarrollo del backend de la aplicación de tareas mientras se ejecuta <i>dentro</i> de un contenedor. Cree un <i>todo-backend/dev.Dockerfile</i> y edite <i>todo-backend/docker-compose.dev.yml</i>.
 
-You will also need to rethink the connections between backend and MongoDB / Redis. Thankfully docker-compose can include environment variables that will be passed to the application:
+También deberá repensar las conexiones entre el backend y MongoDB/Redis. Afortunadamente, docker-compose puede incluir variables de entorno que se pasarán a la aplicación:
 
 ```yaml
 services:
@@ -363,9 +363,9 @@ services:
       - MONGO_URL=...
 ```
 
-The URLs (localhost) are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console</i>. If and when things blow up, the error messages hint at what might be broken.
+Las URL (localhost) son incorrectas a propósito, deberá establecer los valores correctos. Recuerda <i>mirar todo el tiempo lo que sucede en la consola</i>. Si las cosas fallan, los mensajes de error insinúan lo que podría estar roto.
 
-Here is a possibly helpful image illustrating the connections within the docker network:
+Aquí hay una imagen posiblemente útil que ilustra las conexiones dentro de la red acoplable:
 
 ![](../../images/12/ex_12_15_backend_drawio.png)
 
@@ -373,21 +373,21 @@ Here is a possibly helpful image illustrating the connections within the docker 
 
 <div class="content">
 
-### Communications between containers in a more ambitious environment
+### Comunicaciones entre contenedores en un entorno más ambicioso
 
-Next, we will add a [reverse proxy](https://en.wikipedia.org/wiki/Reverse_proxy) to our docker-compose.yml. According to wikipedia
+A continuación, agregaremos un [proxy inverso](https://en.wikipedia.org/wiki/Reverse_proxy) a nuestro docker-compose.yml. segun wikipedia
 
-> <i>A reverse proxy is a type of proxy server that retrieves resources on behalf of a client from one or more servers. These resources are then returned to the client, appearing as if they originated from the reverse proxy server itself.</i>
+> <i>Un proxy inverso es un tipo de servidor proxy que recupera recursos en nombre de un cliente de uno o más servidores. Estos recursos luego se devuelven al cliente, apareciendo como si se originaran en el propio servidor proxy inverso.</i>
 
-So in our case, the reverse proxy will be the single point of entry to our application, and the final goal will be to set both the React frontend and the Express backend behind the reverse proxy. 
+Entonces, en nuestro caso, el proxy inverso será el único punto de entrada a nuestra aplicación, y el objetivo final será establecer tanto el frontend de React como el backend de Express detrás del proxy inverso.
 
-There are multiple different options for a reverse proxy implementation, such as Traefik, Caddy, Nginx, and Apache (ordered by initial release from newer to older).
+Hay múltiples opciones diferentes para una implementación de proxy inverso, como Traefik, Caddy, Nginx y Apache (ordenadas por versión inicial de más reciente a más antigua).
 
-Our pick is [Nginx](https://hub.docker.com/_/nginx). 
+Nuestra elección es [Nginx](https://hub.docker.com/_/nginx).
 
-Let us now put the <i>hello-frontend</i> behind the reverse proxy.
+Ahora pongamos <i>hello-frontend</i> detrás del proxy inverso.
 
-Create a file <i>nginx.conf</i> in the project root and take the following template as a starting point. We will need to do minor edits to have our application running:
+Cree un archivo <i>nginx.conf</i> en la raíz del proyecto y tome la siguiente plantilla como punto de partida. Tendremos que hacer ediciones menores para que nuestra aplicación se ejecute:
 
 ```bash
 # events is required, but defaults are ok
@@ -412,7 +412,7 @@ http {
 }
 ```
 
-Next, create an Nginx service in the <i>docker-compose.yml</i> file. Add a volume as instructed in the Docker Hub page where the right side is _:/etc/nginx/nginx.conf:ro_, the final ro declares that the volume will be <i>read-only</i>:
+A continuación, cree un servicio Nginx en el archivo <i>docker-compose.yml</i>. Agregue un volumen como se indica en la página de Docker Hub donde el lado derecho es _:/etc/nginx/nginx.conf:ro_, el ro final declara que el volumen será <i>de solo lectura</i>:
 
 ```yml
 services:
@@ -429,7 +429,7 @@ services:
       - app # wait for the frontend container to be started
 ```
 
-with that added we can run _docker-compose up_ and see what happens.
+Con eso agregado, podemos ejecutar _docker-compose up_ y ver qué sucede.
 
 ```bash
 $ docker container ls
@@ -438,11 +438,11 @@ a02ae58f3e8d   nginx:1.20.1      "/docker-entrypoint.…"   4 minutes ago   Up 4
 5ee0284566b4   hello-front-dev   "docker-entrypoint.s…"   4 minutes ago   Up 4 minutes   0.0.0.0:3000->3000/tcp, :::3000->3000/tcp   hello-front-dev
 ```
 
-Connecting to http://localhost:8080 will lead to a familiar-looking page with 502 status. 
+Conectarse a http://localhost:8080 conducirá a una página familiar con estado 502.
 
-This is because directing requests to http://localhost:3000 leads to nowhere as the Nginx container does not have an application running in port 3000. By definition, localhost refers to the current computer used to access it. With containers localhost is unique for each container, leading to the container itself.
+Esto se debe a que dirigir las solicitudes a http://localhost:3000 no conduce a ninguna parte, ya que el contenedor Nginx no tiene una aplicación ejecutándose en el puerto 3000. Por definición, localhost se refiere a la computadora actual utilizada para acceder a él. Con los contenedores, localhost es único para cada contenedor, lo que lleva al contenedor en sí.
 
-Let's test this by going inside the Nginx container and using curl to send a request to the application itself. In our usage curl is similar to wget, but won't need any flags.
+Probemos esto ingresando al contenedor Nginx y usando curl para enviar una solicitud a la aplicación misma. En nuestro uso, curl es similar a wget, pero no necesitará ninguna bandera.
 
 ```bash
 $ docker exec -it reverse-proxy bash  
@@ -453,9 +453,9 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-To help us, docker-compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
+Para ayudarnos, docker-compose configuró una red cuando ejecutamos _docker-compose up_. También agregó todos los contenedores en <i>docker-compose.yml</i> a la red. Un DNS se asegura de que podamos encontrar el otro contenedor. Cada uno de los contenedores recibe dos nombres: el nombre del servicio y el nombre del contenedor.
 
-Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000
+Como estamos dentro del contenedor, ¡también podemos probar el DNS! Modifiquemos el nombre del servicio (aplicación) en el puerto 3000
 
 ```html
 root@374f9e62bfa8:/# curl http://app:3000
@@ -470,11 +470,11 @@ root@374f9e62bfa8:/# curl http://app:3000
     ...
 ```
 
-That is it! Let's replace the proxy_pass address in nginx.conf with that one.
+¡Eso es! Reemplacemos la dirección proxy_pass en nginx.conf con esa.
 
-If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
+Si todavía se encuentra con 502, asegúrese de que la aplicación create-react-app se haya creado primero. Puede leer la salida de registros desde _docker-compose up_.
 
-One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is stared:
+Una cosa más: agregamos una opción [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) a la configuración que garantiza que el contenedor _nginx_ no se inicie antes se mira el contenedor frontend _app_:
 
 ```bash
 services:
@@ -491,7 +491,7 @@ services:
       - app // highlight-line
 ```
 
-If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to reslove all DNS names that are referred in the config file:
+Si no hacemos cumplir el orden de inicio con <i>depends\_on</i>, existe el riesgo de que Nginx falle en el inicio, ya que intenta recuperar todos los nombres de DNS a los que se hace referencia en el archivo de configuración:
 
 ```bash
 http {
@@ -509,18 +509,17 @@ http {
 }
 ```
 
-
- Note that <i>depends\_on</i> does not guarantee that the service in the depended container is ready for action, it just ensures that the container has been started (and the corresponding entry is added to DNS). If a service needs to wait another service to become ready before the startup, [other solutions](https://docs.docker.com/compose/startup-order/) should be used.
+Tenga en cuenta que <i>depends\_on</i> no garantiza que el servicio en el contenedor dependiente esté listo para la acción, solo asegura que el contenedor se haya iniciado (y la entrada correspondiente se agregue a DNS). Si un servicio necesita esperar a que otro servicio esté listo antes del inicio, se deben usar [otras soluciones](https://docs.docker.com/compose/startup-order/).
 
 </div>
 
 <div class="tasks">
 
-### Exercises 12.17. - 12.19.
+### Ejercicios 12.17. - 12.19.
 
-#### Exercise 12.17: Set up an Nginx reverse proxy server in front of todo-frontend
+#### Ejercicio 12.17: Configure un servidor proxy inverso Nginx frente a todo-frontend
 
-We are going to put the nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
+A continuación camos a poner el servidor nginx delante de todo-frontend y todo-backend. Comencemos creando un nuevo archivo docker-compose <i>todo-app/docker-compose.dev.yml</i> y <i>todo-app/nginx.conf</i>.
 
 ```bash
 todo-app
@@ -530,15 +529,15 @@ todo-app
 └── docker-compose.dev.yml // highlight-line
 ```
 
-Add the services nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
+Agregue los servicios nginx y todo-frontend creados con <i>todo-app/todo-frontend/dev.Dockerfile</i> en <i>todo-app/docker-compose.dev.yml</i>.
 
 ![](../../images/12/ex_12_16_nginx_front.png)
 
-#### Exercise 12.18: Configure the Nginx server to be in front of todo-backend
+#### Ejercicio 12.18: Configure el servidor Nginx para que esté al frente de todo-backend
 
-Add the service todo-backend to the docker-compose file <i>todo-app/docker-compose.dev.yml</i> in development mode.
+Agregue el servicio todo-backend al archivo docker-compose <i>todo-app/docker-compose.dev.yml</i> en el modo de desarrollo.
 
-Add a new location to the <i>nginx.conf</i> so that requests to _/api_ are proxied to the backend. Something like this should do the trick:
+Agregue una nueva ubicación a <i>nginx.conf</i> para que las solicitudes a _/api_ se transmitan al backend. Algo como esto debería hacer el truco:
 
 ```conf
   server {
@@ -562,50 +561,50 @@ Add a new location to the <i>nginx.conf</i> so that requests to _/api_ are proxi
   }
 ```
 
-The *proxy\_pass* directive has an interesting feature with a trailing slash. As we are using the path _/api_ for location but the backend application only answers in paths _/_ or _/todos_ we will want the _/api_ to be removed from the request. In other words, even though the browser will send a GET request to _/api/todos/1_ we want the Nginx to proxy the request to _/todos/1_. Do this by adding a trailing slash _/_ to the URL at the end of *proxy\_pass*.
+La directiva *proxy\_pass* tiene una característica interesante con una barra inclinada final. Como estamos usando la ruta _/api_ para la ubicación, pero la aplicación backend solo responde en las rutas _/_ o _/todos_, queremos que se elimine _/api_ de la solicitud. En otras palabras, aunque el navegador envíe una solicitud GET a _/api/todos/1_, queremos que Nginx envíe la solicitud a _/todos/1_. Haga esto agregando una barra inclinada final _/_ a la URL al final de *proxy\_pass*.
 
-This is a [common issue](https://serverfault.com/questions/562756/how-to-remove-the-path-with-an-nginx-proxy-pass)
+Este es un [problema común](https://serverfault.com/questions/562756/how-to-remove-the-path-with-an-nginx-proxy-pass)
 
 ![](../../images/12/nginx_trailing_slash_stackoverflow.png)
 
-This illustrates what we are looking for and may be helpful if you are having trouble:
+Esto ilustra lo que estamos buscando y puede ser útil si tiene problemas:
 
 ![](../../images/12/ex_12_17_nginx_back.png)
 
-#### Exercise 12.19: Connect the services, todo-frontend with todo-backend
+#### Ejercicio 12.19: Conecte los servicios, todo-frontend con todo-backend
 
-> In this exercise, submit the entire development environment, including both Express and React applications, Dockerfiles and docker-compose.yml.
+> En este ejercicio, envíe todo el entorno de desarrollo, incluidas las aplicaciones Express y React, Dockerfiles y docker-compose.yml.
 
-Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable.
+Asegúrese de que todo-frontend funcione con todo-backend. Requerirá cambios en la variable ambiental *REACT\_APP\_BACKEND\_URL*.
 
-If you already got this working during a previous exercise you may skip this.
+Si ya hizo que esto funcionara durante un ejercicio anterior, puede omitirlo.
 
-Make sure that the development environment is now fully functional, that is:
-- all features of the todo app work
-- you can edit the source files <i>and</i> the changes take effect through hot reload in case of frontend and by reloading the app in case of backend
+Asegúrese de que el entorno de desarrollo ahora sea completamente funcional, es decir:
+- todas las funciones de la aplicación de tareas funcionan
+- puede editar los archivos fuente <i>y</i> los cambios surten efecto a través de la recarga instantanea en el caso del frontend y recargando la aplicación en el caso del backend.
 
 </div>
 
 <div class="content">
 
-### Tools for Production
+### Herramientas para la producción
 
-Containers are fun tools to use in development, but the best use case for them is in the production environment. There are many more powerful tools than docker-compose to run containers in production.
+Los contenedores son herramientas divertidas para usar en el desarrollo, pero el mejor caso de uso para ellos es en el entorno de producción. Hay muchas herramientas más potentes que docker-compose para ejecutar contenedores en producción.
 
-Heavyweight container orchestration tools like [Kubernetes](https://kubernetes.io/) allow us to manage containers on a completely new level. These tools hide away the physical machines and allow us, the developers, to worry less about the infrastructure.
+Herramientas de orquestación de contenedores pesados como [Kubernetes](https://kubernetes.io/) nos permiten administrar contenedores en un nivel completamente nuevo. Estas herramientas ocultan las máquinas físicas y nos permiten a nosotros, los desarrolladores, preocuparnos menos por la infraestructura.
 
-If you are interested in learning more in-depth about containers come to the [DevOps with Docker](https://devopswithdocker.com) course and you can find more about Kubernetes in the advanced 5 credit [DevOps with Kubernetes](https://devopswithkubernetes.com) course. You should now have the skills to complete both of them!
+Si está interesado en obtener más información sobre los contenedores, acceda al curso [DevOps con Docker](https://devopswithdocker.com) y podrá encontrar más información sobre Kubernetes en el curso avanzado de 5 créditos [DevOps con Kubernetes](https: //devopswithkubernetes.com) curso. ¡Ahora deberías tener las habilidades para completar ambos!
 
 </div>
 
 <div class="tasks">
 
-### Exercises 12.20.-12.22.
-#### Exercise 12.20:
+### Ejercicios 12.20.-12.22.
+#### Ejercicio 12.20:
 
-Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
+Cree una producción <i>todo-app/docker-compose.yml</i> con todos los servicios, Nginx, todo-backend, todo-frontend, MongoDB y Redis. Utilice Dockerfiles en lugar de <i>dev.Dockerfiles</i> y asegúrese de iniciar las aplicaciones en modo de producción.
 
-Please use the following structure for this exercise:
+Utilice la siguiente estructura para este ejercicio:
 
 ```bash
 todo-app
@@ -616,9 +615,9 @@ todo-app
 └── docker-compose.yml // highlight-line
 ```
 
-#### Exercise 12.21:
+#### Ejercicio 12.21:
 
-Create a similar containerized development environment of one of <i>your own</i> full stack apps that you have created during the course or in your free time. You should structure the app in your submission repository as follows:
+Cree un entorno de desarrollo en contenedores similar para uno de sus aplicaciónes <i>propias</i> puede usar las que haya creado durante el curso o en su tiempo libre. Debe estructurar la aplicación en su repositorio de envío de la siguiente manera:
 
 ```bash
 └── my-app
@@ -629,10 +628,10 @@ Create a similar containerized development environment of one of <i>your own</i>
     └── docker-compose.dev.yml
 ```
 
-#### Exercise 12.22:
+#### Ejercicio 12.22:
 
-Finish this part by creating a containerized <i>production setup</i> of your own full stack app.
-Structure the app in your submission repository as follows:
+Termine esta parte creando una <i>configuración de producción</i> en contenedores de su propia aplicación.
+Estructure la aplicación en su repositorio de envío de la siguiente manera:
 
 ```bash
 └── my-app
@@ -645,20 +644,20 @@ Structure the app in your submission repository as follows:
     ├── docker-compose.dev.yml
     └── docker-compose.yml
 ```
-### Submitting exercises and getting the credits
+### Envío de ejercicios y obtención de créditos.
 
-This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-containers).
+Este fue el último ejercicio de esta sección. Es hora de enviar su código a GitHub y marcar todos sus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fs-containers).
 
-Exercises of this part are submitted just like in the previous parts, but unlike parts 0 to 7, the submission goes to an own [course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers). Remember that you have to finish <i>all the exercises</i> to pass this part!
+Los ejercicios de esta parte se envían al igual que en las partes anteriores, pero a diferencia de las partes 0 a 7, la presentación va a una [instancia propia del curso](https://studies.cs.helsinki.fi/stats/courses/fs-containers ). ¡Recuerda que tienes que terminar <i>todos los ejercicios</i> para aprobar esta parte!
 
-Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
+Una vez que hayas completado los ejercicios y quieras obtener los créditos, infórmanos a través del sistema de envío de ejercicios que has completado el curso:
 
 ![Submissions](../../images/11/21.png)
 
 
-**Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
+**Tenga en cuenta** que necesita registrarse en la parte del curso correspondiente para obtener los créditos registrados, consulte [aquí](/es/part0/general_info#parts-and-completion) para obtener más información.
 
-You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
+Puede descargar el certificado por completar esta parte haciendo clic en uno de los iconos de bandera. El icono de la bandera corresponde al idioma del certificado.
 
 </div>
 
