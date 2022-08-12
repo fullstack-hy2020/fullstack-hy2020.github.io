@@ -23,11 +23,11 @@ Por lo que los contenedores son utilizados en ambientes en la nube e incluso dur
 
 Tu probablemente utilices nvm, maquinas virtuales o magia negra para lograr ejecutarlas al mismo tiempo. Sin embargo los contenedores son una excelente solucion ya que puedes ejecutar ambas aplicaciones en sus respectivos contenedores. Ellas estan aisladas una de otra y no interfieren.
 
-<i>Scenario 2: Tu aplicación se ejecuta en tu ordenador. Necesitas mover la aplicación a un servidor</i>
+<i>Escenario 2: Tu aplicación se ejecuta en tu ordenador. Necesitas mover la aplicación a un servidor</i>
 
 No es poco común que la aplicacion simplemente no se ejecute en el servidor a pesar de estar trabajando bien en tu computadora. Esto puede ocurrir debido a algunas dependencias faltantes o otras diferencias en los entornos. Aquí los contenedores son una excelente solución ya que puedes ejecutar tu aplicación en el mismo ambiente tanto en tu computadora como en el servidor. No es perfecto: las diferencias en el hardware pueden provocar incidentes, pero puedes limitar estas diferencias entre los ambientes.
 
-Alguna ves podrás escuchar sobre el tema <i>"Works in my container"</i>. La frase describe la situación en la que la aplicación funciona bien en un contenedor ejecutándose en tu computadora pero se rompe cuando el contenedor es iniciado en el servidor. Esta frase es una variante del infame tema <i>"Works on my machine"</i>, que con frecuencia resuelven los contenedores. La situación es también con mucha certeza un error de uso.
+Alguna vez podrás escuchar sobre el tema <i>"Works in my container"</i>. La frase describe la situación en la que la aplicación funciona bien en un contenedor ejecutándose en tu computadora pero se rompe cuando el contenedor es iniciado en el servidor. Esta frase es una variante del infame tema <i>"Works on my machine"</i>, que con frecuencia resuelven los contenedores. La situación es también con mucha certeza un error de uso.
 
 ### Sobre esta parte ###
 
@@ -52,7 +52,7 @@ Paso 1: Lee el texto debajo de la cabecera Advertencia.
 
 Paso 2: Descargue este [repositorio](https://github.com/fullstack-hy2020/part12-containers-applications) y conviértelo en tu repositorio de envío de esta parte del curso.
 
-Paso 3: Ejecuta <i>curl http://helsinki.fi</i> y guarda el resultado en un archivo. Guarda el archivo en tu repositorio con el nombre <i>script-answers/exercise12_1.txt</i>. El directorio <i>script-answers</i> ha sido creado en el paso anterio.
+Paso 3: Ejecuta <i>curl http://helsinki.fi</i> y guarda el resultado en un archivo. Guarda el archivo en tu repositorio con el nombre <i>script-answers/exercise12_1.txt</i>. El directorio <i>script-answers</i> ha sido creado en el paso anterior.
 
 </div>
 <div class="content">
@@ -121,7 +121,7 @@ Hay varios conceptos que necesitamos repasar. ¡Pero los omitiremos por ahora y 
 
 Comencemos con el comando <i>docker container run</i> que se usa para ejecutar imágenes dentro de un contenedor. La estructura del comando es la siguiente: _container run <i>IMAGE-NAME</i>_ le indicaremos a Docker que cree un contenedor a partir de una imagen. Una característica particularmente interesante del comando es que puede ejecutar un contenedor incluso si la imagen para ejecutar aún no se ha descargado en nuestro dispositivo.
 
-Ejecutemos el comandod
+Ejecutemos el comando
 
 ```bash
 § docker container run hello-world
