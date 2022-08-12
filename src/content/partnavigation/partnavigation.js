@@ -316,6 +316,10 @@ module.exports = {
       d: 'Manteniéndose verde',
       e: 'Expandiéndose aún más',
     },
-    '12': {},
+    '12': {
+      a: 'Introducción a los Contenedores',
+      b: 'Construir y configurar entornos',
+      c: 'Conceptos básicos de orquestación',
+    },
   },
 };
