@@ -19,6 +19,8 @@ class NotFoundPage extends Component {
         ? 'en'
         : window.location.pathname.indexOf('/zh') > -1
         ? 'zh'
+        : window.location.pathname.indexOf('/fr') > -1
+        ? 'fr'
         : 'fi';
 
     this.setState({ siteLanguage });
@@ -26,7 +28,9 @@ class NotFoundPage extends Component {
 
   render() {
     const title =
-      this.state.siteLanguage === 'en' ? 'Page not found' : 'Sivua ei löytynyt';
+      this.state.siteLanguage === 'en' ? 'Page not found' 
+      : this.state.siteLanguage === 'fr' ? 'Page non trouvée'
+      : 'Sivua ei löytynyt';
 
     return (
       <Layout>
