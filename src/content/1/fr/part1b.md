@@ -375,7 +375,7 @@ const App = () => {
 
 Étant donné que pendant ce cours, nous utilisons une version de React contenant des React Hooks, nous n'avons pas besoin de définir des objets avec des méthodes. **Le contenu de ce chapitre n'est pas pertinent pour le cours** mais est certainement bon à savoir à bien des égards. En particulier, lors de l'utilisation d'anciennes versions de React, il faut comprendre les sujets de ce chapitre.
 
-Les fonctions fléchées et les fonctions définies à l'aide du mot-clé _function_ varient considérablement en ce qui concerne leur comportement par rapport au mot-clé [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators /this), qui fait référence à l'objet lui-même.
+Les fonctions fléchées et les fonctions définies à l'aide du mot-clé _function_ varient considérablement en ce qui concerne leur comportement par rapport au mot-clé [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this), qui fait référence à l'objet lui-même.
 
 On peut assigner des méthodes à un objet en définissant des propriétés qui sont des fonctions :
 
@@ -455,7 +455,7 @@ Lors de l'appel de la méthode via une référence, la méthode perd la connaiss
 
 Perdre la trace de _this_ lors de l'écriture de code JavaScript soulève quelques problèmes potentiels. Des situations surviennent souvent où React ou Node (ou plus précisément le moteur JavaScript du navigateur Web) doit appeler une méthode dans un objet que le développeur a défini. Cependant, dans ce cours, nous évitons ces problèmes en utilisant le "this-less" JavaScript.
 
-Une situation conduisant à la "disparition" de _this_ survient lorsque nous définissons un délai d'attente pour appeler la fonction _greet_ sur l'objet _arto_, en utilisant le [setTimeout](https://developer.mozilla.org/en-US/docs/Web/ API/WindowOrWorkerGlobalScope/setTimeout).
+Une situation conduisant à la "disparition" de _this_ survient lorsque nous définissons un délai d'attente pour appeler la fonction _greet_ sur l'objet _arto_, en utilisant le [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
 
 ```js
 const arto = {
@@ -480,11 +480,11 @@ L'appel de <em>arto.greet.bind(arto)</em> crée une nouvelle fonction où _this_
 
 En utilisant les [fonctions fléchées](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), il est possible de résoudre certains des problèmes liés à _this_. Ils ne doivent cependant pas être utilisés comme méthodes pour les objets car alors _this_ ne fonctionne pas du tout. Nous reviendrons plus tard sur le comportement de _this_ par rapport aux fonctions fléchées.
 
-Si vous souhaitez mieux comprendre comment _this_ fonctionne en JavaScript, Internet regorge de documents sur le sujet, par ex. la série de screencasts [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) par [egghead.io](https://egghead.io ) est fortement recommandé !
+Si vous souhaitez mieux comprendre comment _this_ fonctionne en JavaScript, Internet regorge de documents sur le sujet, par ex. la série de screencasts [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) par [egghead.io](https://egghead.io) est fortement recommandé !
 
 ### Les classes
 
-Comme mentionné précédemment, il n'y a pas de mécanisme de classe en JavaScript comme ceux des langages de programmation orientés objet. Il existe cependant des fonctionnalités permettant de "simuler" des [classes] orientées objet (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes).
+Comme mentionné précédemment, il n'y a pas de mécanisme de classe en JavaScript comme ceux des langages de programmation orientés objet. Il existe cependant des fonctionnalités permettant de "simuler" des [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) orientées objet.
 
 Jetons un coup d'œil à la <i>syntaxe de classe</i> qui a été introduite dans JavaScript avec ES6, qui simplifie considérablement la définition des classes (ou des choses semblables à des classes) en JavaScript.
 
