@@ -371,13 +371,13 @@ const App = () => {
 
 <div class="content">
 
-### Object methods and "this"
+### Objets, Méthodes et "this"
 
-Due to the fact that during this course we are using a version of React containing React Hooks we have no need for defining objects with methods. **The contents of this chapter are not relevant to the course** but are certainly in many ways good to know. In particular when using older versions of React one must understand the topics of this chapter.
+Étant donné que pendant ce cours, nous utilisons une version de React contenant des React Hooks, nous n'avons pas besoin de définir des objets avec des méthodes. **Le contenu de ce chapitre n'est pas pertinent pour le cours** mais est certainement bon à savoir à bien des égards. En particulier, lors de l'utilisation d'anciennes versions de React, il faut comprendre les sujets de ce chapitre.
 
-Arrow functions and functions defined using the _function_ keyword vary substantially when it comes to how they behave with respect to the keyword [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this), which refers to the object itself.
+Les fonctions fléchées et les fonctions définies à l'aide du mot-clé _function_ varient considérablement en ce qui concerne leur comportement par rapport au mot-clé [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators /this), qui fait référence à l'objet lui-même.
 
-We can assign methods to an object by defining properties that are functions:
+On peut assigner des méthodes à un objet en définissant des propriétés qui sont des fonctions :
 
 ```js
 const arto = {
@@ -391,10 +391,10 @@ const arto = {
   // highlight-end
 }
 
-arto.greet()  // "hello, my name is Arto Hellas" gets printed
+arto.greet()  // "hello, my name is Arto Hellas" est affiché
 ```
 
-Methods can be assigned to objects even after the creation of the object:
+Les méthodes peuvent être affectées aux objets même après la création de l'objet :
 
 ```js
 const arto = {
@@ -417,7 +417,7 @@ arto.growOlder()
 console.log(arto.age)   // 36 est affiché
 ```
 
-Let's slightly modify the object:
+Modifions légèrement l'objet :
 
 ```js
 const arto = {
@@ -440,22 +440,22 @@ const referenceToAddition = arto.doAddition
 referenceToAddition(10, 15)   // 25 est affiché
 ```
 
-Now the object has the method _doAddition_ which calculates the sum of numbers given to it as parameters. The method is called in the usual way, using the object <em>arto.doAddition(1, 4)</em> or by storing a <i>method reference</i> in a variable and calling the method through the variable: <em>referenceToAddition(10, 15)</em>.
+Maintenant, l'objet a la méthode _doAddition_ qui calcule la somme des nombres qui lui sont donnés en tant que paramètres. La méthode est appelée de manière habituelle, en utilisant l'objet <em>arto.doAddition(1, 4)</em> ou en stockant une <i>référence de méthode</i> dans une variable et en appelant la méthode via la variable : <em>referenceToAddition(10, 15)</em>.
 
-If we try to do the same with the method _greet_ we run into an issue:
+Si nous essayons de faire la même chose avec la méthode _greet_, nous rencontrons un problème :
 
 ```js
-arto.greet()       // "hello, my name is Arto Hellas" gets printed
+arto.greet()       // "hello, my name is Arto Hellas" est affiché
 
 const referenceToGreet = arto.greet
-referenceToGreet() // prints "hello, my name is undefined"
+referenceToGreet() // affiche "hello, my name is undefined"
 ```
 
-When calling the method through a reference, the method loses knowledge of what the original _this_ was. Contrary to other languages, in JavaScript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended.
+Lors de l'appel de la méthode via une référence, la méthode perd la connaissance de ce qu'était le _this_ d'origine. Contrairement à d'autres langages, en JavaScript, la valeur de [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) est définie en fonction de <i>comment la méthode s'appelle</i>. Lors de l'appel de la méthode via une référence, la valeur de _this_ devient le soi-disant [objet global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) et le résultat final n'est souvent pas ce que le développeur de logiciels avait initialement prévu.
 
-Losing track of _this_ when writing JavaScript code brings forth a few potential issues. Situations often arise where React or Node (or more specifically the JavaScript engine of the web browser) needs to call some method in an object that the developer has defined. However, in this course we avoid these issues by using the "this-less" JavaScript.
+Perdre la trace de _this_ lors de l'écriture de code JavaScript soulève quelques problèmes potentiels. Des situations surviennent souvent où React ou Node (ou plus précisément le moteur JavaScript du navigateur Web) doit appeler une méthode dans un objet que le développeur a défini. Cependant, dans ce cours, nous évitons ces problèmes en utilisant le "this-less" JavaScript.
 
-One situation leading to the "disappearance" of _this_ arises when we set a timeout to call the _greet_ function on the _arto_ object, using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) function.
+Une situation conduisant à la "disparition" de _this_ survient lorsque nous définissons un délai d'attente pour appeler la fonction _greet_ sur l'objet _arto_, en utilisant le [setTimeout](https://developer.mozilla.org/en-US/docs/Web/ API/WindowOrWorkerGlobalScope/setTimeout).
 
 ```js
 const arto = {
@@ -468,27 +468,27 @@ const arto = {
 setTimeout(arto.greet, 1000)  // highlight-line
 ```
 
-As mentioned, the value of _this_ in JavaScript is defined based on how the method is being called. When <em>setTimeout</em> is calling the method, it is the JavaScript engine that actually calls the method and, at that point, _this_ refers to the global object.
+Comme mentionné, la valeur de _this_ en JavaScript est définie en fonction de la façon dont la méthode est appelée. Lorsque <em>setTimeout</em> appelle la méthode, c'est le moteur JavaScript qui appelle réellement la méthode et, à ce stade, _this_ fait référence à l'objet global.
 
-There are several mechanisms by which the original _this_ can be preserved. One of these is using a method called [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind):
+Il existe plusieurs mécanismes par lesquels le _this_ original peut être préservé. L'une d'entre elles utilise une méthode appelée [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) :
 
 ```js
 setTimeout(arto.greet.bind(arto), 1000)
 ```
 
-Calling <em>arto.greet.bind(arto)</em> creates a new function where _this_ is bound to point to Arto, independent of where and how the method is being called.
+L'appel de <em>arto.greet.bind(arto)</em> crée une nouvelle fonction où _this_ pointe vers Arto, indépendamment de l'endroit et de la manière dont la méthode est appelée.
 
-Using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) it is possible to solve some of the problems related to _this_. They should not, however, be used as methods for objects because then _this_ does not work at all. We will come back later to the behavior of _this_ in relation to arrow functions.
+En utilisant les [fonctions fléchées](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), il est possible de résoudre certains des problèmes liés à _this_. Ils ne doivent cependant pas être utilisés comme méthodes pour les objets car alors _this_ ne fonctionne pas du tout. Nous reviendrons plus tard sur le comportement de _this_ par rapport aux fonctions fléchées.
 
-If you want to gain a better understanding of how _this_ works in JavaScript, the Internet is full of material about the topic, e.g. the screencast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended!
+Si vous souhaitez mieux comprendre comment _this_ fonctionne en JavaScript, Internet regorge de documents sur le sujet, par ex. la série de screencasts [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) par [egghead.io](https://egghead.io ) est fortement recommandé !
 
-### Classes
+### Les classes
 
-As mentioned previously, there is no class mechanism in JavaScript like the ones in object-oriented programming languages. There are, however, features to make "simulating" object-oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible.
+Comme mentionné précédemment, il n'y a pas de mécanisme de classe en JavaScript comme ceux des langages de programmation orientés objet. Il existe cependant des fonctionnalités permettant de "simuler" des [classes] orientées objet (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes).
 
-Let's take a quick look at the <i>class syntax</i> that was introduced into JavaScript with ES6, which substantially simplifies the definition of classes (or class-like things) in JavaScript.
+Jetons un coup d'œil à la <i>syntaxe de classe</i> qui a été introduite dans JavaScript avec ES6, qui simplifie considérablement la définition des classes (ou des choses semblables à des classes) en JavaScript.
 
-In the following example we define a "class" called Person and two Person objects:
+Dans l'exemple suivant, nous définissons une "classe" appelée Person et deux objets Person :
 
 ```js
 class Person {
@@ -508,22 +508,22 @@ const janja = new Person('Janja Garnbret', 22)
 janja.greet()
 ```
 
-When it comes to syntax, the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core they are still objects based on JavaScript's [prototypal inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since JavaScript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol, BigInt, and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+En ce qui concerne la syntaxe, les classes et les objets créés à partir de celles-ci rappellent beaucoup les classes et objets Java. Leur comportement est également assez similaire aux objets Java. Au cœur, ce sont toujours des objets basés sur [l'héritage prototypal](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript . Le type des deux objets est en fait _Object_, puisque JavaScript ne définit essentiellement que les types [Boolean, Null, Undefined, Number, String, Symbol, BigInt et Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
 
-The introduction of the class syntax was a controversial addition. Check out [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part? on Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) for more details.
+L'introduction de la syntaxe de classe était un ajout controversé. Découvrez [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) ou [Is "Class" In ES6 The New "Bad" Part ? sur Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) pour plus de détails.
 
-The ES6 class syntax is used a lot in "old" React and also in Node.js, hence an understanding of it is beneficial even in this course. However, since we are using the new [Hooks](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course, we have no concrete use for JavaScript's class syntax.
+La syntaxe de la classe ES6 est beaucoup utilisée dans "l'ancien" React et aussi dans Node.js, donc sa compréhension est bénéfique même dans ce cours. Cependant, comme nous utilisons la nouvelle fonctionnalité [Hooks](https://reactjs.org/docs/hooks-intro.html) de React tout au long de ce cours, nous n'avons aucune utilisation concrète de la syntaxe de classe de JavaScript.
 
-### JavaScript materials
+### Matériaux JavaScript
 
-There exist both good and poor guides for JavaScript on the Internet. Most of the links on this page relating to JavaScript features reference [Mozilla's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+Il existe à la fois de bons et de mauvais guides pour JavaScript sur Internet. La plupart des liens de cette page relatifs aux fonctionnalités JavaScript font référence au [Guide JavaScript de Mozilla](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
 
-It is highly recommended to immediately read [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) on Mozilla's website.
+Il est fortement recommandé de lire immédiatement [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) sur le site Web de Mozilla.
 
-If you wish to get to know JavaScript deeply there is a great free book series on the Internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
+Si vous souhaitez connaître JavaScript en profondeur, il existe une excellente série de livres gratuits sur Internet appelée [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
 
-Another great resource for learning JavaScript is [javascript.info](https://javascript.info).
+Une autre excellente ressource pour apprendre JavaScript est [javascript.info](https://javascript.info).
 
-[egghead.io](https://egghead.io) has plenty of quality screencasts on JavaScript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall.
+[egghead.io](https://egghead.io) propose de nombreux screencasts de qualité sur JavaScript, React et d'autres sujets intéressants. Malheureusement, une partie du matériel est derrière un paywall.
 
 </div>
