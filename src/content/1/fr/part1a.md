@@ -410,7 +410,7 @@ Ca compile maintenant avec succès et le DOM généré par React ne contient plu
 <div class="tasks">
   <h3>Exercices 1.1.-1.2.</h3>
 
-Les exercices sont soumis via GitHub et en marquant les exercices terminés dans [le dépôt de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Les exercices sont soumis via GitHub et en marquant les exercices terminés sur le [système de soumission d'exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Vous pouvez soumettre tous les exercices de ce cours dans le même référentiel ou utiliser plusieurs référentiels. Si vous soumettez des exercices de différentes parties dans le même référentiel, veuillez utiliser un schéma de nommage raisonnable pour les répertoires.
 

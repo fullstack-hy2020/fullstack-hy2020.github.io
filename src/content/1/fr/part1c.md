@@ -372,7 +372,7 @@ Modifions l'application pour que l'augmentation du compteur se produise lorsqu'u
 
 Les éléments bouton prennent en charge les [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), dont [click](https://developer.mozilla.org/ en-US/docs/Web/Events/click), l'événement le plus courant. L'événement clic sur un bouton peut également être déclenché avec le clavier ou un écran tactile malgré le nom <i>mouse event</i>.
 
-Dans React, [l'enregistrement d'une fonction de gestionnaire d'événements](https://reactjs.org/docs/handling-events.html) à l'événement <i>click</i> se passe comme ceci :
+Dans React, [l'application d'un event handler](https://reactjs.org/docs/handling-events.html) à l'événement <i>click</i> se passe comme ceci :
 
 ```js
 const App = () => {

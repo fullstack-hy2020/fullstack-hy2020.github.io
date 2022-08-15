@@ -150,7 +150,7 @@ L'objet suivant est défini comme nouvel état de l'application :
 
 La nouvelle valeur de la propriété <i>left</i> est maintenant la même que la valeur de <i>left + 1</i> de l'état précédent, et la valeur de la propriété <i>right</i> est la même que la valeur de la propriété <i>right</i> de l'état précédent.
 
-Nous pouvons définir le nouvel état de l'objet un peu plus précisément en utilisant [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+Nous pouvons définir le nouvel état de l'objet un peu plus précisément en utilisant la syntaxe de propagation de l'objet [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax),
 syntaxe qui a été ajoutée à la spécification du langage à l'été 2018 :
 
 ```js
@@ -412,29 +412,29 @@ Dans ce cours, nous avons pris la décision radicale d'utiliser exclusivement le
 
 Nous en apprendrons plus sur les composants classes de React plus tard dans le cours.
 
-### Debugging React applications
+### Débogage des applications React
 
-A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent on trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.
+Une grande partie du temps d'un développeur typique est consacrée au débogage et à la lecture du code existant. De temps en temps, nous écrivons une ligne ou deux de nouveau code, mais une grande partie de notre temps est consacrée à essayer de comprendre pourquoi quelque chose est cassé ou comment quelque chose fonctionne. Les bonnes pratiques et les outils de débogage sont extrêmement importants pour cette raison.
 
-Lucky for us, React is an extremely developer-friendly library when it comes to debugging.
+Heureusement pour nous, React est une bibliothèque extrêmement conviviale pour les développeurs en matière de débogage.
 
-Before we move on, let us remind ourselves of one of the most important rules of web development.
+Avant de poursuivre, rappelons-nous l'une des règles les plus importantes du développement Web.
 
-<h4>The first rule of web development</h4>
+<h4>La première règle du développement Web</h4>
 
->  **Keep the browser's developer console open at all times.**
+> **Gardez la console développeur du navigateur ouverte à tout moment.**
 >
-> The <i>Console</i> tab in particular should always be open, unless there is a specific reason to view another tab.
+> L'onglet <i>Console</i> en particulier doit toujours être ouvert, sauf s'il existe une raison spécifique d'afficher un autre onglet.
 
-Keep both your code and the web page open together **at the same time, all the time**.
+Gardez votre code et la page Web ouverts ensemble **en même temps, tout le temps**.
 
-If and when your code fails to compile and your browser lights up like a Christmas tree:
+Si et quand votre code ne compile pas et que votre navigateur s'allume comme un sapin de Noël :
 
 ![](../../images/1/6x.png)
 
-don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
+n'écrivez pas plus de code mais plutôt trouvez et corrigez le problème **immédiatement**. Il n'y a pas encore eu de moment dans l'histoire du codage où le code qui ne compile pas commencerait miraculeusement à fonctionner après avoir écrit de grandes quantités de code supplémentaire. Je doute fortement qu'un tel événement se produise au cours de ce cours non plus.
 
-Old school, print-based debugging is always a good idea. If the component
+Le débogage à l'ancienne, basé sur l'impression, est toujours une bonne idée. Si le composant
 
 ```js
 const Button = ({ onClick, text }) => (
@@ -444,7 +444,7 @@ const Button = ({ onClick, text }) => (
 )
 ```
 
-is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:
+ne fonctionne pas comme prévu, il est utile de commencer à imprimer ses variables sur la console. Pour le faire efficacement, nous devons transformer notre fonction dans la forme la moins compacte et recevoir l'intégralité de l'objet props sans le déstructurer immédiatement :
 
 ```js
 const Button = (props) => { 
@@ -458,52 +458,52 @@ const Button = (props) => {
 }
 ```
 
-This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
+Cela révélera immédiatement si, par exemple, l'un des attributs a été mal orthographié lors de l'utilisation du composant.
 
-**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
+**NB** Lorsque vous utilisez _console.log_ pour le débogage, ne combinez pas _objects_ à la manière de Java en utilisant l'opérateur plus. Au lieu d'écrire :
 
 ```js
 console.log('props value is ' + props)
 ```
 
-Separate the things you want to log to the console with a comma:
+Séparez les éléments que vous souhaitez consigner dans la console par une virgule :
 
 ```js
 console.log('props value is', props)
 ```
 
-If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
+Si vous utilisez la manière Java de concaténer une chaîne avec un objet, vous vous retrouverez avec un message de journal plutôt peu informatif :
 
 ```js
 props value is [Object object]
 ```
 
-Whereas the items separated by a comma will all be available in the browser console for further inspection.
+Alors que les éléments séparés par une virgule seront tous disponibles dans la console du navigateur pour une inspection plus approfondie.
 
-Logging to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
+Se connecter à la console n'est en aucun cas le seul moyen de déboguer nos applications. Vous pouvez suspendre l'exécution de votre code d'application dans le <i>débogueur</i> de la console développeur Chrome, en écrivant la commande [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript /Reference/Statements/debugger) n'importe où dans votre code.
 
-The execution will pause once it arrives at a point where the _debugger_ command gets executed:
+L'exécution s'arrêtera une fois qu'elle arrivera à un point où la commande _debugger_ sera exécutée :
 
 ![](../../images/1/7a.png)
 
-By going to the <i>Console</i> tab, it is easy to inspect the current state of variables:
+En allant dans l'onglet <i>Console</i>, il est facile d'inspecter l'état actuel des variables :
 
 ![](../../images/1/8a.png)
 
-Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
+Une fois la cause du bogue découverte, vous pouvez supprimer la commande _debugger_ et actualiser la page.
 
-The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Sources</i> tab.
+Le débogueur nous permet également d'exécuter notre code ligne par ligne avec les contrôles situés à droite de l'onglet <i>Sources</i>.
 
-You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
+Vous pouvez également accéder au débogueur sans la commande _debugger_ en ajoutant des points d'arrêt dans l'onglet <i>Sources</i>. L'inspection des valeurs des variables du composant peut être effectuée dans la section _Scope_ :
 
 ![](../../images/1/9a.png)
 
-It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
+Il est fortement recommandé d'ajouter l'extension [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) à Chrome. Il ajoute un nouvel onglet _Components_ aux outils de développement. Le nouvel onglet des outils de développement peut être utilisé pour inspecter les différents éléments React de l'application, ainsi que leur état et leurs props:
 
 ![](../../images/1/10ea.png)
 
 
-The _App_ component's state is defined like so:
+L'état du composant _App_ est défini comme suit :
 
 ```js
 const [left, setLeft] = useState(0)
@@ -511,19 +511,19 @@ const [right, setRight] = useState(0)
 const [allClicks, setAll] = useState([])
 ```
 
-Dev tools shows the state of hooks in the order of their definition:
+Dev tools affichent l'état des hooks dans l'ordre de leur définition :
 
 ![](../../images/1/11ea.png)
 
-The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
+Le premier <i>State</i> contient la valeur de l'état <i>left</i>, le suivant contient la valeur de l'état <i>right</i> et le dernier contient la valeur de l'état < i>état de tous les clics</i>.
 
-### Rules of Hooks
+### Règles des Hooks
 
-There are a few limitations and rules we have to follow to ensure that our application uses hooks-based state functions correctly.
+Il y a quelques limitations et règles que nous devons suivre pour nous assurer que notre application utilise correctement les fonctions d'état basées sur les hooks.
 
-The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.
+La fonction _useState_ (ainsi que la fonction _useEffect_ introduite plus tard dans le cours) <i>ne doit pas être appelée</i> depuis l'intérieur d'une boucle, d'une expression conditionnelle ou de tout endroit qui n'est pas une fonction définissant un composant. Cela doit être fait pour s'assurer que les hooks sont toujours appelés dans le même ordre, et si ce n'est pas le cas, l'application se comportera de manière erratique.
 
-To recap, hooks may only be called from the inside of a function body that defines a React component:
+Pour récapituler, les hooks ne peuvent être appelés que depuis l'intérieur d'un corps de fonction qui définit un composant React :
 
 ```js
 const App = () => {
@@ -552,13 +552,14 @@ const App = () => {
 }
 ```
 
-### Event Handling Revisited
+### Gestion des événements revisitée
 
-Event handling has proven to be a difficult topic in previous iterations of this course.
+La gestion des événements s'est avérée être un sujet difficile dans les versions précédentes de ce cours.
 
-For this reason we will revisit the topic.
+C'est pourquoi nous reviendrons sur le sujet.
 
-Let's assume that we're developing this simple application with the following component <i>App</i>:
+Supposons que nous développions cette application simple avec le composant suivant <i>App</i> :
+
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -572,19 +573,19 @@ const App = () => {
 }
 ```
 
-We want the clicking of the button to reset the state stored in the _value_ variable.
+Nous voulons que le clic sur le bouton réinitialise l'état stocké dans la variable _value_.
 
-In order to make the button react to a click event, we have to add an <i>event handler</i> to it.
+Afin de faire réagir le bouton à un événement de clic, nous devons lui ajouter un <i>event handler</i>.
 
-Event handlers must always be a function or a reference to a function. The button will not work if the event handler is set to a variable of any other type.
+Les gestionnaires d'événements doivent toujours être une fonction ou une référence à une fonction. Le bouton ne fonctionnera pas si le gestionnaire d'événements est défini sur une variable d'un autre type.
 
-If we were to define the event handler as a string:
+Si nous devions définir notre event handler sous forme de chaîne :
 
 ```js
 <button onClick="crap...">button</button>
 ```
 
-React would warn us about this in the console:
+React nous en avertirait dans la console :
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
@@ -593,26 +594,27 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
     in App (at index.js:27)
 ```
 
-The following attempt would also not work:
+La tentative suivante ne fonctionnerait pas non plus :
 
 ```js
 <button onClick={value + 1}>button</button>
 ```
 
-We have attempted to set the event handler to _value + 1_ which simply returns the result of the operation. React will kindly warn us about this in the console:
+Nous avons tenté de définir le gestionnaire d'événements sur _value + 1_ qui renvoie simplement le résultat de l'opération. React nous en avertira gentiment dans la console :
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
 ```
 
-This attempt would not work either:
+Cette tentative ne fonctionnerait pas non plus :
+
 ```js
 <button onClick={value = 0}>button</button>
 ```
 
-The event handler is not a function but a variable assignment, and React will once again issue a warning to the console. This attempt is also flawed in the sense that we must never mutate state directly in React.
+Le gestionnaire d'événements n'est pas une fonction mais une affectation de variable, et React émettra à nouveau un avertissement sur la console. Cette tentative est également imparfaite dans le sens où nous ne devons jamais muter l'état directement dans React.
 
-What about the following:
+Qu'en est-il des éléments suivants :
 
 ```js
 <button onClick={console.log('clicked the button')}>
@@ -620,20 +622,21 @@ What about the following:
 </button>
 ```
 
-The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function _console.log_?
+Le message est affiché sur la console une fois lorsque le composant est rendu, mais rien ne se passe lorsque nous cliquons sur le bouton. Pourquoi cela ne fonctionne-t-il pas même lorsque notre gestionnaire d'événements contient une fonction _console.log_ ?
 
-The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is actually assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>.
+Le problème ici est que notre gestionnaire d'événements est défini comme un <i>appel de fonction</i>, ce qui signifie que le gestionnaire d'événements se voit en fait attribuer la valeur renvoyée par la fonction, qui dans le cas de _console.log_ est <i>undefined </i>.
 
-The _console.log_ function call gets executed when the component is rendered and for this reason it gets printed once to the console.
+L'appel de la fonction _console.log_ est exécuté lorsque le composant est rendu et pour cette raison, il est imprimé une fois sur la console.
 
-The following attempt is flawed as well:
+La tentative suivante est également erronée :
+
 ```js
 <button onClick={setValue(0)}>button</button>
 ```
 
-We have once again tried to set a function call as the event handler. This does not work. This particular attempt also causes another problem. When the component is rendered the function _setValue(0)_ gets executed which in turn causes the component to be re-rendered. Re-rendering in turn calls _setValue(0)_ again, resulting in an infinite recursion.
+Nous avons de nouveau essayé de définir un appel de fonction comme gestionnaire d'événements. Cela ne fonctionne pas. Cette tentative particulière provoque également un autre problème. Lorsque le composant est rendu, la fonction _setValue(0)_ est exécutée, ce qui entraîne à son tour le rendu du composant. Le re-rendu appelle à son tour _setValue(0)_, ce qui entraîne une récursivité infinie.
 
-Executing a particular function call when the button is clicked can be accomplished like this:
+L'exécution d'un appel de fonction particulier lorsque le bouton est cliqué peut être accompli comme ceci :
 
 ```js
 <button onClick={() => console.log('clicked the button')}>
@@ -641,19 +644,19 @@ Executing a particular function call when the button is clicked can be accomplis
 </button>
 ```
 
-Now the event handler is a function defined with the arrow function syntax _() => console.log('clicked the button')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.
+Maintenant, le gestionnaire d'événements est une fonction définie avec la syntaxe de la fonction fléchée _() => console.log('clicked the button')_. Lorsque le composant est rendu, aucune fonction n'est appelée et seule la référence à la fonction fléchée est définie sur le gestionnaire d'événements. L'appel de la fonction n'a lieu qu'une fois le bouton cliqué.
 
-We can implement resetting the state in our application with this same technique:
+Nous pouvons implémenter la réinitialisation de l'état dans notre application avec cette même technique :
 
 ```js
 <button onClick={() => setValue(0)}>button</button>
 ```
 
-The event handler is now the function _() => setValue(0)_.
+Le gestionnaire d'événements est maintenant la fonction _() => setValue(0)_.
 
-Defining event handlers directly in the attribute of the button is not necessarily the best possible idea.
+Définir les gestionnaires d'événements directement dans l'attribut du bouton n'est pas nécessairement la meilleure idée possible.
 
-You will often see event handlers defined in a separate place. In the following version of our application we define a function that then gets assigned to the _handleClick_ variable in the body of the component function:
+Vous verrez souvent des gestionnaires d'événements définis dans un endroit séparé. Dans la version suivante de notre application, nous définissons une fonction qui est ensuite affectée à la variable _handleClick_ dans le corps de la fonction composant :
 
 ```js
 const App = () => {
@@ -671,13 +674,13 @@ const App = () => {
 }
 ```
 
-The _handleClick_ variable is now assigned to a reference to the function. The reference is passed to the button as the <i>onClick</i> attribute:
+La variable _handleClick_ est maintenant affectée à une référence à la fonction. La référence est transmise au bouton en tant qu'attribut <i>onClick</i> :
 
 ```js
 <button onClick={handleClick}>button</button>
 ```
 
-Naturally, our event handler function can be composed of multiple commands. In these cases we use the longer curly brace syntax for arrow functions:
+Naturellement, notre fonction de gestion d'événements peut être composée de plusieurs commandes. Dans ces cas, nous utilisons la syntaxe des accolades plus longues pour les fonctions fléchées :
 
 ```js
 const App = () => {
@@ -699,13 +702,13 @@ const App = () => {
 }
 ```
 
-### Function that returns a function
+### Fonction qui renvoie une fonction
 
-Another way to define an event handler is to use <i>function that returns a function</i>.
+Une autre façon de définir un gestionnaire d'événements consiste à utiliser <i>fonction qui renvoie une fonction</i>.
 
-You probably won't need to use functions that return functions in any of the exercises in this course.  If the topic seems particularly confusing, you may skip over this section for now and return to it later.
+Vous n'aurez probablement pas besoin d'utiliser des fonctions qui renvoient des fonctions dans aucun des exercices de ce cours. Si le sujet semble particulièrement déroutant, vous pouvez ignorer cette section pour le moment et y revenir plus tard.
 
-Let's make the following changes to our code:
+Apportons les modifications suivantes à notre code :
 
 ```js
 const App = () => {
@@ -728,17 +731,17 @@ const App = () => {
 }
 ```
 
-The code functions correctly even though it looks complicated. 
+Le code fonctionne correctement même s'il semble compliqué.
 
-The event handler is now set to a function call:
+Le gestionnaire d'événements est maintenant défini sur un appel de fonction :
 
 ```js
 <button onClick={hello()}>button</button>
 ```
 
-Earlier on we stated that an event handler may not be a call to a function, and that it has to be a function or a reference to a function. Why then does a function call work in this case?
+Plus tôt, nous avons déclaré qu'un gestionnaire d'événements ne peut pas être un appel à une fonction, et qu'il doit être une fonction ou une référence à une fonction. Pourquoi alors un appel de fonction fonctionne-t-il dans ce cas ?
 
-When the component is rendered, the following function gets executed:
+Lorsque le composant est rendu, la fonction suivante est exécutée :
 
 ```js
 const hello = () => {
@@ -748,15 +751,15 @@ const hello = () => {
 }
 ```
 
-The <i>return value</i> of the function is another function that is assigned to the _handler_ variable.
+La <i>valeur de retour</i> de la fonction est une autre fonction affectée à la variable _handler_.
 
-When React renders the line:
+Lorsque React affiche la ligne :
 
 ```js
 <button onClick={hello()}>button</button>
 ```
 
-It assigns the return value of _hello()_ to the onClick attribute. Essentially the line gets transformed into:
+Il attribue la valeur de retour de _hello()_ à l'attribut onClick. Essentiellement, la ligne se transforme en :
 
 ```js
 <button onClick={() => console.log('hello world')}>
@@ -764,11 +767,11 @@ It assigns the return value of _hello()_ to the onClick attribute. Essentially t
 </button>
 ```
 
-Since the _hello_ function returns a function, the event handler is now a function.
+Puisque la fonction _hello_ renvoie une fonction, le gestionnaire d'événements est maintenant une fonction.
 
-What's the point of this concept?
+Quel est l'intérêt de ce concept ?
 
-Let's change the code a tiny bit:
+Modifions un tout petit peu le code :
 
 ```js
 const App = () => {
@@ -797,15 +800,15 @@ const App = () => {
 }
 ```
 
-Now the application has three buttons with event handlers defined by the _hello_ function that accepts a parameter.
+Maintenant, l'application a trois boutons avec des gestionnaires d'événements définis par la fonction _hello_ qui accepte un paramètre.
 
-The first button is defined as
+Le premier bouton est défini comme
 
 ```js
 <button onClick={hello('world')}>button</button>
 ```
 
-The event handler is created by <i>executing</i> the function call _hello('world')_. The function call returns the function:
+Le gestionnaire d'événements est créé en <i>exécutant</i> l'appel de fonction _hello('world')_. L'appel de fonction renvoie la fonction :
 
 ```js
 () => {
@@ -813,13 +816,13 @@ The event handler is created by <i>executing</i> the function call _hello('world
 }
 ```
 
-The second button is defined as:
+Le deuxième bouton est défini comme :
 
 ```js
 <button onClick={hello('react')}>button</button>
 ```
 
-The function call _hello('react')_ that creates the event handler returns:
+L'appel de fonction _hello('react')_ qui crée le event handler renvoie :
 
 ```js
 () => {
@@ -827,11 +830,11 @@ The function call _hello('react')_ that creates the event handler returns:
 }
 ```
 
-Both buttons get their own individualized event handlers.
+Les deux boutons disposent de leurs propres gestionnaires d'événements individualisés.
 
-Functions returning functions can be utilized in defining generic functionality that can be customized with parameters. The _hello_ function that creates the event handlers can be thought of as a factory that produces customized event handlers meant for greeting users.
+Les fonctions renvoyant des fonctions peuvent être utilisées pour définir des fonctionnalités génériques qui peuvent être personnalisées avec des paramètres. La fonction _hello_ qui crée les gestionnaires d'événements peut être considérée comme une usine qui produit des event handlers personnalisés destinés à accueillir les utilisateurs.
 
-Our current definition is slightly verbose:
+Notre définition actuelle est légèrement verbeuse :
 
 ```js
 const hello = (who) => {
@@ -843,7 +846,7 @@ const hello = (who) => {
 }
 ```
 
-Let's eliminate the helper variables and directly return the created function:
+Éliminons les variables d'assistance et renvoyons directement la fonction créée :
 
 ```js
 const hello = (who) => {
@@ -853,7 +856,7 @@ const hello = (who) => {
 }
 ```
 
-Since our _hello_ function is composed of a single return command, we can omit the curly braces and use the more compact syntax for arrow functions:
+Puisque notre fonction _hello_ est composée d'une seule commande de retour, nous pouvons omettre les accolades et utiliser la syntaxe plus compacte pour les fonctions fléchées :
 
 ```js
 const hello = (who) =>
@@ -862,7 +865,7 @@ const hello = (who) =>
   }
 ```
 
-Lastly, let's write all of the arrows on the same line:
+Enfin, écrivons toutes les flèches sur la même ligne :
 
 ```js
 const hello = (who) => () => {
@@ -870,7 +873,7 @@ const hello = (who) => () => {
 }
 ```
 
-We can use the same trick to define event handlers that set the state of the component to a given value. Let's make the following changes to our code:
+Nous pouvons utiliser la même astuce pour définir des gestionnaires d'événements qui définissent l'état du composant à une valeur donnée. Apportons les modifications suivantes à notre code :
 
 ```js
 const App = () => {
@@ -878,7 +881,7 @@ const App = () => {
   
   // highlight-start
   const setToValue = (newValue) => () => {
-    console.log('value now', newValue)  // print the new value to console
+    console.log('value now', newValue)  // affiche la nouvelle valeur sur la console
     setValue(newValue)
   }
   // highlight-end
@@ -896,13 +899,13 @@ const App = () => {
 }
 ```
 
-When the component is rendered, the <i>thousand</i> button is created:
+Lorsque le composant est rendu, le bouton <i>thousand</i> est créé :
 
 ```js
 <button onClick={setToValue(1000)}>thousand</button>
 ```
 
-The event handler is set to the return value of _setToValue(1000)_ which is the following function:
+Le gestionnaire d'événements est défini sur la valeur de retour de _setToValue(1000)_ qui est la fonction suivante :
 
 ```js
 () => {
@@ -911,13 +914,13 @@ The event handler is set to the return value of _setToValue(1000)_ which is the 
 }
 ```
 
-The increase button is declared as follows:
+Le bouton d'incrémentation est déclaré comme suit :
 
 ```js
 <button onClick={setToValue(value + 1)}>increment</button>
 ```
 
-The event handler is created by the function call _setToValue(value + 1)_ which receives as its parameter the current value of the state variable _value_ increased by one. If the value of _value_ was 10, then the created event handler would be the function:
+Le gestionnaire d'événements est créé par l'appel de fonction _setToValue(value + 1)_ qui reçoit en paramètre la valeur courante de la variable d'état _value_ augmentée de un. Si la valeur de _value_ était 10, alors le gestionnaire d'événements créé serait la fonction :
 
 ```js
 () => {
@@ -926,7 +929,7 @@ The event handler is created by the function call _setToValue(value + 1)_ which 
 }
 ```
 
-Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function that is responsible for updating state, into a normal function:
+L'utilisation de fonctions qui renvoient des fonctions n'est pas nécessaire pour obtenir cette fonctionnalité. Renvoyons la fonction _setToValue_ qui est responsable de la mise à jour de l'état, dans une fonction normale :
 
 ```js
 const App = () => {
@@ -954,17 +957,17 @@ const App = () => {
 }
 ```
 
-We can now define the event handler as a function that calls the _setToValue_ function with an appropriate parameter. The event handler for resetting the application state would be:
+Nous pouvons maintenant définir le gestionnaire d'événements comme une fonction qui appelle la fonction _setToValue_ avec un paramètre approprié. Le gestionnaire d'événements pour réinitialiser l'état de l'application serait :
 
 ```js
 <button onClick={() => setToValue(0)}>reset</button>
 ```
 
-Choosing between the two presented ways of defining your event handlers is mostly a matter of taste.
+Choisir entre les deux façons présentées pour définir vos gestionnaires d'événements est surtout une question de goût.
 
-### Passing Event Handlers to Child Components
+### Passer vos events handlers aux composants enfants
 
-Let's extract the button into its own component:
+Extrayons le bouton dans son propre composant :
 
 ```js
 const Button = (props) => (
@@ -974,20 +977,20 @@ const Button = (props) => (
 )
 ```
 
-The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop.
+Le composant obtient la fonction de gestionnaire d'événements de la prop _handleClick_ et le texte du bouton de la prop _text_.
 
-Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
+L'utilisation du composant <i>Button</i> est simple, même si nous devons nous assurer que nous utilisons les noms d'attribut corrects lors de la transmission des props au composant.
 
 ![](../../images/1/12e.png)
 
-### Do Not Define Components Within Components
+### Ne pas définir de composants dans les composants
 
-Let's start displaying the value of the application into its own <i>Display</i> component.
+Commençons à afficher la valeur de l'application dans son propre composant <i>Display</i>.
 
-We will change the application by defining a new component inside of the <i>App</i>-component.
+Nous allons changer l'application en définissant un nouveau composant à l'intérieur du composant <i>App</i>.
 
 ```js
-// This is the right place to define a component
+// C'est le bon endroit pour définir un composant
 const Button = (props) => (
   <button onClick={props.handleClick}>
     {props.text}
@@ -1002,7 +1005,7 @@ const App = () => {
     setValue(newValue)
   }
 
-  // Do not define components inside another component
+  // Ne pas définir de composants à l'intérieur d'un autre composant
   const Display = props => <div>{props.value}</div> // highlight-line
 
   return (
@@ -1016,9 +1019,9 @@ const App = () => {
 }
 ```
 
-The application still appears to work, but **don't implement components like this!** Never define components inside of other components. The method provides no benefits and leads to many unpleasant problems. The biggest problems are due to the fact that React treats a component defined inside of another component as a new component in every render. This makes it impossible for React to optimize the component.
+L'application semble toujours fonctionner, mais **n'implémentez pas de composants comme celui-ci !** Ne définissez jamais de composants à l'intérieur d'autres composants. La méthode n'offre aucun avantage et entraîne de nombreux problèmes désagréables. Les plus gros problèmes sont dus au fait que React traite un composant défini à l'intérieur d'un autre composant comme un nouveau composant dans chaque rendu. Cela rend impossible pour React d'optimiser le composant.
 
-Let's instead move the <i>Display</i> component function to its correct place, which is outside of the <i>App</i> component function:
+Déplaçons plutôt la fonction de composant <i>Display</i> à sa place correcte, qui est en dehors de la fonction de composant <i>App</i> :
 
 ```js
 const Display = props => <div>{props.value}</div>
@@ -1048,46 +1051,46 @@ const App = () => {
 }
 ```
 
-### Useful Reading
+### Lecture utile
 
-The internet is full of React-related material. However, we use the new style of React for which a large majority of the material found online is outdated.
+Internet regorge de contenu lié à React. Cependant, nous utilisons le nouveau style de React pour lequel une grande majorité du matériel trouvé en ligne est obsolète.
 
-You may find the following links useful:
+Les liens suivants peuvent vous être utiles :
 
-- The [official React documentation](https://reactjs.org/docs/hello-world.html) is worth checking out at some point, although most of it will become relevant only later on in the course. Also, everything related to class-based components is irrelevant to us;
-- Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and recently updated [The Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course. **NB** The first one uses class components but the latter uses the new functional ones.
+- La [documentation officielle de React](https://reactjs.org/docs/hello-world.html) vaut la peine d'être consultée à un moment donné, même si la plupart d'entre elles ne deviendront pertinentes que plus tard dans le cours. De plus, tout ce qui concerne les composants basés sur des classes ne nous concerne pas ;
+- Certains cours sur [Egghead.io](https://egghead.io) comme [Start learning React](https://egghead.io/courses/start-learning-react) sont de haute qualité, et récemment mis à jour [ Le guide du débutant pour réagir](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) est également relativement bon ; les deux cours introduisent des concepts qui seront également introduits plus tard dans ce cours. **NB** Le premier utilise des composants classes mais le second utilise les nouveaux composants fonctionnels.
 
 </div>
 
 <div class="tasks">
 
-<h3>Exercises  1.6.-1.14.</h3>
+<h3>Exercices 1.6.-1.14.</h3>
 
-Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Soumettez vos solutions aux exercices en transmettant d'abord votre code à GitHub, puis en marquant les exercices terminés dans le [système de soumission d'exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part any more**.
+N'oubliez pas de soumettre **tous** les exercices d'une partie **en une seule soumission**. Une fois que vous avez soumis vos solutions pour une partie, **vous ne pouvez plus soumettre d'autres exercices pour cette partie**.
 
-<i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i>
+<i>Certains des exercices fonctionnent sur la même application. Dans ces cas, il suffit de soumettre uniquement la version finale de la demande. Si vous le souhaitez, vous pouvez effectuer un commit après chaque exercice terminé, mais ce n'est pas obligatoire.</i>
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**ATTENTION** create-react-app transformera automatiquement votre projet en un référentiel git à moins que vous ne créiez votre application dans un référentiel git existant. **Il est fort probable que vous ne vouliez pas que chacun de vos projets soit un référentiel distinct**, il vous suffit donc d'exécuter la commande _rm -rf .git_ à la racine de votre application.
 
-In some situations you may also have to run the command below from the root of the project:
+Dans certaines situations, vous devrez peut-être également exécuter la commande ci-dessous à partir de la racine du projet :
 
 ``` 
 rm -rf node_modules/ && npm i
 ```
 
-<h4> 1.6: unicafe step1</h4>
+<h4> 1.6 : unicafé étape1</h4>
 
-Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
+Comme la plupart des entreprises, [Unicafe](https://www.unicafe.fi/#/9/4) recueille les commentaires de ses clients. Votre tâche consiste à mettre en place une application Web pour recueillir les commentaires des clients. Il n'y a que trois options pour les commentaires : <i>bon</i>, <i>neutre</i> et <i>mauvais</i>.
 
-The application must display the total number of collected feedback for each category. Your final application could look like this:
+L'application doit afficher le nombre total de commentaires recueillis pour chaque catégorie. Votre application finale pourrait ressembler à ceci :
 
 ![](../../images/1/13e.png)
 
-Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
+Notez que votre application ne doit fonctionner que pendant une seule session de navigateur. Une fois que vous avez actualisé la page, les commentaires recueillis sont autorisés à disparaître.
 
-It is advisable to use the same structure that is used in material and previous exercise. File <i>index.js</i> is as follows:
+Il est conseillé d'utiliser la même structure que celle utilisée dans le matériel et l'exercice précédent. Le fichier <i>index.js</i> est le suivant :
 
 ```js
 import React from 'react'
@@ -1098,7 +1101,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-You can use the code below as a starting point for the <i>App.js</i> file:
+Vous pouvez utiliser le code ci-dessous comme point de départ pour le fichier <i>App.js</i> :
 
 ```js
 import { useState } from 'react'
@@ -1119,20 +1122,20 @@ const App = () => {
 export default App
 ```
 
-<h4>1.7: unicafe step2</h4>
+<h4>1.7 : unicafé étape2</h4>
 
-Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: -1) and the percentage of positive feedback.
+Développez votre application pour qu'elle affiche plus de statistiques sur les retours collectés : le nombre total de retours collectés, le score moyen (bon : 1, neutre : 0, mauvais : -1) et le pourcentage de retours positifs.
 
 ![](../../images/1/14e.png)
 
-<h4>1.8: unicafe step3</h4>
+<h4>1.8 : unicafé étape3</h4>
 
-Refactor your application so that displaying the statistics is extracted into its own <i>Statistics</i> component. The state of the application should remain in the <i>App</i> root component.
+Refactorisez votre application afin que l'affichage des statistiques soit extrait dans son propre composant <i>Statistiques</i>. L'état de l'application doit rester dans le composant racine <i>App</i>.
 
-Remember that components should not be defined inside other components:
+N'oubliez pas que les composants ne doivent pas être définis à l'intérieur d'autres composants :
 
 ```js
-// a proper place to define a component
+// un endroit approprié pour définir un composant
 const Statistics = (props) => {
   // ...
 }
@@ -1142,7 +1145,7 @@ const App = () => {
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
 
-  // do not define a component within another component
+  // ne pas définir un composant dans un autre composant
   const Statistics = (props) => {
     // ...
   }
@@ -1153,20 +1156,20 @@ const App = () => {
 }
 ```
 
-<h4>1.9: unicafe step4</h4>
+<h4>1.9 : unicafé étape4</h4>
 
-Change your application to display statistics only once feedback has been gathered.
+Modifiez votre application pour n'afficher les statistiques qu'une fois les commentaires recueillis.
 
 ![](../../images/1/15e.png)
 
-<h4>1.10: unicafe step5</h4>
+<h4>1.10 : unicafé étape5</h4>
 
-Let's continue refactoring the application. Extract the following two components:
+Continuons à refactoriser l'application. Extrayez les deux composants suivants :
 
-- <i>Button</i> for defining the buttons used for submitting feedback
-- <i>StatisticLine</i> for displaying a single statistic, e.g. the average score.
+- <i>Bouton</i> pour définir les boutons utilisés pour soumettre des commentaires
+- <i>StatisticLine</i> pour afficher une seule statistique, par ex. la note moyenne.
 
-To be clear: the <i>StatisticLine</i> component always displays a single statistic, meaning that the application uses multiple components for rendering all of the statistics:
+Pour être clair : le composant <i>StatisticLine</i> affiche toujours une seule statistique, ce qui signifie que l'application utilise plusieurs composants pour afficher toutes les statistiques :
 
 ```js
 const Statistics = (props) => {
@@ -1183,29 +1186,29 @@ const Statistics = (props) => {
 
 ```
 
-The application's state should still be kept in the root <i>App</i> component.
+L'état de l'application doit toujours être conservé dans le composant racine <i>App</i>.
 
-<h4>1.11*: unicafe step6</h4>
+<h4>1.11* : unicafé étape6</h4>
 
-Display the statistics in an HTML [table](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics), so that your application looks roughly like this:
+Affichez les statistiques dans un [tableau](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) HTML, afin que votre application ressemble à peu près à ceci :
 
 ![](../../images/1/16e.png)
 
-Remember to keep your console open at all times. If you see this warning in your console:
+N'oubliez pas de garder votre console ouverte en tout temps. Si vous voyez cet avertissement dans votre console :
 
 ![](../../images/1/17a.png)
 
-Then perform the necessary actions to make the warning disappear. Try pasting the error message into a search engine if you get stuck.
+Effectuez ensuite les actions nécessaires pour faire disparaître l'avertissement. Essayez de coller le message d'erreur dans un moteur de recherche si vous êtes bloqué.
 
-<i>Typical source of an error `Unchecked runtime.lastError: Could not establish connection. Receiving end does not exist.` is Chrome extension. Try going to `chrome://extensions/` and try disabling them one by one and refreshing React app page; the error should eventually disappear.</i>
+<i>Source typique d'une erreur `Unchecked runtime.lastError : Impossible d'établir la connexion. La fin de réception n'existe pas.` est l'extension Chrome. Essayez d'aller sur `chrome://extensions/` et essayez de les désactiver un par un et d'actualiser la page de l'application React ; l'erreur devrait éventuellement disparaître.</i>
 
-**Make sure that from now on you don't see any warnings in your console!**
+**Assurez-vous qu'à partir de maintenant, vous ne voyez plus aucun avertissement dans votre console !**
 
-<h4>1.12*: anecdotes step1</h4>
+<h4>1.12* : anecdotes étape1</h4>
 
-The world of software engineering is filled with [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners.
+Le monde de l'ingénierie logicielle est rempli d'[anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) qui distillent des vérités intemporelles de notre domaine en de courtes lignes.
 
-Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering: 
+Développez l'application suivante en ajoutant un bouton sur lequel cliquer pour afficher une anecdote <i>aléatoire</i> du domaine du génie logiciel :
 
 ```js
 import { useState } from 'react'
@@ -1233,31 +1236,31 @@ const App = () => {
 export default App
 ```
 
-Content of the file <i>index.js</i> is same as in previous exercises. 
+Le contenu du fichier <i>index.js</i> est le même que dans les exercices précédents.
 
-Find out how to generate random numbers in JavaScript, eg. via search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
+Découvrez comment générer des nombres aléatoires en JavaScript, par exemple. via le moteur de recherche ou sur [Mozilla Developer Network](https://developer.mozilla.org). N'oubliez pas que vous pouvez tester la génération de nombres aléatoires, par ex. directement dans la console de votre navigateur.
 
-Your finished application could look something like this:
+Votre application terminée pourrait ressembler à ceci :
 
 ![](../../images/1/18a.png)
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**ATTENTION** create-react-app transformera automatiquement votre projet en un référentiel git à moins que vous ne créiez votre application dans un référentiel git existant. **Il est fort probable que vous ne vouliez pas que chacun de vos projets soit un référentiel distinct**, il vous suffit donc d'exécuter la commande _rm -rf .git_ à la racine de votre application.
 
-<h4>1.13*: anecdotes step2</h4>
+<h4>1.13* : anecdotes étape2</h4>
 
-Expand your application so that you can vote for the displayed anecdote.
+Développez votre application afin de pouvoir voter pour l'anecdote affichée.
 
 ![](../../images/1/19a.png)
 
-**NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.
+**NB** stocker les votes de chaque anecdote dans un tableau ou un objet dans l'état du composant. N'oubliez pas que la bonne façon de mettre à jour l'état stocké dans des structures de données complexes comme des objets et des tableaux est de faire une copie de l'état.
 
-You can create a copy of an object like this:
+Vous pouvez créer une copie d'un objet comme ceci :
 
 ```js
 const points = { 0: 1, 1: 3, 2: 4, 3: 2 }
 
 const copy = { ...points }
-// increment the property 2 value by one
+// incrémenter la valeur de la propriété 2 de un
 copy[2] += 1     
 ```
 
@@ -1267,20 +1270,20 @@ OR a copy of an array like this:
 const points = [1, 4, 6, 3]
 
 const copy = [...points]
-// increment the value in position 2 by one
+// incrémenter la valeur en position 2 de un
 copy[2] += 1     
 ```
 
-Using an array might be the simpler choice in this case. Searching the Internet will provide you with lots of hints on how to [create a zero-filled array of a desired length](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-array-of-arbitrary-length/22209781).
+L'utilisation d'un tableau pourrait être le choix le plus simple dans ce cas. Une recherche sur Internet vous fournira de nombreux conseils sur la façon de [créer un tableau rempli de zéros d'une longueur souhaitée](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-tableau-de-longueur-arbitraire/22209781).
 
-<h4>1.14*: anecdotes step3</h4>
+<h4>1.14* : anecdotes étape3</h4>
 
-Now implement the final version of the application that displays the anecdote with the largest number of votes:
+Implémentez maintenant la version finale de l'application qui affiche l'anecdote avec le plus grand nombre de votes :
 
 ![](../../images/1/20a.png)
 
-If multiple anecdotes are tied for first place it is sufficient to just show one of them.
+Si plusieurs anecdotes sont à égalité pour la première place, il suffit d'en montrer une seule.
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+C'était le dernier exercice de cette partie du cours et il est temps de pusher votre code vers GitHub et de marquer tous vos exercices terminés dans le [système de soumission d'exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
