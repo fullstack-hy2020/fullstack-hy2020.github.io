@@ -68,7 +68,7 @@ Si nous examinons attentivement notre code actuel, nous remarquerons que la fonc
 
 ### Déstructuration
 
-Avant d'aller plus loin, nous allons jeter un œil à une petite fonctionnalité mais utile du langage JavaScript qui a été ajoutée dans la spécification ES6, qui nous permet de [déstructurer](https://developer.mozilla.org/en-US/ docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) des valeurs des objets et des tableaux lors de l'affectation.
+Avant d'aller plus loin, nous allons jeter un œil à une petite fonctionnalité mais utile du langage JavaScript qui a été ajoutée dans la spécification ES6, qui nous permet de [déstructurer](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) des valeurs des objets et des tableaux lors de l'affectation.
 
 Dans notre code précédent, nous devions référencer les données transmises à notre composant en tant que _props.name_ et _props.age_. De ces deux expressions, nous avons dû répéter _props.age_ deux fois dans notre code.
 
@@ -370,7 +370,7 @@ Nous avons déjà mentionné les <i>gestionnaires d'événements</i> qui sont en
 
 Modifions l'application pour que l'augmentation du compteur se produise lorsqu'un utilisateur clique sur un bouton, ce qui est implémenté avec l'élément [bouton](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
-Les éléments bouton prennent en charge les [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), dont [click](https://developer.mozilla.org/ en-US/docs/Web/Events/click), l'événement le plus courant. L'événement clic sur un bouton peut également être déclenché avec le clavier ou un écran tactile malgré le nom <i>mouse event</i>.
+Les éléments bouton prennent en charge les [mouse events](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent), dont [click](https://developer.mozilla.org/en-US/docs/Web/Events/click), l'événement le plus courant. L'événement clic sur un bouton peut également être déclenché avec le clavier ou un écran tactile malgré le nom <i>mouse event</i>.
 
 Dans React, [l'application d'un event handler](https://reactjs.org/docs/handling-events.html) à l'événement <i>click</i> se passe comme ceci :
 
