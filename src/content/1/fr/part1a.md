@@ -353,7 +353,7 @@ const App = () => {
 }
 ```
 
-la page n'affichera pas le contenu défini dans le composant Footer, à la place, React crée uniquement un élément [footer] vide (https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer), c'est-à-dire l'élément HTML intégré au lieu de l'élément React personnalisé du même nom. Si vous remplacez la première lettre du nom du composant par une lettre majuscule, React crée un élément <i>div</i> défini dans le composant Footer, qui est rendu sur la page.
+la page n'affichera pas le contenu défini dans le composant Footer, à la place, React crée uniquement un élément [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) vide, c'est-à-dire l'élément HTML intégré au lieu de l'élément React personnalisé du même nom. Si vous remplacez la première lettre du nom du composant par une lettre majuscule, React crée un élément <i>div</i> défini dans le composant Footer, qui est rendu sur la page.
 
 Notez que le contenu d'un composant React doit (généralement) contenir **un élément racine**. Si nous essayons, par exemple, de définir le composant <i>App</i> sans l'élément <i>div</i> le plus externe :
 
@@ -410,7 +410,7 @@ Ca compile maintenant avec succès et le DOM généré par React ne contient plu
 <div class="tasks">
   <h3>Exercices 1.1.-1.2.</h3>
 
-Les exercices sont soumis via GitHub et en marquant les exercices terminés dans [l'applicatoin de soumission] (https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Les exercices sont soumis via GitHub et en marquant les exercices terminés dans [le dépôt de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Vous pouvez soumettre tous les exercices de ce cours dans le même référentiel ou utiliser plusieurs référentiels. Si vous soumettez des exercices de différentes parties dans le même référentiel, veuillez utiliser un schéma de nommage raisonnable pour les répertoires.
 
