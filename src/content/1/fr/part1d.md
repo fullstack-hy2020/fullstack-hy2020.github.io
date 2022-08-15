@@ -2,16 +2,16 @@
 mainImage: ../../../images/part-1.svg
 part: 1
 letter: d
-lang: en
+lang: fr
 ---
 
 <div class="content">
 
-### A note on React version
+### Une note sur la version React
 
-Version 18 of React was released late March 2022. The code in material should work as it is with the new React version. However, some libraries might not yet be compatible with React 18. At the moment of writing (4th April) at least the Apollo client used in [part 8](/en/part8) does not yet work with most recent React.
+La version 18 de React est sortie fin mars 2022. Le code du matériel devrait fonctionner tel qu'il est avec la nouvelle version de React. Cependant, certaines bibliothèques peuvent ne pas encore être compatibles avec React 18. Au moment de la rédaction (4 avril), le client Apollo utilisé dans [partie 8](/en/part8) ne fonctionne pas encore avec la version la plus récente de React.
 
-In case you end up in a situation where your application breaks because of library compatibility problems, <i>downgrade</i> to the older React by changing the file <i>package.json</i> as follows:
+Si vous vous retrouvez dans une situation où votre application tombe en panne en raison de problèmes de compatibilité de bibliothèque, <i>rétrogradez</i> vers l'ancien React en modifiant le fichier <i>package.json</i> comme suit :
 
 ```js
 {
@@ -25,13 +25,13 @@ In case you end up in a situation where your application breaks because of libra
 }
 ```
 
-After the change is made, reinstall dependencies by running
+Une fois la modification effectuée, réinstallez les dépendances en exécutant
 
 ```js
 npm install
 ```
 
-Note that also the file <i>index.js</i> needs to be changed a bit. For React 17 it looks like
+Notez que le fichier <i>index.js</i> doit également être légèrement modifié. Pour React 17, cela ressemble à
 
 ```js
 import ReactDOM from 'react-dom'
@@ -40,7 +40,7 @@ import App from './App'
 ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
-but for React 18 the correct form is
+mais pour React 18, la forme correcte est
 
 ```js
 import React from 'react'
@@ -51,13 +51,13 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-### Complex state
+### État complexe
 
-In our previous example the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
+Dans notre exemple précédent, l'état de l'application était simple car il était composé d'un seul entier. Et si notre application nécessite un état plus complexe ?
 
-In most cases the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.
+Dans la plupart des cas, le moyen le plus simple et plus adéquat d'y parvenir est d'utiliser la fonction _useState_ plusieurs fois pour créer des "morceaux" d'état séparés.
 
-In the following code we create two pieces of state for the application named _left_ and _right_ that both get the initial value of 0:
+Dans le code suivant, nous créons deux éléments d'état nommés _left_ et _right_ qui obtiennent tous deux la valeur initiale de 0 :
 
 ```js
 const App = () => {
@@ -79,9 +79,10 @@ const App = () => {
 }
 ```
 
-The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
+Le composant a accès aux fonctions _setLeft_ et _setRight_ qu'il peut utiliser pour mettre à jour les deux états.
 
-The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
+L'état du composant ou une partie de son état peut être de n'importe quel type. Nous pourrions implémenter la même fonctionnalité en enregistrant le nombre de clics des boutons <i>gauche</i> et <i>droit</i> dans un seul objet :
+
 ```js
 {
   left: 0,
@@ -89,7 +90,7 @@ The component's state or a piece of its state can be of any type. We could imple
 }
 ```
 
-In this case the application would look like this:
+Dans ce cas, l'application ressemblerait à ceci :
 
 ```js
 const App = () => {
@@ -124,9 +125,10 @@ const App = () => {
 }
 ```
 
-Now the component only has a single piece of state and the event handlers have to take care of changing the <i>entire application state</i>.
+Désormais, le composant n'a qu'un seul état et les gestionnaires d'événements doivent s'occuper de modifier <i>l'état de l'ensemble de l'application</i>.
 
-The event handler looks a bit messy. When the left button is clicked, the following function is called:
+Le gestionnaire d'événements semble un peu brouillon. Lorsque le bouton gauche est cliqué, la fonction suivante est appelée :
+
 ```js
 const handleLeftClick = () => {
   const newClicks = { 
@@ -137,7 +139,8 @@ const handleLeftClick = () => {
 }
 ```
 
-The following object is set as the new state of the application:
+L'objet suivant est défini comme nouvel état de l'application :
+
 ```js
 {
   left: clicks.left + 1,
@@ -145,10 +148,10 @@ The following object is set as the new state of the application:
 }
 ```
 
-The new value of the <i>left</i> property is now the same as the value of <i>left + 1</i> from the previous state, and the value of the <i>right</i> property is the same as value of the <i>right</i> property from the previous state.
+La nouvelle valeur de la propriété <i>left</i> est maintenant la même que la valeur de <i>left + 1</i> de l'état précédent, et la valeur de la propriété <i>right</i> est la même que la valeur de la propriété <i>right</i> de l'état précédent.
 
-We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
-syntax that was added to the language specification in the summer of 2018:
+Nous pouvons définir le nouvel état de l'objet un peu plus précisément en utilisant [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+syntaxe qui a été ajoutée à la spécification du langage à l'été 2018 :
 
 ```js
 const handleLeftClick = () => {
@@ -168,17 +171,17 @@ const handleRightClick = () => {
 }
 ```
 
-The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the _clicks_ object. When we specify a particular property - e.g. <i>right</i> in <em>{ ...clicks, right: 1 }</em>, the value of the _right_ property in the new object will be 1.
+La syntaxe peut sembler un peu étrange au premier abord. En pratique, <em>{ ...clicks }</em> crée un nouvel objet qui a des copies de toutes les propriétés de l'objet _clicks_. Lorsque nous spécifions une propriété particulière - par ex. <i>right</i> in <em>{ ...clicks, right: 1 }</em>, la valeur de la propriété _right_ dans le nouvel objet sera 1.
 
-In the example above, this:
+Dans l'exemple ci-dessus, ceci :
 
 ```js
 { ...clicks, right: clicks.right + 1 }
 ```
 
-creates a copy of the _clicks_ object where the value of the _right_ property is increased by one.
+crée une copie de l'objet _clicks_ où la valeur de la propriété _right_ est augmentée de un.
 
-Assigning the object to a variable in the event handlers is not necessary and we can simplify the functions to the following form:
+L'affectation de l'objet à une variable dans les gestionnaires d'événements n'est pas nécessaire et nous pouvons simplifier les fonctions sous la forme suivante :
 
 ```js
 const handleLeftClick = () =>
@@ -188,7 +191,7 @@ const handleRightClick = () =>
   setClicks({ ...clicks, right: clicks.right + 1 })
 ```
 
-Some readers might be wondering why we didn't just update the state directly, like this:
+Certains lecteurs pourraient se demander pourquoi nous n'avons pas simplement mis à jour l'état directement, comme ceci :
 
 ```js
 const handleLeftClick = () => {
@@ -197,15 +200,15 @@ const handleLeftClick = () => {
 }
 ```
 
-The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since [it can result in unexpected side effects](https://stackoverflow.com/a/40309023). Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object, and setting that as the new state.
+L'application semble fonctionner. Cependant, <i>il est interdit dans React de muter directement l'état</i>, car [cela peut entraîner des effets secondaires inattendus](https://stackoverflow.com/a/40309023). Le changement d'état doit toujours être effectué en définissant l'état sur un nouvel objet. Si les propriétés de l'objet d'état précédent ne sont pas modifiées, elles doivent simplement être copiées, ce qui se fait en copiant ces propriétés dans un nouvel objet et en le définissant comme nouvel état.
 
-Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case storing the click counters into separate pieces of state is a far more suitable choice.
+Stocker tout l'état dans un seul objet d'état est un mauvais choix pour cette application particulière ; il n'y a aucun avantage apparent et l'application qui en résulte est beaucoup plus complexe. Dans ce cas, stocker les compteurs de clics dans des éléments d'état séparés est un choix bien plus approprié.
 
-There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.
+Il existe des situations où il peut être avantageux de stocker une partie de l'état de l'application dans une structure de données plus complexe. [La documentation officielle de React](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contient des conseils utiles sur le sujet.
 
-### Handling arrays
+### Gestion des tableaux
 
-Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.
+Ajoutons un élément d'état à notre application contenant un tableau _allClicks_ qui se souvient de chaque clic qui s'est produit dans l'application.
 
 ```js
 const App = () => {
@@ -239,13 +242,13 @@ const App = () => {
 }
 ```
 
-Every click is stored into a separate piece of state called _allClicks_ that is initialized as an empty array:
+Chaque clic est stocké dans un élément d'état séparé appelé _allClicks_ qui est initialisé sous la forme d'un tableau vide :
 
 ```js
 const [allClicks, setAll] = useState([])
 ```
 
-When the <i>left</i> button is clicked, we add the letter <i>L</i> to the _allClicks_ array:
+Lorsque le bouton <i>gauche</i> est cliqué, nous ajoutons la lettre <i>L</i> au tableau _allClicks_ :
 
 ```js
 const handleLeftClick = () => {
@@ -254,9 +257,9 @@ const handleLeftClick = () => {
 }
 ```
 
-The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, that does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.
+L'élément d'état stocké dans _allClicks_ est désormais défini comme un tableau contenant tous les éléments du tableau d'état précédent plus la lettre <i>L</i>. L'ajout du nouvel élément au tableau est accompli avec la méthode [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), qui ne mute pas le tableau existant mais renvoie plutôt une <i>nouvelle copie du tableau</i> avec l'élément ajouté.
 
-As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:
+Comme mentionné précédemment, il est également possible en JavaScript d'ajouter des éléments à un tableau avec la méthode [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) . Si nous ajoutons l'élément en le poussant vers le tableau _allClicks_ puis en mettant à jour l'état, l'application semblerait toujours fonctionner :
 
 ```js
 const handleLeftClick = () => {
@@ -266,10 +269,10 @@ const handleLeftClick = () => {
 }
 ```
 
-However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
+Cependant, __ ne faites pas cela. Comme mentionné précédemment, l'état des composants React comme _allClicks_ ne doit pas être muté directement. Même si l'état de mutation semble fonctionner dans certains cas, cela peut entraîner des problèmes très difficiles à déboguer.
 
-Let's take a closer look at how the clicking 
-is rendered to the page:
+Regardons de plus près comment le clic
+est rendu sur la page :
 
 ```js
 const App = () => {
@@ -287,11 +290,11 @@ const App = () => {
 }
 ```
 
-We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
+Nous appelons la méthode [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) sur le tableau _allClicks_ qui joint tous les éléments en une seule chaîne, séparés par la chaîne passée en paramètre de la fonction, qui dans notre cas est un espace vide.
 
-### Conditional rendering
+### Rendu conditionnel
 
-Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:
+Modifions notre application pour que le rendu de l'historique des clics soit géré par un nouveau composant <i>History</i> :
 
 ```js
 // highlight-start
@@ -327,13 +330,13 @@ const App = () => {
 }
 ```
 
-Now the behavior of the component depends on whether or not any buttons have been clicked. If not, meaning that the <em>allClicks</em> array is empty, the component renders a div element with some instructions instead:
+Maintenant, le comportement du composant dépend du fait que des boutons aient été cliqués ou non. Si ce n'est pas le cas, ce qui signifie que le tableau <em>allClicks</em> est vide, le composant restitue un élément div avec quelques instructions à la place :
 
 ```js
 <div>the app is used by pressing the buttons</div>
 ```
 
-And in all other cases, the component renders the clicking history:
+Et dans tous les autres cas, le composant restitue l'historique des clics :
 
 ```js
 <div>
@@ -341,11 +344,11 @@ And in all other cases, the component renders the clicking history:
 </div>
 ```
 
-The <i>History</i> component renders completely different React elements depending on the state of the application. This is called <i>conditional rendering</i>.
+Le composant <i>History</i> rend des éléments React complètement différents en fonction de l'état de l'application. C'est ce qu'on appelle le <i>rendu conditionnel</i>.
 
-React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).
+React propose également de nombreuses autres façons de faire [le rendu conditionnel](https://reactjs.org/docs/conditional-rendering.html). Nous y reviendrons plus en détail dans la [partie 2](/fr/part2).
 
-Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:
+Apportons une dernière modification à notre application en la refactorisant pour utiliser le composant _Button_ que nous avons défini précédemment :
 
 ```js
 const History = (props) => {
@@ -401,13 +404,13 @@ const App = () => {
 }
 ```
 
-### Old React
+### Ancienne version de React
 
-In this course we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
+Dans ce cours, nous utilisons le [state hook](https://reactjs.org/docs/hooks-state.html) pour ajouter un état à nos composants React, qui fait partie des nouvelles versions de React et est disponible à partir de la version [ 16.8.0](https://www.npmjs.com/package/react/v/16.8.0) et versions ultérieures. Avant l'ajout des hooks, il n'y avait aucun moyen d'ajouter un état aux composants fonctionnels. Les composants qui nécessitaient un état devaient être définis en tant que composants [classes](https://reactjs.org/docs/react-component.html), à l'aide de la syntaxe de classe JavaScript.
 
-In this course we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the current and future style of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
+Dans ce cours, nous avons pris la décision radicale d'utiliser exclusivement les hooks dès le premier jour, pour nous assurer que nous apprenons le style actuel et futur de React. Même si les composants fonctionnels sont l'avenir de React, il est toujours important d'apprendre la syntaxe de la classe, car il existe des milliards de lignes de code React que vous pourriez finir par maintenir un jour. Il en va de même pour la documentation et les exemples de React que vous pouvez trouver sur Internet.
 
-We will learn more about React class components later on in the course.
+Nous en apprendrons plus sur les composants classes de React plus tard dans le cours.
 
 ### Debugging React applications
 
