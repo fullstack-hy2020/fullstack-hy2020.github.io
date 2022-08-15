@@ -480,7 +480,7 @@ props value is [Object object]
 
 Alors que les éléments séparés par une virgule seront tous disponibles dans la console du navigateur pour une inspection plus approfondie.
 
-Se connecter à la console n'est en aucun cas le seul moyen de déboguer nos applications. Vous pouvez suspendre l'exécution de votre code d'application dans le <i>débogueur</i> de la console développeur Chrome, en écrivant la commande [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript /Reference/Statements/debugger) n'importe où dans votre code.
+Se connecter à la console n'est en aucun cas le seul moyen de déboguer nos applications. Vous pouvez suspendre l'exécution de votre code d'application dans le <i>débogueur</i> de la console développeur Chrome, en écrivant la commande [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) n'importe où dans votre code.
 
 L'exécution s'arrêtera une fois qu'elle arrivera à un point où la commande _debugger_ sera exécutée :
 
@@ -1066,7 +1066,7 @@ Les liens suivants peuvent vous être utiles :
 
 <h3>Exercices 1.6.-1.14.</h3>
 
-Soumettez vos solutions aux exercices en transmettant d'abord votre code à GitHub, puis en marquant les exercices terminés dans le [système de soumission d'exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Soumettez vos solutions aux exercices en transmettant d'abord votre code à GitHub, puis en marquant les exercices terminés dans le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 N'oubliez pas de soumettre **tous** les exercices d'une partie **en une seule soumission**. Une fois que vous avez soumis vos solutions pour une partie, **vous ne pouvez plus soumettre d'autres exercices pour cette partie**.
 
@@ -1284,6 +1284,6 @@ Implémentez maintenant la version finale de l'application qui affiche l'anecdot
 
 Si plusieurs anecdotes sont à égalité pour la première place, il suffit d'en montrer une seule.
 
-C'était le dernier exercice de cette partie du cours et il est temps de pusher votre code vers GitHub et de marquer tous vos exercices terminés dans le [système de soumission d'exercices](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+C'était le dernier exercice de cette partie du cours et il est temps de pusher votre code vers GitHub et de marquer tous vos exercices terminés dans le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
