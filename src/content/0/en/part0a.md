@@ -41,7 +41,6 @@ However, note that the deadline for taking exam for University of Helsinki credi
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-
 ### Course channel in Discord and Telegram
 
 You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!
@@ -192,7 +191,15 @@ If you passed the exam, and you are not going to complete more exercises, you ca
 
 ![](../../images/0/enroll5a.png)
 
-Remember to press the big blue button to ask for the credits to be registered.
+Remember to press the big blue button to ask for the credits to be registered. 
+
+Note that you have to press the button twice:
+
+![](../../images/0/button2.png)
+
+When pressed twice you shoud see the following text
+
+> <i>University credit registration in progress...</i>
 
 Note: if you have already done the course exam in Moodle contact matti.luukkainen@helsinki.fi or @mluukkai in Discord.
 
@@ -208,11 +215,23 @@ You will receive your credits after you have submitted enough exercises for a pa
 
 ![](../../images/0/enroll5a.png)
 
-Remember to press the big blue button to ask for the credits to be registered!
+Remember to press the big blue button to ask for the credits to be registered. 
+
+Note that you have to press the button twice:
+
+![](../../images/0/button2.png)
+
+When pressed twice you shoud see the following text
+
+> <i>University credit registration in progress...</i>
 
 **Please note** that in order to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
 
 You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
+
+When the registration is done, the following text apprears in the submission system
+
+> <i>University credits registered, see the course page how to get a transcript if you need one</i>
 
 ### Where do I get my University of Helsinki Student number 
 
