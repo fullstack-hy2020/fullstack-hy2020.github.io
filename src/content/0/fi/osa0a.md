@@ -35,15 +35,15 @@ Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2023. klo 23:59 
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-### Osat ja suorittaminen
-
-Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
-
 ### Apua tehtävien tekoon?
 
 Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>.
 
 Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.
+
+### Osat ja suorittaminen
+
+Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
 
 #### Osat 0-5 (ydinkurssi) - Full Stack -websovelluskehitys (5 op, CSM141081)
 
