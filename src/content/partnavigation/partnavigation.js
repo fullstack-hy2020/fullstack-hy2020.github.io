@@ -322,4 +322,5 @@ module.exports = {
       c: 'Conceptos básicos de orquestación',
     },
   },
+  fr: {},
 };

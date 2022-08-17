@@ -36,7 +36,7 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
     houston,
     contacts,
     licenced,
-  } = content[lang];
+  } = content[lang] || content.en;
 
   const seoDescription = mainSEOdescription[lang];
 

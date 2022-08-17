@@ -35,15 +35,15 @@ Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2023. klo 23:59 
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-### Osat ja suorittaminen
-
-Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
-
 ### Apua tehtävien tekoon?
 
 Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>.
 
 Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.
+
+### Osat ja suorittaminen
+
+Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
 
 #### Osat 0-5 (ydinkurssi) - Full Stack -websovelluskehitys (5 op, CSM141081)
 
@@ -186,6 +186,14 @@ Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit menn�
 
 Muista painaa isoa sinistä nappia jotta suorituksesi rekisteröidään!
 
+Huomaa, että joudut painamaan nappia vielä toisen kerran:
+
+![](../../images/0/button2.png)
+
+Kun nappia on painettu tarpeeksi monta kertaa näet seuraavan tekstin:
+
+> <i>University credit registration in progress...</i>
+
 Huom: jos teit jo kokeen Moodlessa, ota yhteyttä matti.luukkainen@helsinki.fi tai @mluukkai in Discord.
 
 ### Suoritusmerkinnän pyytäminen
@@ -196,16 +204,27 @@ Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b
 
 Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) jälkeen [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
 
-Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja *ilmoittanut palautussovelluksessa* olevasi valmis kurssin suorituksen kanssa:
+Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
 
 ![](../../images/0/enroll5a.png)
 
 Paina siis sinistä nappia "I have completed the course ..."!
 
+Huomaa, että joudut painamaan nappia vielä toisen kerran:
+
+![](../../images/0/button2.png)
+
+Kun nappia on painettu tarpeeksi monta kertaa näet seuraavan tekstin:
+
+> <i>University credit registration in progress...</i>
+
 **Huomaa**, että suoritusmerkintää ei voida kirjata jos et ole ilmoittautunut kaikkiin suorittamiisi osiin, katso [täältä](/osa0/yleista#osat-ja-suorittaminen) ohjeet ilmoittautumiseen.
 
 Arvosana siirtyy Helsingin yliopiston opintorekisteriin Sisuun ja [Opintopolkuun](https://opintopolku.fi/oma-opintopolku/) neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
 
+Kun suoritusmerkintä on kirjattu, näet palautussovelluksessa tekstin
+
+> <i>University credits registered, see the course page how to get a transcript if you need one</i>
 ### Miten saan selville Helsingin yliopiston opiskelijanumeroni?
 
 Kun ilmoittaudut ensimmäistä kertaa Avoimen yliopiston kautta jollekin kurssille, sinulle luodaan Helsingin yliopiston opiskelijanumero. Varmista siis että olet ilmoittautunut kurssille ennen kuin alat selvittää opiskelijanumeroasi. 

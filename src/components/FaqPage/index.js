@@ -12,7 +12,7 @@ import mainSEOtags from '../../content/seo/mainSEOtags';
 
 const FaqPage = ({ lang, title, seoDescription }) => {
   const { t } = useTranslation();
-  const langContent = content[lang] || [];
+  const langContent = content[lang] || content.en;
 
   return (
     <Layout>
