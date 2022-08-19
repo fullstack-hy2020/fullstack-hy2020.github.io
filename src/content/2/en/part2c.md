@@ -232,7 +232,7 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 --watch db.json" // highlight-line
+    "server": "json-server --port 3001 --watch db.json" // highlight-line
   },
 }
 ```
