@@ -52,7 +52,7 @@ La requête et la réponse du serveur ont plusieurs [en-têtes](https://en.wikip
 ![](../../images/0/4e.png)
 
 
-Les <i>en-têtes de réponse</i> en haut nous indiquent par ex. la taille de la réponse en octets et l'heure exacte de la réponse. Un en-tête important [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) nous indique que la réponse est un fichier texte en [utf-8] (https://en.wikipedia.org/wiki/UTF-8)-format, dont le contenu a été formaté avec HTML. De cette façon, le navigateur sait que la réponse est une page [HTML](https://en.wikipedia.org/wiki/HTML) normale et la restitue au navigateur "comme une page Web".
+Les <i>en-têtes de réponse</i> en haut nous indiquent par ex. la taille de la réponse en octets et l'heure exacte de la réponse. Un en-tête important [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) nous indique que la réponse est un fichier texte en [utf-8](https://en.wikipedia.org/wiki/UTF-8)-format, dont le contenu a été formaté avec HTML. De cette façon, le navigateur sait que la réponse est une page [HTML](https://en.wikipedia.org/wiki/HTML) normale et la restitue au navigateur "comme une page Web".
 
 L'onglet <i>Réponse</i> affiche les données de réponse, une page HTML normale. La section <i>body</i> détermine la structure de la page rendue à l'écran :
 
@@ -66,7 +66,7 @@ En raison de la balise img, le navigateur effectue une seconde <i>requête HTTP<
 
 La requête a été faite à l'adresse <https://studies.cs.helsinki.fi/exampleapp/kuva.png> et son type est HTTP GET. Les en-têtes de réponse nous indiquent que la taille de la réponse est de 89350 octets et que son [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) est <i >image/png</i>, c'est donc une image png. Le navigateur utilise ces informations pour restituer correctement l'image à l'écran.
 
-La chaîne d'événements provoquée par l'ouverture de la page https://studies.cs.helsinki.fi/exampleapp sur un navigateur se présente comme suit [diagramme de séquence](https://www.geeksforgeeks.org/unified-modeling-language-uml -séquence-diagrammes/):
+La chaîne d'événements provoquée par l'ouverture de la page https://studies.cs.helsinki.fi/exampleapp sur un navigateur se présente comme suit [diagramme de séquence](https://www.geeksforgeeks.org/unified-modeling-language-uml-séquence-diagrammes/):
 
 ![Schéma de séquence du flux traité ci-dessus](../../images/0/7e.png)
 
@@ -113,7 +113,7 @@ Le contenu de la page HTML a été enregistré en tant que chaîne de modèle, o
 
 Écrire du HTML au milieu du code n'est bien sûr pas intelligent, mais pour les programmeurs PHP de la vieille école, c'était une pratique normale.
 
-Dans les applications Web traditionnelles, le navigateur est "stupide". Il récupère uniquement les données HTML du serveur et toute la logique d'application se trouve sur le serveur. Un serveur peut être créé en utilisant Java Spring (comme dans le cours de l'Université d'Helsinki [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639)), Python Flask (comme dans le cours [tietokantasovellus] (https://materiaalit.github.io/tsoha-18/)) ou avec [Ruby on Rails](http://rubyonrails.org/) pour ne citer que quelques exemples.
+Dans les applications Web traditionnelles, le navigateur est "stupide". Il récupère uniquement les données HTML du serveur et toute la logique d'application se trouve sur le serveur. Un serveur peut être créé en utilisant Java Spring (comme dans le cours de l'Université d'Helsinki [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639)), Python Flask (comme dans le cours [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) ou avec [Ruby on Rails](http://rubyonrails.org/) pour ne citer que quelques exemples.
 
 L'exemple utilise [Express](https://expressjs.com/) de Node.js.
 Ce cours utilisera Node.js et Express pour créer des serveurs Web.
@@ -130,7 +130,7 @@ Toutes les demandes ont des types <i>différents</i>. Le type de la première re
 ![Vue détaillée de la première requête](../../images/0/9e.png)
 
 Lorsque l'on compare la page affichée sur le navigateur et le code HTML renvoyé par le serveur, on remarque que le code ne contient pas la liste des notes.
-La section [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) du code HTML contient un [script](https://developer.mozilla.org/ en-US/docs/Web/HTML/Element/script)-tag, qui amène le navigateur à récupérer un fichier JavaScript appelé <i>main.js</i>.
+La section [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) du code HTML contient un [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script)-tag, qui amène le navigateur à récupérer un fichier JavaScript appelé <i>main.js</i>.
 
 Le code JavaScript ressemble à ceci :
 
@@ -354,7 +354,7 @@ Même si la page est mise à jour sur votre navigateur, les modifications ne son
 
 ### CSS
 
-L'élément <i>head</i> du code HTML de la page Notes contient une balise [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link), qui détermine que le navigateur doit récupérer une feuille de style [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) à partir de l'adresse [main.css](https://studies.cs .helsinki.fi/exampleapp/main.css).
+L'élément <i>head</i> du code HTML de la page Notes contient une balise [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link), qui détermine que le navigateur doit récupérer une feuille de style [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) à partir de l'adresse [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
 Les feuilles de style en cascade, ou CSS, sont un langage de feuille de style utilisé pour déterminer l'apparence des pages Web.
 
@@ -382,7 +382,7 @@ Les attributs CSS peuvent être examinés dans l'onglet <i>éléments</i> de la 
 
 L'élément <i>div</i> le plus externe a la classe <i>container</i>. L'élément <i>ul</i> contenant la liste des notes a la classe <i>notes</i>.
 
-La règle CSS définit que les éléments avec la classe <i>container</i> seront délimités par une [bordure] large d'un pixel (https://developer.mozilla.org/en-US/docs/Web/CSS/border ). Il définit également 10 pixels [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) sur l'élément. Cela ajoute un espace vide entre le contenu de l'élément et la bordure.
+La règle CSS définit que les éléments avec la classe <i>container</i> seront délimités par une [bordure](https://developer.mozilla.org/en-US/docs/Web/CSS/border) large d'un pixel. Il définit également 10 pixels de [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) sur l'élément. Cela ajoute un espace vide entre le contenu de l'élément et la bordure.
 
 La deuxième règle CSS définit la couleur du texte des notes en bleu.
 
@@ -489,7 +489,7 @@ Dans notre exemple d'application, la page d'accueil fonctionne comme une page We
 
 La page Notes donne une partie de la responsabilité, générant le code HTML pour les notes existantes, au navigateur. Le navigateur s'attaque à cette tâche en exécutant le code JavaScript qu'il a récupéré sur le serveur. Le code récupère les notes du serveur sous forme de données JSON et ajoute des éléments HTML pour afficher les notes sur la page à l'aide de [DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).
 
-Ces dernières années, le style [Application à page unique](https://en.wikipedia.org/wiki/Single-page_application) (SPA: single page application) de création d'applications Web a émergé. Les sites Web de style SPA ne récupèrent pas toutes leurs pages séparément du serveur comme le fait notre exemple d'application, mais ne comprennent qu'une seule page HTML extraite du serveur, dont le contenu est manipulé avec JavaScript qui s'exécute dans le navigateur.
+Ces dernières années, le style [application à page unique](https://en.wikipedia.org/wiki/Single-page_application) en anglais SPA (single page application) de création d'applications Web a émergé. Les sites Web de style SPA ne récupèrent pas toutes leurs pages séparément du serveur comme le fait notre exemple d'application, mais ne comprennent qu'une seule page HTML extraite du serveur, dont le contenu est manipulé avec JavaScript qui s'exécute dans le navigateur.
 
 La page Notes de notre application ressemble un peu aux applications de style SPA, mais elle n'en est pas encore là. Même si la logique de rendu des notes est exécutée sur le navigateur, la page utilise toujours la méthode traditionnelle d'ajout de nouvelles notes. Les données sont envoyées au serveur avec la soumission du formulaire, et le serveur demande au navigateur de recharger la page Notes avec une <i>redirection</i>.
 
@@ -602,7 +602,7 @@ Auparavant, il était plus courant pour les développeurs de se spécialiser dan
 
 Le développement Web complet est un défi à bien des égards. Les choses se passent dans de nombreux endroits à la fois, et le débogage est un peu plus difficile qu'avec les applications de bureau classiques. JavaScript ne fonctionne pas toujours comme prévu (par rapport à de nombreux autres langages), et le fonctionnement asynchrone de ses environnements d'exécution entraîne toutes sortes de défis. Communiquer sur le web nécessite la connaissance du protocole HTTP. Il faut également gérer les bases de données et l'administration et la configuration des serveurs. Il serait également bon de connaître suffisamment de CSS pour rendre les applications au moins quelque peu présentables.
 
-Le monde de JavaScript se développe rapidement, ce qui apporte son lot de défis. Les outils, les bibliothèques et le langage lui-même sont en constante évolution. Certains commencent à en avoir assez du changement constant et ont inventé un terme pour cela : <em>fatigue JavaScript</em>. Voir [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) ou [JavaScript fatigue on Medium](https://medium.com/@ericclemmons /javascript-fatigue-48d4011b6fc4).
+Le monde de JavaScript se développe rapidement, ce qui apporte son lot de défis. Les outils, les bibliothèques et le langage lui-même sont en constante évolution. Certains commencent à en avoir assez du changement constant et ont inventé un terme pour cela : <em>fatigue JavaScript</em>. Voir [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) ou [JavaScript fatigue on Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
 
 Vous souffrirez vous-même de la fatigue JavaScript pendant ce cours. Heureusement pour nous, il existe plusieurs façons de lisser la courbe d'apprentissage, et nous pouvons commencer par le codage au lieu de la configuration. Nous ne pouvons pas complètement éviter la configuration, mais nous pouvons joyeusement aller de l'avant dans les prochaines semaines tout en évitant le pire des enfers de configuration. 
 
@@ -696,5 +696,5 @@ Créez un diagramme illustrant la situation dans laquelle l'utilisateur accède 
 
 Créez un diagramme illustrant la situation dans laquelle l'utilisateur crée une nouvelle note à l'aide de la version à page unique de l'application.
 
-C'était le dernier exercice, et il est temps de transmettre vos réponses à GitHub et de marquer les exercices comme effectués dans le [système de soumission] (https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+C'était le dernier exercice, et il est temps de transmettre vos réponses à GitHub et de marquer les exercices comme effectués dans le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 </div>
