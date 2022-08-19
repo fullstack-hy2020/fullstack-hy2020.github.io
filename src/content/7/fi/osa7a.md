@@ -319,11 +319,11 @@ const Login = (props) => {
 }
 ```
 
-Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaaminen ohjelmallisesti.
+Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/docs/en/v6/hooks/use-navigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaaminen ohjelmallisesti.
 
 Kirjautumisen yhteydessä suoritettava komento _navigate('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
-Käyttämämme React Router -kirjaston funktiot [useParams](https://reactrouter.com/docs/en/v6/api#useparams) ja [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create React App on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
+Käyttämämme React Router -kirjaston funktiot [useParams](https://reactrouter.com/docs/en/v6/hooks/use-params) ja [useNavigate](https://reactrouter.com/docs/en/v6/hooks/use-navigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create React App on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
 
 ### Uudelleenohjaus
 
@@ -333,7 +333,7 @@ Näkymän <i>Users</i> routeen liittyy vielä eräs mielenkiintoinen detalji:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä komponentin [Navigate](https://reactrouter.com/docs/en/v6/api#navigate) avulla kirjautumisnäkymään:
+Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä komponentin [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) avulla kirjautumisnäkymään:
 
 ```js
 <Navigate replace to="/login" />
