@@ -290,7 +290,7 @@ Toteuta osan 2 esimerkin [parempi virheilmoitus](/osa2/tyylien_lisaaminen_react_
 
 <h4>2.20*: puhelinluettelo step12</h4>
 
-Avaa sovelluksesi kahteen selaimeen. **Jos poistat jonkun henkilön selaimesta 1** hieman ennen kuin yrität <i>muuttaa henkilön numeroa</i> selaimesta 2, tapahtuu virhetilanne:
+Avaa sovelluksesi kahteen selaimeen. **Jos poistat jonkun henkilön selaimella 1** hieman ennen kuin yrität <i>muuttaa henkilön numeroa</i> selaimella 2, tapahtuu virhetilanne:
 
 ![](../../images/2/29b.png)
 
