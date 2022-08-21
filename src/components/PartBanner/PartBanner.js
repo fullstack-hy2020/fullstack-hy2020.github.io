@@ -56,7 +56,7 @@ const partNameTranslations = {
   fr: [
     'Introduction aux applications Web',
     'Premiers pas avec React',
-    'Communication avec le serveur',
+    'Communiquer avec le serveur',
     'Programmation côté serveur avec NodeJS et Express',
     'Test des serveurs Express, gestion des utilisateurs',
     'Tester des applications React',
