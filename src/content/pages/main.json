@@ -72,5 +72,23 @@
     "houston": "芬兰的Houston Inc. 是一家敏捷型软件公司，成立于2003年。我们为业务的设计和实施提供个性的数字化解决方案。",
     "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
     "licenced": "所有内容基于Creative Commons BY-NC-SA 3.0 License.协议框架。"
+  },
+  "fr": {
+    "mainTitle": "Plongez dans le développement Web moderne",
+    "intro": "Apprenez React, Redux, Node.js, MongoDB, GraphQL et TypeScript en une seule fois ! Ce cours vous présentera le développement Web moderne basé sur JavaScript. L'accent est mis sur la création d'applications à page unique avec ReactJS qui utilisent des API REST construites avec Node.js.",
+    "current": [
+      "L'édition 2022 est lancée ! Vous pouvez continuer un cours précédent dans la nouvelle édition, consultez <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>ceci</a> pour plus de détails.",
+      "Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> et sur Telegram : <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</ un>. Veuillez vous joindre à la conversation !"
+    ],
+    "telegram": "Telegram est une application de forum de discussion de style WhatsApp / Messenger qui peut être utilisée avec un navigateur, des appareils mobiles et des clients Windows / Linux / OSX.",
+    "notice": "NB : Les commentaires déplacés, dégradants et discriminatoires sont strictement interdits sur le canal, et toute personne envoyant ce type de messages sera définitivement retirée de la discussion.",
+    "licence": [
+      "Les parties 0 à 8 et 13 du matériel de cours sont rédigées par <a href='https://github.com/mluukkai'>Matti Luukkainen</a>. Le contenu de la partie 9 est écrit par les développeurs de <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. La partie 10 est écrite par <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>. Le contenu de la partie 11 est écrit par les développeurs de <a href='https://www.smartly.io/'>Smartly</a> et la partie 12 est de <a href='https://github.com/jakoussa'>Jami Kousa</a>. De nombreuses <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>personnes</a> ont amélioré et corrigé le contenu à la fois dans le contenu et l'orthographe. Vous pouvez également apporter vous-même des améliorations au matériel de cours. La page Web du cours est conçue et créée par <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, qui a également vérifié le contenu du matériel de cours. Traduction chinoise par <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>. Traduction espagnole par <a target='_blank' href='https://github.com/sebastiantorres86'>Sebastian Torres</a> et <a target='_blank' href='https://github.com/cynthiamv '>Cynthia Vico Vacca</a>. Traduction française par <a target='_blank' href='https://github.com/AbdoulBaguiM'>Abdoul-Bagui M.</a>",
+      "Le matériel de cours est sous licence <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>licence Creative Commons BY-NC-SA 3.0</a>, ce qui signifie que vous êtes libre d'utiliser et de distribuer le matériel, tant que les noms des auteurs originaux ne sont pas supprimés. Si vous apportez des modifications au matériel et souhaitez distribuer la version modifiée, celle-ci doit être sous la même licence. L'utilisation du matériel à des fins commerciales est interdite sans autorisation."
+    ],
+    "university": "L'Université d'Helsinki est la plus ancienne et la plus grande université scientifique de Finlande, avec une communauté scientifique internationale de 40 000 personnes.",
+    "houston": "Le Finnish Houston Inc. est une société de logiciels agile fondée en 2003. Nous concevons et mettons en œuvre des services numériques personnalisés pour notre entreprise.",
+    "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
+    "licenced": "Le matériel est sous licence Creative Commons BY-NC-SA 3.0."
   }
 }
