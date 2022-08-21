@@ -53,6 +53,22 @@ const partNameTranslations = {
     '容器',
     '使用关系型数据库'
   ],
+  fr: [
+    'Introduction aux applications Web',
+    'Premiers pas avec React',
+    'Communication avec le serveur',
+    'Programmation côté serveur avec NodeJS et Express',
+    'Test des serveurs Express, gestion des utilisateurs',
+    'Tester des applications React',
+    'Gestion d\'état avec Redux',
+    'React router, hooks personnalisés, application de style avec CSS et webpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'Conteneurs',
+    'Utilisation de bases de donées relationnelles'
+  ],
 };
 
 export const PartBanner = ({ lang }) => {
