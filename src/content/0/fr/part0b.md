@@ -12,7 +12,7 @@ Avant de commencer la programmation, nous passerons en revue certains principes 
 L'application n'existe que pour démontrer certains concepts de base du cours et n'est en aucun cas un exemple de <i>comment</i> une application Web moderne doit être créée.
 Au contraire, il démontre certaines anciennes techniques de développement Web, qui pourraient même être considérées comme de <i>mauvaises pratiques</i> de nos jours.
 
-Le code sera conforme aux meilleures pratiques actuelles à partir de la [partie 1](/fr/partie1).
+Le code sera conforme aux meilleures pratiques actuelles à partir de la [partie 1](/fr/part1).
 
 Ouvrez l'[exemple d'application](https://studies.cs.helsinki.fi/exampleapp) dans votre navigateur. Parfois, cela prend un certain temps.
 
@@ -159,7 +159,7 @@ xhttp.onreadystatechange = function() {
 xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
-Les détails du code ne sont pas importants pour le moment, mais du code a été inclus pour pimenter les images et le texte. Nous commencerons correctement à coder dans la [partie 1](/en/part1). L'exemple de code de cette partie n'est en fait pas du tout pertinent pour les techniques de codage de ce cours.
+Les détails du code ne sont pas importants pour le moment, mais du code a été inclus pour pimenter les images et le texte. Nous commencerons correctement à coder dans la [partie 1](/fr/part1). L'exemple de code de cette partie n'est en fait pas du tout pertinent pour les techniques de codage de ce cours.
 
 > Certains pourraient se demander pourquoi xhttp-object est utilisé à la place du fetch moderne. Cela est dû au fait de ne pas encore du tout vouloir entrer dans les promesses, et le code ayant un rôle secondaire dans cette partie. Nous reviendrons sur les moyens modernes de faire des requêtes au serveur dans la partie 2.
 
@@ -259,7 +259,7 @@ La requête au serveur est envoyée sur la dernière ligne, mais le code pour g�
 xhttp.onreadystatechange = function () {
 ```
 
-Sur cette ligne, un <i>gestionnaire d'événements</i> pour l'événement <i>onreadystatechange</i> est défini pour l'objet <em>xhttp</em> effectuant la requête. Lorsque l'état de l'objet change, le navigateur appelle la fonction de gestionnaire d'événements. Le code de la fonction vérifie que [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) est égal à 4 (ce qui décrit la situation <i>L'opération est terminée</ i>) et que le code d'état HTTP de la réponse est 200.
+Sur cette ligne, un <i>gestionnaire d'événements</i> pour l'événement <i>onreadystatechange</i> est défini pour l'objet <em>xhttp</em> effectuant la requête. Lorsque l'état de l'objet change, le navigateur appelle la fonction de gestionnaire d'événements. Le code de la fonction vérifie que [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) est égal à 4 (ce qui décrit la situation <i>L'opération est terminée</i>) et que le code d'état HTTP de la réponse est 200.
 
 
 ```js
@@ -478,8 +478,8 @@ Toutes les données affichées sur la page ont été récupérées avec le code 
 
 La page Notes utilise AJAX pour récupérer les données des notes. La soumission du formulaire utilise toujours le mécanisme traditionnel de soumission de formulaires Web.
 
-Les URL des applications reflètent les temps anciens et insouciants. Les données JSON sont extraites de l'URL <https://studies.cs.helsinki.fi/exampleapp/data.json> et les nouvelles notes sont envoyées à l'URL <https://studies.cs.helsinki.fi/exampleapp/new_note >.
-De nos jours, de telles URL ne seraient pas considérées comme acceptables, car elles ne respectent pas les conventions généralement reconnues des API [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), que nous examinerons plus en détail dans [partie 3](/en/part3)
+Les URL des applications reflètent les temps anciens et insouciants. Les données JSON sont extraites de l'URL <https://studies.cs.helsinki.fi/exampleapp/data.json> et les nouvelles notes sont envoyées à l'URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.
+De nos jours, de telles URL ne seraient pas considérées comme acceptables, car elles ne respectent pas les conventions généralement reconnues des API [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_Web_services), que nous examinerons plus en détail dans la [partie 3](/en/part3)
 
 La chose appelée AJAX est maintenant si banale qu'elle est prise pour acquise. Le terme est tombé dans l'oubli, et la nouvelle génération n'en a même pas entendu parler.
 
@@ -653,7 +653,7 @@ Découvrez les bases des formulaires HTML en lisant le didacticiel de Mozilla [V
 
   <h4>0.4 : Nouvelle note</h4>
 
-Dans le chapitre [Chargement d'une page contenant JavaScript - révision](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review) la chaîne d'événements causés par l'ouverture de la page <https://studies.cs .helsinki.fi/exampleapp/notes> est représenté comme un [diagramme de séquence](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+Dans le chapitre [Chargement d'une page contenant JavaScript - révision](/fr/part0/introduction_aux_applications_web#chargement-dune-page-contenant-java-script-revision) la chaîne d'événements causés par l'ouverture de la page https://studies.cs.helsinki.fi/exampleapp/notes est représentée comme un [diagramme de séquence](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
 Le diagramme a été créé à l'aide du service [websequencediagrams](https://www.websequencediagrams.com) comme suit :
 
@@ -685,12 +685,12 @@ Si nécessaire, affichez les opérations sur le navigateur ou sur le serveur sou
 
 Le diagramme ne doit pas nécessairement être un diagramme de séquence. Toute manière sensée de présenter les événements est acceptable.
 
-Toutes les informations nécessaires pour ce faire, ainsi que les deux exercices suivants, se trouvent dans le texte de [cette partie](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
+Toutes les informations nécessaires pour ce faire, ainsi que les deux exercices suivants, se trouvent dans le texte de [cette partie](/fr/part0/introduction_aux_applications_web#formulaires-et-http-post).
 L'idée de ces exercices est de lire le texte une fois de plus et de réfléchir à ce qui s'y passe. La lecture de l'application [code](https://github.com/mluukkai/example_app) n'est pas nécessaire, mais c'est bien sûr possible.
 
   <h4>0.5 : Application à page unique</h4>
 
-Créez un diagramme illustrant la situation dans laquelle l'utilisateur accède à la version [application à page unique](/en/part0/fundamentals_of_web_apps#single-page-app) de l'application de notes sur <https://studies.cs.helsinki.fi/ exempleapp/spa>.
+Créez un diagramme illustrant la situation dans laquelle l'utilisateur accède à la version [application à page unique](/fr/part0/introduction_aux_applications_web#application-a-page-unique) de l'application de notes sur <https://studies.cs.helsinki.fi/exempleapp/spa>.
 
   <h4>0.6 : Nouvelle note</h4>
 

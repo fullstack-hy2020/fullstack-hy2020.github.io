@@ -44,7 +44,7 @@ Les statistiques de temps d'exécution des exercices peuvent être trouvées via
 
 ### Chaîne de cours dans Discord et Telegram
 
-Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> et sur Telegram : <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</ un>. Veuillez vous joindre à la conversation !
+Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>Discord</a> et sur <a target='_blank' href='https://t.me/fullstackcourse'>Telegram</a>. Rejoignez la conversation !
 
 ### Parties et complétion
 
@@ -68,7 +68,7 @@ Les crédits et les notes sont calculés comme suit :
 
 Une fois que vous avez terminé suffisamment d'exercices pour obtenir une note de passage, vous pouvez télécharger le certificat de cours à partir du [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Si vous souhaitez recevoir des crédits universitaires, vous devez réussir l'examen du cours. L'examen ne compte pas dans votre note finale, mais vous devez le réussir. Plus d'infos sur l'examen [ici](/en/part0/general_info#the-course-exam).
+Si vous souhaitez recevoir des crédits universitaires, vous devez réussir l'examen du cours. L'examen ne compte pas dans votre note finale, mais vous devez le réussir. Plus d'infos sur l'examen [ici](/fr/part0/informations_generales#lexamen-du-cours).
 
 La dernière date possible pour passer l'examen est le 10 janvier 2023. **Notez que vous devez vous inscrire à l'examen au plus tard le 9 janvier 2023.**
 
@@ -80,74 +80,74 @@ Vous ne pouvez passer l'examen qu'après avoir soumis suffisamment d'exercices p
 En soumettant au moins 127 des exercices pour les parties 0 à 7 tout en travaillant sur le cours de base, vous pouvez recevoir un crédit supplémentaire grâce à cette extension.
 - Soumettez au moins 127 exercices pour les parties 0-7.
 - [Inscrivez-vous à la partie 6 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0).
-- [Demander des crédits pour la partie 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 6](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 7 - Développement Web Full Stack, extension 2 (1 cr, CSM141083)
 En soumettant au moins 138 des exercices pour les parties 0 à 7 tout en travaillant sur le cours de base, vous pouvez recevoir un crédit supplémentaire grâce à cette extension.
 - Soumettez au moins 138 exercices pour les parties 0-7.
 - [Inscrivez-vous à la partie 7 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).
-- [Demander des crédits pour la partie 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 7](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 8 - Développement Web Full Stack : GraphQL (1 cr, CSM14113)
 En soumettant au moins 22/26 des exercices de la partie 8 du cours, GraphQL, vous pouvez obtenir un crédit supplémentaire. La partie 8 peut être effectuée à tout moment après la partie 5, car son contenu est indépendant des parties 6 et 7.
 - Soumettez au moins 22/26 exercices pour la partie 8.
 - [Inscrivez-vous à la partie 8 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).
-- [Demander des crédits pour la partie 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 8](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 9 - Développement Web Full Stack : TypeScript (1 cr, CSM14110)
 En soumettant au moins 24/27 des exercices de la partie 9 du cours, TypeScript, vous pouvez obtenir un crédit supplémentaire. Il est recommandé de terminer les parties 0 à 7 avant de participer à la partie 9.
 - Soumettre au moins 24/27 exercices pour la partie 9.
 - [Inscrivez-vous à la partie 9 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
-- [Demander des crédits pour la partie 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 9](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 10 - Développement Web Full Stack : React Native (2 cr, CSM14111)
 En soumettant 25 exercices pour la partie 10 du cours sur React Native, vous pouvez gagner deux crédits supplémentaires. Vous trouverez plus d'informations sur les conditions préalables, la soumission d'exercices et les crédits de cette partie dans[partie 10](/en/part10/introduction_to_react_native).
 - Soumettez au moins 25 exercices pour la partie 10.
 - [Inscrivez-vous à la partie 10 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6).
-- [Demander des crédits pour la partie 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 10](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 11 - Développement Web Full Stack : Intégration continue / Livraison continue (1 cr, CSM14112)
 
 En soumettant tous les exercices de la partie 11 du cours sur l'intégration/livraison continue, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 11](/en/part11).
 - Soumettez tous les exercices de la partie 11.
 - [Inscrivez-vous à la partie 11 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01).
-- [Demander des crédits pour la partie 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 11](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 12 - Développement Web Full Stack : Conteneurs (1 cr, CSM141084)
 
 En soumettant tous les exercices de la partie 12 du cours sur la technologie des conteneurs, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 12](/en/part12).
 - Soumettez tous les exercices de la partie 12.
 - [Inscrivez-vous à la partie 12 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a).
-- [Demander des crédits pour la partie 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 12](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 #### Partie 13 - Développement Web Full Stack : bases de données relationnelles (1 cr, CSM14114)
 
 En soumettant tous les exercices de la partie 13 du cours sur les bases de données relationnelles, vous pouvez gagner un crédit supplémentaire. Vous trouverez plus d'informations sur les prérequis de cette partie et la soumission des exercices dans [partie 13](/en/part13).
 - Soumettez tous les exercices de la partie 13.
 - [Inscrivez-vous à la partie 13 via l'Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c).
-- [Demander des crédits pour la partie 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Demander des crédits pour la partie 13](/fr/part0/informations_generales#comment-obtenir-vos-credits).
 
 ### Étudier le cours en quelques mots
 
 Comment étudier le cours - instructions en bref: cours de base de 5 cr CSM141081
 
 - Faire les excerises. Les exercices sont soumis via GitHub et marqués comme effectués sur le [système de soumission](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-  - [Le ​​certificat de cours](/en/part0/general_info#course-certificate) sera disponible dans le système de soumission
+  - [Le ​​certificat de cours](/fr/part0/informations_generales#certificat-de-cours) sera disponible dans le système de soumission
 - Si vous souhaitez obtenir des crédits de l'Université d'Helsinki
-  - Inscrivez-vous au cours. Vous obtiendrez le lien d'inscription via le système de soumission une fois que vous aurez terminé suffisamment d'exercices. En savoir plus [ici](/en/part0/general_info#the-course-exam)
+  - Inscrivez-vous au cours. Vous obtiendrez le lien d'inscription via le système de soumission une fois que vous aurez terminé suffisamment d'exercices. En savoir plus [ici](/fr/part0/informations_generales#lexamen-du-cours)
   - Enregistrez votre numéro d'étudiant. Après l'inscription au cours, enregistrez votre numéro d'identification d'étudiant de l'Université d'Helsinki dans le système de soumission.
-  - Faites l'examen en ligne dans le système de soumission. En savoir plus [ici](/en/part0/general_info#the-course-exam)
-  - Marquez le cours comme terminé dans le système de soumission, lisez plus [ici](/en/part0/general_info#how-to-get-your-credits)
+  - Faites l'examen en ligne dans le système de soumission. En savoir plus [ici](/fr/part0/informations_generales#lexamen-du-cours)
+  - Marquez le cours comme terminé dans le système de soumission, lisez plus [ici](/fr/part0/informations_generales#comment-obtenir-vos-credits)
 
-Veuillez noter que si vous faites le "cours de base" avec 6 ou 7 crédits, vous avez besoin d'inscriptions séparées pour les crédits supplémentaires, voir [Parties et achèvement](/en/part0/general_info#parts-and-completion) pour plus d'informations.
+Veuillez noter que si vous faites le "cours de base" avec 6 ou 7 crédits, vous avez besoin d'inscriptions séparées pour les crédits supplémentaires, voir [Parties et complétion](/fr/part0/informations_generales#parties-et-completion) pour plus d'informations.
 
 Comment étudier le cours – instructions en bref : autres parties du cours
 
 - Faire les excerises. Les exercices sont soumis via GitHub et marqués comme terminés sur le système de soumission. Notez que chacune des parties 8- a une instance distincte dans le système de soumission
-  - [Le ​​certificat de cours](/en/part0/general_info#course-certificate) sera disponible dans le système de soumission
+  - [Le ​​certificat de cours](/fr/part0/informations_generales#certificat-de-cours) sera disponible dans le système de soumission
 - Si vous souhaitez obtenir des crédits de l'Université d'Helsinki
-  - Inscrivez-vous au cours. Vous pouvez vous inscrire à chaque partie via le lien dans le matériel de cours ([Parties et complétion](/en/part0/general_info#parts-and-completion)). Inscrivez-vous à chaque partie séparément.
- - Marquez la partie terminée dans le système de soumission, lisez plus [ici](/en/part0/general_info#how-to-get-your-credits)
+  - Inscrivez-vous au cours. Vous pouvez vous inscrire à chaque partie via le lien dans le matériel de cours ([Parties et complétion](/fr/part0/informations_generales#parties-et-completion)). Inscrivez-vous à chaque partie séparément.
+ - Marquez la partie terminée dans le système de soumission, lisez plus [ici](/fr/part0/informations_generales#comment-obtenir-vos-credits)
 
 ### Envoi d'exercices
 
@@ -175,7 +175,7 @@ Après l'inscription au cours, enregistrez votre numéro d'étudiant de l'Univer
 
 ![](../../images/0/28b.png)
 
-Voir [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) pour savoir comment trouver votre numéro d'étudiant.
+Voir [this](/fr/part0/informations_generales#ou-puis-je-obtenir-mon-numero-detudiant-de-l-universite-d-helsinki) pour savoir comment trouver votre numéro d'étudiant.
 
 Après ces étapes, vous pouvez passer l'examen du cours dans le système de soumission :
 
@@ -201,7 +201,7 @@ Si vous souhaitez recevoir des crédits de l'Université d'Helsinki, enregistrez
 
 ![](../../images/0/28b.png)
 
-Si vous n'êtes pas étudiant à l'Université d'Helsinki, vous pouvez obtenir un numéro d'étudiant en vous inscrivant au cours via [Open University](/en/part0/general_info#the-course-exam), voir [this](/en /part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) pour plus d'informations.
+Si vous n'êtes pas étudiant à l'Université d'Helsinki, vous pouvez obtenir un numéro d'étudiant en vous inscrivant au cours via [Open University](/fr/part0/informations_generales#lexamen-du-cours), voir [ici](/fr/part0/informations_generales#ou-puis-je-obtenir-mon-numero-detudiant-de-l-universite-d-helsinki) pour plus d'informations.
 
 Vous recevrez vos crédits après avoir soumis suffisamment d'exercices pour obtenir une note de passage, avoir réussi l'examen et nous avoir fait savoir via le système de soumission que vous avez terminé le cours :
 
@@ -209,7 +209,7 @@ Vous recevrez vos crédits après avoir soumis suffisamment d'exercices pour obt
 
 N'oubliez pas d'appuyer sur le gros bouton bleu pour demander l'enregistrement des crédits !
 
-**Veuillez noter** que pour obtenir des crédits universitaires, vous devez vous inscrire pour chaque partie terminée, veuillez consulter [plus d'informations sur l'inscription](/en/part0/general_info#parts-and-completion).
+**Veuillez noter** que pour obtenir des crédits universitaires, vous devez vous inscrire pour chaque partie terminée, veuillez consulter [plus d'informations sur l'inscription](/fr/part0/informations_generales#parties-et-completion).
 
 Vous pouvez consulter votre note à l'Université d'Helsinki Sisu et [Opintopolku](https://opintopolku.fi/oma-opintopolku/) environ quatre semaines après nous en avoir informé.
 
