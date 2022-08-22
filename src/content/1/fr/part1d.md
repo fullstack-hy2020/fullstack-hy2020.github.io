@@ -9,7 +9,7 @@ lang: fr
 
 ### Une note sur la version React
 
-La version 18 de React est sortie fin mars 2022. Le code du matériel devrait fonctionner tel qu'il est avec la nouvelle version de React. Cependant, certaines bibliothèques peuvent ne pas encore être compatibles avec React 18. Au moment de la rédaction (4 avril), le client Apollo utilisé dans [partie 8](/en/part8) ne fonctionne pas encore avec la version la plus récente de React.
+La version 18 de React est sortie fin mars 2022. Le code du matériel devrait fonctionner tel qu'il est avec la nouvelle version de React. Cependant, certaines bibliothèques peuvent ne pas encore être compatibles avec React 18. Au moment de la rédaction (4 avril), le client Apollo utilisé dans la [partie 8](/en/part8) ne fonctionne pas encore avec la version la plus récente de React.
 
 Si vous vous retrouvez dans une situation où votre application tombe en panne en raison de problèmes de compatibilité de bibliothèque, <i>rétrogradez</i> vers l'ancien React en modifiant le fichier <i>package.json</i> comme suit :
 
@@ -515,7 +515,7 @@ Dev tools affichent l'état des hooks dans l'ordre de leur définition :
 
 ![](../../images/1/11ea.png)
 
-Le premier <i>State</i> contient la valeur de l'état <i>left</i>, le suivant contient la valeur de l'état <i>right</i> et le dernier contient la valeur de l'état < i>état de tous les clics</i>.
+Le premier <i>State</i> contient la valeur de l'état <i>left</i>, le suivant contient la valeur de l'état <i>right</i> et le dernier contient la valeur de l'état <i>état de tous les clics</i>.
 
 ### Règles des Hooks
 
@@ -527,22 +527,22 @@ Pour récapituler, les hooks ne peuvent être appelés que depuis l'intérieur d
 
 ```js
 const App = () => {
-  // these are ok
+  // ceci est ok
   const [age, setAge] = useState(0)
   const [name, setName] = useState('Juha Tauriainen')
 
   if ( age > 10 ) {
-    // this does not work!
+    // ceci ne marche pas!
     const [foobar, setFoobar] = useState(null)
   }
 
   for ( let i = 0; i < age; i++ ) {
-    // also this is not good
+    // toujours pas ok !
     const [rightWay, setRightWay] = useState(false)
   }
 
   const notGood = () => {
-    // and this is also illegal
+    // et ceci est presqu'un péché !
     const [x, setX] = useState(-1000)
   }
 
@@ -1107,7 +1107,7 @@ Vous pouvez utiliser le code ci-dessous comme point de départ pour le fichier <
 import { useState } from 'react'
 
 const App = () => {
-  // save clicks of each button to its own state
+  // enregistrer les clics de chaque bouton dans un état différent
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
