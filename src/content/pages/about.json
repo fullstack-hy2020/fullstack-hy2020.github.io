@@ -192,5 +192,17 @@
         ]
       }
     ]
+  },
+  "fr": {
+    "name": "Général",
+    "intro": [
+      "Ce cours sert d'introduction au développement d'applications Web modernes avec JavaScript. L'accent est mis sur la création d'applications à page unique avec ReactJS qui utilisent des API REST construites avec Node.js. Le cours contient également une section sur GraphQL, une alternative moderne aux API REST.",
+      "Le cours couvre les tests, la configuration et la gestion de l'environnement, ainsi que l'utilisation de MongoDB pour stocker les données de l'application.",
+      "Le cours vaut de 5 à 13 crédits et son contenu est le même que dans le <a href='https://fullstack-hy2020.github.io/'>Full stack course</a> enseigné au <a href ='https://www.helsinki.fi/en/computer-science'>Département d'informatique</a> à l'Université d'Helsinki au printemps 2020. Il existe également un <a href='/osa0/yleista #full-stack-harjoitustyo'>projet</a> qui vaut de 1 à 10 crédits.",
+      "Les partenaires et affiliés du cours incluent <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a> et <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a>. Voir <a href='https://www.youtube.com/watch?v=BZexOyQZMMc&list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>ici pour des conférences</a> sur des sujets liés aux cours donnés par divers experts de nos partenaires et affiliés.",
+      "Les participants doivent avoir de bonnes compétences en programmation, des connaissances de base en programmation Web et en bases de données, et connaître les bases du travail avec le système de contrôle de version Git. Vous devez également faire preuve de persévérance et être capable de résoudre des problèmes de manière indépendante et de rechercher des informations.",
+      "La partie 0 du support de cours détaille plus en détail le contenu et le déroulement du cours. Assurez-vous de lire attentivement le matériel et les instructions.",
+      "Vous pouvez discuter du cours et des sujets connexes dans notre groupe dédié sur Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> et sur Telegram : <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</ un>. Veuillez vous joindre à la conversation !"
+    ]
   }
 }
