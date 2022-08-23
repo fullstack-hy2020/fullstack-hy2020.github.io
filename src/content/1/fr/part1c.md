@@ -164,12 +164,14 @@ Cela signifie qu'au lieu d'affecter l'intégralité de l'objet props dans une va
 ```js
 const Hello = (props) => {
   const { name, age } = props
+  ...
+}
 ```
 
 nous attribuons les valeurs des propriétés directement aux variables en déstructurant l'objet props qui est passé à la fonction du composant en tant que paramètre :
 
 ```js
-const Hello = ({ name, age }) => {
+const Hello = ({ name, age }) => {...}
 ```
 
 ### Re-rendu de la page

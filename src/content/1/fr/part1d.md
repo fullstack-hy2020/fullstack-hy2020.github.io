@@ -1080,7 +1080,7 @@ Dans certaines situations, vous devrez peut-être également exécuter la comman
 rm -rf node_modules/ && npm i
 ```
 
-<h4> 1.6 : unicafé étape1</h4>
+<h4> 1.6 : unicafé, étape1</h4>
 
 Comme la plupart des entreprises, [Unicafe](https://www.unicafe.fi/#/9/4) recueille les commentaires de ses clients. Votre tâche consiste à mettre en place une application Web pour recueillir les commentaires des clients. Il n'y a que trois options pour les commentaires : <i>bon</i>, <i>neutre</i> et <i>mauvais</i>.
 
@@ -1122,13 +1122,13 @@ const App = () => {
 export default App
 ```
 
-<h4>1.7 : unicafé étape2</h4>
+<h4>1.7 : unicafé, étape2</h4>
 
 Développez votre application pour qu'elle affiche plus de statistiques sur les retours collectés : le nombre total de retours collectés, le score moyen (bon : 1, neutre : 0, mauvais : -1) et le pourcentage de retours positifs.
 
 ![](../../images/1/14e.png)
 
-<h4>1.8 : unicafé étape3</h4>
+<h4>1.8 : unicafé, étape3</h4>
 
 Refactorisez votre application afin que l'affichage des statistiques soit extrait dans son propre composant <i>Statistiques</i>. L'état de l'application doit rester dans le composant racine <i>App</i>.
 
@@ -1156,13 +1156,13 @@ const App = () => {
 }
 ```
 
-<h4>1.9 : unicafé étape4</h4>
+<h4>1.9 : unicafé, étape4</h4>
 
 Modifiez votre application pour n'afficher les statistiques qu'une fois les commentaires recueillis.
 
 ![](../../images/1/15e.png)
 
-<h4>1.10 : unicafé étape5</h4>
+<h4>1.10 : unicafé, étape5</h4>
 
 Continuons à refactoriser l'application. Extrayez les deux composants suivants :
 
@@ -1188,7 +1188,7 @@ const Statistics = (props) => {
 
 L'état de l'application doit toujours être conservé dans le composant racine <i>App</i>.
 
-<h4>1.11* : unicafé étape6</h4>
+<h4>1.11* : unicafé, étape6</h4>
 
 Affichez les statistiques dans un [tableau](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics) HTML, afin que votre application ressemble à peu près à ceci :
 
@@ -1204,7 +1204,7 @@ Effectuez ensuite les actions nécessaires pour faire disparaître l'avertisseme
 
 **Assurez-vous qu'à partir de maintenant, vous ne voyez plus aucun avertissement dans votre console !**
 
-<h4>1.12* : anecdotes étape1</h4>
+<h4>1.12* : anecdotes, étape1</h4>
 
 Le monde de l'ingénierie logicielle est rempli d'[anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) qui distillent des vérités intemporelles de notre domaine en de courtes lignes.
 
@@ -1246,7 +1246,7 @@ Votre application terminée pourrait ressembler à ceci :
 
 **ATTENTION** create-react-app transformera automatiquement votre projet en un référentiel git à moins que vous ne créiez votre application dans un référentiel git existant. **Il est fort probable que vous ne vouliez pas que chacun de vos projets soit un référentiel distinct**, il vous suffit donc d'exécuter la commande _rm -rf .git_ à la racine de votre application.
 
-<h4>1.13* : anecdotes étape2</h4>
+<h4>1.13* : anecdotes, étape2</h4>
 
 Développez votre application afin de pouvoir voter pour l'anecdote affichée.
 
@@ -1276,7 +1276,7 @@ copy[2] += 1
 
 L'utilisation d'un tableau pourrait être le choix le plus simple dans ce cas. Une recherche sur Internet vous fournira de nombreux conseils sur la façon de [créer un tableau rempli de zéros d'une longueur souhaitée](https://stackoverflow.com/questions/20222501/how-to-create-a-zero-filled-javascript-tableau-de-longueur-arbitraire/22209781).
 
-<h4>1.14* : anecdotes étape3</h4>
+<h4>1.14* : anecdotes, étape3</h4>
 
 Implémentez maintenant la version finale de l'application qui affiche l'anecdote avec le plus grand nombre de votes :
 
