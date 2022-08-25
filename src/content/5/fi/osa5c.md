@@ -545,7 +545,7 @@ await user.type(inputs[0], 'testing a form...')
 
 Metodi <i>getAllByRole</i>  palauttaa taulukon, ja oikea tekstikenttä on taulukossa ensimmäisenä. Testi on kuitenkin hieman epäilyttävä, sillä se luottaa tekstikenttien järjestykseen.
 
-Syötekentille määritellään usein placehoder-teksti, joka ohjaa käyttäjää kirjoittamaan syötekenttään oikean arvon. Lisätään placeholder lomakkeellemme:
+Syötekentille määritellään usein placeholder-teksti, joka ohjaa käyttäjää kirjoittamaan syötekenttään oikean arvon. Lisätään placeholder lomakkeellemme:
 
 ```js
 const NoteForm = ({ createNote }) => {

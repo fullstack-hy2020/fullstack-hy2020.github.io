@@ -403,7 +403,7 @@ const Login = (props) => {
 
 #### Notification
 
-<!-- The notification displayed on login can be done using the [Alert](https://mui.com/material-ui/react-alert/) component, which is quite similiar to Bootstrap's equivalent component:-->
+<!-- The notification displayed on login can be done using the [Alert](https://mui.com/material-ui/react-alert/) component, which is quite similar to Bootstrap's equivalent component:-->
  登录时显示的通知可以用[Alert](https://mui.com/material-ui/react-alert/)组件来完成，它与Bootstrap's equivalent组件非常相似。
 
 ```js

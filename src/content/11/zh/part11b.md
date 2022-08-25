@@ -299,8 +299,8 @@ jobs:
 <!-- Here we're using a public action [actions/checkout](https://github.com/actions/checkout) and we specify a version (<code>@v3</code>) to avoid potential breaking changes if the action gets updated. The <code>checkout</code> action does what the name implies: it checkouts the project source code from git.-->
  这里我们使用一个公共动作[actions/checkout](https://github.com/actions/checkout)，我们指定了一个版本(<code>@v3</code>)，以避免在动作被更新时可能出现的破坏性变化。<code>checkout</code>动作就像它的名字所暗示的那样：它从git检查项目的源代码。
 
-<!-- Secondly, as the application is written in JavaSript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.-->
- 其次，由于应用是用JavaSript编写的，Node.js必须被设置为能够利用<code>package.json</code>中指定的命令。要设置Node.js，可以使用[actions/setup-node](https://github.com/actions/setup-node) 动作。版本<code>16</code>被选中，因为它是应用在生产环境中使用的版本。
+<!-- Secondly, as the application is written in JavaScript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.-->
+ 其次，由于应用是用JavaScript编写的，Node.js必须被设置为能够利用<code>package.json</code>中指定的命令。要设置Node.js，可以使用[actions/setup-node](https://github.com/actions/setup-node) 动作。版本<code>16</code>被选中，因为它是应用在生产环境中使用的版本。
 
 ```js
 # name and trigger not shown anymore...
@@ -458,7 +458,7 @@ describe('Pokedex', function() {
 <!-- Once you are sure that the pipeline works, write another test that ensures that one can navigate from the main page to the page of a particular Pokemon, e.g. <i>ivysaur</i>. The test does not need to be a complex one, just check that when you navigate a link, the page has some right content, such as the string <i>chlorophyll</i> in the case of <i>ivysaur</i>.-->
  一旦你确定管道工作，写另一个测试，确保人们可以从主页面导航到一个特定的小精灵的页面，例如<i>ivysaur</i>。这个测试不需要很复杂，只需检查当你浏览一个链接时，该页面有一些正确的内容，例如在<i>ivysaur</i>的情况下，字符串<i>chlorophyll</i>。
 
-<!-- **Note** also the Pokemon ablilities are written with lower case letters, the capitalization is done in CSS, so <i>do not</i> search eg. for <i>Chlorophyll</i> but <i>chlorophyll</i>.-->
+<!-- **Note** also the Pokemon abilities are written with lower case letters, the capitalization is done in CSS, so <i>do not</i> search eg. for <i>Chlorophyll</i> but <i>chlorophyll</i>.-->
  **注意**口袋妖怪的能力也是用小写字母写的，大写字母是在CSS中完成的，所以<i>不要</i>搜索例如<i>Chlorophyll</i>，而是<i>chlorophyll</i>。
 
 <!-- **Note2** that you should not try <i>bulbasaur</i>, for some reason the page of that particular Pokemon does not work properly...-->

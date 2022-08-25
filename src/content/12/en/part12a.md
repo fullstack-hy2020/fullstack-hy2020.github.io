@@ -121,7 +121,7 @@ For managing the docker containers, there is also a tool called [Docker Compose]
 
 There are several concepts we need to go over. But we will skip those for now and learn about Docker first! 
 
-Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularily nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.
+Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularly nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.
 
 Let us run the command
 

@@ -491,7 +491,7 @@ services:
       - app // highlight-line
 ```
 
-If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to reslove all DNS names that are referred in the config file:
+If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to resolve all DNS names that are referred in the config file:
 
 ```bash
 http {

@@ -1056,12 +1056,12 @@ npm install --save-dev eslint @typescript-eslint/eslint-plugin @typescript-eslin
 }
 ```
 
-<!-- There are quite a few semicolons missing, but those are easy to add. We also have to solve the ESlint issues conserning the _any_-type:-->
+<!-- There are quite a few semicolons missing, but those are easy to add. We also have to solve the ESlint issues concerning the _any_-type:-->
  少了不少分号，但这些很容易添加。我们还必须解决ESlint中关于_any_类型的问题。
 
 ![](../../images/9/50x.png)
 
-<!-- We could and propably should disable some ESlint rules to get the data from the request body.-->
+<!-- We could and probably should disable some ESlint rules to get the data from the request body.-->
  我们可以而且应该禁用一些ESlint规则来从请求体中获取数据。
 
 <!-- Disabling <i>@typescript-eslint/no-unsafe-assignment</i> for the destructuring assignment is nearly enough:-->
@@ -1178,7 +1178,7 @@ app.post('/calculate', (req, res) => {
 }
 ```
 
-<!-- depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertable to numbers.-->
+<!-- depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertible to numbers.-->
 取决于错误。如果输入值没有正确的类型，即它们不是数字或可转换为数字，则会发生后者。
 
 <!-- In this exercise, you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:-->

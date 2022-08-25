@@ -736,7 +736,7 @@ const App = () => {
 <!-- Our solution has a small problem: a person is added to the cache and also rendered twice since the component _PersonForm_ is also adding it to the cache.-->
  我们的解决方案有一个小问题：一个人被添加到缓存中，也被渲染了两次，因为组件_PersonForm_也在将其添加到缓存中。
 
-<!-- Let us now fix the problem by ensuring that a person is not addded twice in the cache:-->
+<!-- Let us now fix the problem by ensuring that a person is not added twice in the cache:-->
  现在让我们通过确保一个人不会被添加到缓存中两次来解决这个问题。
 
 ```js

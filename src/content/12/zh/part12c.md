@@ -566,7 +566,7 @@ services:
       - app // highlight-line
 ```
 
-<!-- If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to reslove all DNS names that are referred in the config file:-->
+<!-- If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to resolve all DNS names that are referred in the config file:-->
  如果我们不使用<i>depends\_on</i>强制执行启动顺序，Nginx有可能在启动时失败，因为它试图重新爱护配置文件中提到的所有DNS名称。
 
 ```bash

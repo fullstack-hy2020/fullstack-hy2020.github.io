@@ -381,7 +381,7 @@ export default Persons
 </button>
 ```
 
-<!-- This causes the component to re-render itsef. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:-->
+<!-- This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:-->
  这导致组件重新渲染。在渲染时，获取用户详细信息的查询<i>FIND_PERSON</i>被执行，<i>如果变量nameToSearch</i>有一个值。
 
 ```js
@@ -705,7 +705,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-<!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
+<!-- Renderöidään mahdollinen virheilmoitus näytölle -->
 <!-- We can then render the error message on the screen as necessary:-->
  然后我们就可以在屏幕上渲染必要的错误信息。
 

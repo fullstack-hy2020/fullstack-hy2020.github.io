@@ -238,7 +238,7 @@ if: ${{ github.event_name == 'push' }}
 <!-- Modify the configuration above so that each new version is by default a _patch_ bump in the version number, so that by default, the last number is increased.-->
  修改上面的配置，使每个新的版本默认是一个_补丁_版本号的提升，所以默认情况下，最后的数字会被增加。
 
-<!-- Remember that we want only to bump the version when the change happens to the main branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.14](/en/part11/keeping_green#exercises-11-13-11-14) to prevent deployment on pull request releated events.-->
+<!-- Remember that we want only to bump the version when the change happens to the main branch! So add a similar <code>if</code> condition to prevent version bumps on pull request as was done in [Exercise 11.14](/en/part11/keeping_green#exercises-11-13-11-14) to prevent deployment on pull request related events.-->
  记住，我们只想在主分支发生变化时提升版本。因此，添加一个类似的<code>if</code>条件，以防止在pull request上的版本颠簸，就像在[练习11.14](/en/part11/keeping_green#exercises-11-13-11-14)中做的那样，防止在pull request相关的事件上进行部署。
 
 <!-- Complete now the workflow. Do not just add it as another step, but configure it as a separate job that [depends](https://docs.github.com/en/actions/using-workflows/advanced-workflow-features#creating-dependent-jobs) on the job that takes care of linting, testing and deployment. So change your workflow definition as follows:-->
@@ -313,7 +313,7 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v2
-      - name: gihub context
+      - name: github context
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
         run: echo "$GITHUB_CONTEXT"

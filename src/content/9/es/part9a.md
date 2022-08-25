@@ -12,7 +12,7 @@ TypeScript es un lenguaje de programación diseñado para el desarrollo de JavaS
 
 ### Principio fundamental
 
-TypeScript es un superconjunto tipado de JavaScript y, finalmente, se compila en código JavaScript simple. El programador puede incluso decidir la versión del código generado, siempre que sea ECMAScript 3 o más reciente. Que Typecript sea un superconjunto de JavaScript significa que incluye todas las características de JavaScript y sus propias características adicionales. De hecho, todo el código JavaScript existente es TypeScript válido.
+TypeScript es un superconjunto tipado de JavaScript y, finalmente, se compila en código JavaScript simple. El programador puede incluso decidir la versión del código generado, siempre que sea ECMAScript 3 o más reciente. Que Typescript sea un superconjunto de JavaScript significa que incluye todas las características de JavaScript y sus propias características adicionales. De hecho, todo el código JavaScript existente es TypeScript válido.
 
 TypeScript consta de tres partes separadas, pero que se cumplen mutuamente:
 

@@ -415,7 +415,7 @@ app.listen(PORT, () => {
 })
 ```
 
-A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each columm has a type defined, as well as other properties if necessary, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute as well as other configuration information. We also defined that the table does not have frequently used timestamp columns (created\_at and updated\_at).
+A few comments on the code. There is nothing very surprising about the <i>Note</i> definition of the model, each column has a type defined, as well as other properties if necessary, such as whether it is the main key of the table. The second parameter in the model definition contains the <i>sequelize</i> attribute as well as other configuration information. We also defined that the table does not have frequently used timestamp columns (created\_at and updated\_at).
 
 We also defined <i>underscored: true</i>, which means that table names are derived from model names as plural [snake case](https://en.wikipedia.org/wiki/Snake_case) versions. Practically this means that, if the name of the model, as in our case is "Note", then the name of the corresponding table is the plural of the name written in a small initial letter, i.e. <i>notes</i>. If, on the other hand, the name of the model would be "two-part", e.g. <i>StudyGroup</i>, then the name of the table would be <i>study_groups</i>. Instead of automatically inferring table names, Sequelize also allows explicitly defining table names.
 

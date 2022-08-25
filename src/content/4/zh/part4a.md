@@ -697,7 +697,7 @@ const reverse = require('../utils/for_testing').reverse
  Jest有很好的错误信息，让我们打破测试来证明这一点。
 
 ```js
-test('palindrom of react', () => {
+test('palindrome of react', () => {
   const result = reverse('react')
 
   expect(result).toBe('tkaer')

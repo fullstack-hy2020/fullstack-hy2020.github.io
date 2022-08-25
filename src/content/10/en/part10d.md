@@ -120,7 +120,7 @@ npm install --save-dev react-test-renderer@17.0.1 @testing-library/react-native 
 
 **NB:** If you face peer dependency issues, make sure that the react-test-renderer version matches the project's React version in the <em>npm install</em> command above. You can check the React version by running <em>npm list react --depth=0</em>.
 
-If the installation fails due to peer dendency issues, try again using the <em>--legacy-peer-deps</em> flag with the <em>npm install</em> command.
+If the installation fails due to peer dependency issues, try again using the <em>--legacy-peer-deps</em> flag with the <em>npm install</em> command.
 
 To be able to use these matchers we need to extend the Jest's <em>expect</em> object. This can be done by using a global setup file. Create a file <i>setupTests.js</i> in the root directory of your project, that is, the same directory where the <i>package.json</i> file is located. In that file add the following line:
 

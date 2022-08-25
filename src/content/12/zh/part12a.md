@@ -163,7 +163,7 @@ Docker version 20.10.5, build 55c4c88
 <!-- There are several concepts we need to go over. But we will skip those for now and learn about Docker first!-->
  有几个概念我们需要去了解。但我们现在先跳过这些，先了解一下Docker!
 
-<!-- Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularily nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.-->
+<!-- Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularly nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.-->
  让我们从命令<i>docker container run</i>开始，该命令用于在容器中运行镜像。该命令的结构如下。_container run <i>IMAGE-NAME</i>_，我们将告诉Docker从一个镜像中创建一个容器。该命令的一个特别好的特点是，即使要运行的镜像还没有下载到我们的设备上，它也可以运行一个容器。
 
 <!-- Let us run the command-->
@@ -245,7 +245,7 @@ For more examples and ideas, visit:
 <!-- Some of these exercises do not require you to write any code or configurations to a file.-->
  这些练习中有一些不需要你写任何代码或配置到文件中。
 <!-- In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".-->
- 在这些练习中，你应该使用[script](https://man7.org/linux/man-pages/man1/script.1.html)命令来记录你所使用的命令；自己尝试一下，用_script_开始记录，_echo "hello"_产生一些输出，_exit_停止记录。它将你的操作保存在一个名为 "typecript "的文件中。
+ 在这些练习中，你应该使用[script](https://man7.org/linux/man-pages/man1/script.1.html)命令来记录你所使用的命令；自己尝试一下，用_script_开始记录，_echo "hello"_产生一些输出，_exit_停止记录。它将你的操作保存在一个名为 "typescript "的文件中。
 
 <!-- If _script_ does not work, you can just copy-paste all commands you used into a text file.-->
  如果_script_不起作用，你可以把你使用的所有命令复制粘贴到一个文本文件中。

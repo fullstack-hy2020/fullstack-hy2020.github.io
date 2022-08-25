@@ -139,7 +139,7 @@ How to study the course – instructions in a nutshell: 5 cr core course CSM1410
   - Do the online exam in the Submission system. Read more [here](/en/part0/general_info#the-course-exam)
   - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
 
-Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credis, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
+Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
 How to study the course – instructions in a nutshell: other course parts
 
@@ -197,7 +197,7 @@ Note that you have to press the button twice:
 
 ![](../../images/0/button2.png)
 
-When pressed twice you shoud see the following text
+When pressed twice you should see the following text
 
 > <i>University credit registration in progress...</i>
 
@@ -221,7 +221,7 @@ Note that you have to press the button twice:
 
 ![](../../images/0/button2.png)
 
-When pressed twice you shoud see the following text
+When pressed twice you should see the following text
 
 > <i>University credit registration in progress...</i>
 
@@ -229,7 +229,7 @@ When pressed twice you shoud see the following text
 
 You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
 
-When the registration is done, the following text apprears in the submission system
+When the registration is done, the following text appears in the submission system
 
 > <i>University credits registered, see the course page how to get a transcript if you need one</i>
 

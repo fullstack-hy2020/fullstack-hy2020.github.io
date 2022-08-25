@@ -40,7 +40,7 @@ lang: zh
  本课程包含14个章节，其中第一章节的编号为0，以便与过去的迭代一致。一个章节大概需要一个周（平均15-20小时）的学习，但完成课程的速度是十分灵活的。
 
 <!-- Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough know-how of the topics in part <i>n</i>  has been achieved. In pedagogic terms, the course uses [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), and you are only intended to proceed to the next part after doing enough of the exercises of the previous part.-->
-从第<i>n</i>章进入<i>n+1</i>章之前，最好对第<i>n</i>章节的主题有足够的了解。在教学方面，本课程使用[掌握学习法（Matery Learning）](https://en.wikipedia.org/wiki/Mastery_learning)，其精髓就是让你在完成上一章足够的练习之后再进入下一章节。
+从第<i>n</i>章进入<i>n+1</i>章之前，最好对第<i>n</i>章节的主题有足够的了解。在教学方面，本课程使用[掌握学习法（Mastery Learning）](https://en.wikipedia.org/wiki/Mastery_learning)，其精髓就是让你在完成上一章足够的练习之后再进入下一章节。
 
 <!-- In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no similar dependency on previous parts.-->
 在第 1-4 章中，你应该<i>至少</i>做完所有没有标有星号（*）的练习。标有星号的练习虽然计入你的最终成绩，但跳过这些练习并不妨碍你做下一章节的必修练习。第5章节没有标有星号的练习，因为与前几章节没有类似的依赖关系。
@@ -280,7 +280,7 @@ lang: zh
 ![](../../images/0/28b.png)
 
 <!-- If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#sign-up-for-the-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.-->
- 如果你不是赫尔辛基大学的学生，你可以通过[开放大学](/en/part0/general_info#sign-up-for-the-exam)注册课程来获得学号，更多信息见[这里](/en/part0/general_info#wher-do-i-get-my-university of-helsinki-student-number)。
+ 如果你不是赫尔辛基大学的学生，你可以通过[开放大学](/en/part0/general_info#sign-up-for-the-exam)注册课程来获得学号，更多信息见[这里](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number)。
 
 <!-- You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:-->
 当你提交了足够的练习以获得合格的成绩，通过了考试，并通过练习提交系统让我们知道你已经完成了课程，你就会收到你的学分。

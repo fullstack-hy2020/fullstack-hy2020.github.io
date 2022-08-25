@@ -994,7 +994,7 @@ or
 }
 ```
 
-depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertable to numbers.
+depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertible to numbers.
 
 In this exercise, you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:
 

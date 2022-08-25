@@ -344,7 +344,7 @@ When the button <i>show address</i> of a person is pressed, the name of the pers
 </button>
 ```
 
-This causes the component to re-render itsef. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
+This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
 
 ```js
 const result = useQuery(FIND_PERSON, {
@@ -633,7 +633,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-<!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
+<!-- Renderöidään mahdollinen virheilmoitus näytölle -->
 We can then render the error message on the screen as necessary:
 
 ```js

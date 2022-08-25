@@ -631,7 +631,7 @@ Jest expects by default that the names of test files contain <i>.test</i>. In th
 Jest has excellent error messages, let's break the test to demonstrate this:
 
 ```js
-test('palindrom of react', () => {
+test('palindrome of react', () => {
   const result = reverse('react')
 
   expect(result).toBe('tkaer')

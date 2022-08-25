@@ -110,7 +110,7 @@ lang: zh
 <!-- The below assumes that you use the ready-made Heroku deploy action [AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy) that has been developed by the community.-->
  下面假设你使用社区开发的现成的Heroku部署动作[AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy)。
 
-<!-- You need the autorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:-->
+<!-- You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:-->
  你需要你刚创建的用于部署的授权令牌。把它的值传递给GitHub Actions的正确方法是使用仓库的秘密。
 
 ![repo secret](../../images/11/10x.png)

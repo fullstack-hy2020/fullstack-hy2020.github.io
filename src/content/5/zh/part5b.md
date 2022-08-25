@@ -374,7 +374,7 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-<!-- Tilan muuttuja <i>newNote</i> ja sen muutokseta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
+<!-- Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
 <!-- The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form.-->
  <i>newNote</i>状态属性和负责改变它的事件处理程序已经从_App_组件移到负责笔记表单的组件。
 
@@ -929,7 +929,7 @@ export default Togglable
 <!-- You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).-->
  你可以在[这个github仓库](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7)的<i>part5-7</i>分支中找到我们当前应用的全部代码。
 
-<!-- Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overriden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage to that:-->
+<!-- Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overridden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage to that:-->
  注意，create-react-app也有一个[默认的ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app)，我们现在已经覆盖了。[文档](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config)提到可以替换默认值，但并不鼓励这样做。
 <!--  <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.-->
  <i>我们强烈建议扩展基本配置，因为删除它可能会带来难以发现的问题</i>。
