@@ -122,7 +122,7 @@ Onnistunut kirjautuminen palauttaa kirjautuneen käyttäjän tiedot ja tokenin:
 
 Virheellisellä käyttäjätunnuksella tai salasanalla kirjautuessa annetaan asianmukaisella statuskoodilla varustettu virheilmoitus
 
-![[VS coden näkymä kertoo pyynnön epäonnistuneen statuskoodilla 401 Unauthorized. Palvelin myös palauttaa virheilmoituksen (invalid username or password) kertovan objektin](../../images/4/19ea.png)
+![VS coden näkymä kertoo pyynnön epäonnistuneen statuskoodilla 401 Unauthorized. Palvelin myös palauttaa virheilmoituksen (invalid username or password) kertovan objektin](../../images/4/19ea.png)
 
 ### Muistiinpanojen luominen vain kirjautuneille
 
