@@ -857,7 +857,7 @@ Kun klikkaamme komentoa _cy.contains('second note')_ Cypressin [test runnerista]
 Klikkaamalla seuraavaa riviä _.contains('make important')_, nähdään että löydetään nimenomaan 
 <i>second note</i>:a vastaava tärkeyden muutoksen tekevä nappi:
 
-![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, korostuu oikealle valintaa vastaava nappi]](../../images/5/35x.png)
+![Klikatessa vasemmalla olevasta testisteppien listasta komentoa, korostuu oikealle valintaa vastaava nappi](../../images/5/35x.png)
 
 Peräkkäin ketjutettuna toisena oleva <i>contains</i>-komento siis <i>jatkaa</i> hakua ensimmäisen komennon löytämän komponentin sisältä.
 
