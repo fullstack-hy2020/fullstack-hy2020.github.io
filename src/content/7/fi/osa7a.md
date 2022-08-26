@@ -185,7 +185,7 @@ URL:iin perustuen renderöitävät komponentit on sijoitettu [Routes](https://re
 
 Routes saa aikaan sen, että renderöitävä komponentti on se, jonka <i>path</i> vastaa osoiterivin polkua.
 
-### Parametroitu route
+### Parametrisoitu route
 
 Tarkastellaan sitten hieman modifioitua versiota edellisestä esimerkistä. Esimerkin koodi kokonaisuudessaan on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
 
@@ -391,9 +391,9 @@ const App = () => {
 
 Komponentti renderöi myös kokonaan komponentin <i>Router</i> ulkopuolella olevan web-sovelluksille tyypillisen <i>footer</i>-elementin eli sivuston pohjalla olevan osan, joka on näkyvillä riippumatta siitä, mikä komponentti sovelluksen reititetyssä osassa näytetään.
 
-### Parametroitu route revisited
+### Parametrisoitu route revisited
 
-Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina <i>kaikki muistiinpanot</i>, vaikka se näyttää niistä ainoastaan sen, jonka <i>id</i> vastaa URL:n parametroitua osaa:
+Sovelluksessa on eräs hieman ikävä seikka. Komponentti _Note_ saa propseina <i>kaikki muistiinpanot</i>, vaikka se näyttää niistä ainoastaan sen, jonka <i>id</i> vastaa URL:n parametrisoitua osaa:
 
 ```js
 const Note = ({ notes }) => { 
