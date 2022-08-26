@@ -67,7 +67,7 @@ Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin 
 
 Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla Tietojenkäsittelytieteen osaston kursseilla on käytetty relaatiotietokantoja. Melkein kaikissa tämän kurssin osissa käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database). 
 
-Tärkein syy Mongon käytölle kurssilla on se, että Mongon on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien node-sovellusten tekemiseen.
+Tärkein syy Mongon käytölle kurssilla on se, että Mongo on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien node-sovellusten tekemiseen.
 
 Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokantoihin on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
@@ -545,7 +545,7 @@ Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin:
 Toinen vaihtoehto on kertoa ympäristömuuttujan Herokulle arvo komentoriviltä
 
 ```
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:<pasdsword>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 ### Tietokannan käyttö reittien käsittelijöissä
