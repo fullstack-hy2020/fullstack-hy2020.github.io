@@ -758,6 +758,8 @@ we would get the following error:
 
 Again, the last line of the error message is the most helpful one. Let's undo this undesired modification.
 
+\* Note that if you make the comment field optional (using the <i>?</i> operator), everything will work fine.
+
 Utility types include many handy tools, and it is definitely worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
 Finally, we can complete the route which returns all diary entries:
