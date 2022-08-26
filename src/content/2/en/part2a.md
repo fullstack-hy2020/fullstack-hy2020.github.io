@@ -245,7 +245,7 @@ React uses the key attributes of objects in an array to determine how to update 
 
 ### Map
 
-Understanding how the array method, [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course. 
+Understanding how the array method [`map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course. 
 
 The application contains an array called _notes_:
 
