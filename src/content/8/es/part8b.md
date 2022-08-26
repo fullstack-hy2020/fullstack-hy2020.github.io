@@ -629,7 +629,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-<!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
+<!-- Renderöidään mahdollinen virheilmoitus näytölle -->
 Entonces podemos mostrar el mensaje de error en la pantalla según sea necesario
 
 ```js

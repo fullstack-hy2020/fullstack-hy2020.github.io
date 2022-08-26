@@ -74,7 +74,7 @@ Extend the workflow with a step to deploy your application to Heroku.
 
 The below assumes that you use the ready-made Heroku deploy action [AkhileshNS/heroku-deploy](https://github.com/AkhileshNS/heroku-deploy) that has been developed by the community.
 
-You need the autorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:
+You need the authorization token that you just created for the deployment. The proper way to pass it's value to GitHub Actions is to use repository secrets:
 
 ![repo secret](../../images/11/10x.png)
 

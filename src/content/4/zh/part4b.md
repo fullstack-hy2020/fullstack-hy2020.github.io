@@ -1312,7 +1312,7 @@ describe('addition of a new note', () => {
     )
   })
 
-  test('fails with status code 400 if data invaild', async () => {
+  test('fails with status code 400 if data invalid', async () => {
     const newNote = {
       important: true
     }

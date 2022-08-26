@@ -561,7 +561,7 @@ Jest espera por defecto que los nombres de los archivos de prueba contengan <i>.
 Jest tiene excelentes mensajes de error, rompamos la prueba para demostrar esto:
 
 ```js
-test('palindrom of react', () => {
+test('palindrome of react', () => {
   const result = palindrome('react')
 
   expect(result).toBe('tkaer')

@@ -615,7 +615,7 @@ await user.type(inputs[0], 'testing a form...' )
 方法<i>getAllByRole</i>现在返回一个数组，右边的输入栏是数组的第一个元素。然而，这种方法有点可疑，因为它依赖于输入字段的顺序。
 
 
-<!-- Quite often input fileds have a <i>placehoder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:-->
+<!-- Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:-->
  很多时候，输入文件都有一个<i>占位符</i>文本，提示用户期待什么样的输入。让我们在我们的表单中添加一个占位符。
 
 ```js
@@ -759,7 +759,7 @@ const element = screen.getByText(
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
-<!-- It is important to notice that unlike the othet _ByText_ commands, _findByText_ returns a promise!-->
+<!-- It is important to notice that unlike the other _ByText_ commands, _findByText_ returns a promise!-->
  需要注意的是，与其他的_ByText_命令不同，_findByText_会返回一个承诺!
 
 <!-- There are situation where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.-->

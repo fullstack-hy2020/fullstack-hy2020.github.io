@@ -950,7 +950,7 @@ services:
 <!-- Check that the data is not persisted by default: after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_ the counter value is reset to 0.-->
  检查数据是否默认不被持久化：在运行_docker-compose -f docker-compose.dev.yml down_和_docker-compose -f docker-compose.dev.yml up_之后，计数器值被重置为0。
 
-<!-- Then create a volume for Redis data (by mofifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.-->
- 然后为Redis数据创建一个卷（通过mofifying <i>todo-app/todo-backend/docker-compose.dev.yml <i>），并确保数据在运行_docker-compose -f docker-compose.dev.yml down_和_docker-compose -f docker-compose.dev.yml up_之后仍然存在。
+<!-- Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.-->
+ 然后为Redis数据创建一个卷（通过modifying <i>todo-app/todo-backend/docker-compose.dev.yml <i>），并确保数据在运行_docker-compose -f docker-compose.dev.yml down_和_docker-compose -f docker-compose.dev.yml up_之后仍然存在。
 
 </div>

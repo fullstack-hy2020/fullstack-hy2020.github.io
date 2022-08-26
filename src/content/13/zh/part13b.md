@@ -62,7 +62,7 @@ const start = async () => {
 start()
 ```
 
-<!-- Starting the application is slightly different from what we have seen before, because we want to make sure that the dabase connection is established successfully before the actual startup.-->
+<!-- Starting the application is slightly different from what we have seen before, because we want to make sure that the database connection is established successfully before the actual startup.-->
  启动应用与我们之前看到的略有不同，因为我们要确保在实际启动前成功建立数据库连接。
 
 <!-- The file <i>util/db.js</i> contains the code to initialize the database:-->
@@ -277,7 +277,7 @@ router.put('/:id', noteFinder, async (req, res) => {
 #### Task 13.7.
 
 <!-- Centralize the application error handling in middleware as in [part 3](/en/part3/saving_data_to_mongo_db#moving-error-handling-into-middleware). You can also enable middleware [express-async-errors](https://github.com/davidbanham/express-async-errors) as we did in [part 4](/en/part4/testing_the_backend#eliminating-the-try-catch).-->
- 在中间件中集中处理应用的错误，如[第3章节](/en/part3/saving_data_to_mongo_db#moving-error-handling-into-middleware)。你也可以像我们在[第4章节](/en/part4/testing_the_backend#eliminating-thetry-catch)中那样，启用中间件[express-async-errors](https://github.com/davidbanham/express-async-errors)。
+ 在中间件中集中处理应用的错误，如[第3章节](/en/part3/saving_data_to_mongo_db#moving-error-handling-into-middleware)。你也可以像我们在[第4章节](/en/part4/testing_the_backend#eliminating-the-try-catch)中那样，启用中间件[express-async-errors](https://github.com/davidbanham/express-async-errors)。
 
 <!-- The data returned in the context of an error message is not very important.-->
 在错误信息的上下文中返回的数据并不十分重要。
@@ -669,7 +669,7 @@ const user = await User.findByPk(req.decodedToken.id)
 const note = await Note.create({ ...req.body, userId: user.id, date: new Date() })
 ```
 
-<!-- The reason for this is that we specificed in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:-->
+<!-- The reason for this is that we specified in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:-->
  原因是我们在文件<i>models/index.js</i>中具体说明了用户和笔记之间存在一对多的联系。
 
 ```js

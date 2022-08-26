@@ -551,7 +551,7 @@ rollbackMigration()
 <!-- Delete all tables from your application's database.-->
 从你的应用的数据库中删除所有表。
 
-<!-- Make a migration that intializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.-->
+<!-- Make a migration that initializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.-->
 进行迁移，使数据库初始化。为两个表添加<i>created\_at</i>和<i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps)。请记住，你将不得不在迁移中自己添加它们。
 
 <!-- **NOTE:** be sure to remove the commands <i>User.sync()</i> and <i>Blog.sync()</i>, which synchronizes the models' schemas from your code, otherwise your migrations will fail.-->
@@ -693,7 +693,7 @@ module.exports = Membership
  所以我们给连接表起了一个能很好描述它的名字，<i>membership</i>。连接表并不总是有一个相关的名字，在这种情况下，连接表的名字可以是被连接的表的名字的组合，例如，<i>user/_teams</i>可以适合我们的情况。
 
 <!-- We make a small addition to the <i>models/index.js</i> file to connect teams and users at the code level using the [belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3) method.-->
- 我们对<i>models/index.js</i>文件做了一个小小的补充，使用[belivesToMany](https://sequelize.org/master/manual/assocs.html#implementation-3)方法在代码层连接团队和用户。
+ 我们对<i>models/index.js</i>文件做了一个小小的补充，使用[belongsToMany](https://sequelize.org/master/manual/assocs.html#implementation-3)方法在代码层连接团队和用户。
 
 ```js
 const Note = require('./note')
@@ -1627,8 +1627,8 @@ npx sequelize-cli model:generate --name User --attributes name:string,username:s
 <!-- Keep in mind that actions requiring login should not be successful with an "expired token", i.e. with the same token after logging out.-->
  请记住，需要登录的操作不应该用 "过期的令牌 "成功，也就是说，在注销后用同样的令牌。
 
-<!-- You may also choose to use some purpose-built npm library to handle sesssions.-->
- 你也可以选择使用一些特制的npm库来处理sesssions。
+<!-- You may also choose to use some purpose-built npm library to handle sessions.-->
+ 你也可以选择使用一些特制的npm库来处理sessions。
 
 <!-- Make the database changes required for this task using migrations.-->
  使用迁移来进行这项任务所需的数据库修改。

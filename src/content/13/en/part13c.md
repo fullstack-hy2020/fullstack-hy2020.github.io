@@ -513,7 +513,7 @@ The current code for the application is in its entirety on [GitHub](https://gith
 
 Delete all tables from your application's database.
 
-Make a migration that intializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.
+Make a migration that initializes the database. Add <i>created\_at</i> and <i>updated\_at</i> [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) for both tables. Keep in mind that you will have to add them in the migration yourself.
 
 **NOTE:** be sure to remove the commands <i>User.sync()</i> and <i>Blog.sync()</i>, which synchronizes the models' schemas from your code, otherwise your migrations will fail.
 
@@ -1506,7 +1506,7 @@ You will probably need at least the following for the implementation
 
 Keep in mind that actions requiring login should not be successful with an "expired token", i.e. with the same token after logging out.
 
-You may also choose to use some purpose-built npm library to handle sesssions.
+You may also choose to use some purpose-built npm library to handle sessions.
 
 Make the database changes required for this task using migrations.
 

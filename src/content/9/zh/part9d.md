@@ -718,7 +718,7 @@ type DiaryEntry = {
 <!-- Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far.-->
  让我们更仔细地研究一下状态处理，因为很多东西似乎是在引擎盖下发生的，它与迄今为止课程中使用的方法有一些不同。
 
-<!-- The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similiar libraries for the state management.-->
+<!-- The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similar libraries for the state management.-->
  状态管理是使用React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) 和 [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)建立的。这是一个很好的设置，因为我们知道这个应用将是相当小的，我们不想使用<i>redux</i>或其他类似的库来进行状态管理。
 <!-- There are a lot of good material, for example  [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe), about this approach to state management.-->
  有很多好的材料，例如[这篇文章](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe)，关于这种状态管理的方法。
@@ -803,7 +803,7 @@ export type Action =
     };
 ```
 
-<!-- The reducer looks quite similiar to the ones we wrote in [part 6](/en/part6) before we started to use the Redux Toolkit. It changes the state for each type of action:-->
+<!-- The reducer looks quite similar to the ones we wrote in [part 6](/en/part6) before we started to use the Redux Toolkit. It changes the state for each type of action:-->
  减速器看起来和我们在开始使用Redux工具包之前在[第6章节](/en/part6)写的那些很相似。它为每种类型的动作改变状态。
 
 ```js
@@ -1455,7 +1455,7 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
  现在，回到<i>AddPatientForm.tsx</i>中的实际表单组件。
 <!-- The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: <i>initialValues</i> and <i>onSubmit</i>. The role of the props is quite self-explanatory.-->
  函数组件<i>AddPatientForm</i>渲染了一个[Formik组件](https://jaredpalmer.com/formik/docs/api/formik)。Formik组件是一个包装器，它需要两个props。<i>initialValues</i>和<i>onSubmit</i>。这些prop的作用是不言而喻的。
-<!-- The Formik wrapper keeps a track of your form's state, and then exposes it and a few resuable methods and event handlers to your form via props.-->
+<!-- The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.-->
  Formik包装器会跟踪你的表单的状态，然后通过props将它和一些可接受的方法和事件处理程序暴露给你的表单。
 
 <!-- We are also using an optional <i>validate</i> prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component.-->

@@ -449,7 +449,7 @@ Finalmente, echemos un vistazo a la tecnología del mañana (o en realidad ya ho
 
 A veces, el [tipado dinámico](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) de variables de JavaScript crea errores molestos. En la parte 5 hablamos brevemente sobre [PropTypes](/en/part5/props_children_and_proptypes#prop-types): un mecanismo que permite hacer cumplir la verificación de tipos para los props pasados ​​a los componentes de React.
 
-Últimamente ha habido un aumento notable en el interés por la [verificación de tipos estáticos](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Por el momento, la versión escrita más popular de Javascript es [Typecript](https://www.typescriptlang.org/), que ha sido desarrollado por Microsoft. Typescript se cubre en la [parte 9](/es/part9).
+Últimamente ha habido un aumento notable en el interés por la [verificación de tipos estáticos](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Por el momento, la versión escrita más popular de Javascript es [Typescript](https://www.typescriptlang.org/), que ha sido desarrollado por Microsoft. Typescript se cubre en la [parte 9](/es/part9).
 
 #### Renderización del lado del servidor, aplicaciones isomórficas y código universal
 

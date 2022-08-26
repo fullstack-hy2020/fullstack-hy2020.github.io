@@ -686,7 +686,7 @@ export type Action =
     };
 ```
 
-The reducer looks quite similiar to the ones we wrote in [part 6](/en/part6/many_reducers#combined-reducers) before we started to use the Redux Toolkit. It changes the state for each type of action:
+The reducer looks quite similar to the ones we wrote in [part 6](/en/part6/many_reducers#combined-reducers) before we started to use the Redux Toolkit. It changes the state for each type of action:
 
 ```js
 export const reducer = (state: State, action: Action): State => {
@@ -1239,7 +1239,7 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
 
 Now, back to the  actual form component in <i>AddPatientForm.tsx</i>.
 The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: <i>initialValues</i> and <i>onSubmit</i>. The role of the props is quite self-explanatory.
-The Formik wrapper keeps a track of your form's state, and then exposes it and a few resuable methods and event handlers to your form via props.
+The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.
 
 We are also using an optional <i>validate</i> prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component. 
  

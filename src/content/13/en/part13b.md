@@ -59,7 +59,7 @@ const start = async () => {
 start()
 ```
 
-Starting the application is slightly different from what we have seen before, because we want to make sure that the dabase connection is established successfully before the actual startup.
+Starting the application is slightly different from what we have seen before, because we want to make sure that the database connection is established successfully before the actual startup.
 
 The file <i>util/db.js</i> contains the code to initialize the database:
 
@@ -622,7 +622,7 @@ const user = await User.findByPk(req.decodedToken.id)
 const note = await Note.create({ ...req.body, userId: user.id, date: new Date() })
 ```
 
-The reason for this is that we specificed in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:
+The reason for this is that we specified in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:
 
 ```js
 const Note = require('./note')
