@@ -523,6 +523,8 @@ It is highly recommended to immediately read [A re-introduction to JavaScript (J
 If you wish to get to know JavaScript deeply there is a great free book series on the Internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
 
 Another great resource for learning JavaScript is [javascript.info](https://javascript.info).
+  
+The free and highly engaging book Eloquent JavaScript  https://eloquentjavascript.net.  Takes you from the basics to interesting stuff quickly, a mixture of theory projects and exercises, covers general programming theory as well as the JavaScript language.
 
 [egghead.io](https://egghead.io) has plenty of quality screencasts on JavaScript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall.
 
