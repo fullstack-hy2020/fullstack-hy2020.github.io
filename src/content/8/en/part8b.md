@@ -572,7 +572,7 @@ At the moment, queries and components are defined in the same place in our code.
 Let's separate the query definitions into their own file <i>queries.js</i>:
 
 ```js 
-import { gql  } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 export const ALL_PERSONS = gql`
   query {
