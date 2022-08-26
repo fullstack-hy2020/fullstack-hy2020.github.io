@@ -90,7 +90,7 @@ func((result) => {
 ```
 
 First, we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) called <i>CallsFunction</i>.
-CallsFunction is a function type with one parameter: <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameter and returns [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) value.  As we will learn later in this part, <i>any</i> is a kind of "wildcard" type that can represent any type. Also, CallsFunction returns [void](https://www.typescriptlang.org/docs/handbook/basic-types.html#void) type.
+CallsFunction is a function type with one parameter: <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameter and returns [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) value.  As we will learn later in this part, <i>any</i> is a kind of "wildcard" type that can represent any type. Also, CallsFunction returns [void](https://www.typescriptlang.org/docs/handbook/2/functions.html#void) type.
 
 Next, we define the function <i>func</i> of type <i>CallsFunction</i>. From the function's type, we can infer that its parameter function cb will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, which will cause an error in TypeScript. 
 
@@ -169,11 +169,11 @@ Otherwise, you might want to start off by getting acquainted with TypeScript's o
 
 #### Sometimes, type inference needs assistance
 
-<!-- The type inference in TypeScript is pretty good but not quite perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that this kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting and type guards. Using them you are basically giving your word to the compiler that the value really is of the type that you declare. You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) and [Type Guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types). -->
+<!-- The type inference in TypeScript is pretty good but not quite perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that this kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting and type guards. Using them you are basically giving your word to the compiler that the value really is of the type that you declare. You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) and [Type Guards](https://www.typescriptlang.org/docs/handbook/2/narrowing.html). -->
 The type inference in TypeScript is pretty good but not quite perfect.
 Sometimes, you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that this kind of usage is not allowed. In these cases, you might need to help the compiler out by doing something like an "extra" type check, but be careful with type casting and type guards.
 Using type casting or type guards, you are basically giving your word to the compiler that the value really is of the type that you declare.
-You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) and [Type Guards](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-guards-and-differentiating-types).
+You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) and [Type Guards](https://www.typescriptlang.org/docs/handbook/2/narrowing.html).
 
 
 #### Mysterious type errors
