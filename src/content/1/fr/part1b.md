@@ -110,7 +110,7 @@ console.log(m2)
 // [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] est affiché
 ```
 
-Ici, un tableau rempli de valeurs entières est transformé en un tableau contenant des chaînes HTML à l'aide de la méthode map. Dans la [partie 2](/en/part2) de ce cours, nous verrons que map est utilisée assez fréquemment dans React.
+Ici, un tableau rempli de valeurs entières est transformé en un tableau contenant des chaînes HTML à l'aide de la méthode map. Dans la [partie 2](/fr/part2) de ce cours, nous verrons que map est utilisée assez fréquemment dans React.
 
 Les éléments individuels d'un tableau sont faciles à affecter à des variables à l'aide de l'[affectation par déstructuration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
 
@@ -259,7 +259,7 @@ const Header = (props) => {
 }
 ```
 
-  <h4>1.3 : informations sur le cours étape 3</h4>
+  <h4>1.3 : courseinfo, étape 3</h4>
 
 Passons à l'utilisation d'objets dans notre application. Modifiez les définitions des variables du composant <i>App</i> comme suit et refactorisez également l'application pour qu'elle fonctionne toujours :
 
@@ -287,7 +287,7 @@ const App = () => {
 }
 ```
 
-  <h4>1.4 : informations sur le cours étape 4</h4>
+  <h4>1.4 : courseinfo, étape 4</h4>
 
 Et puis placez les objets dans un tableau. Modifiez les définitions de variable de <i>App</i> sous la forme suivante et modifiez les autres parties de l'application en conséquence :
 
@@ -335,7 +335,7 @@ const App = () => {
 }
 ```
 
-  <h4>1.5 : informations sur le cours, étape 5</h4>
+  <h4>1.5 : courseinfo, étape 5</h4>
 
 Poussons les changements un peu plus loin. Modifiez le cours et ses parties en un seul objet JavaScript. Réparez tout ce qui casse.
 

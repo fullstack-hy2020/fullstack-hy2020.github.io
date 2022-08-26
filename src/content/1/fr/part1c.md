@@ -164,12 +164,14 @@ Cela signifie qu'au lieu d'affecter l'intégralité de l'objet props dans une va
 ```js
 const Hello = (props) => {
   const { name, age } = props
+  ...
+}
 ```
 
 nous attribuons les valeurs des propriétés directement aux variables en déstructurant l'objet props qui est passé à la fonction du composant en tant que paramètre :
 
 ```js
-const Hello = ({ name, age }) => {
+const Hello = ({ name, age }) => {...}
 ```
 
 ### Re-rendu de la page
@@ -366,7 +368,7 @@ Il est facile de suivre les appels effectués à la fonction de rendu du composa
 
 ### Gestion des événements
 
-Nous avons déjà mentionné les <i>gestionnaires d'événements</i> qui sont enregistrés pour être appelés lorsque des événements spécifiques se produisent plusieurs fois dans [part 0](/en/part0). Par exemple. l'interaction d'un utilisateur avec les différents éléments d'une page Web peut provoquer le déclenchement d'un ensemble de différents types d'événements.
+Nous avons déjà mentionné les <i>gestionnaires d'événements</i> qui sont enregistrés pour être appelés lorsque des événements spécifiques se produisent plusieurs fois dans la [partie 0](/fr/part0). Par exemple. l'interaction d'un utilisateur avec les différents éléments d'une page Web peut provoquer le déclenchement d'un ensemble de différents types d'événements.
 
 Modifions l'application pour que l'augmentation du compteur se produise lorsqu'un utilisateur clique sur un bouton, ce qui est implémenté avec l'élément [bouton](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button).
 
@@ -449,7 +451,7 @@ const App = () => {
 }
 ```
 
-Notre application est maintenant prête !
+Notre application est fin prête !
 
 
 ### Le gestionnaire d'événements est une fonction
@@ -654,7 +656,7 @@ const Display = (props) => {
 ```
 
 Le composant utilise uniquement le champ _counter_ de ses <i>props</i>.
-Cela signifie que nous pouvons simplifier le composant en utilisant la [déstructuration](/en/part1/component_state_event_handlers#destructuring), comme ceci :
+Cela signifie que nous pouvons simplifier le composant en utilisant la [déstructuration](/fr/part1/etat_des_composants_gestionnaires_devenements#destructuration), comme ceci :
 
 ```js
 const Display = ({ counter }) => {

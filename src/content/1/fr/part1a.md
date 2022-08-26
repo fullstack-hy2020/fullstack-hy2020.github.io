@@ -9,7 +9,7 @@ lang: fr
 
 Nous allons maintenant commencer à nous familiariser avec le sujet probablement le plus important de ce cours, à savoir la bibliothèque [React](https://reactjs.org/). Commençons par créer une application React simple et apprenons à connaître les concepts de base de React.
 
-Le moyen le plus simple de démarrer est de loin d'utiliser un outil appelé [create-react-app](https://github.com/facebook/create-react-app). Il est possible (mais pas nécessaire) d'installer <i>create-react-app</i> sur votre machine si l'outil <i>npm</i> qui a été installé avec Node a un numéro de version d'au moins < i>5.3</i>.
+Le moyen le plus simple de démarrer est de loin d'utiliser un outil appelé [create-react-app](https://github.com/facebook/create-react-app). Il est possible (mais pas nécessaire) d'installer <i>create-react-app</i> sur votre machine si l'outil <i>npm</i> qui a été installé avec Node a un numéro de version d'au moins <i>5.3</i>.
 
 Créons une application appelée <i>part1</i> et naviguons jusqu'à son répertoire.
 
@@ -72,7 +72,7 @@ ReactDOM.render(<App />, document.getElementById("root"))
 
 Vous devrez très probablement faire de même pour vos autres projets.
 
-Voir [ici](/en/part1/a_more_complex_state_debugging_react_apps/#a-note-on-react-version) pour en savoir plus sur les différences de version.
+Voir [ici](/fr/part1/plongez_dans_le_debogage_dapplications_react#une-note-sur-la-version-react) pour en savoir plus sur les différences de version.
 
 ### Composant
 
@@ -437,7 +437,7 @@ Les exercices sont soumis **une partie à la fois**. Lorsque vous avez soumis le
 
 Notez que dans cette partie, il y a plus d'exercices que ceux trouvés ci-dessous. <i>Ne soumettez pas votre travail</i> tant que vous n'avez pas terminé tous les exercices que vous souhaitez soumettre pour la partie correspondante.
   
- <h4>1.1 : informations sur le cours, étape 1</h4>
+ <h4>1.1 : courseinfo, étape 1</h4>
 
 <i>L'application sur laquelle nous allons commencer à travailler dans cet exercice sera développée plus en détail dans quelques-uns des exercices suivants. Dans cette série d'exercices et d'autres à venir dans ce cours, il suffit de soumettre uniquement l'état final de l'application. Si vous le souhaitez, vous pouvez également créer un commit pour chaque exercice de la série, mais cela est facultatif.</i>
 
@@ -484,7 +484,7 @@ const App = () => {
 export default App
 ```
 
-et supprimer les fichiers supplémentaires (App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js)).
+et supprimer les fichiers supplémentaires (App.css, App.test.js, index.css, logo.svg, setupTests.js, reportWebVitals.js).
 
 Malheureusement, toute l'application se trouve dans le même composant. Refactorisez le code afin qu'il se compose de trois nouveaux composants : <i>Header</i>, <i>Content</i> et <i>Total</i>. Toutes les données résident toujours dans le composant <i>App</i>, qui transmet les données nécessaires à chaque composant à l'aide des <i>props</i>. <i>Header</i> se charge de restituer le nom du cours, <i>Content</i> restitue les parties et leur nombre d'exercices et <i>Total</i> restitue le nombre total d'exercices.
 
@@ -508,7 +508,7 @@ const App = () => {
 
 **ATTENTION** create-react-app transforme automatiquement le projet en référentiel git, sauf si l'application est créée dans un référentiel déjà existant. Très probablement, vous **ne voulez pas** que le projet devienne un référentiel, alors exécutez la commande _rm -rf .git_ à la racine du projet.
 
-<h4>1.2 : informations sur le cours, étape 2</h4>
+<h4>1.2 : courseinfo, étape 2</h4>
 
 Refactorisez le composant <i>Content</i> afin qu'il n'affiche pas les noms des parties ou leur nombre d'exercices par lui-même. Au lieu de cela, il ne rend que trois composants <i>Part</i> dont chacun rend le nom et le nombre d'exercices d'une partie.
 
