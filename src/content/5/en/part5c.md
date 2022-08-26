@@ -105,7 +105,7 @@ Personally, I do not like this way of storing tests and application code in the 
 
 ### Searching for content in a component
 
-The react-testing-library package offers many different ways of investigating the content of the component being tested. Actually the expect in our test is not needed at all
+The react-testing-library package offers many different ways of investigating the content of the component being tested. Actually the _expect_ in our test is not needed at all
 
 
 ```js
