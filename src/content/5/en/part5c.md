@@ -19,7 +19,7 @@ Let's install the library with the command:
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-We installed also [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) that provides some nice Jest-related helper methods.
+We also installed [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) that provides some nice Jest-related helper methods.
 
 Let's first write tests for the component that is responsible for rendering a note:
 
@@ -570,7 +570,7 @@ const NoteForm = ({ createNote }) => {
         <input
           value={newNote}
           onChange={handleChange}
-          placeholder='write here note content' // highlight-line 
+          placeholder='write note content here' // highlight-line 
         />
         <input
           value={...}
