@@ -91,6 +91,11 @@ If you want to run tests "normally", you can do so with the command:
 CI=true npm test
 ```
 
+For Windows (PowerShell) users
+```js
+$env:CI=$true; npm test
+```
+
 **NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
 Instructions for installing Watchman on different operating systems can be found on the official Watchman website: https://facebook.github.io/watchman/
