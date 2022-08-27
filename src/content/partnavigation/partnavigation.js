@@ -321,6 +321,11 @@ module.exports = {
       b: 'Construir y configurar entornos',
       c: 'Conceptos básicos de orquestación',
     },
+    '13': {
+      a: 'Uso de bases de datos relacionales con Sequelize',
+      b: 'Unir tablas y consultas',
+      c: 'Migraciones, relaciones de muchos-a-muchos',
+    },
   },
   fr: {
     '0': {

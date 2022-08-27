@@ -111,7 +111,7 @@ $ docker run -p 3123:3000 express-server
 Tue, 29 Jun 2021 10:55:10 GMT playground:server Listening on port 3000
 ```
 
-> Si el tuyo no funciona, pasa a la siguiente sección. Hay una explicación de por qué puede no funcionar incluso si siguió los pasos correctamente.
+> Si el tuyo no funciona, pasa a la siguiente sección. Hay una explicación de por qué no puede funcionar incluso si siguió los pasos correctamente.
 
 ¡La aplicación ya se está ejecutando! Probémoslo enviando una solicitud GET a [http://localhost:3123/](http://localhost:3123/).
 

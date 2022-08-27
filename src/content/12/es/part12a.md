@@ -7,25 +7,25 @@ lang: es
 
 <div class="content">
 
-El desarrollo de software incluye un amplio ciclo, desde el imaginado del software hasta la programación y la liberación al usuario final e incluso su mantenimiento. Esta parte será una introducción a los contenedores, una herramienta moderna utilizada en las partes finales del ciclo de desarrollo de software.
+El desarrollo de software incluye un amplio ciclo, desde el imaginado software hasta la programación y la liberación al usuario final e incluso su mantenimiento. Esta parte será una introducción a los contenedores, una herramienta moderna utilizada en las partes finales del ciclo de desarrollo de software.
 
-Los contenedores encapsulan tu aplicacion en un solo paquete. Este paquete entonces incluirá todas las dependencias con la aplicación. Como resultado cada contenedor puede correr aislado de otros contenedores.
+Los contenedores encapsulan tu aplicación en un solo paquete. Este paquete entonces incluirá todas las dependencias con la aplicación. Como resultado cada contenedor puede correr aislado de otros contenedores.
 
-Los contenedores previenen que la aplicacion pueda acceder a los archivos y recursos del dispositivo. Los desarrolladores pueden establecer permisos a las aplicaciones para que accedan a los archivos y también especificar recursos disponibles. Más preciso, los contenedores son virtualizaciones a nivels de Sistema Operativo ( OS-level virtualization ). La comparación mas cercana es con una maquina virtual (VM). VMs son utilizadas para correr multiples sistemas operativos en una misma máquina física. Ellas tiene que ejecutar todo el sistema operativo, mientras que los contenedores ejecutan el software utilizando el sistema operativo del host. La diferencia resultante entre las máquinas virtuales y los contenedores es que apenas hay gastos generales cuando se ejecutan contenedores; solo necesitan ejecutar un solo proceso.
+Los contenedores previenen que la aplicación pueda acceder a los archivos y recursos del dispositivo. Los desarrolladores pueden establecer permisos a las aplicaciones para que accedan a los archivos y también especificar recursos disponibles. Más preciso, los contenedores son virtualizaciones a nivels de Sistema Operativo ( OS-level virtualization ). La comparación más cercana es con una máquina virtual (VM). VMs son utilizadas para correr múltiples sistemas operativos en una misma máquina física. Ellas tienen que ejecutar todo el sistema operativo, mientras que los contenedores ejecutan el software utilizando el sistema operativo del host. La diferencia resultante entre las máquinas virtuales y los contenedores es que apenas hay gastos generales cuando se ejecutan contenedores; solo necesitan ejecutar un solo proceso.
 
-Como los contenedores son relativamente ligeros, al menos comparados con las maquinas virtuales, estos pueden ser escalados con rápidez. Y como aislan el software que ejecutan dentro, permiten que el software se ejecute de manera identica en cualquier ambiente. Por ello, son la opción preferida en cualquier entorno basado en la nube o aplicación con más de un puñado de usuarios.
+Como los contenedores son relativamente ligeros, al menos comparados con las máquinas virtuales, estos pueden ser escalados con rápidez. Y como aislan el software que ejecutan dentro, permiten que el software se ejecute de manera idéntica en cualquier ambiente. Por ello, son la opción preferida en cualquier entorno basado en la nube o aplicación con más de un puñado de usuarios.
 
-Servicios como AWS, Google Cloudy Microsoft Azure soportan contenedores en diferentes formas. Estos incluyen a AWS Fargate y Google Cloud Run, ambos permiten ejecutar los contenedores sin servidor (serverless) - donde el contenedor de la aplicacon ni siquiera necesita estar ejecutandose si no es utilizado. Tambien puedes instalar un entorno de ejecución de contenedores en la mayoría de las computadoros y correrlos tú mismo- incluyendo tu propia máquina.
+Servicios como AWS, Google Cloudy Microsoft Azure soportan contenedores en diferentes formas. Estos incluyen a AWS Fargate y Google Cloud Run, ambos permiten ejecutar los contenedores sin servidor (serverless) - donde el contenedor de la aplicación ni siquiera necesita estar ejecutándose si no es utilizado. También puedes instalar un entorno de ejecución de contenedores en la mayoría de las computadoros y correrlos tú mismo- incluyendo tu propia máquina.
 
 Por lo que los contenedores son utilizados en ambientes en la nube e incluso durante el desarrollo. Cuáles son los beneficios de utilizar contenedores? He aquí dos escenarios comunes:
 
-<i>Escenario 1: Estas desarrollando una aplicación nueva que necesita ejecutarse en la misma maquina que una aplicación antigua (legacy). Ambas requieren diferentes versiones de Node instalada.</i>
+<i>Escenario 1: Estás desarrollando una aplicación nueva que necesita ejecutarse en la misma máquina que una aplicación antigua (legacy). Ambas requieren diferentes versiones de Node instalada.</i>
 
-Tu probablemente utilices nvm, maquinas virtuales o magia negra para lograr ejecutarlas al mismo tiempo. Sin embargo los contenedores son una excelente solucion ya que puedes ejecutar ambas aplicaciones en sus respectivos contenedores. Ellas estan aisladas una de otra y no interfieren.
+Tú probablemente utilices nvm, máquinas virtuales o magia negra para lograr ejecutarlas al mismo tiempo. Sin embargo los contenedores son una excelente solución ya que puedes ejecutar ambas aplicaciones en sus respectivos contenedores. Ellas están aisladas una de otra y no interfieren.
 
 <i>Escenario 2: Tu aplicación se ejecuta en tu ordenador. Necesitas mover la aplicación a un servidor</i>
 
-No es poco común que la aplicacion simplemente no se ejecute en el servidor a pesar de estar trabajando bien en tu computadora. Esto puede ocurrir debido a algunas dependencias faltantes o otras diferencias en los entornos. Aquí los contenedores son una excelente solución ya que puedes ejecutar tu aplicación en el mismo ambiente tanto en tu computadora como en el servidor. No es perfecto: las diferencias en el hardware pueden provocar incidentes, pero puedes limitar estas diferencias entre los ambientes.
+No es poco común que la aplicación simplemente no se ejecute en el servidor a pesar de estar trabajando bien en tu computadora. Esto puede ocurrir debido a algunas dependencias faltantes o otras diferencias en los entornos. Aquí los contenedores son una excelente solución ya que puedes ejecutar tu aplicación en el mismo ambiente tanto en tu computadora como en el servidor. No es perfecto: las diferencias en el hardware pueden provocar incidentes, pero puedes limitar estas diferencias entre los ambientes.
 
 Alguna vez podrás escuchar sobre el tema <i>"Works in my container"</i>. La frase describe la situación en la que la aplicación funciona bien en un contenedor ejecutándose en tu computadora pero se rompe cuando el contenedor es iniciado en el servidor. Esta frase es una variante del infame tema <i>"Works on my machine"</i>, que con frecuencia resuelven los contenedores. La situación es también con mucha certeza un error de uso.
 
@@ -63,11 +63,11 @@ Envía los ejercicios utilizando el [sistema de envío](https://studies.cs.helsi
 
 Completar esta parte supondrá la obtención de 1 crédito. Note que debe realizar todos los ejercicios para obtener el crédito o el certificado.
 
-Una vez completado los ejercicios y desee obtener los créditos, dejanos saber a traves del sistema de envío de ejercicios que has completado el curso::
+Una vez completado los ejercicios y desee obtener los créditos, déjanos saber a través del sistema de envío de ejercicios que has completado el curso::
 
 ![Enviar los ejercicios para obtener los créditos](../../images/10/23.png)
 
-Puedes descargar el certificado de finalización de esta parte dando click en uno de los iconos de las banderas. Cada bandera corresponde con el idioma del certificado.
+Puedes descargar el certificado de finalización de esta parte dando click en uno de los íconos de las banderas. Cada bandera corresponde con el idioma del certificado.
 
 ### Herramientas del oficio
 
