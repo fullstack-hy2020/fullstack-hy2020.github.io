@@ -32,7 +32,7 @@ $ npm run build
   ...
 ```
 
-¡Excelente! El paso final es encontrar una forma de usar un servidor para servir los archivos estáticos. Como sabrá, podríamos usar nuestro [express.static](https://expressjs.com/en/starter/static-files.html) con el servidor Express para servir los archivos estáticos. Te lo dejo como ejercicio para que lo hagas en casa. En su lugar, seguiremos adelante y comenzaremos a escribir nuestro Dockerfile:
+¡Excelente! El paso final es encontrar una forma de usar un servidor para servir los archivos estáticos. Como sabrás, podríamos usar nuestro [express.static](https://expressjs.com/en/starter/static-files.html) con el servidor Express para servir los archivos estáticos. Te lo dejo como ejercicio para que lo hagas en casa. En su lugar, seguiremos adelante y comenzaremos a escribir nuestro Dockerfile:
 
 ```Dockerfile
 FROM node:16
@@ -104,11 +104,11 @@ Nuestro CMD ahora incluye corchetes y, como resultado, usamos el llamado <i>exec
 
 Cuando ahora construimos la imagen con _docker build. -t hello-front_ y la ejecutamos con _docker run -p 5000:3000 hello-front_, la aplicación estará disponible en http://localhost:5000.
 
-### Usando multiples etapas
+### Usando múltiples etapas
 
 Si bien serve es una opción <i>válida</i>, podemos hacerlo mejor. Un buen objetivo es crear imágenes de Docker para que no contengan nada irrelevante. Con un número mínimo de dependencias, es menos probable que las imágenes se rompan o se vuelvan vulnerables con el tiempo.
 
-[Compilaciones de varias etapas](https://docs.docker.com/develop/develop-images/multistage-build/) están diseñadas para dividir el proceso de compilación en muchas etapas separadas, donde es posible limitar qué partes del los archivos de imagen se mueven entre las etapas. Eso abre posibilidades para limitar el tamaño de la imagen, ya que no todos los subproductos de la construcción son necesarios para la imagen resultante. Las imágenes más pequeñas son más rápidas de cargar y descargar y ayudan a reducir la cantidad de vulnerabilidades que puede tener su software.
+[Compilaciones de varias etapas](https://docs.docker.com/develop/develop-images/multistage-build/) están diseñadas para dividir el proceso de compilación en muchas etapas separadas, donde es posible limitar qué partes de los archivos de imagen se mueven entre las etapas. Eso abre posibilidades para limitar el tamaño de la imagen, ya que no todos los subproductos de la construcción son necesarios para la imagen resultante. Las imágenes más pequeñas son más rápidas de cargar y descargar y ayudan a reducir la cantidad de vulnerabilidades que puede tener su software.
 
 Con compilaciones de varias etapas, se puede usar una solución probada y verdadera como [Nginx](https://en.wikipedia.org/wiki/Nginx) para servir archivos estáticos sin muchos dolores de cabeza. La [página de Nginx](https://hub.docker.com/_/nginx) de Docker Hub nos brinda la información necesaria para abrir los puertos y "Alojamiento de contenido estático simple".
 
@@ -311,7 +311,7 @@ $ docker-compose run debug-helper wget -O - http://app:3000
       ...
 ```
 
-La URL es la parte interesante aquí. Simplemente dijimos que se conectara al servicio <i>hello-front-dev</i> y a ese puerto 3000. El <i>hello-front-dev</i> es el nombre del contenedor, que fue dado por nosotros usando *container\_name* en el archivo docker-compose. Y el puerto utilizado es el puerto desde el cual la aplicación está disponible en ese contenedor. No es necesario publicar el puerto para que otros servicios de la misma red puedan conectarse a él. Los "puertos" en el archivo docker-compose son solo para acceso externo.
+La URL es la parte interesante aquí. Simplemente dijimos que se conectará al servicio <i>hello-front-dev</i> y a ese puerto 3000. El <i>hello-front-dev</i> es el nombre del contenedor, que fue dado por nosotros usando *container\_name* en el archivo docker-compose. Y el puerto utilizado es el puerto desde el cual la aplicación está disponible en ese contenedor. No es necesario publicar el puerto para que otros servicios de la misma red puedan conectarse a él. Los "puertos" en el archivo docker-compose son solo para acceso externo.
 
 Cambiemos la configuración del puerto en <i>docker-compose.yml</i> para enfatizar esto:
 
@@ -519,7 +519,7 @@ Tenga en cuenta que <i>depends\_on</i> no garantiza que el servicio en el conten
 
 #### Ejercicio 12.17: Configure un servidor proxy inverso Nginx frente a todo-frontend
 
-A continuación camos a poner el servidor nginx delante de todo-frontend y todo-backend. Comencemos creando un nuevo archivo docker-compose <i>todo-app/docker-compose.dev.yml</i> y <i>todo-app/nginx.conf</i>.
+A continuación vamos a poner el servidor nginx delante de todo-frontend y todo-backend. Comencemos creando un nuevo archivo docker-compose <i>todo-app/docker-compose.dev.yml</i> y <i>todo-app/nginx.conf</i>.
 
 ```bash
 todo-app
@@ -657,7 +657,7 @@ Una vez que hayas completado los ejercicios y quieras obtener los créditos, inf
 
 **Tenga en cuenta** que necesita registrarse en la parte del curso correspondiente para obtener los créditos registrados, consulte [aquí](/es/part0/informacion_general#calificacion) para obtener más información.
 
-Puede descargar el certificado por completar esta parte haciendo clic en uno de los iconos de bandera. El icono de la bandera corresponde al idioma del certificado.
+Puede descargar el certificado por completar esta parte haciendo clic en uno de los íconos de bandera. El ícono de la bandera corresponde al idioma del certificado.
 
 </div>
 
