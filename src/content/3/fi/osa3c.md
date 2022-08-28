@@ -536,9 +536,15 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-Kannattaa huomata että kun .env on gitignorattu, ei Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
+Kannattaa huomata että kun .env on gitignorattu, eivät Fly.io ja Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
 
-Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin:
+Fly.io:a käytettäessä ympäristömuuttujan arvo asetetaan seuraavalla komennolla:
+
+```
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
+
+Herokussa ympäristömuuttujan arvo voidaan asettaa dashboardin kautta menemällä asetuksiin:
 
 ![urlin https://dashboard.heroku.com/apps/sovelluksen_nimi/settings näkymä mahdollistaa key-value-pareina talletettavien ympäristömuuttujien tallentamisen](../../images/3/herokuConfig.png)
 
