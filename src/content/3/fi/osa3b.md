@@ -118,7 +118,7 @@ Tämän jälkeen aina kun teet muutoksia sovellukseen, saat vietyä uuden versio
 fly deploy
 ```
 
-Erittäin tärkeä komento on myös `fly logs` jonka avulla voit seurata tuotantopalvelimen konsoliin tulostuvia logeja. Logit on viisainta pitää koko ajan näkyvillä.
+Erittäin tärkeä komento on myös _fly logs_ jonka avulla voit seurata tuotantopalvelimen konsoliin tulostuvia logeja. Logit on viisainta pitää koko ajan näkyvillä.
 
 Fly.io luo hakemistoosi tiedoston <i>fly.toml</i>, joka sisältää sovelluksen tuotantoympäristön konfiguraation. Tiedoston sisällöstä ei tällä kurssilla tarvitse liiemmin välittää.
 
@@ -290,7 +290,7 @@ Tuotannossa oleva sovellus näyttää seuraavalta:
 
 ![Selain hakee json-muotoisen datan nameoftheapp.herokuapp.com/api/notes osoitteesta ja suoritettavan react-sovelluksen js-koodin sekä index.html-tiedoston osoitteesta  nameoftheapp.herokuapp.com. Backend hakee tarvitsemansa js-tiedostot ja index.html:n herokun palvelimen levyltä.](../../images/3/102.png)
 
-Nyt siis node/express-backend sijaitsee Fly.io:n/Herokun palvelimella. Kun selaimella mennään sovelluksen "juuriosoitteeseen", joka on muotoa https://glacial-ravine-74819.herokuapp.com/, alkaa selain suorittaa React-koodia joka taas hakee JSON-muotoisen datan Fly.io:sta/Herokusta.
+Nyt siis node/express-backend sijaitsee Fly.io:n/Herokun palvelimella. Kun selaimella mennään sovelluksen "juuriosoitteeseen", joka on (käytettäessä Herokua) muotoa https://glacial-ravine-74819.herokuapp.com/, alkaa selain suorittaa React-koodia joka taas hakee JSON-muotoisen datan Fly.io:sta/Herokusta.
 
 ### Frontendin deployauksen suoraviivaistus 
 
