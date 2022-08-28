@@ -549,11 +549,19 @@ app.listen(PORT, () => {
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
-Once the file .env has been gitignored, Heroku does not get the database url from the repository, so you have to set it yourself. That can be done through the heroku dashboard as follows:
+Once the file .env has been gitignored, Fly.io/Heroku does not get the database url from the repository, so you have to set it yourself. 
+
+With Fly.io that happens from the command line with the command:
+
+```
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
+
+That can be done through the Heroku dashboard as follows:
 
 ![](../../images/3/herokuConfig.png)
 
-or from command line with the command:
+or from the command line with the command:
 
 ```
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'

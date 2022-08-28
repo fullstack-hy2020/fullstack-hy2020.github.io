@@ -74,17 +74,15 @@ The setup of our app looks now as follows:
 The react app running in the browser now fetches the data from node/express-server that runs in localhost:3001.
 ### Application to the Internet
 
-Now that the whole stack is ready, let's move our application to the internet. We'll use good old [Heroku](https://www.heroku.com) for this.
+Now that the whole stack is ready, let's move our application to the internet.
 
->If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
+There are a ever growing number of services that can be used to host an app in the internet. The convenient for a developer are so called PaaS (eli Platform as a Service) platforms that take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
 
-Add a file called  <i>Procfile</i> to the backend project's root to tell Heroku how to start the application. 
+For already a decade [Heroku](http://heroku.com) has been dominating the PaaS scewne. In August 2022 Heroku announched that they will end their free tier in 27th November 2022. This is very unfortunate for many developers, especially students. 
 
-```bash
-web: node index.js
-```
+One of the most promising replacements of Heroku is [Fly.io](https://fly.io/) that provides still free usage in some extent, so we have selected Fly.io as the second "official" hosting platform of this course. You are naturally allowed use also something else if you wish.
 
-Change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
+For both, Fly.io and Heroku we need should change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
@@ -93,8 +91,58 @@ app.listen(PORT, () => {
 })
 ```
 
-Now we are using the port defined in [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined. 
-Heroku configures application port based on the environment variable. 
+Now we are using the port defined in [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined. Fly.io and Heroku configures application port based on the environment variable. 
+
+#### Fly.io
+
+If you decide to use the [Fly.io](https://fly.io/) begin by cereating an account. By default everyone gets two free virtual machines that can be used for running two apps at the same time.
+
+Note that we have added the Fly.io instructions in this course 28th August. If you run in problems, please ask help in Discord!
+
+Star by authenticating in command line with the command
+
+```bash
+fly auth login
+```
+
+Initializing an app happens by giving the following command in the root directory of the app
+
+```bash
+fly launch
+```
+
+Give app a name or let Fly.io to autogenerate one. Pick a region where the app is run. Do not create a postgres database for the app since it is not needed. 
+
+The last question is "Would you like to deploy now?", answer yes and your app is also deployed to the Fly.io servers. 
+
+If all goes well the app is now up and running. You can open it to the browser with command
+
+```bash
+fly launch
+```
+
+After the initial setup, when app code has changed, it can be deployed to production with command
+
+
+```bash
+fly deploy
+```
+
+A particulary important command is `fly logs` that can be used to view server logs. It is best to use logs always visible!
+
+Fly.io creates a file  <i>fly.toml</i> to the root of your app. The file contains all the configuration of your server. At this course we can mostly skip the contents of the file.
+
+#### Heroku
+
+Let us also look how to the good old [Heroku](https://www.heroku.com) for hosting an app.
+
+>If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
+
+Add a file called  <i>Procfile</i> to the backend project's root to tell Heroku how to start the application. 
+
+```bash
+web: node index.js
+```
 
 Create a Git repository in the project directory, and add <i>.gitignore</i> with the following contents
 
@@ -115,7 +163,7 @@ If not, the issue can be found by reading heroku logs with command <i>heroku log
 
 >**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
 
-The frontend also works with the backend on Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Heroku instead of <i>http://localhost:3001</i>.
+The frontend also works with the backend on Fly.io or Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Fly.io/Heroku instead of <i>http://localhost:3001</i>.
 
 The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next. 
 
@@ -240,7 +288,11 @@ Unlike when running the app in a development environment, everything is now in t
 
 ### The whole app to internet
 
-After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. 
+After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. In case of Fly.io:n the new deployment is done with the command
+
+```bash
+fly deploy
+```
 
 [The application](https://obscure-harbor-49797.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
 
@@ -254,11 +306,39 @@ The setup looks like now as follows:
 
 ![](../../images/3/102.png)
 
-The node/express-backend now resides in the Heroku server. When the root address that is of the form https://glacial-ravine-74819.herokuapp.com/ is accessed, the browser loads and executes the React app that fetches the json-data from the Heroku server.
+The node/express-backend now resides in the Fly.io/Heroku server. When the root address that is of the form https://glacial-ravine-74819.herokuapp.com/ is accessed, the browser loads and executes the React app that fetches the json-data from the Heroku server.
 
 ###  Streamlining deploying of the frontend 
 
-To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository: 
+To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository.
+
+#### Fly.io
+
+Script look like this
+
+```json
+{
+  "scripts": {
+    // ...
+    "build:ui": "rm -rf build && cd ../part2-notes/ && npm run build && cp -r build ../notes-backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",    
+    "logs:prod": "fly logs"
+  }
+}
+```
+
+The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Fly.io. 
+
+_npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository. 
+
+There is also a script _npm run logs:prod_ to show the Fly.io logs.
+
+Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
+
+#### Heroku
+
+In case of Heroku, the scripts look like the followin
 
 ```json
 {
@@ -272,11 +352,11 @@ To create a new production build of the frontend without extra manual work, let'
 }
 ```
 
-The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to heroku. 
+The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Heroku. 
 
 _npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository. 
 
-There is also a script _npm run logs:prod_ to show the heroku logs.
+There is also a script _npm run logs:prod_ to show the Heroku logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 

@@ -120,11 +120,19 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
+The application should work almost as-is in Fly.io/Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
 
-The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
+The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Heroku.
 
-We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
+For the production usage we have to set the database URL in the service that is hosing our app.
+
+In Fly.io that is done _fly secrets set_:
+
+```
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
+
+For Heroku the same is done with the _heroku config:set_ command.
 
 ```bash
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -136,7 +144,7 @@ heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
-The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
+The application should now work. Sometimes things don't go according to plan. If there are problems, <i>fly logs</i> or <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
 
 ![](../../images/3/51a.png)
 

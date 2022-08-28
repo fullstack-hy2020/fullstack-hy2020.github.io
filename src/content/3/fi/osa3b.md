@@ -88,9 +88,9 @@ Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Env
 
 #### Fly.io
 
-Jos päätätä käyttä [Fly.io](https://fly.io/):ta, aloita luomalla itsellesi tunnus palveluun. Oletusarvoisesti saat käyttöösi kaiksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
+Jos päätätä käyttä [Fly.io](https://fly.io/):ta, aloita luomalla itsellesi tunnus palveluun. Oletusarvoisesti saat käyttöösi kaksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
 
-Fly.io-ohje on lisätty tähän materiaaliin 28.8. Jos törmäät ongelmiin, apua kannattaa kysyä kurssin Discordissa.
+Fly.io-ohje on lisätty tähän materiaaliin 28.8.2022 Jos törmäät ongelmiin, apua kannattaa kysyä kurssin Discordissa.
 
 Aloita kirjautumalla komentoriviltä palveluun komennolla 
 
@@ -150,7 +150,7 @@ Jos ei, vikaa voi selvittää Herokun lokeja lukemalla eli komennolla _heroku lo
 
 > **HUOM:** ainakin alussa on järkevää tarkkailla Herokussa olevan sovelluksen lokeja koko ajan. Parhaiten tämä onnistuu antamalla komento _heroku logs -t_, jolloin logit tulevat konsoliin sitä mukaan kun palvelimella tapahtuu jotain.
 
-Myös frontend toimii Fly.io:ssa Herokussa olevan backendin avulla. Voit varmistaa asian muuttamalla frontendiin määritellyn backendin osoitteen viittaamaan <i>http://localhost:3001</i>:n sijaan Herokussa olevaan backendiin.
+Myös frontend toimii Fly.io:ssa Herokussa olevan backendin avulla. Voit varmistaa asian muuttamalla frontendiin määritellyn backendin osoitteen viittaamaan <i>http://localhost:3001</i>:n sijaan Fly.io:ssa/Herokussa olevaan backendiin.
 
 Seuraavaksi herää kysymys: miten saamme myös frontendin Internetiin? Vaihtoehtoja on useita, mutta käydään seuraavaksi läpi yksi niistä.
 
@@ -295,7 +295,6 @@ Nyt siis node/express-backend sijaitsee Fly.io:n/Herokun palvelimella. Kun selai
 ### Frontendin deployauksen suoraviivaistus 
 
 Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manuaalisia askelia, lisätään uusia skriptejä backendin <i>package.json</i>-tiedostoon.
-
 
 #### Fly.io
 

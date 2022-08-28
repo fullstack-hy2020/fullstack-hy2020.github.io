@@ -113,7 +113,9 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 Sovelluksen pitäisi toimia tuotannossa eli Fly.io:ssa tai Herokussa lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. 
 
-Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttujille arvot tiedostossa <i>.env</i>, tietokantaurlin kertovan ympäristömuuttujan arvo asetetaan Fly.io:ssa komennolla _fly secrets set_:
+Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttujille arvot tiedostossa <i>.env</i>, tietokantaurlin kertovan ympäristömuuttujan täytyy asettaa Fly.io:n tai Herokuun vielä erikseen.
+
+Fly.io:ssa komennolla _fly secrets set_:
 
 ```
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
