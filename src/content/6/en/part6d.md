@@ -607,7 +607,8 @@ You (probably) have one nasty bug in your application. If the user clicks the vo
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
 
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
-This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. 
+
+The fix can be done by canceling the previous notification when a new notification is displayed, whenever necessary. 
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
