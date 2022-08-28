@@ -78,7 +78,7 @@ Now that the whole stack is ready, let's move our application to the internet.
 
 There are a ever growing number of services that can be used to host an app in the internet. The convenient for a developer are so called PaaS (eli Platform as a Service) platforms that take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
 
-For already a decade [Heroku](http://heroku.com) has been dominating the PaaS scewne. In August 2022 Heroku announched that they will end their free tier in 27th November 2022. This is very unfortunate for many developers, especially students. 
+For already a decade [Heroku](http://heroku.com) has been dominating the PaaS scene. In August 2022 Heroku announched that they will end their free tier in 27th November 2022. This is very unfortunate for many developers, especially students. 
 
 One of the most promising replacements of Heroku is [Fly.io](https://fly.io/) that provides still free usage in some extent, so we have selected Fly.io as the second "official" hosting platform of this course. You are naturally allowed use also something else if you wish.
 
@@ -128,7 +128,7 @@ After the initial setup, when app code has changed, it can be deployed to produc
 fly deploy
 ```
 
-A particulary important command is `fly logs` that can be used to view server logs. It is best to use logs always visible!
+A particularly important command is `fly logs` that can be used to view server logs. It is best to keep logs always visible!
 
 Fly.io creates a file  <i>fly.toml</i> to the root of your app. The file contains all the configuration of your server. At this course we can mostly skip the contents of the file.
 
@@ -288,7 +288,7 @@ Unlike when running the app in a development environment, everything is now in t
 
 ### The whole app to internet
 
-After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. In case of Fly.io:n the new deployment is done with the command
+After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to Heroku again. In the case of Fly.io the new deployment is done with the command
 
 ```bash
 fly deploy
@@ -314,7 +314,7 @@ To create a new production build of the frontend without extra manual work, let'
 
 #### Fly.io
 
-Script look like this
+The script looks like this
 
 ```json
 {
@@ -338,7 +338,7 @@ Note that the directory paths in the script <i>build:ui</i> depend on the locati
 
 #### Heroku
 
-In case of Heroku, the scripts look like the followin
+In case of Heroku, the scripts look like the following
 
 ```json
 {
