@@ -242,7 +242,7 @@ console.log(`Server running on port ${PORT}`)
 
 Redémarrons le serveur (vous pouvez arrêter le serveur en appuyant sur _Ctrl+C_ dans la console) et rafraîchissons le navigateur.
 
-La valeur <i>application/json</i> dans le header <i>Content-Type</i> informe le récepteur que les données sont au format JSON. Le tableau  _notes_ est transformé en JSON avec la méthode <em>JSON.stringify(notes)<em>.
+La valeur <i>application/json</i> dans le header <i>Content-Type</i> informe le récepteur que les données sont au format JSON. Le tableau  _notes_ est transformé en JSON avec la méthode <em>JSON.stringify(notes)</em>.
 
 Lorsque nous ouvrons le navigateur, le format affiché est exactement le même que dans la [partie 2](/fr/part2/getting_data_from_server/) où nous avons utilisé [json-server](https://github.com/typicode/json-server) pour servir la liste des notes :
 
@@ -338,7 +338,7 @@ app.listen(PORT, () => {
 Afin de mettre en service la nouvelle version de notre application, nous devons redémarrer l'application.
 
 
-The application did not change a whole lot. Dès le début de notre code, nous importons _express_, qui est cette fois une <i>fonction</i> utilisée pour créer une application express stockée dans la variable _app_ :
+L'application n'a pas beaucoup changé. Dès le début de notre code, nous importons _express_, qui est cette fois une <i>fonction</i> utilisée pour créer une application express stockée dans la variable _app_ :
 
 ```js
 const express = require('express')
@@ -431,7 +431,7 @@ Le contenu de <i>package.json</i> a également changé :
 ```
 
 
-Si vous avez accidentellement utilisé la mauvaise commande et que la dépendance nodemon a été ajoutée sous "dependencies" au lieu de "devDependencies", modifiez manuellement le contenu de <i>package.json<i/> pour qu'il corresponde à ce qui est indiqué ci-dessus.
+Si vous avez accidentellement utilisé la mauvaise commande et que la dépendance nodemon a été ajoutée sous "dependencies" au lieu de "devDependencies", modifiez manuellement le contenu de <i>package.json</i> pour qu'il corresponde à ce qui est indiqué ci-dessus.
 
 
 Par dépendances de développement, nous entendons les outils qui ne sont nécessaires que pendant le développement de l'application, par exemple pour les tests ou le redémarrage automatique de l'application, comme <i>nodemon</i>.
@@ -940,7 +940,7 @@ Que se passe-t-il exactement dans cette ligne de code ? <em>notes.map(n => n.id)
 <div class="tasks">
 
 
-### Exercises 3.1.-3.6.
+### Exercices 3.1.-3.6.
 
 **NB:** Il est recommandé de faire tous les exercices de cette partie dans un nouveau dépôt git dédié, et de placer votre code source à la racine du dépôt. Sinon, vous rencontrerez des problèmes dans l'exercice 3.10.
 
