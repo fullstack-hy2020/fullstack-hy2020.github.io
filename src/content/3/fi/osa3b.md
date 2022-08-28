@@ -88,7 +88,7 @@ Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Env
 
 #### Fly.io
 
-Jos päätätä käyttä [Fly.io](https://fly.io/):ta, aloita luomalla itsellesi tunnus palveluun. Oletusarvoisesti saat käyttöösi kaksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
+Jos päätät käyttää [Fly.io](https://fly.io/):ta, aloita luomalla itsellesi tunnus palveluun. Oletusarvoisesti saat käyttöösi kaksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
 
 Fly.io-ohje on lisätty tähän materiaaliin 28.8.2022 Jos törmäät ongelmiin, apua kannattaa kysyä kurssin Discordissa.
 
