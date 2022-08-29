@@ -356,7 +356,7 @@ logger.info('message')
 logger.error('error message')
 ```
 
-Toinen vaihoehto on destrukturoida funktiot omiin muuttujiin <i>require</i>-kutsun yhteydessä:
+Toinen vaihtoehto on destrukturoida funktiot omiin muuttujiin <i>require</i>-kutsun yhteydessä:
 
 ```js
 const { info, error } = require('./utils/logger')
