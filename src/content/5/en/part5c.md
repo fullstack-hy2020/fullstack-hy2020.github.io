@@ -19,7 +19,7 @@ Let's install the library with the command:
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-We installed also [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) that provides some nice Jest-related helper methods.
+We also installed [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) that provides some nice Jest-related helper methods.
 
 Let's first write tests for the component that is responsible for rendering a note:
 
@@ -91,6 +91,11 @@ If you want to run tests "normally", you can do so with the command:
 CI=true npm test
 ```
 
+For Windows (PowerShell) users
+```js
+$env:CI=$true; npm test
+```
+
 **NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
 Instructions for installing Watchman on different operating systems can be found on the official Watchman website: https://facebook.github.io/watchman/
@@ -105,7 +110,7 @@ Personally, I do not like this way of storing tests and application code in the 
 
 ### Searching for content in a component
 
-The react-testing-library package offers many different ways of investigating the content of the component being tested. Actually the expect in our test is not needed at all
+The react-testing-library package offers many different ways of investigating the content of the component being tested. Actually the _expect_ in our test is not needed at all
 
 
 ```js
@@ -570,7 +575,7 @@ const NoteForm = ({ createNote }) => {
         <input
           value={newNote}
           onChange={handleChange}
-          placeholder='write here note content' // highlight-line 
+          placeholder='write note content here' // highlight-line 
         />
         <input
           value={...}
