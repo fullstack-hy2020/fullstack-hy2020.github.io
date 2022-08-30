@@ -95,15 +95,19 @@ Now we are using the port defined in [environment variable](https://en.wikipedia
 
 #### Fly.io
 
-If you decide to use the [Fly.io](https://fly.io/) begin by creating an account. By default everyone gets two free virtual machines that can be used for running two apps at the same time.
+If you decide to use the [Fly.io](https://fly.io/) begin by installing Fly.io following [this](https://fly.io/docs/hands-on/install-flyctl/). After that you should [create an account](https://fly.io/docs/hands-on/sign-up/) to the service. 
+
+By default everyone gets two free virtual machines that can be used for running two apps at the same time.
 
 Note that we have added the Fly.io instructions in this course 28th August. If you run in problems, please ask help in Discord!
 
-Star by authenticating in command line with the command
+Star by [authenticating](https://fly.io/docs/hands-on/sign-in/)  in command line with the command
 
 ```bash
 fly auth login
 ```
+
+*Note* if the command _fly_ does not work in your machine, you can try the longer version _flyctl_. Eg. in Mac, both formst of the command work.
 
 Initializing an app happens by giving the following command in the root directory of the app
 
