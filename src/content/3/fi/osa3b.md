@@ -88,7 +88,7 @@ Nyt käyttöön tulee [ympäristömuuttujassa](https://en.wikipedia.org/wiki/Env
 
 #### Fly.io
 
-Jos päätät käyttää [Fly.io](https://fly.io/):ta, ja asentamalla Fly.io [tämän](https://fly.io/docs/hands-on/install-flyctl/) ohjeen mukaan ja luomalla itsellesi [tunnus](https://fly.io/docs/hands-on/sign-up/) palveluun.
+Jos päätät käyttää [Fly.io](https://fly.io/):ta, aloita asentamalla Fly.io [tämän](https://fly.io/docs/hands-on/install-flyctl/) ohjeen mukaan ja luomalla itsellesi [tunnus](https://fly.io/docs/hands-on/sign-up/) palveluun.
 
 Oletusarvoisesti saat käyttöösi kaksi ilmaista virtuaalikonetta, ja pystyt käynnistämään molempiin yhden sovelluksen.
 
