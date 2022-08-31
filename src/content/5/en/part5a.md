@@ -299,7 +299,7 @@ return (
     {user === null ?
       loginForm() :
       <div>
-        <p>{user.name} logged-in</p>
+        <p>{user.username} logged-in</p>
         {noteForm()}
       </div>
     }
@@ -316,7 +316,6 @@ The solution isn't perfect, but we'll leave it for now.
 
 Our main component <i>App</i> is at the moment way too large. The changes we did now are a clear sign that the forms should be refactored into their own components. However, we will leave that for an optional exercise. 
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-2), branch <i>part5-2</i>.
 
 ### Creating new notes
 
