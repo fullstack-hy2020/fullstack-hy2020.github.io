@@ -85,7 +85,7 @@ When both backend and frontend are running, we can start Cypress with the comman
 npm run cypress:open
 ```
 
-When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two subdirectories: the <i>integration/1-getting-started</i> and the <i>integration/2-advanced-examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:
+When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>e2e</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two subdirectories: the <i>e2e/1-getting-started</i> and the <i>e2e/2-advanced-examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.cy.js</i>:
 
 ```js
 describe('Note app', function() {
@@ -102,8 +102,6 @@ We start the test from the opened window:
 ![](../../images/5/40x.png)
 
 **NOTE**: you might need to restart Cypress after deleting the example tests.
-  
-**NOTE**: If you are using Cypress ^10.1.0, the <i>integration</i> subdirectory is gone and replaced with <i>e2e</i> subdirectory due to the introduction of component testing. It is also recommended to name E2E test file with this convention <i>note\_app.cy.js</i> but you can specify any pattern using specPattern option in the <i>cypress.config.js</i> file.
 
 Running the test opens your browser and shows how the application behaves as the test is run:
 
