@@ -243,6 +243,8 @@ module.exports = {
 }
 
 ```
+Tarkista, että tiedostossa on rivi 'node': true kuvanmukaisesti ja lisää se tarvittaessa.
+  
 Muutetaan heti konfiguraatioista sisennystä määrittelevä sääntö siten, että sisennystaso on kaksi välilyöntiä:
 
 
@@ -297,6 +299,8 @@ VS Coden ESLint-plugin alleviivaa tyylisääntöjä rikkovat kohdat punaisella:
 ![Havainnollistus siitä miten VS code merkkaa rivit, joilla on eslint-tyylirike](../../images/3/54a.png)
 
 Näin ongelmat on helppo korjata koodiin heti.
+  
+Komento _npm run lint -- --fix_ voi olla avuksi, jos koodissa on esim. useampia syntaksivirheitä.
 
 ESLintille on määritelty suuri määrä [sääntöjä](https://eslint.org/docs/rules/), joita on helppo ottaa käyttöön muokkaamalla tiedostoa <i>.eslintrc.js</i>.
 
