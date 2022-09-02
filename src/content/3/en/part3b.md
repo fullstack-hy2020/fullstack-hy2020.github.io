@@ -101,7 +101,7 @@ By default everyone gets two free virtual machines that can be used for running 
 
 Note that we have added the Fly.io instructions in this course 28th August. If you run in problems, please ask help in Discord!
 
-Star by [authenticating](https://fly.io/docs/hands-on/sign-in/)  in command line with the command
+Start by [authenticating](https://fly.io/docs/hands-on/sign-in/)  in command line with the command
 
 ```bash
 fly auth login
