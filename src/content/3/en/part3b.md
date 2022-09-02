@@ -107,7 +107,7 @@ Start by [authenticating](https://fly.io/docs/hands-on/sign-in/)  in command lin
 fly auth login
 ```
 
-*Note* if the command _fly_ does not work in your machine, you can try the longer version _flyctl_. Eg. in Mac, both formst of the command work.
+*Note* if the command _fly_ does not work in your machine, you can try the longer version _flyctl_. Eg. in Mac, both forms of the command work.
 
 Initializing an app happens by giving the following command in the root directory of the app
 
