@@ -548,7 +548,7 @@ Toiminnallisuuteen jää kuitenkin pieni ongelma. Jos haemme muistiinpanoa sella
 
 HTTP-statuskoodi on onnistumisesta kertova 200. Vastaukseen ei liity dataa, sillä headerin <i>content-length</i> arvo on 0, ja samaa todistaa selain: mitään ei näy.
 
-Syynä tälle käyttäytymiselle on se, että muuttujan _note_ arvoksi tulee _undefined_ jos muistiinpanoa ei löydy. Tilanne tulee käsitellä palvelimella järkevämmin, eli statuskoodin 200 sijaan tulee vastata statuskoodilla [404 not found](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.5).
+Syynä tälle käyttäytymiselle on se, että muuttujan _note_ arvoksi tulee _undefined_ jos muistiinpanoa ei löydy. Tilanne tulee käsitellä palvelimella järkevämmin, eli statuskoodin 200 sijaan tulee vastata statuskoodilla [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found).
 
 Tehdään koodiin muutos:
 
@@ -586,7 +586,7 @@ app.delete('/api/notes/:id', (request, response) => {
 })
 ```
 
-Jos poisto onnistuu eli poistettava muistiinpano on olemassa, vastataan statuskoodilla [204 no content](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.2.5) sillä mukaan ei lähetetä mitään dataa.
+Jos poisto onnistuu eli poistettava muistiinpano on olemassa, vastataan statuskoodilla [204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content) sillä mukaan ei lähetetä mitään dataa.
 
 Ei ole täyttä yksimielisyyttä siitä, mikä statuskoodi DELETE-pyynnöstä pitäisi palauttaa jos poistettavaa resurssia ei ole olemassa. Vaihtoehtoja ovat lähinnä 204 ja 404. Yksinkertaisuuden vuoksi sovellus palauttaa nyt molemmissa tilanteissa statuskoodin 204.
 
@@ -750,7 +750,7 @@ app.post('/api/notes', (request, response) => {
 
 Tunnisteena toimivan id-kentän arvon generointilogiikka on eriytetty funktioon _generateId_.
 
-Jos vastaanotetulta datalta puuttuu sisältö kentästä <i>content</i>, vastataan statuskoodilla [400 bad request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1):
+Jos vastaanotetulta datalta puuttuu sisältö kentästä <i>content</i>, vastataan statuskoodilla [400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request):
 
 ```js
 if (!body.content) {
