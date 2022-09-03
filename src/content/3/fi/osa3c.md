@@ -703,7 +703,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) koska kyse on juuri siitä:
+Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 Bad Request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request) koska kyse on juuri siitä:
 
 > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
 
