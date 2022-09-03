@@ -552,10 +552,10 @@ const tokenExtractor = (req, res, next) => {
     try {
       req.decodedToken = jwt.verify(authorization.substring(7), SECRET)
     } catch{
-      res.status(401).json({ error: 'token invalid' })
+      return res.status(401).json({ error: 'token invalid' })
     }
   }  else {
-    res.status(401).json({ error: 'token missing' })
+    return res.status(401).json({ error: 'token missing' })
   }
   next()
 }
@@ -709,7 +709,7 @@ Add support for users to the application. In addition to ID, users have the foll
 - name (string, must not be empty)
 - username (string, must not be empty)
 
-Unlike in the material, do not now prevent Sequelize from creating [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) <i>created\_at</i> and <i>updated\_at</i> for users
+Unlike in the material, do not prevent Sequelize from creating [timestamps](https://sequelize.org/master/manual/model-basics.html#timestamps) <i>created\_at</i> and <i>updated\_at</i> for users
 
 All users can have the same password as the material. You can also choose to properly implement passwords as in [part 4](/en/part4/user_administration).
 
