@@ -648,7 +648,7 @@ app.get('/api/notes/:id', (request, response) => {
   const note = notes.find(note => note.id === id)
   
   // highlight-start
-  if (note) {
+  if (note.id) {
     response.json(note)
   } else {
     response.status(404).end()
