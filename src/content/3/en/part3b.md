@@ -122,7 +122,7 @@ The last question is "Would you like to deploy now?", answer yes and your app is
 If all goes well the app is now up and running. You can open it to the browser with command
 
 ```bash
-fly launch
+fly open
 ```
 
 After the initial setup, when app code has changed, it can be deployed to production with command
