@@ -325,4 +325,6 @@ Jos löydät kirjoitusvirheen tai jokin asia on ilmaistu epäselvästi tai kieli
 
 Materiaalin jokaisen osan alalaidassa on linkki <em>Ehdota muutosta materiaalin sisältöön</em>, jota klikkaamalla pääset suoraan editoimaan sivun lähdekoodia.
 
+Materiaalissa on paljon linkkejä monenlaisiin syventäviin materiaaleihin. Jos löydät toimimattoman linkin, ehdota korvausta tai jos et löydä korvaavaa linkkiä, pingaa kurssihenkilökuntaa Discordissa.
+
 </div>

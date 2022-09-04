@@ -332,4 +332,6 @@ If you find a typo in the material, or something has been expressed unclearly, o
 
 At the bottom of each part of the material is a link to <em>propose changes to material</em>. You can edit the source code of the page by clicking on the link.
 
+There are also lots of links in the material for many kind of backround material. If you notice that a link is broken (that happens too often...), propose a change or ping us in Discord if you do not find a replacement for the broken link.
+
 </div>
