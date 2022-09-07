@@ -134,10 +134,10 @@ How to study the course – instructions in a nutshell: 5 cr core course CSM1410
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
   - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
-  - Enroll on the course. You will get the enrollment link through submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#the-course-exam)
+  - Enroll on the course. You will get the enrollment link through the submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#the-course-exam)
   - Save your student number. After course enrollment, save your University of Helsinki student ID number in the submission system.
-  - Do the online exam in the Submission system. Read more [here](/en/part0/general_info#the-course-exam)
-  - Mark the course completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
+  - Do the online exam in the submission system. Read more [here](/en/part0/general_info#the-course-exam)
+  - Mark the course completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 
@@ -147,7 +147,7 @@ How to study the course – instructions in a nutshell: other course parts
   - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
   - Enroll on the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately. 
- - Mark the part completed in the submission system, read more [here](/en/part0/general_info#how-to-get-your-credits)
+ - Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
 
 ### Submitting exercises
 
@@ -181,7 +181,7 @@ After these steps, you can do the course exam in the submission system:
 
 ![](../../images/0/enroll3.png)
 
-There is 120 minutes time to complete the exam. If all goes well, you should see the following confirmation:
+You will have 120 minutes to complete the exam. If all goes well, you should see the following confirmation:
 
 ![](../../images/0/enroll4.png)
 
@@ -318,7 +318,7 @@ Using the [Chrome browser](https://www.google.com/chrome/) is recommended for th
 
 The course exercises are submitted to GitHub, so Git must be installed and you should know how to use it. For instructions, see [Git and GitHub tutorial for beginners](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
-Install some sensible text editor that supports web development. [Visual Studio Code](https://code.visualstudio.com/) is highly recommended.
+Install a sensible text editor that supports web development. [Visual Studio Code](https://code.visualstudio.com/) is highly recommended.
 
 Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
 
@@ -332,6 +332,6 @@ If you find a typo in the material, or something has been expressed unclearly, o
 
 At the bottom of each part of the material is a link to <em>propose changes to material</em>. You can edit the source code of the page by clicking on the link.
 
-There are also lots of links in the material for many kind of backround material. If you notice that a link is broken (that happens too often...), propose a change or ping us in Discord if you do not find a replacement for the broken link.
+There are also lots of links in the material for many kind of background material. If you notice that a link is broken (that happens too often...), propose a change or ping us in Discord if you do not find a replacement for the broken link.
 
 </div>
