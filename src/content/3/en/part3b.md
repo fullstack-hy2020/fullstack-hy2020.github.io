@@ -80,9 +80,9 @@ There are a ever growing number of services that can be used to host an app in t
 
 For already a decade [Heroku](http://heroku.com) has been dominating the PaaS scene. In August 2022 Heroku announched that they will end their free tier in 27th November 2022. This is very unfortunate for many developers, especially students. 
 
-One of the most promising replacements of Heroku is [Fly.io](https://fly.io/) that provides still free usage in some extent, so we have selected Fly.io as the second "official" hosting platform of this course. You are naturally allowed use also something else if you wish.
+One of the most promising replacements of Heroku is [Fly.io](https://fly.io/) which has a free plan, so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
 
-For both, Fly.io and Heroku we need should change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
+For both Fly.io and Heroku, we need to change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
@@ -91,41 +91,41 @@ app.listen(PORT, () => {
 })
 ```
 
-Now we are using the port defined in [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined. Fly.io and Heroku configures application port based on the environment variable. 
+Now we are using the port defined in the [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined. Fly.io and Heroku configure the application port based on that environment variable. 
 
 #### Fly.io
 
-If you decide to use the [Fly.io](https://fly.io/) begin by installing Fly.io following [this](https://fly.io/docs/hands-on/install-flyctl/). After that you should [create an account](https://fly.io/docs/hands-on/sign-up/) to the service. 
+If you decide to use [Fly.io](https://fly.io/) begin by installing their flyctl executable following [this guide](https://fly.io/docs/hands-on/install-flyctl/). After that you should [create a Fly.io account](https://fly.io/docs/hands-on/sign-up/). 
 
 By default everyone gets two free virtual machines that can be used for running two apps at the same time.
 
-Note that we have added the Fly.io instructions in this course 28th August. If you run in problems, please ask help in Discord!
+Note that the Fly.io instructions have only been added to this course on the 28th of August 2022. If you run into problems, please ask for help in Discord!
 
-Start by [authenticating](https://fly.io/docs/hands-on/sign-in/)  in command line with the command
+Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via command line with the command
 
 ```bash
 fly auth login
 ```
 
-*Note* if the command _fly_ does not work in your machine, you can try the longer version _flyctl_. Eg. in Mac, both forms of the command work.
+*Note* if the command _fly_ does not work in your machine, you can try the longer version _flyctl_. Eg. on MacOS, both forms of the command work.
 
-Initializing an app happens by giving the following command in the root directory of the app
+Initializing an app happens by running the following command in the root directory of the app
 
 ```bash
 fly launch
 ```
 
-Give app a name or let Fly.io to autogenerate one. Pick a region where the app is run. Do not create a postgres database for the app since it is not needed. 
+Give the app a name or let Fly.io autogenerate one. Pick a region where the app will be run. Do not create a postgres database for the app since it is not needed.
 
 The last question is "Would you like to deploy now?", answer yes and your app is also deployed to the Fly.io servers. 
 
-If all goes well the app is now up and running. You can open it to the browser with command
+If all goes well, the app should now be up and running. You can open it in the browser with the command
 
 ```bash
 fly launch
 ```
 
-After the initial setup, when app code has changed, it can be deployed to production with command
+After the initial setup, when the app code has been updated, it can be deployed to production with the command
 
 
 ```bash
@@ -134,11 +134,11 @@ fly deploy
 
 A particularly important command is `fly logs` that can be used to view server logs. It is best to keep logs always visible!
 
-Fly.io creates a file  <i>fly.toml</i> to the root of your app. The file contains all the configuration of your server. At this course we can mostly skip the contents of the file.
+Fly.io creates a file  <i>fly.toml</i> in the root of your app. The file contains all the configuration of your server. At this course we can mostly ignore the contents of the file.
 
 #### Heroku
 
-Let us also look how to the good old [Heroku](https://www.heroku.com) for hosting an app.
+Let us also look how we would use the good old [Heroku](https://www.heroku.com) for hosting an app.
 
 >If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
 
