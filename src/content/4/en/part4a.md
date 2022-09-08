@@ -583,7 +583,8 @@ test('reverse of releveler', () => {
   expect(result).toBe('releveler')
 })
 ```
-
+NB: jest needs the test filename to follow a specific convention,i.e. <function to be tested>.test.js hence the filename reverse.test.js.
+  
 The ESLint configuration we added to the project in the previous part complains about the _test_ and _expect_ commands in our test file, since the configuration does not allow <i>globals</i>. Let's get rid of the complaints by adding <i>"jest": true</i> to the <i>env</i> property in the <i>.eslintrc.js</i> file.
 
 ```js
