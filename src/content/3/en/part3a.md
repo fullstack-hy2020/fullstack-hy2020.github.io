@@ -300,7 +300,7 @@ We can update the dependencies of the project with the command:
 npm update
 ```
 
-Likewise, if we start working on the project on another computer, we can install all up-to-date dependencies of the project defined in <i>package.json</i> with the command:
+Likewise, if we start working on the project on another computer, we can install all up-to-date dependencies of the project defined in <i>package.json</i> with running the below command in the project's root directory:
 
 ```bash
 npm install
