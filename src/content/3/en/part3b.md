@@ -82,7 +82,7 @@ For already a decade [Heroku](http://heroku.com) has been dominating the PaaS sc
 
 One of the most promising replacements of Heroku is [Fly.io](https://fly.io/) that provides still free usage in some extent, so we have selected Fly.io as the second "official" hosting platform of this course. You are naturally allowed use also something else if you wish.
 
-For both, Fly.io and Heroku we need should change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
+For both Fly.io and Heroku, we need to change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
