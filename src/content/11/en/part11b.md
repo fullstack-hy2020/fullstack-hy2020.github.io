@@ -362,6 +362,7 @@ If you are using Cypress 10.X, you may need to revise the steps as follows:
 - name: e2e tests
   uses: cypress-io/github-action@v4
   with:
+     build: npm run build
      start: npm run start-prod
      wait-on: http://localhost:5000
 ```  
