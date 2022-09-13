@@ -374,7 +374,7 @@ Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendii
 
 ### Asynkroniset actionit ja Redux Thunk
 
-Lähestymistapamme on melko hyvä, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponentit määrittelevien funktioiden koodissa. Olisi parempi, jos kommunikointi voitaisiin abstrahoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>. Esim. <i>App</i> voisi alustaa sovelluksen tilan seuraavasti:
+Lähestymistapamme on melko hyvä, mutta siinä mielessä ikävä, että palvelimen kanssa kommunikointi tapahtuu komponentit määrittelevien funktioiden koodissa. Olisi parempi, jos kommunikointi voitaisiin abstraktoida komponenteilta siten, että niiden ei tarvitsisi kuin kutsua sopivaa <i>action creatoria</i>. Esim. <i>App</i> voisi alustaa sovelluksen tilan seuraavasti:
 
 ```js
 const App = () => {
