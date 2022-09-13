@@ -496,7 +496,7 @@ module.exports = {
  所以这就是我们如何[定义](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships)在<i>users</i>和<i>notes</i>条目之间存在一个_一对多_的关系连接。我们还改变了<i>sync</i>调用的选项，以便数据库中的表与模型定义的变化相匹配。从控制台看，数据库模式如下。
 
 ```js
-username=> \d users
+postgres=# \d users
                                      Table "public.users"
   Column | Type | Collation | Nullable | Default
 ----------+------------------------+-----------+----------+-----------------------------------
@@ -508,7 +508,7 @@ Indexes:
 Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 
-username=> \d notes
+postgres=# \d notes
                                       Table "public.notes"
   Column | Type | Collation | Nullable | Default
 -----------+--------------------------+-----------+----------+-----------------------------------

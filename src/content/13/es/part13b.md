@@ -464,7 +464,7 @@ module.exports = {
 Así es como [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) que existe una conexión de relación _one-to-many_ entre <i>users</i> y <i>notes</i>. También cambiamos las opciones de las llamadas <i>sync</i> para que las tablas en la base de datos coincidan con los cambios realizados en las definiciones del modelo. El esquema de la base de datos tiene el siguiente aspecto desde la consola:
 
 ```js
-username=> \d users
+postgres=# \d users
                                      Table "public.users"
   Column | Type | Collation | Nullable | Default
 ----------+------------------------+-----------+----------+-----------------------------------
@@ -476,7 +476,7 @@ Indexes:
 Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 
-username=> \d notes
+postgres=# \d notes
                                       Table "public.notes"
   Column | Type | Collation | Nullable | Default
 -----------+--------------------------+-----------+----------+-----------------------------------

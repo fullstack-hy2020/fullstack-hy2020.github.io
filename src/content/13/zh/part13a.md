@@ -119,7 +119,7 @@ psql (13.4 (Ubuntu 13.4-1.pgdg20.04+1))
 SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
 Type "help" for help.
 
-username=> \d
+postgres=# \d
 Did not find any relations.
 ```
 
@@ -145,7 +145,7 @@ CREATE TABLE notes (
  让我们从控制台看一下这个情况。首先，_d_命令，它告诉我们数据库中有哪些表。
 
 ```sql
-username=> \d
+postgres=# \d
                  List of relations
  Schema | Name | Type | Owner
 --------+--------------+----------+----------------
@@ -159,7 +159,7 @@ In addition to the <i>notes</i> table, Postgres created a subtable called <i>not
 With the command _\d notes_, we can see how the <i>notes</i> table is defined:
 
 ```sql
-username=> \d notes;
+postgres=# \d notes;
                                      Table "public.notes"
   Column | Type | Collation | Nullable | Default
 -----------+------------------------+-----------+----------+-----------------------------------
@@ -186,7 +186,7 @@ insert into notes (content, important) values ('MongoDB is webscale', false);
  让我们看看创建的内容是什么样子的。
 
 ```sql
-username=> select * from notes;
+postgres=# select * from notes;
  id | content | important | date
 ----+-------------------------------------+-----------+------
   1 | relational databases rule the world | t |
@@ -197,7 +197,7 @@ username=> select * from notes;
 If we try to store data in the database that is not according to the schema, it will not succeed. The value of a mandatory column cannot be missing:
 
 ```sql
-username=> insert into notes (important) values (true);
+postgres=# insert into notes (important) values (true);
 ERROR: null value in column "content" of relation "notes" violates not-null constraint
 DETAIL: Failing row contains (9, null, t, null).
 ```
@@ -205,7 +205,7 @@ DETAIL: Failing row contains (9, null, t, null).
 The column value cannot be of the wrong type:
 
 ```sql
-username=> insert into notes (content, important) values ('only valid data can be saved', 1);
+postgres=# insert into notes (content, important) values ('only valid data can be saved', 1);
 ERROR: column "important" is of type boolean but expression is of type integer
 LINE 1: ...tent, important) values ('only valid data can be saved', 1); ^
 ```
@@ -213,7 +213,7 @@ LINE 1: ...tent, important) values ('only valid data can be saved', 1); ^
 Columns that don't exist in the schema are not accepted either:
 
 ```sql
-username=> insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
+postgres=# insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
 ERROR: column "value" of relation "notes" does not exist
 LINE 1: insert into notes (content, important, value) values ('only ...
 ```
@@ -558,7 +558,7 @@ drop table notes;
 The `\d` command reveals that the table has been lost from the database:
 
 ```
-username=> \d
+postgres=# \d
 Did not find any relations.
 ```
 

@@ -187,7 +187,7 @@ If we restart the application, the log also shows that the migration was not rep
 The database schema of the application now looks like this
 
 ```sql
-username=> \d
+postgres=# \d
                  List of relations
  Schema |     Name     |   Type   |     Owner
 --------+--------------+----------+----------------
@@ -201,7 +201,7 @@ username=> \d
 So Sequelize has created a <i>migrations</i> table that allows it to keep track of the migrations that have been performed. The contents of the table look as follows:
 
 ```js
-username=> select * from migrations;
+postgres=# select * from migrations;
                    name
 -------------------------------------------
  20211209_00_initialize_notes_and_users.js

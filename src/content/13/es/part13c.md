@@ -187,7 +187,7 @@ Si reiniciamos la aplicación, el registro también muestra que la migración no
 El esquema de la base de datos de la aplicación ahora se ve así:
 
 ```sql
-username=> \d
+postgres=# \d
                  List of relations
  Schema |     Name     |   Type   |     Owner
 --------+--------------+----------+----------------
@@ -201,7 +201,7 @@ username=> \d
 Entonces, Sequelize ha creado una tabla <i>migrations</i> que le permite realizar un seguimiento de las migraciones que se han realizado. El contenido de la tabla queda de la siguiente manera:
 
 ```js
-username=> select * from migrations;
+postgres=# select * from migrations;
                    name
 -------------------------------------------
  20211209_00_initialize_notes_and_users.js

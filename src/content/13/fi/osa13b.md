@@ -469,7 +469,7 @@ module.exports = {
 Näin siis [määritellään](https://sequelize.org/master/manual/assocs.html#one-to-one-relationships) että <i>users</i> ja <i>notes</i> rivien välillä on <i>yhden suhde moneen</i> -yhteys. Muutimme myös <i>sync</i>-kutsuja siten että ne muuttavat taulut, jos taulujen määrittelyyn on tullut muutoksia. Kun nyt katsotaan tietokannan skeemaa konsolista, se näyttää seuraavalta:
 
 ```js
-username=> \d users
+postgres=# \d users
                                      Table "public.users"
   Column  |          Type          | Collation | Nullable |              Default
 ----------+------------------------+-----------+----------+-----------------------------------
@@ -481,7 +481,7 @@ Indexes:
 Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 
-username=> \d notes
+postgres=# \d notes
                                       Table "public.notes"
   Column   |           Type           | Collation | Nullable |              Default
 -----------+--------------------------+-----------+----------+-----------------------------------

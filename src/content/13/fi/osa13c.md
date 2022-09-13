@@ -184,7 +184,7 @@ Jos käynnistämme sovelluksen uudelleen, lokistakin on pääteltävissä että 
 Sovelluksen tietokantaskeema näyttää nyt seuraavalta
 
 ```sql
-username=> \d
+postgres=# \d
                  List of relations
  Schema |     Name     |   Type   |     Owner
 --------+--------------+----------+----------------
@@ -198,7 +198,7 @@ username=> \d
 Sequelize on siis luonut taulun <i>migrations</i>, jonka avulla se pitää kirjaa suoritetuista migraatiosta. Taulun sisältö näyttää seuraavalta:
 
 ```sql
-username=> select * from migrations;
+postgres=# select * from migrations;
                    name
 -------------------------------------------
  20211209_00_initialize_notes_and_users.js

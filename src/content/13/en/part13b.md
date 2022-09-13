@@ -464,7 +464,7 @@ module.exports = {
 So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one-to-many_ relationship connection between the <i>users</i> and <i>notes</i> entries. We also changed the options of the <i>sync</i> calls so that the tables in the database match changes made to the model definitions. The database schema looks like the following from the console:
 
 ```js
-username=> \d users
+postgres=# \d users
                                      Table "public.users"
   Column | Type | Collation | Nullable | Default
 ----------+------------------------+-----------+----------+-----------------------------------
@@ -476,7 +476,7 @@ Indexes:
 Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 
-username=> \d notes
+postgres=# \d notes
                                       Table "public.notes"
   Column | Type | Collation | Nullable | Default
 -----------+--------------------------+-----------+----------+-----------------------------------

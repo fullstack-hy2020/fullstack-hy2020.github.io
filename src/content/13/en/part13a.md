@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-In this section we will explore node applications that use relational databases. During the section we will build a node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. There are many online courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and 
+In this section we will explore node applications that use relational databases. During the section we will build a Node-backend using a relational database for a familiar note application from sections 3-5. To complete this part, you will need a reasonable knowledge of relational databases and SQL. There are many online courses on SQL databases, eg. [SQLbolt](https://sqlbolt.com/) and 
 [Intro to SQL by Khan Academy](https://www.khanacademy.org/computing/computer-programming/sql).
 
 There are 24 exercises in this part, and you need to complete each exercise for completing the course. Exercises are submitted via the [submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-psql) just like in the previous parts, but unlike parts 0 to 7, the submission goes to a different "course instance".
@@ -69,23 +69,49 @@ The reason why the the previous sections of the course used MongoDB is precisely
 
 For our application we need a relational database. There are many options, but we will be using the currently most popular Open Source solution [PostgreSQL](https://www.postgresql.org/). You can install Postgres (as the database is often called) on your machine, if you wish to do so. An easier option would be using Postgres as a cloud service, e.g. [ElephantSQL](https://www.elephantsql.com/). You could also take advantage of the course [part 12](/en/part12) lessons and use Postgres locally using Docker.
 
-However, we will be taking advantage of the fact that it is possible to create a Postgres database for the application on the Heroku cloud service platform, which is familiar from the parts 3 and 4.
+However, we will be taking advantage of the fact that it is possible to create a Postgres database for the application on the Fly.io and Heroku cloud service platforms, which are familiar from the parts 3 and 4.
 
 In the theory material of this section, we will be building a Postgres-enabled version from the backend of the notes-storage application, which was built in sections 3 and 4.
 
-Now let's create a suitable directory inside the Heroku application, add a database to it and use the _heroku config_ command to get the <i>connect string</i>, which is required to connect to the database:
+#### Fly.io
+
+Let us create a new Fly.io-app by running the command _fly launch_ in a directory where we shall add the code of the app. Let us also create the Postgress database for the app:
+
+![](../../images/13/6.png)
+
+When creating the app, Fly.io reveals the password of the database that will be needed when connecting the app to the database. <i>This is the only time it is shown in plain text so it is essential to save it somewhere</i> (but not in any public plase such as GitHub).
+
+Note that if you only need the database, and are not planning to deploy the app to Fly.io, it is also possible to [just create the database to Fly.io](https://fly.io/docs/reference/postgres/#creating-a-postgres-app).
+
+A psql concole connection to the database can be opened as follows
+
+```bash
+flyctl postgres connect -a <app_name-db>
+```
+
+in my case the app name is <i>fs-psql-lecture</i> so the command is the following:
+
+```bash
+flyctl postgres connect -a fs-psql-lecture-db
+```
+#### Heroku
+
+If Heroku is used, a new Heroku application is created when inside a suitable directory. After that a database is added to to the app: 
 
 ```bash
 heroku create
 # Returns an app-name for the app you just created in heroku.
 
 heroku addons:create heroku-postgresql:hobby-dev -a <app-name>
+```
+
+We can use the _heroku config_ command to get the <i>connect string</i>, which is required to connect to the database:
+
+```bash
 heroku config -a <app-name>
 === cryptic-everglades-76708 Config Vars
 DATABASE_URL: postgres://<username>:<password>@<host-of-postgres-addon>:5432/<db-name>
 ```
-
-Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
 
 The database can be accessed by running _psql_ command on the Heroku server as follows (note that the command parameters depend on the connection url of the Heroku database):
 
@@ -93,7 +119,7 @@ The database can be accessed by running _psql_ command on the Heroku server as f
 heroku run psql -h <host-of-postgres-addon> -p 5432 -U <username> <dbname> -a <app-name>
 ```
 
-After entering the password, let's try the main psql command _\d_, which tells you the contents of the database:
+The commands asks the password and opens the psql console:
 
 ```bash
 Password for user <username>:
@@ -101,7 +127,22 @@ psql (13.4 (Ubuntu 13.4-1.pgdg20.04+1))
 SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
 Type "help" for help.
 
-username=> \d
+postgres=#
+```
+
+#### Using the psql console
+
+Particularly when using a relational database, it is essential to access the database directly as well. There are many ways to do this, there are several different graphical user interfaces, such as [pgAdmin](https://www.pgadmin.org/). However, we will be using Postgres [psql](https://www.postgresql.org/docs/current/app-psql.html) command-line tool.
+
+When the console is opened, let's try the main psql command _\d_, which tells you the contents of the database:
+
+```bash
+Password for user <username>:
+psql (13.4 (Ubuntu 13.4-1.pgdg20.04+1))
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
+Type "help" for help.
+
+postgres=# \d
 Did not find any relations.
 ```
 
@@ -123,7 +164,7 @@ A few points: column <i>id</i> is defined as a <i>primary key</i>, which means t
 Let's look at the situation from the console. First, the _\d_ command, which tells us what tables are in the database:
 
 ```sql
-username=> \d
+postgres=# \d
                  List of relations
  Schema | Name | Type | Owner
 --------+--------------+----------+----------------
@@ -137,7 +178,7 @@ In addition to the <i>notes</i> table, Postgres created a subtable called <i>not
 With the command _\d notes_, we can see how the <i>notes</i> table is defined:
 
 ```sql
-username=> \d notes;
+postgres=# \d notes;
                                      Table "public.notes"
   Column | Type | Collation | Nullable | Default
 -----------+------------------------+-----------+----------+-----------------------------------
@@ -161,7 +202,7 @@ insert into notes (content, important) values ('MongoDB is webscale', false);
 And let's see what the created content looks like:
 
 ```sql
-username=> select * from notes;
+postgres=# select * from notes;
  id | content | important | date
 ----+-------------------------------------+-----------+------
   1 | relational databases rule the world | t |
@@ -172,7 +213,7 @@ username=> select * from notes;
 If we try to store data in the database that is not according to the schema, it will not succeed. The value of a mandatory column cannot be missing:
 
 ```sql
-username=> insert into notes (important) values (true);
+postgres=# insert into notes (important) values (true);
 ERROR: null value in column "content" of relation "notes" violates not-null constraint
 DETAIL: Failing row contains (9, null, t, null).
 ```
@@ -180,7 +221,7 @@ DETAIL: Failing row contains (9, null, t, null).
 The column value cannot be of the wrong type:
 
 ```sql
-username=> insert into notes (content, important) values ('only valid data can be saved', 1);
+postgres=# insert into notes (content, important) values ('only valid data can be saved', 1);
 ERROR: column "important" is of type boolean but expression is of type integer
 LINE 1: ...tent, important) values ('only valid data can be saved', 1); ^
 ```
@@ -188,7 +229,7 @@ LINE 1: ...tent, important) values ('only valid data can be saved', 1); ^
 Columns that don't exist in the schema are not accepted either:
 
 ```sql
-username=> insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
+postgres=# insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
 ERROR: column "value" of relation "notes" does not exist
 LINE 1: insert into notes (content, important, value) values ('only ...
 ```
@@ -211,14 +252,7 @@ Let's test that we can connect successfully. Create the file <i>index.js</i> and
 require('dotenv').config()
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-})
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
 const main = async () => {
   try {
@@ -233,14 +267,58 @@ const main = async () => {
 main()
 ```
 
-The database <i>connect string</i>, which is revealed by the _heroku config_ command should be stored in a <i>.env</i> file, the contents should be something like the following:
+Note: if you use Heroku, you might need an extra option in connecting the database 
+
+```js
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  // highlight-start
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false
+    }
+  },
+  // highlight-end
+})
+```
+
+The database <i>connect string</i>, that contains the database address and the credentials must be defined in the file <i>.env</i>
+
+If Heroku is used, the connect string can be seen by using the command _heroku config_. The contents of the file <i>.env</i> should be something like the following:
 
 ```bash
 $ cat .env
 DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
 ```
 
-Let's test for a successful connection:
+When using Fly.io, the local connection to the database should first be enabled by 
+[tunneling](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) 
+the localhost port 5432 to the Fly.io database port using the following command
+
+```bash
+flyctl proxy 5432 -a <app-name>-db
+```
+
+in my case the command is
+
+```bash
+flyctl proxy 5432 -a fs-psql-lecture-db
+```
+
+The command must be left running while the database is used. So do not close the console!
+
+The Fly.io connect-string is of the form
+
+```bash
+$ cat .env
+DATABASE_URL=postgres://postgres:<password>@localhost:5432/postgres
+```
+
+Password was shown when the database was created, so hopefully you did not lost it!
+
+The last part of the connect string, <i>postgres</i> refers to the database name. The name could be any string but we use here <i>postgres</i> since it is the default database that is automatically created within a Postgress database. If needed, new databases can be created with the command [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html).
+
+Once the connect string has been set up in the file <i>.env</i> we can test for a connection:
 
 ```bash
 $ node index.js
@@ -533,7 +611,7 @@ drop table notes;
 The `\d` command reveals that the table has been lost from the database:
 
 ```
-username=> \d
+postgres=# \d
 Did not find any relations.
 ```
 
