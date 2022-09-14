@@ -67,14 +67,7 @@ The file <i>util/db.js</i> contains the code to initialize the database:
 const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(DATABASE_URL)
 
 const connectToDatabase = async () => {
   try {
@@ -844,6 +837,33 @@ where: {
 ```
 
 depending on the value of the query parameter.
+
+The database might now contain some note rows that do not have the value for the column
+<i>important</i> set. After the above changes, these notes can not be found with the queries. Let us set the missing values in the psql console and change the schema so that the coulumn does not allow a null value:
+
+```js
+Note.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    important: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false, // highlight-line
+    },
+    date: {
+      type: DataTypes.DATE,
+    },
+  },
+  // ...
+)
+```
 
 The functionality can be further expanded by allowing the user to specify a required keyword when retrieving notes, e.g. a request to http://localhost:3001/api/notes?search=database will return all notes mentioning <i>database</i> or a request to http://localhost:3001/api/notes?search=javascript&important=true will return all notes marked as important and mentioning <i>javascript</i>. The implementation is as follows
 

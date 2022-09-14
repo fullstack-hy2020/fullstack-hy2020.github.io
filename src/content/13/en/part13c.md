@@ -50,7 +50,8 @@ module.exports = {
         allowNull: false
       },
       important: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        allowNull: false
       },
       date: {
         type: DataTypes.DATE
@@ -116,14 +117,7 @@ const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
 const { Umzug, SequelizeStorage } = require('umzug') // highlight-line
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(DATABASE_URL)
 
 // highlight-start
 const runMigrations = async () => {
@@ -147,9 +141,9 @@ const runMigrations = async () => {
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
-    // highlight-start
+    /*  highlight-start */
     await runMigrations()
-    // highlight-end
+    /* highlight-end */
     console.log('connected to the database')
   } catch (err) {
     console.log('failed to connect to the database')

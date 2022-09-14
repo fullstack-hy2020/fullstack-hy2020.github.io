@@ -50,7 +50,8 @@ module.exports = {
         allowNull: false
       },
       important: {
-        type: DataTypes.BOOLEAN
+        type: DataTypes.BOOLEAN,
+        allowNull: false
       },
       date: {
         type: DataTypes.DATE
@@ -116,18 +117,11 @@ const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
 const { Umzug, SequelizeStorage } = require('umzug') // highlight-line
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(DATABASE_URL)
 
-// highlight-start
+ // highlight-start
 const runMigrations = async () => {
-  const migrator = new Umzug({
+  const migrator = new Umzug({ 
     migrations: {
       glob: 'migrations/*.js',
     },
@@ -141,12 +135,14 @@ const runMigrations = async () => {
     files: migrations.map((mig) => mig.name),
   })
 }
-// highlight-end
+ // highlight-end
 
 const connectToDatabase = async () => {
   try {
     await sequelize.authenticate()
-    await runMigrations() // highlight-line
+    /*  highlight-start */
+    await runMigrations()
+    /* highlight-end */
     console.log('database connected')
   } catch (err) {
     console.log('connecting database failed')
