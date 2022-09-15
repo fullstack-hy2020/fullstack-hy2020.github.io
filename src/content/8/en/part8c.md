@@ -449,7 +449,7 @@ Let's change the book graphql schema a little
 type Book {
   title: String!
   published: Int!
-  author: Author!
+  author: Author! // highlight-line
   genres: [String!]!
   id: ID!
 }
