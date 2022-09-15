@@ -116,6 +116,7 @@ on:
   push:
     branches:
       - master
+      # note that your "main" branch might be called main instead of master
 
 jobs:
   hello_world_job:
@@ -181,13 +182,14 @@ Let's implement a Github Action that will lint the code. If the checks don't pas
 
 At start, the workflow that we will save to file <code>pipeline.yml</code> looks like this:
 
-```js
+```yml
 name: Deployment pipeline
 
 on:
   push:
     branches:
       - master
+      # note that your "main" branch might be called main instead of master
 
 jobs:
 ```
@@ -204,7 +206,7 @@ Next, we list the steps in the "build" job that the CI would need to perform. As
 
 This is an easy step:
 
-```js
+```yml
 name: Deployment pipeline
 
 on:
@@ -213,10 +215,10 @@ on:
       - master
 
 jobs:
-  simple_deployment_pipeline: // highlight-line
-    runs-on: ubuntu-20.04 // highlight-line
-    steps: // highlight-line
-      - uses: actions/checkout@v3  // highlight-line
+  simple_deployment_pipeline: # highlight-line
+    runs-on: ubuntu-20.04 # highlight-line
+    steps: # highlight-line
+      - uses: actions/checkout@v3 # highlight-line
 ```
 
 The [uses](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepsuses) keyword tells the workflow to run a specific <i>action</i>. An action is a reusable piece of code, like a function. Actions can be defined in your repository in a separate file or you can use the ones available in public repositories. 
@@ -225,7 +227,7 @@ Here we're using a public action [actions/checkout](https://github.com/actions/c
 
 Secondly, as the application is written in JavaScript, Node.js must be set up to be able to utilize the commands that are specified in <code>package.json</code>. To set up Node.js, [actions/setup-node](https://github.com/actions/setup-node) action can be used. Version <code>16</code> is selected because it is the version the application is using in the production environment.
 
-```js
+```yml
 # name and trigger not shown anymore...
 
 jobs:
@@ -233,9 +235,9 @@ jobs:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2 // highlight-line
-        with: // highlight-line
-          node-version: '16' // highlight-line
+      - uses: actions/setup-node@v3 # highlight-line
+        with: # highlight-line
+          node-version: '16' # highlight-line
 ```
 
 As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/actions/reference/workflow-syntax-for-github-actions#jobsjob_idstepswith) keyword is used to give a "parameter" to the action. Here the parameter specifies the version of Node.js we want to use.
@@ -243,17 +245,17 @@ As we can see, the [with](https://docs.github.com/en/free-pro-team@latest/action
 
 Lastly, the dependencies of the application must be installed. Just like on your own machine we execute <code>npm install</code>. The steps in the job should now look something like
 
-```js
+```yml
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
-      - name: npm install  // highlight-line
-        run: npm install  // highlight-line
+      - name: npm install # highlight-line
+        run: npm install # highlight-line
 ```
 
 Now the environment should be completely ready for the job to run actual important tasks in!
@@ -262,19 +264,19 @@ Now the environment should be completely ready for the job to run actual importa
 
 After the environment has been set up we can run all the scripts from <code>package.json</code> like we would on our own machine. To lint the code all you have to do is add a step to run the <code>npm run eslint</code> command.
 
-```js
+```yml
 jobs:
   simple_deployment_pipeline:
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v2
+      - uses: actions/setup-node@v3
         with:
           node-version: '16'
       - name: npm install 
         run: npm install  
-      - name: lint  // highlight-line
-        run: npm run eslint // highlight-line
+      - name: lint  # highlight-line
+        run: npm run eslint # highlight-line
 ```
 
 </div>

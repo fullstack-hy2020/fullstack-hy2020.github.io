@@ -64,10 +64,10 @@ Then, for some reason you are using a React version older than the current versi
 The fix is to change <i>index.js</i> as follows
 
 ```js
-import ReactDOM from "react-dom"
-import App from "./App"
+import ReactDOM from 'react-dom'
+import App from './App'
 
-ReactDOM.render(<App />, document.getElementById("root"))
+ReactDOM.render(<App />, document.getElementById('root'))
 ```
 
 You quite likely need to do the same for your other projects.
@@ -279,8 +279,8 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="George" /> // highlight-line
-      <Hello name="Daisy" /> // highlight-line
+      <Hello name='George' /> // highlight-line
+      <Hello name='Daisy' /> // highlight-line
     </div>
   )
 }
@@ -308,7 +308,7 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} /> // highlight-line
+      <Hello name='Maya' age={26 + 10} /> // highlight-line
       <Hello name={name} age={age} />     // highlight-line
     </div>
   )
@@ -333,7 +333,7 @@ Also keep in mind that **React component names must be capitalized**. If you try
 const footer = () => {
   return (
     <div>
-      greeting app created by <a href="https://github.com/mluukkai">mluukkai</a>
+      greeting app created by <a href='https://github.com/mluukkai'>mluukkai</a>
     </div>
   )
 }
@@ -346,7 +346,7 @@ const App = () => {
   return (
     <div>
       <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
+      <Hello name='Maya' age={26 + 10} />
       <footer /> // highlight-line
     </div>
   )
@@ -361,7 +361,7 @@ Note that the content of a React component (usually) needs to contain **one root
 const App = () => {
   return (
     <h1>Greetings</h1>
-    <Hello name="Maya" age={26 + 10} />
+    <Hello name='Maya' age={26 + 10} />
     <Footer />
   )
 }
@@ -377,7 +377,7 @@ Using a root element is not the only working option. An <i>array</i> of componen
 const App = () => {
   return [
     <h1>Greetings</h1>,
-    <Hello name="Maya" age={26 + 10} />,
+    <Hello name='Maya' age={26 + 10} />,
     <Footer />
   ]
 }
@@ -395,7 +395,7 @@ const App = () => {
   return (
     <>
       <h1>Greetings</h1>
-      <Hello name="Maya" age={26 + 10} />
+      <Hello name='Maya' age={26 + 10} />
       <Hello name={name} age={age} />
       <Footer />
     </>

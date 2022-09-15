@@ -1001,7 +1001,7 @@ insert into user_notes (user_id, note_id) values (1, 5);
 
 The end result is functional:
 
-![](../../images/13/5.png)
+![](../../images/13/5a.png)
 
 What if we wanted to include information about the author of the note in the notes marked by the user as well? This can be done by adding an <i>include</i> to the marked notes:
 

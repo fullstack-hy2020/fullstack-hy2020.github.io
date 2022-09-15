@@ -1002,7 +1002,7 @@ insert into user_notes (user_id, note_id) values (2, 2);
 
 Lopputulos on toimiva:
 
-![](../../images/13/5.png)
+![](../../images/13/5a.png)
 
 Entä jos haluaisimme, että käyttäjän merkitsemissä muistiinpanoissa olisi myös tieto muistiinpanon tekijästä? Tämä onnistuu lisäämällä liitetyille muistiinpanoille oma <i>include:</i>
 
@@ -1197,7 +1197,30 @@ Muutetaan nyt yksittäisen käyttäjän routea siten, että se hakee kannasta k�
 
 ```js
 router.get('/:id', async (req, res) => {
-  const user = await User.findByPk(req.params.id)
+  const user = await User.findByPk(req.params.id, {
+    attributes: { exclude: [''] } ,
+    include:[{
+        model: note,
+        attributes: { exclude: ['userId'] }
+      },
+      {
+        model: Note,
+        as: 'marked_notes',
+        attributes: { exclude: ['userId']},
+        through: {
+          attributes: []
+        },
+        include: {
+          model: user,
+          attributes: ['name']
+        }
+      },
+    ]
+  })
+
+  if (!user) {
+    return res.status(404).end()
+  }
 
   // highlight-start
   if (!user) {
