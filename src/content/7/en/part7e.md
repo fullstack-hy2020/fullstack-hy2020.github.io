@@ -55,17 +55,21 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.anecdotes.length === 0) { // highlight-line
+  // highlight-start
+    if (this.state.anecdotes.length === 0) {
       return <div>no anecdotes...</div>
     }
+  // highlight-end
 
     return (
       <div>
         <h1>anecdote of the day</h1>
+        // highlight-start
         <div>
-          {this.state.anecdotes[this.state.current].content} // highlight-line
+          {this.state.anecdotes[this.state.current].content}
         </div>
         <button>next</button>
+        // highlight-end
       </div>
     )
   }
@@ -237,7 +241,7 @@ With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html) library
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
   <App />
-  )
+)
 ```
 
 When the state of the application changes, a <i>new virtual DOM</i> gets defined by the components. React has the previous version of the virtual DOM in memory and instead of directly rendering the new virtual DOM using the DOM API, React computes the optimal way to update the DOM (remove, add or modify elements in the DOM) such that the DOM reflects the new virtual DOM.
@@ -312,7 +316,7 @@ You can check how up to date your dependencies are using the command
 npm outdated --depth 0
 ```
 
-One year old project that is used by the [part 9](/en/part9) of his course already have quite a few outdated dependencies:
+The one year old project that is used by the [part 9](/en/part9) of this course already have quite a few outdated dependencies:
 
 ![](../../images/7/33x.png)
 
@@ -445,7 +449,13 @@ Lately, people have started using the term [progressive web app](https://develop
 
 In short, we are talking about web applications working as well as possible on every platform taking advantage of the best parts of those platforms. The smaller screen of mobile devices must not hamper the usability of the application. PWAs should also work flawlessly in offline-mode or with a slow internet connection. On mobile devices, they must be installable just like any other application. All the network traffic in a PWA should be encrypted.
 
-Applications created using Create React App are [progressive](https://github.com/facebookincubator/create-react-app/blob/master/packages/react-scripts/template/README.md#making-a-progressive-web-app) by default. If the application uses data from a server, making it progressive takes work. The offline functionality is usually implemented with the help of [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
+Applications created using Create React App are no longer [progressive](https://create-react-app.dev/docs/making-a-progressive-web-app/) by default since Create React App 4. If PWA is desired, you will have to create a new project using a PWA custom template. 
+
+```js
+npx create-react-app my-app --template cra-template-pwa
+```
+  
+The offline functionality is usually implemented with the help of [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API).
 
 #### Microservice architecture
 
@@ -526,7 +536,7 @@ When it comes to the tools used for the management and bundling of JavaScript pr
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack absolutely is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. 
+Hipsters seem to have lost their interest in tool development after webpack started to dominate the markets. A few years ago, [Parcel](https://parceljs.org) started to make the rounds marketing itself as simple (which Webpack absolutely is not) and faster than Webpack. However, after a promising start, Parcel has not gathered any steam, and it's beginning to look like it will not be the end of Webpack. Currently, [Vite](https://vitejs.dev) tools, also simpler than Webpack, are gaining popularity - but their success can only be measured in the future.
 
 Another notable mention is the [Rome](https://rome.tools/) library, which aspires to be an all-encompassing toolchain to unify linter, compiler, bundler, and more. It is currently under heavy development since the initial commit earlier this year on Feb 27, but the outlook sure seems promising.
 

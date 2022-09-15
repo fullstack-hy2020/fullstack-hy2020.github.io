@@ -59,7 +59,7 @@ const start = async () => {
 start()
 ```
 
-Starting the application is slightly different from what we have seen before, because we want to make sure that the dabase connection is established successfully before the actual startup.
+Starting the application is slightly different from what we have seen before, because we want to make sure that the database connection is established successfully before the actual startup.
 
 The file <i>util/db.js</i> contains the code to initialize the database:
 
@@ -67,14 +67,7 @@ The file <i>util/db.js</i> contains the code to initialize the database:
 const Sequelize = require('sequelize')
 const { DATABASE_URL } = require('./config')
 
-const sequelize = new Sequelize(DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(DATABASE_URL)
 
 const connectToDatabase = async () => {
   try {
@@ -316,6 +309,7 @@ The file <i>models/index.js</i> expands slightly:
 const Note = require('./note')
 const User = require('./user') // highlight-line
 
+Note.sync()
 User.sync() // highlight-line
 
 module.exports = {
@@ -463,7 +457,7 @@ module.exports = {
 So this is how we [define](https://sequelize.org/master/manual/assocs.html#one-to-many-relationships) that there is a _one-to-many_ relationship connection between the <i>users</i> and <i>notes</i> entries. We also changed the options of the <i>sync</i> calls so that the tables in the database match changes made to the model definitions. The database schema looks like the following from the console:
 
 ```js
-username=> \d users
+postgres=# \d users
                                      Table "public.users"
   Column | Type | Collation | Nullable | Default
 ----------+------------------------+-----------+----------+-----------------------------------
@@ -475,7 +469,7 @@ Indexes:
 Referenced by:
     TABLE "notes" CONSTRAINT "notes_user_id_fkey" FOREIGN KEY (user_id) REFERENCES users(id) ON UPDATE CASCADE ON DELETE SET NULL
 
-username=> \d notes
+postgres=# \d notes
                                       Table "public.notes"
   Column | Type | Collation | Nullable | Default
 -----------+--------------------------+-----------+----------+-----------------------------------
@@ -621,7 +615,7 @@ const user = await User.findByPk(req.decodedToken.id)
 const note = await Note.create({ ...req.body, userId: user.id, date: new Date() })
 ```
 
-The reason for this is that we specificed in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:
+The reason for this is that we specified in the file <i>models/index.js</i> that there is a one-to-many connection between users and notes:
 
 ```js
 const Note = require('./note')
@@ -699,7 +693,7 @@ Instead we can achieve the same with this. Using one of the two methods is neces
 
 <div class="tasks">
 
-### Tasks 13.8.-13.11.
+### Tasks 13.8.-13.12.
 
 #### Task 13.8.
 
@@ -843,6 +837,33 @@ where: {
 ```
 
 depending on the value of the query parameter.
+
+The database might now contain some note rows that do not have the value for the column
+<i>important</i> set. After the above changes, these notes can not be found with the queries. Let us set the missing values in the psql console and change the schema so that the coulumn does not allow a null value:
+
+```js
+Note.init(
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    content: {
+      type: DataTypes.TEXT,
+      allowNull: false,
+    },
+    important: {
+      type: DataTypes.BOOLEAN,
+      allowNull: false, // highlight-line
+    },
+    date: {
+      type: DataTypes.DATE,
+    },
+  },
+  // ...
+)
+```
 
 The functionality can be further expanded by allowing the user to specify a required keyword when retrieving notes, e.g. a request to http://localhost:3001/api/notes?search=database will return all notes mentioning <i>database</i> or a request to http://localhost:3001/api/notes?search=javascript&important=true will return all notes marked as important and mentioning <i>javascript</i>. The implementation is as follows
 

@@ -13,7 +13,7 @@ This part also contains a [series of exercises](/en/part7/exercises_extending_th
 
 ### Hooks
 
-React offers 10 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks that we have already been using extensively.
+React offers 15 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks that we have already been using extensively.
 
 In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook which allows for components to provide their functions to other components.
 
@@ -457,7 +457,7 @@ const create = async newObject => {
 }
 
 const update = async (id, newObject) => {
-  const response = await axios.put(`${ baseUrl } /${id}`, newObject)
+  const response = await axios.put(`${ baseUrl }/${id}`, newObject)
   return response.data
 }
 

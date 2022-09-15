@@ -29,7 +29,7 @@ We can use [create-react-app](https://create-react-app.dev) to create a TypeScri
 npx create-react-app my-app --template typescript
 ```
 
-After running the command, you should have a complete basic react app which uses TypeScript.
+After running the command, you should have a complete basic React app which uses TypeScript.
 You can start the app by running <i>npm start</i> in the application's root. 
 
 If you take a look at the files and folders, you'll notice that the app is not that different from 
@@ -66,7 +66,7 @@ Now, let's take a look at the <i>tsconfig.json</i> file that has been created fo
 }
 ```
 
-Options have now key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes eg. types of browser API's to the project.
+The compilerOptions now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like `document`)."
 
 Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files, because <i>allowJs</i> is set to <i>true</i>.
 That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
@@ -102,10 +102,10 @@ We configure eslint in <i>.eslintrc</i> with the following settings:
 }
 ```
 
-Since the return type of basically all React components is <i>JSX.Element</i> or <i>null</i>, we have loosened the default linting rules up a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md). 
-Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is no more needed in every file.
+Since the return type of most React components is generally either <i>JSX.Element</i> or <i>null</i>, we have loosened up the default linting rules a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md). 
+Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.
 
-Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of react's JSX files. 
+Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React's JSX files. 
 We can do that by altering our lint command in <i>.package.json</i> to the following:
 
 ```json
@@ -224,12 +224,12 @@ Create a new Create React App with TypeScript, and set up eslint for the project
 This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
 
 ```jsx
-import React from "react";
-import ReactDOM from "react-dom";
-import App from "./App";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import App from './App';
 
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(<App />);
 ```
 
 and <i>App.tsx</i> to the following:
@@ -407,7 +407,7 @@ We can then build a switch case around that attribute and TypeScript will know w
 
 In the above example, TypeScript knows that a <i>part</i> has the type <i>CoursePart</i>. It can then infer that <i>part</i> is of either type <i>CoursePartOne</i>, <i>CoursePartTwo</i> or <i>CoursePartThree</i>. 
 The <i>name</i> is distinct for each type, so we can use it to identify each type and TypeScript can let us know which attributes are available in each case block. 
-TypeScript will then produce an error if you e.g. try to use the <i>part.description</i> within the <i>"Using props to pass data"</i> block.
+Then, TypeScript will produce an error if you try to use the <i>part.description</i> within the <i>"Using props to pass data"</i> block for example.
 
 What about adding new types? If we were to add a new course part, wouldn't it be nice to know if we had already implemented handling that type in our code? 
 In the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. 
@@ -464,6 +464,7 @@ interface CourseNormalPart extends CoursePartBase {
   type: "normal";
   description: string;
 }
+
 interface CourseProjectPart extends CoursePartBase {
   type: "groupProject";
   groupProjectCount: number;
@@ -477,19 +478,18 @@ interface CourseSubmissionPart extends CoursePartBase {
 
 type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart;
 
-
 // this is the new coursePart variable
 const courseParts: CoursePart[] = [
   {
     name: "Fundamentals",
     exerciseCount: 10,
-    description: "This is the leisured course part",
+    description: "This is the easy course part",
     type: "normal"
   },
   {
     name: "Advanced",
     exerciseCount: 7,
-    description: "This is the harded course part",
+    description: "This is the hard course part",
     type: "normal"
   },
   {
@@ -585,11 +585,11 @@ It is always a good idea to start the application and click around to verify you
 You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have
 different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use. 
 
-TypeScript provides you types which tell you what kind of data structures, functions, components and state to expect.  You can try to look for <i>types.ts</i> or something similar to get you started. VSCode is a big help and just highlighting variables and parameters can give you quite a lot of insight. All this naturally depends on how types are used in the project. 
+TypeScript provides types which signal what kind of data structures, functions, components, and state to expect.  You can try looking for <i>types.ts</i> or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project. 
 
-If the project has unit, integration or end-to-end tests, reading those is most likely beneficial. Test cases are your most important tool when refactoring or creating new features to the application. You want to make sure not to break any existing features when hammering around the code. TypeScript can also give you guidance with argument and return types when changing the code.
+If the project has unit, integration or end-to-end tests, reading those is most likely beneficial. Test cases are your most important tool when refactoring or adding new features to the application. You want to make sure not to break any existing features when hammering around the code. TypeScript can also give you guidance with argument and return types when changing the code.
 
-Do remember that reading code is a skill in itself, and don't worry if you don't understand the code on your first readthrough.  Code may have a lot of corner cases, and pieces of logic may have been added here and there throughout its development cycle. It is hard to imagine what kind of troubles the previous developer has been wrestling with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding all of it requires digging deep into the code and business domain requirements. The more code you read, the better you're going to be at it. You will read more code than you're going to produce.
+Remember that reading code is a skill in itself, so don't worry if you don't understand the code on your first readthrough.  The code may have a lot of corner cases, and pieces of logic may have been added here and there throughout its development cycle. It is hard to imagine what kind of problems the previous developer has wrestled with. Think of it all like [growth rings in trees](https://en.wikipedia.org/wiki/Dendrochronology#Growth_rings). Understanding everything requires digging deep into the code and business domain requirements. The more code you read, the better you will be at understanding it. You will most likely read far more code than you are going to produce throughout your life.
 
 ### Patientor frontend
 
@@ -614,8 +614,9 @@ The main functionality of the code in the <i>state</i> folder is to keep our dat
 
 Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
 
-The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similiar libraries for the state management.
+The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similar libraries for the state management.
 There are a lot of good material, for example  [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe), about this approach to state management.
+
 
 The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html) that, according to its documentation:
 
@@ -685,7 +686,7 @@ export type Action =
     };
 ```
 
-The reducer looks quite similiar to the ones we wrote in [part 6](/en/part6) before we started to use the Redux Toolkit. It changes the state for each type of action:
+The reducer looks quite similar to the ones we wrote in [part 6](/en/part6/many_reducers#combined-reducers) before we started to use the Redux Toolkit. It changes the state for each type of action:
 
 ```js
 export const reducer = (state: State, action: Action): State => {
@@ -715,9 +716,9 @@ export const reducer = (state: State, action: Action): State => {
 };
 ```
 
-The main difference is  that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6).
+The main difference is  that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
 
-There are a lot of things happening in the file <i>state.ts</i>, which takes care of setting up the context. 
+There are a lot of things happening in the file <i>state.tsx</i>, which takes care of setting up the context. 
 The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook
 used to create the state and the dispatch function, and pass them on to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
 
@@ -735,7 +736,7 @@ export const StateProvider = ({
 };
 ```
 
-The provider makes the <i>state</i> and the <i>dispatch</i> functions available in all of the components, thanks to the setup in <i>index.ts</i>:
+The provider makes the <i>state</i> and the <i>dispatch</i> functions available in all of the components, thanks to the setup in <i>index.tsx</i>:
 
 ```js 
 import { reducer, StateProvider } from "./state";
@@ -773,7 +774,7 @@ It is actually quite common that when you start working on an existing codebase,
 
 ### Patient listing page
 
-Let's go through the <i>PatientListPage/index.ts</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. 
+Let's go through the <i>PatientListPage/index.tsx</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. 
 <i>PatientListPage</i> uses our custom hook to inject the state, and the dispatcher for updating it. 
 When we list the patients, we only need to destructure the <i>patients</i> property from the state:
 
@@ -872,7 +873,7 @@ export interface Patient {
   entries: Entry[] // highlight-line
 }
 
-export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
+export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;  // highlight-line
 ```
 
 The response should look as follows:
@@ -883,15 +884,15 @@ The response should look as follows:
 
 Create a page for showing a patient's full information in the frontend. 
 
-The user should be able to access a patient's information e.g. by clicking the patient's name.
+The user should be able to access a patient's information by clicking the patient's name.
 
-Fetch the data from the endpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state, i.e. if the user is visiting the same patient's information many times. 
+Fetch the data from the endpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state (i.e. if the user is visiting the same patient's information many times). 
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
 The Application uses [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles) for styling. You may also use it for the new components but that is up to you since our main focus now is TypeScript.
 
-The Application also uses [React Router](https://reacttraining.com/react-router/web/guides/quick-start)  to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
+The Application also uses [React Router](https://reacttraining.com/react-router/web/guides/quick-start) to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
 
 The result could look like this:
 
@@ -1238,7 +1239,7 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
 
 Now, back to the  actual form component in <i>AddPatientForm.tsx</i>.
 The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: <i>initialValues</i> and <i>onSubmit</i>. The role of the props is quite self-explanatory.
-The Formik wrapper keeps a track of your form's state, and then exposes it and a few resuable methods and event handlers to your form via props.
+The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.
 
 We are also using an optional <i>validate</i> prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component. 
  
@@ -1442,14 +1443,14 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 
   return (
     <Formik
-    initialValues={{
-      /// ...
-    }}
-    onSubmit={onSubmit}
-    validate={values => {
-      /// ...
-    }}
-  >
+      initialValues={{
+        /// ...
+      }}
+      onSubmit={onSubmit}
+      validate={values => {
+        /// ...
+      }}
+    >
     {({ isValid, dirty, setFieldValue, setFieldTouched }) => { // highlight-line
 
       return (
@@ -1514,8 +1515,6 @@ Exercises of this part are submitted via [the submissions system](https://studie
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
 ![Submissions](../../images/11/21.png)
-
-Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 

@@ -17,13 +17,13 @@ Nodella tehtyjen sovellusten debuggaaminen on jossain määrin hankalampaa kuin 
 
 Visual Studio Coden debuggeri voi olla hyödyksi joissain tapauksissa. Saat käynnistettyä sovelluksen debuggaustilassa seuraavasti:
 
-![](../../images/3/35x.png)
+![Avataan run-tabi ja sieltä valinta start debugging](../../images/3/35x.png)
 
 Huomaa, että sovellus ei saa olla samalla käynnissä "normaalisti" konsolista, sillä tällöin sovelluksen käyttämä portti on varattu.
 
 Seuraavassa screenshot, jossa koodi on pysäytetty kesken uuden muistiinpanon lisäyksen:
 
-![](../../images/3/36x.png)
+![Koodiin on lisätty breakpoint, johon suoritus pysähtyy. Vasemman puolen tabissa näkyvät muuttujien arvot, alhaalla Debuging console, jossa on mahdollista evaluoida koodia](../../images/3/36x.png)
 
 Koodi on pysähtynyt rivillä 63 olevan <i>breakpointin</i> kohdalle ja konsoliin on evaluoitu muuttujan <i>note</i> arvo. Vasemmalla olevassa ikkunassa on nähtävillä myös kaikki ohjelman muuttujien arvot.
 
@@ -41,17 +41,17 @@ node --inspect index.js
 
 Debuggeriin pääsee käsiksi klikkaamalla Chromen developer-konsoliin ilmestyneestä vihreästä ikonista:
 
-![](../../images/3/37.png)
+![Developer-konsolitabille on ilmestynyt uusi valinta, joka on Elements-valinnan vasemmalla puolella oleva tekstitön laatikkosymboli](../../images/3/37.png)
 
 Debuggausnäkymä toimii kuten React-koodia debugattaessa. <i>Sources</i>-välilehdelle voidaan esim. asettaa breakpointeja eli kohtia joihin suoritus pysähtyy:
 
-![](../../images/3/38eb.png)
+![Developer-konsolista valittu source-tabi, ja näkyville tulleeseen koodiin on asetettu breakpoint. Suorituksen pysähtyessä aukeaa Watch-näkymä, joka kertoo muuttujien arvot](../../images/3/38eb.png)
 
 Ohjelman muuttujien arvoja voi evaluoida oikealla olevaan <i>watch</i>-ikkunaan.
 
 Kaikki sovelluksen console.log-tulostukset tulevat debuggerin <i>Console</i>-välilehdelle. Voit tutkia siellä myös muuttujien arvoja ja suorittaa mielivaltaista JavaScript-koodia:
 
-![](../../images/3/39ea.png)
+![Console-tabille on mahdollista evaluoida mielivaltaista js-koodia, pysäytetyn koodin muuttujat ovat käytettävissä](../../images/3/39ea.png)
 
 #### Epäile kaikkea
 
@@ -67,7 +67,7 @@ Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin 
 
 Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla Tietojenkäsittelytieteen osaston kursseilla on käytetty relaatiotietokantoja. Melkein kaikissa tämän kurssin osissa käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database). 
 
-Tärkein syy Mongon käytölle kurssilla on se, että Mongon on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien node-sovellusten tekemiseen.
+Tärkein syy Mongon käytölle kurssilla on se, että Mongo on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien node-sovellusten tekemiseen.
 
 Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokantoihin on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
@@ -77,11 +77,11 @@ MongoDB:n voi asentaa paikallisesti omalle koneelle. Internetistä löytyy kuite
 
 Kun käyttäjätili on luotu ja kirjauduttu, Aloitetaan valitsemalla kokeiluihin sopiva ilmainen vaihtoehto
 
-![](../../images/3/mongo1.png)
+![Valitaan 'shared', joka on ilmainen](../../images/3/mongo1.png)
 
 Valitaan sopiva pilvipalvelu ja konesali, ja luodaan klusteri:
 
-![](../../images/3/mongo2.png)
+![Valitaan esim AWS Stockholm ja klikataan Create cluster](../../images/3/mongo2.png)
 
 Odotetaan että klusteri on valmiina, mihin menee noin useita minuutteja.
 
@@ -89,19 +89,19 @@ Odotetaan että klusteri on valmiina, mihin menee noin useita minuutteja.
 
 Luodaan <i>security</i>-välilehdeltä tietokantakäyttäjätunnus joka on siis eri tunnus kuin se, jonka avulla kirjaudutaan MongoDB Atlasiin:
 
-![](../../images/3/mongo3.png)
+![Valitaan Security-välilehdeltä 'Username and password' ja luodaan käyttäjätunnus](../../images/3/mongo3.png)
 
 Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee käsiksi ja sallitaan yksinkertaisuuden vuoksi yhteydet kaikkialta:
 
-![](../../images/3/mongo4.png)
+![Valitaan Network access -välilehdeltä 'Allow access from anywhere'](../../images/3/mongo4.png)
 
 Lopulta ollaan valmiina ottamaan tietokantayhteys. Klikataan <i>connect</i>:
 
-![](../../images/3/mongo5.png)
+![Valitaan Databases-välilehdeltä 'Connect'](../../images/3/mongo5.png)
 
-Valitaan <i>Connect your application</i>:
+Valitaan <i>Connect</i>:
 
-![](../../images/3/mongo6.png)
+![näin avautuvasta näkymästä pitäisi löytyä connect-url](../../images/3/mongo6.png)
 
 Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
 
@@ -168,13 +168,13 @@ const password = process.argv[2]
 
 Kun koodi suoritetaan komennolla <i>node mongo.js salasana</i> lisää Mongoose tietokantaan uuden dokumentin.
 
-Voimme tarkastella tietokannan tilaa MongoDB Atlasin hallintanäkymän <i>collections</i>-osasta:
+Voimme tarkastella tietokannan tilaa MongoDB Atlasin hallintanäkymän <i>Browse collections</i>-osasta:
 
-![](../../images/3/mongo7.png)
+![Valitaan Databases-välilehdeltä 'Browse collections'](../../images/3/mongo7.png)
 
 Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>myFirstDatabase</i> kokoelmaan (collection) nimeltään <i>notes</i>:
 
-![](../../images/3/mongo8.png)
+![Näkymä kertoo luodun tietokannan ja siihen sisältyvän kokoelman](../../images/3/mongo8.png)
 
 Tuhotaan oletusarvoisen nimen saanut kanta <i>myFirstDatabase</i>. Päätetään käyttää tietokannasta nimeä <i>noteApp</i>, joten muutetaan tietokanta-URI muotoon
 
@@ -184,7 +184,7 @@ mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrit
 
 Suoritetaan ohjelma uudelleen:
 
-![](../../images/3/mongo9.png)
+![Näkymä 'Browse collections' näyttää nyt halutun nimen noteApp sisältävän tietokannan](../../images/3/mongo9.png)
 
 Data on nyt oikeassa kannassa. Hallintanäkymä sisältää myös toiminnon <i>create database</i>, joka mahdollistaa uusien tietokantojen luomisen hallintanäkymän kautta. Kannan luominen etukäteen hallintanäkymässä ei kuitenkaan ole tarpeen, sillä MongoDB Atlas osaa luoda kannan automaattisesti jos sovellus yrittää yhdistää kantaan, jota ei ole vielä olemassa.
 
@@ -256,7 +256,7 @@ Note.find({}).then(result => {
 
 Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat:
 
-![](../../images/3/70ea.png)
+![Mongoon tallennetut muistiinpanot tulostuvat konsoliin, muistiinpanoilla on myös kenttä _id jonka Mongo on luonut](../../images/3/70ea.png)
 
 Oliot haetaan kannasta _Note_-modelin metodilla [find](https://mongoosejs.com/docs/api.html#model_Model.find). Metodin parametrina on hakuehto. Koska hakuehtona on tyhjä olio <code>{}</code>, saimme kannasta kaikki _notes_-kokoelmaan talletetut oliot.
 
@@ -386,7 +386,7 @@ app.get('/api/notes', (request, response) => {
 
 Voimme todeta selaimella, että backend toimii kaikkien dokumenttien näyttämisen osalta:
 
-![](../../images/3/44ea.png)
+![Mongoon tallennetut muistiinpanot renderöityvät selaimeen JSON-muodossa](../../images/3/44ea.png)
 
 Toiminnallisuus on muuten kunnossa, mutta frontend olettaa, että olioiden yksikäsitteinen tunniste on kentässä <i>id</i>. Emme myöskään halua näyttää frontendille MongoDB:n versiointiin käyttämää kenttää <i>\_\_v</i>.
 
@@ -487,7 +487,7 @@ Tietokannan osoitetta ei kannata kirjoittaa koodiin, joten osoite annetaan sovel
 
 Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistuneen yhteydenmuodostuksen käsittelevät funktiot, jotka tulostavat konsoliin tiedon siitä, onnistuiko yhteyden muodostaminen:
 
-![](../../images/3/45e.png)
+![Konsoliin tulostuu virheilmoitus 'error connecting to Mongo, bad auth'](../../images/3/45e.png)
 
 On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
 
@@ -504,7 +504,7 @@ npm install dotenv
 Sovelluksen juurihakemistoon tehdään sitten tiedosto nimeltään <i>.env</i>, jonne tarvittavien ympäristömuuttujien arvot määritellään. Tiedosto näyttää seuraavalta:
 
 ```bash
-MONGODB_URI=mongodb+srv://fullstack:<pasdsword>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
@@ -514,7 +514,7 @@ Määrittelimme samalla aiemmin kovakoodaamamme sovelluksen käyttämän portin 
 
 **Tiedosto <i>.env</i> tulee heti gitignorata, sillä emme halua julkaista tiedoston sisältöä verkkoon!**
 
-![](../../images/3/45ae.png)
+![Kuva havainnollistaa sitä että .env on lisätty tiedostoon .gitignore](../../images/3/45ae.png)
 
 dotenvissä määritellyt ympäristömuuttujat otetaan koodissa käyttöön komennolla <em>require('dotenv').config()</em> ja niihin viitataan Nodessa kuten "normaaleihin" ympäristömuuttujiin syntaksilla <em>process.env.MONGODB_URI</em>.
 
@@ -536,16 +536,22 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-Kannattaa huomata että kun .env on gitignorattu, ei Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
+Kannattaa huomata että kun .env on gitignorattu, eivät Fly.io ja Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
 
-Tämän voi tehdä esimerkiksi dashboardin kautta menemällä asetuksiin:
-
-![](../../images/3/herokuConfig.png)
-
-Toinen vaihtoehto on kertoa ympäristömuuttujan herokulle arvo komentoriviltä
+Fly.io:a käytettäessä ympäristömuuttujan arvo asetetaan seuraavalla komennolla:
 
 ```
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:<pasdsword>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
+
+Herokussa ympäristömuuttujan arvo voidaan asettaa dashboardin kautta menemällä asetuksiin:
+
+![urlin https://dashboard.heroku.com/apps/sovelluksen_nimi/settings näkymä mahdollistaa key-value-pareina talletettavien ympäristömuuttujien tallentamisen](../../images/3/herokuConfig.png)
+
+Toinen vaihtoehto on kertoa ympäristömuuttujan Herokulle arvo komentoriviltä
+
+```
+heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 ### Tietokannan käyttö reittien käsittelijöissä
@@ -596,7 +602,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti selaimella, Postmanilla tai VS Coden REST Clientillä**. Seuraavassa kokeillaan uuden muistiinpanon luomista tietokannan käyttöönoton jälkeen:
 
-![](../../images/3/46e.png)
+![Luotaessa VS coden rest clientillä muistiinpano, avautuva näkymä havainnollistaa HTTP-kutsuun saatua vastausta](../../images/3/46e.png)
 
 Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan, että muutosten jälkeinen backend toimii yhdessä myös frontendin kanssa. Kaikkien kokeilujen tekeminen ainoastaan frontendin kautta on todennäköisesti varsin tehotonta.
 
@@ -697,7 +703,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) koska kyse on juuri siitä:
+Jos id ei ole hyväksyttävässä muodossa, ajaudutaan _catch_:in avulla määriteltyyn virheidenkäsittelijään. Sopiva statuskoodi on [400 Bad Request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request) koska kyse on juuri siitä:
 
 > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
 
@@ -718,7 +724,7 @@ Virheenkäsittelijään joutumisen syy voi olla joku ihan muu kuin mitä on tull
 
 Aina kun ohjelmoit ja projektissa on mukana backend, <i>**tulee ehdottomasti koko ajan pitää silmällä backendin konsolin tulostuksia**</i>. Jos työskentelet pienellä näytöllä, riittää että konsolista on näkyvissä edes pieni kaistale:
 
-![](../../images/3/15b.png)
+![Kuva havainnollistaa sitä miten sovelluskehittäjän tulee pitää koko ajan esillä editorin lisäksi konsolia johon backend on käynnistetty](../../images/3/15b.png)
 
 ### Virheidenkäsittelyn keskittäminen middlewareen
 
@@ -908,6 +914,6 @@ Päivitä myös polkujen <i>api/persons/:id</i> ja <i>info</i> käsittely ja var
 
 Selaimella tarkastellen yksittäisen numerotiedon tulisi näyttää seuraavalta:
 
-![](../../images/3/49.png)
+![Mentäessä yksittäisen henkilön urliin, renderöi selain JSON:in missä kenttinä nimi, puhelinnumero sekä id](../../images/3/49.png)
 
 </div>

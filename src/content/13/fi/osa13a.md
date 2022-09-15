@@ -7,10 +7,9 @@ lang: fi
 
 <div class="content">
 
-Tässä osassa tutustutaan relaatiotietokantoja käyttäviin node-sovelluksiin. Osassa rakennetaan osista 3-5 tutulle muistiinpanosovellukselle relaatiotietokantaa käyttävä node-backend. Osan suorittaminen edellyttää kohtuullista relaatiotietokantojen ja SQL:n osaamista. Eräs paikka hankkia riittävä osaaminen on kurssi [Tietokantojen perusteet](https://tikape.mooc.fi/).
+Tässä osassa tutustutaan relaatiotietokantoja käyttäviin Node-sovelluksiin. Osassa rakennetaan osista 3-5 tutulle muistiinpanosovellukselle relaatiotietokantaa käyttävä Node-backend. Osan suorittaminen edellyttää kohtuullista relaatiotietokantojen ja SQL:n osaamista. Eräs tapa hankkia riittävä osaaminen on kurssi [Tietokantojen perusteet](https://tikape.mooc.fi/).
 
-Osassa on 24 tehtävää, ja suoritusmerkintä edellyttää kaikkien tekemistä. Toisin kuin osat 0-7, tämä tehtävä palautetaan 
-[palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-psql) omaan kurssi-instanssiinsa.
+Osassa on 24 tehtävää, ja suoritusmerkintä edellyttää kaikkien tekemistä. Toisin kuin osat 0-7, tämä tehtävä palautetaan [palautussovelluksessa](https://studies.cs.helsinki.fi/stats/courses/fs-psql) omaan kurssi-instanssiinsa.
 
 ### Dokumenttitietokantojen edut ja haitat
 
@@ -67,13 +66,38 @@ Syy sille miksi kurssin aiemmat osat käyttivät MongoDB:tä liittyvät juuri se
 
 ### Sovelluksen tietokanta
 
-Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/). Voit myös hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla.
+Tarvitsemme sovellustamme varten relaatiotietokannan. Vaihtoehtoja on monia, käytämme kurssilla tämän hetken suosituinta Open Source -ratkaisua [PostgreSQL:ää](https://www.postgresql.org/). Voit halutessasi asentaa Postgresin (kuten tietokantaa usein kutsutaan) koneellesi. Helpommalla pääset käyttämällä jotain pilvipalveluna tarjottavaa Postgresia, esim. [ElephantSQL:ää](https://www.elephantsql.com/). Voit myös hyödyntää kurssin [osan 12](/en/part12) oppeja ja käyttää Postgresia paikallisesti Dockerin avulla.
 
-Käytämme nyt kuitenkin hyväksemme sitä, että osista 3 ja 4 tuttuun pilvipalvelualusta Herokuun on mahdollista luoda sovellukselle Postgres-tietokanta.
+Käytämme nyt kuitenkin hyväksemme sitä, että osista 3 ja 4 tuttuille pilvipalvelualustoille Fly.io ja Heroku on mahdollista luoda sovellukselle Postgres-tietokanta.
 
 Tämän osan teoriamateriaalissa rakennetaan osissa 3 ja 4 rakennetun muistiinpanoja tallettavan sovelluksen backendendistä Postgresia käyttävä versio.
 
-Luodaan nyt sopivan hakemiston sisällä Heroku-sovellus, lisätään sille tietokanta ja katsotaan komennolla _heroku config_ mikä on tietokantayhteyden muodostamiseen tarvittava <i>connect string:</i>
+#### Fly.io
+
+Luodaan nyt sopivan hakemiston sisällä Fly.io-sovellus komennolla _fly launch_ ja luodaan sovellukselle Postgres-tietokanta:
+
+![](../../images/13/6.png)
+
+Luomisen yhteydessä Fly.io kertoo tietokannan salasanan, joka tarvitaan jotta sovellus saa yhteyden tietokantaan. <i>Tämä on ainoa kerta kun salasana on mahdollista nähdä tekstimuodossa, joten se on syytä ottaa talteen!</i>
+
+Huomaa, että jos et aio laittaa sovellusta ollenkaan Fly.io:hon, on mahdollista luoda palveluun myös pelkkä tietokanta. Ohjeet siihen [täällä](https://fly.io/docs/reference/postgres/#creating-a-postgres-app).
+
+
+Tietokantaan saadaan psql-konsoliyhteys komennolla
+
+```bash
+flyctl postgres connect -a <sovelluksen_nimi-db>
+```
+
+omassa tapauksessani sovelluksen nimi on <i>fs-psql-lecture</i> joten komento on seuraava:
+
+```bash
+flyctl postgres connect -a fs-psql-lecture-db
+```
+
+#### Heroku
+
+Käytettäessä Herokua luodaan sopivan hakemiston sisällä Heroku-sovellus, lisätään sille tietokanta ja katsotaan komennolla _heroku config_ mikä on tietokantayhteyden muodostamiseen tarvittava <i>connect string:</i>
 
 ```bash
 heroku create
@@ -83,15 +107,13 @@ heroku config
 DATABASE_URL: postgres://<username>:<password>@ec2-44-199-83-229.compute-1.amazonaws.com:5432/<db-name>
 ```
 
-Erityisesti relaatiotietokantaa käytettäessä on oleellista päästä tietokantaan käsiksi myös suoraan. Tapoja tähän on monia, on olemassa mm. useita erilaisia graafisia käyttöliittymiä, kuten [pgAdmin](https://www.pgadmin.org/). Käytetään kuitenkin postgresin [psql](https://www.postgresql.org/docs/current/app-psql.html)-komentorivityökalua.
-
-Tietokantaan päästään käsiksi suorittamalla _psql_ Herokun palvelimella seuraavasti (huomaa, että komennon parametrit riippuvat Heroku-sovelluksen connect urlista):
+Tietokantaan saadaan psql-konsoliyhteys suorittamalla _psql_ Herokun palvelimella seuraavasti (huomaa, että komennon parametrit riippuvat Heroku-sovelluksen connect urlista):
 
 ```bash
 heroku run psql -h ec2-44-199-83-229.compute-1.amazonaws.com -p 5432 -U <username> <dbname>
 ```
 
-Salasanan antamisen jälkeen kokeillaan psql:n tärkeintä komentoa _\d_, joka kertoo tietokannan sisällön:
+Komento kysyy salasanaa ja avaa psql-konsolin:
 
 ```bash
 Password for user <username>:
@@ -99,7 +121,17 @@ psql (13.4 (Ubuntu 13.4-1.pgdg20.04+1))
 SSL connection (protocol: TLSv1.3, cipher: TLS_AES_256_GCM_SHA384, bits: 256, compression: off)
 Type "help" for help.
 
-username=> \d
+postgres=# 
+```
+
+#### psql-konsolin käyttöä
+
+Erityisesti relaatiotietokantaa käytettäessä on oleellista päästä tietokantaan käsiksi myös suoraan. Tapoja tähän on monia, on olemassa mm. useita erilaisia graafisia käyttöliittymiä, kuten [pgAdmin](https://www.pgadmin.org/). Käytetää nnyt kuitenkin Postgresin [psql](https://www.postgresql.org/docs/current/app-psql.html)-komentorivityökalua.
+
+Kun konsoli on avattu, kokeillan psql:n tärkeintä komentoa _\d_, joka kertoo tietokannan sisällön:
+
+```bash
+postgres=# \d
 Did not find any relations.
 ```
 
@@ -121,12 +153,12 @@ Muutama huomio: sarake  <i>id </i> on määritelty <i>pääavaimeksi</i> (engl. 
 Katsotaan tilannetta konsolista käsin. Ensin komento _\d_, joka kertoo mitä tauluja kannassa on:
 
 ```sql
-username=> \d
+postgres=# \d
                  List of relations
  Schema |     Name     |   Type   |     Owner
 --------+--------------+----------+----------------
- public | notes        | table    | username
- public | notes_id_seq | sequence | username
+ public | notes        | table    | postgres
+ public | notes_id_seq | sequence | postgres
 (2 rows)
 ```
 
@@ -135,7 +167,7 @@ Taulun <i>notes</i> lisäksi Postgres loi aputaulun <i>notes\_id\_seq</i>, joka 
 Komennolla _\d notes_ näemme miten taulu <i>notes</i> on määritelty:
 
 ```sql
-username=> \d notes;
+postgres=# \d notes;
                                      Table "public.notes"
   Column   |          Type          | Collation | Nullable |              Default
 -----------+------------------------+-----------+----------+-----------------------------------
@@ -147,7 +179,7 @@ Indexes:
     "notes_pkey" PRIMARY KEY, btree (id)
 ```
 
-Sarakkeella <i>id</i> on siis oletusarvo (default), joka saadaan kutsumalla postgresin sisäistä funktiota <i>nextval</i>.
+Sarakkeella <i>id</i> on siis oletusarvo (default), joka saadaan kutsumalla Postgresin sisäistä funktiota <i>nextval</i>.
 
 Lisätään tauluun hieman sisältöä:
 
@@ -159,7 +191,7 @@ insert into notes (content, important) values ('MongoDB is webscale', false);
 Ja katsotaan miltä luotu sisältö näyttää:
 
 ```sql
-username=> select * from notes;
+postgres=# select * from notes;
  id |               content               | important | date
 ----+-------------------------------------+-----------+------
   1 | relational databases rule the world | t         |
@@ -170,7 +202,7 @@ username=> select * from notes;
 Jos yritämme tallentaa tietokantaan dataa, joka ei ole skeeman mukaista, se ei onnistu. Pakollisen sarakkeen arvo ei voi puuttua:
 
 ```sql
-username=> insert into notes (important) values (true);
+postgres=# insert into notes (important) values (true);
 ERROR:  null value in column "content" of relation "notes" violates not-null constraint
 DETAIL:  Failing row contains (9, null, t, null).
 ```
@@ -178,7 +210,7 @@ DETAIL:  Failing row contains (9, null, t, null).
 Sarakkeen arvo ei voi olla väärää tyyppiä:
 
 ```sql
-username=> insert into notes (content, important) values ('only valid data can be saved', 1);
+postgres=# insert into notes (content, important) values ('only valid data can be saved', 1);
 ERROR:  column "important" is of type boolean but expression is of type integer
 LINE 1: ...tent, important) values ('only valid data can be saved', 1);                                                                 ^
 ```
@@ -186,14 +218,14 @@ LINE 1: ...tent, important) values ('only valid data can be saved', 1);         
 Skeemassa olemattomia sarakkeita ei hyväksytä:
 
 ```sql
-username=> insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
+postgres=# insert into notes (content, important, value) values ('only valid data can be saved', true, 10);
 ERROR:  column "value" of relation "notes" does not exist
 LINE 1: insert into notes (content, important, value) values ('only ...
 ```
 
 Seuraavaksi on aika siirtyä käyttämään tietokantaa sovelluksesta käsin.
 
-### Relaatiotietokantaa käyttävä node-sovellus
+### Relaatiotietokantaa käyttävä Node-sovellus
 
 Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan sille kehitysaikaiseksi riippuvuudeksi <i>nodemon</i>  sekä seuraavat suoritusaikaiset riippuvuudet:
 
@@ -201,7 +233,7 @@ Alustetaan sovellus tavalliseen tapaan komennolla <i>npm init</i> ja asennetaan 
 npm install express dotenv pg sequelize
 ```
 
-Näistä jälkimmäinen [sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) -kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
+Näistä jälkimmäinen [Sequelize](https://sequelize.org/master/) on kirjasto, jonka kautta käytämme Postgresia. Sequelize on niin sanottu [Object relational mapping](https://en.wikipedia.org/wiki/Object%E2%80%93relational_mapping) (ORM) -kirjasto, joka mahdollistaa JavaScript-olioiden tallentamisen relaatiotietokantaan ilman SQL-kielen käyttöä, samaan tapaan kuin MongoDB:n yhteydessä käyttämämme Mongoose.
 
 Testataan, että yhteyden muodostaminen onnistuu. Luodaan tiedosto <i>index.js</i> ja sille seuraava sisältö:
 
@@ -209,14 +241,7 @@ Testataan, että yhteyden muodostaminen onnistuu. Luodaan tiedosto <i>index.js</
 require('dotenv').config()
 const { Sequelize } = require('sequelize')
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-})
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
 const main = async () => {
   try {
@@ -231,34 +256,70 @@ const main = async () => {
 main()
 ```
 
-Komennon _heroku config_ paljastama tietokannan <i>connect string</i> tulee tallentaa tiedostoon <i>.env</i>, jonka sisällön pitää olla suunnilleen seuraava:
-
-```bash
-$ cat .env
-DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
-```
-
-Kokeillaan muodostuuko yhteys:
-
-```bash
-$ node index.js
-Executing (default): SELECT 1+1 AS result
-Connection has been established successfully.
-```
-Jos ja kun yhteys toimii, voimme tehdä ensimmäisen kyselyn. Muutetaan ohjelmaa seuraavasti:
+Huom: Herokua käyttäessä yhteyden muodostusksen saatta joutua konfiguroimaan seuraavasti:
 
 ```js
-require('dotenv').config()
-const { Sequelize, QueryTypes } = require('sequelize') // highlight-line
-
 const sequelize = new Sequelize(process.env.DATABASE_URL, {
+  // highlight-start
   dialectOptions: {
     ssl: {
       require: true,
       rejectUnauthorized: false
     }
   },
-});
+  // highlight-end
+})
+```
+
+Yhteydenmuodostamista varten tulee tiedostoon <i>.env</i> tallentaa <i>connect string</i>, jonka perusteella yhteyden muodostus tapahtuu.
+
+Herokua käyttäessäsi saat connect stringin selville komennolla _heroku config_, ja tiedoston <i>.env</i> sisältö tulee olemaan seuraavan kaltainen
+
+```bash
+$ cat .env
+DATABASE_URL=postgres://<username>:<password>@ec2-54-83-137-206.compute-1.amazonaws.com:5432/<databasename>
+```
+
+Fly.io:a käyttäessä paikallinen tietokantayhteys taytyy ensin tehdä mahdolliseksi [tunneloimalla](https://fly.io/docs/reference/postgres/#connecting-to-postgres-from-outside-fly) paikallisen koneen portti 5432 Fly.io:n tietokannan porttiin komennolla
+
+```bash
+flyctl proxy 5432 -a <app-name>-db
+```
+
+omassa tapauksessani komento on
+
+```bash
+flyctl proxy 5432 -a fs-psql-lecture-db
+```
+
+Komento tulee jättää päälle siksi aikaa kuin tietokantaa käytetään. Konsoli-ikkunaa siis ei saa sulkea.
+
+Fly.io:n connect-string on seuraavaa muotoa:
+
+```bash
+$ cat .env
+DATABASE_URL=postgres://postgres:<password>@localhost:5432/postgres
+```
+
+Salasana on se, jonka on otettu talteen tietokantaa luodessa.
+
+Connect stringin viimeinen osa <i>postgres</i> viittaa käytettävään tietokannan nimeen. Nyt se on valmiiksi luotava ja oletusarvoisesti käytössä oleva <i>postgres</i>-niminen tietokanta. Komennolla [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html) on tarvittaessa mahdollista luoda muita tietokantoja Postgres-tietokantainstanssiin.
+
+Kun connect string on määritety tiedostoon <i>.env</i> voidaan kokeilla muodostuuko yhteys:
+
+```bash
+$ node index.js
+Executing (default): SELECT 1+1 AS result
+Connection has been established successfully.
+```
+
+Jos ja kun yhteys toimii, voimme tehdä ensimmäisen kyselyn. Muutetaan ohjelmaa seuraavasti:
+
+```js
+require('dotenv').config()
+const { Sequelize, QueryTypes } = require('sequelize') // highlight-line
+
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
 const main = async () => {
   try {
@@ -296,6 +357,7 @@ Executing (default): SELECT * FROM notes
 ]
 ```
 
+
 Vaikka Sequelize on ORM-kirjasto, jota käyttämällä SQL:ää ei juurikaan ole tarvetta itse kirjoittaa, käytimme nyt [suoraan SQL:ää](https://sequelize.org/master/manual/raw-queries.html) Sequelizen metodin [query](https://sequelize.org/master/class/lib/sequelize.js~Sequelize.html#instance-method-query) avulla.
 
 Koska kaikki näyttää toimivan, muutetaan sovellus web-sovellukseksi.
@@ -306,14 +368,7 @@ const { Sequelize, QueryTypes } = require('sequelize')
 const express = require('express') // highlight-line
 const app = express() // highlight-line
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(process.env.DATABASE_URL)
 
 // highlight-start
 app.get('/api/notes', async (req, res) => {
@@ -340,18 +395,13 @@ const { Sequelize, Model, DataTypes } = require('sequelize') // highlight-line
 const express = require('express')
 const app = express()
 
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
-  dialectOptions: {
-    ssl: {
-      require: true,
-      rejectUnauthorized: false
-    }
-  },
-});
+const sequelize = new Sequelize(process.env.DATABASE_UR)
 
 // highlight-start
 class Note extends Model {}
+// highlight-end
 
+// highlight-start
 Note.init({
   id: {
     type: DataTypes.INTEGER,
@@ -523,7 +573,7 @@ Sovelluksessamme on nyt yksi ikävä puoli, se olettaa että täsmälleen oikean
 
 Koska ohjelmakoodi säilytetään GitHubissa, olisi järkevää säilyttää myös tietokannan luovat komennot ohjelmakoodin yhteydessä, jotta tietokannan skeema on varmasti sama mitä ohjelmakoodi odottaa. Sequelize pystyy itse asiassa generoimaan skeeman automaattisesti modelien määritelmästä modelien metodin [sync](https://sequelize.org/master/manual/model-basics.html#model-synchronization) avulla.
 
-Tuhotaan nyt tietokanta konsolista käsin antamalla seuraava komento:
+Tuhotaan nyt tietokanta konsolista käsin antamalla psql-konsolissa seuraava komento:
 
 ```sql
 drop table notes;
@@ -532,7 +582,7 @@ drop table notes;
 Komento _\d_ paljastaa että taulu on hävinnyt tietokannasta:
 
 ```sql
-username=> \d
+postgres=# \d
 Did not find any relations.
 ```
 

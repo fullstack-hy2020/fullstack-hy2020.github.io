@@ -35,6 +35,12 @@ Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2023. klo 23:59 
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
+### Apua tehtävien tekoon?
+
+Kurssilla ei tällä hetkellä ole varsinaista opetusta, mutta tehtäviin voi yrittää kysyä apua kurssin keskustelukanavalla Discordissa <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>.
+
+Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.
+
 ### Osat ja suorittaminen
 
 Full Stack –opinnot koostuvat ydinkurssista, sekä useista lisäosista.  Voit suorittaa opinnot 5-14 opintopisteen laajuisena. 
@@ -55,7 +61,7 @@ Arvosana/opintopisterajat:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Koe suoritetaan Avoimen yliopiston [Moodle-järjestelmässä](https://studies.helsinki.fi/courses/cur/otm-dbf5a51d-2121-4110-af0f-f1e8f0b74fb9/_Full_Stack_Web_Development), ohje kokeeseen ilmoittautumiseen [täällä](/osa0/yleista/#kokeeseen-ilmoittautuminen).
+Jos haluat kurssista virallisen suoritusmerkinnän, kuuluu kurssiin myös koe. Hyväksytty suoritus edellyttää kokeen läpäisemistä, koe ei kuitenkaan vaikuta arvosanaan. Lisää tietoa kurssikokeesta [täällä](/osa0/yleista/#kurssikoe).
 
 Kokeen viimeinen suorituspäivä on 10.1.2023. **Huomaa, että viimeinen päivä kokeeseen ilmoittautumiselle on 9.1.2023.**
 
@@ -123,18 +129,16 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 Kurssin suoritusohjeet pähkinänkuoressa (5 op ydinkurssi CSM141081) 
 
 - Tee tehtävät. Palauta vastauksesi [palautussovelluksen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) kautta.
-- Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikokeeseen-ilmoittautuminen) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
-- Aktivoi Helsingin yliopiston käyttäjätunnus. Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Käyttäjätunnus tulee aktivoida ennen kurssikokeen suorittamista. Lue lisää [täältä](osa0/yleista/#kurssikokeeseen-ilmoittautuminen). 
-- Tee verkkotentti Moodlessa. Pääset Moodleen [tämän](https://moodle.helsinki.fi/course/view.php?id=46197) linkin kautta. Kirjaudu Moodleen Helsingin yliopiston käyttäjätunnuksella.  
+- Ilmoittaudu kurssille. Pääset ilmoittautumaan palautussovelluksesta löytyvän [linkin](/osa0/yleista#kurssikoe) kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä. 
 - Tallenna Helsingin yliopiston opiskelijanumerosi palautussovellukseen. Lue lisää [täältä](/osa0/yleista/#suoritusmerkinnan-pyytaminen)
-- Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
+- Tee kurssikoe palautusjärjestelmässä, lue lisää [täältä](/osa0/yleista#kurssikoe).
+- Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
- 
 Kurssin suoritusohjeet pähkinänkuoressa (Osat 6-13) 
 
 - Tee tehtävät. Palauta vastauksesi palautussovelluksen kautta. Huomaa, että osat 8-13 palautetaan palautussovelluksessa erillisiin kurssi-instansseihin.
 - Ilmoittaudu kurssille. Pääset ilmoittautumaan kurssimateriaalista (ks. [Osat ja suorittaminen](/osa0/yleista#osat-ja-suorittaminen)) löytyvän ilmoittautumislinkin kautta.  Ilmoittaudu erikseen kuhunkin osaan. 
-- Pyydä suoritusmerkintää palautussovelluksesta. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
+- Pyydä suoritusmerkintää palautussovelluksessa. Lue lisää [täältä](/osa0/yleista#suoritusmerkinnan-pyytaminen)
 
 ### Tehtävien palauttaminen
 
@@ -148,22 +152,49 @@ GitHubiin palautettuja tehtäviä tarkastetaan plagiaattitunnistusjärjestelmän
 
 Suurin osa tehtävistä on moniosaisia, samaa ohjelmaa pala palalta rakentavia kokonaisuuksia. Tällaisissa tehtäväsarjoissa ohjelman lopullisen version palauttaminen riittää, voit toki halutessasi tehdä commitin jokaisen tehtävän jälkeisestä tilanteesta, mutta se ei ole välttämätöntä.
 
-### Kurssikokeeseen ilmoittautuminen
+### Kurssikoe
 
-Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssikokeen Avoimen yliopiston Moodle-järjestelmässä. Pääset Moodleen seuraavia ohjeita seuraamalla:
+Virallinen kurssisuoritus edellyttää että teet hyväksyttävästi kurssin osia 1-5 käsittelevän kokeen. 
+
+Koe tehdään tehtävien palautusjärjestelmässä. Pääset tekemään kokeen seuraavia ohjeita seuraamalla:
 
 - Tee Avoimen yliopiston kurssi-ilmoittautuminen 9.1.2023 mennessä.
 - Pääset ilmoittautumaan [palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) löytyvän linkin kautta sen jälkeen kun olet palauttanut riittävän määrän tehtäviä:
 
-![](../../images/0/enroll.png)
 
-Pääset Moodleen [tämän linkin](https://moodle.helsinki.fi/course/view.php?id=46197) kautta, sen jälkeen kun olet:
-  - Ilmoittautunut Avoimen yliopiston kautta kurssille, ja
-  - aktivoinut Helsingin yliopiston käyttäjätunnuksen.
+![](../../images/0/enroll1.png)
 
-Käyttäjätunnus myönnetään sinulle ilmoittautumisesi yhteydessä. Se tulee aktivoida ennen kurssikokeen suorittamista. [Lue lisää käyttäjätunnuksen aktivoinnista](https://studies.helsinki.fi/ohjeet/artikkeli/helsingin-yliopiston-kayttajatunnus-avoin-yliopisto).
+Tallettaa Helsingin Yliopiston opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen:
 
-HUOM: Muista tallettaa opiskelijanumerosi [palautussovellukseen](https://studies.cs.helsinki.fi/stats/myinfo) ilmoittautumisen jälkeen! Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
+![](../../images/0/28b.png)
+
+Saat selville opiskelijanumerosi [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
+
+Tämän jälkeen pääset tekemään kokeen palautusjärjestelmässä:
+
+![](../../images/0/enroll3.png)
+
+Koeaika on 120 minuuttia. Jos koesuoritus hyväksytään, saat seuraavan vahvistuksen:
+
+![](../../images/0/enroll4.png)
+
+Jos et pääse kokeesta läpi, voit yrittää uudelleen viikon kuluttua.
+
+Jos pääset kokeesta läpi, ja et halua tehdä enempää tehtäviä, voit mennä palautussovelluksen my submissons -välilehdelle ja pyytää suorituksen rekisteröintiä:
+
+![](../../images/0/enroll5a.png)
+
+Muista painaa isoa sinistä nappia jotta suorituksesi rekisteröidään!
+
+Huomaa, että joudut painamaan nappia vielä toisen kerran:
+
+![](../../images/0/button2.png)
+
+Kun nappia on painettu tarpeeksi monta kertaa näet seuraavan tekstin:
+
+> <i>University credit registration in progress...</i>
+
+Huom: jos teit jo kokeen Moodlessa, ota yhteyttä matti.luukkainen@helsinki.fi tai @mluukkai in Discord.
 
 ### Suoritusmerkinnän pyytäminen
 
@@ -173,16 +204,27 @@ Jos haluat kurssilta virallisen suorituksen, tallenna <b>Helsingin yliopiston</b
 
 Jos et ole Helsingin yliopiston opiskelija, saat opiskelijanumeron ilmoittautumalla kurssille [Avoimen yliopiston](/osa0/yleista/#kokeeseen-ilmoittautuminen) jälkeen [täällä](/osa0/yleista#miten-saan-selville-helsingin-yliopiston-opiskelijanumeroni) kuvatulla tavalla.
 
-Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja *ilmoittanut palautussovelluksessa* olevasi valmis kurssin suorituksen kanssa:
+Saat suoritusmerkinnän sen jälkeen kun olet tehnyt hyväksyttävään suoritukseen oikeuttavan määrän tehtäviä, suorittanut kokeen hyväksytysti ja ilmoittanut palautussovelluksessa olevasi valmis kurssin suorituksen kanssa:
 
-![](../../images/0/28a.png)
+![](../../images/0/enroll5a.png)
 
 Paina siis sinistä nappia "I have completed the course ..."!
 
-Arvosana siirtyy Helsingin yliopiston opintorekisteriin Sisuun ja [Opintopolkuun](https://opintopolku.fi/oma-opintopolku/) neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
+Huomaa, että joudut painamaan nappia vielä toisen kerran:
+
+![](../../images/0/button2.png)
+
+Kun nappia on painettu tarpeeksi monta kertaa näet seuraavan tekstin:
+
+> <i>University credit registration in progress...</i>
 
 **Huomaa**, että suoritusmerkintää ei voida kirjata jos et ole ilmoittautunut kaikkiin suorittamiisi osiin, katso [täältä](/osa0/yleista#osat-ja-suorittaminen) ohjeet ilmoittautumiseen.
 
+Arvosana siirtyy Helsingin yliopiston opintorekisteriin Sisuun ja [Opintopolkuun](https://opintopolku.fi/oma-opintopolku/) neljän viikon sisällä suoritusmerkintäpyynnön jälkeen. Heinäkuu saattaa aiheuttaa viiveen suorituksen kirjaamiseen.
+
+Kun suoritusmerkintä on kirjattu, näet palautussovelluksessa tekstin
+
+> <i>University credits registered, see the course page how to get a transcript if you need one</i>
 ### Miten saan selville Helsingin yliopiston opiskelijanumeroni?
 
 Kun ilmoittaudut ensimmäistä kertaa Avoimen yliopiston kautta jollekin kurssille, sinulle luodaan Helsingin yliopiston opiskelijanumero. Varmista siis että olet ilmoittautunut kurssille ennen kuin alat selvittää opiskelijanumeroasi. 
@@ -259,7 +301,7 @@ Harjoitustyöstä on lisää tietoa [täällä](https://github.com/fullstack-hy2
 
 ### Haastattelulupaus
 
-Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville. Vuoden 2021 aikana ilmestyneiden osien 12 ja 13 suorittamista ei edellytetä 15.3.2022 mennessä harjoitustyön suorittavilta.
+Kurssin yhteistyökumppaneista[Houston Inc](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) ja [Smartly.io](https://www.smartly.io/) ovat antaneet <i>haastattelulupauksen</i> kaikille kurssin sekä projektin täydessä laajuudessa (14+10 op) suorittaville.
 
 Haastattelulupaus tarkoittaa, että opiskelija voi niin halutessaan ilmoittautua työhaastatteluun haastattelulupauksen antaneelle yritykselle. Kurssin vastuuhenkilö toimittaa ohjeet opiskelijalle henkilökohtaisesti kurssisuorituksen jälkeen.
 
@@ -282,5 +324,7 @@ Noden myötä koneelle asentuu myös [npm](https://www.npmjs.com/get-npm) (alunp
 Jos löydät kirjoitusvirheen tai jokin asia on ilmaistu epäselvästi tai kielioppisääntöjen vastaisesti, tee <i>pull request</i> repositoriossa <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io> olevaan kurssimateriaaliin. Esim. tämän sivun Markdown-muotoinen lähdekoodi on osoitteessa <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/blob/source/src/content/0/fi/osa0a.md>
 
 Materiaalin jokaisen osan alalaidassa on linkki <em>Ehdota muutosta materiaalin sisältöön</em>, jota klikkaamalla pääset suoraan editoimaan sivun lähdekoodia.
+
+Materiaalissa on paljon linkkejä monenlaisiin syventäviin materiaaleihin. Jos löydät toimimattoman linkin, ehdota korvausta tai jos et löydä korvaavaa linkkiä, pingaa kurssihenkilökuntaa Discordissa.
 
 </div>

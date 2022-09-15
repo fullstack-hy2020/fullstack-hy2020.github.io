@@ -113,7 +113,9 @@ Obviously, this exercise is not done in the same repository as the previous exer
 
 Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.
 
-Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai) and/or [kaltsoon](https://github.com/kaltsoon) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review, it is best to send a private message and to include the collaboration invite link to the message.  
+Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai) and/or [kaltsoon](https://github.com/kaltsoon) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review,  and to include the collaboration invite link to the message.
+
+**Please note** what was written above, include the link to _the collaboration invite_ in the ping, not the link to the pull request.
 
 Then you are done!
 
@@ -130,8 +132,6 @@ Your solutions are in two repositories (pokedex and your own project), and since
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
 ![Submissions](../../images/11/21.png)
-
-Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 

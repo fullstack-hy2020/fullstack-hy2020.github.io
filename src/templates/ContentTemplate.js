@@ -46,7 +46,8 @@ export default class ContentTemplate extends Component {
 
     links.map(i => {
       i.style = `border-color: ${colors[partColors[frontmatter.part]]}`;
-      ! i.classList.contains('language-switcher__language') && (i.target = '_blank');
+      !i.classList.contains('language-switcher__language') &&
+        (i.target = '_blank');
 
       function over() {
         i.style.backgroundColor = colors[partColors[frontmatter.part]];
@@ -92,13 +93,17 @@ export default class ContentTemplate extends Component {
     const colorCode = colors[partColors[part]];
 
     const parserOptions = {
-      replace: ({ type, name, attribs, children }) => {
+      replace: props => {
+        const { type, name, attribs, children } = props;
         if (type === 'tag' && name === 'picture') {
+          const alt = children[0].attribs.alt
+            ? children[0].attribs.alt
+            : 'fullstack content';
           return (
             <picture>
               <img
                 style={{ borderColor: colorCode }}
-                alt="fullstack content"
+                alt={alt}
                 src={children[0].attribs.src}
               />
             </picture>
@@ -158,7 +163,7 @@ export default class ContentTemplate extends Component {
           ]}
         />
 
-{/* eslint-disable */}
+        {/* eslint-disable */}
         {this.state.showArrowUp && (
           <div
             className="arrow-go-up"
@@ -173,7 +178,7 @@ export default class ContentTemplate extends Component {
             <img src={ArrowToTop} alt="arrow-up" />
           </div>
         )}
-{/* eslint-enable */}
+        {/* eslint-enable */}
 
         <div className="course-container spacing--after">
           <Banner

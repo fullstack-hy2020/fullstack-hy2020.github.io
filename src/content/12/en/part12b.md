@@ -729,7 +729,7 @@ Implement a todo counter that saves the number of created todos to Redis:
 
 ```json
 {
-  "added_todos": 0,
+  "added_todos": 0
 }
 ```
 
@@ -783,6 +783,6 @@ Redis can also be used to implement so called [publish-subscribe](https://en.wik
 
 Check that the data is not persisted by default: after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_ the counter value is reset to 0.
 
-Then create a volume for Redis data (by mofifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
+Then create a volume for Redis data (by modifying <i>todo-app/todo-backend/docker-compose.dev.yml </i>) and make sure that the data survives after running _docker-compose -f docker-compose.dev.yml down_ and _docker-compose -f docker-compose.dev.yml up_.
 
 </div>

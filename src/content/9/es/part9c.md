@@ -566,7 +566,7 @@ Además de eso, de forma predeterminada, <i>ts-node</i> y <i>ts-node-dev</i> amp
  ["js", "json", "node", "ts", "tsx"]
 ```
 
-> **NB**: La validez de los archivos <i>.js</i>, <i>.json</i> y <i>.node</i> como módulos en Typecript depende de la configuración del entorno, incluidas las opciones <i>tsconfig</i> como <i>allowJs</i> y <i>resolveJsonModule</i>.
+> **NB**: La validez de los archivos <i>.js</i>, <i>.json</i> y <i>.node</i> como módulos en Typescript depende de la configuración del entorno, incluidas las opciones <i>tsconfig</i> como <i>allowJs</i> y <i>resolveJsonModule</i>.
 
 Considere una estructura de carpeta plana que contiene archivos:
 

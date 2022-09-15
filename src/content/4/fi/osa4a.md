@@ -356,7 +356,7 @@ logger.info('message')
 logger.error('error message')
 ```
 
-Toinen vaihoehto on destrukturoida funktiot omiin muuttujiin <i>require</i>-kutsun yhteydessä:
+Toinen vaihtoehto on destrukturoida funktiot omiin muuttujiin <i>require</i>-kutsun yhteydessä:
 
 ```js
 const { info, error } = require('./utils/logger')
@@ -609,7 +609,7 @@ Ensin suoritetaan testattava koodi eli generoidaan merkkijonon <i>react</i> pali
 
 Kuten odotettua, testit menevät läpi:
 
-![](../../images/4/1x.png)
+![Jest kertoo että 3 testiä kolmesta meni läpi](../../images/4/1x.png)
 
 Jest olettaa oletusarvoisesti, että testitiedoston nimessä on merkkijono <i>.test</i>. Käytetään kurssilla konventiota, jossa testitiedostojen nimen loppu on <i>.test.js</i>.
 
@@ -625,7 +625,7 @@ test('reverse of react', () => {
 
 Seurauksena on seuraava virheilmoitus:
 
-![](../../images/4/2x.png)
+![Jest kertoo että testin odottama merkkijono poikkesi tuloksena olevasta merkkijonosta](../../images/4/2x.png)
 
 Lisätään tiedostoon <i>tests/average.test.js</i> muutama testi metodille _average_:
 
@@ -649,7 +649,7 @@ describe('average', () => {
 
 Testi paljastaa, että metodi toimii väärin tyhjällä taulukolla (sillä nollalla jaon tulos on JavaScriptissä <i>NaN</i>):
 
-![](../../images/4/3.png)
+![Jest kertoo että odoteutun arvon 0 sijaan tuloksena on NaN](../../images/4/3.png)
 
 Metodi on helppo korjata:
 
@@ -676,7 +676,7 @@ describe('average', () => {
 
 Describejen avulla yksittäisessä tiedostossa olevat testit voidaan jaotella loogisiin kokonaisuuksiin. Testituloste hyödyntää myös describe-lohkon nimeä:
 
-![](../../images/4/4x.png)
+![Testitapausten tulokset on Jestin näkymässä ryhmitelty describe-lohkojen mukaan](../../images/4/4x.png)
 
 Kuten myöhemmin tulemme näkemään, <i>describe</i>-lohkot ovat tarpeellisia, jos haluamme osalle yksittäisen testitiedoston testitapauksista joitain yhteisiä alustus- tai lopetustoimenpiteitä.
 

@@ -363,7 +363,7 @@ Remember to import all the components used in the form.
 
 #### Notification
 
-The notification displayed on login can be done using the [Alert](https://mui.com/material-ui/react-alert/) component, which is quite similiar to Bootstrap's equivalent component:
+The notification displayed on login can be done using the [Alert](https://mui.com/material-ui/react-alert/) component, which is quite similar to Bootstrap's equivalent component:
 
 ```js
 <div>
@@ -502,6 +502,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
 - <https://semantic-ui.com/>
+- <https://mantine.dev/>
 
 ### Styled components
 

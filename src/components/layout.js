@@ -7,10 +7,12 @@ import Header from './Header/Header';
 import InfoBanner from './InfoBanner';
 import PropTypes from 'prop-types';
 
+const BANNER_TO_KEY = 'exam_banner_seen';
+
 class Layout extends Component {
   state = {
     siteLanguage: 'fi',
-    visible: true,
+    visible: false,
   };
 
   componentDidMount() {
@@ -21,9 +23,7 @@ class Layout extends Component {
         ? 'zh'
         : 'fi';
 
-    const visible = !localStorage.getItem('r18_banner_seen');
-
-    console.log(visible);
+    const visible = false; // !localStorage.getItem(BANNER_TO_KEY);
 
     this.setState({
       siteLanguage: siteLanguage,
@@ -32,7 +32,7 @@ class Layout extends Component {
   }
 
   hideNote() {
-    localStorage.setItem('r18_banner_seen', 'yes');
+    localStorage.setItem(BANNER_TO_KEY, 'yes');
     this.setState({
       siteLanguage: this.state.siteLanguage,
       visible: false,

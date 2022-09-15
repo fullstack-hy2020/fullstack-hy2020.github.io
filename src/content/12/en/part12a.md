@@ -25,7 +25,7 @@ You can probably use nvm, virtual machines, or dark magic to get them running at
 
 <i>Scenario 2: Your application runs on your machine. You need to move the application to a server.</i>
 
-It is not uncommon that the application just does not run on the server despite it working just fine in your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
+It is not uncommon that the application just does not run on the server despite it working just fine on your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
 
 Sometimes you may hear about the <i>"Works in my container"</i> issue. The phrase describes a situation in which the application works fine in a container running on your machine but breaks when the container is started on a server. The phrase is a play on the infamous <i>"Works on my machine"</i> issue, which containers are often promised to solve. The situation also is most likely a usage error.
 
@@ -121,7 +121,7 @@ For managing the docker containers, there is also a tool called [Docker Compose]
 
 There are several concepts we need to go over. But we will skip those for now and learn about Docker first! 
 
-Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularily nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.
+Let us start with the command <i>docker container run</i> that is used to run images within a container. The command structure is the following: _container run <i>IMAGE-NAME</i>_ that we will tell Docker to create a container from an image. A particularly nice feature of the command is that it can run a container even if the image to run is not downloaded on our device yet.
 
 Let us run the command
 

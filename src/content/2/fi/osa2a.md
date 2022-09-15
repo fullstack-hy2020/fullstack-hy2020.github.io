@@ -617,6 +617,8 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
 
 Määrittele sovellukseen yksittäisen kurssin muotoilusta huolehtiva komponentti <i>Course</i>.

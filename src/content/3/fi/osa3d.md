@@ -87,7 +87,7 @@ const errorHandler = (error, request, response, next) => {
 
 Validoinnin epäonnistuessa palautetaan validaattorin oletusarvoinen virheviesti:
 
-![](../../images/3/50.png)
+![Luotaessa muistiinpano jonka kenttä content on liian lyhyt, seurauksena on virheilmoituksen sisältävä JSON](../../images/3/50.png)
 
 Huomaamme kuitenkin että sovelluksessa on pieni ongelma, validaatiota ei suoriteta muistiinpanojen päivityksen yhteydessä. [Dokumentaatio](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) kertoo mistä on kyse, validaatiota ei suoriteta oletusarvoisesti metodin <i>findOneAndUpdate</i> suorituksen yhteydessä.
 
@@ -111,23 +111,25 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Tietokantaa käyttävän version vieminen tuotantoon
 
-Sovelluksen pitäisi toimia tuotannossa eli Herokussa lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. 
+Sovelluksen pitäisi toimia tuotannossa eli Fly.io:ssa tai Herokussa lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. 
 
-Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttujille arvot tiedostossa <i>.env</i>, tietokantaurlin kertovan ympäristömuuttujan arvo asetetaan Herokuun komentorivillä komennolla _heroku config:set_:
+Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttujille arvot tiedostossa <i>.env</i>, tietokantaurlin kertovan ympäristömuuttujan täytyy asettaa Fly.io:n tai Herokuun vielä erikseen.
 
-```bash
-heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
+Fly.io:ssa komennolla _fly secrets set_:
+
+```
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-**HUOM:** Jos komento antaa virheilmoituksen, anna MONGODB_URI:n arvo hipsuissa.
+Herokuun ympäristömuuttuja asetetaan komentorivillä komennolla _heroku config:set_:
 
 ```bash
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
-Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, <i>heroku logs</i> auttaa. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa:
+Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, <i>fly logs</i> tai <i>heroku logs</i> auttavat. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa:
 
-![](../../images/3/51a.png)
+![Heroku logs paljastaa että Mongolle ei ole määritelty osoitetta ollenkaan (parameter to openUri must be a string)](../../images/3/51a.png)
 
 Tietokannan osoite olikin siis jostain syystä määrittelemätön. Komento <i>heroku config</i> paljasti, että olin vahingossa määritellyt ympäristömuuttujan <em>MONGO\_URL</em> kun koodi oletti sen olevan nimeltään <em>MONGODB\_URI</em>.
 
@@ -158,7 +160,7 @@ personService
 
 Voit näyttää frontendissa käyttäjälle Mongoosen validoinnin oletusarvoisen virheilmoituksen vaikka ne eivät olekaan luettavuudeltaan parhaat mahdolliset:
 
-![](../../images/3/56e.png)
+![Selain renderöi virheilmoituksen 'Person valiation failed: name...'](../../images/3/56e.png)
 
 #### 3.20*: puhelinluettelo ja tietokanta, step8
 
@@ -205,7 +207,7 @@ npx eslint --init
 
 Vastaillaan kysymyksiin:
 
-![](../../images/3/52be.png)
+![Vastataan kysymyksiin koodin luonteen mukaan, erityisesti että kyse ei ole TypeSriptistä, käytetään ' merkkijonoissa, ei käytetä ; rivien lopussa](../../images/3/52be.png)
 
 Konfiguraatiot tallentuvat tiedostoon _.eslintrc.js_:
 
@@ -241,6 +243,8 @@ module.exports = {
 }
 
 ```
+Tarkista, että tiedostossa on rivi 'node': true kuvanmukaisesti ja lisää se tarvittaessa.
+  
 Muutetaan heti konfiguraatioista sisennystä määrittelevä sääntö siten, että sisennystaso on kaksi välilyöntiä:
 
 
@@ -284,7 +288,7 @@ Näin koko hakemiston <em>build</em> sisältö jätetään huomioimatta linttauk
 
 Lintillä on jonkin verran huomautettavaa koodistamme:
 
-![](../../images/3/53ea.png)
+![Lint kertoo kolmesta virheestä, kaikki muuttujia joille ei ole käyttöä](../../images/3/53ea.png)
 
 Ei kuitenkaan korjata ongelmia vielä.
 
@@ -292,9 +296,11 @@ Parempi vaihtoehto linttauksen suorittamiselle komentoriviltä on konfiguroida e
 
 VS Coden ESLint-plugin alleviivaa tyylisääntöjä rikkovat kohdat punaisella:
 
-![](../../images/3/54a.png)
+![Havainnollistus siitä miten VS code merkkaa rivit, joilla on eslint-tyylirike](../../images/3/54a.png)
 
 Näin ongelmat on helppo korjata koodiin heti.
+  
+Komento _npm run lint -- --fix_ voi olla avuksi, jos koodissa on esim. useampia syntaksivirheitä.
 
 ESLintille on määritelty suuri määrä [sääntöjä](https://eslint.org/docs/rules/), joita on helppo ottaa käyttöön muokkaamalla tiedostoa <i>.eslintrc.js</i>.
 
@@ -361,7 +367,7 @@ Yksittäinen sääntö on helppo kytkeä [pois päältä](https://eslint.org/doc
 
 **HUOM:** Kun teet muutoksia tiedostoon <i>.eslintrc.js</i>, kannattaa muutosten jälkeen suorittaa linttaus komentoriviltä ja varmistaa, että konfiguraatio ei ole viallinen:
 
-![](../../images/3/55.png)
+![Suoritetaan npm run lint...](../../images/3/55.png)
 
 Jos konfiguraatiossa on jotain vikaa, voi editorin lint-plugin näyttää mitä sattuu.
 

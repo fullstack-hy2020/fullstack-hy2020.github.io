@@ -120,11 +120,19 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
+The application should work almost as-is in Fly.io/Heroku. We do have to generate a new production build of the frontend due to the changes that we have made to our frontend. 
 
-The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Heroku.
+The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Heroku.
 
-We defined the environment variables for development in file <i>.env</i>, but the environment variable that defines the database URL in production should be set to Heroku with the _heroku config:set_ command.
+For the production usage we have to set the database URL in the service that is hosing our app.
+
+In Fly.io that is done _fly secrets set_:
+
+```
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
+
+For Heroku the same is done with the _heroku config:set_ command.
 
 ```bash
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -136,13 +144,13 @@ heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
-The application should now work. Sometimes things don't go according to plan. If there are problems, <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
+The application should now work. Sometimes things don't go according to plan. If there are problems, <i>fly logs</i> or <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
 
 ![](../../images/3/51a.png)
 
 For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable, when the code expected it to be in <em>MONGODB\_URI</em>.
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
+You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 
 </div>
 
@@ -164,7 +172,7 @@ personService
     })
     .catch(error => {
       // this is the way to access the error message
-      console.log(error.response.data)
+      console.log(error.response.data.error)
     })
 ```
 
@@ -388,7 +396,7 @@ If there is something wrong in your configuration file, the lint plugin can beha
 
 Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
-You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
+You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
 </div>
 
 <div class="tasks">

@@ -335,13 +335,13 @@ For smaller applications the structure does not matter that much. Once the appli
 
 There is no strict directory structure or file naming convention that is required for Express applications. To contrast this, Ruby on Rails does require a specific structure. Our current structure simply follows some of the best practices you can come across on the internet.
 
-You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
+You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
 If you clone the project for yourself, run the _npm install_ command before starting the application with _npm start_.
 
 ### Note on exports
 
-We have used two different kinds of exports in this part. Firstly, eg. the file <i>utils/logger.js</i> does the export as follows:
+We have used two different kinds of exports in this part. Firstly, e.g. the file <i>utils/logger.js</i> does the export as follows:
 
 ```js
 const info = (...params) => {
@@ -359,7 +359,7 @@ module.exports = {
 // highlight-end
 ```
 
-The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used with two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation: 
+The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used in two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation: 
 
 ```js
 const logger = require('./utils/logger')
@@ -368,7 +368,7 @@ logger.info('message')
 
 logger.error('error message')
 ```
-The other option is to destructure the functions to its own variables in the <i>require</i> statement:
+The other option is to destructure the functions to their own variables in the <i>require</i> statement:
 
 ```js
 const { info, error } = require('./utils/logger')
@@ -377,9 +377,9 @@ info('message')
 error('error message')
 ```
 
-The latter may be preferable way if only small portion of exported functions are used in a file.
+The latter way may be preferable if only a small portion of the exported functions are used in a file.
 
-Eg. in file <i>controller/notes.js</i> exporting happens as follows:
+E.g. in file <i>controller/notes.js</i> exporting happens as follows:
 
 ```js
 const notesRouter = require('express').Router()
@@ -631,7 +631,7 @@ Jest expects by default that the names of test files contain <i>.test</i>. In th
 Jest has excellent error messages, let's break the test to demonstrate this:
 
 ```js
-test('palindrom of react', () => {
+test('palindrome of react', () => {
   const result = reverse('react')
 
   expect(result).toBe('tkaer')

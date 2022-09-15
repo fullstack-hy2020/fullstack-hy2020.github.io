@@ -702,4 +702,12 @@ const Button = ({ onClick, text }) => (
 )
 ```
 
+We can simplify the Button component once more by declaring the return statement in just one line:
+
+```js
+const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
+```
+
+However, be careful to not oversimplify your components, as this makes adding complexity a more tedious task down the road.
+
 </div>

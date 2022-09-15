@@ -30,7 +30,7 @@ npm install -g ts-node typescript
 If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
 We will also take this approach. 
 
-As we remember from [part 3](/en/part3), an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
+As we recall from [part 3](/en/part3), an npm project is set by running the command <i>npm init</i> in an empty directory. Then we can install the dependencies by running 
 
 ```
 npm install --save-dev ts-node typescript
@@ -62,7 +62,7 @@ It is worth mentioning that TypeScript also provides an online playground, where
 
 JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and to adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.
 
-Let us add the project a configuration file _tsconfig.json_ with the following content:
+Let us add a configuration file _tsconfig.json_ to the project with the following content:
 
 ```js
 {
@@ -72,7 +72,7 @@ Let us add the project a configuration file _tsconfig.json_ with the following c
 }
 ```
 
-The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and [much much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
+The <i>tsconfig.json</i> file is used to define how the TypeScript compiler should interpret the code, how strictly the compiler should work, which files to watch or ignore, and [much more](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html).
 For now we will only use the compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny), that does not require to have types for all variables used.
 
 Let's start by creating a simple Multiplier. It looks exactly as it would in JavaScript.
@@ -105,9 +105,9 @@ Now when we run the code, the output is: <i>Multiplied a string and 4, the resul
 Wouldn't it be nice if the language itself could prevent us from ending up in situations like this? 
 This is where we see the first benefits of TypeScript.  Let's add types to the parameters and see where it takes us.
 
-TypeScript natively supports multiple types including <i>number</i>, <i>string</i> and  <i>Array</i>. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/basic-types.html). More complex custom types can also be created.
+TypeScript natively supports multiple types including <i>number</i>, <i>string</i> and  <i>Array</i>. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html). More complex custom types can also be created.
 
-The first two parameters of our function are of the type [number](http://www.typescriptlang.org/docs/handbook/basic-types.html#number) and the last is a [string](http://www.typescriptlang.org/docs/handbook/basic-types.html#string):
+The first two parameters of our function are the number and the string [primitives](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#the-primitives-string-number-and-boolean), respectively:
 
 ```js
 const multiplicator = (a: number, b: number, printText: string) => {
@@ -150,7 +150,7 @@ Let's look at our calculator now:
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-const calculator = (a: number, b: number, op : Operation) => {
+const calculator = (a: number, b: number, op: Operation) => {
   if (op === 'multiply') {
     return a * b;
   } else if (op === 'add') {
@@ -264,7 +264,7 @@ Let's return to the basic idea of TypeScript. TypeScript expects all globally-us
 
 As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
-Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](http://definitelytyped.org/), a community project with the goal of maintaining types of everything in one place.
+Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example: <i>npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose</i> and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](https://github.com/DefinitelyTyped/DefinitelyTyped), a community project with the goal of maintaining types of everything in one place.
 
 Sometimes, an npm package can also include its types within the code and, in that case, installing the corresponding <i>@types/*</i> is not necessary.
 
@@ -398,7 +398,7 @@ const parseArguments = (args: Array<string>): MultiplyValues => {
 }
 ```
 
-Firstly,  the parameter <i>args</i> is an [array](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) of strings. The return value has the type <i>MultiplyValues</i>, which is defined as follows:
+Firstly,  the parameter <i>args</i> is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings. The return value has the type <i>MultiplyValues</i>, which is defined as follows:
 
 ```js
 interface MultiplyValues {
@@ -407,7 +407,7 @@ interface MultiplyValues {
 }
 ```
 
-The definition utilizes TypeScript's [Interface](http://www.typescriptlang.org/docs/handbook/interfaces.html) keyword, which is one way to define the "shape" an object should have. 
+The definition utilizes TypeScript's Interface [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html) keyword, which is one way to define the "shape" an object should have. 
 In our case it is quite obvious that the return value should be an object with the two properties <i>value1</i> and <i>value2</i>, which should both be of type number. 
 
 </div>
@@ -418,7 +418,7 @@ In our case it is quite obvious that the return value should be an object with t
 
 #### setup
 
-Exercises 9.1.-9.7. will all be made in the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Create also the file <i>tsconfig.json</i> in the directory with the following content:
+Exercises 9.1.-9.7. will all be made in the same node project. Create the project in an empty directory with <i>npm init</i> and install the ts-node and typescript packages. Also create the file <i>tsconfig.json</i> in the directory with the following content:
 
 ```json
 {
@@ -883,11 +883,11 @@ So we will use the following <i>.eslintrc</i>
 }
 ```
 
-There are quite a few semicolons missing, but those are easy to add. We also have to solve the ESlint issues conserning the _any_-type:
+There are quite a few semicolons missing, but those are easy to add. We also have to solve the ESlint issues concerning the _any_-type:
 
 ![](../../images/9/50x.png)
 
-We could and propably should disable some ESlint rules to get the data from the request body.
+We could and probably should disable some ESlint rules to get the data from the request body.
 
 Disabling <i>@typescript-eslint/no-unsafe-assignment</i> for the destructuring assignment is nearly enough:
 
@@ -931,7 +931,7 @@ app.post('/calculate', (req, res) => {
 
 // highlight-start
   if ( !value1 || isNaN(Number(value1))) {
-    return res.send({ error: '...'}).status(400);
+    return res.status(400).send({ error: '...'});
   }
   // highlight-end
 
@@ -994,7 +994,7 @@ or
 }
 ```
 
-depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertable to numbers.
+depending on the error. The latter happens if the input values do not have the right type, i.e. they are not numbers or convertible to numbers.
 
 In this exercise, you might find it beneficial to use the <i>explicit any</i> type when handling the data in the request body. Our eslint configuration is preventing this but you may unset this rule for a particular line by inserting the following comment as the previous line:
 

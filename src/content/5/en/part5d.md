@@ -78,8 +78,6 @@ Let's add an npm-script to <i>the backend</i> which starts it in test mode, or s
 ```
 
 NB! In order to get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-
-NB! For macbooks with m1 CPU instead of intel ones, cypress wouldn't work since it doesn't support m1 yet. To fix that, installing Rosetta 2 then configuring your terminal is a must. For step by step instructions follow [here](https://www.cypress.io/blog/2021/01/20/running-cypress-on-the-apple-m1-silicon-arm-architecture-using-rosetta-2/).
   
 When both backend and frontend are running, we can start Cypress with the command
 
@@ -87,7 +85,7 @@ When both backend and frontend are running, we can start Cypress with the comman
 npm run cypress:open
 ```
 
-When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>integration</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two subdirectories: the <i>integration/1-getting-started</i> and the <i>integration/2-advanced-examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.spec.js</i>:
+When we first run Cypress, it creates a <i>cypress</i> directory. It contains an <i>e2e</i> subdirectory, where we will place our tests. Cypress creates a bunch of example tests for us in two subdirectories: the <i>e2e/1-getting-started</i> and the <i>e2e/2-advanced-examples</i> directory. We can delete both directories and make our own test in file <i>note\_app.cy.js</i>:
 
 ```js
 describe('Note app', function() {
@@ -719,7 +717,7 @@ First we test logging in. Then, in their own describe block, we have a bunch of 
 
 As we said above, each test starts from zero! Tests do not start from the state where the previous tests ended. 
 
-The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Logging-in). 
+The Cypress documentation gives us the following advice: [Fully test the login flow – but only once!](https://docs.cypress.io/guides/end-to-end-testing/testing-your-app#Fully-test-the-login-flow-but-only-once). 
 So instead of logging in a user using the form in the <i>beforeEach</i> block, Cypress recommends that we [bypass the UI](https://docs.cypress.io/guides/getting-started/testing-your-app.html#Bypassing-your-UI) and do an HTTP request to the backend to log in. The reason for this is that logging in with an HTTP request is much faster than filling a form. 
 
 Our situation is a bit more complicated than in the example in the Cypress documentation, because when a user logs in, our application saves their details to the localStorage.

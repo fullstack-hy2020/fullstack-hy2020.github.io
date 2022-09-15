@@ -674,6 +674,10 @@ Al hacer clic en el texto <i>Send Request</i>, el cliente REST ejecutará la sol
 
 ![](../../images/3/13ea.png)
 
+### El Cliente HTTP de WebStorm
+
+Si usas *IntelliJ WebStorm* en cambio, puedes usar un procedimiento similar con su Cliente HTTP incorporado. Crea un nuevo archivo con la extensión `.rest` y el editor te mostrará opciones para crear y ejecutar tus solicitudes. Puedes obtener más información al respecto siguiendo [esta guía](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
+
 ### Recibiendo información
 
 A continuación, hagamos posible agregar nuevas notas al servidor. La adición de una nota ocurre al hacer una solicitud HTTP POST a la dirección  http://localhost:3001/api/notes y se envía toda la información de la nueva nota en el [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) de la solicitud en formato JSON.

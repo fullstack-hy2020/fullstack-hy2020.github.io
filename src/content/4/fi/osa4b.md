@@ -152,7 +152,7 @@ afterAll(() => {
 
 Testejä suorittaessa tulee seuraava ilmoitus:
 
-![](../../images/4/8.png)
+![Virheilmoitus Jest did not exit one second after the test run has completed](../../images/4/8.png)
 
 Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
 
@@ -667,7 +667,7 @@ Koodiin jää kuitenkin pieni ongelma: virhetilanteita ei nyt käsitellä ollenk
 
 Jos sovellus POST-pyyntöä käsitellessään aiheuttaa jonkinlaisen ajonaikaisen virheen, syntyy jälleen tuttu tilanne:
 
-![](../../images/4/6.png)
+![Konsolissa näkyy virheilmoitus ValidationError joka johtuu siitä että content puuttuu vastaanotetusta datasta](../../images/4/6.png)
 
 Kyseessä on siis käsittelemätön promisen rejektoituminen. Pyyntöön ei vastata tilanteessa mitenkään.
 
@@ -980,10 +980,9 @@ Kun testi on valmis, refaktoroi operaatio käyttämään promisejen sijaan async
 
 Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_testaaminen#test-ymparisto) hieman muutoksia (mm. testausympäristön määrittely), jotta saat järkevästi tehtyä omaa tietokantaa käyttäviä API-tason testejä.
 
-**HUOM 1:** Testejä suorittaessa törmät ehkä seuraavaan varoitukseen:
+**HUOM 1:** Testejä suorittaessa törmäät ehkä seuraavaan varoitukseen:
 
-![](../../images/4/8a.png)
-
+![Virheilmotus Mongoose: looks like you're trying to test Mongoose app with Jest's default jsdomain environment.](../../images/4/8a.png)
 
 Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
 
@@ -1024,7 +1023,7 @@ Laajenna ohjelmaa siten, että testi menee läpi.
 
 #### 4.12*: blogilistan testit, step5
 
-Tee testit blogin lisäämiselle eli osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP POST -pyynnölle. Testing tulee varmistaa, että jos uusi blogi ei sisällä kenttiä <i>title</i> ja <i>url</i>, pyyntöön vastataan statuskoodilla <i>400 Bad Request</i>.
+Tee testit blogin lisäämiselle eli osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP POST -pyynnölle. Testin tulee varmistaa, että jos uusi blogi ei sisällä kenttiä <i>title</i> ja <i>url</i>, pyyntöön vastataan statuskoodilla <i>400 Bad Request</i>.
 
 Laajenna toteutusta siten, että testit menevät läpi.
 
@@ -1178,7 +1177,7 @@ afterAll(() => {
 
 Testien raportointi tapahtuu <i>describe</i>-lohkojen ryhmittelyn mukaan:
 
-![](../../images/4/7.png)
+![Jest ryhmittelee testitulokset describe-lohkoittain](../../images/4/7.png)
 
 Testeihin jää vielä parannettavaa, mutta on jo aika siirtyä eteenpäin.
 
@@ -1198,7 +1197,7 @@ Toteuta sovellukseen mahdollisuus yksittäisen blogin poistoon.
 
 Käytä async/awaitia. Noudata operaation HTTP-rajapinnan suhteen [RESTful](/osa3/node_js_ja_express#rest)-käytänteitä.
 
-Toteuttaa ominaisuudelle myös testit.
+Toteuta ominaisuudelle myös testit.
 
 #### 4.14* blogilistan laajennus, step2
 
@@ -1208,6 +1207,6 @@ Käytä async/awaitia.
 
 Tarvitsemme muokkausta lähinnä <i>likejen</i> lukumäärän päivittämiseen. Toiminnallisuuden voi toteuttaa samaan tapaan kuin muistiinpanon päivittäminen toteutettiin [osassa 3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan#muut-operaatiot).
 
-Toteuttaa ominaisuudelle myös testit.
+Toteuta ominaisuudelle myös testit.
 
 </div>

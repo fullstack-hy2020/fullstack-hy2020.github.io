@@ -693,7 +693,7 @@ const App = () => {
 
 Our solution has a small problem: a person is added to the cache and also rendered twice since the component _PersonForm_ is also adding it to the cache.
 
-Let us now fix the problem by ensuring that a person is not addded twice in the cache:
+Let us now fix the problem by ensuring that a person is not added twice in the cache:
 
 ```js
 // highlight-start
@@ -969,7 +969,7 @@ If we modify _allPersons_ to do a join query because it sometimes causes an n+1 
 
 > <i>Programmers waste enormous amounts of time thinking about, or worrying about, the speed of noncritical parts of their programs, and these attempts at efficiency actually have a strong negative impact when debugging and maintenance are considered. We should forget about small efficiencies, say about 97% of the time: <strong>premature optimization is the root of all evil.</strong></i>
 
-Facebook's [DataLoader](https://github.com/facebook/dataloader) library offers a good solution for the n+1 problem among other issues. More about using DataLoader with Apollo server [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
+GraphQL Foundation's [DataLoader](https://github.com/graphql/dataloader) library offers a good solution for the n+1 problem among other issues. More about using DataLoader with Apollo server [here](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) and [here](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
 
 ### Epilogue
 
@@ -1016,8 +1016,6 @@ Exercises of this part are submitted via [the submissions system](https://studie
 Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
 
 ![Submissions](../../images/11/21.png)
-
-Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 

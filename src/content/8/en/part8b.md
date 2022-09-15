@@ -344,7 +344,7 @@ When the button <i>show address</i> of a person is pressed, the name of the pers
 </button>
 ```
 
-This causes the component to re-render itsef. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
+This causes the component to re-render itself. On render the query <i>FIND_PERSON</i> that fetches the detailed information of a user is executed <i>if the variable nameToSearch</i> has a value:
 
 ```js
 const result = useQuery(FIND_PERSON, {
@@ -559,7 +559,7 @@ const PersonForm = (props) => {
 
 The pros and cons of this solution are almost opposite of the previous one's. There is no extra web traffic, because queries are not done just in case.  However, if one user now updates the state of the server, the changes do not show to other users immediately. 
       
-If you want to do multiple queries, you can pass multiple objects inside refetchQueries. This will allow you to updated different parts of your app a the same time. Here is an example:
+If you want to do multiple queries, you can pass multiple objects inside refetchQueries. This will allow you to update different parts of your app at the same time. Here is an example:
 ```js
     const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [ { query: ALL_PERSONS }, { query: OTHER_QUERY }, { query: ... } ] // pass as many queries as you need
@@ -572,7 +572,7 @@ At the moment, queries and components are defined in the same place in our code.
 Let's separate the query definitions into their own file <i>queries.js</i>:
 
 ```js 
-import { gql  } from '@apollo/client'
+import { gql } from '@apollo/client'
 
 export const ALL_PERSONS = gql`
   query {
@@ -633,7 +633,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-<!-- Renderlöidään mahdollinen virheilmoitus näytölle -->
+<!-- Renderöidään mahdollinen virheilmoitus näytölle -->
 We can then render the error message on the screen as necessary:
 
 ```js

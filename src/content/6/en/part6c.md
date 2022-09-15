@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Let's expand the application, such that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
+Let's expand the application, so that the notes are stored to the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
 
 The initial state of the database is stored into the file <i>db.json</i>, which is placed in the root of the project:
 
@@ -66,7 +66,7 @@ We'll add axios to the project
 npm install axios
 ```
 
-We'll change the initialization of the state in <i>noteReducer</i>, such that by default there are no notes:
+We'll change the initialization of the state in <i>noteReducer</i>, so that by default there are no notes:
 
 ```js
 const noteSlice = createSlice({
@@ -81,7 +81,7 @@ Let's also add a new action <em>appendNote</em> for adding a note object:
 ```js
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
       const content = action.payload
@@ -151,7 +151,7 @@ Dispatching multiple actions seems a bit 	impractical. Let's add an action creat
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     createNote(state, action) {
       const content = action.payload
@@ -282,7 +282,7 @@ const App = () => {
     noteService
       .getAll().then(notes => dispatch(setNotes(notes)))   
       // highlight-start
-  },[]) // eslint-disable-line react-hooks/exhaustive-deps  
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps  
   // highlight-end
 
   // ...
@@ -372,7 +372,7 @@ As the initial backend data, you can use, e.g. [this](https://github.com/fullsta
 
 #### 6.14 Anecdotes and the backend, step2
 
-Modify the creation of new anecdotes, such that the anecdotes are stored in the backend.
+Modify the creation of new anecdotes, so that the anecdotes are stored in the backend.
 
 </div>
 
@@ -380,7 +380,7 @@ Modify the creation of new anecdotes, such that the anecdotes are stored in the 
 
 ### Asynchronous actions and redux thunk
 
-Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, such that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
+Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components, so that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
 
 ```js
 const App = () => {
@@ -388,7 +388,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeNotes()))  
-  },[dispatch]) 
+  }, [dispatch]) 
 
   // ...
 }
@@ -448,13 +448,16 @@ In the inner function, meaning the <i>asynchronous action</i>, the operation fir
 The component <i>App</i> can now be defined as follows:
 
 ```js
+// ...
+import { initializeNotes } from './reducers/noteReducer' // highlight-line
+
 const App = () => {
   const dispatch = useDispatch()
 
   // highlight-start
   useEffect(() => {
     dispatch(initializeNotes()) 
-  },[dispatch]) 
+  }, [dispatch]) 
   // highlight-end
 
   return (
@@ -477,7 +480,7 @@ import noteService from '../services/notes'
 
 const noteSlice = createSlice({
   name: 'notes',
-  initialState,
+  initialState: [],
   reducers: {
     // highlight-start
     toggleImportanceOf(state, action) {
@@ -530,6 +533,9 @@ The principle here is the same: first, an asynchronous operation is executed, af
 The component <i>NewNote</i> changes as follows:
 
 ```js
+// ...
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
 const NewNote = () => {
   const dispatch = useDispatch()
   
@@ -579,8 +585,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Provider store={store}>
     <App />
-  </Provider>,
-  document.getElementById('root')
+  </Provider>
 )
 ```
 

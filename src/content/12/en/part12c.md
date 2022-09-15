@@ -152,7 +152,7 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before the frontend is build, otherwise it does not get defined in the code!
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before running/building the frontend, otherwise it does not get defined in the code!
 
 #### Exercise 12.14: Testing during the build process
 
@@ -491,7 +491,7 @@ services:
       - app // highlight-line
 ```
 
-If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to reslove all DNS names that are referred in the config file:
+If we do not enforce the starting order with <i>depends\_on</i> there a risk that Nginx fails on startup since it tries to resolve all DNS names that are referred in the config file:
 
 ```bash
 http {
@@ -655,7 +655,6 @@ Once you have completed the exercises and want to get the credits, let us know t
 
 ![Submissions](../../images/11/21.png)
 
-Note that the "exam done in Moodle" note refers to the [Full Stack Open course's exam](/en/part0/general_info#sign-up-for-the-exam), which has to be completed before you can earn credits from this part.
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 

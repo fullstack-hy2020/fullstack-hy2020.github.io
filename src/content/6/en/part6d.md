@@ -253,7 +253,7 @@ props.toggleImportanceOf(note.id)
 
 There is no need to call the _dispatch_ function separately since _connect_ has already modified the _toggleImportanceOf_ action creator into a form that contains the dispatch.
 
-It can take some to time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props).
+It can take some time to wrap your head around how _mapDispatchToProps_ works, especially once we take a look at an [alternative way of using it](/en/part6/connect#alternative-way-of-using-map-dispatch-to-props).
 
 The resulting situation from using _connect_ can be visualized like this:
 
@@ -340,7 +340,7 @@ export default connect(
 Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
 
 
-You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this Github repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
+You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
 
 ### Referencing action creators passed as props
 
@@ -607,7 +607,8 @@ You (probably) have one nasty bug in your application. If the user clicks the vo
 the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
 
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
-This can be done by cancelling the removal of the previous notification when a new notification is displayed whenever necessary. 
+
+The fix can be done by canceling the previous notification when a new notification is displayed, whenever necessary. 
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).

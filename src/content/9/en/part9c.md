@@ -758,6 +758,8 @@ we would get the following error:
 
 Again, the last line of the error message is the most helpful one. Let's undo this undesired modification.
 
+\* Note that if you make the comment field optional (using the <i>?</i> operator), everything will work fine.
+
 Utility types include many handy tools, and it is definitely worth it to take some time to study [the documentation](https://www.typescriptlang.org/docs/handbook/utility-types.html).
 
 Finally, we can complete the route which returns all diary entries:
@@ -789,7 +791,7 @@ The response is what we expect it to be:
 
 ### Exercises 9.10.-9.11.
 
-Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.json](https://github.com/fullstack-hy/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy/misc/blob/master/patients.json). Get the files and store those in a directory called <i>data</i> in your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
+Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those in a directory called <i>data</i> in your project. All data modification can be done in runtime memory, so during this part it is <i>not necessary to write to a file</i>.
 
 #### 9.10: Patientor backend, step3
 
@@ -1022,7 +1024,7 @@ const newDiaryEntry = diaryService.addDiary({
 });
 ```
 
-We certainly would like to have certainty that the object in a post request is of the right type, so let us define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly-typed <i>NewDiaryEntry</i> object. The function shall be defined in the file <i>utils.ts</i>.
+We would like to have assurance that the object in a post request is the correct type, so let us define a function <i>toNewDiaryEntry</i> that receives the request body as a parameter and returns a properly-typed <i>NewDiaryEntry</i> object. The function shall be defined in the file <i>utils.ts</i>.
 
 The route definition uses the function as follows:
 

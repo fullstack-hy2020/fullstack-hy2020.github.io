@@ -55,11 +55,11 @@ export default App
 
 The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.
 
-If you end up with the following error
+If you end up with the following error:
 
 ![](../../images/1/r18-error.png)
 
-you for some reason are using a React version older than the current version 18.
+Then, for some reason you are using a React version older than the current version 18.
 
 The fix is to change <i>index.js</i> as follows
 

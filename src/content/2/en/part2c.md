@@ -11,7 +11,7 @@ For a while now we have only been working on "frontend", i.e. client-side (brows
 
 Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.
 
-Create a file named <i>db.json</i> in the root directory of the project with the following content:
+Create a file named <i>db.json</i> in the root directory of the previous notes project with the following content:
 
 ```json
 {
@@ -40,13 +40,17 @@ Create a file named <i>db.json</i> in the root directory of the project with the
 
 You can [install](https://github.com/typicode/json-server#getting-started) JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.
 
+After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; but since projects created using create-react-app reserve port 3000, we must define an alternate port, such as port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json
+  
+```js
+json-server --port 3001 --watch db.json
+```
+
 However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
 
 ```js
 npx json-server --port 3001 --watch db.json
 ```
-
-The <i>json-server</i> starts running on port 3000 by default; but since projects created using create-react-app reserve port 3000, we must define an alternate port, such as port 3001, for the json-server.
 
 Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
 
@@ -646,8 +650,8 @@ Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is sta
 
 ```bash
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
-($env:REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3) -and (npm start) // For Windows PowerShell
-set REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 && npm start // For Windows cmd.exe
+($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
+set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
 ```
 
 you can access the value of the key from the _process.env_ object:

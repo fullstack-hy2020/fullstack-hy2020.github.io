@@ -43,12 +43,10 @@ const InfoBanner = ({ visible, onHide }) => {
   return (
     <div style={style}>
       <div stule={textStyle}>
-        Note that some libraries might not work with the new React version 18.
-        If you run in trouble with library compatibility, read{' '}
-        <a href="/en/part1/a_more_complex_state_debugging_react_apps#a-note-on-react-version">
-          <span style={linkStyle}>this</span>
+        Doing the course exam soon? Test the new exam system, read more{' '}
+        <a href="/en/part0/general_info#doing-the-exam-without-university-of-helsinki-user-account">
+          <span style={linkStyle}>here</span>!
         </a>
-        .
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>

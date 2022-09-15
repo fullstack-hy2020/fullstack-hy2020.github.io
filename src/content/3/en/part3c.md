@@ -68,7 +68,7 @@ When bugs occur, <i>the worst of all possible strategies</i> is to continue writ
 
 In order to store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-The reason for using Mongo as the database is it's lower complexity with respect to a relational database. [The part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
+The reason for using Mongo as the database is its lower complexity with respect to a relational database. [The part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
 
 Document databases differ from relational databases in how they organize data as well as the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
@@ -140,10 +140,7 @@ if (process.argv.length < 3) {
 
 const password = process.argv[2]
 
-const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
-
-mongoose.connect(url)
+const url = `mongodb+srv://notes-app-full:${password}@cluster1.lvvbt.mongodb.net/?retryWrites=true&w=majority`
 
 const noteSchema = new mongoose.Schema({
   content: String,
@@ -153,16 +150,24 @@ const noteSchema = new mongoose.Schema({
 
 const Note = mongoose.model('Note', noteSchema)
 
-const note = new Note({
-  content: 'HTML is Easy',
-  date: new Date(),
-  important: true,
-})
+mongoose
+  .connect(url)
+  .then((result) => {
+    console.log('connected')
 
-note.save().then(result => {
-  console.log('note saved!')
-  mongoose.connection.close()
-})
+    const note = new Note({
+      content: 'HTML is Easy',
+      date: new Date(),
+      important: true,
+    })
+
+    return note.save()
+  })
+  .then(() => {
+    console.log('note saved!')
+    return mongoose.connection.close()
+  })
+  .catch((err) => console.log(err))
 ```
 
 **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
@@ -267,7 +272,7 @@ When the code is executed, the program prints all the notes stored in the databa
 
 ![](../../images/3/70ea.png)
 
-The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api.html#model_Model.find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
+The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
 
 The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
 
@@ -544,11 +549,19 @@ app.listen(PORT, () => {
 
 It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
-Once the file .env has been gitignored, Heroku does not get the database url from the repository, so you have to set it yourself. That can be done through the heroku dashboard as follows:
+Once the file .env has been gitignored, Fly.io/Heroku does not get the database url from the repository, so you have to set it yourself. 
+
+With Fly.io that happens from the command line with the command:
+
+```
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
+
+That can be done through the Heroku dashboard as follows:
 
 ![](../../images/3/herokuConfig.png)
 
-or from command line with the command:
+or from the command line with the command:
 
 ```
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
@@ -588,7 +601,7 @@ The _savedNote_ parameter in the callback function is the saved and newly create
 response.json(savedNote)
 ```
 
-Using Mongoose's [findById](https://mongoosejs.com/docs/api.html#model_Model.findById) method, fetching an individual note gets changed into the following:
+Using Mongoose's [findById](https://mongoosejs.com/docs/api/model.html#model_Model-findById) method, fetching an individual note gets changed into the following:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -610,7 +623,7 @@ It's probably a good idea to integrate the frontend and backend one functionalit
 
 Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
-You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this Github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
+You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
 </div>
 
@@ -839,7 +852,7 @@ Now the handling of unknown endpoints is ordered <i>before the HTTP request hand
 
 Let's add some missing functionality to our application, including deleting and updating an individual note.
 
-The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndRemove) method:
+The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndRemove) method:
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
@@ -853,7 +866,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 
 In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource actually was deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
 
-The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate) method.
+The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) method.
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -876,11 +889,11 @@ In the code above, we also allow the content of the note to be edited. However, 
 
 Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
 
-There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api.html#model_Model.findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
+There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 
 After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. 
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this github repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
 </div>
 

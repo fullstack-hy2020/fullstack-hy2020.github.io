@@ -20,7 +20,7 @@ When something does not work, don't just guess what's wrong. Instead, log or use
 **NB** As explained in part 1, when you use the command _console.log_ for debugging, don't concatenate things 'the Java way' with a plus. Instead of writing:
 
 ```js
-console.log('props value is' + props)
+console.log('props value is ' + props)
 ```
 
 separate the things to be printed with a comma:
@@ -245,7 +245,7 @@ React uses the key attributes of objects in an array to determine how to update 
 
 ### Map
 
-Understanding how the array method, [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course. 
+Understanding how the array method [`map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) works is crucial for the rest of the course. 
 
 The application contains an array called _notes_:
 
@@ -617,6 +617,8 @@ const App = () => {
 
   return <Course course={course} />
 }
+
+export default App
 ```
 
 Define a component responsible for formatting a single course called <i>Course</i>. 
@@ -661,7 +663,7 @@ If you haven't done so already, calculate the sum of exercises with the array me
 const total = 
   parts.reduce((s, p) => someMagicHere)
 ```
-
+  
 and does not work, it's worth to use <i>console.log</i>, which requires the arrow function to be written in its longer form:
 
 ```js
@@ -670,8 +672,10 @@ const total = parts.reduce((s, p) => {
   return someMagicHere 
 })
 ```
+ 
+**Not working? :** Use your search engine to look up how reduce is used in an **Object Array**.
 
-**Pro tip 2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.jsrefactor) that automatically changes short form arrow functions into their longer form, and vice versa. 
+**Pro tip 2:** There is a [plugin for VS Code](https://marketplace.visualstudio.com/items?itemName=cmstead.js-codeformer) that automatically changes short form arrow functions into their longer form, and vice versa. 
 
 ![](../../images/2/5b.png)
 
