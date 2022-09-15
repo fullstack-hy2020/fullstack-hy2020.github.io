@@ -469,7 +469,9 @@ const rollbackMigration = async () => {
 }
 // highlight-end
 
-module.exports = { connectToDatabase, sequelize, rollbackMigration } // highlight-line
+/* highlight-start */
+module.exports = { connectToDatabase, sequelize, rollbackMigration }
+/* highlight-end */
 ```
 
 Let's create a file <i>util/rollback.js</i>, which will allow the npm script to execute the specified migration rollback function:
@@ -527,7 +529,7 @@ We will continue to expand the application so that each user can be added to one
 
 Since an arbitrary number of users can join one team, and one user can join an arbitrary number of teams, we are dealing with a [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships) relationship, which is traditionally implemented in relational databases using a <i>connection table</i>.
 
-Let's now create the code needed for the teams table as well as the connection table. The migration is as follows:
+Let's now create the code needed for the teams table as well as the connection table. The migration (saved in file <i>20211209_02_add_teams_and_memberships.js</i>) is as follows:
 
 ```js
 const { DataTypes } = require('sequelize')
@@ -616,12 +618,12 @@ Membership.init({
     primaryKey: true,
     autoIncrement: true
   },
-  user_id: {
+  userId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'users', key: 'id' },
   },
-  team_id: {
+  teamId: {
     type: DataTypes.INTEGER,
     allowNull: false,
     references: { model: 'teams', key: 'id' },
@@ -699,7 +701,7 @@ Membership.init({
 })
 ```
 
-Now let's create a couple of teams from the console, as well as a few memberships:
+Now let's create a couple of teams from the psql console, as well as a few memberships:
 
 ```js
 insert into teams (name) values ('toska');
@@ -859,7 +861,7 @@ router.get('/:id', async (req, res) => {
 
 Let's make another many-to-many relationship in the application. Each note is associated to the user who created it by a foreign key. It is now decided that the application also supports that the note can be associated with other users, and that a user can be associated with an arbitrary number of notes created by other users. The idea is that these notes are those that the user has <i>marked</i> for himself.
 
-Let's make a connection table <i>user_notes</i> for the situation. The migration is straightforward:
+Let's make a connection table <i>user\_notes</i> for the situation. The migration, that is saved in file <i>20211209\_03\_add\_user\_notes.js</i> is straightforward:
 
 ```js
 const { DataTypes } = require('sequelize')
