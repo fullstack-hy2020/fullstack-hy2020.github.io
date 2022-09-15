@@ -425,8 +425,7 @@ Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon <i>
 ReactDOM.createRoot(document.getElementById('root')).render(
   <Router> // highlight-line
     <App />
-  </Router>, // highlight-line
-  document.getElementById('root')
+  </Router> // highlight-line
 )
 ```
 
