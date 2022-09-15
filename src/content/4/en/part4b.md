@@ -321,18 +321,13 @@ const initialNotes = [
 // highlight-start
 beforeEach(async () => {
   await Note.deleteMany({})
-
-  let noteObject = new Note(initialNotes[0])
-  await noteObject.save()
-
-  noteObject = new Note(initialNotes[1])
-  await noteObject.save()
+  await Note.collection.insertMany(initialNotes)
 })
 // highlight-end
 // ...
 ```
 
-The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run.
+The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. Doing this, we ensure that the database is in the same state before every test is run. Bulk insertions can be done with the [insertMany](http://mongodb.github.io/node-mongodb-native/3.2/api/Collection.html#insertMany) function.
 
 Let's also make the following changes to the last two tests:
 
@@ -604,12 +599,7 @@ const Note = require('../models/note')
 
 beforeEach(async () => {
   await Note.deleteMany({})
-
-  let noteObject = new Note(helper.initialNotes[0]) // highlight-line
-  await noteObject.save()
-
-  noteObject = new Note(helper.initialNotes[1]) // highlight-line
-  await noteObject.save()
+  await Note.collection.insertMany(helper.initialNotes) // highlight-line
 })
 
 test('notes are returned as json', async () => {
@@ -916,12 +906,7 @@ Let's return to writing our tests and take a closer look at the _beforeEach_ fun
 ```js
 beforeEach(async () => {
   await Note.deleteMany({})
-
-  let noteObject = new Note(helper.initialNotes[0])
-  await noteObject.save()
-
-  noteObject = new Note(helper.initialNotes[1])
-  await noteObject.save()
+  await Note.collection.insertMany(helper.initialNotes)
 })
 ```
 
