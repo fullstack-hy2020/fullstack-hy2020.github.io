@@ -61,15 +61,15 @@ In [part 7](/en/part7/webpack) we had a look at [webpack](https://webpack.js.org
 
 Deployment refers to putting the software where it needs to be for the end-user to use it. In the case of libraries, this may simply mean pushing an npm package to a package archive (such as npmjs.com) where other users can find it and include it in their software. 
 
-Deploying a service (such as a web app) can vary in complexity. In [part 3](/en/part3/deploying_app_to_internet) our deployment workflow involved running some scripts manually and pushing the repository code to [Heroku](https://www.heroku.com/) hosting service.
+Deploying a service (such as a web app) can vary in complexity. In [part 3](/en/part3/deploying_app_to_internet) our deployment workflow involved running some scripts manually and pushing the repository code to [Fly.io](https://fly.io/) or [Heroku](https://www.heroku.com/) hosting service.
 
-In this part, we'll develop a simple "deployment pipeline" that deploys each commit of your code automatically to Heroku <i>if</i> the committed code does not break anything.
+In this part, we'll develop a simple "deployment pipeline" that deploys each commit of your code automatically to Fly.io or Heroku <strong>if</strong> the committed code does not break anything.
 
 Deployments can be significantly more complex, especially if we add requirements such as "the software must be available at all times during the deployment" (zero downtime deployments) or if we have to take things like [database migrations](/en/part13/migrations_many_to_many_relationships#migrations) into account. We won't cover complex deployments like those in this part but it's important to know that they exist.
 
 ### What is CI?
 
-The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different. One influential but quite early (from year 2006) discussion of the topic is in [Martin Fowler's blog](https://www.martinfowler.com/articles/continuousIntegration.html).
+The strict definition of CI (Continuous Integration) and the way the term is used in the industry are quite different. One influential but quite early (written already in 2006) discussion of the topic is in [Martin Fowler's blog](https://www.martinfowler.com/articles/continuousIntegration.html).
 
 Strictly speaking, CI refers to <a href='https://www.atlassian.com/continuous-delivery/principles/continuous-integration-vs-delivery-vs-deployment'>merging developer changes to the main branch</a> often, Wikipedia even helpfully suggests: "several times a day". This is usually true but when we refer to CI in industry, we're usually talking about what happens after the actual merge happens.
 
