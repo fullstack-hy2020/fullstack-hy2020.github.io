@@ -583,7 +583,7 @@ Save the SQL-commands you used at the root of the application repository in the 
 
 #### Exercise 13.3.
 
-Create functionality in your application, which prints the blogs in the database using the command-line, e.g. as follows:
+Create functionality in your application, which prints the blogs in the database on the command-line, e.g. as follows:
 
 ```bash
 $ node cli.js
