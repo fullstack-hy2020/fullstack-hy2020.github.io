@@ -7,11 +7,11 @@ lang: fi
 
 <div class="content">
 
-React oli aiemmin jossain määrin kuuluisa siitä, että sovelluskehityksen edellyttämien työkalujen konfigurointi on ollut hyvin hankalaa. Kiitos [create-react-app](https://github.com/facebookincubator/create-react-app):in, sovelluskehitys Reactilla on kuitenkin nykyään tuskatonta, parempaa työskentelyflowta on tuskin ollut koskaan JavaScriptilla tehtävässä selainpuolen sovelluskehityksessä.
+React oli aiemmin jossain määrin kuuluisa siitä, että sovelluskehityksen edellyttämien työkalujen konfigurointi oli hyvin hankalaa. Kiitos [Create React App](https://github.com/facebookincubator/create-react-app):in, sovelluskehitys Reactilla on kuitenkin nykyään tuskatonta. Parempaa työskentelyflow'ta on tuskin ollut koskaan JavaScriptilla tehtävässä selainpuolen sovelluskehityksessä.
 
-Emme voi kuitenkaan turvautua ikuisesti create-react-app:in magiaan ja nyt onkin aika selvittää mitä kaikkea taustalla on. Avainasemassa React-sovelluksen toimintakuntoon saattamisessa on [webpack](https://webpack.js.org/)-niminen työkalu.
+Emme voi kuitenkaan turvautua ikuisesti Create React App:in magiaan, ja nyt onkin aika selvittää mitä kaikkea taustalla on. Avainasemassa React-sovelluksen toimintakuntoon saattamisessa on [webpack](https://webpack.js.org/)-niminen työkalu.
 
-### bundlaus
+### Bundlaus
 
 Olemme toteuttaneet sovelluksia jakamalla koodin moduuleihin, joita on <i>importattu</i> niitä tarvitseviin paikkoihin. Vaikka ES6-moduulit ovatkin JavaScript-standardissa määriteltyjä, eivät vanhemmat selaimet vielä osaa käsitellä moduuleihin jaettua koodia.
 
@@ -51,17 +51,17 @@ Hakemiston juuressa oleva sovelluksen "päätiedosto" <i>index.html</i> lataa <i
 </html>
 ```
 
-Kuten esimerkistä näemme, create-react-app:illa tehdyssä sovelluksessa bundlataan JavaScriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon <i>/static/css/main.1becb9f2.css</i>
+Kuten esimerkistä näemme, Create React App:illa tehdyssä sovelluksessa bundlataan JavaScriptin lisäksi sovelluksen CSS-määrittelyt tiedostoon <i>/static/css/main.1becb9f2.css</i>.
 
-Käytännössä bundlaus tapahtuu siten, että sovelluksen JavaScriptille määritellään alkupiste, usein tiedosto <i>index.js</i>, ja bundlauksen yhteydessä webpack ottaa mukaan kaiken koodin mitä alkupiste importtaa, sekä importattujen koodien importtaamat koodit, jne.
+Käytännössä bundlaus tapahtuu siten, että sovelluksen JavaScriptille määritellään alkupiste, usein tiedosto <i>index.js</i>, ja bundlauksen yhteydessä webpack ottaa mukaan kaiken koodin mitä alkupiste importtaa, importattujen koodien importtaamat koodit jne.
 
-Koska osa importeista on kirjastoja, kuten React, Redux ja Axios, bundlattuun JavaScript-tiedostoon tulee myös kaikkien näiden sisältö.
+Koska osa importeista on kirjastoja kuten React, Redux tai Axios, bundlattuun JavaScript-tiedostoon tulee myös kaikkien näiden sisältö.
 
-> Vanha tapa jakaa sovelluksen koodi moneen tiedostoon perustui siihen, että <i>index.html</i> latasi kaikki sovelluksen tarvitsemat erilliset JavaScript-tiedostot script-tagien avulla. Tämä on kuitenkin tehotonta, sillä jokaisen tiedoston lataaminen aiheuttaa pienen overheadin ja nykyään pääosin suositaankin koodin bundlaamista yksittäiseksi tiedostoksi.
+> Vanha tapa jakaa sovelluksen koodi moneen tiedostoon perustui siihen, että <i>index.html</i> latasi kaikki sovelluksen tarvitsemat erilliset JavaScript-tiedostot script-tagien avulla. Tämä on kuitenkin tehotonta, sillä jokaisen tiedoston lataaminen aiheuttaa pienen overheadin ja pääosin nykyään suositaankin koodin bundlaamista yksittäiseksi tiedostoksi.
 
 Tehdään nyt React-projektille sopiva webpack-konfiguraatio kokonaan käsin.
 
-Luodaan projektia varten hakemisto ja sen sisälle seuraavat hakemistot (<i>build</i> ja <i>src</i>) sekä seuraavat tiedostot:
+Luodaan projektia varten hakemisto ja sen sisälle hakemistot (<i>build</i> ja <i>src</i>) sekä seuraavat tiedostot:
 
 <pre>
 ├── build
@@ -83,13 +83,13 @@ Tiedoston <i>package.json</i> sisältö voi olla esim. seuraava:
 }
 ```
 
-Asennetaan webpack komennolla
+Asennetaan webpack:
 
 ```js
 npm install --save-dev webpack webpack-cli
 ```
 
-Webpackin toiminta konfiguroidaan tiedostoon <i>webpack.config.js</i>, laitetaan sen alustavaksi sisällöksi seuraava
+Webpackin toiminta konfiguroidaan tiedostoon <i>webpack.config.js</i>. Laitetaan sen alustavaksi sisällöksi seuraava:
 
 ```js
 const path = require('path')
@@ -105,7 +105,7 @@ const config = {
 module.exports = config
 ```
 
-Määritellään sitten npm-skripti <i>build</i> jonka avulla bundlaus suoritetaan
+Määritellään sitten npm-skripti <i>build</i>, jonka avulla bundlaus suoritetaan:
 
 ```js
 // ...
@@ -123,7 +123,7 @@ const hello = name => {
 }
 ```
 
-Kun nyt suoritamme komennon _npm run build_ webpack bundlaa koodin. Tuloksena on hakemistoon <i>build</i> sijoitettava tiedosto <i>main.js</i>:
+Kun nyt suoritamme komennon _npm run build_, webpack bundlaa koodin. Tuloksena on hakemistoon <i>build</i> sijoitettava tiedosto <i>main.js</i>:
 
 ![](../../images/7/19x.png)
 
@@ -133,7 +133,7 @@ Tiedostossa on paljon erikoisen näköistä tavaraa. Lopussa on mukana myös kir
 eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
 ```
 
-Lisätään hakemistoon <i>src</i> tiedosto <i>App.js</i> ja sille sisältö
+Lisätään hakemistoon <i>src</i> tiedosto <i>App.js</i> ja sille sisältö:
 
 ```js
 const App = () => {
@@ -143,7 +143,7 @@ const App = () => {
 export default App
 ```
 
-Importataan ja käytetään modulia <i>App</i> tiedostossa <i>index.js</i>
+Importataan moduuli <i>App</i> ja käytetään sitä tiedostossa <i>index.js</i>:
 
 ```js
 import App from './App';
@@ -155,7 +155,7 @@ const hello = name => {
 App()
 ```
 
-Kun nyt suoritamme bundlauksen komennolla _npm run build_ huomaamme webpackin havainneen molemmat tiedostot:
+Kun nyt suoritamme bundlauksen komennolla _npm run build_, huomaamme webpackin havainneen molemmat tiedostot:
 
 ![](../../images/7/20x.png)
 
@@ -183,13 +183,13 @@ module.exports = config
 
 Konfiguraatio on JavaScriptia ja tapahtuu eksporttaamalla määrittelyt sisältävä olio Noden moduulisyntaksilla.
 
-Tämän hetkinen minimaalinen määrittely on aika ilmeinen, kenttä [entry](https://webpack.js.org/concepts/#entry) kertoo sen tiedoston, mistä bundlaus aloitetaan.
+Tämänhetkinen minimaalinen määrittely on aika ilmeinen. Kenttä [entry](https://webpack.js.org/concepts/#entry) kertoo sen tiedoston, mistä bundlaus aloitetaan.
 
-Kenttä [output](https://webpack.js.org/concepts/#output) taas kertoo minne muodostettu bundle sijoitetaan. Kohdehakemisto täytyy määritellä <i>absoluuttisena polkuna</i>, se taas onnistuu helposti [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths)-metodilla. [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) on Noden globaali muuttuja, joka viittaa nykyiseen hakemistoon.
+Kenttä [output](https://webpack.js.org/concepts/#output) taas kertoo minne muodostettu bundle sijoitetaan. Kohdehakemisto täytyy määritellä <i>absoluuttisena polkuna</i>, mikä onnistuu helposti [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths)-metodilla. [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) on Noden globaali muuttuja, joka viittaa nykyiseen hakemistoon.
 
 ### Reactin bundlaaminen
 
-Muutetaan sitten sovellus minimalistiseksi React-sovellukseksi. Asennetaan tarvittavat kirjastot
+Muutetaan sitten sovellus minimalistiseksi React-sovellukseksi. Asennetaan tarvittavat kirjastot:
 
 ```bash
 npm install react react-dom
@@ -221,7 +221,7 @@ const App = () => {
 export default App
 ```
 
-Tarvitsemme sovellukselle myös "pääsivuna" toimivan tiedoston <i>build/index.html</i> joka lataa <i>script</i>-tagin avulla bundlatun JavaScriptin:
+Tarvitsemme sovellukselle myös "pääsivuna" toimivan tiedoston <i>build/index.html</i>, joka lataa <i>script</i>-tagin avulla bundlatun JavaScriptin:
 
 ```html
 <!DOCTYPE html>
@@ -237,13 +237,13 @@ Tarvitsemme sovellukselle myös "pääsivuna" toimivan tiedoston <i>build/index.
 </html>
 ```
 
-Kun bundlaamme sovelluksen, törmäämme kuitenkin ongelmaan
+Kun bundlaamme sovelluksen, törmäämme kuitenkin ongelmaan:
 
 ![](../../images/7/21x.png)
 
 ### Loaderit
 
-Webpack mainitsee että saatamme tarvita <i>loaderin</i> tiedoston <i>App.js</i> käsittelyyn. Webpack ymmärtää itse vain JavaScriptia ja vaikka se saattaa meiltä matkan varrella olla unohtunutkin, käytämme Reactia ohjelmoidessamme [JSX](https://facebook.github.io/jsx/):ää näkymien renderöintiin, eli esim. seuraava
+Webpack mainitsee, että saatamme tarvita <i>loaderin</i> tiedoston <i>App.js</i> käsittelyyn. Webpack ymmärtää itse vain JavaScriptia, ja vaikka se saattaa meiltä matkan varrella olla unohtunutkin, käytämme Reactia ohjelmoidessamme [JSX](https://facebook.github.io/jsx/):ää näkymien renderöintiin, eli esim. seuraava
 
 ```js
 const App = () => {
@@ -255,7 +255,7 @@ const App = () => {
 }
 ```
 
-ei ole "normaalia" JavaScriptia, vaan JSX:n tarjoama syntaktinen oikotie määritellä <i>div</i>-tagiä vastaava React-elementti.
+ei ole "normaalia" JavaScriptia, vaan JSX:n tarjoama syntaktinen oikotie määritellä <i>div</i>-tagia vastaava React-elementti.
 
 [Loaderien](https://webpack.js.org/concepts/loaders/) avulla on mahdollista kertoa webpackille miten tiedostot tulee käsitellä ennen niiden bundlausta.
 
@@ -298,9 +298,9 @@ Yksittäisen loaderin määrittely on kolmiosainen:
 }
 ```
 
-Kenttä <i>test</i> määrittelee että käsitellään <i>.js</i>-päätteisiä tiedostoja, <i>loader</i> kertoo että käsittely tapahtuu [babel-loader](https://github.com/babel/babel-loader):illa. Kenttä <i>options</i> taas antaa loaderille sen toimintaa ohjaavia parametreja.
+Kenttä <i>test</i> määrittelee, että käsitellään <i>.js</i>-päätteisiä tiedostoja. Kenttä <i>loader</i> kertoo, että käsittely tapahtuu [Babel Loader](https://github.com/babel/babel-loader):illa. Kenttä <i>options</i> taas antaa loaderille sen toimintaa ohjaavia parametreja.
 
-Asennetaan loader ja sen tarvitsemat kirjastot <i>kehitysaikaiseksi riippuvuudeksi</i>:
+Asennetaan loader ja sen tarvitsemat kirjastot <i>kehitysaikaisiksi riippuvuuksiksi</i>:
 
 ```js
 npm install @babel/core babel-loader @babel/preset-react --save-dev
@@ -321,15 +321,13 @@ const App = () =>
 
 Eli JSX-syntaksin sijaan komponentit luodaan pelkällä JavaScriptilla käyttäen Reactin funktiota [createElement](https://reactjs.org/docs/react-without-jsx.html).
 
-Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i>  selaimen <i>open file</i> -toiminnolla:
+Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i> selaimen <i>open file</i> -toiminnolla:
 
 ![](../../images/7/22.png)
 
 Asian korjaamiseksi on asennettava vielä yksi puuttuva riippuvuus, [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill).
 
-
-
-On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i> -toiminnallisuutta, selaimeen ei joillain selaimilla renderöidy mitään. [Konsoliin tulostuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Ongelma korjaantuu asentamalla kirjastot [core-js](https://www.npmjs.com/package/core-js) ja [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
+On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i>-toiminnallisuutta, selaimeen ei joillain selaimilla renderöidy mitään. [Konsoliin tulostuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Ongelma korjaantuu asentamalla kirjastot [core-js](https://www.npmjs.com/package/core-js) ja [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime)
 
 ```bash
 npm install core-js regenerator-runtime
@@ -348,11 +346,11 @@ Tässä on jo melkein kaikki mitä tarvitsemme React-sovelluskehitykseen.
 
 Prosessista, joka muuttaa JavaScriptia muodosta toiseen käytetään englanninkielistä termiä [transpiling](https://en.wiktionary.org/wiki/transpile), joka taas on termi, joka viittaa koodin kääntämiseen (compile) sitä muuntamalla (transform). Suomenkielisen termin puuttuessa käytämme prosessista tällä kurssilla nimitystä <i>transpilaus</i>.
 
-Edellisen luvun konfiguraation avulla siis <i>transpiloimme</i> JSX:ää sisältävän JavaScriptin normaaliksi JavaScriptiksi tämän hetken johtavan työkalun [babelin](https://babeljs.io/) avulla.
+Edellisen luvun konfiguraation avulla siis <i>transpiloimme</i> JSX:ää sisältävän JavaScriptin normaaliksi JavaScriptiksi tämän hetken johtavan työkalun [Babelin](https://babeljs.io/) avulla.
 
-Kuten osassa 1 jo mainittiin, läheskään kaikki selaimet eivät vielä osaa JavaScriptin uusimpien versioiden ES6:n ja ES7:n ominaisuuksia ja tämän takia koodi yleensä transpiloidaan käyttämään vanhempaa JavaScript-syntaksia ES5:ttä.
+Kuten osassa 1 jo mainittiin, läheskään kaikki selaimet eivät vielä osaa JavaScriptin uusimpien versioiden ES6:n ja ES7:n ominaisuuksia, ja tämän takia koodi yleensä transpiloidaan käyttämään vanhempaa JavaScript-syntaksi ES5:ttä.
 
-Babelin suorittama transpilointiprosessi määritellään <i>pluginien</i> avulla. Käytännössä useimmiten käytetään valmiita [presetejä](https://babeljs.io/docs/plugins/), eli useamman sopivan pluginin joukkoja.
+Babelin suorittama transpilointiprosessi määritellään <i>pluginien</i> avulla. Käytännössä useimmiten käytetään valmiita [presetejä](https://babeljs.io/docs/plugins/) eli useamman sopivan pluginin joukkoja.
 
 Tällä hetkellä sovelluksemme transpiloinnissa käytetään presetiä [@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/):
 
@@ -396,7 +394,7 @@ Muuttujan määrittely tapahtuu avainsanan _var_ avulla, sillä ES5 ei tunne ava
 
 ### CSS
 
-Lisätään sovellukseemme hieman CSS:ää. Tehdään tiedosto <i>src/index.css</i>
+Lisätään sovellukseemme hieman CSS:ää. Tehdään tiedosto <i>src/index.css</i>:
 
 ```css
 .container {
@@ -417,13 +415,13 @@ const App = () => {
 }
 ```
 
-ja importataan se tiedostossa <i>index.js</i>
+ja importataan se tiedostossa <i>index.js</i>:
 
 ```js
 import './index.css'
 ```
 
-Transpilointi hajoaa
+Transpilointi hajoaa:
 
 ![](../../images/7/23x.png)
 
@@ -465,7 +463,7 @@ bundlaus toimii taas ja sovellus saa uudet tyylit.
 
 ### Webpack-dev-server
 
-Sovelluskehitys onnistuu jo, mutta development workflow on suorastaan hirveä (alkaa jo muistuttaa Javalla tapahtuvaa sovelluskehitystä...), muutosten jälkeen koodin on bundlattava ja selain uudelleenladattava jos haluamme testata koodia.
+Sovelluskehitys onnistuu jo, mutta development workflow on suorastaan hirveä (alkaa jo muistuttaa Javalla tapahtuvaa sovelluskehitystä...). Muutosten jälkeen koodi on bundlattava ja selain uudelleenladattava jos haluamme testata koodia.
 
 Ratkaisun tarjoaa [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server). Asennetaan se komennolla
 
@@ -486,7 +484,7 @@ Määritellään dev-serverin käynnistävä npm-skripti:
 }
 ```
 
-Lisätään tiedostoon <i>webpack.config.js</i> kenttä <i>devServer</i>
+Lisätään tiedostoon <i>webpack.config.js</i> kenttä <i>devServer</i>:
 
 ```js
 const config = {
@@ -508,7 +506,7 @@ const config = {
 
 Komento _npm start_ käynnistää nyt dev-serverin porttiin, eli sovelluskehitys tapahtuu avaamalla tuttuun tapaan selain osoitteeseen <http://localhost:3000>. Kun teemme koodiin muutoksia, reloadaa selain automaattisesti itsensä.
 
-Päivitysprosessi on nopea, dev-serveriä käytettäessä webpack ei bundlaa koodia normaaliin tapaan tiedostoksi <i>main.js</i>, bundlauksen tuotos on olemassa ainoastaan keskusmuistissa.
+Päivitysprosessi on nopea, sillä dev-serveriä käytettäessä webpack ei bundlaa koodia normaaliin tapaan tiedostoksi <i>main.js</i>, vaan bundlauksen tuotos on olemassa ainoastaan keskusmuistissa.
 
 Laajennetaan koodia muuttamalla komponentin <i>App</i> määrittelyä seuraavasti:
 
@@ -536,7 +534,7 @@ Sovellus toimii hyvin ja kehitys on melko sujuvaa.
 
 ### Sourcemappaus
 
-Erotetaan napin klikkauksenkäsittelijä omaksi funktioksi ja talletetaan tilaan <i>values</i> aiemmat laskurin arvot:
+Erotetaan napin klikkauksenkäsittelijä omaksi funktiokseen ja talletetaan tilaan <i>values</i> laskurin aiemmat arvot:
 
 ```js
 const App = () => {
@@ -559,11 +557,11 @@ const App = () => {
 }
 ```
 
-Sovellus ei enää toimi, ja konsoli kertoo virheestä
+Sovellus ei enää toimi, ja konsoli kertoo virheestä:
 
 ![](../../images/7/25.png)
 
-Tiedämme tietenkin nyt että virhe on metodissa onClick, mutta jos olisi kyse suuremmasta sovelluksesta, on virheilmoitus sikäli hyvin ikävä, että sen ilmoittama paikka:
+Tiedämme tietenkin nyt, että virhe on metodissa onClick, mutta jos olisi kyse suuremmasta sovelluksesta, on virheilmoitus sikäli hyvin ikävä, että sen ilmoittama paikka
 
 <pre>
 App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
@@ -576,7 +574,7 @@ ei vastaa alkuperäisen koodin virheen sijaintia. Jos klikkaamme virheilmoitusta
 
 Haluamme tietenkin, että virheilmoitusten yhteydessä näytetään kirjoittamamme koodi.
 
-Korjaus on onneksi hyvin helppo, pyydetään webpackia generoimaan bundlelle ns. [source map](https://webpack.js.org/configuration/devtool/), jonka avulla bundlea suoritettaessa tapahtuva virhe on mahdollista <i>mäpätä</i> alkuperäisen koodin vastaavaan kohtaan.
+Korjaus on onneksi hyvin helppo. Pyydetään webpackia generoimaan bundlelle ns. [source map](https://webpack.js.org/configuration/devtool/), jonka avulla bundlea suoritettaessa tapahtuva virhe on mahdollista <i>mäpätä</i> alkuperäisen koodin vastaavaan kohtaan.
 
 Source map saadaan generoitua lisäämällä konfiguraatioon kenttä <i>devtool</i> ja sen arvoksi 'source-map':
 
@@ -594,17 +592,17 @@ const config = {
 };
 ```
 
-Konfiguraatioiden muuttuessa webpack tulee käynnistää uudelleen, on tosin mahdollista konfiguroida webpack tarkkailemaan konfiguraatioiden muutoksia, mutta emme tee sitä.
+Konfiguraatioiden muuttuessa webpack tulee käynnistää uudelleen. On tosin mahdollista konfiguroida webpack tarkkailemaan konfiguraatioiden muutoksia, mutta emme tee sitä.
 
-Nyt virheilmoitus on hyvä 
+Nyt virheilmoitus on hyvä
 
 ![](../../images/7/27.png)
 
-sillä se viittaa itse kirjoittamaamme koodiin
+sillä se viittaa itse kirjoittamaamme koodiin:
 
 ![](../../images/7/27eb.png)
 
-Source mapin käyttö mahdollistaa myös chromen debuggerin luontevan käytön
+Source mapin käyttö mahdollistaa myös Chromen debuggerin luontevan käytön:
 
 ![](../../images/7/28.png)
 
@@ -622,11 +620,11 @@ const App = () => {
 
 Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 1356668 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 1356668 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
 
-Jos tiedoston sisältöä tarkastelee, huomaa että sitä voisi optimoida huomattavasti koon suhteen esim. poistamalla kommentit. Tiedostoa ei kuitenkaan kannata lähteä optimoimaan käsin, sillä tarkoitusta varten on olemassa monia työkaluja.
+Tiedoston sisältöä tarkastelemalla huomaa, että tiedostoa voisi optimoida huomattavasti koon suhteen esim. poistamalla kommentit. Tiedostoa ei kuitenkaan kannata lähteä optimoimaan käsin, sillä tarkoitusta varten on olemassa monia työkaluja.
 
 JavaScript-tiedostojen optimointiprosessista käytetään nimitystä <i>minifiointi</i>. Alan johtava työkalu tällä hetkellä lienee [UglifyJS](http://lisperator.net/uglifyjs/).
 
-Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, riittää että muutetaan tiedoston <i>package.json</i> määrittelyä siten, että koodin bundlaus tapahtuu <i>production</i>-moodissa:
+Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen. Riittää, että muutetaan tiedoston <i>package.json</i> määrittelyä siten, että koodin bundlaus tapahtuu <i>production</i>-moodissa:
 
 ```json
 {
@@ -647,14 +645,14 @@ Webpackin versiosta 4 alkaen pluginia ei ole tarvinnut konfiguroida erikseen, ri
 }
 ```
 
-Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva <i>main.js</i> mukavasti
+Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva <i>main.js</i> mukavasti:
 
 ```js
 $ ls -l build/main.js
 -rw-r--r--  1 mluukkai  ATKK\hyad-all  227651 Feb  7 15:58 build/main.js
 ```
 
-Minifioinnin lopputulos on kuin vanhan liiton c-koodia, kommentit ja jopa turhat välilyönnit ja rivinvaihdot on poistettu ja muuttujanimet ovat yksikirjaimisia:
+Minifioinnin lopputulos on kuin vanhan liiton C-koodia. Kommentit ja jopa turhat välilyönnit ja rivinvaihdot on poistettu ja muuttujanimet ovat yksikirjaimisia:
 
 ```js
 function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s&&s[f].run();f=-1,t=c.length}s=null,d=!1,function(e){if(o===clearTimeout)return clearTimeout(e);if((o===l||!o)&&clearTimeout)return o=clearTimeout,clearTimeout(e);try{o(e)}catch(t){try{return o.call(null,e)}catch(t){return o.call(this,e)}}}(e)}}a.nextTick=function(e){var t=new Array(arguments.length-1);if(arguments.length>1)
@@ -664,7 +662,7 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 
 Lisätään sovellukselle backend. Käytetään jo tutuksi käynyttä muistiinpanoja tarjoavaa palvelua.
 
-Talletetaan seuraava sisältö tiedostoon <i>db.json</i>
+Talletetaan seuraava sisältö tiedostoon <i>db.json</i>:
 
 ```json
 {
@@ -683,11 +681,11 @@ Talletetaan seuraava sisältö tiedostoon <i>db.json</i>
 }
 ```
 
-Tarkoituksena on konfiguroida sovellus webpackin avulla siten, että paikallisesti sovellusta kehitettäessä käytetään backendina portissa 3001 toimivaa json-serveriä.
+Tarkoituksena on konfiguroida sovellus webpackin avulla siten, että paikallisesti sovellusta kehitettäessä käytetään backendina portissa 3001 toimivaa JSON Serveriä.
 
 Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://obscure-harbor-49797.herokuapp.com/api/notes> olevaa backendia.
 
-Asennetaan <i>axios</i>, käynnistetään json-server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa7/custom_hookit) _useNotes_ avulla:
+Asennetaan <i>Axios</i>, käynnistetään JSON Server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa7/custom_hookit) _useNotes_ avulla:
 
 ```js
 import React, { useState, useEffect } from 'react'
@@ -730,7 +728,7 @@ const App = () => {
 export default App
 ```
 
-Koodissa on nyt kovakoodattuna sovelluskehityksessä käytettävän palvelimen osoite. Miten saamme osoitteen hallitusti muutettua osoittamaan internetissä olevaan backendiin bundlatessamme koodin?
+Koodissa on nyt kovakoodattuna sovelluskehityksessä käytettävän palvelimen osoite. Miten saamme osoitteen hallitusti muutettua osoittamaan Internetissä olevaan backendiin bundlatessamme koodin?
 
 Muutetaan <i>webpack.config.js</i> oliosta [funktioksi](https://webpack.js.org/configuration/configuration-types/#exporting-a-function):
 
@@ -835,21 +833,21 @@ hakemistossa <i>build</i>, jolloin sovellus käynnistyy oletusarvoisesti osoitte
 
 ### Polyfill
 
-Sovelluksemme on valmis ja toimii muiden selaimien kohtuullisen uusilla versiolla, mutta Internet Explorerilla sovellus ei toimi. Syynä tähän on se, että _axiosin_ ansiosta koodissa käytetään [Promiseja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), mikään IE:n versio ei kuitenkaan niitä tue:
+Sovelluksemme on valmis ja toimii muiden selaimien kohtuullisen uusilla versiolla, mutta Internet Explorerilla sovellus ei toimi. Syynä tähän on se, että _Axiosin_ ansiosta koodissa käytetään [Promiseja](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), mutta mikään IE:n versio ei kuitenkaan niitä tue:
 
 ![](../../images/7/29.png)
 
-On paljon muutakin standardissa määriteltyjä asioita, joita IE ei tue, esim. niinkin harmiton komento kuin taulukoiden [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) ylittää IE:n kyvyt:
+On paljon muitakin standardissa määriteltyjä asioita, joita IE ei tue. Esim. niinkin harmiton komento kuin taulukoiden [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) ylittää IE:n kyvyt:
 
 ![](../../images/7/30.png)
 
-Tälläisessä tilanteessa normaali koodin transpilointi ei auta, sillä transpiloinnissa koodia käännetään uudemmasta JavaScript-syntaksista vanhempaan, selaimien paremmin tukemaan syntaksiin. Promiset ovat syntaktisesti täysin IE:n ymmärrettävissä, IE:ltä vain puuttuu toteutus promisesta, samoin on tilanne taulukoiden suhteen, IE:llä taulukoiden _find_ on arvoltaan <i>undefined</i>.
+Tälläisessä tilanteessa normaali koodin transpilointi ei auta, sillä transpiloinnissa koodia käännetään uudemmasta JavaScript-syntaksista vanhempaan, selaimien paremmin tukemaan syntaksiin. Promiset ovat syntaktisesti täysin IE:n ymmärrettävissä, IE:ltä vain puuttuu toteutus Promisesta. Samoin on tilanne taulukoiden suhteen, IE:llä taulukoiden _find_ on arvoltaan <i>undefined</i>.
 
-Jos haluamme sovelluksen IE-yhteensopivaksi, tarvitsemme [polyfilliä](https://remysharp.com/2010/10/08/what-is-a-polyfill), eli koodia, joka lisää puuttuvan toiminnallisuuden vanhempiin selaimiin.
+Jos haluamme sovelluksen IE-yhteensopivaksi, tarvitsemme [polyfilliä](https://remysharp.com/2010/10/08/what-is-a-polyfill) eli koodia, joka lisää puuttuvan toiminnallisuuden vanhempiin selaimiin.
 
 Polyfillaus on mahdollista hoitaa [Webpackin ja Babelin avulla](https://babeljs.io/docs/usage/polyfill/) tai asentamalla yksi monista tarjolla olevista polyfill-kirjastoista.
 
-Esim. kirjaston [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) tarjoaman polyfillin käyttö on todella helppoa, koodiin lisätään seuraava:
+Esim. kirjaston [Promise Polyfill](https://www.npmjs.com/package/promise-polyfill) tarjoaman polyfillin käyttö on todella helppoa lisäämällä koodiin seuraava:
 
 ```js
 import PromisePolyfill from 'promise-polyfill'
@@ -859,7 +857,7 @@ if (!window.Promise) {
 }
 ```
 
-Jos globaalia _Promise_-olioa ei ole olemassa, eli selain ei tue promiseja, sijoitetaan polyfillattu promise globaaliin muuttujaan. Jos polyfillattu promise on hyvin toteutettu, muun koodin pitäisi toimia ilman ongelmia.
+Jos globaalia _Promise_-olioa ei ole olemassa eli selain ei tue Promiseja, sijoitetaan polyfillattu Promise globaaliin muuttujaan. Jos polyfillattu Promise on hyvin toteutettu, muun koodin pitäisi toimia ilman ongelmia.
 
 Kattavahko lista olemassaolevista polyfilleistä löytyy [täältä](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
 
@@ -867,9 +865,9 @@ Selaimien yhteensopivuus käytettävien API:en suhteen kannattaakin tarkistaa es
 
 ### Eject
 
-Create-react-app käyttää taustalla webpackia. Jos peruskonfiguraatio ei riitä, on projektit mahdollista [ejektoida](https://create-react-app.dev/docs/available-scripts/#npm-run-eject), jolloin kaikki konepellin alla oleva magia häviää, ja konfiguraatiot tallettuvat hakemistoon <i>config</i> ja muokattuun <i>package.json</i>-tiedostoon.
+Create React App käyttää taustalla webpackia. Jos peruskonfiguraatio ei riitä, on projektit mahdollista [ejektoida](https://create-react-app.dev/docs/available-scripts/#npm-run-eject), jolloin kaikki konepellin alla oleva magia häviää, ja konfiguraatiot tallettuvat hakemistoon <i>config</i> ja muokattuun <i>package.json</i>-tiedostoon.
 
-Jos create-react-app:illa tehdyn sovelluksen ejektoi, paluuta ei ole, sen jälkeen kaikesta konfiguroinnista on huolehdittava itse. Konfiguraatiot eivät ole triviaaleimmasta päästä ja create-react-appin ja ejektoinnin sijaan parempi vaihtoehto saattaa joskus olla tehdä itse koko webpack-konfiguraatio.
+Jos Create React App:illa tehdyn sovelluksen ejektoi, paluuta ei ole, vaan sen jälkeen kaikesta konfiguroinnista on huolehdittava itse. Konfiguraatiot eivät ole triviaaleimmasta päästä, ja Create React Appin ja ejektoinnin sijaan parempi vaihtoehto saattaa joskus olla tehdä koko webpack-konfiguraatio itse.
 
 Ejektoidun sovelluksen konfiguraatioiden lukeminen on suositeltavaa ja sangen opettavaista!
 </div>
