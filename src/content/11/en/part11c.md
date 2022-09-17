@@ -64,7 +64,7 @@ Before going to the below exercises, you should setup your application in [Fly.i
 
 If you rather want to use Heroku, there is an [alternative set of exercises](/en/part11/deployment/#exercises-11-10-11-12-heroku) for that.
 
-In contrast to part 3 now we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>fly deploy</i>), we let the Github Actions workflow do that for us!
+In contrast to part 3 now we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>flyctl deploy</i>), we let the GitHub Actions workflow do that for us!
 
 Create a new app in Fly.io and after that generate a Fly.io API token with command
 
