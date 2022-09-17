@@ -344,18 +344,20 @@ _addPerson_ mutation changes like so:
 
 ```js
 Mutation: {
-  addPerson: async (root, args, context) => {
+  addPerson: async (root, args, context) => { // highlight-line
     const person = new Person({ ...args })
+  // highlight-start
     const currentUser = context.currentUser
 
     if (!currentUser) {
       throw new AuthenticationError("not authenticated")
     }
+  // highlight-end
 
     try {
       await person.save()
-      currentUser.friends = currentUser.friends.concat(person)
-      await currentUser.save()
+      currentUser.friends = currentUser.friends.concat(person) // highlight-line
+      await currentUser.save() // highlight-line
     } catch (error) {
       throw new UserInputError(error.message, {
         invalidArgs: args,
@@ -449,7 +451,7 @@ Let's change the book graphql schema a little
 type Book {
   title: String!
   published: Int!
-  author: Author!
+  author: Author! // highlight-line
   genres: [String!]!
   id: ID!
 }

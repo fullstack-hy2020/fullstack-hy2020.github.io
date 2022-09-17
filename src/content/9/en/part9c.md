@@ -637,11 +637,11 @@ In order to avoid time-eating bugs, it is recommended that within a flat directo
 Sometimes, we might want to use a specific modification of a type.
 For example, consider a page for listing some data, some of which is sensitive and some of which is non-sensitive.
 We might want to be sure that no sensitive data is used or displayed. We could <i>pick</i> the fields of a type we allow to be used to enforce this.
-We can do that by using the utility type [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk).
+We can do that by using the utility type [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys).
 
 In our project, we should consider that Ilari might want to create a listing of all his diary entries <i>excluding</i> the comment field since, during a very scary flight, he might end up writing something he wouldn't necessarily want to show anyone else.
 
-The [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) utility type allows us to choose which fields of an existing type we want to use.
+The [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) utility type allows us to choose which fields of an existing type we want to use.
 Pick can be used to either construct a completely new type, or to inform a function what it should return on runtime.
 Utility types are a special kind of type tools, but they can be used just like regular types.
 
@@ -656,7 +656,7 @@ const getNonSensitiveEntries =
 
 and the compiler would expect the function to return an array of values of the modified DiaryEntry type, which include only the four selected fields.
 
-Since [Pick](http://www.typescriptlang.org/docs/handbook/utility-types.html#picktk) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), just like Array does, we now have two nested type variables and the syntax is starting to look a bit odd.
+Since [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) requires the type it modifies to be given as a [type variable](http://www.typescriptlang.org/docs/handbook/generics.html#working-with-generic-type-variables), just like Array does, we now have two nested type variables and the syntax is starting to look a bit odd.
 We can improve the code's readability by using the [alternative](http://www.typescriptlang.org/docs/handbook/basic-types.html#array) array syntax:
 
 ```js
@@ -667,7 +667,7 @@ const getNonSensitiveEntries =
 ```
 
 In this case, we want to exclude only one field,
-so it would be even better to use the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type, which we can use to declare which fields to exclude:
+so it would be even better to use the [Omit](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys) utility type, which we can use to declare which fields to exclude:
 
 ```js
 const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
@@ -948,7 +948,7 @@ router.post('/', (req, res) => {
 
 But wait, what is the type of this object? It is not exactly a <i>DiaryEntry</i>, since it is still missing the <i>id</i> field.
 It could be useful to create a new type, <i>NewDiaryEntry</i>, for an entry that hasn't been saved yet.
-Let's create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> type and the [Omit](http://www.typescriptlang.org/docs/handbook/utility-types.html#omittk) utility type:
+Let's create that in <i>types.ts</i> using the existing <i>DiaryEntry</i> type and the [Omit](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys) utility type:
 
 ```js
 export type NewDiaryEntry = Omit<DiaryEntry, 'id'>;
