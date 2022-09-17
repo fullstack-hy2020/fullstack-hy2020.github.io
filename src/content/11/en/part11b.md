@@ -341,6 +341,18 @@ Define a npm script <code>test:e2e</code> for running the e2e tests from the com
 
 **Note** do not include the word <i>spec</i> in the Cypress test file name, that would cause also Jest to run it, and it might cause problems. 
 
+**Note2** end to end tests are pretty slow and than can cause problems when run with the GitHub Actions. Slowness can be remedied by changing <i>App.jsx</i> to fetch a bit less Pokemons, eg. 50 works fine:
+
+```js
+const { 
+  data: pokemonList, error, isLoading 
+} = useApi('https://pokeapi.co/api/v2/pokemon/?limit=50', mapResults) // highlight-line
+```
+
+The same change must be done in the test file <i>App.jest.spec.jsx</i>
+
+The change is now (16th September 2022) done in the repository, but if you have fetched the code earlier, there might still be a bigger number. 
+
 **Another thing to note** is that despite the page renders the Pokemon names by starting with a capital letter, the names are actually written with lower case letters in the source, so it is <code>ivysaur</code> instead of <code>Ivysaur</code>!
 
 Ensure that the test passes locally. Remember that the Cypress tests _assume that the application is up and running_ when you run the test! If you have forgotten the details (that happened to me too!), please see [part 5](/en/part5/end_to_end_testing) how to get up and running with Cypress.
