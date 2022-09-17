@@ -52,13 +52,17 @@ Let's define some things we **want** in this hypothetical deployment system too:
  - We would like it to be fast
  - We'd like to have no downtime during the deployment (this is distinct from the requirement we have for handling user requests just before/during the deployment).
 
+Next we will have two sets of exercises for automazing the deployment with GitHub Actions, one for those who want to use [Fly.io](https://fly.io/) and one for those who want to use [Heroku](https://heroku.com) for the deployment.  The process of deployment is always specific to the particular cloud provider, so you can also do the both the exercise sets if you want to see the differences how these services work with respect to deployments.
+
 </div>
 
 <div class="tasks">
 
 ### Exercises 11.10-11.12. (Fly.io)
 
-Before going to the below exercises, you should setup your application in Fly.io environment like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
+Before going to the below exercises, you should setup your application in [Fly.io](https://fly.io/) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
+
+If you rather want to use Heroku, there is an [alternative set of exercises](/en/part11/deployment/#exercises-11-10-11-12-heroku) for that.
 
 In contrast to part 3 now we <i>do not deploy the code</i> to Fly.io ourselves (with the command <i>fly deploy</i>), we let the Github Actions workflow do that for us!
 
@@ -288,7 +292,9 @@ Our script based healt check is hardly meaningful in real life since it does ess
 
 ### Exercises 11.10-11.12. (Heroku)
 
-Before going to the below exercises, you should setup your application in Heroku environment like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
+Before going to the below exercises, you should setup your application in [Heroku](heroku.com) hosting service like the one we did in [part 3](/en/part3/deploying_app_to_internet#application-to-the-internet).
+
+If you rather want to use Fly.io for hosting, there is an [alternative set of exercises](/en/part11/deployment/#exercises-11-10-11-12-fly-io) for that.
 
 In contrast to part 3 now we <i>do not push the code</i> to Heroku ourselves, we let the Github Actions workflow do that for us!
 
