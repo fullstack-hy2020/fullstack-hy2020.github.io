@@ -76,7 +76,7 @@ The react app running in the browser now fetches the data from node/express-serv
 
 Now that the whole stack is ready, let's move our application to the internet.
 
-There are a ever growing number of services that can be used to host an app in the internet. The convenient for a developer are so called PaaS (eli Platform as a Service) platforms that take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
+There are a ever growing number of services that can be used to host an app in the internet. The convenient for a developer are so called PaaS (i.e. Platform as a Service) platforms that take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
 
 For already a decade [Heroku](http://heroku.com) has been dominating the PaaS scene. In August 2022 Heroku announched that they will end their free tier in 27th November 2022. This is very unfortunate for many developers, especially students. 
 
