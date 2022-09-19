@@ -335,3 +335,5 @@ At the bottom of each part of the material is a link to <em>propose changes to m
 There are also lots of links in the material for many kind of background material. If you notice that a link is broken (that happens too often...), propose a change or ping us in Discord if you do not find a replacement for the broken link.
 
 </div>
+  
+  I am from India, can i get certificate of completion..
