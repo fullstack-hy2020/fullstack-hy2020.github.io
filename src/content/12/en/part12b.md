@@ -596,7 +596,7 @@ Refresh the page, and our message is displayed! Now we know how exec can be used
 
 While the MongoDB from the previous exercise is running, access the database with mongo command-line interface (CLI). You can do that using docker exec. Then add a new todo using the CLI.
 
-The command to open CLI when inside the container is _mongo_
+The command to open CLI when inside the container is _mongosh_
 
 The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
 
