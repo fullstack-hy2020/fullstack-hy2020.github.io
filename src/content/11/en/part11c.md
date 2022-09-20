@@ -282,7 +282,11 @@ Now when you know that the script based health check works, it is time to define
 
 You propably should use [curl](https://curl.se/) in the script to do the HTTP request. You most likely need to Google how to get hold to the returned string and compare it with the expected value 'ok'.
 
+*Note* that you should <i>not</i> curl to the app domain name (that is the normal url) from the script but instead, use the localhost address. The script is executed in the Fly.io virtual machine just while the app is being deployed and at this particular moment using the normal address is not possible.
+
 It is <strong>storngly advisable</strong> to check first locally that the script works since so many things can go wrong in it, and when run in GitHub Action, you can not do any debug printing. If and <i> when</i> things do not work as indended, it is also a very good idea to log in to the virtual machine (with <i>flyctl ssh console</i>) and check that the script works when runned manually there.
+
+*Another note:* in order to test the script in the virtual machine, you should have the script in your local directory when you make a successful deployment. So if your deployment fails, the script will not be uploaded to the Fly.io server. So in case of problems, comment out the script based health check from fly.toml and do a deployment to get your script to the virtual machine.
 
 Our script based healt check is hardly meaningful in real life since it does essentially the same that is achievable with the simple HTTP check. The example here is just to show that the mechanism exists. Unlike with HTTP checks, with script based health checks you can in principle write an anrbitrarily compled and many sided health check to your app, should you need one.
 
