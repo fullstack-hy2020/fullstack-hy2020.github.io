@@ -80,7 +80,7 @@ There are a ever growing number of services that can be used to host an app in t
 
 For already a decade [Heroku](http://heroku.com) has been dominating the PaaS scene. In August 2022 Heroku announched that they will end their free tier in 27th November 2022. This is very unfortunate for many developers, especially students. 
 
-One of the most promising replacements of Heroku is [Fly.io](https://fly.io/) which has a free plan, so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
+One of the most promising replacements of Heroku is [Fly.io](https://fly.io/)  and [Replit.com](https://replit.com) which has a free plan, so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
 
 There are also some other free options for Heroku replacements besides Fly.io, eg. [Render](https://render.com/) that work well for the purposes of this course. If you known some other good and easy to use service for hosting NodeJS, please let us know!
 
