@@ -194,7 +194,7 @@ Kun nappia on painettu tarpeeksi monta kertaa näet seuraavan tekstin:
 
 > <i>University credit registration in progress...</i>
 
-Huom: jos teit jo kokeen Moodlessa, ota yhteyttä matti.luukkainen@helsinki.fi tai @mluukkai in Discord.
+Huom: jos teit jo kokeen Moodlessa, ota yhteyttä matti.luukkainen@helsinki.fi tai @mluukkai Discordissa.
 
 ### Suoritusmerkinnän pyytäminen
 
