@@ -365,8 +365,8 @@ const Login = (props) => {
 <!-- With user login, we call _navigate('/')_ that causes the browser's url to change to _/_ and the application renders the corresponding component <i>Home</i>.-->
 随着用户的登录，我们调用_navigate("/")_，使浏览器的url改变为_/_，应用渲染相应的组件<i>Home</i>。
 
-<!-- Both [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) and [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.-->
- [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)和[useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)都是钩子函数，就像我们现在已经多次使用的useState和useEffect。  正如你在第一章节所记得的，使用钩子函数有一些[规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks）。Create-react-app已经被配置为在你违反这些规则时发出警告，例如，从条件语句中调用钩子函数。
+<!-- Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.-->
+ [useParams](https://reactrouter.com/en/main/hooks/use-params)和[useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)都是钩子函数，就像我们现在已经多次使用的useState和useEffect。  正如你在第一章节所记得的，使用钩子函数有一些[规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks）。Create-react-app已经被配置为在你违反这些规则时发出警告，例如，从条件语句中调用钩子函数。
 
 ### redirect
 
