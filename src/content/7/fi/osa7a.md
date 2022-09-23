@@ -157,7 +157,7 @@ import {
 
 Normaalisti selain lataa uuden sivun osoiterivillä olevan URL:n muuttuessa. [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/):n avulla <i>BrowserRouter</i> kuitenkin mahdollistaa sen, että selaimen osoiterivillä olevaa URL:ia voidaan käyttää React-sovelluksen sisäiseen "reitittämiseen", eli vaikka osoiterivillä oleva URL muuttuu, sivun sisältöä manipuloidaan ainoastaan JavaScriptillä, eikä selain lataa uutta sisältöä palvelimelta. Selaimen toiminta back- ja forward-toimintojen ja kirjanmerkkien tekemisen suhteen on kuitenkin intuitiivista eli toimii kuten perinteisillä verkkosivuilla.
 
-Routerin sisälle määritellään selaimen osoiteriviä muokkaavia <i>linkkejä</i> komponentin [Link](https://reactrouter.com/docs/en/v6/api#link) avulla. Esim.
+Routerin sisälle määritellään selaimen osoiteriviä muokkaavia <i>linkkejä</i> komponentin [Link](https://reactrouter.com/en/main/components/link) avulla. Esim.
 
 ```js
 <Link to="/notes">notes</Link>
@@ -173,7 +173,7 @@ Selaimen URL:iin perustuen renderöitävät komponentit määritellään kompone
 
 määrittelee, että jos selaimen osoiteena on <i>/notes</i>, renderöidään komponentti <i>Notes</i>.
 
-URL:iin perustuen renderöitävät komponentit on sijoitettu [Routes](https://reactrouter.com/docs/en/v6/api#routes-and-route)-komponentin lapsiksi:
+URL:iin perustuen renderöitävät komponentit on sijoitettu [Routes](https://reactrouter.com/en/main/components/routes)-komponentin lapsiksi:
 
 ```js 
 <Routes>
@@ -255,7 +255,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee URL:n yksilöivään osaan eli näytettävän muistiinpanon <i>id</i>:hen käsiksi React Routerin funktion [useParams](https://reactrouter.com/docs/en/v6/api#useparams) avulla. 
+Komponentti _Note_ saa parametrikseen kaikki muistiinpanot propsina <i>notes</i> ja se pääsee URL:n yksilöivään osaan eli näytettävän muistiinpanon <i>id</i>:hen käsiksi React Routerin funktion [useParams](https://reactrouter.com/en/main/hooks/use-params) avulla. 
 
 ### useNavigate
 
@@ -319,11 +319,11 @@ const Login = (props) => {
 }
 ```
 
-Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/docs/en/v6/hooks/use-navigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaaminen ohjelmallisesti.
+Mielenkiintoista komponentissa on React Routerin funktion [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) käyttö. Funktion avulla on mahdollista selaimen osoiterivin muokkaaminen ohjelmallisesti.
 
 Kirjautumisen yhteydessä suoritettava komento _navigate('/')_ saa aikaan sen, että selaimen osoiteriville tulee osoitteeksi _/_ ja sovellus renderöi osoitetta vastaavan komponentin <i>Home</i>.
 
-Käyttämämme React Router -kirjaston funktiot [useParams](https://reactrouter.com/docs/en/v6/hooks/use-params) ja [useNavigate](https://reactrouter.com/docs/en/v6/hooks/use-navigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create React App on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
+Käyttämämme React Router -kirjaston funktiot [useParams](https://reactrouter.com/en/main/hooks/use-params) ja [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) ovat molemmat hook-funktiota samaan tapaan kuin esim. moneen kertaan käyttämämme useState ja useEffect. Kuten muistamme osasta 1, hook-funktioiden käyttöön liittyy tiettyjä [sääntöjä](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot). Create React App on konfiguroitu varoittamaan, jos hookien säännöt rikkoutuvat, esim. jos hook-funktiota yritetään kutsua ehtolauseen sisältä. 
 
 ### Uudelleenohjaus
 
@@ -333,7 +333,7 @@ Näkymän <i>Users</i> routeen liittyy vielä eräs mielenkiintoinen detalji:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä komponentin [Navigate](https://reactrouter.com/docs/en/v6/components/navigate) avulla kirjautumisnäkymään:
+Jos käyttäjä ei ole kirjautuneena, ei renderöidäkään näkymää <i>Users</i> vaan sen sijaan <i>uudelleenohjataan</i> käyttäjä komponentin [Navigate](https://reactrouter.com/en/main/components/navigate) avulla kirjautumisnäkymään:
 
 ```js
 <Navigate replace to="/login" />
@@ -417,7 +417,7 @@ const Note = ({ note }) => {
 }
 ```
 
-Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon <i>id</i> komponentissa <i>App</i> React Routerin hook-funktion [useMatch](https://reactrouter.com/docs/en/v6/api#usematch) avulla.
+Eräs tapa muuttaa sovellusta olisi selvittää näytettävän muistiinpanon <i>id</i> komponentissa <i>App</i> React Routerin hook-funktion [useMatch](https://reactrouter.com/en/main/hooks/use-match) avulla.
 
 <i>useMatch</i>-hookin käyttö ei ole mahdollista samassa komponentissa, joka määrittelee sovelluksen reititettävän osan. Siirretäänkin <i>Router</i>-komponenttien käyttö komponentin <i>App</i> ulkopuolelle:
 
