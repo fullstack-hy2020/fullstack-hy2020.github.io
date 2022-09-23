@@ -256,7 +256,7 @@ const main = async () => {
 main()
 ```
 
-Huom: Herokua käyttäessä yhteyden muodostusksen saatta joutua konfiguroimaan seuraavasti:
+Huom: Herokua käyttäessä yhteyden muodostuksen saattaa joutua konfiguroimaan seuraavasti:
 
 ```js
 const sequelize = new Sequelize(process.env.DATABASE_URL, {

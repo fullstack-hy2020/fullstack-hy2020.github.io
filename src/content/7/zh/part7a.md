@@ -161,8 +161,8 @@ const App = () => {
 <!-- Routing, or the conditional rendering of components <i>based on the url</i> in the browser, is used by placing components as children of the <i>Router</i> component, meaning inside <i>Router</i> tags.-->
  路由，或者说在浏览器中基于url</i>的组件的有条件渲染，是通过将组件作为<i>Router</i>组件的子代，也就是在<i>Router</i>标签中使用。
 
-<!-- Notice that, even though the component is referred to by the name <i>Router</i>, we are in fact talking about [BrowserRouter](https://reactrouter.com/docs/en/v6/api#browserrouter), because here the import happens by renaming the imported object:-->
- 注意，尽管该组件被称为<i>Router</i>，我们实际上是在谈论[BrowserRouter](https://reactrouter.com/docs/en/v6/api#browserrouter)，因为这里的导入是通过重命名导入的对象发生的。
+<!-- Notice that, even though the component is referred to by the name <i>Router</i>, we are in fact talking about [BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router), because here the import happens by renaming the imported object:-->
+ 注意，尽管该组件被称为<i>Router</i>，我们实际上是在谈论[BrowserRouter](https://reactrouter.com/en/main/router-components/browser-router)，因为这里的导入是通过重命名导入的对象发生的。
 
 ```js
 import {
@@ -171,8 +171,8 @@ import {
 } from "react-router-dom"
 ```
 
-<!-- According to the [manual](https://reactrouter.com/docs/en/v6/api#browserrouter):-->
- 根据[手册](https://reactrouter.com/docs/en/v6/api#browserrouter)。
+<!-- According to the [manual](https://v5.reactrouter.com/web/api/BrowserRouter):-->
+ 根据[手册](https://v5.reactrouter.com/web/api/BrowserRouter)。
 
 <!-- > <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.-->
  > <i>BrowserRouter</i>是一个<i>Router</i>，使用HTML5历史API（pushState、replaceState和popState事件）来保持你的UI与URL同步。
@@ -180,8 +180,8 @@ import {
 <!-- Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.-->
 通常情况下，当地址栏中的URL发生变化时，浏览器会加载一个新页面。然而，在[HTML5历史API](https://css-tricks.com/using-the-html5-history-api/)的帮助下，<i>BrowserRouter</i>使我们能够在React应用中使用浏览器地址栏中的URL进行内部 "路由"。因此，即使地址栏中的URL发生变化，页面的内容也只是使用Javascript进行操作，浏览器不会从服务器上加载新的内容。使用后退和前进的动作，以及做书签，仍然像在一个传统的网页上那样合乎逻辑。
 
-<!-- Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/docs/en/v6/api#link) component. For example,-->
-在路由器内部，我们定义了<i>链接</i>，在[链接](https://reactrouter.com/docs/en/v6/api#link)组件的帮助下修改地址栏。例如。
+<!-- Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/en/main/components/link) component. For example,-->
+在路由器内部，我们定义了<i>链接</i>，在[链接](https://reactrouter.com/en/main/components/link)组件的帮助下修改地址栏。例如。
 
 ```js
 <Link to="/notes">notes</Link>
@@ -190,8 +190,8 @@ import {
 <!-- creates a link in the application with the text <i>notes</i>, which when clicked changes the URL in the address bar to <i>/notes</i>.-->
 在应用中创建一个文本为<i>notes</i>的链接，当点击时将地址栏中的URL改为<i>/notes</i>。
 
-<!-- Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/docs/en/v6/api#routes-and-route). For example,-->
-基于浏览器的URL渲染的组件是在组件[Route](https://reactrouter.com/docs/en/v6/api#routes-and-route)的帮助下定义的。例如。
+<!-- Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/en/main/components/route). For example,-->
+基于浏览器的URL渲染的组件是在组件[Route](https://reactrouter.com/en/main/components/route)的帮助下定义的。例如。
 
 ```js
 <Route path="/notes" element={<Notes />} />
@@ -200,8 +200,8 @@ import {
 <!-- defines that, if the browser address is <i>/notes</i>, we render the <i>Notes</i> component.-->
 定义了，如果浏览器的地址是<i>/notes</i>，我们就渲染<i>Notes</i>组件。
 
-<!-- We wrap the components to be rendered based on the url with a [Routes](https://reactrouter.com/docs/en/v6/api#routes-and-route) component-->
- 我们用一个[Routes](https://reactrouter.com/docs/en/v6/api#routes-and-route)组件来包装要根据网址渲染的组件
+<!-- We wrap the components to be rendered based on the url with a [Routes](https://reactrouter.com/en/main/components/routes) component-->
+ 我们用一个[Routes](https://reactrouter.com/en/main/components/routes)组件来包装要根据网址渲染的组件
 
 ```js
 <Routes>
@@ -290,8 +290,8 @@ const Note = ({ notes }) => {
 }
 ```
 
-<!-- The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/docs/en/v6/api#useparams) function of the React Router.-->
- _Note_组件接收所有的笔记作为prop<i>notes</i>，它可以通过React Router的[useParams](https://reactrouter.com/docs/en/v6/api#useparams)函数访问url参数（要显示的笔记的id）。
+<!-- The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the url parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/en/main/hooks/use-params) function of the React Router.-->
+ _Note_组件接收所有的笔记作为prop<i>notes</i>，它可以通过React Router的[useParams](https://reactrouter.com/en/main/hooks/use-params)函数访问url参数（要显示的笔记的id）。
 
 ### useNavigate
 
@@ -359,14 +359,14 @@ const Login = (props) => {
 }
 ```
 
-<!-- What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) function of the React Router. With this function the browser's url can be changed programmatically.-->
- 这个组件的有趣之处在于使用了React Router的[useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)函数。有了这个函数，浏览器的url可以以编程方式改变。
+<!-- What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router. With this function the browser's url can be changed programmatically.-->
+ 这个组件的有趣之处在于使用了React Router的[useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)函数。有了这个函数，浏览器的url可以以编程方式改变。
 
 <!-- With user login, we call _navigate('/')_ that causes the browser's url to change to _/_ and the application renders the corresponding component <i>Home</i>.-->
 随着用户的登录，我们调用_navigate("/")_，使浏览器的url改变为_/_，应用渲染相应的组件<i>Home</i>。
 
-<!-- Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.-->
- [useParams](https://reactrouter.com/en/main/hooks/use-params)和[useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate)都是钩子函数，就像我们现在已经多次使用的useState和useEffect。  正如你在第一章节所记得的，使用钩子函数有一些[规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks）。Create-react-app已经被配置为在你违反这些规则时发出警告，例如，从条件语句中调用钩子函数。
+<!-- Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)  are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.-->
+ [useParams](https://reactrouter.com/en/main/hooks/use-params)和[useNavigate](https://reactrouter.com/en/main/hooks/use-navigate)都是钩子函数，就像我们现在已经多次使用的useState和useEffect。  正如你在第一章节所记得的，使用钩子函数有一些[规则](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks）。Create-react-app已经被配置为在你违反这些规则时发出警告，例如，从条件语句中调用钩子函数。
 
 ### redirect
 
@@ -377,8 +377,8 @@ const Login = (props) => {
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-<!-- If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/docs/en/v6/api#navigate) to the login view:-->
- 如果一个用户没有登录，<i>Users</i>组件就不会被渲染。相反，用户会被使用组件[Navigate](https://reactrouter.com/docs/en/v6/api#navigate)重定向</i>到登录视图。
+<!-- If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/en/main/components/navigate) to the login view:-->
+ 如果一个用户没有登录，<i>Users</i>组件就不会被渲染。相反，用户会被使用组件[Navigate](https://reactrouter.com/en/main/components/navigate)重定向</i>到登录视图。
 
 ```js
 <Navigate replace to="/login" />
@@ -468,8 +468,8 @@ const Note = ({ note }) => {
 }
 ```
 
-<!-- One way to do this would be to use React Router's [useMatch](https://reactrouter.com/docs/en/v6/api#usematch) hook to figure out the id of the note to be displayed in the _App_ component.-->
- 一种方法是使用React Router's [useMatch](https://reactrouter.com/docs/en/v6/api#usematch)钩子来计算出要在_App_组件中显示的笔记的id。
+<!-- One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/main/hooks/use-match) hook to figure out the id of the note to be displayed in the _App_ component.-->
+ 一种方法是使用React Router's [useMatch](https://reactrouter.com/en/main/hooks/use-match)钩子来计算出要在_App_组件中显示的笔记的id。
 
 <!-- It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:-->
  在定义应用的路由部分的组件中不可能使用<i>useMatch</i>钩。让我们把_Router_组件的使用从_App_移开。

@@ -202,7 +202,7 @@ We defined a new type, _WelcomeProps_, and passed it to the function's parameter
 const Welcome = (props: WelcomeProps) => {
 ```
 
-You could write the same thing using a less verbose syntax:
+You could write the same thing using a more verbose syntax:
 
 ```jsx
 const Welcome = ({ name }: { name: string }) => (
