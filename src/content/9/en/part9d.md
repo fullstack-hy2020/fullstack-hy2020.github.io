@@ -892,7 +892,7 @@ Since we now have the state in the context, you'll need to define a new action t
 
 The Application uses [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles) for styling. You may also use it for the new components but that is up to you since our main focus now is TypeScript.
 
-The Application also uses [React Router](https://reacttraining.com/react-router/web/guides/quick-start) to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
+The Application also uses [React Router](https://reactrouter.com/en/main/start/tutorial) to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
 
 The result could look like this:
 
@@ -900,7 +900,7 @@ The result could look like this:
 
 Example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.
 
-**Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument:
+**Note** that in order to access the id in the url, you need to give [useParams](https://reactrouter.com/en/main/hooks/use-params) a proper type argument:
 
 ```js
 const { id } = useParams<{ id: string }>();

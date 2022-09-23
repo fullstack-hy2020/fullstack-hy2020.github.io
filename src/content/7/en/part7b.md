@@ -19,7 +19,7 @@ In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with
 
 Within the last couple of years many React libraries have begun to offer hook-based apis. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook-based api is a lot easier to use than its older, still available, [connect](/en/part6/connect) API.
 
-The [React Router's](https://reacttraining.com/react-router/web/guides) api we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based. Its hooks can be used to access url parameters and the _navigation_ object, which allows for manipulating the browser url programmatically.
+The [React Router's](https://reactrouter.com/en/main/start/tutorial) api we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based. Its hooks can be used to access url parameters and the _navigation_ object, which allows for manipulating the browser url programmatically.
 
 As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 

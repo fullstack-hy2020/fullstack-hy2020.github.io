@@ -1039,8 +1039,8 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 <!-- The Application uses [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles) for styling. You may also use it for the new components but that is up to you since our main focus now is TypeScript.-->
  应用使用我们在[第7章节](/en/part7/more_about_styles)中提到的[MaterialUI](https://material-ui.com/)进行样式设计。你也可以把它用于新的组件，但这取决于你，因为我们现在的主要重点是TypeScript。
 
-<!-- The Application also uses [React Router](https://reacttraining.com/react-router/web/guides/quick-start)  to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.-->
- 应用还使用[React Router](https://reacttraining.com/react-router/web/guides/quick-start)来控制哪个视图在前端可见。如果你还没有掌握路由器的工作原理，你可能想看一下[第7章节](/en/part7/react_router)。
+<!-- The Application also uses [React Router](https://reactrouter.com/en/main/start/tutorial)  to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.-->
+ 应用还使用[React Router](https://reactrouter.com/en/main/start/tutorial)来控制哪个视图在前端可见。如果你还没有掌握路由器的工作原理，你可能想看一下[第7章节](/en/part7/react_router)。
 
 <!-- The result could look like this:-->
  结果可能是这样的。
@@ -1050,8 +1050,8 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries' >  // highlight-line
 <!-- Example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.-->
  示例使用[Material UI Icons](https://mui.com/components/material-icons/)来表示性别。
 
-<!-- **Note** that in order to access the id in the url, you need to give [useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams) a proper type argument:-->
- **注意**，为了访问url中的id，你需要给[useParams](https://reacttraining.com/react-router/web/api/Hooks/useparams)一个合适的类型参数。
+<!-- **Note** that in order to access the id in the url, you need to give [useParams](https://reactrouter.com/en/main/hooks/use-params) a proper type argument:-->
+ **注意**，为了访问url中的id，你需要给[useParams](https://reactrouter.com/en/main/hooks/use-params)一个合适的类型参数。
 
 ```js
 const { id } = useParams<{ id: string }>();
