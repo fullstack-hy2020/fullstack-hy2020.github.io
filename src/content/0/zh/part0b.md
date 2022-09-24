@@ -89,7 +89,7 @@ lang: zh
  该请求是向地址<https://studies.cs.helsinki.fi/exampleapp/kuva.png>发出的，方法类型是HTTP GET。响应头告诉我们，响应大小为89350字节，其[内容类型](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)为<i>image/png</i>，所以它是一个png图像。浏览器利用这些信息将图像正确地渲染在屏幕上。
 
 <!-- The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):-->
-在浏览器上打开网页https://studies.cs.helsinki.fi/exampleapp，所引起的一系列事件构成了以下[顺序图](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)。
+在浏览器上打开网页<https://studies.cs.helsinki.fi/exampleap>，所引起的一系列事件构成了以下[顺序图](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)。
 
 ![Sequence diagram of the flow covered above](../../images/0/7e.png)
 
