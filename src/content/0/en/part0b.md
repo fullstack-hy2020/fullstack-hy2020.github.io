@@ -115,8 +115,7 @@ Writing HTML in the midst of the code is of course not smart, but for old-school
 
 In traditional web applications the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created using Java Spring (like in the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639)), Python Flask (like in the course [tietokantasovellus](https://materiaalit.github.io/tsoha-18/)) or with [Ruby on Rails](http://rubyonrails.org/) to name just a few examples.
 
-The example uses [Express](https://expressjs.com/) from Node.js. 
-This course will use Node.js and Express to create web servers. 
+The example uses [Express](https://expressjs.com/) library with the Node.js. This course will use Node.js and Express to create web servers. 
 
 ### Running application logic in the browser
 
