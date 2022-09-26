@@ -1058,7 +1058,7 @@ Write a test that verifies that if the <i>likes</i> property is missing from the
 Make the required changes to the code so that it passes the test.
 #### 4.12*: Blog list tests, step5
 
-Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> and <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
+Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
 
 Make the required changes to the code so that it passes the test.
