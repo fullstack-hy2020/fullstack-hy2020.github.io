@@ -113,7 +113,7 @@ Anna sovellukselle nimi, tai anna Fly.io:n generoida automaattinen nimi, valitse
 Jos kaikki menee hyvin, sovellus käynnistyy ja saat sen avattua selaimeen komennolla 
 
 ```bash
-fly launch
+fly open
 ```
 
 Tämän jälkeen aina kun teet muutoksia sovellukseen, saat vietyä uuden version tuotantoon komennolla 
