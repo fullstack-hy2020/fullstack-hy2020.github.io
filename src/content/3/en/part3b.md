@@ -76,13 +76,13 @@ The react app running in the browser now fetches the data from node/express-serv
 
 Now that the whole stack is ready, let's move our application to the internet.
 
-There are a ever growing number of services that can be used to host an app in the internet. The convenient for a developer are so called PaaS (i.e. Platform as a Service) platforms that take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
+There are an ever growing number of services that can be used to host an app on the internet. The convenient for a developer are so called PaaS (i.e. Platform as a Service) platforms that take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
 
-For already a decade [Heroku](http://heroku.com) has been dominating the PaaS scene. In August 2022 Heroku announched that they will end their free tier in 27th November 2022. This is very unfortunate for many developers, especially students. 
+For a decade already, [Heroku](http://heroku.com) has been dominating the PaaS scene. In August 2022 Heroku announced that they will end their free tier on 27th November 2022. This is very unfortunate for many developers, especially students. 
 
-One of the most promising replacements of Heroku is [Fly.io](https://fly.io/) which has a free plan, so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
+One of the most promising replacements for Heroku is [Fly.io](https://fly.io/) which has a free plan, so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
 
-There are also some other free options for Heroku replacements besides Fly.io, eg. [Render](https://render.com/) that work well for the purposes of this course. If you known some other good and easy to use service for hosting NodeJS, please let us know!
+There are also some other free options for Heroku replacements besides Fly.io, eg. [Render](https://render.com/) that work well for the purposes of this course. If you know some other good and easy to use services for hosting NodeJS, please let us know!
 
 For both Fly.io and Heroku, we need to change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
 
@@ -101,7 +101,7 @@ If you decide to use [Fly.io](https://fly.io/) begin by installing their flyctl 
 
 By default everyone gets two free virtual machines that can be used for running two apps at the same time.
 
-Note that the Fly.io instructions have only been added to this course on the 28th of August 2022. If you run into problems, please ask for help in Discord!
+Note that the Fly.io instructions have only been added to this course on the 28th of August 2022. If you run into problems, please ask for help on Discord!
 
 Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via command line with the command
 
@@ -109,7 +109,7 @@ Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via command lin
 fly auth login
 ```
 
-*Note* if the command _fly_ does not work in your machine, you can try the longer version _flyctl_. Eg. on MacOS, both forms of the command work.
+*Note* if the command _fly_ does not work on your machine, you can try the longer version _flyctl_. Eg. on MacOS, both forms of the command work.
 
 Initializing an app happens by running the following command in the root directory of the app
 
@@ -117,7 +117,7 @@ Initializing an app happens by running the following command in the root directo
 fly launch
 ```
 
-Give the app a name or let Fly.io autogenerate one. Pick a region where the app will be run. Do not create a postgres database for the app since it is not needed.
+Give the app a name or let Fly.io auto generate one. Pick a region where the app will be run. Do not create a postgress database for the app since it is not needed.
 
 The last question is "Would you like to deploy now?", answer yes and your app is also deployed to the Fly.io servers. 
 
@@ -136,11 +136,11 @@ fly deploy
 
 A particularly important command is `fly logs` that can be used to view server logs. It is best to keep logs always visible!
 
-Fly.io creates a file  <i>fly.toml</i> in the root of your app. The file contains all the configuration of your server. At this course we can mostly ignore the contents of the file.
+Fly.io creates a file  <i>fly.toml</i> in the root of your app. The file contains all the configuration of your server. On this course we can mostly ignore the contents of the file.
 
 #### Heroku
 
-Let us also look how we would use the good old [Heroku](https://www.heroku.com) for hosting an app.
+Let us also look at how we would use the good old [Heroku](https://www.heroku.com) for hosting an app.
 
 >If you have never used Heroku before, you can find instructions from [Heroku documentation](https://devcenter.heroku.com/articles/getting-started-with-nodejs) or by Googling.
 
@@ -157,7 +157,7 @@ node_modules
 ```
 Create a Heroku account in https://devcenter.heroku.com/. 
 Install the Heroku package using the command: npm install -g heroku. 
-Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with command <i>git push heroku main</i>.
+Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with the command <i>git push heroku main</i>.
 
 If everything went well, the application works:
 
