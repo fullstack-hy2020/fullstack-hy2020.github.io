@@ -51,7 +51,7 @@ For the development of our application, we will be using [Expo](https://docs.exp
 npx create-expo-app rate-repository-app --template expo-template-blank@sdk-46
 ```
   
-Note, that the <em>@sdk-46</em> sets the project's <i>Expo SDK version to 44</i>, which supports <i>React Native version 0.69</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here (https://docs.expo.io/introduction/why-not-expo/). However, these limitations have no effect on the application implemented in the material.
+Note, that the <em>@sdk-46</em> sets the project's <i>Expo SDK version to 46</i>, which supports <i>React Native version 0.69</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here (https://docs.expo.io/introduction/why-not-expo/). However, these limitations have no effect on the application implemented in the material.
 
 Next, let's navigate to the created <i>rate-repository-app</i> directory with the terminal and install a few dependencies we'll be needing soon:
 
@@ -81,9 +81,9 @@ Let's have look at <i>scripts</i> section of the <i>package.json</i> file which 
 }
 ```
 
-Running the script <em>npm start</em> starts the [Metro bundler](https://facebook.github.io/metro/) which is a JavaScript bundler for React Native. It can be described as the [Webpack](https://webpack.js.org/) of the React Native ecosystem. In addition to the Metro bundler, <i>Expo development tools</i> should be open in a browser window at [http://localhost:19002](http://localhost:19002). Expo development tools are a useful set of tools for viewing the application logs and starting the application in an emulator or in Expo's mobile application. We will get to emulators and Expo's mobile application soon, but first, let's open our application.
+Running the script <em>npm start</em> starts the [Metro bundler](https://facebook.github.io/metro/) which is a JavaScript bundler for React Native. It can be described as the [Webpack](https://webpack.js.org/) of the React Native ecosystem. In addition to the Metro bundler, the Expo command-line interface should be open in the terminal window. The command-line interface has an useful set of commands for viewing the application logs and starting the application in an emulator or in Expo's mobile application. We will get to emulators and Expo's mobile application soon, but first, let's open our application.
   
-Expo command line interface suggests a few ways to open our application. Let's press the "w" key in the terminal window to open the application in a browser. We should soon see the text defined in the <i>App.js</i> file in a browser window. Open the <i>App.js</i> file with an editor and make a small change to the text in the <em>Text</em> component. After saving the file you should be able to see that the changes you have made into the code are visible in the browser window.
+Expo command-line interface suggests a few ways to open our application. Let's press the "w" key in the terminal window to open the application in a browser. We should soon see the text defined in the <i>App.js</i> file in a browser window. Open the <i>App.js</i> file with an editor and make a small change to the text in the <em>Text</em> component. After saving the file you should be able to see that the changes you have made into the code are visible in the browser window.
 
 ### Setting up the development environment
 
