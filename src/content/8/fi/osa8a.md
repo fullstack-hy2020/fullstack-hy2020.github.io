@@ -383,7 +383,7 @@ resolveri on funktio, joka palauttaa <i>kaikki</i> taulukon _persons_ oliot
 
 ### Apollo Studio Explorer
 
-Kun Apollo-serveriä suoritetaan sovelluskehitysmoodissa, ja mennään sivulle  [http://localhost:4000](http://localhost:4000) päästään nappia <i>Query your server</i> painamalla  sovelluskehittäjälle erittäin hyödyllisen [Apollo Studio Explorer]https://www.apollographql.com/docs/studio/explorer/explorer/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
+Kun Apollo-serveriä suoritetaan sovelluskehitysmoodissa, ja mennään sivulle  [http://localhost:4000](http://localhost:4000) päästään nappia <i>Query your server</i> painamalla  sovelluskehittäjälle erittäin hyödyllisen [Apollo Studio Explorer](https://www.apollographql.com/docs/studio/explorer/explorer/)-näkymän, joka avulla on mahdollista tehdä kyselyjä palvelimelle.
 
 Kokeillaan 
 
