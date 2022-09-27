@@ -332,7 +332,7 @@ beforeEach(async () => {
 // ...
 ```
 
-The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database.By doing this, we ensure that the database is in the same state before every test is run.
+The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. By doing this, we ensure that the database is in the same state before every test is run.
 
 Let's also make the following changes to the last two tests:
 
@@ -1069,7 +1069,7 @@ Make the required changes to the code so that it passes the test.
 
 ### Refactoring tests
 
-Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organisation of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve if we group related tests with <i>describe</i> blocks.
+Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve if we group related tests with <i>describe</i> blocks.
 
 
 Below is an example of the test file after making some minor improvements:
