@@ -51,7 +51,7 @@ For the development of our application, we will be using [Expo](https://docs.exp
 npx create-expo-app rate-repository-app --template expo-template-blank@sdk-46
 ```
   
-Note, that the <em>@sdk-46</em> sets the project's <i>Expo SDK version to 44</i>, which supports <i>React Native version 0.69</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here (https://docs.expo.io/introduction/why-not-expo/). However, these limitations have no effect on the application implemented in the material.
+Note, that the <em>@sdk-46</em> sets the project's <i>Expo SDK version to 46</i>, which supports <i>React Native version 0.69</i>. Using other Expo SDK version might cause you trouble while following this material. Also, Expo has few limitations when compared to plain React Native CLI, more on them [here (https://docs.expo.io/introduction/why-not-expo/). However, these limitations have no effect on the application implemented in the material.
 
 Next, let's navigate to the created <i>rate-repository-app</i> directory with the terminal and install a few dependencies we'll be needing soon:
 
