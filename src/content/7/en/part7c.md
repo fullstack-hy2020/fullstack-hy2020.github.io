@@ -503,6 +503,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://tailwindcss.com/>
 - <https://semantic-ui.com/>
 - <https://mantine.dev/>
+- <https://react.fluentui.dev/>
 
 ### Styled components
 
