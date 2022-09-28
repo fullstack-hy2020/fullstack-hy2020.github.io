@@ -19,27 +19,7 @@ Voisimmekin hoitaa React-sovelluksen ja GraphQL:n kommunikoinnin Axiosilla. Täm
 
 ### Apollo client
 
-Luodaan uusi React-sovellus. Kirjoittamishetkellä (21th April 2022) Apollo Client ei tue Reactin uutta versiota 18. Downgreidataan projekti käyttämään aiempaa versiota. Muutetaan tiedostoa  <i>package.json</i> seuraavasti:
-
-```js
-{
-  "dependencies": {
-    "react": "^17.0.2", // highlight-line
-    "react-dom": "^17.0.2", // highlight-line
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  // ...
-}
-```
-
-Asennetaan muutoksen jälkeen riippuvuudet uudelleen suorittamalla komento
-
-```js
-npm install
-```
-
-Asennetaan nyt sovellukseen [Apollo Clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
+Luodaan uusi React-sovellus ja asennetaan sovellukseen [Apollo Clientin](https://www.apollographql.com/docs/react/get-started/#installation) vaatimat riippuvuudet.
 
 ```bash
 npm install @apollo/client graphql
