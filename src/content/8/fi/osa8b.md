@@ -28,7 +28,7 @@ npm install @apollo/client graphql
 Aloitetaan seuraavalla ohjelmarungolla.
 
 ```js
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
 import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
@@ -59,7 +59,8 @@ client.query({ query })
     console.log(response.data)
   })
 
-ReactDOM.render(<App />, document.getElementById('root'))
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Koodi aloittaa luomalla [client](https://www.apollographql.com/docs/react/get-started/#create-a-client)-olion, jonka avulla se lähettää kyselyn palvelimelle:
@@ -78,25 +79,27 @@ Palvelimen palauttama vastaus tulostuu konsoliin:
 Sovellus pystyy siis kommunikoimaan GraphQL-palvelimen kanssa olion _client_ välityksellä. Client saadaan sovelluksen kaikkien komponenttien saataville käärimällä komponentti <i>App</i> komponentin [ApolloProvider](https://www.apollographql.com/docs/react/get-started/#connect-your-client-to-react) lapseksi:
 
 ```js
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { 
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache // highlight-line
-} from '@apollo/client' 
+import {
+  ApolloClient,
+  ApolloProvider, // highlight-line
+  HttpLink,
+  InMemoryCache,
+} from '@apollo/client'
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
   link: new HttpLink({
     uri: 'http://localhost:4000',
-  })
+  }),
 })
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}> // highlight-line
     <App />
-  </ApolloProvider>, // highlight-line
-  document.getElementById('root')
+  </ApolloProvider> // highlight-line
 )
 ```
 

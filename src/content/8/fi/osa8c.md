@@ -11,7 +11,7 @@ Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin k�
 
 ### Mongoose ja Apollo
 
-Otetaan käyttöön mongoose:
+Otetaan käyttöön Mongoose:
 
 ```bash
 npm install mongoose
@@ -155,13 +155,14 @@ Person.find({ phone: { $exists: false }})
 
 ### Validoinnit
 
-GraphQL:n lisäksi syötteet validoidaan nyt mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus, joka on tällä kertaa [UserInputError](https://www.apollographql.com/docs/apollo-server/data/errors/):
+GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus, joka on tällä kertaa [UserInputError](https://www.apollographql.com/docs/apollo-server/data/errors/):
 
 ```js
 Mutation: {
   addPerson: async (root, args) => {
       const person = new Person({ ...args })
 
+// highlight-start
       try {
         await person.save()
       } catch (error) {
@@ -169,6 +170,7 @@ Mutation: {
           invalidArgs: args,
         })
       }
+// highlight-end
 
       return person
   },
@@ -176,6 +178,7 @@ Mutation: {
       const person = await Person.findOne({ name: args.name })
       person.phone = args.phone
 
+// highlight-start
       try {
         await person.save()
       } catch (error) {
@@ -183,6 +186,7 @@ Mutation: {
           invalidArgs: args,
         })
       }
+// highlight-end
 
       return person
     }
@@ -296,6 +300,32 @@ Mutation: {
 ```
 
 Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.
+
+Käyttäjän luonti onnistuu nyt seuraavasti:
+
+```js
+mutation {
+  createUser (
+    username: "mluukkai"
+  ) {
+    username
+    id
+  }
+}
+```
+
+Kirjautumisen hoitaa seuraava mutaatio:
+
+```js
+mutation {
+  login (
+    username: "mluukkai"
+    password: "secret"
+  ) {
+    value
+  }
+}
+```
 
 Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäjä liittää kirjautumisen yhteydessä saamansa tokenin kaikkiin pyyntöihinsä. REST:in tapaan token liitetään GraphQL-pyyntöihin headerin <i>Authorization</i> avulla. Apollo Explorerissa headerin liittäminen pyyntöön tapahtuu seuraavasti
 
@@ -448,7 +478,7 @@ Tämän luvun tehtävät todennäköisesti hajottavat frontendin koodin. Tässä
 
 #### 8.13: Tietokanta, osa 1
 
-Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
+Muuta kirjastosovellusta siten, että se tallettaa tiedot tietokantaan. Kirjojen ja kirjailijoiden <i>Mongoose-skeema</i> löytyy valmiiksi [täältä](https://github.com/fullstack-hy/misc/blob/master/library-schema.md).
 
 Muutetaan myös graphql-skeemaa hiukan kirjan osalta
 

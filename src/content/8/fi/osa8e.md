@@ -332,8 +332,7 @@ const User = require('./models/user')
 const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
 
-const MONGODB_URI =
-  'mongodb+srv://fullstack:fullstack@cluster0.o1opl.mongodb.net/graphqlPhoneApp?retryWrites=true&w=majority'
+const MONGODB_URI = 'mongodb+srv://databaseurlhere'
 
 console.log('connecting to', MONGODB_URI)
 
@@ -405,7 +404,7 @@ Eli kun uusi henkilö luodaan, palautetaan henkilön tiedot kaikille tilaajille.
 Asennetaan tarvittavast kirjastot:
 
 ```
-npm install subscriptions-transport-ws graphql-subscriptions
+npm install graphql-subscriptions graphql-ws
 ```
 
 Tiedosto <i>index.js</i> muuttuu seraavasti
@@ -413,7 +412,7 @@ Tiedosto <i>index.js</i> muuttuu seraavasti
 ```js
 // highlight-start
 const { execute, subscribe } = require('graphql')
-const { SubscriptionServer } = require('subscriptions-transport-ws')
+const { SubscriptionServer } = require('graphql-ws')
 // highlight-end
 
 // ...
@@ -425,17 +424,12 @@ const start = async () => {
   const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 // highlight-start
-  const subscriptionServer = SubscriptionServer.create(
-    {
-      schema,
-      execute,
-      subscribe,
-    },
-    {
-      server: httpServer,
-      path: '',
-    }
-  )
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/',
+  })
+
+  const serverCleanup = useServer({ schema }, wsServer)
   // highlight-end
 
   const server = new ApolloServer({
@@ -457,7 +451,7 @@ const start = async () => {
         async serverWillStart() {
           return {
             async drainServer() {
-              subscriptionServer.close()
+              await serverCleanup.dispose()
             },
           }
         },
@@ -481,8 +475,13 @@ const start = async () => {
 }
 
 start()
-
 ```
+
+GraphQL:n Queryt ja mutaatiot hoidetaan HTTP-protokollaa käyttäen. Tilausten osalta kommunikaatio tapahuu [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)-yhteydellä.
+
+Ylläoleva konfio luo palvelimeen HTTP-pyyntöjen kuuntelun rinnalle WebSocketeja kuuntelevan palvelun, jonka se sitoo palvelimen GraphQL-skeemaan. Määrittelyn toinen osa rekisteröi funktion, joka sulkee WebSocket-yhteyden palvelimen sulkemisen yhteydessä.
+
+Toisin kuin HTTP:n yhteydessä, WebSocketteja käyttäessä myös palvelin voi olla datan lähettämisessä aloitteellinen osapuoli. Näinollen WebSocketit sopivat hyvin GraphQL:n tilauksiin, missä palvelimen on pystyttävä kertomaan kaikille tietyn tilauksen tehneille tilausta vastaavan tapahtuman (esim. henkilön luominen) tapahtumisesta.
 
 Määritellylle tilaukselle _personAdded_ tarvitaan resolveri. Myös lisäyksen tekevää resolveria _addPerson_ on muutettava siten, että uuden henkilön lisäys aiheuttaa ilmoituksen tilauksen tehneille.
 
@@ -492,6 +491,8 @@ Muutokset ovat seuraavassa:
 const { PubSub } = require('graphql-subscriptions') // highlight-line
 const pubsub = new PubSub() // highlight-line
 
+const resolvers = {
+  // ...
   Mutation: {
     addPerson: async (root, args, context) => {
       const person = new Person({ ...args })
@@ -519,21 +520,44 @@ const pubsub = new PubSub() // highlight-line
   // highlight-start
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncIterator(['PERSON_ADDED'])
+      subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
     },
   },
   // highlight-end
+}
 ```
 
-Tilausten yhteydessä kommunikaatio tapahtuu [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-periaatteella käyttäen olioa [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup.html#setup). Uuden henkilön lisäys <i>julkaisee</i> tiedon lisäyksestä kaikille muutokset tilanneille PubSubin metodilla _publish_. 
+Tilausten yhteydessä kommunikaatio tapahtuu [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-periaatteella käyttäen olioa [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup.html#setup).
 
-Subscriptionin _personAdded_ resolveri rekisteröi tiedotteista kiinnostuneet clientit palauttamalla niille sopivan [iteraattoriolion](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html).
+Koodia on vähän mutta konepellin alla tapahtuu paljon. Tilauksen _personAdded_ resolverissa palvelin rekisteröi ja tallettaa muistiin tiedon kaikista sille tilauksen tehneistä clienteista. Nämä tallentuvat seuraavan koodinpätkän ansiosta nimellä <i>PERSON\_ADDED</i> varustettuun ["iteraattoriolioon"](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html):
+
+```js
+Subscription: {
+  personAdded: {
+    subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+  },
+},
+```
+
+Iteraattorin nimi on mielivaltainen merkkijono, joka on nyt valittu kuvaavalla tavalla mutta kirjoitettu konventtion mukaan isoin kirjaimin.
+
+Uuden henkilön lisäys <i>julkaisee</i> tiedon lisäyksestä kaikille muutokset tilanneille PubSubin metodilla _publish_:
+
+```js
+pubsub.publish('PERSON_ADDED', { personAdded: person }) 
+```
+
+Koodirivin suoritus saa siis aikaan sen, että kaikille iteraattoriin <i>PERSON\_ADDED</i> rekisteröidyille clienteille lähtee WebSocketin avulla tieto luodusta käyttäjästä.
 
 Tilauksia on mahdollista testata Apollo Exploreilla avulla seuraavasti:
 
 ![](../../images/8/31x.png)
 
-Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä, tulee tieto niistä Explorerin oikeaan reunaan.
+Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä (joudut tekemään lisäyksen toisesta selainikkunasta), tulee tieto niistä Explorerin oikeaan reunaan.
+
+Jos tilaus ei toimi, saatat tarkasta, että yhteysasetukset on määritelty oikein:
+
+![](../../images/8/35.png)
 
 Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branchissa <i>part8-7</i>.
 

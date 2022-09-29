@@ -162,6 +162,7 @@ Mutation: {
   addPerson: async (root, args) => {
       const person = new Person({ ...args })
 
+// highlight-start
       try {
         await person.save()
       } catch (error) {
@@ -169,12 +170,15 @@ Mutation: {
           invalidArgs: args,
         })
       }
+// highlight-end
+
       return person
   },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name })
       person.phone = args.phone
 
+// highlight-start
       try {
         await person.save()
       } catch (error) {
@@ -182,6 +186,8 @@ Mutation: {
           invalidArgs: args,
         })
       }
+// highlight-end
+
       return person
     }
 }
@@ -290,6 +296,33 @@ Mutation: {
 ```
 
 The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication).
+
+
+User creation is done now as follows:
+
+```js
+mutation {
+  createUser (
+    username: "mluukkai"
+  ) {
+    username
+    id
+  }
+}
+```
+
+The mutation for logging in looks like this:
+
+```js
+mutation {
+  login (
+    username: "mluukkai"
+    password: "secret"
+  ) {
+    value
+  }
+}
+```
 
 Just like in the previous case with REST, the idea now is that a logged-in user adds a token they receive upon login to all of their requests. And just like with REST, the token is added to GraphQL queries using the <i>Authorization</i> header.
 

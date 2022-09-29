@@ -333,8 +333,7 @@ const User = require('./models/user')
 const typeDefs = require('./schema')
 const resolvers = require('./resolvers')
 
-const MONGODB_URI =
-  'MONGODB_URI'
+const MONGODB_URI = 'mongodb+srv://databaseurlhere'
 
 console.log('connecting to', MONGODB_URI)
 
@@ -407,7 +406,7 @@ So when a new person is added, all of its details are sent to all subscribers.
 First, we have to install two packages for adding subscriptions to GraphQL:
 
 ```
-npm install subscriptions-transport-ws graphql-subscriptions
+npm install graphql-subscriptions graphql-ws
 ```
 
 The file <i>index.js</i> is changed to
@@ -415,7 +414,7 @@ The file <i>index.js</i> is changed to
 ```js
 // highlight-start
 const { execute, subscribe } = require('graphql')
-const { SubscriptionServer } = require('subscriptions-transport-ws')
+const { SubscriptionServer } = require('graphql-ws')
 // highlight-end
 
 // ...
@@ -427,17 +426,12 @@ const start = async () => {
   const schema = makeExecutableSchema({ typeDefs, resolvers })
 
 // highlight-start
-  const subscriptionServer = SubscriptionServer.create(
-    {
-      schema,
-      execute,
-      subscribe,
-    },
-    {
-      server: httpServer,
-      path: '',
-    }
-  )
+  const wsServer = new WebSocketServer({
+    server: httpServer,
+    path: '/',
+  })
+
+  const serverCleanup = useServer({ schema }, wsServer)
   // highlight-end
 
   const server = new ApolloServer({
@@ -459,7 +453,7 @@ const start = async () => {
         async serverWillStart() {
           return {
             async drainServer() {
-              subscriptionServer.close()
+              await serverCleanup.dispose()
             },
           }
         },
@@ -483,17 +477,22 @@ const start = async () => {
 }
 
 start()
-
 ```
+
+
+When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subsctiptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+
+The below code registers a WebSocketServer object to listen the WebSocket connectionts, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
+
+WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
 
 The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so that it sends a notification to subscribers. 
 
 The required changes are as follows:
 
 ```js
-const { PubSub } = require('graphql-subscriptions') // highlight-line
-const pubsub = new PubSub() // highlight-line
-
+const resolvers = {
+  // ...
   Mutation: {
     addPerson: async (root, args, context) => {
       const person = new Person({ ...args })
@@ -521,21 +520,47 @@ const pubsub = new PubSub() // highlight-line
   // highlight-start
   Subscription: {
     personAdded: {
-      subscribe: () => pubsub.asyncIterator(['PERSON_ADDED'])
+      subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
     },
   },
   // highlight-end
+}
 ```
 
-With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup). Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.
 
-_personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
+
+With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup).
+
+There is only few lines of code added, but quite much is happening under the hood. The resolver of the _personAdded_ subscription registers and saves info about all the clients that do the subscription. The clients are saved to an 
+["iterator object"](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html) called <i>PERSON\_ADDED</i>  thanks to the following code:
+
+```js
+Subscription: {
+  personAdded: {
+    subscribe: () => pubsub.asyncIterator('PERSON_ADDED')
+  },
+},
+```
+
+The iterator name is an arbitrary string, now the name follows the convention, it is the subscription name written in capital letters.
+
+Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_:
+
+```js
+pubsub.publish('PERSON_ADDED', { personAdded: person }) 
+```
+
+Execution of this line sends a WebSocket message about the added person to all the clients registered in the iteror <i>PERSON\_ADDED</i>.
 
 It's possible to test the subscriptions with the Apollo Explorer like this:
 
 ![](../../images/8/31x.png)
 
-When the blue button <i>PersonAdded</i> is pressed Explorer starts to wait for a new person to be added. On addition the info of the added person appears in the right side of the Explorer.
+When the blue button <i>PersonAdded</i> is pressed Explorer starts to wait for a new person to be added. On addition (that you need to do from another browser window) the info of the added person appears in the right side of the Explorer.
+
+If the subscription does not work, check that you have correct connection settings:
+
+![](../../images/8/35.png)
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.
 
