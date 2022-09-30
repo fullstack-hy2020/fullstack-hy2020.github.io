@@ -574,7 +574,8 @@ import { setContext } from 'apollo-link-context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/client/link/ws'
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
+import { createClient } from 'graphql-ws'
 // highlight-end
 
 const authLink = setContext((_, { headers }) => {
@@ -592,12 +593,11 @@ const httpLink = new HttpLink({
 })
 
 // highlight-start
-const wsLink = new WebSocketLink({
-  uri: 'ws://localhost:4000/graphql',
-  options: {
-    reconnect: true
-  }
-})
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: 'ws://localhost:4000',
+  })
+)
 // highlight-end
 
 // highlight-start
@@ -610,7 +610,7 @@ const splitLink = split(
     )
   },
   wsLink,
-  authLink.concat(httpLink),
+  authLink.concat(httpLink)
 )
 // highlight-end
 
@@ -619,18 +619,17 @@ const client = new ApolloClient({
   link: splitLink // highlight-line
 })
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <App />
-  </ApolloProvider>, 
-  document.getElementById('root')
+  </ApolloProvider>
 )
 ```
 
 Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
 
 ```bash
-npm install @apollo/client subscriptions-transport-ws
+npm install @apollo/client graphql-ws
 ```
 
 Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:
@@ -640,10 +639,11 @@ const httpLink = new HttpLink({
   uri: 'http://localhost:4000',
 })
 
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
-  options: { reconnect: true }
-})
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: 'ws://localhost:4000',
+  })
+)
 ```
 
 Tilaukset tehdään hook-funktion [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) avulla. 
@@ -718,6 +718,7 @@ Ratkaistaan ongelma varmistamalla, että sama henkilö ei päädy välimuistiin 
 // highlight-start
 // function that takes care of manipulating cache
 export const updateCache = (cache, query, addedPerson) => {
+  // helper that is used to eliminate saving same person twice
   const uniqByName = (a) => {
     let seen = new Set()
     return a.filter((item) => {
@@ -725,7 +726,9 @@ export const updateCache = (cache, query, addedPerson) => {
       return seen.has(k) ? false : seen.add(k)
     })
   }
+  // highlight-end
 
+  // highlight-start
   cache.updateQuery(query, ({ allPersons }) => {
     return {
       allPersons: uniqByName(allPersons.concat(addedPerson)),
@@ -751,6 +754,8 @@ const App = () => {
   // ...
 }
 ```
+
+Funktio _updateCache_ lisää uuden henkilön tiedot välimuistin queryn _allPersons_ tallentamiin henkilöihin, mutta varmistaa kuitenkin funktion _uniqByName_ avulla, että yhden henkilön tiedot eivät tallennu cälimuitiin useampaan kertaan. 
 
 Funktiota _updateCache_ voidaan hyödyntää myös uuden henkilön lisäyksen yhteydessä tapahtuvassa välimuistin päivityksessä:
 

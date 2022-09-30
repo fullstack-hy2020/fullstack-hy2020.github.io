@@ -578,7 +578,8 @@ import { setContext } from 'apollo-link-context'
 
 // highlight-start
 import { getMainDefinition } from '@apollo/client/utilities'
-import { WebSocketLink } from '@apollo/client/link/ws'
+import { GraphQLWsLink } from '@apollo/client/link/subscriptions'
+import { createClient } from 'graphql-ws'
 // highlight-end
 
 const authLink = setContext((_, { headers }) => {
@@ -596,12 +597,11 @@ const httpLink = new HttpLink({
 })
 
 // highlight-start
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
-  options: {
-    reconnect: true
-  }
-})
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: 'ws://localhost:4000',
+  })
+)
 // highlight-end
 
 // highlight-start
@@ -611,10 +611,10 @@ const splitLink = split(
     return (
       definition.kind === 'OperationDefinition' &&
       definition.operation === 'subscription'
-    );
+    )
   },
   wsLink,
-  authLink.concat(httpLink),
+  authLink.concat(httpLink)
 )
 // highlight-end
 
@@ -623,18 +623,17 @@ const client = new ApolloClient({
   link: splitLink // highlight-line
 })
 
-ReactDOM.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <ApolloProvider client={client}>
     <App />
-  </ApolloProvider>, 
-  document.getElementById('root')
+  </ApolloProvider>
 )
 ```
 
 For this to work, we have to install some dependencies:
 
 ```bash
-npm install @apollo/client subscriptions-transport-ws
+npm install @apollo/client graphql-ws
 ```
 
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
@@ -645,9 +644,11 @@ const wsLink = new WebSocketLink({
   options: { reconnect: true }
 })
 
-const httpLink = createHttpLink({
-  uri: 'http://localhost:4000',
-})
+const wsLink = new GraphQLWsLink(
+  createClient({
+    url: 'ws://localhost:4000',
+  })
+)
 ```
 
 The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) hook function.
@@ -724,6 +725,7 @@ Let us now fix the problem by ensuring that a person is not added twice in the c
 // highlight-start
 // function that takes care of manipulating cache
 export const updateCache = (cache, query, addedPerson) => {
+  // helper that is used to eliminate saving same person twice
   const uniqByName = (a) => {
     let seen = new Set()
     return a.filter((item) => {
@@ -731,7 +733,9 @@ export const updateCache = (cache, query, addedPerson) => {
       return seen.has(k) ? false : seen.add(k)
     })
   }
+  // highlight-end
 
+  // highlight-start
   cache.updateQuery(query, ({ allPersons }) => {
     return {
       allPersons: uniqByName(allPersons.concat(addedPerson)),
