@@ -309,7 +309,7 @@ SELECT * FROM Users WHERE name = 'Arto Hell-as'; DROP TABLE Users; --'
 Las inyecciones de SQL se evitan [desinfectando](https://security.stackexchange.com/questions/172297/sanitizing-input-for-parameterized-queries) la entrada, lo que implicaría comprobar que los parámetros de la consulta no contienen ningún carácter prohibido, en este caso comillas simples. Si se encuentran caracteres prohibidos, se reemplazan con alternativas seguras al [escapar](https://en.wikipedia.org/wiki/Escape_character#JavaScript) de ellos.
 
 
-Los ataques de inyección también son posibles en bases de datos NoSQL. Sin embargo, mongoose los previene [desinfectando](https://zanon.io/posts/nosql-injection-in-mongodb) las consultas. Puede encontrar más información sobre el tema, por ejemplo, [aquí](https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
+Los ataques de inyección también son posibles en bases de datos NoSQL. Sin embargo, mongoose los previene [desinfectando](https://zanon.io/posts/nosql-injection-in-mongodb) las consultas. Puede encontrar más información sobre el tema, por ejemplo, [aquí](https://web.archive.org/web/20220901024441/https://blog.websecurify.com/2014/08/hacking-nodejs-and-mongodb.html).
 
 
 La <i>secuencia de comandos entre sitios (XSS)</i> es un ataque en el que es posible inyectar código JavaScript malicioso en una aplicación web legítima. Luego, el código malicioso se ejecutaría en el navegador de la víctima. Si intentamos inyectar lo siguiente en, por ejemplo, la aplicación de notas

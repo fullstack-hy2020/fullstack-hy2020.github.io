@@ -503,7 +503,13 @@ Aquí hay algunos otros UI frameworks para su consideración. Si no ve su UI fra
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
 - <https://semantic-ui.com/>
-
+- <https://mantine.dev/>
+- <https://react.fluentui.dev/>
+- <https://storybook.js.org>
+- <https://www.primefaces.org/primereact/>
+- <https://v2.grommet.io>
+- <https://blueprintjs.com>
+- <https://evergreen.segment.com>
 
 ### Styled components
 
