@@ -24,10 +24,10 @@
   }
 
   a {
-    border-bottom: 1px solid $black;
+    border-bottom: 1px solid var(--color-text);
 
     &:hover {
-      background-color: $white;
+      background-color: var(--color-background);
     }
   }
 }

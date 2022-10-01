@@ -6,7 +6,7 @@
 
     @include to($tablet) {
       display: block;
-      background-color: $black;
+      background-color: var(--color-text);
       width: 2px !important;
     }
   }

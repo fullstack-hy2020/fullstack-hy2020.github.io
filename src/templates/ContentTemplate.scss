@@ -58,14 +58,14 @@
 
   pre {
     margin: 2rem 0;
-    background-color: $black;
-    color: $white;
+    background-color: var(--color-text);
+    color: var(--color-background);
   }
 
   em {
     font-family: Courier;
     font-style: normal;
-    background-color: rgba($main, 0.6);
+    background-color: rgba(var(--color-main), 0.6);
     padding: 1px 5px 2px;
   }
 
@@ -132,7 +132,7 @@
 
 .tasks {
   a {
-    border-color: $black !important;
+    border-color: var(--color-text) !important;
 
     &:hover {
       background-color: white !important;
@@ -142,7 +142,7 @@
 }
 
 .gatsby-highlight-code-line {
-  background-color: rgba($main, 0.3);
+  background-color: rgba(var(--color-main), 0.3);
   display: block;
   margin-right: -1em;
   margin-left: -1em;

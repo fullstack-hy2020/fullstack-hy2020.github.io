@@ -47,7 +47,8 @@ class Header extends Component {
         ref={this.header}
         className={`header ${headerClass}`}
         style={{
-          backgroundColor: headerClass !== '' ? 'transparent' : 'white',
+          backgroundColor:
+            headerClass !== '' ? 'transparent' : 'var(--color-background)',
         }}
       >
         <div

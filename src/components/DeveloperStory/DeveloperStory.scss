@@ -21,10 +21,10 @@
   color: inherit;
   border: none;
   padding: 0 !important;
-  border-bottom: 2px solid $main;
+  border-bottom: 2px solid var(--color-main);
   cursor: pointer;
 
   &:hover {
-    background-color: $main;
+    background-color: var(--color-main);
   }
 }

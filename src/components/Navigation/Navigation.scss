@@ -10,7 +10,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: $main;
+  background: var(--color-main);
   position: fixed;
   top: 8%;
   right: 5%;
@@ -79,7 +79,7 @@
     height: 3px;
     transition: all 0.3s ease;
     border-radius: 4px;
-    background-color: $black;
+    background-color: var(--color-text);
   }
 
   &:before,
@@ -106,7 +106,7 @@
 
     &::before {
       content: '';
-      background-color: $main;
+      background-color: var(--color-main);
       position: absolute;
       width: 25px;
       height: 25px;
@@ -135,7 +135,7 @@
     &,
     &::before,
     &::after {
-      background: $black;
+      background: var(--color-text);
     }
 
     &::before {

@@ -2,13 +2,47 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400');
 @import './common.scss';
 
+:root,
+html[data-theme='light'] {
+  --color-background: #{$white};
+  --color-text: #{$black};
+  --color-main: #{$main};
+  --color-violet: #{$violet};
+  --color-green: #{$green};
+  --color-turquoise: #{$turquoise};
+  --color-dark-orange: #{$dark-orange};
+  --color-light-orange: #{$light-orange};
+  --color-yellow: #{$yellow};
+  --color-pink: #{$pink};
+  --color-blue: #{$blue};
+  --color-light-blue: #{$light-blue};
+  --color-light-violet: #{$light-violet};
+}
+
+html[data-theme='dark'] {
+  --color-background: #{$black};
+  --color-text: #{$white};
+  --color-main: #{$black};
+  --color-violet: #{$violet};
+  --color-green: #{$green};
+  --color-turquoise: #{$turquoise};
+  --color-dark-orange: #{$dark-orange};
+  --color-light-orange: #{$light-orange};
+  --color-yellow: #{$yellow};
+  --color-pink: #{$pink};
+  --color-blue: #{$blue};
+  --color-light-blue: #{$light-blue};
+  --color-light-violet: #{$light-violet};
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   font-family: $font-body;
   font-weight: $font-weight-medium;
-  color: $black;
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-size: 14px;
   line-height: 1.555rem;
 
@@ -27,20 +61,20 @@ p {
   margin: 0;
   text-align: left;
   line-height: 1.5em;
-  color: $black;
+  color: var(--color-text);
 }
 
 a {
   text-decoration: none;
-  color: $black;
+  color: var(--color-text);
 }
 
 .link {
   a {
-    border-bottom: 2px solid $main;
+    border-bottom: 2px solid var(--color-main);
 
     &:hover {
-      background-color: $main;
+      background-color: var(--color-main);
     }
   }
 }
@@ -262,7 +296,7 @@ a {
 
 .nav-item-hover {
   text-decoration: none;
-  color: $black;
+  color: var(--color-text);
   font-weight: 500;
   padding: 0.2em;
 
@@ -273,8 +307,8 @@ a {
   &:hover,
   &:active,
   &:focus {
-    color: $white;
-    background-color: $black !important;
+    color: var(--color-background);
+    background-color: var(--color-text) !important;
   }
 
   &:focus,
@@ -333,14 +367,14 @@ a {
 }
 
 .about__challenge-button {
-  box-shadow: -3px 5px $black;
+  box-shadow: -3px 5px var(--color-text);
   padding: 0.6rem 1rem;
-  border: 3px solid $black;
+  border: 3px solid var(--color-text);
   font-weight: $font-weight-semi-bold;
 
   &:hover {
-    background-color: $black;
-    color: $white;
+    background-color: var(--color-text);
+    color: var(--color-background);
     cursor: pointer;
   }
 
