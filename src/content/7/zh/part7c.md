@@ -558,18 +558,32 @@ const Login = (props) => {
 <!-- Here are some other UI frameworks for your consideration. If you do not see your favorite UI framework in the list, please make a pull request to the course material.-->
  这里有一些其他的UI框架供你考虑。如果你在列表中没有看到你喜欢的UI框架，请向教材提出拉动请求。
 
-<!-- - <https://bulma.io/>-->
- - <https://bulma.io/>
-<!-- - <https://ant.design/>-->
- - <https://ant.design/>
-<!-- - <https://get.foundation/>-->
- - <https://get.foundation/>
-<!-- - <https://chakra-ui.com/>-->
- - <https://chakra-ui.com/>
-<!-- - <https://tailwindcss.com/>-->
- - <https://tailwindcss.com/>
-<!-- - <https://semantic-ui.com/>-->
- - <https://semantic-ui.com/>
+<!-- - <https://bulma.io/> -->
+- <https://bulma.io/>
+<!-- - <https://ant.design/> -->
+- <https://ant.design/>
+<!-- - <https://get.foundation/> -->
+- <https://get.foundation/>
+<!-- - <https://chakra-ui.com/> -->
+- <https://chakra-ui.com/>
+<!-- - <https://tailwindcss.com/> -->
+- <https://tailwindcss.com/>
+<!-- - <https://semantic-ui.com/> -->
+- <https://semantic-ui.com/>
+<!-- - <https://mantine.dev/> -->
+- <https://mantine.dev/>
+<!-- - <https://react.fluentui.dev/> -->
+- <https://react.fluentui.dev/>
+<!-- - <https://storybook.js.org> -->
+- <https://storybook.js.org>
+<!-- - <https://www.primefaces.org/primereact/> -->
+- <https://www.primefaces.org/primereact/>
+<!-- - <https://v2.grommet.io> -->
+- <https://v2.grommet.io>
+<!-- - <https://blueprintjs.com> -->
+- <https://blueprintjs.com>
+<!-- - <https://evergreen.segment.com> -->
+- <https://evergreen.segment.com>
 
 ### Styled components
 
