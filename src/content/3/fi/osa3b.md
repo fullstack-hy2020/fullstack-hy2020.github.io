@@ -423,7 +423,7 @@ Tee repositorion juureen tiedosto README.md ja lisää siihen linkki Internetiss
 
 Generoi frontendistä tuotantoversio ja lisää se Internetissä olevaan sovellukseesi tässä osassa esiteltyä menetelmää noudattaen.
 
-**HUOM:** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi?
+**HUOM:** eihän hakemisto <i>build</i> ole gitignoroituna projektissasi jos käytät Herokua?
 
 Huolehdi myös, että frontend toimii edelleen myös paikallisesti.
 

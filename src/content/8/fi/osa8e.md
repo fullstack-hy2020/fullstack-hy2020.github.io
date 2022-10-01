@@ -755,7 +755,7 @@ const App = () => {
 }
 ```
 
-Funktio _updateCache_ lisää uuden henkilön tiedot välimuistin queryn _allPersons_ tallentamiin henkilöihin, mutta varmistaa kuitenkin funktion _uniqByName_ avulla, että yhden henkilön tiedot eivät tallennu cälimuitiin useampaan kertaan. 
+Funktio _updateCache_ lisää uuden henkilön tiedot välimuistin queryn <i>allPersons</i> tallentamiin henkilöihin, mutta varmistaa kuitenkin funktion _uniqByName_ avulla, että yhden henkilön tiedot eivät tallennu välimuitiin useampaan kertaan. 
 
 Funktiota _updateCache_ voidaan hyödyntää myös uuden henkilön lisäyksen yhteydessä tapahtuvassa välimuistin päivityksessä:
 
