@@ -1,0 +1,53 @@
+{
+  "common": {
+    "nextPart": "Nächster Part",
+    "previousPart": "Vorheriger Part",
+    "readMore": "Weiterlesen",
+    "proposeChanges": "Änderungen am Material vorschlagen"
+  },
+  "searchPage": {
+    "noMatches": "Keine Treffer gefunden",
+    "matchesTitle": "{{count}} Treffer für \"{{query}}\" gefunden"
+  },
+  "aboutPage": {
+    "generalTitle": "Allgemein"
+  },
+  "navigation": {
+    "aboutCourse": "Über den Kurs",
+    "courseContents": "Kursinhalte",
+    "faq": "FAQ",
+    "partners": "Partner",
+    "challenge": "Herausforderung",
+    "searchLinkSrLabel": "Suchen Sie aus dem Material"
+  },
+  "challengePage": {
+    "aboutTitle": "Das ist die Full Stack Herausforderung",
+    "joinTitle": "Unternehmen, folgen Sie dem Ruf!",
+    "registerButton": "Registriere dein Unternehmen zur Full Stack Herausforderung",
+    "nameLabel": "Name",
+    "namePlaceholder": "Jane Doe",
+    "titleLabel": "Titel",
+    "companyLabel": "Unternehmen",
+    "companyPlaceholder": "Company Co",
+    "phoneLabel": "Telefonnummer",
+    "emailLabel": "Email Adresse",
+    "whereDidYouHearLabel": "Wo hast du von der Herausforderung gehört?",
+    "submitButton": "Einreichen",
+    "submitSuccessMessage": "Danke! Wir werden dich bald kontaktieren!",
+    "participantsTitle": "Diese Unternehmen sind der Full Stack Herausforderung beigetreten",
+    "coOperationTitle": "In Zusammenarbeit mit",
+    "infoButton": "Mehr über die Challenge"
+  },
+  "companiesPage": {
+    "storiesTitle": "Programmier Geschichten von unseren Partnern"
+  },
+  "faqPage": {
+    "faqTitle": "Häufig gestellte Fragen"
+  },
+  "homePage": {
+    "startCourseButton": "Kurs starten",
+    "announcementsTitle": "Ankündigungen",
+    "authorsTitle": "Autoren und Lizenz",
+    "courseNameTitle": "Full Stack open 2022"
+  }
+}
