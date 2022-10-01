@@ -497,6 +497,13 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja:
 - <https://chakra-ui.com/>
 - <https://tailwindcss.com/>
 - <https://semantic-ui.com/>
+- <https://mantine.dev/>
+- <https://react.fluentui.dev/>
+- <https://storybook.js.org>
+- <https://www.primefaces.org/primereact/>
+- <https://v2.grommet.io>
+- <https://blueprintjs.com>
+- <https://evergreen.segment.com>
 
 Jos oma suosikkisi ei ole mukana, tee pull request!
 
