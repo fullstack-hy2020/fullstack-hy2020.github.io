@@ -8,6 +8,7 @@ import './Navigation.scss';
 import LanguagePicker from '../LanguagePicker';
 import { NavigationItem } from './Item';
 import SearchLink from './SearchLink';
+import ThemeSwitcher from './ThemeSwitcher';
 
 const getTranslationPath = (path, language) => {
   return language === 'fi' ? path : `/${language}${path}`;
@@ -79,6 +80,8 @@ const Navigation = props => {
           ))}
 
           {showSearchLink && <SearchLink lang={lang} />}
+
+          <ThemeSwitcher />
 
           <LanguagePicker
             className="navigation__language-picker"
