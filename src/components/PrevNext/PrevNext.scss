@@ -1,6 +1,15 @@
 @import '../common.scss';
 
 .prev-next__container {
+  a:hover {
+    color: $black;
+
+    p,
+    b {
+      color: $black;
+    }
+  }
+
   .separator {
     display: none;
 

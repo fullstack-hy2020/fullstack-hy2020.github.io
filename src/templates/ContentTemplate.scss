@@ -58,8 +58,8 @@
 
   pre {
     margin: 2rem 0;
-    background-color: var(--color-text);
-    color: var(--color-background);
+    background-color: var(--color-pre-background);
+    color: $white;
   }
 
   em {
@@ -114,6 +114,10 @@
     border-bottom-width: 2px;
     border-style: solid;
     padding: 2px;
+
+    &:hover {
+      color: $black;
+    }
   }
 }
 
@@ -131,6 +135,19 @@
 }
 
 .tasks {
+  // Replace colored tasks section background in dark theme w/ colored border due to contrast issues
+  // TODO: alternative set of darker part colors that work behind a white text?
+  html[data-theme='dark'] & {
+    background-color: var(--color-background) !important;
+    border-left: 5px solid;
+    border-top: 1px dotted;
+    border-bottom: 1px dotted;
+
+    @include from($desktop) {
+      border-left: 15px solid;
+    }
+  }
+
   a {
     border-color: var(--color-text) !important;
 
@@ -163,6 +180,10 @@ pre[class*='language-'] {
   right: 5%;
   z-index: 99999;
   cursor: pointer;
+
+  html[data-theme='dark'] & {
+    filter: invert(1);
+  }
 
   @include to($tablet) {
     right: 10%;

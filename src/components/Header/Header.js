@@ -67,7 +67,7 @@ class Header extends Component {
               <TripleBorder
                 hover
                 className="nav-item-hover"
-                childrenClassName="triple-border__logo"
+                childrenClassName="triple-border__logo triple-border__logo--small"
               >
                 fs
               </TripleBorder>

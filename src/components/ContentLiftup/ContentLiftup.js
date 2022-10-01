@@ -23,10 +23,12 @@ export const ContentLiftup = ({
   companyPath,
   small,
   className,
+  applyPadding,
 }) => {
   const classes = [];
 
   small && classes.push('content-liftup--small');
+  applyPadding && classes.push('content-liftup--padding');
 
   return path ? (
     <div className={`content-liftup ${className} ${classes.join(' ')}`}>
@@ -67,6 +69,7 @@ export const ContentLiftup = ({
             {...image}
             contain
             squareBig
+            backdrop
             className="content-liftup__image"
           />
 

@@ -58,6 +58,12 @@
   font-weight: $font-weight-semi-bold;
 }
 
+.triple-border__logo--small {
+  html[data-theme='dark'] .triple-border:hover & {
+    color: $black !important;
+  }
+}
+
 .triple-border__return-tasks {
   font-size: 0.9rem;
   padding: 1rem 0.2rem;

@@ -6,7 +6,10 @@
 html[data-theme='light'] {
   --color-background: #{$white};
   --color-text: #{$black};
+  --color-text-hsl: 0, 0%, 0%;
+  --color-link-decoration: #{$main};
   --color-main: #{$main};
+  --color-pre-background: #{$black};
   --color-violet: #{$violet};
   --color-green: #{$green};
   --color-turquoise: #{$turquoise};
@@ -22,7 +25,10 @@ html[data-theme='light'] {
 html[data-theme='dark'] {
   --color-background: #{$black};
   --color-text: #{$white};
-  --color-main: #{$black};
+  --color-text-hsl: 0, 100%, 100%;
+  --color-link-decoration: #{$gray};
+  --color-main: #{$main--dark};
+  --color-pre-background: #{$main--dark};
   --color-violet: #{$violet};
   --color-green: #{$green};
   --color-turquoise: #{$turquoise};
@@ -71,7 +77,7 @@ a {
 
 .link {
   a {
-    border-bottom: 2px solid var(--color-main);
+    border-bottom: 2px solid var(--color-link-decoration);
 
     &:hover {
       background-color: var(--color-main);

@@ -19,7 +19,8 @@
 
   .submit {
     border: 3px solid var(--color-text);
-    background-color: var(--color-main);
+    color: var(--color-text);
+    background-color: var(--color-background);
     padding: 0.7rem 2rem;
 
     &:hover {
