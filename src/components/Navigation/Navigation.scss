@@ -178,15 +178,15 @@
   }
 
   @include from($large) {
-    margin: 0 20px;
+    margin: 0 15px;
     padding: 0 !important;
 
     &:first-of-type {
-      margin: 0 20px 0 2rem;
+      margin: 0 15px 0 2rem;
     }
 
     &:last-of-type {
-      margin: 0 0 0 20px;
+      margin: 0 0 0 15px;
     }
   }
 }
