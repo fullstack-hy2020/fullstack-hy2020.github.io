@@ -387,6 +387,28 @@ a {
   &--turquoise {
     background-color: $turquoise;
   }
+
+  html[data-theme='dark'] & {
+    color: var(--color-text);
+    box-shadow: -3px 5px var(--color-text);
+    border: 3px solid var(--color-text);
+
+    &:hover {
+      background-color: var(--color-text);
+      color: var(--color-background);
+    }
+
+    &--turquoise {
+      color: var(--color-main);
+      box-shadow: -3px 5px var(--color-main);
+      border: 3px solid var(--color-main);
+
+      &:hover {
+        background-color: var(--color-main);
+        color: var(--color-text);
+      }
+    }
+  }
 }
 
 .space-between--mobile {
