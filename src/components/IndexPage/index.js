@@ -13,7 +13,6 @@ import { Some } from '../Some/Some';
 import { SubHeader } from '../SubHeader/SubHeader';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
 import cc from '../../images/cc.svg';
-import colors from '../../colors';
 import content from '../../content/pages/main.json';
 import houstonLogo from '../../images/Houston_big.svg';
 import landingImage from '../../images/landing.svg';
