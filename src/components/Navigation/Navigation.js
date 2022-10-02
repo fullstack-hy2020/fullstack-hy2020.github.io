@@ -79,9 +79,10 @@ const Navigation = props => {
             <NavigationItem key={i.path} {...i} onClick={handleCloseMenu} />
           ))}
 
-          {showSearchLink && <SearchLink lang={lang} />}
-
-          <ThemeSwitcher />
+          <div className="navigation__icon-buttons">
+            {showSearchLink && <SearchLink lang={lang} />}
+            <ThemeSwitcher />
+          </div>
 
           <LanguagePicker
             className="navigation__language-picker"
