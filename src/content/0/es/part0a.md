@@ -144,7 +144,7 @@ Si ya ha realizado el curso como MOOC o como curso universitario, ahora puede am
 
 Puede sustituir <i>partes</i> de este curso por partes que haya enviado anteriormente. Por ejemplo, si ha completado previamente el curso de tres créditos, puede sustituir las partes 0-3 de este curso con las partes que haya completado anteriormente. Solo puede sustituir partes en secuencia, por lo que no puede sustituir, por ejemplo, las partes 0 y 2 pero no completar la parte 1.
 
-Solo puede sustituir partes enteras. Por ejemplo, si ha enviado previamente el 50% de los ejercicios en una parte, no puede sustituirlos; deberá comenzar de nuevo en esa parte del curso.
+Solo puede sustituir partes enteras. Por ejemplo, si ha enviado previamente el 75 % de los ejercicios en una parte, no puede sustituirlos; deberá comenzar de nuevo en esa parte del curso.
 
 La "transferencia de crédito" de las partes completadas anteriormente ocurre en la pestaña <i>mis envíos</i> del [sistema de envío](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 

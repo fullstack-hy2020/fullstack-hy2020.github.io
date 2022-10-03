@@ -50,6 +50,7 @@ You can discuss the course and related topics in our dedicated group on Discord 
 Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 14 credits. 
 
 #### Parts 0-5 (core course) - Full Stack Web Development (5 cr, CSM141081)
+
 The number of credits and the grade for the course are based on the total number of submitted exercises for parts 0-7 (including exercises marked with an asterisk).
 
 Credits and grades are calculated as follows:
@@ -76,12 +77,14 @@ You can only take the exam after submitting enough exercises for five credits. I
 <i>You do not need to attend the course exam or register to the Open University course in order to obtain the course certificate.</i>
 
 #### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
+
 By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 127 exercises for parts 0-7. 
 - [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
 - [Request credits for part 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
+
 By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
 - Submit at least 138 exercises for parts 0-7. 
 - [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3). 
