@@ -406,7 +406,7 @@ So when a new person is added, all of its details are sent to all subscribers.
 First, we have to install two packages for adding subscriptions to GraphQL:
 
 ```
-npm install ws graphql-ws
+npm install graphql-subscriptions ws graphql-ws
 ```
 
 The file <i>index.js</i> is changed to
