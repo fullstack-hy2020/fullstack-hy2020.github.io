@@ -39,6 +39,7 @@ const SearchPage = ({
             onChange={handleInpuptChange}
             placeholder={inputPlaceholder}
             className={cn({ 'spacing--after': showResults })}
+            autoFocus
           />
 
           {showResults && (
