@@ -5,10 +5,18 @@ import ThemeSwitcherIcon from '../../ThemeSwitcherIcon';
 import SrOnly from '../../SrOnly';
 import styles from './ThemeSwitcher.module.scss';
 
+const getInitialTheme = () => {
+  if (typeof document === 'undefined') {
+    return 'light';
+  }
+
+  return document.documentElement.dataset.theme || 'light';
+};
+
 const ThemeSwitcher = () => {
   const { t } = useTranslation();
 
-  const [theme, setTheme] = useState(document.documentElement.dataset.theme);
+  const [theme, setTheme] = useState(getInitialTheme);
 
   useEffect(
     () => {
