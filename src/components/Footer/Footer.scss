@@ -37,8 +37,8 @@
       }
 
       &:hover {
-        color: $white !important;
-        background-color: $black !important;
+        color: var(--color-background) !important;
+        background-color: var(--color-text) !important;
       }
 
       &:nth-of-type(n + 2) {

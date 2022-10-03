@@ -18,6 +18,8 @@ export const Image = ({
   fullWidth,
   actualSize,
   squareBig,
+  backdrop,
+  darkThemeInvert,
   ...props
 }) => {
   const classes = [];
@@ -31,6 +33,8 @@ export const Image = ({
   large && classes.push('image--large');
   squareBig && classes.push('image--square-big');
   actualSize && classes.push('image--acctual-size');
+  backdrop && classes.push('image--backdrop');
+  darkThemeInvert && classes.push('image--invert');
 
   return (
     <div className={`image ${className} ${classes.join(' ')}`} {...props}>

@@ -18,7 +18,8 @@
       "faq": "FAQ",
       "partners": "Partenaires",
       "challenge": "Challenge",
-      "searchLinkSrLabel": "Rechercher du contenu"
+      "searchLinkSrLabel": "Rechercher du contenu",
+      "ThemeSwitcherSrLabel": "Basculer le thème sombre"
     },
     "challengePage": {
       "aboutTitle": "C'est le défi Full Stack",

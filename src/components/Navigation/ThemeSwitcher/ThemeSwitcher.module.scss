@@ -1,0 +1,26 @@
+@import '../../common.scss';
+
+.themeSwitcher {
+  border-radius: 4px;
+  padding: 4px;
+  display: inline-flex;
+  background: none;
+  border: none;
+  color: var(--color-text);
+
+  &:hover {
+    background-color: var(--color-text) !important;
+    color: var(--color-background) !important;
+    cursor: pointer;
+  }
+
+  &:focus {
+    background-color: var(--color-text);
+    color: var(--color-background);
+  }
+
+  &:focus:not(:focus-visible) {
+    color: var(--color-text);
+    background: none;
+  }
+}

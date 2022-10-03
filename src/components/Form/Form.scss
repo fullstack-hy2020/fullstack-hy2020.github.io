@@ -9,23 +9,24 @@
 
   input {
     padding: 1rem;
-    border: 1px solid $main;
+    border: 1px solid var(--color-main);
     outline: 0;
-    
-    &:focus {      
-      border: 1px solid $black;
+
+    &:focus {
+      border: 1px solid var(--color-text);
     }
   }
 
   .submit {
-    border: 3px solid $black;
-    background-color: $main;
+    border: 3px solid var(--color-text);
+    color: var(--color-text);
+    background-color: var(--color-background);
     padding: 0.7rem 2rem;
 
     &:hover {
       cursor: pointer;
-      background-color: $black;
-      color: $white;
+      background-color: var(--color-text);
+      color: var(--color-background);
     }
-  }  
+  }
 }

@@ -123,6 +123,7 @@ export default class ContentTemplate extends Component {
             <Banner
               style={{
                 backgroundColor: colorCode,
+                borderColor: colorCode,
               }}
               className="spacing tasks content-banner"
             >
