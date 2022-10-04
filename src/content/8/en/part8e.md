@@ -491,7 +491,15 @@ The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also h
 
 The required changes are as follows:
 
+
 ```js
+// highlight-start
+const { PubSub } = require('graphql-subscriptions')
+const pubsub = new PubSub()
+// highlight-end
+
+// ...
+
 const resolvers = {
   // ...
   Mutation: {
