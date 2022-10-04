@@ -1,7 +1,7 @@
 @import '../common.scss';
 
 .sub-header {
-  color: $black;
+  color: var(--color-text);
   font-family: $font-body;
   padding-bottom: 1.357rem;
 

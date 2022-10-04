@@ -4,6 +4,22 @@
   margin-bottom: auto;
 }
 
+.developer-story__company-logo-wrapper {
+  html[data-theme='dark'] & {
+    margin-bottom: 20px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    background: $white;
+    border-radius: 10px;
+    padding: 15px;
+
+    img {
+      margin: 0 auto;
+    }
+  }
+}
+
 .developer-story__name {
   margin-top: 4rem;
   font-size: 1.2rem;
@@ -21,10 +37,10 @@
   color: inherit;
   border: none;
   padding: 0 !important;
-  border-bottom: 2px solid $main;
+  border-bottom: 2px solid var(--color-link-decoration);
   cursor: pointer;
 
   &:hover {
-    background-color: $main;
+    background-color: var(--color-main);
   }
 }

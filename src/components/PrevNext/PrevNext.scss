@@ -1,12 +1,22 @@
 @import '../common.scss';
 
 .prev-next__container {
+  a:hover {
+    color: $black;
+    background-color: $white;
+
+    p,
+    b {
+      color: $black;
+    }
+  }
+
   .separator {
     display: none;
 
     @include to($tablet) {
       display: block;
-      background-color: $black;
+      background-color: var(--color-text);
       width: 2px !important;
     }
   }

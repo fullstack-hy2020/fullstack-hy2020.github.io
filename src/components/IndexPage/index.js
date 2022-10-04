@@ -13,7 +13,6 @@ import { Some } from '../Some/Some';
 import { SubHeader } from '../SubHeader/SubHeader';
 import { TripleBorder } from '../TripleBorder/TripleBorder';
 import cc from '../../images/cc.svg';
-import colors from '../../colors';
 import content from '../../content/pages/main.json';
 import houstonLogo from '../../images/Houston_big.svg';
 import landingImage from '../../images/landing.svg';
@@ -96,7 +95,13 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
         <Element className="push-right-1 push-left-1" spaceBetween flex>
           <Element flex horizontalHalf flexStart>
             <Element flex spaceBetween autoBottomMargin className="col-10">
-              <Image contain small src={news} className="col-1--mobile" />
+              <Image
+                contain
+                small
+                darkThemeInvert
+                src={news}
+                className="col-1--mobile"
+              />
 
               <BodyText
                 className="col-7 col-8--mobile link"
@@ -122,7 +127,13 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
               autoBottomMargin
               className="col-10 spacing--mobile"
             >
-              <Image contain small src={cc} className="col-1--mobile" />
+              <Image
+                contain
+                small
+                darkThemeInvert
+                src={cc}
+                className="col-1--mobile"
+              />
 
               <BodyText
                 headingFont
@@ -151,7 +162,7 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
       <Element flex spaceBetween className="container col-10 spacing--after">
         <TripleBorder
           largeMargin
-          backgroundColor={colors['main']}
+          backgroundColor="var(--color-main)"
           className="col-10 centered--mobile"
         >
           <Element
@@ -169,6 +180,7 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
               >
                 <Image
                   contain
+                  darkThemeInvert
                   src={yliopistoLogo}
                   alt="Helsingin Yliopisto logo"
                   className="col-5 col-4--mobile"
@@ -185,7 +197,12 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
                 className="col-10 col-4--mobile"
                 href="https://www.houston-inc.com"
               >
-                <Image contain src={houstonLogo} alt="Houston Inc. logo" />
+                <Image
+                  contain
+                  darkThemeInvert
+                  src={houstonLogo}
+                  alt="Houston Inc. logo"
+                />
               </a>
 
               <BodyText headingFont className="link" text={houston} />

@@ -6,7 +6,7 @@
   align-items: center;
   position: relative;
   padding: $vertical-spacing * 2 0;
-  background-color: $main;
+  background-color: var(--color-main);
 
   @include from($desktop) {
     padding: 3.444rem;

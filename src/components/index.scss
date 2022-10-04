@@ -2,13 +2,33 @@
 @import url('https://fonts.googleapis.com/css?family=IBM+Plex+Sans:400');
 @import './common.scss';
 
+:root,
+html[data-theme='light'] {
+  --color-background: #{$white};
+  --color-text: #{$black};
+  --color-text-hsl: 0, 0%, 0%;
+  --color-link-decoration: #{$main};
+  --color-main: #{$main};
+  --color-pre-background: #{$black};
+}
+
+html[data-theme='dark'] {
+  --color-background: #{$black};
+  --color-text: #{$white};
+  --color-text-hsl: 0, 100%, 100%;
+  --color-link-decoration: #{$gray};
+  --color-main: #{$main--dark};
+  --color-pre-background: #{$main--dark};
+}
+
 html,
 body {
   margin: 0;
   padding: 0;
   font-family: $font-body;
   font-weight: $font-weight-medium;
-  color: $black;
+  background-color: var(--color-background);
+  color: var(--color-text);
   font-size: 14px;
   line-height: 1.555rem;
 
@@ -27,20 +47,20 @@ p {
   margin: 0;
   text-align: left;
   line-height: 1.5em;
-  color: $black;
+  color: var(--color-text);
 }
 
 a {
   text-decoration: none;
-  color: $black;
+  color: var(--color-text);
 }
 
 .link {
   a {
-    border-bottom: 2px solid $main;
+    border-bottom: 2px solid var(--color-link-decoration);
 
     &:hover {
-      background-color: $main;
+      background-color: var(--color-main);
     }
   }
 }
@@ -262,7 +282,7 @@ a {
 
 .nav-item-hover {
   text-decoration: none;
-  color: $black;
+  color: var(--color-text);
   font-weight: 500;
   padding: 0.2em;
 
@@ -273,8 +293,8 @@ a {
   &:hover,
   &:active,
   &:focus {
-    color: $white;
-    background-color: $black !important;
+    color: var(--color-background);
+    background-color: var(--color-text) !important;
   }
 
   &:focus,
@@ -333,19 +353,41 @@ a {
 }
 
 .about__challenge-button {
-  box-shadow: -3px 5px $black;
+  box-shadow: -3px 5px var(--color-text);
   padding: 0.6rem 1rem;
-  border: 3px solid $black;
+  border: 3px solid var(--color-text);
   font-weight: $font-weight-semi-bold;
 
   &:hover {
-    background-color: $black;
-    color: $white;
+    background-color: var(--color-text);
+    color: var(--color-background);
     cursor: pointer;
   }
 
   &--turquoise {
     background-color: $turquoise;
+  }
+
+  html[data-theme='dark'] & {
+    color: var(--color-text);
+    box-shadow: -3px 5px var(--color-text);
+    border: 3px solid var(--color-text);
+
+    &:hover {
+      background-color: var(--color-text);
+      color: var(--color-background);
+    }
+
+    &--turquoise {
+      color: var(--color-main);
+      box-shadow: -3px 5px var(--color-main);
+      border: 3px solid var(--color-main);
+
+      &:hover {
+        background-color: var(--color-main);
+        color: var(--color-text);
+      }
+    }
   }
 }
 

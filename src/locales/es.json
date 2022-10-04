@@ -15,7 +15,8 @@
     "faq": "Preguntas frecuentes",
     "partners": "Partners",
     "challenge": "Challenge",
-    "searchLinkSrLabel": "Buscar en el material"
+    "searchLinkSrLabel": "Buscar en el material",
+    "ThemeSwitcherSrLabel": "Alternar tema oscuro"
   },
   "challengePage": {
     "registerButton": "Registre su empresa en el desafío Full Stack",

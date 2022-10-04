@@ -79,6 +79,10 @@
   font-family: $font-heading;
   position: relative;
 
+  a {
+    color: $black;
+  }
+
   @include to($desktop) {
     font-size: 1rem;
   }
@@ -149,7 +153,7 @@
 
   .arrow__rectangle {
     position: relative;
-  
+
     @include from($tablet) {
       padding: 1.25rem;
     }
@@ -187,6 +191,7 @@
 
 .arrow--stacked-title {
   font-family: $font-body;
+  color: $black;
 
   @include from($tablet) {
     white-space: nowrap;

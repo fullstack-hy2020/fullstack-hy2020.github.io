@@ -34,7 +34,7 @@
   border-radius: 50%;
 
   .image__content {
-    background-color: $main;
+    background-color: var(--color-main);
   }
 }
 
@@ -112,5 +112,20 @@
     position: relative;
     width: 100%;
     padding-bottom: 60%;
+  }
+}
+
+html[data-theme='dark'] {
+  .image--backdrop {
+    .image__container {
+      background: $white;
+      border-radius: 10px;
+    }
+  }
+
+  .image--invert {
+    img {
+      filter: invert(1);
+    }
   }
 }

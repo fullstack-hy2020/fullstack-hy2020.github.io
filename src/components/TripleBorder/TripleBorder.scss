@@ -10,7 +10,7 @@
   &::after {
     z-index: 2;
     content: '';
-    border: 2px solid $black;
+    border: 2px solid var(--color-text);
     border-radius: 5px;
     position: absolute;
     width: calc(100% + 5px);
@@ -56,6 +56,12 @@
   padding: 0.2rem;
   font-size: 1.111rem;
   font-weight: $font-weight-semi-bold;
+}
+
+.triple-border__logo--small {
+  html[data-theme='dark'] .triple-border:hover & {
+    color: $black !important;
+  }
 }
 
 .triple-border__return-tasks {
