@@ -323,6 +323,7 @@ a {
 
 .frontpage-hero__content {
   @include to($desktop) {
+    z-index: 1;
     margin-bottom: 3rem;
   }
 }
