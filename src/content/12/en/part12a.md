@@ -25,11 +25,11 @@ You can probably use nvm, virtual machines, or dark magic to get them running at
 
 <i>Scenario 2: Your application runs on your machine. You need to move the application to a server.</i>
 
-It is not uncommon that the application just does not run on the server despite it working just fine on your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
+It is not uncommon that the application just does not run on the server despite it works just fine on your machine. It may be due to some missing dependency or other differences in the environments. Here containers are an excellent solution since you can run the application in the same execution environment both on your machine and on the server. It is not perfect: different hardware can be an issue, but you can limit the differences between environments.
 
 Sometimes you may hear about the <i>"Works in my container"</i> issue. The phrase describes a situation in which the application works fine in a container running on your machine but breaks when the container is started on a server. The phrase is a play on the infamous <i>"Works on my machine"</i> issue, which containers are often promised to solve. The situation also is most likely a usage error.
 
-### About this part ###
+### About this part
 
 In this part, the focus of our attention will not be on the JavaScript code. Instead, we are interested in the configuration of the environment in which the software is executed. As a result, the exercises may not contain any coding, the applications are available to you through GitHub and your tasks will include configuring them. The exercises are to be submitted to <i>a single GitHub repository</i> which will include all of the source code and configuration you do during this part.
 
@@ -57,7 +57,7 @@ Step 3: Run <i>curl http://helsinki.fi</i> and save the output into a file. Save
 </div>
 <div class="content">
 
-### Submitting exercises and earning credits ###
+### Submitting exercises and earning credits
 
 Submit the exercises via the [submissions system](https://studies.cs.helsinki.fi/stats/) just like in the previous parts. Exercises in this part are submitted <i>to its [own course instance](https://studies.cs.helsinki.fi/stats/courses/fs-containers)</i>.
 
@@ -77,7 +77,7 @@ The basic tools you are going to need vary between operating systems:
 * Terminal on Mac
 * Command Line on a Linux
 
-### Installing everything required for this part ###
+### Installing everything required for this part
 
 We will begin by installing the required software. The installation step will be one of the possible obstacles. As we are dealing with OS-level virtualization, the tools will require superuser access on the computer. They will have access to your operating systems kernel.
 
@@ -97,9 +97,9 @@ Docker version 20.10.5, build 55c4c88
 
 ### Containers and images
 
-There are two core concepts when starting with containers and they are easy to confuse with one another:
+There are two core concepts in this part: <i>container</i> and <i>image</i>. There are easy to confuse with one another.
 
-A **container** is a runtime instance of an **image**.
+A <i>container</i> is a runtime instance of an <i>image</i>.
 
 Both of the following statements are true:
 
@@ -115,9 +115,9 @@ Cooking metaphor:
 * Image is pre-cooked, frozen treat.
 * Container is the delicious treat.
 
-[Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standards most containerization technologies use today. In practice, Docker is a set of products that help us to manage images and containers. This set of products will enable us to leverage all of the benefits of containers. For example, the docker engine will take care of turning the immutable files called images into containers.
+[Docker](https://www.docker.com/) is the most popular containerization technology and pioneered the standards most containerization technologies use today. In practice, Docker is a set of products that help us to manage images and containers. This set of products will enable us to leverage all of the benefits of containers. For example, the Docker engine will take care of turning the immutable files called images into containers.
 
-For managing the docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing the Node to our machine is not a requirement anymore.
+For managing the Docker containers, there is also a tool called [Docker Compose](https://docs.docker.com/compose/) that allows one to **orchestrate** (control) multiple containers at the same time. In this part we shall use Docker Compose to set up a complex local development environment. In the final version of the development environment that we set up, even installing the Node to our machine is not a requirement anymore.
 
 There are several concepts we need to go over. But we will skip those for now and learn about Docker first! 
 
@@ -216,7 +216,7 @@ Google should be able to help you with creating directories and files.
 
 ### Ubuntu image
 
-The command you just used to run the ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to the previously run hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.
+The command you just used to run the Ubuntu container, _docker container run -it ubuntu bash_, contains a few additions to the previously run hello-world. Let's see the --help to get a better understanding. I'll cut some of the output so we can focus on the relevant parts.
 
 ```bash
 $ docker container run --help
@@ -235,7 +235,7 @@ The two options, or flags, _-it_ make sure we can interact with the container. A
 
 You can try other commands that the ubuntu image might be able to execute. As an example try _docker container run --rm ubuntu ls_. The _ls_ command will list all of the files in the directory and _--rm_ flag will remove the container after execution. Normally containers are not deleted automatically.
 
-Let's continue with our first ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
+Let's continue with our first Ubuntu container with the **index.js** file inside of it. The container has stopped running since we exited it. We can list all of the containers with _container ls -a_, the _-a_ (or --all) will list containers that have already been exited.
 
 ```bash
 $ docker container ls -a
@@ -252,7 +252,7 @@ $ docker start hopeful_clarke
 hopeful_clarke
 ```
 
-The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ so we can not interact with it.
+The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ (that can also be written _-i_) so we can not interact with it.
 
 The container is actually up and running as the command _container ls -a_ shows, but we just can not communicate it:
 
@@ -292,7 +292,7 @@ $ docker start -i hopeful_clarke
 root@b8548b9faec3:/#
 ```
 
-Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. Nano will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root.
+Let's edit the file <i>index.js</i> and add in some JavaScript code to execute. We are just missing the tools to edit the file. [Nano](https://www.nano-editor.org/) will be a good text editor for now. The install instructions were found from the first result of Google. We will omit using sudo since we are already root.
 
 ```bash
 root@b8548b9faec3:/# apt-get update
@@ -300,7 +300,7 @@ root@b8548b9faec3:/# apt-get -y install nano
 root@b8548b9faec3:/# nano /usr/src/app/index.js
 ```
 
-Now we have nano installed and can start editing files!
+Now we have Nano installed and can start editing files!
 
 </div>
 
@@ -312,7 +312,7 @@ Now we have nano installed and can start editing files!
 
 > Use _script_ to record what you do, save the file as script-answers/exercise12_3.txt
 
-Edit the _/usr/src/app/index.js_ file inside the container with the now installed nano and add the following line
+Edit the _/usr/src/app/index.js_ file inside the container with the now installed Nano and add the following line
 
 ```js
 console.log('Hello World')
@@ -346,7 +346,7 @@ Hello World
 
 <div class="content">
 
-### Other docker commands
+### Other Docker commands
 
 Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
 

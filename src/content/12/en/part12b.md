@@ -25,7 +25,7 @@ inside that Dockerfile we will tell the image three things:
 
 - Use the node:16 as the base for our image
 - Include the index.js inside the image, so we don't need to manually copy it into the container
-- When we run a container from the image, use node to execute the index.js file.
+- When we run a container from the image, use Node to execute the index.js file.
 
 The wishes above will translate into a basic Dockerfile. The best location to place this file is usually at the root of the project. 
 
