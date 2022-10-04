@@ -312,39 +312,57 @@ a {
   }
 }
 
-.index__main-title {
-  font-size: 1.571rem;
-
-  @include from($desktop) {
-    font-size: 3rem;
-  }
-}
-
 .auto-bottom-margin {
   margin-bottom: auto;
 }
 
-.absolute-top-right--desktop {
-  @include from($desktop) {
-    position: absolute;
-    top: 0;
-    right: 0;
+.frontpage-hero {
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.frontpage-hero__content {
+  @include to($desktop) {
+    margin-bottom: 3rem;
   }
 }
 
-.frontpage__hero {
+.frontpage-hero__heading {
+  hyphens: auto;
+  font-size: 2rem;
+
   @include from($tablet) {
-    .image {
-      top: -2em;
+    font-size: 2.5rem;
+  }
+
+  @include from($large) {
+    font-size: 3rem;
+  }
+}
+
+.frontpage-hero__cta {
+  display: inline-block;
+  margin-bottom: 4rem;
+}
+
+.frontpage-hero__description {
+  max-width: $tablet-content;
+}
+
+.frontpage-hero__image {
+  @include to($desktop) {
+    position: absolute !important;
+    right: -5%;
+    top: -40px;
+    opacity: 0.1;
+
+    img {
+      transform: translateX(33%);
     }
   }
 
-  @include from($desktop) {
-    flex-direction: column;
-
-    .image {
-      top: 4em;
-    }
+  @include to($tablet) {
+    right: -40px;
   }
 }
 
