@@ -550,7 +550,7 @@ Adding a new person <i>publishes</i> a notification about the operation to all s
 pubsub.publish('PERSON_ADDED', { personAdded: person }) 
 ```
 
-Execution of this line sends a WebSocket message about the added person to all the clients registered in the iteror <i>PERSON\_ADDED</i>.
+Execution of this line sends a WebSocket message about the added person to all the clients registered in the iterator <i>PERSON\_ADDED</i>.
 
 It's possible to test the subscriptions with the Apollo Explorer like this:
 
