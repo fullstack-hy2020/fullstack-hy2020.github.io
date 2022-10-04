@@ -217,10 +217,10 @@ ei komponenttia kuitenkaan renderöidä uudelleen. Voimme saada komponentin rend
 ```js
 let counter = 1
 
+const root = ReactDOM.createRoot(document.getElementById("root"))
+
 const refresh = () => {
-  ReactDOM.createRoot(document.getElementById('root')).render(
-    <App counter={counter} />
-  )
+  root.render(<App counter={counter} />)
 }
 
 refresh()
