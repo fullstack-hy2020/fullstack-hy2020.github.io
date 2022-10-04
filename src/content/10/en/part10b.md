@@ -376,7 +376,7 @@ export default Text;
 Now we have implemented our own text component with consistent color, font size and font weight variants which we can use anywhere in our application. We can get different text variations using different props like this:
 
 ```javascript
-import Text from './Text';
+import { Text } from "react-native";
 
 const Main = () => {
   return (
