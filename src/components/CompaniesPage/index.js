@@ -5,7 +5,6 @@ import Layout from '../layout';
 import { BodyText } from '../BodyText/BodyText';
 import { DeveloperStory } from '../DeveloperStory/DeveloperStory';
 import Element from '../Element/Element';
-import Footer from '../Footer/Footer';
 import SEO from '../seo';
 import mainSEOtags from '../../content/seo/mainSEOtags';
 import stories from '../../content/pages/stories.json';
@@ -57,8 +56,6 @@ const CompaniesPage = ({ lang, title, seoDescription }) => {
 
         <Element className="spacing" />
       </Element>
-
-      <Footer lang={lang} />
     </Layout>
   );
 };

@@ -9,7 +9,6 @@ import SearchResults from './SearchResults';
 import Element from '../Element/Element';
 import InputField from './InputField';
 import { SubHeader } from '../SubHeader/SubHeader';
-import Footer from '../Footer/Footer';
 import SrOnly from '../SrOnly';
 
 const SearchPage = ({
@@ -61,7 +60,6 @@ const SearchPage = ({
           )}
         </Element>
       </Element>
-      <Footer lang={lang} />
     </Layout>
   );
 };

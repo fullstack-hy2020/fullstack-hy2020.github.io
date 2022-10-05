@@ -40,7 +40,7 @@ const IndexPage = ({ lang, title = 'Full stack open 2022' }) => {
   const seoDescription = mainSEOdescription[lang];
 
   return (
-    <Layout>
+    <Layout hideFooter={true}>
       <SEO
         lang={lang}
         title={title}

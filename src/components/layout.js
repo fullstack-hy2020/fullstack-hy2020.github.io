@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 
 import Header from './Header/Header';
 import InfoBanner from './InfoBanner';
+import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 
 const BANNER_TO_KEY = 'exam_banner_seen';
@@ -40,6 +41,7 @@ class Layout extends Component {
   }
 
   render() {
+    const { children, hideFooter } = this.props;
     const { siteLanguage, visible } = this.state;
 
     return (
@@ -48,7 +50,9 @@ class Layout extends Component {
 
         <InfoBanner onHide={() => this.hideNote()} visible={visible} />
 
-        {this.props.children}
+        <main>{children}</main>
+
+        {!hideFooter && <Footer lang={siteLanguage} />}
       </div>
     );
   }

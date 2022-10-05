@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 
 import Arrow from '../components/Arrow/Arrow';
 import Element from '../components/Element/Element';
-import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import SEO from '../components/seo';
 import colors from '../colors';
@@ -56,8 +55,6 @@ class NotFoundPage extends Component {
             ]}
           />
         </Element>
-
-        <Footer lang={this.state.siteLanguage} />
       </Layout>
     );
   }

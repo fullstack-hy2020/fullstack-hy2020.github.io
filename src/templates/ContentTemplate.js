@@ -7,7 +7,6 @@ import ArrowToTop from '../images/up-arrow.svg';
 import { Banner } from '../components/Banner/Banner';
 import EditLink from '../components/EditLink/EditLink';
 import Element from '../components/Element/Element';
-import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import Parser from 'html-react-parser';
 import PrevNext from '../components/PrevNext/PrevNext';
@@ -252,8 +251,6 @@ export default class ContentTemplate extends Component {
 
           <PrevNext part={part} letter={letter} lang={lang} />
         </div>
-
-        <Footer lang={lang} />
       </Layout>
     );
   }
