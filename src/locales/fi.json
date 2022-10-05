@@ -19,7 +19,8 @@
     "partners": "Kurssilla mukana",
     "challenge": "Haaste",
     "searchLinkSrLabel": "Hae materiaalista",
-    "ThemeSwitcherSrLabel": "Käytä tummaa teemaa"
+    "ThemeSwitcherSrLabel": "Käytä tummaa teemaa",
+    "LanguagePickerSrLabel": "Valitse kieli"
   },
   "challengePage": {
     "aboutTitle": "Tämä on Full Stack -haaste",

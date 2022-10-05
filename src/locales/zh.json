@@ -19,7 +19,8 @@
     "partners": "合作伙伴",
     "challenge": "挑战",
     "searchLinkSrLabel": "从教程中搜索",
-    "ThemeSwitcherSrLabel": "切换黑暗主题"
+    "ThemeSwitcherSrLabel": "切换黑暗主题",
+    "LanguagePickerSrLabel": "选择语言"
   },
   "challengePage": {
     "aboutTitle": "这就是全栈！——挑战内容",

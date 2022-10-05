@@ -19,7 +19,8 @@
     "partners": "Partners",
     "challenge": "Challenge",
     "searchLinkSrLabel": "Search from the material",
-    "ThemeSwitcherSrLabel": "Toggle dark theme"
+    "ThemeSwitcherSrLabel": "Toggle dark theme",
+    "LanguagePickerSrLabel": "Select language"
   },
   "challengePage": {
     "aboutTitle": "This is Full Stack -challenge",
