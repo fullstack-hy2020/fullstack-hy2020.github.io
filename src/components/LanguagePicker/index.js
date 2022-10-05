@@ -28,7 +28,7 @@ const LanguagePicker = ({
     /*eslint jsx-a11y/no-onchange: "off" */
     <>
       <SrOnly>
-        <label for="language-select">
+        <label htmlFor="language-select">
           {t('navigation:LanguagePickerSrLabel')}
         </label>
       </SrOnly>

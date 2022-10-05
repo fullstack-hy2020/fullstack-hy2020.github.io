@@ -38,7 +38,7 @@ const SearchPage = ({
 
         <Element className="container">
           <SrOnly>
-            <label for="search-input">
+            <label htmlFor="search-input">
               {t('navigation:searchLinkSrLabel')}
             </label>
           </SrOnly>
