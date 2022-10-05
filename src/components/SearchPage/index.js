@@ -49,7 +49,7 @@ const SearchPage = ({
             onChange={handleInpuptChange}
             placeholder={inputPlaceholder}
             className={cn({ 'spacing--after': showResults })}
-            autoFocus
+            autoFocus // eslint-disable-line jsx-a11y/no-autofocus
           />
 
           {showResults && (
