@@ -463,7 +463,7 @@ Junto con la renderización del lado del servidor se ha hablado de las llamadas 
 
 React y Node proporcionan una opción deseable para implementar una aplicación isomorfa como código universal.
 
-Escribir código universal directamente usando React todavía es bastante engorroso. Últimamente, una biblioteca llamada [Next.js](https://github.com/zeit/next.js/), que se implementa sobre React, ha atraído mucha atención y es una buena opción para hacer aplicaciones universales.
+Escribir código universal directamente usando React todavía es bastante engorroso. Últimamente, una biblioteca llamada [Next.js](https://github.com/vercel/next.js), que se implementa sobre React, ha atraído mucha atención y es una buena opción para hacer aplicaciones universales.
 
 #### Aplicaciones web progresivas
 
