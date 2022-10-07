@@ -346,7 +346,7 @@ Laajennetaan reduceria siten, että se osaa käsitellä muistiinpanon tärkeytee
 
 Koska meillä ei ole vielä koodia joka käyttää ominaisuutta, laajennetaan reduceria testivetoisesti. Aloitetaan tekemällä testi actionin <i>NEW\_NOTE</i> käsittelylle.
 
-Jotta testaus olisi helpompaa, siirretään reducerin koodi ensin omaan moduuliinsa tiedostoon <i>src/reducers/noteReducer.js</i>. Otetaan lisäksi käyttöön kirjasto [deep-freeze](https://github.com/substack/deep-freeze), jonka avulla voimme varmistaa, että reducer on määritelty oikeaoppisesti puhtaana funktiona. Asennetaan kirjasto kehitysaikaiseksi riippuvuudeksi:
+Jotta testaus olisi helpompaa, siirretään reducerin koodi ensin omaan moduuliinsa tiedostoon <i>src/reducers/noteReducer.js</i>. Otetaan lisäksi käyttöön kirjasto [deep-freeze](https://www.npmjs.com/package/deep-freeze), jonka avulla voimme varmistaa, että reducer on määritelty oikeaoppisesti puhtaana funktiona. Asennetaan kirjasto kehitysaikaiseksi riippuvuudeksi:
 
 ```js
 npm install --save-dev deep-freeze

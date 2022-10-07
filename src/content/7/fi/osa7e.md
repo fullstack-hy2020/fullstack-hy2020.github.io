@@ -443,7 +443,7 @@ Palvelimella tapahtuvaan renderöintiin liittyen on alettu puhua <i>isomorfisist
 
 React ja Node tarjoavatkin varteenotettavan vaihtoehdon isomorfisten sovellusten toteuttamiseen universaalina koodina.
 
-Universaalin koodin kirjoittaminen suoraan Reactin avulla on vielä toistaiseksi melko vaivalloista. Viime aikoina paljon huomiota saanut Reactin päälle toteutettu [Next.js](https://github.com/zeit/next.js/)-kirjasto on hyvä vaihtoehto universaalien sovellusten tekemiseen.
+Universaalin koodin kirjoittaminen suoraan Reactin avulla on vielä toistaiseksi melko vaivalloista. Viime aikoina paljon huomiota saanut Reactin päälle toteutettu [Next.js](https://github.com/vercel/next.js)-kirjasto on hyvä vaihtoehto universaalien sovellusten tekemiseen.
 
 #### Progressive web apps
 

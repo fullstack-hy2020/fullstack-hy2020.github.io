@@ -385,7 +385,7 @@ Ampliemos nuestro reducer para que pueda manejar el cambio de importancia de una
 Dado que todavía no tenemos ningún código que utilice esta funcionalidad, estamos expandiendo el reducer en la forma 'test driven' (guiada por pruebas). Comencemos creando una prueba para manejar la acción <i>NEW\_NOTE</i>.
 
 
-Para facilitar las pruebas, primero trasladaremos el código del reducer a su propio módulo al archivo <i>src/reducers/noteReducer.js</i>. También agregaremos la librería [deep-freeze](https://github.com/substack/deep-freeze), que se puede usar para garantizar que el reducer se haya definido correctamente como una función inmutable. Instalemos la librería como una dependencia de desarrollo
+Para facilitar las pruebas, primero trasladaremos el código del reducer a su propio módulo al archivo <i>src/reducers/noteReducer.js</i>. También agregaremos la librería [deep-freeze](https://www.npmjs.com/package/deep-freeze), que se puede usar para garantizar que el reducer se haya definido correctamente como una función inmutable. Instalemos la librería como una dependencia de desarrollo
 
 ```js
 npm install --save-dev deep-freeze

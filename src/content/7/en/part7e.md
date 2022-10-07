@@ -441,7 +441,7 @@ Along with server-side rendering, there has been talk of so-called <i>isomorphic
 
 React and Node provide a desirable option for implementing an isomorphic application as universal code.
 
-Writing universal code directly using React is currently still pretty cumbersome. Lately, a library called [Next.js](https://github.com/zeit/next.js/), which is implemented on top of React, has garnered much attention and is a good option for making universal applications.
+Writing universal code directly using React is currently still pretty cumbersome. Lately, a library called [Next.js](https://github.com/vercel/next.js), which is implemented on top of React, has garnered much attention and is a good option for making universal applications.
 
 #### Progressive web apps
 
