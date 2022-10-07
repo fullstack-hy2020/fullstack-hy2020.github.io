@@ -160,7 +160,7 @@ One interesting possibility to utilize multi-stage builds is to use a separate b
 
 Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
 
-Run the tests with _CI=true npm test_, or create-react-app will start watching for changes and your pipeline will get stuck.
+Run the tests with _CI=true npm test_. Without the env _CI=true_ set, the create-react-app will start watching for changes and your pipeline will get stuck.
 
 You can add a new build stage for the test if you wish to do so. If you do so, remember to read the last paragraph before exercise 12.13 again!
 
@@ -179,7 +179,7 @@ Let's move the whole todo application development to a container. There are a fe
 These all are great reasons. The tradeoff is that we may encounter some unconventional behavior when we aren't running the applications like we are used to. We will need to do at least two things to move the application to a container:
 
 - Start the application in development mode
-- Access the files with VSCode
+- Access the files with VS Code
 
 Let's start with the frontend. Since the Dockerfile will be significantly different to the production Dockerfile let's create a new one called <i>dev.Dockerfile</i>.
 
@@ -218,6 +218,12 @@ $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
 
 Now we can edit the file <i>src/App.js</i>, and the changes should be hot-loaded to the browser!
 
+Note that it takes some time (for me it took 50 seconds!) for the frontend to started with _npm start_ in the development mode. The frontend is has started when the following appears in the container log:
+
+```bash
+You can now view hello-frontend in the browser.
+```
+
 Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:
 
 ```yml
@@ -238,6 +244,8 @@ With this configuration, _docker-compose up_ can run the application in developm
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
+A word of warnig for Windows users: it has been reported that the hot relading does not work properly in all the cases when volumes are used, see [this](https://github.com/microsoft/WSL/issues/4739). If you run into this problem, you could use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).
+
 </div>
 <div class="tasks">
 
@@ -253,7 +261,7 @@ Create <i>todo-frontend/docker-compose.dev.yml</i> and use volumes to enable the
 
 ### Communication between containers in a Docker network
 
-The docker-compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the docker-compose and we shall see how the network and DNS work.
+The Docker Compose tool sets up a network between the containers and includes a DNS to easily connect two containers. Let's add a new service to the Docker Compose and we shall see how the network and DNS work.
 
 [Busybox](https://www.busybox.net/) is a small executable with multiple tools you may need. It is called "The Swiss Army Knife of Embedded Linux", and we definitely can use it to our advantage.
 
@@ -348,7 +356,7 @@ Now that you know how easy it is to find other services in the <i>docker-compose
 
 Use volumes and Nodemon to enable the development of the todo app backend while it is running <i>inside</i> a container. Create a <i>todo-backend/dev.Dockerfile</i> and edit the <i>todo-backend/docker-compose.dev.yml</i>.
 
-You will also need to rethink the connections between backend and MongoDB / Redis. Thankfully docker-compose can include environment variables that will be passed to the application:
+You will also need to rethink the connections between backend and MongoDB / Redis. Thankfully Docker Compose can include environment variables that will be passed to the application:
 
 ```yaml
 services:
@@ -359,11 +367,11 @@ services:
     ports:
       - ...
     environment: 
-      - REDIS_URL=...
-      - MONGO_URL=...
+      - REDIS_URL: redisurl_here
+      - MONGO_URL: mongourl_here
 ```
 
-The URLs (localhost) are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console</i>. If and when things blow up, the error messages hint at what might be broken.
+The URLs  are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console</i>. If and when things blow up, the error messages hint at what might be broken.
 
 Here is a possibly helpful image illustrating the connections within the docker network:
 
@@ -453,7 +461,7 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-To help us, docker-compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
+To help us, Docker Compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
 
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000
 
@@ -590,7 +598,7 @@ Make sure that the development environment is now fully functional, that is:
 
 ### Tools for Production
 
-Containers are fun tools to use in development, but the best use case for them is in the production environment. There are many more powerful tools than docker-compose to run containers in production.
+Containers are fun tools to use in development, but the best use case for them is in the production environment. There are many more powerful tools than Docker Compose to run containers in production.
 
 Heavyweight container orchestration tools like [Kubernetes](https://kubernetes.io/) allow us to manage containers on a completely new level. These tools hide away the physical machines and allow us, the developers, to worry less about the infrastructure.
 
