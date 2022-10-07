@@ -403,8 +403,8 @@ const noteReducer = (state = [], action) => {
  让我们先创建一个测试来处理<i>NEW\_NOTE</i>动作。
 
 
-<!-- To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://github.com/substack/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.-->
- 为了使测试更容易，我们首先将减速器的代码移到它自己的模块中，即文件<i>src/reducers/noteReducer.js</i>。我们还将添加库[deep-freeze](https://github.com/substack/deep-freeze)，它可以用来确保减速器被正确地定义为一个不可变的函数。
+<!-- To make testing easier, we'll first move the reducer's code to its own module to file <i>src/reducers/noteReducer.js</i>. We'll also add the library [deep-freeze](https://www.npmjs.com/package/deep-freeze), which can be used to ensure that the reducer has been correctly defined as an immutable function.-->
+ 为了使测试更容易，我们首先将减速器的代码移到它自己的模块中，即文件<i>src/reducers/noteReducer.js</i>。我们还将添加库[deep-freeze](https://www.npmjs.com/package/deep-freeze)，它可以用来确保减速器被正确地定义为一个不可变的函数。
 <!-- Let's install the library as a development dependency-->
  让我们把这个库作为开发依赖项来安装
 

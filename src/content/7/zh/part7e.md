@@ -513,8 +513,8 @@ Will install react-scripts@5.0.0, which is a breaking change
 <!-- React and Node provide a desirable option for implementing an isomorphic application as universal code.-->
  React和Node提供了一个理想的选择，可以将一个同构的应用实现为通用代码。
 
-<!-- Writing universal code directly using React is currently still pretty cumbersome. Lately, a library called [Next.js](https://github.com/zeit/next.js/), which is implemented on top of React, has garnered much attention and is a good option for making universal applications.-->
- 直接使用React编写通用代码，目前还是相当麻烦的。最近，一个名为[Next.js](https://github.com/zeit/next.js/)的库，在React的基础上实现，获得了很多关注，是制作通用应用的一个不错的选择。
+<!-- Writing universal code directly using React is currently still pretty cumbersome. Lately, a library called [Next.js](https://github.com/vercel/next.js), which is implemented on top of React, has garnered much attention and is a good option for making universal applications.-->
+ 直接使用React编写通用代码，目前还是相当麻烦的。最近，一个名为[Next.js](https://github.com/vercel/next.js)的库，在React的基础上实现，获得了很多关注，是制作通用应用的一个不错的选择。
 
 #### Progressive web apps
 
