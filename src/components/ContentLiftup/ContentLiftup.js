@@ -34,6 +34,7 @@ export const ContentLiftup = ({
     <div className={`content-liftup ${className} ${classes.join(' ')}`}>
       <TripleBorder largeMargin>
         <Link
+          className="content-liftup__link"
           to={path}
           onMouseOver={e => {
             setSrcToChildrenImage(e, hoverImageSrc ? hoverImageSrc : image.src);
@@ -50,7 +51,7 @@ export const ContentLiftup = ({
         </Link>
       </TripleBorder>
 
-      <p className="content-liftup__name">{name}</p>
+      <h3 className="content-liftup__name">{name}</h3>
 
       <p className="content-liftup__summary">{summary}</p>
     </div>

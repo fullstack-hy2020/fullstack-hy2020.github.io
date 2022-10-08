@@ -34,16 +34,16 @@
 }
 
 .content-liftup__link {
-  text-decoration: none;
-  font-weight: bold;
+  &:focus {
+    .image {
+      opacity: 0.6;
+    }
+  }
 
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 100%;
-    width: 100%;
+  &:focus:not(:focus-visible) {
+    .image {
+      opacity: 1;
+    }
   }
 }
 
