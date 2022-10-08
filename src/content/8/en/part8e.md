@@ -481,9 +481,9 @@ start()
 ```
 
 
-When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subsctiptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
+When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subscriptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
-The below code registers a WebSocketServer object to listen the WebSocket connectionts, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
+The below code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
 
 WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
 
@@ -935,7 +935,7 @@ This is a manifestation of the famous [n+1 problem](https://www.google.com/searc
 
 The right solution for the n+1 problem depends on the situation. Often, it requires using some kind of a join query instead of multiple separate queries. 
 
-In our situation, the easiest solution would be to save whose friends list they are on on each _Person_ object:
+In our situation, the easiest solution would be to save whose friends list they are on each _Person_ object:
 
 ```js
 const schema = new mongoose.Schema({
