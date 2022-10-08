@@ -5,7 +5,12 @@ import React from 'react';
 export const NavigationItem = ({ text, path, className, ...props }) => {
   return (
     <li {...props} className={`navigation__item ${className}`}>
-      <Link className="nav-item-hover" to={path}>
+      <Link
+        className="nav-item-hover"
+        to={path}
+        activeClassName="nav-item-active"
+        partiallyActive={true}
+      >
         {text}
       </Link>
     </li>
