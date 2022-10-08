@@ -51,7 +51,7 @@ export const ContentLiftup = ({
         </Link>
       </TripleBorder>
 
-      <h3 className="content-liftup__name">{name}</h3>
+      <h2 className="content-liftup__name">{name}</h2>
 
       <p className="content-liftup__summary">{summary}</p>
     </div>
