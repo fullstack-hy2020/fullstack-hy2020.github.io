@@ -82,7 +82,12 @@ For a decade already, [Heroku](http://heroku.com) has been dominating the PaaS s
 
 One of the most promising replacements for Heroku is [Fly.io](https://fly.io/) which has a free plan, so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
 
-There are also some other free options for Heroku replacements besides Fly.io, eg. [Render](https://render.com/) and [Replit.com](https://replit.com) that work well for the purposes of this course.
+There are also some other free options for Heroku replacements besides Fly.io, eg. [Render](https://render.com/) that works well for the purposes of this course, at least for all parts other than the part 11 (CI/CD) that might have one tricky exercise for other platforms.
+
+Some course participants have also used the following
+
+- [Replit.com](https://replit.com)
+- [CodeSandBox](https://codesandbox.io)
 
 If you know some other good and easy to use services for hosting NodeJS, please let us know!
 
