@@ -338,7 +338,7 @@ The script looks like this
 
 The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Fly.io. 
 
-_npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository. 
+_npm run deploy:full_ combines these two scripts. 
 
 There is also a script _npm run logs:prod_ to show the Fly.io logs.
 
