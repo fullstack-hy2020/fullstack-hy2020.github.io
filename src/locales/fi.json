@@ -13,6 +13,7 @@
     "generalTitle": "Yleistä"
   },
   "navigation": {
+    "skipToContent": "Siirry sisältöön",
     "aboutCourse": "Kurssista",
     "courseContents": "Kurssin sisältö",
     "faq": "FAQ",

@@ -13,6 +13,7 @@
     "generalTitle": "课程简介"
   },
   "navigation": {
+    "skipToContent": "跳到内容",
     "aboutCourse": "关于课程",
     "courseContents": "课程内容",
     "faq": "常见问题",

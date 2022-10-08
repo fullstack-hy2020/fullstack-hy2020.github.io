@@ -13,6 +13,7 @@
     "generalTitle": "General"
   },
   "navigation": {
+    "skipToContent": "Skip to content",
     "aboutCourse": "About course",
     "courseContents": "Course contents",
     "faq": "FAQ",

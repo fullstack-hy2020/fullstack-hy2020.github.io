@@ -36,7 +36,7 @@ export default class ContentTemplate extends Component {
   }
 
   componentDidMount() {
-    const links = Array.from(document.querySelectorAll('a'));
+    const links = Array.from(document.querySelectorAll('a:not(.skip-to-content'));
     const h1 = document.querySelector('h1');
     const h3 = document.querySelectorAll('h3');
     const h3Arr = Array.from(h3).map(t => t.innerText);
@@ -149,7 +149,7 @@ export default class ContentTemplate extends Component {
     };
 
     return (
-      <Layout>
+      <Layout isCoursePage={true}>
         <SEO
           lang={lang}
           title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part} | ${
@@ -212,7 +212,7 @@ export default class ContentTemplate extends Component {
             </div>
           </Banner>
 
-          <Element className="course">
+          <Element className="course" id="course-main-content">
             <ScrollNavigation
               part={part}
               letter={letter}
