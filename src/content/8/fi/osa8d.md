@@ -166,7 +166,7 @@ Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaati
 Tämä edellyttää pientä muutosta tiedostossa <i>index.js</i> olevaan ApolloClient-olion konfiguraatioon
 
 ```js
-import { setContext } from 'apollo-link-context' // highlight-line
+import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
 const authLink = setContext((_, { headers }) => {
