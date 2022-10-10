@@ -367,8 +367,8 @@ services:
     ports:
       - ...
     environment: 
-      - REDIS_URL: redisurl_here
-      - MONGO_URL: mongourl_here
+      - REDIS_URL=redisurl_here
+      - MONGO_URL=mongourl_here
 ```
 
 The URLs  are purposefully wrong, you will need to set the correct values. Remember to <i>look all the time what happens in console</i>. If and when things blow up, the error messages hint at what might be broken.
