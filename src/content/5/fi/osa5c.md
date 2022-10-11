@@ -723,11 +723,11 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 
 #### 5.13: blogilistan testit, step1
 
-Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen, authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää.
+Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin titlen ja authorin mutta ei renderöi oletusarvoisesti urlia eikä likejen määrää. Mikäli toteutit tehtävän 5.7, niin pelkkä titlen renderöinnin testaus riittää.
 
 #### 5.14: blogilistan testit, step2
 
-Tee testi, joka varmistaa että myös url ja likejen määrä näytetään kun blogin kaikki tiedot näyttävää nappia on painettu.
+Tee testi, joka varmistaa että myös url, likejen määrä ja author näytetään, kun blogin kaikki tiedot näyttävää nappia on painettu.
 
 #### 5.15: blogilistan testit, step3
 
