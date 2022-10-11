@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { Banner } from '../Banner/Banner';
 import { BodyText } from '../BodyText/BodyText';
 import Element from '../Element/Element';
-import Footer from '../Footer/Footer';
 import { Image } from './../Image/Image';
 import Layout from '../layout';
 import { PartBanner } from '../PartBanner/PartBanner';
@@ -67,7 +66,6 @@ const AboutPage = ({ title, lang }) => {
       </Element>
 
       <PartBanner lang={lang} />
-      <Footer lang={lang} />
     </Layout>
   );
 };

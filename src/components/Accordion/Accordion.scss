@@ -26,8 +26,13 @@
 }
 
 .active,
+.accordion:focus,
 .accordion:hover {
   background-color: var(--color-main);
+}
+
+.active:focus {
+  border: 3px solid var(--color-text);
 }
 
 .accordion:after {
@@ -37,7 +42,8 @@
   margin-left: 5px;
 }
 
-.active {
+.active,
+.active:not(:focus-visible) {
   border-color: var(--color-background);
 }
 
@@ -48,9 +54,7 @@
 
 .panel {
   background-color: var(--color-background);
-  transition: height 0.3s;
-  transition-timing-function: ease-in-out;
-  overflow: hidden;
+  padding: 2rem 18px;
 }
 
 .accordion--side-navigation {

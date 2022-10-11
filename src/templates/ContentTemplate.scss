@@ -178,7 +178,7 @@ pre[class*='language-'] {
   position: fixed;
   bottom: 5%;
   right: 5%;
-  z-index: 99999;
+  z-index: 40;
   cursor: pointer;
 
   html[data-theme='dark'] & {

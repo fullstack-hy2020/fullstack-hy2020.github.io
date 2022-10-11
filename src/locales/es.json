@@ -10,13 +10,15 @@
     "matchesTitle": "Se encontraron {{count}} coincidencias para la consulta \"{{query}}\""
   },
   "navigation": {
+    "skipToContent": "Saltar al contenido",
     "aboutCourse": "Acerca",
     "courseContents": "Contenido",
     "faq": "Preguntas frecuentes",
     "partners": "Partners",
     "challenge": "Challenge",
     "searchLinkSrLabel": "Buscar en el material",
-    "ThemeSwitcherSrLabel": "Alternar tema oscuro"
+    "ThemeSwitcherSrLabel": "Alternar tema oscuro",
+    "LanguagePickerSrLabel": "Seleccione el idioma"
   },
   "challengePage": {
     "registerButton": "Registre su empresa en el desafío Full Stack",

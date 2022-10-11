@@ -43,7 +43,7 @@ class Header extends Component {
     const isSmallHeader = headerClass === 'header--small';
 
     return (
-      <div
+      <header
         ref={this.header}
         className={`header ${headerClass}`}
         style={{
@@ -75,7 +75,7 @@ class Header extends Component {
           </Link>
           {!isSmallHeader && <Navigation lang={lang} />}
         </div>
-      </div>
+      </header>
     );
   }
 }

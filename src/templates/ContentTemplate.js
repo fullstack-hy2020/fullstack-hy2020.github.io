@@ -7,7 +7,6 @@ import ArrowToTop from '../images/up-arrow.svg';
 import { Banner } from '../components/Banner/Banner';
 import EditLink from '../components/EditLink/EditLink';
 import Element from '../components/Element/Element';
-import Footer from '../components/Footer/Footer';
 import Layout from '../components/layout';
 import Parser from 'html-react-parser';
 import PrevNext from '../components/PrevNext/PrevNext';
@@ -37,7 +36,7 @@ export default class ContentTemplate extends Component {
   }
 
   componentDidMount() {
-    const links = Array.from(document.querySelectorAll('a'));
+    const links = Array.from(document.querySelectorAll('a:not(.skip-to-content'));
     const h1 = document.querySelector('h1');
     const h3 = document.querySelectorAll('h3');
     const h3Arr = Array.from(h3).map(t => t.innerText);
@@ -150,7 +149,7 @@ export default class ContentTemplate extends Component {
     };
 
     return (
-      <Layout>
+      <Layout isCoursePage={true}>
         <SEO
           lang={lang}
           title={`Fullstack ${lang === 'fi' ? 'osa' : 'part'}${part} | ${
@@ -213,7 +212,7 @@ export default class ContentTemplate extends Component {
             </div>
           </Banner>
 
-          <Element className="course">
+          <Element className="course" id="course-main-content">
             <ScrollNavigation
               part={part}
               letter={letter}
@@ -252,8 +251,6 @@ export default class ContentTemplate extends Component {
 
           <PrevNext part={part} letter={letter} lang={lang} />
         </div>
-
-        <Footer lang={lang} />
       </Layout>
     );
   }

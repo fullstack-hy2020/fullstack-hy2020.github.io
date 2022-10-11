@@ -303,6 +303,10 @@ a {
   }
 }
 
+.nav-item-active {
+  border-bottom: 2px solid var(--color-text);
+}
+
 .flex-fix-aligning {
   &::before,
   &::after {

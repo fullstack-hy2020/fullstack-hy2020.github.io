@@ -29,6 +29,7 @@ const Footer = () => {
 
   return (
     <Element
+      Tag="footer"
       id="footer"
       className="container spacing--after-small spacing--mobile"
       flex
