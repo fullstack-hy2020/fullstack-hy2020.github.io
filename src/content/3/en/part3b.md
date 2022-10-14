@@ -80,7 +80,7 @@ There are an ever growing number of services that can be used to host an app on 
 
 For a decade already, [Heroku](http://heroku.com) has been dominating the PaaS scene. In August 2022 Heroku announced that they will end their free tier on 27th November 2022. This is very unfortunate for many developers, especially students. 
 
-One of the most promising replacements for Heroku is [Fly.io](https://fly.io/) which has a free plan, so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
+One of the most promising replacements for Heroku is [Fly.io](https://fly.io/) which has a free plan (but need to add a credit card to your Fly account), so we have selected Fly.io as the second "official" hosting platform of this course. You are of course allowed to use another service if you wish.
 
 There are also some other free options for Heroku replacements besides Fly.io, eg. [Render](https://render.com/) that works well for the purposes of this course, at least for all parts other than the part 11 (CI/CD) that might have one tricky exercise for other platforms.
 
