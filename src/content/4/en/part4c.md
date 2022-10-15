@@ -136,7 +136,7 @@ Document databases also offer a radically different way of organizing the data: 
 ```
 
 
-In this schema notes would be tightly nested under users and the database would not generate ids for them.
+In this schema, notes would be tightly nested under users and the database would not generate ids for them.
 
 
 The structure and schema of the database is not as self-evident as it was with relational databases. The chosen schema must be one which supports the use cases of the application the best. This is not a simple design decision to make, as all use cases of the applications are not known when the design decision is made.
