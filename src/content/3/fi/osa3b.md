@@ -322,6 +322,24 @@ _npm run deploy:full_ yhdistää nuo molemmat sekä lisää vaadittavat <i>git</
 
 Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden sijainnista.
 
+**HUOM:** joissain tapauksissa Fly.io-komentojen suoritus (erityisesti Windows WSL:n kanssa) on aiheuttanut ongelmia. Jos seuraava komento ei tulosta mitään
+
+```bash
+flyctl ping -o personal
+```
+
+koneesi ei jostain (toistaiseksi tuntemattomasta) syytä saa yhteyttä  Fly.io:on. Jos näin käy, [täällä](https://github.com/fullstack-hy2020/misc/blob/master/fly_io_problem.md) kerrotaan eräs tapa edetä.
+
+Onnistuessaan edellisen komennon tulostus näyttää seuraavalta
+
+```bash
+$ flyctl ping -o personal
+35 bytes from fdaa:0:8a3d::3 (gateway), seq=0 time=65.1ms
+35 bytes from fdaa:0:8a3d::3 (gateway), seq=1 time=28.5ms
+35 bytes from fdaa:0:8a3d::3 (gateway), seq=2 time=29.3ms
+...
+```
+
 #### Heroku
 
 Herokun tapauksessa skriptit täyttävät seuraavalta

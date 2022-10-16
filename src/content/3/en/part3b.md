@@ -141,9 +141,29 @@ After the initial setup, when the app code has been updated, it can be deployed 
 fly deploy
 ```
 
-A particularly important command is `fly logs` that can be used to view server logs. It is best to keep logs always visible!
+A particularly important command is _fly logs_ that can be used to view server logs. It is best to keep logs always visible!
 
 Fly.io creates a file  <i>fly.toml</i> in the root of your app. The file contains all the configuration of your server. On this course we can mostly ignore the contents of the file.
+
+**Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL has caused problems. If the following command just hangs
+
+```bash
+flyctl ping -o personal
+```
+
+your computer can not for some reason connect to Fly.io. If this happens to you, [this](https://github.com/fullstack-hy2020/misc/blob/master/fly_io_problem.md) describes one possible way to proceed.
+
+If output of the below command looks like this:
+
+```bash
+$ flyctl ping -o personal
+35 bytes from fdaa:0:8a3d::3 (gateway), seq=0 time=65.1ms
+35 bytes from fdaa:0:8a3d::3 (gateway), seq=1 time=28.5ms
+35 bytes from fdaa:0:8a3d::3 (gateway), seq=2 time=29.3ms
+...
+```
+
+then there are no connection problems!
 
 #### Heroku
 
