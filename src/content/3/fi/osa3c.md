@@ -536,13 +536,7 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-Kannattaa huomata että kun .env on gitignorattu, eivät Fly.io ja Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
-
-Fly.io:a käytettäessä ympäristömuuttujan arvo asetetaan seuraavalla komennolla:
-
-```
-fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
-```
+Kannattaa huomata että kun .env on gitignorattu, ei Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
 
 Herokussa ympäristömuuttujan arvo voidaan asettaa dashboardin kautta menemällä asetuksiin:
 
@@ -552,6 +546,20 @@ Toinen vaihtoehto on kertoa ympäristömuuttujan Herokulle arvo komentoriviltä
 
 ```
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
+```
+
+Koska Fly.io ei hyödynnä GitHubia, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujan arvo välittyy myös sinne.
+
+[Tietoturvallisempi vaihtoehto](https://community.fly.io/t/clarification-on-environment-variables/6309) on kuitenkin estää tiedoston .env siirtyminen Fly.io:n tekemällä hakemiston juureen tiedosto _.dockerignore_, jolla on sisältö
+
+```bash
+.env
+```
+
+ja asettaa ympäristömuuttujan arvo komennolla:
+
+```
+fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
 ### Tietokannan käyttö reittien käsittelijöissä
