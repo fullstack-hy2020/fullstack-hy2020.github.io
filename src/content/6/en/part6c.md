@@ -549,7 +549,7 @@ const NewNote = () => {
   return (
     <form onSubmit={addNote}>
       <input name="note" />
-      <button type="submit">lisää</button>
+      <button type="submit">add</button>
     </form>
   )
 }
