@@ -164,7 +164,7 @@ services.tcp_checks](https://fly.io/docs/reference/configuration/#services-tcp_c
     timeout = "2s"
 ```
 
-This section defines a basic healt check of the deployment. The tcp check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) connection to the virtual machine. 
+This section defines a basic health check of the deployment. The tcp check ensures that the virtual machine where the app resides is up and running and reachable from outside, by opening a [TCP](https://en.wikipedia.org/wiki/Transmission_Control_Protocol) connection to the virtual machine. 
 
 This check notices if something is fundamentally broken in the configurations. E.g. in my case for the app of this part, it took several trials until I got the app up and running:
 
