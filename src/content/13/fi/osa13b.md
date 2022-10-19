@@ -227,7 +227,7 @@ router.put('/:id', noteFinder, async (req, res) => { // highlight-line
 
 Reitinkäsittelijät saavat nyt <i>kolme</i> parametria, näistä ensimmäinen on reitin määrittelevä merkkijono ja toisena on määrittelemämme middleware <i>noteFinder</i>, joka hakee muistiinpanon tietokannasta ja sijoittaa sen <i>req</i> olion kenttään <i>note</i>. Pieni määrä copypastea poistuu ja olemme tyytyväisiä!
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part132-notes/tree/part13-2), branchissa <i>part13-2</i>.
+Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy/part13-notes/tree/part13-2), branchissa <i>part13-2</i>.
 
 </div>
 
