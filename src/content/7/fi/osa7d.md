@@ -325,8 +325,6 @@ Sovellusta voi nyt kokeilla avaamalla tiedoston <i>build/index.html</i> selaimen
 
 ![](../../images/7/22.png)
 
-Asian korjaamiseksi on asennettava vielä yksi puuttuva riippuvuus, [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill).
-
 On kuitenkin huomionarvoista, että jos sovelluksemme sisältää <i>async/await</i>-toiminnallisuutta, selaimeen ei joillain selaimilla renderöidy mitään. [Konsoliin tulostuneen virheviestin googlaaminen](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) valaisee asiaa. Ongelma korjaantuu asentamalla kirjastot [core-js](https://www.npmjs.com/package/core-js) ja [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime)
 
 ```bash
