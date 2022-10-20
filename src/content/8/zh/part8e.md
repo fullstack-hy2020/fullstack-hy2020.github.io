@@ -555,11 +555,11 @@ const pubsub = new PubSub() // highlight-line
   // highlight-end
 ```
 
-<!-- With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup). Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.-->
- 通过订阅，通信是利用对象[PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup)的[发布-订阅](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)原则进行的。添加一个新的人<i>发布</i>一个关于该操作的通知给所有使用PubSub's方法_publish_的订阅者。
+<!-- With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class). Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.-->
+ 通过订阅，通信是利用对象[PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class)的[发布-订阅](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)原则进行的。添加一个新的人<i>发布</i>一个关于该操作的通知给所有使用PubSub's方法_publish_的订阅者。
 
-<!-- _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).-->
- _personAdded_订阅解析器通过返回一个合适的[迭代器对象](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/)来注册所有的订阅者。
+<!-- _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events).-->
+ _personAdded_订阅解析器通过返回一个合适的[迭代器对象](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events)来注册所有的订阅者。
 
 <!-- It's possible to test the subscriptions with the Apollo Explorer like this:-->
  可以这样用Apollo Explorer来测试订阅。

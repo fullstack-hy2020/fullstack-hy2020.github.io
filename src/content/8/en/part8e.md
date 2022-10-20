@@ -538,10 +538,10 @@ const resolvers = {
 
 
 
-With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup).
+With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class).
 
 There is only few lines of code added, but quite much is happening under the hood. The resolver of the _personAdded_ subscription registers and saves info about all the clients that do the subscription. The clients are saved to an 
-["iterator object"](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema.html) called <i>PERSON\_ADDED</i>  thanks to the following code:
+["iterator object"](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events) called <i>PERSON\_ADDED</i>  thanks to the following code:
 
 ```js
 Subscription: {
