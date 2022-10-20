@@ -688,8 +688,8 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      console.log(subscriptionData)
+    onData: ({ data }) => {
+      console.log(data)
     }
   })
 
@@ -704,8 +704,8 @@ const App = () => {
 ![](../../images/8/32e.png)
 
 
-<!-- When a new person is added, the server sends a notification to the client, and the callback function defined in the _onSubscriptionData_ attribute is called and given the details of the new person as parameters.-->
- 当一个新的人被添加时，服务器向客户端发送一个通知，在_onSubscriptionData_属性中定义的回调函数被调用，并给出新的人的细节作为参数。
+<!-- When a new person is added, the server sends a notification to the client, and the callback function defined in the _onData_ attribute is called and given the details of the new person as parameters.-->
+ 当一个新的人被添加时，服务器向客户端发送一个通知，在_onData_属性中定义的回调函数被调用，并给出新的人的细节作为参数。
 
 <!-- Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately.-->
  让我们扩展我们的解决方案，当收到一个新的人的详细资料时，这个人被添加到Apollo缓存中，所以它被立即渲染到屏幕上。
@@ -715,8 +715,8 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      const addedPerson = subscriptionData.data.personAdded
+    onData: ({ data }) => {
+      const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
 
       // highlight-start
@@ -766,8 +766,8 @@ const App = () => {
   const client = useApolloClient()
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData, client }) => {
-      const addedPerson = subscriptionData.data.personAdded
+    onData: ({ data, client }) => {
+      const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
       updateCache(client.cache, { query: ALL_PERSONS }, addedPerson) // highlight-line
     },

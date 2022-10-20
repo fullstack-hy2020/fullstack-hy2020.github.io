@@ -329,8 +329,8 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      console.log(subscriptionData)
+    onData: ({ data }) => {
+      console.log(data)
     }
   })
 
@@ -342,7 +342,7 @@ Cuando se agrega una nueva persona a la agenda, no independientemente de dónde 
 
 ![](../../images/8/32e.png)
 
-Cuando se agrega una nueva persona, el servidor envía una notificación al cliente y se llama a la función de devolución de llamada definida en el atributo _onSubscriptionData_ y se le dan los detalles. de la nueva persona como parámetros.
+Cuando se agrega una nueva persona, el servidor envía una notificación al cliente y se llama a la función de devolución de llamada definida en el atributo _onData_ y se le dan los detalles. de la nueva persona como parámetros.
 
 Extendamos nuestra solución para que cuando se reciban los detalles de una nueva persona, la persona se agregue a la caché de Apollo, de modo que se muestre en la pantalla de inmediato.
 
@@ -366,8 +366,8 @@ const App = () => {
   }
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      const addedPerson = subscriptionData.data.personAdded
+    onData: ({ data }) => {
+      const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
       updateCacheWith(addedPerson)
     }
