@@ -136,7 +136,7 @@ Technically speaking, the HTTP protocol is not well-suited for communication fro
 
 ### Refactoring the backend
 
-Since version 3.0 Apollo Server has not provided support for subscriptions out of the box so we need to do some changes to get it set up. Let us also clean the app structure a bit.
+Since version 3.0 Apollo Server does not support subscriptions out of the box so we need to do some changes before we set up subscriptions. Let us also clean the app structure a bit.
 
 Let us start by extracting the schema definition to file
 <i>schema.js</i>
@@ -403,7 +403,7 @@ type Subscription {
 
 So when a new person is added, all of its details are sent to all subscribers.
 
-First, we have to install two packages for adding subscriptions to GraphQL:
+First, we have to install two packages for adding subscriptions to GraphQL and a Node.js WebSocket library:
 
 ```
 npm install graphql-subscriptions ws graphql-ws
@@ -483,7 +483,7 @@ start()
 
 When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subscriptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
-The below code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
+The above code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
 
 WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
 
