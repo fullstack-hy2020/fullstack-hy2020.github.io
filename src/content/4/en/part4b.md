@@ -319,15 +319,16 @@ const initialNotes = [
 // highlight-end
 
 // highlight-start
+
+jest.setTimeout(12000);
+
 beforeEach(async () => {
-  await Note.deleteMany({})
-
-  let noteObject = new Note(initialNotes[0])
-  await noteObject.save()
-
-  noteObject = new Note(initialNotes[1])
-  await noteObject.save()
-})
+  await mongoose.connection.dropCollection("notes");
+  let noteObject = new Note(initialNotes[0]);
+  await noteObject.save();
+  noteObject = new Note(initialNotes[1]);
+  await noteObject.save();
+});
 // highlight-end
 // ...
 ```
