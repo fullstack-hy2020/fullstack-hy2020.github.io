@@ -124,7 +124,7 @@ Nopea tapa saada storen tila alustettua palvelimella olevan datan perusteella on
 ```js
 // ...
 import noteService from './services/notes' // highlight-line
-import noteReducer, { apppendNote } from './reducers/noteReducer' // highlight-line
+import noteReducer, { appendNote } from './reducers/noteReducer' // highlight-line
 
 const store = configureStore({
   reducer: {
