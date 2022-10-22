@@ -10,6 +10,7 @@ const options = [
   { value: 'zh', label: '中文' },
   { value: 'es', label: 'Spanish' },
   { value: 'fr', label: 'Français' },
+  { value: 'it', label: 'Italian' },  
 ];
 
 const LanguagePicker = ({

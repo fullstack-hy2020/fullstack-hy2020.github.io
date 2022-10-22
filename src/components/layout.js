@@ -22,8 +22,12 @@ class Layout extends Component {
       window.location.pathname.indexOf('/en') > -1
         ? 'en'
         : window.location.pathname.indexOf('/zh') > -1
-        ? 'zh'
-        : 'fi';
+          ? 'zh'
+          : window.location.pathname.indexOf('/fi') > -1
+            ? 'fi'
+            : window.location.pathname.indexOf('/fr') > -1
+            ? 'fr'
+            : 'it';
 
     const visible = false; // !localStorage.getItem(BANNER_TO_KEY);
 

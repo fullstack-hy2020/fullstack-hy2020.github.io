@@ -344,5 +344,73 @@
         "C'est vrai. Si vous terminez le cours avec des crédits complets et terminez les travaux pratiques avec 10 crédits, vous obtenez un entretien d'embauche avec nos partenaires. En savoir plus <a href='/fr/part0/informations_generales#promesse-dentretien'>ici</a>. Vous devez être résident finlandais pour participer à ces entretiens."
       ]
     }
+  ],
+  "fr": [
+    {
+      "title": "Comment puis-je m'inscrire au cours?",
+      "text": [
+        "Vous n'avez pas à vous inscrire tant que vous ne voulez pas passer l'examen du cours. Vous pouvez trouver plus d'informations <a href='/fr/part0/informations_generales#parties-et-completion'>ici</a>. <br><br>Pour le certificat de cours, l'inscription n'est pas nécessaire."
+      ]
+    },
+    {
+      "title": "Combien de crédits compte le cours ?",
+      "text": [
+        "Le cours est de 5 à 14 crédits ECTS <a href='/fr/part0/informations_generales#parties-et-completion'>selon le nombre d'exercices renvoyés</a>. Après avoir terminé le cours, vous pouvez continuer à approfondir vos connaissances sur le sujet en participant au <a href='/fr/part0/informations_generales#projet-full-stack'>projet Full Stack</a>."
+      ]
+    },
+    {
+      "title": "Quelle est la date limite pour les exercices et l'examen ?",
+      "text": [
+        "Vous pouvez compléter le cours à votre propre rythme. La date limite pour les exercices est le 1er mars 2023 à 23.59.59. <br><br>Si vous souhaitez des crédits universitaires ouverts, la date limite pour l'examen est le 10 janvier 2023 à 23.59.59. N'oubliez pas que vous devez vous inscrire à l'examen au plus tard la veille de la date limite du 09.01.2023. Vous pouvez également passer l'examen avant la date limite et continuer à terminer les exercices restants. Une fois que vous avez terminé, vous pouvez réclamer des crédits <a href='/fr/part0/informations_generales#comment-obtenir-vos-credits'> ici</a>.<br><br> Pour le certificat de cours, l'inscription et l'examen ne sont pas nécessaires."
+      ]
+    },
+    {
+      "title": "Comment soumettre les exercices ?",
+      "text": [
+        "Les exercices sont soumis à GitHub, et en marquant les exercices comme effectués dans le système de soumission d'exercices. Vous pouvez en savoir plus <a href='/fr/part0/informations_generales#envoi-dexercices'>ici</a>."
+      ]
+    },
+    {
+      "title": "Dois-je soumettre chaque partie à un dépôt séparé?",
+      "text": [
+        "Non. Vous pouvez utiliser un ou plusieurs dépôts, le plus important est de nommer clairement tout ce qui se trouve dans ce dernier. "
+      ]
+    },
+    {
+      "title": "Puis-je modifier une soumission ?",
+      "text": [
+        "Non. Tous les exercices d'une partie doivent être soumis en même temps. Si vous avez mal marqué des exercices par accident, ou si vous avez mal écrit le nom du référentiel, envoyez un e-mail à matti.luukkainen@helsinki.fi ou un message dans Telegram à <i>mluukkai</i>, indiquez votre nom d'utilisateur GitHub et comment la soumission devrait être édité."
+      ]
+    },
+    {
+      "title": "Quand et comment puis-je obtenir mes crédits ?",
+      "text": [
+        "Vous pouvez obtenir vos crédits après avoir soumis suffisamment d'exercices pour réussir le cours, avoir réussi l'examen du cours et nous avoir fait savoir via le système de soumission d'exercices que vous êtes prêt pour le cours. La date limite est le 10 janvier 2023. En savoir plus <a href='/fr/part0/informations_generales#parties-et-completion'>ici</a>. <br><br>Pour le cours, l'inscription au certificat ou l'examen ne sont pas nécessaires."
+      ]
+    },
+    {
+      "title": "Est-ce que j'obtiens un certificat après avoir terminé le cours?",
+      "text": [
+        "Oui! Vous pouvez télécharger le certificat après avoir terminé le cours à partir du système de soumission d'exercices. Pour le certificat de cours, l'inscription à l'Open University et l'examen ne sont pas nécessaires."
+      ]
+    },
+      {
+      "title": "Dois-je m'inscrire à Open University pour obtenir le certificat de cours?",
+      "text": [
+        "Pour le certificat de cours, l'inscription à l'Open University n'est pas nécessaire. Vous pouvez télécharger le certificat après avoir terminé le cours à partir du système de soumission d'exercices."
+      ]
+    },
+    {
+      "title": "J'ai commencé le cours l'année dernière, comment dois-je continuer ?",
+      "text": [
+        "En savoir plus <a href='/fr/part0/informations_generales#approfondir-un-cours-deja-suivi'>ici</a>"
+      ]
+    },
+    {
+      "title": "J'ai entendu dire que je pouvais obtenir un entretien d'embauche en suivant le cours.",
+      "text": [
+        "C'est vrai. Si vous terminez le cours avec des crédits complets et terminez les travaux pratiques avec 10 crédits, vous obtenez un entretien d'embauche avec nos partenaires. En savoir plus <a href='/fr/part0/informations_generales#promesse-dentretien'>ici</a>. Vous devez être résident finlandais pour participer à ces entretiens."
+      ]
+    }
   ]
 }

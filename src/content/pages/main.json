@@ -90,5 +90,23 @@
     "houston": "Le Finnish Houston Inc. est une société de logiciels agile fondée en 2003. Nous concevons et mettons en œuvre des services numériques personnalisés pour notre entreprise.",
     "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
     "licenced": "Le matériel est sous licence Creative Commons BY-NC-SA 3.0."
+  },
+  "it": {
+    "mainTitle": "Deep Dive Into Modern Web Development",
+    "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
+    "current": [
+      "The 2022 edition has started! You can continue a previous course in the new edition, see <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>this</a> for more details.",
+      "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
+    ],
+    "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
+    "notice": "NB: Inappropriate, degrading and discriminatory comments are strictly forbidden on the channel, and anyone who sends these types of messages will be permanently removed from the discussion.",
+    "licence": [
+      "Parts 0-8 and 13 of the course material is written by <a href='https://github.com/mluukkai'>Matti Luukkainen</a>. The content of part 9 is written by developers from <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>. Part 10 is written by <a href='https://github.com/Kaltsoon'>Kalle Ilves</a>. The content of part 11 is written by developers from <a href='https://www.smartly.io/'>Smartly</a> and part 12 is by <a href='https://github.com/jakousa'>Jami Kousa</a>. Numerous <a href='https://github.com/fullstack-hy2020/misc/blob/master/contributors.md'>people</a> have improved and corrected the material both in content and spelling. You can also make improvements to the course material yourself. The course webpage is designed and created by <a target='_blank' href='https://www.houston-inc.com/'>Houston inc</a>, who have also audited the content of the course material. Chinese translation by <a target='_blank' href='https://zhangwei.online/blog'>Zhang Wei</a>. Spanish translation by <a target='_blank' href='https://github.com/sebastiantorres86'>Sebastian Torres</a> and <a target='_blank' href='https://github.com/cynthiamv'>Cynthia Vico Vacca</a>.",
+      "The course material is licensed under <a href='https://creativecommons.org/licenses/by-nc-sa/3.0/'>Creative Commons BY-NC-SA 3.0 license</a>, which means that you are free to use and distribute the material, as long as the names of the original authors are not removed. If you make changes to the material and want to distribute the modified version, it must be licensed under the same license. Using the material for commercial purposes is forbidden without permission."
+    ],
+    "university": "The University of Helsinki is the oldest and largest science university in Finland, with an international scientific community of 40,000 people.",
+    "houston": "The Finnish Houston Inc. is an agile software company founded in 2003. We design and implement customized digital services for our business.",
+    "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
+    "licenced": "The material is licensed under the Creative Commons BY-NC-SA 3.0 License."
   }
 }
