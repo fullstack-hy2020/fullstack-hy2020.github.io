@@ -1,0 +1,56 @@
+{
+  "common": {
+    "nextPart": "Prossima sezione",
+    "previousPart": "Sezione precedente",
+    "readMore": "Leggi di più",
+    "proposeChanges": "Proponi modifiche al materiale"
+  },
+  "searchPage": {
+    "noMatches": "Nessun risultato trovato",
+    "matchesTitle": "Trovati {{count}} risultati per la ricerca \"{{query}}\""
+  },
+  "aboutPage": {
+    "generalTitle": "Generale"
+  },
+  "navigation": {
+    "skipToContent": "Procedi al contenuto",
+    "aboutCourse": "A proposito del corso",
+    "courseContents": "Contenuti del corso",
+    "faq": "FAQ",
+    "partners": "Partner",
+    "challenge": "Competizione",
+    "searchLinkSrLabel": "Ricerca nel materiale",
+    "ThemeSwitcherSrLabel": "Attiva tema scuro",
+    "LanguagePickerSrLabel": "Seleziona lingua"
+  },
+  "challengePage": {
+    "aboutTitle": "This is Full Stack -challenge",
+    "joinTitle": "Companies, Heed The Call!",
+    "registerButton": "Register your company to Full Stack challenge",
+    "nameLabel": "Name",
+    "namePlaceholder": "Jane Doe",
+    "titleLabel": "Title",
+    "companyLabel": "Company",
+    "companyPlaceholder": "Company Co",
+    "phoneLabel": "Phone",
+    "emailLabel": "Email address",
+    "whereDidYouHearLabel": "Where did you hear from the challenge",
+    "submitButton": "Submit",
+    "submitSuccessMessage": "Thanks! We will contact you soon!",
+    "participantsTitle": "These companies have joined the Full Stack challenge",
+    "coOperationTitle": "In co-operation with",
+    "infoButton": "More about challenge"
+  },
+  "companiesPage": {
+    "storiesTitle": "Developer stories from our partners"
+  },
+  "faqPage": {
+    "faqTitle": "Frequently asked questions"
+  },
+  "homePage": {
+    "startCourseButton": "Start course",
+    "announcementsTitle": "Announcements",
+    "authorsTitle": "Authors and License",
+    "courseNameTitle": "Full Stack open 2022"
+  }
+}
