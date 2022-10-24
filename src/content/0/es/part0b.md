@@ -698,7 +698,7 @@ La idea de estos ejercicios es leer el texto una vez más y pensar en lo que est
 
 <h4>0.5: Aplicación de una sola página</h4>
 
-Cree un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos-de-las-aplicaciones-web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
+Cree un diagrama que describa la situación en la que el usuario accede a la versión de [aplicación de una sola página](/es/part0/fundamentos_de_las_aplicaciones_web#aplicacion-de-una-sola-pagina) de la aplicación de notas en <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
 <h4>0.6: Nueva nota</h4>
 
