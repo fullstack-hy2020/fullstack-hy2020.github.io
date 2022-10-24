@@ -693,7 +693,7 @@ Si es necesario, muestre las operaciones en el navegador o en el servidor como c
 
 El diagrama no tiene por qué ser un diagrama de secuencia. Cualquier forma sensata de presentar los eventos está bien.
 
-Toda la información necesaria para hacer esto, y los dos ejercicios siguientes, se pueden encontrar en el texto de [esta parte](/es/part0/fundamentos-de-las-aplicaciones-web#formularios-y-http-post).
+Toda la información necesaria para hacer esto, y los dos ejercicios siguientes, se pueden encontrar en el texto de [esta parte](/es/part0/fundamentos_de_las_aplicaciones_web#formularios-y-http-post).
 La idea de estos ejercicios es leer el texto una vez más y pensar en lo que está sucediendo allí. No es necesario leer el [código](https://github.com/mluukkai/example_app) de la aplicación pero, por supuesto, es posible.
 
 <h4>0.5: Aplicación de una sola página</h4>
