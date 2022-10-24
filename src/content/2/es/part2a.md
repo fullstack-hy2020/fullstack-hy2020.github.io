@@ -361,7 +361,7 @@ const App = ({ notes }) => {
 }
 ```
 
-Si ha olvidado lo que significa la desestructuración y cómo funciona, revise [esto](/es/part1/manejadores-de-eventos-de-componentes#desestructuración).
+Si ha olvidado lo que significa la desestructuración y cómo funciona, revise [esto](/es/part1/estado_del_componente_controladores_de_eventos#desestructuracion).
 
 Separamos la visualización de una sola nota en su propio componente <i>Note</i>:
 
