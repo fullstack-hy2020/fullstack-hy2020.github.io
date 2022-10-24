@@ -450,7 +450,7 @@ A veces puede resultar útil representar el estado y otras variables como texto 
 <div>debug: {newName}</div>
 ```
 
-También es importante poner lo que aprendimos en el capítulo [depuración de aplicaciones React](/es/part1/un_estado_mas_complejo#depurando_aplicaciones_react) de la parte uno en buen uso. La extensión [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) especialmente, es increíblemente útil para rastrear los cambios que ocurren en el estado de la aplicación.
+También es importante poner lo que aprendimos en el capítulo [depuración de aplicaciones React](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react) de la parte uno en buen uso. La extensión [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) especialmente, es increíblemente útil para rastrear los cambios que ocurren en el estado de la aplicación.
 
 Después de terminar este ejercicio, su aplicación debería verse así:
 
