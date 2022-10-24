@@ -569,5 +569,4 @@ const App = () => {
 
 <!-- ** HUOM **: saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja" väärässä paikassa ", nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä] (/ osa1 / monimutkaisempi_tila_reactin_debuggaus # ala-maarittele-komponenttia-komponentin-sisalla). -->
 **NB**: Es posible que tenga problemas en este ejercicio si define sus componentes "en el lugar equivocado". Ahora sería un buen momento para ensayar 
-el capítulo [no defina un componente en otro componente](/es​​/part1/depuracion_de_app_de_react_con_estados_mas_complejos#no_defina_componentes_dentro_de_otros_componentes)
-de la última parte.
+el capítulo [no defina un componente en otro componente](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#no-definir-componentes-dentro-de-los-componentes) de la última parte.
