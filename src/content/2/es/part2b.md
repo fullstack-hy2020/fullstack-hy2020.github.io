@@ -394,7 +394,7 @@ El texto del botón depende del valor del estado de <em>showAll</em>:
 show {showAll ? 'important' : 'all'}
 ```
 
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part2-3</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes/árbol/part2-3).
+Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part2-3</i> de [este repositorio de GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">
