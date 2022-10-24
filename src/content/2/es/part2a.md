@@ -36,7 +36,7 @@ props value is [Object object]
 ```
 
 Por el contrario, cuando pasa objetos como argumentos distintos separados por comas a _console.log_, como en nuestro segundo ejemplo anterior, el contenido del objeto se imprime en la consola del desarrollador como cadenas que son reveladoras.
-Si es necesario, lea más sobre la depuración de aplicaciones React [aquí](/es/part1/depurando-un-estado-mas-complejo-en-react#depuración-de-aplicaciones-React).
+Si es necesario, lea más sobre la depuración de aplicaciones React [aquí](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#depuracion-de-aplicaciones-react).
 
 ### Protip: fragmentos de código de Visual Studio
 
