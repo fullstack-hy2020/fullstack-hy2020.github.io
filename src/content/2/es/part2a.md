@@ -74,9 +74,9 @@ Si la programación funcional con matrices le parece ajena, vale la pena ver al 
 ### Controladores de eventos revisados
 
 Según el curso del año pasado, el manejo de eventos ha demostrado ser ser dificil.
-Vale la pena leer el capítulo de revisión al final de la parte anterior [revisión de los controladores de eventos](es/part1/depurando-un-estado-mas-complejo-en-react#manejo-de-eventos-revisitado), si cree que su propio conocimiento sobre el tema necesita algo de mejora.
+Vale la pena leer el capítulo de revisión al final de la parte anterior [revisión de los controladores de eventos](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#manejo-de-eventos-revisitado), si cree que su propio conocimiento sobre el tema necesita algo de mejora.
 
-Pasar controladores de eventos a los componentes secundarios del componente <i>App</i> ha planteado algunas preguntas. Se puede encontrar una pequeña revisión sobre el tema [aquí](es/part1/depurando-un-estado-mas-complejo-en-react#pasar-controladores-de-eventos-a-elementos-secundarios).
+Pasar controladores de eventos a los componentes secundarios del componente <i>App</i> ha planteado algunas preguntas. Se puede encontrar una pequeña revisión sobre el tema [aquí](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#pasando-controladores-de-eventos-a-componentes-secundarios).
 
 ### Renderizando colecciones
 
@@ -361,7 +361,7 @@ const App = ({ notes }) => {
 }
 ```
 
-Si ha olvidado lo que significa la desestructuración y cómo funciona, revise [esto](/es/part1/manejadores-de-eventos-de-componentes#desestructuración).
+Si ha olvidado lo que significa la desestructuración y cómo funciona, revise [esto](/es/part1/estado_del_componente_controladores_de_eventos#desestructuracion).
 
 Separamos la visualización de una sola nota en su propio componente <i>Note</i>:
 
