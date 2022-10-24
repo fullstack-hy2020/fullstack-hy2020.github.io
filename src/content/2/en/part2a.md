@@ -429,8 +429,6 @@ Now, we'll create a directory called <i>components</i> for our application and p
 The contents of the Note.js file are as follows: 
 
 ```js
-import React from 'react'
-
 const Note = ({ note }) => {
   return (
     <li>{note.content}</li>
