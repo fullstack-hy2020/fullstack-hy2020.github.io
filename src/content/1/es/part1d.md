@@ -370,7 +370,7 @@ Por suerte para nosotros, React es una librería extremadamente amigable para lo
 
 Antes de continuar, recordemos una de las reglas más importantes del desarrollo web.
 
-<h4>La primera regla de desarrollo web</ h4>
+<h4>La primera regla de desarrollo web</h4>
 
 > **Mantenga la consola de desarrollador del navegador abierta en todo momento.**
 >
