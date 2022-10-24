@@ -507,7 +507,7 @@ const App = () => {
 
 <h4>1.2: informazioni sui corsi, step2</h4>
 
-Esegui il refactor del componente di modo che non visualizzi direttamente i nomi delle sezioni o il relativo numero di esercizi. Invece visualizza solamente tre componenti <i>Part</i> dei quali ciascuno mostra il nome e il numero di esercizi della relativa sezione.
+Esegui il refactor del componente <i>Content</i> di modo che non visualizzi direttamente i nomi delle sezioni o il relativo numero di esercizi. Invece visualizza solamente tre componenti <i>Part</i> dei quali ciascuno mostra il nome e il numero di esercizi della relativa sezione.
 
 ```js
 const Content = ... {
