@@ -25,7 +25,7 @@ Nuestro objetivo es implementar un backend que funcione con la aplicación de no
 **Tenga en cuenta** que las aplicaciones y ejercicios de esta parte no son todas aplicaciones de React, y no usaremos la utilidad <i>create-react-app</i> para inicializar el proyecto para esta aplicación.
 
 
-Ya habíamos mencionado [npm](/es/part2/getting_data_from_server#npm) en la parte 2, que es una herramienta utilizada para administrar paquetes de JavaScript. De hecho, npm se origina en el ecosistema Node.
+Ya habíamos mencionado [npm](/es/part2/obteniendo_datos_del_servidor#npm) en la parte 2, que es una herramienta utilizada para administrar paquetes de JavaScript. De hecho, npm se origina en el ecosistema Node.
 
 
 Naveguemos a un directorio apropiado y creemos una nueva plantilla para nuestra aplicación con el comando _npm init_. Responderemos a las preguntas presentadas por la utilidad y el resultado será un archivo <i>package.json</i> generado automáticamente en la raíz del proyecto, que contiene información sobre el proyecto.
