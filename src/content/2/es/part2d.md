@@ -90,7 +90,7 @@ addNote = event => {
 }
 ```
 
-La nueva nota devuelta por el servidor backend se agrega a la lista de notas en el estado de nuestra aplicación en la forma habitual de usar la función <em>setNotes</em> y luego restablecer el formulario de creación de notas. Un [detalle importante](/es/part1/depurando_estados_mas_complejos_en_aplicaciones_react#manejando-matrices) para recordar es que el método <em>concat</em> no cambia el estado original del componente, sino que crea una nueva copia de la lista.
+La nueva nota devuelta por el servidor backend se agrega a la lista de notas en el estado de nuestra aplicación en la forma habitual de usar la función <em>setNotes</em> y luego restablecer el formulario de creación de notas. Un [detalle importante](/es/part1/un_estado_mas_complejo_depurando_aplicaciones_react#manejo-de-matrices) para recordar es que el método <em>concat</em> no cambia el estado original del componente, sino que crea una nueva copia de la lista.
 
 
 Una vez que los datos devueltos por el servidor comienzan a tener un efecto en el comportamiento de nuestras aplicaciones web, nos enfrentamos de inmediato a un nuevo conjunto de desafíos que surgen, por ejemplo, de la asincronicidad de la comunicación. Esto requiere nuevas estrategias de depuración, el registro de la consola y otros medios de depuración se vuelven cada vez más importantes, y también debemos desarrollar una comprensión suficiente de los principios tanto del tiempo de ejecución de JavaScript como de los componentes de React. Adivinar no será suficiente.
