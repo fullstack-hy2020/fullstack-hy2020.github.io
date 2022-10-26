@@ -64,7 +64,7 @@ Nos familiarizaremos con los principios de implementación de la funcionalidad d
 
 Nuestra primera tarea es recuperar las notas ya existentes en nuestra aplicación React desde la dirección <http://localhost:3001/notes>.
 
-En el [proyecto de ejemplo](/es/part0/fundamentos_de_las_aplicaiones_web#corriendo-la-logica-la-aplicacion-en-el-navegador) ya aprendimos una manera de obtener datos de un servidor usando JavaScript. El código del ejemplo obtenía los datos mediante [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), también conocido como solicitud HTTP realizada mediante un objeto XHR. Esta es una técnica introducida en 1999, que todos los navegadores han admitido durante un buen tiempo.
+En el [proyecto de ejemplo](/es/part0/fundamentos_de_las_aplicaciones_web#ejecucion-de-la-logica-de-la-aplicacion-en-el-navegador) ya aprendimos una manera de obtener datos de un servidor usando JavaScript. El código del ejemplo obtenía los datos mediante [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), también conocido como solicitud HTTP realizada mediante un objeto XHR. Esta es una técnica introducida en 1999, que todos los navegadores han admitido durante un buen tiempo.
 
 Ya no se recomienda el uso de XHR, y los navegadores ya admiten ampliamente el método [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), que se basa en las llamadas [promesas (promises)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), en lugar del modelo impulsado por eventos utilizado por XHR.
 
@@ -284,7 +284,7 @@ Si abre <http://localhost:3000> en el navegador, debe imprimirse a la consola:
 	
 **Nota:** cuando el contenido del archivo <i>index.js</i> cambia, React no siempre lo nota automáticamente, por lo tanto, es posible que deba actualizar el navegador para ver los cambios! Una solución simple para hacer que React note el cambio automáticamente es crear un archivo llamado <i>.env</i> en el directorio raíz del proyecto y agregar esta línea <i>FAST_REFRESH=false</i>. Reinicie la aplicación para que los cambios aplicados surtan efecto.
 
-El método de Axios _get_ devuelve una [promesa](https://developer.mozilla.org/en-US/docs/Web/JavaScript/ Guide/Using_promises).
+El método de Axios _get_ devuelve una [promesa](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
 La documentación del sitio de Mozilla establece lo siguiente sobre las promesas:
 

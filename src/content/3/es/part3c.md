@@ -482,7 +482,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-La definición de [módulos](https://nodejs.org/docs/latest-v8.x/api/modules.html) de Node difiere ligeramente de la forma de definir [módulos ES6](/es/part2/rendering_a_collection_modules#refactoring-modules) en la parte 2.
+La definición de [módulos](https://nodejs.org/docs/latest-v8.x/api/modules.html) de Node difiere ligeramente de la forma de definir [módulos ES6](/es/part2/renderizando_una_coleccion_modulos#refactorizando-modulos) en la parte 2.
 
 La interfaz pública del módulo se define estableciendo un valor en la variable _module.exports_. Estableceremos el valor para que sea el modelo <i>Note</i>. Las otras cosas definidas dentro del módulo, como las variables _mongoose_ y _url_, no serán accesibles ni visibles para los usuarios del módulo.
 
@@ -635,7 +635,7 @@ Cambie la búsqueda de todas las entradas de la agenda telefónica para que los 
 
 Verifique que el frontend funcione después de que se hayan realizado los cambios.
 
-En los siguientes ejercicios, escriba todo el código específico de Mongoose en su propio módulo, como hicimos en el capítulo [Configuración de la base de datos en su propio módulo](/es/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
+En los siguientes ejercicios, escriba todo el código específico de Mongoose en su propio módulo, como hicimos en el capítulo [Configuración de la base de datos en su propio módulo](/es/part3/guardando_datos_en_mongo_db#configuracion-de-la-base-de-datos-en-su-propio-modulo).
 
 #### 3.14: Base de datos de la agenda telefónica, paso 2
 

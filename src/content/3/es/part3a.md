@@ -25,7 +25,7 @@ Nuestro objetivo es implementar un backend que funcione con la aplicación de no
 **Tenga en cuenta** que las aplicaciones y ejercicios de esta parte no son todas aplicaciones de React, y no usaremos la utilidad <i>create-react-app</i> para inicializar el proyecto para esta aplicación.
 
 
-Ya habíamos mencionado [npm](/es/part2/getting_data_from_server#npm) en la parte 2, que es una herramienta utilizada para administrar paquetes de JavaScript. De hecho, npm se origina en el ecosistema Node.
+Ya habíamos mencionado [npm](/es/part2/obteniendo_datos_del_servidor#npm) en la parte 2, que es una herramienta utilizada para administrar paquetes de JavaScript. De hecho, npm se origina en el ecosistema Node.
 
 
 Naveguemos a un directorio apropiado y creemos una nueva plantilla para nuestra aplicación con el comando _npm init_. Responderemos a las preguntas presentadas por la utilidad y el resultado será un archivo <i>package.json</i> generado automáticamente en la raíz del proyecto, que contiene información sobre el proyecto.
@@ -239,7 +239,7 @@ Reiniciemos el servidor (puede apagar el servidor presionando _Ctrl+C_ en la con
 
 El valor <i>application/json</i> en el header <i>Content-Type</i> informa al receptor que los datos están en formato JSON. El arrray _notes_ de notas se transforma en JSON con el método <em>JSON.stringify(notes)</em>.
 
-Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/getting_data_from_server/), donde usamos [json-server](https://github.com/typicode/json-server) para entregar la lista de notas:
+Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/obteniendo_datos_del_servidor), donde usamos [json-server](https://github.com/typicode/json-server) para entregar la lista de notas:
 
 ![](../../images/3/2e.png)
 
@@ -466,7 +466,7 @@ Representational State Transfer, también conocido como REST, se introdujo en 20
 
 No vamos a profundizar en la definición de REST de Fielding ni a perder tiempo reflexionando sobre qué es y qué no es REST. En cambio, tomamos una [visión más estrecha](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) al preocuparnos solo por cómo las API RESTful se entienden generalmente en las aplicaciones web. De hecho, la definición original de REST ni siquiera se limita a las aplicaciones web.
 
-Mencionamos en la [parte anterior](/es/part2/altering_data_in_server#rest) que las cosas singulares, como las notas en el caso de nuestra aplicación, se llaman <i>recursos</i> en el pensamiento REST. Cada recurso tiene una URL asociada que es la dirección única del recurso.
+Mencionamos en la [parte anterior](/es/part2/alterando_datos_en_el_servidor#rest) que las cosas singulares, como las notas en el caso de nuestra aplicación, se llaman <i>recursos</i> en el pensamiento REST. Cada recurso tiene una URL asociada que es la dirección única del recurso.
 
 Una convención es crear la dirección única para los recursos combinando el nombre del tipo de recurso con el identificador único del recurso.
 

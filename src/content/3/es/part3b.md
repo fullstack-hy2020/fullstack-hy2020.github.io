@@ -176,7 +176,7 @@ La aplicación ahora se puede utilizar desde la dirección de <i>backend</i> <ht
 
 ![](../../images/3/28e.png)
 
-Nuestra aplicación ahora funciona exactamente como la aplicación de ejemplo de [aplicación de una sola](/es/part0/fundamentals_of_web_apps#single-page-app) página que estudiamos en la parte 0.
+Nuestra aplicación ahora funciona exactamente como la aplicación de ejemplo de [aplicación de una sola](/es/part0/fundamentos_de_las_aplicaciones_web#aplicacion-de-una-sola-pagina) página que estudiamos en la parte 0.
 
 Cuando usamos un navegador para ir a la dirección <http://localhost:3001>, el servidor devuelve el archivo <i>index.html</i> del repositorio de <i>compilación</i>. El contenido resumido del archivo es el siguiente:
 
