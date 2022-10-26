@@ -64,7 +64,7 @@ Nos familiarizaremos con los principios de implementación de la funcionalidad d
 
 Nuestra primera tarea es recuperar las notas ya existentes en nuestra aplicación React desde la dirección <http://localhost:3001/notes>.
 
-En el [proyecto de ejemplo](/es/part0/fundamentos_de_las_aplicaiones_web#corriendo-la-logica-la-aplicacion-en-el-navegador) ya aprendimos una manera de obtener datos de un servidor usando JavaScript. El código del ejemplo obtenía los datos mediante [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), también conocido como solicitud HTTP realizada mediante un objeto XHR. Esta es una técnica introducida en 1999, que todos los navegadores han admitido durante un buen tiempo.
+En el [proyecto de ejemplo](/es/part0/fundamentos_de_las_aplicaciones_web#ejecucion-de-la-logica-de-la-aplicacion-en-el-navegador) ya aprendimos una manera de obtener datos de un servidor usando JavaScript. El código del ejemplo obtenía los datos mediante [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), también conocido como solicitud HTTP realizada mediante un objeto XHR. Esta es una técnica introducida en 1999, que todos los navegadores han admitido durante un buen tiempo.
 
 Ya no se recomienda el uso de XHR, y los navegadores ya admiten ampliamente el método [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), que se basa en las llamadas [promesas (promises)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), en lugar del modelo impulsado por eventos utilizado por XHR.
 
