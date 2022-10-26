@@ -294,7 +294,7 @@ Abra su aplicación en dos navegadores. **Si elimina a una persona en el navegad
 
 ![](../../images/2/29b.png)
 
-Solucione el problema de acuerdo con el ejemplo que se muestra en [promesa y errores](/es​​/part2/alterando_datos_en_el_servidor#promesas-y-errores) en la parte 2. Modifique el ejemplo para que se muestre al usuario un mensaje cuando la operación no se realice correctamente. Los mensajes que se muestran para eventos exitosos y no exitosos deben verse diferentes
+Solucione el problema de acuerdo con el ejemplo que se muestra en [promesa y errores](/es/part2/alterando_datos_en_el_servidor#promesas-y-errores) en la parte 2. Modifique el ejemplo para que se muestre al usuario un mensaje cuando la operación no se realice correctamente. Los mensajes que se muestran para eventos exitosos y no exitosos deben verse diferentes
 
 ![](../../images/2/28e.png)
 
