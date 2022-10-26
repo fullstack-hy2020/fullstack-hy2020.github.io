@@ -466,7 +466,7 @@ Representational State Transfer, también conocido como REST, se introdujo en 20
 
 No vamos a profundizar en la definición de REST de Fielding ni a perder tiempo reflexionando sobre qué es y qué no es REST. En cambio, tomamos una [visión más estrecha](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) al preocuparnos solo por cómo las API RESTful se entienden generalmente en las aplicaciones web. De hecho, la definición original de REST ni siquiera se limita a las aplicaciones web.
 
-Mencionamos en la [parte anterior](/es/part2/altering_data_in_server#rest) que las cosas singulares, como las notas en el caso de nuestra aplicación, se llaman <i>recursos</i> en el pensamiento REST. Cada recurso tiene una URL asociada que es la dirección única del recurso.
+Mencionamos en la [parte anterior](/es/part2/alterando_datos_en_el_servidor#rest) que las cosas singulares, como las notas en el caso de nuestra aplicación, se llaman <i>recursos</i> en el pensamiento REST. Cada recurso tiene una URL asociada que es la dirección única del recurso.
 
 Una convención es crear la dirección única para los recursos combinando el nombre del tipo de recurso con el identificador único del recurso.
 
