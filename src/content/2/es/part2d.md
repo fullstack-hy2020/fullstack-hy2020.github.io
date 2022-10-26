@@ -279,7 +279,7 @@ Este truco de <em>map</em> puede parecer un poco extraño al principio, pero val
 ### Extraer la comunicación con el backend en un módulo separado
 
 
-El componente <i>App</i> se ha hinchado un poco después de agregar el código para comunicarse con el servidor backend. En el espíritu del [principio de responsabilidad única](https://en.wikipedia.org/wiki/Single_responsibility_principle), consideramos prudente extraer esta comunicación en su propio [módulo](/es/part2/renderizando_una_coleccion_de_componetes#refactorizando-modulos).
+El componente <i>App</i> se ha hinchado un poco después de agregar el código para comunicarse con el servidor backend. En el espíritu del [principio de responsabilidad única](https://en.wikipedia.org/wiki/Single_responsibility_principle), consideramos prudente extraer esta comunicación en su propio [módulo](/es/part2/renderizando_una_coleccion_modulos#refactorizando-modulos).
 
 
 Creemos un directorio <i>src/services</i> y agreguemos un archivo allí llamado <i>notes.js</i>:
