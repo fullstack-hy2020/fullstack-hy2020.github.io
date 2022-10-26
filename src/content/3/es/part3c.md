@@ -482,7 +482,7 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-La definición de [módulos](https://nodejs.org/docs/latest-v8.x/api/modules.html) de Node difiere ligeramente de la forma de definir [módulos ES6](/es/part2/rendering_a_collection_modules#refactoring-modules) en la parte 2.
+La definición de [módulos](https://nodejs.org/docs/latest-v8.x/api/modules.html) de Node difiere ligeramente de la forma de definir [módulos ES6](/es/part2/renderizando_una_coleccion_modulos#refactorizando-modulos) en la parte 2.
 
 La interfaz pública del módulo se define estableciendo un valor en la variable _module.exports_. Estableceremos el valor para que sea el modelo <i>Note</i>. Las otras cosas definidas dentro del módulo, como las variables _mongoose_ y _url_, no serán accesibles ni visibles para los usuarios del módulo.
 
