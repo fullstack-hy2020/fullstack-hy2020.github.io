@@ -284,7 +284,7 @@ El código de la versión final de nuestra aplicación se puede encontrar en la 
 
 <h4>2.19: Guía telefónica paso11 </h4>
 
-Utilice el ejemplo de [mensaje de error mejorado](/es/part2/agregando_estilos_a_aplicaciones_react#mensaje-de-error-mejorado) de la parte 2 como guía para mostrar una notificación que dura unos segundos después de que se ejecuta una operación exitosa (se agrega una persona o se cambia un número):
+Utilice el ejemplo de [mensaje de error mejorado](/es/part2/agregar_estilos_a_la_aplicacion_react#mensaje-de-error-mejorado) de la parte 2 como guía para mostrar una notificación que dura unos segundos después de que se ejecuta una operación exitosa (se agrega una persona o se cambia un número):
 
 ![](../../images/2/27e.png)
 
