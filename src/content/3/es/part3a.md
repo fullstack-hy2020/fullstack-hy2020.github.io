@@ -239,7 +239,7 @@ Reiniciemos el servidor (puede apagar el servidor presionando _Ctrl+C_ en la con
 
 El valor <i>application/json</i> en el header <i>Content-Type</i> informa al receptor que los datos están en formato JSON. El arrray _notes_ de notas se transforma en JSON con el método <em>JSON.stringify(notes)</em>.
 
-Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/getting_data_from_server/), donde usamos [json-server](https://github.com/typicode/json-server) para entregar la lista de notas:
+Cuando abrimos el navegador, el formato que se muestra es exactamente el mismo que en la [parte 2](/es/part2/obteniendo_datos_del_servidor), donde usamos [json-server](https://github.com/typicode/json-server) para entregar la lista de notas:
 
 ![](../../images/3/2e.png)
 
