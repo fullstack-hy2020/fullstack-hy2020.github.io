@@ -284,7 +284,7 @@ Si abre <http://localhost:3000> en el navegador, debe imprimirse a la consola:
 	
 **Nota:** cuando el contenido del archivo <i>index.js</i> cambia, React no siempre lo nota automáticamente, por lo tanto, es posible que deba actualizar el navegador para ver los cambios! Una solución simple para hacer que React note el cambio automáticamente es crear un archivo llamado <i>.env</i> en el directorio raíz del proyecto y agregar esta línea <i>FAST_REFRESH=false</i>. Reinicie la aplicación para que los cambios aplicados surtan efecto.
 
-El método de Axios _get_ devuelve una [promesa](https://developer.mozilla.org/en-US/docs/Web/JavaScript/ Guide/Using_promises).
+El método de Axios _get_ devuelve una [promesa](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
 La documentación del sitio de Mozilla establece lo siguiente sobre las promesas:
 
