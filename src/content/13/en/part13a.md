@@ -314,7 +314,7 @@ $ cat .env
 DATABASE_URL=postgres://postgres:<password>@localhost:5432/postgres
 ```
 
-Password was shown when the database was created, so hopefully you did not lost it!
+Password was shown when the database was created, so hopefully you have not lost it!
 
 The last part of the connect string, <i>postgres</i> refers to the database name. The name could be any string but we use here <i>postgres</i> since it is the default database that is automatically created within a Postgress database. If needed, new databases can be created with the command [CREATE DATABASE](https://www.postgresql.org/docs/14/sql-createdatabase.html).
 
