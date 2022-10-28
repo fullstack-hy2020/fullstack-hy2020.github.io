@@ -124,7 +124,7 @@ notes.forEach(m => {
  在Java中，代码逐行执行，然后停下来等待HTTP请求，也就是等待命令_request.get(...)_完成。由命令返回的数据，在本例中是笔记，然后被存储在一个变量中，我们开始以所需的方式操作数据。
 
 <!-- On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO-operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that code execution continues immediately after calling an IO function, without waiting for it to return.-->
- 另一方面，JavaScript引擎或运行时环境遵循[异步模型](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop）。原则上，这要求所有的[IO-操作](https://en.wikipedia.org/wiki/Input/output)（除了一些例外)都以非阻塞方式执行。这意味着在调用一个IO函数后，代码的执行会立即继续，而不需要等待它的返回。
+ 另一方面，JavaScript引擎或运行时环境遵循[异步模型](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop)。原则上，这要求所有的[IO-操作](https://en.wikipedia.org/wiki/Input/output)（除了一些例外)都以非阻塞方式执行。这意味着在调用一个IO函数后，代码的执行会立即继续，而不需要等待它的返回。
 
 <!-- When an asynchronous operation is completed, or, more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.-->
  当一个异步操作完成时，或者更确切地说，在完成后的某个时间点，JavaScript引擎会调用注册在该操作上的事件处理程序。
