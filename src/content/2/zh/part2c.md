@@ -66,7 +66,7 @@ npx json-server --port 3001 --watch db.json
  展望未来，我们的想法是将笔记保存到服务器上，在这种情况下，这意味着将它们保存到json-server。React代码从服务器上获取笔记，并将其渲染到屏幕上。每当一个新的笔记被添加到应用中，React代码也会将其发送到服务器，使新的笔记在 "内存 "中持续存在。
 
 <!-- json-server stores all the data in the <i>db.json</i> file, which resides on the server. In the real world, data would be stored in some kind of database. However, json-server is a handy tool that enables the use of server-side functionality in the development phase without the need to program any of it.-->
- json-server将所有数据存储在<i>db.json</i>文件中，该文件位于服务器上。在现实世界中，数据会被存储在某种数据库中。然而，jon-server是一个方便的工具，它能够在开发阶段使用服务器端的功能，而不需要对其进行任何编程。
+ json-server将所有数据存储在<i>db.json</i>文件中，该文件位于服务器上。在现实世界中，数据会被存储在某种数据库中。然而，json-server是一个方便的工具，它能够在开发阶段使用服务器端的功能，而不需要对其进行任何编程。
 
 <!-- We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/en/part3) of this course.-->
  我们将在本课程的[第三章节](/en/part3)中更详细地熟悉实现服务器端功能的原则。
