@@ -264,7 +264,7 @@ La transcription vous sera livrée par voie électronique par courrier électron
 
 Si vous avez déjà suivi le cursus en MOOC ou en cursus universitaire, vous pouvez désormais approfondir votre cursus.
 
-#### S'approfindir sur Full Stack open
+#### S'approfondir sur Full Stack open
 
 Vous pouvez simplement reprendre là où vous vous étiez arrêté ! Si vous souhaitez soumettre à nouveau une partie entière, veuillez contacter le personnel du cours via [email](mailto:matti.luukkainen@helsinki.fi) ou Discord <i>mluukkai</i>, avec votre nom d'utilisateur GitHub et les parties que vous souhaitez avoir supprimé de vos soumissions.
 
