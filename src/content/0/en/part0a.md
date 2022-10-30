@@ -269,7 +269,9 @@ Student Services email address: avoin-student@helsinki.fi
 
 ### Course certificate
 
-Even if you do not register to Open University for the exam, you can still download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
+Even if you do not register to Open University for the exam and the credits, you can still download the course certificate from the "My submissions" tab in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
+
+There is one certificate for the base parts (0-7) of the course and after that a separate cert for the each course part.
 
 ### Request a transcript of studies
 
