@@ -15,7 +15,7 @@
     {
       "title": "Milloin on tehtävien ja kokeen deadline?",
       "text": [
-        "Etenemisnopeus on vapaa. Jos haluat Avoimen yliopiston opintopisteet, tulee kurssikoe tehdä 10.1.2023 klo 23.59.59 mennessä. Kannattaa kuitenkin huomata, että kurssille on ilmoittauduttava viimeistään deadlinea edeltävänä päivänä 9.1.2023. Tehtävien deadline on 1.3.2023"
+        "Etenemisnopeus on vapaa. Tehtävien ja kokeen deadline vuoden 2022 versiossa on 1.3.2023. Kurssi jatkuu myös vuonna 2023, lue <a href='/osa0/yleista#kurssin-jatkaminen-2023'>täältä</a> lisää! Eli käytännössä deadlinea ei ole."
       ]
     },
     {
@@ -56,6 +56,12 @@
     }
   ],
   "en": [
+    {
+      "title": "How much does this course cost?",
+      "text": [
+        "The course is totally free of charge. You can even get University of Helsinki ECTS credits for free. See <a href='/en/part0/general_info#parts-and-completion'><here/a> for more."
+      ]
+    },
     {
       "title": "How do I sign up for the course?",
       "text": [

@@ -690,6 +690,8 @@ The diagram does not have to be a sequence diagram. Any sensible way of presenti
 All necessary information for doing this, and the next two exercises, can be found from the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
 The idea of these exercises is to read the text through once more, and to think through what is going on there. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible. 
 
+**Note** perhaps the best way to do diagrams is the [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor) syntax that is now implemented in [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/) markdown pages! 
+
   <h4>0.5: Single page app</h4>
 
 Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.
