@@ -37,8 +37,6 @@ In parts 1-4 you are expected to do <i>at least</i> all of the exercises that ar
 
 The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2023. 
 
-However, note that the deadline for taking exam for University of Helsinki credits is 10.1.2023. 
-
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 ### Course channel in Discord and Telegram
