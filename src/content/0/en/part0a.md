@@ -285,6 +285,10 @@ You can request a verified transcript of studies <i>after your university credit
 
 The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
 
+### Continuing the course at year 2023
+
+The 2022 version of the course ends 1st March 2023. After that course has a two week maintainance break. During the break material stays online, and also exercises can be submitted. During the break the course content may change a bit, noting too dramatic has been planned at the moment. All the exercises submitted for the 2022 version can be used in the 2023 edition so basically the course can be continued without bothering too much about the different versions
+
 ### Expanding on a previously completed course
 
 If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.

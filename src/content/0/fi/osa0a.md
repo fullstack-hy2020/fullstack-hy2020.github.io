@@ -277,7 +277,7 @@ Ohjeet opintosuoritusotteen tilaamiseen:
 
 ### Kurssin jatkaminen 2023
 
-Kurssin "vuoden 2022"-versio päättyy 1.3.2023. klo 23:59 asti. Tämän jälkeen kurssilla pidetään 2 viikon "päivitystauko", materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kurssin sisältöön voi tulla tauon aikana pieniä muutoksia. Kaikki 2022-versioon tehdyt palautukset ovat käytettävissä myös 2023-versiossa, joten voit jatkaa kurssia käytännössä eri vuosien versioista piittaamatta 
+Kurssin "vuoden 2022" versio päättyy 1.3.2023. klo 23:59 asti. Tämän jälkeen kurssilla pidetään 2 viikon "päivitystauko", materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kurssin sisältöön voi tulla tauon aikana pieniä muutoksia. Kaikki vuoden 2022 versioon tehdyt palautukset ovat käytettävissä myös vuoden 2023 versiossa, joten voit jatkaa kurssia käytännössä eri vuosien versioista piittaamatta.
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
