@@ -444,7 +444,7 @@ The result of the bind mount is that the file <i>mongo-init.js</i> in the mongo 
 
 Run _docker-compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker-compose -f docker-compose.dev.yml up_ to initialize the database.
 
-If all goes well, you will among the logs the following:
+If all goes well, you will find among the logs the following:
 
 ```bash
 "x86_64","version":"20.04"}}}}
