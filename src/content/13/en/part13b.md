@@ -839,7 +839,7 @@ where: {
 depending on the value of the query parameter.
 
 The database might now contain some note rows that do not have the value for the column
-<i>important</i> set. After the above changes, these notes can not be found with the queries. Let us set the missing values in the psql console and change the schema so that the coulumn does not allow a null value:
+<i>important</i> set. After the above changes, these notes can not be found with the queries. Let us set the missing values in the psql console and change the schema so that the column does not allow a null value:
 
 ```js
 Note.init(
