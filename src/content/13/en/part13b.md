@@ -757,7 +757,7 @@ router.get('/', async (req, res) => {
   const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
-      model: user,
+      model: User,
       attributes: ['name']
     },
     // highlight-start
@@ -799,7 +799,7 @@ router.get('/', async (req, res) => {
   const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
-      model: user,
+      model: User,
       attributes: ['name']
     },
     where: {
@@ -880,7 +880,7 @@ router.get('/', async (req, res) => {
   const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
-      model: user,
+      model: User,
       attributes: ['name']
     },
     where: {
@@ -932,7 +932,7 @@ router.get('/', async (req, res) => {
   const notes = await Note.findAll({
     attributes: { exclude: ['userId'] },
     include: {
-      model: user,
+      model: User,
       attributes: ['name']
     },
     where
