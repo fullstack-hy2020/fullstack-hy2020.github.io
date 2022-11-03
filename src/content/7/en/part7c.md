@@ -512,7 +512,8 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://www.radix-ui.com/>
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
-- <https://www.radix-ui.com/>
+- <https://nextui.org/
+
 
 ### Styled components
 
