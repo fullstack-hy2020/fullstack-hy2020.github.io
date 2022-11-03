@@ -402,7 +402,7 @@ Let's add some CSS to our application. Let's create a new <i>src/index.css</i> f
 
 ```css
 .container {
-  margin: 10;
+  margin: 10px;
   background-color: #dee8e4;
 }
 ```
