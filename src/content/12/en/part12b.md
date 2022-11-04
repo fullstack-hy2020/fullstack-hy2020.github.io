@@ -551,7 +551,7 @@ $ docker volume inspect todo-backend_mongo_data
 ]
 ```
 
-The named volume still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
+The named volume is still stored in your local filesystem but figuring out <i>where</i> may not be as trivial as with the previous option.
 
 </div>
 
