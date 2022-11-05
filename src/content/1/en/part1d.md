@@ -472,7 +472,7 @@ console.log('props value is', props)
 If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
 
 ```js
-props value is [Object object]
+props value is [object Object]
 ```
 
 Whereas the items separated by a comma will all be available in the browser console for further inspection.
