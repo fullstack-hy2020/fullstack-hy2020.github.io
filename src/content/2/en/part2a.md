@@ -32,7 +32,7 @@ console.log('props value is', props)
 If you concatenate an object with a string and log it to the console (like in our first example), the result will be pretty useless: 
 
 ```js
-props value is [Object object]
+props value is [object Object]
 ```
 
 On the contrary, when you pass objects as distinct arguments separated by commas to _console.log_, like in our second example above, the content of the object is printed to the developer console as strings that are insightful.
