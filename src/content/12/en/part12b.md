@@ -561,7 +561,7 @@ The named volume is still stored in your local filesystem but figuring out <i>wh
 
 #### Exercise 12.7: Little bit of MongoDB coding
 
-Note that this exercise assumes that you have done all the configurations made in material after the exercise 12.5. You should still run the todo-app backend <i>outside a container</i> just the MongoDB is containerized for now.
+Note that this exercise assumes that you have done all the configurations made in the material after exercise 12.5. You should still run the todo-app backend <i>outside a container</i>; just the MongoDB is containerized for now.
 
 The todo application has no proper implementation of routes for getting one todo (GET <i>/todos/:id</i>) and updating one todo (PUT <i>/todos/:id</i>). Fix the code.
 
