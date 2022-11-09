@@ -555,11 +555,11 @@ const pubsub = new PubSub() // highlight-line
   // highlight-end
 ```
 
-<!-- With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup). Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.-->
- 通过订阅，通信是利用对象[PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup)的[发布-订阅](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)原则进行的。添加一个新的人<i>发布</i>一个关于该操作的通知给所有使用PubSub's方法_publish_的订阅者。
+<!-- With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class). Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_.-->
+ 通过订阅，通信是利用对象[PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class)的[发布-订阅](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)原则进行的。添加一个新的人<i>发布</i>一个关于该操作的通知给所有使用PubSub's方法_publish_的订阅者。
 
-<!-- _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).-->
- _personAdded_订阅解析器通过返回一个合适的[迭代器对象](https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/)来注册所有的订阅者。
+<!-- _personAdded_ subscriptions resolver registers all of the subscribers by returning them a suitable [iterator object](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events).-->
+ _personAdded_订阅解析器通过返回一个合适的[迭代器对象](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events)来注册所有的订阅者。
 
 <!-- It's possible to test the subscriptions with the Apollo Explorer like this:-->
  可以这样用Apollo Explorer来测试订阅。
@@ -688,8 +688,8 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      console.log(subscriptionData)
+    onData: ({ data }) => {
+      console.log(data)
     }
   })
 
@@ -704,8 +704,8 @@ const App = () => {
 ![](../../images/8/32e.png)
 
 
-<!-- When a new person is added, the server sends a notification to the client, and the callback function defined in the _onSubscriptionData_ attribute is called and given the details of the new person as parameters.-->
- 当一个新的人被添加时，服务器向客户端发送一个通知，在_onSubscriptionData_属性中定义的回调函数被调用，并给出新的人的细节作为参数。
+<!-- When a new person is added, the server sends a notification to the client, and the callback function defined in the _onData_ attribute is called and given the details of the new person as parameters.-->
+ 当一个新的人被添加时，服务器向客户端发送一个通知，在_onData_属性中定义的回调函数被调用，并给出新的人的细节作为参数。
 
 <!-- Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately.-->
  让我们扩展我们的解决方案，当收到一个新的人的详细资料时，这个人被添加到Apollo缓存中，所以它被立即渲染到屏幕上。
@@ -715,8 +715,8 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      const addedPerson = subscriptionData.data.personAdded
+    onData: ({ data }) => {
+      const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
 
       // highlight-start
@@ -766,8 +766,8 @@ const App = () => {
   const client = useApolloClient()
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData, client }) => {
-      const addedPerson = subscriptionData.data.personAdded
+    onData: ({ data, client }) => {
+      const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
       updateCache(client.cache, { query: ALL_PERSONS }, addedPerson) // highlight-line
     },

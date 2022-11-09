@@ -132,7 +132,7 @@ Las suscripciones son radicalmente diferentes a todo lo que hemos visto en este 
 Con las suscripciones la situación es la contraria. Una vez que una aplicación se ha suscrito, comienza a escuchar al servidor.
 Cuando ocurren cambios en el servidor, envía una notificación a todos sus <i>suscriptores</i>.
 
-Técnicamente hablando, el protocolo HTTP no es adecuado para la comunicación desde el servidor al navegador, por lo que Apollo usa [WebSockets] (https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API ) para la comunicación del suscriptor del servidor.
+Técnicamente hablando, el protocolo HTTP no es adecuado para la comunicación desde el servidor al navegador, por lo que Apollo usa [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API ) para la comunicación del suscriptor del servidor.
 
 ### Suscripciones en el servidor
 
@@ -189,9 +189,9 @@ const pubsub = new PubSub() // highlight-line
   // highlight-end
 ```
 
-Con las suscripciones, la comunicación ocurre usando el principio [publicar-suscribir](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) utilizando un objeto usando un [PubSub](https://www.apollographql.com/docs/graphql-subscriptions/setup/#setup) interfaz. Agregar una nueva persona <i> publica </i> una notificación sobre la operación a todos los suscriptores con el método _publish_ de PubSub.
+Con las suscripciones, la comunicación ocurre usando el principio [publicar-suscribir](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) utilizando un objeto usando un [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class) interfaz. Agregar una nueva persona <i> publica </i> una notificación sobre la operación a todos los suscriptores con el método _publish_ de PubSub.
 
-_personAdded_ subscriptions resolver registra a todos los suscriptores devolviéndoles un [objeto iterador] adecuado (https://www.apollographql.com/docs/graphql-subscriptions/subscriptions-to-schema/).
+_personAdded_ subscriptions resolver registra a todos los suscriptores devolviéndoles un [objeto iterador](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events) adecuado .
 
 Hagamos los siguientes cambios en el código que inicia el servidor
 
@@ -219,7 +219,7 @@ Es posible probar las suscripciones con el patio de juegos de GraphQL de esta ma
 
 Cuando presiona "reproducir" en una suscripción, el área de juegos espera las notificaciones de la suscripción.
 
-El código de backend se puede encontrar en [Github] (https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), rama <i>part8-6</i>.
+El código de backend se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), rama <i>part8-6</i>.
 
 ### Suscripciones en el cliente
 
@@ -329,8 +329,8 @@ const App = () => {
   // ...
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      console.log(subscriptionData)
+    onData: ({ data }) => {
+      console.log(data)
     }
   })
 
@@ -342,7 +342,7 @@ Cuando se agrega una nueva persona a la agenda, no independientemente de dónde 
 
 ![](../../images/8/32e.png)
 
-Cuando se agrega una nueva persona, el servidor envía una notificación al cliente y se llama a la función de devolución de llamada definida en el atributo _onSubscriptionData_ y se le dan los detalles. de la nueva persona como parámetros.
+Cuando se agrega una nueva persona, el servidor envía una notificación al cliente y se llama a la función de devolución de llamada definida en el atributo _onData_ y se le dan los detalles. de la nueva persona como parámetros.
 
 Extendamos nuestra solución para que cuando se reciban los detalles de una nueva persona, la persona se agregue a la caché de Apollo, de modo que se muestre en la pantalla de inmediato.
 
@@ -366,8 +366,8 @@ const App = () => {
   }
 
   useSubscription(PERSON_ADDED, {
-    onSubscriptionData: ({ subscriptionData }) => {
-      const addedPerson = subscriptionData.data.personAdded
+    onData: ({ data }) => {
+      const addedPerson = data.data.personAdded
       notify(`${addedPerson.name} added`)
       updateCacheWith(addedPerson)
     }
@@ -565,13 +565,13 @@ Si modificamos _allPersons_ para hacer una consulta de combinación porque a vec
 > <i>Los programadores pierden una enorme cantidad de tiempo pensando o preocupándose por la velocidad de las partes no críticas de sus programas, y estos intentos de eficiencia en realidad tienen un fuerte impacto negativo cuando se consideran la depuración y el mantenimiento. Deberíamos olvidarnos de las pequeñas eficiencias, digamos alrededor del 97% del tiempo: <strong>la optimización prematura es la raíz de todos los males.</strong></i>
 
 [DataLoader](https://github.com/facebook/dataloader) de Facebook ofrece una buena solución para el problema n + 1 entre otros problemas.
-Más sobre el uso de DataLoader con el servidor Apollo [aquí] (https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) y [aquí](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
+Más sobre el uso de DataLoader con el servidor Apollo [aquí](https://www.robinwieruch.de/graphql-apollo-server-tutorial/#graphql-server-data-loader-caching-batching) y [aquí](http://www.petecorey.com/blog/2017/08/14/batching-graphql-queries-with-dataloader/).
 
 ### Epílogo
 
 La aplicación que creamos en esta parte no está estructurada de manera óptima: el esquema, las consultas y las mutaciones deben al menos moverse fuera del código de la aplicación. En Internet se pueden encontrar ejemplos para una mejor estructuración de las aplicaciones GraphQL. Por ejemplo, para el servidor [aquí](https://blog.apollographql.com/modularizing-your-graphql-schema-code-d7f71d5ed5f2) y el cliente [aquí](https://medium.com/@peterpme/thoughts-on-structuring-your-apollo-queries-mutations-939ba4746cd8).
 
-GraphQL ya es una tecnología bastante antigua, que ha sido utilizada por Facebook desde 2012, por lo que ya podemos verla como "probada en batalla". Desde que Facebook publicó GraphQL en 2015, poco a poco ha recibido más y más atención, y en un futuro cercano podría amenazar el dominio de REST. La muerte de REST también ha sido [predicha] (https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Aunque eso no sucederá todavía, GraphQL es absolutamente digno de [aprender] (https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
+GraphQL ya es una tecnología bastante antigua, que ha sido utilizada por Facebook desde 2012, por lo que ya podemos verla como "probada en batalla". Desde que Facebook publicó GraphQL en 2015, poco a poco ha recibido más y más atención, y en un futuro cercano podría amenazar el dominio de REST. La muerte de REST también ha sido [predicha](https://www.stridenyc.com/podcasts/52-is-2018-the-year-graphql-kills-rest). Aunque eso no sucederá todavía, GraphQL es absolutamente digno de [aprender](https://blog.graphqleditor.com/javascript-predictions-for-2019-by-npm/).
 
 </div>
 
