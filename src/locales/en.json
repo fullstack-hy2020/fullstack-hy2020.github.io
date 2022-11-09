@@ -52,5 +52,8 @@
     "announcementsTitle": "Announcements",
     "authorsTitle": "Authors and License",
     "courseNameTitle": "Full Stack open 2022"
+  },
+  "notFoundPage": {
+    "title": "Page not found"
   }
 }

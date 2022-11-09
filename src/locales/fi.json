@@ -52,5 +52,8 @@
     "announcementsTitle": "Ajankohtaista",
     "authorsTitle": "Materiaalin tekijä ja lisenssi",
     "courseNameTitle": "Full Stack open 2022"
+  },
+  "notFoundPage": {
+    "title": "Sivua ei löytynyt"
   }
 }

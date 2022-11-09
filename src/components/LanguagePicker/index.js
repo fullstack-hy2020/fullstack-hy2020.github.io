@@ -1,16 +1,10 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import cn from 'classnames';
-import SrOnly from '../SrOnly';
-import styles from './LanguagePicker.module.scss';
 
-const options = [
-  { value: 'fi', label: 'Suomi' },
-  { value: 'en', label: 'English' },
-  { value: 'zh', label: '中文' },
-  { value: 'es', label: 'Spanish' },
-  { value: 'fr', label: 'Français' },
-];
+import SrOnly from '../SrOnly';
+import { TRANSLATION_LANGUAGE_OPTIONS } from '../../config';
+import styles from './LanguagePicker.module.scss';
 
 const LanguagePicker = ({
   value = 'fi',
@@ -18,6 +12,7 @@ const LanguagePicker = ({
   className: classNameProp,
 }) => {
   const { t } = useTranslation();
+
   const selectOnChange = e => {
     onChange(e.target.value, e);
   };
@@ -38,7 +33,7 @@ const LanguagePicker = ({
         onChange={selectOnChange}
         className={className}
       >
-        {options.map(({ value: optionValue, label }) => (
+        {TRANSLATION_LANGUAGE_OPTIONS.map(({ value: optionValue, label }) => (
           <option value={optionValue} key={optionValue}>
             {label}
           </option>

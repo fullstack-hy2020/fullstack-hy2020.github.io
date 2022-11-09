@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 import Arrow from '../components/Arrow/Arrow';
 import Element from '../components/Element/Element';
@@ -7,57 +8,36 @@ import SEO from '../components/seo';
 import colors from '../colors';
 import getTranslationPath from '../utils/getPartTranslationPath';
 
-class NotFoundPage extends Component {
-  state = {
-    siteLanguage: 'fi',
-  };
+const NotFoundPage = () => {
+  const { i18n, t } = useTranslation();
 
-  componentDidMount() {
-    const siteLanguage =
-      window.location.pathname.indexOf('/en') > -1
-        ? 'en'
-        : window.location.pathname.indexOf('/zh') > -1
-        ? 'zh'
-        : window.location.pathname.indexOf('/fr') > -1
-        ? 'fr'
-        : 'fi';
+  const title = t('notFoundPage:title');
+  const siteLanguage = i18n.language;
 
-    this.setState({ siteLanguage });
-  }
+  return (
+    <Layout>
+      <SEO
+        title={`${title} | Full stack open`}
+        lang={siteLanguage}
+      />
 
-  render() {
-    const title =
-      this.state.siteLanguage === 'en' ? 'Page not found' 
-      : this.state.siteLanguage === 'fr' ? 'Page non trouvée'
-      : 'Sivua ei löytynyt';
+      <Element className="container spacing--large spacing--after">
+        <h1>404 - {title}</h1>
 
-    return (
-      <Layout>
-        <SEO
-          title={`${title} | Full stack open`}
-          lang={this.state.siteLanguage}
+        <p className="col-10 spacing--small spacing--after">
+          Uncaught ReferenceError: unknown is not defined
+        </p>
+
+        <Arrow
+          className="col-10 arrow__container--with-link"
+          bold
+          thickBorder
+          link={getTranslationPath(siteLanguage, '/')}
+          content={[{ backgroundColor: colors['main'], text: 'Go back home' }]}
         />
-
-        <Element className="container spacing--large spacing--after">
-          <h1>404 - {title}</h1>
-
-          <p className="col-10 spacing--small spacing--after">
-            Uncaught ReferenceError: unknown is not defined
-          </p>
-
-          <Arrow
-            className="col-10 arrow__container--with-link"
-            bold
-            thickBorder
-            link={getTranslationPath(this.state.siteLanguage, '/')}
-            content={[
-              { backgroundColor: colors['main'], text: 'Go back home' },
-            ]}
-          />
-        </Element>
-      </Layout>
-    );
-  }
-}
+      </Element>
+    </Layout>
+  );
+};
 
 export default NotFoundPage;
