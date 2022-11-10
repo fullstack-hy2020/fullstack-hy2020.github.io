@@ -83,7 +83,6 @@ lang: zh
 <!-- Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).-->
 一旦你完成了足够的练习，达到了合格的成绩，你可以从[提交系统](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)下载课程证书。
 
-<!-- The last possible date for taking the exam is 10 January 2023. **Note that you must sign up for the exam by 9 January 2023, at the latest.**-->
 最后可参加考试的日期是2023年1月10日。**注意**，你必须在2023年1月9日之前报名参加考试，这是最晚的时间。
 
 <!-- You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count towards your grade.-->

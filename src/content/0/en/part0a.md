@@ -35,7 +35,7 @@ Proceeding from part <i>n</i> to part <i>n+1</i> is not sensible before enough k
 
 In parts 1-4 you are expected to do <i>at least</i> all of the exercises that are not marked with an asterisk(*). Exercises marked with an asterisk count towards your final grade, but skipping them does not prevent you from doing the compulsory exercises in the next parts. Parts 5- do not have asterisk marked exercises since there is no similar dependency on previous parts.
 
-The speed of completing the course is flexible, and exercises can be submitted until 23:59 [EET](https://en.wikipedia.org/wiki/Eastern_European_Time) on 1 March 2023. 
+The speed of completing the course is flexible.
 
 Exercise completion time statistics can be found via the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -67,8 +67,6 @@ Credits and grades are calculated as follows:
 Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 If you wish to receive university credits, you must complete the course exam. The exam does not count towards your final grade, but you must pass it. More info about the exam [here](/en/part0/general_info#the-course-exam).
-
-The last possible date for taking the exam is 10 January 2023. **Note that you must sign up for the exam by 9 January 2023, at the latest.**
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count towards your grade.
 
@@ -167,7 +165,7 @@ Many of the exercises build a larger application bit by bit. In these cases, sub
 For the official university credits you need to pass the course exam that covers parts 1-5 of the course.
 
 The exam is done in the exercise submission system. Follow the instructions below to complete the exam.
-- Enroll in the course through Open University by 9 Jan 2023.
+- Enroll in the course through Open University.
 - You will get the enrollment link through  [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
 
 ![](../../images/0/enroll1.png)
