@@ -87,7 +87,8 @@ There are also some other free options for Heroku replacements besides Fly.io, e
 Some course participants have also used the following
 
 - [Railway](https://railway.app/)
-- [Replit.com](https://replit.com)
+- [Cyclic](https://www.cyclic.sh/)
+- [Replit](https://replit.com)
 - [CodeSandBox](https://codesandbox.io)
 
 If you know some other good and easy to use services for hosting NodeJS, please let us know!
