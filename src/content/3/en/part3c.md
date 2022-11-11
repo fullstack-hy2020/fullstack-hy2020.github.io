@@ -28,7 +28,7 @@ Below you can see a screenshot where the code execution has been paused in the m
 
 ![](../../images/3/36x.png)
 
-The execution has stopped at the <i>breakpoint</i> in line 63. In the console you can see the value of the <i>note</i> variable. In the top left window you can see other things related to the state of the application.
+The execution has stopped at the <i>breakpoint</i> in line 69. In the console you can see the value of the <i>note</i> variable. In the top left window you can see other things related to the state of the application.
 
 The arrows at the top can be used for controlling the flow of the debugger.
 
