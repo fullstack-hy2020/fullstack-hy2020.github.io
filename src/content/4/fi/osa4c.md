@@ -81,7 +81,7 @@ Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on ta
   {
     username: 'hellas',
     _id: 141414,
-    notes: [141414],
+    notes: [221244],
   },
 ]
 ```
@@ -345,7 +345,7 @@ describe('when there is initially one user at db', () => {
 
 Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, eli uuden ominaisuuden testi kirjoitetaan ennen ominaisuuden ohjelmointia.
 
-Mongoosen validoinnit eivät tarjoa valmista mahdollisuutta kentän arvon uniikkiuden tarkastamiseen.  Ongelmaan on tuonut ratkaisun npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator), valitettavasti mongoose-unique-validator ei kuitenkaan tällä hetkellä (24.1.2022) toimi mongoosen version 6.x kanssa. Joudumme siis toteuttamaan uniikkiuden tarkastuksen itse kontorollerin koodissa.
+Mongoosen validoinnit eivät tarjoa valmista mahdollisuutta kentän arvon uniikkiuden tarkastamiseen.  Ongelmaan on tuonut ratkaisun npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator), valitettavasti mongoose-unique-validator ei kuitenkaan tällä hetkellä (24.1.2022) toimi mongoosen version 6.x kanssa. Joudumme siis toteuttamaan uniikkiuden tarkastuksen itse kontrollerin koodissa.
 
 ```js
 usersRouter.post('/', async (request, response) => {
