@@ -162,7 +162,9 @@ Many of the exercises build a larger application bit by bit. In these cases, sub
 
 ### The course exam
 
-For the official university credits you need to pass the course exam that covers parts 1-5 of the course.
+For the official university credits you need to pass the course exam that covers parts 1-5 of the course
+- If you fail the exam, it can be done again after one week
+- You may continue with submissions after the exam
 
 The exam is done in the exercise submission system. Follow the instructions below to complete the exam.
 - Enroll in the course through Open University.
