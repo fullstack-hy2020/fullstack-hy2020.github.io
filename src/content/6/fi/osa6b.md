@@ -583,8 +583,6 @@ describe('noteReducer', () => {
 
 Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi) -lisäosa, jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
 
-Once the addon in installed, clicking the Redux tab in the browser's console should open the development tools:
-
 Kun lisäosa on asennettu Chromeen, konsolin <i>Redux</i>-välilehti pitäisi näyttää seuraavalta:
 
 ![Redux DevToolsin oikea puoli "State" näyttää storen alkutilan](../../images/6/11ea.png)
