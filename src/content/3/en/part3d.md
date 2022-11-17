@@ -231,7 +231,7 @@ We will answer all of the questions:
 
 ![](../../images/3/52be.png)
 
-The configuration will be saved in the _.eslintrc.js_ file:
+The configuration will be saved in the _.eslintrc.cjs_ file:
 
 ```js
 module.exports = {
