@@ -154,8 +154,8 @@ const jwt = require('jsonwebtoken') //highlight-line
   //highlight-start
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace(/^Bearer /, '')
   }
   return null
 }
