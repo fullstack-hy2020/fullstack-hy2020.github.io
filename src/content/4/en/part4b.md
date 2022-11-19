@@ -797,7 +797,7 @@ notesRouter.delete('/:id', async (request, response, next) => {
   try {
     await Note.findByIdAndRemove(request.params.id)
     response.status(204).end()
-  } catch (exception) {
+  } catch(exception) {
     next(exception)
   }
 })
