@@ -468,7 +468,7 @@ Si noti che il branch <i>main</i> del repository contiene il codice di una versi
 
 Se cloni il progetto, lancia il comando _npm install_ prima di avviare l'applicazione con _npm start_.
 
-### QUando l'applicazione si rompe
+### Quando l'applicazione si rompe
 
 All'inizio della carriera da sviluppatore (e a volte in realtà anche dopo 30 di sviluppo), capita che la tua applicazione semplicemente si rompa completamente. Questo accade ancor più di frequente con i linguaggi dinamici, come JavaScript, dove il compilatore non fa controlli sui tipi di dato, come ad esempio i parametri delle funzioni o i valori che restituiscono.
 
@@ -739,6 +739,6 @@ L'applicazione potrebbe ad esempio apparire così:
 
 <h4>2.5: Separa i moduli</h4>
 
-Dichiara il componente <i>Course</i> come modulo separato, che viene importato dal componente <i>App</i>. Puoi includere nello stesso moculo tutti i sottocomponenti di <i>Course</i>.
+Dichiara il componente <i>Course</i> come modulo separato, che viene importato dal componente <i>App</i>. Puoi includere nello stesso modulo tutti i sottocomponenti di <i>Course</i>.
 
 </div>
