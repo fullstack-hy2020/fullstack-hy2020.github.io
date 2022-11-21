@@ -156,7 +156,7 @@ Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i
 
 #### Exercise 12.14: Testing during the build process
 
-One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests when this might be a good idea. 
+One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where this might be a good idea. 
 
 Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
 
