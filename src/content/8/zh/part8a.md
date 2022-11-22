@@ -130,7 +130,7 @@ type Query {
  除了<i>phone</i>，所有的String字段都必须被赋予一个值。这在模式上以感叹号标示。字段<i>id</i>的类型是<i>ID</i>。<i>ID</i>字段是字符串，但GraphQL确保它们是唯一的。
 
 <!-- The second type is a [Query](https://graphql.org/learn/schema/#the-query-and-mutation-types). Practically every GraphQL schema describes a Query, which tells what kind of queries can be made to the API.-->
- 第二种类型是【查询】(https://graphql.org/learn/schema/#the-query-and-mutation-types)。实际上每个GraphQL模式都描述了一个查询，它告诉人们可以对API进行什么样的查询。
+ 第二种类型是 [查询](https://graphql.org/learn/schema/#the-query-and-mutation-types)。实际上每个GraphQL模式都描述了一个查询，它告诉人们可以对API进行什么样的查询。
 
 <!-- The phonebook describes three different queries. _personCount_ returns an integer, _allPersons_ returns a list of <i>Person</i> objects and <i>findPerson</i> is given a string parameter and it returns a <i>Person</i> object.-->
  电话簿描述了三种不同的查询。_personCount_返回一个整数，_allPersons_返回一个<i>Person</i>对象的列表，<i>findPerson</i>给出一个字符串参数，它返回一个<i>Person</i>对象。
