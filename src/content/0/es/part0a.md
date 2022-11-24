@@ -41,6 +41,10 @@ Sin embargo, tenga en cuenta que la fecha límite para realizar el examen de cr�
 
 Las estadísticas del tiempo de finalización del ejercicio se pueden encontrar en el [sistema de presentación](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
+### Canal de Discord y Telegram para el curso
+
+Puede discutir sobre el curso y temas relacionados en nuestro grupo dedicado en Discord https://study.cs.helsinki.fi/discord/join/fullstack y en Telegram: https://t.me/fullstackcourse. Discord tiene canales fullstack_general y especifico para cada parte (nombres de canal con prefijo fullstack) para discusiones relacionadas con el curso. Tenga en cuenta que el canal chat del grupo no es adecuado para la discusión relacionada con el curso. ¡Únase a la conversación!
+
 ### Calificación
 
 El curso se puede tomar como un curso más corto con un valor de 3 créditos o como el curso completo con un valor de 5-9 créditos, según la cantidad de ejercicios presentados.
@@ -136,7 +140,7 @@ Incluso si no se registra en Open University para el examen, aún puede descarga
 
 Si ya ha realizado el curso como MOOC o como curso universitario, ahora puede ampliar su curso.
 
-#### Ampliación desde Full stack open 2019 o 2020
+#### Ampliación en Full stack
 
 ¡Puede continuar donde lo dejó! Si desea volver a enviar una parte completa, comuníquese con el personal del curso a través de [correo electrónico](mailto:matti.luukkainen@helsinki.fi) o Telegram [@mluukkai](https://t.me/mluukkai), con su nombre de usuario de Github y las partes que le gustaría eliminar de sus envíos.
 
@@ -150,16 +154,9 @@ La "transferencia de crédito" de las partes completadas anteriormente ocurre en
 
 Si ya aprobó el examen del curso (excluyendo el examen del curso de tres créditos) y ahora está ampliando su curso, no es necesario que vuelva a realizar el examen.
 
-### Cambios desde el año 2019
+### Continuando el curso en el año 2023
 
-- Solo hay cambios menores en las partes 0-4.
-- La parte 5d, <i>pruebas de extremo a extremo (end-to-end testing)</i> utilizando la biblioteca [Cypress.io](https://www.cypress.io), es material casi completamente nuevo. El uso de hooks personalizados se ha trasladado de la parte 5 a la parte 7 con contenido nuevo.
-- La Parte 6, que trata sobre Redux, se concentra en la nueva API Redux basada en hooks.
-- El material sobre react-router en la parte 7 también se ha actualizado para usar Hook API. Semantic UI React se ha reemplazado con la biblioteca MaterialUI debido a la falta de mantenimiento.
-- La Parte 8 de GraphQL tiene actualizaciones importantes, especialmente en Apollo Client, que finalmente tiene API estables basadas en Hooks.
-- La parte 9 de TypeScript, la parte 10 de React Native y la parte 11 de CI/CD es completamente nueva.
-
-El material del curso del año pasado se puede encontrar [aquí](https://fullstackopen-2019.github.io/).
+La versión 2022 del curso finaliza el 1 de marzo de 2023. Al finalizar habrá una descanso de dos semanas por mantenimiento. Durante el descanso, el material permanece en línea y también se pueden enviar ejercicios. Durante el descanso el contenido del curso puede cambiar un poco, no se ha planeado nada demasiado dramático hasta el momento. Todos los ejercicios enviados para la versión 2022 se pueden usar en la edición 2023, por lo que básicamente se puede continuar el curso sin preocuparse demasiado por las diferentes versiones.
 
 ### Envío de ejercicios
 
