@@ -613,7 +613,7 @@ You will suffer from JavaScript fatigue yourself during this course. Fortunately
 <div class="tasks"> 
   <h3>Exercises 0.1.-0.6.</h3>
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+The exercises are submitted via GitHub, and by marking the exercises as done in the "my submissions" tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mluukkai_ as a collaborator to it.
 
