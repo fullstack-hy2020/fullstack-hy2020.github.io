@@ -218,7 +218,7 @@ $ docker run -p 3000:3000 -v "$(pwd):/usr/src/app/" hello-front-dev
 
 Now we can edit the file <i>src/App.js</i>, and the changes should be hot-loaded to the browser!
 
-Note that it takes some time (for me it took 50 seconds!) for the frontend to started with _npm start_ in the development mode. The frontend is has started when the following appears in the container log:
+Note that it takes some time (for me it took 50 seconds!) for the frontend to get started with _npm start_ in the development mode. The frontend has started when the following appears in the container log:
 
 ```bash
 You can now view hello-frontend in the browser.
