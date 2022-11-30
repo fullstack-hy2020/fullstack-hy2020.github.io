@@ -250,7 +250,7 @@ Let's implement a GraphQL server with today's leading library: [Apollo Server](h
 Create a new npm project with _npm init_ and install the required dependencies.
 
 ```bash
-npm install apollo-server graphql
+npm install @apollo/server graphql
 ```
 
 Also create a `index.js` file in your project's root directory.
@@ -258,7 +258,7 @@ Also create a `index.js` file in your project's root directory.
 The initial code is as follows: 
 
 ```js
-const { ApolloServer, gql } = require('apollo-server')
+const { ApolloServer, gql } = require('@apollo/server')
 
 let persons = [
   {
@@ -717,7 +717,7 @@ The errors from those rules are handled by [the error handling mechanism of Apol
 Let's block adding the same name to the phonebook multiple times: 
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('apollo-server') // highlight-line
+const { ApolloServer, UserInputError, gql } = require('@apollo/server') // highlight-line
 
 // ...
 
