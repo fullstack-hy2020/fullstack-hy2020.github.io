@@ -142,7 +142,7 @@ Let us start by extracting the schema definition to file
 <i>schema.js</i>
 
 ```js
-const { gql } = require('apollo-server')
+const { gql } = require('@apollo/server')
 
 const typeDefs = gql`
   type User {
@@ -198,7 +198,7 @@ module.exports = typeDefs
 The resolvers definition is moved to the file <i>resolvers.js</i>
 
 ```js
-const { UserInputError, AuthenticationError } = require('apollo-server')
+const { UserInputError, AuthenticationError } = require('@apollo/server')
 const jwt = require('jsonwebtoken')
 const Person = require('./models/person')
 const User = require('./models/user')
@@ -311,15 +311,18 @@ module.exports = resolvers
 Next we will replace Apollo Server with [Apollo Server Express](https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express). Following libraries are installed
 
 ```
-npm install apollo-server-express apollo-server-core express @graphql-tools/schema
+npm install express cors body-parser @graphql-tools/schema
 ```
 and the file <i>index.js</i> changes to:
 
 ```js
-const { ApolloServer } = require('apollo-server-express')
-const { ApolloServerPluginDrainHttpServer } = require('apollo-server-core')
+const { ApolloServer } = require('@apollo/server')
+const { expressMiddleware } = require('@apollo/server/express4')
+const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
+const cors = require('cors')
+const bodyParser = require('body-parser')
 const http = require('http')
 
 const jwt = require('jsonwebtoken')
@@ -367,13 +370,26 @@ const start = async () => {
     },
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
+  
+  app.use(
+    '/',
+    cors(),
+    bodyParser.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const auth = req ? req.headers.authorization : null
+        if (auth && auth.toLowerCase().startsWith('bearer ')) {
+          const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
+          const currentUser = await User.findById(decodedToken.id).populate(
+            'friends'
+          )
+          return { currentUser }
+        }  
+      },
+    }),
+  );
 
   await server.start()
-
-  server.applyMiddleware({
-    app,
-    path: '/',
-  })
 
   const PORT = 4000
 
