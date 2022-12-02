@@ -74,7 +74,7 @@ flyctl auth token
 
 You'll need the token soon for your deployment workflow!
 
-Before setting up the deployment pipelinem let us ensure that a manual deployment with the command <i>flyctl deploy</i> works.
+Before setting up the deployment pipeline let us ensure that a manual deployment with the command <i>flyctl deploy</i> works.
 
 You most likely need to do at least two changes. Firstly, define the Node version to use in the file <i>package.json</i> to match one used in your machine. For me it is 16.13.2:
 

@@ -55,7 +55,7 @@ We also included a few validations. _required: true_, which makes sure that a va
 We can get the application to mostly work with the following changes: 
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('apollo-server')
+const { ApolloServer, UserInputError, gql } = require('@apollo/server')
 const mongoose = require('mongoose')
 const Person = require('./models/person')
 
