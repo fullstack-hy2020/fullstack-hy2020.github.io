@@ -244,7 +244,7 @@ const addNote = (event) => {
 }
 ```
 
-Primero creamos un nuevo objeto para la nota llamado <em>noteObject</em> que recibirá su contenido del esatdo del componente <em>newNote</em>. El identificador único <i>id</i> se genera en función del número total de notas. Este método funciona para nuestra aplicación ya que las notas nunca se eliminan. Con la ayuda de la función <em>Math.random()</em>, nuestra nota tiene un 50% de posibilidades de ser marcada como importante.
+Primero creamos un nuevo objeto para la nota llamado <em>noteObject</em> que recibirá su contenido del estado del componente <em>newNote</em>. El identificador único <i>id</i> se genera en función del número total de notas. Este método funciona para nuestra aplicación ya que las notas nunca se eliminan. Con la ayuda de la función <em>Math.random()</em>, nuestra nota tiene un 50% de posibilidades de ser marcada como importante.
 
 La nueva nota se agrega a la lista de notas usando el método de matriz [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), introducido en la [parte 1](/es/part1/java_script#arrays):
 
