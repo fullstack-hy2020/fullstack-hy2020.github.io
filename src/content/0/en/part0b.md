@@ -653,7 +653,7 @@ Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first f
 
 <i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
 
-  <h4>0.4: New note</h4>
+  <h4>0.4: New note diagram</h4>
 
 In chapter [Loading a page containing JavaScript - review](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review) the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
@@ -692,11 +692,11 @@ The idea of these exercises is to read the text through once more, and to think 
 
 **Note** perhaps the best way to do diagrams is the [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor) syntax that is now implemented in [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/) markdown pages! 
 
-  <h4>0.5: Single page app</h4>
+  <h4>0.5: Single page app diagram</h4>
 
 Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
-  <h4>0.6: New note</h4>
+  <h4>0.6: New note in Single page app diagram</h4>
 
 Create a diagram depicting the situation where the user creates a new note using the single page version of the app. 
 
