@@ -601,7 +601,7 @@ describe('noteReducer', () => {
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux. It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console. When the store is created using Redux Toolkit's <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.
 
-Once the addon in installed, clicking the <i>Redux</i> tab in the browser's console should open the development tools:
+Once the addon is installed, clicking the <i>Redux</i> tab in the browser's console should open the development tools:
 
 ![](../../images/6/11ea.png)
 
