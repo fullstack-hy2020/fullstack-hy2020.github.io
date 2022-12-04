@@ -110,7 +110,7 @@ If you decide to use [Fly.io](https://fly.io/) begin by installing their flyctl 
 
 By default everyone gets two free virtual machines that can be used for running two apps at the same time.
 
-Note that the Fly.io instructions have only been added to this course on the 28th of August 2022. If you run into problems, please ask for help on Discord! If you're build keeps failing due to unhealthy checks, try changing your port from 3001 to 8080.
+Note that the Fly.io instructions have only been added to this course on the 28th of August 2022. If you run into problems, please ask for help on Discord! If your build keeps failing due to unhealthy checks, try changing your port from 3001 to 8080.
 Don't forget to add your `cors` package to `dependencies` in `package.json` and you might need to remove the `morgan` code from the server application.
 
 Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via command line with the command
