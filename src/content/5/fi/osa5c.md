@@ -559,7 +559,7 @@ const NoteForm = ({ createNote }) => {
         <input
           value={newNote}
           onChange={handleChange}
-          placeholder='write here note content' // highlight-line 
+          placeholder='write note content here' // highlight-line 
         />
         <input
           value={...}
@@ -580,7 +580,7 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 
   render(<NoteForm createNote={createNote} />) 
 
-  const input = screen.getByPlaceholderText('write here note content') // highlight-line 
+  const input = screen.getByPlaceholderText('write note content here') // highlight-line 
   const sendButton = screen.getByText('save')
 
   userEvent.type(input, 'testing a form...' )
@@ -727,7 +727,7 @@ Tee testi, joka varmistaa että blogin näyttävä komponentti renderöi blogin 
 
 #### 5.14: blogilistan testit, step2
 
-Tee testi, joka varmistaa että myös url, likejen määrä ja author näytetään, kun blogin kaikki tiedot näyttävää nappia on painettu.
+Tee testi, joka varmistaa että myös url, likejen määrä ja käyttäjä näytetään, kun blogin kaikki tiedot näyttävää nappia on painettu.
 
 #### 5.15: blogilistan testit, step3
 
