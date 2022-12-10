@@ -273,7 +273,7 @@ exit 0  # exit status 0 means that the script "succeeds"
 Ensure now that the deployment works. Note that to get the path to the script file right, it may be beneficial to log in to your virtual machine console to see where the files reside. Logging in is done with the command
 
 ```bash
-flyctl open console
+flyctl ssh console -t YOUR_AUTH_TOKEN
 ```
 
 Now when you know that the script based health check works, it is time to define the real health check.
