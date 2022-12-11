@@ -7,26 +7,21 @@ lang: es
 
 <div class="content">
 
-
 ### Mostrar el formulario de inicio de sesión solo cuando sea apropiado
 
 Modifiquemos la aplicación para que el formulario de inicio de sesión no se muestre por defecto:
 
 ![](../../images/5/10e.png)
 
-
 El formulario de inicio de sesión aparece cuando el usuario presiona el botón <i>login</i>:
 
 ![](../../images/5/11e.png)
-
 
 El usuario puede cerrar el formulario de inicio de sesión haciendo clic en el botón <i>cancel</i>.
 
 Comencemos extrayendo el formulario de inicio de sesión en su propio componente:
 
 ```js
-import React from 'react'
-
 const LoginForm = ({
    handleSubmit,
    handleUsernameChange,
@@ -66,6 +61,7 @@ export default LoginForm
 
 El estado y todas las funciones relacionadas con él se definen fuera del componente y se pasan al componente como props.
 
+
 Tenga en cuenta que los props se asignan a las variables mediante la <i>desestructuración</i>, lo que significa que en lugar de escribir:
 
 ```js
@@ -91,7 +87,8 @@ const LoginForm = (props) => {
 ```
 
 
-donde se accede a las propiedades del objeto _props_ mediante, por ejemplo , _props.handleSubmit_, las propiedades se asignan directamente a sus propias variables.
+donde se accede a las propiedades del objeto _props_ mediante, por ejemplo, _props.handleSubmit_, las propiedades se asignan directamente a sus propias variables.
+
 
 Una forma rápida de implementar la funcionalidad es cambiar la función _loginForm_ del componente <i>App</i> así:
 
@@ -131,6 +128,7 @@ const App = () => {
 
 El estado de los componentes de <i>App</i> ahora contiene el booleano <i>loginVisible</i>, que define si el formulario de inicio de sesión se debe mostrar al usuario o no.
 
+
 El valor de loginVisible se alterna con dos botones. Ambos botones tienen sus controladores de eventos definidos directamente en el componente:
 
 ```js
@@ -140,7 +138,7 @@ El valor de loginVisible se alterna con dos botones. Ambos botones tienen sus co
 ```
 
 
-La visibilidad del componente se define dándole al componente una regla de estilo [en línea](/es/part2/adding_styles_to_react_app#inline-styles), donde el valor de la propiedad [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) es <i>none</i> si no queremos que se muestre el componente:
+La visibilidad del componente se define dándole al componente una regla de estilo [en línea](/es/part2/agregar_estilos_a_la_aplicacion_react#estilos-en-linea), donde el valor de la propiedad [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) es <i>none</i> si no queremos que se muestre el componente:
 
 ```js
 const hideWhenVisible = { display: loginVisible ? 'none' : '' }
@@ -168,7 +166,8 @@ Si _loginVisible_ es <i>false</i>, <i>display</i> no recibirá ningún valor rel
 
 ### Los componentes hijos, también conocidos como props.children
 
-El código relacionado con la gestión de la visibilidad del formulario de inicio de sesión podría considerarse su propia entidad lógica y, por esta razón, sería bueno extraerlo del componente <i>App</i> en su propio componente independiente.
+
+El código relacionado con la gestión de la visibilidad del formulario de inicio de sesión podría considerarse su propia entidad lógica, y por esta razón, sería bueno extraerlo del componente <i>App</i> en su propio componente independiente.
 
 Nuestro objetivo es implementar un nuevo componente <i>Togglable</i> que se pueda usar de la siguiente manera:
 
@@ -187,6 +186,7 @@ Nuestro objetivo es implementar un nuevo componente <i>Togglable</i> que se pued
 
 La forma en que se utiliza el componente es ligeramente diferente de nuestros componentes anteriores. El componente tiene etiquetas de apertura y cierre que rodean un componente <i>LoginForm</i>. En la terminología de React, <i>LoginForm</i> es un componente hijo de <i>Togglable</i>.
 
+
 Podemos agregar cualquier elemento de React que queramos entre las etiquetas de apertura y cierre de <i>Togglable</i>, como este, por ejemplo:
 
 ```js
@@ -200,7 +200,7 @@ Podemos agregar cualquier elemento de React que queramos entre las etiquetas de 
 El código para el componente <i>Togglable</i> se muestra a continuación:
 
 ```js
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 const Togglable = (props) => {
   const [visible, setVisible] = useState(false)
@@ -230,6 +230,7 @@ export default Togglable
 
 
 La parte nueva e interesante del código es [props.children](https://reactjs.org/docs/glossary.html#propschildren), que se utiliza para hacer referencia a los componentes hijos del componente. Los componentes hijos son los elementos de React que definimos entre las etiquetas de apertura y cierre de un componente.
+
 
 Esta vez, los hijos se renderizan en el código que se utiliza para renderizar el componente en sí:
 
@@ -275,7 +276,6 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
   )
 }
 ```
-
 A continuación, definamos el componente de formulario dentro de un componente <i>Togglable</i>:
 
 ```js
@@ -346,7 +346,8 @@ El atributo de estado <i>newNote</i>  y el controlador de eventos responsable de
 
 Solo queda una prop, la función _createNote_, que el formulario llama cuando se crea una nueva nota.
 
-El componente _App_ se vuelve más simple ahora que nos hemos deshecho del estado <i>newNote</i> y su controlador de eventos. La función _addNote_ para crear nuevas notas recibe una nueva nota como parámetro, y la función es la única prop que enviamos al formulario:
+El componente _App_ se vuelve más simple ahora que nos hemos deshecho del estado <i>newNote</i> y su controlador de eventos.
+La función _addNote_ para crear nuevas notas recibe una nueva nota como parámetro, y la función es la única prop que enviamos al formulario:
 
 ```js
 const App = () => {
@@ -371,7 +372,7 @@ const App = () => {
 
 Podríamos hacer lo mismo con el formulario de inicio de sesión, pero lo dejaremos para un ejercicio opcional.
 
-El código de la aplicación se puede encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), rema <i>part5-5</i>.
+El código de la aplicación se puede encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5), rama <i>part5-5</i>.
 
 ### Referencias a componentes con ref
 
@@ -384,7 +385,7 @@ Hay muchas formas de implementar el cierre del formulario desde el componente pa
 Hagamos los siguientes cambios en el componente <i>App</i>:
 
 ```js
-import React, { useState, useRef } from 'react' // highlight-line
+import { useState, useRef } from 'react' // highlight-line
 
 const App = () => {
   // ...
@@ -400,15 +401,14 @@ const App = () => {
 }
 ```
 
-
-El hook [useRef](https://reactjs.org/docs/hooks-reference.html#useref) se utiliza para crear una referencia <i>noteFormRef</i>, que se asigna al componente <i>Togglable</i> que contiene el formulario para crear la nota. La variable <i>noteFormRef</i> actúa como referencia al componente. Este hook asegura que se mantenga la misma referencia (ref) en todas las rerenderizaciones del componente.
+El hook [useRef](https://reactjs.org/docs/hooks-reference.html#useref) se utiliza para crear una referencia <i>noteFormRef</i>, que se asigna al componente <i>Togglable</i> que contiene el formulario para crear la nota. La variable <i>noteFormRef</i> actúa como referencia al componente. Este hook asegura que se mantenga la misma referencia (ref) en todas las re-renderizaciones del componente.
 
 También realizamos los siguientes cambios en el componente <i>Togglable</i>:
 
 ```js
-import React, { useState, useImperativeHandle } from 'react' // highlight-line
+import { useState, forwardRef, useImperativeHandle } from 'react' // highlight-line
 
-const Togglable = React.forwardRef((props, ref) => { // highlight-line
+const Togglable = forwardRef((props, refs) => { // highlight-line
   const [visible, setVisible] = useState(false)
 
   const hideWhenVisible = { display: visible ? 'none' : '' }
@@ -419,7 +419,7 @@ const Togglable = React.forwardRef((props, ref) => { // highlight-line
   }
 
 // highlight-start
-  useImperativeHandle(ref, () => {
+  useImperativeHandle(refs, () => {
     return {
       toggleVisibility
     }
@@ -447,7 +447,7 @@ La función que crea el componente está envuelta dentro de una llamada de funci
 
 El componente usa el hook [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) para que su función <i>toggleVisibility</i> esté disponible fuera del componente.
 
-Ahora podemos ocultar el formulario llamando a n<i>noteFormRef.current.toggleVisibility()</i> después de que se haya creado una nueva nota:
+Ahora podemos ocultar el formulario llamando a <i>noteFormRef.current.toggleVisibility()</i> después de que se haya creado una nueva nota:
 
 ```js
 const App = () => {
@@ -464,9 +464,9 @@ const App = () => {
 }
 ```
 
-En resumen, la función [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) es un hook de React, que se usa para definir funciones en un componente que se puede invocar desde fuera del componente.
+En resumen, la función [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) es un hook de React, que se usa para definir funciones en un componente que se pueden invocar desde fuera del componente.
 
-Este truco funciona para cambiar el estado de un componente, pero parece un poco desagradable. Podríamos haber logrado la misma funcionalidad con un código un poco más limpio usando los "viejos" componentes de clase de React. Analizaremos estos componentes de la clase durante la parte 7 del material del curso. Hasta ahora, esta es la única situación en la que el uso de hooks de React conduce a un código que no es más limpio que con los componentes de clase.
+Este truco funciona para cambiar el estado de un componente, pero parece un poco desagradable. Podríamos haber logrado la misma funcionalidad con un código un poco más limpio usando los "viejos" componentes de clase de React. Analizaremos estos componentes de clase durante la parte 7 del material del curso. Hasta ahora, esta es la única situación en la que el uso de hooks de React conduce a un código que no es más limpio que con los componentes de clase.
 
 También [hay otros casos de uso](https://reactjs.org/docs/refs-and-the-dom.html) para las refs además de acceder a los componentes de React.
 
@@ -519,7 +519,7 @@ El atributo <i>ref</i> se utiliza para asignar una referencia a cada uno de los 
 
 #### 5.5 Frontend de la lista de blogs, paso 5
 
-Cambie el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado. Utilice una funcionalidad similar a la que se mostró [anteriormente en esta parte del material del curso](/es/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). Si desea hacerlo, puede utilizar el componente <i>Togglable</i> definido en la parte 5.
+Cambie el formulario para crear publicaciones de blog para que solo se muestre cuando sea apropiado. Utilice una funcionalidad similar a la que se mostró [anteriormente en esta parte del material del curso](/es/part5/props_children_y_proptypes#mostrar-el-formulario-de-inicio-de-sesion-solo-cuando-sea-apropiado). Si desea hacerlo, puede utilizar el componente <i>Togglable</i> definido en la parte 5.
 
 Por defecto, el formulario no es visible
 
@@ -535,9 +535,9 @@ El formulario se cierra cuando se crea un nuevo blog.
 
 Separe el formulario para crear un nuevo blog en su propio componente (si aún no lo ha hecho) y mueva todos los estados necesarios para crear un nuevo blog a este componente.
 
-El componente debe funcionar como el componente <i>NoteForm</i> del [material](/es/part5/props_children_and_proptypes) de esta pieza.
+El componente debe funcionar como el componente <i>NoteForm</i> del [material](/es/part5/props_children_y_proptypes) de esta pieza.
 
-#### 5.7 * Frontend de la lista de blogs, paso 7
+#### 5.7* Frontend de la lista de blogs, paso 7
 
 Agreguemos un botón a cada blog, que controla si se muestran o no todos los detalles sobre el blog.
 
@@ -551,7 +551,7 @@ En este punto, el botón <i>like</i> no necesita hacer nada.
 
 La aplicación que se muestra en la imagen tiene un poco de CSS adicional para mejorar su apariencia.
 
-Es fácil agregar estilos a la aplicación como se muestra en la parte 2 usando estilos [en línea](/es/part2/adding_styles_to_react_app#inline-styles):
+Es fácil agregar estilos a la aplicación como se muestra en la parte 2 usando estilos [en línea](/es/part2/agregar_estilos_a_la_aplicacion_react#estilos-en-linea):
 
 ```js
 const Blog = ({ blog }) => {
@@ -575,7 +575,7 @@ const Blog = ({ blog }) => {
 
 **NB:** aunque la funcionalidad implementada en esta parte es casi idéntica a la funcionalidad proporcionada por el componente <i>Togglable</i>, el componente no se puede utilizar directamente para lograr el comportamiento deseado. La solución más sencilla será agregar un estado a la publicación del blog que controla el formulario mostrado de la publicación del blog.
 
-#### 5.8 *: Frontend de la lista de blogs, paso 8
+#### 5.8: Frontend de la lista de blogs, paso 8
 
 Implemente la funcionalidad para el botón like. Los likes aumentan al hacer un solicitud de HTTP _PUT_ a la dirección única de la publicación del blog en el backend.
 
@@ -607,14 +607,15 @@ Debería realizar una solicitud HTTP PUT a la dirección <i>/api/blogs/5a43fde2c
   url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
 }
 ```
+El Backend también debe ser actualizado para manejar la referencia al usuario.
 
 **Una última advertencia:** si nota que está usando async/await y el método _then_ en el mismo código, es casi seguro que está haciendo algo mal. Use uno u otro, y nunca uses ambos al mismo tiempo "por si acaso".
 
-#### 5.9 *: Frontend de la lista de blogs, paso 9
+#### 5.9: Frontend de la lista de blogs, paso 9
 
-Modifique la aplicación para enumerar las publicaciones del blog por el número de <i>likes</i>. La clasificación de las publicaciones del blog se puede hacer con el método de array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
+Modifique la aplicación para enumerar las publicaciones del blog por el número de <i>likes</i>. La clasificación de las publicaciones del blog se puede hacer con el método de array [sort](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Global_Objects/Array/sort).
 
-#### 5.10 *: Frontend de la lista de blogs, paso 10
+#### 5.10: Frontend de la lista de blogs, paso 10
 
 Agregue un nuevo botón para eliminar publicaciones de blog. También implemente la lógica para eliminar publicaciones del blog en el backend.
 
@@ -622,7 +623,7 @@ Su aplicación podría verse así:
 
 ![](../../images/5/14ea.png)
 
-El cuadro de diálogo de confirmación para eliminar una publicación de blog es fácil de implementar con la función [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm).
+El cuadro de diálogo de confirmación para eliminar una publicación de blog es fácil de implementar con la función [window.confirm](https://developer.mozilla.org/es/docs/Web/API/Window/confirm).
 
 Muestre el botón para eliminar una publicación de blog solo si la publicación de blog fue agregada por el usuario.
 
@@ -632,15 +633,15 @@ Muestre el botón para eliminar una publicación de blog solo si la publicación
 
 ### PropTypes
 
-El componente <i>Togglable</i> asume que se le da el texto para el botón a través del prop <i>buttonLabel</i>. Si nos olvidamos de definirlo al componente:
+El componente <i>Togglable</i> asume que se le da el texto para el botón a través del prop <i>buttonLabel</i>. Si nos olvidamos de definir este prop al componente:
 
 ```js
 <Togglable> buttonLabel forgotten... </Togglable>
 ```
 
-La aplicación funciona, pero el navegador muestra un botón que no tiene texto del label.
+La aplicación funciona, pero el navegador muestra un botón sin texto.
 
-Nos gustaría hacer cumplir que cuando se usa el componente <i>Togglable</i>, se debe dar un valor al prop de texto del label del botón.
+Nos gustaría hacer cumplir que cuando se usa el componente <i>Togglable</i>, se debe dar un valor al prop de texto del botón.
 
 Los props esperados y requeridos de un componente se pueden definir con el paquete [prop-types](https://github.com/facebook/prop-types). Instalemos el paquete:
 
@@ -667,7 +668,7 @@ La consola mostrará el siguiente mensaje de error si el prop se deja sin defini
 ![](../../images/5/15.png)
 
 
-La aplicación todavía funciona y nada nos obliga a definir props a pesar de las definiciones de PropTypes. Eso sí, es extremadamente poco profesional dejar <i>cualquier</i> salida roja en la consola del navegador.
+La aplicación todavía funciona y nada nos obliga a definir props a pesar de las definiciones de PropTypes. Eso sí, es extremadamente poco profesional dejar <i>cualquier</i> output de color rojo en la consola del navegador.
 
 También definamos PropTypes para el componente <i>LoginForm</i>:
 
@@ -699,7 +700,7 @@ Si el tipo de un prop pasado es incorrecto, por ejemplo, si intentamos definir e
 
 ### ESlint
 
-En la parte 3 configuramos la herramienta de estilo de código para el backend [ESlint](/es/part3/validation_and_es_lint#lint). Tomemos ESlint para usarlo también en el frontend.
+En la parte 3 configuramos la herramienta de estilo de código para el backend [ESlint](/es/part3/validacion_y_es_lint#lint). Utilicemos ESlint también en el frontend.
 
 Create-react-app ha instalado ESlint en el proyecto de forma predeterminada, por lo que todo lo que nos queda por hacer es definir nuestra configuración deseada en el archivo <i>.eslintrc.js</i>.
 
@@ -760,7 +761,8 @@ module.exports = {
           "error", { "before": true, "after": true }
       ],
       "no-console": 0,
-      "react/prop-types": 0
+      "react/prop-types": 0,
+      "react/react-in-jsx-scope": "off"
   },
   "settings": {
     "react": {
@@ -801,7 +803,7 @@ Creemos también un script npm para ejecutar el lint:
 
 El Componente _Togglable_ provoca una advertencia de aspecto desagradable <i>Falta el nombre para mostrar de la definición del componente<i>:
 
-![](../../images/5/25ea.png)
+![](../../images/5/25x.png)
 
 React-devtools también revela que el componente no tiene nombre:
 
@@ -810,7 +812,7 @@ React-devtools también revela que el componente no tiene nombre:
 Afortunadamente, esto es fácil de solucionar.
 
 ```js
-import React, { useState, useImperativeHandle } from 'react'
+import { useState, useImperativeHandle } from 'react'
 import PropTypes from 'prop-types'
 
 const Togglable = React.forwardRef((props, ref) => {
@@ -824,6 +826,9 @@ export default Togglable
 
 Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part5-7</i> de [este repositorio de github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 
+Ten en cuenta que create-react-app también tiene una [configuracion de ESLint por defecto](https://www.npmjs.com/package/eslint-config-react-app), que ahora sobrescribimos. [La documentacion](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) menciona que esta bien reemplazar la configuración por defecto pero no nos anima a hacerlo:
+<i>Recomendamos enérgicamente extender la configuración base, ya que removerla podría introducir problemas difíciles de encontrar</i>.
+
 </div>
 
 <div class="tasks">
@@ -832,7 +837,7 @@ Puede encontrar el código para nuestra aplicación actual en su totalidad en la
 
 #### 5.11: Frontend de la lista de blogs, paso 11
 
-Define PropTypes para uno de los componentes de su aplicación.
+Defina PropTypes para uno de los componentes de su aplicación.
 
 #### 5.12: Frontend de la lista de blogs, paso 12
 
