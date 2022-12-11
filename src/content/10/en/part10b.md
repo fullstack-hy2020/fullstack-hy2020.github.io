@@ -517,7 +517,7 @@ When we start to expand our application we will need a way to transition between
 
 Routing in a React Native application is a bit different to routing in a web application. The main difference is that we can't reference pages with URLs, which we type in to the browser's address bar, and can't navigate back and forth through user's history using the browsers [history API](https://developer.mozilla.org/en-US/docs/Web/API/History_API). However, this is just the matter of the router interface we are using.
 
-With React Native we can use the entire React router's core, including the hooks and components. The only difference to the browser environment is that we must replace the <em>BrowserRouter</em> with React Native compatible [NativeRouter](https://reactrouter.com/docs/en/v6/api#nativerouter), provided by the [react-router-native](https://www.npmjs.com/package/react-router-native) library. Let's get started by installing the <i>react-router-native</i> library:
+With React Native we can use the entire React router's core, including the hooks and components. The only difference to the browser environment is that we must replace the <em>BrowserRouter</em> with React Native compatible [NativeRouter](https://reactrouter.com/en/6.4.5/router-components/native-router), provided by the [react-router-native](https://www.npmjs.com/package/react-router-native) library. Let's get started by installing the <i>react-router-native</i> library:
 
 ```shell
 npm install react-router-native
@@ -604,7 +604,7 @@ const SignIn = () => {
 export default SignIn;
 ```
 
-Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. Users should be able to navigate between the two views by pressing the tabs (hint: you can use the React router's [Link](https://reactrouter.com/docs/en/v6/api#link-react-native) component).
+Set up a route for this <em>SignIn</em> component in the <em>Main</em> component. Also add a tab with text "Sign in" in to the app bar next to the "Repositories" tab. Users should be able to navigate between the two views by pressing the tabs (hint: you can use the React router's [Link](https://reactrouter.com/en/6.4.5/components/link-native) component).
 
 #### Exercise 10.7: scrollable app bar
 
