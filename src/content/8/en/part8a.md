@@ -250,8 +250,10 @@ Let's implement a GraphQL server with today's leading library: [Apollo Server](h
 Create a new npm project with _npm init_ and install the required dependencies.
 
 ```bash
-npm install @apollo/server graphql
+npm install apollo-server@3.10.1 graphql
 ```
+
+**Note** at the time of writing (10th Dec 2022) the code used in this part is not fully compatible with the new version of the Apollo Server, and because of this, if you want everything to work smoothly you should install the version _3.10.1_. Material shall be updated to use the most recent Apollo Server in early 2023.
 
 Also create a `index.js` file in your project's root directory.
 
@@ -490,7 +492,6 @@ Person: {
 
 ### Object within an object
 
-
 Let's modify the schema a bit
 
 ```js
@@ -533,7 +534,6 @@ query {
 }
 ```
 
-
 and the response is now a person object, which <i>contains</i> an address object. 
 
 ```js
@@ -549,7 +549,6 @@ and the response is now a person object, which <i>contains</i> an address object
   }
 }
 ```
-
 
 We still save the persons in the server the same way we did before. 
 
@@ -569,9 +568,7 @@ let persons = [
 
 The person-objects saved in the server are not exactly the same as the GraphQL type <i>Person</i> objects described in the schema. 
 
-
 Contrary to the <i>Person</i> type, the <i>Address</i> type does not have an <i>id</i> field, because they are not saved into their own separate data structure in the server. 
-
 
 Because the objects saved in the array do not have an <i>address</i> field, the default resolver is not sufficient. 
 Let's add a resolver for the <i>address</i> field  of <i>Person</i> type : 
@@ -936,7 +933,13 @@ In some cases, it might be beneficial to name the queries. This is the case espe
 Through the exercises, we will implement a GraphQL backend for a small library. 
 Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to _npm init_ and to install dependencies!
 
-Note that the code does not initially work since the schema definition is not complete.
+**Note** at the time of writing (10th Dec 2022) the code used in this part is not fully compatible with the new version of the Apollo Server, and because of this, if you want everything to work smoothly you should install the version _3.10.1_:
+
+```bash
+npm install apollo-server@3.10.1 graphql
+```
+
+Note also that the code does not initially work since the schema definition is not complete.
 
 #### 8.1: The number of books and authors
 

@@ -245,8 +245,10 @@ Toteutetaan nyt GraphQL-palvelin tämän hetken johtavaa kirjastoa [Apollo Serve
 Luodaan uusi npm-projekti komennolla _npm init_ ja asennetaan tarvittavat riippuvuudet
 
 ```bash
-npm install apollo-server graphql
+npm install apollo-server@3.10.1 graphql
 ```
+
+**Huom:** tätä kirjoittaessa (10.12.2022) tämän osan koodi ei ole täysin yhteensopivaa uusimman Apollo Serverin version kanssa. Tämän takia kannattaa asentaa versio _3.10.1_ jos haluat että koodi toimii sellaisenaan. Osa päivitetään vuoden 2023 alkupuolella.
 
 Alustava toteutus on seuraavassa
 
@@ -919,6 +921,13 @@ Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend.
 
 Huomaa, että koodin käynnistäminen aiheuttaa alussa virheen, sillä skeeman määrittely on puutteellinen.
 
+**Huom:** tätä kirjoittaessa (10.12.2022) tämän osan koodi ei ole täysin yhteensopivaa uusimman Apollo Serverin version kanssa. Tämän takia kannattaa asentaa versio _3.10.1_ jos haluat että koodi toimii sellaisenaan. Osa päivitetään vuoden 2023 alkupuolella.
+
+Asenna siis riippuvuudet seuraavasti:
+
+```bash
+npm install apollo-server@3.10.1 graphql
+```
 #### 8.1: kirjojen ja kirjailijoiden määrä
 
 Toteuta kyselyt _bookCount_ ja _authorCount_ jotka palauttavat kirjojen ja kirjailijoiden lukumäärän.
