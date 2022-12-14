@@ -550,7 +550,7 @@ The code above creates styled versions of the <i>button</i> and <i>input</i> HTM
 
 The syntax for defining the styles is quite interesting, as the CSS rules are defined inside of backticks.
 
-The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used the same way:
+The styled components that we defined work exactly like regular <i>button</i> and <i>input</i> elements, and they can be used in the same way:
 
 ```js
 const Login = (props) => {
