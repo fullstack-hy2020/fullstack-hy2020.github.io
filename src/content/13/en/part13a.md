@@ -311,7 +311,7 @@ The Fly.io connect-string is of the form
 
 ```bash
 $ cat .env
-DATABASE_URL=postgres://postgres:<password>@localhost:5432/postgres
+DATABASE_URL=postgres://postgres:<password>@127.0.0.1:5432/postgres
 ```
 
 Password was shown when the database was created, so hopefully you have not lost it!
