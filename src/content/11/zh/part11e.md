@@ -150,8 +150,8 @@ lang: zh
 <!-- Protect the main branch of the repository where you did the previous exercise. This time prevent also the administrators from merging the code without a review.-->
  保护你之前练习的版本库的主分支。这次也要防止管理员在没有审核的情况下合并代码。
 
-<!-- Do a pull request and ask any of GitHub users [mluukkai](https://github.com/mluukkai) and/or [kaltsoon](https://github.com/kaltsoon) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review, it is best to send a private message and to include the collaboration invite link to the message.-->
- 做一个拉动请求，请GitHub用户[mluukkai](https://github.com/mluukkai)和/或[kaltsoon](https://github.com/kaltsoon)中的任何一个来审查你的代码。一旦审查完毕，就把你的代码合并到主分支。注意，审查者需要是版本库中的合作者。在 Discord 中与我们联系以获得审查，最好是发送私人信息，并在信息中加入合作邀请链接。
+<!-- Do a pull request and ask GitHub user [mluukkai](https://github.com/mluukkai) to review your code. Once the review is done, merge your code to the main branch. Note that the reviewer needs to be a collaborator in the repository. Ping us in Discord to get the review, it is best to send a private message and to include the collaboration invite link to the message.-->
+ 做一个拉动请求，请GitHub用户[mluukkai](https://github.com/mluukkai)和/或 中的任何一个来审查你的代码。一旦审查完毕，就把你的代码合并到主分支。注意，审查者需要是版本库中的合作者。在 Discord 中与我们联系以获得审查，最好是发送私人信息，并在信息中加入合作邀请链接。
 
 <!-- Then you are done!-->
  然后你就完成了!
