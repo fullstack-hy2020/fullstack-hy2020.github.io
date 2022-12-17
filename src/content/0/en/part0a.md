@@ -285,7 +285,9 @@ The transcript will be delivered to you electronically through email. Present th
 
 ### Continuing the course at year 2023
 
-The 2022 version of the course ends 1st March 2023. After that course has a two week maintainance break. During the break material stays online, and also exercises can be submitted. During the break the course content may change a bit, nothing too dramatic has been planned at the moment. All the exercises submitted for the 2022 version can be used in the 2023 edition so basically the course can be continued without bothering too much about the different versions
+The 2022 version of the course ends 1st March 2023. After that course has a two week maintainance break. During the break material stays online, and also exercises can be submitted. During the break the course content may change a bit, nothing too dramatic has been planned at the moment.
+
+All the exercises submitted for the 2022 version can be used in the 2023 edition so basically the course can be continued without bothering too much about the different versions. Also the policy for getting certs, university credits etc. remains the same in 2023. So in practice *nothing changes*, you can do the course without worrying anything reated to the year change.
 
 ### Expanding on a previously completed course
 
