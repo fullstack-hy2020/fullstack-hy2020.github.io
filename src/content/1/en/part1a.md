@@ -18,7 +18,7 @@ npx create-react-app part1
 cd part1
 ```
 
-The application is run as follows
+The application runs as follows
 
 ```bash
 npm start
