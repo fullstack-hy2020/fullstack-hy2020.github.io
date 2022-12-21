@@ -655,7 +655,7 @@ HTML代码几乎相同，但JavaScript文件不同（<i>spa.js</i>），而且�
 <!-- The SPA version of the app does not send the form data in the traditional way, but instead uses the JavaScript code it fetched from the server.-->
  应用的SPA版本没有以传统方式发送表单数据，而是使用了它从服务器上获取的JavaScript代码。
 <!-- We'll look into this code a bit, even though understanding all the details of it is not important just yet.-->
- 我们将研究一下这段代码，尽管还不重要理解它的所有细节。
+ 我们将研究一下这段代码，尽管现在了解它的所有细节并不重要。
 
 ```js
 var form = document.getElementById('notes_form')
