@@ -484,7 +484,7 @@ list.appendChild(newElement)
 ### Loading a page containing JavaScript - review
 
 <!-- Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser.-->
- 让我们回顾一下在浏览器上打开https://studies.cs.helsinki.fi/exampleapp/notes，会发生什么。
+ 让我们回顾一下在浏览器上打开 https://studies.cs.helsinki.fi/exampleapp/notes ，会发生什么。
 
 ![](../../images/0/19e.png)
 
