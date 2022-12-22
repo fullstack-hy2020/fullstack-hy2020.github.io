@@ -714,7 +714,8 @@ The errors from those rules are handled by [the error handling mechanism of Apol
 Let's block adding the same name to the phonebook multiple times: 
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('@apollo/server') // highlight-line
+const { ApolloServer } = require('@apollo/server') // highlight-line
+const { GraphQLError } = require('graphql') //hightlight-line
 
 // ...
 
@@ -724,8 +725,11 @@ const resolvers = {
     addPerson: (root, args) => {
       // highlight-start
       if (persons.find(p => p.name === args.name)) {
-        throw new UserInputError('Name must be unique', {
-          invalidArgs: args.name,
+        throw new GraphQLError('Name must be unique!', {
+            extensions: {
+              code: 'FORBIDDEN',
+            },
+          })
         })
       }
       // highlight-end
