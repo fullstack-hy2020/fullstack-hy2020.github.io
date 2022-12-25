@@ -390,7 +390,7 @@ Cuando Apollo-server se ejecuta en modo de desarrollo (_node filename.js_), inic
 
 Probemos
 
-![](../../images/8/1.png)
+![](../../images/8/1x.png)
 
 A veces, Playground requiere que seas bastante pedante. Si la sintaxis de una consulta es incorrecta, el mensaje de error es bastante imperceptible y no sucede nada cuando presiona go.
 
@@ -692,7 +692,7 @@ Entonces, el resolutor del campo <i>address</i> del tipo <i>Person</i> formatea 
 
 Si intentamos crear una nueva persona, pero los parámetros no se corresponden con la descripción del esquema, el servidor muestra un mensaje de error:
 
-![](../../images/8/5.png)
+![](../../images/8/5x.png)
 
 Por lo tanto, parte del manejo de errores se puede realizar automáticamente con [validación](https://graphql.org/learn/validation/) GraphQL.
 
@@ -728,7 +728,7 @@ const resolvers = {
 
 Entonces, si el nombre que se agregará ya existe en la agenda, arroje el error _UserInputError_.
 
-![](../../images/8/6.png)
+![](../../images/8/6x.png)
 
 El código actual de la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), rama <i>part8-2</i>.
 

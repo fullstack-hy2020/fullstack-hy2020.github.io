@@ -336,7 +336,7 @@ npm outdated --depth 0
 
 La respuesta del modelo del año pasado para los ejercicios de la parte 4 ya tiene bastantes dependencias desactualizadas:
 
-![](../../images/7/33ea.png)
+![](../../images/7/33x.png)
 
 Las dependencias se pueden actualizar actualizando el archivo <i>package.json</i> y ejecutando el comando _npm install_. Sin embargo, las versiones antiguas de las dependencias no son necesariamente un riesgo de seguridad.
 
