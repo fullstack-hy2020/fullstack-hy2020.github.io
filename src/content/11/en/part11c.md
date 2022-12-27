@@ -286,7 +286,7 @@ It is <strong>storngly advisable</strong> to check first locally that the script
 
 *Note* that in order to test the script in the virtual machine, you should have the script in your local directory when you make a successful deployment. So if your deployment fails, the script will not be uploaded to the Fly.io server. So in case of problems, comment out the script based health check from fly.toml and do a deployment to get your script to the virtual machine.
 
-Our script based healt check is hardly meaningful in real life since it does essentially the same that is achievable with the simple HTTP check. The example here is just to show that the mechanism exists. Unlike with HTTP checks, with script based health checks you can in principle write an anrbitrarily compled and many sided health check to your app, should you need one.
+Our script based health check is hardly meaningful in real life since it does essentially the same that is achievable with the simple HTTP check. The example here is just to show that the mechanism exists. Unlike with HTTP checks, with script based health checks you can in principle write an anrbitrarily compled and many sided health check to your app, should you need one.
 
 </div>
 
