@@ -329,7 +329,7 @@ Tee sovellukseen näkymä, joka näyttää kirjautuneelle käyttäjälle käytt�
 
 #### 8.21 Genren kirjat GraphQL:llä
 
-Tehtävässä 8.19 toteutetun tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Jos toteutit rajauksen frontendin koodissa, muuta toteutustasi siten, että haet näytettävät kirjat GraphQL-kyselyillä. Jos teit jo rajauksen GrapGL:llä, ei sinun tarvitse tehdä mitään.
+Tehtävässä 8.19 toteutetun tietyn genren kirjoihin rajoittamisen voi tehdä kokonaan React-sovelluksen puolella. Jos toteutit rajauksen frontendin koodissa, muuta toteutustasi siten, että haet näytettävät kirjat GraphQL-kyselyillä. Jos teit jo rajauksen GraphQL:llä, ei sinun tarvitse tehdä mitään.
 
 Tämä **tehtävä on haastava** ja niin kurssin tässä vaiheessa jo kuuluukin olla.
 
