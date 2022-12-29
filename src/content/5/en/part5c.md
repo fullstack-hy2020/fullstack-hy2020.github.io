@@ -9,7 +9,7 @@ lang: en
 
 There are many different ways of testing React applications. Let's take a look at them next.
 
-Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is actually configured by default to applications created with create-react-app.
+Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is configured by default to applications created with create-react-app.
 
 In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 
@@ -19,7 +19,7 @@ Let's install the library with the command:
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 
-We also installed [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) that provides some nice Jest-related helper methods.
+We also installed [jest-dom](https://testing-library.com/docs/ecosystem-jest-dom/) which provides some nice Jest-related helper methods.
 
 Let's first write tests for the component that is responsible for rendering a note:
 
@@ -104,13 +104,13 @@ Instructions for installing Watchman on different operating systems can be found
 
 In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
 
-The other convention is to store the test files "normally" in their own separate directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
+The other convention is to store the test files "normally" in a separate _test_ directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
 
-Personally, I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
+I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
 
 ### Searching for content in a component
 
-The react-testing-library package offers many different ways of investigating the content of the component being tested. Actually the _expect_ in our test is not needed at all
+The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all
 
 
 ```js
@@ -160,14 +160,14 @@ test('renders content', () => {
 })
 ```
 
-There are also other methods, eg. [getByTestId](https://testing-library.com/docs/queries/bytestid/), that is looking for elements based on id-attributes that are inserted to the code specifically for testing purposes.
+There are also other methods, eg. [getByTestId](https://testing-library.com/docs/queries/bytestid/), that look for elements based on id-attributes that are inserted into the code specifically for testing purposes.
 
 ### Debugging tests
 
 We typically run into many different kinds of problems when writing our tests.
 
 
-Object _screen_ has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to terminal. If we change the test as follows:
+Object _screen_ has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
 
 ```js
 import React from 'react'
@@ -503,9 +503,9 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
 })
 ```
 
-Tests gets the access to the the input field using the function [getByRole](https://testing-library.com/docs/queries/byrole). 
+Tests get access to the input field using the function [getByRole](https://testing-library.com/docs/queries/byrole). 
 
-Method [type](https://testing-library.com/docs/user-event/utility#type) of the userEvent is used to write text to the input field.
+The method [type](https://testing-library.com/docs/user-event/utility#type) of the userEvent is used to write text to the input field.
 
 The first test expectation ensures, that submitting the form calls the _createNote_ method. 
 The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled. 
@@ -550,7 +550,7 @@ would cause an error:
 
 ![](../../images/5/40.png)
 
-The error message suggests to use <i>getAllByRole</i>. Test could be fixed as follows:
+The error message suggests using <i>getAllByRole</i>. The test could be fixed as follows:
 
 ```js
 const inputs = screen.getAllByRole('textbox')
@@ -588,7 +588,7 @@ const NoteForm = ({ createNote }) => {
 }
 ```
 
-Now finding the right input field is easy with method [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext):
+Now finding the right input field is easy with the method [getByPlaceholderText](https://testing-library.com/docs/queries/byplaceholdertext):
 
 ```js
 test('<NoteForm /> updates parent state and calls onSubmit', () => {
@@ -607,9 +607,9 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _container_ object, that is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
+The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _container_ object, which is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
 
-Consider eg. that we would define an unique _id_ to the input field:
+Consider eg. that we would define a unique _id_ to the input field:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -644,9 +644,9 @@ const { container } = render(<NoteForm createNote={createNote} />)
 const input = container.querySelector('#note-input')
 ```
 
-However we shall stick to the approach of using _getByPlaceholderText_ in the test. 
+However, we shall stick to the approach of using _getByPlaceholderText_ in the test. 
 
-Let us look to a couple of details before moving on. Let us assume that a component would render text to an HTML-element as follows:
+Let us look at a couple of details before moving on. Let us assume that a component would render text to an HTML element as follows:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -681,7 +681,7 @@ test('renders content', () => {
 })
 ```
 
-Command _getByText_ looks for an element that has exactly the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
+Command _getByText_ looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
 ```js 
 const element = screen.getByText(
@@ -695,7 +695,7 @@ or we could use the command _findByText_:
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
-It is important to notice that unlike the other _ByText_ commands, _findByText_ returns a promise!
+It is important to notice that, unlike the other _ByText_ commands, _findByText_ returns a promise!
 
 There are situations where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
 
@@ -740,17 +740,17 @@ You can find the code for our current application in its entirety in the <i>part
 
 #### 5.13: Blog list tests, step1
 
-Make a test which checks that the component displaying a blog renders the blog's title and author, but does not render its url or number of likes by default.
+Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default.
 
-Add CSS-classes to the component to help the testing as necessary. 
+Add CSS classes to the component to help the testing as necessary. 
 
 #### 5.14: Blog list tests, step2
 
-Make a test which checks that the blog's url and number of likes are shown when the button controlling the shown details has been clicked. 
+Make a test, which checks that the blog's URL and number of likes are shown when the button controlling the shown details has been clicked. 
 
 #### 5.15: Blog list tests, step3
 
-Make a test which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
+Make a test, which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
 
 #### 5.16: Blog list tests, step4
 
@@ -767,11 +767,11 @@ In the previous part of the course material, we wrote integration tests for the 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
 We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server. 
-We chose to concentrate on making end to end tests in order to test the whole application. We will work on the end to end tests in the last chapter of this part.
+We chose to concentrate on making end-to-end tests to test the whole application. We will work on the end-to-end tests in the last chapter of this part.
 
 ### Snapshot testing
 
-Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simply enough to adopt snapshot testing. 
+Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing. 
 
 The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed.
 
