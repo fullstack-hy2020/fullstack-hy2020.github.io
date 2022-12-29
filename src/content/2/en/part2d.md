@@ -18,13 +18,13 @@ We will take a closer look at REST in the [next part](/en/part3) of the course. 
 
 ### REST
 
-In REST terminology, we refer to individual data objects, such as the notes in our application, as <i>resources</i>. Every resource has a unique address associated with it - its URL. According to a general convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. The <i>notes</i> url, on the other hand, would point to a resource collection containing all the notes.
+In REST terminology, we refer to individual data objects, such as the notes in our application, as <i>resources</i>. Every resource has a unique address associated with it - its URL. According to a general convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. The <i>notes</i> URL, on the other hand, would point to a resource collection containing all the notes.
 
 Resources are fetched from the server with HTTP GET requests. For instance, an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes.
 
 Creating a new resource for storing a note is done by making an HTTP POST request to the <i>notes</i> URL according to the REST convention that the json-server adheres to. The data for the new note resource is sent in the <i>body</i> of the request.
 
-json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string, and that the request must contain the <i>Content-Type</i> request header with the value <i>application/json</i>.
+json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string and that the request must contain the <i>Content-Type</i> request header with the value <i>application/json</i>.
 
 ### Sending Data to the Server
 
@@ -49,7 +49,7 @@ addNote = event => {
 }
 ```
 
-We create a new object for the note but omit the <i>id</i> property, since it's better to let the server generate ids for our resources!
+We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources!
 
 The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
 
@@ -63,7 +63,7 @@ Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of
 
 ![](../../images/2/21e.png)
 
-We can use the inspector to check that the headers sent in the POST request are what we expected them to be, and that their values are correct.
+We can use the inspector to check that the headers sent in the POST request are what we expected them to be and that their values are correct.
 
 Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
 
@@ -99,7 +99,7 @@ It's beneficial to inspect the state of the backend server, e.g. through the bro
 
 This makes it possible to verify that all the data we intended to send was actually received by the server.
 
-In the next part of the course we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
+In the next part of the course, we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
 
 > **NB:** In the current version of our application, the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
 
@@ -169,7 +169,7 @@ const App = () => {
 }
 ```
 
-Notice how every note receives its own <i>unique</i> event handler function, since the <i>id</i> of every note is unique.
+Notice how every note receives its own <i>unique</i> event handler function since the <i>id</i> of every note is unique.
 
 E.g., if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
 
@@ -177,7 +177,7 @@ E.g., if <i>note.id</i> is 3, the event handler function returned by _toggleImpo
 () => { console.log('importance of 3 needs to be toggled') }
 ```
 
-A short reminder here. The string printed by the event handler is defined in Java-like manner by adding the strings:
+A short reminder here. The string printed by the event handler is defined in a Java-like manner by adding the strings:
 
 ```js
 console.log('importance of ' + id + ' needs to be toggled')
@@ -191,7 +191,7 @@ console.log(`importance of ${id} needs to be toggled`)
 
 We can now use the "dollar-bracket"-syntax to add parts to the string that will evaluate JavaScript expressions, e.g. the value of a variable. Note that we use backticks in template strings instead of quotation marks used in regular JavaScript strings.
 
-Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either <i>replace</i> the entire note with an HTTP PUT request, or only change some of the note's properties with an HTTP PATCH request.
+Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either <i>replace</i> the entire note with an HTTP PUT request or only change some of the note's properties with an HTTP PATCH request.
 
 The final form of the event handler function is the following:
 
@@ -207,11 +207,11 @@ const toggleImportanceOf = id => {
 }
 ```
 
-Almost every line of code in the function body contains important details. The first line defines the unique url for each note resource based on its id.
+Almost every line of code in the function body contains important details. The first line defines the unique URL for each note resource based on its id.
 
 The array [find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) is used to find the note we want to modify, and we then assign it to the _note_ variable.
 
-After this we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. 
+After this, we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. 
 
 The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax may seem a bit strange at first:
 
@@ -219,9 +219,9 @@ The code for creating the new object that uses the [object spread](https://devel
 const changedNote = { ...note, important: !note.important }
 ```
 
-In practice, <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spread object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example the <em>important</em> property gets the negation of its previous value in the original object.
+In practice, <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spread object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example, the <em>important</em> property gets the negation of its previous value in the original object.
 
-There's a few things to point out. Why did we make a copy of the note object we wanted to modify, when the following code also appears to work?
+There are a few things to point out. Why did we make a copy of the note object we wanted to modify when the following code also appears to work?
 
 ```js
 const note = notes.find(n => n.id === id)
@@ -425,7 +425,7 @@ The modified <em>getAll</em> function still returns a promise, as the <em>then</
 
 After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.
 
-We have to update the <i>App</i> component to work with the changes made to our module.  We have to fix the callback functions given as parameters to the <em>noteService</em> object's methods, so that they use the directly returned response data:
+We have to update the <i>App</i> component to work with the changes made to our module.  We have to fix the callback functions given as parameters to the <em>noteService</em> object's methods so that they use the directly returned response data:
 
 ```js
 const App = () => {
@@ -484,7 +484,7 @@ Promises are central to modern JavaScript development and it is highly recommend
 
 ### Cleaner Syntax for Defining Object Literals
 
-The module defining note related services currently exports an object with the properties <i>getAll</i>, <i>create</i>, and <i>update</i> that are assigned to functions for handling notes.
+The module defining note-related services currently exports an object with the properties <i>getAll</i>, <i>create</i>, and <i>update</i> that are assigned to functions for handling notes.
 
 The module definition was:
 
@@ -524,7 +524,7 @@ The module exports the following, rather peculiar looking, object:
 }
 ```
 
-The labels to the left of the colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside of the module.
+The labels to the left of the colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside the module.
 
 Since the names of the keys and the assigned variables are the same, we can write the object definition with a more compact syntax:
 
@@ -609,7 +609,7 @@ When we try to change the importance of the hardcoded note, we see the following
 
 ![](../../images/2/23e.png)
 
-The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has actually occurred unless they happen to have their console open. The only way the error can be seen  in the application is that clicking the button has no effect on the importance of the note.
+The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has occurred unless they happen to have their console open. The only way the error can be seen in the application is that clicking the button does not affect the note's importance.
 
 We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
 
@@ -683,7 +683,7 @@ const toggleImportanceOf = id => {
 
 The error message is displayed to the user with the trusty old [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) dialog popup, and the deleted note gets filtered out from the state.
 
-Removing an already deleted note from the application's state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only of the items from the list for which the function that was passed as a parameter returns true for:
+Removing an already deleted note from the application's state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only the items from the list for which the function that was passed as a parameter returns true for:
 
 ```js
 notes.filter(n => n.id !== id)
