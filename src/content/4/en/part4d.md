@@ -9,18 +9,18 @@ lang: en
 
 Users must be able to log into our application, and when a user is logged in, their user information must automatically be attached to any new notes they create. 
 
-We will now implement support for [token based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend. 
+We will now implement support for [token-based authentication](https://scotch.io/tutorials/the-ins-and-outs-of-token-based-authentication#toc-how-token-based-works) to the backend. 
 
-The principles of token based authentication are depicted in the following sequence diagram: 
+The principles of token-based authentication are depicted in the following sequence diagram: 
 
 ![](../../images/4/16e.png)
 
 - User starts by logging in using a login form implemented with React 
     - We will add the login form to the frontend in [part 5](/en/part5) 
 - This causes the React code to send the username and the password to the server address <i>/api/login</i> as a HTTP POST request. 
-- If the username and the password are correct, the server generates a <i>token</i> which somehow identifies the logged in user. 
+- If the username and the password are correct, the server generates a <i>token</i> that somehow identifies the logged-in user. 
     - The token is signed digitally, making it impossible to falsify (with cryptographic means)
-- The backend responds with a status code indicating the operation was successful, and returns the token with the response.
+- The backend responds with a status code indicating the operation was successful and returns the token with the response.
 - The browser saves the token, for example to the state of a React application. 
 - When the user creates a new note (or does some other operation requiring identification), the React code sends the token to the server with the request.
 - The server uses the token to identify the user
@@ -79,7 +79,7 @@ await bcrypt.compare(body.password, user.passwordHash)
 
 If the user is not found, or the password is incorrect, the request is responded to with the status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body. 
 
-If the password is correct, a token is created with the method  _jwt.sign_. The token contains the username and the user id in a digitally signed form. 
+If the password is correct, a token is created with the method _jwt.sign_. The token contains the username and the user id in a digitally signed form. 
 
 ```js
 const userForToken = {
@@ -110,7 +110,7 @@ Let's try logging in using VS Code REST-client:
 
 ![](../../images/4/17e.png)
 
-It does not work. The following is printed to console: 
+It does not work. The following is printed to the console: 
 
 ```bash
 (node:32911) UnhandledPromiseRejectionWarning: Error: secretOrPrivateKey must have a value
@@ -129,7 +129,7 @@ A wrong username or password returns an error message and the proper status code
 
 ![](../../images/4/19ea.png)
 
-### Limiting creating new notes to logged in users
+### Limiting creating new notes to logged-in users
 
 Let's change creating new notes so that it is only possible if the post request has a valid token attached. 
 The note is then saved to the notes list of the user identified by the token. 
@@ -137,9 +137,9 @@ The note is then saved to the notes list of the user identified by the token.
 There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
 Identifying the scheme tells the server how the attached credentials should be interpreted. 
 
-The <i>Bearer</i> scheme is suitable to our needs. 
+The <i>Bearer</i> scheme is suitable for our needs. 
 
-In practice, this means that if the token is for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
+In practice, this means that if the token is, for example, the string <i>eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW</i>, the Authorization header will have the value: 
 
 <pre>
 Bearer eyJhbGciOiJIUzI1NiIsInR5c2VybmFtZSI6Im1sdXVra2FpIiwiaW
@@ -189,13 +189,13 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return error <i>"jwt must be provided"</i>.
+The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return the error <i>"jwt must be provided"</i>.
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
-The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tells the server who made the request. 
+The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tell the server who made the request. 
 
 If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
 
@@ -261,13 +261,13 @@ const errorHandler = (error, request, response, next) => {
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
 
-If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. Some existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. 
+If the application has multiple interfaces requiring identification, JWT's validation should be separated into its own middleware. An existing library like [express-jwt](https://www.npmjs.com/package/express-jwt) could also be used. 
 
 ### Problems of Token-based authentication
 
 Token authentication is pretty easy to implement, but it contains one problem. Once the API user, eg. a React app gets a token, the API has a blind trust to the token holder. What if the access rights of the token holder should be revoked?
 
-There are two solutions to the problem. Easier one is to limit the validity period of a token:
+There are two solutions to the problem. The easier one is to limit the validity period of a token:
 
 ```js
 loginRouter.post('/', async (request, response) => {
@@ -304,9 +304,9 @@ loginRouter.post('/', async (request, response) => {
 })
 ```
 
-Once the token expires, the client app needs to get a new token. Usually this happens by forcing the user to relogin to the app.
+Once the token expires, the client app needs to get a new token. Usually, this happens by forcing the user to re-login to the app.
 
-The error handling middleware should be extended to give a proper error in the case of a expired token:
+The error handling middleware should be extended to give a proper error in the case of an expired token:
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -332,17 +332,17 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-The shorter the expiration time, the more safe the solution is. So if the token gets into wrong hands, or the user access to the system needs to be revoked, the token is usable only a limited amount of time. On the other hand, a short expiration time forces a potential pain to a user, one must login to the system more frequently.
+The shorter the expiration time, the more safe the solution is. So if the token gets into the wrong hands or user access to the system needs to be revoked, the token is only usable for a limited amount of time. On the other hand, a short expiration time forces a potential pain to a user, one must login to the system more frequently.
 
-The other solution is to save info about each token to backend database and to check for each API request if the access right corresponding to the token is still valid. With this scheme, the access rights can be revoked at any time. This kind of solution is often called a <i>server side session</i>.
+The other solution is to save info about each token to backend database and to check for each API request if the access right corresponding to the token is still valid. With this scheme, access rights can be revoked at any time. This kind of solution is often called a <i>server-side session</i>.
 
-The negative aspect of server side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request from database. A database access is considerably slower compared to checking the validity from the token itself. That is why it is a quite common to save the session corresponding to a token to a <i>key-value-database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios.
+The negative aspect of server-side sessions is the increased complexity in the backend and also the effect on performance since the token validity needs to be checked for each API request to the database. A database access is considerably slower compared to checking the validity of the token itself. That is why it is quite common to save the session corresponding to a token to a <i>key-value database</i> such as [Redis](https://redis.io/) that is limited in functionality compared to eg. MongoDB or relational database but extremely fast in some usage scenarios.
 
-When server side sessions are used, the token is quite often just a random string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request the server fetches the relevant information about the identity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.
+When server-side sessions are used, the token is quite often just a random string, that does not include any information about the user as it is quite often the case when jwt-tokens are used. For each API request, the server fetches the relevant information about the identity of the user from the database. It is also quite usual that instead of using Authorization-header, <i>cookies</i> are used as the mechanism for transferring the token between the client and the server.
 
 ### End notes
 
-There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non compulsory exercise. 
+There have been many changes to the code which have caused a typical problem for a fast-paced software project: most of the tests have broken. Because this part of the course is already jammed with new information, we will leave fixing the tests to a non-compulsory exercise. 
 
 Usernames, passwords and applications using token authentication must always be used over [HTTPS](https://en.wikipedia.org/wiki/HTTPS). We could use a Node [HTTPS](https://nodejs.org/api/https.html) server in our application instead of the [HTTP](https://nodejs.org/docs/latest-v8.x/api/http.html) server (it requires more configuration). On the other hand, the production version of our application is in Heroku, so our application stays secure: Heroku routes all traffic between a browser and the Heroku server over HTTPS. 
 
@@ -354,13 +354,13 @@ We will implement login to the frontend in the [next part](/en/part5).
 
 ### Exercises 4.15.-4.23.
 
-In the next exercises, basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity. 
+In the next exercises, the basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity. 
 
 **One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both. 
 
 #### 4.15: bloglist expansion, step3
 
-Implement a way to create new users by doing a HTTP POST-request to address <i>api/users</i>. Users have <i>username, password and name</i>.
+Implement a way to create new users by doing an HTTP POST request to address <i>api/users</i>. Users have a <i>username, password and name</i>.
 
 Do not save passwords to the database as clear text, but use the <i>bcrypt</i> library like we did in part 4 chapter [Creating new users](/en/part4/user_administration#creating-users).
 
@@ -374,7 +374,7 @@ and install [bcryptjs](https://www.npmjs.com/package/bcryptjs) instead.
 
 Implement a way to see the details of all users by doing a suitable HTTP request. 
 
-List of users can for example, look as follows: 
+The list of users can, for example, look as follows: 
 
 ![](../../images/4/22.png)
 
@@ -382,11 +382,11 @@ List of users can for example, look as follows:
 
 Add a feature which adds the following restrictions to creating new users: Both username and password must be given. Both username and password must be at least 3 characters long. The username must be unique. 
 
-The operation must respond with a suitable status code and some kind of an error message if invalid user is created. 
+The operation must respond with a suitable status code and some kind of an error message if an invalid user is created. 
 
-**NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller like we did in [part 3](/en/part3/node_js_and_express) before using Mongoose validation. 
+**NB** Do not test password restrictions with Mongoose validations. It is not a good idea because the password received by the backend and the password hash saved to the database are not the same thing. The password length should be validated in the controller as we did in [part 3](/en/part3/node_js_and_express) before using Mongoose validation. 
 
-Also, implement tests which check that invalid users are not created and invalid add user operation returns a suitable status code and error message. 
+Also, implement tests that ensure invalid users are not created and that an invalid add user operation returns a suitable status code and error message. 
 
 #### 4.17: bloglist expansion, step5
 
@@ -415,7 +415,7 @@ Modify adding new blogs so that it is only possible if a valid token is sent wit
 
 [This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
 
-If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it to the <i>token</i> field of the <i>request</i> object. 
+If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object. 
 
 In other words, if you register this middleware in the <i>app.js</i> file before all routes
 
@@ -423,7 +423,7 @@ In other words, if you register this middleware in the <i>app.js</i> file before
 app.use(middleware.tokenExtractor)
 ```
 
-routes can access the token with _request.token_:
+Routes can access the token with _request.token_:
 ```js
 blogsRouter.post('/', async (request, response) => {
   // ..
@@ -432,7 +432,7 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
-Remember that a normal [middleware](/en/part3/node_js_and_express#middleware) is a function with three parameters, that at the end calls the last parameter <i>next</i> in order to move the control to next middleware:
+Remember that a normal [middleware function](/en/part3/node_js_and_express#middleware) is a function with three parameters, that at the end calls the last parameter <i>next</i> to move the control to the next middleware:
 
 ```js
 const tokenExtractor = (request, response, next) => {
@@ -446,7 +446,7 @@ const tokenExtractor = (request, response, next) => {
 
 Change the delete blog operation so that a blog can be deleted only by the user who added the blog. Therefore, deleting a blog is possible only if the token sent with the request is the same as that of the blog's creator. 
 
-If deleting a blog is attempted without a token or by a wrong user, the operation should return a suitable status code. 
+If deleting a blog is attempted without a token or by an invalid user, the operation should return a suitable status code. 
 
 Note that if you fetch a blog from the database,
 
@@ -454,7 +454,7 @@ Note that if you fetch a blog from the database,
 const blog = await Blog.findById(...)
 ```
 
-the field <i>blog.user</i> does not contain a string, but an Object. So if you want to compare the id of the object fetched from the database and a string id, normal comparison operation does not work. The id fetched from the database must be parsed into a string first. 
+the field <i>blog.user</i> does not contain a string, but an Object. So if you want to compare the id of the object fetched from the database and a string id, a normal comparison operation does not work. The id fetched from the database must be parsed into a string first. 
 
 ```js
 if ( blog.user.toString() === userid.toString() ) ...
@@ -462,7 +462,7 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*:  bloglist expansion, step10
 
-Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who is the user holding a specific token.
+Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who the user holding a specific token is.
 
 Now create a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i>
 
@@ -486,7 +486,7 @@ blogsRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes
+Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes,
 
 ```js
 // use the middleware in all routes
@@ -506,7 +506,7 @@ app.use('/api/users', usersRouter)
 app.use('/api/login', loginRouter)
 ```
 
-As can be seen, this happens by chaining multiple middlewares as the parameter of function  <i>use</i>. It would also be possible to register a middleware only for a specific operation:
+As can be seen, this happens by chaining multiple middlewares as the parameter of function <i>use</i>. It would also be possible to register a middleware only for a specific operation:
 
 ```js
 router.post('/', userExtractor, async (request, response) => {
@@ -516,7 +516,7 @@ router.post('/', userExtractor, async (request, response) => {
 
 #### 4.23*:  bloglist expansion, step11
 
-After adding token based authentication the tests for adding a new blog broke down. Fix the tests. Also write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided.
+After adding token-based authentication the tests for adding a new blog broke down. Fix the tests. Also, write a new test to ensure adding a blog fails with the proper status code <i>401 Unauthorized</i> if a token is not provided.
 
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 
