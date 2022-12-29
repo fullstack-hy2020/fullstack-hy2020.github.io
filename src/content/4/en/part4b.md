@@ -11,7 +11,7 @@ We will now start writing tests for the backend. Since the backend does not cont
 
 In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).
 
-Since our application's backend is still relatively simple, we will make the decision to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group, is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing).
+Since our application's backend is still relatively simple, we will decide to test the entire application through its REST API, so that the database is also included. This kind of testing where multiple components of the system are being tested as a group is called [integration testing](https://en.wikipedia.org/wiki/Integration_testing).
 
 ### Test environment
 
@@ -75,10 +75,10 @@ npm i cross-env -P
 Now we can modify the way that our application runs in different modes. As an example of this, we could define the application to use a separate test database when it is running tests.
 
 
-We can create our separate test database in MongoDB Atlas. This is not an optimal solution in situations where there are many people developing the same application. Test execution in particular typically requires a single database instance is not used by tests that are running concurrently.
+We can create our separate test database in MongoDB Atlas. This is not an optimal solution in situations where many people are developing the same application. Test execution in particular typically requires a single database instance that is not used by tests that are running concurrently.
 
 
-It would be better to run our tests using a database that is installed and running in the developer's local machine. The optimal solution would be to have every test execution use its own separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.
+It would be better to run our tests using a database that is installed and running on the developer's local machine. The optimal solution would be to have every test execution use a separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.
 
 
 Let's make some changes to the module that defines the application's configuration:
@@ -111,7 +111,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/t
 // highlight-end
 ```
 
-The _config_ module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our own implementation is justified since our application is simple, and also because it teaches us valuable lessons.
+The _config_ module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our implementation is justified since our application is simple, and also because it teaches us valuable lessons.
 
 These are the only changes we need to make to our application's code.
 
@@ -167,7 +167,7 @@ When running your tests you may run across the following console warning:
 
 ![](../../images/4/8.png)
 
-The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when the version 5.x is used. Actually [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
+The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
 One way to get rid of this is to run tests with option <i>--forceExit</i>:
 
@@ -195,7 +195,7 @@ test('notes are returned as json', async () => {
 }, 100000)
 ```
   
-This third parameter sets the timeout to be 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
+This third parameter sets the timeout to 100000 ms. A long timeout ensures that our test won't fail due to the time it takes to run. (A long timeout may not be what you want for tests based on performance or speed, but this is fine for our example tests).
 
 One tiny but important detail: at the [beginning](/en/part4/structure_of_backend_application_introduction_to_testing#project-structure) of this part we extracted the Express application into the <i>app.js</i> file, and the role of the <i>index.js</i> file was changed to launch the application at the specified port with Node's built-in <i>http</i> object:
 
@@ -288,9 +288,9 @@ module.exports = {
 
 ### Initializing the database before tests
 
-Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (that happens to be correct in my test database). In order to make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
+Testing appears to be easy and our tests are currently passing. However, our tests are bad as they are dependent on the state of the database (which happens to be correct in my test database). To make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
-Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://jestjs.io/docs/setup-teardown) that can be used for executing operations once before any test is run, or every time before a test is run.
+Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing. Jest offers many other [functions](https://jestjs.io/docs/setup-teardown) that can be used for executing operations once before any test is run or every time before a test is run.
 
 Let's initialize the database <i>before every test</i> with the [beforeEach](https://jestjs.io/docs/en/api.html#beforeeachfn-timeout) function:
 
@@ -332,7 +332,7 @@ beforeEach(async () => {
 // ...
 ```
 
-The database is cleared out at the beginning, and after that we save the two notes stored in the _initialNotes_ array to the database. By doing this, we ensure that the database is in the same state before every test is run.
+The database is cleared out at the beginning, and after that, we save the two notes stored in the _initialNotes_ array to the database. By doing this, we ensure that the database is in the same state before every test is run.
 
 Let's also make the following changes to the last two tests:
 
@@ -362,7 +362,7 @@ Pay special attention to the expect in the latter test. The <code>response.body.
 
 The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
 
-A better option is to specify the tests that need to be run as parameters of the  <i>npm test</i> command.
+A better option is to specify the tests that need to be run as parameters of the <i>npm test</i> command.
 
 The following command only runs the tests found in the <i>tests/note_api.test.js</i> file:
 
@@ -383,7 +383,7 @@ npm test -- -t 'notes'
 ```
 
 **NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
-The problem might be due to the fact that supertest primes the connection, but Jest does not run the afterAll portion of the code. 
+The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code. 
 
 ### async/await
 
@@ -441,7 +441,7 @@ console.log('the first note is removed')
 
 Thanks to the new syntax, the code is a lot simpler than the previous then-chain.
 
-There are a few important details to pay attention to when using async/await syntax. In order to use the await operator with asynchronous operations, they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.
+There are a few important details to pay attention to when using async/await syntax. To use the await operator with asynchronous operations, they have to return a promise. This is not a problem as such, as regular asynchronous functions using callbacks are easy to wrap around promises.
 
 The await keyword can't be used just anywhere in JavaScript code. Using await is possible only inside of an [async](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function) function.
 
@@ -459,7 +459,7 @@ const main = async () => { // highlight-line
 main() // highlight-line
 ```
 
-The code declares that the function assigned to _main_ is asynchronous. After this the code calls the function with <code>main()</code>.
+The code declares that the function assigned to _main_ is asynchronous. After this, the code calls the function with <code>main()</code>.
 
 ### async/await in the backend
 
@@ -482,7 +482,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 When code gets refactored, there is always the risk of [regression](https://en.wikipedia.org/wiki/Regression_testing), meaning that existing functionality may break. Let's refactor the remaining operations by first writing a test for each route of the API.
 
-Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the amount of notes returned by the API increases, and that the newly added note is in the list.
+Let's start with the operation for adding a new note. Let's write a test that adds a new note and verifies that the number of notes returned by the API increases and that the newly added note is in the list.
 
 ```js
 test('a valid note can be added', async () => {
@@ -508,7 +508,7 @@ test('a valid note can be added', async () => {
 })
 ```
 
-Test actually fails since we are by accident returning the status code <i>200 OK</i> when a new note is created. Let us change that to <i>201 CREATED</i>:
+Test fails since we are by accident returning the status code <i>200 OK</i> when a new note is created. Let us change that to <i>201 CREATED</i>:
 
 ```js
 notesRouter.post('/', (request, response, next) => {
@@ -553,7 +553,7 @@ Both tests check the state stored in the database after the saving operation, by
 const response = await api.get('/api/notes')
 ```
 
-The same verification steps will repeat in other tests later on, and it is a good idea to extract these steps into helper functions. Let's add the function into a new file called <i>tests/test_helper.js</i> that is in the same directory as the test file.
+The same verification steps will repeat in other tests later on, and it is a good idea to extract these steps into helper functions. Let's add the function into a new file called <i>tests/test_helper.js</i> which is in the same directory as the test file.
 
 ```js
 const Note = require('../models/note')
@@ -589,7 +589,7 @@ module.exports = {
 }
 ```
 
-The module defines the _notesInDb_ function that can be used for checking the notes stored in the database. The _initialNotes_ array containing the initial database state is also in the module. We also define the _nonExistingId_ function ahead of time, that can be used for creating a database object ID that does not belong to any note object in the database.
+The module defines the _notesInDb_ function that can be used for checking the notes stored in the database. The _initialNotes_ array containing the initial database state is also in the module. We also define the _nonExistingId_ function ahead of time, which can be used for creating a database object ID that does not belong to any note object in the database.
 
 Our tests can now use the helper module and be changed like this:
 
@@ -703,7 +703,7 @@ If there's an exception while handling the POST request we end up in a familiar 
 
 ![](../../images/4/6.png)
 
-In other words we end up with an unhandled promise rejection, and the request never receives a response.
+In other words, we end up with an unhandled promise rejection, and the request never receives a response.
 
 With async/await the recommended way of dealing with exceptions is the old and familiar _try/catch_ mechanism:
 
@@ -773,7 +773,7 @@ test('a note can be deleted', async () => {
 })
 ```
 
-Both tests share a similar structure. In the initialization phase they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
+Both tests share a similar structure. In the initialization phase, they fetch a note from the database. After this, the tests call the actual operation being tested, which is highlighted in the code block. Lastly, the tests verify that the outcome of the operation is as expected.
 
 In the first test, the note object we receive as the response body goes through JSON serialization and parsing. This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string. Because of this we can't directly compare the equality of the <em>resultNote.body</em> and <em>noteToView</em> that is read from the database. Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView</em> as the server is performing for the note object.
 
@@ -820,7 +820,7 @@ try {
 ```
 
 <!-- Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista?  -->
-One starts to wonder, if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
+One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 
 <!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen. -->
 The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this. 
@@ -925,7 +925,7 @@ beforeEach(async () => {
 })
 ```
 
-The function saves the first two notes from the   _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:
+The function saves the first two notes from the _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:
 
 ```js
 beforeEach(async () => {
@@ -958,9 +958,9 @@ saved
 saved
 </pre>
 
-Despite our use of the async/await syntax, our solution does not work like we expected it to. The test execution begins before the database is initialized!
+Despite our use of the async/await syntax, our solution does not work as we expected it to. The test execution begins before the database is initialized!
 
-The problem is that every iteration of the forEach loop generates its own asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
+The problem is that every iteration of the forEach loop generates an asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
 
 Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.
 
@@ -979,7 +979,7 @@ beforeEach(async () => {
 
 The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
 
-The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits that every promise for saving a note is finished, meaning that the database has been initialized.
+The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits until every promise for saving a note is finished, meaning that the database has been initialized.
 
 > The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
 
@@ -998,7 +998,7 @@ beforeEach(async () => {
 
 The asynchronous nature of JavaScript can lead to surprising behavior, and for this reason, it is important to pay careful attention when using the async/await syntax. Even though the syntax makes it easier to deal with promises, it is still necessary to understand how promises work!
 
-The code for our application can be found from [github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
+The code for our application can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 
 </div>
 
@@ -1012,17 +1012,17 @@ The code for our application can be found from [github](https://github.com/fulls
 
 #### 4.8: Blog list tests, step1
 
-Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> url. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
+Use the supertest package for writing a test that makes an HTTP GET request to the <i>/api/blogs</i> URL. Verify that the blog list application returns the correct amount of blog posts in the JSON format.
 
 Once the test is finished, refactor the route handler to use the async/await syntax instead of promises.
 
-Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use their own separate database.
+Notice that you will have to make similar changes to the code that were made [in the material](/en/part4/testing_the_backend#test-environment), like defining the test environment so that you can write tests that use separate databases.
 
 **NB:** When running the tests, you may run into the following warning:
 
 ![](../../images/4/8a.png)
 
-The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when the version 5.x is used. Actually [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
+The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
 One way to get rid of this is to run tests with option <i>--forceExit</i>:
 
@@ -1048,7 +1048,7 @@ Write a test that verifies that the unique identifier property of the blog posts
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
 #### 4.10: Blog list tests, step3
 
-Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> url successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
+Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> URL successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
 
 Once the test is finished, refactor the operation to use async/await instead of promises.
 #### 4.11*: Blog list tests, step4
@@ -1244,7 +1244,7 @@ Implement functionality for updating the information of an individual blog post.
 
 Use async/await.
 
-The application mostly needs to update the amount of <i>likes</i> for a blog post. You can implement this functionality the same way that we implemented updating notes in [part 3](/en/part3/saving_data_to_mongo_db#other-operations).
+The application mostly needs to update the number of <i>likes</i> for a blog post. You can implement this functionality the same way that we implemented updating notes in [part 3](/en/part3/saving_data_to_mongo_db#other-operations).
 
 Implement tests for the functionality.
 
