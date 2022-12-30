@@ -17,7 +17,7 @@ We'll now implement a part of the required user management functionality in the 
 ### Handling login
 A login form has now been added to the top of the page. The form for adding new notes has also been moved to the bottom of the list of notes. 
 
-![](../../images/5/1e.png)
+![browser showing user login for notes](../../images/5/1e.png)
 
 
 The code of the <i>App</i> component now looks as follows: 
@@ -458,7 +458,7 @@ Changes to the login method are as follows:
 
 The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing _window.localStorage_ to the console): 
 
-![](../../images/5/3e.png)
+![browser showing someone logged into notes](../../images/5/3e.png)
 
 You can also inspect the local storage using the developer tools. On Chrome, go to the <i>Application</i> tab and select <i>Local Storage</i> (more details [here](https://developers.google.com/web/tools/chrome-devtools/storage/localstorage)). On Firefox go to the <i>Storage</i> tab and select <i>Local Storage</i> (details [here](https://developer.mozilla.org/en-US/docs/Tools/Storage_Inspector)).
 
@@ -562,11 +562,11 @@ Implement login functionality to the frontend. The token returned with a success
 
 If a user is not logged in, <i>only</i> the login form is visible. 
 
-![](../../images/5/4e.png)
+![browser showing visible login form only](../../images/5/4e.png)
 
 If the user is logged-in, the name of the user and a list of blogs is shown. 
 
-![](../../images/5/5e.png)
+![browser showing notes and who is logged in](../../images/5/5e.png)
 
 User details of the logged-in user do not have to be saved to the local storage yet. 
 
@@ -599,26 +599,26 @@ User details of the logged-in user do not have to be saved to the local storage 
 
 Make the login 'permanent' by using the local storage. Also, implement a way to log out. 
 
-![](../../images/5/6e.png)
+![browser showing logout button after logging in](../../images/5/6e.png)
 
 Ensure the browser does not remember the details of the user after logging out. 
 
 #### 5.3: bloglist frontend, step3
 
-Expand your application to allow  a logged-in user to add new blogs: 
+Expand your application to allow a logged-in user to add new blogs: 
 
-![](../../images/5/7e.png)
+![browser showing new blog form](../../images/5/7e.png)
 
 #### 5.4: bloglist frontend, step4
 
 Implement notifications that inform the user about successful and unsuccessful operations at the top of the page. For example, when a new blog is added, the following notification can be shown: 
 
-![](../../images/5/8e.png)
+![browser showing successful operation](../../images/5/8e.png)
 
 
 Failed login can show the following notification: 
 
-![](../../images/5/9e.png)
+![browser showing failed login attempt](../../images/5/9e.png)
 
 
 The notifications must be visible for a few seconds. It is not compulsory to add colors. 
