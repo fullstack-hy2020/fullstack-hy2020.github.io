@@ -170,33 +170,33 @@ The exam is done in the exercise submission system. Follow the instructions belo
 - Enroll in the course through Open University.
 - You will get the enrollment link through the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
 
-![](../../images/0/enroll1.png)
+![enroll in university credits](../../images/0/enroll1.png)
 
 After the course enrollment, save your University of Helsinki student number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo):
 
-![](../../images/0/28b.png)
+![saving the student number](../../images/0/28b.png)
 
 See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info on how you find out your student number.
 
 After these steps, you can do the course exam in the submission system:
 
-![](../../images/0/enroll3.png)
+![start the course exam](../../images/0/enroll3.png)
 
 You will have 120 minutes to complete the exam. If all goes well, you should see the following confirmation:
 
-![](../../images/0/enroll4.png)
+![final exam confirmation](../../images/0/enroll4.png)
 
 If you fail, you must wait for one week for trying the exam again.
 
 If you passed the exam, and you are not going to complete more exercises, you can go back to my submission tab and ask for the credits:
 
-![](../../images/0/enroll5a.png)
+![ask for course completion credits](../../images/0/enroll5a.png)
 
 Remember to press the big blue button to ask for the credits to be registered. 
 
 Note that you have to press the button twice:
 
-![](../../images/0/button2.png)
+![pressing confirm button](../../images/0/button2.png)
 
 When pressed twice you should see the following text
 
@@ -208,19 +208,19 @@ Note: if you have already done the course exam in Moodle contact matti.luukkaine
 
 If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
-![](../../images/0/28b.png)
+![saving the student number](../../images/0/28b.png)
 
 If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#the-course-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
 
 You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
 
-![](../../images/0/enroll5a.png)
+![ask for course completion credits](../../images/0/enroll5a.png)
 
 Remember to press the big blue button to ask for the credits to be registered. 
 
 Note that you have to press the button twice:
 
-![](../../images/0/button2.png)
+![pressing confirm button](../../images/0/button2.png)
 
 When pressed twice you should see the following text
 
