@@ -46,7 +46,7 @@ Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the
 ```
 When we reload the application, we notice that it already looks a bit more stylish:
 
-![](../../images/7/5ea.png)
+![browser notes app with bootstrap](../../images/7/5ea.png)
 
 In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers)](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
@@ -64,7 +64,7 @@ const App = () => {
 
 We notice that this already affected the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
 
-![](../../images/7/6ea.png)
+![browser notes app with margin spacing](../../images/7/6ea.png)
 
 Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
@@ -94,7 +94,7 @@ const Notes = ({ notes }) => (
 
 The appearance of the application is quite stylish:
 
-![](../../images/7/7e.png)
+![browser notes tab with built-in table](../../images/7/7e.png)
 
 Notice that the React Bootstrap components have to be imported separately from the library as shown below:
 
@@ -142,13 +142,13 @@ import { Table, Form, Button } from 'react-bootstrap'
 
 After switching over to the Bootstrap form, our improved application looks like this:
 
-![](../../images/7/8ea.png)
+![browser notes app with bootstrap login](../../images/7/8ea.png)
 
 #### Notification
 
 Now that the login form is in better shape, let's take a look at improving our application's notifications:
 
-![](../../images/7/9ea.png)
+![browser notes app with bootstrap notification](../../images/7/9ea.png)
 
 Let's add a message for the notification when a user logs into the application. We will store it in the _message_ variable in the <i>App</i> component's state:
 
@@ -221,19 +221,19 @@ Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar
 
 The resulting layout has a very clean and pleasing appearance:
 
-![](../../images/7/10ea.png)
+![browser notes app bootstrap black navigation bar](../../images/7/10ea.png)
 
 
 If the viewport of the browser is narrowed, we notice that the menu "collapses" and it can be expanded by clicking the "hamburger" button:
 
-![](../../images/7/11ea.png)
+![browser notes app with hamburger menu](../../images/7/11ea.png)
 
 
 Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
 
 Chrome's developer tools make it possible to simulate using our application in the browser of different mobile clients:
 
-![](../../images/7/12ea.png)
+![chrome devtools with mobile browser preview of notes app](../../images/7/12ea.png)
 
 You can find the complete code for the application [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 
@@ -302,7 +302,7 @@ const Notes = ({ notes }) => (
 
 The table looks like so:
 
-![](../../images/7/63eb.png)
+![browser notes materialUI table](../../images/7/63eb.png)
 
 One less pleasant feature of Material UI is that each component has to be imported separately. The import list for the notes page is quite long:
 
@@ -355,7 +355,7 @@ const Login = (props) => {
 
 The result is:
 
-![](../../images/7/64ea.png)
+![browser notes app materialUI login form](../../images/7/64ea.png)
 
 MaterialUI, unlike Bootstrap, does not provide a component for the form itself. The form here is an ordinary HTML [form](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/form) element.
 
@@ -379,7 +379,7 @@ The notification displayed on login can be done using the [Alert](https://mui.co
 
 Alert is quite stylish:
 
-![](../../images/7/65ea.png)
+![browser notes app materialUI notifications](../../images/7/65ea.png)
 
 #### Navigation structure
 
@@ -413,7 +413,7 @@ If we use the example code from the documentation
 
 we do get working navigation, but it could look better
 
-![](../../images/7/66ea.png)
+![browser notes app materialUI blue navbar](../../images/7/66ea.png)
 
 We can find a better way from the [documentation](https://mui.com/material-ui/guides/composition/#routing-libraries). We can use [component props](https://mui.com/material-ui/guides/composition/#component-prop) to define how the root element of a MaterialUI component is rendered.
 
@@ -453,7 +453,7 @@ The code for the navigation bar is the following:
 
 and it looks like we want it to:
 
-![](../../images/7/67ea.png)
+![browser notes app MaterialUI blue nav bar white text](../../images/7/67ea.png)
 
 The code of the application can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
 
@@ -463,7 +463,7 @@ The difference between react-bootstrap and MaterialUI is not big. It's up to you
 I have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
 According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:
 
-![](../../images/7/68ea.png)
+![npmtrends of materialUI vs bootstrap](../../images/7/68ea.png)
 
 In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
 
@@ -630,7 +630,7 @@ const App = () => {
 
 The appearance of the resulting application is shown below:
 
-![](../../images/7/18ea.png)
+![browser notes app styled components](../../images/7/18ea.png)
 
 Styled components have seen consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles in React applications.
 
