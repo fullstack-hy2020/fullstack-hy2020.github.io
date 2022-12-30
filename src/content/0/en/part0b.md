@@ -45,7 +45,7 @@ Clicking the first event reveals more information on what's happening:
 
 ![Detailed view of a single event](../../images/0/3e.png)
 
-The upper part, <i>General</i>, shows that the browser requested the address <i>https://studies.cs.helsinki.fi/exampleapp</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200. 
+The upper part, <i>General</i>, shows that the browser requested the address <i><https://studies.cs.helsinki.fi/exampleapp></i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
 
 The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -65,7 +65,7 @@ Because of the img tag, the browser does a second <i>HTTP request</i> to fetch t
 
 The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen.
 
-The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+The chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp> on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
 ![Sequence diagram of the flow covered above](../../images/0/7e.png)
 
@@ -400,14 +400,14 @@ Changes made on the console will not be permanent. If you want to make lasting c
 
 ### Loading a page containing JavaScript - review
 
-Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
+Let's review what happens when the page <https://studies.cs.helsinki.fi/exampleapp/notes> is opened on the browser.
 
 ![sequence diagram of browser/server interaction](../../images/0/19e.png)
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
 - ...and a JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://studies.cs.helsinki.fi/exampleapp/data.json, which 
+- The browser executes the JavaScript code. The code makes an HTTP GET request to the address <https://studies.cs.helsinki.fi/exampleapp/data.json>, which
   returns the notes as JSON  data.
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API.
 

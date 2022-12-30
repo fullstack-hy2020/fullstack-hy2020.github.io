@@ -172,7 +172,7 @@ describe('Note app',  function() {
 
 The test first searches for the login button by its text and clicks the button with the command [cy.click](https://docs.cypress.io/api/commands/click.html#Syntax).
 
-Both of our tests begin the same way, by opening the page <i>http://localhost:3000</i>, so we should 
+Both of our tests begin the same way, by opening the page <i><http://localhost:3000></i>, so we should
 separate the shared part into a <i>beforeEach</i> block run before each test:
 
 ```js

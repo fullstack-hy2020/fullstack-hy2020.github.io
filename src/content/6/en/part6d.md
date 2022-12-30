@@ -16,7 +16,7 @@ To finish this part we will look into another older and more complicated way to 
 
 ### Using the connect function to share the Redux store to components
 
-Let's modify the <i>Notes</i> component so that instead of using the hook API (the _useDispatch_ and  _useSelector_ functions ) it uses the _connect_ function. 
+Let's modify the <i>Notes</i> component so that instead of using the hook API (the _useDispatch_ and  _useSelector_ functions) it uses the _connect_ function.
 We have to modify the following parts of the component:
 
 ````js

@@ -41,7 +41,7 @@ Exercise completion time statistics can be found via the [submission system](htt
 
 ### Course channel in Discord and Telegram
 
-You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord's <i>chat channel is not suitable for course-related discussions</i>. Please join the conversation!
+You can discuss the course and related topics in our dedicated group on Discord <https://study.cs.helsinki.fi/discord/join/fullstack> and on Telegram: <https://t.me/fullstackcourse>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord's <i>chat channel is not suitable for course-related discussions</i>. Please join the conversation!
 
 ### Parts and completion
 

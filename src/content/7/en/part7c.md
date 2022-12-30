@@ -49,7 +49,7 @@ When we reload the application, we notice that it already looks a bit more styli
 
 ![browser notes app with bootstrap](../../images/7/5ea.png)
 
-In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers)](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
+In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
 ```js
 const App = () => {
@@ -459,7 +459,7 @@ The code of the application can be found [here](https://github.com/fullstack-hy2
 
 The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.
 I have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.
-According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:
+According to <https://www.npmtrends.com/> which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:
 
 ![npmtrends of materialUI vs bootstrap](../../images/7/68ea.png)
 

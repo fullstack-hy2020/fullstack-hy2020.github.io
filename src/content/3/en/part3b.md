@@ -9,8 +9,8 @@ lang: en
 
 Next, let's connect the frontend we made in [part 2](/en/part2) to our own backend.
 
-In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address http://localhost:3001/notes.
-Our backend has a slightly different URL structure now, as the notes can be found at http://localhost:3001/api/notes. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
+In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address <http://localhost:3001/notes>.
+Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
 
 ```js
 import axios from 'axios'
@@ -72,6 +72,7 @@ The setup of our app looks now as follows:
 ![diagram of react app and browser](../../images/3/100.png)
 
 The react app running in the browser now fetches the data from node/express-server that runs in localhost:3001.
+
 ### Application to the Internet
 
 Now that the whole stack is ready, let's move our application to the internet.
@@ -193,7 +194,7 @@ Create a Git repository in the project directory, and add <i>.gitignore</i> with
 node_modules
 ```
 
-Create a Heroku account at https://devcenter.heroku.com/. 
+Create a Heroku account at <https://devcenter.heroku.com/>.
 Install the Heroku package using the command: npm install -g heroku.
 Create a Heroku application with the command <i>heroku create</i>, commit your code to the repository and move it to Heroku with the command <i>git push heroku main</i>.
 
@@ -207,7 +208,7 @@ If not, the issue can be found by reading the heroku logs with the command <i>he
 >
 >**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
 
-The frontend also works with the backend on Fly.io or Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Fly.io/Heroku instead of <i>http://localhost:3001</i>.
+The frontend also works with the backend on Fly.io or Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Fly.io/Heroku instead of <i><http://localhost:3001></i>.
 
 The next question is, how do we deploy the frontend to the Internet? We have multiple options. Let's go through one of them next.
 
@@ -351,7 +352,7 @@ The setup looks like now as follows:
 
 ![diagram of react app on heroku with a database](../../images/3/102.png)
 
-The node/express-backend now resides in the Fly.io/Heroku server. When the root address that is of the form https://glacial-ravine-74819.herokuapp.com/ is accessed, the browser loads and executes the React app that fetches the json-data from the Heroku server.
+The node/express-backend now resides in the Fly.io/Heroku server. When the root address that is of the form <https://glacial-ravine-74819.herokuapp.com/> is accessed, the browser loads and executes the React app that fetches the json-data from the Heroku server.
 
 ### Streamlining deploying of the frontend
 
@@ -441,7 +442,7 @@ If the project was created with create-react-app, this problem is easy to solve.
 }
 ```
 
-After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>. 
+After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i><http://localhost:3000></i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i><http://localhost:3001></i>.
 
 Now the frontend is also fine, working with the server both in development- and production mode.
 

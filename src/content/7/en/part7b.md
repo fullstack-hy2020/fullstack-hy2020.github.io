@@ -398,9 +398,9 @@ If we were to do this, we would lose much of the benefit provided by the <i>useF
 
 Let's return to exercises [2.12-14](/en/part2/getting_data_from_server#exercises-2-11-2-14).
 
-Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point.
+Use the code from <https://github.com/fullstack-hy2020/country-hook> as your starting point.
 
-The application can be used to search for a country's details from the https://restcountries.com/ interface. If a country is found, the details of the country are displayed:
+The application can be used to search for a country's details from the <https://restcountries.com/> interface. If a country is found, the details of the country are displayed:
 
 ![browser displaying country details](../../images/7/69ea.png)
 
@@ -454,7 +454,7 @@ We notice that the code is in no way specific to the fact that our application d
 
 Extract the code for communicating with the backend into its own _useResource_ hook. It is sufficient to implement fetching all resources and creating a new resource.
 
-You can do the exercise for the project found in the https://github.com/fullstack-hy2020/ultimate-hooks repository. The <i>App</i> component for the project is the following:
+You can do the exercise for the project found in the <https://github.com/fullstack-hy2020/ultimate-hooks> repository. The <i>App</i> component for the project is the following:
 
 ```js
 const App = () => {
