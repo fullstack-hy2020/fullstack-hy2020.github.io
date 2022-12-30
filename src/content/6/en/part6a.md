@@ -16,12 +16,12 @@ State in the store is not changed directly, but with different <i>actions</i>.
 
 When an action changes the state of the store, the views are rerendered: 
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
+![diagram action->dispatcher->store->view](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-1300w.png)
 
 If some action on the application, for example pushing a button, causes the need to change the state, the change is made with an action. 
 This causes re-rendering the view again: 
 
-![](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
+![same diagram as above but with action looping back](https://facebook.github.io/flux/img/overview/flux-simple-f8-diagram-with-client-action-1300w.png)
 
 Flux offers a standard way for how and where the application's state is kept and how it is modified. 
 
@@ -31,7 +31,7 @@ Facebook has an implementation for Flux, but we will be using the [Redux](https:
 
 We will get to know Redux by implementing a counter application yet again: 
 
-![](../../images/6/1.png)
+![browser counter application](../../images/6/1.png)
 
 Create a new create-react-app-application and install </i>redux</i> with the command
 
@@ -392,7 +392,7 @@ describe('noteReducer', () => {
 
 The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the _push_ command to manipulate the state, the test will not pass
 
-![](../../images/6/2.png)
+![terminal showing test failure and error about not using array.push](../../images/6/2.png)
 
 Now we'll create a test for the <i>TOGGLE\_IMPORTANCE</i> action:
 
@@ -1136,7 +1136,7 @@ npm start
 
 After completing these exercises, your application should look like this:
 
-![](../../images/6/3.png)
+![browser showing anecdotes and vote buttons](../../images/6/3.png)
 
 #### 6.3: anecdotes, step1
 
