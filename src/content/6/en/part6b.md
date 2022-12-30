@@ -38,7 +38,7 @@ export default noteReducer
 
 Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
-![](../../images/6/01e.png)
+![browser with important/not radio buttons and list](../../images/6/01e.png)
 
 Let's start with a very simple and straightforward implementation:
 
@@ -179,7 +179,7 @@ Since our application breaks completely at this point, we render an empty <i>div
 
 The state of the store gets printed to the console:
 
-![](../../images/6/4e.png)
+![devtools console showing notes array data](../../images/6/4e.png)
 
 
 As we can see from the output, the store has the exact shape we wanted it to!
@@ -212,7 +212,7 @@ store.dispatch(createNote('combineReducers forms one reducer from many simple re
 
 By simulating the creation of a note and changing the state of the filter in this fashion, the state of the store gets logged to the console after every change that is made to the store:
 
-![](../../images/6/5e.png)
+![devtools console output showing notes filter and new note](../../images/6/5e.png)
 
 
 At this point, it is good to become aware of a tiny but important detail. If we add a console log statement <i>to the beginning of both reducers</i>:
@@ -227,7 +227,7 @@ const filterReducer = (state = 'ALL', action) => {
 
 Based on the console output one might get the impression that every action gets duplicated:
 
-![](../../images/6/6.png)
+![devtools console output showing dupblicated actions in note and filter reducers](../../images/6/6.png)
 
 
 Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
@@ -248,7 +248,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Next, let's fix a bug that is caused by the code expecting the application store to be an array of notes:
 
-![](../../images/6/7ea.png)
+![browser TypeError: notes.map is not a function](../../images/6/7ea.png)
 
 It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
 
@@ -603,15 +603,15 @@ describe('noteReducer', () => {
 
 Once the addon is installed, clicking the <i>Redux</i> tab in the browser's console should open the development tools:
 
-![](../../images/6/11ea.png)
+![browser with redux addon in devtools](../../images/6/11ea.png)
 
 You can inspect how dispatching a certain action changes the state by clicking the action:
 
-![](../../images/6/12ea.png)
+![devtools inspecting notes tree in redux](../../images/6/12ea.png)
 
 It is also possible to dispatch actions to the store using the development tools:
 
-![](../../images/6/13ea.png)
+![devtools redux dispatching createNote with payload](../../images/6/13ea.png)
 
 You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
 
@@ -676,7 +676,7 @@ The application does not have to use the <i>Notification</i> component intellige
 
 Extend the application so that it uses the <i>Notification</i> component to display a message for five seconds when the user votes for an anecdote or creates a new anecdote:
 
-![](../../images/6/8ea.png)
+![browser showing message of having voted](../../images/6/8ea.png)
 
 It's recommended to create separate [action creators](https://redux-toolkit.js.org/api/createSlice#reducers) for setting and removing notifications.
 
@@ -684,7 +684,7 @@ It's recommended to create separate [action creators](https://redux-toolkit.js.o
 
 Implement filtering for the anecdotes that are displayed to the user.
 
-![](../../images/6/9ea.png)
+![browser showing filtering of anecdotes](../../images/6/9ea.png)
 
 Store the state of the filter in the redux store. It is recommended to create a new reducer and action creators for this purpose. Implement the reducer and action creators using the Redux Toolkit's <em>createSlice</em> function.
 
