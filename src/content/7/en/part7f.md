@@ -7,13 +7,13 @@ lang: en
 
 <div class="content">
 
-In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, there are 13 exercises that continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
+In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, 13 exercises continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
 
-If you do not want to use your own Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
+If you do not want to use your Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
 
 Many of the exercises in this part of the course material will require the refactoring of existing code. This is a common reality of extending existing applications, meaning that refactoring is an important and necessary skill even if it may feel difficult and unpleasant at times.
 
-One good piece of advice for both refactoring and writing new code is to take <i>baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods of time while refactoring.
+One good piece of advice for both refactoring and writing new code is to take <i>baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods while refactoring.
 
 </div>
 
@@ -23,15 +23,15 @@ One good piece of advice for both refactoring and writing new code is to take <i
 
 #### 7.9: automatic code formatting
 
-In the previous parts we used ESLint to ensure that code to follows the defined conventions.  [Prettier](https://prettier.io/) is yet another approach for the same. According to the documentation Prettier is <i>an opinionated code formatter</i>, that is, Prettier does not only control the code style but it also formats the code according to the definition.
+In the previous parts, we used ESLint to ensure that code follows the defined conventions.  [Prettier](https://prettier.io/) is yet another approach for the same. According to the documentation, Prettier is <i>an opinionated code formatter</i>, that is, Prettier not only controls the code style but also formats the code according to the definition.
 
-Prettier is easy to integrate to the code editor, so that when the code is saved, it is automatically formatted correctly.
+Prettier is easy to integrate into the code editor so that when the code is saved, it is automatically formatted correctly.
 
 Take Prettier to use in your app and configure it to work with your editor.
 
 #### 7.10: redux, step1
 
-Refactor the application from using internal React component state to using Redux for the application's state management.
+Refactor the application from using the internal React component state to using Redux for the application's state management.
 
 Change the application's notifications to use Redux at this point of the exercise set.
 
@@ -116,7 +116,7 @@ Implement the functionality for commenting on blog posts:
 
 ![](../../images/7/48.png)
 
-Comments should be anonymous, meaning that they are not associated to the user who left the comment.
+Comments should be anonymous, meaning that they are not associated with the user who left the comment.
 
 In this exercise, it is enough for the frontend to only display the comments that the application receives from the backend.
 
