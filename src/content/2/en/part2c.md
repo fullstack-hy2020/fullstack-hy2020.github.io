@@ -54,7 +54,7 @@ npx json-server --port 3001 --watch db.json
 
 Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
 
-![](../../images/2/14e.png)
+![json data of notes](../../images/2/14e.png)
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 
@@ -251,7 +251,7 @@ We will get more familiar with the _npm_ tool in the [third part of the course](
 
 **NB** The previously started json-server must be terminated before starting a new one; otherwise, there will be trouble:
 
-![](../../images/2/15b.png)
+![cannot bind to port 3001 error](../../images/2/15b.png)
 
 The red print in the error message informs us about the issue:
 
@@ -290,7 +290,7 @@ console.log(promise2)
 
 If you open <http://localhost:3000> in the browser, this should be printed to the console
 
-![](../../images/2/16b.png)
+![promises printed to console](../../images/2/16b.png)
 
 **Note:** when the content of the file <i>index.js</i> changes, React does not always notice that automatically, so you might need to refresh the browser to see your changes! A simple workaround to make React notice the change automatically is to create a file named <i>.env</i> in the root directory of the project and add this line <i>FAST_REFRESH=false</i>. Restart the app for the applied changes to take effect.
 
@@ -319,7 +319,7 @@ promise.then(response => {
 ```
 The following is printed to the console:
 
-![](../../images/2/17e.png)
+![json object data printed to console](../../images/2/17e.png)
 
 The JavaScript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter. The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.
 
@@ -534,7 +534,7 @@ The code for the application, as described so far, can be found in full on [gith
 
 The configuration for the whole application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application
 
-![](../../images/2/18e.png)
+![diagram of composition of react app](../../images/2/18e.png)
 
 The JavaScript code making up our React application is run in the browser. The browser gets the JavaScript from the <i>React dev server</i>, which is the application that runs after running the command <em>npm start</em>. The dev-server transforms the JavaScript into a format understood by the browser. Among other things, it stitches together JavaScript from different files into one file. We'll discuss the dev-server in more detail in part 7 of the course.
 
@@ -608,15 +608,15 @@ The user interface is very simple. The country to be shown is found by typing a 
 
 If there are too many (over 10) countries that match the query, then the user is prompted to make their query more specific:
 
-![](../../images/2/19b1.png)
+![too many matches screenshot](../../images/2/19b1.png)
 
 If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
 
-![](../../images/2/19b2.png)
+![matching countries in a list screenshot](../../images/2/19b2.png)
 
 When there is only one country matching the query, then the basic data of the country (eg. capital and area), its flag and the languages spoken are shown:
 
-![](../../images/2/19c3.png)
+![flag and additional attributes screenshot](../../images/2/19c3.png)
 
 **NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>. You don't need to worry about these edge cases.
 
@@ -628,7 +628,7 @@ When there is only one country matching the query, then the basic data of the co
 
 Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country:
 
-![](../../images/2/19b4.png)
+![attach show buttons for each country feature](../../images/2/19b4.png)
 
 In this exercise, it is also enough that your application works for most countries. Countries whose name appears in the name of another country, like <i>Sudan</i>, can be ignored.
 
@@ -638,7 +638,7 @@ In this exercise, it is also enough that your application works for most countri
 
 Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org). Note that it might take some minutes until a generated API key is valid.
 
-![](../../images/2/19x.png)
+![weather report added feature](../../images/2/19x.png)
 
 If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
 
