@@ -129,9 +129,9 @@ Server running on port 3001
 
 We can open our humble application in the browser by visiting the address <http://localhost:3001>:
 
-![](../../images/3/1.png)
+![hello world screen capture](../../images/3/1.png)
 
-In fact, the server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content.
+The server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content.
 
 
 **NB** if port 3001 is already in use by some other application, then starting the server will result in the following error message:
@@ -241,7 +241,7 @@ The <i>application/json</i> value in the <i>Content-Type</i> header informs the 
 
 When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
 
-![](../../images/3/2e.png)
+![formatted JSON notes data](../../images/3/2e.png)
 
 ### Express
 
@@ -270,7 +270,7 @@ The dependency is also added to our <i>package.json</i> file:
 
 The source code for the dependency is installed in the <i>node\_modules</i> directory located at the root of the project. In addition to express, you can find a great number of other dependencies in the directory:
 
-![](../../images/3/4.png)
+![ls listing of dependencies in directory](../../images/3/4.png)
 
 
 These are the dependencies of the express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
@@ -358,7 +358,7 @@ In our code, the request is answered by using the [send](http://expressjs.com/en
 
 We can verify this from the <i>Network</i> tab in developer tools:
 
-![](../../images/3/5.png)
+![network tab in dev tools](../../images/3/5.png)
 
 
 The second route defines an event handler that handles HTTP GET requests made to the <i>notes</i> path of the application:
@@ -372,7 +372,7 @@ app.get('/api/notes', (request, response) => {
 
 The request is responded to with the [json](http://expressjs.com/en/4x/api.html#res.json) method of the _response_ object. Calling the method will send the __notes__ array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.
 
-![](../../images/3/6ea.png)
+![api/notes gives the formatted JSON data again](../../images/3/6ea.png)
 
 Next, let's take a quick look at the data sent in JSON format.
 
@@ -391,7 +391,7 @@ It's worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a string an
 
 The experiment shown below illustrates this point:
 
-![](../../assets/3/5.png)
+![node terminal demonstrating json is of type string](../../assets/3/5.png)
 
 
 The experiment above was done in the interactive [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html). You can start the interactive node-repl by typing in _node_ in the command line. The repl is particularly useful for testing how commands work while you're writing application code. I highly recommend this!
@@ -572,7 +572,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 When we visit <http://localhost:3001/api/notes/1> again in the browser, the console - which is the terminal (in this case) - will display the following:
 
-![](../../images/3/8.png)
+![terminal displaying 1 then undefined](../../images/3/8.png)
 
 
 The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
@@ -618,7 +618,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Now fetching an individual resource works.
 
-![](../../images/3/9ea.png)
+![api/notes/1 gives a single note as JSON](../../images/3/9ea.png)
 
 
 However, there's another problem with our application.
@@ -626,7 +626,7 @@ However, there's another problem with our application.
 
 If we search for a note with an id that does not exist, the server responds with:
 
-![](../../images/3/10ea.png)
+![network tools showing 200 and content-length 0](../../images/3/10ea.png)
 
 
 The HTTP status code that is returned is 200, which means that the response succeeded. There is no data sent back with the response, since the value of the <i>content-length</i> header is 0, and the same can be verified from the browser. 
@@ -691,7 +691,7 @@ Many tools exist for making the testing of backends easier. One of these is a co
 
 Let's install the Postman desktop client [from here](https://www.postman.com/downloads/)  and try it out:
 
-![](../../images/3/11x.png)
+![postman screenshot on api/notes/2](../../images/3/11x.png)
 
 Using Postman is quite easy in this situation. It's enough to define the URL and then select the correct request type (DELETE).
 
@@ -707,11 +707,11 @@ Once the plugin is installed, using it is very simple. We make a directory at th
 
 Let's create a new <i>get\_all\_notes.rest</i> file and define the request that fetches all notes.
 
-![](../../images/3/12ea.png)
+![get all notes rest file with get request on notes](../../images/3/12ea.png)
 
 By clicking the <i>Send Request</i> text, the REST client will execute the HTTP request and the response from the server is opened in the editor.
 
-![](../../images/3/13ea.png)
+![response from vs code from get request](../../images/3/13ea.png)
 
 ### The WebStorm HTTP Client
 
@@ -752,35 +752,35 @@ For the time being, the application does not do anything with the received data 
 
 Before we implement the rest of the application logic, let's verify with Postman that the data is in fact received by the server. In addition to defining the URL and request type in Postman, we also have to define the data sent in the <i>body</i>:
 
-![](../../images/3/14x.png)
+![postman post on api/notes with post content](../../images/3/14x.png)
 
 The application prints the data that we sent in the request to the console:
 
-![](../../images/3/15e.png)
+![terminal printing content provided in postman](../../images/3/15e.png)
 
 **NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:
 
-![](../../images/3/16.png)
+![nodemon error as typing requre not defined](../../images/3/16.png)
 
 Similarly, it is useful to check the console for making sure that the backend behaves as we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.
 
 A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:
 
-![](../../images/3/17x.png)
+![postman having text as content-type](../../images/3/17x.png)
 
 The <i>Content-Type</i> header is set to <i>text/plain</i>:
 
-![](../../images/3/18x.png)
+![postman showing headers and content-type as text/plain](../../images/3/18x.png)
 
 The server appears to only receive an empty object:
 
-![](../../images/3/19.png)
+![nodemon output showing empty curly braces](../../images/3/19.png)
 
 The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.
 
 If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:
 
-![](../../images/3/20eb.png)
+![sample post request in vscode with JSON data](../../images/3/20eb.png)
 
 We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
 
@@ -904,7 +904,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 The code for the current state of the application is specified in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
-![](../../images/3/21.png)
+![GitHub screenshot of branch 3-1](../../images/3/21.png)
 
 
 If you clone the project, run the _npm install_ command before starting the application with _npm start_ or _npm run dev_.
@@ -981,7 +981,7 @@ Data:
 
 Output in the browser after GET request:
   
-![](../../images/3/22e.png)
+![JSON data of 4 poeple in browser from api/persons](../../images/3/22e.png)
 
 Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string. 
 
@@ -993,7 +993,7 @@ The application must also offer an _npm run dev_ command that will run the appli
 
 Implement a page at the address <http://localhost:3001/info> that looks roughly like this:
 
-![](../../images/3/23x.png)
+![Screenshot for 3.2](../../images/3/23x.png)
 
 
 The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
@@ -1155,7 +1155,7 @@ Morgan is installed just like all other libraries with the _npm install_ command
 
 Configure morgan so that it also shows the data sent in HTTP POST requests:
 
-![](../../images/3/24.png)
+![terminal showing post data being sent](../../images/3/24.png)
 
 Note that logging data even in the console can be dangerous since it can contain sensitive data and may violate local privacy law (e.g. GDPR in EU) or business-standard. In this exercise, you don't have to worry about privacy issues, but in practice, try not to log any sensitive data.
 
