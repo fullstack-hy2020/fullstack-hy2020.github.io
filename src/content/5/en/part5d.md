@@ -99,13 +99,13 @@ describe('Note app', function() {
 
 We start the test from the opened window:
 
-![](../../images/5/40x.png)
+![cypress screenshot with run 1 integration spec](../../images/5/40x.png)
 
 **NOTE**: you might need to restart Cypress after deleting the example tests.
 
 Running the test opens your browser and shows how the application behaves as the test is run:
 
-![](../../images/5/32x.png)
+![cypress showing automation of note test](../../images/5/32x.png)
 
 The structure of the test should look familiar. They use <i>describe</i> blocks to group different test cases, just like Jest. The test cases have been defined with the <i>it</i> method. 
 Cypress borrowed these parts from the [Mocha](https://mochajs.org/) testing library it uses under the hood. 
@@ -148,7 +148,7 @@ describe('Note app', function() {
 
 the test fails
 
-![](../../images/5/33x.png)
+![cypress showing failure expecting to find wtf but no](../../images/5/33x.png)
 
 Let's remove the failing code from the test. 
 
@@ -290,7 +290,7 @@ To avoid name conflicts, we gave the submit button the id <i>login-button</i> we
 
 Now we notice that the variable _cy_ our tests use gives us a nasty Eslint error
 
-![](../../images/5/30ea.png)
+![vscode screenshot showing cy is not defined](../../images/5/30ea.png)
 
 We can get rid of it by installing [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) as a development dependency
 
@@ -364,7 +364,7 @@ cy.get('input')
 
 If the page contained more inputs, the test would break
 
-![](../../images/5/31x.png)
+![cypress error - cy.type can only be called on a single element](../../images/5/31x.png)
 
 Due to this problem, it would again be better to give the input an <i>id</i> and search for the element by its id. 
 
@@ -896,12 +896,12 @@ How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) c
 
 When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:
 
-![](../../images/5/34x.png)
+![cypress test runner clicking testbody and second note](../../images/5/34x.png)
 
 By clicking the next line _.contains('make important')_ we see that the test uses 
 the 'make important' button corresponding to the <i>second note</i>:
 
-![](../../images/5/35x.png)
+![cypress test runner clicking make important](../../images/5/35x.png)
 
 When chained, the second <i>contains</i> command <i>continues</i> the search from within the component found by the first command. 
 
@@ -914,7 +914,7 @@ cy.contains('make important').click()
 
 the result would have been entirely different. The second line of the test would click the button of a wrong note:
 
-![](../../images/5/36x.png)
+![cypress showing error and incorrectly trying to click first button](../../images/5/36x.png)
 
 When coding tests, you should check in the test runner that the tests use the right components!
 
@@ -936,7 +936,7 @@ const Note = ({ note, toggleImportance }) => {
 
 Our tests break! As the test runner reveals,  _cy.contains('second note')_ now returns the component containing the text, and the button is not in it. 
 
-![](../../images/5/37x.png)
+![cypress showing test is broken trying to click make important](../../images/5/37x.png)
 
 One way to fix this is the following:
 
@@ -1003,7 +1003,7 @@ Stopping the test execution with the debugger is [possible](https://docs.cypress
 The developer console is all sorts of useful when debugging your tests. 
 You can see the HTTP requests done by the tests on the Network tab, and the console tab will show you information about your tests:
 
-![](../../images/5/38ea.png)
+![developer console while running cypress](../../images/5/38ea.png)
 
 So far we have run our Cypress tests using the graphical test runner.
 It is also possible to run them [from the command line](https://docs.cypress.io/guides/guides/command-line.html). We just have to add an npm script for it:
@@ -1022,7 +1022,7 @@ It is also possible to run them [from the command line](https://docs.cypress.io/
 
 Now we can run our tests from the command line with the command <i>npm run test:e2e</i>
 
-![](../../images/5/39x.png)
+![terminal output of running npm e2e tests showing passed](../../images/5/39x.png)
 
 Note that videos of the test execution will be saved to <i>cypress/videos/</i>, so you should probably git ignore this directory. 
 
