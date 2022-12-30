@@ -109,7 +109,7 @@ The event handler immediately calls the <em>event.preventDefault()</em> method, 
 
 The target of the event stored in _event.target_ is logged to the console:
 
-![](../../images/2/6e.png)
+![button clicked with form object console](../../images/2/6e.png)
 
 
 The target in this case is the form that we have defined in our component.
@@ -156,7 +156,7 @@ const App = (props) => {
 
 The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong:
 
-![](../../images/2/7e.png)
+![provided value to prop without onchange console error](../../images/2/7e.png)
 
 Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element.
 
@@ -222,11 +222,11 @@ Note that we did not need to call the _event.preventDefault()_ method like we di
 
 You can follow along in the console to see how the event handler is called:
 
-![](../../images/2/8e.png)
+![multiple console calls with typing text](../../images/2/8e.png)
 
 You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab:
 
-![](../../images/2/9ea.png)
+![state changes in react devtools shows typing too](../../images/2/9ea.png)
 
 Now the <i>App</i> component's <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes:
 
@@ -455,7 +455,7 @@ It's also important to put what we learned in the [debugging React applications]
 
 After finishing this exercise your application should look something like this:
 
-![](../../images/2/10e.png)
+![screenshot of 2.6 finished](../../images/2/10e.png)
 
 Note the use of the React developer tools extension in the picture above!
 
@@ -471,7 +471,7 @@ Prevent the user from being able to add names that already exist in the phoneboo
 
 Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted:
 
-![](../../images/2/11e.png)
+![2.7 sample screenshot](../../images/2/11e.png)
 
 **Hint:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
@@ -508,13 +508,13 @@ Expand your application by allowing users to add phone numbers to the phone book
 
 At this point, the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
 
-![](../../images/2/12e.png)
+![2.8 sample screenshot](../../images/2/12e.png)
 
 <h4>2.9*: The Phonebook Step4</h4>
 
 Implement a search field that can be used to filter the list of people by name:
 
-![](../../images/2/13e.png)
+![2.9 sample screenshot](../../images/2/13e.png)
 
 You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
 
