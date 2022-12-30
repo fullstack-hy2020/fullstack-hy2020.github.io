@@ -55,21 +55,21 @@ Store the information about the signed-in user in the Redux store.
 
 Implement a view to the application that displays all of the basic information related to users:
 
-![](../../images/7/41.png)
+![browser blogs with users table showing blogs created](../../images/7/41.png)
 
 #### 7.15: Individual user view
 
 Implement a view for individual users that displays all of the blog posts added by that user:
 
-![](../../images/7/44.png)
+![browser blogs showing users added blogs](../../images/7/44.png)
 
 You can access the view by clicking the name of the user in the view that lists all users:
 
-![](../../images/7/43.png)
+![browser blogs showing clickable users](../../images/7/43.png)
 
 <i>**NB:**</i> you will almost certainly stumble across the following error message during this exercise:
 
-![](../../images/7/42ea.png)
+![browser TypeError cannot read property name of undefined](../../images/7/42ea.png)
 
 The error message will occur if you refresh the page for an individual user.
 
@@ -96,11 +96,11 @@ const User = () => {
 
 Implement a separate view for blog posts. You can model the layout of your view after the following example:
 
-![](../../images/7/45.png)
+![browser blogs showing single blog via URL /blogs/number](../../images/7/45.png)
 
 Users should be able to access the view by clicking the name of the blog post in the view that lists all of the blog posts.
 
-![](../../images/7/46.png)
+![browser showing blogs are clickable](../../images/7/46.png)
 
 After you're done with this exercise, the functionality that was implemented in exercise 5.7 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
 
@@ -108,13 +108,13 @@ After you're done with this exercise, the functionality that was implemented in 
 
 Implement a navigation menu for the application:
 
-![](../../images/7/47.png)
+![browser blogs navigation navigation menu](../../images/7/47.png)
 
 #### 7.18: comments, step1
 
 Implement the functionality for commenting on blog posts:
 
-![](../../images/7/48.png)
+![browser blogs showing list of comments for a blog](../../images/7/48.png)
 
 Comments should be anonymous, meaning that they are not associated with the user who left the comment.
 
@@ -126,7 +126,7 @@ An appropriate mechanism for adding comments to a blog post would be an HTTP POS
 
 Extend your application so that users can add comments to blog posts from the frontend:
 
-![](../../images/7/49.png)
+![browser showing comments added via frontend](../../images/7/49.png)
 
 #### 7.20: Styles, step1
 
