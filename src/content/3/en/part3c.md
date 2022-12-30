@@ -18,7 +18,7 @@ Debugging Node applications is slightly more difficult than debugging JavaScript
 
 The Visual Studio Code debugger can be useful in some situations. You can launch the application in debugging mode like this:
 
-![](../../images/3/35x.png)
+![screenshot showing how to launch debugger in vscode](../../images/3/35x.png)
 
 Note that the application shouldn't be running in another console, otherwise the port will already be in use.
 
@@ -26,7 +26,7 @@ __NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. 
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 
-![](../../images/3/36x.png)
+![vscode screenshot of execution at a breakpoint](../../images/3/36x.png)
 
 The execution stopped at the <i>breakpoint</i> in line 69. In the console, you can see the value of the <i>note</i> variable. In the top left window, you can see other things related to the state of the application.
 
@@ -44,15 +44,15 @@ node --inspect index.js
 
 You can access the debugger by clicking the green icon - the node logo - that appears in the Chrome developer console:
 
-![](../../images/3/37.png)
+![dev tools with green node logo icon](../../images/3/37.png)
 
 The debugging view works the same way as it did with React applications. The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
 
-![](../../images/3/38eb.png)
+![dev tools sources tab breakpoint and watch variables](../../images/3/38eb.png)
 
 All of the application's <i>console.log</i> messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
 
-![](../../images/3/39ea.png)
+![dev tools console tab showing note object typed in](../../images/3/39ea.png)
 
 #### Question everything
 
@@ -82,11 +82,11 @@ Naturally, you can install and run MongoDB on your computer. However, the intern
 
 Once you've created and logged into your account, let us start by selecting the free option:
 
-![](../../images/3/mongo1.png)
+![mongodb deploy a cloud database free shared](../../images/3/mongo1.png)
 
 Pick the cloud provider and location and create the cluster:
 
-![](../../images/3/mongo2.png)
+![mongodb picking shared, aws and region](../../images/3/mongo2.png)
 
 Let's wait for the cluster to be ready for use. This can take some minutes.
 
@@ -94,19 +94,19 @@ Let's wait for the cluster to be ready for use. This can take some minutes.
 
 Let's use the <i>security</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database.
 
-![](../../images/3/mongo3.png)
+![mongodb security quickstart](../../images/3/mongo3.png)
 
 Next, we have to define the IP addresses that are allowed access to the database. For the sake of simplicity we will allow access from all IP addresses:
 
-![](../../images/3/mongo4.png)
+![mongodb network access/add ip access list](../../images/3/mongo4.png)
 
 Finally, we are ready to connect to our database. Start by clicking <i>connect</i>:
 
-![](../../images/3/mongo5.png)
+![mongodb database deployment connect](../../images/3/mongo5.png)
 
 and choose: <i>Connect your application</i>:
 
-![](../../images/3/mongo6.png)
+![mongodb connect application](../../images/3/mongo6.png)
 
 The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application.
 
@@ -184,11 +184,11 @@ When the code is run with the command <i>node mongo.js password</i>, Mongo will 
 
 We can view the current state of the database from the MongoDB Atlas from <i>Browse collections</i>, in the Database tab.
 
-![](../../images/3/mongo7.png)
+![mongodb databases browse collections button](../../images/3/mongo7.png)
 
 As the view states, the <i>document</i> matching the note has been added to the <i>notes</i> collection in the <i>myFirstDatabase</i> database.
 
-![](../../images/3/mongo8.png)
+![mongodb collections tab db myfirst app notes](../../images/3/mongo8.png)
 
 Let's destroy the default database <i>myFirstDatabase</i> and change the name of the database referenced in our connection string to <i>noteApp</i> instead, by modifying the URI:
 
@@ -198,7 +198,7 @@ mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrit
 
 Let's run our code again:
 
-![](../../images/3/mongo9.png)
+![mongodb collections tab noteApp notes](../../images/3/mongo9.png)
 
 The data is now stored in the right database. The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website. Creating a database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet.
 
@@ -270,7 +270,7 @@ Note.find({}).then(result => {
 
 When the code is executed, the program prints all the notes stored in the database:
 
-![](../../images/3/70ea.png)
+![node mongo.js outputs notes as JSON](../../images/3/70ea.png)
 
 The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
 
@@ -400,7 +400,7 @@ app.get('/api/notes', (request, response) => {
 
 We can verify in the browser that the backend works for displaying all of the documents:
 
-![](../../images/3/44ea.png)
+![api/notes in browser shows notes in JSON](../../images/3/44ea.png)
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
@@ -502,7 +502,7 @@ It's not a good idea to hardcode the address of the database into the code, so i
 
 The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt. Both functions just log a message to the console about the success status:
 
-![](../../images/3/45e.png)
+![node output when wrong username/password](../../images/3/45e.png)
 
 There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
 
@@ -527,7 +527,7 @@ We also added the hardcoded port of the server into the <em>PORT</em> environmen
 
 **The <i>.env</i> file should be gitignored right away since we do not want to publish any confidential information publicly online!**
 
-![](../../images/3/45ae.png)
+![.gitignore in vscode with .env line added](../../images/3/45ae.png)
 
 The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
 
@@ -553,7 +553,7 @@ Once the file .env has been gitignored, Heroku does not get the database URL fro
 
 That can be done through the Heroku dashboard as follows:
 
-![](../../images/3/herokuConfig.png)
+![Heroku dashboard showing config vars](../../images/3/herokuConfig.png)
 
 or from the command line with the command:
 
@@ -624,7 +624,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**. Next, let's try creating a new note after taking the database into use:
 
-![](../../images/3/46e.png)
+![VS code rest client doing a post](../../images/3/46e.png)
 
 Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend. It is highly inefficient to test things exclusively through the frontend.
 
@@ -746,7 +746,7 @@ The reason the error handler gets called might be something completely different
 
 Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:
 
-![](../../images/3/15b.png)
+![sample screenshot showing tiny slice of output](../../images/3/15b.png)
 
 ### Moving error handling into middleware
 
@@ -934,6 +934,6 @@ Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to
 
 Inspecting an individual phonebook entry from the browser should look like this:
 
-![](../../images/3/49.png)
+![screenshot of browser showing one person with api/persons/their_id](../../images/3/49.png)
 
 </div>
