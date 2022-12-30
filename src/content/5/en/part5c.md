@@ -548,7 +548,7 @@ const input = screen.getByRole('textbox')
 
 would cause an error:
 
-![](../../images/5/40.png)
+![node error that shows two elements with textbox since we use getByRole](../../images/5/40.png)
 
 The error message suggests using <i>getAllByRole</i>. The test could be fixed as follows:
 
@@ -724,12 +724,12 @@ We can easily find out the [coverage](https://github.com/facebookincubator/creat
 CI=true npm test -- --coverage
 ```
 
-![](../../images/5/18ea.png)
+![terminal output of test coverage](../../images/5/18ea.png)
 
 A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory. 
 The report will tell us the lines of untested code in each component:
 
-![](../../images/5/19ea.png)
+![HTML report of the test coverage](../../images/5/19ea.png)
 
 You can find the code for our current application in its entirety in the <i>part5-8</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-8).
 </div>
