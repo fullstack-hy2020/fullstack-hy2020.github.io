@@ -7,17 +7,17 @@ lang: en
 
 <div class="content">
 
-In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline-styles](/en/part2/adding_styles_to_react_app#inline styles). In this part, we will take a look at a few other ways. 
+In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline styles](/en/part2/adding_styles_to_react_app#inline_styles). In this part, we will take a look at a few other ways. 
 
 ### Ready-made UI libraries
 
 One approach to defining styles for an application is to use a ready-made "UI framework".
 
-One of the first widely popular UI frameworks was the [Bootstrap](https://getbootstrap.com/) toolkit created by Twitter which may still be the most popular framework. Recently, there has been an explosion in the number of new UI frameworks that have entered the arena. In fact, the selection is so vast that there is little hope of creating an exhaustive list of options.
+One of the first widely popular UI frameworks was the [Bootstrap](https://getbootstrap.com/) toolkit created by Twitter which may still be the most popular framework. Recently, there has been an explosion in the number of new UI frameworks that have entered the arena. The selection is so vast that there is little hope of creating an exhaustive list of options.
 
 Many UI frameworks provide developers of web applications with ready-made themes and "components" like buttons, menus, and tables. We write components in quotes because, in this context, we are not talking about React components. Usually, UI frameworks are used by including the CSS stylesheets and JavaScript code of the framework in the application.
 
-There are many UI frameworks that have React-friendly versions where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
+Many UI frameworks have React-friendly versions where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
 Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://mui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
 
@@ -48,7 +48,7 @@ When we reload the application, we notice that it already looks a bit more styli
 
 ![](../../images/7/5ea.png)
 
-In Bootstrap, all of the contents of the application are typically rendered inside of a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
+In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers)](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
 ```js
 const App = () => {
@@ -62,11 +62,11 @@ const App = () => {
 }
 ```
 
-We notice that this already has an effect on the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
+We notice that this already affected the appearance of the application. The content is no longer as close to the edges of the browser as it was earlier:
 
 ![](../../images/7/6ea.png)
 
-Next, let's make some changes to the <i>Notes</i> component, so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
+Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
 ```js
 const Notes = ({ notes }) => (
@@ -192,7 +192,7 @@ We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/
 
 #### Navigation structure
 
-Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution in spite of the cryptic documentation:
+Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution despite the cryptic documentation:
 
 ```js
 <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark">
@@ -231,7 +231,7 @@ If the viewport of the browser is narrowed, we notice that the menu "collapses" 
 
 Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
 
-Chrome developer tools makes it possible to simulate using our application in the browser of different mobile clients:
+Chrome's developer tools make it possible to simulate using our application in the browser of different mobile clients:
 
 ![](../../images/7/12ea.png)
 
@@ -239,7 +239,7 @@ You can find the complete code for the application [here](https://github.com/ful
 
 ### Material UI
 
-As our second example we will look into the [MaterialUI](https://mui.com/) React library, which implements the [Material design](https://material.io/) visual language developed by Google.
+As our second example, we will look into the [MaterialUI](https://mui.com/) React library, which implements the [Material Design](https://material.io/) visual language developed by Google.
 
 Install the library with the command
 
@@ -353,7 +353,7 @@ const Login = (props) => {
 }
 ```
 
-The end result is:
+The result is:
 
 ![](../../images/7/64ea.png)
 
@@ -425,7 +425,7 @@ By defining
 </Button>
 ```
 
-the _Button_ component is rendered so that its root component is react-router-dom's _Link_ which receives its path as prop field _to_.
+the _Button_ component is rendered so that its root component is react-router-dom's _Link_ which receives its path as the prop field _to_.
 
 The code for the navigation bar is the following:
 
@@ -455,19 +455,19 @@ and it looks like we want it to:
 
 ![](../../images/7/67ea.png)
 
-The code of the application can be found from [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
+The code of the application can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/notes-materialui.js).
 
 ### Closing thoughts
 
-The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better-looking. 
-I myself have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
+The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking. 
+I have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
 According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:
 
 ![](../../images/7/68ea.png)
 
 In the two previous examples, we used the UI frameworks with the help of React-integration libraries.
 
-Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes to our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
+Instead of using the [React Bootstrap](https://react-bootstrap.github.io/) library, we could have just as well used Bootstrap directly by defining CSS classes for our application's HTML elements. Instead of defining the table with the <i>Table</i> component:
 
 ```js
 <Table striped>
@@ -632,7 +632,7 @@ The appearance of the resulting application is shown below:
 
 ![](../../images/7/18ea.png)
 
-Styled components have seen a consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles in React applications.
+Styled components have seen consistent growth in popularity in recent times, and quite a lot of people consider it to be the best way of defining styles in React applications.
 
 </div>
 
@@ -640,6 +640,6 @@ Styled components have seen a consistent growth in popularity in recent times, a
 
 ### Exercises
 
-The exercises related to the topics presented here, can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
+The exercises related to the topics presented here can be found at the end of this course material section in the exercise set [for extending the blog list application](/en/part7/exercises_extending_the_bloglist).
 
 </div>
