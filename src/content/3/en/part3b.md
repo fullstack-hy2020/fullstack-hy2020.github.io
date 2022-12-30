@@ -29,7 +29,7 @@ export default { getAll, create, update }
 <!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
 Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
 
-![](../../images/3/3ae.png)
+![Get request showing error in dev tools](../../images/3/3ae.png)
 
 <!-- Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa. -->
 What's going on here? We can access the backend from a browser and from postman without any problems.
@@ -69,7 +69,7 @@ You can read more about CORS from [Mozilla's page](https://developer.mozilla.org
 
 The setup of our app looks now as follows:
 
-![](../../images/3/100.png)
+![diagram of react app and browser](../../images/3/100.png)
 
 The react app running in the browser now fetches the data from node/express-server that runs in localhost:3001.
 ### Application to the Internet
@@ -199,7 +199,7 @@ Create a Heroku application with the command <i>heroku create</i>, commit your c
 
 If everything went well, the application works:
 
-![](../../images/3/25ea.png)
+![live site screenshot of api/notes showing JSON](../../images/3/25ea.png)
 
 If not, the issue can be found by reading the heroku logs with the command <i>heroku logs</i>.
 
@@ -267,7 +267,7 @@ If you are using a Windows computer, you may use either [copy](https://www.windo
 
 The backend directory should now look as follows:
 
-![](../../images/3/27ea.png)
+![bash screenshot of ls showing build directory](../../images/3/27ea.png)
 
 To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript, etc., it fetches, we need a built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
 
@@ -298,7 +298,7 @@ After the change, we have to create a new production build and copy it to the ro
 
 The application can now be used from the <i>backend</i> address <http://localhost:3001>:
 
-![](../../images/3/28e.png)
+![Notes application screenshot](../../images/3/28e.png)
 
 Our application now works exactly like the [single-page app](/en/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0. 
 
@@ -322,11 +322,11 @@ The file contains instructions to fetch a CSS stylesheet defining the styles of 
 
 The React code fetches notes from the server address <http://localhost:3001/api/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
 
-![](../../images/3/29ea.png)
+![Network tab of notes application on backend](../../images/3/29ea.png)
 
 The setup that is ready for a product deployment looks as follows:
 
-![](../../images/3/101.png)
+![diagram of deployment ready react app](../../images/3/101.png)
 
 Unlike when running the app in a development environment, everything is now in the same node/express-backend that runs in localhost:3001. When the browser goes to the page, the file <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes.
 
@@ -340,7 +340,7 @@ fly deploy
 
 [The application](https://obscure-harbor-49797.herokuapp.com/) works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
 
-![](../../images/3/30ea.png)
+![screenshot of notes application](../../images/3/30ea.png)
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 
@@ -348,7 +348,7 @@ The application needs a database. Before we introduce one, let's go through a fe
 
 The setup looks like now as follows:
 
-![](../../images/3/102.png)
+![diagram of react app on heroku with a database](../../images/3/102.png)
 
 The node/express-backend now resides in the Fly.io/Heroku server. When the root address that is of the form https://glacial-ravine-74819.herokuapp.com/ is accessed, the browser loads and executes the React app that fetches the json-data from the Heroku server.
 
@@ -416,7 +416,7 @@ Another option is the use of [shx](https://www.npmjs.com/package/shx).
 
 Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work. 
 
-![](../../images/3/32ea.png)
+![Network dev tools showing a 404 on getting notes](../../images/3/32ea.png)
 
 This is due to changing the backend address to a relative URL: 
 
@@ -478,13 +478,13 @@ Test the deployed backend with a browser and Postman or VS Code REST client to e
 
 The following is a log of one typical problem. Heroku cannot find application dependency <i>express</i>:
 
-![](../../images/3/33.png)
+![terminal screenshot of heroku with error on finding express module](../../images/3/33.png)
 
 The reason is that the <i>express</i> package has not been installed with the <em>npm install express</em> command, so information about the dependency was not saved to the file <i>package.json</i>.
 
 Another typical problem is that the application is not configured to use the port set to the environment variable <em>PORT</em>: 
 
-![](../../images/3/34.png)
+![terminal showing error about failing to bind to port](../../images/3/34.png)
 
 Create a README.md at the root of your repository, and add a link to your online application to it. 
 
