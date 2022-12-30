@@ -19,11 +19,11 @@ It is very common for web applications to have a navigation bar, which enables s
 
 Our app could have a main page
 
-![](../../images/7/1ea.png)
+![browser showing notes app with home nav link](../../images/7/1ea.png)
 
 and separate pages for showing information on notes and users:
 
-![](../../images/7/2ea.png)
+![browser showing notes app with notes nav link](../../images/7/2ea.png)
 
 In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making an HTTP GET request to the server and rendering the HTML representing the view that was returned.
 
@@ -196,7 +196,7 @@ The application now contains five different views whose display is controlled by
 
 <i>Home</i> and <i>Users</i> are unchanged from the previous exercise.  <i>Notes</i> is a bit more complicated. It renders the list of notes passed to it as props in such a way that the name of each note is clickable.
 
-![](../../images/7/3ea.png)
+![notes app showing notes are clickable](../../images/7/3ea.png)
 
 The ability to click a name is implemented with the component <i>Link</i>, and clicking the name of a note whose id is 3 would trigger an event that changes the address of the browser into <i>notes/3</i>:
 
@@ -286,7 +286,7 @@ The option to navigate to the <i>Login</i> view is rendered conditionally in the
 
 So if the user is already logged in, instead of displaying the link <i>Login</i>, we show the username of the user:
 
-![](../../images/7/4a.png)
+![browser notes app showing username logged in](../../images/7/4a.png)
 
 The code of the component handling the login functionality is as follows:
 
@@ -518,23 +518,23 @@ Add React Router to the application so that by clicking links in the <i>Menu</i>
 
 At the root of the application, meaning the path _/_, show the list of anecdotes:
 
-![](../../assets/teht/40.png)
+![browser at baseURL showing anecdotes and footer](../../assets/teht/40.png)
 
 The <i>Footer</i> component should always be visible at the bottom.
 
 The creation of a new anecdote should happen e.g. in the path <i>create</i>:
 
-![](../../assets/teht/41.png)
+![browser anecdotes /create shows create form](../../assets/teht/41.png)
 
 #### 7.2: routed anecdotes, step2
 
 Implement a view for showing a single anecdote:
 
-![](../../assets/teht/42.png)
+![browser /anecdotes/number showing single anecdote](../../assets/teht/42.png)
 
 Navigating to the page showing the single anecdote is done by clicking the name of that anecdote:
 
-![](../../assets/teht/43.png)
+![browser showing previous link that was clicked](../../assets/teht/43.png)
 
 #### 7.3: routed anecdotes, step3
 
@@ -542,6 +542,6 @@ The default functionality of the creation form is quite confusing because nothin
 
 Improve the functionality such that after creating a new anecdote the application transitions automatically to showing the view for all anecdotes <i>and</i> the user is shown a notification informing them of this successful creation for the next five seconds:
 
-![](../../assets/teht/44.png)
+![browser anecdotes showing success message for adding anecdote](../../assets/teht/44.png)
 
 </i>
