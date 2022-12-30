@@ -362,7 +362,7 @@ const App = () => {
 
 It's easy to follow and track the calls made to the <i>App</i> component's render function:
 
-![](../../images/1/4e.png)
+![screenshot of render function with dev tools](../../images/1/4e.png)
 
 ### Event handling
 
@@ -475,7 +475,7 @@ What if we tried to define the event handlers in a simpler form?
 
 This would completely break our application:
 
-![](../../images/1/5c.png)
+![screenshot of re-renders error](../../images/1/5c.png)
 
 What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write:
 
