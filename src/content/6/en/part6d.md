@@ -124,7 +124,7 @@ The <i>Notes</i> component can access the state of the store directly, e.g. thro
 
 The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this:
 
-![](../../images/6/24c.png)
+![diagram notelist and filter connected to redux store](../../images/6/24c.png)
 
 
 The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
@@ -257,7 +257,7 @@ It can take some time to wrap your head around how _mapDispatchToProps_ works, e
 
 The resulting situation from using _connect_ can be visualized like this:
 
-![](../../images/6/25b.png)
+![diagram showing toggle connecting to state in redux and dispatch inside of redux](../../images/6/25b.png)
 
 In addition to accessing the store's state via <i>props.notes</i> and <i>props.filter</i>, the component also references a function that can be used for dispatching <i>notes/toggleImportanceOf</i>-type actions via its <i>toggleImportanceOf</i> prop.
 
@@ -404,7 +404,7 @@ const NewNote = (props) => {
 
 We can see the difference between the two functions:
 
-![](../../images/6/10.png)
+![devtools console of two functions](../../images/6/10.png)
 
 The first function is a regular <i>action creator</i> whereas the second function contains the additional dispatch to the store that was added by connect.
 
