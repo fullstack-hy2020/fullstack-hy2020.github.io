@@ -28,7 +28,7 @@ By default, the application runs on localhost port 3000 with the address <http:/
 
 Your default browser should launch automatically. Open the browser console **immediately**. Also, open a text editor so that you can view the code as well as the webpage at the same time on the screen:
 
-![](../../images/1/1e.png)
+![code and browser side by side](../../images/1/1e.png)
 
 The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file index.js looks like this:
 
@@ -57,7 +57,7 @@ The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>,
 
 If you end up with the following error:
 
-![](../../images/1/r18-error.png)
+![resolve react-dom/client error](../../images/1/r18-error.png)
 
 Then, for some reason, you are using a React version older than the current version 18.
 
@@ -323,7 +323,7 @@ React has been configured to generate quite clear error messages. Despite this, 
 
 **The console should always be open**. If the browser reports errors, it is not advisable to continue writing more code, hoping for miracles. You should instead try to understand the cause of the error and, for example, go back to the previous working state:
 
-![](../../images/1/2a.png)
+![screenshot of undefined prop error](../../images/1/2a.png)
 
 It is good to remember that in React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
 
@@ -369,7 +369,7 @@ const App = () => {
 
 the result is an error message.
 
-![](../../images/1/3c.png)
+![multiple root elements error screenshot](../../images/1/3c.png)
 
 Using a root element is not the only working option. An <i>array</i> of components is also a valid solution:
 
