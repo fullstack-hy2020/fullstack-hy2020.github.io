@@ -362,7 +362,7 @@ The current state of the code for the application can be found on [GitHub](https
 
 <div class="tasks">
 
-### Exercises 6.13.-6.14.
+### Exercises 6.13.-6.14
 
 #### 6.13 Anecdotes and the backend, step1
 
@@ -415,7 +415,7 @@ In this implementation, both components would dispatch an action without the nee
 
 Let us now install the library
 
-```
+```bash
 npm install redux-thunk
 ```
 

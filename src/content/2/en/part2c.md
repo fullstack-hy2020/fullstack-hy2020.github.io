@@ -659,7 +659,7 @@ const api_key = process.env.REACT_APP_API_KEY
 
 Note that if you created the application using `npx create-react-app ...` and you want to use a different name for your environment variable then the environment variable name must still begin with `REACT_APP_`. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
 
-```
+```text
 # .env
 
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3

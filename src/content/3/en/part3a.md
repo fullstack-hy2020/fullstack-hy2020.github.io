@@ -701,7 +701,7 @@ We created a new <i>create\_note.rest</i> file for the request. The request is f
 
 One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. You can also add multiple requests in the same file using `###` separators:
 
-```
+```text
 GET http://localhost:3001/api/notes/
 
 ###

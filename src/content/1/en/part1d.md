@@ -1032,7 +1032,7 @@ Remember, submit **all** the exercises of one part **in a single submission**. O
 
 In some situations you may also have to run the command below from the root of the project:
 
-``` 
+```bash
 rm -rf node_modules/ && npm i
 ```
 

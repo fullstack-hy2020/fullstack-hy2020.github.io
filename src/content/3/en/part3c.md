@@ -554,7 +554,7 @@ That can be done through the Heroku dashboard as follows:
 
 or from the command line with the command:
 
-```
+```bash
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
@@ -568,7 +568,7 @@ However, a [better option](https://community.fly.io/t/clarification-on-environme
 
 and set the env value from the command line with the command:
 
-```
+```bash
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 

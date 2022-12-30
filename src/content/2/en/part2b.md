@@ -439,7 +439,7 @@ The <em>newName</em> state is meant for controlling the form input element.
 
 Sometimes it can be useful to render state and other variables as text for debugging purposes. You can temporarily add the following element to the rendered component:
 
-```
+```html
 <div>debug: {newName}</div>
 ```
 

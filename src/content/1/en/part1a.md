@@ -416,7 +416,7 @@ You may submit all the exercises of this course into the same repository, or use
 
 One very functional file  structure for the submission repository is as follows:
 
-```
+```text
 part0
 part1
   courseinfo

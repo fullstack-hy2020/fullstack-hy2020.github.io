@@ -621,7 +621,7 @@ You can submit all of the exercises into the same repository, or use multiple di
 
 One good way to name the directories in your submission repository is as follows:
 
-```
+```text
 part0
 part1
   courseinfo
@@ -661,7 +661,7 @@ In the section [Loading a page containing JavaScript - review](/en/part0/fundame
 
 The diagram was made using the [web sequence diagrams](https://www.websequencediagrams.com) service as follows:
 
-```
+```plantUML
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
 server-->browser: HTML-code
 browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css

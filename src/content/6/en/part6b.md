@@ -384,7 +384,7 @@ As we have seen so far, Redux's configuration and state management implementatio
 
 Let's start using Redux Toolkit in our application by refactoring the existing code. First, we will need to install the library:
 
-```
+```bash
 npm install @reduxjs/toolkit
 ```
 

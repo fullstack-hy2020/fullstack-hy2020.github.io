@@ -249,13 +249,13 @@ In addition to displaying content, the <i>Note</i> component also makes sure tha
 
 Let us install a library [user-event](https://testing-library.com/docs/user-event/intro) that makes simulating user input a bit easier:
 
-```
+```bash
 npm install --save-dev @testing-library/user-event
 ```
 
 At the moment of writing (28.1.2022) there is a mismatch between the version of a dependency jest-watch-typeahead that create-react-app and user-event are using. The problem is fixed by installing a specific version:
 
-```
+```bash
 npm install -D --exact jest-watch-typeahead@0.6.5
 ```
 
@@ -391,7 +391,7 @@ The _beforeEach_ function gets called before each test, which then renders the <
 
 The first test verifies that the <i>Togglable</i> component renders its child component
 
-```
+```html
 <div className="testDiv">
   togglable content
 </div>

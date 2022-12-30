@@ -235,7 +235,7 @@ A possible fix is found [here](https://github.com/facebook/create-react-app/issu
 
 and run commands
 
-```
+```bash
 rm -rf package-lock.json
 rm -rf node_modules
 npm cache clean --force

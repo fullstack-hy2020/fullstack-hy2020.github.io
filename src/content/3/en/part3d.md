@@ -120,7 +120,7 @@ For production, we have to set the database URL in the service that is hosting o
 
 In Fly.io that is done _fly secrets set_:
 
-```
+```bash
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
