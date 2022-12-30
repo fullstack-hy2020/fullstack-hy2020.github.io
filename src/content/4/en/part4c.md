@@ -13,7 +13,7 @@ We want to add user authentication and authorization to our application. Users s
 
 Let's start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):
 
-![](https://yuml.me/a187045b.png)
+![diagram linking user and notes](https://yuml.me/a187045b.png)
 
 
 If we were working with a relational database the implementation would be straightforward. Both resources would have their separate database tables, and the id of the user who created a note would be stored in the notes table as a foreign key.
@@ -418,7 +418,7 @@ For making new users in a production or development environment, you may send a 
 
 The list looks like this:
 
-![](../../images/4/9.png)
+![browser api/users shows JSON data with notes array](../../images/4/9.png)
 
 
 You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
@@ -467,17 +467,17 @@ await user.save()
 
 Let's try to create a new note
 
-![](../../images/4/10e.png)
+![Postman creating a new note](../../images/4/10e.png)
 
 The operation appears to work. Let's add one more note and then visit the route for fetching all users:
 
-![](../../images/4/11e.png)
+![api/users returns JSON with users and their array of notes](../../images/4/11e.png)
 
 We can see that the user has two notes. 
 
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
 
-![](../../images/4/12e.png)
+![api/notes shows ids of numbers in JSON](../../images/4/12e.png)
 
 ### Populate
 
@@ -502,7 +502,7 @@ The [populate](http://mongoosejs.com/docs/populate.html) method is chained after
 
 The result is almost exactly what we wanted:
 
-![](../../images/4/13ea.png)
+![JSON data showing populated notes and users data with repetition](../../images/4/13ea.png)
 
 We can use the populate parameter for choosing the fields we want to include from the documents. The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
@@ -517,7 +517,7 @@ usersRouter.get('/', async (request, response) => {
 
 The result is now exactly like we want it to be:
 
-![](../../images/4/14ea.png)
+![combined data showing no repetition](../../images/4/14ea.png)
 
 Let's also add a suitable population of user information to notes:
 
@@ -533,7 +533,7 @@ notesRouter.get('/', async (request, response) => {
 
 Now the user's information is added to the <i>user</i> field of note objects.
 
-![](../../images/4/15ea.png)
+![notes JSON now has user info embedded too](../../images/4/15ea.png)
 
 
 It's important to understand that the database does not know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
