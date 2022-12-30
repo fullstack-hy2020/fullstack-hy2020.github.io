@@ -383,7 +383,7 @@ Keep both your code and the web page open together **at the same time, all the t
 
 If and when your code fails to compile and your browser lights up like a Christmas tree:
 
-![](../../images/1/6x.png)
+![screenshot of code](../../images/1/6x.png)
 
 don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
 
@@ -437,11 +437,11 @@ Logging output to the console is by no means the only way of debugging our appli
 
 The execution will pause once it arrives at a point where the _debugger_ command gets executed:
 
-![](../../images/1/7a.png)
+![debugger paused in dev tools](../../images/1/7a.png)
 
 By going to the <i>Console</i> tab, it is easy to inspect the current state of variables:
 
-![](../../images/1/8a.png)
+![console inspection screenshot](../../images/1/8a.png)
 
 Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
 
@@ -449,11 +449,11 @@ The debugger also enables us to execute our code line by line with the controls 
 
 You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
 
-![](../../images/1/9a.png)
+![breakpoint example in devtools](../../images/1/9a.png)
 
 It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
 
-![](../../images/1/10ea.png)
+![screenshot react developer tools extension](../../images/1/10ea.png)
 
 
 The _App_ component's state is defined like so:
@@ -466,7 +466,7 @@ const [allClicks, setAll] = useState([])
 
 Dev tools show the state of hooks in the order of their definition:
 
-![](../../images/1/11ea.png)
+![state of hooks in react dev tools](../../images/1/11ea.png)
 
 The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
 
@@ -931,7 +931,7 @@ The component gets the event handler function from the _handleClick_ prop, and t
 
 Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
-![](../../images/1/12e.png)
+![using correct attribute names code screenshot](../../images/1/12e.png)
 
 ### Do Not Define Components Within Components
 
@@ -1037,7 +1037,7 @@ Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback f
 
 The application must display the total number of collected feedback for each category. Your final application could look like this:
 
-![](../../images/1/13e.png)
+![screenshot of feedback options](../../images/1/13e.png)
 
 Note that your application needs to work only during a single browser session. Once you refresh the page, the collected feedback is allowed to disappear.
 
@@ -1077,7 +1077,7 @@ export default App
 
 Expand your application so that it shows more statistics about the gathered feedback: the total number of collected feedback, the average score (good: 1, neutral: 0, bad: -1) and the percentage of positive feedback.
 
-![](../../images/1/14e.png)
+![average and percentage positive screenshot feedback](../../images/1/14e.png)
 
 <h4>1.8: unicafe step3</h4>
 
@@ -1111,7 +1111,7 @@ const App = () => {
 
 Change your application to display statistics only once feedback has been gathered.
 
-![](../../images/1/15e.png)
+![no feedback given text screenshot](../../images/1/15e.png)
 
 <h4>1.10: unicafe step5</h4>
 
@@ -1143,11 +1143,11 @@ The application's state should still be kept in the root <i>App</i> component.
 
 Display the statistics in an HTML [table](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables/Basics), so that your application looks roughly like this:
 
-![](../../images/1/16e.png)
+![screenshot of statistics table](../../images/1/16e.png)
 
 Remember to keep your console open at all times. If you see this warning in your console:
 
-![](../../images/1/17a.png)
+![console warning](../../images/1/17a.png)
 
 Then perform the necessary actions to make the warning disappear. Try pasting the error message into a search engine if you get stuck.
 
@@ -1193,7 +1193,7 @@ Find out how to generate random numbers in JavaScript, eg. via a search engine o
 
 Your finished application could look something like this:
 
-![](../../images/1/18a.png)
+![random anecdote with next button](../../images/1/18a.png)
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
 
@@ -1201,7 +1201,7 @@ Your finished application could look something like this:
 
 Expand your application so that you can vote for the displayed anecdote.
 
-![](../../images/1/19a.png)
+![anecdote app with votes button added](../../images/1/19a.png)
 
 **NB** store the votes of each anecdote into an array or object in the component's state. Remember that the correct way of updating state stored in complex data structures like objects and arrays is to make a copy of the state.
 
@@ -1231,7 +1231,7 @@ Using an array might be the simpler choice in this case. Searching the Internet 
 
 Now implement the final version of the application that displays the anecdote with the largest number of votes:
 
-![](../../images/1/20a.png)
+![anecdote with largest number of votes](../../images/1/20a.png)
 
 If multiple anecdotes are tied for first place it is sufficient to just show one of them.
 
