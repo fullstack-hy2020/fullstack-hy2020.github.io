@@ -13,7 +13,7 @@ We will now implement support for [token-based authentication](https://scotch.io
 
 The principles of token-based authentication are depicted in the following sequence diagram: 
 
-![](../../images/4/16e.png)
+![sequence diagram of token-based authentication](../../images/4/16e.png)
 
 - User starts by logging in using a login form implemented with React 
     - We will add the login form to the frontend in [part 5](/en/part5) 
@@ -108,7 +108,7 @@ app.use('/api/login', loginRouter)
 
 Let's try logging in using VS Code REST-client: 
 
-![](../../images/4/17e.png)
+![vscode rest post with username/password](../../images/4/17e.png)
 
 It does not work. The following is printed to the console: 
 
@@ -123,11 +123,11 @@ The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set
 
 A successful login returns the user details and the token: 
 
-![](../../images/4/18ea.png)
+![vs code rest resonse showing details and token](../../images/4/18ea.png)
 
 A wrong username or password returns an error message and the proper status code:
 
-![](../../images/4/19ea.png)
+![vs code rest response for incorrect login details](../../images/4/19ea.png)
 
 ### Limiting creating new notes to logged-in users
 
@@ -213,11 +213,11 @@ A new note can now be created using Postman if the <i>authorization</i> header i
 
 Using Postman this looks as follows: 
 
-![](../../images/4/20e.png)
+![postman adding bearer token](../../images/4/20e.png)
 
 and with Visual Studio Code REST client
 
-![](../../images/4/21e.png)
+![vscode adding bearer token example](../../images/4/21e.png)
 
 ### Error handling
 
@@ -376,7 +376,7 @@ Implement a way to see the details of all users by doing a suitable HTTP request
 
 The list of users can, for example, look as follows: 
 
-![](../../images/4/22.png)
+![browser api/users shows JSON data of two users](../../images/4/22.png)
 
 #### 4.16*: bloglist expansion, step4
 
@@ -397,11 +397,11 @@ Which user is designated as the creator does not matter just yet. The functional
 
 Modify listing all blogs so that the creator's user information is displayed with the blog: 
 
-![](../../images/4/23e.png)
+![api/blogs embeds creators user information in JSON data](../../images/4/23e.png)
 
 and listing all users also displays the blogs created by each user: 
 
-![](../../images/4/24e.png)
+![api/users embeds blogs in JSON data](../../images/4/24e.png)
 
 #### 4.18: bloglist expansion, step6
 
