@@ -7,9 +7,9 @@ lang: en
 
 <div class="content">
 
-Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1). 
+Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
-To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
+To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -43,7 +43,6 @@ const App = (props) => {
 }
 ```
 
-
 If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
 
 ```js
@@ -54,9 +53,7 @@ const App = () => {
 }  
 ```
 
-
 Let's stick with the initial value passed in the props for the time being.
-
 
 Next, let's add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) to the component that will be used for adding new notes.
 
@@ -101,16 +98,13 @@ const addNote = (event) => {
 }
 ```
 
-The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function: 
-
+The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function:
 
 The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, [among other things](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), cause the page to reload.
-
 
 The target of the event stored in _event.target_ is logged to the console:
 
 ![button clicked with form object console](../../images/2/6e.png)
-
 
 The target in this case is the form that we have defined in our component.
 
@@ -119,7 +113,6 @@ How do we access the data contained in the form's <i>input</i> element?
 ### Controlled component
 
 There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://reactjs.org/docs/forms.html#controlled-components).
-
 
 Let's add a new piece of state called <em>newNote</em> for storing the user-submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:
 
@@ -382,7 +375,6 @@ const App = (props) => {
 }
 ```
 
-
 The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa:
 
 ```js
@@ -461,7 +453,6 @@ Note the use of the React developer tools extension in the picture above!
 
 **NB:**
 
-
 - you can use the person's name as a value of the <i>key</i> property
 - remember to prevent the default action of submitting HTML forms!
 
@@ -505,7 +496,6 @@ Expand your application by allowing users to add phone numbers to the phone book
 </form>
 ```
 
-
 At this point, the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
 
 ![2.8 sample screenshot](../../images/2/12e.png)
@@ -517,7 +507,6 @@ Implement a search field that can be used to filter the list of people by name:
 ![2.9 sample screenshot](../../images/2/13e.png)
 
 You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
-
 
 **NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g.
 
@@ -568,7 +557,7 @@ const App = () => {
 }
 ```
 
-**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
+**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse
 the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
 from the last part.
 

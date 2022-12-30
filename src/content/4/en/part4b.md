@@ -42,9 +42,7 @@ Next, let's change the scripts in our <i>package.json</i> so that when tests are
 
 We also added the [runInBand](https://jestjs.io/docs/cli#--runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database.
 
-
 We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
-
 
 There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package as a development dependency with the command:
 
@@ -66,6 +64,7 @@ We can then achieve cross-platform compatibility by using the cross-env library 
   // ...
 }
 ```
+
 **NB**: If you are deploying this application to heroku, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server. To fix this, change cross-env to a production dependency by running this in the command line:
 
 ```bash
@@ -74,12 +73,9 @@ npm i cross-env -P
 
 Now we can modify the way that our application runs in different modes. As an example of this, we could define the application to use a separate test database when it is running tests.
 
-
 We can create our separate test database in MongoDB Atlas. This is not an optimal solution in situations where many people are developing the same application. Test execution in particular typically requires a single database instance that is not used by tests that are running concurrently.
 
-
 It would be better to run our tests using a database that is installed and running on the developer's local machine. The optimal solution would be to have every test execution use a separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.
-
 
 Let's make some changes to the module that defines the application's configuration:
 
@@ -116,7 +112,6 @@ The _config_ module that we have implemented slightly resembles the [node-config
 These are the only changes we need to make to our application's code.
 
 You can find the code for our current application in its entirety in the <i>part4-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-2).
-
 
 ### supertest
 
@@ -224,14 +219,11 @@ const api = supertest(app) // highlight-line
 // ...
 ```
 
-
 The documentation for supertest says the following:
 
 > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>
 
-
 In other words, supertest takes care that the application being tested is started at the port that it uses internally.
-
 
 Let's write a few more tests:
 
@@ -250,7 +242,6 @@ test('the first note is about HTTP methods', async () => {
 ```
 
 Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://jestjs.io/docs/expect#expectvalue) method of Jest.
-
 
 The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:
 
@@ -382,12 +373,12 @@ The provided parameter can refer to the name of the test or the describe block. 
 npm test -- -t 'notes'
 ```
 
-**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
-The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code. 
+**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run.
+The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code.
 
 ### async/await
 
-Before we write more tests let's take a look at the _async_ and _await_ keywords. 
+Before we write more tests let's take a look at the _async_ and _await_ keywords.
 
 The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.
 
@@ -808,7 +799,7 @@ You can find the code for our current application in its entirety in the <i>part
 ### Eliminating the try-catch
 
 <!-- Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne. Kaikki routejen käsittelijät noudattavat samaa kaavaa -->
-Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions. 
+Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.
 All of the route handlers follow the same structure
 
 ```js
@@ -823,7 +814,7 @@ try {
 One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 
 <!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen. -->
-The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this. 
+The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.
 
 <!-- Asennetaan kirjasto -->
 Let's install the library
@@ -834,7 +825,7 @@ npm install express-async-errors
 
 <!-- Kirjaston käyttö on <i>todella</i> helppoa.
  Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->
-Using the library is <i>very</i> easy. 
+Using the library is <i>very</i> easy.
 You introduce the library in <i>app.js</i>:
 
 ```js
@@ -854,7 +845,7 @@ module.exports = app
 ```
 
 <!-- Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista. Muistiinpanon poistamisesta huolehtiva route -->
-The 'magic' of the library allows us to eliminate the try-catch blocks completely. 
+The 'magic' of the library allows us to eliminate the try-catch blocks completely.
 For example the route for deleting a note
 
 ```js
@@ -879,7 +870,7 @@ notesRouter.delete('/:id', async (request, response) => {
 ```
 
 <!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen. -->
-Because of the library, we do not need the _next(exception)_ call anymore. 
+Because of the library, we do not need the _next(exception)_ call anymore.
 The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
 
 <!-- Muut routet yksinkertaistuvat seuraavasti: -->
@@ -946,7 +937,7 @@ test('notes are returned as json', async () => {
 }
 ```
 
-We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem. 
+We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem.
 
 The console displays the following output:
 
@@ -1046,20 +1037,22 @@ One way to get rid of this is to run tests with option <i>--forceExit</i>:
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
 
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
+
 #### 4.10: Blog list tests, step3
 
 Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> URL successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
 
 Once the test is finished, refactor the operation to use async/await instead of promises.
+
 #### 4.11*: Blog list tests, step4
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
 
 Make the required changes to the code so that it passes the test.
+
 #### 4.12*: Blog list tests, step5
 
 Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
-
 
 Make the required changes to the code so that it passes the test.
 
@@ -1070,7 +1063,6 @@ Make the required changes to the code so that it passes the test.
 ### Refactoring tests
 
 Our test coverage is currently lacking. Some requests like <i>GET /api/notes/:id</i> and <i>DELETE /api/notes/:id</i> aren't tested when the request is sent with an invalid id. The grouping and organization of tests could also use some improvement, as all tests exist on the same "top level" in the test file. The readability of the test would improve if we group related tests with <i>describe</i> blocks.
-
 
 Below is an example of the test file after making some minor improvements:
 
@@ -1212,7 +1204,6 @@ afterAll(() => {
 })
 ```
 
-
 The test output is grouped according to the <i>describe</i> blocks:
 
 ![jest output showing grouped describe blocks](../../images/4/7.png)
@@ -1220,7 +1211,6 @@ The test output is grouped according to the <i>describe</i> blocks:
 There is still room for improvement, but it is time to move forward.
 
 This way of testing the API, by making HTTP requests and inspecting the database with Mongoose, is by no means the only nor the best way of conducting API-level integration tests for server applications. There is no universal best way of writing tests, as it all depends on the application being tested and available resources.
-
 
 You can find the code for our current application in its entirety in the <i>part4-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-6).
 

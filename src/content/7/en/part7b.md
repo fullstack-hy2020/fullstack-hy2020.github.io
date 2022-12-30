@@ -23,14 +23,14 @@ The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we intr
 
 As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
-**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function. 
+**Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.
 
 **Don’t call Hooks from regular JavaScript functions.** Instead, you can:
 
 - Call Hooks from React function components.
 - Call Hooks from custom Hooks
 
-There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly. 
+There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-hooks) rule that can be used to verify that the application uses hooks correctly.
 
 Create-react-app has the readily-configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
 
@@ -42,9 +42,7 @@ React offers the option to create [custom](https://reactjs.org/docs/hooks-custom
 
 > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
-
 Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word _use_.
-
 
 We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling) that can have its value incremented, decremented, or reset. The code of the application is as follows:
 
@@ -99,7 +97,6 @@ const useCounter = () => {
 
 Our custom hook uses the _useState_ hook internally to create its state. The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
 
-
 React components can use the hook as shown below:
 
 ```js
@@ -123,9 +120,7 @@ const App = (props) => {
 }
 ```
 
-
 By doing this we can extract the state of the _App_ component and its manipulation entirely into the _useCounter_ hook. Managing the counter state and logic is now the responsibility of the custom hook.
-
 
 The same hook could be <i>reused</i> in the application that was keeping track of the number of clicks made to the left and right buttons:
 
@@ -150,9 +145,7 @@ const App = () => {
 }
 ```
 
-
 The application creates <i>two</i> completely separate counters. The first one is assigned to the variable _left_ and the other to the variable _right_.
-
 
 Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requests the user to input their name, birthday, and height:
 
@@ -194,9 +187,7 @@ const App = () => {
 }
 ```
 
-
 Every field of the form has its own state. To keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
-
 
 Let's define our own custom _useField_ hook that simplifies the state management of the form:
 
@@ -216,9 +207,7 @@ const useField = (type) => {
 }
 ```
 
-
 The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
-
 
 The hook can be used in the following way:
 
@@ -242,16 +231,13 @@ const App = () => {
 }
 ```
 
-
 ### Spread attributes
-
 
 We could simplify things a bit further. Since the _name_ object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
 
 ```js
 <input {...name} /> 
 ```
-
 
 As the [example](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the React documentation states, the following two ways of passing props to a component achieve the exact same result:
 
@@ -302,9 +288,9 @@ Custom hooks are not only a tool for reuse; they also provide a better way for d
 
 The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out:
 
-* [Awesome React Hooks Resources](https://github.com/rehooks/awesome-react-hooks)
-* [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
-* [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
+- [Awesome React Hooks Resources](https://github.com/rehooks/awesome-react-hooks)
+- [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
+- [Why Do React Hooks Rely on Call Order?](https://overreacted.io/why-do-hooks-rely-on-call-order/)
 
 </div>
 
@@ -312,7 +298,7 @@ The internet is starting to fill up with more and more helpful material related 
 
 ### Exercises 7.4.-7.8.
 
-We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router). 
+We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router).
 
 #### 7.4: anecdotes and hooks step1
 
@@ -363,7 +349,7 @@ Add a button to the form that you can use to clear all the input fields:
 
 ![browser anecdotes with reset button](../../images/7/61ea.png)
 
-Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field. 
+Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field.
 
 Depending on your solution, you may see the following warning in your console:
 
@@ -375,7 +361,7 @@ We will return to this warning in the next exercise.
 
 If your solution did not cause a warning to appear in the console, you have already finished this exercise.
 
-If you see the warning in the console, make the necessary changes to get rid of the _Invalid value for prop \`reset\` on \<input\> tag_ console warning. 
+If you see the warning in the console, make the necessary changes to get rid of the _Invalid value for prop \`reset\` on \<input\> tag_ console warning.
 
 The reason for this warning is that after making the changes to your application, the following expression:
 

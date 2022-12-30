@@ -7,7 +7,6 @@ lang: en
 
 <div class="content">
 
-
 When creating notes in our application, we would naturally want to store them in some backend server. The [json-server](https://github.com/typicode/json-server) package claims to be a so-called REST or RESTful API in its documentation:
 
 > <i>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</i>
@@ -102,7 +101,6 @@ This makes it possible to verify that all the data we intended to send was actua
 In the next part of the course, we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
 
 > **NB:** In the current version of our application, the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
-
 
 The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
 
@@ -211,7 +209,7 @@ Almost every line of code in the function body contains important details. The f
 
 The array [find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) is used to find the note we want to modify, and we then assign it to the _note_ variable.
 
-After this, we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. 
+After this, we create a <i>new object</i> that is an exact copy of the old note, apart from the important property.
 
 The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax may seem a bit strange at first:
 
@@ -231,7 +229,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must never mutate state directly in React. 
+This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must never mutate state directly in React.
 
 It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 
@@ -256,7 +254,6 @@ The map method creates a new array by mapping every item from the old array into
 This <em>map</em> trick may seem a bit strange at first, but it's worth spending some time wrapping your head around it. We will be using this method many times throughout the course.
 
 ### Extracting Communication with the Backend into a Separate Module
-
 
 The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/en/part2/rendering_a_collection_modules#refactoring-modules).
 
@@ -398,7 +395,6 @@ export default {
 }
 ```
 
-
 We no longer return the promise returned by axios directly. Instead, we assign the promise to the <em>request</em> variable and call its <em>then</em> method:
 
 ```js
@@ -421,7 +417,7 @@ const getAll = () => {
 }
 ```
 
-The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then). 
+The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).
 
 After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.
 
@@ -564,23 +560,23 @@ In defining the object using this shorter notation, we make use of a [new featur
 
 To demonstrate this feature, let's consider a situation where we have the following values assigned to variables:
 
-```js 
+```js
 const name = 'Leevi'
 const age = 0
 ```
 
 In older versions of JavaScript we had to define an object like this:
 
-```js 
+```js
 const person = {
   name: name,
   age: age
 }
 ```
 
-However, since both the property fields and the variable names in the object are the same, it's enough to simply write the following in ES6 JavaScript: 
+However, since both the property fields and the variable names in the object are the same, it's enough to simply write the following in ES6 JavaScript:
 
-```js 
+```js
 const person = { name, age }
 ```
 
@@ -615,7 +611,7 @@ We had [previously](/en/part2/getting_data_from_server#axios-and-promises) menti
 
 The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.
 
-The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method. 
+The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method.
 
 In practice, the error handler for rejected promises is defined like this:
 
@@ -645,7 +641,7 @@ axios
   })
 ```
 
-The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>. 
+The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>.
 
 ```js
 axios
@@ -730,7 +726,7 @@ const delete = (id) => {
 
 <h4>2.18*: Phonebook step10</h4>
 
-Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number. 
+Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.
 
 If the person's information is already in the phonebook, the application can confirm the action from the user:
 

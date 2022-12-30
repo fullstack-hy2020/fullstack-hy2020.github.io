@@ -76,7 +76,7 @@ See [this](/en/part1/a_more_complex_state_debugging_react_apps/#a-note-on-react-
 
 ### Component
 
-The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i> 
+The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)

@@ -58,9 +58,7 @@ const LoginForm = ({
 export default LoginForm
 ```
 
-
 The state and all the functions related to it are defined outside of the component and are passed to the component as props.
-
 
 Notice that the props are assigned to variables through <i>destructuring</i>, which means that instead of writing:
 
@@ -86,9 +84,7 @@ const LoginForm = (props) => {
 }
 ```
 
-
 where the properties of the _props_ object are accessed through e.g. _props.handleSubmit_, the properties are assigned directly to their own variables.
-
 
 One fast way of implementing the functionality is to change the _loginForm_ function of the <i>App</i> component like so:
 
@@ -125,9 +121,7 @@ const App = () => {
 }
 ```
 
-
 The <i>App</i> components state now contains the boolean <i>loginVisible</i>, which defines if the login form should be shown to the user or not.
-
 
 The value of _loginVisible_ is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
 
@@ -136,7 +130,6 @@ The value of _loginVisible_ is toggled with two buttons. Both buttons have their
 
 <button onClick={() => setLoginVisible(false)}>cancel</button>
 ```
-
 
 The visibility of the component is defined by giving the component an [inline](/en/part2/adding_styles_to_react_app#inline-styles) style rule, where the value of the [display](https://developer.mozilla.org/en-US/docs/Web/CSS/display) property is <i>none</i> if we do not want the component to be displayed:
 
@@ -153,22 +146,17 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-
 We are once again using the "question mark" ternary operator. If _loginVisible_ is <i>true</i>, then the CSS rule of the component will be:
 
 ```css
 display: 'none';
 ```
 
-
 If _loginVisible_ is <i>false</i>, then <i>display</i> will not receive any value related to the visibility of the component.
-
 
 ### The components children, aka. props.children
 
-
 The code related to managing the visibility of the login form could be considered to be its own logical entity, and for this reason, it would be good to extract it from the <i>App</i> component into a separate component.
-
 
 Our goal is to implement a new <i>Togglable</i> component that can be used in the following way:
 
@@ -184,9 +172,7 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 </Togglable>
 ```
 
-
 The way that the component is used is slightly different from our previous components. The component has both opening and closing tags that surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
-
 
 We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
 
@@ -196,7 +182,6 @@ We can add any React elements we want between the opening and closing tags of <i
   <p>also this is hidden</p>
 </Togglable>
 ```
-
 
 The code for the <i>Togglable</i> component is shown below:
 
@@ -229,9 +214,7 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-
 The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
-
 
 This time the children are rendered in the code that is used for rendering the component itself:
 
@@ -241,7 +224,6 @@ This time the children are rendered in the code that is used for rendering the c
   <button onClick={toggleVisibility}>cancel</button>
 </div>
 ```
-
 
 Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing _/>_ tag, like this:
 
@@ -276,6 +258,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
   )
 }
 ```
+
 Next let's define the form component inside of a <i>Togglable</i> component:
 
 ```js
@@ -288,9 +271,7 @@ Next let's define the form component inside of a <i>Togglable</i> component:
 </Togglable>
 ```
 
-
 You can find the code for our current application in its entirety in the <i>part5-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-4).
-
 
 ### State of the forms
 
@@ -300,10 +281,10 @@ React documentation says the [following](https://reactjs.org/docs/lifting-state-
 
 <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 
-If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not need it for anything. 
-We could just as well move the state of the forms to the corresponding components. 
+If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not need it for anything.
+We could just as well move the state of the forms to the corresponding components.
 
-The component for a note changes like so: 
+The component for a note changes like so:
 
 ```js
 import { useState } from 'react' 
@@ -344,14 +325,14 @@ export default NoteForm
 ```
 
 <!-- Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
-The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form. 
+The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form.
 
 <!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan. -->
-There is only one prop left, the _createNote_ function, which the form calls when a new note is created. 
+There is only one prop left, the _createNote_ function, which the form calls when a new note is created.
 
 <!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
-The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler. 
-The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form: 
+The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler.
+The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form:
 
 ```js
 const App = () => {
@@ -374,7 +355,7 @@ const App = () => {
 }
 ```
 
-We could do the same for the log in form, but we'll leave that for an optional exercise. 
+We could do the same for the log in form, but we'll leave that for an optional exercise.
 
 The application code can be found on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part5-5),
 branch <i>part5-5</i>.
@@ -447,7 +428,6 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
 export default Togglable
 ```
 
-
 The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call. This way the component can access the ref that is assigned to it.
 
 The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
@@ -479,7 +459,6 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### One point about components
 
-
 When we define a component in React:
 
 ```js
@@ -487,7 +466,6 @@ const Togglable = () => ...
   // ...
 }
 ```
-
 
 And use it like this:
 
@@ -510,7 +488,6 @@ And use it like this:
 We create <i>three separate instances of the component</i> that all have their separate state:
 
 ![browser of three togglable components](../../images/5/12e.png)
-
 
 The <i>ref</i> attribute is used for assigning a reference to each of the components in the variables <i>togglable1</i>, <i>togglable2</i> and <i>togglable3</i>.
 
@@ -536,7 +513,7 @@ The form closes when a new blog is created.
 
 #### 5.6 Blog list frontend, step6
 
-Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component. 
+Separate the form for creating a new blog into its own component (if you have not already done so), and move all the states required for creating a new blog to this component.
 
 The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
@@ -548,7 +525,7 @@ Full details of the blog open when the button is clicked.
 
 ![browser showing full details of a blog with others just having view buttons](../../images/5/13ea.png)
 
-And the details are hidden when the button is clicked again. 
+And the details are hidden when the button is clicked again.
 
 At this point, the <i>like</i> button does not need to do anything.
 
@@ -610,9 +587,10 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
   url: "https://www.joelonsoftware.com/2000/08/09/the-joel-test-12-steps-to-better-code/"
 }
 ```
+
 The backend has to be updated too to handle the user reference.
 
-**One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case". 
+**One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
 
 #### 5.9: Blog list frontend, step9
 
@@ -670,7 +648,6 @@ The console will display the following error message if the prop is left undefin
 
 ![console error stating buttonLabel is undefined](../../images/5/15.png)
 
-
 The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.
 
 Let's also define PropTypes to the <i>LoginForm</i> component:
@@ -705,7 +682,7 @@ If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSub
 
 In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file. 
+Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.
 
 *NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
@@ -776,7 +753,7 @@ module.exports = {
 }
 ```
 
-NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information. 
+NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.
 
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
 
@@ -806,7 +783,7 @@ Let us also create an npm script to run the lint:
 }
 ```
 
-Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>: 
+Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>:
 
 ![vscode showing component definition error](../../images/5/25x.png)
 
@@ -848,7 +825,7 @@ Define PropTypes for one of the components of your application.
 
 Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
 
-Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file. 
+Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.
 
 *NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 

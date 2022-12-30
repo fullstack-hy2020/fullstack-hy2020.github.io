@@ -38,6 +38,7 @@ const App = () => {
 The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
 
 The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
+
 ```js
 {
   left: 0,
@@ -83,6 +84,7 @@ const App = () => {
 Now the component only has a single piece of state and the event handlers have to take care of changing the <i>entire application state</i>.
 
 The event handler looks a bit messy. When the left button is clicked, the following function is called:
+
 ```js
 const handleLeftClick = () => {
   const newClicks = { 
@@ -94,6 +96,7 @@ const handleLeftClick = () => {
 ```
 
 The following object is set as the new state of the application:
+
 ```js
 {
   left: clicks.left + 1,
@@ -224,7 +227,7 @@ const handleLeftClick = () => {
 
 However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
-Let's take a closer look at how the clicking 
+Let's take a closer look at how the clicking
 is rendered to the page:
 
 ```js
@@ -375,7 +378,7 @@ Before we move on, let us remind ourselves of one of the most important rules of
 
 <h4>The first rule of web development</h4>
 
->  **Keep the browser's developer console open at all times.**
+> **Keep the browser's developer console open at all times.**
 >
 > The <i>Console</i> tab in particular should always be open, unless there is a specific reason to view another tab.
 
@@ -455,7 +458,6 @@ It is highly recommended to add the [React developer tools](https://chrome.googl
 
 ![screenshot react developer tools extension](../../images/1/10ea.png)
 
-
 The _App_ component's state is defined like so:
 
 ```js
@@ -512,6 +514,7 @@ Event handling has proven to be a difficult topic in previous iterations of this
 For this reason, we will revisit the topic.
 
 Let's assume that we're developing this simple application with the following component <i>App</i>:
+
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -559,6 +562,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 ```
 
 This attempt would not work either:
+
 ```js
 <button onClick={value = 0}>button</button>
 ```
@@ -580,6 +584,7 @@ The issue here is that our event handler is defined as a <i>function call</i> wh
 The _console.log_ function call gets executed when the component is rendered and for this reason, it gets printed once to the console.
 
 The following attempt is flawed as well:
+
 ```js
 <button onClick={setValue(0)}>button</button>
 ```
@@ -681,7 +686,7 @@ const App = () => {
 }
 ```
 
-The code functions correctly even though it looks complicated. 
+The code functions correctly even though it looks complicated.
 
 The event handler is now set to a function call:
 
@@ -1016,7 +1021,7 @@ You may find the following links useful:
 
 <h3>Exercises 1.6.-1.14.</h3>
 
-Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into 
+Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into
 the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part anymore**.
@@ -1159,7 +1164,7 @@ Then perform the necessary actions to make the warning disappear. Try pasting th
 
 The world of software engineering is filled with [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners.
 
-Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering: 
+Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering:
 
 ```js
 import { useState } from 'react'
@@ -1187,7 +1192,7 @@ const App = () => {
 export default App
 ```
 
-Content of the file <i>index.js</i> is the same as in previous exercises. 
+Content of the file <i>index.js</i> is the same as in previous exercises.
 
 Find out how to generate random numbers in JavaScript, eg. via a search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
 
@@ -1236,6 +1241,5 @@ Now implement the final version of the application that displays the anecdote wi
 If multiple anecdotes are tied for first place it is sufficient to just show one of them.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
 
 </div>

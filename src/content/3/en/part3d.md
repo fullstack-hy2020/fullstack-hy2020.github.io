@@ -7,7 +7,6 @@ lang: en
 
 <div class="content">
 
-
 There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
 
 ```js
@@ -23,12 +22,9 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 If the note does not have the <i>content</i> property, we respond to the request with the status code <i>400 bad request</i>.
 
-
 One smarter way of validating the format of the data before it is stored in the database is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose.
-
 
 We can define specific validation rules for each field in the schema:
 
@@ -49,12 +45,9 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-
 The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also applied to the <i>content</i> field since the minimum length constraint allows the field to be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
 
-
 The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators if none of the built-in ones cover our needs.
-
 
 If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
 
@@ -75,7 +68,6 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
     .catch(error => next(error)) // highlight-line
 })
 ```
-
 
 Let's expand the error handler to deal with these validation errors:
 
@@ -184,11 +176,12 @@ You can display the default error message returned by Mongoose, even though they
 
 #### 3.20*: Phonebook database, step8
 
-Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must 
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must
+
 - has length of 8 or more
 - if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
-  - eg. 09-1234556 and 040-22334455 are valid phone numbers
-  - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
+    - eg. 09-1234556 and 040-22334455 are valid phone numbers
+    - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
 
 Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
@@ -211,7 +204,6 @@ Before we move on to the next part, we will take a look at an important tool cal
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
 
 In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
-
 
 In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
 
@@ -297,7 +289,6 @@ It is recommended to create a separate _npm script_ for linting:
 
 Now the _npm run lint_ command will check every file in the project.
 
-
 Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
 
 ```bash
@@ -314,17 +305,13 @@ Let's not fix these issues just yet.
 
 A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
-
 The VS Code ESlint plugin will underline style violations with a red line:
 
 ![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
 
-
 This makes errors easy to spot and fix right away.
 
-
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
-
 
 Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
 
@@ -359,13 +346,11 @@ Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-tra
 }
 ```
 
-
 Our default configuration takes a bunch of predetermined rules into use from <i>eslint:recommended</i>:
 
 ```bash
 'extends': 'eslint:recommended',
 ```
-
 
 This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
 
@@ -390,7 +375,6 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 **NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
 
 ![terminal output from npm run lint](../../images/3/55.png)
-
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
 

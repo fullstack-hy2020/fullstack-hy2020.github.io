@@ -76,7 +76,6 @@ The component needs the list of notes and the value of the filter from the Redux
 
 If we define:
 
-
 ```js
 const Notes = (props) => { // highlight-line
   const dispatch = useDispatch()
@@ -125,7 +124,6 @@ The <i>Notes</i> component can access the state of the store directly, e.g. thro
 The situation that results from using <i>connect</i> with the <i>mapStateToProps</i> function we defined can be visualized like this:
 
 ![diagram notelist and filter connected to redux store](../../images/6/24c.png)
-
 
 The <i>Notes</i> component has "direct access" via <i>props.notes</i> and <i>props.filter</i> for inspecting the state of the Redux store.
 
@@ -197,7 +195,6 @@ const Notes = (props) => {
 ```
 
 The second parameter of the _connect_ function can be used for defining [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#mapdispatchtoprops-object--dispatch-ownprops--object) which is a group of <i>action creator</i> functions passed to the connected component as props. Let's make the following changes to our existing connect operation:
-
 
 ```js
 const mapStateToProps = (state) => {
@@ -337,8 +334,7 @@ export default connect(
 // highlight-end
 ```
 
-Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_. 
-
+Since the component does not need to access the store's state, we can simply pass <i>null</i> as the first parameter to _connect_.
 
 You can find the code for our current application in its entirety in the <i>part6-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5).
 
@@ -382,9 +378,10 @@ Due to the way that the action creator is imported:
 ```js
 import { createNote } from './../reducers/noteReducer'
 ```
+
 The action creator can also be referenced directly by calling _createNote_. You should not do this, since this is the unmodified version of the action creator that does not contain the added automatic dispatch.
 
-If we print the functions to the console from the code (we have not yet looked at this useful debugging trick): 
+If we print the functions to the console from the code (we have not yet looked at this useful debugging trick):
 
 ```js
 const NewNote = (props) => {
@@ -425,12 +422,9 @@ export default connect(
 )(NewNote)
 ```
 
-
 The connect expression above enables the component to dispatch actions for creating new notes with the <code>props.createNote('a new note')</code> command.
 
-
 The functions passed in <i>mapDispatchToProps</i> must be <i>action creators</i>, that is, functions that return Redux actions.
-
 
 It is worth noting that the <i>mapDispatchToProps</i> parameter is a <i>JavaScript object</i>, as the definition:
 
@@ -472,7 +466,6 @@ export default connect(
   mapDispatchToProps
 )(NewNote)
 ```
-
 
 In this alternative definition, <i>mapDispatchToProps</i> is a function that _connect_ will invoke by passing to it the _dispatch_ function as its parameter. The return value of the function is an object that defines a group of functions that get passed to the connected component as props. Our example defines the function passed as the <i>createNote</i> prop:
 
@@ -570,10 +563,10 @@ Abramov mentions the term [higher-order component](https://reactjs.org/docs/high
 
 Higher-order components, or HOCs, are a way of defining generic functionality that can be applied to components. This is a concept from functional programming that very slightly resembles inheritance in object-oriented programming.
 
-HOCs are a generalization of the [Higher-Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs. 
+HOCs are a generalization of the [Higher-Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) concept. HOFs are functions that either accept functions as parameters or return functions. We have been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like _map, filter and find_ are HOFs.
 
 <!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
-After the React hook API was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook-based APIs are a lot simpler than HOC-based ones, as is the case with Redux as well. 
+After the React hook API was published, HOCs have become less and less popular. Almost all libraries which used to be based on HOCs have now been modified to use hooks. Most of the time hook-based APIs are a lot simpler than HOC-based ones, as is the case with Redux as well.
 
 ### Redux and the component state
 
@@ -583,8 +576,8 @@ What about the _useState_ hook, which provides components with their own state? 
 
 Should we always use Redux? Probably not. Dan Abramov, the developer of Redux, discusses this in his article [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367).
 
-Nowadays it is possible to implement Redux-like state management without Redux by using the React [context](https://reactjs.org/docs/context.html) api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook. 
-More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in 
+Nowadays it is possible to implement Redux-like state management without Redux by using the React [context](https://reactjs.org/docs/context.html) api and the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook.
+More about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). We will also practice this in
 [part 9](/en/part9).
 
 </div>
@@ -597,18 +590,20 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 The <i>redux store</i> is currently being accessed by the components through the <em>useSelector</em> and <em>useDispatch</em> hooks.
 
-Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks. 
+Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks.
+
 #### 6.20 anecdotes and connect, step2
 
 Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.
+
 #### 6.21 anecdotes, the grand finale
 
-You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example, if a user votes twice in three seconds, 
-the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification. 
+You (probably) have one nasty bug in your application. If the user clicks the vote button multiple times in a row, the notification is displayed funnily. For example, if a user votes twice in three seconds,
+the last notification is only displayed for two seconds (assuming the notification is normally shown for 5 seconds). This happens because removing the first notification accidentally removes the second notification.
 
 Fix the bug so that after multiple votes in a row, the notification for the last vote is displayed for five seconds.
 
-The fix can be done by canceling the previous notification when a new notification is displayed, whenever necessary. 
+The fix can be done by canceling the previous notification when a new notification is displayed, whenever necessary.
 The [documentation](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) for the setTimeout function might also be useful for this.
 
 This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).

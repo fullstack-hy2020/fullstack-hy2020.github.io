@@ -104,6 +104,7 @@ const Hello = (props) => {
 Note that we've also utilized the more compact syntax for arrow functions when defining the _bornYear_ function. As mentioned earlier, if an arrow function consists of a single expression, then the function body does not need to be written inside of curly braces. In this more compact form, the function simply returns the result of the single expression.
 
 To recap, the two function definitions shown below are equivalent:
+
 ```js
 const bornYear = () => new Date().getFullYear() - age
 
@@ -132,6 +133,7 @@ const Hello = (props) => {
 
 <!-- Eli koska -->
 If the object we are destructuring has the values
+
 ```js
 props = {
   name: 'Arto Hellas',
@@ -142,6 +144,7 @@ props = {
 the expression <em>const { name, age } = props</em> assigns the values 'Arto Hellas' to _name_ and 35 to _age_.
 
 We can take destructuring a step further:
+
 ```js
 const Hello = ({ name, age }) => { // highlight-line
   const bornYear = () => new Date().getFullYear() - age
@@ -283,7 +286,6 @@ const App = () => {
 export default App
 ```
 
-
 In the first row, the file imports the _useState_ function:
 
 ```js
@@ -337,6 +339,7 @@ The second time the component function is executed it calls the _useState_ funct
 ```js
 () => setCounter(2)
 ```
+
 Meanwhile, the old value of _counter_ - "1" - is rendered to the screen.
 
 Every time the _setCounter_ modifies the state it causes the component to re-render. The value of the state will be incremented again after one second, and this will continue to repeat for as long as the application is running.
@@ -419,6 +422,7 @@ const App = () => {
 ```
 
 By changing the event handler to the following form
+
 ```js
 <button onClick={() => setCounter(counter + 1)}>
   plus
@@ -451,7 +455,6 @@ const App = () => {
 
 Our application is now ready!
 
-
 <!-- ### Tapahtumankäsittelijä on funktio -->
 
 ### An event handler is a function
@@ -483,7 +486,7 @@ What's going on? An event handler is supposed to be either a <i>function</i> or 
 <button onClick={setCounter(counter + 1)}>
 ```
 
-the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning, the value of the <i>counter</i> variable is 0. When React renders the component for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1. 
+the event handler is actually a <i>function call</i>. In many situations this is ok, but not in this particular situation. In the beginning, the value of the <i>counter</i> variable is 0. When React renders the component for the first time, it executes the function call <em>setCounter(0+1)</em>, and changes the value of the component's state to 1.
 This will cause the component to be re-rendered, React will execute the setCounter function call again, and the state will change leading to another rerender...
 
 <!-- Palautetaan siis tapahtumankäsittelijä alkuperäiseen muotoonsa -->
@@ -497,14 +500,14 @@ Let's define the event handlers like we did before:
 
 <!-- Nyt napin tapahtumankäsittelijän määrittelevä attribuutti <i>onClick</i> saa arvokseen funktion _() => setCounter(counter + 1)_, ja funktiota kutsutaan siinä vaiheessa kun sovelluksen käyttäjä painaa nappia.  -->
 Now the button's attribute which defines what happens when the button is clicked - <i>onClick</i> - has the value _() => setCounter(counter + 1)_.
-The setCounter function is called only when a user clicks the button. 
+The setCounter function is called only when a user clicks the button.
 
 <!-- Tapahtumankäsittelijöiden määrittely suoraan JSX-templatejen sisällä ei useimmiten ole kovin viisasta. Tässä tapauksessa se tosin on ok, koska tapahtumankäsittelijät ovat niin yksinkertaisia.  -->
-Usually defining event handlers within JSX-templates is not a good idea. 
-Here it's ok, because our event handlers are so simple. 
+Usually defining event handlers within JSX-templates is not a good idea.
+Here it's ok, because our event handlers are so simple.
 
 <!-- Eriytetään kuitenkin nappien tapahtumankäsittelijät omiksi komponentin sisäisiksi apufunktioikseen: -->
-Let's separate the event handlers into separate functions anyway: 
+Let's separate the event handlers into separate functions anyway:
 
 ```js
 const App = () => {
@@ -641,11 +644,11 @@ Let's go over the main principles of how an application works once more.
 When the application starts, the code in _App_ is executed. This code uses a [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook to create the application state, setting an initial value of the variable _counter_.
 This component contains the _Display_ component - which displays the counter's value, 0 - and three _Button_ components. The buttons all have event handlers, which are used to change the state of the counter.
 
-When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function. 
+When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function.
 **Calling a function that changes the state causes the component to rerender.**
 
-So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered. 
-This causes its subcomponents _Display_ and _Button_ to also be re-rendered. 
+So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered.
+This causes its subcomponents _Display_ and _Button_ to also be re-rendered.
 _Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter.
 
 ### Refactoring the components
@@ -660,7 +663,7 @@ const Display = (props) => {
 }
 ```
 
-The component only uses the _counter_ field of its <i>props</i>. 
+The component only uses the _counter_ field of its <i>props</i>.
 This means we can simplify the component by using [destructuring](/en/part1/component_state_event_handlers#destructuring), like so:
 
 ```js
