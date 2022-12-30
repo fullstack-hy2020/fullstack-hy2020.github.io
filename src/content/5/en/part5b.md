@@ -11,11 +11,11 @@ lang: en
 
 Let's modify the application so that the login form is not displayed by default:
 
-![](../../images/5/10e.png)
+![browser showing log in button by default](../../images/5/10e.png)
 
 The login form appears when the user presses the <i>login</i> button:
 
-![](../../images/5/11e.png)
+![user at login screen about to press cancel](../../images/5/11e.png)
 
 The user can close the login form by clicking the <i>cancel</i> button.
 
@@ -509,7 +509,7 @@ And use it like this:
 
 We create <i>three separate instances of the component</i> that all have their separate state:
 
-![](../../images/5/12e.png)
+![browser of three togglable components](../../images/5/12e.png)
 
 
 The <i>ref</i> attribute is used for assigning a reference to each of the components in the variables <i>togglable1</i>, <i>togglable2</i> and <i>togglable3</i>.
@@ -526,11 +526,11 @@ Change the form for creating blog posts so that it is only displayed when approp
 
 By default the form is not visible
 
-![](../../images/5/13ae.png)
+![browser showing new note button with no form](../../images/5/13ae.png)
 
 It expands when button <i>create new blog</i> is clicked
 
-![](../../images/5/13be.png)
+![browser showing form with create new](../../images/5/13be.png)
 
 The form closes when a new blog is created.
 
@@ -546,7 +546,7 @@ Let's add a button to each blog, which controls whether all of the details about
 
 Full details of the blog open when the button is clicked.
 
-![](../../images/5/13ea.png)
+![browser showing full details of a blog with others just having view buttons](../../images/5/13ea.png)
 
 And the details are hidden when the button is clicked again. 
 
@@ -624,7 +624,7 @@ Add a new button for deleting blog posts. Also, implement the logic for deleting
 
 Your application could look something like this:
 
-![](../../images/5/14ea.png)
+![browser of confirmation of blog removal](../../images/5/14ea.png)
 
 The confirmation dialog for deleting a blog post is easy to implement with the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) function.
 
@@ -668,7 +668,7 @@ Togglable.propTypes = {
 
 The console will display the following error message if the prop is left undefined:
 
-![](../../images/5/15.png)
+![console error stating buttonLabel is undefined](../../images/5/15.png)
 
 
 The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.
@@ -699,7 +699,7 @@ LoginForm.propTypes = {
 
 If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSubmit</i> prop as a string, then this will result in the following warning:
 
-![](../../images/5/16.png)
+![console error saying handleSubmit expected a function](../../images/5/16.png)
 
 ### ESlint
 
@@ -808,11 +808,11 @@ Let us also create an npm script to run the lint:
 
 Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>: 
 
-![](../../images/5/25x.png)
+![vscode showing component definition error](../../images/5/25x.png)
 
 The react-devtools also reveals that the component does not have a name:
 
-![](../../images/5/26ea.png)
+![react devtools showing forwardRef as anonymous](../../images/5/26ea.png)
 
 Fortunately, this is easy to fix
 
