@@ -624,7 +624,7 @@ First, we execute the code to be tested, meaning that we generate a reverse for 
 
 As expected, all of the tests pass:
 
-![](../../images/4/1x.png)
+![terminal output from npm test](../../images/4/1x.png)
 
 Jest expects by default that the names of test files contain <i>.test</i>. In this course, we will follow the convention of naming our tests files with the extension <i>.test.js</i>.
 
@@ -640,7 +640,7 @@ test('palindrome of react', () => {
 
 Running the tests above results in the following error message:
 
-![](../../images/4/2x.png)
+![terminal output shows failure from npm test](../../images/4/2x.png)
 
 Let's add a few tests for the _average_ function, into a new file <i>tests/average.test.js</i>.
 
@@ -664,7 +664,7 @@ describe('average', () => {
 
 The test reveals that the function does not work correctly with an empty array (this is because in JavaScript dividing by zero results in <i>NaN</i>):
 
-![](../../images/4/3.png)
+![terminal output showing empty array fails with jest](../../images/4/3.png)
 
 Fixing the function is quite easy:
 
@@ -694,7 +694,7 @@ describe('average', () => {
 
 Describe blocks can be used for grouping tests into logical collections. The test output of Jest also uses the name of the describe block:
 
-![](../../images/4/4x.png)
+![screenshot of npm test shwoing describe blocks](../../images/4/4x.png)
 
 As we will see later on <i>describe</i> blocks are necessary when we want to run some shared setup or teardown operations for a group of tests.
 
@@ -755,7 +755,7 @@ Define a new _totalLikes_ function that receives a list of blog posts as a param
 
 Write appropriate tests for the function. It's recommended to put the tests inside of a <i>describe</i> block so that the test report output gets grouped nicely:
 
-![](../../images/4/5.png)
+![npm test passing for list_helper_test](../../images/4/5.png)
 
 
 Defining test inputs for the function can be done like this:
