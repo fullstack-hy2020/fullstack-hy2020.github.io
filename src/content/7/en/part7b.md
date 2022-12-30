@@ -34,7 +34,7 @@ There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-h
 
 Create-react-app has the readily-configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
 
-![](../../images/7/60ea.png)
+![vscode error useState being called conditionally](../../images/7/60ea.png)
 
 ### Custom hooks
 
@@ -361,13 +361,13 @@ const App = () => {
 
 Add a button to the form that you can use to clear all the input fields:
 
-![](../../images/7/61ea.png)
+![browser anecdotes with reset button](../../images/7/61ea.png)
 
 Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field. 
 
 Depending on your solution, you may see the following warning in your console:
 
-![](../../images/7/62ea.png)
+![devtools console warning invalid value for reset prop](../../images/7/62ea.png)
 
 We will return to this warning in the next exercise.
 
@@ -416,11 +416,11 @@ Use the code from https://github.com/fullstack-hy2020/country-hook as your start
 
 The application can be used to search for a country's details from the https://restcountries.com/ interface. If a country is found, the details of the country are displayed:
 
-![](../../images/7/69ea.png)
+![browser displaying country details](../../images/7/69ea.png)
 
 If no country is found, a message is displayed to the user:
 
-![](../../images/7/70ea.png)
+![browser showing country not found](../../images/7/70ea.png)
 
 The application is otherwise complete, but in this exercise, you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
 
@@ -514,6 +514,6 @@ The _useResource_ custom hook returns an array of two items just like the state 
 
 If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at port 3005).
 
-![](../../images/5/21e.png)
+![browser showing notes and persons](../../images/5/21e.png)
 
 </div>
