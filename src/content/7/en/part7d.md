@@ -131,7 +131,7 @@ const hello = name => {
 
 When we execute the _npm run build_ command, our application code will be bundled by webpack. The operation will produce a new <i>main.js</i> file that is added under the <i>build</i> directory:
 
-![](../../images/7/19x.png)
+![terminal output webpack npm run build](../../images/7/19x.png)
 
 The file contains a lot of stuff that looks quite interesting. We can also see the code we wrote earlier at the end of the file:
 
@@ -163,11 +163,11 @@ App()
 
 When we bundle the application again with the _npm run build_ command, we notice that webpack has acknowledged both files:
 
-![](../../images/7/20x.png)
+![terminal output showing webpack generated two files](../../images/7/20x.png)
 
 Our application code can be found at the end of the bundle file in a rather obscure format:
 
-![](../../images/7/20z.png)
+![terminal output showing our minified code](../../images/7/20z.png)
 
 ### Configuration file
 
@@ -245,7 +245,7 @@ We still need the <i>build/index.html</i> file  that will serve as the "main pag
 
 When we bundle our application, we run into the following problem:
 
-![](../../images/7/21x.png)
+![webpack terminal failed loader needed](../../images/7/21x.png)
 
 ### Loaders
 
@@ -329,7 +329,7 @@ As we can see from the example above, the React elements that were written in JS
 
 You can test the bundled application by opening the <i>build/index.html</i> file with the <i>open file</i> functionality of your browser:
 
-![](../../images/7/22.png)
+![browser hello webpack](../../images/7/22.png)
 
 It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. With t he [previous solution](https://babeljs.io/docs/en/babel-polyfill/) being deprecated we now have to install two more missing dependencies, that is [core-js](https://www.npmjs.com/package/core-js) and [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
 
@@ -427,7 +427,7 @@ import './index.css'
 
 This will cause the transpilation process to break:
 
-![](../../images/7/23x.png)
+![webpack failure missing loader for css/style](../../images/7/23x.png)
 
 When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/) and [style](https://webpack.js.org/loaders/style-loader/) loaders:
 
@@ -566,7 +566,7 @@ const App = () => {
 
 The application no longer works and the console will display the following error:
 
-![](../../images/7/25.png)
+![devtools console cannot concat on undefined in handleClick](../../images/7/25.png)
 
 We know that the error is in the onClick method, but if the application was any larger the error message would be quite difficult to track down:
 
@@ -577,7 +577,7 @@ App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
 
 The location of the error indicated in the message does not match the actual location of the error in our source code. If we click the error message, we notice that the displayed source code does not resemble our application code:
 
-![](../../images/7/26.png)
+![devtools source does not show our source code](../../images/7/26.png)
 
 Of course, we want to see our actual source code in the error message.
 
@@ -603,15 +603,15 @@ Webpack has to be restarted when we make changes to its configuration. It is als
 
 The error message is now a lot better 
 
-![](../../images/7/27.png)
+![devtools console showing concat error at different line](../../images/7/27.png)
 
 since it refers to the code we wrote:
 
-![](../../images/7/27eb.png)
+![devtools source showing our actual code with values.concat](../../images/7/27eb.png)
 
 Generating the source map also makes it possible to use the Chrome debugger:
 
-![](../../images/7/28.png)
+![devtools debugger paused just before offending line](../../images/7/28.png)
 
 Let's fix the bug by initializing the state of <i>values</i> as an empty array:
 
@@ -843,11 +843,11 @@ By default, the bundled application will be available at <http://localhost:9080>
 
 Our application is finished and works with all relatively recent versions of modern browsers, except for Internet Explorer. The reason for this is that, because of _axios_, our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them:
 
-![](../../images/7/29.png)
+![browser compatibility chart highlighting how bad internet explorer is](../../images/7/29.png)
 
 There are many other things in the standard that IE does not support. Something as harmless as the [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method of JavaScript arrays exceeds the capabilities of IE:
 
-![](../../images/7/30.png)
+![browser compatibility chart showing IE does not support find method](../../images/7/30.png)
 
 In these situations, it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support. IE understands Promises syntactically but it simply has not implemented their functionality. The _find_ property of arrays in IE is simply <i>undefined</i>.
 
