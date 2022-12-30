@@ -250,7 +250,7 @@ export default App
 <!-- Hookin useEffect käyttö aiheuttaa eslint-varoituksen: -->
 Using the useEffect hook causes an eslint warning:
 
-![](../../images/6/26ea.png)
+![vscode warning useEffect missing dispatch dependency](../../images/6/26ea.png)
 
 <!-- Pääsemme varoituksesta eroon seuraavasti: -->
 We can get rid of it by doing the following:
