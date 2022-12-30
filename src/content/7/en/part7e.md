@@ -216,7 +216,7 @@ A more sophisticated way is to use [WebSockets](https://developer.mozilla.org/en
 
 WebSockets is an API provided by the browser, which is not yet fully supported on all browsers:
 
-![](../../images/7/31ea.png)
+![caniuse chart showing websockets not usable by all yet](../../images/7/31ea.png)
 
 Instead of directly using the WebSocket API, it is advisable to use the [Socket.io](https://socket.io/) library, which provides various <i>fallback</i> options in case the browser does not have full support for WebSockets. 
 
@@ -304,7 +304,7 @@ Injection attacks are also possible in NoSQL databases. However, mongoose preven
 
 the code is not executed, but is only rendered as 'text' on the page:
 
-![](../../images/7/32e.png)
+![browser showing notes with XSS attempt](../../images/7/32e.png)
 
 since React [takes care of sanitizing data in variables](https://reactjs.org/docs/introducing-jsx.html#jsx-prevents-injection-attacks). Some versions of React [have been vulnerable](https://medium.com/dailyjs/exploiting-script-injection-flaws-in-reactjs-883fb1fe36c1) to XSS attacks. The security holes have of course been patched, but there is no guarantee that there couldn't be any more.
 
@@ -318,7 +318,7 @@ npm outdated --depth 0
 
 The one-year-old project that is used in [part 9](/en/part9) of this course already has quite a few outdated dependencies:
 
-![](../../images/7/33x.png)
+![npm outdated output of patientor](../../images/7/33x.png)
 
 The dependencies can be brought up to date by updating the file <i>package.json</i>. The best way to do that is by using a tool called _npm-check-updates_. It can be installed globally by running the command
 ```bash
@@ -413,7 +413,7 @@ One of the threats mentioned in the list from OWASP is <i>Broken Authentication<
 
 On Mozilla's MDN, there is a very good [Website security guide](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), which brings up this very important topic:
 
-![](../../images/7/34.png)
+![screenshot of website security from MDN](../../images/7/34.png)
 
 The documentation for Express includes a section on security: [Production Best Practices: Security](https://expressjs.com/en/advanced/best-practice-security.html), which is worth a read. It is also recommended to add a library called [Helmet](https://helmetjs.github.io/) to the backend. It includes a set of middleware that eliminates some security vulnerabilities in Express applications.
 
@@ -469,7 +469,7 @@ For example, the bloglist application could consist of two services: one handlin
 
 The image below visualizes the difference between the structure of an application based on a microservice architecture and one based on a more traditional monolithic structure:
 
-![](../../images/7/36.png)
+![microservices vs traditional approach diagram](../../images/7/36.png)
 
 The role of the frontend (enclosed by a square in the picture) does not differ much between the two models. There is often a so-called [API gateway](http://microservices.io/patterns/apigateway) between the microservices and the frontend, which provides an illusion of a more traditional "everything on the same server" API. [Netflix](https://medium.com/netflix-techblog/optimizing-the-netflix-api-5c9ac715cf19), among others, uses this type of approach.
 
