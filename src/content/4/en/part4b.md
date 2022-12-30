@@ -165,7 +165,7 @@ afterAll(() => {
 
 When running your tests you may run across the following console warning:
 
-![](../../images/4/8.png)
+![jest console warning about not exiting](../../images/4/8.png)
 
 The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
@@ -701,7 +701,7 @@ There's a slight problem with our code: we don't handle error situations. How sh
 
 If there's an exception while handling the POST request we end up in a familiar situation:
 
-![](../../images/4/6.png)
+![terminal showing unhandled promise rejection warning](../../images/4/6.png)
 
 In other words, we end up with an unhandled promise rejection, and the request never receives a response.
 
@@ -1020,7 +1020,7 @@ Notice that you will have to make similar changes to the code that were made [in
 
 **NB:** When running the tests, you may run into the following warning:
 
-![](../../images/4/8a.png)
+![Warning to read docs on connecting mongoose to jest](../../images/4/8a.png)
 
 The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x is used. [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
@@ -1215,7 +1215,7 @@ afterAll(() => {
 
 The test output is grouped according to the <i>describe</i> blocks:
 
-![](../../images/4/7.png)
+![jest output showing grouped describe blocks](../../images/4/7.png)
 
 There is still room for improvement, but it is time to move forward.
 
