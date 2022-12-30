@@ -49,7 +49,7 @@ The upper part, <i>General</i>, shows that the browser requested the address <i>
 
 The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
-![](../../images/0/4e.png)
+![Screenshot of response headers](../../images/0/4e.png)
 
 
 The <i>Response headers</i> on top tell us e.g. the size of the response in bytes and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8) format and the contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML) page and to render it to the browser 'like a web page'.
@@ -174,7 +174,7 @@ This is the bottom-most request shown on the Network tab.
 
 We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.json> straight from the browser:
 
-![](../../images/0/10e.png)
+![Raw JSON Data](../../images/0/10e.png)
 
 There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted: 
 
@@ -324,7 +324,7 @@ document.getElementsByClassName('notes').appendChild(ul)
 
 The topmost node of the DOM tree of an HTML document is called the <em>document</em> object. We can perform various operations on a webpage using the DOM-API. You can access the <em>document</em> object by typing <em>document</em> into the Console tab: 
 
-![](../../images/0/15e.png)
+![document in console tab of developer tools](../../images/0/15e.png)
 
 Let's add a new note to the page from the console. 
 
@@ -390,7 +390,7 @@ HTML elements can also have other attributes apart from classes. The <i>div</i> 
 
 The <i>Elements</i> tab of the console can be used to change the styles of the elements. 
 
-![](../../images/0/18e.png)
+![developer tools elements tab](../../images/0/18e.png)
 
 Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server. 
 
@@ -398,7 +398,7 @@ Changes made on the console will not be permanent. If you want to make lasting c
 
 Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser. 
 
-![](../../images/0/19e.png)
+![sequence diagram of browser/server interaction](../../images/0/19e.png)
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
@@ -413,7 +413,7 @@ Next, let's examine how adding a new note is done.
 
 The Notes page contains a [form element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
-![](../../images/0/20e.png)
+![form element highlight in webpage and developer tools](../../images/0/20e.png)
 
 When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like: 
 
@@ -432,11 +432,11 @@ The network tab also shows the data submitted with the form:
 
 NB: On newer Chrome, the Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.
 
-![](../../images/0/23e.png)
+![form data dropdown in developer tools](../../images/0/23e.png)
 
 The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>. 
 
-![](../../images/0/24e.png)
+![action and method highlight](../../images/0/24e.png)
 
 The code on the server responsible for the POST request is quite simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
 
@@ -499,13 +499,13 @@ A single-page app version of our example application can be found at <https://st
 At first glance, the application looks exactly the same as the previous one. 
 The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined: 
 
-![](../../images/0/25e.png)
+![form with missing action and method](../../images/0/25e.png)
 
 The form has no <i>action</i> or <i>method</i> attributes to define how and where to send the input data. 
 
 Open the <i>Network</i> tab and empty it. When you now create a new note, you'll notice that the browser sends only one request to the server. 
 
-![](../../images/0/26e.png)
+![Network tab in developer tools](../../images/0/26e.png)
 
 The POST request to the address <i>new\_note\_spa</i> contains the new note as JSON data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>): 
 
@@ -518,7 +518,7 @@ The POST request to the address <i>new\_note\_spa</i> contains the new note as J
 
 The <i>Content-Type</i> header of the request tells the server that the included data is represented in JSON format. 
 
-![](../../images/0/27e.png)
+![Content-type header in developer tools](../../images/0/27e.png)
 
 Without this header, the server would not know how to correctly parse the data. 
 
