@@ -95,7 +95,7 @@ const errorHandler = (error, request, response, next) => {
 
 When validating an object fails, we return the following default error message from Mongoose:
 
-![](../../images/3/50.png)
+![postman showing error message](../../images/3/50.png)
 
 We notice that the backend has now a problem: validations are not done when editing a note.
 The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explains what is the problem, validations are not run by default when <i>findOneAndUpdate</i> is executed.
@@ -146,7 +146,7 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 
 The application should now work. Sometimes things don't go according to plan. If there are problems, <i>fly logs</i> or <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
 
-![](../../images/3/51a.png)
+![node output showing connecting to undefined](../../images/3/51a.png)
 
 For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable when the code expected it to be in <em>MONGODB\_URI</em>.
 
@@ -178,7 +178,7 @@ personService
 
 You can display the default error message returned by Mongoose, even though they are not as readable as they could be:
 
-![](../../images/3/56e.png)
+![phonebook screenshot showing person validation failure](../../images/3/56e.png)
 
 **NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
 
@@ -229,7 +229,7 @@ npx eslint --init
 
 We will answer all of the questions:
 
-![](../../images/3/52be.png)
+![terminal output from ESlint init](../../images/3/52be.png)
 
 The configuration will be saved in the _.eslintrc.js_ file:
 
@@ -308,7 +308,7 @@ This causes the entire <em>build</em> directory to not be checked by ESlint.
 
 Lint has quite a lot to say about our code:
 
-![](../../images/3/53ea.png)
+![terminal output of ESlint errors](../../images/3/53ea.png)
 
 Let's not fix these issues just yet.
 
@@ -317,7 +317,7 @@ A better alternative to executing the linter from the command line is to configu
 
 The VS Code ESlint plugin will underline style violations with a red line:
 
-![](../../images/3/54a.png)
+![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
 
 
 This makes errors easy to spot and fix right away.
@@ -389,7 +389,7 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 
 **NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
 
-![](../../images/3/55.png)
+![terminal output from npm run lint](../../images/3/55.png)
 
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
