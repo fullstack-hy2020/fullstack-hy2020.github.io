@@ -55,13 +55,13 @@ The object is sent to the server using the axios <em>post</em> method. The regis
 
 When we try to create a new note, the following output pops up in the console:
 
-![](../../images/2/20e.png)
+![data json output in console](../../images/2/20e.png)
 
 The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
 
 Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get):
 
-![](../../images/2/21e.png)
+![content-type and request payload data in dev tools](../../images/2/21e.png)
 
 We can use the inspector to check that the headers sent in the POST request are what we expected them to be and that their values are correct.
 
@@ -95,7 +95,7 @@ Once the data returned by the server starts to have an effect on the behavior of
 
 It's beneficial to inspect the state of the backend server, e.g. through the browser:
 
-![](../../images/2/22e.png)
+![JSON data output from backend](../../images/2/22e.png)
 
 This makes it possible to verify that all the data we intended to send was actually received by the server.
 
@@ -607,7 +607,7 @@ const getAll = () => {
 
 When we try to change the importance of the hardcoded note, we see the following error message in the console. The error says that the backend server responded to our HTTP PUT request with a status code 404 <i>not found</i>.
 
-![](../../images/2/23e.png)
+![404 not found error in dev tools](../../images/2/23e.png)
 
 The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has occurred unless they happen to have their console open. The only way the error can be seen in the application is that clicking the button does not affect the note's importance.
 
@@ -713,7 +713,7 @@ Extract the code that handles the communication with the backend into its own mo
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
 
-![](../../images/2/24e.png)
+![2.17 window confirm feature screeshot](../../images/2/24e.png)
 
 The associated resource for a person in the backend can be deleted by making an HTTP DELETE request to the resource's URL. If we are deleting e.g. a person who has the <i>id</i> 2, we would have to make an HTTP DELETE request to the URL <i>localhost:3001/persons/2</i>. No data is sent with the request.
 
@@ -734,6 +734,6 @@ Change the functionality so that if a number is added to an already existing use
 
 If the person's information is already in the phonebook, the application can confirm the action from the user:
 
-![](../../images/teht/16e.png)
+![2.18 screenshot alert confirmation](../../images/teht/16e.png)
 
 </div>
