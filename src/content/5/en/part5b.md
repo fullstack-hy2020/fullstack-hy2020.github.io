@@ -84,9 +84,9 @@ const LoginForm = (props) => {
 }
 ```
 
-where the properties of the _props_ object are accessed through e.g. _props.handleSubmit_, the properties are assigned directly to their own variables.
+where the properties of the *props* object are accessed through e.g. *props.handleSubmit*, the properties are assigned directly to their own variables.
 
-One fast way of implementing the functionality is to change the _loginForm_ function of the <i>App</i> component like so:
+One fast way of implementing the functionality is to change the *loginForm* function of the <i>App</i> component like so:
 
 ```js
 const App = () => {
@@ -123,7 +123,7 @@ const App = () => {
 
 The <i>App</i> components state now contains the boolean <i>loginVisible</i>, which defines if the login form should be shown to the user or not.
 
-The value of _loginVisible_ is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
+The value of *loginVisible* is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
 
 ```js
 <button onClick={() => setLoginVisible(true)}>log in</button>
@@ -146,13 +146,13 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-We are once again using the "question mark" ternary operator. If _loginVisible_ is <i>true</i>, then the CSS rule of the component will be:
+We are once again using the "question mark" ternary operator. If *loginVisible* is <i>true</i>, then the CSS rule of the component will be:
 
 ```css
 display: 'none';
 ```
 
-If _loginVisible_ is <i>false</i>, then <i>display</i> will not receive any value related to the visibility of the component.
+If *loginVisible* is <i>false</i>, then <i>display</i> will not receive any value related to the visibility of the component.
 
 ### The components children, aka. props.children
 
@@ -225,7 +225,7 @@ This time the children are rendered in the code that is used for rendering the c
 </div>
 ```
 
-Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing _/>_ tag, like this:
+Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing */>* tag, like this:
 
 ```js
 <Note
@@ -275,13 +275,13 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### State of the forms
 
-The state of the application currently is in the _App_ component.
+The state of the application currently is in the *App* component.
 
 React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
 
 <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
 
-If we think about the state of the forms, so for example the contents of a new note before it has been created, the _App_ component does not need it for anything.
+If we think about the state of the forms, so for example the contents of a new note before it has been created, the *App* component does not need it for anything.
 We could just as well move the state of the forms to the corresponding components.
 
 The component for a note changes like so:
@@ -325,14 +325,14 @@ export default NoteForm
 ```
 
 <!-- Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
-The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the _App_ component to the component responsible for the note form.
+The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the *App* component to the component responsible for the note form.
 
 <!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan. -->
-There is only one prop left, the _createNote_ function, which the form calls when a new note is created.
+There is only one prop left, the *createNote* function, which the form calls when a new note is created.
 
 <!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
-The _App_ component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler.
-The _addNote_ function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form:
+The *App* component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler.
+The *addNote* function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form:
 
 ```js
 const App = () => {
@@ -557,7 +557,7 @@ const Blog = ({ blog }) => {
 
 #### 5.8: Blog list frontend, step8
 
-Implement the functionality for the like button. Likes are increased by making an HTTP _PUT_ request to the unique address of the blog post in the backend.
+Implement the functionality for the like button. Likes are increased by making an HTTP *PUT* request to the unique address of the blog post in the backend.
 
 Since the backend operation replaces the entire blog post, you will have to send all of its fields in the request body. If you wanted to add a like to the following blog post:
 
@@ -590,7 +590,7 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 
 The backend has to be updated too to handle the user reference.
 
-**One last warning:** if you notice that you are using async/await and the _then_-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
+**One last warning:** if you notice that you are using async/await and the *then*-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
 
 #### 5.9: Blog list frontend, step9
 
@@ -684,7 +684,7 @@ In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code
 
 Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*NB:* do not run the *eslint --init* command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
@@ -783,7 +783,7 @@ Let us also create an npm script to run the lint:
 }
 ```
 
-Component _Togglable_ causes a nasty-looking warning <i>Component definition is missing display name</i>:
+Component *Togglable* causes a nasty-looking warning <i>Component definition is missing display name</i>:
 
 ![vscode showing component definition error](../../images/5/25x.png)
 
@@ -827,6 +827,6 @@ Add ESlint to the project. Define the configuration according to your liking. Fi
 
 Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.
 
-*NB:* do not run the _eslint --init_ command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*NB:* do not run the *eslint --init* command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
 </div>

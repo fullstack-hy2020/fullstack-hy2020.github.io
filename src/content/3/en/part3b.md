@@ -103,7 +103,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Now we are using the port defined in the [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined. Fly.io and Heroku configure the application port based on that environment variable.
+Now we are using the port defined in the [environment variable](https://en.wikipedia.org/wiki/Environment_variable) *PORT* or port 3001 if the environment variable *PORT* is undefined. Fly.io and Heroku configure the application port based on that environment variable.
 
 #### Fly.io
 
@@ -120,7 +120,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Don't forget to add your _cors_ package to _dependencies_ in _package.json_ and you might need to remove the _morgan_ code from the server application.
+Don't forget to add your *cors* package to *dependencies* in *package.json* and you might need to remove the *morgan* code from the server application.
 
 Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via the command line with the command
 
@@ -128,7 +128,7 @@ Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via the command
 fly auth login
 ```
 
-*Note* if the command _fly_ does not work on your machine, you can try the longer version _flyctl_. Eg. on MacOS, both forms of the command work.
+*Note* if the command *fly* does not work on your machine, you can try the longer version *flyctl*. Eg. on MacOS, both forms of the command work.
 
 Initializing an app happens by running the following command in the root directory of the app
 
@@ -152,7 +152,7 @@ After the initial setup, when the app code has been updated, it can be deployed 
 fly deploy
 ```
 
-A particularly important command is _fly logs_. This command can be used to view server logs. It is best to keep logs always visible!
+A particularly important command is *fly logs*. This command can be used to view server logs. It is best to keep logs always visible!
 
 Fly.io creates a file <i>fly.toml</i> in the root of your app. The file contains all the configuration of your server. In this course we can mostly ignore the contents of the file.
 
@@ -206,7 +206,7 @@ If not, the issue can be found by reading the heroku logs with the command <i>he
 
 >**NB** At least in the beginning it's good to keep an eye on the heroku logs at all times. The best way to do this is with command <i>heroku logs -t</i> which prints the logs to console whenever something happens on the server.
 >
->**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run _git push heroku HEAD:master_. If you have already done a push to heroku, you may need to run _git push heroku HEAD:main --force_.
+>**NB** If you are deploying from a git repository where your code is not on the main branch (i.e. if you are altering the [notes repo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2) from the last lesson) you will need to run *git push heroku HEAD:master*. If you have already done a push to heroku, you may need to run *git push heroku HEAD:main --force*.
 
 The frontend also works with the backend on Fly.io or Heroku. You can check this by changing the backend's address on the frontend to be the backend's address in Fly.io/Heroku instead of <i><http://localhost:3001></i>.
 
@@ -220,7 +220,7 @@ When the application is deployed, we must create a [production build](https://re
 
 A production build of applications created with <i>create-react-app</i> can be created with the command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
-**NOTE:** at the time of writing (20th January 2022) create-react-app had a bug that causes the following error _TypeError: MiniCssExtractPlugin is not a constructor_
+**NOTE:** at the time of writing (20th January 2022) create-react-app had a bug that causes the following error *TypeError: MiniCssExtractPlugin is not a constructor*
 
 A possible fix is found [here](https://github.com/facebook/create-react-app/issues/11930). Add the following to the file <i>package.json</i>
 
@@ -242,7 +242,7 @@ npm cache clean --force
 npm install
 ```
 
-After these _npm run build_ should work.
+After these *npm run build* should work.
 
 Let's run this command from the <i>root of the frontend project</i>.
 
@@ -282,7 +282,7 @@ whenever express gets an HTTP GET request it will first check if the <i>build</i
 
 Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend's code.
 
-Because of our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server.
+Because of our situation, both the frontend and the backend are at the same address, we can declare *baseUrl* as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server.
 
 ```js
 import axios from 'axios'
@@ -374,11 +374,11 @@ The script looks like this
 }
 ```
 
-The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Fly.io.
+The script *npm run build:ui* builds the frontend and copies the production version under the backend repository.  *npm run deploy* releases the current backend to Fly.io.
 
-_npm run deploy:full_ combines these two scripts.
+*npm run deploy:full* combines these two scripts.
 
-There is also a script _npm run logs:prod_ to show the Fly.io logs.
+There is also a script *npm run logs:prod* to show the Fly.io logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
@@ -398,11 +398,11 @@ In case of Heroku, the script looks like the following
 }
 ```
 
-The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Heroku.
+The script *npm run build:ui* builds the frontend and copies the production version under the backend repository.  *npm run deploy* releases the current backend to Heroku.
 
-_npm run deploy:full_ combines these two and contains the necessary <i>git</i> commands to update the backend repository.
+*npm run deploy:full* combines these two and contains the necessary <i>git</i> commands to update the backend repository.
 
-There is also a script _npm run logs:prod_ to show the Heroku logs.
+There is also a script *npm run logs:prod* to show the Heroku logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
@@ -416,7 +416,7 @@ Another option is the use of [shx](https://www.npmjs.com/package/shx).
 
 ### Proxy
 
-Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work.
+Changes on the frontend have caused it to no longer work in development mode (when started with command *npm start*), as the connection to the backend does not work.
 
 ![Network dev tools showing a 404 on getting notes](../../images/3/32ea.png)
 
@@ -472,7 +472,7 @@ You will probably have to do some small changes to the frontend, at least to the
 
 Deploy the backend to the internet, for example to Heroku.
 
-**NB** the command _heroku_ works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku on your computer, you can use the command [npx heroku](https://www.npmjs.com/package/heroku).
+**NB** the command *heroku* works on the department's computers and the freshman laptops. If for some reason you cannot [install](https://devcenter.heroku.com/articles/heroku-cli) Heroku on your computer, you can use the command [npx heroku](https://www.npmjs.com/package/heroku).
 
 Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works.
 
@@ -496,7 +496,7 @@ Generate a production build of your frontend, and add it to the internet applica
 
 **NB** If you use Heroku, make sure the directory <i>build</i> is not gitignored
 
-Also, make sure that the frontend still works locally (in development mode when started with command _npm start_).
+Also, make sure that the frontend still works locally (in development mode when started with command *npm start*).
 
 If you have problems getting the app working make sure that your directory structure matches [the example app](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 

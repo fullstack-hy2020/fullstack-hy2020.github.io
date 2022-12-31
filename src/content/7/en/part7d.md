@@ -14,7 +14,7 @@ We cannot rely on the black magic of create-react-app forever and it's time for 
 
 We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, the older browsers do not know how to handle code that is divided into modules.
 
-For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the _npm run build_ command. Under the hood, the npm script bundles the source code using webpack, which produces the following collection of files in the <i>build</i> directory:
+For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the *npm run build* command. Under the hood, the npm script bundles the source code using webpack, which produces the following collection of files in the <i>build</i> directory:
 
 <pre>
 .
@@ -122,7 +122,7 @@ const hello = name => {
 }
 ```
 
-When we execute the _npm run build_ command, our application code will be bundled by webpack. The operation will produce a new <i>main.js</i> file that is added under the <i>build</i> directory:
+When we execute the *npm run build* command, our application code will be bundled by webpack. The operation will produce a new <i>main.js</i> file that is added under the <i>build</i> directory:
 
 ![terminal output webpack npm run build](../../images/7/19x.png)
 
@@ -154,7 +154,7 @@ const hello = name => {
 App()
 ```
 
-When we bundle the application again with the _npm run build_ command, we notice that webpack has acknowledged both files:
+When we bundle the application again with the *npm run build* command, we notice that webpack has acknowledged both files:
 
 ![terminal output showing webpack generated two files](../../images/7/20x.png)
 
@@ -387,7 +387,7 @@ var App = function App() {
 };
 ```
 
-As we can see, variables are declared with the _var_ keyword as ES5 JavaScript does not understand the _const_ keyword. Arrow functions are also not used, which is why the function definition used the _function_ keyword.
+As we can see, variables are declared with the *var* keyword as ES5 JavaScript does not understand the *const* keyword. Arrow functions are also not used, which is why the function definition used the *function* keyword.
 
 ### CSS
 
@@ -501,7 +501,7 @@ const config = {
 };
 ```
 
-The _npm start_ command will now start the dev-server at port 3000, meaning that our application will be available by visiting <http://localhost:3000> in the browser. When we make changes to the code, the browser will automatically refresh the page.
+The *npm start* command will now start the dev-server at port 3000, meaning that our application will be available by visiting <http://localhost:3000> in the browser. When we make changes to the code, the browser will automatically refresh the page.
 
 The process for updating the code is fast. When we use the dev-server, the code is not bundled the usual way into the <i>main.js</i> file. The result of the bundling exists only in memory.
 
@@ -684,7 +684,7 @@ Our goal is to configure the application with webpack in such a way that, when u
 
 The bundled file will then be configured to use the backend available at the <https://obscure-harbor-49797.herokuapp.com/api/notes> URL.
 
-We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part7/custom_hooks) called _useNotes_:
+We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part7/custom_hooks) called *useNotes*:
 
 ```js
 // highlight-start
@@ -832,7 +832,7 @@ By default, the bundled application will be available at <http://localhost:9080>
 
 ### Polyfill
 
-Our application is finished and works with all relatively recent versions of modern browsers, except for Internet Explorer. The reason for this is that, because of _axios_, our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them:
+Our application is finished and works with all relatively recent versions of modern browsers, except for Internet Explorer. The reason for this is that, because of *axios*, our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them:
 
 ![browser compatibility chart highlighting how bad internet explorer is](../../images/7/29.png)
 
@@ -840,7 +840,7 @@ There are many other things in the standard that IE does not support. Something 
 
 ![browser compatibility chart showing IE does not support find method](../../images/7/30.png)
 
-In these situations, it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support. IE understands Promises syntactically but it simply has not implemented their functionality. The _find_ property of arrays in IE is simply <i>undefined</i>.
+In these situations, it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support. IE understands Promises syntactically but it simply has not implemented their functionality. The *find* property of arrays in IE is simply <i>undefined</i>.
 
 If we want the application to be IE-compatible, we need to add a [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill), which is code that adds the missing functionality to older browsers.
 
@@ -856,7 +856,7 @@ if (!window.Promise) {
 }
 ```
 
-If the global _Promise_ object does not exist, meaning that the browser does not support Promises, the polyfilled Promise is stored in the global variable. If the polyfilled Promise is implemented well enough, the rest of the code should work without issues.
+If the global *Promise* object does not exist, meaning that the browser does not support Promises, the polyfilled Promise is stored in the global variable. If the polyfilled Promise is implemented well enough, the rest of the code should work without issues.
 
 One exhaustive list of existing polyfills can be found [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
 

@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-We will now start writing tests for the backend. Since the backend does not contain any complicated logic, it doesn't make sense to write [unit tests](https://en.wikipedia.org/wiki/Unit_testing) for it. The only potential thing we could unit test is the _toJSON_ method that is used for formatting notes.
+We will now start writing tests for the backend. Since the backend does not contain any complicated logic, it doesn't make sense to write [unit tests](https://en.wikipedia.org/wiki/Unit_testing) for it. The only potential thing we could unit test is the *toJSON* method that is used for formatting notes.
 
 In some situations, it can be beneficial to implement some of the backend tests by mocking the database instead of using a real database. One library that could be used for this is [mongodb-memory-server](https://github.com/nodkz/mongodb-memory-server).
 
@@ -42,7 +42,7 @@ Next, let's change the scripts in our <i>package.json</i> so that when tests are
 
 We also added the [runInBand](https://jestjs.io/docs/cli#--runinband) option to the npm script that executes the tests. This option will prevent Jest from running tests in parallel; we will discuss its significance once our tests start using the database.
 
-We specified the mode of the application to be <i>development</i> in the _npm run dev_ script that uses nodemon. We also specified that the default _npm start_ command will define the mode as <i>production</i>.
+We specified the mode of the application to be <i>development</i> in the *npm run dev* script that uses nodemon. We also specified that the default *npm start* command will define the mode as <i>production</i>.
 
 There is a slight issue in the way that we have specified the mode of the application in our scripts: it will not work on Windows. We can correct this by installing the [cross-env](https://www.npmjs.com/package/cross-env) package as a development dependency with the command:
 
@@ -107,7 +107,7 @@ TEST_MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/t
 // highlight-end
 ```
 
-The _config_ module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our implementation is justified since our application is simple, and also because it teaches us valuable lessons.
+The *config* module that we have implemented slightly resembles the [node-config](https://github.com/lorenwest/node-config) package. Writing our implementation is justified since our application is simple, and also because it teaches us valuable lessons.
 
 These are the only changes we need to make to our application's code.
 
@@ -241,7 +241,7 @@ test('the first note is about HTTP methods', async () => {
 })
 ```
 
-Both tests store the response of the request to the _response_ variable, and unlike the previous test that used the methods provided by _supertest_ for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://jestjs.io/docs/expect#expectvalue) method of Jest.
+Both tests store the response of the request to the *response* variable, and unlike the previous test that used the methods provided by *supertest* for verifying the status code and headers, this time we are inspecting the response data stored in <i>response.body</i> property. Our tests verify the format and content of the response data with the [expect](https://jestjs.io/docs/expect#expectvalue) method of Jest.
 
 The benefit of using the async/await syntax is starting to become evident. Normally we would have to use callback functions to access the data returned by promises, but with the new syntax things are a lot more comfortable:
 
@@ -323,7 +323,7 @@ beforeEach(async () => {
 // ...
 ```
 
-The database is cleared out at the beginning, and after that, we save the two notes stored in the _initialNotes_ array to the database. By doing this, we ensure that the database is in the same state before every test is run.
+The database is cleared out at the beginning, and after that, we save the two notes stored in the *initialNotes* array to the database. By doing this, we ensure that the database is in the same state before every test is run.
 
 Let's also make the following changes to the last two tests:
 
@@ -351,7 +351,7 @@ Pay special attention to the expect in the latter test. The <code>response.body.
 
 ### Running tests one by one
 
-The _npm test_ command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
+The *npm test* command executes all of the tests for the application. When we are writing tests, it is usually wise to only execute one or two tests. Jest offers a few different ways of accomplishing this, one of which is the [only](https://jestjs.io/docs/en/api#testonlyname-fn-timeout) method. If tests are written across many files, this method is not great.
 
 A better option is to specify the tests that need to be run as parameters of the <i>npm test</i> command.
 
@@ -378,7 +378,7 @@ The problem might be because supertest primes the connection, but Jest does not 
 
 ### async/await
 
-Before we write more tests let's take a look at the _async_ and _await_ keywords.
+Before we write more tests let's take a look at the *async* and *await* keywords.
 
 The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.
 
@@ -390,11 +390,11 @@ Note.find({}).then(notes => {
 })
 ```
 
-The _Note.find()_ method returns a promise and we can access the result of the operation by registering a callback function with the _then_ method.
+The *Note.find()* method returns a promise and we can access the result of the operation by registering a callback function with the *then* method.
 
 All of the code we want to execute once the operation finishes is written in the callback function. If we wanted to make several asynchronous function calls in sequence, the situation would soon become painful. The asynchronous calls would have to be made in the callback. This would likely lead to complicated code and could potentially give birth to a so-called [callback hell](http://callbackhell.com/).
 
-By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of _then_ method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:
+By [chaining promises](https://javascript.info/promise-chaining) we could keep the situation somewhat under control, and avoid callback hell by creating a fairly clean chain of *then* method calls. We have seen a few of these during the course. To illustrate this, you can view an artificial example of a function that fetches all notes and then deletes the first one:
 
 ```js
 Note.find({})
@@ -409,7 +409,7 @@ Note.find({})
 
 The then-chain is alright, but we can do better. The [generator functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) introduced in ES6 provided a [clever way](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch4.md#iterating-generators-asynchronously) of writing asynchronous code in a way that "looks synchronous". The syntax is a bit clunky and not widely used.
 
-The _async_ and _await_ keywords introduced in ES7 bring the same functionality as the generators, but in an understandable and syntactically cleaner way to the hands of all citizens of the JavaScript world.
+The *async* and *await* keywords introduced in ES7 bring the same functionality as the generators, but in an understandable and syntactically cleaner way to the hands of all citizens of the JavaScript world.
 
 We could fetch all of the notes in the database by utilizing the [await](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/await) operator like this:
 
@@ -419,7 +419,7 @@ const notes = await Note.find({})
 console.log('operation returned the following notes', notes)
 ```
 
-The code looks exactly like synchronous code. The execution of code pauses at <em>const notes = await Note.find({})</em> and waits until the related promise is <i>fulfilled</i>, and then continues its execution to the next line. When the execution continues, the result of the operation that returned a promise is assigned to the _notes_ variable.
+The code looks exactly like synchronous code. The execution of code pauses at <em>const notes = await Note.find({})</em> and waits until the related promise is <i>fulfilled</i>, and then continues its execution to the next line. When the execution continues, the result of the operation that returned a promise is assigned to the *notes* variable.
 
 The slightly complicated example presented above could be implemented by using await like this:
 
@@ -450,7 +450,7 @@ const main = async () => { // highlight-line
 main() // highlight-line
 ```
 
-The code declares that the function assigned to _main_ is asynchronous. After this, the code calls the function with <code>main()</code>.
+The code declares that the function assigned to *main* is asynchronous. After this, the code calls the function with <code>main()</code>.
 
 ### async/await in the backend
 
@@ -580,7 +580,7 @@ module.exports = {
 }
 ```
 
-The module defines the _notesInDb_ function that can be used for checking the notes stored in the database. The _initialNotes_ array containing the initial database state is also in the module. We also define the _nonExistingId_ function ahead of time, which can be used for creating a database object ID that does not belong to any note object in the database.
+The module defines the *notesInDb* function that can be used for checking the notes stored in the database. The *initialNotes* array containing the initial database state is also in the module. We also define the *nonExistingId* function ahead of time, which can be used for creating a database object ID that does not belong to any note object in the database.
 
 Our tests can now use the helper module and be changed like this:
 
@@ -669,7 +669,7 @@ afterAll(() => {
 
 The code using promises works and the tests pass. We are ready to refactor our code to use the async/await syntax.
 
-We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the _async_ keyword):
+We make the following changes to the code that takes care of adding a new note(notice that the route handler definition is preceded by the *async* keyword):
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -696,7 +696,7 @@ If there's an exception while handling the POST request we end up in a familiar 
 
 In other words, we end up with an unhandled promise rejection, and the request never receives a response.
 
-With async/await the recommended way of dealing with exceptions is the old and familiar _try/catch_ mechanism:
+With async/await the recommended way of dealing with exceptions is the old and familiar *try/catch* mechanism:
 
 ```js
 notesRouter.post('/', async (request, response, next) => {
@@ -718,7 +718,7 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-The catch block simply calls the _next_ function, which passes the request handling to the error handling middleware.
+The catch block simply calls the *next* function, which passes the request handling to the error handling middleware.
 
 After making the change, all of our tests will pass once again.
 
@@ -870,7 +870,7 @@ notesRouter.delete('/:id', async (request, response) => {
 ```
 
 <!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen. -->
-Because of the library, we do not need the _next(exception)_ call anymore.
+Because of the library, we do not need the *next(exception)* call anymore.
 The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
 
 <!-- Muut routet yksinkertaistuvat seuraavasti: -->
@@ -902,7 +902,7 @@ notesRouter.get('/:id', async (request, response) => {
 
 ### Optimizing the beforeEach function
 
-Let's return to writing our tests and take a closer look at the _beforeEach_ function that sets up the tests:
+Let's return to writing our tests and take a closer look at the *beforeEach* function that sets up the tests:
 
 ```js
 beforeEach(async () => {
@@ -916,7 +916,7 @@ beforeEach(async () => {
 })
 ```
 
-The function saves the first two notes from the _helper.initialNotes_ array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:
+The function saves the first two notes from the *helper.initialNotes* array into the database with two separate operations. The solution is alright, but there's a better way of saving multiple objects to the database:
 
 ```js
 beforeEach(async () => {
@@ -937,7 +937,7 @@ test('notes are returned as json', async () => {
 }
 ```
 
-We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem.
+We save the notes stored in the array into the database inside of a *forEach* loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem.
 
 The console displays the following output:
 
@@ -951,9 +951,9 @@ saved
 
 Despite our use of the async/await syntax, our solution does not work as we expected it to. The test execution begins before the database is initialized!
 
-The problem is that every iteration of the forEach loop generates an asynchronous operation, and _beforeEach_ won't wait for them to finish executing. In other words, the _await_ commands defined inside of the _forEach_ loop are not in the _beforeEach_ function, but in separate functions that _beforeEach_ will not wait for.
+The problem is that every iteration of the forEach loop generates an asynchronous operation, and *beforeEach* won't wait for them to finish executing. In other words, the *await* commands defined inside of the *forEach* loop are not in the *beforeEach* function, but in separate functions that *beforeEach* will not wait for.
 
-Since the execution of tests begins immediately after _beforeEach_ has finished executing, the execution of tests begins before the database state is initialized.
+Since the execution of tests begins immediately after *beforeEach* has finished executing, the execution of tests begins before the database state is initialized.
 
 One way of fixing this is to wait for all of the asynchronous operations to finish executing with the [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method:
 
@@ -968,11 +968,11 @@ beforeEach(async () => {
 })
 ```
 
-The solution is quite advanced despite its compact appearance. The _noteObjects_ variable is assigned to an array of Mongoose objects that are created with the _Note_ constructor for each of the notes in the _helper.initialNotes_ array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the _save_ method of each item in the _noteObjects_ array. In other words, it is an array of promises for saving each of the items to the database.
+The solution is quite advanced despite its compact appearance. The *noteObjects* variable is assigned to an array of Mongoose objects that are created with the *Note* constructor for each of the notes in the *helper.initialNotes* array. The next line of code creates a new array that <i>consists of promises</i>, that are created by calling the *save* method of each item in the *noteObjects* array. In other words, it is an array of promises for saving each of the items to the database.
 
 The [Promise.all](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all) method can be used for transforming an array of promises into a single promise, that will be <i>fulfilled</i> once every promise in the array passed to it as a parameter is resolved. The last line of code <em>await Promise.all(promiseArray)</em> waits until every promise for saving a note is finished, meaning that the database has been initialized.
 
-> The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the _await_ syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the _promiseArray_, and they appear in the same order as the promises in the array.
+> The returned values of each promise in the array can still be accessed when using the Promise.all method. If we wait for the promises to be resolved with the *await* syntax <em>const results = await Promise.all(promiseArray)</em>, the operation will return an array that contains the resolved values for each promise in the *promiseArray*, and they appear in the same order as the promises in the array.
 
 Promise.all executes the promises it receives in parallel. If the promises need to be executed in a particular order, this will be problematic. In situations like this, the operations can be executed inside of a [for...of](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of) block, that guarantees a specific execution order.
 

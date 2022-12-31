@@ -87,7 +87,7 @@ const App = (props) => {
 }
 ```
 
-We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted, by clicking the submit button.
+We have added the *addNote* function as an event handler to the form element that will be called when the form is submitted, by clicking the submit button.
 
 We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler:
 
@@ -102,7 +102,7 @@ The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-ev
 
 The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, [among other things](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), cause the page to reload.
 
-The target of the event stored in _event.target_ is logged to the console:
+The target of the event stored in *event.target* is logged to the console:
 
 ![button clicked with form object console](../../images/2/6e.png)
 
@@ -211,7 +211,7 @@ const handleNoteChange = (event) => {
 
 The <em>target</em> property of the event object now corresponds to the controlled <i>input</i> element, and <em>event.target.value</em> refers to the input value of that element.
 
-Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because no default action occurs on an input change, unlike a form submission.
+Note that we did not need to call the *event.preventDefault()* method like we did in the <i>onSubmit</i> event handler. This is because no default action occurs on an input change, unlike a form submission.
 
 You can follow along in the console to see how the event handler is called:
 
@@ -375,7 +375,7 @@ const App = (props) => {
 }
 ```
 
-The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa:
+The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of *showAll* from true to false and vice versa:
 
 ```js
 () => setShowAll(!showAll)
@@ -396,7 +396,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises, it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. You likely **do not want** your project to be a repository, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. You likely **do not want** your project to be a repository, so simply run the *rm -rf .git* command at the root of your application.
 
 <h4>2.6: The Phonebook Step1</h4>
 

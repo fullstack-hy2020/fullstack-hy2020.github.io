@@ -86,9 +86,9 @@ const App = () => {
 export default App
 ```
 
-The current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run _npm install_ before attempting to run the frontend.
+The current application code can be found on [Github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-1), branch <i>part5-1</i>. If you clone the repo, don't forget to run *npm install* before attempting to run the frontend.
 
-The frontend will not display any notes if it's not connected to the backend. You can start the backend with _npm run dev_ in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with _npm start_, and now you can see the notes that are saved in your MongoDB database from Part 4.
+The frontend will not display any notes if it's not connected to the backend. You can start the backend with *npm run dev* in its folder from Part 4. This will run the backend on port 3001. While that is active, in a separate terminal window you can start the frontend with *npm start*, and now you can see the notes that are saved in your MongoDB database from Part 4.
 
 Keep this in mind from now on.
 
@@ -99,7 +99,7 @@ The login form is handled the same way we handled forms in
 ({ target }) => setUsername(target.value)
 ```
 
-The method _handleLogin_, which is responsible for handling the data in the form, is yet to be implemented.
+The method *handleLogin*, which is responsible for handling the data in the form, is yet to be implemented.
 
 Logging in is done by sending an HTTP POST request to the server address <i>api/login</i>. Let's separate the code responsible for this request into its own module, to file <i>services/login.js</i>.
 
@@ -157,9 +157,9 @@ const App = () => {
 
 If the login is successful, the form fields are emptied <i>and</i> the server response (including a <i>token</i> and the user details) is saved to the <i>user</i> field of the application's state.
 
-If the login fails or running the function _loginService.login_ results in an error, the user is notified.
+If the login fails or running the function *loginService.login* results in an error, the user is notified.
 
-The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when _user === null_. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.
+The user is not notified about a successful login in any way. Let's modify the application to show the login form only <i>if the user is not logged-in</i> so when *user === null*. The form for adding new notes is shown only if the <i>user is logged-in</i>, so <i>user</i> contains the user details.
 
 Let's add two helper functions to the <i>App</i> component for generating the forms:
 
@@ -283,7 +283,7 @@ return (
 )
 ```
 
-If _user === null_ is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), _loginForm()_ is executed. If not, _noteForm()_ is.
+If *user === null* is [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), *loginForm()* is executed. If not, *noteForm()* is.
 
 Let's do one more modification. If the user is logged in, their name is shown on the screen:
 
@@ -377,7 +377,7 @@ const update = (id, newObject) => {
 export default { getAll, create, update, setToken } // highlight-line
 ```
 
-The noteService module contains a private variable _token_. Its value can be changed with a function _setToken_, which is exported by the module. _create_, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method.
+The noteService module contains a private variable *token*. Its value can be changed with a function *setToken*, which is exported by the module. *create*, now with async/await syntax, sets the token to the <i>Authorization</i> header. The header is given to axios as the third parameter of the <i>post</i> method.
 
 The event handler responsible for login must be changed to call the method <code>noteService.setToken(user.token)</code> with a successful login:
 
@@ -427,7 +427,7 @@ Values in the local storage are persisted even when the page is re-rendered. The
 
 Let's extend our application so that it saves the details of a logged-in user to the local storage.
 
-Values saved to the storage are [DOMstrings](https://docs.w3cub.com/dom/domstring), so we cannot save a JavaScript object as it is. The object has to be parsed to JSON first, with the method _JSON.stringify_. Correspondingly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with _JSON.parse_.
+Values saved to the storage are [DOMstrings](https://docs.w3cub.com/dom/domstring), so we cannot save a JavaScript object as it is. The object has to be parsed to JSON first, with the method *JSON.stringify*. Correspondingly, when a JSON object is read from the local storage, it has to be parsed back to JavaScript with *JSON.parse*.
 
 Changes to the login method are as follows:
 
@@ -454,7 +454,7 @@ Changes to the login method are as follows:
   }
 ```
 
-The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing _window.localStorage_ to the console):
+The details of a logged-in user are now saved to the local storage, and they can be viewed on the console (by typing *window.localStorage* to the console):
 
 ![browser showing someone logged into notes](../../images/5/3e.png)
 
@@ -532,7 +532,7 @@ It might be best to use the backend that we marked as the answer for part 4.
 
 While doing the exercises, remember all of the debugging methods we have talked about, especially keeping an eye on the console.
 
-**Warning:** If you notice you are mixing in the functions _async/await_ and _then_ commands, it's 99.9%  certain you are doing something wrong. Use either or, never both.
+**Warning:** If you notice you are mixing in the functions *async/await* and *then* commands, it's 99.9%  certain you are doing something wrong. Use either or, never both.
 
 #### 5.1: bloglist frontend, step1
 

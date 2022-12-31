@@ -56,7 +56,7 @@ When we try to create a new note, the following output pops up in the console:
 
 ![data json output in console](../../images/2/20e.png)
 
-The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
+The newly created note resource is stored in the value of the <i>data</i> property of the *response* object.
 
 Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get):
 
@@ -169,7 +169,7 @@ const App = () => {
 
 Notice how every note receives its own <i>unique</i> event handler function since the <i>id</i> of every note is unique.
 
-E.g., if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
+E.g., if <i>note.id</i> is 3, the event handler function returned by *toggleImportance(note.id)* will be:
 
 ```js
 () => { console.log('importance of 3 needs to be toggled') }
@@ -207,7 +207,7 @@ const toggleImportanceOf = id => {
 
 Almost every line of code in the function body contains important details. The first line defines the unique URL for each note resource based on its id.
 
-The array [find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) is used to find the note we want to modify, and we then assign it to the _note_ variable.
+The array [find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) is used to find the note we want to modify, and we then assign it to the *note* variable.
 
 After this, we create a <i>new object</i> that is an exact copy of the old note, apart from the important property.
 
@@ -217,7 +217,7 @@ The code for creating the new object that uses the [object spread](https://devel
 const changedNote = { ...note, important: !note.important }
 ```
 
-In practice, <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spread object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example, the <em>important</em> property gets the negation of its previous value in the original object.
+In practice, <em>{ ...note }</em> creates a new object with copies of all the properties from the *note* object. When we add properties inside the curly braces after the spread object, e.g. <em>{ ...note, important: true }</em>, then the value of the *important* property of the new object will be *true*. In our example, the <em>important</em> property gets the negation of its previous value in the original object.
 
 There are a few things to point out. Why did we make a copy of the note object we wanted to modify when the following code also appears to work?
 
@@ -231,7 +231,7 @@ axios.put(url, note).then(response => {
 
 This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must never mutate state directly in React.
 
-It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
+It's also worth noting that the new object *changedNote* is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 
 The new note is then sent with a PUT request to the backend where it will replace the old object.
 
@@ -292,7 +292,7 @@ import noteService from './services/notes' // highlight-line
 const App = () => {
 ```
 
-The functions of the module can be used directly with the imported variable _noteService_ as follows:
+The functions of the module can be used directly with the imported variable *noteService* as follows:
 
 ```js
 const App = () => {
