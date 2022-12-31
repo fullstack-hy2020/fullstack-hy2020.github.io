@@ -69,7 +69,7 @@ server.listen(config.PORT, () => {
 })
 ```
 
-The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
+The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function *info* of the logger-module is used for the console printout telling that the application is running.
 
 The handling of environment variables is extracted into a separate <i>utils/config.js</i> file:
 
@@ -331,7 +331,7 @@ There is no strict directory structure or file naming convention that is require
 
 You can find the code for our current application in its entirety in the <i>part4-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-1).
 
-If you clone the project for yourself, run the _npm install_ command before starting the application with _npm start_.
+If you clone the project for yourself, run the *npm install* command before starting the application with *npm start*.
 
 ### Note on exports
 
@@ -499,7 +499,7 @@ module.exports = {
 }
 ```
 
-> The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on Youtube.
+> The *average* function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on Youtube.
 
 There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), which resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/).
 
@@ -513,7 +513,7 @@ Since tests are only executed during the development of our application, we will
 npm install --save-dev jest
 ```
 
-Let's define the <i>npm script _test_</i> to execute tests with Jest and to report about the test execution with the <i>verbose</i> style:
+Let's define the <i>npm script *test*</i> to execute tests with Jest and to report about the test execution with the <i>verbose</i> style:
 
 ```bash
 {
@@ -575,7 +575,7 @@ test('reverse of releveler', () => {
 })
 ```
 
-The ESLint configuration we added to the project in the previous part complains about the _test_ and _expect_ commands in our test file since the configuration does not allow <i>globals</i>. Let's get rid of the complaints by adding <i>"jest": true</i> to the <i>env</i> property in the <i>.eslintrc.js</i> file.
+The ESLint configuration we added to the project in the previous part complains about the *test* and *expect* commands in our test file since the configuration does not allow <i>globals</i>. Let's get rid of the complaints by adding <i>"jest": true</i> to the <i>env</i> property in the <i>.eslintrc.js</i> file.
 
 ```js
 module.exports = {
@@ -595,13 +595,13 @@ module.exports = {
 }
 ```
 
-In the first row, the test file imports the function to be tested and assigns it to a variable called _reverse_:
+In the first row, the test file imports the function to be tested and assigns it to a variable called *reverse*:
 
 ```js
 const reverse = require('../utils/for_testing').reverse
 ```
 
-Individual test cases are defined with the _test_ function. The first parameter of the function is the test description as a string. The second parameter is a <i>function</i>, that defines the functionality for the test case. The functionality for the second test case looks like this:
+Individual test cases are defined with the *test* function. The first parameter of the function is the test description as a string. The second parameter is a <i>function</i>, that defines the functionality for the test case. The functionality for the second test case looks like this:
 
 ```js
 () => {
@@ -633,7 +633,7 @@ Running the tests above results in the following error message:
 
 ![terminal output shows failure from npm test](../../images/4/2x.png)
 
-Let's add a few tests for the _average_ function, into a new file <i>tests/average.test.js</i>.
+Let's add a few tests for the *average* function, into a new file <i>tests/average.test.js</i>.
 
 ```js
 const average = require('../utils/for_testing').average
@@ -671,9 +671,9 @@ const average = array => {
 }
 ```
 
-If the length of the array is 0 then we return 0, and in all other cases, we use the _reduce_ method to calculate the average.
+If the length of the array is 0 then we return 0, and in all other cases, we use the *reduce* method to calculate the average.
 
-There are a few things to notice about the tests that we just wrote. We defined a <i>describe</i> block around the tests that were given the name _average_:
+There are a few things to notice about the tests that we just wrote. We defined a <i>describe</i> block around the tests that were given the name *average*:
 
 ```js
 describe('average', () => {
@@ -705,7 +705,7 @@ Let's create a collection of helper functions that are meant to assist in dealin
 
 #### 4.3: helper functions and unit tests, step1
 
-First, define a _dummy_ function that receives an array of blog posts as a parameter and always returns the value 1. The contents of the <i>list_helper.js</i> file at this point should be the following:
+First, define a *dummy* function that receives an array of blog posts as a parameter and always returns the value 1. The contents of the <i>list_helper.js</i> file at this point should be the following:
 
 ```js
 const dummy = (blogs) => {
@@ -732,7 +732,7 @@ test('dummy returns one', () => {
 
 #### 4.4: helper functions and unit tests, step2
 
-Define a new _totalLikes_ function that receives a list of blog posts as a parameter. The function returns the total sum of <i>likes</i> in all of the blog posts.
+Define a new *totalLikes* function that receives a list of blog posts as a parameter. The function returns the total sum of <i>likes</i> in all of the blog posts.
 
 Write appropriate tests for the function. It's recommended to put the tests inside of a <i>describe</i> block so that the test report output gets grouped nicely:
 
@@ -762,7 +762,7 @@ describe('total likes', () => {
 
 If defining your own test input list of blogs is too much work, you can use the ready-made list [here](https://raw.githubusercontent.com/fullstack-hy2020/misc/master/blogs_for_test.md).
 
-You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with _console.log_ even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting).
+You are bound to run into problems while writing tests. Remember the things that we learned about [debugging](/en/part3/saving_data_to_mongo_db#debugging-node-applications) in part 3. You can print things to the console with *console.log* even during test execution. It is even possible to use the debugger while running tests, you can find instructions for that [here](https://jestjs.io/docs/en/troubleshooting).
 
 **NB:** if some test is failing, then it is recommended to only run that test while you are fixing the issue. You can run a single test with the [only](https://jestjs.io/docs/api#testonlyname-fn-timeout) method.
 
@@ -774,7 +774,7 @@ npm test -- -t 'when list has only one blog, equals the likes of that'
 
 #### 4.5*: helper functions and unit tests, step3
 
-Define a new _favoriteBlog_ function that receives a list of blogs as a parameter. The function finds out which blog has the most likes. If there are many top favorites, it is enough to return one of them.
+Define a new *favoriteBlog* function that receives a list of blogs as a parameter. The function finds out which blog has the most likes. If there are many top favorites, it is enough to return one of them.
 
 The value returned by the function could be in the following format:
 
@@ -796,7 +796,7 @@ This and the next exercise are a little bit more challenging. Finishing these tw
 
 Finishing this exercise can be done without the use of additional libraries. However, this exercise is a great opportunity to learn how to use the [Lodash](https://lodash.com/) library.
 
-Define a function called _mostBlogs_ that receives an array of blogs as a parameter. The function returns the <i>author</i> who has the largest amount of blogs. The return value also contains the number of blogs the top author has:
+Define a function called *mostBlogs* that receives an array of blogs as a parameter. The function returns the <i>author</i> who has the largest amount of blogs. The return value also contains the number of blogs the top author has:
 
 ```js
 {
@@ -809,7 +809,7 @@ If there are many top bloggers, then it is enough to return any one of them.
 
 #### 4.7*: helper functions and unit tests, step5
 
-Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
+Define a function called *mostLikes* that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
 
 ```js
 {

@@ -29,7 +29,7 @@ h1 {
 
 CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application.
 
-The declaration sets the _color_ property to the value <i>green</i>.
+The declaration sets the *color* property to the value <i>green</i>.
 
 One CSS rule can contain an arbitrary number of properties. Let's modify the previous rule to make the text cursive, by defining the font style as <i>italic</i>:
 
@@ -96,7 +96,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Class selectors are defined with the _.classname_ syntax:
+Class selectors are defined with the *.classname* syntax:
 
 ```css
 .note {

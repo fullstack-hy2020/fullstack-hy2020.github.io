@@ -21,7 +21,7 @@ The Visual Studio Code debugger can be useful in some situations. You can launch
 
 Note that the application shouldn't be running in another console, otherwise the port will already be in use.
 
-**NB** A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).
+**NB** A newer version of Visual Studio Code may have *Run* instead of *Debug*. Furthermore, you may have to configure your *launch.json* file to start debugging. This can be done by choosing *Add Configuration...* on the drop-down menu, which is located next to the green play button and above *VARIABLES* menu, and select *Run "npm start" in a debug terminal*. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 
@@ -213,9 +213,9 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-First, we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database.
+First, we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the *noteSchema* variable. The schema tells Mongoose how the note objects are to be stored in the database.
 
-In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercase plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
+In the *Note* model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercase plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
 
 Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
 
@@ -235,7 +235,7 @@ const note = new Note({
 
 Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.
 
-Saving the object to the database happens with the appropriately named _save_ method, which can be provided with an event handler with the _then_ method:
+Saving the object to the database happens with the appropriately named *save* method, which can be provided with an event handler with the *then* method:
 
 ```js
 note.save().then(result => {
@@ -244,9 +244,9 @@ note.save().then(result => {
 })
 ```
 
-When the object is saved to the database, the event handler provided to _then_  gets called. The event handler closes the database connection with the command <code>mongoose.connection.close()</code>. If the connection is not closed, the program will never finish its execution.
+When the object is saved to the database, the event handler provided to *then*  gets called. The event handler closes the database connection with the command <code>mongoose.connection.close()</code>. If the connection is not closed, the program will never finish its execution.
 
-The result of the save operation is in the _result_ parameter of the event handler. The result is not that interesting when we're storing one object in the database. You can print the object to the console if you want to take a closer look at it while implementing your application or during debugging.
+The result of the save operation is in the *result* parameter of the event handler. The result is not that interesting when we're storing one object in the database. You can print the object to the console if you want to take a closer look at it while implementing your application or during debugging.
 
 Let's also save a few more notes by modifying the data in the code and by executing the program again.
 
@@ -269,7 +269,7 @@ When the code is executed, the program prints all the notes stored in the databa
 
 ![node mongo.js outputs notes as JSON](../../images/3/70ea.png)
 
-The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
+The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the *Note* model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  *notes* collection.
 
 The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
 
@@ -401,7 +401,7 @@ We can verify in the browser that the backend works for displaying all of the do
 
 The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
-One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schema. Modifying the method works like this:
+One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the *toJSON* method of the schema, which is used on all instances of the models produced with that schema. Modifying the method works like this:
 
 ```js
 noteSchema.set('toJSON', {
@@ -413,9 +413,9 @@ noteSchema.set('toJSON', {
 })
 ```
 
-Even though the <i>\_id</i> property of Mongoose objects looks like a string, it is in fact an object. The _toJSON_ method we defined transforms it into a string just to be safe. If we didn't make this change, it would cause more harm to us in the future once we start writing tests.
+Even though the <i>\_id</i> property of Mongoose objects looks like a string, it is in fact an object. The *toJSON* method we defined transforms it into a string just to be safe. If we didn't make this change, it would cause more harm to us in the future once we start writing tests.
 
-Let's respond to the HTTP request with a list of objects formatted with the _toJSON_ method:
+Let's respond to the HTTP request with a list of objects formatted with the *toJSON* method:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -425,7 +425,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the _notes_ variable is assigned to an array of objects returned by Mongo. When the response is sent in the JSON format, the _toJSON_ method of each object in the array is called automatically by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
+Now the *notes* variable is assigned to an array of objects returned by Mongo. When the response is sent in the JSON format, the *toJSON* method of each object in the array is called automatically by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
 
 ### Database configuration into its own module
 
@@ -469,7 +469,7 @@ module.exports = mongoose.model('Note', noteSchema) // highlight-line
 
 Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
 
-The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
+The public interface of the module is defined by setting a value to the *module.exports* variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables *mongoose* and *url* will not be accessible or visible to users of the module.
 
 Importing the module happens by adding the following line to <i>index.js</i>:
 
@@ -477,7 +477,7 @@ Importing the module happens by adding the following line to <i>index.js</i>:
 const Note = require('./models/note')
 ```
 
-This way the _Note_ variable will be assigned to the same object that the module defines.
+This way the *Note* variable will be assigned to the same object that the module defines.
 
 The way that the connection is made has changed slightly:
 
@@ -560,7 +560,7 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl
 
 Because GitHub is not used with Fly.io, also the file .env gets to the Fly.io servers when the app is deployed. Because of this also the env variables defined in the file will be available there.
 
-However, a [better option](https://community.fly.io/t/clarification-on-environment-variables/6309) is to prevent .env from being copied to Fly.io by creating to the project root the file _.dockerignore_, with the following contents
+However, a [better option](https://community.fly.io/t/clarification-on-environment-variables/6309) is to prevent .env from being copied to Fly.io by creating to the project root the file *.dockerignore*, with the following contents
 
 ```bash
 .env
@@ -598,9 +598,9 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-The note objects are created with the _Note_ constructor function. The response is sent inside of the callback function for the _save_ operation. This ensures that the response is sent only if the operation succeeded. We will discuss error handling a little bit later.
+The note objects are created with the *Note* constructor function. The response is sent inside of the callback function for the *save* operation. This ensures that the response is sent only if the operation succeeded. We will discuss error handling a little bit later.
 
-The _savedNote_ parameter in the callback function is the saved and newly created note. The data sent back in the response is the formatted version created with the _toJSON_ method:
+The *savedNote* parameter in the callback function is the saved and newly created note. The data sent back in the response is the formatted version created with the *toJSON* method:
 
 ```js
 response.json(savedNote)
@@ -658,7 +658,7 @@ At this point, you can choose to simply allow users to create all phonebook entr
 
 ### Error handling
 
-If we try to visit the URL of a note with an id that does not exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be _null_.
+If we try to visit the URL of a note with an id that does not exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be *null*.
 
 Let's change this behavior so that if a note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:
 
@@ -683,9 +683,9 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If no matching object is found in the database, the value of _note_ will be _null_ and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>. If a promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error.
+If no matching object is found in the database, the value of *note* will be *null* and the *else* block is executed. This results in a response with the status code <i>404 not found</i>. If a promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error.
 
-On top of the non-existing note, there's one more error situation that needs to be handled. In this situation, we are trying to fetch a note with the wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
+On top of the non-existing note, there's one more error situation that needs to be handled. In this situation, we are trying to fetch a note with the wrong kind of *id*, meaning an *id* that doesn't match the mongo identifier format.
 
 If we make the following request, we will get the error message shown below:
 
@@ -721,7 +721,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) because the situation fits the description perfectly:
+If the format of the id is incorrect, then we will end up in the error handler defined in the *catch* block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) because the situation fits the description perfectly:
 
 > <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
 
@@ -789,7 +789,7 @@ Note that the error-handling middleware has to be the last loaded middleware!
 
 ### The order of middleware loading
 
-The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason, it is important to be careful when defining middleware.
+The execution order of middleware is the same as the order that they are loaded into express with the *app.use* function. For this reason, it is important to be careful when defining middleware.
 
 The correct order is the following:
 
@@ -832,7 +832,7 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point.
+Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the *request.body* would be *undefined* at that point.
 
 It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
 
@@ -869,7 +869,7 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
+In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The *result* callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
 
 The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) method.
 

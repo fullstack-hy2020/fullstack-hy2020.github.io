@@ -38,7 +38,7 @@ Create a file named <i>db.json</i> in the root directory of the previous notes p
 }
 ```
 
-You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.
+You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command *npm install -g json-server*. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.
 
 After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; but since projects created using create-react-app reserve port 3000, we must define an alternate port, such as port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json
   
@@ -46,7 +46,7 @@ After installing run the following command to run the json-server. The <i>json-s
 json-server --port 3001 --watch db.json
 ```
 
-However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
+However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command *npx*:
 
 ```js
 npx json-server --port 3001 --watch db.json
@@ -105,7 +105,7 @@ notes.forEach(m => {
 });
 ```
 
-In Java, the code executes line by line and stops to wait for the HTTP request, which means waiting for the command _request.get(...)_ to finish. The data returned by the command, in this case the notes, are then stored in a variable, and we begin manipulating the data in the desired manner.
+In Java, the code executes line by line and stops to wait for the HTTP request, which means waiting for the command *request.get(...)* to finish. The data returned by the command, in this case the notes, are then stored in a variable, and we begin manipulating the data in the desired manner.
 
 On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that code execution continues immediately after calling an IO function, without waiting for it to return.
 
@@ -193,7 +193,7 @@ We now want to use axios. Theoretically, we could define the library directly in
 npm install axios
 ```
 
-**NB _npm_-commands should always be run in the project root directory**, which is where the <i>package.json</i> file can be found.
+**NB *npm*-commands should always be run in the project root directory**, which is where the <i>package.json</i> file can be found.
 
 Axios is now included among the other dependencies:
 
@@ -245,7 +245,7 @@ We can now conveniently, without parameter definitions, start the json-server fr
 npm run server
 ```
 
-We will get more familiar with the _npm_ tool in the [third part of the course](/en/part3).
+We will get more familiar with the *npm* tool in the [third part of the course](/en/part3).
 
 **NB** The previously started json-server must be terminated before starting a new one; otherwise, there will be trouble:
 
@@ -257,14 +257,14 @@ The red print in the error message informs us about the issue:
 
 As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
 
-We used the command _npm install_ twice, but with slight differences:
+We used the command *npm install* twice, but with slight differences:
 
 ```js
 npm install axios
 npm install json-server --save-dev
 ```
 
-There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency of the application because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (_--save-dev_), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
+There is a fine difference in the parameters. <i>axios</i> is installed as a runtime dependency of the application because the execution of the program requires the existence of the library. On the other hand, <i>json-server</i> was installed as a development dependency (*--save-dev*), since the program itself doesn't require it. It is used for assistance during software development. There will be more on different dependencies in the next part of the course.
 
 ### Axios and promises
 
@@ -292,7 +292,7 @@ If you open <http://localhost:3000> in the browser, this should be printed to th
 
 **Note:** when the content of the file <i>index.js</i> changes, React does not always notice that automatically, so you might need to refresh the browser to see your changes! A simple workaround to make React notice the change automatically is to create a file named <i>.env</i> in the root directory of the project and add this line <i>FAST_REFRESH=false</i>. Restart the app for the applied changes to take effect.
 
-Axios' method _get_ returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
+Axios' method *get* returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
 The documentation on Mozilla's site states the following about promises:
 
@@ -304,7 +304,7 @@ In other words, a promise is an object that represents an asynchronous operation
 2. The promise is <i>fulfilled</i>: It means that the operation has been completed and the final value is available, which generally is a successful operation. This state is sometimes also called <i>resolved</i>.
 3. The promise is <i>rejected</i>: It means that an error prevented the final value from being determined, which generally represents a failed operation.
 
-The first promise in our example is <i>fulfilled</i>, representing a successful _axios.get('http://localhost:3001/notes')_ request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
+The first promise in our example is <i>fulfilled</i>, representing a successful *axios.get('http://localhost:3001/notes')* request. The second one, however, is <i>rejected</i>, and the console tells us the reason. It looks like we were trying to make an HTTP GET request to a non-existent address.
 
 If, and when, we want to access the result of the operation represented by the promise, we must register an event handler to the promise. This is achieved using the method <em>then</em>:
 
@@ -616,7 +616,7 @@ When there is only one country matching the query, then the basic data of the co
 
 **NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>. You don't need to worry about these edge cases.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the *rm -rf .git* command at the root of your application.
 
 <h4>2.13*: Data for countries, step2</h4>
 
@@ -638,7 +638,7 @@ Add to the view showing the data of a single country, the weather report for the
 
 If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
 
-**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome.
+**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*. This issue can be fixed by completing the exercise using Chrome.
 
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
 
@@ -650,7 +650,7 @@ REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
 set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
 ```
 
-you can access the value of the key from the _process.env_ object:
+you can access the value of the key from the *process.env* object:
 
 ```js
 const api_key = process.env.REACT_APP_API_KEY

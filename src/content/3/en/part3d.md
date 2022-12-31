@@ -118,13 +118,13 @@ The environment variables defined in dotenv will only be used when the backend i
 
 For production, we have to set the database URL in the service that is hosting our app.
 
-In Fly.io that is done _fly secrets set_:
+In Fly.io that is done *fly secrets set*:
 
 ```bash
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-For Heroku, the same is done with the _heroku config:set_ command.
+For Heroku, the same is done with the *heroku config:set* command.
 
 ```bash
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -223,7 +223,7 @@ We will answer all of the questions:
 
 ![terminal output from ESlint init](../../images/3/52be.png)
 
-The configuration will be saved in the _.eslintrc.js_ file:
+The configuration will be saved in the *.eslintrc.js* file:
 
 ```js
 module.exports = {
@@ -266,13 +266,13 @@ Let's immediately change the rule concerning indentation, so that the indentatio
 ],
 ```
 
-Inspecting and validating a file like _index.js_ can be done with the following command:
+Inspecting and validating a file like *index.js* can be done with the following command:
 
 ```bash
 npx eslint index.js
 ```
 
-It is recommended to create a separate _npm script_ for linting:
+It is recommended to create a separate *npm script* for linting:
 
 ```json
 {
@@ -287,7 +287,7 @@ It is recommended to create a separate _npm script_ for linting:
 }
 ```
 
-Now the _npm run lint_ command will check every file in the project.
+Now the *npm run lint* command will check every file in the project.
 
 Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
 
@@ -352,7 +352,7 @@ Our default configuration takes a bunch of predetermined rules into use from <i>
 'extends': 'eslint:recommended',
 ```
 
-This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
+This includes a rule that warns about *console.log* commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
 
 ```js
 {

@@ -113,7 +113,7 @@ The actions for changing the state of the filter look like this:
 }
 ```
 
-Let's also create a new _action creator_ function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
+Let's also create a new *action creator* function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
