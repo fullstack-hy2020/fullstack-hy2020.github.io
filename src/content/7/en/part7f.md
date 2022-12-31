@@ -19,7 +19,7 @@ One good piece of advice for both refactoring and writing new code is to take <i
 
 <div class="tasks">
 
-### Exercises 7.9.-7.21.
+### Exercises 7.9-7.21
 
 #### 7.9: automatic code formatting
 

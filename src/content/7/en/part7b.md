@@ -296,7 +296,7 @@ The internet is starting to fill up with more and more helpful material related 
 
 <div class="tasks">
 
-### Exercises 7.4.-7.8.
+### Exercises 7.4-7.8
 
 We'll continue with the app from [exercises](/en/part7/react_router#exercises-7-1-7-3) of the chapter [react router](/en/part7/react_router).
 

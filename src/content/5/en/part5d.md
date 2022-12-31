@@ -1031,7 +1031,7 @@ The frontend and the test code can be found on the [GitHub](https://github.com/f
 
 <div class="tasks">
 
-### Exercises 5.17.-5.22.
+### Exercises 5.17-5.22
 
 In the last exercises of this part, we will do some E2E tests for our blog application.
 The material of this part should be enough to complete the exercises.

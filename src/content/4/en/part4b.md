@@ -995,7 +995,7 @@ The code for our application can be found on [GitHub](https://github.com/fullsta
 
 <div class="tasks">
 
-### Exercises 4.8.-4.12.
+### Exercises 4.8-4.12
 
 **NB:** the material uses the [toContain](https://jestjs.io/docs/expect#tocontainitem) matcher in several places to verify that an array contains a specific element. It's worth noting that the method uses the === operator for comparing and matching elements, which means that it is often not well-suited for matching objects. In most cases, the appropriate method for verifying objects in arrays is the [toContainEqual](https://jestjs.io/docs/expect#tocontainequalitem) matcher. However, the model solutions don't check for objects in arrays with matchers, so using the method is not required for solving the exercises.
 
@@ -1218,7 +1218,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-### Exercises 4.13.-4.14.
+### Exercises 4.13-4.14
 
 #### 4.13 Blog list expansions, step1
 

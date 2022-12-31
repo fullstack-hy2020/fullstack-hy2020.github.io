@@ -148,7 +148,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-### Exercises 3.19.-3.21.
+### Exercises 3.19-3.21
 
 #### 3.19*: Phonebook database, step7
 
@@ -385,7 +385,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-### Exercise 3.22.
+### Exercise 3.22
 
 #### 3.22: Lint configuration
 

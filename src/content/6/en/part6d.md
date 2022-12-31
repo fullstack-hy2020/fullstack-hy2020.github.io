@@ -584,7 +584,7 @@ More about this [here](https://www.simplethread.com/cant-replace-redux-with-hook
 
 <div class="tasks">
 
-### Exercises 6.19.-6.21.
+### Exercises 6.19-6.21
 
 #### 6.19 anecdotes and connect, step1
 

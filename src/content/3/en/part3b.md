@@ -458,7 +458,7 @@ The current backend code can be found on [Github](https://github.com/fullstack-h
 
 <div class="tasks">
 
-### Exercises 3.9.-3.11
+### Exercises 3.9-3.11
 
 The following exercises don't require many lines of code. They can however be challenging, because you must understand exactly what is happening and where, and the configurations must be just right.
 

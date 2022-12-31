@@ -495,7 +495,7 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 
 <div class="tasks">
 
-### Exercises 5.5.-5.10.
+### Exercises 5.5-5.10
 
 #### 5.5 Blog list frontend, step5
 
@@ -815,7 +815,7 @@ Note that create-react-app has also a [default ESLint-configuration](https://www
 
 <div class="tasks">
 
-### Exercises 5.11.-5.12.
+### Exercises 5.11-5.12
 
 #### 5.11: Blog list frontend, step11
 

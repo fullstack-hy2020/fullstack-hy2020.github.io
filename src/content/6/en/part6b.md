@@ -599,7 +599,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 <div class="tasks">
 
-### Exercises 6.9.-6.12.
+### Exercises 6.9-6.12
 
 Let's continue working on the anecdote application using Redux that we started in exercise 6.3.
 
