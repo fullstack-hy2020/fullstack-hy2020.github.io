@@ -20,7 +20,7 @@ TypeScript consists of three separate, but mutually fulfilling parts:
 - The compiler
 - The language service
 
-![](../../images/9/1.png)
+![diagram of typescript components](../../images/9/1.png)
 
 The <i>language</i> consists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript, programmers have the most direct contact with the language.
 
