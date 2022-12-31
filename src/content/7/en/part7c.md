@@ -103,7 +103,7 @@ Notice that the React Bootstrap components have to be imported separately from t
 import { Table } from 'react-bootstrap'
 ```
 
-#### Forms
+#### Form in Bootstrap
 
 Let's improve the form in the <i>Login</i> view with the help of Bootstrap [forms](https://getbootstrap.com/docs/4.1/components/forms/).
 
@@ -145,7 +145,7 @@ After switching over to the Bootstrap form, our improved application looks like 
 
 ![browser notes app with bootstrap login](../../images/7/8ea.png)
 
-#### Notification
+#### Notification in Bootstrap
 
 Now that the login form is in better shape, let's take a look at improving our application's notifications:
 
@@ -190,7 +190,7 @@ We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/
 </div>
 ```
 
-#### Navigation structure
+#### Navigation structure in Bootstrap
 
 Lastly, let's alter the application's navigation menu to use Bootstrap's [Navbar](https://getbootstrap.com/docs/4.1/components/navbar/) component. The React Bootstrap library provides us with [matching built-in components](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Through trial and error, we end up with a working solution despite the cryptic documentation:
 
@@ -316,7 +316,7 @@ import {
 } from '@mui/material'
 ```
 
-#### Form
+#### Form in Material UI
 
 Next, let's make the login form in the <i>Login</i> view better using the [TextField](https://mui.com/material-ui/react-text-field/) and [Button](https://mui.com/material-ui/api/button/) components:
 
@@ -359,7 +359,7 @@ MaterialUI, unlike Bootstrap, does not provide a component for the form itself. 
 
 Remember to import all the components used in the form.
 
-#### Notification
+#### Notification in Material UI
 
 The notification displayed on login can be done using the [Alert](https://mui.com/material-ui/react-alert/) component, which is quite similar to Bootstrap's equivalent component:
 
@@ -379,7 +379,7 @@ Alert is quite stylish:
 
 ![browser notes app materialUI notifications](../../images/7/65ea.png)
 
-#### Navigation structure
+#### Navigation structure in Material UI
 
 We can implement navigation using the [AppBar](https://mui.com/material-ui/react-app-bar/) component.
 
