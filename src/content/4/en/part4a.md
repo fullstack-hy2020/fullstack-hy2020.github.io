@@ -50,7 +50,7 @@ module.exports = {
 }
 ```
 
-The logger has two functions, __info__ for printing normal log messages, and __error__ for all error messages. 
+The logger has two functions, **info** for printing normal log messages, and **error** for all error messages.
 
 Extracting logging into its own module is a good idea in more ways than one. If we wanted to start writing logs to a file or send them to an external logging service like [graylog](https://www.graylog.org/) or [papertrail](https://papertrailapp.com) we would only have to make changes in one place.
 

@@ -225,7 +225,7 @@ const handleLeftClick = () => {
 }
 ```
 
-However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
+However, **don't** do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
 Let's take a closer look at how the clicking
 is rendered to the page:

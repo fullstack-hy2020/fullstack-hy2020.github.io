@@ -10,7 +10,7 @@ lang: en
 Next, let's connect the frontend we made in [part 2](/en/part2) to our own backend.
 
 In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address <http://localhost:3001/notes>.
-Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
+Our backend has a slightly different URL structure now, as the notes can be found at <http://localhost:3001/api/notes>. Let's change the attribute **baseUrl** in the <i>src/services/notes.js</i> like so:
 
 ```js
 import axios from 'axios'
