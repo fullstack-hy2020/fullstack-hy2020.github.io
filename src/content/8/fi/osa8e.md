@@ -404,15 +404,15 @@ Eli kun uusi henkilö luodaan, palautetaan henkilön tiedot kaikille tilaajille.
 Asennetaan tarvittavast kirjastot:
 
 ```
-npm install graphql-subscriptions graphql-ws
+npm install ws graphql-ws graphql-subscriptions
 ```
 
 Tiedosto <i>index.js</i> muuttuu seraavasti
 
 ```js
 // highlight-start
-const { execute, subscribe } = require('graphql')
-const { SubscriptionServer } = require('graphql-ws')
+const { WebSocketServer } = require('ws')
+const { useServer } = require('graphql-ws/lib/use/ws')
 // highlight-end
 
 // ...
