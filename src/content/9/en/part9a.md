@@ -7,12 +7,12 @@ lang: en
 
 <div class="content">
 
-TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. For example, Microsoft's <i>Azure Management Portal</i> (1,2 million lines of code) and <i>Visual Studio Code</i> (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code level documentation.
+TypeScript is a programming language designed for large-scale JavaScript development created by Microsoft. For example, Microsoft's <i>Azure Management Portal</i> (1,2 million lines of code) and <i>Visual Studio Code</i> (300 000 lines of code) have both been written in TypeScript. To support building large-scale JavaScript applications, TypeScript offers features such as better development-time tooling, static code analysis, compile-time type checking and code-level documentation.
 
 ### Main principle
 
-TypeScript is a typed superset of JavaScript, and eventually it's compiled into plain JavaScript code. The programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. TypeScript being a superset of JavaScript means that it includes all the features of JavaScript and 
-its own additional features as well. In other words, all existing JavaScript code is actually valid TypeScript.
+TypeScript is a typed superset of JavaScript, and eventually, it's compiled into plain JavaScript code. The programmer is even able to decide the version of the generated code, as long as it's ECMAScript 3 or newer. TypeScript being a superset of JavaScript means that it includes all the features of JavaScript and 
+its additional features as well. In other words, all existing JavaScript code is valid TypeScript.
 
 TypeScript consists of three separate, but mutually fulfilling parts: 
 
@@ -24,9 +24,9 @@ TypeScript consists of three separate, but mutually fulfilling parts:
 
 The <i>language</i> consists of syntax, keywords and type annotations. The syntax is similar to but not the same as JavaScript syntax. From the three parts of TypeScript, programmers have the most direct contact with the language. 
 
-The <i>compiler</i> is responsible for type information erasure (i.e. removing the typing information) and the code transformations. The code transformations enable TypeScript code to be transpiled into executable JavaScript. Everything related to the types is removed at compile-time, so TypeScript isn't actually genuine statically-typed code. 
+The <i>compiler</i> is responsible for type information erasure (i.e. removing the typing information) and for code transformations. The code transformations enable TypeScript code to be transpiled into executable JavaScript. Everything related to the types is removed at compile-time, so TypeScript isn't genuine statically-typed code. 
 
-Traditionally,  <i>compiling</i>  means that code is transformed from a human-readable format to a machine-readable format. In TypeScript, human-readable source code is transformed into another human-readable source code, so the correct term would actually be <i>transpiling</i>. However, compiling has been the most commonly-used term in this context, so we will continue to use it. 
+Traditionally,  <i>compiling</i> means that code is transformed from a human-readable format to a machine-readable format. In TypeScript, human-readable source code is transformed into another human-readable source code, so the correct term would be <i>transpiling</i>. However, compiling has been the most commonly-used term in this context, so we will continue to use it. 
 
 The compiler also performs a static code analysis. It can emit warnings or errors if it finds a reason to do so, and it can be set to perform additional tasks such as combining the generated code into a single file. 
 
@@ -39,7 +39,7 @@ key features to help you understand more of what is to come during this course.
 #### Type annotations
 
 Type annotations in TypeScript are a lightweight way to record the intended <i>contract</i> of a function or a variable. 
-In the example below, we have defined a <i>birthdayGreeter</i> function which accepts two arguments: one of type string and one of type number. 
+In the example below, we have defined a *birthdayGreeter* function that accepts two arguments: one of type string and one of type number. 
 The function will return a string.
 
 
@@ -60,9 +60,9 @@ TypeScript is a structurally-typed language. In structural typing, two elements 
 
 #### Type inference
 
-The TypeScript compiler can attempt to infer the type information if no type has been specified. Variables' type can be inferred based on its assigned value and its usage. The type inference take place when initializing variables and members, setting parameter default values, and determining function return types.
+The TypeScript compiler can attempt to infer the type information if no type has been specified. Variables' type can be inferred based on their assigned value and their usage. The type inference takes place when initializing variables and members, setting parameter default values, and determining function return types.
 
-For example, consider the function <i>add</i>:
+For example, consider the function *add*:
 
 ```js
 const add = (a: number, b: number) => {
@@ -72,7 +72,7 @@ const add = (a: number, b: number) => {
 }
 ```
 
-Type of the function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type <i>number</i>.
+The type of the function's return value is inferred by retracing the code back to the return expression. The return expression performs an addition of the parameters a and b. We can see that a and b are numbers based on their types. Thus, we can infer the return value to be of type *number*.
 
 As a more complex example, let's consider the code below. If you have not used TypeScript before, this example might be a bit complex. But do not worry, you can safely skip it for now.
 
@@ -90,11 +90,11 @@ func((result) => {
 ```
 
 First, we have a declaration of a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) called <i>CallsFunction</i>.
-CallsFunction is a function type with one parameter: <i>callback</i>. The parameter <i>callback</i> is of type function which takes a string parameter and returns [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) value.  As we will learn later in this part, <i>any</i> is a kind of "wildcard" type that can represent any type. Also, CallsFunction returns [void](https://www.typescriptlang.org/docs/handbook/2/functions.html#void) type.
+*CallsFunction* is a function type with one parameter: *callback*. The parameter *callback* is of type function which takes a string parameter and returns [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any) value.  As we will learn later in this part, *any* is a kind of "wildcard" type that can represent any type. Also, CallsFunction returns [void](https://www.typescriptlang.org/docs/handbook/2/functions.html#void) type.
 
-Next, we define the function <i>func</i> of type <i>CallsFunction</i>. From the function's type, we can infer that its parameter function cb will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, which will cause an error in TypeScript. 
+Next, we define the function *func* of type *CallsFunction*. From the function's type, we can infer that its parameter function *cb* will only accept a string argument. To demonstrate this, there is also an example where the parameter function is called with a numeric value, which will cause an error in TypeScript. 
 
-Lastly, we call <i>func</i> giving it the following function as a parameter:
+Lastly, we call *func* giving it the following function as a parameter:
 
 ```js
 (result) => {
@@ -103,7 +103,7 @@ Lastly, we call <i>func</i> giving it the following function as a parameter:
 ```
 
 <!-- So despite not defining types for the parameter function, it is inferred from the calling context that the argument <i>result</i> is of the type string. -->
-Despite the types of the parameter function not being defined, we can infer from the calling context that the argument <i>result</i> is of the type string.
+Despite the types of the parameter function not being defined, we can infer from the calling context that the argument *result* is of type string.
 
 #### Type erasure
 
@@ -122,7 +122,7 @@ let x;
 ```
 
 <!-- This means that at runtime, there is no information present that says that some variable x was declared as being of type SomeInterface. -->
-This means that no type information remains at runtime - nothing says that some variable x was declared as being of type <i>SomeType</i>.
+This means that no type information remains at runtime - nothing says that some variable x was declared as being of type *SomeType*.
 
 The lack of runtime type information can be surprising for programmers who are used to extensively using reflection or other metadata systems.
 
@@ -132,7 +132,7 @@ On different forums, you may stumble upon a lot of different arguments either fo
 
 
 <!-- First of all, probably the most noticeable feature with TypeScript is that it offers **type checking and static code analysis**. The ability to require values to be of a certain type and to have the compiler warn about wrongful usage can help reduce runtime errors and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests. The static code analysis doesn't only warn about wrongful type usage, but also if you for instance misspell a variable or function name or try to use a value beyond it's scope etc. With the help of a sufficient linter settings, it's hard to even think of runtime errors that you may be able to produce. -->
-First of all, TypeScript offers <i>type checking and static code analysis</i>. We can require values to be of a certain type, and have the compiler warn about using them incorrectly. This can reduce runtime errors, and you might even be able to reduce the amount of required unit tests in a project, at least concerning pure type tests.
+First of all, TypeScript offers <i>type checking and static code analysis</i>. We can require values to be of a certain type, and have the compiler warn about using them incorrectly. This can reduce runtime errors, and you might even be able to reduce the number of required unit tests in a project, at least concerning pure-type tests.
 The static code analysis doesn't only warn about wrongful type usage, but also other mistakes such as misspelling a variable or function name or trying to use a variable beyond its scope. 
 
 
@@ -144,11 +144,11 @@ Types can be reused all around the code base, and a change to a type definition 
 
 
 <!-- A third advantage with TypeScript is the more **specific and smarter intellisense**  that the IDE's can provide when they know exactly what types of data you are processing. -->
-The third advantage of TypeScript is that IDEs can provide more <i>specific and smarter intellisense</i> when they know exactly what types of data you are processing.
+The third advantage of TypeScript is that IDEs can provide more <i>specific and smarter IntelliSense</i> when they know exactly what types of data you are processing.
 
 
 <!-- All the features mentioned above are together extremely helpful when you need to refactor your code. The static code analysis emits warnings if you have any errors in your code, and the intellisense can give you hints about available properties and even possible refactoring options. The code level documentation helps you understand the existing code, and with the help of TypeScript it is also very easy to start using the newest JavaScript language features at an early stage just by altering the configuration. -->
-All of these features are extremely helpful when you need to refactor your code. The static code analysis warns you about any errors in your code, and the intellisense can give you hints about available properties and even possible refactoring options. The code-level documentation helps you understand the existing code.
+All of these features are extremely helpful when you need to refactor your code. The static code analysis warns you about any errors in your code, and IntelliSense can give you hints about available properties and even possible refactoring options. The code-level documentation helps you understand the existing code.
 With the help of TypeScript, it is also very easy to start using the newest JavaScript language features at an early stage just by altering its configuration.
 
 ### What does TypeScript not fix?
@@ -165,14 +165,14 @@ Lastly, below, we list some issues many have with TypeScript, which might be goo
 <!-- When using external libraries you may find that some libraries have either missing or in some way invalid type declarations. The reason behind this is most often that the library has not been made with TypeScript. Then the types need to be declared manually, or if someone has already done that they might not have done such a good job with it. These are occasions when you may need to define type declarations yourself. However, you should first check out [DefinitelyTyped](https://definitelytyped.org/) or [their GitHub pages](https://github.com/DefinitelyTyped/DefinitelyTyped), which are probably the most used sources for type declaration files and there is a good chance someone has already added typings for the package you are using. Otherwise you might want to start off by getting acquainted with TypeScript's own [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations. -->
 When using external libraries, you may find that some libraries have either missing or in some way invalid type declarations. Most often, this is due to the library not being written in TypeScript, and the person adding the type declarations manually not doing such a good job with it. In these cases, you might need to define the type declarations yourself. 
 However, there is a good chance someone has already added typings for the package you are using. Always check the DefinitelyTyped [GitHub page](https://github.com/DefinitelyTyped/DefinitelyTyped) first. They are probably the most popular sources for type declaration files. 
-Otherwise, you might want to start off by getting acquainted with TypeScript's own [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations.
+Otherwise, you might want to start by getting acquainted with TypeScript's [documentation](https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html) regarding type declarations.
 
 #### Sometimes, type inference needs assistance
 
 <!-- The type inference in TypeScript is pretty good but not quite perfect. Sometimes you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that this kind of usage is not allowed. These are occasions when you might need to help the compiler with doing e.g. an "extra" type check or something like that. But be careful with type casting and type guards. Using them you are basically giving your word to the compiler that the value really is of the type that you declare. You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) and [Type Guards](https://www.typescriptlang.org/docs/handbook/2/narrowing.html). -->
 The type inference in TypeScript is pretty good but not quite perfect.
 Sometimes, you may feel like you have declared your types perfectly, but the compiler still tells you that the property does not exist or that this kind of usage is not allowed. In these cases, you might need to help the compiler out by doing something like an "extra" type check, but be careful with type casting and type guards.
-Using type casting or type guards, you are basically giving your word to the compiler that the value really is of the type that you declare.
+Using type casting or type guards, you are giving your word to the compiler that the value <i>is</i> of the type that you declare.
 You might want to check out TypeScript's documentation regarding [Type Assertions](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) and [Type Guards](https://www.typescriptlang.org/docs/handbook/2/narrowing.html).
 
 
