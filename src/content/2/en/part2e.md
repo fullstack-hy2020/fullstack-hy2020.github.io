@@ -10,7 +10,7 @@ lang: en
 
 The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-Before we move onto the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
+Before we move to the next part, let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
 
 Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:
 
@@ -143,7 +143,7 @@ const Notification = ({ message }) => {
 
 
 
-If the value of the <em>message</em> prop is <em>null</em>, then nothing is rendered to the screen, and in other cases the message gets rendered inside of a div element.
+If the value of the <em>message</em> prop is <em>null</em>, then nothing is rendered to the screen, and in other cases, the message gets rendered inside of a div element.
 
 
 Let's add a new piece of state called <i>errorMessage</i> to the <i>App</i> component. Let's initialize it with some error message so that we can immediately test our component:
@@ -216,7 +216,7 @@ When the error occurs we add a descriptive error message to the <em>errorMessage
 
 The result looks like this:
 
-![](../../images/2/26e.png)
+![error removed from server screenshot from app](../../images/2/26e.png)
 
 
 The code for the current state of our application can be found in the  <i>part2-7</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
@@ -237,7 +237,7 @@ CSS rules are defined slightly differently in JavaScript than in normal CSS file
 }
 ```
 
-But as a React inline style object it would look like this:
+But as a React inline-style object it would look like this:
 
 ```js
 {
@@ -308,17 +308,17 @@ The code of the final version of our application can be found in the  <i>part2-8
 
 Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed): 
 
-![](../../images/2/27e.png)
+![successful green added screenshot](../../images/2/27e.png)
 
 <h4>2.20*: Phonebook step12</h4>
 
 Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error message:
 
-![](../../images/2/29b.png)
+![error message 404 not found when changing multiple browsers](../../images/2/29b.png)
 
 Fix the issue according to the example shown in [promise and errors](/en/part2/altering_data_in_server#promises-and-errors) in part 2. Modify the example so that the user is shown a message when the operation does not succeed. The messages shown for successful and unsuccessful events should look different:
 
-![](../../images/2/28e.png)
+![error message shown on screen instead of in console feature add-on](../../images/2/28e.png)
 
 **Note** that even if you handle the exception, the error message is printed to the console.
 

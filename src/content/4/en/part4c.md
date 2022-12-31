@@ -13,7 +13,7 @@ We want to add user authentication and authorization to our application. Users s
 
 Let's start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):
 
-![](https://yuml.me/a187045b.png)
+![diagram linking user and notes](https://yuml.me/a187045b.png)
 
 
 If we were working with a relational database the implementation would be straightforward. Both resources would have their separate database tables, and the id of the user who created a note would be stored in the notes table as a foreign key.
@@ -25,19 +25,19 @@ When working with document databases the situation is a bit different, as there 
 The existing solution saves every note in the <i>notes collection</i> in the database. If we do not want to change this existing collection, then the natural choice is to save users in their own collection,  <i>users</i> for example.
 
 
-Like with all document databases, we can use object id's in Mongo to reference documents in other collections. This is similar to using foreign keys in relational databases.
+Like with all document databases, we can use object IDs in Mongo to reference documents in other collections. This is similar to using foreign keys in relational databases.
 
 
-Traditionally document databases like Mongo do not support  <i>join queries</i> that are available in relational databases,  used for aggregating data from multiple tables. However starting from version 3.2. Mongo has supported [lookup aggregation queries](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). We will not be taking a look at this functionality in this course.
+Traditionally document databases like Mongo do not support <i>join queries</i> that are available in relational databases,  used for aggregating data from multiple tables. However, starting from version 3.2. Mongo has supported [lookup aggregation queries](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). We will not be taking a look at this functionality in this course.
 
 
-If we need a functionality similar to join queries, we will implement it in our application code by making multiple queries. In certain situations Mongoose can take care of joining and aggregating data, which gives the appearance of a join query. However, even in these situations Mongoose makes multiple queries to the database in the background.
+If we need functionality similar to join queries, we will implement it in our application code by making multiple queries. In certain situations, Mongoose can take care of joining and aggregating data, which gives the appearance of a join query. However, even in these situations, Mongoose makes multiple queries to the database in the background.
 
 
 ### References across collections
 
 
-If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases we can do the same thing. 
+If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases, we can do the same thing. 
 
 
 Let's assume that the <i>users</i> collection contains two users:
@@ -103,7 +103,7 @@ Document databases do not demand the foreign key to be stored in the note resour
 Since users can have many notes, the related ids are stored in an array in the <i>notes</i> field.
 
 
-Document databases also offer a radically different way of organizing the data: In some situations it might be beneficial to nest the entire notes array as a part of the documents in the users collection:
+Document databases also offer a radically different way of organizing the data: In some situations, it might be beneficial to nest the entire notes array as a part of the documents in the users collection:
 
 ```js
 [
@@ -139,13 +139,13 @@ Document databases also offer a radically different way of organizing the data: 
 In this schema, notes would be tightly nested under users and the database would not generate ids for them.
 
 
-The structure and schema of the database is not as self-evident as it was with relational databases. The chosen schema must be one which supports the use cases of the application the best. This is not a simple design decision to make, as all use cases of the applications are not known when the design decision is made.
+The structure and schema of the database are not as self-evident as it was with relational databases. The chosen schema must support the use cases of the application the best. This is not a simple design decision to make, as all use cases of the applications are not known when the design decision is made.
 
-Paradoxically, schema-less databases like Mongo require developers to make far more radical design decisions about data organization at the beginning of the project than relational databases with schemas. On average, relational databases offer a more-or-less suitable way of organizing data for many applications.
+Paradoxically, schema-less databases like Mongo require developers to make far more radical design decisions about data organization at the beginning of the project than relational databases with schemas. On average, relational databases offer a more or less suitable way of organizing data for many applications.
 
 ### Mongoose schema for users
 
-In this case, we make the decision to store the ids of the notes created by the user in the user document. Let's define the model for representing a user in the <i>models/user.js</i> file:
+In this case, we decide to store the ids of the notes created by the user in the user document. Let's define the model for representing a user in the <i>models/user.js</i> file:
 
 ```js
 const mongoose = require('mongoose')
@@ -418,7 +418,7 @@ For making new users in a production or development environment, you may send a 
 
 The list looks like this:
 
-![](../../images/4/9.png)
+![browser api/users shows JSON data with notes array](../../images/4/9.png)
 
 
 You can find the code for our current application in its entirety in the <i>part4-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-7).
@@ -427,7 +427,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 The code for creating a new note has to be updated so that the note is assigned to the user who created it.
 
-Let's expand our current implementation, so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
+Let's expand our current implementation so that the information about the user who created a note is sent in the <i>userId</i> field of the request body:
 
 ```js
 const User = require('../models/user') //highlight-line
@@ -467,21 +467,21 @@ await user.save()
 
 Let's try to create a new note
 
-![](../../images/4/10e.png)
+![Postman creating a new note](../../images/4/10e.png)
 
 The operation appears to work. Let's add one more note and then visit the route for fetching all users:
 
-![](../../images/4/11e.png)
+![api/users returns JSON with users and their array of notes](../../images/4/11e.png)
 
 We can see that the user has two notes. 
 
 Likewise, the ids of the users who created the notes can be seen when we visit the route for fetching all notes:
 
-![](../../images/4/12e.png)
+![api/notes shows ids of numbers in JSON](../../images/4/12e.png)
 
 ### Populate
 
-We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes, and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.
+We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.
 
 As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
@@ -502,7 +502,7 @@ The [populate](http://mongoosejs.com/docs/populate.html) method is chained after
 
 The result is almost exactly what we wanted:
 
-![](../../images/4/13ea.png)
+![JSON data showing populated notes and users data with repetition](../../images/4/13ea.png)
 
 We can use the populate parameter for choosing the fields we want to include from the documents. The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
@@ -517,7 +517,7 @@ usersRouter.get('/', async (request, response) => {
 
 The result is now exactly like we want it to be:
 
-![](../../images/4/14ea.png)
+![combined data showing no repetition](../../images/4/14ea.png)
 
 Let's also add a suitable population of user information to notes:
 
@@ -533,10 +533,10 @@ notesRouter.get('/', async (request, response) => {
 
 Now the user's information is added to the <i>user</i> field of note objects.
 
-![](../../images/4/15ea.png)
+![notes JSON now has user info embedded too](../../images/4/15ea.png)
 
 
-It's important to understand that the database does not actually know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
+It's important to understand that the database does not know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
 
 The functionality of the <i>populate</i> method of Mongoose is based on the fact that we have defined "types" to the references in the Mongoose schema with the <i>ref</i> option:
 

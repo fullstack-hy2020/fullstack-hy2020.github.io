@@ -15,11 +15,11 @@ This part also contains a [series of exercises](/en/part7/exercises_extending_th
 
 React offers 15 different [built-in hooks](https://reactjs.org/docs/hooks-reference.html), of which the most popular ones are the [useState](https://reactjs.org/docs/hooks-reference.html#usestate) and [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect) hooks that we have already been using extensively.
 
-In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook which allows for components to provide their functions to other components.
+In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook which allows components to provide their functions to other components.
 
-Within the last couple of years many React libraries have begun to offer hook-based apis. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook-based api is a lot easier to use than its older, still available, [connect](/en/part6/connect) API.
+Within the last couple of years, many React libraries have begun to offer hook-based APIs. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook-based API is a lot easier to use than the older, still available, [connect](/en/part6/connect) API.
 
-The [React Router's](https://reactrouter.com/en/main/start/tutorial) api we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based. Its hooks can be used to access url parameters and the _navigation_ object, which allows for manipulating the browser url programmatically.
+The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based. Its hooks can be used to access URL parameters and the _navigation_ object, which allows for manipulating the browser URL programmatically.
 
 As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
@@ -34,11 +34,11 @@ There's an existing [ESlint](https://www.npmjs.com/package/eslint-plugin-react-h
 
 Create-react-app has the readily-configured rule [eslint-plugin-react-hooks](https://www.npmjs.com/package/eslint-plugin-react-hooks) that complains if hooks are used in an illegal manner:
 
-![](../../images/7/60ea.png)
+![vscode error useState being called conditionally](../../images/7/60ea.png)
 
 ### Custom hooks
 
-React offers the option to create our own [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
+React offers the option to create [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
 
 > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
@@ -70,7 +70,7 @@ const App = (props) => {
 }
 ```
 
-Let's extract the counter logic into its own custom hook. The code for the hook is as follows:
+Let's extract the counter logic into a custom hook. The code for the hook is as follows:
 
 ```js
 const useCounter = () => {
@@ -97,7 +97,7 @@ const useCounter = () => {
 }
 ```
 
-Our custom hook uses the _useState_ hook internally to create its own state. The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
+Our custom hook uses the _useState_ hook internally to create its state. The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
 
 
 React components can use the hook as shown below:
@@ -127,7 +127,7 @@ const App = (props) => {
 By doing this we can extract the state of the _App_ component and its manipulation entirely into the _useCounter_ hook. Managing the counter state and logic is now the responsibility of the custom hook.
 
 
-The same hook could be <i>reused</i> in the application that was keeping track of the amount of clicks made to the left and right buttons:
+The same hook could be <i>reused</i> in the application that was keeping track of the number of clicks made to the left and right buttons:
 
 ```js
 
@@ -195,7 +195,7 @@ const App = () => {
 ```
 
 
-Every field of the form has its own state. In order to keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
+Every field of the form has its own state. To keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
 
 
 Let's define our own custom _useField_ hook that simplifies the state management of the form:
@@ -294,9 +294,9 @@ const App = () => {
 }
 ```
 
-Dealing with forms is greatly simplified when the unpleasant nitty-gritty details related to synchronizing the state of the form is encapsulated inside of our custom hook.
+Dealing with forms is greatly simplified when the unpleasant nitty-gritty details related to synchronizing the state of the form are encapsulated inside our custom hook.
 
-Custom hooks are clearly not only a tool for reuse, they also provide a better way for dividing our code into smaller modular parts.
+Custom hooks are not only a tool for reuse; they also provide a better way for dividing our code into smaller modular parts.
 
 ### More about hooks
 
@@ -361,13 +361,13 @@ const App = () => {
 
 Add a button to the form that you can use to clear all the input fields:
 
-![](../../images/7/61ea.png)
+![browser anecdotes with reset button](../../images/7/61ea.png)
 
 Expand the functionality of the <i>useField</i> hook so that it offers a new <i>reset</i> operation for clearing the field. 
 
 Depending on your solution, you may see the following warning in your console:
 
-![](../../images/7/62ea.png)
+![devtools console warning invalid value for reset prop](../../images/7/62ea.png)
 
 We will return to this warning in the next exercise.
 
@@ -410,21 +410,21 @@ If we were to do this, we would lose much of the benefit provided by the <i>useF
 
 #### 7.7: country hook
 
-Let's return to the exercises [2.12-14](/en/part2/getting_data_from_server#exercises-2-11-2-14).
+Let's return to exercises [2.12-14](/en/part2/getting_data_from_server#exercises-2-11-2-14).
 
 Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point.
 
 The application can be used to search for a country's details from the https://restcountries.com/ interface. If a country is found, the details of the country are displayed:
 
-![](../../images/7/69ea.png)
+![browser displaying country details](../../images/7/69ea.png)
 
 If no country is found, a message is displayed to the user:
 
-![](../../images/7/70ea.png)
+![browser showing country not found](../../images/7/70ea.png)
 
-The application is otherwise complete, but in this exercise you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
+The application is otherwise complete, but in this exercise, you have to implement a custom hook _useCountry_, which can be used to search for the details of the country given to the hook as a parameter.
 
-Use the api endpoint [full name](https://restcountries.com/#api-endpoints-v3-full-name) to fetch a country's details in a _useEffect_ hook within your custom hook.
+Use the API endpoint [full name](https://restcountries.com/#api-endpoints-v3-full-name) to fetch a country's details in a _useEffect_ hook within your custom hook.
 
 Note that in this exercise it is essential to use useEffect's [second parameter](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) array to control when the effect function is executed.
 
@@ -512,8 +512,8 @@ const App = () => {
 
 The _useResource_ custom hook returns an array of two items just like the state hooks. The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones.
 
-If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at the port 3005).
+If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the _npm run server_ command at port 3005).
 
-![](../../images/5/21e.png)
+![browser showing notes and persons](../../images/5/21e.png)
 
 </div>

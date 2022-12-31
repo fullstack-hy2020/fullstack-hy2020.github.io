@@ -9,7 +9,7 @@ lang: en
 
 Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1). 
 
-In order to get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
+To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -109,7 +109,7 @@ The event handler immediately calls the <em>event.preventDefault()</em> method, 
 
 The target of the event stored in _event.target_ is logged to the console:
 
-![](../../images/2/6e.png)
+![button clicked with form object console](../../images/2/6e.png)
 
 
 The target in this case is the form that we have defined in our component.
@@ -156,11 +156,11 @@ const App = (props) => {
 
 The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong:
 
-![](../../images/2/7e.png)
+![provided value to prop without onchange console error](../../images/2/7e.png)
 
 Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element.
 
-In order to enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
+To enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
 
 ```js
 const App = (props) => {
@@ -218,15 +218,15 @@ const handleNoteChange = (event) => {
 
 The <em>target</em> property of the event object now corresponds to the controlled <i>input</i> element, and <em>event.target.value</em> refers to the input value of that element.
 
-Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because there is no default action that occurs on an input change, unlike on a form submission.
+Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because no default action occurs on an input change, unlike a form submission.
 
 You can follow along in the console to see how the event handler is called:
 
-![](../../images/2/8e.png)
+![multiple console calls with typing text](../../images/2/8e.png)
 
 You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab:
 
-![](../../images/2/9ea.png)
+![state changes in react devtools shows typing too](../../images/2/9ea.png)
 
 Now the <i>App</i> component's <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes:
 
@@ -279,7 +279,7 @@ const App = (props) => {
 }
 ```
 
-Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items of the list depend on the state of the component:
+Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items on the list depend on the state of the component:
 
 ```js
 import { useState } from 'react'
@@ -336,7 +336,7 @@ If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable wil
 notes.filter(note => note.important === true)
 ```
 
-The comparison operator is in fact redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i>, which means that we can simply write:
+The comparison operator is redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i>, which means that we can simply write:
 
 ```js
 notes.filter(note => note.important)
@@ -402,15 +402,15 @@ You can find the code for our current application in its entirety in the <i>part
 
 <h3>Exercises 2.6.-2.10.</h3>
 
-In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
+In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises, it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. It's likely that you **do not want** your project to be a repository, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. You likely **do not want** your project to be a repository, so simply run the _rm -rf .git_ command at the root of your application.
 
 <h4>2.6: The Phonebook Step1</h4>
 
-Let's create a simple phonebook. <i>**In this part we will only be adding names to the phonebook.**</i>
+Let's create a simple phonebook. <i>**In this part, we will only be adding names to the phonebook.**</i>
 
-Let us start by implementing the addition of a person to phonebook.
+Let us start by implementing the addition of a person to the phonebook.
 
 You can use the code below as a starting point for the <i>App</i> component of your application:
 
@@ -451,18 +451,18 @@ Sometimes it can be useful to render state and other variables as text for debug
 <div>debug: {newName}</div>
 ```
 
-It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension especially, is incredibly useful for tracking changes that occur in the application's state.
+It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension is <i>incredibly</i> useful for tracking changes that occur in the application's state.
 
 After finishing this exercise your application should look something like this:
 
-![](../../images/2/10e.png)
+![screenshot of 2.6 finished](../../images/2/10e.png)
 
 Note the use of the React developer tools extension in the picture above!
 
 **NB:**
 
 
-- you can use the person's name as value of the <i>key</i> property
+- you can use the person's name as a value of the <i>key</i> property
 - remember to prevent the default action of submitting HTML forms!
 
 <h4>2.7: The Phonebook Step2</h4>
@@ -471,7 +471,7 @@ Prevent the user from being able to add names that already exist in the phoneboo
 
 Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted:
 
-![](../../images/2/11e.png)
+![2.7 sample screenshot](../../images/2/11e.png)
 
 **Hint:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
@@ -506,15 +506,15 @@ Expand your application by allowing users to add phone numbers to the phone book
 ```
 
 
-At this point the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
+At this point, the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
 
-![](../../images/2/12e.png)
+![2.8 sample screenshot](../../images/2/12e.png)
 
 <h4>2.9*: The Phonebook Step4</h4>
 
 Implement a search field that can be used to filter the list of people by name:
 
-![](../../images/2/13e.png)
+![2.9 sample screenshot](../../images/2/13e.png)
 
 You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
 
@@ -540,7 +540,7 @@ This saves you from having to manually input data into your application for test
 
 If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the <i>App</i> root component.
 
-It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people into the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
+It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people to the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
 
 The application's root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.
 
@@ -570,6 +570,6 @@ const App = () => {
 
 **NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
 the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
-from last part.
+from the last part.
 
 </div>

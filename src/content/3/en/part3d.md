@@ -27,7 +27,7 @@ app.post('/api/notes', (request, response) => {
 If the note does not have the <i>content</i> property, we respond to the request with the status code <i>400 bad request</i>.
 
 
-One smarter way of validating the format of the data before it is stored in the database, is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose.
+One smarter way of validating the format of the data before it is stored in the database is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose.
 
 
 We can define specific validation rules for each field in the schema:
@@ -50,10 +50,10 @@ const noteSchema = new mongoose.Schema({
 ```
 
 
-The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also applied to the <i>content</i> field, since the minimum length constraint allows the field to be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
+The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also applied to the <i>content</i> field since the minimum length constraint allows the field to be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
 
 
-The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators, if none of the built-in ones cover our needs.
+The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators if none of the built-in ones cover our needs.
 
 
 If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
@@ -95,7 +95,7 @@ const errorHandler = (error, request, response, next) => {
 
 When validating an object fails, we return the following default error message from Mongoose:
 
-![](../../images/3/50.png)
+![postman showing error message](../../images/3/50.png)
 
 We notice that the backend has now a problem: validations are not done when editing a note.
 The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explains what is the problem, validations are not run by default when <i>findOneAndUpdate</i> is executed.
@@ -124,7 +124,7 @@ The application should work almost as-is in Fly.io/Heroku. We do have to generat
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Heroku.
 
-For the production usage we have to set the database URL in the service that is hosting our app.
+For production, we have to set the database URL in the service that is hosting our app.
 
 In Fly.io that is done _fly secrets set_:
 
@@ -132,7 +132,7 @@ In Fly.io that is done _fly secrets set_:
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-For Heroku the same is done with the _heroku config:set_ command.
+For Heroku, the same is done with the _heroku config:set_ command.
 
 ```bash
 heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
@@ -146,9 +146,9 @@ heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluste
 
 The application should now work. Sometimes things don't go according to plan. If there are problems, <i>fly logs</i> or <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
 
-![](../../images/3/51a.png)
+![node output showing connecting to undefined](../../images/3/51a.png)
 
-For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable, when the code expected it to be in <em>MONGODB\_URI</em>.
+For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable when the code expected it to be in <em>MONGODB\_URI</em>.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 
@@ -178,13 +178,13 @@ personService
 
 You can display the default error message returned by Mongoose, even though they are not as readable as they could be:
 
-![](../../images/3/56e.png)
+![phonebook screenshot showing person validation failure](../../images/3/56e.png)
 
 **NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
 
 #### 3.20*: Phonebook database, step8
 
-Add validation to your phonebook application, that will make sure that phone numbers are of the correct form. A phone number must 
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must 
 - has length of 8 or more
 - if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
   - eg. 09-1234556 and 040-22334455 are valid phone numbers
@@ -196,7 +196,7 @@ If an HTTP POST request tries to add a name that is already in the phonebook, th
 
 #### 3.21 Deploying the database backend to production
 
-Generate a new "full stack" version of the application by creating a new production build of the frontend, and copy it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
+Generate a new "full stack" version of the application by creating a new production build of the frontend, and copying it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
 
 Push the latest version to Heroku and verify that everything works there as well.
 
@@ -206,7 +206,7 @@ Push the latest version to Heroku and verify that everything works there as well
 
 ### Lint
 
-Before we move onto the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:
+Before we move on to the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:
 
 > <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
 
@@ -229,7 +229,7 @@ npx eslint --init
 
 We will answer all of the questions:
 
-![](../../images/3/52be.png)
+![terminal output from ESlint init](../../images/3/52be.png)
 
 The configuration will be saved in the _.eslintrc.js_ file:
 
@@ -308,16 +308,16 @@ This causes the entire <em>build</em> directory to not be checked by ESlint.
 
 Lint has quite a lot to say about our code:
 
-![](../../images/3/53ea.png)
+![terminal output of ESlint errors](../../images/3/53ea.png)
 
 Let's not fix these issues just yet.
 
-A better alternative to executing the linter from the command line is to configure a  <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 
 The VS Code ESlint plugin will underline style violations with a red line:
 
-![](../../images/3/54a.png)
+![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
 
 
 This makes errors easy to spot and fix right away.
@@ -389,7 +389,7 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 
 **NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
 
-![](../../images/3/55.png)
+![terminal output from npm run lint](../../images/3/55.png)
 
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.

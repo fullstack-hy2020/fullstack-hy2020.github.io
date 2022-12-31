@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/)-library. Let's start off by making a simple React application as well as getting to know the core concepts of React.
+We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.
 
 The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
@@ -26,11 +26,11 @@ npm start
 
 By default, the application runs on localhost port 3000 with the address <http://localhost:3000>
 
-Your default browser should launch automatically. Open the browser console **immediately**. Also open a text editor so that you can view the code as well as the webpage at the same time on the screen:
+Your default browser should launch automatically. Open the browser console **immediately**. Also, open a text editor so that you can view the code as well as the webpage at the same time on the screen:
 
-![](../../images/1/1e.png)
+![code and browser side by side](../../images/1/1e.png)
 
-The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file <i>index.js</i> look like:
+The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file index.js looks like this:
 
 ```js
 import React from 'react'
@@ -57,9 +57,9 @@ The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>,
 
 If you end up with the following error:
 
-![](../../images/1/r18-error.png)
+![resolve react-dom/client error](../../images/1/r18-error.png)
 
-Then, for some reason you are using a React version older than the current version 18.
+Then, for some reason, you are using a React version older than the current version 18.
 
 The fix is to change <i>index.js</i> as follows:
 
@@ -168,7 +168,7 @@ Any JavaScript code within the curly braces is evaluated and the result of this 
 
 ### JSX
 
-It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are actually dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
+It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
 
 After compiling, our application looks like this:
 
@@ -192,7 +192,7 @@ const App = () => {
 
 The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
 
-It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would actually do so.
+It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would do so.
 
 In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along with Java Spring, which are used on servers.
 
@@ -250,7 +250,7 @@ const App = () => {
 }
 ```
 
-Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialised reusable components.
+Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
 
 Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
 
@@ -270,7 +270,7 @@ const Hello = (props) => { // highlight-line
 }
 ```
 
-Now the function defining the component has a parameter <i>props</i>. As an argument, the parameter receives an object, which has fields corresponding to all the "props" the user of the component defines.
+Now the function defining the component has a parameter props. As an argument, the parameter receives an object, which has fields corresponding to all the "props" the user of the component defines.
 
 The props are defined as follows:
 
@@ -323,11 +323,11 @@ React has been configured to generate quite clear error messages. Despite this, 
 
 **The console should always be open**. If the browser reports errors, it is not advisable to continue writing more code, hoping for miracles. You should instead try to understand the cause of the error and, for example, go back to the previous working state:
 
-![](../../images/1/2a.png)
+![screenshot of undefined prop error](../../images/1/2a.png)
 
 It is good to remember that in React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
 
-Also keep in mind that **React component names must be capitalized**. If you try defining a component as follows:
+Also, keep in mind that **React component names must be capitalized**. If you try defining a component as follows:
 
 ```js
 const footer = () => {
@@ -369,7 +369,7 @@ const App = () => {
 
 the result is an error message.
 
-![](../../images/1/3c.png)
+![multiple root elements error screenshot](../../images/1/3c.png)
 
 Using a root element is not the only working option. An <i>array</i> of components is also a valid solution:
 
@@ -385,7 +385,7 @@ const App = () => {
 
 However, when defining the root component of the application this is not a particularly wise thing to do, and it makes the code look a bit ugly.
 
-Because the root element is stipulated, we have "extra" div-elements in the DOM-tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element:
+Because the root element is stipulated, we have "extra" div elements in the DOM tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element:
 
 ```js
 const App = () => {
@@ -403,7 +403,7 @@ const App = () => {
 }
 ```
 
-It now compiles successfully, and the DOM generated by React no longer contains the extra div-element.
+It now compiles successfully, and the DOM generated by React no longer contains the extra div element.
 
 </div>
 
@@ -429,7 +429,7 @@ part2
 
 See this [example submission repository](https://github.com/fullstack-hy2020/example-submission-repository)!
 
-For each part of the course there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
+For each part of the course, there is a directory, which further branches into directories containing a series of exercises, like "unicafe" for part 1.
 
 For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.
 
@@ -488,7 +488,7 @@ and remove extra files (App.css, App.test.js, index.css, logo.svg, setupTests.js
 
 Unfortunately, the entire application is in the same component. Refactor the code so that it consists of three new components: <i>Header</i>, <i>Content</i>, and <i>Total</i>. All data still resides in the <i>App</i> component, which passes the necessary data to each component using <i>props</i>. <i>Header</i> takes care of rendering the name of the course, <i>Content</i> renders the parts and their number of exercises and <i>Total</i> renders the total number of exercises.
 
-Define the new components in file <i>App.js</i>.
+Define the new components in the file <i>App.js</i>.
 
 The <i>App</i> component's body will approximately be as follows:
 
@@ -510,7 +510,7 @@ const App = () => {
 
 <h4>1.2: course information, step2</h4>
 
-Refactor the <i>Content</i> component so that it does not render any names of parts or their number of exercises by itself. Instead it only renders three <i>Part</i> components of which each renders the name and number of exercises of one part.
+Refactor the <i>Content</i> component so that it does not render any names of parts or their number of exercises by itself. Instead, it only renders three <i>Part</i> components of which each renders the name and number of exercises of one part.
 
 ```js
 const Content = ... {
