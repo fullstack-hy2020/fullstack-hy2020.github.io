@@ -34,7 +34,7 @@ The navigation bar and an application containing multiple views are very easy to
 Here is one way:
 
 ```js
-import React, { useState }  from 'react'
+import { useState }  from 'react'
 import ReactDOM from 'react-dom/client'
 
 const Home = () => (
@@ -168,7 +168,7 @@ Inside the router, we define <i>links</i> that modify the address bar with the h
 
 creates a link in the application with the text <i>notes</i>, which when clicked changes the URL in the address bar to <i>/notes</i>.
 
-Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/en/main/components/route). For example,
+Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/en/main/route/route). For example,
 
 ```js
 <Route path="/notes" element={<Notes />} />
@@ -406,7 +406,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-Would it be possible to modify the application so that *Note* receives only the component it should display?
+Would it be possible to modify the application so that the *Note* component receives only the note that it should display?
 
 ```js
 const Note = ({ note }) => {
@@ -543,4 +543,4 @@ Improve the functionality such that after creating a new anecdote the applicatio
 
 ![browser anecdotes showing success message for adding anecdote](../../assets/teht/44.png)
 
-</i>
+</div>
