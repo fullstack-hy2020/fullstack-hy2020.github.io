@@ -86,6 +86,8 @@ Using <i>strict</i> is suggested by the official documentation.
 
 <i>noUnusedLocals</i> prevents having unused local variables, and <i>noUnusedParameters</i> throws an error if a function has unused parameters.
 
+<i>noImplicitReturns</i> checks all code paths in a function to ensure they return a value.
+
 <i>noFallthroughCasesInSwitch</i> ensures that, in a *switch case*, each case ends either with a <i>return</i> or a <i>break</i> statement.
 
 <i>esModuleInterop</i> allows interoperability between CommonJS and ES Modules; see more in the [documentation](https://www.staging-typescript.org/tsconfig#esModuleInterop).
