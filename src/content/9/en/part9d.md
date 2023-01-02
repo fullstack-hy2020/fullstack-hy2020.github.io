@@ -216,8 +216,9 @@ Now our editor knows that the *name* prop is a string.
 
 <div class="tasks">
 
-### Exercise 9.14.
-#### 9.14.
+### Exercise 9.14
+
+#### 9.14
 
 Create a new Create React App with TypeScript, and set up ESlint for the project similarly to how we just did.
 
@@ -447,9 +448,9 @@ When we remove the comments from the *Deeper type usage* case block, you will se
 
 <div class="tasks">
 
-### Exercise 9.15.
+### Exercise 9.15
 
-#### 9.15.
+#### 9.15
 
 Let us now continue extending the app created in exercise 9.14. First, add the type information and replace the variable *courseParts* with the one from the example below.
 
@@ -848,7 +849,7 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 
 <div class="tasks">
 
-### Exercises 9.16.-9.18.
+### Exercises 9.16-9.18
 
 We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
 
@@ -1054,7 +1055,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 <div class="tasks">
 
-### Exercises 9.19.-9.22.
+### Exercises 9.19-9.22
 
 #### 9.19: Patientor, step4
 
@@ -1412,7 +1413,7 @@ With this material, you should be able to complete the rest of this part's exerc
 
 <div class="tasks">
 
-### Exercises 9.23.-9.27.
+### Exercises 9.23-9.27
 
 #### 9.23: Patientor, step8
 

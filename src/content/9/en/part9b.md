@@ -412,11 +412,11 @@ In our case, it is quite obvious that the return value should be an object with 
 
 <div class="tasks">
 
-### Exercises 9.1.-9.3
+### Exercises 9.1-9.3
 
 #### setup
 
-Exercises 9.1.-9.7. will all be made in the same node project. Create the project in an empty directory with *npm init* and install the ts-node and typescript packages. Also, create the file <i>tsconfig.json</i> in the directory with the following content:
+Exercises 9.1-9.7. will all be made in the same node project. Create the project in an empty directory with *npm init* and install the ts-node and typescript packages. Also, create the file <i>tsconfig.json</i> in the directory with the following content:
 
 ```json
 {
@@ -688,7 +688,7 @@ And now, by running *npm run dev*, we have a working, auto-reloading development
 
 <div class="tasks">
 
-### Exercises 9.4.-9.5
+### Exercises 9.4-9.5
 
 #### 9.4 Express
 
@@ -943,7 +943,7 @@ app.post('/calculate', (req, res) => {
 
 <div class="tasks">
 
-### Exercises 9.6.-9.7
+### Exercises 9.6-9.7
 
 #### 9.6 Eslint
 

@@ -262,7 +262,7 @@ With the help of our compiler and ESlint, it also ensures that good code quality
 
 <div class="tasks">
 
-### Exercises 9.8.-9.9
+### Exercises 9.8-9.9
 
 #### Before you start the exercises
 
@@ -791,7 +791,7 @@ The response is what we expect it to be:
 
 <div class="tasks">
 
-### Exercises 9.10.-9.11
+### Exercises 9.10-9.11
 
 Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those in a directory called <i>data</i> in your project. All data modification can be done in runtime memory, so during this part, it is <i>not necessary to write to a file</i>.
 
@@ -1383,7 +1383,7 @@ The source code of the application can be found on [GitHub](https://github.com/F
 
 <div class="tasks">
 
-### Exercises 9.12.-9.13
+### Exercises 9.12-9.13
 
 #### 9.12: Patientor backend, step5
 
