@@ -15,7 +15,7 @@ One major change from the previous part is that <i>we're not going to use ts-nod
 
 We will create a project for Ilari, who loves flying small planes but has a difficult time managing his flight history. He is a coder himself, so he doesn't necessarily need a user interface, but he'd like to use some custom software with HTTP requests and retain the possibility of later adding a web-based user interface to the application.
 
-Let's start by creating our first real project: <i>Ilari's flight diaries</i>. As usual, run *npm init* and install the *typescript* package as a dev dependency. 
+Let's start by creating our first real project: <i>Ilari's flight diaries</i>. As usual, run *npm init* and install the *typescript* package as a dev dependency.
 
 ```shell
  npm install typescript --save-dev
@@ -73,7 +73,6 @@ Let's go through each configuration:
 The *target* configuration tells the compiler which *ECMAScript* version to use when generating JavaScript. ES6 is supported by most browsers, so it is a good and safe option.
 
 *outDir* tells where the compiled code should be placed.
-
 
 *module* tells the compiler that we want to use *CommonJS* modules in the compiled code. This means we can use the old *require* syntax instead of the *import* one, which is not supported in older versions of *Node*, such as version 10.
 
@@ -214,7 +213,7 @@ The development mode is not suitable at all when we later operate the app in pro
 
 Let's try to create a <i>production build</i> by running the TypeScript compiler. Since we have defined the *outdir* in our tsconfig.json, nothing's left but to run the script *npm run tsc*.
 
-Just like magic, a native runnable JavaScript production build of the Express backend is created in file <i>index.js</i> inside the directory <i>build</i>. The compiled code looks like this 
+Just like magic, a native runnable JavaScript production build of the Express backend is created in file <i>index.js</i> inside the directory <i>build</i>. The compiled code looks like this
 
 ```js
 "use strict";
@@ -263,7 +262,7 @@ With the help of our compiler and ESlint, it also ensures that good code quality
 
 <div class="tasks">
 
-### Exercises 9.8.-9.9.
+### Exercises 9.8.-9.9
 
 **Before you start the exercises**
 
@@ -280,11 +279,13 @@ The project should be runnable with npm scripts, both in development mode and, a
 #### 9.9: Patientor backend, step2
 
 Fork and clone the project [patientor](https://github.com/fullstack-hy2020/patientor). Start the project with the help of the README file.
- 
+
 You can run this command if you get an error message when trying to start the frontend:
+
 ```shell
 npm update chokidar
-``` 
+```
+
  You should be able to use the frontend without a functioning backend.
 
 Ensure that the backend answers the ping request that the <i>frontend</i> has made on startup. Check the developer tools to make sure it works:
@@ -304,6 +305,7 @@ Finally, we are ready to start writing some code.
 Let's start from the basics. Ilari wants to be able to keep track of his experiences on his flight journeys.
 
 He wants to be able to save <i>diary entries</i>, which contain:
+
 - The date of the entry
 - Weather conditions (good, windy, rainy or stormy)
 - Visibility (good, ok or poor)
@@ -361,7 +363,6 @@ export default router;
 ```
 
 We'll route all requests to prefix */api/diaries* to that specific router in <i>index.ts</i>
-
 
 ```js
 import express from 'express';
@@ -551,7 +552,6 @@ export default diaryEntries; // highlight-line
 
 Now, when we import the array, the compiler interprets it correctly and the *weather* and *visibility* fields are understood right:
 
-
 ```js
 import diaries from '../../data/diaries'; // highlight-line
 
@@ -676,6 +676,7 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
   // ...
 }
 ```
+
  Another way would be to declare a completely new type for the *NonSensitiveDiaryEntry*:
 
 ```js
@@ -749,7 +750,6 @@ export default {
 
 If we now try to return this data with the basic *DiaryEntry* type, i.e. if we type the function as follows:
 
-
 ```js
 const getNonSensitiveEntries = (): DiaryEntry[] => {
 ```
@@ -791,7 +791,7 @@ The response is what we expect it to be:
 
 <div class="tasks">
 
-### Exercises 9.10.-9.11.
+### Exercises 9.10.-9.11
 
 Similarly to Ilari's flight service, we do not use a real database in our app but instead use hardcoded data that is in the files [diagnoses.json](https://github.com/fullstack-hy2020/misc/blob/master/diagnoses.json) and [patients.json](https://github.com/fullstack-hy2020/misc/blob/master/patients.json). Get the files and store those in a directory called <i>data</i> in your project. All data modification can be done in runtime memory, so during this part, it is <i>not necessary to write to a file</i>.
 
@@ -981,7 +981,7 @@ There is still a complaint from our code:
 
 ![](../../images/9/43.png)
 
-The cause is the ESlint rule [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md) that prevents us from assigning the fields of a request body to variables. 
+The cause is the ESlint rule [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md) that prevents us from assigning the fields of a request body to variables.
 
 For the time being, let us just ignore the ESlint rule from the whole file by adding the following as the first line of the file:
 
@@ -990,7 +990,6 @@ For the time being, let us just ignore the ESlint rule from the whole file by ad
 ```
 
 To parse the incoming data we must have the *json* middleware configured:
-
 
 ``` js
 import express from 'express';
@@ -1101,7 +1100,6 @@ Let us start creating the parsers for each of the fields of *object*.
 
 To validate the *comment* field, we need to check that it exists, and to ensure that it is of the type *string*.
 
-
 The function should look something like this:
 
 ```js
@@ -1130,7 +1128,7 @@ The function is a so-called [type guard](https://www.typescriptlang.org/docs/han
 text is string
 ```
 
-The general form of a type predicate is _parameterName is Type_ where the _parameterName_ is the name of the function parameter and _Type_ is the targeted type.
+The general form of a type predicate is *parameterName is Type* where the *parameterName* is the name of the function parameter and *Type* is the targeted type.
 
 If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate.
 
@@ -1290,8 +1288,8 @@ const diaryEntries: DiaryEntry [] = data.map(obj => {
 
 export default diaryEntries;
 ```
-Note that since *toNewDiaryEntry* returns an object of type *NewDiaryEntry*, we need to assert it to be *DiaryEntry* with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
+Note that since *toNewDiaryEntry* returns an object of type *NewDiaryEntry*, we need to assert it to be *DiaryEntry* with the [as](http://www.typescriptlang.org/docs/handbook/basic-types.html#type-assertions) operator.
 
 Enums are typically used when there is a set of predetermined values that are not expected to change in the future. Usually, enums are used for much tighter unchanging values (for example, weekdays, months, cardinal directions), but since they offer us a great way to validate our incoming values, we might as well use them in our case.
 
@@ -1338,7 +1336,7 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 };
 ```
 
-we notice that the code does not compile. This is because the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so accessing the fields is not possible. 
+we notice that the code does not compile. This is because the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so accessing the fields is not possible.
 
 We can fix this by destructuring the fields to variables of the type unknown as follows:
 
@@ -1385,7 +1383,7 @@ The source code of the application can be found on [GitHub](https://github.com/F
 
 <div class="tasks">
 
-### Exercises 9.12.-9.13.
+### Exercises 9.12.-9.13
 
 #### 9.12: Patientor backend, step5
 
