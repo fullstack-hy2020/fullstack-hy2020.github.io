@@ -7,36 +7,37 @@ lang: en
 
 <div class="content">
 
-After the brief introduction to the main principles of TypeScript, we are now ready to start our journey toward becoming FullStack TypeScript developers. 
-Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing express backends or React frontends with TypeScript. 
+After the brief introduction to the main principles of TypeScript, we are now ready to start our journey toward becoming FullStack TypeScript developers.
+Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing express backends or React frontends with TypeScript.
 In addition to language features, we will also have a strong emphasis on tooling.
 
 ### Setting things up
 
-Install TypeScript support to your editor of choice. [Visual Studio Code](https://code.visualstudio.com/) works natively with TypeScript. 
+Install TypeScript support to your editor of choice. [Visual Studio Code](https://code.visualstudio.com/) works natively with TypeScript.
 
-As mentioned earlier, TypeScript code is not executable by itself. It has to be first compiled into executable JavaScript. 
-When TypeScript is compiled into JavaScript, the code becomes subject to type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed and the result is pure ready-to-run JavaScript. 
+As mentioned earlier, TypeScript code is not executable by itself. It has to be first compiled into executable JavaScript.
+When TypeScript is compiled into JavaScript, the code becomes subject to type erasure. This means that type annotations, interfaces, type aliases, and other type system constructs are removed and the result is pure ready-to-run JavaScript.
 
 In a production environment, the need for compilation often means that you have to set up a "build step." During the build step, all TypeScript code is compiled into JavaScript in a separate folder, and the production environment then runs the code from that folder. In a development environment, it is often handier to make use of real-time compilation and auto-reloading so one can see the resulting changes more quickly.
 
 Let's start writing our first TypeScript app. To keep things simple, let's start by using the npm package [ts-node](https://github.com/TypeStrong/ts-node). It compiles and executes the specified TypeScript file immediately so that there is no need for a separate compilation step.
 
 You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running:
+
 ```
 npm install -g ts-node typescript
 ```
 
-If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it. 
-We will also take this approach. 
+If you can't or don't want to install global packages, you can create an npm project which has the required dependencies and run your scripts in it.
+We will also take this approach.
 
-As we recall from [part 3](/en/part3), an npm project is set by running the command *npm init* in an empty directory. Then we can install the dependencies by running 
+As we recall from [part 3](/en/part3), an npm project is set by running the command *npm init* in an empty directory. Then we can install the dependencies by running
 
 ```
 npm install --save-dev ts-node typescript
 ```
 
-and setting up <i>scripts</i> within the package.json: 
+and setting up <i>scripts</i> within the package.json:
 
 ```json
 {
@@ -48,7 +49,7 @@ and setting up <i>scripts</i> within the package.json:
 }
 ```
 
-You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, all command-line arguments for the script need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i>, the whole command is: 
+You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, all command-line arguments for the script need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i>, the whole command is:
 
 ```shell
 npm run ts-node -- file.ts
@@ -62,7 +63,7 @@ It is worth mentioning that TypeScript also provides an online playground, where
 
 JavaScript is a quite relaxed language in itself, and things can often be done in multiple different ways. For example, we have named vs anonymous functions, using const and let or var, and the use of <i>semicolons</i>. This part of the course differs from the rest by using semicolons. It is not a TypeScript-specific pattern but a general coding style decision taken when creating any kind of JavaScript project. Whether to use them or not is usually in the hands of the programmer, but since it is expected to adapt one's coding habits to the existing codebase, you are expected to use semicolons and adjust to the coding style in the exercises for this part. This part has some other coding style differences compared to the rest of the course as well, e.g. in the directory naming conventions.
 
-Let us add a configuration file _tsconfig.json_ to the project with the following content:
+Let us add a configuration file *tsconfig.json* to the project with the following content:
 
 ```js
 {
@@ -102,7 +103,7 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 
 Now when we run the code, the output is: *Multiplied a string and 4, the result is: NaN*.
 
-Wouldn't it be nice if the language itself could prevent us from ending up in situations like this? 
+Wouldn't it be nice if the language itself could prevent us from ending up in situations like this?
 This is where we see the first benefits of TypeScript.  Let's add types to the parameters and see where it takes us.
 
 TypeScript natively supports multiple types including *number*, *string* and *Array*. See the comprehensive list [here](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html). More complex custom types can also be created.
@@ -121,8 +122,7 @@ Now the code is no longer valid JavaScript but in fact TypeScript. When we try t
 
 ![](../../images/9/2a.png)
 
-
-One of the best things about TypeScript's editor support is that you don't necessarily need to even run the code to see the issues. 
+One of the best things about TypeScript's editor support is that you don't necessarily need to even run the code to see the issues.
 The VSCode plugin is so efficient, that it informs you immediately when you are trying to use an incorrect type:
 
 ![](../../images/9/2.png)
@@ -131,7 +131,7 @@ The VSCode plugin is so efficient, that it informs you immediately when you are 
 
 Let's expand our multiplicator into a slightly more versatile calculator that also supports addition and division. The calculator should accept three arguments: two numbers and the operation, either *multiply*, *add* or *divide*, which tells it what to do with the numbers.
 
-In JavaScript, the code would require additional validation to make sure the last argument is indeed a string. TypeScript offers a way to define specific types for inputs, which describe exactly what type of input is acceptable. On top of that, TypeScript can also show the info on the accepted values already at the editor level. 
+In JavaScript, the code would require additional validation to make sure the last argument is indeed a string. TypeScript offers a way to define specific types for inputs, which describe exactly what type of input is acceptable. On top of that, TypeScript can also show the info on the accepted values already at the editor level.
 
 We can create a *type* using the TypeScript native keyword *type*. Let's describe our type *Operation*:
 
@@ -139,9 +139,9 @@ We can create a *type* using the TypeScript native keyword *type*. Let's describ
 type Operation = 'multiply' | 'add' | 'divide';
 ```
 
-Now the *Operation* type accepts only three kinds of input; exactly the three strings we wanted. 
-Using the OR operator _|_ we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types).
-In this case, we used exact strings (that, in technical terms, are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions, you could also make the compiler accept for example both string and number: _string | number_.
+Now the *Operation* type accepts only three kinds of input; exactly the three strings we wanted.
+Using the OR operator *|* we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types).
+In this case, we used exact strings (that, in technical terms, are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions, you could also make the compiler accept for example both string and number: *string | number*.
 
 The *type* keyword defines a new name for a type: [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
 
@@ -211,9 +211,8 @@ But now the question is if it's <i>really</i> okay for the function to return a 
 When your code can end up in a situation where something is divided by 0, something has probably gone terribly wrong and an error should be thrown and handled where the function was called.
 When you are deciding to return values you weren't originally expecting, the warnings you see from TypeScript prevent you from making rushed decisions and help you to keep your code working as expected.
 
-
 One more thing to consider is, that even though we have defined types for our parameters, the generated JavaScript used at runtime does not contain the type checks.
-So if, for example, the *Operation* parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore, it's still better to include error handling and be prepared for the unexpected to happen. 
+So if, for example, the *Operation* parameter's value comes from an external interface, there is no definite guarantee that it will be one of the allowed values. Therefore, it's still better to include error handling and be prepared for the unexpected to happen.
 In this case, when there are multiple possible accepted values and all unexpected ones should result in an error, the [switch...case](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement suits better than if...else in our code.
 
 The code of our calculator should look something like this:
@@ -273,7 +272,6 @@ Sometimes, an npm package can also include its types within the code and, in tha
 Since the global variable <i>process</i> is defined by Node itself, we get its typings from the package <i>@types/node</i>.
 
 Since version 10.0 <i>ts-node</i> has defined <i>@types/node</i> as a [peer dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). If the version of npm is at least 7.0, the peer dependencies of a project automatically installed by then npm. If you have an older npm, the peer dependency must be installed explicitly:
-
 
 ```shell
 npm install --save-dev @types/node
@@ -335,7 +333,7 @@ it "works" but gives us the answer:
 Multiplied 5 and NaN, the result is: NaN
 ```
 
-The reason for this is, that *Number('lol')* returns *NaN*, 
+The reason for this is, that *Number('lol')* returns *NaN*,
 which is actually of type *number*, so TypeScript has no power to rescue us from this kind of situation.
 
 To prevent this kind of behavior, we have to validate the data given to us from the command line.
@@ -407,14 +405,14 @@ interface MultiplyValues {
 }
 ```
 
-The definition utilizes TypeScript's Interface [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html) keyword, which is one way to define the "shape" an object should have. 
-In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number. 
+The definition utilizes TypeScript's Interface [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html) keyword, which is one way to define the "shape" an object should have.
+In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 9.1.-9.3.
+### Exercises 9.1.-9.3
 
 #### setup
 
@@ -434,7 +432,7 @@ The compiler option [noImplicitAny](https://www.typescriptlang.org/tsconfig#noIm
 
 Create the code of this exercise in the file <i>bmiCalculator.ts</i>.
 
-Write a function *calculateBmi* that calculates a [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on a given height (in centimeters) and weight (in kilograms) and then returns a message that suits the results. 
+Write a function *calculateBmi* that calculates a [BMI](https://en.wikipedia.org/wiki/Body_mass_index) based on a given height (in centimeters) and weight (in kilograms) and then returns a message that suits the results.
 
 Call the function in the same file with hard-coded parameters and print out the result. The code
 
@@ -456,13 +454,13 @@ Create the code of this exercise in file *exerciseCalculator.ts*.
 
 Write a function *calculateExercises* that calculates the average time of <i>daily exercise hours</i> and compares it to the <i>target amount</i> of daily hours and returns an object that includes the following values:
 
-  - the number of days
-  - the number of training days
-  - the original target value
-  - the calculated average time
-  - boolean value describing if the target was reached
-  - a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
-  - a text value explaining the rating
+- the number of days
+- the number of training days
+- the original target value
+- the calculated average time
+- boolean value describing if the target was reached
+- a rating between the numbers 1-3 that tells how well the hours are met. You can decide on the metric on your own.
+- a text value explaining the rating
 
 The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period. Eg. a week with 3 hours of training on Monday, none on Tuesday, 2 hours on Wednesday, 4.5 hours on Thursday and so on would be represented by the following array:
 
@@ -524,7 +522,7 @@ Handle exceptions and errors appropriately. The exerciseCalculator should accept
 
 We have so far used only one tsconfig rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny). It's a good place to start, but now it's time to look into the config file a little deeper.
 
-As mentioned, the [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project. 
+As mentioned, the [tsconfig.json](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) file contains all your core configurations on how you want TypeScript to work in your project.
 
 Let's specify the following configurations in our <i>tsconfig.json</i> file:
 
@@ -545,11 +543,11 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 
 Do not worry too much about the *compilerOptions*; they will be under closer inspection later on.
 
-You can find explanations for each of the configurations from the TypeScript documentation or from the really handy [tsconfig page](https://www.typescriptlang.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options. 
+You can find explanations for each of the configurations from the TypeScript documentation or from the really handy [tsconfig page](https://www.typescriptlang.org/tsconfig), or from the tsconfig [schema definition](http://json.schemastore.org/tsconfig), which unfortunately is formatted a little worse than the first two options.
 
 ### Adding Express to the mix
 
-Right now, we are in a pretty good place. Our project is set up and we have two executable calculators in it. 
+Right now, we are in a pretty good place. Our project is set up and we have two executable calculators in it.
 However, since we aim to learn FullStack development, it is time to start working with some HTTP requests.
 
 Let us start by installing Express:
@@ -600,14 +598,14 @@ The complaint is that the *'require' call may be converted to an import*. Let us
 import express from 'express';
 ```
 
-**NB**: VSCode offers you the possibility to fix the issues automatically by clicking the <i>Quick Fix...</i> button. Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. The automatic fixes for issues can be a major time saver as well. 
+**NB**: VSCode offers you the possibility to fix the issues automatically by clicking the <i>Quick Fix...</i> button. Keep your eyes open for these helpers/quick fixes; listening to your editor usually makes your code better and easier to read. The automatic fixes for issues can be a major time saver as well.
 
-Now we run into another problem, the compiler complains about the import statement. 
+Now we run into another problem, the compiler complains about the import statement.
 Once again, the editor is our best friend when trying to find out what the issue is:
 
 ![](../../images/9/7.png)
 
-We haven't installed types for <i>express</i>. 
+We haven't installed types for <i>express</i>.
 Let's do what the suggestion says and run:
 
 ```
@@ -624,9 +622,9 @@ Whereas when we use *import*, the editor knows the actual types:
 
 ![](../../images/9/9x.png)
 
-Which import statement to use depends on the export method used in the imported package. 
+Which import statement to use depends on the export method used in the imported package.
 
-A good rule of thumb is to try importing a module using the *import* statement first. We will always use this method in the <i>frontend</i>. 
+A good rule of thumb is to try importing a module using the *import* statement first. We will always use this method in the <i>frontend</i>.
 If *import* does not work, try a combined method: *import ... = require('...')*.
 
 We strongly suggest you read more about TypeScript modules [here](https://www.typescriptlang.org/docs/handbook/modules.html).
@@ -651,13 +649,13 @@ This is because we banned unused parameters in our <i>tsconfig.json</i>:
 }
 ```
 
-This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it's not used at all, as is the case here. 
-Fortunately, this issue has already been solved on the configuration level. 
+This configuration might create problems if you have library-wide predefined functions which require declaring a variable even if it's not used at all, as is the case here.
+Fortunately, this issue has already been solved on the configuration level.
 Once again hovering over the issue gives us a solution. This time we can just click the quick fix button:
 
 ![](../../images/9/14a.png)
 
-If it is absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do. 
+If it is absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do.
 
 Let's rename the *req* variable to *_req*. Finally, we are ready to start the application. It seems to work fine:
 
@@ -690,7 +688,7 @@ And now, by running *npm run dev*, we have a working, auto-reloading development
 
 <div class="tasks">
 
-### Exercises 9.4.-9.5.
+### Exercises 9.4.-9.5
 
 #### 9.4 Express
 
@@ -722,7 +720,7 @@ Make sure there aren't any errors!
 
 #### 9.5 WebBMI
 
-Add an endpoint for the BMI calculator that can be used by doing an HTTP GET request to the endpoint *bmi* and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). For example, to get the BMI of a person with a height of 180 and a weight of 72, the URL is http://localhost:3002/bmi?height=180&weight=72.
+Add an endpoint for the BMI calculator that can be used by doing an HTTP GET request to the endpoint *bmi* and specifying the input with [query string parameters](https://en.wikipedia.org/wiki/Query_string). For example, to get the BMI of a person with a height of 180 and a weight of 72, the URL is <http://localhost:3002/bmi?height=180&weight=72>.
 
 The response is a JSON of the form:
 
@@ -780,15 +778,15 @@ But if you hover over the values parsed from the request, an issue arises:
 
 All of the variables have the type *any*. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but first, we have to consider why this is accepted and where the type *any* came from.
 
-In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). Any is a kind of "wild card" type which stands for <i>whatever</i> type. 
-Things become implicitly any type quite often when one forgets to type functions. 
+In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). Any is a kind of "wild card" type which stands for <i>whatever</i> type.
+Things become implicitly any type quite often when one forgets to type functions.
 
-We can also explicitly type things *any*. The only difference between the implicit and explicit any type is how the code looks; the compiler does not care about the difference. 
+We can also explicitly type things *any*. The only difference between the implicit and explicit any type is how the code looks; the compiler does not care about the difference.
 
-Programmers however see the code differently when *any* is explicitly enforced than when it is implicitly inferred. 
-Implicit *any* typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited. 
+Programmers however see the code differently when *any* is explicitly enforced than when it is implicitly inferred.
+Implicit *any* typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited.
 
-This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny) exists on the compiler level, and it is highly recommended to keep it on at all times. 
+This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny) exists on the compiler level, and it is highly recommended to keep it on at all times.
 In the rare occasions when you truly cannot know what the type of a variable is, you should explicitly state that in the code:
 
 ```js
@@ -796,11 +794,10 @@ const a : any = /* no clue what the type will be! */.
 ```
 
 We already have <i>noImplicitAny</i> configured in our example, so why does the compiler not complain about the implicit *any* types?
-The reason is that the *query* field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed *any*. The same is true for the *request.body* field we use to post data to an app. 
-
+The reason is that the *query* field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed *any*. The same is true for the *request.body* field we use to post data to an app.
 
 What if we would like to restrict developers from using the *any* type? Fortunately, we have methods other than <i>tsconfig.json</i> to enforce a coding style. What we can do is use <i>ESlint</i> to manage
-our code. 
+our code.
 Let's install ESlint and its TypeScript extensions:
 
 ```shell
@@ -825,7 +822,7 @@ We will configure ESlint to [disallow explicit any]( https://github.com/typescri
 
 (Newer versions of ESlint have this rule on by default, so you don't necessarily need to add it separately.)
 
-Let us also set up a *lint* npm script to inspect the files with <i>.ts</i> extension by modifying the <i>package.json</i> file: 
+Let us also set up a *lint* npm script to inspect the files with <i>.ts</i> extension by modifying the <i>package.json</i> file:
 
 ```json
 {
@@ -844,8 +841,7 @@ Now lint will complain if we try to define a variable of type *any*:
 
 ![](../../images/9/13b.png)
 
-
-[@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects. 
+[@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects.
 For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.
 
 On top of the recommended settings, we should try to get familiar with the coding style required in this part and <i>set the semicolon at the end of each line of code to required</i>.
@@ -947,7 +943,7 @@ app.post('/calculate', (req, res) => {
 
 <div class="tasks">
 
-### Exercises 9.6.-9.7.
+### Exercises 9.6.-9.7
 
 #### 9.6 Eslint
 
