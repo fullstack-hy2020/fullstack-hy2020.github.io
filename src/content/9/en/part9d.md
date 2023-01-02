@@ -11,7 +11,7 @@ Before we start delving into how you can use TypeScript with React, we should fi
 
 - Trying to pass an extra/unwanted prop to a component
 - Forgetting to pass a required prop to a component
-- Passing a prop of a wrong type to a component
+- Passing a prop with a wrong type to a component
 
 
 If we make any of these errors, TypeScript can help us catch them in our editor right away. 
@@ -23,13 +23,13 @@ That's enough reasoning for now. Let's start getting our hands dirty!
 ### Create React App with TypeScript
 
 We can use [create-react-app](https://create-react-app.dev) to create a TypeScript app by adding a 
-<i>template</i> argument to the initialisation script. So in order to create a TypeScript Create React App, run the following command:
+<i>template</i> argument to the initialization script. So in order to create a TypeScript Create React App, run the following command:
 
 ```shell
 npx create-react-app my-app --template typescript
 ```
 
-After running the command, you should have a complete basic React app which uses TypeScript.
+After running the command, you should have a complete basic React app that uses TypeScript.
 You can start the app by running <i>npm start</i> in the application's root. 
 
 If you take a look at the files and folders, you'll notice that the app is not that different from 
@@ -68,12 +68,12 @@ Now, let's take a look at the <i>tsconfig.json</i> file that has been created fo
 
 The compilerOptions now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like `document`)."
 
-Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files, because <i>allowJs</i> is set to <i>true</i>.
+Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files because <i>allowJs</i> is set to <i>true</i>.
 That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
 
-In our previous project, we used eslint to help us enforce coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
+In our previous project, we used ESlint to help us enforce a coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
 
-We configure eslint in <i>.eslintrc</i> with the following settings:
+We configure ESlint in <i>.eslintrc</i> with the following settings:
 
 ```js
 {
@@ -219,7 +219,7 @@ Now our editor knows that the <i>name</i> prop is a string.
 ### Exercise 9.14.
 #### 9.14.
 
-Create a new Create React App with TypeScript, and set up eslint for the project similarly to how we just did.
+Create a new Create React App with TypeScript, and set up ESlint for the project similarly to how we just did.
 
 This exercise is similar to the one you have already done in [Part 1](/en/part1/java_script#exercises-1-3-1-5) of the course, but with TypeScript and some extra tweaks. Start off by modifying the contents of <i>index.tsx</i> to the following:
 
@@ -280,7 +280,7 @@ and remove the unnecessary files.
 
 The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i> 
 
-The <i>Header</i> component should take care of rendering the name of the course. <i>Content</i> should render the names of the different parts and the amount of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
+The <i>Header</i> component should take care of rendering the name of the course. <i>Content</i> should render the names of the different parts and the number of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
 
 The <i>App</i> component should look somewhat like this:
 
@@ -303,7 +303,7 @@ const App = () => {
 
 ### Deeper type usage
 
-In the previous exercise, we had three parts of a course, and all parts had the same attributes <i>name</i> and <i>exerciseCount</i>. But what if we had a need for additional attributes for the parts and each part would have a need for different attributes? How would this look, codewise? Let's consider the following example:
+In the previous exercise, we had three parts of a course, and all parts had the same attributes <i>name</i> and <i>exerciseCount</i>. But what if we needed additional attributes for the parts and each part needs different attributes? How would this look, codewise? Let's consider the following example:
 
 ```js
 const courseParts = [
@@ -332,8 +332,8 @@ but the first and the third also have an attribute called <i>description</i>, an
 the second and third parts also have some distinct additional attributes.
 
 Let's imagine that our application just keeps on growing, and we need to pass the different course parts around in our code.
-On top of that, there is also additional attributes and course parts added to the mix.
-How can we know that our code is capable of handling all the different types of data correctly, and we are not for example forgetting to render a new course part on some page? This is where TypeScript really comes handy!
+On top of that, there are also additional attributes and course parts added to the mix.
+How can we know that our code is capable of handling all the different types of data correctly, and we are not for example forgetting to render a new course part on some page? This is where TypeScript comes in handy!
 
 Let's start by defining types for our different course parts:
 
@@ -358,7 +358,7 @@ interface CoursePartThree {
 }
 ```
 
-Next we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. 
+Next, we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. 
 We can then use it to define a type for our array, which should accept any of these course part types:
 
 ```js
@@ -366,12 +366,12 @@ type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
 Now we can set the type for our <i>courseParts</i> variable. 
-Our editor will automatically warn us if we use a wrong type for an attribute, use an extra attribute, or forget to set an expected attribute.
+Our editor will automatically warn us if we use the wrong type for an attribute, use an extra attribute, or forget to set an expected attribute.
 You can test this by commenting out any attribute for any course part.
 Thanks to the <i>name</i> [string literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types), TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
 
 But we're not satisfied yet! There is still a lot of duplication in our types, and we want to avoid that. 
-We start off by identifying the attributes all course parts have in common, and defining a base type which contains them.
+We start by identifying the attributes all course parts have in common, and defining a base type that contains them.
 Then we will [extend](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) that base type to create our part-specific types:
 
 ```js
@@ -399,7 +399,7 @@ interface CoursePartThree extends CoursePartBase {
 
 How should we now use these types in our components?
 
-One handy way to use this kind of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared or TypeScript has inferred that a variable is of type union and that each type in the type union contains a certain attribute, 
+One handy way to use these kinds of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared or TypeScript has inferred that a variable is of type union and that each type in the type union contains a certain attribute, 
 we can use that as a type identifier. 
 We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block.
 
@@ -411,7 +411,7 @@ Then, TypeScript will produce an error if you try to use the <i>part.description
 
 What about adding new types? If we were to add a new course part, wouldn't it be nice to know if we had already implemented handling that type in our code? 
 In the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. 
-Of course, sometimes, this is totally acceptable, for example if you want to handle only specific (but not all) cases of a type union, but in most cases it is recommended to handle all variations separately.
+Sometimes this is wholly acceptable. For instance, if you wanted to handle only specific (but not all) cases of a type union, having a default is fine. Nonetheless, it is recommended to handle all variations separately in most cases.
 
 With TypeScript, we can use a method called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type) and also has the return type <i>never</i>.
 
@@ -508,7 +508,7 @@ const courseParts: CoursePart[] = [
 ]
 ```
 
-Now we know that both interfaces <i>CourseNormalPart</i> and <i>CourseSubmissionPart</i> share not only the base attributes, but also an attribute called <i>description</i>, which is a string in both interfaces. 
+Now we know that both interfaces <i>CourseNormalPart</i> and <i>CourseSubmissionPart</i> share not only the base attributes but also an attribute called <i>description</i>, which is a string in both interfaces. 
 
 Your first task is to declare a new interface that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CourseNormalPart</i> and <i>CourseSubmissionPart</i> without getting any errors.
 
@@ -528,7 +528,7 @@ Lastly, add another course part interface with the following attributes: <i>name
 
 Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now, if you have not modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
-The end result might look like the following:
+The result might look like the following:
 
 ![](../../images/9/45.png)
 
@@ -571,7 +571,7 @@ type DiaryEntry = {
 } 
 ```
 
-In most cases you can use either <i>type</i> or <i>interface</i>, whichever syntax you prefer. However, there are a few things to keep in mind. 
+In most cases, you can use either <i>type</i> or <i>interface</i>, whichever syntax you prefer. However, there are a few things to keep in mind. 
 For example, if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to define multiple types with the same name, it will result in an error stating that a type with the same name is already declared. 
 
 TypeScript documentation [recommends using interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) in most cases.
@@ -585,7 +585,7 @@ It is always a good idea to start the application and click around to verify you
 You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have
 different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use. 
 
-TypeScript provides types which signal what kind of data structures, functions, components, and state to expect.  You can try looking for <i>types.ts</i> or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project. 
+TypeScript provides types for what kind of data structures, functions, components, and state to expect.  You can try looking for <i>types.ts</i> or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project. 
 
 If the project has unit, integration or end-to-end tests, reading those is most likely beneficial. Test cases are your most important tool when refactoring or adding new features to the application. You want to make sure not to break any existing features when hammering around the code. TypeScript can also give you guidance with argument and return types when changing the code.
 
@@ -597,12 +597,12 @@ It's time to get our hands dirty finalizing the frontend for the backend we buil
 
 Before diving into the code, let us start both the frontend and the backend.
 
-If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients to the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has clearly not been a strong point of the creators, so let's disregard the UI for now.
+If all goes well, you should see a patient listing page. It fetches a list of patients from our backend, and renders it to the screen as a simple table. There is also a button for creating new patients on the backend. As we are using mock data instead of a database, the data will not persist - closing the backend will delete all the data we have added. UI design has not been a strong point of the creators, so let's disregard the UI for now.
 
 After verifying that everything works, we can start studying the code. All the interesting stuff resides in the <i>src</i> folder. For your convenience, there is already a <i>types.ts</i> file for basic types used in the app, which you will have to extend or refactor in the exercises.
 
-In principle, we could use the same types for both backend and frontend, but usually the frontend has different data structures and use cases for the data, which causes the types to be different. 
-For example, the frontend has a state, and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
+In principle, we could use the same types for both backend and frontend, but usually, the frontend has different data structures and use cases for the data, which causes the types to be different. 
+For example, the frontend has a state and may want to keep data in objects or maps whereas the backend uses an array. The frontend might also not need all the fields of a data object saved in the backend, and it may need to add some new fields to use for rendering.
 
 The folder structure looks as follows:
 
@@ -614,15 +614,15 @@ The main functionality of the code in the <i>state</i> folder is to keep our dat
 
 Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far. 
 
-The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similar libraries for the state management.
-There are a lot of good material, for example  [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe), about this approach to state management.
+The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similar libraries for state management.
+There are a lot of good materials, like [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe), about this approach to state management.
 
 
 The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html) that, according to its documentation:
 
 > <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i> 
 
-In our case, the "global", shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In many ways our code works much like the Redux-based state management we used in [part 6](/en/part6), but is more lightweight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way Redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.
+In our case, the "global", shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In many ways, our code works much like the Redux-based state management we used in [part 6](/en/part6), but is more lightweight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way Redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.
 
 The [context](https://reactjs.org/docs/context.html) of our application has a tuple containing the app state and the dispatcher for changing the state. 
 The application state is typed as follows:
@@ -633,9 +633,9 @@ export type State = {
 };
 ```
 
-The state is an object with one key, <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with a <i>Patient</i> objects as values. The index can only be  a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
+The state is an object with one key, <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with <i>Patient</i> objects as values. The index can only be a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
 
-But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not actually have any way of knowing if the key you are trying to access actually exists or not. So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
+But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not have any way of knowing if the key you are trying to access exists or not. So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
 
 ```js
 const myPatient = state.patients['non-existing-id'];
@@ -716,7 +716,7 @@ export const reducer = (state: State, action: Action): State => {
 };
 ```
 
-The main difference is  that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
+The main difference is that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
 
 There are a lot of things happening in the file <i>state.tsx</i>, which takes care of setting up the context. 
 The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook
@@ -770,12 +770,12 @@ const PatientListPage = () => {
 
 Don't worry if this seems confusing; it will be until you have studied the [context's documentation](https://reactjs.org/docs/context.html) and its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely to do the exercises!
 
-It is actually quite common that when you start working on an existing codebase, you do not understand 100% of what happens under the hood in the beginning. If the app has been properly structured (and it has a proper set of tests), you can trust that if you make careful modifications, the app still works despite the fact that you did not understand  all the internal mechanisms. Over time, you will get a grasp on the more unfamiliar parts, but it does not happen overnight when working with a large codebase.
+It is quite common that when you start working on an existing codebase, you do not understand 100% of what happens under the hood in the beginning. If the app has been properly structured (and it has a proper set of tests), you can trust that if you make careful modifications, the app still works despite not understanding all the internal mechanisms. Over time, you will get a grasp on the more unfamiliar parts, but it does not happen overnight when working with a large codebase.
 
 ### Patient listing page
 
 Let's go through the <i>PatientListPage/index.tsx</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. 
-<i>PatientListPage</i> uses our custom hook to inject the state, and the dispatcher for updating it. 
+<i>PatientListPage</i> uses our custom hook to inject the state and the dispatcher for updating it. 
 When we list the patients, we only need to destructure the <i>patients</i> property from the state:
 
 ```js
@@ -835,7 +835,7 @@ React.useEffect(() => {
 }, [dispatch]);
 ````
 
-**A word of warning!** Passing a type parameter to Axios will not validate any data. It is quite dangerous especially if you are using external APIs. You can create custom validation functions which take in the whole payload and return the correct type, or you can use a type guard. Both are valid options. There are also many libraries that provide validation through a different kind of schemas, for example [io-ts](https://gcanti.github.io/io-ts/). For simplicity's sake, we will continue to trust our own work and trust that we will get data of the correct form from the backend.
+**A word of warning!** Passing a type parameter to Axios will not validate any data. It is quite dangerous especially if you are using external APIs. You can create custom validation functions that take in the whole payload and return the correct type, or you can use a type guard. Both are valid options. Many libraries also provide validation through different kinds of schemas (e.g. [io-ts](https://gcanti.github.io/io-ts/)). For simplicity's sake, we will continue to trust our work and trust that we will get data of the correct form from the backend.
 
 As our app is quite small, we will update the state by simply calling the <i>dispatch</i> function provided to us by the <i>useStateValue</i> hook.
 The compiler helps by making sure that we dispatch actions according to our <i>Action</i> type with a predefined type string and payload:
@@ -890,7 +890,7 @@ Fetch the data from the endpoint created in the previous exercise. After fetchin
 
 Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
-The Application uses [MaterialUI](https://material-ui.com/) that we covered in [part 7](/en/part7/more_about_styles) for styling. You may also use it for the new components but that is up to you since our main focus now is TypeScript.
+The Application uses [MaterialUI](https://material-ui.com/) for styling, which we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you since our main focus now is TypeScript.
 
 The Application also uses [React Router](https://reactrouter.com/en/main/start/tutorial) to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
 
@@ -900,13 +900,13 @@ The result could look like this:
 
 Example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.
 
-**Note** that in order to access the id in the url, you need to give [useParams](https://reactrouter.com/en/main/hooks/use-params) a proper type argument:
+**Note** that to access the id in the URL, you need to give [useParams](https://reactrouter.com/en/main/hooks/use-params) a proper type argument:
 
 ```js
 const { id } = useParams<{ id: string }>();
 ```
 
-#### 9.18: patientor, step3
+#### 9.18: Patientor, step3
 
 Currently, we create <i>action</i> objects wherever we dispatch actions, e.g. the <i>App</i> component has the following:
 
@@ -935,7 +935,7 @@ dispatch(setPatientList(patientListFromApi));
 
 ### Full entries
 
-In the [exercise 9.10.](/en/part9/typing_the_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all. 
+In [exercise 9.10.](/en/part9/typing_the_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all. 
 Since we now have a page for viewing a patient's information, it would be nice to expand our data a bit. 
 Let's add an <i>Entry</i> field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.
 
@@ -945,7 +945,7 @@ Let's ditch our old patient seed data from the backend and start using [this exp
 
 Let us now create a proper <i>Entry</i> type based on the data we have.
 
-If we take a closer look at the data, we can see that the entries are actually quite different from one another. For example, let's take a look at the first two entries:
+If we take a closer look at the data, we can see that the entries are quite different from one another. For example, let's take a look at the first two entries:
 
 ```js
 {
@@ -981,13 +981,13 @@ If we take a closer look at the data, we can see that the entries are actually q
 Immediately, we can see that while the first few fields are the same, the first entry has a <i>discharge</i> field and the second entry has <i>employerName</i> and <i>sickLeave</i> fields. 
 All the entries seem to have some fields in common, but some fields are entry-specific. 
 
-When looking at the <i>type</i>, we can see that there are actually three kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>.
+When looking at the <i>type</i>, we can see that there are three kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>.
 This indicates we need three separate types. Since they all have some fields in common, we might just want to create a base entry interface that we can extend with the different fields in each type. 
 
-When looking at the data, it seems that the fields <i>id</i>, <i>description</i>, <i>date</i> and <i>specialist</i> are something that can be found in each entry. On top of that, it seems that the <i>diagnosisCodes</i> is only found in one <i>OccupationalHealthCare</i> and one <i>Hospital</i> type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the <i>HealthCheck</i> type as well, 
+When looking at the data, it seems that the fields <i>id</i>, <i>description</i>, <i>date</i> and <i>specialist</i> are something that can be found in each entry. On top of that, it seems that <i>diagnosisCodes</i> is only found in one <i>OccupationalHealthCare</i> and one <i>Hospital</i> type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the <i>HealthCheck</i> type as well 
 since it might just not be used in these specific entries.
 
-So our <i>BaseEntry</i> from which each type could be extended from would be the following:
+So our <i>BaseEntry</i> from which each type could be extended would be the following:
 
 ```js
 interface BaseEntry {
@@ -1056,7 +1056,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 ### Exercises 9.19.-9.22.
 
-#### 9.19: patientor, step4
+#### 9.19: Patientor, step4
 
 Define the types <i>OccupationalHealthcareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
@@ -1064,9 +1064,9 @@ Define the types <i>OccupationalHealthcareEntry</i> and <i>HospitalEntry</i> so 
 
 Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
 
-#### 9.20: patientor, step5
+#### 9.20: Patientor, step5
 
-Extend a patient's page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnose codes</i> of the patient's entries. 
+Extend a patient's page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnoseCodes</i> of the patient's entries. 
 
 You can use the same type definition for an <i>Entry</i> in the frontend. For these exercises, it is enough to just copy/paste the definitions from the backend to the frontend.
 
@@ -1074,15 +1074,15 @@ Your solution could look like this:
 
 ![](../../images/9/41.png)
 
-#### 9.21: patientor, step6
+#### 9.21: Patientor, step6
 
 Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
 ![](../../images/9/42.png)
 
-#### 9.22: patientor, step7
+#### 9.22: Patientor, step7
 
-Extend the entry listing in the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other. 
+Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other. 
 
 You could use eg. [Icons](https://mui.com/components/material-icons/) or some other [Material UI](https://mui.com/) component to get appropriate visuals for your listing.
 
@@ -1102,7 +1102,7 @@ The resulting entries in the listing <i>could</i> look something like this:
 
 ### Add patient form
 
-Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our app's add patient form. Here's a small intro from the Formik's documentation:
+Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our app's add patient form. Here's a small intro from Formik's documentation:
 
 > Formik is a small library that helps you with the 3 most annoying parts:
 >
@@ -1131,7 +1131,7 @@ interface Props {
 
 As you can see, the component requires two props: <i>onSubmit</i> and <i>onCancel</i>.
 Both are callback functions that return <i>void</i>. The <i>onSubmit</i> function should receive an 
-object of type <i>PatientFormValues</i> as an argument, so that the callback can handle our form values.
+object of type <i>PatientFormValues</i> as an argument so that the callback can handle our form values.
 
 Looking at the <i>AddPatientForm</i> function component, you can see we have bound the <i>Props</i> as our component's props, and we destructure <i>onSubmit</i> and <i>onCancel</i> from those props.
 
@@ -1165,7 +1165,7 @@ const genderOptions: GenderOption[] = [
 ];
 ```
 
-Next, look at the type <i>SelectFieldProps</i>. It defines the type for the props for our <i>SelectField</i> component. There, you can see that <i>options</i> is an array of <i>GenderOption</i> types.
+Next, look at the type <i>SelectFieldProps</i>. It defines the type for the props of our <i>SelectField</i> component. There, you can see that <i>options</i> is an array of <i>GenderOption</i> types.
 
 ```js
 type SelectFieldProps = {
@@ -1237,7 +1237,7 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
 }
 ```
 
-Now, back to the  actual form component in <i>AddPatientForm.tsx</i>.
+Now, back to the actual form component in <i>AddPatientForm.tsx</i>.
 The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: <i>initialValues</i> and <i>onSubmit</i>. The role of the props is quite self-explanatory.
 The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.
 
@@ -1345,13 +1345,13 @@ export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
 export default AddPatientForm;
 ```
 
-As a child of our Formik wrapper, we have a <i>function</i> which returns the form contents.
-We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element. Inside of the Form element, we use our <i>TextField</i> and <i>SelectField</i> components that we created in <i>FormField.tsx</i>.
+As a child of our Formik wrapper, we have a <i>function</i> that returns the form contents.
+We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element. Inside the Form element, we use our <i>TextField</i> and <i>SelectField</i> components that we created in <i>FormField.tsx</i>.
 
-Lastly, we create two buttons: one for cancelling the form submission and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away when clicked. 
+Lastly, we create two buttons: one for canceling the form submission and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away when clicked. 
 The submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. The submit button is enabled only if the form is <i>valid</i> and <i>dirty</i>, which means that the user has edited some of the fields.
 
-We handle form submission through Formik, because it allows us to call the validation function before  performing the actual submission. If the validation function returns any errors, the submission is cancelled.
+We handle form submission through Formik, because it allows us to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is canceled.
 
 The buttons are set inside a Material UI [Grid](https://mui.com/components/grid/#main-content) to set them next to each other easily.
 
@@ -1381,8 +1381,8 @@ The buttons are set inside a Material UI [Grid](https://mui.com/components/grid/
 </Grid>
 ```
 
-The <i>onSubmit</i> callback has been passed down all the way from our patient list page.
-Basically, it sends an HTTP POST request to our backend, adds the patient returned from the backend to our app's state and closes the modal. 
+The <i>onSubmit</i> callback has been passed all the way down from our patient list page.
+It sends an HTTP POST request to our backend, adds the patient returned from the backend to our app's state and closes the modal. 
 If the backend returns an error, the error is displayed on the form.
 
 Here is our submit function:
@@ -1415,7 +1415,7 @@ With this material, you should be able to complete the rest of this part's exerc
 
 ### Exercises 9.23.-9.27.
 
-#### 9.23: patientor, step8
+#### 9.23: Patientor, step8
 
 We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
 
@@ -1423,7 +1423,7 @@ Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backe
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
-#### 9.24: patientor, step9
+#### 9.24: Patientor, step9
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page. 
 
@@ -1474,19 +1474,19 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 };
 ```
 
-With small tweaks on types, the  readily made component <i>SelectField</i> can be used for the heath check rating.
+With small tweaks on types, the readily made component <i>SelectField</i> can be used for the health check rating.
 
-#### 9.25: patientor, step10
+#### 9.25: Patientor, step10
 
 Extend your solution so that it displays an error message if some required values are missing or formatted incorrectly. 
 
-#### 9.26: patientor, step11
+#### 9.26: Patientor, step11
 
-Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in the server's response.
+Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
 
 The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. Getting the types to work properly might be a slight challenge if you use just a single form.
 
-Note that that if you need alter the shown form based on user selections, you can access the form values using the parameter _values_ of the rendering function:
+Note that if you need to alter the shown form based on user selections, you can access the form values using the parameter _values_ of the rendering function:
 
 ```js
 <Formik
@@ -1504,9 +1504,9 @@ Note that that if you need alter the shown form based on user selections, you ca
 </Formik>
 ```
 
-#### 9.27: patientor, step12
+#### 9.27: Patientor, step12
 
-Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about the possible errors in the server's response.
+Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
 
 ### Submitting exercises and getting the credits
 
