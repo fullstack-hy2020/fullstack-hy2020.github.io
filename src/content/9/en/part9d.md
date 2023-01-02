@@ -30,7 +30,7 @@ npx create-react-app my-app --template typescript
 ```
 
 After running the command, you should have a complete basic React app that uses TypeScript.
-You can start the app by running <i>npm start</i> in the application's root. 
+You can start the app by running *npm start* in the application's root. 
 
 If you take a look at the files and folders, you'll notice that the app is not that different from 
 one using pure JavaScript. The only differences are that the <i>.js</i> and <i>.jsx</i> files are now  <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.
@@ -68,8 +68,8 @@ Now, let's take a look at the <i>tsconfig.json</i> file that has been created fo
 
 The compilerOptions now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like `document`)."
 
-Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files because <i>allowJs</i> is set to <i>true</i>.
-That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to  <i>false</i>.
+Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files because *allowJs* is set to *true*.
+That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to *false*.
 
 In our previous project, we used ESlint to help us enforce a coding style, and we'll do the same with this app. We do not need to install any dependencies, since create-react-app has taken care of that already.
 
@@ -102,7 +102,7 @@ We configure ESlint in <i>.eslintrc</i> with the following settings:
 }
 ```
 
-Since the return type of most React components is generally either <i>JSX.Element</i> or <i>null</i>, we have loosened up the default linting rules a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md). 
+Since the return type of most React components is generally either *JSX.Element* or *null*, we have loosened up the default linting rules a bit by disabling the rules [explicit-function-return-type](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-function-return-type.md) and [explicit-module-boundary-types](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/explicit-module-boundary-types.md). 
 Now we don't need to explicitly state our function return types everywhere. We will also disable [react/react-in-jsx-scope](https://github.com/yannickcr/eslint-plugin-react/blob/master/docs/rules/react-in-jsx-scope.md) since importing React is [no longer needed](https://reactjs.org/blog/2020/09/22/introducing-the-new-jsx-transform.html) in every file.
 
 Next, we need to get our linting script to parse <i>*.tsx </i> files, which are the TypeScript equivalent of React's JSX files. 
@@ -144,9 +144,9 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-In this example, we have a component called <i>Welcome</i> to which we pass a <i>name</i> as a prop. It then renders the name to the screen.  We know that the <i>name</i> should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of a component's props and warnings about invalid prop types. 
+In this example, we have a component called *Welcome* to which we pass a *name* as a prop. It then renders the name to the screen.  We know that the *name* should be a string, and we use the [prop-types](https://www.npmjs.com/package/prop-types) package introduced in [part 5](/en/part5/props_children_and_proptypes#prop-types) to receive hints about the desired types of a component's props and warnings about invalid prop types. 
 
-With TypeScript, we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as react components are nothing but mere functions. We will use an interface for the parameter types (i.e., props) and <i>JSX.Element</i> as the return type for any react component.
+With TypeScript, we don't need the <i>prop-types</i> package anymore. We can define the types with the help of TypeScript just like we define types for a regular function as react components are nothing but mere functions. We will use an interface for the parameter types (i.e., props) and *JSX.Element* as the return type for any react component.
 
 For example:
 
@@ -181,7 +181,7 @@ const MyComp4 = ({ label, price }: { label: string, price: number }) => {
 }
 ```
 
-Now, let's return to our code example and see how we would define the type for the <i>Welcome</i> component in TypeScript.
+Now, let's return to our code example and see how we would define the type for the *Welcome* component in TypeScript.
 
 ```jsx
 interface WelcomeProps {
@@ -210,7 +210,7 @@ const Welcome = ({ name }: { name: string }) => (
 );
 ```
 
-Now our editor knows that the <i>name</i> prop is a string. 
+Now our editor knows that the *name* prop is a string. 
 
 </div>
 
@@ -278,11 +278,11 @@ export default App;
 
 and remove the unnecessary files.
 
-The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: <i>Header</i>,  <i>Content</i> and <i>Total</i>. All data is still kept in the <i>App</i> component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i> 
+The whole app is now in one component. That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*. All data is still kept in the *App* component, which passes all necessary data to each component as props. <i>Be sure to add type declarations for each component's props!</i> 
 
-The <i>Header</i> component should take care of rendering the name of the course. <i>Content</i> should render the names of the different parts and the number of exercises in each part, and <i>Total</i> should render the total sum of exercises in all parts.
+The *Header* component should take care of rendering the name of the course. *Content* should render the names of the different parts and the number of exercises in each part, and *Total* should render the total sum of exercises in all parts.
 
-The <i>App</i> component should look somewhat like this:
+The *App* component should look somewhat like this:
 
 ```jsx
 const App = () => {
@@ -303,7 +303,7 @@ const App = () => {
 
 ### Deeper type usage
 
-In the previous exercise, we had three parts of a course, and all parts had the same attributes <i>name</i> and <i>exerciseCount</i>. But what if we needed additional attributes for the parts and each part needs different attributes? How would this look, codewise? Let's consider the following example:
+In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts and each part needs different attributes? How would this look, codewise? Let's consider the following example:
 
 ```js
 const courseParts = [
@@ -327,8 +327,8 @@ const courseParts = [
 ```
 
 In the above example, we have added some additional attributes to each course part.
-Each part has the <i>name</i> and <i>exerciseCount</i> attributes,
-but the first and the third also have an attribute called <i>description</i>, and 
+Each part has the *name* and *exerciseCount* attributes,
+but the first and the third also have an attribute called *description*, and 
 the second and third parts also have some distinct additional attributes.
 
 Let's imagine that our application just keeps on growing, and we need to pass the different course parts around in our code.
@@ -365,10 +365,10 @@ We can then use it to define a type for our array, which should accept any of th
 type CoursePart = CoursePartOne | CoursePartTwo | CoursePartThree;
 ```
 
-Now we can set the type for our <i>courseParts</i> variable. 
+Now we can set the type for our *courseParts* variable. 
 Our editor will automatically warn us if we use the wrong type for an attribute, use an extra attribute, or forget to set an expected attribute.
 You can test this by commenting out any attribute for any course part.
-Thanks to the <i>name</i> [string literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types), TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
+Thanks to the *name* [string literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types), TypeScript can identify which course part requires which additional attributes, even if the variable is defined to use the type union.
 
 But we're not satisfied yet! There is still a lot of duplication in our types, and we want to avoid that. 
 We start by identifying the attributes all course parts have in common, and defining a base type that contains them.
@@ -405,15 +405,15 @@ We can then build a switch case around that attribute and TypeScript will know w
 
 ![](../../images/9/32.png)
 
-In the above example, TypeScript knows that a <i>part</i> has the type <i>CoursePart</i>. It can then infer that <i>part</i> is of either type <i>CoursePartOne</i>, <i>CoursePartTwo</i> or <i>CoursePartThree</i>. 
-The <i>name</i> is distinct for each type, so we can use it to identify each type and TypeScript can let us know which attributes are available in each case block. 
-Then, TypeScript will produce an error if you try to use the <i>part.description</i> within the <i>"Using props to pass data"</i> block for example.
+In the above example, TypeScript knows that a *part* has the type *CoursePart*. It can then infer that *part* is of either type *CoursePartOne*, *CoursePartTwo* or *CoursePartThree*. 
+The *name* is distinct for each type, so we can use it to identify each type and TypeScript can let us know which attributes are available in each case block. 
+Then, TypeScript will produce an error if you try to use the *part.description* within the *"Using props to pass data"* block for examp*
 
 What about adding new types? If we were to add a new course part, wouldn't it be nice to know if we had already implemented handling that type in our code? 
-In the example above, a new type would go to the <i>default</i> block and nothing would get printed for a new type. 
+In the example above, a new type would go to the *default* block and nothing would get printed for a new type. 
 Sometimes this is wholly acceptable. For instance, if you wanted to handle only specific (but not all) cases of a type union, having a default is fine. Nonetheless, it is recommended to handle all variations separately in most cases.
 
-With TypeScript, we can use a method called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type) and also has the return type <i>never</i>.
+With TypeScript, we can use a method called <i>exhaustive type checking</i>. Its basic principle is that if we encounter an unexpected value, we call a function that accepts a value with the type [never](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type) and also has the return type *never*.
 
 A straightforward version of the function could look like this:
 
@@ -428,19 +428,19 @@ const assertNever = (value: never): never => {
 };
 ```
 
-If we now were to replace the contents of our <i>default</i> block to:
+If we now were to replace the contents of our *default* block to:
 
 ```js
 default:
   return assertNever(part);
 ```
 
-and would also comment out the <i>Deeper type usage</i> case block, we would see the following error:
+and would also comment out the *Deeper type usage* case block, we would see the following error:
 
 ![](../../images/9/33.png)
 
-The error message says that <i>Argument of type 'CoursePartThree' is not assignable to parameter of type 'never'</i>, which tells us that we are using a variable somewhere where it should never be used. This tells us that something needs to be fixed. 
-When we remove the comments from the <i>Deeper type usage</i> case block, you will see that the error goes away.
+The error message says that *Argument of type 'CoursePartThree' is not assignable to parameter of type 'never'*, which tells us that we are using a variable somewhere where it should never be used. This tells us that something needs to be fixed. 
+When we remove the comments from the *Deeper type usage* case block, you will see that the error goes away.
 
 </div>
 
@@ -450,7 +450,7 @@ When we remove the comments from the <i>Deeper type usage</i> case block, you wi
 
 #### 9.15.
 
-Let us now continue extending the app created in exercise 9.14. First, add the type information and replace the variable <i>courseParts</i> with the one from the example below.
+Let us now continue extending the app created in exercise 9.14. First, add the type information and replace the variable *courseParts* with the one from the example below.
 
 ```js
 // new types
@@ -508,13 +508,13 @@ const courseParts: CoursePart[] = [
 ]
 ```
 
-Now we know that both interfaces <i>CourseNormalPart</i> and <i>CourseSubmissionPart</i> share not only the base attributes but also an attribute called <i>description</i>, which is a string in both interfaces. 
+Now we know that both interfaces *CourseNormalPart* and *CourseSubmissionPart* share not only the base attributes but also an attribute called *description*, which is a string in both interfaces. 
 
-Your first task is to declare a new interface that includes the <i>description</i> attribute and extends the <i>CoursePartBase</i> interface. Then modify the code so that you can remove the <i>description</i> attribute from both <i>CourseNormalPart</i> and <i>CourseSubmissionPart</i> without getting any errors.
+Your first task is to declare a new interface that includes the *description* attribute and extends the *CoursePartBase* interface. Then modify the code so that you can remove the *description* attribute from both *CourseNormalPart* and *CourseSubmissionPart* without getting any errors.
 
-Then create a component <i>Part</i> that renders all attributes of each type of course part. Use a switch case-based exhaustive type checking! Use the new component in component <i>Content</i>.
+Then create a component *Part* that renders all attributes of each type of course part. Use a switch case-based exhaustive type checking! Use the new component in component *Content*.
 
-Lastly, add another course part interface with the following attributes: <i>name</i>, <i>exerciseCount</i>, <i>description</i> and <i>requirements</i>, the latter being a string array. The objects of this type look like the following:
+Lastly, add another course part interface with the following attributes: *name*, *exerciseCount*, *description* and *requirements*, the latter being a string array. The objects of this type look like the following:
 
 ```js
 {
@@ -526,7 +526,7 @@ Lastly, add another course part interface with the following attributes: <i>name
 }
 ```
 
-Then add that interface to the type union <i>CoursePart</i> and add corresponding data to the <i>courseParts</i> variable. Now, if you have not modified your <i>Content</i> component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to <i>Content</i>, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
+Then add that interface to the type union *CoursePart* and add corresponding data to the *courseParts* variable. Now, if you have not modified your *Content* component correctly, you should get an error, because you have not yet added support for the fourth course part type. Do the necessary changes to *Content*, so that all attributes for the new course part also get rendered and that the compiler doesn't produce any errors.
 
 The result might look like the following:
 
@@ -571,7 +571,7 @@ type DiaryEntry = {
 } 
 ```
 
-In most cases, you can use either <i>type</i> or <i>interface</i>, whichever syntax you prefer. However, there are a few things to keep in mind. 
+In most cases, you can use either *type* or *interface*, whichever syntax you prefer. However, there are a few things to keep in mind. 
 For example, if you define multiple interfaces with the same name, they will result in a merged interface, whereas if you try to define multiple types with the same name, it will result in an error stating that a type with the same name is already declared. 
 
 TypeScript documentation [recommends using interfaces](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#differences-between-type-aliases-and-interfaces) in most cases.
@@ -608,7 +608,7 @@ The folder structure looks as follows:
 
 ![](../../images/9/34a.png)
 
-As you would expect, there are currently two main components: <i>AddPatientModal</i> and <i>PatientListPage</i>. The <i>state</i> folder contains state handling for the frontend.
+As you would expect, there are currently two main components: *AddPatientModal* and *PatientListPage*. The <i>state</i> folder contains state handling for the frontend.
 The main functionality of the code in the <i>state</i> folder is to keep our data in one place and offer simple actions to alter the state of our app.
 ### State handling
 
@@ -633,16 +633,16 @@ export type State = {
 };
 ```
 
-The state is an object with one key, <i>patients</i>, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with <i>Patient</i> objects as values. The index can only be a <i>string</i> or a <i>number</i> as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
+The state is an object with one key, *patients*, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with *Patient* objects as values. The index can only be a *string* or a *number* as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
 
-But be aware of one thing! When a type is declared like the type for <i>patients</i>, TypeScript does not have any way of knowing if the key you are trying to access exists or not. So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type <i>Patient</i> and no error would be thrown when trying to access its properties:
+But be aware of one thing! When a type is declared like the type for *patients*, TypeScript does not have any way of knowing if the key you are trying to access exists or not. So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type *Patient* and no error would be thrown when trying to access its properties:
 
 ```js
 const myPatient = state.patients['non-existing-id'];
 console.log(myPatient.name); // no error, TypeScript believes that myPatient is of type Patient
 ```
 
-To fix this, we could define the type for patient values to be a union of <i>Patient</i> and <i>undefined</i> in the following way:
+To fix this, we could define the type for patient values to be a union of *Patient* and *undefined* in the following way:
 
 ```js
 export type State = {
@@ -659,7 +659,7 @@ console.log(myPatient.name); // error, Object is possibly 'undefined'
 
 This type of additional type security is always good to implement if you e.g. use data from external sources or use the value of a user input to access data in your code. But if you are sure that you only handle data that actually exists, then there is no one stopping you from using the first presented solution.
 
-Even though we are not using them in this course part, it is good to mention that a more type-strict way would be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map's accessor function <i>get()</i> always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:
+Even though we are not using them in this course part, it is good to mention that a more type-strict way would be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map's accessor function *get()* always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:
 
 ```js
 interface State {
@@ -672,7 +672,7 @@ console.log(myPatient.name); // error, Object is possibly 'undefined'
 console.log(myPatient?.name); // valid code, but will log 'undefined'
 ```
 
-Just like with redux, all state manipulation is done by a reducer. It is defined in the file <i>reducer.ts</i> along with the type <i>Action</i>, which looks as follows:
+Just like with redux, all state manipulation is done by a reducer. It is defined in the file <i>reducer.ts</i> along with the type *Action*, which looks as follows:
 
 ```js
 export type Action =
@@ -736,7 +736,7 @@ export const StateProvider = ({
 };
 ```
 
-The provider makes the <i>state</i> and the <i>dispatch</i> functions available in all of the components, thanks to the setup in <i>index.tsx</i>:
+The provider makes the *state* and the *dispatch* functions available in all of the components, thanks to the setup in <i>index.tsx</i>:
 
 ```js 
 import { reducer, StateProvider } from "./state";
@@ -749,7 +749,7 @@ ReactDOM.render(
 );
 ```
 
-It also defines the <i>useStateValue</i> hook:
+It also defines the *useStateValue* hook:
 
 ```js 
 export const useStateValue = () => useContext(StateContext);
@@ -775,8 +775,8 @@ It is quite common that when you start working on an existing codebase, you do n
 ### Patient listing page
 
 Let's go through the <i>PatientListPage/index.tsx</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state. 
-<i>PatientListPage</i> uses our custom hook to inject the state and the dispatcher for updating it. 
-When we list the patients, we only need to destructure the <i>patients</i> property from the state:
+*PatientListPage* uses our custom hook to inject the state and the dispatcher for updating it. 
+When we list the patients, we only need to destructure the *patients* property from the state:
 
 ```js
 import { useStateValue } from "../state";
@@ -787,7 +787,7 @@ const PatientListPage = () => {
 }
 ```
 
-We also use the app state created with the <i>useState</i> hook for managing modal visibility and form error handling:
+We also use the app state created with the *useState* hook for managing modal visibility and form error handling:
 
 
 ```js
@@ -795,10 +795,10 @@ const [modalOpen, setModalOpen] = React.useState<boolean>(false);
 const [error, setError] = React.useState<string | undefined>();
 ```
 
-We give the <i>useState</i> hook a type parameter, which is then applied to the actual state. So <i>modalOpen</i> is a <i>boolean</i> and <i>error</i> has the type <i>string | undefined</i>. 
-Both set functions returned by the <i>useState</i> hook are functions that accept only arguments according to the type parameter given, eg. the exact type for <i>setModalOpen</i> function is <i>React.Dispatch<React.SetStateAction&lt;boolean&gt;></i>.
+We give the *useState* hook a type parameter, which is then applied to the actual state. So *modalOpen* is a *boolean* while *error* has the type *string | undefined*. 
+Both set functions returned by the *useState* hook are functions that accept only arguments according to the type parameter given, eg. the exact type for *setModalOpen* function is `React.Dispatch<React.SetStateAction<boolean>>`.
 
-We also have the <i>openModal</i> and <i>closeModal</i> helper functions for better readability and convenience:
+We also have the *openModal* and *closeModal* helper functions for better readability and convenience:
 
 ```js
 const openModal = (): void => setModalOpen(true);
@@ -811,7 +811,7 @@ const closeModal = (): void => {
 
 The frontend's types are based on what you have created when developing the backend in the previous part.
 
-When the component <i>App</i> mounts, it fetches patients from the backend using [Axios](https://github.com/axios/axios). Note how we are giving the <i>axios.get</i> function a type parameter to describe the type of the response data:
+When the component *App* mounts, it fetches patients from the backend using [Axios](https://github.com/axios/axios). Note how we are giving the *axios.get* function a type parameter to describe the type of the response data:
 
 ````js
 React.useEffect(() => {
@@ -837,8 +837,8 @@ React.useEffect(() => {
 
 **A word of warning!** Passing a type parameter to Axios will not validate any data. It is quite dangerous especially if you are using external APIs. You can create custom validation functions that take in the whole payload and return the correct type, or you can use a type guard. Both are valid options. Many libraries also provide validation through different kinds of schemas (e.g. [io-ts](https://gcanti.github.io/io-ts/)). For simplicity's sake, we will continue to trust our work and trust that we will get data of the correct form from the backend.
 
-As our app is quite small, we will update the state by simply calling the <i>dispatch</i> function provided to us by the <i>useStateValue</i> hook.
-The compiler helps by making sure that we dispatch actions according to our <i>Action</i> type with a predefined type string and payload:
+As our app is quite small, we will update the state by simply calling the *dispatch* function provided to us by the *useStateValue* hook.
+The compiler helps by making sure that we dispatch actions according to our *Action* type with a predefined type string and payload:
 
 ```js
 dispatch({ type: "SET_PATIENT_LIST", payload: patients });
@@ -850,7 +850,7 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 
 ### Exercises 9.16.-9.18.
 
-We will soon add a new type for our app, <i>Entry</i>, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a <i>description</i>, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
+We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
 
 Before going into this, let us do some preparatory work.
 
@@ -908,7 +908,7 @@ const { id } = useParams<{ id: string }>();
 
 #### 9.18: Patientor, step3
 
-Currently, we create <i>action</i> objects wherever we dispatch actions, e.g. the <i>App</i> component has the following:
+Currently, we create *action* objects wherever we dispatch actions, e.g. the *App* component has the following:
 
 ```js
 dispatch({
@@ -918,7 +918,7 @@ dispatch({
 
 Define [action creator functions](/en/part6/flux_architecture_and_redux#action-creators) in the file <i>src/state/reducer.ts</i> and refactor the code to use them.
 
-For example, the <i>App</i> should become like the following:
+For example, the *App* should become like the following:
 
 ```js
 import { useStateValue, setPatientList } from "./state";
@@ -937,13 +937,13 @@ dispatch(setPatientList(patientListFromApi));
 
 In [exercise 9.10.](/en/part9/typing_the_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all. 
 Since we now have a page for viewing a patient's information, it would be nice to expand our data a bit. 
-Let's add an <i>Entry</i> field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.
+Let's add an *Entry* field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.
 
 Let's ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy/misc/blob/master/patients.ts).
 
-**Notice:** This time, the data is not in the .json format but instead in the .ts format. You should already have the complete <i>Gender</i> and <i>Patient</i> types implemented, so only correct the paths where they are imported from if needed.
+**Notice:** This time, the data is not in the .json format but instead in the .ts format. You should already have the complete *Gender* and *Patient* types implemented, so only correct the paths where they are imported from if needed.
 
-Let us now create a proper <i>Entry</i> type based on the data we have.
+Let us now create a proper *Entry* type based on the data we have.
 
 If we take a closer look at the data, we can see that the entries are quite different from one another. For example, let's take a look at the first two entries:
 
@@ -978,16 +978,16 @@ If we take a closer look at the data, we can see that the entries are quite diff
 }
 ```
 
-Immediately, we can see that while the first few fields are the same, the first entry has a <i>discharge</i> field and the second entry has <i>employerName</i> and <i>sickLeave</i> fields. 
+Immediately, we can see that while the first few fields are the same, the first entry has a *discharge* field and the second entry has *employerName* and *sickLeave* fields. 
 All the entries seem to have some fields in common, but some fields are entry-specific. 
 
-When looking at the <i>type</i>, we can see that there are three kinds of entries: <i>OccupationalHealthcare</i>, <i>Hospital</i> and <i>HealthCheck</i>.
+When looking at the *type*, we can see that there are three kinds of entries: *OccupationalHealthcare*, *Hospital* and *HealthCheck*.
 This indicates we need three separate types. Since they all have some fields in common, we might just want to create a base entry interface that we can extend with the different fields in each type. 
 
-When looking at the data, it seems that the fields <i>id</i>, <i>description</i>, <i>date</i> and <i>specialist</i> are something that can be found in each entry. On top of that, it seems that <i>diagnosisCodes</i> is only found in one <i>OccupationalHealthCare</i> and one <i>Hospital</i> type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the <i>HealthCheck</i> type as well 
+When looking at the data, it seems that the fields *id*, *description*, *date* and *specialist* are something that can be found in each entry. On top of that, it seems that *diagnosisCodes* is only found in one *OccupationalHealthcare* and one *Hospital* type entry. Since it is not always used even in those types of entries, it is safe to assume that the field is optional. We could consider adding it to the *HealthCheck* type as well 
 since it might just not be used in these specific entries.
 
-So our <i>BaseEntry</i> from which each type could be extended would be the following:
+So our *BaseEntry* from which each type could be extended would be the following:
 
 ```js
 interface BaseEntry {
@@ -999,7 +999,7 @@ interface BaseEntry {
 }
 ```
 
-If we want to finetune it a bit further, since we already have a <i>Diagnosis</i> type defined in the backend, we might just want to refer to the code field of the <i>Diagnosis</i> type directly in case its type ever changes. 
+If we want to finetune it a bit further, since we already have a *Diagnosis* type defined in the backend, we might just want to refer to the code field of the *Diagnosis* type directly in case its type ever changes. 
 We can do that like so:
 
 ```js
@@ -1012,12 +1012,12 @@ interface BaseEntry {
 }
 ```
 
-As you might remember, <i>Array&lt;Type&gt;</i> is just an alternative way to say <i>Type[]</i>. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying <i>Diagnosis['code'][]</i> which starts to look a bit strange.
+As you might remember, `Array<Type>` is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying *Diagnosis['code'][]* which starts to look a bit strange.
 
-Now that we have the <i>BaseEntry</i> defined, we can start creating the extended entry types we will actually be using. Let's start by creating the <i>HealthCheckEntry</i> type.
+Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 
-Entries of type <i>HealthCheck</i> contain the field <i>HealthCheckRating</i>, which is an integer from 0 to 3, zero meaning <i>Healthy</i> and 3 meaning <i>CriticalRisk</i>. This is a perfect case for an enum definition. 
-With these specifications we could write a <i>HealthCheckEntry</i> type definition like so:
+Entries of type *HealthCheck* contain the field *HealthCheckRating*, which is an integer from 0 to 3, zero meaning *Healthy* and 3 meaning *CriticalRisk*. This is a perfect case for an enum definition. 
+With these specifications we could write a *HealthCheckEntry* type definition like so:
 
 ```js
 export enum HealthCheckRating {
@@ -1033,7 +1033,7 @@ interface HealthCheckEntry extends BaseEntry {
 }
 ```
 
-Now we only need to create the <i>OccupationalHealthcareEntry</i> and <i>HospitalEntry</i> types so we can combine them in a union and export them as an Entry type like this:
+Now we only need to create the *OccupationalHealthcareEntry* and *HospitalEntry* types so we can combine them in a union and export them as an Entry type like this:
 
 ```js
 export type Entry =
@@ -1041,7 +1041,7 @@ export type Entry =
   | OccupationalHealthcareEntry
   | HealthCheckEntry;
 ```
-An important point concerning unions is that, when you use them with _Omit_ to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the _id_ from each _Entry_. We could think of using _Omit&lt;Entry, 'id'&gt;_, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
+An important point concerning unions is that, when you use them with _Omit_ to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the _id_ from each _Entry_. We could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
 
 ```ts
 // Define special omit for unions
@@ -1058,17 +1058,17 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 #### 9.19: Patientor, step4
 
-Define the types <i>OccupationalHealthcareEntry</i> and <i>HospitalEntry</i> so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
+Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
 ![](../../images/9/40.png)
 
-Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field <i>type</i> has a correct value.
+Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field *type* has a correct value.
 
 #### 9.20: Patientor, step5
 
-Extend a patient's page in the frontend to list the <i>date</i>, <i>description</i> and <i>diagnoseCodes</i> of the patient's entries. 
+Extend a patient's page in the frontend to list the *date*, *description* and *diagnoseCodes* of the patient's entries. 
 
-You can use the same type definition for an <i>Entry</i> in the frontend. For these exercises, it is enough to just copy/paste the definitions from the backend to the frontend.
+You can use the same type definition for an *Entry* in the frontend. For these exercises, it is enough to just copy/paste the definitions from the backend to the frontend.
 
 Your solution could look like this:
 
@@ -1114,7 +1114,7 @@ Form handling can sometimes be quite a nuisance in React. That's why we have dec
 
 The code for the form can be found from <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found from <i>src/AddPatientModal/FormField.tsx</i>.
 
-Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, which we have simply called <i>PatientFormValues</i>. The type is a modified version of the <i>Patient</i> type with the <i>id</i> and <i>entries</i> properties omitted. We don't want the user to be able to submit those when creating a new patient. The <i>id</i> is created by the backend and <i>entries</i> can only be added for existing patients.
+Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, which we have simply called *PatientFormValues*. The type is a modified version of the *Patient* type with the *id* and *entries* properties omitted. We don't want the user to be able to submit those when creating a new patient. The *id* is created by the backend and *entries* can only be added for existing patients.
 
 ```js
 export type PatientFormValues = Omit<Patient, "id" | "entries">;
@@ -1129,11 +1129,11 @@ interface Props {
 }
 ```
 
-As you can see, the component requires two props: <i>onSubmit</i> and <i>onCancel</i>.
-Both are callback functions that return <i>void</i>. The <i>onSubmit</i> function should receive an 
-object of type <i>PatientFormValues</i> as an argument so that the callback can handle our form values.
+As you can see, the component requires two props: *onSubmit* and *onCancel*.
+Both are callback functions that return *void*. The *onSubmit* function should receive an 
+object of type *PatientFormValues* as an argument so that the callback can handle our form values.
 
-Looking at the <i>AddPatientForm</i> function component, you can see we have bound the <i>Props</i> as our component's props, and we destructure <i>onSubmit</i> and <i>onCancel</i> from those props.
+Looking at the *AddPatientForm* function component, you can see we have bound the *Props* as our component's props, and we destructure *onSubmit* and *onCancel* from those props.
 
 ```js
 export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
@@ -1142,11 +1142,11 @@ export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
 ```
 
 Now before we continue, let's take a look at our form helpers in <i>FormField.tsx</i>.
-If you check what is exported from the file, you'll find the type <i>GenderOption</i> and the function components <i>SelectField</i> and <i>TextField</i>.
+If you check what is exported from the file, you'll find the type *GenderOption* and the function components *SelectField* and *TextField*.
 
-Let's take a closer look at <i>SelectField</i> and the types around it.
+Let's take a closer look at *SelectField* and the types around it.
 First, we create a generic type for each option object that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field.
-Since the only options we want to allow are different genders, we set that the <i>value</i> should be of type <i>Gender</i>.
+Since the only options we want to allow are different genders, we set that the *value* should be of type *Gender*.
 
 ```js
 export type GenderOption = {
@@ -1155,7 +1155,7 @@ export type GenderOption = {
 };
 ```
 
-In <i>AddPatientForm.tsx</i>, we use the <i>GenderOption</i> type for the <i>genderOptions</i> variable, declaring it to be an array containing objects of type <i>GenderOption</i>:
+In <i>AddPatientForm.tsx</i>, we use the *GenderOption* type for the *genderOptions* variable, declaring it to be an array containing objects of type *GenderOption*:
 
 ```js
 const genderOptions: GenderOption[] = [
@@ -1165,7 +1165,7 @@ const genderOptions: GenderOption[] = [
 ];
 ```
 
-Next, look at the type <i>SelectFieldProps</i>. It defines the type for the props of our <i>SelectField</i> component. There, you can see that <i>options</i> is an array of <i>GenderOption</i> types.
+Next, look at the type *SelectFieldProps*. It defines the type for the props of our *SelectField* component. There, you can see that *options* is an array of *GenderOption* types.
 
 ```js
 type SelectFieldProps = {
@@ -1175,7 +1175,7 @@ type SelectFieldProps = {
 };
 ```
 
-The function component <i>SelectField</i> in itself looks a bit cryptic but it just renders the label, a select element, and all given option elements (or, actually, their labels and values).
+The function component *SelectField* in itself looks a bit cryptic but it just renders the label, a select element, and all given option elements (or, actually, their labels and values).
 
 ```jsx
 const FormikSelect = ({ field, ...props }: FieldProps) =>
@@ -1201,7 +1201,7 @@ export const SelectField = ({ name, label, options }: SelectFieldProps) => (
 );
 ```
 
-Now let's move on to the <i>TextField</i> component. The component renders a TextFieldMUI that is a [Material UI TextField](https://mui.com/components/text-fields/) with a label:
+Now let's move on to the *TextField* component. The component renders a TextFieldMUI that is a [Material UI TextField](https://mui.com/components/text-fields/) with a label:
 
 ```jsx
 interface TextProps extends FieldProps {
@@ -1228,7 +1228,7 @@ export const TextField = ({ field, label, placeholder }: TextProps) => (
 Note that we use the Formik [ErrorMessage](https://jaredpalmer.com/formik/docs/api/errormessage) component to render an error message for the input when needed. 
 The component does everything under the hood, and we don't need to specify what it should do.
 
-It would also be possible to get hold of the error messages within the component by using the prop <i>form</i>: 
+It would also be possible to get hold of the error messages within the component by using the prop *form*: 
 
 ```jsx
 export const TextField = ({ field, label, placeholder, form }: TextProps) => {
@@ -1238,10 +1238,10 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
 ```
 
 Now, back to the actual form component in <i>AddPatientForm.tsx</i>.
-The function component <i>AddPatientForm</i> renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: <i>initialValues</i> and <i>onSubmit</i>. The role of the props is quite self-explanatory.
+The function component *AddPatientForm* renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: *initialValues* and *onSubmit*. The role of the props is quite self-explanatory.
 The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.
 
-We are also using an optional <i>validate</i> prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component. 
+We are also using an optional *validate* prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component. 
  
 First, have a look at the entire component. We will later discuss the different parts in detail.
 
@@ -1346,10 +1346,10 @@ export default AddPatientForm;
 ```
 
 As a child of our Formik wrapper, we have a <i>function</i> that returns the form contents.
-We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element. Inside the Form element, we use our <i>TextField</i> and <i>SelectField</i> components that we created in <i>FormField.tsx</i>.
+We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element. Inside the Form element, we use our *TextField* and *SelectField* components that we created in <i>FormField.tsx</i>.
 
-Lastly, we create two buttons: one for canceling the form submission and one for submitting the form. The cancel button calls the <i>onCancel</i> callback straight away when clicked. 
-The submit button triggers Formik's onSubmit event, which in turn uses the <i>onSubmit</i> callback from the component's props. The submit button is enabled only if the form is <i>valid</i> and <i>dirty</i>, which means that the user has edited some of the fields.
+Lastly, we create two buttons: one for canceling the form submission and one for submitting the form. The cancel button calls the *onCancel* callback straight away when clicked. 
+The submit button triggers Formik's onSubmit event, which in turn uses the *onSubmit* callback from the component's props. The submit button is enabled only if the form is <i>valid</i> and <i>dirty</i>, which means that the user has edited some of the fields.
 
 We handle form submission through Formik, because it allows us to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is canceled.
 
@@ -1381,7 +1381,7 @@ The buttons are set inside a Material UI [Grid](https://mui.com/components/grid/
 </Grid>
 ```
 
-The <i>onSubmit</i> callback has been passed all the way down from our patient list page.
+The *onSubmit* callback has been passed all the way down from our patient list page.
 It sends an HTTP POST request to our backend, adds the patient returned from the backend to our app's state and closes the modal. 
 If the backend returns an error, the error is displayed on the form.
 
@@ -1433,7 +1433,7 @@ Upon a successful submit, the new entry should be added to the correct patient a
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called _DiagnosisSelection_ that can be used for setting the field <i>diagnoses</i>.
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called _DiagnosisSelection_ that can be used for setting the field *diagnoses*.
 
 It can be used as follows:
 
@@ -1474,7 +1474,7 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 };
 ```
 
-With small tweaks on types, the readily made component <i>SelectField</i> can be used for the health check rating.
+With small tweaks on types, the readily made component *SelectField* can be used for the health check rating.
 
 #### 9.25: Patientor, step10
 
