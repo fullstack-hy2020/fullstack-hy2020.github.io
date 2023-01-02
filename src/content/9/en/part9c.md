@@ -253,7 +253,7 @@ Let's add an npm script for running the application in production mode:
 
 When we run the app with *npm start*, we can verify that the production build also works:
 
-![](../../images/9/15a.png)
+![browser showing pong from localhost:3000/ping](../../images/9/15a.png)
 
 Now we have a minimal working pipeline for developing our project.
 With the help of our compiler and ESlint, it also ensures that good code quality is maintained. With this base, we can start creating an app that we could, later on, deploy into a production environment.
@@ -290,7 +290,7 @@ npm update chokidar
 
 Ensure that the backend answers the ping request that the <i>frontend</i> has made on startup. Check the developer tools to make sure it works:
 
-![](../../images/9/16a.png)
+![dev tools showing ping failed](../../images/9/16a.png)
 
 You might also want to have a look at the <i>console</i> tab. If something fails, [part 3](/en/part3) of the course shows how the problem can be solved.
 
@@ -416,7 +416,7 @@ export default {
 
 But something is not right:
 
-![](../../images/9/17c.png)
+![vscode asking to consider using resolveJsonModule since can't find module](../../images/9/17c.png)
 
 The hint says we might want to use *resolveJsonModule*. Let's add it to our tsconfig:
 
@@ -498,7 +498,7 @@ export default {
 
 But since the JSON already has its values declared, assigning a type for the data set results in an error:
 
-![](../../images/9/19b.png)
+![vscode showing string not assignable to weather error](../../images/9/19b.png)
 
 The end of the error message reveals the problem: the *weather* fields are incompatible. In *DiaryEntry*, we specified that its type is *Weather*, but
 the TypeScript compiler had inferred its type to be *string*.
@@ -756,7 +756,7 @@ const getNonSensitiveEntries = (): DiaryEntry[] => {
 
 we would get the following error:
 
-![](../../images/9/22b.png)
+![vs code error - comment is declared here](../../images/9/22b.png)
 
 Again, the last line of the error message is the most helpful one. Let's undo this undesired modification.
 
@@ -785,7 +785,7 @@ export default router;
 
 The response is what we expect it to be:
 
-![](../../images/9/26.png)
+![browser api/diaries shows three json objects](../../images/9/26.png)
 
 </div>
 
@@ -811,11 +811,11 @@ In this exercise, you may assume that field *gender* has type *string*.
 
 Try the endpoint with your browser and ensure that *ssn* is not included in the response:
 
-![](../../images/9/22g.png)
+![api/patients browser shows no ssn in patients json](../../images/9/22g.png)
 
 After creating the endpoint, ensure that the <i>frontend</i> shows the list of patients:
 
-![](../../images/9/22h.png)
+![browser showing list of patients](../../images/9/22h.png)
 
 </div>
 
@@ -847,7 +847,7 @@ export default {
 
 But once again, a new problem emerges:
 
-![](../../images/9/23e.png)
+![vscode error cant assign undefined to DiaryEntry](../../images/9/23e.png)
 
 The issue is that there is no guarantee that an entry with the specified id can be found.
 It is good that we are made aware of this potential problem already at compile phase. Without TypeScript, we would not be warned about this problem, and in the worst-case scenario, we could have ended up returning an *undefined* object instead of informing the user about the specified entry not being found.
@@ -979,7 +979,7 @@ Now the code looks much cleaner!
 
 There is still a complaint from our code:
 
-![](../../images/9/43.png)
+![vscode error unsafe assignment of any value](../../images/9/43.png)
 
 The cause is the ESlint rule [@typescript-eslint/no-unsafe-assignment](https://github.com/typescript-eslint/typescript-eslint/blob/master/packages/eslint-plugin/docs/rules/no-unsafe-assignment.md) that prevents us from assigning the fields of a request body to variables.
 
@@ -1076,7 +1076,7 @@ Once again, we have a type issue: what is the *object* type? Since the *object* 
 
 However, if we type the object as *any*, ESlint gives us two complaints:
 
-![](../../images/9/44.png)
+![vscode eslint showing object should be typed something non-any and that its defined but never used](../../images/9/44.png)
 
 We could ignore these rules but a better idea is to follow the advice the editor gives in the <i>Quick Fix</i> and set the parameter type to *unknown*:
 
@@ -1134,11 +1134,11 @@ If the type guard function returns true, the TypeScript compiler knows that the 
 
 Before the type guard is called, the actual type of the variable *comment* is not known:
 
-![](../../images/9/28e-21.png)
+![vscode hovering over isString(comment) shows type unknown](../../images/9/28e-21.png)
 
 But after the call, if the code proceeds past the exception (that is, the type guard returned true), then the compiler knows that *comment* is of type *string*:
 
-![](../../images/9/29e-21.png)
+![vscode hovering over return comment shows type string](../../images/9/29e-21.png)
 
 Why do we have two conditions in the string type guard?
 
@@ -1259,7 +1259,7 @@ const parseWeather = (weather: unknown): Weather => {
 
 One issue arises after these changes. Our data in file <i>data/diaries.ts</i> does not conform to our types anymore:
 
-![](../../images/9/30.png)
+![vscode error rainy is not assignable to type Weather](../../images/9/30.png)
 
 This is because we cannot just assume a string is an enum.
 
@@ -1375,7 +1375,7 @@ const toNewDiaryEntry = (object: any): NewDiaryEntry => {
 
 If we now try to create a new diary entry with invalid or missing fields, we are getting an appropriate error message:
 
-![](../../images/9/30b.png)
+![postman showing 400 bad request with incorrect or missing visibility - awsesome](../../images/9/30b.png)
 
 The source code of the application can be found on [GitHub](https://github.com/FullStack-HY/flight-diary).
 
