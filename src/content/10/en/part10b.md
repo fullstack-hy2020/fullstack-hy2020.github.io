@@ -784,7 +784,6 @@ As we can see, implementing the <em>FormikTextInput</em> component that handles 
 
 <div class="tasks">
 
-
 ### Exercise 10.8.
 
 #### Exercise 10.8: the sign-in form
