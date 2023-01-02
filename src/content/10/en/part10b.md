@@ -113,7 +113,7 @@ Once the developer menu is open, simply press "Reload" to reload the application
 
 <div class="tasks">
 
-### Exercise 10.3.
+### Exercise 10.3
 
 #### Exercise 10.3: the reviewed repositories list
 
@@ -472,7 +472,7 @@ Next, read the article [A Complete Guide to Flexbox](https://css-tricks.com/snip
 
 <div class="tasks">
 
-### Exercises 10.4. - 10.5.
+### Exercises 10.4-10.5
 
 #### Exercise 10.4: the app bar
 
@@ -592,7 +592,7 @@ That's it! The last <em>Route</em> inside the <em>Routes</em> is for catching pa
 
 <div class="tasks">
 
-### Exercises 10.6. - 10.7.
+### Exercises 10.6-10.7
 
 #### Exercise 10.6: the sign-in view
 
@@ -784,7 +784,7 @@ As we can see, implementing the <em>FormikTextInput</em> component that handles 
 
 <div class="tasks">
 
-### Exercise 10.8.
+### Exercise 10.8
 
 #### Exercise 10.8: the sign-in form
 
@@ -882,7 +882,7 @@ const FormikTextInput = ({ name, ...props }) => {
 
 <div class="tasks">
 
-### Exercise 10.9.
+### Exercise 10.9
 
 #### Exercise 10.9: validating the sign-in form
 
@@ -964,7 +964,7 @@ Now, the Android bundle of the application will have the component defined in th
 
 <div class="tasks">
 
-### Exercise 10.10.
+### Exercise 10.10
 
 #### Exercise 10.10: a platform-specific font
 
