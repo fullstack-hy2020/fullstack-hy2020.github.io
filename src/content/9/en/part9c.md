@@ -207,7 +207,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Now, if we run the app with *npm run dev*, we can verify that a request to http://localhost:3000/ping gives the response <i>pong</i>, so our configuration is set!
+Now, if we run the app with *npm run dev*, we can verify that a request to <http://localhost:3000/ping> gives the response <i>pong</i>, so our configuration is set!
 
 When starting the app with *npm run dev*, it runs in development mode.
 The development mode is not suitable at all when we later operate the app in production.
@@ -384,7 +384,7 @@ app.listen(PORT, () => {
 });
 ```
 
-And now, if we make an HTTP GET request to http://localhost:3000/api/diaries, we should see the message: *Fetching all diaries!*
+And now, if we make an HTTP GET request to <http://localhost:3000/api/diaries>, we should see the message: *Fetching all diaries!*
 
 Next, we need to start serving the seed data (found [here](https://github.com/fullstack-hy2020/misc/blob/master/diaryentries.json)) from the app. We will fetch the data and save it to <i>data/diaries.json</i>.
 
