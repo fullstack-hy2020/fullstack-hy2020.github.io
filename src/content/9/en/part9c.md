@@ -264,7 +264,7 @@ With the help of our compiler and ESlint, it also ensures that good code quality
 
 ### Exercises 9.8.-9.9
 
-**Before you start the exercises**
+#### Before you start the exercises
 
 For this set of exercises, you will be developing a backend for an existing project called **Patientor**, which is a simple medical record application for doctors who handle diagnoses and basic health information of their patients.
 
