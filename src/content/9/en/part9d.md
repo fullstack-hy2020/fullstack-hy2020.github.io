@@ -196,7 +196,7 @@ const element = <Welcome name="Sara" />;
 ReactDOM.render(element, document.getElementById("root"));
 ```
 
-We defined a new type, _WelcomeProps_, and passed it to the function's parameter types.
+We defined a new type, *WelcomeProps*, and passed it to the function's parameter types.
 
 ```jsx
 const Welcome = (props: WelcomeProps) => {
@@ -400,7 +400,7 @@ interface CoursePartThree extends CoursePartBase {
 
 How should we now use these types in our components?
 
-One handy way to use these kinds of types in TypeScript is by using _switch case_ expressions. Once you have either explicitly declared or TypeScript has inferred that a variable is of type union and that each type in the type union contains a certain attribute, 
+One handy way to use these kinds of types in TypeScript is by using *switch case* expressions. Once you have either explicitly declared or TypeScript has inferred that a variable is of type union and that each type in the type union contains a certain attribute,
 we can use that as a type identifier.
 We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block.
 
@@ -1041,7 +1041,7 @@ export type Entry =
   | HealthCheckEntry;
 ```
 
-An important point concerning unions is that, when you use them with _Omit_ to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the _id_ from each _Entry_. We could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
+An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
 
 ```ts
 // Define special omit for unions
@@ -1086,7 +1086,7 @@ Extend the entry listing on the patient's page to include the Entry's details wi
 
 You could use eg. [Icons](https://mui.com/components/material-icons/) or some other [Material UI](https://mui.com/) component to get appropriate visuals for your listing.
 
-You should use a _switch case_-based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten. 
+You should use a *switch case*-based rendering and <i>exhaustive type checking</i> so that no cases can be forgotten.
 
 Like this:
 
@@ -1432,7 +1432,7 @@ Upon a successful submit, the new entry should be added to the correct patient a
 
 If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called _DiagnosisSelection_ that can be used for setting the field *diagnoses*.
+Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called *DiagnosisSelection* that can be used for setting the field *diagnoses*.
 
 It can be used as follows:
 
@@ -1485,7 +1485,7 @@ Extend your solution so that it supports <i>two</i> entry types and displays an 
 
 The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. Getting the types to work properly might be a slight challenge if you use just a single form.
 
-Note that if you need to alter the shown form based on user selections, you can access the form values using the parameter _values_ of the rendering function:
+Note that if you need to alter the shown form based on user selections, you can access the form values using the parameter *values* of the rendering function:
 
 ```js
 <Formik
