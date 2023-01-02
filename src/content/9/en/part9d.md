@@ -405,11 +405,11 @@ One handy way to use these kinds of types in TypeScript is by using *switch case
 we can use that as a type identifier.
 We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block.
 
-![](../../images/9/32.png)
+![vscode showing attributes with dot usage on part](../../images/9/32.png)
 
 In the above example, TypeScript knows that a *part* has the type *CoursePart*. It can then infer that *part* is of either type *CoursePartOne*, *CoursePartTwo* or *CoursePartThree*.
 The *name* is distinct for each type, so we can use it to identify each type and TypeScript can let us know which attributes are available in each case block.
-Then, TypeScript will produce an error if you try to use the *part.description* within the *"Using props to pass data"* block for examp*
+Then, TypeScript will produce an error if you try to use the *part.description* within the *"Using props to pass data"* block for example.
 
 What about adding new types? If we were to add a new course part, wouldn't it be nice to know if we had already implemented handling that type in our code?
 In the example above, a new type would go to the *default* block and nothing would get printed for a new type.
@@ -439,7 +439,7 @@ default:
 
 and would also comment out the *Deeper type usage* case block, we would see the following error:
 
-![](../../images/9/33.png)
+![vscode error coursepart three not assignable to type never](../../images/9/33.png)
 
 The error message says that *Argument of type 'CoursePartThree' is not assignable to parameter of type 'never'*, which tells us that we are using a variable somewhere where it should never be used. This tells us that something needs to be fixed.
 When we remove the comments from the *Deeper type usage* case block, you will see that the error goes away.
@@ -532,7 +532,7 @@ Then add that interface to the type union *CoursePart* and add corresponding dat
 
 The result might look like the following:
 
-![](../../images/9/45.png)
+![browser showing half stack application development](../../images/9/45.png)
 
 </div>
 
@@ -608,7 +608,7 @@ For example, the frontend has a state and may want to keep data in objects or ma
 
 The folder structure looks as follows:
 
-![](../../images/9/34a.png)
+![vscode folder structure for patientor](../../images/9/34a.png)
 
 As you would expect, there are currently two main components: *AddPatientModal* and *PatientListPage*. The <i>state</i> folder contains state handling for the frontend.
 The main functionality of the code in the <i>state</i> folder is to keep our data in one place and offer simple actions to alter the state of our app.
@@ -879,7 +879,7 @@ export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;  // highlight-line
 
 The response should look as follows:
 
-![](../../images/9/38a.png)
+![browser showing entries blank array when accessing patient](../../images/9/38a.png)
 
 #### 9.17: patientor, step2
 
@@ -897,7 +897,7 @@ The Application also uses [React Router](https://reactrouter.com/en/main/start/t
 
 The result could look like this:
 
-![](../../images/9/39x.png)
+![browser showing patientor with one patient](../../images/9/39x.png)
 
 Example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.
 
@@ -1012,7 +1012,7 @@ interface BaseEntry {
 }
 ```
 
-As you might remember, `Array<Type>` is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying *Diagnosis['code'][]* which starts to look a bit strange.
+As you might remember, `Array<Type>` is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying `Diagnosis['code'][]` which starts to look a bit strange.
 
 Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 
@@ -1061,7 +1061,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
-![](../../images/9/40.png)
+![browser shoiwing entries json data properly for patient](../../images/9/40.png)
 
 Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field *type* has a correct value.
 
@@ -1073,13 +1073,13 @@ You can use the same type definition for an *Entry* in the frontend. For these e
 
 Your solution could look like this:
 
-![](../../images/9/41.png)
+![browser showing list of diagnosis codes for patient](../../images/9/41.png)
 
 #### 9.21: Patientor, step6
 
 Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
-![](../../images/9/42.png)
+![browser showing list of codes and their descriptions for patient ](../../images/9/42.png)
 
 #### 9.22: Patientor, step7
 
@@ -1091,11 +1091,11 @@ You should use a *switch case*-based rendering and <i>exhaustive type checking</
 
 Like this:
 
-![](../../images/9/35c.png)
+![vscode showing error for healthCheckEntry not being assignable to type never](../../images/9/35c.png)
 
 The resulting entries in the listing <i>could</i> look something like this:
 
-![](../../images/9/36x.png)
+![browser showing list of entries and their details in a nicer format](../../images/9/36x.png)
 
 </div>
 
