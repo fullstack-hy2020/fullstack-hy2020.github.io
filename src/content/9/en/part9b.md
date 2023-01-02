@@ -24,7 +24,7 @@ Let's start writing our first TypeScript app. To keep things simple, let's start
 
 You can install both <i>ts-node</i> and the official <i>typescript</i> package globally by running:
 
-```
+```bash
 npm install -g ts-node typescript
 ```
 
@@ -33,7 +33,7 @@ We will also take this approach.
 
 As we recall from [part 3](/en/part3), an npm project is set by running the command *npm init* in an empty directory. Then we can install the dependencies by running
 
-```
+```bash
 npm install --save-dev ts-node typescript
 ```
 
@@ -552,7 +552,7 @@ However, since we aim to learn FullStack development, it is time to start workin
 
 Let us start by installing Express:
 
-```
+```bash
 npm install express
 ```
 
@@ -608,7 +608,7 @@ Once again, the editor is our best friend when trying to find out what the issue
 We haven't installed types for <i>express</i>.
 Let's do what the suggestion says and run:
 
-```
+```bash
 npm install --save-dev @types/express
 ```
 
@@ -665,7 +665,7 @@ To simplify the development, we should enable <i>auto-reloading</i> to improve o
 
 Let's install *ts-node-dev* to our development dependencies:
 
-```
+```bash
 npm install --save-dev ts-node-dev
 ```
 
