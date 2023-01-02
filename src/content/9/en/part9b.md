@@ -120,12 +120,12 @@ multiplicator('how about a string?', 4, 'Multiplied a string and 4, the result i
 
 Now the code is no longer valid JavaScript but in fact TypeScript. When we try to run the code, we notice that it does not compile:
 
-![](../../images/9/2a.png)
+![terminal output showing error assigning string to number](../../images/9/2a.png)
 
 One of the best things about TypeScript's editor support is that you don't necessarily need to even run the code to see the issues.
 The VSCode plugin is so efficient, that it informs you immediately when you are trying to use an incorrect type:
 
-![](../../images/9/2.png)
+![vscode showing same error about string as number](../../images/9/2.png)
 
 ### Creating your first own types
 
@@ -164,11 +164,11 @@ const calculator = (a: number, b: number, op: Operation) => {
 
 Now, when we hover on top of the *Operation* type in the calculator function, we can immediately see suggestions on what to do with it:
 
-![](../../images/9/3.png)
+![vs code suggestion operation 3 types](../../images/9/3.png)
 
 And if we try to use a value that is not within the *Operation* type, we get the familiar red warning signal and extra info from our editor:
 
-![](../../images/9/4x.png)
+![vscode warning when trying to have 'yolo' as Operation](../../images/9/4x.png)
 
 This is already pretty nice, but one thing we haven't touched yet is typing the return value of a function. Usually, you want to know what a function returns, and it would be nice to have a guarantee that it returns what it says it does. Let's add a return value *number* to the calculator function:
 
@@ -590,7 +590,7 @@ app.listen(PORT, () => {
 
 Everything else seems to be working just fine but, as you'd expect, the *req* and *res* parameters of *app.get* need typing. If you look carefully, VSCode is also complaining about the importing of Express. You can see a short yellow line of dots under the *require*. Let's hover over the problem:
 
-![](../../images/9/6.png)
+![vscode warning to change require to import](../../images/9/6.png)
 
 The complaint is that the *'require' call may be converted to an import*. Let us follow the advice and write the import as follows:
 
@@ -603,7 +603,7 @@ import express from 'express';
 Now we run into another problem, the compiler complains about the import statement.
 Once again, the editor is our best friend when trying to find out what the issue is:
 
-![](../../images/9/7.png)
+![vscode error about not finding express](../../images/9/7.png)
 
 We haven't installed types for <i>express</i>.
 Let's do what the suggestion says and run:
@@ -616,11 +616,11 @@ And no more errors! Let's take a look at what changed.
 
 When we hover over the *require* statement, we can see the compiler interprets everything express-related to be of type *any*.
 
-![](../../images/9/8a.png)
+![vscode showing problem of implicitly having any type](../../images/9/8a.png)
 
 Whereas when we use *import*, the editor knows the actual types:
 
-![](../../images/9/9x.png)
+![vscode showing req is of type Request](../../images/9/9x.png)
 
 Which import statement to use depends on the export method used in the imported package.
 
@@ -631,7 +631,7 @@ We strongly suggest you read more about TypeScript modules [here](https://www.ty
 
 There is one more problem with the code:
 
-![](../../images/9/9b.png)
+![vscode showing req declared but never read](../../images/9/9b.png)
 
 This is because we banned unused parameters in our <i>tsconfig.json</i>:
 
@@ -653,13 +653,13 @@ This configuration might create problems if you have library-wide predefined fun
 Fortunately, this issue has already been solved on the configuration level.
 Once again hovering over the issue gives us a solution. This time we can just click the quick fix button:
 
-![](../../images/9/14a.png)
+![vscode quickfix to add underscore to variable](../../images/9/14a.png)
 
 If it is absolutely impossible to get rid of an unused variable, you can prefix it with an underscore to inform the compiler you have thought about it and there is nothing you can do.
 
 Let's rename the *req* variable to *_req*. Finally, we are ready to start the application. It seems to work fine:
 
-![](../../images/9/11a.png)
+![browser result showing pong on /ping](../../images/9/11a.png)
 
 To simplify the development, we should enable <i>auto-reloading</i> to improve our workflow. In this course, you have already used <i>nodemon</i>, but ts-node has an alternative called <i>ts-node-dev</i>. It is meant to be used only with a development environment that takes care of recompilation on every change, so restarting the application won't be necessary.
 
@@ -770,11 +770,11 @@ app.post('/calculate', (req, res) => {
 
 When you hover over the *calculate* function, you can see the typing of the *calculator* even though the code itself does not contain any typings:
 
-![](../../images/9/12a21.png)
+![vscode showing calculator types when mouse over function](../../images/9/12a21.png)
 
 But if you hover over the values parsed from the request, an issue arises:
 
-![](../../images/9/13a21.png)
+![vscode problematically showing any when hovering over values parsed in to calculate](../../images/9/13a21.png)
 
 All of the variables have the type *any*. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but first, we have to consider why this is accepted and where the type *any* came from.
 
@@ -839,7 +839,7 @@ Let us also set up a *lint* npm script to inspect the files with <i>.ts</i> exte
 
 Now lint will complain if we try to define a variable of type *any*:
 
-![](../../images/9/13b.png)
+![vscode showing ESlint complaining about using the any type](../../images/9/13b.png)
 
 [@typescript-eslint](https://github.com/typescript-eslint/typescript-eslint) has a lot of TypeScript-specific ESlint rules, but you can also use all basic ESlint rules in TypeScript projects.
 For now, we should probably go with the recommended settings, and we will modify the rules as we go along whenever we find something we want to change the behavior of.
@@ -901,7 +901,7 @@ app.post('/calculate', (req, res) => {
 
 However this still leaves one problem to deal with, the last parameter in the function call is not safe:
 
-![](../../images/9/51x.png)
+![vscode showing unsafe argument of any type assigned to parameter of type Operation](../../images/9/51x.png)
 
 We can just disable another ESlint rule to get rid of that:
 
