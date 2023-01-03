@@ -16,10 +16,7 @@ const NotFoundPage = () => {
 
   return (
     <Layout>
-      <SEO
-        title={`${title} | Full stack open`}
-        lang={siteLanguage}
-      />
+      <SEO title={`${title} | Full stack open`} lang={siteLanguage} />
 
       <Element className="container spacing--large spacing--after">
         <h1>404 - {title}</h1>
