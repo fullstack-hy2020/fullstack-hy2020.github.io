@@ -7,27 +7,39 @@ lang: en
 
 <div class="content">
 
-We want to add user authentication and authorization to our application. Users should be stored in the database and every note should be linked to the user who created it. Deleting and editing a note should only be allowed for the user who created it.
+We want to add user authentication and authorization to our application.
+Users should be stored in the database and every note should be linked to the user who created it.
+Deleting and editing a note should only be allowed for the user who created it.
 
-Let's start by adding information about users to the database. There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):
+Let's start by adding information about users to the database.
+There is a one-to-many relationship between the user (<i>User</i>) and notes (<i>Note</i>):
 
 ![diagram linking user and notes](https://yuml.me/a187045b.png)
 
-If we were working with a relational database the implementation would be straightforward. Both resources would have their separate database tables, and the id of the user who created a note would be stored in the notes table as a foreign key.
+If we were working with a relational database the implementation would be straightforward.
+Both resources would have their separate database tables, and the id of the user who created a note would be stored in the notes table as a foreign key.
 
 When working with document databases the situation is a bit different, as there are many different ways of modeling the situation.
 
-The existing solution saves every note in the <i>notes collection</i> in the database. If we do not want to change this existing collection, then the natural choice is to save users in their own collection,  <i>users</i> for example.
+The existing solution saves every note in the <i>notes collection</i> in the database.
+If we do not want to change this existing collection, then the natural choice is to save users in their own collection,  <i>users</i> for example.
 
-Like with all document databases, we can use object IDs in Mongo to reference documents in other collections. This is similar to using foreign keys in relational databases.
+Like with all document databases, we can use object IDs in Mongo to reference documents in other collections.
+This is similar to using foreign keys in relational databases.
 
-Traditionally document databases like Mongo do not support <i>join queries</i> that are available in relational databases,  used for aggregating data from multiple tables. However, starting from version 3.2. Mongo has supported [lookup aggregation queries](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/). We will not be taking a look at this functionality in this course.
+Traditionally document databases like Mongo do not support <i>join queries</i> that are available in relational databases,  used for aggregating data from multiple tables.
+However, starting from version 3.2.
+Mongo has supported [lookup aggregation queries](https://docs.mongodb.com/manual/reference/operator/aggregation/lookup/).
+We will not be taking a look at this functionality in this course.
 
-If we need functionality similar to join queries, we will implement it in our application code by making multiple queries. In certain situations, Mongoose can take care of joining and aggregating data, which gives the appearance of a join query. However, even in these situations, Mongoose makes multiple queries to the database in the background.
+If we need functionality similar to join queries, we will implement it in our application code by making multiple queries.
+In certain situations, Mongoose can take care of joining and aggregating data, which gives the appearance of a join query.
+However, even in these situations, Mongoose makes multiple queries to the database in the background.
 
 ### References across collections
 
-If we were using a relational database the note would contain a <i>reference key</i> to the user who created it. In document databases, we can do the same thing.
+If we were using a relational database the note would contain a <i>reference key</i> to the user who created it.
+In document databases, we can do the same thing.
 
 Let's assume that the <i>users</i> collection contains two users:
 
@@ -122,13 +134,17 @@ Document databases also offer a radically different way of organizing the data: 
 
 In this schema, notes would be tightly nested under users and the database would not generate ids for them.
 
-The structure and schema of the database are not as self-evident as it was with relational databases. The chosen schema must support the use cases of the application the best. This is not a simple design decision to make, as all use cases of the applications are not known when the design decision is made.
+The structure and schema of the database are not as self-evident as it was with relational databases.
+The chosen schema must support the use cases of the application the best.
+This is not a simple design decision to make, as all use cases of the applications are not known when the design decision is made.
 
-Paradoxically, schema-less databases like Mongo require developers to make far more radical design decisions about data organization at the beginning of the project than relational databases with schemas. On average, relational databases offer a more or less suitable way of organizing data for many applications.
+Paradoxically, schema-less databases like Mongo require developers to make far more radical design decisions about data organization at the beginning of the project than relational databases with schemas.
+On average, relational databases offer a more or less suitable way of organizing data for many applications.
 
 ### Mongoose schema for users
 
-In this case, we decide to store the ids of the notes created by the user in the user document. Let's define the model for representing a user in the <i>models/user.js</i> file:
+In this case, we decide to store the ids of the notes created by the user in the user document.
+Let's define the model for representing a user in the <i>models/user.js</i> file:
 
 ```js
 const mongoose = require('mongoose')
@@ -160,7 +176,8 @@ const User = mongoose.model('User', userSchema)
 module.exports = User
 ```
 
-The ids of the notes are stored within the user document as an array of Mongo ids. The definition is as follows:
+The ids of the notes are stored within the user document as an array of Mongo ids.
+The definition is as follows:
 
 ```js
 {
@@ -169,7 +186,8 @@ The ids of the notes are stored within the user document as an array of Mongo id
 }
 ```
 
-The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents. Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
+The type of the field is <i>ObjectId</i> that references <i>note</i>-style documents.
+Mongo does not inherently know that this is a field that references notes, the syntax is purely related to and defined by Mongoose.
 
 Let's expand the schema of the note defined in the <i>models/note.js</i> file so that the note contains information about the user who created it:
 
@@ -195,7 +213,10 @@ In stark contrast to the conventions of relational databases, <i>references are 
 
 ### Creating users
 
-Let's implement a route for creating new users. Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>. The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password. It is never wise to store unencrypted plain text passwords in the database!
+Let's implement a route for creating new users.
+Users have a unique <i>username</i>, a <i>name</i> and something called a <i>passwordHash</i>.
+The password hash is the output of a [one-way hash function](https://en.wikipedia.org/wiki/Cryptographic_hash_function) applied to the user's password.
+It is never wise to store unencrypted plain text passwords in the database!
 
 Let's install the [bcrypt](https://github.com/kelektiv/node.bcrypt.js) package for generating the password hashes:
 
@@ -205,7 +226,8 @@ npm install bcrypt
 
 Creating new users happens in compliance with the RESTful conventions discussed in [part 3](/en/part3/node_js_and_express#rest), by making an HTTP POST request to the <i>users</i> path.
 
-Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file. Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
+Let's define a separate <i>router</i> for dealing with users in a new <i>controllers/users.js</i> file.
+Let's take the router into use in our application in the <i>app.js</i> file, so that it handles requests made to the <i>/api/users</i> url:
 
 ```js
 const usersRouter = require('./controllers/users')
@@ -242,13 +264,16 @@ usersRouter.post('/', async (request, response) => {
 module.exports = usersRouter
 ```
 
-The password sent in the request is <i>not</i> stored in the database. We store the <i>hash</i> of the password that is generated with the *bcrypt.hash* function.
+The password sent in the request is <i>not</i> stored in the database.
+We store the <i>hash</i> of the password that is generated with the *bcrypt.hash* function.
 
-The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material. We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
+The fundamentals of [storing passwords](https://codahale.com/how-to-safely-store-a-password/) are outside the scope of this course material.
+We will not discuss what the magic number 10 assigned to the [saltRounds](https://github.com/kelektiv/node.bcrypt.js/#a-note-on-rounds) variable means, but you can read more about it in the linked material.
 
 Our current code does not contain any error handling or input validation for verifying that the username and password are in the desired format.
 
-The new feature can and should initially be tested manually with a tool like Postman. However testing things manually will quickly become too cumbersome, especially once we implement functionality that enforces usernames to be unique.
+The new feature can and should initially be tested manually with a tool like Postman.
+However testing things manually will quickly become too cumbersome, especially once we implement functionality that enforces usernames to be unique.
 
 It takes much less effort to write automated tests, and it will make the development of our application much easier.
 
@@ -294,7 +319,8 @@ describe('when there is initially one user in db', () => {
 })
 ```
 
-The tests use the <i>usersInDb()</i> helper function that we implemented in the <i>tests/test_helper.js</i> file. The function is used to help us verify the state of the database after a user is created:
+The tests use the <i>usersInDb()</i> helper function that we implemented in the <i>tests/test_helper.js</i> file.
+The function is used to help us verify the state of the database after a user is created:
 
 ```js
 const User = require('../models/user')
@@ -314,7 +340,8 @@ module.exports = {
 }
 ```
 
-The <i>beforeEach</i> block adds a user with the username <i>root</i> to the database. We can write a new test that verifies that a new user with the same username can not be created:
+The <i>beforeEach</i> block adds a user with the username <i>root</i> to the database.
+We can write a new test that verifies that a new user with the same username can not be created:
 
 ```js
 describe('when there is initially one user in db', () => {
@@ -343,9 +370,11 @@ describe('when there is initially one user in db', () => {
 })
 ```
 
-The test case obviously will not pass at this point. We are essentially practicing [test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), where tests for new functionality are written before the functionality is implemented.
+The test case obviously will not pass at this point.
+We are essentially practicing [test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), where tests for new functionality are written before the functionality is implemented.
 
-Mongoose does not have a built-in validator for checking the uniqueness of a field. In principle we could find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package but unfortunately at the time of writing (24th Jan 2022)
+Mongoose does not have a built-in validator for checking the uniqueness of a field.
+In principle we could find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package but unfortunately at the time of writing (24th Jan 2022)
 mongoose-unique-validator does not work with Mongoose version 6.x, so we have to implement the uniqueness check by ourselves in the controller:
 
 ```js
@@ -376,7 +405,9 @@ usersRouter.post('/', async (request, response) => {
 })
 ```
 
-We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.
+We could also implement other validations into the user creation.
+We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough.
+Implementing these functionalities is left as an optional exercise.
 
 Before we move onward, let's add an initial implementation of a route handler that returns all of the users in the database:
 
@@ -435,7 +466,8 @@ notesRouter.post('/', async (request, response, next) => {
 })
 ```
 
-It's worth noting that the <i>user</i> object also changes. The <i>id</i> of the note is stored in the <i>notes</i> field:
+It's worth noting that the <i>user</i> object also changes.
+The <i>id</i> of the note is stored in the <i>notes</i> field:
 
 ```js
 const user = await User.findById(body.userId)
@@ -450,7 +482,8 @@ Let's try to create a new note
 
 ![Postman creating a new note](../../images/4/10e.png)
 
-The operation appears to work. Let's add one more note and then visit the route for fetching all users:
+The operation appears to work.
+Let's add one more note and then visit the route for fetching all users:
 
 ![api/users returns JSON with users and their array of notes](../../images/4/11e.png)
 
@@ -462,11 +495,15 @@ Likewise, the ids of the users who created the notes can be seen when we visit t
 
 ### Populate
 
-We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes and not just their id. In a relational database, this functionality would be implemented with a <i>join query</i>.
+We would like our API to work in such a way, that when an HTTP GET request is made to the <i>/api/users</i> route, the user objects would also contain the contents of the user's notes and not just their id.
+In a relational database, this functionality would be implemented with a <i>join query</i>.
 
-As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us. Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made. With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
+As previously mentioned, document databases do not properly support join queries between collections, but the Mongoose library can do some of these joins for us.
+Mongoose accomplishes the join by doing multiple queries, which is different from join queries in relational databases which are <i>transactional</i>, meaning that the state of the database does not change during the time that the query is made.
+With join queries in Mongoose, nothing can guarantee that the state between the collections being joined is consistent, meaning that if we make a query that joins the user and notes collections, the state of the collections may change during the query.
 
-The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method. Let's update the route that returns all users first:
+The Mongoose join is done with the [populate](http://mongoosejs.com/docs/populate.html) method.
+Let's update the route that returns all users first:
 
 ```js
 usersRouter.get('/', async (request, response) => {
@@ -477,13 +514,15 @@ usersRouter.get('/', async (request, response) => {
 })
 ```
 
-The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query. The parameter given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
+The [populate](http://mongoosejs.com/docs/populate.html) method is chained after the <i>find</i> method making the initial query.
+The parameter given to the populate method defines that the <i>ids</i> referencing <i>note</i> objects in the <i>notes</i> field of the <i>user</i> document will be replaced by the referenced <i>note</i> documents.
 
 The result is almost exactly what we wanted:
 
 ![JSON data showing populated notes and users data with repetition](../../images/4/13ea.png)
 
-We can use the populate parameter for choosing the fields we want to include from the documents. The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
+We can use the populate parameter for choosing the fields we want to include from the documents.
+The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
 ```js
 usersRouter.get('/', async (request, response) => {

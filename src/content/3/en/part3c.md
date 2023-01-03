@@ -11,23 +11,32 @@ Before we move into the main topic of persisting data in a database, we will tak
 
 ### Debugging Node applications
 
-Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. Some people think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open-source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
+Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser.
+Printing to the console is a tried and true method, and it's always worth doing.
+Some people think that more sophisticated methods should be used instead, but I disagree.
+Even the world's elite open-source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
 
 #### Visual Studio Code
 
-The Visual Studio Code debugger can be useful in some situations. You can launch the application in debugging mode like this:
+The Visual Studio Code debugger can be useful in some situations.
+You can launch the application in debugging mode like this:
 
 ![screenshot showing how to launch debugger in vscode](../../images/3/35x.png)
 
 Note that the application shouldn't be running in another console, otherwise the port will already be in use.
 
-**NB** A newer version of Visual Studio Code may have *Run* instead of *Debug*. Furthermore, you may have to configure your *launch.json* file to start debugging. This can be done by choosing *Add Configuration...* on the drop-down menu, which is located next to the green play button and above *VARIABLES* menu, and select *Run "npm start" in a debug terminal*. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).
+**NB** A newer version of Visual Studio Code may have *Run* instead of *Debug*.
+Furthermore, you may have to configure your *launch.json* file to start debugging.
+This can be done by choosing *Add Configuration...* on the drop-down menu, which is located next to the green play button and above *VARIABLES* menu, and select *Run "npm start" in a debug terminal*.
+For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).
 
 Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
 
 ![vscode screenshot of execution at a breakpoint](../../images/3/36x.png)
 
-The execution stopped at the <i>breakpoint</i> in line 69. In the console, you can see the value of the <i>note</i> variable. In the top left window, you can see other things related to the state of the application.
+The execution stopped at the <i>breakpoint</i> in line 69.
+In the console, you can see the value of the <i>note</i> variable.
+In the top left window, you can see other things related to the state of the application.
 
 The arrows at the top can be used for controlling the flow of the debugger.
 
@@ -45,37 +54,52 @@ You can access the debugger by clicking the green icon - the node logo - that ap
 
 ![dev tools with green node logo icon](../../images/3/37.png)
 
-The debugging view works the same way as it did with React applications. The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
+The debugging view works the same way as it did with React applications.
+The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
 
 ![dev tools sources tab breakpoint and watch variables](../../images/3/38eb.png)
 
-All of the application's <i>console.log</i> messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
+All of the application's <i>console.log</i> messages will appear in the <i>Console</i> tab of the debugger.
+You can also inspect values of variables and execute your own JavaScript code.
 
 ![dev tools console tab showing note object typed in](../../images/3/39ea.png)
 
 #### Question everything
 
-Debugging Full Stack applications may seem tricky at first. Soon our application will also have a database in addition to the frontend and backend, and there will be many potential areas for bugs in the application.
+Debugging Full Stack applications may seem tricky at first.
+Soon our application will also have a database in addition to the frontend and backend, and there will be many potential areas for bugs in the application.
 
-When the application "does not work", we have to first figure out where the problem actually occurs. It's very common for the problem to exist in a place where you didn't expect it to, and it can take minutes, hours, or even days before you find the source of the problem.
+When the application "does not work", we have to first figure out where the problem actually occurs.
+It's very common for the problem to exist in a place where you didn't expect it to, and it can take minutes, hours, or even days before you find the source of the problem.
 
-The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one. Logging to the console, Postman, debuggers, and experience will help.
+The key is to be systematic.
+Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one.
+Logging to the console, Postman, debuggers, and experience will help.
 
-When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have even more bugs, and debugging them will be even more difficult. The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) principle from Toyota Production Systems is very effective in this situation as well.
+When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code.
+It will guarantee that your code will soon have even more bugs, and debugging them will be even more difficult.
+The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) principle from Toyota Production Systems is very effective in this situation as well.
 
 ### MongoDB
 
-To store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
+To store our saved notes indefinitely, we need a database.
+Most of the courses taught at the University of Helsinki use relational databases.
+In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
 
-The reason for using Mongo as the database is its lower complexity compared to a relational database. [Part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
+The reason for using Mongo as the database is its lower complexity compared to a relational database.
+[Part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
 
-Document databases differ from relational databases in how they organize data as well as in the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
+Document databases differ from relational databases in how they organize data as well as in the query languages they support.
+Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
 
-You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately, the material is currently only available in Finnish.
+You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course.
+Unfortunately, the material is currently only available in Finnish.
 
 Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea of how a document database stores data.
 
-Naturally, you can install and run MongoDB on your computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/atlas/database).
+Naturally, you can install and run MongoDB on your computer.
+However, the internet is also full of Mongo database services that you can use.
+Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
 Once you've created and logged into your account, let us start by selecting the free option:
 
@@ -85,19 +109,24 @@ Pick the cloud provider and location and create the cluster:
 
 ![mongodb picking shared, aws and region](../../images/3/mongo2.png)
 
-Let's wait for the cluster to be ready for use. This can take some minutes.
+Let's wait for the cluster to be ready for use.
+This can take some minutes.
 
 **NB** do not continue before the cluster is ready.
 
-Let's use the <i>security</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database.
+Let's use the <i>security</i> tab for creating user credentials for the database.
+Please note that these are not the same credentials you use for logging into MongoDB Atlas.
+These will be used for your application to connect to the database.
 
 ![mongodb security quickstart](../../images/3/mongo3.png)
 
-Next, we have to define the IP addresses that are allowed access to the database. For the sake of simplicity we will allow access from all IP addresses:
+Next, we have to define the IP addresses that are allowed access to the database.
+For the sake of simplicity we will allow access from all IP addresses:
 
 ![mongodb network access/add ip access list](../../images/3/mongo4.png)
 
-Finally, we are ready to connect to our database. Start by clicking <i>connect</i>:
+Finally, we are ready to connect to our database.
+Start by clicking <i>connect</i>:
 
 ![mongodb database deployment connect](../../images/3/mongo5.png)
 
@@ -115,7 +144,8 @@ mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/myFirstDatabase?r
 
 We are now ready to use the database.
 
-We could use the database directly from our JavaScript code with the [official MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) library, but it is quite cumbersome to use. We will instead use the [Mongoose](http://mongoosejs.com/index.html) library that offers a higher-level API.
+We could use the database directly from our JavaScript code with the [official MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) library, but it is quite cumbersome to use.
+We will instead use the [Mongoose](http://mongoosejs.com/index.html) library that offers a higher-level API.
 
 Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with this library.
 
@@ -125,7 +155,8 @@ Let's install Mongoose:
 npm install mongoose
 ```
 
-Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
+Let's not add any code dealing with Mongo to our backend just yet.
+Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -167,9 +198,11 @@ mongoose
   .catch((err) => console.log(err))
 ```
 
-**NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
+**NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above.
+You should verify and use the correct URI that was generated from MongoDB Atlas.
 
-The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter. We can access the command line parameter like this:
+The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter.
+We can access the command line parameter like this:
 
 ```js
 const password = process.argv[2]
@@ -177,7 +210,8 @@ const password = process.argv[2]
 
 When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database.
 
-**NB:** Please note the password is the password created for the database user, not your MongoDB Atlas password.  Also, if you created a password with special characters, then you'll need to [URL encode that password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
+**NB:** Please note the password is the password created for the database user, not your MongoDB Atlas password.
+Also, if you created a password with special characters, then you'll need to [URL encode that password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
 
 We can view the current state of the database from the MongoDB Atlas from <i>Browse collections</i>, in the Database tab.
 
@@ -197,7 +231,9 @@ Let's run our code again:
 
 ![mongodb collections tab noteApp notes](../../images/3/mongo9.png)
 
-The data is now stored in the right database. The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website. Creating a database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet.
+The data is now stored in the right database.
+The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website.
+Creating a database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet.
 
 ### Schema
 
@@ -213,11 +249,14 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-First, we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the *noteSchema* variable. The schema tells Mongoose how the note objects are to be stored in the database.
+First, we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the *noteSchema* variable.
+The schema tells Mongoose how the note objects are to be stored in the database.
 
-In the *Note* model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercase plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
+In the *Note* model definition, the first <i>"Note"</i> parameter is the singular name of the model.
+The name of the collection will be the lowercase plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
 
-Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
+Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database.
+It is possible to store documents with completely different fields in the same collection.
 
 The idea behind Mongoose is that the data stored in the database is given a <i>schema at the level of the application</i> that defines the shape of the documents stored in any given collection.
 
@@ -233,7 +272,8 @@ const note = new Note({
 })
 ```
 
-Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.
+Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters.
+Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.
 
 Saving the object to the database happens with the appropriately named *save* method, which can be provided with an event handler with the *then* method:
 
@@ -244,13 +284,18 @@ note.save().then(result => {
 })
 ```
 
-When the object is saved to the database, the event handler provided to *then*  gets called. The event handler closes the database connection with the command <code>mongoose.connection.close()</code>. If the connection is not closed, the program will never finish its execution.
+When the object is saved to the database, the event handler provided to *then*  gets called.
+The event handler closes the database connection with the command <code>mongoose.connection.close()</code>.
+If the connection is not closed, the program will never finish its execution.
 
-The result of the save operation is in the *result* parameter of the event handler. The result is not that interesting when we're storing one object in the database. You can print the object to the console if you want to take a closer look at it while implementing your application or during debugging.
+The result of the save operation is in the *result* parameter of the event handler.
+The result is not that interesting when we're storing one object in the database.
+You can print the object to the console if you want to take a closer look at it while implementing your application or during debugging.
 
 Let's also save a few more notes by modifying the data in the code and by executing the program again.
 
-**NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy and paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended.
+**NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy and paste code directly from there.
+Mixing promises with old-school callbacks in the same code is not recommended.
 
 ### Fetching objects from the database
 
@@ -269,7 +314,9 @@ When the code is executed, the program prints all the notes stored in the databa
 
 ![node mongo.js outputs notes as JSON](../../images/3/70ea.png)
 
-The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the *Note* model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  *notes* collection.
+The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the *Note* model.
+The parameter of the method is an object expressing search conditions.
+Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  *notes* collection.
 
 The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
 
@@ -295,7 +342,8 @@ Create a <i>mongo.js</i> file in the project directory, that can be used for add
 
 **NB:** Do not include the password in the file that you commit and push to GitHub!
 
-The application should work as follows. You use the program by passing three command-line arguments (the first is the password), e.g.:
+The application should work as follows.
+You use the program by passing three command-line arguments (the first is the password), e.g.:
 
 ```bash
 node mongo.js yourpassword Anna 040-1234556
@@ -307,7 +355,8 @@ As a result, the application will print:
 added Anna number 040-1234556 to phonebook
 ```
 
-The new entry to the phonebook will be saved to the database. Notice that if the name contains whitespace characters, it must be enclosed in quotes:
+The new entry to the phonebook will be saved to the database.
+Notice that if the name contains whitespace characters, it must be enclosed in quotes:
 
 ```bash
 node mongo.js yourpassword "Arto Vihavainen" 045-1232456
@@ -330,7 +379,8 @@ Ada Lovelace 040-1231236
 
 You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv) variable.
 
-**NB: do not close the connection in the wrong place**. E.g. the following code will not work:
+**NB: do not close the connection in the wrong place**.
+E.g. the following code will not work:
 
 ```js
 Person
@@ -342,7 +392,8 @@ Person
 mongoose.connection.close()
 ```
 
-In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation is started. This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called.
+In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation is started.
+This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called.
 
 The correct place for closing the database connection is at the end of the callback function:
 
@@ -399,9 +450,12 @@ We can verify in the browser that the backend works for displaying all of the do
 
 ![api/notes in browser shows notes in JSON](../../images/3/44ea.png)
 
-The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
+The application works almost perfectly.
+The frontend assumes that every object has a unique id in the <i>id</i> field.
+We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
-One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the *toJSON* method of the schema, which is used on all instances of the models produced with that schema. Modifying the method works like this:
+One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the *toJSON* method of the schema, which is used on all instances of the models produced with that schema.
+Modifying the method works like this:
 
 ```js
 noteSchema.set('toJSON', {
@@ -413,7 +467,9 @@ noteSchema.set('toJSON', {
 })
 ```
 
-Even though the <i>\_id</i> property of Mongoose objects looks like a string, it is in fact an object. The *toJSON* method we defined transforms it into a string just to be safe. If we didn't make this change, it would cause more harm to us in the future once we start writing tests.
+Even though the <i>\_id</i> property of Mongoose objects looks like a string, it is in fact an object.
+The *toJSON* method we defined transforms it into a string just to be safe.
+If we didn't make this change, it would cause more harm to us in the future once we start writing tests.
 
 Let's respond to the HTTP request with a list of objects formatted with the *toJSON* method:
 
@@ -425,7 +481,8 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the *notes* variable is assigned to an array of objects returned by Mongo. When the response is sent in the JSON format, the *toJSON* method of each object in the array is called automatically by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
+Now the *notes* variable is assigned to an array of objects returned by Mongo.
+When the response is sent in the JSON format, the *toJSON* method of each object in the array is called automatically by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
 
 ### Database configuration into its own module
 
@@ -469,7 +526,9 @@ module.exports = mongoose.model('Note', noteSchema) // highlight-line
 
 Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
 
-The public interface of the module is defined by setting a value to the *module.exports* variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables *mongoose* and *url* will not be accessible or visible to users of the module.
+The public interface of the module is defined by setting a value to the *module.exports* variable.
+We will set the value to be the <i>Note</i> model.
+The other things defined inside of the module, like the variables *mongoose* and *url* will not be accessible or visible to users of the module.
 
 Importing the module happens by adding the following line to <i>index.js</i>:
 
@@ -497,23 +556,27 @@ mongoose.connect(url)
 
 It's not a good idea to hardcode the address of the database into the code, so instead the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable.
 
-The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt. Both functions just log a message to the console about the success status:
+The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt.
+Both functions just log a message to the console about the success status:
 
 ![node output when wrong username/password](../../images/3/45e.png)
 
-There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
+There are many ways to define the value of an environment variable.
+One way would be to define it when the application is started:
 
 ```bash
 MONGODB_URI=address_here npm run dev
 ```
 
-A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
+A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library.
+You can install the library with the command:
 
 ```bash
 npm install dotenv
 ```
 
-To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this:
+To use the library, we create a <i>.env</i> file at the root of the project.
+The environment variables are defined inside of the file, and it can look like this:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
@@ -544,7 +607,8 @@ app.listen(PORT, () => {
 })
 ```
 
-It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
+It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported.
+This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
 Once the file .env has been gitignored, Heroku does not get the database URL from the repository, so you have to set it yourself.
 
@@ -558,7 +622,8 @@ or from the command line with the command:
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-Because GitHub is not used with Fly.io, also the file .env gets to the Fly.io servers when the app is deployed. Because of this also the env variables defined in the file will be available there.
+Because GitHub is not used with Fly.io, also the file .env gets to the Fly.io servers when the app is deployed.
+Because of this also the env variables defined in the file will be available there.
 
 However, a [better option](https://community.fly.io/t/clarification-on-environment-variables/6309) is to prevent .env from being copied to Fly.io by creating to the project root the file *.dockerignore*, with the following contents
 
@@ -598,9 +663,13 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-The note objects are created with the *Note* constructor function. The response is sent inside of the callback function for the *save* operation. This ensures that the response is sent only if the operation succeeded. We will discuss error handling a little bit later.
+The note objects are created with the *Note* constructor function.
+The response is sent inside of the callback function for the *save* operation.
+This ensures that the response is sent only if the operation succeeded.
+We will discuss error handling a little bit later.
 
-The *savedNote* parameter in the callback function is the saved and newly created note. The data sent back in the response is the formatted version created with the *toJSON* method:
+The *savedNote* parameter in the callback function is the saved and newly created note.
+The data sent back in the response is the formatted version created with the *toJSON* method:
 
 ```js
 response.json(savedNote)
@@ -618,15 +687,21 @@ app.get('/api/notes/:id', (request, response) => {
 
 ### Verifying frontend and backend integration
 
-When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**. Next, let's try creating a new note after taking the database into use:
+When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**.
+Next, let's try creating a new note after taking the database into use:
 
 ![VS code rest client doing a post](../../images/3/46e.png)
 
-Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend. It is highly inefficient to test things exclusively through the frontend.
+Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend.
+It is highly inefficient to test things exclusively through the frontend.
 
-It's probably a good idea to integrate the frontend and backend one functionality at a time. First, we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser. After this, we could verify that the frontend works with the new backend. Once everything seems to be working, we would move on to the next feature.
+It's probably a good idea to integrate the frontend and backend one functionality at a time.
+First, we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser.
+After this, we could verify that the frontend works with the new backend.
+Once everything seems to be working, we would move on to the next feature.
 
-Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
+Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas.
+Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
 
 You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
@@ -648,9 +723,11 @@ In the following exercises, write all Mongoose-specific code into its own module
 
 #### 3.14: Phonebook database, step2
 
-Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
+Change the backend so that new numbers are <i>saved to the database</i>.
+Verify that your frontend still works after the changes.
 
-At this point, you can choose to simply allow users to create all phonebook entries. At this stage, the phonebook can have multiple entries for a person with the same name.
+At this point, you can choose to simply allow users to create all phonebook entries.
+At this stage, the phonebook can have multiple entries for a person with the same name.
 
 </div>
 
@@ -660,7 +737,8 @@ At this point, you can choose to simply allow users to create all phonebook entr
 
 If we try to visit the URL of a note with an id that does not exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be *null*.
 
-Let's change this behavior so that if a note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:
+Let's change this behavior so that if a note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found.
+In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -683,9 +761,13 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If no matching object is found in the database, the value of *note* will be *null* and the *else* block is executed. This results in a response with the status code <i>404 not found</i>. If a promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error.
+If no matching object is found in the database, the value of *note* will be *null* and the *else* block is executed.
+This results in a response with the status code <i>404 not found</i>.
+If a promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>.
+The console displays more detailed information about the error.
 
-On top of the non-existing note, there's one more error situation that needs to be handled. In this situation, we are trying to fetch a note with the wrong kind of *id*, meaning an *id* that doesn't match the mongo identifier format.
+On top of the non-existing note, there's one more error situation that needs to be handled.
+In this situation, we are trying to fetch a note with the wrong kind of *id*, meaning an *id* that doesn't match the mongo identifier format.
 
 If we make the following request, we will get the error message shown below:
 
@@ -700,7 +782,8 @@ Body:   {}
     ...
 </pre>
 
-Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called.
+Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected.
+This will cause the callback function defined in the <em>catch</em> block to be called.
 
 Let's make some small adjustments to the response in the <em>catch</em> block:
 
@@ -721,13 +804,16 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If the format of the id is incorrect, then we will end up in the error handler defined in the *catch* block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) because the situation fits the description perfectly:
+If the format of the id is incorrect, then we will end up in the error handler defined in the *catch* block.
+The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) because the situation fits the description perfectly:
 
-> <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
+> <i>The request could not be understood by the server due to malformed syntax.
+The client SHOULD NOT repeat the request without modifications.</i>
 
 We have also added some data to the response to shed some light on the cause of the error.
 
-When dealing with Promises, it's almost always a good idea to add error and exception handling. Otherwise, you will find yourself dealing with strange bugs.
+When dealing with Promises, it's almost always a good idea to add error and exception handling.
+Otherwise, you will find yourself dealing with strange bugs.
 
 It's never a bad idea to print the object that caused the exception to the console in the error handler:
 
@@ -738,17 +824,25 @@ It's never a bad idea to print the object that caused the exception to the conso
 })
 ```
 
-The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one.
+The reason the error handler gets called might be something completely different than what you had anticipated.
+If you log the error to the console, you may save yourself from long and frustrating debugging sessions.
+Moreover, most modern services where you deploy your application support some form of logging system that you can use to check these logs.
+As mentioned, Heroku is one.
 
-Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:
+Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>.
+If you are working on a small screen, it is enough to just see a tiny slice of the output in the background.
+Any error messages will catch your attention even when the console is far back in the background:
 
 ![sample screenshot showing tiny slice of output](../../images/3/15b.png)
 
 ### Moving error handling into middleware
 
-We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we want to report data related to errors to an external error-tracking system like [Sentry](https://sentry.io/welcome/) later on.
+We have written the code for the error handler among the rest of our code.
+This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place.
+This can be particularly useful if we want to report data related to errors to an external error-tracking system like [Sentry](https://sentry.io/welcome/) later on.
 
-Let's change the handler for the <i>/api/notes/:id</i> route so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
+Let's change the handler for the <i>/api/notes/:id</i> route so that it passes the error forward with the <em>next</em> function.
+The next function is passed to the handler as the third parameter:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -764,9 +858,12 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
+The error that is passed forwards is given to the <em>next</em> function as a parameter.
+If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware.
+If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
 
-Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this:
+Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>.
+Our error handler looks like this:
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -783,13 +880,16 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation, the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler.
+The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo.
+In this situation, the error handler will send a response to the browser with the response object passed as a parameter.
+In all other error situations, the middleware passes the error forward to the default Express error handler.
 
 Note that the error-handling middleware has to be the last loaded middleware!
 
 ### The order of middleware loading
 
-The execution order of middleware is the same as the order that they are loaded into express with the *app.use* function. For this reason, it is important to be careful when defining middleware.
+The execution order of middleware is the same as the order that they are loaded into express with the *app.use* function.
+For this reason, it is important to be careful when defining middleware.
 
 The correct order is the following:
 
@@ -818,7 +918,8 @@ const errorHandler = (error, request, response, next) => {
 app.use(errorHandler)
 ```
 
-The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following:
+The json-parser middleware should be among the very first middleware loaded into Express.
+If the order was the following:
 
 ```js
 app.use(requestLogger) // request.body is undefined!
@@ -851,7 +952,9 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
+Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>.
+Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware.
+The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
 
 ### Other operations
 
@@ -869,7 +972,10 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The *result* callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
+In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>.
+The two different cases are deleting a note that exists, and deleting a note that does not exist in the database.
+The *result* callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary.
+Any exception that occurs is passed onto the error handler.
 
 The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) method.
 
@@ -890,13 +996,17 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In the code above, we also allow the content of the note to be edited. However, we will not support changing the creation date for obvious reasons.
+In the code above, we also allow the content of the note to be edited.
+However, we will not support changing the creation date for obvious reasons.
 
 Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
 
-There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
+There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method.
+By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate).
+We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
 
-After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database.
+After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work.
+The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 

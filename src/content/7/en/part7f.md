@@ -7,13 +7,17 @@ lang: en
 
 <div class="content">
 
-In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, 13 exercises continue our work on the Bloglist application that we worked on in parts four and five of the course material. Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order. You are free to skip over a part of the exercises if you wish to do so.
+In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, 13 exercises continue our work on the Bloglist application that we worked on in parts four and five of the course material.
+Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order.
+You are free to skip over a part of the exercises if you wish to do so.
 
 If you do not want to use your Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
 
-Many of the exercises in this part of the course material will require the refactoring of existing code. This is a common reality of extending existing applications, meaning that refactoring is an important and necessary skill even if it may feel difficult and unpleasant at times.
+Many of the exercises in this part of the course material will require the refactoring of existing code.
+This is a common reality of extending existing applications, meaning that refactoring is an important and necessary skill even if it may feel difficult and unpleasant at times.
 
-One good piece of advice for both refactoring and writing new code is to take <i>baby steps</i>. Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods while refactoring.
+One good piece of advice for both refactoring and writing new code is to take <i>baby steps</i>.
+Losing your sanity is almost guaranteed if you leave the application in a completely broken state for long periods while refactoring.
 
 </div>
 
@@ -23,7 +27,9 @@ One good piece of advice for both refactoring and writing new code is to take <i
 
 #### 7.9: automatic code formatting
 
-In the previous parts, we used ESLint to ensure that code follows the defined conventions.  [Prettier](https://prettier.io/) is yet another approach for the same. According to the documentation, Prettier is <i>an opinionated code formatter</i>, that is, Prettier not only controls the code style but also formats the code according to the definition.
+In the previous parts, we used ESLint to ensure that code follows the defined conventions.
+[Prettier](https://prettier.io/) is yet another approach for the same.
+According to the documentation, Prettier is <i>an opinionated code formatter</i>, that is, Prettier not only controls the code style but also formats the code according to the definition.
 
 Prettier is easy to integrate into the code editor so that when the code is saved, it is automatically formatted correctly.
 
@@ -39,7 +45,8 @@ Change the application's notifications to use Redux at this point of the exercis
 
 <i>Note</i> that this and the next two exercises are quite laborious but incredibly educational.
 
-Store the information about blog posts in the Redux store. In this exercise, it is enough that you can see the blogs in the backend and create a new blog.
+Store the information about blog posts in the Redux store.
+In this exercise, it is enough that you can see the blogs in the backend and create a new blog.
 
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 
@@ -73,7 +80,8 @@ You can access the view by clicking the name of the user in the view that lists 
 
 The error message will occur if you refresh the page for an individual user.
 
-The cause of the issue is that, when we navigate directly to the page of an individual user, the React application has not yet received the data from the backend. One solution for fixing the problem is to use conditional rendering:
+The cause of the issue is that, when we navigate directly to the page of an individual user, the React application has not yet received the data from the backend.
+One solution for fixing the problem is to use conditional rendering:
 
 ```js
 const User = () => {
@@ -94,7 +102,8 @@ const User = () => {
 
 #### 7.16: Blog view
 
-Implement a separate view for blog posts. You can model the layout of your view after the following example:
+Implement a separate view for blog posts.
+You can model the layout of your view after the following example:
 
 ![browser blogs showing single blog via URL /blogs/number](../../images/7/45.png)
 
@@ -102,7 +111,8 @@ Users should be able to access the view by clicking the name of the blog post in
 
 ![browser showing blogs are clickable](../../images/7/46.png)
 
-After you're done with this exercise, the functionality that was implemented in exercise 5.7 is no longer necessary. Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
+After you're done with this exercise, the functionality that was implemented in exercise 5.7 is no longer necessary.
+Clicking a blog post no longer needs to expand the item in the list and display the details of the blog post.
 
 #### 7.17: Navigation
 

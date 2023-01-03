@@ -7,11 +7,14 @@ lang: en
 
 <div class="content">
 
-There are many different ways of testing React applications. Let's take a look at them next.
+There are many different ways of testing React applications.
+Let's take a look at them next.
 
-Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part. Jest is configured by default to applications created with create-react-app.
+Tests will be implemented with the same [Jest](http://jestjs.io/) testing library developed by Facebook that was used in the previous part.
+Jest is configured by default to applications created with create-react-app.
 
-In addition to Jest, we also need another testing library that will help us render components for testing purposes. The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
+In addition to Jest, we also need another testing library that will help us render components for testing purposes.
+The current best option for this is [react-testing-library](https://github.com/testing-library/react-testing-library) which has seen rapid growth in popularity in recent times.
 
 Let's install the library with the command:
 
@@ -71,9 +74,11 @@ After the initial configuration, the test renders the component with the [render
 render(<Note note={note} />)
 ```
 
-Normally React components are rendered to the <i>DOM</i>. The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
+Normally React components are rendered to the <i>DOM</i>.
+The render method we used renders the components in a format that is suitable for tests without rendering them to the DOM.
 
-We can use the object [screen](https://testing-library.com/docs/queries/about#screen) to access the rendered component. We use screen's method [getByText](https://testing-library.com/docs/queries/bytext) to search for an element that has the note content and ensure that it exists:
+We can use the object [screen](https://testing-library.com/docs/queries/about#screen) to access the rendered component.
+We use screen's method [getByText](https://testing-library.com/docs/queries/bytext) to search for an element that has the note content and ensure that it exists:
 
 ```js
   const element = screen.getByText('Component testing is done with react-testing-library')
@@ -82,7 +87,8 @@ We can use the object [screen](https://testing-library.com/docs/queries/about#sc
 
 ### Running tests
 
-Create-react-app configures tests to be run in watch mode by default, which means that the *npm test* command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
+Create-react-app configures tests to be run in watch mode by default, which means that the *npm test* command will not exit once the tests have finished, and will instead wait for changes to be made to the code.
+Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
 
 If you want to run tests "normally", you can do so with the command:
 
@@ -96,21 +102,27 @@ For Windows (PowerShell) users
 $env:CI=$true; npm test
 ```
 
-**NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
+**NB:** the console may issue a warning if you have not installed Watchman.
+Watchman is an application developed by Facebook that watches for changes that are made to files.
+The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
 Instructions for installing Watchman on different operating systems can be found on the official Watchman website: <https://facebook.github.io/watchman/>
 
 ### Test file location
 
-In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
+In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location.
+We created our test files according to the current standard by placing them in the same directory as the component being tested.
 
-The other convention is to store the test files "normally" in a separate *test* directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
+The other convention is to store the test files "normally" in a separate *test* directory.
+Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
 
-I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
+I do not like this way of storing tests and application code in the same directory.
+The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
 
 ### Searching for content in a component
 
-The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the *expect* in our test is not needed at all
+The react-testing-library package offers many different ways of investigating the content of the component being tested.
+In reality, the *expect* in our test is not needed at all
 
 ```js
 import React from 'react'
@@ -132,7 +144,7 @@ test('renders content', () => {
 })
 ```
 
-Test fails if *getByText* does not find the element it is looking for.
+The test fails if *getByText* does not find the element it is looking for.
 
 We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to find rendered elements by using the method [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) of the object [container](https://testing-library.com/docs/react-testing-library/api/#container-1) that is one of the fields returned by the render:
 
@@ -159,13 +171,14 @@ test('renders content', () => {
 })
 ```
 
-There are also other methods, eg. [getByTestId](https://testing-library.com/docs/queries/bytestid/), that look for elements based on id-attributes that are inserted into the code specifically for testing purposes.
+There are also other methods, e.g. [getByTestId](https://testing-library.com/docs/queries/bytestid/), that look for elements based on id-attributes that are inserted into the code specifically for testing purposes.
 
 ### Debugging tests
 
 We typically run into many different kinds of problems when writing our tests.
 
-Object *screen* has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
+Object *screen* has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal.
+If we change the test as follows:
 
 ```js
 import React from 'react'
@@ -253,7 +266,8 @@ Let us install a library [user-event](https://testing-library.com/docs/user-even
 npm install --save-dev @testing-library/user-event
 ```
 
-At the moment of writing (28.1.2022) there is a mismatch between the version of a dependency jest-watch-typeahead that create-react-app and user-event are using. The problem is fixed by installing a specific version:
+At the moment of writing (28.1.2022) there is a mismatch between the version of a dependency jest-watch-typeahead that create-react-app and user-event are using.
+The problem is fixed by installing a specific version:
 
 ```bash
 npm install -D --exact jest-watch-typeahead@0.6.5
@@ -290,7 +304,8 @@ test('clicking the button calls event handler once', async () => {
 })
 ```
 
-There are a few interesting things related to this test. The event handler is a [mock](https://facebook.github.io/jest/docs/en/mock-functions.html) function defined with Jest:
+There are a few interesting things related to this test.
+The event handler is a [mock](https://facebook.github.io/jest/docs/en/mock-functions.html) function defined with Jest:
 
 ```js
 const mockHandler = jest.fn()
@@ -317,13 +332,15 @@ The expectation of the test verifies that the <i>mock function</i> has been call
 expect(mockHandler.mock.calls).toHaveLength(1)
 ```
 
-[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested. Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
+[Mock objects and functions](https://en.wikipedia.org/wiki/Mock_object) are commonly used stub components in testing that are used for replacing dependencies of the components being tested.
+Mocks make it possible to return hardcoded responses, and to verify the number of times the mock functions are called and with what parameters.
 
 In our example, the mock function is a perfect choice since it can be easily used for verifying that the method gets called exactly once.
 
 ### Tests for the <i>Togglable</i> component
 
-Let's write a few tests for the <i>Togglable</i> component. Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components.
+Let's write a few tests for the <i>Togglable</i> component.
+Let's add the <i>togglableContent</i> CSS classname to the div that returns the child components.
 
 ```js
 const Togglable = forwardRef((props, ref) => {
@@ -397,7 +414,8 @@ The first test verifies that the <i>Togglable</i> component renders its child co
 </div>
 ```
 
-The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains *{ display: 'none' }*. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
+The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains *{ display: 'none' }*.
+Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
 
 Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:
 
@@ -432,7 +450,8 @@ await user.click(button)
 
 We can also simulate text input with <i>userEvent</i>.
 
-Let's make a test for the <i>NoteForm</i> component. The code of the component is as follows.
+Let's make a test for the <i>NoteForm</i> component.
+The code of the component is as follows.
 
 ```js
 import { useState } from 'react'
@@ -547,7 +566,8 @@ would cause an error:
 
 ![node error that shows two elements with textbox since we use getByRole](../../images/5/40.png)
 
-The error message suggests using <i>getAllByRole</i>. The test could be fixed as follows:
+The error message suggests using <i>getAllByRole</i>.
+The test could be fixed as follows:
 
 ```js
 const inputs = screen.getAllByRole('textbox')
@@ -555,9 +575,11 @@ const inputs = screen.getAllByRole('textbox')
 await user.type(inputs[0], 'testing a form...')
 ```
 
-Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
+Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array.
+However, this approach is a bit suspicious since it relies on the order of the input fields.
 
-Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
+Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected.
+Let us add a placeholder to our form:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -603,9 +625,10 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-The most flexible way of finding elements in tests is the method <i>querySelector</i> of the *container* object, which is returned by *render*, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
+The most flexible way of finding elements in tests is the method <i>querySelector</i> of the *container* object, which is returned by *render*, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component).
+Any CSS selector can be used with this method for searching elements in tests.
 
-Consider eg. that we would define a unique *id* to the input field:
+Consider e.g. that we would define a unique *id* to the input field:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -642,7 +665,8 @@ const input = container.querySelector('#note-input')
 
 However, we shall stick to the approach of using *getByPlaceholderText* in the test.
 
-Let us look at a couple of details before moving on. Let us assume that a component would render text to an HTML element as follows:
+Let us look at a couple of details before moving on.
+Let us assume that a component would render text to an HTML element as follows:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -677,7 +701,8 @@ test('renders content', () => {
 })
 ```
 
-Command *getByText* looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
+Command *getByText* looks for an element that has the **same text** that it has as a parameter, and nothing more.
+If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
 ```js
 const element = screen.getByText(
@@ -693,9 +718,10 @@ const element = await screen.findByText('Does not work anymore :(')
 
 It is important to notice that, unlike the other *ByText* commands, *findByText* returns a promise!
 
-There are situations where yet another form of the command *queryByText* is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
+There are situations where yet another form of the command *queryByText* is useful.
+The command returns the element but <i>it does not cause an exception</i> if the element is not found.
 
-We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
+We could use the command to ensure that something <i>is not rendered</i> to the component:
 
 ```js
 test('does not render this', () => {
@@ -749,7 +775,8 @@ Make a test, which ensures that if the <i>like</i> button is clicked twice, the 
 
 #### 5.16: Blog list tests, step4
 
-Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created.
+Make a test for the new blog form.
+The test should check, that the form calls the event handler it received as props with the right details when a new blog is created.
 
 </div>
 
@@ -757,19 +784,28 @@ Make a test for the new blog form. The test should check, that the form calls th
 
 ### Frontend integration tests
 
-In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected the database through the API provided by the backend. When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios than unit tests are well suited for.
+In the previous part of the course material, we wrote integration tests for the backend that tested its logic and connected the database through the API provided by the backend.
+When writing these tests, we made the conscious decision not to write unit tests, as the code for that backend is fairly simple, and it is likely that bugs in our application occur in more complicated scenarios than unit tests are well suited for.
 
-So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
+So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components.
+Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
-We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server.
-We chose to concentrate on making end-to-end tests to test the whole application. We will work on the end-to-end tests in the last chapter of this part.
+We could also make integration tests for the frontend.
+Integration testing tests the collaboration of multiple components.
+It is considerably more difficult than unit testing, as we would have to for example mock data from the server.
+We chose to concentrate on making end-to-end tests to test the whole application.
+We will work on the end-to-end tests in the last chapter of this part.
 
 ### Snapshot testing
 
-Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
+Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing.
+The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
 
 The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed.
 
-If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident. Snapshot tests notify the developer if the HTML code of the component changes. The developer has to tell Jest if the change was desired or undesired. If the change to the HTML code is unexpected, it strongly implies a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing.
+If the snapshot notices some change in the HTML defined by the component, then either it is new functionality or a "bug" caused by accident.
+Snapshot tests notify the developer if the HTML code of the component changes.
+The developer has to tell Jest if the change was desired or undesired.
+If the change to the HTML code is unexpected, it strongly implies a bug, and the developer can become aware of these potential issues easily thanks to snapshot testing.
 
 </div>

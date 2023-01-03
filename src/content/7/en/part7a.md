@@ -7,7 +7,8 @@ lang: en
 
 <div class="content">
 
-The exercises in this seventh part of the course differ a bit from the ones before. In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
+The exercises in this seventh part of the course differ a bit from the ones before.
+In this and the next chapter, as usual, there are [exercises related to the theory in the chapter](/en/part7/react_router#exercises-7-1-7-3).
 
 In addition to the exercises in this and the next chapter, there are a series of exercises in which we'll be revising what we've learned during the whole course by expanding the Bloglist application which we worked on during parts 4 and 5.
 
@@ -27,7 +28,9 @@ and separate pages for showing information on notes and users:
 
 In an [old school web app](/en/part0/fundamentals_of_web_apps#traditional-web-applications), changing the page shown by the application would be accomplished by the browser making an HTTP GET request to the server and rendering the HTML representing the view that was returned.
 
-In single-page apps, we are, in reality, always on the same page. The Javascript code run by the browser creates an illusion of different "pages". If HTTP requests are made when switching views, they are only for fetching JSON-formatted data, which the new view might require for it to be shown.
+In single-page apps, we are, in reality, always on the same page.
+The Javascript code run by the browser creates an illusion of different "pages".
+If HTTP requests are made when switching views, they are only for fetching JSON-formatted data, which the new view might require for it to be shown.
 
 The navigation bar and an application containing multiple views are very easy to implement using React.
 
@@ -93,15 +96,22 @@ const App = () => {
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-Each view is implemented as its own component. We store the view component information in the application state called <i>page</i>. This information tells us which component, representing a view, should be shown below the menu bar.
+Each view is implemented as its own component.
+We store the view component information in the application state called <i>page</i>.
+This information tells us which component, representing a view, should be shown below the menu bar.
 
-However, the method is not very optimal. As we can see from the pictures, the address stays the same even though at times we are in different views. Each view should preferably have its own address, e.g. to make bookmarking possible. The <i>back</i> button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different. If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self-made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
+However, the method is not very optimal.
+As we can see from the pictures, the address stays the same even though at times we are in different views.
+Each view should preferably have its own address, e.g. to make bookmarking possible.
+The <i>back</i> button doesn't work as expected for our application either, meaning that <i>back</i> doesn't move you to the previously displayed view of the application, but somewhere completely different.
+If the application were to grow even bigger and we wanted to, for example, add separate views for each user and note, then this self-made <i>routing</i>, which means the navigation management of the application, would get overly complicated.
 
 ### React Router
 
 Luckily, React has the [React Router](https://reactrouter.com/) library which provides an excellent solution for managing navigation in a React application.
 
-Let's change the above application to use React Router. First, we install React Router with the command
+Let's change the above application to use React Router.
+First, we install React Router with the command
 
 ```bash
 npm install react-router-dom
@@ -158,9 +168,13 @@ According to the [v5 docs](https://v5.reactrouter.com/web/api/BrowserRouter):
 
 > <i>BrowserRouter</i> is a <i>Router</i> that uses the HTML5 history API (pushState, replaceState and the popState event) to keep your UI in sync with the URL.
 
-Normally the browser loads a new page when the URL in the address bar changes. However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application. So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server. Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
+Normally the browser loads a new page when the URL in the address bar changes.
+However, with the help of the [HTML5 history API](https://css-tricks.com/using-the-html5-history-api/), <i>BrowserRouter</i> enables us to use the URL in the address bar of the browser for internal "routing" in a React application.
+So, even if the URL in the address bar changes, the content of the page is only manipulated using Javascript, and the browser will not load new content from the server.
+Using the back and forward actions, as well as making bookmarks, is still logical like on a traditional web page.
 
-Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/en/main/components/link) component. For example,
+Inside the router, we define <i>links</i> that modify the address bar with the help of the [Link](https://reactrouter.com/en/main/components/link) component.
+For example,
 
 ```js
 <Link to="/notes">notes</Link>
@@ -168,7 +182,8 @@ Inside the router, we define <i>links</i> that modify the address bar with the h
 
 creates a link in the application with the text <i>notes</i>, which when clicked changes the URL in the address bar to <i>/notes</i>.
 
-Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/en/main/route/route). For example,
+Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/en/main/route/route).
+For example,
 
 ```js
 <Route path="/notes" element={<Notes />} />
@@ -190,11 +205,15 @@ The Routes works by rendering the first component whose <i>path</i> matches the 
 
 ### Parameterized route
 
-Let's examine the slightly modified version from the previous example. The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
+Let's examine the slightly modified version from the previous example.
+The complete code for the example can be found [here](https://github.com/fullstack-hy2020/misc/blob/master/router-app-v1.js).
 
-The application now contains five different views whose display is controlled by the router. In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
+The application now contains five different views whose display is controlled by the router.
+In addition to the components from the previous example (<i>Home</i>, <i>Notes</i> and <i>Users</i>), we have <i>Login</i> representing the login view and <i>Note</i> representing the view of a single note.
 
-<i>Home</i> and <i>Users</i> are unchanged from the previous exercise.  <i>Notes</i> is a bit more complicated. It renders the list of notes passed to it as props in such a way that the name of each note is clickable.
+<i>Home</i> and <i>Users</i> are unchanged from the previous exercise.
+<i>Notes</i> is a bit more complicated.
+It renders the list of notes passed to it as props in such a way that the name of each note is clickable.
 
 ![notes app showing notes are clickable](../../images/7/3ea.png)
 
@@ -262,7 +281,8 @@ The *Note* component receives all of the notes as props <i>notes</i>, and it can
 
 ### useNavigate
 
-We have also implemented a simple login function in our application. If a user is logged in, information about a logged-in user is saved to the <i>user</i> field of the state of the <i>App</i> component.
+We have also implemented a simple login function in our application.
+If a user is logged in, information about a logged-in user is saved to the <i>user</i> field of the state of the <i>App</i> component.
 
 The option to navigate to the <i>Login</i> view is rendered conditionally in the menu.
 
@@ -322,11 +342,14 @@ const Login = (props) => {
 }
 ```
 
-What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router. With this function, the browser's URL can be changed programmatically.
+What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router.
+With this function, the browser's URL can be changed programmatically.
 
 With user login, we call *navigate('/')* which causes the browser's URL to change to */* and the application renders the corresponding component <i>Home</i>.
 
-Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.
+Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) are hook functions, just like useState and useEffect which we have used many times now.
+As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions.
+Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.
 
 ### redirect
 
@@ -336,7 +359,8 @@ There is one more interesting detail about the <i>Users</i> route:
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
 ```
 
-If a user isn't logged in, the <i>Users</i> component is not rendered. Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/en/main/components/navigate) to the login view:
+If a user isn't logged in, the <i>Users</i> component is not rendered.
+Instead, the user is <i>redirected</i> using the component [Navigate](https://reactrouter.com/en/main/components/navigate) to the login view:
 
 ```js
 <Navigate replace to="/login" />
@@ -396,7 +420,8 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 
 ### Parameterized route revisited
 
-Our application has a flaw. The *Note* component receives all of the notes, even though it only displays the one whose id matches the url parameter:
+Our application has a flaw.
+The *Note* component receives all of the notes, even though it only displays the one whose id matches the url parameter:
 
 ```js
 const Note = ({ notes }) => { 
@@ -422,7 +447,8 @@ const Note = ({ note }) => {
 
 One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) hook to figure out the id of the note to be displayed in the *App* component.
 
-It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the *Router* components from *App*:
+It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application.
+Let's move the use of the *Router* components from *App*:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -495,7 +521,8 @@ The completed code can be found [here](https://github.com/fullstack-hy2020/misc/
 
 ### Exercises 7.1-7.3
 
-Let's return to working with anecdotes. Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.
+Let's return to working with anecdotes.
+Use the redux-free anecdote app found in the repository <https://github.com/fullstack-hy2020/routed-anecdotes> as the starting point for the exercises.
 
 If you clone the project into an existing git repository, remember to <i>delete the git configuration of the cloned application:</i>
 

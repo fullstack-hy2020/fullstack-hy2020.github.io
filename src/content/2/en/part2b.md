@@ -7,9 +7,11 @@ lang: en
 
 <div class="content">
 
-Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
+Let's continue expanding our application by allowing users to add new notes.
+You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
-To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.
+To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state.
+Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props.
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -100,7 +102,8 @@ const addNote = (event) => {
 
 The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function:
 
-The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, [among other things](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), cause the page to reload.
+The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form.
+The default action would, [among other things](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), cause the page to reload.
 
 The target of the event stored in *event.target* is logged to the console:
 
@@ -147,7 +150,8 @@ const App = (props) => {
 }
 ```
 
-The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong:
+The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited.
+The console displays a warning that gives us a clue as to what might be wrong:
 
 ![provided value to prop without onchange console error](../../images/2/7e.png)
 
@@ -200,7 +204,8 @@ We have now registered an event handler to the <i>onChange</i> attribute of the 
 />
 ```
 
-The event handler is called every time <i>a change occurs in the input element</i>. The event handler function receives the event object as its <em>event</em> parameter:
+The event handler is called every time <i>a change occurs in the input element</i>.
+The event handler function receives the event object as its <em>event</em> parameter:
 
 ```js
 const handleNoteChange = (event) => {
@@ -211,13 +216,15 @@ const handleNoteChange = (event) => {
 
 The <em>target</em> property of the event object now corresponds to the controlled <i>input</i> element, and <em>event.target.value</em> refers to the input value of that element.
 
-Note that we did not need to call the *event.preventDefault()* method like we did in the <i>onSubmit</i> event handler. This is because no default action occurs on an input change, unlike a form submission.
+Note that we did not need to call the *event.preventDefault()* method like we did in the <i>onSubmit</i> event handler.
+This is because no default action occurs on an input change, unlike a form submission.
 
 You can follow along in the console to see how the event handler is called:
 
 ![multiple console calls with typing text](../../images/2/8e.png)
 
-You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab:
+You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good.
+You can directly view how the state changes from the React Devtools tab:
 
 ![state changes in react devtools shows typing too](../../images/2/9ea.png)
 
@@ -238,7 +245,10 @@ const addNote = (event) => {
 }
 ```
 
-First, we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> function, our note has a 50% chance of being marked as important.
+First, we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state.
+The unique identifier <i>id</i> is generated based on the total number of notes.
+This method works for our application since notes are never deleted.
+With the help of the <em>Math.random()</em> function, our note has a 50% chance of being marked as important.
 
 The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method, introduced in [part 1](/en/part1/java_script#arrays):
 
@@ -246,7 +256,8 @@ The new note is added to the list of notes using the [concat](https://developer.
 setNotes(notes.concat(noteObject))
 ```
 
-The method does not mutate the original <em>notes</em> array, but rather creates <i>a new copy of the array with the new item added to the end</i>. This is important since we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React!
+The method does not mutate the original <em>notes</em> array, but rather creates <i>a new copy of the array with the new item added to the end</i>.
+This is important since we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React!
 
 The event handler also resets the value of the controlled input element by calling the <em>setNewNote</em> function of the <em>newNote</em> state:
 
@@ -272,7 +283,8 @@ const App = (props) => {
 }
 ```
 
-Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items on the list depend on the state of the component:
+Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable.
+The items on the list depend on the state of the component:
 
 ```js
 import { useState } from 'react'
@@ -315,15 +327,18 @@ const notesToShow = showAll
 
 The definition uses the [conditional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) operator also found in many other programming languages.
 
-The operator functions as follows. If we have:
+The operator functions as follows.
+If we have:
 
 ```js
 const result = condition ? val1 : val2
 ```
 
-the <em>result</em> variable will be set to the value of <em>val1</em> if <em>condition</em> is true. If <em>condition</em> is false, the <em>result</em> variable will be set to the value of<em>val2</em>.
+the <em>result</em> variable will be set to the value of <em>val1</em> if <em>condition</em> is true.
+If <em>condition</em> is false, the <em>result</em> variable will be set to the value of<em>val2</em>.
 
-If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable will be assigned to a list that only contains notes that have the <em>important</em> property set to true. Filtering is done with the help of the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method:
+If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable will be assigned to a list that only contains notes that have the <em>important</em> property set to true.
+Filtering is done with the help of the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method:
 
 ```js
 notes.filter(note => note.important === true)
@@ -335,7 +350,8 @@ The comparison operator is redundant, since the value of <em>note.important</em>
 notes.filter(note => note.important)
 ```
 
-The reason we showed the comparison operator first was to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not work as expected in all situations and it's safer to use <em>val1 === val2</em> exclusively in comparisons. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
+The reason we showed the comparison operator first was to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not work as expected in all situations and it's safer to use <em>val1 === val2</em> exclusively in comparisons.
+You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
 
 You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state.
 
@@ -369,13 +385,15 @@ const App = (props) => {
           <Note key={note.id} note={note} />
         )}
       </ul>
-      // ...    
+      // ...
     </div>
   )
 }
 ```
 
-The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of *showAll* from true to false and vice versa:
+The displayed notes (all versus important) are controlled with a button.
+The event handler for the button is so simple that it has been defined directly in the attribute of the button element.
+The event handler switches the value of *showAll* from true to false and vice versa:
 
 ```js
 () => setShowAll(!showAll)
@@ -394,13 +412,17 @@ You can find the code for our current application in its entirety in the <i>part
 
 <h3>Exercises 2.6.-2.10.</h3>
 
-In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises, it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
+In the first exercise, we will start working on an application that will be further developed in the later exercises.
+In related sets of exercises, it is sufficient to return the final version of your application.
+You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. You likely **do not want** your project to be a repository, so simply run the *rm -rf .git* command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository.
+You likely **do not want** your project to be a repository, so simply run the *rm -rf .git* command at the root of your application.
 
 <h4>2.6: The Phonebook Step1</h4>
 
-Let's create a simple phonebook. <i>**In this part, we will only be adding names to the phonebook.**</i>
+Let's create a simple phonebook.
+<i>**In this part, we will only be adding names to the phonebook.**</i>
 
 Let us start by implementing the addition of a person to the phonebook.
 
@@ -427,8 +449,7 @@ const App = () => {
         </div>
       </form>
       <h2>Numbers</h2>
-      ...
-    </div>
+      ...     </div>
   )
 }
 
@@ -437,13 +458,15 @@ export default App
 
 The <em>newName</em> state is meant for controlling the form input element.
 
-Sometimes it can be useful to render state and other variables as text for debugging purposes. You can temporarily add the following element to the rendered component:
+Sometimes it can be useful to render state and other variables as text for debugging purposes.
+You can temporarily add the following element to the rendered component:
 
 ```html
 <div>debug: {newName}</div>
 ```
 
-It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension is <i>incredibly</i> useful for tracking changes that occur in the application's state.
+It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use.
+The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension is <i>incredibly</i> useful for tracking changes that occur in the application's state.
 
 After finishing this exercise your application should look something like this:
 
@@ -458,7 +481,9 @@ Note the use of the React developer tools extension in the picture above!
 
 <h4>2.7: The Phonebook Step2</h4>
 
-Prevent the user from being able to add names that already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task. Keep in mind [how object equality works](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) in Javascript.
+Prevent the user from being able to add names that already exist in the phonebook.
+JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task.
+Keep in mind [how object equality works](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) in Javascript.
 
 Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted:
 
@@ -486,7 +511,8 @@ Using template strings is the more idiomatic option and the sign of a true JavaS
 
 <h4>2.8: The Phonebook Step3</h4>
 
-Expand your application by allowing users to add phone numbers to the phone book. You will need to add a second <i>input</i> element to the form (along with its own event handler):
+Expand your application by allowing users to add phone numbers to the phone book.
+You will need to add a second <i>input</i> element to the form (along with its own event handler):
 
 ```js
 <form>
@@ -496,7 +522,8 @@ Expand your application by allowing users to add phone numbers to the phone book
 </form>
 ```
 
-At this point, the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
+At this point, the application could look something like this.
+The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
 
 ![2.8 sample screenshot](../../images/2/12e.png)
 
@@ -506,10 +533,10 @@ Implement a search field that can be used to filter the list of people by name:
 
 ![2.9 sample screenshot](../../images/2/13e.png)
 
-You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
+You can implement the search field as an <i>input</i> element that is placed outside the HTML form.
+The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
 
-**NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g.
-
+**NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g. 
 ```js
 const App = () => {
   const [persons, setPersons] = useState([
@@ -527,11 +554,14 @@ This saves you from having to manually input data into your application for test
 
 <h4>2.10: The Phonebook Step5</h4>
 
-If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the <i>App</i> root component.
+If you have implemented your application in a single component, refactor it by extracting suitable parts into new components.
+Maintain the application's state and all event handlers in the <i>App</i> root component.
 
-It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people to the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
+It is sufficient to extract <i>**three**</i> components from the application.
+Good candidates for separate components are, for example, the search filter, the form for adding new people to the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
 
-The application's root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.
+The application's root component could look similar to this after the refactoring.
+The refactored root component below only renders titles and lets the extracted components take care of the rest.
 
 ```js
 const App = () => {
@@ -557,7 +587,8 @@ const App = () => {
 }
 ```
 
-**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse
+**NB**: You might run into problems in this exercise if you define your components "in the wrong place".
+Now would be a good time to rehearse
 the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
 from the last part.
 

@@ -35,7 +35,8 @@ export default noteReducer
 
 ### Store with complex state
 
-Let's implement filtering for the notes that are displayed to the user. The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
+Let's implement filtering for the notes that are displayed to the user.
+The user interface for the filters will be implemented with [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
 ![browser with important/not radio buttons and list](../../images/6/01e.png)
 
@@ -75,7 +76,8 @@ Since the <i>name</i> attribute of all the radio buttons is the same, they form 
 
 The buttons have a change handler that currently only prints the string associated with the clicked button to the console.
 
-We decide to implement the filter functionality by storing <i>the value of the filter</i> in the redux store in addition to the notes themselves. The state of the store should look like this after making these changes:
+We decide to implement the filter functionality by storing <i>the value of the filter</i> in the redux store in addition to the notes themselves.
+The state of the store should look like this after making these changes:
 
 ```js
 {
@@ -87,11 +89,13 @@ We decide to implement the filter functionality by storing <i>the value of the f
 }
 ```
 
-Only the array of notes is stored in the state of the current implementation of our application. In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
+Only the array of notes is stored in the state of the current implementation of our application.
+In the new implementation, the state object has two properties, <i>notes</i> that contains the array of notes and <i>filter</i> that contains a string indicating which notes should be displayed to the user.
 
 ### Combined reducers
 
-We could modify our current reducer to deal with the new shape of the state. However, a better solution in this situation is to define a new separate reducer for the state of the filter:
+We could modify our current reducer to deal with the new shape of the state.
+However, a better solution in this situation is to define a new separate reducer for the state of the filter:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -113,7 +117,8 @@ The actions for changing the state of the filter look like this:
 }
 ```
 
-Let's also create a new *action creator* function. We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
+Let's also create a new *action creator* function.
+We will write the code for the action creator in a new <i>src/reducers/filterReducer.js</i> module:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -182,9 +187,12 @@ const reducer = combineReducers({
 })
 ```
 
-The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
+The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>.
+The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state.
+Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
 
-Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's add the following to the <i>index.js</i> file:
+Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer.
+Let's add the following to the <i>index.js</i> file:
 
 ```js
 import { createNote } from './reducers/noteReducer'
@@ -199,7 +207,8 @@ By simulating the creation of a note and changing the state of the filter in thi
 
 ![devtools console output showing notes filter and new note](../../images/6/5e.png)
 
-At this point, it is good to become aware of a tiny but important detail. If we add a console log statement <i>to the beginning of both reducers</i>:
+At this point, it is good to become aware of a tiny but important detail.
+If we add a console log statement <i>to the beginning of both reducers</i>:
 
 ```js
 const filterReducer = (state = 'ALL', action) => {
@@ -212,11 +221,14 @@ Based on the console output one might get the impression that every action gets 
 
 ![devtools console output showing dupblicated actions in note and filter reducers](../../images/6/6.png)
 
-Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
+Is there a bug in our code? No.
+The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer.
+Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
 
 ### Finishing the filters
 
-Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:
+Let's finish the application so that it uses the combined reducer.
+We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -230,7 +242,8 @@ Next, let's fix a bug that is caused by the code expecting the application store
 
 ![browser TypeError: notes.map is not a function](../../images/6/7ea.png)
 
-It's an easy fix. Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
+It's an easy fix.
+Because the notes are in the store's field <i>notes</i>, we only have to make a little change to the selector function:
 
 ```js
 const Notes = () => {
@@ -322,7 +335,8 @@ const App = () => {
 export default App
 ```
 
-The implementation is rather straightforward. Clicking the different radio buttons changes the state of the store's <i>filter</i> property.
+The implementation is rather straightforward.
+Clicking the different radio buttons changes the state of the store's <i>filter</i> property.
 
 Let's change the <i>Notes</i> component to incorporate the filter:
 
@@ -376,19 +390,26 @@ const notes = useSelector(({ filter, notes }) => {
 })
 ```
 
-There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally, this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later.
+There is a slight cosmetic flaw in our application.
+Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected.
+Naturally, this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later.
 
 ### Redux Toolkit
 
-As we have seen so far, Redux's configuration and state management implementation requires quite a lot of effort. This is manifested for example in the reducer and action creator-related code which has somewhat repetitive boilerplate code. [Redux Toolkit](https://redux-toolkit.js.org/) is a library that solves these common Redux-related problems. The library for example greatly simplifies the configuration of the Redux store and offers a large variety of tools to ease state management.
+As we have seen so far, Redux's configuration and state management implementation requires quite a lot of effort.
+This is manifested for example in the reducer and action creator-related code which has somewhat repetitive boilerplate code.
+[Redux Toolkit](https://redux-toolkit.js.org/) is a library that solves these common Redux-related problems.
+The library for example greatly simplifies the configuration of the Redux store and offers a large variety of tools to ease state management.
 
-Let's start using Redux Toolkit in our application by refactoring the existing code. First, we will need to install the library:
+Let's start using Redux Toolkit in our application by refactoring the existing code.
+First, we will need to install the library:
 
 ```bash
 npm install @reduxjs/toolkit
 ```
 
-Next, open the <i>index.js</i> file which currently creates the Redux store. Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
+Next, open the <i>index.js</i> file which currently creates the Redux store.
+Instead of Redux's <em>createStore</em> function, let's create the store using Redux Toolkit's [configureStore](https://redux-toolkit.js.org/api/configureStore) function:
 
 ```js
 import React from 'react'
@@ -418,9 +439,12 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-We already got rid of a few lines of code now that we don't need the <em>combineReducers</em> function to create the reducer for the store. We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.
+We already got rid of a few lines of code now that we don't need the <em>combineReducers</em> function to create the reducer for the store.
+We will soon see that the <em>configureStore</em> function has many additional benefits such as the effortless integration of development tools and many commonly used libraries without the need for additional configuration.
 
-Let's move on to refactoring the reducers, which brings forth the benefits of the Redux Toolkit. With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function. We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:
+Let's move on to refactoring the reducers, which brings forth the benefits of the Redux Toolkit.
+With Redux Toolkit, we can easily create reducer and related action creators using the [createSlice](https://redux-toolkit.js.org/api/createSlice) function.
+We can use the <em>createSlice</em> function to refactor the reducer and action creators in the <i>reducers/noteReducer.js</i> file in the following manner:
 
 ```js
 import { createSlice } from '@reduxjs/toolkit' // highlight-line
@@ -474,7 +498,13 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values. For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>. It is a good practice to give the parameter a value, which is unique among the reducers. This way there won't be unexpected collisions between the application's action type values. The <em>initialState</em> parameter defines the reducer's initial state. The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions. Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
+The <em>createSlice</em> function's <em>name</em> parameter defines the prefix which is used in the action's type values.
+For example, the <em>createNote</em> action defined later will have the type value of <em>notes/createNote</em>.
+It is a good practice to give the parameter a value, which is unique among the reducers.
+This way there won't be unexpected collisions between the application's action type values.
+The <em>initialState</em> parameter defines the reducer's initial state.
+The <em>reducers</em> parameter takes the reducer itself as an object, of which functions handle state changes caused by certain actions.
+Note that the <em>action.payload</em> in the function contains the argument provided by calling the action creator:
 
 ```js
 dispatch(createNote('Redux Toolkit is awesome!'))
@@ -500,11 +530,18 @@ createNote(state, action) {
 }
 ```
 
-We are mutating <em>state</em> argument's array by calling the <em>push</em> method instead of returning a new instance of the array. What's this all about?
+We are mutating <em>state</em> argument's array by calling the <em>push</em> method instead of returning a new instance of the array.
+What's this all about?
 
-Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer. Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable. Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action. In this case, the function <i>returns</i> the new state. Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.
+Redux Toolkit utilizes the [Immer](https://immerjs.github.io/immer/) library with reducers created by <em>createSlice</em> function, which makes it possible to mutate the <em>state</em> argument inside the reducer.
+Immer uses the mutated state to produce a new, immutable state and thus the state changes remain immutable.
+Note that <em>state</em> can be changed without "mutating" it, as we have done with the <em>toggleImportanceOf</em> action.
+In this case, the function <i>returns</i> the new state.
+Nevertheless mutating the state will often come in handy especially when a complex state needs to be updated.
 
-The <em>createSlice</em> function returns an object containing the reducer as well as the action creators defined by the <em>reducers</em> parameter. The reducer can be accessed by the <em>noteSlice.reducer</em> property, whereas the action creators by the <em>noteSlice.actions</em> property. We can produce the file's exports in the following way:
+The <em>createSlice</em> function returns an object containing the reducer as well as the action creators defined by the <em>reducers</em> parameter.
+The reducer can be accessed by the <em>noteSlice.reducer</em> property, whereas the action creators by the <em>noteSlice.actions</em> property.
+We can produce the file's exports in the following way:
 
 ```js
 const noteSlice = createSlice(/* ... */)
@@ -579,7 +616,9 @@ describe('noteReducer', () => {
 
 ### Redux DevTools
 
-[Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux. It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console. When the store is created using Redux Toolkit's <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.
+[Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux.
+It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console.
+When the store is created using Redux Toolkit's <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.
 
 Once the addon is installed, clicking the <i>Redux</i> tab in the browser's console should open the development tools:
 
@@ -605,7 +644,9 @@ Let's continue working on the anecdote application using Redux that we started i
 
 #### 6.9 Better anecdotes, step7
 
-Install Redux Toolkit for the project. Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit's <em>configureStore</em> to create the store. Also, start using Redux DevTools to debug the application's state easier.
+Install Redux Toolkit for the project.
+Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit's <em>configureStore</em> to create the store.
+Also, start using Redux DevTools to debug the application's state easier.
 
 #### 6.10 Better anecdotes, step8
 
@@ -648,9 +689,12 @@ const Notification = () => {
 }
 ```
 
-You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality by using the Redux Toolkit's <em>createSlice</em> function. Also, refactor the application so that it uses a combined reducer as shown in this part of the course material.
+You will have to make changes to the application's existing reducer.
+Create a separate reducer for the new functionality by using the Redux Toolkit's <em>createSlice</em> function.
+Also, refactor the application so that it uses a combined reducer as shown in this part of the course material.
 
-The application does not have to use the <i>Notification</i> component intelligently at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
+The application does not have to use the <i>Notification</i> component intelligently at this point in the exercises.
+It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
 
 #### 6.11 Better anecdotes, step9
 
@@ -666,9 +710,12 @@ Implement filtering for the anecdotes that are displayed to the user.
 
 ![browser showing filtering of anecdotes](../../images/6/9ea.png)
 
-Store the state of the filter in the redux store. It is recommended to create a new reducer and action creators for this purpose. Implement the reducer and action creators using the Redux Toolkit's <em>createSlice</em> function.
+Store the state of the filter in the redux store.
+It is recommended to create a new reducer and action creators for this purpose.
+Implement the reducer and action creators using the Redux Toolkit's <em>createSlice</em> function.
 
-Create a new <i>Filter</i> component for displaying the filter. You can use the following code as a template for the component:
+Create a new <i>Filter</i> component for displaying the filter.
+You can use the following code as a template for the component:
 
 ```js
 const Filter = () => {

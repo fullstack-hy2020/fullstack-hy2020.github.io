@@ -7,7 +7,9 @@ lang: en
 
 <div class="content">
 
-There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
+There are usually constraints that we want to apply to the data that is stored in our application's database.
+Our application shouldn't accept notes that have a missing or empty <i>content</i> property.
+The validity of the note is checked in the route handler:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -45,11 +47,16 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-The <i>content</i> field is now required to be at least five characters long. The <i>date</i> field is set as required, meaning that it can not be missing. The same constraint is also applied to the <i>content</i> field since the minimum length constraint allows the field to be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
+The <i>content</i> field is now required to be at least five characters long.
+The <i>date</i> field is set as required, meaning that it can not be missing.
+The same constraint is also applied to the <i>content</i> field since the minimum length constraint allows the field to be missing.
+We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
 
-The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators if none of the built-in ones cover our needs.
+The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose.
+The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators if none of the built-in ones cover our needs.
 
-If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
+If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception.
+Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
 
 ```js
 app.post('/api/notes', (request, response, next) => { // highlight-line
@@ -92,7 +99,8 @@ When validating an object fails, we return the following default error message f
 We notice that the backend has now a problem: validations are not done when editing a note.
 The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explains what is the problem, validations are not run by default when <i>findOneAndUpdate</i> is executed.
 
-The fix is easy. Let us also reformulate the route code a bit:
+The fix is easy.
+Let us also reformulate the route code a bit:
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -112,7 +120,8 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Fly.io/Heroku. We do have to generate a new production build of the frontend since changes thus far were only on our backend.
+The application should work almost as-is in Fly.io/Heroku.
+We do have to generate a new production build of the frontend since changes thus far were only on our backend.
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Heroku.
 
@@ -136,11 +145,16 @@ heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster
 heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
 ```
 
-The application should now work. Sometimes things don't go according to plan. If there are problems, <i>fly logs</i> or <i>heroku logs</i> will be there to help. My own application did not work after making the changes. The logs showed the following:
+The application should now work.
+Sometimes things don't go according to plan.
+If there are problems, <i>fly logs</i> or <i>heroku logs</i> will be there to help.
+My own application did not work after making the changes.
+The logs showed the following:
 
 ![node output showing connecting to undefined](../../images/3/51a.png)
 
-For some reason the URL of the database was undefined. The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable when the code expected it to be in <em>MONGODB\_URI</em>.
+For some reason the URL of the database was undefined.
+The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable when the code expected it to be in <em>MONGODB\_URI</em>.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 
@@ -154,11 +168,13 @@ You can find the code for our current application in its entirety in the <i>part
 
 Expand the validation so that the name stored in the database has to be at least three characters long.
 
-Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a <em>catch</em> block as shown below:
+Expand the frontend so that it displays some form of error message when a validation error occurs.
+Error handling can be implemented by adding a <em>catch</em> block as shown below:
 
 ```js
 personService
-    .create({ ... })
+    .create({ ...
+})
     .then(createdPerson => {
       // ...
     })
@@ -172,16 +188,18 @@ You can display the default error message returned by Mongoose, even though they
 
 ![phonebook screenshot showing person validation failure](../../images/3/56e.png)
 
-**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
+**NB:** On update operations, mongoose validators are off by default.
+[Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
 
 #### 3.20*: Phonebook database, step8
 
-Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must
+Add validation to your phonebook application, which will make sure that phone numbers are of the correct form.
+A phone number must
 
-- has length of 8 or more
+- have a length of 8 or more digits
 - if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
-    - eg. 09-1234556 and 040-22334455 are valid phone numbers
-    - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
+    - e.g. 09-1234556 and 040-22334455 are valid phone numbers
+    - e.g. 1234556, 1-22334455 and 10-22-334455 are invalid
 
 Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
@@ -189,7 +207,8 @@ If an HTTP POST request tries to add a name that is already in the phonebook, th
 
 #### 3.21 Deploying the database backend to production
 
-Generate a new "full stack" version of the application by creating a new production build of the frontend, and copying it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
+Generate a new "full stack" version of the application by creating a new production build of the frontend, and copying it to the backend repository.
+Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
 
 Push the latest version to Heroku and verify that everything works there as well.
 
@@ -199,13 +218,18 @@ Push the latest version to Heroku and verify that everything works there as well
 
 ### Lint
 
-Before we move on to the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:
+Before we move on to the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>).
+Wikipedia says the following about lint:
 
-> <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
+> <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors.
+The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage.
+Lint-like tools generally perform static analysis of source code.</i>
 
-In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
+In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors.
+Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
 
-In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
+In the JavaScript universe, the current leading tool for static analysis aka.
+"linting" is [ESlint](https://eslint.org/).
 
 Let's install ESlint as a development dependency to the backend project with the command:
 
@@ -289,7 +313,8 @@ It is recommended to create a separate *npm script* for linting:
 
 Now the *npm run lint* command will check every file in the project.
 
-Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
+Also, the files in the <em>build</em> directory get checked when the command is run.
+We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
 
 ```bash
 build
@@ -303,7 +328,9 @@ Lint has quite a lot to say about our code:
 
 Let's not fix these issues just yet.
 
-A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously.
+By using the plugin you will see errors in your code immediately.
+You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
 The VS Code ESlint plugin will underline style violations with a red line:
 
@@ -313,7 +340,8 @@ This makes errors easy to spot and fix right away.
 
 ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
 
-Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
+Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator.
+The rule is added under the <i>rules</i> field in the configuration file.
 
 ```js
 {
@@ -352,7 +380,9 @@ Our default configuration takes a bunch of predetermined rules into use from <i>
 'extends': 'eslint:recommended',
 ```
 
-This includes a rule that warns about *console.log* commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
+This includes a rule that warns about *console.log* commands.
+[Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file.
+Let's do this for the <i>no-console</i> rule in the meantime.
 
 ```js
 {
@@ -372,13 +402,16 @@ This includes a rule that warns about *console.log* commands. [Disabling](https:
 }
 ```
 
-**NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
+**NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line.
+This will verify that the configuration file is correctly formatted:
 
 ![terminal output from npm run lint](../../images/3/55.png)
 
 If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
 
-Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
+Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file.
+It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours.
+Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
 You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
 </div>
@@ -391,6 +424,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 Add ESlint to your application and fix all the warnings.
 
-This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise of this part of the course.
+It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

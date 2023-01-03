@@ -6,15 +6,21 @@ lang: en
 ---
 <div class="content">
 
-Developing with React was notorious for requiring tools that were very difficult to configure. These days, getting started with React development is almost painless thanks to [create-react-app](https://github.com/facebookincubator/create-react-app). A better development workflow has probably never existed for browser-side JavaScript development.
+Developing with React was notorious for requiring tools that were very difficult to configure.
+These days, getting started with React development is almost painless thanks to [create-react-app](https://github.com/facebookincubator/create-react-app).
+A better development workflow has probably never existed for browser-side JavaScript development.
 
-We cannot rely on the black magic of create-react-app forever and it's time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).
+We cannot rely on the black magic of create-react-app forever and it's time for us to take a look under the hood.
+One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).
 
 ### Bundling
 
-We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them. Even though ES6 modules are defined in the ECMAScript standard, the older browsers do not know how to handle code that is divided into modules.
+We have implemented our applications by dividing our code into separate modules that have been <i>imported</i> to places that require them.
+Even though ES6 modules are defined in the ECMAScript standard, the older browsers do not know how to handle code that is divided into modules.
 
-For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code. When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the *npm run build* command. Under the hood, the npm script bundles the source code using webpack, which produces the following collection of files in the <i>build</i> directory:
+For this reason, code that is divided into modules must be <i>bundled</i> for browsers, meaning that all of the source code files are transformed into a single file that contains all of the application code.
+When we deployed our React frontend to production in [part 3](/en/part3/deploying_app_to_internet), we performed the bundling of our application with the *npm run build* command.
+Under the hood, the npm script bundles the source code using webpack, which produces the following collection of files in the <i>build</i> directory:
 
 <pre>
 .
@@ -53,11 +59,14 @@ The <i>index.html</i> file located at the root of the build directory is the "ma
 
 As we can see from the example application that was created with create-react-app, the build script also bundles the application's CSS files into a single <i>/static/css/main.1becb9f2.css</i> file.
 
-In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file. When webpack bundles the code, it includes all of the code that the entry point imports, the code that its imports import, and so on.
+In practice, bundling is done so that we define an entry point for the application, which typically is the <i>index.js</i> file.
+When webpack bundles the code, it includes all of the code that the entry point imports, the code that its imports import, and so on.
 
 Since part of the imported files are packages like React, Redux, and Axios, the bundled JavaScript file will also contain the contents of each of these libraries.
 
-> The old way of dividing the application's code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags. This resulted in  decreased performance, since the loading of each separate file results in some overhead. For this reason, these days the preferred method is to bundle the code into a single file.
+> The old way of dividing the application's code into multiple files was based on the fact that the <i>index.html</i> file loaded all of the separate JavaScript files of the application with the help of script tags.
+This resulted in  decreased performance, since the loading of each separate file results in some overhead.
+For this reason, these days the preferred method is to bundle the code into a single file.
 
 Next, we will create a suitable webpack configuration for a React application by hand from scratch.
 
@@ -122,11 +131,13 @@ const hello = name => {
 }
 ```
 
-When we execute the *npm run build* command, our application code will be bundled by webpack. The operation will produce a new <i>main.js</i> file that is added under the <i>build</i> directory:
+When we execute the *npm run build* command, our application code will be bundled by webpack.
+The operation will produce a new <i>main.js</i> file that is added under the <i>build</i> directory:
 
 ![terminal output webpack npm run build](../../images/7/19x.png)
 
-The file contains a lot of stuff that looks quite interesting. We can also see the code we wrote earlier at the end of the file:
+The file contains a lot of stuff that looks quite interesting.
+We can also see the code we wrote earlier at the end of the file:
 
 ```js
 eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
@@ -182,13 +193,17 @@ module.exports = config
 
 The configuration file has been written in JavaScript and the configuration object is exported using Node's module syntax.
 
-Our minimal configuration definition almost explains itself. The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application.
+Our minimal configuration definition almost explains itself.
+The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application.
 
-The [output](https://webpack.js.org/concepts/#output) property defines the location where the bundled code will be stored. The target directory must be defined as an <i>absolute path</i>, which is easy to create with the [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths) method. We also use [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) which is a global variable in Node that stores the path to the current directory.
+The [output](https://webpack.js.org/concepts/#output) property defines the location where the bundled code will be stored.
+The target directory must be defined as an <i>absolute path</i>, which is easy to create with the [path.resolve](https://nodejs.org/docs/latest-v8.x/api/path.html#path_path_resolve_paths) method.
+We also use [\_\_dirname](https://nodejs.org/docs/latest/api/globals.html#globals_dirname) which is a global variable in Node that stores the path to the current directory.
 
 ### Bundling React
 
-Next, let's transform our application into a minimal React application. Let's install the required libraries:
+Next, let's transform our application into a minimal React application.
+Let's install the required libraries:
 
 ```bash
 npm install react react-dom
@@ -242,7 +257,10 @@ When we bundle our application, we run into the following problem:
 
 ### Loaders
 
-The error message from webpack states that we may need an appropriate <i>loader</i> to bundle the <i>App.js</i> file correctly. By default, webpack only knows how to deal with plain JavaScript. Although we may have become unaware of it, we are using [JSX](https://facebook.github.io/jsx/) for rendering our views in React. To illustrate this, the following code is not regular JavaScript:
+The error message from webpack states that we may need an appropriate <i>loader</i> to bundle the <i>App.js</i> file correctly.
+By default, webpack only knows how to deal with plain JavaScript.
+Although we may have become unaware of it, we are using [JSX](https://facebook.github.io/jsx/) for rendering our views in React.
+To illustrate this, the following code is not regular JavaScript:
 
 ```js
 const App = () => {
@@ -297,7 +315,9 @@ The definition of a single loader consists of three parts:
 }
 ```
 
-The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>. The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader). The <i>options</i> property is used for specifying parameters for the loader, which configure its functionality.
+The <i>test</i> property specifies that the loader is for files that have names ending with <i>.js</i>.
+The <i>loader</i> property specifies that the processing for those files will be done with [babel-loader](https://github.com/babel/babel-loader).
+The <i>options</i> property is used for specifying parameters for the loader, which configure its functionality.
 
 Let's install the loader and its required packages as a <i>development dependency</i>:
 
@@ -324,7 +344,9 @@ You can test the bundled application by opening the <i>build/index.html</i> file
 
 ![browser hello webpack](../../images/7/22.png)
 
-It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers. [Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue. With t he [previous solution](https://babeljs.io/docs/en/babel-polyfill/) being deprecated we now have to install two more missing dependencies, that is [core-js](https://www.npmjs.com/package/core-js) and [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
+It's worth noting that if the bundled application's source code uses <i>async/await</i>, the browser will not render anything on some browsers.
+[Googling the error message in the console](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) will shed some light on the issue.
+With t he [previous solution](https://babeljs.io/docs/en/babel-polyfill/) being deprecated we now have to install two more missing dependencies, that is [core-js](https://www.npmjs.com/package/core-js) and [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
 
 ```bash
 npm install core-js regenerator-runtime
@@ -341,13 +363,15 @@ Our configuration contains nearly everything that we need for React development.
 
 ### Transpilers
 
-The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile). The general definition of the term is to compile source code by transforming it from one language to another.
+The process of transforming code from one form of JavaScript to another is called [transpiling](https://en.wiktionary.org/wiki/transpile).
+The general definition of the term is to compile source code by transforming it from one language to another.
 
 By using the configuration from the previous section, we are <i>transpiling</i> the code containing JSX into regular JavaScript with the help of [babel](https://babeljs.io/), which is currently the most popular tool for the job.
 
 As mentioned in part 1, most browsers do not support the latest features that were introduced in ES6 and ES7, and for this reason, the code is usually transpiled to a version of JavaScript that implements the ES5 standard.
 
-The transpilation process that is executed by Babel is defined with <i>plugins</i>. In practice, most developers use ready-made [presets](https://babeljs.io/docs/plugins/) that are groups of pre-configured plugins.
+The transpilation process that is executed by Babel is defined with <i>plugins</i>.
+In practice, most developers use ready-made [presets](https://babeljs.io/docs/plugins/) that are groups of pre-configured plugins.
 
 Currently, we are using the [@babel/preset-react](https://babeljs.io/docs/plugins/preset-react/) preset for transpiling the source code of our application:
 
@@ -379,7 +403,8 @@ Let's install the preset with the command:
 npm install @babel/preset-env --save-dev
 ```
 
-When we transpile the code, it gets transformed into old-school JavaScript. The definition of the transformed <i>App</i> component looks like this:
+When we transpile the code, it gets transformed into old-school JavaScript.
+The definition of the transformed <i>App</i> component looks like this:
 
 ```js
 var App = function App() {
@@ -387,11 +412,13 @@ var App = function App() {
 };
 ```
 
-As we can see, variables are declared with the *var* keyword as ES5 JavaScript does not understand the *const* keyword. Arrow functions are also not used, which is why the function definition used the *function* keyword.
+As we can see, variables are declared with the *var* keyword as ES5 JavaScript does not understand the *const* keyword.
+Arrow functions are also not used, which is why the function definition used the *function* keyword.
 
 ### CSS
 
-Let's add some CSS to our application. Let's create a new <i>src/index.css</i> file:
+Let's add some CSS to our application.
+Let's create a new <i>src/index.css</i> file:
 
 ```css
 .container {
@@ -446,7 +473,8 @@ When using CSS, we have to use [css](https://webpack.js.org/loaders/css-loader/)
 
 The job of the [css loader](https://webpack.js.org/loaders/css-loader/) is to load the <i>CSS</i> files and the job of the [style loader](https://webpack.js.org/loaders/style-loader/) is to generate and inject a <i>style</i> element that contains all of the styles of the application.
 
-With this configuration, the CSS definitions are included in the <i>main.js</i> file of the application. For this reason, there is no need to separately import the <i>CSS</i> styles in the main <i>index.html</i> file of the application.
+With this configuration, the CSS definitions are included in the <i>main.js</i> file of the application.
+For this reason, there is no need to separately import the <i>CSS</i> styles in the main <i>index.html</i> file of the application.
 
 If needed, the application's CSS can also be generated into its own separate file by using the [mini-css-extract-plugin](https://github.com/webpack-contrib/mini-css-extract-plugin).
 
@@ -460,9 +488,11 @@ The bundling will succeed once again and the application gets new styles.
 
 ### Webpack-dev-server
 
-The current configuration makes it possible to develop our application but the workflow is awful (to the point where it resembles the development workflow with Java). Every time we make a change to the code, we have to bundle it and refresh the browser to test the code.
+The current configuration makes it possible to develop our application but the workflow is awful (to the point where it resembles the development workflow with Java).
+Every time we make a change to the code, we have to bundle it and refresh the browser to test the code.
 
-The [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) offers a solution to our problems. Let's install it with the command:
+The [webpack-dev-server](https://webpack.js.org/guides/development/#using-webpack-dev-server) offers a solution to our problems.
+Let's install it with the command:
 
 ```js
 npm install --save-dev webpack-dev-server
@@ -501,9 +531,12 @@ const config = {
 };
 ```
 
-The *npm start* command will now start the dev-server at port 3000, meaning that our application will be available by visiting <http://localhost:3000> in the browser. When we make changes to the code, the browser will automatically refresh the page.
+The *npm start* command will now start the dev-server at port 3000, meaning that our application will be available by visiting <http://localhost:3000> in the browser.
+When we make changes to the code, the browser will automatically refresh the page.
 
-The process for updating the code is fast. When we use the dev-server, the code is not bundled the usual way into the <i>main.js</i> file. The result of the bundling exists only in memory.
+The process for updating the code is fast.
+When we use the dev-server, the code is not bundled the usual way into the <i>main.js</i> file.
+The result of the bundling exists only in memory.
 
 Let's extend the code by changing the definition of the <i>App</i> component as shown below:
 
@@ -567,13 +600,15 @@ App.js:27 Uncaught TypeError: Cannot read property 'concat' of undefined
     at handleClick (App.js:27)
 </pre>
 
-The location of the error indicated in the message does not match the actual location of the error in our source code. If we click the error message, we notice that the displayed source code does not resemble our application code:
+The location of the error indicated in the message does not match the actual location of the error in our source code.
+If we click the error message, we notice that the displayed source code does not resemble our application code:
 
 ![devtools source does not show our source code](../../images/7/26.png)
 
 Of course, we want to see our actual source code in the error message.
 
-Luckily, fixing the error message in this respect is quite easy. We will ask webpack to generate a so-called [source map](https://webpack.js.org/configuration/devtool/) for the bundle, which makes it possible to <i>map errors</i> that occur during the execution of the bundle to the corresponding part in the original source code.
+Luckily, fixing the error message in this respect is quite easy.
+We will ask webpack to generate a so-called [source map](https://webpack.js.org/configuration/devtool/) for the bundle, which makes it possible to <i>map errors</i> that occur during the execution of the bundle to the corresponding part in the original source code.
 
 The source map can be generated by adding a new <i>devtool</i> property to the configuration object with the value 'source-map':
 
@@ -591,7 +626,8 @@ const config = {
 };
 ```
 
-Webpack has to be restarted when we make changes to its configuration. It is also possible to make webpack watch for changes made to itself but we will not do that this time.
+Webpack has to be restarted when we make changes to its configuration.
+It is also possible to make webpack watch for changes made to itself but we will not do that this time.
 
 The error message is now a lot better
 
@@ -617,13 +653,20 @@ const App = () => {
 
 ### Minifying the code
 
-When we deploy the application to production, we are using the <i>main.js</i> code bundle that is generated by webpack. The size of the <i>main.js</i> file is 1356668 bytes even though our application only contains a few lines of our code. The large file size is because the bundle also contains the source code for the entire React library. The size of the bundled code matters since the browser has to load the code when the application is first used. With high-speed internet connections, 1356668 bytes is not an issue, but if we were to keep adding more external dependencies, loading speeds could become an issue, particularly for mobile users.
+When we deploy the application to production, we are using the <i>main.js</i> code bundle that is generated by webpack.
+The size of the <i>main.js</i> file is 1356668 bytes even though our application only contains a few lines of our code.
+The large file size is because the bundle also contains the source code for the entire React library.
+The size of the bundled code matters since the browser has to load the code when the application is first used.
+With high-speed internet connections, 1356668 bytes is not an issue, but if we were to keep adding more external dependencies, loading speeds could become an issue, particularly for mobile users.
 
-If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments. There's no point in manually optimizing these files, as there are many existing tools for the job.
+If we inspect the contents of the bundle file, we notice that it could be greatly optimized in terms of file size by removing all of the comments.
+There's no point in manually optimizing these files, as there are many existing tools for the job.
 
-The optimization process for JavaScript files is called <i>minification</i>. One of the leading tools intended for this purpose is [UglifyJS](http://lisperator.net/uglifyjs/).
+The optimization process for JavaScript files is called <i>minification</i>.
+One of the leading tools intended for this purpose is [UglifyJS](http://lisperator.net/uglifyjs/).
 
-Starting from version 4 of webpack, the minification plugin does not require additional configuration to be used. It is enough to modify the npm script in the <i>package.json</i> file to specify that webpack will execute the bundling of the code in <i>production</i> mode:
+Starting from version 4 of webpack, the minification plugin does not require additional configuration to be used.
+It is enough to modify the npm script in the <i>package.json</i> file to specify that webpack will execute the bundling of the code in <i>production</i> mode:
 
 ```json
 {
@@ -684,7 +727,8 @@ Our goal is to configure the application with webpack in such a way that, when u
 
 The bundled file will then be configured to use the backend available at the <https://obscure-harbor-49797.herokuapp.com/api/notes> URL.
 
-We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application. For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part7/custom_hooks) called *useNotes*:
+We will install <i>axios</i>, start the json-server, and then make the necessary changes to the application.
+For the sake of changing things up, we will fetch the notes from the backend with our [custom hook](/en/part7/custom_hooks) called *useNotes*:
 
 ```js
 // highlight-start
@@ -727,7 +771,8 @@ const App = () => {
 export default App
 ```
 
-The address of the backend server is currently hardcoded in the application code. How can we change the address in a controlled fashion to point to the production backend server when the code is bundled for production?
+The address of the backend server is currently hardcoded in the application code.
+How can we change the address in a controlled fashion to point to the production backend server when the code is bundled for production?
 
 Let's change the configuration object in the <i>webpack.config.js</i> file to a function instead of an object:
 
@@ -756,9 +801,11 @@ const config = (env, argv) => {
 module.exports = config
 ```
 
-The definition remains almost the same, except for the fact that the configuration object is now returned by the function. The function receives the two parameters, <i>env</i> and <i>argv</i>, the second of which can be used for accessing the <i>mode</i> that is defined in the npm script.
+The definition remains almost the same, except for the fact that the configuration object is now returned by the function.
+The function receives the two parameters, <i>env</i> and <i>argv</i>, the second of which can be used for accessing the <i>mode</i> that is defined in the npm script.
 
-We can also use webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) for defining <i>global default constants</i> that can be used in the bundled code. Let's define a new global constant <i>BACKEND\_URL</i> that gets a different value depending on the environment that the code is being bundled for:
+We can also use webpack's [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) for defining <i>global default constants</i> that can be used in the bundled code.
+Let's define a new global constant <i>BACKEND\_URL</i> that gets a different value depending on the environment that the code is being bundled for:
 
 ```js
 const path = require('path')
@@ -832,21 +879,26 @@ By default, the bundled application will be available at <http://localhost:9080>
 
 ### Polyfill
 
-Our application is finished and works with all relatively recent versions of modern browsers, except for Internet Explorer. The reason for this is that, because of *axios*, our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them:
+Our application is finished and works with all relatively recent versions of modern browsers, except for Internet Explorer.
+The reason for this is that, because of *axios*, our code uses [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), and no existing version of IE supports them:
 
 ![browser compatibility chart highlighting how bad internet explorer is](../../images/7/29.png)
 
-There are many other things in the standard that IE does not support. Something as harmless as the [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method of JavaScript arrays exceeds the capabilities of IE:
+There are many other things in the standard that IE does not support.
+Something as harmless as the [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) method of JavaScript arrays exceeds the capabilities of IE:
 
 ![browser compatibility chart showing IE does not support find method](../../images/7/30.png)
 
-In these situations, it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support. IE understands Promises syntactically but it simply has not implemented their functionality. The *find* property of arrays in IE is simply <i>undefined</i>.
+In these situations, it is not enough to transpile the code, as transpilation simply transforms the code from a newer version of JavaScript to an older one with wider browser support.
+IE understands Promises syntactically but it simply has not implemented their functionality.
+The *find* property of arrays in IE is simply <i>undefined</i>.
 
 If we want the application to be IE-compatible, we need to add a [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill), which is code that adds the missing functionality to older browsers.
 
 Polyfills can be added with the help of [webpack and Babel](https://babeljs.io/docs/usage/polyfill/) or by installing one of many existing polyfill libraries.
 
-The polyfill provided by the [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) library is easy to use. We simply have to add the following to our existing application code:
+The polyfill provided by the [promise-polyfill](https://www.npmjs.com/package/promise-polyfill) library is easy to use.
+We simply have to add the following to our existing application code:
 
 ```js
 import PromisePolyfill from 'promise-polyfill'
@@ -856,7 +908,8 @@ if (!window.Promise) {
 }
 ```
 
-If the global *Promise* object does not exist, meaning that the browser does not support Promises, the polyfilled Promise is stored in the global variable. If the polyfilled Promise is implemented well enough, the rest of the code should work without issues.
+If the global *Promise* object does not exist, meaning that the browser does not support Promises, the polyfilled Promise is stored in the global variable.
+If the polyfilled Promise is implemented well enough, the rest of the code should work without issues.
 
 One exhaustive list of existing polyfills can be found [here](https://github.com/Modernizr/Modernizr/wiki/HTML5-Cross-browser-Polyfills).
 
@@ -864,9 +917,11 @@ The browser compatibility of different APIs can be checked by visiting [https://
 
 ### Eject
 
-The create-react-app tool uses webpack behind the scenes. If the default configuration is not enough, it is possible to [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and in a modified <i>package.json</i> file.
+The create-react-app tool uses webpack behind the scenes.
+If the default configuration is not enough, it is possible to [eject](https://create-react-app.dev/docs/available-scripts/#npm-run-eject) the project which will get rid of all of the black magic, and the default configuration files will be stored in the <i>config</i> directory and a modified <i>package.json</i> file.
 
-If you eject an application created with create-react-app, there is no return and all of the configurations will have to be maintained manually. The default configuration is not trivial, and instead of ejecting from a create-react-app application, a better alternative may be to write your own webpack configuration from the get-go.
+If you eject an application created with create-react-app, there is no return and all of the configurations will have to be maintained manually.
+The default configuration is not trivial, and instead of ejecting from a create-react-app application, a better alternative may be to write your own webpack configuration from the get-go.
 
 Going through and reading the configuration files of an ejected application is still recommended and extremely educational.
 

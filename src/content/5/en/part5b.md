@@ -123,7 +123,8 @@ const App = () => {
 
 The <i>App</i> components state now contains the boolean <i>loginVisible</i>, which defines if the login form should be shown to the user or not.
 
-The value of *loginVisible* is toggled with two buttons. Both buttons have their event handlers defined directly in the component:
+The value of *loginVisible* is toggled with two buttons.
+Both buttons have their event handlers defined directly in the component:
 
 ```js
 <button onClick={() => setLoginVisible(true)}>log in</button>
@@ -146,7 +147,8 @@ const showWhenVisible = { display: loginVisible ? '' : 'none' }
 </div>
 ```
 
-We are once again using the "question mark" ternary operator. If *loginVisible* is <i>true</i>, then the CSS rule of the component will be:
+We are once again using the "question mark" ternary operator.
+If *loginVisible* is <i>true</i>, then the CSS rule of the component will be:
 
 ```css
 display: 'none';
@@ -154,7 +156,7 @@ display: 'none';
 
 If *loginVisible* is <i>false</i>, then <i>display</i> will not receive any value related to the visibility of the component.
 
-### The components children, aka. props.children
+### The components children, AKA props.children
 
 The code related to managing the visibility of the login form could be considered to be its own logical entity, and for this reason, it would be good to extract it from the <i>App</i> component into a separate component.
 
@@ -172,7 +174,9 @@ Our goal is to implement a new <i>Togglable</i> component that can be used in th
 </Togglable>
 ```
 
-The way that the component is used is slightly different from our previous components. The component has both opening and closing tags that surround a <i>LoginForm</i> component. In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
+The way that the component is used is slightly different from our previous components.
+The component has both opening and closing tags that surround a <i>LoginForm</i> component.
+In React terminology <i>LoginForm</i> is a child component of <i>Togglable</i>.
 
 We can add any React elements we want between the opening and closing tags of <i>Togglable</i>, like this for example:
 
@@ -214,7 +218,8 @@ const Togglable = (props) => {
 export default Togglable
 ```
 
-The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
+The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component.
+The child components are the React elements that we define between the opening and closing tags of a component.
 
 This time the children are rendered in the code that is used for rendering the component itself:
 
@@ -225,7 +230,8 @@ This time the children are rendered in the code that is used for rendering the c
 </div>
 ```
 
-Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists. If a component is defined with an automatically closing */>* tag, like this:
+Unlike the "normal" props we've seen before, <i>children</i> is automatically added by React and always exists.
+If a component is defined with an automatically closing */>* tag, like this:
 
 ```js
 <Note
@@ -259,7 +265,7 @@ const NoteForm = ({ onSubmit, handleChange, value}) => {
 }
 ```
 
-Next let's define the form component inside of a <i>Togglable</i> component:
+Next, let's define the form component inside of a <i>Togglable</i> component:
 
 ```js
 <Togglable buttonLabel="new note">
@@ -279,7 +285,8 @@ The state of the application currently is in the *App* component.
 
 React documentation says the [following](https://reactjs.org/docs/lifting-state-up.html) about where to place the state:
 
-<i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+<i>Often, several components need to reflect the same changing data.
+We recommend lifting the shared state up to their closest common ancestor.</i>
 
 If we think about the state of the forms, so for example the contents of a new note before it has been created, the *App* component does not need it for anything.
 We could just as well move the state of the forms to the corresponding components.
@@ -324,13 +331,15 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-<!-- Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin. -->
+<!-- Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
+-->
 The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the *App* component to the component responsible for the note form.
 
-<!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan. -->
+<!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.-->
 There is only one prop left, the *createNote* function, which the form calls when a new note is created.
 
-<!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon. Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
+<!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon.
+Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
 The *App* component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler.
 The *addNote* function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form:
 
@@ -364,7 +373,11 @@ branch <i>part5-5</i>.
 
 Our current implementation is quite good; it has one aspect that could be improved.
 
-After a new note is created, it would make sense to hide the new note form. Currently, the form stays visible. There is a slight problem with hiding the form. The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component. How can we access it outside of the component?
+After a new note is created, it would make sense to hide the new note form.
+Currently, the form stays visible.
+There is a slight problem with hiding the form.
+The visibility is controlled with the <i>visible</i> variable inside of the <i>Togglable</i> component.
+How can we access it outside of the component?
 
 There are many ways to implement closing the form from the parent component, but let's use the [ref](https://reactjs.org/docs/refs-and-the-dom.html) mechanism of React, which offers a reference to the component.
 
@@ -387,7 +400,9 @@ const App = () => {
 }
 ```
 
-The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form. The <i>noteFormRef</i> variable acts as a reference to the component. This hook ensures the same reference (ref) that is kept throughout re-renders of the component.
+The [useRef](https://reactjs.org/docs/hooks-reference.html#useref) hook is used to create a <i>noteFormRef</i> ref, that is assigned to the <i>Togglable</i> component containing the creation note form.
+The <i>noteFormRef</i> variable acts as a reference to the component.
+This hook ensures the same reference (ref) that is kept throughout re-renders of the component.
 
 We also make the following changes to the <i>Togglable</i> component:
 
@@ -428,7 +443,8 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
 export default Togglable
 ```
 
-The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call. This way the component can access the ref that is assigned to it.
+The function that creates the component is wrapped inside of a [forwardRef](https://reactjs.org/docs/react-api.html#reactforwardref) function call.
+This way the component can access the ref that is assigned to it.
 
 The component uses the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook to make its <i>toggleVisibility</i> function available outside of the component.
 
@@ -451,7 +467,10 @@ const App = () => {
 
 To recap, the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) function is a React hook, that is used for defining functions in a component, which can be invoked from outside of the component.
 
-This trick works for changing the state of a component, but it looks a bit unpleasant. We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components. We will take a look at these class components during part 7 of the course material. So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
+This trick works for changing the state of a component, but it looks a bit unpleasant.
+We could have accomplished the same functionality with slightly cleaner code using "old React" class-based components.
+We will take a look at these class components during part 7 of the course material.
+So far this is the only situation where using React hooks leads to code that is not cleaner than with class components.
 
 There are also [other use cases](https://reactjs.org/docs/refs-and-the-dom.html) for refs than accessing React components.
 
@@ -499,7 +518,9 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 
 #### 5.5 Blog list frontend, step5
 
-Change the form for creating blog posts so that it is only displayed when appropriate. Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate). If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
+Change the form for creating blog posts so that it is only displayed when appropriate.
+Use functionality similar to what was shown [earlier in this part of the course material](/en/part5/props_children_and_proptypes#displaying-the-login-form-only-when-appropriate).
+If you wish to do so, you can use the <i>Togglable</i> component defined in part 5.
 
 By default the form is not visible
 
@@ -553,13 +574,16 @@ const Blog = ({ blog }) => {
 )}
 ```
 
-**NB:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior. The easiest solution will be to add a state to the blog post that controls the displayed form of the blog post.
+**NB:** even though the functionality implemented in this part is almost identical to the functionality provided by the <i>Togglable</i> component, the component can not be used directly to achieve the desired behavior.
+The easiest solution will be to add a state to the blog post that controls the displayed form of the blog post.
 
 #### 5.8: Blog list frontend, step8
 
-Implement the functionality for the like button. Likes are increased by making an HTTP *PUT* request to the unique address of the blog post in the backend.
+Implement the functionality for the like button.
+Likes are increased by making an HTTP *PUT* request to the unique address of the blog post in the backend.
 
-Since the backend operation replaces the entire blog post, you will have to send all of its fields in the request body. If you wanted to add a like to the following blog post:
+Since the backend operation replaces the entire blog post, you will have to send all of its fields in the request body.
+If you wanted to add a like to the following blog post:
 
 ```js
 {
@@ -590,15 +614,18 @@ You would have to make an HTTP PUT request to the address <i>/api/blogs/5a43fde2
 
 The backend has to be updated too to handle the user reference.
 
-**One last warning:** if you notice that you are using async/await and the *then*-method in the same code, it is almost certain that you are doing something wrong. Stick to using one or the other, and never use both at the same time "just in case".
+**One last warning:** if you notice that you are using async/await and the *then*-method in the same code, it is almost certain that you are doing something wrong.
+Stick to using one or the other, and never use both at the same time "just in case".
 
 #### 5.9: Blog list frontend, step9
 
-Modify the application to list the blog posts by the number of <i>likes</i>. Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
+Modify the application to list the blog posts by the number of <i>likes</i>.
+Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
 
 #### 5.10: Blog list frontend, step10
 
-Add a new button for deleting blog posts. Also, implement the logic for deleting blog posts in the frontend.
+Add a new button for deleting blog posts.
+Also, implement the logic for deleting blog posts in the frontend.
 
 Your application could look something like this:
 
@@ -614,7 +641,8 @@ Show the button for deleting a blog post only if the blog post was added by the 
 
 ### PropTypes
 
-The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop. If we forget to define it to the component:
+The <i>Togglable</i> component assumes that it is given the text for the button via the <i>buttonLabel</i> prop.
+If we forget to define it to the component:
 
 ```js
 <Togglable> buttonLabel forgotten... </Togglable>
@@ -624,7 +652,8 @@ The application works, but the browser renders a button that has no label text.
 
 We would like to enforce that when the <i>Togglable</i> component is used, the button label text prop must be given a value.
 
-The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package. Let's install the package:
+The expected and required props of a component can be defined with the [prop-types](https://github.com/facebook/prop-types) package.
+Let's install the package:
 
 ```shell
 npm install prop-types
@@ -648,7 +677,8 @@ The console will display the following error message if the prop is left undefin
 
 ![console error stating buttonLabel is undefined](../../images/5/15.png)
 
-The application still works and nothing forces us to define props despite the PropTypes definitions. Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.
+The application still works and nothing forces us to define props despite the PropTypes definitions.
+Mind you, it is extremely unprofessional to leave <i>any</i> red output in the browser console.
 
 Let's also define PropTypes to the <i>LoginForm</i> component:
 
@@ -680,11 +710,13 @@ If the type of a passed prop is wrong, e.g. if we try to define the <i>handleSub
 
 ### ESlint
 
-In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend. Let's take ESlint to use in the frontend as well.
+In part 3 we configured the [ESlint](/en/part3/validation_and_es_lint#lint) code style tool to the backend.
+Let's take ESlint to use in the frontend as well.
 
 Create-react-app has installed ESlint to the project by default, so all that's left for us to do is define our desired configuration in the <i>.eslintrc.js</i> file.
 
-*NB:* do not run the *eslint --init* command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*NB:* do not run the *eslint --init* command.
+It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
 Next, we will start testing the frontend and in order to avoid undesired and irrelevant linter errors we will install the [eslint-plugin-jest](https://www.npmjs.com/package/eslint-plugin-jest) package:
 
@@ -753,7 +785,10 @@ module.exports = {
 }
 ```
 
-NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work. If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed. Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work. See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.
+NOTE: If you are using Visual Studio Code together with ESLint plugin, you might need to add a workspace setting for it to work.
+If you are seeing ```Failed to load plugin react: Cannot find module 'eslint-plugin-react'``` additional configuration is needed.
+Adding the line ```"eslint.workingDirectories": [{ "mode": "auto" }]``` to settings.json in the workspace seems to work.
+See [here](https://github.com/microsoft/vscode-eslint/issues/880#issuecomment-578052807) for more information.
 
 Let's create [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file with the following contents to the repository root
 
@@ -808,7 +843,8 @@ export default Togglable
 
 You can find the code for our current application in its entirety in the <i>part5-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part5-7).
 
-Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overridden. [The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage us to do so:
+Note that create-react-app has also a [default ESLint-configuration](https://www.npmjs.com/package/eslint-config-react-app), that we have now overridden.
+[The documentation](https://create-react-app.dev/docs/setting-up-your-editor/#extending-or-replacing-the-default-eslint-config) mentions that it is ok to replace the default but does not encourage us to do so:
  <i>We highly recommend extending the base config, as removing it could introduce hard-to-find issues</i>.
 
 </div>
@@ -823,10 +859,13 @@ Define PropTypes for one of the components of your application.
 
 #### 5.12: Blog list frontend, step12
 
-Add ESlint to the project. Define the configuration according to your liking. Fix all of the linter errors.
+Add ESlint to the project.
+Define the configuration according to your liking.
+Fix all of the linter errors.
 
 Create-react-app has installed ESlint to the project by default, so all that's left for you to do is define your desired configuration in the <i>.eslintrc.js</i> file.
 
-*NB:* do not run the *eslint --init* command. It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
+*NB:* do not run the *eslint --init* command.
+It will install the latest version of ESlint that is not compatible with the configuration file created by create-react-app!
 
 </div>

@@ -7,7 +7,8 @@ lang: en
 
 <div class="content">
 
-The exercises in this part are a bit different than the exercises in the previous parts. The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/en/part7/custom_hooks#exercises-7-4-7-8).
+The exercises in this part are a bit different than the exercises in the previous parts.
+The exercises in the previous part and the exercises in this part [are about the theory presented in this part](/en/part7/custom_hooks#exercises-7-4-7-8).
 
 This part also contains a [series of exercises](/en/part7/exercises_extending_the_bloglist) in which we modify the Bloglist application from parts 4 and 5 to rehearse and apply the skills we have learned.
 
@@ -17,11 +18,15 @@ React offers 15 different [built-in hooks](https://reactjs.org/docs/hooks-refere
 
 In [part 5](/en/part5/props_children_and_proptypes#references-to-components-with-ref) we used the [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle) hook which allows components to provide their functions to other components.
 
-Within the last couple of years, many React libraries have begun to offer hook-based APIs. [In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components. Redux's hook-based API is a lot easier to use than the older, still available, [connect](/en/part6/connect) API.
+Within the last couple of years, many React libraries have begun to offer hook-based APIs.
+[In part 6](/en/part6/flux_architecture_and_redux) we used the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) hooks from the react-redux library to share our redux-store and dispatch function to our components.
+Redux's hook-based API is a lot easier to use than the older, still available, [connect](/en/part6/connect) API.
 
-The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based. Its hooks can be used to access URL parameters and the *navigation* object, which allows for manipulating the browser URL programmatically.
+The [React Router's](https://reactrouter.com/en/main/start/tutorial) API we introduced in the [previous part](/en/part7/react_router) is also partially [hook](https://reacttraining.com/react-router/web/api/Hooks)-based.
+Its hooks can be used to access URL parameters and the *navigation* object, which allows for manipulating the browser URL programmatically.
 
-As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html). Let's recap the rules of using hooks, copied verbatim from the official React documentation:
+As mentioned in [part 1](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks), hooks are not normal functions, and when using those we have to adhere to certain [rules or limitations](https://reactjs.org/docs/hooks-rules.html).
+Let's recap the rules of using hooks, copied verbatim from the official React documentation:
 
 **Don’t call Hooks inside loops, conditions, or nested functions.** Instead, always use Hooks at the top level of your React function.
 
@@ -38,13 +43,16 @@ Create-react-app has the readily-configured rule [eslint-plugin-react-hooks](htt
 
 ### Custom hooks
 
-React offers the option to create [custom](https://reactjs.org/docs/hooks-custom.html) hooks. According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
+React offers the option to create [custom](https://reactjs.org/docs/hooks-custom.html) hooks.
+According to React, the primary purpose of custom hooks is to facilitate the reuse of the logic used in components.
 
 > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
-Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks). Additionally, the name of custom hooks must start with the word *use*.
+Custom hooks are regular JavaScript functions that can use any other hooks, as long as they adhere to the [rules of hooks](/en/part1/a_more_complex_state_debugging_react_apps#rules-of-hooks).
+Additionally, the name of custom hooks must start with the word *use*.
 
-We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling) that can have its value incremented, decremented, or reset. The code of the application is as follows:
+We implemented a counter application in [part 1](/en/part1/component_state_event_handlers#event-handling) that can have its value incremented, decremented, or reset.
+The code of the application is as follows:
 
 ```js  
 import { useState } from 'react'
@@ -68,7 +76,8 @@ const App = (props) => {
 }
 ```
 
-Let's extract the counter logic into a custom hook. The code for the hook is as follows:
+Let's extract the counter logic into a custom hook.
+The code for the hook is as follows:
 
 ```js
 const useCounter = () => {
@@ -95,7 +104,8 @@ const useCounter = () => {
 }
 ```
 
-Our custom hook uses the *useState* hook internally to create its state. The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
+Our custom hook uses the *useState* hook internally to create its state.
+The hook returns an object, the properties of which include the value of the counter as well as functions for manipulating the value.
 
 React components can use the hook as shown below:
 
@@ -120,7 +130,8 @@ const App = (props) => {
 }
 ```
 
-By doing this we can extract the state of the *App* component and its manipulation entirely into the *useCounter* hook. Managing the counter state and logic is now the responsibility of the custom hook.
+By doing this we can extract the state of the *App* component and its manipulation entirely into the *useCounter* hook.
+Managing the counter state and logic is now the responsibility of the custom hook.
 
 The same hook could be <i>reused</i> in the application that was keeping track of the number of clicks made to the left and right buttons:
 
@@ -145,9 +156,11 @@ const App = () => {
 }
 ```
 
-The application creates <i>two</i> completely separate counters. The first one is assigned to the variable *left* and the other to the variable *right*.
+The application creates <i>two</i> completely separate counters.
+The first one is assigned to the variable *left* and the other to the variable *right*.
 
-Dealing with forms in React is somewhat tricky. The following application presents the user with a form that requests the user to input their name, birthday, and height:
+Dealing with forms in React is somewhat tricky.
+The following application presents the user with a form that requests the user to input their name, birthday, and height:
 
 ```js
 const App = () => {
@@ -187,7 +200,8 @@ const App = () => {
 }
 ```
 
-Every field of the form has its own state. To keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
+Every field of the form has its own state.
+To keep the state of the form synchronized with the data provided by the user, we have to register an appropriate <i>onChange</i> handler for each of the <i>input</i> elements.
 
 Let's define our own custom *useField* hook that simplifies the state management of the form:
 
@@ -207,7 +221,8 @@ const useField = (type) => {
 }
 ```
 
-The hook function receives the type of the input field as a parameter. The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
+The hook function receives the type of the input field as a parameter.
+The function returns all of the attributes required by the <i>input</i>: its type, value and the onChange handler.
 
 The hook can be used in the following way:
 
@@ -233,7 +248,8 @@ const App = () => {
 
 ### Spread attributes
 
-We could simplify things a bit further. Since the *name* object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
+We could simplify things a bit further.
+Since the *name* object has exactly all of the attributes that the <i>input</i> element expects to receive as props, we can pass the props to the element using the [spread syntax](https://reactjs.org/docs/jsx-in-depth.html#spread-attributes) in the following way:
 
 ```js
 <input {...name} /> 
@@ -286,7 +302,8 @@ Custom hooks are not only a tool for reuse; they also provide a better way for d
 
 ### More about hooks
 
-The internet is starting to fill up with more and more helpful material related to hooks. The following sources are worth checking out:
+The internet is starting to fill up with more and more helpful material related to hooks.
+The following sources are worth checking out:
 
 - [Awesome React Hooks Resources](https://github.com/rehooks/awesome-react-hooks)
 - [Easy to understand React Hook recipes by Gabe Ragland](https://usehooks.com/)
@@ -392,7 +409,8 @@ One simple fix would be to not use the spread syntax and write all of the forms 
 />
 ```
 
-If we were to do this, we would lose much of the benefit provided by the <i>useField</i> hook. Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
+If we were to do this, we would lose much of the benefit provided by the <i>useField</i> hook.
+Instead, come up with a solution that fixes the issue, but is still easy to use with spread syntax.
 
 #### 7.7: country hook
 
@@ -400,7 +418,8 @@ Let's return to exercises [2.12-14](/en/part2/getting_data_from_server#exercises
 
 Use the code from <https://github.com/fullstack-hy2020/country-hook> as your starting point.
 
-The application can be used to search for a country's details from the <https://restcountries.com/> interface. If a country is found, the details of the country are displayed:
+The application can be used to search for a country's details from the <https://restcountries.com/> interface.
+If a country is found, the details of the country are displayed:
 
 ![browser displaying country details](../../images/7/69ea.png)
 
@@ -450,11 +469,14 @@ const update = async (id, newObject) => {
 export default { getAll, create, update, setToken }
 ```
 
-We notice that the code is in no way specific to the fact that our application deals with notes. Excluding the value of the *baseUrl* variable, the same code could be reused in the blog post application for dealing with the communication with the backend.
+We notice that the code is in no way specific to the fact that our application deals with notes.
+Excluding the value of the *baseUrl* variable, the same code could be reused in the blog post application for dealing with the communication with the backend.
 
-Extract the code for communicating with the backend into its own *useResource* hook. It is sufficient to implement fetching all resources and creating a new resource.
+Extract the code for communicating with the backend into its own *useResource* hook.
+It is sufficient to implement fetching all resources and creating a new resource.
 
-You can do the exercise for the project found in the <https://github.com/fullstack-hy2020/ultimate-hooks> repository. The <i>App</i> component for the project is the following:
+You can do the exercise for the project found in the <https://github.com/fullstack-hy2020/ultimate-hooks> repository.
+The <i>App</i> component for the project is the following:
 
 ```js
 const App = () => {
@@ -496,7 +518,8 @@ const App = () => {
 }
 ```
 
-The *useResource* custom hook returns an array of two items just like the state hooks. The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones.
+The *useResource* custom hook returns an array of two items just like the state hooks.
+The first item of the array contains all of the individual resources and the second item of the array is an object that can be used for manipulating the resource collection, like creating new ones.
 
 If you implement the hook correctly, it can be used for both notes and phone numbers (start the server with the *npm run server* command at port 3005).
 

@@ -7,7 +7,8 @@ lang: en
 
 <div class="content">
 
-Let's expand the application so that the notes are stored in the backend. We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
+Let's expand the application so that the notes are stored in the backend.
+We'll use [json-server](/en/part2/getting_data_from_server), familiar from part 2.
 
 The initial state of the database is stored in the file <i>db.json</i>, which is placed in the root of the project:
 
@@ -144,7 +145,9 @@ noteService.getAll().then(notes =>
 // ...
 ```
 
-Dispatching multiple actions seems a bit impractical. Let's add an action creator <em>setNotes</em> which can be used to directly replace the notes array. We'll get the action creator from the <em>createSlice</em> function by implementing the <em>setNotes</em> action:
+Dispatching multiple actions seems a bit impractical.
+Let's add an action creator <em>setNotes</em> which can be used to directly replace the notes array.
+We'll get the action creator from the <em>createSlice</em> function by implementing the <em>setNotes</em> action:
 
 ```js
 // ...
@@ -270,7 +273,8 @@ const App = () => {
 <!-- Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton. -->
 Now the variable <i>dispatch</i> we define in the *App* component, which practically is the dispatch function of the redux store, has been added to the array useEffect receives as a parameter.
 **If** the value of the dispatch variable would change during runtime,
-the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
+the effect would be executed again.
+This however cannot happen in our application, so the warning is unnecessary.
 
 <!-- Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta: -->
 Another way to get rid of the warning would be to disable ESlint on that line:
@@ -289,11 +293,13 @@ const App = () => {
 }
 ```
 
-Generally disabling ESlint when it throws a warning is not a good idea. Even though the ESlint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
+Generally disabling ESlint when it throws a warning is not a good idea.
+Even though the ESlint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
 
 More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
-We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:
+We can do the same thing when it comes to creating a new note.
+Let's expand the code communicating with the server as follows:
 
 ```js
 const baseUrl = 'http://localhost:3001/notes'
@@ -380,7 +386,9 @@ Modify the creation of new anecdotes, so that the anecdotes are stored in the ba
 
 ### Asynchronous actions and Redux thunk
 
-Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components. It would be better if the communication could be abstracted away from the components so that they don't have to do anything else but call the appropriate <i>action creator</i>. As an example, <i>App</i> would initialize the state of the application as follows:
+Our approach is quite good, but it is not great that the communication with the server happens inside the functions of the components.
+It would be better if the communication could be abstracted away from the components so that they don't have to do anything else but call the appropriate <i>action creator</i>.
+As an example, <i>App</i> would initialize the state of the application as follows:
 
 ```js
 const App = () => {
@@ -411,7 +419,9 @@ const NewNote = () => {
 }
 ```
 
-In this implementation, both components would dispatch an action without the need to know about the communication between the server that happens behind the scenes. These kinds of <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library. The use of the library doesn't need any additional configuration when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.
+In this implementation, both components would dispatch an action without the need to know about the communication between the server that happens behind the scenes.
+These kinds of <i>async actions</i> can be implemented using the [Redux Thunk](https://github.com/reduxjs/redux-thunk) library.
+The use of the library doesn't need any additional configuration when the Redux store is created using the Redux Toolkit's <em>configureStore</em> function.
 
 Let us now install the library
 
@@ -419,7 +429,9 @@ Let us now install the library
 npm install redux-thunk
 ```
 
-With Redux Thunk it is possible to implement <i>action creators</i> which return a function instead of an object. The function receives Redux store's <em>dispatch</em> and <em>getState</em> methods as parameters. This allows for example implementations of asynchronous action creators, which first wait for the completion of a certain asynchronous operation and after that dispatch some action, which changes the store's state.
+With Redux Thunk it is possible to implement <i>action creators</i> which return a function instead of an object.
+The function receives Redux store's <em>dispatch</em> and <em>getState</em> methods as parameters.
+This allows for example implementations of asynchronous action creators, which first wait for the completion of a certain asynchronous operation and after that dispatch some action, which changes the store's state.
 
 We can define an action creator <em>initializeNotes</em> which initializes the notes based on the data received from the server:
 
@@ -470,7 +482,8 @@ const App = () => {
 }
 ```
 
-The solution is elegant. The initialization logic for the notes has been completely separated from the React component.
+The solution is elegant.
+The initialization logic for the notes has been completely separated from the React component.
 
 Next, let's replace the <em>createNote</em> action creator created by the <em>createSlice</em> function with an asynchronous action creator:
 
@@ -528,7 +541,9 @@ export const createNote = content => {
 export default noteSlice.reducer
 ```
 
-The principle here is the same: first, an asynchronous operation is executed, after which the action changing the state of the store is <i>dispatched</i>. Redux Toolkit offers a multitude of tools to simplify asynchronous state management. Suitable tools for this use case are for example the [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) function and the [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API.
+The principle here is the same: first, an asynchronous operation is executed, after which the action changing the state of the store is <i>dispatched</i>.
+Redux Toolkit offers a multitude of tools to simplify asynchronous state management.
+Suitable tools for this use case are for example the [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) function and the [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API.
 
 The component <i>NewNote</i> changes as follows:
 
@@ -607,7 +622,8 @@ Also modify the creation of a new anecdote to happen using asynchronous action c
 
 #### 6.17 Anecdotes and the backend, step5
 
-Voting does not yet save changes to the backend. Fix the situation with the help of the Redux Thunk library.
+Voting does not yet save changes to the backend.
+Fix the situation with the help of the Redux Thunk library.
 
 #### 6.18 Anecdotes and the backend, step6
 
