@@ -36,7 +36,7 @@ You can start the app by running *npm start* in the application's root.
 
 If you take a look at the files and folders, you'll notice that the app is not that different from
 one using pure JavaScript.
-The only differences are that the <i>.js</i> and <i>.jsx</i> files are now  <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.
+The only differences are that the <i>.js</i> and <i>.jsx</i> files are now <i>.ts</i> and <i>.tsx</i> files, they contain some type annotations, and the root directory contains a <i>tsconfig.json</i> file.
 
 Now, let's take a look at the <i>tsconfig.json</i> file that has been created for us:
 
@@ -291,7 +291,7 @@ export default App;
 and remove the unnecessary files.
 
 The whole app is now in one component.
-That is not what we want, so refactor the code so that it consists of three components: *Header*,  *Content* and *Total*.
+That is not what we want, so refactor the code so that it consists of three components: *Header*, *Content* and *Total*.
 All data is still kept in the *App* component, which passes all necessary data to each component as props.
 <i>Be sure to add type declarations for each component's props!</i>
 
@@ -321,7 +321,8 @@ const App = () => {
 ### Deeper type usage
 
 In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*.
-But what if we needed additional attributes for the parts and each part needs different attributes? How would this look, codewise? Let's consider the following example:
+But what if we needed additional attributes for the parts and each part needs different attributes? How would this look, codewise?
+Let's consider the following example:
 
 ```js
 const courseParts = [
@@ -934,7 +935,7 @@ Our naive implementation will be that a patient has an array of entries.
 
 Before going into this, let us do some preparatory work.
 
-#### 9.16: patientor, step1
+#### 9.16: Patientor, step1
 
 Create an endpoint <i>/api/patients/:id</i>  that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients.
 For the time being, expand the backend types as follows:
@@ -961,7 +962,7 @@ The response should look as follows:
 
 ![browser showing entries blank array when accessing patient](../../images/9/38a.png)
 
-#### 9.17: patientor, step2
+#### 9.17: Patientor, step2
 
 Create a page for showing a patient's full information in the frontend.
 
@@ -1041,9 +1042,7 @@ For example, let's take a look at the first two entries:
   specialist: 'MD House',
   diagnosisCodes: ['S62.5'],
   description:
-    "Healing time appr.
-2 weeks.
-patient doesn't remember how he got the injury.",
+    "Healing time appr. 2 weeks. patient doesn't remember how he got the injury.",
   discharge: {
     date: '2015-01-16',
     criteria: 'Thumb has healed.',
@@ -1058,9 +1057,7 @@ patient doesn't remember how he got the injury.",
   employerName: 'HyPD',
   diagnosisCodes: ['Z57.1', 'Z74.3', 'M51.2'],
   description:
-    'Patient mistakenly found himself in a nuclear plant waste site without protection gear.
-Very minor radiation poisoning.
-',
+    'Patient mistakenly found himself in a nuclear plant waste site without protection gear. Very minor radiation poisoning. ',
   sickLeave: {
     startDate: '2019-08-05',
     endDate: '2019-08-28'

@@ -514,7 +514,7 @@ Write a function *calculateExercises* that calculates the average time of <i>dai
 - the calculated average time
 - boolean value describing if the target was reached
 - a rating between the numbers 1-3 that tells how well the hours are met.
-You can decide on the metric on your own.
+  You can decide on the metric on your own.
 - a text value explaining the rating
 
 The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period.

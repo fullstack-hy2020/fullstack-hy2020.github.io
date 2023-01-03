@@ -607,7 +607,7 @@ app.listen(PORT, () => {
 })
 ```
 
-It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported.
+Observe how <i>dotenv</i> must be imported before the <i>note</i> model.
 This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
 Once the file .env has been gitignored, Heroku does not get the database URL from the repository, so you have to set it yourself.
@@ -738,7 +738,7 @@ At this stage, the phonebook can have multiple entries for a person with the sam
 If we try to visit the URL of a note with an id that does not exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be *null*.
 
 Let's change this behavior so that if a note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found.
-In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:
+In addition, let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -858,7 +858,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-The error that is passed forwards is given to the <em>next</em> function as a parameter.
+The error that is passed forward is given to the <em>next</em> function as a parameter.
 If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware.
 If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
 
