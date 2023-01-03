@@ -253,7 +253,7 @@ The programs we have written are alright, but it sure would be better if we coul
 
 Let's try it out, as we would in a regular Node application, by accessing *process.argv*. If you are using a recent npm-version (7.0 or later), there are no problems but with an older setup something is not right:
 
-![](../../images/9/5.png)
+![vs code error cannot find name process need to install type definitions](../../images/9/5.png)
 
 So what is the problem with older setups?
 
