@@ -449,7 +449,7 @@ For example, if we are handling an array containing objects of a specific type, 
 Even though the compiler is pretty good at making sure we don't do anything unwanted, it is safer to define the types for the data ourselves.
 
 Currently, we have a basic working TypeScript express app, but there are barely any actual <i>typings</i> in the code.
-Since we know what type of data should be accepted for the weather and visibility fields, there is no reason for us not to include their types in the code.
+Since we know what type of data should be accepted for the *weather* and *visibility* fields, there is no reason for us not to include their types in the code.
 
 Let's create a file for our types, <i>types.ts</i>, where we'll define all our types for this project.
 
@@ -1195,7 +1195,7 @@ const parseDate = (date: unknown): string => {
 The code is nothing special. The only thing is that we can't use a type guard here since a date in this case is only considered to be a *string*.
 Note that even though the *parseDate* function accepts the *date* variable as *unknown* after we check the type with *isString*, then its type is set as *string*, which is why we can give the variable to the *isDate* function requiring a string without any problems.
 
-Finally, we are ready to move on to the last two types, Weather and Visibility.
+Finally, we are ready to move on to the last two types, *Weather* and *Visibility*.
 
 We would like the validation and parsing to work as follows:
 
@@ -1220,7 +1220,7 @@ const isWeather = (str: string): str is Weather => {
 This would work just fine, but the problem is that the list of possible values for Weather does not necessarily stay in sync with the type definitions if the type is altered.
 This is most certainly not good, since we would like to have just one source for all possible weather types.
 
-In our case, a better solution would be to improve the actual Weather type. Instead of a type alias, we should use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html), which allows us to use the actual values in our code at runtime, not only in the compilation phase.
+In our case, a better solution would be to improve the actual *Weather* type. Instead of a type alias, we should use the TypeScript [enum](https://www.typescriptlang.org/docs/handbook/enums.html), which allows us to use the actual values in our code at runtime, not only in the compilation phase.
 
 Let us redefine the type *Weather* as follows:
 

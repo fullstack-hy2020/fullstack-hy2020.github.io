@@ -271,7 +271,7 @@ Sometimes, an npm package can also include its types within the code and, in tha
 
 Since the global variable <i>process</i> is defined by Node itself, we get its typings from the package <i>@types/node</i>.
 
-Since version 10.0 <i>ts-node</i> has defined <i>@types/node</i> as a [peer dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). If the version of npm is at least 7.0, the peer dependencies of a project automatically installed by then npm. If you have an older npm, the peer dependency must be installed explicitly:
+Since version 10.0 <i>ts-node</i> has defined <i>@types/node</i> as a [peer dependency](https://docs.npmjs.com/cli/v8/configuring-npm/package-json#peerdependencies). If the version of npm is at least 7.0, the peer dependencies of a project are automatically installed by npm. If you have an older npm, the peer dependency must be installed explicitly:
 
 ```shell
 npm install --save-dev @types/node
@@ -588,7 +588,7 @@ app.listen(PORT, () => {
 });
 ```
 
-Everything else seems to be working just fine but, as you'd expect, the *req* and *res* parameters of *app.get* need typing. If you look carefully, VSCode is also complaining about the importing of Express. You can see a short yellow line of dots under the *require*. Let's hover over the problem:
+Everything else seems to be working just fine but, as you'd expect, the *req* and *res* parameters of *app.get* need typing. If you look carefully, VSCode is also complaining about the importing of Express. You can see a short yellow line of dots under *require*. Let's hover over the problem:
 
 ![vscode warning to change require to import](../../images/9/6.png)
 
@@ -881,7 +881,7 @@ So we will use the following <i>.eslintrc</i>
 
 Quite a few semicolons are missing, but those are easy to add. We also have to solve the ESlint issues concerning the *any* type:
 
-![](../../images/9/50x.png)
+![vscode error unsafe assignment of any value](../../images/9/50x.png)
 
 We could and probably should disable some ESlint rules to get the data from the request body.
 

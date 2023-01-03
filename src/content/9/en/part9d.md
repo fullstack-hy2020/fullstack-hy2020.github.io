@@ -11,7 +11,7 @@ Before we start delving into how you can use TypeScript with React, we should fi
 
 - Trying to pass an extra/unwanted prop to a component
 - Forgetting to pass a required prop to a component
-- Passing a prop with a wrong type to a component
+- Passing a prop with the wrong type to a component
 
 If we make any of these errors, TypeScript can help us catch them in our editor right away.
 If we didn't use TypeScript, we would have to catch these errors later during testing.
@@ -65,7 +65,7 @@ Now, let's take a look at the <i>tsconfig.json</i> file that has been created fo
 }
 ```
 
-The compilerOptions now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like `document`)."
+Notice *compilerOptions* now has the key [lib](https://www.typescriptlang.org/tsconfig#lib) that includes "type definitions for things found in browser environments (like `document`)."
 
 Everything else should be more or less fine except that, at the moment, the configuration allows compiling JavaScript files because *allowJs* is set to *true*.
 That would be fine if you need to mix TypeScript and JavaScript (e.g. if you are in the process of transforming a JavaScript project into TypeScript or something like that), but we want to create a pure TypeScript app, so let's change that configuration to *false*.
@@ -935,7 +935,7 @@ dispatch(setPatientList(patientListFromApi));
 
 ### Full entries
 
-In [exercise 9.10.](/en/part9/typing_the_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.
+In [exercise 9.10](/en/part9/typing_the_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.
 Since we now have a page for viewing a patient's information, it would be nice to expand our data a bit.
 Let's add an *Entry* field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.
 
@@ -1103,7 +1103,7 @@ The resulting entries in the listing <i>could</i> look something like this:
 
 ### Add patient form
 
-Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the [Formik](https://jaredpalmer.com/formik/docs/overview) package for our app's add patient form. Here's a small intro from Formik's documentation:
+Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the [Formik](https://formik.org/docs/overview) package for our app's add patient form. Here's a small intro from Formik's documentation:
 
 > Formik is a small library that helps you with the 3 most annoying parts:
 >
@@ -1225,7 +1225,7 @@ export const TextField = ({ field, label, placeholder }: TextProps) => (
 );
 ```
 
-Note that we use the Formik [ErrorMessage](https://jaredpalmer.com/formik/docs/api/errormessage) component to render an error message for the input when needed.
+Note that we use the Formik [ErrorMessage](https://formik.org/docs/api/errormessage) component to render an error message for the input when needed.
 The component does everything under the hood, and we don't need to specify what it should do.
 
 It would also be possible to get hold of the error messages within the component by using the prop *form*:
@@ -1238,7 +1238,7 @@ export const TextField = ({ field, label, placeholder, form }: TextProps) => {
 ```
 
 Now, back to the actual form component in <i>AddPatientForm.tsx</i>.
-The function component *AddPatientForm* renders a [Formik component](https://jaredpalmer.com/formik/docs/api/formik). The Formik component is a wrapper, which requires two props: *initialValues* and *onSubmit*. The role of the props is quite self-explanatory.
+The function component *AddPatientForm* renders a [Formik component](https://formik.org/docs/api/formik). The Formik component is a wrapper, which requires two props: *initialValues* and *onSubmit*. The role of the props is quite self-explanatory.
 The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.
 
 We are also using an optional *validate* prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component.
@@ -1346,7 +1346,7 @@ export default AddPatientForm;
 ```
 
 As a child of our Formik wrapper, we have a <i>function</i> that returns the form contents.
-We use Formik's [Form](https://jaredpalmer.com/formik/docs/api/form) to render the actual form element. Inside the Form element, we use our *TextField* and *SelectField* components that we created in <i>FormField.tsx</i>.
+We use Formik's [Form](https://formik.org/docs/api/form) to render the actual form element. Inside the Form element, we use our *TextField* and *SelectField* components that we created in <i>FormField.tsx</i>.
 
 Lastly, we create two buttons: one for canceling the form submission and one for submitting the form. The cancel button calls the *onCancel* callback straight away when clicked.
 The submit button triggers Formik's onSubmit event, which in turn uses the *onSubmit* callback from the component's props. The submit button is enabled only if the form is <i>valid</i> and <i>dirty</i>, which means that the user has edited some of the fields.
