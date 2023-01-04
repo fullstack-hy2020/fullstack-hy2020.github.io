@@ -142,9 +142,9 @@ Let us start by extracting the schema definition to file
 <i>schema.js</i>
 
 ```js
-const { gql } = require('@apollo/server')
 
-const typeDefs = gql`
+
+const typeDefs = `#grapql
   type User {
     username: String!
     friends: [Person!]!
@@ -370,6 +370,8 @@ const start = async () => {
     },
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
+
+  await server.start()
   
   app.use(
     '/',
@@ -388,8 +390,6 @@ const start = async () => {
       },
     }),
   );
-
-  await server.start()
 
   const PORT = 4000
 
@@ -481,10 +481,23 @@ const start = async () => {
 
   await server.start()
 
-  server.applyMiddleware({
-    app,
-    path: '/',
-  })
+ app.use(
+    '/',
+    cors(),
+    bodyParser.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const auth = req ? req.headers.authorization : null
+        if (auth && auth.toLowerCase().startsWith('bearer ')) {
+          const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_KEY)
+          const currentUser = await User.findById(decodedToken.id).populate(
+            'friends'
+          )
+          return { currentUser }
+        }  
+      },
+    }),
+  );
 
   const PORT = 4000
 
