@@ -482,7 +482,7 @@ That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
 If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
 
-One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is stared:
+One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is started:
 
 ```bash
 services:
