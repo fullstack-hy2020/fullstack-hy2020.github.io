@@ -25,7 +25,7 @@
     "gatsby-remark-unwrap-images": "^1.0.1",
     "gatsby-source-filesystem": "^2.0.12",
     "gatsby-transformer-json": "^2.1.6",
-    "gatsby-transformer-remark": "^2.1.19",
+    "gatsby-transformer-remark": "^5.25.1",
     "gatsby-transformer-sharp": "^2.1.8",
     "html-react-parser": "^0.6.0",
     "i18next": "^19.7.0",
