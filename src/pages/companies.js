@@ -5,7 +5,7 @@ import CompaniesPage from '../components/CompaniesPage';
 const Companies = () => (
   <CompaniesPage
     lang="fi"
-    title="Yritysesittelyt | Full Stack open 2022"
+    title="Yritysesittelyt | Full Stack open"
     seoDescription="Kurssin yhteistyöyritysten devaajat esittäytyvät"
   />
 );

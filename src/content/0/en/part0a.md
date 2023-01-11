@@ -236,7 +236,7 @@ When the registration is done, the following text appears in the submission syst
 
 ### Where do I get my University of Helsinki Student number 
 
-When and if you enroll in a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. Please make sure you have enrolled in the course before you try to find out what your student number is. 
+When and if you enroll in a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. <i>**Please make sure you have enrolled in the course before you try to find out what your student number is.** </i>
 
 Note also that <strong>you do not need to enroll</strong> in Open University to get the course certificate!
 
@@ -255,7 +255,7 @@ After course enrollment, you will receive a confirmation email to an email addre
 
 #### C) Contact Student Services 
 
-If you have trouble finding out your student number through the means listed above, you can send an email to University of Helsinki Student Services 
+If you have trouble finding out your student number through the means listed above, you can send an email to University of Helsinki Student Services. <i>**Make sure you have enrolled on the course through the Open University before sending the email!**</i>
 
 In your email, include the following information 
 
@@ -264,6 +264,8 @@ In your email, include the following information
 - your date of birth. 
 
 Student Services email address: avoin-student@helsinki.fi 
+
+ **One more reminded:** <i>make sure you have enrolled on the course through the Open University before sending the email</i>
 
 ### Course certificate
 
@@ -285,9 +287,9 @@ The transcript will be delivered to you electronically through email. Present th
 
 ### Continuing the course in the year 2023
 
-The 2022 version of the course ends on the 1st of March 2023. After that course has a two-week maintenance break. During the break material stays online, and also exercises can be submitted. During the break the course content may change a bit, nothing too dramatic has been planned at the moment.
+The course has a two-week maintenance "break" starting at 1st of March 2023. During the break material stays online, and also exercises can be submitted. During the break the course content may change a bit, nothing too dramatic has been planned at the moment.
 
-All the exercises submitted for the 2022 version can be used in the 2023 edition so basically, the course can be continued without bothering too much about the different versions. Also the policy for getting certs, university credits etc. remains the same in 2023. So in practice, *nothing changes*, you can do the course without worrying about anything related to the year change.
+All the submitted exercises remain valid after the maintainance break, the course can be continued without bothering too much about the break. Also the policy for getting certs, university credits etc. shall remain the same. So in practice, *nothing changes*, you can do the course without worrying about anything related to timing.
 
 ### Expanding on a previously completed course
 
