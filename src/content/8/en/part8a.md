@@ -260,7 +260,7 @@ Also create a `index.js` file in your project's root directory.
 The initial code is as follows: 
 
 ```js
-const { ApolloServer, gql } = require('@apollo/server')
+const { ApolloServer, gql } = require('apollo-server')
 
 let persons = [
   {
