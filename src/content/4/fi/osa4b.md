@@ -581,7 +581,7 @@ beforeEach(async () => {
 test('notes are returned as json', async () => {
   await api
     .get('/api/notes')
-    .expect(201)
+    .expect(200)
     .expect('Content-Type', /application\/json/)
 })
 
@@ -609,7 +609,7 @@ test('a valid note can be added ', async () => {
   await api
     .post('/api/notes')
     .send(newNote)
-    .expect(200)
+    .expect(201)
     .expect('Content-Type', /application\/json/)
 
 
