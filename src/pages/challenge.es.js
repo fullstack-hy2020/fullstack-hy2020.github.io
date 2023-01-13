@@ -6,7 +6,7 @@ const Challenge = () => {
   return (
     <ChallengePage
       lang="es"
-      title="Full stack -challenge | Full Stack open 2022"
+      title="Full stack -challenge | Full Stack open"
       seoDescription="The University of Helsinki and Houston Inc. have partnered up to challenge both individual developers and companies alike to learn and build upon their expertise in true Full Stack development. The course is built by coders for coders, and offers something for both newcomers and seasoned industry veterans alike. "
       aboutContent={[
         'The world is in dire need of software developers. We want to help breed the next generation of coders — one of our offered methods is to enroll in the Full Stack MOOC course.',
