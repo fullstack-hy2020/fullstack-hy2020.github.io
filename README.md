@@ -1,4 +1,4 @@
-# Full stack open 2022 and beyond
+# Full stack open
 
 Despite the repo name this IS the current course repository
 

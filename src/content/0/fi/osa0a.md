@@ -31,7 +31,7 @@ Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä en
 
 Oletuksena on, että teet osien 1-4 tehtävistä <i>ainakin ne</i>, joita ei ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen. Osissa 5- ei tähtiä ole, sillä osien tehtävillä ei ole suurta riippuvuutta aiempiin osiin. 
 
-Etenemisnopeus kurssilla on vapaa, tehtäviä voi palauttaa 1.3.2023. klo 23:59 asti. Tämän jälkeen kurssilla pidetään 2 viikon "päivitystauko", materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kurssin sisältöön voi tulla tauon aikana pieniä muutoksia.
+Etenemisnopeus kurssilla on vapaa. Maaliskuun ensimmäisestä päivästä alkaen kurssilla pidetään 2 viikon "päivitystauko", materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kurssin sisältöön voi tulla tauon aikana pieniä muutoksia.
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -124,7 +124,6 @@ Lisätietoja osan esitietovaatimuksista ja tehtävien palauttamisesta löydät [
 -	Tee kaikki tehtävät osasta 13.
 -	[Ilmoittaudu tähän osaan Avoimen yliopiston kautta.](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c)
 -	[Pyydä suoritusmerkintää](https://fullstackopen.com/osa0/yleista#suoritusmerkinnan-pyytaminen) tästä osasta. 
-
 
 ### Suoritusohjeet pähkinänkuoressa
 
@@ -228,7 +227,7 @@ Kun suoritusmerkintä on kirjattu, näet palautussovelluksessa tekstin
 > <i>University credits registered, see the course page how to get a transcript if you need one</i>
 ### Miten saan selville Helsingin yliopiston opiskelijanumeroni?
 
-Kun ilmoittaudut ensimmäistä kertaa Avoimen yliopiston kautta jollekin kurssille, sinulle luodaan Helsingin yliopiston opiskelijanumero. Varmista siis että olet ilmoittautunut kurssille ennen kuin alat selvittää opiskelijanumeroasi. 
+Kun ilmoittaudut ensimmäistä kertaa Avoimen yliopiston kautta jollekin kurssille, sinulle luodaan Helsingin yliopiston opiskelijanumero. <i>**Varmista siis että olet ilmoittautunut kurssille ennen kuin alat selvittää opiskelijanumeroasi.**</i>
 
 Voit selvittää oman opiskelijanumerosi seuraavilla tavoilla: 
 
@@ -246,7 +245,7 @@ Kurssi-ilmoittautumisesi yhteydessä sinulle lähetään sähköpostivahvistus i
 
 #### C) Yhteydenotto opintoneuvontaan 
 
-Jos sinulla on ongelmia selvittää opiskelijanumerosi yllä olevilla tavoilla, voit myös lähettää sähköpostia opintoneuvontaan.  
+Jos sinulla on ongelmia selvittää opiskelijanumerosi yllä olevilla tavoilla, voit myös lähettää sähköpostia opintoneuvontaan. <i>**Varmista että olet ilmoittautunut kurssille Avoimen yliopiston kautta ennen yhteydenottoa!**</i>
 
 Kerro sähköpostissa  
 - mille kurssille olet ilmoittautunut, 
@@ -254,7 +253,8 @@ Kerro sähköpostissa
 - syntymäaikasi. 
 
 Opiskelijaneuvonnan sähköpostiosoite: avoin-student@helsinki.fi  
-
+ 
+Ja vielä muistutus: <i>**varmista että olet ilmoittautunut kurssille Avoimen yliopiston kautta ennen yhteydenottoa!**</i>
 
 ### Kurssitodistus
 
@@ -277,7 +277,7 @@ Ohjeet opintosuoritusotteen tilaamiseen:
 
 ### Kurssin jatkaminen 2023
 
-Kurssin "vuoden 2022" versio päättyy 1.3.2023. klo 23:59 asti. Tämän jälkeen kurssilla pidetään 2 viikon "päivitystauko", materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kurssin sisältöön voi tulla tauon aikana pieniä muutoksia. Kaikki vuoden 2022 versioon tehdyt palautukset ovat käytettävissä myös vuoden 2023 versiossa, joten voit jatkaa kurssia käytännössä eri vuosien versioista piittaamatta.
+Vuoden vaihtumisesta huolimatta kurssi jatkuu normaaliin tapaan. Kurssilla pidetään 1.3.-14.3. päivitystauko, jonka aikana kurssin sisältöön voi tulla pieniä muutoksia. Materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kaikki jo tehdyt palautukset ovat käytettävissä myös päivitystauon jälkeen, joten voit jatkaa kurssia päivitystauosta piittaamatta.
 
 ### Aiemmin suoritetun kurssin täydentäminen
 
