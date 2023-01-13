@@ -36,9 +36,22 @@ What's going on here? We can access the backend from a browser and from postman 
 
 ### Same origin policy and CORS
 
-The issue lies with a thing called CORS, or Cross-Origin Resource Sharing.
+The issue lies with a thing called `same origin policy`. A URL's origin is defined by the combination of scheme, hostname and port
+  ```js
+  // example
+  
+  http://example.com:80/index.html
+  
+  // scheme/protocol: http
+  // host: example.com
+  // port: 80
+  ```
 
-According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
+When you visit a webiste (e.i http://catwebsites.com) the browser issues a request to the server on which the webiste(catwebsites.com) is hosted, the response sent by the server is an HTML that may contain one or more references to external assets/resources hosted either on the same server that catwebsites.com is hosted on or a different website, when the browser sees reference(s) to a URL in the source HTML, it issues a request, if the request is issued using the URL that the source HTML was fetched from, then the browser process the response without any issues. however, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the `Access-Control-Allow-origin` response header, if it contains `*` or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process the response and throw an error.
+  
+In essence, the same origin policy is a security mechanism implemented by browsers in order to prevent session hijacking among other security vulnerabilities.
+
+ In order to enable legitimate cross origin requests (requests to URLs that don't share the same origin) W3C came up with a mechanism called CORS(Cross Origin Resource Sharing). According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
 

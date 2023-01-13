@@ -532,6 +532,9 @@ list.appendChild(newElement)
 <!-- The network tab also shows the data submitted with the form:-->
  Network选项卡还显示了随表单提交的数据。
 
+<!-- NB: On newer Chrome, the Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.-->
+ 注意：对于新版Chrome，Form Data下拉菜单在新的标签Payload内，Payload标签位于Headers标签的右侧。
+ 
 ![](../../images/0/23e.png)
 
 <!-- The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>.-->

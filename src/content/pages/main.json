@@ -3,7 +3,7 @@
     "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
     "intro": "Ota haltuusi React, Redux, Node.js, MongoDB, GraphQL ja TypeScript! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
     "current": [
-      "Kurssin vuoden 2022 versio on käynnissä! Vaikka vuosi lähestyy loppuaan, voit aloittaa nyt sillä kurssi jatkuu myös vuonna 2023, lue <a href='/osa0/yleista#kurssin-jatkaminen-2023'>täältä</a> lisää!",
+      "Vuosi 2022 on ohi mutta kurssi jatkuu! Lue <a href='/osa0/yleista#kurssin-jatkaminen-2023'>täältä</a> lisää!",
       "Kurssiin liittyvää keskustelua Discordissa, kanavalla <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
       "Yhteistyökumppaneina kurssilla on <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.kesko.fi/'>K-ryhmä</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a>, <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a> ja <a href='https://www.smartly.io/'>Smartly.io</a>. Katso <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>täältä</a> yhteistyökumppaniemme asiantuntijoiden vierailuluentoja kurssin aihepiireistä."
     ],
@@ -15,14 +15,14 @@
     ],
     "university": "Helsingin yliopisto on Suomen vanhin ja suurin tiedekorkeakoulu, yhteensä 40 000 henkilön kansainvälinen tiedeyhteisö. Tieteen voimalla yliopisto on rakentanut yhteiskuntaa, sivistystä ja hyvinvointia jo vuodesta 1640.",
     "houston": "Suomalainen Houston Inc. on vuonna 2003 perustettu ketterä softatalo. Suunnittelemme ja toteutamme asiakkaillemme räätälöityjä digitaalisia palveluita liiketoiminnan tarpeisiin.",
-    "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open", "matti.luukkainen@helsinki.fi"],
     "licenced": "Materiaali on lisensoitu Creative Commons BY-NC-SA 3.0 -lisenssillä."
   },
   "en": {
     "mainTitle": "Deep Dive Into Modern Web Development",
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
-      "The 2022 edition has started! Despite the year is soon over you can start now since the course continues at 2023, see <a href='/en/part0/general_info#continuing-the-course-at-year-2023'>this</a> for more details.",
+      "The year 2022 is over but the course continues! See <a href='/en/part0/general_info#continuing-the-course-at-year-2023'>this</a> for more details.",
       "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation!"
     ],
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",
@@ -33,7 +33,7 @@
     ],
     "university": "The University of Helsinki is the oldest and largest science university in Finland, with an international scientific community of 40,000 people.",
     "houston": "The Finnish Houston Inc. is an agile software company founded in 2003. We design and implement customized digital services for our business.",
-    "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open", "matti.luukkainen@helsinki.fi"],
     "licenced": "The material is licensed under the Creative Commons BY-NC-SA 3.0 License."
   },
   "es": {
@@ -51,14 +51,13 @@
     ],
     "university": "La Universidad de Helsinki es la universidad de ciencias más grande y antigua de Finlandia, con una comunidad científica internacional de 40.000 personas.",
     "houston": "The Finnish Houston Inc. es una empresa de software ágil fundada en 2003. Diseñamos e implementamos servicios digitales personalizados para nuestro negocio.",
-    "contacts": ["Full Stack Open 2022", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full Stack Open", "matti.luukkainen@helsinki.fi"],
     "licensed": "El material está sujeto a la licencia Creative Commons BY-NC-SA 3.0."
   },
   "zh": {
     "mainTitle": "深入浅出现代Web编程",
     "intro": "一站式学习 React, Redux, Node.js, MongoDB, GraphQL 以及 TypeScript！这门课程会向你介绍基于 JavaScript 的现代 Web 开发技术。重点是利用 ReactJS 搭建单页面应用程序（SPA：Single Page Application），并使用Node.js构建REST API。",
     "current": [
-
       "2022年的课程已经开始了。你可以在新版本使用新的教材继续之前的课程, 点击<a href='/zh/part0/基础知识#expanding-on-a-previously-completed-course'>这里</a>查看详情.",
       "你可以加入我们的 Discord 群组 <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> 以及 Telegram 群组: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>来参与课程讨论。快来加入我们吧！"
     ],
@@ -70,7 +69,7 @@
     ],
     "university": "赫尔辛基大学（The University of Helsinki）是芬兰历史最悠久、规模最大的学术型大学，拥有40,000人的国际科学团体。",
     "houston": "芬兰的Houston Inc. 是一家敏捷型软件公司，成立于2003年。我们为业务的设计和实施提供个性的数字化解决方案。",
-    "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open", "matti.luukkainen@helsinki.fi"],
     "licenced": "所有内容基于Creative Commons BY-NC-SA 3.0 License.协议框架。"
   },
   "fr": {
@@ -88,7 +87,7 @@
     ],
     "university": "L'Université d'Helsinki est la plus ancienne et la plus grande université scientifique de Finlande, avec une communauté scientifique internationale de 40 000 personnes.",
     "houston": "Le Finnish Houston Inc. est une société de logiciels agile fondée en 2003. Nous concevons et mettons en œuvre des services numériques personnalisés pour notre entreprise.",
-    "contacts": ["Full stack open 2022", "matti.luukkainen@helsinki.fi"],
+    "contacts": ["Full stack open", "matti.luukkainen@helsinki.fi"],
     "licenced": "Le matériel est sous licence Creative Commons BY-NC-SA 3.0."
   }
 }
