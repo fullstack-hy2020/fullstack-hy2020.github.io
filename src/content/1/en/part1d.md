@@ -11,9 +11,9 @@ lang: en
 
 In our previous example, the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
 
-In most cases, the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.
+In most cases, the easiest and best way to accomplish this is by using the *useState* function multiple times to create separate "pieces" of state.
 
-In the following code we create two pieces of state for the application named _left_ and _right_ that both get the initial value of 0:
+In the following code we create two pieces of state for the application named *left* and *right* that both get the initial value of 0:
 
 ```js
 const App = () => {
@@ -35,7 +35,7 @@ const App = () => {
 }
 ```
 
-The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
+The component gets access to the functions *setLeft* and *setRight* that it can use to update the two pieces of state.
 
 The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
 
@@ -127,7 +127,7 @@ const handleRightClick = () => {
 }
 ```
 
-The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the _clicks_ object. When we specify a particular property - e.g. <i>right</i> in <em>{ ...clicks, right: 1 }</em>, the value of the _right_ property in the new object will be 1.
+The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the *clicks* object. When we specify a particular property - e.g. <i>right</i> in <em>{ ...clicks, right: 1 }</em>, the value of the *right* property in the new object will be 1.
 
 In the example above, this:
 
@@ -135,7 +135,7 @@ In the example above, this:
 { ...clicks, right: clicks.right + 1 }
 ```
 
-creates a copy of the _clicks_ object where the value of the _right_ property is increased by one.
+creates a copy of the *clicks* object where the value of the *right* property is increased by one.
 
 Assigning the object to a variable in the event handlers is not necessary and we can simplify the functions to the following form:
 
@@ -164,7 +164,7 @@ There are situations where it can be beneficial to store a piece of application 
 
 ### Handling arrays
 
-Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.
+Let's add a piece of state to our application containing an array *allClicks* that remembers every click that has occurred in the application.
 
 ```js
 const App = () => {
@@ -198,13 +198,13 @@ const App = () => {
 }
 ```
 
-Every click is stored in a separate piece of state called _allClicks_ that is initialized as an empty array:
+Every click is stored in a separate piece of state called *allClicks* that is initialized as an empty array:
 
 ```js
 const [allClicks, setAll] = useState([])
 ```
 
-When the <i>left</i> button is clicked, we add the letter <i>L</i> to the _allClicks_ array:
+When the <i>left</i> button is clicked, we add the letter <i>L</i> to the *allClicks* array:
 
 ```js
 const handleLeftClick = () => {
@@ -213,9 +213,9 @@ const handleLeftClick = () => {
 }
 ```
 
-The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.
+The piece of state stored in *allClicks* is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.
 
-As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:
+As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the *allClicks* array and then updating the state, the application would still appear to work:
 
 ```js
 const handleLeftClick = () => {
@@ -225,7 +225,7 @@ const handleLeftClick = () => {
 }
 ```
 
-However, **don't** do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
+However, **don't** do this. As mentioned previously, the state of React components like *allClicks* must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
 Let's take a closer look at how the clicking
 is rendered to the page:
@@ -246,7 +246,7 @@ const App = () => {
 }
 ```
 
-We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
+We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the *allClicks* array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
 
 ### Conditional rendering
 
@@ -304,7 +304,7 @@ The <i>History</i> component renders completely different React elements dependi
 
 React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).
 
-Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:
+Let's make one last modification to our application by refactoring it to use the *Button* component that we defined earlier on:
 
 ```js
 const History = (props) => {
@@ -416,7 +416,7 @@ const Button = (props) => {
 
 This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
 
-**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
+**NB** When you use *console.log* for debugging, don't combine *objects* in a Java-like fashion by using the plus operator. Instead of writing:
 
 ```js
 console.log('props value is ' + props)
@@ -438,7 +438,7 @@ Whereas the items separated by a comma will all be available in the browser cons
 
 Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
 
-The execution will pause once it arrives at a point where the _debugger_ command gets executed:
+The execution will pause once it arrives at a point where the *debugger* command gets executed:
 
 ![debugger paused in dev tools](../../images/1/7a.png)
 
@@ -446,19 +446,19 @@ By going to the <i>Console</i> tab, it is easy to inspect the current state of v
 
 ![console inspection screenshot](../../images/1/8a.png)
 
-Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
+Once the cause of the bug is discovered you can remove the *debugger* command and refresh the page.
 
 The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Sources</i> tab.
 
-You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
+You can also access the debugger without the *debugger* command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the *Scope*-section:
 
 ![breakpoint example in devtools](../../images/1/9a.png)
 
-It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
+It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new *Components* tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
 
 ![screenshot react developer tools extension](../../images/1/10ea.png)
 
-The _App_ component's state is defined like so:
+The *App* component's state is defined like so:
 
 ```js
 const [left, setLeft] = useState(0)
@@ -476,7 +476,7 @@ The first <i>State</i> contains the value of the <i>left</i> state, the next con
 
 There are a few limitations and rules we have to follow to ensure that our application uses hooks-based state functions correctly.
 
-The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.
+The *useState* function (as well as the *useEffect* function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.
 
 To recap, hooks may only be called from the inside of a function body that defines a React component:
 
@@ -528,7 +528,7 @@ const App = () => {
 }
 ```
 
-We want the clicking of the button to reset the state stored in the _value_ variable.
+We want the clicking of the button to reset the state stored in the *value* variable.
 
 In order to make the button react to a click event, we have to add an <i>event handler</i> to it.
 
@@ -555,7 +555,7 @@ The following attempt would also not work:
 <button onClick={value + 1}>button</button>
 ```
 
-We have attempted to set the event handler to _value + 1_ which simply returns the result of the operation. React will kindly warn us about this in the console:
+We have attempted to set the event handler to *value + 1* which simply returns the result of the operation. React will kindly warn us about this in the console:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
@@ -577,11 +577,11 @@ What about the following:
 </button>
 ```
 
-The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function _console.log_?
+The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function *console.log*?
 
-The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>.
+The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is assigned the returned value from the function, which in the case of *console.log* is <i>undefined</i>.
 
-The _console.log_ function call gets executed when the component is rendered and for this reason, it gets printed once to the console.
+The *console.log* function call gets executed when the component is rendered and for this reason, it gets printed once to the console.
 
 The following attempt is flawed as well:
 
@@ -589,7 +589,7 @@ The following attempt is flawed as well:
 <button onClick={setValue(0)}>button</button>
 ```
 
-We have once again tried to set a function call as the event handler. This does not work. This particular attempt also causes another problem. When the component is rendered the function _setValue(0)_ gets executed which in turn causes the component to be re-rendered. Re-rendering in turn calls _setValue(0)_ again, resulting in an infinite recursion.
+We have once again tried to set a function call as the event handler. This does not work. This particular attempt also causes another problem. When the component is rendered the function *setValue(0)* gets executed which in turn causes the component to be re-rendered. Re-rendering in turn calls *setValue(0)* again, resulting in an infinite recursion.
 
 Executing a particular function call when the button is clicked can be accomplished like this:
 
@@ -599,7 +599,7 @@ Executing a particular function call when the button is clicked can be accomplis
 </button>
 ```
 
-Now the event handler is a function defined with the arrow function syntax _() => console.log('clicked the button')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.
+Now the event handler is a function defined with the arrow function syntax *() => console.log('clicked the button')*. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.
 
 We can implement resetting the state in our application with this same technique:
 
@@ -607,11 +607,11 @@ We can implement resetting the state in our application with this same technique
 <button onClick={() => setValue(0)}>button</button>
 ```
 
-The event handler is now the function _() => setValue(0)_.
+The event handler is now the function *() => setValue(0)*.
 
 Defining event handlers directly in the attribute of the button is not necessarily the best possible idea.
 
-You will often see event handlers defined in a separate place. In the following version of our application we define a function that then gets assigned to the _handleClick_ variable in the body of the component function:
+You will often see event handlers defined in a separate place. In the following version of our application we define a function that then gets assigned to the *handleClick* variable in the body of the component function:
 
 ```js
 const App = () => {
@@ -629,7 +629,7 @@ const App = () => {
 }
 ```
 
-The _handleClick_ variable is now assigned to a reference to the function. The reference is passed to the button as the <i>onClick</i> attribute:
+The *handleClick* variable is now assigned to a reference to the function. The reference is passed to the button as the <i>onClick</i> attribute:
 
 ```js
 <button onClick={handleClick}>button</button>
@@ -706,7 +706,7 @@ const hello = () => {
 }
 ```
 
-The <i>return value</i> of the function is another function that is assigned to the _handler_ variable.
+The <i>return value</i> of the function is another function that is assigned to the *handler* variable.
 
 When React renders the line:
 
@@ -714,7 +714,7 @@ When React renders the line:
 <button onClick={hello()}>button</button>
 ```
 
-It assigns the return value of _hello()_ to the onClick attribute. Essentially the line gets transformed into:
+It assigns the return value of *hello()* to the onClick attribute. Essentially the line gets transformed into:
 
 ```js
 <button onClick={() => console.log('hello world')}>
@@ -722,7 +722,7 @@ It assigns the return value of _hello()_ to the onClick attribute. Essentially t
 </button>
 ```
 
-Since the _hello_ function returns a function, the event handler is now a function.
+Since the *hello* function returns a function, the event handler is now a function.
 
 What's the point of this concept?
 
@@ -755,7 +755,7 @@ const App = () => {
 }
 ```
 
-Now the application has three buttons with event handlers defined by the _hello_ function that accepts a parameter.
+Now the application has three buttons with event handlers defined by the *hello* function that accepts a parameter.
 
 The first button is defined as
 
@@ -763,7 +763,7 @@ The first button is defined as
 <button onClick={hello('world')}>button</button>
 ```
 
-The event handler is created by <i>executing</i> the function call _hello('world')_. The function call returns the function:
+The event handler is created by <i>executing</i> the function call *hello('world')*. The function call returns the function:
 
 ```js
 () => {
@@ -777,7 +777,7 @@ The second button is defined as:
 <button onClick={hello('react')}>button</button>
 ```
 
-The function call _hello('react')_ that creates the event handler returns:
+The function call *hello('react')* that creates the event handler returns:
 
 ```js
 () => {
@@ -787,7 +787,7 @@ The function call _hello('react')_ that creates the event handler returns:
 
 Both buttons get their individualized event handlers.
 
-Functions returning functions can be utilized in defining generic functionality that can be customized with parameters. The _hello_ function that creates the event handlers can be thought of as a factory that produces customized event handlers meant for greeting users.
+Functions returning functions can be utilized in defining generic functionality that can be customized with parameters. The *hello* function that creates the event handlers can be thought of as a factory that produces customized event handlers meant for greeting users.
 
 Our current definition is slightly verbose:
 
@@ -811,7 +811,7 @@ const hello = (who) => {
 }
 ```
 
-Since our _hello_ function is composed of a single return command, we can omit the curly braces and use the more compact syntax for arrow functions:
+Since our *hello* function is composed of a single return command, we can omit the curly braces and use the more compact syntax for arrow functions:
 
 ```js
 const hello = (who) =>
@@ -860,7 +860,7 @@ When the component is rendered, the <i>thousand</i> button is created:
 <button onClick={setToValue(1000)}>thousand</button>
 ```
 
-The event handler is set to the return value of _setToValue(1000)_ which is the following function:
+The event handler is set to the return value of *setToValue(1000)* which is the following function:
 
 ```js
 () => {
@@ -875,7 +875,7 @@ The increase button is declared as follows:
 <button onClick={setToValue(value + 1)}>increment</button>
 ```
 
-The event handler is created by the function call _setToValue(value + 1)_ which receives as its parameter the current value of the state variable _value_ increased by one. If the value of _value_ was 10, then the created event handler would be the function:
+The event handler is created by the function call *setToValue(value + 1)* which receives as its parameter the current value of the state variable *value* increased by one. If the value of *value* was 10, then the created event handler would be the function:
 
 ```js
 () => {
@@ -884,7 +884,7 @@ The event handler is created by the function call _setToValue(value + 1)_ which 
 }
 ```
 
-Using functions that return functions is not required to achieve this functionality. Let's return the _setToValue_ function which is responsible for updating state into a normal function:
+Using functions that return functions is not required to achieve this functionality. Let's return the *setToValue* function which is responsible for updating state into a normal function:
 
 ```js
 const App = () => {
@@ -912,7 +912,7 @@ const App = () => {
 }
 ```
 
-We can now define the event handler as a function that calls the _setToValue_ function with an appropriate parameter. The event handler for resetting the application state would be:
+We can now define the event handler as a function that calls the *setToValue* function with an appropriate parameter. The event handler for resetting the application state would be:
 
 ```js
 <button onClick={() => setToValue(0)}>reset</button>
@@ -932,7 +932,7 @@ const Button = (props) => (
 )
 ```
 
-The component gets the event handler function from the _handleClick_ prop, and the text of the button from the _text_ prop.
+The component gets the event handler function from the *handleClick* prop, and the text of the button from the *text* prop.
 
 Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
@@ -1028,7 +1028,7 @@ Remember, submit **all** the exercises of one part **in a single submission**. O
 
 <i>Some of the exercises work on the same application. In these cases, it is sufficient to submit just the final version of the application. If you wish, you can make a commit after every finished exercise, but it is not mandatory.</i>
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the *rm -rf .git* command at the root of your application.
 
 In some situations you may also have to run the command below from the root of the project:
 
@@ -1200,7 +1200,7 @@ Your finished application could look something like this:
 
 ![random anecdote with next button](../../images/1/18a.png)
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the *rm -rf .git* command at the root of your application.
 
 <h4>1.13*: anecdotes step2</h4>
 

@@ -43,7 +43,7 @@ and add the following line to the <i>scripts</i> part of the file <i>package.jso
 }
 ```
 
-Now let's launch json-server with the command _npm run server_.
+Now let's launch json-server with the command *npm run server*.
 
 Next, we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend
 
@@ -211,7 +211,7 @@ noteService.getAll().then(notes =>
 )
 ```
 
-> **NB:** why didn't we use await in place of promises and event handlers (registered to _then_-methods)?
+> **NB:** why didn't we use await in place of promises and event handlers (registered to *then*-methods)?
 >
 > Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
 
@@ -268,7 +268,7 @@ const App = () => {
 ```
 
 <!-- Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton. -->
-Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux store, has been added to the array useEffect receives as a parameter.
+Now the variable <i>dispatch</i> we define in the *App* component, which practically is the dispatch function of the redux store, has been added to the array useEffect receives as a parameter.
 **If** the value of the dispatch variable would change during runtime,
 the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
 
@@ -317,7 +317,7 @@ export default {
 }
 ```
 
-The method _addNote_ of the component <i>NewNote</i> changes slightly:
+The method *addNote* of the component <i>NewNote</i> changes slightly:
 
 ```js
 import { useDispatch } from 'react-redux'
@@ -611,7 +611,7 @@ Voting does not yet save changes to the backend. Fix the situation with the help
 
 #### 6.18 Anecdotes and the backend, step6
 
-The creation of notifications is still a bit tedious since one has to do two actions and use the _setTimeout_ function:
+The creation of notifications is still a bit tedious since one has to do two actions and use the *setTimeout* function:
 
 ```js
 dispatch(setNotification(`new anecdote '${content}'`))

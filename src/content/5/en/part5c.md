@@ -82,7 +82,7 @@ We can use the object [screen](https://testing-library.com/docs/queries/about#sc
 
 ### Running tests
 
-Create-react-app configures tests to be run in watch mode by default, which means that the _npm test_ command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
+Create-react-app configures tests to be run in watch mode by default, which means that the *npm test* command will not exit once the tests have finished, and will instead wait for changes to be made to the code. Once new changes to the code are saved, the tests are executed automatically after which Jest goes back to waiting for new changes to be made.
 
 If you want to run tests "normally", you can do so with the command:
 
@@ -104,13 +104,13 @@ Instructions for installing Watchman on different operating systems can be found
 
 In React there are (at least) [two different conventions](https://medium.com/@JeffLombardJr/organizing-tests-in-jest-17fc431ff850) for the test file's location. We created our test files according to the current standard by placing them in the same directory as the component being tested.
 
-The other convention is to store the test files "normally" in a separate _test_ directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
+The other convention is to store the test files "normally" in a separate *test* directory. Whichever convention we choose, it is almost guaranteed to be wrong according to someone's opinion.
 
 I do not like this way of storing tests and application code in the same directory. The reason we choose to follow this convention is that it is configured by default in applications created by create-react-app.
 
 ### Searching for content in a component
 
-The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all
+The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the *expect* in our test is not needed at all
 
 ```js
 import React from 'react'
@@ -132,7 +132,7 @@ test('renders content', () => {
 })
 ```
 
-Test fails if _getByText_ does not find the element it is looking for.
+Test fails if *getByText* does not find the element it is looking for.
 
 We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to find rendered elements by using the method [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) of the object [container](https://testing-library.com/docs/react-testing-library/api/#container-1) that is one of the fields returned by the render:
 
@@ -165,7 +165,7 @@ There are also other methods, eg. [getByTestId](https://testing-library.com/docs
 
 We typically run into many different kinds of problems when writing our tests.
 
-Object _screen_ has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
+Object *screen* has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
 
 ```js
 import React from 'react'
@@ -245,7 +245,7 @@ Now the HTML of the wanted element gets printed:
 
 ### Clicking buttons in tests
 
-In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called.
+In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the *toggleImportance* event handler function gets called.
 
 Let us install a library [user-event](https://testing-library.com/docs/user-event/intro) that makes simulating user input a bit easier:
 
@@ -387,7 +387,7 @@ describe('<Togglable />', () => {
 })
 ```
 
-The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component and saves the field _container_ of the return value.
+The *beforeEach* function gets called before each test, which then renders the <i>Togglable</i> component and saves the field *container* of the return value.
 
 The first test verifies that the <i>Togglable</i> component renders its child component
 
@@ -397,7 +397,7 @@ The first test verifies that the <i>Togglable</i> component renders its child co
 </div>
 ```
 
-The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains _{ display: 'none' }_. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
+The remaining tests use the [toHaveStyle](https://www.npmjs.com/package/@testing-library/jest-dom#tohavestyle) method to verify that the child component of the <i>Togglable</i> component is not visible initially, by checking that the style of the <i>div</i> element contains *{ display: 'none' }*. Another test verifies that when the button is pressed the component is visible, meaning that the style for hiding the component <i>is no longer</i> assigned to the component.
 
 Let's also add a test that can be used to verify that the visible content can be hidden by clicking the second button of the component:
 
@@ -422,7 +422,7 @@ describe('<Togglable />', () => {
 
 ### Testing the forms
 
-We already used the _click_ function of the [user-event](https://testing-library.com/docs/user-event/intro) in our previous tests to click buttons.
+We already used the *click* function of the [user-event](https://testing-library.com/docs/user-event/intro) in our previous tests to click buttons.
 
 ```js
 const user = userEvent.setup()
@@ -472,7 +472,7 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-The form works by calling the _createNote_ function it received as props with the details of the new note.
+The form works by calling the *createNote* function it received as props with the details of the new note.
 
 The test is as follows:
 
@@ -504,7 +504,7 @@ Tests get access to the input field using the function [getByRole](https://testi
 
 The method [type](https://testing-library.com/docs/user-event/utility#type) of the userEvent is used to write text to the input field.
 
-The first test expectation ensures, that submitting the form calls the _createNote_ method.
+The first test expectation ensures, that submitting the form calls the *createNote* method.
 The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled.
 
 ### About finding the elements
@@ -603,9 +603,9 @@ test('<NoteForm /> updates parent state and calls onSubmit', () => {
 })
 ```
 
-The most flexible way of finding elements in tests is the method <i>querySelector</i> of the _container_ object, which is returned by _render_, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
+The most flexible way of finding elements in tests is the method <i>querySelector</i> of the *container* object, which is returned by *render*, as was mentioned [earlier in this part](/en/part5/testing_react_apps#searching-for-content-in-a-component). Any CSS selector can be used with this method for searching elements in tests.
 
-Consider eg. that we would define a unique _id_ to the input field:
+Consider eg. that we would define a unique *id* to the input field:
 
 ```js
 const NoteForm = ({ createNote }) => {
@@ -640,7 +640,7 @@ const { container } = render(<NoteForm createNote={createNote} />)
 const input = container.querySelector('#note-input')
 ```
 
-However, we shall stick to the approach of using _getByPlaceholderText_ in the test.
+However, we shall stick to the approach of using *getByPlaceholderText* in the test.
 
 Let us look at a couple of details before moving on. Let us assume that a component would render text to an HTML element as follows:
 
@@ -660,7 +660,7 @@ const Note = ({ note, toggleImportance }) => {
 export default Note
 ```
 
-the _getByText_ command that the test uses does <i>not</i> find the element
+the *getByText* command that the test uses does <i>not</i> find the element
 
 ```js
 test('renders content', () => {
@@ -677,7 +677,7 @@ test('renders content', () => {
 })
 ```
 
-Command _getByText_ looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
+Command *getByText* looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
 ```js
 const element = screen.getByText(
@@ -685,15 +685,15 @@ const element = screen.getByText(
 )
 ```
 
-or we could use the command _findByText_:
+or we could use the command *findByText*:
 
 ```js
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
-It is important to notice that, unlike the other _ByText_ commands, _findByText_ returns a promise!
+It is important to notice that, unlike the other *ByText* commands, *findByText* returns a promise!
 
-There are situations where yet another form of the command _queryByText_ is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
+There are situations where yet another form of the command *queryByText* is useful. The command returns the element but <i>it does not cause an exception</i> if the element is not found.
 
 We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
 

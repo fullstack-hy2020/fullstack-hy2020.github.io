@@ -70,7 +70,7 @@ module.exports = loginRouter
 
 The code starts by searching for the user from the database by the <i>username</i> attached to the request.
 Next, it checks the <i>password</i>, also attached to the request.
-Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, the _bcrypt.compare_ method is used to check if the password is correct:
+Because the passwords themselves are not saved to the database, but <i>hashes</i> calculated from the passwords, the *bcrypt.compare* method is used to check if the password is correct:
 
 ```js
 await bcrypt.compare(body.password, user.passwordHash)
@@ -78,7 +78,7 @@ await bcrypt.compare(body.password, user.passwordHash)
 
 If the user is not found, or the password is incorrect, the request is responded to with the status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2). The reason for the failure is explained in the response body.
 
-If the password is correct, a token is created with the method _jwt.sign_. The token contains the username and the user id in a digitally signed form.
+If the password is correct, a token is created with the method *jwt.sign*. The token contains the username and the user id in a digitally signed form.
 
 ```js
 const userForToken = {
@@ -118,7 +118,7 @@ It does not work. The following is printed to the console:
 (node:32911) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
 ```
 
-The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set a value to the environment variable <i>SECRET</i>. It can be any string. When we set the value in file <i>.env</i>, the login works.
+The command *jwt.sign(userForToken, process.env.SECRET)* fails. We forgot to set a value to the environment variable <i>SECRET</i>. It can be any string. When we set the value in file <i>.env</i>, the login works.
 
 A successful login returns the user details and the token:
 
@@ -188,7 +188,7 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return the error <i>"jwt must be provided"</i>.
+The helper function *getTokenFrom* isolates the token from the <i>authorization</i> header. The validity of the token is checked with *jwt.verify*. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return the error <i>"jwt must be provided"</i>.
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
@@ -196,7 +196,7 @@ const decodedToken = jwt.verify(token, process.env.SECRET)
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tell the server who made the request.
 
-If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body.
+If the object decoded from the token does not contain the user's identity (*decodedToken.id* is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body.
 
 ```js
 if (!decodedToken.id) {
@@ -355,7 +355,7 @@ We will implement login to the frontend in the [next part](/en/part5).
 
 In the next exercises, the basics of user management will be implemented for the Bloglist application. The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication). You can of course also use your creativity.
 
-**One more warning:** If you notice you are mixing async/await and _then_ calls, it is 99% certain you are doing something wrong. Use either or, never both.
+**One more warning:** If you notice you are mixing async/await and *then* calls, it is 99% certain you are doing something wrong. Use either or, never both.
 
 #### 4.15: bloglist expansion, step3
 
@@ -412,7 +412,7 @@ Modify adding new blogs so that it is only possible if a valid token is sent wit
 
 #### 4.20*: bloglist expansion, step8
 
-[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the _getTokenFrom_ helper function.
+[This example](/en/part4/token_authentication) from part 4 shows taking the token from the header with the *getTokenFrom* helper function.
 
 If you used the same solution, refactor taking the token to a [middleware](/en/part3/node_js_and_express#middleware). The middleware should take the token from the <i>Authorization</i> header and place it into the <i>token</i> field of the <i>request</i> object.
 
@@ -422,7 +422,7 @@ In other words, if you register this middleware in the <i>app.js</i> file before
 app.use(middleware.tokenExtractor)
 ```
 
-Routes can access the token with _request.token_:
+Routes can access the token with *request.token*:
 
 ```js
 blogsRouter.post('/', async (request, response) => {
@@ -462,15 +462,15 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*:  bloglist expansion, step10
 
-Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware _tokenExtractor_ that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who the user holding a specific token is.
+Both the new blog creation and blog deletion need to find out the identity of the user who is doing the operation. The middleware *tokenExtractor* that we did in exercise 4.20 helps but still both the handlers of <i>post</i> and <i>delete</i> operations need to find out who the user holding a specific token is.
 
-Now create a new middleware _userExtractor_, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i>
+Now create a new middleware *userExtractor*, that finds out the user and sets it to the request object. When you register the middleware in <i>app.js</i>
 
 ```js
 app.use(middleware.userExtractor)
 ```
 
-the user will be set in the field _request.user_:
+the user will be set in the field *request.user*:
 
 ```js
 blogsRouter.post('/', async (request, response) => {
@@ -486,7 +486,7 @@ blogsRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Note that it is possible to register a middleware only for a specific set of routes. So instead of using _userExtractor_ with all the routes,
+Note that it is possible to register a middleware only for a specific set of routes. So instead of using *userExtractor* with all the routes,
 
 ```js
 // use the middleware in all routes

@@ -258,7 +258,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-The _Note_ component receives all of the notes as props <i>notes</i>, and it can access the URL parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/en/main/hooks/use-params) function of the React Router.
+The *Note* component receives all of the notes as props <i>notes</i>, and it can access the URL parameter (the id of the note to be displayed) with the [useParams](https://reactrouter.com/en/main/hooks/use-params) function of the React Router.
 
 ### useNavigate
 
@@ -324,7 +324,7 @@ const Login = (props) => {
 
 What is interesting about this component is the use of the [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) function of the React Router. With this function, the browser's URL can be changed programmatically.
 
-With user login, we call _navigate('/')_ which causes the browser's URL to change to _/_ and the application renders the corresponding component <i>Home</i>.
+With user login, we call *navigate('/')* which causes the browser's URL to change to */* and the application renders the corresponding component <i>Home</i>.
 
 Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavigate](https://reactrouter.com/en/main/hooks/use-navigate) are hook functions, just like useState and useEffect which we have used many times now.  As you remember from part 1, there are some [rules](/en/part1/a_more_complex_state_debugging_react_apps/#rules-of-hooks) to using hook functions. Create-react-app has been configured to warn you if you break these rules, for example, by calling a hook function from a conditional statement.
 
@@ -396,7 +396,7 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 
 ### Parameterized route revisited
 
-Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one whose id matches the url parameter:
+Our application has a flaw. The *Note* component receives all of the notes, even though it only displays the one whose id matches the url parameter:
 
 ```js
 const Note = ({ notes }) => { 
@@ -406,7 +406,7 @@ const Note = ({ notes }) => {
 }
 ```
 
-Would it be possible to modify the application so that the _Note_ component receives only the note that it should display?
+Would it be possible to modify the application so that the *Note* component receives only the note that it should display?
 
 ```js
 const Note = ({ note }) => {
@@ -420,9 +420,9 @@ const Note = ({ note }) => {
 }
 ```
 
-One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) hook to figure out the id of the note to be displayed in the _App_ component.
+One way to do this would be to use React Router's [useMatch](https://reactrouter.com/en/v6.3.0/api#usematch) hook to figure out the id of the note to be displayed in the *App* component.
 
-It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the _Router_ components from _App_:
+It is not possible to use the <i>useMatch</i> hook in the component which defines the routed part of the application. Let's move the use of the *Router* components from *App*:
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -480,7 +480,7 @@ Every time the component is rendered, so practically every time the browser's UR
 const match = useMatch('/notes/:id')
 ```
 
-If the URL matches _/notes/:id_, the match variable will contain an object from which we can access the parameterized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
+If the URL matches */notes/:id*, the match variable will contain an object from which we can access the parameterized part of the path, the id of the note to be displayed, and we can then fetch the correct note to display.
 
 ```js
 const note = match 
@@ -515,7 +515,7 @@ npm start
 
 Add React Router to the application so that by clicking links in the <i>Menu</i> component the view can be changed.
 
-At the root of the application, meaning the path _/_, show the list of anecdotes:
+At the root of the application, meaning the path */*, show the list of anecdotes:
 
 ![browser at baseURL showing anecdotes and footer](../../assets/teht/40.png)
 

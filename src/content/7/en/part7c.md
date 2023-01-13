@@ -49,7 +49,7 @@ When we reload the application, we notice that it already looks a bit more styli
 
 ![browser notes app with bootstrap](../../images/7/5ea.png)
 
-In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
+In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root *div* element of the application the  *container* class attribute:
 
 ```js
 const App = () => {
@@ -151,7 +151,7 @@ Now that the login form is in better shape, let's take a look at improving our a
 
 ![browser notes app with bootstrap notification](../../images/7/9ea.png)
 
-Let's add a message for the notification when a user logs into the application. We will store it in the _message_ variable in the <i>App</i> component's state:
+Let's add a message for the notification when a user logs into the application. We will store it in the *message* variable in the <i>App</i> component's state:
 
 ```js
 const App = () => {
@@ -423,7 +423,7 @@ By defining
 </Button>
 ```
 
-the _Button_ component is rendered so that its root component is react-router-dom's _Link_ which receives its path as the prop field _to_.
+the *Button* component is rendered so that its root component is react-router-dom's *Link* which receives its path as the prop field *to*.
 
 The code for the navigation bar is the following:
 

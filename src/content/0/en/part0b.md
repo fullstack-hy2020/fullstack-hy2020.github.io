@@ -16,7 +16,7 @@ Code will conform to contemporary best practices from [part 1](/en/part1) onward
 
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while.
 
-**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing _F12_ or _option-cmd-i_ simultaneously.  On Windows or Linux, open the console by pressing _F12_ or _ctrl-shift-i_ simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
+**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing *F12* or *option-cmd-i* simultaneously.  On Windows or Linux, open the console by pressing *F12* or *ctrl-shift-i* simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
 
 Remember to <i>always</i> keep the Developer Console open when developing web applications.
 
@@ -617,7 +617,7 @@ You will suffer from JavaScript fatigue yourself during this course. Fortunately
 
 The exercises are submitted via GitHub, and by marking the exercises as done in the "my submissions" tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mluukkai_ as a collaborator to it.
+You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add *mluukkai* as a collaborator to it.
 
 One good way to name the directories in your submission repository is as follows:
 

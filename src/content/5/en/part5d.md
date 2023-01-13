@@ -288,7 +288,7 @@ If we search for a button by its text, [cy.contains](https://docs.cypress.io/api
 This will happen even if the button is not visible.
 To avoid name conflicts, we gave the submit button the id <i>login-button</i> we can use to access it.
 
-Now we notice that the variable _cy_ our tests use gives us a nasty Eslint error
+Now we notice that the variable *cy* our tests use gives us a nasty Eslint error
 
 ![vscode screenshot showing cy is not defined](../../images/5/30ea.png)
 
@@ -620,7 +620,7 @@ it('login fails with wrong password', function() {
 
 Using should is a bit trickier than using <i>contains</i>, but it allows for more diverse tests than <i>contains</i> which works based on text content only.
 
-A list of the most common assertions which can be used with _should_ can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
+A list of the most common assertions which can be used with *should* can be found [here](https://docs.cypress.io/guides/references/assertions.html#Common-Assertions).
 
 We can, for example, make sure that the error message is red and it has a border:
 
@@ -745,7 +745,7 @@ describe('when logged in', function() {
 })
 ```
 
-We can access the response to a [cy.request](https://docs.cypress.io/api/commands/request.html) with the _then_ method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises).
+We can access the response to a [cy.request](https://docs.cypress.io/api/commands/request.html) with the *then* method.  Under the hood <i>cy.request</i>, like all Cypress commands, are [promises](https://docs.cypress.io/guides/core-concepts/introduction-to-cypress.html#Commands-Are-Promises).
 The callback function saves the details of a logged-in user to localStorage, and reloads the page.
 Now there is no difference to a user logging in with the login form.
 
@@ -894,11 +894,11 @@ describe('when logged in', function() {
 
 How does the [cy.contains](https://docs.cypress.io/api/commands/contains.html) command actually work?
 
-When we click the _cy.contains('second note')_ command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:
+When we click the *cy.contains('second note')* command in Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), we see that the command searches for the element containing the text <i>second note</i>:
 
 ![cypress test runner clicking testbody and second note](../../images/5/34x.png)
 
-By clicking the next line _.contains('make important')_ we see that the test uses
+By clicking the next line *.contains('make important')* we see that the test uses
 the 'make important' button corresponding to the <i>second note</i>:
 
 ![cypress test runner clicking make important](../../images/5/35x.png)
@@ -918,7 +918,7 @@ the result would have been entirely different. The second line of the test would
 
 When coding tests, you should check in the test runner that the tests use the right components!
 
-Let's change the _Note_ component so that the text of the note is rendered to a <i>span</i>.
+Let's change the *Note* component so that the text of the note is rendered to a <i>span</i>.
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -934,7 +934,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-Our tests break! As the test runner reveals,  _cy.contains('second note')_ now returns the component containing the text, and the button is not in it.
+Our tests break! As the test runner reveals,  *cy.contains('second note')* now returns the component containing the text, and the button is not in it.
 
 ![cypress showing test is broken trying to click make important](../../images/5/37x.png)
 
@@ -980,10 +980,10 @@ debugger()
 cy.contains('logout').click()
 ```
 
-This won't work, however. When Cypress runs a test, it adds each _cy_ command to an execution queue.
+This won't work, however. When Cypress runs a test, it adds each *cy* command to an execution queue.
 When the code of the test method has been executed, Cypress will execute each command in the queue one by one.
 
-Cypress commands always return _undefined_, so _button.click()_ in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed.
+Cypress commands always return *undefined*, so *button.click()* in the above code would cause an error. An attempt to start the debugger would not stop the code between executing the commands, but before any commands have been executed.
 
 Cypress commands are <i>like promises</i>, so if we want to access their return values, we have to do it using the [then](https://docs.cypress.io/api/commands/then.html) command.
 For example, the following test would print the number of buttons in the application, and click the first button:

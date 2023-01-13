@@ -76,7 +76,7 @@ class App extends React.Component {
 }
 ```
 
-The component state is in the instance variable _this.state_. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently-shown anecdote.
+The component state is in the instance variable *this.state*. The state is an object having two properties. <i>this.state.anecdotes</i> is the list of anecdotes and <i>this.state.current</i> is the index of the currently-shown anecdote.
 
 In Functional components, the right place for fetching data from a server is inside an [effect hook](https://reactjs.org/docs/hooks-effect.html), which is executed when a component renders or less frequently if necessary, e.g. only in combination with the first render.
 
@@ -107,7 +107,7 @@ class App extends React.Component {
 
 The callback function of the HTTP request updates the component state using the method [setState](https://reactjs.org/docs/react-component.html#setstate). The method only touches the keys that have been defined in the object passed to the method as an argument. The value for the key <i>current</i> remains unchanged.
 
-Calling the method setState always triggers the rerender of the Class Component, i.e. calling the method _render_.
+Calling the method setState always triggers the rerender of the Class Component, i.e. calling the method *render*.
 
 We'll finish off the component with the ability to change the shown anecdote. The following is the code for the entire component with the addition highlighted:
 
@@ -184,11 +184,11 @@ const App = () => {
 }
 ```
 
-In the case of our example, the differences were minor. The biggest difference between Functional components and Class components is mainly that the state of a Class component is a single object, and that the state is updated using the method _setState_, while in Functional components the state can consist of multiple different variables, with all of them having their own update function.
+In the case of our example, the differences were minor. The biggest difference between Functional components and Class components is mainly that the state of a Class component is a single object, and that the state is updated using the method *setState*, while in Functional components the state can consist of multiple different variables, with all of them having their own update function.
 
 In some more advanced use cases, the effect hook offers a considerably better mechanism for controlling side effects compared to the lifecycle methods of Class Components.
 
-A notable benefit of using Functional components is not having to deal with the self-referencing _this_ reference of the Javascript class.
+A notable benefit of using Functional components is not having to deal with the self-referencing *this* reference of the Javascript class.
 
 In my opinion, and the opinion of many others, Class Components offer little benefit over Functional components enhanced with hooks, except for the so-called [error boundary](https://reactjs.org/docs/error-boundaries.html) mechanism, which currently (15th February 2021) isn't yet in use by functional components.
 
@@ -320,7 +320,7 @@ The one-year-old project that is used in [part 9](/en/part9) of this course alre
 
 ![npm outdated output of patientor](../../images/7/33x.png)
 
-The dependencies can be brought up to date by updating the file <i>package.json</i>. The best way to do that is by using a tool called _npm-check-updates_. It can be installed globally by running the command
+The dependencies can be brought up to date by updating the file <i>package.json</i>. The best way to do that is by using a tool called *npm-check-updates*. It can be installed globally by running the command
 
 ```bash
 npm install -g npm-check-updates
@@ -340,7 +340,7 @@ Checking ...\ultimate-hooks\package.json
 Run ncu -u to upgrade package.json
 ```
 
-The file <i>package.json</i> is brought up to date by running the command _ncu -u_.
+The file <i>package.json</i> is brought up to date by running the command *ncu -u*.
 
 ```console
 $ ncu -u
@@ -354,11 +354,11 @@ Upgrading ...\ultimate-hooks\package.json
 Run npm install to install new versions.
 ```
 
-Then it is time to update the dependencies by running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk.
+Then it is time to update the dependencies by running the command *npm install*. However, old versions of the dependencies are not necessarily a security risk.
 
 The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of dependencies. It compares the version numbers of the dependencies in your application to a list of the version numbers of dependencies containing known security threats in a centralized error database.
 
-Running _npm audit_ on the same project prints a long list of complaints and suggested fixes.
+Running *npm audit* on the same project prints a long list of complaints and suggested fixes.
 Below is a part of the report:
 
 ```js
@@ -389,7 +389,7 @@ To address all issues (including breaking changes), run:
   npm audit fix --force
 ```
 
-After only one year, the code is full of small security threats. Luckily, there are only 2 critical threats.  Let's run _npm audit fix_ as the report suggests:
+After only one year, the code is full of small security threats. Luckily, there are only 2 critical threats.  Let's run *npm audit fix* as the report suggests:
 
 ```js
 $ npm audit fix
@@ -401,7 +401,7 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
   (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
 ```
 
-62 threats remain because, by default, _audit fix_ does not update dependencies if their <i>major</i> version number has increased.  Updating these dependencies could lead to the whole application breaking down.
+62 threats remain because, by default, *audit fix* does not update dependencies if their <i>major</i> version number has increased.  Updating these dependencies could lead to the whole application breaking down.
 
 The source for the critical bug is the library [immer](https://github.com/immerjs/immer)
 
@@ -413,7 +413,7 @@ fix available via `npm audit fix --force`
 Will install react-scripts@5.0.0, which is a breaking change
 ```
 
-Running _npm audit fix --force_ would upgrade the library version but would also upgrade the library _react-scripts_ and that would potentially break down the development environment. So we will leave the library upgrades for later...
+Running *npm audit fix --force* would upgrade the library version but would also upgrade the library *react-scripts* and that would potentially break down the development environment. So we will leave the library upgrades for later...
 
 One of the threats mentioned in the list from OWASP is <i>Broken Authentication</i> and the related <i>Broken Access Control</i>. The token-based authentication we have been using is fairly robust if the application is being used on the traffic-encrypting HTTPS protocol. When implementing access control, one should e.g. remember to not only check a user's identity in the browser but also on the server. Bad security would be to prevent some actions to be taken only by hiding the execution options in the code of the browser.
 

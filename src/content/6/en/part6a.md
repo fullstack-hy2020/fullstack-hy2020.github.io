@@ -72,7 +72,7 @@ const counterReducer = (state, action) => {
 }
 ```
 
-The first parameter is the <i>state</i> in the store. The reducer returns a <i>new state</i> based on the _action_ type.
+The first parameter is the <i>state</i> in the store. The reducer returns a <i>new state</i> based on the *action* type.
 
 Let's change the code a bit. We have used if-else statements to respond to an action and change the state. However, the [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch) statement is the most common approach to writing a reducer.
 
@@ -93,7 +93,7 @@ const counterReducer = (state = 0, action) => {
 }
 ```
 
-Reducer is never supposed to be called directly from the application's code. Reducer is only given as a parameter to the _createStore_-function which creates the store:
+Reducer is never supposed to be called directly from the application's code. Reducer is only given as a parameter to the *createStore*-function which creates the store:
 
 ```js
 import { createStore } from 'redux'
@@ -175,7 +175,7 @@ would cause the following to be printed
 -1
 </pre>
 
-The code of our counter application is the following. All of the code has been written in the same file (_index.js_), so <i>store</i> is straight available for the React code. We will get to know better ways to structure React/Redux code later.
+The code of our counter application is the following. All of the code has been written in the same file (*index.js*), so <i>store</i> is straight available for the React code. We will get to know better ways to structure React/Redux code later.
 
 ```js
 import React from 'react'
@@ -231,9 +231,9 @@ store.subscribe(renderApp)
 ```
 
 There are a few notable things in the code.
-<i>App</i> renders the value of the counter by asking it from the store with the method _store.getState()_. The action handlers of the buttons <i>dispatch</i> the right actions to the store.
+<i>App</i> renders the value of the counter by asking it from the store with the method *store.getState()*. The action handlers of the buttons <i>dispatch</i> the right actions to the store.
 
-When the state in the store is changed, React is not able to automatically rerender the application. Thus we have registered a function _renderApp_, which renders the whole app, to listen for changes in the store with the _store.subscribe_ method. Note that we have to immediately call the _renderApp_ method. Without the call, the first rendering of the app would never happen.
+When the state in the store is changed, React is not able to automatically rerender the application. Thus we have registered a function *renderApp*, which renders the whole app, to listen for changes in the store with the *store.subscribe* method. Note that we have to immediately call the *renderApp* method. Without the call, the first rendering of the app would never happen.
 
 ### Redux-notes
 
@@ -322,7 +322,7 @@ The application seems to be working, but the reducer we have declared is bad. It
 
 Pure functions are such, that they <i>do not cause any side effects</i> and they must always return the same response when called with the same parameters.
 
-We added a new note to the state with the method _state.push(action.data)_ which <i>changes</i> the state of the state-object. This is not allowed. The problem is easily solved by using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which creates a <i>new array</i>, which contains all the elements of the old array and the new element:
+We added a new note to the state with the method *state.push(action.data)* which <i>changes</i> the state of the state-object. This is not allowed. The problem is easily solved by using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which creates a <i>new array</i>, which contains all the elements of the old array and the new element:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -384,7 +384,7 @@ describe('noteReducer', () => {
 })
 ```
 
-The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the _push_ command to manipulate the state, the test will not pass
+The <i>deepFreeze(state)</i> command ensures that the reducer does not change the state of the store given to it as a parameter. If the reducer uses the *push* command to manipulate the state, the test will not pass
 
 ![terminal showing test failure and error about not using array.push](../../images/6/2.png)
 
@@ -492,7 +492,7 @@ state.map(note =>
 
 Because we now have quite good tests for the reducer, we can refactor the code safely.
 
-Adding a new note creates the state it returns with Array's _concat_ function. Let's take a look at how we can achieve the same by using the JavaScript [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) -syntax:
+Adding a new note creates the state it returns with Array's *concat* function. Let's take a look at how we can achieve the same by using the JavaScript [array spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_operator) -syntax:
 
 ```js
 const noteReducer = (state = [], action) => {
@@ -819,9 +819,9 @@ First, we install react-redux
 npm install react-redux
 ```
 
-Next, we move the _App_ component into its own file _App.js_. Let's see how this affects the rest of the application files.
+Next, we move the *App* component into its own file *App.js*. Let's see how this affects the rest of the application files.
 
-_index.js_ becomes:
+*index.js* becomes:
 
 ```js
 import React from 'react'
