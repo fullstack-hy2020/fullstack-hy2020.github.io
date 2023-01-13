@@ -109,7 +109,7 @@ If you know some other good and easy-to-use services for hosting NodeJS, please 
 For both Fly.io and Heroku, we need to change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
 
 ```js
-const PORT = process.env.PORT || 3001  // highlight-line
+const PORT = process.env.PORT || 8080  // highlight-line
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`)
 })
