@@ -73,7 +73,7 @@ Kun koko "stäkki" on saatu vihdoin kuntoon, siirretään sovellus Internetiin.
 
 Sovellusten hostaamiseen, eli "internettiin laittamiseen" on olemassa lukematon määrä erilaisia ratkaisuja. Helpoimpia näistä sovelluskehittäjän kannalta ovat ns PaaS (eli Platform as a Service) -palvelut, jotka huolehtivat sovelluskehittäjän puolesta tietokannan ja suoritusympäristön asentamisen.
 
-Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.com). Elokuun 2022 lopussa Heroku ilmoitti että 27.11.2022 alkaen alustan maksuttomat palvelut loppuvat. Tämän takia esittelemme seuraavassa Herokun lisäksi myös lupaavan korvaajan [Fly.io](https://fly.io/). Voit käyttää kumpaa vaan kunhan muistat sen että Herokun ilmaisuus loppuu pian. Heroku on lupaillut jonkinlaista ilmaista käyttömahdollisuutta opiskelijoille, mutta sen varaan ei kannata liiaksi tässä vaiheessa laskea.
+Kymmenen vuoden ajan PaaS-ratkaisujen ykkönen on ollut [Heroku](http://heroku.com). Elokuun 2022 lopussa Heroku ilmoitti että 27.11.2022 alkaen alustan maksuttomat palvelut loppuvat. Tämän takia esittelemme seuraavassa Herokun lisäksi myös lupaavan korvaajan [Fly.io](https://fly.io/).
 
 Molempia ratkaisuja varten muutetaan tiedoston <i>index.js</i> lopussa olevaa sovelluksen käyttämän portin määrittelyä seuraavasti:
 
@@ -108,7 +108,32 @@ Sovelluksen alustus tapahtuu seuraavasti. Mene sovelluksen juurihakemistoon ja a
 fly launch
 ```
 
-Anna sovellukselle nimi, tai anna Fly.io:n generoida automaattinen nimi, valitse "region" eli alue minkä konesaliissa sovelluksesi toimii. Älä luo sovellukselle postgres- sekä Upstash Redis-tietokantaa. Lopuksi vielä kysytään "Would you like to deploy now?" eli haluatko että sovellus myös viedään tuotantoympäristöön. Valitse kyllä.
+Anna sovellukselle nimi, tai anna Fly.io:n generoida automaattinen nimi, valitse "region" eli alue minkä konesaliissa sovelluksesi toimii. Älä luo sovellukselle postgres- sekä Upstash Redis-tietokantaa. Lopuksi vielä kysytään "Would you like to deploy now?" eli haluatko että sovellus myös viedään tuotantoympäristöön. Valitse "Ei".
+
+Fly.io luo hakemistoosi tiedoston <i>fly.toml</i>, joka sisältää sovelluksen tuotantoympäristön konfiguraation.
+
+Jotta sovellus saadaan konfiguroitua oikein, tulee tiedostoon konfiguraatuoon tehdä pieni lisäys osiin [env]
+
+```bash
+[env]
+  PORT = 8080 # lisätään tämä
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 8080 
+  processes = ["app"]
+```
+
+Osaan [env] lisätään määritelmä ympäristömuuttujalle PORT, jotta sovellus osaa käynnistää itsensä samaan samaan porttiin, missä Fly olettaa (määrittely kohdassa [services]) sen olevan käynnissä.
+
+Sovellus voidaan nyt käynnistää komennolla
+
+```bash
+fly deploy
+```
 
 Jos kaikki menee hyvin, sovellus käynnistyy ja saat sen avattua selaimeen komennolla 
 
@@ -123,8 +148,6 @@ fly deploy
 ```
 
 Erittäin tärkeä komento on myös _fly logs_ jonka avulla voit seurata tuotantopalvelimen konsoliin tulostuvia logeja. Logit on viisainta pitää koko ajan näkyvillä.
-
-Fly.io luo hakemistoosi tiedoston <i>fly.toml</i>, joka sisältää sovelluksen tuotantoympäristön konfiguraation. Tiedoston sisällöstä ei tällä kurssilla tarvitse liiemmin välittää.
 
 #### Heroku
 

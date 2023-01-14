@@ -10,9 +10,7 @@ lang: en
 
 In this part, our focus shifts towards the backend: that is, towards implementing functionality on the server side of the stack.
 
-
 We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.
-
 
 This course material was written with version <i>16.13.2</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 

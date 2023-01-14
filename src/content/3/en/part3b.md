@@ -26,12 +26,10 @@ const getAll = () => {
 export default { getAll, create, update }
 ```
 
-<!-- Frontendin tekemä GET-pyyntö osoitteeseen <http://localhost:3001/api/notes> ei jostain syystä toimi: -->
 Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
 
 ![Get request showing error in dev tools](../../images/3/3ae.png)
 
-<!-- Mistä on kyse? Backend toimii kuitenkin selaimesta ja postmanista käytettäessä ilman ongelmaa. -->
 What's going on here? We can access the backend from a browser and from postman without any problems.
 
 ### Same origin policy and CORS
@@ -85,6 +83,7 @@ The setup of our app looks now as follows:
 ![diagram of react app and browser](../../images/3/100.png)
 
 The react app running in the browser now fetches the data from node/express-server that runs in localhost:3001.
+
 ### Application to the Internet
 
 Now that the whole stack is ready, let's move our application to the internet.
@@ -150,7 +149,30 @@ fly launch
 
 Give the app a name or let Fly.io auto-generate one. Pick a region where the app will be run. Do not create a Postgres database for the app since it is not needed.
 
-The last question is "Would you like to deploy now?", answer yes and your app is also deployed to the Fly.io servers. 
+The last question is "Would you like to deploy now?". We should answer "no" since we are not quite ready yet.
+
+Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is configured. To get the app up and running we should do a small addition to the part [env] of the configuration:
+
+```bash
+[env]
+  PORT = 8080 # add this
+
+[experimental]
+  auto_rollback = true
+
+[[services]]
+  http_checks = []
+  internal_port = 8080 
+  processes = ["app"]
+```
+
+We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [services]) where the app should create the server.
+
+We are now ready to deploy the app to the Fly.io servers. That is done with the following command:
+
+```bash
+fly deploy
+```
 
 If all goes well, the app should now be up and running. You can open it in the browser with the command
 
@@ -167,7 +189,6 @@ fly deploy
 
 A particularly important command is _fly logs_. This command can be used to view server logs. It is best to keep logs always visible!
 
-Fly.io creates a file <i>fly.toml</i> in the root of your app. The file contains all the configuration of your server. In this course we can mostly ignore the contents of the file.
 
 **Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL has caused problems. If the following command just hangs
 
