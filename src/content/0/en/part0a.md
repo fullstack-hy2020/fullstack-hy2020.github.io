@@ -45,7 +45,7 @@ You can discuss the course and related topics in our dedicated group on Discord 
 
 ### How to ask help in Discord/Telegam
 
-When you ask for help for a problem in the Discord/Telegram group wour question shoul be as informative and precise as possible. If your question look like this
+When you ask for help for a problem in the Discord/Telegram group your question should be as informative and precise as possible. If your question look like this
 
 > <i>Adding a new person does not work, could you help me with that?</i>
 
