@@ -43,6 +43,38 @@ Exercise completion time statistics can be found via the [submission system](htt
 
 You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord's <i>chat channel is not suitable for course-related discussions</i>. Please join the conversation!
 
+### How to ask help in Discord/Telegam
+
+When you ask for help for a problem in the Discord/Telegram group wour question shoul be as informative and precise as possible. If your question look like this
+
+> <i>Adding a new person does not work, could you help me with that?</i>
+
+it is quite likely that nobody will not bother to answer to you. The bug can be <i>anywhere</i>.
+
+A better question could be
+
+> <i> In the exercise 2.15 when I try to add a new person to the app, server responds to 403, despite the request looks ok to me.
+>
+> The code looks like this
+> 
+> ```js
+>   // the relevant part of code is pasted here
+>   // code should contain several console.log statements for helping the debuging
+> ```
+>
+> The following gets printed to the console
+>
+> ```bash
+>   // data printed to console
+> ```
+>
+> The network tab looks like the following</i>
+>
+> [screen shot from the network console]
+>
+> All the code can be found here (a link to GitHub)
+
+
 ### Parts and completion
 
 Full Stack studies consist of the core course and multiple extensions. You can complete the studies in the extent of 5 to 14 credits. 
