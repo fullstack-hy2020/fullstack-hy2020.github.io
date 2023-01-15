@@ -22,6 +22,7 @@
     "mainTitle": "Deep Dive Into Modern Web Development",
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
+      "<em>Questions about the course? Read carefully <a href='/en/part0/general_info'>Part 0</a>, that has an answer to most...</em>",
       "The year 2022 is over but the course continues! See <a href='/en/part0/general_info#continuing-the-course-at-year-2023'>this</a> for more details.",
       "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation! <ul><li>See <a href='/en/part0/general_info#how-to-ask-help-in-discord-telegam'>here</a> how to ask questions in a proper way</li><ul>"
     ],
