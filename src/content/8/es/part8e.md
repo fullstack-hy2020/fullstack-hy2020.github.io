@@ -215,7 +215,7 @@ No se necesitan otros cambios en el servidor.
 
 Es posible probar las suscripciones con el patio de juegos de GraphQL de esta manera:
 
-![](../../images/8/31.png)
+![](../../images/8/31x.png)
 
 Cuando presiona "reproducir" en una suscripción, el área de juegos espera las notificaciones de la suscripción.
 

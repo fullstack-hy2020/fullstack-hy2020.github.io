@@ -1040,11 +1040,11 @@ Si la función de protección de tipos devuelve verdadero, el compilador de Type
 
 Antes de que se llame al tipo de protección, el tipo real de la variable <i>comment</i> no se conoce:
 
-![](../../images/9/28e.png)
+![](../../images/9/28e-21.png)
 
 Pero después de la llamada, si el código pasa de la excepción (es decir, el tipo guard devuelto verdadero), el compilador sabe que <i>comment</i> es del tipo <i>string</i>:
 
-![](../../images/9/29e.png)
+![](../../images/9/29e-21.png)
 
 ¿Por qué tenemos dos condiciones en la protección de tipo de string?
 
