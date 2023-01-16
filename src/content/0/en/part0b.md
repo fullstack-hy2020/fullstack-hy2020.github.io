@@ -70,7 +70,7 @@ The chain of events caused by opening the page https://studies.cs.helsinki.fi/ex
 
 ![Sequence diagram of the flow covered above](../../images/0/7m.png)
 
-The sequence diagram visualizes how the browser and server are comminicating over the time. The time flows in the diagram from top to bottom, so the diagram starts with the first request that the browser sends to server, followed by the response.
+The sequence diagram visualizes how the browser and server are communicating over the time. The time flows in the diagram from top to bottom, so the diagram starts with the first request that the browser sends to server, followed by the response.
 
 First, the browser sends an HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen.
 
