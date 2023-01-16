@@ -181,7 +181,7 @@ Note that you should not remove the line at the bottom of the component
 export default App
 ```
 
-The export is not shown in most of the examples of the course material. Without the export the component and thw whole app breaks down.
+The export is not shown in most of the examples of the course material. Without the export the component and the whole app breaks down.
 
 Did you remember your promise to keep the console open? What was printed out there?
 
