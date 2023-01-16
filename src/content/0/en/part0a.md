@@ -165,7 +165,7 @@ How to study the course – instructions in a nutshell: 5 cr core course CSM1410
 - Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
   - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
-  - Enroll in the course. You will get the enrollment link through the submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#the-course-exam)
+  - Enroll in the course. You will get the enrollment link through the submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#submitting-exercises)
   - Save your student number. After course enrollment, save your University of Helsinki student ID number in the submission system.
   - Do the online exam in the submission system. Read more [here](/en/part0/general_info#the-course-exam)
   - Mark the course completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
