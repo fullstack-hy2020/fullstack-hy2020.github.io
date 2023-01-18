@@ -43,6 +43,9 @@ const App = (props) => {
 }
 ```
 
+We can also use React Developer Tools to see that this really happens:
+
+![](../../images/2/30.png)
 
 If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
 
@@ -54,9 +57,7 @@ const App = () => {
 }  
 ```
 
-
 Let's stick with the initial value passed in the props for the time being.
-
 
 Next, let's add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) to the component that will be used for adding new notes.
 
@@ -235,7 +236,6 @@ const addNote = (event) => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date().toISOString(),
     important: Math.random() < 0.5,
     id: notes.length + 1,
   }

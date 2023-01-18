@@ -7,7 +7,6 @@ lang: en
 
 <div class="content">
 
-
 When creating notes in our application, we would naturally want to store them in some backend server. The [json-server](https://github.com/typicode/json-server) package claims to be a so-called REST or RESTful API in its documentation:
 
 > <i>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</i>
@@ -35,7 +34,6 @@ addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date(),
     important: Math.random() < 0.5,
   }
 
@@ -55,17 +53,25 @@ The object is sent to the server using the axios <em>post</em> method. The regis
 
 When we try to create a new note, the following output pops up in the console:
 
-![data json output in console](../../images/2/20e.png)
+![data json output in console](../../images/2/20new.png)
 
 The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
 
-Sometimes it can be useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get):
+Quite often it is useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get).
 
-![content-type and request payload data in dev tools](../../images/2/21e.png)
+We can use the inspector to check that the headers sent in the POST request are what we expected them to be:
 
-We can use the inspector to check that the headers sent in the POST request are what we expected them to be and that their values are correct.
+![](../../images/2/21new1.png)
 
 Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
+
+The tab <i>payload</i> can be used to check the request data:
+
+![](../../images/2/21new2.png)
+
+Also the tab <i>response</i> is useful, it shows what was the data the server responded with:
+
+![](../../images/2/21new3.png)
 
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
 
@@ -74,7 +80,6 @@ addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date(),
     important: Math.random() > 0.5,
   }
 
@@ -100,9 +105,6 @@ It's beneficial to inspect the state of the backend server, e.g. through the bro
 This makes it possible to verify that all the data we intended to send was actually received by the server.
 
 In the next part of the course, we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
-
-> **NB:** In the current version of our application, the browser adds the creation date property to the note. Since the clock of the machine running the browser can be wrongly configured, it's much wiser to let the backend server generate this timestamp for us. This is in fact what we will do in the next part of the course.
-
 
 The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
 
@@ -211,7 +213,7 @@ Almost every line of code in the function body contains important details. The f
 
 The array [find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) is used to find the note we want to modify, and we then assign it to the _note_ variable.
 
-After this, we create a <i>new object</i> that is an exact copy of the old note, apart from the important property. 
+After this, we create a <i>new object</i> that is an exact copy of the old note, apart from the important property that has the value flipped (from true to false or from false to true).
 
 The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax may seem a bit strange at first:
 
@@ -231,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must never mutate state directly in React. 
+This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React. 
 
 It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 
@@ -328,7 +330,6 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      date: new Date().toISOString(),
       important: Math.random() > 0.5
     }
 
@@ -458,7 +459,6 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      date: new Date().toISOString(),
       important: Math.random() > 0.5
     }
 
@@ -598,7 +598,6 @@ const getAll = () => {
   const nonExisting = {
     id: 10000,
     content: 'This note is not saved to server',
-    date: '2019-05-30T17:30:31.098Z',
     important: true,
   }
   return request.then(response => response.data.concat(nonExisting))
@@ -693,23 +692,41 @@ It's probably not a good idea to use alert in more serious React applications. W
 
 The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
 
+### Full stack developer's oath
+
+It is again time for the exercises. The complexity of our app is now increasing since besides just taking care of the React components in the frontend, we also have a backend that is persisting the application data.
+
+To cope with the increasing complexity we should extend the web developer's oath to a <i>Full stack developer's oath</i>, which reminds us to make sure that the communication between fronend and backend happens as expected.
+
+So here is the updated oath:
+
+Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+
+- I will have my browser developer console open all the time
+- <i>I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect</i>
+- <i>I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect</i>
+- I progress with small steps
+- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
+- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+
 </div>
 
 <div class="tasks">
 
-<h3>Exercises 2.15.-2.18.</h3>
+<h3>Exercises 2.12.-2.15.</h3>
 
-<h4>2.15: Phonebook step7</h4>
+<h4>2.12: Phonebook step7</h4>
 
 Let's return to our phonebook application.
 
 Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
 
-<h4>2.16: Phonebook step8</h4>
+<h4>2.13: Phonebook step8</h4>
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-<h4>2.17: Phonebook step9</h4>
+<h4>2.14: Phonebook step9</h4>
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
 
@@ -728,7 +745,9 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.18*: Phonebook step10</h4>
+<h4>2.15*: Phonebook step10</h4>
+
+<i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 
 Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number. 
 
