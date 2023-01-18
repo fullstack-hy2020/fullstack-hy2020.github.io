@@ -19,19 +19,16 @@ Tehdään projektin juurihakemistoon tiedosto <i>db.json</i>:
     {
       "id": 1,
       "content": "HTML is easy",
-      "date": "2022-1-17T17:30:31.098Z",
       "important": true
     },
     {
       "id": 2,
       "content": "Browser can execute only JavaScript",
-      "date": "2022-1-17T18:39:34.091Z",
       "important": false
     },
     {
       "id": 3,
       "content": "GET and POST are the most important methods of HTTP protocol",
-      "date": "2022-1-17T19:20:14.298Z",
       "important": true
     }
   ]
@@ -50,9 +47,9 @@ Oletusarvoisesti JSON Server käynnistyy porttiin 3000. Koska create-react-app:i
 
 Mennään selaimella osoitteeseen <http://localhost:3001/notes>. Kuten huomaamme, JSON Server tarjoaa osoitteessa tiedostoon tallentamamme muistiinpanot JSON-muodossa:
 
-![](../../images/2/14ea.png)
+![](../../images/2/14new.png)
 
-Jos selaimesi ei osaa näyttää JSON-muotoista dataa formatoituna, asenna jokin sopiva plugin, esim. [JSONView](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) helpottamaan elämääsi.
+Jos selaimesi ei osaa näyttää JSON-muotoista dataa formatoituna, asenna jokin sopiva plugin, esim. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) helpottamaan elämääsi.
 
 Jatkossa ideana onkin se, että muistiinpanot talletetaan palvelimelle eli tässä vaiheessa JSON Serverille. React-koodi hakee muistiinpanot palvelimelta ja renderöi ne ruudulle. Kun sovellukseen lisätään uusi muistiinpano, React-koodi lähettää sen myös palvelimelle, jotta uudet muistiinpanot jäävät pysyvästi "muistiin".
 
@@ -142,17 +139,17 @@ Nykyään lähes kaikki JavaScript-projektit määritellään node "pakkausmanag
 
 ```json
 {
-  "name": "notes",
+  "name": "notes-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -195,18 +192,18 @@ Nyt Axios on mukana riippuvuuksien joukossa:
 
 ```json
 {
-  "name": "notes",
+  "name": "notes-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.24.0", // highlight-line
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.3"
+    "axios": "^1.2.2", // highlight-line
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   // ...
 }
@@ -286,9 +283,7 @@ console.log(promise2)
 
 Konsoliin tulostuu:
 
-![](../../images/2/16b.png)
-
-**Huom:** kun tiedostoon <i>index.js</i> lisätään sisältöä, React ei välttämättä havaitse muutosta automaattisesti eli joudut ehkä refreshaamaan selaimen, jotta näet muutokset! 
+![](../../images/2/16new.png)
 
 Axiosin metodi _get_ palauttaa [promisen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
@@ -316,7 +311,7 @@ promise.then(response => {
 
 Konsoliin tulostuu:
 
-![](../../images/2/17e.png)
+![](../../images/2/17new.png)
 
 JavaScriptin suoritusympäristö kutsuu <em>then</em>-metodin avulla rekisteröityä takaisinkutsufunktiota antaen sille parametriksi olion <em>response</em>, joka sisältää kaiken oleellisen HTTP GET -pyynnön vastaukseen liittyvän, eli palautetun <i>datan</i>, <i>statuskoodin</i> ja <i>headerit</i>.
 
@@ -350,10 +345,8 @@ Voimme vihdoin siirtyä käyttämään sovelluksessamme palvelimelta haettavaa d
 Tehdään se aluksi "huonosti", eli lisätään sovellusta vastaavan komponentin <i>App</i> renderöinti takaisinkutsufunktion sisälle muuttamalla <i>index.js</i> seuraavaan muotoon:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import axios from 'axios' // highlight-line
-
+import axios from 'axios'
 import App from './App'
 
 axios.get('http://localhost:3001/notes').then(response => {
@@ -440,7 +433,7 @@ Efekti, eli funktio
 }
 ```
 
-suoritetaan heti renderöinnin jälkeen. Funktion suoritus saa aikaan sen, että konsoliin tulostuu <i>effect</i> ja että komento <em>axios.get</em> aloittaa datan hakemisen palvelimelta sekä rekisteröi operaatiolle <i>tapahtumankäsittelijäksi</i> funktion
+suoritetaan heti komponentin renderöinnin jälkeen. Funktion suoritus saa aikaan sen, että konsoliin tulostuu <i>effect</i> ja että komento <em>axios.get</em> aloittaa datan hakemisen palvelimelta sekä rekisteröi operaatiolle <i>tapahtumankäsittelijäksi</i> funktion
 
 ```js
 response => {
@@ -544,7 +537,7 @@ Kaikki sovelluksen osat ovat sovelluskehitysvaiheessa siis ohjelmoijan koneella 
 
 <div class="tasks">
 
-<h3>Tehtävät 2.11.-2.14.</h3>
+<h3>Tehtävä 2.11.</h3>
 
 <h4>2.11: puhelinluettelo step6</h4>
 
@@ -594,66 +587,5 @@ Error: listen EADDRINUSE 0.0.0.0:3001
 on portti 3001 jo jonkin muun sovelluksen, esim. jo käynnissä olevan JSON Serverin käytössä. Sulje toinen sovellus tai jos se ei onnistu, vaihda porttia.
 
 Muuta sovellusta siten, että alkutila haetaan Axios-kirjaston avulla palvelimelta. Hoida datan hakeminen [Effect hookilla](https://reactjs.org/docs/hooks-effect.html)).
-
-<h4>2.12* maiden tiedot, step1</h4>
-
-RESTCountries [https://restcountries.com](https://restcountries.com) tarjoaa paljon eri maihin liittyvää tietoa koneluettavassa muodossa ns. REST API:n välityksellä.
-
-Tee sovellus, jonka avulla voit tarkastella eri maiden tietoja. Sovelluksen kannattaa hakea tiedot endpointista [all](https://restcountries.com/#api-endpoints-v3-all).
-
-Sovelluksen käyttöliittymä on yksinkertainen. Näytettävä maa haetaan kirjoittamalla hakuehto hakukenttään.
-
-Jos ehdon täyttäviä maita on liikaa (yli kymmenen), kehotetaan tarkentamaan hakuehtoa:
-
-![](../../images/2/19b1.png)
-
-Jos maita on kymmenen tai alle mutta enemmän kuin yksi, näytetään hakuehdon täyttävät maat:
-
-![](../../images/2/19b2.png)
-
-Kun ehdon täyttäviä maita on enää yksi, näytetään maan perustiedot, lippu sekä maassa puhutut kielet:
-
-![](../../images/2/19c3.png)
-
-**Huom1:** Riittää, että sovelluksesi toimii suurimmalle osalle maista. Jotkut maat kuten Sudan voivat tuottaa ongelmia, sillä maan nimi on toisen maan (South Sudan) osa. Näistä corner caseista ei tarvitse välittää.
-
-**Huom2:** Saatat törmätä ongelmiin tässä tehtävässä, jos määrittelet komponentteja "väärässä paikassa". Nyt kannattaakin ehdottomasti kerrata edellisen osan luku [älä määrittele komponenttia komponentin sisällä](/osa1/monimutkaisempi_tila_reactin_debuggaus#ala-maarittele-komponenttia-komponentin-sisalla).
-
-**VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
-
-<h4>2.13*: maiden tiedot, step2</h4>
-
-**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
-
-Paranna edellisen tehtävän maasovellusta siten, että kun sivulla näkyy useiden maiden nimiä, tulee maan nimen viereen nappi, jota klikkaamalla pääsee suoraan maan näkymään:
-
-![](../../images/2/19b4.png)
-
-Tässäkin tehtävässä riittää, että ohjelmasi toimii suurella osalla maita ja maat, joiden nimi sisältyy johonkin muuhun maahan (kuten Sudan) voit unohtaa. 
-
-<h4>2.14*: maiden tiedot, step3</h4>
-
-**Tässä osassa on vielä paljon tekemistä, joten älä juutu tähän tehtävään!**
-
-Lisää yksittäisen maan näkymään pääkaupungin säätiedotus. Säätiedotuksen tarjoavia palveluita on kymmeniä. Itse käytin [https://openweathermap.org/](https://openweathermap.org/):ia. Huomaa että api-avaimen luomisen jälkeen saattaa kulua hetki ennen kuin avain alkaa toimia.
-
-![](../../images/2/19x.png)
-
-Jos käytät Open weather mapia, [täällä](https://openweathermap.org/weather-conditions#Icon-list) on ohje sääikonien generointiin.
-
-**Huom:** Tarvitset melkein kaikkia säätietoja tarjoavia palveluja käyttääksesi API-avaimen. Älä talleta avainta versionhallintaan eli älä kirjoita avainta suoraan koodiin. Avaimen arvo kannattaa määritellä ns. [ympäristömuuttujana](https://create-react-app.dev/docs/adding-custom-environment-variables/).
-
-Oletetaan että API-avaimen arvo on <i>54l41n3n4v41m34rv0</i>. Kun ohjelma käynnistetään seuraavasti
-
-```bash
-REACT_APP_API_KEY=54l41n3n4v41m34rv0 npm start
-```
-
-koodista päästään avaimen arvoon käsiksi olion _process.env_ kautta:
-
-```js
-const api_key = process.env.REACT_APP_API_KEY
-// muuttujassa api_key on nyt käynnistyksessä annettu API-avaimen arvo
-```
 
 </div>

@@ -43,6 +43,10 @@ const App = (props) => {
 }
 ```
 
+Voimme vielä havainnollsitaa tilanteen React Developer Toolsin avulla:
+
+![](../../images/2/30.png)
+
 Jos haluaisimme lähteä liikkeelle tyhjästä muistiinpanojen listasta, annettaisiin tilan alkuarvoksi tyhjä taulukko, ja koska komponentti ei käyttäisi ollenkaan propseja, voitaisiin parametri <em>props</em> jättää kokonaan määrittelemättä:
 
 ```js
@@ -217,7 +221,7 @@ Voit seurata konsolista miten tapahtumankäsittelijää kutsutaan:
 
 ![](../../images/2/8e.png)
 
-Muistithan jo asentaa [React Developer Toolsin](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)? Developer Toolsista näet, miten tila muuttuu syötekenttään kirjoitettaessa:
+Olethan jo asentanut [React Developer Toolsin](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi)? Developer Toolsista näet, miten tila muuttuu syötekenttään kirjoitettaessa:
 
 ![](../../images/2/9ea.png)
 
@@ -228,7 +232,6 @@ const addNote = (event) => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date().toISOString(),
     important: Math.random() > 0.5,
     id: notes.length + 1,
   }
