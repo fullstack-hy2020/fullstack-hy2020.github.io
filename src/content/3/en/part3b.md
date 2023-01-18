@@ -146,8 +146,8 @@ Initializing an app happens by running the following command in the root directo
 fly launch
 ```
 
-Give the app a name or let Fly.io auto-generate one. Pick a region where the app will be run. Do not create a Postgres database for the app since it is not needed.
-
+Give the app a name or let Fly.io auto-generate one. Pick a region where the app will be run. Do not create a Postgres database for the app and do not create an Upstash Redis database, since these are not needed.
+  
 The last question is "Would you like to deploy now?". We should answer "no" since we are not quite ready yet.
 
 Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is configured. To get the app up and running we should do a small addition to the part [env] of the configuration:
