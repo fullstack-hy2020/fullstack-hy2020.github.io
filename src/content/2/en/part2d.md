@@ -696,7 +696,7 @@ The code for the current state of our application can be found in the  <i>part2-
 
 It is again time for the exercises. The complexity of our app is now increasing since besides just taking care of the React components in the frontend, we also have a backend that is persisting the application data.
 
-To cope with the increasing complexity we should extend the web developer's oath to a <i>Full stack developer's oath</i>, which reminds us to make sure that the communication between fronend and backend happens as expected.
+To cope with the increasing complexity we should extend the web developer's oath to a <i>Full stack developer's oath</i>, which reminds us to make sure that the communication between frontend and backend happens as expected.
 
 So here is the updated oath:
 
