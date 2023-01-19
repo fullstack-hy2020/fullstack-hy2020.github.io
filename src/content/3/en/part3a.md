@@ -7,12 +7,11 @@ lang: en
 
 <div class="content">
 
-
 In this part, our focus shifts towards the backend: that is, towards implementing functionality on the server side of the stack.
 
 We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.
 
-This course material was written with version <i>16.13.2</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+This course material was written with version <i>v18.13.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
 
 As mentioned in [part 1](/en/part1/java_script), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
 
@@ -38,9 +37,7 @@ Let's navigate to an appropriate directory, and create a new template for our ap
 }
 ```
 
-
 The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.
-
 
 Let's make a small change to the <i>scripts</i> object:
 
@@ -55,13 +52,11 @@ Let's make a small change to the <i>scripts</i> object:
 }
 ```
 
-
 Next, let's create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:
 
 ```js
 console.log('hello world')
 ```
-
 
 We can run the program directly with Node from the command line:
 
@@ -69,13 +64,11 @@ We can run the program directly with Node from the command line:
 node index.js
 ```
 
-
 Or we can run it as an [npm script](https://docs.npmjs.com/misc/scripts):
 
 ```bash
 npm start
 ```
-
 
 The <i>start</i> npm script works because we defined it in the <i>package.json</i> file:
 
@@ -150,7 +143,6 @@ Error: listen EADDRINUSE :::3001
     at listenInCluster (net.js:1378:12)
 ```
 
-
 You have two options. Either shut down the application using port 3001 (the json-server in the last part of the material was using port 3001), or use a different port for this application.
 
 Let's take a closer look at the first line of the code:
@@ -205,19 +197,16 @@ let notes = [
   {
     id: 1,
     content: "HTML is easy",
-    date: "2022-05-30T17:30:31.098Z",
     important: true
   },
   {
     id: 2,
-    content: "Browser can execute only Javascript",
-    date: "2022-05-30T18:39:34.091Z",
+    content: "Browser can execute only JavaScript",
     important: false
   },
   {
     id: 3,
     content: "GET and POST are the most important methods of HTTP protocol",
-    date: "2022-05-30T19:20:14.298Z",
     important: true
   }
 ]
@@ -239,7 +228,7 @@ The <i>application/json</i> value in the <i>Content-Type</i> header informs the 
 
 When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
 
-![formatted JSON notes data](../../images/3/2e.png)
+![formatted JSON notes data](../../images/3/2new.png)
 
 ### Express
 
@@ -259,33 +248,26 @@ The dependency is also added to our <i>package.json</i> file:
 {
   // ...
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.18.2"
   }
 }
-
 ```
-
 
 The source code for the dependency is installed in the <i>node\_modules</i> directory located at the root of the project. In addition to express, you can find a great number of other dependencies in the directory:
 
 ![ls listing of dependencies in directory](../../images/3/4.png)
 
-
 These are the dependencies of the express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
-
-The version 4.17.2. of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+The version 4.18.2 of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
 ```json
-"express": "^4.17.2"
+"express": "^4.18.2"
 ```
-
 
 The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/getting-started/semantic-versioning).
 
-
-The caret in the front of <i>^4.17.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.17.2</i>. However, the installed version of express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
-
+The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.18.2</i>. However, the installed version of express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
 We can update the dependencies of the project with the command:
 
@@ -327,9 +309,7 @@ app.listen(PORT, () => {
 })
 ```
 
-
 To get the new version of our application into use, we have to restart the application.
-
 
 The application did not change a whole lot. Right at the beginning of our code, we're importing _express_, which this time is a <i>function</i> that is used to create an express application stored in the _app_ variable:
 
@@ -337,7 +317,6 @@ The application did not change a whole lot. Right at the beginning of our code, 
 const express = require('express')
 const app = express()
 ```
-
 
 Next, we define two <i>routes</i> to the application. The first one defines an event handler that is used to handle HTTP GET requests made to the application's <i>/</i> root:
 
@@ -347,17 +326,13 @@ app.get('/', (request, response) => {
 })
 ```
 
-
 The event handler function accepts two parameters. The first [request](http://expressjs.com/en/4x/api.html#req) parameter contains all of the information of the HTTP request, and the second [response](http://expressjs.com/en/4x/api.html#res) parameter is used to define how the request is responded to.
 
-
 In our code, the request is answered by using the [send](http://expressjs.com/en/4x/api.html#res.send) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200.
-
 
 We can verify this from the <i>Network</i> tab in developer tools:
 
 ![network tab in dev tools](../../images/3/5.png)
-
 
 The second route defines an event handler that handles HTTP GET requests made to the <i>notes</i> path of the application:
 
@@ -367,10 +342,9 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-
 The request is responded to with the [json](http://expressjs.com/en/4x/api.html#res.json) method of the _response_ object. Calling the method will send the __notes__ array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.
 
-![api/notes gives the formatted JSON data again](../../images/3/6ea.png)
+![api/notes gives the formatted JSON data again](../../images/3/6new.png)
 
 Next, let's take a quick look at the data sent in JSON format.
 
@@ -415,23 +389,19 @@ The contents of <i>package.json</i> have also changed:
 {
   //...
   "dependencies": {
-    "express": "^4.17.2",
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   }
 }
 ```
 
-
 If you accidentally used the wrong command and the nodemon dependency was added under "dependencies" instead of "devDependencies", then manually change the contents of <i>package.json</i> to match what is shown above.
-
 
 By development dependencies, we are referring to tools that are needed only during the development of the application, e.g. for testing or automatically restarting the application, like <i>nodemon</i>.
 
-
-These development dependencies are not needed when the application is run in production mode on the production server (e.g. Heroku).
-
+These development dependencies are not needed when the application is run in production mode on the production server (e.g. Fly.io or Heroku).
 
 We can start our application with <i>nodemon</i> like this:
 
@@ -439,9 +409,7 @@ We can start our application with <i>nodemon</i> like this:
 node_modules/.bin/nodemon index.js
 ```
 
-
 Changes to the application code now cause the server to restart automatically. It's worth noting that even though the backend server restarts automatically, the browser still has to be manually refreshed. This is because unlike when working in React, we don't have the [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) functionality needed to automatically reload the browser.
-
 
 The command is long and quite unpleasant, so let's define a dedicated <i>npm script</i> for it in the <i>package.json</i> file:
 
@@ -457,9 +425,7 @@ The command is long and quite unpleasant, so let's define a dedicated <i>npm scr
 }
 ```
 
-
 In the script there is no need to specify the <i>node\_modules/.bin/nodemon</i> path to nodemon, because _npm_ automatically knows to search for the file from that directory. 
-
 
 We can now start the server in development mode with the command:
 
@@ -467,36 +433,25 @@ We can now start the server in development mode with the command:
 npm run dev
 ```
 
-
 Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command.
-
 
 ### REST
 
-
 Let's expand our application so that it provides the same RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes).
-
 
 Representational State Transfer, aka REST, was introduced in 2000 in Roy Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications.
 
-
 We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) by only concerning ourselves with how RESTful APIs are typically understood in web applications. The original definition of REST is not even limited to web applications.
-
 
 We mentioned in the [previous part](/en/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address.
 
-
 One convention for creating unique addresses is to combine the name of the resource type with the resource's unique identifier.
-
 
 Let's assume that the root URL of our service is <i>www.example.com/api</i>.
 
-
 If we define the resource type of note to be <i>notes</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.
 
-
 The URL for the entire collection of all note resources is <i>www.example.com/api/notes</i>.
-
 
 We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:
 
@@ -510,24 +465,17 @@ We can execute different operations on resources. The operation to be executed i
 | notes/10              | PATCH               | replaces a part of the identified resource with the request data |
 |                       |                     |                                                                  |
 
-
 This is how we manage to roughly define what REST refers to as a [uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints), which means a consistent way of defining interfaces that makes it possible for systems to cooperate.
-
 
 This way of interpreting REST falls under the [second level of RESTful maturity](https://martinfowler.com/articles/richardsonMaturityModel.html) in the Richardson Maturity Model. According to the definition provided by Roy Fielding, we have not defined a [REST API](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven). In fact, a large majority of the world's purported "REST" APIs do not meet Fielding's original criteria outlined in his dissertation.
 
-
 In some places (see e.g. [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)) you will see our model for a straightforward [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API, being referred to as an example of [resource-oriented architecture](https://en.wikipedia.org/wiki/Resource-oriented_architecture) instead of REST. We will avoid getting stuck arguing semantics and instead return to working on our application.
-
 
 ### Fetching a single resource
 
-
 Let's expand our application so that it offers a REST interface for operating on individual notes. First, let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource.
 
-
 The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
-
 
 We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:
 
@@ -539,9 +487,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Now <code>app.get('/api/notes/:id', ...)</code> will handle all HTTP GET requests that are of the form <i>/api/notes/SOMETHING</i>, where <i>SOMETHING</i> is an arbitrary string.
-
 
 The <i>id</i> parameter in the route of a request can be accessed through the [request](http://expressjs.com/en/api.html#req) object:
 
@@ -551,9 +497,7 @@ const id = request.params.id
 
 The now familiar _find_ method of arrays is used to find the note with an id that matches the parameter. The note is then returned to the sender of the request.
 
-
 When we test our application by going to <http://localhost:3001/api/notes/1> in our browser, we notice that it does not appear to work, as the browser displays an empty page. This comes as no surprise to us as software developers, and it's time to debug.
-
 
 Adding _console.log_ commands into our code is a time-proven trick:
 
@@ -567,14 +511,11 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 When we visit <http://localhost:3001/api/notes/1> again in the browser, the console - which is the terminal (in this case) - will display the following:
 
 ![terminal displaying 1 then undefined](../../images/3/8.png)
 
-
 The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
-
 
 To further our investigation, we also add a console log inside the comparison function passed to the _find_ method. To do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
 
@@ -590,7 +531,6 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 When we visit the URL again in the browser, each call to the comparison function prints a few different things to the console. The console output is the following:
 
 <pre>
@@ -599,9 +539,7 @@ When we visit the URL again in the browser, each call to the comparison function
 3 'number' '1' 'string' false
 </pre>
 
-
 The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the ids of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'. 
-
 
 Let's fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
 
@@ -613,25 +551,19 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Now fetching an individual resource works.
 
-![api/notes/1 gives a single note as JSON](../../images/3/9ea.png)
-
+![api/notes/1 gives a single note as JSON](../../images/3/9new.png)
 
 However, there's another problem with our application.
-
 
 If we search for a note with an id that does not exist, the server responds with:
 
 ![network tools showing 200 and content-length 0](../../images/3/10ea.png)
 
-
 The HTTP status code that is returned is 200, which means that the response succeeded. There is no data sent back with the response, since the value of the <i>content-length</i> header is 0, and the same can be verified from the browser. 
 
-
 The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) instead of 200.
-
 
 Let's make the following change to our code:
 
@@ -650,20 +582,15 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-
 Since no data is attached to the response, we use the [status](http://expressjs.com/en/4x/api.html#res.status) method for setting the status and the [end](http://expressjs.com/en/4x/api.html#res.end) method for responding to the request without sending any data.
 
-
 The if-condition leverages the fact that all JavaScript objects are [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), meaning that they evaluate to true in a comparison operation. However, _undefined_ is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) meaning that it will evaluate to false.
-
 
 Our application works and sends the error status code if no note is found. However, the application doesn't return anything to show to the user, like web applications normally do when we visit a page that does not exist. We do not need to display anything in the browser because REST APIs are interfaces that are intended for programmatic use, and the error status code is all that is needed.
   
 Anyway, it's possible to give a clue about the reason for sending a 404 error by [overriding the default NOT FOUND message](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614).
 
-
 ### Deleting resources
-
 
 Next, let's implement a route for deleting resources. Deletion happens by making an HTTP DELETE request to the URL of the resource:
 
@@ -677,7 +604,6 @@ app.delete('/api/notes/:id', (request, response) => {
 ```
 
 If deleting the resource is successful, meaning that the note exists and is removed, we respond to the request with the status code [204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content) and return no data with the response.
-
 
 There's no consensus on what status code should be returned to a DELETE request if the resource does not exist. The only two options are 204 and 404. For the sake of simplicity, our application will respond with 204 in both cases.
 
@@ -709,7 +635,7 @@ Let's create a new <i>get\_all\_notes.rest</i> file and define the request that 
 
 By clicking the <i>Send Request</i> text, the REST client will execute the HTTP request and the response from the server is opened in the editor.
 
-![response from vs code from get request](../../images/3/13ea.png)
+![response from vs code from get request](../../images/3/13new.png)
 
 ### The WebStorm HTTP Client
 
@@ -741,7 +667,6 @@ app.post('/api/notes', (request, response) => {
 // highlight-end
 ```
 
-
 The event handler function can access the data from the <i>body</i> property of the _request_ object.
 
 Without the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
@@ -750,7 +675,7 @@ For the time being, the application does not do anything with the received data 
 
 Before we implement the rest of the application logic, let's verify with Postman that the data is in fact received by the server. In addition to defining the URL and request type in Postman, we also have to define the data sent in the <i>body</i>:
 
-![postman post on api/notes with post content](../../images/3/14x.png)
+![postman post on api/notes with post content](../../images/3/14new.png)
 
 The application prints the data that we sent in the request to the console:
 
@@ -764,11 +689,11 @@ Similarly, it is useful to check the console for making sure that the backend be
 
 A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:
 
-![postman having text as content-type](../../images/3/17x.png)
+![postman having text as content-type](../../images/3/17new.png)
 
 The <i>Content-Type</i> header is set to <i>text/plain</i>:
 
-![postman showing headers and content-type as text/plain](../../images/3/18x.png)
+![postman showing headers and content-type as text/plain](../../images/3/18new.png)
 
 The server appears to only receive an empty object:
 
@@ -778,7 +703,7 @@ The server will not be able to parse the data correctly without the correct valu
 
 If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:
 
-![sample post request in vscode with JSON data](../../images/3/20eb.png)
+![sample post request in vscode with JSON data](../../images/3/20new.png)
 
 We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
 
@@ -809,7 +734,6 @@ Postman also allows users to save requests, but the situation can get quite chao
 
 You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
 
-
 Let's return to the application. Once we know that the application receives data correctly, it's time to finalize the handling of the request:
 
 ```js
@@ -827,11 +751,9 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 We need a unique id for the note. First, we find out the largest id number in the current list and assign it to the _maxId_ variable. The id of the new note is then defined as _maxId + 1_. This method is not recommended, but we will live with it for now as we will replace it soon enough.
 
-
-The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> and <i>date</i> properties will be given default values. All other properties are discarded:
+The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> property will be given default value false. All other properties are discarded:
 
 ```js
 const generateId = () => {
@@ -863,9 +785,7 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-
 The logic for generating the new id number for notes has been extracted into a separate _generateId_ function.
-
 
 If the received data is missing a value for the <i>content</i> property, the server will respond to the request with the status code [400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request):
 
@@ -877,19 +797,14 @@ if (!body.content) {
 }
 ```
 
-
 Notice that calling return is crucial because otherwise the code will execute to the very end and the malformed note gets saved to the application.
 
-
-If the content property has a value, the note will be based on the received data. As mentioned previously, it is better to generate timestamps on the server than in the browser, since we can't trust that the host machine running the browser has its clock set correctly. The generation of the <i>date</i> property is now done by the server.
-
-
+If the content property has a value, the note will be based on the received data.
 If the <i>important</i> property is missing, we will default the value to <i>false</i>. The default value is currently generated in a rather odd-looking way:
 
 ```js
 important: body.important || false,
 ```
-
 
 If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate to its value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
 
@@ -1144,12 +1059,9 @@ Add the [morgan](https://github.com/expressjs/morgan) middleware to your applica
 
 The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.
 
-
 Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same way as configuring any other middleware by using the _app.use_ command.
 
-
 #### 3.8*: Phonebook backend step8
-
 
 Configure morgan so that it also shows the data sent in HTTP POST requests:
 
@@ -1158,7 +1070,6 @@ Configure morgan so that it also shows the data sent in HTTP POST requests:
 Note that logging data even in the console can be dangerous since it can contain sensitive data and may violate local privacy law (e.g. GDPR in EU) or business-standard. In this exercise, you don't have to worry about privacy issues, but in practice, try not to log any sensitive data.
 
 This exercise can be quite challenging, even though the solution does not require a lot of code.
-
 
 This exercise can be completed in a few different ways. One of the possible solutions utilizes these two techniques:
 - [creating new tokens](https://github.com/expressjs/morgan#creating-new-tokens)
