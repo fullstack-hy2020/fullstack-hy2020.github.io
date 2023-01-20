@@ -354,7 +354,7 @@ The app breaks down:
 
 ![](../../images/2/31a.png)
 
-The error message gives the reason and location for the error. The code that caused the problems is the followign:
+The error message gives the reason and location for the error. The code that caused the problems is the following:
 
 ```js
   // notesToShow gets the value of notes
