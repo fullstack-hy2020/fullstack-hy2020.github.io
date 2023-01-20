@@ -389,6 +389,22 @@ Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorit
 
 Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
 
+Tähän alle tulisi kertoa mitä reittiä pitkin tämän saa toimimaan. Ainakaan Windowsilla kun menen Command Promptiin ja koitan allaolevaa koodia joko noden sisällä niin käy seuraavaa:
+Welcome to Node.js v19.3.0.
+Type ".help" for more information.
+> node_modules/.bin/nodemon index.js
+node_modules/.bin/nodemon index.js
+             ^
+
+Uncaught SyntaxError: Unexpected token '.'
+  
+Tai jos koitan ajaa koodin ihan vain kansioni juuressa niin käy seuraavaa:
+C:\Users\> node_modules/.bin/nodemon index.js
+'node_modules' is not recognized as an internal or external command,
+operable program or batch file.
+
+
+  
 ```bash
 node_modules/.bin/nodemon index.js
 ```
