@@ -165,12 +165,7 @@ notesRouter.post('/', async (request, response) => {
   const body = request.body
 //highlight-start
   const token = getTokenFrom(request)
-
   const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!decodedToken.id) {
-    return response.status(401).json({ error: 'token missing or invalid' })
-  }
-
   const user = await User.findById(decodedToken.id)
 //highlight-end
 
@@ -196,16 +191,6 @@ const decodedToken = jwt.verify(token, process.env.SECRET)
 ```
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tell the server who made the request. 
-
-If the object decoded from the token does not contain the user's identity (_decodedToken.id_ is undefined), error status code [401 unauthorized](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2) is returned and the reason for the failure is explained in the response body. 
-
-```js
-if (!decodedToken.id) {
-  return response.status(401).json({
-    error: 'token missing or invalid'
-  })
-}
-```
 
 When the identity of the maker of the request is resolved, the execution continues as before. 
 
@@ -249,7 +234,7 @@ const errorHandler = (error, request, response, next) => {
     })
   } else if (error.name === 'JsonWebTokenError') {  // highlight-line
     return response.status(401).json({ // highlight-line
-      error: 'invalid token' // highlight-line
+      error: 'token missing or invalid' // highlight-line
     }) // highlight-line
   }
 
