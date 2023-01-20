@@ -422,7 +422,7 @@ The Notes page contains a [form element](https://developer.mozilla.org/en-US/doc
 
 ![form element highlight in webpage and developer tools](../../images/0/20e.png)
 
-When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like:[label](mailto:mluukkai%40iki.fi)
+When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like:
 
 ![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
 
@@ -430,10 +430,6 @@ Surprisingly, submitting the form causes no less than <i>five</i> HTTP requests.
 The first one is the form submit event. Let's zoom into it:
 
 ![Detailed view of the first request](../../images/0/22e.png)
-
-
-[comment]: # (Markdown seems to be good, BUT generated HTML from Markdown is NOT!)
-[comment]: # ([Something is wrong!!](../../images/0/Something%20is%20wrong!.png))
 
 It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
 
