@@ -348,5 +348,79 @@
         "C'est vrai. Si vous terminez le cours avec des crédits complets et terminez les travaux pratiques avec 10 crédits, vous obtenez un entretien d'embauche avec nos partenaires. En savoir plus <a href='/fr/part0/informations_generales#promesse-dentretien'>ici</a>. Vous devez être résident finlandais pour participer à ces entretiens."
       ]
     }
+  ],
+  "pt_BR": [
+    {
+      "title": "Quanto custa este curso?",
+      "text": [
+        "O curso é totalmente gratuito. Você pode obter um certificado e até mesmo créditos ECTS da Universidade de Helsinque de graça. Entre <a href='/en/part0/general_info#parts-and-completion'>aqu</a> para ver mais informações."
+      ]
+    },
+    {
+      "title": "Como eu me inscrevo no curso?",
+      "text": [
+        "Você não precisa se inscrever até querer fazer o exame do curso. Você pode encontrar mais informações <a href='/en/part0/general_info#parts-and-completion'>aqui</a>. <br><br> Para o certificado do curso, não é necessário se inscrever."
+      ]
+    },
+    {
+      "title": "Quantos créditos é o curso?",
+      "text": [
+        "O curso é de 5-14 créditos ECTS <a href='/en/part0/general_info#parts-and-completion'>dependendo da quantidade de exercícios enviados</a>. Depois de concluir o curso, você pode continuar a aprofundar seus conhecimentos sobre o assunto fazendo o projeto Full Stack de 1-10 créditos ECTS <a href='/en/part0/general_info#full-stack-project'>aqui</a>."
+      ]
+    },
+    {
+      "title": "Qual é o prazo para a entrega dos exercícios e a prova?",
+      "text": [
+        "Você pode completar o curso no seu próprio ritmo e não há prazos para nada. O curso tem uma pausa de manutenção em março, mas isso não afeta muito. Entre <a href='/en/part0/general_info#continuing-the-course-at-year-2023'>aqui</a> para mais detalhes."
+      ]
+    },
+    {
+      "title": "Como eu envio os exercícios?",
+      "text": [
+        "As tarefas são enviadas para o GitHub e marcadas como concluídas no sistema de envio de exercícios. Você pode ler mais em <a href='/en/part0/general_info#submitting-exercises'>aqui</a>."
+      ]
+    },
+    {
+      "title": "Eu preciso enviar cada parte para um repositório separado?",
+      "text": [
+        "Não. Você pode usar um ou mais repositórios, contudo, o mais importante é nomear tudo de forma clara em um repositório."
+      ]
+    },
+    {
+      "title": "Posso editar um exercício já enviado?",
+      "text": [
+        "Não. Todas as tarefas de uma parte devem ser enviadas ao mesmo tempo. Se você marcou as tarefas incorretamente por acidente ou escreveu o nome do repositório incorretamente, envie um e-mail para matti.luukkainen@helsinki.fi ou mande uma mensagem no Telegram para <i>mluukkai</i>, informando seu nome de usuário do GitHub e como a solução do exercício deve ser editado."
+      ]
+    },
+    {
+      "title": "Quando e como posso obter meus créditos?",
+      "text": [
+        "Você pode obter seus créditos depois de enviar exercícios suficientes para passar no curso, passar na prova do curso e nos informar através do sistema de envio de exercícios que você está pronto com o curso.<br><br>Para obter o certificado do curso, não é necessário se inscrever ou fazer a prova."
+      ]
+    },
+    {
+      "title": "Eu recebo um certificado ao concluir o curso?",
+      "text": [
+        "Sim! Você pode baixar o certificado após concluir o curso a partir do sistema de envio de exercícios. Para pegar o certificado do curso, não é necessário se inscrever na Universidade Aberta e nem fazer o exame."
+      ]
+    },
+    {
+      "title": "Devo me inscrever na Universidade Aberta para obter o certificado do curso?",
+      "text": [
+        "Não é necessário se inscrever na Universidade Aberta para obter o certificado do curso. Você pode baixar o certificado após concluir o curso a partir do sistema de envio de exercícios."
+      ]
+    },
+    {
+      "title": "Eu comecei o curso no ano passado, como devo continuar?",
+      "text": [
+        "Leia mais <a href='/en/part0/general_info#expanding-on-a-previously-completed-course'>aqui</a>"
+      ]
+    },
+    {
+      "title": "Ouvi dizer que eu poderia conseguir uma entrevista de emprego ao completar o curso.",
+      "text": [
+        "É verdade. Se você completar o curso com créditos completos e completar o trabalho prático com 10 créditos, você consegue uma entrevista de emprego com nossos parceiros. Leia mais <a href='/en/part0/general_info#interview-promise'>aqui</a>. Você precisa residir na Finlândia para participar dessas entrevistas."
+      ]
+    }
   ]
 }
