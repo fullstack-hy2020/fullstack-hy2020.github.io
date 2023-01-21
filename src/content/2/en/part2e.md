@@ -354,7 +354,7 @@ The app breaks down:
 
 ![](../../images/2/31a.png)
 
-The error message gives the reason and location for the error. The code that caused the problems is the followign:
+The error message gives the reason and location for the error. The code that caused the problems is the following:
 
 ```js
   // notesToShow gets the value of notes
@@ -462,7 +462,7 @@ The other thing that we still need to have a closer look is the second parameter
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
 
-If the second parameter is an empty array <em>[]</em>, it's contenent never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.
+If the second parameter is an empty array <em>[]</em>, it's content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.
 
 However, there are situations where we want to perform the effect at other times, e.g. when the state of the component changes in a particular way.
 
@@ -655,6 +655,6 @@ REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 
 Note that you will need to restart the server to apply the changes.
 
-This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
