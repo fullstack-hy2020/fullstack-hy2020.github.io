@@ -57,6 +57,38 @@ Discord has fullstack_general and part-specific (channel names with fullstack pr
 Note that Discord's <i>chat channel is not suitable for course-related discussions</i>.
 Please join the conversation!
 
+### How to ask help in Discord/Telegam
+
+When you ask for help for a problem in the Discord/Telegram group your question should be as informative and precise as possible. If your question look like this
+
+> <i>Adding a new person does not work, could you help me with that?</i>
+
+it is quite likely that nobody will not bother to answer to you. The bug can be <i>anywhere</i>.
+
+A better question could be
+
+> <i> In the exercise 2.15 when I try to add a new person to the app, server responds to 403, despite the request looks ok to me.
+>
+> The code looks like this
+> 
+> ```js
+>   // the relevant part of code is pasted here
+>   // code should contain several console.log statements for helping the debuging
+> ```
+>
+> The following gets printed to the console
+>
+> ```bash
+>   // data printed to console
+> ```
+>
+> The network tab looks like the following</i>
+>
+> [screen shot from the network console]
+>
+> All the code can be found here (a link to GitHub)
+
+
 ### Parts and completion
 
 Full Stack studies consist of the core course and multiple extensions.
@@ -168,15 +200,14 @@ How to study the course – instructions in a nutshell: 5 cr core course CSM1410
   The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
     - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
 - If you want to get University of Helsinki credits
-    - Enroll in the course.
+    - Enroll in the course. 
       You will get the enrollment link through the submission system once you have completed enough exercises.
-      Read more [here](/en/part0/general_info#the-course-exam)
+      Read more [here](/en/part0/general_info#submitting-exercises)
     - Save your student number.
       After course enrollment, save your University of Helsinki student ID number in the submission system.
     - Do the online exam in the submission system.
       Read more [here](/en/part0/general_info#the-course-exam)
-    - Mark the course completed in the submission system.
-      Read more [here](/en/part0/general_info#how-to-get-your-credits)
+    - Mark the course completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
 
 Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
 

@@ -138,8 +138,8 @@ The view displays the <i>MongoDB URI</i>, which is the address of the database t
 
 The address looks like this:
 
-```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+```js
+mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
 ```
 
 We are now ready to use the database.
@@ -161,41 +161,35 @@ Instead, let's make a practice application by creating a new file, <i>mongo.js</
 ```js
 const mongoose = require('mongoose')
 
-if (process.argv.length < 3) {
-  console.log('Please provide the password as an argument: node mongo.js <password>')
+if (process.argv.length<3) {
+  console.log('give password as argument')
   process.exit(1)
 }
 
 const password = process.argv[2]
 
-const url = `mongodb+srv://notes-app-full:${password}@cluster1.lvvbt.mongodb.net/?retryWrites=true&w=majority`
+const url =
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+
+mongoose.set('strictQuery',false)
+mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
 const Note = mongoose.model('Note', noteSchema)
 
-mongoose
-  .connect(url)
-  .then((result) => {
-    console.log('connected')
+const note = new Note({
+  content: 'HTML is Easy',
+  important: true,
+})
 
-    const note = new Note({
-      content: 'HTML is Easy',
-      date: new Date(),
-      important: true,
-    })
-
-    return note.save()
-  })
-  .then(() => {
-    console.log('note saved!')
-    return mongoose.connection.close()
-  })
-  .catch((err) => console.log(err))
+note.save().then(result => {
+  console.log('note saved!')
+  mongoose.connection.close()
+})
 ```
 
 **NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above.
@@ -219,12 +213,13 @@ We can view the current state of the database from the MongoDB Atlas from <i>Bro
 
 As the view states, the <i>document</i> matching the note has been added to the <i>notes</i> collection in the <i>myFirstDatabase</i> database.
 
-![mongodb collections tab db myfirst app notes](../../images/3/mongo8.png)
+![mongodb collections tab db myfirst app notes](../../images/3/mongo8new.png)
 
-Let's destroy the default database <i>myFirstDatabase</i> and change the name of the database referenced in our connection string to <i>noteApp</i> instead, by modifying the URI:
+Let's destroy the default database <i>test</i> and change the name of the database referenced in our connection string to <i>noteApp</i> instead, by modifying the URI:
 
-```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+```js
+const url =
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 ```
 
 Let's run our code again:
@@ -242,7 +237,6 @@ After establishing the connection to the database, we define the [schema](http:/
 ```js
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
@@ -267,7 +261,6 @@ Next, the application creates a new note object with the help of the <i>Note</i>
 ```js
 const note = new Note({
   content: 'HTML is Easy',
-  date: new Date(),
   important: false,
 })
 ```
@@ -312,7 +305,7 @@ Note.find({}).then(result => {
 
 When the code is executed, the program prints all the notes stored in the database:
 
-![node mongo.js outputs notes as JSON](../../images/3/70ea.png)
+![node mongo.js outputs notes as JSON](../../images/3/70new.png)
 
 The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the *Note* model.
 The parameter of the method is an object expressing search conditions.
@@ -423,13 +416,13 @@ const mongoose = require('mongoose')
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-  `mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${fullstack@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
+mongoose.set('strictQuery',false)
 mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
@@ -471,7 +464,7 @@ Even though the <i>\_id</i> property of Mongoose objects looks like a string, it
 The *toJSON* method we defined transforms it into a string just to be safe.
 If we didn't make this change, it would cause more harm to us in the future once we start writing tests.
 
-Let's respond to the HTTP request with a list of objects formatted with the *toJSON* method:
+No changes are needed in the handler:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -481,8 +474,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the *notes* variable is assigned to an array of objects returned by Mongo.
-When the response is sent in the JSON format, the *toJSON* method of each object in the array is called automatically by the [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) method.
+the code uses automatically the defined *toJSON* when formatting notes to the response.
 
 ### Database configuration into its own module
 
@@ -492,6 +484,8 @@ Let's create a new directory for the module called <i>models</i>, and add a file
 
 ```js
 const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
 
 const url = process.env.MONGODB_URI // highlight-line
 
@@ -509,7 +503,6 @@ mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
@@ -610,17 +603,7 @@ app.listen(PORT, () => {
 Observe how <i>dotenv</i> must be imported before the <i>note</i> model.
 This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
 
-Once the file .env has been gitignored, Heroku does not get the database URL from the repository, so you have to set it yourself.
-
-That can be done through the Heroku dashboard as follows:
-
-![Heroku dashboard showing config vars](../../images/3/herokuConfig.png)
-
-or from the command line with the command:
-
-```bash
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
-```
+### Important note to Fly.io users
 
 Because GitHub is not used with Fly.io, also the file .env gets to the Fly.io servers when the app is deployed.
 Because of this also the env variables defined in the file will be available there.
@@ -636,6 +619,12 @@ and set the env value from the command line with the command:
 ```bash
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
+
+Since also the PORT is defined in our .env it is actually essential to ignore the file in Fly.io since otherways the app starts in the wrong port.
+
+When using Render, the database url is given by defining the proper env in the dashboard:
+
+![specifying environment variables in render](../../images/3/render-env.png)
 
 ### Using database in route handlers
 
@@ -654,7 +643,6 @@ app.post('/api/notes', (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save().then(savedNote => {
@@ -669,7 +657,7 @@ This ensures that the response is sent only if the operation succeeded.
 We will discuss error handling a little bit later.
 
 The *savedNote* parameter in the callback function is the saved and newly created note.
-The data sent back in the response is the formatted version created with the *toJSON* method:
+The data sent back in the response is the formatted version created automatically with the *toJSON* method:
 
 ```js
 response.json(savedNote)
@@ -690,7 +678,7 @@ app.get('/api/notes/:id', (request, response) => {
 When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**.
 Next, let's try creating a new note after taking the database into use:
 
-![VS code rest client doing a post](../../images/3/46e.png)
+![VS code rest client doing a post](../../images/3/46new.png)
 
 Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend.
 It is highly inefficient to test things exclusively through the frontend.
@@ -997,7 +985,6 @@ app.put('/api/notes/:id', (request, response, next) => {
 ```
 
 In the code above, we also allow the content of the note to be edited.
-However, we will not support changing the creation date for obvious reasons.
 
 Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
 

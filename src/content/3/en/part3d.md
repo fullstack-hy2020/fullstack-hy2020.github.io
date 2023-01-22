@@ -38,18 +38,12 @@ const noteSchema = new mongoose.Schema({
     minLength: 5,
     required: true
   },
-  date: { 
-    type: Date,
-    required: true
-  },
   // highlight-end
   important: Boolean
 })
 ```
 
-The <i>content</i> field is now required to be at least five characters long.
-The <i>date</i> field is set as required, meaning that it can not be missing.
-The same constraint is also applied to the <i>content</i> field since the minimum length constraint allows the field to be missing.
+The <i>content</i> field is now required to be at least five characters long and it is set as required, meaning that it can not be missing.
 We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
 
 The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose.
@@ -120,10 +114,10 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Fly.io/Heroku.
+The application should work almost as-is in Fly.io/Render.
 We do have to generate a new production build of the frontend since changes thus far were only on our backend.
 
-The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Heroku.
+The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Render.
 
 For production, we have to set the database URL in the service that is hosting our app.
 
@@ -133,28 +127,28 @@ In Fly.io that is done *fly secrets set*:
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-For Heroku, the same is done with the *heroku config:set* command.
+When the app is being developed, it is more than likely that something fails. Eg. when I deployed my app for the first time with the database, not a single note was seen:
 
-```bash
-heroku config:set MONGODB_URI=mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true
-```
+![browser showing no notes present in app](../../images/3/fly-problem1.png)
 
-**NB:** if the command causes an error, give the value of MONGODB_URI in apostrophes:
+The network tab of the browser console revealed that fetching the notes did not succeed, the request just remained for a long time in the *pending* state until it failed with statuscode 502.
 
-```bash
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
-```
+The browser console has to be open <i>all the time!</i>
 
-The application should now work.
-Sometimes things don't go according to plan.
-If there are problems, <i>fly logs</i> or <i>heroku logs</i> will be there to help.
-My own application did not work after making the changes.
-The logs showed the following:
+It is also vital to follow continuously the server logs.
+The problem became obvious when the logs were opened with *fly logs*:
 
-![node output showing connecting to undefined](../../images/3/51a.png)
+![fly logs showing connecting to undefined](../../images/3/fly-problem3.png)
 
-For some reason the URL of the database was undefined.
-The <i>heroku config</i> command revealed that I had accidentally defined the URL to the <em>MONGO\_URL</em> environment variable when the code expected it to be in <em>MONGODB\_URI</em>.
+The database url was *undefined*, so the command *fly secrets set MONGODB\_URI* was forgotten.
+
+When using Render, the database url is given by defining the proper env in the dashboard:
+
+![defining the environment varialbe in render service](../../images/3/render-env.png)
+
+The Render Dashboard shows the server logs:
+
+![browser showing the render logs again](../../images/3/r7.png)
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 
@@ -210,7 +204,7 @@ If an HTTP POST request tries to add a name that is already in the phonebook, th
 Generate a new "full stack" version of the application by creating a new production build of the frontend, and copying it to the backend repository.
 Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
 
-Push the latest version to Heroku and verify that everything works there as well.
+Push the latest version to Fly.io/Render and verify that everything works there as well.
 
 </div>
 
@@ -245,7 +239,7 @@ npx eslint --init
 
 We will answer all of the questions:
 
-![terminal output from ESlint init](../../images/3/52be.png)
+![terminal output from ESlint init](../../images/3/52new.png)
 
 The configuration will be saved in the *.eslintrc.js* file:
 
@@ -254,7 +248,7 @@ module.exports = {
     'env': {
         'commonjs': true,
         'es2021': true,
-        'node': true
+        'node': true // highlight-line
     },
     'extends': 'eslint:recommended',
     'parserOptions': {
@@ -413,7 +407,7 @@ Many companies define coding standards that are enforced throughout the organiza
 It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours.
 Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
 
-You can find the code for our current application in its entirety in the <i>part3-7</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-7).
+You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
 </div>
 
 <div class="tasks">

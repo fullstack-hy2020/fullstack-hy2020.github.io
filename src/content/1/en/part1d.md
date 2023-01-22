@@ -987,7 +987,21 @@ const Button = (props) => (
 )
 ```
 
-The component gets the event handler function from the *handleClick* prop, and the text of the button from the *text* prop.
+The component gets the event handler function from the *handleClick* prop, and the text of the button from the *text* prop. Let's use the new component:
+
+```js
+const App = (props) => {
+  // ...
+  return (
+    <div>
+      {value}
+      <Button handleClick={setToValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={setToValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={setToValue(value + 1)} text="increment" /> // highlight-line
+    </div>
+  )
+}
+```
 
 Using the <i>Button</i> component is simple, although we have to make sure that we use the correct attribute names when passing props to the component.
 
@@ -1076,6 +1090,15 @@ Also, everything related to class-based components is irrelevant to us;
 - Some courses on [Egghead.io](https://egghead.io) like [Start learning React](https://egghead.io/courses/start-learning-react) are of high quality, and the recently updated [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) is also relatively good; both courses introduce concepts that will also be introduced later on in this course.
 **NB** The first one uses class components but the latter uses the new functional ones.
 
+### Web programmers oath
+
+Programming is hard, that is why I will use all the possible means to make it easier
+- I will have my browser developer console open all the time
+- I progress with small steps
+- I will write lots of *console.log* statements to to make sure I understand how the code behaves and to help pinpointing problems
+- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything still was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask help
+
 </div>
 
 <div class="tasks">
@@ -1103,9 +1126,8 @@ rm -rf node_modules/ && npm i
 
 <h4> 1.6: unicafe step1</h4>
 
-Like most companies, [Unicafe](https://www.unicafe.fi/#/9/4) collects feedback from its customers.
-Your task is to implement a web application for collecting customer feedback.
-There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
+Like most companies, the student restaurant of the University of Helsinki [Unicafe](https://www.unicafe.fi) collects feedback from its customers.
+Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
 
 The application must display the total number of collected feedback for each category.
 Your final application could look like this:
@@ -1253,7 +1275,8 @@ const App = () => {
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
-    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.'
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
+    'The only way to go fast, is to go well.'
   ]
    
   const [selected, setSelected] = useState(0)

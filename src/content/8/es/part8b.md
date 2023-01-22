@@ -13,7 +13,7 @@ El código actual del servidor se puede encontrar en [Github](https://github.com
 
 En teoría, podríamos usar GraphQL con solicitudes HTTP POST. A continuación se muestra un ejemplo de esto con Postman.
 
-![](../../images/8/8.png)
+![](../../images/8/8x.png)
 
 La comunicación funciona enviando solicitudes HTTP POST a http://localhost:4000/graphql. La consulta en sí es una cadena enviada como el valor de la clave <i>query</i>.
 
@@ -249,7 +249,7 @@ El nombre de la consulta es <i>findPersonByName</i>, y se le da una cadena <i>$n
 
 También es posible realizar consultas con parámetros con GraphQL Playground. Los parámetros se dan en <i>Variables de consulta</i>:
 
-![](../../images/8/10.png)
+![](../../images/8/10x.png)
 
 <!-- Pregunte käyttämämme _useQuery_ toimii hyvin tilanteissa, joissa kysely sobre tarkoitus suorittaa heti komponentin renderöinnin yhteydessä. Nyt kuitenkin haluamme tehdä kyselyn vasta siinä vaiheessa kun käyttäjä haluaa nähdä jonkin henkilön tiedot, eli kysely tehdään vasta [sitä tarvittaessa] (https://www.apollographql.com/docs.0-queries/#v3ta ejecutar consultas manualmente). -->
 El hook _useQuery_ es adecuado para situaciones en las que la consulta se realiza cuando se procesa el componente.
@@ -810,7 +810,7 @@ Queremos configurar el mensaje de error solo cuando el resultado de la mutación
 <!-- useEffect aiheuttaa ESLint-virheilmoituksen: -->
 El uso de useEffect provoca una advertencia de ESLint:
 
-![](../../images/8/41ea.png)
+![](../../images/8/41x.png)
 
 <!-- Varoitus en aiheeton, ja pääsemme helpoimmalla ignoroimalla ESLint-säännön riviltä: -->
 La advertencia no tiene sentido y la solución más fácil es ignorar la regla ESLint en la línea:

@@ -11,7 +11,7 @@ Siirrämme tässä osassa fokuksen backendiin eli palvelimella olevaan toiminnal
 
 Backendin toteutusympäristönä käytämme [Node.js](https://nodejs.org/en/):ää, joka on melkein missä vaan, erityisesti palvelimilla ja omalla koneellasikin toimiva Googlen [V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScriptin suoritusympäristö.
 
-Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v16.13.2</i>. Huolehdi, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
+Kurssimateriaalia tehtäessä on ollut käytössä Node.js:n versio <i>v18.13.02</i>. Suosittelen, että omasi on vähintään yhtä tuore (ks. komentoriviltä _node -v_).
 
 Kuten [osassa 1](/osa1/java_scriptia) todettiin, selaimet eivät vielä osaa kaikkia uusimpia JavaScriptin ominaisuuksia, ja siksi selainpuolen koodi täytyy kääntää eli <i>transpiloida</i> esim [Babel](https://babeljs.io/):illa. Backendissa tilanne on kuitenkin toinen, koska uusin Node hallitsee riittävissä määrin myös JavaScriptin uusia versioita, joten suoritamme Nodella kirjoittamaamme koodia suoraan ilman transpilointivaihetta.
 
@@ -187,19 +187,16 @@ let notes = [
   {
     id: 1,
     content: "HTML is easy",
-    date: "2022-01-10T17:30:31.098Z",
     important: true
   },
   {
     id: 2,
-    content: "Browser can execute only Javascript",
-    date: "2022-01-10T18:39:34.091Z",
+    content: "Browser can execute only JavaScript",
     important: false
   },
   {
     id: 3,
     content: "GET and POST are the most important methods of HTTP protocol",
-    date: "2022-01-10T19:20:14.298Z",
     important: true
   }
 ]
@@ -221,7 +218,7 @@ Headerin <i>Content-Type</i> arvolla <i>application/json</i> kerrotaan, että ky
 
 Kun avaamme selaimen, on tulostusasu sama kuin [osassa 2](/osa2/palvelimella_olevan_datan_hakeminen) käytetyn [json-serverin](https://github.com/typicode/json-server) tarjoamalla muistiinpanojen listalla:
 
-![Selain renderöi json-muotoisen datan](../../images/3/2e.png)
+![Selain renderöi json-muotoisen datan](../../images/3/2new.png)
 
 ### Express
 
@@ -241,7 +238,7 @@ Riippuvuus tulee nyt määritellyksi tiedostoon <i>package.json</i>:
 {
   // ...
   "dependencies": {
-    "express": "^4.17.2"
+   "express": "^4.18.2"
   }
 }
 
@@ -253,13 +250,13 @@ Riippuvuuden koodi asentuu kaikkien projektin riippuvuuksien tapaan projektin ju
 
 Kyseessä ovat Expressin riippuvuudet ja niiden riippuvuudet jne. eli projektimme [transitiiviset riippuvuudet](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/).
 
-Projektiin asentui Expressin versio 4.17.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
+Projektiin asentui Expressin versio 4.18.2. </i>package.json:issa</i> versiomerkinnän edessä on väkänen, eli muoto on
 
 ```json
-"express": "^4.17.2"
+"express": "^4.18.2"
 ```
   
-npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.17.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.17.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
+npm:n yhteydessä käytetään ns. [semanttista versiointia](https://docs.npmjs.com/getting-started/semantic-versioning). Merkintä <i>^4.18.2</i> tarkoittaa, että jos projektin riippuvuudet päivitetään, asennetaan Expressistä versio, joka on vähintään <i>4.18.2</i>, mutta asennetuksi voi tulla versio, jonka <i>patch</i> eli viimeinen numero tai <i>minor</i> eli keskimmäinen numero voi olla suurempi. Pääversio eli <i>major</i> täytyy kuitenkin olla edelleen sama.
 
 Voimme päivittää projektin riippuvuudet komennolla
 
@@ -336,7 +333,7 @@ app.get('/api/notes', (request, response) => {
 
 Pyyntöön vastataan _response_-olion metodilla [json](http://expressjs.com/en/4x/api.html#res.json), joka lähettää HTTP-pyynnön vastaukseksi parametrina olevaa JavaScript-olioa eli taulukkoa _notes_ vastaavan JSON-muotoisen merkkijonon. Express asettaa headerin <i>Content-Type</i> arvoksi <i>application/json</i>.
 
-![Selain renderöi json-muotoiset muistiinpanot](../../images/3/6ea.png)
+![Selain renderöi json-muotoiset muistiinpanot](../../images/3/6new.png)
 
 Pieni huomio JSON-muodossa palautettavasta datasta.
 
@@ -376,10 +373,10 @@ Tiedoston <i>package.json</i> sisältö muuttuu seuraavasti:
 {
   //...
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   }
 }
 ```
@@ -388,7 +385,7 @@ Jos nodemon-riippuvuus kuitenkin meni sovelluksessasi normaaliin "dependencies"-
 
 Kehitysaikaisilla riippuvuuksilla tarkoitetaan työkaluja, joita tarvitaan ainoastaan sovellusta kehitettäessä esim. testaukseen tai sovelluksen automaattiseen uudelleenkäynnistykseen kuten <i>nodemon</i>.
 
-Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorittamaan tuotantopalvelimella (esim. Herokussa, johon tulemme kohta siirtämään sovelluksemme), ei kehitysaikaisia riippuvuuksia tarvita.
+Kun sovellusta suoritetaan tuotantomoodissa eli samoin kuin sitä tullaan suorittamaan tuotantopalvelimella (esim. Fly.io:ssa, johon tulemme kohta siirtämään sovelluksemme), ei kehitysaikaisia riippuvuuksia tarvita.
 
 Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
 
@@ -540,7 +537,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Nyt yksittäisen resurssin hakeminen toimii.
 
-![Yksittäistä muistiinpanoa vastaava json renderöityy](../../images/3/9ea.png)
+![Yksittäistä muistiinpanoa vastaava json renderöityy](../../images/3/9new.png)
 
 Toiminnallisuuteen jää kuitenkin pieni ongelma. Jos haemme muistiinpanoa sellaisella indeksillä, jota vastaavaa muistiinpanoa ei ole olemassa, vastaa palvelin seuraavasti:
 
@@ -619,7 +616,7 @@ Luodaan kaikki muistiinpanot hakevan pyynnön määrittelevä tiedosto <i>get\_a
 
 Klikkaamalla tekstiä <i>Send Request</i>, REST client suorittaa määritellyn HTTP-pyynnön, ja palvelimen vastaus avautuu editoriin:
 
-![VS codeen avautuu näkymä missä palvelimen palauttama json-muotoinen taulukko muistiinpanoja sekä operaatioon vastattu statuskoodi ja palautetut headerit](../../images/3/13ea.png)
+![VS codeen avautuu näkymä missä palvelimen palauttama json-muotoinen taulukko muistiinpanoja sekä operaatioon vastattu statuskoodi ja palautetut headerit](../../images/3/13new.png)
 
 ### Datan vastaanottaminen
 
@@ -655,7 +652,7 @@ Toistaiseksi sovellus ei vielä tee vastaanotetulle datalle mitään muuta kuin 
 
 Ennen toimintalogiikan viimeistelyä varmistetaan ensin Postmanilla, että lähetetty tieto menee varmasti perille. Pyyntötyypin ja urlin lisäksi on määriteltävä myös pyynnön mukana menevä data eli <i>body</i>:
 
-![Valitaan postmanissa JSON body-datan tyypiksi](../../images/3/14x.png)
+![Valitaan postmanissa JSON body-datan tyypiksi](../../images/3/14new.png)
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
@@ -669,11 +666,11 @@ Konsolista kannattaa seurata myös, reagoiko backend odotetulla tavalla esim. ku
 
 Eräs ongelmanlähde on se, että dataa lähettäessä headerille <i>Content-Type</i> ei aseteta oikeaa arvoa. Näin tapahtuu esim. jos Postmanissa bodyn tyyppiä ei määritellä oikein:
 
-![Valitaan postmanissa text body-datan tyypiksi](../../images/3/17x.png)
+![Valitaan postmanissa text body-datan tyypiksi](../../images/3/17new.png)
 
 Headerin <i>Content-Type</i> arvoksi asettuu <i>text/plain</i>:
 
-![Nähdään postmanin headers-välilehdeltä että content-type on text/plain](../../images/3/18x.png)
+![Nähdään postmanin headers-välilehdeltä että content-type on text/plain](../../images/3/18new.png)
 
 Palvelin näyttää vastaanottavan ainoastaan tyhjän olion:
 
@@ -683,7 +680,7 @@ Ilman oikeaa headerin arvoa palvelin ei osaa parsia dataa oikeaan muotoon. Se ei
 
 Jos käytät VS Codea, edellisessä luvussa esitelty REST client kannattaa asentaa viimeistään <i>nyt</i>. POST-pyyntö tehdään REST clientillä seuraavasti:
 
-![VS codeen avautuu näkymä joka näyttää palvelimen palauttaman, luodun json-objektin, sekä siihen liittyvät headerit ja statuskoodin 200](../../images/3/20eb.png)
+![VS codeen avautuu näkymä joka näyttää palvelimen palauttaman, luodun json-objektin, sekä siihen liittyvät headerit ja statuskoodin 200](../../images/3/20new.png)
 
 Pyyntöä varten on siis luotu oma tiedosto <i>create\_note.rest</i>. Pyyntö on muotoiltu [dokumentaation ohjetta](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage) noudatellen.
 
@@ -716,7 +713,7 @@ app.post('/api/notes', (request, response) => {
 
 Uudelle muistiinpanolle tarvitaan uniikki id. Ensin selvitetään olemassa olevista id:istä suurin muuttujaan _maxId_. Uuden muistiinpanon id:ksi asetetaan sitten _maxId + 1_. Tämä tapa ei ole kovin hyvä, mutta emme nyt välitä siitä, sillä tulemme pian korvaamaan tavan, jolla muistiinpanot talletetaan.
 
-Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentille <i>important</i> ja <i>date</i> asetetaan oletusarvot. Kaikki muut kentät hylätään:
+Tämänhetkisessä versiossa on vielä se ongelma, että voimme HTTP POST -pyynnöllä lisätä mitä tahansa kenttiä sisältäviä olioita. Parannellaan sovellusta siten, että kenttä <i>content</i> ei saa olla tyhjä. Kentälle <i>important</i> asetetaan oletusarvo false jos sen arvoa ei ole määritelty. Kaikki muut kentät hylätään:
 
 ```js
 const generateId = () => {
@@ -738,7 +735,6 @@ app.post('/api/notes', (request, response) => {
   const note = {
     content: body.content,
     important: body.important || false,
-    date: new Date(),
     id: generateId(),
   }
 
@@ -762,9 +758,7 @@ if (!body.content) {
 
 Huomaa, että returnin kutsuminen on tärkeää. Ilman kutsua koodi jatkaisi suoritusta metodin loppuun asti, ja virheellinen muistiinpano tallettuisi!
 
-Jos content-kentällä on arvo, luodaan muistiinpano syötteen perusteella. Kuten edellisessä osassa mainitsimme, aikaleimoja ei kannata luoda selaimen koodissa, sillä käyttäjän koneen kellonaikaan ei voi luottaa. Aikaleiman eli kentän <i>date</i> arvon generointi onkin nyt palvelimen vastuulla.
-
-Jos kenttä <i>important</i> puuttuu, asetetaan sille oletusarvo <i>false</i>. Oletusarvo generoidaan nyt hieman erikoisella tavalla:
+Jos content-kentällä on arvo, luodaan muistiinpano syötteen perusteella. Jos kenttä <i>important</i> puuttuu, asetetaan sille oletusarvo <i>false</i>. Oletusarvo generoidaan nyt hieman erikoisella tavalla:
 
 ```js
 important: body.important || false,

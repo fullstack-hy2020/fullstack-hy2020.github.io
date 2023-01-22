@@ -382,7 +382,7 @@ npm install -g npm-check-updates
 
 Using this tool, the up-to-dateness of dependencies is checked in the following way:
 
-```console
+```bash
 $ npm-check-updates
 Checking ...\ultimate-hooks\package.json
 [====================] 9/9 100%
@@ -396,7 +396,7 @@ Run ncu -u to upgrade package.json
 
 The file <i>package.json</i> is brought up to date by running the command *ncu -u*.
 
-```console
+```bash
 $ ncu -u
 Upgrading ...\ultimate-hooks\package.json
 [====================] 9/9 100%

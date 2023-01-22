@@ -10,7 +10,7 @@ lang: en
 The appearance of our current application is quite modest.
 In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-Before we move to the next part, let's take a look at how we can add styles to a React application.
+Let's take a look at how we can add styles to a React application.
 There are several different ways of doing this and we will take a look at the other methods later on.
 First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on).
 
@@ -27,8 +27,6 @@ h1 {
   color: green;
 }
 ```
-
-**Note:** when the content of the file <i>index.css</i> changes, React might not notice that automatically, so you may need to refresh the browser to see your changes!
 
 CSS rules comprise of <i>selectors</i> and <i>declarations</i>.
 The selector defines which elements the rule should be applied to.
@@ -305,15 +303,15 @@ The code of the final version of our application can be found in the  <i>part2-8
 
 <div class="tasks">
 
-<h3>Exercises 2.19.-2.20.</h3>
+<h3>Exercises 2.16.-2.17.</h3>
 
-<h4>2.19: Phonebook step11</h4>
+<h4>2.16: Phonebook step11</h4>
 
 Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed):
 
 ![successful green added screenshot](../../images/2/27e.png)
 
-<h4>2.20*: Phonebook step12</h4>
+<h4>2.17*: Phonebook step12</h4>
 
 Open your application in two browsers.
 **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error message:
@@ -328,7 +326,362 @@ The messages shown for successful and unsuccessful events should look different:
 
 **Note** that even if you handle the exception, the error message is printed to the console.
 
-This was the last exercise of this part of the course.
-It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+</div>
+
+<div class="content">
+
+### Couple of important remarks
+
+At the end of this part, there are a few more challenging exercises.
+At this stage, you can skip the exercises if they are too much of a headache, we will come back to the same themes again later.
+The material is worth reading through in any case.
+
+We have done one thing in our app that is masking away a very typical source of error.
+
+We set the state *notes* to have an initial value of an empty array:
+
+```js
+const App = () => {
+  const [notes, setNotes] = useState([])
+
+  // ...
+}
+```
+
+This is a pretty natural initial value since the notes are a set, that is, there are many notes that the state will store.
+
+If the state would be only saving "one thing", a more proper initial value would be *null* denoting that there is <i>nothing</i> in the state at the start.
+Let us try what happens if we use this initial value:
+
+```js
+const App = () => {
+  const [notes, setNotes] = useState(null) // highlight-line
+
+  // ...
+}
+```
+
+The app breaks down:
+
+![error showing uncaught type error when reading map](../../images/2/31a.png)
+
+The error message gives the reason and location for the error.
+The code that caused the problems is the following:
+
+```js
+  // notesToShow gets the value of notes
+  const notesToShow = showAll
+    ? notes
+    : notes.filter(note => note.important)
+
+  // ...
+
+  {notesToShow.map(note =>  // highlight-line
+    <Note key={note.id} note={note} />
+  )}
+```
+
+The error message is
+
+```bash
+Cannot read properties of null (reading 'map')
+```
+
+The variable *notesToShow* is first assigned the value of the state *notes* and then the code tries to call the method *map* to a non-existing object, that is, to *null*.
+
+What is the reason for that?
+
+The effect hook uses the function *setNotes* to set *notes* to have the notes that the backend is returning:
+
+```js
+  useEffect(() => {
+    noteService
+      .getAll()
+      .then(initialNotes => {
+        setNotes(initialNotes)  // highlight-line
+      })
+  }, [])
+```
+
+However, the problem is that the effect is executed only <i>after the first render</i>.
+And because *notes* has the initial value of null:
+
+```js
+const App = () => {
+  const [notes, setNotes] = useState(null) // highlight-line
+
+  // ...
+```
+
+on the first render, the following code gets executed
+
+```js
+notesToShow = notes
+
+// ...
+
+notesToShow.map(note => ...)
+```
+
+and this blows up the app since we can not call the method *filter* on the value *null*.
+
+When we set *notes* to be initially an empty array, there is no error since it is allowed to call *filter* to an empty array.
+
+So, the initialization of the state "masked" the problem that is caused by the fact that the data is not yet fetched from the backend.
+
+Another way to circumvent the problem is to use <i>conditional rendering</i> and return null if the component state is not properly initialized:
+
+```js
+const App = () => {
+  const [notes, setNotes] = useState(null) // highlight-line
+  // ... 
+
+  useEffect(() => {
+    noteService
+      .getAll()
+      .then(initialNotes => {
+        setNotes(initialNotes)
+      })
+  }, [])
+
+  // do not render anything if notes is still null
+  // highlight-start
+  if (!notes) { 
+    return null 
+  }
+  // highlight-end
+
+  // ...
+} 
+```
+
+So on the first render, nothing is rendered. When the notes arrive from the backend, the effect used the function *setNotes* to set the value of the state *notes*.
+This causes the component to be rendered again, and at the second render, the notes get rendered to the screen.
+
+The method based on conditional rendering is suitable in cases where it is impossible to define the state so that the initial rendering is possible.
+
+The other thing that we still need to have a closer look at is the second parameter of <em>useEffect</em>:
+
+```js
+  useEffect(() => {
+    noteService
+      .getAll()
+      .then(initialNotes => {
+        setNotes(initialNotes)  
+      })
+  }, []) // highlight-line
+```
+
+The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
+The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
+
+If the second parameter is an empty array <em>[]</em>, it's content never changes and the effect is only run after the first render of the component.
+This is exactly what we want when we are initializing the app state from the server.
+
+However, there are situations where we want to perform the effect at other times, e.g. when the state of the component changes in a particular way.
+
+Consider the following simple application for querying currency exchange rates from the [Exchange rate API](https://www.exchangerate-api.com/):
+
+```js
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
+const App = () => {
+  const [value, setValue] = useState('')
+  const [rates, setRates] = useState({})
+  const [currency, setCurrency] = useState(null)
+
+  useEffect(() => {
+    console.log('effect run, currency is now', currency)
+
+    // skip if currency is not defined
+    if (currency) {
+      console.log('fetching exchange rates...')
+      axios
+        .get(`https://open.er-api.com/v6/latest/${currency}`)
+        .then(response => {
+          setRates(response.data.rates)
+        })
+    }
+  }, [currency])
+
+  const handleChange = (event) => {
+    setValue(event.target.value)
+  }
+
+  const onSearch = (event) => {
+    event.preventDefault()
+    setCurrency(value)
+  }
+
+  return (
+    <div>
+      <form onSubmit={onSearch}>
+        currency: <input value={value} onChange={handleChange} />
+        <button type="submit">exchange rate</button>
+      </form>
+      <pre>
+        {JSON.stringify(rates, null, 2)}
+      </pre>
+    </div>
+  )
+}
+```
+
+The user interface of the application has a form, in the input field of which the name of the desired currency is written.
+If the currency exists, the application renders the exchange rates of the currency to other currencies:
+
+![browser showing exchange rate for eur against aother currencies and developer tools opn](../../images/2/32new.png)
+
+The application sets the name of the currency entered into the form to the state *currency* at the moment the button is pressed.
+
+When the *currency* gets a new value, the application fetches its exchange rates from the API in the effect function:
+
+```js
+const App = () => {
+  // ...
+  const [currency, setCurrency] = useState(null)
+
+  useEffect(() => {
+    console.log('effect run, currency is now', currency)
+
+    // skip if currency is not defined
+    if (currency) {
+      console.log('fetching exchange rates...')
+      axios
+        .get(`https://open.er-api.com/v6/latest/${currency}`)
+        .then(response => {
+          setRates(response.data.rates)
+        })
+    }
+  }, [currency]) // highlight-line
+  // ...
+}
+```
+
+The useEffect hook has now *[currency]* as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter *[currency]* changes. That is, when the state *currency* gets a new value, the content of the table changes and the effect function is executed.
+
+The effect has the following condition
+
+```js
+if (currency) { 
+  // get exchange rates
+}
+```
+
+which prevents requesting the exchange rates just after the first render when the variable *currency* still has the initial value, i.e. an empty string.
+
+So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address <https://open.er-api.com/v6/latest/eur> and stores the response in the *rates* state.
+
+When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested form the API.
+
+The way presented here for making API requests might seem a bit awkward.
+This particular application could have been made completely without using the useEffect, by making the API requests directly in the form submit handler function:
+
+```js
+  const onSearch = (event) => {
+    event.preventDefault()
+    axios
+      .get(`https://open.er-api.com/v6/latest/${value}`)
+      .then(response => {
+        setRates(response.data.rates)
+      })
+  }
+```
+
+However, there are situations where that technique would not work. For example, you <i>might</i> encounter one such a situation in the exercise 2.20 where the use of useEffect could provide a solution.
+Note that this depends quite much on the approach you selected, e.g. the model solution does not use this trick.
+
+</div>
+
+<div class="tasks">
+
+<h3>Exercises 2.18.-2.20.</h3>
+
+<h4>2.18* Data for countries, step1</h4>
+
+The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
+
+Create an application, in which one can look at data from various countries.
+The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
+
+The user interface is very simple.
+The country to be shown is found by typing a search query into the search field.
+
+If there are too many (over 10) countries that match the query, then the user is prompted to make their query more specific:
+
+![too many matches screenshot](../../images/2/19b1.png)
+
+If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
+
+![matching countries in a list screenshot](../../images/2/19b2.png)
+
+When there is only one country matching the query, then the basic data of the country (eg. capital and area), its flag and the languages spoken are shown:
+
+![flag and additional attributes screenshot](../../images/2/19c3.png)
+
+**NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>.
+You don't need to worry about these edge cases.
+
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository.
+**Most likely you do not want each of your projects to be a separate repository**, so simply run the *rm -rf .git* command at the root of your application.
+
+<h4>2.19*: Data for countries, step2</h4>
+
+**There is still a lot to do in this part, so don't get stuck on this exercise!**
+
+Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country:
+
+![attach show buttons for each country feature](../../images/2/19b4.png)
+
+In this exercise, it is also enough that your application works for most countries.
+Countries whose name appears in the name of another country, like <i>Sudan</i>, can be ignored.
+
+<h4>2.20*: Data for countries, step3</h4>
+
+**There is still a lot to do in this part, so don't get stuck on this exercise!**
+
+Add to the view showing the data of a single country, the weather report for the capital of that country.
+There are dozens of providers for weather data.
+One suggested API is [https://openweathermap.org](https://openweathermap.org).
+Note that it might take some minutes until a generated API key is valid.
+
+![weather report added feature](../../images/2/19x.png)
+
+If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
+
+**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*. This issue can be fixed by completing the exercise using Chrome.
+
+**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control!
+Nor hardcode the api-key to your source code.
+Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
+
+Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
+
+```bash
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
+($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
+set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
+```
+
+you can access the value of the key from the *process.env* object:
+
+```js
+const api_key = process.env.REACT_APP_API_KEY
+// variable api_key has now the value set in startup
+```
+
+Note that if you created the application using *npx create-react-app ...* and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*.
+You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
+
+```text
+# .env
+
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
+```
+
+Note that you will need to restart the server to apply the changes.
+
+This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

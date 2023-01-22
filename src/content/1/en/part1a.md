@@ -60,25 +60,6 @@ export default App
 
 The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.
 
-If you end up with the following error:
-
-![resolve react-dom/client error](../../images/1/r18-error.png)
-
-Then, for some reason, you are using a React version older than the current version 18.
-
-The fix is to change <i>index.js</i> as follows:
-
-```js
-import ReactDOM from 'react-dom'
-import App from './App'
-
-ReactDOM.render(<App />, document.getElementById('root'))
-```
-
-You quite likely need to do the same for your other projects.
-
-See [this](/en/part1/a_more_complex_state_debugging_react_apps/#a-note-on-react-version) for more about the version differences.
-
 ### Component
 
 The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>.
@@ -90,8 +71,22 @@ ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 
 renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'.
 
-By default, the file <i>public/index.html</i> doesn't contain any HTML markup that is visible to us in the browser.
-You can try adding some HTML to the file.
+By default, the file <i>public/index.html</i> doesn't contain any HTML markup that is visible to us in the browser:
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      content not shown ...
+  </head>
+  <body>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+  </body>
+</html>
+```
+
+You can try adding there some HTML to the file.
 However, when using React, all content that needs to be rendered is usually defined as React components.
 
 Let's take a closer look at the code defining the component:
@@ -141,7 +136,7 @@ const App = () => {
 In other words, the function returns the value of the expression.
 
 The function defining the component may contain any kind of JavaScript code.
-Modify your component to be as follows and observe what happens in the console:
+Modify your component to be as follows:
 
 ```js
 const App = () => {
@@ -152,7 +147,19 @@ const App = () => {
     </div>
   )
 }
+
+export default App
 ```
+
+and observe what happens in the browser console
+
+![](../../images/1/30.png)
+
+The first rule of frontend web development: 
+
+> <i>keep the console open all the time</i>
+
+Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and the for the rest of my life when I'm doing web development. 
 
 It is also possible to render dynamic content inside of a component.
 
@@ -163,6 +170,7 @@ const App = () => {
   const now = new Date()
   const a = 10
   const b = 20
+  console.log(now, a+b)
 
   return (
     <div>
@@ -176,6 +184,16 @@ const App = () => {
 ```
 
 Any JavaScript code within the curly braces is evaluated and the result of this evaluation is embedded into the defined place in the HTML produced by the component.
+
+Note that you should not remove the line at the bottom of the component
+
+```js
+export default App
+```
+
+The export is not shown in most of the examples of the course material. Without the export the component and the whole app breaks down.
+
+Did you remember your promise to keep the console open? What was printed out there?
 
 ### JSX
 
@@ -318,6 +336,7 @@ Let's modify the code so that the component <i>Hello</i> uses two props:
 
 ```js
 const Hello = (props) => {
+  console.log(props) // highlight-line
   return (
     <div>
       <p>
@@ -343,6 +362,14 @@ const App = () => {
 
 The props sent by the component <i>App</i> are the values of the variables, the result of the evaluation of the sum expression and a regular string.
 
+Component <i>Hello</i> also logs the value of the object props to the console.
+
+I rellly hope your console was open. If it was not, remember what you promised:
+
+>  <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
+
+Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make the life so much easier.
+
 ### Some notes
 
 React has been configured to generate quite clear error messages.
@@ -354,7 +381,7 @@ You should instead try to understand the cause of the error and, for example, go
 
 ![screenshot of undefined prop error](../../images/1/2a.png)
 
-It is good to remember that in React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
+As we already mentioned, that when programming with React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
 
 Also, keep in mind that **React component names must be capitalized**.
 If you try defining a component as follows:
@@ -446,6 +473,12 @@ It now compiles successfully, and the DOM generated by React no longer contains 
 
 The exercises are submitted via GitHub, and by marking the exercises as done in the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
+The exercises are submitted **one part at a time**.
+When you have submitted the exercises for a part of the course you can no longer submit undone exercises for the same part.
+
+Note that in this part, there are [more exercises](/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14) besides those found below.
+<i>Do not submit your work</i> until you have completed all of the exercises you want to submit for the part.
+
 You may submit all the exercises of this course into the same repository, or use multiple repositories.
 If you submit exercises of different parts into the same repository, please use a sensible naming scheme for the directories.
 
@@ -468,12 +501,6 @@ For each part of the course, there is a directory, which further branches into d
 
 For each web application for a series of exercises, it is recommended to submit all files relating to that application, except for the directory <i>node\_modules</i>.
 
-The exercises are submitted **one part at a time**.
-When you have submitted the exercises for a part of the course you can no longer submit undone exercises for the same part.
-
-Note that in this part, there are more exercises besides those found below.
-<i>Do not submit your work</i> until you have completed all of the exercises you want to submit for the part.
-  
   <h4>1.1: course information, step1</h4>
 
 <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises.
@@ -549,7 +576,17 @@ const App = () => {
 }
 ```
 
-**WARNING** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository.
+**WARNING** Don't try to program all the components concurrently, because that will almost certainly break down the whole app.
+Proceed in small steps, first make e.g. the component <i>Header</i> and only when it works for sure, you could proceed to the next component.
+
+Careful, small-step progress may seem slow, but it is actually <i> by far the fastest</i> way to progress.
+Famous software developer Robert "Uncle Bob" Martin has stated
+
+> <i>"The only way to go fast, is to go well"</i>
+
+that is, according to Martin, careful progress with small steps is even the only way to be fast.
+
+**WARNING2** create-react-app automatically makes the project a git repository unless the application is created within an already existing repository.
 Most likely you **do not want** the project to become a repository, so run the command *rm -rf .git* in the root of the project.
 
 <h4>1.2: course information, step2</h4>
@@ -570,6 +607,6 @@ const Content = ... {
 ```
 
 Our application passes on information in quite a primitive way at the moment, since it is based on individual variables.
-This situation will improve soon.
+We shall fix that in the [part 2](/en/part2).
 
 </div>

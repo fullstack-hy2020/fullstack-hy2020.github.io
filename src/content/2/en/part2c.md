@@ -21,19 +21,16 @@ Create a file named <i>db.json</i> in the root directory of the previous notes p
     {
       "id": 1,
       "content": "HTML is easy",
-      "date": "2022-1-17T17:30:31.098Z",
       "important": true
     },
     {
       "id": 2,
       "content": "Browser can execute only JavaScript",
-      "date": "2022-1-17T18:39:34.091Z",
       "important": false
     },
     {
       "id": 3,
       "content": "GET and POST are the most important methods of HTTP protocol",
-      "date": "2022-1-17T19:20:14.298Z",
       "important": true
     }
   ]
@@ -61,7 +58,7 @@ npx json-server --port 3001 --watch db.json
 Let's navigate to the address <http://localhost:3001/notes> in the browser.
 We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
 
-![json data of notes](../../images/2/14e.png)
+![](../../images/2/14new.png)
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 
@@ -179,17 +176,17 @@ A clear indicator that a project uses npm is the <i>package.json</i> file locate
 
 ```json
 {
-  "name": "notes",
+  "name": "notes-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.3"
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -233,18 +230,18 @@ Axios is now included among the other dependencies:
 
 ```json
 {
-  "name": "notes",
+  "name": "notes-frontend",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@testing-library/jest-dom": "^5.16.1",
-    "@testing-library/react": "^12.1.2",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
-    "axios": "^0.24.0", // highlight-line
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.3"
+    "axios": "^1.2.2", // highlight-line
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "web-vitals": "^2.1.4"
   },
   // ...
 }
@@ -334,10 +331,7 @@ console.log(promise2)
 
 If you open <http://localhost:3000> in the browser, this should be printed to the console
 
-![promises printed to console](../../images/2/16b.png)
-
-**Note:** when the content of the file <i>index.js</i> changes, React does not always notice that automatically, so you might need to refresh the browser to see your changes! A simple workaround to make React notice the change automatically is to create a file named <i>.env</i> in the root directory of the project and add this line <i>FAST_REFRESH=false</i>.
-Restart the app for the applied changes to take effect.
+![promises printed to console](../../images/2/16new.png)
 
 Axios' method *get* returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises).
 
@@ -370,7 +364,7 @@ promise.then(response => {
 
 The following is printed to the console:
 
-![json object data printed to console](../../images/2/17e.png)
+![json object data printed to console](../../images/2/17new.png)
 
 The JavaScript runtime environment calls the callback function registered by the <em>then</em> method providing it with a <em>response</em> object as a parameter.
 The <em>response</em> object contains all the essential data related to the response of an HTTP GET request, which would include the returned <i>data</i>, <i>status code</i>, and <i>headers</i>.
@@ -406,10 +400,8 @@ Let's try and request the notes from our local server and render them, initially
 Please note that this approach has many issues, as we're rendering the entire <i>App</i> component only when we successfully retrieve a response:
 
 ```js
-import React from 'react'
 import ReactDOM from 'react-dom/client'
-import axios from 'axios' // highlight-line
-
+import axios from 'axios'
 import App from './App'
 
 axios.get('http://localhost:3001/notes').then(response => {
@@ -625,7 +617,7 @@ We will do this in part 3.
 
 <div class="tasks">
 
-<h3>Exercises 2.11.-2.14.</h3>
+<h3>Exercise 2.11.</h3>
 
 <h4>2.11: The Phonebook Step6</h4>
 
@@ -679,89 +671,4 @@ Close the other application, or change the port in case that doesn't work.
 Modify the application such that the initial state of the data is fetched from the server using the <i>axios</i>-library.
 Complete the fetching with an [Effect hook](https://reactjs.org/docs/hooks-effect.html).
 
-<h4>2.12* Data for countries, step1</h4>
-
-The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
-
-Create an application, in which one can look at data from various countries.
-The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
-
-The user interface is very simple.
-The country to be shown is found by typing a search query into the search field.
-
-If there are too many (over 10) countries that match the query, then the user is prompted to make their query more specific:
-
-![too many matches screenshot](../../images/2/19b1.png)
-
-If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
-
-![matching countries in a list screenshot](../../images/2/19b2.png)
-
-When there is only one country matching the query, then the basic data of the country (e.g. capital and area), its flag and the languages spoken are shown:
-
-![flag and additional attributes screenshot](../../images/2/19c3.png)
-
-**NB**: It is enough that your application works for most countries.
-Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>.
-You don't need to worry about these edge cases.
-
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository.
-**Most likely you do not want each of your projects to be a separate repository**, so simply run the *rm -rf .git* command at the root of your application.
-
-<h4>2.13*: Data for countries, step2</h4>
-
-**There is still a lot to do in this part, so don't get stuck on this exercise!**
-
-Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country:
-
-![attach show buttons for each country feature](../../images/2/19b4.png)
-
-In this exercise, it is also enough that your application works for most countries.
-Countries whose name appears in the name of another country, like <i>Sudan</i>, can be ignored.
-
-<h4>2.14*: Data for countries, step3</h4>
-
-**There is still a lot to do in this part, so don't get stuck on this exercise!**
-
-Add to the view showing the data of a single country, the weather report for the capital of that country.
-There are dozens of providers for weather data.
-One suggested API is [https://openweathermap.org](https://openweathermap.org).
-Note that it might take some minutes until a generated API key is valid.
-
-![weather report added feature](../../images/2/19x.png)
-
-If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
-
-**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*.
-This issue can be fixed by completing the exercise using Chrome.
-
-**NB:** You need an api-key to use almost every weather service.
-Do not save the api-key to source control! Nor hardcode the api-key to your source code.
-Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
-
-Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
-
-```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
-($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
-set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
-```
-
-you can access the value of the key from the *process.env* object:
-
-```js
-const api_key = process.env.REACT_APP_API_KEY
-// variable api_key has now the value set in startup
-```
-
-Note that if you created the application using `npx create-react-app ...` and you want to use a different name for your environment variable then the environment variable name must still begin with `REACT_APP_`.
-You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
-
-```text
-# .env
-
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
-```
-
-Note that you will need to restart the server to apply the changes.
 </div>

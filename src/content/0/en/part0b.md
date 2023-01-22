@@ -9,13 +9,14 @@ lang: en
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
-The application exists only to demonstrate some basic concepts of the course, and is, by no means, an example of <i>how</i> a modern web application should be made.
-On the contrary, it demonstrates some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
+The application exists only to demonstrate some basic concepts of the course, and is, by no means, an example of <i>how</i> a modern web application should be made. On the contrary, it demonstrates some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
 
 Code will conform to contemporary best practices from [part 1](/en/part1) onwards.
 
 Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser.
 Sometimes this takes a while.
+
+The course material is done with the Chrome browser.
 
 **The 1st rule of web development**: Always keep the Developer Console open on your web browser.
 On macOS, open the console by pressing *F12* or *option-cmd-i* simultaneously.
@@ -80,7 +81,9 @@ The browser uses this information to render the image correctly to the screen.
 
 The chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp> on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
-![Sequence diagram of the flow covered above](../../images/0/7e.png)
+![Sequence diagram of the flow covered above](../../images/0/7m.png)
+
+The sequence diagram visualizes how the browser and server are communicating over the time. The time flows in the diagram from top to bottom, so the diagram starts with the first request that the browser sends to server, followed by the response.
 
 First, the browser sends an HTTP GET request to the server to fetch the HTML code of the page.
 The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>.
@@ -101,8 +104,8 @@ The HTML code of the example application has been formed dynamically because it 
 The HTML code of the homepage is as follows:
 
 ```js
-const getFrontPageHtml = (noteCount) => {
-  return(`
+const getFrontPageHtml = noteCount => {
+  return `
     <!DOCTYPE html>
     <html>
       <head>
@@ -116,8 +119,8 @@ const getFrontPageHtml = (noteCount) => {
         </div>
       </body>
     </html>
-`)
-} 
+`
+}
 
 app.get('/', (req, res) => {
   const page = getFrontPageHtml(notes.length)
@@ -134,7 +137,7 @@ Writing HTML amid the code is of course not smart, but for old-school PHP progra
 
 In traditional web applications, the browser is "dumb".
 It only fetches HTML data from the server, and all application logic is on the server.
-A server can be created using Java Spring (like in the University of Helsinki course [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007/119558639)), Python Flask (like the courses [database applications](https://materiaalit.github.io/tsoha-18/)) or [Ruby on Rails](http://rubyonrails.org/) to name just a few examples.
+A server can be created using [Java Spring](https://spring.io/projects/spring-framework), [Python Flask](https://flask.palletsprojects.com/en/2.2.x/) or [Ruby on Rails](http://rubyonrails.org/) to name just a few examples.
 
 The example uses [Express](https://expressjs.com/) library with the Node.js.
 This course will use Node.js and Express to create web servers.
@@ -411,7 +414,7 @@ The fetched CSS file looks as follows:
 ```css
 .container {
   padding: 10px;
-  border: 1px solid; 
+  border: 1px solid;
 }
 
 .notes {
@@ -426,7 +429,7 @@ A class selector definition always starts with a period and contains the name of
 
 The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
 
-CSS attributes can be examined on the <i>elements</i> tab of the console:  
+CSS attributes can be examined on the <i>elements</i> tab of the console:
 
 ![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
 
@@ -454,14 +457,14 @@ If you want to make lasting changes, they must be saved to the CSS style sheet o
 
 Let's review what happens when the page <https://studies.cs.helsinki.fi/exampleapp/notes> is opened on the browser.
 
-![sequence diagram of browser/server interaction](../../images/0/19e.png)
+![sequence diagram of browser/server interaction](../../images/0/19m.png)
 
 - The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
 - Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
 - ...and a JavaScript code file <i>main.js</i>
 - The browser executes the JavaScript code.
   The code makes an HTTP GET request to the address <https://studies.cs.helsinki.fi/exampleapp/data.json>, which
-  returns the notes as JSON  data.
+  returns the notes as JSON data.
 - When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API.
 
 ### Forms and HTTP POST
@@ -484,8 +487,7 @@ Let's zoom into it:
 ![Detailed view of the first request](../../images/0/22e.png)
 
 It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>.
-The server responds with HTTP status code 302.
-This is a [URL redirect](https://en.wikipedia.org/wiki/URL_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
+The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
 
 So, the browser reloads the Notes page.
 The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).
@@ -578,7 +580,7 @@ When you now create a new note, you'll notice that the browser sends only one re
 
 ![Network tab in developer tools](../../images/0/26e.png)
 
-The POST request to the address <i>new\_note\_spa</i> contains the new note as JSON data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):
+The POST request to the address <i>new_note_spa</i> contains the new note as JSON data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):
 
 ```js
 {
@@ -616,7 +618,7 @@ form.onsubmit = function(e) {
 }
 ```
 
-The command <em>document.getElementById('notes\_form')</em> instructs the code to fetch the form element from the page and to register an <i>event handler</i> to handle the form's submit event.
+The command <em>document.getElementById('notes_form')</em> instructs the code to fetch the form element from the page and to register an <i>event handler</i> to handle the form's submit event.
 The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form's submit.
 The default method would send the data to the server and cause a new GET request, which we don't want to happen.
 
@@ -630,9 +632,7 @@ var sendToServer = function(note) {
   // ...
 
   xhttpForPost.open('POST', '/new_note_spa', true)
-  xhttpForPost.setRequestHeader(
-    'Content-type', 'application/json'
-  )
+  xhttpForPost.setRequestHeader('Content-type', 'application/json')
   xhttpForPost.send(JSON.stringify(note))
 }
 ```
@@ -645,7 +645,7 @@ The application code is available at <https://github.com/mluukkai/example_app>.
 It's worth remembering that the application is only meant to demonstrate the concepts of the course.
 The code follows a poor style of development in some measures, and should not be used as an example when creating your applications.
 The same is true for the URLs used.
-The URL <i>new\_note\_spa</i> that new notes are sent to, does not adhere to current best practices.
+The URL <i>new_note_spa</i> that new notes are sent to, does not adhere to current best practices.
 
 ### JavaScript-libraries
 
@@ -767,31 +767,39 @@ Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first f
 
 In the section [Loading a page containing JavaScript - review](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review), the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
-The diagram was made using the [web sequence diagrams](https://www.websequencediagrams.com) service as follows:
+The diagram was made as a GitHub Markdown-file using the [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntax, as follows:
 
-```plantUML
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
-server-->browser: HTML-code
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
-server-->browser: main.css
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
-server-->browser: main.js
+```text
+sequenceDiagram
+    participant browser
+    participant server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+    
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server
 
-note over browser:
-browser starts executing js-code
-that requests JSON data from server 
-end note
-
-browser->server: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
-server-->browser: [{ content: "HTML is easy", date: "2019-05-23" }, ...]
-
-note over browser:
-browser executes the event handler
-that renders notes to display
-end note
+    Note right of browser: The browser executes the callback function that renders the notes
 ```
 
-**Create a similar diagram** depicting the situation where the user creates a new note on page <https://studies.cs.helsinki.fi/exampleapp/notes> when writing something into the text field and clicking the <i>submit</i> button.
+**Create a similar diagram** depicting the situation where the user creates a new note on the page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button.
 
 If necessary, show operations on the browser or on the server as comments on the diagram.
 
@@ -802,7 +810,7 @@ All necessary information for doing this, and the next two exercises, can be fou
 The idea of these exercises is to read the text through once more and to think through what is going on there.
 Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible.
 
-**Note** perhaps the best way to do diagrams is the [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor) syntax that is now implemented in [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/) markdown pages!
+You can do the diagrams with any program, but perhaps the easiest and the best way to do diagrams is the [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor) syntax that is now implemented in [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/) Markdown pages!
 
   <h4>0.5: Single page app diagram</h4>
 

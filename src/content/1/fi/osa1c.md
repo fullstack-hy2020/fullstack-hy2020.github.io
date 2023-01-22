@@ -251,7 +251,7 @@ Tähänastiset komponenttimme ovat olleet siinä mielessä yksinkertaisia, että
 
 Määritellään nyt sovelluksemme komponentille <i>App</i> tila Reactin [state hookin](https://reactjs.org/docs/hooks-state.html) avulla.
 
-Muutetaan <i>index.js</i> muotoon
+Palautetaan <i>index.js</i> muotoon
 
 ```js
 import React from 'react'
@@ -262,7 +262,7 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-ja <i>App.js</i> muotoon:
+ja muutetaan <i>App.js</i> muotoon:
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -365,6 +365,8 @@ const App = () => {
 voidaan konsolista seurata komponentin renderöitymistä:
 
 ![](../../images/1/4e.png)
+
+Olihan selaimesi konsoli auki? Jos ei ollut, niin lupaa että tämä oli viimeinen kerta kun asiasta pitää muistuttaa.
 
 ### Tapahtumankäsittely
 
@@ -633,6 +635,44 @@ Kun jotain napeista painetaan, suoritetaan vastaava tapahtumankäsittelijä. Tap
 
 Eli jos painetaan nappia <i>plus</i>, muuttaa napin tapahtumankäsittelijä tilan _counter_ arvoksi 1 ja komponentti _App_ renderöidään uudelleen. Komponentin uudelleenrenderöinti aiheuttaa sen "alikomponentteina" olevien _Display_- ja _Button_-komponenttien uudelleenrenderöitymisen. _Display_ saa propsin arvoksi laskurin uuden arvon 1 ja _Button_-komponentit saavat propseina tilaa sopivasti muuttavat tapahtumankäsittelijät.
 
+Jotta varmasti ymmärtäisimme, miten ohjelma toimii, lisätään koodiin muutama _console.log_
+
+```js
+const App = () => {
+  const [counter, setCounter] = useState(0)
+  console.log('rendering with counter value', counter) // highlight-line
+
+  const increaseByOne = () => {
+    console.log('increasing, value before', counter) // highlight-line
+    setCounter(counter + 1)
+  }
+
+  const decreaseByOne = () => { 
+    console.log('decreasing, value before', counter) // highlight-line
+    setCounter(counter - 1)
+  }
+
+  const setToZero = () => {
+    console.log('resetting to zero, value before', counter) // highlight-line
+    setCounter(0)
+  }
+
+  return (
+    <div>
+      <Display counter={counter} />
+      <Button handleClick={increaseByOne} text="plus" />
+      <Button handleClick={setToZero} text="zero" />
+      <Button handleClick={decreaseByOne} text="minus" />
+    </div>
+  )
+} 
+```
+
+Katsotaan nyt mitä konsoliin tulostuu kun painetaan nappeja plus, plus, zero ja minus:
+
+![](../../images/1/31.png)
+
+Ei kannata yrittää arvailla mitä koodisi tekee, parempi on varmistaa toiminnallisuus omin silmin esim. lisäilemällä koodiin sopivasti _console.log_-komentoja.
 
 ### Komponenttien refaktorointi
 

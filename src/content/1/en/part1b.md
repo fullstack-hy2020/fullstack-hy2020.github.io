@@ -11,7 +11,7 @@ During the course, we have a goal and a need to learn a sufficient amount of Jav
 
 JavaScript has advanced rapidly in the last few years and in this course, we use features from the newer versions.
 The official name of the JavaScript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript).
-At this moment, the latest version is the one released in June of 2021 with the name [ECMAScript®2021](https://www.ecma-international.org/ecma-262/), otherwise known as ES12.
+At this moment, the latest version is the one released in June of 2022 with the name [ECMAScript®2022](https://www.ecma-international.org/ecma-262/), otherwise known as ES13.
 
 Browsers do not yet support all of JavaScript's newest features.
 Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of JavaScript to an older, more compatible version.
@@ -22,7 +22,6 @@ We will take a closer look at the configuration of the transpilation in [part 7]
 
 [Node.js](https://nodejs.org/en/) is a JavaScript runtime environment based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine and works practically anywhere - from servers to mobile phones.
 Let's practice writing some JavaScript using Node.
-It is expected that the version of Node.js installed on your machine is at least version <i>16.13.2</i>.
 The latest versions of Node already understand the latest versions of JavaScript, so the code does not need to be transpiled.
 
 The code is written into files ending with <i>.js</i> that are run by issuing the command <em>node name\_of\_file.js</em>
