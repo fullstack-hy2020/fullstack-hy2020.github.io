@@ -186,7 +186,7 @@ Let's destroy the default database <i>test</i> and change the name of the databa
 
 ```js
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 ```
 
 Let's run our code again:
