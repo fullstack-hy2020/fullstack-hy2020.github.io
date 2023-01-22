@@ -36,16 +36,12 @@ const noteSchema = new mongoose.Schema({
     minlength: 5,
     required: true
   },
-  date: { 
-    type: Date,
-    required: true
-  },
     // highlight-end
   important: Boolean
 })
 ```
 
-Kentän <i>content</i> pituuden vaaditaan nyt olevan vähintään viisi merkkiä. Kentälle <i>date</i> taas on asetettu ehdoksi, että sillä on oltava joku arvo eli kenttä ei saa olla tyhjä. Sama ehto on asetettu myös kentälle <i>content</i>, sillä minimipituuden tarkistava ehto ei huomioi tilannetta, jossa kentällä ei ole mitään arvoa. Kentälle <i>important</i> ei ole asetettu mitään ehtoa, joten se on määritelty edelleen yksinkertaisemmassa muodossa.
+Kentän <i>content</i> pituuden vaaditaan nyt olevan vähintään viisi merkkiä ja kentän arvo ei saa olla tyhjä. Kentälle <i>important</i> ei ole asetettu mitään ehtoa, joten se on määritelty edelleen yksinkertaisemmassa muodossa.
 
 Esimerkissä käytetyt validaattorit <i>minlength</i> ja <i>required</i> ovat Mongooseen [sisäänrakennettuja](https://mongoosejs.com/docs/validation.html#built-in-validators) validointisääntöjä. Mongoosen [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) -ominaisuus mahdollistaa mielivaltaisten validaattorien toteuttamisen, jos valmiiden joukosta ei löydy tarkoitukseen sopivaa.
 
@@ -111,9 +107,9 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Tietokantaa käyttävän version vieminen tuotantoon
 
-Sovelluksen pitäisi toimia tuotannossa eli Fly.io:ssa tai Herokussa lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. 
+Sovelluksen pitäisi toimia tuotannossa eli Fly.io:ssa tai Renderissä lähes sellaisenaan. Frontendin muutosten takia on tehtävä siitä uusi tuotantoversio ja kopioitava se backendiin. 
 
-Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttujille arvot tiedostossa <i>.env</i>, tietokantaurlin kertovan ympäristömuuttujan täytyy asettaa Fly.io:n tai Herokuun vielä erikseen.
+Huomaa, että vaikka määrittelimme sovelluskehitystä varten ympäristömuuttujille arvot tiedostossa <i>.env</i>, tietokantaurlin kertovan ympäristömuuttujan täytyy asettaa Fly.io:n tai Render vielä erikseen.
 
 Fly.io:ssa komennolla _fly secrets set_:
 
@@ -121,17 +117,30 @@ Fly.io:ssa komennolla _fly secrets set_:
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-Herokuun ympäristömuuttuja asetetaan komentorivillä komennolla _heroku config:set_:
+Kun sovellus viedään tuotantoon, on hyvin tavanomaista että kaikki ei toimi odotusten mukaan. Esim. ensimmäinen tuotantoonvientiyritykseni päätyi seuraavaan:
 
-```bash
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:secretpasswordhere@cluster0-ostce.mongodb.net/note-app?retryWrites=true'
-```
+![](../../images/3/fly-problem1.png)
 
-Sovelluksen pitäisi nyt toimia. Aina kaikki ei kuitenkaan mene suunnitelmien mukaan. Jos ongelmia ilmenee, <i>fly logs</i> tai <i>heroku logs</i> auttavat. Oma sovellukseni ei toiminut muutoksen jälkeen. Loki kertoi seuraavaa:
+Sovelluksessa ei toimi mikään.
 
-![Heroku logs paljastaa että Mongolle ei ole määritelty osoitetta ollenkaan (parameter to openUri must be a string)](../../images/3/51a.png)
+Selaimen konsolin network-välilehti paljastaa että yritys muistiinpanojen hakemiseksi ei onnistu, pyyntö jää pitkäksi aikaa tilaan _pending_ ja lopulta epäonnistuu HTTP statuskoodilla 502.
 
-Tietokannan osoite olikin siis jostain syystä määrittelemätön. Komento <i>heroku config</i> paljasti, että olin vahingossa määritellyt ympäristömuuttujan <em>MONGO\_URL</em> kun koodi oletti sen olevan nimeltään <em>MONGODB\_URI</em>.
+Selaimen konsolia on siis tarkasteltava <i>koko ajan!</i>
+
+Myös palvelimen lokien seuraaminen on elintärkeää. Ongelman syy selviääkin heti kun katsomme komennolla _fly logs_ mitä palvelimella tapahtuu:
+
+![](../../images/3/fly-problem3.png)
+
+Tietokannan osoite on siis _undefined_, eli komento *fly secrets set MONGODB\_URI* oli unohtunut.
+
+Renderiä käytettäessä tietokannan osoitteen kertova ympäristömuuttuja määritellään dashboardista käsin:
+
+![](../../images/3/render-env.png)
+
+Renderiä käytettäessä sovelluksen lokia on mahdollista tarkastella 
+Dashboardin kautta:
+
+![](../../images/3/r7.png)
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6), branchissä <i>part3-6</i>.
 
@@ -173,11 +182,12 @@ Toteuta sovelluksellesi validaatio, joka huolehtii, että backendiin voi tallett
 Toteuta validoinnin toinen osa [Custom validationina](https://mongoosejs.com/docs/validation.html#custom-validators).
 
 Jos HTTP POST -pyyntö yrittää lisätä virheellistä numeroa, tulee vastata sopivalla statuskoodilla ja lisätä vastaukseen asianmukainen virheilmoitus.
+
 #### 3.21 tietokantaa käyttävä versio Internetiin
 
 Generoi päivitetystä sovelluksesta "full stack" -versio, eli tee frontendista uusi production build ja kopioi se backendin repositorioon. Varmista, että kaikki toimii paikallisesti käyttämällä koko sovellusta backendin osoitteesta <http://localhost:3001>.
 
-Pushaa uusi versio Herokuun ja varmista, että kaikki toimii myös siellä.
+Pushaa uusi versio Fly.io:n tai Renderiin ja varmista, että kaikki toimii myös siellä.
 
 </div>
 
@@ -207,7 +217,7 @@ npx eslint --init
 
 Vastaillaan kysymyksiin:
 
-![Vastataan kysymyksiin koodin luonteen mukaan, erityisesti että kyse ei ole TypeSriptistä, käytetään ' merkkijonoissa, ei käytetä ; rivien lopussa](../../images/3/52be.png)
+![Vastataan kysymyksiin koodin luonteen mukaan, erityisesti että kyse ei ole TypeSriptistä, käytetään ' merkkijonoissa, ei käytetä ; rivien lopussa](../../images/3/52new.png)
 
 Konfiguraatiot tallentuvat tiedostoon _.eslintrc.js_:
 
@@ -216,7 +226,7 @@ module.exports = {
     'env': {
         'commonjs': true,
         'es2021': true,
-        'node': true
+        'node': true // highlight-line
     },
     'extends': 'eslint:recommended',
     'parserOptions': {

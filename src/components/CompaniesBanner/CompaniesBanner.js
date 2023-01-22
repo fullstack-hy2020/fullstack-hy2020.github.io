@@ -30,10 +30,6 @@ const partners = [
     url: 'https://corporate.elisa.fi/rekrytointi/',
   },
   {
-    image: { name: 'kesko.svg', alt: 'Kesko' },
-    url: 'https://www.kesko.fi/',
-  },
-  {
     image: { name: 'unity.svg', alt: 'Unity' },
     url: 'https://www.instagram.com/unitytechnologies/?hl=en',
   },

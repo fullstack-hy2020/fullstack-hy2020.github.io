@@ -97,11 +97,11 @@ describe('Note app', function() {
 
 Comenzamos la prueba desde la ventana abierta:
 
-![](../../images/5/40ea.png)
+![](../../images/5/40x.png)
 
 La ejecución de la prueba abre su navegador y muestra cómo se comporta la aplicación cuando se ejecuta la prueba:
 
-![](../../images/5/32ae.png)
+![](../../images/5/32x.png)
 
 La estructura de la prueba debe parecer familiar. Usan bloques <i>describe</i> para agrupar diferentes casos de prueba como lo hace Jest. Los casos de prueba se han definido con el método <i>it</i>.
 Cypress tomó prestadas estas partes de la librería de pruebas [Mocha](https://mochajs.org/) que usa bajo el capó.
@@ -146,7 +146,7 @@ describe('Note app', function() {
 
 la prueba falla
 
-![](../../images/5/33ea.png)
+![](../../images/5/33x.png)
 
 Eliminemos el código defectuoso de la prueba.
 
@@ -361,7 +361,7 @@ cy.get('input')
 
 Si la página contuviera más entradas, la prueba se rompería
 
-![](../../images/5/31ea.png)
+![](../../images/5/31x.png)
 
 Debido a esto, nuevamente sería mejor darle a la entrada un <i>id</i> y buscar el elemento por su id.
 
@@ -876,11 +876,11 @@ describe('when logged in', function() {
 
 Cuando hacemos clic en el comando _cy.contains('second note')_ en Cypress [Test Runner](https://docs.cypress.io/guides/core-concepts/test-runner.html), vemos ese comando busca el elemento que contiene el texto <i>second note</i>:
 
-![](../../images/5/34ea.png)
+![](../../images/5/34x.png)
 
 Al hacer clic en la siguiente línea _.contains('make important') _ vemos que la prueba usa el botón 'make important' correspondiente a la <i> segunda nota </i>:
 
-![](../../images/5/35ea.png)
+![](../../images/5/35x.png)
 
 Cuando está encadenado, el segundo comando <i>contains</i> <i>continúa</i> la búsqueda desde dentro del componente encontrado por el primer comando.
 
@@ -893,7 +893,7 @@ cy.contains('make important').click()
 
 el resultado habría sido totalmente diferente. La segunda línea de la prueba haría clic en el botón de una nota incorrecta:
 
-![](../../images/5/36ea.png)
+![](../../images/5/36x.png)
 
 ¡Al codificar pruebas, debe verificar en el corredor de pruebas que las pruebas utilizan los componentes correctos!
 
@@ -915,7 +915,7 @@ const Note = ({ note, toggleImportance }) => {
 
 ¡Nuestras pruebas se rompen! Como revela el corredor de pruebas, _cy.contains('second note') _ ahora devuelve el componente que contiene el texto y el botón no está en él.
 
-![](../../images/5/37ea.png)
+![](../../images/5/37x.png)
 
 Una forma de solucionarlo es la siguiente:
 
@@ -999,7 +999,7 @@ También es posible ejecutarlos [desde la línea de comandos](https://docs.cypre
 
 Ahora podemos ejecutar nuestras pruebas desde la línea de comandos con el comando <i>npm run test: e2e</i>
 
-![](../../images/5/39ea.png
+![](../../images/5/39ea.png)
 
 Tenga en cuenta que el video de la ejecución de la prueba se guardará en <i>cypress/videos/</i>, por lo que probablemente debería ignorar este directorio.
 

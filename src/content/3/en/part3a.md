@@ -11,7 +11,7 @@ In this part, our focus shifts towards the backend: that is, towards implementin
 
 We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.
 
-This course material was written with version <i>16.13.2</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running *node -v* in the command line).
+This course material was written with version <i>v18.13.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running *node -v* in the command line).
 
 As mentioned in [part 1](/en/part1/java_script), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
 
@@ -189,19 +189,16 @@ let notes = [
   {
     id: 1,
     content: "HTML is easy",
-    date: "2022-05-30T17:30:31.098Z",
     important: true
   },
   {
     id: 2,
-    content: "Browser can execute only Javascript",
-    date: "2022-05-30T18:39:34.091Z",
+    content: "Browser can execute only JavaScript",
     important: false
   },
   {
     id: 3,
     content: "GET and POST are the most important methods of HTTP protocol",
-    date: "2022-05-30T19:20:14.298Z",
     important: true
   }
 ]
@@ -223,7 +220,7 @@ The <i>application/json</i> value in the <i>Content-Type</i> header informs the 
 
 When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
 
-![formatted JSON notes data](../../images/3/2e.png)
+![formatted JSON notes data](../../images/3/2new.png)
 
 ### Express
 
@@ -243,10 +240,9 @@ The dependency is also added to our <i>package.json</i> file:
 {
   // ...
   "dependencies": {
-    "express": "^4.17.2"
+    "express": "^4.18.2"
   }
 }
-
 ```
 
 The source code for the dependency is installed in the <i>node\_modules</i> directory located at the root of the project. In addition to express, you can find a great number of other dependencies in the directory:
@@ -255,15 +251,15 @@ The source code for the dependency is installed in the <i>node\_modules</i> dire
 
 These are the dependencies of the express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
 
-The version 4.17.2. of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+The version 4.18.2 of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
 
 ```json
-"express": "^4.17.2"
+"express": "^4.18.2"
 ```
 
 The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/getting-started/semantic-versioning).
 
-The caret in the front of <i>^4.17.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.17.2</i>. However, the installed version of express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
+The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.18.2</i>. However, the installed version of express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
 
 We can update the dependencies of the project with the command:
 
@@ -340,7 +336,7 @@ app.get('/api/notes', (request, response) => {
 
 The request is responded to with the [json](http://expressjs.com/en/4x/api.html#res.json) method of the *response* object. Calling the method will send the **notes** array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.
 
-![api/notes gives the formatted JSON data again](../../images/3/6ea.png)
+![api/notes gives the formatted JSON data again](../../images/3/6new.png)
 
 Next, let's take a quick look at the data sent in JSON format.
 
@@ -380,10 +376,10 @@ The contents of <i>package.json</i> have also changed:
 {
   //...
   "dependencies": {
-    "express": "^4.17.2",
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.20"
   }
 }
 ```
@@ -392,7 +388,7 @@ If you accidentally used the wrong command and the nodemon dependency was added 
 
 By development dependencies, we are referring to tools that are needed only during the development of the application, e.g. for testing or automatically restarting the application, like <i>nodemon</i>.
 
-These development dependencies are not needed when the application is run in production mode on the production server (e.g. Heroku).
+These development dependencies are not needed when the application is run in production mode on the production server (e.g. Fly.io or Heroku).
 
 We can start our application with <i>nodemon</i> like this:
 
@@ -544,7 +540,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Now fetching an individual resource works.
 
-![api/notes/1 gives a single note as JSON](../../images/3/9ea.png)
+![api/notes/1 gives a single note as JSON](../../images/3/9new.png)
 
 However, there's another problem with our application.
 
@@ -626,7 +622,7 @@ Let's create a new <i>get\_all\_notes.rest</i> file and define the request that 
 
 By clicking the <i>Send Request</i> text, the REST client will execute the HTTP request and the response from the server is opened in the editor.
 
-![response from vs code from get request](../../images/3/13ea.png)
+![response from vs code from get request](../../images/3/13new.png)
 
 ### The WebStorm HTTP Client
 
@@ -666,7 +662,7 @@ For the time being, the application does not do anything with the received data 
 
 Before we implement the rest of the application logic, let's verify with Postman that the data is in fact received by the server. In addition to defining the URL and request type in Postman, we also have to define the data sent in the <i>body</i>:
 
-![postman post on api/notes with post content](../../images/3/14x.png)
+![postman post on api/notes with post content](../../images/3/14new.png)
 
 The application prints the data that we sent in the request to the console:
 
@@ -680,11 +676,11 @@ Similarly, it is useful to check the console for making sure that the backend be
 
 A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:
 
-![postman having text as content-type](../../images/3/17x.png)
+![postman having text as content-type](../../images/3/17new.png)
 
 The <i>Content-Type</i> header is set to <i>text/plain</i>:
 
-![postman showing headers and content-type as text/plain](../../images/3/18x.png)
+![postman showing headers and content-type as text/plain](../../images/3/18new.png)
 
 The server appears to only receive an empty object:
 
@@ -694,7 +690,7 @@ The server will not be able to parse the data correctly without the correct valu
 
 If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:
 
-![sample post request in vscode with JSON data](../../images/3/20eb.png)
+![sample post request in vscode with JSON data](../../images/3/20new.png)
 
 We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
 
@@ -743,7 +739,7 @@ app.post('/api/notes', (request, response) => {
 
 We need a unique id for the note. First, we find out the largest id number in the current list and assign it to the *maxId* variable. The id of the new note is then defined as *maxId + 1*. This method is not recommended, but we will live with it for now as we will replace it soon enough.
 
-The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> and <i>date</i> properties will be given default values. All other properties are discarded:
+The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> property will be given default value false. All other properties are discarded:
 
 ```js
 const generateId = () => {
@@ -789,8 +785,7 @@ if (!body.content) {
 
 Notice that calling return is crucial because otherwise the code will execute to the very end and the malformed note gets saved to the application.
 
-If the content property has a value, the note will be based on the received data. As mentioned previously, it is better to generate timestamps on the server than in the browser, since we can't trust that the host machine running the browser has its clock set correctly. The generation of the <i>date</i> property is now done by the server.
-
+If the content property has a value, the note will be based on the received data.
 If the <i>important</i> property is missing, we will default the value to <i>false</i>. The default value is currently generated in a rather odd-looking way:
 
 ```js

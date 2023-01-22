@@ -1,7 +1,7 @@
 import './layout.css';
 import './index.scss';
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 import Header from './Header/Header';
@@ -10,7 +10,7 @@ import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
 
-const BANNER_TO_KEY = 'exam_banner_seen';
+const BANNER_TO_KEY = 'exercise_numbering_part2_seen';
 
 const Layout = props => {
   const { i18n } = useTranslation();
@@ -19,8 +19,16 @@ const Layout = props => {
   const siteLanguage = i18n.language;
 
   const [visible, setVisible] = useState(
-    () => false // !localStorage.getItem(BANNER_TO_KEY)
+    false
   );
+
+  useEffect(() => {
+    const key = localStorage.getItem(BANNER_TO_KEY)
+    console.log(key)
+    if (!key) {
+      setVisible(true)
+    }
+  }, [])
 
   const hideNote = () => {
     localStorage.setItem(BANNER_TO_KEY, 'yes');
