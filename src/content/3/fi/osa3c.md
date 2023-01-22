@@ -614,6 +614,21 @@ Kun kuvioissa on mukana tietokanta, on tietokannan tilan tarkastelu MongoDB Atla
 
 Sovelluksen tämän hetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4), branchissa <i>part3-4</i>.
 
+### Todellisen full stack -sovelluskehittäjän vala
+
+Sovelluksemme koostuu nyt frontendin ja backendin lisäksi myös tietokannasta. Virhelähteiden määrä siis kasvaa ja päivitämme full stack -kehittäjän valaa seuraavasti:
+
+Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+
+- pidän selaimen konsolin koko ajan auki
+- tarkkailen säännöllisesti selaimen network-välilehdeltä, että frontendin ja backendin välinen kommunikaatio tapahtuu oletusteni mukaan
+- tarkkailen säännöllisesti palvelimella olevan datan tilaa, ja varmistan että frontendin lähettämä data siirtyy sinne kuten oletin
+- <i>pidän silmällä tietokannan tilaa: varmistan että backend tallentaa datan sinne oikeaan muotoon</i>
+- etenen pienin askelin
+- käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+
 </div>
 
 <div class="tasks">
