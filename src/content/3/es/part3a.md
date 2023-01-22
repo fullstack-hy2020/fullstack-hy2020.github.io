@@ -925,7 +925,7 @@ La aplicación también debe ofrecer un comando _npm run dev_ que ejecutará la 
 
 Implemente una página en la dirección <http://localhost:3001/info> que se parezca más o menos a esto:
 
-![](../../images/3/23ea.png)
+![](../../images/3/23x.png)
 
 
 La página tiene que mostrar la hora en que se recibió la solicitud y cuántas entradas hay en la agenda telefónica en el momento de procesar la solicitud.

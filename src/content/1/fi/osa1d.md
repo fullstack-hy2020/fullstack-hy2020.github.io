@@ -7,51 +7,6 @@ lang: fi
 
 <div class="content">
 
-
-### Huomio Reactin versioista
-
-Reactin uusin versio 18 julkaistiin maaliskuun 2022 lopussa. Materiaalin koodin pitäisi toimia sellaisenaan uudenkin Reactin kanssa poislukien [osassa 8](/osa8) käytettävää Apollo Clientiä. 
-
-Jos törmäät ongelmiin voit downgreidata projektin vanhempaan Reactiin muuttamalla tiedostoa  <i>package.json</i> seuraavasti:
-
-```js
-{
-  "dependencies": {
-    "react": "^17.0.2", // highlight-line
-    "react-dom": "^17.0.2", // highlight-line
-    "react-scripts": "5.0.0",
-    "web-vitals": "^2.1.4"
-  },
-  // ...
-}
-```
-
-ja asentamalla muutoksen jälkeen riippuvuudet uudelleen suorittamalla komento
-
-```js
-npm install
-```
-
-Huomaa, että myös tiedosto <i>index.js</i> eroaa hieman eri Reactin versiossa. React 17:lla se näyttää seuraavalta
-
-```js
-import ReactDOM from 'react-dom'
-import App from './App'
-
-ReactDOM.render(<App />, document.getElementById('root'))
-```
-
-React 18:aa käyttäessä tiedoston muoto on seuraava:
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-
-import App from './App'
-
-ReactDOM.createRoot(document.getElementById('root')).render(<App />)
-```
-
 ### Monimutkaisempi tila
 
 Edellisessä esimerkissä sovelluksen tila oli yksinkertainen, sillä se koostui ainoastaan yhdestä kokonaisluvusta. Entä jos sovellus tarvitsee monimutkaisemman tilan?
@@ -417,9 +372,9 @@ const App = () => {
 
 ### Vanha React
 
-Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis uutta Reactia ja käytettävissä alkuvuodesta 2019 ilmestyneestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja JavaScript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, ja tilaa edellyttävät komponentit oli pakko määritellä [class](https://reactjs.org/docs/react-component.html)-komponentteina JavaScriptin luokkasyntaksia hyödyntäen.
+Tällä kurssilla käyttämämme tapa React-komponenttien tilan määrittelyyn, eli [state hook](https://reactjs.org/docs/hooks-state.html) on siis "uutta" Reactia ja käytettävissä alkuvuodesta 2019 ilmestyneestä versiosta [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) lähtien. Ennen hookeja JavaScript-funktioina määriteltyihin React-komponentteihin ei ollut mahdollista saada tilaa ollenkaan, ja tilaa edellyttävät komponentit oli pakko määritellä [class](https://reactjs.org/docs/react-component.html)-komponentteina JavaScriptin luokkasyntaksia hyödyntäen.
 
-Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan modernia Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat modernia Reactia, maailmassa on miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja Internetistä löytyvien esimerkkien suhteen tilanne on sama; törmäät class-komponentteihin välittömästi.
+Olemme tällä kurssilla tehneet hieman radikaalinkin ratkaisun käyttää pelkästään hookeja ja näin ollen opetella heti alusta asti ohjelmoimaan modernia Reactia. Luokkasyntaksin hallitseminen on kuitenkin sikäli tärkeää, että vaikka funktiona määriteltävät komponentit ovat modernia Reactia, maailmassa on miljardeja rivejä vanhaa Reactia, jota kenties sinäkin joudut jonain päivänä ylläpitämään. Dokumentaation ja Internetistä löytyvien esimerkkien suhteen tilanne on sama; tulet törmäämään myös class-komponentteihin.
 
 Tutustummekin riittävällä tasolla class-komponentteihin kurssin [seitsemännessä](/osa7) osassa.
 
@@ -527,7 +482,7 @@ React Developer Tools näyttää hookeilla luodut tilan osat siinä järjestykse
 
 Ylimpänä oleva <i>State</i> vastaa siis tilan <i>left</i> arvoa, seuraava tilan <i>right</i> arvoa ja alimpana on taulukko <i>allClicks</i>.
 
-JavaScript debuggaukseen voi tutustua myös esim. [tämän sivun videolla](https://developer.chrome.com/docs/devtools/overview/) alkaen kohdasta 16:50.
+Chromella tapahtuvaan JavaScriptin debuggaukseen voi tutustua myös esim. [tämän sivun videolla](https://developer.chrome.com/docs/devtools/overview/) alkaen kohdasta 16:50.
 
 ### Hookien säännöt
 
@@ -983,7 +938,21 @@ const Button = (props) => (
 )
 ```
 
-Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon, jonka se renderöi painikkeen tekstiksi.
+Komponentti saa siis propsina _handleClick_ tapahtumankäsittelijän ja propsina _text_ merkkijonon, jonka se renderöi painikkeen tekstiksi. Komponenttia käytetään seuraavasti:
+
+```js
+const App = (props) => {
+  // ...
+  return (
+    <div>
+      {value}
+      <Button handleClick={setToValue(1000)} text="thousand" /> // highlight-line
+      <Button handleClick={setToValue(0)} text="reset" /> // highlight-line
+      <Button handleClick={setToValue(value + 1)} text="increment" /> // highlight-line
+    </div>
+  )
+}
+```
 
 Komponentin <i>Button</i> käyttö on helppoa, mutta on toki pidettävä huolta siitä, että komponentille annettavat propsit on nimetty niin kuin komponentti olettaa:
 
@@ -1067,6 +1036,17 @@ Linkkejä:
 - Reactin sivuilla oleva [tutoriaali](https://reactjs.org/tutorial/tutorial.html) sen sijaan on aika huono.
 - [Egghead.io](https://egghead.io):n kursseista [Start learning React](https://egghead.io/courses/start-learning-react) on laadukas, ja hieman uudempi [The Beginner's guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) on myös kohtuullisen hyvä; molemmat sisältävät myös asioita, jotka tulevat tällä kurssilla vasta myöhemmissä osissa. Molemmissa on toki se ongelma, että ne käyttävät Class-komponentteja.
 
+### Webohjelmoijan vala
+
+Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+
+- pidän selaimen konsolin koko ajan auki
+- etenen pienin askelin
+- käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+
+
 </div>
 
 <div class="tasks">
@@ -1082,7 +1062,7 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 <h4> 1.6: unicafe step1</h4>
 
-Monien firmojen tapaan nykyään myös [Unicafe](https://www.unicafe.fi/#/9/4) kerää asiakaspalautetta. Tee Unicafelle verkossa toimiva palautesovellus. Vastausvaihtoehtoja olkoon vain kolme: <i>hyvä</i>, <i>neutraali</i> ja <i>huono</i>.
+Monien firmojen tapaan nykyään myös Helsingin yliopiston opiskelijaruokala [Unicafe](https://www.unicafe.fi) kerää asiakaspalautetta. Tee Unicafelle verkossa toimiva palautesovellus. Vastausvaihtoehtoja olkoon vain kolme: <i>hyvä</i>, <i>neutraali</i> ja <i>huono</i>.
 
 Sovelluksen tulee näyttää jokaisen palautteen lukumäärä. Sovellus voi näyttää esim. seuraavalta:
 
@@ -1095,7 +1075,6 @@ Kannattaa noudattaa samaa rakennetta kuin materiaalissa ja edellisessä tehtäv�
 ```js
 import ReactDOM from 'react-dom/client'
 import App from './App'
-
 
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
@@ -1183,7 +1162,6 @@ const Statistics = (props) => {
     </div>
   )
 }
-
 ```
 
 Sovelluksen tila säilytetään edelleen juurikomponentissa <i>App</i>.
@@ -1219,7 +1197,8 @@ const App = () => {
     'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
     'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
-    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.'
+    'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when dianosing patients.',
+    'The only way to go fast, is to go well.'
   ]
    
   const [selected, setSelected] = useState(0)

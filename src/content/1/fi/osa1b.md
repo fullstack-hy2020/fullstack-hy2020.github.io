@@ -9,13 +9,13 @@ lang: fi
 
 Kurssin aikana on web-sovelluskehityksen rinnalla tavoite ja tarve oppia riittävässä määrin JavaScriptia.
 
-JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2021 julkaistu [ES12](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2021.
+JavaScript on kehittynyt viime vuosina nopeaan tahtiin, ja käytämme kurssilla kielen uusimpien versioiden piirteitä. JavaScript-standardin virallinen nimi on [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Tämän hetken tuorein versio on kesäkuussa 2023 julkaistu [ES13](https://www.ecma-international.org/ecma-262/), toiselta nimeltään ECMAScript 2023.
 
 Selaimet eivät vielä osaa kaikkia JavaScriptin uusimpien versioiden ominaisuuksia. Tämän takia selaimessa suoritetaan useimmiten koodia, joka on käännetty (englanniksi <i>transpiled</i>) uudemmasta JavaScriptin versiosta johonkin vanhempaan, laajemmin tuettuun versioon.
 
 Tällä hetkellä johtava tapa tehdä transpilointi on [Babel](https://babeljs.io/). Create-react-app:in avulla luoduissa React-sovelluksissa on valmiiksi konfiguroitu automaattinen transpilaus. Katsomme kurssin [osassa 7](/osa7) tarkemmin miten transpiloinnin konfigurointi tapahtuu.
 
-[Node.js](https://nodejs.org/en/) on melkein missä vaan (mm. palvelimilla) toimiva, Googlen [Chrome V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScript-suoritusympäristö. Harjoitellaan hieman JavaScriptia Nodella. Tässä oletetaan, että koneellasi on Node.js:stä vähintään versio <i>16.13.2</i>. Noden tuoreet versiot osaavat suoraan JavaScriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
+[Node.js](https://nodejs.org/en/) on melkein missä vaan (mm. palvelimilla) toimiva, Googlen [Chrome V8](https://developers.google.com/v8/)-JavaScript-moottoriin perustuva JavaScript-suoritusympäristö. Harjoitellaan hieman JavaScriptia Nodella.  Noden tuoreet versiot osaavat suoraan JavaScriptin kohtuullisen uusia versioita, joten koodin transpilaus ei ole tarpeen.
 
 Koodi kirjoitetaan <i>.js</i>-päätteiseen tiedostoon ja suoritetaan komennolla <em>node tiedosto.js</em>
 
@@ -68,7 +68,7 @@ t.forEach(value => {
 })                    
 ```
 
-Huomaa, että taulukon sisältöä voi muuttaa, vaikka taulukko on määritelty _const_:ksi. Koska taulukko on <i>olio</i>, muuttuja viittaa koko ajan samaan olioon, jonka sisältö muuttuu kun taulukkoon lisätään uusia alkioita.
+Huomaa, että taulukon sisältöä voi muuttaa, vaikka taulukko on määritelty _const_:ksi. Tämä johtuu siitä, että taulukko on <i>olio</i>, muuttuja viittaa koko ajan samaan olioon, jonka sisältö muuttuu kun taulukkoon lisätään uusia alkioita.
 
 Eräs tapa käydä taulukon alkiot läpi on esimerkissä käytetty _forEach_, joka saa parametrikseen nuolisyntaksilla määritellyn <i>funktion</i>
 
@@ -138,7 +138,7 @@ const object1 = {
   education: 'Filosofian tohtori',
 }
 
-const object12 = {
+const object2 = {
   name: 'Full Stack -websovelluskehitys',
   level: 'aineopinto',
   size: 5,

@@ -529,7 +529,7 @@ We will continue to expand the application so that each user can be added to one
 
 Since an arbitrary number of users can join one team, and one user can join an arbitrary number of teams, we are dealing with a [many-to-many](https://sequelize.org/master/manual/assocs.html#many-to-many-relationships) relationship, which is traditionally implemented in relational databases using a <i>connection table</i>.
 
-Let's now create the code needed for the teams table as well as the connection table. The migration (saved in file <i>20211209_02_add_teams_and_memberships.js</i>) is as follows:
+Let's now create the code needed for the teams table as well as the connection table. The migration (saved in file <i>20211209\_02\_add\_teams\_and\_memberships.js</i>) is as follows:
 
 ```js
 const { DataTypes } = require('sequelize')

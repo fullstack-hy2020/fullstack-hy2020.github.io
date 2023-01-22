@@ -67,7 +67,9 @@ Virheiden ilmaantuessa <i>ylivoimaisesti huonoin strategia</i> on jatkaa koodin 
 
 Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Useimmilla Tietojenkäsittelytieteen osaston kursseilla on käytetty relaatiotietokantoja. Melkein kaikissa tämän kurssin osissa käytämme [MongoDB](https://www.mongodb.com/):tä, joka on ns. [dokumenttitietokanta](https://en.wikipedia.org/wiki/Document-oriented_database). 
 
-Tärkein syy Mongon käytölle kurssilla on se, että Mongo on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien node-sovellusten tekemiseen.
+Tärkein syy Mongon käytölle kurssilla on se, että Mongo on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien Node-sovellusten tekemiseen.
+
+Mongon valinta tämän kurssin alkuun on siis tehty enimmäkseen pedagogisista perusteista. Itse susoittelen useimiin sovelluksiin lähtökohtaisesti relaatiotietokantaa. Eli suosittelel lämpimästi tekemään myös tämän kurssin [Osan 13](https://fullstackopen.com/osa13). 
 
 Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokantoihin on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
@@ -95,20 +97,18 @@ Seuraavaksi tulee määritellä ne IP-osoitteet, joista tietokantaan pääsee k�
 
 ![Valitaan Network access -välilehdeltä 'Allow access from anywhere'](../../images/3/mongo4.png)
 
-Lopulta ollaan valmiina ottamaan tietokantayhteys. Klikataan <i>connect</i>:
+Lopulta ollaan valmiina ottamaan tietokantayhteys. Valitaan <i>connect</i> ja sen jälkeisestä näkymästä <i>connect your application</i>:
 
 ![Valitaan Databases-välilehdeltä 'Connect'](../../images/3/mongo5.png)
 
-Valitaan <i>Connect</i>:
+Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan:
 
-![näin avautuvasta näkymästä pitäisi löytyä connect-url](../../images/3/mongo6.png)
-
-Näkymä kertoo <i>MongoDB URI:n</i> eli osoitteen, jonka avulla sovelluksemme käyttämä MongoDB-kirjasto saa yhteyden kantaan.
+![näin avautuvasta näkymästä pitäisi löytyä connect-url](../../images/3/mongo6new.png)
 
 Osoite näyttää seuraavalta:
 
 ```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority
+mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
 ```
 
 Olemme nyt valmiina kannan käyttöön.
@@ -136,13 +136,13 @@ if (process.argv.length<3) {
 const password = process.argv[2]
 
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
+mongoose.set('strictQuery', false)
 mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
@@ -150,7 +150,6 @@ const Note = mongoose.model('Note', noteSchema)
 
 const note = new Note({
   content: 'HTML is Easy',
-  date: new Date(),
   important: true,
 })
 
@@ -172,14 +171,15 @@ Voimme tarkastella tietokannan tilaa MongoDB Atlasin hallintanäkymän <i>Browse
 
 ![Valitaan Databases-välilehdeltä 'Browse collections'](../../images/3/mongo7.png)
 
-Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>myFirstDatabase</i> kokoelmaan (collection) nimeltään <i>notes</i>:
+Kuten näkymä kertoo, on muistiinpanoa vastaava <i>dokumentti</i> lisätty tietokannan <i>test</i> kokoelmaan (collection) nimeltään <i>notes</i>:
 
-![Näkymä kertoo luodun tietokannan ja siihen sisältyvän kokoelman](../../images/3/mongo8.png)
+![Näkymä kertoo luodun tietokannan ja siihen sisältyvän kokoelman](../../images/3/mongo8new.png)
 
-Tuhotaan oletusarvoisen nimen saanut kanta <i>myFirstDatabase</i>. Päätetään käyttää tietokannasta nimeä <i>noteApp</i>, joten muutetaan tietokanta-URI muotoon
+Tuhotaan oletusarvoisen nimen saanut kanta <i>test</i>. Päätetään käyttää tietokannasta nimeä <i>noteApp</i>, joten muutetaan tietokanta-URI muotoon
 
-```bash
-mongodb+srv://fullstack:$<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
+```js
+const url =
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 ```
 
 Suoritetaan ohjelma uudelleen:
@@ -195,7 +195,6 @@ Yhteyden avaamisen jälkeen määritellään muistiinpanon [skeema](http://mongo
 ```js
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
@@ -217,7 +216,6 @@ Seuraavaksi tiedoston <i>mongo.js</i> sovellus luo muistiinpanoa vastaavan [mode
 ```js
 const note = new Note({
   content: 'HTML is Easy',
-  date: new Date(),
   important: false,
 })
 ```
@@ -256,7 +254,7 @@ Note.find({}).then(result => {
 
 Kun koodi suoritetaan, kantaan talletetut muistiinpanot tulostuvat:
 
-![Mongoon tallennetut muistiinpanot tulostuvat konsoliin, muistiinpanoilla on myös kenttä _id jonka Mongo on luonut](../../images/3/70ea.png)
+![Mongoon tallennetut muistiinpanot tulostuvat konsoliin, muistiinpanoilla on myös kenttä _id jonka Mongo on luonut](../../images/3/70new.png)
 
 Oliot haetaan kannasta _Note_-modelin metodilla [find](https://mongoosejs.com/docs/api.html#model_Model.find). Metodin parametrina on hakuehto. Koska hakuehtona on tyhjä olio <code>{}</code>, saimme kannasta kaikki _notes_-kokoelmaan talletetut oliot.
 
@@ -361,13 +359,13 @@ const mongoose = require('mongoose')
 
 // ÄLÄ KOSKAAN TALLETA SALASANOJA GitHubiin!
 const url =
-  `mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${fullstack@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
+mongoose.set('strictQuery',false)
 mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
@@ -404,7 +402,7 @@ noteSchema.set('toJSON', {
 
 Vaikka Mongoose-olioiden kenttä <i>\_id</i> näyttääkin merkkijonolta, se on todellisuudessa olio. Määrittelemämme metodi _toJSON_ muuttaa sen merkkijonoksi kaiken varalta. Jos emme tekisi muutosta, siitä aiheutuisi ylimääräistä harmia testien yhteydessä.
 
-Palautetaan HTTP-pyynnön vastauksena _toJSON_-metodin avulla muotoiltuja oliota:
+Muistiinpanojen hakemisesta vastaavaan käsittelijään ei tarvitse tehdä muutoksia eli seuraava koodi
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -414,7 +412,7 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Nyt siis muuttujassa _notes_ on taulukollinen MongoDB:n palauttamia olioita. Kun taulukko lähetetään JSON-muotoisena vastauksena, jokaisen taulukon olion _toJSON_-metodia kutsutaan automaattisesti [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)-metodin toimesta.
+kutsuu jokaiselle tietokannasta luettavalle muistiinpanolle automaattisesti metodia _toJSON_ muodostaessaan vastausta.
 
 ### Tietokantamäärittelyjen eriyttäminen moduuliksi
 
@@ -424,6 +422,8 @@ Tehdään moduulia varten hakemisto <i>models</i> ja sinne tiedosto <i>note.js</
 
 ```js
 const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
 
 const url = process.env.MONGODB_URI // highlight-line
 
@@ -440,7 +440,6 @@ mongoose.connect(url)
 
 const noteSchema = new mongoose.Schema({
   content: String,
-  date: Date,
   important: Boolean,
 })
 
@@ -492,7 +491,7 @@ Yhteyden muodostavalle metodille on nyt rekisteröity onnistuneen ja epäonnistu
 On useita tapoja määritellä ympäristömuuttujan arvo. Voimme esim. antaa sen ohjelman käynnistyksen yhteydessä seuraavasti:
 
 ```bash
-MONGODB_URI=osoite_tahan npm run watch
+MONGODB_URI=osoite_tahan npm run dev
 ```
 
 Eräs kehittyneempi tapa on käyttää [dotenv](https://github.com/motdotla/dotenv#readme)-kirjastoa. Asennetaan kirjasto komennolla
@@ -536,19 +535,9 @@ app.listen(PORT, () => {
 
 On tärkeää, että <i>dotenv</i> otetaan käyttöön ennen modelin <i>note</i> importtaamista. Tällöin varmistutaan siitä, että tiedostossa <i>.env</i> olevat ympäristömuuttujat ovat alustettuja kun moduulin koodia importoidaan.
 
-Kannattaa huomata että kun .env on gitignorattu, ei Heroku saa tietoonsa tietokannan osoitetta repositoriosta, vaan se on asetettava itse.
+### Tärkeä huomio Fly.io:n käyttäjille 
 
-Herokussa ympäristömuuttujan arvo voidaan asettaa dashboardin kautta menemällä asetuksiin:
-
-![urlin https://dashboard.heroku.com/apps/sovelluksen_nimi/settings näkymä mahdollistaa key-value-pareina talletettavien ympäristömuuttujien tallentamisen](../../images/3/herokuConfig.png)
-
-Toinen vaihtoehto on kertoa ympäristömuuttujan Herokulle arvo komentoriviltä
-
-```
-heroku config:set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
-```
-
-Koska Fly.io ei hyödynnä GitHubia, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujan arvo välittyy myös sinne.
+Koska Fly.io ei hyödynnä gitiä, menee myös .env-tiedosto Fly.io:n palvelimelle, ja ympäristömuuttujien arvo välittyy myös sinne.
 
 [Tietoturvallisempi vaihtoehto](https://community.fly.io/t/clarification-on-environment-variables/6309) on kuitenkin estää tiedoston .env siirtyminen Fly.io:n tekemällä hakemiston juureen tiedosto _.dockerignore_, jolla on sisältö
 
@@ -561,6 +550,12 @@ ja asettaa ympäristömuuttujan arvo komennolla:
 ```
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
+
+Koska .env-tiedosto määrittelee myös ympäristömuuttujan PORT arvon, on .env:in ignorointi oikeastaan välttämätöntä jotta sovellus ei yritä käynnistää itseään väärään portiin.
+
+Renderiä käytettäessä tietokannan osoitteen kertova ympäristömuuttuja määritellään dashboardista käsin:
+
+![](../../images/3/render-env.png)
 
 ### Tietokannan käyttö reittien käsittelijöissä
 
@@ -579,7 +574,6 @@ app.post('/api/notes', (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save().then(savedNote => {
@@ -590,7 +584,7 @@ app.post('/api/notes', (request, response) => {
 
 Muistiinpano-oliot siis luodaan _Note_-konstruktorifunktiolla. Pyyntöön vastataan _save_-operaation takaisinkutsufunktion sisällä. Näin varmistutaan, että operaation vastaus tapahtuu vain, jos operaatio on onnistunut. Palaamme virheiden käsittelyyn myöhemmin.
 
-Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin siitä metodilla _toJSON_ formatoitu muoto:
+Takaisinkutsufunktion parametrina oleva _savedNote_ on talletettu muistiinpano. HTTP-pyyntöön palautetaan kuitenkin automaattisesti siitä metodilla _toJSON_ formatoitu muoto:
 
 ```js
 response.json(savedNote)
@@ -610,7 +604,7 @@ app.get('/api/notes/:id', (request, response) => {
 
 Kun backendia laajennetaan, kannattaa sitä testailla aluksi **ehdottomasti selaimella, Postmanilla tai VS Coden REST Clientillä**. Seuraavassa kokeillaan uuden muistiinpanon luomista tietokannan käyttöönoton jälkeen:
 
-![Luotaessa VS coden rest clientillä muistiinpano, avautuva näkymä havainnollistaa HTTP-kutsuun saatua vastausta](../../images/3/46e.png)
+![Luotaessa VS coden rest clientillä muistiinpano, avautuva näkymä havainnollistaa HTTP-kutsuun saatua vastausta](../../images/3/46new.png)
 
 Vasta kun kaikki on todettu toimivaksi, kannattaa siirtyä testailemaan, että muutosten jälkeinen backend toimii yhdessä myös frontendin kanssa. Kaikkien kokeilujen tekeminen ainoastaan frontendin kautta on todennäköisesti varsin tehotonta.
 
@@ -880,7 +874,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin. Päivämäärän muuttaminen ei ole mahdollista.
+Operaatio mahdollistaa myös muistiinpanon sisällön editoinnin.
 
 Huomaa, että metodin <em>findByIdAndUpdate</em> parametrina tulee antaa normaali JavaScript-olio eikä uuden olion luomisessa käytettävä <em>Note</em>-konstruktorifunktiolla luotu olio.
 

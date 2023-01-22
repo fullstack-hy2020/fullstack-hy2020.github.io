@@ -147,7 +147,7 @@ Ahora, cuando pasamos el cursor sobre el tipo <i>Operation</i> en la función ca
 
 Y si intentamos usar un valor que no está dentro del tipo <i>Operation</i>, obtenemos la conocida señal de advertencia roja e información adicional de nuestro editor:
 
-![](../../images/9/4.png)
+![](../../images/9/4x.png)
 
 Esto ya es bastante bueno, pero una cosa que aún no hemos tocado es tipear el valor de retorno de una función. Por lo general, desea saber qué devuelve una función, y sería bueno tener una garantía de que realmente devuelve lo que dice. Agreguemos un valor de retorno <i>number</i> a la función de calculadora:
 
@@ -574,7 +574,7 @@ Cuando pasamos el cursor sobre la declaración <i>require</i>, podemos ver que e
 
 Mientras que cuando usamos <i>import</i>, el editor conoce los tipos reales
 
-![](../../images/9/9a.png)
+![](../../images/9/9x.png)
 
 La declaración de importación que se utilizará depende del método de exportación utilizado en el paquete importado.
 
@@ -726,11 +726,11 @@ app.get('/calculate', (req, res) => {
 
 Cuando pasa el cursor sobre la función <i>calculate</i>, puede ver el tipeado de <i>calculator</i> aunque el código en sí no contiene ningun tipying:
 
-![](../../images/9/12a.png)
+![](../../images/9/12a21.png)
 
 Pero si pasa el cursor sobre los valores del request, surge un problema:
 
-![](../../images/9/13a.png)
+![](../../images/9/13a21.png)
 
 Todas las variables tienen el tipo <i>any</i>. No es tan sorprendente, ya que nadie les ha dado un tipo todavía. Hay un par de maneras de solucionar este problema, pero la primera que tenemos que considerar por qué esto es aceptado y de dónde el tipo <i>any</i> viene?
 
