@@ -410,9 +410,9 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-and this blows up the app since we can not call method _filter_ of the value _null_. 
+and this blows up the app since we can not call method _map_ of the value _null_. 
 
-When we set _notes_ to be initially an empty array, there is no error since it is allowed to call _filter_ to an empty array.
+When we set _notes_ to be initially an empty array, there is no error since it is allowed to call _map_ to an empty array.
 
 So, the initialization of the state "masked" the problem that is caused by the fact that the data is not yet fetched from the backend.
 

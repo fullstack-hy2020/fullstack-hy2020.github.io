@@ -13,7 +13,7 @@ We will now implement support for [token-based authentication](https://scotch.io
 
 The principles of token-based authentication are depicted in the following sequence diagram: 
 
-![sequence diagram of token-based authentication](../../images/4/16e.png)
+![sequence diagram of token-based authentication](../../images/4/16new.png)
 
 - User starts by logging in using a login form implemented with React 
     - We will add the login form to the frontend in [part 5](/en/part5) 
@@ -119,7 +119,7 @@ It does not work. The following is printed to the console:
 (node:32911) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
 ```
 
-The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set a value to the environment variable <i>SECRET</i>. It can be any string. When we set the value in file <i>.env</i>, the login works. 
+The command _jwt.sign(userForToken, process.env.SECRET)_ fails. We forgot to set a value to the environment variable <i>SECRET</i>. It can be any string. When we set the value in file <i>.env</i> (and restart the server), the login works. 
 
 A successful login returns the user details and the token: 
 
@@ -131,8 +131,7 @@ A wrong username or password returns an error message and the proper status code
 
 ### Limiting creating new notes to logged-in users
 
-Let's change creating new notes so that it is only possible if the post request has a valid token attached. 
-The note is then saved to the notes list of the user identified by the token. 
+Let's change creating new notes so that it is only possible if the post request has a valid token attached. The note is then saved to the notes list of the user identified by the token. 
 
 There are several ways of sending the token from the browser to the server. We will use the [Authorization](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Authorization) header. The header also tells which [authentication scheme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Authentication#Authentication_schemes) is used. This can be necessary if the server offers multiple ways to authenticate. 
 Identifying the scheme tells the server how the attached credentials should be interpreted. 
@@ -154,8 +153,8 @@ const jwt = require('jsonwebtoken') //highlight-line
   //highlight-start
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
   }
   return null
 }
@@ -164,11 +163,9 @@ const getTokenFrom = request => {
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 //highlight-start
-  const token = getTokenFrom(request)
-
-  const decodedToken = jwt.verify(token, process.env.SECRET)
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
   if (!decodedToken.id) {
-    return response.status(401).json({ error: 'token missing or invalid' })
+    return response.status(401).json({ error: 'token invalid' })
   }
 
   const user = await User.findById(decodedToken.id)
@@ -177,7 +174,6 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
-    date: new Date(),
     user: user._id
   })
 
@@ -189,10 +185,28 @@ notesRouter.post('/', async (request, response) => {
 })
 ```
 
-The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on. If there is no token passed, it will return the error <i>"jwt must be provided"</i>.
+The helper function _getTokenFrom_ isolates the token from the <i>authorization</i> header. The validity of the token is checked with _jwt.verify_. The method also decodes the token, or returns the Object which the token was based on.
 
 ```js
 const decodedToken = jwt.verify(token, process.env.SECRET)
+```
+
+If the token is missing or is it invalid, the exception <i>JsonWebTokenError</i> is raised. We need to extend the error handling middleware to take care of this particular case:
+
+```js
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name ===  'JsonWebTokenError') { // highlight-line
+    return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
+  }
+
+  next(error)
+}
 ```
 
 The object decoded from the token contains the <i>username</i> and <i>id</i> fields, which tell the server who made the request. 
@@ -202,7 +216,7 @@ If the object decoded from the token does not contain the user's identity (_deco
 ```js
 if (!decodedToken.id) {
   return response.status(401).json({
-    error: 'token missing or invalid'
+    error: 'token invalid'
   })
 }
 ```
@@ -218,46 +232,6 @@ Using Postman this looks as follows:
 and with Visual Studio Code REST client
 
 ![vscode adding bearer token example](../../images/4/21e.png)
-
-### Error handling
-
-Token verification can also cause a <i>JsonWebTokenError</i>. If we for example remove a few characters from the token and try creating a new note, this happens: 
-
-```bash
-JsonWebTokenError: invalid signature
-    at /Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:126:19
-    at getSecret (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:80:14)
-    at Object.module.exports [as verify] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:84:10)
-    at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
-```
-
-There are many possible reasons for a decoding error. The token can be faulty (like in our example), falsified, or expired. Let's extend our errorHandler middleware to take into account the different decoding errors. 
-
-```js
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
-const errorHandler = (error, request, response, next) => {
-  if (error.name === 'CastError') {
-    return response.status(400).send({
-      error: 'malformatted id'
-    })
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({
-      error: error.message 
-    })
-  } else if (error.name === 'JsonWebTokenError') {  // highlight-line
-    return response.status(401).json({ // highlight-line
-      error: 'invalid token' // highlight-line
-    }) // highlight-line
-  }
-
-  logger.error(error.message)
-
-  next(error)
-}
-```
 
 Current application code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branch <i>part4-9</i>.
 
@@ -521,34 +495,5 @@ After adding token-based authentication the tests for adding a new blog broke do
 [This](https://github.com/visionmedia/supertest/issues/398) is most likely useful when doing the fix.
 
 This is the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
-<!---
-note left of user
-  user fills in login form with
-  username and password
-end note
-user -> browser: login button pressed
-
-browser -> backend: HTTP POST /api/login { username, password }
-note left of backend
-  backend generates TOKEN that identifies user 
-end note
-backend -> browser: TOKEN returned as message body 
-note left of browser
-  browser saves TOKEN
-end note
-note left of user
-  user creates a note
-end note
-user -> browser: create note button pressed
-browser -> backend: HTTP POST /api/notes { content } TOKEN in header
-note left of backend
-  backend identifies userfrom the TOKEN
-end note
-
-backend -> browser: 201 created
-
-user -> user:
--->
 
 </div>

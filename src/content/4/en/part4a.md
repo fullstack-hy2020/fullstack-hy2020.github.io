@@ -7,12 +7,9 @@ lang: en
 
 <div class="content">
 
-
 Let's continue our work on the backend of the notes application we started in [part 3](/en/part3). 
 
-
 ### Project structure
-
 
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 
@@ -61,18 +58,17 @@ The contents of the <i>index.js</i> file used for starting the application gets 
 
 ```js
 const app = require('./app') // the actual Express application
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
 
 The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application. The function _info_ of the logger-module is used for the console printout telling that the application is running.
+
+Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) [practices](https://nodejsbestpractices.com/sections/projectstructre/separateexpress). One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
 
 The handling of environment variables is extracted into a separate <i>utils/config.js</i> file:
 
@@ -221,6 +217,8 @@ const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
 
 logger.info('connecting to', config.MONGODB_URI)
 
@@ -530,10 +528,10 @@ Let's define the <i>npm script _test_</i> to execute tests with Jest and to repo
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
     "lint": "eslint .",
     "test": "jest --verbose" // highlight-line
   },
@@ -549,14 +547,6 @@ Jest requires one to specify that the execution environment is Node. This can be
  "jest": {
    "testEnvironment": "node"
  }
-}
-```
-
-Alternatively, Jest can look for a configuration file with the default name <i>jest.config.js</i>, where we can define the execution environment like this:
-
-```js
-module.exports = {
-  testEnvironment: 'node',
 }
 ```
 
@@ -594,13 +584,7 @@ module.exports = {
     'node': true,
     'jest': true, // highlight-line
   },
-  'extends': 'eslint:recommended',
-  'parserOptions': {
-    'ecmaVersion': 12
-  },
-  "rules": {
-    // ...
-  },
+  // ...
 }
 ```
 
@@ -680,9 +664,7 @@ const average = array => {
 }
 ```
 
-
 If the length of the array is 0 then we return 0, and in all other cases, we use the _reduce_ method to calculate the average.
-
 
 There are a few things to notice about the tests that we just wrote. We defined a <i>describe</i> block around the tests that were given the name _average_:
 
@@ -710,15 +692,11 @@ test('of empty array is zero', () => {
 
 <div class="tasks">
 
-
 ### Exercises 4.3.-4.7.
-
 
 Let's create a collection of helper functions that are meant to assist in dealing with the blog list. Create the functions into a file called <i>utils/list_helper.js</i>. Write your tests into an appropriately named test file under the <i>tests</i> directory.
 
-
 #### 4.3: helper functions and unit tests, step1
-
 
 First, define a _dummy_ function that receives an array of blog posts as a parameter and always returns the value 1. The contents of the <i>list_helper.js</i> file at this point should be the following:
 
@@ -731,7 +709,6 @@ module.exports = {
   dummy
 }
 ```
-
 
 Verify that your test configuration works with the following test:
 
@@ -746,17 +723,13 @@ test('dummy returns one', () => {
 })
 ```
 
-
 #### 4.4: helper functions and unit tests, step2
 
-
 Define a new _totalLikes_ function that receives a list of blog posts as a parameter. The function returns the total sum of <i>likes</i> in all of the blog posts.
-
 
 Write appropriate tests for the function. It's recommended to put the tests inside of a <i>describe</i> block so that the test report output gets grouped nicely:
 
 ![npm test passing for list_helper_test](../../images/4/5.png)
-
 
 Defining test inputs for the function can be done like this:
 
@@ -828,7 +801,6 @@ Define a function called _mostBlogs_ that receives an array of blogs as a parame
 If there are many top bloggers, then it is enough to return any one of them.
 
 #### 4.7*: helper functions and unit tests, step5
-
 
 Define a function called _mostLikes_ that receives an array of blogs as its parameter. The function returns the author, whose blog posts have the largest amount of likes. The return value also contains the total number of likes that the author has received:
 

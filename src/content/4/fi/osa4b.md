@@ -15,7 +15,7 @@ Koska sovelluksemme backend on koodiltaan kuitenkin suhteellisen yksinkertainen,
 
 ### test-ympäristö
 
-Edellisen osan luvussa [Tietokantaa käyttävän version vieminen tuotantoon](/osa3/validointi_ja_es_lint#tietokantaa-kayttavan-version-vieminen-tuotantoon) mainitsimme, että kun sovellusta suoritetaan Herokussa, on se <i>production</i>-moodissa.
+Edellisen osan luvussa [Tietokantaa käyttävän version vieminen tuotantoon](/osa3/validointi_ja_es_lint#tietokantaa-kayttavan-version-vieminen-tuotantoon) mainitsimme, että kun sovellusta suoritetaan tuotantopalvelimella eli esim. Fly.io:ssa tai Renderissä, on se <i>production</i>-moodissa.
 
 Noden konventiona on määritellä projektin suoritusmoodi ympäristömuuttujan <i>NODE\_ENV</i> avulla. Yleinen käytäntö on määritellä sovelluksille omat moodinsa tuotantokäyttöön, sovelluskehitykseen ja testaukseen.
 
@@ -27,10 +27,11 @@ Määritellään nyt tiedostossa <i>package.json</i>, että testejä suoritettae
   "scripts": {
     "start": "NODE_ENV=production node index.js",// highlight-line
     "dev": "NODE_ENV=development nodemon index.js",// highlight-line
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
+    "lint": "eslint .",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
@@ -67,7 +68,7 @@ Nyt sovelluksen toimintaa on mahdollista muokata sen suoritusmoodiin perustuen. 
 
 Sovelluksen testikanta voidaan luoda tuotantokäytön ja sovelluskehityksen tapaan Mongo DB Atlasiin. Ratkaisu ei ole optimaalinen, erityisesti jos sovellusta on tekemässä yhtä aikaa useita henkilöitä. Testien suoritus nimittäin yleensä edellyttää, että samaa tietokantainstanssia ei ole yhtä aikaa käyttämässä useampia testiajoja.
 
-Testaukseen kannattaisikin käyttää verkossa olevan jaetun tietokannan sijaan mieluummin sovelluskehittäjän paikallisella koneella olevaa tietokantaa. Optimiratkaisu olisi tietysti se, että jokaista testiajoa varten olisi käytettävissä oma tietokanta, sekin periaatteessa onnistuu "suhteellisen helposti" mm. [keskusmuistissa toimivan Mongon](https://docs.mongodb.com/manual/core/inmemory/) ja [docker](https://www.docker.com)-kontainereiden avulla. Etenemme kuitenkin nyt lyhyemmän kaavan mukaan ja käytämme testikantana normaalia Mongoa.
+Testaukseen kannattaisikin käyttää verkossa olevan jaetun tietokannan sijaan mieluummin sovelluskehittäjän paikallisella koneella olevaa tietokantaa. Optimiratkaisu olisi tietysti se, että jokaista testiajoa varten olisi käytettävissä oma tietokanta, sekin periaatteessa onnistuu "suhteellisen helposti" mm. [keskusmuistissa toimivan Mongon](https://docs.mongodb.com/manual/core/inmemory/) ja [Docker](https://www.docker.com)-kontainereiden avulla. Etenemme kuitenkin nyt lyhyemmän kaavan mukaan ja käytämme testikantana normaalia Mongoa.
 
 Muutetaan konfiguraatiot suorittavaa moduulia seuraavasti:
 
@@ -131,8 +132,8 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+afterAll(async () => {
+  await mongoose.connection.close()
 })
 ```
 
@@ -140,13 +141,29 @@ Testi importtaa tiedostoon <i>app.js</i> määritellyn Express-sovelluksen ja k�
 
 Testimetodi tekee HTTP GET -pyynnön osoitteeseen <i>api/notes</i> ja varmistaa, että pyyntöön vastataan statuskoodilla 200 ja että data palautetaan oikeassa muodossa, eli että <i>Content-Type</i>:n arvo on <i>application/json</i>.
 
+Headerin arvon tarkastaminen näyttää syntaksiltaan hieman kummalliselta:
+
+```js
+.expect('Content-Type', /application\/json/)
+```
+
+Haluttu arvo on nyt määritelty [regexinä](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) eli suomeksi säännöllisenä lausekkeena. Regex alkaa ja loppuu vinoviivaan /, koska haluttu merkkijono <i>application/json</i> myös sisältää saman vinoviivan, on sen eteen laitettu \ jotta sitä ei tulkita regexin lopetusmerkiksi.
+
+Periaatteessa testi olisi voitu määritellä myös normaalina merkkijonona
+
+```js
+.expect('Content-Type', 'application/json')
+```
+
+Tässä ongelmana on kuitenkin se, että käytettäessä merkkijonoa, tulee headerin arvon olla täsmälleen sama. Määrittelemällemme regexille kelpaa että header <i>sisältää</i> kyseisen merkkijonon. Headerin todellinen arvo on <i>application/json; charset=utf-8</i>, eli se sisältää myös tiedon merkistökoodauksesta. Testimme ei kuitenkaan ole tästä kiinnostunut ja siksi testi on parempi määritellä tarkan merkkijonon sijaan regexinä.
+
 Testissä on muutama detalji joihin tutustumme vasta [hieman myöhemmin](/osa4/backendin_testaaminen#async-await) tässä osassa. Testikoodin määrittelevä nuolifunktio alkaa sanalla <i>async</i>, ja <i>api</i>-oliolle tehtyä metodikutsua edeltää sana <i>await</i>. Teemme ensin muutamia testejä ja tutustumme sen jälkeen async/await-magiaan. Tällä hetkellä niistä ei tarvitse välittää, sillä kaikki toimii kunhan kirjoitat testimetodit esimerkin mukaan. Async/await-syntaksin käyttö liittyy siihen, että palvelimelle tehtävät pyynnöt ovat <i>asynkronisia</i> operaatioita. [Async/await-kikalla](https://jestjs.io/docs/asynchronous) saamme pyynnön näyttämään koodin tasolla synkronisesti toimivalta.
 
 Kaikkien testien (joita siis tällä kertaa on vain yksi) päätteeksi on vielä lopputoimenpiteenä katkaistava Mongoosen käyttämä tietokantayhteys. Tämä onnistuu helposti metodissa [afterAll](https://jestjs.io/docs/api#afterallfn-timeout):
 
 ```js
-afterAll(() => {
-  mongoose.connection.close()
+afterAll(async () => {
+  await mongoose.connection.close()
 })
 ```
 
@@ -154,24 +171,29 @@ Testejä suorittaessa tulee seuraava ilmoitus:
 
 ![Virheilmoitus Jest did not exit one second after the test run has completed](../../images/4/8.png)
 
-Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
+Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei välttämättä suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
 
-Virheilmoituksesta pääsee eroon lisäämällä testien suoritukseen option <i>--forceExit</i>:
+Virheilmoituksesta pääsee eroon muutamallakin tavalla. [Esimerkiksi](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) lisäämällä hakemistoon <i>tests</i> tiedosto <i>teardown.js</i> jolla on seuraava sisältö
 
-```json
-{
-  // ..
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
-  },
-  // ...
+```js
+module.exports = () => {
+  process.exit(0)
 }
 ```
 
-Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#sovelluksen-rakenne) Express-sovelluksen tiedostoon <i>app.js</i>, ja tiedoston <i>index.js</i> rooliksi jäi sovelluksen käynnistäminen määriteltyyn porttiin Noden <i>http</i>-olion avulla:
+ja lajentamalla tiedoston <i>package.json</i> Jestiä koskevaa määrittelyä seuraavasti
+
+```js
+{
+ //...
+ "jest": {
+   "testEnvironment": "node"
+   "globalTeardown": "./tests/teardown.js" // highlight-line
+ }
+}
+```
+
+Pieni mutta tärkeä huomio: eristimme tämän osan [alussa](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet#sovelluksen-rakenne) Express-sovelluksen tiedostoon <i>app.js</i>, ja tiedoston <i>index.js</i> rooliksi jäi sovelluksen käynnistäminen määriteltyyn porttiin <i>http</i>-olion avulla:
 
 ```js
 const app = require('./app') // varsinainen Express-sovellus
@@ -203,6 +225,8 @@ SuperTestin dokumentaatio toteaa seuraavaa:
 > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>
 
 SuperTest siis huolehtii testattavan sovelluksen käynnistämisestä sisäisesti käyttämäänsä porttiin.
+
+Lisätään tiedoston _mongo.js_ ohjelmaa käyttämällä testitietokantaan kaksi muistiinpanoa (tässä kohtaa on muistettava vaihtaa käyttöön oikea tietokantaurl).
 
 Tehdään pari testiä lisää:
 
@@ -251,7 +275,6 @@ const error = (...params) => {
   // highlight-end  
 }
 
-
 module.exports = {
   info, error
 }
@@ -259,7 +282,7 @@ module.exports = {
 
 ### Tietokannan alustaminen ennen testejä
 
-Testaus vaikuttaa helpolta ja testit menevät läpi. Testimme ovat kuitenkin huonoja, sillä niiden läpimeno riippuu tietokannan tilasta (joka sattuu omassa testikannassani olemaan sopiva). Jotta saisimme robustimmat testit, tulee tietokannan tila nollata testien alussa ja sen jälkeen laittaa kantaan hallitusti testien tarvitsema data.
+Testaus vaikuttaa helpolta ja testit menevät läpi. Testimme ovat kuitenkin huonoja, sillä niiden läpimeno riippuu tietokannan tilasta, jossa nyt sattuu olemaan kaksi muistiinpanoa. Jotta saisimme robustimmat testit, tulee tietokannan tila nollata testien alussa ja sen jälkeen laittaa kantaan hallitusti testien tarvitsema data.
 
 Testimme käyttää jo nyt Jestin metodia [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) sulkemaan tietokannan testien suoritusten jälkeen. Jest tarjoaa joukon muitakin [funktioita](https://jestjs.io/docs/setup-teardown), joiden avulla voidaan suorittaa operaatioita ennen yhdenkään testin suorittamista tai ennen jokaisen testin suoritusta.
 
@@ -278,12 +301,10 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false,
   },
   {
-    content: 'Browser can execute only Javascript',
-    date: new Date(),
+    content: 'Browser can execute only JavaScript',
     important: true,
   },
 ]
@@ -320,7 +341,7 @@ test('a specific note is within the returned notes', async () => {
   const contents = response.body.map(r => r.content) // highlight-line
 
   expect(contents).toContain(
-    'Browser can execute only Javascript' // highlight-line
+    'Browser can execute only JavaScript' // highlight-line
   )
 })
 ```
@@ -483,7 +504,6 @@ notesRouter.post('/', (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save()
@@ -527,18 +547,16 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false
   },
   {
-    content: 'Browser can execute only Javascript',
-    date: new Date(),
+    content: 'Browser can execute only JavaScript',
     important: true
   }
 ]
 
 const nonExistingId = async () => {
-  const note = new Note({ content: 'willremovethissoon', date: new Date() })
+  const note = new Note({ content: 'willremovethissoon' })
   await note.save()
   await note.remove()
 
@@ -596,7 +614,7 @@ test('a specific note is within the returned notes', async () => {
 
   const contents = response.body.map(r => r.content)
   expect(contents).toContain(
-    'Browser can execute only Javascript'
+    'Browser can execute only JavaScript'
   )
 })
 
@@ -637,9 +655,9 @@ test('note without content is not added', async () => {
   expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
-afterAll(() => {
-  mongoose.connection.close()
-}) 
+afterAll(async () => {
+  await mongoose.connection.close()
+})
 ```
 
 Promiseja käyttävä koodi toimii nyt ja testitkin menevät läpi. Olemme valmiit muuttamaan koodin käyttämään async/await-syntaksia.
@@ -653,7 +671,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   const savedNote = await note.save()
@@ -680,7 +697,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
   // highlight-start
   try {
@@ -712,9 +728,7 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
-
-  expect(resultNote.body).toEqual(processedNoteToView)
+  expect(resultNote.body).toEqual(noteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -740,8 +754,6 @@ test('a note can be deleted', async () => {
 ```
 
 Molemmat testit ovat rakenteeltaan samankaltaisia. Alustusvaiheessa ne hakevat kannasta yksittäisen muistiinpanon. Tämän jälkeen on itse testattava operaatio, joka on koodissa korostettuna. Lopussa tarkastetaan, että operaation tulos on haluttu. 
-
-Ensimmäisessä testissä note-objekti, jonka saamme palvelimelta vastauksena, käy läpi JSON-serialisoinnin ja -parsimisen. Tämän prosessoinnin seurauksena note-objektin <em>date</em> kentän arvon tyyppi muuttuu <em>Date</em>-objektista merkkijonoksi. Tämän takia emme voi suoraan verrata <em>resultNote.body</em>-muuttujaa ja suoraan tietokannasta luettua <em>noteToView</em>-muuttujaa. Sen sijaan meidän täytyy ensin suorittaa <em>noteToView</em>-muuttujalle samanlainen JSON-serialisointi ja -parsiminen kuin minkä palvelin suorittaa note-objektille.
 
 Testit menevät läpi, joten voimme turvallisesti refaktoroida testatut routet käyttämään async/awaitia:
 
@@ -844,7 +856,6 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   const savedNote = await note.save()
@@ -856,7 +867,7 @@ notesRouter.get('/:id', async (request, response) => {
   if (note) {
     response.json(note)
   } else {
-    response.status(404).end()
+    response.status(201).json(savedNote)
   }
 })
 ```
@@ -962,6 +973,22 @@ beforeEach(async () => {
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), haarassa <i>part4-5</i>. 
 
+### Testejä tekevän full stack -sovelluskehittäjän vala
+
+Testien tekeminen tuo ohjelmointiin jälleen uuden kerroksen haasteellisuutta. Joudumme päivittämään full stack -kehittäjän valaamme muistuttamaan siitä että sytemaattisuus on myös testejä kehitettäessä avainasemassa.
+
+Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+
+- pidän selaimen konsolin koko ajan auki
+- tarkkailen säännöllisesti selaimen network-välilehdeltä, että frontendin ja backendin välinen kommunikaatio tapahtuu oletusteni mukaan
+- tarkkailen säännöllisesti palvelimella olevan datan tilaa, ja varmistan että frontendin lähettämä data siirtyy sinne kuten oletin
+- pidän silmällä tietokannan tilaa: varmistan että backend tallentaa datan sinne oikeaan muotoon
+- etenen pienin askelin
+- <i>käytän koodissa ja testeissä runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani rivin, sekä etsiessäni koodista tai testeistä mahdollisia ongelman aiheuttajia</i>
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
+- <i>jos testit eivät mene läpi, varmistan että testien testaama toiminnallisuus varmasti toimii sovelluksessa</i>
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+
 </div>
 
 <div class="tasks">
@@ -984,26 +1011,29 @@ Huomaa, että joudut tekemään koodiin [materiaalin tapaan](/osa4/backendin_tes
 
 ![Virheilmotus Mongoose: looks like you're trying to test Mongoose app with Jest's default jsdomain environment.](../../images/4/8a.png)
 
-Kyse lienee Mongoosen version 6.x aiheuttamasta ongelmasta, versiossa 5.x ei samaa virhettä esiinny. Itseasiassa [Mongoosen dokumentaatio](https://mongoosejs.com/docs/jest.html) ei suosittele Mongoosea käyttävien sovellusten testaamista Jestillä.
+Virheilmoituksesta pääsee eroon muutamallakin tavalla. [Esimerkiksi](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) lisäämällä hakemistoon <i>tests</i> tiedosto <i>teardown.js</i> jolla on seuraava sisältö
 
-Virheilmoituksesta pääsee eroon lisäämällä testien suoritukseen option <i>--forceExit</i>:
+```js
+module.exports = () => {
+  process.exit(0)
+}
+```
 
-```json
+ja lajentamalla tiedoston <i>package.json</i> Jestiä koskevaa määrittelyä seuraavasti
+
+```js
 {
-  // ..
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
-  },
-  // ...
+ //...
+ "jest": {
+   "testEnvironment": "node"
+   "globalTeardown": ".test/teardown.js" // highlight-line
+ }
 }
 ```
 
 **HUOM 2:** Testien kehitysvaiheessa yleensä **<i>ei kannata suorittaa joka kerta kaikkia testejä</i>**, vaan keskittyä yhteen testiin kerrallaan. Katso lisää [täältä](/osa4/backendin_testaaminen#testien-suorittaminen-yksitellen).
 
-#### 4.9*: blogilistan testit, step2
+#### 4.9: blogilistan testit, step2
 
 Tee testi, joka varmistaa että palautettujen blogien identifioivan kentän tulee olla nimeltään <i>id</i>. Oletusarvoisestihan tietokantaan talletettujen olioiden tunnistekenttä on <i>_id</i>. Olion kentän olemassaolon tarkastaminen onnistuu Jestin matcherillä [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined).
 
@@ -1023,7 +1053,7 @@ Laajenna ohjelmaa siten, että testi menee läpi.
 
 #### 4.12*: blogilistan testit, step5
 
-Tee testit blogin lisäämiselle eli osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP POST -pyynnölle. Testin tulee varmistaa, että jos uusi blogi ei sisällä kenttiä <i>title</i> ja <i>url</i>, pyyntöön vastataan statuskoodilla <i>400 Bad Request</i>.
+Tee testit blogin lisäämiselle eli osoitteeseen <i>/api/blogs</i> tapahtuvalle HTTP POST -pyynnölle jotka varmistavat, että jos uusi blogi ei sisällä kenttää <i>title</i> tai kenttää <i>url</i>, pyyntöön vastataan statuskoodilla <i>400 Bad Request</i>.
 
 Laajenna toteutusta siten, että testit menevät läpi.
 
@@ -1070,7 +1100,7 @@ describe('when there is initially some notes saved', () => {
 
     const contents = response.body.map(r => r.content)
     expect(contents).toContain(
-      'Browser can execute only Javascript'
+      'Browser can execute only JavaScript'
     )
   })
 
@@ -1086,15 +1116,11 @@ describe('when there is initially some notes saved', () => {
         .expect(200)
         .expect('Content-Type', /application\/json/)
       
-      const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
-
-      expect(resultNote.body).toEqual(processedNoteToView)
+      expect(resultNote.body).toEqual(noteToView)
     })
 
     test('fails with statuscode 404 if note does not exist', async () => {
       const validNonexistingId = await helper.nonExistingId()
-
-      console.log(validNonexistingId)
 
       await api
         .get(`/api/notes/${validNonexistingId}`)
@@ -1170,8 +1196,8 @@ describe('when there is initially some notes saved', () => {
   })
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+afterAll(async () => {
+  await mongoose.connection.close()
 })
 ```
 

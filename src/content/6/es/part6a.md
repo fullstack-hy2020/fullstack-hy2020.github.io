@@ -849,8 +849,7 @@ const toggleImportanceOf = (id) => {
 
 Las funciones que crean acciones se denominan [creadores de acciones](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
 
-El componente <i>App</i> ya no tiene que saber nada sobre la representación interna de las acciones, solo obtiene la acción correcta llamando a la función creator:
-Functions that create actions are called [action creators](https://redux.js.org/advanced/async-actions#synchronous-action-creators).
+El componente <i>App</i> ya no tiene que saber nada sobre la representación interna de las acciones, solo obtiene la acción correcta llamando a la función del creador.
 
 ```js
 const App = () => {

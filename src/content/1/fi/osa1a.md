@@ -434,6 +434,104 @@ const App = () => {
 
 Nyt käännös menee läpi, ja Reactin generoimaan DOM:iin ei tule ylimääräistä div-elementtiä.
 
+### Älä renderöi olioita
+
+Tarkastellaan sovellusta, joka tulostaa ruudulle ystäviemme nimet ja iät:
+
+```js
+const App = () => {
+  const friends = [
+    { name: 'Leevi', age: 4 },
+    { name: 'Venla', age: 10 },
+  ]
+
+  return (
+    <div>
+      <p>{friends[0]}</p>
+      <p>{friends[1]}</p>
+    </div>
+  )
+}
+
+export default App
+```
+
+Mitään ei kuitenkaan tule ruudulle. Yritän etsiä koodista 15 minuutin ajan ongelmaa, mutta en keksi missä vika voisi olla.
+
+Vihdoin mieleeni palaa antamamme lupaus
+
+> <i>pidän konsolin koko ajan auki tamän kurssin ja koko loppuelämäni ajan tehdessäni web-sovelluskehitystä</i>
+
+Konsoli huutaakin punaisena:
+
+![](../../images/1/34new.png)
+
+Ongelman ydin on <i>Objects are not valid as a React child</i> eli sovellus yrittää renderöidä <i>olioita</i> ja se taas ei onnistu.
+
+Koodissa yhden ystävän tiedot yritetään renderöidä seuraavasti
+
+```js
+<p>{friends[0]}</p>
+```
+
+ja tämä aiheuttaa ongelman sillä aaltosulkeissa oleva renderöitävä asia on olio
+
+```js
+{ name: 'Leevi', age: 4 }
+```
+
+Yksittäisten aaltosulkeissa renderöitävien asioiden tulee Reactissa olla primitiivisiä arvoja, kuten lukuja tai merkkijonoja.
+
+Korjaus on seuraava
+
+```js
+const App = () => {
+  const friends = [
+    { name: 'Leevi', age: 4 },
+    { name: 'Venla', age: 10 },
+  ]
+
+  return (
+    <div>
+      <p>{friends[0].name} {friends[0].age}</p>
+      <p>{friends[1].name} {friends[1].age}</p>
+    </div>
+  )
+}
+
+export default App
+```
+
+Eli nyt aaltosulkeiden sisällä renderöidään erikseen ystävän nimi
+
+```js
+{friends[0].name}
+```
+
+ja ikä
+
+```js
+{friends[0].age}
+```
+
+Virheen korjauksen jälkeen kannattaa konsolin virheilmoitukset tyhjentää painamalla Ø ja tämän jälkeen uudelleenladata sivun sisältö ja varmistua että virheilmoituksia ei näy.
+
+Pieni lisähuomio edelliseen. React sallii myös taulukoiden renderöimisen <i>jos</i> taulukko sisältää arvoja, jotka kelpaavat renderöitäviksi (kuten nimeroita tai merkkijonoja). Eli seuraava ohjelma kyllä toimisi, vaikka tulos ei ole kenties se mitä haluamme: 
+
+```js
+const App = () => {
+  const friends = [ 'Leevi', 'Venla']
+
+  return (
+    <div>
+      <p>{friends}</p>
+    </div>
+  )
+}
+```
+
+Tässä osassa ei kannata edes yrittää hyödyntää taulukkojen suoraa renderöintiä, palaamme siihen seuraavassa osassa.
+
 </div>
 
 <div class="tasks">
