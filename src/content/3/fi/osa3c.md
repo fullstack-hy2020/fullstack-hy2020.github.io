@@ -179,7 +179,7 @@ Tuhotaan oletusarvoisen nimen saanut kanta <i>test</i>. Päätetään käyttää
 
 ```js
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 ```
 
 Suoritetaan ohjelma uudelleen:
