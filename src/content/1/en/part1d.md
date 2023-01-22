@@ -1054,6 +1054,12 @@ In some situations you may also have to run the command below from the root of t
 rm -rf node_modules/ && npm i
 ```
 
+If and <i>when</i> you encounter an error message
+
+> <i>Objects are not valid as a React child</i>
+
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-rended-object).
+
 <h4> 1.6: unicafe step1</h4>
 
 Like most companies, the student restaurant of the University of Helsinki [Unicafe](https://www.unicafe.fi) collects feedback from its customers. Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.

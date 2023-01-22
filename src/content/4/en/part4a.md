@@ -7,12 +7,9 @@ lang: en
 
 <div class="content">
 
-
 Let's continue our work on the backend of the notes application we started in [part 3](/en/part3). 
 
-
 ### Project structure
-
 
 Before we move into the topic of testing, we will modify the structure of our project to adhere to Node.js best practices.
 

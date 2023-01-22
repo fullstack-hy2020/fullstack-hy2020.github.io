@@ -1060,6 +1060,13 @@ Tehtävät palautetaan **yksi osa kerrallaan**. Kun olet palauttanut osan tehtä
 
 **VAROITUS** create-react-app tekee projektista automaattisesti Git-repositorion, ellei sovellusta luoda jo olemassa olevan repositorion sisälle. Todennäköisesti **et halua** että projektista tulee repositorio, joten suorita projektin juuressa komento _rm -rf .git_.
 
+Jos, ja kun törmäät virheilmoitukseen
+
+> <i>Objects are not valid as a React child</i>
+
+pidä mielessä [täällä](/osa1/reactin_alkeet#ala-renderoi-olioita) kerrotut asiat.
+
+
 <h4> 1.6: unicafe step1</h4>
 
 Monien firmojen tapaan nykyään myös Helsingin yliopiston opiskelijaruokala [Unicafe](https://www.unicafe.fi) kerää asiakaspalautetta. Tee Unicafelle verkossa toimiva palautesovellus. Vastausvaihtoehtoja olkoon vain kolme: <i>hyvä</i>, <i>neutraali</i> ja <i>huono</i>.
