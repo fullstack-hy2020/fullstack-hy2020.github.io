@@ -473,7 +473,7 @@ The code tries to render the information of one friend as follows
 <p>{friends[0]}</p>
 ```
 
-ja tämä aiheuttaa ongelman sillä aaltosulkeissa oleva renderöitävä asia on olio
+and this causes a problem because the item to be rendered in the braces is an object.
 
 ```js
 { name: 'Peter', age: 4 }
