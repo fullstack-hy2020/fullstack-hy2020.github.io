@@ -339,7 +339,7 @@ The props sent by the component <i>App</i> are the values of the variables, the 
 
 Component <i>Hello</i> also logs the value of the object props to the console.
 
-I rellly hope your console was open. If it was not, remember what you promised:
+I really hope your console was open. If it was not, remember what you promised:
 
 >  <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
 
