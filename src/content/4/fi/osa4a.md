@@ -56,18 +56,17 @@ Sovelluksen käynnistystiedosto <i>index.js</i> pelkistyy seuraavasti:
 
 ```js
 const app = require('./app') // varsinainen Express-sovellus
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
 
-<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Sovelluksen käynnistäminen tapahtuu nyt <em>server</em>-muuttujassa olevan olion kautta. Käynnistymisestä kertova konsolitulostus tehdään logger-moduulin funktion _info_ avulla.
+<i>index.js</i> ainoastaan importtaa tiedostossa <i>app.js</i> olevan varsinaisen sovelluksen ja käynnistää sen. Käynnistymisestä kertova konsolitulostus tehdään logger-moduulin funktion _info_ avulla.
+
+Nyt Express-sovellus ja sen käynnistysestä ja verkkoasetuksista huolehtiva on eriytetty toisistaan [parhaita](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) [käytänteitä](https://nodejsbestpractices.com/sections/projectstructre/separateexpress) noudattaen. Eräs tämä tavan eduista on se, että sovelluksen toimintaa voi nyt testata API-tasolle tehtävien HTTP-kutsujen tasolla kuitenkaan tekemättä kutsuja varsinaisesti HTTP:llä verkon yli. Tämä tekee testien suorittamisesta nopeampaa.
 
 Ympäristömuuttujien käsittely on eriytetty moduulin <i>utils/config.js</i> vastuulle:
 
@@ -211,6 +210,8 @@ const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
 
 logger.info('connecting to', config.MONGODB_URI)
 
@@ -515,10 +516,10 @@ Määritellään npm-skripti <i>test</i> suorittamaan testaus Jestillä ja rapor
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add . && git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
     "lint": "eslint .",
     "test": "jest --verbose" // highlight-line
   },
@@ -534,14 +535,6 @@ Jestille pitää vielä kertoa, että suoritusympäristönä on käytössä Node
  "jest": {
    "testEnvironment": "node"
  }
-}
-```
-
-Vaihtoehtoisesti Jest löytää oletuksena asetukset tiedostosta <i>jest.config.js</i>, jonne suoritusympäristön määrittely tapahtuu seuraavasti:
-
-```js
-module.exports = {
-  testEnvironment: 'node',
 }
 ```
 
@@ -579,13 +572,7 @@ module.exports = {
     'node': true,
     'jest': true, // highlight-line
   },
-  'extends': 'eslint:recommended',
-  'parserOptions': {
-    'ecmaVersion': 12
-  },
-  "rules": {
-    // ...
-  },
+  // ...
 }
 ```
 

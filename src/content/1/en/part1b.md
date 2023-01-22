@@ -245,6 +245,7 @@ During this course, we will define all functions using the arrow syntax.
 </div>
 
 <div class="tasks">
+
   <h3>Exercises 1.3.-1.5.</h3>
 
 <i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project since we are only interested in the final state of the submitted application.</i>
@@ -257,6 +258,12 @@ const Header = (props) => {
   return <h1>{props.course}</h1>
 }
 ```
+
+If and <i>when</i> you encounter an error message
+
+> <i>Objects are not valid as a React child</i>
+
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-rended-object).
 
   <h4>1.3: course information step3</h4>
 

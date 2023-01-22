@@ -41,7 +41,7 @@ Let's assume that the <i>users</i> collection contains two users:
     username: 'hellas',
     _id: 141414,
   },
-];
+]
 ```
 
 The <i>notes</i> collection contains three notes that all have a <i>user</i> field that references a user in the <i>users</i> collection:
@@ -180,7 +180,6 @@ const noteSchema = new mongoose.Schema({
     required: true,
     minlength: 5
   },
-  date: Date,
   important: Boolean,
   // highlight-start
   user: {
@@ -335,7 +334,7 @@ describe('when there is initially one user in db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('username must be unique')
+    expect(result.body.error).toContain('expected `username` to be unique')
 
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toEqual(usersAtStart)
@@ -345,35 +344,39 @@ describe('when there is initially one user in db', () => {
 
 The test case obviously will not pass at this point. We are essentially practicing [test-driven development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development), where tests for new functionality are written before the functionality is implemented.
 
-Mongoose does not have a built-in validator for checking the uniqueness of a field. In principle we could find a ready-made solution for this from the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) npm package but unfortunately at the time of writing (24th Jan 2022)
-mongoose-unique-validator does not work with Mongoose version 6.x, so we have to implement the uniqueness check by ourselves in the controller:
+Mongoose does not have a built-in validator for checking the uniqueness of a field. Fortunately there is a ready-made solution for this, the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) library. Let us install the library:
+
+```
+npm install mongoose-unique-validator
+```
+
+and extend the code by following the library documentation:
 
 ```js
-usersRouter.post('/', async (request, response) => {
-  const { username, name, password } = request.body
+const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator') // highlight-line
 
-// highlight-start
-  const existingUser = await User.findOne({ username })
-  if (existingUser) {
-    return response.status(400).json({
-      error: 'username must be unique'
-    })
-  }
+const userSchema = mongoose.Schema({
+  // highlight-start
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
   // highlight-end
-
-  const saltRounds = 10
-  const passwordHash = await bcrypt.hash(password, saltRounds)
-
-  const user = new User({
-    username,
-    name,
-    passwordHash,
-  })
-
-  const savedUser = await user.save()
-
-  response.status(201).json(savedUser)
+  name: String,
+  passwordHash: String,
+  notes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Note'
+    }
+  ],
 })
+
+userSchema.plugin(uniqueValidator) // highlight-line
+
+// ...
 ```
 
 We could also implement other validations into the user creation. We could check that the username is long enough, that the username only consists of permitted characters, or that the password is strong enough. Implementing these functionalities is left as an optional exercise.
@@ -415,7 +418,7 @@ const User = require('../models/user') //highlight-line
 
 //...
 
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => {
   const body = request.body
 
   const user = await User.findById(body.userId) //highlight-line
@@ -423,7 +426,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
-    date: new Date(),
     user: user._id //highlight-line
   })
 
@@ -481,22 +483,24 @@ The [populate](http://mongoosejs.com/docs/populate.html) method is chained after
 
 The result is almost exactly what we wanted:
 
-![JSON data showing populated notes and users data with repetition](../../images/4/13ea.png)
+![JSON data showing populated notes and users data with repetition](../../images/4/13new.png)
 
-We can use the populate parameter for choosing the fields we want to include from the documents. The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
+We can use the populate parameter for choosing the fields we want to include from the documents. In addition to the field id:n we are now only interested in <i>content</i> and <i>important</i>.
+
+The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
 ```js
 usersRouter.get('/', async (request, response) => {
   const users = await User
-    .find({}).populate('notes', { content: 1, date: 1 })
+    .find({}).populate('notes', { content: 1, important:  })
 
   response.json(users)
-});
+})
 ```
 
 The result is now exactly like we want it to be:
 
-![combined data showing no repetition](../../images/4/14ea.png)
+![combined data showing no repetition](../../images/4/14new.png)
 
 Let's also add a suitable population of user information to notes:
 
@@ -506,12 +510,12 @@ notesRouter.get('/', async (request, response) => {
     .find({}).populate('user', { username: 1, name: 1 })
 
   response.json(notes)
-});
+})
 ```
 
 Now the user's information is added to the <i>user</i> field of note objects.
 
-![notes JSON now has user info embedded too](../../images/4/15ea.png)
+![notes JSON now has user info embedded too](../../images/4/15new.png)
 
 It's important to understand that the database does not know that the ids stored in the <i>user</i> field of notes reference documents in the user collection.
 
@@ -524,7 +528,6 @@ const noteSchema = new mongoose.Schema({
     required: true,
     minlength: 5
   },
-  date: Date,
   important: Boolean,
   user: {
     type: mongoose.Schema.Types.ObjectId,
