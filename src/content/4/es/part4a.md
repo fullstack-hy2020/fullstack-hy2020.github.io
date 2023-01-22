@@ -554,7 +554,7 @@ Primero ejecutamos el código a probar, lo que significa que generamos un palín
 
 Como se esperaba, todas las pruebas pasan:
 
-![](../../images/4/1.png)
+![](../../images/4/1x.png)
 
 Jest espera por defecto que los nombres de los archivos de prueba contengan <i>.test</i>. En este curso, seguiremos la convención de nombrar nuestros archivos de prueba con la extensión <i>.test.js</i>.
 
@@ -570,7 +570,7 @@ test('palindrome of react', () => {
 
 Ejecutar las pruebas anteriores da como resultado el siguiente mensaje de error:
 
-![](../../images/4/2e.png)
+![](../../images/4/2x.png)
 
 Agreguemos algunas pruebas para la función _average_, en un nuevo archivo <i>tests/average.test.js</i>.
 
@@ -622,7 +622,7 @@ describe('average', () => {
 
 Se pueden usar bloques de descripción para agrupar pruebas en colecciones lógicas. La salida de prueba de Jest también usa el nombre del bloque describe:
 
-![](../../images/4/4.png)
+![](../../images/4/4x.png)
 
 Como veremos más adelante, los bloques <i>describe</i> son necesarios cuando queremos ejecutar algunas operaciones de instalación o desmontaje compartidas para un grupo de pruebas.
 

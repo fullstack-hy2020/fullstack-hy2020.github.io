@@ -324,7 +324,7 @@ Riippuvuudet saa ajantasaistettua päivittämällä tiedostoa <i>package.json</i
 npm install -g npm-check-updates
 ```
 Tämän työkalun avulla tarkistetaan riippuvuuksien ajantasaisuus seuraavasti:
-```console
+```bash
 $ npm-check-updates
 Checking ...\ultimate-hooks\package.json
 [====================] 9/9 100%
@@ -336,7 +336,7 @@ Checking ...\ultimate-hooks\package.json
 Run ncu -u to upgrade package.json
 ```
 Tiedosto <i>package.json</i> päivitetään suorittamalla komento _ncu -u_.
-```console
+```bash
 $ ncu -u
 Upgrading ...\ultimate-hooks\package.json
 [====================] 9/9 100%

@@ -18,7 +18,7 @@ Debuggear aplicaciones de Node es un poco más difícil que debuggear JavaScript
 
 El debugger de Visual Studio Code puede resultar útil en algunas situaciones. Puede iniciar la aplicación en modo de debugging de esta manera:
 
-![](../../images/3/35.png)
+![](../../images/3/35x.png)
 
 Tenga en cuenta que la aplicación no debería ejecutarse en otra consola, de lo contrario, el puerto ya estará en uso.
 
@@ -26,7 +26,7 @@ __NB__ Una versión más reciente de Visual Studio Code puede tener _Run_ en lug
 
 A continuación, puede ver una captura de pantalla donde la ejecución del código se ha detenido en medio de guardar una nueva nota:
 
-![](../../images/3/36e.png)
+![](../../images/3/36x.png)
 
 La ejecución se ha detenido en el <i>breakpoint</i> de la línea 63. En la consola puede ver el valor de la variable de <i>note</i>. En la ventana superior izquierda puede ver otras cosas relacionadas con el estado de la aplicación.
 

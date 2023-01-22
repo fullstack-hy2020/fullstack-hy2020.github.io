@@ -13,9 +13,9 @@ Sovelluksen olemassaolon tarkoitus on ainoastaan havainnollistaa kurssin perusk�
 
 Kurssin suosittelemaa tyyliä noudattavan koodin kirjoittaminen alkaa [osasta 1](/osa1).
 
-Käytä nyt ja <i>koko ajan</i> tämän kurssin aikana Chrome-selainta.
-
 Avataan selaimella [esimerkkisovellus](https://studies.cs.helsinki.fi/exampleapp/). Sivun ensimmäinen lataus kestää joskus hetken.
+
+Kurssimateriaali olettaaa että käytössä Chrome-selain.
 
 **Web-sovelluskehityksen sääntö numero yksi**: pidä selaimen Developer-konsoli koko ajan auki. Konsoli avautuu Macilla painamalla yhtä aikaa _alt_ _cmd_ ja _i_. Windowsilla konsolin saa auki painamalla _F12_ tai yhtä aikaa _ctrl_ _shift_ ja _i_.
 
@@ -46,7 +46,7 @@ Klikkaamalla näistä ensimmäistä, paljastuu tarkempaa tietoa siitä mistä on
 
 ![](../../images/0/3e.png)
 
-Ylimmästä osasta <i>General</i> selviää, että selain teki [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)-metodilla pyynnön osoitteeseen <i>https://studies.cs.helsinki.fi/exampleapp/</i> ja että pyyntö oli onnistunut, sillä pyyntöön saatiin vastaus, jonka [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) on 200.
+Ylimmästä osasta <i>General</i> selviää, että selain teki [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET)-metodilla pyynnön osoitteeseen <i>https://studies.cs.helsinki.fi/exampleapp/</i> ja että pyyntö oli onnistunut, sillä pyyntöön saatiin vastaus, jonka [statuskoodi](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) on 200.
 
 Pyyntöön ja palvelimen lähettämään vastaukseen liittyy erinäinen määrä otsakkeita eli [headereita](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -66,9 +66,11 @@ img-tagin ansiosta selain tekee toisenkin <i>HTTP-pyynnön</i>, jonka avulla se 
 
 Eli pyyntö on tehty osoitteeseen <https://studies.cs.helsinki.fi/exampleapp/kuva.png> ja se on tyypiltään HTTP GET. Vastaukseen liittyvät headerit kertovat että vastauksen koko on 89350 tavua ja vastauksen [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) on <i>image/png</i>, eli kyseessä on png-tyyppinen kuva. Tämän tiedon ansiosta selain tietää, miten kuva on piirrettävä HTML-sivulle.
 
-Sivun https://studies.cs.helsinki.fi/exampleapp/ avaaminen selaimessa saa siis aikaan alla olevan [sekvenssikaavion](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot) kuvaaman tapahtumasarjan:
+Sivun https://studies.cs.helsinki.fi/exampleapp/ avaaminen selaimessa saa siis aikaan alla olevan [sekvenssikaavion](https://en.wikipedia.org/wiki/Sequence_diagram) kuvaaman tapahtumasarjan:
 
-![](../../images/0/7b.png)
+![](../../images/0/7m.png)
+
+Sekvenssikaavio kuvaa selaimen (browser) ja palvelimen (server) välisen kommunikaation aikajärjestyksessä "ylhäältä alaspäin", eli ylimpänä on ensin selaimen ensin lähettämä pyyntö, jonka jälkeen tulee palvelimen vastaus tähän pyyntöön, ja tämän jälkeen selaimen seuraava pyyntö jne.
 
 Ensin selain tekee palvelimelle HTTP GET -pyynnön, jonka avulla se hakee sivun HTML-koodin. HTML-koodissa olevan <i>img</i>-tagin ansiosta selain hakee palvelimelta kuvan <i>kuva.png</i>. Selain renderöi HTML-kielellä muotoillun sivun ja kuvan näytölle. Vaikka käyttäjä ei sitä helposti huomaa, alkaa sivu renderöityä näytölle jo ennen kuvan hakemista.
 
@@ -109,7 +111,7 @@ Koodia ei tarvitse vielä ymmärtää, mutta käytännössä HTML-sivun sisält�
 
 HTML:n kirjoittaminen suoraan koodin sekaan ei tietenkään ole järkevää, mutta vanhan liiton PHP-ohjelmoijille se oli arkipäivää.
 
-Perinteisissä websovelluksissa selain on "tyhmä", se ainoastaan pyytää palvelimelta HTML-muodossa olevia sisältöjä, kaikki sovelluslogiikka on palvelimessa. Palvelin voi olla tehty esim. kurssin [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007) tapaan Java Springillä tai [tietokantasovelluksessa](https://materiaalit.github.io/tsoha-19/) käytetyllä Python Flaskilla tai [Ruby on Railsilla](http://rubyonrails.org/). Esimerkissä on käytetty Node.js:n [Express](https://expressjs.com/)-kirjastoa. Tulemme käyttämään kurssilla Node.js:ää ja Expressiä web-palvelimen toteuttamiseen.
+Perinteisissä websovelluksissa selain on "tyhmä", se ainoastaan pyytää palvelimelta HTML-muodossa olevia sisältöjä, kaikki sovelluslogiikka on palvelimessa. Palvelin voi olla tehty esim. jo eläkkeelle jääneen kurssin [Web-palvelinohjelmointi](https://courses.helsinki.fi/fi/tkt21007) tapaan Java Springillä tai [tietokantasovelluksessa](https://hy-tsoha.github.io/) käytetyllä Python Flaskilla tai [Ruby on Railsilla](http://rubyonrails.org/). Esimerkissä on käytetty Node.js:n [Express](https://expressjs.com/)-kirjastoa. Tulemme käyttämään kurssilla Node.js:ää ja Expressiä web-palvelimen toteuttamiseen.
 
 ### Selaimessa suoritettava sovelluslogiikka
 
@@ -403,7 +405,7 @@ Tehdyt muutokset eivät luonnollisestikaan jää voimaan kun selaimen sivu uudel
 
 Kerrataan vielä mitä tapahtuu kun selaimessa avataan sivu https://studies.cs.helsinki.fi/exampleapp/notes
 
-![](../../images/0/19b.png)
+![](../../images/0/19m.png)
 
 - selain hakee palvelimelta sivun sisällön ja rakenteen määrittelevän HTML-koodin HTTP GET -pyynnöllä
 - HTML-koodi saa aikaan sen, että selain hakee sivun tyylit määrittelevän tiedoston <i>main.css</i>
@@ -504,7 +506,7 @@ Avaa nyt <i>Network</i>-välilehti ja tyhjennä se &#x29B8;-symbolilla. Kun luot
 
 ![](../../images/0/26e.png)
 
-Pyyntö kohdistuu osoitteeseen <i>new\_note\_spa</i>, on tyypiltään POST ja se sisältää JSON-muodossa olevan uuden muistiinpanon, johon kuuluu sekä sisältö (<i>content</i>) että aikaleima (<i>date</i>):
+Pyyntö kohdistuu osoitteeseen <i>new_note_spa</i>, on tyypiltään POST ja se sisältää JSON-muodossa olevan uuden muistiinpanon, johon kuuluu sekä sisältö (<i>content</i>) että aikaleima (<i>date</i>):
 
 ```js
 {
@@ -645,30 +647,38 @@ Tutustu HTML:n lomakkeiden perusteisiin lukemalla Mozillan tutoriaali [Your firs
 
   <h4>0.4: uusi muistiinpano</h4>
 
-Luvussa [JavaScriptia sisältävän sivun lataaminen - kertaus](/osa0/web_sovelluksen_toimintaperiaatteita#java-scriptia-sisaltavan-sivun-lataaminen-kertaus) kuvataan [sekvenssikaavion](https://github.com/mluukkai/ohjelmistotekniikka-kevat2019/blob/master/web/materiaali.md#sekvenssikaaviot) avulla sivun <https://studies.cs.helsinki.fi/exampleapp/notes> avaamisen aikaansaama tapahtumasarja.
+Luvussa [JavaScriptia sisältävän sivun lataaminen - kertaus](/osa0/web_sovelluksen_toimintaperiaatteita#java-scriptia-sisaltavan-sivun-lataaminen-kertaus) kuvataan [sekvenssikaavion](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)) avulla sivun <https://studies.cs.helsinki.fi/exampleapp/notes> avaamisen aikaansaama tapahtumasarja.
 
-Kaavio on luotu [WebSequenceDiagrams](https://www.websequencediagrams.com)-palvelussa, seuraavasti:
+Kaavio on luotu GitHubiin Markdown-tiedostona hyödyntäen [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntaksia, seuraavasti:
 
 ```
-selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/notes
-palvelin-->selain: HTML-koodi
-selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.css
-palvelin-->selain: main.css
-selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/main.js
-palvelin-->selain: main.js
+sequenceDiagram
+    participant browser
+    participant server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
+    activate server
+    server-->>browser: HTML document
+    deactivate server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
+    activate server
+    server-->>browser: the css file
+    deactivate server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
+    activate server
+    server-->>browser: the JavaScript file
+    deactivate server
+    
+    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+    
+    browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
+    activate server
+    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    deactivate server    
 
-note over selain:
-selain alkaa suorittaa js-koodia
-joka pyytää JSON-datan palvelimelta
-end note
-
-selain->palvelin: HTTP GET https://studies.cs.helsinki.fi/exampleapp/data.json
-palvelin-->selain: [{ content: "HTML on helppoa", date: "2019-01-01" }, ...]
-
-note over selain:
-selain suorittaa tapahtumankäsittelijän
-joka renderöi muistiinpanot näytölle
-end note
+    Note right of browser: The browser executes the callback function that renders the notes 
 ```
 
 **Tee vastaavanlainen kaavio**, joka kuvaa mitä tapahtuu tilanteessa, missä käyttäjä luo uuden muistiinpanon ollessaan sivulla <https://studies.cs.helsinki.fi/exampleapp/notes>, eli kirjoittaa tekstikenttään jotain ja painaa nappia <i>tallenna</i>.
@@ -676,6 +686,8 @@ end note
 Kirjoita tarvittaessa palvelimella tai selaimessa tapahtuvat operaatiot sopivina kommentteina kaavion sekaan.
 
 Kaavion ei ole pakko olla sekvenssikaavio. Mikä tahansa järkevä kuvaustapa käy.
+
+Voit tehdä kaaviot millä ohjelmistolla haluat, mutta suositeltava tapa on tehdä ne suoraan GitHubiin Markdown- eli md-päätteisiksi tiedostoiksi käyttäen [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntaksia.
 
 Kaikki oleellinen tieto tämän ja seuraavien kahden tehtävän tekemiseen on [tässä osassa](../osa0). Näiden tehtävien ideana on, että luet tekstin vielä kerran ja mietit tarkkaan mitä missäkin tapahtuu. Ohjelman [koodin](https://github.com/mluukkai/example_app) lukemista ei näissä tehtävissä edellytetä, vaikka sekin on toki mahdollista.
 
@@ -687,6 +699,6 @@ Tee kaavio tilanteesta, jossa käyttäjä menee selaimella osoitteeseen <https:/
 
 Tee kaavio tilanteesta, jossa käyttäjä luo uuden muistiinpanon single page -versiossa.
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata vastaukset GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä ja on aika pushata vastaukset GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

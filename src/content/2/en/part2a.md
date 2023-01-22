@@ -64,9 +64,9 @@ Debugging your code using _console.log()_ is so common that Visual Studio Code h
 
 ### JavaScript Arrays
 
-From here on out, we will be using the functional programming methods of the JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as _find_, _filter_, and _map_ - all of the time. They operate on the same general principles as streams do in Java 8, which have been used during the last few years in both the 'Ohjelmoinnin perusteet' and 'Ohjelmoinnin jatkokurssi' courses at the university's department of Computer Science, and also in the programming MOOC. 
+From here on out, we will be using the functional programming operators of the JavaScript [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), such as _find_, _filter_, and _map_ - all of the time.
 
-If functional programming with arrays feels foreign to you, it is worth watching at least the first three parts of the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
+If operating arrays with functional operators feels foreign to you, it is worth watching at least the first three parts of the YouTube video series [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84):
 
 - [Higher-order functions](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
@@ -117,19 +117,16 @@ const notes = [
   {
     id: 1,
     content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
     content: 'Browser can execute only JavaScript',
-    date: '2019-05-30T18:39:34.091Z',
     important: false
   },
   {
     id: 3,
     content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
     important: true
   }
 ]
@@ -139,7 +136,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Every note contains its textual content and a timestamp, as well as a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>.
+Every note contains its textual content, a _boolean_ value for marking whether the note has been categorized as important or not, and also a unique <i>id</i>.
 
 The example above works due to the fact that there are exactly three notes in the array.
 
@@ -254,19 +251,16 @@ const notes = [
   {
     id: 1,
     content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
     content: 'Browser can execute only JavaScript',
-    date: '2019-05-30T18:39:34.091Z',
     important: false
   },
   {
     id: 3,
     content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
     important: true
   }
 ]
@@ -314,8 +308,10 @@ This is already pretty close to the React code we used:
 
 ```js
 notes.map(note =>
-  <li key={note.id}>{note.content}</li>
-)
+  <li key={note.id}>
+    {note.content}
+  </li>
+)s
 ```
 
 which generates a <i>li</i> tag containing the contents of the note from each note object.
@@ -413,13 +409,12 @@ A whole React application can be written in a single file. Although that is, of 
 We have been using modules the whole time. The first few lines of the file <i>index.js</i>:
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from "react-dom/client"
 
-import App from './App'
+import App from "./App"
 ```
 
-[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) three modules, enabling them to be used in that file. The  module <i>React</i>  is placed into the variable _React_, the module <i>react-dom</i> into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The module <i>react-dom/client</i> into the variable _ReactDOM_, and the module that defines the main component of the app is placed into the variable _App_
 
 Let's move our <i>Note</i> component into its own module.
 
@@ -563,13 +558,25 @@ If the problem has still not been resolved, sadly there isn't much to do apart f
 
 I added this chapter to the material after the model answer for the next question exploded completely (due to props being of the wrong type), and I had to debug it using <em>console.log</em>.
 
+### Web developer's oath
+
+Before the exercises, let me remind what you promised at the end of the previous part.
+
+Programming is hard, that is why I will use all the possible means to make it easier
+
+- I will have my browser developer console open all the time
+- I progress with small steps
+- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
+- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+
 </div>
 
 <div class="tasks">
 
 <h3>Exercises 2.1.-2.5.</h3>
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well.
 
@@ -581,7 +588,7 @@ Note that this part has more exercises than the ones before, so <i>do not submit
 
 <h4>2.1: Course information step6</h4>
 
-Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
+Let's finish the code for rendering course contents from exercises 1.1 - 1.5. You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system]https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>. To see the solution to the <i>course info</i> exercise, click on _index.js_ under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
 
 
 **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command _npm install_ before you can start the application.**

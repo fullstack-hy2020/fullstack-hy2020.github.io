@@ -142,7 +142,7 @@ const hello = name => {
 
 Cuando ejecutamos el comando _npm run build_ , el código de nuestra aplicación será empaquetado por webpack. La operación producirá un nuevo archivo <i>main.js</i> que se agregará al directorio de <i>compilación</i>:
 
-![](../../images/7/19ea.png)
+![](../../images/7/19x.png)
 
 El archivo contiene muchas cosas que parecen bastante interesantes. También podemos ver el código que escribimos anteriormente al final del archivo:
 
@@ -172,7 +172,7 @@ App()
 
 Cuando empaquetamos la aplicación nuevamente con el comando _npm run build_, notamos que webpack ha reconocido ambos archivos:
 
-![](../../images/7/20ea.png)
+![](../../images/7/20x.png)
 
 El código de nuestra aplicación se puede encontrar al final del archivo del paquete en un formato bastante oscuro:
 
@@ -280,7 +280,7 @@ Todavía necesitamos el archivo <i>build/index.html</i> que servirá como la "p�
 
 Cuando empaquetamos nuestra aplicación, nos encontramos con el siguiente problema:
 
-![](../../images/7/21.png)
+![](../../images/7/21x.png)
 
 ### Cargadores
 
@@ -472,7 +472,7 @@ import './index.css'
 
 Esto hará que el proceso de transpilación se interrumpa:
 
-![](../../images/7/23.png)
+![](../../images/7/23x.png)
 
 
 Cuando usamos CSS, tenemos que usar [css](https://webpack.js.org/loaders/css-loader/) y cargadores de [estilos](https://webpack.js.org/loaders/style-loader/):

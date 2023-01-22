@@ -11,7 +11,7 @@ Ennen kun menemme uuteen asiaan, nostetaan esiin muutama edellisen osan huomiota
 
 ### console.log
 
-**Mikä erottaa kokeneen ja kokemattoman JavaScript-ohjelmoijan? Kokeneet käyttävät 10-100 kertaa enemmän console.logia**.
+_**Mikä erottaa kokeneen ja kokemattoman JavaScript-ohjelmoijan? Kokeneet käyttävät 10-100 kertaa enemmän console.logia**_.
 
 Paradoksaalista kyllä tämä näyttää olevan tilanne, vaikka kokematon ohjelmoija oikeastaan tarvitsisi console.logia (tai jotain muita debuggaustapoja) huomattavissa määrin kokenutta enemmän. 
 
@@ -70,7 +70,7 @@ Ehkä kätevin kaikista snippeteistä on komennon <em>console.log()</em> nopeast
 
 ### Taulukkojen käyttö JavaScriptissä
 
-Tästä osasta lähtien käytämme runsaasti JavaScriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin Java 8:sta tutuissa streameissa, joita on käytetty jo vuosien ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa. Operaattoreihin tutustutaan myös Ohjelmoinnin jatkokurssin Python-versiossa, [osassa 12](https://python-s20.vercel.app/osa-12/3-funktionaalista-ohjelmointia).
+Tästä osasta lähtien käytämme runsaasti JavaScriptin [taulukkojen](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) funktionaalisia käsittelymetodeja kuten _find_, _filter_ ja _map_. Periaate niissä on täysin sama kuin esim. Java 8:sta tutuissa streameissa, joita on käytetty jo vuosien ajan Tietojenkäsittelytieteen osaston Ohjelmoinnin perusteissa ja jatkokurssilla sekä Ohjelmoinnin MOOC:issa. Operaattoreihin tutustutaan myös Ohjelmoinnin jatkokurssin Python-versiossa, [osassa 12](https://ohjelmointi-22.mooc.fi/osa-12/3-funktionaalista-ohjelmointia).
 
 Jos taulukon funktionaalinen käsittely tuntuu vielä vieraalta, kannattaa katsoa YouTubessa olevasta videosarjasta [Functional Programming in JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) ainakin kolme ensimmäistä osaa:
 
@@ -115,19 +115,16 @@ const notes = [
   {
     id: 1,
     content: 'HTML is easy',
-    date: '2019-05-30T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
     content: 'Browser can execute only JavaScript',
-    date: '2019-05-30T18:39:34.091Z',
     important: false
   },
   {
     id: 3,
     content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2019-05-30T19:20:14.298Z',
     important: true
   }
 ]
@@ -137,7 +134,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Jokaiseen muistiinpanoon on merkitty tekstisisällön ja aikaleiman lisäksi yksikäsitteinen tunniste <i>id</i> ja _boolean_-arvo, joka kertoo onko muistiinpano luokiteltu tärkeäksi.
+Jokaiseen muistiinpanoon on merkitty tekstisisällön lisäksi yksikäsitteinen tunniste <i>id</i> ja _boolean_-arvo, joka kertoo onko muistiinpano luokiteltu tärkeäksi.
 
 Taulukossa on kolme muistiinpanoa, ja yksittäiset muistiinpanot renderöidään 'kovakoodatusti' viittaamalla taulukon olioihin:
 
@@ -249,19 +246,16 @@ const notes = [
   {
     id: 1,
     content: 'HTML is easy',
-    date: '2020-01-10T17:30:31.098Z',
     important: true
   },
   {
     id: 2,
-    content: 'Browser can execute only Javascript',
-    date: '2020-01-10T18:39:34.091Z',
+    content: 'Browser can execute only JavaScript',
     important: false
   },
   {
     id: 3,
     content: 'GET and POST are the most important methods of HTTP protocol',
-    date: '2020-01-10T19:20:14.298Z',
     important: true
   }
 ]
@@ -323,17 +317,6 @@ note => <li key={note.id}>{note.content}</li>
 käyttötarkoitus on näkymäelementtien muodostaminen, tulee muuttujien <i>note.id</i> ja <i>note.content </i> arvo renderöidä aaltosulkeiden sisällä. Kokeile mitä koodi tekee, jos poistat aaltosulkeet.
 
 Aaltosulkeiden käyttö tulee varmaan aiheuttamaan alussa pientä päänvaivaa, mutta totut niihin pian. Reactin antama visuaalinen feedback on välitön.
-
-Parempi muotoilu ohjelmamme muistiinpanorivit tuottavalle apufunktiolle saattaakin olla seuraava useille riveille jaoteltu versio:
-
-```js
-note =>
-  <li key={note.id}>
-    {note.content}
-  </li>
-```
-
-Kyse on kuitenkin edelleen yhden komennon sisältävästä nuolifunktiosta, komento vain sattuu olemaan hieman monimutkaisempi.
 
 ### Antipattern: taulukon indeksit avaimina
 
@@ -416,13 +399,12 @@ Koko React-sovellus on mahdollista määritellä samassa tiedostossa, mutta se e
 Koodissamme on käytetty koko ajan moduuleja. Tiedoston <i>index.js</i> ensimmäiset rivit
 
 ```js
-import React from 'react'
-import ReactDOM from 'react-dom/client'
+import ReactDOM from "react-dom/client"
 
-import App from './App'
+import App from "./App"
 ```
 
-[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kolme moduulia. Moduuli <i>React</i> sijoitetaan muuttujaan _React_, moduuli <i>react-dom</i> sijoitetaan muuttujaan _ReactDOM_ ja sovelluksen pääkomponentin määrittelevä moduuli muuttujaan _App_.
+[importtaavat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) eli ottavat käyttöönsä kaksi moduulia. Moduuli <i>react-dom/client</i> sijoitetaan muuttujaan _ReactDOM_ ja sovelluksen pääkomponentin määrittelevä moduuli muuttujaan _App_.
 
 Siirretään nyt <i>Note</i>-komponentti omaan moduuliinsa.
 
@@ -563,13 +545,25 @@ Jos ongelma ei vieläkään ratkea, ei auta kuin jatkaa vianjäljitystä eli kir
 
 Lisäsin tämän luvun materiaaliin, kun seuraavan tehtävän mallivastauksen koodi räjähti ihan totaalisesti (syynä väärässä muodossa ollut propsi), ja jouduin jälleen kerran debuggaamaan console.logaamalla.
 
+### Websovelluskehittäjän vala
+
+Ennen tehtävien pariin palaamista on hyvä muistaa, mitä lupasimme osan yksi lopussa.
+
+Ohjelmointi on hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+
+- pidän selaimen konsolin koko ajan auki
+- etenen pienin askelin
+- käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+
 </div>
 
 <div class="tasks">
 
 <h3>Tehtävät 2.1.-2.5.</h3>
 
-Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tehtävät palautetaan GitHubin kautta ja merkitsemällä tehdyt tehtävät [palautussovellukseen]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Voit palauttaa kurssin kaikki tehtävät samaan repositorioon, tai käyttää useita repositorioita. Jos palautat eri osien tehtäviä samaan repositorioon, käytä järkevää hakemistojen nimentää.
 
@@ -654,6 +648,8 @@ Ilmoita myös kurssin yhteenlaskettu tehtävien lukumäärä:
 ![](../../images/teht/9e.png)
 
 <h4>2.3*: kurssitiedot step8</h4>
+
+<i>Miksi tehtävä on merkattu tähdellä? Selitys asiaan  [täällä](/osa0/yleista#suoritustapa).</i>
 
 Jos et jo niin tehnyt, laske koodissasi tehtävien määrä taulukon metodilla [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce).
 

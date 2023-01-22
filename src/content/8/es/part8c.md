@@ -294,7 +294,7 @@ Al igual que en el caso anterior con REST, la idea ahora es que un usuario que h
 
 En el playground de GraphQL, el encabezado se agrega a una consulta como esta
 
-![](../../images/8/24.png)
+![](../../images/8/24x.png)
 
 Ahora ampliemos la definición del objeto _server_ agregando un tercer parámetro [contexto](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) a la llamada al constructor:
 

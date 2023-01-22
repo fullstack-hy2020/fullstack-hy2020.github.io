@@ -34,7 +34,6 @@ const addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date().toISOString(),
     important: Math.random() > 0.5,
   }
 
@@ -54,17 +53,23 @@ Olio lähetetään palvelimelle käyttämällä Axiosin metodia <em>post</em>. R
 
 Kun nyt kokeillaan luoda uusi muistiinpano, konsoliin tulostus näyttää seuraavalta:
 
-![](../../images/2/20e.png)
+![](../../images/2/20new.png)
 
 Uusi muistiinpano on siis _response_-olion kentän <i>data</i> arvona. Palvelin on lisännyt muistiinpanolle tunnisteen eli <i>id</i>-kentän.
 
-Joskus on hyödyllistä tarkastella HTTP-pyyntöjä [osan 0 alussa](/osa0/web_sovelluksen_toimintaperiaatteita#http-get) paljon käytetyn konsolin <i>Network</i>-välilehden kautta:
+Usein on hyödyllistä tarkastella HTTP-pyyntöjä [osan 0 alussa](/osa0/web_sovelluksen_toimintaperiaatteita#http-get) paljon käytetyn konsolin <i>Network</i>-välilehden kautta. Välilehti <i>header</i> kertoo pyynnön perustiedot ja näyttää pyynnön ja vastauksen headereiden arvot:
 
-![](../../images/2/21e.png)
-
-Voimme tarkastaa esim. onko POST-pyynnön mukana menevä data juuri se mitä oletimme, onko headerit asetettu oikein ym.
+![](../../images/2/21new1.png)
 
 Koska POST-pyynnössä lähettämämme data oli JavaScript-olio, osasi Axios automaattisesti asettaa pyynnön <i>Content-type</i>-headerille oikean arvon eli <i>application/json</i>.
+
+Välilehdeltä <i>payload</i> näemme missä muodossa data lähti:
+
+![](../../images/2/21new2.png)
+
+Välilehti <i>response</i> on myös hyödyllinen, se kertoo mitä palvelin palautti:
+
+![](../../images/2/21new3.png)
 
 Uusi muistiinpano ei vielä renderöidy ruudulle, sillä emme aseta komponentille <i>App</i> uutta tilaa muistiinpanon luomisen yhteydessä. Viimeistellään sovellus vielä tältä osin:
 
@@ -73,7 +78,6 @@ addNote = event => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
-    date: new Date().toISOString(),
     important: Math.random() > 0.5,
   }
 
@@ -99,8 +103,6 @@ Palvelimen tilaa kannattaa tarkastella myös suoraan esim. selaimella:
 Näin on mahdollista varmistua mm. siitä, siirtyykö kaikki oletettu data palvelimelle.
 
 Kurssin seuraavassa osassa alamme toteuttaa itse myös palvelimella olevan sovelluslogiikan. Tutustumme silloin tarkemmin palvelimen debuggausta auttaviin työkaluihin kuten [Postmaniin](https://www.postman.com/). Tässä vaiheessa JSON Server -palvelimen tilan tarkkailuun riittänee selain.
-
-> **HUOM:** sovelluksen nykyisessä versiossa selain lisää uudelle muistiinpanolle sen luomishetkeä kuvaavan kentän. Koska koneen oma kello voi näyttää mitä sattuu, on aikaleimojen generointi todellisuudessa viisaampaa hoitaa palvelimella ja tulemmekin tekemään tämän muutoksen kurssin seuraavassa osassa.
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5), branchissa <i>part2-5</i>.
 
@@ -211,7 +213,7 @@ Melkein jokaiselle riville sisältyy tärkeitä yksityiskohtia. Ensimmäinen riv
 
 Taulukon metodilla [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) etsitään muutettava muistiinpano ja talletetaan muuttujaan _note_ viite siihen.
 
-Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö pois lukien kenttä important. 
+Sen jälkeen luodaan <i>uusi olio</i>, jonka sisältö on sama kuin vanhan olion sisältö pois lukien kenttä important jonka arvo vaihtuu päinvastaiseksi. 
 
 Niin sanottua [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) -syntaksia hyödyntävä uuden olion luominen näyttää hieman erikoiselta:
 
@@ -231,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-Näin ei ole suositeltavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, tilaa ei Reactissa saa muuttaa suoraan!
+Näin ei ole suositeltavaa tehdä, sillä muuttuja <em>note</em> on viite komponentin tilassa, eli <em>notes</em>-taulukossa olevaan olioon, ja kuten muistamme, Reactissa tilaa [ei saa muuttaa suoraan!](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) 
 
 Kannattaa huomata myös, että uusi olio _changedNote_ on ainoastaan ns. [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), eli uuden olion kenttien arvoina on vanhan olion kenttien arvot. Jos vanhan olion kentät olisivat itsessään olioita, viittaisivat uuden olion kentät samoihin olioihin.
 
@@ -327,7 +329,6 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      date: new Date().toISOString(),
       important: Math.random() > 0.5
     }
 
@@ -456,7 +457,6 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      date: new Date().toISOString(),
       important: Math.random() > 0.5
     }
 
@@ -596,7 +596,6 @@ const getAll = () => {
   const nonExisting = {
     id: 10000,
     content: 'This note is not saved to server',
-    date: '2019-05-30T17:30:31.098Z',
     important: true,
   }
   return request.then(response => response.data.concat(nonExisting))
@@ -691,23 +690,40 @@ Alertia tuskin kannattaa käyttää todellisissa React-sovelluksissa. Opimme koh
 
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6), branchissa <i>part2-6</i>.
 
+### Full stack -sovelluskehittäjän vala
+
+On taas tehtävien aika. Tehtävien haastavuus alkaa nousta, sillä koodin toimivuuteen vaikuttaa myös se, kommunikoiko React-koodi oikein JSON Serverin kanssa.
+
+Meidän onkin syytä päivittää websovelluskehittäjän vala <i>Full stack -sovelluskehittäjän valaksi</i>, eli muistuttaa itseämme siitä, että frontendin koodin lisäksi seuraamme koko ajan sitä, miten fronend ja backend kommunikoivat.
+
+Full stack -ohjelmointi on <i>todella</i> hankalaa, ja sen takia lupaan hyödyntää kaikkia ohjelmointia helpottavia keinoja:
+
+- pidän selaimen konsolin koko ajan auki
+- <i>tarkkailen säännöllisesti selaimen network-välilehdeltä, että frontendin ja backendin välinen kommunikaatio tapahtuu oletusteni mukaan</i>
+- <i>tarkkailen säännöllisesti palvelimella olevan datan tilaa, ja varmistan että frontendin lähettämä data siirtyy sinne kuten oletin</i>
+- etenen pienin askelin
+- käytän koodissa runsaasti _console.log_-komentoja varmistamaan sen, että varmasti ymmärrän jokaisen kirjoittamani koodirivin, sekä etsiessäni koodista mahdollisia bugin aiheuttajia
+- jos koodini ei toimi, en kirjoita enää yhtään lisää koodia, vaan alan poistamaan toiminnan rikkoneita rivejä tai palaan suosiolla tilanteeseen, missä koodi vielä toimi
+- kun kysyn apua kurssin Discord- tai Telegram-kanavalla, tai muualla internetissä, muotoilen kysymyksen järkevästi, esim. [täällä](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) esiteltyyn tapaan
+
+
 </div>
 
 <div class="tasks">
 
-<h3>Tehtävät 2.15.-2.18.</h3>
+<h3>Tehtävät 2.12.-2.15.</h3>
 
-<h4>2.15: puhelinluettelo step7</h4>
+<h4>2.12: puhelinluettelo step7</h4>
 
 Palataan jälleen puhelinluettelon pariin.
 
 Tällä hetkellä luetteloon lisättäviä uusia numeroita ei synkronoida palvelimelle. Korjaa tilanne.
 
-<h4>2.16: puhelinluettelo step8</h4>
+<h4>2.13: puhelinluettelo step8</h4>
 
 Siirrä palvelimen kanssa kommunikoinnista vastaava toiminnallisuus omaan moduuliin tämän osan materiaalissa olevan esimerkin tapaan.
 
-<h4>2.17: puhelinluettelo step9</h4>
+<h4>2.14: puhelinluettelo step9</h4>
 
 Tee ohjelmaan mahdollisuus yhteystietojen poistamiseen. Poistaminen voi tapahtua esim. nimen yhteyteen liitetyllä napilla. Poiston suorittaminen voidaan varmistaa käyttäjältä [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm)-metodilla:
 
@@ -726,7 +742,9 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.18*: puhelinluettelo step10</h4>
+<h4>2.15*: puhelinluettelo step10</h4>
+
+<i>Miksi tehtävä on merkattu tähdellä? Selitys asiaan [täällä](/osa0/yleista#suoritustapa).</i>
 
 Muuta toiminnallisuutta siten, että jos jo olemassa olevalle henkilölle lisätään numero, korvaa lisätty numero aiemman numeron. Korvaaminen kannattaa tehdä HTTP PUT -pyynnöllä.
 
