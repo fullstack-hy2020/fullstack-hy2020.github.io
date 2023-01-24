@@ -426,7 +426,7 @@ When the button on the form is clicked, the browser will send the user input to 
 
 ![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
 
-Surprisingly, submitting the form causes no less than <i>five</i> HTTP requests.
+Surprisingly, submitting the form causes no fewer than <i>five</i> HTTP requests.
 The first one is the form submit event. Let's zoom into it:
 
 ![Detailed view of the first request](../../images/0/22e.png)
