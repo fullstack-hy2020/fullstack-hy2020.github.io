@@ -87,7 +87,7 @@ Os créditos e as notas são calculados da seguinte maneira:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Assim que tiver completado exercícios suficientes para passar na grade, você pode baixar o certificado de conclusão do curso pelo [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 If you wish to receive university credits, you must complete the course exam. The exam does not count towards your final grade, but you must pass it. More info about the exam [here](/en/part0/general_info#the-course-exam).
 
