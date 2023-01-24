@@ -1,0 +1,371 @@
+---
+mainImage: ../../../images/part-0.svg
+part: 0
+letter: a
+lang: pt
+---
+
+<div class="content">
+
+Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O principal foco é em aplicativos de página única implementados com React e suportados por serviços web RESTful e GraphQL implementados com Node.js. O curso também tem partes em TypeScript, React Native e Integração Contínua.
+
+Outros tópicos incluem depuração de aplicativos, tecnologia de container, configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
+
+### Pré-requisitos
+Os participantes devem ter boas habilidades de programação, conhecimento básico de programação web e banco de dados e saber os básicos do sistema de controle de versão Git. Também é esperado que você tenha perseverança e capacidade de resolver problemas e buscar informações de forma independente.
+
+Conhecimento prévio de JavaScript ou outros tópicos do curso não é necessário.
+
+### Material do curso
+O material do curso deve ser lido parte por parte e na ordem.
+
+O material contém exercícios, que são colocados de forma que o material anterior forneça informações suficientes para resolver cada exercício. Você pode fazer os exercícios enquanto os encontra no material, mas também pode ser benéfico ler todo o material na parte antes de começar os exercícios.
+
+Em muitas partes do curso, os exercícios constroem uma aplicação maior passo a passo. Algumas das aplicações de exercícios são desenvolvidas em várias partes.
+
+O material do curso é baseado em aplicações de exemplo expandidas incrementalmente, que mudam de parte para parte. É melhor seguir o código enquanto faz pequenas modificações independentemente. O código das aplicações de exemplo para cada etapa de cada parte pode ser encontrado no GitHub.
+
+### Realizando o curso
+O curso contém quatorze partes, sendo a primeira numerada 0 para consistência com as iterações anteriores. Uma parte corresponde de forma geral a uma semana (com média de 15-20 horas) de estudo, mas a velocidade de conclusão do curso é flexível.
+
+Passar da parte <i>n</i> para a parte <i>n+1</i> não é sensato antes de ter um conhecimento suficiente dos tópicos na parte <i>n</i>. Em termos pedagógicos, o curso usa o [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), e você só deve prosseguir para a próxima parte depois de fazer o suficiente dos exercícios da parte anterior.
+
+A velocidade de conclusão do curso é flexível.
+
+Estatísticas de tempo de conclusão dos exercícios podem ser encontradas através do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+### Canal do curso no Discord e Telegram
+Você pode discutir o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. O Discord possui canais fullstack_general e específicos de partes (nomes de canais com prefixo fullstack) para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Por favor, participe da conversa!
+
+### Como pedir ajuda no Discord/Telegam
+Ao pedir ajuda para um problema no grupo do Discord/Telegram, sua pergunta deve ser o mais informativa e precisa possível. Se sua pergunta parecer isso
+
+> <i>Adicionar uma nova pessoa não funciona, você poderia me ajudar com isso?</i>
+
+É muito provável que ninguém se importe em responder. O erro pode estar <i>em qualquer lugar</i>.
+
+Uma boa pergunta poderia ser:
+
+> <i> No exercício 2.15, quando eu tentei adicionar uma nova pessoa à aplicação, o servidor responde com status 403. Mesmo com essa requisição, parece que tudo está funcionando.
+>
+> O código parece com isto:
+> ```js 
+>  // o código relevante é colado aqui
+>  // o código deve conter várias instruções console.log > para ajudar no debug
+> ```
+> O seguinte é impresso no console:
+> 
+> ```bash
+> // dados impressos no console
+> ```
+>
+> A aba Network vai ser exibida dessa forma:</i>
+>
+> [captura de tela da guia de rede do console]
+> 
+> Todo o código pode ser encontrado aqui (um link para o GitHub)
+
+
+### Partes e conclusão
+
+Os estudos de Full Stack consistem no curso principal e várias extensões. Você pode concluir os estudos com 5 a 14 créditos.
+
+### Partes 0-5 (curso principal) - Desenvolvimento web Full Stack (5 cr, CSM141081)
+
+O número de créditos e a nota para o curso são baseados no número total de exercícios enviados para as partes 0-7 (incluindo os exercícios marcados com um asterisco).
+
+Os créditos e as notas são calculados da seguinte maneira:
+
+
+| Exercícios   | Créditos       | Grade    |
+| ------------ | :------------: | :------: |
+| 138          |       7        | 5        |
+| 127          |       6        | 5        |
+| 116          |       5        | 5        |
+| 105          |       5        | 4        |
+| 94           |       5        | 3        |
+| 83           |       5        | 2        |
+| 72           |       5        | 1        |
+
+Once you have completed enough exercises for a passing grade, you can download the course certificate from the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+If you wish to receive university credits, you must complete the course exam. The exam does not count towards your final grade, but you must pass it. More info about the exam [here](/en/part0/general_info#the-course-exam).
+
+You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count toward your grade.
+
+<i>You do not need to attend the course exam or register for the Open University course to obtain the course certificate.</i>
+
+#### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
+
+By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
+- Submit at least 127 exercises for parts 0-7. 
+- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
+- [Request credits for part 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
+
+By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
+- Submit at least 138 exercises for parts 0-7. 
+- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3). 
+- [Request credits for part 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
+By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5 because its contents are independent of parts 6 and 7.
+- Submit at least 22/26 exercises for part 8.
+- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491). 
+- [Request credits for part 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
+By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
+- Submit at least 24/27 exercises for part 9.
+- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb). 
+- [Request credits for part 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
+By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
+- Submit at least 25 exercises for part 10. 
+- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6). 
+- [Request credits for part 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
+
+By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
+- Submit all exercises for part 11. 
+- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01). 
+- [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
+
+By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
+- Submit all exercises for part 12. 
+- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a). 
+- [Request credits for part 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+#### Part 13 - Full Stack Web Development: relational databases (1 cr, CSM14114)
+
+By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
+- Submit all exercises for part 13. 
+- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c). 
+- [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+
+
+### Studying the course in a nutshell
+
+How to study the course – instructions in a nutshell: 5 cr core course CSM141081
+
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+  - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
+- If you want to get University of Helsinki credits
+  - Enroll in the course. You will get the enrollment link through the submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#submitting-exercises)
+  - Save your student number. After course enrollment, save your University of Helsinki student ID number in the submission system.
+  - Do the online exam in the submission system. Read more [here](/en/part0/general_info#the-course-exam)
+  - Mark the course completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
+
+Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
+
+How to study the course – instructions in a nutshell: other course parts
+
+- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-13 have a separate instance in the submission system 
+  - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
+- If you want to get University of Helsinki credits
+  - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately. 
+ - Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
+
+### Submitting exercises
+
+The exercises are submitted through GitHub and marking them as done on the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.
+
+Exercises are submitted **one part at a time**. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.
+
+A system for detecting plagiarism is used to check exercises submitted to GitHub. If code is found from model answers or multiple students hand in the same code, the situation is handled according to the [policy on plagiarism](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism) of the University of Helsinki.
+
+Many of the exercises build a larger application bit by bit. In these cases, submitting only the completed application is enough. You can make a commit after each exercise, but that is not compulsory.
+
+### The course exam
+
+For the official university credits, you need to pass the course exam that covers parts 1-5 of the course
+- If you fail the exam, it can be done again after one week
+- You may continue with submissions after the exam
+
+The exam is done in the exercise submission system. Follow the instructions below to complete the exam.
+- Enroll in the course through Open University.
+- You will get the enrollment link through the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
+
+![enroll in university credits](../../images/0/enroll1.png)
+
+After the course enrollment, save your University of Helsinki student number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo):
+
+![saving the student number](../../images/0/28b.png)
+
+See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info on how you find out your student number.
+
+After these steps, you can do the course exam in the submission system:
+
+![start the course exam](../../images/0/enroll3.png)
+
+You will have 120 minutes to complete the exam. If all goes well, you should see the following confirmation:
+
+![final exam confirmation](../../images/0/enroll4.png)
+
+If you fail, you must wait for one week for trying the exam again.
+
+If you passed the exam, and you are not going to complete more exercises, you can go back to my submission tab and ask for the credits:
+
+![ask for course completion credits](../../images/0/enroll5a.png)
+
+Remember to press the big blue button to ask for the credits to be registered. 
+
+Note that you have to press the button twice:
+
+![pressing confirm button](../../images/0/button2.png)
+
+When pressed twice you should see the following text
+
+> <i>University credit registration in progress...</i>
+
+Note: if you have already done the course exam in Moodle contact matti.luukkainen@helsinki.fi or @mluukkai in Discord.
+
+### How to get your credits
+
+If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
+
+![saving the student number](../../images/0/28b.png)
+
+If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#the-course-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
+
+You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
+
+![ask for course completion credits](../../images/0/enroll5a.png)
+
+Remember to press the big blue button to ask for the credits to be registered. 
+
+Note that you have to press the button twice:
+
+![pressing confirm button](../../images/0/button2.png)
+
+When pressed twice you should see the following text
+
+> <i>University credit registration in progress...</i>
+
+**Please note** that to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
+
+You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
+
+When the registration is done, the following text appears in the submission system
+
+> <i>University credits registered, see the course page how to get a transcript if you need one</i>
+
+### Where do I get my University of Helsinki Student number 
+
+When and if you enroll in a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. <i>**Please make sure you have enrolled in the course before you try to find out what your student number is.** </i>
+
+Note also that <strong>you do not need to enroll</strong> in Open University to get the course certificate!
+
+You can find out what your student number is through one of the options below: 
+
+#### A) Sisu 
+
+If you have a university of Helsinki user account, you can find your student number from your profile in the University of Helsinki’s study information system Sisu: 
+ - Log in to Sisu with your University of Helsinki username and password.   
+ - Select: My profile 
+ - Select: Personal information 
+
+#### B) Enrollment confirmation email 
+
+After course enrollment, you will receive a confirmation email to an email address you have entered on the enrollment form. This message either directly has your student number on it or includes a link that takes you to a page displaying your University of Helsinki student number.  
+
+#### C) Contact Student Services 
+
+If you have trouble finding out your student number through the means listed above, you can send an email to University of Helsinki Student Services. <i>**Make sure you have enrolled on the course through the Open University before sending the email!**</i>
+
+In your email, include the following information 
+
+- name of the course you have enrolled in, 
+- your name, and 
+- your date of birth. 
+
+Student Services email address: avoin-student@helsinki.fi 
+
+ **One more reminded:** <i>make sure you have enrolled on the course through the Open University before sending the email</i>
+
+### Course certificate
+
+Even if you do not register to Open University for the exam and the credits, you can still download the course certificate from the "My submissions" tab in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
+
+There is one certificate for the base parts (0-7) of the course and after that a separate cert for each course part.
+
+### Request a transcript of studies
+
+You can request a verified transcript <i>after your university credits have been registered</i>. To request an official transcript, please contact avoin-student@helsinki.fi.
+
+- When requesting an official transcript, remember to mention
+  - the name of the course,
+  - your full name,
+  - your date of birth, and
+  - the language of the transcript.
+
+The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
+
+### Continuing the course in the year 2023
+
+The course has a two-week maintenance "break" starting at 1st of March 2023. During the break material stays online, and also exercises can be submitted. During the break the course content may change a bit, nothing too dramatic has been planned at the moment.
+
+All the submitted exercises remain valid after the maintainance break, the course can be continued without bothering too much about the break. Also the policy for getting certs, university credits etc. shall remain the same. So in practice, *nothing changes*, you can do the course without worrying about anything related to timing.
+
+### Expanding on a previously completed course
+
+If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
+
+#### Expanding on Full stack open
+
+You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
+
+#### Expanding on the University of Helsinki instance of this course
+
+That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
+
+### Full stack project
+
+A full stack project worth 5, 7 or 10 credits will be available through Open University.
+
+For the project, an application is implemented in React and/or Node, though implementing a mobile application in React Native is also possible.
+
+The number of credits is based on hours of work done. One credit is approximately 17.5 hours of work. The work is graded pass/fail.
+
+It is possible to complete the project as a pair or a group.
+
+See [more information on the project](https://github.com/fullstack-hy2020/misc/blob/master/project.md).
+
+### Interview promise
+
+Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10).
+
+This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
+
+You need to be a resident of Finland to participate in these interviews.
+
+### Before you start
+
+Using the [Chrome browser](https://www.google.com/chrome/) is recommended for this course because it provides the best tools for web development. Another alternative is the [Developer Edition of Firefox](https://www.mozilla.org/en-US/firefox/developer/), which provides the same range of features.
+
+The course exercises are submitted to GitHub, so Git must be installed and you should know how to use it. For instructions, see [Git and GitHub tutorial for beginners](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
+
+Install a sensible text editor that supports web development. [Visual Studio Code](https://code.visualstudio.com/) is highly recommended.
+
+Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
+
+Also, install [Node.js](https://nodejs.org/en/). The material has been done with version 16.13.2, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
+
+Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
+
+### Typos in the material
+
+If you find a typo in the material, or something has been expressed unclearly or is simply bad grammar, submit a <i>pull request</i> to the course material in the [repository](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md>
+
+At the bottom of each part of the material is a link to <em>propose changes to the material</em>. You can edit the source code of the page by clicking on the link.
+
+There are also lots of links in the material for many kinds of background material. If you notice that a link is broken (that happens too often...), propose a change or ping us in Discord if you do not find a replacement for the broken link.
+
+</div>
