@@ -7,42 +7,42 @@ lang: pt
 
 <div class="content">
 
-Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O principal foco é em aplicativos de página única implementados com React e suportados por serviços web RESTful e GraphQL implementados com Node.js. O curso também tem partes em TypeScript, React Native e Integração Contínua.
+Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O principal foco é em aplicativos de página única implementados com React e com suporte a Serviços Web RESTful e GraphQL implementados com Node.js. O curso também têm partes em TypeScript, React Native e Integração Contínua.
 
-Outros tópicos incluem depuração de aplicativos, tecnologia de container, configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
+Outros tópicos incluem depuração de aplicativos, tecnologia de contêineres, configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
 
 ### Pré-requisitos
 Os participantes devem ter boas habilidades de programação, conhecimento básico de programação web e banco de dados e saber os básicos do sistema de controle de versão Git. Também é esperado que você tenha perseverança e capacidade de resolver problemas e buscar informações de forma independente.
 
-Conhecimento prévio de JavaScript ou outros tópicos do curso não é necessário.
+Conhecimento prévio em JavaScript ou outros tópicos do curso não é necessário.
 
 ### Material do curso
-O material do curso deve ser lido parte por parte e na ordem.
+O material do curso deve ser lido parte por parte e em ordem.
 
-O material contém exercícios, que são colocados de forma que o material anterior forneça informações suficientes para resolver cada exercício. Você pode fazer os exercícios enquanto os encontra no material, mas também pode ser benéfico ler todo o material na parte antes de começar os exercícios.
+O material contém exercícios, que são expostos de forma que o material anterior forneça informações suficientes para que se consiga resolver o exercício posterior. É possível fazer os exercícios enquanto se passa pelo material, mas também pode ser benéfico ler todo o material da parte antes de começar os exercícios.
 
-Em muitas partes do curso, os exercícios constroem uma aplicação maior passo a passo. Algumas das aplicações de exercícios são desenvolvidas em várias partes.
+Em muitas partes do curso, os exercícios constroem uma aplicação maior a cada passo dado. Algumas das aplicações dos exercícios são desenvolvidas em várias partes.
 
-O material do curso é baseado em aplicações de exemplo expandidas incrementalmente, que mudam de parte para parte. É melhor seguir o código enquanto faz pequenas modificações independentemente. O código das aplicações de exemplo para cada etapa de cada parte pode ser encontrado no GitHub.
+O material do curso é baseado em aplicações de exemplo expandidas incrementalmente, que mudam de parte para parte. O melhor a se fazer é seguir o código enquanto faz pequenas modificações de forma independente. O código das aplicações de exemplo para cada etapa de cada parte pode ser encontrado no GitHub.
 
-### Realizando o curso
-O curso contém quatorze partes, sendo a primeira numerada 0 para consistência com as iterações anteriores. Uma parte corresponde de forma geral a uma semana (com média de 15-20 horas) de estudo, mas a velocidade de conclusão do curso é flexível.
+### Fazendo o curso
+O curso contém quatorze partes, sendo a primeira numerada como "0" para manter consistência com as iterações anteriores. Uma parte corresponde de forma geral a uma semana (com média de 15-20 horas) de estudo, mas a velocidade de conclusão do curso é flexível.
 
-Passar da parte <i>n</i> para a parte <i>n+1</i> não é sensato antes de ter um conhecimento suficiente dos tópicos na parte <i>n</i>. Em termos pedagógicos, o curso usa o [Mastery Learning](https://en.wikipedia.org/wiki/Mastery_learning), e você só deve prosseguir para a próxima parte depois de fazer o suficiente dos exercícios da parte anterior.
+É imprudente ir passando da parte <i>n</i> para a parte <i>n+1</i> sem antes não se ter conhecimento suficiente dos tópicos na parte <i>n</i>. Em termos pedagógicos, o curso utiliza o [Aprendizagem para o domínio (Mastery Learning)](https://en.wikipedia.org/wiki/Mastery_learning), e você só deve prosseguir para a próxima parte depois de completar suficientemente os exercícios da parte anterior.
 
 A velocidade de conclusão do curso é flexível.
 
 Estatísticas de tempo de conclusão dos exercícios podem ser encontradas através do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 ### Canal do curso no Discord e Telegram
-Você pode discutir o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. O Discord possui canais fullstack_general e específicos de partes (nomes de canais com prefixo fullstack) para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Por favor, participe da conversa!
+Você pode discutir sobre o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. O Discord possui os canais "fullstack_general" e os específicos das partes (nomes de canais com prefixo fullstack) para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Venha participar da conversa conosco!
 
 ### Como pedir ajuda no Discord/Telegam
-Ao pedir ajuda para um problema no grupo do Discord/Telegram, sua pergunta deve ser o mais informativa e precisa possível. Se sua pergunta parecer isso
+Ao pedir ajuda no grupo do Discord/Telegram, sua pergunta deve ser a mais informativa e precisa possível. Se sua pergunta parecer com isso:
 
-> <i>Adicionar uma nova pessoa não funciona, você poderia me ajudar com isso?</i>
+> <i>A função de adicionar uma nova pessoa não funciona. Poderia me ajudar a resolver isso?</i>
 
-É muito provável que ninguém se importe em responder. O erro pode estar <i>em qualquer lugar</i>.
+É muito provável que ninguém ligue em responder. O erro pode estar <i>em todo lugar</i>.
 
 Uma boa pergunta poderia ser:
 
@@ -51,7 +51,7 @@ Uma boa pergunta poderia ser:
 > O código parece com isto:
 > ```js 
 >  // o código relevante é colado aqui
->  // o código deve conter várias instruções console.log > para ajudar no debug
+>  // o código deve conter várias instruções 'console.log' para ajudar no debug
 > ```
 > O seguinte é impresso no console:
 > 
@@ -66,16 +66,15 @@ Uma boa pergunta poderia ser:
 > Todo o código pode ser encontrado aqui (um link para o GitHub)
 
 
-### Partes e conclusão
+### Partes e encerramento
 
-Os estudos de Full Stack consistem no curso principal e várias extensões. Você pode concluir os estudos com 5 a 14 créditos.
+Os estudos Full Stack consistem no curso principal e em vários aproveitamentos. Você pode concluir os estudos com 5 a 14 créditos.
 
-### Partes 0-5 (curso principal) - Desenvolvimento web Full Stack (5 cr, CSM141081)
+### Partes 0-5 (curso principal) - Desenvolvimento Web Full Stack (5 cr, CSM141081)
 
-O número de créditos e a nota para o curso são baseados no número total de exercícios enviados para as partes 0-7 (incluindo os exercícios marcados com um asterisco).
+A quantidade de créditos e a nota para o curso são baseados no número total de exercícios enviados para as partes 0-7 (incluindo os exercícios marcados com um asterisco).
 
 Os créditos e as notas são calculados da seguinte maneira:
-
 
 | Exercícios   | Créditos       | Grade    |
 | ------------ | :------------: | :------: |
@@ -87,285 +86,285 @@ Os créditos e as notas são calculados da seguinte maneira:
 | 83           |       5        | 2        |
 | 72           |       5        | 1        |
 
-Assim que tiver completado exercícios suficientes para passar na grade, você pode baixar o certificado de conclusão do curso pelo [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Assim que tiver completado exercícios suficientes para passar na grade, fica disponível para download o certificado de conclusão do curso pelo [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Se você deseja receber créditos universitários, deve completar o exame do curso. O exame não conta para sua nota final, mas você deve passá-lo. Mais informações sobre o exame [aqui](/en/part0/general_info#the-course-exam).
+Se deseja receber créditos universitários, você deve completar a prova do curso. A prova não conta para sua nota final, mas é necessário passar nela. Mais informações sobre a prova [aqui](/pt/part0/general_info#the-course-exam).
 
-You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count toward your grade.
+Você só pode fazer a prova após entregar exercícios suficientes para cinco créditos. Não é aconselhável fazer a prova imediatamente após entregar o número exato de exercícios. A prova vale o mesmo para os 5 a 14 créditos e não conta para sua nota.
 
-<i>You do not need to attend the course exam or register for the Open University course to obtain the course certificate.</i>
+<i>Você não precisa participar da prova do curso ou se inscrever no curso da Universidade Aberta para obter o certificado do curso.</i>
 
-#### Part 6 - Full Stack Web Development, extension 1 (1 cr, CSM141082)
+#### Parte 6 - Desenvolvimento Web Full Stack, aproveitamento 1 (1 cr, CSM141082)
 
-By submitting at least 127 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
-- Submit at least 127 exercises for parts 0-7. 
-- [Enroll in part 6 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
-- [Request credits for part 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+Ao entregar pelo menos 127 dos exercícios das partes 0-7 ao avançar no curso principal, você pode receber crédito adicional através deste aproveitamento.
+- Entregue pelo menos 127 exercícios das partes 0-7. 
+- [Inscreva-se na parte 6 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
+- [Solicitar créditos para a parte 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 7 - Full Stack Web Development, extension 2 (1 cr, CSM141083)
+#### Parte 7 - Desenvolvimento Full Stack, aproveitamento 2 (1 cr, CSM141083)
 
-By submitting at least 138 of the exercises for parts 0-7 while working on the core course, you can receive an additional credit through this extension. 
-- Submit at least 138 exercises for parts 0-7. 
-- [Enroll in part 7 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3). 
-- [Request credits for part 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+Ao entregar pelo menos 138 dos exercícios das partes 0-7 enquanto trabalha no curso principal, você pode receber crédito adicional através deste aproveitamento.
+- Entregue pelo menos 138 exercícios para as partes 0-7.
+- [Matricule-se na parte 7 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).
+- [Solicite créditos para a parte 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 8 - Full Stack Web Development: GraphQL (1 cr, CSM14113)
-By submitting at least 22/26 of the exercises for part 8 of the course, GraphQL, you can get one additional credit. Part 8 can be done any time after part 5 because its contents are independent of parts 6 and 7.
-- Submit at least 22/26 exercises for part 8.
-- [Enroll in part 8 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491). 
-- [Request credits for part 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+#### Parte 8 - Desenvolvimento Full Stack: GraphQL (1 cr, CSM14113)
+Ao entregar pelo menos 22 dos 26 exercícios da 8 do curso, GraphQL, você pode obter um crédito adicional. A parte 8 pode ser feita a qualquer momento depois da parte 5, pois seu conteúdo é independente das partes 6 e 7.
+- Entregue pelo menos 22 dos 26 exercícios da 8.
+- [Matricule-se na parte 8 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).
+- [Solicite créditos para a parte 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 9 - Full Stack Web Development: TypeScript (1 cr, CSM14110)
-By submitting at least 24/27 of the exercises for part 9 of the course, TypeScript, you can get one additional credit. It is recommended that you complete parts 0-7 before taking part 9.
-- Submit at least 24/27 exercises for part 9.
-- [Enroll in part 9 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb). 
-- [Request credits for part 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+#### Parte 9 - Desenvolvimento Full Stack: TypeScript (1 cr, CSM14110)
+Ao entregar pelo menos 24 dos 27 exercícios da parte 9 do curso, TypeScript, você pode obter um crédito adicional. É recomendado que você complete as partes 0-7 antes de fazer a parte 9.
+- Entregue pelo menos 24 dos 27 exercícios da parte 9.
+- [Inscreva-se na parte 9 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
+- [Solicite créditos para a parte 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 10 - Full Stack Web Development: React Native (2 cr, CSM14111)
-By submitting 25 exercises for part 10 of the course on React Native, you can earn two additional credits. More information about this part's prerequisites, exercise submission, and credits can be found in [part 10](/en/part10/introduction_to_react_native).
-- Submit at least 25 exercises for part 10. 
-- [Enroll in part 10 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6). 
-- [Request credits for part 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+#### Parte 10 - Desenvolvimento Full Stack: React Native (2 cr, CSM14111)
+Ao entregar 25 exercícios da parte 10 do curso de React Native, você pode ganhar dois créditos adicionais. Mais informações sobre os pré-requisitos dessa parte, a entrega de exercícios e os créditos podem ser encontrados na [parte 10](/pt/part10/introduction_to_react_native).
+- Entregue pelo menos 25 exercícios da parte 10.
+- [Inscreva-se na parte 10 através da Universidade Aberta] (https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6). 
+- [Solicite créditos para a parte 10](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 11 - Full Stack Web Development: Continuous Integration / Continuous Delivery (1 cr, CSM14112)
+#### Parte 11 - Desenvolvimento Full Stack Web: Integração Contínua / Entrega Contínua (1 cr, CSM14112)
 
-By submitting all exercises for part 11 of the course on Continuous Integration/Delivery, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 11](/en/part11).
-- Submit all exercises for part 11. 
-- [Enroll in part 11 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01). 
-- [Request credits for part 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+Ao entregar todos os exercícios da parte 11 do curso de Integração/Entrega Contínua, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 11](/pt/part11).
+- Entregue todos os exercícios da parte 11. 
+- [Inscreva-se na parte 11 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01). 
+- [Solicite créditos para a parte 11](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 12 - Full Stack Web Development: Containers (1 cr, CSM141084)
+#### Parte 12 - Desenvolvimento Full Stack Web: Containers (1 cr, CSM141084)
 
-By submitting all exercises for part 12 of the course on Container technology, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 12](/en/part12).
-- Submit all exercises for part 12. 
-- [Enroll in part 12 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a). 
-- [Request credits for part 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+Ao entregar todos os exercícios da parte 12 do curso sobre a tecnologia Container, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 12](/pt/part12).
+- Submeter todos os exercícios para a parte 12. 
+- [Inscreva-se na parte 12 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a). 
+- [Solicite créditos para a parte 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
-#### Part 13 - Full Stack Web Development: relational databases (1 cr, CSM14114)
+#### Parte 13 - Desenvolvimento Web Full Stack: Bases de Dados Relacionais (1 cr, CSM14114)
 
-By submitting all exercises for part 13 of the course on Relational databases, you can earn one additional credit. More information about this part's prerequisites and exercise submission can be found in [part 13](/en/part13).
-- Submit all exercises for part 13. 
-- [Enroll in part 13 through the Open University](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c). 
-- [Request credits for part 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+Ao entregar todos os exercícios da parte 13 do curso sobre bancos de dados relacionais, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 13](/pt/parte13).
+- Submeter todos os exercícios da parte 13. 
+- [Inscreva-se na parte 13 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c). 
+- [Solicite créditos para a parte 13](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 
-### Studying the course in a nutshell
+### O curso em poucas palavras
 
-How to study the course – instructions in a nutshell: 5 cr core course CSM141081
+Como estudar o curso – instruções resumidas: curso básico de 5 cr CSM141081
 
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-  - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
-- If you want to get University of Helsinki credits
-  - Enroll in the course. You will get the enrollment link through the submission system once you have completed enough exercises. Read more [here](/en/part0/general_info#submitting-exercises)
-  - Save your student number. After course enrollment, save your University of Helsinki student ID number in the submission system.
-  - Do the online exam in the submission system. Read more [here](/en/part0/general_info#the-course-exam)
-  - Mark the course completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
+- Faça os exercícios. Os exercícios são enviados através do GitHub e marcados como concluídos no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+   - [O certificado do curso](/pt/part0/general_info#course-certificate) estará disponível no sistema de envio de exercícios
+- Se você deseja obter os créditos da Universidade de Helsinque:
+   - Inscreva-se no curso. Você receberá o link de inscrição por meio do sistema de envio de exercícios assim que concluir os exercícios suficientes. Leia mais [aqui](/pt/part0/general_info#submit-exercises)
+   - Salve seu número de aluno. Após a inscrição no curso, salve seu número de identificação de aluno da Universidade de Helsinque no sistema de envio de exercícios.
+   - Faça o exame online no sistema de submissão. Leia mais [aqui](/en/part0/general_info#the-course-exam)
+   - Marcar o curso concluído no sistema de envio de exercícios. Leia mais [aqui](/en/part0/general_info#how-to-get-your-credits)
 
-Please note that if you do the "base course" with 6 or 7 credits, you need separate registrations for the extra credits, see [Parts and completion](/en/part0/general_info#parts-and-completion) for more.
+Observe que, se você fizer o "curso básico" com 6 ou 7 créditos, precisará de registros separados para os créditos extras, consulte [Partes e conclusão](/en/part0/general_info#parts-and-completion) para saber mais.
 
-How to study the course – instructions in a nutshell: other course parts
+Como estudar o curso – instruções resumidas: outras partes do curso
 
-- Do the exercises. The exercises are submitted through GitHub and marking them as done on the submission system. Note that parts 8-13 have a separate instance in the submission system 
-  - [The course certificate](/en/part0/general_info#course-certificate) will be available in the submission system
-- If you want to get University of Helsinki credits
-  - Enroll in the course. You can enroll in each part through the link in the course material ([Parts and completion](/en/part0/general_info#parts-and-completion)). Enroll in each part separately. 
- - Mark the part completed in the submission system. Read more [here](/en/part0/general_info#how-to-get-your-credits)
+- Faça os exercícios. Os exercícios são enviados por meio do GitHub e marcados como concluídos no sistema de envio de exercícios. Observe que as partes 8-13 têm uma instância separada no sistema de envio
+   - [O certificado do curso](/en/part0/general_info#course-certificate) estará disponível no sistema de submissão
+- Se você deseja obter créditos da Universidade de Helsinque
+   - Inscreva-se no curso. Você pode se inscrever em cada parte através do link no material do curso ([Partes e conclusão](/en/part0/general_info#parts-and-completion)). Inscreva-se em cada parte separadamente.
+  - Marcar a parte concluída no sistema de envio. Leia mais [aqui](/en/part0/general_info#how-to-get-your-credits)
 
-### Submitting exercises
+### Enviando exercícios
 
-The exercises are submitted through GitHub and marking them as done on the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Os exercícios são enviados por meio do GitHub e marcados como concluídos na guia "meus envios" do [pedido de envio](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-If you are submitting exercises from different parts to the same repository, use an appropriate system for naming your directories. You can of course create a new repository for each part. If you are using a private repository, add <i>mluukkai</i> as a collaborator.
+Se estiver enviando exercícios de diferentes partes para o mesmo repositório, use uma forma de nomeção apropriada em seus diretórios. É claro que você pode criar um novo repositório para cada parte. Se você estiver usando um repositório privado, adicione <i>mluukkai</i> como colaborador.
 
-Exercises are submitted **one part at a time**. Once you have submitted exercises for a part, you can no longer submit any more exercises for that part.
+Os exercícios são enviados **uma parte de cada vez**. Depois de enviar exercícios para uma parte, você não poderá mais enviar exercícios para essa parte.
 
-A system for detecting plagiarism is used to check exercises submitted to GitHub. If code is found from model answers or multiple students hand in the same code, the situation is handled according to the [policy on plagiarism](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism) of the University of Helsinki.
+Um sistema de detecção de plágio é usado para verificar os exercícios enviados ao GitHub. Se o código encontrado bater com as respostas-modelo ou se vários alunos entregarem o mesmo código, a situação será tratada de acordo com a [política de plágio](https://guide.student.helsinki.fi/en/article/what-cheating-and-plagiarism) da Universidade de Helsinque.
 
-Many of the exercises build a larger application bit by bit. In these cases, submitting only the completed application is enough. You can make a commit after each exercise, but that is not compulsory.
+Muitos dos exercícios fazem com que a aplicação escale pouco a pouco. Nesses casos, basta enviar apenas a inscrição preenchida. Você pode fazer um commit após cada exercício, mas isso não é obrigatório.
 
-### The course exam
+### A prova do curso
 
-For the official university credits, you need to pass the course exam that covers parts 1-5 of the course
-- If you fail the exam, it can be done again after one week
-- You may continue with submissions after the exam
+Quantos aos créditos universitários oficiais, você precisa passar na prova do curso que abrange as partes de 1 a 5
+- Se você não passar na prova na primeira vez, é possível refazê-la após uma semana
+- Você pode continuar enviando os exercícios mesmo após ter feito a prova
 
-The exam is done in the exercise submission system. Follow the instructions below to complete the exam.
-- Enroll in the course through Open University.
-- You will get the enrollment link through the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) once you have completed enough exercises.
+A prova é feita no sistema de envio de exercícios. Siga as instruções abaixo para concluir a prova.
+- Inscreva-se no curso através da Universidade Aberta.
+- Você receberá o link de inscrição por meio do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) depois de concluir os exercícios suficientes.
 
-![enroll in university credits](../../images/0/enroll1.png)
+![matricule-se em 'créditos universitários'](../../images/0/enroll1.png)
 
-After the course enrollment, save your University of Helsinki student number in the [submission system](https://studies.cs.helsinki.fi/stats/myinfo):
+Após sua matrícula no curso, salve seu número de identificação de aluno da Universidade de Helsinque no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/myinfo):
 
-![saving the student number](../../images/0/28b.png)
+![salvando o número de identificação de aluno](../../images/0/28b.png)
 
-See [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for info on how you find out your student number.
+Leia mais [aqui](/pt/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) para obter informações sobre como descobrir seu número de identificação de aluno.
 
-After these steps, you can do the course exam in the submission system:
+Após essas etapas, você já poderá fazer a prova do curso no sistema de envio de exercícios:
 
-![start the course exam](../../images/0/enroll3.png)
+![iniciar a prova do curso](../../images/0/enroll3.png)
 
-You will have 120 minutes to complete the exam. If all goes well, you should see the following confirmation:
+Você terá 120 minutos para concluir o exame. Se tudo correr bem, você verá a seguinte confirmação:
 
-![final exam confirmation](../../images/0/enroll4.png)
+![confirmação da prova final](../../images/0/enroll4.png)
 
-If you fail, you must wait for one week for trying the exam again.
+Se for reprovado, deverá aguardar uma semana para tentar novamente a prova.
 
-If you passed the exam, and you are not going to complete more exercises, you can go back to my submission tab and ask for the credits:
+Se você passou no exame e não deseja mais fazer mais exercícios, é possível voltar à aba de envio de exercícios e solicitar pelos créditos:
 
-![ask for course completion credits](../../images/0/enroll5a.png)
+![solicitar créditos de conclusão do curso](../../images/0/enroll5a.png)
 
-Remember to press the big blue button to ask for the credits to be registered. 
+Lembre-se de apertar no botão azul grande para pedir o cadastro dos créditos.
 
-Note that you have to press the button twice:
+Observe que você deve pressionar o botão duas vezes:
 
-![pressing confirm button](../../images/0/button2.png)
+![pressionando o botão confirmar](../../images/0/button2.png)
 
-When pressed twice you should see the following text
+Quando pressionado duas vezes, deverá ser exibido o seguinte texto:
 
-> <i>University credit registration in progress...</i>
+> <i>Crédito universitário em andamento...</i>
 
-Note: if you have already done the course exam in Moodle contact matti.luukkainen@helsinki.fi or @mluukkai in Discord.
+Observação: se você já fez o exame do curso no Moodle, entre em contato com matti.luukkainen@helsinki.fi ou @mluukkai no Discord.
 
-### How to get your credits
+### Como conseguir seus créditos
 
-If you want to receive University of Helsinki credits, save your <b>University of Helsinki</b> student number to [the exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
+Se você deseja receber os créditos da Universidade de Helsinki, salve seu número de aluno da <b>Universidade de Helsinque</b> no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen)
 
-![saving the student number](../../images/0/28b.png)
+![salvando o número de identificação do aluno](../../images/0/28b.png)
 
-If you are not a student at the University of Helsinki, you can get a student number by registering for the course through [Open University](/en/part0/general_info#the-course-exam), see [this](/en/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) for more info.
+Se você não é aluno da Universidade de Helsinque, pode obter um número de aluno registrando-se no curso através da [Universidade Aberta](/pt/part0/general_info#the-course-exam). Entre [aqui](/pt/part0/general_info#where-do-i-get-my-university-of-helsinki-student-number) para mais informações.
 
-You will receive your credits after you have submitted enough exercises for a passing grade, passed the exam and let us know through the exercise submission system that you have completed the course:
+Você receberá seus créditos depois de enviar exercícios suficientes para sua aprovação, passar na prova e nos informar através do sistema de envio de exercícios que você concluiu o curso:
 
-![ask for course completion credits](../../images/0/enroll5a.png)
+![pedir créditos de conclusão do curso](../../images/0/enroll5a.png)
 
-Remember to press the big blue button to ask for the credits to be registered. 
+Lembre-se de apertar o botão azul para pedir o cadastro dos créditos.
 
-Note that you have to press the button twice:
+Observe que você deve pressionar o botão duas vezes:
 
-![pressing confirm button](../../images/0/button2.png)
+![pressionando o botão confirmar](../../images/0/button2.png)
 
-When pressed twice you should see the following text
+Quando pressionado duas vezes, você deve ver o seguinte texto:
 
-> <i>University credit registration in progress...</i>
+> <i>Crédito universitário em andamento...</i>
 
-**Please note** that to get university credits you need a registration for each completed part, please see [more info about registration](/en/part0/general_info#parts-and-completion).
+**Note** que para obter créditos universitários, você precisa de um registro de cada parte concluída. Consulte [mais informações sobre o registro](/pt/part0/general_info#parts-and-completion).
 
-You can view your grade in University of Helsinki Sisu and [Opintopolku](https://opintopolku.fi/oma-opintopolku/) approximately four weeks after notifying us.
+Você pode ver sua nota no Sisu da Universidade de Helsinki e no [Opintopolku](https://opintopolku.fi/oma-opintopolku/) aproximadamente quatro semanas após nos notificar.
 
-When the registration is done, the following text appears in the submission system
+Quando o registro é feito, o seguinte texto aparece no sistema de envio de exercícios:
 
-> <i>University credits registered, see the course page how to get a transcript if you need one</i>
+> <i>Créditos universitários registrados! Consulte a página do curso para obter uma transcrição, caso necessite.</i>
 
-### Where do I get my University of Helsinki Student number 
+### Onde obtenho meu número de estudante da Universidade de Helsinque
 
-When and if you enroll in a course for the first time through the Open University, a University of Helsinki student number will be automatically generated. <i>**Please make sure you have enrolled in the course before you try to find out what your student number is.** </i>
+Se e quando você se matricular pela primeira vez em um curso através da Universidade Aberta, será gerado automaticamente um número de identificação de aluno da Universidade de Helsinque. <i>**Certifique-se de estar matriculado no curso antes de tentar descobrir qual é o seu número de aluno.** </i>
 
-Note also that <strong>you do not need to enroll</strong> in Open University to get the course certificate!
+Note que <strong>você não precisa se matricular</strong> na Universidade Aberta para obter o certificado do curso!
 
-You can find out what your student number is through one of the options below: 
+Você consegue saber do seu número de identificação de aluno através de uma das opções abaixo:
 
-#### A) Sisu 
+#### A) Sisu
 
-If you have a university of Helsinki user account, you can find your student number from your profile in the University of Helsinki’s study information system Sisu: 
- - Log in to Sisu with your University of Helsinki username and password.   
- - Select: My profile 
- - Select: Personal information 
+Se você tiver uma conta de usuário da Universidade de Helsinque, poderá encontrar seu número de identificação de aluno em seu perfil no sistema de informações de estudo da Universidade de Helsinque Sisu:
+  - Faça login no Sisu com seu nome de usuário e senha da Universidade de Helsinque.
+  - Selecione: Meu perfil
+  - Selecione: Informações pessoais
 
-#### B) Enrollment confirmation email 
+#### B) E-mail de confirmação de matrícula
 
-After course enrollment, you will receive a confirmation email to an email address you have entered on the enrollment form. This message either directly has your student number on it or includes a link that takes you to a page displaying your University of Helsinki student number.  
+Após a matrícula no curso, você receberá um e-mail de confirmação no endereço de e-mail que você inseriu no formulário de inscrição. Esta mensagem contém diretamente o seu número de aluno ou inclui um link que o leva a uma página que exibe seu número de identificação de aluno da Universidade de Helsinque.
 
-#### C) Contact Student Services 
+#### C) Entre em contato com o Serviço de Alunos
 
-If you have trouble finding out your student number through the means listed above, you can send an email to University of Helsinki Student Services. <i>**Make sure you have enrolled on the course through the Open University before sending the email!**</i>
+Se você tiver problemas para descobrir seu número de identificação de aluno pelos meios listados acima, envie um e-mail para os Serviços Estudantis da Universidade de Helsinque. <i>**Certifique-se de estar matriculado no curso pela Universidade Aberta antes de enviar o e-mail!**</i>
 
-In your email, include the following information 
+Em seu e-mail, inclua as seguintes informações:
 
-- name of the course you have enrolled in, 
-- your name, and 
-- your date of birth. 
+- Nome do curso em que se inscreveu;
+- Seu nome; e
+- Sua data de nascimento.
 
-Student Services email address: avoin-student@helsinki.fi 
+Endereço de e-mail dos Serviços Estudantis: avoin-student@helsinki.fi
 
- **One more reminded:** <i>make sure you have enrolled on the course through the Open University before sending the email</i>
+  **Mais um lembrete:** <i>certifique-se de ter se matriculado no curso pela Universidade Aberta antes de enviar o e-mail.</i>
 
-### Course certificate
+### Certificado do curso
 
-Even if you do not register to Open University for the exam and the credits, you can still download the course certificate from the "My submissions" tab in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) once you have completed enough exercises for a passing grade.
+Mesmo que você não se registre na Universidade Aberta para fazer a prova e obter os créditos, você ainda poderá baixar o certificado do curso na guia "Meus envios" no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) depois de concluir os exercícios suficientes para passar de ano.
 
-There is one certificate for the base parts (0-7) of the course and after that a separate cert for each course part.
+Há um certificado para as partes básicas (0-7) do curso e, depois disso, um certificado separado para cada parte do curso.
 
-### Request a transcript of studies
+### Solicite a transcrição dos estudos
 
-You can request a verified transcript <i>after your university credits have been registered</i>. To request an official transcript, please contact avoin-student@helsinki.fi.
+Você pode solicitar uma transcrição verificada <i>depois que seus créditos universitários forem registrados</i>. Para solicitar uma transcrição oficial, entre em contato com avoin-student@helsinki.fi.
 
-- When requesting an official transcript, remember to mention
-  - the name of the course,
-  - your full name,
-  - your date of birth, and
-  - the language of the transcript.
+- Ao solicitar uma transcrição oficial, lembre-se de mencionar
+   - O nome do curso;
+   - Seu nome completo;
+   - Sua data de nascimento; e
+   - O idioma da transcrição.
 
-The transcript will be delivered to you electronically through email. Present this document at your institution to have the credits included in your degree. The decision to include the credits will be made by your home institution.
+A transcrição será entregue a você via e-mail, eletrônicamente. Apresente este documento em sua instituição para ter os créditos incluídos em seu diploma. A decisão de incluir os créditos será tomada pela sua instituição de origem.
 
-### Continuing the course in the year 2023
+### Continuando o curso no ano de 2023
 
-The course has a two-week maintenance "break" starting at 1st of March 2023. During the break material stays online, and also exercises can be submitted. During the break the course content may change a bit, nothing too dramatic has been planned at the moment.
+O curso tem um "intervalo" de manutenção de duas semanas a partir de 1º de março de 2023. Durante o intervalo, o material fica online e podem ser enviados exercícios. Durante o intervalo, o conteúdo do curso pode mudar um pouco — nada muito drástico foi planejado até o momento.
 
-All the submitted exercises remain valid after the maintainance break, the course can be continued without bothering too much about the break. Also the policy for getting certs, university credits etc. shall remain the same. So in practice, *nothing changes*, you can do the course without worrying about anything related to timing.
+Todos os exercícios apresentados permanecem válidos após o intervalo de manutenção. O curso pode ser continuado sem que seja necessário se preocupar com o intervalo. Além disso, a política para obtenção de certificados, créditos universitários etc. permanecerá a mesma. Então, na prática, *nada muda*. Você pode continuar fazendo o curso sem se preocupar com essas mudanças.
 
-### Expanding on a previously completed course
+### Aproveitamento de um curso concluído anteriormente
 
-If you have already taken the course either as a MOOC or as a university course, you can now expand on your course.
+Se você já fez um curso como MOOC ou outro curso universitário, você pode reaproveitar seu curso.
 
-#### Expanding on Full stack open
+#### Aproveitamento no curso Full Stack Aberto
 
-You can just pick up where you left off! If you wish to resubmit a whole part, please contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>, with your GitHub username and which parts you would like to have deleted from your submissions.
+Basta continuar de onde parou! Se deseja reenviar uma parte inteira, entre em contato com o pessoal do curso via [email](mailto:matti.luukkainen@helsinki.fi) ou no Discord <i>mluukkai</i>, com seu nome de usuário do GitHub e quais partes você gostaria ter excluído de seus envios.
 
-#### Expanding on the University of Helsinki instance of this course
+#### Aproveitamento dos créditos deste curso da Universidade de Helsinque
 
-That is also possible, just contact the course personnel via [email](mailto:matti.luukkainen@helsinki.fi) or Discord <i>mluukkai</i>.
+Isso também é possível, basta entrar em contato com o pessoal do curso via [email](mailto:matti.luukkainen@helsinki.fi) ou no Discord <i>mluukkai</i>.
 
-### Full stack project
+### Projeto Full Stack
 
-A full stack project worth 5, 7 or 10 credits will be available through Open University.
+Um projeto full stack no valor de 5, 7 ou 10 créditos estará disponível na Universidade Aberta.
 
-For the project, an application is implemented in React and/or Node, though implementing a mobile application in React Native is also possible.
+Como objeto do projeto, um aplicativo é implementado em React e/ou Node, embora também seja possível implementar um aplicativo móvel em React Native.
 
-The number of credits is based on hours of work done. One credit is approximately 17.5 hours of work. The work is graded pass/fail.
+O número de créditos é baseado nas horas de trabalho realizadas. Um crédito equivale a aproximadamente 17,5 horas de trabalho. O trabalho é classificado como aprovado/reprovado.
 
-It is possible to complete the project as a pair or a group.
+É possível concluir o projeto em dupla ou em grupo.
 
-See [more information on the project](https://github.com/fullstack-hy2020/misc/blob/master/project.md).
+Veja [mais informações sobre o projeto](https://github.com/fullstack-hy2020/misc/blob/master/project.md).
 
-### Interview promise
+### Promessa de entrevista
 
-Our collaborators, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) and [Smartly.io](https://www.smartly.io/), have given the <i>promise of a job interview</i> for everyone who completes the course and the project work with maximum credits (14 + 10).
+Nossos colaboradores, [Houston Inc.](https://houston-inc.com/), [Terveystalo](https://www.terveystalo.com/en/) e [Smartly.io](https://www .smartly.io/), <i>prometeram uma entrevista de emprego</i> para todos que concluírem o curso e o trabalho do projeto com o máximo de créditos (14 + 10).
 
-This means that the student can, if they so choose, sign up for a job interview with a collaborator who has given the promise. The teacher of the course, Matti Luukkainen, will send instructions to the student after the courses have been completed with maximum credits.
+Isso significa que o aluno pode, se assim o desejar, inscrever-se para uma entrevista de emprego com um colaborador que tenha feito a promessa. O professor do curso, Matti Luukkainen, enviará instruções ao aluno após a conclusão dos cursos com o máximo de créditos.
 
-You need to be a resident of Finland to participate in these interviews.
+Você precisa residir na Finlândia para participar dessas entrevistas.
 
-### Before you start
+### Antes que você comece
 
-Using the [Chrome browser](https://www.google.com/chrome/) is recommended for this course because it provides the best tools for web development. Another alternative is the [Developer Edition of Firefox](https://www.mozilla.org/en-US/firefox/developer/), which provides the same range of features.
+O uso do [navegador Chrome](https://www.google.com/chrome/) é recomendado para este curso porque fornece as melhores ferramentas para desenvolvimento web. Outra alternativa é a [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/), que oferece a mesma variedade de recursos.
 
-The course exercises are submitted to GitHub, so Git must be installed and you should know how to use it. For instructions, see [Git and GitHub tutorial for beginners](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
+Os exercícios do curso são submetidos ao GitHub, portanto o Git deve estar instalado e você deve saber como utilizá-lo. Para mais instruções, consulte o [Tutorial do Git e do GitHub para iniciantes](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
-Install a sensible text editor that supports web development. [Visual Studio Code](https://code.visualstudio.com/) is highly recommended.
+Instale um editor de texto adequado que suporte desenvolvimento web. O editor [Visual Studio Code](https://code.visualstudio.com/) é altamente recomendado.
 
-Don't code with nano, Notepad or Gedit. NetBeans isn't very good for web development either. It is also rather heavy in comparison to Visual Studio Code.
+Não programe com nano, bloco de notas ou Gedit. O NetBeans também não é muito bom para desenvolvimento web. Também é bastante pesado em comparação com o Visual Studio Code.
 
-Also, install [Node.js](https://nodejs.org/en/). The material has been done with version 16.13.2, so don't install any version older than that. See [Node.js installation instructions](https://nodejs.org/en/download/package-manager/).
+Além disso, instale o [Node.js](https://nodejs.org/en/). O material foi feito com a versão 16.13.2, portanto não instale nenhuma versão anterior a essa. Consulte as [instruções de instalação do Node.js](https://nodejs.org/en/download/package-manager/).
 
-Node package manager [npm](https://www.npmjs.com/get-npm) will be automatically installed with Node.js. We will be actively using npm throughout the course. Node also comes with [npx](https://www.npmjs.com/package/npx), which we'll need a few times.
+O gerenciador de pacotes do Node [npm](https://www.npmjs.com/get-npm) será instalado automaticamente com o Node.js. Usaremos ativamente o npm ao longo do curso. O Node também vem com [npx](https://www.npmjs.com/package/npx), o qual utilizaremos algumas vezes.
 
-### Typos in the material
+### Erros de digitação no material
 
-If you find a typo in the material, or something has been expressed unclearly or is simply bad grammar, submit a <i>pull request</i> to the course material in the [repository](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). For example, the markdown source code of this page can be found in the repository at <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/en/part0a.md>
+Se você encontrar algum erro de digitação no material, ou algo que foi expresso de forma pouco clara ou com erros gramaticais, solicite um <i>pull request</i> para o material do curso no [repositório](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). Por exemplo, o código-fonte markdown desta página pode ser encontrado no repositório em <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/pt/parte0a.md>.
 
-At the bottom of each part of the material is a link to <em>propose changes to the material</em>. You can edit the source code of the page by clicking on the link.
+No canto inferior de cada parte deste material, há um link para <em>propor alterações no material</em>. Você pode editar o código-fonte da página clicando no link.
 
-There are also lots of links in the material for many kinds of background material. If you notice that a link is broken (that happens too often...), propose a change or ping us in Discord if you do not find a replacement for the broken link.
+Há também muitos links no material para muitos tipos de material de apoio. Se você perceber que um link está quebrado (isso acontece com muita frequência...), proponha uma alteração ou envie um ping para nós no Discord se não encontrar um link substituto para o link quebrado.
 
 </div>
