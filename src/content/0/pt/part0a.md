@@ -89,7 +89,7 @@ Os créditos e as notas são calculados da seguinte maneira:
 
 Assim que tiver completado exercícios suficientes para passar na grade, você pode baixar o certificado de conclusão do curso pelo [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-If you wish to receive university credits, you must complete the course exam. The exam does not count towards your final grade, but you must pass it. More info about the exam [here](/en/part0/general_info#the-course-exam).
+Se você deseja receber créditos universitários, deve completar o exame do curso. O exame não conta para sua nota final, mas você deve passá-lo. Mais informações sobre o exame [aqui](/en/part0/general_info#the-course-exam).
 
 You can only take the exam after submitting enough exercises for five credits. It is not wise in practice to take the exam immediately after submitting the critical number of exercises. The exam is the same for 5-14 credits and does not count toward your grade.
 
