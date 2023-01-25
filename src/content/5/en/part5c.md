@@ -75,7 +75,6 @@ Normally React components are rendered to the <i>DOM</i>. The render method we u
 
 We can use the object [screen](https://testing-library.com/docs/queries/about#screen) to access the rendered component. We use screen's method [getByText](https://testing-library.com/docs/queries/bytext) to search for an element that has the note content and ensure that it exists:
 
-
 ```js
   const element = screen.getByText('Component testing is done with react-testing-library')
   expect(element).toBeDefined()
@@ -111,7 +110,6 @@ I do not like this way of storing tests and application code in the same directo
 ### Searching for content in a component
 
 The react-testing-library package offers many different ways of investigating the content of the component being tested. In reality, the _expect_ in our test is not needed at all
-
 
 ```js
 import React from 'react'
@@ -165,7 +163,6 @@ There are also other methods, eg. [getByTestId](https://testing-library.com/docs
 ### Debugging tests
 
 We typically run into many different kinds of problems when writing our tests.
-
 
 Object _screen_ has method [debug](https://testing-library.com/docs/queries/about/#screendebug) that can be used to print the HTML of a component to the terminal. If we change the test as follows:
 
@@ -246,7 +243,6 @@ Now the HTML of the wanted element gets printed:
 ```
 ### Clicking buttons in tests
 
-
 In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called.
 
 Let us install a library [user-event](https://testing-library.com/docs/user-event/intro) that makes simulating user input a bit easier:
@@ -286,7 +282,6 @@ test('clicking the button calls event handler once', async () => {
 })
 ```
 
-
 There are a few interesting things related to this test. The event handler is a [mock](https://facebook.github.io/jest/docs/en/mock-functions.html) function defined with Jest:
 
 ```js
@@ -306,7 +301,6 @@ await user.click(button)
 ```
 
 Clicking happens with the method [click](https://testing-library.com/docs/user-event/convenience/#click) of the userEvent-library.
-
 
 The expectation of the test verifies that the <i>mock function</i> has been called exactly once.
 
@@ -388,8 +382,8 @@ The _beforeEach_ function gets called before each test, which then renders the <
 
 The first test verifies that the <i>Togglable</i> component renders its child component 
 
-```
-<div className="testDiv" >
+```js
+<div className="testDiv">
   togglable content
 </div>
 ```
@@ -708,7 +702,6 @@ test('does not render this', () => {
   expect(element).toBeNull()
 })
 ```
-
 
 ### Test coverage
 
