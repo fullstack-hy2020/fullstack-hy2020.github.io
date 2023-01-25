@@ -240,16 +240,10 @@ Haimme nyt halutun tekstin sisältävän elemementin sisällön tulostettavaksi:
 
 Sisällön näyttämisen lisäksi toinen <i>Note</i>-komponenttien vastuulla oleva asia on huolehtia siitä, että propsina välitettyä tapahtumankäsittelijäfunktiota _toggleImportance_ kutsutaan kun noten yhteydessä olevaa nappia painetaan.
 
-Asennetaan testiä varten apukirjasto [user-event](https://testing-library.com/docs/ecosystem-user-event/):
+Asennetaan testiä varten apukirjasto [user-event](https://testing-library.com/docs/user-event/intro/):
 
 ```
 npm install --save-dev @testing-library/user-event
-```
-
-Tällä hetkellä (28.1.2022) create-react-appin ja user-eventin olettamien kirjastojen välillä on pieni yhteensopivuusero joka korjautuu kun asetetaan kirjastosta jest-watch-typeahead tietty versio:
-
-```
-npm install -D --exact jest-watch-typeahead@0.6.5
 ```
 
 Testaus onnistuu seuraavasti:
@@ -385,7 +379,7 @@ Ennen jokaista testiä suoritettava _beforeEach_ renderöi <i>Togglable</i>-komp
 Ensimmäinen testi tarkastaa, että <i>Togglable</i> renderöi sen lapsikomponentin
 
 ```js
-<div className="testDiv" >
+<div className="testDiv">
   togglable content
 </div>
 ```
