@@ -9,36 +9,36 @@ lang: pt
 
 Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O foco principal é em aplicativos de página única implementados com React e com suporte a Serviços Web RESTful e GraphQL implementados com Node.js. O curso também têm partes sobre TypeScript, React Native e Integração Contínua.
 
-Outros tópicos incluem depuração de aplicativos, tecnologia de containers (contêineres), configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
+Outros tópicos incluem depuração de aplicativos, tecnologia de contêineres (containers), configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
 
 ### Pré-requisitos
-Os participantes devem ter boas habilidades de programação, conhecimento básico de programação web e banco de dados e saber os básicos do sistema de controle de versão Git. Também é esperado que você tenha perseverança e capacidade de resolver problemas e buscar informações de forma independente.
+Os participantes devem ter boas habilidades de programação, conhecimento básico de programação web e banco de dados e saber o básico do sistema de controle de versão Git. Também é esperado que você tenha perseverança e capacidade de resolver problemas e que saiba buscar informações de forma independente.
 
 Conhecimento prévio em JavaScript ou outros tópicos do curso não é necessário.
 
-### Material do curso
-O material do curso deve ser lido parte por parte e em ordem.
+### Conteúdo do curso
+O conteúdo do curso deve ser lido parte por parte e em ordem.
 
-O material contém exercícios, que são expostos de forma que o material anterior forneça informações suficientes para que se consiga resolver o exercício posterior. É possível fazer os exercícios enquanto se passa pelo material, mas também pode ser benéfico ler todo o material da parte antes de começar os exercícios.
+O material contêm exercícios que são expostos de forma que a parte anterior forneça informações suficientes para que se consiga resolver o exercício posterior. É possível fazer os exercícios enquanto se passa pelo material, mas também pode ser benéfico ler todo o conteúdo da parte antes de começar os exercícios.
 
 Em muitas partes do curso, os exercícios constroem uma aplicação maior a cada passo dado. Algumas das aplicações dos exercícios são desenvolvidas em várias partes.
 
-O material do curso é baseado em aplicações de exemplo expandidas incrementalmente, que mudam de parte para parte. O melhor a se fazer é seguir o código enquanto faz pequenas modificações de forma independente. O código das aplicações de exemplo para cada etapa de cada parte pode ser encontrado no GitHub.
+O conteúdo do curso é baseado em aplicações de exemplo expandidas incrementalmente, que mudam de parte para parte. O melhor a se fazer é seguir o código enquanto se faz pequenas modificações de forma independente. O código das aplicações de exemplo para cada etapa de cada parte pode ser encontrado no GitHub.
 
 ### Fazendo o curso
 O curso contém quatorze partes, sendo a primeira numerada como "0" para manter consistência com as iterações anteriores. Uma parte corresponde de forma geral a uma semana (com média de 15-20 horas) de estudo, mas a velocidade de conclusão do curso é flexível.
 
-É imprudente ir passando da parte <i>n</i> para a parte <i>n+1</i> sem antes não se ter conhecimento suficiente dos tópicos na parte <i>n</i>. Em termos pedagógicos, o curso utiliza o [Aprendizagem para o domínio (Mastery Learning)](https://en.wikipedia.org/wiki/Mastery_learning), e você só deve prosseguir para a próxima parte depois de completar suficientemente os exercícios da parte anterior.
+É imprudente ir passando da parte <i>n</i> para a parte <i>n+1</i> sem antes não se ter conhecimento suficiente dos tópicos na parte <i>n</i>. Em termos pedagógicos, o curso utiliza o método de [Aprendizagem para o domínio (Mastery Learning)](https://en.wikipedia.org/wiki/Mastery_learning), e você só deve prosseguir para a próxima parte assim que completar suficientemente os exercícios da parte anterior.
 
 A velocidade de conclusão do curso é flexível.
 
 Estatísticas de tempo de conclusão dos exercícios podem ser encontradas através do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 ### Canal do curso no Discord e Telegram
-Você pode discutir sobre o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. O Discord possui os canais "fullstack_general" e os específicos das partes (nomes de canais com prefixo fullstack) para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Venha participar da conversa conosco!
+Você pode discutir sobre o curso e tópicos relacionados em nosso grupo dedicado no Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> e no Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. O Discord possui os canais "fullstack_general" e os específicos das partes (nomes de canais com prefixo "fullstack") para discussões relacionadas ao curso. Observe que o <i>chat do Discord não é adequado para discussões relacionadas ao curso</i>. Venha participar da conversa conosco!
 
 ### Como pedir ajuda no Discord/Telegam
-Ao pedir ajuda no grupo do Discord/Telegram, sua pergunta deve ser a mais informativa e precisa possível. Se sua pergunta parecer com isso:
+Ao pedir ajuda no grupo do Discord/Telegram, sua pergunta deve ser a mais informativa e precisa possível. Se sua pergunta se parecer com isso:
 
 > <i>A função de adicionar uma nova pessoa não funciona. Poderia me ajudar a resolver isso?</i>
 
@@ -99,23 +99,23 @@ Você só pode fazer a prova após entregar exercícios suficientes para cinco c
 Ao entregar pelo menos 127 dos exercícios das partes 0-7 ao avançar no curso principal, você pode receber crédito adicional através deste aproveitamento.
 - Entregue pelo menos 127 exercícios das partes 0-7. 
 - [Inscreva-se na parte 6 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
-- [Solicitar créditos para a parte 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
+- [Solicite créditos para a parte 6](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Parte 7 - Desenvolvimento Full Stack, aproveitamento 2 (1 cr, CSM141083)
 
-Ao entregar pelo menos 138 dos exercícios das partes 0-7 enquanto trabalha no curso principal, você pode receber crédito adicional através deste aproveitamento.
+Ao entregar pelo menos 138 dos exercícios das partes de 0 a 7 enquanto trabalha no curso principal, você pode receber crédito adicional através deste aproveitamento.
 - Entregue pelo menos 138 exercícios para as partes 0-7.
 - [Matricule-se na parte 7 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).
 - [Solicite créditos para a parte 7](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Parte 8 - Desenvolvimento Full Stack: GraphQL (1 cr, CSM14113)
 Ao entregar pelo menos 22 dos 26 exercícios da 8 do curso, GraphQL, você pode obter um crédito adicional. A parte 8 pode ser feita a qualquer momento depois da parte 5, pois seu conteúdo é independente das partes 6 e 7.
-- Entregue pelo menos 22 dos 26 exercícios da 8.
+- Entregue pelo menos 22 dos 26 exercícios da parte 8.
 - [Matricule-se na parte 8 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).
 - [Solicite créditos para a parte 8](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
 
 #### Parte 9 - Desenvolvimento Full Stack: TypeScript (1 cr, CSM14110)
-Ao entregar pelo menos 24 dos 27 exercícios da parte 9 do curso, TypeScript, você pode obter um crédito adicional. É recomendado que você complete as partes 0-7 antes de fazer a parte 9.
+Ao entregar pelo menos 24 dos 27 exercícios da parte 9 do curso, TypeScript, você pode obter um crédito adicional. É recomendado que você complete as partes de 0 a 7 antes de fazer a parte 9.
 - Entregue pelo menos 24 dos 27 exercícios da parte 9.
 - [Inscreva-se na parte 9 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
 - [Solicite créditos para a parte 9](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
@@ -135,7 +135,7 @@ Ao entregar todos os exercícios da parte 11 do curso de Integração/Entrega Co
 
 #### Parte 12 - Desenvolvimento Full Stack Web: Containers (1 cr, CSM141084)
 
-Ao entregar todos os exercícios da parte 12 do curso sobre a tecnologia Container, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 12](/en/part12).
+Ao entregar todos os exercícios da parte 12 do curso sobre a tecnologia "Container", você pode ganhar créditos adicionais. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 12](/en/part12).
 - Envie todos os exercícios para a parte 12. 
 - [Inscreva-se na parte 12 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a). 
 - [Solicite créditos para a parte 12](https://fullstackopen.com/en/part0/general_info/#how-to-get-your-credits).
@@ -150,21 +150,21 @@ Ao entregar todos os exercícios da parte 13 do curso sobre bancos de dados rela
 
 ### O curso em poucas palavras
 
-Como estudar o curso – instruções resumidas: curso básico de 5 cr CSM141081
+Como estudar no curso – instruções resumidas: curso básico de 5 cr CSM141081
 
 - Faça os exercícios. Os exercícios são enviados através do GitHub e marcados como concluídos no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
    - [O certificado do curso](/pt/part0/informacoes_gerais#certificado-do-curso) estará disponível no sistema de envio de exercícios
-- Se você deseja obter os créditos da Universidade de Helsinque:
+- Se deseja obter os créditos da Universidade de Helsinque:
    - Inscreva-se no curso. Você receberá o link de inscrição por meio do sistema de envio de exercícios assim que concluir os exercícios suficientes. Leia mais [aqui](/pt/part0/informacoes_gerais#enviando-exercicios)
    - Salve seu número de aluno. Após a inscrição no curso, salve seu número de identificação de aluno da Universidade de Helsinque no sistema de envio de exercícios.
    - Faça o exame online no sistema de submissão. Leia mais [aqui](/pt/part0/informacoes_gerais#a-prova-do-curso)
    - Marcar o curso concluído no sistema de envio de exercícios. Leia mais [aqui](/pt/part0/general_info#how-to-get-your-credits)
 
-Observe que, se você fizer o "curso básico" com 6 ou 7 créditos, precisará de registros separados para os créditos extras, consulte [Partes e conclusão](/pt/part0/informacoes_gerais#das-partes-e-conclusao) para saber mais.
+Observe que, se você fizer o "curso básico" com 6 ou 7 créditos, precisará de registros separados para os créditos extras. Consulte [Partes e conclusão](/pt/part0/informacoes_gerais#das-partes-e-conclusao) para saber mais.
 
-Como estudar o curso – instruções resumidas: outras partes do curso
+Como estudar no curso – instruções resumidas: outras partes do curso
 
-- Faça os exercícios. Os exercícios são enviados por meio do GitHub e marcados como concluídos no sistema de envio de exercícios. Observe que as partes 8-13 têm uma instância separada no sistema de envio
+- Faça os exercícios. Os exercícios são enviados por meio do GitHub e marcados como concluídos no sistema de envio de exercícios. Observe que as partes 8 a 13 têm uma instância separada no sistema de envio
    - [O certificado do curso](/pt/part0/informacoes_gerais#certificado-do-curso) estará disponível no sistema de submissão
 - Se você deseja obter créditos da Universidade de Helsinque
    - Inscreva-se no curso. Você pode se inscrever em cada parte através do link no material do curso ([Das partes e conclusão](/pt/part0/informacoes_gerais#das-partes-e-conclusao)). Inscreva-se em cada parte separadamente.
@@ -174,7 +174,7 @@ Como estudar o curso – instruções resumidas: outras partes do curso
 
 Os exercícios são enviados por meio do GitHub e marcados como concluídos na guia "meus envios" do [pedido de envio](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-Se estiver enviando exercícios de diferentes partes para o mesmo repositório, use uma forma de nomeção apropriada em seus diretórios. É claro que você pode criar um novo repositório para cada parte. Se você estiver usando um repositório privado, adicione <i>mluukkai</i> como colaborador.
+Se estiver enviando exercícios de diferentes partes para o mesmo repositório, use uma forma de nomeação apropriada em seus diretórios. É claro que você pode criar um repositório para cada parte. Se você estiver usando um repositório privado, adicione <i>mluukkai</i> como colaborador.
 
 Os exercícios são enviados **uma parte de cada vez**. Depois de enviar exercícios para uma parte, você não poderá mais enviar exercícios para essa parte.
 
@@ -210,7 +210,7 @@ Você terá 120 minutos para concluir o exame. Se tudo correr bem, você verá a
 
 Se for reprovado, deverá aguardar uma semana para tentar novamente a prova.
 
-Se você passou no exame e não deseja mais fazer mais exercícios, é possível voltar à aba de envio de exercícios e solicitar pelos créditos:
+Se você passou no exame e não deseja fazer mais exercícios, é possível voltar à aba de envio de exercícios e solicitar pelos créditos:
 
 ![solicitar créditos de conclusão do curso](../../images/0/enroll5a.png)
 
@@ -250,7 +250,7 @@ Quando pressionado duas vezes, você deve ver o seguinte texto:
 
 **Note** que para obter créditos universitários, você precisa de um registro de cada parte concluída. Consulte [mais informações sobre o registro](/pt/part0/informacoes_gerais#das-partes-e-conclusao).
 
-Você pode ver sua nota no Sisu da Universidade de Helsinki e no [Opintopolku](https://opintopolku.fi/oma-opintopolku/) aproximadamente quatro semanas após nos notificar.
+Você já poderá ver sua nota no Sisu da Universidade de Helsinki e no [Opintopolku](https://opintopolku.fi/oma-opintopolku/) aproximadamente quatro semanas após nos notificar.
 
 Quando o registro é feito, o seguinte texto aparece no sistema de envio de exercícios:
 
@@ -258,7 +258,7 @@ Quando o registro é feito, o seguinte texto aparece no sistema de envio de exer
 
 ### Onde obtenho meu número de identificação de aluno da Universidade de Helsinque
 
-Se e quando você se matricular pela primeira vez em um curso através da Universidade Aberta, será gerado automaticamente um número de identificação de aluno da Universidade de Helsinque. <i>**Certifique-se de estar matriculado no curso antes de tentar descobrir qual é o seu número de aluno.** </i>
+Se e quando você se matricular pela primeira vez em um curso através da Universidade Aberta, será gerado automaticamente um número de identificação de aluno da Universidade de Helsinque. <i>**Certifique-se de estar matriculado no curso antes de tentar descobrir qual é o seu número de identificação de aluno.** </i>
 
 Note que <strong>você não precisa se matricular</strong> na Universidade Aberta para obter o certificado do curso!
 
@@ -267,13 +267,13 @@ Você consegue saber do seu número de identificação de aluno através de uma 
 #### A) Sisu
 
 Se você tiver uma conta de usuário da Universidade de Helsinque, poderá encontrar seu número de identificação de aluno em seu perfil no sistema de informações de estudo da Universidade de Helsinque Sisu:
-  - Faça login no Sisu com seu nome de usuário e senha da Universidade de Helsinque.
-  - Selecione: Meu perfil
-  - Selecione: Informações pessoais
+  - Faça login no Sisu com seu nome de usuário e senha da Universidade de Helsinque;
+  - Selecione: Meu perfil; e
+  - Selecione: Informações pessoais.
 
 #### B) E-mail de confirmação de matrícula
 
-Após a matrícula no curso, você receberá um e-mail de confirmação no endereço de e-mail que você inseriu no formulário de inscrição. Esta mensagem contém diretamente o seu número de aluno ou inclui um link que o leva a uma página que exibe seu número de identificação de aluno da Universidade de Helsinque.
+Após a matrícula no curso, você receberá um e-mail de confirmação no endereço de e-mail que você inseriu no formulário de inscrição. Esta mensagem contém diretamente o seu número de identificação de aluno ou inclui um link que o leva a uma página que exibe seu número de identificação de aluno da Universidade de Helsinque.
 
 #### C) Entre em contato com o Serviço de Alunos
 
@@ -293,7 +293,7 @@ Endereço de e-mail dos Serviços Estudantis: avoin-student@helsinki.fi
 
 Mesmo que você não se registre na Universidade Aberta para fazer a prova e obter os créditos, você ainda poderá baixar o certificado do curso na guia "Meus envios" no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) depois de concluir os exercícios suficientes para passar de ano.
 
-Há um certificado para as partes básicas (0-7) do curso e, depois disso, um certificado separado para cada parte do curso.
+Há um certificado para as partes básicas (0 a 7) do curso e, depois disso, um certificado separado para cada parte do curso.
 
 ### Solicite a transcrição dos estudos
 
@@ -309,7 +309,7 @@ A transcrição será entregue a você via e-mail, eletrônicamente. Apresente e
 
 ### Continuando o curso no ano de 2023
 
-O curso tem um "intervalo" de manutenção de duas semanas a partir de 1º de março de 2023. Durante o intervalo, o material fica online e podem ser enviados exercícios. Durante o intervalo, o conteúdo do curso pode mudar um pouco — nada muito drástico foi planejado até o momento.
+O curso tem um "intervalo" de manutenção de duas semanas a partir de 1º de março de 2023. Durante o intervalo, o material fica online e podem ser enviados os exercícios. Durante o intervalo, o conteúdo do curso pode mudar um pouco — nada muito drástico foi planejado até o momento.
 
 Todos os exercícios apresentados permanecem válidos após o intervalo de manutenção. O curso pode ser continuado sem que seja necessário se preocupar com o intervalo. Além disso, a política para obtenção de certificados, créditos universitários etc. permanecerá a mesma. Então, na prática, *nada muda*. Você pode continuar fazendo o curso sem se preocupar com essas mudanças.
 
@@ -329,7 +329,7 @@ Isso também é possível, basta entrar em contato com o pessoal do curso via [e
 
 Um projeto full stack no valor de 5, 7 ou 10 créditos estará disponível na Universidade Aberta.
 
-Como objeto do projeto, um aplicativo é implementado em React e/ou Node, embora também seja possível implementar um aplicativo móvel em React Native.
+Como objetivo do projeto, uma aplicação é implementada em React e/ou Node, embora também seja possível implementar um aplicativo móvel em React Native.
 
 O número de créditos é baseado nas horas de trabalho realizadas. Um crédito equivale a aproximadamente 17,5 horas de trabalho. O trabalho é classificado como aprovado/reprovado.
 
@@ -347,7 +347,7 @@ Você precisa residir na Finlândia para participar dessas entrevistas.
 
 ### Antes que você comece
 
-O uso do [navegador Chrome](https://www.google.com/chrome/) é recomendado para este curso porque fornece as melhores ferramentas para desenvolvimento web. Outra alternativa é a [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/), que oferece a mesma variedade de recursos.
+O uso do [navegador Chrome](https://www.google.com/chrome/) é recomendado para este curso porque fornece as melhores ferramentas para desenvolvimento web. Outra alternativa é o [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/), que oferece a mesma variedade de recursos.
 
 Os exercícios do curso são submetidos ao GitHub, portanto o Git deve estar instalado e você deve saber como utilizá-lo. Para mais instruções, consulte o [Tutorial do Git e do GitHub para iniciantes](https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners).
 
@@ -355,16 +355,16 @@ Instale um editor de texto adequado que suporte desenvolvimento web. O editor [V
 
 Não programe com nano, bloco de notas ou Gedit. O NetBeans também não é muito bom para desenvolvimento web. Também é bastante pesado em comparação com o Visual Studio Code.
 
-Além disso, instale o [Node.js](https://nodejs.org/en/). O material foi feito com a versão 16.13.2, portanto não instale nenhuma versão anterior a essa. Consulte as [instruções de instalação do Node.js](https://nodejs.org/en/download/package-manager/).
+Além disso, instale o [Node.js](https://nodejs.org/en/). O material foi feito utilizando a versão 16.13.2, portanto não instale nenhuma versão anterior a essa. Consulte as [instruções de instalação do Node.js](https://nodejs.org/en/download/package-manager/).
 
 O gerenciador de pacotes do Node [npm](https://www.npmjs.com/get-npm) será instalado automaticamente com o Node.js. Usaremos ativamente o npm ao longo do curso. O Node também vem com [npx](https://www.npmjs.com/package/npx), o qual utilizaremos algumas vezes.
 
 ### Erros de digitação no material
 
-Se você encontrar algum erro de digitação no material, ou algo que foi expresso de forma pouco clara ou com erros gramaticais, solicite um <i>pull request</i> para o material do curso no [repositório](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). Por exemplo, o código-fonte markdown desta página pode ser encontrado no repositório em <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/pt/part0a.md>.
+Se você encontrar algum erro de digitação no material, ou algo que foi expresso de forma pouco clara, ou com erros gramaticais, solicite um <i>pull request</i> no material do curso no [repositório](https://github.com/fullstack-hy2020/fullstack-hy2020.github.io). Por exemplo, o código-fonte markdown desta página pode ser encontrado no repositório em <https://github.com/fullstack-hy2020/fullstack-hy2020.github.io/edit/source/src/content/0/pt/part0a.md>.
 
 No canto inferior de cada parte deste material, há um link para <em>propor alterações no material</em>. Você pode editar o código-fonte da página clicando no link.
 
-Há também muitos links no material para muitos tipos de material de apoio. Se você perceber que um link está quebrado (isso acontece com muita frequência...), proponha uma alteração ou envie um ping para nós no Discord se não encontrar um link substituto para o link quebrado.
+Há também muitos links no material para muitos tipos de material de apoio. Se você perceber que um link está quebrado (isso acontece com muita frequência...), proponha uma alteração ou nos ping no Discord se não encontrar um link substituto para o link quebrado.
 
 </div>
