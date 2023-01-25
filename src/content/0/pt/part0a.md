@@ -9,7 +9,7 @@ lang: pt
 
 Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O foco principal é em aplicativos de página única implementados com React e com suporte a Serviços Web RESTful e GraphQL implementados com Node.js. O curso também têm partes sobre TypeScript, React Native e Integração Contínua.
 
-Outros tópicos incluem depuração de aplicativos, tecnologia de contêineres, configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
+Outros tópicos incluem depuração de aplicativos, tecnologia de containers (contêineres), configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
 
 ### Pré-requisitos
 Os participantes devem ter boas habilidades de programação, conhecimento básico de programação web e banco de dados e saber os básicos do sistema de controle de versão Git. Também é esperado que você tenha perseverança e capacidade de resolver problemas e buscar informações de forma independente.
@@ -51,7 +51,7 @@ Uma boa pergunta poderia ser:
 > O código parece com isto:
 > ```js 
 >  // o código relevante é colado aqui
->  // o código deve conter várias instruções 'console.log' para ajudar no debug
+>  // o código deve conter várias instruções 'console.log' para ajudar no debugging
 > ```
 > O seguinte é impresso no console:
 > 
@@ -63,7 +63,7 @@ Uma boa pergunta poderia ser:
 >
 > [captura de tela da guia de rede do console]
 > 
-> Todo o código pode ser encontrado aqui (um link para o GitHub)
+> <i>Todo o código pode ser encontrado aqui (um link para o repositório no GitHub)</i>
 
 
 ### Das partes e conclusão
