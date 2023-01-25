@@ -335,8 +335,8 @@ module.exports = {
     '1': {
       a: 'Premiers pas avec React',
       b: 'JavaScript',
-      c: "État des composants, gestionnaires d'événements",
-      d: "Plongez dans le débogage d'applications React",
+      c: 'État des composants, gestionnaires d\'événements',
+      d: 'Plongez dans le débogage d\'applications React',
     },
     '2': {
       a: 'Rendu de collections, modules',
@@ -352,10 +352,10 @@ module.exports = {
       d: 'Validation et ESLint',
     },
     '4': {
-      a: "Structure de l'application backend, introduction aux tests",
+      a: 'Structure de l\'application backend, introduction aux tests',
       b: 'Tester le backend',
       c: 'Gestion des utilisateurs',
-      d: "Jeton d'authentification",
+      d: 'Jeton d\'authentification',
     },
     '5': {
       a: 'Connexion front-end',
@@ -366,7 +366,7 @@ module.exports = {
     '6': {
       a: 'Architecture de flux et Redux',
       b: 'Quelques reducers',
-      c: "Communiquer avec le backend dans l'application Redux",
+      c: 'Communiquer avec le backend dans l\'application Redux',
       d: 'Connect',
     },
     '7': {
@@ -387,7 +387,7 @@ module.exports = {
     '9': {
       a: 'Contexte et introduction',
       b: 'Premiers pas avec TypeScript',
-      c: "De l'application express à TypeScript",
+      c: 'De l\'application express à TypeScript',
       d: 'Écrire des applications React avec TypeScript',
     },
     '10': {
@@ -406,7 +406,7 @@ module.exports = {
     '12': {
       a: 'Introduction aux Conteneurs',
       b: 'Construire et configurer des environnements',
-      c: "Bases de l'Orchestration",
+      c: 'Bases de l\'Orchestration',
     },
     '13': {
       a: 'Bases de données relationnelles avec Sequelize',

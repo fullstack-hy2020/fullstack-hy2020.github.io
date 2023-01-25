@@ -69,6 +69,22 @@ const partNameTranslations = {
     'Conteneurs',
     'Utilisation de bases de donées relationnelles'
   ],
+  pt: [
+    'Fundamentos de aplicações web',
+    'Introdução ao React',
+    'Comunicação com o servidor',
+    'Programando um servidor com NodeJS e Express',
+    'Teste de servidores Express e Administração de Usuários',
+    'Teste de aplicativos React',
+    'Gerenciamento de Estado com Redux',
+    'React router, hooks personalizados, estilização de aplicativos com CSS e Webpack',
+    'GraphQL',
+    'TypeScript',
+    'React Native',
+    'CI/CD',
+    'Containers',
+    'Utilizando bancos de dados relacionais'
+  ]
 };
 
 export const PartBanner = ({ lang }) => {
