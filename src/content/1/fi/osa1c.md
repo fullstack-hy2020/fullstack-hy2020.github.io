@@ -604,15 +604,15 @@ const App = () => {
       <Display counter={counter}/>
       // highlight-start
       <Button
-        handleClick={increaseByOne}
+        onClick={increaseByOne}
         text='plus'
       />
       <Button
-        handleClick={setToZero}
+        onClick={setToZero}
         text='zero'
       />     
       <Button
-        handleClick={decreaseByOne}
+        onClick={decreaseByOne}
         text='minus'
       />           
       // highlight-end
