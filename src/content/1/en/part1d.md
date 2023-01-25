@@ -1029,8 +1029,8 @@ You may find the following links useful:
 Programming is hard, that is why I will use all the possible means to make it easier
 - I will have my browser developer console open all the time
 - I progress with small steps
-- I will write lots of _console.log_ statements to to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything still was still working
+- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
+- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask help
 
 </div>
