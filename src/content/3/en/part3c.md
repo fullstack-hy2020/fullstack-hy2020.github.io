@@ -563,7 +563,7 @@ fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.m
 
 Since also the PORT is defined in our .env it is actually essential to ignore the file in Fly.io since otherways the app starts in the wrong port.
 
-When using Render, the database url is given by definig the proper env in the dashboard:
+When using Render, the database url is given by defining the proper env in the dashboard:
 
 ![](../../images/3/render-env.png)
 
