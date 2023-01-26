@@ -97,7 +97,7 @@ Docker version 20.10.5, build 55c4c88
 
 ### Containers and images
 
-There are two core concepts in this part: <i>container</i> and <i>image</i>. There are easy to confuse with one another.
+There are two core concepts in this part: <i>container</i> and <i>image</i>. They are easy to confuse with one another.
 
 A <i>container</i> is a runtime instance of an <i>image</i>.
 
@@ -254,7 +254,7 @@ hopeful_clarke
 
 The start command will start the same container we had previously. Unfortunately, we forgot to start it with the flag _--interactive_ (that can also be written _-i_) so we can not interact with it.
 
-The container is actually up and running as the command _container ls -a_ shows, but we just can not communicate it:
+The container is actually up and running as the command _container ls -a_ shows, but we just can not communicate with it:
 
 ```bash
 $ docker container ls -a
