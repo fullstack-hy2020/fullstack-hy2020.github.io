@@ -192,11 +192,11 @@ A prova é feita no sistema de envio de exercícios. Siga as instruções abaixo
 - Inscreva-se no curso através da Universidade Aberta.
 - Você receberá o link de inscrição por meio do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) depois de concluir os exercícios suficientes.
 
-![matricule-se em 'créditos universitários'](../../images/0/enroll1.png)
+![enroll in university credits](../../images/0/enroll1.png)
 
 Após sua matrícula no curso, salve seu número de identificação de aluno da Universidade de Helsinque no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/myinfo):
 
-![salvando o número de identificação de aluno](../../images/0/28b.png)
+![saving the student number](../../images/0/28b.png)
 
 Leia mais [aqui](/pt/part0/informacoes_gerais#onde-obtenho-meu-numero-de-identificacao-de-aluno-da-universidade-de-helsinque) para obter informações sobre como descobrir seu número de identificação de aluno.
 
