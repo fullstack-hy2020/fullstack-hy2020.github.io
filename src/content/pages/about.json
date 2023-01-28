@@ -209,7 +209,7 @@
   "pt": {
     "name": "Geral",
     "intro": [
-      "<em>Têm dúvidas sobre o curso? Leia cuidadosamente a <a href='/pt/part0/general_info'>Parte 0</a>, pois lá é possível encontrar a resposta para a maioria delas...</em>",
+      "<em>Têm dúvidas sobre o curso? Leia cuidadosamente a <a href='/pt/part0/informacoes_gerais'>Parte 0</a>, pois lá é possível encontrar a resposta para a maioria delas...</em>",
       "Este curso serve como uma introdução ao desenvolvimento de aplicações <em>web</em> modernas com JavaScript. O objetivo principal é construir aplicações SPA (Aplicações de Página Única) com ReactJS que utilizam APIs REST construídas com Node.js. O curso também contém uma seção sobre GraphQL, uma alternativa moderna às APIs REST.",
       "O curso abrange testes, gerenciamento de configuração e ambiente, uso de bancos de dados para armazenar os dados da aplicação, entre outras coisas.",
       "O curso vale de 5 a 14 créditos e o conteúdo é o mesmo do curso <a href='https://fullstack-hy2020.github.io/'>Full stack</a> realizado no <a href='https://www.helsinki.fi/en/computer-science'>Departamento de Ciência da Computação</a> na Universidade de Helsinki na primavera de 2022. Este também é um <a href='/osa0/yleista#full-stack-harjoitustyo'>projeto</a> associado que vale de 1 a 10 créditos.",
