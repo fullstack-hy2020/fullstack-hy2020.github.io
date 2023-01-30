@@ -306,7 +306,7 @@ O funcionamento do navegador baseia-se na ideia de representar os elementos HTML
 
 O Modelo de Documento por Objetos, ou [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), é uma Interface de Programação de Aplicação (API [Application Programming Interface]) que possibilita a modificação programática das <i>árvores de elementos</i> correspondentes às páginas web.
 
-O código JavaScript introduzido no capítulo anterior usou a API DOM para adicionar uma lista de anotações na página.
+O código JavaScript introduzido no capítulo anterior usou a API DOM para adicionar uma lista de notas na página.
 
 O código a seguir cria um novo nó na variável <em>ul</em> e adiciona alguns nós-filho a ele:
 
@@ -411,8 +411,8 @@ Vamos revisar o que acontece quando a página https://studies.cs.helsinki.fi/exa
 - Os links no código HTML fazem com que o navegador também busque a folha de estilo CSS <i>main.css</i>...
 - ...e um arquivo de código JavaScript <i>main.js</i>;
 - O navegador executa o código JavaScript. O código faz uma requisição HTTP GET para o endereço https://studies.cs.helsinki.fi/exampleapp/data.json, que
-  retorna as anotações como dados JSON; e
-- Quando é finalizada a busca pelos dados, o navegador executa um <i>event handler</i>, que renderiza as anotações na página usando a API DOM.
+  retorna as notas como dados JSON; e
+- Quando é finalizada a busca pelos dados, o navegador executa um <i>event handler</i>, que renderiza as notas na página usando a API DOM.
 
 ### Formulários (Forms) e HTTP POST
 
@@ -481,7 +481,7 @@ A página "Notes", da nossa aplicação, segue um estilo de desenvolvimento web 
 
 [AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML [JavaScript Assíncrono e XML]) é um termo que foi introduzido em fevereiro de 2005 com base em avanços na tecnologia do navegador para descrever uma nova abordagem revolucionária que permitia o carregamento de conteúdo em páginas web usando JavaScript embutido dentro do HTML, sem a necessidade de re-renderizar a página.
 
-Antes da Era AJAX, todas as páginas web funcionavam como a [aplicação web tradicional](/en/part0/fundamentals_of_web_apps#traditional-web-applications) que vimos anteriormente neste capítulo. Todos os dados mostrados na página eram buscados com o código HTML gerado pelo servidor.
+Antes da Era AJAX, todas as páginas web funcionavam como a [aplicação web tradicional](/pt/part0/fundamentos_de_aplicacoes_web#aplicacoes-web-tradicionais) que vimos anteriormente neste capítulo. Todos os dados mostrados na página eram buscados com o código HTML gerado pelo servidor.
 
 A página "Notes" usa AJAX para buscar os dados das notas. O envio do formulário ainda usa o mecanismo tradicional de envio de formulários web.
 
@@ -493,7 +493,7 @@ O termo AJAX agora é tão reconhecível que quase todo mundo conhece. Porém, o
 
 Em nossa aplicação de exemplo, a página inicial funciona como uma página web tradicional: toda a lógica está no servidor e o navegador só renderiza o HTML conforme instruído.
 
-A página "Notes" transfere algumas dessas responsabilidades para o navegador, gerando o código HTML para notas que já existem. O navegador realiza essa tarefa executando o código JavaScript que ele baixou do servidor. O código baixa as notas do servidor como dados JSON e adiciona elementos HTML para exibir as notas na página usando a [API DOM](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).
+A página "Notes" transfere algumas dessas responsabilidades para o navegador, gerando o código HTML para notas que já existem. O navegador realiza essa tarefa executando o código JavaScript que ele baixou do servidor. O código baixa as notas do servidor como dados JSON e adiciona elementos HTML para exibir as notas na página usando a [API DOM](/pt/part0/fundamentos_de_aplicacoes_web#modelo-de-documento-por-objetos-dom-document-object-model).
 
 Nos últimos anos, o estilo [SPA](https://en.wikipedia.org/wiki/Single-page_application) (Aplicação de Página Única) de criação de aplicações web surgiu. Os sites de estilo SPA não baixam todas as suas páginas separadamente do servidor como o nosso exemplo de aplicação faz, mas incluem apenas uma página HTML baixada do servidor, cujo conteúdo é manipulado com o código JavaScript que é executado no navegador.
 
@@ -567,7 +567,7 @@ var sendToServer = function(note) {
 O código determina que os dados devem ser enviados com uma requisição HTTP POST e o tipo de dados deve ser JSON. O tipo de dados é determinado com um cabeçalho <i>Content-type</i>. Em seguida, os dados são enviados como uma string JSON.
 
 O código da aplicação está disponível em <https://github.com/mluukkai/example_app>.
-Vale ressaltar que a aplicação serve apenas para demonstrar os conceitos do curso. O código segue um estilo ruim de desenvolvimento em algumas partes e não deve ser usado como exemplo ao criar suas próprias aplicações. O mesmo se aplica às URLs usadas. A URL <i>new_note_spa</i> para a qual as novas anotações são enviadas, não segue as melhores práticas usadas atualmente.
+Vale ressaltar que a aplicação serve apenas para demonstrar os conceitos do curso. O código segue um estilo ruim de desenvolvimento em algumas partes e não deve ser usado como exemplo ao criar suas próprias aplicações. O mesmo se aplica às URLs usadas. A URL <i>new_note_spa</i> para a qual as novas notas são enviadas, não segue as melhores práticas usadas atualmente.
 
 ### Bibliotecas JavaScript
 
@@ -655,7 +655,7 @@ Aprenda sobre os conceitos básicos de formulários HTML lendo o tutorial do Moz
 
   <h4>0.4: Novo diagrama das notas</h4>
 
-Na seção [Carregando uma página contendo JavaScript — revisão](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review), a cadeia de eventos causada pela abertura da página <https://studies.cs.helsinki.fi/exampleapp/notes> é retratada como um [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+Na seção [Carregando uma página contendo JavaScript — revisão](/pt/part0/fundamentos_de_aplicacoes_web#carregando-uma-pagina-contendo-java-script-revisao), a cadeia de eventos causada pela abertura da página <https://studies.cs.helsinki.fi/exampleapp/notes> é retratada como um [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
 O diagrama foi feito como um arquivo GitHub Markdown usando a sintaxe [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams), como o exemplo a seguir:
 
@@ -695,7 +695,7 @@ Se necessário, mostre operações no navegador ou no servidor como comentários
 
 O diagrama não precisa ser um diagrama de sequência. Qualquer maneira sensata de representar os eventos já estará de bom tamanho.
 
-Todas as informações necessárias para fazer este e os próximos dois exercícios podem ser encontradas no texto [desta parte](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
+Todas as informações necessárias para fazer este e os próximos dois exercícios podem ser encontradas no texto [desta parte](/pt/part0/fundamentos_de_aplicacoes_web#formularios-forms-e-http-post).
 A ideia desses exercícios é fazer você reler o texto e pensar no que está acontecendo. Não é necessário ler o [código](https://github.com/mluukkai/example_app) da aplicação, mas não deixa de ser algo possível.
 
 Você pode fazer os diagramas com qualquer programa, mas talvez a maneira mais fácil e melhor de se fazer diagramas seja utilizando a sintaxe [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor), agora implementada em páginas Markdown do [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)!
