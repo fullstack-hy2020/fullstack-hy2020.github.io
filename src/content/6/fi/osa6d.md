@@ -7,574 +7,339 @@ lang: fi
 
 <div class="content">
 
-Olemme käyttäneet Redux-storea React Redux -kirjaston [hook](https://react-redux.js.org/api/hooks)-apin eli funktioiden [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) avulla.
+Tarkastellaan osan lopussa vielä muutamaa erilaista tapaa sovelluksen tilan hallintaan.
 
-Tarkastellaan tämän osan lopuksi toista, hieman vanhempaa ja jonkin verran monimutkaisempaa tapaa Reduxin käyttöön eli [React Redux](https://github.com/reactjs/react-redux) -kirjaston määrittelemää [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md)-funktiota.
+Jatketaan muistiinpano-sovelluksen parissa. Otetaan fokukseen palvelimen kanssa tapahtuva kommunikointi. Aloitetaan sovellus puhtaalta pöydältä. Ensimmäinen versio on seuraava:
 
-<i>**Uusissa sovelluksissa kannattaa ehdottomasti käyttää hook-apia**</i>, mutta _connect_-funktion tuntemisesta on hyötyä vanhempia Reduxia käyttäviä projekteja ylläpidettäessä.
+```js
+const App = () => {
+  const addNote = async (event) => {
+    event.preventDefault()
+    const content = event.target.note.value
+    event.target.note.value = ''
+    console.log(content)
+  }
 
-### Redux-storen välittäminen komponentille connect-funktiolla
+  const toggleImportance = (note) => {
+    console.log('toggle importance of', note.id)
+  }
 
-Muutetaan sovelluksen komponenttia <i>Notes</i> siten, että korvataan hook-apin eli funktioiden _useDispatch_ ja _useSelector_ käyttö funktiolla _connect_. Komponentin seuraavat osat tulee siis muuttaa:
+  const notes = []
 
-````js
-import { useDispatch, useSelector } from 'react-redux' // highlight-line
-import { toggleImportanceOf } from '../reducers/noteReducer'
-
-const Notes = () => {
-  // highlight-start
-  const dispatch = useDispatch() 
-  const notes = useSelector(({filter, notes}) => {
-    if ( filter === 'ALL' ) {
-      return notes
-    }
-    return filter  === 'IMPORTANT' 
-      ? notes.filter(note => note.important)
-      : notes.filter(note => !note.important)
-  })
-  // highlight-end
-
-  return (
-    <ul>
+  return(
+    <div>
+      <h2>Notes app</h2>
+      <form onSubmit={addNote}>
+        <input name="note" />
+        <button type="submit">add</button>
+      </form>
       {notes.map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => 
-            dispatch(toggleImportanceOf(note.id)) // highlight-line
-          }
-        />
+        <li key={note.id} onClick={() => toggleImportance(note)}>
+          {note.content} 
+          <strong> {note.important ? 'important' : ''}</strong>
+        </li>
       )}
-    </ul>
+    </div>
   )
 }
 
-export default Notes
-````
-
-Funktiota _connect_ käyttämällä "normaaleista" React-komponenteista saadaan muodostettua komponentteja, joiden <i>propseihin</i> on "mäpätty" eli yhdistetty haluttuja osia storen määrittelemästä tilasta.
-
-Muodostetaan ensin komponentista <i>Notes</i> _connect_-funktion avulla <i>yhdistetty komponentti</i>:
-
-```js
-import { connect } from 'react-redux' // highlight-line
-import { toggleImportanceOf } from '../reducers/noteReducer'
-
-const Notes = () => {
-  // ...
-}
-
-const ConnectedNotes = connect()(Notes) // highlight-line
-export default ConnectedNotes           // highlight-line
+export default App
 ```
 
-Moduuli eksporttaa nyt alkuperäisen komponentin sijaan <i>yhdistetyn komponentin</i>, joka toimii toistaiseksi täsmälleen alkuperäisen komponentin kaltaisesti.
+Alkuvaiheen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) branchissa <i>part6-0</i>.
 
-Komponentti tarvitsee storesta sekä muistiinpanojen listan että filtterin arvon. Funktion _connect_ ensimmäisenä parametrina voidaan määritellä funktio [mapStateToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters), joka liittää joitakin storen tilan perusteella määriteltyjä asioita _connect_-funktiolla muodostetun <i>yhdistetyn komponentin</i> propseiksi.
+### Palvelimella olevan datan hallinta React Query -kirjaston avulla
 
-Jos määritellään:
+Hyödynnämme nyt [React Query](https://react-query-v3.tanstack.com/) -kirjastoa palvelimelta haettavan datan säilyttämiseen ja hallinnointiin. Asennetaan kirjasto komennolla
+
+```bash
+npm install react-query
+```
+
+Tiedostoon <i>index.js</i> tarvitaan muutama lisäys, jotta kirjaston funktiot saadaan välitettyä koko sovelluksen käyttöön:
 
 ```js
-const Notes = (props) => { // highlight-line
-  const dispatch = useDispatch()
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { QueryClient, QueryClientProvider } from 'react-query' // highlight-line
 
-// highlight-start
-  const notesToShow = () => {
-    if ( props.filter === 'ALL') {
-      return props.notes
-    }
-    
-    return props.filter  === 'IMPORTANT' 
-      ? props.notes.filter(note => note.important)
-      : props.notes.filter(note => !note.important)
+import App from './App'
+
+const queryClient = new QueryClient() // highlight-line
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <QueryClientProvider client={queryClient}> // highlight-line
+    <App />
+  </QueryClientProvider> // highlight-line
+)
+```
+
+Voimme nyt hakea muistiinpanot komponentissa <i>App</i>. Koodi laajenee seuraavasti:
+
+```js
+import { useQuery } from 'react-query'  // highlight-line
+import axios from 'axios'  // highlight-line
+
+const App = () => {
+  // ...
+
+   // highlight-start
+  const result = useQuery(
+    'notes',
+    () => axios.get('http://localhost:3001/notes').then(res => res.data)
+  )
+
+  console.log(result)
+  // highlight-end
+
+  // highlight-start
+  if ( result.isLoading ) {
+    return <div>loading data...</div>
   }
   // highlight-end
 
-  return (
-    <ul>
-      {notesToShow().map(note => // highlight-line
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => 
-            dispatch(toggleImportanceOf(note.id))
-          }
-        />
-      )}
-    </ul>
-  )
-}
-
-const mapStateToProps = (state) => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  }
-}
-
-const ConnectedNotes = connect(mapStateToProps)(Notes) // highlight-line
-
-export default ConnectedNotes
-```
-
-on komponentin <i>Notes</i> sisällä mahdollista viitata storen tilaan, esim. muistiinpanoihin suoraan propsin kautta <i>props.notes</i>. Vastaavasti <i>props.filter</i> viittaa storessa olevaan filter-kentän tilaan.
-
-Komennolla _connect_ ja <i>mapStateToProps</i>-määrittelyllä aikaan saatua tilannetta voidaan visualisoida seuraavasti:
-
-![Sovelluksella on kaksi propsia, notes ja filter. Näistä notes on viite storeen talletettuihin muistiinpanoihin ja filter viite storeen talletettuun filtterimerkkijonoon.](../../images/6/24c.png)
-
-Komponentin <i>Notes</i> sisältä on siis propsien <i>props.notes</i> ja <i>props.filter</i> kautta "suora pääsy" tarkastelemaan Redux-storen sisällä olevaa tilaa.
-
-Komponentti _Notes_ ei oikeastaan tarvitse mihinkään tietoa siitä, mikä filtteri on valittuna. Filtteröintilogiikka voidaan siis siirtää kokonaan komponentin ulkopuolelle, ja palauttaa propsina _notes_ suoraan sopivalla tavalla filtteröidyt muistiinpanot:
-
-```js
-const Notes = (props) => {
-  const dispatch = useDispatch()
+  const notes = result.data  // highlight-line
 
   return (
-    <ul>
-      {props.notes.map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => 
-            dispatch(toggleImportanceOf(note.id))
-          }
-        />
-      )}
-    </ul>
-  )
-}
-
-// highlight-start
-const mapStateToProps = (state) => {
-  if ( state.filter === 'ALL' ) {
-    return {
-      notes: state.notes
-    }
-  }
-
-  return {
-    notes: (state.filter  === 'IMPORTANT' 
-      ? state.notes.filter(note => note.important)
-      : state.notes.filter(note => !note.important)
-    )
-  }
-}
-// highlight-end
-
-const ConnectedNotes = connect(mapStateToProps)(Notes)
-export default ConnectedNotes  
-```
-
-### mapDispatchToProps
-
-Olemme nyt korvanneet hookin _useSelector_, mutta <i>Notes</i> käyttää edelleen hookia _useDispatch_ ja sen palauttavaa funktiota _dispatch_:
-
-```js
-const Notes = (props) => {
-  const dispatch = useDispatch() // highlight-line
-
-  return (
-    <ul>
-      {props.notes.map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => 
-            dispatch(toggleImportanceOf(note.id)) // highlight-line
-          }
-        />
-      )}
-    </ul>
+    // ...
   )
 }
 ```
 
-_connect_-funktion toisena parametrina voidaan määritellä [mapDispatchToProps](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md#connect-parameters) eli joukko <i>action creator</i> -funktioita, jotka välitetään yhdistetylle komponentille propseina. Laajennetaan connectausta seuraavasti:
+Datan hakeminen palvelimelta tapahtuu edelleen tuttuun tapaan Axiosin <i>get</i>-metodilla. Axiosin metodikutsu on kuitenkin nyt kääritty [useQuery](https://react-query-v3.tanstack.com/reference/useQuery)-funktiolla muodostetuksi [kyselyksi](https://react-query-v3.tanstack.com/guides/queries). Funktiokutsun ensimmäisenä parametrina on merkkijono <i>notes</i> joka toimii [avaimena](https://react-query-v3.tanstack.com/guides/query-keys) määriteltyyn kyselyyn, eli muistiinpanojen listaan.
 
-```js
-const mapStateToProps = (state) => {
-  return {
-    notes: state.notes,
-    filter: state.filter,
-  }
-}
+Funktion <i>useQuery</i> paluuarvo on olio, joka kertoo kyselyn tilan. Konsoliin tehty tulostus havainnollistaa tilannetta: 
 
-// highlight-start
-const mapDispatchToProps = {
-  toggleImportanceOf,
-}
-// highlight-end
+![](../../images/6/60new.png)
 
-const ConnectedNotes = connect(
-  mapStateToProps,
-  mapDispatchToProps // highlight-line
-)(Notes)
+Eli ensimmäistä kertaa komponenttia renderöitäessä kysely on vielä tilassa <i>loading</i>, eli siihen liittyvä HTTP-pyyntö on kesken. Tässä vaiheessa renderöidään ainoastaan:
 
-export default ConnectedNotes
+```
+<div>loading data...</div>
 ```
 
-Nyt komponentti voi dispatchata suoraan action creatorin _toggleImportanceOf_ määrittelemän actionin kutsumalla propsien kautta saamaansa funktiota koodissa:
+HTTP-pyyntö kuitenkin valmistuu niin nopeasti, että tekstiä eivät edes tarkkasilmäisimmät ehdi näkemään. Kun pyyntö valmistuu, renderöidään komponentti uudelleen. Kysely on toisella renderöinnillä tilassa <i>success</i>, ja kyselyolion kenttä <i>data</i> sisältää pyynnön palauttaman datan, eli muistiinpanojen listan, joka renderöidään ruudulle.
+
+Sovellus siis hakee datan palvelimelta ja renderöi sen ruudulle käyttämättä ollenkaan luvuissa 2-5 käytettyjä Reactin hookeja <i>useState</i> ja <i>useEffect</i>. Palvelimella oleva data on nyt kokonaisuudessaan React Query -kirjaston hallinnoinnin alaisuudessa, ja sovellus ei tarvitse ollenkaan Reactin <i>useState</i>-hookilla määriteltyä tilaa!
+
+Siirretään varsinaisen HTTP-pyynnön tekevä funktio omaan tiedostoonsa <i>requests.js</i>:
 
 ```js
-const Notes = (props) => {
-  return (
-    <ul>
-      {props.notes.map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => props.toggleImportanceOf(note.id)}
-        />
-      )}
-    </ul>
-  )
+import axios from 'axios'
+
+export const getNotes = () =>
+  axios.get('http://localhost:3001/notes').then(res => res.data)
+```
+
+Komponentti <i>App</i> yksinkertaistuu nyt hiukan
+
+```js
+import { useQuery } from 'react-query' 
+import { getAnecdotes } from './requests' // highlight-line
+
+const App = () => {
+  // ...
+
+  const result = useQuery('notes', getNotes)  // highlight-line
+
+  // ...
 }
 ```
 
-Eli se sijaan että kutsuttaisiin action creator -funktiota _dispatch_-funktion kanssa
+Sovelluksen tämän hetken koodi on [GitHubissa](https://github.com/fullstack-hy2020/query-notes/tree/part6-1) branchissa <i>part6-1</i>.
+
+### Datan vieminen palvelimelle React Queryn avulla
+
+Data haetaan jo onnistuneesti palvelimelta. Huolehditan seuraavaksi siitä, että lisätty ja muutettu data tallennetaan palvelimelle. Aloitetaan uusien muistiinpanojen lisäämisestä.
+
+Tehdään tiedostoon <i>requests.js</i> funktio <i>addANote</i> uusien muistiinpanojen talletusta varten:
 
 ```js
-dispatch(toggleImportanceOf(note.id))
+import axios from 'axios'
+
+const baseUrl = 'http://localhost:3001/notes'
+
+export const getNotes = () =>
+  axios.get(baseUrl).then(res => res.data)
+
+export const createNote = newNote => // highlight-line
+  axios.post(baseUrl, newNote).then(res => res.data) // highlight-line
 ```
 
-_connect_-funktiota käytettäessä actionin dispatchaamiseen riittää
+Komponentti <i>App</i> muuttuu seuraavasti
 
 ```js
-props.toggleImportanceOf(note.id)
-```
+import { useQuery, useMutation } from 'react-query' // highlight-line
+import { getNotes, createNote } from './requests' // highlight-line
 
-Storen _dispatch_-funktiota ei enää tarvitse kutsua, sillä _connect_ on muokannut action creatorin _toggleImportanceOf_ sellaiseen muotoon, joka sisältää dispatchauksen.
+const App = () => {
+  const newNoteMutation = useMutation(createNote) // highlight-line
 
-_mapDispatchToProps_ lienee aluksi hieman haastava ymmärtää, etenkin sen kohta käsiteltävä [vaihtoehtoinen käyttötapa](/osa6/connect#map-dispatch-to-propsin-vaihtoehtoinen-kayttotapa).
-
-_connect_-funktion aikaansaamaa tilannetta voidaan havainnollistaa seuraavasti:
-
-![Sovelluksella on nyt propsia, notes, filter ja toggle_importance_of. Näistä notes on viite storeen talletettuihin muistiinpanoihin ja filter viite storeen talletettuun filtterimerkkijonoon. Uutena oleva toggle_importance_of on viite toggle_importance-funktioon, joka on sidottu dispatch-operaatioon](../../images/6/25b.png)
-
-Eli sen lisäksi, että <i>Notes</i> pääsee storen tilaan propsin <i>props.notes</i> kautta, se viittaa <i>props.toggleImportanceOf</i>:lla funktioon, jonka avulla storeen saadaan dispatchattua <i>notes/toggleImportanceOf</i>-tyyppisiä actioneja.
-
-_connect_-funktiota käyttämään refaktoroitu komponentti <i>Notes</i> on kokonaisuudessaan seuraava:
-
-```js
-import { connect } from 'react-redux' 
-import { toggleImportanceOf } from '../reducers/noteReducer'
-
-const Notes = (props) => {
-  return (
-    <ul>
-      {props.notes.map(note =>
-        <Note
-          key={note.id}
-          note={note}
-          handleClick={() => props.toggleImportanceOf(note.id)}
-        />
-      )}
-    </ul>
-  )
-}
-
-const mapStateToProps = (state) => {
-  if ( state.filter === 'ALL' ) {
-    return {
-      notes: state.notes
-    }
-  }
-
-  return {
-    notes: (state.filter  === 'IMPORTANT' 
-    ? state.notes.filter(note => note.important)
-    : state.notes.filter(note => !note.important)
-    )
-  }
-}
-
-const mapDispatchToProps = {
-  toggleImportanceOf
-}
-
-// eksportoidaan suoraan connectin palauttama komponentti
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Notes)
-```
-
-Otetaan _connect_ käyttöön myös uuden muistiinpanon luomisessa:
-
-```js
-import { connect } from 'react-redux' 
-import { createNote } from '../reducers/noteReducer'
-
-const NewNote = (props) => { // highlight-line
-  
   const addNote = async (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
-    props.createNote(content) // highlight-line
+    newNoteMutation.mutate({ content, important: true }) // highlight-line
   }
 
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
+  // 
 
-// highlight-start
-export default connect(
-  null, 
-  { createNote }
-)(NewNote)
-// highlight-end
-```
-
-Koska komponentti ei tarvitse storen tilasta mitään, on _connect_-funktion ensimmäinen parametri <i>null</i>.
-
-Sovelluksen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
-
-### Huomio propsina välitettyyn action creatoriin viittaamisesta
-
-Tarkastellaan vielä erästä mielenkiintoista seikkaa komponentista <i>NewNote</i>:
-
-```js
-import { connect } from 'react-redux' 
-import { createNote } from '../reducers/noteReducer'  // highlight-line
-
-const NewNote = (props) => {
-  
-  const addNote = async (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    props.createNote(content)  // highlight-line
-  }
-
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
-
-export default connect(
-  null, 
-  { createNote }  // highlight-line
-)(NewNote)
-```
-
-Aloittelevalle _connect_-funktion käyttäjälle aiheuttaa joskus ihmetystä se, että action creatorista <i>createNote</i> on komponentin sisällä käytettävissä <i>kaksi eri versiota</i>.
-
-Funktioon tulee viitata propsien kautta, eli <i>props.createNote</i>. Tällöin kyseessä on _connect_-funktion muokkaama, <i>dispatchauksen sisältävä</i> versio funktiosta.
-
-Moduulissa olevan import-lauseen
-
-```js
-import { createNote } from './../reducers/noteReducer'
-```
-
-ansiosta komponentin sisältä on mahdollista viitata funktioon myös suoraan (eli _createNote_). Näin ei kuitenkaan tule tehdä, sillä silloin on kyseessä alkuperäinen action creator, joka <i>ei sisällä dispatchausta</i>.
-
-Jos tulostamme funktiot koodin sisällä (emme olekaan vielä käyttäneet kurssilla tätä erittäin hyödyllistä debug-kikkaa)
-
-```js
-const NewNote = (props) => {
-  console.log(createNote)
-  console.log(props.createNote)
-
-  const addNote = (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    props.createNote(content)
-  }
-
-  // ...
 }
 ```
 
-näemme eron:
-
-![Ensin tulostuu pelkkä action creatot -funktion koodi. Tämän jälkeen tulostuu koodi joka sisältää komennon, dispatch(actionCreator.apply(this, arguments)) eli dispatchiin "sidottu" action creator](../../images/6/10.png)
-
-Ensimmäinen funktioista on siis normaali <i>action creator</i>, toinen taas _connect_-funktion muotoilema funktio, joka sisältää storen metodin dispatch-kutsun.
-
-_connect_ on erittäin kätevä työkalu, mutta abstraktisuutensa takia se voi aluksi tuntua hankalalta.
-
-### mapDispatchToPropsin vaihtoehtoinen käyttötapa
-
-Määrittelimme siis _connect_-funktion komponentille <i>NewNote</i> antaman actioneja dispatchaavan funktion seuraavasti:
+Uuden muistiinpanon luomista varten määritellään [mutaatio](https://react-query-v3.tanstack.com/guides/mutations) funktion [useMutation](https://react-query-v3.tanstack.com/reference/useMutation) avulla:
 
 ```js
-const NewNote = (props) => {
-  // ...
-}
-
-export default connect(
-  null,
-  { createNote } // highlight-line
-)(NewNote)
+const newNoteMutation = useMutation(createNote)
 ```
 
-Eli määrittelyn ansiosta komponentti dispatchaa uuden muistiinpanon lisäyksen suorittavan actionin suoraan komennolla <code>props.createNote('uusi muistiinpano')</code>.
+Parametrina on tiedostoon <i>requests.js</i> lisäämämme funktio, joka lähettää Axiosin avulla uuden muistiinpanon palvelille.
 
-Parametrin <i>mapDispatchToProps</i> kenttinä ei voi antaa mitä tahansa funktiota, vaan funktion on oltava <i>action creator</i> eli Redux-actionin palauttava funktio.
-
-Kannattaa huomata, että parametri <i>mapDispatchToProps</i> on nyt <i>olio</i>, sillä määrittely
+Tapahtumakäsittelijä <i>addNote</i> suorittaa mutaation kutsumalla mutaatio-olion funktiota <i>mutate</i> ja antamalla uuden muistiinpanon parametrina:
 
 ```js
-{
-  createNote
-}
+newNoteMutation.mutate({ content, important: true })
 ```
 
-on lyhempi tapa määritellä olioliteraali
+Ratkaisumme on hyvä. Paitsi se ei toimi. Uusi muistiinpano kyllä tallettuu palvelimelle, mutta se ei päivity näytölle. 
+
+Jotta saamme renderöityä myös uuden muistiinpanon, meidän on kerrottava React Querylle, että kyselyn, jonka avaimena on merkkijono <i>notes</i> vanha tulos tulee mitätöidä eli
+[invalidoida](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations). 
+
+Invalidointi on onneksi helppoa, se voidaan tehdä kytkemällä mutaatioon sopiva <i>onSuccess</i>-takaisinkutsufunktio:
 
 ```js
-{
-  createNote: createNote
-}
-```
+import { useQuery, useMutation, useQueryClient } from 'react-query' // highlight-line
+import { getNotes, createNote } from './requests'
 
-eli olio, jonka ainoan kentän <i>createNote</i> arvona on funktio <i>createNote</i>.
+const App = () => {
+  const queryClient = useQueryClient() // highlight-line
 
-Voimme määritellä saman myös pitemmän kaavan kautta, antamalla _connect_-funktion toisena parametrina seuraavanlaisen <i>funktion</i>:
-
-```js
-const NewNote = (props) => {
-  // ...
-}
-
-// highlight-start
-const mapDispatchToProps = (dispatch) => {
-  return {
-    createNote: (value) => {
-      dispatch(createNote(value))
+  const newNoteMutation = useMutation(createNote, {
+    onSuccess: () => {  // highlight-line
+      queryClient.invalidateQueries('notes')  // highlight-line
     },
+  })
+
+  // ...
+}
+```
+
+Kun mutaatio on nyt suoritettu onnistuneesti, suoritetaan funktiokutsu
+
+```js
+queryClient.invalidateQueries('notes')
+```
+
+Tämä taas saa aikaan sen, että React Query päivittää automaattisesti kyselyn, jonka avain on  <i>notes</i> eli hakee muistiinpanot palvelimelta. Tämän seurauksena sovellus renderöi ajantasaisen palvelimella olevan tilan, eli myös lisätty muistiinpano renderöityy.
+
+Toteutetaan vielä muistiinpanojen tärkeyden muutos. Lisätään tiedostoon <i>requests.js</i> muistiinpanojen päivityksen hoitava funktio:
+
+```js
+export const updateNote = updatedNote =>
+  axios.put(`${baseUrl}/${updatedNote.id}`, updatedNote).then(res => res.data)
+```
+
+Myös muistiinpanon päivittäminen tapahtuu mutaation avulla. Komponentti <i>App</i> laajenee seuraavasti:
+
+```js
+import { useQuery, useMutation, useQueryClient } from 'react-query' 
+import { getNotes, createNote, updateNote } from './requests' // highlight-line
+
+const App = () => {
+  // ...
+
+  const updateNoteMutation = useMutation(updateNote, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('notes')
+    },
+  })
+
+  const toggleImportance = (note) => {
+    updateNoteMutation.mutate({...note, important: !note.important })
   }
-}
-// highlight-end
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(NewNote)
-```
-
-Tässä vaihtoehtoisessa tavassa <i>mapDispatchToProps</i> on funktio, jota _connect_ kutsuu antaen sille parametriksi storen _dispatch_-funktion. Funktion paluuarvona on olio, joka määrittelee joukon funktioita, jotka annetaan connectoitavalle komponentille propsiksi. Esimerkkimme määrittelee propsin <i>createNote</i> olevan funktio
-
-```js
-(value) => {
-  dispatch(createNote(value))
+  // ...
 }
 ```
 
-eli action creatorilla luodun actionin dispatchaus.
+Eli jälleen luotiin mutaatio, joka invalidoi kyselyn <i>notes</i>, jotta päivitetty muistiinpano saadaan renderöitymään oikein. Mutaation käyttö on helppoa, metodi <i>mutate</i> saa parametrikseen muistiinpanon, jonka tärkeys on vaihdettu vanhan arvon negaatioon.
 
-Komponentti siis viittaa funktioon propsin <i>props.createNote</i> kautta:
+Sovelluksen tämän hetken koodi on [GitHubissa](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) branchissa <i>part6-2</i>.
+
+### Suorituskyvyn optimointi
+
+Sovellus toimii hyvin, ja koodikin on suhteellisen yksinkertaista. Erityisesti yllättää muistiinpanojen listan muutoksen toteuttamisen helppous. Esim. kun muutamme muistiinpanon tärkeyttä, riittää kyselyn <i>notes</i> invalidointi siihen, että sovelluksen data päivittyy:
 
 ```js
-const NewNote = (props) => {
-
-  const addNote = async (event) => {
-    event.preventDefault()
-    const content = event.target.note.value
-    event.target.note.value = ''
-    props.createNote(content)
-  }
-
-  return (
-    <form onSubmit={addNote}>
-      <input name="note" />
-      <button type="submit">add</button>
-    </form>
-  )
-}
+  const updateNoteMutation = useMutation(updateNote, {
+    onSuccess: () => {
+      queryClient.invalidateQueries('notes') // highlight-line
+    },
+  })
 ```
 
-Konsepti on hiukan monimutkainen ja sen selittäminen sanallisesti on haastavaa. Useimmissa tapauksissa onneksi riittää <i>mapDispatchToProps</i>:in yksinkertaisempi muoto. On kuitenkin tilanteita, joissa monimutkaisempi muoto on tarpeen, esim. jos määriteltäessä propseiksi mäpättyjä <i>dispatchattavia actioneja</i> on [viitattava komponentin omiin propseihin](https://github.com/gaearon/redux-devtools/issues/250#issuecomment-186429931).
+Tästä on toki seurauksena se, että sovellus tekee muistiinpanon muutoksen aiheuttavan PUT-pyynnön jälkeen uuden GET-pyynnön, jonka avulla se hakee palvelimelta kyselyn datan:
 
-Egghead.io:sta löytyy Reduxin kehittäjän Dan Abramovin loistava tutoriaali [Getting started with Redux](https://egghead.io/courses/getting-started-with-redux), jonka katsomista voin suositella kaikille. Neljässä viimeisessä videossa käsitellään _connect_-funktiota ja nimenomaan sen "hankalampaa" käyttötapaa.
+![](../../images/6/61new.png)
 
-### Presentational/Container revisited
+Jos sovelluksen hakema datamäärä ei ole suuri, ei asialla ole juurikaan merkitystä. Selainpuolen toiminnallisuuden kannaltahan ylimääräisen HTTP GET -pyynnön tekeminen ei kuurikaan haittaa, mutta joissain tilanteissa se saattaa rasittaa palvelinta.
 
-_connect_-funktiota hyödyntävä versio komponentista <i>Notes</i> keskittyy lähes ainoastaan muistiinpanojen renderöimiseen, ja se on hyvin lähellä sitä minkä sanotaan olevan [presentational](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0)-komponentti, joita Dan Abramovin [sanoin](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) kuvaillaan seuraavasti:
+Tarvittaessa on myös mahdollista optimoida suorituskykyä [päivittämällä itse](https://react-query-v3.tanstack.com/guides/updates-from-mutation-responses) React Queryn ylläpitämää kyselyn tilaa.
 
-- Are concerned with how things look.
-- May contain both presentational and container components inside, and usually have some DOM markup and styles of their own.
-- Often allow containment via props.children.
-- Have no dependencies on the rest of the app, such as Redux actions or stores.
-- Don’t specify how the data is loaded or mutated.
-- Receive data and callbacks exclusively via props.
-- Rarely have their own state (when they do, it’s UI state rather than data).
-- Are written as functional components unless they need state, lifecycle hooks, or performance optimizations.
-
-_connect_-funktion avulla muodostettu _yhdistetty komponentti_
+Muutos uuden muistiinpanon lisäävän mutaation osalta on seuraavassa:
 
 ```js
-const mapStateToProps = (state) => {
-  if ( state.filter === 'ALL' ) {
-    return {
-      notes: state.notes
+const App = () => {
+  const queryClient =  useQueryClient() 
+
+  const newNoteMutation = useMutation(createNote, {
+    onSuccess: (newNote) => {
+      const notes = queryClient.getQueryData('notes') // highlight-line
+      queryClient.setQueryData('notes', notes.concat(newNote)) // highlight-line
     }
-  }
-
-  return {
-    notes: (state.filter  === 'IMPORTANT' 
-    ? state.notes.filter(note => note.important)
-    : state.notes.filter(note => !note.important)
-    )
-  }
+  })
+  // ...
 }
-
-const mapDispatchToProps = {
-  toggleImportanceOf,
-}
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Notes)
 ```
 
-taas on selkeästi <i>container</i>-komponentti, joita Dan Abramov [luonnehtii](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) seuraavasti:
+Eli <i>onSuccess</i>-takaisinkutsussa ensin luetaan <i>queryClient</i>-olion avulla olemassaoleva kyselyn <i>notes</i> tila ja päivitetään sitä lisäämällä mukaan uusi muistiinpano, joka saadaan takaisunkutsufunktion parametrina. Parametrin arvo on funktion <i>createNote</i> palauttama arvo, jonka määriteltiin tiedostossa <i>requests.js</i> seuraavasti:
 
-- Are concerned with how things work.
-- May contain both presentational and container components inside but usually don’t have any DOM markup of their own except for some wrapping divs, and never have any styles.
-- Provide the data and behavior to presentational or other container components.
-- Call Redux actions and provide these as callbacks to the presentational components.
-- Are often stateful, as they tend to serve as data sources.
-- Are usually generated using higher order components such as connect from React Redux, rather than written by hand.
+```js
+export const createNote = newNote =>
+  axios.post(baseUrl, newNote).then(res => res.data)
+```
 
-Komponenttien presentational vs. container -jaottelu on eräs hyväksi havaittu tapa strukturoida React-sovelluksia. Jako voi olla toimiva tai sitten ei, kaikki riippuu kontekstista.
+Samankaltainen muutos olisi suhteellisen helppoa tehdä myös muistiinpanon tärkeyden muuttavaan mutaatioon, jätämme sen kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
 
-Abramov mainitsee jaon [eduiksi](https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0) muun muassa seuraavat:
+Jos seuraamme tarkasti selaimen network-välilehteä, huomaamme että React Query hakee kaikki muistiinpanot jo siinä vaiheessa kun viemme kursorin syötekenttään:
 
-- Better separation of concerns. You understand your app and your UI better by writing components this way.
-- Better reusability. You can use the same presentational component with completely different state sources, and turn those into separate container components that can be further reused.
-- Presentational components are essentially your app’s “palette”. You can put them on a single page and let the designer tweak all their variations without touching the app’s logic. You can run screenshot regression tests on that page.
+![](../../images/6/62new.png)
 
-Abramov mainitsee termin [higher-order component](https://reactjs.org/docs/higher-order-components.html). Esim. <i>Notes</i> on normaali komponentti, React Reduxin _connect_-funktio taas on <i>higher-order komponentti</i> eli käytännössä funktio, joka haluaa parametrikseen komponentin muuttuakseen "normaaliksi" komponentiksi.
+Mistä on kyse? Hieman [dokumentaatiota](https://react-query-v3.tanstack.com/reference/useQuery)
+tutkimalla huomataan, että React Queryn kyselyjen oletusarvoinen toiminnallisuus on se, että kyselyt (joiden tila on <i>stale</i>) päivitetään kun <i>window focus</i> eli sovelluksen käyttöliittymän aktiivinen elementti vaihtuu. Voimme halutessamme kytkeä toiminnallisuuden pois luomalla kyselyn seuraavasti:
 
-Higher-order componentit eli HOC:t ovat yleinen tapa määritellä geneeristä toiminnallisuutta, joka sitten erikoistetaan esim. renderöitymisen määrittelyn suhteen parametrina annettavan komponentin avulla. Kyseessä on funktionaalisen ohjelmoinnin etäisesti olio-ohjelmoinnin perintää muistuttava käsite.
+```js
+const App = () => {
+  // ...
+  const result = useQuery('notes', getNotes, {
+    refetchOnWindowFocus: false  // highlight-line
+  })
 
-HOC:it ovat oikeastaan käsitteen [Higher-Order Function](https://en.wikipedia.org/wiki/Higher-order_function) (HOF) yleistys. HOF:eja ovat sellaiset funktiot, jotka joko ottavat parametrikseen funktioita tai palauttavat funktioita. Olemme oikeastaan käyttäneet HOF:eja läpi kurssin. Esim. lähes kaikki taulukoiden käsittelyyn tarkoitetut metodit kuten _map, filter ja find_ ovat HOF:eja.
+  // ...
+}
+```
 
-Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin, ovat saaneet hook-perustaisen apin. Useimmiten, kuten myös Reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia.
+Konsoliin tehtävillä tulostuksilla voit tarkkailla sitä miten usein React Query aiheuttaa sovelluksen uudelleenrenderöinnin. Nyrkkisääntönä on se, että uudelleenrenderöinti tapahtuu vähintään aina kun sille on tarvetta, eli kun kyselyn tila muuttuu. Voit lukea lisää asiasta esim. [täältä](https://tkdodo.eu/blog/react-query-render-optimizations).
 
-### Redux ja komponenttien tila
+Sovelluksen lopullinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) branchissa <i>part6-3</i>.
 
-Kurssi on ehtinyt pitkälle, ja olemme vihdoin päässeet siihen pisteeseen missä käytämme Reactia "oikein", eli React keskittyy pelkästään näkymien muodostamiseen ja sovelluksen tila sekä sovelluslogiikka on eristetty kokonaan React-komponenttien ulkopuolelle, Reduxiin ja action reducereihin.
+React Query on monipuolinen kirjasto joka jo nyt nähdyn perusteella yksinkertaistaa sovellusta. Tekeekö React Query monimutkaisemmat tilanhallintaratkaisut kuten esim. Reduxin tarpeettomaksi? Ei. React Query voi joissain tapauksissa korvata osin sovelluksen tilan, mutta kuten [dokumentaatio](https://react-query-v3.tanstack.com/guides/does-this-replace-client-state) toteaa
 
-Entä _useState_-hookilla saatava komponenttien oma tila, onko sillä roolia jos sovellus käyttää Reduxia tai muuta komponenttien ulkoista tilanhallintaratkaisua? Jos sovelluksessa on monimutkaisempia lomakkeita, saattaa niiden lokaali tila olla edelleen järkevä toteuttaa funktiolla _useState_ saatavan tilan avulla. Lomakkeidenkin tilan voi toki tallettaa myös Reduxiin, mutta jos lomakkeen tila on oleellinen ainoastaan lomakkeen täyttövaiheessa (esim. syötteen muodon validoinnin kannalta), voi olla viisaampaa jättää tilan hallinta suoraan lomakkeesta huolehtivan komponentin vastuulle.
+- React Query is a <i>server-state library</i>, responsible for managing asynchronous operations between your server and client
+- Redux, etc. are <i>client-state libraries</i> that can be used to store asynchronous data, albeit inefficiently when compared to a tool like React Query
 
-Kannattaako Reduxia käyttää aina? Tuskinpa. Reduxin kehittäjä Dan Abramov pohdiskelee asiaa artikkelissaan [You Might Not Need Redux](https://medium.com/@dan_abramov/you-might-not-need-redux-be46360cf367)
-
-Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman Reduxia käyttämällä Reactin [context](https://reactjs.org/docs/context.html)-apia ja [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer)-hookia, lisää asiasta on esim. [täällä](https://www.simplethread.com/cant-replace-redux-with-hooks/) ja [täällä](https://hswolff.com/blog/how-to-usecontext-with-usereducer/). Tutustumme tähän tapaan myös kurssin [yhdeksännessä osassa](/en/part9).
+React Query on siis kirjasto, joka ylläpitää frontendissä <i>palvelimen tilaa</i>, eli toimii ikäänkuin välimuistina sille, mitä palvelimelle on talletettu. React Query yksinkertaistaa palvelimella olevan datan käsittelyä, ja voi joissain tapauksissa eliminoida tarpeen sille, että palvelimella oleva data haettaisiin frontendin tilaan. Useimmat React-sovellukset tarvitsevat palvelimella olevan datan tilapäisen tallettamisen lisäksi myös jonkun ratkaisun sille, miten frontendin muu tila (esim. lomakkeiden tai notifikaatioiden tila) käsitellään. 
 
 </div>
 
@@ -582,22 +347,465 @@ Reduxin kaltainen tilankäsittely on mahdollista toteuttaa nykyään myös ilman
 
 ### Tehtävät 6.19.-6.21.
 
-#### 6.19 anekdootit ja connect, step1
+Tehdään nyt anekdoottisovelluksesta uusi, React Query -kirjastoa hyödyntävä versio. Ota lähtökohdaksesi
+[täällä](https://github.com/fullstack-hy2020/query-anecdotes) oleva projekti. Projektissa on valmiina asennettuna JSON Server, jonka toimintaa on hieman modifioitu. Käynnistä palvelin komennolla <i>npm run server</i>.
 
-<i>Redux-storea</i> käytetään tällä hetkellä <em>useSelector</em>- ja <em>useDispatch</em>-hookien avulla. Tämä on varmasti paras tapa tehdä asiat, mutta harjoitellaan kuitenkin hieman _connect_-funktion käyttöä.
+#### Tehtävä 6.19
 
-Muokkaa <i>Notification</i>-komponenttia niin, että se käyttää _connect_-funktiota hookien sijaan. 
+Toteuta anekdoottien hakeminen palvelimelta React Queryn avulla. 
 
-#### 6.20 anekdootit ja connect, step2
+Sovelluksen tulee toimia siten, että jos palvelimen kanssa kommuikoinnissa ilmenee ongelmia, tulee näkyviin ainoastaan virhesivu:
 
-Tee sama <i>Filter</i>- ja <i>AnecdoteForm</i>-komponenteille.
+![](../../images/6/65new.png)
 
-#### 6.21 anekdootit, loppuhuipennus
+Löydät ohjeen virhetilanteen havaitsemiseen [täältä](https://react-query-v3.tanstack.com/guides/queries). 
 
-Sovellukseen on (todennäköisesti) jäänyt eräs hieman ikävä bugi. Jos "vote"-näppäintä painellaan useasti peräkkäin, notifikaatio näkyy ruudulla hieman miten sattuu. Esimerkiksi jos äänestetään kaksi kertaa kolmen sekunnin välein, näkyy jälkimmäinen notifikaatio ruudulla ainoastaan kahden sekunnin verran (olettaen, että notifikaation näyttöaika on viisi sekuntia). Tämä johtuu siitä, että ensimmäisen äänestyksen notifikaation tyhjennys tyhjentääkin myöhemmän äänestyksen notifikaation.
+Voit simuloida palvelimen kanssa tapahtuvaa ongelmaa esim. sammuttamalla JSON Serverin. Huomaa, että kysely on ensin jonkin aikaa tilassa <i>isLoading</i> sillä epäonnistuessaan React Query yrittää pyyntöä muutaman kerran ennen kuin se toteaa, että pyyntö ei onnistu. Voit halutessasi määritellä, että uudelleenyrityksiä ei tehdä:
 
-Korjaa bugi siten, että usean peräkkäisen äänestyksen viimeistä notifikaatiota näytetään aina viiden sekunnin ajan. Korjaus tapahtuu siten, että uuden notifikaation tullessa edellisen notifikaation nollaus tarvittaessa perutaan, ks. funktion _setTimeout_ [dokumentaatio](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
+```js
+const result = useQuery(
+  'anecdotes', getAnecdotes, 
+  {
+    retry: false
+  }
+)
+```
+
+tai, että pyyntöä yritetään uudelleen esim. vain kerran:
+
+```js
+const result = useQuery(
+  'anecdotes', getAnecdotes, 
+  {
+    retry: 1
+  }
+)
+```
+
+#### Tehtävä 6.20
+
+Toteuta uusien anekdoottien lisääminen palvelimelle React Queryn avulla. Sovelluksen tulee automaattisesti renderöidä lisätty anekdootti. Huomaa, että anekdootin sisällön pitää olla vähintään 5 merkkiä pitkä, muuten palvelin ei hyväksy POST pyyntöä. Virheiden käsittelystä ei tarvitse nyt välittää.
+
+#### Tehtävä 6.21
+
+Toteuta anekdoottien äänestäminen hyödyntäen jälleen React Queryä. Sovelluksen tulee automaattisesti renderöidä äänestetyn anekdootin kasvatettu äänimäärä.
+
+</div>
+
+<div class="content">
+
+### useReducer
+
+Vaikka sovellus siis käyttäisi React Queryä, tarvitaan siis yleensä jonkinlainen ratkaisu selaimen muun tilan (esimerkiksi lomakkeiden) hallintaan. Melko usein <i>useState</i>:n avulla muodostettu tila on riittävä ratkaisu. Reduxin käyttö on toki mahdollista mutta on olemassa myös muita vaihtoehtoja.
+
+Tarkastellaan yksinkertaista laskurisovellusta. Sovellus näyttää laskurin arvon, ja tarjoaa kolme nappia laskurin tilan päivittämiseen:
+
+![](../../images/6/63new.png)
+
+Toteutetaan laskurin tilan hallinta Reactin sisäänrakennetun [useReducer](https://beta.reactjs.org/reference/react/useReducer)-hookin tarjoamalla Reduxin kaltaisella tilanhallintamekanismilla:
+
+
+```js
+import { useReducer } from 'react'
+
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case "INC":
+        return state + 1
+    case "DEC":
+        return state - 1
+    case "ZERO":
+        return 0
+    default:
+        return state
+  }
+}
+
+const App = () => {
+  const [counter, counterDispatch] = useReducer(counterReducer, 0)
+
+  return (
+    <div>
+      <div>{counter}</div>
+      <div>
+        <button onClick={() => counterDispatch({ type: "INC"})}>+</button>
+        <button onClick={() => counterDispatch({ type: "DEC"})}>-</button>
+        <button onClick={() => counterDispatch({ type: "ZERO"})}>0</button>
+      </div>
+    </div>
+  )
+}
+
+export default App
+```
+
+<i>useReducer</i> siis tarjoaa mekanismin, jonka avulla sovellukselle voidaan luoda tila. Parametrina tilaa luotaessa annetaan tilan muutosten hallinnan hoitava reduserifunktio, sekä tilan alkuarvo:
+
+```js
+const [counter, counterDispatch] = useReducer(counterReducer, 0)
+```
+
+Tilan muutokset hoitava reduserifunktio on täysin samanlainen Reduxin reducerien kanssa, eli funktio saa parametrikseen nykyisen tilan, sekä tilanmuutoksen tekemän actionin. Funktio palauttaa actionin tyypin ja mahdollisen sisällön perusteella päivitetyn uuden tilan:
+
+```js
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case "INC":
+        return state + 1
+    case "DEC":
+        return state - 1
+    case "ZERO":
+        return 0
+    default:
+        return state
+  }
+}
+```
+
+Esimerkissämme actioneilla ei ole muuta kuin tyyppi. Jos actionin tyyppi on <i>INC</i>, kasvattaa se tilan arvoa yhdellä jne. Reduxin reducerien tapaan actionin mukana voi myös olla mielivaltaista dataa, joka yleensä laitetaan actionin kenttään <i>payload</i>.
+
+Funktio <i>useReducer</i> palauttaa taulukon, jonka kautta päästään käsiksi tilan nykyiseen arvoon (taulukon ensimmäinen alkio), sekä <i>dispatch</i>-funktioon (taulukon toinen alkio), jonka avulla tilaa voidaan muuttaa:
+
+```js
+const App = () => {
+  const [counter, counterDispatch] = useReducer(counterReducer, 0)  // highlight-line
+
+  return (
+    <div>
+      <div>{counter}</div> // highlight-line
+      <div>
+        <button onClick={() => counterDispatch({ type: "INC" })}>+</button> // highlight-line
+        <button onClick={() => counterDispatch({ type: "DEC" })}>-</button>
+        <button onClick={() => counterDispatch({ type: "ZERO" })}>0</button>
+      </div>
+    </div>
+  )
+}
+```
+
+Tilan muutos tapahtuu siis täsmälleen kuten Reduxia käytettäessä, dispatch-funktiolle annetaan parametriksi sopiva tilaa muuttava action:
+
+```js
+counterDispatch({ type: "INC" })
+```
+
+Sovelluksen tämänhetkinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-1) branchissa <i>part6-1</i>.
+
+### Kontekstin käyttö tilan välittämiseen
+
+Jos haluamme jakaa sovelluksen useaan komponenttiin, on laskurin arvo sekä sen hallintaan käytettävä dispatch-funktio välitettävä myös muille komponenteille. Eräs ratkaisu olisi välittää nämä tuttuun tapaan propseina:
+
+```js
+const Display = ({ counter }) => {
+  return <div>{counter}</div>
+}
+
+const Button = ({ dispatch, type, label }) => {
+  return (
+    <button onClick={() => dispatch({ type })}>
+      {label}
+    </button>
+  )
+}
+
+const App = () => {
+  const [counter, counterDispatch] = useReducer(counterReducer, 0)
+
+  return (
+    <div>
+      <Display counter={counter}/> // highlight-line
+      <div>
+        // highlight-start
+        <Button dispatch={counterDispatch} type='INC' label='+' />
+        <Button dispatch={counterDispatch} type='DEC' label='-' />
+        <Button dispatch={counterDispatch} type='ZERO' label='0' />
+        // highlight-end
+      </div>
+    </div>
+  )
+}
+```
+
+Ratkaisu toimii, mutta ei ole optimaalinen. Jos komponenttirakenne monimutkaistuu, tulee esim dispatcheria välittää propsien avulla monen komponentin kautta sitä tarvitseville komponenteille siitäkin huolimatta, että komponenttipuussa välissä olevat komponentit eivät dispatcheria tarvitsisikaan. Tästä ilmiöstä käytetään nimitystä <i>prop drilling</i>. 
+
+Reactin sisäänrakennettu [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) tuo tilanteeseen ratkaisun. Reactin konteksti on eräänlainen sovelluksen globaali tila, johon on mahdollista antaa suora pääsy mille tahansa komponentille.
+
+Luodaan sovellukseen nyt konteksti, joka tallettaa laskurin tilanhallinnan.
+
+Konteksti luodaan Reactin hookilla [createContext](https://beta.reactjs.org/reference/react/createContext). Luodaan konteksti tiedostoon <i>CounterContext.js</i>:
+
+```js
+import { createContext } from 'react'
+
+const CounterContext = createContext()
+
+export default CounterContext
+```
+
+Komponentti <i>App</i> voi nyt <i>tarjota</i> kontekstin sen alikomponenteille seuraavasti:
+
+```js
+import CounterContext from './CounterContext' // highlight-line
+
+const App = () => {
+  const [counter, counterDispatch] = useReducer(counterReducer, 0)
+
+  return (
+    <CounterContext.Provider value={[counter, counterDispatch]}>  // highlight-line
+      <Display counter={counter}/>
+      <div>
+        <Button type='INC' label='+' />
+        <Button type='DEC' label='-' />
+        <Button type='ZERO' label='0' />
+      </div>
+    </CounterContext.Provider> // highlight-line
+  )
+}
+```
+
+Kontekstin tarjoaminen siis tapahtuu käärimällä lapsikomponentit komponentin <i>CounterContext.Provider</i> sisälle ja asettamalla kontekstille sopiva arvo.
+
+Kontekstin arvoksi annetaan nyt taulukko, joka sisältää laskimen arvon, sekä arvon muuttamiseen käytettävän <i>dispatch</i>-funktion.
+
+Muut komponentit saavat nyt kontekstin käyttöön hookin [useContext](https://beta.reactjs.org/reference/react/useContext) avulla:
+
+```js
+import { useContext } from 'react' // highlight-line
+import CounterContext from './CounterContext'
+
+const Display = () => {
+  const [counter, dispatch] = useContext(CounterContext) // highlight-line
+  return <div>
+    {counter}
+  </div>
+}
+
+const Button = ({ type, label }) => {
+  const [counter, dispatch] = useContext(CounterContext) // highlight-line
+  return (
+    <button onClick={() => dispatch({ type })}>
+      {label}
+    </button>
+  )
+}
+```
+
+Komponetit saavat siis näin tietoonsa kontekstin tarjoajan siihen asettaman sisällön, joka on tällä kertaa taulukko mikä sisältää laskurin arvon, sekä laskurin tilaa muuttavan dispatch-funktion.
+
+Sovelluksen tämänhetkinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) branchissa <i>part6-2</i>.
+
+### Laskurikontekstin määrittely omassa tiedostossa
+
+Sovelluksessamme on vielä sellainen ikävä piirre, että laskurin tilanhallinnan toiminnallisuus on määritelty osin komponentissa <i>App</i>. Siirretään nyt kaikki laskuriin liittyvä tiedostoon <i>CounterContext.js</i>:
+
+```js
+import { createContext, useReducer } from 'react'
+
+const counterReducer = (state, action) => {
+  switch (action.type) {
+    case "INC":
+        return state + 1
+    case "DEC":
+        return state - 1
+    case "ZERO":
+        return 0
+    default:
+        return state
+  }
+}
+
+const CounterContext = createContext()
+
+export const CounterContextProvider = (props) => {
+  const [counter, counterDispatch] = useReducer(counterReducer, 0)
+
+  return (
+    <CounterContext.Provider value={[counter, counterDispatch] }>
+      {props.children}
+    </CounterContext.Provider>
+  )
+}
+
+export default CounterContext
+```
+
+Tiedosto exporttaa nyt kontekstia vastaavan olion <i>CounterContext</i> lisäksi komponentin <i>CouterContextProvider</i> joka on käytännössä kontekstin tarjoaja (context provider), jonka arvona on laskuri ja sen tilanhallintaan käytettävä dispatcheri.
+
+Otetaan kontekstin tarjoaja käyttöön tiedostossa <i>index.js</i>
+
+```js
+import ReactDOM from 'react-dom/client'
+import App from './App'
+import { CounterContextProvider } from './CounterContext' // highlight-line
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <CounterContextProvider>  // highlight-line
+    <App />
+  </CounterContextProvider>  // highlight-line
+)
+```
+
+Nyt laskurin arvon ja toiminnallisuuden määrittelevä konteksti on <i>kaikkien</i> sovelluksen komponenttien käytettävissä.
+
+Komponentti <i>App</i> yksinkertaistuu seuraavaan muotoon:
+
+```js
+import Display from './components/Display'
+import Button from './components/Button'
+
+const App = () => {
+  return (
+    <div>
+      <Display />
+      <div>
+        <Button type='INC' label='+' />
+        <Button type='DEC' label='-' />
+        <Button type='ZERO' label='0' />
+      </div>
+    </div>
+  )
+}
+
+export default App
+```
+
+Kontekstia käytetään edelleen samalla tavalla, esim. komponentti <i>Button</i> on siis määritelty seuraavasti:
+
+```js
+import { useContext } from 'react'
+import CounterContext from '../CounterContext'
+
+const Button = ({ type, label }) => {
+  const [counter, dispatch] = useContext(CounterContext)
+  return (
+    <button onClick={() => dispatch({ type })}>
+      {label}
+    </button>
+  )
+}
+
+export default Button
+```
+
+Komponentti <i>Button</i> tarvitsee ainoastaan laskuriin liittyvää <i>dispatch</i>-funktiota, mutta se saa kontekstista funktion <i>useContext</i> avulla haltuunsa myös laskurin arvon (eli muuttujan <i>counter</i>):
+
+```js
+  const [counter, dispatch] = useContext(CounterContext)
+```
+
+Tämä ei ole suuri ongelma, mutta koodia on mahdollista muuttaa hieman miellyttävämpään ja ilmaisuvoimaisempaan suuntaan määrittelemällä tiedostoon <i>CounterContext</i> pari apufunktiota:
+
+```js
+import { createContext, useReducer, useContext } from 'react' // highlight-line
+
+const CounterContext = createContext()
+
+// ...
+
+export const useCounterValue = () => {
+  const counterAndDispatch = useContext(CounterContext)
+  return counterAndDispatch[0]
+}
+
+export const useCounterDispatch = () => {
+  const counterAndDispatch = useContext(CounterContext)
+  return counterAndDispatch[1]
+}
+
+// ...
+```
+
+Näiden apufunktioiden avulla kontekstia käyttävien komponenttien on mahdollista saada haltuunsa juuri tarvitsemansa osa kontekstia. Komponentti <i>Display</i> muuttuu seuraavasti:
+
+```js
+import { useCounterValue } from '../CounterContext' // highlight-line
+
+const Display = () => {
+  const counter = useCounterValue() // highlight-line
+  return <div>
+    {counter}
+  </div>
+}
+
+
+export default Display
+```
+
+Komponentti <i>Button</i> muuttuu muotoon:
+
+```js
+import { useCounterDispatch } from '../CounterContext' // highlight-line
+
+const Button = ({ type, label }) => {
+  const dispatch = useCounterDispatch() // highlight-line
+  return (
+    <button onClick={() => dispatch({ type })}>
+      {label}
+    </button>
+  )
+}
+
+export default Button
+```
+
+Ratkaisu on varsin tyylikäs. Koko sovelluksen tila eli laskurin arvo ja sen hallintaan tarkoitettu koodi on nyt eristetty tiedostoon <i>CounterContext</i> joka tarjoaa komponenteille hyvin nimetyt ja helppokäyttöiset apufunktiot tilan käsittelyyn.
+
+Sovelluksen lopullinen koodi on GitHubissa repositorion [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) branchissa <i>part6-3</i>.
+
+Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i> ja <i>useCounterDispatch</i> on määritelty ns. [custom hookeina](https://reactjs.org/docs/hooks-custom.html), sillä funktion <i>useContext</i> kutsuminen [ei ole mahdollista](https://reactjs.org/docs/hooks-rules.html) muualta kuin React-komponenteista tai custom hookeista käsin. Custom hookit taas ovat JavaScript-funktioita joiden nimen pitää alkaa merkkijonolla _use_. Palaamme custom hookeihin hieman tarkemmin kurssin [osassa 7](http://localhost:8000/osa7/custom_hookit).
+
+</div>
+
+
+<div class="tasks">
+
+### Tehtävät 6.22.-6.23.
+
+#### Tehtävä 6.22.
+
+Sovelluksessa on valmiina komponentti <i>Notification</i> käyttäjälle tehtävien notifikaatioiden näyttämistä varten.
+
+Toteuta sovelluksen notifikaation tilan hallinta useReduce-hookin ja contextin avulla. Notifikaatio kertoo kun uusi anekdootti luodaan tai anekdoottia äänestetään:
+
+![](../../images/6/66new.png)
+
+Notifikaatio näytetään viiden sekunnin ajan.
+
+#### Tehtävä 6.23.
+
+Kuten tehtävässä 6.20 todettiin, palvelin vaatii, että lisättävän anekdootin sisällön pituus on vähintään 5 merkkiä. Toteuta nyt lisäämisen yhteyteen virheenkäsittely. Käytännössä riittää, että näytät epäonnistuneen lisäyksen yhteydessä käyttäjälle notifikaation:
+
+![](../../images/6/67new.png)
+
+Virhetilanne kannattaa käsitellä sille rekisteröidyssä takaisinkutsufunktiossa, ks 
+[täältä](https://react-query-v3.tanstack.com/reference/useMutation) miten rekisteröit funktion.
 
 Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+
+</div>
+
+<div class="content">
+
+### Tilanhallintaratkaisun valinta
+
+Luvuissa 1-5 kaikki sovelluksen tilanhallinta hoidettiin Reactin hookin <i>useState</i> avulla. Backendiin tehtävät asynkroniset kutsut edellyttivät joissain tilanteissa hookin <i>useEffect</i> käyttöä. Mitään muuta ei periaatteessa tarvita.
+
+Hienoisena ongelmana <i>useState</i>-hookilla luotuun tilaan perustuvassa ratkaisussa on se, että jos jotain osaa sovelluksen tilasta tarvitaan useissa sovelluksen komponenteissa, tulee tila ja sen muuttamiseksi tarvittavat funktiot välittää propsien avulla kaikille tilaa käsitteleville komponenteille. Joskus propseja on välitettävä usean komponentin läpi, ja voi olla, että matkan varrella olevat komponentit eivät edes ole tilasta millään tavalla kiinnostuneita. Tästä hieman ikävästä ilmiöstä käytetään nimitystä <i>prop drilling</i>.
+
+Aikojen saatossa React-sovellusten tilanhallintaan on kehitelty muutamiakin vaihtoehtoisia ratkaisuja, joiden avulla ongelmllisia tilanteinta (esim. prop drilling) saadaan helpotettua. Mikään ratkaisu ei kuitenkaan ole ollut "lopullinen", kaikilla on omat hyvät ja huonot puolensa, ja uusia ratkaisuja kehitellään koko ajan.
+
+Aloittelijaa ja kokenuttakin web-kehittäjää tilanne saattaa hämmentää. Mitä ratkaisua tulisi käytää?
+
+Yksinkertaisessa sovelluksessa <i>useState</i> on varmasti hyvä lähtökohta. Jos sovellus kommunikoi palvelimen kanssa, voi kommunikoinnin hoitaa lukujen 1-5 tapaan itse sovelluksen tilaa hyödyntäen. Viime aikoina on kuitenkin yleistynyt se, että kommunikointi ja siihen liittyvä tilanhallinta siirretään ainakin osin React Queryn (tai jonkun muun samantapaisen kirjaston) hallinnoitavaksi. Jos useState ja sen myötä aiheutuva prop drilling arveluttaa, voi kontekstin käyttö olla hyvä vaihtoehto. On myös tilanteita, joissa osa tilasta voi olla järkevää hoitaa useStaten ja osa kontekstien avulla.
+
+Kaikkien kattavimman ja järeimmän tilanhallintaratkaisun tarjoaa Redux, joka on eräs tapa toteuttaa ns. [Flux](https://facebook.github.io/flux/)-arkkitehtuuri. Redux on hieman vanhempi kuin tässä aliosassa esitetyt ratkaisut. Reduxin jähmeys onkin ollut motivaationa monille uusille tilanhallintaratkaisuille kuten tässä osassa esittelemällemme Reactin <i>useReducer</i>:ille. Osa Reduxin jäykkyyteen kohdistuvasta kritiikistä tosin on jo vanhentunut [Redux Toolkit](https://redux-toolkit.js.org/):in ansiosta. 
+
+Vuosien saatossa on myös kehitelty muita Reduxia vastaavia tilantahallintakirjastoja, kuten esim. uudempi tulokas [Recoil](https://recoiljs.org/) ja hieman iäkkäämpi [MobX](https://mobx.js.org/). [Npm trendsien](https://npmtrends.com/mobx-vs-recoil-vs-redux) perusteella Redux kuitenkin dominoi edelleen selvästi, ja näyttää itseasiassa vaan kasvattavan etumatkaansa:
+
+![](../../images/6/64new.png)
+
+Myöskään Reduxia ei ole pakko käyttää sovelluksessa kokonaisvaltaisesti. Saattaa olla mielekästä hoitaa esim. sovellusten lomakkeiden datan tallentaminen Reduxin ulkopuolella, erityisesti niissä tilanteissa, missä lomakkeen tila ei vaikuta muuhun sovellukseen. Myös Reduxin ja Reqct Queryn yhteiskäyttö samassa sovellukssa on täysin mahdollista. 
+
+Kysymys siitä mitä tilanhallintarkatkaisua tulisi käyttää ei ole ollenkaan suoraviivainen. Yhtä oikeaa vastausta on mahdotonta antaa, ja on myös todennäköistä, että valittu tilanhallintaratkaisu saattaa sovelluksen kasvaessa osoittautua siinä määrin epäoptimaaliseksi, että tilanhallinnan ratkaisuja täytyy vaihtaa vaikka sovellus olisi jo ehditty viedä tuotantokäyttöön.
 
 </div>
