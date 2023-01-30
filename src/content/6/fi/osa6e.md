@@ -5,8 +5,6 @@ letter: e
 lang: fi
 ---
 
-
-
 <div class="tasks">
 
 **HUOM**: tämä on osan 6 vanha päätösluku joka korvattiin 30.1.2023 [uudella luvulla](/osa6/react_query_use_reducer_ja_contex), joka käsittelee React Queryä, useReduceria ja contextia. Tämä luku säilyy nähtävillä muutaman viikon ajan.
