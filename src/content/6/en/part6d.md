@@ -786,7 +786,7 @@ This was the last exercise for this part of the course and it's time to push you
 
 <div class="content">
 
-### Which state management solution to chooce?
+### Which state management solution to choose?
 
 In chapters 1-5, all state management of the application was done using React's hook <i>useState</i>. Asynchronous calls to the backend required the use of the <i>useEffect</i> hook in some situations. In principle, nothing else is needed.
 
