@@ -250,17 +250,17 @@ Let's implement a GraphQL server with today's leading library: [Apollo Server](h
 Create a new npm project with _npm init_ and install the required dependencies.
 
 ```bash
-npm install apollo-server@3.10.1 graphql
+npm install apollo/server graphql
 ```
 
-**Note** at the time of writing (10th Dec 2022) the code used in this part is not fully compatible with the new version of the Apollo Server, and because of this, if you want everything to work smoothly you should install the version _3.10.1_. Material shall be updated to use the most recent Apollo Server in early 2023.
 
 Also create a `index.js` file in your project's root directory.
 
 The initial code is as follows: 
 
 ```js
-const { ApolloServer, gql } = require('@apollo/server')
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
 
 let persons = [
   {
@@ -285,7 +285,7 @@ let persons = [
   },
 ]
 
-const typeDefs = gql`
+const typeDefs = `
   type Person {
     name: String!
     phone: String
@@ -315,9 +315,11 @@ const server = new ApolloServer({
   resolvers,
 })
 
-server.listen().then(({ url }) => {
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+}).then(({ url }) =>
   console.log(`Server ready at ${url}`)
-})
+)
 ```
 
 The heart of the code is an _ApolloServer_, which is given two parameters:
@@ -714,7 +716,7 @@ The errors from those rules are handled by [the error handling mechanism of Apol
 Let's block adding the same name to the phonebook multiple times: 
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('@apollo/server') // highlight-line
+const { GraphQLError } = require('graphql') // highlight-line
 
 // ...
 
@@ -724,7 +726,7 @@ const resolvers = {
     addPerson: (root, args) => {
       // highlight-start
       if (persons.find(p => p.name === args.name)) {
-        throw new UserInputError('Name must be unique', {
+        throw new GraphQLError('Name must be unique', {
           invalidArgs: args.name,
         })
       }
@@ -933,10 +935,9 @@ In some cases, it might be beneficial to name the queries. This is the case espe
 Through the exercises, we will implement a GraphQL backend for a small library. 
 Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to _npm init_ and to install dependencies!
 
-**Note** at the time of writing (10th Dec 2022) the code used in this part is not fully compatible with the new version of the Apollo Server, and because of this, if you want everything to work smoothly you should install the version _3.10.1_:
 
 ```bash
-npm install apollo-server@3.10.1 graphql
+npm install apollo/server graphql
 ```
 
 Note also that the code does not initially work since the schema definition is not complete.
