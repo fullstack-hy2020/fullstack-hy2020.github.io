@@ -7,9 +7,9 @@ lang: pt
 
 <div class="content">
 
-Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O foco principal é em aplicativos de página única implementados com React e com suporte a Serviços Web RESTful e GraphQL implementados com Node.js. O curso também têm partes sobre TypeScript, React Native e Integração Contínua.
+Este curso é uma introdução ao desenvolvimento web moderno com JavaScript. O foco principal é em  de página única implementados com React e com suporte a Serviços Web RESTful e GraphQL implementados com Node.js. O curso também têm partes sobre TypeScript, React Native e Integração Contínua.
 
-Outros tópicos incluem depuração de aplicativos, tecnologia de contêineres (containers), configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
+Outros tópicos incluem depuração de aplicações, tecnologia de contêineres (containers), configuração, gerenciamento de ambientes de tempo de execução e banco de dados.
 
 ### Pré-requisitos
 Os participantes devem ter boas habilidades de programação, conhecimento básico de programação web e banco de dados e saber o básico do sistema de controle de versão Git. Também é esperado que você tenha perseverança e capacidade de resolver problemas e que saiba buscar informações de forma independente.
@@ -192,11 +192,11 @@ A prova é feita no sistema de envio de exercícios. Siga as instruções abaixo
 - Inscreva-se no curso através da Universidade Aberta.
 - Você receberá o link de inscrição por meio do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen/submissions) depois de concluir os exercícios suficientes.
 
-![matricule-se em 'créditos universitários'](../../images/0/enroll1.png)
+![enroll in university credits](../../images/0/enroll1.png)
 
 Após sua matrícula no curso, salve seu número de identificação de aluno da Universidade de Helsinque no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/myinfo):
 
-![salvando o número de identificação de aluno](../../images/0/28b.png)
+![saving the student number](../../images/0/28b.png)
 
 Leia mais [aqui](/pt/part0/informacoes_gerais#onde-obtenho-meu-numero-de-identificacao-de-aluno-da-universidade-de-helsinque) para obter informações sobre como descobrir seu número de identificação de aluno.
 

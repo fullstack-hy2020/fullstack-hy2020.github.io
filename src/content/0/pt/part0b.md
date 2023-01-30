@@ -7,83 +7,83 @@ lang: pt
 
 <div class="content">
 
-Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
+Antes de começarmos a programar, passaremos por alguns princípios de desenvolvimento web examinando uma aplicação de exemplo em <https://studies.cs.helsinki.fi/exampleapp>.
 
-The application exists only to demonstrate some basic concepts of the course, and is, by no means, an example of <i>how</i> a modern web application should be made. On the contrary, it demonstrates some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
+A aplicação serve apenas para demonstrar alguns conceitos básicos do curso e, de maneira alguma, é um exemplo de <i>como</i> uma aplicação web moderna deve ser feita. Pelo contrário, ele demonstra algumas técnicas antigas de desenvolvimento web, que até poderiam ser consideradas como <i>práticas ruins</i> hoje em dia.
 
-Code will conform to contemporary best practices from [part 1](/en/part1) onwards.
+O código seguirá as melhores práticas contemporâneas a partir da [parte 1](/pt/part1) em diante.
 
-Open the [example application](https://studies.cs.helsinki.fi/exampleapp) in your browser. Sometimes this takes a while.
+Abra a [aplicação de exemplo](https://studies.cs.helsinki.fi/exampleapp) no seu navegador. Às vezes demora um pouco.
 
-The course material is done with the Chrome browser.
+O conteúdo do curso é feito utilizando o navegador Chrome.
 
-**The 1st rule of web development**: Always keep the Developer Console open on your web browser. On macOS, open the console by pressing _F12_ or _option-cmd-i_ simultaneously. On Windows or Linux, open the console by pressing _F12_ or _ctrl-shift-i_ simultaneously. The console can also be opened via the [context menu](https://en.wikipedia.org/wiki/Menu_key).
+**A 1ª regra de desenvolvimento web**: Mantenha sempre o "Console do Desenvolvedor" aberto no seu navegador web. No macOS, abra o console pressionando _F12_ ou _option-cmd-i_ simultaneamente. No Windows ou Linux, abra o console pressionando _F12_ ou _ctrl-shift-i_ simultaneamente. O console também pode ser aberto via [tecla Menu](https://help.gnome.org/users/gnome-help/stable/keyboard-key-menu.html.pt_BR).
 
-Remember to <i>always</i> keep the Developer Console open when developing web applications.
+Lembre-se de <i>sempre</i> manter o console do desenvolvedor aberto ao desenvolver aplicações web.
 
-The console looks like this:
+O console se parece com isso:
 
-![A screenshot of the developer tools open in a browser](../../images/0/1e.png)
+![Captura de tela das ferramentas do dev aberta em um browser](../../images/0/1e.png)
 
-Make sure that the <i>Network</i> tab is open, and check the <i>Disable cache</i> option as shown. <i>Preserve log</i> can also be useful: it saves the logs printed by the application when the page is reloaded.
+Certifique-se de que a guia <i>Rede</i> esteja aberta e marque a opção <i>Desativar cache</i> conforme mostrado. <i>Preservar registro</i> também pode ser útil: ele salva os logs impressos pela aplicação quando a página é recarregada.
 
-**NB:** The most important tab is the <i>Console</i> tab. However, in this introduction, we will be using the <i>Network</i> tab quite a bit.
+**N.B.:** A guia mais importante é a <i>Console</i>. No entanto, nesta introdução, usaremos mais a guia <i>Rede</i>.
 
 ### HTTP GET
 
-The server and the web browser communicate with each other using the [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP) protocol. The <i>Network</i> tab shows how the browser and the server communicate.
+O servidor e o navegador web se comunicam usando o protocolo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). A guia <i>Network</i> mostra como o navegador e o servidor se comunicam.
 
-When you reload the page (press the F5 key or the &#8635; symbol on your browser), the console will show that two events have happened:
+Quando você recarrega a página (pressione a tecla F5 ou o símbolo &#8635; no seu navegador), o console mostrará que dois eventos aconteceram:
 
-- The browser has fetched the contents of the page <i>studies.cs.helsinki.fi/exampleapp</i> from the server
-- And has downloaded the image <i>kuva.png</i>
+- O navegador baixou o conteúdo da página <i>studies.cs.helsinki.fi/exampleapp</i> do servidor; e
+- E baixou a imagem <i>kuva.png</i>.
 
-![Screenshot of the developer console showing these two events](../../images/0/2e.png)
+![Captura de tela do console do desenvolvedor mostrando esses dois eventos](../../images/0/2e.png)
 
-On a small screen, you might have to widen the console window to see these.
+Se estiver utilizando um monitor pequena, terá que ampliar a janela do console para conseguir ver claramente.
 
-Clicking the first event reveals more information on what's happening:
+Ao clicar no primeiro evento, mais informações sobre o que está acontecendo são reveladas:
 
-![Detailed view of a single event](../../images/0/3e.png)
+![Visão detalhada de um único evento](../../images/0/3e.png)
 
-The upper part, <i>General</i>, shows that the browser requested the address <i>https://studies.cs.helsinki.fi/exampleapp</i> (though the address has changed slightly since this picture was taken) using the [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) method, and that the request was successful, because the server response had the [Status code](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes) 200.
+Na parte superior, <i>Geral</i>, mostra que o navegador solicitou o endereço <i>https://studies.cs.helsinki.fi/exampleapp</i> (embora o endereço tenha mudado ligeiramente desde que esta imagem foi feita) usando o método [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) e que a requisição foi bem-sucedida, pois o servidor respondeu com o código de status [200](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
-The request and the server response have several [headers](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
+A requisição e a resposta do servidor possuem vários [cabeçalhos](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
-![Screenshot of response headers](../../images/0/4e.png)
+![Captura de tela dos cabeçalhos de resposta](../../images/0/4e.png)
 
-The <i>Response headers</i> on top tell us e.g. the size of the response in bytes and the exact time of the response. An important header [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) tells us that the response is a text file in [utf-8](https://en.wikipedia.org/wiki/UTF-8) format and the contents of which have been formatted with HTML. This way the browser knows the response to be a regular [HTML](https://en.wikipedia.org/wiki/HTML) page and to render it to the browser 'like a web page'.
+Os cabeçalhos de resposta no topo nos dizem, por exemplo, o tamanho da resposta em bytes e o momento exato da resposta. Um cabeçalho importante, [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type), nos diz que a resposta é um arquivo de texto no formato [utf-8](https://en.wikipedia.org/wiki/UTF-8) e que os conteúdos foram formatados com HTML. Dessa forma, o navegador sabe que a resposta é uma página HTML comum e a renderiza para o navegador "como uma página web".
 
-The <i>Response</i> tab shows the response data, a regular HTML page. The <i>body</i> section determines the structure of the page rendered to the screen:
+A guia <i>Resposta</i> mostra os dados de resposta, uma página HTML comum. A seção <i>body</i> determina a estrutura da página renderizada na tela:
 
-![Screenshot of the response tab](../../images/0/5e.png)
+![Captura de tela da guia Resposta](../../images/0/5e.png)
 
-The page contains a [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) element, which in turn contains a heading, a link to the page <i>notes</i>, and an [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img) tag, and displays the number of notes created.
+A página contém um elemento [div](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div), que por sua vez contém um título, um link para a página <i>notes</i> e uma tag [img](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img), e exibe o número de notas criadas.
 
-Because of the img tag, the browser does a second <i>HTTP request</i> to fetch the image <i>kuva.png</i> from the server. The details of the request are as follows:
+Devido à tag "img", o navegador faz uma segunda requisição <i>HTTP</i> para buscar a imagem <i>kuva.png</i> do servidor. Os detalhes da requisição são os seguintes:
 
-![Detailed view of the second event](../../images/0/6e.png)
+![Imagem detalhada do segundo evento](../../images/0/6e.png)
 
-The request was made to the address <https://studies.cs.helsinki.fi/exampleapp/kuva.png> and its type is HTTP GET. The response headers tell us that the response size is 89350 bytes, and its [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) is <i>image/png</i>, so it is a png image. The browser uses this information to render the image correctly to the screen.
+A requisição foi feita para o endereço <https://studies.cs.helsinki.fi/exampleapp/kuva.png> e o seu tipo é HTTP GET. Os cabeçalhos de resposta nos dizem que o tamanho da resposta é 89350 bytes e seu [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) é <i>image/png</i>, então é uma imagem png. O navegador usa essa informação para renderizar a imagem corretamente na tela.
 
-The chain of events caused by opening the page https://studies.cs.helsinki.fi/exampleapp on a browser form the following [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+A cadeia de eventos causada pela abertura da página https://studies.cs.helsinki.fi/exampleapp no navegador forma o seguinte [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
-![Sequence diagram of the flow covered above](../../images/0/7m.png)
+![Diagrama de sequência do fluxo descrito acima](../../images/0/7m.png)
 
-The sequence diagram visualizes how the browser and server are communicating over the time. The time flows in the diagram from top to bottom, so the diagram starts with the first request that the browser sends to server, followed by the response.
+O diagrama de sequência demonstra como o navegador e o servidor estão se comunicando ao longo do tempo. O tempo flui no diagrama de cima para baixo, então se inicia com a primeira requisição que o navegador envia ao servidor, seguido pela resposta.
 
-First, the browser sends an HTTP GET request to the server to fetch the HTML code of the page. The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>. The browser renders the HTML page and the image to the screen.
+Primeiro, o navegador envia uma requisição HTTP GET ao servidor para buscar o código HTML da página. A tag <i>img</i> no HTML requisita que o navegador busque a imagem <i>kuva.png</i>. O navegador renderiza a página HTML e a imagem na tela.
 
-Even though it is difficult to notice, the HTML page begins to render before the image has been fetched from the server.
+Embora seja difícil notar, a página HTML começa a ser renderizada antes que a imagem tenha sido buscada do servidor.
 
-### Traditional web applications
+### Aplicações web tradicionais
 
-The homepage of the example application works like a <i>traditional web application</i>. When entering the page, the browser fetches the HTML document detailing the structure and the textual content of the page from the server.
+A página inicial da aplicação de exemplo funciona como uma <i>aplicação web tradicional</i>. Ao entrar na página, o navegador busca o documento HTML que detalha a estrutura e o conteúdo textual da página no servidor.
 
-The server has formed this document somehow. The document can be a <i>static</i> text file saved into the server's directory. The server can also form the HTML documents <i>dynamically</i> according to the application code, using, for example, data from a database.
-The HTML code of the example application has been formed dynamically because it contains information on the number of created notes.
+O servidor formou esse documento de alguma forma. O documento pode ser um arquivo de texto <i>estático</i> salvo no diretório do servidor. O servidor também pode formar os documentos HTML <i>dinamicamente</i> de acordo com o código da aplicação, utilizando, por exemplo, dados de um banco de dados.
+O código HTML da aplicação de exemplo foi formado dinamicamente porque contém informações sobre o número de notas criadas.
 
-The HTML code of the homepage is as follows:
+O código HTML da página inicial é o seguinte:
 
 ```js
 const getFrontPageHtml = noteCount => {
@@ -110,31 +110,31 @@ app.get('/', (req, res) => {
 })
 ```
 
-You don't have to understand the code just yet.
+Você não precisa entender o código agora.
 
-The content of the HTML page has been saved as a template string or a string that allows for evaluating, for example, variables in the midst of it. The dynamically changing part of the homepage, the number of saved notes (in the code <em>noteCount</em>), is replaced by the current number of notes (in the code <em>notes.length</em>) in the template string.
+O conteúdo da página HTML foi salvo como uma string-modelo ou uma string que permite avaliar, por exemplo, variáveis dentro dela. A parte da página inicial que muda dinamicamente, o número de notas salvas (no código <em>noteCount</em>), é substituída pelo número atual de notas (no código <em>notes.length</em>) na string de modelo.
 
-Writing HTML amid the code is of course not smart, but for old-school PHP programmers, it was a normal practice.
+Escrever HTML no meio do código não é algo inteligente de se fazer, obviamente, mas para os programadores PHP antigos, isso era uma prática normal.
 
-In traditional web applications, the browser is "dumb". It only fetches HTML data from the server, and all application logic is on the server. A server can be created using [Java Spring](https://spring.io/projects/spring-framework) , [Python Flask](https://flask.palletsprojects.com/en/2.2.x/) or [Ruby on Rails](http://rubyonrails.org/) to name just a few examples.
+Em aplicações web tradicionais, o navegador é "burro". Ele só busca dados HTML do servidor e toda a lógica da aplicação está no servidor. Um servidor pode ser criado usando [Java Spring](https://spring.io/projects/spring-framework), [Python Flask](https://flask.palletsprojects.com/en/2.2.x/) ou [Ruby on Rails](http://rubyonrails.org/), para citar apenas alguns exemplos.
 
-The example uses [Express](https://expressjs.com/) library with the Node.js. This course will use Node.js and Express to create web servers.
+O exemplo usa a biblioteca [Express](https://expressjs.com/) com o Node.js. Este curso usará o Node.js e o Express para criar servidores web.
 
-### Running application logic in the browser
+### Executando a lógica da aplicação no navegador
 
-Keep the Developer Console open. Empty the console by clicking the 🚫 symbol, or by typing clear() in the console.
-Now when you go to the [notes](https://studies.cs.helsinki.fi/exampleapp/notes) page, the browser does 4 HTTP requests:
+Mantenha o Console do Desenvolvedor aberto. Esvazie o console clicando no símbolo 🚫 ou digitando clear() no console.
+Agora, quando você for para a página [notes](https://studies.cs.helsinki.fi/exampleapp/notes), o navegador fará 4 requisições HTTP:
 
-![Screenshot of the developer console with the 4 requests visible](../../images/0/8e.png)
+![Captura de tela do console do desenvolvedor com 4 requisições visíveis](../../images/0/8e.png)
 
-All of the requests have <i>different</i> types. The first request's type is <i>document</i>. It is the HTML code of the page, and it looks as follows:
+Todas as requisições têm <i>tipos diferentes</i>. O tipo da primeira requisição é <i>document</i>. É o código HTML da página, e ele é assim:
 
-![Detailed view of the first request](../../images/0/9e.png)
+![Imagem detalhada da primeira requisição](../../images/0/9e.png)
 
-When we compare the page shown on the browser and the HTML code returned by the server, we notice that the code does not contain the list of notes.
-The [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) section of the HTML contains a [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) tag, which causes the browser to fetch a JavaScript file called <i>main.js</i>.
+Quando comparamos a página mostrada no navegador e o código HTML retornado pelo servidor, notamos que o código não contém a lista de notas.
+A seção [head](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) do HTML contém uma tag [script](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script), que faz com que o navegador busque um arquivo JavaScript chamado <i>main.js</i>.
 
-The JavaScript code looks as follows:
+O código JavaScript fica assim:
 
 ```js
 var xhttp = new XMLHttpRequest()
@@ -162,32 +162,32 @@ xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 
-The details of the code are not important right now, but some code has been included to spice up the images and the text. We will properly start coding in [part 1](/en/part1). The sample code in this part is actually not relevant at all to the coding techniques of this course.
+Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a codificar de verdade na [parte 1](/pt/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
 
-> Some might wonder why xhttp-object is used instead of the modern fetch. This is due to not wanting to go into promises at all yet, and the code having a secondary role in this part. We will return to modern ways to make requests to the server in part 2.
+> Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch" (ir buscar). Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na parte 2.
 
-Immediately after fetching the <i>script</i> tag, the browser begins to execute the code.
+Imediatamente após baixar a tag <i>script</i>, o navegador começa a executar o código.
 
-The last two lines instruct the browser to do an HTTP GET request to the server's address <i>/data.json</i>:
+As últimas duas linhas instruem o navegador a fazer uma requisição HTTP GET ao endereço do servidor <i>/data.json</i>:
 
 ```js
 xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 
-This is the bottom-most request shown on the Network tab.
+Esta é a requisição mais "profunda" exibida na guia de Rede.
 
-We can try going to the address <https://studies.cs.helsinki.fi/exampleapp/data.json> straight from the browser:
+Podemos tentar ir ao endereço <https://studies.cs.helsinki.fi/exampleapp/data.json> diretamente do navegador:
 
-![Raw JSON Data](../../images/0/10e.png)
+![Dados JSON brutos](../../images/0/10e.png)
 
-There we find the notes in [JSON](https://en.wikipedia.org/wiki/JSON) "raw data". By default, Chromium-based browsers are not too good at displaying JSON data. Plugins can be used to handle the formatting. Install, for example, [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) on Chrome, and reload the page. The data is now nicely formatted:
+Lá encontramos as notas em formato de "dados brutos" [JSON](https://en.wikipedia.org/wiki/JSON). Por padrão, os navegadores baseados em Chromium não são muito bons em exibir dados JSON. É possível usar plugins para lidar com a formatação. Instale, por exemplo, a extensão [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) no Chrome e recarregue a página. Os dados agora estão formatados corretamente:
 
-![Formatted JSON output](../../images/0/11e.png)
+![Saída JSON formatada](../../images/0/11e.png)
 
-So, the JavaScript code of the notes page above downloads the JSON data containing the notes, and forms a bullet-point list from the note contents:
+Então, o código JavaScript da página de notas ilustrada acima baixa os dados JSON contendo as notas e forma uma lista de itens de notas a partir do conteúdo das notas:
 
-This is done by the following code:
+Isso é feito pelo seguinte código:
 
 ```js
 const data = JSON.parse(this.responseText)
@@ -206,14 +206,14 @@ data.forEach(function(note) {
 document.getElementById('notes').appendChild(ul)
 ```
 
-The code first creates an unordered list with a [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)-tag...
+O código cria primeiro uma lista não ordenada com a tag [ul](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul)...
 
 ```js
 var ul = document.createElement('ul')
 ul.setAttribute('class', 'notes')
 ```
 
-...and then adds one [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li)-tag for each note. Only the <i>content</i> field of each note becomes the contents of the li-tag. The timestamps found in the raw data are not used for anything here.
+...e em seguida, adiciona uma tag [li](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li) para cada nota. Somente o campo <i>content</i> de cada nota se torna o conteúdo da tag li. Os "timestamps" (registros de data/hora) encontrados nos dados JSON não são utilizados para nada neste caso.
 
 ```js
 data.forEach(function(note) {
@@ -224,61 +224,61 @@ data.forEach(function(note) {
 })
 ```
 
-Now open the <i>Console</i> tab on your Developer Console:
+Abra a guia <i>Console</i> no seu Console do Desenvolvedor:
 
-![Screenshot of the console tab on the developer console](../../images/0/12e.png)
+![Captura de tela da guia console no Console do Desenvolvedor](../../images/0/12e.png)
 
-By clicking the little triangle at the beginning of the line, you can expand the text on the console.
+Ao clicar no pequeno triângulo no início da linha, você expande o texto na guia Console.
 
-![Screenshot of one of the previously collapsed entries expanded](../../images/0/13e.png)
+![Captura de tela de uma das entradas anteriormente colapsadas expandida](../../images/0/13e.png)
 
-This output on the console is caused by the <em>console.log</em> command in the code:
+Esse "output" (saída) no console é fruto do comando <em>console.log</em> no código:
 
 ```js
 const data = JSON.parse(this.responseText)
 console.log(data)
 ```
 
-So, after receiving data from the server, the code prints it to the console.
+Então, após receber os dados do servidor, o código os imprime no console.
 
-The <i>Console</i> tab and the <em>console.log</em> command will become very familiar to you during the course.
+Você se familiarizará com a guia <i>Console</i> e o comando <em>console.log</em> no decorrer do curso.
 
-### Event handlers and Callback functions
+### Manipuladores de Eventos (Event handlers) e Funções Callback
 
-The structure of this code is a bit odd:
+A estrutura desse código é um pouco estranha:
 
 ```js
 var xhttp = new XMLHttpRequest()
 
 xhttp.onreadystatechange = function() {
-  // code that takes care of the server response
+  // código que lida com a resposta do servidor
 }
 
 xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 
-The request to the server is sent on the last line, but the code to handle the response can be found further up. What's going on?
+A requisição ao servidor é feita na última linha, mas o código que lida com a resposta é encontrado mais acima. O que está acontecendo?
 
 ```js
 xhttp.onreadystatechange = function () {
 ```
 
-On this line, an <i>event handler</i> for the event <i>onreadystatechange</i> is defined for the <em>xhttp</em> object doing the request. When the state of the object changes, the browser calls the event handler function. The function code checks that the [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) equals 4 (which depicts the situation <i>The operation is complete</i>) and that the HTTP status code of the response is 200.
+Nessa linha, um <i>event handler</i> (manipulador de evento) para o evento <i>onreadystatechange</i> é definido para o objeto <em>xhttp</em> que faz a requisição. Quando o estado do objeto muda, o navegador chama a função manipuladora de eventos. O código da função verifica que o [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) é igual a 4 (o que representa o estado "DONE" que exibe a descrição <i>A operação está completa</i>) e que o código de status HTTP da resposta é 200.
 
 ```js
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    // code that takes care of the server response
+    // código que manipula a resposta do servidor
   }
 }
 ```
 
-The mechanism of invoking event handlers is very common in JavaScript. Event handler functions are called [callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) functions. The application code does not invoke the functions itself, but the runtime environment - the browser, invokes the function at an appropriate time when the <i>event</i> has occurred.
+O mecanismo de chamada de manipuladores de eventos é muito comum em JavaScript. As funções de manipulação de eventos são chamadas de [funções callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). O código da aplicação não chama as funções em si, mas o "runtime environment" (ambiente de tempo de execução) — isto é, o navegador, que chama a função no tempo correto quando o <i>evento</i> ocorre.
 
-### Document Object Model or DOM
+### Modelo de Documento por Objetos (DOM [Document Object Model])
 
-We can think of HTML pages as implicit tree structures.
+Podemos pensar em páginas HTML como estruturas implícitas de uma árvore.
 
 <pre>
 html
@@ -298,17 +298,17 @@ html
         input
 </pre>
 
-The same treelike structure can be seen on the console tab <i>Elements</i>.
+A mesma estrutura de árvore pode ser vista na guia <i>Elementos</i> do console.
 
-![A screenshot of the Elements tab of the developer console](../../images/0/14e.png)
+![Captura de tela da guia Elementos do Console do Desenvolvedor](../../images/0/14e.png)
 
-The functioning of the browser is based on the idea of depicting HTML elements as a tree.
+O funcionamento do navegador baseia-se na ideia de representar os elementos HTML como uma árvore.
 
-Document Object Model, or [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), is an Application Programming Interface (<i>API</i>) that enables programmatic modification of the <i>element trees</i> corresponding to web pages.
+O Modelo de Documento por Objetos, ou [DOM](https://en.wikipedia.org/wiki/Document_Object_Model), é uma Interface de Programação de Aplicação (API [Application Programming Interface]) que possibilita a modificação programática das <i>árvores de elementos</i> correspondentes às páginas web.
 
-The JavaScript code introduced in the previous chapter used the DOM-API to add a list of notes to the page.
+O código JavaScript introduzido no capítulo anterior usou a API DOM para adicionar uma lista de notas na página.
 
-The following code creates a new node to the variable <em>ul</em>, and adds some child nodes to it:
+O código a seguir cria um novo nó na variável <em>ul</em> e adiciona alguns nós-filho a ele:
 
 ```js
 var ul = document.createElement('ul')
@@ -321,50 +321,50 @@ data.forEach(function(note) {
 })
 ```
 
-Finally, the tree branch of the <em>ul</em> variable is connected to its proper place in the HTML tree of the whole page:
+Por fim, a ramificação da árvore da variável <em>ul</em> é conectada ao seu lugar previsto na árvore HTML da página:
 
 ```js
 document.getElementsByClassName('notes').appendChild(ul)
 ```
 
-### Manipulating the document object from console
+### Manipulando o objeto "Document" por meio do console
 
-The topmost node of the DOM tree of an HTML document is called the <em>document</em> object. We can perform various operations on a webpage using the DOM-API. You can access the <em>document</em> object by typing <em>document</em> into the Console tab:
+O nó de nível mais alto da árvore DOM de um documento HTML é o objeto <em>document</em>. Podemos realizar várias operações em uma página web usando a API DOM. Você consegue acessar o objeto <em>document</em> digitando <em>document</em> na guia Console:
 
-![document in console tab of developer tools](../../images/0/15e.png)
+![Documento na guia do console das Ferramentas do Desenvolvedor](../../images/0/15e.png)
 
-Let's add a new note to the page from the console.
+Vamos adicionar uma nova nota à página a partir do console.
 
-First, we'll get the list of notes from the page. The list is in the first ul-element of the page:
+Primeiro, vamos pegar a lista de notas da página. A lista está no primeiro elemento "ul" da página:
 
 ```js
 list = document.getElementsByTagName('ul')[0]
 ```
 
-Then create a new li-element and add some text content to it:
+Em seguida, criamos um novo elemento "li" e adicionamos algum conteúdo de texto a ele:
 
 ```js
 newElement = document.createElement('li')
-newElement.textContent = 'Page manipulation from console is easy'
+newElement.textContent = 'É bem facil fazer manipulação de páginas pelo console'
 ```
 
-And add the new li-element to the list:
+E adicionamos o novo elemento "li" à lista:
 
 ```js
 list.appendChild(newElement)
 ```
 
-![Screenshot of the page with the new note added to the list](../../images/0/16e.png)
+![Captura de tela da página com a nova nota adicionada à lista](../../images/0/16e.png)
 
-Even though the page updates on your browser, the changes are not permanent. If the page is reloaded, the new note will disappear, because the changes were not pushed to the server. The JavaScript code the browser fetches will always create the list of notes based on JSON data from the address <https://studies.cs.helsinki.fi/exampleapp/data.json>.
+Mesmo que a página seja atualizada no seu navegador, as mudanças não são permanentes. Se a página for recarregada, a nova nota desaparecerá, pois as mudanças não foram enviadas ao servidor. O código JavaScript que o navegador busca sempre criará a lista de notas com base nos dados JSON do endereço <https://studies.cs.helsinki.fi/exampleapp/data.json>.
 
 ### CSS
 
-The <i>head</i> element of the HTML code of the Notes page contains a [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) tag, which determines that the browser must fetch a [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) style sheet from the address [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
+O elemento <i>head</i> (cabeçalho) do código HTML da página Notes contém uma tag [link](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link), que determina que o navegador deve buscar uma folha de estilo [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS) a partir do endereço [main.css](https://studies.cs.helsinki.fi/exampleapp/main.css).
 
-Cascading Style Sheets, or CSS, is a style sheet language used to determine the appearance of web pages.
+Folhas de Estilo em Cascata (CSS [Cascading Style Sheets]), é uma linguagem de estilo usada para determinar a aparência de páginas web.
 
-The fetched CSS file looks as follows:
+O arquivo CSS baixado se parece com o seguinte:
 
 ```css
 .container {
@@ -377,75 +377,75 @@ The fetched CSS file looks as follows:
 }
 ```
 
-The file defines two [class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors). These are used to select certain parts of the page and to define styling rules to style them.
+O arquivo define dois [seletores de classe](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors). Eles são utilizados para selecionar certas partes da página e para definir regras de estilo para estilizá-las.
 
-A class selector definition always starts with a period and contains the name of the class.
+Uma definição de seletor de classe sempre começa com um ponto e contém o nome da classe.
 
-The classes are [attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), which can be added to HTML elements.
+As classes são [atributos](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/class), que podem ser adicionados à elementos HTML.
 
-CSS attributes can be examined on the <i>elements</i> tab of the console:
+Atributos CSS podem ser examinados na guia <i>Elementos</i>:
 
-![Screenshot of the Elements tab on the developer console](../../images/0/17e.png)
+![Captura de tela da guia Elementos](../../images/0/17e.png)
 
-The outermost <i>div</i> element has the class <i>container</i>. The <i>ul</i> element containing the list of notes has the class <i>notes</i>.
+O elemento <i>div</i> mais externo tem a classe <i>container</i>. O elemento <i>ul</i> que contém a lista de notas tem a classe <i>notes</i>.
 
-The CSS rule defines that elements with the <i>container</i> class will be outlined with a one-pixel wide [border](https://developer.mozilla.org/en-US/docs/Web/CSS/border). It also sets 10-pixel [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) on the element. This adds some empty space between the element's content and the border.
+A primeira regra CSS define que elementos com a classe <i>container</i> terão a [borda](https://developer.mozilla.org/en-US/docs/Web/CSS/border) da largura de um pixel. Ele também define um [padding](https://developer.mozilla.org/en-US/docs/Web/CSS/padding) de 10 pixels no elemento. Essa propriedade adiciona um espaço vazio entre o conteúdo do elemento e a borda.
 
-The second CSS rule sets the text color of the notes as blue.
+A segunda regra CSS define a cor do texto das notas como azul.
 
-HTML elements can also have other attributes apart from classes. The <i>div</i> element containing the notes has an [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) attribute. JavaScript code uses the id to find the element.
+Os elementos HTML também podem ter outros atributos além de classes. O elemento <i>div</i>, que contém as notas, tem um atributo [id](https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/id) (identificador[exclusivo]). O código JavaScript usa o "id" para encontrar o elemento.
 
-The <i>Elements</i> tab of the console can be used to change the styles of the elements.
+A guia <i>Elementos</i> do console pode ser usada para alterar os estilos dos elementos.
 
-![developer tools elements tab](../../images/0/18e.png)
+![Guia Elementos das Ferramentas do Desenvolvedor](../../images/0/18e.png)
 
-Changes made on the console will not be permanent. If you want to make lasting changes, they must be saved to the CSS style sheet on the server.
+As alterações feitas no console não serão permanentes. Se deseja fazer alterações duradouras, elas devem ser salvas na folha de estilo CSS no servidor.
 
-### Loading a page containing JavaScript - review
+### Carregando uma página contendo JavaScript — revisão
 
-Let's review what happens when the page https://studies.cs.helsinki.fi/exampleapp/notes is opened on the browser.
+Vamos revisar o que acontece quando a página https://studies.cs.helsinki.fi/exampleapp/notes é aberta no navegador.
 
-![sequence diagram of browser/server interaction](../../images/0/19m.png)
+![Diagrama de sequência da interação navegador/servidor](../../images/0/19m.png)
 
-- The browser fetches the HTML code defining the content and the structure of the page from the server using an HTTP GET request.
-- Links in the HTML code cause the browser to also fetch the CSS style sheet <i>main.css</i>...
-- ...and a JavaScript code file <i>main.js</i>
-- The browser executes the JavaScript code. The code makes an HTTP GET request to the address https://studies.cs.helsinki.fi/exampleapp/data.json, which
-  returns the notes as JSON data.
-- When the data has been fetched, the browser executes an <i>event handler</i>, which renders the notes to the page using the DOM-API.
+- O navegador busca o código HTML que define o conteúdo e a estrutura da página do servidor usando uma requisição HTTP GET;
+- Os links no código HTML fazem com que o navegador também busque a folha de estilo CSS <i>main.css</i>...
+- ...e um arquivo de código JavaScript <i>main.js</i>;
+- O navegador executa o código JavaScript. O código faz uma requisição HTTP GET para o endereço https://studies.cs.helsinki.fi/exampleapp/data.json, que
+  retorna as notas como dados JSON; e
+- Quando é finalizada a busca pelos dados, o navegador executa um <i>event handler</i>, que renderiza as notas na página usando a API DOM.
 
-### Forms and HTTP POST
+### Formulários (Forms) e HTTP POST
 
-Next, let's examine how adding a new note is done.
+Agora, vamos examinar como se adiciona uma nova nota.
 
-The Notes page contains a [form element](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
+A página de notas contém um [elemento form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
-![form element highlight in webpage and developer tools](../../images/0/20e.png)
+![Elemento de formulário destacado tanto na página web quanto nas Ferramentas do Desenvolvedor](../../images/0/20e.png)
 
-When the button on the form is clicked, the browser will send the user input to the server. Let's open the <i>Network</i> tab and see what submitting the form looks like:
+Quando o botão no formulário é clicado, o navegador enviará a entrada (input) do usuário para o servidor. Vamos abrir a guia <i>Rede</i> e ver como se envia o formulário:
 
-![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
+![Captura de tela da guia Rede onde os eventos para enviar o formulário são mostrados](../../images/0/21e.png)
 
-Surprisingly, submitting the form causes no less than <i>five</i> HTTP requests.
-The first one is the form submit event. Let's zoom into it:
+Surpreendentemente, o envio do formulário gera não menos que <i>cinco</i> requisições HTTP.
+A primeira é o evento de envio do formulário. Vamos focar nessa parte:
 
-![Detailed view of the first request](../../images/0/22e.png)
+![Visualização detalhada da primeira requisição](../../images/0/22e.png)
 
-It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>. The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
+Trata-se de uma requisição [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) para o endereço do servidor <i>new\_note</i>. O servidor responde com o código de status HTTP 302. Isso é um [redirecionamento de URL](https://en.wikipedia.org/wiki/URL_redirection), no qual o servidor pede ao navegador para fazer uma nova requisição HTTP GET para o endereço definido no cabeçalho <i>Localização</i> — o endereço <i>notes</i>.
 
-So, the browser reloads the Notes page. The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).
+Então, o navegador recarrega a página de Notas (Notes). O recarregamento faz mais três requisições HTTP: busca o arquivo CSS (main.css), o arquivo de JavaScript (main.js) e os dados das notas (data.json).
 
-The network tab also shows the data submitted with the form:
+A guia Rede também mostra os dados enviados com o formulário:
 
-NB: On newer Chrome, the Form Data dropdown is within the new Payload tab, located to the right of the Headers tab.
+N.B.: Na versão mais recente do Chrome, o menu drop-down (lista suspensa) "Form Data" está dentro da nova guia "Payload", localizada à direita da guia "Cabeçalhos".
 
-![form data dropdown in developer tools](../../images/0/23e.png)
+![Menu drop-down do Form Data das Ferramentas do Desenvolvedor](../../images/0/23e.png)
 
-The Form tag has attributes <i>action</i> and <i>method</i>, which define that submitting the form is done as an HTTP POST request to the address <i>new_note</i>.
+A tag Form tem os atributos <i>action</i> e <i>method</i>, que definem que o envio do formulário é feito como uma requisição HTTP POST para o endereço <i>new_note</i>.
 
-![action and method highlight](../../images/0/24e.png)
+![Destaque dos atributos action e method](../../images/0/24e.png)
 
-The code on the server responsible for the POST request is quite simple (NB: this code is on the server, and not on the JavaScript code fetched by the browser):
+O código no servidor responsável pela requisição POST é bastante simples (N.B.: este código está no servidor, e não no código JavaScript baixado pelo navegador):
 
 ```js
 app.post('/new_note', (req, res) => {
@@ -458,11 +458,11 @@ app.post('/new_note', (req, res) => {
 })
 ```
 
-Data is sent as the [body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) of the POST request.
+Os dados são enviados como o [body](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) da requisição POST.
 
-The server can access the data by accessing the <em>req.body</em> field of the request object <em>req</em>.
+O servidor consegue acessar os dados acessando o campo <em>req.body</em> do objeto de requisição <em>req</em>.
 
-The server creates a new note object, and adds it to an array called <em>notes</em>.
+O servidor cria um novo objeto nota e adiciona-o a um array chamado <em>notes</em>.
 
 ```js
 notes.push({
@@ -471,67 +471,64 @@ notes.push({
 })
 ```
 
-The Note objects have two fields: <i>content</i> containing the actual content of the note, and <i>date</i> containing the date and time the note was created.
+Os objetos de "Notas" têm dois campos: <i>content</i>, contendo o conteúdo real da anotação; e <i>date</i>, contendo a data e hora em que a anotação foi criada.
 
-The server does not save new notes to a database, so new notes disappear when the server is restarted.
+O servidor não salva as novas notas em um banco de dados, então elas desaparecem quando o servidor é reiniciado.
 
 ### AJAX
 
-The Notes page of the application follows an early-nineties style of web development and uses "Ajax". As such, it's on the crest of the wave of early 2000s web technology.
+A página "Notes", da nossa aplicação, segue um estilo de desenvolvimento web dos anos 90 e usa "Ajax". Como tal, ela está na crista da onda da tecnologia web dos anos 2000.
 
-[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML) is a term introduced in February 2005 on the back of advancements in browser technology to describe a new revolutionary approach that enabled the fetching of content to web pages using JavaScript included within the HTML, without the need to rerender the page.
+[AJAX](<https://en.wikipedia.org/wiki/Ajax_(programming)>) (Asynchronous JavaScript and XML [JavaScript Assíncrono e XML]) é um termo que foi introduzido em fevereiro de 2005 com base em avanços na tecnologia do navegador para descrever uma nova abordagem revolucionária que permitia o carregamento de conteúdo em páginas web usando JavaScript embutido dentro do HTML, sem a necessidade de re-renderizar a página.
 
-Before the AJAX era, all web pages worked like the [traditional web application](/en/part0/fundamentals_of_web_apps#traditional-web-applications) we saw earlier in this chapter.
-All of the data shown on the page was fetched with the HTML code generated by the server.
+Antes da Era AJAX, todas as páginas web funcionavam como a [aplicação web tradicional](/pt/part0/fundamentos_de_aplicacoes_web#aplicacoes-web-tradicionais) que vimos anteriormente neste capítulo. Todos os dados mostrados na página eram buscados com o código HTML gerado pelo servidor.
 
-The Notes page uses AJAX to fetch the notes data. Submitting the form still uses the traditional mechanism of submitting web forms.
+A página "Notes" usa AJAX para buscar os dados das notas. O envio do formulário ainda usa o mecanismo tradicional de envio de formulários web.
 
-The application URLs reflect the old, carefree times. JSON data is fetched from the URL <https://studies.cs.helsinki.fi/exampleapp/data.json> and new notes are sent to the URL <https://studies.cs.helsinki.fi/exampleapp/new_note>.  
-Nowadays URLs like these would not be considered acceptable, as they don't follow the generally acknowledged conventions of [RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) APIs, which we'll look into more in [part 3](/en/part3).
+As URLs da aplicação refletem os tempos antigos e despreocupados. Os dados JSON são buscados na URL <https://studies.cs.helsinki.fi/exampleapp/data.json> e novas notas são enviadas para a URL <https://studies.cs.helsinki.fi/exampleapp/new_note>. Hoje em dia, URLs como essas não seriam consideradas aceitáveis, pois não seguem as convenções geralmente reconhecidas de [APIs RESTful](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) (Representational State Transfer (REST) [Transferência de Estado Representacional]), que veremos com mais detalhes na [parte 3](/pt/part3).
 
-The thing termed AJAX is now so commonplace that it's taken for granted. The term has faded into oblivion, and the new generation has not even heard of it.
+O termo AJAX agora é tão reconhecível que quase todo mundo conhece. Porém, o termo desapareceu e a nova geração nem sequer ouviu falar dele.
 
-### Single page app
+### Aplicação de Página Única (SPA [Single Page Application])
 
-In our example app, the home page works like a traditional webpage: All of the logic is on the server, and the browser only renders the HTML as instructed.
+Em nossa aplicação de exemplo, a página inicial funciona como uma página web tradicional: toda a lógica está no servidor e o navegador só renderiza o HTML conforme instruído.
 
-The Notes page gives some of the responsibility, generating the HTML code for existing notes, to the browser. The browser tackles this task by executing the JavaScript code it fetched from the server. The code fetches the notes from the server as JSON data and adds HTML elements for displaying the notes to the page using the [DOM-API](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom).
+A página "Notes" transfere algumas dessas responsabilidades para o navegador, gerando o código HTML para notas que já existem. O navegador realiza essa tarefa executando o código JavaScript que ele baixou do servidor. O código baixa as notas do servidor como dados JSON e adiciona elementos HTML para exibir as notas na página usando a [API DOM](/pt/part0/fundamentos_de_aplicacoes_web#modelo-de-documento-por-objetos-dom-document-object-model).
 
-In recent years, the [Single-page application](https://en.wikipedia.org/wiki/Single-page_application) (SPA) style of creating web applications has emerged. SPA-style websites don't fetch all of their pages separately from the server like our sample application does, but instead comprise only one HTML page fetched from the server, the contents of which are manipulated with JavaScript that executes in the browser.
+Nos últimos anos, o estilo [SPA](https://en.wikipedia.org/wiki/Single-page_application) (Aplicação de Página Única) de criação de aplicações web surgiu. Os sites de estilo SPA não baixam todas as suas páginas separadamente do servidor como o nosso exemplo de aplicação faz, mas incluem apenas uma página HTML baixada do servidor, cujo conteúdo é manipulado com o código JavaScript que é executado no navegador.
 
-The Notes page of our application bears some resemblance to SPA-style apps, but it's not quite there yet. Even though the logic for rendering the notes is run on the browser, the page still uses the traditional way of adding new notes. The data is sent to the server via the form's submit, and the server instructs the browser to reload the Notes page with a <i>redirect</i>.
+A página "Notes" da nossa aplicação tem alguma semelhança com as aplicações de estilo SPA, mas ainda não está bem lá. Mesmo que a lógica para renderizar as notas seja executada no navegador, a página ainda usa o mecanismo tradicional de adição de novas notas. Os dados são enviados para o servidor através do envio do formulário e o servidor instrui o navegador a recarregar a página "Notes" com um <i>redirect</i>.
 
-A single-page app version of our example application can be found at <https://studies.cs.helsinki.fi/exampleapp/spa>.
-At first glance, the application looks exactly the same as the previous one.
-The HTML code is almost identical, but the JavaScript file is different (<i>spa.js</i>) and there is a small change in how the form-tag is defined:
+Uma versão SPA da aplicação que estamos utilizando de exemplo pode ser encontrada em <https://studies.cs.helsinki.fi/exampleapp/spa>.
+À primeira vista, a aplicação parece igual à anterior.
+O código HTML é quase idêntico, mas o arquivo JavaScript é diferente (<i>spa.js</i>), e há uma pequena mudança na maneira como a tag "form" é definida:
 
-![form with missing action and method](../../images/0/25e.png)
+![Formulário sem os atributos action e method](../../images/0/25e.png)
 
-The form has no <i>action</i> or <i>method</i> attributes to define how and where to send the input data.
+O formulário não possui atributos <i>action</i> ou <i>method</i> para definir como e onde enviar os dados de entrada.
 
-Open the <i>Network</i> tab and empty it. When you now create a new note, you'll notice that the browser sends only one request to the server.
+Abra a guia <i>Rede</i> e esvazie-a. Quando você criar uma nova nota, verá que o navegador envia apenas uma requisição para o servidor.
 
-![Network tab in developer tools](../../images/0/26e.png)
+![Guia Rede nas Ferramentas do Desenvolvedor](../../images/0/26e.png)
 
-The POST request to the address <i>new_note_spa</i> contains the new note as JSON data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):
+A requisição POST para o endereço <i>new_note_spa</i> contém a nova nota como dados JSON, contendo tanto o conteúdo da nota (<i>content</i>) quanto o timestamp (<i>date</i>):
 
 ```js
 {
-  content: "single page app does not reload the whole page",
+  content: "Uma aplicação de página única (SPA) não recarrega toda a página",
   date: "2019-05-25T15:15:59.905Z"
 }
 ```
 
-The <i>Content-Type</i> header of the request tells the server that the included data is represented in JSON format.
+O cabeçalho <i>Content-Type</i> da requisição informa ao servidor que os dados incluídos estão representados no formato JSON.
 
-![Content-type header in developer tools](../../images/0/27e.png)
+![Cabeçalho Content-type nas Ferramentas do Desenvolvedor](../../images/0/27e.png)
 
-Without this header, the server would not know how to correctly parse the data.
+Sem esse cabeçalho, o servidor não saberia como analisar corretamente os dados.
 
-The server responds with status code [201 created](https://httpstatuses.com/201). This time the server does not ask for a redirect, the browser stays on the same page, and it sends no further HTTP requests.
+O servidor responde com o código de status [201](https://httpstatuses.com/201). Dessa vez, o servidor não requisita um redirecionamento, o navegador fica na mesma página e não envia mais requisições HTTP.
 
-The SPA version of the app does not traditionally send the form data, but instead uses the JavaScript code it fetched from the server.
-We'll look into this code a bit, even though understanding all the details of it is not important just yet.
+A versão SPA da nossa aplicação não envia de forma tradicional os dados do formulário, mas usa o código JavaScript que recuperou do servidor. Vamos analisar um pouco esse código, embora entender todos os detalhes dele não seja importante ainda nesta etapa.
 
 ```js
 var form = document.getElementById('notes_form')
@@ -550,11 +547,11 @@ form.onsubmit = function(e) {
 }
 ```
 
-The command <em>document.getElementById('notes_form')</em> instructs the code to fetch the form element from the page and to register an <i>event handler</i> to handle the form's submit event. The event handler immediately calls the method <em>e.preventDefault()</em> to prevent the default handling of form's submit. The default method would send the data to the server and cause a new GET request, which we don't want to happen.
+O comando <em>document.getElementById('notes_form')</em> instrui o código a buscar o elemento de formulário da página e a registrar um <i>manipulador de evento</i> para lidar com o evento de envio do formulário. O manipulador de evento chama imediatamente o método <em>e.preventDefault()</em> para evitar o tratamento padrão do envio do formulário. O método padrão enviaria os dados para o servidor e causaria uma nova requisição GET, o que não queremos que aconteça.
 
-Then the event handler creates a new note, adds it to the notes list with the command <em>notes.push(note)</em>, rerenders the note list on the page and sends the new note to the server.
+Em seguida, o manipulador de evento cria uma nova nota, adiciona-a à lista de notas com o comando <em>notes.push(note)</em>, redesenha a lista de notas na página e envia a nova nota ao servidor.
 
-The code for sending the note to the server is as follows:
+O código para enviar a nota ao servidor é o seguinte:
 
 ```js
 var sendToServer = function(note) {
@@ -567,60 +564,60 @@ var sendToServer = function(note) {
 }
 ```
 
-The code determines that the data is to be sent with an HTTP POST request and the data type is to be JSON. The data type is determined with a <i>Content-type</i> header. Then the data is sent as JSON string.
+O código determina que os dados devem ser enviados com uma requisição HTTP POST e o tipo de dados deve ser JSON. O tipo de dados é determinado com um cabeçalho <i>Content-type</i>. Em seguida, os dados são enviados como uma string JSON.
 
-The application code is available at <https://github.com/mluukkai/example_app>.
-It's worth remembering that the application is only meant to demonstrate the concepts of the course. The code follows a poor style of development in some measures, and should not be used as an example when creating your applications. The same is true for the URLs used. The URL <i>new_note_spa</i> that new notes are sent to, does not adhere to current best practices.
+O código da aplicação está disponível em <https://github.com/mluukkai/example_app>.
+Vale ressaltar que a aplicação serve apenas para demonstrar os conceitos do curso. O código segue um estilo ruim de desenvolvimento em algumas partes e não deve ser usado como exemplo ao criar suas próprias aplicações. O mesmo se aplica às URLs usadas. A URL <i>new_note_spa</i> para a qual as novas notas são enviadas, não segue as melhores práticas usadas atualmente.
 
-### JavaScript-libraries
+### Bibliotecas JavaScript
 
-The sample app is done with so-called [vanilla JavaScript](https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/), using only the DOM-API and JavaScript to manipulate the structure of the pages.
+A aplicação de exemplo é feita com o chamado JavaScript "vanilla" (ou JavaScript "puro") (https://www.freecodecamp.org/news/is-vanilla-javascript-worth-learning-absolutely-c2c67140ac34/), usando somente a API DOM e JavaScript para manipular a estrutura das páginas.
 
-Instead of using JavaScript and the DOM-API only, different libraries containing tools that are easier to work with compared to the DOM-API are often used to manipulate pages. One of these libraries is the ever-so-popular [jQuery](https://jquery.com/).
+Em vez de usar somente JavaScript e a API DOM, é comum usar diferentes bibliotecas que contêm ferramentas mais fáceis de trabalhar em comparação com a API DOM para manipular páginas. Uma dessas bibliotecas é a popular jQuery (https://jquery.com/).
 
-jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of JavaScript, and the most popular browsers generally support basic functionalities well.
+A biblioteca jQuery foi desenvolvida quando as aplicações web seguiam principalmente o estilo tradicional do servidor gerando páginas HTML, cuja funcionalidade era aprimorada no lado do navegador usando JavaScript escrito com jQuery. Uma das razões para o sucesso de jQuery foi a sua compatibilidade cross-browser (compatibilidade entre navegadores). A biblioteca funcionava independentemente do navegador ou da empresa que a fez, então não havia necessidade de soluções específicas para cada navegador. Hoje em dia, usar jQuery não é tão justificável dada a evolução do JavaScript, e os navegadores mais populares, de modo geral, dão um bom suporte às funcionalidades básicas.
 
-The rise of the single-page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.
+A ascensão das SPA trouxe várias formas mais "modernas" de desenvolvimento web do que jQuery. A favorita da primeira onda de desenvolvedores foi BackboneJS (http://backbonejs.org/). Após o seu lançamento (https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) em 2012, AngularJS (https://angularjs.org/) rapidamente se tornou quase o padrão de desenvolvimento web moderno da Google.
 
-However, the popularity of Angular plummeted in October 2014 after the [Angular team announced that support for version 1 will end](https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), and Angular 2 will not be backwards compatible with the first version. Angular 2 and the newer versions have not gotten too warm of a welcome.
+No entanto, a popularidade do Angular caiu em outubro de 2014 após a equipe do Angular anunciar que o suporte à versão 1 encerraria-se (https://web.archive.org/web/20151208002550/https://jaxenter.com/angular-2-0-announcement-backfires-112127.html), e o Angular 2 não seria compatível com a primeira versão. Angular 2 e as versões mais recentes não foram muito bem recebidas.
 
-Currently, the most popular tool for implementing the browser-side logic of web applications is Facebook's [React](https://reactjs.org/) library.
-During this course, we will get familiar with React and the [Redux](https://github.com/reactjs/redux) library, which are frequently used together.
+Atualmente, a ferramenta mais popular para implementar a lógica do lado do cliente (navegador) de aplicações web é a biblioteca [React](https://reactjs.org/) do Facebook.
+Durante este curso, vamos nos familiarizar com o React e com a biblioteca [Redux](https://github.com/reactjs/redux), que são frequentemente usadas juntas.
 
-The status of React seems strong, but the world of JavaScript is ever-changing. For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been capturing some interest.
+O status do React parece forte, mas o mundo do JavaScript está sempre mudando. Por exemplo, recentemente, um novato — [VueJS](https://vuejs.org/) — tem chamado a atenção.
 
-### Full-stack web development
+### Desenvolvimento Web Full-Stack
 
-What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, but no one knows what it means. Or at least, there is no agreed-upon definition for the term.
+O que significa o nome do curso, <i>Desenvolvimento web full-stack</i>? A palavra "Full-stack" é um jargão de que todo mundo fala, mas ninguém sabe o que significa. Ou pelo menos, não há uma definição padrão para o termo.
 
-Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one. There is often also a database layer below the server. We can therefore think of the <i>architecture</i> of a web application as a kind of <i>stack</i> of layers.
+Praticamente todas as aplicações web têm, pelo menos, duas "camadas" (layers): o navegador, sendo mais próximo do usuário final (cliente), é a camada superior; enquanto que o servidor é a camada inferior. Há também, no geral, uma camada de banco de dados abaixo do servidor. Podemos, portanto, pensar na <i>arquitetura</i> de uma aplicação web como uma espécie de <i>pilha</i> (stack) de camadas.
 
-Often, we also talk about the [frontend and the backend](https://en.wikipedia.org/wiki/Front_and_back_ends). The browser is the frontend, and JavaScript that runs on the browser is frontend code. The server on the other hand is the backend.
+No geral, também falamos sobre o [front-end e o back-end](https://en.wikipedia.org/wiki/Front_and_back_ends). O navegador é o front-end, e o JavaScript que roda no navegador é o código front-end. O servidor, por outro lado, é o back-end.
 
-In the context of this course, full-stack web development means that we focus on all parts of the application: the frontend, the backend, and the database. Sometimes the software on the server and its operating system are seen as parts of the stack, but we won't go into those.
+No contexto deste curso, desenvolvimento web full-stack significa que nos concentramos em todas as partes da aplicação: front-end, back-end e banco de dados. Às vezes, o software no servidor e o sistema operacional dele são vistos como partes da pilha, mas não entraremos nesses detalhes.
 
-We will code the backend with JavaScript, using the [Node.js](https://nodejs.org/en/) runtime environment. Using the same programming language on multiple layers of the stack gives full-stack web development a whole new dimension. However, it's not a requirement of full-stack web development to use the same programming language (JavaScript) for all layers of the stack.
+Programaremos o back-end com JavaScript, usando o ambiente de execução [Node.js](https://nodejs.org/en/). Usar a mesma linguagem de programação em múltiplas camadas da pilha dá ao desenvolvimento web full-stack uma nova dimensão. No entanto, não é uma exigência do desenvolvimento web full-stack usar a mesma linguagem de programação (JavaScript) para todas as camadas da pilha.
 
-It used to be more common for developers to specialize in one layer of the stack, for example, the backend. Technologies on the backend and the frontend were quite different. With the Full stack trend, it has become common for developers to be proficient in all layers of the application and the database. Oftentimes, full-stack developers must also have enough configuration and administration skills to operate their applications, for example, in the cloud.
+Era mais comum que os desenvolvedores se especializassem em uma dessas camadas, por exemplo, no back-end. As tecnologias no back-end e no front-end eram bastante diferentes. Com a tendência Full-stack, tornou-se comum que os desenvolvedores tenham habilidade em todas as camadas da aplicação e no banco de dados. Muitas vezes, os desenvolvedores full-stack também precisam ter habilidades suficientes de configuração e administração para operar suas aplicações, por exemplo, na nuvem.
 
-### JavaScript fatigue
+### Fadiga do JavaScript
 
-Full-stack web development is challenging in many ways. Things are happening in many places at once, and debugging is quite a bit harder than with regular desktop applications. JavaScript does not always work as you'd expect it to (compared to many other languages), and the asynchronous way its runtime environments work causes all sorts of challenges. Communicating on the web requires knowledge of the HTTP protocol. One must also handle databases and server administration and configuration. It would also be good to know enough CSS to make applications at least somewhat presentable.
+O desenvolvimento de aplicações web full-stack é de muitas maneiras desafiador. Várias coisas estão acontecendo em vários lugares ao mesmo tempo, e a depuração é um pouco mais difícil se comparada com a depuração de [softwares de desktop comuns](https://en.wikipedia.org/wiki/Application_software). JavaScript nem sempre funciona da maneira que você espera que funcione (em comparação com muitas outras linguagens), e a forma assíncrona que seus ambientes de tempo de execução (runtime environments) funcionam cria todos os tipos de desafios. Comunicação na web exige conhecimento do protocolo HTTP. Também é preciso lidar com bancos de dados e administração e configuração de servidores. Também seria bom saber o suficiente de CSS para tornar as aplicações pelo menos um pouco apresentáveis.
 
-The world of JavaScript develops fast, which brings its own set of challenges. Tools, libraries and the language itself are under constant development. Some are starting to get tired of the constant change, and have coined a term for it: <em>JavaScript fatigue</em>. See [How to Manage JavaScript Fatigue on auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) or [JavaScript fatigue on Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
+O mundo JavaScript se desenvolve rápido, o que traz seus próprios desafios. Ferramentas, bibliotecas e a própria linguagem estão em constante desenvolvimento. Algumas pessoas começam a ficar cansadas das constantes mudanças e deram um nome para isso: <em> fadiga JavaScript </em>. Veja [Como gerenciar a fadiga JavaScript no auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) ou [Fadiga JavaScript no site Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
 
-You will suffer from JavaScript fatigue yourself during this course. Fortunately for us, there are a few ways to smooth the learning curve, and we can start with coding instead of configuration. We can't avoid configuration completely, but we can merrily push ahead in the next few weeks while avoiding the worst of configuration hells.
+Você sofrerá de fadiga JavaScript durante este curso. Felizmente para nós, existem algumas maneiras de suavizar a curva de aprendizado para que possamos começar com programação em vez de configuração. Não podemos evitar completamente a configuração, mas podemos avançar animadamente nas próximas semanas evitando os piores infernos da configuração.
 
 </div>
 
 <div class="tasks"> 
-  <h3>Exercises 0.1.-0.6.</h3>
+  <h3>Exercícios 0.1. a 0.6.</h3>
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the "my submissions" tab of the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Os exercícios são enviados via GitHub, marcando os exercícios como concluídos na guia "meus envios" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
-You can submit all of the exercises into the same repository, or use multiple different repositories. If you submit exercises from different parts into the same repository, name your directories well. If you use a private repository to submit the exercises, add _mluukkai_ as a collaborator to it.
+Você pode colocar todos os exercícios em um mesmo repositório ou usar múltiplos repositórios diferentes. Se você enviar exercícios de diferentes partes para o mesmo repositório, dê nomes apropriados às suas pastas. Se você usar um repositório privado para enviar os exercícios, adicione _mluukkai_ como colaborador dele.
 
-One good way to name the directories in your submission repository is as follows:
+Uma boa maneira de nomear as pastas no seu repositório de envio é a seguinte:
 
 ```
 part0
@@ -634,34 +631,33 @@ part2
   countries
 ```
 
-So, each part has its own directory, which contains a directory for each exercise set (like the unicafe exercises in part 1).
+Então, cada parte tem sua própria pasta, que contém uma pasta para cada conjunto de exercícios (como os exercícios "unicafe" na parte 1).
 
-The exercises are submitted **one part at a time**. When you have submitted the exercises for a part, you can no longer submit any missed exercises for that part.
+Os exercícios são enviados **uma parte de cada vez**. Quando você tiver enviado os exercícios para uma parte, não poderá mais enviar nenhum exercício não feito para essa parte.
 
   <h4>0.1: HTML</h4>
 
-Review the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).
+Revise os conceitos básicos de HTML lendo esse tutorial do Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<i>Este exercício não é enviado ao GitHub. Ler o tutorial já é suficiente.</i>
 
   <h4>0.2: CSS</h4>
 
-Review the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+Revise os conceitos básicos de CSS lendo esse tutorial do Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<i>Este exercício não é enviado ao GitHub. Ler o tutorial já é suficiente.</i>
 
-  <h4>0.3: HTML forms</h4>
+  <h4>0.3: Formulários HTML</h4>
 
-Learn about the basics of HTML forms by reading Mozilla's tutorial [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
+Aprenda sobre os conceitos básicos de formulários HTML lendo o tutorial do Mozilla [Your first form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<i>Este exercício não é enviado ao GitHub. Ler o tutorial já é suficiente.</i>
 
-  <h4>0.4: New note diagram</h4>
+  <h4>0.4: Novo diagrama das notas</h4>
 
-In the section [Loading a page containing JavaScript - review](/en/part0/fundamentals_of_web_apps#loading-a-page-containing-java-script-review), the chain of events caused by opening the page <https://studies.cs.helsinki.fi/exampleapp/notes> is depicted as a [sequence diagram](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+Na seção [Carregando uma página contendo JavaScript — revisão](/pt/part0/fundamentos_de_aplicacoes_web#carregando-uma-pagina-contendo-java-script-revisao), a cadeia de eventos causada pela abertura da página <https://studies.cs.helsinki.fi/exampleapp/notes> é retratada como um [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
 
-The diagram was made as a GitHub Markdown-file using the [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams)-syntax, as follows:
-
+O diagrama foi feito como um arquivo GitHub Markdown usando a sintaxe [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams), como o exemplo a seguir:
 
 ```
 sequenceDiagram
@@ -683,35 +679,35 @@ sequenceDiagram
     server-->>browser: the JavaScript file
     deactivate server
     
-    Note right of browser: The browser starts executing the JavaScript code that fetches the JSON from the server
+    Note right of browser: O navegador começa a executar o código JavaScript que busca o JSON do servidor
     
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
-    server-->>browser: [{ "content": "HTML is easy", "date": "2023-1-1" }, ... ]
+    server-->>browser: [{ "content": "HTML é fácil", "date": "2023-1-1" }, ... ]
     deactivate server    
 
-    Note right of browser: The browser executes the callback function that renders the notes 
+    Note right of browser: O navegador executa a função de retorno de chamada que renderiza as notas 
 ```
 
-**Create a similar diagram** depicting the situation where the user creates a new note on the page <https://studies.cs.helsinki.fi/exampleapp/notes> by writing something into the text field and clicking the <i>submit</i> button.
+**Crie um diagrama semelhante** que retrate a situação em que o usuário cria uma nova nota na página <https://studies.cs.helsinki.fi/exampleapp/notes> escrevendo algo no campo de texto e clicando no botão <i>submit</i>
 
-If necessary, show operations on the browser or on the server as comments on the diagram.
+Se necessário, mostre operações no navegador ou no servidor como comentários no diagrama.
 
-The diagram does not have to be a sequence diagram. Any sensible way of presenting the events is fine.
+O diagrama não precisa ser um diagrama de sequência. Qualquer maneira sensata de representar os eventos já estará de bom tamanho.
 
-All necessary information for doing this, and the next two exercises, can be found in the text of [this part](/en/part0/fundamentals_of_web_apps#forms-and-http-post).
-The idea of these exercises is to read the text through once more and to think through what is going on there. Reading the application [code](https://github.com/mluukkai/example_app) is not necessary, but it is of course possible.
+Todas as informações necessárias para fazer este e os próximos dois exercícios podem ser encontradas no texto [desta parte](/pt/part0/fundamentos_de_aplicacoes_web#formularios-forms-e-http-post).
+A ideia desses exercícios é fazer você reler o texto e pensar no que está acontecendo. Não é necessário ler o [código](https://github.com/mluukkai/example_app) da aplicação, mas não deixa de ser algo possível.
 
-You can do the diagrams with any program, but perhaps the easiest and the best way to do diagrams is the [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor) syntax that is now implemented in [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/) Markdown pages!
+Você pode fazer os diagramas com qualquer programa, mas talvez a maneira mais fácil e melhor de se fazer diagramas seja utilizando a sintaxe [Mermaid](https://github.com/mermaid-js/mermaid#sequence-diagram-docs---live-editor), agora implementada em páginas Markdown do [GitHub](https://github.blog/2022-02-14-include-diagrams-markdown-files-mermaid/)!
 
-  <h4>0.5: Single page app diagram</h4>
+<h4>0.5: Diagrama de SPA</h4>
 
-Create a diagram depicting the situation where the user goes to the [single-page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.
+Crie um diagrama que retrate o contexto em que o usuário utilize a versão de aplicação de página única das notas em <https://studies.cs.helsinki.fi/exampleapp/spa>.
 
-  <h4>0.6: New note in Single page app diagram</h4>
+<h4>0.6: Nova nota no diagrama de SPA</h4>
 
-Create a diagram depicting the situation where the user creates a new note using the single-page version of the app.
+Crie um diagrama que retrate o contexto em que o usuário cria uma nova nota utilizando a versão de aplicação de página única.
 
-This was the last exercise, and it's time to push your answers to GitHub and mark the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Este foi o último exercício, e é hora de enviar suas respostas para o GitHub e marcar os exercícios como concluídos no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

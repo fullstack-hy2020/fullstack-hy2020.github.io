@@ -75,16 +75,16 @@ const partNameTranslations = {
     'Comunicação com o servidor',
     'Programando um servidor com NodeJS e Express',
     'Teste de servidores Express e Administração de Usuários',
-    'Teste de aplicativos React',
+    'Teste de aplicações React',
     'Gerenciamento de Estado com Redux',
-    'React router, hooks personalizados, estilização de aplicativos com CSS e Webpack',
+    'React router, hooks personalizados, estilização de aplicações com CSS e Webpack',
     'GraphQL',
     'TypeScript',
     'React Native',
     'CI/CD',
     'Containers',
-    'Utilizando bancos de dados relacionais'
-  ]
+    'Utilizando bancos de dados relacionais',
+  ],
 };
 
 export const PartBanner = ({ lang }) => {
