@@ -644,7 +644,7 @@ Ou seja, de acordo com Martin, o progresso cuidadoso, passo a passo, é, ainda, 
 
 <h4>1.2: Informações do curso — 2º passo</h4>
 
-Refatore o componente <i>Content</i> de tal forma que ele não renderize os nomes das partes ou seus números de exercícios <i>per se</i>. Em vez disso, ele somente renderiza três componentes <i>Part</i>, cada um dos quais renderiza o nome e o número de exercícios de uma parte.
+Refatore o componente <i>Content</i> de tal forma que ele não renderize os nomes das partes ou seus números de exercícios <i>per se</i>. Em vez disso, somente renderiza três componentes <i>Part</i>, cada um dos quais renderiza o nome e o número de exercícios de uma parte.
 
 ```js
 const Content = ... {
