@@ -43,7 +43,9 @@ const InfoBanner = ({ visible, onHide }) => {
   return (
     <div style={style}>
       <div stule={textStyle}>
-        Numbering of the exercises in part 2 has changed!
+        <p>Part 6 has new content about React Query, useReducer hook and React context.</p>
+        <p>The new content replaces the chapter on Redux connect (that still remains online for a while).</p>
+        <div style={{ marginTop: 10 }}><i>If you have already completed the part 6, this change has no effect on your progress.</i></div>
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>

@@ -45,6 +45,8 @@ and add the following line to the <i>scripts</i> part of the file <i>package.jso
 
 Now let's launch json-server with the command _npm run server_.
 
+### Getting data from the backend
+
 Next, we'll create a method into the file <i>services/notes.js</i>, which uses <i>axios</i> to fetch data from the backend
 
 ```js
@@ -247,12 +249,10 @@ const App = () => {
 export default App
 ```
 
-<!-- Hookin useEffect käyttö aiheuttaa eslint-varoituksen: -->
 Using the useEffect hook causes an eslint warning:
 
 ![vscode warning useEffect missing dispatch dependency](../../images/6/26ea.png)
 
-<!-- Pääsemme varoituksesta eroon seuraavasti: -->
 We can get rid of it by doing the following:
 
 ```js
@@ -267,12 +267,10 @@ const App = () => {
 }
 ```
 
-<!-- Nyt komponentin _App_ sisällä määritelty muuttuja <i>dispatch</i> eli käytännössä redux-storen dispatch-funktio on lisätty useEffectille parametrina annettuun taulukkoon. **Jos** dispatch-muuttujan sisältö muuttuisi ohjelman suoritusaikana, suoritettaisiin efekti uudelleen, näin ei kuitenkaan ole, eli varoitus on tässä tilanteessa oikeastaan aiheeton. -->
 Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux store, has been added to the array useEffect receives as a parameter.
 **If** the value of the dispatch variable would change during runtime, 
 the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
 
-<!-- Toinen tapa päästä eroon varoituksesta olisi disabloida se kyseisen rivin kohdalta: -->
 Another way to get rid of the warning would be to disable ESlint on that line:
 
 ```js
@@ -292,6 +290,8 @@ const App = () => {
 Generally disabling ESlint when it throws a warning is not a good idea. Even though the ESlint rule in question has caused some [arguments](https://github.com/facebook/create-react-app/issues/6880), we will use the first solution.
 
 More about the need to define the hooks dependencies in [the react documentation](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
+
+### Sending data to the backend
 
 We can do the same thing when it comes to creating a new note. Let's expand the code communicating with the server as follows:
 
@@ -313,7 +313,7 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew, // highlight-line
 }
 ```
 
@@ -346,12 +346,19 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-Because the backend generates ids for the notes, we'll change the action creator <em>createNote</em> accordingly:
+Because the backend generates ids for the notes, we'll change the action creator <em>createNote</em> in the file <i>createNote</i> accordingly:
 
 ```js
-createNote(state, action) {
-  state.push(action.payload)
-}
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    createNote(state, action) {
+      state.push(action.payload) // highlight-line
+    },
+    // ..
+  },
+})
 ```
 
 Changing the importance of notes could be implemented using the same principle, by making an asynchronous method call to the server and then dispatching an appropriate action.
@@ -362,15 +369,15 @@ The current state of the code for the application can be found on [GitHub](https
 
 <div class="tasks">
 
-### Exercises 6.13.-6.14.
+### Exercises 6.14.-6.15.
 
-#### 6.13 Anecdotes and the backend, step1
+#### 6.14 Anecdotes and the backend, step1
 
 When the application launches, fetch the anecdotes from the backend implemented using json-server.
 
 As the initial backend data, you can use, e.g. [this](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
-#### 6.14 Anecdotes and the backend, step2
+#### 6.15 Anecdotes and the backend, step2
 
 Modify the creation of new anecdotes, so that the anecdotes are stored in the backend.
 
@@ -482,7 +489,6 @@ const noteSlice = createSlice({
   name: 'notes',
   initialState: [],
   reducers: {
-    // highlight-start
     toggleImportanceOf(state, action) {
       const id = action.payload
 
@@ -503,7 +509,7 @@ const noteSlice = createSlice({
     setNotes(state, action) {
       return action.payload
     }
-    // highlight-end
+    // createNote definition removed from here!
   },
 })
 
@@ -528,7 +534,7 @@ export const createNote = content => {
 export default noteSlice.reducer
 ```
 
-The principle here is the same: first, an asynchronous operation is executed, after which the action changing the state of the store is <i>dispatched</i>. Redux Toolkit offers a multitude of tools to simplify asynchronous state management. Suitable tools for this use case are for example the [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) function and the [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API.
+The principle here is the same: first, an asynchronous operation is executed, after which the action changing the state of the store is <i>dispatched</i>.
 
 The component <i>NewNote</i> changes as follows:
 
@@ -589,29 +595,31 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-The current state of the code for the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) in the branch <i>part6-4</i>.
+The current state of the code for the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) in the branch <i>part6-5</i>.
+
+Redux Toolkit offers a multitude of tools to simplify asynchronous state management. Suitable tools for this use case are for example the [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) function and the [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) API.
 
 </div>
 
 <div class="tasks">
 
 
-### Exercises 6.15.-6.18.
+### Exercises 6.16.-6.19.
 
-#### 6.15 Anecdotes and the backend, step3
+#### 6.16 Anecdotes and the backend, step3
 
 Modify the initialization of the Redux store to happen using asynchronous action creators, which are made possible by the Redux Thunk library.
 
-#### 6.16 Anecdotes and the backend, step4
+#### 6.17 Anecdotes and the backend, step4
 
 Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the Redux Thunk library.
 
 
-#### 6.17 Anecdotes and the backend, step5
+#### 6.18 Anecdotes and the backend, step5
 
 Voting does not yet save changes to the backend. Fix the situation with the help of the Redux Thunk library.
 
-#### 6.18 Anecdotes and the backend, step6
+#### 6.19 Anecdotes and the backend, step6
 
 The creation of notifications is still a bit tedious since one has to do two actions and use the _setTimeout_ function:
 
