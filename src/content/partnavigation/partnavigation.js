@@ -420,7 +420,7 @@ module.exports = {
       b: 'Fundamentos de aplicações web',
     },
     '1': {
-      a: 'Introdução ao React',
+      a: 'Introdução à biblioteca React',
       b: 'JavaScript',
       c: 'Estado do componente, manipuladores de eventos',
       d: 'Um estado mais complexo e depuração de aplicações React',
@@ -478,7 +478,7 @@ module.exports = {
       d: 'React com tipos',
     },
     '10': {
-      a: 'Introdução ao React Native',
+      a: 'Introdução à biblioteca React Native',
       b: 'Conceitos básicos de React Native',
       c: 'Comunicação com o servidor',
       d: 'Testando e estendendo nossa aplicação',

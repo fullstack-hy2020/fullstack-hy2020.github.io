@@ -6,6 +6,6 @@ lang: pt
 
 <div class="intro">
 
-In this part, we will familiarize ourselves with the React-library, which we will be using to write the code that runs in the browser. We will also look at some features of JavaScript that are important for understanding React.
+Nesta parte, nos familiarizaremos com a biblioteca React, que usaremos para escrever o código que roda no navegador. Também vamos dar uma olhada em algumas características do JavaScript que são importantes para entender React.
 
 </div>
