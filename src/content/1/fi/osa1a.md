@@ -635,7 +635,7 @@ const App = () => {
 }
 ```
 
-**VAROITUS** älä yritä tehdä ohjelmassasi kaikkia komponentteja yhtä, sillä se johtaa lähes varmasti siihen että ohjelma ei toimi. Etene pieni askel kerrallaan, tee aluksi esim. komponentti <i>Header</i> ja vasta kun se toimii 100% varmasti, kannattaa edetä seuraavaan komponenttiin.
+**VAROITUS** älä yritä tehdä ohjelmassasi kaikkia komponentteja yhtä aikaa, sillä se johtaa lähes varmasti siihen että ohjelma ei toimi. Etene pieni askel kerrallaan, tee aluksi esim. komponentti <i>Header</i> ja vasta kun se toimii 100% varmasti, kannattaa edetä seuraavaan komponenttiin.
 
 Huolellinen, pienin askelin eteneminen saattaa tuntua hitaalta, mutta se on itseasiassa <i> ylivoimaisesti nopein</i> tapa edetä. Kuuluisa ohjelmistokehittäjä Robert "Uncle Bob" Martin on todennut
 
