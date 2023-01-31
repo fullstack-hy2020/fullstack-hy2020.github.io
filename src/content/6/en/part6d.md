@@ -442,13 +442,13 @@ const App = () => {
 export default App
 ```
 
-The hook [useReducer](https://beta.reactjs.org/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reduser function that handles state changes, and the initial value of the state:
+The hook [useReducer](https://beta.reactjs.org/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reducer function that handles state changes, and the initial value of the state:
 
 ```js
 const [counter, counterDispatch] = useReducer(counterReducer, 0)
 ```
 
-The reduser function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:
+The reducer function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:
 
 ```js
 const counterReducer = (state, action) => {
