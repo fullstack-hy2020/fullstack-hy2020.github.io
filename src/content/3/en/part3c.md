@@ -644,7 +644,7 @@ In the following exercises, write all Mongoose-specific code into its own module
 
 Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
 
-At this point, you can choose to simply allow users to create all phonebook entries. At this stage, the phonebook can have multiple entries for a person with the same name. 
+At this point, you can choose to simply allow all users to create phonebook entries. At this stage, the phonebook can have multiple entries for a person with the same name. 
 
 </div>
 
