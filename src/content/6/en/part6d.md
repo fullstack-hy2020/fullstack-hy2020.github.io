@@ -138,7 +138,7 @@ The <i>App</i> component is now slightly simplified
 
 ```js
 import { useQuery } from 'react-query' 
-import { getAnecdotes } from './requests' // highlight-line
+import { getNotes } from './requests' // highlight-line
 
 const App = () => {
   // ...
