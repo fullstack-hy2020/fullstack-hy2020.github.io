@@ -97,7 +97,7 @@ Voisimme periaatteessa muokata jo olemassaolevaa reduceria ottamaan huomioon muu
 const filterReducer = (state = 'ALL', action) => {
   switch (action.type) {
     case 'SET_FILTER':
-      return action.filter
+      return action.payload
     default:
       return state
   }
@@ -109,7 +109,7 @@ Filtterin arvon asettavat actionit ovat siis muotoa:
 ```js
 {
   type: 'SET_FILTER',
-  filter: 'IMPORTANT'
+  payload: 'IMPORTANT'
 }
 ```
 
@@ -123,7 +123,7 @@ const filterReducer = (state = 'ALL', action) => {
 export const filterChange = filter => {
   return {
     type: 'SET_FILTER',
-    filter,
+    payload: filter,
   }
 }
 
@@ -155,14 +155,17 @@ const store = createStore(reducer)
 
 console.log(store.getState())
 
+/*
 ReactDOM.createRoot(document.getElementById('root')).render(
-  /*
   <Provider store={store}>
     <App />
-  </Provider>,
-  */
-  <div />,
-  document.getElementById('root')
+  </Provider>
+)*/
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <div />
+  </Provider>
 )
 ```
 
@@ -377,9 +380,52 @@ const notes = useSelector(({ filter, notes }) => {
 
 Sovelluksessa on vielä pieni kauneusvirhe, sillä vaikka oletusarvosesti filtterin arvo on <i>ALL</i> eli näytetään kaikki muistiinpanot, ei vastaava radiopainike ole valittuna. Ongelma on luonnollisestikin mahdollista korjata, mutta koska kyseessä on ikävä, mutta harmiton feature, jätämme korjauksen myöhemmäksi.
 
+Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2), branchissa <i>part6-2</i>.
+
+</div>
+
+<div class="tasks">
+
+### Tehtävä 6.9
+
+Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen parissa.
+
+#### 6.9 paremmat anekdootit, step7
+
+Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen:
+
+![Yläosaan lisätään tekstikenttä, johon kirjoittamalla voidaan rajoittaa näytettävät anekdootit niihin joihin sisältyy "filtterikenttään" kirjoitettu merkkijono](../../images/6/9ea.png)
+
+Säilytä filtterin tila Redux-storessa. Käytännössä kannattaa tehdä uusi reducer ja action creatorit, ja luoda storea varten yhdistetty reduceri funktion <i>combineReducers</i> avulla.
+
+Tee filtterin ruudulla näyttämistä varten komponentti <i>Filter</i>. Voit ottaa sen pohjaksi seuraavan koodin:
+
+```js
+const Filter = () => {
+  const handleChange = (event) => {
+    // input-kentän arvo muuttujassa event.target.value
+  }
+  const style = {
+    marginBottom: 10
+  }
+
+  return (
+    <div style={style}>
+      filter <input onChange={handleChange} />
+    </div>
+  )
+}
+
+export default Filter
+```
+
+</div>
+
+<div class="content">
+
 ### Redux Toolkit
 
-Kuten olemme jo tähän asti huomanneet, Reduxin konfigurointi ja tilanhallinnan toteutus vaativat melko paljon vaivannäköä. Tämä ilmenee esimerkiksi reducereiden ja action creatorien koodista, jossa on jonkin verran toistoa. [Redux Toolkit](https://redux-toolkit.js.org/) on kirjasto, joka soveltuu näiden yleisten Reduxin käyttöön liittyvien ongelmien ratkaisemiseen. Kirjaston käyttö mm. yksinkertaistaa huomattavasti Redux-storen luontia ja tarjoaa suuren määrän tilanhallintaa helpottavia työkaluja.
+Kuten olemme jo tähän asti huomanneet, Reduxin konfigurointi ja tilanhallinnan toteutus vaativat melko paljon vaivannäköä. Tämä ilmenee esimerkiksi reducereiden ja action creatorien koodista, jossa on jonkin verran toisteisuutta. [Redux Toolkit](https://redux-toolkit.js.org/) on kirjasto, joka soveltuu näiden yleisten Reduxin käyttöön liittyvien ongelmien ratkaisemiseen. Kirjaston käyttö mm. yksinkertaistaa huomattavasti Redux-storen luontia ja tarjoaa suuren määrän tilanhallintaa helpottavia työkaluja.
 
 Otetaan Redux Toolkit käyttöön sovelluksessamme refaktoroimalla nykyistä koodia. Aloitetaan kirjaston asennuksella:
 
@@ -474,7 +520,7 @@ const noteSlice = createSlice({
 // highlight-end
 ```
 
-<em>createSlice</em>-funktion <em>name</em>-parametri määrittelee etuliitteen, jota käytetään actioneiden type-arvoissa. Esimerkiksi myöhemmin määritelty <em>createNote</em>-action saa type-arvon <em>notes/createNote</em>. Parametrin arvona on hyvä käyttää muiden reducereiden kesken uniikkia nimeä, jotta sovelluksen actioneiden type-arvoissa ei tapahtuisi odottamattomia yhteentörmäyksiä. Parametri <em>initialState</em> määrittelee reducerin alustavan tilan. Parametri <em>reducers</em> määrittelee itse reducerin objektina, jonka funktiot käsittelevät tietyn actionin aiheuttamat tilamuutokset. Huomaa, että funktioissa <em>action.payload</em> sisältää action creatorin kutsussa annetun argumentin:
+<em>createSlice</em>-funktion <em>name</em>-parametri määrittelee etuliitteen, jota käytetään actioneiden type-arvoissa. Esimerkiksi myöhemmin määritelty <em>createNote</em>-action saa type-arvon <em>notes/createNote</em>. Parametrin arvona on hyvä käyttää muiden reducereiden kesken uniikkia nimeä, jotta sovelluksen actioneiden type-arvoissa ei tapahtuisi odottamattomia yhteentörmäyksiä. Parametri <em>initialState</em> määrittelee reducerin alustavan tilan. Parametri <em>reducers</em> määrittelee itse reducerin objektina, jonka funktiot käsittelevät tietyn actionin aiheuttamat tilamuutokset. Huomaa, että funktioissa <em>action.payload</em> sisältää action creatorin kutsussa annetun parametrin:
 
 ```js
 dispatch(createNote('Redux Toolkit is awesome!'))
@@ -524,7 +570,7 @@ Importit toimivat muissa tiedostoissa tavalliseen tapaan:
 import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteReducer'
 ```
 
-Joudumme hieman muuttamaan testiemme rakennetta Redux Toolkitin nimeämiskäytäntöjen takia:
+Joudumme hieman muuttamaan testiämme Redux Toolkitin nimeämiskäytäntöjen takia:
 
 ```js 
 import noteReducer from './noteReducer'
@@ -542,7 +588,7 @@ describe('noteReducer', () => {
     const newState = noteReducer(state, action)
 
     expect(newState).toHaveLength(1)
-    expect(newState.map(s => s.content)).toContainEqual(action.payload) // highlight-line
+    expect(newState.map(s => s.content)).toContainEqual(action.payload)
   })
 
   test('returns new state with action notes/toggleImportanceOf', () => {
@@ -560,7 +606,7 @@ describe('noteReducer', () => {
   
     const action = {
       type: 'notes/toggleImportanceOf', // highlight-line
-      payload: 2 // highlight-line
+      payload: 2
     }
   
     deepFreeze(state)
@@ -579,37 +625,91 @@ describe('noteReducer', () => {
 })
 ```
 
+### Redux Toolkit ja console.log
+
+Kuten olemme oppineet, on _console.log_ äärimmäisen voimakas työkalu, se pelastaa meidät yleensä aina pulasta.
+
+Yritetään tulostaa Redux storen tilan konsoliin kesken funktiolla _createSlice_ luodun reducerin: 
+
+```js
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    // ...
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = { 
+        ...noteToChange, 
+        important: !noteToChange.important 
+      }
+
+      console.log(state) // highlight-line
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote 
+      )     
+    }
+  },
+})
+```
+
+Konsoliin tulostuu seuraava
+
+![](../../images/6/40new.png)
+
+Tulostus on mielenkiintoinen mutta ei kovin hyödyllinen. Kyse tässä jo edell mainitusta Redux toolkitin käyttämästä Immer-kirjastosta, mitä käytetään nyt sisäisesti storen tilan tallentamiseen. 
+
+Tilan saa tulostettua ihmisluettavassa muodossa, esim. muuttamalla se merkkijonoksi ja takaisin JavaScript-olioksi seuraavasti: 
+
+```js
+console.log(JSON.parse(JSON.stringify(state))) // highlight-line
+```
+
+Konsolitulostus on nyt ihmisluettava
+
+![](../../images/6/41new.png)
+
 ### Redux DevTools
 
 Chromeen on asennettavissa [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd?hl=fi) -lisäosa, jonka avulla Redux-storen tilaa ja sitä muuttavia actioneja on mahdollisuus seurata selaimen konsolista. Redux Toolkitin <em>configureStore</em>-funktion avulla luodussa storessa Redux DevTools on käytössä automaattisesti ilman ylimääräistä konfigurointia.
 
 Kun lisäosa on asennettu Chromeen, konsolin <i>Redux</i>-välilehti pitäisi näyttää seuraavalta:
 
-![Redux DevToolsin oikea puoli "State" näyttää storen alkutilan](../../images/6/11ea.png)
+![Redux DevToolsin oikea puoli "State" näyttää storen alkutilan](../../images/6/42new.png)
 
 Kunkin actionin storen tilaan aiheuttamaa muutosta on helppo tarkastella:
 
-![edux DevToolsin vasen puoli näyttää suoritetut actionit, muuttunut tila heijastuu oikealle puolelle](../../images/6/12ea.png)
+![edux DevToolsin vasen puoli näyttää suoritetut actionit, muuttunut tila heijastuu oikealle puolelle](../../images/6/43new.png)
 
 Konsolin avulla on myös mahdollista dispatchata actioneja storeen:
 
-![Mahdollisuus actionien dispatchaamiseen avautuu alalaidan valinnoista](../../images/6/13ea.png)
+![Mahdollisuus actionien dispatchaamiseen avautuu alalaidan valinnoista](../../images/6/44new.png)
 
-Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2) branchissa </i>part6-2</i>.
+Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) branchissa </i>part6-3</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtävät 6.9-6.12
-
-Jatketaan tehtävässä 6.3 aloitetun Reduxia käyttävän anekdoottisovelluksen parissa.
-
-#### 6.9 anekdootit, step7
-
-Asenna projektiin Redux Toolkit. Siirrä tämän jälkeen Redux-storen määrittely omaan tiedostoon <i>store.js</i> ja hyödynnä sen luonnissa Redux Toolkitin <em>configureStore</em>-funktiota. Ota myös käyttöön Redux DevTools sovelluksen tilan debuggaamisen helpottamiseksi.
+### Tehtävät 6.10-6.13
 
 #### 6.10 anekdootit, step8
+
+Asenna projektiin Redux Toolkit. Siirrä tämän jälkeen Redux-storen määrittely omaan tiedostoon <i>store.js</i> ja hyödynnä sen luonnissa Redux Toolkitin <em>configureStore</em>-funktiota. 
+
+Muuta <i>filter reduserin ja action creatorien</i> määrittely tapahtumaan Redux Toolkitin <em>createSlice</em>-funktion avulla.
+
+Ota myös käyttöön Redux DevTools sovelluksen tilan debuggaamisen helpottamiseksi.
+
+#### 6.11 anekdootit, step9
+
+Muuta myös <i>anekdoottireduserin ja action creatorien</i> määrittely tapahtumaan Redux Toolkitin <em>createSlice</em>-funktion avulla.
+
+#### 6.12 anekdootit, step10
 
 Sovelluksessa on valmiina komponentin <i>Notification</i> runko:
 
@@ -650,11 +750,11 @@ const Notification = () => {
 }
 ```
 
-Joudut siis muuttamaan ja laajentamaan sovelluksen olemassaolevaa reduceria. Tee toiminnallisuutta varten oma reduceri. Hyödynnä tässä Redux Toolkitin <em>createSlice</em>-funktiota. Siirry käyttämään sovelluksessa yhdistettyä reduceria tämän osan materiaalin tapaan.
+Joudut siis muuttamaan ja laajentamaan sovelluksen olemassaolevaa reduceria. Tee toiminnallisuutta varten oma reduceri. Hyödynnä jälleen Redux Toolkitin <em>createSlice</em>-funktiota. Siirry käyttämään sovelluksessa yhdistettyä reduceria tämän osan materiaalin tapaan.
 
 Tässä vaiheessa sovelluksen ei vielä tarvitse osata käyttää <i>Notification</i>-komponenttia järkevällä tavalla, vaan riittää että sovellus toimii ja näyttää <i>notificationReducerin</i> alkuarvoksi asettaman viestin.
 
-#### 6.11 paremmat anekdootit, step9
+#### 6.13 paremmat anekdootit, step11
 
 Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin avulla viiden sekunnin ajan, kun sovelluksessa äänestetään tai luodaan uusia anekdootteja:
 
@@ -662,33 +762,5 @@ Laajenna sovellusta siten, että se näyttää <i>Notification</i>-komponentin a
 
 Notifikaation asettamista ja poistamista varten kannattaa toteuttaa [action creatorit](https://redux-toolkit.js.org/api/createSlice#reducers).
 
-#### 6.12* paremmat anekdootit, step10
-
-Toteuta sovellukseen näytettävien muistiinpanojen filtteröiminen:
-
-![Yläosaan lisätään tekstikenttä, johon kirjoittamalla voidaan rajoittaa näytettävät anekdootit niihin joihin sisältyy "filtterikenttään" kirjoitettu merkkijono](../../images/6/9ea.png)
-
-Säilytä filtterin tila Redux-storessa. Käytännössä kannattaa siis jälleen luoda uusi reducer ja action creatorit. Hyödynnä tässä Redux Toolkitin <em>createSlice</em>-funktiota.
-
-Tee filtterin ruudulla näyttämistä varten komponentti <i>Filter</i>. Voit ottaa sen pohjaksi seuraavan koodin:
-
-```js
-const Filter = () => {
-  const handleChange = (event) => {
-    // input-kentän arvo muuttujassa event.target.value
-  }
-  const style = {
-    marginBottom: 10
-  }
-
-  return (
-    <div style={style}>
-      filter <input onChange={handleChange} />
-    </div>
-  )
-}
-
-export default Filter
-```
 
 </div>

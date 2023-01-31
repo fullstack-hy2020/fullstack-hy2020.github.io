@@ -715,17 +715,17 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 <h3>Exercises 2.12.-2.15.</h3>
 
-<h4>2.12: Phonebook step7</h4>
+<h4>2.12: The Phonebook step7</h4>
 
 Let's return to our phonebook application.
 
 Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
 
-<h4>2.13: Phonebook step8</h4>
+<h4>2.13: The Phonebook step8</h4>
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-<h4>2.14: Phonebook step9</h4>
+<h4>2.14: The Phonebook step9</h4>
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
 
@@ -744,7 +744,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.15*: Phonebook step10</h4>
+<h4>2.15*: The Phonebook step10</h4>
 
 <i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 

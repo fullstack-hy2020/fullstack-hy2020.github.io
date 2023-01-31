@@ -103,7 +103,7 @@ We could modify our current reducer to deal with the new shape of the state. How
 const filterReducer = (state = 'ALL', action) => {
   switch (action.type) {
     case 'SET_FILTER':
-      return action.filter
+      return action.payload
     default:
       return state
   }
@@ -116,7 +116,7 @@ The actions for changing the state of the filter look like this:
 ```js
 {
   type: 'SET_FILTER',
-  filter: 'IMPORTANT'
+  payload: 'IMPORTANT'
 }
 ```
 
@@ -131,7 +131,7 @@ const filterReducer = (state = 'ALL', action) => {
 export const filterChange = filter => {
   return {
     type: 'SET_FILTER',
-    filter,
+    payload: filter,
   }
 }
 
@@ -164,13 +164,17 @@ const store = createStore(reducer)
 
 console.log(store.getState())
 
+/*
 ReactDOM.createRoot(document.getElementById('root')).render(
-  /*
   <Provider store={store}>
     <App />
-  </Provider>,
-  */
-  <div />
+  </Provider>
+)*/
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <div />
+  </Provider>
 )
 ```
 
@@ -224,17 +228,13 @@ const filterReducer = (state = 'ALL', action) => {
 }
 ```
 
-
 Based on the console output one might get the impression that every action gets duplicated:
 
 ![devtools console output showing dupblicated actions in note and filter reducers](../../images/6/6.png)
 
-
 Is there a bug in our code? No. The combined reducer works in such a way that every <i>action</i> gets handled in <i>every</i> part of the combined reducer. Typically only one reducer is interested in any given action, but there are situations where multiple reducers change their respective parts of the state based on the same action.
 
-
 ### Finishing the filters
-
 
 Let's finish the application so that it uses the combined reducer. We start by changing the rendering of the application and hooking up the store to the application in the <i>index.js</i> file:
 
@@ -273,7 +273,6 @@ const Notes = () => {
 }
 ```
 
-<!-- Aiemminhan selektorifunktio palautti koko storen tilan: -->
 Previously the selector function returned the whole state of the store:
 
 ```js
@@ -375,14 +374,12 @@ const Notes = () => {
   )
 ```
 
-<!-- Muutos kohdistuu siis ainoastaan selektorifunktioon, joka oli aiemmnin muotoa -->
 We only make changes to the selector function, which used to be
 
 ```js
 useSelector(state => state.notes)
 ```
 
-<!-- Yksinkertaistetaan vielä selektoria destrukturoimalla parametrina olevasta tilasta sen kentät erilleen: -->
 Let's simplify the selector by destructuring the fields from the state it receives as a parameter:
 
 ```js
@@ -397,6 +394,47 @@ const notes = useSelector(({ filter, notes }) => {
 ```
 
 There is a slight cosmetic flaw in our application. Even though the filter is set to <i>ALL</i> by default, the associated radio button is not selected. Naturally, this issue can be fixed, but since this is an unpleasant but ultimately harmless bug we will save the fix for later. 
+
+The current version of the application can be found on [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3), branch <i>part6-3</i>.
+
+</div>
+
+<div class="tasks">
+
+### Exercise 6.9
+
+#### 6.9 Better anecdotes, step7
+
+Implement filtering for the anecdotes that are displayed to the user.
+
+![browser showing filtering of anecdotes](../../images/6/9ea.png)
+
+Store the state of the filter in the redux store. It is recommended to create a new reducer, action creators, and a combined reducer for the store using the <i>combineReducers</i> function.
+
+Create a new <i>Filter</i> component for displaying the filter. You can use the following code as a template for the component:
+
+```js
+const Filter = () => {
+  const handleChange = (event) => {
+    // input-field value is in variable event.target.value
+  }
+  const style = {
+    marginBottom: 10
+  }
+
+  return (
+    <div style={style}>
+      filter <input onChange={handleChange} />
+    </div>
+  )
+}
+
+export default Filter
+```
+
+</div>
+
+<div class="content">
 
 ### Redux Toolkit
 
@@ -542,7 +580,7 @@ The imports in other files will work just as they did before:
 import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteReducer'
 ```
 
-We need to alter the tests a bit due to the naming conventions of ReduxToolkit:
+We need to alter the action type names in the tests due to the conventions of ReduxToolkit:
 
 ```js 
 import noteReducer from './noteReducer'
@@ -560,7 +598,7 @@ describe('noteReducer', () => {
     const newState = noteReducer(state, action)
 
     expect(newState).toHaveLength(1)
-    expect(newState.map(s => s.content)).toContainEqual(action.payload) // highlight-line
+    expect(newState.map(s => s.content)).toContainEqual(action.payload)
   })
 
   test('returns new state with action notes/toggleImportanceOf', () => {
@@ -578,7 +616,7 @@ describe('noteReducer', () => {
   
     const action = {
       type: 'notes/toggleImportanceOf', // highlight-line
-      payload: 2 // highlight-line
+      payload: 2
     }
   
     deepFreeze(state)
@@ -597,37 +635,93 @@ describe('noteReducer', () => {
 })
 ```
 
+### Redux Toolkit and console.log
+
+As we have learned, console.log is an extremely powerful tool, it usually always saves us from trouble.
+
+Let's try to print the state of the Redux Store to the console in the middle of the reducer created with the function createSlice:
+
+```js
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    // ...
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = { 
+        ...noteToChange, 
+        important: !noteToChange.important 
+      }
+
+      console.log(state) // highlight-line
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote 
+      )     
+    }
+  },
+})
+```
+
+The following is printed to the console
+
+![](../../images/6/40new.png)
+
+The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit, which is now used internally to save the state of the Store.
+
+The status can be converted to a human-readable format, e.g. by converting it to a string and back to a JavaScript object as follows:
+
+```js
+console.log(JSON.parse(JSON.stringify(state))) // highlight-line
+```
+
+Console output is now human readable
+
+![](../../images/6/41new.png)
+
 ### Redux DevTools
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) is a Chrome addon that offers useful development tools for Redux. It can be used for example to inspect the Redux store's state and dispatch actions through the browser's console. When the store is created using Redux Toolkit's <em>configureStore</em> function, no additional configuration is needed for Redux DevTools to work.
 
 Once the addon is installed, clicking the <i>Redux</i> tab in the browser's console should open the development tools:
 
-![browser with redux addon in devtools](../../images/6/11ea.png)
+![browser with redux addon in devtools](../../images/6/42new.png)
 
 You can inspect how dispatching a certain action changes the state by clicking the action:
 
-![devtools inspecting notes tree in redux](../../images/6/12ea.png)
+![devtools inspecting notes tree in redux](../../images/6/43new.png)
 
 It is also possible to dispatch actions to the store using the development tools:
 
-![devtools redux dispatching createNote with payload](../../images/6/13ea.png)
+![devtools redux dispatching createNote with payload](../../images/6/44new.png)
 
-You can find the code for our current application in its entirety in the <i>part6-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
+You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
 
 </div>
 
 <div class="tasks">
 
-### Exercises 6.9.-6.12.
+### Exercises 6.10.-6.13.
 
 Let's continue working on the anecdote application using Redux that we started in exercise 6.3. 
 
-#### 6.9 Better anecdotes, step7
-
-Install Redux Toolkit for the project. Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit's <em>configureStore</em> to create the store. Also, start using Redux DevTools to debug the application's state easier.
-
 #### 6.10 Better anecdotes, step8
+
+Install Redux Toolkit for the project. Move the Redux store creation into the file <i>store.js</i> and use Redux Toolkit's <em>configureStore</em> to create the store.
+
+Change the definition of the <i>filter reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
+
+Also, start using Redux DevTools to debug the application's state easier.
+
+#### 6.11 Better anecdotes, step9
+
+Change also the definition of the <i>anecdote reducer and action creators</i> to use the Redux Toolkit's <em>createSlice</em> function.
+
+#### 6.12 Better anecdotes, step10
 
 The application has a ready-made body for the <i>Notification</i> component:
 
@@ -668,45 +762,16 @@ const Notification = () => {
 }
 ```
 
-You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality by using the Redux Toolkit's <em>createSlice</em> function. Also, refactor the application so that it uses a combined reducer as shown in this part of the course material.
+You will have to make changes to the application's existing reducer. Create a separate reducer for the new functionality by using the Redux Toolkit's <em>createSlice</em> function.
 
 The application does not have to use the <i>Notification</i> component intelligently at this point in the exercises. It is enough for the application to display the initial value set for the message in the <i>notificationReducer</i>.
 
-#### 6.11 Better anecdotes, step9
+#### 6.13 Better anecdotes, step11
 
 Extend the application so that it uses the <i>Notification</i> component to display a message for five seconds when the user votes for an anecdote or creates a new anecdote:
 
 ![browser showing message of having voted](../../images/6/8ea.png)
 
 It's recommended to create separate [action creators](https://redux-toolkit.js.org/api/createSlice#reducers) for setting and removing notifications.
-
-#### 6.12* Better anecdotes, step10
-
-Implement filtering for the anecdotes that are displayed to the user.
-
-![browser showing filtering of anecdotes](../../images/6/9ea.png)
-
-Store the state of the filter in the redux store. It is recommended to create a new reducer and action creators for this purpose. Implement the reducer and action creators using the Redux Toolkit's <em>createSlice</em> function.
-
-Create a new <i>Filter</i> component for displaying the filter. You can use the following code as a template for the component:
-
-```js
-const Filter = () => {
-  const handleChange = (event) => {
-    // input-field value is in variable event.target.value
-  }
-  const style = {
-    marginBottom: 10
-  }
-
-  return (
-    <div style={style}>
-      filter <input onChange={handleChange} />
-    </div>
-  )
-}
-
-export default Filter
-```
 
 </div>
