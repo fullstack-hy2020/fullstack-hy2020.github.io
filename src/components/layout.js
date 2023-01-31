@@ -10,7 +10,7 @@ import Footer from './Footer/Footer';
 import PropTypes from 'prop-types';
 import SkipToContent from './SkipToContent/SkipToContent';
 
-const BANNER_TO_KEY = 'exercise_numbering_part2_seen';
+const BANNER_TO_KEY = 'part_6_changes';
 
 const Layout = props => {
   const { i18n } = useTranslation();
