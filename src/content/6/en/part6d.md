@@ -138,7 +138,7 @@ The <i>App</i> component is now slightly simplified
 
 ```js
 import { useQuery } from 'react-query' 
-import { getAnecdotes } from './requests' // highlight-line
+import { getNotes } from './requests' // highlight-line
 
 const App = () => {
   // ...
@@ -153,7 +153,7 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 
 ### Synchronizing data to the server using React Query
 
-Data is already successfully retrieved from the server. Next, I'll make sure that the added and modified data is stored on the server. Let's start by adding new notes.
+Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.
 
 Let's make a function <i>addANote</i> to the file <i>requests.js</i> for saving new notes:
 
