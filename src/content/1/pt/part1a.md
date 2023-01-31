@@ -7,30 +7,30 @@ lang: pt
 
 <div class="content">
 
-We will now start getting familiar with probably the most important topic of this course, namely the [React](https://reactjs.org/) library. Let's start by making a simple React application as well as getting to know the core concepts of React.
+Agora, começaremos a nos familiarizar com provavelmente o tópico mais importante deste curso, a biblioteca [React](https://reactjs.org/). Vamos começar criando uma aplicação React simples, conhecendo os conceitos-chave de React.
 
-The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
+A maneira mais simples de começar é usando uma ferramenta chamada [create-react-app](https://github.com/facebook/create-react-app). É possível (mas não necessário) instalar o <i>create-react-app</i> na sua máquina se a ferramenta <i>npm</i> instalada junto com o Node tiver na versão <i>5.3</i>, pelo menos.
 
-Let's create an application called <i>part1</i> and navigate to its directory.
+Vamos criar uma aplicação chamada <i>part1</i> e navegar até o seu diretório.
 
 ```bash
 npx create-react-app part1
 cd part1
 ```
 
-The application runs as follows
+A aplicação é executada da seguinte forma:
 
 ```bash
 npm start
 ```
 
-By default, the application runs on localhost port 3000 with the address <http://localhost:3000>
+Por padrão, a aplicação é executada no localhost na porta 3000 com o endereço <http://localhost:3000>
 
-Your default browser should launch automatically. Open the browser console **immediately**. Also, open a text editor so that you can view the code as well as the webpage at the same time on the screen:
+Seu navegador padrão deve ser automaticamente aberto. Abra **imediatamente** o console do navegador. Além disso, abra um editor de texto para que você possa ver o código e a página da web ao mesmo tempo na tela:
 
-![code and browser side by side](../../images/1/1e.png)
+![código e navegador lado a lado](../../images/1/1e.png)
 
-The code of the application resides in the <i>src</i> folder. Let's simplify the default code such that the contents of the file index.js looks like this:
+O código da aplicação reside na pasta <i>src</i>. Vamos simplificar o código padrão para que o conteúdo do arquivo index.js pareça assim:
 
 ```js
 import React from 'react'
@@ -41,99 +41,99 @@ import App from './App'
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-and file <i>App.js</i> looks like this
+e o arquivo <i>App.js</i> parece assim:
 
 ```js
 const App = () => (
   <div>
-    <p>Hello world</p>
+    <p>Olá, mundo!</p>
   </div>
 )
 
 export default App
 ```
 
-The files <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> and <i>reportWebVitals.js</i> may be deleted as they are not needed in our application right now.
+Os arquivos <i>App.css</i>, <i>App.test.js</i>, <i>index.css</i>, <i>logo.svg</i>, <i>setupTests.js</i> e <i>reportWebVitals.js</i> podem ser excluídos, pois não são necessários em nossa aplicação neste momento.
 
-### Component
+### Componente
 
-The file <i>App.js</i> now defines a [React component](https://reactjs.org/docs/components-and-props.html) with the name <i>App</i>. The command on the final line of file <i>index.js</i> 
+O arquivo <i>App.js</i> agora define um componente [React](https://reactjs.org/docs/components-and-props.html) com o nome <i>App</i>. O comando na linha final do arquivo <i>index.js</i>
 
 ```js
 ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
-renders its contents into the <i>div</i>-element, defined in the file <i>public/index.html</i>, having the <i>id</i> value 'root'.
+renderiza seu conteúdo dentro do elemento <i>div</i>, definido no arquivo <i>public/index.html</i>, com o valor de <i>id</i> 'root'.
 
-By default, the file <i>public/index.html</i> doesn't contain any HTML markup that is visible to us in the browser:
+Por padrão, o arquivo <i>public/index.html</i> não contém nenhum marcador HTML que é visível para nós no navegador:
 
 ```html
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      content not shown ...
+      conteúdo não mostrado ...
   </head>
   <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <noscript>Você precisa habilitar o JavaScript para executar esta aplicação.</noscript>
     <div id="root"></div>
   </body>
 </html>
 ```
 
-You can try adding there some HTML to the file. However, when using React, all content that needs to be rendered is usually defined as React components.
+Você pode até tentar adicionar algum HTML ao arquivo, no entanto, ao usar React, todo o conteúdo que precisa ser renderizado é geralmente definido como "componentes React".
 
-Let's take a closer look at the code defining the component:
+Vamos dar uma olhada mais de perto no código que define o componente:
 
 ```js
 const App = () => (
   <div>
-    <p>Hello world</p>
+    <p>Olá, mundo!</p>
   </div>
 )
 ```
 
-As you probably guessed, the component will be rendered as a <i>div</i>-tag, which wraps a <i>p</i>-tag containing the text <i>Hello world</i>.
+Como você provavelmente adivinhou, o componente será renderizado como uma tag <i>div</i>, que envolve uma tag <i>p</i> contendo o texto <i>"Olá, mundo!"</i>.
 
-Technically the component is defined as a JavaScript function. The following is a function (which does not receive any parameters):
+Técnicamente, o componente é definido como uma função JavaScript. O código a seguir também é uma função (que não recebe nenhum parâmetro):
 
 ```js
 () => (
   <div>
-    <p>Hello world</p>
+    <p>Olá, mundo!</p>
   </div>
 )
 ```
 
-The function is then assigned to a constant variable <i>App</i>:
+A função é, então, atribuída a uma (variável) constante <i>App</i>:
 
 ```js
 const App = ...
 ```
 
-There are a few ways to define functions in JavaScript. Here we will use [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), which are described in a newer version of JavaScript known as [ECMAScript 6](http://es6-features.org/#Constants), also called ES6.
+Existem algumas maneiras de definir funções em JavaScript. Aqui usaremos as [funções de seta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) (arrow functions), que são descritas em uma versão mais recente do JavaScript conhecida como [ECMAScript 6](http://es6-features.org/#Constants), também chamada de ES6.
 
-Because the function consists of only a single expression we have used a shorthand, which represents this piece of code:
+Por conta da função consistir em apenas uma única expressão, usamos uma notação abreviada, que representa este trecho de código:
 
 ```js
 const App = () => {
   return (
     <div>
-      <p>Hello world</p>
+      <p>Olá, mundo!</p>
     </div>
   )
 }
 ```
 
-In other words, the function returns the value of the expression.
+Em outras palavras, a função retorna o valor da expressão.
 
-The function defining the component may contain any kind of JavaScript code. Modify your component to be as follows:
+A função que define o componente pode conter qualquer tipo de código JavaScript. Modifique seu componente da seguinte maneira:
 
 ```js
 const App = () => {
-  console.log('Hello from component')
+  console.log('Olá do componente!')
   return (
     <div>
-      <p>Hello world</p>
+      <p>Olá, mundo!</p>
     </div>
   )
 }
@@ -141,19 +141,19 @@ const App = () => {
 export default App
 ```
 
-and observe what happens in the browser console
+E observe o que acontece no console do navegador:
 
 ![](../../images/1/30.png)
 
-The first rule of frontend web development: 
+A primeira regra do desenvolvimento web front-end:
 
-> <i>keep the console open all the time</i>
+> <i> Mantenha o console aberto o tempo todo.</i>
 
-Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and the for the rest of my life when I'm doing web development. 
+Vamos repetir juntos: <i>Prometo manter o console aberto o tempo todo</i> durante este curso e pelo resto da minha vida quando estiver fazendo desenvolvimento web.
 
-It is also possible to render dynamic content inside of a component.
+Também é possível renderizar conteúdo dinâmico dentro de um componente.
 
-Modify the component as follows:
+Modifique o componente da seguinte maneira:
 
 ```js
 const App = () => {
@@ -164,32 +164,32 @@ const App = () => {
 
   return (
     <div>
-      <p>Hello world, it is {now.toString()}</p>
+      <p>Olá, mundo! Hoje é {now.toString()}</p>
       <p>
-        {a} plus {b} is {a + b}
+        {a} mais {b} é {a + b}
       </p>
     </div>
   )
 }
 ```
 
-Any JavaScript code within the curly braces is evaluated and the result of this evaluation is embedded into the defined place in the HTML produced by the component.
+Qualquer código JavaScript dentro das chaves é avaliado e o resultado desta avaliação é incorporado no lugar definido no HTML produzido pelo componente.
 
-Note that you should not remove the line at the bottom of the component
+Note que você não deve remover a linha no final do componente:
 
 ```js
 export default App
 ```
 
-The export is not shown in most of the examples of the course material. Without the export the component and the whole app breaks down.
+A exportação não é mostrada em a maioria dos exemplos do material do curso. Sem a exportação, o componente e a aplicação inteira desmoronam.
 
-Did you remember your promise to keep the console open? What was printed out there?
+Você se lembrou da sua promessa de deixar o console aberto? O que foi mostrado?
 
 ### JSX
 
-It seems like React components are returning HTML markup. However, this is not the case. The layout of React components is mostly written using [JSX](https://reactjs.org/docs/introducing-jsx.html). Although JSX looks like HTML, we are dealing with a way to write JavaScript. Under the hood, JSX returned by React components is compiled into JavaScript.
+Parece que os componentes React estão retornando marcações HTML. No entanto, não é esse o caso. A maior parte da estrutura de componentes React é escrita usando [JSX](https://reactjs.org/docs/introducing-jsx.html) (JavaScript Syntax Extension [Extensão de Sintaxe para JavaScript]). Embora o JSX pareça com HTML, estamos lidando com uma maneira de escrever JavaScript. Por baixo dos panos, o JSX retornado por componentes React é compilado em JavaScript.
 
-After compiling, our application looks like this:
+Depois da compilação, nossa aplicação fica assim:
 
 ```js
 const App = () => {
@@ -200,220 +200,220 @@ const App = () => {
     'div',
     null,
     React.createElement(
-      'p', null, 'Hello world, it is ', now.toString()
+      'p', null, 'Olá, mundo! Hoje é ', now.toString()
     ),
     React.createElement(
-      'p', null, a, ' plus ', b, ' is ', a + b
+      'p', null, a, ' mais ', b, ' é ', a + b
     )
   )
 }
 ```
 
-The compilation is handled by [Babel](https://babeljs.io/repl/). Projects created with *create-react-app* are configured to compile automatically. We will learn more about this topic in [part 7](/en/part7) of this course.
+A compilação é gerenciada pelo [Babel](https://babeljs.io/repl/). Projetos criados com *create-react-app* são configurados para compilar automaticamente. Vamos aprender mais sobre esse tópico na [parte 7](/pt/part7) deste curso.
 
-It is also possible to write React as "pure JavaScript" without using JSX. Although, nobody with a sound mind would do so.
+Também é possível escrever React como "JavaScript puro" sem usar JSX. Embora não seja recomendável.
 
-In practice, JSX is much like HTML with the distinction that with JSX you can easily embed dynamic content by writing appropriate JavaScript within curly braces. The idea of JSX is quite similar to many templating languages, such as Thymeleaf used along with Java Spring, which are used on servers.
+Na prática, o JSX é muito parecido com HTML com a distinção de que, com o JSX, é possível inserir facilmente conteúdo dinâmico escrevendo JavaScript adequado dentro de chaves. A idéia do JSX é bastante semelhante a muitas linguagens de modelos, como Thymeleaf usado junto com Java Spring, que são usadas em servidores.
 
-JSX is "[XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction)-like", which means that every tag needs to be closed. For example, a newline is an empty element, which in HTML can be written as follows:
+JSX é "semelhante a [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction)" (Extensible Markup Language [Linguagem de Marcação Extensível]), o que significa que todas as tags precisam ser fechadas. Por exemplo, uma nova linha é um elemento vazio, que em HTML pode ser escrito da seguinte maneira:
 
 ```html
 <br>
 ```
 
-but when writing JSX, the tag needs to be closed:
+mas ao escrever em JSX, a tag precisa ser fechada:
 
 ```html
 <br />
 ```
 
-### Multiple components
+### Múltiplos componentes
 
-Let's modify the file <i>App.js</i> as follows (NB: export at the bottom is left out in these <i>examples</i>, now and in the future. It is still needed for the code to work):
+Vamos modificar o arquivo <i>App.js</i> da seguinte forma (N.B.: a exportação na parte inferior é omitida nestes <i>exemplos</i>, agora e no futuro. Ela ainda é necessária para que o código funcione):
 
 ```js
-// highlight-start
+// começo destacado
 const Hello = () => {
   return (
     <div>
-      <p>Hello world</p>
+      <p>Olá, mundo!</p>
     </div>
   )
 }
-// highlight-end
+// final destacado
 
 const App = () => {
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello /> // highlight-line
+      <h1>Olá a todos!</h1>
+      <Hello /> // linha destacada
     </div>
   )
 }
 ```
 
-We have defined a new component <i>Hello</i> and used it inside the component <i>App</i>. Naturally, a component can be used multiple times:
+Nós definimos um novo componente <i>Hello</i> e o usamos dentro do componente <i>App</i>. Naturalmente, um componente pode ser usado várias vezes:
 
 ```js
 const App = () => {
   return (
     <div>
-      <h1>Greetings</h1>
+      <h1>Olá a todos!</h1>
       <Hello />
-      // highlight-start
+      // começo destacado
       <Hello />
       <Hello />
-      // highlight-end
+      // final destacado
     </div>
   )
 }
 ```
 
-Writing components with React is easy, and by combining components, even a more complex application can be kept fairly maintainable. Indeed, a core philosophy of React is composing applications from many specialized reusable components.
+Escrever componentes em React é fácil, e com combinação de componentes, mesmo uma aplicação mais complexa pode ser relativamente mantível. De fato, uma das filosofias fundamentais do React é criar aplicações a partir de muitos componentes que são especializados e reutilizáveis.
 
-Another strong convention is the idea of a <i>root component</i> called <i>App</i> at the top of the component tree of the application. Nevertheless, as we will learn in [part 6](/en/part6), there are situations where the component <i>App</i> is not exactly the root, but is wrapped within an appropriate utility component.
+Outra forte convenção é a ideia de um componente <i>root</i> chamado <i>App</i> no topo da árvore de componentes da aplicação. No entanto, como aprenderemos na [parte 6](/pt/part6), há situações em que o componente <i>App</i> não é exatamente a raiz (root), mas é envolto em um componente utilitário apropriado.
 
-### props: passing data to components
+### props: passando dados para componentes
 
-It is possible to pass data to components using so-called [props](https://reactjs.org/docs/components-and-props.html).
+É possível passar dados para componentes usando as chamadas [props](https://reactjs.org/docs/components-and-props.html) (properties [ propriedades ]).
 
-Let's modify the component <i>Hello</i> as follows:
+Vamos modificar o componente <i>Hello</i> da seguinte forma:
 
 ```js
-const Hello = (props) => { // highlight-line
+const Hello = (props) => { // linha destacada
   return (
     <div>
-      <p>Hello {props.name}</p> // highlight-line
+      <p>Olá {props.name}</p> // linha destacada
     </div>
   )
 }
 ```
 
-Now the function defining the component has a parameter props. As an argument, the parameter receives an object, which has fields corresponding to all the "props" the user of the component defines.
+Agora, a função que define o componente tem um parâmetro "props". Como argumento, o parâmetro recebe um objeto, que possui campos correspondentes a todas as "props" que o usuário do componente define.
 
-The props are defined as follows:
+As props são definidas da seguinte forma:
 
 ```js
 const App = () => {
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name='George' /> // highlight-line
-      <Hello name='Daisy' /> // highlight-line
+      <h1>Olá a todos!</h1>
+      <Hello name='George' /> // linha destacada
+      <Hello name='Daisy' /> // linha destacada
     </div>
   )
 }
 ```
 
-There can be an arbitrary number of props and their values can be "hard-coded" strings or the results of JavaScript expressions. If the value of the prop is achieved using JavaScript it must be wrapped with curly braces.
+É possível haver um número arbitrário de props e seus valores podem ser strings "hard-coded" (dados ou estruturas em um código que não podem ser alterados sem modificar manualmente o programa) ou resultados de expressões JavaScript. Se o valor da prop é obtido usando JavaScript, ele deve ser envolvido com chaves.
 
-Let's modify the code so that the component <i>Hello</i> uses two props:
+Vamos modificar o código para que o componente <i>Hello</i> use duas props:
 
 ```js
 const Hello = (props) => {
-  console.log(props) // highlight-line
+  console.log(props) // linha destacada
   return (
     <div>
       <p>
-        Hello {props.name}, you are {props.age} years old // highlight-line
+        Olá {props.name}, você tem {props.age} anos // linha destacada
       </p>
     </div>
   )
 }
 
 const App = () => {
-  const name = 'Peter' // highlight-line
-  const age = 10       // highlight-line
+  const name = 'Peter' // linha destacada
+  const age = 10       // linha destacada
 
   return (
     <div>
-      <h1>Greetings</h1>
-      <Hello name='Maya' age={26 + 10} /> // highlight-line
-      <Hello name={name} age={age} />     // highlight-line
+      <h1>Olá a todos!</h1>
+      <Hello name='Maya' age={26 + 10} /> // linha destacada
+      <Hello name={name} age={age} />     // linha destacada
     </div>
   )
 }
 ```
 
-The props sent by the component <i>App</i> are the values of the variables, the result of the evaluation of the sum expression and a regular string.
+As props enviadas pelo componente <i>App</i> são os valores das variáveis, isto é, o resultado da avaliação da expressão de soma e de uma string comum.
 
-Component <i>Hello</i> also logs the value of the object props to the console.
+O componente <i>Hello</i> também registra o valor do objeto props no console.
 
-I really hope your console was open. If it was not, remember what you promised:
+Eu espero genuinamente que seu console esteja aberto. Se não estiver, lembre-se do que você prometeu:
 
->  <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
+>  <i>Eu prometo manter o console aberto o tempo todo durante este curso e pelo resto da minha vida quando estiver programando aplicações web.</i>
 
-Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make the life so much easier.
+Desenvolvimento de software é difícil. Fica ainda mais difícil se não estiver usando todas as ferramentas possíveis, como o console web e a impressão de depuração com _console.log_. Profissionais usam ambos <i>o tempo todo</i>, e não há razão qualquer para que um iniciante não adote o uso desses métodos maravilhosos que tornarão a vida muito mais fácil.
 
-### Some notes
+### Alguns lembretes
 
-React has been configured to generate quite clear error messages. Despite this, you should, at least in the beginning, advance in **very small steps** and make sure that every change works as desired.
+O React foi configurado para gerar mensagens de erro bastante claras. Mesmo assim, você deve, pelo menos no começo, avançar com **passos bem curtos** e ter certeza de que cada mudança funciona como desejado.
 
-**The console should always be open**. If the browser reports errors, it is not advisable to continue writing more code, hoping for miracles. You should instead try to understand the cause of the error and, for example, go back to the previous working state:
+**O console deve estar sempre aberto**. Se o navegador relatar erros, não é aconselhável continuar escrevendo mais código, esperando por milagres. Em vez disso, você deve tentar entender a causa do erro e, por exemplo, voltar ao estado anterior de funcionamento:
 
-![screenshot of undefined prop error](../../images/1/2a.png)
+![captura de tela de um erro prop indefinido](../../images/1/2a.png)
 
-As we already mentioned, that when programming with React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
+Como já mencionamos, é possível e vantajoso escrever comandos <em>console.log()</em> (que imprimem no console) ao programar com React.
 
-Also, keep in mind that **React component names must be capitalized**. If you try defining a component as follows:
+Além disso, tenha em mente que **os nomes de componentes React devem ser maiusculizados**. Se você tentar definir um componente da seguinte forma:
 
 ```js
 const footer = () => {
   return (
     <div>
-      greeting app created by <a href='https://github.com/mluukkai'>mluukkai</a>
+      Aplicação de Saudações criado por <a href='https://github.com/mluukkai'>mluukkai</a>
     </div>
   )
 }
 ```
 
-and use it like this
+E usá-lo desta forma:
 
 ```js
 const App = () => {
   return (
     <div>
-      <h1>Greetings</h1>
+      <h1>Olá a todos!</h1>
       <Hello name='Maya' age={26 + 10} />
-      <footer /> // highlight-line
+      <footer /> // linha destacada
     </div>
   )
 }
 ```
 
-the page is not going to display the content defined within the Footer component, and instead React only creates an empty [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) element, i.e. the built-in HTML element instead of the custom React element of the same name. If you change the first letter of the component name to a capital letter, then React creates a <i>div</i>-element defined in the Footer component, which is rendered on the page.
+A página não vai exibir o conteúdo definido dentro do componente Footer e, em vez disso, o React cria apenas um elemento [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) vazio, ou seja, o elemento HTML incorporado em vez do elemento React personalizado com o mesmo nome. Se você mudar a primeira letra do nome do componente para maiúsculo, o React cria um elemento <i>div</i> definido no componente Footer, que é renderizado na página.
 
-Note that the content of a React component (usually) needs to contain **one root element**. If we, for example, try to define the component <i>App</i> without the outermost <i>div</i>-element:
+Note que o conteúdo de um componente React (geralmente) precisa conter **um elemento raiz (root)**. Se, por exemplo, tentarmos definir o componente <i>App</i> sem o elemento <i>div</i> externo:
 
 ```js
 const App = () => {
   return (
-    <h1>Greetings</h1>
+    <h1>Olá a todos!</h1>
     <Hello name='Maya' age={26 + 10} />
     <Footer />
   )
 }
 ```
 
-the result is an error message.
+o resultado é uma mensagem de erro.
 
-![multiple root elements error screenshot](../../images/1/3c.png)
+![captura de tela de múltiplos erros de elementos-raiz](../../images/1/3c.png)
 
-Using a root element is not the only working option. An <i>array</i> of components is also a valid solution:
+Usar um elemento raiz não é a única opção viável. Um <i>array</i> (vetor) de componentes também é uma solução válida:
 
 ```js
 const App = () => {
   return [
-    <h1>Greetings</h1>,
+    <h1>Olá a todos!</h1>,
     <Hello name='Maya' age={26 + 10} />,
     <Footer />
   ]
 }
 ```
 
-However, when defining the root component of the application this is not a particularly wise thing to do, and it makes the code look a bit ugly.
+Porém, definir o componente raiz da aplicação não é algo particularmente sábio a se fazer, e deixa o código com uma aparência um pouco feia.
 
-Because the root element is stipulated, we have "extra" div elements in the DOM tree. This can be avoided by using [fragments](https://reactjs.org/docs/fragments.html#short-syntax), i.e. by wrapping the elements to be returned by the component with an empty element:
+Por conta do elemento raiz ser "estipulado", temos elementos div "extras" na árvore DOM. Isso pode ser evitado usando [fragmentos](https://reactjs.org/docs/fragments.html#short-syntax), ou seja, envolvendo os elementos a serem retornados pelo componente com um elemento vazio:
 
 ```js
 const App = () => {
@@ -422,7 +422,7 @@ const App = () => {
 
   return (
     <>
-      <h1>Greetings</h1>
+      <h1>Olá a todos!</h1>
       <Hello name='Maya' age={26 + 10} />
       <Hello name={name} age={age} />
       <Footer />
@@ -431,18 +431,18 @@ const App = () => {
 }
 ```
 
-It now compiles successfully, and the DOM generated by React no longer contains the extra div element.
+Agora, a aplicação compila com sucesso, e a DOM gerada pelo React não contém mais o elemento "div" extra.
 
-### Do not render objects
+### Não renderize objetos
 
-Consider an application that prints the names and ages of our friends on the screen:
+Considere uma aplicação que imprime os nomes e idades de nossos amigos na tela:
 
 ```js
 const App = () => {
-  const friends = [
-    { name: 'Peter', age: 4 },
-    { name: 'Maya', age: 10 },
-  ]
+  const friends = [ 
+        { name: 'Peter', age: 4 },
+        { name: 'Maya', age: 10 },
+    ]
 
   return (
     <div>
@@ -455,40 +455,40 @@ const App = () => {
 export default App
 ```
 
-However, nothing appears on the screen. I've been trying to find a problem in the code for 15 minutes, but I can't figure out where the problem could be.
+No entanto, nada aparece na tela. Venho tentando encontrar o problema no código há 15 minutos, mas não consigo descobrir onde o problema poderia estar.
 
-I finally remember the promise we made
+Eu finalmente lembro da promessa que fizemos:
 
-> <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
+> <i>Eu prometo manter o console aberto o tempo todo durante este curso e pelo resto da minha vida quando estiver programando aplicações web.</i>
 
-The console screams in red:
+O console grita em vermelho:
 
 ![](../../images/1/34new.png)
 
-The core of the problem is <i>Objects are not valid as a React child</i>, i.e. the application tries to render <i>objects</i> and it fails again.
+O núcleo do problema é que: <i>Objetos não são válidos como elementos-filho do React</i>, ou seja, a aplicação tenta renderizar <i>objetos</i> e falha novamente.
 
-The code tries to render the information of one friend as follows
+O código tenta renderizar as informações de um "friend" da seguinte forma
 
 ```js
 <p>{friends[0]}</p>
 ```
 
-and this causes a problem because the item to be rendered in the braces is an object.
+e isso causa um problema, porque o item a ser renderizado dentro das chaves é um objeto.
 
 ```js
 { name: 'Peter', age: 4 }
 ```
 
-In React, the individual things rendered in braces must be primitive values, such as numbers or strings.
+Em React, elementos individuais renderizadas dentro das chaves devem ser valores primitivos, como números ou strings.
 
-The fix is ​​as follows
+A solução é a seguinte:
 
 ```js
 const App = () => {
-  const friends = [
-    { name: 'Peter', age: 4 },
-    { name: 'Maya', age: 10 },
-  ]
+  const friends = [ 
+        { name: 'Peter', age: 4 },
+        { name: 'Maya', age: 10 },
+    ]
 
   return (
     <div>
@@ -501,21 +501,21 @@ const App = () => {
 export default App
 ```
 
-So now the friend's name is rendered separately inside the curly braces
+Agora o nome do amigo é renderizado separadamente dentro das chaves:
 
 ```js
 {friends[0].name}
 ```
 
-and age
+Também a idade:
 
 ```js
 {friends[0].age}
 ```
 
-After correcting the error, you should clear the console error messages by pressing Ø and then reload the page content and make sure that no error messages are displayed.
+Após corrigir o erro, limpe as mensagens de erro do console pressionando Ø e, em seguida, recarrege o conteúdo da página e garanta que não haja mensagens de erro exibidas.
 
-A small additional note to the previous one. React also allows arrays to be rendered <i>if</i> the array contains values ​​that are eligible for rendering (such as numbers or strings). So the following program would work, although the result might not be what we want:
+Uma adição ao lembrete anterior: O React também permite que matrizes sejam renderizadas se elas contêm valores elegíveis para renderização (como números ou strings). Então, o seguinte programa funcionaria, embora o resultado pudesse não ser o que queremos:
 
 ```js
 const App = () => {
@@ -529,9 +529,17 @@ const App = () => {
 }
 ```
 
-In this part, it is not even worth trying to use the direct rendering of the tables, we will come back to it in the next part.
+Nesta parte, nem vale a pena tentar usar a renderização direta de tabelas. Voltaremos a discutir isso na próxima parte.
 
 </div>
+
+
+
+
+### SEM REVISÃO ^^^^^^^^^^
+
+
+
 
 <div class="tasks">
   <h3>Exercises 1.1.-1.2.</h3>

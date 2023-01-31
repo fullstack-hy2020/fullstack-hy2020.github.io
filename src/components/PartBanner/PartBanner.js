@@ -71,7 +71,7 @@ const partNameTranslations = {
   ],
   pt: [
     'Fundamentos de aplicações web',
-    'Introdução ao React',
+    'Introdução à biblioteca React',
     'Comunicação com o servidor',
     'Programando um servidor com NodeJS e Express',
     'Teste de servidores Express e Administração de Usuários',
