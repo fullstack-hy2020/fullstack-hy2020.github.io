@@ -45,6 +45,8 @@ ja lisätään tiedoston <i>package.json</i> osaan <i>scripts</i> rivi
 
 Käynnistetään JSON Server komennolla _npm run server_.
 
+### Datan hakeminen palvelimelta
+
 Tehdään sitten tuttuun tapaan <i>axiosia</i> hyödyntävä backendistä dataa hakeva metodi tiedostoon <i>services/notes.js</i>:
 
 ```js
@@ -287,6 +289,8 @@ Yleisesti ottaen ESLint-virheiden disabloiminen ei ole hyvä idea, joten vaikka 
 
 Lisää hookien riippuvuuksien määrittelyn tarpeesta on [Reactin dokumentaatiossa](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
 
+### Datan lähettäminen palvelimelle
+
 Voimme toimia samoin myös uuden muistiinpanon luomisen suhteen. Laajennetaan palvelimen kanssa kommunikoivaa koodia:
 
 ```js
@@ -307,7 +311,7 @@ const createNew = async (content) => {
 
 export default {
   getAll,
-  createNew,
+  createNew, // highlight-line
 }
 ```
 
@@ -340,31 +344,38 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-Koska backend generoi muistiinpanoille id:t, muutetaan action <em>createNote</em> seuraavaan muotoon:
+Koska backend generoi muistiinpanoille id:t, muutetaan tiedostossa <i>notesReducer.js</i> määritelty action creator <i>createNote</i> seuraavaan muotoon:
 
 ```js
-createNote(state, action) {
-  state.push(action.payload)
-}
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    createNote(state, action) {
+      state.push(action.payload) // highlight-line
+    },
+    // ..
+  },
+})
 ```
 
 Muistiinpanojen tärkeyden muuttaminen olisi mahdollista toteuttaa samalla periaatteella, eli tehdä palvelimelle ensin asynkroninen metodikutsu ja sen jälkeen dispatchata sopiva action.
 
-Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) branchissa <i>part6-3</i>.
+Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) branchissa <i>part6-4</i>.
 
 </div>
 
 <div class="tasks">
 
-### Tehtävät 6.13.-6.14.
+### Tehtävät 6.14.-6.15.
 
-#### 6.13 anekdootit ja backend, step1
+#### 6.14 anekdootit ja backend, step1
 
 Hae sovelluksen käynnistyessä anekdootit JSON Serverillä toteutetusta backendistä.
 
 Backendin alustavan sisällön saat esim. [täältä](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
-#### 6.14 anekdootit ja backend, step2
+#### 6.15 anekdootit ja backend, step2
 
 Muuta uusien anekdoottien luomista siten, että anekdootit talletetaan backendiin.
 
@@ -442,6 +453,10 @@ Sisemmässä funktiossaan eli <i>asynkronisessa actionissa</i> operaatio hakee e
 Komponentti <i>App</i> voidaan nyt määritellä seuraavasti:
 
 ```js
+import { initializeNotes } from './reducers/noteReducer' // highlight-line
+
+// ...
+
 const App = () => {
   const dispatch = useDispatch()
 
@@ -473,7 +488,6 @@ const noteSlice = createSlice({
   name: 'notes',
   initialState,
   reducers: {
-    // highlight-start
     toggleImportanceOf(state, action) {
       const id = action.payload
 
@@ -494,7 +508,7 @@ const noteSlice = createSlice({
     setNotes(state, action) {
       return action.payload
     }
-    // highlight-end
+    // createNote definition removed from here!
   },
 })
 
@@ -519,9 +533,9 @@ export const createNote = content => {
 export default noteSlice.reducer
 ```
 
-Periaate on jälleen sama. Ensin suoritetaan asynkroninen operaatio, ja sen valmistuttua <i>dispatchataan</i> storen tilaa muuttava action. Redux Toolkit tarjoaa monia työkaluja asynkronisen tilanhallinnan helpottamiseksi. Tähän käyttötarkoitukseen soveltuvat mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktio ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) -API.
+Periaate on jälleen sama. Ensin suoritetaan asynkroninen operaatio, ja sen valmistuttua <i>dispatchataan</i> storen tilaa muuttava action.
 
-Komponentti <i>NewNote</i> muuttuu seuraavasti:
+Komponentti <i>NewNote</i> yksinkertaistuu seuraavasti:
 
 ```js
 const NewNote = () => {
@@ -577,27 +591,29 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) branchissa <i>part6-4</i>.
+Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) branchissa <i>part6-5</i>.
+
+Redux Toolkit tarjoaa myös hieman kehittyneempiä työkaluja asynkronisen tilanhallinnan helpottamiseksi, esim mm. [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk)-funktion ja [RTK Query](https://redux-toolkit.js.org/rtk-query/overview) -API:n. Yksinkertaisissa sovelluksissa näiden tuoma hyöty lienee kuitenkin vähäinen.
 
 </div>
 
 <div class="tasks">
 
-### Tehtävät 6.15.-6.18.
+### Tehtävät 6.16.-6.19.
 
-#### 6.15 anekdootit ja backend, step3
+#### 6.16 anekdootit ja backend, step3
 
 Muuta Redux-storen alustus tapahtumaan Redux Thunk -kirjaston avulla toteutettuun asynkroniseen actioniin.
 
-#### 6.16 anekdootit ja backend, step4
+#### 6.17 anekdootit ja backend, step4
 
 Muuta myös uuden anekdootin luominen tapahtumaan Redux Thunk -kirjaston avulla toteutettuihin asynkronisiin actioneihin.
 
-#### 6.17 anekdootit ja backend, step5
+#### 6.18 anekdootit ja backend, step5
 
 Äänestäminen ei vielä talleta muutoksia backendiin. Korjaa tilanne Redux Thunk -kirjastoa hyödyntäen.
 
-#### 6.18 anekdootit ja backend, step6
+#### 6.19 anekdootit ja backend, step6
 
 Notifikaatioiden tekeminen on nyt hieman ikävää, sillä se edellyttää kahden actionin tekemistä ja _setTimeout_-funktion käyttöä:
 

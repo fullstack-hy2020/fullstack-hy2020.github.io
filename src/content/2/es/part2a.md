@@ -401,7 +401,7 @@ import ReactDOM from 'react-dom'
 
 [importan](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) dos módulos, lo que les permite ser utilizados en ese archivo. El módulo <i>React</i> se coloca en una variable llamada _React_ y <i>React-DOM</i> en la variable _ReactDOM_.
 
-Muevamos nuestro componente <i>Note</i> a su propio módulo.
+Movamos nuestro componente <i>Note</i> a su propio módulo.
 
 En aplicaciones más pequeñas, los componentes generalmente se colocan en un directorio llamado <i>components</i>, que a su vez se ubica dentro del directorio <i>src</i>. La convención es nombrar el archivo después del componente.
 
