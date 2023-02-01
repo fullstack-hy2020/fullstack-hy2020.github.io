@@ -155,7 +155,7 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 
 Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.
 
-Let's make a function <i>addANote</i> to the file <i>requests.js</i> for saving new notes:
+Let's make a function <i>createNote</i> to the file <i>requests.js</i> for saving new notes:
 
 ```js
 import axios from 'axios'
@@ -363,7 +363,7 @@ The application should work in such a way that if there are problems communicati
 
 You can find [here](https://react-query-v3.tanstack.com/guides/queries) info how to detect the possible errors.
 
-You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a requesst fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
+You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a request fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
 
 
 ```js
