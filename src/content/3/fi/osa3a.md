@@ -659,7 +659,7 @@ Ennen toimintalogiikan viimeistelyä varmistetaan ensin Postmanilla, että lähe
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
-![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15e.png)
+![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15new.png)
 
 **HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
 
