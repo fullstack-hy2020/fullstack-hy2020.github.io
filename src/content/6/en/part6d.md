@@ -351,7 +351,7 @@ Most React applications need not only a way to temporarily store the served data
 
 ### Exercises 6.19.-6.21.
 
-Now let's make a new version of the anecdote application that uses the React Query library. Take [this project]((https://github.com/fullstack-hy2020/query-anecdotes)) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.
+Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.
 
 #### Exercise 6.19
 
