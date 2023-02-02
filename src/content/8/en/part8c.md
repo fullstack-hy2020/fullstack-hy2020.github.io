@@ -11,10 +11,10 @@ We will now add user management to our application, but let's first start using 
 
 ### Mongoose and Apollo
 
-Install mongoose:
+Install Mongoose and dotenv:
 
 ```bash
-npm install mongoose
+npm install mongoose dotenv
 ```
 
 We will imitate what we did in parts [3](/en/part3/saving_data_to_mongo_db) and [4](/en/part4/structure_of_backend_application_introduction_to_testing).
@@ -55,11 +55,12 @@ We also included a few validations. _required: true_, which makes sure that a va
 We can get the application to mostly work with the following changes: 
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('@apollo/server')
+// ...
 const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
 const Person = require('./models/person')
 
-const MONGODB_URI = 'mongodb+srv://databaseurlhere'
+const MONGODB_URI = process.env.MONGODB_URI
 
 console.log('connecting to', MONGODB_URI)
 
@@ -121,9 +122,10 @@ allPersons: async (root, args) => {
 Apollo server waits for the promise to resolve, and returns the result. So Apollo works roughly like this:
 
 ```js
-Person.find({}).then( result => {
-  // return the result 
-})
+allPersons: async (root, args) => {
+  const result = await Person.find({})
+  return result
+}
 ```
 
 Let's complete the _allPersons_ resolver so it takes the optional parameter _phone_ into account:
@@ -155,7 +157,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validation
 
-As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling _try/catch_ block to the _save_ method. When we end up in the catch, we throw a suitable exception: 
+As well as in GraphQL, the input is now validated using the validations defined in the mongoose schema. For handling possible validation errors in the schema, we must add an error-handling _try/catch_ block to the _save_ method. When we end up in the catch, we throw a exception [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with error code : 
 
 ```js
 Mutation: {
@@ -166,8 +168,12 @@ Mutation: {
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving person failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 // highlight-end
@@ -182,8 +188,12 @@ Mutation: {
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 // highlight-end
@@ -192,6 +202,8 @@ Mutation: {
     }
 }
 ```
+
+We have also added the Mongoose error and the data that caused the error to the <i>extensions</i> object that is used to convey more info about the cause of the error to the caller.
 
 The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 

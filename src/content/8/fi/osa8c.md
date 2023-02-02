@@ -11,10 +11,10 @@ Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin k�
 
 ### Mongoose ja Apollo
 
-Otetaan käyttöön Mongoose:
+Otetaan käyttöön Mongoose ja asennetaan samalla dotenv:
 
 ```bash
-npm install mongoose
+npm install mongoose dotenv
 ```
 
 Tehdään osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
@@ -54,11 +54,14 @@ Mukana on myös muutama validointi. Arvon olemassaolon takaava _required: true_ 
 Saamme sovelluksen jo suurilta osin toimimaan seuraavilla muutoksilla:
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('apollo-server')
+// ...
+
+
 const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
 const Person = require('./models/person')
 
-const MONGODB_URI = 'mongodb+srv://databaseurlhere'
+const MONGODB_URI = process.env.MONGODB_URI
 
 console.log('connecting to', MONGODB_URI)
 
@@ -70,7 +73,7 @@ mongoose.connect(MONGODB_URI)
     console.log('error connection to MongoDB:', error.message)
   })
 
-const typeDefs = gql`
+const typeDefs = `
   ...
 `
 
@@ -109,21 +112,21 @@ Muutokset ovat melko suoraviivaisia. Huomio kiinnittyy pariin seikkaan. Kuten mu
 
 Toinen huomionarvoinen seikka on se, että resolverifunktiot palauttavat nyt <i>promisen</i>, aiemminhan ne palauttivat aina normaaleja oliota. Kun resolveri palauttaa promisen, Apollo server [osaa lähettää vastaukseksi](https://www.apollographql.com/docs/apollo-server/data/resolvers/#return-values) sen arvon mihin promise resolvoituu.
 
-
 Eli esimerkiksi jos seuraava resolverifunktio suoritetaan,
 
 ```js
 allPersons: async (root, args) => {
   return Person.find({})
-},
+}
 ```
 
 odottaa Apollo server promisen valmistumista ja lähettää promisen vastauksen kyselyn tekijälle. Apollo toimii siis suunnilleen seuraavasti:
 
 ```js
-Person.find({}).then( result => {
-  // palautetaan kyselyn tuloksena result
-})
+allPersons: async (root, args) => {
+  const result = await Person.find({})
+  return result
+}
 ```
 
 Täydennetään vielä resolveri _allPersons_ ottamaan huomioon optionaalinen filtterinä toimiva parametri _phone_:
@@ -155,7 +158,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validoinnit
 
-GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus, joka on tällä kertaa [UserInputError](https://www.apollographql.com/docs/apollo-server/data/errors/):
+GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi   [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) *BAD\_USER\_INPUT* varustetu poikkeus [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors):
 
 ```js
 Mutation: {
@@ -166,8 +169,12 @@ Mutation: {
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving person failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 // highlight-end
@@ -182,8 +189,12 @@ Mutation: {
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 // highlight-end
@@ -192,6 +203,8 @@ Mutation: {
     }
 }
 ```
+
+Mongoosen virheen tiedot ja ongelman aiheuttanut data on nyt liitetty poikkeuksen konfiguraatio-olioon <i>extensions</i>, näin ne saadaan välitettyä kutsujalle.
 
 Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
