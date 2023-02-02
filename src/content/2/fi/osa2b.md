@@ -43,7 +43,7 @@ const App = (props) => {
 }
 ```
 
-Voimme vielä havainnollsitaa tilanteen React Developer Toolsin avulla:
+Voimme vielä havainnollistaa tilanteen React Developer Toolsin avulla:
 
 ![](../../images/2/30.png)
 

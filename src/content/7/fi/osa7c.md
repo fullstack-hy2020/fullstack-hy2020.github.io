@@ -31,14 +31,14 @@ Asennetaan kirjasto:
 npm install react-bootstrap
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään Bootstrapin CSS-määrittelyt lataava rivi:
+Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään [Bootstrapin CSS-määrittelyt](https://react-bootstrap.github.io/getting-started/introduction#stylesheets) lataava rivi:
 
 ```js
 <head>
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
     crossorigin="anonymous"
   />
   // ...
@@ -66,6 +66,8 @@ const App = () => {
 Sovelluksen ulkoasu muuttuu siten, että sisältö ei ole enää yhtä kiinni selaimen reunoissa:
 
 ![](../../images/7/6ea.png)
+
+#### Taulukko
 
 Muutetaan seuraavaksi komponenttia <i>Notes</i> siten, että se renderöi muistiinpanojen listan [taulukkona](https://getbootstrap.com/docs/4.1/content/tables/). React-Bootstrap tarjoaa valmiin komponentin [Table](https://react-bootstrap.github.io/components/table/), joten CSS-luokan käyttöön ei ole tarvetta.
 
@@ -132,7 +134,8 @@ let Login = (props) => {
         </Form.Group>
       </Form>
     </div>
-)}
+  )
+}
 ```
 
 Importoitavien komponenttien määrä kasvaa:
@@ -190,7 +193,7 @@ ja renderöidään viesti Bootstrapin [Alert](https://getbootstrap.com/docs/4.1/
 </div>
 ```
 
-#### Navigaatiorakenne
+#### Navigaatiomenu
 
 Muutetaan vielä lopuksi sovelluksen navigaatiomenu käyttämään Bootstrapin [Navbaria](https://getbootstrap.com/docs/4.1/components/navbar/). Tähänkin React-Bootstrap tarjoaa [valmiit komponentit](https://react-bootstrap.github.io/components/navbar/#navbars-mobile-friendly). Dokumentaatio on hieman kryptistä, mutta trial and error johtaa lopulta toimivaan ratkaisuun:
 
@@ -245,15 +248,6 @@ Asennetaan kirjasto:
 npm install @mui/material @emotion/react @emotion/styled
 ```
 
-Lisätään sitten sovelluksen tiedostoon <i>public/index.html</i> tagin <i>head</i> sisään MaterialUI:n CSS-määrittelyt lataava rivi:
-
-```js
-<head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-  // ...
-</head>
-```
-
 Tehdään nyt MaterialUI:n avulla koodiin suunnilleen samat muutokset kuin mitä teimme Bootstrapilla.
 
 Renderöidään koko sovelluksen sisältö komponentin [Container](https://material-ui.com/components/container/) sisälle:
@@ -270,6 +264,8 @@ const App = () => {
   )
 }
 ```
+
+#### Taulukko
 
 Aloitetaan komponentista <i>Notes</i> ja renderöidään muistiinpanojen lista [taulukkona](https://mui.com/material-ui/react-table/#simple-table):
 
@@ -351,7 +347,7 @@ const Login = (props) => {
 }
 ```
 
-Lopputulos on:
+Lopputulos on elegantti:
 
 ![](../../images/7/64ea.png)
 
@@ -379,9 +375,9 @@ Alert on ulkoasultaan tyylikäs:
 
 ![](../../images/7/65ea.png)
 
-#### Navigaatiorakenne
+#### Navigaatiomenu
 
-Navigaatiorakenne toteutetaan komponentin [AppBar](https://mui.com/components/app-bar/) avulla
+Navigaatiomenu toteutetaan komponentin [AppBar](https://mui.com/components/app-bar/) avulla
 
 Jos sovelletaan suoraan dokumentaation esimerkkiä  
 
@@ -499,7 +495,6 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja:
 - <https://semantic-ui.com/>
 - <https://mantine.dev/>
 - <https://react.fluentui.dev/>
-- <https://storybook.js.org>
 - <https://www.primefaces.org/primereact/>
 - <https://v2.grommet.io>
 - <https://blueprintjs.com>
@@ -507,7 +502,6 @@ Luetellaan tässä kaikesta huolimatta muitakin UI-frameworkeja:
 - <https://www.radix-ui.com/>
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
-- <https://www.radix-ui.com/>
 
 Jos oma suosikkisi ei ole mukana, tee pull request!
 

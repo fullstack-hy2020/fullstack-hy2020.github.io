@@ -155,7 +155,7 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 
 Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.
 
-Let's make a function <i>addANote</i> to the file <i>requests.js</i> for saving new notes:
+Let's make a function <i>createNote</i> to the file <i>requests.js</i> for saving new notes:
 
 ```js
 import axios from 'axios'
@@ -332,7 +332,7 @@ const App = () => {
 }
 ```
 
-If you put a console.log statement to the code, you can see form browser console how often React Query causes the application to be re-rendered. The rule of thumb is that rerendering happens at least whenever there is a need for it, i.e. when the state of the query changes. You can read more about it e.g. [here](https://tkdodo.eu/blog/react-query-render-optimizations).
+If you put a console.log statement to the code, you can see from browser console how often React Query causes the application to be re-rendered. The rule of thumb is that rerendering happens at least whenever there is a need for it, i.e. when the state of the query changes. You can read more about it e.g. [here](https://tkdodo.eu/blog/react-query-render-optimizations).
 
 The code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-3) in the branch <i>part6-3</i>.
 
@@ -351,7 +351,7 @@ Most React applications need not only a way to temporarily store the served data
 
 ### Exercises 6.19.-6.21.
 
-Now let's make a new version of the anecdote application that uses the React Query library. Take [this project]((https://github.com/fullstack-hy2020/query-anecdotes)) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.
+Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.
 
 #### Exercise 6.19
 
@@ -363,7 +363,7 @@ The application should work in such a way that if there are problems communicati
 
 You can find [here](https://react-query-v3.tanstack.com/guides/queries) info how to detect the possible errors.
 
-You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a requesst fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
+You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a request fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
 
 
 ```js
@@ -442,13 +442,13 @@ const App = () => {
 export default App
 ```
 
-The hook [useReducer](https://beta.reactjs.org/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reduser function that handles state changes, and the initial value of the state:
+The hook [useReducer](https://beta.reactjs.org/reference/react/useReducer) provides a mechanism to create a state for an application. The parameter for creating a state is the reducer function that handles state changes, and the initial value of the state:
 
 ```js
 const [counter, counterDispatch] = useReducer(counterReducer, 0)
 ```
 
-The reduser function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:
+The reducer function that handles state changes is similar to Redux's reducers, i.e. the function gets as parameters the current state and the action that changes the state. The function returns the new state updated based on the type and possible contents of the action:
 
 ```js
 const counterReducer = (state, action) => {
