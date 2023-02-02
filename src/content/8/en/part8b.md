@@ -109,7 +109,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 ### Making queries
 
-We are ready to implement the main view of the application, which shows a list of phone numbers. 
+We are ready to implement the main view of the application, which shows a list of person's name and phone number. 
 
 Apollo Client offers a few alternatives for making [queries](https://www.apollographql.com/docs/react/data/queries/). 
 Currently, the use of the hook function [useQuery](https://www.apollographql.com/docs/react/api/react/hooks/#usequery) is the dominant practice.

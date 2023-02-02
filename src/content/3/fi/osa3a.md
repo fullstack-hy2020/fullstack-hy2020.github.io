@@ -393,7 +393,10 @@ Voimme käynnistää ohjelman <i>nodemonilla</i> seuraavasti:
 node_modules/.bin/nodemon index.js
 ```
 
+Huom: komennon tämä muoto ei välttämättä toimi Windowsilla. Se ei kuitenkaan haittaa sillä 5 sentin päästä kerrotaan komennosta parempi muoto.
+
 Sovelluksen koodin muutokset aiheuttavat nyt automaattisen palvelimen uudelleenkäynnistymisen. Kannattaa huomata, että vaikka palvelin uudelleenkäynnistyy automaattisesti, selain täytyy kuitenkin refreshata, sillä toisin kuin Reactin yhteydessä, meillä ei nyt ole eikä tässä skenaariossa (jossa palautamme JSON-muotoista dataa) edes voisikaan olla selainta päivittävää [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) -toiminnallisuutta.
+
 
 Komento on ikävä, joten määritellään sitä varten <i>npm-skripti</i> tiedostoon <i>package.json</i>:
 
@@ -656,7 +659,7 @@ Ennen toimintalogiikan viimeistelyä varmistetaan ensin Postmanilla, että lähe
 
 Sovellus tulostaa lähetetyn vastaanottamansa datan terminaaliin:
 
-![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15e.png)
+![Konsoliin tulostuu palvelimen vastaanottama json-objekti](../../images/3/15new.png)
 
 **HUOM:** Kun ohjelmoit backendia, <i>pidä sovellusta suorittava konsoli koko ajan näkyvillä</i>. Nodemonin ansiosta sovellus käynnistyy uudelleen jos koodiin tehdään muutoksia. Jos seuraat konsolia, huomaat välittömästi jos sovelluksen koodiin tulee virhe:
 

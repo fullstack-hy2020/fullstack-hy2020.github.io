@@ -416,13 +416,7 @@ const NewNote = () => {
 }
 ```
 
-Molemmat komponentit dispatchaisivat ainoastaan actionin välittämättä siitä, että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia. Tämän kaltaisten <i>asynkronisten actioneiden</i> käyttö onnistuu [Redux Thunk](https://github.com/reduxjs/redux-thunk)-kirjaston avulla. Kirjaston käyttö ei vaadi ylimääräistä konfiguraatiota, kun Redux-store on luotu Redux Toolkitin <em>configureStore</em>-funktiolla.
-
-Asennetaan kirjasto:
-
-```
-npm install redux-thunk
-```
+Molemmat komponentit dispatchaisivat ainoastaan actionin välittämättä siitä, että taustalla tapahtuu todellisuudessa palvelimen kanssa tapahtuvaa kommunikointia. Tämän kaltaisten <i>asynkronisten actioneiden</i> käyttö onnistuu [Redux Thunk](https://github.com/reduxjs/redux-thunk)-kirjaston avulla. Kirjaston käyttö ei vaadi ylimääräistä konfiguraatiota eikä asennusta, kun Redux-store on luotu Redux Toolkitin <em>configureStore</em>-funktiolla.
 
 Redux Thunkin ansiosta on mahdollista määritellä <i>action creatoreja</i>, jotka palauttavat objektin sijaan funktion. Tämän funktion parametreina ovat Redux-storen <em>dispatch</em>- ja <em>getState</em>-metodi. Tämän ansiosta on mahdollista toteuttaa asynkronisia action creatoreja, jotka ensin odottavat jonkin asynkronisen toimenpiteen valmistumista ja vasta sen jälkeen dispatchaavat varsinaisen actionin.
 

@@ -149,7 +149,7 @@ The first rule of frontend web development:
 
 > <i>keep the console open all the time</i>
 
-Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and the for the rest of my life when I'm doing web development. 
+Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and for the rest of my life when I'm doing web development. 
 
 It is also possible to render dynamic content inside of a component.
 
@@ -343,7 +343,7 @@ I really hope your console was open. If it was not, remember what you promised:
 
 >  <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
 
-Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make the life so much easier.
+Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make life so much easier.
 
 ### Some notes
 
@@ -353,7 +353,7 @@ React has been configured to generate quite clear error messages. Despite this, 
 
 ![screenshot of undefined prop error](../../images/1/2a.png)
 
-As we already mentioned, that when programming with React it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
+As we already mentioned, when programming with React, it is possible and worthwhile to write <em>console.log()</em> commands (which print to the console) within your code.
 
 Also, keep in mind that **React component names must be capitalized**. If you try defining a component as follows:
 
