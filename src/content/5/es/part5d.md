@@ -576,6 +576,8 @@ El segundo comando comprueba que el texto del botón haya cambiado a <i>make not
 
 Las pruebas y el código de interfaz actual se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), rama <i>part5-9</i>.
 
+### Prueba de inicio de sesión fallida
+
 Hagamos una prueba para asegurarnos de que un intento de inicio de sesión falla si la contraseña es incorrecta.
 
 Cypress ejecutará todas las pruebas cada vez de forma predeterminada y, a medida que aumenta el número de pruebas, comienza a consumir bastante tiempo.
