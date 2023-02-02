@@ -902,8 +902,10 @@ module.exports = defineConfig({
     setupNodeEvents(on, config) {
     },
     baseUrl: 'http://localhost:3000',
-    BACKEND: 'http://localhost:3001/api' // highlight-line
   },
+  env: {
+    BACKEND: 'http://localhost:3001/api' // highlight-line
+  }
 })
 ```
 
@@ -912,14 +914,15 @@ Let's replace all the backend addresses from the tests in the following way
 ```js
 describe('Note ', function() {
   beforeEach(function() {
-    cy.visit('')
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/testing/reset`) // highlight-line
+
+    cy.request('POST', `${Cypress.env('BACKEND')}/testing/reset`) // highlight-line
     const user = {
       name: 'Matti Luukkainen',
       username: 'mluukkai',
       password: 'secret'
     }
-    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/users`, user) // highlight-line
+    cy.request('POST', `${Cypress.env('BACKEND')}/users`, user) // highlight-line
+    cy.visit('')
   })
   // ...
 })
