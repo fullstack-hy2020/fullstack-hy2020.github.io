@@ -35,13 +35,11 @@ We'll start with the following code for our application:
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
 const client = new ApolloClient({
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'http://localhost:4000',
-  })
 })
 
 const query = gql`
@@ -89,15 +87,12 @@ import App from './App'
 import {
   ApolloClient,
   ApolloProvider, // highlight-line
-  HttpLink,
   InMemoryCache,
 } from '@apollo/client'
 
 const client = new ApolloClient({
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'http://localhost:4000',
-  }),
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -750,8 +745,6 @@ It looks bleak, but it works:
 Surprisingly, when a person's number is changed, the new number automatically appears on the list of persons rendered by the <i>Persons</i> component. 
 This happens because each person has an identifying field of type <i>ID</i>, so the person's details saved to the cache update automatically when they are changed with the mutation. 
 
-The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
-
 Our application still has one small flaw. If we try to change the phone number for a name which does not exist, nothing seems to happen. 
 This happens because if a person with the given name cannot be found, 
 the mutation response is <i>null</i>:
@@ -820,7 +813,7 @@ useEffect(() => {
 
 However, this solution does not work if the _notify_ function is not wrapped to a [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback) function.  If it's not, this results in an endless loop. When the _App_ component is rerendered after a notification is removed, a <i>new version</i> of _notify_ gets created which causes the effect function to be executed, which causes a new notification, and so on, and so on...
 
-The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5) branch <i>part8-5</i>.
+The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4) branch <i>part8-4</i>.
 
 ### Apollo Client and the applications state
 

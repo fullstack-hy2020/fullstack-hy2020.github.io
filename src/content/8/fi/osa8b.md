@@ -31,13 +31,11 @@ Aloitetaan seuraavalla ohjelmarungolla.
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-import { ApolloClient, HttpLink, InMemoryCache, gql } from '@apollo/client'
+import { ApolloClient, InMemoryCache, gql } from '@apollo/client'
 
 const client = new ApolloClient({
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'http://localhost:4000',
-  })
 })
 
 const query = gql`
@@ -85,15 +83,12 @@ import App from './App'
 import {
   ApolloClient,
   ApolloProvider, // highlight-line
-  HttpLink,
   InMemoryCache,
 } from '@apollo/client'
 
 const client = new ApolloClient({
+  uri: 'http://localhost:4000',
   cache: new InMemoryCache(),
-  link: new HttpLink({
-    uri: 'http://localhost:4000',
-  }),
 })
 
 ReactDOM.createRoot(document.getElementById('root')).render(
@@ -723,8 +718,6 @@ Ulkoasu on karu mutta toimiva:
 
 Kun numero muutetaan, päivittyy se hieman yllättäen automaattisesti komponentin <i>Persons</i> renderöimään nimien ja numeroiden listaan. Tämä johtuu siitä, että koska henkilöillä on identifioiva, tyyppiä <i>ID</i> oleva kenttä, päivittyy henkilö välimuistissa uusilla tiedoilla päivitysoperaation yhteydessä. 
 
-Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
-
 Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimeen liittyvän puhelinnumeron, ei mitään näytä tapahtuvan. Syynä tälle on se, että jos nimeä vastaavaa henkilöä ei löydy, vastataan kyselyyn <i>null</i>:
 
 ![](../../images/8/23ea.png)
@@ -757,7 +750,7 @@ const PhoneForm = ({ setError }) => {
 }
 ```
 
-Jos henkilöä ei löytynyt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan jälleen useEffect-hookin avulla, eli virheviesti halutaan asettaa ainoastaan jos mutaation tulos _result.data_ muuttuu.
+Jos henkilöä ei löytynyt, eli kyselyn tulos _result.data.editNumber_ on _null_, asettaa komponentti propseina saamansa callback-funktion avulla sopivan virheilmoituksen. Virheilmoituksen asettamista kontrolloidaan useEffect-hookin avulla, eli virheviesti halutaan asettaa ainoastaan jos mutaation tulos _result.data_ muuttuu.
 
 useEffect aiheuttaa ESLint-virheilmoituksen:
 
@@ -789,7 +782,7 @@ useEffect(() => {
 
 Tämä ratkaisu ei kuitenkaan toimi, ellei _setError_-funktiota ole määritelty [useCallback](https://reactjs.org/docs/hooks-reference.html#usecallback)-funktioon käärittynä. Jos näin ei tehdä, seurauksena on ikuinen luuppi, sillä aina kun komponentti _App_ renderöidään uudelleen notifikaation poistamisen jälkeen, syntyy <i>uusi versio</i> funktiosta _setError_ ja se taas aiheuttaa efektifunktion uudelleensuorituksen ja taas uuden notifikaation...
 
-Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-5), branchissa <i>part8-5</i>.
+Sovelluksen tämänhetkinen koodi on [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-4), branchissa <i>part8-4</i>.
 
 ### Apollo Client ja sovelluksen tila
 
