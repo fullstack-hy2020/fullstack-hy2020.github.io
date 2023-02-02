@@ -203,7 +203,7 @@ Mutation: {
 }
 ```
 
-We have also added the Mongoose error and the data that caused the error to the <i>extensions</i> object that is used to convey more info about the cause of the error to the caller.
+We have also added the Mongoose error and the data that caused the error to the <i>extensions</i> object that is used to convey more info about the cause of the error to the caller. The frontend can then display this information to the user, who can try the operation again with a better input. 
 
 The code of the backend can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branch <i>part8-4</i>.
 

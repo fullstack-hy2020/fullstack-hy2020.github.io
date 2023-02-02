@@ -204,7 +204,7 @@ Mutation: {
 }
 ```
 
-Mongoosen virheen tiedot ja ongelman aiheuttanut data on nyt liitetty poikkeuksen konfiguraatio-olioon <i>extensions</i>, näin ne saadaan välitettyä kutsujalle.
+Mongoosen virheen tiedot ja ongelman aiheuttanut data on nyt liitetty poikkeuksen konfiguraatio-olioon <i>extensions</i>, näin ne saadaan välitettyä kutsujalle. 
 
 Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
