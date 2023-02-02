@@ -150,6 +150,40 @@ la prueba falla
 
 Eliminemos el código defectuoso de la prueba.
 
+La variable _cy_ que usa nuestros tests nos genera un horrible error de Eslint
+
+![vscode screenshot showing cy is not defined](../../images/5/58new.png)
+
+Podemos deshacernos de ello instalando [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) como una dependencia de desarrollo
+```js
+npm install eslint-plugin-cypress --save-dev
+```
+
+y cambiando la configuración en <i>.eslintrc.js</i> de la siguiente manera:
+
+```js
+module.exports = {
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true,
+        "cypress/globals": true // highlight-line
+    },
+    "extends": [ 
+      // ...
+    ],
+    "parserOptions": {
+      // ...
+    },
+    "plugins": [
+        "react", "jest", "cypress" // highlight-line
+    ],
+    "rules": {
+      // ...
+    }
+}
+```
+
 ### Escribiendo en un formulario
 
 Extendamos nuestras pruebas para que la prueba intente iniciar sesión en nuestra aplicación.
