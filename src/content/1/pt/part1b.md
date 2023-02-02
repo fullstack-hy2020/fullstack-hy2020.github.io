@@ -7,67 +7,66 @@ lang: pt
 
 <div class="content">
 
-During the course, we have a goal and a need to learn a sufficient amount of JavaScript in addition to web development.
+Teremos, durante o curso, o objetivo e a necessidade de aprender certa quantidade de JavaScript, além de desenvolvimento web.
 
-JavaScript has advanced rapidly in the last few years and in this course, we use features from the newer versions. The official name of the JavaScript standard is [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). At this moment, the latest version is the one released in June of 2022 with the name [ECMAScript®2022](https://www.ecma-international.org/ecma-262/), otherwise known as ES13.
+JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos recursos das versões mais recentes. O nome oficial do padrão de JavaScript é [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Atualmente, a versão mais recente é a lançada em junho de 2022 com o nome de [ECMAScript®2022](https://www.ecma-international.org/ecma-262/), também conhecido como ES13.
 
-Browsers do not yet support all of JavaScript's newest features. Due to this fact, a lot of code run in browsers has been <i>transpiled</i> from a newer version of JavaScript to an older, more compatible version.
+Os navegadores ainda não suportam todos os recursos mais recentes de JavaScript. Devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
 
-Today, the most popular way to do transpiling is by using [Babel](https://babeljs.io/). Transpilation is automatically configured in React applications created with create-react-app. We will take a closer look at the configuration of the transpilation in [part 7](/en/part7) of this course.
+Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transcompilador [Babel](https://babeljs.io/). A transpilação é configurada automaticamente em aplicações React criadas com create-react-app. Vamos olhar mais de perto a configuração de transpilação na [parte 7](/pt/part7) deste curso.
 
-[Node.js](https://nodejs.org/en/) is a JavaScript runtime environment based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine and works practically anywhere - from servers to mobile phones. Let's practice writing some JavaScript using Node. The latest versions of Node already understand the latest versions of JavaScript, so the code does not need to be transpiled.
+[Node.js](https://nodejs.org/en/) é um ambiente de tempo de execução JavaScript baseado no motor JavaScript [Chrome V8](https://developers.google.com/v8/) da Google e funciona praticamente em qualquer lugar, desde servidores até telefones celulares. Vamos praticar a escrita de código JavaScript usando Node. As versões mais recentes do Node são compatíveis com as versões mais recentes de JavaScript, então o código não precisa ser transpilado.
 
-The code is written into files ending with <i>.js</i> that are run by issuing the command <em>node name\_of\_file.js</em>
+O código é escrito em arquivos com extensão <i>.js</i> que são executados ao emitir o comando <em>node nome\_do\_arquivo.js</em>
 
-It is also possible to write JavaScript code into the Node.js console, which is opened by typing _node_ in the command line, as well as into the browser's developer tool console. [The newest revisions of Chrome handle the newer features of JavaScript pretty well](http://kangax.github.io/compat-table/es2016plus/) without transpiling the code. Alternatively, you can use a tool like [JS Bin](https://jsbin.com/?js,console).
+Também é possível escrever código JavaScript na console do Node.js, que pode ser aberta digitando "node" na linha de comando, bem como na aba Console nas Ferramentas do Desenvolvedor do navegador. [As revisões mais recentes do Chrome lidam bem com as novas funcionalidades de JavaScript](http://kangax.github.io/compat-table/es2016plus/) sem precisar transpilar o código. Alternativamente, você pode usar uma ferramenta como [JS Bin](https://jsbin.com/?js,console).
 
-JavaScript is sort of reminiscent, both in name and syntax, to Java. But when it comes to the core mechanism of the language they could not be more different. Coming from a Java background, the behavior of JavaScript can seem a bit alien, especially if one does not make the effort to look up its features.
+JavaScript é meio reminiscente, tanto no nome quanto na sintaxe, com o Java. Porém, quando se trata do mecanismo central da linguagem, eles não poderiam ser mais diferentes. Da perspectiva de alguém que vem de um background em Java, a forma como JavaScript se comporta pode parecer um pouco estranho, principalmente se se não fizer esforço para entender seus recursos internos.
 
-In certain circles, it has also been popular to attempt "simulating" Java features and design patterns in JavaScript. We do not recommend doing this as the languages and respective ecosystems are ultimately very different.
+Em determinados círculos, tem se popularizado tentar "simular" recursos e padrões de design de Java em JavaScript. Não recomendamos fazer isso, já que as linguagens e seus respectivos ecossistemas são, no final das contas, muito diferentes.
 
-### Variables
+### Variáveis
 
-In JavaScript there are a few ways to go about defining variables:
+Em JavaScript, existem algumas maneiras de definir variáveis:
 
 ```js
 const x = 1
 let y = 5
 
-console.log(x, y)   // 1, 5 are printed
+console.log(x, y)   // 1, 5 são impressos
 y += 10
-console.log(x, y)   // 1, 15 are printed
-y = 'sometext'
-console.log(x, y)   // 1, sometext are printed
-x = 4               // causes an error
+console.log(x, y)   // 1, 15 são impressos
+y = 'algum texto'
+console.log(x, y)   // 1, algumtexto são impressos
+x = 4               // causará um erro
 ```
 
-[const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) does not define a variable but a <i>constant</i> for which the value can no longer be changed. On the other hand, [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) defines a normal variable.
+[const](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) não define uma variável, mas uma <i>constante</i> no qual o valor não pode mais ser alterado. Por outro lado, [let](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let) define uma variável padrão.
 
-In the example above, we also see that the variable's data type can change during execution. At the start, _y_ stores an integer; at the end, it stores a string.
+No exemplo acima, também vemos que o tipo de dados da variável pode mudar durante a execução. No início, _y_ armazena um inteiro; no final, armazena uma string.
 
-It is also possible to define variables in JavaScript using the keyword [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). var was, for a long time, the only way to define variables. const and let were only recently added in version ES6. In specific situations, var works in a different way compared to variable definitions in most languages - see [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) or [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) for more information. During this course the use of var is ill-advised and you should stick with using const and let!
-You can find more on this topic on YouTube - e.g. [var, let and const - ES6 JavaScript Features](https://youtu.be/sjyJBL5fkp8)
+Também é possível definir variáveis em JavaScript usando a palavra-chave [var](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var). var foi, por muito tempo, a única maneira de definir variáveis. const e let foram adicionadas recentemente na versão ES6. Em situações específicas, var funciona de maneira diferente em comparação com as definições de variáveis em a maioria das linguagens. Visite [JavaScript Variables - Should You Use let, var or const? on Medium](https://medium.com/craft-academy/javascript-variables-should-you-use-let-var-or-const-394f7645c88f) ou [Keyword: var vs. let on JS Tips](http://www.jstips.co/en/javascript/keyword-var-vs-let/) para mais informações.
 
 ### Arrays
 
-An [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) and a couple of examples of its use:
+Um [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) e alguns exemplos de seu uso:
 
 ```js
 const t = [1, -1, 3]
 
 t.push(5)
 
-console.log(t.length) // 4 is printed
-console.log(t[1])     // -1 is printed
+console.log(t.length) // 4 é impresso
+console.log(t[1])     // -1 é impresso
 
 t.forEach(value => {
-  console.log(value)  // numbers 1, -1, 3, 5 are printed, each to own line
+  console.log(value)  // os números 1, -1, 3, 5 são impressos, cada um em sua própria linha
 })                    
 ```
 
-Notable in this example is the fact that the contents of the array can be modified even though it is defined as a _const_. Because the array is an object, the variable always points to the same object. However, the content of the array changes as new items are added to it.
+O importante neste exemplo é o fato de que o conteúdo do array pode ser modificado mesmo que seja definido como uma _const_. Por conta do array ser um objeto, a variável sempre aponta para o mesmo objeto. No entanto, o conteúdo do array muda à medida que novos itens são adicionados a ele.
 
-One way of iterating through the items of the array is using _forEach_ as seen in the example. _forEach_ receives a <i>function</i> defined using the arrow syntax as a parameter.
+Uma forma de iterar através dos itens do array é usando _forEach_, como visto no exemplo. _forEach_ recebe uma <i>função</i> definida usando a sintaxe de seta como parâmetro.
 
 ```js
 value => {
@@ -75,213 +74,213 @@ value => {
 }
 ```
 
-forEach calls the function <i>for each of the items in the array</i>, always passing the individual item as an argument. The function as the argument of forEach may also receive [other arguments](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
+forEach chama a função <i>para cada um dos itens no array</i>, sempre passando o item individual como argumento. A função como argumento de forEach também pode receber [outros argumentos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
-In the previous example, a new item was added to the array using the method [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). When using React, techniques from functional programming are often used. One characteristic of the functional programming paradigm is the use of [immutable](https://en.wikipedia.org/wiki/Immutable_object) data structures. In React code, it is preferable to use the method [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), which does not add the item to the array but creates a new array in which the content of the old array and the new item are both included.
+No exemplo anterior, um novo item foi adicionado ao array usando o método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Quando se usa React, técnicas de programação funcional são comumente usadas. Uma característica do paradigma de programação funcional é o uso de estruturas de dados [imutáveis](https://en.wikipedia.org/wiki/Immutable_object). No código React, é preferível usar o método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que não adiciona o item ao array, mas cria um novo array no qual o conteúdo do antigo array e o novo item são ambos incluídos.
 
 ```js
 const t = [1, -1, 3]
 
 const t2 = t.concat(5)
 
-console.log(t)  // [1, -1, 3] is printed
-console.log(t2) // [1, -1, 3, 5] is printed
+console.log(t)  // [1, -1, 3] é impresso
+console.log(t2) // [1, -1, 3, 5] é impresso
 ```
 
-The method call _t.concat(5)_ does not add a new item to the old array but returns a new array which, besides containing the items of the old array, also contains the new item.
+A chamada de método _t.concat(5)_ não adiciona um novo item ao array antigo, mas retorna um novo array que, além de conter os itens do array antigo, também contém o novo item.
 
-There are plenty of useful methods defined for arrays. Let's look at a short example of using the [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) method.
+Há muitos métodos úteis definidos para arrays. Vamos dar uma olhada em um pequeno exemplo de uso do método [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 
 ```js
 const t = [1, 2, 3]
 
-const m1 = t.map(value => value * 2)
-console.log(m1)   // [2, 4, 6] is printed
+const m1 = t.map(valor => valor * 2)
+console.log(m1)   // [2, 4, 6] é impresso
 ```
 
-Based on the old array, map creates a <i>new array</i>, for which the function given as a parameter is used to create the items. In the case of this example, the original value is multiplied by two.
+Com base no array antigo, o map cria um <i>novo array</i>, para o qual a função dada como parâmetro é usada para criar os itens. No caso deste exemplo, o valor original é multiplicado por dois.
 
-Map can also transform the array into something completely different:
+O map também pode transformar o array em algo completamente diferente:
 
 ```js
-const m2 = t.map(value => '<li>' + value + '</li>')
+const m2 = t.map(valor => '<li>' + valor + '</li>')
 console.log(m2)  
-// [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] is printed
+// [ '<li>1</li>', '<li>2</li>', '<li>3</li>' ] é impresso
 ```
 
-Here an array filled with integer values is transformed into an array containing strings of HTML using the map method. In [part 2](/en/part2) of this course, we will see that map is used quite frequently in React.
+Aqui, um array preenchido com valores inteiros é transformado em um array contendo strings de HTML usando o método map. Na [parte 2](/pt/part2) deste curso, veremos que o map é usado com frequência em React.
 
-Individual items of an array are easy to assign to variables with the help of the [destructuring assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment).
+Itens individuais de um array são fáceis de atribuir a variáveis com a ajuda da [atribuição via desestruturação](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (destructuring assignment).
 
 ```js
 const t = [1, 2, 3, 4, 5]
 
-const [first, second, ...rest] = t
+const [primeiro, segundo, ...resto] = t
 
-console.log(first, second)  // 1, 2 is printed
-console.log(rest)          // [3, 4, 5] is printed
+console.log(primeiro, segundo)  // 1, 2 é impresso
+console.log(resto)          // [3, 4, 5] é impresso
 ```
 
-Thanks to the assignment, the variables _first_ and _second_ will receive the first two integers of the array as their values. The remaining integers are "collected" into an array of their own which is then assigned to the variable _rest_.
+Graças à atribuição, as variáveis _primeiro_ e _segundo_ receberão os dois primeiros inteiros do array como seus valores. Os inteiros restantes são "coletados" em um array próprio que é então atribuído à variável _resto_.
 
-### Objects
+### Objetos
 
-There are a few different ways of defining objects in JavaScript. One very common method is using [object literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals), which happens by listing its properties within braces:
+Existem algumas formas diferentes de se definir objetos em JavaScript. Um método muito comum é usar [objetos literais](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Grammar_and_types#Object_literals) (object literals), que ocorre listando suas propriedades dentro de chaves:
 
 ```js
-const object1 = {
-  name: 'Arto Hellas',
-  age: 35,
-  education: 'PhD',
+const objeto1 = {
+  nome: 'Arto Hellas',
+  idade: 35,
+  educacao: 'PhD',
 }
 
-const object2 = {
-  name: 'Full Stack web application development',
-  level: 'intermediate studies',
-  size: 5,
+const objeto2 = {
+  nome: 'Desenvolvimento de aplicações web Full Stack',
+  nivel: 'Estudos intermediários',
+  tamanho: 5,
 }
 
-const object3 = {
-  name: {
-    first: 'Dan',
-    last: 'Abramov',
+const objeto3 = {
+  nome: {
+    primeiro: 'Dan',
+    ultimo: 'Abramov',
   },
-  grades: [2, 3, 5, 3],
-  department: 'Stanford University',
+  notas: [2, 3, 5, 3],
+  departamento: 'Universidade Stanford',
 }
 ```
 
-The values of the properties can be of any type, like integers, strings, arrays, objects...
+Os valores das propriedades podem ser de qualquer tipo, como inteiros, strings, arrays, objetos...
 
-The properties of an object are referenced by using the "dot" notation, or by using brackets:
+As propriedades de um objeto são referenciadas usando a notação de "ponto", ou usando colchetes:
 
 ```js
-console.log(object1.name)         // Arto Hellas is printed
-const fieldName = 'age' 
-console.log(object1[fieldName])    // 35 is printed
+console.log(objeto1.nome)         // Arto Hellas é impresso
+const nomePropriedade = 'idade' 
+console.log(objeto1[nomePropriedade])    // 35 é impresso
 ```
 
-You can also add properties to an object on the fly by either using dot notation or brackets:
+Você também pode adicionar propriedades a um objeto em tempo de execução usando a notação de ponto ou colchetes:
 
 ```js
-object1.address = 'Helsinki'
-object1['secret number'] = 12341
+objeto1.endereço = 'Helsinque'
+objeto1['numero secreto'] = 12341
 ```
 
-The latter of the additions has to be done by using brackets because when using dot notation, <i>secret number</i> is not a valid property name because of the space character.
+A última adição representada acima tem que ser feita usando colchetes porque, quando se usa a notação de ponto, <i>numero secreto</i> não é um nome de propriedade válido devido ao caractere de espaço separando as duas palavras.
 
-Naturally, objects in JavaScript can also have methods. However, during this course, we do not need to define any objects with methods of their own. This is why they are only discussed briefly during the course.
+Naturalmente, os objetos em JavaScript também podem ter métodos. No entanto, durante este curso, não precisaremos definir objetos com métodos próprios. É por isso que eles só são discutidos rapidamente durante o curso.
 
-Objects can also be defined using so-called constructor functions, which results in a mechanism reminiscent of many other programming languages, e.g. Java's classes. Despite this similarity, JavaScript does not have classes in the same sense as object-oriented programming languages. There has been, however, an addition of the <i>class syntax</i> starting from version ES6, which in some cases helps structure object-oriented classes.
+Objetos também podem ser definidos usando funções construtoras, o que resulta em um mecanismo semelhante a muitas outras linguagens de programação, como Java. Apesar desta semelhança, o JavaScript não tem classes tal qual outras linguagens de programação orientadas a objetos. No entanto, a partir da versão ES6, foi adicionada a sintaxe para <i>classes</i>, o que em alguns casos ajuda a estruturar classes orientadas a objetos.
 
-### Functions
+### Funções
 
-We have already become familiar with defining arrow functions. The complete process, without cutting corners, of defining an arrow function is as follows:
+Já nos familiarizamos com a definição de funções de seta. O processo completo, sem atalhos, para definir uma função de seta é o seguinte:
 
 ```js
-const sum = (p1, p2) => {
+const soma = (p1, p2) => {
   console.log(p1)
   console.log(p2)
   return p1 + p2
 }
 ```
 
-and the function is called as can be expected:
+E a função é chamada:
 
 ```js
-const result = sum(1, 5)
-console.log(result)
+const resultado = soma(1, 5)
+console.log(resultado)
 ```
 
-If there is just a single parameter, we can exclude the parentheses from the definition:
+Se houver apenas um parâmetro, podemos excluir os parênteses da definição:
 
 ```js
-const square = p => {
+const quadrado = p => {
   console.log(p)
   return p * p
 }
 ```
 
-If the function only contains a single expression then the braces are not needed. In this case, the function only returns the result of its only expression. Now, if we remove console printing, we can further shorten the function definition:
+Se a função contiver apenas uma expressão, então as chaves não são necessárias. Neste caso, a função retorna apenas o resultado de sua única expressão. Agora, se removermos a impressão do console, podemos encurtar ainda mais a definição da função:
 
 ```js
-const square = p => p * p
+const quadrado = p => p * p
 ```
 
-This form is particularly handy when manipulating arrays - e.g. when using the map method:
+Este formato é particularmente útil ao manipular arrays, como quando usamos o método "map":
 
 ```js
 const t = [1, 2, 3]
-const tSquared = t.map(p => p * p)
-// tSquared is now [1, 4, 9]
+const tAoQuadrado = t.map(p => p * p)
+// tAoQuadrado agora é [1, 4, 9]
 ```
 
-The arrow function feature was added to JavaScript only a couple of years ago, with version [ES6](http://es6-features.org/). Before this, the only way to define functions was by using the keyword _function_.
+A funcionalidade da função de seta foi adicionada ao JavaScript há apenas alguns anos, com a versão [ES6](http://es6-features.org/). Antes disso, a única maneira de definir funções era usando a palavra-chave _function_.
 
-There are two ways to reference the function; one is giving a name in a [function declaration](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function).
+Existem duas maneiras de se referenciar uma função; uma é atribuir um nome em uma [declaração de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/function) (function declaration).
 
 ```js
-function product(a, b) {
+function produto(a, b) {
   return a * b
 }
 
-const result = product(2, 6)
-// result is now 12
+const resultado = produto(2, 6)
+// resultado agora é 12
 ```
 
-The other way to define the function is by using a [function expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function). In this case, there is no need to give the function a name and the definition may reside among the rest of the code:
+Outra maneira de definir uma função é usando uma [expressão de função](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/function) (function expression). Neste caso, não é necessário atribuir um nome à função, e a definição pode residir dentro do restante do código:
 
 ```js
-const average = function(a, b) {
+const media = function(a, b) { // *média
   return (a + b) / 2
 }
 
-const result = average(2, 5)
-// result is now 3.5
+const resultado = media(2, 5)
+// resultado agora é 3.5
 ```
 
-During this course, we will define all functions using the arrow syntax.
+Durante este curso, todas as funções serão definidas usando a sintaxe de seta.
 
 </div>
 
 <div class="tasks">
 
-  <h3>Exercises 1.3.-1.5.</h3>
+  <h3>Exercícios 1.3 a 1.5</h3>
 
-<i>We continue building the application that we started working on in the previous exercises. You can write the code into the same project since we are only interested in the final state of the submitted application.</i>
+<i>Vamos continuar construindo a aplicação que começamos a trabalhar nas exercícios anteriores. Você pode escrever o código no mesmo projeto, pois estamos interessados apenas no estado final da aplicação.</i>
 
-**Pro-tip:** you may run into issues when it comes to the structure of the <i>props</i> that components receive. A good way to make things more clear is by printing the props to the console, e.g. as follows:
+**Dica Pro:** você pode ter problemas com a estrutura das <i>props</i> que os componentes recebem. Uma boa maneira de tornar as coisas mais claras é imprimindo as props no console, como por exemplo:
 
 ```js
 const Header = (props) => {
-  console.log(props) // highlight-line
+  console.log(props) // linha destacada
   return <h1>{props.course}</h1>
 }
 ```
 
-If and <i>when</i> you encounter an error message
+Se e <i>quando</i> você encontrar a mensagem de erro:
 
-> <i>Objects are not valid as a React child</i>
+> <i>Objetos não são válidos como elementos-filho do React.</i>
 
-keep in mind the things told [here](/en/part1/introduction_to_react#do-not-rended-object).
+... tenha em mente o explicado [aqui](/pt/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
-  <h4>1.3: course information step3</h4>
+  <h4>1.3: course information — 3º passo</h4>
 
-Let's move forward to using objects in our application. Modify the variable definitions of the <i>App</i> component as follows and also refactor the application so that it still works:
+Vamos avançar para o uso de objetos em nossa aplicação. Modifique as definições de variáveis do componente <i>App</i> da forma a seguir e também refatore a aplicação para que continue funcionando:
 
 ```js
 const App = () => {
-  const course = 'Half Stack application development'
+  const course = 'Desenvolvimento de aplicação Half Stack'
   const part1 = {
-    name: 'Fundamentals of React',
+    name: 'Fundamentos da biblioteca React',
     exercises: 10
   }
   const part2 = {
-    name: 'Using props to pass data',
+    name: 'Usando props para passar dados',
     exercises: 7
   }
   const part3 = {
-    name: 'State of a component',
+    name: 'Estado de um componente',
     exercises: 14
   }
 
@@ -293,27 +292,28 @@ const App = () => {
 }
 ```
 
-  <h4>1.4: course information step4</h4>
+  <h4>1.4: course information — 4º passo</h4>
 
-And then place the objects into an array. Modify the variable definitions of <i>App</i> into the following form and modify the other parts of the application accordingly:
+Agora, coloque os objetos em um array. Modifique as definições de variáveis do componente <i>App</i> da seguinte maneira e modifique igualmente as outras partes da aplicação:
 
 ```js
 const App = () => {
-  const course = 'Half Stack application development'
+  const course = 'Desenvolvimento de aplicação Half Stack'
   const parts = [
     {
-      name: 'Fundamentals of React',
+      name: 'Fundamentos da biblioteca React',
       exercises: 10
     },
     {
-      name: 'Using props to pass data',
+      name: 'Usando props para passar dados',
       exercises: 7
     },
     {
-      name: 'State of a component',
+      name: 'Estado de um componente',
       exercises: 14
     }
   ]
+
 
   return (
     <div>
@@ -323,13 +323,13 @@ const App = () => {
 }
 ```
 
-**NB** at this point <i>you can assume that there are always three items</i>, so there is no need to go through the arrays using loops. We will come back to the topic of rendering components based on items in arrays with a more thorough exploration in the [next part of the course](../part2).
+**N.B.:** Neste ponto, <i>presume-se que há sempre três itens</i>, então não é necessário percorrer os arrays usando loops. Voltaremos ao tema de renderização de componentes com base em itens de arrays em uma abordagem minuciosa na [próxima parte do curso](../part2).
 
-However, do not pass different objects as separate props from the <i>App</i> component to the components <i>Content</i> and <i>Total</i>. Instead, pass them directly as an array:
+De qualquer forma, não passe objetos diferentes como propriedades separadas do componente <i>App</i> para os componentes <i>Content</i> e <i>Total</i>. Em vez disso, passe-os diretamente como um array:
 
 ```js
 const App = () => {
-  // const definitions
+  // definições "const"
 
   return (
     <div>
@@ -341,25 +341,25 @@ const App = () => {
 }
 ```
 
-  <h4>1.5: course information step5</h4>
+  <h4>1.5: course information — 5º passo</h4>
 
-Let's take the changes one step further. Change the course and its parts into a single JavaScript object. Fix everything that breaks.
+Vamos dar um passo a frente com as mudanças. Transforme a constante "course" (curso) e suas "parts" (partes) em um único objeto JavaScript. Corrija tudo que venha a quebrar.
 
 ```js
 const App = () => {
   const course = {
-    name: 'Half Stack application development',
+    name: 'Desenvolvimento de aplicação Half Stack',
     parts: [
       {
-        name: 'Fundamentals of React',
+        name: 'Fundamentos da biblioteca React',
         exercises: 10
       },
       {
-        name: 'Using props to pass data',
+        name: 'Usando props para passar dados',
         exercises: 7
       },
       {
-        name: 'State of a component',
+        name: 'Estado de um componente',
         exercises: 14
       }
     ]
@@ -377,161 +377,161 @@ const App = () => {
 
 <div class="content">
 
-### Object methods and "this"
+### Métodos de objetos e "this"
 
-Because this course uses a version of React containing React Hooks we do not need to define objects with methods. **The contents of this chapter are not relevant to the course** but are certainly in many ways good to know. In particular, when using older versions of React one must understand the topics of this chapter.
+Como este curso usa uma versão de React que contém React Hooks, não é necessário definir objetos com métodos. **O conteúdo deste capítulo não é relevante para o curso**, mas certamente é bom conhecer. Em particular, ao usar versões antigas de React, é necessário compreender os tópicos deste capítulo.
 
-Arrow functions and functions defined using the _function_ keyword vary substantially when it comes to how they behave with respect to the keyword [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this), which refers to the object itself.
+Funções de seta e funções definidas usando a palavra-chave _function_ variam substancialmente em relação ao comportamento da palavra-chave [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this), que se refere ao próprio objeto.
 
-We can assign methods to an object by defining properties that are functions:
+Podemos atribuir métodos a um objeto definindo propriedades que são funções:
 
 ```js
 const arto = {
-  name: 'Arto Hellas',
-  age: 35,
-  education: 'PhD',
-  // highlight-start
-  greet: function() {
-    console.log('hello, my name is ' + this.name)
+  nome: 'Arto Hellas',
+  idade: 35,
+  educacao: 'PhD', // *educação
+  // começo
+  cumprimentar: function() { // *saudação
+    console.log('olá, meu nome é ' + this.nome)
   },
-  // highlight-end
+  // final
 }
 
-arto.greet()  // "hello, my name is Arto Hellas" gets printed
+arto.cumprimentar()  // "olá, meu nome é Arto Hellas" é impresso
 ```
 
-Methods can be assigned to objects even after the creation of the object:
+Métodos podem ser atribuídos a objetos mesmo após a criação do objeto:
 
 ```js
 const arto = {
-  name: 'Arto Hellas',
-  age: 35,
-  education: 'PhD',
-  greet: function() {
-    console.log('hello, my name is ' + this.name)
+  nome: 'Arto Hellas',
+  idade: 35,
+  educacao: 'PhD',
+  cumprimentar: function() {
+    console.log('olá, meu nome é ' + this.nome)
   },
 }
 
-// highlight-start
-arto.growOlder = function() {
-  this.age += 1
+// começo
+arto.envelhecer = function() {
+  this.idade += 1
 }
-// highlight-end
+// final
 
-console.log(arto.age)   // 35 is printed
-arto.growOlder()
-console.log(arto.age)   // 36 is printed
+console.log(arto.idade)   // 35 é impresso
+arto.envelhecer()
+console.log(arto.idade)   // 36 é impresso
 ```
 
-Let's slightly modify the object:
+Vamos modificar um pouco o objeto:
 
 ```js
 const arto = {
-  name: 'Arto Hellas',
-  age: 35,
-  education: 'PhD',
-  greet: function() {
-    console.log('hello, my name is ' + this.name)
+  nome: 'Arto Hellas',
+  idade: 35,
+  educacao: 'PhD',
+  cumprimentar: function() {
+    console.log('olá, meu nome é ' + this.nome)
   },
-  // highlight-start
-  doAddition: function(a, b) {
+  // começo
+  fazerAdicao: function(a, b) { // *fazerAdição
     console.log(a + b)
   },
-  // highlight-end
+  // final
 }
 
-arto.doAddition(1, 4)        // 5 is printed
+arto.fazerAdicao(1, 4)        // 5 é impresso
 
-const referenceToAddition = arto.doAddition
-referenceToAddition(10, 15)   // 25 is printed
+const referenciaParaAdicao = arto.fazerAdicao
+referenciaParaAdicao(10, 15)   // 25 é impresso
 ```
 
-Now the object has the method _doAddition_ which calculates the sum of numbers given to it as parameters. The method is called in the usual way, using the object <em>arto.doAddition(1, 4)</em> or by storing a <i>method reference</i> in a variable and calling the method through the variable: <em>referenceToAddition(10, 15)</em>.
+Agora, o objeto tem o método _fazerAdicao_, que calcula a soma dos números dados a ele como parâmetros. O método é chamado da maneira tradicional, usando o objeto <em>arto.fazerAdicao(1, 4)</em> ou armazenando uma <i>referência ao método</i> em uma variável e chamando o método através da variável: <em>referenciaParaAdicao(10, 15)</em>.
 
-If we try to do the same with the method _greet_ we run into an issue:
+Se tentarmos fazer o mesmo com o método _cumprimentar_, deparamo-nos com um problema:
 
 ```js
-arto.greet()       // "hello, my name is Arto Hellas" gets printed
+arto.cumprimentar()       // "olá, meu nome é Arto Hellas" é impresso
 
-const referenceToGreet = arto.greet
-referenceToGreet() // prints "hello, my name is undefined"
+const referenciaParaCumprimentar = arto.cumprimentar
+referenciaParCumprimentar() // "olá, meu nome é undefined" é impresso
 ```
 
-When calling the method through a reference, the method loses knowledge of what the original _this_ was. Contrary to other languages, in JavaScript the value of [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) is defined based on <i>how the method is called</i>. When calling the method through a reference the value of _this_ becomes the so-called [global object](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) and the end result is often not what the software developer had originally intended.
+Ao chamar o método através de uma referência, o método perde o conhecimento do que era o _this_ original. Ao contrário de outras linguagens, em JavaScript, o valor de [this](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this) é definido com base <i>em como o método é chamado</i>. Ao chamar o método através de uma referência, o valor de _this_ se torna o chamado [objeto global](https://developer.mozilla.org/en-US/docs/Glossary/Global_object) (global object) e o resultado final sai geralmente diferente do que o desenvolvedor originalmente pretendeu.
 
-Losing track of _this_ when writing JavaScript code brings forth a few potential issues. Situations often arise where React or Node (or more specifically the JavaScript engine of the web browser) needs to call some method in an object that the developer has defined. However, in this course, we avoid these issues by using "this-less" JavaScript.
+Perder o rastro do _this_ ao escrever código JavaScript traz alguns problemas eventuais. Algumas situações frequentemente surgem onde React ou o Node (ou mais especificamente o motor JavaScript do navegador) precisa chamar algum método em um objeto que o desenvolvedor tenha definido. No entanto, neste curso, evitamos esses problemas usando o JavaScript "sem this".
 
-One situation leading to the "disappearance" of _this_ arises when we set a timeout to call the _greet_ function on the _arto_ object, using the [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) function.
+Uma situação que leva ao "desaparecimento" do _this_ ocorre quando definimos um tempo limite para chamar a função _cumprimentar_ no objeto _arto_, usando a função [setTimeout](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout).
 
 ```js
 const arto = {
-  name: 'Arto Hellas',
-  greet: function() {
-    console.log('hello, my name is ' + this.name)
+  nome: 'Arto Hellas',
+  cumprimentar: function() {
+    console.log('olá, meu nome é ' + this.nome)
   },
 }
 
-setTimeout(arto.greet, 1000)  // highlight-line
+setTimeout(arto.cumprimentar, 1000)  // linha destacada
 ```
 
-As mentioned, the value of _this_ in JavaScript is defined based on how the method is being called. When <em>setTimeout</em> is calling the method, it is the JavaScript engine that actually calls the method and, at that point, _this_ refers to the global object.
+Como mencionado, o valor de _this_ em JavaScript é definido com base na forma como o método é chamado. Quando o <em>setTimeout</em> está chamando o método, é o motor JavaScript que realmente chama o método e, nesse ponto, _this_ se refere ao objeto global.
 
-There are several mechanisms by which the original _this_ can be preserved. One of these is using a method called [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind):
+Existem vários mecanismos pelos quais o _this_ original pode ser preservado. Um desses é usando um método chamado [bind](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/bind) (amarrar, atar):
 
 ```js
-setTimeout(arto.greet.bind(arto), 1000)
+setTimeout(arto.cumprimentar.bind(arto), 1000)
 ```
 
-Calling <em>arto.greet.bind(arto)</em> creates a new function where _this_ is bound to point to Arto, independent of where and how the method is being called.
+Chamar <em>arto.cumprimentar.bind(arto)</em> cria uma nova função onde _this_ é obrigado a apontar para Arto, independentemente de onde e como o método está sendo chamado.
 
-Using [arrow functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) it is possible to solve some of the problems related to _this_. They should not, however, be used as methods for objects because then _this_ does not work at all. We will come back later to the behavior of _this_ in relation to arrow functions.
+Usando [funções de seta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) é possível resolver alguns dos problemas relacionados ao _this_. No entanto, eles não devem ser usados como métodos para objetos, pois o _this_ não funciona de forma alguma. Mais tarde, voltaremos a discutir o comportamento da palavra-chave _this_ em relação às funções de seta.
 
-If you want to gain a better understanding of how _this_ works in JavaScript, the Internet is full of material about the topic, e.g. the screencast series [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) by [egghead.io](https://egghead.io) is highly recommended!
+Se deseja compreender de fato como _this_ funciona em JavaScript, a Internet está cheia de material sobre o assunto como, por exemplo, a série screencast [Understand JavaScript's this Keyword in Depth](https://egghead.io/courses/understand-javascript-s-this-keyword-in-depth) por [egghead.io](https://egghead.io), que é extremamente recomendada!
 
 ### Classes
 
-As mentioned previously, there is no class mechanism in JavaScript like the ones in object-oriented programming languages. There are, however, features to make "simulating" object-oriented [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) possible.
+Como mencionado anteriormente, não há um "mecanismo" de classes em JavaScript como os de linguagens de programação orientadas a objetos. No entanto, há recursos para tornar possível a "simulação" de [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) orientadas a objetos.
 
-Let's take a quick look at the <i>class syntax</i> that was introduced into JavaScript with ES6, which substantially simplifies the definition of classes (or class-like things) in JavaScript.
+Vamos dar uma olhada na <i>sintaxe para classes</i> que foi introduzida ao JavaScript com o ES6, o que simplifica substancialmente a definição de classes (ou estruturas semelhantes a classes) em JavaScript.
 
-In the following example we define a "class" called Person and two Person objects:
+No exemplo a seguir, definimos uma "classe" chamada Pessoa e dois objetos Pessoa:
 
 ```js
-class Person {
-  constructor(name, age) {
-    this.name = name
-    this.age = age
+class Pessoa {
+  constructor(nome, idade) {
+    this.nome = nome
+    this.idade = idade
   }
-  greet() {
-    console.log('hello, my name is ' + this.name)
+  cumprimentar() {
+    console.log('olá, meu nome é ' + this.nome)
   }
 }
 
-const adam = new Person('Adam Ondra', 29)
-adam.greet()
+const adam = new Pessoa('Adam Ondra', 29)
+adam.cumprimentar()
 
-const janja = new Person('Janja Garnbret', 23)
-janja.greet()
+const janja = new Pessoa('Janja Garnbret', 23)
+janja.cumprimentar()
 ```
 
-When it comes to syntax, the classes and the objects created from them are very reminiscent of Java classes and objects. Their behavior is also quite similar to Java objects. At the core, they are still objects based on JavaScript's [prototypal inheritance](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Inheritance). The type of both objects is actually _Object_, since JavaScript essentially only defines the types [Boolean, Null, Undefined, Number, String, Symbol, BigInt, and Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Data_structures).
+Quanto à sintaxe, as classes e os objetos criados a partir delas são muito semelhantes às classes e objetos Java. Seu comportamento também é bastante semelhante aos objetos Java. Mas em seu mecanismo interno, ainda são objetos baseados na [herança prototipal](https://developer.mozilla.org/en/docs/Learn/JavaScript/Objects/Inheritance) de JavaScript. O tipo de ambos os objetos é, na verdade, _Object_, uma vez que o JavaScript essencialmente define apenas os tipos [Boolean, Null, Undefined, Number, String, Symbol, BigInt e Object](https://developer.mozilla.org/en/docs/Web/JavaScript/Data_structures).
 
-The introduction of the class syntax was a controversial addition. Check out [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) or [Is “Class” In ES6 The New “Bad” Part? on Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) for more details.
+A inserção da sintaxe para classes foi uma adição controversa. Confira [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) ou [Is “Class” In ES6 The New “Bad” Part? on Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) para mais detalhes.
 
-The ES6 class syntax is used a lot in "old" React and also in Node.js, hence an understanding of it is beneficial even in this course. However, since we are using the new [Hooks](https://reactjs.org/docs/hooks-intro.html) feature of React throughout this course, we have no concrete use for JavaScript's class syntax.
+A sintaxe para classe ES6 é muito utilizada no "antigo" React e também no Node.js, portanto, é benéfico ter compreensão dela mesmo neste curso. Entretanto, como estaremos usando o novo recurso [Hooks](https://reactjs.org/docs/hooks-intro.html) do React ao longo deste curso, não teremos uso concreto da sintaxe para classes de JavaScript.
 
-### JavaScript materials
+### Materiais de JavaScript
 
-There exist both good and poor guides for JavaScript on the Internet. Most of the links on this page relating to JavaScript features reference [Mozilla's JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript).
+Existem guias bons e ruins para JavaScript na Internet. A maioria dos links nesta página relacionados aos recursos de JavaScript referem-se ao [Guia JavaScript da Mozilla](https://developer.mozilla.org/en/docs/Web/JavaScript).
 
-It is highly recommended to immediately read [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript) on Mozilla's website.
+É recomendado ler imediatamente o artigo [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Overview) no site da Mozilla.
 
-If you wish to get to know JavaScript deeply there is a great free book series on the Internet called [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
+Se deseja conhecer profundamente JavaScript, há uma ótima série de livros gratuitos na Internet chamada [You-Dont-Know-JS](https://github.com/getify/You-Dont-Know-JS).
 
-Another great resource for learning JavaScript is [javascript.info](https://javascript.info).
+Outra ótima fonte para aprender JavaScript é [javascript.info](https://javascript.info).
   
-The free and highly engaging book [Eloquent JavaScript](https://eloquentjavascript.net) takes you from the basics to interesting stuff quickly. It is a mixture of theory projects and exercises and covers general programming theory as well as the JavaScript language.
+O extremamente cativante e gratuito [Eloquent JavaScript](https://eloquentjavascript.net) te leva rapidamente dos conceitos básicos à construção de aplicações muito interessantes. É uma mistura de teoria, projetos e exercícios, e cobre tanto a teoria geral de programação quanto a linguagem JavaScript.
 
-[egghead.io](https://egghead.io) has plenty of quality screencasts on JavaScript, React, and other interesting topics. Unfortunately, some of the material is behind a paywall.
+[egghead.io](https://egghead.io) possui muitos screencasts de qualidade sobre JavaScript, React e outros tópicos interessantes. Infelizmente, alguns dos materiais só são acessíveis na versão paga.
 
 </div>
