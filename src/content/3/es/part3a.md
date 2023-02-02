@@ -171,7 +171,7 @@ import http from 'http'
 
 En estos días, el código que se ejecuta en el navegador utiliza módulos ES6. Los módulos se definen con un [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) y se utilizan con un [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-Sin embargo, Node.js usa los llamados módulos [CommonJS](https://en.wikipedia.org/wiki/CommonJS). La razón de esto es que el ecosistema de Node necesitaba módulos mucho antes de que JavaScript los admitiera en la especificación del lenguaje. En el momento de escribir este material, Node no es compatible con los módulos ES6, pero el soporte para ellos [llegará](https://nodejs.org/api/esm.html) en algún momento.
+Sin embargo, Node.js usa los llamados módulos [CommonJS](https://en.wikipedia.org/wiki/CommonJS). La razón de esto es que el ecosistema de Node necesitaba módulos mucho antes de que JavaScript los admitiera en la especificación del lenguaje. En el momento de escribir este material, Node es compatible con los módulos ES6.
 
 Los módulos de CommonJS funcionan casi exactamente como los módulos de ES6, al menos en lo que respecta a nuestras necesidades en este curso.
 

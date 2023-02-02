@@ -960,7 +960,7 @@ Utilice el paquete supertest para escribir una prueba que realice una solicitud 
 
 Una vez finalizada la prueba, refactorice el controlador de ruta para usar la sintaxis async/await en lugar de promesas.
 
-Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/testing_the_backend#test-environment),
+Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/porbando_el_backend#entorno-de-prueba),
 
 **NB:** Al ejecutar las pruebas, es posible que se encuentre con la siguiente advertencia:
 
@@ -974,7 +974,7 @@ module.exports = {
 }
 ```
 
-**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/testing_the_backend#running-tests-one-by-one). 
+**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/porbando_el_backend#ejecucion-de-pruebas-una-por-una). 
 
 #### 4.9*: Pruebas de lista de blogs, paso 2
 
