@@ -761,7 +761,7 @@ Avant d'implémenter le reste de la logique applicative, vérifions avec Postman
 
 L'application imprime les données que nous avons envoyées dans la requête à la console :
 
-![](../../images/3/15e.png)
+![](../../images/3/15new.png)
 
 **NB** <i>Gardez le terminal exécutant l'application visible à tout moment</i> lorsque vous travaillez sur le backend. Grâce à Nodemon, toute modification apportée au code redémarre l'application. Si vous prêtez attention à la console, vous serez immédiatement en mesure de repérer les erreurs qui se produisent dans l'application :
 

@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 13 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta.  Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää osan aivan hyvin toteuttamatta.
+Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 13 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää myös osan toteuttamatta. Tehtävissä on melko suuressa roolissa [osassa 6](/osa6) käsiteltyjen edistyneempien tilanhallintamenetelmien (Redux, React Query ja context) soveltaminen.
 
 Voit ottaa pohjaksi oman sovelluksesi sijaan myös mallivastauksen koodin.
 
@@ -29,27 +29,57 @@ Prettier on helppo integroida suoraan editoriin siten, että editori muokkaa koo
 
 Ota sovellukseesi käyttöön Prettier, tee sille sopiva konfiguraatio sekä editori-integraatio.
 
-#### 7.10: redux, step1
+### Tilan hallinta: Redux
+
+<i>Tehtävistä 7.10-7.13 on valittavissa kaksi vaihtoehtoista versiota: voit tehdä sovelluksen tilanhallinnan joko käyttäen Reduxia tai React Queryä ja Contextia</i>. Jos haluat maksimoida oppimisen, voit tehdä molemmat versiot!
+
+#### 7.10: Redux, step1
 
 Siirry käyttämään React-komponenttien tilan sijaan Reduxia sovelluksen tilan hallintaan.
 
 Muuta tässä tehtävässä notifikaatio käyttämään Reduxia.
 
-#### 7.11: redux, step2
+#### 7.11: Redux, step2
 
 <i>Tämä ja seuraava kaksi osaa ovat kohtuullisen työläitä, mutta erittäin opettavaisia.</i>
 
-Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa voit halutessasi hallita edelleen Reactin tilan avulla. 
-
 Siirrä blogien tietojen talletus Reduxiin. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogin luominen onnistuu.
 
-#### 7.12: redux, step3
+Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa kannattaa hallita edelleen Reactin tilan avulla.
+
+#### 7.12: Redux, step3
 
 Laajenna ratkaisua siten, että blogien "liketys" ja poisto toimivat.
 
-#### 7.13: redux, step4
+#### 7.13: Redux, step4
 
 Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
+
+### Tilan hallinta: React Query ja context
+
+<i>Tehtävistä 7.10-7.13 on valittavissa kaksi vaihtoehtoista versiota: voit tehdä sovelluksen tilanhallinnan joko käyttäen Reduxia tai React Queryä ja Contextia</i>.
+
+#### 7.10: React Query ja context step1
+
+Muuta tässä tehtävässä notifikaation tilanhallinta tapahtumaan käyttäen useReducer-hookia ja contextia.
+
+#### 7.11: React Query ja context step1
+
+Siirrä blogien tietojen hallinnointi tapahtumaan React Query -kirjastoa hyväksikäyttäen. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogin luominen onnistuu.
+
+Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa kannattaa hallita edelleen Reactin tilan avulla.
+
+#### 7.12: React Query ja context step1
+
+Laajenna ratkaisua siten, että blogien "liketys" ja poisto toimivat.
+
+#### 7.13: React Query ja context step1
+
+Siirrä myös kirjautuneen käyttäjän tietojen hallinnointi tapahtumaan useReducer-hookin ja contextin avulla.
+
+### Näkymät
+
+Loput tehtävät ovat yhteisiä sekä Redux- että React Query -versiota tekeville.
 
 #### 7.14: käyttäjien näkymä
 
@@ -136,6 +166,6 @@ Tee sovelluksesi ulkoasusta tyylikkäämpi jotain kurssilla esiteltyä tapaa kä
 
 Jos käytät tyylien lisäämiseen noin tunnin aikaa, merkkaa myös tämä tehtävä tehdyksi.
 
-Tämä oli osan viimeinen tehtävä ja on aika pushata koodi githubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Tämä oli osan viimeinen tehtävä ja on aika pushata koodi GitHubiin sekä merkata tehdyt tehtävät [palautussovellukseen](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

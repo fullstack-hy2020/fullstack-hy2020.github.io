@@ -39,7 +39,7 @@ module.exports = {
       a: 'Flux-arkkitehtuuri ja Redux',
       b: 'Monta reduseria',
       c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
-      d: 'React Query, useReducer ja contex',
+      d: 'React Query, useReducer ja context',
       e: 'connect (vanha osa)',
     },
     '7': {
@@ -107,7 +107,7 @@ module.exports = {
       a: 'Flux-architecture and Redux',
       b: 'Many reducers',
       c: 'Communicating with server in a redux application',
-      d: 'React Query, useReducer and the contex',
+      d: 'React Query, useReducer and the context',
       e: 'connect (the old part)',
     },
     '7': {
