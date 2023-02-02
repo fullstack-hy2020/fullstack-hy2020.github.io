@@ -9,7 +9,7 @@ lang: pt
 
 Agora, começaremos a nos familiarizar com provavelmente o tópico mais importante deste curso, a biblioteca [React](https://reactjs.org/). Vamos começar criando uma aplicação React simples, conhecendo os conceitos-chave de React.
 
-A maneira mais simples de começar é usando uma ferramenta chamada [create-react-app](https://github.com/facebook/create-react-app). É possível (mas não necessário) instalar o <i>create-react-app</i> na sua máquina se a ferramenta <i>npm</i> instalada junto com o Node tiver na versão <i>5.3</i>, pelo menos.
+A maneira mais simples de começar é usando uma ferramenta chamada [create-react-app](https://github.com/facebook/create-react-app). É possível (mas não necessário) instalar o <i>create-react-app</i> em sua máquina se a ferramenta <i>npm</i> instalada junto com o Node estiver na versão <i>5.3</i>, pelo menos.
 
 Vamos criar uma aplicação chamada <i>part1</i> e navegar até o seu diretório.
 
@@ -157,14 +157,14 @@ Modifique o componente da seguinte maneira:
 
 ```js
 const App = () => {
-  const now = new Date()
+  const agora = new Date()
   const a = 10
   const b = 20
-  console.log(now, a+b)
+  console.log(agora, a+b)
 
   return (
     <div>
-      <p>Olá, mundo! Hoje é {now.toString()}</p>
+      <p>Olá, mundo! Hoje é {agora.toString()}</p>
       <p>
         {a} mais {b} é {a + b}
       </p>
@@ -193,14 +193,14 @@ Depois da compilação, nossa aplicação fica assim:
 
 ```js
 const App = () => {
-  const now = new Date()
+  const agora = new Date()
   const a = 10
   const b = 20
   return React.createElement(
     'div',
     null,
     React.createElement(
-      'p', null, 'Olá, mundo! Hoje é ', now.toString()
+      'p', null, 'Olá, mundo! Hoje é ', agora.toString()
     ),
     React.createElement(
       'p', null, a, ' mais ', b, ' é ', a + b
@@ -283,7 +283,7 @@ Vamos modificar o componente <i>Hello</i> da seguinte maneira:
 const Hello = (props) => { // linha destacada
   return (
     <div>
-      <p>Olá {props.name}</p> // linha destacada
+      <p>Olá {props.nome}</p> // linha destacada
     </div>
   )
 }
@@ -298,8 +298,8 @@ const App = () => {
   return (
     <div>
       <h1>Olá a todos!</h1>
-      <Hello name='George' /> // linha destacada
-      <Hello name='Daisy' /> // linha destacada
+      <Hello nome='George' /> // linha destacada
+      <Hello nome='Daisy' /> // linha destacada
     </div>
   )
 }
@@ -315,21 +315,21 @@ const Hello = (props) => {
   return (
     <div>
       <p>
-        Olá {props.name}, você tem {props.age} anos // linha destacada
+        Olá {props.nome}, você tem {props.idade} anos // linha destacada
       </p>
     </div>
   )
 }
 
 const App = () => {
-  const name = 'Peter' // linha destacada
-  const age = 10       // linha destacada
+  const nome = 'Peter' // linha destacada
+  const idade = 10       // linha destacada
 
   return (
     <div>
       <h1>Olá a todos!</h1>
-      <Hello name='Maya' age={26 + 10} /> // linha destacada
-      <Hello name={name} age={age} />     // linha destacada
+      <Hello nome='Maya' idade={26 + 10} />   // linha destacada
+      <Hello nome={nome} idade={idade} />     // linha destacada
     </div>
   )
 }
@@ -374,7 +374,7 @@ const App = () => {
   return (
     <div>
       <h1>Olá a todos!</h1>
-      <Hello name='Maya' age={26 + 10} />
+      <Hello nome='Maya' idade={26 + 10} />
       <footer /> // linha destacada
     </div>
   )
@@ -389,7 +389,7 @@ Note que o conteúdo de um componente React (normalmente) precisa conter **um el
 const App = () => {
   return (
     <h1>Olá a todos!</h1>
-    <Hello name='Maya' age={26 + 10} />
+    <Hello nome='Maya' idade={26 + 10} />
     <Footer />
   )
 }
@@ -405,7 +405,7 @@ Usar um elemento raiz não é a única opção viável. Um <i>array</i> (vetor) 
 const App = () => {
   return [
     <h1>Olá a todos!</h1>,
-    <Hello name='Maya' age={26 + 10} />,
+    <Hello nome='Maya' idade={26 + 10} />,
     <Footer />
   ]
 }
@@ -417,14 +417,14 @@ Por conta do elemento raiz ser "estipulado", temos elementos div "extras" na ár
 
 ```js
 const App = () => {
-  const name = 'Peter'
-  const age = 10
+  const nome = 'Peter'
+  const idade = 10
 
   return (
     <>
       <h1>Olá a todos!</h1>
-      <Hello name='Maya' age={26 + 10} />
-      <Hello name={name} age={age} />
+      <Hello nome='Maya' idade={26 + 10} />
+      <Hello nome={nome} idade={idade} />
       <Footer />
     </>
   )
@@ -439,15 +439,15 @@ Considere uma aplicação que imprime os nomes e idades de nossos amigos na tela
 
 ```js
 const App = () => {
-  const friends = [ 
-        { name: 'Peter', age: 4 },
-        { name: 'Maya', age: 10 },
+  const amigos = [ 
+      { nome: 'Peter', idade: 4 },
+      { nome: 'Maya', idade: 10 },
     ]
 
   return (
     <div>
-      <p>{friends[0]}</p>
-      <p>{friends[1]}</p>
+      <p>{amigos[0]}</p>
+      <p>{amigos[1]}</p>
     </div>
   )
 }
@@ -467,16 +467,16 @@ O console grita em vermelho:
 
 O núcleo do problema é que: <i>Objetos não são válidos como elementos-filho do React</i>, isto é, a aplicação tenta renderizar <i>objetos</i> e falha novamente.
 
-O código tenta renderizar as informações de um "friend" da seguinte maneira:
+O código tenta renderizar as informações de um amigo da seguinte maneira:
 
 ```js
-<p>{friends[0]}</p>
+<p>{amigos[0]}</p>
 ```
 
 E isso causa um problema, porque o item a ser renderizado dentro das chaves é um objeto.
 
 ```js
-{ name: 'Peter', age: 4 }
+{ nome: 'Peter', idade: 4 }
 ```
 
 Em React, elementos individuais renderizadas dentro das chaves devem ser valores primitivos, como números ou strings.
@@ -485,15 +485,15 @@ A solução é a seguinte:
 
 ```js
 const App = () => {
-  const friends = [ 
-      { name: 'Peter', age: 4 },
-      { name: 'Maya', age: 10 },
+  const amigos = [ 
+      { nome: 'Peter', idade: 4 },
+      { nome: 'Maya', idade: 10 },
     ]
 
   return (
     <div>
-      <p>{friends[0].name} {friends[0].age}</p>
-      <p>{friends[1].name} {friends[1].age}</p>
+      <p>{amigos[0].nome} {amigos[0].idade}</p>
+      <p>{amigos[1].nome} {amigos[1].idade}</p>
     </div>
   )
 }
@@ -504,13 +504,13 @@ export default App
 Agora o nome do amigo é renderizado separadamente dentro das chaves:
 
 ```js
-{friends[0].name}
+{amigos[0].nome}
 ```
 
 Também a idade:
 
 ```js
-{friends[0].age}
+{amigos[0].idade}
 ```
 
 Após corrigir o erro, limpe as mensagens de erro do console pressionando Ø e, em seguida, recarrege o conteúdo da página e garanta que não haja mensagens de erro exibidas.
@@ -519,11 +519,11 @@ Uma adição ao lembrete anterior: React também permite que matrizes sejam rend
 
 ```js
 const App = () => {
-  const friends = [ 'Peter', 'Maya']
+  const amigos = [ 'Peter', 'Maya']
 
   return (
     <div>
-      <p>{friends}</p>
+      <p>{amigos}</p>
     </div>
   )
 }
@@ -534,7 +534,7 @@ Nesta parte, nem vale a pena tentar usar a renderização direta de tabelas. Vol
 </div>
 
 <div class="tasks">
-  <h3>Exercícios 1.1.-1.2.</h3>
+  <h3>Exercícios 1.1 a 1.2</h3>
 
 Os exercícios são enviados via GitHub, marcando os exercícios como concluídos na guia "meus envios" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -563,7 +563,7 @@ Para cada parte do curso, há um diretório, que se ramifica em diretórios cont
 
 Para cada aplicação web em uma série de exercícios, é recomendado que você envie todos os arquivos relacionados a essa aplicação, exceto o diretório <i>node_modules</i>.
 
-  <h4>1.1: Informações do curso — 1º passo</h4>
+  <h4>1.1: course information — 1º passo</h4>
 
 <i>A aplicação que começaremos a trabalhar neste exercício será desenvolvida em alguns dos exercícios seguintes. Neste e em outros conjuntos de exercícios futuros neste curso, é suficiente enviar apenas o estado final da aplicação. Se desejar, também pode criar um commit para cada exercício da série, mas é algo totalmente opcional.</i>
 
@@ -642,7 +642,7 @@ Ou seja, de acordo com Martin, o progresso cuidadoso, passo a passo, é, ainda, 
 
 **ATENÇÃO II** "create-react-app" faz automaticamente com que o projeto se torne um repositório git, a menos que a aplicação seja criada dentro de um repositório já existente. É muito provável que você **não queira** que o projeto se torne um repositório, então execute o comando _rm -rf .git_ na raiz do projeto.
 
-<h4>1.2: Informações do curso — 2º passo</h4>
+<h4>1.2: course information — 2º passo</h4>
 
 Refatore o componente <i>Content</i> de tal forma que ele não renderize os nomes das partes ou seus números de exercícios <i>per se</i>. Em vez disso, somente renderiza três componentes <i>Part</i>, cada um dos quais renderiza o nome e o número de exercícios de uma parte.
 
