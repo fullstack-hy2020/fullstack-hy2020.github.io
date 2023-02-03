@@ -250,17 +250,17 @@ Let's implement a GraphQL server with today's leading library: [Apollo Server](h
 Create a new npm project with _npm init_ and install the required dependencies.
 
 ```bash
-npm install apollo-server@3.10.1 graphql
+npm install @apollo/server graphql
 ```
 
-**Note** at the time of writing (10th Dec 2022) the code used in this part is not fully compatible with the new version of the Apollo Server, and because of this, if you want everything to work smoothly you should install the version _3.10.1_. Material shall be updated to use the most recent Apollo Server in early 2023.
 
 Also create a `index.js` file in your project's root directory.
 
 The initial code is as follows: 
 
 ```js
-const { ApolloServer, gql } = require('@apollo/server')
+const { ApolloServer } = require('@apollo/server')
+const { startStandaloneServer } = require('@apollo/server/standalone')
 
 let persons = [
   {
@@ -285,7 +285,7 @@ let persons = [
   },
 ]
 
-const typeDefs = gql`
+const typeDefs = `
   type Person {
     name: String!
     phone: String
@@ -315,12 +315,14 @@ const server = new ApolloServer({
   resolvers,
 })
 
-server.listen().then(({ url }) => {
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+}).then(({ url }) => {
   console.log(`Server ready at ${url}`)
 })
 ```
 
-The heart of the code is an _ApolloServer_, which is given two parameters:
+The heart of the code is an [ApolloServer](https://www.apollographql.com/docs/apollo-server/api/apollo-server/), which is given two parameters:
 
 ```js
 const server = new ApolloServer({
@@ -331,7 +333,7 @@ const server = new ApolloServer({
 
 The first parameter, _typeDefs_, contains the GraphQL schema. 
 
-The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/tutorials/fullstack-quickstart/04-writing-query-resolvers) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to. 
+The second parameter is an object, which contains the [resolvers](https://www.apollographql.com/docs/apollo-server/data/resolvers/) of the server. These are the code, which defines <i>how</i> GraphQL queries are responded to. 
 
 The code of the resolvers is the following: 
 
@@ -426,12 +428,9 @@ The second parameter, _args_, contains the parameters of the query.
 The resolver then returns from the array _persons_ the person whose name is the same as the value of <i>args.name</i>. 
 The resolver does not need the first parameter _root_.
  
-
- 
- In fact, all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript, the parameters don't have to be defined if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
+In fact, all resolver functions are given [four parameters](https://www.graphql-tools.com/docs/resolvers#resolver-function-signature). With JavaScript, the parameters don't have to be defined if they are not needed. We will be using the first and the third parameter of a resolver later in this part. 
 
 ### The default resolver
-
 
 When we do a query, for example
 
@@ -453,7 +452,6 @@ We have so far only defined resolvers for fields of the type <i>Query</i>, so fo
 Because we did not define resolvers for the fields of the type <i>Person</i>, Apollo has defined [default resolvers](https://www.graphql-tools.com/docs/resolvers/#default-resolver) for them. 
 They work like the one shown below: 
 
-
 ```js
 const resolvers = {
   Query: {
@@ -473,12 +471,9 @@ const resolvers = {
 }
 ```
 
-
 The default resolver returns the value of the corresponding field of the object. The object itself can be accessed through the first parameter of the resolver, _root_.
 
-
 If the functionality of the default resolver is enough, you don't need to define your own. It is also possible to define resolvers for only some fields of a type, and let the default resolvers handle the rest. 
-
 
 We could for example define that the address of all persons is 
 <i>Manhattan New York</i> by hard-coding the following to the resolvers of the street and city fields of the type <i>Person</i>:
@@ -516,9 +511,7 @@ type Query {
 }
 ```
 
-
 so a person now has a field with the type <i>Address</i>, which contains the street and the city. 
-
 
 The queries requiring the address change into
 
@@ -564,7 +557,6 @@ let persons = [
   // ...
 ]
 ```
-
 
 The person-objects saved in the server are not exactly the same as the GraphQL type <i>Person</i> objects described in the schema. 
 
@@ -615,9 +607,7 @@ type Mutation {
 }
 ```
 
-
 The Mutation is given the details of the person as parameters. The parameter <i>phone</i> is the only one which is nullable. The Mutation also has a return value. The return value is type <i>Person</i>, the idea being that the details of the added person are returned if the operation is successful and if not, null. Value for the field <i>id</i> is not given as a parameter. Generating an id is better left for the server. 
-
 
 Mutations also require a resolver: 
 
@@ -707,14 +697,13 @@ If we try to create a new person, but the parameters do not correspond with the 
 
 So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
 
-However, GraphQL cannot handle everything automatically. For example, stricter rules for data sent to a Mutation have to be added manually.
-The errors from those rules are handled by [the error handling mechanism of Apollo Server](https://www.apollographql.com/docs/apollo-server/data/errors).
+However, GraphQL cannot handle everything automatically. For example, stricter rules for data sent to a Mutation have to be added manually. An error could be handeled by throwing [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a proper 
+[error code](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes).
 
-
-Let's block adding the same name to the phonebook multiple times: 
+Let's prevent adding the same name to the phonebook multiple times: 
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('@apollo/server') // highlight-line
+const { GraphQLError } = require('graphql') // highlight-line
 
 // ...
 
@@ -724,8 +713,11 @@ const resolvers = {
     addPerson: (root, args) => {
       // highlight-start
       if (persons.find(p => p.name === args.name)) {
-        throw new UserInputError('Name must be unique', {
-          invalidArgs: args.name,
+        throw new GraphQLError('Name must be unique', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name
+          }
         })
       }
       // highlight-end
@@ -739,9 +731,9 @@ const resolvers = {
 ```
 
 
-So if the name to be added already exists in the phonebook, throw _UserInputError_ error. 
+So if the name to be added already exists in the phonebook, throw _GraphQLError_ error. 
 
-![](../../images/8/6x.png)
+![](../../images/8/6new.png)
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
 
@@ -932,12 +924,6 @@ In some cases, it might be beneficial to name the queries. This is the case espe
 
 Through the exercises, we will implement a GraphQL backend for a small library. 
 Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to _npm init_ and to install dependencies!
-
-**Note** at the time of writing (10th Dec 2022) the code used in this part is not fully compatible with the new version of the Apollo Server, and because of this, if you want everything to work smoothly you should install the version _3.10.1_:
-
-```bash
-npm install apollo-server@3.10.1 graphql
-```
 
 Note also that the code does not initially work since the schema definition is not complete.
 

@@ -159,13 +159,12 @@ const App = () => {
 }
 ```
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
-
 ### Adding a token to a header
 
 After the backend changes, creating new persons requires that a valid user token is sent with the request. In order to send the token, we have to change the way we define the _ApolloClient_ object in <i>index.js</i> a little. 
 
 ```js
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
 import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
@@ -174,13 +173,15 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `bearer ${token}` : null,
+      authorization: token ? `Bearer ${token}` : null,
     }
   }
 })
 // highlight-end
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // highlight-line
+const httpLink = createHttpLink({
+  uri: '/graphql',
+})
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -188,7 +189,7 @@ const client = new ApolloClient({
 })
 ```
 
-The link parameter given to the _client_ object defines how apollo connects to the server. Here, the normal [httpLink](https://www.apollographql.com/docs/link/links/http.htm) connection is modified so that the request's <i>authorization</i> [header](https://www.apollographql.com/docs/react/networking/authentication/#header) contains the token if one has been saved to the localStorage. 
+The field _uri_ that was previously used when creating the _client_ object has been replaced by the field _link_, which defines in a more complicated case how Apollo is connected to the server. The server url is now wrapped using the function [createHttpLink](https://www.apollographql.com/docs/link/links/http.htm) into a suitable httpLink object. The link is modified by the [context](https://www .apollographql.com/docs/react/api/link/apollo-link-context/#overview) defined by the authLink object so that a possible token in localStorage is [set to header](https://www.apollographql.com/docs/react/networking/authentication /#header) <i>authorization</i> for each request to the server.
 
 Creating new persons and changing numbers works again. There is however one remaining problem. If we try to add a person without a phone number, it is not possible. 
 
@@ -217,7 +218,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
+Current application code can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branch <i>part8-6</i>.
 
 ### Updating cache, revisited
 
@@ -231,14 +232,16 @@ const PersonForm = ({ setError }) => {
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const errors = error.graphQLErrors[0].extensions.error.errors
+      const messages = Object.values(errors).map(e => e.message).join('\n')
+      setError(messages)
     }
   })
 ```
 
 This approach is pretty good, the drawback being that the query is always rerun with any updates. 
 
-It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/data/mutations/#update) callback for the mutation, which Apollo runs after the mutation:
+It is possible to optimize the solution by handling updating the cache ourselves. This is done by defining a suitable [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function) callback for the mutation, which Apollo runs after the mutation:
 
 ```js 
 const PersonForm = ({ setError }) => {
@@ -276,7 +279,7 @@ Be diligent with the cache. Old data in cache can cause hard-to-find bugs. As we
 
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Read more [here](https://martinfowler.com/bliki/TwoHardThings.html).
 
-The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branch <i>part8-8</i>.
+The current code of the application can be found on [Github](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branch <i>part8-7</i>.
 
 </div>
 
