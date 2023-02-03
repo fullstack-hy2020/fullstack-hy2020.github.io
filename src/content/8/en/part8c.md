@@ -237,7 +237,6 @@ Every user is connected to a bunch of other persons in the system through the _f
 
 Logging in and identifying the user are handled the same way we used in [part 4](/en/part4/token_authentication) when we used REST, by using tokens. 
 
-
 Let's extend the schema like so: 
 
 ```js
@@ -276,8 +275,6 @@ The resolvers of the mutations are as follows:
 ```js
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
-
 Mutation: {
   // ..
   createUser: async (root, args) => {
@@ -285,8 +282,12 @@ Mutation: {
 
     return user.save()
       .catch(error => {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Creating the user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       })
   },
@@ -294,7 +295,11 @@ Mutation: {
     const user = await User.findOne({ username: args.username })
 
     if ( !user || args.password !== 'secret' ) {
-      throw new UserInputError("wrong credentials")
+      throw new GraphQLError('wrong credentials', {
+        extensions: {
+          code: 'BAD_USER_INPUT'
+        }
+      })        
     }
 
     const userForToken = {
@@ -302,13 +307,12 @@ Mutation: {
       id: user._id,
     }
 
-    return { value: jwt.sign(userForToken, JWT_SECRET) }
+    return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
   },
 },
 ```
 
-The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication).
-
+The new user mutation is straightforward. The login mutation checks if the username/password pair is valid. And if it is indeed valid, it returns a jwt token familiar from [part 4](/en/part4/token_authentication). Note that the *JWT\_SECRET* must be defined in the  <i>.env</i> file.
 
 User creation is done now as follows:
 
@@ -342,25 +346,26 @@ In the Apollo Explorer, the header is added to a query like so:
 
 ![](../../images/8/24x.png)
 
-Let's now expand the definition of the _server_ object by adding a third parameter [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument) to the constructor call:
+Modify the startup of the backend by giving the function that handles the startup [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) another parameter [context](https://www.apollographql.com /docs/apollo-server/data/context/)
 
 ```js
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+startStandaloneServer(server, {
+  listen: { port: 4000 },
   // highlight-start
-  context: async ({ req }) => {
+  context: async ({ req, res }) => {
     const auth = req ? req.headers.authorization : null
-    if (auth && auth.toLowerCase().startsWith('bearer ')) {
+    if (auth && auth.startsWith('Bearer ')) {
       const decodedToken = jwt.verify(
-        auth.substring(7), JWT_SECRET
+        auth.substring(7), process.env.JWT_SECRET
       )
-
-      const currentUser = await User.findById(decodedToken.id).populate('friends')
+      const currentUser = await User
+        .findById(decodedToken.id).populate('friends')
       return { currentUser }
     }
-  }
+  },
   // highlight-end
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
 })
 ```
 
@@ -378,6 +383,9 @@ Query: {
   }
 },
 ```
+If the header has the correct value, the query returns the user information identified by the header
+
+![](../../images/8/50new.png)
 
 ### Friends list
 
@@ -389,33 +397,41 @@ _addPerson_ mutation changes like so:
 
 ```js
 Mutation: {
-  addPerson: async (root, args, context) => { // highlight-line
-    const person = new Person({ ...args })
-  // highlight-start
-    const currentUser = context.currentUser
+    addPerson: async (root, args, context) => { // highlight-line
+      const person = new Person({ ...args })
+      const currentUser = context.currentUser // highlight-line
 
-    if (!currentUser) {
-      throw new AuthenticationError("not authenticated")
-    }
-  // highlight-end
+      // highlight-start
+      if (!currentUser) {
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          }
+        })
+      }
+      // highlight-end
 
-    try {
-      await person.save()
-      currentUser.friends = currentUser.friends.concat(person) // highlight-line
-      await currentUser.save() // highlight-line
-    } catch (error) {
-      throw new UserInputError(error.message, {
-        invalidArgs: args,
-      })
-    }
-
-    return person
-  },
+      try {
+        await person.save()
+        currentUser.friends = currentUser.friends.concat(person) // highlight-line
+        await currentUser.save() // highlight-line
+      } catch (error) {
+        throw new GraphQLError('Saving user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
+        })
+      }
+      
+      return person
+    },
   //...
 }
 ```
 
-If a logged-in user cannot be found from the context, an _AuthenticationError_ is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user. 
+If a logged-in user cannot be found from the context, an _GraphQLError_ with a proper message is thrown. Creating new persons is now done with _async/await_ syntax, because if the operation is successful, the created person is added to the friends list of the user. 
 
 Let's also add functionality for adding an existing user to your friends list. The mutation is as follows: 
 
@@ -436,7 +452,9 @@ And the mutation's resolver:
       currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
     if (!currentUser) {
-      throw new AuthenticationError("not authenticated")
+      throw new GraphQLError('wrong credentials', {
+        extensions: { code: 'BAD_USER_INPUT' }
+      }) 
     }
 
     const person = await Person.findOne({ name: args.name })

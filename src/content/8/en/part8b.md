@@ -602,7 +602,9 @@ const PersonForm = ({ setError }) => {
     refetchQueries: [  {query: ALL_PERSONS } ],
     // highlight-start
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const errors = error.graphQLErrors[0].extensions.error.errors
+      const messages = Object.values(errors).map(e => e.message).join('\n')
+      setError(messages)
     }
     // highlight-end
   })
@@ -611,7 +613,8 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-<!-- Renderöidään mahdollinen virheilmoitus näytölle -->
+We have to dig quite deep to the error object until we find the proper error messages...
+
 We can then render the error message on the screen as necessary:
 
 ```js

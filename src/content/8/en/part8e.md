@@ -142,9 +142,7 @@ Let us start by extracting the schema definition to file
 <i>schema.js</i>
 
 ```js
-const { gql } = require('@apollo/server')
-
-const typeDefs = gql`
+const typeDefs = `
   type User {
     username: String!
     friends: [Person!]!
@@ -198,121 +196,166 @@ module.exports = typeDefs
 The resolvers definition is moved to the file <i>resolvers.js</i>
 
 ```js
-const { UserInputError, AuthenticationError } = require('@apollo/server')
+const { GraphQLError } = require('graphql')
 const jwt = require('jsonwebtoken')
 const Person = require('./models/person')
 const User = require('./models/user')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
-
 const resolvers = {
   Query: {
     personCount: async () => Person.collection.countDocuments(),
-    allPersons: async (root, args) => {
+    allPersons: async (root, args, context) => {
       if (!args.phone) {
         return Person.find({})
       }
-
-      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+  
+      return Person.find({ phone: { $exists: args.phone === 'YES'  }})
     },
     findPerson: async (root, args) => Person.findOne({ name: args.name }),
     me: (root, args, context) => {
       return context.currentUser
-    },
+    }
   },
   Person: {
-    address: (root) => {
+    address: ({ street, city }) => {
       return {
-        street: root.street,
-        city: root.city,
+        street,
+        city,
       }
     },
   },
   Mutation: {
     addPerson: async (root, args, context) => {
+      const person = new Person({ ...args })
       const currentUser = context.currentUser
 
       if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          }
+        })
       }
 
-      const person = new Person({ ...args })
       try {
         await person.save()
         currentUser.friends = currentUser.friends.concat(person)
         await currentUser.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
-
+  
       return person
     },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name })
       person.phone = args.phone
-
+      
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Editing number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
-      return person.save()
+
+      return person
     },
     createUser: async (root, args) => {
       const user = new User({ username: args.username })
-
-      return user.save().catch((error) => {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+  
+      return user.save()
+        .catch(error => {
+          throw new GraphQLError('Creating the user failed', {
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              invalidArgs: args.name,
+              error
+            }
+          })
         })
-      })
     },
     login: async (root, args) => {
       const user = await User.findOne({ username: args.username })
-
-      if (!user || args.password !== 'secret') {
-        throw new UserInputError('wrong credentials')
+  
+      if ( !user || args.password !== 'secret' ) {
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' }
+        })        
       }
-
+  
       const userForToken = {
         username: user.username,
         id: user._id,
       }
-
-      return { value: jwt.sign(userForToken, JWT_SECRET) }
+  
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
     },
     addAsFriend: async (root, args, { currentUser }) => {
-      const nonFriendAlready = (person) =>
+      const nonFriendAlready = (person) => 
         !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
-
+  
       if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' }
+        }) 
       }
-
+  
       const person = await Person.findOne({ name: args.name })
-      if (nonFriendAlready(person)) {
+      if ( nonFriendAlready(person) ) {
         currentUser.friends = currentUser.friends.concat(person)
       }
-
+  
       await currentUser.save()
-
+  
       return currentUser
     },
-  },
+  }
 }
 
 module.exports = resolvers
 ```
 
-Next we will replace Apollo Server with [Apollo Server Express](https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express). Following libraries are installed
+So far, we have started the application with the easy-to-use function [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/#startstandaloneserver), thanks to which the application has not had to be configured at much:
+
+```js
+const { startStandaloneServer } = require('@apollo/server/standalone')
+
+// ...
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+  context: async ({ req, res }) => {
+    /// ...
+  },
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+}) 
+```
+
+Unfortunately startStandaloneServer does not allow adding subscriptions to the application, so let's switch to the more robust [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) function. As the name of the function already suggests, it is an Express middleware, which means that Express must also be configured for the application, with the GraphQL server acting as middleware.
+
+Let us install Express
 
 ```
-npm install express cors body-parser @graphql-tools/schema
+npm install express cors
 ```
+
 and the file <i>index.js</i> changes to:
 
 ```js
@@ -354,42 +397,31 @@ const start = async () => {
   const app = express()
   const httpServer = http.createServer(app)
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers })
-
   const server = new ApolloServer({
-    schema,
-    context: async ({ req }) => {
-      const auth = req ? req.headers.authorization : null
-      if (auth && auth.toLowerCase().startsWith('bearer ')) {
-        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
-        const currentUser = await User.findById(decodedToken.id).populate(
-          'friends'
-        )
-        return { currentUser }
-      }
-    },
+    typeDefs,
+    resolvers,
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
-  
+
+  await server.start()
+
   app.use(
     '/',
     cors(),
-    bodyParser.json(),
+    express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => {
         const auth = req ? req.headers.authorization : null
-        if (auth && auth.toLowerCase().startsWith('bearer ')) {
-          const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
+        if (auth && auth.startsWith('Bearer ')) {
+          const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
           const currentUser = await User.findById(decodedToken.id).populate(
             'friends'
           )
           return { currentUser }
-        }  
+        }
       },
     }),
-  );
-
-  await server.start()
+  )
 
   const PORT = 4000
 
@@ -398,9 +430,16 @@ const start = async () => {
   )
 }
 
-// call the function that does the setup and starts the server
 start()
 ```
+
+There are several changes to the code. [ApolloServerPluginDrainHttpServer](https://www.apollographql.com/docs/apollo-server/api/plugin/drain-http-server) has now been added to the configuration of the GraphQL server according to the recommendations of the documentation:
+
+> <i>We highly recommend using this plugin to ensure your server shuts down gracefully.</i>
+
+The GraphQL server in the _server_ variable is now connected to listen to the root of the server, i.e. to the _/_ route, using the _expressMiddleware_ object. Information about the logged-in user is set in the context using the function we defined earlier. Since it is an Express server, the middlewares express-json and cors are also needed so that the data included in the requests is correctly parsed and so that CORS problems do not appear.
+
+Since the GraphQL server must be started before the Express application can start listening to the specified port, the entire initialization has had to be placed in an <i>async function</i>, which allows waiting for the GraphQL server to start:
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 

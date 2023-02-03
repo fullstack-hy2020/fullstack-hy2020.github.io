@@ -281,8 +281,6 @@ Mutaatioiden resolverit seuraavassa:
 ```js
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
-
 Mutation: {
   // ..
   createUser: async (root, args) => {
@@ -290,16 +288,24 @@ Mutation: {
 
     return user.save()
       .catch(error => {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Creating the user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       })
   },
   login: async (root, args) => {
     const user = await User.findOne({ username: args.username })
 
-    if ( !user || args.password !== 'secret' ) {
-      throw new UserInputError("wrong credentials")
+    if ( !user || args.password !== 'secret' ) {
+      throw new GraphQLError('wrong credentials', {
+        extensions: {
+          code: 'BAD_USER_INPUT'
+        }
+      })        
     }
 
     const userForToken = {
@@ -307,12 +313,12 @@ Mutation: {
       id: user._id,
     }
 
-    return { value: jwt.sign(userForToken, JWT_SECRET) }
+    return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
   },
 },
 ```
 
-Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.
+Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.  Jotta koodi toimisi, täytyy ympäristömuuttujalle *JWT\_SECRET* muistaa antaa arvo  <i>.env</i>-tiedostossa.
 
 Käyttäjän luonti onnistuu nyt seuraavasti:
 
@@ -344,31 +350,32 @@ Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäj
 
 ![](../../images/8/24x.png)
 
-Laajennetaan sitten backendin olion _server_ määrittelyä lisäämällä konstruktorikutsuun kolmas parametri [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument):
+Muutetaan backendin käynnistämistä siten, että annetaan käynnistyksen huolehtivalle funktiolle [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toinen parametri [context](https://www.apollographql.com/docs/apollo-server/data/context/):
 
 ```js
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+startStandaloneServer(server, {
+  listen: { port: 4000 },
   // highlight-start
-  context: async ({ req }) => {
+  context: async ({ req, res }) => {
     const auth = req ? req.headers.authorization : null
-    if (auth && auth.toLowerCase().startsWith('bearer ')) {
+    if (auth && auth.startsWith('Bearer ')) {
       const decodedToken = jwt.verify(
-        auth.substring(7), JWT_SECRET
+        auth.substring(7), process.env.JWT_SECRET
       )
-
       const currentUser = await User
         .findById(decodedToken.id).populate('friends')
-
       return { currentUser }
     }
-  }
+  },
   // highlight-end
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
 })
 ```
 
-Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>, context on siis oikea paikka tehdä asioita, jotka ovat useille resolvereille yhteistä, kuten pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
+Kontekstin avulla voidaan suorittaa jotain kaikille kyselyille ja mutaatioille yhteisiä asioita, esim. pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
+
+Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>.
 
 Määrittelemämme koodi siis asettaa kontekstin kenttään _currentUser_ pyynnön tehnyttä käyttäjää vastaavan olion. Jos pyyntöön ei liity käyttäjää, on kentän arvo määrittelemätön.
 
@@ -382,6 +389,10 @@ Query: {
   }
 },
 ```
+
+Jos headerissa on oikea arvo, palauttaa kysely headerin yksilöimän käyttäjän tiedot
+
+![](../../images/8/50new.png)
 
 ### Tuttavalista
 
@@ -397,17 +408,27 @@ Mutation: {
     const person = new Person({ ...args })
     const currentUser = context.currentUser // highlight-line
 
-    if (!currentUser) { // highlight-line
-      throw new AuthenticationError("not authenticated") // highlight-line
-    } // highlight-line
+    // highlight-start
+    if (!currentUser) {
+      throw new GraphQLError('not authenticated', {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+        }
+      })
+    }
+    // highlight-end
 
     try {
       await person.save()
       currentUser.friends = currentUser.friends.concat(person) // highlight-line
       await currentUser.save() // highlight-line
     } catch (error) {
-      throw new UserInputError(error.message, {
-        invalidArgs: args,
+      throw new GraphQLError('Saving user failed', {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+          invalidArgs: args.name,
+          error
+        }
       })
     }
 
@@ -417,7 +438,7 @@ Mutation: {
 }
 ```
 
-Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _AuthenticationError_. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneen talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
+Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _GraphQLError_ asianomaisella virheilmoituksella varustettuna. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneen talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
 
 Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa:
 
@@ -438,7 +459,9 @@ Mutaation toteuttava resolveri:
       !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
     if (!currentUser) {
-      throw new AuthenticationError("not authenticated")
+      throw new GraphQLError('wrong credentials', {
+        extensions: { code: 'BAD_USER_INPUT' }
+      }) 
     }
 
     const person = await Person.findOne({ name: args.name })
