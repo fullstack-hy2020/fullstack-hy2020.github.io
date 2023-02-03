@@ -142,9 +142,7 @@ Let us start by extracting the schema definition to file
 <i>schema.js</i>
 
 ```js
-const { gql } = require('@apollo/server')
-
-const typeDefs = gql`
+const typeDefs = `
   type User {
     username: String!
     friends: [Person!]!
@@ -198,125 +196,171 @@ module.exports = typeDefs
 The resolvers definition is moved to the file <i>resolvers.js</i>
 
 ```js
-const { UserInputError, AuthenticationError } = require('@apollo/server')
+const { GraphQLError } = require('graphql')
 const jwt = require('jsonwebtoken')
 const Person = require('./models/person')
 const User = require('./models/user')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
-
 const resolvers = {
   Query: {
     personCount: async () => Person.collection.countDocuments(),
-    allPersons: async (root, args) => {
+    allPersons: async (root, args, context) => {
       if (!args.phone) {
         return Person.find({})
       }
-
-      return Person.find({ phone: { $exists: args.phone === 'YES' } })
+  
+      return Person.find({ phone: { $exists: args.phone === 'YES'  }})
     },
     findPerson: async (root, args) => Person.findOne({ name: args.name }),
     me: (root, args, context) => {
       return context.currentUser
-    },
+    }
   },
   Person: {
-    address: (root) => {
+    address: ({ street, city }) => {
       return {
-        street: root.street,
-        city: root.city,
+        street,
+        city,
       }
     },
   },
   Mutation: {
     addPerson: async (root, args, context) => {
+      const person = new Person({ ...args })
       const currentUser = context.currentUser
 
       if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          }
+        })
       }
 
-      const person = new Person({ ...args })
       try {
         await person.save()
         currentUser.friends = currentUser.friends.concat(person)
         await currentUser.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
-
+  
       return person
     },
     editNumber: async (root, args) => {
       const person = await Person.findOne({ name: args.name })
       person.phone = args.phone
-
+      
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Editing number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
-      return person.save()
+
+      return person
     },
     createUser: async (root, args) => {
       const user = new User({ username: args.username })
-
-      return user.save().catch((error) => {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+  
+      return user.save()
+        .catch(error => {
+          throw new GraphQLError('Creating the user failed', {
+            extensions: {
+              code: 'BAD_USER_INPUT',
+              invalidArgs: args.name,
+              error
+            }
+          })
         })
-      })
     },
     login: async (root, args) => {
       const user = await User.findOne({ username: args.username })
-
-      if (!user || args.password !== 'secret') {
-        throw new UserInputError('wrong credentials')
+  
+      if ( !user || args.password !== 'secret' ) {
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' }
+        })        
       }
-
+  
       const userForToken = {
         username: user.username,
         id: user._id,
       }
-
-      return { value: jwt.sign(userForToken, JWT_SECRET) }
+  
+      return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
     },
     addAsFriend: async (root, args, { currentUser }) => {
-      const nonFriendAlready = (person) =>
+      const nonFriendAlready = (person) => 
         !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
-
+  
       if (!currentUser) {
-        throw new AuthenticationError('not authenticated')
+        throw new GraphQLError('wrong credentials', {
+          extensions: { code: 'BAD_USER_INPUT' }
+        }) 
       }
-
+  
       const person = await Person.findOne({ name: args.name })
-      if (nonFriendAlready(person)) {
+      if ( nonFriendAlready(person) ) {
         currentUser.friends = currentUser.friends.concat(person)
       }
-
+  
       await currentUser.save()
-
+  
       return currentUser
     },
-  },
+  }
 }
 
 module.exports = resolvers
 ```
 
-Next we will replace Apollo Server with [Apollo Server Express](https://www.apollographql.com/docs/apollo-server/integrations/middleware/#apollo-server-express). Following libraries are installed
+So far, we have started the application with the easy-to-use function [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/#startstandaloneserver), thanks to which the application has not had to be configured at much:
+
+```js
+const { startStandaloneServer } = require('@apollo/server/standalone')
+
+// ...
+
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+})
+
+startStandaloneServer(server, {
+  listen: { port: 4000 },
+  context: async ({ req, res }) => {
+    /// ...
+  },
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
+}) 
+```
+
+Unfortunately startStandaloneServer does not allow adding subscriptions to the application, so let's switch to the more robust [expressMiddleware](https://www.apollographql.com/docs/apollo-server/api/express-middleware/) function. As the name of the function already suggests, it is an Express middleware, which means that Express must also be configured for the application, with the GraphQL server acting as middleware.
+
+Let us install Express
 
 ```
-npm install express cors body-parser @graphql-tools/schema
+npm install express cors
 ```
+
 and the file <i>index.js</i> changes to:
 
 ```js
 const { ApolloServer } = require('@apollo/server')
+// highlight-start
 const { expressMiddleware } = require('@apollo/server/express4')
 const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
 const { makeExecutableSchema } = require('@graphql-tools/schema')
@@ -324,6 +368,7 @@ const express = require('express')
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const http = require('http')
+// highlight-end
 
 const jwt = require('jsonwebtoken')
 
@@ -354,42 +399,30 @@ const start = async () => {
   const app = express()
   const httpServer = http.createServer(app)
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers })
-
   const server = new ApolloServer({
-    schema,
-    context: async ({ req }) => {
-      const auth = req ? req.headers.authorization : null
-      if (auth && auth.toLowerCase().startsWith('bearer ')) {
-        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
-        const currentUser = await User.findById(decodedToken.id).populate(
-          'friends'
-        )
-        return { currentUser }
-      }
-    },
+    schema: makeExecutableSchema({ typeDefs, resolvers }),
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
-  
+
+  await server.start()
+
   app.use(
     '/',
     cors(),
-    bodyParser.json(),
+    express.json(),
     expressMiddleware(server, {
       context: async ({ req }) => {
         const auth = req ? req.headers.authorization : null
-        if (auth && auth.toLowerCase().startsWith('bearer ')) {
-          const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
+        if (auth && auth.startsWith('Bearer ')) {
+          const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
           const currentUser = await User.findById(decodedToken.id).populate(
             'friends'
           )
           return { currentUser }
-        }  
+        }
       },
     }),
-  );
-
-  await server.start()
+  )
 
   const PORT = 4000
 
@@ -398,9 +431,16 @@ const start = async () => {
   )
 }
 
-// call the function that does the setup and starts the server
 start()
 ```
+
+There are several changes to the code. [ApolloServerPluginDrainHttpServer](https://www.apollographql.com/docs/apollo-server/api/plugin/drain-http-server) has now been added to the configuration of the GraphQL server according to the recommendations of the documentation:
+
+> <i>We highly recommend using this plugin to ensure your server shuts down gracefully.</i>
+
+The GraphQL server in the _server_ variable is now connected to listen to the root of the server, i.e. to the _/_ route, using the _expressMiddleware_ object. Information about the logged-in user is set in the context using the function we defined earlier. Since it is an Express server, the middlewares express-json and cors are also needed so that the data included in the requests is correctly parsed and so that CORS problems do not appear.
+
+Since the GraphQL server must be started before the Express application can start listening to the specified port, the entire initialization has had to be placed in an <i>async function</i>, which allows waiting for the GraphQL server to start:
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-6), branch <i>part8-6</i>.
 
@@ -422,14 +462,13 @@ So when a new person is added, all of its details are sent to all subscribers.
 First, we have to install two packages for adding subscriptions to GraphQL and a Node.js WebSocket library:
 
 ```
-npm install graphql-subscriptions ws graphql-ws
+npm install graphql-ws ws @graphql-tools/schema
 ```
 
 The file <i>index.js</i> is changed to
 
 ```js
 // highlight-start
-const { execute, subscribe } = require('graphql')
 const { WebSocketServer } = require('ws')
 const { useServer } = require('graphql-ws/lib/use/ws')
 // highlight-end
@@ -440,29 +479,20 @@ const start = async () => {
   const app = express()
   const httpServer = http.createServer(app)
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers })
-
-// highlight-start
+  // highlight-start
   const wsServer = new WebSocketServer({
     server: httpServer,
     path: '/',
   })
-
-  const serverCleanup = useServer({ schema }, wsServer)
+  // highlight-end
+  
+  // highlight-start
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+  const serverCleanup = useServer({ schema }, wsServer);
   // highlight-end
 
   const server = new ApolloServer({
     schema,
-    context: async ({ req }) => {
-      const auth = req ? req.headers.authorization : null
-      if (auth && auth.toLowerCase().startsWith('bearer ')) {
-        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
-        const currentUser = await User.findById(decodedToken.id).populate(
-          'friends'
-        )
-        return { currentUser }
-      }
-    },
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       // highlight-start
@@ -470,9 +500,9 @@ const start = async () => {
         async serverWillStart() {
           return {
             async drainServer() {
-              await serverCleanup.dispose()
+              await serverCleanup.dispose();
             },
-          }
+          };
         },
       },
       // highlight-end
@@ -481,10 +511,23 @@ const start = async () => {
 
   await server.start()
 
-  server.applyMiddleware({
-    app,
-    path: '/',
-  })
+  app.use(
+    '/',
+    cors(),
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const auth = req ? req.headers.authorization : null
+        if (auth && auth.startsWith('Bearer ')) {
+          const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+          const currentUser = await User.findById(decodedToken.id).populate(
+            'friends'
+          )
+          return { currentUser }
+        }
+      },
+    }),
+  )
 
   const PORT = 4000
 
@@ -496,17 +539,16 @@ const start = async () => {
 start()
 ```
 
-
 When queries and mutations are used, GraphQL uses the HTTP protocol in the communication. In case of subscriptions, the communication between client and server happens with [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API).
 
 The above code registers a WebSocketServer object to listen the WebSocket connections, besides the usual HTTP connections that the server listens. The second part of the definition registers a function that closes the WebSocket connection on server shutdown.
+If you're interested in more details about configurations, Apollo's [documentation](https://www.apollographql.com/docs/apollo-server/data/subscriptions) explains in relative detail what each line of code does.
 
 WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
 
 The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so that it sends a notification to subscribers. 
 
 The required changes are as follows:
-
 
 ```js
 // highlight-start
@@ -524,7 +566,11 @@ const resolvers = {
       const currentUser = context.currentUser
 
       if (!currentUser) {
-        throw new AuthenticationError("not authenticated")
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          }
+        })
       }
 
       try {
@@ -532,8 +578,12 @@ const resolvers = {
         currentUser.friends = currentUser.friends.concat(person)
         await currentUser.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 
@@ -552,9 +602,13 @@ const resolvers = {
 }
 ```
 
+The following library needs to be installed
 
+```
+npm install graphql-subscriptions
+```
 
-With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class).
+With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions#the-pubsub-class).
 
 There is only few lines of code added, but quite much is happening under the hood. The resolver of the _personAdded_ subscription registers and saves info about all the clients that do the subscription. The clients are saved to an 
 ["iterator object"](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events) called <i>PERSON\_ADDED</i>  thanks to the following code:
@@ -589,6 +643,8 @@ If the subscription does not work, check that you have correct connection settin
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.
 
+Implementin gsubscriptions involves a lot of configurations. You will be able to cope with the few exercises of this course without worrying much about the details. If you planning to use subsctiptions in an production use application, you should definitely read carefully Apollo's [documentation on subscriptions](https://www.apollographql.com/docs/apollo-server/data/subscriptions).
+
 ### Subscriptions on the client
 
 In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
@@ -596,7 +652,7 @@ The configuration in <i>index.js</i> has to be modified like so:
 
 ```js
 import { 
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
+  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink,
   split  // highlight-line
 } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
@@ -617,15 +673,11 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const httpLink = new HttpLink({
-  uri: 'http://localhost:4000',
-})
+const httpLink = createHttpLink({ uri: 'http://localhost:4000' })
 
 // highlight-start
 const wsLink = new GraphQLWsLink(
-  createClient({
-    url: 'ws://localhost:4000',
-  })
+  createClient({ url: 'ws://localhost:4000' })
 )
 // highlight-end
 
@@ -664,10 +716,7 @@ npm install @apollo/client graphql-ws
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
 
 ```js
-const wsLink = new WebSocketLink({
-  uri: `ws://localhost:4000/graphql`,
-  options: { reconnect: true }
-})
+const httpLink = createHttpLink({ uri: 'http://localhost:4000' })
 
 const wsLink = new GraphQLWsLink(
   createClient({
@@ -678,7 +727,7 @@ const wsLink = new GraphQLWsLink(
 
 The subscriptions are done using the [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) hook function.
 
-Let's modify the code like so:
+Let's make the following changes to the code. Add the code defining the order to the file <i>queries.js</i>:
 
 ```js
 // highlight-start
@@ -690,11 +739,14 @@ export const PERSON_ADDED = gql`
   }
   ${PERSON_DETAILS}
 `
-// highlight-end
+```
 
-import {
-  useQuery, useMutation, useSubscription, useApolloClient // highlight-line
-} from '@apollo/client'
+and do the subscription in the App component:
+
+```js
+
+import { useQuery, useMutation, useSubscription } from '@apollo/client' // highlight-line
+
 
 const App = () => {
   // ...
