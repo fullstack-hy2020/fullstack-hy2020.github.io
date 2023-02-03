@@ -497,7 +497,7 @@ The selection of fields is done with the Mongo [syntax](https://docs.mongodb.com
 ```js
 usersRouter.get('/', async (request, response) => {
   const users = await User
-    .find({}).populate('notes', { content: 1, important:  })
+    .find({}).populate('notes', { content: 1, important: 1 })
 
   response.json(users)
 })
