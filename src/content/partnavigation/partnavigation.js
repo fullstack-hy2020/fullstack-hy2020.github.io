@@ -268,7 +268,7 @@ module.exports = {
     },
     '4': {
       a: 'Estructura de la aplicación backend, introducción a las pruebas',
-      b: 'Porbando el backend',
+      b: 'Probando el backend',
       c: 'Administración de usuarios',
       d: 'Autenticación de token',
     },

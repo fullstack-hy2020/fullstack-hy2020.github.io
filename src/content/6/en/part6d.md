@@ -765,7 +765,7 @@ As a technical detail, it should be noted that the helper functions <i>useCounte
 
 The application has a <i>Notification</i> component for displaying notifications to the user.
 
-Implement the application's notification state management using the useReduce hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on:
+Implement the application's notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on:
 
 ![](../../images/6/66new.png)
 

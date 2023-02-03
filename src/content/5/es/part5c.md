@@ -571,6 +571,8 @@ const author = component.container.querySelector('#author')
 
 <div class="content">
 
+### Pruebas de integración Frontend
+
 En la parte anterior del material del curso, escribimos pruebas de integración para el backend que probaron su lógica y conectaron la base de datos a través de la API proporcionada por el backend. Al escribir estas pruebas, tomamos la decisión consciente de no escribir pruebas unitarias, ya que el código para ese backend es bastante simple, y es probable que los errores en nuestra aplicación ocurran en escenarios más complicados de los que las pruebas unitarias son adecuadas.
 
 Hasta ahora, todas nuestras pruebas para el frontend han sido pruebas unitarias que han validado el correcto funcionamiento de componentes individuales. Las pruebas unitarias son útiles a veces, pero incluso un conjunto completo de pruebas unitarias no es suficiente para validar que la aplicación funciona como un todo.
