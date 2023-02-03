@@ -31,7 +31,7 @@ Certifique-se de que a guia <i>Rede</i> esteja aberta e marque a opção <i>Desa
 
 ### HTTP GET
 
-O servidor e o navegador web se comunicam usando o protocolo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). A guia <i>Network</i> mostra como o navegador e o servidor se comunicam.
+O servidor e o navegador web se comunicam usando o protocolo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). A guia <i>Rede</i> mostra como o navegador e o servidor se comunicam.
 
 Quando você recarrega a página (pressione a tecla F5 ou o símbolo &#8635; no seu navegador), o console mostrará que dois eventos aconteceram:
 
@@ -46,7 +46,7 @@ Ao clicar no primeiro evento, mais informações sobre o que está acontecendo s
 
 ![Visão detalhada de um único evento](../../images/0/3e.png)
 
-Na parte superior, <i>Geral</i>, mostra que o navegador solicitou o endereço <i>https://studies.cs.helsinki.fi/exampleapp</i> (embora o endereço tenha mudado ligeiramente desde que esta imagem foi feita) usando o método [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) e que a requisição foi bem-sucedida, pois o servidor respondeu com o código de status [200](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
+Na parte superior, <i>Geral</i>, mostra que o navegador requisitou o endereço <i>https://studies.cs.helsinki.fi/exampleapp</i> (embora o endereço tenha mudado ligeiramente desde que esta imagem foi feita) usando o método [GET](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/GET) e que a requisição foi bem-sucedida, pois o servidor respondeu com o código de status [200](https://en.wikipedia.org/wiki/List_of_HTTP_status_codes).
 
 A requisição e a resposta do servidor possuem vários [cabeçalhos](https://en.wikipedia.org/wiki/List_of_HTTP_header_fields):
 
@@ -94,8 +94,8 @@ const getFrontPageHtml = noteCount => {
       </head>
       <body>
         <div class='container'>
-          <h1>Full stack example app</h1>
-          <p>number of notes created ${noteCount}</p>
+          <h1>Exemplo de aplicação Full Stack</h1>
+          <p>Número de notas criadas: ${noteCount}</p>
           <a href='/notes'>notes</a>
           <img src='kuva.png' width='200' />
         </div>
@@ -418,11 +418,11 @@ Vamos revisar o que acontece quando a página https://studies.cs.helsinki.fi/exa
 
 Agora, vamos examinar como se adiciona uma nova nota.
 
-A página de notas contém um [elemento form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form).
+A página de notas contém um [elemento formulário](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Your_first_HTML_form) (form).
 
 ![Elemento de formulário destacado tanto na página web quanto nas Ferramentas do Desenvolvedor](../../images/0/20e.png)
 
-Quando o botão no formulário é clicado, o navegador enviará a entrada (input) do usuário para o servidor. Vamos abrir a guia <i>Rede</i> e ver como se envia o formulário:
+Quando o botão no formulário é clicado, o navegador envia a entrada (input) do usuário para o servidor. Vamos abrir a guia <i>Rede</i> e ver como se envia o formulário:
 
 ![Captura de tela da guia Rede onde os eventos para enviar o formulário são mostrados](../../images/0/21e.png)
 
@@ -586,23 +586,23 @@ Durante este curso, vamos nos familiarizar com o React e com a biblioteca [Redux
 
 O status do React parece forte, mas o mundo do JavaScript está sempre mudando. Por exemplo, recentemente, um novato — [VueJS](https://vuejs.org/) — tem chamado a atenção.
 
-### Desenvolvimento Web Full-Stack
+### Desenvolvimento Web Ful Stack
 
-O que significa o nome do curso, <i>Desenvolvimento web full-stack</i>? A palavra "Full-stack" é um jargão de que todo mundo fala, mas ninguém sabe o que significa. Ou pelo menos, não há uma definição padrão para o termo.
+O que significa o nome do curso, <i>Desenvolvimento web full stack</i>? A palavra "Full stack" é um jargão de que todo mundo fala, mas ninguém sabe o que significa. Ou pelo menos, não há uma definição padrão para o termo.
 
-Praticamente todas as aplicações web têm, pelo menos, duas "camadas" (layers): o navegador, sendo mais próximo do usuário final (cliente), é a camada superior; enquanto que o servidor é a camada inferior. Há também, no geral, uma camada de banco de dados abaixo do servidor. Podemos, portanto, pensar na <i>arquitetura</i> de uma aplicação web como uma espécie de <i>pilha</i> (stack) de camadas.
+Praticamente, todas as aplicações web têm, pelo menos, duas "camadas" (layers): o navegador, sendo mais próximo do usuário final (cliente), é a camada superior; enquanto que o servidor é a camada inferior. Há também, no geral, uma camada de banco de dados abaixo do servidor. Podemos, portanto, pensar na <i>arquitetura</i> de uma aplicação web como uma espécie de <i>pilha</i> (stack) de camadas.
 
 No geral, também falamos sobre o [front-end e o back-end](https://en.wikipedia.org/wiki/Front_and_back_ends). O navegador é o front-end, e o JavaScript que roda no navegador é o código front-end. O servidor, por outro lado, é o back-end.
 
-No contexto deste curso, desenvolvimento web full-stack significa que nos concentramos em todas as partes da aplicação: front-end, back-end e banco de dados. Às vezes, o software no servidor e o sistema operacional dele são vistos como partes da pilha, mas não entraremos nesses detalhes.
+No contexto deste curso, desenvolvimento web full stack significa que nos concentramos em todas as partes da aplicação: front-end, back-end e banco de dados. Às vezes, o software no servidor e o sistema operacional dele são vistos como partes da pilha, mas não entraremos nesses detalhes.
 
-Programaremos o back-end com JavaScript, usando o ambiente de execução [Node.js](https://nodejs.org/en/). Usar a mesma linguagem de programação em múltiplas camadas da pilha dá ao desenvolvimento web full-stack uma nova dimensão. No entanto, não é uma exigência do desenvolvimento web full-stack usar a mesma linguagem de programação (JavaScript) para todas as camadas da pilha.
+Programaremos o back-end com JavaScript, usando o ambiente de execução [Node.js](https://nodejs.org/en/). Usar a mesma linguagem de programação em múltiplas camadas da pilha dá ao desenvolvimento web full stack uma nova dimensão. No entanto, não é uma exigência do desenvolvimento web full stack usar a mesma linguagem de programação (JavaScript) para todas as camadas da pilha.
 
-Era mais comum que os desenvolvedores se especializassem em uma dessas camadas, por exemplo, no back-end. As tecnologias no back-end e no front-end eram bastante diferentes. Com a tendência Full-stack, tornou-se comum que os desenvolvedores tenham habilidade em todas as camadas da aplicação e no banco de dados. Muitas vezes, os desenvolvedores full-stack também precisam ter habilidades suficientes de configuração e administração para operar suas aplicações, por exemplo, na nuvem.
+Era mais comum que os desenvolvedores se especializassem em uma dessas camadas, por exemplo, no back-end. As tecnologias no back-end e no front-end eram bastante diferentes. Com a tendência Full stack, tornou-se comum que os desenvolvedores tenham habilidade em todas as camadas da aplicação e no banco de dados. Muitas vezes, os desenvolvedores full stack também precisam ter habilidades suficientes de configuração e administração para operar suas aplicações, por exemplo, na nuvem.
 
 ### Fadiga do JavaScript
 
-O desenvolvimento de aplicações web full-stack é de muitas maneiras desafiador. Várias coisas estão acontecendo em vários lugares ao mesmo tempo, e a depuração é um pouco mais difícil se comparada com a depuração de [softwares de desktop comuns](https://en.wikipedia.org/wiki/Application_software). JavaScript nem sempre funciona da maneira que você espera que funcione (em comparação com muitas outras linguagens), e a forma assíncrona que seus ambientes de tempo de execução (runtime environments) funcionam cria todos os tipos de desafios. Comunicação na web exige conhecimento do protocolo HTTP. Também é preciso lidar com bancos de dados e administração e configuração de servidores. Também seria bom saber o suficiente de CSS para tornar as aplicações pelo menos um pouco apresentáveis.
+O desenvolvimento de aplicações web full stack é de muitas maneiras desafiador. Várias coisas estão acontecendo em vários lugares ao mesmo tempo, e a depuração é um pouco mais difícil se comparada com a depuração de [softwares de desktop comuns](https://en.wikipedia.org/wiki/Application_software). JavaScript nem sempre funciona da maneira que você espera que funcione (em comparação com muitas outras linguagens), e a forma assíncrona que seus ambientes de tempo de execução (runtime environments) funcionam cria todos os tipos de desafios. Comunicação na web exige conhecimento do protocolo HTTP. Também é preciso lidar com bancos de dados e administração e configuração de servidores. Também seria bom saber o suficiente de CSS para tornar as aplicações pelo menos um pouco apresentáveis.
 
 O mundo JavaScript se desenvolve rápido, o que traz seus próprios desafios. Ferramentas, bibliotecas e a própria linguagem estão em constante desenvolvimento. Algumas pessoas começam a ficar cansadas das constantes mudanças e deram um nome para isso: <em> fadiga JavaScript </em>. Veja [Como gerenciar a fadiga JavaScript no auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) ou [Fadiga JavaScript no site Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
 
@@ -611,7 +611,7 @@ Você sofrerá de fadiga JavaScript durante este curso. Felizmente para nós, ex
 </div>
 
 <div class="tasks"> 
-  <h3>Exercícios 0.1. a 0.6.</h3>
+  <h3>Exercícios 0.1 a 0.6</h3>
 
 Os exercícios são enviados via GitHub, marcando os exercícios como concluídos na guia "meus envios" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -655,7 +655,7 @@ Aprenda sobre os conceitos básicos de formulários HTML lendo o tutorial do Moz
 
   <h4>0.4: Novo diagrama das notas</h4>
 
-Na seção [Carregando uma página contendo JavaScript — revisão](/pt/part0/fundamentos_de_aplicacoes_web#carregando-uma-pagina-contendo-java-script-revisao), a cadeia de eventos causada pela abertura da página <https://studies.cs.helsinki.fi/exampleapp/notes> é retratada como um [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/)
+Na seção [Carregando uma página contendo JavaScript — revisão](/pt/part0/fundamentos_de_aplicacoes_web#carregando-uma-pagina-contendo-java-script-revisao), a cadeia de eventos causada pela abertura da página <https://studies.cs.helsinki.fi/exampleapp/notes> é retratada como um [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/).
 
 O diagrama foi feito como um arquivo GitHub Markdown usando a sintaxe [Mermaid](https://docs.github.com/en/get-started/writing-on-github/working-with-advanced-formatting/creating-diagrams), como o exemplo a seguir:
 
@@ -686,10 +686,10 @@ sequenceDiagram
     server-->>browser: [{ "content": "HTML é fácil", "date": "2023-1-1" }, ... ]
     deactivate server    
 
-    Note right of browser: O navegador executa a função de retorno de chamada que renderiza as notas 
+    Note right of browser: O navegador executa a função de retorno de chamada que renderiza as notas
 ```
 
-**Crie um diagrama semelhante** que retrate a situação em que o usuário cria uma nova nota na página <https://studies.cs.helsinki.fi/exampleapp/notes> escrevendo algo no campo de texto e clicando no botão <i>submit</i>
+**Crie um diagrama semelhante** que retrate a situação em que o usuário cria uma nova nota na página <https://studies.cs.helsinki.fi/exampleapp/notes> escrevendo algo no campo de texto e clicando no botão <i>submit</i>.
 
 Se necessário, mostre operações no navegador ou no servidor como comentários no diagrama.
 
