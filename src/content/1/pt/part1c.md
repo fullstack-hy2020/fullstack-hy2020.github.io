@@ -263,7 +263,7 @@ import { useState } from 'react'
 
 const App = () => {
   const [ contador, defContador ] = useState(0)
-  // * "setCounter" pode ser traduzido como "definirContador", que fica
+  // "setCounter" pode ser traduzido como "definirContador", que fica
   // como "defContador" em sua forma reduzida.
 
   setTimeout(
@@ -376,7 +376,7 @@ const App = () => {
   const [ contador, defContador ] = useState(0)
 
   const manipClique = () => {
-    // * "handleClick" pode ser traduzido, grosso modo, como "manipularClique";
+    // "handleClick" pode ser traduzido, grosso modo, como "manipularClique";
     // Versão reduzida: "manipClique".
     console.log('clicado')
   }
