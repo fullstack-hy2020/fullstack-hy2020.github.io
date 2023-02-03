@@ -357,14 +357,14 @@ ja muutetaan tiedosto <i>index.js</i> seuraavaan muotoon:
 
 ```js
 const { ApolloServer } = require('@apollo/server')
-const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer') // highlight-line
-const { expressMiddleware } = require('@apollo/server/express4') // highlight-line
-
 // highlight-start
-const http = require('http')
+const { expressMiddleware } = require('@apollo/server/express4')
+const { ApolloServerPluginDrainHttpServer } = require('@apollo/server/plugin/drainHttpServer')
+const { makeExecutableSchema } = require('@graphql-tools/schema')
 const express = require('express')
-const bodyParser = require('body-parser')
 const cors = require('cors')
+const bodyParser = require('body-parser')
+const http = require('http')
 // highlight-end
 
 const jwt = require('jsonwebtoken')
@@ -395,8 +395,7 @@ const start = async () => {
   const httpServer = http.createServer(app)
 
   const server = new ApolloServer({
-    typeDefs,
-    resolvers,
+    schema: makeExecutableSchema({ typeDefs, resolvers }),
     plugins: [ApolloServerPluginDrainHttpServer({ httpServer })],
   })
 
@@ -462,7 +461,7 @@ Eli kun uusi henkilö luodaan, palautetaan henkilön tiedot kaikille tilaajille.
 Asennetaan tarvittavast kirjastot:
 
 ```
-npm install ws graphql-ws graphql-subscriptions
+npm install graphql-ws ws @graphql-tools/schema
 ```
 
 Tiedosto <i>index.js</i> muuttuu seraavasti
@@ -479,29 +478,20 @@ const start = async () => {
   const app = express()
   const httpServer = http.createServer(app)
 
-  const schema = makeExecutableSchema({ typeDefs, resolvers })
-
-// highlight-start
+  // highlight-start
   const wsServer = new WebSocketServer({
     server: httpServer,
     path: '/',
   })
-
-  const serverCleanup = useServer({ schema }, wsServer)
+  // highlight-end
+  
+  // highlight-start
+  const schema = makeExecutableSchema({ typeDefs, resolvers })
+  const serverCleanup = useServer({ schema }, wsServer);
   // highlight-end
 
   const server = new ApolloServer({
     schema,
-    context: async ({ req }) => {
-      const auth = req ? req.headers.authorization : null
-      if (auth && auth.toLowerCase().startsWith('bearer ')) {
-        const decodedToken = jwt.verify(auth.substring(7), JWT_SECRET)
-        const currentUser = await User.findById(decodedToken.id).populate(
-          'friends'
-        )
-        return { currentUser }
-      }
-    },
     plugins: [
       ApolloServerPluginDrainHttpServer({ httpServer }),
       // highlight-start
@@ -509,9 +499,9 @@ const start = async () => {
         async serverWillStart() {
           return {
             async drainServer() {
-              await serverCleanup.dispose()
+              await serverCleanup.dispose();
             },
-          }
+          };
         },
       },
       // highlight-end
@@ -520,10 +510,23 @@ const start = async () => {
 
   await server.start()
 
-  server.applyMiddleware({
-    app,
-    path: '/',
-  })
+  app.use(
+    '/',
+    cors(),
+    express.json(),
+    expressMiddleware(server, {
+      context: async ({ req }) => {
+        const auth = req ? req.headers.authorization : null
+        if (auth && auth.startsWith('Bearer ')) {
+          const decodedToken = jwt.verify(auth.substring(7), process.env.JWT_SECRET)
+          const currentUser = await User.findById(decodedToken.id).populate(
+            'friends'
+          )
+          return { currentUser }
+        }
+      },
+    }),
+  )
 
   const PORT = 4000
 
@@ -537,7 +540,7 @@ start()
 
 GraphQL:n Queryt ja mutaatiot hoidetaan HTTP-protokollaa käyttäen. Tilausten osalta kommunikaatio tapahuu [WebSocket](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API)-yhteydellä.
 
-Ylläoleva konfio luo palvelimeen HTTP-pyyntöjen kuuntelun rinnalle WebSocketeja kuuntelevan palvelun, jonka se sitoo palvelimen GraphQL-skeemaan. Määrittelyn toinen osa rekisteröi funktion, joka sulkee WebSocket-yhteyden palvelimen sulkemisen yhteydessä.
+Ylläoleva konfio luo palvelimeen HTTP-pyyntöjen kuuntelun rinnalle WebSocketeja kuuntelevan palvelun, jonka se sitoo palvelimen GraphQL-skeemaan. Määrittelyn toinen osa rekisteröi funktion, joka sulkee WebSocket-yhteyden palvelimen sulkemisen yhteydessä. Jos olet kiinnostunut tarkemmin konfiguraatioista, selittää Apollon [dokumentaatio](https://www.apollographql.com/docs/apollo-server/data/subscriptions) suhteellisen tarkasti mitä kukin koodirivi tekee.
 
 Toisin kuin HTTP:n yhteydessä, WebSocketteja käyttäessä myös palvelin voi olla datan lähettämisessä aloitteellinen osapuoli. Näinollen WebSocketit sopivat hyvin GraphQL:n tilauksiin, missä palvelimen on pystyttävä kertomaan kaikille tietyn tilauksen tehneille tilausta vastaavan tapahtuman (esim. henkilön luominen) tapahtumisesta.
 
@@ -557,7 +560,11 @@ const resolvers = {
       const currentUser = context.currentUser
 
       if (!currentUser) {
-        throw new AuthenticationError("not authenticated")
+        throw new GraphQLError('not authenticated', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+          }
+        })
       }
 
       try {
@@ -565,8 +572,12 @@ const resolvers = {
         currentUser.friends = currentUser.friends.concat(person)
         await currentUser.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 
@@ -585,7 +596,13 @@ const resolvers = {
 }
 ```
 
-Tilausten yhteydessä kommunikaatio tapahtuu [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-periaatteella käyttäen olioa [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#the-pubsub-class).
+Toimiakseen koodi vaatii kirjaston asennuksen 
+
+```
+npm install graphql-subscriptions
+```
+
+Tilausten yhteydessä kommunikaatio tapahtuu [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern)-periaatteella käyttäen olioa [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions#the-pubsub-class).
 
 Koodia on vähän mutta konepellin alla tapahtuu paljon. Tilauksen _personAdded_ resolverissa palvelin rekisteröi ja tallettaa muistiin tiedon kaikista sille tilauksen tehneistä clienteista. Nämä tallentuvat seuraavan koodinpätkän ansiosta nimellä <i>PERSON\_ADDED</i> varustettuun ["iteraattoriolioon"](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events):
 
@@ -611,7 +628,14 @@ Tilauksia on mahdollista testata Apollo Exploreilla avulla seuraavasti:
 
 ![](../../images/8/31x.png)
 
-Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä (joudut tekemään lisäyksen toisesta selainikkunasta), tulee tieto niistä Explorerin oikeaan reunaan.
+subscription Subscription {
+  personAdded {
+    phone
+    name
+  }
+}
+
+Kun tilauksen suorittavaa sinistä PersonAdded-painiketta painetaan, jää Explorer odottamaan tilaukseen tulevia vastauksia. Aina kun sovellukseen lisätään uusia käyttäjiä (joudut tekemään lisäyksen frontendista tai toisesta selainikkunasta), tulee tieto niistä Explorerin oikeaan reunaan.
 
 Jos tilaus ei toimi, saatat tarkasta, että yhteysasetukset on määritelty oikein:
 
@@ -619,13 +643,16 @@ Jos tilaus ei toimi, saatat tarkasta, että yhteysasetukset on määritelty oike
 
 Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branchissa <i>part8-7</i>.
 
+Tilausten toteuttamiseen liittyy paljon erilaista konfiguraatiota. Tämän kurssin muutamasta tehtävästä selviät hyvin välittämättä kaikista detaljesta, jos olet toteuttamassa tilauksia todelliseen käyttöön tulevaan sovellukseen, kannattaa ehdottomasti lukea tarkasti Apollon
+[tilauksia käsittelevä dokumentaatio](https://www.apollographql.com/docs/apollo-server/data/subscriptions).
+
 ### Tilaukset clientissä
 
 Jotta saamme tilaukset käyttöön React-sovelluksessa, tarvitaan jonkin verran muutoksia erityisesti [konfiguraatioiden osalta](https://www.apollographql.com/docs/react/data/subscriptions/). Tiedostossa <i>index.js</i> olevat konfiguraatiot on muokattava seuraavaan muotoon:
 
 ```js
 import { 
-  ApolloClient, ApolloProvider, HttpLink, InMemoryCache, 
+  ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, 
   split  // highlight-line
 } from '@apollo/client'
 import { setContext } from 'apollo-link-context'
@@ -646,16 +673,12 @@ const authLink = setContext((_, { headers }) => {
   }
 })
 
-const httpLink = new HttpLink({
-  uri: 'http://localhost:4000',
-})
+const httpLink = createHttpLink({ uri: 'http://localhost:4000' })
 
 // highlight-start
-const wsLink = new GraphQLWsLink(
-  createClient({
-    url: 'ws://localhost:4000',
-  })
-)
+const wsLink = new GraphQLWsLink(createClient({
+  url: 'ws://localhost:4000',
+}))
 // highlight-end
 
 // highlight-start
@@ -687,26 +710,22 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
 
 ```bash
-npm install @apollo/client graphql-ws
+npm install graphql-ws
 ```
 
 Uusi konfiguraatio johtuu siitä, että sovelluksella tulee nyt olla HTTP-yhteyden lisäksi websocket-yhteys GraphQL-palvelimelle:
 
 ```js
-const httpLink = new HttpLink({
-  uri: 'http://localhost:4000',
-})
+const httpLink = createHttpLink({ uri: 'http://localhost:4000' })
 
 const wsLink = new GraphQLWsLink(
-  createClient({
-    url: 'ws://localhost:4000',
-  })
+  createClient({ url: 'ws://localhost:4000' })
 )
 ```
 
 Tilaukset tehdään hook-funktion [useSubscription](https://www.apollographql.com/docs/react/api/react/hooks/#usesubscription) avulla. 
 
-Tehdään koodiin seuraavat muutokset:
+Tehdään koodiin seuraavat muutokset. Lisätään tiedostoon <i>queries.js</i> tilauksen määrittelevä koodi:
 
 ```js
 // highlight-start
@@ -718,11 +737,13 @@ export const PERSON_ADDED = gql`
   }
   ${PERSON_DETAILS}
 `
-// highlight-end
+```
 
-import {
-  useQuery, useMutation, useSubscription, useApolloClient // highlight-line
-} from '@apollo/client'
+ja tehdään tilaus komponentissa App:
+
+```js
+import { useQuery, useApolloClient, useSubscription } from '@apollo/client'
+import { PERSON_ADDED } from './queries.js'
 
 const App = () => {
   // ...
