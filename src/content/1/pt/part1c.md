@@ -64,7 +64,7 @@ A idade da pessoa não precisa ser passada como parâmetro para a função, já 
 
 Se examinarmos nosso código atual de perto, vamos perceber que a função "auxiliadora" é definida dentro de outra função que define o comportamento de nosso componente. Em Java, definir uma função dentro de outra é algo complexo e incômodo, portanto, não é algo muito comum. Em JavaScript, entretanto, definir funções dentro de funções é uma técnica amplamente usada.
 
-### Desestruturação
+### Desestruturação (Destructuring)
 
 Antes de avançarmos, vamos dar uma olhada em uma pequena, porém útil, funcionalidade da linguagem JavaScript que foi adicionada na especificação ES6, que nos permite [desestruturar](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (destructuring assignment [atribuição via desestruturação]) valores de objetos e arrays por atribuição.
 
@@ -239,7 +239,7 @@ setInterval(() => {
 
 Fazer repitidas chamadas ao método _render_ não é a forma recomendada de re-renderização de componentes. A seguir, apresentaremos uma forma melhor para fazer essa re-renderização.
 
-### Componente "Stateful"
+### Componente "Stateful" (ou Componente de Estado)
 
 Todos os nossos componentes até agora foram simples no sentido de que não continham nenhum estado que pudesse mudar durante o ciclo de vida do componente.
 
@@ -363,7 +363,7 @@ O console do seu navegador estava aberto? Se não estava, prometa que essa foi a
 
 ### Tratamento de eventos (Event handling)
 
-Já mencionamos, na [Parte 0](/en/part0), <i>manipuladores de eventos</i> que são registrados para serem chamados quando eventos específicos ocorrem várias vezes. A interação de um usuário com os diferentes elementos de uma página web pode causar uma coleção de vários tipos de eventos a serem acionados.
+Já mencionamos, na [Parte 0](/pt/part0), <i>manipuladores de eventos</i> que são registrados para serem chamados quando eventos específicos ocorrem várias vezes. A interação de um usuário com os diferentes elementos de uma página web pode causar uma coleção de vários tipos de eventos a serem acionados.
 
 Vamos mudar a aplicação para que o aumento do contador aconteça quando um usuário clicar em um botão, que é implementado com o elemento [botão](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (button).
 
@@ -375,15 +375,16 @@ Em React, se [registra uma função manipuladora de eventos](https://reactjs.org
 const App = () => {
   const [ contador, defContador ] = useState(0)
 
-  const handleClick = () => {
-    // *"handleClick" pode ser traduzido, grosso modo, como "manipularClique"
+  const manipClique = () => {
+    // * "handleClick" pode ser traduzido, grosso modo, como "manipularClique";
+    // Versão reduzida: "manipClique".
     console.log('clicado')
   }
 
   return (
     <div>
       <div>{contador}</div>
-      <button onClick={handleClick}>
+      <button onClick={manipClique}>
         mais+
       </button>
     </div>
@@ -391,9 +392,7 @@ const App = () => {
 }
 ```
 
-Definimos o valor do atributo <i>onClick</i> do botão como uma referência à função _handleClick_ definida no código.
-
-Agora, a cada clique no botão <i>mais+</i>, a função _handleClick_ é chamada, o que significa que a cada evento de clique uma mensagem <i>clicado</i> será registrada no console do navegador.
+Definimos o valor do atributo <i>onClick</i> do botão como uma referência à função _manipClique_ definida no código.manipCliquecada clique no botão <i>mais+</i>, a função _manipClique_ é chamada, o que significa que a cada evento de clique uma mensagem <i>clicado</i> será registrada no console do navegador.
 
 A função manipuladora de eventos também pode ser definida diretamente na atribuição de valor do atributo "onClick":
 
@@ -505,237 +504,222 @@ const App = () => {
         mais+
       </button>
       <button onClick={zerarContador}>
-        zero
+        zerar
       </button>
     </div>
   )
 }
 ```
-
-
-
-
-^^^^^^^^^^^
-### SEM REVISÃO
-
-
-
-
-
-Here, the event handlers have been defined correctly. The value of the <i>onClick</i> attribute is a variable containing a reference to a function:
+Aqui, os manipuladores de eventos foram definidos corretamente. O valor do atributo <i>onClick</i> é uma variável que contém uma referência a uma função:
 
 ```js
-<button onClick={increaseByOne}> 
-  plus
+<button onClick={aumentarEmUm}> 
+  mais+
 </button>
 ```
 
-### Passing state - to child components
+### Passagem de Estado para Componentes-filho
 
-It's recommended to write React components that are small and reusable across the application and even across projects. Let's refactor our application so that it's composed of three smaller components, one component for displaying the counter and two components for buttons.
+Recomenda-se escrever componentes React pequenos e reutilizáveis ​​em toda a aplicação, e até mesmo em projetos. Vamos refatorar nossa aplicação para que seja composta por três componentes menores: um componente para exibir o contador e dois componentes para os botões.
 
-Let's first implement a <i>Display</i> component that's responsible for displaying the value of the counter.
+Vamos implementar primeiro um componente <i>Display</i>, que é responsável pela exibição do valor do contador.
 
-One best practice in React is to [lift the state up](https://reactjs.org/docs/lifting-state-up.html) in the component hierarchy. The documentation says:
+Uma boa prática em React é [elevar o estado](https://reactjs.org/docs/lifting-state-up.html) (lift the state up) na hierarquia de componentes. A documentação diz:
 
-> <i>Often, several components need to reflect the same changing data. We recommend lifting the shared state up to their closest common ancestor.</i>
+> <i>Com frequência, a modificação de um dado tem que ser refletida em vários componentes. Recomendamos elevar o estado compartilhado ao elemento pai comum mais próximo.</i>
 
-So let's place the application's state in the <i>App</i> component and pass it down to the <i>Display</i> component through <i>props</i>:
+Vamos colocar o estado da aplicação no componente <i>App</i> e passá-lo para o componente <i>Exibir</i> através de <i>props</i>:
 
 ```js
-const Display = (props) => {
+const Exibir = (props) => {
   return (
-    <div>{props.counter}</div>
+    <div>{props.contador}</div>
   )
 }
 ```
 
-Using the component is straightforward, as we only need to pass the state of the _counter_ to it:
+O uso do componente é direto, objetivo, já que precisamos apenas passar o estado do _contador_ para ele:
 
 ```js
 const App = () => {
-  const [ counter, setCounter ] = useState(0)
+  const [ contador, defContador ] = useState(0)
 
-  const increaseByOne = () => setCounter(counter + 1)
-  const setToZero = () => setCounter(0)
+  const aumentarEmUm = () => defContador(contador + 1)
+  const zerarContador = () => defContador(0)
 
   return (
     <div>
-      <Display counter={counter}/> // highlight-line
-      <button onClick={increaseByOne}>
-        plus
+      <Exibir contador={contador}/>
+      <button onClick={aumentarEmUm}>
+        mais+
       </button>
-      <button onClick={setToZero}> 
-        zero
+      <button onClick={zerarContador}> 
+        zerar
       </button>
     </div>
   )
 }
 ```
 
-Everything still works. When the buttons are clicked and the <i>App</i> gets re-rendered, all of its children including the <i>Display</i> component are also re-rendered.
+Tudo ainda está funcionando. Quando os botões são clicados e o <i>App</i> é re-renderizado, todos os seus filhos, incluindo o componente <i>Exibir</i>, também são re-renderizados.
 
-Next, let's make a <i>Button</i> component for the buttons of our application. We have to pass the event handler as well as the title of the button through the component's props:
+Agora, vamos criar um componente <i>Botao</i> (*Botão) para os botões da nossa aplicação. Temos que passar o manipulador de eventos, bem como o título do botão, através das props do componente:
 
 ```js
-const Button = (props) => {
+const Botao = (props) => {
   return (
     <button onClick={props.onClick}>
-      {props.text}
+      {props.texto}
     </button>
   )
 }
 ```
 
-Our <i>App</i> component now looks like this:
+O nosso componente <i>App</i> fica assim:
 
 ```js
 const App = () => {
-  const [ counter, setCounter ] = useState(0)
+  const [ contador, defContador ] = useState(0)
 
-  const increaseByOne = () => setCounter(counter + 1)
-  //highlight-start
-  const decreaseByOne = () => setCounter(counter - 1)
-  //highlight-end
-  const setToZero = () => setCounter(0)
+  const aumentarEmUm = () => defContador(contador + 1)
+  const diminuirEmUm = () => defContador(contador - 1)
+  const zerarContador = () => defContador(0)
 
   return (
     <div>
-      <Display counter={counter}/>
-      // highlight-start
-      <Button
-        onClick={increaseByOne}
-        text='plus'
+      <Exibir contador={contador}/>
+      <Botao
+        onClick={aumentarEmUm}
+        texto='mais+'
       />
-      <Button
-        onClick={setToZero}
-        text='zero'
+      <Botao
+        onClick={zerarContador}
+        texto='zerar'
       />     
-      <Button
-        onClick={decreaseByOne}
-        text='minus'
+      <Botao
+        onClick={diminuirEmUm}
+        texto='menos-'
       />           
-      // highlight-end
     </div>
   )
 }
 ```
 
-Since we now have an easily reusable <i>Button</i> component, we've also implemented new functionality into our application by adding a button that can be used to decrement the counter.
+Por conta de agora termos disponível um componente <i>Botao</i> facilmente reutilizável, também implementamos uma nova funcionalidade em nossa aplicação, adicionando um botão que pode ser usado para decrementar o contador.
 
-The event handler is passed to the <i>Button</i> component through the _onClick_ prop. The name of the prop itself is not that significant, but our naming choice wasn't completely random. React's own official [tutorial](https://reactjs.org/tutorial/tutorial.html) suggests this convention.
+O manipulador de eventos é passado para o componente <i>Botao</i> através da prop _onClick_. O nome mesmo da prop não é algo tão significativo, mas a escolha do nome que colocamos não foi de todo aleatória. O próprio [tutorial oficial do React](https://reactjs.org/tutorial/tutorial.html) sugere essa convenção.
 
-### Changes in state cause rerendering
+### Alterações no estado causam re-renderização
 
-Let's go over the main principles of how an application works once more.
+Vamos revisar, mais uma vez, os principais princípios de como uma aplicação funciona.
 
-When the application starts, the code in _App_ is executed. This code uses a [useState](https://reactjs.org/docs/hooks-reference.html#usestate) hook to create the application state, setting an initial value of the variable _counter_.
-This component contains the _Display_ component - which displays the counter's value, 0 - and three _Button_ components. The buttons all have event handlers, which are used to change the state of the counter.
+Quando a aplicação inicia, o código em _App_ é executado. Este código usa um hook [useState](https://reactjs.org/docs/hooks-reference.html#usestate) para criar o estado da aplicação, definindo um valor inicial da variável _contador_.
+Este componente contém o componente _Exibir_ — que exibe o valor do contador, 0 — e três componentes _Botao_. Os botões possuem manipuladores de eventos, que são usados para mudar o estado do contador.
 
-When one of the buttons is clicked, the event handler is executed. The event handler changes the state of the _App_ component with the _setCounter_ function. 
-**Calling a function that changes the state causes the component to rerender.**
+Quando um dos botões é clicado, o manipulador de eventos é executado. O manipulador de eventos muda o estado do componente _App_ com a função _defContador_. 
+**Chamar uma função que muda o estado faz com que o componente seja re-renderizado.**
 
-So, if a user clicks the <i>plus</i> button, the button's event handler changes the value of _counter_ to 1, and the _App_ component is rerendered. 
-This causes its subcomponents _Display_ and _Button_ to also be re-rendered. 
-_Display_ receives the new value of the counter, 1, as props. The _Button_ components receive event handlers which can be used to change the state of the counter.
+Então, se um usuário clicar no botão <i>mais+</i>, o manipulador de eventos do botão muda o valor de _contador_ para 1, e o componente _App_ é re-renderizado. 
+Isso faz com que seus subcomponentes _Exibir_ e _Botao_ também sejam rerenderizados. 
+_Exibir_ recebe o novo valor do contador, 1, como props. Os componentes _Botao_ recebem manipuladores de eventos que podem ser usados para mudar o estado do contador.
 
-To be sure to understand how the program works, let us add some _console.log_ statements to it
+Para ter certeza de que você entendeu como o programa funciona, vamos adicionar algumas declarações _console.log_ a ele:
 
 ```js
 const App = () => {
-  const [counter, setCounter] = useState(0)
-  console.log('rendering with counter value', counter) // highlight-line
+  const [ contador, defContador ] = useState(0)
+  console.log('renderizando com o valor do contador em', contador)
 
-  const increaseByOne = () => {
-    console.log('increasing, value before', counter) // highlight-line
-    setCounter(counter + 1)
+  const aumentarEmUm = () => {
+    console.log('aumentando, valor anterior', contador)
+    defContador(contador + 1)
   }
 
-  const decreaseByOne = () => { 
-    console.log('decreasing, value before', counter) // highlight-line
-    setCounter(counter - 1)
+  const diminuirEmUm = () => { 
+    console.log('diminuindo, valor anterior', contador)
+    defContador(contador - 1)
   }
 
-  const setToZero = () => {
-    console.log('resetting to zero, value before', counter) // highlight-line
-    setCounter(0)
+  const zerarContador = () => {
+    console.log('zerando, valor anterior', contador)
+    defContador(0)
   }
 
   return (
     <div>
-      <Display counter={counter} />
-      <Button handleClick={increaseByOne} text="plus" />
-      <Button handleClick={setToZero} text="zero" />
-      <Button handleClick={decreaseByOne} text="minus" />
+      <Exibir contador={contador} />
+      <Botao manipClique={aumentarEmUm} texto="mais+" />
+      <Botao manipClique={zerarContador} texto="zerar" />
+      <Botao manipClique={diminuirEmUm} texto="menos-" />
     </div>
   )
 } 
 ```
 
-Let us now see what gets rendered to the console when the buttons plus, plus, zero and minus are pressed:
+Vejamos agora o que é renderizado no console quando os botões "mais+", "zerar" e "menos-" são clicados:
 
 ![](../../images/1/31.png)
 
-Do not ever try to guess what your code does. It is just better to use _console.log_ and <i>see with your own eyes</i> what it does.
+Nunca tente adivinhar o que o seu código faz. É melhor usar _console.log_ e <i>ver com seus próprios olhos</i> o que ele faz.
 
-### Refactoring the components
+### Refatorando os Componentes
 
-The component displaying the value of the counter is as follows:
+O componente que exibe o valor do contador é o seguinte:
 
 ```js
-const Display = (props) => {
+const Exibir = (props) => {
   return (
-    <div>{props.counter}</div>
+    <div>{props.contador}</div>
   )
 }
 ```
 
-The component only uses the _counter_ field of its <i>props</i>. 
-This means we can simplify the component by using [destructuring](/en/part1/component_state_event_handlers#destructuring), like so:
+O componente só usa o campo _contador_ de suas <i>props</i>.
+Isso significa que podemos simplificar o componente usando [desestruturação](/pt/part1/estado_do_componente_manipuladores_de_eventos#desestruturacao-destructuring), desta forma:
 
 ```js
-const Display = ({ counter }) => {
+const Exibir = ({ contador }) => {
   return (
-    <div>{counter}</div>
+    <div>{contador}</div>
   )
 }
 ```
 
-The function defining the component contains only the return statement, so
-we can define the function using the more compact form of arrow functions:
+A função que define o componente contém apenas a instrução de retorno, então
+podemos definir a função usando a forma mais compacta das funções de seta:
 
 ```js
-const Display = ({ counter }) => <div>{counter}</div>
+const Exibir = ({ contador }) => <div>{contador}</div>
 ```
 
-We can simplify the Button component as well.
+Também podemos simplificar o componente <i>Botao</i>:
 
 ```js
-const Button = (props) => {
+const Botao = (props) => {
   return (
     <button onClick={props.onClick}>
-      {props.text}
+      {props.texto}
     </button>
   )
 }
 ```
 
-We can use destructuring to get only the required fields from <i>props</i>, and use the more compact form of arrow functions:
+Podemos usar a desestruturação para obter apenas os campos necessários de <i>props</i> e usar a forma mais compacta de funções de seta:
 
 ```js
-const Button = ({ onClick, text }) => (
+const Botao = ({ onClick, texto }) => (
   <button onClick={onClick}>
-    {text}
+    {texto}
   </button>
 )
 ```
 
-We can simplify the Button component once more by declaring the return statement in just one line:
+Podemos simplificar ainda mais o componente Botao, fazendo com que a declaração de retorno caiba em apenas uma linha:
 
 ```js
-const Button = ({ onClick, text }) => <button onClick={onClick}>{text}</button>
+const Botao = ({ onClick, texto }) => <button onClick={onClick}>{texto}</button>
 ```
 
-However, be careful to not oversimplify your components, as this makes adding complexity a more tedious task down the road.
+Porém, tenha cuidado para não simplificar demais seus componentes, porque pode ficar mais difícil lidar com a complexidade do código à medida em que ele for crescendo em tamanho.
 
 </div>
