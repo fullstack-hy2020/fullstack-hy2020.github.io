@@ -17,6 +17,8 @@ Participants are expected to have good programming skills, basic knowledge of we
 
 Previous knowledge of JavaScript or other course topics is not required.
 
+How much programming experience is needed? It is hard to say, but you should be pretty fluent with <i>your</i> language. This level of fluency takes usually at least 100-200 of hours practice to develop.
+
 ### Course material
 
 The course material is meant to be read one part at a time and in order.
