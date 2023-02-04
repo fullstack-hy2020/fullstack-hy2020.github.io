@@ -263,7 +263,7 @@ If and <i>when</i> you encounter an error message
 
 > <i>Objects are not valid as a React child</i>
 
-keep in mind the things told [here](/en/part1/introduction_to_react#do-not-rended-object).
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
 
   <h4>1.3: course information step3</h4>
 
