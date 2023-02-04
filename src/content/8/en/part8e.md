@@ -488,7 +488,7 @@ const start = async () => {
   
   // highlight-start
   const schema = makeExecutableSchema({ typeDefs, resolvers })
-  const serverCleanup = useServer({ schema }, wsServer);
+  const serverCleanup = useServer({ schema }, wsServer)
   // highlight-end
 
   const server = new ApolloServer({
@@ -668,7 +668,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `bearer ${token}` : null,
+      authorization: token ? `Bearer ${token}` : null,
     }
   }
 })
@@ -707,10 +707,10 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-For this to work, we have to install some dependencies:
+For this to work, we have to install a dependency:
 
 ```bash
-npm install @apollo/client graphql-ws
+npm install graphql-ws 
 ```
 
 The new configuration is due to the fact that the application must have an HTTP connection as well as a WebSocket connection to the GraphQL server.
