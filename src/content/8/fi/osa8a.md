@@ -923,8 +923,6 @@ Joissain tilanteissa voi myös olla hyötyä nimetä kyselyt. Näin on erityises
 
 Tehtävissä toteutetaan yksinkertaisen kirjaston GraphQL:ää tarjoava backend. Ota sovelluksesi lähtökohdaksi [tämä tiedosto](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Muista _npm init_ ja riippuvuuksien asentaminen!
 
-Huomaa, että koodin käynnistäminen aiheuttaa alussa virheen, sillä skeeman määrittely on puutteellinen.
-
 #### 8.1: kirjojen ja kirjailijoiden määrä
 
 Toteuta kyselyt _bookCount_ ja _authorCount_ jotka palauttavat kirjojen ja kirjailijoiden lukumäärän.

@@ -345,12 +345,12 @@ React Query on siis kirjasto, joka ylläpitää frontendissä <i>palvelimen tila
 
 <div class="tasks">
 
-### Tehtävät 6.19.-6.21.
+### Tehtävät 6.20.-6.22.
 
 Tehdään nyt anekdoottisovelluksesta uusi, React Query -kirjastoa hyödyntävä versio. Ota lähtökohdaksesi
 [täällä](https://github.com/fullstack-hy2020/query-anecdotes) oleva projekti. Projektissa on valmiina asennettuna JSON Server, jonka toimintaa on hieman modifioitu. Käynnistä palvelin komennolla <i>npm run server</i>.
 
-#### Tehtävä 6.19
+#### Tehtävä 6.20
 
 Toteuta anekdoottien hakeminen palvelimelta React Queryn avulla. 
 
@@ -382,11 +382,11 @@ const result = useQuery(
 )
 ```
 
-#### Tehtävä 6.20
+#### Tehtävä 6.21
 
 Toteuta uusien anekdoottien lisääminen palvelimelle React Queryn avulla. Sovelluksen tulee automaattisesti renderöidä lisätty anekdootti. Huomaa, että anekdootin sisällön pitää olla vähintään 5 merkkiä pitkä, muuten palvelin ei hyväksy POST pyyntöä. Virheiden käsittelystä ei tarvitse nyt välittää.
 
-#### Tehtävä 6.21
+#### Tehtävä 6.22
 
 Toteuta anekdoottien äänestäminen hyödyntäen jälleen React Queryä. Sovelluksen tulee automaattisesti renderöidä äänestetyn anekdootin kasvatettu äänimäärä.
 
@@ -759,9 +759,9 @@ Teknisenä yksityiskohtana todettakoon, että apufunktiot <i>useCounterValue</i>
 
 <div class="tasks">
 
-### Tehtävät 6.22.-6.23.
+### Tehtävät 6.23.-6.24.
 
-#### Tehtävä 6.22.
+#### Tehtävä 6.23.
 
 Sovelluksessa on valmiina komponentti <i>Notification</i> käyttäjälle tehtävien notifikaatioiden näyttämistä varten.
 
@@ -771,7 +771,7 @@ Toteuta sovelluksen notifikaation tilan hallinta useReduce-hookin ja contextin a
 
 Notifikaatio näytetään viiden sekunnin ajan.
 
-#### Tehtävä 6.23.
+#### Tehtävä 6.24.
 
 Kuten tehtävässä 6.20 todettiin, palvelin vaatii, että lisättävän anekdootin sisällön pituus on vähintään 5 merkkiä. Toteuta nyt lisäämisen yhteyteen virheenkäsittely. Käytännössä riittää, että näytät epäonnistuneen lisäyksen yhteydessä käyttäjälle notifikaation:
 
