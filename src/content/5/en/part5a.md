@@ -128,7 +128,8 @@ We'll get back to configuring eslint in a moment. You can ignore the error for t
 
 // eslint-disable-next-line import/no-anonymous-default-export
 export default { login }
-
+```
+  
 The method for handling the login can be implemented as follows: 
 
 ```js
