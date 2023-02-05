@@ -8,10 +8,14 @@ lang: zh
 
 
 <div class="tasks">
+<!--**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for couple of weeks.-->
 
-**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for couple of weeks.
+**注意**: 本章作为旧版第 6 部分的结束章节，已经在2023年1月30日被替换为“ [React Query, useReducer 和 context](/zh/part6/react_query_use_reducer_and_the_contex)“。这一章将仅在此保留几周。
 
-If you have started with the exercises (6.19-6.21) that use the Redux connect you may continue with those. If you have not yet started, I recommend to proceed with the new section.
+<!--If you have started with the exercises (6.19-6.21) that use the Redux connect you may continue with those. If you have not yet started, I recommend to proceed with the new section.-->
+
+如果你已经用 Redux 的 connect 方法开始了 6.19 - 6.21 的练习，你可以继续将它完成。如果你还没有开始，我建议你从新增的章节开始。
+
 </div>
 
 <div class="content">
@@ -684,6 +688,13 @@ export default connect(
 <div class="tasks">
 
 ### Exercises 6.19.-6.21.
+<!--**NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex). This section remains here for couple of weeks.-->
+
+**注意**: 本章作为旧版第 6 部分的结束章节，已经在2023年1月30日被替换为“ [React Query, useReducer 和 context](/zh/part6/react_query_use_reducer_and_the_contex)“。这一章将仅在此保留几周。
+
+<!--If you have started with the exercises (6.19-6.21) that use the Redux connect you may continue with those. If you have not yet started, I recommend to proceed with the new section.-->
+
+如果你已经用 Redux 的 connect 方法开始了 6.19 - 6.21 的练习，你可以继续将它完成。如果你还没有开始，我建议你从新增的章节开始。
 
 #### 6.19 anecdotes and connect, step1
 
@@ -692,6 +703,7 @@ export default connect(
 
 <!-- Modify the <i>Notification</i> component so that it uses the _connect_ function instead of the hooks.-->
  修改<i>Notification</i>组件，使其使用_connect_函数而不是钩子。
+
 #### 6.20 anecdotes and connect, step2
 
 <!-- Do the same for the <i>Filter</i> and <i>AnecdoteForm</i> components.-->
