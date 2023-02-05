@@ -159,7 +159,8 @@
 }
 
 .gatsby-highlight-code-line {
-  background-color: rgba(var(--color-main), 0.3);
+  background-color: rgba($main, 0.3);
+  //background-color: rgba(var(--color-main), 0.3);
   display: block;
   margin-right: -1em;
   margin-left: -1em;
