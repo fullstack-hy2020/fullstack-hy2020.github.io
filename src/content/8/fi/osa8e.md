@@ -1051,7 +1051,7 @@ Ota clientillä käyttöön subscriptiot ja tilaa _bookAdded_. Uusien kirjojen t
 
 #### 8.25: Subscriptionit client, osa 2
 
-Pidä sovelluksen käyttöliittymä ajantasaisena, kun palvelin tiedottaa uusista kirjoista.
+Pidä sovelluksen käyttöliittymä kirjojen listan osalta ajantasaisena (kirjailijoiden listan ajantasaisena pitäminen on vapaaehtoista), kun palvelin tiedottaa uusista kirjoista.
 
 #### 8.26: n+1
 
