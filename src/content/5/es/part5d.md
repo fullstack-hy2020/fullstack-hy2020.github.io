@@ -880,9 +880,9 @@ describe('Note app', function() {
 
 There is one more annoying feature in our tests
 
-Hay una característica más molesta en nuestras pruebas. La URL de nuestra aplicacion _http://localhost:3000_ esta esta incustrada directamente en varios lugares.
+Hay una característica más molesta en nuestras pruebas. La URL de nuestra aplicacion  <i> http://localhost:3000 </i> esta esta incustrada directamente en varios lugares.
 
-Definamos la URL de nuestra aplicación _baseUrl_ en el [archivo de configuracion](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress _cypress.config.js_:
+Definamos la URL de nuestra aplicación <i> baseUrl </i> en el [archivo de configuracion](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress <i>cypress.config.js</i>:
 
 ```js
 {
@@ -912,7 +912,7 @@ cy.visit('')
 
 Tambien la direccion del backend esta en los tests incrustada directamente. La documentacion de Cypress recomienda definir otras direcciones usadas en los tets como variables de entorno.
 
-Expandamos el archivo de configuracion _cypress.config.js_:
+Expandamos el archivo de configuracion <i>cypress.config.js_:</i>
 
 ```js
 {
@@ -983,7 +983,7 @@ Cuando hacemos clic en el comando _cy.contains('second note')_ en Cypress [Test 
 
 ![](../../images/5/34x.png)
 
-Al hacer clic en la siguiente línea _.contains('make important') _ vemos que la prueba usa el botón 'make important' correspondiente a la <i> segunda nota </i>:
+Al hacer clic en la siguiente línea <i>.contains('make important')</i> vemos que la prueba usa el botón 'make important' correspondiente a la <i> segunda nota </i>:
 
 ![](../../images/5/35x.png)
 
