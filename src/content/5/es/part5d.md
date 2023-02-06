@@ -1018,7 +1018,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-¡Nuestras pruebas se rompen! Como revela el corredor de pruebas, _cy.contains('second note') _ ahora devuelve el componente que contiene el texto y el botón no está en él.
+¡Nuestras pruebas se rompen! Como revela el corredor de pruebas, _cy.contains('second note')_ ahora devuelve el componente que contiene el texto y el botón no está en él.
 
 ![](../../images/5/37x.png)
 
