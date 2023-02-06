@@ -1106,9 +1106,9 @@ Ahora podemos ejecutar nuestras pruebas desde la línea de comandos con el coman
 
 ![](../../images/5/39ea.png)
 
-Tenga en cuenta que el video de la ejecución de la prueba se guardará en <i>cypress/videos/</i>, por lo que probablemente debería ignorar este directorio.
+Tenga en cuenta que el video de la ejecución de la prueba se guardará en <i>cypress/videos/</i>, por lo que probablemente debería ignorar este directorio. También es posible [deshabilitar](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) la grabación de videos.
 
-La interfaz y el código de prueba se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), rama <i>part5-11</i>.
+El frontend y los tests/pruebas se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), rama <i>part5-11</i>.
 
 </div>
 
