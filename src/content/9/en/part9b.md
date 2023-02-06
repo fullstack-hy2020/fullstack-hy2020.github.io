@@ -49,10 +49,10 @@ and setting up <i>scripts</i> within the package.json:
 }
 ```
 
-You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, all command-line arguments for the script need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i>, the whole command is:
+You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, command-line arguments that include short or long form options for the `npm run` script need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i> and options `-s` and `--someoption`, the whole command is:
 
 ```shell
-npm run ts-node -- file.ts
+npm run ts-node file.ts -- -s --someoption
 ```
 
 It is worth mentioning that TypeScript also provides an online playground, where you can quickly try out TypeScript code and instantly see the resulting JavaScript and possible compilation errors. You can access TypeScript's official playground [here](https://www.typescriptlang.org/play/index.html).
