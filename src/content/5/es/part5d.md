@@ -878,6 +878,75 @@ describe('Note app', function() {
 })
 ```
 
+There is one more annoying feature in our tests
+
+Hay una característica más molesta en nuestras pruebas. La URL de nuestra aplicacion _http://localhost:3000_ esta esta incustrada directamente en varios lugares.
+
+Definamos la URL de nuestra aplicación _baseUrl_ en el [archivo de configuracion](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress _cypress.config.js_:
+
+```js
+{
+  const { defineConfig } = require('cypress')
+
+  module.exports = defineConfig({
+    e2e: {
+      setupNodeEvents(on, config){
+      },
+        baseUrl: 'http://localhost:3000' // highlight-line
+    },
+  })
+}
+```
+
+Todos los comandos en los tests que usan la dirección de la aplicación
+
+```js
+cy.visit('http://localhost:3000')
+```
+
+se pueden cambiar a
+
+```js
+cy.visit('')
+```
+
+Tambien la direccion del backend esta en los tests incrustada directamente. La documentacion de Cypress recomienda definir otras direcciones usadas en los tets como variables de entorno.
+
+Expandamos el archivo de configuracion _cypress.config.js_:
+
+```js
+{
+  const { defineConfig } = require('cypress')
+
+  module.exports = defineConfig({
+	e2e: {
+	  setupNodeEvents(on, config){
+	  },
+	  baseUrl: 'http://localhost:3000',
+	  BACKEND: 'http://localhost:3001/api' // highlight-line
+	},
+  })
+}
+```
+
+Reemplazemos todas las direcciones del backend en los tests de la siguiente manera:
+
+```js
+describe('Note ', function() {
+  beforeEach(function() {
+    cy.visit('')
+    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/testing/reset`) // highlight-line
+    const user = {
+      name: 'Matti Luukkainen',
+      username: 'mluukkai',
+      password: 'secret'
+    }
+    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/users`, user) // highlight-line
+  })
+  // ...
+})
+```
+
 Las pruebas y el código de la interfaz se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), rama <i>part5-10</i>.
 
 ### Cambiar la importancia de una nota
