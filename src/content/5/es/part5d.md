@@ -878,8 +878,6 @@ describe('Note app', function() {
 })
 ```
 
-There is one more annoying feature in our tests
-
 Hay una característica más molesta en nuestras pruebas. La URL de nuestra aplicacion  <i> http://localhost:3000 </i> esta esta incustrada directamente en varios lugares.
 
 Definamos la URL de nuestra aplicación <i> baseUrl </i> en el [archivo de configuracion](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress <i>cypress.config.js</i>:
