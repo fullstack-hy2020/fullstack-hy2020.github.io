@@ -349,11 +349,11 @@ Most React applications need not only a way to temporarily store the served data
 
 <div class="tasks">
 
-### Exercises 6.19.-6.21.
+### Exercises 6.20.-6.22.
 
 Now let's make a new version of the anecdote application that uses the React Query library. Take [this project](https://github.com/fullstack-hy2020/query-anecdotes) as your starting point. The project has a ready-installed JSON Server, the operation of which has been slightly modified. Start the server with <i>npm run server</i>.
 
-#### Exercise 6.19
+#### Exercise 6.20
 
 Implement retrieving anecdotes from the server using React Query.
 
@@ -386,11 +386,11 @@ const result = useQuery(
 )
 ```
 
-#### Exercise 6.20
+#### Exercise 6.21
 
 Implement adding new anecdotes to the server using React Query. The application should render a new anecdote by default. Note that the content of the anecdote must be at least 5 characters long, otherwise the server will reject the POST request. You don't have to worry about error handling now.
 
-#### Exercise 6.21
+#### Exercise 6.22
 
 Implement voting for anecdotes using again the React Query. The application should automatically render the increased number of votes for the voted anecdote
 
@@ -759,9 +759,9 @@ As a technical detail, it should be noted that the helper functions <i>useCounte
 
 <div class="tasks">
 
-### Exercises 6.22.-6.23.
+### Exercises 6.23.-6.24.
 
-#### Exercise 6.22.
+#### Exercise 6.23.
 
 The application has a <i>Notification</i> component for displaying notifications to the user.
 
@@ -771,7 +771,7 @@ Implement the application's notification state management using the useReducer h
 
 The notification is displayed for five seconds.
 
-#### Exercise 6.23.
+#### Exercise 6.24.
 
 As stated in exercise 6.20, the server requires that the content of the anecdote to be added is at least 5 characters long. Now implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request:
 

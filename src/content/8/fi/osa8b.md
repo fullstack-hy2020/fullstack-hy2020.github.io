@@ -804,6 +804,8 @@ Tehtävissä toteutetaan edellisen osan tehtävissä tehdylle backendille fronte
 
 Ota sovelluksesi lähtökohdaksi [tämä projekti](https://github.com/fullstack-hy2020/library-frontend).
 
+**Huom** voit halutessasi käyttää myös [React routeria](/osa7/react_router) sovelluksen navigaation toteuttamiseen!
+
 #### 8.8: Kirjailijoiden näkymä
 
 Toteuta kirjailijoiden näkymä, eli näytä sivulla kaikkien kirjailijoiden tiedot esim. seuraavasti:
