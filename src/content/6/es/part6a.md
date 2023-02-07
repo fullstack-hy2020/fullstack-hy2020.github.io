@@ -351,6 +351,8 @@ Ahora las acciones tienen un tipo y un campo <i>data</i>, que contiene la nota a
 }
 ```
 
+La eleccion del nombre del campo es arbitraria. La convención es que las acciones tengan exactamente dos campos, <i>type</i> diciendo el tipo y <i>payload</i> conteniendo la información incluida en la acción.
+
 ### Funciones puras, inmutables
 
 La función inicial del reducer es sencilla:
