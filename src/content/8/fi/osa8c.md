@@ -56,10 +56,11 @@ Saamme sovelluksen jo suurilta osin toimimaan seuraavilla muutoksilla:
 ```js
 // ...
 
-
 const mongoose = require('mongoose')
 mongoose.set('strictQuery', false)
 const Person = require('./models/person')
+
+require('dotenv').config()
 
 const MONGODB_URI = process.env.MONGODB_URI
 
@@ -557,11 +558,11 @@ type Mutation {
 
 Täydennä sovellusta siten, että kaikki kyselyt (kyselyn _allBooks_ parametrin _author_ toimintaansaattaminen on vapaaehtoinen lisätehtävä!) sekä mutaatiot toimivat.
 
-Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/reference/operator/query/in/).
+Kirjojen haun parametrin <i>genre</i> suhteen tilanne on hieman haastavampi. Ratkaisu on yksinkertainen, mutta sen löytäminen voi tuottaa päänvaivaa. Saatat hyötyä [tästä](https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/). 
 
 #### 8.15 Tietokanta, osa 3
 
-Täydennä sovellusta siten, että tietokannan validointivirheet (esim. liian lyhyt kirjan tai kirjailijan nimi) käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_, jolle asetetaan sopiva virheviesti.
+Täydennä sovellusta siten, että tietokannan validointivirheet (esim. liian lyhyt kirjan tai kirjailijan nimi) käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors), jolle asetetaan sopiva virheviesti.
 
 #### 8.16 käyttäjä ja kirjautuminen
 

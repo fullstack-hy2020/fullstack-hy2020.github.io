@@ -835,7 +835,7 @@ Through these exercises, we'll implement a frontend for the GraphQL library.
 
 Take [this project](https://github.com/fullstack-hy2020/library-frontend) as a start for your application. 
 
-You can implement your application either using the render prop components <i>Query</i> and <i>Mutation</i> of the Apollo Client, or using the hooks provided by Apollo client 3.0. 
+**Note** if you want, you can also use [React router](/en/part7/react_router) to implement the application's navigation!
 
 #### 8.8: Authors view
 
