@@ -740,6 +740,10 @@ Un buen modelo para el reducer es el ejemplo anterior de [redux-notas](/es/part6
 #### 6.2: unicafe revisitado, paso 2
 Ahora implemente la funcionalidad real de la aplicación.
 
+Tu aplicación puede tener una apariencia modesta, nada más se necesitan 3 botones y el número de calificaciones para cada tipo:
+
+![](../../images/6/50new.png)
+
 </div>
 
 <div class="content">
