@@ -563,6 +563,29 @@ In the example, the <i>first argument</i> is the target value.
 
 Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
+Cople of things to notice:
+
+If you define helper functions in other modules, you should use the [JavaScript module system](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), that is, the one we have used with React where importing is done with
+
+```js
+import { isNotNumber } from "./utils";
+```
+
+and exporting 
+
+```js
+export const isNotNumber = (argument: any): boolean =>
+  isNaN(Number(argument));
+
+default export "this is the default..."
+```
+
+Another note: somehow surprisingly TypeScript does not allow to define the same variable in many files at a "block-scope", that is, outside functions (or classes):
+
+![browser showing pong from localhost:3000/ping](../../images/9/60new.png)
+
+This is actually not quite true. This rule applies only to files that are treated as "scripts". A file is a script if it does not contain any export or import statements. If a file has those, then the file is treated as a [module](https://www.typescriptlang.org/docs/handbook/modules.html), <i>and</i> the variables do not get defined in the block-scope.
+
 </div>
 
 <div class="content">
@@ -1057,7 +1080,7 @@ Configure your project to use the above ESlint settings and fix all the warnings
 
 #### 9.7 WebExercises
 
-Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to endpoint <i>exercises</i> with the input in the request body:
+Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to endpoint http://localhost:3002/exercises with the input in the request body:
 
 ```js
 {
