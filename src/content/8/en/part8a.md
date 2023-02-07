@@ -925,10 +925,7 @@ In some cases, it might be beneficial to name the queries. This is the case espe
 Through the exercises, we will implement a GraphQL backend for a small library. 
 Start with [this file](https://github.com/fullstack-hy2020/misc/blob/master/library-backend.js). Remember to _npm init_ and to install dependencies!
 
-Note also that the code does not initially work since the schema definition is not complete.
-
 #### 8.1: The number of books and authors
-
 
 Implement queries _bookCount_ and _authorCount_ which return the number of books and the number of authors. 
 

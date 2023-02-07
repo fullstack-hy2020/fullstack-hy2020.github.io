@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 After the brief introduction to the main principles of TypeScript, we are now ready to start our journey toward becoming FullStack TypeScript developers.
-Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing express backends or React frontends with TypeScript.
+Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing Express backends or React frontends with TypeScript.
 In addition to language features, we will also have a strong emphasis on tooling.
 
 ### Setting things up
@@ -49,10 +49,10 @@ and setting up <i>scripts</i> within the package.json:
 }
 ```
 
-You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, all command-line arguments for the script need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i>, the whole command is:
+You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, command-line arguments that include short or long form options for the `npm run` script need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i> and options `-s` and `--someoption`, the whole command is:
 
 ```shell
-npm run ts-node -- file.ts
+npm run ts-node file.ts -- -s --someoption
 ```
 
 It is worth mentioning that TypeScript also provides an online playground, where you can quickly try out TypeScript code and instantly see the resulting JavaScript and possible compilation errors. You can access TypeScript's official playground [here](https://www.typescriptlang.org/play/index.html).
@@ -139,11 +139,11 @@ We can create a *type* using the TypeScript native keyword *type*. Let's describ
 type Operation = 'multiply' | 'add' | 'divide';
 ```
 
-Now the *Operation* type accepts only three kinds of input; exactly the three strings we wanted.
-Using the OR operator *|* we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types).
-In this case, we used exact strings (that, in technical terms, are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions, you could also make the compiler accept for example both string and number: *string | number*.
+Now the *Operation* type accepts only three kinds of values; exactly the three strings we wanted.
+Using the OR operator *|* we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types).
+In this case, we used exact strings (that, in technical terms, are called [string literal types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)) but with unions, you could also make the compiler accept for example both string and number: *string | number*.
 
-The *type* keyword defines a new name for a type: [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
+The *type* keyword defines a new name for a type: [a type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases). Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
 
 Let's look at our calculator now:
 
@@ -220,9 +220,7 @@ The code of our calculator should look something like this:
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-type Result = number;  // highlight-line
-
-const calculator = (a: number, b: number, op: Operation) : Result => {  // highlight-line
+const calculator = (a: number, b: number, op: Operation) : number => {  // highlight-line
   switch(op) {
     case 'multiply':
       return a * b;
@@ -239,15 +237,51 @@ const calculator = (a: number, b: number, op: Operation) : Result => {  // highl
 try {
   console.log(calculator(1, 5 , 'divide'));
 } catch (error: unknown) {
-  let errorMessage = 'Something went wrong.'
+  let errorMessage = 'Something went wrong: '
   if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
+    errorMessage += error.message;
   }
   console.log(errorMessage);
 }
 ```
 
-As of TypeScript 4.0, *catch* blocks allow you to specify the type of catch clause variables. Pre-4.4, all *catch* clause variables were of type *any*. However, with the release of 4.4, the default type is *unknown*. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of *any*. Anything is assignable to *unknown*, but *unknown* isn’t assignable to anything but itself and *any* without a type assertion or a control flow-based narrowing. Likewise, no operations are permitted on an *unknown* without first asserting or narrowing it to a more specific type.
+### Type narrowing
+
+The default type of the catch block parameter *error* is *unknown*. The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of *any*. Anything is assignable to *unknown*, but *unknown* isn’t assignable to anything but itself and *any* without a type assertion or a control flow-based narrowing. Likewise, no operations are permitted on an *unknown* without first asserting or narrowing it to a more specific type.
+
+Both the possible causes of exception (wrong operator or division by zero) will throw an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object with an error message, that our program prints to the user.
+
+If our code would be JavaScript, we could print the error message by just referring to the field [message](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message) of the object _error_ as follows:
+
+```js
+try {
+  console.log(calculator(1, 5 , 'divide'));
+} catch (error) {
+  console.log('Something went wrong: ' + error.message);  // highlight-line
+}
+```
+
+Since the default type of the *error* object in TypeScript is *unknown*, we have to [narrow](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) the type to access the field:
+
+```ts
+try {
+  console.log(calculator(1, 5 , 'divide'));
+} catch (error: unknown) {
+  let errorMessage = 'Something went wrong: '
+  // here we can not use error.message
+  if (error instanceof Error) { // highlight-line 
+    // the type is narrowed and we can refer to error.message
+    errorMessage += error.message;  // highlight-line 
+  }
+  // here we can not use error.message
+
+  console.log(errorMessage);
+}
+```
+
+Here the narrowing was done with a [typeof](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards) type guard, that is just one of the many ways to narrow a type. We shall see many others later in this part.
+
+### Accessing command line arguments
 
 The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.
 
@@ -263,7 +297,13 @@ Let's return to the basic idea of TypeScript. TypeScript expects all globally-us
 
 As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
-Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example: *npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose* and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](https://github.com/DefinitelyTyped/DefinitelyTyped), a community project to maintain types of everything in one place.
+Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example: 
+
+```
+npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose
+```
+
+and so on and so on. The <i>@types/*</i> are maintained by [Definitely typed](https://github.com/DefinitelyTyped/DefinitelyTyped), a community project to maintain types of everything in one place.
 
 Sometimes, an npm package can also include its types within the code and, in that case, installing the corresponding <i>@types/*</i> is not necessary.
 
@@ -388,7 +428,9 @@ we get a proper error message:
 Something bad happened. Error: Provided values were not numbers!
 ```
 
-The definition of the function *parseArguments* has a couple of interesting things:
+There is quite a lot going on in the code. The most important addition is the function *parseArguments* that ensures that the parameters given to _multiplicator_ are of the right type. If not, an exception is thrown with a descriptive error message.
+
+The definition of the function has a couple of interesting things:
 
 ```js
 const parseArguments = (args: Array<string>): MultiplyValues => {
@@ -396,7 +438,15 @@ const parseArguments = (args: Array<string>): MultiplyValues => {
 }
 ```
 
-Firstly, the parameter *args* is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings. The return value has the type *MultiplyValues*, which is defined as follows:
+Firstly, the parameter *args* is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings. There is also an alternative syntax for defining an array. We could also have written
+
+```js
+const parseArguments = (args: string[]): MultiplyValues => {
+  // ...
+}
+```
+
+The return value of the function has the type *MultiplyValues*, which is defined as follows:
 
 ```js
 interface MultiplyValues {
@@ -405,8 +455,7 @@ interface MultiplyValues {
 }
 ```
 
-The definition utilizes TypeScript's Interface [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html) keyword, which is one way to define the "shape" an object should have.
-In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number.
+The definition utilizes TypeScript's [Interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) keyword, which is one way to define the "shape" an object should have. In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number.
 
 </div>
 

@@ -128,7 +128,7 @@ module.exports = {
     '9': {
       a: 'Background and introduction',
       b: 'First steps with TypeScript',
-      c: 'Typing the express app',
+      c: 'Typing an Express app',
       d: 'React with types',
     },
     '10': {
