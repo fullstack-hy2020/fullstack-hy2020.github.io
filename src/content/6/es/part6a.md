@@ -260,6 +260,28 @@ Hay algunas cosas notables en el código. <i>App</i> muestra el valor del contad
 Cuando se cambia el estado del store, React no puede volver a rerenderizar automáticamente la aplicación. Por lo tanto, hemos registrado una función _renderApp_ , que renderiza toda la aplicación, para escuchar cambios en el store con el método _store.subscribe_. Tenga en cuenta que tenemos que invocar inmediatamente al método _renderApp_ . Sin la invocación, la primera representación de la aplicación nunca se produciría.
 
 
+### Una nota sobre el uso de createStore
+
+Los más observadores notarán que el nombre de la función createStore está subrayado. Si pasa el mouse sobre el nombre, aparecerá una explicación
+
+![](../../images/6/30new.png)
+
+La explicacion completa es la siguiente:
+
+><i>Recomendamos utilizar el método configureStore del paquete @reduxjs/toolkit, que reemplaza a createStore.</i>
+>
+><i>Redux Toolkit es nuestro enfoque recomendado para escribir la lógica de Redux hoy, incluida la configuración de store, reducers, la obtención de datos y más.</i>
+>
+><i>Para obtener más detalles, lea esta página de documentos de Redux: https://redux.js.org/introduction/why-rtk-is-redux-today</i>
+>
+><i>configureStore de Redux Toolkit es una versión mejorada de createStore que simplifica la configuración y ayuda a evitar errores comunes.</i>
+>
+><i>No debería usar el paquete principal de redux por sí solo hoy en día, excepto con fines de aprendizaje. El método createStore del paquete core de redux no se eliminará, pero alentamos a todos los usuarios a migrar al uso de Redux Toolkit para todo el código de Redux.</i>
+
+Entonces, en lugar de la función <i>createStore</i>, se recomienda usar la función un poco más "avanzada" <i>configureStore</i>, y también la usaremos cuando nos hayamos hecho cargo de la funcionalidad básica de Redux.
+
+Nota adicional: <i>createStore</i> se define como "obsoleto", lo que generalmente significa que la función se eliminará en alguna versión más nueva de la biblioteca. La explicación anterior y la discusión de [este](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) revelan que <i> createStore</i> no se eliminará y se le ha dado el estado <i>obsoleto</i>, quizás por motivos ligeramente incorrectos. Por lo tanto, la función no está obsoleta, pero hoy en día existe una forma nueva y preferible de hacer casi lo mismo.
+
 ### Redux-notas
 
 
