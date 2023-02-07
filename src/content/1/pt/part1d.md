@@ -7,225 +7,213 @@ lang: pt
 
 <div class="content">
 
-### Complex state
+### Um estado complexo (complex state)
 
-In our previous example, the application state was simple as it was comprised of a single integer. What if our application requires a more complex state?
+Em nosso exemplo anterior, o estado da aplicação era simples, pois consistia em apenas um número inteiro. E se a nossa aplicação precisar de um estado mais complexo?
 
-In most cases, the easiest and best way to accomplish this is by using the _useState_ function multiple times to create separate "pieces" of state.
+Na maioria dos casos, a maneira mais fácil e melhor de fazer isso é usando a função _useState_ múltiplas vezes para criar "pedaços" (pieces) separados de estado.
 
-In the following code we create two pieces of state for the application named _left_ and _right_ that both get the initial value of 0:
+No código a seguir, criamos dois pedaços de estado para a aplicação, chamados _esquerda_ e _direita_, ambos com o valor inicial 0:
 
 ```js
 const App = () => {
-  const [left, setLeft] = useState(0)
-  const [right, setRight] = useState(0)
+  const [esquerda, defEsquerda] = useState(0) // ou "definirEsquerda"
+  const [direita, defDireita] = useState(0) // ou "definirDireita"
 
   return (
     <div>
-      {left}
-      <button onClick={() => setLeft(left + 1)}>
-        left
+      {esquerda}
+      <button onClick={() => defEsquerda(esquerda + 1)}>
+        Esquerda
       </button>
-      <button onClick={() => setRight(right + 1)}>
-        right
+      <button onClick={() => defDireita(direita + 1)}>
+        Direita
       </button>
-      {right}
+      {direita}
     </div>
   )
 }
 ```
 
-The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
+O componente tem acesso às funções _defEsquerda_ e _defDireita_, que podem ser usadas para atualizar os dois pedaços de estado.
 
-The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
+O estado ou um pedaço de estado do componente pode ser de qualquer tipo. Poderíamos implementar a mesma funcionalidade salvando a contagem de cliques tanto dos botões "<i>esquerda</i>" quanto "<i>direita</i>" em um único objeto:
 ```js
 {
-  left: 0,
-  right: 0
+  esquerda: 0,
+  direita: 0
 }
 ```
 
-In this case, the application would look like this:
+Nesse caso, a aplicação ficaria assim:
 
 ```js
 const App = () => {
-  const [clicks, setClicks] = useState({
-    left: 0, right: 0
+  const [cliques, defCliques] = useState({ // ou "definirCliques"
+    esquerda: 0, direita: 0
   })
 
-  const handleLeftClick = () => {
-    const newClicks = { 
-      left: clicks.left + 1, 
-      right: clicks.right 
+  const manipCliqueEsquerda = () => {
+    /* "handleLeftClick" pode ser traduzido, grosso modo,
+    como "manipularCliqueEsquerda". Versão reduzida: "manipCliqueEsquerda". */
+    const novosCliques = { 
+      esquerda: cliques.esquerda + 1, 
+      direita: cliques.direita 
     }
-    setClicks(newClicks)
+    defCliques(novosCliques)
   }
 
-  const handleRightClick = () => {
-    const newClicks = { 
-      left: clicks.left, 
-      right: clicks.right + 1 
+  const manipCliqueDireita = () => {
+    /* A mesma lógica aplica-se à (variável) constante "handleRightClick". */
+    const novosCliques = { 
+      esquerda: cliques.esquerda, 
+      direita: cliques.direita + 1 
     }
-    setClicks(newClicks)
+    defCliques(novosCliques)
   }
 
   return (
     <div>
-      {clicks.left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {clicks.right}
+      {cliques.esquerda}
+      <button onClick={manipCliqueEsquerda}>Esquerda</button>
+      <button onClick={manipCliqueDireita}>Direita</button>
+      {cliques.direita}
     </div>
   )
 }
 ```
 
-Now the component only has a single piece of state and the event handlers have to take care of changing the <i>entire application state</i>.
+Agora, o componente tem apenas um único pedaço de estado, e os manipuladores de eventos precisam cuidar da mudança do <i>estado inteiro da aplicação</i>.
 
-The event handler looks a bit messy. When the left button is clicked, the following function is called:
+O formato do manipulador de eventos parece confuso aqui. Quando o botão da esquerda é clicado, a seguinte função é chamada:
 ```js
-const handleLeftClick = () => {
-  const newClicks = { 
-    left: clicks.left + 1, 
-    right: clicks.right 
+const manipCliqueEsquerda = () => {
+  const novosCliques = { 
+    esquerda: cliques.esquerda + 1, 
+    direita: cliques.direita 
   }
-  setClicks(newClicks)
+  defCliques(novosCliques)
 }
 ```
 
-The following object is set as the new state of the application:
+O objeto a seguir é definido como o novo estado da aplicação:
 ```js
 {
-  left: clicks.left + 1,
-  right: clicks.right
+  esquerda: cliques.esquerda + 1,
+  direita: cliques.direita
 }
 ```
 
-The new value of the <i>left</i> property is now the same as the value of <i>left + 1</i> from the previous state, and the value of the <i>right</i> property is the same as the value of the <i>right</i> property from the previous state.
+O novo valor da propriedade <i>esquerda</i> agora é o mesmo que o valor de <i>esquerda + 1</i> do estado anterior, e o valor da propriedade <i>direita</i> é o mesmo que o valor da propriedade <i>direita</i> do estado anterior.
 
-We can define the new state object a bit more neatly by using the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
-syntax that was added to the language specification in the summer of 2018:
+Podemos definir mais claramente o novo objeto de estado usando a ([sintaxe de espalhamento](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)) (Spread syntax (...)) que foi adicionada à especificação da linguagem no verão de 2018:
 
 ```js
-const handleLeftClick = () => {
-  const newClicks = { 
-    ...clicks, 
-    left: clicks.left + 1 
+const manipCliqueEsquerda = () => {
+  const novosCliques = { 
+    ...cliques, 
+    esquerda: cliques.esquerda + 1 
   }
-  setClicks(newClicks)
+  defCliques(novosCliques)
 }
 
-const handleRightClick = () => {
-  const newClicks = { 
-    ...clicks, 
-    right: clicks.right + 1 
+const manipCliqueDireita = () => {
+  const novosCliques = { 
+    ...cliques, 
+    direita: cliques.direita + 1 
   }
-  setClicks(newClicks)
+  defCliques(novosCliques)
 }
 ```
 
-The syntax may seem a bit strange at first. In practice <em>{ ...clicks }</em> creates a new object that has copies of all of the properties of the _clicks_ object. When we specify a particular property - e.g. <i>right</i> in <em>{ ...clicks, right: 1 }</em>, the value of the _right_ property in the new object will be 1.
+A sintaxe pode parecer um tanto estranha no começo. Na prática, <em>{ ...cliques }</em> cria um novo objeto que tem cópias de todas as propriedades do objeto _cliques_. Quando discriminamos uma propriedade específica — por exemplo, <i>direita</i> em <em>{ ...cliques, direita: 1 }</em>, o valor da propriedade _direita_ no novo objeto será 1.
 
-In the example above, this:
-
-```js
-{ ...clicks, right: clicks.right + 1 }
-```
-
-creates a copy of the _clicks_ object where the value of the _right_ property is increased by one.
-
-Assigning the object to a variable in the event handlers is not necessary and we can simplify the functions to the following form:
+No exemplo acima, este trecho...
 
 ```js
-const handleLeftClick = () =>
-  setClicks({ ...clicks, left: clicks.left + 1 })
-
-const handleRightClick = () =>
-  setClicks({ ...clicks, right: clicks.right + 1 })
+{ ...cliques, direita: cliques.direita + 1 }
 ```
 
-Some readers might be wondering why we didn't just update the state directly, like this:
+... cria uma cópia do objeto _cliques_, onde o valor da propriedade _direita_ é aumentado em 1.
+
+Não é necessário atribuir o objeto a uma variável nos manipuladores de eventos, e podemos simplificar as funções da seguinte maneira:
 
 ```js
-const handleLeftClick = () => {
-  clicks.left++
-  setClicks(clicks)
-}
+const manipCliqueEsquerda = () =>
+  defCliques({ ...cliques, esquerda: cliques.esquerda + 1 })
+
+const manipCliqueDireita = () =>
+  defCliques({ ...cliques, direita: cliques.direita + 1 })
 ```
 
-The application appears to work. However, <i>it is forbidden in React to mutate state directly</i>, since [it can result in unexpected side effects](https://stackoverflow.com/a/40309023). Changing state has to always be done by setting the state to a new object. If properties from the previous state object are not changed, they need to simply be copied, which is done by copying those properties into a new object and setting that as the new state.
+A aplicação parece funcionar. Entretanto, <i> em React, é proibido mudar (mutate) o estado diretamente</i>, já que [pode resultar em efeitos colaterais inesperados](https://stackoverflow.com/a/40309023). A mudança de estado sempre tem que ser feita pela definição/atribuição do estado a um novo objeto. Se as propriedades do objeto de estado anterior não forem alteradas, podem simplesmente ser copiadas, que se dá copiando essas propriedades em um novo objeto e definindo-o como o novo estado.
 
-Storing all of the state in a single state object is a bad choice for this particular application; there's no apparent benefit and the resulting application is a lot more complex. In this case, storing the click counters into separate pieces of state is a far more suitable choice.
+Armazenar todo o estado em um único objeto de estado é uma má escolha para esta aplicação, especificamente; não há qualquer benefício aparente, e a aplicação resultante fica muito mais complexa. Neste caso, armazenar os contadores de cliques em pedaços separados de estado é uma escolha muito mais adequada.
 
-There are situations where it can be beneficial to store a piece of application state in a more complex data structure. [The official React documentation](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contains some helpful guidance on the topic.
+Há situações em que pode ser benéfico armazenar um pedaço de estado da aplicação em uma estrutura de dados mais complexa. [A documentação oficial de React](https://reactjs.org/docs/hooks-faq.html#should-i-use-one-or-many-state-variables) contém algumas orientações úteis sobre o assunto.
 
-### Handling arrays
+### Manipulando Arrays
 
-Let's add a piece of state to our application containing an array _allClicks_ that remembers every click that has occurred in the application.
+Vamos adicionar um pedaço de estado à nossa aplicação contendo o array _todosOsCliques_, que lembra cada clique que ocorreu na aplicação.
 
 ```js
 const App = () => {
-  const [left, setLeft] = useState(0)
-  const [right, setRight] = useState(0)
-  const [allClicks, setAll] = useState([]) // highlight-line
+  const [esquerda, defEsquerda] = useState(0)
+  const [direita, defDireita] = useState(0)
+  const [todosOsCliques, defTodos] = useState([])
 
-// highlight-start
-  const handleLeftClick = () => {
-    setAll(allClicks.concat('L'))
-    setLeft(left + 1)
-  }
-// highlight-end  
+  const manipCliqueEsquerda = () => {
+    defTodos(todosOsCliques.concat('E'))
+    defEsquerda(esquerda + 1)
+  } 
 
-// highlight-start
-  const handleRightClick = () => {
-    setAll(allClicks.concat('R'))
-    setRight(right + 1)
+  const manipCliqueDireita = () => {
+    defTodos(todosOsCliques.concat('D'))
+    defDireita(direita + 1)
   }
-// highlight-end  
 
   return (
     <div>
-      {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {right}
-      <p>{allClicks.join(' ')}</p> // highlight-line
+      {esquerda}
+      <button onClick={manipCliqueEsquerda}>Esquerda</button>
+      <button onClick={manipCliqueDireita}>Direita</button>
+      {direita}
+      <p>{todosOsCliques.join(' ')}</p>
     </div>
   )
 }
 ```
-
-Every click is stored in a separate piece of state called _allClicks_ that is initialized as an empty array:
+ 
+Cada clique é armazenado em um pedaço separado de estado chamado _todosOsCliques_, que é inicializado como um array vazio:
 
 ```js
-const [allClicks, setAll] = useState([])
+const [todosOsCliques, defTodos] = useState([])
 ```
 
-When the <i>left</i> button is clicked, we add the letter <i>L</i> to the _allClicks_ array:
+Quando o botão <i>Esquerda</i> é clicado, adicionamos a letra <i>E</i> ao array _todosOsCliques_:
 
 ```js
-const handleLeftClick = () => {
-  setAll(allClicks.concat('L'))
-  setLeft(left + 1)
+const manipCliqueEsquerda = () => {
+  defTodos(todosOsCliques.concat('E'))
+  defEsquerda(esquerda + 1)
 }
 ```
 
-The piece of state stored in _allClicks_ is now set to be an array that contains all of the items of the previous state array plus the letter <i>L</i>. Adding the new item to the array is accomplished with the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) method, which does not mutate the existing array but rather returns a <i>new copy of the array</i> with the item added to it.
+O pedaço de estado armazenado em _todosOsCliques_ agora é definido para ser um array que contém todos os itens do array anterior mais a letra <i>E</i>. O método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) (concatenar) adiciona o novo item ao array, que não muda o array existente, mas sim retorna uma <i>nova cópia do array</i> com o item adicionado a ele.
 
-As mentioned previously, it's also possible in JavaScript to add items to an array with the [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) method. If we add the item by pushing it to the _allClicks_ array and then updating the state, the application would still appear to work:
+Como mencionado anteriormente, também é possível em JavaScript adicionar itens a um array com o método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) (Significa, literalmente, "empurrar", "apertar", "pressionar". Porém, nestes termos, o método push() ADICIONA um ou mais elementos ao final de um array e retorna o novo comprimento desse array). Se adicionarmos o item "empurrando-o" para o array _todosOsCliques_ e então atualizando o estado, a aplicação ainda aparentará funcionar:
 
 ```js
-const handleLeftClick = () => {
-  allClicks.push('L')
-  setAll(allClicks)
-  setLeft(left + 1)
+const manipCliqueEsquerda = () => {
+  todosOsCliques.push('E')
+  defTodos(todosOsCliques)
+  defEsquerda(esquerda + 1)
 }
 ```
 
-However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
+No entanto, __não__ faça isso. Como mencionado anteriormente, o estado dos componentes em React, tal como _todosOsCliques_, não devem ser mudados diretamente. Mesmo se estado mudado parecer funcionar em alguns casos, tal decisão pode levar a erros no código muito difíceis de depurar.
 
-Let's take a closer look at how the clicking 
-is rendered to the page:
+Vamos olhar mais de perto em como o clique é renderizado na página:
 
 ```js
 const App = () => {
@@ -233,270 +221,261 @@ const App = () => {
 
   return (
     <div>
-      {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {right}
-      <p>{allClicks.join(' ')}</p> // highlight-line
+      {esquerda}
+      <button onClick={manipCliqueEsquerda}>Esquerda</button>
+      <button onClick={manipCliqueDireita}>Direita</button>
+      {direita}
+      <p>{todosOsCliques.join(' ')}</p>
     </div>
   )
 }
 ```
 
-We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
+Chamamos o método [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) (juntar, conectar) no array _todosOsCliques_ que une todos os itens em uma única string, separados pela string passada como parâmetro da função, que em nosso caso é um espaço vazio.
 
-### Conditional rendering
+### Renderização Condicional
 
-Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:
+Vamos modificar nossa aplicação para que a renderização do histórico de cliques seja gerenciada por um novo componente chamado <i>Historico</i> (*Histórico):
 
 ```js
-// highlight-start
-const History = (props) => {
-  if (props.allClicks.length === 0) {
+const Historico = (props) => {
+  if (props.todosOsCliques.length === 0) {
     return (
       <div>
-        the app is used by pressing the buttons
+        Clique em um dos botões para usar a aplicação!
       </div>
     )
   }
 
   return (
     <div>
-      button press history: {props.allClicks.join(' ')}
+      Histórico de cliques nos botões: {props.todosOsCliques.join(' ')}
     </div>
   )
 }
-// highlight-end
 
 const App = () => {
   // ...
 
   return (
     <div>
-      {left}
-      <button onClick={handleLeftClick}>left</button>
-      <button onClick={handleRightClick}>right</button>
-      {right}
-      <History allClicks={allClicks} /> // highlight-line
+      {esquerda}
+      <button onClick={manipCliqueEsquerda}>Esquerda</button>
+      <button onClick={manipCliqueDireita}>Direita</button>
+      {direita}
+      <Historico todosOsCliques={todosOsCliques} />
     </div>
   )
 }
 ```
 
-Now the behavior of the component depends on whether or not any buttons have been clicked. If not, meaning that the <em>allClicks</em> array is empty, the component renders a div element with some instructions instead:
+Agora, o comportamento do componente depende se algum dos botões foi clicado ou não. Se não, ou seja, o array <em>todosOsCliques</em> estando vazio, o componente renderiza um elemento "div" com algumas instruções:
 
 ```js
-<div>the app is used by pressing the buttons</div>
+<div>Clique em um dos botões para usar a aplicação!</div>
 ```
 
-And in all other cases, the component renders the clicking history:
+E em todos os outros casos, o componente renderiza o histórico de cliques:
 
 ```js
 <div>
-  button press history: {props.allClicks.join(' ')}
+  Histórico de cliques nos botões: {props.todosOsCliques.join(' ')}
 </div>
 ```
 
-The <i>History</i> component renders completely different React elements depending on the state of the application. This is called <i>conditional rendering</i>.
+O componente <i>Historico</i> renderiza elementos React completamente diferentes dependendo do estado da aplicação. Isso é chamado de <i>renderização condicional</i> (conditional rendering).
 
-React also offers many other ways of doing [conditional rendering](https://reactjs.org/docs/conditional-rendering.html). We will take a closer look at this in [part 2](/en/part2).
+React também oferece muitas outras formas de fazer [renderização condicional](https://reactjs.org/docs/conditional-rendering.html). Veremos isso na prática na [Parte 2](/pt/part2).
 
-Let's make one last modification to our application by refactoring it to use the _Button_ component that we defined earlier on:
+Vamos fazer mais uma modificação a nossa aplicação, refatorando-a para usar o componente _Botao_ que definimos anteriormente:
 
 ```js
-const History = (props) => {
-  if (props.allClicks.length === 0) {
+const Historico = (props) => {
+  if (props.todosOsCliques.length === 0) {
     return (
       <div>
-        the app is used by pressing the buttons
+        Clique em um dos botões para usar a aplicação!
       </div>
     )
   }
 
   return (
     <div>
-      button press history: {props.allClicks.join(' ')}
+      Histórico de cliques nos botões: {props.todosOsCliques.join(' ')}
     </div>
   )
 }
 
-// highlight-start
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
+const Botao = ({ manipClique, texto }) => (
+  <button onClick={manipClique}>
+    {texto}
   </button>
 )
-// highlight-end
 
 const App = () => {
-  const [left, setLeft] = useState(0)
-  const [right, setRight] = useState(0)
-  const [allClicks, setAll] = useState([])
+  const [esquerda, defEsquerda] = useState(0)
+  const [direita, defDireita] = useState(0)
+  const [todosOsCliques, defTodos] = useState([])
 
-  const handleLeftClick = () => {
-    setAll(allClicks.concat('L'))
-    setLeft(left + 1)
+  const manipCliqueEsquerda = () => {
+    defTodos(todosOsCliques.concat('E'))
+    defEsquerda(esquerda + 1)
   }
 
-  const handleRightClick = () => {
-    setAll(allClicks.concat('R'))
-    setRight(right + 1)
+  const manipCliqueDireita = () => {
+    defTodos(todosOsCliques.concat('D'))
+    defDireita(direita + 1)
   }
 
   return (
     <div>
-      {left}
-      // highlight-start
-      <Button handleClick={handleLeftClick} text='left' />
-      <Button handleClick={handleRightClick} text='right' />
-      // highlight-end
-      {right}
-      <History allClicks={allClicks} />
+      {esquerda}
+      <Botao manipClique={manipCliqueEsquerda} texto='Esquerda' />
+      <Botao manipClique={manipCliqueDireita} texto='Direita' />
+      {direita}
+      <Historico todosOsCliques={todosOsCliques} />
     </div>
   )
 }
 ```
 
-### Old React
+### React antigo
 
-In this course, we use the [state hook](https://reactjs.org/docs/hooks-state.html) to add state to our React components, which is part of the newer versions of React and is available from version [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) onwards. Before the addition of hooks, there was no way to add state to functional components. Components that required state had to be defined as [class](https://reactjs.org/docs/react-component.html) components, using the JavaScript class syntax.
+Neste curso, usamos o [state hook](https://reactjs.org/docs/hooks-state.html) ("gancho de estado") para adicionar estado aos nossos componentes React, que faz parte das versões mais recentes da biblioteca e está disponível a partir da versão [16.8.0](https://www.npmjs.com/package/react/v/16.8.0) em diante. Antes da adição dos hooks, não havia maneira de adicionar estado a componentes funcionais. Componentes que precisavam de estado tinham que ser definidos como componentes de [classe](https://reactjs.org/docs/react-component.html), usando a sintaxe de classe JavaScript.
 
-In this course, we have made the slightly radical decision to use hooks exclusively from day one, to ensure that we are learning the current and future variations of React. Even though functional components are the future of React, it is still important to learn the class syntax, as there are billions of lines of legacy React code that you might end up maintaining someday. The same applies to documentation and examples of React that you may stumble across on the internet.
+Neste curso, fizemos a decisão um pouco radical de usar exclusivamente hooks desde o primeiro dia, para garantir que estamos aprendendo as variações atuais e futuras de React. Embora os componentes funcionais sejam o futuro da biblioteca, ainda é importante aprender a sintaxe de classe, já que existem bilhões de linhas de código React legado que você pode acabar fazendo manutenção algum dia. O mesmo se aplica à documentação e exemplos de React que você pode encontrar na internet.
 
-We will learn more about React class components later on in the course.
+Vamos aprender mais sobre componentes de classe React mais tarde no curso.
 
-### Debugging React applications
+### Depuração de aplicações React
 
-A large part of a typical developer's time is spent on debugging and reading existing code. Every now and then we do get to write a line or two of new code, but a large part of our time is spent trying to figure out why something is broken or how something works. Good practices and tools for debugging are extremely important for this reason.
+Grande parte do tempo de um desenvolvedor é gasto na depuração e na leitura de códigos existentes. De vez em quando, conseguimos escrever uma ou duas linhas de código novo, mas grande parte do nosso tempo é gasto tentando descobrir por que algo está quebrado ou como algo funciona. Boas práticas e ferramentas de depuração são extremamente importantes por esta razão.
 
-Lucky for us, React is an extremely developer-friendly library when it comes to debugging.
+Felizmente para nós, React é uma biblioteca extremamente amigável para com os desenvolvedores quando se trata de depuração.
 
-Before we move on, let us remind ourselves of one of the most important rules of web development.
+Antes de continuarmos, vamos nos lembrar de uma das regras mais importantes do desenvolvimento web.
 
-<h4>The first rule of web development</h4>
+<h4>A primeira regra do desenvolvimento web</h4>
 
->  **Keep the browser's developer console open at all times.**
+>  **Mantenha o Console do navegador aberto o tempo todo.**
 >
-> The <i>Console</i> tab in particular should always be open, unless there is a specific reason to view another tab.
+> A guia <i>Console</i> em particular deve estar sempre aberta, a menos que haja uma razão específica para visualizar outra guia.
 
-Keep both your code and the web page open together **at the same time, all the time**.
+Mantenha tanto o seu código quanto a página web abertos juntos **o tempo todo**.
 
-If and when your code fails to compile and your browser lights up like a Christmas tree:
+Se e quando seu código não compilar e seu navegador brilhar igual uma árvore de Natal,...
 
-![screenshot of code](../../images/1/6x.png)
+![captura de tela do código](../../images/1/6x.png)
 
-don't write more code but rather find and fix the problem **immediately**. There has yet to be a moment in the history of coding where code that fails to compile would miraculously start working after writing large amounts of additional code. I highly doubt that such an event will transpire during this course either.
+... não escreva nenhuma linha de código a mais, mas encontre e corrija **imediatamente** o problema. Ainda não aconteceu na história da programação de o código que não estivesse compilando começasse a funcionar após a adição de mais linhas de código. Duvido que tal evento ocorra durante este curso também.
 
-Old-school, print-based debugging is always a good idea. If the component
+A depuração (debug) "old-school", baseada na impressão no Console, é sempre uma das melhores opções. Se o componente...
 
 ```js
-const Button = ({ handleClick, text }) => (
-  <button onClick={handleClick}>
-    {text}
+const Botao = ({ manipClique, texto }) => (
+  <button onClick={manipClique}>
+    {texto}
   </button>
 )
 ```
 
-is not working as intended, it's useful to start printing its variables out to the console. In order to do this effectively, we must transform our function into the less compact form and receive the entire props object without destructuring it immediately:
+... não estiver funcionando como desejado, é útil começar a imprimir suas variáveis ​​no console. Para que isso funcione, devemos transformar nossa função na forma menos compactada e receber todo o objeto "props" sem desestruturá-lo de forma imediata:
 
 ```js
-const Button = (props) => { 
-  console.log(props) // highlight-line
-  const { handleClick, text } = props
+const Botao = (props) => { 
+  console.log(props)
+  const { manipClique, texto } = props
   return (
-    <button onClick={handleClick}>
-      {text}
+    <button onClick={manipClique}>
+      {texto}
     </button>
   )
 }
 ```
 
-This will immediately reveal if, for instance, one of the attributes has been misspelled when using the component.
+Isso revelará imediatamente se, por exemplo, um dos atributos foi escrito incorretamente ao usar o componente.
 
-**NB** When you use _console.log_ for debugging, don't combine _objects_ in a Java-like fashion by using the plus operator. Instead of writing:
-
-```js
-console.log('props value is ' + props)
-```
-
-Separate the things you want to log to the console with a comma:
+**N.B.:** Quando você usar _console.log_ para depuração, não combine _objetos (objects)_ do jeito Java de se fazer usando o operador de adição. Em vez de escrever...
 
 ```js
-console.log('props value is', props)
+console.log('o valor de props é ' + props)
 ```
 
-If you use the Java-like way of concatenating a string with an object, you will end up with a rather uninformative log message:
+... separe as coisas que você deseja registrar no console com uma vírgula:
 
 ```js
-props value is [object Object]
+console.log('o valor de props é', props)
 ```
 
-Whereas the items separated by a comma will all be available in the browser console for further inspection.
-
-Logging output to the console is by no means the only way of debugging our applications. You can pause the execution of your application code in the Chrome developer console's <i>debugger</i>, by writing the command [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) anywhere in your code.
-
-The execution will pause once it arrives at a point where the _debugger_ command gets executed:
-
-![debugger paused in dev tools](../../images/1/7a.png)
-
-By going to the <i>Console</i> tab, it is easy to inspect the current state of variables:
-
-![console inspection screenshot](../../images/1/8a.png)
-
-Once the cause of the bug is discovered you can remove the _debugger_ command and refresh the page.
-
-The debugger also enables us to execute our code line by line with the controls found on the right-hand side of the <i>Sources</i> tab.
-
-You can also access the debugger without the _debugger_ command by adding breakpoints in the <i>Sources</i> tab. Inspecting the values of the component's variables can be done in the _Scope_-section:
-
-![breakpoint example in devtools](../../images/1/9a.png)
-
-It is highly recommended to add the [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension to Chrome. It adds a new _Components_ tab to the developer tools. The new developer tools tab can be used to inspect the different React elements in the application, along with their state and props:
-
-![screenshot react developer tools extension](../../images/1/10ea.png)
-
-
-The _App_ component's state is defined like so:
+Se você usar do jeito Java de concatenar uma string com um objeto, aparecerá uma mensagem de log muito pouco informativa:
 
 ```js
-const [left, setLeft] = useState(0)
-const [right, setRight] = useState(0)
-const [allClicks, setAll] = useState([])
+o valor de props é [object Object]
 ```
 
-Dev tools show the state of hooks in the order of their definition:
+Registrar a saída no console não é de maneira alguma a única forma de depurar nossas aplicações. Você pode pausar a execução do código da sua aplicação no _depurador (debugger)_ no Console do Desenvolvedor do Chrome, escrevendo o comando [debugger](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger) em qualquer lugar do seu código.
 
-![state of hooks in react dev tools](../../images/1/11ea.png)
+A execução será pausada assim que chegar a um ponto onde o comando _debugger_ for executado:
 
-The first <i>State</i> contains the value of the <i>left</i> state, the next contains the value of the <i>right</i> state and the last contains the value of the <i>allClicks</i> state.
+![debugger pausado na Ferramenta do Desenvolvedor](../../images/1/7a.png)
 
-### Rules of Hooks
+Ao ir para a guia <i>Console</i>, é fácil inspecionar o estado atual das variáveis:
 
-There are a few limitations and rules we have to follow to ensure that our application uses hooks-based state functions correctly.
+![captura de tela de inspeção de console](../../images/1/8a.png)
 
-The _useState_ function (as well as the _useEffect_ function introduced later on in the course) <i>must not be called</i> from inside of a loop, a conditional expression, or any place that is not a function defining a component. This must be done to ensure that the hooks are always called in the same order, and if this isn't the case the application will behave erratically.
+Uma vez que a causa do erro é descoberta, é possível remover o comando _debugger_ e atualizar a página.
 
-To recap, hooks may only be called from the inside of a function body that defines a React component:
+O depurador também nos permite executar nosso código linha por linha com os controles encontrados na parte direita da guia <i>Fontes</i> (sources).
+
+Você também pode acessar o depurador sem o comando _debugger_, adicionando pontos de interrupção na guia <i>Fontes</i>. Inspecionar os valores das variáveis do componente pode ser feito na seção _Escopo (Scope)_:
+
+![exemplo de ponto de interrupção nas ferramentas do desenvolvedor](../../images/1/9a.png)
+
+É extremamente recomendado adicionar a extensão [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) ao Chrome. Ele adiciona uma nova guia _Components_ às ferramentas de desenvolvedor. A nova guia de ferramentas de desenvolvedor pode ser usada para inspecionar os diferentes elementos React na aplicação, juntamente com seu estado e props:
+
+![captura de tela da extensão de ferramentas de desenvolvedor React](../../images/1/10ea.png)
+
+O estado do componente _App_ é definido assim:
+
+```js
+const [esquerda, defEsquerda] = useState(0)
+const [direita, defDireita] = useState(0)
+const [todosOsCliques, defTodos] = useState([])
+```
+
+As ferramentas do desenvolvedor mostram o estado dos hooks na ordem de sua definição:
+
+![estado dos hooks nas ferramentas do desenvolvedor React](../../images/1/11ea.png)
+
+O primeiro <i>State</i> (Estado) contém o valor do estado <i>esquerda</i>; a próxima contém o valor do estado <i>direita</i> e a última contém o valor do estado <i>todosOsCliques</i>.
+
+### Regras dos Hooks
+
+Há algumas limitações e regras que devemos seguir para garantir que a nossa aplicação use corretamente as funções de estado baseadas em hooks.
+
+A função _useState_ ("usarEstado", assim como a função _useEffect_, ou "usarEfeito", introduzida mais tarde neste curso) <i>não deve ser chamada</i> dentro de um loop, uma expressão condicional ou qualquer lugar que não seja uma função que define um componente. Assim deve ser para garantir que os hooks sejam sempre chamados na mesma ordem e, se isso não acontecer, a aplicação se comportará erraticamente.
+
+Resumindo, hooks só podem ser chamados de dentro do corpo de uma função que define um componente React:
 
 ```js
 const App = () => {
-  // these are ok
-  const [age, setAge] = useState(0)
-  const [name, setName] = useState('Juha Tauriainen')
+  // Desta forma funciona!
+  const [idade, defIdade] = useState(0)
+  const [nome, defNome] = useState('Juha Tauriainen')
 
-  if ( age > 10 ) {
-    // this does not work!
-    const [foobar, setFoobar] = useState(null)
+  if ( idade > 10 ) {
+    // Desta forma não funciona!
+    const [foobar, defFoobar] = useState(null)
   }
 
-  for ( let i = 0; i < age; i++ ) {
-    // also this is not good
-    const [rightWay, setRightWay] = useState(false)
+  for ( let i = 0; i < idade; i++ ) {
+    // Esta forma também não é boa!
+    const [formaCorreta, defFormaCorreta] = useState(false)
   }
 
-  const notGood = () => {
-    // and this is also illegal
-    const [x, setX] = useState(-1000)
+  const bemRuim = () => {
+    // E esta aqui é ilegal!
+    const [x, defX] = useState(-1000)
   }
 
   return (
@@ -505,152 +484,162 @@ const App = () => {
 }
 ```
 
-### Event Handling Revisited
+### Manipulação de Eventos Revisitados
 
-Event handling has proven to be a difficult topic in previous iterations of this course.
+A manipulação de eventos se mostrou um tópico difícil em iterações anteriores neste curso.
 
-For this reason, we will revisit the topic.
+Por esta razão, revisaremos o tópico.
 
-Let's assume that we're developing this simple application with the following component <i>App</i>:
+Vamos supor que estejamos desenvolvendo essa aplicação simples com o seguinte componente <i>App</i>:
 ```js
 const App = () => {
-  const [value, setValue] = useState(10)
+  const [valor, defValor] = useState(10)
 
   return (
     <div>
-      {value}
-      <button>reset to zero</button>
+      {valor}
+      <button>zerar</button>
     </div>
   )
 }
 ```
 
-We want the clicking of the button to reset the state stored in the _value_ variable.
+Queremos que o clique do botão reinicialize o estado armazenado na variável _valor_.
 
-In order to make the button react to a click event, we have to add an <i>event handler</i> to it.
+Para fazer com que o botão reaja a um evento de clique, precisamos adicionar um <i>manipulador de eventos</i> a ele.
 
-Event handlers must always be a function or a reference to a function. The button will not work if the event handler is set to a variable of any other type.
+Os manipuladores de eventos devem sempre ser uma função ou uma referência a uma função. O botão não funcionará se o manipulador de eventos for definido como uma variável de outro tipo.
 
-If we were to define the event handler as a string:
+Se definíssemos o manipulador de eventos como uma string...
 
 ```js
-<button onClick="crap...">button</button>
+<button onClick="lixo...">botão</button>
 ```
 
-React would warn us about this in the console:
+... React nos avisaria sobre isso no console:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
-    in button (at index.js:20)
-    in div (at index.js:18)
-    in App (at index.js:27)
+/* index.js:2178 Aviso: Esperava-se que o ouvinte `onClick` fosse uma função, mas obteve-se um valor do tipo `string`. */
+    em botão (at index.js:20)
+    em div (at index.js:18)
+    em App (at index.js:27)
 ```
 
-The following attempt would also not work:
+O seguinte também não funcionaria:
 
 ```js
-<button onClick={value + 1}>button</button>
+<button onClick={valor + 1}>botão</button>
 ```
 
-We have attempted to set the event handler to _value + 1_ which simply returns the result of the operation. React will kindly warn us about this in the console:
+Tentamos definir o manipulador de eventos como _valor + 1_, o que simplesmente retorna o resultado da operação. React nos avisará sobre isso no console:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
+/* index.js:2178 Aviso: Esperava-se que o ouvinte `onClick` fosse uma função, mas obteve-se um valor do tipo `number`. */
 ```
 
-This attempt would not work either:
+Este também não funcionaria:
 ```js
-<button onClick={value = 0}>button</button>
+<button onClick={valor = 0}>botão</button>
 ```
 
-The event handler is not a function but a variable assignment, and React will once again issue a warning to the console. This attempt is also flawed in the sense that we must never mutate state directly in React.
+O manipulador de eventos não é uma função, mas uma **atribuição de variável**, e React, mais uma vez, emitirá um aviso no console. Esta tentativa também é falha no sentido de que nunca devemos mudar o estado diretamente em React.
 
-What about the following:
+Vejamos o próximo exemplo:
 
 ```js
-<button onClick={console.log('clicked the button')}>
-  button
+<button onClick={console.log('clicou no botão')}>
+  botão
 </button>
 ```
 
-The message gets printed to the console once when the component is rendered but nothing happens when we click the button. Why does this not work even when our event handler contains a function _console.log_?
+A mensagem é impressa no console assim que o componente é renderizado, mas nada acontece quando clicamos no botão. Por que não funciona mesmo quando nosso manipulador de eventos contém a função _console.log_?
 
-The issue here is that our event handler is defined as a <i>function call</i> which means that the event handler is assigned the returned value from the function, which in the case of _console.log_ is <i>undefined</i>.
+O problema aqui é que nosso manipulador de eventos é definido como uma <i>chamada de função</i>, o que significa que o manipulador de eventos é atribuído ao valor retornado da função, que no caso de _console.log_ é <i>undefined</i> (indefinido).
 
-The _console.log_ function call gets executed when the component is rendered and for this reason, it gets printed once to the console.
+A função _console.log_ é chamada quando o componente é renderizado e, por esse motivo, é impresso uma vez no console.
 
-The following attempt is flawed as well:
+A tentativa a seguir também não funciona:
 ```js
-<button onClick={setValue(0)}>button</button>
+<button onClick={setValue(0)}>botão</button>
 ```
 
-We have once again tried to set a function call as the event handler. This does not work. This particular attempt also causes another problem. When the component is rendered the function _setValue(0)_ gets executed which in turn causes the component to be re-rendered. Re-rendering in turn calls _setValue(0)_ again, resulting in an infinite recursion.
+Novamente, tentamos definir uma chamada de função como o manipulador de eventos. Isso não funciona. Essa tentativa específica também causa outro problema. Quando o componente é renderizado, a função _setValue(0)_ é executada, o que por sua vez faz com que o componente seja renderizado novamente. A re-renderização, por conseguinte, chama _setValue(0)_ novamente, resultando em uma recursão infinita.
 
-Executing a particular function call when the button is clicked can be accomplished like this:
+A execução de uma chamada de função específica quando o botão é clicado pode ser realizada da seguinte maneira:
 
 ```js
-<button onClick={() => console.log('clicked the button')}>
-  button
+<button onClick={() => console.log('clicou no botão')}>
+  botão
 </button>
 ```
 
-Now the event handler is a function defined with the arrow function syntax _() => console.log('clicked the button')_. When the component gets rendered, no function gets called and only the reference to the arrow function is set to the event handler. Calling the function happens only once the button is clicked.
+Agora, o manipulador de eventos é uma função definida com a sintaxe de função de seta _() => console.log('clicou no botão')_. Quando o componente é renderizado, nenhuma função é chamada e apenas a referência à função de seta é definida como o manipulador de eventos. A chamada da função ocorre apenas quando o botão é clicado.
 
-We can implement resetting the state in our application with this same technique:
+Podemos implementar a reinicialização do estado em nossa aplicação com essa mesma técnica:
 
 ```js
-<button onClick={() => setValue(0)}>button</button>
+<button onClick={() => setValue(0)}>botão</button>
 ```
 
-The event handler is now the function _() => setValue(0)_.
+O manipulador de eventos agora é a função _() => setValue(0)_.
 
-Defining event handlers directly in the attribute of the button is not necessarily the best possible idea.
+Definir manipuladores de eventos diretamente no atributo do botão nem sempre é a melhor opção a se aplicar.
 
-You will often see event handlers defined in a separate place. In the following version of our application we define a function that then gets assigned to the _handleClick_ variable in the body of the component function:
+Você verá frequentemente manipuladores de eventos definidos em um lugar separado. Na versão seguinte de nossa aplicação, definimos uma função que então é atribuída à variável _manipClique_ no corpo da função do componente:
 
 ```js
-const App = () => {
-  const [value, setValue] = useState(10)
+const Aplic = () => {
+  const [valor, defValor] = useState(10)
 
-  const handleClick = () =>
-    console.log('clicked the button')
+  const manipClique = () =>
+    console.log('clicou no botão')
 
   return (
     <div>
-      {value}
-      <button onClick={handleClick}>button</button>
+      {valor}
+      <button onClick={manipClique}>botão</button>
     </div>
   )
 }
 ```
 
-The _handleClick_ variable is now assigned to a reference to the function. The reference is passed to the button as the <i>onClick</i> attribute:
+Agora, a variável _manipClique_ está atribuída a uma referência à função. A referência é passada ao botão como o atributo <i>onClick</i>:
 
 ```js
-<button onClick={handleClick}>button</button>
+<button onClick={manipClique}>botão</button>
 ```
 
-Naturally, our event handler function can be composed of multiple commands. In these cases we use the longer curly brace syntax for arrow functions:
+Naturalmente, nossa função manipuladora de eventos pode ser composta por múltiplos comandos. Nestes casos, usamos a sintaxe de chaves mais longa para funções de seta:
 
 ```js
-const App = () => {
-  const [value, setValue] = useState(10)
+const Aplicacao = () => {
+  const [valor, defValor] = useState(10)
 
-  // highlight-start
-  const handleClick = () => {
-    console.log('clicked the button')
-    setValue(0)
+  const manipClique = () => {
+    console.log('clicou no botão')
+    defValor(0)
   }
-   // highlight-end
 
   return (
     <div>
-      {value}
-      <button onClick={handleClick}>button</button>
+      {valor}
+      <button onClick={manipClique}>botão</button>
     </div>
   )
 }
 ```
+
+^^^^^^^^^^^
+### REVISADO
+
+
+
+
+
+
+
 
 ### A function that returns a function
 
@@ -1031,7 +1020,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
 - If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>
 
