@@ -578,12 +578,13 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true, // highlight-line
     "esModuleInterop": true,
     "moduleResolution": "node"
   }
@@ -687,7 +688,7 @@ This is because we banned unused parameters in our <i>tsconfig.json</i>:
 ```js
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true, // highlight-line
@@ -806,15 +807,22 @@ Let's add the HTTP POST endpoint *calculate* to our app:
 ```js
 import { calculator } from './calculator';
 
+app.use(express.json());
+
 // ...
 
 app.post('/calculate', (req, res) => {
   const { value1, value2, op } = req.body;
 
   const result = calculator(value1, value2, op);
-  res.send(result);
+  res.send({ result });
 });
+```
 
+To get this working, we must add an <i>export</i> to the function _calculator_:
+
+```js
+export const calculator = (a: number, b: number, op: Operation) : number => {
 ```
 
 When you hover over the *calculate* function, you can see the typing of the *calculator* even though the code itself does not contain any typings:
@@ -835,15 +843,13 @@ We can also explicitly type things *any*. The only difference between the implic
 Programmers however see the code differently when *any* is explicitly enforced than when it is implicitly inferred.
 Implicit *any* typings are usually considered problematic, since it is quite often due to the coder forgetting to assign types (or being too lazy to do it), and it also means that the full power of TypeScript is not properly exploited.
 
-This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny) exists on the compiler level, and it is highly recommended to keep it on at all times.
-In the rare occasions when you truly cannot know what the type of a variable is, you should explicitly state that in the code:
+This is why the configuration rule [noImplicitAny](https://www.typescriptlang.org/tsconfig#noImplicitAny) exists on the compiler level, and it is highly recommended to keep it on at all times. In the rare occasions when you truly cannot know what the type of a variable is, you should explicitly state that in the code:
 
 ```js
 const a : any = /* no clue what the type will be! */.
 ```
 
-We already have <i>noImplicitAny</i> configured in our example, so why does the compiler not complain about the implicit *any* types?
-The reason is that the *query* field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed *any*. The same is true for the *request.body* field we use to post data to an app.
+We already have <i>noImplicitAny: true</i> configured in our example, so why does the compiler not complain about the implicit *any* types? The reason is that the *body* field of an Express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed *any*. The same is true for the *request.query* field that Express uses for the query parameters.
 
 What if we would like to restrict developers from using the *any* type? Fortunately, we have methods other than <i>tsconfig.json</i> to enforce a coding style. What we can do is use <i>ESlint</i> to manage
 our code.
@@ -934,7 +940,7 @@ Quite a few semicolons are missing, but those are easy to add. We also have to s
 
 We could and probably should disable some ESlint rules to get the data from the request body.
 
-Disabling *@typescript-eslint/no-unsafe-assignment* for the destructuring assignment is nearly enough:
+Disabling *@typescript-eslint/no-unsafe-assignment* for the destructuring assignment and calling the [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number) constructor to values is nearly enough:
 
 ```js
 app.post('/calculate', (req, res) => {
@@ -943,8 +949,8 @@ app.post('/calculate', (req, res) => {
   // highlight-end
   const { value1, value2, op } = req.body;
 
-  const result = calculator(Number(value1), Number(value2), op);
-  res.send(result);
+  const result = calculator(Number(value1), Number(value2), op); // highlight-line
+  res.send({ result });
 });
 ```
 
@@ -963,7 +969,7 @@ app.post('/calculate', (req, res) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   // highlight-end
   const result = calculator(Number(value1), Number(value2), op);
-  res.send(result);
+  res.send({ result });
 });
 ```
 
@@ -975,7 +981,7 @@ app.post('/calculate', (req, res) => {
   const { value1, value2, op } = req.body;
 
 // highlight-start
-  if ( !value1 || isNaN(Number(value1))) {
+  if ( !value1 || isNaN(Number(value1)) ) {
     return res.status(400).send({ error: '...'});
   }
   // highlight-end
@@ -984,9 +990,60 @@ app.post('/calculate', (req, res) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const result = calculator(Number(value1), Number(value2), op);
-  return res.send(result);
+  return res.send({ result });
 });
 ```
+
+We shall see later on in this parts some techniques how the <i>any</i> typed data (eg. the input an app recieves from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
+
+### Type assertion
+
+Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet. Let us export the type Operation in <i>calcultor.ts</i>:
+
+```js
+export type Operation = 'multiply' | 'add' | 'divide';
+```
+
+Now we can import the type and use a <i>type assertion</i> to tell the TypeScript compiler what type a variable has: 
+
+```js
+import { calculator, Operation } from './calculator'; // highligh-line
+
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // validate the data here
+
+  // assert the type
+  const operation = op as Operation;  // highlight-line 
+
+  const result = calculator(Number(value1), Number(value2), operation); // highlight-line
+
+  return res.send({ result });
+});
+```
+
+The defined constant _operation_ has now the type _Operation_ and the compiler is perfectly happy, no quieting of the Eslint rule is needed on the following function call. The new variable is actually not needed, the type assertion can be done when an argument is passed to the function:
+
+```js
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // validate the data here
+
+  const result = calculator(
+    Number(value1), Number(value2), op as Operation // highlight-line
+  ); 
+
+  return res.send({ result });
+});
+```
+
+Using a type assertion (or quieting an Eslint rule) is always a bit risky thing. It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing. If the asserted type does <i>not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
+
+In the next chapter we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
 
 </div>
 
