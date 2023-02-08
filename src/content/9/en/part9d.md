@@ -310,7 +310,7 @@ const App = () => {
 
 ### Deeper type usage
 
-In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts and each part needs different attributes? How would this look, codewise? Let's consider the following example:
+In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts not all parts have the same attributes? How would this look, codewise? Let's consider the following example:
 
 ```js
 const courseParts = [
@@ -343,7 +343,7 @@ Each part has the *name* and *exerciseCount* attributes, but the first, the thir
 
 Let's imagine that our application just keeps on growing, and we need to pass the different course parts around in our code. On top of that, there are also additional attributes and course parts added to the mix. How can we know that our code is capable of handling all the different types of data correctly, and we are not for example forgetting to render a new course part on some page? This is where TypeScript comes in handy!
 
-Let's start by defining types for our different course parts. We notice that the first and third have a same set of attributes, and the second and fourth are a bit different so we have three different kinds of course part elements. 
+Let's start by defining types for our different course parts. We notice that the first and third have the same set of attributes. The second and fourth are a bit different so we have three different kinds of course part elements. 
 
 So let us define a type for each of the different kind of of course parts:
 
@@ -371,7 +371,7 @@ interface CoursePartBackround {
 }
 ```
 
-Besides the fields that are found in the entries, we have now introduced a additional field called <i>kind</i> that has a [literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) type. The field kind is describing what "kind of" course part the type represents. We shall soon see where the field kind is used!
+Besides the attributes that are found in the various course parts, we have now introduced a additional attribute called <i>kind</i> that has a [literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) type, it is a "hard coded" string, distinct for each course part. We shall soon see where the attribute kind is used!
 
 Next, we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. We can then use it to define a type for our array, which should accept any of these course part types:
 
@@ -416,7 +416,7 @@ const App = () => {
 }
 ```
 
-Note that we have now added the field _kind_ with a proper value to each element of the array.
+Note that we have now added the attribute _kind_ with a proper value to each element of the array.
 
 Our editor will automatically warn us if we use the wrong type for an attribute, use an extra attribute, or forget to set an expected attribute. If we eg. try to add the following to the array
 
@@ -433,7 +433,7 @@ We will immediately see an error in the editor:
 
 ![](../../images/9/63new.png)
 
-Since our new entry has the field <i>kind</i> with value <i>basic</i> TypeScript knows that the entry is does not only have the type _CoursePart_ but it is actually meant to be a _CoursePartBasic_. So here the field _kind_ "narrows" the type of the entry from a more generic type to a more specific type that has a certain set of fields. We shall see this style of type narrowin in action in the code soon!
+Since our new entry has the attribute _kind_ with value _"basic"_ TypeScript knows that the entry is does not only have the type _CoursePart_ but it is actually meant to be a _CoursePartBasic_. So here the attribute _kind_ "narrows" the type of the entry from a more general to a more specific type that has a certain set of attributes. We shall soon see this style of type narrowing in action in the code!
 
 But we're not satisfied yet! There is still a lot of duplication in our types, and we want to avoid that. We start by identifying the attributes all course parts have in common, and defining a base type that contains them. Then we will [extend](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) that base type to create our kind-specific types:
 
@@ -466,29 +466,29 @@ type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
 
 How should we now use these types in our components?
 
-If we try acess the objects in the array _courseParts: CoursePart[]_ we notice that it is possibly to only access the attributes that are common to all the union types:
+If we try to acess the objects in the array _courseParts: CoursePart[]_ we notice that it is possibly to only access the attributes that are common to all the types in the union:
 
 ![](../../images/9/65new.png)
 
-And indeed, the TypeScript [documentation](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#working-with-union-types) mentions:
+And indeed, the TypeScript [documentation](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#working-with-union-types) says this:
 
-> <i>TypeScript will only allow an operation if it is valid for every member of the union.</i>
+> <i>TypeScript will only allow an operation (or attribute access) if it is valid for every member of the union.</i>
 
 The documentation also mentions the following:
 
-> <i>The solution is to narrow the union with code, the same as you would in JavaScript without type annotations. Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code.</i>
+> <i>The solution is to narrow the union with code... Narrowing occurs when TypeScript can deduce a more specific type for a value based on the structure of the code.</i>
 
 So once again the [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) is the rescue!
 
-One handy way to narrow these kinds of types in TypeScript is by using *switch case* expressions. Once TypeScript has inferred that a variable is of type union and that each type in the union contain a certain literal attribute (in our case <i>kind</i>), we can use that as a type identifier. We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block:
+One handy way to narrow these kinds of types in TypeScript is to use *switch case* expressions. Once TypeScript has inferred that a variable is of union type and that each type in the union contain a certain literal attribute (in our case _kind_), we can use that as a type identifier. We can then build a switch case around that attribute and TypeScript will know which attributes are available within each case block:
 
 ![](../../images/9/64new.png)
 
-In the above example, TypeScript knows that a *part* has the type *CoursePart* and it can then infer that *part* is of either type *CoursePartBasic*, *CoursePartGroup* or *CoursePartBackround* based on the value of the atrribute _kind_.
+In the above example, TypeScript knows that a *part* has the type *CoursePart* and it can then infer that *part* is of either type *CoursePartBasic*, *CoursePartGroup* or *CoursePartBackround* based on the value of the attribute _kind_.
 
-The specific technique of type narrowing where a union type is narrowed based on one attrribute value is called [discriminated union](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions).
+The specific technique of type narrowing where a union type is narrowed based on literal attribute value is called [discriminated union](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#discriminated-unions).
 
-Note the narrowing can naturally be also done with _if_ clause. We could eg. do the following:
+Note that the narrowing can naturally be also done with _if_ clause. We could eg. do the following:
 
 ```js
   courseParts.forEach(part => {
@@ -524,7 +524,7 @@ default:
   return assertNever(part);
 ```
 
-and remove the case that handles the type_ CoursePartBackround_, we would see the following error:
+and remove the case that handles the type _CoursePartBackround_, we would see the following error:
 
 ![](../../images/9/66new.png)
 
