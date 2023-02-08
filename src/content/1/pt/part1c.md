@@ -363,28 +363,28 @@ O console do seu navegador estava aberto? Se não estava, prometa que essa foi a
 
 ### Tratamento de eventos (Event handling)
 
-Já mencionamos, na [Parte 0](/pt/part0), <i>manipuladores de eventos</i> que são registrados para serem chamados quando eventos específicos ocorrem várias vezes. A interação de um usuário com os diferentes elementos de uma página web pode causar uma coleção de vários tipos de eventos a serem acionados.
+Já mencionamos, na [Parte 0](/pt/part0), <i>gerenciadores de eventos</i> que são registrados para serem chamados quando eventos específicos ocorrem várias vezes. A interação de um usuário com os diferentes elementos de uma página web pode causar uma coleção de vários tipos de eventos a serem acionados.
 
 Vamos mudar a aplicação para que o aumento do contador aconteça quando um usuário clicar em um botão, que é implementado com o elemento [botão](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button) (button).
 
 Os elementos de botão suportam os chamados [Eventos de Mouse](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent) (MouseEvent), dos quais [clique](https://developer.mozilla.org/en-US/docs/Web/Events/click) (click) é o evento mais comum. O evento de clique em um botão também pode ser acionado com o teclado ou com uma tela touch screen, apesar de ser "<i>eventos de mouse</i>".
 
-Em React, se [registra uma função manipuladora de eventos](https://reactjs.org/docs/handling-events.html) (event handler function) para o evento <i>click</i> desta forma:
+Em React, se [registra uma função gerenciadora de eventos](https://reactjs.org/docs/handling-events.html) (event handler function) para o evento <i>click</i> desta forma:
 
 ```js
 const App = () => {
   const [ contador, defContador ] = useState(0)
 
-  const manipClique = () => {
-    // "handleClick" pode ser traduzido, grosso modo, como "manipularClique";
-    // Versão reduzida: "manipClique".
+  const gerClique = () => {
+    // "handleClick" pode ser traduzido, grosso modo, como "gerenciarClique";
+    // Versão reduzida: "gerClique".
     console.log('clicado')
   }
 
   return (
     <div>
       <div>{contador}</div>
-      <button onClick={manipClique}>
+      <button onClick={gerClique}>
         mais+
       </button>
     </div>
@@ -392,9 +392,9 @@ const App = () => {
 }
 ```
 
-Definimos o valor do atributo <i>onClick</i> do botão como uma referência à função _manipClique_ definida no código.manipCliquecada clique no botão <i>mais+</i>, a função _manipClique_ é chamada, o que significa que a cada evento de clique uma mensagem <i>clicado</i> será registrada no console do navegador.
+Definimos o valor do atributo <i>onClick</i> do botão como uma referência à função _gerClique_ definida no código.gerCliquecada clique no botão <i>mais+</i>, a função _gerClique_ é chamada, o que significa que a cada evento de clique uma mensagem <i>clicado</i> será registrada no console do navegador.
 
-A função manipuladora de eventos também pode ser definida diretamente na atribuição de valor do atributo "onClick":
+A função gerenciadora de eventos também pode ser definida diretamente na atribuição de valor do atributo "onClick":
 
 ```js
 const App = () => {
@@ -411,7 +411,7 @@ const App = () => {
 }
 ```
 
-Ao mudar a função manipuladora de eventos para a seguinte forma...
+Ao mudar a função gerenciadora de eventos para a seguinte forma...
 ```js
 <button onClick={() => defContador(contador + 1)}>
   mais+
@@ -442,9 +442,9 @@ const App = () => {
 
 Nossa aplicação está pronta!
 
-### Um manipulador de evento é uma função
+### Um gerenciador de evento é uma função
 
-Definimos os manipuladores de eventos para os nossos botões, onde declaramos seus atributos <i>onClick</i>:
+Definimos os gerenciadores de eventos para os nossos botões, onde declaramos seus atributos <i>onClick</i>:
 
 ```js
 <button onClick={() => defContador(contador + 1)}> 
@@ -452,7 +452,7 @@ Definimos os manipuladores de eventos para os nossos botões, onde declaramos se
 </button>
 ```
 
-E se tentássemos definir os manipuladores de eventos de uma forma mais simples? O que aconteceria?
+E se tentássemos definir os gerenciadores de eventos de uma forma mais simples? O que aconteceria?
 
 ```js
 <button onClick={defContador(contador + 1)}> 
@@ -464,16 +464,16 @@ Quebraria completamente nossa aplicação:
 
 ![captura de tela de erro de re-renderizadores](../../images/1/5c.png)
 
-O que está acontecendo? Um manipulador de eventos deve ser uma <i>função</i> ou uma <i>referência de função</i>. Quando escrevemos:
+O que está acontecendo? Um gerenciador de eventos deve ser uma <i>função</i> ou uma <i>referência de função</i>. Quando escrevemos:
 
 ```js
 <button onClick={defContador(contador + 1)}>
 ```
 
-O manipulador de eventos é, neste caso, uma <i>chamada de função</i> (function call). Em muitos casos isso pode até estar ok, mas não nesta situação específica. No começo, o valor da variável <i>contador</i> é 0. Quando React renderiza o componente pela primeira vez, ele executa a chamada de função <em>defContador(0+1)</em>, e muda o valor do estado do componente para 1. 
+O gerenciador de eventos é, neste caso, uma <i>chamada de função</i> (function call). Em muitos casos isso pode até estar ok, mas não nesta situação específica. No começo, o valor da variável <i>contador</i> é 0. Quando React renderiza o componente pela primeira vez, ele executa a chamada de função <em>defContador(0+1)</em>, e muda o valor do estado do componente para 1. 
 Isso fará com que o componente seja re-renderizado, React executará a chamada da função defContador novamente e o estado mudará levando a outra re-renderização...
 
-Vamos definir os manipuladores de eventos como fizemos antes:
+Vamos definir os gerenciadores de eventos como fizemos antes:
 
 ```js
 <button onClick={() => defContador(contador + 1)}> 
@@ -484,10 +484,10 @@ Vamos definir os manipuladores de eventos como fizemos antes:
 Agora, o atributo do botão que define o que acontece quando o botão é clicado — <i>onClick</i> — tem o valor _() => defContador(contador + 1)_.
 A função defContador é chamada somente quando um usuário clica no botão. 
 
-Em geral, definir manipuladores de eventos dentro de templates JSX não é uma boa ideia. 
-Aqui está ok, porque nossos manipuladores de eventos são bem simples. 
+Em geral, definir gerenciadores de eventos dentro de templates JSX não é uma boa ideia. 
+Aqui está ok, porque nossos gerenciadores de eventos são bem simples. 
 
-De qualquer jeito, vamos separar os manipuladores de eventos em funções separadas: 
+De qualquer jeito, vamos separar os gerenciadores de eventos em funções separadas: 
 
 ```js
 const App = () => {
@@ -510,7 +510,7 @@ const App = () => {
   )
 }
 ```
-Aqui, os manipuladores de eventos foram definidos corretamente. O valor do atributo <i>onClick</i> é uma variável que contém uma referência a uma função:
+Aqui, os gerenciadores de eventos foram definidos corretamente. O valor do atributo <i>onClick</i> é uma variável que contém uma referência a uma função:
 
 ```js
 <button onClick={aumentarEmUm}> 
@@ -563,7 +563,7 @@ const App = () => {
 
 Tudo ainda está funcionando. Quando os botões são clicados e o <i>App</i> é re-renderizado, todos os seus filhos, incluindo o componente <i>Exibir</i>, também são re-renderizados.
 
-Agora, vamos criar um componente <i>Botao</i> (*Botão) para os botões da nossa aplicação. Temos que passar o manipulador de eventos, bem como o título do botão, através das props do componente:
+Agora, vamos criar um componente <i>Botao</i> (*Botão) para os botões da nossa aplicação. Temos que passar o gerenciador de eventos, bem como o título do botão, através das props do componente:
 
 ```js
 const Botao = (props) => {
@@ -607,21 +607,21 @@ const App = () => {
 
 Por conta de agora termos disponível um componente <i>Botao</i> facilmente reutilizável, também implementamos uma nova funcionalidade em nossa aplicação, adicionando um botão que pode ser usado para decrementar o contador.
 
-O manipulador de eventos é passado para o componente <i>Botao</i> através da prop _onClick_. O nome mesmo da prop não é algo tão significativo, mas a escolha do nome que colocamos não foi de todo aleatória. O próprio [tutorial oficial do React](https://reactjs.org/tutorial/tutorial.html) sugere essa convenção.
+O gerenciador de eventos é passado para o componente <i>Botao</i> através da prop _onClick_. O nome mesmo da prop não é algo tão significativo, mas a escolha do nome que colocamos não foi de todo aleatória. O próprio [tutorial oficial do React](https://reactjs.org/tutorial/tutorial.html) sugere essa convenção.
 
 ### Alterações no estado causam re-renderização
 
 Vamos revisar, mais uma vez, os principais princípios de como uma aplicação funciona.
 
 Quando a aplicação inicia, o código em _App_ é executado. Este código usa um hook [useState](https://reactjs.org/docs/hooks-reference.html#usestate) para criar o estado da aplicação, definindo um valor inicial da variável _contador_.
-Este componente contém o componente _Exibir_ — que exibe o valor do contador, 0 — e três componentes _Botao_. Os botões possuem manipuladores de eventos, que são usados para mudar o estado do contador.
+Este componente contém o componente _Exibir_ — que exibe o valor do contador, 0 — e três componentes _Botao_. Os botões possuem gerenciadores de eventos, que são usados para mudar o estado do contador.
 
-Quando um dos botões é clicado, o manipulador de eventos é executado. O manipulador de eventos muda o estado do componente _App_ com a função _defContador_. 
+Quando um dos botões é clicado, o gerenciador de eventos é executado. O gerenciador de eventos muda o estado do componente _App_ com a função _defContador_. 
 **Chamar uma função que muda o estado faz com que o componente seja re-renderizado.**
 
-Então, se um usuário clicar no botão <i>mais+</i>, o manipulador de eventos do botão muda o valor de _contador_ para 1, e o componente _App_ é re-renderizado. 
+Então, se um usuário clicar no botão <i>mais+</i>, o gerenciador de eventos do botão muda o valor de _contador_ para 1, e o componente _App_ é re-renderizado. 
 Isso faz com que seus subcomponentes _Exibir_ e _Botao_ também sejam rerenderizados. 
-_Exibir_ recebe o novo valor do contador, 1, como props. Os componentes _Botao_ recebem manipuladores de eventos que podem ser usados para mudar o estado do contador.
+_Exibir_ recebe o novo valor do contador, 1, como props. Os componentes _Botao_ recebem gerenciadores de eventos que podem ser usados para mudar o estado do contador.
 
 Para ter certeza de que você entendeu como o programa funciona, vamos adicionar algumas declarações _console.log_ a ele:
 
@@ -648,9 +648,9 @@ const App = () => {
   return (
     <div>
       <Exibir contador={contador} />
-      <Botao manipClique={aumentarEmUm} texto="mais+" />
-      <Botao manipClique={zerarContador} texto="zerar" />
-      <Botao manipClique={diminuirEmUm} texto="menos-" />
+      <Botao gerClique={aumentarEmUm} texto="mais+" />
+      <Botao gerClique={zerarContador} texto="zerar" />
+      <Botao gerClique={diminuirEmUm} texto="menos-" />
     </div>
   )
 } 
@@ -675,7 +675,7 @@ const Exibir = (props) => {
 ```
 
 O componente só usa o campo _contador_ de suas <i>props</i>.
-Isso significa que podemos simplificar o componente usando [desestruturação](/pt/part1/estado_do_componente_manipuladores_de_eventos#desestruturacao-destructuring), desta forma:
+Isso significa que podemos simplificar o componente usando [desestruturação](/pt/part1/estado_do_componente_gerenciadores_de_eventos#desestruturacao-destructuring), desta forma:
 
 ```js
 const Exibir = ({ contador }) => {

@@ -243,7 +243,7 @@ Então, após receber os dados do servidor, o código os imprime no console.
 
 Você se familiarizará com a guia <i>Console</i> e o comando <em>console.log</em> no decorrer do curso.
 
-### Manipuladores de Eventos (Event handlers) e Funções Callback
+### Gerenciadores de Evento (Event handlers) e Funções Callback
 
 A estrutura desse código é um pouco estranha:
 
@@ -264,17 +264,17 @@ A requisição ao servidor é feita na última linha, mas o código que lida com
 xhttp.onreadystatechange = function () {
 ```
 
-Nessa linha, um <i>event handler</i> (manipulador de evento) para o evento <i>onreadystatechange</i> é definido para o objeto <em>xhttp</em> que faz a requisição. Quando o estado do objeto muda, o navegador chama a função manipuladora de eventos. O código da função verifica que o [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) é igual a 4 (o que representa o estado "DONE" que exibe a descrição <i>A operação está completa</i>) e que o código de status HTTP da resposta é 200.
+Nessa linha, um <i>event handler</i> (gerenciador de evento ou manipulador de eventos) para o evento <i>onreadystatechange</i> é definido para o objeto <em>xhttp</em> que faz a requisição. Quando o estado do objeto muda, o navegador chama a função gerenciadora de evento. O código da função verifica que o [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) é igual a 4 (o que representa o estado "DONE" que exibe a descrição <i>A operação está completa</i>) e que o código de status HTTP da resposta é 200.
 
 ```js
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
-    // código que manipula a resposta do servidor
+    // código que gerencia a resposta do servidor
   }
 }
 ```
 
-O mecanismo de chamada de manipuladores de eventos é muito comum em JavaScript. As funções de manipulação de eventos são chamadas de [funções callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). O código da aplicação não chama as funções em si, mas o "runtime environment" (ambiente de tempo de execução) — isto é, o navegador, que chama a função no tempo correto quando o <i>evento</i> ocorre.
+O mecanismo de chamada de gerenciadores de eventos é muito comum em JavaScript. As funções de gerência de eventos são chamadas de [funções callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). O código da aplicação não chama as funções em si, mas o "runtime environment" (ambiente de tempo de execução) — isto é, o navegador, que chama a função no tempo correto quando o <i>evento</i> ocorre.
 
 ### Modelo de Documento por Objetos (DOM [Document Object Model])
 
@@ -327,7 +327,7 @@ Por fim, a ramificação da árvore da variável <em>ul</em> é conectada ao seu
 document.getElementsByClassName('notes').appendChild(ul)
 ```
 
-### Manipulando o objeto "Document" por meio do console
+### Gerenciando o objeto "Document" por meio do console
 
 O nó de nível mais alto da árvore DOM de um documento HTML é o objeto <em>document</em>. Podemos realizar várias operações em uma página web usando a API DOM. Você consegue acessar o objeto <em>document</em> digitando <em>document</em> na guia Console:
 
@@ -345,7 +345,7 @@ Em seguida, criamos um novo elemento "li" e adicionamos algum conteúdo de texto
 
 ```js
 newElement = document.createElement('li')
-newElement.textContent = 'É bem facil fazer manipulação de páginas pelo console'
+newElement.textContent = 'É bem facil fazer gerencia de páginas pelo console'
 ```
 
 E adicionamos o novo elemento "li" à lista:
@@ -547,9 +547,9 @@ form.onsubmit = function(e) {
 }
 ```
 
-O comando <em>document.getElementById('notes_form')</em> instrui o código a buscar o elemento de formulário da página e a registrar um <i>manipulador de evento</i> para lidar com o evento de envio do formulário. O manipulador de evento chama imediatamente o método <em>e.preventDefault()</em> para evitar o tratamento padrão do envio do formulário. O método padrão enviaria os dados para o servidor e causaria uma nova requisição GET, o que não queremos que aconteça.
+O comando <em>document.getElementById('notes_form')</em> instrui o código a buscar o elemento de formulário da página e a registrar um <i>gerenciador de evento</i> para lidar com o evento de envio do formulário. O gerenciador de evento chama imediatamente o método <em>e.preventDefault()</em> para evitar o tratamento padrão do envio do formulário. O método padrão enviaria os dados para o servidor e causaria uma nova requisição GET, o que não queremos que aconteça.
 
-Em seguida, o manipulador de evento cria uma nova nota, adiciona-a à lista de notas com o comando <em>notes.push(note)</em>, redesenha a lista de notas na página e envia a nova nota ao servidor.
+Em seguida, o gerenciador de evento cria uma nova nota, adiciona-a à lista de notas com o comando <em>notes.push(note)</em>, redesenha a lista de notas na página e envia a nova nota ao servidor.
 
 O código para enviar a nota ao servidor é o seguinte:
 
