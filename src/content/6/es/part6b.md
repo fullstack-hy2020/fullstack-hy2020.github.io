@@ -442,53 +442,23 @@ export default Filter
 
 ### Redux DevTools
 
-Existe una extensión [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) que se puede instalar en Chrome, en la cual el estado del store Redux y la acción que lo cambia se puede monitorear desde la consola del navegador.
+[Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) es una extension de Chrome, que ofrece útiles herramientas de desarrollo para Redux. Se puede usar, por ejemplo, para inspeccionar el estado del store de Redux y enviar acciones (dispatch) a través de la consola del navegador. Cuando el store se crea usando la función <em>configureStore</em> de Redux Toolkit, no se necesita ninguna configuración adicional para que Redux DevTools funcione.
 
+Una vez instalado el complemento, al hacer clic en la pestaña de Redux en la consola del navegador deberia abrir las herramientas de desarrollo:
 
-Al debuggear, además de la extensión del navegador también tenemos la librería de software [redux-devtools-extension](https://www.npmjs.com/package/redux-devtools-extension). Instalemos usando el comando:
+![browser with redux addon in devtools](../../images/6/42new.png)
 
-```js
-npm install --save-dev redux-devtools-extension
-```
+Puedes inspeccionar cómo el envío de una determinada acción cambia el estado haciendo clic en la acción:
 
-Tendremos que cambiar ligeramente la definición del store para que la librería esté en funcionamiento:
+![devtools inspecting notes tree in redux](../../images/6/43new.png)
 
-```js
-// ...
-import { createStore, combineReducers } from 'redux'
-import { composeWithDevTools } from 'redux-devtools-extension' // highlight-line
+También es posible enviar acciones (dispatch) a la store utilizando las herramientas de desarrollo:
 
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
+![devtools redux dispatching createNote with payload](../../images/6/44new.png)
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer
-})
+You can find the code for our current application in its entirety in the <i>part6-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
 
-const store = createStore(
-  reducer,
-  // highlight-start
-  composeWithDevTools()
-  // highlight-end
-)
-
-export default store
-```
-
-Ahora, cuando abre la consola, la pestaña <i>redux</i> se ve así:
-
-![](../../images/6/11ea.png)
-
-El efecto de cada acción en el store se puede observar fácilmente.
-
-![](../../images/6/12ea.png)
-
-También es posible enviar acciones al store usando la consola.
-
-![](../../images/6/13ea.png)
-
-Puede encontrar el código para nuestra aplicación actual en su totalidad en la rama <i>part6-2</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-2).
+El código actual de la aplicación estan en la rama <i>part6-3</i> de [este repositorio de Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3).
 
 </div>
 
