@@ -386,7 +386,7 @@ interface MultiplyValues {
   value2: number;
 }
 
-const parseArguments = (args: Array<string>): MultiplyValues => {
+const parseArguments = (args: string[]): MultiplyValues => {
   if (args.length < 4) throw new Error('Not enough arguments');
   if (args.length > 4) throw new Error('Too many arguments');
 
@@ -433,18 +433,13 @@ There is quite a lot going on in the code. The most important addition is the fu
 The definition of the function has a couple of interesting things:
 
 ```js
-const parseArguments = (args: Array<string>): MultiplyValues => {
-  // ...
-}
-```
-
-Firstly, the parameter *args* is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings. There is also an alternative syntax for defining an array. We could also have written
-
-```js
 const parseArguments = (args: string[]): MultiplyValues => {
   // ...
 }
 ```
+
+Firstly, the parameter *args* is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings. 
+
 
 The return value of the function has the type *MultiplyValues*, which is defined as follows:
 
@@ -456,6 +451,22 @@ interface MultiplyValues {
 ```
 
 The definition utilizes TypeScript's [Interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) keyword, which is one way to define the "shape" an object should have. In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number.
+
+### The alternative array syntax
+
+Note that there is also an alternative syntax for [arrays](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) in TypeScript. Instead of writing
+
+```js
+let values: number[]; 
+```
+
+we could use the "generics syntax" and write
+
+```js
+let values: Array<number>; 
+```
+
+In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests to write the simple arrays with the [] syntax and use the the <> syntax for the more complex ones, see [here](https://typescript-eslint.io/rules/array-type/#array-simple) for examples.
 
 </div>
 
