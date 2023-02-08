@@ -440,6 +440,253 @@ export default Filter
 
 <div class="content">
 
+### Redux Toolkit
+
+Como hemos visto hasta ahora, la implementación de la gestión del estado y la configuración de Redux requiere bastante esfuerzo. Esto se manifiesta, por ejemplo, en el código relacionado con el reducer y el creador de acciones, que tiene un código repetitivo un tanto repetitivo. [Redux Toolkit](https://redux-toolkit.js.org/) es una librería que resuelve estos problemas comunes relacionados con Redux. La librería, por ejemplo, simplifica enormemente la configuración de la store de Redux y ofrece una gran variedad de herramientas para facilitar la gestión del estado.
+
+Comencemos a usar Redux Toolkit en nuestra aplicación refactorizando el código existente. Primero, necesitaremos instalar la biblioteca:
+
+```
+npm install @reduxjs/toolkit
+```
+
+A continuación, abra el archivo <i>index.js</i> que actualmente crea la store de Redux. En lugar de la función <em>createStore</em> de Redux, creemos la tienda usando la función [configureStore](https://redux-toolkit.js.org/api/configureStore) de Redux Toolkit:
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux'
+import { configureStore } from '@reduxjs/toolkit' // highlight-line
+import App from './App'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+ // highlight-start
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer
+  }
+})
+// highlight-end
+
+console.log(store.getState())
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+```
+
+Ya nos deshicimos de algunas líneas de código ahora que ya no necesitamos la función <em>combineReducers</em> para crear el reducer para la store de Redux. Pronto veremos que la función <em>configureStore</em> tiene muchos beneficios adicionales, como la integración sin esfuerzo de herramientas de desarrollo y muchas librerías de uso común sin necesidad de configuración adicional.
+
+Pasemos a refactorizar los reducers, que representa uno de los beneficios de Redux Toolkit. Con Redux Toolkit, podemos crear fácilmente reducers y creadores de acciones relacionados usando la función [createSlice](https://redux-toolkit.js.org/api/createSlice). Podemos usar la función <em>createSlice</em> para refactorizar el reducer y los creadores de acciones en el archivo <i>reducers/noteReducer.js</i> de la siguiente manera:
+
+```js
+import { createSlice } from '@reduxjs/toolkit' // highlight-line
+
+const initialState = [
+  {
+    content: 'reducer defines how redux store works',
+    important: true,
+    id: 1,
+  },
+  {
+    content: 'state of store can contain any data',
+    important: false,
+    id: 2,
+  },
+]
+
+const generateId = () =>
+  Number((Math.random() * 1000000).toFixed(0))
+
+// highlight-start
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    createNote(state, action) {
+      const content = action.payload
+
+      state.push({
+        content,
+        important: false,
+        id: generateId(),
+      })
+    },
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = { 
+        ...noteToChange, 
+        important: !noteToChange.important 
+      }
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote 
+      )     
+    }
+  },
+})
+// highlight-end
+```
+
+El parámetro <em>name</em> de la función <em>createSlice</em> define el prefijo que se utiliza en los valores de tipo de la acción. Por ejemplo, la acción <em>createNote</em> definida más adelante tendrá el valor de tipo <em>notes/createNote</em>. Es una buena práctica dar al parámetro un valor que sea único entre los reducers. De esta forma no habrá colisiones inesperadas entre los valores de tipo de acción de la aplicación. El parámetro <em>initialState</em> define el estado inicial del reducer. El parámetro <em>reducers</em> toma el propio reducer como un objeto, cuyas funciones manejan los cambios de estado causados por ciertas acciones. Tenga en cuenta que <em>action.payload</em> en la función contiene el argumento proporcionado al llamar al creador de la acción:
+
+```js
+dispatch(createNote('Redux Toolkit is awesome!'))
+```
+
+Esta llamada de <em>dispatch</em> responde al despacho del siguiente objeto:
+
+```js
+dispatch({ type: 'notes/createNote', payload: 'Redux Toolkit is awesome!' })
+```
+
+Si has seguido todo de cerca, es posible que hayas notado que dentro de la acción <em>createNote</em>, parece suceder algo que viola el principio de inmutabilidad de los reducers mencionado anteriormente:
+
+```js
+createNote(state, action) {
+  const content = action.payload
+
+  state.push({
+    content,
+    important: false,
+    id: generateId(),
+  })
+}
+```
+
+Estamos mutando el arreglo del parámetro <em>state</em> llamando al método <em>push</em> en lugar de devolver una nueva instancia del arreglo. ¿De qué se trata todo esto?
+
+Redux Toolkit utiliza la librería [Immer](https://immerjs.github.io/immer/) con reducers creados por la función <em>createSlice</em>, que hace posible mutar el parámetro del <em>estado</em> dentro del reducer. Immer usa el estado mutado para producir un nuevo estado inmutable y, por lo tanto, los cambios de estado permanecen inmutables. Tenga en cuenta que el <em>estado</em> se puede cambiar sin "mutarlo", como hemos hecho con la acción <em>toggleImportanceOf</em>. En este caso, la función <i>retorna</i> el nuevo estado. Sin embargo, mutar el estado a menudo será útil, especialmente cuando se necesita actualizar un estado complejo.
+
+La función <em>createSlice</em> retorna un objeto que contiene el reducer así como los creadores de acciones definidos por el parámetro <em>reducers</em>. Se puede acceder al reducer mediante la propiedad <em>noteSlice.reducer</em>, mientras que a los creadores de acciones mediante la propiedad <em>noteSlice.actions</em>. Podemos producir las exportaciones del archivo de la siguiente manera:
+
+```js
+const noteSlice = createSlice(/* ... */)
+
+// highlight-start
+export const { createNote, toggleImportanceOf } = noteSlice.actions
+
+export default noteSlice.reducer
+// highlight-end
+```
+
+Las importaciones en otros archivos funcionarán igual que antes:
+
+```js
+import noteReducer, { createNote, toggleImportanceOf } from './reducers/noteReducer'
+```
+
+Necesitamos modificar los nombres de los tipos de acción en las pruebas debido a las convenciones de ReduxToolkit:
+
+```js 
+import noteReducer from './noteReducer'
+import deepFreeze from 'deep-freeze'
+
+describe('noteReducer', () => {
+  test('returns new state with action notes/createNote', () => {
+    const state = []
+    const action = {
+      type: 'notes/createNote', // highlight-line
+      payload: 'the app state is in redux store', // highlight-line
+    }
+
+    deepFreeze(state)
+    const newState = noteReducer(state, action)
+
+    expect(newState).toHaveLength(1)
+    expect(newState.map(s => s.content)).toContainEqual(action.payload)
+  })
+
+  test('returns new state with action notes/toggleImportanceOf', () => {
+    const state = [
+      {
+        content: 'the app state is in redux store',
+        important: true,
+        id: 1
+      },
+      {
+        content: 'state changes are made with actions',
+        important: false,
+        id: 2
+      }]
+  
+    const action = {
+      type: 'notes/toggleImportanceOf', // highlight-line
+      payload: 2
+    }
+  
+    deepFreeze(state)
+    const newState = noteReducer(state, action)
+  
+    expect(newState).toHaveLength(2)
+  
+    expect(newState).toContainEqual(state[0])
+  
+    expect(newState).toContainEqual({
+      content: 'state changes are made with actions',
+      important: true,
+      id: 2
+    })
+  })
+})
+```
+
+### Redux Toolkit and console.log
+
+Como hemos aprendido, console.log es una herramienta extremadamente poderosa, por lo general siempre nos salva de problemas.
+
+Intentemos imprimir el estado de la store de Redux en la consola en medio del reductor creado con la función createSlice:
+
+```js
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState,
+  reducers: {
+    // ...
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = { 
+        ...noteToChange, 
+        important: !noteToChange.important 
+      }
+
+      console.log(state) // highlight-line
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote 
+      )     
+    }
+  },
+})
+```
+
+Lo siguiente se imprime en la consola
+
+![](../../images/6/40new.png)
+
+La salida es interesante pero no muy útil. Esto trata de la librería Immer mencionada anteriormente utilizada por Redux Toolkit, que ahora se usa internamente para guardar el estado de la Tienda.
+
+El estado se puede convertir a un formato legible por humanos, e.j. convirtiéndolo en una cadena y de nuevo en un objeto JavaScript de la siguiente manera:
+
+```js
+console.log(JSON.parse(JSON.stringify(state))) // highlight-line
+```
+
+La salida de la consola ahora es legible para humanos
+
+![](../../images/6/41new.png)
+
 ### Redux DevTools
 
 [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) es una extension de Chrome, que ofrece útiles herramientas de desarrollo para Redux. Se puede usar, por ejemplo, para inspeccionar el estado del store de Redux y enviar acciones (dispatch) a través de la consola del navegador. Cuando el store se crea usando la función <em>configureStore</em> de Redux Toolkit, no se necesita ninguna configuración adicional para que Redux DevTools funcione.
