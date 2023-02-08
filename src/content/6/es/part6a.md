@@ -1000,12 +1000,8 @@ import { createNote } from './../reducers/noteReducer'
 Codigo para el componente <i>App</i>
 
 ```js
-import React from 'react'
-import { 
-  createNote, toggleImportanceOf
-} from './reducers/noteReducer' 
+import { createNote, toggleImportanceOf } from './reducers/noteReducer' // highlight-line
 import { useSelector, useDispatch } from 'react-redux'  // highlight-line
-
 
 const App = () => {
   const dispatch = useDispatch()  // highlight-line
