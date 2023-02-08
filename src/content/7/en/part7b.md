@@ -410,7 +410,7 @@ If we were to do this, we would lose much of the benefit provided by the <i>useF
 
 #### 7.7: country hook
 
-Let's return to exercises [2.12-14](/en/part2/getting_data_from_server#exercises-2-11-2-14).
+Let's return to exercises [2.18-20](/en/part2/getting_data_from_server#exercises-2-18-2-20).
 
 Use the code from https://github.com/fullstack-hy2020/country-hook as your starting point.
 
