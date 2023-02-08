@@ -424,11 +424,11 @@ module.exports = {
     '1': {
       a: 'Introdução à biblioteca React',
       b: 'JavaScript',
-      c: 'Estado do componente, manipuladores de eventos',
+      c: 'Estado do componente e gerenciadores de eventos',
       d: 'Um estado mais complexo e depuração de aplicações React',
     },
     '2': {
-      a: 'Renderização de uma coleção, módulos',
+      a: 'Renderização de uma coleção e módulos',
       b: 'Formulários',
       c: 'Obtendo dados do servidor',
       d: 'Alterando dados no servidor',
@@ -441,13 +441,13 @@ module.exports = {
       d: 'Validação e ESLint',
     },
     '4': {
-      a: 'Estrutura de uma aplicação backend, introdução aos testes',
-      b: 'Testando o backend',
+      a: 'Estrutura de uma aplicação back-end, introdução a testes',
+      b: 'Testando o back-end',
       c: 'Administração de usuários',
       d: 'Autenticação por token',
     },
     '5': {
-      a: 'Login no frontend',
+      a: 'Login no front-end',
       b: 'props.children e proptypes',
       c: 'Testando aplicações React',
       d: 'Teste de ponta a ponta',
