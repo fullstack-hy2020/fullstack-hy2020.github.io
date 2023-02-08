@@ -264,6 +264,8 @@ Se e <i>quando</i> você encontrar a mensagem de erro:
 
 ... tenha em mente o explicado [aqui](/pt/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
+**N.B.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
+
   <h4>1.3: course information — 3º passo</h4>
 
 Vamos avançar para o uso de objetos em nossa aplicação. Modifique as definições de variáveis do componente <i>App</i> da forma a seguir e também refatore a aplicação para que continue funcionando:

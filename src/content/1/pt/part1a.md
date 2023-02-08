@@ -157,14 +157,14 @@ Modifique o componente da seguinte maneira:
 
 ```js
 const App = () => {
-  const agora = new Date()
+  const hoje = new Date()
   const a = 10
   const b = 20
-  console.log(agora, a+b)
+  console.log(hoje, a+b)
 
   return (
     <div>
-      <p>Olá, mundo! Hoje é {agora.toString()}</p>
+      <p>Olá, mundo! Hoje é {hoje.toString()}</p>
       <p>
         {a} mais {b} é {a + b}
       </p>
@@ -193,14 +193,14 @@ Depois da compilação, nossa aplicação fica assim:
 
 ```js
 const App = () => {
-  const agora = new Date()
+  const hoje = new Date()
   const a = 10
   const b = 20
   return React.createElement(
     'div',
     null,
     React.createElement(
-      'p', null, 'Olá, mundo! Hoje é ', agora.toString()
+      'p', null, 'Olá, mundo! Hoje é ', hoje.toString()
     ),
     React.createElement(
       'p', null, a, ' mais ', b, ' é ', a + b
@@ -501,7 +501,7 @@ const App = () => {
 export default App
 ```
 
-Agora o nome do amigo é renderizado separadamente dentro das chaves:
+O nome do amigo é renderizado separadamente dentro das chaves:
 
 ```js
 {amigos[0].nome}
@@ -540,7 +540,7 @@ Os exercícios são enviados via GitHub, marcando os exercícios como concluído
 
 Os exercícios são enviados **uma parte de cada vez**. Quando você tiver enviado os exercícios para uma parte, não poderá mais enviar nenhum exercício não feito para essa parte.
 
-Note que nesta parte há [mais exercícios](/en/part1/a_more_complex_state_debugging_react_apps#exercises-1-6-1-14) além dos encontrados abaixo. <i>Não envie seus exercícios</i> até que você tenha concluído todos os exercícios desta parte.
+Note que nesta parte há [mais exercícios](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#exercicios-1-6-a-1-14) além dos encontrados abaixo. <i>Não envie seus exercícios</i> até que você tenha concluído todos os exercícios desta parte.
 
 É possível colocar todos os exercícios em um mesmo repositório ou usar múltiplos repositórios diferentes. Se você enviar exercícios de diferentes partes para o mesmo repositório, dê nomes apropriados às suas pastas.
 
@@ -562,6 +562,8 @@ Veja este [exemplo de repositório de submissão](https://github.com/fullstack-h
 Para cada parte do curso, há um diretório, que se ramifica em diretórios contendo uma série de exercícios, como "unicafe" para a parte 1.
 
 Para cada aplicação web em uma série de exercícios, é recomendado que você envie todos os arquivos relacionados a essa aplicação, exceto o diretório <i>node_modules</i>.
+
+**N.B.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
 
   <h4>1.1: course information — 1º passo</h4>
 
