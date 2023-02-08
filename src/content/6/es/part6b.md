@@ -405,6 +405,41 @@ const notes = useSelector(({ filter, notes }) => {
 
 Hay un pequeño defecto cosmético en nuestra aplicación. Aunque el filtro está configurado en <i>ALL</i> de forma predeterminada, el radio button asociado no está seleccionado. Naturalmente, este problema se puede solucionar, pero como se trata de un error desagradable pero, en última instancia, inofensivo, guardaremos la solución para más adelante.
 
+</div>
+
+<div class="tasks">
+
+### Ejercicio 6.9
+
+#### 6.9 Mejores anécdotas, paso 7
+
+Implementa filtros para las anecdotas que se muestran al usuario. Se recomienda crear un nuevo reducer, action creators y un reducer commbinado para la store usando la función <i>combineReducers</i>.
+
+Crea un nuevo componente <i>Filter</i> para mostrar los filtros. Puedes utilizar el suigiente código como punto de partida:
+
+```js
+const Filter = () => {
+  const handleChange = (event) => {
+    // input-field value is in variable event.target.value
+  }
+  const style = {
+    marginBottom: 10
+  }
+
+  return (
+    <div style={style}>
+      filter <input onChange={handleChange} />
+    </div>
+  )
+}
+
+export default Filter
+```
+
+</div>
+
+<div class="content">
+
 ### Redux DevTools
 
 Existe una extensión [Redux DevTools](https://chrome.google.com/webstore/detail/redux-devtools/lmhkpmbekcpmknklioeibfkpmmfibljd) que se puede instalar en Chrome, en la cual el estado del store Redux y la acción que lo cambia se puede monitorear desde la consola del navegador.
@@ -460,24 +495,27 @@ Puede encontrar el código para nuestra aplicación actual en su totalidad en la
 <div class="tasks">
 
 
-### Ejercicios 6.9.-6.12.
+### Ejercicios 6.10.-6.13.
 
-
-Continuemos trabajando en la aplicación de anécdotas usando redux que comenzamos en el ejercicio 6.3.
-
-
-#### 6.9 Mejores anécdotas, paso 7
-
-Comience a utilizar Redux DevTools. Mueva la definición de Redux-store a su propio archivo <i>store.js</i>.
-
+Continuemos trabajando en la aplicación de anécdotas usando redux la cual comenzamos en el ejercicio 6.3.
 
 #### 6.10 Mejores anécdotas, paso 8
 
-La aplicación tiene un cuerpo listo para usar para el componente <i>Notification</i>:
+Instala Redux Toolkit en el proyecto. Mueve la creacion de la store de redux a su propio archivo <i>store.js</i> y usa la función <em>configureStore</em> para crear la store.
+
+Cambia la definición del <i>Filter reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
+
+Tambien, empieza a usar los Redux DevTools para depurar el estado de la aplicación facilmente.
+
+### 6.11 Mejores anécdotas, paso 9
+
+Cambia también la definición de <i>Anecdote reducer y creación de acciones</i> para usar la función <em>createSlice</em> de Redux Toolkit.
+
+#### 6.12 Mejores anécdotas, paso 10
+
+La aplicación tiene un cuerpo listo para usar el componente <i>Notification</i>:
 
 ```js
-import React from 'react'
-
 const Notification = () => {
   const style = {
     border: 'solid',
@@ -494,11 +532,9 @@ const Notification = () => {
 export default Notification
 ```
 
-
-Extienda el componente para que muestre el mensaje almacenado en el store redux, haciendo que el componente tome el formulario:
+Extienda el componente para que muestre el mensaje almacenado en el store de redux, haciendo que el componente tome la siguiente forma:
 
 ```js
-import React from 'react'
 import { useSelector } from 'react-redux' // highlight-line
 
 const Notification = () => {
@@ -516,53 +552,16 @@ const Notification = () => {
 }
 ```
 
-Tendrá que realizar cambios en el reducer existente de la aplicación. Cree un reducer separado para la nueva funcionalidad y refactorice la aplicación para que utilice un [reducer combinado](https://fullstackopen.com/es/part6/muchos_reducers#reducers-combinados) como se muestra en esta parte del material del curso.
+Tendrá que realizar cambios en el reducer existente de la aplicación. Cree un reducer separado para la nueva funcionalidad usando la función <em>createSlice</em> de Redux Toolkit.
 
 La aplicación no tiene que utilizar el componente <i>Notification</i> de forma inteligente en este punto de los ejercicios. Es suficiente que la aplicación muestre el valor inicial establecido para el mensaje en el <i>notificationReducer</i>.
 
-#### 6.11 Mejores anécdotas, paso 9
-
+#### 6.13 Mejores anécdotas, paso 11
 
 Extienda la aplicación para que utilice el componente <i>Notification</i> para mostrar un mensaje durante cinco segundos cuando el usuario vote por una anécdota o cree una nueva anécdota:
 
-![](../../images/6/8ea.png)
+![browser showing message of having voted](../../images/6/8ea.png)
 
-
-Se recomienda crear [creadores de acciones](https://redux.js.org/basics/actions#action-creators) independientes para configurar y eliminar notificaciones.
-
-
-#### 6.12* Mejores anécdotas, paso 10
-
-
-Implementar el filtrado de las anécdotas que se le muestran al usuario.
-
-![](../../images/6/9ea.png)
-
-
-Guarde el estado del filtro en el store redux. Se recomienda crear un nuevo reducer y creadores de acciones para este propósito.
-
-
-Cree un nuevo componente <i>Filter</i> para mostrar el filtro. Puede utilizar el siguiente código como plantilla para el componente:
-
-```js
-import React from 'react'
-
-const Filter = () => {
-  const handleChange = (event) => {
-    // input-field value is in variable event.target.value
-  }
-  const style = {
-    marginBottom: 10
-  }
-
-  return (
-    <div style={style}>
-      filter <input onChange={handleChange} />
-    </div>
-  )
-}
-
-export default Filter
-```
+Se recomienda crear [creadores de acciones](https://redux-toolkit.js.org/api/createSlice#reducers) independientes para configurar y eliminar notificaciones.
 
 </div>
