@@ -485,7 +485,7 @@ const App = () => {
 }
 ```
 
-### Gerência de Eventos Revisitados
+### Revisão sobre Gerência de Eventos
 
 A gerência de eventos se mostrou um tópico difícil em iterações anteriores neste curso.
 
