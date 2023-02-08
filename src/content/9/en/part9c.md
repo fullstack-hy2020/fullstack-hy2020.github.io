@@ -443,8 +443,7 @@ And our problem is solved.
 
 Earlier, we saw how the compiler can decide the type of a variable by the value it is assigned.
 Similarly, the compiler can interpret large data sets consisting of objects and arrays.
-Due to this, the compiler warns us if we try to do something suspicious with the JSON data we are handling.
-For example, if we are handling an array containing objects of a specific type, and we try to add an object which does not have all the fields the other objects have, or has type conflicts (for example, a number where there should be a string), the compiler can give us a warning.
+Due to this, the compiler warns us if we try to do something suspicious with the JSON data we are handling. For example, if we are handling an array containing objects of a specific type, and we try to add an object which does not have all the fields the other objects have, or has type conflicts (for example, a number where there should be a string), the compiler can give us a warning.
 
 Even though the compiler is pretty good at making sure we don't do anything unwanted, it is safer to define the types for the data ourselves.
 
@@ -479,9 +478,9 @@ import diaryData from '../../data/entries.json';
 
 import { DiaryEntry } from '../types'; // highlight-line
 
-const diaries: Array<DiaryEntry> = diaryData; // highlight-line
+const diaries: <DiaryEntry[] = diaryData; // highlight-line
 
-const getEntries = (): Array<DiaryEntry> => { // highlight-line
+const getEntries = (): DiaryEntry[] => { // highlight-line
   return diaries; // highlight-line
 };
 
@@ -511,9 +510,9 @@ import diaryData from '../../data/entries.json'
 
 import { Weather, Visibility, DiaryEntry } from '../types'
 
-const diaries: Array<DiaryEntry> = diaryData as Array<DiaryEntry>; // highlight-line
+const diaries: DiaryEntry[] = diaryData as DiaryEntry[]; // highlight-line
 
-const getEntries = (): Array<DiaryEntry> => {
+const getEntries = (): DiaryEntry[] => {
   return diaries;
 }
 
@@ -536,7 +535,7 @@ Since we cannot use typings in a JSON file, we should convert the JSON file to a
 ```js
 import { DiaryEntry } from "../src/types"; // highlight-line
 
-const diaryEntries: Array<DiaryEntry> = [ // highlight-line
+const diaryEntries: DiaryEntry[] = [ // highlight-line
   {
       "id": 1,
       "date": "2017-01-01",
@@ -557,7 +556,7 @@ import diaries from '../../data/ntries'; // highlight-line
 
 import { DiaryEntry } from '../types';
 
-const getEntries = (): Array<DiaryEntry> => {
+const getEntries = (): DiaryEntry[] => {
   return diaries;
 }
 
@@ -651,21 +650,12 @@ In our case, to create a "censored" version of the *DiaryEntry* for public displ
 
 ```js
 const getNonSensitiveEntries =
-  (): Array<Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>> => {
+  (): Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>[] => {
     // ...
   }
 ```
 
 and the compiler would expect the function to return an array of values of the modified *DiaryEntry* type, which includes only the four selected fields.
-
-Since [Pick](https://www.typescriptlang.org/docs/handbook/utility-types.html#picktype-keys) requires the type it modifies to be given as a [type parameter](https://www.typescriptlang.org/docs/handbook/2/generics.html), just like Array does, we now have two nested type variables and the syntax is starting to look a bit odd. We can improve the code readability by using the [alternative](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) array syntax:
-
-```js
-const getNonSensitiveEntries =
-  (): Pick<DiaryEntry, 'id' | 'date' | 'weather' | 'visibility'>[] => {
-    // ...
-  }
-```
 
 In this case, we want to exclude only one field, so it would be even better to use the [Omit](https://www.typescriptlang.org/docs/handbook/utility-types.html#omittype-keys) utility type, which we can use to declare which fields to exclude:
 
@@ -675,13 +665,13 @@ const getNonSensitiveEntries = (): Omit<DiaryEntry, 'comment'>[] => {
 }
 ```
 
- Another way would be to declare a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) *NonSensitiveDiaryEntry* in the file <i>types.ts</i>:
+To improve the readability, we should most definitively define a [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) *NonSensitiveDiaryEntry* in the file <i>types.ts</i>:
 
 ```js
 export type NonSensitiveDiaryEntry = Omit<DiaryEntry, 'comment'>;
 ```
 
-The code now becomes:
+The code becomes now much more clear and more descriptive:
 
 ```js
 import diaries from '../../data/entries';
@@ -1021,7 +1011,7 @@ const newDiaryEntry = diaryService.addDiary({
 });
 ```
 
-We would like to have the assurance that the object in a POST request is the correct type, so let us define a function *toNewDiaryEntry* that receives the request body as a parameter and returns a properly-typed *NewDiaryEntry* object. The function shall be defined in the file <i>utils.ts</i>.
+We would like to have the assurance that the object in a POST request has the correct type. Let us now define a function *toNewDiaryEntry* that receives the request body as a parameter and returns a properly-typed *NewDiaryEntry* object. The function shall be defined in the file <i>utils.ts</i>.
 
 The route definition uses the function as follows:
 
@@ -1105,6 +1095,7 @@ export default toNewDiaryEntry;
 >    weather: 'cloudy', // fake the return value
 >    visibility: 'great',
 >    date: '2022-1-1',
+>    comment: 'fake news'
 >  };
 >
 >  return newEntry;
@@ -1113,7 +1104,7 @@ export default toNewDiaryEntry;
 >
 > <i>So before the real data and types are ready to use, I'am just returning here something that has for the sure the right type. The code stays in a operational state all the time and my blood pressure remains in normal level. </i>
 
-### Type predicates
+### Type guards
 
 Let us start creating the parsers for each of the fields of *object*.
 
@@ -1141,7 +1132,7 @@ const isString = (text: unknown): text is string => {
 };
 ```
 
-The function is a so-called [type predicate](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). That means it is a function that returns a boolean <i>and</i> has a <i>type predicate</i> as the return type. In our case, the type predicate is:
+The function is a so-called [type guard](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#using-type-predicates). That means it is a function that returns a boolean <i>and</i> has a <i>type predicate</i> as the return type. In our case, the type predicate is:
 
 ```js
 text is string
@@ -1149,49 +1140,48 @@ text is string
 
 The general form of a type predicate is *parameterName is Type* where the *parameterName* is the name of the function parameter and *Type* is the targeted type.
 
-If the type predicate function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate.
+If the type guard function returns true, the TypeScript compiler knows that the tested variable has the type that was defined in the type predicate.
 
-Before the type predicate is called, the actual type of the variable *comment* is not known:
+Before the type guard is called, the actual type of the variable *comment* is not known:
 
 ![vscode hovering over isString(comment) shows type unknown](../../images/9/28e-21.png)
 
-But after the call, if the code proceeds past the exception (that is, the type predicate returned true), then the compiler knows that *comment* is of type *string*:
+But after the call, if the code proceeds past the exception (that is, the type guard returned true), then the compiler knows that *comment* is of type *string*:
 
 ![vscode hovering over return comment shows type string](../../images/9/29e-21.png)
 
-The use of a type predicate is one way to do [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html), that is, to give a variable a more strict type or accurate type.
+The use of a type guard that returns a type predicate is one way to do [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html), that is, to give a variable a more strict type or accurate type. As we will soon see there are also other kind of [type guards](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) available.
 
-Why do we have two conditions in the string type predicate?
-
-```js
-const isString = (text: unknown): text is string => {
-  return typeof text === 'string' || text instanceof String; // highlight-line
-}
-```
-
-Would it not be enough to write the predicate like this?
-
-```js
-const isString = (text: unknown): text is string => {
-  return typeof text === 'string';
-}
-```
-
-Most likely, the simpler form is good enough for all practical purposes.
-However, if we want to be sure, both conditions are needed.
-There are two different ways to create string objects in JavaScript which both work a bit differently when compared to the *typeof* and *instanceof* operators:
-
-```js
-const a = "I'm a string primitive";
-const b = new String("I'm a String Object");
-typeof a; --> returns 'string'
-typeof b; --> returns 'object'
-a instanceof String; --> returns false
-b instanceof String; --> returns true
-```
-
-However, it is unlikely that anyone would create a string with a constructor function.
-Most likely the simpler version of the type predicate would be just fine.
+> #### Side note: testing if something is a string
+>
+> <i>Why do we have two conditions in the string type guard?</i>
+>
+>```js
+>const isString = (text: unknown): text is string => {
+>  return typeof text === 'string' || text instanceof String; // highlight-line
+>}
+>```
+>
+><i>Would it not be enough to write the guard like this?</i>
+>
+>```js
+>const isString = (text: unknown): text is string => {
+>  return typeof text === 'string';
+>}
+>```
+>
+><i>Most likely, the simpler form is good enough for all practical purposes. However, if we want to be sure, both conditions are needed. There are two different ways to create string objects in JavaScript which both work a bit differently when compared to the *typeof* and *instanceof* operators:</i>
+>
+>```js
+>const a = "I'm a string primitive";
+>const b = new String("I'm a String Object");
+>typeof a; --> returns 'string'
+>typeof b; --> returns 'object'
+>a instanceof String; --> returns false
+>b instanceof String; --> returns true
+>```
+>
+><i>However, it is unlikely that anyone would create a string with a constructor function. Most likely the simpler version of the type guard would be just fine.</i>
 
 Next, let's consider the *date* field.
 Parsing and validating the date object is pretty similar to what we did with comments.
@@ -1213,8 +1203,7 @@ const parseDate = (date: unknown): string => {
 };
 ```
 
-The code is nothing special. The only thing is that we can't use a type predicate here since a date in this case is only considered to be a *string*.
-Note that even though the *parseDate* function accepts the *date* variable as *unknown* after we check the type with *isString*, then its type is set as *string*, which is why we can give the variable to the *isDate* function requiring a string without any problems.
+The code is nothing special. The only thing is that we can't use a type predicate based type guard here since a date in this case is only considered to be a *string*. Note that even though the *parseDate* function accepts the *date* variable as *unknown* after we check the type with *isString*, then its type is set as *string*, which is why we can give the variable to the *isDate* function requiring a string without any problems.
 
 Finally, we are ready to move on to the last two types, *Weather* and *Visibility*.
 
@@ -1230,7 +1219,7 @@ const parseWeather = (weather: unknown): Weather => {
 ```
 
 The question is: how can we validate that the string is of a specific form?
-One possible way to write the type predicate would be this:
+One possible way to write the type guard would be this:
 
 ```js
 const isWeather = (str: string): str is Weather => {
@@ -1257,7 +1246,7 @@ export enum Weather {
 }
 ```
 
-Now we can check that a string is one of the accepted values, and the type predicate can be written like this:
+Now we can check that a string is one of the accepted values, and the type guard can be written like this:
 
 ```js
 const isWeather = (param: string): param is Weather => {
@@ -1314,7 +1303,7 @@ export enum Visibility {
 }
 ```
 
-The type predicate and the parser are below:
+The type guard and the parser are below:
 
 ```js
 const isVisibility = (param: string): param is Visibility => {
@@ -1346,66 +1335,48 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 
 we notice that the code does not compile. This is because the [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) type does not allow any operations, so accessing the fields is not possible.
 
-We can fix this by destructuring the fields to variables of the type unknown as follows:
+We can again fix the problem by type narrowing. We have now two type guards, the first checks that the parameter object exists and it has the type <i>object</i>. After this the second type guard uses the [in](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing) operator to ensure that the object has all the desired fields:
 
 ```js
-type Fields = {
-  comment: unknown, date: unknown, weather: unknown, visibility: unknown
-};
+const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
+  if ( !object || typeof object !== 'object' ) {
+    throw new Error('Incorrect or missing data');
+  }
 
-const toNewDiaryEntry = ({ comment, date, weather, visibility } : Fields): NewDiaryEntry => {
-  const newEntry: NewDiaryEntry = {
-    comment: parseComment(comment),
-    date: parseDate(date),
-    weather: parseWeather(weather),
-    visibility: parseVisibility(visibility)
-  };
+  if ('comment' in object && 'date' in object && 'weather' in object && 'visibility' in object)  {
+    const newEntry: NewDiaryEntry = {
+      weather: parseWeather(object.weather),
+      visibility: parseVisibility(object.visibility),
+      date: parseDate(object.date),
+      comment: parseComment(object.comment)
+    };
+  
+    return newEntry;
+  }
 
-  return newEntry;
+  throw new Error('Incorrect data: some fields are missing');
 };
 ```
 
-The first version of our flight diary application is now complete!
+If the guard does not evaluate to true, an exeption is thrown.
 
-Remember that we can do this "trick" since the parameter given to _toNewDiaryEntry_ is the Express request body that the library has given type _any_. Since any is quite a forgiving type, we can destructure it the fields of the object of the type *Fields*. This type has all our interesting fileds with the type *unknown*. 
-
-Note that we have defined the [type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases) Fields just for improving the code readability, and since the type is just used in this function only, the type definition is not done in the file <i>types.ts</i> where all the "general purpose" types of the app are defined.
- 
-We could also have defined the parameter type within the function definition:
+The use of operator _in_ actually now guarantees that the fields indeed exist in the object. Because of that, the existence check in parsers in no more needed:
 
 ```js
-const toNewDiaryEntry = (
-  { comment, date, weather, visibility } : 
-  { comment: unknown, date: unknown, weather: unknown, visibility: unknown } // highlight-line
-): NewDiaryEntry => {
-
-  // ...
-
-  return newEntry;
+const parseVisibility = (visibility: unknown): Visibility => {
+  // check !visibility removed:
+  if (!isString(visibility) || !isVisibility(visibility)) {
+      throw new Error('Incorrect visibility: ' + visibility);
+  }
+  return visibility;
 };
 ```
 
-Obviously the this looks quite bad and the use of the helper type is much more preferable solution.
-
-The other option to bypass the problem would be to use the type *any* for the parameter and disable the lint rule for that line:
-
-```js
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const toNewDiaryEntry = (object: any): NewDiaryEntry => {
-  const newEntry: NewDiaryEntry = {
-    comment: parseComment(object.comment),
-    date: parseDate(object.date),
-    weather: parseWeather(object.weather),
-    visibility: parseVisibility(object.visibility)
-  };
-
-  return newEntry;
-};
-```
+If a field, e.g. _comment_ would be optional, the type narrowing should take that into account, and the operator [in](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing) could not be used quite as we did here, since the _in_ test requires the field to be present.
 
 If we now try to create a new diary entry with invalid or missing fields, we are getting an appropriate error message:
 
-![postman showing 400 bad request with incorrect or missing visibility - awsesome](../../images/9/30b.png)
+![postman showing 400 bad request with incorrect or missing visibility - awsesome](../../images/9/62new.png)
 
 The source code of the application can be found on [GitHub](https://github.com/FullStack-HY/flight-diary).
 
