@@ -547,64 +547,67 @@ which tells us that we are using a variable somewhere where it should never be u
 Let us now continue extending the app created in exercise 9.14. First, add the type information and replace the variable *courseParts* with the one from the example below.
 
 ```js
-// new types
 interface CoursePartBase {
   name: string;
   exerciseCount: number;
-  type: string;
 }
 
-interface CourseNormalPart extends CoursePartBase {
-  type: "normal";
+interface CoursePartBasic extends CoursePartBase {
   description: string;
+  kind: "basic"
 }
 
-interface CourseProjectPart extends CoursePartBase {
-  type: "groupProject";
+interface CoursePartGroup extends CoursePartBase {
   groupProjectCount: number;
+  kind: "group"
 }
 
-interface CourseSubmissionPart extends CoursePartBase {
-  type: "submission";
+interface CoursePartBackround extends CoursePartBase {
   description: string;
-  exerciseSubmissionLink: string;
+  backroundMaterial: string;
+  kind: "background"
 }
 
-type CoursePart = CourseNormalPart | CourseProjectPart | CourseSubmissionPart;
+type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
 
-// this is the new coursePart variable
 const courseParts: CoursePart[] = [
   {
     name: "Fundamentals",
     exerciseCount: 10,
-    description: "This is the easy course part",
-    type: "normal"
-  },
-  {
-    name: "Advanced",
-    exerciseCount: 7,
-    description: "This is the hard course part",
-    type: "normal"
+    description: "This is an awesome course part",
+    kind: "basic"
   },
   {
     name: "Using props to pass data",
     exerciseCount: 7,
     groupProjectCount: 3,
-    type: "groupProject"
+    kind: "group"
+  },
+  {
+    name: "Basics of type Narrowing",
+    exerciseCount: 7,
+    description: "How to go from unknown to string",
+    kind: "basic"
   },
   {
     name: "Deeper type usage",
     exerciseCount: 14,
     description: "Confusing description",
-    exerciseSubmissionLink: "https://fake-exercise-submit.made-up-url.dev",
-    type: "submission"
-  }
-]
+    backroundMaterial: "https://type-level-typescript.com/template-literal-types",
+    kind: "background"
+  },
+  {
+    name: "TypeScript in frontend",
+    exerciseCount: 10,
+    description: "a hard part",
+    kind: "basic",
+  },
+];
 ```
 
-Now we know that both interfaces *CourseNormalPart* and *CourseSubmissionPart* share not only the base attributes but also an attribute called *description*, which is a string in both interfaces.
+Now we know that both interfaces *CoursePartBasic* and *CoursePartBackround* share not only the base attributes but also an attribute called *description*, which is a string in both interfaces.
 
-Your first task is to declare a new interface that includes the *description* attribute and extends the *CoursePartBase* interface. Then modify the code so that you can remove the *description* attribute from both *CourseNormalPart* and *CourseSubmissionPart* without getting any errors.
+Your first task is to declare a new interface that includes the *description* attribute and extends the *CoursePartBase* interface. Then modify the code so that you can remove the *description* attribute from both *CoursePartBasic* and *CoursePartBackround*  without getting any errors.
 
 Then create a component *Part* that renders all attributes of each type of course part. Use a switch case-based exhaustive type checking! Use the new component in component *Content*.
 
@@ -616,7 +619,7 @@ Lastly, add another course part interface with the following attributes: *name*,
   exerciseCount: 21,
   description: "Typing the backend",
   requirements: ["nodejs", "jest"],
-  type: "special"
+  kind: "special"
 }
 ```
 
