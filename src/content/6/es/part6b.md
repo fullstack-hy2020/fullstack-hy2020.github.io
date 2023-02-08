@@ -39,7 +39,7 @@ export default noteReducer
 ### Store con estado complejo
 
 
-Implementemos el filtrado de las notas que se muestran al usuario. La interfaz de usuario para los filtros se implementará con [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
+Implementemos el filtrado de las notas que se muestran al usuario. La interfaz de usuario para los filtros se implementará con [botones de radio](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio):
 
 ![](../../images/6/01e.png)
 
@@ -78,7 +78,7 @@ const App = () => {
 ```
 
 
-Dado que el atributo <i>name</i> de todos los botones de opción es el mismo, forman un <i>button group</i> (grupo de botones) en el que solo se puede seleccionar una opción.
+Dado que el atributo <i>name</i> de todos los botones de radio es el mismo, forman un <i>button group</i> (grupo de botones) en el que solo se puede seleccionar una opción.
 
 
 Los botones tienen un controlador de cambios que actualmente solo imprime el string asociado con el botón en el que se hizo clic en la consola.
