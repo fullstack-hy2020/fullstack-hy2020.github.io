@@ -130,6 +130,7 @@ module.exports = {
       b: 'First steps with TypeScript',
       c: 'Typing an Express app',
       d: 'React with types',
+      e: 'Grande finale: Patientor frontend',
     },
     '10': {
       a: 'Introduction to React Native',
