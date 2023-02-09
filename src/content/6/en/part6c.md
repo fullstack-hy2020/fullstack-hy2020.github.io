@@ -346,7 +346,7 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-Because the backend generates ids for the notes, we'll change the action creator <em>createNote</em> in the file <i>createNote</i> accordingly:
+Because the backend generates ids for the notes, we'll change the action creator <em>createNote</em> in the file <i>noteReducer.js</i> accordingly:
 
 ```js
 const noteSlice = createSlice({
