@@ -239,7 +239,7 @@ setInterval(() => {
 
 Fazer repitidas chamadas ao método _render_ não é a forma recomendada de re-renderização de componentes. A seguir, apresentaremos uma forma melhor para fazer essa re-renderização.
 
-### Componente "Stateful" (ou Componente de Estado)
+### Componente "Stateful" (ou Componente com Estado)
 
 Todos os nossos componentes até agora foram simples no sentido de que não continham nenhum estado que pudesse mudar durante o ciclo de vida do componente.
 
@@ -291,7 +291,7 @@ O corpo da função que define o componente começa com a chamada da função:
 const [ contador, defContador ] = useState(0)
 ```
 
-A chamada da função adiciona <i>estado</i> (state) ao componente e o renderiza inicializado com o valor zero. A função retorna um array que contém dois itens. Atribuímos os itens às variáveis _contador_ e _defContador_ usando a sintaxe de atribuição via desestruturação mostrada anteriormente.
+A chamada da função adiciona <i>estado</i> (state) ao componente e o renderiza inicializado com o valor 0 (zero). A função retorna um array que contém dois itens. Atribuímos os itens às variáveis _contador_ e _defContador_ usando a sintaxe de atribuição via desestruturação mostrada anteriormente.
 
 A variável _contador_ é atribuída ao valor inicial de <i>estado</i>, que é zero. A variável _defContador_ é atribuída a uma função que será usada para <i>modificar o estado</i>.
 

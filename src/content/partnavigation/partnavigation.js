@@ -424,7 +424,7 @@ module.exports = {
     '1': {
       a: 'Introdução à biblioteca React',
       b: 'JavaScript',
-      c: 'Estado do componente e gerenciadores de eventos',
+      c: 'Estado de componente e gerenciadores de eventos',
       d: 'Um estado mais complexo e depuração de aplicações React',
     },
     '2': {
