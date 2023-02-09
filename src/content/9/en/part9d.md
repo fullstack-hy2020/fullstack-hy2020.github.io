@@ -1003,11 +1003,11 @@ Create a TypeScript React app with simillar configurations as the above examples
 
 Remember to keep the network tab open. It might give you a valuable hint...
 
-#### Exercise 9.18
+#### Exercise 9.17
 
 Make it possible to add new diary entries from the fronend. In this exercise you may skip all types of validations and assume that user just enters the data in correct form.
 
-#### Exercise 9.19
+#### Exercise 9.18
 
 Inform user if the the creation of a diary entry fails in the backend. You should tell uset the reason for failure
 
@@ -1017,7 +1017,7 @@ Your solution could look like this:
 
 ![](../../images/9/71new.png)
 
-#### Exercise 9.20
+#### Exercise 9.19
 
 Addition of a diary in now very error prone since user can type anything to the fields. Let us improve the situation.
 

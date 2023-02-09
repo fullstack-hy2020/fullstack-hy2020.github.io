@@ -278,13 +278,13 @@ dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 
 <div class="tasks">
 
-### Exercises 9.16-9.18
+### Exercises 9.20-9.22
 
 We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
 
 Before going into this, let us do some preparatory work.
 
-#### 9.16: patientor, step1
+#### 9.20: patientor, step1
 
 Create an endpoint <i>/api/patients/:id</i>  that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
@@ -310,7 +310,7 @@ The response should look as follows:
 
 ![browser showing entries blank array when accessing patient](../../images/9/38a.png)
 
-#### 9.17: patientor, step2
+#### 9.21: patientor, step2
 
 Create a page for showing a patient's full information in the frontend.
 
@@ -336,7 +336,7 @@ Example uses [Material UI Icons](https://mui.com/components/material-icons/) to 
 const { id } = useParams<{ id: string }>();
 ```
 
-#### 9.18: Patientor, step3
+#### 9.22: Patientor, step3
 
 Currently, we create *action* objects wherever we dispatch actions, e.g. the *App* component has the following:
 
@@ -484,9 +484,9 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 <div class="tasks">
 
-### Exercises 9.19-9.22
+### Exercises 9.23-9.26
 
-#### 9.19: Patientor, step4
+#### 9.23: Patientor, step4
 
 Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
@@ -494,7 +494,7 @@ Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those
 
 Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field *type* has a correct value.
 
-#### 9.20: Patientor, step5
+#### 9.24: Patientor, step5
 
 Extend a patient's page in the frontend to list the *date*, *description* and *diagnoseCodes* of the patient's entries.
 
@@ -504,13 +504,13 @@ Your solution could look like this:
 
 ![browser showing list of diagnosis codes for patient](../../images/9/41.png)
 
-#### 9.21: Patientor, step6
+#### 9.25: Patientor, step6
 
 Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
 ![browser showing list of codes and their descriptions for patient ](../../images/9/42.png)
 
-#### 9.22: Patientor, step7
+#### 9.26: Patientor, step7
 
 Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other.
 
@@ -842,9 +842,9 @@ With this material, you should be able to complete the rest of this part's exerc
 
 <div class="tasks">
 
-### Exercises 9.23-9.27
+### Exercises 9.27-9.31
 
-#### 9.23: Patientor, step8
+#### 9.27: Patientor, step8
 
 We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
 
@@ -852,7 +852,7 @@ Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backe
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
-#### 9.24: Patientor, step9
+#### 9.28: Patientor, step9
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.
 
@@ -905,11 +905,11 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 
 With small tweaks on types, the readily made component *SelectField* can be used for the health check rating.
 
-#### 9.25: Patientor, step10
+#### 9.29: Patientor, step10
 
 Extend your solution so that it displays an error message if some required values are missing or formatted incorrectly.
 
-#### 9.26: Patientor, step11
+#### 9.30: Patientor, step11
 
 Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
 
@@ -933,7 +933,7 @@ Note that if you need to alter the shown form based on user selections, you can 
 </Formik>
 ```
 
-#### 9.27: Patientor, step12
+#### 9.31: Patientor, step12
 
 Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
 
