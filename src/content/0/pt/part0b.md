@@ -162,7 +162,7 @@ xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 
-Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a codificar de verdade na [parte 1](/pt/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
+Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a programar de verdade na [parte 1](/pt/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
 
 > Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch" (ir buscar). Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na parte 2.
 
@@ -613,7 +613,7 @@ Você sofrerá de fadiga JavaScript durante este curso. Felizmente para nós, ex
 <div class="tasks"> 
   <h3>Exercícios 0.1 a 0.6</h3>
 
-Os exercícios são enviados via GitHub, marcando os exercícios como concluídos na guia "meus envios" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Os exercícios são enviados via GitHub, marcando os exercícios como concluídos na guia "my submissions" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Você pode colocar todos os exercícios em um mesmo repositório ou usar múltiplos repositórios diferentes. Se você enviar exercícios de diferentes partes para o mesmo repositório, dê nomes apropriados às suas pastas. Se você usar um repositório privado para enviar os exercícios, adicione _mluukkai_ como colaborador dele.
 

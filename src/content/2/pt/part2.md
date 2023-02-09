@@ -6,5 +6,5 @@ lang: pt
 
 <div class="intro">
 
-Let's continue our introduction to React. First, we will take a look at how to render a data collection, like a list of names, to the screen. After this, we will inspect how a user can submit data to a React application using HTML forms. Next, our focus shifts towards looking at how JavaScript code in the browser can fetch and handle data stored in a remote backend server. Lastly, we will take a quick look at a few simple ways of adding CSS styles to our React applications.
+Vamos continuar com nossa introdução à biblioteca React. Primeiramente, aprenderemos a como renderizar uma coleção de dados, como uma lista de nomes, por exemplo. Depois, examinaremos como um usuário pode enviar dados a uma aplicação React usando formulários HTML. Em seguida, nosso foco muda para a forma como o código JavaScript no navegador busca e manipula dados armazenados em um servidor back-end remoto. Por fim, daremos uma rápida olhada em algumas formas simples de adição de estilos CSS às nossas aplicações React.
 </div>

@@ -536,7 +536,7 @@ Nesta parte, nem vale a pena tentar usar a renderização direta de tabelas. Vol
 <div class="tasks">
   <h3>Exercícios 1.1 a 1.2</h3>
 
-Os exercícios são enviados via GitHub, marcando os exercícios como concluídos na guia "meus envios" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Os exercícios são enviados via GitHub, marcando os exercícios como concluídos na guia "my submissions" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Os exercícios são enviados **uma parte de cada vez**. Quando você tiver enviado os exercícios para uma parte, não poderá mais enviar nenhum exercício não feito para essa parte.
 
