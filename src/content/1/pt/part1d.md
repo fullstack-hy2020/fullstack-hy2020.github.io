@@ -470,7 +470,7 @@ const App = () => {
   }
 
   for ( let i = 0; i < idade; i++ ) {
-    // Esta forma também não é boa!
+    // Não faça deste jeito também!
     const [formaCorreta, defFormaCorreta] = useState(false)
   }
 
@@ -489,7 +489,7 @@ const App = () => {
 
 A gerência de eventos se mostrou um tópico difícil em iterações anteriores neste curso.
 
-Por esta razão, revisaremos o tópico.
+Por essa razão, revisaremos o tópico.
 
 Vamos supor que estejamos desenvolvendo essa aplicação simples com o seguinte componente <i>App</i>:
 ```js
@@ -1008,7 +1008,7 @@ Estes links talvez possam lhe ser úteis:
 - Vale a pena dar uma olhada em algum momento na [documentação oficial React](https://reactjs.org/docs/hello-world.html), embora a maior parte dela só se torne relevante mais para frente no curso. Além disso, tudo relacionado a componentes baseados em classe é irrelevante para nós;
 - Alguns cursos no [Egghead.io](https://egghead.io), como o [Start learning React](https://egghead.io/courses/start-learning-react), são de altíssima qualidade; e o recentemente atualizado [Beginner's Guide to React](https://egghead.io/courses/the-beginner-s-guide-to-reactjs) também é relativamente bom; ambos os cursos introduzem conceitos que também serão introduzido no decorrer deste curso. **N.B.: O primeiro curso usa componentes de classe, mas o segundo usa a nova abordagem baseada em funções.**
 
-### Juramento dos Programadores Web
+### Juramento do Programador Web
 
 Programar é difícil, e é por isso que eu usarei todos os meios possíveis para ser mais fácil:
 - Manterei meu Console do navegador aberto o tempo todo;
@@ -1023,7 +1023,7 @@ Programar é difícil, e é por isso que eu usarei todos os meios possíveis par
 
 <h3>Exercícios 1.6 a 1.14</h3>
 
-Envie suas soluções aos exercícios dando "push" para seu repositório no GitHub e, em seguida, marque os exercícios concluídos na guia "meus envios" no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Envie suas soluções aos exercícios dando "push" para seu repositório no GitHub e, em seguida, marque os exercícios concluídos na guia "my submissions" no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Lembre-se: envie **todos** os exercícios de uma parte **de uma única vez**; isto é, envie todas as suas soluções de uma vez para seu repositório. Uma vez que você tenha enviado suas soluções para uma parte, **não é mais possível enviar mais exercícios para essa parte**.
 
@@ -1250,6 +1250,6 @@ Agora, implemente a versão final da aplicação que exibe a anedota com o maior
 
 Se múltiplas anedotas estiverem empatadas no primeiro lugar, mostre apenas uma delas.
 
-Este foi o último exercício para esta parte do curso, e é hora de enviar seu código para o GitHub e marcar todos os seus exercícios concluídos na guia "meus envios" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Este foi o último exercício para esta parte do curso, e é hora de enviar seu código para o GitHub e marcar todos os seus exercícios concluídos na guia "my submissions" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

@@ -59,7 +59,7 @@ Uma boa pergunta poderia ser:
 > // dados impressos no console
 > ```
 >
-> A aba Rede vai ser exibida dessa forma:</i>
+> A guia Rede vai ser exibida dessa forma:</i>
 >
 > [captura de tela da guia de rede do console]
 > 
@@ -158,7 +158,7 @@ Como estudar no curso – instruções resumidas: curso básico de 5 créditos C
    - Inscreva-se no curso. Você receberá o link de inscrição por meio do sistema de envio de exercícios assim que concluir os exercícios suficientes. Leia mais [aqui](/pt/part0/informacoes_gerais#enviando-exercicios)
    - Salve seu número de aluno. Após a inscrição no curso, salve seu número de identificação de aluno da Universidade de Helsinque no sistema de envio de exercícios.
    - Faça a prova online no sistema de envio de exercícios. Leia mais [aqui](/pt/part0/informacoes_gerais#a-prova-do-curso)
-   - Marque o curso concluído no sistema de envio de exercícios. Leia mais [aqui](/pt/part0/general_info#how-to-get-your-credits)
+   - Marque o curso concluído no sistema de envio de exercícios. Leia mais [aqui](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos)
 
 Observe que, se você fizer o "curso básico" com 6 ou 7 créditos, precisará de registros separados para os créditos extras. Consulte [Partes e conclusão](/pt/part0/informacoes_gerais#das-partes-e-conclusao) para saber mais.
 
@@ -172,7 +172,7 @@ Como estudar no curso – instruções resumidas: outras partes do curso
 
 ### Enviando exercícios
 
-Os exercícios são enviados por meio do GitHub e marcados como concluídos na guia "meus envios" do [pedido de envio](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Os exercícios são enviados por meio do GitHub e marcados como concluídos na guia "my submissions" do [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Se estiver enviando exercícios de diferentes partes para o mesmo repositório, use uma forma de nomeação apropriada para seus diretórios. É claro que você pode criar um repositório para cada parte. Se você estiver usando um repositório privado, adicione <i>mluukkai</i> como colaborador.
 
@@ -210,7 +210,7 @@ Você terá 120 minutos para concluir a prova. Se tudo correr bem, você verá a
 
 Se for reprovado, deverá aguardar uma semana para tentar novamente a prova.
 
-Se você passou na prova e não deseja fazer mais exercícios, é possível voltar à aba de envio de exercícios e solicitar pelos créditos:
+Se você passou na prova e não deseja fazer mais exercícios, é possível voltar à guia de envio de exercícios e solicitar pelos créditos:
 
 ![solicitar créditos de conclusão do curso](../../images/0/enroll5a.png)
 
@@ -291,7 +291,7 @@ Endereço de e-mail dos Serviços Estudantis: avoin-student@helsinki.fi
 
 ### Certificado do curso
 
-Mesmo que você não se registre na Universidade Aberta para fazer a prova e obter os créditos, você ainda poderá baixar o certificado do curso na guia "Meus envios" no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) depois de concluir os exercícios suficientes para passar de ano.
+Mesmo que você não se registre na Universidade Aberta para fazer a prova e obter os créditos, você ainda poderá baixar o certificado do curso na guia "my submissions" no [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen) depois de concluir os exercícios suficientes para passar de ano.
 
 Há um certificado para as partes básicas (0 a 7) do curso e, depois disso, um certificado separado para cada parte do curso.
 
