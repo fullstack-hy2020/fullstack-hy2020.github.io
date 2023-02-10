@@ -17,6 +17,8 @@ Participants are expected to have good programming skills, basic knowledge of we
 
 Previous knowledge of JavaScript or other course topics is not required.
 
+How much programming experience is needed? It is hard to say, but you should be pretty fluent with <i>your</i> language. This level of fluency takes usually at least 100-200 of hours practice to develop.
+
 ### Course material
 
 The course material is meant to be read one part at a time and in order.
@@ -43,7 +45,7 @@ Exercise completion time statistics can be found via the [submission system](htt
 
 You can discuss the course and related topics in our dedicated group on Discord <https://study.cs.helsinki.fi/discord/join/fullstack> and on Telegram: <https://t.me/fullstackcourse>. Discord has fullstack_general and part-specific (channel names with fullstack prefix) channels for course-related discussion. Note that Discord's <i>chat channel is not suitable for course-related discussions</i>. Please join the conversation!
 
-### How to ask help in Discord/Telegam
+### How to get help in Discord/Telegram
 
 When you ask for help for a problem in the Discord/Telegram group your question should be as informative and precise as possible. If your question look like this
 

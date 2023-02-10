@@ -393,8 +393,8 @@ don't write more code but rather find and fix the problem **immediately**. There
 Old-school, print-based debugging is always a good idea. If the component
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -405,9 +405,9 @@ is not working as intended, it's useful to start printing its variables out to t
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { onClick, text } = props
+  const { handleClick, text } = props
   return (
-    <button onClick={onClick}>
+    <button onClick={handleClick}>
       {text}
     </button>
   )
@@ -1032,11 +1032,12 @@ You may find the following links useful:
 ### Web programmers oath
 
 Programming is hard, that is why I will use all the possible means to make it easier
+
 - I will have my browser developer console open all the time
 - I progress with small steps
-- I will write lots of *console.log* statements to to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything still was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask help
+- I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpointing problems
+- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>
 
@@ -1058,6 +1059,12 @@ In some situations you may also have to run the command below from the root of t
 ```bash
 rm -rf node_modules/ && npm i
 ```
+
+If and <i>when</i> you encounter an error message
+
+> <i>Objects are not valid as a React child</i>
+
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
 
 <h4> 1.6: unicafe step1</h4>
 

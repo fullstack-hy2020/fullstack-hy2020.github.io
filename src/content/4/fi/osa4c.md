@@ -180,7 +180,7 @@ const noteSchema = new mongoose.Schema({
     required: true,
     minlength: 5
   },
-  date: Date,
+
   important: Boolean,
   // highlight-start
   user: {
@@ -335,7 +335,7 @@ describe('when there is initially one user at db', () => {
       .expect(400)
       .expect('Content-Type', /application\/json/)
 
-    expect(result.body.error).toContain('username must be unique')
+    expect(result.body.error).toContain('expected `username` to be unique')
 
     const usersAtEnd = await helper.usersInDb()
     expect(usersAtEnd).toHaveLength(usersAtStart.length)
@@ -345,34 +345,39 @@ describe('when there is initially one user at db', () => {
 
 Testi ei tietenkään mene läpi tässä vaiheessa. Toimimme nyt [TDD:n eli test driven developmentin](https://en.wikipedia.org/wiki/Test-driven_development) hengessä, eli uuden ominaisuuden testi kirjoitetaan ennen ominaisuuden ohjelmointia.
 
-Mongoosen validoinnit eivät tarjoa valmista mahdollisuutta kentän arvon uniikkiuden tarkastamiseen.  Ongelmaan on tuonut ratkaisun npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator), valitettavasti mongoose-unique-validator ei kuitenkaan tällä hetkellä (24.1.2022) toimi mongoosen version 6.x kanssa. Joudumme siis toteuttamaan uniikkiuden tarkastuksen itse kontrollerin koodissa.
+Mongoosen validoinnit eivät tarjoa valmista mahdollisuutta kentän arvon uniikkiuden tarkastamiseen.  Ongelmaan tuo ratkaisun npm-pakettina asennettava [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator). Asennetaan kirjasto tuttuun tapaan komennolla
+
+```
+npm install mongoose-unique-validator
+```
+
+ja laajennetaan koodia kirjaston dokumentaatiota noudattaen:
 
 ```js
-usersRouter.post('/', async (request, response) => {
-  const { username, name, password } = request.body
+const mongoose = require('mongoose')
+const uniqueValidator = require('mongoose-unique-validator') // highlight-line
 
-// highlight-start
-  const existingUser = await User.findOne({ username })
-  if (existingUser) {
-    return response.status(400).json({
-      error: 'username must be unique'
-    })
-  }
+const userSchema = mongoose.Schema({
+  // highlight-start
+  username: {
+    type: String,
+    required: true,
+    unique: true
+  },
   // highlight-end
-
-  const saltRounds = 10
-  const passwordHash = await bcrypt.hash(password, saltRounds)
-
-  const user = new User({
-    username,
-    name,
-    passwordHash,
-  })
-
-  const savedUser = await user.save()
-
-  response.status(201).json(savedUser)
+  name: String,
+  passwordHash: String,
+  notes: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Note'
+    }
+  ],
 })
+
+userSchema.plugin(uniqueValidator) // highlight-line
+
+// ...
 ```
 
 Voisimme toteuttaa käyttäjien luomisen yhteyteen myös muita tarkistuksia, esim. onko käyttäjätunnus tarpeeksi pitkä, koostuuko se sallituista merkeistä ja onko salasana tarpeeksi hyvä. Jätämme ne kuitenkin vapaaehtoiseksi harjoitustehtäväksi.
@@ -403,7 +408,7 @@ const User = require('../models/user')
 
 //...
 
-notesRouter.post('/', async (request, response, next) => {
+notesRouter.post('/', async (request, response) => {
   const body = request.body
 
   const user = await User.findById(body.userId) //highlight-line
@@ -411,7 +416,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
-    date: new Date(),
     user: user._id //highlight-line
   })
 
@@ -469,22 +473,22 @@ Funktion [populate](http://mongoosejs.com/docs/populate.html) kutsu siis ketjute
 
 Lopputulos on jo melkein haluamamme kaltainen:
 
-![Selain renderöi osoitteessa localhost:3001/api/users taulukollisen JSON:eja joilla kentät username, name, id ja notes. Kenttä notes on nyt olio jolla on kentät content, important, date, id ja user](../../images/4/13ea.png)
+![Selain renderöi osoitteessa localhost:3001/api/users taulukollisen JSON:eja joilla kentät username, name, id ja notes. Kenttä notes on nyt olio jolla on kentät content, important, id ja user](../../images/4/13new.png)
 
-Populaten yhteydessä on myös mahdollista rajata mitä kenttiä sisällytettävistä dokumenteista otetaan mukaan. Rajaus tapahtuu Mongon [syntaksilla](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
+Populaten yhteydessä on myös mahdollista rajata mitä kenttiä sisällytettävistä dokumenteista otetaan mukaan. Haluamme id:n lisäksi nyt ainoastaan kentätä <i>content</i> ja <i>important</i>. Rajaus tapahtuu Mongon [syntaksilla](https://docs.mongodb.com/manual/tutorial/project-fields-from-query-results/#return-the-specified-fields-and-the-id-field-only):
 
 ```js
 usersRouter.get('/', async (request, response) => {
   const users = await User
-    .find({}).populate('notes', { content: 1, date: 1 })
+    .find({}).populate('notes', { content: 1, important: 1 })
 
   response.json(users)
-});
+})
 ```
 
 Tulos on täsmälleen sellainen kuin haluamme:
 
-![Selain renderöi osoitteessa localhost:3001/api/users taulukollisen JSON:eja joilla kentät username, name, id ja notes. Kenttä notes on nyt olio jolla on ainoastaan halutut kentät content, important, date](../../images/4/14ea.png)
+![Selain renderöi osoitteessa localhost:3001/api/users taulukollisen JSON:eja joilla kentät username, name, id ja notes. Kenttä notes on nyt olio jolla on ainoastaan halutut kentät content, important](../../images/4/14new.png)
 
 Lisätään sopiva käyttäjän tietojen populointi muistiinpanojen yhteyteen:
 
@@ -494,12 +498,12 @@ notesRouter.get('/', async (request, response) => {
     .find({}).populate('user', { username: 1, name: 1 })
 
   response.json(notes)
-});
+})
 ```
 
 Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>:
 
-![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, date, id ja user. Kenttä user on olio jolla on kentät name, username ja id](../../images/4/15ea.png)
+![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, date, id ja user. Kenttä user on olio jolla on kentät name, username ja id](../../images/4/15new.png)
 
 Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä sille, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat <i>users</i>-kokoelman dokumentteihin.
 
@@ -512,7 +516,6 @@ const noteSchema = new mongoose.Schema({
     required: true,
     minlength: 5
   },
-  date: Date,
   important: Boolean,
   user: {
     type: mongoose.Schema.Types.ObjectId,

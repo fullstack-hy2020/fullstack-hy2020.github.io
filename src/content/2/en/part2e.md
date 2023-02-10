@@ -308,7 +308,7 @@ Fix the issue according to the example shown in [promise and errors](/en/part2/a
 
 At the end of this part there are a few more challenging exercises. At this stage, you can skip the exercises if they are too much of a headache, we will come back to the same themes again later. The material is worth reading through in any case.
 
-We have done one thing in our app that is masking away a very typical source of error. 
+We have done one thing in our app that is masking away a very typical source of error.
 
 We set the state *notes* to have initial value of an empty array:
 
@@ -322,7 +322,7 @@ const App = () => {
 
 This is a pretty natural initial value since the notes are a set, that is, there are many notes that the state will store.
 
-If the state would be only saving "one thing", a more proper initial value would be *null* denoting that there is <i>noting</i> in the state at the start. Let us try what happens if we use this initial value:
+If the state would be only saving "one thing", a more proper initial value would be *null* denoting that there is <i>nothing</i> in the state at the start. Let us try what happens if we use this initial value:
 
 ```js
 const App = () => {
@@ -353,7 +353,7 @@ The error message gives the reason and location for the error. The code that cau
 
 The error message is
 
-```
+```bash
 Cannot read properties of null (reading 'map')
 ```
 
@@ -375,6 +375,7 @@ The effect hook uses the function *setNotes* to set *notes* to have the notes th
 
 However the problem is that the effect is executed only <i>after the first render</i>.
 And because *notes* has the initial value of null:
+
 ```js
 const App = () => {
   const [notes, setNotes] = useState(null) // highlight-line
@@ -392,9 +393,9 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-and this blows up the app since we can not call method *filter* of the value *null*. 
+and this blows up the app since we can not call method *map* of the value *null*.
 
-When we set *notes* to be initially an empty array, there is no error since it is allowed to call *filter* to an empty array.
+When we set *notes* to be initially an empty array, there is no error since it is allowed to call *map* to an empty array.
 
 So, the initialization of the state "masked" the problem that is caused by the fact that the data is not yet fetched from the backend.
 
@@ -439,7 +440,6 @@ The other thing that we still need to have a closer look is the second parameter
       })
   }, []) // highlight-line
 ```
-
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
@@ -502,7 +502,7 @@ The user interface of the application has a form, in the input field of which th
 
 The application sets the name of the currency entered to the form to the state *currency* at the moment the button is pressed.
 
-When the *currency* gets a new value, the application fetches it's exchange rates form the API in the effect function:
+When the *currency* gets a new value, the application fetches its exchange rates from the API in the effect function:
 
 ```js
 const App = () => {
@@ -532,15 +532,15 @@ The effect has the following condition
 
 ```js
 if (currency) { 
-  // haetaan valuuttakurssit
+  // exchange rates are fetched
 }
 ```
 
-which prevents requesting the exchange rates just after the first render when the variable *currency* still has the initial value, i.e. an empty string.
+which prevents requesting the exchange rates just after the first render when the variable *currency* still has the initial value, i.e. a null value.
 
 So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address https://open.er-api.com/v6/latest/eur and stores the response in the *rates* state.
 
-When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested form the API.
+When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested from the API.
 
 The way presented here for making API requests might seem a bit awkward.
 This particular application could have been made completely without using the useEffect, by making the API requests directly in the form submit handler function:
@@ -586,7 +586,7 @@ When there is only one country matching the query, then the basic data of the co
 
 **NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>. You don't need to worry about these edge cases.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the *rm -rf .git* command at the root of your application.
 
 <h4>2.19*: Data for countries, step2</h4>
 
@@ -608,7 +608,7 @@ Add to the view showing the data of a single country, the weather report for the
 
 If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
 
-**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome.
+**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*. This issue can be fixed by completing the exercise using Chrome.
 
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
 
@@ -627,9 +627,9 @@ const api_key = process.env.REACT_APP_API_KEY
 // variable api_key has now the value set in startup
 ```
 
-Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following. 
+Note that if you created the application using *npx create-react-app ...* and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
 
-```
+```text
 # .env
 
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3

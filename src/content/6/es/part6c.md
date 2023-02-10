@@ -8,7 +8,7 @@ lang: es
 <div class="content">
 
 
-Expandamos la aplicación, de modo que las notas se almacenen en el backend. Usaremos [json-server](/es/part2/getting_data_from_server), de la parte 2.
+Expandamos la aplicación, de modo que las notas se almacenen en el backend. Usaremos [json-server](/es/part2/obteniendo_datos_del_servidor), de la parte 2.
 
 
 El estado inicial de la base de datos se almacena en el archivo <i>db.json</i>, que se coloca en la raíz del proyecto:
@@ -51,6 +51,8 @@ y agregue la siguiente línea a la parte de <i>scripts</i> del archivo <i>packag
 
 Ahora iniciemos json-server con el comando _npm run server_.
 
+### Obteniendo datos del backend
+
 A continuación, crearemos un método en el archivo  <i>services/notes.js</i>, que usa <i>axios</i> para obtener datos del backend
 
 ```js
@@ -75,28 +77,74 @@ npm install axios
 Cambiaremos la inicialización del estado en <i>noteReducer</i>, de modo que por defecto no haya notas:
 
 ```js
-const noteReducer = (state = [], action) => {
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [], // highlight-line
   // ...
-}
+})
 ```
 
-Una forma rápida de inicializar el estado en función de los datos en el servidor es buscar las notas en el archivo <i>index.js</i>  y enviar la acción <i>NEW\_NOTE</i> para cada una de ellas:
+También agreguemos una nueva acción <em>appendNote</em> para añadir un objeto de una nota:
+
+```js
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    createNote(state, action) {
+      const content = action.payload
+
+      state.push({
+        content,
+        important: false,
+        id: generateId(),
+      })
+    },
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = { 
+        ...noteToChange, 
+        important: !noteToChange.important 
+      }
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote 
+      )     
+    },
+    // highlight-start
+    appendNote(state, action) {
+      state.push(action.payload)
+    }
+    // highlight-end
+  },
+})
+
+export const { createNote, toggleImportanceOf, appendNote } = noteSlice.actions // highlight-line
+
+export default noteSlice.reducer
+```
+
+Una manera rápida para inicializar el estado de las notas basado en los datos recibidos del backend es extraer las notas en el archivo <i>index.js</i> y enviar (dispatch) una acción usando <em>appendNote</em> para cada nota individual: 
 
 ```js
 // ...
 import noteService from './services/notes' // highlight-line
+import noteReducer, { appendNote } from './reducers/noteReducer' // highlight-line
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  }
 })
-
-const store = createStore(reducer)
 
 // highlight-start
 noteService.getAll().then(notes =>
   notes.forEach(note => {
-    store.dispatch({ type: 'NEW_NOTE', data: note })
+    store.dispatch(appendNote(note))
   })
 )
 // highlight-end
@@ -104,45 +152,72 @@ noteService.getAll().then(notes =>
 // ...
 ```
 
-
-
-Agreguemos soporte en el reducer para la acción <i>INIT\_NOTES</i>, con el cual se puede realizar la inicialización enviando una sola acción. Creemos también una función de creador de acciones _initializeNotes_.
+Enviar (dispatching) múltiples acciones parece un poco impráctico. Agreguemos un creador de acciones <em>setNotes</em> que se puede usar para reemplazar directamente el array de notas. Obtendremos el creador de acciones de la función <em>createSlice</em> implementando la acción <em>setNotes</em>:
 
 ```js
 // ...
-const noteReducer = (state = [], action) => {
-  console.log('ACTION:', action)
-  switch (action.type) {
-    case 'NEW_NOTE':
-      return [...state, action.data]
-    case 'INIT_NOTES':   // highlight-line
-      return action.data // highlight-line
-    // ...
-  }
-}
 
-export const initializeNotes = (notes) => {
-  return {
-    type: 'INIT_NOTES',
-    data: notes,
-  }
-}
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    createNote(state, action) {
+      const content = action.payload
 
-// ...
+      state.push({
+        content,
+        important: false,
+        id: generateId(),
+      })
+    },
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = { 
+        ...noteToChange, 
+        important: !noteToChange.important 
+      }
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote 
+      )     
+    },
+    appendNote(state, action) {
+      state.push(action.payload)
+    },
+    // highlight-start
+    setNotes(state, action) {
+      return action.payload
+    }
+    // highlight-end
+  },
+})
+
+export const { createNote, toggleImportanceOf, appendNote, setNotes } = noteSlice.actions // highlight-line
+
+export default noteSlice.reducer
 ```
 
-
-<i>index.js</i> simplifica:
+Ahora, el código en el archivo <i>index.js</i> se ve mucho mejor:
 
 ```js
-import noteReducer, { initializeNotes } from './reducers/noteReducer'
 // ...
+import noteService from './services/notes'
+import noteReducer, { setNotes } from './reducers/noteReducer' // highlight-line
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer,
+  }
+})
 
 noteService.getAll().then(notes =>
-  store.dispatch(initializeNotes(notes))
+  store.dispatch(setNotes(notes)) // highlight-line
 )
 ```
-
 
 > **NB:**  ¿por qué no usamos await en lugar de promesas y controladores de eventos (registrados en _then_ métodos)?
 >
@@ -151,20 +226,20 @@ noteService.getAll().then(notes =>
 Sin embargo, decidimos mover la inicialización de las notas al componente <i>App</i> y, como es habitual al obtener datos de un servidor, usaremos <i>effect hook</i>.
 
 ```js
-import React, {useEffect} from 'react' // highlight-line
+import { useEffect } from 'react' // highlight-line
 import NewNote from './components/NewNote'
 import Notes from './components/Notes'
 import VisibilityFilter from './components/VisibilityFilter'
-import noteService from './services/notes'
-import { initializeNotes } from './reducers/noteReducer' // highlight-line
+import noteService from './services/notes'  // highlight-line
+import { setNotes } from './reducers/noteReducer' // highlight-line
 import { useDispatch } from 'react-redux' // highlight-line
 
 const App = () => {
+    // highlight-start
   const dispatch = useDispatch()
-  // highlight-start
   useEffect(() => {
     noteService
-      .getAll().then(notes => dispatch(initializeNotes(notes)))
+      .getAll().then(notes => dispatch(setNotes(notes)))
   }, [])
   // highlight-end
 
@@ -182,7 +257,7 @@ export default App
 
 El uso del hoook useEffect genera una advertencia eslint:
 
-![](../../images/6/26ea.png)
+![vscode warnig useEffect missing dispatch dependency](../../images/6/26ea.png)
 
 Podemos deshacernos de él haciendo lo siguiente:
 
@@ -191,7 +266,7 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     noteService
-      .getAll().then(notes => dispatch(initializeNotes(notes)))
+      .getAll().then(notes => dispatch(setNotes(notes)))
   }, [dispatch]) // highlight-line
 
   // ...
@@ -208,9 +283,9 @@ const App = () => {
   const dispatch = useDispatch()
   useEffect(() => {
     noteService
-      .getAll().then(notes => dispatch(initializeNotes(notes)))   
+      .getAll().then(notes => dispatch(setNotes(notes)))   
       // highlight-start
-  },[]) // eslint-disable-line react-hooks/exhaustive-deps  
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps  
   // highlight-end
 
   // ...
@@ -220,6 +295,8 @@ const App = () => {
 Generalmente, deshabilitar eslint cuando genera una advertencia no es una buena idea. Aunque la regla eslint en cuestión ha causado algunos [argumentos](https://github.com/facebook/create-react-app/issues/6880), usaremos la primera solución.
 
 Más sobre la necesidad de definir las dependencias de los hooks en la [documentación de react](https://reactjs.org/docs/hooks-faq.html#is-it-safe-to-omit-functions-from-the-list-of-dependencies).
+
+### Enviando datos al backend
 
 Podemos hacer lo mismo cuando se trata de crear una nueva nota. Expandamos el código comunicándonos con el servidor de la siguiente manera:
 
@@ -248,7 +325,6 @@ export default {
 El método _addNote_ del componente <i>NewNote</i> cambia ligeramente:
 
 ```js
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import { createNote } from '../reducers/noteReducer'
 import noteService from '../services/notes' // highlight-line
@@ -275,35 +351,39 @@ const NewNote = (props) => {
 export default NewNote
 ```
 
-Debido a que el backend genera ids para las notas, cambiaremos el creador de la acción _createNote_
+Debido a que el backend genera ids para las notas, cambiaremos el creador de la acción <em>createNote</em> en el archoivo <i>noteReducer.js</i> de la siguiente manera:
 
 ```js
-export const createNote = (data) => {
-  return {
-    type: 'NEW_NOTE',
-    data,
-  }
-}
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    createNote(state, action) {
+      state.push(action.payload) // highlight-line
+    },
+    // ..
+  },
+})
 ```
 
 El cambio de importancia de las notas podría implementarse utilizando el mismo principio, lo que significa realizar una llamada de método asincrónico al servidor y luego enviar una acción apropiada.
 
-El estado actual del código para la aplicación se puede encontrar en [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) en la rama <i>part6-3</i>.
+El estado actual del código para la aplicación se puede encontrar en [Github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-3) en la rama <i>part6-3</i>.
 
 </div>
 
 <div class="tasks">
 
-### Ejercicios 6.13.-6.14.
+### Ejercicios 6.14.-6.15.
 
-#### 6.13 Anécdotas y el backend, paso 1
+#### 6.14 Anécdotas y el backend, paso 1
 
 Cuando la aplicación se inicie, obtenga las anécdotas del backend implementado usando json-server.
 
 Como datos de backend iniciales, puede usar, por ejemplo, [esto](https://github.com/fullstack-hy2020/misc/blob/master/anecdotes.json).
 
 
-#### 6.14 Anécdotas y el backend, paso 2
+#### 6.15 Anécdotas y el backend, paso 2
 
 Modificar la creación de nuevas anécdotas, de forma que las anécdotas se almacenen en el backend.
 
@@ -320,7 +400,7 @@ const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(initializeNotes()))  
+    dispatch(initializeNotes())  
   },[dispatch]) 
 
   // ...
