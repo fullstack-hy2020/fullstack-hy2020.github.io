@@ -385,7 +385,7 @@ The *beforeEach* function gets called before each test, which then renders the <
 
 The first test verifies that the <i>Togglable</i> component renders its child component
 
-```html
+```js
 <div className="testDiv">
   togglable content
 </div>

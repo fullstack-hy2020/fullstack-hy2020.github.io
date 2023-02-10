@@ -150,6 +150,40 @@ la prueba falla
 
 Eliminemos el código defectuoso de la prueba.
 
+La variable _cy_ que usa nuestros tests nos genera un horrible error de Eslint
+
+![vscode screenshot showing cy is not defined](../../images/5/58new.png)
+
+Podemos deshacernos de ello instalando [eslint-plugin-cypress](https://github.com/cypress-io/eslint-plugin-cypress) como una dependencia de desarrollo
+```js
+npm install eslint-plugin-cypress --save-dev
+```
+
+y cambiando la configuración en <i>.eslintrc.js</i> de la siguiente manera:
+
+```js
+module.exports = {
+    "env": {
+        "browser": true,
+        "es6": true,
+        "jest/globals": true,
+        "cypress/globals": true // highlight-line
+    },
+    "extends": [ 
+      // ...
+    ],
+    "parserOptions": {
+      // ...
+    },
+    "plugins": [
+        "react", "jest", "cypress" // highlight-line
+    ],
+    "rules": {
+      // ...
+    }
+}
+```
+
 ### Escribiendo en un formulario
 
 Extendamos nuestras pruebas para que la prueba intente iniciar sesión en nuestra aplicación.
@@ -542,6 +576,8 @@ El segundo comando comprueba que el texto del botón haya cambiado a <i>make not
 
 Las pruebas y el código de interfaz actual se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-9), rama <i>part5-9</i>.
 
+### Prueba de inicio de sesión fallida
+
 Hagamos una prueba para asegurarnos de que un intento de inicio de sesión falla si la contraseña es incorrecta.
 
 Cypress ejecutará todas las pruebas cada vez de forma predeterminada y, a medida que aumenta el número de pruebas, comienza a consumir bastante tiempo.
@@ -842,6 +878,73 @@ describe('Note app', function() {
 })
 ```
 
+Hay una característica más molesta en nuestras pruebas. La URL de nuestra aplicacion  <i> http://localhost:3000 </i> esta esta incustrada directamente en varios lugares.
+
+Definamos la URL de nuestra aplicación <i> baseUrl </i> en el [archivo de configuracion](https://docs.cypress.io/guides/references/configuration) pre-generado de Cypress <i>cypress.config.js</i>:
+
+```js
+{
+  const { defineConfig } = require('cypress')
+
+  module.exports = defineConfig({
+    e2e: {
+      setupNodeEvents(on, config){
+      },
+        baseUrl: 'http://localhost:3000' // highlight-line
+    },
+  })
+}
+```
+
+Todos los comandos en los tests que usan la dirección de la aplicación
+
+```js
+cy.visit('http://localhost:3000')
+```
+
+se pueden cambiar a
+
+```js
+cy.visit('')
+```
+
+Tambien la direccion del backend esta en los tests incrustada directamente. La documentacion de Cypress recomienda definir otras direcciones usadas en los tets como variables de entorno.
+
+Expandamos el archivo de configuracion <i>cypress.config.js_:</i>
+
+```js
+{
+  const { defineConfig } = require('cypress')
+
+  module.exports = defineConfig({
+	e2e: {
+	  setupNodeEvents(on, config){
+	  },
+	  baseUrl: 'http://localhost:3000',
+	  BACKEND: 'http://localhost:3001/api' // highlight-line
+	},
+  })
+}
+```
+
+Reemplazemos todas las direcciones del backend en los tests de la siguiente manera:
+
+```js
+describe('Note ', function() {
+  beforeEach(function() {
+    cy.visit('')
+    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/testing/reset`) // highlight-line
+    const user = {
+      name: 'Matti Luukkainen',
+      username: 'mluukkai',
+      password: 'secret'
+    }
+    cy.request('POST', `${Cypress.env('EXTERNAL_API')}/users`, user) // highlight-line
+  })
+  // ...
+})
+```
+
 Las pruebas y el código de la interfaz se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-10), rama <i>part5-10</i>.
 
 ### Cambiar la importancia de una nota
@@ -878,7 +981,7 @@ Cuando hacemos clic en el comando _cy.contains('second note')_ en Cypress [Test 
 
 ![](../../images/5/34x.png)
 
-Al hacer clic en la siguiente línea _.contains('make important') _ vemos que la prueba usa el botón 'make important' correspondiente a la <i> segunda nota </i>:
+Al hacer clic en la siguiente línea <i>.contains('make important')</i> vemos que la prueba usa el botón 'make important' correspondiente a la <i> segunda nota </i>:
 
 ![](../../images/5/35x.png)
 
@@ -913,7 +1016,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-¡Nuestras pruebas se rompen! Como revela el corredor de pruebas, _cy.contains('second note') _ ahora devuelve el componente que contiene el texto y el botón no está en él.
+¡Nuestras pruebas se rompen! Como revela el corredor de pruebas, _cy.contains('second note')_ ahora devuelve el componente que contiene el texto y el botón no está en él.
 
 ![](../../images/5/37x.png)
 
@@ -1001,9 +1104,9 @@ Ahora podemos ejecutar nuestras pruebas desde la línea de comandos con el coman
 
 ![](../../images/5/39ea.png)
 
-Tenga en cuenta que el video de la ejecución de la prueba se guardará en <i>cypress/videos/</i>, por lo que probablemente debería ignorar este directorio.
+Tenga en cuenta que el video de la ejecución de la prueba se guardará en <i>cypress/videos/</i>, por lo que probablemente debería ignorar este directorio. También es posible [deshabilitar](https://docs.cypress.io/guides/guides/screenshots-and-videos#Videos) la grabación de videos.
 
-La interfaz y el código de prueba se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), rama <i>part5-11</i>.
+El frontend y los tests/pruebas se pueden encontrar en [github](https://github.com/fullstack-hy2020/part2-notes/tree/part5-11), rama <i>part5-11</i>.
 
 </div>
 
