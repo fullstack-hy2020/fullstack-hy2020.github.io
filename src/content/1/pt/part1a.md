@@ -229,10 +229,10 @@ Mas ao escrever em JSX, a tag precisa ser fechada:
 
 ### Múltiplos componentes
 
-Vamos modificar o arquivo <i>App.js</i> da seguinte forma (N.B.: a exportação na parte inferior é omitida nestes <i>exemplos</i>, agora e no futuro. Ela ainda é necessária para que o código funcione):
+Vamos modificar o arquivo <i>App.js</i> da seguinte forma (N.B.(Nota Bene): a exportação na parte inferior é omitida nestes <i>exemplos</i>, tanto agora quanto no futuro. Ela ainda é necessária para que o código funcione):
 
 ```js
-// começo
+// highlight-start
 const Hello = () => {
   return (
     <div>
@@ -240,13 +240,13 @@ const Hello = () => {
     </div>
   )
 }
-// final
+// highlight-end
 
 const App = () => {
   return (
     <div>
       <h1>Olá a todos!</h1>
-      <Hello /> // linha destacada
+      <Hello /> // highlight-line
     </div>
   )
 }
@@ -260,10 +260,10 @@ const App = () => {
     <div>
       <h1>Olá a todos!</h1>
       <Hello />
-      // começo
+      // highlight-start
       <Hello />
       <Hello />
-      // final
+      // highlight-end
     </div>
   )
 }
@@ -275,15 +275,15 @@ Outra forte convenção é a ideia de um componente <i>root</i> chamado <i>App</
 
 ### props: passando dados para componentes
 
-É possível passar dados para componentes usando as chamadas [props](https://reactjs.org/docs/components-and-props.html) (properties [ propriedades ]).
+É possível passar dados para componentes usando as chamadas [props](https://reactjs.org/docs/components-and-props.html) (properties [propriedades]).
 
 Vamos modificar o componente <i>Hello</i> da seguinte maneira:
 
 ```js
-const Hello = (props) => { // linha destacada
+const Hello = (props) => { // highlight-line
   return (
     <div>
-      <p>Olá {props.nome}</p> // linha destacada
+      <p>Olá {props.nome}</p> // highlight-line
     </div>
   )
 }
@@ -298,8 +298,8 @@ const App = () => {
   return (
     <div>
       <h1>Olá a todos!</h1>
-      <Hello nome='George' /> // linha destacada
-      <Hello nome='Daisy' /> // linha destacada
+      <Hello nome='George' /> // highlight-line
+      <Hello nome='Daisy' /> // highlight-line
     </div>
   )
 }
@@ -311,25 +311,25 @@ Vamos modificar o código para que o componente <i>Hello</i> use duas props:
 
 ```js
 const Hello = (props) => {
-  console.log(props) // linha destacada
+  console.log(props) // highlight-line
   return (
     <div>
       <p>
-        Olá {props.nome}, você tem {props.idade} anos // linha destacada
+        Olá {props.nome}, você tem {props.idade} anos // highlight-line
       </p>
     </div>
   )
 }
 
 const App = () => {
-  const nome = 'Peter' // linha destacada
-  const idade = 10       // linha destacada
+  const nome = 'Peter' // highlight-line
+  const idade = 10       // highlight-line
 
   return (
     <div>
       <h1>Olá a todos!</h1>
-      <Hello nome='Maya' idade={26 + 10} />   // linha destacada
-      <Hello nome={nome} idade={idade} />     // linha destacada
+      <Hello nome='Maya' idade={26 + 10} />   // highlight-line
+      <Hello nome={nome} idade={idade} />     // highlight-line
     </div>
   )
 }
@@ -375,7 +375,7 @@ const App = () => {
     <div>
       <h1>Olá a todos!</h1>
       <Hello nome='Maya' idade={26 + 10} />
-      <footer /> // linha destacada
+      <footer /> // highlight-line
     </div>
   )
 }

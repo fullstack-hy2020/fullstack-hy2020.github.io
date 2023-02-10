@@ -27,7 +27,7 @@ O console se parece com isso:
 
 Certifique-se de que a guia <i>Rede</i> esteja aberta e marque a opção <i>Desativar cache</i> conforme mostrado. <i>Preservar registro</i> também pode ser útil: ele salva os logs impressos pela aplicação quando a página é recarregada.
 
-**N.B.:** A guia mais importante é a <i>Console</i>. No entanto, nesta introdução, usaremos mais a guia <i>Rede</i>.
+**N.B. (<i>Nota Bene</i>):** A guia mais importante é a <i>Console</i>. No entanto, nesta introdução, usaremos mais a guia <i>Rede</i>.
 
 ### HTTP GET
 
@@ -345,7 +345,7 @@ Em seguida, criamos um novo elemento "li" e adicionamos algum conteúdo de texto
 
 ```js
 newElement = document.createElement('li')
-newElement.textContent = 'É bem facil fazer gerencia de páginas pelo console'
+newElement.textContent = 'É bem facil fazer gerência de páginas pelo console'
 ```
 
 E adicionamos o novo elemento "li" à lista:
