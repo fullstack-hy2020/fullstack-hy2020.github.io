@@ -666,7 +666,7 @@ Before we implement the rest of the application logic, let's verify with Postman
 
 The application prints the data that we sent in the request to the console:
 
-![terminal printing content provided in postman](../../images/3/15e.png)
+![terminal printing content provided in postman](../../images/3/15new.png)
 
 **NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:
 

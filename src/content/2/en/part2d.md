@@ -702,10 +702,10 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - <i>I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect</i>
-- <i>I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect</i>
+- <i>I will constantly keep an eye on the state of the server to make sure that the data sent there by the fronend is saved there as I expect</i>
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>
@@ -714,17 +714,17 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 <h3>Exercises 2.12.-2.15.</h3>
 
-<h4>2.12: Phonebook step7</h4>
+<h4>2.12: The Phonebook step7</h4>
 
 Let's return to our phonebook application.
 
 Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
 
-<h4>2.13: Phonebook step8</h4>
+<h4>2.13: The Phonebook step8</h4>
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-<h4>2.14: Phonebook step9</h4>
+<h4>2.14: The Phonebook step9</h4>
 
 Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
 
@@ -743,7 +743,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.15*: Phonebook step10</h4>
+<h4>2.15*: The Phonebook step10</h4>
 
 <i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 

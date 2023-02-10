@@ -157,8 +157,6 @@ const App = () => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
-
 ### Tokenin lisääminen headeriin
 
 Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaatii sen, että käyttäjän token lähetetään pyynnön mukana. 
@@ -166,6 +164,7 @@ Backendin muutosten jälkeen uusien henkilöiden lisäys puhelinluetteloon vaati
 Tämä edellyttää pientä muutosta tiedostossa <i>index.js</i> olevaan ApolloClient-olion konfiguraatioon
 
 ```js
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'  // highlight-line
 import { setContext } from '@apollo/client/link/context' // highlight-line
 
 // highlight-start
@@ -174,13 +173,15 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `bearer ${token}` : null,
+      authorization: token ? `Bearer ${token}` : null,
     }
   }
 })
 // highlight-end
 
-const httpLink = new HttpLink({ uri: 'http://localhost:4000' }) // highlight-line
+const httpLink = createHttpLink({
+  uri: 'http://localhost:4000',
+})
 
 const client = new ApolloClient({
   cache: new InMemoryCache(),
@@ -188,13 +189,7 @@ const client = new ApolloClient({
 })
 ```
 
-_client_-olion muodostamisen yhteydessä oleva toinen parametri _link_ määrittelee, miten apollo on yhteydessä palvelimeen. Nyt normaalia [httpLink](https://www.apollographql.com/docs/link/links/http.htm)-yhteyttä muokataan siten, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
-
-Asennetaan vielä muutoksen tarvitsema kirjasto
-
-```bash
-npm install apollo-link-context
-```
+_client_-olion muodostamisen yhteydessä ollut kenttä _uri_ on korvattu kentällä _link_, joka määrittelee hieman monimutkaisimmissa tapauksissa, miten Apollo on yhteydessä palvelimeen. Palvelimen url on nyt kääritty funktion [createHttpLink](https://www.apollographql.com/docs/link/links/http.htm) avulla sopivaksi httpLink-olioksi jota muokataan authLink-olion määrittelemän [kontekstin](https://www.apollographql.com/docs/react/api/link/apollo-link-context/#overview) avulla siten, että pyyntöjen mukaan [asetetaan headerille](https://www.apollographql.com/docs/react/networking/authentication/#header) <i>authorization</i> arvoksi localStoragessa mahdollisesti oleva token.
 
 Uusien henkilöiden lisäys ja numeroiden muuttaminen toimii taas. Sovellukseen jää kuitenkin yksi ongelma. Jos yritämme lisätä puhelinnumerotonta henkilöä, se ei onnistu.
 
@@ -223,7 +218,7 @@ const PersonForm = ({ setError }) => {
 }
 ```
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-6), branchissa <i>part8-6</i>.
 
 ### Välimuistin päivitys revisited
 
@@ -237,14 +232,16 @@ const PersonForm = ({ setError }) => {
   const [ createPerson ] = useMutation(CREATE_PERSON, {
     refetchQueries: [  {query: ALL_PERSONS} ], // highlight-line
     onError: (error) => {
-      setError(error.graphQLErrors[0].message)
+      const errors = error.graphQLErrors[0].extensions.error.errors
+      const messages = Object.values(errors).map(e => e.message).join('\n')
+      setError(messages)
     }
   })
 ```
 
 Lähestymistapa on kohtuullisen toimiva, ikävänä puolena on toki se, että päivityksen yhteydessä suoritetaan aina myös kysely. 
 
-Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/api/react/hooks/#options-2)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
+Ratkaisua on mahdollista optimoida hoitamalla välimuistin päivitys itse. Tämä tapahtuu määrittelemällä mutaatiolle sopiva [update](https://www.apollographql.com/docs/react/data/mutations/#the-update-function)-callback, jonka Apollo suorittaa mutaation päätteeksi: 
 
 
 ```js 
@@ -283,7 +280,7 @@ Välimuistin kanssa kannattaa olla tarkkana. Välimuistissa oleva epäajantasain
 > <i>There are only two hard things in Computer Science: cache invalidation and naming things.</i> Katso lisää [täältä](https://www.google.com/search?q=two+hard+things+in+Computer+Science&oq=two+hard+things+in+Computer+Science).
 
 
-Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-8), branchissa <i>part8-8</i>.
+Sovelluksen tämän vaiheen koodi [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-frontend/tree/part8-7), branchissa <i>part8-7</i>.
 
 </div>
 

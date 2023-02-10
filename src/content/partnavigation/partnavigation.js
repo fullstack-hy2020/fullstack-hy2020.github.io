@@ -39,7 +39,8 @@ module.exports = {
       a: 'Flux-arkkitehtuuri ja Redux',
       b: 'Monta reduseria',
       c: 'Redux-sovelluksen kommunikointi palvelimen kanssa',
-      d: 'connect',
+      d: 'React Query, useReducer ja context',
+      e: 'connect (vanha osa)',
     },
     '7': {
       a: 'React-router',
@@ -106,7 +107,8 @@ module.exports = {
       a: 'Flux-architecture and Redux',
       b: 'Many reducers',
       c: 'Communicating with server in a redux application',
-      d: 'connect',
+      d: 'React Query, useReducer and the context',
+      e: 'connect (the old part)',
     },
     '7': {
       a: 'React-router',
@@ -126,7 +128,7 @@ module.exports = {
     '9': {
       a: 'Background and introduction',
       b: 'First steps with TypeScript',
-      c: 'Typing the express app',
+      c: 'Typing an Express app',
       d: 'React with types',
     },
     '10': {
@@ -266,7 +268,7 @@ module.exports = {
     },
     '4': {
       a: 'Estructura de la aplicación backend, introducción a las pruebas',
-      b: 'Porbando el backend',
+      b: 'Probando el backend',
       c: 'Administración de usuarios',
       d: 'Autenticación de token',
     },

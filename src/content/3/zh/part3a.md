@@ -896,7 +896,7 @@ app.post('/api/notes', (request, response) => {
 <!-- The application prints the data that we sent in the request to the console:-->
  应用将我们在请求中发送的数据打印到控制台。
 
-![](../../images/3/15e.png)
+![](../../images/3/15new.png)
 
 <!-- **NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:-->
  **NB** <i> 当你在后端工作时，保持运行应用的终端始终可见 </i>。由于 Nodemon 的存在，我们对代码的任何改动都会重新启动应用。如果你关注控制台，你将立即能够发现应用中出现的错误。

@@ -322,7 +322,7 @@ const App = () => {
 
 This is a pretty natural initial value since the notes are a set, that is, there are many notes that the state will store.
 
-If the state would be only saving "one thing", a more proper initial value would be _null_ denoting that there is <i>noting</i> in the state at the start. Let us try what happens if we use this initial value:
+If the state would be only saving "one thing", a more proper initial value would be _null_ denoting that there is <i>nothing</i> in the state at the start. Let us try what happens if we use this initial value:
 
 ```js
 const App = () => {
@@ -502,7 +502,7 @@ The user interface of the application has a form, in the input field of which th
 
 The application sets the name of the currency entered to the form to the state _currency_ at the moment the button is pressed.
 
-When the _currency_ gets a new value, the application fetches it's exchange rates form the API in the effect function:
+When the _currency_ gets a new value, the application fetches it's exchange rates from the API in the effect function:
 
 ```js
 const App = () => {
@@ -532,15 +532,15 @@ The effect has the following condition
 
 ```js
 if (currency) { 
-  // haetaan valuuttakurssit
+  // exchange rates are fetched
 }
 ```
 
-which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. an empty string.
+which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. a null value.
 
 So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address https://open.er-api.com/v6/latest/eur and stores the response in the _rates_ state.
 
-When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested form the API.
+When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested from the API.
 
 The way presented here for making API requests might seem a bit awkward.
 This particular application could have been made completely without using the useEffect, by making the API requests directly in the form submit handler function:

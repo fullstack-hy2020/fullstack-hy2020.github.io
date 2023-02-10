@@ -88,7 +88,7 @@ const App = () => {
   )
 }
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Jokainen näkymä on siis toteutettu omana komponenttinaan, ja sovelluksen tilassa <i>page</i> pidetään tieto siitä, mitä näkymää vastaava komponentti menupalkin alla näytetään.
@@ -111,7 +111,7 @@ React Routerin tarjoama reititys saadaan käyttöön muuttamalla sovellusta seur
 import {
   BrowserRouter as Router,
   Routes, Route, Link
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const App = () => {
   const padding = {
@@ -133,7 +133,7 @@ const App = () => {
       </Routes>
 
       <div>
-        <i>Note app, Department of Computer Science 2022</i>
+        <i>Note app, Department of Computer Science 2023</i>
       </div>
     </Router>
   )
@@ -148,7 +148,7 @@ Huomaa, että vaikka komponenttiin viitataan nimellä <i>Router</i>, kyseessä o
 import {
   BrowserRouter as Router, // highlight-line
   Routes, Route, Link
-} from "react-router-dom"
+} from 'react-router-dom'
 ```
 
 [Manuaalin](https://reactrouter.com/docs/en/v6/api#browserrouter) mukaan
@@ -204,7 +204,7 @@ const Notes = ({notes}) => (
     <ul>
       {notes.map(note =>
         <li key={note.id}>
-          <Link to={`/notes/${note.id}`}>{note.content}</Link>
+          <Link to={`/notes/${note.id}`}>{note.content}</Link>  // highlight-line
         </li>
       )}
     </ul>
@@ -240,7 +240,7 @@ Kun selain siirtyy muistiinpanon yksilöivään osoitteeseen, esim. <i>/notes/3<
 import {
   // ...
   useParams  // highlight-line
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const Note = ({ notes }) => {
   const id = useParams().id // highlight-line
@@ -249,7 +249,7 @@ const Note = ({ notes }) => {
     <div>
       <h2>{note.content}</h2>
       <div>{note.user}</div>
-      <div><strong>{note.important ? 'tärkeä' : ''}</strong></div>
+      <div><strong>{note.important ? 'important' : ''}</strong></div>
     </div>
   )
 }
@@ -382,7 +382,7 @@ const App = () => {
     </Router>      
       <div>
         <br />
-        <em>Note app, Department of Computer Science 2022</em>
+        <em>Note app, Department of Computer Science 2023</em>
       </div>
     </div>
   )
@@ -411,7 +411,7 @@ const Note = ({ note }) => {
     <div>
       <h2>{note.content}</h2>
       <div>{note.user}</div>
-      <div><strong>{note.important ? 'tärkeä' : ''}</strong></div>
+      <div><strong>{note.important ? 'important' : ''}</strong></div>
     </div>
   )
 }
@@ -435,7 +435,7 @@ Komponentti <i>App</i> muuttuu seuraavasti:
 import {
   // ...
   useMatch  // highlight-line
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const App = () => {
   // ...
@@ -464,7 +464,7 @@ const App = () => {
       </Routes>   
 
       <div>
-        <em>Note app, Department of Computer Science 2022</em>
+        <em>Note app, Department of Computer Science 2023</em>
       </div>
     </div>
   )

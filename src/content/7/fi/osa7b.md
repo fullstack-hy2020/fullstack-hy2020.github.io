@@ -13,14 +13,14 @@ Tämän ja seuraavan luvun tehtävien lisäksi seitsemäs osa sisältää kertaa
 
 ### Hookit
 
-React tarjoaa yhteensä kymmenen erilaista [valmista hookia](https://reactjs.org/docs/hooks-reference.html), joista ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://reactjs.org/docs/hooks-reference.html#usestate) ja [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect).
+React tarjoaa yhteensä 15 erilaista [valmista hookia](https://reactjs.org/docs/hooks-reference.html), joista ylivoimaisesti eniten käytetyt ovat meillekin jo tutut [useState](https://reactjs.org/docs/hooks-reference.html#usestate) ja [useEffect](https://reactjs.org/docs/hooks-reference.html#useeffect).
 
-Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle.
+Käytimme [osassa 5](/osa5/props_children_ja_proptypet#ref-eli-viite-komponenttiin) hookia [useImperativeHandle](https://reactjs.org/docs/hooks-reference.html#useimperativehandle), jonka avulla komponentin sisäinen funktio pystyttiin tarjoamaan näkyville komponentin ulkopuolelle. [Osassa 6](/osa6/react_query_use_reducer_ja_contex) taas olivat käytössä [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) ja [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) kun toteutimme Reduxia muistuttavan tilanhallintaratkaisun.
 
 Muutaman edellisen vuoden aikana moni Reactin apukirjasto on ruvennut tarjoamaan hook-perustaisen rajapinnan. [Osassa 6](/osa6/flux_arkkitehtuuri_ja_redux#redux-storen-valittaminen-eri-komponenteille)
-käytimme React Redux -kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään Redux-storen ja dispatch-funktion niitä tarvitseville komponenteille. Reduxin hook-perustainen API onkin huomattavasti helpompi käyttää kuin vanhempi, mutta edelleen käytössä oleva [connect](/osa6/connect) API.
+käytimme React Redux -kirjaston hookeja [useSelector](https://react-redux.js.org/api/hooks#useselector) ja [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) välittämään Redux-storen ja dispatch-funktion niitä tarvitseville komponenteille.
 
-Myös edellisessä [luvussa](/osa7/react_router/) käsitellyn [React Routerin](https://v5.reactrouter.com/web/guides) API perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä _navigation_-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
+Myös edellisessä [luvussa](/osa7/react_router/) käsitellyn [React Routerin](https://v5.reactrouter.com/web/guides) API perustuu osin [hookeihin](https://reacttraining.com/react-router/web/api/Hooks), joiden avulla päästiin käsiksi routejen parametroituun osaan, sekä <i>navigation</i>-olioon, joka mahdollistaa selaimen osoiterivin manipuloinnin koodista.
 
 Kuten [osassa 1](/osa1/monimutkaisempi_tila_reactin_debuggaus#hookien-saannot) mainittiin, hookit eivät ole mitä tahansa funktiota, vaan niitä on käytettävä tiettyjä [sääntöjä](https://reactjs.org/docs/hooks-rules.html) noudattaen. Seuraavassa vielä hookien käytön säännöt suoraan Reactin dokumentaatiosta kopioituna:
 
@@ -41,13 +41,13 @@ React tarjoaa mahdollisuuden myös omien eli [custom](https://reactjs.org/docs/h
 
 > <i>Building your own Hooks lets you extract component logic into reusable functions.</i>
 
-Custom-hookit ovat tavallisia JavaScript-funktioita, jotka voivat kutsua mitä tahansa muita hookeja kunhan vain toimivat hookien sääntöjen puitteissa. Custom-hookin nimen täytyy alkaa sanalla _use_.
+Custom-hookit ovat tavallisia JavaScript-funktioita, jotka voivat kutsua mitä tahansa muita hookeja kunhan ne vain toimivat hookien sääntöjen puitteissa. Custom-hookin nimen täytyy alkaa sanalla _use_.
 
 Teimme [osassa 1](/osa1/komponentin_tila_ja_tapahtumankasittely#tapahtumankasittely) laskurin, jonka arvoa voi kasvattaa, vähentää ja nollata. Sovelluksen koodi on seuraava:
 
 ```js  
 import { useState } from 'react'
-const App = (props) => {
+const App = () => {
   const [counter, setCounter] = useState(0)
 
   return (
@@ -99,7 +99,7 @@ Hook siis käyttää sisäisesti _useState_-hookia luomaan itselleen tilan. Hook
 React-komponentti käyttää hookia seuraavaan tapaan:
 
 ```js
-const App = (props) => {
+const App = () => {
   const counter = useCounter()
 
   return (
@@ -398,7 +398,7 @@ Palataan hetkeksi tehtäväsarjan [2.12-14](/osa2/palvelimella_olevan_datan_hake
 
 Ota pohjaksi repositoriossa https://github.com/fullstack-hy2020/country-hook oleva koodi. 
 
-Sovelluksen avulla on mahdollista hakea maiden tietoja https://restcountries.com/-rajapinnasta. Jos maa löytyy, näytetään maan perustiedot:
+Sovelluksen avulla on mahdollista hakea maiden tietoja <https://restcountries.com/> -rajapinnasta. Jos maa löytyy, näytetään maan perustiedot:
 
 ![](../../images/7/69ea.png)
 
@@ -410,7 +410,7 @@ Sovellus on muuten valmiiksi toteutettu, mutta joudut tässä tehtävässä tote
 
 Maan tietojen hakeminen kannattaa hoitaa API:n endpointin [full name](https://restcountries.com/#api-endpoints-v3-full-name) avulla ja hookin sisällä olevassa _useEffect_-hookissa.
 
-Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa. Taulukolla kontrolloidaan, milloin efektifunktio kannattaa suorittaa.
+Huomaa, että tässä tehtävässä on oleellista hyödyntää useEffectin [toisena parametrina](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect) olevaa taulukkoa. Taulukolla kontrolloidaan, milloin efektifunktio kannattaa suorittaa. Kurssin [osassa 2](/osa2/tyylien_lisaaminen_react_sovellukseen#muutama-tarkea-huomio) on käyty läpi toisen parametrin käytön periaatteita.
 
 #### 7.8: ultimate hooks
 
