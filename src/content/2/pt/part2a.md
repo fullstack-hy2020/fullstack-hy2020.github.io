@@ -15,9 +15,9 @@ Antes de começar esta nova parte, vamos revisar alguns dos tópicos que, ano pa
 
 Paradoxalmente, isso parece ser verdade, mesmo que um programador iniciante precise do <i>console.log</i> (ou de qualquer outro método de depuração) mais do que um experiente.
 
-Quando algo não funciona, não adivinhe o que está errado. Em vez disso, faça o log ou use outra forma de depuração.
+Quando algo não funciona, não tente adivinhar o que está errado. Em vez disso, faça o log ou use outra forma de depuração.
 
-**N.B.:** Como explicado na Parte 1, ao usar o comando _console.log_ para depuração, não concatene coisas "do jeito Java" com o sinal de adição (+). Em vez de escrever...
+**N.B. (Nota Bene):** Como explicado na Parte 1, ao usar o comando _console.log_ para depuração, não concatene coisas "do jeito Java" com o sinal de adição (+). Em vez de escrever...
 
 ```js
 console.log('valor de props é ' + props)
@@ -59,13 +59,13 @@ O atalho mais importante é o do comando <em>console.log()</em>, por exemplo, <e
 }
 ```
 
-Depurar seu código usando _console.log()_ é tão trivial que o Visual Studio Code já tem esse atalho embutido. Para usá-lo, digite _log_ e aperte Tab para autocompletar. Extensões do atalho _console.log()_ mais completas podem ser encontradas no [marketplace](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance).
+Depurar seu código usando _console.log()_ é algo tão trivial que o Visual Studio Code já tem esse atalho embutido. Para usá-lo, digite _log_ e aperte Tab para autocompletar. Extensões do atalho _console.log()_ mais completas podem ser encontradas no [marketplace](https://marketplace.visualstudio.com/search?term=console.log&target=VSCode&category=All%20categories&sortBy=Relevance).
 
 ### Arrays em JavaScript
 
 A partir daqui, usaremos os operadores de programação funcional do [array](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) (matriz) JavaScript, como _find_, _filter_ e _map_ o tempo todo.
 
-Se operar arrays com operadores funcionais parecer estranho para você, vale a pena assistir pelo menos as primeiras três partes da série de vídeos [Programação Funcional em JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) no YouTube:
+Se operar arrays com operadores funcionais parecer estranho para você, vale a pena assistir pelo menos os primeiros três vídeos da série [Programação Funcional em JavaScript](https://www.youtube.com/playlist?list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) no YouTube:
 
 - [Funções de ordem superior](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84)
 - [Map](https://www.youtube.com/watch?v=bCqtb-Z5YGQ&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84&index=2)
@@ -147,7 +147,7 @@ Cada nota contém seu conteúdo textual, um valor _booleano_ para marcar se a no
 
 O exemplo acima funciona devido ao fato de haver exatamente três notas no array.
 
-Uma única nota é renderizada acessando os objetos no array, se referindo a um número de índice no "código de teste":
+Uma única nota é renderizada acessando os objetos no array, referindo-se a um número de índice no "código de teste":
 
 ```js
 <li>{notes[1].content}</li>
@@ -188,7 +188,7 @@ const App = (props) => {
 }
 ```
 
-Como o código que gera as tags <i>li</i> é JavaScript, ele deve ser envoltório em chaves em um modelo JSX, assim como todo outro código JavaScript.
+Como o código que gera as tags <i>li</i> é JavaScript, ele deve ser envolto em chaves no modelo JSX, assim como todo código JavaScript.
 
 Também faremos com que o código fique mais legível separando a declaração da função de seta em várias linhas:
 
@@ -213,13 +213,13 @@ const App = (props) => {
 }
 ```
 
-### o atributo "key" (chave)
+### O atributo "key" (chave)
 
 Mesmo que a aplicação pareça estar funcionando, há um aviso no console:
 
 ![erro da propriedade de chave única no console](../../images/2/1a.png)
 
-Como sugere a [página React](https://reactjs.org/docs/lists-and-keys.html#keys) vinculada na mensagem de erro, os itens da lista, ou seja, os elementos gerados pelo método _map_, devem ter separadamente um valor de key único: um atributo chamado <i>key</i> (chave).
+Como sugere a [página React](https://reactjs.org/docs/lists-and-keys.html#keys) vinculada na mensagem de erro, os itens da lista, ou seja, os elementos gerados pelo método _map_, devem ter cada qual um valor único que os permite serem identificados: um atributo chamado <i>key</i> (chave).
 
 Vamos adicionar as keys:
 
@@ -291,7 +291,7 @@ A função é esta:
 note => note.id
 ```
 
-Que no caso, é uma função de seta escrita de forma compacta. A forma completa seria:
+Que, neste caso, é uma função de seta escrita de forma compacta. A forma completa seria:
 
 ```js
 (note) => {
@@ -301,7 +301,7 @@ Que no caso, é uma função de seta escrita de forma compacta. A forma completa
 
 A função recebe um objeto "note" como parâmetro e retorna o valor de seu campo <i>id</i>.
 
-Se mudarmos o comando para...
+Se mudarmos a instrução para...
 
 ```js
 const result = notes.map(note => note.content)
@@ -327,7 +327,7 @@ Por conta do parâmetro da função passado para o método _map_ —
 note => <li key={note.id}>{note.content}</li>
 ```
 
-&nbsp;— ser usado para criar elementos de visualização, o valor da variável deve ser renderizado dentro de chaves. Tente ver o que acontece se as chaves são removidas. 
+&nbsp;— ser usado para criar elementos de visualização, o valor da variável deve ser renderizado dentro de chaves. Tente ver o que acontece se as chaves forem removidas. 
 
 O uso constante de chaves pode gerar algum desconforto no início, mas você se acostumará rapidamente com elas. O feedback visual em React é imediato.
 
@@ -341,7 +341,7 @@ notes.map((note, i) => ...)
 
 Quando chamado desta forma, é atribuído ao _i_ o valor do índice da posição no array onde a nota reside.
 
-Como tal, uma forma de definir a criação de linhas (row) sem gerar erros é:
+Como tal, uma forma de definir a criação de linhas (row) sem gerar erros é esta:
 
 ```js
 <ul>
@@ -359,7 +359,7 @@ Leia mais sobre isso neste [artigo](https://robinpokorny.medium.com/index-as-a-k
 
 ### Refatorando módulos
 
-Vamos arrumar um pouco nosso código. Estamos interessados apenas no campo _notes_ das props, então vamos recuperá-lo diretamente usando [destruturação](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment):
+Vamos arrumar um pouco nosso código. Estamos interessados apenas no campo _notes_ das props, então vamos recuperá-lo diretamente usando [desestruturação](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment):
 
 ```js
 const App = ({ notes }) => {//highlight-line
@@ -378,7 +378,7 @@ const App = ({ notes }) => {//highlight-line
 }
 ```
 
-Se você esqueceu o que significa destruturação e como ela funciona, por favor, revise a [seção sobre destruturação](/pt/part1/estado_do_componente_e_gerenciadores_de_eventos#desestruturacao-destructuring).
+Se você esqueceu o que significa desestruturação e como essa ferramenta funciona, por favor, revise a [seção sobre desestruturação](/pt/part1/estado_do_componente_e_gerenciadores_de_eventos#desestruturacao-destructuring).
 
 Vamos separar a exibição de uma única nota em seu próprio componente <i>Note</i>: 
 
@@ -411,7 +411,7 @@ Note que o atributo <i>key</i> agora deve ser definido para os componentes <i>No
 
 Uma aplicação React pode ser escrita inteiramente em um único arquivo, mesmo que fazer isso seja, obviamente, nada prático. A prática comum é declarar cada componente em seu próprio arquivo como um <i>módulo ES6</i>.
 
-Estamos utilizando módulos o tempo todo. As primeiras linhas do arquivo <i>index.js</i>:
+Estamos utilizando módulos o tempo todo. As primeiras linhas do arquivo <i>index.js</i>...
 
 ```js
 import ReactDOM from "react-dom/client"
@@ -419,11 +419,11 @@ import ReactDOM from "react-dom/client"
 import App from "./App"
 ```
 
-[importam](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) (import) dois módulos, habilitando-os a serem usados ​​nessa pasta. É importado o módulo <i>react-dom/client</i> para a variável _ReactDOM_ e o módulo que define o componente principal da aplicação é colocado na variável _App_.
+... [importam](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) (import) dois módulos, habilitando-os a serem usados ​​nessa pasta. É importado o módulo <i>react-dom/client</i> para a variável _ReactDOM_ e o módulo que define o componente principal da aplicação é atribuído à variável _App_.
 
 Vamos separar nosso componente <i>Note</i> em um módulo próprio.
 
-Em aplicativos menores, os componentes geralmente são colocados em uma pasta chamada <i>components</i>, que por sua vez é colocada dentro da pasta <i>src</i>. A convenção é nomear o arquivo com o nome do componente.
+Em aplicações menores, os componentes geralmente são colocados em uma pasta chamada <i>components</i>, que por sua vez é colocada dentro da pasta <i>src</i>. A convenção é nomear o arquivo com o nome do componente.
 
 Agora, criaremos uma pasta chamada <i>components</i> para nossa aplicação e criaremos dentro dela um arquivo chamado <i>Note.js</i>.
 O conteúdo do arquivo Note.js é o seguinte: 
@@ -535,7 +535,7 @@ const Course = ({ course }) => (
 ```
 
 O componente deve ser alterado para sua forma mais extensa, no qual poderemos adicionar a impressão desejada:
-// highlight-line
+
 ```js
 const Course = ({ course }) => { 
   console.log(course) // highlight-line
@@ -547,7 +547,7 @@ const Course = ({ course }) => {
 }
 ```
 
-Muitas vezes, a raiz do problema é que espera-se que as propriedades sejam de um tipo diferente, ou que sejam chamadas com um nome diferente do que realmente são, e a desestruturação falha como resultado. O problema começa a se resolver quando a desestruturação é removida e vemos o que as <em>props</em> armazenam. 
+Muitas vezes, a raiz do problema é que espera-se que as propriedades sejam de um tipo diferente, ou que sejam chamadas com um nome diferente do que realmente são, e a desestruturação falha como resultado. O problema começa a revelar-se quando a desestruturação é removida e vemos o que as <em>props</em> armazenam. 
 
 ```js
 const Course = (props) => { // highlight-line
@@ -596,8 +596,7 @@ Lembre-se: envie **todos** os exercícios de uma parte **de uma única vez**; is
 
 Vamos finalizar o código para que possamos renderizar os conteúdos do curso dos exercícios 1.1 a 1.5. Você pode começar com o código das respostas-modelo. As respostas-modelo da Parte 1 podem ser encontradas no [sistema de envio de exercícios]https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicando em <i>"my submissions"</i> em cima; vá até a linha correspondente à parte 1 na coluna <i>"solutions"</i> e clique em <i>show</i>. Para ver a solução para o exercício <i>course info</i>, clique em _index.js_ abaixo de <i>kurssitiedot</i> ("kurssitiedot" significa "course info" ou "informações do curso").
 
-**Note que se você copiar um projeto de um lugar para outro, é provável que terá de excluir o diretório <i>node\_modules</i> e instalar as dependências novamente com o comando _npm install_ antes de iniciar a aplicação.**
-Em geral, não é recomendado que você copie todo o conteúdo de um projeto e/ou adicione o diretório <i>node\_modules</i> ao sistema de controle de versão.
+**Note que se você copiar um projeto de um lugar para outro, é provável que terá de excluir o diretório <i>node\_modules</i> e instalar as dependências novamente com o comando _npm install_ antes de iniciar a aplicação.** Em geral, não é recomendado que você copie todo o conteúdo de um projeto e/ou adicione o diretório <i>node\_modules</i> ao sistema de controle de versão.
 
 Vamos modificar o componente <i>App</i> desta maneira:
 
@@ -631,7 +630,7 @@ const App = () => {
 export default App
 ```
 
-Defina um componente chamado <i>Course</i> que será responsável por formatar/exibir um único curso.
+Crie um componente chamado <i>Course</i> que será responsável por formatar/exibir um único curso.
 
 A estrutura do componente da aplicação pode ser a seguinte, por exemplo:
 
@@ -645,13 +644,13 @@ App
       ...
 </pre>
 
-Desta forma, o componente <i>Course</i> contém os componentes definidos na parte anterior, responsáveis por renderizar o nome do curso e suas partes.
+Desta forma, o componente <i>Course</i> conterá os componentes definidos na parte anterior, responsáveis por renderizar o nome do curso e suas partes.
 
 O resultado da página pode, por exemplo, ficar assim: 
 
 ![half stack application screenshot](../../images/teht/8e.png)
 
-Você ainda não precisa do total da soma do número de atividades. 
+Você ainda não precisa da soma do número de exercícios. 
 
 A aplicação deve funcionar <i>independentemente do número de partes de um curso</i>, então certifique-se de que a aplicação funcione se você adicionar ou remover partes de um curso. 
 
@@ -659,13 +658,13 @@ Certifique-se de que o console não esteja mostrando erros!
 
 <h4>2.2: Course information — 7º passo</h4>
 
-Mostre também o total da soma das atividades do curso.
+Mostre também a soma (ou total) dos exercícios do curso.
 
-![sum of exercises added feature](../../images/teht/9e.png)
+![recurso de soma de exercícios](../../images/teht/9e.png)
 
 <h4>2.3*: Course information — 8º passo</h4>
 
-Se você ainda não o fez, calcule a soma das atividades com o método de matriz [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (reduzir).
+Se você ainda não o fez, calcule a soma dos exercícios com o método de array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (reduzir).
 
 **Dica:** quando seu código fica assim...
 
@@ -674,7 +673,7 @@ const total =
   parts.reduce((s, p) => someMagicHere)
 ```
   
-... e ao mesmo tempo não funciona, vale a pena usar o <i>console.log</i>, o que requer que a função de seta seja escrita em sua forma mais longa:
+... e ao mesmo tempo que não funciona, vale a pena usar o <i>console.log</i>, o que requer que a função de seta seja escrita em sua forma mais longa:
 
 ```js
 const total = parts.reduce((s, p) => {
@@ -750,13 +749,10 @@ const App = () => {
 
 A aplicação pode, por exemplo, ficar assim: 
 
-![recurso adicional de número arbitrário de cursos](../../images/teht/10e.png)
+![recurso que mostra o número arbitrário de cursos](../../images/teht/10e.png)
 
 <h4>2.5: um módulo separado</h4>
 
 Crie o componente <i>Course</i> como um módulo separado, que é importado pelo componente <i>App</i>. Você pode incluir todos os subcomponentes do curso no mesmo módulo (Course).
-
-^^^^^^
-### AINDA NÃO REVISADO
 
 </div>

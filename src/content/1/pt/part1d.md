@@ -147,7 +147,7 @@ const gerCliqueDireita = () =>
   defCliques({ ...cliques, direita: cliques.direita + 1 })
 ```
 
-A aplicação parece funcionar. Entretanto, <i> em React, é proibido mudar (mutate) o estado diretamente</i>, já que [pode resultar em efeitos colaterais inesperados](https://stackoverflow.com/a/40309023). A mudança de estado sempre tem que ser feita pela definição/atribuição do estado a um novo objeto. Se as propriedades do objeto de estado anterior não forem alteradas, podem simplesmente ser copiadas, que se dá copiando essas propriedades em um novo objeto e definindo-o como o novo estado.
+A aplicação parece funcionar. Entretanto, <i> em React, é proibido mudar (mutate) diretamente o estado</i>, já que [pode resultar em efeitos colaterais inesperados](https://stackoverflow.com/a/40309023). A mudança de estado sempre tem que ser feita pela definição/atribuição do estado a um novo objeto. Se as propriedades do objeto de estado anterior não forem alteradas, podem simplesmente ser copiadas, que se dá copiando essas propriedades em um novo objeto e definindo-o como o novo estado.
 
 Armazenar todo o estado em um único objeto de estado é uma má escolha para esta aplicação, especificamente; não há qualquer benefício aparente, e a aplicação resultante fica muito mais complexa. Neste caso, armazenar os contadores de cliques em pedaços separados de estado é uma escolha muito mais adequada.
 
@@ -396,7 +396,7 @@ const Botao = (props) => {
 
 Isso revelará imediatamente se, por exemplo, um dos atributos foi escrito incorretamente ao usar o componente.
 
-**N.B.:** Quando você usar _console.log_ para depuração, não combine _objetos (objects)_ do jeito Java de se fazer usando o operador de adição. Em vez de escrever...
+**N.B. (Nota Bene):** Quando você usar _console.log_ para depuração, não combine _objetos (objects)_ do jeito Java de se fazer usando o operador de adição. Em vez de escrever...
 
 ```js
 console.log('o valor de props é ' + props)
@@ -545,7 +545,7 @@ Este também não funcionaria:
 <button onClick={valor = 0}>botão</button>
 ```
 
-O gerenciador de eventos não é uma função, mas uma **atribuição de variável**, e React, mais uma vez, emitirá um aviso no console. Esta tentativa também é falha no sentido de que nunca devemos mudar o estado diretamente em React.
+O gerenciador de eventos não é uma função, mas uma **atribuição de variável**, e React, mais uma vez, emitirá um aviso no console. Esta tentativa também é falha no sentido de que nunca devemos mudar diretamente o estado em React.
 
 Vejamos o próximo exemplo:
 

@@ -253,7 +253,7 @@ Durante este curso, todas as funções serão definidas usando a sintaxe de seta
 
 ```js
 const Header = (props) => {
-  console.log(props) // linha destacada
+  console.log(props) // highlight-line
   return <h1>{props.course}</h1>
 }
 ```
@@ -264,7 +264,7 @@ Se e <i>quando</i> você encontrar a mensagem de erro:
 
 ... tenha em mente o explicado [aqui](/pt/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
-**N.B.:** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
+**N.B. (Nota Bene):** o conteúdo dos exercícios foram deixados no idioma original da tradução (inglês) por questões de conveniência, visto a revisão que os mantenedores do curso devem fazer no código enviado ao sistema de avaliação da Universidade de Helsinque. Desta forma, escreva suas aplicações utilizando os mesmos termos usados nas variáveis, componentes, etc que estão em inglês.
 
   <h4>1.3: course information — 3º passo</h4>
 
@@ -392,11 +392,11 @@ const arto = {
   nome: 'Arto Hellas',
   idade: 35,
   educacao: 'PhD', // *educação
-  // começo
+  // highlight-start
   cumprimentar: function() { // *saudação
     console.log('olá, meu nome é ' + this.nome)
   },
-  // final
+  // highlight-end
 }
 
 arto.cumprimentar()  // "olá, meu nome é Arto Hellas" é impresso
@@ -414,11 +414,11 @@ const arto = {
   },
 }
 
-// começo
+// highlight-start
 arto.envelhecer = function() {
   this.idade += 1
 }
-// final
+// highlight-end
 
 console.log(arto.idade)   // 35 é impresso
 arto.envelhecer()
@@ -435,11 +435,11 @@ const arto = {
   cumprimentar: function() {
     console.log('olá, meu nome é ' + this.nome)
   },
-  // começo
+  // highlight-start
   fazerAdicao: function(a, b) { // *fazerAdição
     console.log(a + b)
   },
-  // final
+  // highlight-end
 }
 
 arto.fazerAdicao(1, 4)        // 5 é impresso
@@ -473,7 +473,7 @@ const arto = {
   },
 }
 
-setTimeout(arto.cumprimentar, 1000)  // linha destacada
+setTimeout(arto.cumprimentar, 1000)  // highlight-line
 ```
 
 Como mencionado, o valor de _this_ em JavaScript é definido com base na forma como o método é chamado. Quando o <em>setTimeout</em> está chamando o método, é o motor JavaScript que realmente chama o método e, nesse ponto, _this_ se refere ao objeto global.

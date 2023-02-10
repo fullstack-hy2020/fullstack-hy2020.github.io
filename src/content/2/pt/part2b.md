@@ -7,9 +7,9 @@ lang: pt
 
 <div class="content">
 
-Let's continue expanding our application by allowing users to add new notes. You can find the code for our current application [here](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1). 
+Vamos continuar expandindo nossa aplicação permitindo que os usuários adicionem novas notas. Você pode encontrar o código para nossa aplicação atual [aqui](https://github.com/fullstack-hy2020/part2-notes/tree/part2-1).
 
-To get our page to update when new notes are added it's best to store the notes in the <i>App</i> component's state. Let's import the [useState](https://reactjs.org/docs/hooks-state.html) function and use it to define a piece of state that gets initialized with the initial notes array passed in the props. 
+Para que a página seja atualizada quando novas notas são adicionadas, armazene as notas no estado do componente <i>App</i>. Vamos importar a função [useState](https://reactjs.org/docs/hooks-state.html) e usá-la para definir um pedaço de estado que é inicializado com o array das notas iniciais passado nas props.
 
 ```js
 import { useState } from 'react' // highlight-line
@@ -17,6 +17,11 @@ import Note from './components/Note'
 
 const App = (props) => { // highlight-line
   const [notes, setNotes] = useState(props.notes) // highlight-line
+  /* 
+    "notes" traduz-se como "notas"
+    "setNotes" traduz-se, grosso modo, como "definirNotas"
+    - Versão reduzida: "defNotas"
+  */
 
   return (
     <div>
@@ -33,7 +38,7 @@ const App = (props) => { // highlight-line
 export default App 
 ```
 
-The component uses the <em>useState</em> function to initialize the piece of state stored in <em>notes</em> with the array of notes passed in the props:
+O componente usa a função <em>useState</em> para inicializar o pedaço de estado armazenado em <em>notes</em> com o array de notas passado nas props:
 
 ```js
 const App = (props) => { 
@@ -43,11 +48,11 @@ const App = (props) => {
 }
 ```
 
-We can also use React Developer Tools to see that this really happens:
+Também podemos usar o "React Developer Tools" para ver o que realmente está acontecendo:
 
 ![](../../images/2/30.png)
 
-If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
+Se quiséssemos inicializá-la com uma lista vazia de notas, definiríamos o valor inicial como um array vazio e, como as props não seriam utilizadas, poderíamos omitir o parâmetro <em>props</em> da definição da função:
 
 ```js
 const App = () => { 
@@ -57,9 +62,9 @@ const App = () => {
 }  
 ```
 
-Let's stick with the initial value passed in the props for the time being.
+Vamos manter o valor inicial passado nas props por agora.
 
-Next, let's add an HTML [form](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) to the component that will be used for adding new notes.
+Em seguida, vamos adicionar um [formulário HTML](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms) (form) ao componente que será usado para adicionar novas notas.
 
 ```js
 const App = (props) => {
@@ -67,8 +72,9 @@ const App = (props) => {
 
 // highlight-start 
   const addNote = (event) => {
+    //"addNote" traduz-se, grosso modo, como "adicionarNota"
     event.preventDefault()
-    console.log('button clicked', event.target)
+    console.log('botão clicado', event.target)
   }
   // highlight-end   
 
@@ -91,51 +97,51 @@ const App = (props) => {
 }
 ```
 
-We have added the _addNote_ function as an event handler to the form element that will be called when the form is submitted, by clicking the submit button.
+Adicionamos a função _addNote_ como um gerenciador de evento ao elemento de formulário que será chamado quando o formulário for enviado, clicando no botão de envio <i>save</i>.
 
-We use the method discussed in [part 1](/en/part1/component_state_event_handlers#event-handling) for defining our event handler:
+Usamos o método discutido na [Parte 1](/en/part1/component_state_event_handlers#event-handling) para definir nosso gerenciador de evento:
 
 ```js
-const addNote = (event) => {
-  event.preventDefault()
-  console.log('button clicked', event.target)
+const addNote = (evento) => {
+  evento.preventDefault()
+  console.log('botão clicado', evento.target)
 }
 ```
 
-The <em>event</em> parameter is the [event](https://reactjs.org/docs/handling-events.html) that triggers the call to the event handler function: 
+O parâmetro <em>event</em> é o [event](https://reactjs.org/docs/handling-events.html) (evento) que aciona a chamada para a função gerenciadora de evento:
 
+O gerenciador de eventos chama imediatamente o método <em>event.preventDefault()</em>, o que "impede a ação padrão" (prevents the default action) de enviar um formulário. A ação padrão causaria, [entre outras coisas](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), a recarga da página.
 
-The event handler immediately calls the <em>event.preventDefault()</em> method, which prevents the default action of submitting a form. The default action would, [among other things](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), cause the page to reload.
+O alvo do evento armazenado em _event.target_ é registrado no console:
 
+![console mostrando o botão clicado com o objeto formulário](../../images/2/6e.png)
 
-The target of the event stored in _event.target_ is logged to the console:
+O alvo neste caso é o formulário que definimos em nosso componente.
 
-![button clicked with form object console](../../images/2/6e.png)
+Como acessamos os dados armazenados no elemento <i>input</i> do formulário?
 
+### Um componente controlado
 
-The target in this case is the form that we have defined in our component.
+Existem muitas maneiras de fazer isso: o primeiro método que vamos utilizar é através do uso de componentes [controlados](https://reactjs.org/docs/forms.html#controlled-components) (controlled components).
 
-How do we access the data contained in the form's <i>input</i> element?
-
-### Controlled component
-
-There are many ways to accomplish this; the first method we will take a look at is through the use of so-called [controlled components](https://reactjs.org/docs/forms.html#controlled-components).
-
-
-Let's add a new piece of state called <em>newNote</em> for storing the user-submitted input **and** let's set it as the <i>input</i> element's <i>value</i> attribute:
+Vamos adicionar um novo pedaço de estado chamado <em>newNote</em> para armazenar a entrada fornecida pelo usuário **e** vamos defini-lo como o atributo <i>value</i> do elemento <i>input</i> (entrada):
 
 ```js
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   // highlight-start
   const [newNote, setNewNote] = useState(
-    'a new note...'
+    /* 
+      "newNote" traduz-se como "novaNota"
+      "setNewNote" traduz-se, grosso modo, como "defNovaNota"
+    */
+    'uma nova nota...'
   ) 
   // highlight-end
 
   const addNote = (event) => {
     event.preventDefault()
-    console.log('button clicked', event.target)
+    console.log('botão clicado', event.target)
   }
 
   return (
@@ -155,25 +161,25 @@ const App = (props) => {
 }
 ```
 
-The placeholder text stored as the initial value of the <em>newNote</em> state appears in the <i>input</i> element, but the input text can't be edited. The console displays a warning that gives us a clue as to what might be wrong:
+O texto do espaço reservado armazenado como o valor inicial do estado <em>newNote</em> aparece no elemento <i>input</i>, mas o texto de entrada (input text) não é editável. O console exibe um aviso que nos dá uma dica do que pode estar errado:
 
-![provided value to prop without onchange console error](../../images/2/7e.png)
+![console exibindo erro de valor fornecido para prop sem onchange](../../images/2/7e.png)
 
-Since we assigned a piece of the <i>App</i> component's state as the <i>value</i> attribute of the input element, the <i>App</i> component now [controls](https://reactjs.org/docs/forms.html#controlled-components) the behavior of the input element.
+A partir do momento que atribuímos um pedaço do estado do componente <i>App</i> como o atributo <i>value</i> do elemento de entrada, o componente <i>App</i> passou a controlar o comportamento do elemento de entrada.
 
-To enable editing of the input element, we have to register an <i>event handler</i> that synchronizes the changes made to the input with the component's state:
+Para habilitar a edição do elemento de entrada, precisamos registrar um <i>gerenciador de evento</i> que sincroniza as mudanças feitas na entrada com o estado do componente:
 
 ```js
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState(
-    'a new note...'
+    'uma nova nota...'
   ) 
 
   // ...
 
 // highlight-start
-  const handleNoteChange = (event) => {
+  const handleNoteChange = (event) => { // ou "gerEntradaDeNota"
     console.log(event.target.value)
     setNewNote(event.target.value)
   }
@@ -199,7 +205,7 @@ const App = (props) => {
 }
 ```
 
-We have now registered an event handler to the <i>onChange</i> attribute of the form's <i>input</i> element:
+Agora registramos um gerenciador de evento para o atributo <i>onChange</i> do elemento <i>input</i> do formulário:
 
 ```js
 <input
@@ -208,7 +214,7 @@ We have now registered an event handler to the <i>onChange</i> attribute of the 
 />
 ```
 
-The event handler is called every time <i>a change occurs in the input element</i>. The event handler function receives the event object as its <em>event</em> parameter:
+O gerenciador de evento é chamado toda vez que <i>ocorre uma mudança no elemento de entrada</i>. A função do gerenciador de evento recebe o objeto de evento como seu parâmetro <em>event</em>:
 
 ```js
 const handleNoteChange = (event) => {
@@ -217,19 +223,19 @@ const handleNoteChange = (event) => {
 }
 ```
 
-The <em>target</em> property of the event object now corresponds to the controlled <i>input</i> element, and <em>event.target.value</em> refers to the input value of that element.
+A propriedade <em>target</em> do objeto "event" agora corresponde ao elemento de entrada controlado, e <em>event.target.value</em> se refere ao valor (value) de entrada desse elemento.
 
-Note that we did not need to call the _event.preventDefault()_ method like we did in the <i>onSubmit</i> event handler. This is because no default action occurs on an input change, unlike a form submission.
+Observe que não precisamos chamar o método _event.preventDefault()_ como fizemos no gerenciador de evento <i>onSubmit</i>. Isso ocorre porque não há uma ação padrão em uma mudança de entrada, ao contrário do que ocorre em um envio de formulário.
 
-You can follow along in the console to see how the event handler is called:
+É possível acompanhar no console como o gerenciador de eventos é chamado:
 
-![multiple console calls with typing text](../../images/2/8e.png)
+![múltiplas chamadas no console ao digitar typing text](../../images/2/8e.png)
 
-You did remember to install [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi), right? Good. You can directly view how the state changes from the React Devtools tab:
+Você se lembrou de instalar o [React devtools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) (Ferramentas do Desenvolvedor React), certo? Ótimo. Você pode ver diretamente como o estado muda na guia "Componentes":
 
-![state changes in react devtools shows typing too](../../images/2/9ea.png)
+![mudanças de estado no react devtools mostrando a digitação](../../images/2/9ea.png)
 
-Now the <i>App</i> component's <em>newNote</em> state reflects the current value of the input, which means that we can complete the <em>addNote</em> function for creating new notes:
+Agora, o estado <em>newNote</em> do componente <i>App</i> reflete o valor atual do elemento de entrada, o que significa que podemos completar a função <em>addNote</em> para criar novas notas:
 
 ```js
 const addNote = (event) => {
@@ -245,41 +251,42 @@ const addNote = (event) => {
 }
 ```
 
-First, we create a new object for the note called <em>noteObject</em> that will receive its content from the component's <em>newNote</em> state. The unique identifier <i>id</i> is generated based on the total number of notes. This method works for our application since notes are never deleted. With the help of the <em>Math.random()</em> function, our note has a 50% chance of being marked as important.
+Primeiramente, criamos um novo objeto para a nota (variável que cria as notas com suas propriedades) chamada <em>noteObject</em> (ou "objetoNota") que receberá seu conteúdo do estado <em>newNote</em> do componente. O identificador único <i>id</i> é gerado com base no número total de notas. Este método funciona para a nossa aplicação, já que as nossas notas nunca são excluídas. Com a ajuda da função <em>Math.random()</em>, a nossa nota tem 50% de chance de ser marcada como importante.
 
-The new note is added to the list of notes using the [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) array method, introduced in [part 1](/en/part1/java_script#arrays):
+A nova nota é adicionada à lista de notas usando o método de array [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) (concatenar), apresentado na [Parte 1](/pt/part1/java_script#arrays):
 
 ```js
 setNotes(notes.concat(noteObject))
 ```
 
-The method does not mutate the original <em>notes</em> array, but rather creates <i>a new copy of the array with the new item added to the end</i>. This is important since we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React!
+O método não muda o array original <em>notes</em>, porém, cria <i>uma nova cópia do array com o novo item adicionado no final</i>. Isso é importante, já que nós [nunca devemos mudar diretamente o estado](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) em React!
 
-The event handler also resets the value of the controlled input element by calling the <em>setNewNote</em> function of the <em>newNote</em> state:
+O gerenciador de eventos também limpa o valor do elemento de entrada controlado chamando a função <em>setNewNote</em> do estado <em>newNote</em>:
 
 ```js
 setNewNote('')
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
+É possível encontrar o código atual completo da nossa aplicação na branch <i>part2-2</i> [neste repositório do GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-2).
 
-### Filtering Displayed Elements
+### Filtragem dos elementos exibidos
 
-Let's add some new functionality to our application that allows us to only view the important notes.
+Vamos adicionar algumas novas funcionalidades à nossa aplicação que nos permitam visualizar apenas as notas importantes.
 
-Let's add a piece of state to the <i>App</i> component that keeps track of which notes should be displayed:
+Vamos adicionar um pedaço de estado ao componente <i>App</i> que vai manter o registro das notas que devem ser exibidas:
 
 ```js
 const App = (props) => {
   const [notes, setNotes] = useState(props.notes) 
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true) // highlight-line
-  
+  // "exibirTudo" e "defExibirTudo", respectivamente.
+
   // ...
 }
 ```
 
-Let's change the component so that it stores a list of all the notes to be displayed in the <em>notesToShow</em> variable. The items on the list depend on the state of the component:
+Modifiquemos o componente para que ele armazene uma lista de todas as notas a serem exibidas na variável <em>notesToShow</em>. Os itens na lista dependem do estado do componente:
 
 ```js
 import { useState } from 'react'
@@ -294,6 +301,7 @@ const App = (props) => {
 
 // highlight-start
   const notesToShow = showAll
+    // "notesToShow" traduz-se como "notasParaExibir"
     ? notes
     : notes.filter(note => note.important === true)
 // highlight-end
@@ -312,7 +320,7 @@ const App = (props) => {
 }
 ```
 
-The definition of the <em>notesToShow</em> variable is rather compact:
+A definição da variável <em>notesToShow</em> é bastante compacta:
 
 ```js
 const notesToShow = showAll
@@ -320,42 +328,42 @@ const notesToShow = showAll
   : notes.filter(note => note.important === true)
 ```
 
-The definition uses the [conditional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) operator also found in many other programming languages.
+A definição utiliza o operador [condicional](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) (ou operador ternário) encontrado também em muitas outras linguagens de programação.
 
-The operator functions as follows. If we have:
+O operador funciona da seguinte maneira. Se tivermos...
 
 ```js
 const result = condition ? val1 : val2
 ```
 
-the <em>result</em> variable will be set to the value of <em>val1</em> if <em>condition</em> is true. If <em>condition</em> is false, the <em>result</em> variable will be set to the value of<em>val2</em>.
+... a variável <em>result</em> será definida com o valor de <em>val1</em> se <em>condition</em> for verdadeiro. Se <em>condition</em> for falso, a variável <em>result</em> será definida com o valor de <em>val2</em>.
 
-If the value of <em>showAll</em> is false, the <em>notesToShow</em> variable will be assigned to a list that only contains notes that have the <em>important</em> property set to true. Filtering is done with the help of the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method:
+Se o valor de <em>showAll</em> for falso, a variável <em>notesToShow</em> será atribuída a uma lista que contém somente as notas que possuem a propriedade <em>important</em> definida como verdadeira. A filtragem é feita com a ajuda do método de array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) (filtrar):
 
 ```js
 notes.filter(note => note.important === true)
 ```
 
-The comparison operator is redundant, since the value of <em>note.important</em> is either <i>true</i> or <i>false</i>, which means that we can simply write:
+O operador ternário é redundante aqui, já que o valor de <em>note.important</em> é verdadeiro ou falso, o que significa que podemos simplesmente escrever:
 
 ```js
 notes.filter(note => note.important)
 ```
 
-The reason we showed the comparison operator first was to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not work as expected in all situations and it's safer to use <em>val1 === val2</em> exclusively in comparisons. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
+A razão de mostrarmos o operador de comparação primeiro foi para enfatizar um detalhe importante: em JavaScript, <em>val1 == val2</em> não funciona como esperado em todas as situações e é mais seguro usar <em>val1 === val2</em> exclusivamente em comparações. Leia mais sobre o assunto [aqui](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
 
-You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state.
+É possível testar a funcionalidade de filtragem mudando o valor inicial do estado <em>showAll</em>.
 
-Next, let's add functionality that enables users to toggle the <em>showAll</em> state of the application from the user interface.
+Em seguida, vamos adicionar a funcionalidade que permite aos usuários alternar o estado <em>showAll</em> da aplicação a partir da interface do usuário (GUI).
 
-The relevant changes are shown below:
+As alterações relevantes são mostradas abaixo:
 
 ```js
 import { useState } from 'react' 
 import Note from './components/Note'
 
 const App = (props) => {
-  const [notes, setNotes] = useState(props.notes) 
+  const [notes, setNotes] = useState(props.notes)
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
@@ -368,6 +376,7 @@ const App = (props) => {
       <div>
         <button onClick={() => setShowAll(!showAll)}>
           show {showAll ? 'important' : 'all' }
+            {/* exibirTudo ? 'importante' : 'tudo' */}
         </button>
       </div>
 // highlight-end            
@@ -382,37 +391,36 @@ const App = (props) => {
 }
 ```
 
-
-The displayed notes (all versus important) are controlled with a button. The event handler for the button is so simple that it has been defined directly in the attribute of the button element. The event handler switches the value of _showAll_ from true to false and vice versa:
+As notas exibidas ("all" versus "important") são controladas com um botão. O gerenciador de eventos do botão é tão simples que foi definido diretamente no atributo do elemento do botão. O gerenciador de eventos alterna o valor de _showAll_ de verdadeiro para falso e vice-versa:
 
 ```js
 () => setShowAll(!showAll)
 ```
 
-The text of the button depends on the value of the <em>showAll</em> state:
+O texto do botão depende do valor do estado <em>showAll</em>:
 
 ```js
 show {showAll ? 'important' : 'all'}
 ```
 
-You can find the code for our current application in its entirety in the <i>part2-3</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
+Você pode encontrar o código da nossa aplicação atual na íntegra na branch <i>part2-3</i> [neste repositório GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-3).
 </div>
 
 <div class="tasks">
 
-<h3>Exercises 2.6.-2.10.</h3>
+<h3>Exercícios 2.6 a 2.10</h3>
 
-In the first exercise, we will start working on an application that will be further developed in the later exercises. In related sets of exercises, it is sufficient to return the final version of your application. You may also make a separate commit after you have finished each part of the exercise set, but doing so is not required.
+Em nosso primeiro exercício, vamos começar a trabalhar em uma aplicação que será desenvolvida mais tarde em exercícios subsequentes. Em exercícios que fazem parte de conjuntos relacionados, é mais que suficiente retornar a versão final da sua aplicação. Você também pode fazer um commit separado depois de ter terminado cada parte do conjunto de exercícios, mas isso não é obrigatório.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. You likely **do not want** your project to be a repository, so simply run the _rm -rf .git_ command at the root of your application.
+**AVISO**: "create-react-app" transformará automaticamente seu projeto em um repositório git, a menos que você crie sua aplicação dentro de um repositório git já existente.**Você muito provavelmente não quer que cada um de seus projetos seja um repositório separado**, então basta executar o comando _rm -rf .git_ na raiz de sua aplicação para aplicar as modificações.
 
-<h4>2.6: The Phonebook Step1</h4>
+<h4>2.6: The Phonebook — 1º passo</h4>
 
-Let's create a simple phonebook. <i>**In this part, we will only be adding names to the phonebook.**</i>
+Vamos criar uma lista telefônica bem simples. <i>**Nesta parte, vamos adicionar apenas nomes à lista telefônica.**</i>
 
-Let us start by implementing the addition of a person to the phonebook.
+Vamos começar implementando a funcionalidade que adiciona uma pessoa à lista telefônica.
 
-You can use the code below as a starting point for the <i>App</i> component of your application:
+Você pode usar o código abaixo como ponto de partida para o componente <i>App</i> da sua aplicação:
 
 ```js
 import { useState } from 'react'
@@ -443,59 +451,60 @@ const App = () => {
 export default App
 ```
 
-The <em>newName</em> state is meant for controlling the form input element.
+O estado <em>newName</em> é destinado a controlar o elemento de entrada do formulário.
 
-Sometimes it can be useful to render state and other variables as text for debugging purposes. You can temporarily add the following element to the rendered component:
+Pode ser útil às vezes renderizar o estado e outras variáveis, como texto, para fins de depuração. Você pode adicionar temporariamente o seguinte elemento ao componente renderizado:
 
 ```
 <div>debug: {newName}</div>
 ```
 
-It's also important to put what we learned in the [debugging React applications](/en/part1/a_more_complex_state_debugging_react_apps) chapter of part one into good use. The [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) extension is <i>incredibly</i> useful for tracking changes that occur in the application's state.
+Também é importante colocar em prática o que aprendemos no capítulo sobre [depuração de aplicações React](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react) da primeira parte. A extensão [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi) é <i>incrivelmente</i> útil para rastrear as alterações que ocorrem no estado da aplicação.
 
-After finishing this exercise your application should look something like this:
+Depois de concluir este exercício, sua aplicação deve ficar mais ou menos parecida com isto:
 
-![screenshot of 2.6 finished](../../images/2/10e.png)
+![captura de tela do exercício 2.6 finalizado](../../images/2/10e.png)
 
-Note the use of the React developer tools extension in the picture above!
+Atente-se ao uso da extensão "React developer tools" na imagem acima!
 
-**NB:**
+**N.B. (Nota Bene):**
 
+- Você pode usar o nome da pessoa como um valor da propriedade <i>key</i>; e
+- Lembre-se de impedir a ação padrão de envio de formulários HTML! (preventDefault)
 
-- you can use the person's name as a value of the <i>key</i> property
-- remember to prevent the default action of submitting HTML forms!
+<h4>2.7: The Phonebook — 2º passo</h4>
 
-<h4>2.7: The Phonebook Step2</h4>
+Impeça que o usuário possa adicionar nomes que já existam na lista telefônica. JavaScript têm inúmeros [métodos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) adequados para realizar esta tarefa. Tenha em mente [como funciona a igualdade de objetos](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) em JavaScript.
 
-Prevent the user from being able to add names that already exist in the phonebook. JavaScript arrays have numerous suitable [methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) for accomplishing this task. Keep in mind [how object equality works](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) in Javascript.
+Emita uma aviso com o comando [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) (alerta) quando o usuário tentar fazer isso:
 
-Issue a warning with the [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) command when such an action is attempted:
+![captura de tela mostrando o exemplo do exercício 2.7](../../images/2/11e.png)
+<i>Tradução do alerta em tela: "Arto Hellas já foi adicionado à lista telefônica"</i>
 
-![2.7 sample screenshot](../../images/2/11e.png)
-
-**Hint:** when you are forming strings that contain values from variables, it is recommended to use a [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
+**Dica:** ao formar strings que contêm valores de variáveis, recomenda-se usar [template strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals):
 
 ```js
 `${newName} is already added to phonebook`
+// `${newName} já foi adicionado(a) à lista telefônica!`
 ```
 
-If the <em>newName</em> variable holds the value <i>Arto Hellas</i>, the template string expression returns the string
+Se a variável <em>newName</em> contiver o valor <i>Arto Hellas</i>, a expressão template string retornará a string:
 
 ```js
 `Arto Hellas is already added to phonebook`
 ```
 
-The same could be done in a more Java-like fashion by using the plus operator:
+O mesmo pode ser feito de um "jeito mais Java" usando o operador de soma (+):
 
 ```js
 newName + ' is already added to phonebook'
 ```
 
-Using template strings is the more idiomatic option and the sign of a true JavaScript professional.
+Template strings é a opção mais idiomática, além de que seu uso é o sinal que representa um verdadeiro profissional JavaScript.
 
-<h4>2.8: The Phonebook Step3</h4>
+<h4>2.8: The Phonebook — 3º passo</h4>
 
-Expand your application by allowing users to add phone numbers to the phone book. You will need to add a second <i>input</i> element to the form (along with its own event handler):
+Expanda sua aplicação permitindo com que os usuários adicionem números de telefone à lista telefônica. Você precisará adicionar um segundo elemento de <i>entrada</i> (input) ao formulário (junto com seu próprio gerenciador de eventos):
 
 ```js
 <form>
@@ -505,21 +514,19 @@ Expand your application by allowing users to add phone numbers to the phone book
 </form>
 ```
 
+Neste ponto, a aplicação pode ficar mais ou menos assim. A imagem também exibe o estado da aplicação com a ajuda da ferramenta [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
 
-At this point, the application could look something like this. The image also displays the application's state with the help of [React developer tools](https://chrome.google.com/webstore/detail/react-developer-tools/fmkadmapgofadopljbjfkapdkoienihi):
+![captura de tela do exercício 2.8](../../images/2/12e.png)
 
-![2.8 sample screenshot](../../images/2/12e.png)
+<h4>2.9*: The Phonebook — 4º passo</h4>
 
-<h4>2.9*: The Phonebook Step4</h4>
+Implemente um campo de pesquisa que possa ser usado para filtrar a lista de pessoas por nome:
 
-Implement a search field that can be used to filter the list of people by name:
+![captura de tela do exercício 2.9](../../images/2/13e.png)
 
-![2.9 sample screenshot](../../images/2/13e.png)
+Você pode implementar o campo de pesquisa como um elemento <i>input</i> que é colocado fora do formulário HTML. A lógica de filtragem mostrada na imagem é <i>case insensitive</i>, o que significa que se você pesquisar por <i>arto</i>, também há o retorno de resultados que contêm "Arto" com o A maiúsculo.
 
-You can implement the search field as an <i>input</i> element that is placed outside the HTML form. The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
-
-
-**NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g.
+**N.B.:** Quando se está trabalhando em nova funcionalidade, é útil inserir em sua aplicação um "código de teste" — como alguns dados fantasiosos de pessoas — desta forma:
 
 ```js
 const App = () => {
@@ -534,15 +541,15 @@ const App = () => {
 }
 ```
 
-This saves you from having to manually input data into your application for testing out your new functionality.
+Isso lhe economiza o trabalho de ter que ficar inserindo dados manualmente na sua aplicação para testar a nova funcionalidade.
 
-<h4>2.10: The Phonebook Step5</h4>
+<h4>2.10: The Phonebook — 5º passo</h4>
 
-If you have implemented your application in a single component, refactor it by extracting suitable parts into new components. Maintain the application's state and all event handlers in the <i>App</i> root component.
+Se você implementou sua aplicação em um único componente, refatore-o extraindo e transformando as partes corretas do código em novos componentes. Mantenha o estado da aplicação e todos os gerenciadores de eventos no componente raiz <i>App</i>.
 
-It is sufficient to extract <i>**three**</i> components from the application. Good candidates for separate components are, for example, the search filter, the form for adding new people to the phonebook, a component that renders all people from the phonebook, and a component that renders a single person's details.
+Já é suficiente extrair <i>**três**</i> componentes da aplicação. São boas opções para tornar em componentes separados, por exemplo, o filtro de pesquisa, o formulário para adicionar novas pessoas à lista telefônica, um componente que renderiza todas as pessoas da lista telefônica e um componente que renderiza os detalhes de uma única pessoa.
 
-The application's root component could look similar to this after the refactoring. The refactored root component below only renders titles and lets the extracted components take care of the rest.
+O componente raiz da aplicação após a refatoração pode ficar parecido com o do exemplo abaixo. O componente raiz refatorado abaixo renderiza apenas os títulos, enquanto que deixa os componentes extraídos cuidarem do resto.
 
 ```js
 const App = () => {
@@ -568,8 +575,6 @@ const App = () => {
 }
 ```
 
-**NB**: You might run into problems in this exercise if you define your components "in the wrong place". Now would be a good time to rehearse 
-the chapter [do not define a component in another component](/en/part1/a_more_complex_state_debugging_react_apps#do-not-define-components-within-components)
-from the last part.
+**N.B.**: Você pode ter problemas neste exercício se definir seus componentes "no lugar errado". Agora, é definitivamente uma boa ideia revisar o capítulo da seção anterior: [Não defina Componentes dentro de Componentes](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#nao-defina-componentes-dentro-de-componentes).
 
 </div>
