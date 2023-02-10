@@ -1,7 +1,7 @@
 ---
 mainImage: ../../../images/part-9.svg
 part: 9
-letter: e
+letter: f
 lang: en
 ---
 
@@ -13,7 +13,8 @@ When diving into an existing codebase for the first time, it is good to get an o
 If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the <i>package.json</i>.
 It is always a good idea to start the application and click around to verify you have a functional development environment.
 
-You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.
+You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have
+different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.
 
 TypeScript provides types for what kind of data structures, functions, components, and state to expect.  You can try looking for <i>types.ts</i> or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project.
 
@@ -36,119 +37,242 @@ For example, the frontend has a state and may want to keep data in objects or ma
 
 The folder structure looks as follows:
 
-![vscode folder structure for patientor](../../images/9/34new.png)
+![vscode folder structure for patientor](../../images/9/34a.png)
 
-Besides the component *App*, a directory for services there are currently two main components: *AddPatientModal* and *PatientListPage*.
+As you would expect, there are currently two main components: *AddPatientModal* and *PatientListPage*. The <i>state</i> folder contains state handling for the frontend.
+The main functionality of the code in the <i>state</i> folder is to keep our data in one place and offer simple actions to alter the state of our app.
 
-There is nothing very surprising in the code. The state and communication with the backend is implemented with _useState_ hook and Axios, simillarly to the notes app in the previous section. [Material UI](http://localhost:8000/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implementer with [React Router](http://localhost:8000/en/part7/react_router), bot familliar to us from part 7 of the course.
+### State handling
 
-From typing point of view there are couple of interesting things. Component _App_ passes the function _setPatients_ as a prop to the component _PatientListPage_:
+Let's study the state handling a bit closer as a lot of stuff seems to be happening under the hood and it differs a bit from the methods used in the course so far.
+
+The state management is built using the React Hooks [useContext](https://reactjs.org/docs/hooks-reference.html#usecontext) and [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer). This is quite a good setup because we know the app will be rather small and we don't want to use <i>redux</i> or other similar libraries for state management.
+There are a lot of good materials, like [this article](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe), about this approach to state management.
+
+The approach taken in this app uses the React [context](https://reactjs.org/docs/context.html) that, according to its documentation:
+
+> <i>... is designed to share data that can be considered "global" for a tree of React components, such as the current authenticated user, theme, or preferred language.</i>
+
+In our case, the "global", shared data is the application state <i>and</i> the dispatch function that is used to make changes to data. In many ways, our code works much like the Redux-based state management we used in [part 6](/en/part6), but is more lightweight since it does not require the use of any external libraries. This part assumes that you are at least familiar with the way Redux works, e.g. you should have covered at least [the first section](/en/part6/flux_architecture_and_redux) of part 6.
+
+The [context](https://reactjs.org/docs/context.html) of our application has a tuple containing the app state and the dispatcher for changing the state.
+The application state is typed as follows:
 
 ```js
-const App = () => {
-  const [patients, setPatients] = useState<Patient[]>([]); // highlight-lines
+export type State = {
+  patients: { [id: string]: Patient };
+};
+```
 
-  // ...
-  
+The state is an object with one key, *patients*, which has a [dictionary](https://www.typescriptlang.org/docs/handbook/2/indexed-access-types.html) or simply put an object with string keys and with *Patient* objects as values. The index can only be a *string* or a *number* as you can access the object values using those. This enforces that the state conforms to the form we want, and prevents developers from misusing the state.
+
+But be aware of one thing! When a type is declared like the type for *patients*, TypeScript does not have any way of knowing if the key you are trying to access exists or not. So if we were to try to access a patient by a non-existing id, the compiler would think that the returned value is of type *Patient* and no error would be thrown when trying to access its properties:
+
+```js
+const myPatient = state.patients['non-existing-id'];
+console.log(myPatient.name); // no error, TypeScript believes that myPatient is of type Patient
+```
+
+To fix this, we could define the type for patient values to be a union of *Patient* and *undefined* in the following way:
+
+```js
+export type State = {
+  patients: { [id: string]: Patient | undefined };
+};
+```
+
+That would cause the compiler to give the following warning:
+
+```js
+const myPatient = state.patients['non-existing-id'];
+console.log(myPatient.name); // error, Object is possibly 'undefined'
+```
+
+This type of additional type security is always good to implement if you e.g. use data from external sources or use the value of a user input to access data in your code. But if you are sure that you only handle data that actually exists, then there is no one stopping you from using the first presented solution.
+
+Even though we are not using them in this course part, it is good to mention that a more type-strict way would be to use [Map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map) objects, to which you can declare a type for both the key and the content. The Map's accessor function *get()* always returns a union of the declared value type and undefined, so TypeScript automatically requires you to perform validity checks on data retrieved from a map:
+
+```js
+interface State {
+  patients: Map<string, Patient>;
+}
+...
+const myPatient = state.patients.get('non-existing-id'); // type for myPatient is now Patient | undefined 
+console.log(myPatient.name); // error, Object is possibly 'undefined'
+
+console.log(myPatient?.name); // valid code, but will log 'undefined'
+```
+
+Just like with redux, all state manipulation is done by a reducer. It is defined in the file <i>reducer.ts</i> along with the type *Action*, which looks as follows:
+
+```js
+export type Action =
+  | {
+      type: "SET_PATIENT_LIST";
+      payload: Patient[];
+    }
+  | {
+      type: "ADD_PATIENT";
+      payload: Patient;
+    };
+```
+
+The reducer looks quite similar to the ones we wrote in [part 6](/en/part6/many_reducers#combined-reducers) before we started to use the Redux Toolkit. It changes the state for each type of action:
+
+```js
+export const reducer = (state: State, action: Action): State => {
+  switch (action.type) {
+    case "SET_PATIENT_LIST":
+      return {
+        ...state,
+        patients: {
+          ...action.payload.reduce(
+            (memo, patient) => ({ ...memo, [patient.id]: patient }),
+            {}
+          ),
+          ...state.patients
+        }
+      };
+    case "ADD_PATIENT":
+      return {
+        ...state,
+        patients: {
+          ...state.patients,
+          [action.payload.id]: action.payload
+        }
+      };
+    default:
+      return state;
+  }
+};
+```
+
+The main difference is that the state is now a dictionary (or an object), instead of the array that we used in [part 6](/en/part6/flux_architecture_and_redux#pure-functions-immutable).
+
+There are a lot of things happening in the file <i>state.tsx</i>, which takes care of setting up the context.
+The main ingredient is the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook
+used to create the state and the dispatch function, and pass them on to the [context provider](https://reactjs.org/docs/context.html#contextprovider):
+
+```js
+export const StateProvider = ({
+  reducer,
+  children
+}: StateProviderProps) => {
+  const [state, dispatch] = useReducer(reducer, initialState); // highlight-line
   return (
-    <div className="App">
-      <Router>
-        <Container>
-          <Routes>
-            // ...
-            <Route path="/" element={
-              <PatientListPage patients={patients} setPatients={setPatients} // highlight-lines
-            />} />
-          </Routes>
-        </Container>
-      </Router>
-    </div>
+    <StateContext.Provider value={[state, dispatch]}>  // highlight-line
+      {children}
+    </StateContext.Provider>
   );
 };
 ```
 
-In order to keep TypeScrip compiler happy, the props shoudl be typed. The typing look followin:
-
+The provider makes the *state* and the *dispatch* functions available in all of the components, thanks to the setup in <i>index.tsx</i>:
 
 ```js
-interface Props {
-  patients : Patient[]
-  setPatients: React.Dispatch<React.SetStateAction<Patient[]>>
-}
+import { reducer, StateProvider } from "./state";
 
-const PatientListPage = ({ patients, setPatients } : Props ) => { 
+ReactDOM.render(
+  <StateProvider reducer={reducer}>
+    <App />
+  </StateProvider>, 
+  document.getElementById('root')
+);
+```
+
+It also defines the *useStateValue* hook:
+
+```js
+export const useStateValue = () => useContext(StateContext);
+```
+
+and the components that need to access the state or dispatcher use it to get hold of those:
+
+```js
+import { useStateValue } from "../state";
+
+// ...
+
+const PatientListPage = () => {
+  const [{ patients }, dispatch] = useStateValue();
   // ...
 }
 ```
 
-So the function _setPatients_ has type _React.Dispatch<React.SetStateAction<Patient[]>>_. We can see the type in the editor when we hover over the function:
+Don't worry if this seems confusing; it will be until you have studied the [context's documentation](https://reactjs.org/docs/context.html) and its use in [state management](https://medium.com/@seantheurgel/react-hooks-as-state-management-usecontext-useeffect-usereducer-a75472a862fe). You do not need to understand all this completely to do the exercises!
 
-![](../../images/9/73new.png)
+It is quite common that when you start working on an existing codebase, you do not understand 100% of what happens under the hood in the beginning. If the app has been properly structured (and it has a proper set of tests), you can trust that if you make careful modifications, the app still works despite not understanding all the internal mechanisms. Over time, you will get a grasp on the more unfamiliar parts, but it does not happen overnight when working with a large codebase.
 
-The [React TypeScript cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) has a pretty nice list of typical Prop types, where we can seek for help if finding the proper typing for props is problematic.
+### Patient listing page
 
-_PatientListPage_ passes four props to the component _AddPatientModal_ component. Two of these props are functions. Let us have a look how these are typed:
+Let's go through the <i>PatientListPage/index.tsx</i> as you can take inspiration from there to help you fetch data from the backend and update the application's state.
+*PatientListPage* uses our custom hook to inject the state and the dispatcher for updating it.
+When we list the patients, we only need to destructure the *patients* property from the state:
 
 ```js
-const PatientListPage = ({ patients, setPatients } : Props ) => {
+import { useStateValue } from "../state";
 
-  const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [error, setError] = useState<string>();
-
+const PatientListPage = () => {
+  const [{ patients }, dispatch] = useStateValue();
   // ...
+}
+```
 
-  const closeModal = (): void => { // highlight-line
-    setModalOpen(false);
-    setError(undefined);
-  };
+We also use the app state created with the *useState* hook for managing modal visibility and form error handling:
 
-  const submitNewPatient = async (values: PatientFormValues) => { // highlight-line
-    // ...
-  };
-  // ...
+```js
+const [modalOpen, setModalOpen] = React.useState<boolean>(false);
+const [error, setError] = React.useState<string | undefined>();
+```
 
-  return (
-    <div className="App">
-      // ...
-      <AddPatientModal
-        modalOpen={modalOpen}
-        onSubmit={submitNewPatient} // highlight-line
-        error={error}
-        onClose={closeModal} // highlight-line
-      />
-    </div>
-  );
+We give the *useState* hook a type parameter, which is then applied to the actual state. So *modalOpen* is a *boolean* while *error* has the type *string | undefined*.
+Both set functions returned by the *useState* hook are functions that accept only arguments according to the type parameter given, eg. the exact type for *setModalOpen* function is `React.Dispatch<React.SetStateAction<boolean>>`.
+
+We also have the *openModal* and *closeModal* helper functions for better readability and convenience:
+
+```js
+const openModal = (): void => setModalOpen(true);
+
+const closeModal = (): void => {
+  setModalOpen(false);
+  setError(undefined);
 };
 ```
 
-Types look like the following:
+The frontend's types are based on what you have created when developing the backend in the previous part.
+
+When the component *App* mounts, it fetches patients from the backend using [Axios](https://github.com/axios/axios). Note how we are giving the *axios.get* function a type parameter to describe the type of the response data:
+
+````js
+React.useEffect(() => {
+  axios.get<void>(`${apiBaseUrl}/ping`);
+
+  const fetchPatientList = async () => {
+    try {
+      const { data: patients } = await axios.get<Patient[]>(
+        `${apiBaseUrl}/patients`
+      );
+      dispatch({ type: "SET_PATIENT_LIST", payload: patients });
+    } catch (error: unknown) {
+      let errorMessage = 'Something went wrong.'
+      if(axios.isAxiosError(error) && error.response) {
+        errorMessage += ' Error: ' + error.response.data.message;
+      }
+      console.error(errorMessage);
+    }
+  };
+  fetchPatientList();
+}, [dispatch]);
+````
+
+**A word of warning!** Passing a type parameter to Axios will not validate any data. It is quite dangerous especially if you are using external APIs. You can create custom validation functions that take in the whole payload and return the correct type, or you can use a type guard. Both are valid options. Many libraries also provide validation through different kinds of schemas (e.g. [io-ts](https://gcanti.github.io/io-ts/)). For simplicity's sake, we will continue to trust our work and trust that we will get data of the correct form from the backend.
+
+As our app is quite small, we will update the state by simply calling the *dispatch* function provided to us by the *useStateValue* hook.
+The compiler helps by making sure that we dispatch actions according to our *Action* type with a predefined type string and payload:
 
 ```js
-interface Props {
-  modalOpen: boolean;
-  onClose: () => void;
-  onSubmit: (values: PatientFormValues) => Promise<void>;
-  error?: string;
-}
-
-const AddPatientModal = ({ modalOpen, onClose, onSubmit, error }: Props) => {
-  // ...
-}
+dispatch({ type: "SET_PATIENT_LIST", payload: patients });
 ```
-
-_onClose_ is just a function that takes no parameters, and does not return anything, so the type is
-
-```js
-() => void
-```
-
-The type of _onSubmit_ is a bit more interesting, it has one parameter that has the type _PatientFormValues_. The return value of the function is _Promise<void>_. So again the function type is written with the arrow syntax:
-
-```js
-(values: PatientFormValues) => Promise<void>
-```
-
-The return value of a _async_ function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is _Promise<void>_.
 
 </div>
 
@@ -160,9 +284,9 @@ We will soon add a new type for our app, *Entry*, which represents a lightweight
 
 Before going into this, let us do some preparatory work.
 
-#### 9.20: Patientor, step1
+#### 9.20: patientor, step1
 
-Create an endpoint <i>/api/patients/:id</i> to the backend that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
+Create an endpoint <i>/api/patients/:id</i>  that returns all of the patient information for one patient, including the array of patient entries that is still empty for all the patients. For the time being, expand the backend types as follows:
 
 ```js
 // eslint-disable-next-line @typescript-eslint/no-empty-interface
@@ -179,30 +303,60 @@ export interface Patient {
   entries: Entry[] // highlight-line
 }
 
-export type NonSensitivePatient = Omit<Patient, 'ssn' | 'entries'>;  // highlight-line
+export type PublicPatient = Omit<Patient, 'ssn' | 'entries'>;  // highlight-line
 ```
 
 The response should look as follows:
 
 ![browser showing entries blank array when accessing patient](../../images/9/38a.png)
 
-#### 9.21: Patientor, step2
+#### 9.21: patientor, step2
 
 Create a page for showing a patient's full information in the frontend.
 
 The user should be able to access a patient's information by clicking the patient's name.
 
-Fetch the data from the endpoint created in the previous exercise.
+Fetch the data from the endpoint created in the previous exercise. After fetching the patient information from the backend, add the fetched information to the application's state. Do not fetch the information if it already is in the app state (i.e. if the user is visiting the same patient's information many times).
 
-You may use [MaterialUI](https://material-ui.com/) for the new components but that is up to you since our main focus now is TypeScript.
+Since we now have the state in the context, you'll need to define a new action type for updating an individual patient's data.
 
-You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the [React Router](https://reactrouter.com/en/main/start/tutorial) works.
+The Application uses [MaterialUI](https://material-ui.com/) for styling, which we covered in [part 7](/en/part7/more_about_styles). You may also use it for the new components but that is up to you since our main focus now is TypeScript.
+
+The Application also uses [React Router](https://reactrouter.com/en/main/start/tutorial) to control which view is visible in the frontend. You might want to have a look at [part 7](/en/part7/react_router) if you don't yet have a grasp on how the router works.
 
 The result could look like this:
 
 ![browser showing patientor with one patient](../../images/9/39x.png)
 
-The example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.
+Example uses [Material UI Icons](https://mui.com/components/material-icons/) to represent genders.
+
+**Note** that to access the id in the URL, you need to give [useParams](https://reactrouter.com/en/main/hooks/use-params) a proper type argument:
+
+```js
+const { id } = useParams<{ id: string }>();
+```
+
+#### 9.22: Patientor, step3
+
+Currently, we create *action* objects wherever we dispatch actions, e.g. the *App* component has the following:
+
+```js
+dispatch({
+  type: "SET_PATIENT_LIST", payload: patientListFromApi
+});
+```
+
+Define [action creator functions](/en/part6/flux_architecture_and_redux#action-creators) in the file <i>src/state/reducer.ts</i> and refactor the code to use them.
+
+For example, the *App* should become like the following:
+
+```js
+import { useStateValue, setPatientList } from "./state";
+
+// ...
+
+dispatch(setPatientList(patientListFromApi));
+```
 
 </div>
 
@@ -330,9 +484,9 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 <div class="tasks">
 
-### Exercises 9.22-9.25
+### Exercises 9.23-9.26
 
-#### 9.22: Patientor, step3
+#### 9.23: Patientor, step4
 
 Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those conform with the example data. Ensure that your backend returns the entries properly when you go to an individual patient's route:
 
@@ -340,7 +494,7 @@ Define the types *OccupationalHealthcareEntry* and *HospitalEntry* so that those
 
 Use types properly in the backend! For now, there is no need to do a proper validation for all the fields of the entries in the backend, it is enough e.g. to check that the field *type* has a correct value.
 
-#### 9.23: Patientor, step4
+#### 9.24: Patientor, step5
 
 Extend a patient's page in the frontend to list the *date*, *description* and *diagnoseCodes* of the patient's entries.
 
@@ -350,13 +504,13 @@ Your solution could look like this:
 
 ![browser showing list of diagnosis codes for patient](../../images/9/41.png)
 
-#### 9.24: Patientor, step5
+#### 9.25: Patientor, step6
 
 Fetch and add diagnoses to the application state from the <i>/api/diagnoses</i> endpoint. Use the new diagnosis data to show the descriptions for patient's diagnosis codes:
 
 ![browser showing list of codes and their descriptions for patient ](../../images/9/42.png)
 
-#### 9.25: Patientor, step6
+#### 9.26: Patientor, step7
 
 Extend the entry listing on the patient's page to include the Entry's details with a new component that shows the rest of the information of the patient's entries distinguishing different types from each other.
 
@@ -688,9 +842,9 @@ With this material, you should be able to complete the rest of this part's exerc
 
 <div class="tasks">
 
-### Exercises 9.26-9.30
+### Exercises 9.27-9.31
 
-#### 9.26: Patientor, step7
+#### 9.27: Patientor, step8
 
 We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
 
@@ -698,7 +852,7 @@ Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backe
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
-#### 9.27: Patientor, step8
+#### 9.28: Patientor, step9
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.
 
@@ -751,11 +905,11 @@ const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
 
 With small tweaks on types, the readily made component *SelectField* can be used for the health check rating.
 
-#### 9.29: Patientor, step9
+#### 9.29: Patientor, step10
 
 Extend your solution so that it displays an error message if some required values are missing or formatted incorrectly.
 
-#### 9.29: Patientor, step10
+#### 9.30: Patientor, step11
 
 Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
 
@@ -779,20 +933,8 @@ Note that if you need to alter the shown form based on user selections, you can 
 </Formik>
 ```
 
-#### 9.30: Patientor, step11
+#### 9.31: Patientor, step12
 
 Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
-
-### Submitting exercises and getting the credits
-
-Exercises of this part are submitted via [the submissions system](https://studies.cs.helsinki.fi/stats/courses/fs-typescript) just like in the previous parts, but unlike previous parts, the submission goes to a different "course instance". Remember that you have to finish at least 24 exercises to pass this part!
-
-Once you have completed the exercises and want to get the credits, let us know through the exercise submission system that you have completed the course:
-
-![Submissions](../../images/11/21.png)
-
-**Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
-
-You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.
 
 </div>
