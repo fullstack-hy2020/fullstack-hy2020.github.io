@@ -113,7 +113,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Fly.io/Render. We do have to generate a new production build of the frontend since changes thus far were only on our backend.
+The application should work almost as-is in Fly.io/Render. We do not have to generate a new production build of the frontend since changes thus far were only on our backend.
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Render.
 
