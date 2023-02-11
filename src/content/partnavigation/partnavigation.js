@@ -282,7 +282,8 @@ module.exports = {
       a: 'Flux-architecture y Redux',
       b: 'Muchos reducers',
       c: 'Comunicarse con el servidor en una aplicación redux',
-      d: 'conectar',
+      d: 'React Query, useReducer y  el contexto,
+      e: 'connect (la parte antigua)',
     },
     '7': {
       a: 'React-router',
@@ -302,7 +303,7 @@ module.exports = {
     '9': {
       a: 'Antecedentes e introducción',
       b: 'Primeros pasos con TypeScript',
-      c: 'Escribiendo la aplicación express',
+      c: 'Escribiendo una aplicación express',
       d: 'React con tipos',
     },
     '10': {
