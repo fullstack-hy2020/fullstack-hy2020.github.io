@@ -259,7 +259,7 @@ A nova nota é adicionada à lista de notas usando o método de array [concat](h
 setNotes(notes.concat(noteObject))
 ```
 
-O método não muda o array original <em>notes</em>, porém, cria <i>uma nova cópia do array com o novo item adicionado no final</i>. Isso é importante, já que nós [nunca devemos mudar diretamente o estado](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) em React!
+O método não muda o array original <em>notes</em>, porém, cria <i>uma nova cópia do array com o novo item adicionado ao final</i>. Isso é importante, já que nós [nunca devemos mudar diretamente o estado](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) em React!
 
 O gerenciador de eventos também limpa o valor do elemento de entrada controlado chamando a função <em>setNewNote</em> do estado <em>newNote</em>:
 

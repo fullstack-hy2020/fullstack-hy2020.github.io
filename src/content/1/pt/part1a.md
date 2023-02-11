@@ -381,7 +381,7 @@ const App = () => {
 }
 ```
 
-A página não vai exibir o conteúdo definido dentro do componente Footer e, em vez disso, o React cria apenas um elemento [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) vazio, ou seja, o elemento HTML incorporado em vez do elemento React personalizado com o mesmo nome. Se você mudar a primeira letra do nome do componente para maiúsculo, o React cria um elemento <i>div</i> definido no componente Footer, que é renderizado na página.
+A página não vai exibir o conteúdo definido dentro do componente Footer e, em vez disso, React cria apenas um elemento [footer](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/footer) vazio, ou seja, o elemento HTML incorporado em vez do elemento React personalizado com o mesmo nome. Se você mudar a primeira letra do nome do componente para maiúsculo, o React cria um elemento <i>div</i> definido no componente Footer, que é renderizado na página.
 
 Note que o conteúdo de um componente React (normalmente) precisa conter **um elemento raiz (root)**. Se, por exemplo, tentarmos definir o componente <i>App</i> sem o elemento <i>div</i> externo:
 
@@ -465,7 +465,7 @@ O console grita em vermelho:
 
 ![](../../images/1/34new.png)
 
-O núcleo do problema é que: <i>Objetos não são válidos como elementos-filho do React</i>, isto é, a aplicação tenta renderizar <i>objetos</i> e falha novamente.
+O núcleo do problema é que: <i>Objetos não são válidos como elementos-filho React</i>, isto é, a aplicação tenta renderizar <i>objetos</i> e falha novamente.
 
 O código tenta renderizar as informações de um amigo da seguinte maneira:
 
@@ -604,7 +604,7 @@ const App = () => {
       <p>
         {part3} {exercises3}
       </p>
-      <p>Número de exercícios {exercises1 + exercises2 + exercises3}</p>
+      <p>Number of exercises {exercises1 + exercises2 + exercises3}</p>
     </div>
   )
 }
@@ -634,7 +634,7 @@ const App = () => {
 }
 ```
 
-**ATENÇÃO** Não tente programar todos os componentes simultaneamente, pois isso quase que certamente fará com que a aplicação desmorone. Avance em pequenos passos. Programe primeiro, por exemplo, o componente <i>Header</i>, e somente quando estiver funcionando corretamente, prossiga para o próximo componente.
+**ATENÇÃO I** Não tente programar todos os componentes simultaneamente, pois isso quase que certamente fará com que a aplicação desmorone. Avance em pequenos passos. Programe primeiro o componente <i>Header</i>, por exemplo, e somente quando estiver funcionando corretamente, prossiga para o próximo componente.
 
 O progresso cuidadoso e que avança em pequenos passos pode parecer lento, porém, na verdade, é <i> de longe o caminho mais rápido</i> para o progresso. O famoso desenvolvedor de software Robert "Uncle Bob" Martin afirmou:
 

@@ -9,7 +9,7 @@ lang: pt
 
 Antes de começarmos a programar, passaremos por alguns princípios de desenvolvimento web examinando uma aplicação de exemplo em <https://studies.cs.helsinki.fi/exampleapp>.
 
-A aplicação serve apenas para demonstrar alguns conceitos básicos do curso e, de maneira alguma, é um exemplo de <i>como</i> uma aplicação web moderna deve ser feita. Pelo contrário, ele demonstra algumas técnicas antigas de desenvolvimento web, que até poderiam ser consideradas como <i>práticas ruins</i> hoje em dia.
+A aplicação serve apenas para demonstrar alguns conceitos básicos do curso e, de maneira alguma, é um exemplo de <i>como</i> uma aplicação web moderna deve ser feita. Pelo contrário, ela demonstra algumas técnicas antigas de desenvolvimento web, que até poderiam ser consideradas como <i>práticas ruins</i> hoje em dia.
 
 O código seguirá as melhores práticas contemporâneas a partir da [parte 1](/pt/part1) em diante.
 
@@ -52,7 +52,7 @@ A requisição e a resposta do servidor possuem vários [cabeçalhos](https://en
 
 ![Captura de tela dos cabeçalhos de resposta](../../images/0/4e.png)
 
-Os cabeçalhos de resposta no topo nos dizem, por exemplo, o tamanho da resposta em bytes e o momento exato da resposta. Um cabeçalho importante, [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type), nos diz que a resposta é um arquivo de texto no formato [utf-8](https://en.wikipedia.org/wiki/UTF-8) e que os conteúdos foram formatados com HTML. Dessa forma, o navegador sabe que a resposta é uma página HTML comum e a renderiza para o navegador "como uma página web".
+Os cabeçalhos de resposta no topo nos dizem, por exemplo, o tamanho da resposta em bytes e o momento exato da resposta. Um cabeçalho importante, [Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type), nos diz que a resposta é um arquivo de texto no formato [utf-8](https://en.wikipedia.org/wiki/UTF-8) e que os conteúdos foram formatados em HTML. Dessa forma, o navegador sabe que a resposta é uma página HTML comum e a renderiza para o navegador "como uma página web".
 
 A guia <i>Resposta</i> mostra os dados de resposta, uma página HTML comum. A seção <i>body</i> determina a estrutura da página renderizada na tela:
 
@@ -264,7 +264,7 @@ A requisição ao servidor é feita na última linha, mas o código que lida com
 xhttp.onreadystatechange = function () {
 ```
 
-Nessa linha, um <i>event handler</i> (gerenciador de evento ou manipulador de eventos) para o evento <i>onreadystatechange</i> é definido para o objeto <em>xhttp</em> que faz a requisição. Quando o estado do objeto muda, o navegador chama a função gerenciadora de evento. O código da função verifica que o [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) é igual a 4 (o que representa o estado "DONE" que exibe a descrição <i>A operação está completa</i>) e que o código de status HTTP da resposta é 200.
+Nessa linha, um <i>event handler</i> (gerenciador de evento ou manipulador de evento) para o evento <i>onreadystatechange</i> é definido para o objeto <em>xhttp</em> que faz a requisição. Quando o estado do objeto muda, o navegador chama a função gerenciadora de evento. O código da função verifica que o [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) é igual a 4 (o que representa o estado "DONE" que exibe a descrição <i>A operação está completa</i>) e que o código de status HTTP da resposta é 200.
 
 ```js
 xhttp.onreadystatechange = function() {
@@ -274,7 +274,7 @@ xhttp.onreadystatechange = function() {
 }
 ```
 
-O mecanismo de chamada de gerenciadores de eventos é muito comum em JavaScript. As funções de gerência de eventos são chamadas de [funções callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). O código da aplicação não chama as funções em si, mas o "runtime environment" (ambiente de tempo de execução) — isto é, o navegador, que chama a função no tempo correto quando o <i>evento</i> ocorre.
+O mecanismo de chamada de gerenciadores de eventos é muito comum em JavaScript. As funções de gerência de eventos são chamadas de [funções callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). O código da aplicação não chama as funções em si, mas o "runtime environment" (ambiente de tempo de execução) — isto é, o navegador, que chama a função no tempo correto quando o <i>evento</i> acontece.
 
 ### Modelo de Documento por Objetos (DOM [Document Object Model])
 
@@ -308,7 +308,7 @@ O Modelo de Documento por Objetos, ou [DOM](https://en.wikipedia.org/wiki/Docume
 
 O código JavaScript introduzido no capítulo anterior usou a API DOM para adicionar uma lista de notas na página.
 
-O código a seguir cria um novo nó na variável <em>ul</em> e adiciona alguns nós-filho a ele:
+O código a seguir cria um novo nó (node) na variável <em>ul</em> e adiciona alguns nós-filho a ele:
 
 ```js
 var ul = document.createElement('ul')
@@ -424,7 +424,7 @@ A página de notas contém um [elemento formulário](https://developer.mozilla.o
 
 Quando o botão no formulário é clicado, o navegador envia a entrada (input) do usuário para o servidor. Vamos abrir a guia <i>Rede</i> e ver como se envia o formulário:
 
-![Captura de tela da guia Rede onde os eventos para enviar o formulário são mostrados](../../images/0/21e.png)
+![Captura de tela da guia de Rede onde os eventos para enviar o formulário são mostrados](../../images/0/21e.png)
 
 Surpreendentemente, o envio do formulário gera não menos que <i>cinco</i> requisições HTTP.
 A primeira é o evento de envio do formulário. Vamos focar nessa parte:
@@ -435,7 +435,7 @@ Trata-se de uma requisição [HTTP POST](https://developer.mozilla.org/en-US/doc
 
 Então, o navegador recarrega a página de Notas (Notes). O recarregamento faz mais três requisições HTTP: busca o arquivo CSS (main.css), o arquivo de JavaScript (main.js) e os dados das notas (data.json).
 
-A guia Rede também mostra os dados enviados com o formulário:
+A guia de Rede também mostra os dados enviados com o formulário:
 
 N.B.: Na versão mais recente do Chrome, o menu drop-down (lista suspensa) "Form Data" está dentro da nova guia "Payload", localizada à direita da guia "Cabeçalhos".
 
@@ -471,7 +471,7 @@ notes.push({
 })
 ```
 
-Os objetos de "Notas" têm dois campos: <i>content</i>, contendo o conteúdo real da anotação; e <i>date</i>, contendo a data e hora em que a anotação foi criada.
+Os objetos de "Notes" têm dois campos: <i>content</i>, contendo o conteúdo real da nota; e <i>date</i>, contendo a data e hora em que a nota foi criada.
 
 O servidor não salva as novas notas em um banco de dados, então elas desaparecem quando o servidor é reiniciado.
 
@@ -588,23 +588,23 @@ O status do React parece forte, mas o mundo do JavaScript está sempre mudando. 
 
 ### Desenvolvimento Web Ful Stack
 
-O que significa o nome do curso, <i>Desenvolvimento web full stack</i>? A palavra "Full stack" é um jargão de que todo mundo fala, mas ninguém sabe o que significa. Ou pelo menos, não há uma definição padrão para o termo.
+O que significa o nome do curso, <i>Desenvolvimento Web Full Stack</i>? A palavra "Full Stack" é um jargão de que todo mundo fala, mas ninguém sabe o que significa. Ou pelo menos, não há uma definição padrão para o termo.
 
-Praticamente, todas as aplicações web têm, pelo menos, duas "camadas" (layers): o navegador, sendo mais próximo do usuário final (cliente), é a camada superior; enquanto que o servidor é a camada inferior. Há também, no geral, uma camada de banco de dados abaixo do servidor. Podemos, portanto, pensar na <i>arquitetura</i> de uma aplicação web como uma espécie de <i>pilha</i> (stack) de camadas.
+Praticamente, todas as aplicações web têm, pelo menos, duas "camadas" (layers): o navegador, sendo mais próximo do usuário final (cliente), é a camada superior; enquanto que o servidor é a camada inferior. Há também, no geral, uma camada de banco de dados abaixo da do servidor. Podemos, portanto, pensar na <i>arquitetura</i> de uma aplicação web como uma espécie de <i>pilha</i> (stack) de camadas.
 
 No geral, também falamos sobre o [front-end e o back-end](https://en.wikipedia.org/wiki/Front_and_back_ends). O navegador é o front-end, e o JavaScript que roda no navegador é o código front-end. O servidor, por outro lado, é o back-end.
 
 No contexto deste curso, desenvolvimento web full stack significa que nos concentramos em todas as partes da aplicação: front-end, back-end e banco de dados. Às vezes, o software no servidor e o sistema operacional dele são vistos como partes da pilha, mas não entraremos nesses detalhes.
 
-Programaremos o back-end com JavaScript, usando o ambiente de execução [Node.js](https://nodejs.org/en/). Usar a mesma linguagem de programação em múltiplas camadas da pilha dá ao desenvolvimento web full stack uma nova dimensão. No entanto, não é uma exigência do desenvolvimento web full stack usar a mesma linguagem de programação (JavaScript) para todas as camadas da pilha.
+Programaremos o back-end em JavaScript, usando o ambiente de execução [Node.js](https://nodejs.org/en/). Usar a mesma linguagem de programação em múltiplas camadas da pilha dá ao desenvolvimento web full stack uma nova dimensão. No entanto, não é uma exigência do desenvolvimento web full stack usar a mesma linguagem de programação (JavaScript) para todas as camadas da pilha.
 
-Era mais comum que os desenvolvedores se especializassem em uma dessas camadas, por exemplo, no back-end. As tecnologias no back-end e no front-end eram bastante diferentes. Com a tendência Full stack, tornou-se comum que os desenvolvedores tenham habilidade em todas as camadas da aplicação e no banco de dados. Muitas vezes, os desenvolvedores full stack também precisam ter habilidades suficientes de configuração e administração para operar suas aplicações, por exemplo, na nuvem.
+Era mais comum que os desenvolvedores se especializassem em uma dessas camadas, por exemplo, no back-end. As tecnologias no back-end e no front-end eram bastante diferentes. Com a tendência Full Stack, tornou-se comum que os desenvolvedores tenham a habilidade de programar em todas as camadas da aplicação e no banco de dados. Muitas vezes, os desenvolvedores full stack também precisam ter habilidades suficientes de configuração e administração para operar suas aplicações, como na nuvem, por exemplo.
 
-### Fadiga do JavaScript
+### Fadiga JavaScript
 
-O desenvolvimento de aplicações web full stack é de muitas maneiras desafiador. Várias coisas estão acontecendo em vários lugares ao mesmo tempo, e a depuração é um pouco mais difícil se comparada com a depuração de [softwares de desktop comuns](https://en.wikipedia.org/wiki/Application_software). JavaScript nem sempre funciona da maneira que você espera que funcione (em comparação com muitas outras linguagens), e a forma assíncrona que seus ambientes de tempo de execução (runtime environments) funcionam cria todos os tipos de desafios. Comunicação na web exige conhecimento do protocolo HTTP. Também é preciso lidar com bancos de dados e administração e configuração de servidores. Também seria bom saber o suficiente de CSS para tornar as aplicações pelo menos um pouco apresentáveis.
+O desenvolvimento de aplicações web full stack é de muitas maneiras desafiador. Várias coisas estão acontecendo em vários lugares ao mesmo tempo, e a depuração (debug) é um pouco mais difícil se comparada com a depuração de [softwares de desktop comuns](https://en.wikipedia.org/wiki/Application_software). JavaScript nem sempre funciona da maneira que você espera que funcione (em comparação com muitas outras linguagens), e a forma assíncrona que seus ambientes de tempo de execução (runtime environments) funcionam cria todos os tipos de desafios. Comunicação na web exige conhecimento do protocolo HTTP. Também é preciso lidar com bancos de dados e administração e configuração de servidores. Também seria bom saber o suficiente de CSS para tornar as aplicações pelo menos um pouco apresentáveis.
 
-O mundo JavaScript se desenvolve rápido, o que traz seus próprios desafios. Ferramentas, bibliotecas e a própria linguagem estão em constante desenvolvimento. Algumas pessoas começam a ficar cansadas das constantes mudanças e deram um nome para isso: <em> fadiga JavaScript </em>. Veja [Como gerenciar a fadiga JavaScript no auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) ou [Fadiga JavaScript no site Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
+O mundo JavaScript se desenvolve rápido, o que traz seus próprios desafios. Ferramentas, bibliotecas e a própria linguagem estão em constante desenvolvimento. Algumas pessoas começam a ficar cansadas das constantes mudanças e deram um nome para isso: <em> fadiga JavaScript</em>. Veja [Como gerenciar a fadiga JavaScript no auth0](https://auth0.com/blog/how-to-manage-javascript-fatigue/) ou [Fadiga JavaScript no site Medium](https://medium.com/@ericclemmons/javascript-fatigue-48d4011b6fc4).
 
 Você sofrerá de fadiga JavaScript durante este curso. Felizmente para nós, existem algumas maneiras de suavizar a curva de aprendizado para que possamos começar com programação em vez de configuração. Não podemos evitar completamente a configuração, mas podemos avançar animadamente nas próximas semanas evitando os piores infernos da configuração.
 
