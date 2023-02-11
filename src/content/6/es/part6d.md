@@ -761,13 +761,15 @@ Como detalle técnico, debe tenerse en cuenta que las funciones auxiliares <i>us
 
 #### Exercise 6.23.
 
-The application has a <i>Notification</i> component for displaying notifications to the user.
+La aplicación tiene un componente <i>Notification</i> para mostrar notificaciones al usuario.
 
 Implement the application's notification state management using the useReducer hook and context. The notification should tell the user when a new anecdote is created or an anecdote is voted on:
 
+Implemente la gestión de estado de notificación de la aplicación utilizando el hook useReducer y el contexto. La notificación debe informar al usuario cuando se crea una nueva anécdota o se vota por una anécdota:
+
 ![](../../images/6/66new.png)
 
-The notification is displayed for five seconds.
+La notificación se muestra durante cinco segundos.
 
 #### Exercise 6.24.
 
