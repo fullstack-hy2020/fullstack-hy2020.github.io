@@ -210,13 +210,11 @@ The example uses [Material UI Icons](https://mui.com/components/material-icons/)
 
 ### Full entries
 
-In [exercise 9.10](/en/part9/typing_the_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.
+In [exercise 9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.
 Since we now have a page for viewing a patient's information, it would be nice to expand our data a bit.
 Let's add an *Entry* field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.
 
-Let's ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy/misc/blob/master/patients.ts).
-
-**Notice:** This time, the data is not in the .json format but instead in the .ts format. You should already have the complete *Gender* and *Patient* types implemented, so only correct the paths where they are imported from if needed.
+Let's ditch our old patient seed data from the backend and start using [this expanded format](https://github.com/fullstack-hy2020/misc/blob/master/patients-full.ts).
 
 Let us now create a proper *Entry* type based on the data we have.
 
@@ -283,11 +281,22 @@ interface BaseEntry {
   description: string;
   date: string;
   specialist: string;
-  diagnosisCodes?: Array<Diagnosis['code']>;
+  diagnosisCodes?: Diagnosis['code'][];
 }
 ```
 
-As you might remember, `Array<Type>` is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying `Diagnosis['code'][]` which starts to look a bit strange.
+As we mentioned [earlier in this part](/en/part9/first_steps_with_type_script/#the-alternative-array-syntax), we could define an array with syntax _Array&#60;Type&#62;_ instead of defining it *Type[]*. In this particular case writing _Diagnosis['code'][]_ starts to look a bit strange so we will decide to use the alternative syntax (that is also recommended by the ESlint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)):
+
+```js
+interface BaseEntry {
+  id: string;
+  description: string;
+  date: string;
+  specialist: string;
+  diagnosisCodes?: Array<Diagnosis['code']>; // highlight-line
+}
+```
+
 
 Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 
@@ -317,7 +326,15 @@ export type Entry =
   | HealthCheckEntry;
 ```
 
-An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
+### Omit with unions
+
+An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using 
+
+```js
+Omit<Entry, 'id'>
+```
+
+but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
 
 ```ts
 // Define special omit for unions
@@ -330,7 +347,7 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 
 <div class="tasks">
 
-### Exercises 9.22-9.25
+### Exercises 9.22-9.29
 
 #### 9.22: Patientor, step3
 
@@ -372,324 +389,6 @@ The resulting entries in the listing <i>could</i> look something like this:
 
 ![browser showing list of entries and their details in a nicer format](../../images/9/36x.png)
 
-</div>
-
-<div class="content">
-
-### Add patient form
-
-Form handling can sometimes be quite a nuisance in React. That's why we have decided to utilize the [Formik](https://formik.org/docs/overview) package for our app's add patient form. Here's a small intro from Formik's documentation:
-
-> Formik is a small library that helps you with the 3 most annoying parts:
->
-> - Getting values in and out of form state
-> - Validation and error messages
-> - Handling form submission
->
-> By colocating all of the above in one place, Formik will keep things organized - making testing, refactoring, and reasoning about your forms a breeze.
-
-The code for the form can be found from <i>src/AddPatientModal/AddPatientForm.tsx</i> and some form field helpers can be found from <i>src/AddPatientModal/FormField.tsx</i>.
-
-Looking at the top of the <i>AddPatientForm.tsx</i> you can see we have created a type for our form values, which we have simply called *PatientFormValues*. The type is a modified version of the *Patient* type with the *id* and *entries* properties omitted. We don't want the user to be able to submit those when creating a new patient. The *id* is created by the backend and *entries* can only be added for existing patients.
-
-```js
-export type PatientFormValues = Omit<Patient, "id" | "entries">;
-```
-
-Next, we declare the props for our form component:
-
-```js
-interface Props {
-  onSubmit: (values: PatientFormValues) => void;
-  onCancel: () => void;
-}
-```
-
-As you can see, the component requires two props: *onSubmit* and *onCancel*.
-Both are callback functions that return *void*. The *onSubmit* function should receive an
-object of type *PatientFormValues* as an argument so that the callback can handle our form values.
-
-Looking at the *AddPatientForm* function component, you can see we have bound the *Props* as our component's props, and we destructure *onSubmit* and *onCancel* from those props.
-
-```js
-export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
-  // ...
-}
-```
-
-Now before we continue, let's take a look at our form helpers in <i>FormField.tsx</i>.
-If you check what is exported from the file, you'll find the type *GenderOption* and the function components *SelectField* and *TextField*.
-
-Let's take a closer look at *SelectField* and the types around it.
-First, we create a generic type for each option object that contains a value and a label for that value. These are the kind of option objects we want to allow on our form in the select field.
-Since the only options we want to allow are different genders, we set that the *value* should be of type *Gender*.
-
-```js
-export type GenderOption = {
-  value: Gender;
-  label: string;
-};
-```
-
-In <i>AddPatientForm.tsx</i>, we use the *GenderOption* type for the *genderOptions* variable, declaring it to be an array containing objects of type *GenderOption*:
-
-```js
-const genderOptions: GenderOption[] = [
-  { value: Gender.Male, label: "Male" },
-  { value: Gender.Female, label: "Female" },
-  { value: Gender.Other, label: "Other" }
-];
-```
-
-Next, look at the type *SelectFieldProps*. It defines the type for the props of our *SelectField* component. There, you can see that *options* is an array of *GenderOption* types.
-
-```js
-type SelectFieldProps = {
-  name: string;
-  label: string;
-  options: GenderOption[];
-};
-```
-
-The function component *SelectField* in itself looks a bit cryptic but it just renders the label, a select element, and all given option elements (or, actually, their labels and values).
-
-```jsx
-const FormikSelect = ({ field, ...props }: FieldProps) =>
-  <Select {...field} {...props} />;
-
-export const SelectField = ({ name, label, options }: SelectFieldProps) => (
-  <>
-    <InputLabel>{label}</InputLabel>
-    <Field
-      fullWidth
-      style={{ marginBottom: "0.5em" }}
-      label={label}
-      component={FormikSelect}
-      name={name}
-    >
-      {options.map((option) => (
-        <MenuItem key={option.value} value={option.value}>
-          {option.label || option.value}
-        </MenuItem>
-      ))}
-    </Field>
-  </>
-);
-```
-
-Now let's move on to the *TextField* component. The component renders a TextFieldMUI that is a [Material UI TextField](https://mui.com/components/text-fields/) with a label:
-
-```jsx
-interface TextProps extends FieldProps {
-  label: string;
-  placeholder: string;
-}
-
-export const TextField = ({ field, label, placeholder }: TextProps) => (
-  <div style={{ marginBottom: "1em" }}>
-    <TextFieldMUI
-      fullWidth
-      label={label}
-      placeholder={placeholder}
-      {...field}
-    />
-    <Typography variant="subtitle2" style={{ color: "red" }}>
-      <ErrorMessage name={field.name} />
-    </Typography>
-  </div>
-);
-```
-
-Note that we use the Formik [ErrorMessage](https://formik.org/docs/api/errormessage) component to render an error message for the input when needed.
-The component does everything under the hood, and we don't need to specify what it should do.
-
-It would also be possible to get hold of the error messages within the component by using the prop *form*:
-
-```jsx
-export const TextField = ({ field, label, placeholder, form }: TextProps) => {
-  console.log(form.errors); 
-  // ...
-}
-```
-
-Now, back to the actual form component in <i>AddPatientForm.tsx</i>.
-The function component *AddPatientForm* renders a [Formik component](https://formik.org/docs/api/formik). The Formik component is a wrapper, which requires two props: *initialValues* and *onSubmit*. The role of the props is quite self-explanatory.
-The Formik wrapper keeps a track of your form's state, and then exposes it and a few reusable methods and event handlers to your form via props.
-
-We are also using an optional *validate* prop that expects a validation function and returns an object containing possible errors. Here, we only check that our text fields are not falsy, but it could easily contain e.g. some validation for the social security number format or something like that. The error messages defined by this function can then be displayed on the corresponding field's ErrorMessage component.
-
-First, have a look at the entire component. We will later discuss the different parts in detail.
-
-```jsx
-interface Props {
-  onSubmit: (values: PatientFormValues) => void;
-  onCancel: () => void;
-}
-
-export const AddPatientForm = ({ onSubmit, onCancel }: Props) => {
-  return (
-    <Formik
-      initialValues={{
-        name: "",
-        ssn: "",
-        dateOfBirth: "",
-        occupation: "",
-        gender: Gender.Other
-      }}
-      onSubmit={onSubmit}
-      validate={values => {
-        const requiredError = "Field is required";
-        const errors: { [field: string]: string } = {};
-        if (!values.name) {
-          errors.name = requiredError;
-        }
-        if (!values.ssn) {
-          errors.ssn = requiredError;
-        }
-        if (!values.dateOfBirth) {
-          errors.dateOfBirth = requiredError;
-        }
-        if (!values.occupation) {
-          errors.occupation = requiredError;
-        }
-        return errors;
-      }}
-    >
-      {({ isValid, dirty }) => {
-        return (
-          <Form className="form ui">
-            <Field
-              label="Name"
-              placeholder="Name"
-              name="name"
-              component={TextField}
-            />
-            <Field
-              label="Social Security Number"
-              placeholder="SSN"
-              name="ssn"
-              component={TextField}
-            />
-            <Field
-              label="Date Of Birth"
-              placeholder="YYYY-MM-DD"
-              name="dateOfBirth"
-              component={TextField}
-            />
-            <Field
-              label="Occupation"
-              placeholder="Occupation"
-              name="occupation"
-              component={TextField}
-            />
-            <SelectField
-              label="Gender"
-              name="gender"
-              options={genderOptions}
-            />
-            <Grid>
-              <Grid item>
-                <Button
-                  color="secondary"
-                  variant="contained"
-                  style={{ float: "left" }}
-                  type="button"
-                  onClick={onCancel}
-                >
-                  Cancel
-                </Button>
-              </Grid>
-              <Grid item>
-                <Button
-                  style={{ float: "right" }}
-                  type="submit"
-                  variant="contained"
-                  disabled={!dirty || !isValid}
-                >
-                  Add
-                </Button>
-              </Grid>
-            </Grid>
-          </Form>
-        );
-      }}
-    </Formik>
-  );
-};
-
-export default AddPatientForm;
-```
-
-As a child of our Formik wrapper, we have a <i>function</i> that returns the form contents.
-We use Formik's [Form](https://formik.org/docs/api/form) to render the actual form element. Inside the Form element, we use our *TextField* and *SelectField* components that we created in <i>FormField.tsx</i>.
-
-Lastly, we create two buttons: one for canceling the form submission and one for submitting the form. The cancel button calls the *onCancel* callback straight away when clicked.
-The submit button triggers Formik's onSubmit event, which in turn uses the *onSubmit* callback from the component's props. The submit button is enabled only if the form is <i>valid</i> and <i>dirty</i>, which means that the user has edited some of the fields.
-
-We handle form submission through Formik, because it allows us to call the validation function before performing the actual submission. If the validation function returns any errors, the submission is canceled.
-
-The buttons are set inside a Material UI [Grid](https://mui.com/components/grid/#main-content) to set them next to each other easily.
-
-```jsx
-<Grid>
-  <Grid item>
-    <Button
-      color="secondary"
-      variant="contained"
-      style={{ float: "left" }}
-      type="button"
-      onClick={onCancel}
-    >
-      Cancel
-    </Button>
-  </Grid>
-  <Grid item>
-    <Button
-      style={{ float: "right" }}
-      type="submit"
-      variant="contained"
-      disabled={!dirty || !isValid}
-    >
-      Add
-    </Button>
-  </Grid>
-</Grid>
-```
-
-The *onSubmit* callback has been passed all the way down from our patient list page.
-It sends an HTTP POST request to our backend, adds the patient returned from the backend to our app's state and closes the modal.
-If the backend returns an error, the error is displayed on the form.
-
-Here is our submit function:
-
-```js
-const submitNewPatient = async (values: FormValues) => {
-  try {
-    const { data: newPatient } = await axios.post<Patient>(
-      `${apiBaseUrl}/patients`,
-      values
-    );
-    dispatch({ type: "ADD_PATIENT", payload: newPatient });
-    closeModal();
-  } catch (error: unknown) {
-    let errorMessage = 'Something went wrong.'
-    if(axios.isAxiosError(error) && error.response) {
-      console.error(error.response.data);
-      errorMessage = error.response.data.error;
-    }
-    setError(errorMessage);
-  }
-};
-```
-
-With this material, you should be able to complete the rest of this part's exercises. When in doubt, try reading the existing code to find clues on how to proceed!
-
-</div>
-
-<div class="tasks">
-
-### Exercises 9.26-9.30
-
 #### 9.26: Patientor, step7
 
 We have established that patients can have different kinds of entries. We don't yet have any way of adding entries to patients in our app, so, at the moment, it is pretty useless as an electronic medical record.
@@ -698,90 +397,43 @@ Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backe
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
+In this exercise you quite likely need to remember [this trick](/en/part9/grande_finale_patientor_frontend#omit-with-unions).
+
+You may assume that the diagnostic codes are sent in a correct form and use eg. the following kind of parser to extract those from the request body:
+
+```js
+const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
+  if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
+    return [] as Array<Diagnosis['code']>;
+  }
+
+  return object.diagnosisCodes as Array<Diagnosis['code']>;
+};
+```
+
 #### 9.27: Patientor, step8
 
 Now that our backend supports adding entries, we want to add the corresponding functionality to the frontend. In this exercise, you should add a form for adding an entry to a patient. An intuitive place for accessing the form would be on a patient's page.
 
-In this exercise, it is enough to **support <i>one</i> entry type**, and you do not have to handle any errors. It is enough if a new entry can be created when the form is filled with valid data.
+In this exercise, it is enough to **support <i>one</i> entry type**. All the fields in the form can be just plain text inputs, so it is up to user to enter valid values.
 
 Upon a successful submit, the new entry should be added to the correct patient and the patient's entries on the patient page should be updated to contain the new entry.
 
-If you like, you can re-use some of the code from the <i>Add patient</i> form for this exercise, but this is not a requirement.
+Your form might look something like this:
 
-Note that the file [FormField.tsx](https://github.com/fullstack-hy2020/patientor/blob/master/src/AddPatientModal/FormField.tsx#L58) has a ready-made component called *DiagnosisSelection* that can be used for setting the field *diagnoses*.
+![](../../images/9/74new.png)
 
-It can be used as follows:
+If user enters invalid values to the form and backend rejects the addition, show a proper error message to user
 
-```js
-const AddEntryForm = ({ onSubmit, onCancel }: Props) => {
-  const [{ diagnoses }] = useStateValue() // highlight-line
+![](../../images/9/75new.png)
 
-  return (
-    <Formik
-      initialValues={{
-        /// ...
-      }}
-      onSubmit={onSubmit}
-      validate={values => {
-        /// ...
-      }}
-    >
-    {({ isValid, dirty, setFieldValue, setFieldTouched }) => { // highlight-line
+#### 9.28: Patientor, step9
 
-      return (
-        <Form className="form ui">
-          // ...
-
-          // highlight-start
-          <DiagnosisSelection
-            setFieldValue={setFieldValue}
-            setFieldTouched={setFieldTouched}
-            diagnoses={Object.values(diagnoses)}
-          />    
-          // highlight-end
-
-          // ...
-        </Form>
-      );
-    }}
-  </Formik>
-  );
-};
-```
-
-With small tweaks on types, the readily made component *SelectField* can be used for the health check rating.
-
-#### 9.29: Patientor, step9
-
-Extend your solution so that it displays an error message if some required values are missing or formatted incorrectly.
+Extend your solution so that it supports <i>all the entry types</i>. You do not need to care about possible errors in the server's response.
 
 #### 9.29: Patientor, step10
 
-Extend your solution so that it supports <i>two</i> entry types and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
-
-The easiest but surely not the most elegant way to do this exercise is to have a separate form for each different entry type. Getting the types to work properly might be a slight challenge if you use just a single form.
-
-Note that if you need to alter the shown form based on user selections, you can access the form values using the parameter *values* of the rendering function:
-
-```js
-<Formik
-  initialValues={}
-  onSubmit={onSubmit}
-  validate={}
->
-  {({ isValid, dirty, setFieldValue, setFieldTouched, values }) => { // highlight-line
-    console.log(values); // highlight-line
-    return (
-      <Form className="form ui">
-      </Form>
-    );
-  }}
-</Formik>
-```
-
-#### 9.30: Patientor, step11
-
-Extend your solution so that it supports <i>all the entry types</i> and displays an error message if some required values are missing or formatted incorrectly. You do not need to care about possible errors in the server's response.
+Improve the entry creation forms so that it makes hard to enter incorrect values for...
 
 ### Submitting exercises and getting the credits
 
