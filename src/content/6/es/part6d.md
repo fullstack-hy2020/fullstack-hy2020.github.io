@@ -492,9 +492,9 @@ counterDispatch({ type: "INC" })
 
 El código actual de la aplicación se encuentra en el repositorio [https://github.com/fullstack-hy2020/hook-counter](https://github.com/fullstack-hy2020/hook-counter/tree/part6-1) en la rama <i>part6-1</i>.
 
-### Using context for passing the state to components
+### Usando context para pasar el estado a los componentes
 
-If we want to split the application into several components, the value of the counter and the dispatch function used to manage it must also be passed to the other components. One solution would be to pass these as props in the usual way:
+Si queremos dividir la aplicación en varios componentes, el valor del contador y la función de despacho utilizada para gestionarlo también deben pasarse a los otros componentes. Una solución sería pasar estos como props de la manera habitual:
 
 ```js
 const Display = ({ counter }) => {
@@ -527,13 +527,13 @@ const App = () => {
 }
 ```
 
-The solution works, but is not optimal. If the component structure gets complicated, e.g. the dispatcher should be forwarded using props through many components to the components that need it, even though the components in between in the component tree do not need the dispatcher. This phenomenon is called <i>prop drilling</i>.
+La solución funciona, pero no es óptima. Si la estructura de los componentes se complica, por ejemplo, el despachador debe transmitirse usando props a través de muchos componentes para llegar a los componentes que lo necesitan, aunque los componentes intermedios en el árbol de componentes no necesiten el despachador. Este fenómeno se llama <i>prop drilling</i>.
 
-React's built-in [Context API](https://beta.reactjs.org/learn/passing-data-deeply-with-context) provides a solution for us. React's context is a kind of global state of the application, to which it is possible to give direct access to any component app.
+La [API de contexto](https://beta.reactjs.org/learn/passing-data-deeply-with-context) integrada en React proporciona una solución para nosotros. El contexto de React es un tipo de estado global de la aplicación, al que se puede dar acceso directo a cualquier componente de la aplicación.
 
-Let us now create a context in the application that stores the state management of the counter.
+Vamos a crear ahora un contexto en la aplicación que almacene la gestión de estado del contador.
 
-The context is created with React's hook [createContext](https://beta.reactjs.org/reference/react/createContext). Let's create a context in the file <i>CounterContext.js</i>:
+El contexto se crea con el hook [createContext](https://beta.reactjs.org/reference/react/createContext) de React. Vamos a crear un contexto en el archivo <i>CounterContext.js</i>:
 
 ```js
 import { createContext } from 'react'
@@ -543,7 +543,7 @@ const CounterContext = createContext()
 export default CounterContext
 ```
 
-The <i>App</i> component can now <i>provide</i> a context to its child components as follows:
+El componente <i>App</i> ahora puede <i>proveer</i> un contexto a sus componentes hijo de la siguiente manera:
 
 ```js
 import CounterContext from './CounterContext' // highlight-line
@@ -564,11 +564,11 @@ const App = () => {
 }
 ```
 
-As can be seen, providing the context is done by wrapping the child components inside the <i>CounterContext.Provider</i> component and setting a suitable value for the context.
+Como se puede ver, el proveedor de contexto se realiza envolviendo los componentes hijo dentro del componente <i>CounterContext.Provider</i> y estableciendo un valor adecuado para el contexto.
 
-The context value is now set to be an array containing the value of the counter, and the <i>dispatch</i> function.
+El valor del contexto ahora se establece en un arreglo que contiene el valor del contador y la función <i>dispatch</i>.
 
-Other components now access the context using the [useContext](https://beta.reactjs.org/reference/react/useContext) hook:
+Otros componentes ahora acceden al contexto utilizando el hook [useContext](https://beta.reactjs.org/reference/react/useContext):
 
 ```js
 import { useContext } from 'react' // highlight-line
@@ -591,7 +591,7 @@ const Button = ({ type, label }) => {
 }
 ```
 
-The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) in the branch <i>part6-2</i>.
+El código actual de la aplicación se encuentra en [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) en la rama <i>part6-2</i>.
 
 ### Defining the counter context in a separate file
 
