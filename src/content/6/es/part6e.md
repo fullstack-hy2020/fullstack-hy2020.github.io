@@ -5,14 +5,20 @@ letter: e
 lang: es
 ---
 
+<div class="tasks">
+
+**NOTA**: esta es la antigua sección final de la parte 6 que ha sido reemplazada el 30 de enero de 2023 con material sobre [React Query, useReducer y context](/es/part6/react_query_use_reducer_and_the_context). Esta sección permanecera aquí durante unas semanas.
+
+Si has empezado con los ejercicios (6.19-6.21) que usan la función connect de Redux puedes continuar con ellos. Si aún no has empezado, te recomiendo que continúes con la nueva sección.
+</div>
+
 <div class="content">
 
 Hasta ahora hemos utilizado nuestro redux-store con la ayuda de la api de [hooks](https://react-redux.js.org/api/hooks) de react-redux. Prácticamente esto ha significado utilizar las funciones [useSelector](https://react-redux.js.org/api/hooks#useselector) y [useDispatch](https://react-redux.js.org/api/hooks#usedispatch).
 
 Para terminar esta parte, veremos otra forma más antigua y complicada de usar redux, la función [connect](https://github.com/reduxjs/react-redux/blob/master/docs/api/connect.md) proporcionada por react-redux.
 
-En aplicaciones nuevas, debe usar la api hook, pero saber cómo usar connect es útil cuando se mantienen proyectos antiguos usando redux.
-
+<i>**En aplicaciones nuevas, usa la api de hook**</i>, pero saber cómo usar connect es útil cuando se mantienen proyectos antiguos usando redux.
 
 ### Uso de la función connect para compartir el store redux con los componentes
 
@@ -613,7 +619,7 @@ Haga lo mismo con los componentes <i>Filter</i> y <i>AnecdoteForm</i>.
 
 #### 6.21 anécdotas, el gran final
 
-(Probablemente) tenga un error desagradable en su aplicación. Si el usuario hace clic en el botón de voto varias veces seguidas, la notificación se muestra de forma rara. Por ejemplo, si un usuario vota dos veces en tres segundos, la última notificación solo se muestra durante dos segundos (asumiendo que la notificación normalmente se muestra durante 5 segundos). Esto sucede porque la eliminación de la primera notificación elimina accidentalmente la segunda notificación.
+(Probablemente) tengas un error desagradable en su aplicación. Si el usuario hace clic en el botón de voto varias veces seguidas, la notificación se muestra de forma rara. Por ejemplo, si un usuario vota dos veces en tres segundos, la última notificación solo se muestra durante dos segundos (asumiendo que la notificación normalmente se muestra durante 5 segundos). Esto sucede porque la eliminación de la primera notificación elimina accidentalmente la segunda notificación.
 
 Solucione el error para que después de varios votos seguidos, la notificación del último voto se muestre durante cinco segundos. Esto se puede hacer cancelando la eliminación de la notificación anterior cuando se muestra una nueva notificación cuando sea necesario. La [documentación](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/setTimeout) de la función setTimeout también puede ser útil para esto.
 
