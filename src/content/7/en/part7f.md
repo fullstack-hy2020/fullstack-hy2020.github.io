@@ -10,6 +10,7 @@ lang: en
 In addition to the eight exercises in the [React router](/en/part7/react_router) and [custom hooks](en/part7/custom_hooks) sections of this seventh part of the course material, 13 exercises continue our work on the Bloglist application that we worked on in parts four and five of the course material.
 Some of the following exercises are "features" that are independent of one another, meaning that there is no need to finish the exercises in any particular order.
 You are free to skip over a part of the exercises if you wish to do so.
+Quite many of the exercises are applying the advanced state management technique (Redux, React Query and context) covered in part [part 6](/en/part6).
 
 If you do not want to use your Bloglist application, you are free to use the code from the model solution as a starting point for these exercises.
 
@@ -35,13 +36,18 @@ Prettier is easy to integrate into the code editor so that when the code is save
 
 Take Prettier to use in your app and configure it to work with your editor.
 
-#### 7.10: redux, step1
+### State management: Redux
+
+<i>There are two alternative versions to choose for exercises 7.10-7.13: you can do the state management of the application either using Redux or React Query and Context</i>.
+If you want to maximize your learning, you should do both versions!
+
+#### 7.10: Redux, step1
 
 Refactor the application from using the internal React component state to using Redux for the application's state management.
 
 Change the application's notifications to use Redux at this point of the exercise set.
 
-#### 7.11: redux, step2
+#### 7.11: Redux, step2
 
 <i>Note</i> that this and the next two exercises are quite laborious but incredibly educational.
 
@@ -50,13 +56,40 @@ In this exercise, it is enough that you can see the blogs in the backend and cre
 
 You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
 
-#### 7.12: redux, step3
+#### 7.12: Redux, step3
 
 Expand your solution so that it is again possible to like and delete a blog.
 
-#### 7.13: redux, step4
+#### 7.13: Redux, step4
 
 Store the information about the signed-in user in the Redux store.
+
+### State management: React Query and context
+
+<i>There are two alternative versions to choose for exercises 7.10-7.13: you can do the state management of the application either using Redux or React Query and Context</i>.
+
+#### 7.10: React Query and context step1
+
+Refactor the app to use the useReducer-hook and context to manage the notification data.
+
+#### 7.11: React Query and context step2
+
+Use React Query to manage the state for blogs.
+For this exercise, it is sufficient that the application displays existing blogs and that the creation of a new blog is successful.
+
+You are free to manage the state for logging in and creating new blog posts by using the internal state of React components.
+
+#### 7.12: React Query and context step3
+
+Expand your solution so that it is again possible to like and delete a blog.
+
+#### 7.13: React Query and context step4
+
+Use the useReducer-hook and context to manage the data for the logged in user.
+
+### Views
+
+The rest of the tasks are common to both the Redux and React Query versions.
 
 #### 7.14: Users view
 

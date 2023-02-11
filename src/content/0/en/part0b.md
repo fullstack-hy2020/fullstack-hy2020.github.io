@@ -9,7 +9,8 @@ lang: en
 
 Before we start programming, we will go through some principles of web development by examining an example application at <https://studies.cs.helsinki.fi/exampleapp>.
 
-The application exists only to demonstrate some basic concepts of the course, and is, by no means, an example of <i>how</i> a modern web application should be made. On the contrary, it demonstrates some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
+The application exists only to demonstrate some basic concepts of the course, and is, by no means, an example of <i>how</i> a modern web application should be made.
+On the contrary, it demonstrates some old techniques of web development, which could even be considered <i>bad practices</i> nowadays.
 
 Code will conform to contemporary best practices from [part 1](/en/part1) onwards.
 
@@ -83,7 +84,8 @@ The chain of events caused by opening the page <https://studies.cs.helsinki.fi/e
 
 ![Sequence diagram of the flow covered above](../../images/0/7m.png)
 
-The sequence diagram visualizes how the browser and server are communicating over the time. The time flows in the diagram from top to bottom, so the diagram starts with the first request that the browser sends to server, followed by the response.
+The sequence diagram visualizes how the browser and server are communicating over the time.
+The time flows in the diagram from top to bottom, so the diagram starts with the first request that the browser sends to server, followed by the response.
 
 First, the browser sends an HTTP GET request to the server to fetch the HTML code of the page.
 The <i>img</i> tag in the HTML prompts the browser to fetch the image <i>kuva.png</i>.
@@ -480,14 +482,15 @@ Let's open the <i>Network</i> tab and see what submitting the form looks like:
 
 ![Screenshot of the Network tab where the events for submitting the form are shown](../../images/0/21e.png)
 
-Surprisingly, submitting the form causes no less than <i>five</i> HTTP requests.
+Surprisingly, submitting the form causes no fewer than <i>five</i> HTTP requests.
 The first one is the form submit event.
 Let's zoom into it:
 
 ![Detailed view of the first request](../../images/0/22e.png)
 
 It is an [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) request to the server address <i>new\_note</i>.
-The server responds with HTTP status code 302. This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
+The server responds with HTTP status code 302.
+This is a [URL redirect](https://en.wikipedia.org/wiki/URL\_redirection), with which the server asks the browser to do a new HTTP GET request to the address defined in the header's <i>Location</i> - the address <i>notes</i>.
 
 So, the browser reloads the Notes page.
 The reload causes three more HTTP requests: fetching the style sheet (main.css), the JavaScript code (main.js), and the raw data of the notes (data.json).
@@ -580,7 +583,7 @@ When you now create a new note, you'll notice that the browser sends only one re
 
 ![Network tab in developer tools](../../images/0/26e.png)
 
-The POST request to the address <i>new_note_spa</i> contains the new note as JSON data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):
+The POST request to the address <i>new\_note\_spa</i> contains the new note as JSON data containing both the content of the note (<i>content</i>) and the timestamp (<i>date</i>):
 
 ```js
 {
@@ -645,7 +648,7 @@ The application code is available at <https://github.com/mluukkai/example_app>.
 It's worth remembering that the application is only meant to demonstrate the concepts of the course.
 The code follows a poor style of development in some measures, and should not be used as an example when creating your applications.
 The same is true for the URLs used.
-The URL <i>new_note_spa</i> that new notes are sent to, does not adhere to current best practices.
+The URL <i>new\_note\_spa</i> that new notes are sent to, does not adhere to current best practices.
 
 ### JavaScript-libraries
 
@@ -674,7 +677,8 @@ For example, recently a newcomer - [VueJS](https://vuejs.org/) - has been captur
 
 ### Full-stack web development
 
-What does the name of the course, <i>Full stack web development</i>, mean? Full stack is a buzzword that everyone talks about, but no one knows what it means.
+What does the name of the course, <i>Full stack web development</i>, mean.
+Full stack is a buzzword that everyone talks about, but no one knows what it means.
 Or at least, there is no agreed-upon definition for the term.
 
 Practically all web applications have (at least) two "layers": the browser, being closer to the end-user, is the top layer, and the server the bottom one.

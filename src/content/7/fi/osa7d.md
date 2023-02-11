@@ -94,6 +94,24 @@ Webpackin toiminta konfiguroidaan tiedostoon <i>webpack.config.js</i>. Laitetaan
 ```js
 const path = require('path')
 
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
+  }
+}
+
+module.exports = config
+```
+
+**Huom:** määrittely olisi mahdollista tehdä funktion sijaan myös suoraan oliona:
+
+```js
+const path = require('path')
+
 const config = {
   entry: './src/index.js',
   output: {
@@ -104,6 +122,8 @@ const config = {
 
 module.exports = config
 ```
+
+Olio riittää monissa tilanteissa, mutta tulemme myöhemmin tarvitsemaan tiettyjä ominaisuuksia, jotka edellyttävät sen että määrittely on tehty funktiona.
 
 Määritellään sitten npm-skripti <i>build</i>, jonka avulla bundlaus suoritetaan:
 
@@ -170,18 +190,20 @@ Katsotaan nyt tarkemmin konfiguraation <i>webpack.config.js</i> tämänhetkistä
 ```js
 const path = require('path')
 
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js'
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
   }
 }
 
 module.exports = config
 ```
 
-Konfiguraatio on JavaScriptia ja tapahtuu eksporttaamalla määrittelyt sisältävä olio Noden moduulisyntaksilla.
+Konfiguraatio on JavaScriptia ja tapahtuu eksporttaamalla määrittelyt palauttava funktio Noden moduulisyntaksilla.
 
 Tämänhetkinen minimaalinen määrittely on aika ilmeinen. Kenttä [entry](https://webpack.js.org/concepts/#entry) kertoo sen tiedoston, mistä bundlaus aloitetaan.
 
@@ -202,7 +224,7 @@ import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App'
 
-ReactDOM.createRoot(document.getElementById('root')).render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 ja muutetaan <i>App.js</i> muotoon
@@ -262,26 +284,32 @@ ei ole "normaalia" JavaScriptia, vaan JSX:n tarjoama syntaktinen oikotie määri
 Määritellään projektiimme Reactin käyttämän JSX:n normaaliksi JavaScriptiksi muuntava loaderi:
 
 ```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js',
-  },
-  // highlight-start
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-react'],
+const path = require('path')
+
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    },
+      // highlight-start
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
         },
-      },
-    ],
-  },
-  // highlight-end
+      ],
+    },
+      // highlight-end
+  }
 }
+
+module.exports = config
 ```
 
 Loaderit määritellään kentän <i>module</i> alle sijoitettavaan taulukkoon <i>rules</i>.
@@ -616,7 +644,7 @@ const App = () => {
 
 ### Koodin minifiointi
 
-Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 1356668 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 1356668 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
+Kun sovellus viedään tuotantoon, on siis käytössä tiedostoon <i>main.js</i> webpackin generoima koodi. Vaikka sovelluksemme sisältää omaa koodia vain muutaman rivin, on tiedoston <i>main.js</i> koko 1009487 tavua, sillä se sisältää myös kaiken React-kirjaston koodin. Tiedoston koollahan on sikäli väliä, että selain joutuu lataamaan tiedoston kun sovellusta aletaan käyttämään. Nopeilla internetyhteyksillä 1009487 tavua ei sinänsä ole ongelma, mutta jos mukaan sisällytetään enemmän kirjastoja, alkaa sovelluksen lataaminen pikkuhiljaa hidastua etenkin mobiilikäytössä.
 
 Tiedoston sisältöä tarkastelemalla huomaa, että tiedostoa voisi optimoida huomattavasti koon suhteen esim. poistamalla kommentit. Tiedostoa ei kuitenkaan kannata lähteä optimoimaan käsin, sillä tarkoitusta varten on olemassa monia työkaluja.
 
@@ -647,7 +675,7 @@ Kun sovellus bundlataan uudelleen, pienenee tuloksena oleva <i>main.js</i> mukav
 
 ```js
 $ ls -l build/main.js
--rw-r--r--  1 mluukkai  ATKK\hyad-all  227651 Feb  7 15:58 build/main.js
+-rw-r--r--  1 mluukkai  ATKK\hyad-all  146237 Feb  7 15:58 build/main.js
 ```
 
 Minifioinnin lopputulos on kuin vanhan liiton C-koodia. Kommentit ja jopa turhat välilyönnit ja rivinvaihdot on poistettu ja muuttujanimet ovat yksikirjaimisia:
@@ -681,7 +709,7 @@ Talletetaan seuraava sisältö tiedostoon <i>db.json</i>:
 
 Tarkoituksena on konfiguroida sovellus webpackin avulla siten, että paikallisesti sovellusta kehitettäessä käytetään backendina portissa 3001 toimivaa JSON Serveriä.
 
-Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://obscure-harbor-49797.herokuapp.com/api/notes> olevaa backendia.
+Bundlattu tiedosto laitetaan sitten käyttämään todellista, osoitteessa <https://notes2023.fly.dev/api/notes> olevaa backendia.
 
 Asennetaan <i>Axios</i>, käynnistetään JSON Server ja tehdään tarvittavat lisäykset sovellukseen. Vaihtelun vuoksi muistiinpanojen hakeminen palvelimelta on toteutettu [custom hookin](/osa7/custom_hookit) _useNotes_ avulla:
 
@@ -706,7 +734,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 'https://obscure-harbor-49797.herokuapp.com/api/notes'
+  const url = 'https://notes2023.fly.dev/api/notes'
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -728,34 +756,22 @@ export default App
 
 Koodissa on nyt kovakoodattuna sovelluskehityksessä käytettävän palvelimen osoite. Miten saamme osoitteen hallitusti muutettua osoittamaan Internetissä olevaan backendiin bundlatessamme koodin?
 
-Muutetaan <i>webpack.config.js</i> oliosta [funktioksi](https://webpack.js.org/configuration/configuration-types/#exporting-a-function):
+Webpackin konfiguraatiofunktiolla on kaksi parametria, <i>env</i> ja <i>argv</i>, joista jälkimmäisen avulla saamme selville npm-skriptissä määritellyn <i>moden</i>:
 
 ```js
-const path = require('path');
+const path = require('path')
 
-const config = (env, argv) => {
+const config = (env, argv) => { // highlight-line
+  console.log('argv.mode:', argv.mode)
   return {
-    entry: './src/index.js',
-    output: {
-      // ...
-    },
-    devServer: {
-      // ...
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    plugins: [
-      // ...
-    ],
+    // ...
   }
 }
 
 module.exports = config
 ```
 
-Määrittely on muuten täysin sama, mutta aiemmin eksportattu olio on nyt määritellyn funktion paluuarvo. Funktio saa parametrit <i>env</i> ja <i>argv</i>, joista jälkimmäisen avulla saamme selville npm-skriptissä määritellyn <i>moden</i>.
+Nyt voimme siis halutessamme säätää Webpackin toimimaan eri tavalla riippuen siitä onko sovelluksen käyttöympäristö eli "mode" arvoltaan production vai development.
 
 Webpackin [DefinePlugin](https://webpack.js.org/plugins/define-plugin/):in avulla voimme määritellä globaaleja <i>vakioarvoja</i>, joita on mahdollista käyttää bundlattavassa koodissa. Määritellään nyt vakio <i>BACKEND\_URL</i>, joka saa eri arvon riippuen siitä ollaanko kehitysympäristössä vai tehdäänkö tuotantoon sopivaa bundlea:
 
@@ -764,11 +780,11 @@ const path = require('path')
 const webpack = require('webpack') // highlight-line
 
 const config = (env, argv) => {
-  console.log('argv', argv.mode)
+  console.log('argv.mode:', argv.mode)
 
   // highlight-start
   const backend_url = argv.mode === 'production'
-    ? 'https://obscure-harbor-49797.herokuapp.com/api/notes'
+    ? 'https://notes2023.fly.dev/api/notes'
     : 'http://localhost:3001/notes'
   // highlight-end
 
@@ -818,6 +834,8 @@ const App = () => {
   )
 }
 ```
+
+Nyt siis jos sovellus on käynnistetty komennolla _npm start_ development-moodissa, hakee se muistiinpanot osoitteesta http://localhost:3001/notes. Komennolla _npm run build_ bundlattu versio taas käyttää osoitetta https://notes2023.fly.dev/api/notes muistiinpanojen hakemiseen.
 
 Jos kehitys- ja tuotantokonfiguraatio eriytyvät paljon, saattaa olla hyvä idea [eriyttää konfiguraatiot](https://webpack.js.org/guides/production/) omiin tiedostoihinsa.
 

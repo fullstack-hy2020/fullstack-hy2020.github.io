@@ -8,7 +8,7 @@ lang: en
 <div class="content">
 
 After the brief introduction to the main principles of TypeScript, we are now ready to start our journey toward becoming FullStack TypeScript developers.
-Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing express backends or React frontends with TypeScript.
+Rather than giving you a thorough introduction to all aspects of TypeScript, we will focus in this part on the most common issues that arise when developing Express backends or React frontends with TypeScript.
 In addition to language features, we will also have a strong emphasis on tooling.
 
 ### Setting things up
@@ -57,11 +57,11 @@ and setting up <i>scripts</i> within the package.json:
 ```
 
 You can now use <i>ts-node</i> within this directory by running *npm run ts-node*.
-Note that if you are using ts-node through package.json, all command-line arguments for the script need to be prefixed with *--*.
-So if you want to run file.ts with <i>ts-node</i>, the whole command is:
+Note that if you are using ts-node through package.json, command-line arguments that include short or long-form options for the *npm run script* need to be prefixed with *--*.
+So if you want to run file.ts with <i>ts-node</i> and options *-s* and *--someoption*, the whole command is:
 
 ```shell
-npm run ts-node -- file.ts
+npm run ts-node file.ts -- -s --someoption
 ```
 
 It is worth mentioning that TypeScript also provides an online playground, where you can quickly try out TypeScript code and instantly see the resulting JavaScript and possible compilation errors.
@@ -165,11 +165,11 @@ Let's describe our type *Operation*:
 type Operation = 'multiply' | 'add' | 'divide';
 ```
 
-Now the *Operation* type accepts only three kinds of input; exactly the three strings we wanted.
-Using the OR operator *|* we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/advanced-types.html#union-types).
-In this case, we used exact strings (that, in technical terms, are called [string literal types](http://www.typescriptlang.org/docs/handbook/advanced-types.html#string-literal-types)) but with unions, you could also make the compiler accept for example both string and number: *string | number*.
+Now the *Operation* type accepts only three kinds of values; exactly the three strings we wanted.
+Using the OR operator *|* we can define a variable to accept multiple values by creating a [union type](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types).
+In this case, we used exact strings (that, in technical terms, are called [string literal types](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types)) but with unions, you could also make the compiler accept for example both string and number: *string | number*.
 
-The *type* keyword defines a new name for a type: [a type alias](https://www.typescriptlang.org/docs/handbook/advanced-types.html#type-aliases).
+The *type* keyword defines a new name for a type: [a type alias](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases).
 Since the defined type is a union of three possible values, it is handy to give it an alias that has a representative name.
 
 Let's look at our calculator now:
@@ -252,9 +252,7 @@ The code of our calculator should look something like this:
 ```js
 type Operation = 'multiply' | 'add' | 'divide';
 
-type Result = number;  // highlight-line
-
-const calculator = (a: number, b: number, op: Operation) : Result => {  // highlight-line
+const calculator = (a: number, b: number, op: Operation) : number => {  // highlight-line
   switch(op) {
     case 'multiply':
       return a * b;
@@ -271,20 +269,55 @@ const calculator = (a: number, b: number, op: Operation) : Result => {  // highl
 try {
   console.log(calculator(1, 5 , 'divide'));
 } catch (error: unknown) {
-  let errorMessage = 'Something went wrong.'
+  let errorMessage = 'Something went wrong: '
   if (error instanceof Error) {
-    errorMessage += ' Error: ' + error.message;
+    errorMessage += error.message;
   }
   console.log(errorMessage);
 }
 ```
 
-As of TypeScript 4.0, *catch* blocks allow you to specify the type of catch clause variables.
-Pre-4.4, all *catch* clause variables were of type *any*.
-However, with the release of 4.4, the default type is *unknown*.
+### Type narrowing
+
+The default type of the catch block parameter *error* is *unknown*.
 The [unknown](https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-0.html#new-unknown-top-type) is a kind of top type that was introduced in TypeScript version 3 to be the type-safe counterpart of *any*.
 Anything is assignable to *unknown*, but *unknown* isn’t assignable to anything but itself and *any* without a type assertion or a control flow-based narrowing.
 Likewise, no operations are permitted on an *unknown* without first asserting or narrowing it to a more specific type.
+
+Both the possible causes of exception (wrong operator or division by zero) will throw an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object with an error message, that our program prints to the user.
+
+If our code would be JavaScript, we could print the error message by just referring to the field [message](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message) of the object *error* as follows:
+
+```js
+try {
+  console.log(calculator(1, 5 , 'divide'));
+} catch (error) {
+  console.log('Something went wrong: ' + error.message);  // highlight-line
+}
+```
+
+Since the default type of the *error* object in TypeScript is *unknown*, we have to [narrow](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) the type to access the field:
+
+```ts
+try {
+  console.log(calculator(1, 5 , 'divide'));
+} catch (error: unknown) {
+  let errorMessage = 'Something went wrong: '
+  // here we can not use error.message
+  if (error instanceof Error) { // highlight-line 
+    // the type is narrowed and we can refer to error.message
+    errorMessage += error.message;  // highlight-line 
+  }
+  // here we can not use error.message
+
+  console.log(errorMessage);
+}
+```
+
+Here the narrowing was done with a [typeof](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#typeof-type-guards) type guard, that is just one of the many ways to narrow a type.
+We shall see many others later in this part.
+
+### Accessing command line arguments
 
 The programs we have written are alright, but it sure would be better if we could use command-line arguments instead of always having to change the code to calculate different things.
 
@@ -307,7 +340,13 @@ The community is active and continuously reacting to updates and changes in comm
 You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
 Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix.
-For example: *npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose* and so on and so on.
+For example:
+
+```bash
+npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose
+```
+
+and so on and so on.
 The <i>@types/*</i> are maintained by [Definitely typed](https://github.com/DefinitelyTyped/DefinitelyTyped), a community project to maintain types of everything in one place.
 
 Sometimes, an npm package can also include its types within the code and, in that case, installing the corresponding <i>@types/*</i> is not necessary.
@@ -394,7 +433,7 @@ interface MultiplyValues {
   value2: number;
 }
 
-const parseArguments = (args: Array<string>): MultiplyValues => {
+const parseArguments = (args: string[]): MultiplyValues => {
   if (args.length < 4) throw new Error('Not enough arguments');
   if (args.length > 4) throw new Error('Too many arguments');
 
@@ -437,16 +476,21 @@ Something bad happened.
 Error: Provided values were not numbers!
 ```
 
-The definition of the function *parseArguments* has a couple of interesting things:
+There is quite a lot going on in the code.
+The most important addition is the function *parseArguments* that ensures that the parameters given to *multiplicator* are of the right type.
+If not, an exception is thrown with a descriptive error message.
+
+The definition of the function has a couple of interesting things:
 
 ```js
-const parseArguments = (args: Array<string>): MultiplyValues => {
+const parseArguments = (args: string[]): MultiplyValues => {
   // ...
 }
 ```
 
 Firstly, the parameter *args* is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings.
-The return value has the type *MultiplyValues*, which is defined as follows:
+
+The return value of the function has the type *MultiplyValues*, which is defined as follows:
 
 ```js
 interface MultiplyValues {
@@ -455,8 +499,25 @@ interface MultiplyValues {
 }
 ```
 
-The definition utilizes TypeScript's Interface [object type](https://www.typescriptlang.org/docs/handbook/2/objects.html) keyword, which is one way to define the "shape" an object should have.
+The definition utilizes TypeScript's [Interface](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces) keyword, which is one way to define the "shape" an object should have.
 In our case, it is quite obvious that the return value should be an object with the two properties *value1* and *value2*, which should both be of type number.
+
+### The alternative array syntax
+
+Note that there is also an alternative syntax for [arrays](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) in TypeScript.
+Instead of writing
+
+```js
+let values: number[]; 
+```
+
+we could use the "generics syntax" and write
+
+```js
+let values: Array<number>; 
+```
+
+In this course we shall mostly be following the convention enforced by the Eslint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple) that suggests to write the simple arrays with the [] syntax and use the the <> syntax for the more complex ones, see [here](https://typescript-eslint.io/rules/array-type/#array-simple) for examples.
 
 </div>
 
@@ -515,7 +576,7 @@ Write a function *calculateExercises* that calculates the average time of <i>dai
 - boolean value describing if the target was reached
 - a rating between the numbers 1-3 that tells how well the hours are met.
   You can decide on the metric on your own.
-- a text value explaining the rating
+- a text value explaining the rating, you can come up with the explanations
 
 The daily exercise hours are given to the function as an [array](https://www.typescriptlang.org/docs/handbook/basic-types.html#array) that contains the number of exercise hours for each day in the training period.
 E.g. a week with 3 hours of training on Monday, none on Tuesday, 2 hours on Wednesday, 4.5 hours on Thursday and so on would be represented by the following array:
@@ -572,6 +633,32 @@ Handle exceptions and errors appropriately.
 The exerciseCalculator should accept inputs of varied lengths.
 Determine by yourself how you manage to collect all needed input.
 
+Cople of things to notice:
+
+If you define helper functions in other modules, you should use the [JavaScript module system](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), that is, the one we have used with React where importing is done with
+
+```js
+import { isNotNumber } from "./utils";
+```
+
+and exporting
+
+```js
+export const isNotNumber = (argument: any): boolean =>
+  isNaN(Number(argument));
+
+default export "this is the default..."
+```
+
+Another note: somehow surprisingly TypeScript does not allow to define the same variable in many files at a "block-scope", that is, outside functions (or classes):
+
+![browser showing pong from localhost:3000/ping](../../images/9/60new.png)
+
+This is actually not quite true.
+This rule applies only to files that are treated as "scripts".
+A file is a script if it does not contain any export or import statements.
+If a file has those, then the file is treated as a [module](https://www.typescriptlang.org/docs/handbook/modules.html), <i>and</i> the variables do not get defined in the block-scope.
+
 </div>
 
 <div class="content">
@@ -588,12 +675,13 @@ Let's specify the following configurations in our <i>tsconfig.json</i> file:
 ```json
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true, // highlight-line
     "esModuleInterop": true,
     "moduleResolution": "node"
   }
@@ -705,7 +793,7 @@ This is because we banned unused parameters in our <i>tsconfig.json</i>:
 ```js
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true, // highlight-line
@@ -832,15 +920,22 @@ Let's add the HTTP POST endpoint *calculate* to our app:
 ```js
 import { calculator } from './calculator';
 
+app.use(express.json());
+
 // ...
 
 app.post('/calculate', (req, res) => {
   const { value1, value2, op } = req.body;
 
   const result = calculator(value1, value2, op);
-  res.send(result);
+  res.send({ result });
 });
+```
 
+To get this working, we must add an <i>export</i> to the function *calculator*:
+
+```js
+export const calculator = (a: number, b: number, op: Operation) : number => {
 ```
 
 When you hover over the *calculate* function, you can see the typing of the *calculator* even though the code itself does not contain any typings:
@@ -872,11 +967,12 @@ In the rare occasions when you truly cannot know what the type of a variable is,
 const a : any = /* no clue what the type will be! */.
 ```
 
-We already have <i>noImplicitAny</i> configured in our example, so why does the compiler not complain about the implicit *any* types?
-The reason is that the *query* field of an express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed *any*.
-The same is true for the *request.body* field we use to post data to an app.
+We already have <i>noImplicitAny: true</i> configured in our example, so why does the compiler not complain about the implicit *any* types?
+The reason is that the *body* field of an Express [Request](https://expressjs.com/en/5x/api.html#req) object is explicitly typed *any*.
+The same is true for the *request.query* field that Express uses for the query parameters.
 
-What if we would like to restrict developers from using the *any* type? Fortunately, we have methods other than <i>tsconfig.json</i> to enforce a coding style.
+What if we would like to restrict developers from using the *any* type?
+Fortunately, we have methods other than <i>tsconfig.json</i> to enforce a coding style.
 What we can do is use <i>ESlint</i> to manage
 our code.
 Let's install ESlint and its TypeScript extensions:
@@ -968,7 +1064,7 @@ We also have to solve the ESlint issues concerning the *any* type:
 
 We could and probably should disable some ESlint rules to get the data from the request body.
 
-Disabling *@typescript-eslint/no-unsafe-assignment* for the destructuring assignment is nearly enough:
+Disabling *@typescript-eslint/no-unsafe-assignment* for the destructuring assignment and calling the [Number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/Number) constructor to values is nearly enough:
 
 ```js
 app.post('/calculate', (req, res) => {
@@ -977,8 +1073,8 @@ app.post('/calculate', (req, res) => {
   // highlight-end
   const { value1, value2, op } = req.body;
 
-  const result = calculator(Number(value1), Number(value2), op);
-  res.send(result);
+  const result = calculator(Number(value1), Number(value2), op); // highlight-line
+  res.send({ result });
 });
 ```
 
@@ -997,7 +1093,7 @@ app.post('/calculate', (req, res) => {
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   // highlight-end
   const result = calculator(Number(value1), Number(value2), op);
-  res.send(result);
+  res.send({ result });
 });
 ```
 
@@ -1010,7 +1106,7 @@ app.post('/calculate', (req, res) => {
   const { value1, value2, op } = req.body;
 
 // highlight-start
-  if ( !value1 || isNaN(Number(value1))) {
+  if ( !value1 || isNaN(Number(value1)) ) {
     return res.status(400).send({ error: '...'});
   }
   // highlight-end
@@ -1019,9 +1115,65 @@ app.post('/calculate', (req, res) => {
 
   // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
   const result = calculator(Number(value1), Number(value2), op);
-  return res.send(result);
+  return res.send({ result });
 });
 ```
+
+We shall see later on in this parts some techniques how the <i>any</i> typed data (eg. the input an app recieves from the user) can be <i>narrowed</i> to a more specific type (such as number).
+With a proper narrowing of types, there is no more need to silence the eslint rules.
+
+### Type assertion
+
+Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet.
+Let us export the type Operation in <i>calcultor.ts</i>:
+
+```js
+export type Operation = 'multiply' | 'add' | 'divide';
+```
+
+Now we can import the type and use a <i>type assertion</i> to tell the TypeScript compiler what type a variable has:
+
+```js
+import { calculator, Operation } from './calculator'; // highligh-line
+
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // validate the data here
+
+  // assert the type
+  const operation = op as Operation;  // highlight-line 
+
+  const result = calculator(Number(value1), Number(value2), operation); // highlight-line
+
+  return res.send({ result });
+});
+```
+
+The defined constant *operation* has now the type *Operation* and the compiler is perfectly happy, no quieting of the Eslint rule is needed on the following function call.
+The new variable is actually not needed, the type assertion can be done when an argument is passed to the function:
+
+```js
+app.post('/calculate', (req, res) => {
+  // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+  const { value1, value2, op } = req.body;
+
+  // validate the data here
+
+  const result = calculator(
+    Number(value1), Number(value2), op as Operation // highlight-line
+  ); 
+
+  return res.send({ result });
+});
+```
+
+Using a type assertion (or quieting an Eslint rule) is always a bit risky thing.
+It leaves the TypeScript compiler off the hook, the compiler just trusts that we as developers know what we are doing.
+If the asserted type does <i>not</i> have the right kind of value, the result will be a runtime error, so one must be pretty careful when validating the data if a type assertion is used.
+
+In the next chapter we shall have a look at [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) which will provide a much more safe way of giving a stricter type for data that is coming from an external source.
 
 </div>
 
@@ -1036,7 +1188,7 @@ Configure your project to use the above ESlint settings and fix all the warnings
 #### 9.7 WebExercises
 
 Add an endpoint to your app for the exercise calculator.
-It should be used by doing an HTTP POST request to endpoint <i>exercises</i> with the input in the request body:
+It should be used by doing an HTTP POST request to endpoint <http://localhost:3002/exercises> with the input in the request body:
 
 ```js
 {

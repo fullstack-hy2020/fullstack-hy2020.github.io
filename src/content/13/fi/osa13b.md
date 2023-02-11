@@ -981,7 +981,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 #### Tehtävä 13.13.
 
 Toteuta sovellukseen kaikki blogit palauttavaan reittiin filtteröinti hakusanan perusteella. Filtteröinti toimii seuraavasti
-- _GET /api/blogs?serch=react_ palauttaa ne blogit joiden kentässä <i>title</i> esiintyy hakusana <i>react</i>, hakusana on epäcasesensitiivinen
+- _GET /api/blogs?search=react_ palauttaa ne blogit joiden kentässä <i>title</i> esiintyy hakusana <i>react</i>, hakusana on epäcasesensitiivinen
 - _GET /api/blogs_ palauttaa kaikki blogit
 
 
@@ -990,7 +990,7 @@ Toteuta sovellukseen kaikki blogit palauttavaan reittiin filtteröinti hakusanan
 
 Laajenna filtteriä siten, että se etsii hakusanaa kentistä <i>title</i> ja <i>author</i>, eli
 
-_GET /api/blogs?serch=jami_ palauttaa ne blogit joiden kentässä <i>title</i> tai kentässä <i>author</i> esiintyy hakusana <i>jami</i>
+_GET /api/blogs?search=jami_ palauttaa ne blogit joiden kentässä <i>title</i> tai kentässä <i>author</i> esiintyy hakusana <i>jami</i>
 #### Tehtävä 13.15.
 
 Muokkaa blogien reittiä siten, että se palauttaa blogit tykkäysten perusteella laskevassa järjestyksessä. Etsi [dokumentaatiosta](https://sequelize.org/master/manual/model-querying-basics.html) ohjeet järjestämiselle.

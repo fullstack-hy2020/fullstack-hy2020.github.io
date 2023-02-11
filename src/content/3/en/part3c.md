@@ -219,7 +219,7 @@ Let's destroy the default database <i>test</i> and change the name of the databa
 
 ```js
 const url =
-  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 ```
 
 Let's run our code again:
@@ -416,7 +416,7 @@ const mongoose = require('mongoose')
 
 // DO NOT SAVE YOUR PASSWORD TO GITHUB!!
 const url =
-  `mongodb+srv://fullstack:${fullstack@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
+  `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
 mongoose.set('strictQuery',false)
 mongoose.connect(url)
@@ -448,7 +448,11 @@ The frontend assumes that every object has a unique id in the <i>id</i> field.
 We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
 
 One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the *toJSON* method of the schema, which is used on all instances of the models produced with that schema.
-Modifying the method works like this:
+  
+To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: <https://mongoosejs.com/docs/guide.html#options>.
+See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the toJSON option.
+  
+See <https://mongoosejs.com/docs/api.html#transform> for more info on the transform function.
 
 ```js
 noteSchema.set('toJSON', {
@@ -714,8 +718,7 @@ In the following exercises, write all Mongoose-specific code into its own module
 Change the backend so that new numbers are <i>saved to the database</i>.
 Verify that your frontend still works after the changes.
 
-At this point, you can choose to simply allow users to create all phonebook entries.
-At this stage, the phonebook can have multiple entries for a person with the same name.
+At this stage, you can ignore whether there is already a person in the database with the same name as the person you are adding.
 
 </div>
 
@@ -996,6 +999,26 @@ After testing the backend directly with Postman and the VS Code REST client, we 
 The frontend also appears to work with the backend using the database.
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+
+### A true full stack developer's oath
+
+It is again time for the exercises.
+The complexity of our app is now taken another step since besides frontend and backend we also have a database.
+There are indeed really many potential sources of error.
+
+So we should once more extend our oath:
+
+Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+
+- I will have my browser developer console open all the time
+- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
+- I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect
+- <i>I will keep an eye on the database: does the backend save data there in the right format</i>
+- I progress with small steps
+- I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpoint problems
+- If my code does not work, I will not write more code.
+  Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>
 

@@ -661,7 +661,8 @@ For the sake of simplicity, our application will respond with 204 in both cases.
 
 ### Postman
 
-So how do we test the delete operation? HTTP GET requests are easy to make from the browser.
+So how do we test the delete operation?
+HTTP GET requests are easy to make from the browser.
 We could write some JavaScript for testing deletion, but writing test code is not always the best solution in every situation.
 
 Many tools exist for making the testing of backends easier.
@@ -743,7 +744,7 @@ In addition to defining the URL and request type in Postman, we also have to def
 
 The application prints the data that we sent in the request to the console:
 
-![terminal printing content provided in postman](../../images/3/15e.png)
+![terminal printing content provided in postman](../../images/3/15new.png)
 
 **NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend.
 Thanks to Nodemon any changes we make to the code will restart the application.

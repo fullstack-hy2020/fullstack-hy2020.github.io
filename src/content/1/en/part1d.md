@@ -419,8 +419,8 @@ Old-school, print-based debugging is always a good idea.
 If the component
 
 ```js
-const Button = ({ onClick, text }) => (
-  <button onClick={onClick}>
+const Button = ({ handleClick, text }) => (
+  <button onClick={handleClick}>
     {text}
   </button>
 )
@@ -432,9 +432,9 @@ To do this effectively, we must transform our function into the less compact for
 ```js
 const Button = (props) => { 
   console.log(props) // highlight-line
-  const { onClick, text } = props
+  const { handleClick, text } = props
   return (
-    <button onClick={onClick}>
+    <button onClick={handleClick}>
       {text}
     </button>
   )
@@ -987,7 +987,8 @@ const Button = (props) => (
 )
 ```
 
-The component gets the event handler function from the *handleClick* prop, and the text of the button from the *text* prop. Let's use the new component:
+The component gets the event handler function from the *handleClick* prop, and the text of the button from the *text* prop.
+Let's use the new component:
 
 ```js
 const App = (props) => {
@@ -1093,11 +1094,13 @@ Also, everything related to class-based components is irrelevant to us;
 ### Web programmers oath
 
 Programming is hard, that is why I will use all the possible means to make it easier
+
 - I will have my browser developer console open all the time
 - I progress with small steps
-- I will write lots of *console.log* statements to to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything still was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask help
+- I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpointing problems
+- If my code does not work, I will not write more code.
+Instead I start deleting the code until it works or just return to a state when everything was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>
 
@@ -1124,10 +1127,17 @@ In some situations you may also have to run the command below from the root of t
 rm -rf node_modules/ && npm i
 ```
 
+If and <i>when</i> you encounter an error message
+
+> <i>Objects are not valid as a React child</i>
+
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
+
 <h4> 1.6: unicafe step1</h4>
 
 Like most companies, the student restaurant of the University of Helsinki [Unicafe](https://www.unicafe.fi) collects feedback from its customers.
-Your task is to implement a web application for collecting customer feedback. There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
+Your task is to implement a web application for collecting customer feedback.
+There are only three options for feedback: <i>good</i>, <i>neutral</i>, and <i>bad</i>.
 
 The application must display the total number of collected feedback for each category.
 Your final application could look like this:

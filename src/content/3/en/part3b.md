@@ -31,11 +31,13 @@ Now frontend's GET request to <http://localhost:3001/api/notes> does not work fo
 
 ![Get request showing error in dev tools](../../images/3/3ae.png)
 
-What's going on here? We can access the backend from a browser and from postman without any problems.
+What's going on here?
+We can access the backend from a browser and from postman without any problems.
 
 ### Same origin policy and CORS
 
-The issue lies with a thing called `same origin policy`. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
+The issue lies with a thing called `same origin policy`.
+A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
 
 ```text
 http://example.com:80/index.html
@@ -54,7 +56,8 @@ If it contains `*` or the URL of the source HTML, the browser will process the r
   
 The <strong>same-origin policy</strong> is a security mechanism implemented by browsers in order to prevent session hijacking among other security vulnerabilities.
 
-In order to enable legitimate cross-origin requests (requests to URLs that don't share the same origin) W3C came up with a mechanism called <strong>CORS</strong>(Cross-Origin Resource Sharing). According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
+In order to enable legitimate cross-origin requests (requests to URLs that don't share the same origin) W3C came up with a mechanism called <strong>CORS</strong>(Cross-Origin Resource Sharing).
+According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
 
 > <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served.
 A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos.
@@ -99,8 +102,10 @@ Now that the whole stack is ready, let's move our application to the internet.
 There are an ever-growing number of services that can be used to host an app on the internet.
 The developer-friendly services like PaaS (i.e. Platform as a Service) take care of installing the execution environment (e.g. Node.js) and could also provide various services such as databases.
 
-For a decade, [Heroku](http://heroku.com) was dominating the PaaS scene. Unfortunately the free tier Heroku ended at 27th November 2022.
-This is very unfortunate for many developers, especially students. Heroku is still very much a viable option if you are willing to spend some money.
+For a decade, [Heroku](http://heroku.com) was dominating the PaaS scene.
+Unfortunately the free tier Heroku ended at 27th November 2022.
+This is very unfortunate for many developers, especially students.
+Heroku is still very much a viable option if you are willing to spend some money.
 They also have [a student program](https://www.heroku.com/students) that provides some free credits.
 
 We are now introducing two services [Fly.io](https://fly.io/) and [Render](https://render.com/) that both have a (limited) free plan.
@@ -170,7 +175,8 @@ Do not create a Postgres database for the app and do not create an Upstash Redis
 The last question is "Would you like to deploy now?".
 We should answer "no" since we are not quite ready yet.
 
-Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is configured. To get the app up and running we <i>might</i> need to do a small addition to the part [env] of the configuration:
+Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is configured.
+To get the app up and running we <i>might</i> need to do a small addition to the part [env] of the configuration:
 
 ```bash
 [env]
@@ -185,9 +191,11 @@ Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is c
   processes = ["app"]
 ```
 
-We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [services]) where the app should create the server. Note that the definition might be already there, but some times it has been missing.
+We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [services]) where the app should create the server.
+Note that the definition might be already there, but some times it has been missing.
 
-We are now ready to deploy the app to the Fly.io servers. That is done with the following command:
+We are now ready to deploy the app to the Fly.io servers.
+That is done with the following command:
 
 ```bash
 fly deploy
@@ -209,7 +217,6 @@ fly deploy
 A particularly important command is *fly logs*.
 This command can be used to view server logs.
 It is best to keep logs always visible!
-
 
 **Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL has caused problems.
 If the following command just hangs
@@ -247,15 +254,18 @@ The app repository is then connected to Render:
 
 The connecting seem to require that the app reopository is public.
 
-Next we will define the basic configurations. If the app is <i>not</i> at the root of the repository the <i>Root directory</i> needs to be given a proper value:
+Next we will define the basic configurations.
+If the app is <i>not</i> at the root of the repository the <i>Root directory</i> needs to be given a proper value:
 
 ![providing root directory in render deploy options](../../images/3/r3.png)
 
-After this, the app starts up in the Render. The dashboard tells us the app state and the url where the app is running:
+After this, the app starts up in the Render.
+The dashboard tells us the app state and the url where the app is running:
 
 ![render showing app state and logs starting up](../../images/3/r4.png)
 
-According to the [documentation](https://render.com/docs/deploys) every commit to GitHub should redeploy the app. For some reason this is not always working.
+According to the [documentation](https://render.com/docs/deploys) every commit to GitHub should redeploy the app.
+For some reason this is not always working.
 
 Fortunately, it is also possible to manually redeploy the app:
 
@@ -265,7 +275,8 @@ Also, the app logs can be seen in the dashboard:
 
 ![seeing the render app there](../../images/3/r7.png)
 
-We notice now from the logs that the app has been started in the port 10000. The app code gets the right port through the environment variable PORT so it is essential that the file <i>index.js</i> has been updated as follows:
+We notice now from the logs that the app has been started in the port 10000.
+The app code gets the right port through the environment variable PORT so it is essential that the file <i>index.js</i> has been updated as follows:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
@@ -444,7 +455,7 @@ There is also a script *npm run logs:prod* to show the Fly.io logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
-#### Render
+#### Render script
 
 In case of Render, the scripts look like the following
 

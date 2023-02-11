@@ -252,7 +252,8 @@ In [part 8](/en/part8), our topic is GraphQL, which provides a nice mechanism fo
 ### Virtual DOM
 
 The concept of the Virtual DOM often comes up when discussing React.
-What is it all about? As mentioned in [part 0](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom), browsers provide a [DOM API](https://developer.mozilla.org/fi/docs/DOM) through which the JavaScript running in the browser can modify the elements defining the appearance of the page.
+What is it all about?
+As mentioned in [part 0](/en/part0/fundamentals_of_web_apps#document-object-model-or-dom), browsers provide a [DOM API](https://developer.mozilla.org/fi/docs/DOM) through which the JavaScript running in the browser can modify the elements defining the appearance of the page.
 
 When a software developer uses React, they rarely or never directly manipulate the DOM.
 The function defining the React component returns a set of [React elements](https://reactjs.org/docs/glossary.html#elements).
@@ -269,9 +270,7 @@ The React elements defining the appearance of the components of the application 
 With the help of the [ReactDOM](https://reactjs.org/docs/react-dom.html) library, the virtual DOM defined by the components is rendered to a real DOM that can be shown by the browser using the DOM API:
 
 ```js
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <App />
-)
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 When the state of the application changes, a <i>new virtual DOM</i> gets defined by the components.
@@ -294,13 +293,13 @@ If we're using [Redux Thunk](/en/part6/communicating_with_server_in_a_redux_appl
 Because both React and [Flux](https://facebook.github.io/flux/docs/in-depth-overview) were created at Facebook, one could say that using React only as a UI library is the intended use case.
 Following the Flux architecture adds some overhead to the application, and if we're talking about a small application or prototype, it might be a good idea to use React "wrong", since [over-engineering](https://en.wikipedia.org/wiki/Overengineering) rarely yields an optimal result.
 
-As I mentioned at the end of [part 6](/en/part6/connect#redux-and-the-component-state), the React [Context API](https://reactjs.org/docs/context.html) offers one alternative solution for centralized state management without the need for third-party libraries such as redux.
-You can read more about this [here](https://www.simplethread.com/cant-replace-redux-with-hooks/) and [here](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
+Part 6 [last chapter](/part6/react_query_use_reducer_ja_contex) covers the newer trends of state management in React.
+React's hook functions <i>useReducer</i> and <i>useContext</i> provide a kind of lightweight version of Redux. <i>React Query</i>, on the other hand, is a library that solves many of the problems associated with handling state on the server, eliminating the need for a React application to store data retrieved from the server directly in frontend state.
 
 ### React/node-application security
 
 So far during the course, we have not touched on information security much.
-We do not have much time for this now either, but fortunately, the department has the MOOC course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) for this important topic.
+We do not have much time for this now either, but fortunately, University of Helsinki has a MOOC course [Securing Software](https://cybersecuritybase.mooc.fi/module-2.1) for this important topic.
 
 We will, however, take a look at some things specific to this course.
 
@@ -617,7 +616,6 @@ All of this happens automatically through the infrastructure and there is no nee
 
 ### Useful libraries and interesting links
 
-<!-- Javasciptin kehittäjäyhteisö on tuottanut valtavan määrän erilaisia hyödyllisiä kirjastoja ja jos olet koodaamassa jotain vähänkin isompaa, kannattaa etsiä mitä valmista kalustoa on jo tarjolla. Seuraavassa listataan muutamia luotettavien tahojen hyväksi havaitsemia kirjastoja. -->
 The JavaScript developer community has produced a large variety of useful libraries.
 If you are developing anything more substantial, it is worth it to check if existing solutions are already available.
 Below are listed some libraries recommended by trustworthy parties.
@@ -625,17 +623,12 @@ Below are listed some libraries recommended by trustworthy parties.
 If your application has to handle complicated data, [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), is a good library to use.
 If you prefer the functional programming style, you might consider using [ramda](https://ramdajs.com/).
 
-<!-- Jos sovelluksessa käsitellään aikaa, tarjoavat [moment](https://momentjs.com/) ja hieman uudempi [date-fns](https://github.com/date-fns/date-fns) siihen hyvän välineistön. -->
 If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that.
-
-<!-- Lomakkeiden käyttöä helpottavia kirjastoja ovat [Formik](https://www.npmjs.com/package/formik) ja [redux-form](https://redux-form.com/8.3.0/). Jos sovelluksessa tulee piirtää graafeja, on vaihtoehtoja lukuisia, sekä [recharts](http://recharts.org/en-US/) että [highcharts](https://github.com/highcharts/highcharts-react) ovat hyviksi havaittuja. -->
-[Formik](https://www.npmjs.com/package/formik) and [final-form](https://final-form.org/react/) can be used to handle forms more easily.
+If you have complex forms in your apps, hava a look would [React Hook Form](https://react-hook-form.com/) be good fit.
 If your application displays graphs, there are multiple options to choose from.
 Both [recharts](http://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well-recommended.
 
-The [immutable.js](https://github.com/facebook/immutable-js/) library maintained by Facebook provides, as the name suggests, immutable implementations of some data structures.
-The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) in part 6, reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs.
-Over the past year, some of the popularity of Immutable.js has been taken over by [Immer](https://github.com/mweststrate/immer), which provides similar functionality but in a somewhat easier package.
+The [Immer](https://github.com/mweststrate/immer) provides immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) in part 6, reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs.
 
 [Redux-saga](https://redux-saga.js.org/) provides an alternative way to make asynchronous actions for [Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6.
 Some embrace the hype and like it.

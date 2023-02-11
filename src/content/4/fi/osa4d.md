@@ -13,7 +13,7 @@ Toteutamme nyt backendiin tuen [token-perustaiselle](https://scotch.io/tutorials
 
 Token-autentikaation periaatetta kuvaa seuraava sekvenssikaavio:
 
-![Sekvensikaavio, joka sisältää saman datan kuin alla oleva bulletpoint-lista](../../images/4/16e.png)
+![Sekvensikaavio, joka sisältää saman datan kuin alla oleva bulletpoint-lista](../../images/4/16new.png)
 
 - Alussa käyttäjä kirjautuu Reactilla toteutettua kirjautumislomaketta käyttäen
   - lisäämme kirjautumislomakkeen frontendiin [osassa 5](/osa5)
@@ -114,7 +114,7 @@ Kirjautuminen ei kuitenkaan toimi, konsoli näyttää seuraavalta:
 (node:32911) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
 ```
 
-Ongelman aiheuttaa komento _jwt.sign(userForToken, process.env.SECRET)_ sillä ympäristömuuttujalle <i>SECRET</i> on unohtunut määritellä arvo. Kun arvo (joka saa olla mikä tahansa merkkijono) määritellään tiedostoon <i>.env</i>, alkaa kirjautuminen toimia.
+Ongelman aiheuttaa komento _jwt.sign(userForToken, process.env.SECRET)_ sillä ympäristömuuttujalle <i>SECRET</i> on unohtunut määritellä arvo. Kun arvo (joka saa olla mikä tahansa merkkijono) määritellään tiedostoon <i>.env</i> (ja sovellus uudelleenkäynnistetään), alkaa kirjautuminen toimia.
 
 Onnistunut kirjautuminen palauttaa kirjautuneen käyttäjän tiedot ja tokenin:
 
@@ -146,8 +146,8 @@ const jwt = require('jsonwebtoken') //highlight-line
   //highlight-start
 const getTokenFrom = request => {
   const authorization = request.get('authorization')
-  if (authorization && authorization.toLowerCase().startsWith('bearer ')) {
-    return authorization.substring(7)
+  if (authorization && authorization.startsWith('Bearer ')) {
+    return authorization.replace('Bearer ', '')
   }
   return null
 }
@@ -156,11 +156,9 @@ const getTokenFrom = request => {
 notesRouter.post('/', async (request, response) => {
   const body = request.body
 //highlight-start
-  const token = getTokenFrom(request)
-
-  const decodedToken = jwt.verify(token, process.env.SECRET)
-  if (!token || !decodedToken.id) {
-    return response.status(401).json({ error: 'token missing or invalid' })
+  const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
   }
 
   const user = await User.findById(decodedToken.id)
@@ -169,7 +167,6 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
-    date: new Date(),
     user: user._id
   })
 
@@ -177,31 +174,47 @@ notesRouter.post('/', async (request, response) => {
   user.notes = user.notes.concat(savedNote._id)
   await user.save()
 
-  response.json(savedNote.toJSON())
+  response.json(savedNote)
 })
 ```
 
 Apufunktio _getTokenFrom_ eristää tokenin headerista <i>authorization</i>. Tokenin oikeellisuus varmistetaan metodilla _jwt.verify_. Metodi myös dekoodaa tokenin, eli palauttaa olion, jonka perusteella token on laadittu:
 
 ```js
-const decodedToken = jwt.verify(token, process.env.SECRET)
+const decodedToken = jwt.verify(getTokenFrom(request), process.env.SECRET)
 ```
 
 Tokenista dekoodatun olion sisällä on kentät <i>username</i> ja <i>id</i> eli se kertoo palvelimelle kuka pyynnön on tehnyt.
 
-Jos tokenia ei ole tai tokenista dekoodattu olio ei sisällä käyttäjän identiteettiä (eli _decodedToken.id_ ei ole määritelty), palautetaan virheestä kertova statuskoodi [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized) ja kerrotaan syy vastauksen bodyssä:
+Jos tokenia ei ole tai se on epävalidi, syntyy poikkeus <i>JsonWebTokenError</i>. Laajennetaan virheidenkäsittelijämiddleware huomioimaan tilanne:
 
 ```js
-if (!token || !decodedToken.id) {
-  return response.status(401).json({
-    error: 'token missing or invalid'
-  })
+const errorHandler = (error, request, response, next) => {
+  logger.error(error.message)
+
+  if (error.name === 'CastError') {
+    return response.status(400).send({ error: 'malformatted id' })
+  } else if (error.name === 'ValidationError') {
+    return response.status(400).json({ error: error.message })
+  } else if (error.name ===  'JsonWebTokenError') { // highlight-line
+    return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
+  }
+
+  next(error)
 }
+```
+
+Jos token on muuten kunnossa, mutta tokenista dekoodattu olio ei sisällä käyttäjän identiteettiä (eli _decodedToken.id_ ei ole määritelty), palautetaan virheestä kertova statuskoodi [401 unauthorized](https://www.rfc-editor.org/rfc/rfc9110.html#name-401-unauthorized) ja kerrotaan syy vastauksen bodyssä:
+
+```js
+  if (!decodedToken.id) {
+    return response.status(401).json({ error: 'token invalid' })
+  }
 ```
 
 Kun pyynnön tekijän identiteetti on selvillä, jatkuu suoritus entiseen tapaan.
 
-Uuden muistiinpanon luominen onnistuu nyt postmanilla jos <i>authorization</i>-headerille asetetaan oikeanlainen arvo, eli merkkijono <i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, missä loppuosa on <i>login</i>-operaation palauttama token.
+Uuden muistiinpanon luominen onnistuu nyt Postmanilla jos <i>Authorization</i>-headerille asetetaan oikeanlainen arvo, eli merkkijono <i>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, missä loppuosa on <i>login</i>-operaation palauttama token.
 
 Postmanilla luominen näyttää seuraavalta
 
@@ -211,50 +224,9 @@ ja Visual Studio Coden REST clientillä
 
 ![VS coden näkymä, joka kertoo että POST localhost:3001/api/notes pyyntöön mukaan on liitetty Authorization-headeri jonka arvo on bearer tokeninarvo](../../images/4/21ea.png)
 
-### Poikkeusten käsittely
-
-Tokenin verifiointi voi myös aiheuttaa poikkeuksen <i>JsonWebTokenError</i>. Jos esim. poistetaan tokenista pari merkkiä, ja yritetään luoda muistiinpano, tapahtuu seuraavasti
-
-```bash
-JsonWebTokenError: invalid signature
-    at /Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:126:19
-    at getSecret (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:80:14)
-    at Object.module.exports [as verify] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/verify.js:84:10)
-    at notesRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/notes.js:40:30)
-```
-
-Syynä tokenin dekoodaamisen aiheuttamalle virheelle on monia. Token voi olla viallinen, kuten esimerkissämme, väärennetty tai eliniältään vanhentunut. Laajennetaan virheidenkäsittelymiddlewarea huomioimaan tokenin dekoodaamisen aiheuttamat virheet
-
-```js
-const unknownEndpoint = (request, response) => {
-  response.status(404).send({ error: 'unknown endpoint' })
-}
-
-const errorHandler = (error, request, response, next) => {
-  if (error.name === 'CastError') {
-    return response.status(400).send({
-      error: 'malformatted id'
-    })
-  } else if (error.name === 'ValidationError') {
-    return response.status(400).json({
-      error: error.message 
-    })
-  } else if (error.name === 'JsonWebTokenError') {  // highlight-line
-    return response.status(401).json({ // highlight-line
-      error: 'invalid token' // highlight-line
-    }) // highlight-line
-  }
-
-  logger.error(error.message)
-
-  next(error)
-}
-```
-
 Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [githubissa](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-9), branchissä <i>part4-9</i>.
 
 Jos sovelluksessa on useampia rajapintoja jotka vaativat kirjautumisen, kannattaa JWT:n validointi eriyttää omaksi middlewarekseen, tai käyttää jotain jo olemassa olevaa kirjastoa kuten [express-jwt](https://github.com/auth0/express-jwt).
-
 
 ### Token-perustaisen kirjautumisen ongelmat
 

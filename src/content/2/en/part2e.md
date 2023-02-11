@@ -423,9 +423,9 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-and this blows up the app since we can not call the method *filter* on the value *null*.
+and this blows up the app since we can not call method *map* of the value *null*.
 
-When we set *notes* to be initially an empty array, there is no error since it is allowed to call *filter* to an empty array.
+When we set *notes* to be initially an empty array, there is no error since it is allowed to call *map* to an empty array.
 
 So, the initialization of the state "masked" the problem that is caused by the fact that the data is not yet fetched from the backend.
 
@@ -455,7 +455,8 @@ const App = () => {
 } 
 ```
 
-So on the first render, nothing is rendered. When the notes arrive from the backend, the effect used the function *setNotes* to set the value of the state *notes*.
+So on the first render, nothing is rendered.
+When the notes arrive from the backend, the effect used the function *setNotes* to set the value of the state *notes*.
 This causes the component to be rendered again, and at the second render, the notes get rendered to the screen.
 
 The method based on conditional rendering is suitable in cases where it is impossible to define the state so that the initial rendering is possible.
@@ -559,21 +560,23 @@ const App = () => {
 }
 ```
 
-The useEffect hook has now *[currency]* as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter *[currency]* changes. That is, when the state *currency* gets a new value, the content of the table changes and the effect function is executed.
+The useEffect hook has now *[currency]* as the second parameter.
+The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter *[currency]* changes.
+That is, when the state *currency* gets a new value, the content of the table changes and the effect function is executed.
 
 The effect has the following condition
 
 ```js
 if (currency) { 
-  // get exchange rates
+  // exchange rates are fetched
 }
 ```
 
-which prevents requesting the exchange rates just after the first render when the variable *currency* still has the initial value, i.e. an empty string.
+which prevents requesting the exchange rates just after the first render when the variable *currency* still has the initial value, i.e. a null value.
 
 So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address <https://open.er-api.com/v6/latest/eur> and stores the response in the *rates* state.
 
-When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested form the API.
+When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested from the API.
 
 The way presented here for making API requests might seem a bit awkward.
 This particular application could have been made completely without using the useEffect, by making the API requests directly in the form submit handler function:
@@ -589,7 +592,8 @@ This particular application could have been made completely without using the us
   }
 ```
 
-However, there are situations where that technique would not work. For example, you <i>might</i> encounter one such a situation in the exercise 2.20 where the use of useEffect could provide a solution.
+However, there are situations where that technique would not work.
+For example, you <i>might</i> encounter one such a situation in the exercise 2.20 where the use of useEffect could provide a solution.
 Note that this depends quite much on the approach you selected, e.g. the model solution does not use this trick.
 
 </div>
@@ -620,7 +624,8 @@ When there is only one country matching the query, then the basic data of the co
 
 ![flag and additional attributes screenshot](../../images/2/19c3.png)
 
-**NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>.
+**NB**: It is enough that your application works for most countries.
+Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>.
 You don't need to worry about these edge cases.
 
 **WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository.
@@ -650,9 +655,11 @@ Note that it might take some minutes until a generated API key is valid.
 
 If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
 
-**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*. This issue can be fixed by completing the exercise using Chrome.
+**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*.
+This issue can be fixed by completing the exercise using Chrome.
 
-**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control!
+**NB:** You need an api-key to use almost every weather service.
+Do not save the api-key to source control!
 Nor hardcode the api-key to your source code.
 Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
 
@@ -682,6 +689,7 @@ REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 
 Note that you will need to restart the server to apply the changes.
 
-This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+This was the last exercise of this part of the course.
+It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

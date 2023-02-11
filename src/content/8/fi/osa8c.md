@@ -11,10 +11,10 @@ Laajennetaan sovellusta käyttäjänhallinnalla. Siirrytään kuitenkin ensin k�
 
 ### Mongoose ja Apollo
 
-Otetaan käyttöön Mongoose:
+Otetaan käyttöön Mongoose ja asennetaan samalla dotenv:
 
 ```bash
-npm install mongoose
+npm install mongoose dotenv
 ```
 
 Tehdään osien [3](/osa3/tietojen_tallettaminen_mongo_db_tietokantaan) ja [4](/osa4/sovelluksen_rakenne_ja_testauksen_alkeet) tapaa imitoiden.
@@ -54,11 +54,15 @@ Mukana on myös muutama validointi. Arvon olemassaolon takaava _required: true_ 
 Saamme sovelluksen jo suurilta osin toimimaan seuraavilla muutoksilla:
 
 ```js
-const { ApolloServer, UserInputError, gql } = require('apollo-server')
+// ...
+
 const mongoose = require('mongoose')
+mongoose.set('strictQuery', false)
 const Person = require('./models/person')
 
-const MONGODB_URI = 'mongodb+srv://databaseurlhere'
+require('dotenv').config()
+
+const MONGODB_URI = process.env.MONGODB_URI
 
 console.log('connecting to', MONGODB_URI)
 
@@ -70,7 +74,7 @@ mongoose.connect(MONGODB_URI)
     console.log('error connection to MongoDB:', error.message)
   })
 
-const typeDefs = gql`
+const typeDefs = `
   ...
 `
 
@@ -109,21 +113,21 @@ Muutokset ovat melko suoraviivaisia. Huomio kiinnittyy pariin seikkaan. Kuten mu
 
 Toinen huomionarvoinen seikka on se, että resolverifunktiot palauttavat nyt <i>promisen</i>, aiemminhan ne palauttivat aina normaaleja oliota. Kun resolveri palauttaa promisen, Apollo server [osaa lähettää vastaukseksi](https://www.apollographql.com/docs/apollo-server/data/resolvers/#return-values) sen arvon mihin promise resolvoituu.
 
-
 Eli esimerkiksi jos seuraava resolverifunktio suoritetaan,
 
 ```js
 allPersons: async (root, args) => {
   return Person.find({})
-},
+}
 ```
 
 odottaa Apollo server promisen valmistumista ja lähettää promisen vastauksen kyselyn tekijälle. Apollo toimii siis suunnilleen seuraavasti:
 
 ```js
-Person.find({}).then( result => {
-  // palautetaan kyselyn tuloksena result
-})
+allPersons: async (root, args) => {
+  const result = await Person.find({})
+  return result
+}
 ```
 
 Täydennetään vielä resolveri _allPersons_ ottamaan huomioon optionaalinen filtterinä toimiva parametri _phone_:
@@ -155,7 +159,7 @@ Person.find({ phone: { $exists: false }})
 
 ### Validoinnit
 
-GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi sopiva poikkeus, joka on tällä kertaa [UserInputError](https://www.apollographql.com/docs/apollo-server/data/errors/):
+GraphQL:n lisäksi syötteet validoidaan nyt Mongoose-skeemassa määriteltyjä validointeja käyttäen. Skeemassa olevien validointivirheiden varalta _save_-metodeille täytyy lisätä virheen käsittelevä _try/catch_-lohko. Heitetään catchiin jouduttaessa vastaukseksi   [virhekoodilla](https://www.apollographql.com/docs/apollo-server/data/errors/#built-in-error-codes) *BAD\_USER\_INPUT* varustetu poikkeus [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors):
 
 ```js
 Mutation: {
@@ -166,8 +170,12 @@ Mutation: {
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving person failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 // highlight-end
@@ -182,8 +190,12 @@ Mutation: {
       try {
         await person.save()
       } catch (error) {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Saving number failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       }
 // highlight-end
@@ -192,6 +204,8 @@ Mutation: {
     }
 }
 ```
+
+Mongoosen virheen tiedot ja ongelman aiheuttanut data on nyt liitetty poikkeuksen konfiguraatio-olioon <i>extensions</i>, näin ne saadaan välitettyä kutsujalle. 
 
 Backendin koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-4), branchissa <i>part8-4</i>.
 
@@ -268,8 +282,6 @@ Mutaatioiden resolverit seuraavassa:
 ```js
 const jwt = require('jsonwebtoken')
 
-const JWT_SECRET = 'NEED_HERE_A_SECRET_KEY'
-
 Mutation: {
   // ..
   createUser: async (root, args) => {
@@ -277,16 +289,24 @@ Mutation: {
 
     return user.save()
       .catch(error => {
-        throw new UserInputError(error.message, {
-          invalidArgs: args,
+        throw new GraphQLError('Creating the user failed', {
+          extensions: {
+            code: 'BAD_USER_INPUT',
+            invalidArgs: args.name,
+            error
+          }
         })
       })
   },
   login: async (root, args) => {
     const user = await User.findOne({ username: args.username })
 
-    if ( !user || args.password !== 'secret' ) {
-      throw new UserInputError("wrong credentials")
+    if ( !user || args.password !== 'secret' ) {
+      throw new GraphQLError('wrong credentials', {
+        extensions: {
+          code: 'BAD_USER_INPUT'
+        }
+      })        
     }
 
     const userForToken = {
@@ -294,12 +314,12 @@ Mutation: {
       id: user._id,
     }
 
-    return { value: jwt.sign(userForToken, JWT_SECRET) }
+    return { value: jwt.sign(userForToken, process.env.JWT_SECRET) }
   },
 },
 ```
 
-Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.
+Käyttäjän luova mutaatio on suoraviivainen. Kirjautumisesta vastaava mutaatio tarkastaa onko käyttäjätunnus/salasana-pari validi ja jos on, palautetaan [osasta 4](/osa4/token_perustainen_kirjautuminen) tuttu jwt-token.  Jotta koodi toimisi, täytyy ympäristömuuttujalle *JWT\_SECRET* muistaa antaa arvo  <i>.env</i>-tiedostossa.
 
 Käyttäjän luonti onnistuu nyt seuraavasti:
 
@@ -331,31 +351,32 @@ Aivan kuten REST:in tapauksessa myös nyt ideana on, että kirjautunut käyttäj
 
 ![](../../images/8/24x.png)
 
-Laajennetaan sitten backendin olion _server_ määrittelyä lisäämällä konstruktorikutsuun kolmas parametri [context](https://www.apollographql.com/docs/apollo-server/data/data/#context-argument):
+Muutetaan backendin käynnistämistä siten, että annetaan käynnistyksen huolehtivalle funktiolle [startStandaloneServer](https://www.apollographql.com/docs/apollo-server/api/standalone/) toinen parametri [context](https://www.apollographql.com/docs/apollo-server/data/context/):
 
 ```js
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
+startStandaloneServer(server, {
+  listen: { port: 4000 },
   // highlight-start
-  context: async ({ req }) => {
+  context: async ({ req, res }) => {
     const auth = req ? req.headers.authorization : null
-    if (auth && auth.toLowerCase().startsWith('bearer ')) {
+    if (auth && auth.startsWith('Bearer ')) {
       const decodedToken = jwt.verify(
-        auth.substring(7), JWT_SECRET
+        auth.substring(7), process.env.JWT_SECRET
       )
-
       const currentUser = await User
         .findById(decodedToken.id).populate('friends')
-
       return { currentUser }
     }
-  }
+  },
   // highlight-end
+}).then(({ url }) => {
+  console.log(`Server ready at ${url}`)
 })
 ```
 
-Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>, context on siis oikea paikka tehdä asioita, jotka ovat useille resolvereille yhteistä, kuten pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
+Kontekstin avulla voidaan suorittaa jotain kaikille kyselyille ja mutaatioille yhteisiä asioita, esim. pyyntöön liittyvän [käyttäjän tunnistaminen](https://blog.apollographql.com/authorization-in-graphql-452b1c402a9?_ga=2.45656161.474875091.1550613879-1581139173.1549828167).
+
+Contextin palauttama olio annetaan kaikille resolvereille <i>kolmantena parametrina</i>.
 
 Määrittelemämme koodi siis asettaa kontekstin kenttään _currentUser_ pyynnön tehnyttä käyttäjää vastaavan olion. Jos pyyntöön ei liity käyttäjää, on kentän arvo määrittelemätön.
 
@@ -369,6 +390,10 @@ Query: {
   }
 },
 ```
+
+Jos headerissa on oikea arvo, palauttaa kysely headerin yksilöimän käyttäjän tiedot
+
+![](../../images/8/50new.png)
 
 ### Tuttavalista
 
@@ -384,17 +409,27 @@ Mutation: {
     const person = new Person({ ...args })
     const currentUser = context.currentUser // highlight-line
 
-    if (!currentUser) { // highlight-line
-      throw new AuthenticationError("not authenticated") // highlight-line
-    } // highlight-line
+    // highlight-start
+    if (!currentUser) {
+      throw new GraphQLError('not authenticated', {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+        }
+      })
+    }
+    // highlight-end
 
     try {
       await person.save()
       currentUser.friends = currentUser.friends.concat(person) // highlight-line
       await currentUser.save() // highlight-line
     } catch (error) {
-      throw new UserInputError(error.message, {
-        invalidArgs: args,
+      throw new GraphQLError('Saving user failed', {
+        extensions: {
+          code: 'BAD_USER_INPUT',
+          invalidArgs: args.name,
+          error
+        }
       })
     }
 
@@ -404,7 +439,7 @@ Mutation: {
 }
 ```
 
-Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _AuthenticationError_. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneen talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
+Jos kirjautunutta käyttäjää ei löydy kontekstista, heitetään poikkeus _GraphQLError_ asianomaisella virheilmoituksella varustettuna. Henkilön talletus hoidetaan nyt _async/await_-syntaksilla, koska joudumme onnistuneen talletuksen yhteydessä tallettamaan uuden henkilön käyttäjän tuttavalistalle.
 
 Lisätään sovellukseen vielä mahdollisuus liittää jokin henkilö omalle tuttavalistalle. Mutaatio seuraavassa:
 
@@ -425,7 +460,9 @@ Mutaation toteuttava resolveri:
       !currentUser.friends.map(f => f._id.toString()).includes(person._id.toString())
 
     if (!currentUser) {
-      throw new AuthenticationError("not authenticated")
+      throw new GraphQLError('wrong credentials', {
+        extensions: { code: 'BAD_USER_INPUT' }
+      }) 
     }
 
     const person = await Person.findOne({ name: args.name })
@@ -521,11 +558,11 @@ type Mutation {
 
 Täydennä sovellusta siten, että kaikki kyselyt (kyselyn _allBooks_ parametrin _author_ toimintaansaattaminen on vapaaehtoinen lisätehtävä!) sekä mutaatiot toimivat.
 
-Saatat tässä tehtävässä hyötyä [tästä](https://docs.mongodb.com/manual/reference/operator/query/in/).
+Kirjojen haun parametrin <i>genre</i> suhteen tilanne on hieman haastavampi. Ratkaisu on yksinkertainen, mutta sen löytäminen voi tuottaa päänvaivaa. Saatat hyötyä [tästä](https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/). 
 
 #### 8.15 Tietokanta, osa 3
 
-Täydennä sovellusta siten, että tietokannan validointivirheet (esim. liian lyhyt kirjan tai kirjailijan nimi) käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus _UserInputError_, jolle asetetaan sopiva virheviesti.
+Täydennä sovellusta siten, että tietokannan validointivirheet (esim. liian lyhyt kirjan tai kirjailijan nimi) käsitellään järkevästi, eli niiden seurauksena heitetään poikkeus [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors), jolle asetetaan sopiva virheviesti.
 
 #### 8.16 käyttäjä ja kirjautuminen
 

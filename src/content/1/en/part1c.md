@@ -216,7 +216,8 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 The App component is given the value of the counter via the *counter* prop.
 This component renders the value to the screen.
-What happens when the value of *counter* changes? Even if we were to add the following
+What happens when the value of *counter* changes?
+Even if we were to add the following
 
 ```js
 counter += 1
@@ -387,7 +388,8 @@ It's easy to follow and track the calls made to the <i>App</i> component's rende
 
 ![screenshot of render function with dev tools](../../images/1/4e.png)
 
-Was your browser console open? If it wasn't, then promise that this was the last time you need to be reminded about it.
+Was your browser console open?
+If it wasn't, then promise that this was the last time you need to be reminded about it.
 
 ### Event handling
 
@@ -501,7 +503,8 @@ This would completely break our application:
 
 ![screenshot of re-renders error](../../images/1/5c.png)
 
-What's going on? An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write:
+What's going on?
+An event handler is supposed to be either a <i>function</i> or a <i>function reference</i>, and when we write:
 
 ```js
 <button onClick={setCounter(counter + 1)}>
@@ -717,9 +720,10 @@ const App = () => {
 
 Let us now see what gets rendered to the console when the buttons plus, plus, zero and minus are pressed:
 
-![](../../images/1/31.png)
+![devtools console showing rendering and increasing messages alternating](../../images/1/31.png)
 
-Do not ever try to guess what your code does. It is just better to use *console.log* and <i>see with your own eyes</i> what it does.
+Do not ever try to guess what your code does.
+It is just better to use *console.log* and <i>see with your own eyes</i> what it does.
 
 ### Refactoring the components
 

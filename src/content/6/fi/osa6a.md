@@ -7,11 +7,11 @@ lang: fi
 
 <div class="content">
 
-Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytäntöä määritellä useiden komponenttien tarvitsema tila ja sitä käsittelevät metodit [sovelluksen juurikomponentissa](https://reactjs.org/docs/lifting-state-up.html). Tilaa ja sitä käsitteleviä funktioita on välitetty propsien avulla niitä tarvitseville komponenteille. Tämä toimii johonkin pisteeseen saakka, mutta sovelluksen kasvaessa tilan hallinta muuttuu haasteelliseksi.
+Olemme noudattaneet sovelluksen tilan hallinnassa Reactin suosittelemaa käytäntöä määritellä useiden komponenttien tarvitsema tila ja sitä käsittelevät funktiot sovelluksen komponenttirakenteen [ylimmissä](https://reactjs.org/docs/lifting-state-up.html) kompontenteissa. Usein suurin osa tilaa ja sitä funktiot on määritelty sovelluksen juurikomponentissa. Tilaa ja sitä käsitteleviä funktioita on välitetty propsien avulla niitä tarvitseville komponenteille. Tämä toimii johonkin pisteeseen saakka, mutta sovelluksen kasvaessa tilan hallinta muuttuu haasteelliseksi.
 
 ### Flux-arkkitehtuuri
 
-Facebook kehitti tilan hallinnan ongelmia helpottamaan [Flux](https://facebook.github.io/flux/docs/in-depth-overview)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
+Facebook kehitti jo Reactin historian varhaisvaiheissa tilan hallinnan ongelmia helpottamaan [Flux](https://facebook.github.io/flux/docs/in-depth-overview)-arkkitehtuurin. Fluxissa sovelluksen tilan hallinta erotetaan kokonaan Reactin komponenttien ulkopuolisiin varastoihin eli <i>storeihin</i>. Storessa olevaa tilaa ei muuteta suoraan, vaan tapahtumien eli <i>actionien</i> avulla.
 
 Kun action muuttaa storen tilaa, renderöidään näkymät uudelleen:
 
@@ -69,7 +69,7 @@ const counterReducer = (state, action) => {
 }
 ```
 
-Ensimmäinen parametri on siis storessa oleva <i>tila</i>. Reducer palauttaa <i>uuden tilan</i> actionin tyypin mukaan.
+Ensimmäinen parametri on siis storessa oleva <i>tila</i>. Reducer palauttaa <i>uuden tilan</i> actionin tyypin mukaan. Eli esim. actionin tyypin ollessa <i>INCREMENT</i> tila saa arvokseen vanhan arvon plus yksi. Jos actionin tyyppi on <i>ZERO</i> tilan uusi arvo on nolla.
 
 Muutetaan koodia vielä hiukan. Reducereissa on tapana käyttää if:ien sijaan [switch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/switch)-komentoa.
 Määritellään myös parametrille <i>state</i> [oletusarvoksi](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters) 0. Näin reducer toimii vaikka storen tilaa ei olisi vielä alustettu.
@@ -220,8 +220,10 @@ const App = () => {
   )
 }
 
+const root = ReactDOM.createRoot(document.getElementById('root'))
+
 const renderApp = () => {
-  ReactDOM.createRoot(document.getElementById('root')).render(<App />)
+  root.render(<App />)
 }
 
 renderApp()
@@ -232,6 +234,28 @@ Koodissa on pari huomionarvoista seikkaa. <i>App</i> renderöi laskurin arvon ky
 
 Kun storessa olevan tilan arvo muuttuu, ei React osaa automaattisesti renderöidä sovellusta uudelleen. Olemmekin rekisteröineet koko sovelluksen renderöinnin suorittavan funktion _renderApp_ kuuntelemaan storen muutoksia metodilla _store.subscribe_. Huomaa, että joudumme kutsumaan heti alussa metodia _renderApp_, sillä ilman kutsua sovelluksen ensimmäistä renderöintiä ei tapahdu ollenkaan.
 
+### Huomautus funktion createStore käytöstä
+
+Tarkkasilmäisimmät huomaavat, että funktion createStore nimen päällä on viiva. Jos hiiren vie nimen päälle, tulee asialle selitystä 
+
+![](../../images/6/30new.png)
+
+Selitys on kokonaisuudessaan seuraava
+
+><i>We recommend using the configureStore method of the @reduxjs/toolkit package, which replaces createStore.</i>
+>
+><i>Redux Toolkit is our recommended approach for writing Redux logic today, including store setup, reducers, data fetching, and more.</i>
+>
+><i>For more details, please read this Redux docs page: https://redux.js.org/introduction/why-rtk-is-redux-today</i>
+>
+><i>configureStore from Redux Toolkit is an improved version of createStore that simplifies setup and helps avoid common bugs.</i>
+>
+><i>You should not be using the redux core package by itself today, except for learning purposes. The createStore method from the core redux package will not be removed, but we encourage all users to migrate to using Redux Toolkit for all Redux code.</i>
+
+Funktion <i>createStore</i> sijaan siis suositellaan käytettäväksi hieman "kehittyneempää" funktiota <i>configureStore</i>, ja mekin tulemme ottamaan sen käyttöömme kun olemme ottaneet Reduxin perustoiminnallisuuden haltuun.
+
+Sivuhuomio: <i>createStore</i> on määritelty olevan "deprecated", joka yleensä tarkoittaa sitä, että ominaisuus tulee postumaan kirjaston jossain uudemmassa versiossa. Ylläoleva selitys ja [tämäkin](https://stackoverflow.com/questions/71944111/redux-createstore-is-deprecated-cannot-get-state-from-getstate-in-redux-ac) keskustelu paljastavat, että <i>createStore</i> ei tule poistumaan, ja sille onkin annettu ehkä hieman virheellisin perustein status <i>deprecated</i>. Funktio ei siis ole vanhentunut, mutta nykyään on olemassa suositeltavampi, uusi tapa tehdä suunilleen sama asia.
+
 ### Redux-muistiinpanot
 
 Tavoitteenamme on muuttaa muistiinpanosovellus käyttämään tilanhallintaan Reduxia. Katsotaan kuitenkin ensin eräitä konsepteja hieman yksinkertaistetun muistiinpanosovelluksen kautta.
@@ -241,7 +265,7 @@ Sovelluksen ensimmäinen versio on seuraava:
 ```js
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
-    state.push(action.data)
+    state.push(action.payload)
     return state
   }
 
@@ -252,7 +276,7 @@ const store = createStore(noteReducer)
 
 store.dispatch({
   type: 'NEW_NOTE',
-  data: {
+  payload: {
     content: 'the app state is in redux store',
     important: true,
     id: 1
@@ -261,7 +285,7 @@ store.dispatch({
 
 store.dispatch({
   type: 'NEW_NOTE',
-  data: {
+  payload: {
     content: 'state changes are made with actions',
     important: false,
     id: 2
@@ -274,7 +298,8 @@ const App = () => {
       <ul>
         {store.getState().map(note=>
           <li key={note.id}>
-            {note.content} <strong>{note.important ? 'important' : ''}</strong>
+            {note.content}
+            <strong>{note.important ? 'important' : ''}</strong>
           </li>
         )}
         </ul>
@@ -285,18 +310,20 @@ const App = () => {
 
 Toistaiseksi sovelluksessa ei siis ole toiminnallisuutta uusien muistiinpanojen lisäämiseen, mutta voimme toteuttaa sen dispatchaamalla <i>NEW\_NOTE</i>-tyyppisiä actioneja koodista.
 
-Actioneissa on nyt tyypin lisäksi kenttä <i>data</i>, joka sisältää lisättävän muistiinpanon:
+Actioneissa on nyt tyypin lisäksi kenttä <i>payload</i>, joka sisältää lisättävän muistiinpanon:
 
 ```js
 {
   type: 'NEW_NOTE',
-  data: {
+  payload: {
     content: 'state changes are made with actions',
     important: false,
     id: 2
   }
 }
 ```
+
+Kentän nimen valinta ei ole sattumanvarainen. Yleinen konventio on, että actioneilla on juurikin kaksi kenttää, tyypin kertova <i>type</i> ja actionin mukana olevan tiedon sisältävä <i>payload</i>.
 
 ### Puhtaat funktiot ja muuttumattomat (immutable) oliot
 
@@ -305,7 +332,7 @@ Reducerimme alustava versio on yksinkertainen:
 ```js
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
-    state.push(action.data)
+    state.push(action.payload)
     return state
   }
 
@@ -319,12 +346,12 @@ Sovellus näyttää toimivan, mutta määrittelemämme reduceri on huono, sillä
 
 Puhtaat funktiot ovat sellaisia, että ne <i>eivät aiheuta mitään sivuvaikutuksia</i> ja ne palauttavat aina saman vastauksen samoilla parametreilla kutsuttaessa.
 
-Lisäsimme tilaan uuden muistiinpanon metodilla _state.push(action.data)_, joka <i>muuttaa</i> state-olion tilaa. Tämä ei ole sallittua. Ongelman voi korjata helposti käyttämällä metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka luo <i>uuden taulukon</i>, jonka sisältönä on vanhan taulukon alkiot sekä lisättävä alkio:
+Lisäsimme tilaan uuden muistiinpanon metodilla _state.push(action.payload)_, joka <i>muuttaa</i> state-olion tilaa. Tämä ei ole sallittua. Ongelman voi korjata helposti käyttämällä metodia [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), joka luo <i>uuden taulukon</i>, jonka sisältönä on vanhan taulukon alkiot sekä lisättävä alkio:
 
 ```js
 const noteReducer = (state = [], action) => {
   if (action.type === 'NEW_NOTE') {
-    return state.concat(action.data)
+    return state.concat(action.payload)
   }
 
   return state
@@ -338,7 +365,7 @@ Laajennetaan reduceria siten, että se osaa käsitellä muistiinpanon tärkeytee
 ```js
 {
   type: 'TOGGLE_IMPORTANCE',
-  data: {
+  payload: {
     id: 2
   }
 }
@@ -363,7 +390,7 @@ describe('noteReducer', () => {
     const state = []
     const action = {
       type: 'NEW_NOTE',
-      data: {
+      payload: {
         content: 'the app state is in redux store',
         important: true,
         id: 1
@@ -374,16 +401,16 @@ describe('noteReducer', () => {
     const newState = noteReducer(state, action)
 
     expect(newState).toHaveLength(1)
-    expect(newState).toContainEqual(action.data)
+    expect(newState).toContainEqual(action.payload)
   })
 })
 ```
 
-Testi siis varmistaa, että reducerin palauttama uusi tila on taulukko, joka sisältää yhden elementin, joka on sama kun actionin kentän <i>data</i> sisältävä olio.
+Testi siis varmistaa, että reducerin palauttama uusi tila on taulukko, joka sisältää yhden elementin, joka on sama kun actionin kentän <i>payload</i> sisältävä olio.
 
 Komento <i>deepFreeze(state)</i> varmistaa, että reducer ei muuta parametrina olevaa storen tilaa. Jos reducer käyttää tilan manipulointiin komentoa _push_, testi ei mene läpi:
 
-![Testi aiheuttaa virheilmoituksen TypeError: Can not add property 0, object is not extensible. Syynä komento state.push(action.data)](../../images/6/2.png)
+![Testi aiheuttaa virheilmoituksen TypeError: Can not add property 0, object is not extensible. Syynä komento state.push(action.payload)](../../images/6/2.png)
 
 Tehdään sitten testi actionin <i>TOGGLE\_IMPORTANCE</i> käsittelylle:
 
@@ -403,7 +430,7 @@ test('returns new state with action TOGGLE_IMPORTANCE', () => {
 
   const action = {
     type: 'TOGGLE_IMPORTANCE',
-    data: {
+    payload: {
       id: 2
     }
   }
@@ -428,7 +455,7 @@ Eli seuraavan actionin
 ```js
 {
   type: 'TOGGLE_IMPORTANCE',
-  data: {
+  payload: {
     id: 2
 }
 ```
@@ -441,9 +468,9 @@ Reducer laajenee seuraavasti:
 const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
-      return state.concat(action.data)
+      return state.concat(action.payload)
     case 'TOGGLE_IMPORTANCE':
-      const id = action.data.id
+      const id = action.payload.id
       const noteToChange = state.find(n => n.id === id)
       const changedNote = { 
         ...noteToChange, 
@@ -493,7 +520,7 @@ Uuden muistiinpanon lisäys luo palautettavan tilan taulukon _concat_-funktiolla
 const noteReducer = (state = [], action) => {
   switch(action.type) {
     case 'NEW_NOTE':
-      return [...state, action.data]
+      return [...state, action.payload]
     case 'TOGGLE_IMPORTANCE':
       // ...
     default:
@@ -514,7 +541,7 @@ niin <code>...luvut</code> hajottaa taulukon yksittäisiksi alkioiksi, eli voimm
 [...luvut, 4, 5]
 ```
 
-ja lopputuloksena on taulukko, jonka sisältö on `[1, 2, 3, 4, 5]`.
+ja lopputuloksena on taulukko, jonka sisältö on <i>[1, 2, 3, 4, 5]</i>.
 
 Jos olisimme sijoittaneet taulukon toisen sisälle ilman spreadia, eli
 
@@ -522,7 +549,7 @@ Jos olisimme sijoittaneet taulukon toisen sisälle ilman spreadia, eli
 [luvut, 4, 5]
 ```
 
-lopputulos olisi ollut `[[1, 2, 3], 4, 5]`.
+lopputulos olisi ollut /i>.[[1, 2, 3], 4, 5]</i>..
 
 Samannäköinen syntaksi toimii taulukosta [destrukturoimalla](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) alkioita otettaessa siten, että se <i>kerää</i> loput alkiot:
 
@@ -647,7 +674,9 @@ Reducerin toteutuksessa kannattaa ottaa mallia ylläolevasta [Redux-muistiinpano
 
 Toteuta sitten sovellukseen koko sen varsinainen toiminnallisuus. 
 
-Huomaa, että koska kaikki koodi on tiedostossa <i>index.js</i> saatat joutua uudelleenlataamaan selaimen koodiin tehtävien muutosten jälkeen, sillä React ei välttämättä automaattisesti huomaa tiedostoon <i>index.js</i> tehtyjä muutoksia.
+Sovelluksesi saa olla ulkoasultaan vaatimaton, muuta ei tarvita kuin napit ja tieto kunkin tyyppisen arvostelun lukumäärä: 
+
+![](../../images/6/50new.png)
 
 </div>
 
@@ -662,38 +691,44 @@ const generateId = () =>
   Number((Math.random() * 1000000).toFixed(0))
 
 const App = () => {
+  // highlight-start
   const addNote = (event) => {
     event.preventDefault()
     const content = event.target.note.value
     event.target.note.value = ''
     store.dispatch({
       type: 'NEW_NOTE',
-      data: {
+      payload: {
         content,
         important: false,
         id: generateId()
       }
     })
   }
+    // highlight-end
 
+  // highlight-start
   const toggleImportance = (id) => {
     store.dispatch({
       type: 'TOGGLE_IMPORTANCE',
-      data: { id }
+      payload: { id }
     })
   }
+    // highlight-end
 
   return (
     <div>
+      // highlight-start
       <form onSubmit={addNote}>
         <input name="note" /> 
         <button type="submit">add</button>
       </form>
+        // highlight-end
       <ul>
         {store.getState().map(note =>
           <li
             key={note.id} 
-            onClick={() => toggleImportance(note.id)}
+            onClick={() => toggleImportance(note.id)}   // highlight-line
           >
             {note.content} <strong>{note.important ? 'important' : ''}</strong>
           </li>
@@ -718,7 +753,7 @@ addNote = (event) => {
   event.target.note.value = ''
   store.dispatch({
     type: 'NEW_NOTE',
-    data: {
+    payload: {
       content,
       important: false,
       id: generateId()
@@ -742,7 +777,7 @@ Tärkeys muutetaan klikkaamalla muistiinpanon nimeä. Käsittelijä on erittäin
 toggleImportance = (id) => {
   store.dispatch({
     type: 'TOGGLE_IMPORTANCE',
-    data: { id }
+    payload: { id }
   })
 }
 ```
@@ -756,7 +791,7 @@ React-komponenttien on oikeastaan tarpeetonta tuntea Reduxin actionien tyyppejä
 ```js
 const createNote = (content) => { return {
     type: 'NEW_NOTE',
-    data: {
+    payload: {
       content,
       important: false,
       id: generateId()
@@ -767,7 +802,7 @@ const createNote = (content) => { return {
 const toggleImportanceOf = (id) => {
   return {
     type: 'TOGGLE_IMPORTANCE',
-    data: { id }
+    payload: { id }
   }
 }
 ```
@@ -812,12 +847,9 @@ Tiedosto _index.js_ näyttää seuraavalta:
 ```js
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
-import App from './App'
-
-
 import { createStore } from 'redux'
 import { Provider } from 'react-redux' // highlight-line
+
 import App from './App'
 import noteReducer from './reducers/noteReducer'
 
@@ -845,7 +877,7 @@ const generateId = () =>
 export const createNote = (content) => { // highlight-line
   return {
     type: 'NEW_NOTE',
-    data: {
+    payload: {
       content,
       important: false,
       id: generateId()
@@ -856,7 +888,7 @@ export const createNote = (content) => { // highlight-line
 export const toggleImportanceOf = (id) => { // highlight-line
   return {
     type: 'TOGGLE_IMPORTANCE',
-    data: { id }
+    payload: { id }
   }
 }
 
@@ -939,7 +971,7 @@ Komponentin koodissa on muutama mielenkiintoinen seikka. Aiemmin koodi hoiti act
 ```js
 store.dispatch({
   type: 'TOGGLE_IMPORTANCE',
-  data: { id }
+  payload: { id }
 })
 ```
 
@@ -996,6 +1028,8 @@ Yleensä selektorifunktiot ovat mielenkiintoisempia ja valitsevat vain osan Redu
 const importantNotes = useSelector(state => state.filter(note => note.important))  
 ```
 
+Redux-sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://github.com/fullstack-hy2020/redux-notes/tree/part6-0), branchissa <i>part6-0</i>.
+
 ### Lisää komponentteja
 
 Eriytetään uuden muistiinpanon luominen omaksi komponentikseen: 
@@ -1004,7 +1038,7 @@ Eriytetään uuden muistiinpanon luominen omaksi komponentikseen:
 import { useDispatch } from 'react-redux' // highlight-line
 import { createNote } from '../reducers/noteReducer' // highlight-line
 
-const NewNote = (props) => {
+const NewNote = () => {
   const dispatch = useDispatch() // highlight-line
 
   const addNote = (event) => {

@@ -102,12 +102,13 @@ The function as the argument of *forEach* may also receive [other arguments](htt
 In the previous example, a new item was added to the array using the method [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push).
 When using React, techniques from functional programming are often used.
 One characteristic of the functional programming paradigm is the use of [immutable](https://en.wikipedia.org/wiki/Immutable_object) data structures.
-In React code, it is preferable to use the method [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), which does not add the item to the array but creates a new array in which the content of the old array and the new item are both included.
+In React code, it is preferable to use the method [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), which creates a new array with the added item.
+This ensures the original array remains unchanged.
 
 ```js
 const t = [1, -1, 3]
 
-const t2 = t.concat(5)
+const t2 = t.concat(5)  // creates new array
 
 console.log(t)  // [1, -1, 3] is printed
 console.log(t2) // [1, -1, 3, 5] is printed
@@ -284,6 +285,7 @@ During this course, we will define all functions using the arrow syntax.
 </div>
 
 <div class="tasks">
+
   <h3>Exercises 1.3.-1.5.</h3>
 
 <i>We continue building the application that we started working on in the previous exercises.
@@ -298,6 +300,12 @@ const Header = (props) => {
   return <h1>{props.course}</h1>
 }
 ```
+
+If and <i>when</i> you encounter an error message
+
+> <i>Objects are not valid as a React child</i>
+
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
 
   <h4>1.3: course information step3</h4>
 

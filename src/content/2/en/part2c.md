@@ -58,7 +58,7 @@ npx json-server --port 3001 --watch db.json
 Let's navigate to the address <http://localhost:3001/notes> in the browser.
 We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
 
-![](../../images/2/14new.png)
+![browser on 3001/notes shows the three json notes](../../images/2/14new.png)
 
 If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
 
@@ -552,7 +552,10 @@ There are many possible use cases for an effect hook other than fetching data fr
 However, this use is sufficient for us, for now.
 
 Think back to the sequence of events we just discussed.
-Which parts of the code are run? In what order? How often? Understanding the order of events is critical!
+Which parts of the code are run?
+In what order?
+How often?
+Understanding the order of events is critical!
 
 Note that we could have also written the code for the effect function this way:
 

@@ -72,7 +72,7 @@ Quite often it is useful to inspect HTTP requests in the <i>Network</i> tab of C
 
 We can use the inspector to check that the headers sent in the POST request are what we expected them to be:
 
-![](../../images/2/21new1.png)
+![content-type data in dev tools](../../images/2/21new1.png)
 
 Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
 
@@ -84,7 +84,9 @@ Also the tab <i>response</i> is useful, it shows what was the data the server re
 
 ![dev tools showing server response](../../images/2/21new3.png)
 
-The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
+The new note is not rendered to the screen yet.
+This is because we did not update the state of the <i>App</i> component when we created the new note.
+Let's fix this:
 
 ```js
 addNote = event => {
@@ -257,7 +259,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React. 
+This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React.
 
 It's also worth noting that the new object *changedNote* is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object.
 If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
@@ -737,7 +739,8 @@ The code for the current state of our application can be found in the  <i>part2-
 
 ### Full stack developer's oath
 
-It is again time for the exercises. The complexity of our app is now increasing since besides just taking care of the React components in the frontend, we also have a backend that is persisting the application data.
+It is again time for the exercises.
+The complexity of our app is now increasing since besides just taking care of the React components in the frontend, we also have a backend that is persisting the application data.
 
 To cope with the increasing complexity we should extend the web developer's oath to a <i>Full stack developer's oath</i>, which reminds us to make sure that the communication between frontend and backend happens as expected.
 
@@ -747,10 +750,11 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - <i>I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect</i>
-- <i>I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect</i>
+- <i>I will constantly keep an eye on the state of the server to make sure that the data sent there by the fronend is saved there as I expect</i>
 - I progress with small steps
 - I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpoint problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- If my code does not work, I will not write more code.
+  Instead, I start deleting the code until it works or just return to a state when everything was still working
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>
@@ -759,18 +763,18 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 <h3>Exercises 2.12.-2.15.</h3>
 
-<h4>2.12: Phonebook step7</h4>
+<h4>2.12: The Phonebook step7</h4>
 
 Let's return to our phonebook application.
 
 Currently, the numbers that are added to the phonebook are not saved to a backend server.
 Fix this situation.
 
-<h4>2.13: Phonebook step8</h4>
+<h4>2.13: The Phonebook step8</h4>
 
 Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
 
-<h4>2.14: Phonebook step9</h4>
+<h4>2.14: The Phonebook step9</h4>
 
 Make it possible for users to delete entries from the phonebook.
 The deletion can be done through a dedicated button for each person in the phonebook list.
@@ -794,7 +798,7 @@ const delete = (id) => {
 }
 ```
 
-<h4>2.15*: Phonebook step10</h4>
+<h4>2.15*: The Phonebook step10</h4>
 
 <i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 

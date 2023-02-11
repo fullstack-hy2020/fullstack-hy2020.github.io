@@ -127,7 +127,8 @@ In Fly.io that is done *fly secrets set*:
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-When the app is being developed, it is more than likely that something fails. Eg. when I deployed my app for the first time with the database, not a single note was seen:
+When the app is being developed, it is more than likely that something fails.
+Eg. when I deployed my app for the first time with the database, not a single note was seen:
 
 ![browser showing no notes present in app](../../images/3/fly-problem1.png)
 

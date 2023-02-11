@@ -47,7 +47,7 @@ const App = (props) => {
 
 We can also use React Developer Tools to see that this really happens:
 
-![](../../images/2/30.png)
+![devtools with highlight over react dev tools app props and hooks](../../images/2/30.png)
 
 If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
 
@@ -539,7 +539,8 @@ Implement a search field that can be used to filter the list of people by name:
 You can implement the search field as an <i>input</i> element that is placed outside the HTML form.
 The filtering logic shown in the image is <i>case insensitive</i>, meaning that the search term <i>arto</i> also returns results that contain Arto with an uppercase A.
 
-**NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g. 
+**NB:** When you are working on new functionality, it's often useful to "hardcode" some dummy data into your application, e.g.
+
 ```js
 const App = () => {
   const [persons, setPersons] = useState([

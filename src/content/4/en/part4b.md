@@ -19,7 +19,7 @@ This kind of testing where multiple components of the system are being tested as
 
 ### Test environment
 
-In one of the previous chapters of the course material, we mentioned that when your backend server is running in Heroku, it is in <i>production</i> mode.
+In one of the previous chapters of the course material, we mentioned that when your backend server is running in Fly.io or Render, it is in <i>production</i> mode.
 
 The convention in Node is to define the execution mode of the application with the <i>NODE\_ENV</i> environment variable.
 In our current application, we only load the environment variables defined in the <i>.env</i> file if the application is <i>not</i> in production mode.
@@ -34,11 +34,10 @@ Next, let's change the scripts in our <i>package.json</i> so that when tests are
   "scripts": {
     "start": "NODE_ENV=production node index.js",// highlight-line
     "dev": "NODE_ENV=development nodemon index.js",// highlight-line
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add .
-&& git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
     "lint": "eslint .",
     "test": "NODE_ENV=test jest --verbose --runInBand"// highlight-line
   },
@@ -74,11 +73,11 @@ We can then achieve cross-platform compatibility by using the cross-env library 
 }
 ```
 
-**NB**: If you are deploying this application to heroku, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server.
+**NB**: If you are deploying this application to Fly.io/Render, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server.
 To fix this, change cross-env to a production dependency by running this in the command line:
 
 ```bash
-npm i cross-env -P
+npm install cross-env
 ```
 
 Now we can modify the way that our application runs in different modes.
@@ -156,8 +155,8 @@ test('notes are returned as json', async () => {
     .expect('Content-Type', /application\/json/)
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+afterAll(async () => {
+  await mongoose.connection.close()
 })
 ```
 
@@ -166,7 +165,26 @@ This object is assigned to the <i>api</i> variable and tests can use it for maki
 
 Our test makes an HTTP GET request to the <i>api/notes</i> url and verifies that the request is responded to with the status code 200.
 The test also verifies that the <i>Content-Type</i> header is set to <i>application/json</i>, indicating that the data is in the desired format.
-(If you're not familiar with the RegEx syntax of <i>/application\/json/</i>, you can learn more [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions).)
+
+Checking the value of the header uses a bit strange looking syntax:
+
+```js
+.expect('Content-Type', /application\/json/)
+```
+
+The desired value is now defined as [regular expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) or in short regex.
+The regex starts and ends with a slash /, because the desired string <i>application/json</i> also contains the same slash, it is preceded by a \ so that it is not interpreted as a regex termination character.
+
+In principle, the test could also have been defined as a string
+
+```js
+.expect('Content-Type', 'application/json')
+```
+
+The problem here, however, is that when using a string, the value of the header must be exactly the same.
+For the regex we defined, it is acceptable that the header <i>contains</i> the string in question.
+The actual value of the header is <i>application/json; charset=utf-8</i>, i.e. it also contains information about character encoding.
+However, our test is not interested in this and therefore it is better to define the test as a regex instead of an exact string.
 
 The test contains some details that we will explore [a bit later on](/en/part4/testing_the_backend#async-await).
 The arrow function that defines the test is preceded by the <i>async</i> keyword and the method call for the <i>api</i> object is preceded by the <i>await</i> keyword.
@@ -179,8 +197,8 @@ Once all the tests (there is currently only one) have finished running we have t
 This can be easily achieved with the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) method:
 
 ```js
-afterAll(() => {
-  mongoose.connection.close()
+afterAll(async () => {
+  await mongoose.connection.close()
 })
 ```
 
@@ -191,18 +209,24 @@ When running your tests you may run across the following console warning:
 The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x is used.
 [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
-One way to get rid of this is to run tests with option <i>--forceExit</i>:
+[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
+create to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
 
-```json
+```js
+module.exports = () => {
+  process.exit(0)
+}
+```
+
+and by extending the Jest definitions in the <i>package.json</i> as follows
+
+```js
 {
-  // ..
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
-  },
-  // ...
+ //...
+ "jest": {
+   "testEnvironment": "node",
+   "globalTeardown": "./tests/teardown.js" // highlight-line
+ }
 }
 ```
 
@@ -226,13 +250,10 @@ One tiny but important detail: at the [beginning](/en/part4/structure_of_backend
 
 ```js
 const app = require('./app') // the actual Express app
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
@@ -254,6 +275,8 @@ The documentation for supertest says the following:
 > <i>if the server is not already listening for connections then it is bound to an ephemeral port for you so there is no need to keep track of ports.</i>
 
 In other words, supertest takes care that the application being tested is started at the port that it uses internally.
+
+Let's add two notes to the test database using the <i>mongo.js</i> program (here we must remember to switch to the correct database url).
 
 Let's write a few more tests:
 
@@ -313,7 +336,7 @@ module.exports = {
 ### Initializing the database before tests
 
 Testing appears to be easy and our tests are currently passing.
-However, our tests are bad as they are dependent on the state of the database (which happens to be correct in my test database).
+However, our tests are bad as they are dependent on the state of the database, which now happens to have two notes.
 To make our tests more robust, we have to reset the database and generate the needed test data in a controlled manner before we run the tests.
 
 Our tests are already using the [afterAll](https://jestjs.io/docs/api#afterallfn-timeout) function of Jest to close the connection to the database after the tests are finished executing.
@@ -334,12 +357,10 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false,
   },
   {
-    content: 'Browser can execute only Javascript',
-    date: new Date(),
+    content: 'Browser can execute only JavaScript',
     important: true,
   },
 ]
@@ -378,7 +399,7 @@ test('a specific note is within the returned notes', async () => {
   const contents = response.body.map(r => r.content)
 
   expect(contents).toContain(
-    'Browser can execute only Javascript'
+    'Browser can execute only JavaScript'
   )
   // highlight-end
 })
@@ -570,7 +591,6 @@ notesRouter.post('/', (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save()
@@ -615,18 +635,16 @@ const Note = require('../models/note')
 const initialNotes = [
   {
     content: 'HTML is easy',
-    date: new Date(),
     important: false
   },
   {
-    content: 'Browser can execute only Javascript',
-    date: new Date(),
+    content: 'Browser can execute only JavaScript',
     important: true
   }
 ]
 
 const nonExistingId = async () => {
-  const note = new Note({ content: 'willremovethissoon', date: new Date() })
+  const note = new Note({ content: 'willremovethissoon' })
   await note.save()
   await note.remove()
 
@@ -687,7 +705,7 @@ test('a specific note is within the returned notes', async () => {
   const contents = response.body.map(r => r.content)
 
   expect(contents).toContain(
-    'Browser can execute only Javascript'
+    'Browser can execute only JavaScript'
   )
 })
 
@@ -727,9 +745,9 @@ test('note without content is not added', async () => {
   expect(notesAtEnd).toHaveLength(helper.initialNotes.length) // highlight-line
 })
 
-afterAll(() => {
-  mongoose.connection.close()
-}) 
+afterAll(async () => {
+  await mongoose.connection.close()
+})
 ```
 
 The code using promises works and the tests pass.
@@ -744,7 +762,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   const savedNote = await note.save()
@@ -772,7 +789,6 @@ notesRouter.post('/', async (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
   // highlight-start
   try {
@@ -804,9 +820,7 @@ test('a specific note can be viewed', async () => {
     .expect('Content-Type', /application\/json/)
 // highlight-end
 
-  const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
-
-  expect(resultNote.body).toEqual(processedNoteToView)
+  expect(resultNote.body).toEqual(noteToView)
 })
 
 test('a note can be deleted', async () => {
@@ -835,11 +849,6 @@ Both tests share a similar structure.
 In the initialization phase, they fetch a note from the database.
 After this, the tests call the actual operation being tested, which is highlighted in the code block.
 Lastly, the tests verify that the outcome of the operation is as expected.
-
-In the first test, the note object we receive as the response body goes through JSON serialization and parsing.
-This processing will turn the note object's <em>date</em> property value's type from <em>Date</em> object into a string.
-Because of this we can't directly compare the equality of the <em>resultNote.body</em> and <em>noteToView</em> that is read from the database.
-Instead, we must first perform similar JSON serialization and parsing for the <em>noteToView</em> as the server is performing for the note object.
 
 The tests pass and we can safely refactor the tested routes to use async/await:
 
@@ -871,8 +880,6 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Eliminating the try-catch
 
-<!-- Async/await selkeyttää koodia jossain määrin, mutta sen 'hinta' on poikkeusten käsittelyn edellyttämä <i>try/catch</i>-rakenne.
-Kaikki routejen käsittelijät noudattavat samaa kaavaa -->
 Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.
 All of the route handlers follow the same structure
 
@@ -884,21 +891,16 @@ try {
 }
 ```
 
-<!-- Mieleen herää kysymys, olisiko koodia mahdollista refaktoroida siten, että <i>catch</i> saataisiin refaktoroitua ulos metodeista?  -->
 One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 
-<!-- Kirjasto [express-async-errors](https://github.com/davidbanham/express-async-errors) tuo tilanteeseen helpotuksen.-->
 The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.
 
-<!-- Asennetaan kirjasto -->
 Let's install the library
 
 ```bash
 npm install express-async-errors
 ```
 
-<!-- Kirjaston käyttö on <i>todella</i> helppoa.
- Kirjaston koodi otetaan käyttöön tiedostossa <i>src/app.js</i>: -->
 Using the library is <i>very</i> easy.
 You introduce the library in <i>app.js</i>:
 
@@ -918,8 +920,6 @@ const mongoose = require('mongoose')
 module.exports = app
 ```
 
-<!-- Kirjaston koodiin sisällyttämän "magian" ansiosta pääsemme kokonaan eroon try-catch-lauseista.
-Muistiinpanon poistamisesta huolehtiva route -->
 The 'magic' of the library allows us to eliminate the try-catch blocks completely.
 For example the route for deleting a note
 
@@ -934,7 +934,6 @@ notesRouter.delete('/:id', async (request, response, next) => {
 })
 ```
 
-<!-- muuttuu muotoon -->
 becomes
 
 ```js
@@ -944,12 +943,10 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-<!-- Kirjaston ansiosta kutsua _next(exception)_ ei siis enää tarvita, kirjasto hoitaa asian konepellin alla, eli jos <i>async</i>-funktiona määritellyn routen sisällä syntyy poikkeus, siirtyy suoritus automaattisesti virheenkäsittelijämiddlewareen.-->
 Because of the library, we do not need the *next(exception)* call anymore.
 The library handles everything under the hood.
-If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
+If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error-handling middleware.
 
-<!-- Muut routet yksinkertaistuvat seuraavasti: -->
 The other routes become:
 
 ```js
@@ -959,7 +956,6 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   const savedNote = await note.save()
@@ -1079,6 +1075,26 @@ Even though the syntax makes it easier to deal with promises, it is still necess
 
 The code for our application can be found on [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part4-5), branch <i>part4-5</i>.
 
+### A true full stack developer's oath
+
+Making tests brings yet another layer of challenge to programming.
+We have to update our full stack developer oath to remind you that systematicity is also key when developing tests.
+
+So we should once more extend our oath:
+
+Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+
+- I will have my browser developer console open all the time
+- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
+- I will constantly keep on eye the state of the server to make sure that the data sent there by the frontend is saved there as I expect
+- I will keep an eye on the database: does the backend save data there in the right format
+- I will progress in small steps
+- <i>I will write lots of *console.log* statements to make sure I understand how the code and the tests behave and to help pinpoint problems</i>
+- If my code does not work, I will not write more code.
+  Instead, I start deleting the code until it works or just return to a state when everything was still working
+- <i>If a test does not pass, I make sure that the tested functionality for sure works in the application</i>
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+
 </div>
 
 <div class="tasks">
@@ -1106,28 +1122,31 @@ Notice that you will have to make similar changes to the code that were made [in
 
 ![Warning to read docs on connecting mongoose to jest](../../images/4/8a.png)
 
-The problem is quite likely caused by the Mongoose version 6.x, the problem does not appear when version 5.x is used.
-[Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
+[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles)
+to get rid of this is to create to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
 
-One way to get rid of this is to run tests with option <i>--forceExit</i>:
+```js
+module.exports = () => {
+  process.exit(0)
+}
+```
 
-```json
+and by extending the Jest definitions in the <i>package.json</i> as follows
+
+```js
 {
-  // ..
-  "scripts": {
-    "start": "cross-env NODE_ENV=production node index.js",
-    "dev": "cross-env NODE_ENV=development nodemon index.js",
-    "lint": "eslint .",
-    "test": "cross-env NODE_ENV=test jest --verbose --runInBand --forceExit" // highlight-line
-  },
-  // ...
+ //...
+ "jest": {
+   "testEnvironment": "node"
+   "globalTeardown": ".test/teardown.js" // highlight-line
+ }
 }
 ```
 
 **NB:** when you are writing your tests **<i>it is better to not execute all of your tests</i>**, only execute the ones you are working on.
 Read more about this [here](/en/part4/testing_the_backend#running-tests-one-by-one).
 
-#### 4.9*: Blog list tests, step2
+#### 4.9: Blog list tests, step2
 
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>.
 Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
@@ -1152,7 +1171,7 @@ Make the required changes to the code so that it passes the test.
 
 #### 4.12*: Blog list tests, step5
 
-Write a test related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifies that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
+Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verify that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
 Make the required changes to the code so that it passes the test.
 
@@ -1203,7 +1222,7 @@ describe('when there is initially some notes saved', () => {
     const contents = response.body.map(r => r.content)
 
     expect(contents).toContain(
-      'Browser can execute only Javascript'
+      'Browser can execute only JavaScript'
     )
   })
 })
@@ -1218,16 +1237,12 @@ describe('viewing a specific note', () => {
       .get(`/api/notes/${noteToView.id}`)
       .expect(200)
       .expect('Content-Type', /application\/json/)
-      
-    const processedNoteToView = JSON.parse(JSON.stringify(noteToView))
 
-    expect(resultNote.body).toEqual(processedNoteToView)
+    expect(resultNote.body).toEqual(noteToView)
   })
 
   test('fails with statuscode 404 if note does not exist', async () => {
     const validNonexistingId = await helper.nonExistingId()
-
-    console.log(validNonexistingId)
 
     await api
       .get(`/api/notes/${validNonexistingId}`)
@@ -1302,8 +1317,8 @@ describe('deletion of a note', () => {
   })
 })
 
-afterAll(() => {
-  mongoose.connection.close()
+afterAll(async () => {
+  await mongoose.connection.close()
 })
 ```
 

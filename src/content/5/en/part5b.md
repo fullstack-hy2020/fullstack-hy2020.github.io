@@ -294,20 +294,16 @@ We could just as well move the state of the forms to the corresponding component
 The component for a note changes like so:
 
 ```js
-import { useState } from 'react' 
+import { useState } from 'react'
 
 const NoteForm = ({ createNote }) => {
-  const [newNote, setNewNote] = useState('') 
-
-  const handleChange = (event) => {
-    setNewNote(event.target.value)
-  }
+  const [newNote, setNewNote] = useState('')
 
   const addNote = (event) => {
     event.preventDefault()
     createNote({
       content: newNote,
-      important: Math.random() > 0.5,
+      important: true
     })
 
     setNewNote('')
@@ -320,7 +316,7 @@ const NoteForm = ({ createNote }) => {
       <form onSubmit={addNote}>
         <input
           value={newNote}
-          onChange={handleChange}
+          onChange={event => setNewNote(event.target.value)}
         />
         <button type="submit">save</button>
       </form>
@@ -331,22 +327,19 @@ const NoteForm = ({ createNote }) => {
 export default NoteForm
 ```
 
-<!-- Tilan muuttuja <i>newNote</i> ja sen muutoksesta huolehtiva tapahtumankäsittelijä on siirretty komponentista _App_ lomakkeesta huolehtivaan komponenttiin.
--->
+**NOTE** At the same time, we changed the behavior of the application so that new notes are important by default, i.e. the field <i>important</i> gets the value <i>true</i>.
+
 The <i>newNote</i> state attribute and the event handler responsible for changing it have been moved from the *App* component to the component responsible for the note form.
 
-<!-- Propseja on enää yksi, funktio _createNote_, jota lomake kutsuu kun uusi muistiinpano luodaan.-->
 There is only one prop left, the *createNote* function, which the form calls when a new note is created.
 
-<!-- Komponentti _App_ yksintertaistuu, tilasta <i>newNote</i> ja sen käsittelijäfunktiosta on päästy eroon.
-Uuden muistiinpanon luomisesta huolehtiva funktio _addNote_ saa suoraan parametriksi uuden muistiinpanon ja funktio on ainoa props, joka välitetään lomakkeelle: -->
 The *App* component becomes simpler now that we have got rid of the <i>newNote</i> state and its event handler.
 The *addNote* function for creating new notes receives a new note as a parameter, and the function is the only prop we send to the form:
 
 ```js
 const App = () => {
   // ...
-  const addNote = (noteObject) => {
+  const addNote = (noteObject) => { // highlight-line
     noteService
       .create(noteObject)
       .then(returnedNote => {
@@ -510,11 +503,34 @@ We create <i>three separate instances of the component</i> that all have their s
 
 The <i>ref</i> attribute is used for assigning a reference to each of the components in the variables <i>togglable1</i>, <i>togglable2</i> and <i>togglable3</i>.
 
+### The updated full stack developer's oath
+
+The number of moving parts increases.
+At the same time, the likelihood of ending up in a situation where we are looking for a bug in the wrong place increases.
+So we need to be even more systematic.
+
+So we should once more extend our oath:
+
+Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+
+- I will have my browser developer console open all the time
+- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
+- I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect
+- I will keep on eye on the database: does the backend save data there in the right format
+- I progress with small steps
+- <i>when I suspect that there is a bug in the frontend, I make sure that the backend works for sure</i>
+- <i>when I suspect that there is a bug in the backend, I make sure that the frontend works for sure</i>
+- I will write lots of *console.log* statements to make sure I understand how the code and the tests behave and to help pinpoint problems
+- If my code does not work, I will not write more code.
+  Instead, I start deleting the code until it works or just return to a state when everything still was still working
+-If a test does not pass, I make sure that the tested functionality for sure works in the application
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+
 </div>
 
 <div class="tasks">
 
-### Exercises 5.5-5.10
+### Exercises 5.5-5.11
 
 #### 5.5 Blog list frontend, step5
 
@@ -538,7 +554,7 @@ Separate the form for creating a new blog into its own component (if you have no
 
 The component must work like the <i>NoteForm</i> component from the [material](/en/part5/props_children_and_proptypes) of this part.
 
-#### 5.7* Blog list frontend, step7
+#### 5.7 Blog list frontend, step7
 
 Let's add a button to each blog, which controls whether all of the details about the blog are shown or not.
 
@@ -579,6 +595,16 @@ The easiest solution will be to add a state to the blog post that controls the d
 
 #### 5.8: Blog list frontend, step8
 
+We notice that something is wrong.
+When a new blog is created in the app, the name of the user that added the blog is not shown in the details of the blog:
+
+![browser showing names not added](../../images/5/59new.png)
+
+When the browser is reloaded, the information of the person is displayed.
+This is not acceptable, find out where the problem is and make the necessary correction.
+
+#### 5.9: Blog list frontend, step9
+
 Implement the functionality for the like button.
 Likes are increased by making an HTTP *PUT* request to the unique address of the blog post in the backend.
 
@@ -617,12 +643,12 @@ The backend has to be updated too to handle the user reference.
 **One last warning:** if you notice that you are using async/await and the *then*-method in the same code, it is almost certain that you are doing something wrong.
 Stick to using one or the other, and never use both at the same time "just in case".
 
-#### 5.9: Blog list frontend, step9
+#### 5.10: Blog list frontend, step10
 
 Modify the application to list the blog posts by the number of <i>likes</i>.
 Sorting the blog posts can be done with the array [sort](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) method.
 
-#### 5.10: Blog list frontend, step10
+#### 5.11: Blog list frontend, step11
 
 Add a new button for deleting blog posts.
 Also, implement the logic for deleting blog posts in the frontend.
@@ -811,7 +837,6 @@ Let us also create an npm script to run the lint:
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "server": "json-server -p3001 db.json",
     "eslint": "eslint ." // highlight-line
   },
   // ...
@@ -851,15 +876,11 @@ Note that create-react-app has also a [default ESLint-configuration](https://www
 
 <div class="tasks">
 
-### Exercises 5.11-5.12
-
-#### 5.11: Blog list frontend, step11
-
-Define PropTypes for one of the components of your application.
+### Exercise 5.12
 
 #### 5.12: Blog list frontend, step12
 
-Add ESlint to the project.
+Define PropTypes for one of the components of your application, and add ESlint to the project.
 Define the configuration according to your liking.
 Fix all of the linter errors.
 

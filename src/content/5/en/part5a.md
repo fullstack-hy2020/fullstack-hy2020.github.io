@@ -19,10 +19,9 @@ Throughout this part, we will assume that new users will not be added from the f
 
 ### Handling login
 
-A login form has now been added to the top of the page.
-The form for adding new notes has also been moved to the bottom of the list of notes.
+A login form has now been added to the top of the page:
 
-![browser showing user login for notes](../../images/5/1e.png)
+![browser showing user login for notes](../../images/5/1new.png)
 
 The code of the <i>App</i> component now looks as follows:
 
@@ -127,6 +126,18 @@ const login = async credentials => {
   return response.data
 }
 
+export default { login }
+```
+
+If you have installed the eslint plugin in VS Code, you may now see the following warning:
+
+![vscode warning stating to assign a variable before exporting](../../images/5/50new.png)
+
+We'll get back to configuring eslint in a moment.
+You can ignore the error for the time being or suppress it by adding the following to the line before the warning:
+
+```js
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { login }
 ```
 
@@ -311,11 +322,10 @@ return (
 
     <Notification message={errorMessage} />
 
-    {user === null ?
-      loginForm() :
-      <div>
-        <p>{user.name} logged-in</p>
-        {noteForm()}
+    {!user && loginForm()} 
+    {user && <div>
+       <p>{user.name} logged in</p>
+         {noteForm()}
       </div>
     }
 
@@ -369,7 +379,7 @@ let token = null // highlight-line
 
 // highlight-start
 const setToken = newToken => {
-  token = `bearer ${newToken}`
+  token = `Bearer ${newToken}`
 }
 // highlight-end
 
@@ -394,6 +404,7 @@ const update = (id, newObject) => {
   return request.then(response => response.data)
 }
 
+// eslint-disable-next-line import/no-anonymous-default-export
 export default { getAll, create, update, setToken } // highlight-line
 ```
 

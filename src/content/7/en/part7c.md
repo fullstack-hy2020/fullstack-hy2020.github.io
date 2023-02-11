@@ -38,15 +38,15 @@ Let's install the package with the command:
 npm install react-bootstrap
 ```
 
-Then let's add a link for loading the CSS stylesheet for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
+Then let's add a [link for loading the CSS stylesheet](https://react-bootstrap.github.io/getting-started/introduction#stylesheets) for Bootstrap inside of the <i>head</i> tag in the <i>public/index.html</i> file of the application:
 
 ```js
 <head>
   <link
     rel="stylesheet"
-    href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
-    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
-    crossOrigin="anonymous"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65"
+    crossorigin="anonymous"
   />
   // ...
 </head>
@@ -56,7 +56,7 @@ When we reload the application, we notice that it already looks a bit more styli
 
 ![browser notes app with bootstrap](../../images/7/5ea.png)
 
-In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers) (https://getbootstrap.com/docs/4.1/layout/overview/#containers).
+In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers).
 In practice this is accomplished by giving the root *div* element of the application the *container* class attribute:
 
 ```js
@@ -75,6 +75,8 @@ We notice that this already affected the appearance of the application.
 The content is no longer as close to the edges of the browser as it was earlier:
 
 ![browser notes app with margin spacing](../../images/7/6ea.png)
+
+#### Table in Bootstrap
 
 Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/).
 React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
@@ -142,7 +144,8 @@ let Login = (props) => {
         </Form.Group>
       </Form>
     </div>
-)}
+  )
+}
 ```
 
 The number of components we need to import increases:
@@ -259,17 +262,7 @@ Install the library with the command
 npm install @mui/material @emotion/react @emotion/styled
 ```
 
-Then add the following line to the <i>head</i> tag in the <i>public/index.html</i> file.
-The line loads Google's font Roboto.
-
-```js
-<head>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
-  // ...
-</head>
-```
-
-Now let's use MaterialUI to do the same modifications to the code we did earlier with bootstrap.
+Now let's use MaterialUI to do the same modifications to the code we did earlier with Bootstrap.
 
 Render the contents of the whole application within a [Container](https://mui.com/components/container/):
 
@@ -285,6 +278,8 @@ const App = () => {
   )
 }
 ```
+
+#### Table in MaterialUI
 
 Let's start with the <i>Notes</i> component.
 We'll render the list of notes as a [table](https://mui.com/material-ui/react-table/#simple-table):
@@ -527,7 +522,6 @@ If you do not see your favorite UI framework in the list, please make a pull req
 - <https://semantic-ui.com/>
 - <https://mantine.dev/>
 - <https://react.fluentui.dev/>
-- <https://storybook.js.org>
 - <https://www.primefaces.org/primereact/>
 - <https://v2.grommet.io>
 - <https://blueprintjs.com>

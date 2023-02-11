@@ -428,7 +428,8 @@ import ReactDOM from "react-dom/client"
 import App from "./App"
 ```
 
-[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file. The module <i>react-dom/client</i> into the variable *ReactDOM*, and the module that defines the main component of the app is placed into the variable *App*
+[import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import) two modules, enabling them to be used in that file.
+The module <i>react-dom/client</i> into the variable *ReactDOM*, and the module that defines the main component of the app is placed into the variable *App*
 
 Let's move our <i>Note</i> component into its own module.
 
@@ -590,8 +591,9 @@ Programming is hard, that is why I will use all the possible means to make it ea
 - I will have my browser developer console open all the time
 - I progress with small steps
 - I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpointing problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://localhost:8000/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- If my code does not work, I will not write more code.
+  Instead, I start deleting the code until it works or just return to a state when everything still was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>
 
@@ -599,7 +601,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 <h3>Exercises 2.1.-2.5.</h3>
 
-The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system]https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+The exercises are submitted via GitHub, and by marking the exercises as done in the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 You can submit all of the exercises into the same repository, or use multiple different repositories.
 If you submit exercises from different parts into the same repository, name your directories well.
@@ -615,7 +617,8 @@ You probably **do not** want the project to become a repository, so run the comm
 <h4>2.1: Course information step6</h4>
 
 Let's finish the code for rendering course contents from exercises 1.1 - 1.5.
-You can start with the code from the model answers. The model answers for part 1 can be found by going to the [submission system]https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>.
+You can start with the code from the model answers.
+The model answers for part 1 can be found by going to the [submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicking on <i>my submissions</i> at the top, and in the row corresponding to part 1 under the <i>solutions</i> column clicking on <i>show</i>.
 To see the solution to the <i>course info</i> exercise, click on *index.js* under <i>kurssitiedot</i> ("kurssitiedot" means "course info").
 
 **Note that if you copy a project from one place to another, you might have to delete the <i>node\_modules</i> directory and install the dependencies again with the command *npm install* before you can start the application.**

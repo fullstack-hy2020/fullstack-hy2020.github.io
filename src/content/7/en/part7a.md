@@ -123,7 +123,7 @@ The routing provided by React Router is enabled by changing the application as f
 import {
   BrowserRouter as Router,
   Routes, Route, Link
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const App = () => {
 
@@ -146,7 +146,7 @@ const App = () => {
       </Routes>
 
       <div>
-        <i>Note app, Department of Computer Science 2022</i>
+        <i>Note app, Department of Computer Science 2023</i>
       </div>
     </Router>
   )
@@ -161,7 +161,7 @@ Notice that, even though the component is referred to by the name <i>Router</i>,
 import {
   BrowserRouter as Router, // highlight-line
   Routes, Route, Link
-} from "react-router-dom"
+} from 'react-router-dom'
 ```
 
 According to the [v5 docs](https://v5.reactrouter.com/web/api/BrowserRouter):
@@ -226,7 +226,7 @@ const Notes = ({notes}) => (
     <ul>
       {notes.map(note =>
         <li key={note.id}>
-          <Link to={`/notes/${note.id}`}>{note.content}</Link>
+          <Link to={`/notes/${note.id}`}>{note.content}</Link>  // highlight-line
         </li>
       )}
     </ul>
@@ -262,7 +262,7 @@ When a browser navigates to the URL for a specific note, for example, <i>/notes/
 import {
   // ...
   useParams  // highlight-line
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const Note = ({ notes }) => {
   const id = useParams().id // highlight-line
@@ -409,7 +409,7 @@ const App = () => {
       </Router>      
       <footer>
         <br />
-        <em>Note app, Department of Computer Science 2022</em>
+        <em>Note app, Department of Computer Science 2023</em>
       </footer>
     </div>
   )
@@ -464,7 +464,7 @@ The _App_component becomes:
 import {
   // ...
   useMatch  // highlight-line
-} from "react-router-dom"
+} from 'react-router-dom'
 
 const App = () => {
   // ...
@@ -493,7 +493,7 @@ const App = () => {
       </Routes>   
 
       <div>
-        <em>Note app, Department of Computer Science 2022</em>
+        <em>Note app, Department of Computer Science 2023</em>
       </div>
     </div>
   )

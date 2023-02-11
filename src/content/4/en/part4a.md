@@ -59,19 +59,19 @@ The contents of the <i>index.js</i> file used for starting the application gets 
 
 ```js
 const app = require('./app') // the actual Express application
-const http = require('http')
 const config = require('./utils/config')
 const logger = require('./utils/logger')
 
-const server = http.createServer(app)
-
-server.listen(config.PORT, () => {
+app.listen(config.PORT, () => {
   logger.info(`Server running on port ${config.PORT}`)
 })
 ```
 
 The <i>index.js</i> file only imports the actual application from the <i>app.js</i> file and then starts the application.
 The function *info* of the logger-module is used for the console printout telling that the application is running.
+
+Now the Express app and the code taking care of the web server are separated from each other following the [best](https://dev.to/nermineslimane/always-separate-app-and-server-files--1nc7) [practices](https://nodejsbestpractices.com/sections/projectstructre/separateexpress).
+One of the advantages of this method is that the application can now be tested at the level of HTTP API calls without actually making calls via HTTP over the network, this makes the execution of tests faster.
 
 The handling of environment variables is extracted into a separate <i>utils/config.js</i> file:
 
@@ -195,7 +195,8 @@ And in the current version, we have:
 notesRouter.delete('/:id', (request, response) => {
 ```
 
-So what are these router objects exactly? The Express manual provides the following explanation:
+So what are these router objects exactly?
+The Express manual provides the following explanation:
 
 > <i>A router object is an isolated instance of middleware and routes.
 You can think of it as a “mini-application,” capable only of performing middleware and routing functions.
@@ -224,6 +225,8 @@ const notesRouter = require('./controllers/notes')
 const middleware = require('./utils/middleware')
 const logger = require('./utils/logger')
 const mongoose = require('mongoose')
+
+mongoose.set('strictQuery', false)
 
 logger.info('connecting to', config.MONGODB_URI)
 
@@ -548,11 +551,10 @@ Let's define the <i>npm script *test*</i> to execute tests with Jest and to repo
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
-    "build:ui": "rm -rf build && cd ../../../2/luento/notes && npm run build && cp -r build ../../../3/luento/notes-backend",
-    "deploy": "git push heroku master",
-    "deploy:full": "npm run build:ui && git add .
-&& git commit -m uibuild && git push && npm run deploy",
-    "logs:prod": "heroku logs --tail",
+    "build:ui": "rm -rf build && cd ../frontend/ && npm run build && cp -r build ../backend",
+    "deploy": "fly deploy",
+    "deploy:full": "npm run build:ui && npm run deploy",
+    "logs:prod": "fly logs",
     "lint": "eslint .",
     "test": "jest --verbose" // highlight-line
   },
@@ -569,14 +571,6 @@ This can be done by adding the following to the end of <i>package.json</i>:
  "jest": {
    "testEnvironment": "node"
  }
-}
-```
-
-Alternatively, Jest can look for a configuration file with the default name <i>jest.config.js</i>, where we can define the execution environment like this:
-
-```js
-module.exports = {
-  testEnvironment: 'node',
 }
 ```
 
@@ -615,13 +609,7 @@ module.exports = {
     'node': true,
     'jest': true, // highlight-line
   },
-  'extends': 'eslint:recommended',
-  'parserOptions': {
-    'ecmaVersion': 12
-  },
-  "rules": {
-    // ...
-  },
+  // ...
 }
 ```
 
