@@ -475,7 +475,7 @@ const App = () => {
   }
 
   const bemRuim = () => {
-    // E esta aqui é ilegal!
+    // E isto aqui é ilegal!
     const [x, defX] = useState(-1000)
   }
 
@@ -951,7 +951,7 @@ const App = () => {
     defValor(novoValor)
   }
 
-  // Não defina componentes dentro de outro componente
+  // Não defina um componente dentro de outro componente
   const Exibir = props => <div>{props.valor}</div> // highlight-line
 
   return (
@@ -1039,7 +1039,7 @@ rm -rf node_modules/ && npm i
 
 Se e <i>quando</i> você encontrar uma mensagem de erro...
 
-> <i>Objetos não são válidos como elementos-filho do React.</i>
+> <i>Objetos não são válidos como elementos-filho React.</i>
 
 ... lembre-se do que foi explicado [aqui](/pt/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
@@ -1173,7 +1173,7 @@ Lembre-se de manter seu console aberto o tempo todo. Se você ver este aviso no 
 
 O mundo da engenharia de software é cheio de [anedotas](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) que distilam verdades atemporais de nosso campo em frases curtas.
 
-Expanda a aplicação a seguir, adicionando um botão que, ao ser clicado, exiba uma anedota aleatória da área de engenharia de software:
+Expanda a aplicação a seguir, adicionando um botão que, ao ser clicado, exiba uma anedota aleatória da área da engenharia de software:
 
 ```js
 import { useState } from 'react'
@@ -1181,7 +1181,7 @@ import { useState } from 'react'
 const App = () => {
   const anecdotes = [
     'Se fazer algo dói, faça isso com mais frequência.',
-    'Contratar mão de obra para um projeto de software que já está atrasado, faz com que o atrase mais ainda!',
+    'Contratar mão de obra para um projeto de software que já está atrasado, faz com que se atrase mais ainda!',
     'Os primeiros 90% do código correspondem ao primeiro 10% do tempo de desenvolvimento... Os outros 10% do código correspondem aos outros 90% do tempo de desenvolvimento.',
     'Qualquer idiota escreve código que um computador consegue entender. Bons programadores escrevem código que humanos conseguem entender.',
     'Otimização prematura é a raiz de todo o mal.',
