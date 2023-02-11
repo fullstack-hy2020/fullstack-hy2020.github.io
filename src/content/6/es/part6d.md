@@ -757,9 +757,9 @@ Como detalle técnico, debe tenerse en cuenta que las funciones auxiliares <i>us
 
 <div class="tasks">
 
-### Exercises 6.23.-6.24.
+### Ejercicios 6.23.-6.24.
 
-#### Exercise 6.23.
+#### Ejercicio 6.23.
 
 La aplicación tiene un componente <i>Notification</i> para mostrar notificaciones al usuario.
 
@@ -771,17 +771,15 @@ Implemente la gestión de estado de notificación de la aplicación utilizando e
 
 La notificación se muestra durante cinco segundos.
 
-#### Exercise 6.24.
+#### Ejercicio 6.24.
 
-As stated in exercise 6.20, the server requires that the content of the anecdote to be added is at least 5 characters long. Now implement error handling for the insertion. In practice, it is sufficient to display a notification to the user in case of a failed POST request:
+Como se indicó en el ejercicio 6.20, el servidor requiere que el contenido de la anécdota a agregar tenga al menos 5 caracteres de longitud. Ahora implemente el manejo de errores para la inserción. En la práctica, es suficiente mostrar una notificación al usuario en caso de una solicitud POST fallida:
 
 ![](../../images/6/67new.png)
 
-The error condition should be handled in the callback function registered for it, see
-[here](https://react-query-v3.tanstack.com/reference/useMutation) how to register a function.
+La condición de error debe manejarse en la función de devolución de llamada registrada para ello, consulte [aquí](https://react-query-v3.tanstack.com/reference/useMutation) cómo registrar una función.
 
-This was the last exercise for this part of the course and it's time to push your code to GitHub and mark all of your completed exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
+Este fue el último ejercicio para esta parte del curso y es hora de enviar su código a GitHub y marcar todos sus ejercicios completados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 </div>
 
 <div class="content">
