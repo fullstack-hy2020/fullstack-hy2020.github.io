@@ -499,7 +499,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect
+- I will constantly keep on eye the state of the server to make sure that the data sent there by the frontend is saved there as I expect
 - I will keep on eye on the database: does the backend save data there in the right format
 - I progress with small steps
 - <i>when I suspect that there is a bug in the frontend, I make sure that the backend works for sure</i>
