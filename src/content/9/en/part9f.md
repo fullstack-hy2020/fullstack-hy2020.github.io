@@ -5,6 +5,13 @@ letter: f
 lang: en
 ---
 
+<div class="tasks">
+
+**NOTE**: this is the old section about Patientor frontend that was replaced 12 February 2023, with [this chapter](/en/part9/grande_finale_patientor_frontend). In the change the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript. 
+
+If you have started doing the exercises with the old Patientor, you may continue with this section. If not, then it is recommender to use the "new" patientor. This section remains here for couple of weeks.
+</div>
+
 <div class="content">
 
 ### Working with an existing codebase
@@ -13,7 +20,7 @@ When diving into an existing codebase for the first time, it is good to get an o
 If the README is not available or someone has "saved time" and left it as a stub, you can take a peek at the <i>package.json</i>.
 It is always a good idea to start the application and click around to verify you have a functional development environment.
 
-You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have
+You can also browse the folder structure to get some insight into the application's functionality and/or the architecture used. These are not always clear, and the developers might have chosen a way to organize code that is not familiar to you. The [sample project](https://github.com/fullstack-hy2020/old-patientor) used in the rest of this part is organized, feature-wise. You can see what pages the application has, and some general components, e.g. modals and state. Keep in mind that the features may have
 different scopes. For example, modals are visible UI-level components whereas the state is comparable to business logic and keeps the data organized under the hood for the rest of the app to use.
 
 TypeScript provides types for what kind of data structures, functions, components, and state to expect.  You can try looking for <i>types.ts</i> or something similar to get started. VSCode is a big help and simply highlighting variables and parameters can provide quite a lot of insight. All this naturally depends on how types are used in the project.

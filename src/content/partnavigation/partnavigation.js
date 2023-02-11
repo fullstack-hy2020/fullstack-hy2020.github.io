@@ -130,8 +130,8 @@ module.exports = {
       b: 'First steps with TypeScript',
       c: 'Typing an Express app',
       d: 'React with types',
-      e: 'Grande finale: Patientor frontend',
-      f: 'Patientor frontend (the old material)',
+      e: 'Grande finale: Patientor',
+      f: 'Legacy patientor (the old material)',
     },
     '10': {
       a: 'Introduction to React Native',

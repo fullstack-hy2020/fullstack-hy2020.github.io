@@ -5,8 +5,6 @@ letter: e
 lang: en
 ---
 
-
-
 <div class="tasks">
 
 **NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_context). This section remains here for couple of weeks.
