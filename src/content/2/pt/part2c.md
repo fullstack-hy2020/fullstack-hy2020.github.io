@@ -7,70 +7,69 @@ lang: pt
 
 <div class="content">
 
-For a while now we have only been working on "frontend", i.e. client-side (browser) functionality. We will begin working on "backend", i.e. server-side functionality in the [third part](/en/part3) of this course. Nonetheless, we will now take a step in that direction by familiarizing ourselves with how the code executing in the browser communicates with the backend.
+Já estamos trabalhando há um tempo apenas no "front-end", ou seja, com as funcionalidades do lado do cliente (navegador). Começaremos a trabalhar no "back-end", ou seja, com as funcionalidades do lado do servidor na [Parte 3](/pt/part3) deste curso. Contudo, agora daremos um passo nessa direção, assim familiarizando-nos com a comunicação do código executado no navegador com o back-end.
 
-Let's use a tool meant to be used during software development called [JSON Server](https://github.com/typicode/json-server) to act as our server.
+Vamos usar uma ferramenta destinada a ser usada durante a fase de desenvolvimento de software chamada [JSON Server](https://github.com/typicode/json-server), que atuará como nosso servidor.
 
-Create a file named <i>db.json</i> in the root directory of the previous notes project with the following content:
+Crie um arquivo chamado <i>db.json</i> na raiz do diretório do projeto de notas com o seguinte conteúdo:
 
 ```json
 {
   "notes": [
     {
       "id": 1,
-      "content": "HTML is easy",
+      "content": "HTML é fácil",
       "important": true
     },
     {
       "id": 2,
-      "content": "Browser can execute only JavaScript",
+      "content": "O navegador só pode executar JavaScript",
       "important": false
     },
     {
       "id": 3,
-      "content": "GET and POST are the most important methods of HTTP protocol",
+      "content": "GET e POST são os métodos mais importantes do protocolo HTTP",
       "important": true
     }
   ]
 }
 ```
 
-You can [install](https://github.com/typicode/json-server#getting-started) a JSON server globally on your machine using the command _npm install -g json-server_. A global installation requires administrative privileges, which means that it is not possible on faculty computers or freshman laptops.
+É possível [instalar](https://github.com/typicode/json-server#getting-started) globalmente um servidor JSON na sua máquina usando o comando _npm install -g json-server_. Uma instalação global requer privilégios administrativos, o que significa que não é possível fazer isso em computadores de faculdade, etc.
 
-After installing run the following command to run the json-server. The <i>json-server</i> starts running on port 3000 by default; but since projects created using create-react-app reserve port 3000, we must define an alternate port, such as port 3001, for the json-server. The --watch option automatically looks for any saved changes to db.json
+Após a instalação, execute o seguinte comando para executar o json-server. O <i>json-server</i> é executado na porta 3000 por padrão; porém, como projetos criados usando o "create-react-app" reservam a porta 3000 para si, devemos definir uma porta alternativa — como a porta 3001 — para o json-server. A opção <em>--watch</em> procura automaticamente por quaisquer alterações salvas no arquivo <i>db.json</i>.
   
 ```js
 json-server --port 3001 --watch db.json
 ```
 
-However, a global installation is not necessary.  From the root directory of your app, we can run the <i>json-server</i> using the command _npx_:
+Entretanto, não é necessária uma instalação global. A partir da raiz do diretório da sua aplicação, podemos executar o <i>json-server</i> usando o comando _npx_:
 
 ```js
 npx json-server --port 3001 --watch db.json
 ```
 
-Let's navigate to the address <http://localhost:3001/notes> in the browser. We can see that <i>json-server</i> serves the notes we previously wrote to the file in JSON format:
+Vamos acessar o endereço <http://localhost:3001/notes> no navegador. Vemos que o <i>json-server</i> serve as notas que escrevemos anteriormente no arquivo em formato JSON:
 
 ![](../../images/2/14new.png)
 
-If your browser doesn't have a way to format the display of JSON-data, then install an appropriate plugin, e.g. [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) to make your life easier.
+Se o seu navegador não tiver um formatador para exibir os dados JSON, instale um plugin como o [JSONVue](https://chrome.google.com/webstore/detail/jsonview/chklaanhfefbnpoihckbnefhakgolnmc) para facilitar sua vida.
 
-Going forward, the idea will be to save the notes to the server, which in this case means saving them to the json-server. The React code fetches the notes from the server and renders them to the screen. Whenever a new note is added to the application, the React code also sends it to the server to make the new note persist in "memory".
+A partir de agora, a ideia será salvar as notas no servidor, que, neste caso, significa salvá-las no json-server. O código React busca as notas do servidor e as renderiza na tela. Sempre que uma nova nota é adicionada à aplicação, o código React também a envia ao servidor para que a nova nota persista (persist — leia mais sobre persistência de dados [aqui](https://www.take.net/blog/tecnologia/persistencia-de-dados/)) na "memória".
 
-json-server stores all the data in the <i>db.json</i> file, which resides on the server. In the real world, data would be stored in some kind of database. However, json-server is a handy tool that enables the use of server-side functionality in the development phase without the need to program any of it.
+O json-server armazena todos os dados no arquivo <i>db.json</i>, que reside no servidor. No mundo real, os dados seriam armazenados em algum tipo de banco de dados. No entanto, o json-server é uma ferramenta muito útil que permite o uso da funcionalidade de um servidor na fase de desenvolvimento sem a necessidade de programar nenhum desses outros softwares.
 
-We will get familiar with the principles of implementing server-side functionality in more detail in [part 3](/en/part3) of this course.
+Nos familiarizaremos com os princípios de implementação das funcionalidades de um servidor com mais detalhes na [parte 3](/pt/part3) deste curso.
 
-### The browser as a runtime environment
+### O navegador como ambiente de execução
 
-Our first task is fetching the already existing notes to our React application from the address <http://localhost:3001/notes>.
+Nossa primeira tarefa é buscar as notas já existentes em nossa aplicação React a partir do endereço <http://localhost:3001/notes>.
 
-In the part0 [example project](/en/part0/fundamentals_of_web_apps#running-application-logic-on-the-browser), we already learned a way to fetch data from a server using JavaScript. The code in the example was fetching the data using [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), otherwise known as an HTTP request made using an XHR object. This is a technique introduced in 1999, which every browser has supported for a good while now.
+Na [projeto-exemplo](/pt/part0/fundamentos_de_aplicacoes_web#executando-a-logica-da-aplicacao-no-navegador) da Parte 0, já aprendemos uma maneira de buscar dados de um servidor usando JavaScript. O código no exemplo estava buscando os dados usando [XMLHttpRequest](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest), também conhecido como uma "requisição HTTP" feita usando um objeto XHR. Esta é uma técnica introduzida em 1999, no qual todos os navegadores têm oferecido suporte a ela já faz um bom tempo.
 
-The use of XHR is no longer recommended, and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event-driven model used by XHR.
+Já não é mais recomendado o uso do objeto XHR, e a maioria dos navegadores já suportam amplamente o método [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) ("ir buscar" ou "buscar"), que é baseado em chamadas conhecidas como [promessas](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) (promises), ao invés do modelo de gerenciamento de eventos utilizado pelo XHR.
 
-As a reminder from part0 (which one should <i>remember to not use</i> without a pressing reason), data was fetched using XHR in the following way: 
-
+Como lembrete da Parte 0 (que deve ser lembrado <i>de não ser usado</i> sem um motivo plausível), os dados foram buscados usando o XHR da seguinte maneira: 
 
 ```js
 const xhttp = new XMLHttpRequest()
@@ -78,7 +77,7 @@ const xhttp = new XMLHttpRequest()
 xhttp.onreadystatechange = function() {
   if (this.readyState == 4 && this.status == 200) {
     const data = JSON.parse(this.responseText)
-    // handle the response that is saved in variable data
+    // gerencia a resposta que é salva nos dados variáveis
   }
 }
 
@@ -86,11 +85,11 @@ xhttp.open('GET', '/data.json', true)
 xhttp.send()
 ```
 
-Right at the beginning, we register an <i>event handler</i> to the <em>xhttp</em> object representing the HTTP request, which will be called by the JavaScript runtime whenever the state of the <em>xhttp</em> object changes. If the change in state means that the response to the request has arrived, then the data is handled accordingly.
+Desde o início, registramos um <i>gerenciador de evento</i> ao objeto <em>xhttp</em> representando a requisição HTTP, que será chamado pelo ambiente de execução JavaScript sempre que o estado do objeto <em>xhttp</em> mudar. Se a mudança no estado significa que a resposta à requisição chegou, então os dados são lidos de acordo com o que foi estabelecido.
 
-It is worth noting that the code in the event handler is defined before the request is sent to the server. Despite this, the code within the event handler will be executed at a later point in time. Therefore, the code does not execute synchronously "from top to bottom", but does so <i>asynchronously</i>. JavaScript calls the event handler that was registered for the request at some point.
+Vale a pena notar que o código no gerenciador de eventos é definido antes da requisição ser enviada ao servidor. Mesmo assim, o código dentro do gerenciador de eventos será executado em um momento posterior. Portanto, o código não executa sincronamente "de cima para baixo", mas sim <i>assincronamente</i> (asynchronously). JavaScript chama em algum momento o gerenciador de eventos que foi registrado para a requisição.
 
-A synchronous way of making requests that's common in Java programming, for instance, would play out as follows (NB, this is not actually working Java code):
+Uma forma comum de fazer requisições sincronas em Java, por exemplo, funcionaria da seguinte maneira (N.B. (Nota Bene): este código Java não funciona):
 
 ```java
 HTTPRequest request = new HTTPRequest();
@@ -103,15 +102,15 @@ notes.forEach(m => {
 });
 ```
 
-In Java, the code executes line by line and stops to wait for the HTTP request, which means waiting for the command _request.get(...)_ to finish. The data returned by the command, in this case the notes, are then stored in a variable, and we begin manipulating the data in the desired manner.
+Em Java, o código é executado linha a linha e é interrompido para esperar pela requisição HTTP, o que significa esperar até o comando _request.get(...)_ ser concluído. Os dados retornados pelo comando, neste caso as notas, são então armazenados em uma variável na qual podemos manipular os dados da maneira que desejarmos.
 
-On the other hand, JavaScript engines, or runtime environments, follow the [asynchronous model](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). In principle, this requires all [IO operations](https://en.wikipedia.org/wiki/Input/output) (with some exceptions) to be executed as non-blocking. This means that code execution continues immediately after calling an IO function, without waiting for it to return.
+Por outro lado, os ambientes de tempo de execução JavaScript, ou "engines" (motores), seguem o [modelo assíncrono](https://developer.mozilla.org/en-US/docs/Web/JavaScript/EventLoop). Em princípio, isso requer que todas as [operações IO](https://en.wikipedia.org/wiki/Input/output) (com algumas exceções) sejam executadas como não-bloqueantes. Isso significa que a execução do código continua imediatamente após a chamada de uma função IO, sem esperar que ela termine.
 
-When an asynchronous operation is completed, or, more specifically, at some point after its completion, the JavaScript engine calls the event handlers registered to the operation.
+Quando uma operação assíncrona é concluída, ou mais especificamente, algum tempo depois de sua conclusão, o que acontece é que o motor JavaScript chama os gerenciadores de evento registrados na operação.
 
-Currently, JavaScript engines are <i>single-threaded</i>, which means that they cannot execute code in parallel. As a result, it is a requirement in practice to use a non-blocking model for executing IO operations. Otherwise, the browser would "freeze" during, for instance, the fetching of data from a server.
+Atualmente, os motores JavaScript são <i>single-threaded</i> (linha de execução única), o que significa que não podem executar código em paralelo. Como resultado, na prática, é uma exigência usar um modelo não-bloqueante para a execução de operações IO. Caso contrário, o navegador "congelaria" durante a busca de dados em um servidor, por exemplo.
 
-Another consequence of this single-threaded nature of JavaScript engines is that if some code execution takes up a lot of time, the browser will get stuck for the duration of the execution. If we added the following code at the top of our application:
+Outra consequência da natureza single-threaded dos motores JavaScript é que se alguma execução de código levar muito tempo, o navegador ficará preso durante toda a execução. Se adicionássemos o seguinte código no topo de nossa aplicação...
 
 ```js
 setTimeout(() => {
@@ -120,27 +119,27 @@ setTimeout(() => {
   while (i < 50000000000) {
     i++
   }
-  console.log('end')
+  console.log('fim do loop')
 }, 5000)
 ```
 
-everything would work normally for 5 seconds. However, when the function defined as the parameter for <em>setTimeout</em> is run, the browser will be stuck for the duration of the execution of the long loop. Even the browser tab cannot be closed during the execution of the loop, at least not in Chrome.
+... tudo funcionaria normalmente por 5 segundos. No entanto, quando a função definida como o parâmetro para <em>setTimeout</em> é executada, o navegador fica preso durante toda a execução do longo loop. Mesmo a aba do navegador não pode ser fechada durante a execução do loop, pelo menos não no Chrome.
 
-For the browser to remain <i>responsive</i>, i.e., to be able to continuously react to user operations with sufficient speed, the code logic needs to be such that no single computation can take too long.
+Para o navegador permanecer <i>responsivo</i>, ou seja, ser capaz de reagir continuamente às operações do usuário com velocidade suficiente, a lógica do código precisa ser tal que nenhuma única computação tenha de levar tanto tempo para se realizar.
 
-There is a host of additional material on the subject to be found on the internet. One particularly clear presentation of the topic is the keynote by Philip Roberts called [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ)
+Existe uma série de materiais sobre o tema disponíves na internet. Uma apresentação particularmente clara do tópico é a palestra de Philip Roberts chamada [What the heck is the event loop anyway?](https://www.youtube.com/watch?v=8aGhZQkoFbQ) (disponível em português).
 
-In today's browsers, it is possible to run parallelized code with the help of so-called [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). The event loop of an individual browser window is, however, still only handled by a [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).
+É possível executar código paralelizado nos navegadores de hoje em dia com a ajuda dos chamados [web workers](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Using_web_workers). No entanto, o loop de eventos de uma única janela do navegador ainda é realizado como [single thread](https://medium.com/techtrument/multithreading-javascript-46156179cf9a).
 
 ### npm
 
-Let's get back to the topic of fetching data from the server.
+Vamos voltar ao assunto sobre obtenção de dados do servidor.
 
-We could use the previously mentioned promise-based function [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) to pull the data from the server. Fetch is a great tool. It is standardized and supported by all modern browsers (excluding IE).
+Poderíamos usar a função baseada em promessas [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch), mencionada anteriormente, para puxar (pull) os dados do servidor. Fetch é uma ótima ferramenta. É padronizada e tem suporte de todos os navegadores modernos (exceto o IE [Internet Explorer]).
 
-That being said, we will be using the [axios](https://github.com/axios/axios) library instead for communication between the browser and server. It functions like fetch but is somewhat more pleasant to use. Another good reason to use axios is our getting familiar with adding external libraries, so-called <i>npm packages</i>, to React projects.
+Dito isso, usaremos a biblioteca [axios](https://github.com/axios/axios) para fazer essa comunicação entre navegador e servidor. Ela funciona como o fetch, mas é um pouco mais agradável de se usar. Outra boa razão para usar o axios é que nos familiarizaremos com a adição de bibliotecas externas em projetos React, conhecidas como <i>pacotes npm</i> (npm packages).
 
-Nowadays, practically all JavaScript projects are defined using the node package manager, aka [npm](https://docs.npmjs.com/getting-started/what-is-npm). The projects created using create-react-app also follow the npm format. A clear indicator that a project uses npm is the <i>package.json</i> file located at the root of the project:
+Hoje em dia, praticamente todos os projetos JavaScript são definidos usando o gerenciador de pacotes do Node, conhecido como [npm](https://docs.npmjs.com/getting-started/what-is-npm) (abreviação de "Node Package Manager"). Os projetos criados usando "create-react-app" também seguem o formato npm. Um indicador claro de que um projeto usa npm é o arquivo <i>package.json</i> localizado na raiz do projeto:
 
 ```json
 {
@@ -183,17 +182,17 @@ Nowadays, practically all JavaScript projects are defined using the node package
 }
 ```
 
-At this point, the <i>dependencies</i> part is of most interest to us as it defines what <i>dependencies</i>, or external libraries, the project has.
+Neste ponto, o objeto <i>dependencies</i>, que é uma parte do documento <i>package.json</i>, é o que mais nos interessa agora, pois define quais são as <i>dependências</i> ou bibliotecas externas do projeto.
 
-We now want to use axios. Theoretically, we could define the library directly in the <i>package.json</i> file, but it is better to install it from the command line.
+Agora queremos usar o axios. Teoricamente, poderíamos definir a biblioteca diretamente no arquivo <i>package.json</i>, mas é melhor instalá-la a partir da linha de comando.
 
 ```js
 npm install axios
 ```
 
-**NB _npm_-commands should always be run in the project root directory**, which is where the <i>package.json</i> file can be found.
+**N.B.: os comandos do _npm_ sempre devem ser executados no diretório raiz do projeto**, onde o arquivo <i>package.json</i> pode ser encontrado.
 
-Axios is now included among the other dependencies:
+O axios agora está incluído entre as outras dependências:
 
 ```json
 {
@@ -214,15 +213,15 @@ Axios is now included among the other dependencies:
 }
 ```
 
-In addition to adding axios to the dependencies, the <em>npm install</em> command also <i>downloaded</i> the library code. As with other dependencies, the code can be found in the <i>node\_modules</i> directory located in the root. As one might have noticed, <i>node\_modules</i> contains a fair amount of interesting stuff.
+Além de adicionar o axios às dependências, o comando <em>npm install</em> também <i>baixou</i> o código da biblioteca. Como outras dependências, o código pode ser encontrado no diretório <i>node\_modules</i> localizado na raiz. É possível notar que o diretório <i>node_modules</i> contém uma quantidade significativa de coisas interessantes.
 
-Let's make another addition. Install <i>json-server</i> as a development dependency (only used during development) by executing the command:
+Vamos fazer mais uma adição. Instale o <i>json-server</i> como uma dependência de desenvolvimento (usado apenas durante o desenvolvimento) executando o comando...
 
 ```js
 npm install json-server --save-dev
 ```
 
-and making a small addition to the <i>scripts</i> part of the <i>package.json</i> file:
+... e fazendo uma pequena adição ao objeto <i>scripts</i> do arquivo <i>package.json</i>:
 
 ```json
 {
@@ -236,6 +235,16 @@ and making a small addition to the <i>scripts</i> part of the <i>package.json</i
   },
 }
 ```
+^^^^^^^^^^^^
+### PARTE REVISADA
+
+
+
+
+
+
+
+
 
 We can now conveniently, without parameter definitions, start the json-server from the project root directory with the command:
 
