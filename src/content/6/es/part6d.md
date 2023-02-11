@@ -593,9 +593,9 @@ const Button = ({ type, label }) => {
 
 El código actual de la aplicación se encuentra en [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-2) en la rama <i>part6-2</i>.
 
-### Defining the counter context in a separate file
+### Definiendo el contexto del contador en un archivo separado
 
-Our application has an annoying feature, that the functionality of the counter state management is partly defined in the <i>App</i> component. Now let's move everything related to the counter to <i>CounterContext.js</i>:
+Nuestra aplicación tiene una característica molesta, que la funcionalidad de la gestión del estado del contador está parcialmente definida en el componente <i>App</i>. Ahora vamos a mover todo lo relacionado con el contador al archivo <i>CounterContext.js</i>:
 
 ```js
 import { createContext, useReducer } from 'react'
@@ -628,9 +628,9 @@ export const CounterContextProvider = (props) => {
 export default CounterContext
 ```
 
-The file now exports, in addition to the <i>CounterContext</i> object corresponding to the context, the <i>CounterContextProvider</i> component, which is practically a context provider whose value is a counter and a dispatcher used for its state management.
+El archivo ahora exporta, además del objeto <i>CounterContext</i> correspondiente al contexto, el componente <i>CounterContextProvider</i>, que es prácticamente un proveedor de contexto cuyo valor es un contador y un despachador utilizado para su gestión de estado.
 
-Let's enable the context provider by making a change in <i>index.js</i>:
+Habilitemos el proveedor de contexto haciendo un cambio en <i>index.js</i>:
 
 ```js
 import ReactDOM from 'react-dom/client'
@@ -644,9 +644,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Now the context defining the value and functionality of the counter is available to <i>all</i> components of the application.
+Ahora el contexto que define el valor y la funcionalidad del contador está disponible para <i>todos</i> los componentes de la aplicación.
 
-The <i>App</i> component is simplified to the following form:
+El componente <i>App</i> se simplifica a la siguiente forma:
 
 ```js
 import Display from './components/Display'
@@ -686,13 +686,13 @@ const Button = ({ type, label }) => {
 export default Button
 ```
 
-The <i>Button</i> component only needs the <i>dispatch</i> function of the counter, but it also gets the value of the counter from the context using the function <i>useContext</i>:
+El componente <i>Button</i> solo necesita la función <i>dispatch</i> del contador, pero también obtiene el valor del contador del contexto utilizando la función <i>useContext</i>:
 
 ```js
   const [counter, dispatch] = useContext(CounterContext)
 ```
 
-This is not a big problem, but it is possible to make the code a bit more pleasant and expressive by defining a couple of helper functions in the <i>CounterContext</i> file:
+Esto no es un gran problema, pero es posible hacer que el código sea un poco más agradable y expresivo definiendo un par de funciones auxiliares en el archivo <i>CounterContext</i>:
 
 ```js
 import { createContext, useReducer, useContext } from 'react' // highlight-line
@@ -714,7 +714,7 @@ export const useCounterDispatch = () => {
 // ...
 ```
 
-With the help of these helper functions, it is possible for the components that use the context to get hold of the part of the context that they need. The <i>Display</i> component changes as follows:
+Con la ayuda de estas funciones auxiliares, es posible que los componentes que usan el contexto obtengan la parte del contexto que necesitan. El componente <i>Display</i> cambia de la siguiente manera:
 
 ```js
 import { useCounterValue } from '../CounterContext' // highlight-line
@@ -730,7 +730,7 @@ const Display = () => {
 export default Display
 ```
 
-Component <i>Button</i> becomes:
+El componente <i>Button</i> se vuelve:
 
 ```js
 import { useCounterDispatch } from '../CounterContext' // highlight-line
@@ -747,11 +747,11 @@ const Button = ({ type, label }) => {
 export default Button
 ```
 
-The solution is quite elegant. The entire state of the application, i.e. the value of the counter and the code for managing it, is now isolated in the file <i>CounterContext</i>, which provides components with well-named and easy-to-use auxiliary functions for managing the state.
+La solución es bastante elegante. Todo el estado de la aplicación, es decir, el valor del contador y el código para gestionarlo, ahora está aislado en el archivo <i>CounterContext</i>, que proporciona a los componentes funciones auxiliares bien nombradas y fáciles de usar para gestionar el estado.
 
-The final code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) in the branch <i>part6-3</i>.
+El código de la aplicación final se encuentra en [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) en la rama <i>part6-3</i>.
 
-As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks -rules.html) only from React components or custom hooks. Custom Hooks, on the other hand, are JavaScript functions whose name must start with the string _use_. We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.
+Como detalle técnico, debe tenerse en cuenta que las funciones auxiliares <i>useCounterValue</i> y <i>useCounterDispatch</i> se definen como [hooks personalizados](https://es.reactjs.org/docs/hooks-custom.html), porque llamar a la función de hook <i>useContext</i> es [posible](https://es.reactjs.org/docs/hooks -reglas.html) solo desde componentes de React o hooks personalizados. Los hooks personalizados, por otro lado, son funciones JavaScript cuyo nombre debe comenzar con la cadena _use_. Volveremos a los hooks personalizados en un poco más de detalle en la [parte 7](/part7/hooks_personalizados) del curso.
 
 </div>
 
