@@ -29,7 +29,7 @@ console.log('valor de props é ' + props)
 console.log('valor de props é', props)
 ```
 
-Se você concatenar um objeto com uma string e fazer o registro (log) no console (como demonstrado em nosso primeiro exemplo), o resultado será bastante inútil:
+Se você concatenar um objeto com uma string e fazer o registro (log) no console (como demonstrado em nosso primeiro exemplo), o resultado será bem inútil:
 
 ```js
 valor de props é [object Object]
@@ -474,7 +474,7 @@ Caso deseje clonar o projeto, execute o comando _npm install_ antes de iniciar a
 
 Logo cedo em sua carreira em programação (e até mesmo após 30 anos de programação como esta pessoa que vos escreve), o que acontece com frequência é que a aplicação simplesmente quebra, completamente. Isso é ainda mais verídico quando se trata de linguagens dinamicamente tipadas, como JavaScript, onde o compilador não verifica o tipo do dado declarado. Por exemplo, variáveis de função ou valores de retorno.
 
-Uma "explosão React" pode, por exemplo, parecer assim:
+Uma "explosão React" pode parecer assim, por exemplo:
 
 ![exemplo de erro em React](../../images/2/3b.png)
 
@@ -646,7 +646,7 @@ App
 
 Desta forma, o componente <i>Course</i> conterá os componentes definidos na parte anterior, responsáveis por renderizar o nome do curso e suas partes.
 
-O resultado da página pode, por exemplo, ficar assim: 
+O resultado da página pode ficar assim, por exemplo: 
 
 ![half stack application screenshot](../../images/teht/8e.png)
 
@@ -747,7 +747,7 @@ const App = () => {
 }
 ```
 
-A aplicação pode, por exemplo, ficar assim: 
+A aplicação pode ficar assim, por exemplo: 
 
 ![recurso que mostra o número arbitrário de cursos](../../images/teht/10e.png)
 

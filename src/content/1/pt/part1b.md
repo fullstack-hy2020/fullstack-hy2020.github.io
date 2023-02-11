@@ -260,7 +260,7 @@ const Header = (props) => {
 
 Se e <i>quando</i> você encontrar a mensagem de erro:
 
-> <i>Objetos não são válidos como elementos-filho do React.</i>
+> <i>Objetos não são válidos como elementos-filho React.</i>
 
 ... tenha em mente o explicado [aqui](/pt/part1/introducao_a_biblioteca_react#nao-renderize-objetos).
 
