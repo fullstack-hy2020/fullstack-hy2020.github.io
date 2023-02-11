@@ -429,11 +429,17 @@ If user enters invalid values to the form and backend rejects the addition, show
 
 #### 9.28: Patientor, step9
 
-Extend your solution so that it supports <i>all the entry types</i>. You do not need to care about possible errors in the server's response.
+Extend your solution so that it supports <i>all the entry types</i>
 
 #### 9.29: Patientor, step10
 
-Improve the entry creation forms so that it makes hard to enter incorrect values for...
+Improve the entry creation forms so that it makes hard to enter incorrect values dates, diagnosis codes and health rating.
+
+Your improved form might look something like this:
+
+![](../../images/9/76new.png)
+
+Diagnosis codes are now set with Material UI [multiple select](https://mui.com/material-ui/react-select/#multiple-select) and dates with [Input](https://mui.com/material-ui/api/input/) elements with type [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date).
 
 ### Submitting exercises and getting the credits
 
