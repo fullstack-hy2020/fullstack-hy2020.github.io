@@ -132,7 +132,7 @@ app.post('/api/notes', (request, response, next) => {
 ```
 
 
-En el primer _then_ recibimos el objeto _savedNote_ devuelto por la Mongoose y formateado. Se retprna el resultado de la operación. Luego, como [discutimos anteriormente](/es/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), el método _then_ de una promesa también devuelve una promesa y podemos acceder a la nota formateada registrando una nueva función callback con el método _then_.
+En el primer _then_ recibimos el objeto _savedNote_ devuelto por la Mongoose y formateado. Se retorna el resultado de la operación. Luego, como [discutimos anteriormente](/es/part2/altering_data_in_server#extracting-communication-with-the-backend-into-a-separate-module), el método _then_ de una promesa también devuelve una promesa y podemos acceder a la nota formateada registrando una nueva función callback con el método _then_.
 
 Podemos limpiar nuestro código aún más usando la sintaxis más compacta para las funciones de flecha:
 
