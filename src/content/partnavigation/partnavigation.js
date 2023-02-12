@@ -43,7 +43,7 @@ module.exports = {
       e: 'connect (vanha osa)',
     },
     '7': {
-      a: 'React-router',
+      a: 'React Router',
       b: 'custom-hookit',
       c: 'Lisää tyyleistä',
       d: 'Webpack',
@@ -111,7 +111,7 @@ module.exports = {
       e: 'connect (the old part)',
     },
     '7': {
-      a: 'React-router',
+      a: 'React Router',
       b: 'Custom hooks',
       c: 'More about styles',
       d: 'Webpack',

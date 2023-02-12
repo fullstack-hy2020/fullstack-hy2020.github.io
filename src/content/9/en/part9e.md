@@ -7,9 +7,9 @@ lang: en
 
 <div class="tasks">
 
-**NOTE**: this is the new section about Patientor frontend that has replaced 12 February 2023, [this chapter](/en/part9/patientor_frontend_the_old_material). In the change the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript. 
+**NOTE**: this is the new section about Patientor frontend that has replaced 12th February 2023, [this chapter](/en/part9/patientor_frontend_the_old_material). In the change, the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript. 
 
-If you have started doing the exercises with the old Patientor, you may continue with [the old material](/en/part9/patientor_frontend_the_old_material). If not, then it is recommender to use the "new" patientor that is described in this section.
+If you have started doing the exercises with the old Patientor, you may continue with [the old material](/en/part9/patientor_frontend_the_old_material). If not, then it is recommended to use the "new" patientor that is described in this section.
 
 </div>
 
@@ -31,7 +31,7 @@ Remember that reading code is a skill in itself, so don't worry if you don't und
 
 ### Patientor frontend
 
-It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_the_express_app).
+It's time to get our hands dirty finalizing the frontend for the backend we built in [exercises 9.8.-9.13](/en/part9/typing_the_express_app). We will actually also need some new features to the backend for finishing the app.
 
 Before diving into the code, let us start both the frontend and the backend.
 
@@ -44,13 +44,13 @@ For example, the frontend has a state and may want to keep data in objects or ma
 
 The folder structure looks as follows:
 
-![vscode folder structure for patientor](../../images/9/34new.png)
+![vscode folder structure for patientor](../../images/9/34brandnew.png)
 
-Besides the component *App*, a directory for services there are currently two main components: *AddPatientModal* and *PatientListPage*.
+Besides the component *App* a directory for services, there is currently three main components: *AddPatientModal* and *PatientListPage* which are both defined in a directory, and a component *HealthRatingBar* defined in a file. If a component has some subcomponents not used elsewhere in the app, it might be a good idea to define the component and its subcomponents in a directory. For example now the AddPatientModal is defined in the file _components/AddPatientModal/index.tsx_ and its subcomponent *AddPatientForm* in its own file under the same directory.
 
-There is nothing very surprising in the code. The state and communication with the backend is implemented with _useState_ hook and Axios, simillarly to the notes app in the previous section. [Material UI](http://localhost:8000/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implementer with [React Router](http://localhost:8000/en/part7/react_router), bot familliar to us from part 7 of the course.
+There is nothing very surprising in the code. The state and communication with the backend are implemented with _useState_ hook and Axios, similar to the notes app in the previous section. [Material UI](http://localhost:8000/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implementer with [React Router](http://localhost:8000/en/part7/react_router), both familiar to us from part 7 of the course.
 
-From typing point of view there are couple of interesting things. Component _App_ passes the function _setPatients_ as a prop to the component _PatientListPage_:
+From typing point of view, there are a couple of interesting things. Component _App_ passes the function _setPatients_ as a prop to the component _PatientListPage_:
 
 ```js
 const App = () => {
@@ -65,8 +65,11 @@ const App = () => {
           <Routes>
             // ...
             <Route path="/" element={
-              <PatientListPage patients={patients} setPatients={setPatients} // highlight-lines
-            />} />
+              <PatientListPage
+                patients={patients}
+                setPatients={setPatients} // highlight-lines
+              />} 
+            />
           </Routes>
         </Container>
       </Router>
@@ -75,8 +78,7 @@ const App = () => {
 };
 ```
 
-In order to keep TypeScrip compiler happy, the props shoudl be typed. The typing look followin:
-
+To keep the TypeScript compiler happy, the props should be typed as follows:
 
 ```js
 interface Props {
@@ -93,9 +95,9 @@ So the function _setPatients_ has type _React.Dispatch<React.SetStateAction<Pati
 
 ![](../../images/9/73new.png)
 
-The [React TypeScript cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) has a pretty nice list of typical Prop types, where we can seek for help if finding the proper typing for props is problematic.
+The [React TypeScript cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) has a pretty nice list of typical prop types, where we can seek for help if finding the proper typing for props is not obvious.
 
-_PatientListPage_ passes four props to the component _AddPatientModal_ component. Two of these props are functions. Let us have a look how these are typed:
+_PatientListPage_ passes four props to the component _AddPatientModal_. Two of these props are functions. Let us have a look how these are typed:
 
 ```js
 const PatientListPage = ({ patients, setPatients } : Props ) => {
@@ -150,13 +152,13 @@ _onClose_ is just a function that takes no parameters, and does not return anyth
 () => void
 ```
 
-The type of _onSubmit_ is a bit more interesting, it has one parameter that has the type _PatientFormValues_. The return value of the function is _Promise<void>_. So again the function type is written with the arrow syntax:
+The type of _onSubmit_ is a bit more interesting, it has one parameter that has the type _PatientFormValues_. The return value of the function is _Promise&#60;void&#62;_. So again the function type is written with the arrow syntax:
 
 ```js
 (values: PatientFormValues) => Promise<void>
 ```
 
-The return value of a _async_ function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is _Promise<void>_.
+The return value of a _async_ function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is just _Promise&#60;void&#62;_.
 
 </div>
 
@@ -293,7 +295,7 @@ interface BaseEntry {
 }
 ```
 
-As we mentioned [earlier in this part](/en/part9/first_steps_with_type_script/#the-alternative-array-syntax), we could define an array with syntax _Array&#60;Type&#62;_ instead of defining it *Type[]*. In this particular case writing _Diagnosis['code'][]_ starts to look a bit strange so we will decide to use the alternative syntax (that is also recommended by the ESlint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)):
+As was mentioned [earlier in this part](/en/part9/first_steps_with_type_script/#the-alternative-array-syntax), we could define an array with the syntax _Array&#60;Type&#62;_ instead of defining it *Type[]*. In this particular case writing _Diagnosis['code'][]_ starts to look a bit strange so we will decide to use the alternative syntax (that is also recommended by the ESlint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)):
 
 ```js
 interface BaseEntry {
@@ -304,7 +306,6 @@ interface BaseEntry {
   diagnosisCodes?: Array<Diagnosis['code']>; // highlight-line
 }
 ```
-
 
 Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 
@@ -356,6 +357,8 @@ type EntryWithoutId = UnionOmit<Entry, 'id'>;
 <div class="tasks">
 
 ### Exercises 9.22-9.29
+
+Now we are ready to put the finishing touches to the app!
 
 #### 9.22: Patientor, step3
 
@@ -412,6 +415,7 @@ You may assume that the diagnostic codes are sent in a correct form and use eg. 
 ```js
 const parseDiagnosisCodes = (object: unknown): Array<Diagnosis['code']> =>  {
   if (!object || typeof object !== 'object' || !('diagnosisCodes' in object)) {
+    // we will just trust the data to be in correct form
     return [] as Array<Diagnosis['code']>;
   }
 
@@ -441,7 +445,7 @@ Extend your solution so that it supports <i>all the entry types</i>
 
 #### 9.29: Patientor, step10
 
-Improve the entry creation forms so that it makes hard to enter incorrect values dates, diagnosis codes and health rating.
+Improve the entry creation forms so that it makes hard to enter incorrect dates, diagnosis codes and health rating.
 
 Your improved form might look something like this:
 

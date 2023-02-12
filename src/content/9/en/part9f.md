@@ -7,9 +7,9 @@ lang: en
 
 <div class="tasks">
 
-**NOTE**: this is the old section about Patientor frontend that was replaced 12 February 2023, with [this chapter](/en/part9/grande_finale_patientor_frontend). In the change the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript. 
+**NOTE**: this is the old section about Patientor frontend that was replaced 12th February 2023, with [this chapter](/en/part9/grande_finale_patientor_frontend). In the change, the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript. 
 
-If you have started doing the exercises with the old Patientor, you may continue with this section. If not, then it is recommender to use the "new" patientor. This section remains here for couple of weeks.
+If you have started doing the exercises with the old Patientor, you may continue with this section. If not, then it is recommended to use the "new" patientor. This section remains here for couple of weeks.
 </div>
 
 <div class="content">
@@ -448,7 +448,7 @@ interface BaseEntry {
 }
 ```
 
-As you might remember, `Array<Type>` is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying `Diagnosis['code'][]` which starts to look a bit strange.
+As you might remember, _Array<Type>_ is just an alternative way to say *Type[]*. In cases like this, it is just much clearer to use the array convention since the other option would be to define the type by saying _Diagnosis['code'][]_ which starts to look a bit strange.
 
 Now that we have the *BaseEntry* defined, we can start creating the extended entry types we will actually be using. Let's start by creating the *HealthCheckEntry* type.
 
@@ -478,7 +478,7 @@ export type Entry =
   | HealthCheckEntry;
 ```
 
-An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using `Omit<Entry, 'id'>`, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
+An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using _Omit<Entry, 'id'>_, but [it wouldn't work as we might expect](https://github.com/microsoft/TypeScript/issues/42680). In fact, the resulting type would only contain the common properties, but not the ones they don't share. A possible workaround is to define a special Omit-like function to deal with such situations:
 
 ```ts
 // Define special omit for unions
