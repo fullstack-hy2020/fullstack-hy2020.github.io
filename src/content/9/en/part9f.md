@@ -9,7 +9,7 @@ lang: en
 
 **NOTE**: this is the old section about Patientor frontend that was replaced 12th February 2023, with [this chapter](/en/part9/grande_finale_patientor_frontend). In the change, the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript. 
 
-If you have started doing the exercises with the old Patientor, you may continue with this section. If not, then it is recommended to use the "new" patientor. This section remains here for couple of weeks.
+If you have started doing the exercises with the old Patientor, you may continue with this section. If not, then it is recommended to use the "new" patientor. This section remains here for a couple of weeks.
 </div>
 
 <div class="content">
