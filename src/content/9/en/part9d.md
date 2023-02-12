@@ -310,7 +310,7 @@ const App = () => {
 
 ### Deeper type usage
 
-In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts not all parts have the same attributes? How would this look, codewise? Let's consider the following example:
+In the previous exercise, we had three parts of a course, and all parts had the same attributes *name* and *exerciseCount*. But what if we needed additional attributes for the parts where all parts do not have the same attributes? How would this look, codewise? Let's consider the following example:
 
 ```js
 const courseParts = [
@@ -345,7 +345,7 @@ Let's imagine that our application just keeps on growing, and we need to pass th
 
 Let's start by defining types for our different course parts. We notice that the first and third have the same set of attributes. The second and fourth are a bit different so we have three different kinds of course part elements. 
 
-So let us define a type for each of the different kind of of course parts:
+So let us define a type for each of the different kind of course parts:
 
 ```js
 interface CoursePartBasic {
@@ -371,7 +371,7 @@ interface CoursePartBackround {
 }
 ```
 
-Besides the attributes that are found in the various course parts, we have now introduced a additional attribute called <i>kind</i> that has a [literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) type, it is a "hard coded" string, distinct for each course part. We shall soon see where the attribute kind is used!
+Besides the attributes that are found in the various course parts, we have now introduced an additional attribute called <i>kind</i> that has a [literal](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#literal-types) type, it is a "hard coded" string, distinct for each course part. We shall soon see where the attribute kind is used!
 
 Next, we will create a type [union](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#union-types) of all these types. We can then use it to define a type for our array, which should accept any of these course part types:
 
@@ -433,7 +433,7 @@ We will immediately see an error in the editor:
 
 ![](../../images/9/63new.png)
 
-Since our new entry has the attribute _kind_ with value _"basic"_ TypeScript knows that the entry is does not only have the type _CoursePart_ but it is actually meant to be a _CoursePartBasic_. So here the attribute _kind_ "narrows" the type of the entry from a more general to a more specific type that has a certain set of attributes. We shall soon see this style of type narrowing in action in the code!
+Since our new entry has the attribute _kind_ with value _"basic"_ TypeScript knows that the entry does not only have the type _CoursePart_ but it is actually meant to be a _CoursePartBasic_. So here the attribute _kind_ "narrows" the type of the entry from a more general to a more specific type that has a certain set of attributes. We shall soon see this style of type narrowing in action in the code!
 
 But we're not satisfied yet! There is still a lot of duplication in our types, and we want to avoid that. We start by identifying the attributes all course parts have in common, and defining a base type that contains them. Then we will [extend](https://www.typescriptlang.org/docs/handbook/2/objects.html#extending-types) that base type to create our kind-specific types:
 
@@ -466,7 +466,7 @@ type CoursePart = CoursePartBasic | CoursePartGroup | CoursePartBackround;
 
 How should we now use these types in our components?
 
-If we try to acess the objects in the array _courseParts: CoursePart[]_ we notice that it is possibly to only access the attributes that are common to all the types in the union:
+If we try to acess the objects in the array _courseParts: CoursePart[]_ we notice that it is possible to only access the attributes that are common to all the types in the union:
 
 ![](../../images/9/65new.png)
 
@@ -650,7 +650,7 @@ const App = () => {
 }
 ```
 
-When we hover over the the _useState_ calls in the editor, we notice couple of interesting things. 
+When we hover over the _useState_ calls in the editor, we notice couple of interesting things. 
 
 The type of the first call _useState('')_ looks like the following:
 
@@ -665,7 +665,7 @@ The type is a somehow challenging to decipher. It has the following "form":
 functionName(parameters): return_value
 ```
 
-So we notice that ts compiler has inferred that the initial state is either a string or a function that returns a string:
+So we notice that TypeScript compiler has inferred that the initial state is either a string or a function that returns a string:
 
 ```ts
 initialState: string | (() => string)
@@ -677,7 +677,7 @@ The type of the returned array is the following:
 [string, React.Dispatch<React.SetStateAction<string>>]
 ```
 
-So the first element, assignd to _newNote_ is a string and the second element that we assigned _setNewNote_ has a slightly more complex type. We notice that there is a string mentioned there, so we know that it must be the type of a function that sets a valued data. See [here](https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/) of you want to learn more about the types of useState function.
+So the first element, assignd to _newNote_ is a string and the second element that we assigned _setNewNote_ has a slightly more complex type. We notice that there is a string mentioned there, so we know that it must be the type of a function that sets a valued data. See [here](https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/) if you want to learn more about the types of useState function.
 
 From this all we see that TypeScript has indeed [inferred](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) the type of the first useState quite right, it is creating a state with type string.
 
@@ -691,7 +691,7 @@ useState<never[]>(initialState: never[] | (() => never[])):
 
 TypeScript can just infer that the state has type _never[]_, it is an array but it has no clue what are the elements stored to array, so we clearly need to help the compiler and provide the type explicitly.
 
-One of the best sources for information about typing React is the [React TypeScript cheetseat](https://react-typescript-cheatsheet.netlify.app/).
+One of the best sources for information about typing React is the [React TypeScript Cheatsheet](https://react-typescript-cheatsheet.netlify.app/).
 
 The chapter about [useState](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/hooks#usestate) hook instructs to use a <i>type parameter</i> in situations where the compiler can not infer the type. 
 
@@ -710,7 +710,7 @@ The solution is now simple:
 const [notes, setNotes] = useState<Note[]>([]);
 ```
 
-And indeed, the type is set quire right:
+And indeed, the type is set quite right:
 
 ```ts
 useState<Note[]>(initialState: Note[] | (() => Note[])):
@@ -816,7 +816,7 @@ It does not quite work, there is an Eslint error complaining about implicit any:
 ![](../../images/9/68new.png)
 
 TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the unfamous implicit any that we wan to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
-[forms and events](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events) reveals that the right type of event handlers is _React.SyntheticEvent_. 
+[forms and events](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events) reveals that the right type of event handler is _React.SyntheticEvent_. 
 
 The code becomes
 
@@ -913,11 +913,11 @@ We can now set the data in the state _notes_ to get the code working:
   }, [])
 ```
 
-So just like with _useState_, we gave a type  parameter to _axios.get_ to instruct it how the typing should be done. Just like _useState_ also _axios.get_ is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of _axios.get_ has a default value _any_ so, it the function is used without defining the type parameter, the type of the response data will be any.
+So just like with _useState_, we gave a type  parameter to _axios.get_ to instruct it how the typing should be done. Just like _useState_ also _axios.get_ is a [generic function](https://www.typescriptlang.org/docs/handbook/2/generics.html#working-with-generic-type-variables). Unlike some generic functions, the type parameter of _axios.get_ has a default value _any_ so, if the function is used without defining the type parameter, the type of the response data will be any.
 
-The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to _axios.get_ is potentially dangerous thing to do. The request body can contain data in an arbitrary form, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type _Note[]_.
+The code works, compiler and Eslint are happy and remain quiet. However, giving a type parameter to _axios.get_ is a potentially dangerous thing to do. The request body can contain data in an arbitrary form, and when giving a type parameter we are essentially just telling to TypeScript compiler to trust us that the data has type _Note[]_.
 
-So our code is essentially as safe as it would be if a [type asserion](/en/part9/first_steps_with_type_script#type-assertion) would be used:
+So our code is essentially as safe as it would be if a [type assertion](/en/part9/first_steps_with_type_script#type-assertion) would be used:
 
 ```js
   useEffect(() => {
@@ -930,7 +930,7 @@ So our code is essentially as safe as it would be if a [type asserion](/en/part9
 
 Since the TypeScript types do not even exist in runtime, our code does not give us any "safety" agains situations where the request body contains data in a wrong form. 
 
-Giving type variable to _axios.get_ might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in correct form. If we want build a robust system we should prepare for surprises and parse the response data in the frontend simillarly that we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
+Giving type variable to _axios.get_ might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend simillarly that we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
 
 Let us now wrap up our app by implementing the new note addition:
 
@@ -948,7 +948,7 @@ Let us now wrap up our app by implementing the new note addition:
   };
 ```
 
-We are again giving _axios.post_ a type parameter. We know that the server response is added note sothe proper type parameter is _Note_.
+We are again giving _axios.post_ a type parameter. We know that the server response is added note so the proper type parameter is _Note_.
 
 Let us clean up the code a bit. For the type definitions, we create a file _types.ts_ with the following content:
 
@@ -1070,7 +1070,7 @@ TypeScript documentation [recommends using interfaces](https://www.typescriptlan
 
 ### Exercises 9.16-9.19
 
-Let us now build a frontend for the Ilari's flight diaries that was. The source code of the backend can be found in [this GitHub repository](https://github.com/fullstack-hy2020/flight-diary). 
+Let us now build a frontend for the Ilari's flight diaries that was developed in [the previous section](/en/part9/typing_an_express_app). The source code of the backend can be found in [this GitHub repository](https://github.com/fullstack-hy2020/flight-diary). 
 
 #### Exercise 9.16
 
@@ -1082,13 +1082,13 @@ You can decide how the diary entries are rendered. If you wish, you may take ins
 
 #### Exercise 9.17
 
-Make it possible to add new diary entries from the fronend. In this exercise you may skip all validations and assume that user just enters the data in a correct form.
+Make it possible to add new diary entries from the frontend. In this exercise you may skip all validations and assume that the user just enters the data in a correct form.
 
 #### Exercise 9.18
 
 Notify the user if the the creation of a diary entry fails in the backend, show also the reason for the failure.
 
-See eg. [this](https://dev.to/mdmostafizurrahaman/handle-axios-error-in-typescript-4mf9) how you can narrow the Axios error so that you can get hold to the error message. 
+See eg. [this](https://dev.to/mdmostafizurrahaman/handle-axios-error-in-typescript-4mf9) how you can narrow the Axios error so that you can get hold of the error message. 
 
 Your solution may look like this:
 
@@ -1096,7 +1096,7 @@ Your solution may look like this:
 
 #### Exercise 9.19
 
-Addition of a diary entry in now very error prone since user can type anything to the input fields. The situation must be improved.
+Addition of a diary entry is now very error prone since user can type anything to the input fields. The situation must be improved.
 
 Modify the input form so that the date is set with a HTML [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date) input element, and the weather and visibility are set with HTML [radio buttons](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio). We have already used radio buttons in [part 6](/en/part6/many_reducers#store-with-complex-state), that material may or may not be useful...
 
