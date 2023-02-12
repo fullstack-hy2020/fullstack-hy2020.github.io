@@ -47,7 +47,7 @@ const InfoBanner = ({ visible, onHide }) => {
       <div style={textStyle}>
         <p>There are some changes in part 9. The <i>Patientor</i> example app structure has been refactored to a less complex form to make it easier to concentrate on learning TypeScript.</p>
         <div style={{ marginTop: 10 }}>
-          If you are just working with the old Patientor, no worris, the old material shall stay online for couple of weeks.
+          If you are just working with the old Patientor, no worries, the old material shall stay online for a couple of weeks.
         </div>
 
         <div style={{ marginTop: 10 }}><i>If you have already completed the part 9, this change has absolutely no effect on your progress.</i></div>
