@@ -184,13 +184,13 @@ Todas las rutas están ahora definidas para el objeto enrutador, de manera simil
 Vale la pena señalar que los caminos en los controladores de ruta se han acortado. En la versión anterior, teníamos:
 
 ```js
-app.delete('/api/notes/:id', (request, response) => {
+app.delete('/api/notes/:id', (request, response, next) => {
 ```
 
 Y en la versión actual, tenemos:
 
 ```js
-notesRouter.delete('/:id', (request, response) => {
+notesRouter.delete('/:id', (request, response, next) => {
 ```
 
 Entonces , ¿qué son exactamente estos objetos de enrutador? El manual Express proporciona la siguiente explicación:
