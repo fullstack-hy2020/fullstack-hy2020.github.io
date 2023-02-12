@@ -34,8 +34,8 @@ La barra de navegación y una aplicación que contiene múltiples vistas son muy
 He aquí una forma:
 
 ```js
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import { useState }  from 'react'
+import ReactDOM from 'react-dom/client'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -52,7 +52,7 @@ const Users = () => (
 const App = () => {
   const [page, setPage] = useState('home')
 
- const toPage = (page) => (event) => {
+  const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
   }
@@ -90,7 +90,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Cada vista se implementa como su propio componente. Almacenamos la información del componente de vista en el estado de la aplicación llamado <i>page</i>. Esta información nos dice qué componente, que representa una vista, debe mostrarse debajo de la barra de menú.
