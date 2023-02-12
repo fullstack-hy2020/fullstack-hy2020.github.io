@@ -393,7 +393,7 @@ Modificar la creación de nuevas anécdotas, de forma que las anécdotas se alma
 
 ### Acciones asincrónicas y redux thunk
 
-Nuestro enfoque está bien, pero no es bueno que la comunicación con el servidor ocurra dentro de las funciones de los componentes. Sería mejor si la comunicación se pudiera abstraer de los componentes, de modo que no tuvieran que hacer nada más que llamar al <i>creador de la acción</i> correspondiente. Como ejemplo, <i>App</i> inicializaría el estado de la aplicación de la siguiente manera:
+Nuestro enfoque es bastante bueno, pero no es genial que la comunicación con el servidor suceda dentro de las funciones de los componentes. Sería mejor si la comunicación pudiera abstraerse de los componentes para que no tengan que hacer nada más que llamar al creador de acciones apropiado. Como ejemplo, <i>App</i> inicializaría el estado de la aplicación de la siguiente manera:
 
 ```js
 const App = () => {
@@ -401,7 +401,7 @@ const App = () => {
 
   useEffect(() => {
     dispatch(initializeNotes())  
-  },[dispatch]) 
+  }, [dispatch]) 
 
   // ...
 }
@@ -424,86 +424,47 @@ const NewNote = () => {
 }
 ```
 
-Ambos componentes solo usarían la función que se les proporciona como prop sin importar la comunicación con el servidor que está sucediendo en segundo plano.
+En esta implementación, ambos componentes enviarían una acción sin necesidad de saber sobre la comunicación entre el servidor que sucede detrás de escena. Estos tipos de <i>acciones asincrónicas</i> se pueden implementar utilizando la librería [Redux Thunk](https://github.com/reduxjs/redux-thunk). El uso de la librería no requiere ninguna configuración adicional o incluso instalación cuando el store de Redux se crea utilizando la función <em>configureStore</em> del kit de herramientas de Redux (Redux Toolkit).
 
-Ahora instalemos la librería [redux-thunk](https://github.com/gaearon/redux-thunk), que nos permite crear <i>acciones asincrónicas</i>. La instalación se realiza con el comando:
+Con Redux Thunk, es posible implementar <i>action creators</i> que devuelven una función en lugar de un objeto. La función recibe los métodos <em>dispatch</em> y <em>getState</em> del store de Redux como parámetros. Esto permite, por ejemplo, implementaciones de creadores de acciones asincrónicas, que primero esperan la finalización de una cierta operación asincrónica y luego despachan alguna acción, que cambia el estado del store.
 
-```bash
-npm install redux-thunk
-```
-
-La librería redux-thunk es un <i>redux-middleware</i>, que debe inicializarse junto con la inicialización del store. Mientras estamos aquí, extraigamos la definición del store en su propio archivo <i>src/store.js</i>: 
+Podemos implementar el <i>action creator</i> <em>initializeNotes</em> que inicializa las notas basadas en los datos recibidos del servidor de la siguiente manera:
 
 ```js
-import { createStore, combineReducers, applyMiddleware } from 'redux'
-import thunk from 'redux-thunk' // highlight-line
-import { composeWithDevTools } from 'redux-devtools-extension'
+// ...
+import noteService from '../services/notes' // highlight-line
 
-import noteReducer from './reducers/noteReducer'
-import filterReducer from './reducers/filterReducer'
+const noteSlice = createSlice(/* ... */)
 
-const reducer = combineReducers({
-  notes: noteReducer,
-  filter: filterReducer,
-})
+export const { createNote, toggleImportanceOf, setNotes, appendNote } = noteSlice.actions
 
-const store = createStore(
-  reducer,
-  composeWithDevTools(
-    applyMiddleware(thunk) // highlight-line
-  )
-)
-
-export default store
-```
-
-Después de los cambios, el archivo <i>src/index.js</i> se ve así
-After the changes the file <i>src/index.js</i> looks like this
-
-```js
-import React from 'react'
-import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux' 
-import store from './store' // highlight-line
-import App from './App'
-
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-)
-```
-
-Gracias a redux-thunk, es posible definir <i>creadores de acciones</i> para que devuelvan una función que tenga como parámetro el método <i>dispatch</i> de redux-store. Como resultado de esto, se pueden hacer creadores de acciones asincrónicas, que primero esperan a que termine alguna operación, luego de lo cual luego envían la acción real.
-
-
-Ahora podemos definir el creador de acciones, <i>initializeNotes</i>, que inicializa el estado de las notas de la siguiente manera:
-
-```js
+// highlight-start
 export const initializeNotes = () => {
   return async dispatch => {
     const notes = await noteService.getAll()
-    dispatch({
-      type: 'INIT_NOTES',
-      data: notes,
-    })
+    dispatch(setNotes(notes))
   }
 }
+// highlight-end
+
+export default noteSlice.reducer
 ```
 
-En la función interna, es decir, la <i>acción asincrónica</i>, la operación primero obtiene todas las notas del servidor y luego envía las notas a la acción, que las agrega al store.
+En la función interna, es decir, la <i>acción asincrónica</i>, la operación primero obtiene todas las notas del servidor y luego <i>despacha</i> la acción <em>setNotes</em>, que las agrega al store.
 
-El componente <i>App</i> ahora se puede definir de la siguiente manera:
+El componente <i>App</i> puede inicializar las notas de la siguiente manera:
 
 ```js
+// ...
+import { initializeNotes } from './reducers/noteReducer' // highlight-line
+
 const App = () => {
   const dispatch = useDispatch()
 
   // highlight-start
   useEffect(() => {
     dispatch(initializeNotes()) 
-  },[dispatch]) 
+  }, [dispatch]) 
   // highlight-end
 
   return (
@@ -516,27 +477,71 @@ const App = () => {
 }
 ```
 
-La solución es elegante. La lógica de inicialización de las notas se ha separado completamente fuera del componente React.
+La solución es bastante elegante. La lógica de inicialización de las notas se ha separado completamente del componente React.
 
-El creador de acciones _createNote_, que agrega una nueva nota tiene este aspecto
+Ahora, reemplacemos el creador de acciones <em>createNote</em> creado por la función <em>createSlice</em> con un creador de acciones asincrónico:
 
 ```js
+// ...
+import noteService from '../services/notes'
+
+const noteSlice = createSlice({
+  name: 'notes',
+  initialState: [],
+  reducers: {
+    toggleImportanceOf(state, action) {
+      const id = action.payload
+
+      const noteToChange = state.find(n => n.id === id)
+
+      const changedNote = { 
+        ...noteToChange, 
+        important: !noteToChange.important 
+      }
+
+      return state.map(note =>
+        note.id !== id ? note : changedNote 
+      )     
+    },
+    appendNote(state, action) {
+      state.push(action.payload)
+    },
+    setNotes(state, action) {
+      return action.payload
+    }
+    // createNote definition removed from here!
+  },
+})
+
+export const { toggleImportanceOf, appendNote, setNotes } = noteSlice.actions // highlight-line
+
+export const initializeNotes = () => {
+  return async dispatch => {
+    const notes = await noteService.getAll()
+    dispatch(setNotes(notes))
+  }
+}
+
+// highlight-start
 export const createNote = content => {
   return async dispatch => {
     const newNote = await noteService.createNew(content)
-    dispatch({
-      type: 'NEW_NOTE',
-      data: newNote,
-    })
+    dispatch(appendNote(newNote))
   }
 }
+// highlight-end
+
+export default noteSlice.reducer
 ```
 
-El principio aquí es el mismo: primero se ejecuta una operación asincrónica, después de lo cual se envía la acción que cambia el estado del store.
+El principio aquí es el mismo: primero se ejecuta una operación asincrónica y luego se <i>despacha</i> la acción que cambia el estado del store.
 
-El componente <i>NewNote</i> cambia de la siguiente manera:
+El componente <i>NewNote</i> cambia como se muestra a continuación:
 
 ```js
+// ...
+import { createNote } from '../reducers/noteReducer' // highlight-line
+
 const NewNote = () => {
   const dispatch = useDispatch()
   
@@ -550,35 +555,71 @@ const NewNote = () => {
   return (
     <form onSubmit={addNote}>
       <input name="note" />
-      <button type="submit">lisää</button>
+      <button type="submit">add</button>
     </form>
   )
 }
 ```
 
-El estado actual del código para la aplicación se puede encontrar en [github](https://github.com/fullstack-hy2020/redux-notes/tree/part6-4) en la rama <i>part6-4</i>.
+Finalmente, limpiemos un poco el archivo <i>index.js</i> moviendo el código relacionado con la creación del store de Redux a su propio archivo <i>store.js</i>:
+
+```js
+import { configureStore } from '@reduxjs/toolkit'
+
+import noteReducer from './reducers/noteReducer'
+import filterReducer from './reducers/filterReducer'
+
+const store = configureStore({
+  reducer: {
+    notes: noteReducer,
+    filter: filterReducer
+  }
+})
+
+export default store
+```
+
+Despues de los cambios, el contenido del archivo <i>index.js</i> es el siguiente:
+
+```js
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import { Provider } from 'react-redux' 
+import store from './store' // highlight-line
+import App from './App'
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <Provider store={store}>
+    <App />
+  </Provider>
+)
+```
+
+El estado actual del código de la aplicación se puede encontrar en [GitHub](https://github.com/fullstack-hy2020/redux-notes/tree/part6-5) en la rama <i>part6-5</i>.
+
+Redux Toolkit ofrece una gran cantidad de herramientas para simplificar la administración de estado asíncrono. Las herramientas adecuadas para este caso de uso son, por ejemplo, la función [createAsyncThunk](https://redux-toolkit.js.org/api/createAsyncThunk) y la API [RTK Query](https://redux-toolkit.js.org/rtk-query/overview).
 
 </div>
 
 <div class="tasks">
 
 
-### Ejercicios 6.15.-6.18.
+### Ejercicios 6.16.-6.19.
 
-#### 6.15 Anécdotas y el backend, paso3
+#### 6.16 Anécdotas y el backend, paso 3
 
-Modifique la inicialización de redux-store para que suceda utilizando creadores de acciones asincrónicas, que son posibles gracias a la librería <i>redux-thunk</i>.
+Modifique la inicialización de la redux-store para que suceda utilizando creadores de acciones asincrónicas, que son posibles gracias a la librería <i>redux-thunk</i>.
 
-#### 6.16 Anécdotas y el backend, paso 4
+#### 6.17 Anécdotas y el backend, paso 4
 
 También modifique la creación de una nueva anécdota para que suceda usando creadores de acciones asincrónicas, hecho posible por la librería <i>redux-thunk</i>.
 
 
-#### 6.17 Anécdotas y el backend, paso 5
+#### 6.18 Anécdotas y el backend, paso 5
 
 La votación aún no guarda los cambios en el backend. Arregle la situación con la ayuda de la librería <i>redux-thunk</i>.
 
-#### 6.18 Anécdotas y el backend, paso 6
+#### 6.19 Anécdotas y el backend, paso 6
 
 La creación de notificaciones sigue siendo un poco tediosa, ya que hay que realizar dos acciones y utilizar la función _setTimeout_:
 
