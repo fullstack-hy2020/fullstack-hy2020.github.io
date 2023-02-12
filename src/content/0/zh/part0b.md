@@ -802,7 +802,7 @@ part2
 <!-- Review the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).-->
 通过阅读Mozilla的这个教程来复习HTML的基础知识：[HTML教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)。
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<!-- This exercise is not submitted to GitHub, it's enough to just read the tutorial -->
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
 
@@ -812,7 +812,7 @@ part2
 <!-- Review the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).-->
  通过阅读Mozilla的这个教程来复习CSS的基础知识：[CSS教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)。
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<!-- This exercise is not submitted to GitHub, it's enough to just read the tutorial -->
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
 
@@ -876,7 +876,7 @@ end note
  这些练习的目的是再一次通读文本，并思考其中的内容。阅读应用的[代码](https://github.com/mluukkai/example_app)不是必须的，但当然也可以。
 
 <!--   <h4>0.5: Single page app</h4>-->
- <h4>0.5: 单页应用</h4
+ <h4>0.5: 单页应用</h4>
 
 <!-- Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.-->
  创建一个图表，描述用户进入[单页应用](/en/part0/fundamentals_of_web_apps#single-page-app)版本的笔记应用的情况，网址为<https://studies.cs.helsinki.fi/exampleapp/spa>。
