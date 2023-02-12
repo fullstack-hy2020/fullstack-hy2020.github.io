@@ -284,7 +284,7 @@ module.exports = {
       a: 'Flux-architecture y Redux',
       b: 'Muchos reducers',
       c: 'Comunicarse con el servidor en una aplicación redux',
-      d: 'React Query, useReducer y  el contexto,
+      d: 'React Query, useReducer y  el contexto',
       e: 'connect (la parte antigua)',
     },
     '7': {
