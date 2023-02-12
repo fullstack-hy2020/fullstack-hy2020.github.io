@@ -10,5 +10,5 @@ La séptima parte del curso aborda varios temas diferentes. Primero, nos familia
 
 <i>Parte actualizada 1 de febrero de 2023</i>
 - <i>Version alternativa de los ejercicios 7.10-7.13 que utilizan React Query y Context en lugar de Redux</i>
-- 
+
 </div>
