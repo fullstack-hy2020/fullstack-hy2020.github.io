@@ -1058,7 +1058,7 @@ If and <i>when</i> you encounter an error message
 
 > <i>Objects are not valid as a React child</i>
 
-keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects).
 
 <h4> 1.6: unicafe step1</h4>
 
