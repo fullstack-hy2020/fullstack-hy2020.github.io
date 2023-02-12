@@ -15,7 +15,7 @@ Continuemos nuestro trabajo en el backend del aplicación de notas que comenzamo
 
 Antes de pasar al tema de las pruebas, modificaremos la estructura de nuestro proyecto para cumplir con las mejores prácticas de Node.js. 
 
-Después de realizar los cambios en la estructura de directorios de nuestro proyecto, terminamos con la siguiente estructura: 
+Después de realizar los cambios que explicaremos a continuación, terminaremos con la siguiente estructura: 
 
 ```bash
 ├── index.js
