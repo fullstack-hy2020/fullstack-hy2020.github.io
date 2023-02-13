@@ -41,7 +41,7 @@ Por esta razón, el código que se divide en módulos debe estar <i>empaquetado<
 </pre>
 
 
-El archivo <i>index.html</i> ubicado en la raíz del directorio de compilación es el "archivo principal" de la aplicación, que carga el archivo JavaScript incluido con la etiqueta <i>script</i> (de hecho, hay dos archivos JavaScript incluidos):
+El archivo <i>index.html</i> ubicado en la raíz del directorio de compilación es el "archivo principal" de la aplicación, que carga el archivo JavaScript incluido con la etiqueta <i>script</i>:
 
 ```html
 <!doctype html>
@@ -57,7 +57,7 @@ El archivo <i>index.html</i> ubicado en la raíz del directorio de compilación 
 </html>
 ```
 
-Como podemos ver en la aplicación de ejemplo que se creó con create-react-app, el script de compilación también agrupa los archivos CSS de la aplicación en un solo archivo <i>/static/css/main.f9a47af2.chunk.css</i>.
+Como podemos ver en la aplicación de ejemplo que se creó con create-react-app, el script de compilación también agrupa los archivos CSS de la aplicación en un solo archivo <i>/static/css/main.1becb9f2.css</i>.
 
 
 En la práctica, la agrupación se realiza de modo que definamos un punto de entrada para la aplicación, que normalmente es el archivo <i>index.js</i>. Cuando webpack empaqueta el código, incluye todo el código que importa el punto de entrada y el código que importa, y así sucesivamente.
@@ -108,13 +108,16 @@ Definimos la funcionalidad de webpack en el archivo <i>webpack.config.js</i>, qu
 ```js
 const path = require('path')
 
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js'
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
   }
 }
+
 module.exports = config
 ```
 
