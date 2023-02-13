@@ -482,9 +482,7 @@ Algunas posibles desventajas de usar frameworks UI a través de librerías de in
 
 También está la cuestión de si las librerías de framework UI deben usarse en primer lugar. Depende de cada uno formarse su propia opinión, pero para las personas que carecen de conocimientos en CSS y diseño web, son herramientas muy útiles.
 
-
 ### Otros UI frameworks
-
 
 Aquí hay algunos otros UI frameworks para su consideración. Si no ve su UI framework favorito en la lista, haga un pull request al material del curso.
 
@@ -505,6 +503,7 @@ Aquí hay algunos otros UI frameworks para su consideración. Si no ve su UI fra
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
 - <https://www.radix-ui.com/>
+- <https://nextui.org/>
 
 ### Styled components
 
