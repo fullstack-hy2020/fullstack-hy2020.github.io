@@ -402,7 +402,7 @@ Sovelluksen tämänhetkinen koodi on kokonaisuudessaan [GitHubissa](https://gith
 Muistiinpanot luovaa koodia on nyt mukautettava siten, että uusi muistiinpano tulee liitetyksi sen luoneeseen käyttäjään.
 
 Laajennetaan ensin olemassaolevaa toteutusta siten, että tieto muistiinpanon luovan käyttäjän id:stä lähetetään pyynnön rungossa kentän <i>userId</i> arvona:
-
+(TÄMÄ LAAJENNUS EI OLE GITHUBIN MALLIVERIOSSA JA NÄIN MYÖS NYKYISET TESIT EPÄONNISTUVAT)
 ```js
 const User = require('../models/user')
 
