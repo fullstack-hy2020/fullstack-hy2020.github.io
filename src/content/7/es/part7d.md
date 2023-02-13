@@ -44,16 +44,16 @@ Por esta razón, el código que se divide en módulos debe estar <i>empaquetado<
 El archivo <i>index.html</i> ubicado en la raíz del directorio de compilación es el "archivo principal" de la aplicación, que carga el archivo JavaScript incluido con la etiqueta <i>script</i> (de hecho, hay dos archivos JavaScript incluidos):
 
 ```html
-<!doctype html><html lang="en">
-<head>
-  <meta charset="utf-8"/>
-  <title>React App</title>
-  <link href="/static/css/main.f9a47af2.chunk.css" rel="stylesheet"></head>
-<body>
-  <div id="root"></div>
-  <script src="/static/js/1.578f4ea1.chunk.js"></script>
-  <script src="/static/js/main.8209a8f2.chunk.js"></script>
-</body>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8"/>
+    <title>React App</title>
+    <script defer="defer" src="/static/js/main.88d3369d.js"></script> 
+    <link href="/static/css/main.1becb9f2.css" rel="stylesheet">
+  </head>
+    <div id="root"></div>
+  </body>
 </html>
 ```
 
