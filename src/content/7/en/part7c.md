@@ -508,6 +508,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://www.radix-ui.com/>
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
+- <https://www.radix-ui.com/>
 - <https://nextui.org/>
 
 ### Styled components
@@ -569,7 +570,7 @@ const Login = (props) => {
 }
 ```
 
-Let's create a few more components for styling that application which will be styled versions of <i>div</i> elements:
+Let's create a few more components for styling this application which will be styled versions of <i>div</i> elements:
 
 ```js
 const Page = styled.div`

@@ -509,7 +509,7 @@ Aquí hay algunos otros UI frameworks para su consideración. Si no ve su UI fra
 
 También hay [otras formas](https://blog.bitsrc.io/5-ways-to-style-react-components-in-2019-30f1ccc2b5b) de diseñar aplicaciones React que aún no hemos analizado.
 
-La librería [styled components](https://www.styled-components.com/) ofrece un enfoque interesante para definir estilos a través [tagged template literals](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals#plantillas_etiquetadas) que se introdujeron en ES6.
+La librería [styled components](https://www.styled-components.com/) ofrece un enfoque interesante para definir estilos a través de [plantillas literales etiquetadas](https://developer.mozilla.org/es/docs/Web/JavaScript/Reference/Template_literals#plantillas_etiquetadas) que se introdujeron en ES6.
 
 Hagamos algunos cambios en los estilos de nuestra aplicación con la ayuda de styled components. Primero, instale el paquete con el comando:
 
@@ -564,7 +564,7 @@ const Login = (props) => {
 }
 ```
 
-Creemos algunos componentes más para diseñar esa aplicación, que son versiones con estilo de elementos <i>div</i>:
+Creemos algunos componentes más para estilizar esta aplicación, que serán versiones con estilo de elementos <i>div</i>:
 
 ```js
 const Page = styled.div`
@@ -642,7 +642,7 @@ Los Styled components han experimentado un crecimiento constante en popularidad 
 ### Ejercicios
 
 
-Los ejercicios relacionados con los temas presentados aquí se pueden encontrar al final de esta sección de material del curso en el conjunto de ejercicios [para extender la aplicación de lista de blogs](/es/part7/exercises_extending_the_bloglist).
+Los ejercicios relacionados con los temas presentados aquí se pueden encontrar al final de esta sección de material del curso en el conjunto de ejercicios [para extender la aplicación de lista de blogs](/es/part7/ejercicios_ampliar_la_lista_de_blogs).
 
 </div>
 
