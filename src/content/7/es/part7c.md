@@ -110,7 +110,7 @@ import { Table } from 'react-bootstrap'
 
 Mejoremos el formulario en la vista de inicio de sesión con la ayuda de [formularios](https://getbootstrap.com/docs/4.1/components/forms/) Bootstrap.
 
-React Bootstrap proporciona [componentes](https://react-bootstrap.github.io/components/forms/) integrados para crear formularios (aunque falta un poco la documentación para ellos):
+React Bootstrap proporciona [componentes](https://react-bootstrap.github.io/forms/overview/) integrados para crear formularios (aunque falta un poco la documentación para ellos):
 
 ```js
 let Login = (props) => {
