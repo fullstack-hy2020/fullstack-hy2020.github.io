@@ -31,7 +31,7 @@ Instalemos el paquete con el comando:
 npm install react-bootstrap
 ```
 
-Luego agreguemos un link para cargar la hoja de estilo CSS para Bootstrap dentro de la etiqueta <i>head</i> en el archivo <i>public/index.html</i> de la aplicación:
+Luego agreguemos un [link para cargar la hoja de estilo CSS](https://react-bootstrap.github.io/getting-started/introduction#stylesheets) para Bootstrap dentro de la etiqueta <i>head</i> en el archivo <i>public/index.html</i> de la aplicación:
 
 ```js
 <head>
