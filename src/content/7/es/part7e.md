@@ -60,17 +60,21 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.anecdotes.length === 0 ) { // highlight-line
+	// highlight-start
+    if (this.state.anecdotes.length === 0 ) {
       return <div>no anecdotes...</div>
     }
+	// highlight-end
 
     return (
       <div>
         <h1>anecdote of the day</h1>
+		// highlight-start
         <div>
           {this.state.anecdotes[this.state.current].content} // highlight-line
-        </div>
+		</div>
         <button>next</button>
+		// highlight-end
       </div>
     )
   }
