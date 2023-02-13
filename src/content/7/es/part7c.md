@@ -478,9 +478,9 @@ El beneficio de usar la librería React Bootstrap no es tan evidente en este eje
 
 Además de hacer que el código del frontend sea más compacto y legible, otro beneficio de usar las librerías del UI framework de React es que incluyen el JavaScript que se necesita para que los componentes específicos funcionen. Algunos componentes de Bootstrap requieren algunas [dependencias de JavaScript](https://getbootstrap.com/docs/4.1/getting-started/introduction/#js) desagradables que preferiríamos no incluir en nuestras aplicaciones React.
 
-Algunas posibles desventajas de usar UI frameworks a través de librerías de integración en lugar de usarlos "directamente" son que las librerías de integración pueden tener API inestables y documentación deficiente. La situación con [Semantic UI React](https://react.semantic-ui.com) es mucho mejor que con muchos otros UI frameworks, ya que es una librería de integración oficial de React.
+Algunas posibles desventajas de usar frameworks UI a través de librerías de integración en lugar de usarlos "directamente" son que las librerías de integración pueden tener API inestables y documentación deficiente. La situación con [Semantic UI React](https://react.semantic-ui.com) es mucho mejor que con muchos otros UI frameworks, ya que es una librería de integración oficial de React.
 
-También está la cuestión de si las librerías de UI framework deben usarse en primer lugar. Depende de cada uno formarse su propia opinión, pero para las personas que carecen de conocimientos en CSS y diseño web, son herramientas muy útiles.
+También está la cuestión de si las librerías de framework UI deben usarse en primer lugar. Depende de cada uno formarse su propia opinión, pero para las personas que carecen de conocimientos en CSS y diseño web, son herramientas muy útiles.
 
 
 ### Otros UI frameworks
