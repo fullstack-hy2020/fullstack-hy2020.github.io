@@ -802,8 +802,7 @@ const config = (env, argv) => { // highlight-line
 module.exports = config
 ```
 
-La definición sigue siendo casi exactamente la misma, excepto por el hecho de que la función ahora devuelve el objeto de configuración. La función recibe los dos parámetros, <i>env</i> y <i>argv</i>, el segundo de los cuales se puede utilizar para acceder al <i>modo</i> definido en el script npm.
-
+Ahora bien, si queremos, podemos configurar webpack para que funcione de manera diferente dependiendo de si el entorno de operación de la aplicación, o <i>mode</i>, está configurado para producción o desarrollo.
 
 También podemos usar [DefinePlugin](https://webpack.js.org/plugins/define-plugin/) de webpack para definir <i>constantes predeterminadas globales</i> que se pueden usar en el código incluido. Definamos una nueva constante global <i>BACKEND\_URL</i>, que obtiene un valor diferente según el entorno para el que se empaqueta el código:
 
@@ -816,8 +815,8 @@ const config = (env, argv) => {
 
   // highlight-start
   const backend_url = argv.mode === 'production'
-    ? 'https://blooming-atoll-75500.herokuapp.com/api/notes'
-    : 'http://localhost:3001/api/notes'
+    ? 'https://notes2023.fly.dev/api/notes'
+    : 'http://localhost:3001/notes'
   // highlight-end
 
   return {
@@ -827,7 +826,7 @@ const config = (env, argv) => {
       filename: 'main.js'
     },
     devServer: {
-      contentBase: path.resolve(__dirname, 'build'),
+      static: path.resolve(__dirname, 'build'),
       compress: true,
       port: 3000,
     },
@@ -848,7 +847,6 @@ const config = (env, argv) => {
 module.exports = config
 ```
 
-
 La constante global se usa de la siguiente manera en el código:
 
 ```js
@@ -868,22 +866,19 @@ const App = () => {
 }
 ```
 
-
 Si la configuración para el desarrollo y la producción difiere mucho, puede ser una buena idea [separar la configuración](https://webpack.js.org/guides/production/) de los dos en sus propios archivos.
 
+Ahora, si la aplicación se inicia con el comando _npm start_ en modo de desarrollo, obtiene las notas de la dirección http://localhost:3001/notes. La versión empaquetada con el comando _npm run build_ usa la dirección https://notes2023.fly.dev/api/notes para obtener la lista de notas.
 
-Podemos inspeccionar la versión de producción empaquetada de la aplicación localmente ejecutando el siguiente comando en el directorio de <i>compilación</i>:
+Podemos inspeccionar la versión de producción empaquetada de la aplicación localmente ejecutando el siguiente comando en el directorio de <i>compilación/build</i>:
 
 ```js
 npx static-server
 ```
 
-
 De forma predeterminada, la aplicación incluida estará disponible en <http://localhost:9080>.
 
-
 ### Polyfill
-
 
 Nuestra aplicación está terminada y funciona con todas las versiones relativamente recientes de los navegadores modernos, con la excepción de Internet Explorer. La razón de esto es que debido a _axios_, nuestro código usa [Promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), y ninguna versión existente de IE las admite:
 
