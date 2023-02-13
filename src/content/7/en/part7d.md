@@ -591,7 +591,6 @@ const App = () => {
 }
 ```
 
-
 The application no longer works and the console will display the following error:
 
 ![devtools console cannot concat on undefined in handleClick](../../images/7/25.png)
