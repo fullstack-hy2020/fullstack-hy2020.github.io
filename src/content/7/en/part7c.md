@@ -66,7 +66,7 @@ We notice that this already affected the appearance of the application. The cont
 
 ![browser notes app with margin spacing](../../images/7/6ea.png)
 
-#### Table
+#### Tables
 
 Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 

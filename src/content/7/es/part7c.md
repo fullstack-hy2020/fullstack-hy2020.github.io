@@ -68,6 +68,7 @@ Notamos que esto ya tiene un efecto en la apariencia de la aplicación. El conte
 
 ![](../../images/7/6ea.png)
 
+### Tablas
 
 A continuación, hagamos algunos cambios en el componente <i>Notes</i>, para que muestre la lista de notas como una [tabla](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap proporciona un componente [Table](https://react-bootstrap.github.io/components/table/) integrado para este propósito, por lo que no es necesario definir clases CSS por separado.
 
