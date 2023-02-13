@@ -513,7 +513,7 @@ npm install style-loader css-loader --save-dev
 
 El empaquetamiento volverá a tener éxito y la aplicación obtendrá nuevos estilos.
 
-### Webpack-dev-servidor
+### Webpack-dev-server
 
 La configuración actual hace posible el desarrollo de nuestra aplicación, pero el flujo de trabajo es terrible (hasta el punto en que se parece al flujo de trabajo de desarrollo con Java). Cada vez que hacemos un cambio en el código, tenemos que empaquetarlo y actualizar el navegador para probar el código.
 
@@ -563,7 +563,8 @@ El proceso de actualización del código es rápido. Cuando usamos el dev-server
 Extendamos el código cambiando la definición del componente <i>App</i> como se muestra a continuación:
 
 ```js
-import React, {useState} from 'react'
+import React, { useState } from 'react'
+import './index.css'
 
 const App = () => {
   const [counter, setCounter] = useState(0)
@@ -581,17 +582,9 @@ const App = () => {
 export default App
 ```
 
-
-Vale la pena notar que los mensajes de error no se muestran de la misma manera que con nuestras aplicaciones que fueron creadas usando create-react-app. Por este motivo tenemos que prestar más atención a la consola:
-
-![](../../images/7/24.png)
-
-
 La aplicación funciona bien y el flujo de trabajo de desarrollo es bastante fluido.
 
-
 ### Source maps
-
 
 Extraigamos el controlador de clics en su propia función y almacenemos el valor anterior del contador en su propio estado de <i>valores</i>:
 
@@ -600,15 +593,17 @@ const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState() // highlight-line
 
+//highlight-start
   const handleClick = () => {
     setCounter(counter + 1)
-    setValues(values.concat(counter)) // highlight-line
+    setValues(values.concat(counter))
   }
+//highlight-end
 
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={handleClick}>
+      <button onClick={handleClick}> // highlight-line
         press
       </button>
     </div>
