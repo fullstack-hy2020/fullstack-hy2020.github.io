@@ -81,13 +81,9 @@ class App extends React.Component {
 }
 ```
 
-
-
 El estado del componente está en la variable de instancia _this.state_. El estado es un objeto que tiene dos propiedades. <i>this.state.anecdotes</i> es la lista de anécdotas y <i>this.state.current</i> es el índice de la anécdota que se muestra actualmente.
 
-
 En componentes funcionales, el lugar adecuado para obtener datos de un servidor es dentro de un [effect hook](https://reactjs.org/docs/hooks-effect.html), que se ejecuta cuando un componente se renderiza o con menos frecuencia si es necesario, por ejemplo, solo en combinación con el primer renderizado.
-
 
 Los [métodos de ciclo de vida](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) de componentes de clase ofrecen la funcionalidad correspondiente. El lugar correcto para desencadenar la obtención de datos de un servidor es dentro del método de ciclo de vida [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), que se ejecuta una vez justo después de la primera vez que se renderiza un componente:
 
@@ -211,7 +207,7 @@ Al escribir código nuevo, [no hay ninguna razón racional para usar Componentes
 
 ### Organización del código en la aplicación de React
 
-En la mayoría de las aplicaciones seguimos el principio según el cual los componentes se colocaban en los <i>componentes</i> del directorio, los <i>reducers</i> se colocaban en el directorio reductores y el código responsable de comunicarse con el servidor se colocaba en los <i>servicios</i> de directorio. Esta forma de organización se adapta perfectamente a una aplicación más pequeña, pero a medida que aumenta la cantidad de componentes, se necesitan mejores soluciones. No existe una forma correcta de organizar un proyecto. El artículo [La forma 100% correcta de estructurar una aplicación React (o por qué no existe tal cosa)](https://hackernoon.com/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) proporciona una perspectiva sobre el problema.
+En la mayoría de las aplicaciones seguimos el principio según el cual los componentes se colocaban en los <i>componentes</i> del directorio, los <i>reducers</i> se colocaban en el directorio reductores y el código responsable de comunicarse con el servidor se colocaba en los <i>servicios</i> de directorio. Esta forma de organización se adapta perfectamente a una aplicación más pequeña, pero a medida que aumenta la cantidad de componentes, se necesitan mejores soluciones. No existe una forma correcta de organizar un proyecto. El artículo [La forma 100% correcta de estructurar una aplicación React (o por qué no existe tal cosa)](https://medium.com/hackernoon/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) proporciona una perspectiva sobre el problema.
 
 
 ### Frontend y backend en el mismo repositorio
