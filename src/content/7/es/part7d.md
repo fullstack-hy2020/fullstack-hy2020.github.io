@@ -738,14 +738,11 @@ Guardemos el siguiente contenido en el archivo <i>db.json</i>:
 }
 ```
 
-
 Nuestro objetivo es configurar la aplicación con webpack de tal manera que, cuando se use localmente, la aplicación use el servidor json disponible en el puerto 3001 como su backend.
 
+El archivo empaquetado se configurará para usar el backend disponible en la URL <https://notes2023.fly.dev/api/notes>.
 
-El archivo empaquetado se configurará para usar el backend disponible en la URL <https://blooming-atoll-75500.herokuapp.com/api/notes>.
-
-
-Instalaremos <i>axios</i>, iniciaremos el json-server y luego realizaremos los cambios necesarios en la aplicación. Con el fin de cambiar las cosas, obtendremos las notas del backend con nuestro [hook personalizado](/en/part7/custom_hooks) llamado _useNotes_:
+Instalaremos <i>axios</i>, iniciaremos el json-server y luego realizaremos los cambios necesarios en la aplicación. Con el fin de cambiar las cosas, obtendremos las notas del backend con nuestro [hook personalizado](/es/part7/hooks_personalizados) llamado _useNotes_:
 
 ```js
 import React, { useState, useEffect } from 'react'
