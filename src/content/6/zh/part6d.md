@@ -6,10 +6,13 @@ lang: zh
 ---
 
 <div class="content">
+<!--At the end of this part, we will look at a few more different ways to manage the state of an application.-->
 
-At the end of this part, we will look at a few more different ways to manage the state of an application.
+在本章结束，我们将会了解几种管理应用状态的不同方式。
 
-Let's continue with the note application. We will focus on communication with the server. Let's start the application from scratch. The first version is as follows:
+<!--Let's continue with the note application. We will focus on communication with the server. Let's start the application from scratch. The first version is as follows:-->
+
+我们继续回到 note 应用。这次我们将关注与服务器的通信。我们从头开始打造应用，它的第一版如下：
 
 ```js
 const App = () => {
@@ -46,19 +49,29 @@ const App = () => {
 export default App
 ```
 
-The initial code is on GitHub in the repository [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) in branch <i>part6-0</i>.
+<!--The initial code is on GitHub in the repository [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) in branch <i>part6-0</i>.-->
 
-### Managing data on the server with the React Query library
+初始代码可以在 GitHub 仓库 [https://github.com/fullstack-hy2020/query-notes](https://github.com/fullstack-hy2020/query-notes/tree/part6-0) 中 <i>part6-0</i> 的分支中找到.
 
-We shall now use the [React Query](https://react-query-v3.tanstack.com/) library to store and manage data retrieved from the server. 
+### <!--Managing data on the server with the React Query library-->
 
-Install the library with the command
+### 利用 React Query 管理服务器端数据
+
+<!--We shall now use the [React Query](https://react-query-v3.tanstack.com/) library to store and manage data retrieved from the server.--> 
+
+我们现在将用 [React Query](https://react-query-v3.tanstack.com/) 存储并管理从服务器检索的数据。
+
+<!--Install the library with the command-->
+
+用以下命令安装 React Query 库：
 
 ```bash
 npm install react-query
 ```
 
-A few additions to the file  <i>index.js</i> are needed to pass the library functions to the entire application:
+<!--A few additions to the file  <i>index.js</i> are needed to pass the library functions to the entire application:-->
+
+在 <i>index.js</i> 中需要增加一些内容，以便将这个库中的函数传递给整个应用。
 
 
 ```js
@@ -77,7 +90,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-We can now retrieve the notes in the <i>App</i> component. The code expands as follows:
+<!--We can now retrieve the notes in the <i>App</i> component. The code expands as follows:-->
+
+我们现在就可以从  <i>App</i> 组件中检索笔记了。相关代码如下：
 
 ```js
 import { useQuery } from 'react-query'  // highlight-line
@@ -109,13 +124,19 @@ const App = () => {
 }
 ```
 
-Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://react-query-v3.tanstack.com/guides/queries) formed with the [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://react-query-v3.tanstack.com/guides/query-keys)  to the query defined, i.e. the list of notes.
+<!--Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://react-query-v3.tanstack.com/guides/queries) formed with the [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://react-query-v3.tanstack.com/guides/query-keys)  to the query defined, i.e. the list of notes.-->
+
+从服务器中检索数据的方式和 Axios 的 *get* 方法类似。然而，Axios 的调用方法现在被包装在一个用 [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) 函数形成的 [query](https://react-query-v3.tanstack.com/guides/queries) 查询中。在这个函数调用中，第一个参数——一个字符串 <i>notes</i>——是已经定义的查询的 [key](https://react-query-v3.tanstack.com/guides/query-keys)，即笔记列表。
 
 The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation: 
 
+*useQuery* 函数的返回值是一个包含查询状态的对象。控制台中的输出展现了这个情境：
+
 ![](../../images/6/60new.png)
 
-That is, the first time the component is rendered, the query is still in <i>loading</i> state, i.e. the associated HTTP request is pending. At this stage, only the following is rendered:
+<!--That is, the first time the component is rendered, the query is still in <i>loading</i> state, i.e. the associated HTTP request is pending. At this stage, only the following is rendered:-->
+
+当组件第一次被渲染时，查询仍处于*加载*状态，即，相关的 HTTP 请求仍在等待中。在这个阶段，只有如下元素会被渲染：
 
 ```
 <div>loading data...</div>
@@ -123,9 +144,15 @@ That is, the first time the component is rendered, the query is still in <i>load
 
 However, the HTTP request is completed so quickly that even the most astute will not be able to see the text. When the request is completed, the component is rendered again. The query is in the state <i>success</i> on the second rendering, and the field <i>data</i> of the query object contains the data returned by the request, i.e. the list of notes that is rendered on the screen.
 
-So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the React Query library, and the application does not need the state defined with React's <i>useState</i> hook at all!
+然而， HTTP 请求在瞬息之内完成，甚至最敏锐的人也无法看到这个文本。当请求完成后，这个组件会被重新渲染。在第二次渲染中，查询的状态为*成功*，而且，查询对象的 *data* 字段中包含了请求返回的数据，即，屏幕上显示的笔记列表。
 
-Let's move the function making the actual HTTP request to its own file <i>requests.js</i>
+<!--So the application retrieves data from the server and renders it on the screen without using the React hooks <i>useState</i> and <i>useEffect</i> used in chapters 2-5 at all. The data on the server is now entirely under the administration of the React Query library, and the application does not need the state defined with React's <i>useState</i> hook at all!-->
+
+因此，这个应用可以从服务器中检索数据并将其渲染到屏幕上，而完全不使用我们在第 2 章至第 5 章谈及的 React 钩子—— *useState* 和 *useEffect*。服务器中的数据现在完全在 React Query 库的管理下，应用程序完全不需要用 React 的 useState 钩子定义状态。
+
+<!--Let's move the function making the actual HTTP request to its own file <i>requests.js</i>-->
+
+让我将发出实际 HTTP 请求的函数移动到它自己的文件 <i>requests.js</i> 中。
 
 ```js
 import axios from 'axios'
@@ -134,7 +161,9 @@ export const getNotes = () =>
   axios.get('http://localhost:3001/notes').then(res => res.data)
 ```
 
-The <i>App</i> component is now slightly simplified
+<!--The <i>App</i> component is now slightly simplified-->
+
+现在，*APP* 组件变得稍微简洁了。
 
 ```js
 import { useQuery } from 'react-query' 
@@ -151,7 +180,11 @@ const App = () => {
 
 The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-1) in the branch <i>part6-1</i>.
 
-### Synchronizing data to the server using React Query
+当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-1) 上 *part6-1* 的分支中找到。
+
+### <!--Synchronizing data to the server using React Query-->
+
+### 使用 React Query 将数据同步至服务器
 
 Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.
 
