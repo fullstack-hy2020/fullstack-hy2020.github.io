@@ -637,7 +637,7 @@ The result might look like the following:
 
 So far, we have only looked at an application that keeps all the data in a typed variable but does not have any state. Let us once more go back to the note app, and build a typed version of it.
 
-We start with the following dode:
+We start with the following code:
 
 ```js
 import { useState } from 'react';
