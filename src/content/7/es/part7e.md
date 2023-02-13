@@ -204,20 +204,17 @@ En mi opinión, y la opinión de muchos otros, los componentes de clase básicam
 
 Al escribir código nuevo, [no hay ninguna razón racional para usar Componentes de Clase](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) si el proyecto usa React con un número de versión 16.8 o superior. Por otro lado, actualmente [no hay necesidad de reescribir todo el código React antiguo](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) como componentes funcionales.
 
-
 ### Organización del código en la aplicación de React
 
 En la mayoría de las aplicaciones seguimos el principio según el cual los componentes se colocaban en los <i>componentes</i> del directorio, los <i>reducers</i> se colocaban en el directorio reductores y el código responsable de comunicarse con el servidor se colocaba en los <i>servicios</i> de directorio. Esta forma de organización se adapta perfectamente a una aplicación más pequeña, pero a medida que aumenta la cantidad de componentes, se necesitan mejores soluciones. No existe una forma correcta de organizar un proyecto. El artículo [La forma 100% correcta de estructurar una aplicación React (o por qué no existe tal cosa)](https://medium.com/hackernoon/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) proporciona una perspectiva sobre el problema.
 
-
 ### Frontend y backend en el mismo repositorio
 
-Durante el curso, hemos creado el frontend y el backend en repositorios separados. Este es un enfoque muy típico. Sin embargo, hicimos la implementación [copiando](/es/part3/deploying_app_to_internet#serving-static-files-from-the-backend) el código de frontend incluido en el repositorio de backend. Un enfoque posiblemente mejor habría sido implementar el código del frontend por separado. Especialmente con las aplicaciones creadas con create-react-app, es muy sencillo gracias al [buildpack](https://github.com/mars/create-react-app-buildpack) incluido.
+Durante el curso, hemos creado el frontend y el backend en repositorios separados. Este es un enfoque muy típico. Sin embargo, hicimos la implementación [copiando](/part3/implementacion_de_la_aplicacion_en_internet#sirviendo-archivos-estaticos-desde-el-backend) el código de frontend incluido en el repositorio de backend. Un enfoque posiblemente mejor habría sido implementar el código del frontend por separado. Especialmente con las aplicaciones creadas con create-react-app, es muy sencillo gracias al [buildpack](https://github.com/mars/create-react-app-buildpack) incluido.
 
 A veces, puede haber una situación en la que la aplicación completa se coloque en un solo repositorio. En este caso, un enfoque común es colocar <i>package.json</i> y <i>webpack.config.js</i> en el directorio raíz, así como colocar el código de frontend y backend en sus propios directorios, por ejemplo, <i>cliente</i> y <i>servidor</i>.
 
 [Este repositorio](https://github.com/fullstack-hy2020/create-app) proporciona un posible punto de partida para la organización de "código de repositorio único".
-
 
 ### Cambios en el servidor
 
