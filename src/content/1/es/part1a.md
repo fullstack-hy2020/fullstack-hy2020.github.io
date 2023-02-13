@@ -11,6 +11,8 @@ Ahora comenzaremos a familiarizarnos con probablemente el tema más importante d
 
 La forma más fácil de empezar es utilizando una herramienta llamada [create-react-app](https://github.com/facebook/create-react-app). Es posible (pero no necesario) instalar <i>create-react-app</i> en su máquina si la herramienta <i>npm</i> que se instaló junto con Node tiene un número de versión de al menos <i>5.3</i>.
 
+> <i>Tu también puedes usar la nueva herramienta de generación frontend [Vite](https://vitejs.dev/) en este curso si lo deseas. La herramienta create-react-app sigue siendo la herramienta recomendada por el equipo de React y es por eso que sigue siendo la herramienta predeterminada para configurar un proyecto React en este curso. Lee [aquí](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) cómo el equipo de React ve el futuro de las herramientas de React.</i>
+
 Creemos una aplicación llamada <i>part1</i> y naveguemos hasta su directorio.
 
 ```bash
