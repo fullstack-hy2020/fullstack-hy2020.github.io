@@ -745,10 +745,10 @@ El archivo empaquetado se configurará para usar el backend disponible en la URL
 Instalaremos <i>axios</i>, iniciaremos el json-server y luego realizaremos los cambios necesarios en la aplicación. Con el fin de cambiar las cosas, obtendremos las notas del backend con nuestro [hook personalizado](/es/part7/hooks_personalizados) llamado _useNotes_:
 
 ```js
+// highlight-start
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
-// highlight-start
 const useNotes = (url) => {
   const [notes, setNotes] = useState([])
 
@@ -765,7 +765,7 @@ const useNotes = (url) => {
 const App = () => {
   const [counter, setCounter] = useState(0)
   const [values, setValues] = useState([])
-  const url = 'https://blooming-atoll-75500.herokuapp.com/api/notes'
+  const url = 'https://notes2023.fly.dev/api/notes' // highlight-line
   const notes = useNotes(url) // highlight-line
 
   const handleClick = () => {
@@ -776,7 +776,7 @@ const App = () => {
   return (
     <div className="container">
       hello webpack {counter} clicks
-      <button onClick={handleClick} >press</button>
+      <button onClick={handleClick}>press</button>
       <div>{notes.length} notes on server {url}</div> // highlight-line
     </div>
   )
@@ -785,31 +785,17 @@ const App = () => {
 export default App
 ```
 
-
 La dirección del servidor backend está actualmente hardcodeada en el código de la aplicación. ¿Cómo podemos cambiar la dirección de forma controlada para que apunte al servidor de backend de producción cuando el código está empaquetado para producción?
 
-
-Cambiemos el objeto de configuración en el archivo <i>webpack.config.js</i> para que sea una función en lugar de un objeto:
+La función de configuración de webpack tiene dos parámetros, <i>env</i> y <i>argv</i>. Podemos usar el segundo para averiguar el <i>modo</i> definido en el script npm:
 
 ```js
-const path = require('path');
+const path = require('path')
 
-const config = (env, argv) => {
+const config = (env, argv) => { // highlight-line
+  console.log('argv.mode:', argv.mode)
   return {
-    entry: './src/index.js',
-    output: {
-      // ...
-    },
-    devServer: {
-      // ...
-    },
-    devtool: 'source-map',
-    module: {
-      // ...
-    },
-    plugins: [
-      // ...
-    ],
+    // ...
   }
 }
 
