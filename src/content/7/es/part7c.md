@@ -249,8 +249,9 @@ Instale la librería con el comando
 ```bash
 npm install @mui/material @emotion/react @emotion/styled
 ```
+Ahora usemos MaterialUI para hacer las mismas modificaciones al código que hicimos anteriormente con bootstrap.
 
-Luego agregue la siguiente línea a la etiqueta <i>head</i> en el archivo <i>public/index.html</i>. La línea carga la fuente Roboto de Google.
+Renderice el contenido de toda la aplicación dentro de un [Container](https://mui.com/material-ui/react-container/):
 
 ```js
 <head>
