@@ -18,7 +18,7 @@ No podemos confiar en la magia negra de create-react-app para siempre y es hora 
 Hemos implementado nuestras aplicaciones dividiendo nuestro código en módulos separados que se han <i>importado</i> a lugares que los requieren. Aunque los módulos ES6 se definen en el estándar ECMAScript, ningún navegador sabe realmente cómo manejar el código dividido en módulos.
 
 
-Por esta razón, el código que se divide en módulos debe estar <i>empaquetado</i> para los navegadores, lo que significa que todos los archivos de código fuente se transforman en un solo archivo que contiene todo el código de la aplicación. Cuando implementamos nuestro frontend de React en producción en la [parte 3](/es/part3/deploying_app_to_internet), realizamos el empaquetado de nuestra aplicación con el comando _npm run build_. En la cara oculta, el script npm empaqueta el código fuente usando el webpack que produce la siguiente colección de archivos en el directorio de <i>compilación</i>:
+Por esta razón, el código que se divide en módulos debe estar <i>empaquetado</i> para los navegadores, lo que significa que todos los archivos de código fuente se transforman en un solo archivo que contiene todo el código de la aplicación. Cuando implementamos nuestro frontend de React en producción en la [parte 3](es/part3/implementacion_de_la_aplicacion_en_internet), realizamos el empaquetado de nuestra aplicación con el comando _npm run build_. En la cara oculta, el script npm empaqueta el código fuente usando el webpack que produce la siguiente colección de archivos en el directorio de <i>compilación</i>:
 
 
 <pre>
