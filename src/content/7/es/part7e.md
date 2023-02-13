@@ -268,7 +268,7 @@ Sin embargo, la arquitectura MVC no se suele mencionar cuando se habla de aplica
 
 Debido a que tanto React como [Flux](https://facebook.github.io/flux/docs/in-depth-overview) se crearon en Facebook, se podría decir que usar React solo como una biblioteca de UI es el caso de uso previsto. Seguir la arquitectura Flux agrega algunos gastos generales a la aplicación, y si estamos hablando de una pequeña aplicación o prototipo, podría ser una buena idea usar React "incorrectamente", ya que la [ingeniería excesiva](https://en.wikipedia.org/wiki/Overengineering) rara vez produce un resultado óptimo.
 
-Como mencioné al final de la [parte 6](/en/part6/connect#redux-and-the-component-state), [Context-api](https://reactjs.org/docs/context.html) de React ofrece una solución alternativa para la administración centralizada del estado sin la necesidad de bibliotecas de terceros como redux. Puede leer más sobre esto, [aqui](https://www.simplethread.com/cant-replace-redux-with-hooks/) y [aqui](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
+El ultimo capítulo de la [parte 6](/es/part6/react_query_use_reducer_y_el_contexto) cubre las nuevas tendencias de gestión de estado en React. Las funciones de hooks de React <i>useReducer</i> y <i>useContext</i> proporcionan una versión liviana de Redux. <i>React Query</i>, por otro lado, es una biblioteca que resuelve muchos de los problemas asociados con el manejo del estado en el servidor, eliminando la necesidad de que una aplicación React almacene los datos recuperados del servidor directamente en el estado del frontend.
 
 ### Seguridad en aplicaciones React/node
 
