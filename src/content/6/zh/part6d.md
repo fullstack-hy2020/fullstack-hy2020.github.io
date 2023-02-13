@@ -142,7 +142,7 @@ The return value of the <i>useQuery</i> function is an object that indicates the
 <div>loading data...</div>
 ```
 
-However, the HTTP request is completed so quickly that even the most astute will not be able to see the text. When the request is completed, the component is rendered again. The query is in the state <i>success</i> on the second rendering, and the field <i>data</i> of the query object contains the data returned by the request, i.e. the list of notes that is rendered on the screen.
+<!--However, the HTTP request is completed so quickly that even the most astute will not be able to see the text. When the request is completed, the component is rendered again. The query is in the state <i>success</i> on the second rendering, and the field <i>data</i> of the query object contains the data returned by the request, i.e. the list of notes that is rendered on the screen.-->
 
 然而， HTTP 请求在瞬息之内完成，甚至最敏锐的人也无法看到这个文本。当请求完成后，这个组件会被重新渲染。在第二次渲染中，查询的状态为*成功*，而且，查询对象的 *data* 字段中包含了请求返回的数据，即，屏幕上显示的笔记列表。
 
@@ -186,9 +186,13 @@ The current code for the application is in [GitHub](https://github.com/fullstack
 
 ### 使用 React Query 将数据同步至服务器
 
-Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.
+<!--Data is already successfully retrieved from the server. Next, we will make sure that the added and modified data is stored on the server. Let's start by adding new notes.-->
 
-Let's make a function <i>createNote</i> to the file <i>requests.js</i> for saving new notes:
+数据已经成功地从服务器中检索出来。接下来，我们将确保对数据的新增和修改也会存储到服务器中。让我们从新增笔记开始。
+
+<!--Let's make a function <i>createNote</i> to the file <i>requests.js</i> for saving new notes:-->
+
+让我们在 *requests.js* 中构建一个 *createNote* 函数，用以存储新笔记：
 
 ```js
 import axios from 'axios'
@@ -202,7 +206,9 @@ export const createNote = newNote => // highlight-line
   axios.post(baseUrl, newNote).then(res => res.data) // highlight-line
 ```
 
-The <i>App</i> component will change as follows
+<!--The <i>App</i> component will change as follows-->
+
+*App* 组件相应做出如下更新：
 
 ```js
 import { useQuery, useMutation } from 'react-query' // highlight-line
@@ -223,26 +229,38 @@ const App = () => {
 }
 ```
 
-To create a new note, a [mutation](https://react-query-v3.tanstack.com/guides/mutations) is defined using the function [useMutation](https://react-query-v3.tanstack.com/reference/useMutation):
+<!--To create a new note, a [mutation](https://react-query-v3.tanstack.com/guides/mutations) is defined using the function [useMutation](https://react-query-v3.tanstack.com/reference/useMutation):-->
+
+为了新增一条笔记，我们需要用 [useMutation](https://react-query-v3.tanstack.com/reference/useMutation) 创建一个 [mutation（突变）](https://react-query-v3.tanstack.com/guides/mutations)。
 
 ```js
 const newNoteMutation = useMutation(createNote)
 ```
 
-The parameter is the function we added to the file <i>requests.js</i>, which uses Axios to send a new note to the server.
+<!--The parameter is the function we added to the file <i>requests.js</i>, which uses Axios to send a new note to the server.-->
 
-The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as a parameter:
+*useMutation* 的参数即是我们在 *requests.js* 中添加的，使用 Axios 向服务器发送一条新笔记的函数。
+
+<!--The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as a parameter:-->
+
+事件处理器 *addNote* 在调用 mutation 对象中的 mutate 函数的同时，将新笔记作为参数传入，以执行突变：
 
 
 ```js
 newNoteMutation.mutate({ content, important: true })
 ```
 
-Our solution is good. Except it doesn't work. The new note is saved on the server, but it is not updated on the screen.
+<!--Our solution is good. Except it doesn't work. The new note is saved on the server, but it is not updated on the screen.-->
 
-In order to render a new note as well, we need to tell React Query that the old result of the query whose key is the string <i>notes</i> should be [invalidated](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations).
+我们的解决方案挺不错，但仍美中不足。新的笔记虽然存储在了服务器上，但并没有在屏幕上更新。
 
-Fortunately, invalidation is easy, it can be done by defining the appropriate <i>onSuccess</i> callback function to the mutation:
+<!--In order to render a new note as well, we need to tell React Query that the old result of the query whose key is the string <i>notes</i> should be [invalidated](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations).-->
+
+为了能渲染出新的笔记，我们需要告诉 React Query，应该使 key 为 *notes* 的旧查询结果 [invalidated（无效）](https://react-query-v3.tanstack.com/guides/invalidations-from-mutations)。
+
+<!--Fortunately, invalidation is easy, it can be done by defining the appropriate <i>onSuccess</i> callback function to the mutation:-->
+
+幸运的是，无效化很容易，它可以通过为突变定义适当的 *onSuccess* 回调函数来完成：
 
 ```js
 import { useQuery, useMutation, useQueryClient } from 'react-query' // highlight-line
@@ -261,15 +279,21 @@ const App = () => {
 }
 ```
 
-Now that the mutation has been successfully executed, a function call is made to
+<!--Now that the mutation has been successfully executed, a function call is made to-->
+
+在突变已经成功执行后，一个函数被调用
 
 ```js
 queryClient.invalidateQueries('notes')
 ```
 
-This in turn causes React Query to automatically update a query with the key <i>notes</i>, i.e. fetch the notes from the server. As a result, the application renders the up-to-date state on the server, i.e. the added note is also rendered.
+<!--This in turn causes React Query to automatically update a query with the key <i>notes</i>, i.e. fetch the notes from the server. As a result, the application renders the up-to-date state on the server, i.e. the added note is also rendered.-->
 
-Let us also implement the change in the importance of notes. A function for updating notes is added to the file <i>requests.js</i>:
+这让 React Query 通过从服务器上获取笔记。自动更新 key 为 *notes* 的查询。因此，应用渲染了服务器上最新的状态，包括刚刚新增的笔记。
+
+<!--Let us also implement the change in the importance of notes. A function for updating notes is added to the file <i>requests.js</i>:-->
+
+让我们加入更改笔记重要性的功能。用于更新笔记的函数被加入到文件 *requests.js*:
 
 ```js
 export const updateNote = updatedNote =>
@@ -277,6 +301,8 @@ export const updateNote = updatedNote =>
 ```
 
 Updating the note is also done by mutation. The <i>App</i> component expands as follows:
+
+更新笔记同样通过突变来完成。*App* 组件扩展为如下：
 
 ```js
 import { useQuery, useMutation, useQueryClient } from 'react-query' 
@@ -301,7 +327,11 @@ const App = () => {
 
 So again, a mutation was created that invalidated the query <i>notes</i> so that the updated note is rendered correctly. Using mutation is easy, the method <i>mutate</i> receives a note as a parameter, the importance of which has been changed to the negation of the old value.
 
+一个能够无效化查询的突变被再次创建，更新后的笔记也可以正常渲染。使用突变是轻松的，*mutate* 方法接收一个笔记作为参数，这个笔记的重要性已变为旧值的反义。
+
 The current code for the application is in [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) in the branch <i>part6-2</i>.
+
+当前应用的代码可以在 [GitHub](https://github.com/fullstack-hy2020/query-notes/tree/part6-2) 上 *part6-2*的分支中找到。
 
 ### Optimizing the performance
 
