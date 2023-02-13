@@ -22,23 +22,22 @@ Por esta razón, el código que se divide en módulos debe estar <i>empaquetado<
 
 
 <pre>
+.
 ├── asset-manifest.json
 ├── favicon.ico
 ├── index.html
+├── logo192.png
+├── logo512.png
 ├── manifest.json
-├── precache-manifest.8082e70dbf004a0fe961fc1f317b2683.js
-├── service-worker.js
+├── robots.txt
 └── static
     ├── css
-    │   ├── main.f9a47af2.chunk.css
-    │   └── main.f9a47af2.chunk.css.map
+    │   ├── main.1becb9f2.css
+    │   └── main.1becb9f2.css.map
     └── js
-        ├── 1.578f4ea1.chunk.js
-        ├── 1.578f4ea1.chunk.js.map
-        ├── main.8209a8f2.chunk.js
-        ├── main.8209a8f2.chunk.js.map
-        ├── runtime~main.229c360f.js
-        └── runtime~main.229c360f.js.map
+        ├── main.88d3369d.js
+        ├── main.88d3369d.js.LICENSE.txt
+        └── main.88d3369d.js.map
 </pre>
 
 
