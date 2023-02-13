@@ -120,7 +120,23 @@ const config = () => {
 
 module.exports = config
 ```
+**Nota:** es posible definirlo directamente como un objeto en lugar de una función:
 
+```js
+const path = require('path')
+
+const config = {
+  entry: './src/index.js',
+  output: {
+    path: path.resolve(__dirname, 'build'),
+    filename: 'main.js'
+  }
+}
+
+module.exports = config
+```
+
+Un objeto puede ser suficiente para la mayoría de los casos, pero en algunos casos, necesitaremos ciertas características que requieren que la definición se realice como una función.
 
 Luego definiremos un nuevo script npm llamado <i>build</i> que ejecutará el empaquetado con webpack:
 
@@ -141,14 +157,15 @@ const hello = name => {
 }
 ```
 
-
 Cuando ejecutamos el comando _npm run build_ , el código de nuestra aplicación será empaquetado por webpack. La operación producirá un nuevo archivo <i>main.js</i> que se agregará al directorio de <i>compilación</i>:
 
 ![](../../images/7/19x.png)
 
 El archivo contiene muchas cosas que parecen bastante interesantes. También podemos ver el código que escribimos anteriormente al final del archivo:
 
-![](../../images/7/19eb.png)
+```js
+eval("const hello = name => {\n  console.log(`hello ${name}`)\n}\n\n//# sourceURL=webpack://webpack-osa7/./src/index.js?");
+```
 
 Agreguemos un archivo <i>App.js</i> en el directorio <i>src</i> con el siguiente contenido:
 
@@ -178,46 +195,22 @@ Cuando empaquetamos la aplicación nuevamente con el comando _npm run build_, no
 
 El código de nuestra aplicación se puede encontrar al final del archivo del paquete en un formato bastante oscuro:
 
-```js
-/***/ "./src/App.js":
-/*!********************!*\
-  !*** ./src/App.js ***!
-  \********************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\nconst App = () => {\n  return null\n}\n\n/* harmony default export */ __webpack_exports__[\"default\"] = (App);\n\n//# sourceURL=webpack:///./src/App.js?");
-
-/***/ }),
-
-/***/ "./src/index.js":
-/*!**********************!*\
-  !*** ./src/index.js ***!
-  \**********************/
-/*! no exports provided */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _App__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./App */ \"./src/App.js\");\n\n\nconst hello = name => {\n  console.log(`hello ${name}`)\n};\n\nObject(_App__WEBPACK_IMPORTED_MODULE_0__[\"default\"])()\n\n//# sourceURL=webpack:///./src/index.js?");
-
-/***/ })
-```
-
+![](../../images/7/20z.png)
 
 ### Archivo de configuración
-
 
 Echemos un vistazo más de cerca al contenido de nuestro archivo <i>webpack.config.js</i> actual:
 
 ```js
 const path = require('path')
 
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js'
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    }
   }
 }
 
@@ -225,7 +218,6 @@ module.exports = config
 ```
 
 El archivo de configuración se ha escrito en JavaScript y el objeto de configuración se exporta utilizando la sintaxis del módulo de Node.
-
 
 Nuestra definición de configuración mínima casi se explica sola. La propiedad [entry](https://webpack.js.org/concepts/#entry) del objeto de configuración especifica el archivo que servirá como punto de entrada para empaquetar la aplicación.
 
@@ -245,20 +237,24 @@ Y convirtamos nuestra aplicación en una aplicación React agregando las definic
 
 ```js
 import React from 'react'
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom/client'
 import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 También realizaremos los siguientes cambios en el archivo <i>App.js</i>:
 
 ```js
-import React from 'react'
+import React from 'react' // necesitamos esto también ahora en los archivos los componentes
 
-const App = () => (
-  <div>hello webpack</div>
-)
+const App = () => {
+  return (
+    <div>
+      hello webpack
+    </div>
+  )
+}
 
 export default App
 ```
@@ -290,40 +286,47 @@ El mensaje de error del paquete web indica que es posible que necesitemos un <i>
 
 ```js
 const App = () => {
-  return <div>hello webpack</div>
+  return (
+    <div>
+      hello webpack
+    </div>
+  )
 }
 ```
 
-
 La sintaxis utilizada anteriormente proviene de JSX y nos proporciona una forma alternativa de definir un elemento React para una etiqueta <i>div</i>.
 
-
-Podemos usar [caargadores](https://webpack.js.org/concepts/loaders/) para informar a webpack de los archivos que deben procesarse antes de que se empaqueten.
-
+Podemos usar [cargadores](https://webpack.js.org/concepts/loaders/) para informar a webpack de los archivos que deben procesarse antes de que se empaqueten.
 
 Configuremos un cargador para nuestra aplicación que transforme el código JSX en JavaScript normal:
 
 ```js
-const config = {
-  entry: './src/index.js',
-  output: {
-    path: path.resolve(__dirname, 'build'),
-    filename: 'main.js',
-  },
-  // highlight-start
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        loader: 'babel-loader',
-        options: {
-          presets: ['@babel/preset-react'],
+const path = require('path')
+
+const config = () => {
+  return {
+    entry: './src/index.js',
+    output: {
+      path: path.resolve(__dirname, 'build'),
+      filename: 'main.js'
+    },
+      // highlight-start
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-react'],
+          },
         },
-      },
-    ],
-  },
-  // highlight-end
+      ],
+    },
+      // highlight-end
+  }
 }
+
+module.exports = config
 ```
 
 
@@ -369,21 +372,18 @@ Puede probar la aplicación incluida abriendo el archivo <i>build/index.html</i>
 ![](../../images/7/22.png)
 
 
-Vale la pena señalar que si el código fuente de la aplicación incluida usa <i>async/await</i>, el navegador no renderizará nada en algunos navegadores. [Buscar en Google el mensaje de error en la consola](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) arrojará algo de luz sobre el problema. Tenemos que instalar una dependencia más que falta, que es [@babel/polyfill](https://babeljs.io/docs/en/babel-polyfill):
+Vale la pena señalar que si el código fuente de la aplicación incluida usa <i>async/await</i>, el navegador no renderizará nada en algunos navegadores. [Buscar en Google el mensaje de error en la consola](https://stackoverflow.com/questions/33527653/babel-6-regeneratorruntime-is-not-defined) arrojará algo de luz sobre el problema. Siendo la solución previa a este problema la instalación de [babel-polyfill](https://babeljs.io/docs/en/babel-polyfill/), la cual está [obsoleta](https://babeljs.io/docs/en/babel-polyfill/), ahora tenemos que instalar dos dependencias más, que son [core-js](https://www.npmjs.com/package/core-js) y [regenerator-runtime](https://www.npmjs.com/package/regenerator-runtime):
 
 ```bash
-npm install @babel/polyfill
+npm install core-js regenerator-runtime
 ```
-
-
-Realicemos los siguientes cambios en la propiedad <i>entry</i> del objeto de configuración de webpack en el archivo i>webpack.config.js</i>:
+Necesitas importar esas dependencias en la parte superior del archivo <i>index.js</i>:
 
 ```js
-  entry: ['@babel/polyfill', './src/index.js']
+import 'core-js/stable/index.js'
+import 'regenerator-runtime/runtime.js'
 ```
-
 Nuestra configuración contiene casi todo lo que necesitamos para el desarrollo de React.
-
 
 ### Transpiladores
 
