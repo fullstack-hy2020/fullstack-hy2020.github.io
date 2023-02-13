@@ -750,7 +750,8 @@ test('a specific note can be viewed', async () => {
     .expect(200)
     .expect('Content-Type', /application\/json/)
 // highlight-end
-
+  
+  resultNote.body.date = new Date(resultNote.body.date)
   expect(resultNote.body).toEqual(noteToView)
 })
 
