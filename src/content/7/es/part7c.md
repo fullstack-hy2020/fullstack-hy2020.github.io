@@ -240,9 +240,9 @@ Las herramientas para desarrolladores de Chrome permiten simular el uso de nuest
 
 Puede encontrar el código completo de la aplicación [aquí](https://github.com/fullstack-hy2020/misc/blob/master/notes-bootstrap.js).
 
-### UI de material
+### Material UI
 
-Como segundo ejemplo, veremos la librería [MaterialUI](https://mui.com/) React, que implementa el lenguaje visual de [Material design](https://material.io/) desarrollado por Google.
+Como segundo ejemplo, veremos la librería de React de [MaterialUI](https://mui.com/), que implementa el lenguaje visual de [Material design](https://material.io/) desarrollado por Google.
 
 Instale la librería con el comando
 
