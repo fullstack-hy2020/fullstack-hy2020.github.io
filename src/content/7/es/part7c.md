@@ -420,9 +420,7 @@ Definiendo
 </Button>
 ```
 
-<!-- the _Button_ component is rendered so, that its root component is react-router-dom _Link_ which receives its path as prop field _to_. -->
-
-el componente _Button_ se renderiza de tal manera, que de su componente raíz react-router-dom _Link_ recibe su ruta como campo de prop _to_.
+el componente _Button_ se renderiza de tal manera, que de su componente raíz _Link_ de react-router-dom recibe su ruta como campo de prop _to_.
 
 ```js
 <AppBar position="static">
