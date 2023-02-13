@@ -106,7 +106,7 @@ Tenga en cuenta que los componentes de React Bootstrap deben importarse por sepa
 import { Table } from 'react-bootstrap'
 ```
 
-### Formularios
+#### Formularios
 
 Mejoremos el formulario en la vista de inicio de sesión con la ayuda de [formularios](https://getbootstrap.com/docs/4.1/components/forms/) Bootstrap.
 
