@@ -487,7 +487,7 @@ const start = async () => {
   
   // highlight-start
   const schema = makeExecutableSchema({ typeDefs, resolvers })
-  const serverCleanup = useServer({ schema }, wsServer);
+  const serverCleanup = useServer({ schema }, wsServer)
   // highlight-end
 
   const server = new ApolloServer({
@@ -668,7 +668,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `bearer ${token}` : null,
+      authorization: token ? `Bearer ${token}` : null,
     }
   }
 })
@@ -707,7 +707,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 )
 ```
 
-Jotta kaikki toimisi, on asennettava uusia riippuvuuksia:
+Jotta kaikki toimisi, on asennettava uusi riippuvuus:
 
 ```bash
 npm install graphql-ws
@@ -1051,7 +1051,7 @@ Ota clientillä käyttöön subscriptiot ja tilaa _bookAdded_. Uusien kirjojen t
 
 #### 8.25: Subscriptionit client, osa 2
 
-Pidä sovelluksen käyttöliittymä ajantasaisena, kun palvelin tiedottaa uusista kirjoista.
+Pidä sovelluksen käyttöliittymä kirjojen listan osalta ajantasaisena (kirjailijoiden listan ajantasaisena pitäminen on vapaaehtoista), kun palvelin tiedottaa uusista kirjoista.
 
 #### 8.26: n+1
 

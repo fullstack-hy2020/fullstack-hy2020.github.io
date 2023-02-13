@@ -60,6 +60,8 @@ const mongoose = require('mongoose')
 mongoose.set('strictQuery', false)
 const Person = require('./models/person')
 
+require('dotenv').config()
+
 const MONGODB_URI = process.env.MONGODB_URI
 
 console.log('connecting to', MONGODB_URI)
@@ -549,11 +551,11 @@ type Mutation {
 
 Complete the program so that all queries (to get _allBooks_ working with the parameter _author_ and _bookCount_ field of an author object is not required) and mutations work. 
 
-You might find [this](https://docs.mongodb.com/manual/reference/operator/query/in/) useful.
+Regarding the <i>genre</i> parameter of the all books query, the situation is a bit more challenging. The solution is simple, but finding it can be a headache. You might benefit from [this](https://www.mongodb.com/docs/manual/tutorial/query-array-of-documents/).
 
 #### 8.15 Database, part 3
 
-Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. This means that they cause _UserInputError_ with a suitable error message to be thrown. 
+Complete the program so that database validation errors (e.g. book title or author name being too short) are handled sensibly. This means that they cause [GraphQLError](https://www.apollographql.com/docs/apollo-server/data/errors/#custom-errors) with a suitable error message to be thrown. 
 
 #### 8.16 user and logging in
 
