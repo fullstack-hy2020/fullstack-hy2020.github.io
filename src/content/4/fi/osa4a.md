@@ -120,7 +120,6 @@ notesRouter.post('/', (request, response, next) => {
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save()
@@ -285,7 +284,6 @@ const noteSchema = new mongoose.Schema({
     required: true,
     minlength: 5
   },
-  date: Date,
   important: Boolean,
 })
 

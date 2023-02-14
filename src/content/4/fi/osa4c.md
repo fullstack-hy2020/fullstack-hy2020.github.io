@@ -450,7 +450,7 @@ Huomaamme siis, että käyttäjällä on kaksi muistiinpanoa.
 
 Muistiinpanon luoneen käyttäjän id tulee näkyviin muistiinpanon yhteyteen:
 
-![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, date, id ja user, jonka arvo käyttäjäid](../../images/4/12e.png)
+![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, id ja user, jonka arvo käyttäjäid](../../images/4/12e.png)
 
 ### populate
 
@@ -503,7 +503,7 @@ notesRouter.get('/', async (request, response) => {
 
 Nyt käyttäjän tiedot tulevat muistiinpanon kenttään <i>user</i>:
 
-![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, date, id ja user. Kenttä user on olio jolla on kentät name, username ja id](../../images/4/15new.png)
+![Selain renderöi osoitteessa localhost:3001/api/notes taulukollisen JSON:eja joilla kentät content, important, id ja user. Kenttä user on olio jolla on kentät name, username ja id](../../images/4/15new.png)
 
 Korostetaan vielä, että tietokannan tasolla ei siis ole mitään määrittelyä sille, että esim. muistiinpanojen kenttään <i>user</i> talletetut id:t viittaavat <i>users</i>-kokoelman dokumentteihin.
 

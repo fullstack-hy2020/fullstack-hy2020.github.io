@@ -3,7 +3,7 @@
     "mainTitle": "Syväsukellus moderniin websovelluskehitykseen",
     "intro": "Ota haltuusi React, Redux, Node.js, MongoDB, GraphQL ja TypeScript! Kurssilla tutustutaan JavaScriptilla tapahtuvaan moderniin websovelluskehitykseen. Pääpaino on React-kirjaston avulla toteutettavissa single page -sovelluksissa, ja niitä tukevissa Node.js:llä toteutetuissa REST-rajapinnoissa.",
     "current": [
-      "Vuosi 2022 on ohi mutta kurssi jatkuu! Lue <a href='/osa0/yleista#kurssin-jatkaminen-2023'>täältä</a> lisää!",
+      "Kurssilla ei ole enää vuosittaisia versiota, kurssi jatkuu katkeamattomasti ilman taukoja. Lue <a href='/osa0/yleista#ei-enaa-vuosittaisia-versioita'>täältä</a> lisää!",
       "Kurssiin liittyvää keskustelua Discordissa, kanavalla <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> sekä Telegramissa, kanavalla <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>, tule mukaan! <ul><li>Katso <a href='/en/part0/general_info#how-to-ask-help-in-discord-telegam'>täältä</a> miten kanavalla kysytyt kysymykset kannattaa muotoilla</li><li>Huom: kaikki epäasialliset, halventavat ja jotain ihmisryhmää syrjivät kommentit kanavalla ovat kiellettyjä ja tälläisten kommenttien esittäjät poistetaan kanavalta.</li></ul>",
       "Yhteistyökumppaneina kurssilla on <a href='https://www.houston-inc.com/'>Houston Inc</a>, <a href='https://www.terveystalo.com/fi/Yritystietoa/Terveystalo-tyontantajana/Digital-Health/'>Terveystalo</a>, <a href='https://elisa.fi/'>Elisa</a>, <a href='https://www.instagram.com/unitytechnologies/?hl=en'>Unity Technologies</a>, <a href='https://careers.konecranes.com/Konecranes/'>Konecranes</a> ja <a href='https://www.smartly.io/'>Smartly.io</a>. Katso <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'>täältä</a> yhteistyökumppaniemme asiantuntijoiden vierailuluentoja kurssin aihepiireistä."
     ],
@@ -23,7 +23,7 @@
     "intro": "Learn React, Redux, Node.js, MongoDB, GraphQL and TypeScript in one go! This course will introduce you to modern JavaScript-based web development. The main focus is on building single page applications with ReactJS that use REST APIs built with Node.js.",
     "current": [
       "<em>Questions about the course? Read carefully <a href='/en/part0/general_info'>Part 0</a>, that has an answer to most of them...</em>",
-      "The year 2022 is over but the course continues! See <a href='/en/part0/general_info#continuing-the-course-at-year-2023'>this</a> for more details.",
+      "No more yearly versions, the course just continues without any break! See <a href='/en/part0/general_info/#no-more-yearly-versions'>here</a> for more details.",
       "You can discuss the course and related topics in our dedicated group on Discord <a target='_blank' href='https://study.cs.helsinki.fi/discord/join/fullstack'>https://study.cs.helsinki.fi/discord/join/fullstack</a> and on Telegram: <a target='_blank' href='https://t.me/fullstackcourse'>https://t.me/fullstackcourse</a>. Please join the conversation! <ul><li>See <a href='/en/part0/general_info#how-to-ask-help-in-discord-telegam'>here</a> how to ask questions in a proper way</li><ul>"
     ],
     "telegram": "Telegram is a whatsapp / messenger-style discussion forum application that can be used with a browser, mobile devices, and Windows / Linux / OSX clients.",

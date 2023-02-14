@@ -58,7 +58,6 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
   const note = new Note({
     content: body.content,
     important: body.important || false,
-    date: new Date(),
   })
 
   note.save()
@@ -113,7 +112,7 @@ app.put('/api/notes/:id', (request, response, next) => {
 
 ### Deploying the database backend to production
 
-The application should work almost as-is in Fly.io/Render. We do have to generate a new production build of the frontend since changes thus far were only on our backend.
+The application should work almost as-is in Fly.io/Render. We do not have to generate a new production build of the frontend since changes thus far were only on our backend.
 
 The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Render.
 
@@ -189,7 +188,7 @@ Add validation to your phonebook application, which will make sure that phone nu
 
 Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
 
-If an HTTP POST request tries to add a name that is already in the phonebook, the server must respond with an appropriate status code and error message.
+If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.
 
 #### 3.21 Deploying the database backend to production
 

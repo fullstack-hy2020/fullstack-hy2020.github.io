@@ -1031,7 +1031,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
 - If my code does not work, I will not write more code. Instead I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -1058,7 +1058,7 @@ If and <i>when</i> you encounter an error message
 
 > <i>Objects are not valid as a React child</i>
 
-keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects).
 
 <h4> 1.6: unicafe step1</h4>
 
