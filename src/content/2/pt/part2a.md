@@ -85,7 +85,7 @@ A passagem de gerenciadores de eventos para os componentes-filho do componente <
 
 Faremos neste momento a lógica da aplicação do lado do cliente (navegador), ou o "front-end", em React, para uma aplicação semelhante à aplicação de exemplo da [Parte 0](/pt/part0).
 
-Começemos com o seguinte (arquivo <i>App.js</i>):
+Comecemos com o seguinte (arquivo <i>App.js</i>):
 
 ```js
 const App = (props) => {
@@ -594,7 +594,7 @@ Lembre-se: envie **todos** os exercícios de uma parte **de uma única vez**; is
 
 <h4>2.1: Course information — 6º passo</h4>
 
-Vamos finalizar o código para que possamos renderizar os conteúdos do curso dos exercícios 1.1 a 1.5. Você pode começar com o código das respostas-modelo. As respostas-modelo da Parte 1 podem ser encontradas no [sistema de envio de exercícios]https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicando em <i>"my submissions"</i> em cima; vá até a linha correspondente à parte 1 na coluna <i>"solutions"</i> e clique em <i>show</i>. Para ver a solução para o exercício <i>course info</i>, clique em _index.js_ abaixo de <i>kurssitiedot</i> ("kurssitiedot" significa "course info" ou "informações do curso").
+Vamos finalizar o código para que possamos renderizar os conteúdos do curso dos exercícios 1.1 a 1.5. Você pode começar com o código das respostas-modelo. As respostas-modelo da Parte 1 podem ser encontradas no [sistema de envio de exercícios]https://studies.cs.helsinki.fi/stats/courses/fullstackopen), clicando em <i>"my submissions"</i> em cima; vá até a linha correspondente à Parte 1 na coluna <i>"solutions"</i> e clique em <i>show</i>. Para ver a solução para o exercício <i>course info</i>, clique em _index.js_ abaixo de <i>kurssitiedot</i> ("kurssitiedot" significa "course info" ou "informações do curso").
 
 **Note que se você copiar um projeto de um lugar para outro, é provável que terá de excluir o diretório <i>node\_modules</i> e instalar as dependências novamente com o comando _npm install_ antes de iniciar a aplicação.** Em geral, não é recomendado que você copie todo o conteúdo de um projeto e/ou adicione o diretório <i>node\_modules</i> ao sistema de controle de versão.
 
@@ -666,7 +666,7 @@ Mostre também a soma (ou total) dos exercícios do curso.
 
 Se você ainda não o fez, calcule a soma dos exercícios com o método de array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) (reduzir).
 
-**Dica:** quando seu código fica assim...
+**Dica I:** quando seu código fica assim...
 
 ```js
 const total = 

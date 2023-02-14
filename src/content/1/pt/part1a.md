@@ -94,7 +94,7 @@ const App = () => (
 
 Como você provavelmente já adivinhou, o componente será renderizado como uma tag <i>div</i>, que envolve uma tag <i>p</i> contendo o texto <i>"Olá, mundo!"</i>.
 
-Técnicamente, o componente é definido como uma função JavaScript. O código a seguir também é uma função (que não recebe nenhum parâmetro):
+Tecnicamente, o componente é definido como uma função JavaScript. O código a seguir também é uma função (que não recebe nenhum parâmetro):
 
 ```js
 () => (
@@ -213,7 +213,7 @@ A compilação é gerenciada pelo [Babel](https://babeljs.io/repl/). Projetos cr
 
 Também é possível escrever React como "JavaScript puro" sem usar JSX. Embora não seja recomendável.
 
-Na prática, o JSX é muito parecido com HTML com a diferença de que, com o JSX, é possível inserir facilmente conteúdo dinâmico escrevendo código JavaScript dentro de chaves. A idéia do JSX é bastante semelhante a muitas linguagens de modelos, como Thymeleaf usado junto ao Java Spring, que são usadas em servidores.
+Na prática, o JSX é muito parecido com HTML com a diferença de que, com o JSX, é possível inserir facilmente conteúdo dinâmico escrevendo código JavaScript dentro de chaves. A ideia do JSX é bastante semelhante a muitas linguagens de modelos, como Thymeleaf usado junto ao Java Spring, que são usadas em servidores.
 
 JSX é "semelhante a [XML](https://developer.mozilla.org/en-US/docs/Web/XML/XML_introduction)" (Extensible Markup Language [Linguagem de Marcação Extensível]), o que significa que todas as tags precisam ser fechadas. Por exemplo, uma nova linha é um elemento vazio, que em HTML pode ser escrito da seguinte maneira:
 
@@ -513,7 +513,7 @@ Também a idade:
 {amigos[0].idade}
 ```
 
-Após corrigir o erro, limpe as mensagens de erro do console pressionando Ø e, em seguida, recarrege o conteúdo da página e garanta que não haja mensagens de erro exibidas.
+Após corrigir o erro, limpe as mensagens de erro do console pressionando Ø e, em seguida, recarregue o conteúdo da página e garanta que não haja mensagens de erro exibidas.
 
 Uma adição ao lembrete anterior: React também permite que matrizes sejam renderizadas se elas contêm valores elegíveis para renderização (como números ou strings). Então, o seguinte programa funcionaria, embora o resultado não seja o que desejamos:
 
@@ -559,7 +559,7 @@ part2
 
 Veja este [exemplo de repositório de submissão](https://github.com/fullstack-hy2020/example-submission-repository)!
 
-Para cada parte do curso, há um diretório, que se ramifica em diretórios contendo uma série de exercícios, como "unicafe" para a parte 1.
+Para cada parte do curso, há um diretório, que se ramifica em diretórios contendo uma série de exercícios, como "unicafe" para a Parte 1.
 
 Para cada aplicação web em uma série de exercícios, é recomendado que você envie todos os arquivos relacionados a essa aplicação, exceto o diretório <i>node_modules</i>.
 

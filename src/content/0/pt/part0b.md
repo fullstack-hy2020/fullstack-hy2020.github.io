@@ -164,7 +164,7 @@ xhttp.send()
 
 Os detalhes do código não são importantes agora, mas algum código foi incluído para dar vida às imagens e ao texto. Começaremos a programar de verdade na [parte 1](/pt/part1). O código-exemplo nesta parte, na realidade, não tem relação alguma com as técnicas de programação deste curso.
 
-> Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch" (ir buscar). Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na parte 2.
+> Alguns podem se perguntar o porquê do objeto "xhttp" ser usado aqui em vez do moderno "fetch" (ir buscar). Isso se deve ao fato de não querermos entrar no assunto das "Promises" (promessas) ainda, e o código ter um papel secundário nesta parte. Voltaremos às formas modernas de fazer requisições ao servidor na Parte 2.
 
 Imediatamente após baixar a tag <i>script</i>, o navegador começa a executar o código.
 
@@ -345,7 +345,7 @@ Em seguida, criamos um novo elemento "li" e adicionamos algum conteúdo de texto
 
 ```js
 newElement = document.createElement('li')
-newElement.textContent = 'É bem facil fazer gerência de páginas pelo console'
+newElement.textContent = 'É bem fácil fazer gerência de páginas pelo console'
 ```
 
 E adicionamos o novo elemento "li" à lista:
@@ -431,7 +431,7 @@ A primeira é o evento de envio do formulário. Vamos focar nessa parte:
 
 ![Visualização detalhada da primeira requisição](../../images/0/22e.png)
 
-Trata-se de uma requisição [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) para o endereço do servidor <i>new\_note</i>. O servidor responde com o código de status HTTP 302. Isso é um [redirecionamento de URL](https://en.wikipedia.org/wiki/URL_redirection), no qual o servidor pede ao navegador para fazer uma nova requisição HTTP GET para o endereço definido no cabeçalho <i>Localização</i> — o endereço <i>notes</i>.
+Trata-se de uma requisição [HTTP POST](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods/POST) para o endereço do servidor <i>new_note</i>. O servidor responde com o código de status HTTP 302. Isso é um [redirecionamento de URL](https://en.wikipedia.org/wiki/URL_redirection), no qual o servidor pede ao navegador para fazer uma nova requisição HTTP GET para o endereço definido no cabeçalho <i>Localização</i> — o endereço <i>notes</i>.
 
 Então, o navegador recarrega a página de Notas (Notes). O recarregamento faz mais três requisições HTTP: busca o arquivo CSS (main.css), o arquivo de JavaScript (main.js) e os dados das notas (data.json).
 
@@ -663,30 +663,30 @@ O diagrama foi feito como um arquivo GitHub Markdown usando a sintaxe [Mermaid](
 sequenceDiagram
     participant browser
     participant server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/notes
     activate server
     server-->>browser: HTML document
     deactivate server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.css
     activate server
     server-->>browser: the css file
     deactivate server
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/main.js
     activate server
     server-->>browser: the JavaScript file
     deactivate server
-    
+
     Note right of browser: O navegador começa a executar o código JavaScript que busca o JSON do servidor
-    
+
     browser->>server: GET https://studies.cs.helsinki.fi/exampleapp/data.json
     activate server
     server-->>browser: [{ "content": "HTML é fácil", "date": "2023-1-1" }, ... ]
-    deactivate server    
+    deactivate server
 
-    Note right of browser: O navegador executa a função de retorno de chamada que renderiza as notas
+    Note right of browser: O navegador executa a função callback (função de retorno de chamada) que renderiza as notas
 ```
 
 **Crie um diagrama semelhante** que retrate a situação em que o usuário cria uma nova nota na página <https://studies.cs.helsinki.fi/exampleapp/notes> escrevendo algo no campo de texto e clicando no botão <i>submit</i>.

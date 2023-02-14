@@ -98,54 +98,54 @@ Você só pode fazer a prova após entregar exercícios suficientes para cinco c
 
 Ao entregar pelo menos 127 dos exercícios das partes 0 a 7 ao avançar no curso principal, você pode receber crédito adicional através deste aproveitamento.
 - Entregue pelo menos 127 exercícios das partes 0 a 7. 
-- [Inscreva-se na parte 6 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
-- [Solicite créditos para a parte 6](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+- [Inscreva-se na Parte 6 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-c67dc747-1d6a-43cb-b40b-9eacf425dcc0). 
+- [Solicite créditos para a Parte 6](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
 #### Parte 7 - Desenvolvimento Full Stack, aproveitamento 2 (1 cr, CSM141083)
 
 Ao entregar pelo menos 138 dos exercícios das partes de 0 a 7 enquanto trabalha no curso principal, você pode receber crédito adicional através deste aproveitamento.
 - Entregue pelo menos 138 exercícios para as partes 0 a 7.
-- [Matricule-se na parte 7 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).
-- [Solicite créditos para a parte 7](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+- [Matricule-se na Parte 7 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-3016e9c9-0fdc-4ee3-9e9b-38176359f9f3).
+- [Solicite créditos para a Parte 7](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
 #### Parte 8 - Desenvolvimento Full Stack: GraphQL (1 cr, CSM14113)
-Ao entregar pelo menos 22 dos 26 exercícios da parte 8 do curso, GraphQL, você pode obter um crédito adicional. A parte 8 pode ser feita a qualquer momento depois da parte 5, pois seu conteúdo é independente das partes 6 e 7.
-- Entregue pelo menos 22 dos 26 exercícios da parte 8.
-- [Matricule-se na parte 8 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).
-- [Solicite créditos para a parte 8](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+Ao entregar pelo menos 22 dos 26 exercícios da Parte 8 do curso, GraphQL, você pode obter um crédito adicional. A Parte 8 pode ser feita a qualquer momento depois da Parte 5, pois seu conteúdo é independente das partes 6 e 7.
+- Entregue pelo menos 22 dos 26 exercícios da Parte 8.
+- [Matricule-se na Parte 8 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-067b1506-0307-4118-9e2b-292e0b81e491).
+- [Solicite créditos para a Parte 8](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
 #### Parte 9 - Desenvolvimento Full Stack: TypeScript (1 cr, CSM14110)
-Ao entregar pelo menos 24 dos 27 exercícios da parte 9 do curso, TypeScript, você pode obter um crédito adicional. É recomendado que você complete as partes de 0 a 7 antes de fazer a parte 9.
-- Entregue pelo menos 24 dos 27 exercícios da parte 9.
-- [Inscreva-se na parte 9 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
-- [Solicite créditos para a parte 9](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+Ao entregar pelo menos 24 dos 27 exercícios da Parte 9 do curso, TypeScript, você pode obter um crédito adicional. É recomendado que você complete as partes de 0 a 7 antes de fazer a Parte 9.
+- Entregue pelo menos 24 dos 27 exercícios da Parte 9.
+- [Inscreva-se na Parte 9 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-d9125f89-a440-48e1-898a-ee4e16b06cdb).
+- [Solicite créditos para a Parte 9](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
 #### Parte 10 - Desenvolvimento Full Stack: React Native (2 cr, CSM14111)
-Ao entregar 25 exercícios da parte 10 do curso de React Native, você pode ganhar dois créditos adicionais. Mais informações sobre os pré-requisitos dessa parte, a entrega de exercícios e os créditos podem ser encontrados na [parte 10](/en/part10/introduction_to_react_native).
-- Entregue pelo menos 25 exercícios da parte 10.
-- [Inscreva-se na parte 10 através da Universidade Aberta] (https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6). 
-- [Solicite créditos para a parte 10](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+Ao entregar 25 exercícios da Parte 10 do curso de React Native, você pode ganhar dois créditos adicionais. Mais informações sobre os pré-requisitos dessa parte, a entrega de exercícios e os créditos podem ser encontrados na [Parte 10](/en/part10/introduction_to_react_native).
+- Entregue pelo menos 25 exercícios da Parte 10.
+- [Inscreva-se na Parte 10 através da Universidade Aberta] (https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-aa395a19-4625-44a9-8301-5fbb946c6ed6). 
+- [Solicite créditos para a Parte 10](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
 #### Parte 11 - Desenvolvimento Full Stack Web: Integração Contínua / Entrega Contínua (1 cr, CSM14112)
 
-Ao entregar todos os exercícios da parte 11 do curso de Integração/Entrega Contínua, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 11](/pt/part11).
-- Entregue todos os exercícios da parte 11. 
-- [Inscreva-se na parte 11 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01). 
-- [Solicite créditos para a parte 11](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+Ao entregar todos os exercícios da Parte 11 do curso de Integração/Entrega Contínua, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [Parte 11](/pt/part11).
+- Entregue todos os exercícios da Parte 11. 
+- [Inscreva-se na Parte 11 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-4cb66c68-da12-422e-a34d-c8e8e7c8db01). 
+- [Solicite créditos para a Parte 11](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
-#### Parte 12 - Desenvolvimento Full Stack Web: Containers (1 cr, CSM141084)
+#### P - Desenvolvimento Full Stack Web: Containers (1 cr, CSM141084)
 
-Ao entregar todos os exercícios da parte 12 do curso sobre a tecnologia "Container", você pode ganhar créditos adicionais. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 12](/pt/part12).
-- Envie todos os exercícios para a parte 12. 
-- [Inscreva-se na parte 12 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a). 
-- [Solicite créditos para a parte 12](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+Ao entregar todos os exercícios da parte 12 do curso sobre a tecnologia "Container", você pode ganhar créditos adicionais. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [Parte 12](/pt/part12).
+- Envie todos os exercícios para a Parte 12. 
+- [Inscreva-se na Parte 12 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-51a6f590-607c-4e34-bd6f-2d87e2203d9a). 
+- [Solicite créditos para a Parte 12](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
 #### Parte 13 - Desenvolvimento Web Full Stack: Bases de Dados Relacionais (1 cr, CSM14114)
 
-Ao entregar todos os exercícios da parte 13 do curso sobre bancos de dados relacionais, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [parte 13](/pt/part13).
-- Envie todos os exercícios da parte 13. 
-- [Inscreva-se na parte 13 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c). 
-- [Solicite créditos para a parte 13](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
+Ao entregar todos os exercícios da Parte 13 do curso sobre bancos de dados relacionais, você pode ganhar crédito adicional. Mais informações sobre os pré-requisitos desta parte e entrega de exercícios podem ser encontradas na [Parte 13](/pt/part13).
+- Envie todos os exercícios da Parte 13. 
+- [Inscreva-se na Parte 13 através da Universidade Aberta](https://www.avoin.helsinki.fi/palvelut/esittely.aspx?s=otm-6e548d4e-75bf-483b-8426-c65d8c4e161c). 
+- [Solicite créditos para a Parte 13](/pt/part0/informacoes_gerais#como-conseguir-seus-creditos).
 
 
 ### O curso em poucas palavras
@@ -305,7 +305,7 @@ Você pode solicitar uma transcrição verificada <i>depois que seus créditos u
    - Sua data de nascimento; e
    - O idioma da transcrição.
 
-A transcrição será entregue a você via e-mail, eletrônicamente. Apresente este documento em sua instituição para ter os créditos incluídos em seu diploma. A decisão de incluir os créditos será tomada pela sua instituição de origem.
+A transcrição será entregue a você via e-mail, eletronicamente. Apresente este documento em sua instituição para ter os créditos incluídos em seu diploma. A decisão de incluir os créditos será tomada pela sua instituição de origem.
 
 ### Continuando o curso no ano de 2023
 

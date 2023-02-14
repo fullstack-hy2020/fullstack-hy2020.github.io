@@ -165,7 +165,7 @@ O texto do espaço reservado armazenado como o valor inicial do estado <em>newNo
 
 ![console exibindo erro de valor fornecido para prop sem onchange](../../images/2/7e.png)
 
-A partir do momento que atribuímos um pedaço do estado do componente <i>App</i> como o atributo <i>value</i> do elemento de entrada, o componente <i>App</i> passou a controlar o comportamento do elemento de entrada.
+A partir do momento que atribuímos um pedaço do estado do componente <i>App</i> como o atributo <i>value</i> do elemento de entrada (input element), o componente <i>App</i> passou a controlar o comportamento do elemento de entrada.
 
 Para habilitar a edição do elemento de entrada, precisamos registrar um <i>gerenciador de evento</i> que sincroniza as mudanças feitas na entrada com o estado do componente:
 
@@ -526,7 +526,7 @@ Implemente um campo de pesquisa que possa ser usado para filtrar a lista de pess
 
 Você pode implementar o campo de pesquisa como um elemento <i>input</i> que é colocado fora do formulário HTML. A lógica de filtragem mostrada na imagem é <i>case insensitive</i>, o que significa que se você pesquisar por <i>arto</i>, também há o retorno de resultados que contêm "Arto" com o A maiúsculo.
 
-**N.B.:** Quando se está trabalhando em nova funcionalidade, é útil inserir em sua aplicação um "código de teste" — como alguns dados fantasiosos de pessoas — desta forma:
+**N.B.:** Quando se está trabalhando em uma nova funcionalidade, é útil inserir em sua aplicação um "código de teste" — como alguns dados fantasiosos de pessoas — desta forma:
 
 ```js
 const App = () => {

@@ -237,7 +237,7 @@ setInterval(() => {
 }, 1000)
 ```
 
-Fazer repitidas chamadas ao método _render_ não é a forma recomendada de re-renderização de componentes. A seguir, apresentaremos uma forma melhor para fazer essa re-renderização.
+Fazer repetidas chamadas ao método _render_ não é a forma recomendada de re-renderização de componentes. A seguir, apresentaremos uma forma melhor para fazer essa re-renderização.
 
 ### Componente "Stateful" (ou Componente com Estado)
 
@@ -357,7 +357,7 @@ const App = () => {
 
 É fácil seguir e acompanhar as chamadas feitas à função de renderização do componente <i>App</i>:
 
-![captura de tela da função de renderização nas Ferramentas de dDsenvolvimento](../../images/1/4e.png)
+![captura de tela da função de renderização nas Ferramentas de Desenvolvimento](../../images/1/4e.png)
 
 O console do seu navegador estava aberto? Se não estava, prometa que essa foi a última vez que precisou ser lembrado disso.
 
@@ -392,7 +392,7 @@ const App = () => {
 }
 ```
 
-Definimos o valor do atributo <i>onClick</i> do botão como uma referência à função _gerClique_ definida no código.gerCliquecada clique no botão <i>mais+</i>, a função _gerClique_ é chamada, o que significa que a cada evento de clique uma mensagem <i>clicado</i> será registrada no console do navegador.
+Definimos o valor do atributo <i>onClick</i> do botão como uma referência à função _gerClique_ definida no código. A cada clique no botão <i>mais+</i>, a função _gerClique_ é chamada, o que significa que a cada evento de clique uma mensagem <i>clicado</i> será registrada no console do navegador.
 
 A função gerenciadora de eventos também pode ser definida diretamente na atribuição de valor do atributo "onClick":
 
@@ -620,7 +620,7 @@ Quando um dos botões é clicado, o gerenciador de eventos é executado. O geren
 **Chamar uma função que muda o estado faz com que o componente seja re-renderizado.**
 
 Então, se um usuário clicar no botão <i>mais+</i>, o gerenciador de eventos do botão muda o valor de _contador_ para 1, e o componente _App_ é re-renderizado. 
-Isso faz com que seus subcomponentes _Exibir_ e _Botao_ também sejam rerenderizados. 
+Isso faz com que seus subcomponentes _Exibir_ e _Botao_ também sejam re-renderizados. 
 _Exibir_ recebe o novo valor do contador, 1, como props. Os componentes _Botao_ recebem gerenciadores de eventos que podem ser usados para mudar o estado do contador.
 
 Para ter certeza de que você entendeu como o programa funciona, vamos adicionar algumas declarações _console.log_ a ele:

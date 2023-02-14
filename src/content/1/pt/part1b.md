@@ -13,7 +13,7 @@ JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos recursos
 
 Os navegadores ainda não suportam todos os recursos mais recentes de JavaScript. Devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
 
-Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transcompilador [Babel](https://babeljs.io/). A transpilação é configurada automaticamente em aplicações React criadas com create-react-app. Vamos olhar mais de perto a configuração de transpilação na [parte 7](/pt/part7) deste curso.
+Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transcompilador [Babel](https://babeljs.io/). A transpilação é configurada automaticamente em aplicações React criadas com create-react-app. Vamos olhar mais de perto a configuração de transpilação na [Parte 7](/pt/part7) deste curso.
 
 [Node.js](https://nodejs.org/en/) é um ambiente de tempo de execução JavaScript baseado no motor JavaScript [Chrome V8](https://developers.google.com/v8/) da Google e funciona praticamente em qualquer lugar, desde servidores até telefones celulares. Vamos praticar a escrita de código JavaScript usando Node. As versões mais recentes do Node são compatíveis com as versões mais recentes de JavaScript, então o código não precisa ser transpilado.
 

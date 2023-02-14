@@ -1053,7 +1053,7 @@ A aplicação deve exibir o número total de feedbacks coletados para cada categ
 
 ![captura de tela das opções de feedback](../../images/1/13e.png)
 
-Note que sua aplicação precisa funcionar apenas durante uma única sessão de navegação.  É permitido que, assim que você atualize a página, o feedback coletado desapareça.
+Note que sua aplicação precisa funcionar apenas durante uma única sessão de navegação.  É permitido que, assim que você atualizar a página, o feedback coletado desapareça.
 
 É aconselhável usar a mesma estrutura que é usada no material e no exercício anterior. O arquivo <i>index.js</i> fica assim:
 
