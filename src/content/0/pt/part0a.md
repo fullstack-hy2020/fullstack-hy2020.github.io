@@ -329,7 +329,7 @@ Isso também é possível, basta entrar em contato com o pessoal do curso via [e
 
 Um projeto full stack no valor de 5, 7 ou 10 créditos estará disponível na Universidade Aberta.
 
-O objetivo do projeto é implemenar uma aplicação em React e/ou Node, embora também seja possível implementar um aplicativo móvel em React Native.
+O objetivo do projeto é implementar uma aplicação em React e/ou Node, embora também seja possível implementar um aplicativo móvel em React Native.
 
 O número de créditos é baseado nas horas de trabalho realizadas. Um crédito equivale a aproximadamente 17,5 horas de trabalho. O trabalho é classificado como aprovado/reprovado.
 
