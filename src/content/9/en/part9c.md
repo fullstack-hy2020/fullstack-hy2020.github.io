@@ -1389,7 +1389,7 @@ If we now try to create a new diary entry with invalid or missing fields, we are
 
 ![postman showing 400 bad request with incorrect or missing visibility - awsesome](../../images/9/62new.png)
 
-The source code of the application can be found on [GitHub](https://github.com/FullStack-HY/flight-diary).
+The source code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/flight-diary).
 
 </div>
 

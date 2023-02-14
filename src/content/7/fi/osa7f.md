@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 13 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää myös osan toteuttamatta. Tehtävissä on melko suuressa roolissa [osassa 6](/osa6) käsiteltyjen edistyneempien tilanhallintamenetelmien (Redux, React Query ja context) soveltaminen.
+Kurssin seitsemännessä osassa on lukujen [React Router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 13 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää myös osan toteuttamatta. Tehtävissä on melko suuressa roolissa [osassa 6](/osa6) käsiteltyjen edistyneempien tilanhallintamenetelmien (Redux, React Query ja context) soveltaminen.
 
 Voit ottaa pohjaksi oman sovelluksesi sijaan myös mallivastauksen koodin.
 

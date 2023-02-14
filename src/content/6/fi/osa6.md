@@ -10,4 +10,7 @@ Olemme toistaiseksi sijoittaneet ohjelman tilan ja siitä huolehtivan logiikan s
 
 Tututustumme Reactin suoraan tukemaan Reduxin kevytversioon, eli Reactin kontekstiin ja useRedux-hookiin sekä palvelimen tilan hallintaa helpottavaan React Query -kirjastoon.
 
+<i>Osa päivitetty 1.2.2023</i>
+- <i>Uusi luku, aiheenaan React Query, useReducer ja React context korvasi Redux connect -luvun</i>
+
 </div>

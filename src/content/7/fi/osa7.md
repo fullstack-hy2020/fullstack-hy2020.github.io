@@ -11,4 +11,7 @@ Käymme myös katsauksen siitä miten voimme määritellä itse hook-funktiota.
 
 Kurssin seitsemännen osan teemoihin liittyvät myös useat yhteistyökumppaniemme asiantuntijoiden vierailuluennoista, jotka löydät <a href='https://www.youtube.com/playlist?list=PLumQiZ25uijis31zaRL7rhzLalSwLqUtm'><span style='text-decoration: underline;'>täältä</span></span></a>.
   
+<i>Osa päivitetty 1.2.2023</i>
+- <i>Tehtäviin 7.10-7.13 lisätty vaihtoehtoinen React queryä ja contextia hyödyntävä versio</i>
+
 </div>

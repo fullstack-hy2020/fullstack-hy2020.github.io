@@ -726,7 +726,7 @@ Sovelluksessa on  vielä pieni ongelma. Jos yritämme vaihtaa olemattomaan nimee
 
 ![](../../images/8/23ea.png)
 
-Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä tässä tilanteessa hyötyä.
+Koska kyseessä ei ole GraphQL:n kannalta virhetilanne, ei _onError_-virheenkäsittelijän rekisteröimisestä olisi tässä tilanteessa hyötyä.
 
 Voimme generoida virheilmoituksen _useMutation_-hookin toisena parametrina palauttaman mutaation tuloksen kertovan olion _result_ avulla.
 
