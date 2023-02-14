@@ -55,6 +55,12 @@
   ],
   "en": [
     {
+      "title": "What are the prerequisites of the course?",
+      "text": [
+        "See <a href='/en/part0/general_info#prerequisites'>here</a>."
+      ]
+    },
+    {
       "title": "How much does this course cost?",
       "text": [
         "The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS credits for free. See <a href='/en/part0/general_info#parts-and-completion'><here/a> for more."
@@ -75,7 +81,7 @@
     {
       "title": "When is the deadline for the exercises and the exam?",
       "text": [
-        "You can complete the course at your own pace and there are no deadlines for anything. Course has a maintainance 'break' in early March but it has not much an effect to anything, see <a href='/en/part0/general_info#continuing-the-course-at-year-2023'>this</a> for more details."
+        "You can complete the course at your own pace and there are no deadlines for anything. See <a href='/en/part0/general_info/#no-more-yearly-versions'>this</a> for more details."
       ]
     },
     {
@@ -223,7 +229,7 @@
     {
       "title": "练习与考试的截止日期是什么时候呢？",
       "text": [
-        "您可以按照自己的进度完成课程。 提交联系的截止日期但是2023年3月1日的23点59分59秒，如果你想要获得公开大学的学分，截止日期为2023年1月10日的23点59分59秒。 请记住，您必须在截止日期的前一天，即2023年1月9日报名参加考试。"
+        "您可以按照自己的进度完成课程。 提交练习的截止日期但是2023年3月1日的23点59分59秒，如果你想要获得公开大学的学分，截止日期为2023年1月10日的23点59分59秒。 请记住，您必须在截止日期的前一天，即2023年1月9日报名参加考试。"
       ]
     },
     {

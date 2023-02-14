@@ -180,14 +180,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
 Since our application breaks completely at this point, we render an empty <i>div</i> element instead of the <i>App</i> component.
 
-
 The state of the store gets printed to the console:
 
 ![devtools console showing notes array data](../../images/6/4e.png)
 
-
 As we can see from the output, the store has the exact shape we wanted it to!
-
 
 Let's take a closer look at how the combined reducer is created:
 
@@ -198,9 +195,7 @@ const reducer = combineReducers({
 })
 ```
 
-
 The state of the store defined by the reducer above is an object with two properties: <i>notes</i> and <i>filter</i>. The value of the <i>notes</i> property is defined by the <i>noteReducer</i>, which does not have to deal with the other properties of the state. Likewise, the <i>filter</i> property is managed by the <i>filterReducer</i>.
-
 
 Before we make more changes to the code, let's take a look at how different actions change the state of the store defined by the combined reducer. Let's add the following to the <i>index.js</i> file:
 

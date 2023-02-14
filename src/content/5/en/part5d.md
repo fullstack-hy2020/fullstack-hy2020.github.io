@@ -309,7 +309,7 @@ describe('Note app',  function() {
     cy.get('#password').type('salainen')  // highlight-line
     cy.get('#login-button').click()  // highlight-line
 
-    cy.contains(M'atti Luukkainen logged in') // highlight-line
+    cy.contains('Matti Luukkainen logged in') // highlight-line
   })
 })
 ```

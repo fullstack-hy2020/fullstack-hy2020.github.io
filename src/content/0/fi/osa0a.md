@@ -31,7 +31,7 @@ Materiaalissa osasta <i>n</i> osaan <i>n+1</i> eteneminen ei ole mielekästä en
 
 Oletuksena on, että teet osien 1-4 tehtävistä <i>ainakin ne</i>, joita ei ole merkattu tähdellä. Myös tähdellä merkatut tehtävät vaikuttavat arvosteluun, mutta niiden tekemättä jättäminen ei aiheuta liian suuria esteitä seuraavan osan (tähdellä merkkaamattomien) tehtävien tekemiseen. Osissa 5- ei tähtiä ole, sillä osien tehtävillä ei ole suurta riippuvuutta aiempiin osiin. 
 
-Etenemisnopeus kurssilla on vapaa. Maaliskuun ensimmäisestä päivästä alkaen kurssilla pidetään 2 viikon "päivitystauko", materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kurssin sisältöön voi tulla tauon aikana pieniä muutoksia.
+Etenemisnopeus kurssilla on vapaa.
 
 Tämän kurssin eri osiin jo tehtyjen palautusten ajankäyttöstatistiikan näet [tehtävien palautussovelluksesta](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
@@ -275,9 +275,17 @@ Ohjeet opintosuoritusotteen tilaamiseen:
 - Sähköisesti varmennettu opintosuoritusote toimitetaan sinulle sähköpostitse.
 - Toimittamalla virallisen opintosuoritusotteen omaan korkeakouluusi, saat opintopisteet rekisteröityä sinne. Huomaa että jokainen korkeakoulu päättää itse toisessa korkeakoulussa suoritettujen opintojen hyväksiluvusta tutkintoon.
 
-### Kurssin jatkaminen 2023
+### Ei enää vuosittaisia versioita
 
-Vuoden vaihtumisesta huolimatta kurssi jatkuu normaaliin tapaan. Kurssilla pidetään 1.3.-14.3. päivitystauko, jonka aikana kurssin sisältöön voi tulla pieniä muutoksia. Materiaali säilyy edelleen nähtävillä ja myös tehtäviä voi palauttaa tauon aikana. Kaikki jo tehdyt palautukset ovat käytettävissä myös päivitystauon jälkeen, joten voit jatkaa kurssia päivitystauosta piittaamatta.
+Kurssilla ei ole enää vuosittaisia versiota, kurssi on siis käynnissä koko ajan. Jokaista kurssin osaa päivitetään vähintään kerran vuodessa. Päivitykset ovat useimmiten pieniä, kirjastoversiot nostetaan ajan tasalle ja tekstiä parannellaan. Myös isompia päivityksiä tapahtuu välillä.
+
+Muutoksista huolimatta <i>kaikki jo tehdyt palautukset säilyvät voimassa</i>, eli voit jatkaa kurssia päivityksistä huolimatta normaaliin tapaan.
+
+Viimeaikaisia isompia muutoksia
+- Osa 2 (18.1.2023): Muutos tehtävien numeroinnissa, tehtävät 2.11-13. siirretty osan loppuun
+- Osa 6 (30.1.2023): Uusi luku, aiheenaan React Query, useReducer ja React context korvasi Redux connect -luvun
+- Osa 8 (5.2.2023): Backend muutettu käyttäämään Apollo Server -kirjaston versiota 4.0
+- Osa 9 (12.2.2023): Sisältöä tarkennettu, Patientor-esimerkkisovelluksen rakennetta yksinkertaistettu
 
 ### Aiemmin suoritetun kurssin täydentäminen
 

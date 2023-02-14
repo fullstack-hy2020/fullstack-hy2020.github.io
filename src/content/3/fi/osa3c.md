@@ -69,7 +69,7 @@ Jotta saisimme talletettua muistiinpanot pysyvästi, tarvitsemme tietokannan. Us
 
 Tärkein syy Mongon käytölle kurssilla on se, että Mongo on tietokantanoviiseille helpompikäyttöinen kuin relaatiotietokannat. Kurssin [osassa 13](https://fullstackopen.com/osa13) tutustutaan relaatiotietokantoja käyttävien Node-sovellusten tekemiseen.
 
-Mongon valinta tämän kurssin alkuun on siis tehty enimmäkseen pedagogisista perusteista. Itse susoittelen useimiin sovelluksiin lähtökohtaisesti relaatiotietokantaa. Eli suosittelel lämpimästi tekemään myös tämän kurssin [Osan 13](https://fullstackopen.com/osa13). 
+Mongon valinta tämän kurssin alkuun on siis tehty enimmäkseen pedagogisista perusteista. Itse suosittelen useimpiin sovelluksiin lähtökohtaisesti relaatiotietokantaa. Eli suosittelen lämpimästi tekemään myös tämän kurssin [Osan 13](https://fullstackopen.com/osa13). 
 
 Dokumenttitietokannat poikkeavat jossain määrin relaatiotietokannoista niin datan organisointitapansa kuin kyselykielensäkin suhteen. Dokumenttitietokantojen ajatellaan kuuluvan sateenvarjotermin [NoSQL](https://en.wikipedia.org/wiki/NoSQL) alle. Lyhyt johdanto dokumenttitietokantoihin on [täällä](https://github.com/fullstack-hy2020/misc/blob/master/dokumenttitietokannat.MD).
 
