@@ -201,7 +201,12 @@ This was the last exercise in this section. It's time to push your code to GitHu
 ### Debugging
   
 When our application doesn't work as intended, we should immediately start <i>debugging</i> it. In practice, this means that we'll need to reproduce the erroneous behavior and monitor the code execution to find out which part of the code behaves incorrectly. During the course, we have already done a bunch of debugging by logging messages, inspecting network traffic, and using specific development tools, such as <i>React Development Tools</i>. In general, debugging isn't that different in React Native, we'll just need the right tools for the job.
-  
+
+The good old console.log messages appear in the Expo command line:
+
+![GraphQL structure](../../images/10/27new.png)
+
+That might actually be enough in most cases, but sometimes we need more.
 [React Native Debugger](https://docs.expo.io/workflow/debugging/#react-native-debugger) is a tool that offers a similar set of debugging features as the browser's developer tools. Let's get started by installing React Native Debugger with the help of the [installation instructions](https://github.com/jhen0409/react-native-debugger#installation). If you are unsure which installation method to choose, downloading a pre-built binary from the [release page](https://github.com/jhen0409/react-native-debugger/releases) is perhaps the easiest option. On the release page, find the latest release which supports React Native version 0.69 and download the binary suitable for your operating system (for example <i>.dmg</i> file for macOS and <i>.exe</i> file for Windows) under the "Assets" section. Once the installation is complete, start the React Native Debugger, open a new debugger window (shortcuts: <em>Command+T</em> on macOS, <em>Ctrl+T</em> on Linux/Windows) and set the React Native packager port to <em>19000</em>.
 
 **NB:** If the debugger can't connect to the application and you see the error message "Another debugger is already connected", make sure that <i><http://localhost:19000/debugger-ui></i> is not open in some browser tab.
