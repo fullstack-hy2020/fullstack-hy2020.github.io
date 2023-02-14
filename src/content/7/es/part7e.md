@@ -331,7 +331,7 @@ Puede verificar qué tan actualizadas están sus dependencias usando el comando
 npm outdated --depth 0
 ```
 
-La respuesta del modelo del año pasado para los ejercicios de la parte 4 ya tiene bastantes dependencias desactualizadas:
+La respuesta del modelo del año pasado para los ejercicios de la [parte 4](/es/part4) ya tiene bastantes dependencias desactualizadas:
 
 ![](../../images/7/33x.png)
 
