@@ -335,73 +335,79 @@ La respuesta del modelo del año pasado para los ejercicios de la [parte 4](/es/
 
 ![](../../images/7/33x.png)
 
-Las dependencias se pueden actualizar actualizando el archivo <i>package.json</i> y ejecutando el comando _npm install_. Sin embargo, las versiones antiguas de las dependencias no son necesariamente un riesgo de seguridad.
+Las dependencias se pueden actualizar actualizando el archivo <i>package.json</i> y ejecutando el comando _npm-check-updates.
+
+```bash
+npm install -g npm-check-updates
+```
+
+Usando esta herramienta, la actualización de las dependencias se verifica de la siguiente manera:
+
+```bash
+$ npm-check-updates
+Checking ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run ncu -u to upgrade package.json
+```
+
+El archivo <i>package.json</i> se actualiza ejecutando el comando _ncu -u_.
+
+```bash
+$ ncu -u
+Upgrading ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run npm install to install new versions.
+```
+
+Ahora es el momento de actualizar las dependencias ejecutando el comando _npm install_. Sin embargo, las versiones antiguas de las dependencias no necesariamente son un riesgo de seguridad.
 
 El comando npm [audit](https://docs.npmjs.com/cli/audit) se puede utilizar para verificar la seguridad de las dependencias. Compara los números de versión de las dependencias de su aplicación con una lista de los números de versión de las dependencias que contienen amenazas de seguridad conocidas en una base de datos de errores centralizada.
 
-Ejecutar _npm audit_ en un ejercicio de la parte 4 del curso del año pasado imprime una larga lista de quejas y soluciones sugeridas. A continuación se muestra una parte del informe:
+Below is a part of the report:
+Ejecutando _npm audit_ en el mismo proyecto imprime una larga lista de quejas y sugerencias de solución. A continuación se muestra una parte del informe:
 
 ```js
-$ bloglist-backend npm audit
+$ patientor npm audit
 
-                       === npm audit security report ===
+... many lines removed ...
 
-# Run  npm install --save-dev jest@25.1.0  to resolve 62 vulnerabilities
-SEMVER WARNING: Recommended action is a potentially breaking change
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-config > babel-jest >                 │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+url-parse  <1.5.2
+Severity: moderate
+Open redirect in url-parse - https://github.com/advisories/GHSA-hh27-ffr2-f2jc
+fix available via `npm audit fix`
+node_modules/url-parse
 
+ws  6.0.0 - 6.2.1 || 7.0.0 - 7.4.5
+Severity: moderate
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+fix available via `npm audit fix`
+node_modules/webpack-dev-server/node_modules/ws
+node_modules/ws
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-config > babel-jest >   │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+120 vulnerabilities (102 moderate, 16 high, 2 critical)
 
+To address issues that do not require attention, run:
+  npm audit fix
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-runtime > jest-config > │
-│               │ babel-jest > babel-plugin-istanbul > test-exclude >          │
-│               │ micromatch > braces                                          │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
-
-...
-
-
-found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 scanned packages
-  run `npm audit fix` to fix 354 of them.
-  62 vulnerabilities require semver-major dependency updates.
+To address all issues (including breaking changes), run:
+  npm audit fix --force
 ```
 
-Después de solo un año, el código está lleno de pequeñas amenazas a la seguridad. Afortunadamente, solo hay una amenaza crítica. Vamos a correr _npm audit fix_ como sugiere el informe:
+Después de solo un año, el código está lleno de pequeñas amenazas de seguridad. Afortunadamente, solo hay 2 amenazas críticas. Ejecutemos _npm audit fix_ como sugiere el informe:
 
 ```js
-$ bloglist-backend npm audit fix
+$ npm audit fix
 
 + mongoose@5.9.1
 added 19 packages from 8 contributors, removed 8 packages and updated 15 packages in 7.325s
@@ -410,33 +416,29 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
   (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
 ```
 
-Sigue habiendo 62 amenazas porque, de forma predeterminada, _audit fix_ no actualiza las dependencias si su número de versión <i>principal</i> ha aumentado. La actualización de estas dependencias podría provocar la avería de toda la aplicación. Las amenazas restantes son causadas por la dependencia de prueba jest. Nuestra aplicación tiene la versión 23.6.0 cuando la versión segura es la 25.0.1. Como jest es una dependencia del desarrollo, la amenaza en realidad no existe, pero actualicémosla solo para estar seguros:
+62 amenazas permanecen porque, por defecto, _audit fix_ no actualiza las dependencias si su número de versión <i>major</i> ha aumentado. Actualizar estas dependencias podría conducir al colapso de toda la aplicación.
+
+El código fuente del error crítico es la librería [immer](https://github.com/immerjs/immer)
 
 ```js
-npm install --save-dev jest@25.1.0 
+immer  <9.0.6
+Severity: critical
+Prototype Pollution in immer - https://github.com/advisories/GHSA-33f9-j839-rf8h
+fix available via `npm audit fix --force`
+Will install react-scripts@5.0.0, which is a breaking change
 ```
 
-Después de la actualización, la situación se ve bien
-
-```js
- $ blogs-backend npm audit
-
-                       === npm audit security report ===
-
-found 0 vulnerabilities
- in 1204443 scanned packages
-```                                                                    
+Ejecutando _npm audit fix --force_ actualizaría la versión de la librería, pero también actualizaría la librería _react-scripts_ y eso podría potencialmente colapsar el entorno de desarrollo. Así que dejaremos las actualizaciones de librerías para más tarde ...
 
 Una de las amenazas mencionadas en la lista de OWASP es <i>Broken Authentication</i> y <i>Broken Access Control</i> relacionado. La autenticación basada en tokens que hemos estado usando es bastante sólida, si la aplicación se usa en el protocolo HTTPS de cifrado de tráfico. Al implementar el control de acceso, por ejemplo, se debe recordar no solo verificar la identidad de un usuario en el navegador, sino también en el servidor. La mala seguridad sería evitar que se tomen algunas acciones solo ocultando las opciones de ejecución en el código del navegador.
 
 En MDN de Mozilla hay una muy buena [guía de seguridad de sitios web](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), que trae a colación este tema tan importante:
 
-
 ![](../../images/7/34.png)
 
 La documentación de Express incluye una sección sobre seguridad: [Prácticas recomendadas de producción: seguridad](https://expressjs.com/en/advanced/best-practice-security.html), que vale la pena leer. También se recomienda agregar una biblioteca llamada [Helmet](https://helmetjs.github.io/) al backend. Incluye un conjunto de middlewares que eliminan algunas vulnerabilidades de seguridad en aplicaciones Express.
 
-También vale la pena usar el [plugin de seguridad](https://github.com/nodesecurity/eslint-plugin-security) de ESlint .
+También vale la pena usar el [plugin de seguridad](https://github.com/nodesecurity/eslint-plugin-security) de ESlint.
 
 ### Tendencias actuales
 
