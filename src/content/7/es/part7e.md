@@ -260,15 +260,15 @@ Cuando el estado de la aplicación cambia, los componentes definen un <i>nuevo v
 
 ### El papel de React en las aplicaciones
 
-Es posible que en el material no hayamos puesto suficiente énfasis en el hecho de que React es principalmente una biblioteca para administrar la creación de vistas para una aplicación. Si nos fijamos en el patrón de [modelo vista controlador](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) tradicional, entonces el dominio de React sería <i>Vista</i>. React tiene un área de aplicación más estrecha que, por ejemplo , [Angular](https://angular.io/), que es un framework de Frontend MVC que lo abarca todo. Por lo tanto, React no es un <i>framework</i>, sino <i>library</i>.
+Es posible que en el material no hayamos puesto suficiente énfasis en el hecho de que React es principalmente una librería para administrar la creación de vistas para una aplicación. Si nos fijamos en el patrón de [modelo vista controlador](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) tradicional, entonces el dominio de React sería <i>Vista</i>. React tiene un área de aplicación más estrecha que, por ejemplo , [Angular](https://angular.io/), que es un framework de Frontend MVC que lo abarca todo. Por lo tanto, React no es un <i>framework</i>, sino <i>library</i>.
 
 En aplicaciones pequeñas, los datos manejados por la aplicación se almacenan en el estado de los componentes de React, por lo que en este escenario el estado de los componentes se puede considerar como <i>modelos</i> de una arquitectura MVC.
 
 Sin embargo, la arquitectura MVC no se suele mencionar cuando se habla de aplicaciones React. Además, si usamos Redux, las aplicaciones siguen la arquitectura [Flux](https://facebook.github.io/flux/docs/in-depth-overview) y el papel de React se centra aún más en la creación de vistas. La lógica empresarial de la aplicación se maneja utilizando los creadores de acciones y estados de Redux. Si usamos [redux thunk](/es/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) que vimos en la parte 6, entonces la lógica empresarial puede separarse casi por completo del código de React.
 
-Debido a que tanto React como [Flux](https://facebook.github.io/flux/docs/in-depth-overview) se crearon en Facebook, se podría decir que usar React solo como una biblioteca de UI es el caso de uso previsto. Seguir la arquitectura Flux agrega algunos gastos generales a la aplicación, y si estamos hablando de una pequeña aplicación o prototipo, podría ser una buena idea usar React "incorrectamente", ya que la [ingeniería excesiva](https://en.wikipedia.org/wiki/Overengineering) rara vez produce un resultado óptimo.
+Debido a que tanto React como [Flux](https://facebook.github.io/flux/docs/in-depth-overview) se crearon en Facebook, se podría decir que usar React solo como una librería de UI es el caso de uso previsto. Seguir la arquitectura Flux agrega algunos gastos generales a la aplicación, y si estamos hablando de una pequeña aplicación o prototipo, podría ser una buena idea usar React "incorrectamente", ya que la [ingeniería excesiva](https://en.wikipedia.org/wiki/Overengineering) rara vez produce un resultado óptimo.
 
-El ultimo capítulo de la [parte 6](/es/part6/react_query_use_reducer_y_el_contexto) cubre las nuevas tendencias de gestión de estado en React. Las funciones de hooks de React <i>useReducer</i> y <i>useContext</i> proporcionan una versión liviana de Redux. <i>React Query</i>, por otro lado, es una biblioteca que resuelve muchos de los problemas asociados con el manejo del estado en el servidor, eliminando la necesidad de que una aplicación React almacene los datos recuperados del servidor directamente en el estado del frontend.
+El ultimo capítulo de la [parte 6](/es/part6/react_query_use_reducer_y_el_contexto) cubre las nuevas tendencias de gestión de estado en React. Las funciones de hooks de React <i>useReducer</i> y <i>useContext</i> proporcionan una versión liviana de Redux. <i>React Query</i>, por otro lado, es una librería que resuelve muchos de los problemas asociados con el manejo del estado en el servidor, eliminando la necesidad de que una aplicación React almacene los datos recuperados del servidor directamente en el estado del frontend.
 
 ### Seguridad en aplicaciones React/node
 
@@ -436,7 +436,7 @@ En MDN de Mozilla hay una muy buena [guía de seguridad de sitios web](https://d
 
 ![](../../images/7/34.png)
 
-La documentación de Express incluye una sección sobre seguridad: [Prácticas recomendadas de producción: seguridad](https://expressjs.com/en/advanced/best-practice-security.html), que vale la pena leer. También se recomienda agregar una biblioteca llamada [Helmet](https://helmetjs.github.io/) al backend. Incluye un conjunto de middlewares que eliminan algunas vulnerabilidades de seguridad en aplicaciones Express.
+La documentación de Express incluye una sección sobre seguridad: [Prácticas recomendadas de producción: seguridad](https://expressjs.com/en/advanced/best-practice-security.html), que vale la pena leer. También se recomienda agregar una librería llamada [Helmet](https://helmetjs.github.io/) al backend. Incluye un conjunto de middlewares que eliminan algunas vulnerabilidades de seguridad en aplicaciones Express.
 
 También vale la pena usar el [plugin de seguridad](https://github.com/nodesecurity/eslint-plugin-security) de ESlint.
 
@@ -462,7 +462,7 @@ Junto con la renderización del lado del servidor se ha hablado de las llamadas 
 
 React y Node proporcionan una opción deseable para implementar una aplicación isomorfa como código universal.
 
-Escribir código universal directamente usando React todavía es bastante engorroso. Últimamente, una biblioteca llamada [Next.js](https://github.com/vercel/next.js), que se implementa sobre React, ha atraído mucha atención y es una buena opción para hacer aplicaciones universales.
+Escribir código universal directamente usando React todavía es bastante engorroso. Últimamente, una librería llamada [Next.js](https://github.com/vercel/next.js), que se implementa sobre React, ha atraído mucha atención y es una buena opción para hacer aplicaciones universales.
 
 #### Aplicaciones web progresivas
 
@@ -520,23 +520,23 @@ Por ejemplo, utilizando la [puerta de enlace API](https://aws.amazon.com/api-gat
 
 Sin servidor no se trata de que no haya un servidor en las aplicaciones, sino de cómo se define el servidor. El desarrollador de software puede cambiar sus esfuerzos de programación a un mayor nivel de abstracción, ya que ya no es necesario definir mediante programación el enrutamiento de solicitudes HTTP, relaciones de bases de datos, etc., ya que la infraestructura de la nube proporciona todo esto. Las funciones en la nube también se prestan para crear un buen sistema de escalado, por ejemplo, Lambda de Amazon puede ejecutar una gran cantidad de funciones en la nube por segundo. Todo esto ocurre automáticamente a través de la infraestructura y no es necesario iniciar nuevos servidores, etc.
 
-### Bibliotecas útiles y enlaces interesantes
+### Librerías útiles y enlaces interesantes
 
-a comunidad de desarrolladores de JavaScript ha producido una gran variedad de bibliotecas útiles. Si está desarrollando algo más sustancial, vale la pena comprobar si las soluciones existentes ya están disponibles. Un buen lugar para encontrar bibliotecas es https://applibslist.xyz/ . A continuación se enumeran algunas bibliotecas recomendadas por partes confiables.
+a comunidad de desarrolladores de JavaScript ha producido una gran variedad de librerías útiles. Si está desarrollando algo más sustancial, vale la pena comprobar si las soluciones existentes ya están disponibles. A continuación se enumeran algunas librerías recomendadas por partes confiables.
 
-Si su aplicación tiene que manejar datos complicados, [lodash](https://www.npmjs.com/package/lodash), que recomendamos en la [parte 4](/es/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), es una buena biblioteca para usar. Si prefiere un estilo de programación funcional, podría considerar usar [ramda](https://ramdajs.com/).
+Si su aplicación tiene que manejar datos complicados, [lodash](https://www.npmjs.com/package/lodash), que recomendamos en la [parte 4](/es/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), es una buena librería para usar. Si prefiere un estilo de programación funcional, podría considerar usar [ramda](https://ramdajs.com/).
 
 Si maneja horas y fechas, [date-fns](https://github.com/date-fns/date-fns) ofrece buenas herramientas para eso.
 
 [Formik](https://www.npmjs.com/package/formik) y [redux-form](https://redux-form.com/8.3.0/) se pueden utilizar para manipular formularios más fácilmente. Si su aplicación muestra gráficos, hay varias opciones para elegir. Se recomiendan tanto [recharts](http://recharts.org/en-US/) como [highcharts](https://github.com/highcharts/highcharts-react) .
 
-La biblioteca [immutable.js](https://github.com/facebook/immutable-js/) mantenida por Facebook proporciona, como su nombre indica, implementaciones inmutables de algunas estructuras de datos. La biblioteca podría ser útil cuando se usa Redux, ya que como recordamos de la [parte 6](/es/part6/flux_architecture_and_redux#pure-functions-immutable): los reducers deben ser funciones puras, lo que significa que no deben modificar el estado del store, sino que deben reemplazarlo por uno nuevo cuando se produce un cambio. Durante el año pasado, [Immer](https://github.com/mweststrate/immer) se hizo cargo de parte de la popularidad de Immutable.js, que proporciona una funcionalidad similar pero en un paquete algo más sencillo.
+La librería [immutable.js](https://github.com/facebook/immutable-js/) mantenida por Facebook proporciona, como su nombre indica, implementaciones inmutables de algunas estructuras de datos. La librería podría ser útil cuando se usa Redux, ya que como recordamos de la [parte 6](/es/part6/flux_architecture_and_redux#pure-functions-immutable): los reducers deben ser funciones puras, lo que significa que no deben modificar el estado del store, sino que deben reemplazarlo por uno nuevo cuando se produce un cambio. Durante el año pasado, [Immer](https://github.com/mweststrate/immer) se hizo cargo de parte de la popularidad de Immutable.js, que proporciona una funcionalidad similar pero en un paquete algo más sencillo.
 
 [Redux-saga](https://redux-saga.js.org/) proporciona una forma alternativa de hacer las acciones asincrónicas para [redux thunk](/es/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) que vimos en la parte 6. Algunos abrazan el hype y les gusta. Yo no.
 
-Para las aplicaciones de una sola página, la recopilación de datos analíticos sobre la interacción entre los usuarios y la página es [más desafiante](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) que para las aplicaciones web tradicionales donde se carga toda la página. La biblioteca [React Google Analytics](https://github.com/react-ga/react-ga) ofrece una solución.
+Para las aplicaciones de una sola página, la recopilación de datos analíticos sobre la interacción entre los usuarios y la página es [más desafiante](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) que para las aplicaciones web tradicionales donde se carga toda la página. La librería [React Google Analytics](https://github.com/react-ga/react-ga) ofrece una solución.
 
-Puede aprovechar su conocimiento de React al desarrollar aplicaciones móviles utilizando la extremadamente popular biblioteca [React Native](https://facebook.github.io/react-native/) de Facebook.
+Puede aprovechar su conocimiento de React al desarrollar aplicaciones móviles utilizando la extremadamente popular librería [React Native](https://facebook.github.io/react-native/) de Facebook. la cual es el tema de la [parte 10](/es/part10) del curso.
 
 En lo que respecta a las herramientas utilizadas para la gestión y empaquetamiento de proyectos de JavaScript, la comunidad ha sido muy voluble. Las mejores prácticas han cambiado rápidamente (los años son aproximaciones, nadie recuerda eso en el pasado):
 
@@ -546,12 +546,14 @@ En lo que respecta a las herramientas utilizadas para la gestión y empaquetamie
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-Los hipsters parecen haber perdido su interés en el desarrollo de herramientas después de que webpack comenzara a dominar los mercados. Hace unos años, [Parcel](https://parceljs.org) comenzó a hacer rondas de marketing en sí mismo tan simple (que Webpack no lo es) y más rápido que Webpack. Sin embargo, después de un comienzo prometedor, Parcel no ha cobrado fuerza y ​​parece que no será el final de Webpack.
+Los hipsters parecen haber perdido su interés en el desarrollo de herramientas después de que webpack comenzara a dominar los mercados. Hace unos años, [Parcel](https://parceljs.org) comenzó a hacer rondas de marketing en sí mismo como simple (que Webpack no lo es) y más rápido que Webpack. Sin embargo, después de un comienzo prometedor, Parcel no ha cobrado fuerza y ​​parece que no será el final de Webpack.
+
+Otra digna de mención es la biblioteca [Rome](https://rome.tools/), que aspira a ser una cadena de herramientas integral para unificar el linter, el compilador, el empaquetador y más. Actualmente está en desarrollo intensivo desde el primer commit a principios de este año el 27 de febrero, pero la perspectiva parece prometedora.
 
 El sitio <https://reactpatterns.com/> proporciona una lista concisa de las mejores prácticas para React, algunas de las cuales ya están familiarizadas con este curso. Otra lista similar es [react bits](https://vasanthk.gitbooks.io/react-bits/).
 
-[Reactiflux](https://www.reactiflux.com/) es una gran comunidad de chat de desarrolladores de React en Discord. Podría ser un posible lugar para obtener apoyo una vez finalizado el curso. Por ejemplo, numerosas bibliotecas tienen sus propios canales.
+[Reactiflux](https://www.reactiflux.com/) es una gran comunidad de chat de desarrolladores de React en Discord. Podría ser un posible lugar para obtener apoyo una vez finalizado el curso. Por ejemplo, numerosas librerías tienen sus propios canales.
 
-Si conoce algunos enlaces o bibliotecas recomendables, ¡haga un pull request!
+Si conoce algunos enlaces o librerías recomendables, ¡haga un pull request!
 
 </div>
