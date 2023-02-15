@@ -151,7 +151,7 @@ The main concepts of the React Native Testing Library are the [queries](https://
 
 ```javascript
 import { Text, View } from 'react-native';
-import { render } from '@testing-library/react-native';
+import { render, screen } from '@testing-library/react-native';
 
 const Greeting = ({ name }) => {
   return (
@@ -163,25 +163,31 @@ const Greeting = ({ name }) => {
 
 describe('Greeting', () => {
   it('renders a greeting message based on the name prop', () => {
-    const { debug, getByText } = render(<Greeting name="Kalle" />);
+    render(<Greeting name="Kalle" />);
 
-    debug();
+    screen.debug();
 
-    expect(getByText('Hello Kalle!')).toBeDefined();
+    expect(screen.getByText('Hello Kalle!')).toBeDefined();
   });
 });
 ```
 
+Tests use the object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) to do the queries to the rendered component.
+
+We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. The Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined) is used to to ensure that the query has found the element.
+
 React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
 
-The <em>render</em> function returns the queries and additional helpers, such as the <em>debug</em> function. The [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) function prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like. We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The <em>toHaveTextContent</em> matcher is used to assert that the node's textual content is correct. The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.
+The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) has also a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like. 
+
+For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.
 
 The second very important React Native Testing Library concept is firing events. We can fire an event in a provided node by using the [fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent) object's methods. This is useful for example typing text into a text field or pressing a button. Here is an example of how to test submitting a simple form:
 
 ```javascript
 import { useState } from 'react';
 import { Text, TextInput, Pressable, View } from 'react-native';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEven, screent } from '@testing-library/react-native';
 
 const Form = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
@@ -219,11 +225,11 @@ const Form = ({ onSubmit }) => {
 describe('Form', () => {
   it('calls function provided by onSubmit prop after pressing the submit button', () => {
     const onSubmit = jest.fn();
-    const { getByPlaceholderText, getByText } = render(<Form onSubmit={onSubmit} />);
+    render(<Form onSubmit={onSubmit} />);
 
-    fireEvent.changeText(getByPlaceholderText('Username'), 'kalle');
-    fireEvent.changeText(getByPlaceholderText('Password'), 'password');
-    fireEvent.press(getByText('Submit'));
+    fireEvent.changeText(screen.getByPlaceholderText('Username'), 'kalle');
+    fireEvent.changeText(screen.getByPlaceholderText('Password'), 'password');
+    fireEvent.press(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
 
