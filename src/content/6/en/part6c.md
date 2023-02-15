@@ -597,7 +597,6 @@ Redux Toolkit offers a multitude of tools to simplify asynchronous state managem
 
 <div class="tasks">
 
-
 ### Exercises 6.16.-6.19.
 
 #### 6.16 Anecdotes and the backend, step3
