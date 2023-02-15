@@ -86,7 +86,7 @@ const App = () => {
 
 Agora, o componente tem apenas um único pedaço de estado, e os gerenciadores de eventos precisam cuidar da mudança do <i>estado inteiro da aplicação</i>.
 
-O formato do gerenciador de eventos parece confuso aqui. Quando o botão da esquerda é clicado, a seguinte função é chamada:
+O formato do gerenciador de evento parece confuso aqui. Quando o botão da esquerda é clicado, a seguinte função é chamada:
 ```js
 const gerCliqueEsquerda = () => {
   const novosCliques = { 
@@ -507,11 +507,11 @@ const App = () => {
 
 Queremos que o clique do botão reinicialize o estado armazenado na variável _valor_.
 
-Para fazer com que o botão reaja a um evento de clique, precisamos adicionar um <i>gerenciador de eventos</i> a ele.
+Para fazer com que o botão reaja a um evento de clique, precisamos adicionar um <i>gerenciador de evento</i> a ele.
 
-Os gerenciadores de eventos devem sempre ser uma função ou uma referência a uma função. O botão não funcionará se o gerenciador de eventos for definido como uma variável de outro tipo.
+Os gerenciadores de eventos devem sempre ser uma função ou uma referência a uma função. O botão não funcionará se o gerenciador de evento for definido como uma variável de outro tipo.
 
-Se definíssemos o gerenciador de eventos como uma string...
+Se definíssemos o gerenciador de evento como uma string...
 
 ```js
 <button onClick="lixo...">botão</button>
@@ -533,7 +533,7 @@ O seguinte também não funcionaria:
 <button onClick={valor + 1}>botão</button>
 ```
 
-Tentamos definir o gerenciador de eventos como _valor + 1_, o que simplesmente retorna o resultado da operação. React nos avisará sobre isso no console:
+Tentamos definir o gerenciador de evento como _valor + 1_, o que simplesmente retorna o resultado da operação. React nos avisará sobre isso no console:
 
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `number` type.
@@ -545,7 +545,7 @@ Este também não funcionaria:
 <button onClick={valor = 0}>botão</button>
 ```
 
-O gerenciador de eventos não é uma função, mas uma **atribuição de variável**, e React, mais uma vez, emitirá um aviso no console. Esta tentativa também é falha no sentido de que nunca devemos mudar diretamente o estado em React.
+O gerenciador de evento não é uma função, mas uma **atribuição de variável**, e React, mais uma vez, emitirá um aviso no console. Esta tentativa também é falha no sentido de que nunca devemos mudar diretamente o estado em React.
 
 Vejamos o próximo exemplo:
 
@@ -555,9 +555,9 @@ Vejamos o próximo exemplo:
 </button>
 ```
 
-A mensagem é impressa no console assim que o componente é renderizado, mas nada acontece quando clicamos no botão. Por que não funciona mesmo quando nosso gerenciador de eventos contém a função _console.log_?
+A mensagem é impressa no console assim que o componente é renderizado, mas nada acontece quando clicamos no botão. Por que não funciona mesmo quando nosso gerenciador de evento contém a função _console.log_?
 
-O problema aqui é que nosso gerenciador de eventos é definido como uma <i>chamada de função</i>, o que significa que o gerenciador de eventos é atribuído ao valor retornado da função, que no caso de _console.log_ é <i>undefined</i> (indefinido).
+O problema aqui é que nosso gerenciador de evento é definido como uma <i>chamada de função</i>, o que significa que o gerenciador de evento é atribuído ao valor retornado da função, que no caso de _console.log_ é <i>undefined</i> (indefinido).
 
 A função _console.log_ é chamada quando o componente é renderizado e, por esse motivo, é impresso uma vez no console.
 
@@ -566,7 +566,7 @@ A tentativa a seguir também não funciona:
 <button onClick={setValue(0)}>botão</button>
 ```
 
-Novamente, tentamos definir uma chamada de função como o gerenciador de eventos. Isso não funciona. Essa tentativa específica também causa outro problema. Quando o componente é renderizado, a função _setValue(0)_ é executada, o que por sua vez faz com que o componente seja renderizado novamente. A re-renderização, por conseguinte, chama _setValue(0)_ novamente, resultando em uma recursão infinita.
+Novamente, tentamos definir uma chamada de função como o gerenciador de evento. Isso não funciona. Essa tentativa específica também causa outro problema. Quando o componente é renderizado, a função _setValue(0)_ é executada, o que por sua vez faz com que o componente seja renderizado novamente. A re-renderização, por conseguinte, chama _setValue(0)_ novamente, resultando em uma recursão infinita.
 
 A execução de uma chamada de função específica quando o botão é clicado pode ser realizada da seguinte maneira:
 
@@ -576,7 +576,7 @@ A execução de uma chamada de função específica quando o botão é clicado p
 </button>
 ```
 
-Agora, o gerenciador de eventos é uma função definida com a sintaxe de função de seta _() => console.log('clicou no botão')_. Quando o componente é renderizado, nenhuma função é chamada e apenas a referência à função de seta é definida como o gerenciador de eventos. A chamada da função ocorre apenas quando o botão é clicado.
+Agora, o gerenciador de evento é uma função definida com a sintaxe de função de seta _() => console.log('clicou no botão')_. Quando o componente é renderizado, nenhuma função é chamada e apenas a referência à função de seta é definida como o gerenciador de evento. A chamada da função ocorre apenas quando o botão é clicado.
 
 Podemos implementar a reinicialização do estado em nossa aplicação com essa mesma técnica:
 
@@ -584,7 +584,7 @@ Podemos implementar a reinicialização do estado em nossa aplicação com essa 
 <button onClick={() => setValue(0)}>botão</button>
 ```
 
-O gerenciador de eventos agora é a função _() => setValue(0)_.
+O gerenciador de evento agora é a função _() => setValue(0)_.
 
 Definir gerenciadores de eventos diretamente no atributo do botão nem sempre é a melhor opção a se aplicar.
 
@@ -634,7 +634,7 @@ const Aplicacao = () => {
 
 ### Uma função que retorna outra função
 
-Outra maneira de definir um gerenciador de eventos é usar uma <i>função que retorna outra função</i>.
+Outra maneira de definir um gerenciador de evento é usar uma <i>função que retorna outra função</i>.
 
 Provavelmente, você não precisará usar funções que retornam funções em nenhum dos exercícios deste curso. Se o tópico parecer confuso demais, você pode pular esta seção por enquanto e retornar a ela mais tarde.
 
@@ -663,13 +663,13 @@ const App = () => {
 
 O código funciona corretamente, apesar de parecer complicado. 
 
-O gerenciador de eventos agora está definido como uma chamada de função:
+O gerenciador de evento agora está definido como uma chamada de função:
 
 ```js
 <button onClick={ola()}>botão</button>
 ```
 
-Anteriormente, afirmamos que um gerenciador de eventos não pode ser uma chamada de função e que precisa ser ou uma função ou uma referência a uma função. Então, por que uma chamada de função funciona neste caso?
+Anteriormente, afirmamos que um gerenciador de evento não pode ser uma chamada de função e que precisa ser ou uma função ou uma referência a uma função. Então, por que uma chamada de função funciona neste caso?
 
 Quando o componente é renderizado, a seguinte função é executada:
 
@@ -697,7 +697,7 @@ Ele atribui o valor de retorno de _ola()_ ao atributo onClick. Essencialmente, a
 </button>
 ```
 
-Como a função _ola_ retorna uma função, o gerenciador de eventos passa, agora, a ser uma função.
+Como a função _ola_ retorna uma função, o gerenciador de evento passa, agora, a ser uma função.
 
 Qual é o objetivo deste conceito?
 
@@ -738,7 +738,7 @@ O primeiro botão é definido como:
 <button onClick={hello('mundo')}>botão</button>
 ```
 
-O gerenciador de eventos é criado <i>executando</i> a chamada da função _ola('mundo')_. A chamada da função retorna a função:
+O gerenciador de evento é criado <i>executando</i> a chamada da função _ola('mundo')_. A chamada da função retorna a função:
 
 ```js
 () => {
@@ -752,7 +752,7 @@ O segundo botão é definido como:
 <button onClick={hello('react')}>botão</button>
 ```
 
-A chamada da função _ola('react')_ que cria o gerenciador de eventos retorna:
+A chamada da função _ola('react')_ que cria o gerenciador de evento retorna:
 
 ```js
 () => {
@@ -837,7 +837,7 @@ Quando o componente é renderizado, é criado o botão <i>mil</i>:
 <button onClick={defAoValor(1000)}>mil</button>
 ```
 
-O gerenciador de eventos é definido como o valor retornado de _defAoValor(1000)_, que é a seguinte função:
+O gerenciador de evento é definido como o valor retornado de _defAoValor(1000)_, que é a seguinte função:
 
 ```js
 () => {
@@ -852,7 +852,7 @@ O botão de incremento é declarado da seguinte forma:
 <button onClick={defAoValor(valor + 1)}>incrementar</button>
 ```
 
-O gerenciador de eventos é criado pela chamada da função _defAoValor(valor + 1)_, que recebe como parâmetro o valor atual da variável de estado _valor_ incrementado em 1 (um). Se o valor de _valor_ fosse 10, então o gerenciador de eventos criado seria a seguinte função:
+O gerenciador de evento é criado pela chamada da função _defAoValor(valor + 1)_, que recebe como parâmetro o valor atual da variável de estado _valor_ incrementado em 1 (um). Se o valor de _valor_ fosse 10, então o gerenciador de evento criado seria a seguinte função:
 
 ```js
 () => {
@@ -889,7 +889,7 @@ const App = () => {
 }
 ```
 
-Agora, podemos definir o gerenciador de eventos como uma função que chama a função _defAoValor_ com um parâmetro apropriado. O gerenciador de eventos utilizado para redefinir o estado da aplicação seria:
+Agora, podemos definir o gerenciador de evento como uma função que chama a função _defAoValor_ com um parâmetro apropriado. O gerenciador de evento utilizado para redefinir o estado da aplicação seria:
 
 ```js
 <button onClick={() => defAoValor(0)}>zerar</button>
@@ -909,7 +909,7 @@ const Botao = (props) => (
 )
 ```
 
-A componente obtém a função de gerenciador de eventos da propriedade _gerClique_, e o texto do botão da propriedade _texto_. Vamos usar o novo componente:
+A componente obtém a função de gerenciador de evento da propriedade _gerClique_, e o texto do botão da propriedade _texto_. Vamos usar o novo componente:
 
 ```js
 const App = (props) => {
@@ -1011,10 +1011,10 @@ Estes links talvez possam lhe ser úteis:
 ### Juramento do Programador Web
 
 Programar é difícil, e é por isso que eu usarei todos os meios possíveis para ser mais fácil:
-- Manterei meu Console do navegador aberto o tempo todo;
-- Vou progredir aos poucos, passo a passo;
-- Escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
-- Se meu código não funcionar, não escreverei mais nenhuma linha de código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
+- Eu manterei meu Console do navegador aberto o tempo todo;
+- Eu vou progredir aos poucos, passo a passo;
+- Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
+- Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
 - Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>

@@ -9,9 +9,9 @@ lang: pt
 
 Teremos, durante o curso, o objetivo e a necessidade de aprender certa quantidade de JavaScript, além de desenvolvimento web.
 
-JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos recursos das versões mais recentes. O nome oficial do padrão de JavaScript é [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Atualmente, a versão mais recente é a lançada em junho de 2022 com o nome de [ECMAScript®2022](https://www.ecma-international.org/ecma-262/), também conhecido como ES13.
+JavaScript evoluiu rapidamente nos últimos anos e, neste curso, usamos as funcionalidades das versões mais recentes. O nome oficial do padrão de JavaScript é [ECMAScript](https://en.wikipedia.org/wiki/ECMAScript). Atualmente, a versão mais recente é a lançada em junho de 2022 com o nome de [ECMAScript®2022](https://www.ecma-international.org/ecma-262/), também conhecido como ES13.
 
-Os navegadores ainda não suportam todos os recursos mais recentes de JavaScript. Devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
+Os navegadores ainda não suportam todos as funcionalidades mais recentes de JavaScript. Devido a esse fato, muito código executado em navegadores é <i>transpilado</i> de uma versão mais recente de JavaScript para uma versão mais antiga e compatível.
 
 Hoje em dia, a maneira mais popular de fazer a transpilação é usando o transcompilador [Babel](https://babeljs.io/). A transpilação é configurada automaticamente em aplicações React criadas com create-react-app. Vamos olhar mais de perto a configuração de transpilação na [Parte 7](/pt/part7) deste curso.
 
@@ -21,9 +21,9 @@ O código é escrito em arquivos com extensão <i>.js</i> que são executados ao
 
 Também é possível escrever código JavaScript na console do Node.js, que pode ser aberta digitando "node" na linha de comando, bem como na aba Console nas Ferramentas do Desenvolvedor do navegador. [As revisões mais recentes do Chrome lidam bem com as novas funcionalidades de JavaScript](http://kangax.github.io/compat-table/es2016plus/) sem precisar transpilar o código. Alternativamente, você pode usar uma ferramenta como [JS Bin](https://jsbin.com/?js,console).
 
-JavaScript é meio reminiscente, tanto no nome quanto na sintaxe, com o Java. Porém, quando se trata do mecanismo central da linguagem, eles não poderiam ser mais diferentes. Da perspectiva de alguém que vem de um background em Java, a forma como JavaScript se comporta pode parecer um pouco estranho, principalmente se se não fizer esforço para entender seus recursos internos.
+JavaScript é meio reminiscente, tanto no nome quanto na sintaxe, com o Java. Porém, quando se trata do mecanismo central da linguagem, eles não poderiam ser mais diferentes. Da perspectiva de alguém que vem de um background em Java, a forma como JavaScript se comporta pode parecer um pouco estranho, principalmente se se não fizer esforço para entender seus funcionalidades internos.
 
-Em determinados círculos, tem se popularizado tentar "simular" recursos e padrões de design de Java em JavaScript. Não recomendamos fazer isso, já que as linguagens e seus respectivos ecossistemas são, no final das contas, muito diferentes.
+Em determinados círculos, tem se popularizado tentar "simular" funcionalidades e padrões de design de Java em JavaScript. Não recomendamos fazer isso, já que as linguagens e seus respectivos ecossistemas são, no final das contas, muito diferentes.
 
 ### Variáveis
 
@@ -76,7 +76,7 @@ value => {
 
 forEach chama a função <i>para cada um dos itens no array</i>, sempre passando o item individual como argumento. A função como argumento de forEach também pode receber [outros argumentos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach).
 
-No exemplo anterior, um novo item foi adicionado ao array usando o método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Quando se usa React, técnicas de programação funcional são comumente usadas. Uma característica do paradigma de programação funcional é o uso de estruturas de dados [imutáveis](https://en.wikipedia.org/wiki/Immutable_object). No código React, é preferível usar o método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que não adiciona o item ao array, mas cria um novo array no qual o conteúdo do antigo array e o novo item são ambos incluídos.
+No exemplo anterior, um novo item foi adicionado ao array usando o método [push](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push). Quando se usa React, técnicas de programação funcional são comumente usadas. Uma característica do paradigma de programação funcional é o uso de estruturas de dados [imutáveis](https://en.wikipedia.org/wiki/Immutable_object). No código React, é preferível usar o método [concat](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat), que não adiciona o item ao array, mas cria um array novo no qual o conteúdo do antigo array e o novo item são ambos incluídos.
 
 ```js
 const t = [1, -1, 3]
@@ -87,7 +87,7 @@ console.log(t)  // [1, -1, 3] é impresso
 console.log(t2) // [1, -1, 3, 5] é impresso
 ```
 
-A chamada de método _t.concat(5)_ não adiciona um novo item ao array antigo, mas retorna um novo array que, além de conter os itens do array antigo, também contém o novo item.
+A chamada de método _t.concat(5)_ não adiciona um novo item ao array antigo, mas retorna um array novo que, além de conter os itens do array antigo, também contém o novo item.
 
 Há muitos métodos úteis definidos para arrays. Vamos dar uma olhada em um pequeno exemplo de uso do método [map](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map).
 
@@ -98,7 +98,7 @@ const m1 = t.map(valor => valor * 2)
 console.log(m1)   // [2, 4, 6] é impresso
 ```
 
-Com base no array antigo, o map cria um <i>novo array</i>, para o qual a função dada como parâmetro é usada para criar os itens. No caso deste exemplo, o valor original é multiplicado por dois.
+Com base no array antigo, o map cria um <i>array novo</i>, para o qual a função dada como parâmetro é usada para criar os itens. No caso deste exemplo, o valor original é multiplicado por dois.
 
 O map também pode transformar o array em algo completamente diferente:
 
@@ -492,7 +492,7 @@ Se deseja compreender de fato como _this_ funciona em JavaScript, a Internet est
 
 ### Classes
 
-Como mencionado anteriormente, não há um "mecanismo" de classes em JavaScript como os de linguagens de programação orientadas a objetos. No entanto, há recursos para tornar possível a "simulação" de [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) orientadas a objetos.
+Como mencionado anteriormente, não há um "mecanismo" de classes em JavaScript como os de linguagens de programação orientadas a objetos. No entanto, há funcionalidades para tornar possível a "simulação" de [classes](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Classes) orientadas a objetos.
 
 Vamos dar uma olhada na <i>sintaxe para classes</i> que foi introduzida ao JavaScript com o ES6, o que simplifica substancialmente a definição de classes (ou estruturas semelhantes a classes) em JavaScript.
 
@@ -520,11 +520,11 @@ Quanto à sintaxe, as classes e os objetos criados a partir delas são muito sem
 
 A inserção da sintaxe para classes foi uma adição controversa. Confira [Not Awesome: ES6 Classes](https://github.com/petsel/not-awesome-es6-classes) ou [Is “Class” In ES6 The New “Bad” Part? on Medium](https://medium.com/@rajaraodv/is-class-in-es6-the-new-bad-part-6c4e6fe1ee65) para mais detalhes.
 
-A sintaxe para classe ES6 é muito utilizada no "antigo" React e também no Node.js, portanto, é benéfico ter compreensão dela mesmo neste curso. Entretanto, como estaremos usando o novo recurso [Hooks](https://reactjs.org/docs/hooks-intro.html) do React ao longo deste curso, não teremos uso concreto da sintaxe para classes de JavaScript.
+A sintaxe para classe ES6 é muito utilizada no "antigo" React e também no Node.js, portanto, é benéfico ter compreensão dela mesmo neste curso. Entretanto, como estaremos usando a nova funcionalidade [Hooks](https://reactjs.org/docs/hooks-intro.html) do React ao longo deste curso, não teremos uso concreto da sintaxe para classes de JavaScript.
 
 ### Materiais de JavaScript
 
-Existem guias bons e ruins para JavaScript na Internet. A maioria dos links nesta página relacionados aos recursos de JavaScript referem-se ao [Guia JavaScript da Mozilla](https://developer.mozilla.org/en/docs/Web/JavaScript).
+Existem guias bons e ruins para JavaScript na Internet. A maioria dos links nesta página relacionados às funcionalidades de JavaScript referem-se ao [Guia JavaScript da Mozilla](https://developer.mozilla.org/en/docs/Web/JavaScript).
 
 É recomendado ler imediatamente o artigo [A re-introduction to JavaScript (JS tutorial)](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Language_Overview) no site da Mozilla.
 

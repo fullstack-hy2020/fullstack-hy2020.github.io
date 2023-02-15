@@ -23,7 +23,7 @@ Lembre-se de <i>sempre</i> manter o console do desenvolvedor aberto ao desenvolv
 
 O console se parece com isso:
 
-![Captura de tela das ferramentas do dev aberta em um browser](../../images/0/1e.png)
+![Captura de tela das ferramentas do desenvolvedor aberta em um browser](../../images/0/1e.png)
 
 Certifique-se de que a guia <i>Rede</i> esteja aberta e marque a opção <i>Desativar cache</i> conforme mostrado. <i>Preservar registro</i> também pode ser útil: ele salva os logs impressos pela aplicação quando a página é recarregada.
 
@@ -66,7 +66,7 @@ Devido à tag "img", o navegador faz uma segunda requisição <i>HTTP</i> para b
 
 A requisição foi feita para o endereço <https://studies.cs.helsinki.fi/exampleapp/kuva.png> e o seu tipo é HTTP GET. Os cabeçalhos de resposta nos dizem que o tamanho da resposta é 89350 bytes e seu [Content-type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type) é <i>image/png</i>, então é uma imagem png. O navegador usa essa informação para renderizar a imagem corretamente na tela.
 
-A cadeia de eventos causada pela abertura da página https://studies.cs.helsinki.fi/exampleapp no navegador forma o seguinte [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
+O encadeamento de eventos causado pela abertura da página https://studies.cs.helsinki.fi/exampleapp no navegador forma o seguinte [diagrama de sequência](https://www.geeksforgeeks.org/unified-modeling-language-uml-sequence-diagrams/):
 
 ![Diagrama de sequência do fluxo descrito acima](../../images/0/7m.png)
 

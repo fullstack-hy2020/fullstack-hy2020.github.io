@@ -7,134 +7,130 @@ lang: pt
 
 <div class="content">
 
-When creating notes in our application, we would naturally want to store them in some backend server. The [json-server](https://github.com/typicode/json-server) package claims to be a so-called REST or RESTful API in its documentation:
+Quando criamos notas em nossa aplicação, naturalmente queremos armazená-las em algum servidor back-end. O pacote [json-server](https://github.com/typicode/json-server) afirma ser uma API REST ou RESTful em sua documentação:
 
-> <i>Get a full fake REST API with zero coding in less than 30 seconds (seriously)</i>
+> <i> Use uma API REST falsa completa sem precisar programá-la em menos de 30 segundos (sério!) </i>
 
-The json-server does not exactly match the description provided by the textbook [definition](https://en.wikipedia.org/wiki/Representational_state_transfer) of a REST API, but neither do most other APIs claiming to be RESTful.
+O json-server não corresponde exatamente à descrição fornecida pela [definição](https://en.wikipedia.org/wiki/Representational_state_transfer) do que é uma API REST, e nem mesmo a maioria das outras APIs que afirmam ser RESTful.
 
-We will take a closer look at REST in the [next part](/en/part3) of the course. But it's important to familiarize ourselves at this point with some of the [conventions](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) used by json-server and REST APIs in general. In particular, we will be taking a look at the conventional use of [routes](https://github.com/typicode/json-server#routes), aka URLs and HTTP request types, in REST.
+Vamos nos aprofundar mais em REST na [próxima parte](/pt/part3) do curso. Porém, é importante já nos familiarizarmos com algumas das [convenções](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) usadas pelo json-server e APIs REST em geral. Em particular, vamos dar uma olhada no uso convencional de [rotas](https://github.com/typicode/json-server#routes) (routes) — também conhecidas como URLs —, e os tipos de requisição HTTP em REST.
 
 ### REST
 
-In REST terminology, we refer to individual data objects, such as the notes in our application, as <i>resources</i>. Every resource has a unique address associated with it - its URL. According to a general convention used by json-server, we would be able to locate an individual note at the resource URL <i>notes/3</i>, where 3 is the id of the resource. The <i>notes</i> URL, on the other hand, would point to a resource collection containing all the notes.
+Na terminologia REST, nos referimos a objetos de dados individuais — as notas em nossa aplicação, por exemplo — como <i>recursos</i>. Cada recurso tem um endereço único associado a ele — sua URL. De acordo com uma convenção geral usada pelo json-server, poderíamos localizar uma nota individual na URL do recurso <i>notes/3</i>, onde 3 é o id do recurso. A URL <i>notes</i>, por outro lado, apontaria para uma coleção de recursos contendo todas as notas.
 
-Resources are fetched from the server with HTTP GET requests. For instance, an HTTP GET request to the URL <i>notes/3</i> will return the note that has the id number 3. An HTTP GET request to the <i>notes</i> URL would return a list of all notes.
+Os recursos são buscados do servidor com solicitações HTTP GET. Por exemplo, uma requisição HTTP GET para a URL <i>notes/3</i> retornará a nota que tem o número de id 3. Uma requisição HTTP GET para a URL <i>notes</i> retornaria uma lista de todas as notas.
 
-Creating a new resource for storing a note is done by making an HTTP POST request to the <i>notes</i> URL according to the REST convention that the json-server adheres to. The data for the new note resource is sent in the <i>body</i> of the request.
+A criação de um novo recurso para armazenar uma nota é feita fazendo uma requisição HTTP POST para a URL <i>notes</i> de acordo com a convenção REST a qual o json-server adere. Os dados para o novo recurso de nota são enviados no <i>corpo</i> (body) da requisição.
 
-json-server requires all data to be sent in JSON format. What this means in practice is that the data must be a correctly formatted string and that the request must contain the <i>Content-Type</i> request header with the value <i>application/json</i>.
+O json-server exige que todos os dados sejam enviados no formato JSON. O que isso significa na prática é que os dados devem ser uma formatados em formato de string e que a requisição deve conter o cabeçalho de requisição <i>Content-Type</i> (Tipo de Conteúdo) com o valor <i>application/json</i>.
 
-### Sending Data to the Server
+### Enviando dados ao servidor
 
-Let's make the following changes to the event handler responsible for creating a new note:
+Vamos fazer as seguintes alterações no gerenciador de evento responsável por criar uma nova nota:
 
 ```js
-addNote = event => {
+addNote = (event) => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
     important: Math.random() < 0.5,
   }
 
-// highlight-start
-  axios
-    .post('http://localhost:3001/notes', noteObject)
-    .then(response => {
-      console.log(response)
-    })
-// highlight-end
+  // highlight-start
+  axios.post('http://localhost:3001/notes', noteObject).then((response) => {
+    console.log(response)
+  })
+  // highlight-end
 }
 ```
 
-We create a new object for the note but omit the <i>id</i> property since it's better to let the server generate ids for our resources!
+Criamos um novo objeto para a nota, mas omitimos a propriedade <i>id</i> já que é melhor deixar o servidor gerar os ids para nossos recursos!
 
-The object is sent to the server using the axios <em>post</em> method. The registered event handler logs the response that is sent back from the server to the console.
+O objeto é enviado ao servidor usando o método <em>post</em> do axios. O gerenciador de evento assinalado registra (logs) a resposta que é enviada de volta pelo servidor para o console.
 
-When we try to create a new note, the following output pops up in the console:
+Quando tentamos criar uma nova nota, a seguinte saída aparece no console:
 
-![data json output in console](../../images/2/20new.png)
+![saída dos dados json no console](../../images/2/20new.png)
 
-The newly created note resource is stored in the value of the <i>data</i> property of the _response_ object.
+O recurso de nota recém-criado é armazenado no valor da propriedade <i>data</i> do objeto _response_.
 
-Quite often it is useful to inspect HTTP requests in the <i>Network</i> tab of Chrome developer tools, which was used heavily at the beginning of [part 0](/en/part0/fundamentals_of_web_apps#http-get).
+Por vezes é útil inspecionar as requisições HTTP na guia <i>Rede</i> das Ferramentas do Desenvolvedor do Chrome (ou do navegador que esteja utilizando), recurso esse que foi amplamente usado no início da [Parte 0](/pt/part0/fundamentos_de_aplicacoes_web#http-get).
 
-We can use the inspector to check that the headers sent in the POST request are what we expected them to be:
+Podemos usar o inspetor para verificar se os cabeçalhos enviados na requisição POST são os que esperávamos:
 
 ![](../../images/2/21new1.png)
 
-Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
+Como os dados que enviamos na requisição POST eram um objeto JavaScript, o axios sabia automaticamente definir o valor apropriado de <i>application/json</i> para o cabeçalho <i>Content-Type</i>.
 
-The tab <i>payload</i> can be used to check the request data:
+A guia <i>Visualização</i> (<i>Payload</i>) pode ser usada para verificar os dados da requisição:
 
 ![](../../images/2/21new2.png)
 
-Also the tab <i>response</i> is useful, it shows what was the data the server responded with:
+Também é útil a guia <i>Resposta</i> (<i>Response</i>), pois mostra qual foi os dados que o servidor respondeu:
 
 ![](../../images/2/21new3.png)
 
-The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
+A nova nota ainda não é renderizada na tela. Isso se deve ao fato de que não atualizamos o estado do componente <i>App</i> quando criamos a nova nota. Vamos consertar isso:
 
 ```js
-addNote = event => {
+addNote = (event) => {
   event.preventDefault()
   const noteObject = {
     content: newNote,
     important: Math.random() > 0.5,
   }
 
-  axios
-    .post('http://localhost:3001/notes', noteObject)
-    .then(response => {
-      // highlight-start
-      setNotes(notes.concat(response.data))
-      setNewNote('')
-      // highlight-end
-    })
+  axios.post('http://localhost:3001/notes', noteObject).then((response) => {
+    // highlight-start
+    setNotes(notes.concat(response.data))
+    setNewNote('')
+    // highlight-end
+  })
 }
 ```
 
-The new note returned by the backend server is added to the list of notes in our application's state in the customary way of using the <em>setNotes</em> function and then resetting the note creation form. An [important detail](/en/part1/a_more_complex_state_debugging_react_apps#handling-arrays) to remember is that the <em>concat</em> method does not change the component's original state, but instead creates a new copy of the list.
+A nova nota retornada pelo servidor back-end é adicionada à lista de notas no estado da nossa aplicação seguindo a forma habitual do uso da função <em>setNotes</em> e, em seguida, reinicia o formulário de criação de notas. Um [detalhe importante](/pt/part1/um_estado_mais_complexo_e_depuracao_de_aplicacoes_react#gerenciando-arrays) a lembrar é que o método <em>concat</em> não muda o estado original do componente, mas cria uma nova cópia da lista.
 
-Once the data returned by the server starts to have an effect on the behavior of our web applications, we are immediately faced with a whole new set of challenges arising from, for instance, the asynchronicity of communication. This necessitates new debugging strategies, console logging and other means of debugging become increasingly more important. We must also develop a sufficient understanding of the principles of both the JavaScript runtime and React components. Guessing won't be enough.
+Assim que os dados retornados pelo servidor começam a ter efeito no comportamento das nossas aplicações web, somos imediatamente confrontados com um conjunto inteiro de novos desafios decorrentes como, por exemplo, a assincronicidade da comunicação. Isso necessita de novas estratégias de depuração, como o "console.log" e outros meios de depuração que se tornam cada vez mais importantes. Também devemos desenvolver uma compreensão suficiente dos princípios do ambiente de execução JavaScript e dos componentes React. Só ficar adivinhando não será suficiente.
 
-It's beneficial to inspect the state of the backend server, e.g. through the browser:
+Algo benéfico é inspecionar o estado do servidor back-end, por exemplo, através do navegador:
 
-![JSON data output from backend](../../images/2/22e.png)
+![saída de dados JSON do back-end](../../images/2/22e.png)
 
-This makes it possible to verify that all the data we intended to send was actually received by the server.
+Isso torna possível verificar se todos os dados que pretendíamos enviar realmente foram recebidos pelo servidor.
 
-In the next part of the course, we will learn to implement our own logic in the backend. We will then take a closer look at tools like [Postman](https://www.postman.com/downloads/) that helps us to debug our server applications. However, inspecting the state of the json-server through the browser is sufficient for our current needs.
+Na próxima parte do curso, aprenderemos a implementar nossa própria lógica no back-end. Em seguida, daremos uma olhada mais atenta em ferramentas como [Postman](https://www.postman.com/downloads/), que nos ajuda a depurar nossas aplicações de servidor. Entretanto, inspecionar o estado do json-server através do navegador já é suficiente para nossas necessidades atuais.
 
-The code for the current state of our application can be found in the  <i>part2-5</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
+O código para o estado atual de nossa aplicação pode ser encontrado na branch <i>part2-5</i> neste repositório no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-5).
 
-### Changing the Importance of Notes
+### Alterando a importância das notas
 
-Let's add a button to every note that can be used for toggling its importance.
+Vamos adicionar um botão ao lado de cada nota para podermos alternar sua importância.
 
-We make the following changes to the <i>Note</i> component:
+Façamos as seguintes alterações no componente <i>Note</i>:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
-  const label = note.important
-    ? 'make not important' : 'make important'
-
+  //"toggleImportance" traduz-se, grosso modo, como "alternarImportancia"
+  const label = note.important ? 'make not important' : 'make important'
+  // *"label" = "etiqueta"       'tornar desimportante':'tornar importante'
   return (
     <li>
-      {note.content} 
+      {note.content}
       <button onClick={toggleImportance}>{label}</button>
     </li>
   )
 }
 ```
 
-We add a button to the component and assign its event handler as the <em>toggleImportance</em> function passed in the component's props.
+Adicionamos um botão ao componente e atribuímos o seu gerenciador de evento como a função <em>toggleImportance</em> ("alternarImportancia") passada nas props do componente.
 
-The <i>App</i> component defines an initial version of the <em>toggleImportanceOf</em> event handler function and passes it to every <i>Note</i> component:
+O componente <i>App</i> define uma versão inicial da função gerenciadora de evento <em>toggleImportanceOf</em> ("alternarImportanciaDe") e passa para cada componente <i>Note</i>:
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
 
@@ -143,6 +139,7 @@ const App = () => {
   // highlight-start
   const toggleImportanceOf = (id) => {
     console.log('importance of ' + id + ' needs to be toggled')
+    //          'importância de ' + id + ' precisa ser alternada'
   }
   // highlight-end
 
@@ -153,17 +150,18 @@ const App = () => {
       <h1>Notes</h1>
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
+          show {showAll ? 'important' : 'all'}
+          {/* mostrar ... 'importante': 'todos' */}
         </button>
-      </div>      
+      </div>
       <ul>
-        {notesToShow.map(note => 
+        {notesToShow.map((note) => (
           <Note
             key={note.id}
-            note={note} 
+            note={note}
             toggleImportance={() => toggleImportanceOf(note.id)} // highlight-line
           />
-        )}
+        ))}
       </ul>
       // ...
     </div>
@@ -171,59 +169,60 @@ const App = () => {
 }
 ```
 
-Notice how every note receives its own <i>unique</i> event handler function since the <i>id</i> of every note is unique.
+Note como cada nota recebe o seu próprio gerenciador de evento único, uma vez que o <i>id</i> de cada nota é único.
 
-E.g., if <i>note.id</i> is 3, the event handler function returned by _toggleImportance(note.id)_ will be:
+Por exemplo, se o <i>note.id</i> for 3, a função gerenciadora de evento retornada por _toggleImportance (note.id)_ será:
 
 ```js
 () => { console.log('importance of 3 needs to be toggled') }
+//                'a importância de 3 precisa ser alternada'
 ```
 
-A short reminder here. The string printed by the event handler is defined in a Java-like manner by adding the strings:
+Um breve lembrete: a string impressa pelo gerenciador de evento é definida de um jeito Java, isto é, adicionando strings:
 
 ```js
 console.log('importance of ' + id + ' needs to be toggled')
 ```
 
-The [template string](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals) syntax added in ES6 can be used to write similar strings in a much nicer way:
+A sintaxe das [template strings](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), funcionalidade essa adicionada com o ES6, pode ser usada para escrever strings similares de uma maneira muito mais agradável:
 
 ```js
 console.log(`importance of ${id} needs to be toggled`)
 ```
 
-We can now use the "dollar-bracket"-syntax to add parts to the string that will evaluate JavaScript expressions, e.g. the value of a variable. Note that we use backticks in template strings instead of quotation marks used in regular JavaScript strings.
+Agora podemos usar a sintaxe de "dollar-bracket" (cifrão-colchete) para adicionar partes à string que avaliará expressões JavaScript como, por exemplo, o valor de uma variável. Observe que usamos crases em template strings em vez de aspas usadas em strings JavaScript regulares.
 
-Individual notes stored in the json-server backend can be modified in two different ways by making HTTP requests to the note's unique URL. We can either <i>replace</i> the entire note with an HTTP PUT request or only change some of the note's properties with an HTTP PATCH request.
+As notas individuais armazenadas no json-server do back-end podem ser modificadas de duas maneiras diferentes fazendo requisições HTTP para a URL única da nota. Podemos substituir a nota inteira com uma requisição HTTP PUT ou apenas alterar algumas das propriedades da nota com uma requisição HTTP PATCH.
 
-The final form of the event handler function is the following:
+A forma final da função gerenciadora de evento é a seguinte:
 
 ```js
-const toggleImportanceOf = id => {
+const toggleImportanceOf = (id) => {
   const url = `http://localhost:3001/notes/${id}`
-  const note = notes.find(n => n.id === id)
+  const note = notes.find((n) => n.id === id)
   const changedNote = { ...note, important: !note.important }
 
-  axios.put(url, changedNote).then(response => {
-    setNotes(notes.map(n => n.id !== id ? n : response.data))
+  axios.put(url, changedNote).then((response) => {
+    setNotes(notes.map((n) => (n.id !== id ? n : response.data)))
   })
 }
 ```
 
-Almost every line of code in the function body contains important details. The first line defines the unique URL for each note resource based on its id.
+Quase todas as linhas de código no corpo da função contêm detalhes importantes. A primeira linha define a URL única para cada recurso de nota com base em seu id.
 
-The array [find method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) is used to find the note we want to modify, and we then assign it to the _note_ variable.
+O método de array [find](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) ("achar" ou "encontrar") é usado para encontrar a nota que queremos modificar e, em seguida, atribuí-la à variável _note_.
 
-After this, we create a <i>new object</i> that is an exact copy of the old note, apart from the important property that has the value flipped (from true to false or from false to true).
+Depois disso, criamos um <i>novo objeto</i> que é uma cópia exata da antiga nota, exceto pela propriedade "important" que tem o valor invertido (de verdadeiro para falso ou de falso para verdadeiro).
 
-The code for creating the new object that uses the [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax may seem a bit strange at first:
+O código para criar o novo objeto que usa a sintaxe [object spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) (espalhamento de objeto) pode parecer um tanto estranho de primeira vista:
 
 ```js
 const changedNote = { ...note, important: !note.important }
 ```
 
-In practice, <em>{ ...note }</em> creates a new object with copies of all the properties from the _note_ object. When we add properties inside the curly braces after the spread object, e.g. <em>{ ...note, important: true }</em>, then the value of the _important_ property of the new object will be _true_. In our example, the <em>important</em> property gets the negation of its previous value in the original object.
+Na prática, <em>{ ...note }</em> cria um novo objeto com cópias de todas as propriedades do objeto _note_. Quando adicionamos propriedades dentro das chaves depois do objeto spread, por exemplo, <em>{ ...note, important: true }</em>, então o valor da propriedade _important_ do novo objeto será _true_. Em nosso exemplo, a propriedade <em>important</em> obtém a negação de seu valor anterior no objeto original.
 
-There are a few things to point out. Why did we make a copy of the note object we wanted to modify when the following code also appears to work?
+Há algumas coisas a se pontuar. Por que fizemos uma cópia do objeto "note" que queríamos modificar quando o seguinte código também parece funcionar?
 
 ```js
 const note = notes.find(n => n.id === id)
@@ -233,62 +232,65 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React. 
+Isso não é recomendado porque a variável <em>note</em> é uma referência a um item no array <em>notes</em> no estado do componente e, como sabemos, nunca devemos [mudar diretamente o estado](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) em React.
 
-It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
+Também vale a pena notar que o novo objeto _changedNote_ é apenas uma cópia superficial, o que significa que os valores do novo objeto são os mesmos que os valores do objeto antigo. Se os valores do objeto antigo eram objetos em si, então os valores copiados no novo objeto referenciariam os mesmos objetos que estavam no objeto antigo.
 
-The new note is then sent with a PUT request to the backend where it will replace the old object.
+A nova nota é então enviada com uma requisição PUT ao back-end, onde ela substituirá o objeto antigo.
 
-The callback function sets the component's <em>notes</em> state to a new array that contains all the items from the previous <em>notes</em> array, except for the old note which is replaced by the updated version of it returned by the server:
+A função callback (função de retorno de chamada) define o estado do componente <em>notes</em> como um array novo que contém todos os itens do array <em>notes</em> anterior, exceto pela nota antiga, que é substituída pela versão atualizada dela retornada pelo servidor:
 
 ```js
-axios.put(url, changedNote).then(response => {
-  setNotes(notes.map(note => note.id !== id ? note : response.data))
+axios.put(url, changedNote).then((response) => {
+  setNotes(notes.map((note) => (note.id !== id ? note : response.data)))
 })
 ```
 
-This is accomplished with the <em>map</em> method:
+Isto é feito utilizando o método <em>map</em>:
 
 ```js
-notes.map(note => note.id !== id ? note : response.data)
+notes.map((note) => (note.id !== id ? note : response.data))
 ```
 
-The map method creates a new array by mapping every item from the old array into an item in the new array. In our example, the new array is created conditionally so that if <em>note.id !== id</em> is true; we simply copy the item from the old array into the new array. If the condition is false, then the note object returned by the server is added to the array instead.
+O método <i>map</i> cria um array novo mapeando cada item do array antigo em um item no array novo. Em nosso exemplo, o array novo é criado de forma condicional de modo que se <em>note.id !== id</em> for verdadeiro, simplesmente copiamos o item do array antigo para o array novo. Se a condição for falsa, então o objeto de nota retornado pelo servidor é adicionado ao array.
 
-This <em>map</em> trick may seem a bit strange at first, but it's worth spending some time wrapping your head around it. We will be using this method many times throughout the course.
+Esse truque do método <em>map</em> pode parecer um pouco estranho agora no início, mas vale a pena gastar algum tempo entendendo como ele funciona. Nós usaremos este método muitas vezes ao longo do curso.
 
-### Extracting Communication with the Backend into a Separate Module
+### Separando a Comunicação com o Back-end em um Módulo Único
 
-The <i>App</i> component has become somewhat bloated after adding the code for communicating with the backend server. In the spirit of the [single responsibility principle](https://en.wikipedia.org/wiki/Single_responsibility_principle), we deem it wise to extract this communication into its own [module](/en/part2/rendering_a_collection_modules#refactoring-modules).
+O componente <i>App</i> ficou um pouco pesado após adicionar o código para se comunicar com o servidor back-end. No espírito do [princípio da responsabilidade única](https://en.wikipedia.org/wiki/Single_responsibility_principle) (single responsibility principle), achamos sensato extrair esta comunicação em seu próprio [módulo](/pt/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos).
 
-Let's create a <i>src/services</i> directory and add a file there called <i>notes.js</i>:
+Vamos criar um diretório <i>src/services</i> e adicionar lá um arquivo chamado <i>notes.js</i>:
 
 ```js
 import axios from 'axios'
 const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
+  // "getAll" traduz-se, grosso modo, como "requisitarTudo"
   return axios.get(baseUrl)
 }
 
-const create = newObject => {
+const create = (newObject) => {
+  // "criar"
   return axios.post(baseUrl, newObject)
 }
 
 const update = (id, newObject) => {
+  // Grosso modo, "atualizar" (tradução aproximada)
   return axios.put(`${baseUrl}/${id}`, newObject)
 }
 
-export default { 
-  getAll: getAll, 
-  create: create, 
-  update: update 
+export default {
+  getAll: getAll,
+  create: create,
+  update: update,
 }
 ```
 
-The module returns an object that has three functions (<i>getAll</i>, <i>create</i>, and <i>update</i>) as its properties that deal with notes. The functions directly return the promises returned by the axios methods.
+O módulo retorna um objeto que tem três funções (<i>getAll</i>, <i>create</i>, e <i>update</i>) como suas propriedades que lidam com as notas. As funções retornam diretamente as promessas retornadas pelos métodos da biblioteca axios.
 
-The <i>App</i> component uses <em>import</em> to get access to the module:
+O componente <i>App</i> usa a declaração <em>import</em> para ter acesso ao módulo:
 
 ```js
 import noteService from './services/notes' // highlight-line
@@ -296,7 +298,7 @@ import noteService from './services/notes' // highlight-line
 const App = () => {
 ```
 
-The functions of the module can be used directly with the imported variable _noteService_ as follows:
+As funções do módulo podem ser usadas diretamente com a variável importada _noteService_, como a seguir:
 
 ```js
 const App = () => {
@@ -304,24 +306,20 @@ const App = () => {
 
   useEffect(() => {
     // highlight-start
-    noteService
-      .getAll()
-      .then(response => {
-        setNotes(response.data)
-      })
+    noteService.getAll().then((response) => {
+      setNotes(response.data)
+    })
     // highlight-end
   }, [])
 
-  const toggleImportanceOf = id => {
-    const note = notes.find(n => n.id === id)
+  const toggleImportanceOf = (id) => {
+    const note = notes.find((n) => n.id === id)
     const changedNote = { ...note, important: !note.important }
 
     // highlight-start
-    noteService
-      .update(id, changedNote)
-      .then(response => {
-        setNotes(notes.map(note => note.id !== id ? note : response.data))
-      })
+    noteService.update(id, changedNote).then((response) => {
+      setNotes(notes.map((note) => (note.id !== id ? note : response.data)))
+    })
     // highlight-end
   }
 
@@ -329,17 +327,15 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      important: Math.random() > 0.5
+      important: Math.random() > 0.5,
     }
 
-// highlight-start
-    noteService
-      .create(noteObject)
-      .then(response => {
-        setNotes(notes.concat(response.data))
-        setNewNote('')
-      })
-// highlight-end
+    // highlight-start
+    noteService.create(noteObject).then((response) => {
+      setNotes(notes.concat(response.data))
+      setNewNote('')
+    })
+    // highlight-end
   }
 
   // ...
@@ -348,29 +344,27 @@ const App = () => {
 export default App
 ```
 
-We could take our implementation a step further. When the <i>App</i> component uses the functions, it receives an object that contains the entire response for the HTTP request:
+Poderíamos levar nossa implementação um passo adiante. Quando o componente <i>App</i> usa as funções, ele recebe um objeto que contém a resposta inteira para a requisição HTTP:
 
 ```js
-noteService
-  .getAll()
-  .then(response => {
-    setNotes(response.data)
-  })
+noteService.getAll().then((response) => {
+  setNotes(response.data)
+})
 ```
 
-The <i>App</i> component only uses the <i>response.data</i> property of the response object.
+O componente <i>App</i> usa apenas a propriedade <i>response.data</i> do objeto de resposta.
 
-The module would be much nicer to use if, instead of the entire HTTP response, we would only get the response data. Using the module would then look like this:
+Seria muito melhor de usar o módulo se, em vez da obter resposta a HTTP inteira, só obtivéssemos os dados da resposta. Então, o uso do módulo ficaria assim:
 
 ```js
-noteService
-  .getAll()
-  .then(initialNotes => {
-    setNotes(initialNotes)
-  })
+noteService.getAll().then((initialNotes) => {
+  /* "initialNotes" traduz-se, grosso modo,
+      como "notasIniciais" */
+  setNotes(initialNotes)
+})
 ```
 
-We can achieve this by changing the code in the module as follows (the current code contains some copy-paste, but we will tolerate that for now):
+Podemos fazer o que estamos planejando mudando o código no módulo da seguinte forma (o código atual contém um pouco de "copia e cola", mas vamos tolerar isso por enquanto):
 
 ```js
 import axios from 'axios'
@@ -378,54 +372,53 @@ const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
 }
 
-const create = newObject => {
+const create = (newObject) => {
   const request = axios.post(baseUrl, newObject)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
 }
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
 }
 
-export default { 
-  getAll: getAll, 
-  create: create, 
-  update: update 
+export default {
+  getAll: getAll,
+  create: create,
+  update: update,
 }
 ```
 
-
-We no longer return the promise returned by axios directly. Instead, we assign the promise to the <em>request</em> variable and call its <em>then</em> method:
+Não retornamos mais a promessa entregue diretamente pelo axios. Em vez disso, atribuímos a promessa à variável <em>request</em> (requisição) e chamamos o seu método <em>then</em>:
 
 ```js
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
 }
 ```
 
-The last row in our function is simply a more compact expression of the same code as shown below:
+A última linha em nossa função é simplesmente uma expressão mais compacta do mesmo código mostrado abaixo:
 
 ```js
 const getAll = () => {
   const request = axios.get(baseUrl)
   // highlight-start
-  return request.then(response => {
+  return request.then((response) => {
     return response.data
   })
   // highlight-end
 }
 ```
 
-The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then). 
+A função modificada <em>getAll</em> ainda retorna uma promessa, já que o método <em>then</em> de uma promessa também [retorna uma promessa](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).
 
-After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.
+Depois de definir o parâmetro do método <em>then</em> para retornar diretamente <i>response.data</i>, conseguimos fazer com que a função <em>getAll</em> funcionasse da forma que desejávamos. Quando a requisição HTTP é bem-sucedida, a promessa retorna os dados enviados de volta na resposta do back-end.
 
-We have to update the <i>App</i> component to work with the changes made to our module.  We have to fix the callback functions given as parameters to the <em>noteService</em> object's methods so that they use the directly returned response data:
+Temos que atualizar o componente <i>App</i> para funcionar com as mudanças feitas em nosso módulo. Temos que consertar as funções callback dadas como parâmetros para os métodos do objeto <em>noteService</em> para que elas usem os dados de resposta que foram diretamente retornados:
 
 ```js
 const App = () => {
@@ -434,23 +427,24 @@ const App = () => {
   useEffect(() => {
     noteService
       .getAll()
-      // highlight-start      
-      .then(initialNotes => {
+      // highlight-start
+      .then((initialNotes) => {
         setNotes(initialNotes)
-      // highlight-end
+        // highlight-end
       })
   }, [])
 
-  const toggleImportanceOf = id => {
-    const note = notes.find(n => n.id === id)
+  const toggleImportanceOf = (id) => {
+    const note = notes.find((n) => n.id === id)
     const changedNote = { ...note, important: !note.important }
 
     noteService
       .update(id, changedNote)
-      // highlight-start      
-      .then(returnedNote => {
-        setNotes(notes.map(note => note.id !== id ? note : returnedNote))
-      // highlight-end
+      // highlight-start
+      .then((returnedNote) => {
+        // ou "notaRetornada"
+        setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
+        // highlight-end
       })
   }
 
@@ -458,15 +452,15 @@ const App = () => {
     event.preventDefault()
     const noteObject = {
       content: newNote,
-      important: Math.random() > 0.5
+      important: Math.random() > 0.5,
     }
 
     noteService
       .create(noteObject)
-      // highlight-start      
-      .then(returnedNote => {
+      // highlight-start
+      .then((returnedNote) => {
         setNotes(notes.concat(returnedNote))
-      // highlight-end
+        // highlight-end
         setNewNote('')
       })
   }
@@ -475,67 +469,17 @@ const App = () => {
 }
 ```
 
-This is all quite complicated and attempting to explain it may just make it harder to understand. The internet is full of material discussing the topic, such as [this](https://javascript.info/promise-chaining) one.
+Tudo isso é bastante complicado, e tentar explicar pode deixar ainda mais difícil de entender. A internet está cheia de material sobre o tópico, como [este](https://javascript.info/promise-chaining).
 
-The "Async and performance" book from the [You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) book series [explains the topic](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md) well, but the explanation is many pages long.
+O livro "Async and performance" da série de livros [You do not know JS](https://github.com/getify/You-Dont-Know-JS/tree/1st-ed) [explica bem o tópico](https://github.com/getify/You-Dont-Know-JS/blob/1st-ed/async%20%26%20performance/ch3.md), mas é uma explicação de muitas páginas.
 
-Promises are central to modern JavaScript development and it is highly recommended to invest a reasonable amount of time into understanding them.
+Promessas são vitais para o desenvolvimento em JavaScript moderno, e é extremamente recomendável investir um tempo razoável para entendê-las.
 
-### Cleaner Syntax for Defining Object Literals
+### Uma sintaxe mais limpa para definir Objetos Literais (Object Literals)
 
-The module defining note-related services currently exports an object with the properties <i>getAll</i>, <i>create</i>, and <i>update</i> that are assigned to functions for handling notes.
+O módulo que define os serviços relacionados às notas exporta atualmente um objeto com as propriedades <i>getAll</i>, <i>create</i> e <i>update</i> que são atribuídas a funções que gerenciam as notas.
 
-The module definition was:
-
-```js
-import axios from 'axios'
-const baseUrl = 'http://localhost:3001/notes'
-
-const getAll = () => {
-  const request = axios.get(baseUrl)
-  return request.then(response => response.data)
-}
-
-const create = newObject => {
-  const request = axios.post(baseUrl, newObject)
-  return request.then(response => response.data)
-}
-
-const update = (id, newObject) => {
-  const request = axios.put(`${baseUrl}/${id}`, newObject)
-  return request.then(response => response.data)
-}
-
-export default { 
-  getAll: getAll, 
-  create: create, 
-  update: update 
-}
-```
-
-The module exports the following, rather peculiar looking, object:
-
-```js
-{ 
-  getAll: getAll, 
-  create: create, 
-  update: update 
-}
-```
-
-The labels to the left of the colon in the object definition are the <i>keys</i> of the object, whereas the ones to the right of it are <i>variables</i> that are defined inside the module.
-
-Since the names of the keys and the assigned variables are the same, we can write the object definition with a more compact syntax:
-
-```js
-{ 
-  getAll, 
-  create, 
-  update 
-}
-```
-
-As a result, the module definition gets simplified into the following form:
+A definição do módulo era:
 
 ```js
 import axios from 'axios'
@@ -543,215 +487,265 @@ const baseUrl = 'http://localhost:3001/notes'
 
 const getAll = () => {
   const request = axios.get(baseUrl)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
 }
 
-const create = newObject => {
+const create = (newObject) => {
   const request = axios.post(baseUrl, newObject)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
 }
 
 const update = (id, newObject) => {
   const request = axios.put(`${baseUrl}/${id}`, newObject)
-  return request.then(response => response.data)
+  return request.then((response) => response.data)
+}
+
+export default {
+  getAll: getAll,
+  create: create,
+  update: update,
+}
+```
+
+O módulo exporta o seguinte objeto, mesmo que pareça um tanto peculiar:
+
+```js
+{
+  getAll: getAll,
+  create: create,
+  update: update
+}
+```
+
+As etiquetas (labels) à esquerda do dois-pontos na definição do objeto são as <i>chaves</i> (keys) do objeto, enquanto as à direita são as <i>variáveis</i> (variables) que são definidas dentro do módulo.
+
+Como os nomes das chaves e das variáveis atribuídas são os mesmos, podemos escrever a definição do objeto com uma sintaxe mais compacta:
+
+```js
+{
+  getAll, create, update
+}
+```
+
+Como resultado, a definição do módulo simplifica-se da seguinte forma:
+
+```js
+import axios from 'axios'
+const baseUrl = 'http://localhost:3001/notes'
+
+const getAll = () => {
+  const request = axios.get(baseUrl)
+  return request.then((response) => response.data)
+}
+
+const create = (newObject) => {
+  const request = axios.post(baseUrl, newObject)
+  return request.then((response) => response.data)
+}
+
+const update = (id, newObject) => {
+  const request = axios.put(`${baseUrl}/${id}`, newObject)
+  return request.then((response) => response.data)
 }
 
 export default { getAll, create, update } // highlight-line
 ```
 
-In defining the object using this shorter notation, we make use of a [new feature](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions) that was introduced to JavaScript through ES6, enabling a slightly more compact way of defining objects using variables.
+Ao definir o objeto usando esta notação mais curta, fazemos uso de uma [nova funcionalidade](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Object_initializer#Property_definitions) que foi introduzida ao JavaScript por meio do ES6, permitindo uma maneira ligeiramente mais compacta de se definir objetos usando variáveis.
 
-To demonstrate this feature, let's consider a situation where we have the following values assigned to variables:
+Para demonstrar essa nova funcionalidade, consideremos uma situação em que temos os seguintes valores atribuídos às variáveis:
 
-```js 
+```js
 const name = 'Leevi'
 const age = 0
 ```
 
-In older versions of JavaScript we had to define an object like this:
+Em versões mais antigas do JavaScript, tínhamos que definir um objeto assim:
 
-```js 
+```js
 const person = {
   name: name,
-  age: age
+  age: age,
 }
 ```
 
-However, since both the property fields and the variable names in the object are the same, it's enough to simply write the following in ES6 JavaScript: 
+No entanto, como tanto os campos de propriedades quanto os nomes de variáveis no objeto são os mesmos, basta escrever o seguinte, utilizando o padrão JavaScript ES6:
 
-```js 
+```js
 const person = { name, age }
 ```
 
-The result is identical for both expressions. They both create an object with a <i>name</i> property with the value <i>Leevi</i> and an <i>age</i> property with the value <i>0</i>.
+O resultado é idêntico para ambas as expressões. Ambos criam um objeto com uma propriedade <i>name</i> com o valor <i>Leevi</i> e uma propriedade <i>age</i> com o valor <i>0</i>.
 
-### Promises and Errors
+### Promessas e Erros
 
-If our application allowed users to delete notes, we could end up in a situation where a user tries to change the importance of a note that has already been deleted from the system.
+Se a nossa aplicação permitisse que os usuários excluíssem notas, poderíamos acabar em uma situação em que um usuário tenta mudar a importância de uma nota que já foi excluída do sistema.
 
-Let's simulate this situation by making the <em>getAll</em> function of the note service return a "hardcoded" note that does not actually exist on the backend server:
+Vamos simular esta situação fazendo com que a função <em>getAll</em> do serviço de notas retorne uma "nota de exemplo" ("'hardcoded' note") que na verdade não existe no servidor back-end:
 
 ```js
 const getAll = () => {
   const request = axios.get(baseUrl)
   const nonExisting = {
+    //  'naoExistente'
     id: 10000,
     content: 'This note is not saved to server',
+    //       'Esta nota não está salva no servidor'
     important: true,
   }
-  return request.then(response => response.data.concat(nonExisting))
+  return request.then((response) => response.data.concat(nonExisting))
 }
 ```
 
-When we try to change the importance of the hardcoded note, we see the following error message in the console. The error says that the backend server responded to our HTTP PUT request with a status code 404 <i>not found</i>.
+Quando tentamos mudar a importância da nota, vemos a seguinte mensagem de erro no console. A mensagem de erro diz que o servidor back-end respondeu à nossa solicitação HTTP PUT com um código de status 404 <i>not found</i> (não encontrado(a)).
 
-![404 not found error in dev tools](../../images/2/23e.png)
+![erro 404 not found nas ferramentas do desenvolvedor](../../images/2/23e.png)
 
-The application should be able to handle these types of error situations gracefully. Users won't be able to tell that an error has occurred unless they happen to have their console open. The only way the error can be seen in the application is that clicking the button does not affect the note's importance.
+A aplicação deve ser capaz de lidar com estes tipos de erro de forma elegante. Os usuários não serão capazes de dizer que ocorreu um erro a menos que estejam com o console aberto. A única maneira de o erro ser visto na aplicação é a importância da nota não ser alternada quando se clica no botão.
 
-We had [previously](/en/part2/getting_data_from_server#axios-and-promises) mentioned that a promise can be in one of three different states. When an HTTP request fails, the associated promise is <i>rejected</i>. Our current code does not handle this rejection in any way.
+Mencionamos [anteriormente](/pt/part2/obtendo_dados_do_servidor#axios-e-promessas-promises) que uma promessa pode estar em um dos três estados diferentes. Quando uma solicitação HTTP falha, a promessa associada é <i>rejeitada</i>. O nosso código atual não gerencia por nenhum meio essa rejeição.
 
-The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.
+A rejeição de uma promessa é [gerenciada](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) fornecendo ao método <em>then</em> uma segunda função callback, que é chamada na situação em que a promessa é rejeitada.
 
-The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method. 
+A forma mais comum de adicionar um gerenciador para promessas rejeitadas é usar o método [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) (grosso modo, "pegar" ou "capturar").
 
-In practice, the error handler for rejected promises is defined like this:
+Na prática, o gerenciador de erro para promessas rejeitadas é definido da seguinte forma:
 
 ```js
 axios
   .get('http://example.com/probably_will_fail')
-  .then(response => {
-    console.log('success!')
+  .then((response) => {
+    console.log('success! (sucesso!)')
   })
-  .catch(error => {
-    console.log('fail')
+  .catch((error) => {
+    console.log('fail (falha)')
   })
 ```
 
-If the request fails, the event handler registered with the <em>catch</em> method gets called.
+Se a requisição falhar, o gerenciador de evento registrado com o método <em>catch</em> é chamado.
 
-The <em>catch</em> method is often utilized by placing it deeper within the promise chain.
+O método <em>catch</em> é frequentemente utilizado colocando-o mais no final no encadeamento de promessas.
 
-When our application makes an HTTP request, we are in fact creating a [promise chain](https://javascript.info/promise-chaining):
+Quando a nossa aplicação faz uma requisição HTTP, na verdade estamos criando um [encadeamento de promessa(s)](https://javascript.info/promise-chaining) (promise chain):
 
 ```js
 axios
   .put(`${baseUrl}/${id}`, newObject)
-  .then(response => response.data)
-  .then(changedNote => {
+  .then((response) => response.data)
+  .then((changedNote) => {
     // ...
   })
 ```
 
-The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>. 
+O método <em>catch</em> pode ser usado para definir uma função gerenciadora no final de um encadeamento de promessas, que é chamada/acionada uma vez que qualquer promessa no encadeamento lance uma exceção e a promessa se torne <i>rejeitada</i>.
 
 ```js
 axios
   .put(`${baseUrl}/${id}`, newObject)
-  .then(response => response.data)
-  .then(changedNote => {
+  .then((response) => response.data)
+  .then((changedNote) => {
     // ...
   })
-  .catch(error => {
-    console.log('fail')
+  .catch((error) => {
+    console.log('fail (falha)')
   })
 ```
 
-Let's use this feature and register an error handler in the <i>App</i> component:
+Vamos usar essa funcionalidade e registrar um gerenciador de erro no componente <i>App</i>:
 
 ```js
-const toggleImportanceOf = id => {
-  const note = notes.find(n => n.id === id)
+const toggleImportanceOf = (id) => {
+  const note = notes.find((n) => n.id === id)
   const changedNote = { ...note, important: !note.important }
 
   noteService
-    .update(id, changedNote).then(returnedNote => {
-      setNotes(notes.map(note => note.id !== id ? note : returnedNote))
+    .update(id, changedNote)
+    .then((returnedNote) => {
+      setNotes(notes.map((note) => (note.id !== id ? note : returnedNote)))
     })
     // highlight-start
-    .catch(error => {
-      alert(
-        `the note '${note.content}' was already deleted from server`
-      )
-      setNotes(notes.filter(n => n.id !== id))
+    .catch((error) => {
+      alert(`the note '${note.content}' was already deleted from server`)
+      //    `a nota '${note.content}' já foi excluída do servidor`
+      setNotes(notes.filter((n) => n.id !== id))
     })
-    // highlight-end
+  // highlight-end
 }
 ```
 
-The error message is displayed to the user with the trusty old [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) dialog popup, and the deleted note gets filtered out from the state.
+A mensagem de erro é exibida ao usuário com a antiga e confiável caixa de diálogo [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) (alerta), e a nota excluída é filtrada do estado.
 
-Removing an already deleted note from the application's state is done with the array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) method, which returns a new array comprising only the items from the list for which the function that was passed as a parameter returns true for:
+A remoção de uma nota já excluída do estado da aplicação é feita com o método de array [filter](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) (filtrar), que retorna um array novo com apenas os itens da lista para os quais a função passada como parâmetro retorna verdadeiro para:
 
 ```js
-notes.filter(n => n.id !== id)
+notes.filter((n) => n.id !== id)
 ```
 
-It's probably not a good idea to use alert in more serious React applications. We will soon learn a more advanced way of displaying messages and notifications to users. There are situations, however, where a simple, battle-tested method like <em>alert</em> can function as a starting point. A more advanced method could always be added in later, given that there's time and energy for it.
+Não é lá uma boa ideia usar o "alert" em aplicações React mais sérias. Em breve aprenderemos uma maneira mais avançada de exibir mensagens e notificações aos usuários. No entanto, há situações em que um método simples e testado como o <em>alert</em> pode funcionar como um ponto de partida. Uma maneira mais avançada sempre pode ser adicionada posteriormente, desde que haja tempo e energia disponíveis para isso.
 
-The code for the current state of our application can be found in the  <i>part2-6</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
+O código para o estado atual de nossa aplicação pode ser encontrado na branch <i>part2-6</i> no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-6).
 
-### Full stack developer's oath
+### Juramento do Programador Full Stack
 
-It is again time for the exercises. The complexity of our app is now increasing since besides just taking care of the React components in the frontend, we also have a backend that is persisting the application data.
+Chegou novamente a hora dos exercícios. A complexidade de nossa aplicação está aumentando, já que além de cuidarmos dos componentes React no front-end, também temos um back-end que persiste os dados da aplicação.
 
-To cope with the increasing complexity we should extend the web developer's oath to a <i>Full stack developer's oath</i>, which reminds us to make sure that the communication between frontend and backend happens as expected.
+Para lidar com essa complexidade crescente, devemos estender o Juramento do Programador Web para o <i>Juramento do Programador Full Stack</i>, que nos lembrará de garantir com que a comunicação entre front e back-end aconteça como planejado.
 
-So here is the updated oath:
+Então aqui está o juramento atualizado:
 
-Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso que eu usarei todos os meios possíveis para torná-lo mais fácil:
 
-- I will have my browser developer console open all the time
-- <i>I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect</i>
-- <i>I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect</i>
-- I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- Eu manterei meu Console do navegador sempre aberto;
+- <i> Eu usarei a guia Rede das Ferramentas do Desenvolvedor do navegador para garantir que o front-end e o back-end estejam se comunicando da forma que eu planejei</i> ;
+- <i>Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo front-end estejam sendo salvos lá da forma que eu planejei</i>;
+- Eu vou progredir aos poucos, passo a passo;
+- Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
+- Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
+- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>
 
 <div class="tasks">
 
-<h3>Exercises 2.12.-2.15.</h3>
+<h3>Exercícios 2.12 a 2.15</h3>
 
-<h4>2.12: The Phonebook step7</h4>
+<h4>2.12: The Phonebook — 7º passo</h4>
 
-Let's return to our phonebook application.
+Vamos retornar à nossa lista telefônica.
 
-Currently, the numbers that are added to the phonebook are not saved to a backend server. Fix this situation.
+No momento, os números adicionados à lista telefônica não são salvos em um servidor back-end. Corrija essa situação.
 
-<h4>2.13: The Phonebook step8</h4>
+<h4>2.13: The Phonebook — 8º passo</h4>
 
-Extract the code that handles the communication with the backend into its own module by following the example shown earlier in this part of the course material.
+Crie um módulo próprio para o código que gerencia a comunicação com o back-end, seguindo o exemplo mostrado anteriormente no conteúdo desta parte do curso.
 
-<h4>2.14: The Phonebook step9</h4>
+<h4>2.14: The Phonebook — 9º passo</h4>
 
-Make it possible for users to delete entries from the phonebook. The deletion can be done through a dedicated button for each person in the phonebook list. You can confirm the action from the user by using the [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm) method:
+Faça com que os usuários possam excluir entradas de contato da lista telefônica. A exclusão pode ser feita por meio de um botão dedicado a pessoa na lista telefônica. Você pode confirmar a ação do usuário usando o método [window.confirm](https://developer.mozilla.org/en-US/docs/Web/API/Window/confirm):
 
-![2.17 window confirm feature screeshot](../../images/2/24e.png)
+![captura de tela do recurso "window.confirm" - 2.17](../../images/2/24e.png)
 
-The associated resource for a person in the backend can be deleted by making an HTTP DELETE request to the resource's URL. If we are deleting e.g. a person who has the <i>id</i> 2, we would have to make an HTTP DELETE request to the URL <i>localhost:3001/persons/2</i>. No data is sent with the request.
+O recurso associado a uma pessoa no back-end pode ser excluído fazendo uma requisição HTTP DELETE para a URL do recurso. Se estivermos excluindo, por exemplo, uma pessoa que tenha o <i>id</i> 2, teríamos que fazer uma requisição HTTP DELETE para a URL <i>localhost:3001/persons/2</i>. Nenhum dado é enviado com a requisição.
 
-You can make an HTTP DELETE request with the [axios](https://github.com/axios/axios) library in the same way that we make all of the other requests.
+Você pode fazer uma requisição HTTP DELETE com a biblioteca [axios](https://github.com/axios/axios) da mesma forma que fazemos todas as outras requisições.
 
-**NB:** You can't use the name <em>delete</em> for a variable because it's a reserved word in JavaScript. E.g. the following is not possible:
+**N.B.:** Você não pode utilizar o nome <em>delete</em> para declarar uma variável, porque é uma palavra reservada em JavaScript. Por exemplo, não é possível fazer o seguinte:
 
 ```js
-// use some other name for variable!
+// use algum outro nome para sua variável
 const delete = (id) => {
   // ...
 }
 ```
 
-<h4>2.15*: The Phonebook step10</h4>
+<h4>2.15*: The Phonebook — 10º passo</h4>
 
-<i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
+<i>Por que há um asterisco na atividade? Entre [aqui](/pt/part0/informacoes_gerais#fazendo-o-curso) para saber o motivo.</i>
 
-Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number. 
+Altere a funcionalidade para que, caso um número seja adicionado a um usuário já existente, o novo número substitua o antigo. É recomendável usar o método HTTP PUT para atualizar o número de telefone.
 
-If the person's information is already in the phonebook, the application can ask the user to confirm the action:
+Se as informações da pessoa já estiverem na lista telefônica, a aplicação pedirá a confirmação do usuário:
 
-![2.18 screenshot alert confirmation](../../images/teht/16e.png)
+![captura de tela do alerta de confirmação - 2.18](../../images/teht/16e.png)
 
 </div>
