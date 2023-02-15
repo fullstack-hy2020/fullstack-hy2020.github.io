@@ -35,9 +35,7 @@ Take Prettier to use in your app and configure it to work with your editor.
 
 #### 7.10: Redux, step1
 
-Refactor the application from using the internal React component state to using Redux for the application's state management.
-
-Change the application's notifications to use Redux at this point of the exercise set.
+Refactor the application to use Redux to manage the notification data.
 
 #### 7.11: Redux, step2
 

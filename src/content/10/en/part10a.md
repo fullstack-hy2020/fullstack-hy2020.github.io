@@ -202,7 +202,7 @@ This was the last exercise in this section. It's time to push your code to GitHu
   
 When our application doesn't work as intended, we should immediately start <i>debugging</i> it. In practice, this means that we'll need to reproduce the erroneous behavior and monitor the code execution to find out which part of the code behaves incorrectly. During the course, we have already done a bunch of debugging by logging messages, inspecting network traffic, and using specific development tools, such as <i>React Development Tools</i>. In general, debugging isn't that different in React Native, we'll just need the right tools for the job.
 
-The good old console.log messages appear in the Expo command line:
+The good old console.log messages appear in the Expo development tools command line:
 
 ![GraphQL structure](../../images/10/27new.png)
 
