@@ -60,30 +60,30 @@ class App extends React.Component {
   }
 
   render() {
-    if (this.state.anecdotes.length === 0 ) { // highlight-line
+	// highlight-start
+    if (this.state.anecdotes.length === 0 ) {
       return <div>no anecdotes...</div>
     }
+	// highlight-end
 
     return (
       <div>
         <h1>anecdote of the day</h1>
+		// highlight-start
         <div>
           {this.state.anecdotes[this.state.current].content} // highlight-line
-        </div>
+		</div>
         <button>next</button>
+		// highlight-end
       </div>
     )
   }
 }
 ```
 
-
-
 El estado del componente está en la variable de instancia _this.state_. El estado es un objeto que tiene dos propiedades. <i>this.state.anecdotes</i> es la lista de anécdotas y <i>this.state.current</i> es el índice de la anécdota que se muestra actualmente.
 
-
 En componentes funcionales, el lugar adecuado para obtener datos de un servidor es dentro de un [effect hook](https://reactjs.org/docs/hooks-effect.html), que se ejecuta cuando un componente se renderiza o con menos frecuencia si es necesario, por ejemplo, solo en combinación con el primer renderizado.
-
 
 Los [métodos de ciclo de vida](https://reactjs.org/docs/state-and-lifecycle.html#adding-lifecycle-methods-to-a-class) de componentes de clase ofrecen la funcionalidad correspondiente. El lugar correcto para desencadenar la obtención de datos de un servidor es dentro del método de ciclo de vida [componentDidMount](https://reactjs.org/docs/react-component.html#componentdidmount), que se ejecuta una vez justo después de la primera vez que se renderiza un componente:
 
@@ -204,20 +204,17 @@ En mi opinión, y la opinión de muchos otros, los componentes de clase básicam
 
 Al escribir código nuevo, [no hay ninguna razón racional para usar Componentes de Clase](https://reactjs.org/docs/hooks-faq.html#should-i-use-hooks-classes-or-a-mix-of-both) si el proyecto usa React con un número de versión 16.8 o superior. Por otro lado, actualmente [no hay necesidad de reescribir todo el código React antiguo](https://reactjs.org/docs/hooks-faq.html#do-i-need-to-rewrite-all-my-class-components) como componentes funcionales.
 
-
 ### Organización del código en la aplicación de React
 
-En la mayoría de las aplicaciones seguimos el principio según el cual los componentes se colocaban en los <i>componentes</i> del directorio, los <i>reducers</i> se colocaban en el directorio reductores y el código responsable de comunicarse con el servidor se colocaba en los <i>servicios</i> de directorio. Esta forma de organización se adapta perfectamente a una aplicación más pequeña, pero a medida que aumenta la cantidad de componentes, se necesitan mejores soluciones. No existe una forma correcta de organizar un proyecto. El artículo [La forma 100% correcta de estructurar una aplicación React (o por qué no existe tal cosa)](https://hackernoon.com/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) proporciona una perspectiva sobre el problema.
-
+En la mayoría de las aplicaciones seguimos el principio según el cual los componentes se colocaban en los <i>componentes</i> del directorio, los <i>reducers</i> se colocaban en el directorio reductores y el código responsable de comunicarse con el servidor se colocaba en los <i>servicios</i> de directorio. Esta forma de organización se adapta perfectamente a una aplicación más pequeña, pero a medida que aumenta la cantidad de componentes, se necesitan mejores soluciones. No existe una forma correcta de organizar un proyecto. El artículo [La forma 100% correcta de estructurar una aplicación React (o por qué no existe tal cosa)](https://medium.com/hackernoon/the-100-correct-way-to-structure-a-react-app-or-why-theres-no-such-thing-3ede534ef1ed) proporciona una perspectiva sobre el problema.
 
 ### Frontend y backend en el mismo repositorio
 
-Durante el curso, hemos creado el frontend y el backend en repositorios separados. Este es un enfoque muy típico. Sin embargo, hicimos la implementación [copiando](/es/part3/deploying_app_to_internet#serving-static-files-from-the-backend) el código de frontend incluido en el repositorio de backend. Un enfoque posiblemente mejor habría sido implementar el código del frontend por separado. Especialmente con las aplicaciones creadas con create-react-app, es muy sencillo gracias al [buildpack](https://github.com/mars/create-react-app-buildpack) incluido.
+Durante el curso, hemos creado el frontend y el backend en repositorios separados. Este es un enfoque muy típico. Sin embargo, hicimos la implementación [copiando](/part3/implementacion_de_la_aplicacion_en_internet#sirviendo-archivos-estaticos-desde-el-backend) el código de frontend incluido en el repositorio de backend. Un enfoque posiblemente mejor habría sido implementar el código del frontend por separado. Especialmente con las aplicaciones creadas con create-react-app, es muy sencillo gracias al [buildpack](https://github.com/mars/create-react-app-buildpack) incluido.
 
 A veces, puede haber una situación en la que la aplicación completa se coloque en un solo repositorio. En este caso, un enfoque común es colocar <i>package.json</i> y <i>webpack.config.js</i> en el directorio raíz, así como colocar el código de frontend y backend en sus propios directorios, por ejemplo, <i>cliente</i> y <i>servidor</i>.
 
 [Este repositorio](https://github.com/fullstack-hy2020/create-app) proporciona un posible punto de partida para la organización de "código de repositorio único".
-
 
 ### Cambios en el servidor
 
@@ -263,15 +260,15 @@ Cuando el estado de la aplicación cambia, los componentes definen un <i>nuevo v
 
 ### El papel de React en las aplicaciones
 
-Es posible que en el material no hayamos puesto suficiente énfasis en el hecho de que React es principalmente una biblioteca para administrar la creación de vistas para una aplicación. Si nos fijamos en el patrón de [modelo vista controlador](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) tradicional, entonces el dominio de React sería <i>Vista</i>. React tiene un área de aplicación más estrecha que, por ejemplo , [Angular](https://angular.io/), que es un framework de Frontend MVC que lo abarca todo. Por lo tanto, React no es un <i>framework</i>, sino <i>library</i>.
+Es posible que en el material no hayamos puesto suficiente énfasis en el hecho de que React es principalmente una librería para administrar la creación de vistas para una aplicación. Si nos fijamos en el patrón de [modelo vista controlador](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93controller) tradicional, entonces el dominio de React sería <i>Vista</i>. React tiene un área de aplicación más estrecha que, por ejemplo , [Angular](https://angular.io/), que es un framework de Frontend MVC que lo abarca todo. Por lo tanto, React no es un <i>framework</i>, sino <i>library</i>.
 
 En aplicaciones pequeñas, los datos manejados por la aplicación se almacenan en el estado de los componentes de React, por lo que en este escenario el estado de los componentes se puede considerar como <i>modelos</i> de una arquitectura MVC.
 
 Sin embargo, la arquitectura MVC no se suele mencionar cuando se habla de aplicaciones React. Además, si usamos Redux, las aplicaciones siguen la arquitectura [Flux](https://facebook.github.io/flux/docs/in-depth-overview) y el papel de React se centra aún más en la creación de vistas. La lógica empresarial de la aplicación se maneja utilizando los creadores de acciones y estados de Redux. Si usamos [redux thunk](/es/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) que vimos en la parte 6, entonces la lógica empresarial puede separarse casi por completo del código de React.
 
-Debido a que tanto React como [Flux](https://facebook.github.io/flux/docs/in-depth-overview) se crearon en Facebook, se podría decir que usar React solo como una biblioteca de UI es el caso de uso previsto. Seguir la arquitectura Flux agrega algunos gastos generales a la aplicación, y si estamos hablando de una pequeña aplicación o prototipo, podría ser una buena idea usar React "incorrectamente", ya que la [ingeniería excesiva](https://en.wikipedia.org/wiki/Overengineering) rara vez produce un resultado óptimo.
+Debido a que tanto React como [Flux](https://facebook.github.io/flux/docs/in-depth-overview) se crearon en Facebook, se podría decir que usar React solo como una librería de UI es el caso de uso previsto. Seguir la arquitectura Flux agrega algunos gastos generales a la aplicación, y si estamos hablando de una pequeña aplicación o prototipo, podría ser una buena idea usar React "incorrectamente", ya que la [ingeniería excesiva](https://en.wikipedia.org/wiki/Overengineering) rara vez produce un resultado óptimo.
 
-Como mencioné al final de la [parte 6](/en/part6/connect#redux-and-the-component-state), [Context-api](https://reactjs.org/docs/context.html) de React ofrece una solución alternativa para la administración centralizada del estado sin la necesidad de bibliotecas de terceros como redux. Puede leer más sobre esto, [aqui](https://www.simplethread.com/cant-replace-redux-with-hooks/) y [aqui](https://hswolff.com/blog/how-to-usecontext-with-usereducer/).
+El ultimo capítulo de la [parte 6](/es/part6/react_query_use_reducer_y_el_contexto) cubre las nuevas tendencias de gestión de estado en React. Las funciones de hooks de React <i>useReducer</i> y <i>useContext</i> proporcionan una versión liviana de Redux. <i>React Query</i>, por otro lado, es una librería que resuelve muchos de los problemas asociados con el manejo del estado en el servidor, eliminando la necesidad de que una aplicación React almacene los datos recuperados del servidor directamente en el estado del frontend.
 
 ### Seguridad en aplicaciones React/node
 
@@ -334,77 +331,83 @@ Puede verificar qué tan actualizadas están sus dependencias usando el comando
 npm outdated --depth 0
 ```
 
-La respuesta del modelo del año pasado para los ejercicios de la parte 4 ya tiene bastantes dependencias desactualizadas:
+La respuesta del modelo del año pasado para los ejercicios de la [parte 4](/es/part4) ya tiene bastantes dependencias desactualizadas:
 
 ![](../../images/7/33x.png)
 
-Las dependencias se pueden actualizar actualizando el archivo <i>package.json</i> y ejecutando el comando _npm install_. Sin embargo, las versiones antiguas de las dependencias no son necesariamente un riesgo de seguridad.
+Las dependencias se pueden actualizar actualizando el archivo <i>package.json</i> y ejecutando el comando _npm-check-updates.
+
+```bash
+npm install -g npm-check-updates
+```
+
+Usando esta herramienta, la actualización de las dependencias se verifica de la siguiente manera:
+
+```bash
+$ npm-check-updates
+Checking ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run ncu -u to upgrade package.json
+```
+
+El archivo <i>package.json</i> se actualiza ejecutando el comando _ncu -u_.
+
+```bash
+$ ncu -u
+Upgrading ...\ultimate-hooks\package.json
+[====================] 9/9 100%
+
+ @testing-library/react       ^13.0.0  →  ^13.1.1
+ @testing-library/user-event  ^14.0.4  →  ^14.1.1
+ react-scripts                  5.0.0  →    5.0.1
+
+Run npm install to install new versions.
+```
+
+Ahora es el momento de actualizar las dependencias ejecutando el comando _npm install_. Sin embargo, las versiones antiguas de las dependencias no necesariamente son un riesgo de seguridad.
 
 El comando npm [audit](https://docs.npmjs.com/cli/audit) se puede utilizar para verificar la seguridad de las dependencias. Compara los números de versión de las dependencias de su aplicación con una lista de los números de versión de las dependencias que contienen amenazas de seguridad conocidas en una base de datos de errores centralizada.
 
-Ejecutar _npm audit_ en un ejercicio de la parte 4 del curso del año pasado imprime una larga lista de quejas y soluciones sugeridas. A continuación se muestra una parte del informe:
+Below is a part of the report:
+Ejecutando _npm audit_ en el mismo proyecto imprime una larga lista de quejas y sugerencias de solución. A continuación se muestra una parte del informe:
 
 ```js
-$ bloglist-backend npm audit
+$ patientor npm audit
 
-                       === npm audit security report ===
+... many lines removed ...
 
-# Run  npm install --save-dev jest@25.1.0  to resolve 62 vulnerabilities
-SEMVER WARNING: Recommended action is a potentially breaking change
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-config > babel-jest >                 │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+url-parse  <1.5.2
+Severity: moderate
+Open redirect in url-parse - https://github.com/advisories/GHSA-hh27-ffr2-f2jc
+fix available via `npm audit fix`
+node_modules/url-parse
 
+ws  6.0.0 - 6.2.1 || 7.0.0 - 7.4.5
+Severity: moderate
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+ReDoS in Sec-Websocket-Protocol header - https://github.com/advisories/GHSA-6fc8-4gx4-v693
+fix available via `npm audit fix`
+node_modules/webpack-dev-server/node_modules/ws
+node_modules/ws
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-config > babel-jest >   │
-│               │ babel-plugin-istanbul > test-exclude > micromatch > braces   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
+120 vulnerabilities (102 moderate, 16 high, 2 critical)
 
+To address issues that do not require attention, run:
+  npm audit fix
 
-┌───────────────┬──────────────────────────────────────────────────────────────┐
-│ Low           │ Regular Expression Denial of Service                         │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Package       │ braces                                                       │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Dependency of │ jest [dev]                                                   │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ Path          │ jest > jest-cli > jest-runner > jest-runtime > jest-config > │
-│               │ babel-jest > babel-plugin-istanbul > test-exclude >          │
-│               │ micromatch > braces                                          │
-├───────────────┼──────────────────────────────────────────────────────────────┤
-│ More info     │ https://npmjs.com/advisories/786                             │
-└───────────────┴──────────────────────────────────────────────────────────────┘
-
-...
-
-
-found 416 vulnerabilities (65 low, 2 moderate, 348 high, 1 critical) in 20047 scanned packages
-  run `npm audit fix` to fix 354 of them.
-  62 vulnerabilities require semver-major dependency updates.
+To address all issues (including breaking changes), run:
+  npm audit fix --force
 ```
 
-Después de solo un año, el código está lleno de pequeñas amenazas a la seguridad. Afortunadamente, solo hay una amenaza crítica. Vamos a correr _npm audit fix_ como sugiere el informe:
+Después de solo un año, el código está lleno de pequeñas amenazas de seguridad. Afortunadamente, solo hay 2 amenazas críticas. Ejecutemos _npm audit fix_ como sugiere el informe:
 
 ```js
-$ bloglist-backend npm audit fix
+$ npm audit fix
 
 + mongoose@5.9.1
 added 19 packages from 8 contributors, removed 8 packages and updated 15 packages in 7.325s
@@ -413,33 +416,29 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
   (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
 ```
 
-Sigue habiendo 62 amenazas porque, de forma predeterminada, _audit fix_ no actualiza las dependencias si su número de versión <i>principal</i> ha aumentado. La actualización de estas dependencias podría provocar la avería de toda la aplicación. Las amenazas restantes son causadas por la dependencia de prueba jest. Nuestra aplicación tiene la versión 23.6.0 cuando la versión segura es la 25.0.1. Como jest es una dependencia del desarrollo, la amenaza en realidad no existe, pero actualicémosla solo para estar seguros:
+62 amenazas permanecen porque, por defecto, _audit fix_ no actualiza las dependencias si su número de versión <i>major</i> ha aumentado. Actualizar estas dependencias podría conducir al colapso de toda la aplicación.
+
+El código fuente del error crítico es la librería [immer](https://github.com/immerjs/immer)
 
 ```js
-npm install --save-dev jest@25.1.0 
+immer  <9.0.6
+Severity: critical
+Prototype Pollution in immer - https://github.com/advisories/GHSA-33f9-j839-rf8h
+fix available via `npm audit fix --force`
+Will install react-scripts@5.0.0, which is a breaking change
 ```
 
-Después de la actualización, la situación se ve bien
-
-```js
- $ blogs-backend npm audit
-
-                       === npm audit security report ===
-
-found 0 vulnerabilities
- in 1204443 scanned packages
-```                                                                    
+Ejecutando _npm audit fix --force_ actualizaría la versión de la librería, pero también actualizaría la librería _react-scripts_ y eso podría potencialmente colapsar el entorno de desarrollo. Así que dejaremos las actualizaciones de librerías para más tarde ...
 
 Una de las amenazas mencionadas en la lista de OWASP es <i>Broken Authentication</i> y <i>Broken Access Control</i> relacionado. La autenticación basada en tokens que hemos estado usando es bastante sólida, si la aplicación se usa en el protocolo HTTPS de cifrado de tráfico. Al implementar el control de acceso, por ejemplo, se debe recordar no solo verificar la identidad de un usuario en el navegador, sino también en el servidor. La mala seguridad sería evitar que se tomen algunas acciones solo ocultando las opciones de ejecución en el código del navegador.
 
 En MDN de Mozilla hay una muy buena [guía de seguridad de sitios web](https://developer.mozilla.org/en-US/docs/Learn/Server-side/First_steps/Website_security), que trae a colación este tema tan importante:
 
-
 ![](../../images/7/34.png)
 
-La documentación de Express incluye una sección sobre seguridad: [Prácticas recomendadas de producción: seguridad](https://expressjs.com/en/advanced/best-practice-security.html), que vale la pena leer. También se recomienda agregar una biblioteca llamada [Helmet](https://helmetjs.github.io/) al backend. Incluye un conjunto de middlewares que eliminan algunas vulnerabilidades de seguridad en aplicaciones Express.
+La documentación de Express incluye una sección sobre seguridad: [Prácticas recomendadas de producción: seguridad](https://expressjs.com/en/advanced/best-practice-security.html), que vale la pena leer. También se recomienda agregar una librería llamada [Helmet](https://helmetjs.github.io/) al backend. Incluye un conjunto de middlewares que eliminan algunas vulnerabilidades de seguridad en aplicaciones Express.
 
-También vale la pena usar el [plugin de seguridad](https://github.com/nodesecurity/eslint-plugin-security) de ESlint .
+También vale la pena usar el [plugin de seguridad](https://github.com/nodesecurity/eslint-plugin-security) de ESlint.
 
 ### Tendencias actuales
 
@@ -447,7 +446,7 @@ Finalmente, echemos un vistazo a la tecnología del mañana (o en realidad ya ho
 
 #### Versiones tipadas de JavaScript
 
-A veces, el [tipado dinámico](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) de variables de JavaScript crea errores molestos. En la parte 5 hablamos brevemente sobre [PropTypes](/en/part5/props_children_and_proptypes#prop-types): un mecanismo que permite hacer cumplir la verificación de tipos para los props pasados ​​a los componentes de React.
+A veces, el [tipado dinámico](https://developer.mozilla.org/en-US/docs/Glossary/Dynamic_typing) de variables de JavaScript crea errores molestos. En la parte 5 hablamos brevemente sobre [PropTypes](/es/part5/props_children_y_proptypes#prop-types): un mecanismo que permite hacer cumplir la verificación de tipos para los props pasados ​​a los componentes de React.
 
 Últimamente ha habido un aumento notable en el interés por la [verificación de tipos estáticos](https://en.wikipedia.org/wiki/Type_system#Static_type_checking). Por el momento, la versión escrita más popular de Javascript es [Typescript](https://www.typescriptlang.org/), que ha sido desarrollado por Microsoft. Typescript se cubre en la [parte 9](/es/part9).
 
@@ -463,7 +462,7 @@ Junto con la renderización del lado del servidor se ha hablado de las llamadas 
 
 React y Node proporcionan una opción deseable para implementar una aplicación isomorfa como código universal.
 
-Escribir código universal directamente usando React todavía es bastante engorroso. Últimamente, una biblioteca llamada [Next.js](https://github.com/vercel/next.js), que se implementa sobre React, ha atraído mucha atención y es una buena opción para hacer aplicaciones universales.
+Escribir código universal directamente usando React todavía es bastante engorroso. Últimamente, una librería llamada [Next.js](https://github.com/vercel/next.js), que se implementa sobre React, ha atraído mucha atención y es una buena opción para hacer aplicaciones universales.
 
 #### Aplicaciones web progresivas
 
@@ -521,23 +520,23 @@ Por ejemplo, utilizando la [puerta de enlace API](https://aws.amazon.com/api-gat
 
 Sin servidor no se trata de que no haya un servidor en las aplicaciones, sino de cómo se define el servidor. El desarrollador de software puede cambiar sus esfuerzos de programación a un mayor nivel de abstracción, ya que ya no es necesario definir mediante programación el enrutamiento de solicitudes HTTP, relaciones de bases de datos, etc., ya que la infraestructura de la nube proporciona todo esto. Las funciones en la nube también se prestan para crear un buen sistema de escalado, por ejemplo, Lambda de Amazon puede ejecutar una gran cantidad de funciones en la nube por segundo. Todo esto ocurre automáticamente a través de la infraestructura y no es necesario iniciar nuevos servidores, etc.
 
-### Bibliotecas útiles y enlaces interesantes
+### Librerías útiles y enlaces interesantes
 
-a comunidad de desarrolladores de JavaScript ha producido una gran variedad de bibliotecas útiles. Si está desarrollando algo más sustancial, vale la pena comprobar si las soluciones existentes ya están disponibles. Un buen lugar para encontrar bibliotecas es https://applibslist.xyz/ . A continuación se enumeran algunas bibliotecas recomendadas por partes confiables.
+a comunidad de desarrolladores de JavaScript ha producido una gran variedad de librerías útiles. Si está desarrollando algo más sustancial, vale la pena comprobar si las soluciones existentes ya están disponibles. A continuación se enumeran algunas librerías recomendadas por partes confiables.
 
-Si su aplicación tiene que manejar datos complicados, [lodash](https://www.npmjs.com/package/lodash), que recomendamos en la [parte 4](/es/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), es una buena biblioteca para usar. Si prefiere un estilo de programación funcional, podría considerar usar [ramda](https://ramdajs.com/).
+Si su aplicación tiene que manejar datos complicados, [lodash](https://www.npmjs.com/package/lodash), que recomendamos en la [parte 4](/es/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), es una buena librería para usar. Si prefiere un estilo de programación funcional, podría considerar usar [ramda](https://ramdajs.com/).
 
 Si maneja horas y fechas, [date-fns](https://github.com/date-fns/date-fns) ofrece buenas herramientas para eso.
 
 [Formik](https://www.npmjs.com/package/formik) y [redux-form](https://redux-form.com/8.3.0/) se pueden utilizar para manipular formularios más fácilmente. Si su aplicación muestra gráficos, hay varias opciones para elegir. Se recomiendan tanto [recharts](http://recharts.org/en-US/) como [highcharts](https://github.com/highcharts/highcharts-react) .
 
-La biblioteca [immutable.js](https://github.com/facebook/immutable-js/) mantenida por Facebook proporciona, como su nombre indica, implementaciones inmutables de algunas estructuras de datos. La biblioteca podría ser útil cuando se usa Redux, ya que como recordamos de la [parte 6](/es/part6/flux_architecture_and_redux#pure-functions-immutable): los reducers deben ser funciones puras, lo que significa que no deben modificar el estado del store, sino que deben reemplazarlo por uno nuevo cuando se produce un cambio. Durante el año pasado, [Immer](https://github.com/mweststrate/immer) se hizo cargo de parte de la popularidad de Immutable.js, que proporciona una funcionalidad similar pero en un paquete algo más sencillo.
+La librería [immutable.js](https://github.com/facebook/immutable-js/) mantenida por Facebook proporciona, como su nombre indica, implementaciones inmutables de algunas estructuras de datos. La librería podría ser útil cuando se usa Redux, ya que como recordamos de la [parte 6](/es/part6/flux_architecture_and_redux#pure-functions-immutable): los reducers deben ser funciones puras, lo que significa que no deben modificar el estado del store, sino que deben reemplazarlo por uno nuevo cuando se produce un cambio. Durante el año pasado, [Immer](https://github.com/mweststrate/immer) se hizo cargo de parte de la popularidad de Immutable.js, que proporciona una funcionalidad similar pero en un paquete algo más sencillo.
 
 [Redux-saga](https://redux-saga.js.org/) proporciona una forma alternativa de hacer las acciones asincrónicas para [redux thunk](/es/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) que vimos en la parte 6. Algunos abrazan el hype y les gusta. Yo no.
 
-Para las aplicaciones de una sola página, la recopilación de datos analíticos sobre la interacción entre los usuarios y la página es [más desafiante](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) que para las aplicaciones web tradicionales donde se carga toda la página. La biblioteca [React Google Analytics](https://github.com/react-ga/react-ga) ofrece una solución.
+Para las aplicaciones de una sola página, la recopilación de datos analíticos sobre la interacción entre los usuarios y la página es [más desafiante](https://developers.google.com/analytics/devguides/collection/analyticsjs/single-page-applications) que para las aplicaciones web tradicionales donde se carga toda la página. La librería [React Google Analytics](https://github.com/react-ga/react-ga) ofrece una solución.
 
-Puede aprovechar su conocimiento de React al desarrollar aplicaciones móviles utilizando la extremadamente popular biblioteca [React Native](https://facebook.github.io/react-native/) de Facebook.
+Puede aprovechar su conocimiento de React al desarrollar aplicaciones móviles utilizando la extremadamente popular librería [React Native](https://facebook.github.io/react-native/) de Facebook. la cual es el tema de la [parte 10](/es/part10) del curso.
 
 En lo que respecta a las herramientas utilizadas para la gestión y empaquetamiento de proyectos de JavaScript, la comunidad ha sido muy voluble. Las mejores prácticas han cambiado rápidamente (los años son aproximaciones, nadie recuerda eso en el pasado):
 
@@ -547,12 +546,14 @@ En lo que respecta a las herramientas utilizadas para la gestión y empaquetamie
 - 2012-14 [Browserify](https://www.npmjs.com/package/browserify)
 - 2015- [Webpack](https://www.npmjs.com/package/webpack)
 
-Los hipsters parecen haber perdido su interés en el desarrollo de herramientas después de que webpack comenzara a dominar los mercados. Hace unos años, [Parcel](https://parceljs.org) comenzó a hacer rondas de marketing en sí mismo tan simple (que Webpack no lo es) y más rápido que Webpack. Sin embargo, después de un comienzo prometedor, Parcel no ha cobrado fuerza y ​​parece que no será el final de Webpack.
+Los hipsters parecen haber perdido su interés en el desarrollo de herramientas después de que webpack comenzara a dominar los mercados. Hace unos años, [Parcel](https://parceljs.org) comenzó a hacer rondas de marketing en sí mismo como simple (que Webpack no lo es) y más rápido que Webpack. Sin embargo, después de un comienzo prometedor, Parcel no ha cobrado fuerza y ​​parece que no será el final de Webpack.
+
+Otra digna de mención es la biblioteca [Rome](https://rome.tools/), que aspira a ser una cadena de herramientas integral para unificar el linter, el compilador, el empaquetador y más. Actualmente está en desarrollo intensivo desde el primer commit a principios de este año el 27 de febrero, pero la perspectiva parece prometedora.
 
 El sitio <https://reactpatterns.com/> proporciona una lista concisa de las mejores prácticas para React, algunas de las cuales ya están familiarizadas con este curso. Otra lista similar es [react bits](https://vasanthk.gitbooks.io/react-bits/).
 
-[Reactiflux](https://www.reactiflux.com/) es una gran comunidad de chat de desarrolladores de React en Discord. Podría ser un posible lugar para obtener apoyo una vez finalizado el curso. Por ejemplo, numerosas bibliotecas tienen sus propios canales.
+[Reactiflux](https://www.reactiflux.com/) es una gran comunidad de chat de desarrolladores de React en Discord. Podría ser un posible lugar para obtener apoyo una vez finalizado el curso. Por ejemplo, numerosas librerías tienen sus propios canales.
 
-Si conoce algunos enlaces o bibliotecas recomendables, ¡haga un pull request!
+Si conoce algunos enlaces o librerías recomendables, ¡haga un pull request!
 
 </div>
