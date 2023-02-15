@@ -87,7 +87,7 @@ xhttp.send()
 
 Desde o início, registramos um <i>gerenciador de evento</i> ao objeto <em>xhttp</em> representando a requisição HTTP, que será chamado pelo ambiente de execução JavaScript sempre que o estado do objeto <em>xhttp</em> mudar. Se a mudança no estado significa que a resposta à requisição chegou, então os dados são lidos de acordo com o que foi estabelecido.
 
-Vale a pena notar que o código no gerenciador de eventos é definido antes da requisição ser enviada ao servidor. Mesmo assim, o código dentro do gerenciador de eventos será executado em um momento posterior. Portanto, o código não executa sincronicamente "de cima para baixo", mas sim <i>assincronamente</i> (asynchronously). JavaScript chama em algum momento o gerenciador de eventos que foi registrado para a requisição.
+Vale a pena notar que o código no gerenciador de evento é definido antes da requisição ser enviada ao servidor. Mesmo assim, o código dentro do gerenciador de evento será executado em um momento posterior. Portanto, o código não executa sincronicamente "de cima para baixo", mas sim <i>assincronamente</i> (asynchronously). JavaScript chama em algum momento o gerenciador de evento que foi registrado para a requisição.
 
 Uma forma comum de fazer requisições síncronas em Java, por exemplo, funcionaria da seguinte maneira (N.B. (Nota Bene): este código Java não funciona):
 
@@ -355,7 +355,7 @@ Porém, o que não é imediatamente óbvio é onde o comando <em>axios.get</em> 
 
 ### Effect-hooks
 
-Já usamos [hooks de estado](https://reactjs.org/docs/hooks-state.html) que foram introduzidos juntamente com a versão do React [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), que fornecem estado aos componentes React definidos como funções — os chamados <i>componentes funcionais</i>. A versão 16.8.0 também introduz [effect hooks](https://reactjs.org/docs/hooks-effect.html) (ou "ganchos de efeito" ou "hooks de efeito") como um novo recurso. De acordo com a documentação oficial:
+Já usamos [hooks de estado](https://reactjs.org/docs/hooks-state.html) que foram introduzidos juntamente com a versão do React [16.8.0](https://www.npmjs.com/package/react/v/16.8.0), que fornecem estado aos componentes React definidos como funções — os chamados <i>componentes funcionais</i>. A versão 16.8.0 também introduz [effect hooks](https://reactjs.org/docs/hooks-effect.html) (ou "ganchos de efeito" ou "hooks de efeito") como uma nova funcionalidade. De acordo com a documentação oficial:
 
 > <i>O Effect Hook (Hook de Efeito) te permite executar efeitos colaterais em componentes funcionais</i> > <i>Buscar dados, configurar uma subscription (assinatura), e mudar o DOM manualmente dentro dos componentes React são exemplos de efeitos colaterais.</i>
 

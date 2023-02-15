@@ -110,7 +110,7 @@ const addNote = (evento) => {
 
 O parâmetro <em>event</em> é o [event](https://reactjs.org/docs/handling-events.html) (evento) que aciona a chamada para a função gerenciadora de evento:
 
-O gerenciador de eventos chama imediatamente o método <em>event.preventDefault()</em>, o que "impede a ação padrão" (prevents the default action) de enviar um formulário. A ação padrão causaria, [entre outras coisas](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), a recarga da página.
+O gerenciador de evento chama imediatamente o método <em>event.preventDefault()</em>, o que "impede a ação padrão" (prevents the default action) de enviar um formulário. A ação padrão causaria, [entre outras coisas](https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/submit_event), a recarga da página.
 
 O alvo do evento armazenado em _event.target_ é registrado no console:
 
@@ -227,7 +227,7 @@ A propriedade <em>target</em> do objeto "event" agora corresponde ao elemento de
 
 Observe que não precisamos chamar o método _event.preventDefault()_ como fizemos no gerenciador de evento <i>onSubmit</i>. Isso ocorre porque não há uma ação padrão em uma mudança de entrada, ao contrário do que ocorre em um envio de formulário.
 
-É possível acompanhar no console como o gerenciador de eventos é chamado:
+É possível acompanhar no console como o gerenciador de evento é chamado:
 
 ![múltiplas chamadas no console ao digitar typing text](../../images/2/8e.png)
 
@@ -261,7 +261,7 @@ setNotes(notes.concat(noteObject))
 
 O método não muda o array original <em>notes</em>, porém, cria <i>uma nova cópia do array com o novo item adicionado ao final</i>. Isso é importante, já que nós [nunca devemos mudar diretamente o estado](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) em React!
 
-O gerenciador de eventos também limpa o valor do elemento de entrada controlado chamando a função <em>setNewNote</em> do estado <em>newNote</em>:
+O gerenciador de evento também limpa o valor do elemento de entrada controlado chamando a função <em>setNewNote</em> do estado <em>newNote</em>:
 
 ```js
 setNewNote('')
@@ -391,7 +391,7 @@ const App = (props) => {
 }
 ```
 
-As notas exibidas ("all" versus "important") são controladas com um botão. O gerenciador de eventos do botão é tão simples que foi definido diretamente no atributo do elemento do botão. O gerenciador de eventos alterna o valor de _showAll_ de verdadeiro para falso e vice-versa:
+As notas exibidas ("all" versus "important") são controladas com um botão. O gerenciador de evento do botão é tão simples que foi definido diretamente no atributo do elemento do botão. O gerenciador de evento alterna o valor de _showAll_ de verdadeiro para falso e vice-versa:
 
 ```js
 () => setShowAll(!showAll)
@@ -504,7 +504,7 @@ Template strings é a opção mais idiomática, além de que seu uso é o sinal 
 
 <h4>2.8: The Phonebook — 3º passo</h4>
 
-Expanda sua aplicação permitindo com que os usuários adicionem números de telefone à lista telefônica. Você precisará adicionar um segundo elemento de <i>entrada</i> (input) ao formulário (junto com seu próprio gerenciador de eventos):
+Expanda sua aplicação permitindo com que os usuários adicionem números de telefone à lista telefônica. Você precisará adicionar um segundo elemento de <i>entrada</i> (input) ao formulário (junto com seu próprio gerenciador de evento):
 
 ```js
 <form>
