@@ -283,7 +283,7 @@ console.log(result)
 ```
 
 <i>[1, 2, 3]</i> será impresso no console.
-_map_ (mapear) sempre cria um novo array, cujos elementos foram criados a partir dos elementos do array original por meio do <i>mapping</i> (mapeamento): usa-se a função fornecida como um parâmetro para o método _map_. 
+_map_ (mapear) sempre cria um array novo, cujos elementos foram criados a partir dos elementos do array original por meio do <i>mapping</i> (mapeamento): usa-se a função fornecida como um parâmetro para o método _map_. 
 
 A função é esta:
 
@@ -378,7 +378,7 @@ const App = ({ notes }) => {//highlight-line
 }
 ```
 
-Se você esqueceu o que significa desestruturação e como essa ferramenta funciona, por favor, revise a [seção sobre desestruturação](/pt/part1/estado_do_componente_e_gerenciadores_de_eventos#desestruturacao-destructuring).
+Se você esqueceu o que significa desestruturação e como essa ferramenta funciona, por favor, revise a [seção sobre desestruturação](/pt/part1/estado_de_componente_e_gerenciadores_de_eventos#desestruturacao-destructuring).
 
 Vamos separar a exibição de uma única nota em seu próprio componente <i>Note</i>: 
 
@@ -570,10 +570,10 @@ Adicionei este capítulo ao material após a resposta do modelo da próxima perg
 Antes de fazer os exercícios, deixe-me lembrá-lo do que havia jurado no final da parte anterior.
 
 Programar é difícil, e é por isso que eu usarei todos os meios possíveis para ser mais fácil:
-- Manterei meu Console do navegador aberto o tempo todo;
-- Vou progredir aos poucos, passo a passo;
-- Escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
-- Se meu código não funcionar, não escreverei mais nenhuma linha de código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
+- Eu manterei meu Console do navegador aberto o tempo todo;
+- Eu vou progredir aos poucos, passo a passo;
+- Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
+- Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
 - Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>

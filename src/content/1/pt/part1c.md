@@ -464,13 +464,13 @@ Quebraria completamente nossa aplicação:
 
 ![captura de tela de erro de re-renderizadores](../../images/1/5c.png)
 
-O que está acontecendo? Um gerenciador de eventos deve ser uma <i>função</i> ou uma <i>referência de função</i>. Quando escrevemos:
+O que está acontecendo? Um gerenciador de evento deve ser uma <i>função</i> ou uma <i>referência de função</i>. Quando escrevemos:
 
 ```js
 <button onClick={defContador(contador + 1)}>
 ```
 
-O gerenciador de eventos é, neste caso, uma <i>chamada de função</i> (function call). Em muitos casos isso pode até estar ok, mas não nesta situação específica. No começo, o valor da variável <i>contador</i> é 0. Quando React renderiza o componente pela primeira vez, ele executa a chamada de função <em>defContador(0+1)</em>, e muda o valor do estado do componente para 1. 
+O gerenciador de evento é, neste caso, uma <i>chamada de função</i> (function call). Em muitos casos isso pode até estar ok, mas não nesta situação específica. No começo, o valor da variável <i>contador</i> é 0. Quando React renderiza o componente pela primeira vez, ele executa a chamada de função <em>defContador(0+1)</em>, e muda o valor do estado do componente para 1. 
 Isso fará com que o componente seja re-renderizado, React executará a chamada da função defContador novamente e o estado mudará levando a outra re-renderização...
 
 Vamos definir os gerenciadores de eventos como fizemos antes:
@@ -563,7 +563,7 @@ const App = () => {
 
 Tudo ainda está funcionando. Quando os botões são clicados e o <i>App</i> é re-renderizado, todos os seus filhos, incluindo o componente <i>Exibir</i>, também são re-renderizados.
 
-Agora, vamos criar um componente <i>Botao</i> (*Botão) para os botões da nossa aplicação. Temos que passar o gerenciador de eventos, bem como o título do botão, através das props do componente:
+Agora, vamos criar um componente <i>Botao</i> (*Botão) para os botões da nossa aplicação. Temos que passar o gerenciador de evento, bem como o título do botão, através das props do componente:
 
 ```js
 const Botao = (props) => {
@@ -607,7 +607,7 @@ const App = () => {
 
 Por conta de agora termos disponível um componente <i>Botao</i> facilmente reutilizável, também implementamos uma nova funcionalidade em nossa aplicação, adicionando um botão que pode ser usado para decrementar o contador.
 
-O gerenciador de eventos é passado para o componente <i>Botao</i> através da prop _onClick_. O nome mesmo da prop não é algo tão significativo, mas a escolha do nome que colocamos não foi de todo aleatória. O próprio [tutorial oficial do React](https://reactjs.org/tutorial/tutorial.html) sugere essa convenção.
+O gerenciador de evento é passado para o componente <i>Botao</i> através da prop _onClick_. O nome mesmo da prop não é algo tão significativo, mas a escolha do nome que colocamos não foi de todo aleatória. O próprio [tutorial oficial do React](https://reactjs.org/tutorial/tutorial.html) sugere essa convenção.
 
 ### Alterações no estado causam re-renderização
 
@@ -616,10 +616,10 @@ Vamos revisar, mais uma vez, os principais princípios de como uma aplicação f
 Quando a aplicação inicia, o código em _App_ é executado. Este código usa um hook [useState](https://reactjs.org/docs/hooks-reference.html#usestate) para criar o estado da aplicação, definindo um valor inicial da variável _contador_.
 Este componente contém o componente _Exibir_ — que exibe o valor do contador, 0 — e três componentes _Botao_. Os botões possuem gerenciadores de eventos, que são usados para mudar o estado do contador.
 
-Quando um dos botões é clicado, o gerenciador de eventos é executado. O gerenciador de eventos muda o estado do componente _App_ com a função _defContador_. 
+Quando um dos botões é clicado, o gerenciador de evento é executado. O gerenciador de evento muda o estado do componente _App_ com a função _defContador_. 
 **Chamar uma função que muda o estado faz com que o componente seja re-renderizado.**
 
-Então, se um usuário clicar no botão <i>mais+</i>, o gerenciador de eventos do botão muda o valor de _contador_ para 1, e o componente _App_ é re-renderizado. 
+Então, se um usuário clicar no botão <i>mais+</i>, o gerenciador de evento do botão muda o valor de _contador_ para 1, e o componente _App_ é re-renderizado. 
 Isso faz com que seus subcomponentes _Exibir_ e _Botao_ também sejam re-renderizados. 
 _Exibir_ recebe o novo valor do contador, 1, como props. Os componentes _Botao_ recebem gerenciadores de eventos que podem ser usados para mudar o estado do contador.
 
