@@ -702,9 +702,9 @@ export default createApolloClient;
 The last piece of the sign-in puzzle is to integrate the storage to the <em>useSignIn</em> hook. To achieve this the hook must be able to access token storage instance we have initialized in the <em>App</em> component. React [Context](https://reactjs.org/docs/context.html) is just the tool we need for the job. Create a directory <i>contexts</i> in the <i>src</i> directory. In that directory create a file <i>AuthStorageContext.js</i> with the following content:
 
 ```javascript
-import React from 'react';
+import { createContext } from 'react';
 
-const AuthStorageContext = React.createContext();
+const AuthStorageContext = createContext();
 
 export default AuthStorageContext;
 ```
@@ -757,22 +757,23 @@ Note that accessing a context's value using the <em>useContext</em> hook only wo
 Accessing the <em>AuthStorage</em> instance with <em>useContext(AuthStorageContext)</em> is quite verbose and reveals the details of the implementation. Let's improve this by implementing a <em>useAuthStorage</em> hook in a <i>useAuthStorage.js</i> file in the <i>hooks</i> directory:
 
 ```javascript
+import { createContext } from 'react';
 import { useContext } from 'react'; 
 
-import AuthStorageContext from '../contexts/AuthStorageContext';
+const AuthStorageContext = createContext();
 
-const useAuthStorage = () => {
+export const useAuthStorage = () => {
   return useContext(AuthStorageContext);
 };
 
-export default useAuthStorage;
+export default AuthStorageContext;
 ```
 
 The hook's implementation is quite simple but it improves the readability and maintainability of the hooks and components using it. We can use the hook to refactor the <em>useSignIn</em> hook like this:
 
 ```javascript
 // ...
-import useAuthStorage from '../hooks/useAuthStorage'; // highlight-line
+import { useAuthStorage } from '../hooks/useAuthStorage'; // highlight-line
 
 const useSignIn = () => {
   const authStorage = useAuthStorage(); //highlight-line
@@ -780,7 +781,9 @@ const useSignIn = () => {
 };
 ```
 
-The ability to provide data to component's descendants opens tons of use cases for React Context. To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
+The ability to provide data to component's descendants opens tons of use cases for React Context, as we already saw in the [last chapter](/en/part6/react_query_use_reducer_and_the_context) of part 6.
+ 
+To learn more about these use cases, read Kent C. Dodds' enlightening article [How to use React Context effectively](https://kentcdodds.com/blog/how-to-use-react-context-effectively) to find out how to combine the [useReducer](https://reactjs.org/docs/hooks-reference.html#usereducer) hook with the context to implement state management. You might find a way to use this knowledge in the upcoming exercises.
 
 </div>
 
