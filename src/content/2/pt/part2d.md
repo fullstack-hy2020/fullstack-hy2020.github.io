@@ -581,7 +581,7 @@ O resultado é idêntico para ambas as expressões. Ambos criam um objeto com um
 
 Se a nossa aplicação permitisse que os usuários excluíssem notas, poderíamos acabar em uma situação em que um usuário tenta mudar a importância de uma nota que já foi excluída do sistema.
 
-Vamos simular esta situação fazendo com que a função <em>getAll</em> do serviço de notas retorne uma "nota de exemplo" ("'hardcoded' note") que na verdade não existe no servidor back-end:
+Vamos simular essa situação fazendo com que a função <em>getAll</em> do serviço de notas retorne uma "nota de exemplo" ("<i>'hardcoded' note</i> ") que na verdade não existe no servidor back-end:
 
 ```js
 const getAll = () => {
