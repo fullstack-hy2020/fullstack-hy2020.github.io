@@ -13,7 +13,7 @@ A aplicação serve apenas para demonstrar alguns conceitos básicos do curso e,
 
 O código seguirá as melhores práticas contemporâneas a partir da [parte 1](/pt/part1) em diante.
 
-Abra a [aplicação de exemplo](https://studies.cs.helsinki.fi/exampleapp) no seu navegador. Às vezes demora um pouco.
+Abra a [aplicação de exemplo](https://studies.cs.helsinki.fi/exampleapp) em seu navegador. Às vezes demora um pouco.
 
 O conteúdo do curso é feito utilizando o navegador Chrome.
 
