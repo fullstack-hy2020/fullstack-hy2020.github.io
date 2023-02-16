@@ -54,7 +54,7 @@ From typing point of view, there are a couple of interesting things. Component _
 
 ```js
 const App = () => {
-  const [patients, setPatients] = useState<Patient[]>([]); // highlight-lines
+  const [patients, setPatients] = useState<Patient[]>([]); // highlight-line
 
   // ...
   
@@ -67,7 +67,7 @@ const App = () => {
             <Route path="/" element={
               <PatientListPage
                 patients={patients}
-                setPatients={setPatients} // highlight-lines
+                setPatients={setPatients} // highlight-line
               />} 
             />
           </Routes>
