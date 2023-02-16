@@ -7,18 +7,17 @@ lang: pt
 
 <div class="content">
 
+Está bastante modesta a aparência atual da nossa aplicação. No [exercício 0.2](/pt/part0/fundamentos_de_aplicacoes_web#exercicios-0-1-a-0-6), o objetivo era passar pelo tutorial [CSS da Mozilla](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
 
-The appearance of our current application is quite modest. In [exercise 0.2](/en/part0/fundamentals_of_web_apps#exercises-0-1-0-6), the assignment was to go through Mozilla's [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).
+Vamos dar uma olhada em como podemos adicionar estilos a uma aplicação React. Existem várias maneiras diferentes de fazer isso e veremos os outros métodos mais tarde. Primeiro, adicionaremos o CSS à nossa aplicação da maneira antiga; em um único arquivo sem usar um [pré-processador CSS](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (embora isso não seja inteiramente verdade, como aprenderemos mais tarde).
 
-Let's take a look at how we can add styles to a React application. There are several different ways of doing this and we will take a look at the other methods later on. First, we will add CSS to our application the old-school way; in a single file without using a [CSS preprocessor](https://developer.mozilla.org/en-US/docs/Glossary/CSS_preprocessor) (although this is not entirely true as we will learn later on). 
-
-Let's add a new <i>index.css</i> file under the <i>src</i> directory and then add it to the application by importing it in the <i>index.js</i> file:
+Vamos criar um novo arquivo chamado <i>index.css</i> no diretório <i>src</i> e vamos adicioná-lo à aplicação importando-o no arquivo <i>index.js</i>:
 
 ```js
 import './index.css'
 ```
 
-Let's add the following CSS rule to the <i>index.css</i> file:
+Vamos adicionar a seguinte regra CSS ao arquivo <i>index.css</i>:
 
 ```css
 h1 {
@@ -26,24 +25,22 @@ h1 {
 }
 ```
 
-CSS rules comprise of <i>selectors</i> and <i>declarations</i>. The selector defines which elements the rule should be applied to. The selector above is <i>h1</i>, which will match all of the <i>h1</i> header tags in our application.
+As regras CSS consistem em <i>seletores</i> (selectors) e <i>declarações</i> (declarations). O seletor define a quais elementos a regra deve ser aplicada. O seletor acima é <i>h1</i>, que corresponderá a todas as tags de cabeçalho <i>h1</i> em nossa aplicação.
 
-The declaration sets the _color_ property to the value <i>green</i>.
+A declaração define a propriedade _color_ com o valor <i>green</i> (verde).
 
-One CSS rule can contain an arbitrary number of properties. Let's modify the previous rule to make the text cursive, by defining the font style as <i>italic</i>:
+Uma regra CSS pode conter um número arbitrário de propriedades. Vamos modificar a regra anterior para tornar o texto cursivo, definindo o estilo da fonte como <i>italic</i> (itálico):
 
 ```css
 h1 {
   color: green;
-  font-style: italic;  // highlight-line
+  font-style: italic; // highlight-line
 }
 ```
 
+Existem muitas maneiras de corresponder a elementos usando [diferentes tipos de seletores CSS](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
 
-There are many ways of matching elements by using [different types of CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors).
-
-
-If we wanted to target, let's say, each one of the notes with our styles, we could use the selector <i>li</i>, as all of the notes are wrapped inside <i>li</i> tags:
+Se quiséssemos direcionar, digamos, cada uma das notas com nossos estilos, poderíamos usar o seletor <i>li</i>, já que todas as notas estão envolvidas em tags <i>li</i>:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -60,8 +57,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-
-Let's add the following rule to our style sheet (since my knowledge of elegant web design is close to zero, the styles don't make much sense):
+Vamos adicionar a seguinte regra à nossa folha de estilo (já que meu conhecimento em web design moderno elegante é próximo a zero, os estilos aqui adicionados não são pra fazer muito sentido):
 
 ```css
 li {
@@ -71,21 +67,17 @@ li {
 }
 ```
 
+Usar tipos de elementos para definir regras CSS é um tanto problemático. Se nossa aplicação contiver outras tags <i>li</i>, a mesma regra de estilo também será aplicada a elas.
 
-Using element types for defining CSS rules is slightly problematic. If our application contained other <i>li</i> tags, the same style rule would also be applied to them.
+Se quisermos aplicar nosso estilo especificamente às notas, é melhor opção é usar [seletores de classe](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors).
 
-
-If we want to apply our style specifically to notes, then it is better to use [class selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/Class_selectors).
-
-
-In regular HTML, classes are defined as the value of the <i>class</i> attribute:
+Em HTML comum, as classes são definidas como o valor do atributo <i>class</i>:
 
 ```html
-<li class="note">some text...</li>
+<li class="note">algum texto...</li>
 ```
 
-
-In React we have to use the [className](https://reactjs.org/docs/dom-elements.html#classname) attribute instead of the class attribute. With this in mind, let's make the following changes to our <i>Note</i> component:
+Em React, temos que usar o atributo [className](https://reactjs.org/docs/dom-elements.html#classname) em vez do atributo <i>class</i>. Com isso em mente, façamos as seguintes alterações em nosso componente <i>Note</i>:
 
 ```js
 const Note = ({ note, toggleImportance }) => {
@@ -102,8 +94,7 @@ const Note = ({ note, toggleImportance }) => {
 }
 ```
 
-
-Class selectors are defined with the _.classname_ syntax:
+Os seletores de classe são definidos com a sintaxe _.classname_:
 
 ```css
 .note {
@@ -113,17 +104,13 @@ Class selectors are defined with the _.classname_ syntax:
 }
 ```
 
+Se você adicionar outros elementos <i>li</i> à aplicação agora, eles não serão afetados pela regra de estilo acima.
 
-If you now add other <i>li</i> elements to the application, they will not be affected by the style rule above.
+### Uma mensagem de erro aprimorada
 
+Anteriormente, implementamos a mensagem de erro que era exibida quando o usuário tentava alternar a importância de uma nota excluída com o método <em>alert</em>. Vamos implementar a mensagem de erro como seu próprio componente React.
 
-### Improved error message
-
-
-We previously implemented the error message that was displayed when the user tried to toggle the importance of a deleted note with the <em>alert</em> method. Let's implement the error message as its own React component.
-
-
-The component is quite simple:
+O componente é bastante simples:
 
 ```js
 const Notification = ({ message }) => {
@@ -139,19 +126,17 @@ const Notification = ({ message }) => {
 }
 ```
 
+Se o valor da prop <em>message</em> for <em>null</em>, nada é renderizado na tela e, em outros casos, a mensagem é renderizada dentro de um elemento div.
 
-
-If the value of the <em>message</em> prop is <em>null</em>, then nothing is rendered to the screen, and in other cases, the message gets rendered inside of a div element.
-
-
-Let's add a new piece of state called <i>errorMessage</i> to the <i>App</i> component. Let's initialize it with some error message so that we can immediately test our component:
+Vamos adicionar um novo pedaço de estado chamado <i>errorMessage</i> ao componente <i>App</i>. Vamos inicializá-lo com alguma mensagem de erro para que possamos testar imediatamente nosso componente:
 
 ```js
 const App = () => {
-  const [notes, setNotes] = useState([]) 
+  const [notes, setNotes] = useState([])
   const [newNote, setNewNote] = useState('')
   const [showAll, setShowAll] = useState(true)
   const [errorMessage, setErrorMessage] = useState('some error happened...') // highlight-line
+  //  'mensagemDeErro', 'defMensagemDeErro'        'aconteceu algum erro...'
 
   // ...
 
@@ -161,16 +146,16 @@ const App = () => {
       <Notification message={errorMessage} /> // highlight-line
       <div>
         <button onClick={() => setShowAll(!showAll)}>
-          show {showAll ? 'important' : 'all' }
+          show {showAll ? 'important' : 'all'}
         </button>
-      </div>      
+      </div>
       // ...
     </div>
   )
 }
 ```
 
-Then let's add a style rule that suits an error message:
+Vamos adicionar uma regra de estilo que sirva para uma mensagem de erro:
 
 ```css
 .error {
@@ -184,8 +169,7 @@ Then let's add a style rule that suits an error message:
 }
 ```
 
-
-Now we are ready to add the logic for displaying the error message. Let's change the <em>toggleImportanceOf</em> function in the following way:
+Agora estamos prontos para adicionar a lógica para exibir a mensagem de erro. Vamos mudar a função <em>toggleImportanceOf</em> da seguinte maneira:
 
 ```js
   const toggleImportanceOf = id => {
@@ -200,6 +184,7 @@ Now we are ready to add the logic for displaying the error message. Let's change
         // highlight-start
         setErrorMessage(
           `Note '${note.content}' was already removed from server`
+          //`A nota '${note.content} já foi excluída do servidor'`
         )
         setTimeout(() => {
           setErrorMessage(null)
@@ -210,22 +195,21 @@ Now we are ready to add the logic for displaying the error message. Let's change
   }
 ```
 
-When the error occurs we add a descriptive error message to the <em>errorMessage</em> state. At the same time, we start a timer, that will set the <em>errorMessage</em> state to <em>null</em> after five seconds.
+Quando o erro acontece, adicionamos uma mensagem de erro descritiva ao estado <em>errorMessage</em>. Ao mesmo tempo, iniciamos um temporizador, que definirá o estado <em>errorMessage</em> como <em>null</em> após 5 (cinco) segundos.
 
-The result looks like this:
+O resultado fica assim:
 
-![error removed from server screenshot from app](../../images/2/26e.png)
+![captura de tela de erro: removido do servidor da aplicação](../../images/2/26e.png)
 
+O código para o estado atual da nossa aplicação pode ser encontrado na branch <i>part2-7</i> no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
 
-The code for the current state of our application can be found in the  <i>part2-7</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-7).
+### Estilos inline
 
-### Inline styles
+React também possibilita escrever estilos diretamente no código com o chamados [estilos inline](https://reactjs.org/docs/dom-elements.html#style) (ou "estilos em linha").
 
-React also makes it possible to write styles directly in the code as so-called [inline styles](https://react-cn.github.io/react/tips/inline-styles.html).
+A ideia por trás da definição de estilos inline é extremamente simples. É possível fornecer a qualquer componente ou elemento React um conjunto de propriedades CSS como um objeto JavaScript através do atributo [style](https://reactjs.org/docs/dom-elements.html#style) (estilo).
 
-The idea behind defining inline styles is extremely simple. Any React component or element can be provided with a set of CSS properties as a JavaScript object through the [style](https://reactjs.org/docs/dom-elements.html#style) attribute.
-
-CSS rules are defined slightly differently in JavaScript than in normal CSS files. Let's say that we wanted to give some element the color green and italic font that's 16 pixels in size. In CSS, it would look like this:
+As regras CSS são definidas de forma um tanto diferente em JavaScript se comparadas com as de arquivos CSS comuns. Digamos que quiséssemos dar a um elemento a cor verde e uma fonte itálica de 16 pixels de tamanho. Em CSS, ficaria assim:
 
 ```css
 {
@@ -235,7 +219,7 @@ CSS rules are defined slightly differently in JavaScript than in normal CSS file
 }
 ```
 
-But as a React inline-style object it would look like this:
+Mas como se trata de um objeto de estilo inline React, ficaria assim:
 
 ```js
 {
@@ -245,9 +229,9 @@ But as a React inline-style object it would look like this:
 }
 ```
 
-Every CSS property is defined as a separate property of the JavaScript object. Numeric values for pixels can be simply defined as integers. One of the major differences compared to regular CSS, is that hyphenated (kebab case) CSS properties are written in camelCase.
+Cada propriedade CSS é definida como uma propriedade separada do objeto JavaScript. Valores numéricos em pixels podem ser definidos com simples números inteiros. Uma das principais diferenças em comparação ao CSS comum é que propriedades CSS com hífen (kebab case) são escritas em camelCase.
 
-Next, we could add a "bottom block" to our application by creating a <i>Footer</i> component and defining the following inline styles for it:
+Em seguida, poderíamos adicionar um "bloco inferior" à nossa aplicação criando um componente <i>Footer</i> e definindo-o com os seguintes estilos inline:
 
 ```js
 // highlight-start
@@ -255,13 +239,15 @@ const Footer = () => {
   const footerStyle = {
     color: 'green',
     fontStyle: 'italic',
-    fontSize: 16
+    fontSize: 16,
   }
-
   return (
     <div style={footerStyle}>
       <br />
-      <em>Note app, Department of Computer Science, University of Helsinki 2022</em>
+      <em>
+        Note app, Department of Computer Science, University of Helsinki 2023
+{/*Note app, Departamento de Ciências da Computação, Universidade de Helsinque 2023*/}
+      </em>
     </div>
   )
 }
@@ -276,7 +262,7 @@ const App = () => {
 
       <Notification message={errorMessage} />
 
-      // ...  
+      // ...
 
       <Footer /> // highlight-line
     </div>
@@ -284,51 +270,51 @@ const App = () => {
 }
 ```
 
-Inline styles come with certain limitations. For instance, so-called [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) can't be used straightforwardly.
+Estilos inline possuem certas limitações. Por exemplo, não é possível usar as chamadas [pseudo-classes](https://developer.mozilla.org/en-US/docs/Web/CSS/Pseudo-classes) diretamente neles.
 
-Inline styles and some of the other ways of adding styles to React components go completely against the grain of old conventions. Traditionally, it has been considered best practice to entirely separate CSS from the content (HTML) and functionality (JavaScript). According to this older school of thought, the goal was to write CSS, HTML, and JavaScript into their separate files.
+Estilos inline e algumas outras maneiras de adicionar estilos aos componentes React vão completamente contra a corrente das antigas convenções. Tradicionalmente, tem sido considerada a melhor prática separar completamente o CSS do conteúdo (HTML) e da funcionalidade (JavaScript). De acordo com essa antiga escola de pensamento, o objetivo era escrever o CSS, o HTML e o JavaScript em arquivos separados.
 
-The philosophy of React is, in fact, the polar opposite of this. Since the separation of CSS, HTML, and JavaScript into separate files did not seem to scale well in larger applications, React bases the division of the application along the lines of its logical functional entities.
+A filosofia do React é, na verdade, o oposto polar disso. As aplicações maiores não pareciam escalar bem com os arquivos CSS, HTML e JavaScript separados, então React decidiu basear a divisão dessas partes ao longo das linhas das entidades funcionais lógicas da aplicação.
 
-The structural units that make up the application's functional entities are React components. A React component defines the HTML for structuring the content, the JavaScript functions for determining functionality, and also the component's styling; all in one place. This is to create individual components that are as independent and reusable as possible.
+As unidades estruturais que compõem as entidades funcionais da aplicação são os componentes React. Um componente React define o HTML para estruturar o conteúdo, as funções JavaScript para determinar a funcionalidade e também o estilo do componente; tudo em um só lugar. Isso é para criar componentes individuais que sejam o mais independentes e reutilizáveis possível.
 
-The code of the final version of our application can be found in the  <i>part2-8</i> branch on [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8).
+O código da versão final da nossa aplicação pode ser encontrado na branch <i>part2-8</i> no [GitHub](https://github.com/fullstack-hy2020/part2-notes/tree/part2-8).
 
 </div>
 
 <div class="tasks">
 
-<h3>Exercises 2.16.-2.17.</h3>
+<h3>Exercícios 2.16 a 2.17</h3>
 
-<h4>2.16: Phonebook step11</h4>
+<h4>2.16: The Phonebook — 11º passo</h4>
 
-Use the [improved error message](/en/part2/adding_styles_to_react_app#improved-error-message) example from part 2 as a guide to show a notification that lasts for a few seconds after a successful operation is executed (a person is added or a number is changed): 
+Use como guia o exemplo da [mensagem de erro aprimorada](/pt/part2/adicionando_estilos_a_aplicacao_react#uma-mensagem-de-erro-aprimorada) da Parte 2 para exibir uma notificação que dure alguns segundos depois que uma operação bem-sucedida for executada (uma pessoa é adicionada ou um número é alterado):
 
-![successful green added screenshot](../../images/2/27e.png)
+![captura de tela: 'adicionado com sucesso' em verde](../../images/2/27e.png)
 
-<h4>2.17*: Phonebook step12</h4>
+<h4>2.17*: The Phonebook — 12º passo</h4>
 
-Open your application in two browsers. **If you delete a person in browser 1** a short while before attempting to <i>change the person's phone number</i> in browser 2, you will get the following error message:
+Abra sua aplicação em dois navegadores. **Se você excluir uma pessoa no navegador 1** um pouco antes de tentar <i>alterar o número de telefone da pessoa</i> no navegador 2, você receberá a seguinte mensagem de erro:
 
-![error message 404 not found when changing multiple browsers](../../images/2/29b.png)
+![mensagem de erro "404 not found" quando se altera a aplicação em múltiplos navegadores](../../images/2/29b.png)
 
-Fix the issue according to the example shown in [promise and errors](/en/part2/altering_data_in_server#promises-and-errors) in part 2. Modify the example so that the user is shown a message when the operation does not succeed. The messages shown for successful and unsuccessful events should look different:
+Corrija o problema de acordo com o exemplo mostrado em [promessas e erros](/pt/part2/alterando_dados_no_servidor#promessas-e-erros) na Parte 2. Modifique o exemplo para que uma mensagem seja mostrada ao usuário quando a operação for mal-sucedida. As mensagens exibidas para eventos bem e mal sucedidos devem ser diferentes:
 
-![error message shown on screen instead of in console feature add-on](../../images/2/28e.png)
+![mensagem de erro exibida na tela em vez do console - recurso complementar](../../images/2/28e.png)
 
-**Note** that even if you handle the exception, the error message is printed to the console.
+**Note** que mesmo se você gerenciar (handle) a exceção, a mensagem de erro ainda é impressa no console.
 
 </div>
 
 <div class="content">
 
-### Couple of important remarks
+### Algumas observações importantes
 
-At the end of this part there are a few more challenging exercises. At this stage, you can skip the exercises if they are too much of a headache, we will come back to the same themes again later. The material is worth reading through in any case.
+Têm alguns exercícios mais desafiadores no final desta parte. Você pode pular os exercícios se eles forem muito complicados, pois nós voltaremos aos mesmos temas mais tarde; porém, vale a pena ler o conteúdo, de qualquer forma.
 
-We have done one thing in our app that is masking away a very typical source of error. 
+Fizemos uma coisa em nossa aplicação que "mascara" uma fonte muito típica de erro.
 
-We set the state _notes_ to have initial value of an empty array:
+Definimos o estado _notes_ com um valor inicial de um array vazio:
 
 ```js
 const App = () => {
@@ -338,9 +324,9 @@ const App = () => {
 }
 ```
 
-This is a pretty natural initial value since the notes are a set, that is, there are many notes that the state will store.
+Esse é um valor inicial bem lógico, uma vez que as notas são um conjunto, isto é, há muitas notas que o estado irá armazenar.
 
-If the state would be only saving "one thing", a more proper initial value would be _null_ denoting that there is <i>noting</i> in the state at the start. Let us try what happens if we use this initial value:
+Se o estado estivesse salvando apenas "uma coisa", um valor inicial mais adequado seria _null_, indicando que não há <i>nada</i> no início do estado. Vamos ver o que acontece se usarmos esse valor inicial:
 
 ```js
 const App = () => {
@@ -350,14 +336,14 @@ const App = () => {
 }
 ```
 
-The app breaks down:
+A aplicação quebra:
 
 ![](../../images/2/31a.png)
 
-The error message gives the reason and location for the error. The code that caused the problems is the following:
+A mensagem de erro fornece a razão e a localização do erro. O código que causou o problema é o seguinte:
 
 ```js
-  // notesToShow gets the value of notes
+  // "notesToShow" obtém o valor de "notes"
   const notesToShow = showAll
     ? notes
     : notes.filter(note => note.important)
@@ -369,17 +355,17 @@ The error message gives the reason and location for the error. The code that cau
   )}
 ```
 
-The error message is
+A mensagem de erro é:
 
 ```
 Cannot read properties of null (reading 'map')
 ```
 
-The variable _notesToShow_ is first assigned the value of the state _notes_ and then the code tries to call method _map_ to an nonexisting object, that is, to _null_.
+A variável _notesToShow_ recebe primeiro o valor do estado _notes_ e depois o código tenta chamar o método _map_ em um objeto inexistente, ou seja, _null_.
 
-What is the reason for that?
+Qual é a razão disso?
 
-The effect hook uses the function _setNotes_ to set _notes_ to have the notes that the backend is returning:
+O hook de efeito (effect hook) utiliza a função _setNotes_ para definir que _notes_ terá as notas que o back-end está retornando:
 
 ```js
   useEffect(() => {
@@ -391,8 +377,9 @@ The effect hook uses the function _setNotes_ to set _notes_ to have the notes th
   }, [])
 ```
 
-However the problem is that the effect is executed only <i>after the first render</i>.
-And because _notes_ has the initial value of null:
+No entanto, o problema é que o efeito é executado somente <i>após a primeira renderização</i>.
+E por conta de _notes_ ter o valor inicial _null_,...
+
 ```js
 const App = () => {
   const [notes, setNotes] = useState(null) // highlight-line
@@ -400,7 +387,7 @@ const App = () => {
   // ...
 ```
 
-on the first render the following code gets executed
+... o código a seguir é executado na primeira renderização...
 
 ```js
 notesToShow = notes
@@ -410,13 +397,13 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-and this blows up the app since we can not call method _map_ of the value _null_. 
+... e isso faz com que a aplicação quebre, já que não podemos chamar o método _map_ no valor _null_.
 
-When we set _notes_ to be initially an empty array, there is no error since it is allowed to call _map_ to an empty array.
+Não há erro quando definimos _notes_ para ser inicialmente um array vazio, já que é permitido chamar o método _map_ em um array vazio.
 
-So, the initialization of the state "masked" the problem that is caused by the fact that the data is not yet fetched from the backend.
+Assim, a inicialização do estado "mascarou" o problema que é causado pelo fato de que os dados ainda não foram buscados no back-end.
 
-Another way to circumvent the problem is to use <i>conditional rendering</i> and return null if the component state is not properly initialized:
+Outra maneira de contornar o problema é usar a renderização condicional e retornar um valor nulo se o estado do componente não estiver adequadamente inicializado:
 
 ```js
 const App = () => {
@@ -431,7 +418,7 @@ const App = () => {
       })
   }, [])
 
-  // do not render anything if notes is still null
+  // não renderize nada se "notes" estiverem como "null"
   // highlight-start
   if (!notes) { 
     return null 
@@ -442,11 +429,11 @@ const App = () => {
 } 
 ```
 
-So on the first render, nothing is rendered. When the notes arrive from the backend, the effect used function _setNotes_ to set the value of the state _notes_. This causes the component to be rendered again, and at the second render, the notes get rendered to the screen.
+Assim, nada é renderizado na primeira renderização. Quando as notas chegam do servidor, o efeito usa a função _setNotes_ que define o valor do estado _notes_. Isso faz com que o componente seja renderizado novamente e, na segunda renderização, as notas são exibidas na tela.
 
-The method based on conditional rendering is suitable in cases where it is impossible to define the state so that the initial rendering is possible.
+O método baseado na renderização condicional é adequado em casos em que é impossível definir o estado para o qual a renderização inicial seja possível.
 
-The other thing that we still need to have a closer look is the second parameter of the useEffect:
+Um outro detalhe que ainda precisamos examinar mais de perto é o segundo parâmetro de useEffect:
 
 ```js
   useEffect(() => {
@@ -458,34 +445,34 @@ The other thing that we still need to have a closer look is the second parameter
   }, []) // highlight-line
 ```
 
+O segundo parâmetro de <em>useEffect</em> é utilizado para [especificar com que frequência o efeito é executado](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
+O princípio é que o efeito é sempre executado após a primeira renderização do componente <i>e</i> quando o valor do segundo parâmetro muda.
 
-The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
-The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
+Se o segundo parâmetro for um array vazio <em>[]</em>, seu conteúdo nunca muda e o efeito é executado somente após a primeira renderização do componente. Isso é exatamente o que queremos quando estamos inicializando o estado da aplicação a partir do servidor.
 
-If the second parameter is an empty array <em>[]</em>, it's content never changes and the effect is only run after the first render of the component. This is exactly what we want when we are initializing the app state from the server.
+No entanto, há situações em que queremos executar o efeito em outros momentos, por exemplo, quando o estado do componente muda de uma maneira específica.
 
-However, there are situations where we want to perform the effect at other times, e.g. when the state of the component changes in a particular way.
-
-Consider the following simple application for querying currency exchange rates from the [Exchange rate API](https://www.exchangerate-api.com/):
+Considere a aplicação simples a seguir que consulta as taxas de câmbio da [Exchange rate API](https://www.exchangerate-api.com/):
 
 ```js
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
 const App = () => {
-  const [value, setValue] = useState('')
-  const [rates, setRates] = useState({})
-  const [currency, setCurrency] = useState(null)
+  const [value, setValue] = useState('') // ou "valor" e "defValor"
+  const [rates, setRates] = useState({}) // ou "taxas" e "defTaxas"
+  const [currency, setCurrency] = useState(null) // ou "moeda" e "defMoeda"
 
   useEffect(() => {
-    console.log('effect run, currency is now', currency)
+    console.log('effect run, currency is now (efeito rodando, a moeda agora é)', currency)
 
     // skip if currency is not defined
+    // pule se a moeda não for definida
     if (currency) {
-      console.log('fetching exchange rates...')
+      console.log('fetching exchange rates... (buscando as taxas de câmbio)')
       axios
         .get(`https://open.er-api.com/v6/latest/${currency}`)
-        .then(response => {
+        .then((response) => {
           setRates(response.data.rates)
         })
     }
@@ -504,38 +491,39 @@ const App = () => {
     <div>
       <form onSubmit={onSearch}>
         currency: <input value={value} onChange={handleChange} />
+        {/* moeda */}
         <button type="submit">exchange rate</button>
+        {/* taxa de câmbio */}
       </form>
-      <pre>
-        {JSON.stringify(rates, null, 2)}
-      </pre>
+      <pre>{JSON.stringify(rates, null, 2)}</pre>
     </div>
   )
 }
 ```
 
-The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
+A interface de usuário da aplicação possui um formulário, onde no campo de entrada é escrito o nome da moeda (currency) desejada. Se a moeda existir, a aplicação renderiza as taxas de câmbio da moeda inserida para outras moedas:
 
 ![](../../images/2/32new.png)
 
-The application sets the name of the currency entered to the form to the state _currency_ at the moment the button is pressed.
+Quando o botão é clicado, a aplicação define o nome da moeda inserido no formulário para o estado _currency_.
 
-When the _currency_ gets a new value, the application fetches it's exchange rates form the API in the effect function:
+Quando _currency_ recebe um novo valor, a aplicação busca suas taxas de câmbio da API na função de efeito:
 
 ```js
 const App = () => {
   // ...
-  const [currency, setCurrency] = useState(null)
+  const [currency, setCurrency] = useState(null) // ou "moeda" e "defMoeda"
 
   useEffect(() => {
-    console.log('effect run, currency is now', currency)
+    console.log('effect run, currency is now (efeito rodando, a moeda agora é)', currency)
 
     // skip if currency is not defined
+    // pule se a moeda não for definida
     if (currency) {
-      console.log('fetching exchange rates...')
+      console.log('fetching exchange rates... (buscando as taxas de câmbio)')
       axios
         .get(`https://open.er-api.com/v6/latest/${currency}`)
-        .then(response => {
+        .then((response) => {
           setRates(response.data.rates)
         })
     }
@@ -544,24 +532,25 @@ const App = () => {
 }
 ```
 
-The useEffect hook has now _[currency]_ as the second parameter. The effect function is therefore executed after the first render, and <i>always</i> after the table as its second parameter _[currency]_ changes. That is, when the state _currency_ gets a new value, the content of the table changes and the effect function is executed.
+O hook useEffect agora tem _[currency]_ como segundo parâmetro. A função de efeito é, portanto, executada após a primeira renderização e <i>sempre</i> depois que a tabela que é definida no segundo parâmetro _[currency]_ muda. Ou seja, quando o estado _currency_ recebe um novo valor, o conteúdo da tabela muda e a função de efeito é executada.
 
-The effect has the following condition
+O efeito tem esta condição...
 
 ```js
-if (currency) { 
-  // haetaan valuuttakurssit
+if (currency) {
+  // exchange rates are fetched
+  // as taxas de câmbio são buscadas
 }
 ```
 
-which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. an empty string.
+... que impede a requisição das taxas de câmbio logo após a primeira renderização, quando a variável _currency_ ainda tem o valor inicial, ou seja, um valor nulo.
 
-So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address https://open.er-api.com/v6/latest/eur and stores the response in the _rates_ state.
+Portanto, se o usuário escrever, por exemplo, <i>eur</i> no campo de pesquisa, a aplicação usa a biblioteca Axios para fazer uma requisição HTTP GET ao endereço https://open.er-api.com/v6/latest/eur e armazena a resposta no estado _rates_.
 
-When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested form the API.
+Quando o usuário inserir outro valor no campo de pesquisa, por exemplo, <i>usd</i>, a função de efeito é executada novamente e as taxas de câmbio da nova moeda são requisitadas da API.
 
-The way presented here for making API requests might seem a bit awkward.
-This particular application could have been made completely without using the useEffect, by making the API requests directly in the form submit handler function:
+A forma apresentada aqui para fazer requisições à API pode parecer um tanto estranha.
+Esta aplicação em específico poderia ter sido completamente construída sem a necessidade de usar o hook useEffect, por meio de requisições feitas à API diretamente na função de gerência de envio do formulário:
 
 ```js
   const onSearch = (event) => {
@@ -574,78 +563,81 @@ This particular application could have been made completely without using the us
   }
 ```
 
-However, there are situations where that technique would not work. For example, you <i>might</i> encounter one such a situation in the exercise 2.20 where the use of useEffect could provide a solution. Note that this depends quite much on the approach you selected, e.g. the model solution does not use this trick.
+No entanto, existem situações em que essa técnica não funcionaria. Por exemplo, é <i>possível</i> que você encontre uma situação dessas no exercício 2.20, onde o uso do hook useEffect possa fornecer uma solução. Observe que isso depende muito da abordagem selecionada; por exemplo, a solução do modelo não usa esse truque.
 
 </div>
 
 <div class="tasks">
 
-<h3>Exercises 2.18.-2.20.</h3>
+<h3>Exercícios 2.18 a 2.20</h3>
 
-<h4>2.18* Data for countries, step1</h4>
+<h4>2.18*: Data for countries — 1º passo</h4>
 
-The API [https://restcountries.com](https://restcountries.com) provides data for different countries in a machine-readable format, a so-called REST API.
+A API [https://restcountries.com](https://restcountries.com) fornece dados de diferentes países em um formato legível por máquina (machine-readable format), uma chamada API REST.
 
-Create an application, in which one can look at data from various countries. The application should probably get the data from the endpoint [all](https://restcountries.com/v3.1/all).
+Crie uma aplicação onde se possa ver os dados de vários países. A aplicação vai provavelmente obter os dados do endpoint [all](https://restcountries.com/v3.1/all).
 
-The user interface is very simple. The country to be shown is found by typing a search query into the search field.
+A interface de usuário é muito simples. O país a ser exibido deve ser encontrado através de uma consulta em um campo de pesquisa.
 
-If there are too many (over 10) countries that match the query, then the user is prompted to make their query more specific:
+Se houver muitos (mais de 10) países que correspondam à consulta, é solicitado ao usuário que seja mais específico na consulta:
 
-![too many matches screenshot](../../images/2/19b1.png)
+![captura de tela com a resposta 'too many matches'](../../images/2/19b1.png)
+<i>Descrição da imagem: Muitas correspondências encontradas. Especifique outro filtro.</i>
 
-If there are ten or fewer countries, but more than one, then all countries matching the query are shown:
+Se houver dez ou menos países, porém mais de um, todos os países que correspondem à consulta são exibidos:
 
-![matching countries in a list screenshot](../../images/2/19b2.png)
+![captura de tela dos países correspondentes em uma lista](../../images/2/19b2.png)
 
-When there is only one country matching the query, then the basic data of the country (eg. capital and area), its flag and the languages spoken are shown:
+Quando houver apenas um país que corresponda à consulta, os dados básicos do país (capital e área, por exemplo), sua bandeira e os idiomas falados no país são exibidos:
 
-![flag and additional attributes screenshot](../../images/2/19c3.png)
+![captura de tela da bandeira e dos atributos adicionais](../../images/2/19c3.png)
 
-**NB**: It is enough that your application works for most countries. Some countries, like <i>Sudan</i>, can be hard to support since the name of the country is part of the name of another country, <i>South Sudan</i>. You don't need to worry about these edge cases.
+**N.B.**: Já é suficiente que sua aplicação funcione para a maioria dos países. Alguns países, como o <i>Sudan</i> (Sudão), podem ser difíceis de ajustar, já que o nome do país faz parte do nome de outro país, <i>South Sudan</i> (Sudão do Sul). Você não precisa se preocupar com esses casos extremos.
 
-**WARNING** create-react-app will automatically turn your project into a git-repository unless you create your application inside of an existing git repository. **Most likely you do not want each of your projects to be a separate repository**, so simply run the _rm -rf .git_ command at the root of your application.
+**N.B.**: A API recebe consultas somente em inglês. (nota do tradutor)
 
-<h4>2.19*: Data for countries, step2</h4>
+**AVISO**: "create-react-app" transformará automaticamente seu projeto em um repositório git, a menos que você crie sua aplicação dentro de um repositório git já existente.**Você muito provavelmente não quer que cada um de seus projetos seja um repositório separado**, então basta executar o comando _rm -rf .git_ na raiz de sua aplicação para aplicar as modificações.
 
-**There is still a lot to do in this part, so don't get stuck on this exercise!**
+<h4>2.19*: Data for countries — 2º passo</h4>
 
-Improve on the application in the previous exercise, such that when the names of multiple countries are shown on the page there is a button next to the name of the country, which when pressed shows the view for that country:
+**Ainda há muito o que fazer nesta parte, então não fique preso neste exercício!**
 
-![attach show buttons for each country feature](../../images/2/19b4.png)
+Melhore a aplicação do exercício anterior de modo que quando os nomes de vários países são exibidos na página, haja um botão ao lado do nome do país que, ao ser clicado, exiba as informações desse país:
 
-In this exercise, it is also enough that your application works for most countries. Countries whose name appears in the name of another country, like <i>Sudan</i>, can be ignored.
+![funcionalidade atrelada que exibe botões para cada país](../../images/2/19b4.png)
 
-<h4>2.20*: Data for countries, step3</h4>
+Neste exercício, é suficiente que sua aplicação funcione para a maioria dos países. Países cujo nome aparece no nome de outro país, como o <i>Sudão</i>, podem ser ignorados.
 
-**There is still a lot to do in this part, so don't get stuck on this exercise!**
+<h4>2.20*: Data for countries — 3º passo</h4>
 
-Add to the view showing the data of a single country, the weather report for the capital of that country. There are dozens of providers for weather data. One suggested API is [https://openweathermap.org](https://openweathermap.org). Note that it might take some minutes until a generated API key is valid.
+**Ainda há muito o que fazer nesta parte, então não fique preso neste exercício!**
 
-![weather report added feature](../../images/2/19x.png)
+Adicione à funcionalidade que exibe os dados de um único país o relatório meteorológico para a capital desse país. Existem dezenas de provedores de dados meteorológicos. Uma API sugerida é a [https://openweathermap.org](https://openweathermap.org). Observe que pode levar alguns minutos até que a chave gerada da API seja validada.
 
-If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
+![funcionalidade adicionada que exibe os dados meteorológicos](../../images/2/19x.png)
 
-**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with _http://_. This issue can be fixed by completing the exercise using Chrome.
+Se você usar o Open Weather map, a descrição de como obter os ícones climáticos encontra-se [aqui](https://openweathermap.org/weather-conditions#Icon-list).
 
-**NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
+**N.B.:** Em alguns navegadores (como o Firefox), a API escolhida pode enviar uma resposta de erro, o que indica que a criptografia HTTPS não é suportada, mesmo que a URL da solicitação comece com _http://_. Esse problema pode ser corrigido concluindo o exercício usando o Chrome.
 
-Assuming the api-key is <i>t0p53cr3t4p1k3yv4lu3</i>, when the application is started like so:
+**N.B.:** Quase todos os serviços meteorológicos exigem que você use uma chave de API. Não salve a chave de API no controle de versão (Git)! Nem programe usando a chave de API em seu código-fonte. Em vez disso, use uma [variável de ambiente](https://create-react-app.dev/docs/adding-custom-environment-variables/) (environment variable) para salvar a chave.
+
+Supondo que a chave de API seja <i>t0p53cr3t4p1k3yv4lu3</i>, quando a aplicação é iniciada desta forma...
 
 ```bash
-REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // For Linux/macOS Bash
-($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // For Windows PowerShell
-set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // For Windows cmd.exe
+REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3 npm start // Para o Bash do Linux/macOS
+($env:REACT_APP_API_KEY="t0p53cr3t4p1k3yv4lu3") -and (npm start) // Para o PowerShell do Windows
+set "REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3" && npm start // Para o cmd.exe do Windows
 ```
 
-you can access the value of the key from the _process.env_ object:
+... é possível acessar o valor da chave através do objeto _process.env_:
 
 ```js
 const api_key = process.env.REACT_APP_API_KEY
-// variable api_key has now the value set in startup
+// a variável "api_key" agora possui o valor definido na inicialização
 ```
 
-Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following. 
+Observe que, se você criou a aplicação usando _npx create-react-app ..._ e deseja usar um nome diferente para sua variável de ambiente, o nome da variável de ambiente ainda deve começar com *REACT\_APP_*. Também é possível usar um arquivo `.env` em vez de defini-la na linha de comando todas a vezes, criando um arquivo chamado '.env' na raiz do projeto e adicionando o seguinte:
 
 ```
 # .env
@@ -653,8 +645,8 @@ Note that if you created the application using _npx create-react-app ..._ and yo
 REACT_APP_API_KEY=t0p53cr3t4p1k3yv4lu3
 ```
 
-Note that you will need to restart the server to apply the changes.
+Observe que você precisará reiniciar o servidor para aplicar as alterações.
 
-This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Este foi o último exercício para esta parte do curso, e é hora de enviar seu código para o GitHub e marcar todos os seus exercícios concluídos na guia "my submissions" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>
