@@ -439,7 +439,7 @@ module.exports = {
     },
     '3': {
       a: 'Node.js e Express',
-      b: 'Implementação da aplicação na internet',
+      b: 'Implantação da aplicação na internet',
       c: 'Salvando dados no MongoDB',
       d: 'Validação e ESLint',
     },
