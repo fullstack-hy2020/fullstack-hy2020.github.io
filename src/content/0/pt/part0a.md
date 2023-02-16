@@ -216,7 +216,7 @@ Se você passou na prova e não deseja fazer mais exercícios, é possível volt
 
 Lembre-se de apertar no botão azul grande para pedir o cadastro dos créditos.
 
-Observe que você deve clicar o botão duas vezes:
+Observe que você deve clicar no botão duas vezes:
 
 ![pressionando o botão confirmar](../../images/0/button2.png)
 
@@ -240,7 +240,7 @@ Você receberá seus créditos depois de enviar exercícios suficientes para sua
 
 Lembre-se de apertar o botão azul para pedir o cadastro dos créditos.
 
-Observe que você deve clicar o botão duas vezes:
+Note que você deve clicar no botão duas vezes:
 
 ![pressionando o botão confirmar](../../images/0/button2.png)
 
