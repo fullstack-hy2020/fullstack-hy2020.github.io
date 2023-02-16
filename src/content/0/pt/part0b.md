@@ -17,7 +17,7 @@ Abra a [aplicação de exemplo](https://studies.cs.helsinki.fi/exampleapp) em se
 
 O conteúdo do curso é feito utilizando o navegador Chrome.
 
-**A 1ª regra de desenvolvimento web**: Mantenha sempre o "Console do Desenvolvedor" aberto no seu navegador web. No macOS, abra o console pressionando _F12_ ou _option-cmd-i_ simultaneamente. No Windows ou Linux, abra o console pressionando _F12_ ou _ctrl-shift-i_ simultaneamente. O console também pode ser aberto via [tecla Menu](https://help.gnome.org/users/gnome-help/stable/keyboard-key-menu.html.pt_BR).
+**A 1ª regra de desenvolvimento web**: Mantenha sempre o "Console do Desenvolvedor" aberto em seu navegador web. No macOS, abra o console pressionando _F12_ ou _option-cmd-i_ simultaneamente. No Windows ou Linux, abra o console pressionando _F12_ ou _ctrl-shift-i_ simultaneamente. O console também pode ser aberto via [tecla Menu](https://help.gnome.org/users/gnome-help/stable/keyboard-key-menu.html.pt_BR).
 
 Lembre-se de <i>sempre</i> manter o console do desenvolvedor aberto ao desenvolver aplicações web.
 
@@ -33,7 +33,7 @@ Certifique-se de que a guia <i>Rede</i> esteja aberta e marque a opção <i>Desa
 
 O servidor e o navegador web se comunicam usando o protocolo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). A guia <i>Rede</i> mostra como o navegador e o servidor se comunicam.
 
-Quando você recarrega a página (clique a tecla F5 ou o símbolo &#8635; no seu navegador), o console mostrará que dois eventos aconteceram:
+Quando você recarrega a página (clique a tecla F5 ou o símbolo &#8635; em seu navegador), o console mostrará que dois eventos aconteceram:
 
 - O navegador baixou o conteúdo da página <i>studies.cs.helsinki.fi/exampleapp</i> do servidor; e
 - E baixou a imagem <i>kuva.png</i>.
