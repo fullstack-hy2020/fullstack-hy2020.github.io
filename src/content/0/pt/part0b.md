@@ -33,7 +33,7 @@ Certifique-se de que a guia <i>Rede</i> esteja aberta e marque a opção <i>Desa
 
 O servidor e o navegador web se comunicam usando o protocolo [HTTP](https://developer.mozilla.org/en-US/docs/Web/HTTP). A guia <i>Rede</i> mostra como o navegador e o servidor se comunicam.
 
-Quando você recarrega a página (pressione a tecla F5 ou o símbolo &#8635; no seu navegador), o console mostrará que dois eventos aconteceram:
+Quando você recarrega a página (clique a tecla F5 ou o símbolo &#8635; no seu navegador), o console mostrará que dois eventos aconteceram:
 
 - O navegador baixou o conteúdo da página <i>studies.cs.helsinki.fi/exampleapp</i> do servidor; e
 - E baixou a imagem <i>kuva.png</i>.

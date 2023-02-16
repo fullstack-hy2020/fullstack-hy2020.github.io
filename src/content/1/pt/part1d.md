@@ -909,7 +909,7 @@ const Botao = (props) => (
 )
 ```
 
-A componente obtém a função de gerenciador de evento da propriedade _gerClique_, e o texto do botão da propriedade _texto_. Vamos usar o novo componente:
+O componente obtém a função de gerência de evento da propriedade _gerClique_, e o texto do botão da propriedade _texto_. Vamos usar o novo componente:
 
 ```js
 const App = (props) => {

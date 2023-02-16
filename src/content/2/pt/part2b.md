@@ -354,7 +354,7 @@ A razão de mostrarmos o operador de comparação primeiro foi para enfatizar um
 
 É possível testar a funcionalidade de filtragem mudando o valor inicial do estado <em>showAll</em>.
 
-Em seguida, vamos adicionar a funcionalidade que permite aos usuários alternar o estado <em>showAll</em> da aplicação a partir da interface do usuário (GUI).
+Em seguida, vamos adicionar a funcionalidade que permite aos usuários alternar o estado <em>showAll</em> da aplicação a partir da interface de usuário (GUI).
 
 As alterações relevantes são mostradas abaixo:
 

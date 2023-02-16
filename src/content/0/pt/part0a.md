@@ -216,11 +216,11 @@ Se você passou na prova e não deseja fazer mais exercícios, é possível volt
 
 Lembre-se de apertar no botão azul grande para pedir o cadastro dos créditos.
 
-Observe que você deve pressionar o botão duas vezes:
+Observe que você deve clicar o botão duas vezes:
 
 ![pressionando o botão confirmar](../../images/0/button2.png)
 
-Quando pressionado duas vezes, deverá ser exibido o seguinte texto:
+Quando clicado duas vezes, deverá ser exibido o seguinte texto:
 
 > <i>Crédito universitário em andamento...</i>
 
@@ -240,11 +240,11 @@ Você receberá seus créditos depois de enviar exercícios suficientes para sua
 
 Lembre-se de apertar o botão azul para pedir o cadastro dos créditos.
 
-Observe que você deve pressionar o botão duas vezes:
+Observe que você deve clicar o botão duas vezes:
 
 ![pressionando o botão confirmar](../../images/0/button2.png)
 
-Quando pressionado duas vezes, você deve ver o seguinte texto:
+Quando clicado duas vezes, você deve ver o seguinte texto:
 
 > <i>Crédito universitário em andamento...</i>
 
