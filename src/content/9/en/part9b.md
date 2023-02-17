@@ -1028,7 +1028,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-We shall see later on in this parts some techniques how the <i>any</i> typed data (eg. the input an app recieves from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
+We shall see later on in this part some techniques how the <i>any</i> typed data (eg. the input an app recieves from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
 
 ### Type assertion
 
