@@ -408,7 +408,7 @@ Your next task is to add endpoint <i>/api/patients/:id/entries</i> to your backe
 
 Remember that we have different kinds of entries in our app, so our backend should support all those types and check that at least all required fields are given for each type.
 
-In this exercise you quite likely need to remember [this trick](/en/part9/grande_finale_patientor_frontend#omit-with-unions).
+In this exercise you quite likely need to remember [this trick](/en/part9/grande_finale_patientor#omit-with-unions).
 
 You may assume that the diagnostic codes are sent in a correct form and use eg. the following kind of parser to extract those from the request body:
 
