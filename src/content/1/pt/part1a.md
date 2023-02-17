@@ -110,7 +110,7 @@ A função é, então, atribuída a uma (variável) constante <i>App</i>:
 const App = ...
 ```
 
-Existem algumas maneiras de definir funções em JavaScript. Aqui usaremos as [funções de seta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) (arrow functions), que são descritas em uma versão mais recente do JavaScript conhecida como [ECMAScript 6](http://es6-features.org/#Constants), também chamada de ES6.
+Existem algumas maneiras de definir funções em JavaScript. Aqui usaremos as [funções de seta](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) (arrow functions), que são descritas em uma versão mais recente de JavaScript conhecida como [ECMAScript 6](http://es6-features.org/#Constants), também chamada de ES6.
 
 Por conta da função consistir em apenas uma única expressão, usamos uma notação abreviada, que representa este trecho de código:
 
