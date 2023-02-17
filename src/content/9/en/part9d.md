@@ -637,7 +637,7 @@ The result might look like the following:
 
 So far, we have only looked at an application that keeps all the data in a typed variable but does not have any state. Let us once more go back to the note app, and build a typed version of it.
 
-We start with the following dode:
+We start with the following code:
 
 ```js
 import { useState } from 'react';
@@ -677,7 +677,7 @@ The type of the returned array is the following:
 [string, React.Dispatch<React.SetStateAction<string>>]
 ```
 
-So the first element, assignd to _newNote_ is a string and the second element that we assigned _setNewNote_ has a slightly more complex type. We notice that there is a string mentioned there, so we know that it must be the type of a function that sets a valued data. See [here](https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/) if you want to learn more about the types of useState function.
+So the first element, assigned to _newNote_ is a string and the second element that we assigned _setNewNote_ has a slightly more complex type. We notice that there is a string mentioned there, so we know that it must be the type of a function that sets a valued data. See [here](https://codewithstyle.info/Using-React-useState-hook-with-TypeScript/) if you want to learn more about the types of useState function.
 
 From this all we see that TypeScript has indeed [inferred](https://www.typescriptlang.org/docs/handbook/type-inference.html#handbook-content) the type of the first useState quite right, it is creating a state with type string.
 

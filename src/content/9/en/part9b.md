@@ -816,7 +816,7 @@ The response is a JSON of the form:
 }
 ```
 
-See the [Express documentation](http://expressjs.com/en/5x/api.html#req.query) for info on how to access the query parameters.
+See the [Express documentation](https://expressjs.com/en/5x/api.html#req.query) for info on how to access the query parameters.
 
 If the query parameters of the request are of the wrong type or missing, a response with proper status code and an error message is given:
 

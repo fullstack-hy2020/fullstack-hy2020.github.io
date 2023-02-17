@@ -489,7 +489,7 @@ import diaryData from '../../data/entries.json';
 
 import { DiaryEntry } from '../types'; // highlight-line
 
-const diaries: <DiaryEntry[] = diaryData; // highlight-line
+const diaries: DiaryEntry[] = diaryData; // highlight-line
 
 const getEntries = (): DiaryEntry[] => { // highlight-line
   return diaries; // highlight-line
