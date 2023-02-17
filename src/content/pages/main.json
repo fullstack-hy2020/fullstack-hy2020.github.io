@@ -92,7 +92,7 @@
     "licenced": "Le matériel est sous licence Creative Commons BY-NC-SA 3.0."
   },
   "pt": {
-    "mainTitle": "Dê Um Mergulho Profundo em Desenvolvimento Web Moderno",
+    "mainTitle": "Dê um mergulho profundo em desenvolvimento web moderno",
     "intro": "Aprenda React, Redux, Node.js, MongoDB, GraphQL e TypeScript em único lugar! Este curso irá introduzi-lo ao desenvolvimento de aplicações web modernas em JavaScript. O objetivo principal é construir aplicações SPA (Aplicações de Página Única) com ReactJS que utilizam APIs REST construídas em Node.js.",
     "current": [
       "<em>Têm dúvidas sobre o curso? Leia cuidadosamente a <a href='/pt/part0/informacoes_gerais'>Parte 0</a>, pois lá é possível encontrar a resposta para a maioria delas...</em>",
