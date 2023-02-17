@@ -560,7 +560,7 @@ const name = 'Leevi'
 const age = 0
 ```
 
-Em versões mais antigas do JavaScript, tínhamos que definir um objeto assim:
+Em versões mais antigas de JavaScript, tínhamos que definir um objeto assim:
 
 ```js
 const person = {

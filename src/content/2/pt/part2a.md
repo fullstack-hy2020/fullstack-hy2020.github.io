@@ -23,7 +23,7 @@ Quando algo não funciona, não tente adivinhar o que está errado. Em vez disso
 console.log('valor de props é ' + props)
 ```
 
-... separe os valores a serem impressas com uma vírgula:
+... separe os valores a serem impressos com uma vírgula:
 
 ```js
 console.log('valor de props é', props)
@@ -81,7 +81,7 @@ A passagem de gerenciadores de eventos para os componentes-filho do componente <
 
 ### Renderização de Coleções
 
-**N.B.:** A partir deste momento, os códigos utilizados como exemplo permanecerão no idioma original (inglês), visto que é disponibilizado ao final de cada sessão o repositório onde o código-exemplo pode ser encontrado na íntegra. É muito provável que o estudante se confunda caso os nomes de variáveis, funções, componentes, etc estejam em português, dado que estaria diferente do código disponibilizado no repositório do GitHub, que está em inglês.
+**N.B.:** A partir deste momento, os códigos utilizados como exemplo permanecerão no idioma original (inglês), visto que é disponibilizado ao final de cada sessão o repositório onde o código-exemplo pode ser encontrado na íntegra. É muito provável que o estudante se confunda caso os nomes de variáveis, funções, componentes, etc estejam em português, dado que estaria diferente do código disponibilizado no repositório do GitHub, que está em inglês. (nota do tradutor)
 
 Faremos neste momento a lógica da aplicação do lado do cliente (navegador), ou o "front-end", em React, para uma aplicação semelhante à aplicação de exemplo da [Parte 0](/pt/part0).
 
@@ -159,7 +159,7 @@ Isso, obviamente, não é algo prático. Podemos melhorar nosso código gerando 
 notes.map(note => <li>{note.content}</li>)
 ```
 
-O resultado é um array de elementos <i>li</i>.
+O resultado é um array de elementos <i>li</i>...
 
 ```js
 [
@@ -169,7 +169,7 @@ O resultado é um array de elementos <i>li</i>.
 ]
 ```
 
-Que então podem ser colocados dentro de tags <i>ul</i>:
+... que então podem ser colocados dentro de tags <i>ul</i>:
 
 ```js
 const App = (props) => {

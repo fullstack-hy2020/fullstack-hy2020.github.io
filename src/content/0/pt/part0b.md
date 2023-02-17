@@ -118,12 +118,12 @@ Escrever HTML no meio do código não é algo inteligente de se fazer, obviament
 
 Em aplicações web tradicionais, o navegador é "burro". Ele só busca dados HTML do servidor e toda a lógica da aplicação está no servidor. Um servidor pode ser criado usando [Java Spring](https://spring.io/projects/spring-framework), [Python Flask](https://flask.palletsprojects.com/en/2.2.x/) ou [Ruby on Rails](http://rubyonrails.org/), para citar apenas alguns exemplos.
 
-O exemplo usa a biblioteca [Express](https://expressjs.com/) com o Node.js. Este curso usará o Node.js e o Express para criar servidores web.
+O exemplo usa a biblioteca [Express](https://expressjs.com/) com Node.js. Este curso usará Node.js e Express para criar servidores web.
 
 ### Executando a lógica da aplicação no navegador
 
-Mantenha o Console do Desenvolvedor aberto. Esvazie o console clicando no símbolo 🚫 ou digitando clear() no console.
-Agora, quando você for para a página [notes](https://studies.cs.helsinki.fi/exampleapp/notes), o navegador fará 4 requisições HTTP:
+Mantenha o Console do Desenvolvedor aberto. Esvazie o console clicando no símbolo 🚫 ou digitando _clear()_ no console.
+Agora, quando você for para a página [notes](https://studies.cs.helsinki.fi/exampleapp/notes), o navegador fará 4 (quatro) requisições HTTP:
 
 ![Captura de tela do console do desenvolvedor com 4 requisições visíveis](../../images/0/8e.png)
 
@@ -264,7 +264,7 @@ A requisição ao servidor é feita na última linha, mas o código que lida com
 xhttp.onreadystatechange = function () {
 ```
 
-Nessa linha, um <i>event handler</i> (gerenciador de evento ou manipulador de evento) para o evento <i>onreadystatechange</i> é definido para o objeto <em>xhttp</em> que faz a requisição. Quando o estado do objeto muda, o navegador chama a função gerenciadora de evento. O código da função verifica que o [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) é igual a 4 (o que representa o estado "DONE" que exibe a descrição <i>A operação está completa</i>) e que o código de status HTTP da resposta é 200.
+Nessa linha, um <i>event handler</i> ("gerenciador de evento" ou "manipulador de evento") para o evento <i>onreadystatechange</i> é definido para o objeto <em>xhttp</em> que faz a requisição. Quando o estado do objeto muda, o navegador chama a função gerenciadora de evento. O código da função verifica que o [readyState](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/readyState) é igual a 4 (o que representa o estado "DONE" que exibe a descrição <i>A operação está completa</i>) e que o código de status HTTP da resposta é 200.
 
 ```js
 xhttp.onreadystatechange = function() {
@@ -274,7 +274,7 @@ xhttp.onreadystatechange = function() {
 }
 ```
 
-O mecanismo de chamada de gerenciadores de eventos é muito comum em JavaScript. As funções de gerência de eventos são chamadas de [funções callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function). O código da aplicação não chama as funções em si, mas o "runtime environment" (ambiente de tempo de execução) — isto é, o navegador, que chama a função no tempo correto quando o <i>evento</i> acontece.
+O mecanismo de chamada de gerenciadores de eventos é muito comum em JavaScript. As funções de gerência de eventos são chamadas de [funções callback](https://developer.mozilla.org/en-US/docs/Glossary/Callback_function) (funções de retorno de chamada). O código da aplicação não chama as funções em si, mas o "runtime environment" (ambiente de tempo de execução) — isto é, o navegador, que chama a função no tempo correto quando o <i>evento</i> acontece.
 
 ### Modelo de Documento por Objetos (DOM [Document Object Model])
 
@@ -575,7 +575,7 @@ A aplicação de exemplo é feita com o chamado JavaScript "vanilla" (ou JavaScr
 
 Em vez de usar somente JavaScript e a API DOM, é comum usar diferentes bibliotecas que contêm ferramentas mais fáceis de trabalhar em comparação com a API DOM para manipular páginas. Uma dessas bibliotecas é a popular jQuery (https://jquery.com/).
 
-A biblioteca jQuery foi desenvolvida quando as aplicações web seguiam principalmente o estilo tradicional do servidor gerando páginas HTML, cuja funcionalidade era aprimorada no lado do navegador usando JavaScript escrito com jQuery. Uma das razões para o sucesso de jQuery foi a sua compatibilidade cross-browser (compatibilidade entre navegadores). A biblioteca funcionava independentemente do navegador ou da empresa que a fez, então não havia necessidade de soluções específicas para cada navegador. Hoje em dia, usar jQuery não é tão justificável dada a evolução do JavaScript, e os navegadores mais populares, de modo geral, dão um bom suporte às funcionalidades básicas.
+A biblioteca jQuery foi desenvolvida quando as aplicações web seguiam principalmente o estilo tradicional do servidor gerando páginas HTML, cuja funcionalidade era aprimorada no lado do navegador usando JavaScript escrito com jQuery. Uma das razões para o sucesso de jQuery foi a sua compatibilidade cross-browser (compatibilidade entre navegadores). A biblioteca funcionava independentemente do navegador ou da empresa que a fez, então não havia necessidade de soluções específicas para cada navegador. Hoje em dia, usar jQuery não é tão justificável dada a evolução de JavaScript, e os navegadores mais populares, de modo geral, dão um bom suporte às funcionalidades básicas.
 
 A ascensão das SPA trouxe várias formas mais "modernas" de desenvolvimento web do que jQuery. A favorita da primeira onda de desenvolvedores foi BackboneJS (http://backbonejs.org/). Após o seu lançamento (https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) em 2012, AngularJS (https://angularjs.org/) rapidamente se tornou quase o padrão de desenvolvimento web moderno da Google.
 
@@ -584,7 +584,7 @@ No entanto, a popularidade do Angular caiu em outubro de 2014 após a equipe do 
 Atualmente, a ferramenta mais popular para implementar a lógica do lado do cliente (navegador) de aplicações web é a biblioteca [React](https://reactjs.org/) do Facebook.
 Durante este curso, vamos nos familiarizar com o React e com a biblioteca [Redux](https://github.com/reactjs/redux), que são frequentemente usadas juntas.
 
-O status do React parece forte, mas o mundo do JavaScript está sempre mudando. Por exemplo, recentemente, um novato — [VueJS](https://vuejs.org/) — tem chamado a atenção.
+O status do React parece forte, mas o mundo de JavaScript está sempre mudando. Por exemplo, recentemente, um novato — [VueJS](https://vuejs.org/) — tem chamado a atenção.
 
 ### Desenvolvimento Web Ful Stack
 
