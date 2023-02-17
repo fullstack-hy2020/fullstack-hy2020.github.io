@@ -7,21 +7,21 @@ lang: pt
 
 <div class="content">
 
-In this part, our focus shifts towards the backend: that is, towards implementing functionality on the server side of the stack.
+Vamos focar no backend nesta parte: ou seja, na implementação de funcionalidades no lado do servidor da pilha.
 
-We will be building our backend on top of [NodeJS](https://nodejs.org/en/), which is a JavaScript runtime based on Google's [Chrome V8](https://developers.google.com/v8/) JavaScript engine.
+Estaremos construindo nosso back-end utilizando [NodeJS](https://nodejs.org/en/), que é um ambiente de execução JavaScript baseado no motor JavaScript [Chrome V8](https://developers.google.com/v8/) do Google.
 
-This course material was written with version <i>v18.13.0</i> of Node.js. Please make sure that your version of Node is at least as new as the version used in the material (you can check the version by running _node -v_ in the command line).
+O conteúdo desta parte do curso foi escrita com base na versão <i>v18.13.0</i> do Node.js. Certifique-se de que a versão do seu Node é pelo menos tão nova quanto a versão utilizada aqui (você pode verificar a versão executando _node -v_ na linha de comando).
 
-As mentioned in [part 1](/en/part1/java_script), browsers don't yet support the newest features of JavaScript, and that is why the code running in the browser must be <i>transpiled</i> with e.g. [babel](https://babeljs.io/). The situation with JavaScript running in the backend is different. The newest version of Node supports a large majority of the latest features of JavaScript, so we can use the latest features without having to transpile our code.
+Como mencionado na [Parte 1](/pt/part1/java_script), os navegadores ainda não suportam as novas funcionalidades de JavaScript, e é por isso que o código em execução no navegador deve ser <i>transpilado</i> com o [babel](https://babeljs.io/), por exemplo. Mas a situação é diferente com JavaScript em execução no back-end. A versão mais recente do Node suporta a maioria das últimas funcionalidades de JavaScript, então podemos usar as últimas funcionalidades sem ter que transpilar nosso código.
 
-Our goal is to implement a backend that will work with the notes application from [part 2](/en/part2/). However, let's start with the basics by implementing a classic "hello world" application.
+Nosso objetivo é implementar um back-end que funcione com a aplicação de notas da [Parte 2](/pt/part2/). No entanto, vamos começar com o básico implementando um clássico programa "Olá, mundo!".
 
-**Notice** that the applications and exercises in this part are not all React applications, and we will not use the <i>create-react-app</i> utility for initializing the project for this application.
+**Note** que nem todas as aplicações e exercícios nesta parte são aplicações React, e não usaremos o utilitário <i>create-react-app</i> para inicializar o projeto para esta aplicação.
 
-We had already mentioned [npm](/en/part2/getting_data_from_server#npm) back in part 2, which is a tool used for managing JavaScript packages. In fact, npm originates from the Node ecosystem.
+Já tínhamos mencionado o [npm](/en/part2/getting_data_from_server#npm) na Parte 2, que é uma ferramenta usada para gerenciar pacotes JavaScript. Na verdade, o npm é originário do ecossistema Node.
 
-Let's navigate to an appropriate directory, and create a new template for our application with the _npm init_ command. We will answer the questions presented by the utility, and the result will be an automatically generated <i>package.json</i> file at the root of the project that contains information about the project.
+Vamos navegar até um diretório apropriado e criar um novo modelo para nossa aplicação com o comando _npm init_. Vamos responder as perguntas apresentadas pelo utilitário, e o resultado será um arquivo <i>package.json</i> gerado automaticamente na raiz do projeto que contém as informações do projeto.
 
 ```json
 {
@@ -37,9 +37,9 @@ Let's navigate to an appropriate directory, and create a new template for our ap
 }
 ```
 
-The file defines, for instance, that the entry point of the application is the <i>index.js</i> file.
+O arquivo define, por exemplo, que o ponto de entrada da aplicação é o arquivo <i>index.js</i>.
 
-Let's make a small change to the <i>scripts</i> object:
+Vamos fazer uma pequena alteração no objeto <i>scripts</i>:
 
 ```bash
 {
@@ -52,25 +52,25 @@ Let's make a small change to the <i>scripts</i> object:
 }
 ```
 
-Next, let's create the first version of our application by adding an <i>index.js</i> file to the root of the project with the following code:
+Agora, vamos criar a primeira versão da nossa aplicação adicionando um arquivo <i>index.js</i> à raiz do projeto com o seguinte código:
 
 ```js
 console.log('hello world')
 ```
 
-We can run the program directly with Node from the command line:
+Podemos executar o programa diretamente com o Node a partir da linha de comando:
 
 ```bash
 node index.js
 ```
 
-Or we can run it as an [npm script](https://docs.npmjs.com/misc/scripts):
+Ou podemos executá-lo como um [script npm](https://docs.npmjs.com/misc/scripts):
 
 ```bash
 npm start
 ```
 
-The <i>start</i> npm script works because we defined it in the <i>package.json</i> file:
+O script npm <i>start</i> funciona porque o definimos no arquivo <i>package.json</i>:
 
 ```bash
 {
@@ -83,21 +83,17 @@ The <i>start</i> npm script works because we defined it in the <i>package.json</
 }
 ```
 
+Embora a execução do projeto funcione quando ele é iniciado chamando _node index.js_ a partir da linha de comando, é costume dos projetos npm executar tarefas como scripts npm.
 
-Even though the execution of the project works when it is started by calling _node index.js_ from the command line, it's customary for npm projects to execute such tasks as npm scripts.
-
-
-By default, the <i>package.json</i> file also defines another commonly used npm script called <i>npm test</i>. Since our project does not yet have a testing library, the _npm test_ command simply executes the following command:
+Por padrão, o arquivo <i>package.json</i> também define outro script npm comumente usado chamado <i>npm test</i>. Como nosso projeto ainda não possui uma biblioteca de testes, o comando _npm test_ apenas executa o seguinte comando:
 
 ```bash
 echo "Error: no test specified" && exit 1
 ```
 
+### Um servidor web simples
 
-### Simple web server
-
-
-Let's change the application into a web server by editing the _index.js_ files as follow:
+Vamos transformar a aplicação em um servidor web editando o arquivo _index.js_ da seguinte maneira:
 
 ```js
 const http = require('http')
@@ -109,23 +105,22 @@ const app = http.createServer((request, response) => {
 
 const PORT = 3001
 app.listen(PORT)
-console.log(`Server running on port ${PORT}`)
+console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
 ```
 
-Once the application is running, the following message is printed in the console:
+Uma vez que a aplicação está em execução, a seguinte mensagem é impressa no console:
 
 ```bash
-Server running on port 3001
+Server running on port (Servidor em execução na porta) 3001
 ```
 
-We can open our humble application in the browser by visiting the address <http://localhost:3001>:
+Podemos abrir nossa humilde aplicação no navegador entrando no endereço <http://localhost:3001>:
 
-![hello world screen capture](../../images/3/1.png)
+![captura de tela do programa 'hello world'](../../images/3/1.png)
 
-The server works the same way regardless of the latter part of the URL. Also the address <http://localhost:3001/foo/bar> will display the same content.
+O servidor funciona da mesma maneira independentemente da última parte da URL. Além disso, o endereço <http://localhost:3001/foo/bar> exibirá o mesmo conteúdo.
 
-
-**NB** if port 3001 is already in use by some other application, then starting the server will result in the following error message:
+**N.B.:** se a porta 3001 já estiver sendo usada por alguma outra aplicação, iniciar o servidor resultará na seguinte mensagem de erro:
 
 ```bash
 ➜  hello npm start
@@ -143,51 +138,48 @@ Error: listen EADDRINUSE :::3001
     at listenInCluster (net.js:1378:12)
 ```
 
-You have two options. Either shut down the application using port 3001 (the json-server in the last part of the material was using port 3001), or use a different port for this application.
+Você tem duas opções: ou encerre a aplicação usando a porta 3001 (o json-server na última parte do material estava usando a porta 3001), ou use uma porta diferente para esta aplicação.
 
-Let's take a closer look at the first line of the code:
+Vamos olhar mais de perto na primeira linha do código:
 
 ```js
 const http = require('http')
 ```
 
-In the first row, the application imports Node's built-in [web server](https://nodejs.org/docs/latest-v8.x/api/http.html) module. This is practically what we have already been doing in our browser-side code, but with a slightly different syntax:
+Na primeira linha, a aplicação importa o módulo integrado [web server](https://nodejs.org/docs/latest-v8.x/api/http.html) do Node. Isso é praticamente o que já estávamos fazendo em nosso código no lado do navegador, mas com uma sintaxe um pouco diferente:
 
 ```js
 import http from 'http'
 ```
 
-These days, code that runs in the browser uses ES6 modules. Modules are defined with an [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) and taken into use with an [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
+Hoje em dia, o código que roda no navegador usa módulos ES6. Os módulos são definidos com um [export](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/export) e usados com um [import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import).
 
-However, Node.js uses so-called [CommonJS](https://en.wikipedia.org/wiki/CommonJS) modules. The reason for this is that the Node ecosystem had a need for modules long before JavaScript supported them in the language specification. Node supports now also the use of ES6 modules, but since the support is yet [not quite perfect](https://nodejs.org/api/esm.html#modules-ecmascript-modules) we'll stick to CommonJS modules.
+No entanto, Node.js usa módulos chamados [CommonJS](https://en.wikipedia.org/wiki/CommonJS). A razão para isso é que o ecossistema Node teve a necessidade de usar módulos muito antes de JavaScript os suportar na especificação da linguagem. Node agora também suporta o uso de módulos ES6, mas como o suporte ainda [não é totalmente perfeito](https://nodejs.org/api/esm.html#modules-ecmascript-modules), vamos aderir aos módulos CommonJS.
 
-CommonJS modules function almost exactly like ES6 modules, at least as far as our needs in this course are concerned.
+Os módulos CommonJS funcionam quase exatamente como os módulos ES6, pelo menos no que diz respeito às nossas necessidades neste curso.
 
-The next chunk in our code looks like this:
+O próximo trecho em nosso código é assim:
 
 ```js
 const app = http.createServer((request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/plain' })
-  response.end('Hello World')
+  response.end('Hello World (Olá, mundo!)')
 })
 ```
 
-The code uses the _createServer_ method of the [http](https://nodejs.org/docs/latest-v8.x/api/http.html) module to create a new web server. An <i>event handler</i> is registered to the server that is called <i>every time</i> an HTTP request is made to the server's address http://localhost:3001.
+O código usa o método _createServer_ ("criarServidor") do módulo [http](https://nodejs.org/docs/latest-v8.x/api/http.html) para criar um novo servidor web. Um <i>gerenciador de evento</i> é registrado no servidor que é chamado <i>sempre</i> que uma requisição HTTP é feita para o endereço http://localhost:3001 do servidor.
 
+A requisição é respondida com o código de status 200, com o cabeçalho <i>Content-Type</i> definido como <i>text/plain</i>, e o conteúdo do site a ser retornado definido como <i>Hello World</i>.
 
-The request is responded to with the status code 200, with the <i>Content-Type</i> header set to <i>text/plain</i>, and the content of the site to be returned set to <i>Hello World</i>.
-
-
-The last rows bind the http server assigned to the _app_ variable, to listen to HTTP requests sent to port 3001:
+As últimas linhas vinculam o servidor http atribuído à variável _app_ para ouvir as requisições HTTP enviadas à porta 3001:
 
 ```js
 const PORT = 3001
 app.listen(PORT)
-console.log(`Server running on port ${PORT}`)
+console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
 ```
 
-
-The primary purpose of the backend server in this course is to offer raw data in JSON format to the frontend. For this reason, let's immediately change our server to return a hardcoded list of notes in the JSON format:
+O objetivo principal do servidor back-end neste curso é oferecer dados brutos em formato JSON para o front-end. Por esse motivo, vamos imediatamente alterar nosso servidor para retornar uma lista codificada de notas no formato JSON:
 
 ```js
 const http = require('http')
@@ -196,17 +188,17 @@ const http = require('http')
 let notes = [
   {
     id: 1,
-    content: "HTML is easy",
+    content: 'HTML é fácil',
     important: true
   },
   {
     id: 2,
-    content: "Browser can execute only JavaScript",
+    content: 'O navegador só pode executar JavaScript',
     important: false
   },
   {
     id: 3,
-    content: "GET and POST are the most important methods of HTTP protocol",
+    content: 'GET e POST são os métodos mais importantes do protocolo HTTP',
     important: true
   }
 ]
@@ -219,30 +211,30 @@ const app = http.createServer((request, response) => {
 
 const PORT = 3001
 app.listen(PORT)
-console.log(`Server running on port ${PORT}`)
+console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
 ```
 
-Let's restart the server (you can shut the server down by pressing _Ctrl+C_ in the console) and let's refresh the browser.
+Vamos reiniciar o servidor (você pode encerrá-lo pressionando _Ctrl + C_ no console) e atualizar o navegador.
 
-The <i>application/json</i> value in the <i>Content-Type</i> header informs the receiver that the data is in the JSON format. The _notes_ array gets transformed into JSON with the <em>JSON.stringify(notes)</em> method.
+O valor <i>application/json</i> no cabeçalho <i>Content-Type</i> informa o receptor de que os dados estão no formato JSON. O array _notes_ é transformado em JSON com o método <em>JSON.stringify(notes)</em>.
 
-When we open the browser, the displayed format is exactly the same as in [part 2](/en/part2/getting_data_from_server/) where we used [json-server](https://github.com/typicode/json-server) to serve the list of notes:
+Quando abrimos o navegador, o formato de exibição das notas é o mesmo que vimos na [Parte 2](/pt/part2/obtendo_dados_do_servidor) quando usamos o [json-server](https://github.com/typicode/json-server) para servir a lista de notas:
 
-![formatted JSON notes data](../../images/3/2new.png)
+![dados das notas JSON formatados](../../images/3/2new.png)
 
 ### Express
 
-Implementing our server code directly with Node's built-in [http](https://nodejs.org/docs/latest-v8.x/api/http.html) web server is possible. However, it is cumbersome, especially once the application grows in size.
+É possível implementar nosso código do servidor diretamente com o servidor web [http](https://nodejs.org/docs/latest-v8.x/api/http.html) integrado do Node. No entanto, isso é cansativo, especialmente quando a aplicação fica maior.
 
-Many libraries have been developed to ease server-side development with Node, by offering a more pleasing interface to work with the built-in http module. These libraries aim to provide a better abstraction for general use cases we usually require to build a backend server. By far the most popular library intended for this purpose is [express](http://expressjs.com).
+Muitas bibliotecas foram desenvolvidas para facilitar o desenvolvimento do lado do servidor com Node, oferecendo uma interface mais agradável para trabalhar com o módulo integrado http. Essas bibliotecas visam fornecer uma melhor abstração para casos de uso geral que normalmente exigimos para construir um servidor back-end. De longe, a biblioteca mais popular destinada a esse fim é o [Express](http://expressjs.com).
 
-Let's take express into use by defining it as a project dependency with the command:
+Vamos usar o Express definindo-o como uma dependência do projeto com o comando:
 
 ```bash
 npm install express
 ```
 
-The dependency is also added to our <i>package.json</i> file:
+A dependência também é adicionada ao nosso arquivo <i>package.json</i>:
 
 ```json
 {
@@ -253,39 +245,39 @@ The dependency is also added to our <i>package.json</i> file:
 }
 ```
 
-The source code for the dependency is installed in the <i>node\_modules</i> directory located at the root of the project. In addition to express, you can find a great number of other dependencies in the directory:
+O código-fonte da dependência é instalado no diretório <i>node_modules</i> localizado na raiz do projeto. Além do Express, você pode encontrar uma grande quantidade de outras dependências no diretório:
 
-![ls listing of dependencies in directory](../../images/3/4.png)
+![listagem 'ls' das dependências no diretório](../../images/3/4.png)
 
-These are the dependencies of the express library and the dependencies of all of its dependencies, and so forth. These are called the [transitive dependencies](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) of our project.
+Essas são as dependências da biblioteca Express e as dependências de todas as suas dependências e assim por diante. Elas são chamadas de [dependências transitivas](https://lexi-lambda.github.io/blog/2016/08/24/understanding-the-npm-dependency-model/) (transitive dependencies) do nosso projeto.
 
-The version 4.18.2 of express was installed in our project. What does the caret in front of the version number in <i>package.json</i> mean?
+A versão 4.18.2 da biblioteca Express foi instalada em nosso projeto. O que significa esse acento circunflexo na frente do número de versão em <i>package.json</i>?
 
 ```json
 "express": "^4.18.2"
 ```
 
-The versioning model used in npm is called [semantic versioning](https://docs.npmjs.com/getting-started/semantic-versioning).
+O modelo de versionamento usado no npm é chamado de [versionamento semântico](https://docs.npmjs.com/getting-started/semantic-versioning) (semantic versioning).
 
-The caret in the front of <i>^4.18.2</i> means that if and when the dependencies of a project are updated, the version of express that is installed will be at least <i>4.18.2</i>. However, the installed version of express can also have a larger <i>patch</i> number (the last number), or a larger <i>minor</i> number (the middle number). The major version of the library indicated by the first <i>major</i> number must be the same.
+O acento circunflexo na frente de <i>^4.18.2</i> significa que se e quando as dependências de um projeto forem atualizadas, a versão instalada do Express será pelo menos <i>4.18.2</i>. No entanto, a versão instalada do Express também pode ter um número de <i>patch</i> maior (o último número) ou um número <i>minor</i> maior (o número do meio). A versão principal da biblioteca indicada pelo primeiro número <i>major</i> deve ser a mesma.
 
-We can update the dependencies of the project with the command:
+Podemos atualizar as dependências do projeto com o comando:
 
 ```bash
 npm update
 ```
 
-Likewise, if we start working on the project on another computer, we can install all up-to-date dependencies of the project defined in <i>package.json</i> by running this next command in the project's root directory:
+Igualmente, se começarmos a trabalhar no projeto em outro computador, podemos instalar todas as dependências atualizadas do projeto definidas em <i>package.json</i> executando comando a seguir no diretório raiz do projeto:
 
 ```bash
 npm install
 ```
 
-If the <i>major</i> number of a dependency does not change, then the newer versions should be [backwards compatible](https://en.wikipedia.org/wiki/Backward_compatibility). This means that if our application happened to use version 4.99.175 of express in the future, then all the code implemented in this part would still have to work without making changes to the code. In contrast, the future 5.0.0 version of express [may contain](https://expressjs.com/en/guide/migrating-5.html) changes that would cause our application to no longer work.
+Se o número <i>major</i> de uma dependência não mudar, então as novas versões devem ser [compatíveis com versões anteriores](https://en.wikipedia.org/wiki/Backward_compatibility). Isso significa que se nossa aplicação vier a usar a versão 4.99.175 do Express no futuro, então todo o código implementado nesta parte ainda terá que funcionar sem a necessidade de alterações no código. Em contraste, a futura versão 5.0.0 do express [pode conter](https://expressjs.com/en/guide/migrating-5.html) alterações que farão com que nossa aplicação não funcione mais.
 
-### Web and express
+### Web e Express
 
-Let's get back to our application and make the following changes:
+Vamos voltar à nossa aplicação e fazer as seguintes alterações:
 
 ```js
 const express = require('express')
@@ -305,20 +297,20 @@ app.get('/api/notes', (request, response) => {
 
 const PORT = 3001
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
 })
 ```
 
-To get the new version of our application into use, we have to restart the application.
+Para colocar a nova versão de nossa aplicação em uso, temos que reiniciar a aplicação.
 
-The application did not change a whole lot. Right at the beginning of our code, we're importing _express_, which this time is a <i>function</i> that is used to create an express application stored in the _app_ variable:
+A aplicação não mudou muito. Logo no início do nosso código, importamos o _express_ que desta vez é uma <i>função</i> usada para criar uma aplicação express armazenada na variável _app_:
 
 ```js
 const express = require('express')
 const app = express()
 ```
 
-Next, we define two <i>routes</i> to the application. The first one defines an event handler that is used to handle HTTP GET requests made to the application's <i>/</i> root:
+Em seguida, definimos duas <i>rotas</i> para a aplicação. A primeira define um gerenciador de evento que é usado para lidar com requisições HTTP GET feitas na raiz <i>/</i> da aplicação:
 
 ```js
 app.get('/', (request, response) => {
@@ -326,15 +318,15 @@ app.get('/', (request, response) => {
 })
 ```
 
-The event handler function accepts two parameters. The first [request](http://expressjs.com/en/4x/api.html#req) parameter contains all of the information of the HTTP request, and the second [response](http://expressjs.com/en/4x/api.html#res) parameter is used to define how the request is responded to.
+A função de gerência de evento aceita dois parâmetros. O primeiro parâmetro [request](http://expressjs.com/en/4x/api.html#req) (requisitar) contém todas as informações da requisição HTTP, e o segundo parâmetro [response](http://expressjs.com/en/4x/api.html#res) (resposta) é usado para definir como a requisição é respondida.
 
-In our code, the request is answered by using the [send](http://expressjs.com/en/4x/api.html#res.send) method of the _response_ object. Calling the method makes the server respond to the HTTP request by sending a response containing the string <code>\<h1>Hello World!\</h1></code> that was passed to the _send_ method. Since the parameter is a string, express automatically sets the value of the <i>Content-Type</i> header to be <i>text/html</i>. The status code of the response defaults to 200.
+Em nosso código, a requisição é respondida usando o método [send](http://expressjs.com/en/4x/api.html#res.send) (enviar) do objeto _response_. Ao chamar o método, o servidor responde à requisição HTTP enviando uma resposta contendo a string <code>\<h1>Hello World!\</h1></code> que foi passada para o método _send_. Como o parâmetro é uma string, o express define automaticamente o valor do cabeçalho <i>Content-Type</i> como <i>text/html</i>. O código de status da resposta é definido como 200 por padrão.
 
-We can verify this from the <i>Network</i> tab in developer tools:
+Podemos verificar isso na guia <i>Rede</i> nas Ferramentas do Desenvolvedor:
 
-![network tab in dev tools](../../images/3/5.png)
+![guia Rede nas Ferramentas do Desenvolvedor](../../images/3/5.png)
 
-The second route defines an event handler that handles HTTP GET requests made to the <i>notes</i> path of the application:
+A segunda rota define um gerenciador de evento que lida com requisições HTTP GET feitas no caminho <i>notes</i> da aplicação:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -342,48 +334,43 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-The request is responded to with the [json](http://expressjs.com/en/4x/api.html#res.json) method of the _response_ object. Calling the method will send the __notes__ array that was passed to it as a JSON formatted string. Express automatically sets the <i>Content-Type</i> header with the appropriate value of <i>application/json</i>.
+A requisição é respondida com o método [json](http://expressjs.com/en/4x/api.html#res.json) do objeto _response_. Quando chamado, o método enviará o array __notes__ que foi passado como uma string formatada em JSON. O express define automaticamente o cabeçalho <i>Content-Type</i> com o valor apropriado de <i>application/json</i>.
 
-![api/notes gives the formatted JSON data again](../../images/3/6new.png)
+![api/notes fornece os dados JSON formatados novamente](../../images/3/6new.png)
 
-Next, let's take a quick look at the data sent in JSON format.
+Em seguida, vamos dar uma olhada rápida nos dados enviados no formato JSON.
 
-In the earlier version where we were only using Node, we had to transform the data into the JSON format with the _JSON.stringify_ method:
+Na versão anterior do código em que estávamos usando apenas Node, tivemos que transformar os dados no formato JSON com o método _JSON.stringify_:
 
 ```js
 response.end(JSON.stringify(notes))
 ```
 
+Com Express isso se torna desnecessário, porque essa transformação acontece automaticamente.
 
-With express, this is no longer required, because this transformation happens automatically.
+Vale ressaltar que [JSON](https://en.wikipedia.org/wiki/JSON) (JavaScript Object Notation [Notação de Objeto JavaScript]) é uma string e não um objeto JavaScript como o valor que foi atribuído a _notes_.
 
+O experimento mostrado abaixo ilustra esse ponto:
 
-It's worth noting that [JSON](https://en.wikipedia.org/wiki/JSON) is a string and not a JavaScript object like the value assigned to _notes_.
+![terminal do node demonstrando que 'json' é do tipo string](../../assets/3/5.png)
 
-
-The experiment shown below illustrates this point:
-
-![node terminal demonstrating json is of type string](../../assets/3/5.png)
-
-
-The experiment above was done in the interactive [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html). You can start the interactive node-repl by typing in _node_ in the command line. The repl is particularly useful for testing how commands work while you're writing application code. I highly recommend this!
+O experimento acima foi feito no [node-repl](https://nodejs.org/docs/latest-v8.x/api/repl.html) interativo. Você pode iniciar o node-repl interativo digitando _node_ no terminal. O repl é particularmente útil para testar como os comandos funcionam enquanto você está escrevendo o código da aplicação. Eu mais que recomendo o uso dessa ferramenta!
 
 ### nodemon
 
-If we make changes to the application's code we have to restart the application to see the changes. We restart the application by first shutting it down by typing _Ctrl+C_ and then restarting the application. Compared to the convenient workflow in React where the browser automatically reloaded after changes were made, this feels slightly cumbersome.
+Se fizermos alterações no código da aplicação, precisamos reiniciá-la para ver as alterações. Reiniciamos a aplicação primeiro encerrando-a pressionando _Ctrl + C_ e depois reiniciando-a. Se compararmos isso ao conveniente fluxo de trabalho em React, em que o navegador é recarregado automaticamente após as alterações serem feitas, parece até um pouco trabalhoso.
 
-The solution to this problem is [nodemon](https://github.com/remy/nodemon): 
+A solução para esse problema é o [nodemon](https://github.com/remy/nodemon):
 
-> <i>nodemon will watch the files in the directory in which nodemon was started, and if any files change, nodemon will automatically restart your node application.</i>
+> <i>nodemon irá monitorar os arquivos no diretório em que ele foi iniciado, e se houver alguma alteração nos arquivos, o nodemon reiniciará automaticamente sua aplicação node.</i>
 
-
-Let's install nodemon by defining it as a <i>development dependency</i> with the command:
+Vamos instalar o nodemon definindo-o como uma <i>dependência de desenvolvimento</i> (development dependency) com o comando:
 
 ```bash
 npm install --save-dev nodemon
 ```
 
-The contents of <i>package.json</i> have also changed:
+O conteúdo do arquivo <i>package.json</i> também foi alterado:
 
 ```json
 {
@@ -397,21 +384,21 @@ The contents of <i>package.json</i> have also changed:
 }
 ```
 
-If you accidentally used the wrong command and the nodemon dependency was added under "dependencies" instead of "devDependencies", then manually change the contents of <i>package.json</i> to match what is shown above.
+Se você usou acidentalmente o comando errado e a dependência nodemon foi adicionada em "dependencies" em vez de "devDependencies", altere manualmente o conteúdo de <i>package.json</i> para que corresponda ao que é mostrado acima.
 
-By development dependencies, we are referring to tools that are needed only during the development of the application, e.g. for testing or automatically restarting the application, like <i>nodemon</i>.
+Por dependências de desenvolvimento, estamos nos referindo a ferramentas que são necessárias apenas durante o desenvolvimento da aplicação, por exemplo, para testar ou reiniciar automaticamente a aplicação, como o <i>nodemon</i>.
 
-These development dependencies are not needed when the application is run in production mode on the production server (e.g. Fly.io or Heroku).
+Essas dependências de desenvolvimento não são necessárias quando a aplicação é executada na fase de produção em um servidor de produção (Fly.io ou Heroku, por exemplo).
 
-We can start our application with <i>nodemon</i> like this:
+Podemos iniciar nossa aplicação com o <i>nodemon</i> assim:
 
 ```bash
 node_modules/.bin/nodemon index.js
 ```
 
-Changes to the application code now cause the server to restart automatically. It's worth noting that even though the backend server restarts automatically, the browser still has to be manually refreshed. This is because unlike when working in React, we don't have the [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) functionality needed to automatically reload the browser.
+Alterações no código da aplicação agora fazem com que o servidor seja reiniciado automaticamente. Vale ressaltar que, embora o servidor back-end seja reiniciado automaticamente, o navegador ainda deve ser atualizado manualmente. Isso ocorre porque, ao contrário do que acontece ao trabalhar em React, não temos a funcionalidade [hot reload](https://gaearon.github.io/react-hot-loader/getstarted/) (grosso modo, "recarga rápida") necessária para recarregar automaticamente o navegador.
 
-The command is long and quite unpleasant, so let's define a dedicated <i>npm script</i> for it in the <i>package.json</i> file:
+O comando é longo e bastante desagradável, portanto, vamos definir um <i>script npm</i> dedicado para ele no arquivo <i>package.json</i>:
 
 ```bash
 {
@@ -425,59 +412,59 @@ The command is long and quite unpleasant, so let's define a dedicated <i>npm scr
 }
 ```
 
-In the script there is no need to specify the <i>node\_modules/.bin/nodemon</i> path to nodemon, because _npm_ automatically knows to search for the file from that directory. 
+Não é necessário especificar  no script o caminho <i>node\_modules/.bin/nodemon</i> para o nodemon, pois o npm pesquisa automaticamente pelo arquivo nesse diretório.
 
-We can now start the server in development mode with the command:
+Agora podemos iniciar o servidor no modo de desenvolvimento com o comando:
 
 ```bash
 npm run dev
 ```
 
-Unlike with the <i>start</i> and <i>test</i> scripts, we also have to add <i>run</i> to the command.
+Ao contrário dos scripts <i>start</i> e <i>test</i>, também temos que adicionar <i>run</i> ao comando.
 
 ### REST
 
-Let's expand our application so that it provides the same RESTful HTTP API as [json-server](https://github.com/typicode/json-server#routes).
+Vamos expandir nossa aplicação para que ela forneça a mesma API HTTP RESTful do [json-server](https://github.com/typicode/json-server#routes).
 
-Representational State Transfer, aka REST, was introduced in 2000 in Roy Fielding's [dissertation](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm). REST is an architectural style meant for building scalable web applications.
+<i>Representational State Transfer</i>, também conhecido como REST, foi introduzido em 2000 na [dissertação de PhD](https://www.ics.uci.edu/~fielding/pubs/dissertation/rest_arch_style.htm) de Roy Fielding. REST é um estilo arquitetural destinado a construir aplicações web escaláveis.
 
-We are not going to dig into Fielding's definition of REST or spend time pondering about what is and isn't RESTful. Instead, we take a more [narrow view](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services) by only concerning ourselves with how RESTful APIs are typically understood in web applications. The original definition of REST is not even limited to web applications.
+Não vamos aprofundar a definição de REST de Fielding ou gastar tempo ponderando sobre o que é ou não RESTful. Em vez disso, adotamos uma visão mais [restrita](https://en.wikipedia.org/wiki/Representational_state_transfer#Applied_to_web_services), preocupando-nos apenas com a típica compreensão de APIs RESTful em aplicações web. A definição original de REST não se limita somente à aplicações web.
 
-We mentioned in the [previous part](/en/part2/altering_data_in_server#rest) that singular things, like notes in the case of our application, are called <i>resources</i> in RESTful thinking. Every resource has an associated URL which is the resource's unique address.
+Mencionamos na [parte anterior](/en/part2/altering_data_in_server#rest) que coisas singulares, como as notas no caso da nossa aplicação, são chamadas de <i>recursos</i> no modo RESTful de pensar. Cada recurso tem uma URL associada que é o endereço exclusivo do recurso.
 
-One convention for creating unique addresses is to combine the name of the resource type with the resource's unique identifier.
+Uma convenção para criar endereços exclusivos é combinar o nome do tipo de recurso com o identificador exclusivo do recurso.
 
-Let's assume that the root URL of our service is <i>www.example.com/api</i>.
+Vamos assumir que a URL raiz do nosso serviço é <i>www.example.com/api</i>.
 
-If we define the resource type of note to be <i>notes</i>, then the address of a note resource with the identifier 10, has the unique address <i>www.example.com/api/notes/10</i>.
+Se definirmos o tipo de recurso da nota como <i>notes</i>, então o endereço de um recurso de "note" com o identificador 10 tem o endereço exclusivo <i>www.example.com/api/notes/10</i>.
 
-The URL for the entire collection of all note resources is <i>www.example.com/api/notes</i>.
+A URL para toda a coleção de todos os recursos de <i>notes</i> é <i>www.example.com/api/notes</i>.
 
-We can execute different operations on resources. The operation to be executed is defined by the HTTP <i>verb</i>:
+Podemos executar diferentes operações em recursos. A operação a ser executada é definida pelo <i>verbo</i> HTTP:
 
-| URL                   | verb                | functionality                                                    |
-| --------------------- | ------------------- | -----------------------------------------------------------------|
-| notes/10              | GET                 | fetches a single resource                                        |
-| notes                 | GET                 | fetches all resources in the collection                          |
-| notes                 | POST                | creates a new resource based on the request data                 |
-| notes/10              | DELETE              | removes the identified resource                                  |
-| notes/10              | PUT                 | replaces the entire identified resource with the request data    |
-| notes/10              | PATCH               | replaces a part of the identified resource with the request data |
-|                       |                     |                                                                  |
+| URL                   | verbo               | funcionalidade                                                       |
+| --------------------- | ------------------- | ---------------------------------------------------------------------|
+| notes/10              | GET                 | busca um único recurso                                               |
+| notes                 | GET                 | busca todos os recursos na coleção                                   |
+| notes                 | POST                | cria um novo recurso baseado nos dados requisitados                  |
+| notes/10              | DELETE              | exclui um recurso identificado                                       |
+| notes/10              | PUT                 | substitui todo o recurso identificado com os dados requisitados      |
+| notes/10              | PATCH               | substitui uma parte do recurso identificado com os dados requisitados|
+|                       |                     |                                                                      |
 
-This is how we manage to roughly define what REST refers to as a [uniform interface](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints), which means a consistent way of defining interfaces that makes it possible for systems to cooperate.
+É assim que conseguimos definir aproximadamente o que REST chama de [interface uniforme](https://en.wikipedia.org/wiki/Representational_state_transfer#Architectural_constraints) (uniform interface), que significa uma maneira consistente de definir interfaces que tornam possível a cooperação entre sistemas.
 
-This way of interpreting REST falls under the [second level of RESTful maturity](https://martinfowler.com/articles/richardsonMaturityModel.html) in the Richardson Maturity Model. According to the definition provided by Roy Fielding, we have not defined a [REST API](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven). In fact, a large majority of the world's purported "REST" APIs do not meet Fielding's original criteria outlined in his dissertation.
+Essa forma de interpretação do modelo REST se enquadra no [segundo nível de maturidade RESTful](https://martinfowler.com/articles/richardsonMaturityModel.html) (second level of RESTful maturity) no Modelo de Maturidade de Richardson. De acordo com a definição fornecida por Roy Fielding, ainda não definimos o que é uma [API REST](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven). Na verdade, a grande maioria das APIs "REST" do mundo não atende aos critérios originais de Fielding delineados em sua dissertação.
 
-In some places (see e.g. [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)) you will see our model for a straightforward [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) API, being referred to as an example of [resource-oriented architecture](https://en.wikipedia.org/wiki/Resource-oriented_architecture) instead of REST. We will avoid getting stuck arguing semantics and instead return to working on our application.
+Em alguns lugares (ver, por exemplo, [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)) você verá nosso modelo para uma API [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) simples sendo referido como um exemplo de [arquitetura orientada a recursos](https://en.wikipedia.org/wiki/Resource-oriented_architecture) (resource-oriented architecture) em vez de REST. Vamos evitar ficar presos discutindo semântica e, em vez disso, voltar a trabalhar em nossa aplicação.
 
-### Fetching a single resource
+### Buscando um único recurso
 
-Let's expand our application so that it offers a REST interface for operating on individual notes. First, let's create a [route](http://expressjs.com/en/guide/routing.html) for fetching a single resource.
+Vamos expandir nossa aplicação para que ela ofereça uma interface REST para operar em notas individuais. Primeiro, vamos criar uma [rota](http://expressjs.com/en/guide/routing.html) para buscar um único recurso.
 
-The unique address we will use for an individual note is of the form <i>notes/10</i>, where the number at the end refers to the note's unique id number.
+O endereço único que usaremos para uma nota individual é da forma <i>notes/10</i>, onde o número no final refere-se ao número de identificação único da nota.
 
-We can define [parameters](http://expressjs.com/en/guide/routing.html#route-parameters) for routes in express by using the colon syntax:
+Podemos definir [parâmetros](http://expressjs.com/en/guide/routing.html#route-parameters) para rotas no Express usando a sintaxe de dois-pontos:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -487,17 +474,26 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Now <code>app.get('/api/notes/:id', ...)</code> will handle all HTTP GET requests that are of the form <i>/api/notes/SOMETHING</i>, where <i>SOMETHING</i> is an arbitrary string.
+Agora, <code>app.get('/api/notes/:id', ...)</code> gerenciará todas as requisições HTTP GET que estão na forma <i>/api/notes/X</i>, onde <i>X</i> é uma string arbitrária.
 
-The <i>id</i> parameter in the route of a request can be accessed through the [request](http://expressjs.com/en/api.html#req) object:
+O parâmetro <i>id</i> na rota de uma requisição pode ser acessado por meio do objeto [request](http://expressjs.com/en/api.html#req):
 
 ```js
 const id = request.params.id
 ```
 
-The now familiar _find_ method of arrays is used to find the note with an id that matches the parameter. The note is then returned to the sender of the request.
+O agora familiar método de arrays _find_ é usado para encontrar a nota com um ID que corresponde ao parâmetro. A nota é então retornada ao remetente da requisição.
 
-When we test our application by going to <http://localhost:3001/api/notes/1> in our browser, we notice that it does not appear to work, as the browser displays an empty page. This comes as no surprise to us as software developers, and it's time to debug.
+Quando testamos nossa aplicação acessando <http://localhost:3001/api/notes/1> em nosso navegador, percebemos que ela não parece funcionar, pois o navegador exibe uma página vazia. Isso não é surpresa para nós, desenvolvedores de software, pois é hora de depurar.
+
+^^^^^^^^^^^
+### REVISADO
+
+
+
+
+
+
 
 Adding _console.log_ commands into our code is a time-proven trick:
 
