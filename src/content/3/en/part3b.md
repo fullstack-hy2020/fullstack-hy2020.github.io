@@ -34,7 +34,7 @@ What's going on here? We can access the backend from a browser and from postman 
 
 ### Same origin policy and CORS
 
-The issue lies with a thing called `same origin policy`. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
+The issue lies with a thing called _same origin policy_. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
 
 ```text
 http://example.com:80/index.html
@@ -357,6 +357,8 @@ fly deploy
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
 
 ![screenshot of notes application](../../images/3/30new.png)
+
+<i>**NOTE:** changing of the importance DOES NOT work yet since the backed has no implementation for it yet.</i>
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 
