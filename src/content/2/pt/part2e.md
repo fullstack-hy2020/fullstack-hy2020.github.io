@@ -618,7 +618,7 @@ Adicione à funcionalidade que exibe os dados de um único país o relatório me
 
 Se você usar o Open Weather map, a descrição de como obter os ícones climáticos encontra-se [aqui](https://openweathermap.org/weather-conditions#Icon-list).
 
-**N.B.:** Em alguns navegadores (como o Firefox), a API escolhida pode enviar uma resposta de erro, o que indica que a criptografia HTTPS não é suportada, mesmo que a URL da solicitação comece com _http://_. Esse problema pode ser corrigido concluindo o exercício usando o Chrome.
+**N.B.:** Em alguns navegadores (como o Firefox), a API escolhida pode enviar uma resposta de erro, o que indica que a criptografia HTTPS não é suportada, mesmo que a URL da requisição comece com _http://_. Esse problema pode ser corrigido concluindo o exercício usando o Chrome.
 
 **N.B.:** Quase todos os serviços meteorológicos exigem que você use uma chave de API. Não salve a chave de API no controle de versão (Git)! Nem programe usando a chave de API em seu código-fonte. Em vez disso, use uma [variável de ambiente](https://create-react-app.dev/docs/adding-custom-environment-variables/) (environment variable) para salvar a chave.
 

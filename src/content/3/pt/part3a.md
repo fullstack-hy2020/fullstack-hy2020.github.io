@@ -83,7 +83,7 @@ O script npm <i>start</i> funciona porque o definimos no arquivo <i>package.json
 }
 ```
 
-Embora a execução do projeto funcione quando ele é iniciado chamando _node index.js_ a partir da linha de comando, é costume dos projetos npm executar tarefas como scripts npm.
+Embora a execução do projeto funcione quando ele é iniciado chamando _node index.js_ a partir da linha de comando, é costume de projetos npm executar tarefas como scripts npm.
 
 Por padrão, o arquivo <i>package.json</i> também define outro script npm comumente usado chamado <i>npm test</i>. Como nosso projeto ainda não possui uma biblioteca de testes, o comando _npm test_ apenas executa o seguinte comando:
 
@@ -456,7 +456,7 @@ Podemos executar diferentes operações em recursos. A operação a ser executad
 
 Essa forma de interpretação do modelo REST se enquadra no [segundo nível de maturidade RESTful](https://martinfowler.com/articles/richardsonMaturityModel.html) (second level of RESTful maturity) no Modelo de Maturidade de Richardson. De acordo com a definição fornecida por Roy Fielding, ainda não definimos o que é uma [API REST](http://roy.gbiv.com/untangled/2008/rest-apis-must-be-hypertext-driven). Na verdade, a grande maioria das APIs "REST" do mundo não atende aos critérios originais de Fielding delineados em sua dissertação.
 
-Em alguns lugares (ver, por exemplo, [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)) você verá nosso modelo para uma API [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) simples sendo referido como um exemplo de [arquitetura orientada a recursos](https://en.wikipedia.org/wiki/Resource-oriented_architecture) (resource-oriented architecture) em vez de REST. Vamos evitar ficar presos discutindo semântica e, em vez disso, voltar a trabalhar em nossa aplicação.
+Em alguns lugares (ver, por exemplo, [Richardson, Ruby: RESTful Web Services](http://shop.oreilly.com/product/9780596529260.do)), verá nosso modelo para uma API [CRUD](https://en.wikipedia.org/wiki/Create,_read,_update_and_delete) simples será referenciado como um exemplo de [arquitetura orientada a recursos](https://en.wikipedia.org/wiki/Resource-oriented_architecture) (resource-oriented architecture) em vez de REST. Vamos evitar ficar presos discutindo semântica e, em vez disso, voltar a trabalhar em nossa aplicação.
 
 ### Buscando um único recurso
 
@@ -486,16 +486,7 @@ O agora familiar método de arrays _find_ é usado para encontrar a nota com um 
 
 Quando testamos nossa aplicação acessando <http://localhost:3001/api/notes/1> em nosso navegador, percebemos que ela não parece funcionar, pois o navegador exibe uma página vazia. Isso não é surpresa para nós, desenvolvedores de software, pois é hora de depurar.
 
-^^^^^^^^^^^
-### REVISADO
-
-
-
-
-
-
-
-Adding _console.log_ commands into our code is a time-proven trick:
+Adicionar comandos console.log em nosso código já é um truque comprovado pelo tempo:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -507,13 +498,13 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-When we visit <http://localhost:3001/api/notes/1> again in the browser, the console - which is the terminal (in this case) - will display the following:
+Quando visitamos novamente o endereço <http://localhost:3001/api/notes/1> no navegador, o console — que é o terminal (neste caso) — exibirá o seguinte:
 
-![terminal displaying 1 then undefined](../../images/3/8.png)
+![o terminal exibe 1 e depois 'undefined'](../../images/3/8.png)
 
-The id parameter from the route is passed to our application but the _find_ method does not find a matching note.
+O parâmetro de id da rota é passado para nossa aplicação, mas o método _find_ não encontra uma nota correspondente.
 
-To further our investigation, we also add a console log inside the comparison function passed to the _find_ method. To do this, we have to get rid of the compact arrow function syntax <em>note => note.id === id</em>, and use the syntax with an explicit return statement:
+Para aprofundar nossa investigação, também adicionamos um _console.log_ dentro da função de comparação passada para o método _find_. Para fazer isso, temos que nos livrar da sintaxe de função de seta compactada <em>note => note.id === id</em>, e usar a sintaxe com uma declaração explícita de retorno:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -527,7 +518,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-When we visit the URL again in the browser, each call to the comparison function prints a few different things to the console. The console output is the following:
+Quando visitamos a URL novamente no navegador, cada chamada à função de comparação imprime algumas coisas diferentes no console. A saída do console é a seguinte:
 
 <pre>
 1 'number' '1' 'string' false
@@ -535,9 +526,9 @@ When we visit the URL again in the browser, each call to the comparison function
 3 'number' '1' 'string' false
 </pre>
 
-The cause of the bug becomes clear. The _id_ variable contains a string '1', whereas the ids of notes are integers. In JavaScript, the "triple equals" comparison === considers all values of different types to not be equal by default, meaning that 1 is not '1'. 
+A causa do bug fica clara. A variável _id_ contém uma string '1', enquanto os ids das notas são números inteiros. Em JavaScript, o comparador de igualdade estrita <em>===</em> considera que todos os valores de tipos diferentes não são iguais por padrão, o que significa que 1 não é igual a '1'. 
 
-Let's fix the issue by changing the id parameter from a string into a [number](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number):
+Vamos corrigir o problema mudando o parâmetro id de uma string para um [Number](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Number) (construtor Number):
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -547,21 +538,21 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Now fetching an individual resource works.
+Agora, a busca de um recurso individual funciona.
 
-![api/notes/1 gives a single note as JSON](../../images/3/9new.png)
+![api/notes/1 traz uma única nota como JSON](../../images/3/9new.png)
 
-However, there's another problem with our application.
+No entanto, há outro problema com nossa aplicação.
 
-If we search for a note with an id that does not exist, the server responds with:
+Se procurarmos uma nota com um id que não existe, o servidor responde com:
 
-![network tools showing 200 and content-length 0](../../images/3/10ea.png)
+![ferramentas do desenvolvedor mostrando '200 and content-length 0'](../../images/3/10ea.png)
 
-The HTTP status code that is returned is 200, which means that the response succeeded. There is no data sent back with the response, since the value of the <i>content-length</i> header is 0, and the same can be verified from the browser. 
+O código de status HTTP retornado é 200, o que significa que a resposta teve sucesso. Não são retornados dados com a resposta, uma vez que o valor do cabeçalho <i>content-length</i> é 0, e o mesmo pode ser verificado no navegador.
 
-The reason for this behavior is that the _note_ variable is set to _undefined_ if no matching note is found. The situation needs to be handled on the server in a better way. If no note is found, the server should respond with the status code [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) instead of 200.
+A razão para esse comportamento é que a variável <i>note</i> é definida como "undefined" se nenhuma nota correspondente for encontrada. A situação precisa ser tratada no servidor de forma correta. Se nenhuma nota for encontrada, o servidor deve responder com o código de status [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) ("404 não encontrado(a)") em vez de 200.
 
-Let's make the following change to our code:
+Vamos fazer a seguinte alteração em nosso código:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -578,17 +569,17 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Since no data is attached to the response, we use the [status](http://expressjs.com/en/4x/api.html#res.status) method for setting the status and the [end](http://expressjs.com/en/4x/api.html#res.end) method for responding to the request without sending any data.
+Como nenhum dado está anexado à resposta, usamos o método [status](http://expressjs.com/en/4x/api.html#res.status) para definir o status e o método [end](http://expressjs.com/en/4x/api.html#res.end) para responder à requisição sem enviar nenhum dado.
 
-The if-condition leverages the fact that all JavaScript objects are [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy), meaning that they evaluate to true in a comparison operation. However, _undefined_ is [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) meaning that it will evaluate to false.
+A condição <em>if</em> aproveita o fato de que todos os objetos JavaScript são [truthy](https://developer.mozilla.org/en-US/docs/Glossary/Truthy) (verdade/verdadeiro), o que significa que eles avaliam como verdadeiros em uma operação de comparação. No entanto, _undefined_ é [falsy](https://developer.mozilla.org/en-US/docs/Glossary/Falsy) (falso/falsidade), o que significa que ele avaliará como falso.
 
-Our application works and sends the error status code if no note is found. However, the application doesn't return anything to show to the user, like web applications normally do when we visit a page that does not exist. We do not need to display anything in the browser because REST APIs are interfaces that are intended for programmatic use, and the error status code is all that is needed.
-  
-Anyway, it's possible to give a clue about the reason for sending a 404 error by [overriding the default NOT FOUND message](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614).
+Nossa aplicação funciona e envia o código de status de erro se nenhuma nota for encontrada. No entanto, a aplicação não informa nada ao usuário — como as aplicações web normalmente fazem — quando visitamos uma página que não existe. Não precisamos exibir nada no navegador porque as APIs REST são interfaces destinadas ao uso programático, e o código de status de erro já é o necessário para o caso.
 
-### Deleting resources
+De qualquer forma, é possível dar uma pista sobre a razão para enviar um erro 404 [substituindo a mensagem padrão NOT FOUND](https://stackoverflow.com/questions/14154337/how-to-send-a-custom-http-status-message-in-node-express/36507614#36507614).
 
-Next, let's implement a route for deleting resources. Deletion happens by making an HTTP DELETE request to the URL of the resource:
+### Excluindo recursos
+
+A seguir, vamos implementar uma rota para excluir recursos. A exclusão ocorre fazendo uma requisição HTTP DELETE para a URL do recurso:
 
 ```js
 app.delete('/api/notes/:id', (request, response) => {
@@ -599,51 +590,56 @@ app.delete('/api/notes/:id', (request, response) => {
 })
 ```
 
-If deleting the resource is successful, meaning that the note exists and is removed, we respond to the request with the status code [204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content) and return no data with the response.
+Se a exclusão do recurso for bem-sucedida, ou seja, se a nota existir e for removida, respondemos à requisição com o código de status [204 no content](https://www.rfc-editor.org/rfc/rfc9110.html#name-204-no-content) ("200 nenhum conteúdo") e não retornamos nenhum dado com a resposta.
 
-There's no consensus on what status code should be returned to a DELETE request if the resource does not exist. The only two options are 204 and 404. For the sake of simplicity, our application will respond with 204 in both cases.
+Não há consenso sobre qual código de status deve ser retornado para uma requisição DELETE se o recurso não existir. As únicas duas opções são 204 e 404. Para simplificar, nossa aplicação responderá com 204 em ambos os casos.
+
+^^^
+### REVISADO
+
 
 ### Postman
 
-So how do we test the delete operation? HTTP GET requests are easy to make from the browser. We could write some JavaScript for testing deletion, but writing test code is not always the best solution in every situation.
+Então, como testar a operação de exclusão? As requisições HTTP GET são fáceis de fazer a partir do navegador. Poderíamos escrever algum JavaScript para testar a exclusão, mas escrever código de teste nem sempre é a melhor solução em todas as situações.
 
-Many tools exist for making the testing of backends easier. One of these is a command line program [curl](https://curl.haxx.se). However, instead of curl, we will take a look at using [Postman](https://www.postman.com) for testing the application.
+Existem muitas ferramentas para tornar mais fácil a realização de testes em back-ends. Uma delas é o programa de linha de comando [curl](https://curl.haxx.se). No entanto, em vez do curl, vamos dar uma olhada em como usar o [Postman](https://www.postman.com) para testar a aplicação.
 
-Let's install the Postman desktop client [from here](https://www.postman.com/downloads/)  and try it out:
+Vamos baixar o cliente desktop do Postman [deste site](https://www.postman.com/downloads/) e testá-lo:
 
-![postman screenshot on api/notes/2](../../images/3/11x.png)
+![captura de tela do postman na api/notes/2](../../images/3/11x.png)
 
-Using Postman is quite easy in this situation. It's enough to define the URL and then select the correct request type (DELETE).
+É bastante fácil usar o Postman nesta situação. É suficiente definir a URL e selecionar o tipo de requisição correta (DELETE).
 
-The backend server appears to respond correctly. By making an HTTP GET request to <http://localhost:3001/api/notes> we see that the note with the id 2 is no longer in the list, which indicates that the deletion was successful. 
+O servidor back-end parece responder corretamente. Ao fazer uma requisição HTTP GET para <http://localhost:3001/api/notes>, vemos que a nota com o id 2 não está mais na lista, o que indica que a exclusão foi bem-sucedida.
 
-Because the notes in the application are only saved to memory, the list of notes will return to its original state when we restart the application.
+Como as notas na aplicação são salvas apenas na memória, a lista de notas retornará ao seu estado original quando reiniciarmos a aplicação.
 
-### The Visual Studio Code REST client
+### O cliente REST do Visual Studio Code
 
-If you use Visual Studio Code, you can use the VS Code [REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) plugin instead of Postman.
+Se quiser o usar o Visual Studio Code, é possível utilizar o plugin VS Code [REST client](https://marketplace.visualstudio.com/items?itemName=humao.rest-client) (ou "cliente Rest") em vez do Postman.
 
-Once the plugin is installed, using it is very simple. We make a directory at the root of the application named <i>requests</i>. We save all the REST client requests in the directory as files that end with the <i>.rest</i> extension.
+É muito fácil usar o plugin depois de instalado. Criamos um diretório na raiz da aplicação chamado <i>requests</i>. Salvamos todas as requisições do cliente REST no diretório como arquivos que terminam com a extensão <i>.rest</i>.
 
-Let's create a new <i>get\_all\_notes.rest</i> file and define the request that fetches all notes.
+Vamos criar um novo arquivo <i>get\_all\_notes.rest</i> e definir a requisição que busca todas as notas.
 
-![get all notes rest file with get request on notes](../../images/3/12ea.png)
+![arquivo rest que obtêm todas as notas com a requisição GET](../../images/3/12ea.png)
 
-By clicking the <i>Send Request</i> text, the REST client will execute the HTTP request and the response from the server is opened in the editor.
+Ao clicar no texto <i>Send Request</i>, o cliente REST executará a requisição HTTP e a resposta do servidor será aberta no editor.
 
-![response from vs code from get request](../../images/3/13new.png)
+![resposta do vs code da requisição Get](../../images/3/13new.png)
 
-### The WebStorm HTTP Client
+### O cliente HTTP do WebStorm
 
-If you use *IntelliJ WebStorm* instead, you can use a similar procedure with its built-in HTTP Client. Create a new file with extension `.rest` and the editor will display your options to create and run your requests. You can learn more about it by following [this guide](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
+Se em vez daqueles você usar o *IntelliJ WebStorm*, é possível fazer um procedimento semelhante com o Cliente HTTP integrado. Crie um novo arquivo com extensão `.rest` e o editor exibirá suas opções para criar e executar suas requisições. Você pode aprender mais sobre isso seguindo [este guia](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
 
-### Receiving data
+### Recebendo dados
 
-Next, let's make it possible to add new notes to the server. Adding a note happens by making an HTTP POST request to the address http://localhost:3001/api/notes, and by sending all the information for the new note in the request [body](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) in JSON format.
+Em seguida, vamos implementar a funcionalidade de adicionar novas notas ao servidor. É possível adicionar uma nota fazendo uma requisição HTTP POST para o endereço http://localhost:3001/api/notes e enviando todas as informações para a nova nota no [corpo](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) (body) da requisição em formato JSON.
 
-To access the data easily, we need the help of the express [json-parser](https://expressjs.com/en/api.html) that is taken to use with command _app.use(express.json())_.
 
-Let's activate the json-parser and implement an initial handler for dealing with the HTTP POST requests:
+Para que possamos acessar os dados facilmente, precisamos da ajuda do [json-parser](https://expressjs.com/en/api.html) do Express, que é usado com o comando _app.use(express.json())_.
+
+Vamos ativar o json-parser e implementar um gerenciador inicial para lidar com requisições HTTP POST:
 
 ```js
 const express = require('express')
@@ -663,47 +659,47 @@ app.post('/api/notes', (request, response) => {
 // highlight-end
 ```
 
-The event handler function can access the data from the <i>body</i> property of the _request_ object.
+A função do gerenciador de evento pode acessar os dados da propriedade <i>body</i> do objeto _request_.
 
-Without the json-parser, the <i>body</i> property would be undefined. The json-parser functions so that it takes the JSON data of a request, transforms it into a JavaScript object and then attaches it to the <i>body</i> property of the _request_ object before the route handler is called.
+Sem o json-parser, a propriedade <i>body</i> seria indefinida. O json-parser funciona de forma que ele pega os dados JSON de uma requisição, transforma-os em um objeto JavaScript e, em seguida, anexa-os à propriedade <i>body</i> do objeto _request_ antes do gerenciador de rota ser chamado.
 
-For the time being, the application does not do anything with the received data besides printing it to the console and sending it back in the response.
+Por enquanto, a aplicação não faz nada com os dados recebidos, exceto imprimi-los no console e enviá-los de volta na resposta.
 
-Before we implement the rest of the application logic, let's verify with Postman that the data is in fact received by the server. In addition to defining the URL and request type in Postman, we also have to define the data sent in the <i>body</i>:
+Antes de implementarmos o restante da lógica da aplicação, vamos verificar com o Postman se os dados são recebidos pelo servidor. Além de definir a URL e o tipo de requisição no Postman, também temos que definir os dados enviados no <i>body</i>:
 
-![postman post on api/notes with post content](../../images/3/14new.png)
+![postman - POST em api/notes com o conteúdo do POST](../../images/3/14new.png)
 
-The application prints the data that we sent in the request to the console:
+A aplicação imprime no console os dados que enviamos na requisição:
 
-![terminal printing content provided in postman](../../images/3/15new.png)
+![terminal imprimindo o conteúdo provido no postman](../../images/3/15new.png)
 
-**NB** <i>Keep the terminal running the application visible at all times</i> when you are working on the backend. Thanks to Nodemon any changes we make to the code will restart the application. If you pay attention to the console, you will immediately be able to pick up on errors that occur in the application:
+**N.B.:** <i>Mantenha o terminal visível o tempo todo enquanto a aplicação estiver sendo executada</i> quando estiver trabalhando no back-end. Graças ao Nodemon, quaisquer alterações que fizermos no código reiniciarão a aplicação. Se você prestar atenção no console, poderá identificar imediatamente os erros que ocorrem na aplicação:
 
-![nodemon error as typing requre not defined](../../images/3/16.png)
+![erro do nodemon: 'typing requre not defined'](../../images/3/16.png)
 
-Similarly, it is useful to check the console for making sure that the backend behaves as we expect it to in different situations, like when we send data with an HTTP POST request. Naturally, it's a good idea to add lots of <em>console.log</em> commands to the code while the application is still being developed.
+Da mesma forma, é útil verificar o console para garantir que o back-end está se comportando da forma que esperamos em diferentes situações, como quando enviamos dados com uma requisição HTTP POST. Naturalmente, é uma boa ideia adicionar muitos comandos <em>console.log</em> ao código enquanto a aplicação ainda está sendo desenvolvida.
 
-A potential cause for issues is an incorrectly set <i>Content-Type</i> header in requests. This can happen with Postman if the type of body is not defined correctly:
+Uma possível causa de problemas é um cabeçalho <i>Content-Type</i> definido incorretamente em requisições. Isso pode acontecer com o Postman se o tipo de corpo não estiver definido corretamente:
 
-![postman having text as content-type](../../images/3/17new.png)
+![postman com o texto definido como 'content-type'](../../images/3/17new.png)
 
-The <i>Content-Type</i> header is set to <i>text/plain</i>:
+O cabeçalho <i>Content-Type</i> é definido como <i>text/plain</i>:
 
-![postman showing headers and content-type as text/plain](../../images/3/18new.png)
+![postman mostrando cabeçalhos and content-type como 'text/plain'](../../images/3/18new.png)
 
-The server appears to only receive an empty object:
+O servidor parece receber apenas um objeto vazio:
 
-![nodemon output showing empty curly braces](../../images/3/19.png)
+![saída do nodemon mostrando chaves vazias](../../images/3/19.png)
 
-The server will not be able to parse the data correctly without the correct value in the header. It won't even try to guess the format of the data since there's a [massive amount](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) of potential <i>Content-Types</i>.
+O servidor não será capaz de analisar corretamente os dados sem o valor correto no cabeçalho. Ele nem tentará adivinhar o formato dos dados, já que há uma [quantidade enorme](https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/MIME_types) de potenciais <i>Content-Types</i>.
 
-If you are using VS Code, then you should install the REST client from the previous chapter <i>now, if you haven't already</i>. The POST request can be sent with the REST client like this:
+Se você estiver usando o VS Code, deverá instalar o cliente REST do capítulo anterior <i>agora, se ainda não tiver instalado</i>. A requisição POST pode ser enviada com o cliente REST assim:
 
-![sample post request in vscode with JSON data](../../images/3/20new.png)
+![exemplo de requisição post no vscode com dados JSON](../../images/3/20new.png)
 
-We created a new <i>create\_note.rest</i> file for the request. The request is formatted according to the [instructions in the documentation](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
+Criamos um novo arquivo <i>create\_note.rest</i> para a requisição. A requisição é formatada de acordo com as [instruções da documentação](https://github.com/Huachao/vscode-restclient/blob/master/README.md#usage).
 
-One benefit that the REST client has over Postman is that the requests are handily available at the root of the project repository, and they can be distributed to everyone in the development team. You can also add multiple requests in the same file using `###` separators:
+Uma vantagem que o cliente REST tem sobre o Postman é que as requisições estão disponíveis convenientemente na raiz do repositório do projeto e podem ser distribuídas para todos na equipe de desenvolvimento. Você também pode adicionar várias requisições no mesmo arquivo usando separadores `###`:
 
 ```
 GET http://localhost:3001/api/notes/
@@ -718,19 +714,19 @@ content-type: application/json
 }
 ```
 
-Postman also allows users to save requests, but the situation can get quite chaotic especially when you're working on multiple unrelated projects.
+O Postman também permite que os usuários salvem requisições, mas a situação pode ficar bastante caótica, especialmente quando você está trabalhando em vários projetos não relacionados.
 
-> **Important sidenote**
+> **Observação importante**
 >
-> Sometimes when you're debugging, you may want to find out what headers have been set in the HTTP request. One way of accomplishing this is through the [get](http://expressjs.com/en/4x/api.html#req.get) method of the _request_ object, that can be used for getting the value of a single header. The _request_ object also has the <i>headers</i> property, that contains all of the headers of a specific request.
->
-
-> Problems can occur with the VS REST client if you accidentally add an empty line between the top row and the row specifying the HTTP headers. In this situation, the REST client interprets this to mean that all headers are left empty, which leads to the backend server not knowing that the data it has received is in the JSON format.
+> Às vezes, ao depurar, é possível que queira descobrir quais cabeçalhos foram definidos na requisição HTTP. Uma maneira de fazer isso é através do método [get](http://expressjs.com/en/4x/api.html#req.get) do objeto _request_, que pode ser usado para obter o valor de um único cabeçalho. O objeto _request_ também possui a propriedade <i>headers</i>, que contém todos os cabeçalhos de uma requisição específica.
 >
 
-You will be able to spot this missing <i>Content-Type</i> header if at some point in your code you print all of the request headers with the _console.log(request.headers)_ command.
+> Podem ocorrer problemas com o cliente REST do VS se você adicionar acidentalmente uma linha vazia entre a linha superior e a linha que especifica os cabeçalhos HTTP. Nessa situação, o cliente REST interpreta como se todos os cabeçalhos estivessem vazios, o que faz com que o servidor back-end não saiba que os dados que recebeu estão no formato JSON.
+>
 
-Let's return to the application. Once we know that the application receives data correctly, it's time to finalize the handling of the request:
+Você será capaz de identificar esse cabeçalho faltando <i>Content-Type</i> se em algum momento no seu código você imprimir todos os cabeçalhos da requisição com o comando _console.log(request.headers)_.
+
+Vamos voltar para a aplicação. Depois de verificar se a aplicação recebe dados corretamente, é hora de finalizar o gerenciamento da requisição:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -747,9 +743,9 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-We need a unique id for the note. First, we find out the largest id number in the current list and assign it to the _maxId_ variable. The id of the new note is then defined as _maxId + 1_. This method is not recommended, but we will live with it for now as we will replace it soon enough.
+Precisamos de um id único para a nota. Primeiro, descobrimos o maior número de id na lista atual e o atribuímos à variável _maxId_. O id da nova nota é então definido como _maxId + 1_. Este método não é recomendado, mas vamos conviver com ele por enquanto, pois o substituiremos em breve.
 
-The current version still has the problem that the HTTP POST request can be used to add objects with arbitrary properties. Let's improve the application by defining that the <i>content</i> property may not be empty. The <i>important</i> property will be given default value false. All other properties are discarded:
+A versão atual ainda tem o problema de que a requisição HTTP POST pode ser usada para adicionar objetos com propriedades arbitrárias. Vamos melhorar a aplicação definindo que a propriedade <i>content</i> não pode estar vazia. A propriedade <i>important</i> receberá o valor padrão <em>false</em>. Todas as outras propriedades são descartadas:
 
 ```js
 const generateId = () => {
@@ -764,7 +760,7 @@ app.post('/api/notes', (request, response) => {
 
   if (!body.content) {
     return response.status(400).json({ 
-      error: 'content missing' 
+      error: 'content missing' // "conteúdo em falta"
     })
   }
 
@@ -780,45 +776,40 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-The logic for generating the new id number for notes has been extracted into a separate _generateId_ function.
+A lógica para gerar às notas um novo número de ID foi extraída para uma função separada _generateId_.
 
-If the received data is missing a value for the <i>content</i> property, the server will respond to the request with the status code [400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request):
+Se os dados recebidos estiverem faltando um valor para a propriedade <i>content</i>, o servidor responderá à requisição com o código de status [400 bad request](https://www.rfc-editor.org/rfc/rfc9110.html#name-400-bad-request) ("400 requisição inválida"):
 
 ```js
 if (!body.content) {
   return response.status(400).json({ 
-    error: 'content missing' 
+    error: 'content missing' // "conteúdo em falta"
   })
 }
 ```
 
-Notice that calling return is crucial because otherwise the code will execute to the very end and the malformed note gets saved to the application.
+Observe que declarar o <em>return</em> é crucial porque, caso contrário, o código será executado até o final e a nota malformada será salva na aplicação.
 
-If the content property has a value, the note will be based on the received data.
-If the <i>important</i> property is missing, we will default the value to <i>false</i>. The default value is currently generated in a rather odd-looking way:
+Se a propriedade <i>content</i> tiver um valor, a nota será baseada nos dados recebidos.
+Se estiver faltando a propriedade <i>important</i>, definimos o valor padrão como <i>false</i>. O valor padrão é gerado atualmente de uma forma bastante estranha:
 
 ```js
 important: body.important || false,
 ```
 
-If the data saved in the _body_ variable has the <i>important</i> property, the expression will evaluate to its value. If the property does not exist, then the expression will evaluate to false which is defined on the right-hand side of the vertical lines.
+Se os dados salvos na variável _body_ tiverem a propriedade <i>important</i>, a expressão avaliará para o valor dela. Se a propriedade não existir, a expressão avaliará para <i>false</i>, que é definido no lado direito das barras verticais.
 
+> Sendo mais preciso, quando a propriedade <i>important</i> é <i>false</i>, então a expressão <em>body.important || false</em> retornará de fato  o <i>false</i> do lado direito...
 
-> To be exact, when the <i>important</i> property is <i>false</i>, then the <em>body.important || false</em> expression will in fact return the <i>false</i> from the right-hand side...
+É possível encontrar o código atual completo da nossa aplicação na branch <i>part3-1</i> neste [repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
+O código para o estado atual da aplicação é especificado na branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
 
-You can find the code for our current application in its entirety in the <i>part3-1</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
+![captura de tela da branch 3-1 no GitHub](../../images/3/21.png)
 
+Se você clonar o projeto, execute o comando _npm install_ antes de iniciar a aplicação com _npm start_ ou _npm run dev_.
 
-The code for the current state of the application is specified in branch [part3-1](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-1).
-
-![GitHub screenshot of branch 3-1](../../images/3/21.png)
-
-
-If you clone the project, run the _npm install_ command before starting the application with _npm start_ or _npm run dev_.
-
-
-One more thing before we move on to the exercises. The function for generating IDs looks currently like this:
+Mais uma coisa antes de prosseguirmos para os exercícios. A função para gerar IDs se parece atualmente com isso:
 
 ```js
 const generateId = () => {
@@ -829,38 +820,31 @@ const generateId = () => {
 }
 ```
 
-
-The function body contains a row that looks a bit intriguing:
+O corpo da função contém uma linha que parece um tanto intrigante:
 
 ```js
 Math.max(...notes.map(n => n.id))
 ```
 
-What exactly is happening in that line of code? <em>notes.map(n => n.id)</em> creates a new array that contains all the ids of the notes. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) returns the maximum value of the numbers that are passed to it. However, <em>notes.map(n => n.id)</em> is an <i>array</i> so it can't directly be given as a parameter to _Math.max_. The array can be transformed into individual numbers by using the "three dot" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) syntax <em>...</em>.
+O que exatamente está acontecendo nessa linha de código? <em>notes.map(n => n.id)</em> cria um novo array que contém todos os IDs das notas. [Math.max](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max) retorna o valor máximo dos números que lhe são passados. No entanto, <em>notes.map(n => n.id)</em> é um <i>array</i>, então ele não pode ser dado diretamente como parâmetro para Math.max. O array pode ser transformado em números individuais usando a sintaxe de espalhamento ou sintaxe de "três pontos" [spread](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax) <em>...</em> 
 
 </div>
 
 <div class="tasks">
 
+### Exercícios 3.1 a 3.6
 
-### Exercises 3.1.-3.6.
+**N.B.:** É recomendado fazer todos os exercícios desta parte em um novo repositório Git separado e colocar o código-fonte na raiz do repositório. Caso contrário, você terá problemas no exercício 3.10.
 
-**NB:** It's recommended to do all of the exercises from this part into a new dedicated git repository, and place your source code right at the root of the repository. Otherwise, you will run into problems in exercise 3.10.
+**N.B.:** Como este não é um projeto de front-end e não estamos trabalhando com React, a aplicação <strong>não é criada</strong> com "create-react-app". Inicializa-se este projeto com o comando <em>npm init</em> que foi demonstrado anteriormente nesta parte do material.
 
+**Forte Recomendação:** quando você estiver trabalhando com código back-end, sempre fique de olho no que está acontecendo no terminal que está executando sua aplicação.
 
-**NB:** Because this is not a frontend project and we are not working with React, the application <strong>is not created</strong> with create-react-app. You initialize this project with the <em>npm init</em> command that was demonstrated earlier in this part of the material.
+#### 3.1: Phonebook backend — 1º passo
 
+Implemente uma aplicação Node que retorna uma lista de pessoas da lista telefônica a partir do endereço <http://localhost:3001/api/persons>.
 
-**Strong recommendation:** When you are working on backend code, always keep an eye on what's going on in the terminal that is running your application.
-
-
-#### 3.1: Phonebook backend step1
-
-
-Implement a Node application that returns a hardcoded list of phonebook entries from the address <http://localhost:3001/api/persons>.
-  
-
-Data:
+Dados:
   
 ```js
 [
@@ -887,69 +871,72 @@ Data:
 ]
 ```
 
-Output in the browser after GET request:
-  
-![JSON data of 4 poeple in browser from api/persons](../../images/3/22e.png)
+Saída no navegador após a requisição GET:
 
-Notice that the forward slash in the route <i>api/persons</i> is not a special character, and is just like any other character in the string. 
+![Dados JSON de 4 pessoas no navegador a partir de api/persons](../../images/3/22e.png)
 
-The application must be started with the command _npm start_.
+Observe que a barra invertida na rota <i>api/persons</i> não é um caractere especial, sendo apenas como qualquer outro caractere na string.
 
-The application must also offer an _npm run dev_ command that will run the application and restart the server whenever changes are made and saved to a file in the source code.
- 
-#### 3.2: Phonebook backend step2
+A aplicação deve ser iniciada com o comando _npm start_.
 
-Implement a page at the address <http://localhost:3001/info> that looks roughly like this:
+A aplicação também deve disponibilizar um comando _npm run dev_ que executará a aplicação e reiniciará o servidor sempre que as alterações forem feitas e salvas em um arquivo no código-fonte.
 
-![Screenshot for 3.2](../../images/3/23x.png)
+#### 3.2: Phonebook backend — 2º passo
 
+Implemente uma página no endereço <http://localhost:3001/info> que se pareça mais ou menos com isto:
 
-The page has to show the time that the request was received and how many entries are in the phonebook at the time of processing the request.
+![Captura de tela para o exercício 3.2](../../images/3/23x.png)
 
-#### 3.3: Phonebook backend step3
+A página deve mostrar a hora em que a requisição foi recebida e quantas entradas há na lista telefônica no momento do processamento da requisição.
 
+#### 3.3: Phonebook backend — 3º passo
 
-Implement the functionality for displaying the information for a single phonebook entry. The url for getting the data for a person with the id 5 should be <http://localhost:3001/api/persons/5>
+Implemente uma funcionalidade que exiba as informações de uma única entrada da lista telefônica. A URL para obter os dados de uma pessoa com o id 5 deve ser <http://localhost:3001/api/persons/5>.
 
-If an entry for the given id is not found, the server has to respond with the appropriate status code.
+Se uma entrada para o id fornecido não for encontrada, o servidor deverá responder com o código de status apropriado.
 
-#### 3.4: Phonebook backend step4
+#### 3.4: Phonebook backend — 4º passo
 
+Implemente uma funcionalidade que permita excluir uma única entrada da lista telefônica fazendo uma requisição HTTP DELETE para a URL exclusiva dessa entrada na lista telefônica.
 
-Implement functionality that makes it possible to delete a single phonebook entry by making an HTTP DELETE request to the unique URL of that phonebook entry.
+Teste se sua funcionalidade funciona com o Postman ou com o cliente REST do Visual Studio Code.
 
+#### 3.5: Phonebook backend — 5º passo
 
-Test that your functionality works with either Postman or the Visual Studio Code REST client.
+Expanda o back-end para que novas entradas da lista telefônica possam ser adicionadas fazendo solicitações HTTP POST para o endereço <http://localhost:3001/api/persons>.
 
+Gere um novo id para as entradas da lista telefônica com a função [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Use um intervalo grande o suficiente para seus valores aleatórios, para que a probabilidade de criar ids duplicados seja pequena.
 
-#### 3.5: Phonebook backend step5
+#### 3.6: Phonebook backend — 6º passo
 
+Implemente o gerenciamento de erro (error handling) para a criação de novas entradas. A requisição não pode ser bem-sucedida se:
+- O nome ou o número estão faltando; e se
+- O nome já existe na lista telefônica.
 
-Expand the backend so that new phonebook entries can be added by making HTTP POST requests to the address <http://localhost:3001/api/persons>.
-
-
-Generate a new id for the phonebook entry with the [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random) function. Use a big enough range for your random values so that the likelihood of creating duplicate ids is small.
-
-
-#### 3.6: Phonebook backend step6
-
-
-
-
-Implement error handling for creating new entries. The request is not allowed to succeed, if:
-- The name or number is missing 
-- The name already exists in the phonebook
-
-
-Respond to requests like these with the appropriate status code, and also send back information that explains the reason for the error, e.g.:
+Responda a solicitações como essas com o código de status apropriado e envie também informações que explicam o motivo do erro, como por exemplo:
 
 ```js
-{ error: 'name must be unique' }
+{ error: 'name must be unique' } // "o nome deve ser único"
 ```
 
 </div>
 
 <div class="content">
+
+
+
+
+
+
+
+^^^^^^
+### SEM REVISÃO
+
+
+
+
+
+
 
 
 ### About HTTP request types
