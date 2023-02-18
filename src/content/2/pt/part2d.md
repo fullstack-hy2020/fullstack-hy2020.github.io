@@ -19,7 +19,7 @@ Vamos nos aprofundar mais em REST na [próxima parte](/pt/part3) do curso. Poré
 
 Na terminologia REST, nos referimos a objetos de dados individuais — as notas em nossa aplicação, por exemplo — como <i>recursos</i>. Cada recurso tem um endereço único associado a ele — sua URL. De acordo com uma convenção geral usada pelo json-server, poderíamos localizar uma nota individual na URL do recurso <i>notes/3</i>, onde 3 é o id do recurso. A URL <i>notes</i>, por outro lado, apontaria para uma coleção de recursos contendo todas as notas.
 
-Os recursos são buscados do servidor com solicitações HTTP GET. Por exemplo, uma requisição HTTP GET para a URL <i>notes/3</i> retornará a nota que tem o número de id 3. Uma requisição HTTP GET para a URL <i>notes</i> retornaria uma lista de todas as notas.
+Os recursos são buscados do servidor com requisições HTTP GET. Por exemplo, uma requisição HTTP GET para a URL <i>notes/3</i> retornará a nota que tem o número de id 3. Uma requisição HTTP GET para a URL <i>notes</i> retornaria uma lista de todas as notas.
 
 A criação de um novo recurso para armazenar uma nota é feita fazendo uma requisição HTTP POST para a URL <i>notes</i> de acordo com a convenção REST a qual o json-server adere. Os dados para o novo recurso de nota são enviados no <i>corpo</i> (body) da requisição.
 
@@ -597,13 +597,13 @@ const getAll = () => {
 }
 ```
 
-Quando tentamos mudar a importância da nota, vemos a seguinte mensagem de erro no console. A mensagem de erro diz que o servidor back-end respondeu à nossa solicitação HTTP PUT com um código de status 404 <i>not found</i> (não encontrado(a)).
+Quando tentamos mudar a importância da nota, vemos a seguinte mensagem de erro no console. A mensagem de erro diz que o servidor back-end respondeu à nossa requisição HTTP PUT com um código de status 404 <i>not found</i> (não encontrado(a)).
 
 ![erro 404 not found nas ferramentas do desenvolvedor](../../images/2/23e.png)
 
 A aplicação deve ser capaz de lidar com estes tipos de erro de forma elegante. Os usuários não serão capazes de dizer que ocorreu um erro a menos que estejam com o console aberto. A única maneira de o erro ser visto na aplicação é a importância da nota não ser alternada quando se clica no botão.
 
-Mencionamos [anteriormente](/pt/part2/obtendo_dados_do_servidor#axios-e-promessas-promises) que uma promessa pode estar em um dos três estados diferentes. Quando uma solicitação HTTP falha, a promessa associada é <i>rejeitada</i>. O nosso código atual não gerencia por nenhum meio essa rejeição.
+Mencionamos [anteriormente](/pt/part2/obtendo_dados_do_servidor#axios-e-promessas-promises) que uma promessa pode estar em um dos três estados diferentes. Quando uma requisição HTTP falha, a promessa associada é <i>rejeitada</i>. O nosso código atual não gerencia por nenhum meio essa rejeição.
 
 A rejeição de uma promessa é [gerenciada](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) fornecendo ao método <em>then</em> uma segunda função callback, que é chamada na situação em que a promessa é rejeitada.
 

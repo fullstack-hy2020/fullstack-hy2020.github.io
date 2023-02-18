@@ -361,7 +361,7 @@ const App = () => {
 
 O console do seu navegador estava aberto? Se não estava, prometa que essa foi a última vez que precisou ser lembrado disso.
 
-### Tratamento de eventos (Event handling)
+### Gerenciamento de eventos (Event handling)
 
 Já mencionamos, na [Parte 0](/pt/part0), <i>gerenciadores de eventos</i> que são registrados para serem chamados quando eventos específicos ocorrem várias vezes. A interação de um usuário com os diferentes elementos de uma página web pode causar uma coleção de vários tipos de eventos a serem acionados.
 
