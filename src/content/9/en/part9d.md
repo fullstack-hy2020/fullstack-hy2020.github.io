@@ -216,7 +216,7 @@ HTMLElement | null
 
 since if the function does not find the searched element, it will return null.
 
-Earlier in this part we [warned](http://localhost:8000/en/part9/first_steps_with_type_script#type-assertion) about the dangers of type assertions, but in our case the assertion is ok since we are sure that the file <i>index.html</i> indeed has this particular id and the function is always returning a HTMLElement.
+Earlier in this part we [warned](https://fullstackopen.com/en/part9/first_steps_with_type_script#type-assertion) about the dangers of type assertions, but in our case the assertion is ok since we are sure that the file <i>index.html</i> indeed has this particular id and the function is always returning a HTMLElement.
 
 </div>
 
@@ -659,7 +659,7 @@ useState<string>(initialState: string | (() => string)):
   [string, React.Dispatch<React.SetStateAction<string>>] 
 ```
 
-The type is a somehow challenging to decipher. It has the following "form":
+The type is somewhat challenging to decipher. It has the following "form":
 
 ```
 functionName(parameters): return_value
@@ -815,7 +815,7 @@ It does not quite work, there is an Eslint error complaining about implicit any:
 
 ![](../../images/9/68new.png)
 
-TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the unfamous implicit any that we wan to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
+TypeScript compiler has now no clue what is the type of the parameter, so that is why the type is the infamous implicit any that we wan to [avoid](/en/part9/first_steps_with_type_script#the-horrors-of-any) at all costs. The React TypeScript cheatsheet comes again to rescue, the chapter about
 [forms and events](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/forms_and_events) reveals that the right type of event handler is _React.SyntheticEvent_. 
 
 The code becomes
@@ -928,9 +928,9 @@ So our code is essentially as safe as it would be if a [type assertion](/en/part
   }, [])
 ```
 
-Since the TypeScript types do not even exist in runtime, our code does not give us any "safety" agains situations where the request body contains data in a wrong form. 
+Since the TypeScript types do not even exist in runtime, our code does not give us any "safety" against situations where the request body contains data in a wrong form. 
 
-Giving type variable to _axios.get_ might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend simillarly that we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
+Giving type variable to _axios.get_ might be ok if we are <i>absolutely sure</i> that the backend behaves correctly and returns always the data in correct form. If we want to build a robust system we should prepare for surprises and parse the response data in the frontend similarly that we did [in the previous section](/en/part9/typing_an_express_app#proofing-requests) for the requests to the backend.
 
 Let us now wrap up our app by implementing the new note addition:
 
