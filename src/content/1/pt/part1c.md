@@ -66,7 +66,7 @@ Se examinarmos nosso código atual de perto, vamos perceber que a função "auxi
 
 ### Desestruturação (Destructuring)
 
-Antes de avançarmos, vamos dar uma olhada em uma pequena, porém útil, funcionalidade da linguagem JavaScript que foi adicionada na especificação ES6, que nos permite [desestruturar](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (destructuring assignment [atribuição via desestruturação]) valores de objetos e arrays por atribuição.
+Antes de avançarmos, vamos dar uma olhada em uma pequena, porém útil, funcionalidade da linguagem JavaScript que foi adicionada na especificação ES6, que nos permite [desestruturar](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) (destructuring assignment [atribuição via desestruturação]) valores de objetos e arrays por atribuição.
 
 Em nosso código anterior, tivemos que referenciar os dados passados para nosso componente como _props.nome_ e _props.idade_. Dessas duas expressões, tivemos que repetir _props.idade_ duas vezes em nosso código.
 

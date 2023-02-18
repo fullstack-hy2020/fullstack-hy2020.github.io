@@ -1020,6 +1020,6 @@ Este exercício pode ser bastante desafiador, embora a solução não exija muit
 
 Este exercício pode ser concluído de várias maneiras diferentes. Uma das soluções possíveis utiliza essas duas técnicas:
 - [criando novos tokens](https://github.com/expressjs/morgan#creating-new-tokens)
-- [JSON.stringify](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+- [JSON.stringify](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
 </div>
