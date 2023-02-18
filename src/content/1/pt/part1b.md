@@ -163,7 +163,7 @@ console.log(objeto1[nomePropriedade])    // 35 é impresso
 Você também pode adicionar propriedades a um objeto em tempo de execução usando a notação de ponto ou colchetes:
 
 ```js
-objeto1.endereço = 'Helsinque'
+objeto1.endereco = 'Helsinque' // *endereço
 objeto1['numero secreto'] = 12341
 ```
 
