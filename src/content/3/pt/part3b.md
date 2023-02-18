@@ -7,10 +7,10 @@ lang: pt
 
 <div class="content">
 
-Next, let's connect the frontend we made in [part 2](/en/part2) to our own backend.
+Em seguida, vamos conectar o front-end que fizemos na [Parte 2](/pt/part2) ao nosso próprio back-end.
 
-In the previous part, the frontend could ask for the list of notes from the json-server we had as a backend, from the address http://localhost:3001/notes.
-Our backend has a slightly different URL structure now, as the notes can be found at http://localhost:3001/api/notes. Let's change the attribute __baseUrl__ in the <i>src/services/notes.js</i> like so:
+Na parte anterior, o front-end permitia requisições da lista de notas do json-server que tínhamos como back-end, a partir do endereço http://localhost:3001/notes.
+A estrutura de URL do nosso back-end agora é um pouco diferente, pois as notas podem ser encontradas em http://localhost:3001/api/notes. Vamos alterar o atributo __baseUrl__ no <i>src/services/notes.js</i> assim:
 
 ```js
 import axios from 'axios'
@@ -26,15 +26,15 @@ const getAll = () => {
 export default { getAll, create, update }
 ```
 
-Now frontend's GET request to <http://localhost:3001/api/notes> does not work for some reason:
+Porém, agora a requisição GET do front-end para <http://localhost:3001/api/notes> não funciona por algum motivo:
 
-![Get request showing error in dev tools](../../images/3/3ae.png)
+![requisição GET mostrando erro nas ferramentas do desenvolvedor](../../images/3/3ae.png)
 
-What's going on here? We can access the backend from a browser and from postman without any problems.
+O que está acontecendo aqui? Podemos acessar o back-end através do navegador e do postman sem problemas.
 
-### Same origin policy and CORS
+### Política de Mesma Origem e CORS
 
-The issue lies with a thing called `same origin policy`. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
+O problema é uma coisa chamada `Política de Mesma Origem`. A origem de uma URL é definida pela combinação do protocolo (<i>protocol</i>, também conhecido como esquema (<i>scheme</i>)), do nome do host e da porta (<i>port</i>).
 
 ```text
 http://example.com:80/index.html
@@ -44,28 +44,28 @@ host: example.com
 port: 80
 ```
 
-When you visit a website (i.e <http://catwebsites.com>), the browser issues a request to the server on which the website (catwebsites.com) is hosted. The response sent by the server is an HTML file that may contain one or more references to external assets/resources hosted either on the same server that <i>catwebsites.com</i> is hosted on or a different website. When the browser sees reference(s) to a URL in the source HTML, it issues a request. If the request is issued using the URL that the source HTML was fetched from, then the browser processes the response without any issues. However, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the `Access-Control-Allow-origin` response header. If it contains `*` or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process it and throw an error.
+Quando você visita um site (ou seja, <http://catwebsites.com>), o navegador emite uma requisição para o servidor em que o site (catwebsites.com) está hospedado. A resposta enviada pelo servidor é um arquivo HTML que pode conter uma ou mais referências a recursos/ativos externos hospedados no mesmo servidor que <i>catwebsites.com</i> está hospedado ou em um site diferente. Quando o navegador vê referência(s) a uma URL no HTML de origem, ele emite uma requisição. Se a requisição for feita usando a URL da qual o HTML de origem foi obtido, o navegador processa a resposta sem problemas. No entanto, se o recurso for obtido usando uma URL que não compartilha a mesma origem (esquema, host, porta) que o HTML de origem, o navegador deverá verificar o cabeçalho de resposta `Access-Control-Allow-origin` (CORS). Se ele contiver `*` ou a URL do HTML de origem, o navegador processará a resposta, caso contrário, o navegador se recusará a processá-la e lançará um erro.
   
-The <strong>same-origin policy</strong> is a security mechanism implemented by browsers in order to prevent session hijacking among other security vulnerabilities.
+A <strong>Política de Mesma Origem</strong> é um mecanismo de segurança implementado pelos navegadores para impedir o sequestro de sessão, entre outras vulnerabilidades de segurança.
 
-In order to enable legitimate cross-origin requests (requests to URLs that don't share the same origin) W3C came up with a mechanism called <strong>CORS</strong>(Cross-Origin Resource Sharing). According to [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
+Para permitir requisições legítimas de várias origens (requisições a URLs que não compartilham a mesma origem), a W3C criou um mecanismo chamado <strong>CORS</strong> (Compartilhamento de Recursos de Origem Cruzada). De acordo com a [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
 
-> <i>Cross-origin resource sharing (CORS) is a mechanism that allows restricted resources (e.g. fonts) on a web page to be requested from another domain outside the domain from which the first resource was served. A web page may freely embed cross-origin images, stylesheets, scripts, iframes, and videos. Certain "cross-domain" requests, notably Ajax requests, are forbidden by default by the same-origin security policy.</i>
+> <i>Cross-Origin Resource Sharing ou CORS é um mecanismo que permite que recursos restritos em uma página web sejam recuperados por outro domínio fora do domínio ao qual pertence o recurso que será recuperado. Uma página web pode integrar livremente recursos de diferentes origens, como imagens, folhas de estilo, scripts, iframes e vídeos. Certas "requisições de domínio cruzado", em particular as requisições Ajax, são proibidas por padrão pela política de segurança de mesma origem.</i>
 
-The problem is that, by default, the JavaScript code of an application that runs in a browser can only communicate with a server in the same [origin](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy). 
-Because our server is in localhost port 3001, while our frontend is in localhost port 3000, they do not have the same origin.
+O problema é que, por padrão, o código JavaScript de uma aplicação que é executada em um navegador só pode se comunicar com um servidor na mesma [origem](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) (origin).
+Como nosso servidor está em _localhost, porta 3001_, enquanto nosso front-end está em _localhost, porta 3000_, eles não possuem a mesma origem.
 
-Keep in mind, that [same-origin policy](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) and CORS are not specific to React or Node. They are universal principles regarding the safe operation of web applications. 
+Lembre-se de que [Política de Mesma Origem](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) (same-origin policy) e CORS não são específicos de React ou Node. São princípios universais referentes à operação segura de aplicações web.
 
-We can allow requests from other <i>origins</i> by using Node's [cors](https://github.com/expressjs/cors) middleware.
+Podemos permitir requisições de outras <i>origens</i> usando o middleware [cors](https://github.com/expressjs/cors) do Node.
 
-In your backend repository, install <i>cors</i> with the command
+No repositório do seu back-end, instale o <i>cors</i> com o comando...
 
 ```bash
 npm install cors
 ```
 
-take the middleware to use and allow for requests from all origins: 
+... use o middleware e permita requisições de todas as origens:
 
 ```js
 const cors = require('cors')
@@ -73,85 +73,85 @@ const cors = require('cors')
 app.use(cors())
 ```
 
-And the frontend works! However, the functionality for changing the importance of notes has not yet been implemented on the backend. 
+E o front-end funciona! No entanto, a funcionalidade para alterar a importância das notas ainda não foi implementada no back-end.
 
-You can read more about CORS from [Mozilla's page](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
+Você pode ler mais sobre o CORS na página da [Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
-The setup of our app looks now as follows:
+A configuração de nosso aplicação agora é a seguinte:
 
-![diagram of react app and browser](../../images/3/100.png)
+![diagrama da aplicação React e do navegador](../../images/3/100.png)
 
-The react app running in the browser now fetches the data from node/express-server that runs in localhost:3001.
+A aplicação React sendo executada no navegador agora obtém os dados do servidor node/express que é executado em <em>localhost:3001</em>.
 
-### Application to the Internet
+### A Aplicação na Internet
 
-Now that the whole stack is ready, let's move our application to the internet.
+Agora que toda a pilha (stack) está pronta, vamos mover nossa aplicação para a internet.
 
-There are an ever-growing number of services that can be used to host an app on the internet. The developer-friendly services like PaaS (i.e. Platform as a Service) take care of installing the execution environment (eg. Node.js) and could also provide various services such as databases.
+Há um número cada vez maior de serviços que podem ser usados para hospedar uma aplicação na internet. Serviços voltados a desenvolvedores (developer-friendly services), como o PaaS (Platform as a Service [Plataforma como Serviço]), cuidam da instalação do ambiente de execução (Node.js, por exemplo) e também podem fornecer vários serviços, como bancos de dados.
 
-For a decade, [Heroku](http://heroku.com) was dominating the PaaS scene. Unfortunately the free tier Heroku ended at 27th November 2022. This is very unfortunate for many developers, especially students. Heroku is still very much a viable option if you are willing to spend some money. They also have [a student program](https://www.heroku.com/students) that provides some free credits.
+Durante uma década, [Heroku](http://heroku.com) dominou a cena PaaS. Infelizmente, o plano gratuito do Heroku acabou em 27 de novembro de 2022. Muitos desenvolvedores ficaram tristes com isso, especialmente estudantes. O Heroku ainda é uma opção viável se você estiver disposto a gastar algum dinheiro. Eles também têm [um programa para estudantes](https://www.heroku.com/students) que fornece alguns créditos gratuitos.
 
-We are now introducing two services [Fly.io](https://fly.io/) and [Render](https://render.com/) that both have a (limited) free plan. Fly.io is our "official" hosting service since it can be for sure used also on the parts 11 and 13 of the course. Render will be fine at least for the other parts of this course.
+Agora estamos apresentando dois serviços: [Fly.io](https://fly.io/) e [Render](https://render.com/), onde ambos têm um plano gratuito (limitado). O Fly.io é nosso serviço de hospedagem "oficial", pois pode ser usado com certeza também nas Partes 11 e 13 do curso. O Render será bom para as outras partes deste curso, pelo menos.
 
-Note that despite using the free tier only, Fly.io <i>might</i> require one to enter the credit card details. At the moment Render can be used without a credit card.
+Observe que, apesar de usar apenas o plano gratuito, o Fly.io <i>pode</i> exigir que você insira suas informações de cartão de crédito. No momento, o Render pode ser usado sem um cartão de crédito.
 
-Render might be a bit easier to use since it does not require any software to be installed on your machine.
+O Render pode ser um pouco mais fácil de usar, pois não requer a instalação de nenhum software em sua máquina.
 
-There are also some other free options hosting options that work well for this course, at least for all parts other than part 11 (CI/CD) that might have one tricky exercise for other platforms.
+Também existem outras opções gratuitas de hospedagem que funcionam bem para este curso, para todas as partes exceto a Parte 11 (CI/CD), que tem um exercício complicado de se fazer em outras plataformas.
 
-Some course participants have also used the following
+Alguns participantes do curso também usaram estes serviços:
 
 - [Railway](https://railway.app/)
 - [Cyclic](https://www.cyclic.sh/)
 - [Replit](https://replit.com)
 - [CodeSandBox](https://codesandbox.io)
 
-If you know some other good and easy-to-use services for hosting NodeJS, please let us know!
+Se você conhece outros serviços bons e fáceis de usar para hospedar NodeJS, por favor, nos avise!
 
-For both Fly.io and Render, we need to change the definition of the port our application uses at the bottom of the <i>index.js</i> file like so: 
+Tanto para o Fly.io quanto para o Render, precisamos mudar, no final do arquivo <i>index.js</i>, a definição da porta que nossa aplicação usa:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
 })
 ```
 
-Now we are using the port defined in the [environment variable](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ or port 3001 if the environment variable _PORT_ is undefined. Fly.io and Render configure the application port based on that environment variable. 
+Agora estamos usando a porta definida na [variável de ambiente](https://en.wikipedia.org/wiki/Environment_variable) _PORT_ ou a porta 3001 se a variável de ambiente _PORT_ estiver indefinida. O Fly.io e o Render configuram a porta da aplicação com base nessa variável de ambiente.
 
 #### Fly.io
 
-<i>Note that you may need to give your credit card number to Fly.io even if you are using only the free tier!</i> There has been actually conflicting reports about this, it is known for a fact that some of the students in this course are using Fly.io without entering the credit card info. At the moment [Render](https://render.com/) can be used without a credit card.
+<i>Note que pode ser preciso fornecer seu número de cartão de crédito para o Fly.io, mesmo se estiver usando apenas o plano gratuito!</i> Na verdade, houve relatos conflitantes sobre isso. Fato é que alguns alunos deste curso estão usando o Fly.io sem informar as informações do cartão de crédito. No momento, [Render](https://render.com/) pode ser usado sem um cartão de crédito.
 
-By default, everyone gets two free virtual machines that can be used for running two apps at the same time. 
+Por padrão, todos recebem duas máquinas virtuais gratuitas que podem ser usadas para executar duas aplicações ao mesmo tempo.
 
-If you decide to use [Fly.io](https://fly.io/) begin by installing their flyctl executable following [this guide](https://fly.io/docs/hands-on/install-flyctl/). After that, you should [create a Fly.io account](https://fly.io/docs/hands-on/sign-up/). 
+Se você decidir usar o [Fly.io](https://fly.io/), comece instalando seu executável _flyctl_ seguindo [este guia](https://fly.io/docs/hands-on/install-flyctl/). Após isso, você deve [criar uma conta Fly.io](https://fly.io/docs/hands-on/sign-up/).
 
-Start by [authenticating](https://fly.io/docs/hands-on/sign-in/) via the command line with the command
+Comece por [autenticar-se](https://fly.io/docs/hands-on/sign-in/) via linha de comando com o comando
 
 ```bash
 fly auth login
 ```
 
-*Note* if the command _fly_ does not work on your machine, you can try the longer version _flyctl_. Eg. on MacOS, both forms of the command work.
+*Observação:* se o comando _fly_ não funcionar em sua máquina, você pode tentar a versão mais longa _flyctl_. Por exemplo, ambas as formas do comando funcionam no MacOS.
 
-<i>If you do not get the flyctl to work in your machine, you could try Render (see next section), it does not require anything to be installed in your machine.</i>
+<i>Se você não conseguir fazer o _flyctl_ funcionar em sua máquina, é possível experimentar o Render (veja a próxima seção), que não requer nada a ser instalado em sua máquina.</i>
 
-Initializing an app happens by running the following command in the root directory of the app
+Inicializa-se uma aplicação executando o seguinte comando no diretório raiz do aplicação:
 
 ```bash
 fly launch
 ```
 
-Give the app a name or let Fly.io auto-generate one. Pick a region where the app will be run. Do not create a Postgres database for the app and do not create an Upstash Redis database, since these are not needed.
-  
-The last question is "Would you like to deploy now?". We should answer "no" since we are not quite ready yet.
+Dê um nome à aplicação ou deixe que o Fly.io gere um automaticamente. Escolha uma região onde a aplicação será executada. Não crie um banco de dados Postgres e não crie um banco de dados Upstash Redis, pois eles não são necessários.
 
-Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is configured. To get the app up and running we <i>might</i> need to do a small addition to the part [env] of the configuration:
+A última pergunta é "Você gostaria de implantar agora? (Would you like to deploy now?)". Devemos responder "não" porque ainda não estamos prontos.
+
+Fly.io cria um arquivo <i>fly.toml</i> na raiz da sua aplicação onde a mesma é configurada. Para colocar a aplicação em funcionamento, <i>talvez</i> precisemos fazer uma pequena adição na parte [env] da configuração:
 
 ```bash
 [env]
-  PORT = "8080" # add this
+  PORT = "8080" # adicione isto
 
 [experimental]
   auto_rollback = true
@@ -162,39 +162,37 @@ Fly.io creates a file <i>fly.toml</i> in the root of your app where the app is c
   processes = ["app"]
 ```
 
-We have now defined in the part [env] that environment variable PORT will get the correct port (defined in part [services]) where the app should create the server. Note that the definition might be already there, but some times it has been missing.
+Agora definimos na parte [env] que a variável de ambiente _PORT_ obterá a porta correta (definida na parte [services]) onde a aplicação deve criar o servidor. Observe que a definição pode já estar lá, mas às vezes ela falta.
 
-We are now ready to deploy the app to the Fly.io servers. That is done with the following command:
+Agora estamos prontos para implantar (deploy) a aplicação nos servidores Fly.io. Isso é feito com o seguinte comando:
 
 ```bash
 fly deploy
 ```
 
-If all goes well, the app should now be up and running. You can open it in the browser with the command
+Se tudo correr bem, a aplicação deverá estar em funcionamento. Você pode abri-la no navegador com o comando
 
 ```bash
 fly open
 ```
 
-After the initial setup, when the app code has been updated, it can be deployed to production with the command
-
+Depois da configuração inicial, quando o código da aplicação for atualizado, poderá ser implantada na produção com o comando:
 
 ```bash
 fly deploy
 ```
 
-A particularly important command is _fly logs_. This command can be used to view server logs. It is best to keep logs always visible!
+Um comando particularmente importante é _fly logs_. Este comando pode ser usado para visualizar os logs do servidor. É melhor manter os logs sempre visíveis!
 
-
-**Note:** In some cases (the cause is so far unknown) running Fly.io commands especially on Windows WSL has caused problems. If the following command just hangs
+**Atenção:** Em alguns casos (a causa é até agora desconhecida) executar comandos Fly.io, especialmente no Windows WSL, causou problemas. Se o seguinte comando simplesmente travar...
 
 ```bash
 flyctl ping -o personal
 ```
 
-your computer can not for some reason connect to Fly.io. If this happens to you, [this](https://github.com/fullstack-hy2020/misc/blob/master/fly_io_problem.md) describes one possible way to proceed.
+... seu computador não consegue, por algum motivo, se conectar ao Fly.io. Se isso acontecer com você, [aqui](https://github.com/fullstack-hy2020/misc/blob/master/fly_io_problem.md) encontra-se uma possível maneira de resolver o problema.
 
-If the output of the below command looks like this:
+Se a saída do comando abaixo se parecer com isto...
 
 ```bash
 $ flyctl ping -o personal
@@ -204,25 +202,38 @@ $ flyctl ping -o personal
 ...
 ```
 
-then there are no connection problems!
+... então não há problemas de conexão!
 
 #### Render
 
-The following assumes that the [sign in](https://dashboard.render.com/) has be made with a GitHub account.
+Este serviço pressupõe que o [login](https://dashboard.render.com/) tenha sido feito com uma conta do GitHub.
 
-After signing in, let us create a new "web service":
+Depois de fazer login, vamos criar um novo "Web Service":
 
 ![](../../images/3/r1.png)
 
-The app repository is then connected to Render:
+O repositório da aplicação é então conectado ao Render:
 
 ![](../../images/3/r2.png)
 
-The connecting seem to require that the app reopository is public.
+A conexão parece exigir que o repositório da aplicação seja público.
 
-Next we will define the basic configurations. If the app is <i>not</i> at the root of the repository the <i>Root directory</i> needs to be given a proper value:
+A seguir, definiremos as configurações básicas. Se a aplicação <i>não</i> estiver na raiz do repositório, o <i>diretório raiz</i> precisa receber um valor apropriado:
 
 ![](../../images/3/r3.png)
+
+
+
+
+
+^^^^^
+### NÃO REVISADO
+
+
+
+
+
+
 
 After this, the app starts up in the Render. The dashboard tells us the app state and the url where the app is running:
 

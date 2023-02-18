@@ -512,7 +512,7 @@ Tornou-se cada vez mais complexa a configuração de toda a aplicação. Vamos r
 
 O código JavaScript que compõe nossa aplicação React é executado no navegador. O navegador obtém o JavaScript do <i>servidor de desenvolvimento React</i> (React dev server), que é a aplicação que é executada após a execução do comando <em>npm start</em>. O servidor de desenvolvimento transforma o JavaScript em um formato compreendido pelo navegador. Entre outras coisas, ele costura e junta o JavaScript de diferentes arquivos em um único arquivo. Discutiremos sobre o servidor de desenvolvimento React em mais detalhes na Parte 7 do curso.
 
-A aplicação React em execução no navegador busca os dados no formato JSON do <i>json-server</i>, que está sendo executado na porta 3001 na máquina. O servidor a partir do qual solicitamos os dados — <i>json-server</i> — obtém seus dados do arquivo <i>db.json</i>.
+A aplicação React em execução no navegador busca os dados no formato JSON do <i>json-server</i>, que está sendo executado na porta 3001 na máquina. O servidor a partir do qual requisitamos os dados — <i>json-server</i> — obtém seus dados do arquivo <i>db.json</i>.
 
 Neste ponto do desenvolvimento, calha que todas as partes da aplicação residem na máquina do desenvolvedor, conhecido como "localhost". A situação muda quando a aplicação é implementada na internet. Faremos isso na Parte 3.
 

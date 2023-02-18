@@ -7,7 +7,7 @@ lang: pt
 
 <div class="content">
 
-Vamos focar no backend nesta parte: ou seja, na implementação de funcionalidades no lado do servidor da pilha.
+Vamos focar no back-end nesta parte: ou seja, na implementação de funcionalidades no lado do servidor da pilha.
 
 Estaremos construindo nosso back-end utilizando [NodeJS](https://nodejs.org/en/), que é um ambiente de execução JavaScript baseado no motor JavaScript [Chrome V8](https://developers.google.com/v8/) do Google.
 
