@@ -151,7 +151,7 @@ The main concepts of the React Native Testing Library are the [queries](https://
 
 ```javascript
 import { Text, View } from 'react-native';
-import { render } from '@testing-library/react-native';
+import { render, screen } from '@testing-library/react-native';
 
 const Greeting = ({ name }) => {
   return (
@@ -163,25 +163,31 @@ const Greeting = ({ name }) => {
 
 describe('Greeting', () => {
   it('renders a greeting message based on the name prop', () => {
-    const { debug, getByText } = render(<Greeting name="Kalle" />);
+    render(<Greeting name="Kalle" />);
 
-    debug();
+    screen.debug();
 
-    expect(getByText('Hello Kalle!')).toBeDefined();
+    expect(screen.getByText('Hello Kalle!')).toBeDefined();
   });
 });
 ```
 
+Tests use the object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) to do the queries to the rendered component.
+
+We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. The Jest matcher [toBeDefined](https://jestjs.io/docs/expect#tobedefined) is used to to ensure that the query has found the element.
+
 React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
 
-The <em>render</em> function returns the queries and additional helpers, such as the <em>debug</em> function. The [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) function prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like. We acquire the <em>Text</em> node containing certain text by using the <em>getByText</em> function. For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The <em>toHaveTextContent</em> matcher is used to assert that the node's textual content is correct. The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.
+The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) has also a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like. 
+
+For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.
 
 The second very important React Native Testing Library concept is firing events. We can fire an event in a provided node by using the [fireEvent](https://callstack.github.io/react-native-testing-library/docs/api#fireevent) object's methods. This is useful for example typing text into a text field or pressing a button. Here is an example of how to test submitting a simple form:
 
 ```javascript
 import { useState } from 'react';
 import { Text, TextInput, Pressable, View } from 'react-native';
-import { render, fireEvent } from '@testing-library/react-native';
+import { render, fireEven, screen } from '@testing-library/react-native';
 
 const Form = ({ onSubmit }) => {
   const [username, setUsername] = useState('');
@@ -219,11 +225,11 @@ const Form = ({ onSubmit }) => {
 describe('Form', () => {
   it('calls function provided by onSubmit prop after pressing the submit button', () => {
     const onSubmit = jest.fn();
-    const { getByPlaceholderText, getByText } = render(<Form onSubmit={onSubmit} />);
+    render(<Form onSubmit={onSubmit} />);
 
-    fireEvent.changeText(getByPlaceholderText('Username'), 'kalle');
-    fireEvent.changeText(getByPlaceholderText('Password'), 'password');
-    fireEvent.press(getByText('Submit'));
+    fireEvent.changeText(screen.getByPlaceholderText('Username'), 'kalle');
+    fireEvent.changeText(screen.getByPlaceholderText('Password'), 'password');
+    fireEvent.press(screen.getByText('Submit'));
 
     expect(onSubmit).toHaveBeenCalledTimes(1);
 
@@ -391,7 +397,7 @@ You don't have to test any Apollo Client or AsyncStorage related code which is i
 Note that Formik's form submissions are <i>asynchronous</i> so expecting the <em>onSubmit</em> function to be called immediately after pressing the submit button won't work. You can get around this issue by making the test function an async function using the <em>async</em> keyword and using the React Native Testing Library's [waitFor](https://callstack.github.io/react-native-testing-library/docs/api#waitfor) helper function. The <em>waitFor</em> function can be used to wait for expectations to pass. If the expectations don't pass within a certain period, the function will throw an error. Here is a rough example of how to use it:
 
 ```javascript
-import { render, fireEvent, waitFor } from '@testing-library/react-native';
+import { render, screen, fireEvent, waitFor } from '@testing-library/react-native';
 // ...
 
 describe('SignIn', () => {
@@ -418,7 +424,7 @@ It is time to put everything we have learned so far to good use and start extend
 
 <div class="tasks">
 
-### Exercises 10.19. - 10.24.
+### Exercises 10.19. - 10.26.
 
 #### Exercise 10.19: the single repository view
 
@@ -445,6 +451,12 @@ The view should have its own route. It would be a good idea to define the reposi
 The final version of the single repository view should look something like this:
 
 ![Application preview](../../images/10/13.jpg)
+
+**Note** if the peer depencendy issues prevent installing the library, try the _--legacy-peer-deps_ option:
+
+```
+npm install expo-linking --legacy-peer-deps
+```
 
 #### Exercise 10.20: repository's review list
 
@@ -635,6 +647,61 @@ export class RepositoryListContainer extends React.Component {
 The final version of the filtering feature should look something like this:
 
 ![Application preview](../../images/10/18.jpg)
+
+#### Exercise 10.25: the user's reviews view
+
+Implement a feature which allows user to see their reviews. Once signed in, the user should be able to access this view by pressing a "My reviews" tab in the app bar. Here is what the review list view should roughly look like:
+
+![Application preview](../../images/10/20.jpg)
+
+Remember that you can fetch the authenticated user from the Apollo Server with the <em>me</em> query. This query returns a <em>User</em> type, which has a field <em>reviews</em>. If you have already implemented a reusable <em>me</em> query in your code, you can customize this query to fetch the <em>reviews</em> field conditionally. This can be done using GraphQL's [include](https://graphql.org/learn/queries/#directives) directive.
+
+Let's say that the current query is implemented roughly in the following manner:
+
+```javascript
+const GET_CURRENT_USER = gql`
+  query {
+    me {
+      # user fields...
+    }
+  }
+`;
+```
+
+You can provide the query with an <em>includeReviews</em> argument and use that with the <em>include</em> directive:
+
+```javascript
+const GET_CURRENT_USER = gql`
+  query getCurrentUser($includeReviews: Boolean = false) {
+    me {
+      # user fields...
+      reviews @include(if: $includeReviews) {
+        edges {
+          node {
+            # review fields...
+          }
+        }
+      }
+    }
+  }
+`;
+```
+
+The <em>includeReviews</em> argument has a default value of <em>false</em>, because we don't want to cause additional server overhead unless we explicitly want to fetch authenticated user's reviews. The principle of the <em>include</em> directive is quite simple: if the value of the <em>if</em> argument is <em>true</em>, include the field, otherwise omit it.
+
+#### Exercise 10.26: review actions
+
+Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository review implemented in the previous exercise. The other button is for deleting the review. Pressing this button should delete the review. Here is what the actions should roughly look like:
+
+![Application preview](../../images/10/21.jpg)
+
+Pressing the delete button should be followed by a confirmation alert. If the user confirms the deletion, the review is deleted. Otherwise, the deletion is discarded. You can implement the confirmation using the [Alert](https://reactnative.dev/docs/alert) module. Note that calling the <em>Alert.alert</em> method won't open any window in Expo web preview. Use either Expo mobile app or an emulator to see the what the alert window looks like.
+
+Here is the confirmation alert that should pop out once the user presses the delete button:
+
+![Application preview](../../images/10/22.jpg)
+
+You can delete a review using the <em>deleteReview</em> mutation. This mutation has a single argument, which is the id of the review to be deleted. After the mutation has been performed, the easiest way to update the review list's query is to call the [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) function.
 
 </div>
 
@@ -908,15 +975,15 @@ const RepositoryList = () => {
 export default RepositoryList;
 ```
 
-Use a relatively small <em>first</em> argument value such as 8 while trying out the infinite scrolling. This way you don't need to review too many repositories. You might face an issue that the <em>onEndReach</em> handler is called immediately after the view is loaded. This is most likely because the list contains so few repositories that the end of the list is reached immediately. You can get around this issue by increasing the value of <em>first</em> argument. Once you are confident that the infinite scrolling is working, feel free to use a larger value for the <em>first</em> argument.
+Use a relatively small <em>first</em> argument value such as 3 while trying out the infinite scrolling. This way you don't need to review too many repositories. You might face an issue that the <em>onEndReach</em> handler is called immediately after the view is loaded. This is most likely because the list contains so few repositories that the end of the list is reached immediately. You can get around this issue by increasing the value of <em>first</em> argument. Once you are confident that the infinite scrolling is working, feel free to use a larger value for the <em>first</em> argument.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 10.25.-10.27.
+### Exercise 10.27.
 
-#### Exercise 10.25: infinite scrolling for the repository's reviews list
+#### Exercise 10.27: infinite scrolling for the repository's reviews list
 
 Implement infinite scrolling for the repository's reviews list. The <em>Repository</em> type's <em>reviews</em> field has the <em>first</em> and <em>after</em> arguments similar to the <em>repositories</em> query. <em>ReviewConnection</em> type also has the <em>pageInfo</em> field just like the <em>RepositoryConnection</em> type.
 
@@ -975,65 +1042,6 @@ const cache = new InMemoryCache({
 ```
 
 As with the reviewed repositories list, use a relatively small <em>first</em> argument value while you are trying out the infinite scrolling. You might need to create a few new users and use them to create a few new reviews to make the reviews list long enough to scroll. Set the value of the <em>first</em> argument high enough so that the <em>onEndReach</em> handler isn't called immediately after the view is loaded, but low enough so that you can see that more reviews are fetched once you reach the end of the list. Once everything is working as intended you can use a larger value for the <em>first</em> argument.
-
-#### Exercise 10.26: the user's reviews view
-
-Implement a feature which allows user to see their reviews. Once signed in, the user should be able to access this view by pressing a "My reviews" tab in the app bar. Implementing an infinite scrolling for the review list is <i>optional</i> in this exercise. Here is what the review list view should roughly look like:
-
-![Application preview](../../images/10/20.jpg)
-
-Remember that you can fetch the authenticated user from the Apollo Server with the <em>me</em> query. This query returns a <em>User</em> type, which has a field <em>reviews</em>. If you have already implemented a reusable <em>me</em> query in your code, you can customize this query to fetch the <em>reviews</em> field conditionally. This can be done using GraphQL's [include](https://graphql.org/learn/queries/#directives) directive.
-
-Let's say that the current query is implemented roughly in the following manner:
-
-```javascript
-const GET_CURRENT_USER = gql`
-  query {
-    me {
-      # user fields...
-    }
-  }
-`;
-```
-
-You can provide the query with an <em>includeReviews</em> argument and use that with the <em>include</em> directive:
-
-```javascript
-const GET_CURRENT_USER = gql`
-  query getCurrentUser($includeReviews: Boolean = false) {
-    me {
-      # user fields...
-      reviews @include(if: $includeReviews) {
-        edges {
-          node {
-            # review fields...
-          }
-          cursor
-        }
-        pageInfo {
-          # page info fields...
-        }
-      }
-    }
-  }
-`;
-```
-
-The <em>includeReviews</em> argument has a default value of <em>false</em>, because we don't want to cause additional server overhead unless we explicitly want to fetch authenticated user's reviews. The principle of the <em>include</em> directive is quite simple: if the value of the <em>if</em> argument is <em>true</em>, include the field, otherwise omit it.
-
-#### Exercise 10.27: review actions
-
-Now that user can see their reviews, let's add some actions to the reviews. Under each review on the review list, there should be two buttons. One button is for viewing the review's repository. Pressing this button should take the user to the single repository review implemented in the previous exercise. The other button is for deleting the review. Pressing this button should delete the review. Here is what the actions should roughly look like:
-
-![Application preview](../../images/10/21.jpg)
-
-Pressing the delete button should be followed by a confirmation alert. If the user confirms the deletion, the review is deleted. Otherwise, the deletion is discarded. You can implement the confirmation using the [Alert](https://reactnative.dev/docs/alert) module. Note that calling the <em>Alert.alert</em> method won't open any window in Expo web preview. Use either Expo mobile app or an emulator to see the what the alert window looks like.
-
-Here is the confirmation alert that should pop out once the user presses the delete button:
-
-![Application preview](../../images/10/22.jpg)
-
-You can delete a review using the <em>deleteReview</em> mutation. This mutation has a single argument, which is the id of the review to be deleted. After the mutation has been performed, the easiest way to update the review list's query is to call the [refetch](https://www.apollographql.com/docs/react/data/queries/#refetching) function.
 
 This was the last exercise in this section. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fs-react-native-2020). Note that exercises in this section should be submitted to the part 4 in the exercise submission system.
 
