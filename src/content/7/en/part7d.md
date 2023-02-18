@@ -89,7 +89,7 @@ The contents of the <i>package.json</i> file can e.g. be the following:
 
 Let's install webpack with the command:
 
-```js
+```bash
 npm install --save-dev webpack webpack-cli
 ```
 
@@ -336,7 +336,7 @@ The <i>test</i> property specifies that the loader is for files that have names 
 
 Let's install the loader and its required packages as a <i>development dependency</i>:
 
-```js
+```bash
 npm install @babel/core babel-loader @babel/preset-react --save-dev
 ```
 
@@ -410,7 +410,7 @@ Let's add the [@babel/preset-env](https://babeljs.io/docs/plugins/preset-env/) p
 
 Let's install the preset with the command:
 
-```js
+```bash
 npm install @babel/preset-env --save-dev
 ```
 
@@ -487,7 +487,7 @@ If needed, the application's CSS can also be generated into its own separate fil
 
 When we install the loaders:
 
-```js
+```bash
 npm install style-loader css-loader --save-dev
 ```
 
@@ -681,7 +681,7 @@ Starting from version 4 of webpack, the minification plugin does not require add
 
 When we bundle the application again, the size of the resulting <i>main.js</i> decreases substantially:
 
-```js
+```bash
 $ ls -l build/main.js
 -rw-r--r--  1 mluukkai  ATKK\hyad-all  227651 Feb  7 15:58 build/main.js
 ```
@@ -850,7 +850,7 @@ Now, if the application is started with the command _npm start_ in development m
 
 We can inspect the bundled production version of the application locally by executing the following command in the <i>build</i> directory:
 
-```js
+```bash
 npx static-server
 ```
 
