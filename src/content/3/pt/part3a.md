@@ -594,17 +594,13 @@ Se a exclusão do recurso for bem-sucedida, ou seja, se a nota existir e for rem
 
 Não há consenso sobre qual código de status deve ser retornado para uma requisição DELETE se o recurso não existir. As únicas duas opções são 204 e 404. Para simplificar, nossa aplicação responderá com 204 em ambos os casos.
 
-^^^
-### REVISADO
-
-
 ### Postman
 
 Então, como testar a operação de exclusão? As requisições HTTP GET são fáceis de fazer a partir do navegador. Poderíamos escrever algum JavaScript para testar a exclusão, mas escrever código de teste nem sempre é a melhor solução em todas as situações.
 
 Existem muitas ferramentas para tornar mais fácil a realização de testes em back-ends. Uma delas é o programa de linha de comando [curl](https://curl.haxx.se). No entanto, em vez do curl, vamos dar uma olhada em como usar o [Postman](https://www.postman.com) para testar a aplicação.
 
-Vamos baixar o cliente desktop do Postman [deste site](https://www.postman.com/downloads/) e testá-lo:
+Vamos baixar [deste site](https://www.postman.com/downloads/) o cliente desktop do Postman e testá-lo:
 
 ![captura de tela do postman na api/notes/2](../../images/3/11x.png)
 
@@ -630,7 +626,7 @@ Ao clicar no texto <i>Send Request</i>, o cliente REST executará a requisição
 
 ### O cliente HTTP do WebStorm
 
-Se em vez daqueles você usar o *IntelliJ WebStorm*, é possível fazer um procedimento semelhante com o Cliente HTTP integrado. Crie um novo arquivo com extensão `.rest` e o editor exibirá suas opções para criar e executar suas requisições. Você pode aprender mais sobre isso seguindo [este guia](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
+Se em vez daqueles você usar o *IntelliJ WebStorm*, é possível fazer um procedimento semelhante com o Cliente HTTP integrado. Crie um novo arquivo com extensão `.rest` e o editor exibirá suas opções para criar e executar suas requisições. Saiba mais sobre o processo seguindo [este guia](https://www.jetbrains.com/help/webstorm/http-client-in-product-code-editor.html).
 
 ### Recebendo dados
 
@@ -677,9 +673,9 @@ A aplicação imprime no console os dados que enviamos na requisição:
 
 ![erro do nodemon: 'typing requre not defined'](../../images/3/16.png)
 
-Da mesma forma, é útil verificar o console para garantir que o back-end está se comportando da forma que esperamos em diferentes situações, como quando enviamos dados com uma requisição HTTP POST. Naturalmente, é uma boa ideia adicionar muitos comandos <em>console.log</em> ao código enquanto a aplicação ainda está sendo desenvolvida.
+Da mesma forma, é útil verificar o console para garantir que o back-end está se comportando da forma que esperamos em diferentes situações, como quando enviamos dados com uma requisição HTTP POST. Naturalmente, é uma boa ideia adicionar muitos comandos <em>console.log</em> ao código enquanto a aplicação ainda estiver sendo desenvolvida.
 
-Uma possível causa de problemas é um cabeçalho <i>Content-Type</i> definido incorretamente em requisições. Isso pode acontecer com o Postman se o tipo de corpo não estiver definido corretamente:
+Uma possível causa de problemas é um cabeçalho <i>Content-Type</i> definido incorretamente em requisições. Isso pode acontecer com o Postman se o tipo <i>body</i> não estiver definido corretamente:
 
 ![postman com o texto definido como 'content-type'](../../images/3/17new.png)
 
@@ -721,7 +717,7 @@ O Postman também permite que os usuários salvem requisições, mas a situaçã
 > Às vezes, ao depurar, é possível que queira descobrir quais cabeçalhos foram definidos na requisição HTTP. Uma maneira de fazer isso é através do método [get](http://expressjs.com/en/4x/api.html#req.get) do objeto _request_, que pode ser usado para obter o valor de um único cabeçalho. O objeto _request_ também possui a propriedade <i>headers</i>, que contém todos os cabeçalhos de uma requisição específica.
 >
 
-> Podem ocorrer problemas com o cliente REST do VS se você adicionar acidentalmente uma linha vazia entre a linha superior e a linha que especifica os cabeçalhos HTTP. Nessa situação, o cliente REST interpreta como se todos os cabeçalhos estivessem vazios, o que faz com que o servidor back-end não saiba que os dados que recebeu estão no formato JSON.
+> Podem ocorrer problemas com o cliente REST do VS Code se você adicionar acidentalmente uma linha vazia entre a linha superior e a linha que especifica os cabeçalhos HTTP. Nessa situação, o cliente REST interpreta como se todos os cabeçalhos estivessem vazios, o que faz com que o servidor back-end não saiba que os dados que recebeu estão no formato JSON.
 >
 
 Você será capaz de identificar esse cabeçalho faltando <i>Content-Type</i> se em algum momento no seu código você imprimir todos os cabeçalhos da requisição com o comando _console.log(request.headers)_.
@@ -875,7 +871,7 @@ Saída no navegador após a requisição GET:
 
 ![Dados JSON de 4 pessoas no navegador a partir de api/persons](../../images/3/22e.png)
 
-Observe que a barra invertida na rota <i>api/persons</i> não é um caractere especial, sendo apenas como qualquer outro caractere na string.
+Observe que a barra comum na rota <i>api/persons</i> não é um caractere especial, sendo apenas como qualquer outro caractere na string.
 
 A aplicação deve ser iniciada com o comando _npm start_.
 
@@ -903,7 +899,7 @@ Teste se sua funcionalidade funciona com o Postman ou com o cliente REST do Visu
 
 #### 3.5: Phonebook backend — 5º passo
 
-Expanda o back-end para que novas entradas da lista telefônica possam ser adicionadas fazendo solicitações HTTP POST para o endereço <http://localhost:3001/api/persons>.
+Expanda o back-end para que novas entradas da lista telefônica possam ser adicionadas fazendo requisições HTTP POST para o endereço <http://localhost:3001/api/persons>.
 
 Gere um novo id para as entradas da lista telefônica com a função [Math.random](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random). Use um intervalo grande o suficiente para seus valores aleatórios, para que a probabilidade de criar ids duplicados seja pequena.
 
@@ -913,7 +909,7 @@ Implemente o gerenciamento de erro (error handling) para a criação de novas en
 - O nome ou o número estão faltando; e se
 - O nome já existe na lista telefônica.
 
-Responda a solicitações como essas com o código de status apropriado e envie também informações que explicam o motivo do erro, como por exemplo:
+Responda a requisições como essas com o código de status apropriado e envie também informações que explicam o motivo do erro, como por exemplo:
 
 ```js
 { error: 'name must be unique' } // "o nome deve ser único"
@@ -923,74 +919,46 @@ Responda a solicitações como essas com o código de status apropriado e envie 
 
 <div class="content">
 
+### Sobre os tipos de requisição HTTP
 
+O [padrão HTTP](https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties) fala sobre duas propriedades relacionadas aos tipos de requisição, **segurança** (safety) e **idempotência** (idempotency).
 
+A requisição HTTP GET deve ser <i>segura</i>:
 
+> <i>Em particular, a convenção estabelecida diz que os métodos GET e HEAD NÃO devem ter a importância de realizar uma ação além da recuperação. Esses métodos devem ser considerados "seguros".</i>
 
+Segurança significa que a execução da requisição não deve causar quaisquer <i>efeitos colaterais</i> no servidor. Por efeitos colaterais, entendemos que o estado do banco de dados não deve mudar como resultado da requisição, e a resposta deve retornar apenas os dados que já existem no servidor.
 
+Nada garante que uma requisição GET é <i>segura</i>, esta é apenas uma recomendação definida no padrão HTTP. Adotando os princípios RESTful em nossa API, as requisições GET são sempre usadas de forma que são <i>seguras</i>.
 
-^^^^^^
-### SEM REVISÃO
+O padrão HTTP também define que o tipo de requisição [HEAD](https://www.rfc-editor.org/rfc/rfc9110.html#name-head) deve ser seguro. Na prática, o HEAD deve funcionar exatamente como o GET, mas não retorna nada além do código de status e dos cabeçalhos de resposta. O corpo da resposta não será retornado quando você fizer uma requisição HEAD.
 
+Todas as requisições HTTP, exceto o POST, devem ser <i>idempotentes</i>:
 
+> <i>Os métodos também podem ter a propriedade de "idempotência", no sentido de que (além de problemas de erro ou expiração) os efeitos colaterais de N > 0 requisições idênticas são os mesmos que para uma única requisição. Os métodos GET, HEAD, PUT e DELETE compartilham essa propriedade.</i>
 
+Isso significa que se uma requisição não gera efeitos colaterais, o resultado deve ser o mesmo, independentemente de quantas vezes a requisição for enviada.
 
+Se fizermos uma requisição HTTP PUT para a URL <i>/api/notes/10</i> e com a requisição enviarmos os dados <em>{ content: "sem efeitos colaterais!", important: true }</em>, o resultado será o mesmo, independentemente de quantas vezes a requisição for enviada.
 
+Assim como <i>segurança</i> para a requisição GET, <i>idempotência</i> também é apenas uma recomendação no padrão HTTP e não algo que possa ser garantido simplesmente com base no tipo de requisição. No entanto, quando nossa API adere aos princípios RESTful, as requisições GET, HEAD, PUT e DELETE são usadas de forma que são idempotentes.
 
-
-
-### About HTTP request types
-
-[The HTTP standard](https://www.rfc-editor.org/rfc/rfc9110.html#name-common-method-properties) talks about two properties related to request types, **safety** and **idempotency**.
-
-The HTTP GET request should be <i>safe</i>:
-
-> <i>In particular, the convention has been established that the GET and HEAD methods SHOULD NOT have the significance of taking an action other than retrieval. These methods ought to be considered "safe".</i>
-
-
-Safety means that the executing request must not cause any <i>side effects</i> on the server. By side effects, we mean that the state of the database must not change as a result of the request, and the response must only return data that already exists on the server.
-
-
-Nothing can ever guarantee that a GET request is <i>safe</i>, this is just a recommendation that is defined in the HTTP standard. By adhering to RESTful principles in our API, GET requests are always used in a way that they are <i>safe</i>.
-
-
-The HTTP standard also defines the request type [HEAD](https://www.rfc-editor.org/rfc/rfc9110.html#name-head), which ought to be safe. In practice, HEAD should work exactly like GET but it does not return anything but the status code and response headers. The response body will not be returned when you make a HEAD request.
-
-
-All HTTP requests except POST should be <i>idempotent</i>:
-
-> <i>Methods can also have the property of "idempotence" in that (aside from error or expiration issues) the side-effects of N > 0 identical requests is the same as for a single request. The methods GET, HEAD, PUT and DELETE share this property</i>
-
-
-This means that if a request does not generate side effects, then the result should be the same regardless of how many times the request is sent.
-
-
-If we make an HTTP PUT request to the URL <i>/api/notes/10</i> and with the request we send the data <em>{ content: "no side effects!", important: true }</em>, the result is the same regardless of how many times the request is sent.
-
-
-Like <i>safety</i> for the GET request, <i>idempotence</i> is also just a recommendation in the HTTP standard and not something that can be guaranteed simply based on the request type. However, when our API adheres to RESTful principles, then GET, HEAD, PUT, and DELETE requests are used in such a way that they are idempotent.
-
-
-POST is the only HTTP request type that is neither <i>safe</i> nor <i>idempotent</i>. If we send 5 different HTTP POST requests to <i>/api/notes</i> with a body of <em>{content: "many same", important: true}</em>, the resulting 5 notes on the server will all have the same content.
-
+POST é o único tipo de requisição HTTP que não é nem <i>seguro</i> nem <i>idempotente</i>. Se enviarmos 5 requisições HTTP POST diferentes para <i>/api/notes</i> com um corpo de <em>
+{ content: "muitas iguais", important: true }</em>, as 5 notas resultantes no servidor terão o mesmo conteúdo.
 
 ### Middleware
 
-The express [json-parser](https://expressjs.com/en/api.html) we took into use earlier is a so-called [middleware](http://expressjs.com/en/guide/using-middleware.html).
+O [json-parser](https://expressjs.com/en/api.html) do Express que usamos anteriormente é um [middleware](http://expressjs.com/en/guide/using-middleware.html).
 
+<i>Middleware</i> são funções que podem ser usadas para lidar com objetos de _request_ e _response_.
 
-Middleware are functions that can be used for handling _request_ and _response_ objects.
+O json-parser que usamos anteriormente pega os dados brutos das requisições armazenadas no objeto _request_, decompõe-nos em um objeto JavaScript e os atribui ao objeto _request_ como uma nova propriedade <i>body</i>.
 
-The json-parser we used earlier takes the raw data from the requests that are stored in the _request_ object, parses it into a JavaScript object and assigns it to the _request_ object as a new property <i>body</i>.
+Na prática, é possível usar vários <i>middlewares</i> ao mesmo tempo. Quando você tem mais de um, eles são executados um por um na ordem em que foram adicionados no Express.
 
+Vamos implementar nosso próprio <i>middleware</i> que imprime informações sobre cada requisição enviada ao servidor.
 
-In practice, you can use several middlewares at the same time. When you have more than one, they're executed one by one in the order that they were taken into use in express.
-
-
-Let's implement our own middleware that prints information about every request that is sent to the server.
-
-
-Middleware is a function that receives three parameters:
+<i>Middleware</i> é uma função que recebe três parâmetros:
 
 ```js
 const requestLogger = (request, response, next) => {
@@ -1002,21 +970,19 @@ const requestLogger = (request, response, next) => {
 }
 ```
 
-At the end of the function body, the _next_ function that was passed as a parameter is called. The _next_ function yields control to the next middleware.
+No final do corpo da função, a função _next_ que foi passada como parâmetro é chamada. A função _next_ cede o controle para o próximo <i>middleware</i>.
 
-Middleware is taken into use like this:
+<i>Middleware</i> é usado assim:
 
 ```js
 app.use(requestLogger)
 ```
 
-Middleware functions are called in the order that they're taken into use with the express server object's _use_ method. Notice that json-parser is taken into use before the _requestLogger_ middleware, because otherwise <i>request.body</i> will not be initialized when the logger is executed!
+Funções de <i>middleware</i> são chamadas na ordem em que são adicionadas ao objeto do servidor Express com o método _use_. Observe que o json-parser é adicionado antes do <i>middleware</i> _requestLogger_, caso contrário, <i>request.body</i> não será inicializado quando o registrador (logger) for executado!
 
+Funções de <i>middleware</i> devem ser adicionadas antes das rotas se quisermos que sejam executadas antes que os gerenciadores de evento da rota sejam chamados. Também há situações em que queremos definir funções de <i>middleware</i> depois das rotas. Na prática, isso significa que estamos definindo funções de <i>middleware</i> que só são chamadas se nenhuma rota manipular a requisição HTTP.
 
-Middleware functions have to be taken into use before routes if we want them to be executed before the route event handlers are called. There are also situations where we want to define middleware functions after routes. In practice, this means that we are defining middleware functions that are only called if no route handles the HTTP request.
-
-
-Let's add the following middleware after our routes. This middleware will be used for catching requests made to non-existent routes. For these requests, the middleware will return an error message in the JSON format.
+Vamos adicionar o <i>middleware</i> a seguir depois das nossas rotas. Este <i>middleware</i> será usado para pegar requisições feitas para rotas inexistentes. Para essas requisições, o <i>middleware</i> retornará uma mensagem de erro no formato JSON.
 
 ```js
 const unknownEndpoint = (request, response) => {
@@ -1026,35 +992,34 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-
-You can find the code for our current application in its entirety in the <i>part3-2</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
+É possível encontrar o código para nossa aplicação atual na íntegra na branch <i>part3-2</i> neste [repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
 
 </div>
 
 <div class="tasks">
 
-### Exercises 3.7.-3.8.
+### Exercícios 3.7 a 3.8
 
-#### 3.7: Phonebook backend step7
+#### 3.7: Phonebook backend — 7º passo
 
-Add the [morgan](https://github.com/expressjs/morgan) middleware to your application for logging. Configure it to log messages to your console based on the <i>tiny</i> configuration.
+Adicione o <i>middleware</i> [morgan](https://github.com/expressjs/morgan) na sua aplicação para realizar o registro de logs (logging). Configure-o para que as mensagens sejam registradas no console com base na configuração <i>tiny</i>.
 
-The documentation for Morgan is not the best, and you may have to spend some time figuring out how to configure it correctly. However, most documentation in the world falls under the same category, so it's good to learn to decipher and interpret cryptic documentation in any case.
+A documentação do Morgan não é a das melhores, e talvez você precise gastar algum tempo para descobrir como configurá-lo corretamente. No entanto, a maioria das documentações do mundo se enquadra na mesma categoria, então é bom aprender a decifrar e interpretar documentações crípticas de qualquer maneira.
 
-Morgan is installed just like all other libraries with the _npm install_ command. Taking morgan into use happens the same way as configuring any other middleware by using the _app.use_ command.
+Morgan é instalado da mesma forma que todas as outras bibliotecas com o comando _npm install_. O uso do Morgan ocorre da mesma forma que a configuração de qualquer outro <i>middleware</i>, usando o comando _app.use_.
 
-#### 3.8*: Phonebook backend step8
+#### 3.8*: Phonebook backend — 8º passo
 
-Configure morgan so that it also shows the data sent in HTTP POST requests:
+Configure o Morgan para que também mostre os dados enviados em requisições HTTP POST:
 
-![terminal showing post data being sent](../../images/3/24.png)
+![terminal mostrando dados POST sendo enviados](../../images/3/24.png)
 
-Note that logging data even in the console can be dangerous since it can contain sensitive data and may violate local privacy law (e.g. GDPR in EU) or business-standard. In this exercise, you don't have to worry about privacy issues, but in practice, try not to log any sensitive data.
+Note que registrar dados, mesmo no console, pode ser perigoso, pois pode conter dados sensíveis e violar leis de privacidade locais (por exemplo, GDPR na UE) ou padrão de negócios. Você não precisa se preocupar com questões de privacidade neste exercício, porém, na prática, evite registrar quaisquer dados sensíveis.
 
-This exercise can be quite challenging, even though the solution does not require a lot of code.
+Este exercício pode ser bastante desafiador, embora a solução não exija muito código.
 
-This exercise can be completed in a few different ways. One of the possible solutions utilizes these two techniques:
-- [creating new tokens](https://github.com/expressjs/morgan#creating-new-tokens)
-- [JSON.stringify](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
+Este exercício pode ser concluído de várias maneiras diferentes. Uma das soluções possíveis utiliza essas duas técnicas:
+- [criando novos tokens](https://github.com/expressjs/morgan#creating-new-tokens)
+- [JSON.stringify](https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
 </div>
