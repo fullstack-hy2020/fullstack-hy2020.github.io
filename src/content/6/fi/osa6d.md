@@ -354,7 +354,7 @@ Tehdään nyt anekdoottisovelluksesta uusi, React Query -kirjastoa hyödyntävä
 
 Toteuta anekdoottien hakeminen palvelimelta React Queryn avulla. 
 
-Sovelluksen tulee toimia siten, että jos palvelimen kanssa kommuikoinnissa ilmenee ongelmia, tulee näkyviin ainoastaan virhesivu:
+Sovelluksen tulee toimia siten, että jos palvelimen kanssa kommunikoinnissa ilmenee ongelmia, tulee näkyviin ainoastaan virhesivu:
 
 ![](../../images/6/65new.png)
 
