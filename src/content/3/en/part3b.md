@@ -34,7 +34,7 @@ What's going on here? We can access the backend from a browser and from postman 
 
 ### Same origin policy and CORS
 
-The issue lies with a thing called `same origin policy`. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
+The issue lies with a thing called _same origin policy_. A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
 
 ```text
 http://example.com:80/index.html
