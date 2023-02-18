@@ -563,7 +563,7 @@ export default diaryEntries; // highlight-line
 Now, when we import the array, the compiler interprets it correctly and the *weather* and *visibility* fields are understood right:
 
 ```js
-import diaries from '../../data/ntries'; // highlight-line
+import diaries from '../../data/entries'; // highlight-line
 
 import { DiaryEntry } from '../types';
 
