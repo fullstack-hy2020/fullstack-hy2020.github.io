@@ -659,7 +659,7 @@ useState<string>(initialState: string | (() => string)):
   [string, React.Dispatch<React.SetStateAction<string>>] 
 ```
 
-The type is a somehow challenging to decipher. It has the following "form":
+The type is somewhat challenging to decipher. It has the following "form":
 
 ```
 functionName(parameters): return_value
