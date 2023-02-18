@@ -869,7 +869,7 @@ But if you hover over the values parsed from the request, an issue arises:
 
 All of the variables have the type *any*. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but first, we have to consider why this is accepted and where the type *any* came from.
 
-In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). Any is a kind of "wild card" type which stands for <i>whatever</i> type.
+In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any). Any is a kind of "wild card" type which stands for <i>whatever</i> type.
 Things become implicitly any type quite often when one forgets to type functions.
 
 We can also explicitly type things *any*. The only difference between the implicit and explicit any type is how the code looks; the compiler does not care about the difference.
