@@ -975,13 +975,13 @@ const RepositoryList = () => {
 export default RepositoryList;
 ```
 
-Use a relatively small <em>first</em> argument value such as 8 while trying out the infinite scrolling. This way you don't need to review too many repositories. You might face an issue that the <em>onEndReach</em> handler is called immediately after the view is loaded. This is most likely because the list contains so few repositories that the end of the list is reached immediately. You can get around this issue by increasing the value of <em>first</em> argument. Once you are confident that the infinite scrolling is working, feel free to use a larger value for the <em>first</em> argument.
+Use a relatively small <em>first</em> argument value such as 3 while trying out the infinite scrolling. This way you don't need to review too many repositories. You might face an issue that the <em>onEndReach</em> handler is called immediately after the view is loaded. This is most likely because the list contains so few repositories that the end of the list is reached immediately. You can get around this issue by increasing the value of <em>first</em> argument. Once you are confident that the infinite scrolling is working, feel free to use a larger value for the <em>first</em> argument.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 10.27.
+### Exercise 10.27.
 
 #### Exercise 10.27: infinite scrolling for the repository's reviews list
 
