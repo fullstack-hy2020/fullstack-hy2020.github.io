@@ -150,15 +150,15 @@ La verificación del valor en el encabezado usa una sintaxis un poco extraña:
 .expect('Content-Type', /application\/json/)
 ```
 
-El valor lo definimos como una [expresión regular](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) o en palabras cortas: regex. Las expresiones regulares en javascript inician y finalizan con un slash /. Dado que la cadena deseada <i>application/json</i> también contiene el mismo slash en el medio, entonces se precede por un \ de tal manera que el / no se interprete como un caracter de terminación.
+El valor lo definimos como una [expresión regular](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) o en palabras cortas: regex. Las expresiones regulares en JavaScript inician y finalizan con un slash /. Dado que la cadena deseada <i>application/json</i> también contiene el mismo slash en el medio, entonces se precede por un \ de tal manera que no se interprete como un caracter de terminación.
 
-En princio, el test podrían también ser definido simplemente como una cadena
+En princio, el test podría también ser definido simplemente como una cadena:
 
 ```js
 .expect('Content-Type', 'application/json')
 ```
 
-El problema, es que cuando usamos cadenas el valor del encabezado debe ser exactamente el mismo. Para la expresión que definimos, es suficiente que el encabezado <i>contentga</i> la cadena en cuestión. Por ejemplo, el valor actual del encabezado puede ser <i>application/json; charset=utf-8</i> ya que también tiene información de la codificación de caracteres (utf-8). Sin embargo, nuestra prueba no está interesada en esto y, por lo tanto, es mejor definir la prueba como una expresión regular en lugar verificar una cadena exacta.
+El problema, es que si usamos cadenas el valor del encabezado debe ser exactamente el mismo. Para la expresión que definimos, es suficiente que el encabezado <i>contenga</i> la cadena en cuestión. Por ejemplo, el valor actual del encabezado puede ser <i>application/json; charset=utf-8</i> ya que también tiene información de la codificación de caracteres (utf-8). Sin embargo, nuestra prueba no está interesada en esto y, por lo tanto, es mejor definir la prueba como una expresión regular en lugar verificar una cadena exacta.
  
 La prueba contiene algunos detalles que exploraremos [un poco más adelante](/es/part4/testing_the_backend#async-await). La función de flecha que define la prueba está precedida por la palabra clave <i>async</i> y la llamada al método para el objeto <i>api</i> está precedida por la palabra clave <i>await</i>. Escribiremos algunas pruebas y luego echaremos un vistazo más de cerca a esta magia asyn/await. No se preocupe por ellos por ahora, solo tenga la seguridad de que las pruebas de ejemplo funcionan correctamente. La sintaxis async/await está relacionada con el hecho de que hacer una solicitud a la API es una operación <i>asincrónica</i>. La [sintaxis async/await](https://facebook.github.io/jest/docs/en/asynchronous.html) se puede utilizar para escribir código asincrónico con la apariencia de código síncrono.
 
