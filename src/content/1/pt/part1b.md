@@ -249,7 +249,7 @@ Durante este curso, todas as funções serão definidas usando a sintaxe de seta
 
 <i>Vamos continuar construindo a aplicação que começamos a trabalhar nas exercícios anteriores. Você pode escrever o código no mesmo projeto, pois estamos interessados apenas no estado final da aplicação.</i>
 
-**Dica Pro:** você pode ter problemas com a estrutura das <i>props</i> que os componentes recebem. Uma boa maneira de tornar as coisas mais claras é imprimindo as props no console, como por exemplo:
+**DICA PRO:** você pode ter problemas com a estrutura das <i>props</i> que os componentes recebem. Uma boa maneira de tornar as coisas mais claras é imprimindo as props no console, como por exemplo:
 
 ```js
 const Header = (props) => {
