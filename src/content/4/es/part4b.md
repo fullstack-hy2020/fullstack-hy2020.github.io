@@ -72,15 +72,15 @@ Podemos crear nuestra base de datos de prueba separada en Mongo DB Atlas. Esta n
 
 Sería mejor ejecutar nuestras pruebas usando una base de datos que esté instalada y ejecutándose en la máquina local del desarrollador. La solución óptima sería que cada ejecución de prueba use su propia base de datos separada. Esto es "relativamente simple" de lograr [ejecutando Mongo en memoria](https://docs.mongodb.com/manual/core/inmemory/) o usando contenedores [Docker](https://www.docker.com ). No complicaremos las cosas y en su lugar continuaremos usando la base de datos MongoDB Atlas.
 
-Hagamos algunos cambios en el módulo que define la configuración de la aplicación: 
+Hagamos algunos cambios en el módulo que define la configuración de la aplicación (utils/config.js): 
 
 ```js
 require('dotenv').config()
 
 const PORT = process.env.PORT
+// highlight-start
 let MONGODB_URI = process.env.MONGODB_URI
 
-// highlight-start
 if (process.env.NODE_ENV === 'test') {
   MONGODB_URI = process.env.TEST_MONGODB_URI
 }
@@ -960,7 +960,7 @@ Utilice el paquete supertest para escribir una prueba que realice una solicitud 
 
 Una vez finalizada la prueba, refactorice el controlador de ruta para usar la sintaxis async/await en lugar de promesas.
 
-Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/porbando_el_backend#entorno-de-prueba),
+Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/probando_el_backend#entorno-de-prueba),
 
 **NB:** Al ejecutar las pruebas, es posible que se encuentre con la siguiente advertencia:
 
@@ -974,7 +974,7 @@ module.exports = {
 }
 ```
 
-**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/porbando_el_backend#ejecucion-de-pruebas-una-por-una). 
+**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/probando_el_backend#ejecucion-de-pruebas-una-por-una). 
 
 #### 4.9*: Pruebas de lista de blogs, paso 2
 
