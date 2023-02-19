@@ -974,7 +974,7 @@ module.exports = {
 }
 ```
 
-**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/porbando_el_backend#ejecucion-de-pruebas-una-por-una). 
+**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/probando_el_backend#ejecucion-de-pruebas-una-por-una). 
 
 #### 4.9*: Pruebas de lista de blogs, paso 2
 
