@@ -222,88 +222,76 @@ A seguir, definiremos as configurações básicas. Se a aplicação <i>não</i> 
 
 ![](../../images/3/r3.png)
 
-
-
-
-
-^^^^^
-### NÃO REVISADO
-
-
-
-
-
-
-
-After this, the app starts up in the Render. The dashboard tells us the app state and the url where the app is running:
+Depois disso, a aplicação é iniciada no Render. O painel informa o estado da aplicação e a URL onde ela está sendo executada:
 
 ![](../../images/3/r4.png)
 
-According to the [documentation](https://render.com/docs/deploys) every commit to GitHub should redeploy the app. For some reason this is not always working.
+De acordo com a [documentação](https://render.com/docs/deploys), cada confirmação no GitHub deve redesenhar a aplicação. Por alguma razão, isso nem sempre funciona.
 
-Fortunately it is also possible to manually redeploy the app:
+Felizmente, também é possível redesenhar manualmente a aplicação:
 
 ![](../../images/3/r5.png)
 
-Also the app logs can be seen in the dashboard:
+Também é possível ver os logs da aplicação no painel:
 
 ![](../../images/3/r7.png)
 
-We notice now from the logs that the app has been started in the port 10000. The app code gets the right port through the environment variable PORT so it is essential that the file <i>index.js</i> has been updated as follows:
+Observamos nos logs que a aplicação foi iniciada na porta 10000. O código da aplicação obtém a porta correta por meio da variável de ambiente PORT, portanto, é essencial que o arquivo <i>index.js</i> tenha sido atualizado da seguinte maneira:
 
 ```js
 const PORT = process.env.PORT || 3001  // highlight-line
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
 })
 ```
 
-### Frontend production build
+### Build de produção do front-end
 
-So far we have been running React code in <i>development mode</i>. In development mode the application is configured to give clear error messages, immediately render code changes to the browser, and so on. 
+Até agora, rodamos o código do React em <i>modo de desenvolvimento</i>. No modo de desenvolvimento, a aplicação é configurada para dar mensagens de erro claras, renderizar imediatamente as mudanças de código para o navegador, e assim por diante.
 
-When the application is deployed, we must create a [production build](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) or a version of the application which is optimized for production. 
+Quando a aplicação é implantada (deployed), é necessário criar um [build de produção](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) (grosso modo, "versão de produção" ou "compilação de produção" ou "estrutura de produção") ou uma versão da aplicação otimizada para produção.
 
-A production build of applications created with <i>create-react-app</i> can be created with the command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
+Um build de produção de aplicações gerado com <i>create-react-app</i> pode ser criado com o comando [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
-Let's run this command from the <i>root of the notes frontend project</i> that we developend in [Part 2](/en/part2).
+Vamos executar esse comando a partir do <i>diretório raiz do projeto front-end de notas</i> que desenvolvemos na [Parte 2](/pt/part2).
 
-This creates a directory called <i>build</i> (which contains the only HTML file of our application, <i>index.html</i> ) which contains the directory <i>static</i>. [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our application's JavaScript code will be generated in the <i>static</i> directory. Even though the application code is in multiple files, all of the JavaScript will be minified into one file. All of the code from all of the application's dependencies will also be minified into this single file. 
+Isso cria um diretório chamado <i>build</i> (que contém o único arquivo HTML de nossa aplicação, <i>index.html</i>) que contém o diretório <i>static</i>. Uma versão [minificada](<https://en.wikipedia.org/wiki/Minification_(programming)>) do código JavaScript de nossa aplicação será gerada no diretório <i>static</i>. Embora o código da aplicação esteja em vários arquivos, todo o JavaScript será minificado em um arquivo. Todo o código de todas as dependências da aplicação também será minificado neste único arquivo.
 
-The minified code is not very readable. The beginning of the code looks like this: 
+O código minificado não é muito legível. O início do código se parece com isso: 
 
 ```js
 !function(e){function r(r){for(var n,f,i=r[0],l=r[1],a=r[2],c=0,s=[];c<i.length;c++)f=i[c],o[f]&&s.push(o[f][0]),o[f]=0;for(n in l)Object.prototype.hasOwnProperty.call(l,n)&&(e[n]=l[n]);for(p&&p(r);s.length;)s.shift()();return u.push.apply(u,a||[]),t()}function t(){for(var e,r=0;r<u.length;r++){for(var t=u[r],n=!0,i=1;i<t.length;i++){var l=t[i];0!==o[l]&&(n=!1)}n&&(u.splice(r--,1),e=f(f.s=t[0]))}return e}var n={},o={2:0},u=[];function f(r){if(n[r])return n[r].exports;var t=n[r]={i:r,l:!1,exports:{}};return e[r].call(t.exports,t,t.exports,f),t.l=!0,t.exports}f.m=e,f.c=n,f.d=function(e,r,t){f.o(e,r)||Object.defineProperty(e,r,{enumerable:!0,get:t})},f.r=function(e){"undefined"!==typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"})
 ```
 
-### Serving static files from the backend
+### Servindo arquivos estáticos a partir do back-end
 
-One option for deploying the frontend is to copy the production build (the <i>build</i> directory) to the root of the backend repository and configure the backend to show the frontend's <i>main page</i> (the file <i>build/index.html</i>) as its main page. 
+Uma opção para implantar o front-end é copiar a versão de produção (o diretório <i>build</i>) para a raiz do repositório back-end e configurar o back-end para mostrar a <i>página principal</i> do front-end (o arquivo <i>build/index.html</i>) como sua página principal.
 
-We begin by copying the production build of the frontend to the root of the backend. With a Mac or Linux computer, the copying can be done from the frontend directory with the command
+Começamos copiando o build de produção do front-end para a raiz do back-end. Com um computador Mac ou Linux, a cópia pode ser feita a partir do diretório do front-end com o comando:
 
 ```bash
 cp -r build ../backend
 ```
 
-If you are using a Windows computer, you may use either [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) or [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/) command instead. Otherwise, simply copy and paste. 
+Se estiver usando um computador Windows, é possível usar o comando [copy](https://www.windows-commandline.com/windows-copy-command-syntax-examples/) ou [xcopy](https://www.windows-commandline.com/xcopy-command-syntax-examples/). Caso contrário, basta copiar e colar.
 
-The backend directory should now look as follows:
+O diretório do back-end deve ficar assim agora:
 
-![bash screenshot of ls showing build directory](../../images/3/27new.png)
+![captura de tela do bash mostrando o diretório build](../../images/3/27new.png)
 
-To make express show <i>static content</i>, the page <i>index.html</i> and the JavaScript, etc., it fetches, we need a built-in middleware from express called [static](http://expressjs.com/en/starter/static-files.html).
+Para fazer o Express exibir <i>conteúdo estático</i> — a página <i>index.html</i> e o JavaScript, etc. —, que ele busca, precisamos de um middleware embutido do Express chamado [static](http://expressjs.com/en/starter/static-files.html).
 
-When we add the following amidst the declarations of middlewares
+Quando adicionamos o seguinte código em meio às declarações dos <i>middlewares</i>...
+
 ```js
 app.use(express.static('build'))
 ```
 
-whenever express gets an HTTP GET request it will first check if the <i>build</i> directory contains a file corresponding to the request's address. If a correct file is found, express will return it. 
+... sempre que o Express recebe uma requisição HTTP GET, ele primeiro verifica se o diretório <i>build</i> contém um arquivo correspondente ao endereço da requisição. Se um arquivo correto for encontrado, o Express o retornará.
 
-Now HTTP GET requests to the address <i>www.serversaddress.com/index.html</i> or <i>www.serversaddress.com</i> will show the React frontend. GET requests to the address <i>www.serversaddress.com/api/notes</i> will be handled by the backend's code.
+Agora, as requisições HTTP GET para o endereço <i>www.serversaddress.com/index.html</i> ou <i>www.serversaddress.com</i> mostrarão o front-end do React. As requisições GET para o endereço <i>www.serversaddress.com/api/notes</i> serão tratadas pelo código do back-end.
 
-Because of our situation, both the frontend and the backend are at the same address, we can declare _baseUrl_ as a [relative](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) URL. This means we can leave out the part declaring the server. 
+Dada nossa situação atual, pelo fato de tanto o front-end quanto o back-end estarem no mesmo endereço, podemos declarar o _baseUrl_ como uma URL [relativa](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) (relative URL). Isso significa que podemos deixar de fora a parte que declara o servidor.
 
 ```js
 import axios from 'axios'
@@ -317,15 +305,15 @@ const getAll = () => {
 // ...
 ```
 
-After the change, we have to create a new production build and copy it to the root of the backend repository. 
+Depois da alteração, temos que criar uma nova versão de produção e copiá-la para a raiz do repositório back-end.
 
-The application can now be used from the <i>backend</i> address <http://localhost:3001>:
+A aplicação agora pode ser usada no endereço <http://localhost:3001> do <i>back-end</i>:
 
-![Notes application screenshot](../../images/3/28new.png)
+![Captura de tela da aplicação Notes](../../images/3/28new.png)
 
-Our application now works exactly like the [single-page app](/en/part0/fundamentals_of_web_apps#single-page-app) example application we studied in part 0. 
+Nossa aplicação agora funciona exatamente como o exemplo de [Aplicação de Página Única](/pt/part0/fundamentos_de_aplicacoes_web#aplicacao-de-pagina-unica-spa-single-page-application) que estudamos na Parte 0. 
 
-When we use a browser to go to the address <http://localhost:3001>, the server returns the <i>index.html</i> file from the <i>build</i> repository. The summarized contents of the file are as follows: 
+Quando usamos um navegador para acessar o endereço http://localhost:3001, o servidor retorna o arquivo <i>index.html</i> do repositório <i>build</i>. O conteúdo resumido do arquivo é o seguinte:
 
 ```html
 <head>
@@ -341,51 +329,51 @@ When we use a browser to go to the address <http://localhost:3001>, the server r
 </html>
 ```
 
-The file contains instructions to fetch a CSS stylesheet defining the styles of the application, and two <i>script</i> tags that instruct the browser to fetch the JavaScript code of the application - the actual React application. 
+O arquivo contém instruções para buscar uma folha de estilo CSS definindo os estilos da aplicação, e duas tags <i>script</i> que instruem o navegador a buscar o código JavaScript da aplicação — a aplicação React real.
 
-The React code fetches notes from the server address <http://localhost:3001/api/notes> and renders them to the screen. The communications between the server and the browser can be seen in the <i>Network</i> tab of the developer console:
+O código React busca notas do endereço do servidor <http://localhost:3001/api/notes> e as renderiza na tela. As comunicações entre o servidor e o navegador podem ser vistas na guia <i>Rede</i> das Ferramentas do Desenvolvedor:
 
-![Network tab of notes application on backend](../../images/3/29new.png)
+![guia de rede da aplicação de notas no back-end](../../images/3/29new.png)
 
-The setup that is ready for a product deployment looks as follows:
+A configuração que está pronta para implantação de produção é a seguinte:
 
-![diagram of deployment ready react app](../../images/3/101.png)
+![diagrama da aplicação React pronta para implantação](../../images/3/101.png)
 
-Unlike when running the app in a development environment, everything is now in the same node/express-backend that runs in localhost:3001. When the browser goes to the page, the file <i>index.html</i> is rendered. That causes the browser to fetch the product version of the React app. Once it starts to run, it fetches the json-data from the address localhost:3001/api/notes.
+Ao contrário do que acontece quando a aplicação é executada em um ambiente de desenvolvimento, tudo está agora no mesmo back-end Node/Express que é executado em <i>localhost:3001</i>. Quando o navegador vai até a página, o arquivo <i>index.html</i> é renderizado. Isso faz com que o navegador busque o build de produção da aplicação React. Assim que começa a ser executada, ela busca os dados json do endereço <i>localhost:3001/api/notes</i>.
 
-### The whole app to the internet
+### A aplicação toda na internet
 
-After ensuring that the production version of the application works locally, commit the production build of the frontend to the backend repository, and push the code to GitHub again.
+Após garantir que a versão de produção da aplicação funciona localmente, confirme a versão de produção do front-end no repositório do back-end e envie o código para o GitHub novamente.
 
-If you are using Render a push to GitHub <i>might</i> be enough. If the automatic deployment does not work, select the "manual deploy" from the Render dashboard.
+Se você estiver usando o Render, um "push" para o GitHub <i>pode</i> ser suficiente. Se a implantação automática não funcionar, selecione "manual deploy" (implantação manual) no painel do Render.
 
-In the case of Fly.io the new deployment is done with the command
+No caso do Fly.io, a nova implantação é feita com o comando:
 
 ```bash
 fly deploy
 ```
 
-The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet. 
+A aplicação funciona perfeitamente, com exceção de que ainda não adicionamos a funcionalidade de alterar a importância de uma nota no back-end.
 
-![screenshot of notes application](../../images/3/30new.png)
+![captura de tela da aplicação de notas](../../images/3/30new.png)
 
-Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
+Nossa aplicação salva as notas em uma variável. Se a aplicação travar ou for reiniciada, todos os dados desaparecerão.
 
-The application needs a database. Before we introduce one, let's go through a few things. 
+A aplicação precisa de um banco de dados. Antes de introduzirmos um, vamos passar por alguns pontos.
 
-The setup looks like now as follows:
+A configuração agora parece assim:
 
-![diagram of react app on heroku with a database](../../images/3/102.png)
+![diagrama da aplicação React no Heroku com um banco de dados](../../images/3/102.png)
 
-The node/express-backend now resides in the Fly.io/Render server. When the root address is accessed, the browser loads and executes the React app that fetches the json-data from the Fly.io/Render server.
+O back-end Node/Express agora reside no servidor Fly.io/Render. Quando o endereço raiz é acessado, o navegador carrega e executa a aplicação React que busca os dados json do servidor Fly.io/Render.
 
-###  Streamlining deploying of the frontend 
+### Otimização da implantação do front-end
 
-To create a new production build of the frontend without extra manual work, let's add some npm-scripts to the <i>package.json</i> of the backend repository.
+Para criar uma nova versão de produção do front-end sem trabalho manual adicional, vamos adicionar alguns npm-scripts ao <i>package.json</i> do repositório do back-end.
 
 #### Fly.io
 
-The script looks like this
+O script fica assim:
 
 ```json
 {
@@ -398,6 +386,19 @@ The script looks like this
   }
 }
 ```
+
+
+
+
+
+^^^^^
+### NÃO REVISADO
+
+
+
+
+
+
 
 The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Fly.io. 
 
