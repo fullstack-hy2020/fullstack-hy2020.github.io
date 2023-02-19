@@ -11,6 +11,8 @@ This course is an introduction to modern web development with JavaScript. The ma
 
 Other topics include debugging applications, container technology, configuration, managing runtime environments, and databases.
 
+The course is totally free of charge. You can get a certificate and even the University of Helsinki ECTS credits for free.
+
 ### Prerequisites
 
 Participants are expected to have good programming skills, basic knowledge of web programming and databases, and know the basics of the Git version control system. You are also expected to have perseverance and a capacity for solving problems and seeking information independently.
