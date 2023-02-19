@@ -72,15 +72,15 @@ Podemos crear nuestra base de datos de prueba separada en Mongo DB Atlas. Esta n
 
 Sería mejor ejecutar nuestras pruebas usando una base de datos que esté instalada y ejecutándose en la máquina local del desarrollador. La solución óptima sería que cada ejecución de prueba use su propia base de datos separada. Esto es "relativamente simple" de lograr [ejecutando Mongo en memoria](https://docs.mongodb.com/manual/core/inmemory/) o usando contenedores [Docker](https://www.docker.com ). No complicaremos las cosas y en su lugar continuaremos usando la base de datos MongoDB Atlas.
 
-Hagamos algunos cambios en el módulo que define la configuración de la aplicación: 
+Hagamos algunos cambios en el módulo que define la configuración de la aplicación (utils/config.js): 
 
 ```js
 require('dotenv').config()
 
 const PORT = process.env.PORT
+// highlight-start
 let MONGODB_URI = process.env.MONGODB_URI
 
-// highlight-start
 if (process.env.NODE_ENV === 'test') {
   MONGODB_URI = process.env.TEST_MONGODB_URI
 }
