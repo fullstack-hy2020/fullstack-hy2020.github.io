@@ -44,20 +44,20 @@ host: example.com
 port: 80
 ```
 
-Quando você visita um site (ou seja, <http://catwebsites.com>), o navegador emite uma requisição para o servidor em que o site (catwebsites.com) está hospedado. A resposta enviada pelo servidor é um arquivo HTML que pode conter uma ou mais referências a recursos/ativos externos hospedados no mesmo servidor que <i>catwebsites.com</i> está hospedado ou em um site diferente. Quando o navegador vê referência(s) a uma URL no HTML de origem, ele emite uma requisição. Se a requisição for feita usando a URL da qual o HTML de origem foi obtido, o navegador processa a resposta sem problemas. No entanto, se o recurso for obtido usando uma URL que não compartilha a mesma origem (esquema, host, porta) que o HTML de origem, o navegador deverá verificar o cabeçalho de resposta `Access-Control-Allow-origin` (CORS). Se ele contiver `*` ou a URL do HTML de origem, o navegador processará a resposta, caso contrário, o navegador se recusará a processá-la e lançará um erro.
+Quando você visita um site (ou seja, <http://catwebsites.com>), o navegador emite uma requisição para o servidor em que o site (catwebsites.com) está hospedado. A resposta enviada pelo servidor é um arquivo HTML que pode conter uma ou mais referências a recursos/ativos externos hospedados no mesmo servidor que <i>catwebsites.com</i> está hospedado ou em um site diferente. Quando o navegador vê referência(s) a uma URL no HTML de origem, ele emite uma requisição. Se a requisição for feita usando a URL da qual o HTML de origem foi obtido, o navegador processa a resposta sem problemas. No entanto, se o recurso for obtido usando uma URL que não compartilha a mesma origem (esquema, host, porta) que o HTML de origem, o navegador deverá verificar o cabeçalho de resposta _Access-Control-Allow-origin_ (CORS). Se ele contiver _*_ ou a URL do HTML de origem, o navegador processará a resposta, caso contrário, o navegador se recusará a processá-la e lançará um erro.
   
-A <strong>Política de Mesma Origem</strong> é um mecanismo de segurança implementado pelos navegadores para impedir o sequestro de sessão, entre outras vulnerabilidades de segurança.
+A <strong>Política de Mesma Origem</strong> é um mecanismo de segurança implementado pelos navegadores para impedir sequestro de sessão (session hijacking), entre outras vulnerabilidades de segurança.
 
-Para permitir requisições legítimas de várias origens (requisições a URLs que não compartilham a mesma origem), a W3C criou um mecanismo chamado <strong>CORS</strong> (Compartilhamento de Recursos de Origem Cruzada). De acordo com a [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
+Para permitir requisições legítimas de várias origens (requisições a URLs que não compartilham a mesma origem), a W3C criou um mecanismo chamado <strong>CORS</strong> (Cross-Origin Resource Sharing [Compartilhamento de Recursos de Origem Cruzada]). De acordo com a [Wikipedia](https://en.wikipedia.org/wiki/Cross-origin_resource_sharing):
 
 > <i>Cross-Origin Resource Sharing ou CORS é um mecanismo que permite que recursos restritos em uma página web sejam recuperados por outro domínio fora do domínio ao qual pertence o recurso que será recuperado. Uma página web pode integrar livremente recursos de diferentes origens, como imagens, folhas de estilo, scripts, iframes e vídeos. Certas "requisições de domínio cruzado", em particular as requisições Ajax, são proibidas por padrão pela política de segurança de mesma origem.</i>
 
 O problema é que, por padrão, o código JavaScript de uma aplicação que é executada em um navegador só pode se comunicar com um servidor na mesma [origem](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) (origin).
 Como nosso servidor está em _localhost, porta 3001_, enquanto nosso front-end está em _localhost, porta 3000_, eles não possuem a mesma origem.
 
-Lembre-se de que [Política de Mesma Origem](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) (same-origin policy) e CORS não são específicos de React ou Node. São princípios universais referentes à operação segura de aplicações web.
+Lembre-se de que a [Política de Mesma Origem](https://developer.mozilla.org/en-US/docs/Web/Security/Same-origin_policy) (same-origin policy) e CORS não são específicos de React ou Node. São princípios universais referentes à operação segura de aplicações web.
 
-Podemos permitir requisições de outras <i>origens</i> usando o middleware [cors](https://github.com/expressjs/cors) do Node.
+Podemos permitir requisições de outras <i>origens</i> usando o <i>middleware</i> [cors](https://github.com/expressjs/cors) do Node.
 
 No repositório do seu back-end, instale o <i>cors</i> com o comando...
 
@@ -65,7 +65,7 @@ No repositório do seu back-end, instale o <i>cors</i> com o comando...
 npm install cors
 ```
 
-... use o middleware e permita requisições de todas as origens:
+... use o <i>middleware</i> e permita requisições de todas as origens:
 
 ```js
 const cors = require('cors')
@@ -73,7 +73,7 @@ const cors = require('cors')
 app.use(cors())
 ```
 
-E o front-end funciona! No entanto, a funcionalidade para alterar a importância das notas ainda não foi implementada no back-end.
+E o front-end funciona! No entanto, a funcionalidade para alternar a importância das notas ainda não foi implementada no back-end.
 
 Você pode ler mais sobre o CORS na página da [Mozilla](https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS).
 
@@ -91,7 +91,7 @@ Há um número cada vez maior de serviços que podem ser usados para hospedar um
 
 Durante uma década, [Heroku](http://heroku.com) dominou a cena PaaS. Infelizmente, o plano gratuito do Heroku acabou em 27 de novembro de 2022. Muitos desenvolvedores ficaram tristes com isso, especialmente estudantes. O Heroku ainda é uma opção viável se você estiver disposto a gastar algum dinheiro. Eles também têm [um programa para estudantes](https://www.heroku.com/students) que fornece alguns créditos gratuitos.
 
-Agora estamos apresentando dois serviços: [Fly.io](https://fly.io/) e [Render](https://render.com/), onde ambos têm um plano gratuito (limitado). O Fly.io é nosso serviço de hospedagem "oficial", pois pode ser usado com certeza também nas Partes 11 e 13 do curso. O Render será bom para as outras partes deste curso, pelo menos.
+Agora estamos apresentando dois serviços: [Fly.io](https://fly.io/) e [Render](https://render.com/), onde ambos têm um plano gratuito (limitado). O Fly.io é nosso serviço de hospedagem "oficial", pois pode ser usado com certeza também nas Partes 11 e 13 do curso. O Render será bom pelo menos para as outras partes deste curso.
 
 Observe que, apesar de usar apenas o plano gratuito, o Fly.io <i>pode</i> exigir que você insira suas informações de cartão de crédito. No momento, o Render pode ser usado sem um cartão de crédito.
 
@@ -127,7 +127,7 @@ Por padrão, todos recebem duas máquinas virtuais gratuitas que podem ser usada
 
 Se você decidir usar o [Fly.io](https://fly.io/), comece instalando seu executável _flyctl_ seguindo [este guia](https://fly.io/docs/hands-on/install-flyctl/). Após isso, você deve [criar uma conta Fly.io](https://fly.io/docs/hands-on/sign-up/).
 
-Comece por [autenticar-se](https://fly.io/docs/hands-on/sign-in/) via linha de comando com o comando
+Comece por [autenticar-se](https://fly.io/docs/hands-on/sign-in/) via linha de comando com o comando:
 
 ```bash
 fly auth login
@@ -247,7 +247,7 @@ app.listen(PORT, () => {
 
 ### Build de produção do front-end
 
-Até agora, rodamos o código do React em <i>modo de desenvolvimento</i>. No modo de desenvolvimento, a aplicação é configurada para dar mensagens de erro claras, renderizar imediatamente as mudanças de código para o navegador, e assim por diante.
+Até agora, rodamos o código do React em <i>modo de desenvolvimento</i>. No modo de desenvolvimento, a aplicação é configurada para exibir mensagens de erro claras, renderizar imediatamente as mudanças de código para o navegador, e assim por diante.
 
 Quando a aplicação é implantada (deployed), é necessário criar um [build de produção](https://reactjs.org/docs/optimizing-performance.html#use-the-production-build) (grosso modo, "versão de produção" ou "compilação de produção" ou "estrutura de produção") ou uma versão da aplicação otimizada para produção.
 
@@ -255,7 +255,7 @@ Um build de produção de aplicações gerado com <i>create-react-app</i> pode s
 
 Vamos executar esse comando a partir do <i>diretório raiz do projeto front-end de notas</i> que desenvolvemos na [Parte 2](/pt/part2).
 
-Isso cria um diretório chamado <i>build</i> (que contém o único arquivo HTML de nossa aplicação, <i>index.html</i>) que contém o diretório <i>static</i>. Uma versão [minificada](<https://en.wikipedia.org/wiki/Minification_(programming)>) do código JavaScript de nossa aplicação será gerada no diretório <i>static</i>. Embora o código da aplicação esteja em vários arquivos, todo o JavaScript será minificado em um arquivo. Todo o código de todas as dependências da aplicação também será minificado neste único arquivo.
+Isso cria um diretório chamado <i>build</i> (que contém o único arquivo HTML da nossa aplicação, <i>index.html</i>) que contém o diretório <i>static</i>. Uma versão [minificada](<https://en.wikipedia.org/wiki/Minification_(programming)>) do código JavaScript da nossa aplicação será gerada no diretório <i>static</i>. Embora o código da aplicação esteja em vários arquivos, todo o JavaScript será minificado em um arquivo. Todo o código de todas as dependências da aplicação também será minificado neste único arquivo.
 
 O código minificado não é muito legível. O início do código se parece com isso: 
 
@@ -279,7 +279,7 @@ O diretório do back-end deve ficar assim agora:
 
 ![captura de tela do bash mostrando o diretório build](../../images/3/27new.png)
 
-Para fazer o Express exibir <i>conteúdo estático</i> — a página <i>index.html</i> e o JavaScript, etc. —, que ele busca, precisamos de um middleware embutido do Express chamado [static](http://expressjs.com/en/starter/static-files.html).
+Para fazer o Express exibir <i>conteúdo estático</i> — a página <i>index.html</i> e o JavaScript, etc. — que ele busca, precisamos de um <i>middleware</i> embutido do Express chamado [static](http://expressjs.com/en/starter/static-files.html).
 
 Quando adicionamos o seguinte código em meio às declarações dos <i>middlewares</i>...
 
@@ -329,7 +329,7 @@ Quando usamos um navegador para acessar o endereço http://localhost:3001, o ser
 </html>
 ```
 
-O arquivo contém instruções para buscar uma folha de estilo CSS definindo os estilos da aplicação, e duas tags <i>script</i> que instruem o navegador a buscar o código JavaScript da aplicação — a aplicação React real.
+O arquivo contém instruções para buscar uma folha de estilo CSS que define os estilos da aplicação, e duas tags <i>script</i> que instruem o navegador a buscar o código JavaScript da aplicação — a aplicação React real.
 
 O código React busca notas do endereço do servidor <http://localhost:3001/api/notes> e as renderiza na tela. As comunicações entre o servidor e o navegador podem ser vistas na guia <i>Rede</i> das Ferramentas do Desenvolvedor:
 
@@ -353,7 +353,7 @@ No caso do Fly.io, a nova implantação é feita com o comando:
 fly deploy
 ```
 
-A aplicação funciona perfeitamente, com exceção de que ainda não adicionamos a funcionalidade de alterar a importância de uma nota no back-end.
+A aplicação funciona perfeitamente, com exceção de que ainda não adicionamos a funcionalidade de alternar a importância de uma nota no back-end.
 
 ![captura de tela da aplicação de notas](../../images/3/30new.png)
 
@@ -369,7 +369,7 @@ O back-end Node/Express agora reside no servidor Fly.io/Render. Quando o endere�
 
 ### Otimização da implantação do front-end
 
-Para criar uma nova versão de produção do front-end sem trabalho manual adicional, vamos adicionar alguns npm-scripts ao <i>package.json</i> do repositório do back-end.
+Para criar uma nova versão de produção do front-end sem trabalho manual adicional, vamos adicionar alguns scripts npm ao <i>package.json</i> do repositório do back-end.
 
 #### Fly.io
 
@@ -387,30 +387,17 @@ O script fica assim:
 }
 ```
 
+O script _npm run build:ui_ constrói o front-end e copia a versão de produção no repositório do back-end. _npm run deploy_ libera a versão atual do back-end para o Fly.io.
 
+_npm run deploy:full_ combina esses dois scripts.
 
+Existe também um script _npm run logs:prod_ para mostrar os logs do Fly.io.
 
-
-^^^^^
-### NÃO REVISADO
-
-
-
-
-
-
-
-The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository.  _npm run deploy_ releases the current backend to Fly.io. 
-
-_npm run deploy:full_ combines these two scripts. 
-
-There is also a script _npm run logs:prod_ to show the Fly.io logs.
-
-Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
+Observe que os caminhos de diretório no script <i>build:ui</i> dependem da localização dos repositórios no sistema de arquivos.
 
 #### Render
 
-In case of Render, the scripts look like the following
+No caso do Render, os scripts ficam assim:
 
 ```json
 {
@@ -422,33 +409,33 @@ In case of Render, the scripts look like the following
 }
 ```
 
-The script _npm run build:ui_ builds the frontend and copies the production version under the backend repository. _npm run deploy:full_ contains also the necessary <i>git</i> commands to update the backend repository. 
+O script _npm run build:ui_ constrói o front-end e copia a versão de produção no repositório do back-end. _npm run deploy:full_ contém também os comandos necessários <i>git</i> para atualizar o repositório do back-end.
 
-Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
+Observe que os caminhos de diretório no script <i>build:ui</i> dependem da localização dos repositórios no sistema de arquivos.
 
->**NB**  On Windows, npm scripts are executed in cmd.exe as the default shell which does not support bash commands. For the above bash commands to work, you can change the default shell to Bash (in the default Git for Windows installation) as follows:
+>**N.B.:** No Windows, scripts npm são executados em cmd.exe como o shell padrão que não oferece suporte a comandos bash. Para que os comandos bash acima funcionem, é possível alterar o shell padrão para Bash (na instalação padrão do Git para Windows) da seguinte forma:
 
 ```md
 npm config set script-shell "C:\\Program Files\\git\\bin\\bash.exe"
 ```
 
-Another option is the use of [shx](https://www.npmjs.com/package/shx).
+Outra opção é usar o [shx](https://www.npmjs.com/package/shx).
 
 ### Proxy
 
-Changes on the frontend have caused it to no longer work in development mode (when started with command _npm start_), as the connection to the backend does not work. 
+As alterações no front-end fizeram com que não funcionasse mais no modo de desenvolvimento (quando iniciado com o comando _npm start_), pois a conexão com o back-end não funciona.
 
-![Network dev tools showing a 404 on getting notes](../../images/3/32new.png)
+![ferramentas do desenvolvedor mostrando um erro 404 ao obter notas](../../images/3/32new.png)
 
-This is due to changing the backend address to a relative URL: 
+Isso se deve à alteração do endereço do back-end para um URL relativo:
 
 ```js
 const baseUrl = '/api/notes'
 ```
 
-Because in development mode the frontend is at the address <i>localhost:3000</i>, the requests to the backend go to the wrong address <i>localhost:3000/api/notes</i>. The backend is at <i>localhost:3001</i>. 
+Como no modo de desenvolvimento o front-end está no endereço <i>localhost:3000</i>, as requisições ao back-end vão para o endereço errado <i>localhost:3000/api/notes</i>. O back-end está em <i>localhost:3001</i>.
 
-If the project was created with create-react-app, this problem is easy to solve. It is enough to add the following declaration to the <i>package.json</i> file of the frontend repository. 
+Esse problema é fácil de resolver se o projeto foi criado com "create-react-app". Basta adicionar a seguinte declaração ao arquivo <i>package.json</i> do repositório do front-end.
 
 ```bash
 {
@@ -462,50 +449,50 @@ If the project was created with create-react-app, this problem is easy to solve.
 }
 ```
 
-After a restart, the React development environment will work as a [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). If the React code does an HTTP request to a server address at <i>http://localhost:3000</i> not managed by the React application itself (i.e. when requests are not about fetching the CSS or JavaScript of the application), the request will be redirected to the server at <i>http://localhost:3001</i>. 
+Após a reinicialização, o ambiente de desenvolvimento React funcionará como um [proxy](https://create-react-app.dev/docs/proxying-api-requests-in-development/). Se o código React fizer uma requisição HTTP para um endereço de servidor em <i>http://localhost:3000</i> não gerenciado pela aplicação React em si (ou seja, quando as requisições não se tratam de buscar o CSS ou JavaScript da aplicação), a requisição será redirecionada para o servidor em <i>http://localhost:3001</i>.
 
-Now the frontend is also fine, working with the server both in development- and production mode. 
+Agora o front-end já funciona bem: conecta-se ao servidor tanto no modo de desenvolvimento quanto no de produção.
 
-A negative aspect of our approach is how complicated it is to deploy the frontend. Deploying a new version requires generating a new production build of the frontend and copying it to the backend repository. This makes creating an automated [deployment pipeline](https://martinfowler.com/bliki/DeploymentPipeline.html) more difficult. Deployment pipeline means an automated and controlled way to move the code from the computer of the developer through different tests and quality checks to the production environment. Building a deployment pipeline is the topic of [part 11](https://fullstackopen.com/en/part11) of this course.
+Um aspecto negativo da nossa abordagem é o quão complicado é implantar o front-end. Implantar uma nova versão requer a geração de um novo build de produção do front-end e a cópia dele para o repositório do back-end. Isso torna a criação de um [pipeline de implantação](https://martinfowler.com/bliki/DeploymentPipeline.html) automatizado mais difícil. Pipeline de implantação refere-se a uma maneira automatizada e controlada de mover o código do computador do desenvolvedor por meio de diferentes testes e verificações de qualidade até o ambiente de produção. A criação de um pipeline de implantação é o tema da [Parte 11](/pt/part11) deste curso.
 
-There are multiple ways to achieve this (for example placing both backend and frontend code [in the same repository](https://github.com/mars/heroku-cra-node) ) but we will not go into those now. 
+Existem várias maneiras de conseguir fazer isso (por exemplo, colocando o código do back-end e do front-end [no mesmo repositório](https://github.com/mars/heroku-cra-node)), mas não entraremos nesses detalhes agora.
 
-In some situations, it may be sensible to deploy the frontend code as its own application. With apps created with create-react-app it is [straightforward](https://github.com/mars/create-react-app-buildpack).
+Em algumas situações, é sensato implantar o código do front-end como sua própria aplicação. Fazer isso é [simples](https://github.com/mars/create-react-app-buildpack) com aplicações criadas com "create-react-app".
 
-The current backend code can be found on [Github](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), in the branch <i>part3-3</i>. The changes in frontend code are in <i>part3-1</i> branch of the [frontend repository](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1).
+O código atual do back-end pode ser encontrado no [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3), na branch <i>part3-3</i>. As alterações no código do frontend estão na branch <i>part3-1</i> do [repositório do front-end](https://github.com/fullstack-hy2020/part2-notes/tree/part3-1).
 
 </div>
 
 <div class="tasks">
 
-### Exercises 3.9.-3.11.
+### Exercícios 3.9 a 3.11
 
-The following exercises don't require many lines of code. They can however be challenging, because you must understand exactly what is happening and where, and the configurations must be just right. 
+Os exercícios a seguir não exigem muitas linhas de código. No entanto, podem ser desafiadores, pois você deve entender exatamente o que e onde está acontecendo, e as configurações devem estar corretas.
 
-#### 3.9 phonebook backend step9
+#### 3.9: Phonebook backend — 9º passo
 
-Make the backend work with the phonebook frontend from the exercises of the previous part. Do not implement the functionality for making changes to the phone numbers yet, that will be implemented in exercise 3.17. 
+Faça com que o back-end funcione com o front-end da lista telefônica dos exercícios da parte anterior. Não implemente a funcionalidade para fazer alterações nos números de telefone ainda, porque isso será implementado no exercício 3.17.
 
-You will probably have to do some small changes to the frontend, at least to the URLs for the backend. Remember to keep the developer console open in your browser. If some HTTP requests fail, you should check from the <i>Network</i>-tab what is going on. Keep an eye on the backend's console as well. If you did not do the previous exercise, it is worth it to print the request data or <i>request.body</i> to the console in the event handler responsible for POST requests. 
+Você provavelmente terá que fazer algumas pequenas alterações no front-end, pelo menos nas URLs para o back-end. Lembre-se de manter o Console do desenvolvedor aberto em seu navegador. Se algumas requisições HTTP falharem, você deve verificar na guia <i>Rede</i> o que está acontecendo. Fique de olho também no console do back-end. Se você não fez o exercício anterior, vale a pena imprimir no console os dados da requisição ou <i>request.body</i> no gerenciador de eventos responsável pelas requisições POST.
 
-#### 3.10 phonebook backend step10
+#### 3.10: Phonebook backend — 10º passo
 
-Deploy the backend to the internet, for example to Fly.io or Render. 
+Implante o back-end na internet; pode ser no Fly.io ou no Render, por exemplo.
 
-Test the deployed backend with a browser and Postman or VS Code REST client to ensure it works. 
+Teste o recém-implantado back-end com um navegador, com o Postman ou com o cliente REST do VS Code para garantir que ele esteja funcionando.
 
-**PRO TIP:** When you deploy your application to Internet, it is worth it to at least in the beginning keep an eye on the logs of the application **AT ALL TIMES**.
+**DICA PRO:** Quando você implantar sua aplicação na internet, é importante pelo menos no início ficar de olho nos logs da aplicação **A TODO MOMENTO**.
 
-Create a README.md at the root of your repository, and add a link to your online application to it. 
+Crie um README.md na raiz do seu repositório e adicione um link de acesso à sua aplicação online.
 
-#### 3.11 phonebook full stack
+#### 3.11: Phonebook backend — 11º passo
 
-Generate a production build of your frontend, and add it to the internet application using the method introduced in this part. 
+Gere um build de produção do seu front-end e adicione-o à aplicação na internet utilizando o método introduzido nesta parte.
 
-**NB** If you use Render, make sure the directory <i>build</i> is not gitignored
+**N.B.:** Se você usar o Render, certifique-se de que o diretório <i>build</i> não esteja no <i>gitignored</i>.
 
-Also, make sure that the frontend still works locally (in development mode when started with command _npm start_). 
+Certifique-se também de que o front-end ainda funcione localmente (em modo de desenvolvimento quando iniciado com o comando _npm start_).
 
-If you have problems getting the app working make sure that your directory structure matches [the example app](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
+Se tiver problemas para fazer a aplicação funcionar, certifique-se de que a estrutura do seu diretório corresponda [à aplicação de exemplo](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-3).
 
 </div>
