@@ -196,7 +196,7 @@ const Togglable = (props) => {
   const showWhenVisible = { display: visible ? '' : 'none' }
 
   const toggleVisibility = () => {
-    setVisible(!visible)
+    setVisible(previousState=>!previousState)
   }
 
   return (
@@ -216,6 +216,8 @@ export default Togglable
 ```
 
 The new and interesting part of the code is [props.children](https://reactjs.org/docs/glossary.html#propschildren), which is used for referencing the child components of the component. The child components are the React elements that we define between the opening and closing tags of a component.
+   
+Also we have used new way of updating visible state in <i>toggleVisibility</i>. This syntax is used when new state depends upon previous state and here setVisible first receives previous state of <i>visible</i> as argument and then return new state which is opposite of previous state <i>i.e changes true to false</i> 
 
 This time the children are rendered in the code that is used for rendering the component itself:
 
@@ -398,7 +400,7 @@ const Togglable = forwardRef((props, refs) => { // highlight-line
   const showWhenVisible = { display: visible ? '' : 'none' }
 
   const toggleVisibility = () => {
-    setVisible(!visible)
+    setVisible(previousState=>!previousState)
   }
 
 // highlight-start
