@@ -960,7 +960,7 @@ Utilice el paquete supertest para escribir una prueba que realice una solicitud 
 
 Una vez finalizada la prueba, refactorice el controlador de ruta para usar la sintaxis async/await en lugar de promesas.
 
-Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/porbando_el_backend#entorno-de-prueba),
+Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/probando_el_backend#entorno-de-prueba),
 
 **NB:** Al ejecutar las pruebas, es posible que se encuentre con la siguiente advertencia:
 
