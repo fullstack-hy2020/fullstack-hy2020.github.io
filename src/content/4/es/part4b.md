@@ -999,7 +999,7 @@ module.exports = {
 
 Escriba una prueba que verifique que la propiedad de identificador único de las publicaciones del blog se llame <i>id</i>, de manera predeterminada, la base de datos nombra la propiedad <i>_id</i>. La verificación de la existencia de una propiedad se realiza fácilmente con el comparador [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) de Jest.
 
-Realice los cambios necesarios en el código para que pase la prueba. El método [toJSON](/es/part3/save_data_to_mongo_db#backend-connected-to-a-database) discutido en la parte 3 es un lugar apropiado para definir el parámetro <i>id</i>.
+Realice los cambios necesarios en el código para que pase la prueba. El método [toJSON](/es/part3/guardando_datos_en_mongo_db#backend-conectado-a-una-base-de-datos) discutido en la parte 3 es un lugar apropiado para definir el parámetro <i>id</i>.
 
 #### 4.10: Pruebas de lista de blogs, paso 3
 
@@ -1192,7 +1192,7 @@ Puede encontrar el código para nuestra aplicación actual en su totalidad en la
 
 Implementar la funcionalidad para eliminar un solo recurso de publicación de blog.
 
-Utilice la sintaxis async/await. Siga las convenciones de [RESTful](/es/part3/node_js_and_express#rest) al definir la API HTTP.
+Utilice la sintaxis async/await. Siga las convenciones de [RESTful](/es/part3/node_js_y_express#rest) al definir la API HTTP.
 
 No dude en implementar pruebas para la funcionalidad si lo desea. De lo contrario, verifique que la funcionalidad funcione con Postman o alguna otra herramienta.
 
@@ -1202,7 +1202,7 @@ Implementar la funcionalidad para actualizar la información de una publicación
 
 Utilice async / await.
 
-La aplicación principalmente necesita actualizar la cantidad de <i>likes</i> para una publicación de blog. Puede implementar esta funcionalidad de la misma manera que implementamos las notas de actualización en la [parte 3](/es/part3/save_data_to_mongo_db#other-operations).
+La aplicación principalmente necesita actualizar la cantidad de <i>likes</i> para una publicación de blog. Puede implementar esta funcionalidad de la misma manera que implementamos las notas de actualización en la [parte 3](/es/part3/guardando_datos_en_mongo_db#otras-operaciones).
 
 No dude en implementar pruebas para la funcionalidad si lo desea. De lo contrario, verifique que la funcionalidad funcione con Postman o alguna otra herramienta.
 
