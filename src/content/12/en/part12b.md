@@ -319,7 +319,7 @@ Creating files like _docker-compose.yml_ that <i>declare</i> what you want inste
 
 #### Exercise 12.6: Docker compose
 
-Create a <i>todo-app/todo-backend/docker-compose.yml</i> file that works with the node application from the previous exercise.
+Create a <i>todo-app/todo-backend/docker-compose.yml</i> file that works with the Node application from the previous exercise.
 
 The visit counter is the only feature that is required to be working.
 
@@ -331,7 +331,7 @@ The visit counter is the only feature that is required to be working.
 
 When you are developing software, containerization can be used in various ways to improve your quality of life. One of the most useful cases is by bypassing the need to install and configure tools twice.
 
-It may not be the best option to move your entire development environment into a container, but if that's what you want it's certainly possible. We will revisit this idea at the end of this part. But until then, <i>run the node application itself outside of containers</i>.
+It may not be the best option to move your entire development environment into a container, but if that's what you want it's certainly possible. We will revisit this idea at the end of this part. But until then, <i>run the Node application itself outside of containers</i>.
 
 The application we met in the previous exercises uses MongoDB. Let's explore [Docker Hub](https://hub.docker.com/) to find a MongoDB image. Docker Hub is the default place where Docker pulls the images from, you can use other registries as well, but since we are already knee-deep in Docker it's a good choice. With a quick search, we can find [https://hub.docker.com/_/mongo](https://hub.docker.com/_/mongo)
 

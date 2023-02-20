@@ -240,7 +240,7 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-With this configuration, _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!
+With this configuration, _docker compose up_ can run the application in development mode. You don't even need Node installed to develop it!
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
 
@@ -283,10 +283,10 @@ services:
     image: busybox # highlight-line
 ```
 
-The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this:
+The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker compose up_ will also look like this:
 
 ```bash
-$ docker-compose up
+$ docker compose up
   Pulling debug-helper (busybox:)...
   latest: Pulling from library/busybox
   8ec32b265e94: Pull complete
@@ -304,10 +304,10 @@ $ docker-compose up
 
 This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running, we can do the request with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.
 
-With Docker Compose we can use _docker-compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
+With Docker Compose we can use _docker compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
 
 ```bash
-$ docker-compose run debug-helper wget -O - http://app:3000
+$ docker compose run debug-helper wget -O - http://app:3000
 
   Creating react-app_debug-helper_run ... done
   Connecting to hello-front-dev:3000 (172.26.0.2:3000)
@@ -339,11 +339,11 @@ services:
     image: busybox
 ```
 
-With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://app:3000_ works since the port is still 3000 within the docker network.
+With _docker compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker compose run debug-helper wget -O - http://app:3000_ works since the port is still 3000 within the docker network.
 
 ![](../../images/12/busybox_networking_drawio.png)
 
-As the above image illustrates, _docker-compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
+As the above image illustrates, _docker compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
 
 Now that you know how easy it is to find other services in the <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our <i>docker-compose.yml</i>.
 
@@ -437,7 +437,7 @@ services:
       - app # wait for the frontend container to be started
 ```
 
-with that added we can run _docker-compose up_ and see what happens.
+with that added we can run _docker compose up_ and see what happens.
 
 ```bash
 $ docker container ls
@@ -461,7 +461,7 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-To help us, Docker Compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
+To help us, Docker Compose set up a network when we ran _docker compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
 
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000
 
@@ -480,7 +480,7 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
-If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
+If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker compose up_.
 
 One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is started:
 
