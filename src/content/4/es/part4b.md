@@ -942,6 +942,25 @@ beforeEach(async () => {
 ```
 
 La naturaleza asincrónica de JavaScript puede llevar a un comportamiento sorprendente por esta razón, es importante prestar mucha atención al usar la sintaxis async/await. Aunque la sintaxis hace que sea más fácil lidiar con las promesas, ¡es necesario entender cómo funcionan las promesas!
+  
+### El juramento de un verdadero desarrollador full stack 
+
+Realizar pruebas añade otro nivel de desafío a la programación. Debemos actualizar nuestro juramento como desarrolladores full stack para recordar que la sistematicidad también es clave al desarrollar pruebas.
+
+Por lo tanto, debemos extender nuestro juramento una vez más:
+
+El desarrollo full stack es <i> extremadamente difícil </i>, por eso usaré todos los medios posibles para hacerlo más fácil:
+
+- Mantendré la consola de desarrollador del navegador abierta todo el tiempo
+- Usaré la pestaña "Network" dentro de las herramientas de desarrollo del navegador, para asegurarme que el frontend y el backend se comuniquen como espero
+- Mantendré constantemente atento del estado del servidor, para asegurarme de que los datos enviados allí por el frontend se guarden como espero
+- Vigilaré la base de datos para confirmar que los datos enviado por el backend se guarden en el formato correcto
+- Progresaré en pequeños pasos
+- <i>Escribiré muchas sentencias console.log para asegurarme de que entiendo cómo se comporta el código y las pruebas; además para ayudarme a identificar los problemas</i>
+- Si mi código no funciona, no escribiré más código. En su lugar, comenzaré a eliminar código hasta que funcione o simplemente volveré a un estado en el que todo todavía funcionaba
+- <i>Si una prueba no pasa, me aseguraré de que la funcionalidad probada funcione correctamente en la aplicación</i>
+- Cuando pido ayuda en el canal Discord o Telegram del curso, o en otro lugar, formularé mis preguntas correctamente, vea [aquí](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) como pedir ayuda
+
 
 </div>
 
