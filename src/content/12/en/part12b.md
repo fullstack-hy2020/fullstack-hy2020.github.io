@@ -357,7 +357,13 @@ The meaning of the two first environment variables defined above is explained on
 
 The last environment variable *MONGO\_INITDB\_DATABASE* will tell MongoDB to create a database with that name. 
 
-You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g. _docker compose -f docker-compose.dev.yml up_. Now that we may have multiple it's useful.
+You can use _-f_ flag to specify a <i>file</i> to run the Docker Compose command with e.g.
+
+```bash
+docker compose -f docker-compose.dev.yml up
+```
+
+Now that we may have multiple it's useful.
 
 Now start the MongoDB with _docker compose -f docker-compose.dev.yml up -d_. With _-d_ it will run it in the background. You can view the output logs with _docker compose -f docker-compose.dev.yml logs -f_. There the _-f_ will ensure we <i>follow</i> the logs.
 
@@ -410,9 +416,9 @@ db.todos.insert({ text: 'Learn about containers', done: false });
 
 This file will initialize the database with a user and a few todos. Next, we need to get it inside the container at startup.
 
-We could create a new image FROM mongo and COPY the file inside, or we can use a <i>bind mount</i> to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.
+We could create a new image FROM mongo and COPY the file inside, or we can use a [bind mount](https://docs.docker.com/storage/bind-mounts/) to mount the file <i>mongo-init.js</i> to the container. Let's do the latter.
 
-Bind mount is the act of binding a file on the host machine to a file in the container. We could add a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose-yml. Otherwise the format is the same, first host and then container:
+Bind mount is the act of binding a file (or directory) on the host machine to a file (or directory) in the container. A bind mount is done by adding a _-v_ flag with _container run_. The syntax is _-v FILE-IN-HOST:FILE-IN-CONTAINER_. Since we already learned about Docker Compose let's skip that. The bind mount is declared under key <i>volumes</i> in docker-compose-yml. Otherwise the format is the same, first host and then container:
 
 ```yml
   mongo:
@@ -432,23 +438,6 @@ Bind mount is the act of binding a file on the host machine to a file in the con
 The result of the bind mount is that the file <i>mongo-init.js</i> in the mongo folder of the host machine is the same as the <i>mongo-init.js</i> file in the container's /docker-entrypoint-initdb.d directory. Changes to either file will be available in the other. We don't need to make any changes during runtime. But this will be the key to software development in containers.
 
 Run _docker compose -f docker-compose.dev.yml down --volumes_ to ensure that nothing is left and start from a clean slate with _docker compose -f docker-compose.dev.yml up_ to initialize the database.
-
-If all goes well, you will find among the logs the following:
-
-```bash
-"x86_64","version":"20.04"}}}}
-mongo_1  | Successfully added user: {
-mongo_1  | 	"user" : "the_username",
-mongo_1  | 	"roles" : [
-mongo_1  | 		{
-mongo_1  | 			"role" : "dbOwner",
-mongo_1  | 			"db" : "the_database"
-mongo_1  | 		}
-mongo_1  | 	]
-mongo_1  | }
-```
-
-So the user is added to the database.
 
 If you see an error like this:
 
@@ -474,8 +463,8 @@ By default, containers are not going to preserve our data. When you close the Mo
 This is a rare case in which it does preserve the data as the developers who made the Docker image for Mongo have defined a volume to be used: [https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113](https://github.com/docker-library/mongo/blob/cb8a419053858e510fc68ed2d69415b3e50011cb/4.4/Dockerfile#L113) This line will instruct Docker to preserve the data in those directories.
 
 There are two distinct methods to store the data: 
-- Declaring a location in your filesystem (called bind mount)
-- Letting Docker decide where to store the data (volume)
+- Declaring a location in your filesystem (called [bind mount](https://docs.docker.com/storage/bind-mounts/))
+- Letting Docker decide where to store the data ([volume](https://docs.docker.com/storage/volumes/))
 
 I prefer the first choice in most cases whenever you <i>really</i> need to avoid deleting the data. Let's see both in action with docker compose:
 
@@ -606,6 +595,10 @@ $ docker container rm keen_darwin
 $ docker container run -d -p 8080:80 nginx
 ```
 
+> <i>**Editor's note_** when doing development, it is **essential** to constantly follow the container logs. I'm usually not running containers in a detached mode (that is with -d) since it requires a bit of extra effor to open the logs. 
+> 
+> When I'm 100% sure that everything works... no, when I'm 200% sure, then I might relax a bit and start the containers in detached mode. Until everithing again falls apart and it is time to open the logs again.</i>
+
 Let's look at the app by going to http://localhost:8080. It seems that the app is showing the wrong message! Let's hop right into the container and fix this. Keep your browser open, we won't need to shut down the container for this fix. We will execute bash inside the container, the flags _-it_ will ensure that we can interact with the container:
 
 ```bash
@@ -648,13 +641,13 @@ While the MongoDB from the previous exercise is running, access the database wit
 
 The command to open CLI when inside the container is _mongosh_
 
-The mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
+The Mongo CLI will require the username and password flags to authenticate correctly. Flags _-u root -p example_ should work, the values are from the docker-compose.dev.yml.
 
 * Step 1: Run MongoDB
 * Step 2: Use docker exec to get inside the container
 * Step 3: Open Mongo cli
 
-When you have connected to the mongo cli you can ask it to show dbs inside:
+When you have connected to the Mongo cli you can ask it to show dbs inside:
 
 ```bash
 > show dbs
@@ -705,7 +698,7 @@ Ensure that you see the new todo both in the Express app and when querying from 
 
 ### Redis
 
-[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
+[Redis](https://redis.io/) is a [key-value](https://redis.com/nosql/key-value-databases/) database. In contrast to eg. MongoDB, the data stored to a key-value storage has a bit less structure, there are eg. no collections or tables, it just contains junks of data that can be fetched based on the <i>key</i> that was attached to the data  (the <i>value</i>).
 
 By default Redis works <i>in-memory</i>, which means that it does not store data persistently. 
 
