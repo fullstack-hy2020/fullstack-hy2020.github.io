@@ -202,7 +202,13 @@ RUN npm install
 CMD ["npm", "start"]
 ```
  
-During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so _docker build -f ./dev.Dockerfile -t hello-front-dev ._ will build the image. The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
+During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so the following command will build the image:
+
+```bash
+docker build -f ./dev.Dockerfile -t hello-front-dev .
+```
+
+The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
 
 The second task, accessing the files with VSCode, is not done yet. There are at least two ways of doing this: 
 
@@ -227,6 +233,8 @@ Note that it takes some time (for me it took 50 seconds!) for the frontend to ge
 You can now view hello-frontend in the browser.
 ```
 
+> <i>**Editor's note:** hot reload might work in your computer, but it is currently known to have some [issues](https://github.com/facebook/create-react-app/issues/11879). So if it does not work for you, just continue without the hot reload support, and reload the browser when you change the frontend code. You may also use use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).</i>
+
 Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:
 
 ```yml
@@ -246,8 +254,6 @@ services:
 With this configuration, _docker compose up_ can run the application in development mode. You don't even need Node installed to develop it!
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
-
-A word of warnig for Windows users: it has been reported that the hot relading does not work properly in all the cases when volumes are used, see [this](https://github.com/microsoft/WSL/issues/4739). If you run into this problem, you could use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).
 
 </div>
 <div class="tasks">
@@ -286,7 +292,7 @@ services:
     image: busybox # highlight-line
 ```
 
-The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker compose up_ will also look like this:
+The Busybox container won't have any process running inside so we can not _exec_ in there. Because of that, the output of _docker compose up_ will also look like this:
 
 ```bash
 $ docker compose up
@@ -322,7 +328,23 @@ $ docker compose run debug-helper wget -O - http://app:3000
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The <i>hello-front-dev</i> is the name of the container, which was given by us using *container\_name* in the docker-compose file. And the port used is the port from which the application is available in that container. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
+The URL is the interesting part here. We simply said to connect to the port 3000 of the service <i>app</i>. The <i>app</i> is the name of the service specified in the <i>docker-compose.yml</i>: 
+
+```bash
+services:
+  app: // highlight-line
+    image: hello-front-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000 // highlight-line
+    container_name: hello-front-dev
+```
+
+And the port used is the port from which the application is available in that container, also specified in the <i>docker-compose.yml</i>. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
 Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
 
@@ -531,7 +553,7 @@ http {
 
 #### Exercise 12.17: Set up an Nginx reverse proxy server in front of todo-frontend
 
-We are going to put the nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
+We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
 
 ```bash
 todo-app
@@ -541,7 +563,7 @@ todo-app
 └── docker-compose.dev.yml // highlight-line
 ```
 
-Add the services nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
+Add the services Nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
 
 ![](../../images/12/ex_12_16_nginx_front.png)
 
@@ -593,7 +615,41 @@ If you already got this working during a previous exercise you may skip this.
 
 Make sure that the development environment is now fully functional, that is:
 - all features of the todo app work
-- you can edit the source files <i>and</i> the changes take effect through hot reload in case of frontend and by reloading the app in case of backend
+- you can edit the source files <i>and</i> the changes take effect by reloading the app (the hot reloading may or may not work...)
+- frontend should access the backend throught Nginx, so the requests should be done to http://localhost:8080/api/todos (assuming that you set up Nginx to be accesses in port 8080):
+
+![](../../images/12/todos-dev-right-2.png)
+
+Note that your app should work even if no [exposed port](https://docs.docker.com/compose/compose-file/compose-file-v3/#ports) are defined for the backend and frontend in the docker compose file:
+
+```yml
+services:
+  app:
+    image: todo-front-dev
+    volumes:
+      - ./todo-frontend/:/usr/src/app
+    # no ports here!
+
+  server:
+      image: todo-back-dev
+      volumes:
+        - ./todo-backend/:/usr/src/app
+      environment: 
+        - ...
+      # no ports here!
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80 # this is needed
+    container_name: reverse-proxy
+    depends_on:
+      - app
+```
+
+We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to right container port by Nginx. Because fronend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/compose/networking/) and thanks to that, they have direct access to each other's (container) ports.
 
 </div>
 
