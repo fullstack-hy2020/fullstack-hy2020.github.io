@@ -306,7 +306,7 @@ const getAll = () => {
 // ...
 ```
 
-After the change, we have to create a new production build and copy it to the root of the backend repository. 
+After the change, we have to create a new production build of the fronend and copy it to the root of the backend repository. 
 
 The application can now be used from the <i>backend</i> address <http://localhost:3001>:
 

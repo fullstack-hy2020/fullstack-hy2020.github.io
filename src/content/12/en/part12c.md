@@ -609,17 +609,17 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 > In this exercise, submit the entire development environment, including both Express and React applications, Dockerfiles and docker-compose.yml.
 
-Finally it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give an impression that React app is run in the container but it is totally wrong. 
+Finally, it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give the impression that React app is run in the container but it is totally wrong. 
 
-It is just the <i>React app source code</i> that is in the container. When the browser hits the address http://loclhost:8080 (assuming that you set up Nginx to be accesses in port 8080), the React source code gets downloaded from the container to the browser:
+It is just the <i>React app source code</i> that is in the container. When the browser hits the address http://loclhost:8080 (assuming that you set up Nginx to be accessed in port 8080), the React source code gets downloaded from the container to the browser:
 
 ![](../../images/12/nginx-setup.png)
 
-Next the browser starts executing the React app, and all the request it makes to the backend should be done through the Nginx reverse proxy:
+Next, the browser starts executing the React app, and all the requests it makes to the backend should be done through the Nginx reverse proxy:
 
 ![](../../images/12/nginx-setup2.png)
 
-The fronent container is actually no more accessed beyond the 1st request that gets the React app source code to the browser.
+The frontent container is actually no more accessed beyond the first request that gets the React app source code to the browser.
 
 Set up now your app to work as in the abovefigure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
 
@@ -659,7 +659,7 @@ services:
       - app
 ```
 
-We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to right container port by Nginx. Because nginx, fronend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/compose/networking/) and thanks to that, they have direct access to each other's (container) ports.
+We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to the right container port by Nginx. Because Nginx, frontend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/compose/networking/) and thanks to that, Nginx has direct access to frontend and backend containers ports.
 
 </div>
 
