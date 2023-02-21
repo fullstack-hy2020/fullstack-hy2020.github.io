@@ -9,10 +9,10 @@ lang: en
 
 ### React in container
 
-Let's create and containerize a React application next. Let us choose npm as the package manager even though create-react-app defaults to yarn.
+Let's create and containerize a React application next.
 
 ```
-$ npx create-react-app hello-front --use-npm
+$ npx create-react-app hello-front
   ...
 
   Happy hacking!
@@ -70,13 +70,14 @@ root@98fa9483ee85:/usr/src/app# npm install -g serve
 
 root@98fa9483ee85:/usr/src/app# serve build
 
-   ┌───────────────────────────────────┐
-   │                                   │
-   │   Serving!                        │
-   │                                   │
-   │   Local:  http://localhost:5000   │
-   │                                   │
-   └───────────────────────────────────┘
+   ┌────────────────────────────────────────┐
+   │                                        │
+   │   Serving!                             │
+   │                                        │
+   │   - Local:    http://localhost:3000    │
+   │   - Network:  http://172.17.0.2:3000   │
+   │                                        │
+   └────────────────────────────────────────┘
 
 ```
 
@@ -102,7 +103,7 @@ CMD ["serve", "build"] # highlight-line
 
 Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
 
-When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:5000.
+When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5001:3000 hello-front_, the app will be available in http://localhost:5001.
 
 ### Using multiple stages
 
@@ -130,7 +131,7 @@ RUN npm run build
 FROM nginx:1.20-alpine # highlight-line
 
 # COPY the directory build from build-stage to /usr/share/nginx/html
-# The target location here was found from the docker hub page
+# The target location here was found from the Docker hub page
 COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-line
 ```
 
@@ -152,11 +153,13 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before running/building the frontend, otherwise it does not get defined in the code!
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. 
+
+Note that you need to set *REACT\_APP\_BACKEND\_URL* before building the frontend, otherwise it does not get defined in the code!
 
 #### Exercise 12.14: Testing during the build process
 
-One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where this might be a good idea. 
+One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where it might be worth considering. 
 
 Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
 
