@@ -1171,20 +1171,20 @@ Puede encontrar el código para nuestra aplicación actual en su totalidad en la
 
 #### 4.13 Expansiones de la lista de blogs, paso 1
 
-Implementar la funcionalidad para eliminar un solo recurso de publicación de blog.
+Implemente una funcionalidad que permita eliminar una publicación.
 
 Utilice la sintaxis async/await. Siga las convenciones de [RESTful](/es/part3/node_js_and_express#rest) al definir la API HTTP.
 
-No dude en implementar pruebas para la funcionalidad si lo desea. De lo contrario, verifique que la funcionalidad funcione con Postman o alguna otra herramienta.
+Si lo desea, puede implementar pruebas para la funcionalidad creada. De lo contrario, verifique que la nueva funcionalidad trabaje correctamente. Puede usar Postman o alguna otra herramienta.
 
 #### 4.14 Expansiones de listas de blogs, paso 2
 
-Implementar la funcionalidad para actualizar la información de una publicación de blog individual.
+Implemente una funcionalidad que permita actualizar la información de una publicación individualmente.
 
 Utilice async / await.
 
-La aplicación principalmente necesita actualizar la cantidad de <i>likes</i> para una publicación de blog. Puede implementar esta funcionalidad de la misma manera que implementamos las notas de actualización en la [parte 3](/es/part3/save_data_to_mongo_db#other-operations).
+La aplicación deberá permitir la actualización del número de <i>likes</i> en cada publicación. Puede implementar esta funcionalidad de la misma manera que implementamos las notas de actualización en la [parte 3](/es/part3/save_data_to_mongo_db#other-operations).
 
-No dude en implementar pruebas para la funcionalidad si lo desea. De lo contrario, verifique que la funcionalidad funcione con Postman o alguna otra herramienta.
+Si lo desea, puede implementar pruebas para la funcionalidad creada. De lo contrario, verifique que la nueva funcionalidad trabaje correctamente. Puede usar Postman o alguna otra herramienta.
 
 </div>
