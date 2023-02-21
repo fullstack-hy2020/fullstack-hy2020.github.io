@@ -559,13 +559,21 @@ We are going to put the Nginx server in front of both todo-frontend and todo-bac
 todo-app
 ├── todo-frontend
 ├── todo-backend
-├── nginx.conf // highlight-line
+├── nginx.dev.conf // highlight-line
 └── docker-compose.dev.yml // highlight-line
 ```
 
 Add the services Nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
 
 ![](../../images/12/ex_12_16_nginx_front.png)
+
+In this and the following exercises you do not need to support the the build option, that is, the command
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+It is enough to build the frontend and backend at their own repositories.
 
 #### Exercise 12.18: Configure the Nginx server to be in front of todo-backend
 
@@ -678,6 +686,7 @@ If you are interested in learning more in-depth about containers come to the [De
 <div class="tasks">
 
 ### Exercises 12.20.-12.22.
+
 #### Exercise 12.20:
 
 Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
@@ -688,8 +697,9 @@ Please use the following structure for this exercise:
 todo-app
 ├── todo-frontend
 ├── todo-backend
-├── nginx.conf
+├── nginx.dev.conf
 ├── docker-compose.dev.yml
+├── nginx.conf  // highlight-line
 └── docker-compose.yml // highlight-line
 ```
 
