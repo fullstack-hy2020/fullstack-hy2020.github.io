@@ -609,6 +609,18 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 > In this exercise, submit the entire development environment, including both Express and React applications, Dockerfiles and docker-compose.yml.
 
+Finally it is time to put all pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give an impression that React app is run in the container but it is totally wrong. 
+
+It is just the React app code that is in the container. When the server hits the address http://loclhost:8080 (assuming that you set up Nginx to be accesses in port 8080), the React source code gets downloaded from the container to the browser:
+
+![](../../images/12/nginx-setup.png)
+
+Next the browser starts executing the React app, and all the request it makes to the backend should now go through the Nginx reverse proxy:
+
+![](../../images/12/nginx-setup2.png)
+
+THe fronent container is actually no more accessed beyond the 1st request that gets the React app source code to the browser.
+
 Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable.
 
 If you already got this working during a previous exercise you may skip this.
@@ -616,7 +628,7 @@ If you already got this working during a previous exercise you may skip this.
 Make sure that the development environment is now fully functional, that is:
 - all features of the todo app work
 - you can edit the source files <i>and</i> the changes take effect by reloading the app (the hot reloading may or may not work...)
-- frontend should access the backend throught Nginx, so the requests should be done to http://localhost:8080/api/todos (assuming that you set up Nginx to be accesses in port 8080):
+- frontend should access the backend throught Nginx, so the requests should be done to http://localhost:8080/api/todos:
 
 ![](../../images/12/todos-dev-right-2.png)
 
