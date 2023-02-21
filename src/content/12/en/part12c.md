@@ -659,7 +659,7 @@ services:
       - app
 ```
 
-We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to right container port by Nginx. Because fronend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/compose/networking/) and thanks to that, they have direct access to each other's (container) ports.
+We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to right container port by Nginx. Because nginx, fronend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/compose/networking/) and thanks to that, they have direct access to each other's (container) ports.
 
 </div>
 
