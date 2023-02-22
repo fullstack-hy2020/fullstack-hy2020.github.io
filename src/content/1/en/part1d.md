@@ -245,6 +245,98 @@ const App = () => {
 
 We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
 
+
+### Update of the state is asynchronous
+
+Let's expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:
+
+```js
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0) // highlight-line
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p>
+      <p>total {total}</p>  // highlight-line
+    </div>
+  )
+}
+```
+
+The solution does not quite work:
+
+![](../../images/1/33.png)
+
+For some reason the total of button presses is all the time one behind the actual amount of presses.
+
+Let us add couple of console.log statements to the event handler:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    console.log('left before', left)  // highlight-line
+    setLeft(left + 1)
+    console.log('left after', left)  // highlight-line
+    setTotal(left + right) 
+  }
+
+  // ...
+}
+```
+
+The console reveals the problem
+
+![](../../images/1/32.png)
+
+
+Even though a new value was set to _left_ by calling _setLeft(left + 1)_, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
+
+```js
+setTotal(left + right) 
+```
+
+The reason for this is that a state update in React happens [asynchronously](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous), i.e. not immediately but "at some point" before the component is rendered again.
+
+We can fix the app as follows:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft + right) 
+  }
+
+  // ...
+}
+```
+
+So now the number of button presses is definitely based on the correct number of left button presses.
+
+
 ### Conditional rendering
 
 Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:

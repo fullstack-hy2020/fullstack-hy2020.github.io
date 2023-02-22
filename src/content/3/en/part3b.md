@@ -306,7 +306,7 @@ const getAll = () => {
 // ...
 ```
 
-After the change, we have to create a new production build and copy it to the root of the backend repository. 
+After the change, we have to create a new production build of the fronend and copy it to the root of the backend repository. 
 
 The application can now be used from the <i>backend</i> address <http://localhost:3001>:
 
@@ -486,7 +486,11 @@ Test the deployed backend with a browser and Postman or VS Code REST client to e
 
 **PRO TIP:** When you deploy your application to Internet, it is worth it to at least in the beginning keep an eye on the logs of the application **AT ALL TIMES**.
 
-Create a README.md at the root of your repository, and add a link to your online application to it. 
+Create a README.md at the root of your repository, and add a link to your online application to it.
+
+**NOTE**: as it was said, you should deploy the BACKEND to the cloud service. If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is). In case of using Render, the backend must be in the root of your repository.
+
+You shall NOT be deploying the frontend directly at any stage of this part. It is just backend repository that is deployed throughout the whole part, nothing else.
 
 #### 3.11 phonebook full stack
 

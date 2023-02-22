@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Software development includes the whole lifecycle from envisioning the software to programming and to releasing the software to the end-users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
+Software development includes the whole lifecycle from envisioning the software to programming and to releasing the it to the end-users and even maintaining it. This part will introduce containers, a modern tool utilized in the latter parts of the software lifecycle.
 
 Containers encapsulate your application into a single package. This package will then include all of the dependencies with the application. As a result, each container can run isolated from the other containers.
 
@@ -126,7 +126,7 @@ Let us start with the command <i>docker container run</i> that is used to run im
 Let us run the command
 
 ```bash
-§ docker container run hello-world
+$ docker container run hello-world
 ```
 
 There will be a lot of output, but let's split it into multiple sections, which we can decipher together. The lines are numbered by me so that it is easier to follow the explanation. Your output will not have the numbers.
@@ -188,7 +188,7 @@ The output contains a few new things for us to learn. <i>Docker daemon</i> is a 
 ### Exercise 12.2
 
 Some of these exercises do not require you to write any code or configurations to a file.
-In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript".
+In these exercises you should use [script](https://man7.org/linux/man-pages/man1/script.1.html) command to record the commands you have used; try it yourself with _script_ to start recording, _echo "hello"_ to generate some output, and _exit_ to stop recording. It saves your actions into a file names "typescript" (that has nothing to do with the TypeScript programming language, the name is just a coincidence).
 
 If _script_ does not work, you can just copy-paste all commands you used into a text file.
 
@@ -242,6 +242,8 @@ $ docker container ls -a
 CONTAINER ID   IMAGE     COMMAND   CREATED          STATUS                            NAMES
 b8548b9faec3   ubuntu    "bash"    3 minutes ago    Exited (0) 6 seconds ago          hopeful_clarke
 ```
+
+> <i>Editor's note: that the command _docker container ls_ has also a shorter form _docker ps_</i>, I prefer the shorer one.
 
 We have two options when addressing a container. The identifier in the first column can be used to interact with the container almost always. Plus, most commands accept the container name as a more human-friendly method of working with them. The name of the container was automatically generated to be **"hopeful_clarke"** in my case.
 
@@ -348,7 +350,13 @@ Hello World
 
 ### Other Docker commands
 
-Now that we have Node installed in the container we can execute JavaScript in the container! Let's create a new image from the container. The _commit <i>CONTAINER-ID-OR-CONTAINER-NAME</i> <i>NEW-IMAGE-NAME</i>_ will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
+Now that we have Node installed in the container, we can execute JavaScript in the container! Let's create a new image from the container. The command 
+
+```bash
+commit CONTAINER-ID-OR-CONTAINER-NAME NEW-IMAGE-NAME
+```
+
+will create a new image that includes the changes we have made. You can use _container diff_ to check for the changes between the original image and container before doing so.
 
 ```bash
 $ docker commit hopeful_clarke hello-node-world
