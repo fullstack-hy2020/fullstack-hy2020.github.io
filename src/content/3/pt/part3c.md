@@ -7,132 +7,131 @@ lang: pt
 
 <div class="content">
 
-Before we move into the main topic of persisting data in a database, we will take a look at a few different ways of debugging Node applications.
+Antes de irmos ao assunto principal sobre persistência de dados em um banco de dados, vamos dar uma olhada em algumas maneiras diferentes de depurar aplicações Node.
 
-### Debugging Node applications
+### Depurando aplicações Node
 
-Debugging Node applications is slightly more difficult than debugging JavaScript running in your browser. Printing to the console is a tried and true method, and it's always worth doing. Some people think that more sophisticated methods should be used instead, but I disagree. Even the world's elite open-source developers [use](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) this [method](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
-
+A depuração de aplicações Node é um tanto mais difícil do que depurar JavaScript em execução no navegador. A impressão de dados no console é um método testado e comprovado, e sempre vale a pena utilizá-lo. Algumas pessoas acham que métodos mais sofisticados devem ser usados ​​em vez do console, mas eu discordo. Até os melhores desenvolvedores de código aberto do mundo [usam](https://tenderlovemaking.com/2016/02/05/i-am-a-puts-debuggerer.html) esse [método](https://swizec.com/blog/javascript-debugging-slightly-beyond-consolelog/).
 
 #### Visual Studio Code
 
-The Visual Studio Code debugger can be useful in some situations. You can launch the application in debugging mode like this:
+O depurador do Visual Studio Code pode ser útil em algumas situações. Você pode iniciar a aplicação no modo de depuração assim:
 
-![screenshot showing how to launch debugger in vscode](../../images/3/35x.png)
+![captura de tela mostrando a forma de iniciar o depurador no VS Code](../../images/3/35x.png)
 
-Note that the application shouldn't be running in another console, otherwise the port will already be in use.
+Observe que a aplicação não deve estar em execução em outro console, caso contrário, a porta já estará em uso.
 
-__NB__ A newer version of Visual Studio Code may have _Run_ instead of _Debug_. Furthermore, you may have to configure your _launch.json_ file to start debugging. This can be done by choosing _Add Configuration..._ on the drop-down menu, which is located next to the green play button and above _VARIABLES_ menu, and select _Run "npm start" in a debug terminal_. For more detailed setup instructions, visit Visual Studio Code's [Debugging documentation](https://code.visualstudio.com/docs/editor/debugging).
+__N.B.:__ Uma versão mais recente do Visual Studio Code pode ter _Run_ em vez de _Debug_. Além disso, talvez você precise configurar seu arquivo _launch.json_ para iniciar a depuração. Isso pode ser feito escolhendo _Add Configuration..._ no menu, que está localizado ao lado do botão verde de reprodução e acima do menu _VARIABLES_, selecionando _Run "npm start" in a debug terminal_. Para instruções de configuração mais detalhadas, leia a [documentação sobre depuração](https://code.visualstudio.com/docs/editor/debugging) do Visual Studio Code.
 
-Below you can see a screenshot where the code execution has been paused in the middle of saving a new note:
+Abaixo você pode ver uma captura de tela onde a execução do código foi interrompida no meio do salvamento uma nova nota:
 
-![vscode screenshot of execution at a breakpoint](../../images/3/36x.png)
+![captura de tela do vscode mostrando a execução em um ponto de interrupção](../../images/3/36x.png)
 
-The execution stopped at the <i>breakpoint</i> in line 69. In the console, you can see the value of the <i>note</i> variable. In the top left window, you can see other things related to the state of the application.
+A execução parou no <i>ponto de interrupção</i> na linha 69. É possível ver no console o valor da variável <i>note</i>. Na janela superior esquerda, é possível ver outras coisas relacionadas ao estado da aplicação.
 
-The arrows at the top can be used for controlling the flow of the debugger.
+As setas na parte superior podem ser usadas para controlar o fluxo do depurador.
 
-For some reason, I don't use the Visual Studio Code debugger a whole lot.
+Por algum razão, eu não uso muito o depurador do Visual Studio Code.
 
-#### Chrome dev tools
+#### As Ferramentas do Desenvolvedor do Chrome
 
-Debugging is also possible with the Chrome developer console by starting your application with the command:
+Também é possível depurar o código com o Console do Desenvolvedor do Chrome, iniciando a aplicação com o comando:
 
 ```bash
 node --inspect index.js
 ```
 
-You can access the debugger by clicking the green icon - the node logo - that appears in the Chrome developer console:
+Você pode acessar o depurador clicando no ícone verde — o logotipo do Node — que aparece no console de desenvolvedor do Chrome:
 
-![dev tools with green node logo icon](../../images/3/37.png)
+![ferramentas do desenvolvedor com o logotipo verde do node](../../images/3/37.png)
 
-The debugging view works the same way as it did with React applications. The <i>Sources</i> tab can be used for setting breakpoints where the execution of the code will be paused.
+A visualização da depuração funciona da mesma maneira quando fazíamos com as aplicações React. A guia <i>Fontes</i> pode ser usada para definir pontos de interrupção onde a execução do código será pausada.
 
-![dev tools sources tab breakpoint and watch variables](../../images/3/38eb.png)
+![ferramentas do desenvolvedor - ponto de interrupção na guia fontes e variáveis sendo monitoradas](../../images/3/38eb.png)
 
-All of the application's <i>console.log</i> messages will appear in the <i>Console</i> tab of the debugger. You can also inspect values of variables and execute your own JavaScript code.
+Todas as mensagens do <i>console.log</i> da aplicação aparecerão na guia <i>Console</i> do depurador. Também é possível inspecionar valores de variáveis e executar seu próprio código JavaScript.
 
-![dev tools console tab showing note object typed in](../../images/3/39ea.png)
+![ferramentas do desenvolvedor - guia console mostrando o objeto de nota digitado](../../images/3/39ea.png)
 
-#### Question everything
+#### Questione tudo
 
-Debugging Full Stack applications may seem tricky at first. Soon our application will also have a database in addition to the frontend and backend, and there will be many potential areas for bugs in the application.
+Depurar aplicações Full Stack pode parecer complicado no início. Em breve, nossa aplicação também terá um banco de dados além do front-end e back-end, e haverá muitas áreas potenciais para erros na aplicação.
 
-When the application "does not work", we have to first figure out where the problem actually occurs. It's very common for the problem to exist in a place where you didn't expect it to, and it can take minutes, hours, or even days before you find the source of the problem.
+Quando a aplicação "não funciona", primeiro precisamos descobrir onde o problema realmente está. É muito comum que o problema exista em um lugar onde você não esperava, e pode levar minutos, horas ou até mesmo dias antes de encontrar a fonte do problema.
 
-The key is to be systematic. Since the problem can exist anywhere, <i>you must question everything</i>, and eliminate all possibilities one by one. Logging to the console, Postman, debuggers, and experience will help.
+A resposta é ser sistemático. Como o problema pode existir em qualquer lugar, <i>você deve questionar tudo</i> e eliminar todas as possibilidades uma por uma. Impressão de logs no console, Postman, depuradores e experiência ajudarão.
 
-When bugs occur, <i>the worst of all possible strategies</i> is to continue writing code. It will guarantee that your code will soon have even more bugs, and debugging them will be even more difficult. The [stop and fix](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) principle from Toyota Production Systems is very effective in this situation as well.
+Quando bugs acontecem, <i>a pior de todas as estratégias possíveis</i> é continuar escrevendo código. Isso garantirá que seu código gere ainda mais bugs em breve, e depurá-los será ainda mais difícil. O princípio [pare e corrija](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) do Toyota Production Systems também é muito eficaz nessa situação.
 
 ### MongoDB
 
-To store our saved notes indefinitely, we need a database. Most of the courses taught at the University of Helsinki use relational databases. In most parts of this course, we will use [MongoDB](https://www.mongodb.com/) which is a so-called [document database](https://en.wikipedia.org/wiki/Document-oriented_database).
+Para armazenar indefinidamente nossas notas que estão sendo salvas, precisamos de um banco de dados. A maioria dos cursos ministrados na Universidade de Helsinque usa bancos de dados relacionais. Usaremos na maior parte deste curso o [MongoDB](https://www.mongodb.com/), que é um tipo de [banco de dados de documentos](https://en.wikipedia.org/wiki/Document-oriented_database) (document database).
 
-The reason for using Mongo as the database is its lower complexity compared to a relational database. [Part 13](https://fullstackopen.com/en/part13) of the course shows how to build node.js backends that use a relational database.
+A razão para usar o Mongo como banco de dados é devido a sua menor complexidade em comparação com um banco de dados relacional. A [Parte 13](/pt/part13) do curso mostra como construir back-ends node.js que usam um banco de dados relacional.
 
-Document databases differ from relational databases in how they organize data as well as in the query languages they support. Document databases are usually categorized under the [NoSQL](https://en.wikipedia.org/wiki/NoSQL) umbrella term.
+Bancos de dados de documentos diferem de bancos de dados relacionais em como eles organizam dados, bem como nas linguagens de consulta (query languages) que suportam. Bancos de dados de documentos são geralmente categorizados sob o termo genérico [NoSQL](https://en.wikipedia.org/wiki/NoSQL) (Not Only SQL [Não Somente SQL]).
 
-You can read more about document databases and NoSQL from the course material for [week 7](https://tikape-s18.mooc.fi/part7/) of the Introduction to Databases course. Unfortunately, the material is currently only available in Finnish. 
+É possível ler mais sobre bancos de dados de documentos e NoSQL no material do curso para a [7ª semana](https://tikape-s18.mooc.fi/part7/) do curso de Introdução a Bancos de Dados. Infelizmente, o material está atualmente disponível apenas em finlandês.
 
-Read now the chapters on [collections](https://docs.mongodb.com/manual/core/databases-and-collections/) and [documents](https://docs.mongodb.com/manual/core/document/) from the MongoDB manual to get a basic idea of how a document database stores data.
+Leia agora os capítulos sobre [coleções](https://docs.mongodb.com/manual/core/databases-and-collections/) (collections) e [documentos](https://docs.mongodb.com/manual/core/document/) (documents) do manual do MongoDB para ter uma ideia básica de como um banco de dados de documentos armazena dados.
 
-Naturally, you can install and run MongoDB on your computer. However, the internet is also full of Mongo database services that you can use. Our preferred MongoDB provider in this course will be [MongoDB Atlas](https://www.mongodb.com/atlas/database).
+Naturalmente, é possível instalar e executar o MongoDB em seu computador. Porém, a internet também está cheia de serviços de banco de dados Mongo que você pode usar. O provedor MongoDB preferido neste curso será o [MongoDB Atlas](https://www.mongodb.com/atlas/database).
 
-Once you've created and logged into your account, let us start by selecting the free option:
+Depois de criar e fazer login em sua conta, vamos começar selecionando o plano gratuito:
 
-![mongodb deploy a cloud database free shared](../../images/3/mongo1.png)
+![implantação no mongodb um banco de dados em nuvem gratuito compartilhado](../../images/3/mongo1.png)
 
-Pick the cloud provider and location and create the cluster:
+Escolha o provedor de nuvem e a localização e crie o <i>cluster</i> (grupo, aglomerado):
 
-![mongodb picking shared, aws and region](../../images/3/mongo2.png)
+![escolha compartilhada do mongodb, aws e região](../../images/3/mongo2.png)
 
-Let's wait for the cluster to be ready for use. This can take some minutes.
+Vamos esperar o cluster ficar pronto para uso. Isso pode levar alguns minutos.
 
-**NB** do not continue before the cluster is ready.
+**N.B.:** não continue antes que o cluster esteja pronto.
 
-Let's use the <i>security</i> tab for creating user credentials for the database. Please note that these are not the same credentials you use for logging into MongoDB Atlas. These will be used for your application to connect to the database.
+Vamos usar a aba <i>security</i> (segurança) para criar credenciais de usuário para o banco de dados. Observe que essas não são as mesmas credenciais que você usa para fazer login no MongoDB Atlas. Essas serão usadas para que sua aplicação se conecte ao banco de dados.
 
-![mongodb security quickstart](../../images/3/mongo3.png)
+![início rápido de segurança do mongodb](../../images/3/mongo3.png)
 
-Next, we have to define the IP addresses that are allowed access to the database. For the sake of simplicity we will allow access from all IP addresses:
+Em seguida, temos que definir os endereços IP que têm permissão de acesso ao banco de dados. Visando simplicidade, permitiremos o acesso de todos os endereços IP:
 
-![mongodb network access/add ip access list](../../images/3/mongo4.png)
+![acesso à rede mongodb/adicionar lista de acesso ip](../../images/3/mongo4.png)
 
-Finally, we are ready to connect to our database. Start by clicking <i>connect</i>:
+Por fim, estamos prontos para nos conectar ao nosso banco de dados. Comece clicando em <i>connect</i> (conectar)...
 
 ![mongodb database deployment connect](../../images/3/mongo5.png)
 
-and choose: <i>Connect your application</i>:
+... e escolha: <i>Connect your application</i> (Conecte sua aplicação):
 
-![mongodb connect application](../../images/3/mongo6.png)
+![conexão à aplicação do mongodb](../../images/3/mongo6.png)
 
-The view displays the <i>MongoDB URI</i>, which is the address of the database that we will supply to the MongoDB client library we will add to our application.
+A visualização exibe o <i>URI do MongoDB</i>, que é o endereço do banco de dados que forneceremos à biblioteca-cliente do MongoDB que adicionaremos à nossa aplicação.
 
-The address looks like this:
+O endereço se parece com isso:
 
 ```js
 mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
 ```
 
-We are now ready to use the database.
+Estamos prontos para usar o banco de dados.
 
-We could use the database directly from our JavaScript code with the [official MongoDB Node.js driver](https://mongodb.github.io/node-mongodb-native/) library, but it is quite cumbersome to use. We will instead use the [Mongoose](http://mongoosejs.com/index.html) library that offers a higher-level API.
+Poderíamos usar o banco de dados diretamente do nosso código JavaScript com a biblioteca oficial [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/), mas ela é bastante complicada de usar. Em vez disso, usaremos a biblioteca [Mongoose](http://mongoosejs.com/index.html), que oferece uma API de alto nível.
 
-Mongoose could be described as an <i>object document mapper</i> (ODM), and saving JavaScript objects as Mongo documents is straightforward with this library.
+Mongoose poderia ser descrito como um <i>mapeador de documento-objeto</i> (ODM [object document mapper]), onde é possível salvar diretamente objetos JavaScript como documentos Mongo com esta biblioteca.
 
-Let's install Mongoose:
+Vamos instalar o Mongoose:
 
 ```bash
 npm install mongoose
 ```
 
-Let's not add any code dealing with Mongo to our backend just yet. Instead, let's make a practice application by creating a new file, <i>mongo.js</i>:
+Ainda não vamos adicionar nenhum código relacionado ao Mongo em nosso back-end. Em vez disso, vamos fazer uma aplicação prática criando um novo arquivo, <i>mongo.js</i>:
 
 ```js
 const mongoose = require('mongoose')
 
 if (process.argv.length<3) {
-  console.log('give password as argument')
+  console.log('give password as argument (insira a senha como argumento)')
   process.exit(1)
 }
 
@@ -157,47 +156,47 @@ const note = new Note({
 })
 
 note.save().then(result => {
-  console.log('note saved!')
+  console.log('note saved! (nota salva!)')
   mongoose.connection.close()
 })
 ```
 
-**NB:** Depending on which region you selected when building your cluster, the <i>MongoDB URI</i> may be different from the example provided above. You should verify and use the correct URI that was generated from MongoDB Atlas.
+**N.B.:** Dependendo da região que você selecionou ao criar seu cluster, o <i>URI do MongoDB</i> pode ser diferente do exemplo fornecido acima. Você deve verificar e usar o URI correto que foi gerado pelo MongoDB Atlas.
 
-The code also assumes that it will be passed the password from the credentials we created in MongoDB Atlas, as a command line parameter. We can access the command line parameter like this:
+O código também assume que será passada a senha das credenciais que criamos no MongoDB Atlas como um parâmetro de linha de comando. Podemos acessar o parâmetro da linha de comando assim:
 
 ```js
 const password = process.argv[2]
 ```
 
-When the code is run with the command <i>node mongo.js password</i>, Mongo will add a new document to the database.
+Quando o código é executado com o comando <i>node mongo.js password</i>, o Mongo adicionará um novo documento ao banco de dados.
 
-**NB:** Please note the password is the password created for the database user, not your MongoDB Atlas password.  Also, if you created a password with special characters, then you'll need to [URL encode that password](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password).
+**N.B.:** Observe que a senha usada é a senha criada para o usuário do banco de dados, não a senha do MongoDB Atlas. Além disso, se criou uma senha com caracteres especiais, então você precisará [codificar por cento sua senha](https://docs.atlas.mongodb.com/troubleshoot-connection/#special-characters-in-connection-string-password) (URL encoding).
 
-We can view the current state of the database from the MongoDB Atlas from <i>Browse collections</i>, in the Database tab.
+Podemos visualizar o estado atual do banco de dados do MongoDB Atlas a partir da guia <i>Browse collections</i>, na opção <i>Databases</i>.
 
-![mongodb databases browse collections button](../../images/3/mongo7.png)
+![botão de navegação de coleções de bancos de dados mongodb](../../images/3/mongo7.png)
 
-As the view states, the <i>document</i> matching the note has been added to the <i>notes</i> collection in the <i>myFirstDatabase</i> database.
+Como a visualização indica, o <i>document</i> (documento) correspondente à nota foi adicionado à coleção <i>notes</i> no banco de dados <i>myFirstDatabase</i>.
 
-![mongodb collections tab db myfirst app notes](../../images/3/mongo8new.png)
+![guia de coleções do mongodb - 'notes' no banco de dados 'myFirstDatabase'](../../images/3/mongo8new.png)
 
-Let's destroy the default database <i>test</i> and change the name of the database referenced in our connection string to <i>noteApp</i> instead, by modifying the URI:
+Vamos excluir o banco de dados padrão <i>test</i> e mudar o nome do banco de dados referenciado em nossa string de conexão para <i>noteApp</i>, modificando a URI:
 
 ```js
 const url =
   `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority`
 ```
 
-Let's run our code again:
+Vamos executar novamente nosso código:
 
-![mongodb collections tab noteApp notes](../../images/3/mongo9.png)
+![guia de coleções mongodb - 'noteApp notes'](../../images/3/mongo9.png)
 
-The data is now stored in the right database. The view also offers the <i>create database</i> functionality, that can be used to create new databases from the website. Creating a database like this is not necessary, since MongoDB Atlas automatically creates a new database when an application tries to connect to a database that does not exist yet.
+Os dados agora estão armazenados no banco de dados correto. A visualização também oferece a funcionalidade <i>create database</i> (criar banco de dados), que pode ser usada para criar novos bancos de dados a partir da plataforma. Não é necessário criar um banco de dados dessa forma, pois o MongoDB Atlas cria automaticamente um novo banco de dados quando uma aplicação tenta se conectar a um banco de dados que ainda não existe.
 
-### Schema
+### Esquema (Schema)
 
-After establishing the connection to the database, we define the [schema](http://mongoosejs.com/docs/guide.html) for a note and the matching [model](http://mongoosejs.com/docs/models.html):
+Depois de estabelecer a conexão com o banco de dados, definimos o [esquema](http://mongoosejs.com/docs/guide.html) (schema) para uma nota e o [modelo](http://mongoosejs.com/docs/models.html) (model) correspondente:
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -208,11 +207,27 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-First, we define the [schema](http://mongoosejs.com/docs/guide.html) of a note that is stored in the _noteSchema_ variable. The schema tells Mongoose how the note objects are to be stored in the database.
+Primeiro, definimos o [esquema](http://mongoosejs.com/docs/guide.html) de uma nota que é armazenada na variável _noteSchema_. O esquema informa ao Mongoose como os objetos de nota devem ser armazenados no banco de dados.
 
-In the _Note_ model definition, the first <i>"Note"</i> parameter is the singular name of the model. The name of the collection will be the lowercase plural <i>notes</i>, because the [Mongoose convention](http://mongoosejs.com/docs/models.html) is to automatically name collections as the plural (e.g. <i>notes</i>) when the schema refers to them in the singular (e.g. <i>Note</i>).
+Na definição do modelo _Note_, o primeiro parâmetro <i>"Note"</i> é o nome singular do modelo. O nome da coleção será o plural em minúsculo <i>notes</i>, porque a [convenção do Mongoose](http://mongoosejs.com/docs/models.html) é nomear automaticamente as coleções como o plural (por exemplo, <i>notes</i>) quando o esquema se refere a elas no singular (por exemplo, <i>Note</i>).
 
-Document databases like Mongo are <i>schemaless</i>, meaning that the database itself does not care about the structure of the data that is stored in the database. It is possible to store documents with completely different fields in the same collection.
+Bancos de dados de documentos como o Mongo são <i>schemaless</i> (sem esquema), o que significa que o banco de dados em si não se importa com a estrutura dos dados armazenados no banco de dados. É possível armazenar documentos com campos completamente diferentes na mesma coleção.
+
+
+
+
+
+
+
+^^^^
+### NÃO REVISADO
+
+
+
+
+
+
+
 
 The idea behind Mongoose is that the data stored in the database is given a <i>schema at the level of the application</i> that defines the shape of the documents stored in any given collection.
 
