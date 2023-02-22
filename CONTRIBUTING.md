@@ -11,4 +11,4 @@
 
 1. Prettify your code with `npm run format`
 2. Create a new branch for your changes
-3. Create the PR from that branch to the master branch
+3. Create the PR from that branch to the source branch
