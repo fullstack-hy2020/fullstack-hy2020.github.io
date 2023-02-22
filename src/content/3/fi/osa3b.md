@@ -316,7 +316,7 @@ Jotta uuden frontendin version generointi onnistuisi jatkossa ilman turhia manua
 
 #### Fly.io
 
-Skripit seuraavassa
+Fly.io:n tapauksessa skriptit näyttävät seuraavalta:
 
 ```json
 {
@@ -338,7 +338,7 @@ Huomaa, että skriptissä <i>build:ui</i> olevat polut riippuvat repositorioiden
 
 #### Render
 
-Renderin tapauksessa skriptit täyttävät seuraavalta
+Renderin tapauksessa skriptit näyttävät seuraavalta:
 
 ```json
 {
