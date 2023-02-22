@@ -574,7 +574,7 @@ In the example, the <i>first argument</i> is the target value.
 
 Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
-Cople of things to notice:
+Couple of things to notice:
 
 If you define helper functions in other modules, you should use the [JavaScript module system](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), that is, the one we have used with React where importing is done with
 
@@ -1028,11 +1028,11 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-We shall see later on in this part some techniques how the <i>any</i> typed data (eg. the input an app recieves from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
+We shall see later on in this part some techniques how the <i>any</i> typed data (eg. the input an app receives from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
 
 ### Type assertion
 
-Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet. Let us export the type Operation in <i>calcultor.ts</i>:
+Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet. Let us export the type Operation in <i>calculator.ts</i>:
 
 ```js
 export type Operation = 'multiply' | 'add' | 'divide';

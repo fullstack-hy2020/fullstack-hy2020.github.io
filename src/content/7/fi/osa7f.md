@@ -63,17 +63,17 @@ Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
 Muuta tässä tehtävässä notifikaation tilanhallinta tapahtumaan käyttäen useReducer-hookia ja contextia.
 
-#### 7.11: React Query ja context step1
+#### 7.11: React Query ja context step2
 
 Siirrä blogien tietojen hallinnointi tapahtumaan React Query -kirjastoa hyväksikäyttäen. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogin luominen onnistuu.
 
 Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa kannattaa hallita edelleen Reactin tilan avulla.
 
-#### 7.12: React Query ja context step1
+#### 7.12: React Query ja context step3
 
 Laajenna ratkaisua siten, että blogien "liketys" ja poisto toimivat.
 
-#### 7.13: React Query ja context step1
+#### 7.13: React Query ja context step4
 
 Siirrä myös kirjautuneen käyttäjän tietojen hallinnointi tapahtumaan useReducer-hookin ja contextin avulla.
 
