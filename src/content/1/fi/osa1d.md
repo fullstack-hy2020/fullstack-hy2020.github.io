@@ -254,6 +254,96 @@ const App = () => {
 
 Taulukolle _allClicks_ kutsutaan metodia [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join), joka muodostaa taulukosta merkkijonon, joka sisältää taulukon alkiot erotettuina parametrina olevalla merkillä eli välilyönnillä.
 
+
+### Tilan päivitys tapahtuu asynkronisesti
+
+Laajennetaan sovellusta siten, että se pitää kirjaa nappien painallusten yhteenlasketusta määrästä tilassa _total_, jonka arvoa päivitetään aina nappien painalluksen yhteydessä:
+
+```js
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0) // highlight-line
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p>
+      <p>total {total}</p>  // highlight-line
+    </div>
+  )
+}
+```
+
+Ratkaisu toimii melkein:
+
+![](../../images/1/33.png)
+
+Jostain syystä napien painellusten yhteenlaskettu määrä näyttää koko ajan yhtä liian vähän.
+
+Lisätään tapahtumankäsittelijään muutama console.log:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    console.log('left before', left)  // highlight-line
+    setLeft(left + 1)
+    console.log('left after', left)  // highlight-line
+    setTotal(left + right) 
+  }
+
+  // ...
+}
+```
+
+Konsoli paljastaa ongelman
+
+![](../../images/1/32.png)
+
+Vaikka tilalle _left_ asetettiin uusi arvo kutsumalla _setLeft(left + 1)_ on tilalla siis tapahtumankäsittelijän sisällä edelleen vanha arvo päivityksestä huolimatta! Tämän takia seuraava takia nappien painallusten laskuyritys tuottaa aina yhtä liian pienen tuloksen:
+
+```js
+setTotal(left + right) 
+```
+
+Syynä ilmiöön on se, että tilan päivitys tapahtuu Reactissa [asynkronisesti](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous), eli "jossain vaiheessa" ennen kuin komponentti renderöidään uudelleen, ei kuitenkaan välittömästi.
+
+Saamme korjattua sovelluksen seuraavasti:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft + right) 
+  }
+
+  // ...
+}
+```
+
+Eli nyt nappien määrän summa perustuu varmasti oikeaan määrään vasemman napin painalluksia.
+
 ### Ehdollinen renderöinti
 
 Muutetaan sovellusta siten, että painallushistorian renderöinnistä vastaa komponentti _History_:
