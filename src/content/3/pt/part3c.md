@@ -21,13 +21,13 @@ O depurador do Visual Studio Code pode ser útil em algumas situações. Você p
 
 Observe que a aplicação não deve estar em execução em outro console, caso contrário, a porta já estará em uso.
 
-__N.B.:__ Uma versão mais recente do Visual Studio Code pode ter _Run_ em vez de _Debug_. Além disso, talvez você precise configurar seu arquivo _launch.json_ para iniciar a depuração. Isso pode ser feito escolhendo _Add Configuration..._ no menu, que está localizado ao lado do botão verde de reprodução e acima do menu _VARIABLES_, selecionando _Run "npm start" in a debug terminal_. Para instruções de configuração mais detalhadas, leia a [documentação sobre depuração](https://code.visualstudio.com/docs/editor/debugging) do Visual Studio Code.
+__N.B.:__ Uma versão mais recente do Visual Studio Code pode ter _Run_ em vez de _Debug_. Além disso, talvez você precise configurar seu arquivo _launch.json_ para iniciar a depuração. Isso pode ser feito selecionando _Add Configuration..._ no menu, que está localizado ao lado do botão verde de play e acima do menu _VARIABLES_, selecionando _Run "npm start" in a debug terminal_. Para instruções de configuração mais detalhadas, leia a [documentação sobre depuração](https://code.visualstudio.com/docs/editor/debugging) do Visual Studio Code.
 
 Abaixo você pode ver uma captura de tela onde a execução do código foi interrompida no meio do salvamento uma nova nota:
 
-![captura de tela do vscode mostrando a execução em um ponto de interrupção](../../images/3/36x.png)
+![captura de tela do vscode mostrando a execução em um ponto de parada(../../images/3/36x.png)
 
-A execução parou no <i>ponto de interrupção</i> na linha 69. É possível ver no console o valor da variável <i>note</i>. Na janela superior esquerda, é possível ver outras coisas relacionadas ao estado da aplicação.
+A execução parou no <i>ponto de parada</i> (breakpoint) na linha 69. É possível ver no console o valor da variável <i>note</i>. Na janela superior esquerda, é possível ver outras coisas relacionadas ao estado da aplicação.
 
 As setas na parte superior podem ser usadas para controlar o fluxo do depurador.
 
@@ -41,11 +41,11 @@ Também é possível depurar o código com o Console do Desenvolvedor do Chrome,
 node --inspect index.js
 ```
 
-Você pode acessar o depurador clicando no ícone verde — o logotipo do Node — que aparece no console de desenvolvedor do Chrome:
+É possível acessar o depurador clicando no ícone verde — o logotipo do Node — que aparece no console de desenvolvedor do Chrome:
 
 ![ferramentas do desenvolvedor com o logotipo verde do node](../../images/3/37.png)
 
-A visualização da depuração funciona da mesma maneira quando fazíamos com as aplicações React. A guia <i>Fontes</i> pode ser usada para definir pontos de interrupção onde a execução do código será pausada.
+A visualização da depuração funciona da mesma maneira que fazíamos com as aplicações React. A guia <i>Fontes</i> (Sources) pode ser usada para definir pontos de parada onde a execução do código será pausada.
 
 ![ferramentas do desenvolvedor - ponto de interrupção na guia fontes e variáveis sendo monitoradas](../../images/3/38eb.png)
 
@@ -53,21 +53,21 @@ Todas as mensagens do <i>console.log</i> da aplicação aparecerão na guia <i>C
 
 ![ferramentas do desenvolvedor - guia console mostrando o objeto de nota digitado](../../images/3/39ea.png)
 
-#### Questione tudo
+#### Questione tudo!
 
 Depurar aplicações Full Stack pode parecer complicado no início. Em breve, nossa aplicação também terá um banco de dados além do front-end e back-end, e haverá muitas áreas potenciais para erros na aplicação.
 
-Quando a aplicação "não funciona", primeiro precisamos descobrir onde o problema realmente está. É muito comum que o problema exista em um lugar onde você não esperava, e pode levar minutos, horas ou até mesmo dias antes de encontrar a fonte do problema.
+Quando a aplicação "não funciona", primeiro precisamos descobrir onde o problema realmente está. É muito comum que o problema esteja em um lugar onde você menos esperava, e pode levar minutos, horas ou até mesmo dias antes de encontrar a fonte do problema.
 
 A resposta é ser sistemático. Como o problema pode existir em qualquer lugar, <i>você deve questionar tudo</i> e eliminar todas as possibilidades uma por uma. Impressão de logs no console, Postman, depuradores e experiência ajudarão.
 
-Quando bugs acontecem, <i>a pior de todas as estratégias possíveis</i> é continuar escrevendo código. Isso garantirá que seu código gere ainda mais bugs em breve, e depurá-los será ainda mais difícil. O princípio [pare e corrija](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) do Toyota Production Systems também é muito eficaz nessa situação.
+Quando bugs acontecem, <i>a pior de todas as estratégias possíveis</i> é continuar escrevendo mais código. Isso garantirá que seu código gere ainda mais bugs para frente, e depurá-los será ainda mais difícil. O princípio [pare e corrija](http://gettingtolean.com/toyota-principle-5-build-culture-stopping-fix/) do <i>Toyota Production Systems</i> também é muito eficaz nessa situação.
 
 ### MongoDB
 
-Para armazenar indefinidamente nossas notas que estão sendo salvas, precisamos de um banco de dados. A maioria dos cursos ministrados na Universidade de Helsinque usa bancos de dados relacionais. Usaremos na maior parte deste curso o [MongoDB](https://www.mongodb.com/), que é um tipo de [banco de dados de documentos](https://en.wikipedia.org/wiki/Document-oriented_database) (document database).
+Para armazenar indefinidamente nossas notas que estão sendo salvas, precisamos de um banco de dados. A maioria dos cursos ministrados na Universidade de Helsinque utiliza bancos de dados relacionais. Usaremos na maior parte deste curso o [MongoDB](https://www.mongodb.com/), que é um tipo de [banco de dados de documentos](https://en.wikipedia.org/wiki/Document-oriented_database) (document database).
 
-A razão para usar o Mongo como banco de dados é devido a sua menor complexidade em comparação com um banco de dados relacional. A [Parte 13](/pt/part13) do curso mostra como construir back-ends node.js que usam um banco de dados relacional.
+A razão para usar o Mongo como banco de dados é devido a sua menor complexidade em comparação com um banco de dados relacional. A [Parte 13](/pt/part13) do curso mostra como construir back-ends em Node.js que usam um banco de dados relacional.
 
 Bancos de dados de documentos diferem de bancos de dados relacionais em como eles organizam dados, bem como nas linguagens de consulta (query languages) que suportam. Bancos de dados de documentos são geralmente categorizados sob o termo genérico [NoSQL](https://en.wikipedia.org/wiki/NoSQL) (Not Only SQL [Não Somente SQL]).
 
@@ -89,7 +89,7 @@ Vamos esperar o cluster ficar pronto para uso. Isso pode levar alguns minutos.
 
 **N.B.:** não continue antes que o cluster esteja pronto.
 
-Vamos usar a aba <i>security</i> (segurança) para criar credenciais de usuário para o banco de dados. Observe que essas não são as mesmas credenciais que você usa para fazer login no MongoDB Atlas. Essas serão usadas para que sua aplicação se conecte ao banco de dados.
+Vamos usar a guia <i>security</i> (segurança) para criar credenciais de usuário para o banco de dados. Observe que essas não são as mesmas credenciais que você usa para fazer login no MongoDB Atlas. Essas serão usadas para que sua aplicação se conecte ao banco de dados.
 
 ![início rápido de segurança do mongodb](../../images/3/mongo3.png)
 
@@ -105,7 +105,7 @@ Por fim, estamos prontos para nos conectar ao nosso banco de dados. Comece clica
 
 ![conexão à aplicação do mongodb](../../images/3/mongo6.png)
 
-A visualização exibe o <i>URI do MongoDB</i>, que é o endereço do banco de dados que forneceremos à biblioteca-cliente do MongoDB que adicionaremos à nossa aplicação.
+A imagem exibe o <i>URI do MongoDB</i>, que é o endereço do banco de dados que forneceremos à biblioteca-cliente do MongoDB que adicionaremos à nossa aplicação.
 
 O endereço se parece com isso:
 
@@ -117,7 +117,7 @@ Estamos prontos para usar o banco de dados.
 
 Poderíamos usar o banco de dados diretamente do nosso código JavaScript com a biblioteca oficial [MongoDB Node.js Driver](https://mongodb.github.io/node-mongodb-native/), mas ela é bastante complicada de usar. Em vez disso, usaremos a biblioteca [Mongoose](http://mongoosejs.com/index.html), que oferece uma API de alto nível.
 
-Mongoose poderia ser descrito como um <i>mapeador de documento-objeto</i> (ODM [object document mapper]), onde é possível salvar diretamente objetos JavaScript como documentos Mongo com esta biblioteca.
+Mongoose poderia ser descrito como um <i>mapeador de documento-objeto</i> (ODM [object document mapper]), onde é possível, com esta biblioteca, salvar diretamente objetos JavaScript como documentos Mongo.
 
 Vamos instalar o Mongoose:
 
@@ -177,11 +177,11 @@ Podemos visualizar o estado atual do banco de dados do MongoDB Atlas a partir da
 
 ![botão de navegação de coleções de bancos de dados mongodb](../../images/3/mongo7.png)
 
-Como a visualização indica, o <i>document</i> (documento) correspondente à nota foi adicionado à coleção <i>notes</i> no banco de dados <i>myFirstDatabase</i>.
+Como a imagem indica, o <i>document</i> (documento) correspondente à nota foi adicionado à coleção <i>notes</i> no banco de dados <i>myFirstDatabase</i>.
 
 ![guia de coleções do mongodb - 'notes' no banco de dados 'myFirstDatabase'](../../images/3/mongo8new.png)
 
-Vamos excluir o banco de dados padrão <i>test</i> e mudar o nome do banco de dados referenciado em nossa string de conexão para <i>noteApp</i>, modificando a URI:
+Vamos excluir o banco de dados padrão <i>test</i> e mudar o nome do banco de dados referenciado em nossa string de conexão para <i>noteApp</i>, modificando o URI:
 
 ```js
 const url =
@@ -209,61 +209,45 @@ const Note = mongoose.model('Note', noteSchema)
 
 Primeiro, definimos o [esquema](http://mongoosejs.com/docs/guide.html) de uma nota que é armazenada na variável _noteSchema_. O esquema informa ao Mongoose como os objetos de nota devem ser armazenados no banco de dados.
 
-Na definição do modelo _Note_, o primeiro parâmetro <i>"Note"</i> é o nome singular do modelo. O nome da coleção será o plural em minúsculo <i>notes</i>, porque a [convenção do Mongoose](http://mongoosejs.com/docs/models.html) é nomear automaticamente as coleções como o plural (por exemplo, <i>notes</i>) quando o esquema se refere a elas no singular (por exemplo, <i>Note</i>).
+Na definição do modelo _Note_, o primeiro parâmetro <i>"Note"</i> é o nome singular do modelo. O nome da coleção será o plural <i>notes</i> em minúsculo, porque a [convenção do Mongoose](http://mongoosejs.com/docs/models.html) estabelece a nomeação automática de coleções com o seu plural (por exemplo, <i>notes</i>) quando o esquema se refere a elas no singular (por exemplo, <i>Note</i>).
 
 Bancos de dados de documentos como o Mongo são <i>schemaless</i> (sem esquema), o que significa que o banco de dados em si não se importa com a estrutura dos dados armazenados no banco de dados. É possível armazenar documentos com campos completamente diferentes na mesma coleção.
 
+A ideia por trás do Mongoose é que os dados armazenados no banco de dados recebam um <i>esquema no nível da aplicação</i> que define a forma dos documentos armazenados em qualquer coleção.
 
+### Criando e salvando objetos
 
-
-
-
-
-^^^^
-### NÃO REVISADO
-
-
-
-
-
-
-
-
-The idea behind Mongoose is that the data stored in the database is given a <i>schema at the level of the application</i> that defines the shape of the documents stored in any given collection.
-
-### Creating and saving objects
-
-Next, the application creates a new note object with the help of the <i>Note</i> [model](http://mongoosejs.com/docs/models.html):
+Em seguida, a aplicação cria um novo objeto de nota com a ajuda do [modelo](http://mongoosejs.com/docs/models.html) <i>Note</i>:
 
 ```js
 const note = new Note({
-  content: 'HTML is Easy',
+  content: 'HTML é fácil',
   important: false,
 })
 ```
 
-Models are so-called <i>constructor functions</i> that create new JavaScript objects based on the provided parameters. Since the objects are created with the model's constructor function, they have all the properties of the model, which include methods for saving the object to the database.
+Modelos são chamados de <i>funções construtoras</i> (constructor functions) que criam novos objetos JavaScript com base nos parâmetros fornecidos. Como os objetos são criados com a função construtora do modelo, eles herdam todas as propriedades do modelo, que incluem métodos para salvar o objeto no banco de dados.
 
-Saving the object to the database happens with the appropriately named _save_ method, which can be provided with an event handler with the _then_ method:
+O salvamento do objeto no banco de dados ocorre com o método apropriadamente chamado _save_, que pode ser fornecido com um gerenciador de evento com o método _then_:
 
 ```js
 note.save().then(result => {
-  console.log('note saved!')
+  console.log('note saved! (nota salva!)')
   mongoose.connection.close()
 })
 ```
 
-When the object is saved to the database, the event handler provided to _then_  gets called. The event handler closes the database connection with the command <code>mongoose.connection.close()</code>. If the connection is not closed, the program will never finish its execution.
+Quando o objeto é salvo no banco de dados, o gerenciador de evento fornecido para _then_ é chamado. O gerenciador de evento fecha a conexão do banco de dados com o comando <code>mongoose.connection.close()</code>. Se a conexão não for fechada, o programa nunca terminará sua execução.
 
-The result of the save operation is in the _result_ parameter of the event handler. The result is not that interesting when we're storing one object in the database. You can print the object to the console if you want to take a closer look at it while implementing your application or during debugging.
+O resultado da operação de salvamento está no parâmetro _result_ do gerenciador de evento. O resultado não é lá muito interessante quando estamos armazenando um objeto no banco de dados. Você pode imprimir o objeto no console se quiser examiná-lo mais de perto enquanto implementa sua aplicação ou durante a depuração.
 
-Let's also save a few more notes by modifying the data in the code and by executing the program again.
+Vamos também salvar algumas notas adicionais modificando os dados no código e executando o programa novamente.
 
-**NB:** Unfortunately the Mongoose documentation is not very consistent, with parts of it using callbacks in its examples and other parts, other styles, so it is not recommended to copy and paste code directly from there. Mixing promises with old-school callbacks in the same code is not recommended. 
+**N.B.:** Infelizmente, a documentação do Mongoose não é muito consistente: usam callbacks em alguns de seus exemplos; em outras partes, outros estilos. Portanto, não é recomendado copiar e colar o código diretamente de lá. Misturar promessas com callbacks antigos no mesmo código não é recomendado. 
 
-### Fetching objects from the database
+### Recuperando objetos do banco de dados
 
-Let's comment out the code for generating new notes and replace it with the following:
+Vamos comentar o código que gera novas notas e adicionemos o seguinte:
 
 ```js
 Note.find({}).then(result => {
@@ -274,15 +258,15 @@ Note.find({}).then(result => {
 })
 ```
 
-When the code is executed, the program prints all the notes stored in the database:
+Quando o código é executado, o programa imprime todas as notas armazenadas no banco de dados:
 
-![node mongo.js outputs notes as JSON](../../images/3/70new.png)
+![node mongo.js imprime notas no formato JSON](../../images/3/70new.png)
 
-The objects are retrieved from the database with the [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) method of the _Note_ model. The parameter of the method is an object expressing search conditions. Since the parameter is an empty object<code>{}</code>, we get all of the notes stored in the  _notes_ collection.
+Os objetos são recuperados do banco de dados com o método [find](https://mongoosejs.com/docs/api/model.html#model_Model-find) do modelo _Note_. O parâmetro do método é um objeto que expressa condições de pesquisa. Como o parâmetro é um objeto vazio<code>{}</code>, obtemos todas as notas armazenadas na coleção  _notes_.
 
-The search conditions adhere to the Mongo search query [syntax](https://docs.mongodb.com/manual/reference/operator/).
+As condições de pesquisa aderem à [sintaxe](https://docs.mongodb.com/manual/reference/operator/) (syntax) de consulta do Mongo.
 
-We could restrict our search to only include important notes like this:
+Podemos restringir nossa pesquisa incluíndo apenas notas importantes:
 
 ```js
 Note.find({ important: true }).then(result => {
@@ -294,41 +278,41 @@ Note.find({ important: true }).then(result => {
 
 <div class="tasks">
 
-### Exercise 3.12.
+### Exercício 3.12
 
 #### 3.12: Command-line database
 
-Create a cloud-based MongoDB database for the phonebook application with MongoDB Atlas. 
+Crie um banco de dados MongoDB em nuvem (ou baseado na nuvem) com o MongoDB Atlas para a aplicação da lista telefônica.
 
-Create a <i>mongo.js</i> file in the project directory, that can be used for adding entries to the phonebook, and for listing all of the existing entries in the phonebook.
+Crie um arquivo <i>mongo.js</i> no diretório do projeto, que pode ser usado para adicionar entradas à lista telefônica e listar todas as entradas existentes na lista telefônica.
 
-**NB:** Do not include the password in the file that you commit and push to GitHub! 
+**N.B.:** Não inclua sua senha no arquivo que você enviará ao GitHub!
 
-The application should work as follows. You use the program by passing three command-line arguments (the first is the password), e.g.:
+A aplicação deve funcionar da seguinte maneira: o programa é usado através de três argumentos de linha de comando (o primeiro é a senha). Por exemplo:
 
 ```bash
-node mongo.js yourpassword Anna 040-1234556
+node mongo.js suasenha Anna 040-1234556
 ```
 
-As a result, the application will print:
+Como resultado, a aplicação imprimirá:
 
 ```bash
 added Anna number 040-1234556 to phonebook
 ```
 
-The new entry to the phonebook will be saved to the database. Notice that if the name contains whitespace characters, it must be enclosed in quotes:
+A nova entrada na lista telefônica será salva no banco de dados. Observe que, se o nome contiver caracteres de espaço em branco, o mesmo deverá ser colocado entre aspas:
 
 ```bash
-node mongo.js yourpassword "Arto Vihavainen" 045-1232456
+node mongo.js suasenha "Arto Vihavainen" 045-1232456
 ```
 
-If the password is the only parameter given to the program, meaning that it is invoked like this:
+Se a senha for o único parâmetro fornecido ao programa, ou seja, se for chamado assim...
 
 ```bash
-node mongo.js yourpassword
+node mongo.js suasenha
 ```
 
-Then the program should display all of the entries in the phonebook:
+... o programa deverá exibir todas as entradas da lista telefônica:
 
 <pre>
 phonebook:
@@ -337,9 +321,9 @@ Arto Vihavainen 045-1232456
 Ada Lovelace 040-1231236
 </pre>
 
-You can get the command-line parameters from the [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv) variable.
+É possível obter os parâmetros da linha de comando através da variável [process.argv](https://nodejs.org/docs/latest-v8.x/api/process.html#process_process_argv).
 
-**NB: do not close the connection in the wrong place**. E.g. the following code will not work:
+**N.B.: não encerre a conexão no lugar errado**. Por exemplo, o código a seguir não funcionará:
 
 ```js
 Person
@@ -351,9 +335,9 @@ Person
 mongoose.connection.close()
 ```
 
-In the code above the <i>mongoose.connection.close()</i> command will get executed immediately after the <i>Person.find</i> operation is started. This means that the database connection will be closed immediately, and the execution will never get to the point where <i>Person.find</i> operation finishes and the <i>callback</i> function gets called.
+No código acima, o comando <code>mongoose.connection.close()</code> será executado imediatamente após a operação <i>Person.find</i> ser iniciada. Isso significa que a conexão com o banco de dados será fechada imediatamente, e a execução nunca chegará ao ponto em que a operação <i>Person.find</i> termina e a função <i>callback</i> é chamada.
 
-The correct place for closing the database connection is at the end of the callback function:
+O local correto para fechar a conexão com o banco de dados é no final da função <i>callback</i>:
 
 ```js
 Person
@@ -364,22 +348,22 @@ Person
   })
 ```
 
-**NB:** If you define a model with the name <i>Person</i>, mongoose will automatically name the associated collection as <i>people</i>.
+**N.B.:** Se você definir um modelo com o nome <i>Person</i>, o mongoose nomeará automaticamente a coleção associada como <i>people</i>.
 
 </div>
 
 <div class="content">
 
-### Connecting the backend to a database
+### Conectando o back-end a um banco de dados
 
-Now we have enough knowledge to start using Mongo in our application.
+Agora temos conhecimento suficiente para começar a usar o Mongo em nossa aplicação.
 
-Let's get a quick start by copy-pasting the Mongoose definitions to the <i>index.js</i> file:
+Vamos rapidamente copiar e colar as definições do Mongoose no arquivo <i>index.js</i>:
 
 ```js
 const mongoose = require('mongoose')
 
-// DO NOT SAVE YOUR PASSWORD TO GITHUB!!
+// NÃO SALVE SUA SENHA NO GITHUB!!
 const url =
   `mongodb+srv://fullstack:${password}@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority`
 
@@ -394,7 +378,7 @@ const noteSchema = new mongoose.Schema({
 const Note = mongoose.model('Note', noteSchema)
 ```
 
-Let's change the handler for fetching all notes to the following form:
+Vamos mudar o gerenciador para buscar todas as notas da seguinte forma:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -404,17 +388,17 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-We can verify in the browser that the backend works for displaying all of the documents:
+Podemos verificar no navegador que o back-end funciona na medida em que exibe todos os documentos:
 
-![api/notes in browser shows notes in JSON](../../images/3/44ea.png)
+![o endereço 'api/notes' no navegador mostra as notas em formato JSON](../../images/3/44ea.png)
 
-The application works almost perfectly. The frontend assumes that every object has a unique id in the <i>id</i> field. We also don't want to return the mongo versioning field <i>\_\_v</i> to the frontend.
+A aplicação funciona quase perfeitamente. O front-end assume que cada objeto tem um id único no campo <i>id</i>. Também não queremos retornar o campo de versionamento do Mongo <i>\_\_v</i> para o front-end.
 
-One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schema.
-  
-To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See https://mongoosejs.com/docs/guide.html#toJSON and  https://mongoosejs.com/docs/api.html#document_Document-toObject for more info on the toJSON option.
-  
-see https://mongoosejs.com/docs/api.html#transform for more info on the transform function.
+Uma maneira de formatar os objetos retornados pelo Mongoose é [modificar](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) (modify) o método _toJSON_ do esquema, que é usado em todas as instâncias dos modelos produzidos com esse esquema.
+
+Para modificar o método, precisamos alterar as opções configuráveis ​​do esquema. As opções podem ser alteradas usando o método _set_ do esquema. Entre aqui para obter mais informações sobre este método: https://mongoosejs.com/docs/guide.html#options. Veja https://mongoosejs.com/docs/guide.html#toJSON e https://mongoosejs.com/docs/api.html#document_Document-toObject para obter mais informações sobre a opção _toJSON_.
+
+Entre no link https://mongoosejs.com/docs/api.html#transform para obter mais informações sobre a função de transformação (transform function).
 
 ```js
 noteSchema.set('toJSON', {
@@ -426,9 +410,9 @@ noteSchema.set('toJSON', {
 })
 ```
 
-Even though the <i>\_id</i> property of Mongoose objects looks like a string, it is in fact an object. The _toJSON_ method we defined transforms it into a string just to be safe. If we didn't make this change, it would cause more harm to us in the future once we start writing tests.
+Embora a propriedade <i>\_id</i> dos objetos Mongoose pareça uma string, na verdade é um objeto. O método _toJSON_ que definimos transforma-o em uma string como garantia. Se não fizéssemos essa mudança, isso nos causaria mais problemas no futuro quando começássemos a escrever testes.
 
-No changes are needed in the handler:
+Nenhuma mudança é necessária no gerenciador:
 
 ```js
 app.get('/api/notes', (request, response) => {
@@ -438,13 +422,13 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-the code uses automatically the defined _toJSON_ when formatting notes to the response.
+O código usa automaticamente o já definido _toJSON_ quando formata as notas para serem enviadas como resposta.
 
-### Database configuration into its own module
+### A configuração do banco de dados em seu próprio módulo
 
-Before we refactor the rest of the backend to use the database, let's extract the Mongoose-specific code into its own module.
+Antes de refatorarmos o restante do back-end para usar o banco de dados, vamos extrair o código específico do Mongoose em seu próprio módulo.
 
-Let's create a new directory for the module called <i>models</i>, and add a file called <i>note.js</i>:
+Vamos criar um novo diretório para o módulo chamado <i>models</i>, onde adicionaremos um arquivo chamado <i>note.js</i>:
 
 ```js
 const mongoose = require('mongoose')
@@ -453,15 +437,15 @@ mongoose.set('strictQuery', false)
 
 const url = process.env.MONGODB_URI // highlight-line
 
-console.log('connecting to', url) // highlight-line
+console.log('connecting to (conectando em)', url) // highlight-line
 
 mongoose.connect(url)
 // highlight-start
   .then(result => {
-    console.log('connected to MongoDB')
+    console.log('connected to MongoDB (Conectado ao MongoDB)')
   })
   .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
+    console.log('error connecting to MongoDB (Erro ao conectar ao MongoDB):', error.message)
   })
 // highlight-end
 
@@ -481,68 +465,68 @@ noteSchema.set('toJSON', {
 module.exports = mongoose.model('Note', noteSchema) // highlight-line
 ```
 
-Defining Node [modules](https://nodejs.org/docs/latest-v8.x/api/modules.html) differs slightly from the way of defining [ES6 modules](/en/part2/rendering_a_collection_modules#refactoring-modules) in part 2.
+A definição de [módulos](https://nodejs.org/docs/latest-v8.x/api/modules.html) do Node difere um pouco da maneira de definir [módulos ES6](/pt/part2/renderizacao_de_uma_colecao_e_modulos#refatorando-modulos) da Parte 2.
 
-The public interface of the module is defined by setting a value to the _module.exports_ variable. We will set the value to be the <i>Note</i> model. The other things defined inside of the module, like the variables _mongoose_ and _url_ will not be accessible or visible to users of the module.
+A interface pública do módulo é estabelecida ao definir um valor para a variável _module.exports_. Vamos definir o valor como o modelo <i>Note</i>. As outras coisas definidas dentro do módulo, como as variáveis _mongoose_ e _url_, não serão acessíveis ou visíveis para os usuários do módulo.
 
-Importing the module happens by adding the following line to <i>index.js</i>:
+A importação do módulo acontece adicionando a seguinte linha no arquivo <i>index.js</i>:
 
 ```js
 const Note = require('./models/note')
 ```
 
-This way the _Note_ variable will be assigned to the same object that the module defines.
+Dessa forma, a variável _Note_ será atribuída ao mesmo objeto que o módulo define.
 
-The way that the connection is made has changed slightly:
+A forma como a conexão é feita mudou um pouco:
 
 ```js
 const url = process.env.MONGODB_URI
 
-console.log('connecting to', url)
+console.log('connecting to (conectando em)', url)
 
 mongoose.connect(url)
   .then(result => {
-    console.log('connected to MongoDB')
+    console.log('connected to MongoDB (Conectado ao MongoDB)')
   })
   .catch((error) => {
-    console.log('error connecting to MongoDB:', error.message)
+    console.log('error connecting to MongoDB (Erro ao conectar ao MongoDB):', error.message)
   })
 ```
 
-It's not a good idea to hardcode the address of the database into the code, so instead the address of the database is passed to the application via the <em>MONGODB_URI</em> environment variable.
+Não é uma boa ideia colocar o endereço do banco de dados no código; então, em vez disso, o endereço do banco de dados é passado para a aplicação através da variável de ambiente <em>MONGODB_URI</em>.
 
-The method for establishing the connection is now given functions for dealing with a successful and unsuccessful connection attempt. Both functions just log a message to the console about the success status:
+Agora, o método para estabelecer a conexão recebe funções para lidar com uma tentativa de conexão bem-sucedida e mal-sucedida. Ambas as funções registram apenas uma mensagem no console sobre o status de sucesso:
 
-![node output when wrong username/password](../../images/3/45e.png)
+![saída do Node quando nome de usuário/senha são incorretos](../../images/3/45e.png)
 
-There are many ways to define the value of an environment variable. One way would be to define it when the application is started:
+Existem muitas maneiras de definir o valor de uma variável de ambiente. Uma maneira seria defini-la quando a aplicação é iniciada:
 
 ```bash
 MONGODB_URI=address_here npm run dev
 ```
 
-A more sophisticated way is to use the [dotenv](https://github.com/motdotla/dotenv#readme) library. You can install the library with the command:
+Uma maneira mais sofisticada é usar a biblioteca [dotenv](https://github.com/motdotla/dotenv#readme). É possível instalá-la com o comando:
 
 ```bash
 npm install dotenv
 ```
 
-To use the library, we create a <i>.env</i> file at the root of the project. The environment variables are defined inside of the file, and it can look like this:
+Para usar a biblioteca, criamos um arquivo <i>.env</i> na raiz do projeto. As variáveis de ambiente são definidas dentro do arquivo, coisa que se parece assim:
 
 ```bash
 MONGODB_URI=mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority
 PORT=3001
 ```
 
-We also added the hardcoded port of the server into the <em>PORT</em> environment variable.
+Também adicionamos a porta indicada do servidor na variável de ambiente <em>PORT</em>.
 
-**The <i>.env</i> file should be gitignored right away since we do not want to publish any confidential information publicly online!**
+**O arquivo <i>.env</i> deve ser ignorado (adicionado ao arquivo .gitignore) imediatamente, pois não queremos publicar informações confidenciais na internet!**
 
-![.gitignore in vscode with .env line added](../../images/3/45ae.png)
+![.gitignore no vscode com a linha .env adicionada](../../images/3/45ae.png)
 
-The environment variables defined in the <i>.env</i> file can be taken into use with the expression <em>require('dotenv').config()</em> and you can reference them in your code just like you would reference normal environment variables, with the familiar <em>process.env.MONGODB_URI</em> syntax.
+As variáveis de ambiente definidas no arquivo <i>.env</i> podem ser utilizadas com a expressão <em>require('dotenv').config()</em>, onde é possível se referir a elas em seu código da mesma maneira que você se refere a variáveis de ambiente normais, com a já familiar sintaxe <em>process.env.MONGODB_URI</em>.
 
-Let's change the <i>index.js</i> file in the following way:
+Vamos mudar o arquivo <i>index.js</i> da seguinte maneira:
 
 ```js
 require('dotenv').config() // highlight-line
@@ -554,46 +538,46 @@ const Note = require('./models/note') // highlight-line
 
 const PORT = process.env.PORT // highlight-line
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`)
+  console.log(`Server running on port (Servidor em execução na porta) ${PORT}`)
 })
 ```
 
-It's important that <i>dotenv</i> gets imported before the <i>note</i> model is imported. This ensures that the environment variables from the <i>.env</i> file are available globally before the code from the other modules is imported.
+É importante que o <i>dotenv</i> seja importado antes do modelo <i>note</i>. Isso garante que as variáveis de ambiente do arquivo <i>.env</i> estejam disponíveis globalmente antes que o código dos outros módulos seja importado.
 
-### Important note to Fly.io users 
+### Nota importante para usuários do Fly.io
 
-Because GitHub is not used with Fly.io, also the file .env gets to the Fly.io servers when the app is deployed. Because of this also the env variables defined in the file will be available there.
+Como o GitHub não é usado com Fly.io, o arquivo .env também é enviado para os servidores Fly.io quando a aplicação é implantada. Por causa disso, as variáveis de ambiente definidas no arquivo também estarão disponíveis lá.
 
-However, a [better option](https://community.fly.io/t/clarification-on-environment-variables/6309) is to prevent .env from being copied to Fly.io by creating to the project root the file _.dockerignore_, with the following contents
+No entanto, uma [opção melhor](https://community.fly.io/t/clarification-on-environment-variables/6309) é impedir que .env seja copiado ao Fly.io criando, na raiz do projeto, o arquivo _.dockerignore_ com o seguinte conteúdo:
 
 ```bash
 .env
 ```
 
-and set the env value from the command line with the command:
+Defina o valor da variável de ambiente na linha de comando desta forma:
 
 ```
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-Since also the PORT is defined in our .env it is actually essential to ignore the file in Fly.io since otherways the app starts in the wrong port.
+Já que a variável PORT também é definida em nosso .env, é essencial ignorar o arquivo no Fly.io, caso contrário, a aplicação iniciará na porta errada.
 
-When using Render, the database url is given by defining the proper env in the dashboard:
+Ao usar o Render, a url do banco de dados é fornecida definindo a variável de ambiente adequada no painel:
 
 ![](../../images/3/render-env.png)
 
-### Using database in route handlers
+### Usando o banco de dados em gerenciadores de evento de rotas
 
-Next, let's change the rest of the backend functionality to use the database.
+Agora, vamos mudar o resto da funcionalidade do back-end para usar o banco de dados.
 
-Creating a new note is accomplished like this:
+Cria-se uma nova nota desta forma:
 
 ```js
 app.post('/api/notes', (request, response) => {
   const body = request.body
 
   if (body.content === undefined) {
-    return response.status(400).json({ error: 'content missing' })
+    return response.status(400).json({ error: 'content missing' }) // "conteúdo em falta"
   }
 
   const note = new Note({
@@ -607,15 +591,15 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
-The note objects are created with the _Note_ constructor function. The response is sent inside of the callback function for the _save_ operation. This ensures that the response is sent only if the operation succeeded. We will discuss error handling a little bit later.
+Os objetos de <i>note</i> são criados com a função construtora _Note_. A resposta é enviada dentro da função callback para a operação _save_. Isso garante que a resposta seja enviada somente se a operação tiver sucesso. Discutiremos sobre gerenciamento de erros um pouco mais tarde.
 
-The _savedNote_ parameter in the callback function is the saved and newly created note. The data sent back in the response is the formatted version created automatically with the _toJSON_ method:
+O parâmetro _savedNote_ na função callback é a nota salva e recém-criada. Os dados enviados de volta na resposta são a versão formatada criada automaticamente com o método _toJSON_:
 
 ```js
 response.json(savedNote)
 ```
 
-Using Mongoose's [findById](https://mongoosejs.com/docs/api/model.html#model_Model-findById) method, fetching an individual note gets changed into the following:
+Busca-se uma nota individual utilizando o método [findById](https://mongoosejs.com/docs/api/model.html#model_Model-findById) (grosso modo, "acharPorId") do Mongoose, onde nosso código altera-se da seguinte forma:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -625,51 +609,51 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-### Verifying frontend and backend integration
+### Verificando a integração entre front-end e back-end
 
-When the backend gets expanded, it's a good idea to test the backend first with **the browser, Postman or the VS Code REST client**. Next, let's try creating a new note after taking the database into use:
+Ao se expandir o back-end, sempre é uma boa ideia testá-lo primeiro **com o navegador, com o Postman ou com o cliente REST do VS Code**. Em seguida, vamos tentar criar uma nova nota depois colocar o banco de dados em uso:
 
-![VS code rest client doing a post](../../images/3/46new.png)
+![Cliente REST do VS Code utilizando o método POST](../../images/3/46new.png)
 
-Only once everything has been verified to work in the backend, is it a good idea to test that the frontend works with the backend. It is highly inefficient to test things exclusively through the frontend.
+Somente depois de verificar se tudo funciona no back-end, é uma boa ideia testar se o front-end funciona com o back-end. É extremamente ineficiente testar as funcionalidades exclusivamente pelo front-end.
 
-It's probably a good idea to integrate the frontend and backend one functionality at a time. First, we could implement fetching all of the notes from the database and test it through the backend endpoint in the browser. After this, we could verify that the frontend works with the new backend. Once everything seems to be working, we would move on to the next feature.
+Sempre é uma boa ideia integrar tanto ao front-end quanto ao back-end uma funcionalidade de cada vez. Primeiro, poderíamos implementar a busca de todas as notas no banco de dados e testá-la por meio do <i>endpoint</i> (ou "ponto de terminação" — objetivamente, um <i>endpoint</i> ou ponto de terminação é qualquer dispositivo conectado a uma rede de computadores. Leia mais [aqui](https://www.cloudflare.com/pt-br/learning/security/glossary/what-is-endpoint/)) do back-end no navegador. Depois disso, verificaríamos se o front-end funciona com o novo back-end. Depois que tudo parecer estar funcionando, passaríamos para a próxima funcionalidade.
 
-Once we introduce a database into the mix, it is useful to inspect the state persisted in the database, e.g. from the control panel in MongoDB Atlas. Quite often little Node helper programs like the <i>mongo.js</i> program we wrote earlier can be very helpful during development.
+Uma vez que um banco de dados é introduzido nessa mistura, é sempre útil inspecionar o estado persistido no banco de dados através, por exemplo, do painel de controle do MongoDB Atlas. Muitas vezes, pequenos programas auxiliares do Node como o <i>mongo.js</i> que escrevemos anteriormente podem ser muito úteis durante o desenvolvimento.
 
-You can find the code for our current application in its entirety in the <i>part3-4</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
+Você pode encontrar o código da nossa aplicação atual na íntegra na branch <i>part3-4</i> deste repositório do [GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-4).
 
 </div>
 
 <div class="tasks">
 
-### Exercises 3.13.-3.14.
+### Exercícios 3.13 a 3.14
 
-The following exercises are pretty straightforward, but if your frontend stops working with the backend, then finding and fixing the bugs can be quite interesting. 
+Os próximos exercícios são bastante diretos, mas se o seu front-end parar de funcionar com o back-end, pode ser até bastante interessante encontrar e corrigir os bugs que forem surgindo.
 
-#### 3.13: Phonebook database, step1
+#### 3.13: Phonebook database — 1º passo
 
-Change the fetching of all phonebook entries so that the data is <i>fetched from the database</i>.
+Altere a funcionalidade que busca todas as entradas da lista telefônica para que os dados sejam <i>buscados do banco de dados</i>.
 
-Verify that the frontend works after the changes have been made.
+Verifique se o front-end funciona depois que as alterações forem feitas.
 
-In the following exercises, write all Mongoose-specific code into its own module, just like we did in the chapter [Database configuration into its own module](/en/part3/saving_data_to_mongo_db#database-configuration-into-its-own-module).
+Nos próximos exercícios, escreva todo o código específico do Mongoose em seu próprio módulo, assim como fizemos no capítulo ["A configuração do banco de dados em seu próprio módulo"](/pt/part3/salvando_dados_no_mongo_db#a-configuracao-do-banco-de-dados-em-seu-proprio-modulo).
 
-#### 3.14: Phonebook database, step2
+#### 3.14: Phonebook database — 2º passo
 
-Change the backend so that new numbers are <i>saved to the database</i>. Verify that your frontend still works after the changes.
+Altere o back-end para que os novos números sejam <i>salvos no banco de dados</i>. Verifique se o seu front-end ainda funciona após as alterações.
 
-At this stage, you can ignore whether there is already a person in the database with the same name as the person you are adding.
+Você pode ignorar, nesta etapa, se já existe uma pessoa no banco de dados com o mesmo nome da pessoa que você está adicionando.
 
 </div>
 
 <div class="content">
 
-### Error handling
+### Gerenciamento de erros
 
-If we try to visit the URL of a note with an id that does not exist e.g. <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431> where <i>5c41c90e84d891c15dfa3431</i> is not an id stored in the database, then the response will be _null_.
+Se tentarmos visitar a URL de uma nota com um ID que não existe, por exemplo <http://localhost:3001/api/notes/5c41c90e84d891c15dfa3431>, onde <i>5c41c90e84d891c15dfa3431</i> não é um ID armazenado no banco de dados, a resposta será _null_.
 
-Let's change this behavior so that if a note with the given id doesn't exist, the server will respond to the request with the HTTP status code 404 not found. In addition let's implement a simple <em>catch</em> block to handle cases where the promise returned by the <em>findById</em> method is <i>rejected</i>:
+Vamos mudar esse comportamento para que, se uma nota com o ID fornecido não existir, o servidor responda à requisição com o código de status HTTP "404 not found" (404 não encontrado(a)). Além disso, vamos implementar um simples bloco <em>catch</em> para lidar com casos em que a promessa retornada pelo método <em>findById</em> é <i>rejeitada</i>:
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -692,11 +676,11 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If no matching object is found in the database, the value of _note_ will be _null_ and the _else_ block is executed. This results in a response with the status code <i>404 not found</i>. If a promise returned by the <em>findById</em> method is rejected, the response will have the status code <i>500 internal server error</i>. The console displays more detailed information about the error.
+Se nenhum objeto correspondente for encontrado no banco de dados, o valor de _note_ será _null_ e o bloco _else_ será executado. Isso resulta em uma resposta com o código de status <i>404 not found</i> (404 não encontrado(a)). Se uma promessa retornada pelo método <em>findById</em> for rejeitada, a resposta terá o código de status <i>500 internal server error</i> (500 erro interno do servidor). O console exibe informações mais detalhadas sobre o erro.
 
-On top of the non-existing note, there's one more error situation that needs to be handled. In this situation, we are trying to fetch a note with the wrong kind of _id_, meaning an _id_ that doesn't match the mongo identifier format.
+Além da nota inexistente, há mais uma situação de erro que precisa ser lidada. Nessa situação, estamos tentando buscar uma nota com o tipo errado de _id_, ou seja, um _id_ que não corresponde ao formato de identificador do Mongo.
 
-If we make the following request, we will get the error message shown below:
+Se fizermos a seguinte requisição, obteremos a mensagem de erro mostrada abaixo:
 
 <pre>
 Method: GET
@@ -709,9 +693,21 @@ Body:   {}
     ...
 </pre>
 
-Given a malformed id as an argument, the <em>findById</em> method will throw an error causing the returned promise to be rejected. This will cause the callback function defined in the <em>catch</em> block to be called. 
+Dado um ID mal formatado como argumento, o método <em>findById</em> lançará um erro, fazendo com que a promessa retornada seja rejeitada. Isso fará com que a função callback definida no bloco <em>catch</em> seja chamada.
 
-Let's make some small adjustments to the response in the <em>catch</em> block:
+Vamos fazer alguns pequenos ajustes de resposta no bloco <em>catch</em>:
+
+
+
+
+
+^^^^
+### REVISADO
+
+
+
+
+
 
 ```js
 app.get('/api/notes/:id', (request, response) => {
@@ -730,34 +726,34 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-If the format of the id is incorrect, then we will end up in the error handler defined in the _catch_ block. The appropriate status code for the situation is [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) because the situation fits the description perfectly:
+Se o formato do ID estiver incorreto, o gerenciador de erro definido no bloco _catch_ será chamado. O código de status apropriado para a situação é [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) (<i>400 requisição inválida</i>) porque a situação se encaixa perfeitamente na descrição:
 
-> <i>The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modifications.</i>
+> <i>A requisição não pôde ser entendida pelo servidor devido a uma sintaxe mal formatada. O cliente NÃO DEVE repetir a requisição sem modificações.</i>
 
-We have also added some data to the response to shed some light on the cause of the error.
+Também adicionamos alguns dados à resposta para esclarecer a causa do erro.
 
-When dealing with Promises, it's almost always a good idea to add error and exception handling. Otherwise, you will find yourself dealing with strange bugs.
+Ao lidar com Promessas, quase sempre é uma boa ideia adicionar gerenciamento de erro e exceção. Caso contrário, você se encontrará lidando com bugs estranhos.
 
-It's never a bad idea to print the object that caused the exception to the console in the error handler:
+Nunca é uma má ideia imprimir o objeto que causou a exceção no console do gerenciador de erro:
 
 ```js
 .catch(error => {
-  console.log(error)  // highlight-line
+  console.log(error) // highlight-line
   response.status(400).send({ error: 'malformatted id' })
 })
 ```
 
-The reason the error handler gets called might be something completely different than what you had anticipated. If you log the error to the console, you may save yourself from long and frustrating debugging sessions. Moreover, most modern services where you deploy your application support some form of logging system that you can use to check these logs. As mentioned, Heroku is one.
+A razão pela qual o gerenciador de erro é chamado pode ser algo completamente diferente do que você havia imaginado. Se você imprimir o erro no console, poderá se salvar de longas e frustrantes sessões de depuração. Além disso, a maioria dos serviços modernos onde você implanta sua aplicação suporta algum tipo de sistema de registro (logging system) que se pode usar para verificar esses logs. Como já mencionado, o Heroku é um deles.
 
-Every time you're working on a project with a backend, <i>it is critical to keep an eye on the console output of the backend</i>. If you are working on a small screen, it is enough to just see a tiny slice of the output in the background. Any error messages will catch your attention even when the console is far back in the background:
+Toda vez que você trabalha em um projeto com um back-end, <i>é crucial ficar de olho na saída do console do back-end</i>. Se você está trabalhando em uma tela pequena, já é suficiente ver apenas um pedacinho da tela de saída em segundo plano. Qualquer mensagem de erro chamará sua atenção mesmo quando o console estiver bem escondido:
 
-![sample screenshot showing tiny slice of output](../../images/3/15b.png)
+![amostra de captura de tela mostrando um pedacinho da tela de saída](../../images/3/15b.png)
 
-### Moving error handling into middleware
+### Transferindo o gerenciamento de erro para um middleware
 
-We have written the code for the error handler among the rest of our code. This can be a reasonable solution at times, but there are cases where it is better to implement all error handling in a single place. This can be particularly useful if we want to report data related to errors to an external error-tracking system like [Sentry](https://sentry.io/welcome/) later on.
+Escrevemos o código do gerenciador de erro junto com o restante do código. Pode até ser uma solução razoável às vezes, mas há casos em que é melhor implementar todo o gerenciamento de erro em um único lugar. Isso pode ser particularmente útil se quisermos relatar dados relacionados a erros para um sistema externo de rastreamento de erros (external error-tracking system) como o [Sentry](https://sentry.io/welcome/) posteriormente.
 
-Let's change the handler for the <i>/api/notes/:id</i> route so that it passes the error forward with the <em>next</em> function. The next function is passed to the handler as the third parameter:
+Vamos mudar o gerenciador para a rota <i>/api/notes/:id</i> para que ele passe o erro adiante com a função <em>next</em>. A função _next_ é passada para o gerenciador como o terceiro parâmetro:
 
 ```js
 app.get('/api/notes/:id', (request, response, next) => { // highlight-line
@@ -773,9 +769,9 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-The error that is passed forwards is given to the <em>next</em> function as a parameter. If <em>next</em> was called without a parameter, then the execution would simply move onto the next route or middleware. If the <em>next</em> function is called with a parameter, then the execution will continue to the <i>error handler middleware</i>.
+O erro que é passado para frente é devido à função <em>next</em> como parâmetro. Se <em>next</em> for chamado sem um parâmetro, então a execução simplesmente avançará para a próxima rota ou middleware. Se a função <em>next</em> for chamada com um parâmetro, então a execução continuará para o <i>middleware de gerenciamento de erro</i>.
 
-Express [error handlers](https://expressjs.com/en/guide/error-handling.html) are middleware that are defined with a function that accepts <i>four parameters</i>. Our error handler looks like this:
+Os [gerenciadores de erro](https://expressjs.com/en/guide/error-handling.html) do Express são middlewares definidos com uma função que aceita <i>quatro parâmetros</i>. Nosso gerenciador de erro é assim:
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -788,19 +784,19 @@ const errorHandler = (error, request, response, next) => {
   next(error)
 }
 
-// this has to be the last loaded middleware.
+// Este deve ser o último middleware a ser carregado.
 app.use(errorHandler)
 ```
 
-The error handler checks if the error is a <i>CastError</i> exception, in which case we know that the error was caused by an invalid object id for Mongo. In this situation, the error handler will send a response to the browser with the response object passed as a parameter. In all other error situations, the middleware passes the error forward to the default Express error handler. 
+O gerenciador de erro verifica se o erro é uma exceção <i>CastError</i> (grosso modo, "ErroDeLançamento"), caso em que sabemos que o erro foi causado por um id de objeto inválido para o Mongo. Nessa situação, o gerenciador de erro enviará uma resposta ao navegador com o objeto de resposta passado como parâmetro. Em todas as outras situações de erro, o middleware passa o erro para o gerenciador de erro padrão do Express.
 
-Note that the error-handling middleware has to be the last loaded middleware!
+Observe que o middleware de gerenciamento de erro deve ser o último middleware a ser carregado!
 
-### The order of middleware loading
+### A ordem de carregamento dos middlewares
 
-The execution order of middleware is the same as the order that they are loaded into express with the _app.use_ function. For this reason, it is important to be careful when defining middleware.
+A ordem de execução dos middlewares é a mesma que a ordem em que são carregados no Express com a função _app.use_. Por esse motivo, é importante ter cuidado ao definir os middlewares.
 
-The correct order is the following:
+A ordem correta é a seguinte:
 
 ```js
 app.use(express.static('build'))
@@ -816,24 +812,24 @@ const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-// handler of requests with unknown endpoint
+// gerenciador de requisições com um endpoint desconhecido
 app.use(unknownEndpoint)
 
 const errorHandler = (error, request, response, next) => {
   // ...
 }
 
-// handler of requests with result to errors
+// gerenciador de requisições com um resultado para erros
 app.use(errorHandler)
 ```
 
-The json-parser middleware should be among the very first middleware loaded into Express. If the order was the following:
+O middleware JSON-parser ("analisador de JSON") deve estar entre os primeiros middlewares carregados no Express. Se a ordem fosse a seguinte...
 
 ```js
-app.use(requestLogger) // request.body is undefined!
+app.use(requestLogger) // request.body torna-se indefinido!
 
 app.post('/api/notes', (request, response) => {
-  // request.body is undefined!
+  // request.body torna-se indefinido!
   const body = request.body
   // ...
 })
@@ -841,18 +837,18 @@ app.post('/api/notes', (request, response) => {
 app.use(express.json())
 ```
 
-Then the JSON data sent with the HTTP requests would not be available for the logger middleware or the POST route handler, since the _request.body_ would be _undefined_ at that point.
+... os dados JSON enviados com as requisições HTTP não estariam disponíveis para o middleware de registro (logger middleware) ou para o gerenciador da rota POST, já que o _request.body_ estaria _indefinido_ nesse ponto.
 
-It's also important that the middleware for handling unsupported routes is next to the last middleware that is loaded into Express, just before the error handler.
+Também é importante que o middleware para lidar com as rotas não suportadas esteja próximo ao último middleware que é carregado no Express, logo antes do gerenciador de erro.
 
-For example, the following loading order would cause an issue:
+Por exemplo, a seguinte ordem de carregamento causaria um problema:
 
 ```js
 const unknownEndpoint = (request, response) => {
   response.status(404).send({ error: 'unknown endpoint' })
 }
 
-// handler of requests with unknown endpoint
+// gerenciador de requisições com endpoint desconhecido
 app.use(unknownEndpoint)
 
 app.get('/api/notes', (request, response) => {
@@ -860,13 +856,13 @@ app.get('/api/notes', (request, response) => {
 })
 ```
 
-Now the handling of unknown endpoints is ordered <i>before the HTTP request handler</i>. Since the unknown endpoint handler responds to all requests with <i>404 unknown endpoint</i>, no routes or middleware will be called after the response has been sent by unknown endpoint middleware. The only exception to this is the error handler which needs to come at the very end, after the unknown endpoints handler.
+Dessa forma, o gerenciamento de endpoints desconhecidos é posto em ordem <i>antes do gerenciador de requisições HTTP</i>. Como o gerenciador de endpoints desconhecidos responde a todas as requisições com <i>404 unknown endpoint</i> (404 endpoint desconhecido), nenhuma rota ou middleware será chamado após a resposta ter sido enviada pelo middleware de endpoint desconhecido. A única exceção a isso é o gerenciador de erros, que precisa vir no final, após o gerenciador de endpoints desconhecidos.
 
-### Other operations
+### Outras operações
 
-Let's add some missing functionality to our application, including deleting and updating an individual note.
+Vamos adicionar algumas funcionalidades restantes à nossa aplicação, incluindo a exclusão e a atualização de uma nota individual.
 
-The easiest way to delete a note from the database is with the [findByIdAndRemove](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndRemove) method:
+A maneira mais fácil de excluir uma nota do banco de dados é com o método [findByIdAndRemove](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndRemove) (grosso modo, "acharPorIdERemover"):
 
 ```js
 app.delete('/api/notes/:id', (request, response, next) => {
@@ -878,9 +874,9 @@ app.delete('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In both of the "successful" cases of deleting a resource, the backend responds with the status code <i>204 no content</i>. The two different cases are deleting a note that exists, and deleting a note that does not exist in the database. The _result_ callback parameter could be used for checking if a resource was actually deleted, and we could use that information for returning different status codes for the two cases if we deemed it necessary. Any exception that occurs is passed onto the error handler.
+Em ambos os casos "bem-sucedidos" de exclusão de um recurso, o back-end responde com o código de status <i>204 no content</i> (204 sem conteúdo). Os dois casos diferentes são excluir uma nota que existe e excluir uma nota que não existe no banco de dados. O parâmetro de retorno _result_ poderia ser usado para verificar se um recurso foi realmente excluído, e poderíamos usar essa informação para retornar diferentes códigos de status para os dois casos, caso julgássemos necessário. Qualquer exceção que venha a ocorrer é lançada ao gerenciador de erro.
 
-The toggling of the importance of a note can be easily accomplished with the [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) method.
+A alternância da importância de uma nota pode ser facilmente realizada com o método [findByIdAndUpdate](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate) (grosso modo, "acharPorIdEAtualizar").
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -899,64 +895,66 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-In the code above, we also allow the content of the note to be edited.
+No código acima, também permitimos a edição do conteúdo da nota.
 
-Notice that the <em>findByIdAndUpdate</em> method receives a regular JavaScript object as its parameter, and not a new note object created with the <em>Note</em> constructor function.
+Observe que o método <em>findByIdAndUpdate</em> recebe um objeto JavaScript comum como parâmetro, e não um novo objeto de nota criado com a função construtora <em>Note</em>.
 
-There is one important detail regarding the use of the <em>findByIdAndUpdate</em> method. By default, the <em>updatedNote</em> parameter of the event handler receives the original document [without the modifications](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). We added the optional <code>{ new: true }</code> parameter, which will cause our event handler to be called with the new modified document instead of the original.
+Existe um detalhe importante em relação ao uso do método <em>findByIdAndUpdate</em>. Por padrão, o parâmetro <em>updatedNote</em> do gerenciador de evento recebe o documento original [sem as modificações](https://mongoosejs.com/docs/api/model.html#model_Model-findByIdAndUpdate). Adicionamos o parâmetro opcional <code>{ new: true }</code>, que fará com que nosso gerenciador de evento seja chamado com o novo documento modificado em vez do original.
 
-After testing the backend directly with Postman and the VS Code REST client, we can verify that it seems to work. The frontend also appears to work with the backend using the database. 
+Após testar o back-end diretamente com o Postman e o cliente REST do VS Code, podemos verificar que parece funcionar. O front-end também parece funcionar com o back-end usando o banco de dados.
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
+É possível encontrar o código da nossa aplicação atual na íntegra na branch <i>part3-5</i> [neste repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-5).
 
-### A true full stack developer's oath
+### Juramento de um Verdadeiro Programador Full Stack
 
-It is again time for the exercises. The complexity of our app is now taken another step since besides frontend and backend we also have a database. 
-There are indeed really many potential sources of error.
+Chegou novamente a hora dos exercícios. A complexidade de nossa aplicação cresceu pois, além do front-end e do back-end, também temos um banco de dados. Há de fato muitas fontes potenciais de erros.
 
-So we should once more extend our oath:
+Portanto, devemos estender novamente nosso juramento:
 
-Full stack development is <i> extremely hard</i>, that is why I will use all the possible means to make it easier
+Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso que eu usarei todos os meios possíveis para torná-lo mais fácil:
 
-- I will have my browser developer console open all the time
-- I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
-- <i>I will keep an eye on the database: does the backend save data there in the right format</i>
-- I progress with small steps
-- I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpoint problems
-- If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- Eu manterei meu Console do navegador sempre aberto;
+- Eu usarei a guia Rede das Ferramentas do Desenvolvedor do navegador para garantir que o front-end e o back-end estejam se comunicando da forma que eu planejei;
+- Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo front-end estejam sendo salvos lá da forma que eu planejei;
+- <i>Eu ficarei de olho no banco de dados: o back-end salva os dados no banco de dados no formato correto?</i> ;
+- Eu vou progredir aos poucos, passo a passo;
+- Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
+- Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
+- Quando eu pedir ajuda no canal do Discord ou Telegram do curso ou em outro lugar, formularei minhas perguntas de forma adequada. Veja [aqui](/pt/part0/informacoes_gerais#como-pedir-ajuda-no-discord-telegam) como pedir ajuda.
 
 </div>
 
 <div class="tasks">
 
-### Exercises 3.15.-3.18.
+### Exercícios 3.15 a 3.18
 
-#### 3.15: Phonebook database, step3
+#### 3.15: Phonebook database — 3º passo
 
-Change the backend so that deleting phonebook entries is reflected in the database.
+Altere o back-end para que a exclusão de entradas da lista telefônica seja refletida no banco de dados.
 
-Verify that the frontend still works after making the changes.
+Verifique se o front-end ainda funciona após as alterações.
 
-#### 3.16: Phonebook database, step4
+#### 3.16: Phonebook database — 4º passo
 
-Move the error handling of the application to a new error handler middleware. 
+Transfira o gerenciamento de erros da aplicação para um novo middleware gerenciador de erros.
 
-#### 3.17*: Phonebook database, step5
+#### 3.17*: Phonebook database — 5º passo
 
-If the user tries to create a new phonebook entry for a person whose name is already in the phonebook, the frontend will try to update the phone number of the existing entry by making an HTTP PUT request to the entry's unique URL.
+Se o usuário tentar criar uma nova entrada na lista telefônica para uma pessoa cujo nome já está presente na lista, o front-end tentará atualizar o número de telefone da entrada existente fazendo uma requisição HTTP PUT para a URL única da entrada.
 
-Modify the backend to support this request.
+Modifique o back-end para suportar essa requisição.
 
-Verify that the frontend works after making your changes.
+Verifique se o front-end funciona após fazer suas alterações.
 
-#### 3.18*: Phonebook database step6
+#### 3.18*: Phonebook database — 6º passo
 
-Also update the handling of the <i>api/persons/:id</i> and <i>info</i> routes to use the database, and verify that they work directly with the browser, Postman, or VS Code REST client.
+Atualize também o gerenciamento das rotas <i>api/persons/:id</i> e <i>info</i> para usar o banco de dados e verifique se elas funcionam diretamente com o navegador, com o Postman ou com o cliente REST do VS Code.
 
-Inspecting an individual phonebook entry from the browser should look like this:
+A verificação no navegador de uma entrada individual da lista telefônica deve ocorrer a seguinte maneira:
 
-![screenshot of browser showing one person with api/persons/their_id](../../images/3/49.png)
+![captura de tela do navegador mostrando uma pessoa utilizando a rota 'api/persons/their_id'](../../images/3/49.png)
+
+^^^^^^^^
+### NÃO REVISADO
 
 </div>

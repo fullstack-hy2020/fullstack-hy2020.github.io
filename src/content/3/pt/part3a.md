@@ -273,7 +273,7 @@ Igualmente, se começarmos a trabalhar no projeto em outro computador, podemos i
 npm install
 ```
 
-Se o número <i>major</i> de uma dependência não mudar, então as novas versões devem ser [compatíveis com versões anteriores](https://en.wikipedia.org/wiki/Backward_compatibility). Isso significa que se nossa aplicação vier a usar a versão 4.99.175 do Express no futuro, então todo o código implementado nesta parte ainda terá que funcionar sem a necessidade de alterações no código. Em contraste, a futura versão 5.0.0 do express [pode conter](https://expressjs.com/en/guide/migrating-5.html) alterações que farão com que nossa aplicação não funcione mais.
+Se o número <i>major</i> de uma dependência não mudar, então as novas versões devem ser [compatíveis com versões anteriores](https://en.wikipedia.org/wiki/Backward_compatibility). Isso significa que se nossa aplicação vier a usar a versão 4.99.175 do Express no futuro, então todo o código implementado nesta parte ainda terá que funcionar sem a necessidade de alterações no código. Em contraste, a futura versão 5.0.0 do Express [pode conter](https://expressjs.com/en/guide/migrating-5.html) alterações que farão com que nossa aplicação não funcione mais.
 
 ### Web e Express
 
@@ -362,7 +362,7 @@ Se fizermos alterações no código da aplicação, precisamos reiniciá-la para
 
 A solução para esse problema é o [nodemon](https://github.com/remy/nodemon):
 
-> <i>nodemon irá monitorar os arquivos no diretório em que ele foi iniciado, e se houver alguma alteração nos arquivos, o nodemon reiniciará automaticamente sua aplicação node.</i>
+> <i>nodemon irá monitorar os arquivos no diretório em que ele foi iniciado, e se houver alguma alteração nos arquivos, o nodemon reiniciará automaticamente sua aplicação Node.</i>
 
 Vamos instalar o nodemon definindo-o como uma <i>dependência de desenvolvimento</i> (development dependency) com o comando:
 
@@ -550,7 +550,7 @@ Se procurarmos uma nota com um id que não existe, o servidor responde com:
 
 O código de status HTTP retornado é 200, o que significa que a resposta teve sucesso. Não são retornados dados com a resposta, uma vez que o valor do cabeçalho <i>content-length</i> é 0, e o mesmo pode ser verificado no navegador.
 
-A razão para esse comportamento é que a variável <i>note</i> é definida como "undefined" se nenhuma nota correspondente for encontrada. A situação precisa ser tratada no servidor de forma correta. Se nenhuma nota for encontrada, o servidor deve responder com o código de status [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) ("404 não encontrado(a)") em vez de 200.
+A razão para esse comportamento é que a variável <i>note</i> é definida como "undefined" se nenhuma nota correspondente for encontrada. A situação precisa ser gerenciada no servidor de forma correta. Se nenhuma nota for encontrada, o servidor deve responder com o código de status [404 not found](https://www.rfc-editor.org/rfc/rfc9110.html#name-404-not-found) ("404 não encontrado(a)") em vez de 200.
 
 Vamos fazer a seguinte alteração em nosso código:
 
@@ -633,7 +633,7 @@ Se em vez daqueles você usar o *IntelliJ WebStorm*, é possível fazer um proce
 Em seguida, vamos implementar a funcionalidade de adicionar novas notas ao servidor. É possível adicionar uma nota fazendo uma requisição HTTP POST para o endereço http://localhost:3001/api/notes e enviando todas as informações para a nova nota no [corpo](https://www.w3.org/Protocols/rfc2616/rfc2616-sec7.html#sec7) (body) da requisição em formato JSON.
 
 
-Para que possamos acessar os dados facilmente, precisamos da ajuda do [json-parser](https://expressjs.com/en/api.html) do Express, que é usado com o comando _app.use(express.json())_.
+Para que possamos acessar os dados facilmente, precisamos da ajuda do [json-parser](https://expressjs.com/en/api.html) (grosso modo, "analisador de JSON") do Express, que é usado com o comando _app.use(express.json())_.
 
 Vamos ativar o json-parser e implementar um gerenciador inicial para lidar com requisições HTTP POST:
 
@@ -784,7 +784,7 @@ if (!body.content) {
 }
 ```
 
-Observe que declarar o <em>return</em> é crucial porque, caso contrário, o código será executado até o final e a nota malformada será salva na aplicação.
+Observe que declarar o <em>return</em> é crucial porque, caso contrário, o código será executado até o final e a nota mal formatada será salva na aplicação.
 
 Se a propriedade <i>content</i> tiver um valor, a nota será baseada nos dados recebidos.
 Se estiver faltando a propriedade <i>important</i>, definimos o valor padrão como <i>false</i>. O valor padrão é gerado atualmente de uma forma bastante estranha:
@@ -980,7 +980,7 @@ app.use(requestLogger)
 
 Funções de <i>middleware</i> são chamadas na ordem em que são adicionadas ao objeto do servidor Express com o método _use_. Observe que o json-parser é adicionado antes do <i>middleware</i> _requestLogger_, caso contrário, <i>request.body</i> não será inicializado quando o registrador (logger) for executado!
 
-Funções de <i>middleware</i> devem ser adicionadas antes das rotas se quisermos que sejam executadas antes que os gerenciadores de evento da rota sejam chamados. Também há situações em que queremos definir funções de <i>middleware</i> depois das rotas. Na prática, isso significa que estamos definindo funções de <i>middleware</i> que só são chamadas se nenhuma rota manipular a requisição HTTP.
+Funções de <i>middleware</i> devem ser adicionadas antes das rotas se quisermos que sejam executadas antes que os gerenciadores de evento da rota sejam chamados. Também há situações em que queremos definir funções de <i>middleware</i> depois das rotas. Na prática, isso significa que estamos definindo funções de <i>middleware</i> que só são chamadas se nenhuma rota gerenciar a requisição HTTP.
 
 Vamos adicionar o <i>middleware</i> a seguir depois das nossas rotas. Este <i>middleware</i> será usado para pegar requisições feitas para rotas inexistentes. Para essas requisições, o <i>middleware</i> retornará uma mensagem de erro no formato JSON.
 

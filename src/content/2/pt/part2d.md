@@ -697,7 +697,7 @@ Desenvolvimento Full Stack é algo <i>extremamente difícil</i>, e é por isso q
 
 - Eu manterei meu Console do navegador sempre aberto;
 - <i> Eu usarei a guia Rede das Ferramentas do Desenvolvedor do navegador para garantir que o front-end e o back-end estejam se comunicando da forma que eu planejei</i> ;
-- <i>Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo front-end estejam sendo salvos lá da forma que eu planejei</i>;
+- <i> Eu ficarei de olho no estado do servidor para garantir que os dados enviados pelo front-end estejam sendo salvos lá da forma que eu planejei</i>;
 - Eu vou progredir aos poucos, passo a passo;
 - Eu escreverei muitas instruções _console.log_ para ter certeza de que estou entendendo como o código se comporta e para me ajudar a identificar os erros;
 - Se meu código não funcionar, não escreverei mais nenhuma linha no código. Em vez disso, começarei a excluir o código até que funcione ou retornarei ao estado em que tudo ainda estava funcionando; e
