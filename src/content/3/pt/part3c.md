@@ -109,7 +109,7 @@ A imagem exibe o <i>URI do MongoDB</i>, que é o endereço do banco de dados que
 
 O endereço se parece com isso:
 
-```js
+```bash
 mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/?retryWrites=true&w=majority
 ```
 
@@ -697,18 +697,6 @@ Dado um ID mal formatado como argumento, o método <em>findById</em> lançará u
 
 Vamos fazer alguns pequenos ajustes de resposta no bloco <em>catch</em>:
 
-
-
-
-
-^^^^
-### REVISADO
-
-
-
-
-
-
 ```js
 app.get('/api/notes/:id', (request, response) => {
   Note.findById(request.params.id)
@@ -726,7 +714,7 @@ app.get('/api/notes/:id', (request, response) => {
 })
 ```
 
-Se o formato do ID estiver incorreto, o gerenciador de erro definido no bloco _catch_ será chamado. O código de status apropriado para a situação é [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) (<i>400 requisição inválida</i>) porque a situação se encaixa perfeitamente na descrição:
+Se o formato do ID estiver incorreto, o gerenciador de erro definido no bloco _catch_ será chamado. O código de status apropriado para o erro é [400 Bad Request](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1) (<i>400 requisição inválida</i>), porque a situação se encaixa perfeitamente na descrição:
 
 > <i>A requisição não pôde ser entendida pelo servidor devido a uma sintaxe mal formatada. O cliente NÃO DEVE repetir a requisição sem modificações.</i>
 
@@ -745,13 +733,13 @@ Nunca é uma má ideia imprimir o objeto que causou a exceção no console do ge
 
 A razão pela qual o gerenciador de erro é chamado pode ser algo completamente diferente do que você havia imaginado. Se você imprimir o erro no console, poderá se salvar de longas e frustrantes sessões de depuração. Além disso, a maioria dos serviços modernos onde você implanta sua aplicação suporta algum tipo de sistema de registro (logging system) que se pode usar para verificar esses logs. Como já mencionado, o Heroku é um deles.
 
-Toda vez que você trabalha em um projeto com um back-end, <i>é crucial ficar de olho na saída do console do back-end</i>. Se você está trabalhando em uma tela pequena, já é suficiente ver apenas um pedacinho da tela de saída em segundo plano. Qualquer mensagem de erro chamará sua atenção mesmo quando o console estiver bem escondido:
+Toda vez que você trabalha em um projeto com um back-end, <i>é crucial ficar de olho na saída do console do back-end</i>. Se você está usando uma tela pequena, já é suficiente ver apenas um pedacinho da tela de saída em segundo plano. Qualquer mensagem de erro chamará sua atenção mesmo quando o console estiver bem escondido:
 
 ![amostra de captura de tela mostrando um pedacinho da tela de saída](../../images/3/15b.png)
 
 ### Transferindo o gerenciamento de erro para um middleware
 
-Escrevemos o código do gerenciador de erro junto com o restante do código. Pode até ser uma solução razoável às vezes, mas há casos em que é melhor implementar todo o gerenciamento de erro em um único lugar. Isso pode ser particularmente útil se quisermos relatar dados relacionados a erros para um sistema externo de rastreamento de erros (external error-tracking system) como o [Sentry](https://sentry.io/welcome/) posteriormente.
+Escrevemos o código do gerenciador de erro junto ao restante do código. Pode até ser uma solução razoável às vezes, mas há casos em que é melhor implementar todo o gerenciamento de erro em um único lugar. Isso pode ser particularmente útil se quisermos relatar dados relacionados a erros para um sistema externo de rastreamento de erros (external error-tracking system) como o [Sentry](https://sentry.io/welcome/) posteriormente.
 
 Vamos mudar o gerenciador para a rota <i>/api/notes/:id</i> para que ele passe o erro adiante com a função <em>next</em>. A função _next_ é passada para o gerenciador como o terceiro parâmetro:
 
@@ -769,7 +757,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-O erro que é passado para frente é devido à função <em>next</em> como parâmetro. Se <em>next</em> for chamado sem um parâmetro, então a execução simplesmente avançará para a próxima rota ou middleware. Se a função <em>next</em> for chamada com um parâmetro, então a execução continuará para o <i>middleware de gerenciamento de erro</i>.
+O erro que é passado adiante é devido à função <em>next</em> como parâmetro. Se <em>next</em> for chamado sem um parâmetro, então a execução simplesmente avançará para a próxima rota ou middleware. Se a função <em>next</em> for chamada com um parâmetro, então a execução continuará para o <i>middleware de gerenciamento de erro</i>.
 
 Os [gerenciadores de erro](https://expressjs.com/en/guide/error-handling.html) do Express são middlewares definidos com uma função que aceita <i>quatro parâmetros</i>. Nosso gerenciador de erro é assim:
 
@@ -839,7 +827,7 @@ app.use(express.json())
 
 ... os dados JSON enviados com as requisições HTTP não estariam disponíveis para o middleware de registro (logger middleware) ou para o gerenciador da rota POST, já que o _request.body_ estaria _indefinido_ nesse ponto.
 
-Também é importante que o middleware para lidar com as rotas não suportadas esteja próximo ao último middleware que é carregado no Express, logo antes do gerenciador de erro.
+Também é importante que o middleware que gerencia rotas não suportadas esteja próximo ao último middleware que é carregado no Express, logo antes do gerenciador de erro.
 
 Por exemplo, a seguinte ordem de carregamento causaria um problema:
 
@@ -950,11 +938,8 @@ Verifique se o front-end funciona após fazer suas alterações.
 
 Atualize também o gerenciamento das rotas <i>api/persons/:id</i> e <i>info</i> para usar o banco de dados e verifique se elas funcionam diretamente com o navegador, com o Postman ou com o cliente REST do VS Code.
 
-A verificação no navegador de uma entrada individual da lista telefônica deve ocorrer a seguinte maneira:
+A verificação no navegador de uma entrada individual da lista telefônica deve ocorrer da seguinte maneira:
 
 ![captura de tela do navegador mostrando uma pessoa utilizando a rota 'api/persons/their_id'](../../images/3/49.png)
-
-^^^^^^^^
-### NÃO REVISADO
 
 </div>
