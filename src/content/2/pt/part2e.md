@@ -575,7 +575,7 @@ No entanto, existem situações em que essa técnica não funcionaria. Por exemp
 
 A API [https://restcountries.com](https://restcountries.com) fornece dados de diferentes países em um formato legível por máquina (machine-readable format), uma chamada API REST.
 
-Crie uma aplicação onde se possa ver os dados de vários países. A aplicação vai provavelmente obter os dados do endpoint [all](https://restcountries.com/v3.1/all).
+Crie uma aplicação onde se possa ver os dados de vários países. A aplicação vai provavelmente obter os dados do endpoint (ponto de terminação) [all](https://restcountries.com/v3.1/all).
 
 A interface de usuário é muito simples. O país a ser exibido deve ser encontrado através de uma consulta em um campo de pesquisa.
 

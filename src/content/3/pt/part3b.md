@@ -289,7 +289,7 @@ app.use(express.static('build'))
 
 ... sempre que o Express recebe uma requisição HTTP GET, ele primeiro verifica se o diretório <i>build</i> contém um arquivo correspondente ao endereço da requisição. Se um arquivo correto for encontrado, o Express o retornará.
 
-Agora, as requisições HTTP GET para o endereço <i>www.serversaddress.com/index.html</i> ou <i>www.serversaddress.com</i> mostrarão o front-end do React. As requisições GET para o endereço <i>www.serversaddress.com/api/notes</i> serão tratadas pelo código do back-end.
+Agora, as requisições HTTP GET para o endereço <i>www.serversaddress.com/index.html</i> ou <i>www.serversaddress.com</i> mostrarão o front-end do React. As requisições GET para o endereço <i>www.serversaddress.com/api/notes</i> serão gerenciadas pelo código do back-end.
 
 Dada nossa situação atual, pelo fato de tanto o front-end quanto o back-end estarem no mesmo endereço, podemos declarar o _baseUrl_ como uma URL [relativa](https://www.w3.org/TR/WD-html40-970917/htmlweb.html#h-5.1.2) (relative URL). Isso significa que podemos deixar de fora a parte que declara o servidor.
 
