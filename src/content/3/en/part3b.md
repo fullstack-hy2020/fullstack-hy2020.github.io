@@ -358,7 +358,7 @@ The application works perfectly, except we haven't added the functionality for c
 
 ![screenshot of notes application](../../images/3/30new.png)
 
-<i>**NOTE:** changing of the importance DOES NOT work yet since the backed has no implementation for it yet.</i>
+<i>**NOTE:** changing of the importance DOES NOT work yet since the backend has no implementation for it yet.</i>
 
 Our application saves the notes to a variable. If the application crashes or is restarted, all of the data will disappear. 
 
