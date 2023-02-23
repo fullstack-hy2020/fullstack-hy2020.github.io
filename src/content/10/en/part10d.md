@@ -1057,7 +1057,7 @@ As we are getting closer to the end of this part, let's take a moment to look at
 
 > Paper is a collection of customizable and production-ready components for React Native, following Google’s Material Design guidelines.
 
-[React Native Paper](https://callstack.github.io/react-native-paper/) is for React Native what [Material-UI](https://material-ui.com/) is for React web applications. It offers a wide range of high-quality UI components, support for [custom themes](https://callstack.github.io/react-native-paper/theming.html) and a fairly simple [setup](https://callstack.github.io/react-native-paper/getting-started.html) for Expo based React Native applications.
+[React Native Paper](https://callstack.github.io/react-native-paper/) is for React Native what [Material-UI](https://material-ui.com/) is for React web applications. It offers a wide range of high-quality UI components, support for [custom themes](https://callstack.github.io/react-native-paper/docs/guides/theming/) and a fairly simple [setup](https://callstack.github.io/react-native-paper/docs/guides/getting-started) for Expo based React Native applications.
 
 #### Styled-components
 
