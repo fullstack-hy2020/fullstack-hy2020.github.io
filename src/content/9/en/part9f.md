@@ -371,7 +371,7 @@ dispatch(setPatientList(patientListFromApi));
 
 ### Full entries
 
-In [exercise 9.10](/en/part9/typing_the_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.
+In [exercise 9.10](/en/part9/typing_an_express_app#exercises-9-10-9-11) we implemented an endpoint for fetching information about various diagnoses, but we are still not using that endpoint at all.
 Since we now have a page for viewing a patient's information, it would be nice to expand our data a bit.
 Let's add an *Entry* field to our patient data so that a patient's data contains their medical entries, including possible diagnoses.
 
