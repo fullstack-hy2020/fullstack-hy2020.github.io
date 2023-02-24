@@ -678,7 +678,7 @@ const App = () => {
 } 
 ```
 
-Let us now see what gets rendered to the console when the buttons plus, plus, zero and minus are pressed:
+Let us now see what gets rendered to the console when the buttons plus, zero and minus are pressed:
 
 ![](../../images/1/31.png)
 

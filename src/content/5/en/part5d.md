@@ -309,7 +309,7 @@ describe('Note app',  function() {
     cy.get('#password').type('salainen')  // highlight-line
     cy.get('#login-button').click()  // highlight-line
 
-    cy.contains(M'atti Luukkainen logged in') // highlight-line
+    cy.contains('Matti Luukkainen logged in') // highlight-line
   })
 })
 ```
@@ -667,7 +667,7 @@ it('login fails with wrong password', function() {
 
 The command <i>should</i> is most often used by chaining it after the command <i>get</i> (or another similar command that can be chained). The <i>cy.get('html')</i> used in the test practically means the visible content of the entire application.
 
-We vould also check the same by chaining the command <i>contains</i> with the command <i>should</i> with a slightly different parameter:
+We would also check the same by chaining the command <i>contains</i> with the command <i>should</i> with a slightly different parameter:
 
 ```js
 cy.contains('Matti Luukkainen logged in').should('not.exist')

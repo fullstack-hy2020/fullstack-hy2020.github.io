@@ -11,6 +11,8 @@ Alamme nyt tutustua kurssin ehkä tärkeimpään teemaan, [React](https://reactj
 
 Ehdottomasti helpoin tapa päästä alkuun on [create-react-app](https://github.com/facebookincubator/create-react-app)-nimisen työkalun käyttö. <i>create-react-app</i> on mahdollista asentaa omalle koneelle, mutta asennukseen ei ole tarvetta jos Noden mukana asentunut <i>npm</i>-työkalu on versioltaan vähintään <i>5.3</i>. Tällöin npm:n mukana asentuu komento </i>npx</i>, joka mahdollistaa create-react-app:in käytön asentamatta sitä erikseen. Npm:n version saa selville komennolla <em>npm -v</em>.
 
+> <i>Voit halutessasi käyttää kurssilla React-projektien luomiseen myös "uuden generaation" [Vite](https://vitejs.dev/)-kirjastoa. Koska create-react-app on edelleen Reactin kehitystiimin suositus, on se myös tämän kurssin oletusarvoinen työkalu React-projektien luomiseen. Voit lukea [täältä](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) React-tiimin ajatuksista frontendin "bootstrappaus"-työkalujen tulevaisuudesta.</i>
+
 Luodaan sovellus nimeltään <i>part1</i> ja mennään sovelluksen sisältämään hakemistoon:
 
 ```bash

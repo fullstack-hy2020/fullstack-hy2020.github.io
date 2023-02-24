@@ -574,7 +574,7 @@ In the example, the <i>first argument</i> is the target value.
 
 Handle exceptions and errors appropriately. The exerciseCalculator should accept inputs of varied lengths. Determine by yourself how you manage to collect all needed input.
 
-Cople of things to notice:
+Couple of things to notice:
 
 If you define helper functions in other modules, you should use the [JavaScript module system](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules), that is, the one we have used with React where importing is done with
 
@@ -816,7 +816,7 @@ The response is a JSON of the form:
 }
 ```
 
-See the [Express documentation](http://expressjs.com/en/5x/api.html#req.query) for info on how to access the query parameters.
+See the [Express documentation](https://expressjs.com/en/5x/api.html#req.query) for info on how to access the query parameters.
 
 If the query parameters of the request are of the wrong type or missing, a response with proper status code and an error message is given:
 
@@ -869,7 +869,7 @@ But if you hover over the values parsed from the request, an issue arises:
 
 All of the variables have the type *any*. It is not all that surprising, as no one has given them a type yet. There are a couple of ways to fix this, but first, we have to consider why this is accepted and where the type *any* came from.
 
-In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](http://www.typescriptlang.org/docs/handbook/basic-types.html#any). Any is a kind of "wild card" type which stands for <i>whatever</i> type.
+In TypeScript, every untyped variable whose type cannot be inferred implicitly becomes type [any](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#any). Any is a kind of "wild card" type which stands for <i>whatever</i> type.
 Things become implicitly any type quite often when one forgets to type functions.
 
 We can also explicitly type things *any*. The only difference between the implicit and explicit any type is how the code looks; the compiler does not care about the difference.
@@ -1028,11 +1028,11 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-We shall see later on in this parts some techniques how the <i>any</i> typed data (eg. the input an app recieves from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
+We shall see later on in this part some techniques how the <i>any</i> typed data (eg. the input an app receives from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
 
 ### Type assertion
 
-Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet. Let us export the type Operation in <i>calcultor.ts</i>:
+Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-assertions) is another "dirty trick" that can be done to keep TypeScript compiler and Eslint quiet. Let us export the type Operation in <i>calculator.ts</i>:
 
 ```js
 export type Operation = 'multiply' | 'add' | 'divide';

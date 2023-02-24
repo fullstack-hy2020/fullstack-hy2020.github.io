@@ -49,7 +49,7 @@ const schema = new mongoose.Schema({
 module.exports = mongoose.model('Person', schema)
 ```
 
-Mukana on myös muutama validointi. Arvon olemassaolon takaava _required: true_ on sikäli turha, että GraphQL:n käyttö takaa sen, että kentät ovat olemassa. Validointi on kuitenkin hyvä pitää myös tietokannan puolella.
+Mukana on myös muutama validointi. Arvon olemassaolon takaava _required: true_ on sikäli turha, koska GraphQL:n käyttö takaa sen, että kentät ovat olemassa. Validointi on kuitenkin hyvä pitää myös tietokannan puolella.
 
 Saamme sovelluksen jo suurilta osin toimimaan seuraavilla muutoksilla:
 

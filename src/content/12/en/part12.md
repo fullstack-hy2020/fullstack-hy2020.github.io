@@ -12,4 +12,7 @@ We will utilize containers to create immutable execution environments for our No
 
 This section has been created by [Jami Kousa](https://github.com/jakousa) in collaboration with the Helsinki-based Services Foundation team at Unity. The Services Foundation team works on providing platforms for other teams at Unity to succeed in their mission of building great services for their customers. The team is passionate about improving Unity’s developer experience and works on tools like the Unity Dashboard, the Unity Editor, and [Unity.com](https://unity.com/).
 
+<i>Part updated 12th Feb 2023</i>
+- <i>No major changes</i>
+
 </div>

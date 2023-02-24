@@ -489,7 +489,7 @@ import diaryData from '../../data/entries.json';
 
 import { DiaryEntry } from '../types'; // highlight-line
 
-const diaries: <DiaryEntry[] = diaryData; // highlight-line
+const diaries: DiaryEntry[] = diaryData; // highlight-line
 
 const getEntries = (): DiaryEntry[] => { // highlight-line
   return diaries; // highlight-line
@@ -563,7 +563,7 @@ export default diaryEntries; // highlight-line
 Now, when we import the array, the compiler interprets it correctly and the *weather* and *visibility* fields are understood right:
 
 ```js
-import diaries from '../../data/ntries'; // highlight-line
+import diaries from '../../data/entries'; // highlight-line
 
 import { DiaryEntry } from '../types';
 
@@ -1389,7 +1389,7 @@ If we now try to create a new diary entry with invalid or missing fields, we are
 
 ![postman showing 400 bad request with incorrect or missing visibility - awsesome](../../images/9/62new.png)
 
-The source code of the application can be found on [GitHub](https://github.com/FullStack-HY/flight-diary).
+The source code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/flight-diary).
 
 </div>
 
