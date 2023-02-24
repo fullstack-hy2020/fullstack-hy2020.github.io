@@ -757,7 +757,7 @@ app.get('/api/notes/:id', (request, response, next) => { // highlight-line
 })
 ```
 
-O erro que é passado adiante é devido à função <em>next</em> como parâmetro. Se <em>next</em> for chamado sem um parâmetro, então a execução simplesmente avançará para a próxima rota ou middleware. Se a função <em>next</em> for chamada com um parâmetro, então a execução continuará para o <i>middleware de gerenciamento de erro</i>.
+O erro que é passado adiante é devido à função <em>next</em> como parâmetro. Se <em>next</em> for chamada sem um parâmetro, então a execução simplesmente avançará para a próxima rota ou middleware. Se a função <em>next</em> for chamada com um parâmetro, então a execução continuará para o <i>middleware de gerenciamento de erro</i>.
 
 Os [gerenciadores de erro](https://expressjs.com/en/guide/error-handling.html) do Express são middlewares definidos com uma função que aceita <i>quatro parâmetros</i>. Nosso gerenciador de erro é assim:
 

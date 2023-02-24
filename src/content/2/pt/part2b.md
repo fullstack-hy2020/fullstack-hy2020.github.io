@@ -474,7 +474,7 @@ Atente-se ao uso da extensão "React developer tools" na imagem acima!
 
 <h4>2.7: The Phonebook — 2º passo</h4>
 
-Impeça que o usuário possa adicionar nomes que já existam na lista telefônica. JavaScript têm inúmeros [métodos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) adequados para realizar esta tarefa. Tenha em mente [como funciona a igualdade de objetos](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) em JavaScript.
+Impeça que o usuário adicione nomes que já existam na lista telefônica. JavaScript têm inúmeros [métodos](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) adequados para realizar esta tarefa. Tenha em mente [como funciona a igualdade de objetos](https://www.joshbritz.co/posts/why-its-so-hard-to-check-object-equality/) em JavaScript.
 
 Emita uma aviso com o comando [alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) (alerta) quando o usuário tentar fazer isso:
 

@@ -522,9 +522,9 @@ Se definíssemos o gerenciador de evento como uma string...
 ```js
 index.js:2178 Warning: Expected `onClick` listener to be a function, instead got a value of `string` type.
 /* index.js:2178 Aviso: Esperava-se que o ouvinte `onClick` fosse uma função, mas obteve-se um valor do tipo `string`. */
-    em botão (at index.js:20)
-    em div (at index.js:18)
-    em App (at index.js:27)
+    in button (at index.js:20)
+    in div (at index.js:18)
+    in App (at index.js:27)
 ```
 
 O seguinte também não funcionaria:
@@ -1204,7 +1204,7 @@ export default App
 
 O conteúdo do arquivo <i>index.js</i> é o mesmo dos exercícios anteriores.
 
-Descubra como gerar números aleatórios (random numbers) em JavaScript, por exemplo, pesquisando na internet ou lendo o [Mozilla Developer Network](https://developer.mozilla.org). Lembre-se de que você pode testar a criação de números aleatórios, por exemplo, diretamente no console do seu navegador.
+Descubra como gerar números aleatórios (random numbers) em JavaScript, por exemplo, pesquisando na internet ou lendo o [Mozilla Developer Network](https://developer.mozilla.org). Lembre-se de que você pode testar a criação de números aleatórios diretamente no console do seu navegador, por exemplo.
 
 Sua aplicação no estado final pode ficar mais ou menos assim:
 
@@ -1248,7 +1248,7 @@ Agora, implemente a versão final da aplicação que exibe a anedota com o maior
 
 ![anedota com o maior número de votos](../../images/1/20a.png)
 
-Se múltiplas anedotas estiverem empatadas no primeiro lugar, mostre apenas uma delas.
+Se múltiplas anedotas estiverem empatadas no primeiro lugar, exiba apenas uma delas.
 
 Este foi o último exercício para esta parte do curso, e é hora de enviar seu código para o GitHub e marcar todos os seus exercícios concluídos na guia "my submissions" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
