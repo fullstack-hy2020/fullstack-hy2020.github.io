@@ -248,7 +248,7 @@ React usa os atributos "key" (ou atributos-chave) dos objetos em um array para d
 
 ### Map
 
-Entender como funciona o método de array [`map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) é crucial para fazer o resto do curso.
+Entender como funciona o método de array [`map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) é crucial para fazer o restante do curso.
 
 A aplicação contém um array chamado _notes_:
 
@@ -747,7 +747,7 @@ const App = () => {
 }
 ```
 
-A aplicação pode ficar assim, por exemplo: 
+A aplicação pode, por exemplo, ficar assim: 
 
 ![recurso que mostra o número arbitrário de cursos](../../images/teht/10e.png)
 
