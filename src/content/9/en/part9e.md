@@ -164,7 +164,7 @@ The return value of a _async_ function is a [promise](https://developer.mozilla.
 
 <div class="tasks">
 
-### Exercises 9.20-9.22
+### Exercises 9.20-9.21
 
 We will soon add a new type for our app, *Entry*, which represents a lightweight patient journal entry. It consists of a journal text, i.e. a *description*, a creation date, information regarding the specialist who created it and possible diagnosis codes. Diagnosis codes map to the ICD-10 codes returned from the <i>/api/diagnoses</i> endpoint. Our naive implementation will be that a patient has an array of entries.
 
