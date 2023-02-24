@@ -308,7 +308,7 @@ Fix the issue according to the example shown in [promise and errors](/en/part2/a
 
 At the end of this part there are a few more challenging exercises. At this stage, you can skip the exercises if they are too much of a headache, we will come back to the same themes again later. The material is worth reading through in any case.
 
-We have done one thing in our app that is masking away a very typical source of error. 
+We have done one thing in our app that is masking away a very typical source of error.
 
 We set the state _notes_ to have initial value of an empty array:
 
@@ -334,7 +334,7 @@ const App = () => {
 
 The app breaks down:
 
-![](../../images/2/31a.png)
+![console typerror cannot read properties of null via map from App](../../images/2/31a.png)
 
 The error message gives the reason and location for the error. The code that caused the problems is the following:
 
@@ -353,7 +353,7 @@ The error message gives the reason and location for the error. The code that cau
 
 The error message is
 
-```
+```bash
 Cannot read properties of null (reading 'map')
 ```
 
@@ -375,6 +375,7 @@ The effect hook uses the function _setNotes_ to set _notes_ to have the notes th
 
 However the problem is that the effect is executed only <i>after the first render</i>.
 And because _notes_ has the initial value of null:
+
 ```js
 const App = () => {
   const [notes, setNotes] = useState(null) // highlight-line
@@ -392,7 +393,7 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-and this blows up the app since we can not call method _map_ of the value _null_. 
+and this blows up the app since we can not call method _map_ of the value _null_.
 
 When we set _notes_ to be initially an empty array, there is no error since it is allowed to call _map_ to an empty array.
 
@@ -439,7 +440,6 @@ The other thing that we still need to have a closer look is the second parameter
       })
   }, []) // highlight-line
 ```
-
 
 The second parameter of <em>useEffect</em> is used to [specify how often the effect is run](https://reactjs.org/docs/hooks-reference.html#conditionally-firing-an-effect).
 The principle is that the effect is always executed after the first render of the component <i>and</i> when the value of the second parameter changes.
@@ -498,7 +498,7 @@ const App = () => {
 
 The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
 
-![](../../images/2/32new.png)
+![browser showing currency exchange rates with eur typed and cosole saying fetching exchange rates](../../images/2/32new.png)
 
 The application sets the name of the currency entered to the form to the state _currency_ at the moment the button is pressed.
 
@@ -538,7 +538,7 @@ if (currency) {
 
 which prevents requesting the exchange rates just after the first render when the variable _currency_ still has the initial value, i.e. a null value.
 
-So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address https://open.er-api.com/v6/latest/eur and stores the response in the _rates_ state.
+So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address <https://open.er-api.com/v6/latest/eur> and stores the response in the _rates_ state.
 
 When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested from the API.
 
@@ -627,7 +627,7 @@ const api_key = process.env.REACT_APP_API_KEY
 // variable api_key has now the value set in startup
 ```
 
-Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following. 
+Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
 
 ```
 # .env

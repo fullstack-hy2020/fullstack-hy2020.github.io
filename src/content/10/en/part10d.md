@@ -81,7 +81,7 @@ Now, let's run our example test by running <em>npm test</em>. The command's outp
 
 Organizing test files in a single <i>\_\_tests\_\_</i> directory is one approach in organizing the tests. When choosing this approach, it is recommended to put the test files in their corresponding subdirectories just like the code itself. This means that for example tests related to components are in the <i>components</i> directory, tests related to utilities are in the <i>utils</i> directory, and so on. This will result in the following structure:
 
-```
+```bash
 src/
   __tests__/
     components/
@@ -96,7 +96,7 @@ src/
 
 Another approach is to organize the tests near the implementation. This means that for example, the test file containing tests for the <em>AppBar</em> component is in the same directory as the component's code. This will result in the following structure:
 
-```
+```bash
 src/
   components/
     AppBar/
@@ -178,7 +178,7 @@ We acquire the <em>Text</em> node containing certain text by using the <em>getBy
 
 React Native Testing Library's documentation has some good hints on [how to query different kinds of elements](https://callstack.github.io/react-native-testing-library/docs/how-should-i-query). Another guide worth reading is Kent C. Dodds article [Making your UI tests resilient to change](https://kentcdodds.com/blog/making-your-ui-tests-resilient-to-change).
 
-The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) has also a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like. 
+The object [screen](https://callstack.github.io/react-native-testing-library/docs/api#screen) has also a helper method [debug](https://callstack.github.io/react-native-testing-library/docs/api#debug) that prints the rendered React tree in a user-friendly format. Use it if you are unsure what the React tree rendered by the <em>render</em> function looks like.
 
 For all available queries, check the React Native Testing Library's [documentation](https://callstack.github.io/react-native-testing-library/docs/api-queries). The full list of available React Native specific matchers can be found in the [documentation](https://github.com/testing-library/jest-native#matchers) of the jest-native library. Jest's [documentation](https://jestjs.io/docs/en/expect) contains every universal Jest matcher.
 
@@ -302,7 +302,7 @@ Now, the <em>RepositoryList</em> component contains only the side effects and it
 
 <div class="tasks">
 
-### Exercises 10.17. - 10.18.
+### Exercises 10.17. - 10.18
 
 #### Exercise 10.17: testing the reviewed repositories list
 
@@ -412,6 +412,7 @@ describe('SignIn', () => {
   });
 });
 ```
+
 </div>
 
 <div class="content">
@@ -424,7 +425,7 @@ It is time to put everything we have learned so far to good use and start extend
 
 <div class="tasks">
 
-### Exercises 10.19. - 10.26.
+### Exercises 10.19. - 10.26
 
 #### Exercise 10.19: the single repository view
 
@@ -452,9 +453,9 @@ The final version of the single repository view should look something like this:
 
 ![Application preview](../../images/10/13.jpg)
 
-**Note** if the peer depencendy issues prevent installing the library, try the _--legacy-peer-deps_ option:
+**Note** if the peer depencendy issues prevent installing the library, try the *--legacy-peer-deps* option:
 
-```
+```bash
 npm install expo-linking --legacy-peer-deps
 ```
 
@@ -538,7 +539,7 @@ You can create a review using the <em>createReview</em> mutation. Check this mut
 
 After a successful <em>createReview</em> mutation, redirect the user to the repository's view you implemented in the previous exercise. This can be done with the <em>navigate</em> function after you have obtained it using the [useNavigate](https://reactrouter.com/docs/en/v6/api#usenavigate) hook. The created review has a <em>repositoryId</em> field which you can use to construct the route's path.
 
-To prevent getting cached data with the <em>repository</em> query in the single repository view, use the _cache-and-network_ [fetch policy](https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy) in the query. It can be used with the <em>useQuery</em> hook like this:
+To prevent getting cached data with the <em>repository</em> query in the single repository view, use the *cache-and-network* [fetch policy](https://www.apollographql.com/docs/react/data/queries/#setting-a-fetch-policy) in the query. It can be used with the <em>useQuery</em> hook like this:
 
 ```javascript
 useQuery(GET_REPOSITORY, {
@@ -852,7 +853,7 @@ export default RepositoryList;
 
 Try scrolling to the end of the reviewed repositories list and you should see the message in the logs.
 
-Next, we need to fetch more repositories once the end of the list is reached. This can be achieved using the [fetchMore](https://www.apollographql.com/docs/react/pagination/core-api/#the-fetchmore-function) function provided by the <em>useQuery</em> hook. To describe Apollo Client, how to merge the existing repositories in the cache with the next set of repositories, we can use a [field policy](https://www.apollographql.com/docs/react/caching/cache-field-behavior/). In general, field policies can be used to customize the cache behavior during read and write operations with [read](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function) and [merge](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function) functions. 
+Next, we need to fetch more repositories once the end of the list is reached. This can be achieved using the [fetchMore](https://www.apollographql.com/docs/react/pagination/core-api/#the-fetchmore-function) function provided by the <em>useQuery</em> hook. To describe Apollo Client, how to merge the existing repositories in the cache with the next set of repositories, we can use a [field policy](https://www.apollographql.com/docs/react/caching/cache-field-behavior/). In general, field policies can be used to customize the cache behavior during read and write operations with [read](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-read-function) and [merge](https://www.apollographql.com/docs/react/caching/cache-field-behavior/#the-merge-function) functions.
 
 Let's add a field policy for the <em>repositories</em> query in the <i>apolloClient.js</i> file:
 
@@ -911,7 +912,7 @@ export default createApolloClient;
 
 As mentioned earlier, the format of the pagination's result object and the arguments are based on the Relay's pagination specification. Luckily, Apollo Client provides a predefined field policy, <em>relayStylePagination</em>, which can be used in this case.
 
-Next, let's alter the <em>useRepositories</em> hook so that it returns a decorated <em>fetchMore</em> function, which calls the actual <em>fetchMore</em> function with appropriate	arguments so that we can fetch the next set of repositories:
+Next, let's alter the <em>useRepositories</em> hook so that it returns a decorated <em>fetchMore</em> function, which calls the actual <em>fetchMore</em> function with appropriate arguments so that we can fetch the next set of repositories:
 
 ```javascript
 const useRepositories = (variables) => {
@@ -981,7 +982,7 @@ Use a relatively small <em>first</em> argument value such as 3 while trying out 
 
 <div class="tasks">
 
-### Exercise 10.27.
+### Exercise 10.27
 
 #### Exercise 10.27: infinite scrolling for the repository's reviews list
 
@@ -1065,7 +1066,7 @@ As we are getting closer to the end of this part, let's take a moment to look at
 
 [Styled-components](https://styled-components.com/) is a library for styling React components using [CSS-in-JS](https://en.wikipedia.org/wiki/CSS-in-JS) technique. In React Native we are already used to defining component's styles as a JavaScript object, so CSS-in-JS is not so uncharted territory. However, the approach of styled-components is quite different from using the <em>StyleSheet.create</em> method and the <em>style</em> prop.
 
-In styled-components components' styles are defined with the component using a feature called [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) or a plain JavaScript object. Styled-components makes it possible to define new style properties for component based on its props _at runtime_. This brings many possibilities, such as seamlessly switching between a light and a dark theme. It also has a full [theming support](https://styled-components.com/docs/advanced#theming). Here is an example of creating a <em>Text</em> component with style variations based on props:
+In styled-components components' styles are defined with the component using a feature called [tagged template literal](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Tagged_templates) or a plain JavaScript object. Styled-components makes it possible to define new style properties for component based on its props *at runtime*. This brings many possibilities, such as seamlessly switching between a light and a dark theme. It also has a full [theming support](https://styled-components.com/docs/advanced#theming). Here is an example of creating a <em>Text</em> component with style variations based on props:
 
 ```javascript
 import styled from 'styled-components/native';

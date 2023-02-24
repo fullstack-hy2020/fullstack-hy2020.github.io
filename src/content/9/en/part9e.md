@@ -7,7 +7,7 @@ lang: en
 
 <div class="tasks">
 
-**NOTE**: this is the new section about Patientor frontend that has replaced 12th February 2023, [this chapter](/en/part9/patientor_frontend_the_old_material). In the change, the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript. 
+**NOTE**: this is the new section about Patientor frontend that has replaced 12th February 2023, [this chapter](/en/part9/patientor_frontend_the_old_material). In the change, the Patientor frontend structure was refactored to a simpler form that makes it much easier to focus on learning TypeScript.
 
 If you have started doing the exercises with the old Patientor, you may continue with [the old material](/en/part9/patientor_frontend_the_old_material). If not, then it is recommended to use the "new" patientor that is described in this section.
 
@@ -46,11 +46,11 @@ The folder structure looks as follows:
 
 ![vscode folder structure for patientor](../../images/9/34brandnew.png)
 
-Besides the component *App* a directory for services, there are currently three main components: *AddPatientModal* and *PatientListPage* which are both defined in a directory, and a component *HealthRatingBar* defined in a file. If a component has some subcomponents not used elsewhere in the app, it might be a good idea to define the component and its subcomponents in a directory. For example now the AddPatientModal is defined in the file _components/AddPatientModal/index.tsx_ and its subcomponent *AddPatientForm* in its own file under the same directory.
+Besides the component *App* a directory for services, there are currently three main components: *AddPatientModal* and *PatientListPage* which are both defined in a directory, and a component *HealthRatingBar* defined in a file. If a component has some subcomponents not used elsewhere in the app, it might be a good idea to define the component and its subcomponents in a directory. For example now the AddPatientModal is defined in the file *components/AddPatientModal/index.tsx* and its subcomponent *AddPatientForm* in its own file under the same directory.
 
-There is nothing very surprising in the code. The state and communication with the backend are implemented with _useState_ hook and Axios, similar to the notes app in the previous section. [Material UI](http://localhost:8000/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implementer with [React Router](http://localhost:8000/en/part7/react_router), both familiar to us from part 7 of the course.
+There is nothing very surprising in the code. The state and communication with the backend are implemented with *useState* hook and Axios, similar to the notes app in the previous section. [Material UI](http://localhost:8000/en/part7/more_about_styles#material-ui) is used to style the app and the navigation structure is implementer with [React Router](http://localhost:8000/en/part7/react_router), both familiar to us from part 7 of the course.
 
-From typing point of view, there are a couple of interesting things. Component _App_ passes the function _setPatients_ as a prop to the component _PatientListPage_:
+From typing point of view, there are a couple of interesting things. Component *App* passes the function *setPatients* as a prop to the component *PatientListPage*:
 
 ```js
 const App = () => {
@@ -91,13 +91,13 @@ const PatientListPage = ({ patients, setPatients } : Props ) => {
 }
 ```
 
-So the function _setPatients_ has type _React.Dispatch<React.SetStateAction<Patient[]>>_. We can see the type in the editor when we hover over the function:
+So the function *setPatients* has type *React.Dispatch<React.SetStateAction<Patient[]>>*. We can see the type in the editor when we hover over the function:
 
-![](../../images/9/73new.png)
+![vscode showing Patient array as type for setPatients](../../images/9/73new.png)
 
 The [React TypeScript cheatsheet](https://react-typescript-cheatsheet.netlify.app/docs/basic/getting-started/basic_type_example#basic-prop-types-examples) has a pretty nice list of typical prop types, where we can seek for help if finding the proper typing for props is not obvious.
 
-_PatientListPage_ passes four props to the component _AddPatientModal_. Two of these props are functions. Let us have a look how these are typed:
+*PatientListPage* passes four props to the component *AddPatientModal*. Two of these props are functions. Let us have a look how these are typed:
 
 ```js
 const PatientListPage = ({ patients, setPatients } : Props ) => {
@@ -146,19 +146,19 @@ const AddPatientModal = ({ modalOpen, onClose, onSubmit, error }: Props) => {
 }
 ```
 
-_onClose_ is just a function that takes no parameters, and does not return anything, so the type is
+*onClose* is just a function that takes no parameters, and does not return anything, so the type is
 
 ```js
 () => void
 ```
 
-The type of _onSubmit_ is a bit more interesting, it has one parameter that has the type _PatientFormValues_. The return value of the function is _Promise&#60;void&#62;_. So again the function type is written with the arrow syntax:
+The type of *onSubmit* is a bit more interesting, it has one parameter that has the type *PatientFormValues*. The return value of the function is _Promise&#60;void&#62;_. So again the function type is written with the arrow syntax:
 
 ```js
 (values: PatientFormValues) => Promise<void>
 ```
 
-The return value of a _async_ function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is just _Promise&#60;void&#62;_.
+The return value of a *async* function is a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function#return_value) with the value that the function returns. Our function does not return anything so the proper return type is just _Promise&#60;void&#62;_.
 
 </div>
 
@@ -295,7 +295,7 @@ interface BaseEntry {
 }
 ```
 
-As was mentioned [earlier in this part](/en/part9/first_steps_with_type_script/#the-alternative-array-syntax), we could define an array with the syntax _Array&#60;Type&#62;_ instead of defining it *Type[]*. In this particular case writing _Diagnosis['code'][]_ starts to look a bit strange so we will decide to use the alternative syntax (that is also recommended by the ESlint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)):
+As was mentioned [earlier in this part](/en/part9/first_steps_with_type_script/#the-alternative-array-syntax), we could define an array with the syntax _Array&#60;Type&#62;_ instead of defining it *Type[]*. In this particular case writing *Diagnosis['code'][]* starts to look a bit strange so we will decide to use the alternative syntax (that is also recommended by the ESlint rule [array-simple](https://typescript-eslint.io/rules/array-type/#array-simple)):
 
 ```js
 interface BaseEntry {
@@ -337,7 +337,7 @@ export type Entry =
 
 ### Omit with unions
 
-An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using 
+An important point concerning unions is that, when you use them with *Omit* to exclude a property, it works in a possibly unexpected way. Suppose we want to remove the *id* from each *Entry*. We could think of using
 
 ```js
 Omit<Entry, 'id'>
@@ -433,11 +433,11 @@ Upon a successful submit, the new entry should be added to the correct patient a
 
 Your form might look something like this:
 
-![](../../images/9/74new.png)
+![Patientor new healthcheck entry form](../../images/9/74new.png)
 
 If user enters invalid values to the form and backend rejects the addition, show a proper error message to user
 
-![](../../images/9/75new.png)
+![browser showing healthCheckRating incorrect 15 error](../../images/9/75new.png)
 
 #### 9.28: Patientor, step9
 
@@ -449,7 +449,7 @@ Improve the entry creation forms so that it makes hard to enter incorrect dates,
 
 Your improved form might look something like this:
 
-![](../../images/9/76new.png)
+![patientor showing fancy calendar ui](../../images/9/76new.png)
 
 Diagnosis codes are now set with Material UI [multiple select](https://mui.com/material-ui/react-select/#multiple-select) and dates with [Input](https://mui.com/material-ui/api/input/) elements with type [date](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date).
 

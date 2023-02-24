@@ -45,7 +45,7 @@ const App = (props) => {
 
 We can also use React Developer Tools to see that this really happens:
 
-![](../../images/2/30.png)
+![browser showing dev react tools window](../../images/2/30.png)
 
 If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
 

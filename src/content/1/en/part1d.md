@@ -248,7 +248,6 @@ const App = () => {
 
 We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
 
-
 ### Update of the state is asynchronous
 
 Let's expand the application so that it keeps track of the total number of button presses in the state _total_, whose value is always updated when the buttons are pressed:
@@ -287,7 +286,7 @@ const App = () => {
 
 The solution does not quite work:
 
-![](../../images/1/33.png)
+![browser showing 2 left|right 1, RLL total 2](../../images/1/33.png)
 
 For some reason the total of button presses is all the time one behind the actual amount of presses.
 
@@ -310,8 +309,7 @@ const App = () => {
 
 The console reveals the problem
 
-![](../../images/1/32.png)
-
+![devtools console showing left before 4 and left after 4](../../images/1/32.png)
 
 Even though a new value was set to _left_ by calling _setLeft(left + 1)_, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
 
@@ -338,7 +336,6 @@ const App = () => {
 ```
 
 So now the number of button presses is definitely based on the correct number of left button presses.
-
 
 ### Conditional rendering
 
@@ -1124,6 +1121,7 @@ You may find the following links useful:
 ### Web programmers oath
 
 Programming is hard, that is why I will use all the possible means to make it easier
+
 - I will have my browser developer console open all the time
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems

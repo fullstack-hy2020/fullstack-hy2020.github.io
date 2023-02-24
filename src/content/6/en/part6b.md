@@ -653,7 +653,7 @@ const noteSlice = createSlice({
 
 The following is printed to the console
 
-![](../../images/6/40new.png)
+![devtools console showing Handler,Target as null but IsRevoked as true](../../images/6/40new.png)
 
 The output is interesting but not very useful. This is about the previously mentioned Immer library used by the Redux Toolkit, which is now used internally to save the state of the Store.
 
@@ -665,7 +665,7 @@ console.log(JSON.parse(JSON.stringify(state))) // highlight-line
 
 Console output is now human readable
 
-![](../../images/6/41new.png)
+![dev tools showing array of 2 notes](../../images/6/41new.png)
 
 ### Redux DevTools
 

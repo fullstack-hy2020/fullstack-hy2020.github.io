@@ -61,17 +61,17 @@ Quite often it is useful to inspect HTTP requests in the <i>Network</i> tab of C
 
 We can use the inspector to check that the headers sent in the POST request are what we expected them to be:
 
-![](../../images/2/21new1.png)
+![dev tools header shows 201 created for localhost:3001/notes](../../images/2/21new1.png)
 
 Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
 
 The tab <i>payload</i> can be used to check the request data:
 
-![](../../images/2/21new2.png)
+![devtools payload tab shows content and important fields from above](../../images/2/21new2.png)
 
 Also the tab <i>response</i> is useful, it shows what was the data the server responded with:
 
-![](../../images/2/21new3.png)
+![devtools response tab shows same content as payload but with id field too](../../images/2/21new3.png)
 
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
 
@@ -233,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React. 
+This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React.
 
 It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 

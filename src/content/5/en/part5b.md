@@ -488,7 +488,7 @@ The <i>ref</i> attribute is used for assigning a reference to each of the compon
 
 ### The updated full stack developer's oath
 
-The number of moving parts increases. At the same time, the likelihood of ending up in a situation where we are looking for a bug in the wrong place increases. So we need to be even more systematic. 
+The number of moving parts increases. At the same time, the likelihood of ending up in a situation where we are looking for a bug in the wrong place increases. So we need to be even more systematic.
 
 So we should once more extend our oath:
 
@@ -505,7 +505,6 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - If my code does not work, I will not write more code. Instead, I start deleting the code until it works or just return to a state when everything still was still working
 -If a test does not pass, I make sure that the tested functionality for sure works in the application
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
-
 
 </div>
 
@@ -575,7 +574,7 @@ const Blog = ({ blog }) => {
 
 We notice that something is wrong. When a new blog is created in the app, the name of the user that added the blog is not shown in the details of the blog:
 
-![](../../images/5/59new.png)
+![browser showing missing name underneath like button](../../images/5/59new.png)
 
 When the browser is reloaded, the information of the person is displayed. This is not acceptable, find out where the problem is and make the necessary correction.
 

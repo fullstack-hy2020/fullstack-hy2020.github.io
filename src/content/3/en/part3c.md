@@ -396,9 +396,9 @@ The application works almost perfectly. The frontend assumes that every object h
 
 One way to format the objects returned by Mongoose is to [modify](https://stackoverflow.com/questions/7034848/mongodb-output-id-instead-of-id) the _toJSON_ method of the schema, which is used on all instances of the models produced with that schema.
   
-To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See https://mongoosejs.com/docs/guide.html#toJSON and  https://mongoosejs.com/docs/api.html#document_Document-toObject for more info on the toJSON option.
+To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: https://mongoosejs.com/docs/guide.html#options. See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the toJSON option.
   
-see https://mongoosejs.com/docs/api.html#transform for more info on the transform function.
+see <https://mongoosejs.com/docs/api.html#transform> for more info on the transform function.
 
 ```js
 noteSchema.set('toJSON', {
@@ -564,7 +564,7 @@ Since also the PORT is defined in our .env it is actually essential to ignore th
 
 When using Render, the database url is given by defining the proper env in the dashboard:
 
-![](../../images/3/render-env.png)
+![browser showing render environment variables](../../images/3/render-env.png)
 
 ### Using database in route handlers
 

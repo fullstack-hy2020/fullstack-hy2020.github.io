@@ -89,19 +89,19 @@ npm run cypress:open
 
 Cypress asks what type of tests we are doing. Let us answer "E2E Testing":
 
-![](../../images/5/51new.png)
+![cypress arrow towards e2e testing option](../../images/5/51new.png)
 
 Next a browser is selected (e.g. Chrome) and then we click "Create new spec":
 
-![](../../images/5/52new.png)
+![create new spec with arrow pointing towards it](../../images/5/52new.png)
 
 Let us create the test file <i>cypress/e2e/note\_app.cy.js</i>:
 
-![](../../images/5/53new.png)
+![cypress with path cypress/e2e/note_app.cy.js](../../images/5/53new.png)
 
 We could edit the tests in Cypress but let us rather use VS Code:
 
-![](../../images/5/54new.png)
+![vscode showing edits of test and cypress showing spec added](../../images/5/54new.png)
 
 We can now close the edit view of Cypress.
 
@@ -166,7 +166,6 @@ the test fails
 ![cypress showing failure expecting to find wtf but no](../../images/5/57new.png)
 
 Let's remove the failing code from the test.
-
 
 The variable _cy_ our tests use gives us a nasty Eslint error
 

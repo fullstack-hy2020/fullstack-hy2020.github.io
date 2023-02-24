@@ -121,7 +121,7 @@ fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.m
 
 When the app is being developed, it is more than likely that something fails. Eg. when I deployed my app for the first time with the database, not a single note was seen:
 
-![](../../images/3/fly-problem1.png)
+![browser showing no notes appearing](../../images/3/fly-problem1.png)
 
 The network tab of the browser console revealed that fetching the notes did not succeed, the request just remained for a long time in the _pending_ state until it failed with statuscode 502.
 
@@ -129,17 +129,17 @@ The browser console has to be open <i>all the time!</i>
 
 It is also vital to follow continuously the server logs. The problem became obvious when the logs were opened with  _fly logs_:
 
-![](../../images/3/fly-problem3.png)
+![fly.io server log showing connecting to undefined](../../images/3/fly-problem3.png)
 
 The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
 
 When using Render, the database url is given by definig the proper env in the dashboard:
 
-![](../../images/3/render-env.png)
+![browser render showing the MONGODB_URI env variable](../../images/3/render-env.png)
 
 The Render Dashboard shows the server logs:
 
-![](../../images/3/r7.png)
+![render dashboard with arrow pointting to server running on port 10000](../../images/3/r7.png)
 
 You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 

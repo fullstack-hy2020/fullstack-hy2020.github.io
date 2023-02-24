@@ -346,7 +346,7 @@ The test case obviously will not pass at this point. We are essentially practici
 
 Mongoose does not have a built-in validator for checking the uniqueness of a field. Fortunately there is a ready-made solution for this, the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) library. Let us install the library:
 
-```
+```bash
 npm install mongoose-unique-validator
 ```
 

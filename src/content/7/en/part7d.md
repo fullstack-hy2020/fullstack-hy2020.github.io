@@ -839,7 +839,7 @@ const App = () => {
 
 If the configuration for development and production differs a lot, it may be a good idea to [separate the configuration](https://webpack.js.org/guides/production/) of the two into their own files.
 
-Now, if the application is started with the command _npm start_ in development mode, it fetches the notes from the address http://localhost:3001/notes. The version bundled with the command _npm run build_ uses the address https://notes2023.fly.dev/api/notes to get the list of notes.
+Now, if the application is started with the command _npm start_ in development mode, it fetches the notes from the address <http://localhost:3001/notes>. The version bundled with the command _npm run build_ uses the address <https://notes2023.fly.dev/api/notes> to get the list of notes.
 
 We can inspect the bundled production version of the application locally by executing the following command in the <i>build</i> directory:
 

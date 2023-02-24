@@ -50,7 +50,7 @@ The initial code is on GitHub in the repository [https://github.com/fullstack-hy
 
 ### Managing data on the server with the React Query library
 
-We shall now use the [React Query](https://react-query-v3.tanstack.com/) library to store and manage data retrieved from the server. 
+We shall now use the [React Query](https://react-query-v3.tanstack.com/) library to store and manage data retrieved from the server.
 
 Install the library with the command
 
@@ -59,7 +59,6 @@ npm install react-query
 ```
 
 A few additions to the file  <i>index.js</i> are needed to pass the library functions to the entire application:
-
 
 ```js
 import React from 'react'
@@ -111,13 +110,13 @@ const App = () => {
 
 Retrieving data from the server is still done in the familiar way with the Axios <i>get</i> method. However, the Axios method call is now wrapped in a [query](https://react-query-v3.tanstack.com/guides/queries) formed with the [useQuery](https://react-query-v3.tanstack.com/reference/useQuery) function. The first parameter of the function call is a string <i>notes</i> which acts as a [key](https://react-query-v3.tanstack.com/guides/query-keys)  to the query defined, i.e. the list of notes.
 
-The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation: 
+The return value of the <i>useQuery</i> function is an object that indicates the status of the query. The output to the console illustrates the situation:
 
-![](../../images/6/60new.png)
+![browser devtools showing success status](../../images/6/60new.png)
 
 That is, the first time the component is rendered, the query is still in <i>loading</i> state, i.e. the associated HTTP request is pending. At this stage, only the following is rendered:
 
-```
+```html
 <div>loading data...</div>
 ```
 
@@ -199,7 +198,6 @@ const newNoteMutation = useMutation(createNote)
 The parameter is the function we added to the file <i>requests.js</i>, which uses Axios to send a new note to the server.
 
 The event handler <i>addNote</i> performs the mutation by calling the mutation object's function <i>mutate</i> and passing the new note as a parameter:
-
 
 ```js
 newNoteMutation.mutate({ content, important: true })
@@ -284,7 +282,7 @@ The application works well, and the code is relatively simple. The ease of makin
 
 The consequence of this, of course, is that after the PUT request that causes the note change, the application makes a new GET request to retrieve the query data from the server:
 
-![](../../images/6/61new.png)
+![devtools network tab with highlight over 3 and notes requests](../../images/6/61new.png)
 
 If the amount of data retrieved by the application is not large, it doesn't really matter. After all, from a browser-side functionality point of view, making an extra HTTP GET request doesn't really matter, but in some situations it might put a strain on the server.
 
@@ -317,7 +315,7 @@ It would be relatively easy to make a similar change to a mutation that changes 
 
 If we closely follow the browser's network tab, we notice that React Query retrieves all notes as soon as we move the cursor to the input field:
 
-![](../../images/6/62new.png)
+![dev tools notes app with input text field highlighted and arrow on network over notes request as 200](../../images/6/62new.png)
 
 What is going on? By reading the [documentation](https://react-query-v3.tanstack.com/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes. If we want, we can turn off the functionality by creating a query as follows:
 
@@ -343,7 +341,7 @@ React Query is a versatile library that, based on what we have already seen, sim
 
 So React Query is a library that maintains the <i>server state</i> in the frontend, i.e. acts as a cache for what is stored on the server. React Query simplifies the processing of data on the server, and can in some cases eliminate the need for data on the server to be saved in the frontend state.
 
-Most React applications need not only a way to temporarily store the served data, but also some solution for how the rest of the frontend state (e.g. the state of forms or notifications) is handled. 
+Most React applications need not only a way to temporarily store the served data, but also some solution for how the rest of the frontend state (e.g. the state of forms or notifications) is handled.
 
 </div>
 
@@ -359,12 +357,11 @@ Implement retrieving anecdotes from the server using React Query.
 
 The application should work in such a way that if there are problems communicating with the server, only an error page will be displayed:
 
-![](../../images/6/65new.png)
+![browser saying anecdote service not available due to problems in server on localhost](../../images/6/65new.png)
 
 You can find [here](https://react-query-v3.tanstack.com/guides/queries) info how to detect the possible errors.
 
 You can simulate a problem with the server by e.g. turning off the JSON Server. Please note that in a problem situation, the query is first in the state <i>isLoading</i> for a while, because if a request fails, React Query tries the request a few times before it states that the request is not successful. You can optionally specify that no retries are made:
-
 
 ```js
 const result = useQuery(
@@ -404,7 +401,7 @@ So even if the application uses React Query, some kind of solution is usually ne
 
 Let's look at a simple counter application. The application displays the counter value, and offers three buttons to update the counter status:
 
-![](../../images/6/63new.png)
+![browser showing + - 0 buttons and 7 above](../../images/6/63new.png)
 
 We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook. Code looks like the following:
 
@@ -804,9 +801,8 @@ Over the years, there have also been other state management libraries developed 
 
 ![graph showing redux growing in popularity over past 5 years](../../images/6/64new.png)
 
-Also, Redux does not have to be used in its entirety in an application. It may make sense, for example, to manage the form state outside of Redux, especially in situations where the state of a form does not affect the rest of the application. It is also perfectly possible to use Redux and React Query together in the same application. 
+Also, Redux does not have to be used in its entirety in an application. It may make sense, for example, to manage the form state outside of Redux, especially in situations where the state of a form does not affect the rest of the application. It is also perfectly possible to use Redux and React Query together in the same application.
 
 The question of which state management solution should be used is not at all straightforward. It is impossible to give a single correct answer. It is also likely that the selected state management solution may turn out to be suboptimal as the application grows to such an extent that the solution have to be changed even if the application has already been put into production use.
 
 </div>
-

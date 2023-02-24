@@ -14,6 +14,7 @@ At the moment the frontend shows existing notes and lets users change the state 
 We'll now implement a part of the required user management functionality in the frontend. Let's begin with the user login. Throughout this part, we will assume that new users will not be added from the frontend.
 
 ### Handling login
+
 A login form has now been added to the top of the page:
 
 ![browser showing user login for notes](../../images/5/1new.png)
@@ -118,7 +119,7 @@ export default { login }
 
 If you have installed the eslint plugin in VS Code, you may now see the following warning:
 
-![](../../images/5/50new.png)
+![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
 
 We'll get back to configuring eslint in a moment. You can ignore the error for the time being or suppress it by adding the following to the line before the warning:
 
@@ -127,7 +128,7 @@ We'll get back to configuring eslint in a moment. You can ignore the error for t
 export default { login }
 ```
 
-The method for handling the login can be implemented as follows: 
+The method for handling the login can be implemented as follows:
 
 ```js
 import loginService from './services/login' // highlight-line

@@ -60,7 +60,7 @@ A better question could be
 > <i> In the exercise 2.15 when I try to add a new person to the app, server responds to 403, despite the request looks ok to me.
 >
 > The code looks like this
-> 
+>
 > ```js
 >   // the relevant part of code is pasted here
 >   // code should contain several console.log statements for helping the debuging
@@ -77,7 +77,6 @@ A better question could be
 > [screen shot from the network console]
 >
 > All the code can be found here (a link to GitHub)
-
 
 ### Parts and completion
 
@@ -340,6 +339,7 @@ There are no more "yearly versions" of the course, the course is open all the ti
 Despite changes <i>all the submitted exercises remain valid</i>, and the course can be continued without bothering about the updates. Also the policy for getting certs, university credits etc. shall remain the same no matter what happens.
 
 Recent major changes
+
 - Part 2 (18th Jan 2023): Exercise numbering changed, the old 2.11-13. moved to the end of the part
 - Part 6 (30th Jan 2023): A new section on React Query, useReducer and React context replaced the section on Redux connect
 - Part 8 (5th Feb 2023): Backend updated to use Apollo Server 4.0
