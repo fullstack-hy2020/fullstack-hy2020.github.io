@@ -274,7 +274,7 @@ Implementaremos el inicio de sesión en la interfaz en la [siguiente parte](/es/
 
 <div class="tasks">
 
-### Ejercicios 4.15.-4.22.
+### Ejercicios 4.15.-4.23.
 
 En los próximos ejercicios, se implementarán los conceptos básicos de la gestión de usuarios para la aplicación Bloglist. La forma más segura es seguir la historia desde el capítulo de la parte 4 [Administración de usuarios](/es/part4/administracion_de_usuarios) hasta el capítulo [Autenticación basada en token](/es/part4/autenticacion_de_token). Por supuesto, también puede utilizar su creatividad.
 
