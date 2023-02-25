@@ -14,7 +14,7 @@ If you have started with the exercises (6.19-6.21) that use the Redux connect yo
 
 <div class="content">
 
-###
+### Understanding the older connect function
 
 So far we have used our Redux store with the help of the [hook](https://react-redux.js.org/api/hooks) API from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.

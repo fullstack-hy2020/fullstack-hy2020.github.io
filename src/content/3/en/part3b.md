@@ -397,7 +397,7 @@ There is also a script *npm run logs:prod* to show the Fly.io logs.
 
 Note that the directory paths in the script <i>build:ui</i> depend on the location of repositories in the file system.
 
-#### Render
+#### Render script
 
 In case of Render, the scripts look like the following
 
