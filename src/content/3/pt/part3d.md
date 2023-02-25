@@ -7,8 +7,7 @@ lang: pt
 
 <div class="content">
 
-
-There are usually constraints that we want to apply to the data that is stored in our application's database. Our application shouldn't accept notes that have a missing or empty <i>content</i> property. The validity of the note is checked in the route handler:
+Existem restrições que normalmente queremos aplicar aos dados armazenados no banco de dados da nossa aplicação. Nossa aplicação não deve aceitar notas que tenham uma propriedade <i>content</i> em falta ou vazia. A validade da nota é verificada no gerenciador de rota:
 
 ```js
 app.post('/api/notes', (request, response) => {
@@ -23,14 +22,11 @@ app.post('/api/notes', (request, response) => {
 })
 ```
 
+Se a nota não tiver a propriedade <i>content</i>, respondemos à requisição com o código de status <i>400 bad request</i> (400 requisição inválida).
 
-If the note does not have the <i>content</i> property, we respond to the request with the status code <i>400 bad request</i>.
+Uma maneira mais inteligente de validar o formato dos dados antes de serem armazenados no banco de dados é usar a funcionalidade de [validação](https://mongoosejs.com/docs/validation.html) (validation) disponível no Mongoose.
 
-
-One smarter way of validating the format of the data before it is stored in the database is to use the [validation](https://mongoosejs.com/docs/validation.html) functionality available in Mongoose.
-
-
-We can define specific validation rules for each field in the schema:
+Podemos definir regras de validação específicas para cada campo no esquema:
 
 ```js
 const noteSchema = new mongoose.Schema({
@@ -45,11 +41,11 @@ const noteSchema = new mongoose.Schema({
 })
 ```
 
-The <i>content</i> field is now required to be at least five characters long and it is set as required, meaning that it can not be missing. We have not added any constraints to the <i>important</i> field, so its definition in the schema has not changed.
+O campo <i>content</i> agora deve ter pelo menos cinco caracteres de comprimento e é definido como obrigatório, o que significa que não pode estar faltando. Não adicionamos nenhuma restrição ao campo <i>important</i>, portanto, sua definição no esquema não mudou.
 
-The <i>minLength</i> and <i>required</i> validators are [built-in](https://mongoosejs.com/docs/validation.html#built-in-validators) and provided by Mongoose. The Mongoose [custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) functionality allows us to create new validators if none of the built-in ones cover our needs.
+Os validadores <i>minLength</i> (grosso modo, "comprimentoMínimo") e <i>required</i> são [integrados](https://mongoosejs.com/docs/validation.html#built-in-validators) (built-in) e fornecidos pelo Mongoose. A funcionalidade de [validação personalizada](https://mongoosejs.com/docs/validation.html#custom-validators) do Mongoose nos permite criar novos validadores se nenhum dos integrados atender às nossas necessidades.
 
-If we try to store an object in the database that breaks one of the constraints, the operation will throw an exception. Let's change our handler for creating a new note so that it passes any potential exceptions to the error handler middleware:
+Se tentarmos armazenar no banco de dados um objeto que viola uma das restrições, a operação lançará uma exceção. Vamos alterar nosso gerenciador para criar uma nova nota para que ele passe quaisquer exceções potenciais para o middleware gerenciador de erros:
 
 ```js
 app.post('/api/notes', (request, response, next) => { // highlight-line
@@ -68,8 +64,7 @@ app.post('/api/notes', (request, response, next) => { // highlight-line
 })
 ```
 
-
-Let's expand the error handler to deal with these validation errors:
+Vamos expandir o gerenciador de erros para lidar com os erros de validação:
 
 ```js
 const errorHandler = (error, request, response, next) => {
@@ -85,14 +80,14 @@ const errorHandler = (error, request, response, next) => {
 }
 ```
 
-When validating an object fails, we return the following default error message from Mongoose:
+Quando a validação de um objeto falha, retornamos a seguinte mensagem de erro padrão do Mongoose:
 
-![postman showing error message](../../images/3/50.png)
+![mensagem de erro sendo exibida no postman](../../images/3/50.png)
 
-We notice that the backend has now a problem: validations are not done when editing a note.
-The [documentation](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explains what is the problem, validations are not run by default when <i>findOneAndUpdate</i> is executed.
+Percebemos que o back-end tem agora um problema: as validações não são executadas quando uma nota é editada.
+A [documentação](https://github.com/blakehaswell/mongoose-unique-validator#find--updates) explica qual é o problema: as validações não são executadas por padrão quando <i>findOneAndUpdate</i> é executado.
 
-The fix is easy. Let us also reformulate the route code a bit:
+É fácil a correção. Também vamos reformular um pouco o código da rota:
 
 ```js
 app.put('/api/notes/:id', (request, response, next) => {
@@ -110,55 +105,55 @@ app.put('/api/notes/:id', (request, response, next) => {
 })
 ```
 
-### Deploying the database backend to production
+### Implantando o back-end do banco de dados para produção
 
-The application should work almost as-is in Fly.io/Render. We do not have to generate a new production build of the frontend since changes thus far were only on our backend.
+A aplicação deve funcionar quase como está no Fly.io/Render. Não precisamos gerar um novo build de produção do front-end, uma vez que as alterações até agora ocorreram apenas no back-end.
 
-The environment variables defined in dotenv will only be used when the backend is not in <i>production mode</i>, i.e. Fly.io or Render.
+As variáveis de ambiente definidas em <i>dotenv</i> só serão usadas quando o back-end não estiver em <i>modo de produção</i> (production mode), ou seja, no Fly.io ou Render.
 
-For production, we have to set the database URL in the service that is hosting our app.
+Para se adaptar ao modo de produção, temos que definir a URL do banco de dados no serviço que está hospedando nossa aplicação.
 
-In Fly.io that is done _fly secrets set_:
+Isso é feito no Fly.io com _fly secrets set_:
 
 ```
 fly secrets set MONGODB_URI='mongodb+srv://fullstack:<password>@cluster0.o1opl.mongodb.net/noteApp?retryWrites=true&w=majority'
 ```
 
-When the app is being developed, it is more than likely that something fails. Eg. when I deployed my app for the first time with the database, not a single note was seen:
+Quando a aplicação está sendo desenvolvida, é mais do que provável que algo falhe. Por exemplo, quando implantei minha aplicação pela primeira vez com o banco de dados, não foi exibida uma única nota sequer:
 
-![](../../images/3/fly-problem1.png)
+![nenhuma nota sendo exibida na aplicação online](../../images/3/fly-problem1.png)
 
-The network tab of the browser console revealed that fetching the notes did not succeed, the request just remained for a long time in the _pending_ state until it failed with statuscode 502.
+O console do navegador na guia Rede revelou que a busca pelas notas não teve sucesso — a requisição simplesmente permaneceu por muito tempo no estado _pendente_ (pending) até falhar e exibir o código de status 502.
 
-The browser console has to be open <i>all the time!</i>
+O console do navegador tem que estar aberto <i>o tempo todo!</i>
 
-It is also vital to follow continuously the server logs. The problem became obvious when the logs were opened with  _fly logs_:
+Também é vital acompanhar continuamente os logs do servidor. O problema ficou óbvio quando os logs foram abertos com _fly logs_:
 
-![](../../images/3/fly-problem3.png)
+![logs da aplicação online no Fly.io](../../images/3/fly-problem3.png)
 
-The database url was _undefined_, so the command *fly secrets set MONGODB\_URI* was forgotten.
+A URL do banco de dados estava _undefined_ (indefinida), então o comando *fly secrets set MONGODB\_URI* foi esquecido.
 
-When using Render, the database url is given by definig the proper env in the dashboard:
+Ao usar o Render, a URL do banco de dados é fornecida definindo a variável de ambiente adequada no painel:
 
-![](../../images/3/render-env.png)
+![opção da variáveis de ambiente no painel do Render](../../images/3/render-env.png)
 
-The Render Dashboard shows the server logs:
+O Painel do Render mostra os logs do servidor:
 
-![](../../images/3/r7.png)
+![logs da aplicação online no Render](../../images/3/r7.png)
 
-You can find the code for our current application in its entirety in the <i>part3-5</i> branch of [this GitHub repository](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
+É possível encontrar o código da nossa aplicação atual na íntegra na branch <i>part3-5</i> [neste repositório do GitHub](https://github.com/fullstack-hy2019/part3-notes-backend/tree/part3-5).
 
 </div>
 
 <div class="tasks">
 
-### Exercises 3.19.-3.21.
+### Exercícios 3.19 a 3.21
 
-#### 3.19*: Phonebook database, step7
+#### 3.19*: Phonebook database — 7º passo
 
-Expand the validation so that the name stored in the database has to be at least three characters long.
+Expanda a validação para que o nome armazenado no banco de dados tenha pelo menos três caracteres.
 
-Expand the frontend so that it displays some form of error message when a validation error occurs. Error handling can be implemented by adding a <em>catch</em> block as shown below:
+Expanda o front-end para que seja exibido algum tipo de mensagem de erro quando ocorrer um erro de validação. O gerenciamento de erros pode ser implementado adicionando um bloco <em>catch</em> como mostrado abaixo:
 
 ```js
 personService
@@ -167,34 +162,38 @@ personService
       // ...
     })
     .catch(error => {
-      // this is the way to access the error message
+      // esta é a maneira de acessar a mensagem de erro
       console.log(error.response.data.error)
     })
 ```
 
-You can display the default error message returned by Mongoose, even though they are not as readable as they could be:
+Você pode exibir a mensagem de erro padrão retornada pelo Mongoose, mesmo que essas mensagens não sejam tão legíveis:
 
-![phonebook screenshot showing person validation failure](../../images/3/56e.png)
+![captura de tela da lista telefônica mostrando falha na validação de uma pessoa](../../images/3/56e.png)
 
-**NB:** On update operations, mongoose validators are off by default. [Read the documentation](https://mongoosejs.com/docs/validation.html) to determine how to enable them.
+**N.B.:** Os validadores do mongoose são desativados por padrão nas operações de atualização. [Leia a documentação](https://mongoosejs.com/docs/validation.html) para saber como ativá-los.
 
-#### 3.20*: Phonebook database, step8
+#### 3.20*: Phonebook database — 8º passo
 
-Add validation to your phonebook application, which will make sure that phone numbers are of the correct form. A phone number must 
-- has length of 8 or more
-- if formed of two parts that are separated by -, the first part has two or three numbers and the second part also consists of numbers
-  - eg. 09-1234556 and 040-22334455 are valid phone numbers
-  - eg. 1234556, 1-22334455 and 10-22-334455 are invalid
+Aplique a validação à sua aplicação da lista telefônica, na qual garantirá que os números de telefone estejam no formato correto. Um número de telefone deve:
+- Ter comprimento de 8 ou mais caracteres;
+- Se for composto por duas partes que são separadas por "-" (hífen), a primeira parte deve ter dois ou três números e a segunda parte também é completada com o restante do número telefônico:
+  - Ex.: 09-1234556 e 040-22334455 são números válidos;
+  - Ex.: 1234556, 1-22334455 e 10-22-334455 são números inválidos.
 
-Use a [Custom validator](https://mongoosejs.com/docs/validation.html#custom-validators) to implement the second part of the validation.
+Use um [Validador Personalizado](https://mongoosejs.com/docs/validation.html#custom-validators) (Custom validator) para implementar a segunda parte da validação.
 
-If an HTTP POST request tries to add a person with an invalid phone number, the server should respond with an appropriate status code and error message.
+Se uma requisição HTTP POST tentar adicionar uma pessoa com um número de telefone inválido, o servidor deve responder com um código de status apropriado e uma mensagem de erro.
 
-#### 3.21 Deploying the database backend to production
+#### 3.21 Implantação do back-end do banco de dados para produção
 
-Generate a new "full stack" version of the application by creating a new production build of the frontend, and copying it to the backend repository. Verify that everything works locally by using the entire application from the address <http://localhost:3001/>.
+Gere uma nova versão "full stack" da aplicação criando um novo build de produção do front-end, assim copiando-o ao repositório do back-end. Verifique se tudo funciona localmente acessando a aplicação inteira no endereço <http://localhost:3001/>.
 
-Push the latest version to Fly.io/Render and verify that everything works there as well.
+Envie a versão mais recente para o Fly.io/Render e verifique se tudo funciona lá também.
+
+**NOTA:** você deve implantar o BACK-END no serviço em nuvem. Se estiver usando o Fly.io, os comandos devem ser executados no diretório raiz do back-end (ou seja, no mesmo diretório onde está o package.json do back-end). Caso esteja usando o Render, o back-end deve estar na raiz do seu repositório.
+
+Você NÃO deve implantar o front-end diretamente em nenhuma etapa desta parte. Somente o repositório do back-end que é implantado nesta parte, nada mais.
 
 </div>
 
@@ -202,31 +201,31 @@ Push the latest version to Fly.io/Render and verify that everything works there 
 
 ### Lint
 
-Before we move on to the next part, we will take a look at an important tool called [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). Wikipedia says the following about lint:
+Antes de prosseguirmos para a próxima parte, vamos dar uma olhada em uma ferramenta importante chamada [lint](<https://en.wikipedia.org/wiki/Lint_(software)>). A Wikipedia diz o seguinte sobre o lint:
 
-> <i>Generically, lint or a linter is any tool that detects and flags errors in programming languages, including stylistic errors. The term lint-like behavior is sometimes applied to the process of flagging suspicious language usage. Lint-like tools generally perform static analysis of source code.</i>
+> <i>De forma genérica, lint ou um linter é qualquer ferramenta que detecta e sinaliza erros em linguagens de programação, incluindo erros de estilo. O termo "<i>lint-like behavior</i>" ("de um jeito lint") é às vezes aplicado ao processo de sinalização do uso suspeito da linguagem. Ferramentas semelhantes ao lint geralmente realizam análise estática do código fonte.</i>
 
-In compiled statically typed languages like Java, IDEs like NetBeans can point out errors in the code, even ones that are more than just compile errors. Additional tools for performing [static analysis](https://en.wikipedia.org/wiki/Static_program_analysis) like [checkstyle](https://checkstyle.sourceforge.io), can be used for expanding the capabilities of the IDE to also point out problems related to style, like indentation.
+Em linguagens compiladas de tipagem estática, como Java, IDEs (Integrated Development Environment [Ambiente de Desenvolvimento Integrado]) como o NetBeans podem apontar erros no código, inclusive aqueles que são mais do que apenas erros de compilação. Ferramentas adicionais que fazem [análise estática](https://en.wikipedia.org/wiki/Static_program_analysis) (static analysis), como [checkstyle](https://checkstyle.sourceforge.io), podem ser usadas para expandir as capacidades da IDE e apontar também problemas relacionados ao estilo, como a indentação (indentation).
 
-In the JavaScript universe, the current leading tool for static analysis aka. "linting" is [ESlint](https://eslint.org/).
+No universo JavaScript, a ferramenta líder atual para análise estática, também conhecida como "linting", é o [ESlint](https://eslint.org/).
 
-Let's install ESlint as a development dependency to the backend project with the command:
+Vamos instalar o ESlint como uma dependência de desenvolvimento no projeto back-end com o comando:
 
 ```bash
 npm install eslint --save-dev
 ```
 
-After this we can initialize a default ESlint configuration with the command:
+Após isso, podemos inicializar uma configuração padrão do ESlint com o comando:
 
 ```bash
 npx eslint --init
 ```
 
-We will answer all of the questions:
+Responderemos à todas as perguntas:
 
-![terminal output from ESlint init](../../images/3/52new.png)
+![saída do terminal proveniente do comando 'eslint --init'](../../images/3/52new.png)
 
-The configuration will be saved in the _.eslintrc.js_ file:
+A configuração será salva no arquivo _.eslintrc.js_:
 
 ```js
 module.exports = {
@@ -260,7 +259,7 @@ module.exports = {
 }
 ```
 
-Let's immediately change the rule concerning indentation, so that the indentation level is two spaces.
+Vamos mudar imediatamente a regra relacionada à indentação, para que o nível de indentação (ou nível de recuo) seja de dois espaços.
 
 ```js
 "indent": [
@@ -269,13 +268,13 @@ Let's immediately change the rule concerning indentation, so that the indentatio
 ],
 ```
 
-Inspecting and validating a file like _index.js_ can be done with the following command:
+Inspeciona-se e valida-se um arquivo como _index.js_ da seguinte maneira:
 
 ```bash
 npx eslint index.js
 ```
 
-It is recommended to create a separate _npm script_ for linting:
+Recomenda-se criar um  _npm script_ separado para a análise estática (linting):
 
 ```json
 {
@@ -290,37 +289,33 @@ It is recommended to create a separate _npm script_ for linting:
 }
 ```
 
-Now the _npm run lint_ command will check every file in the project.
+Agora o comando _npm run lint_ verificará todos os arquivos do projeto.
 
-Also the files in the <em>build</em> directory get checked when the command is run. We do not want this to happen, and we can accomplish this by creating an [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) file in the project's root with the following contents:
+Também são verificados os arquivos do diretório <em>build</em> quando o comando é executado. Não queremos que isso aconteça; podemos impedir essa análise criando um arquivo [.eslintignore](https://eslint.org/docs/user-guide/configuring#ignoring-files-and-directories) na raiz do projeto adicionando o seguinte:
 
 ```bash
 build
 ```
 
-This causes the entire <em>build</em> directory to not be checked by ESlint.
+Isso faz com que o diretório inteiro <em>build</em> não seja verificado pelo ESlint.
 
-Lint has quite a lot to say about our code:
+O lint tem bastante a dizer sobre o nosso código:
 
-![terminal output of ESlint errors](../../images/3/53ea.png)
+![saída de erros ESlint no terminal](../../images/3/53ea.png)
 
-Let's not fix these issues just yet.
+Mas não vamos corrigir esses problemas ainda.
 
-A better alternative to executing the linter from the command line is to configure a <i>eslint-plugin</i> to the editor, that runs the linter continuously. By using the plugin you will see errors in your code immediately. You can find more information about the Visual Studio ESLint plugin [here](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
+Uma melhor forma de executar o linter a partir da linha de comando é configurar um <i>eslint-plugin</i> no editor, que executará o linter continuamente. Assim que usar o plugin, você verá erros no seu código imediatamente. É possível encontrar mais informações sobre o plugin Visual Studio ESLint [aqui](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint).
 
+O plugin ESlint do VS Code sublinhará as violações de estilo com uma linha vermelha:
 
-The VS Code ESlint plugin will underline style violations with a red line:
+![captura de tela do plugin do vscode ESlint exibindo erros](../../images/3/54a.png)
 
-![Screenshot of vscode ESlint plugin showing errors](../../images/3/54a.png)
+Isso torna os erros fáceis de detectar e corrigir imediatamente.
 
+O ESlint tem uma vasta variedade de [regras](https://eslint.org/docs/rules/), das quais são fáceis de usar por meio do arquivo <i>.eslintrc.js</i>.
 
-This makes errors easy to spot and fix right away.
-
-
-ESlint has a vast array of [rules](https://eslint.org/docs/rules/) that are easy to take into use by editing the <i>.eslintrc.js</i> file.
-
-
-Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us, if equality is checked with anything but the triple equals operator. The rule is added under the <i>rules</i> field in the configuration file.
+Vamos adicionar a regra [eqeqeq](https://eslint.org/docs/rules/eqeqeq) que nos alerta se a igualdade é verificada com algo que não seja o operador de igualdade estrita. A regra é adicionada sob o campo <i>rules</i> no arquivo de configuração.
 
 ```js
 {
@@ -332,9 +327,9 @@ Let's add the [eqeqeq](https://eslint.org/docs/rules/eqeqeq) rule that warns us,
 }
 ```
 
-While we're at it, let's make a few other changes to the rules.
+Já que estamos configurando essa parte, vamos fazer algumas outras mudanças nas regras.
 
-Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-trailing-spaces) at the ends of lines, let's require that [there is always a space before and after curly braces](https://eslint.org/docs/rules/object-curly-spacing), and let's also demand a consistent use of whitespaces in the function parameters of arrow functions.
+Vamos evitar [espaços à direita (ou no final da cadeia)](https://eslint.org/docs/rules/no-trailing-spaces) (trailing spaces) ao final das linhas, exigir que [sempre haja um espaço antes e depois das chaves](https://eslint.org/docs/rules/object-curly-spacing) e também exigir um uso consistente de espaços em branco nos parâmetros de funções de seta.
 
 ```js
 {
@@ -353,15 +348,13 @@ Let's prevent unnecessary [trailing spaces](https://eslint.org/docs/rules/no-tra
 }
 ```
 
-
-Our default configuration takes a bunch of predetermined rules into use from <i>eslint:recommended</i>:
+Nossa configuração padrão usa uma série de regras pré-determinadas da regra <i>eslint:recommended</i>:
 
 ```bash
 'extends': 'eslint:recommended',
 ```
 
-
-This includes a rule that warns about _console.log_ commands. [Disabling](https://eslint.org/docs/user-guide/configuring#configuring-rules) a rule can be accomplished by defining its "value" as 0 in the configuration file. Let's do this for the <i>no-console</i> rule in the meantime.
+Isso inclui uma regra que avisa sobre comandos _console.log_. Para [desabilitar](https://eslint.org/docs/user-guide/configuring#configuring-rules) uma regra, é necessário que seu "valor" seja definido como 0 no arquivo de configuração. Vamos fazer isso para a regra <i>no-console</i> por enquanto.
 
 ```js
 {
@@ -381,25 +374,26 @@ This includes a rule that warns about _console.log_ commands. [Disabling](https:
 }
 ```
 
-**NB** when you make changes to the <i>.eslintrc.js</i> file, it is recommended to run the linter from the command line. This will verify that the configuration file is correctly formatted:
+**N.B.:** quando se faz alterações no arquivo <i>.eslintrc.js</i>, é recomendado executar o linter a partir da linha de comando. Isso irá verificar se o arquivo de configuração está formatado corretamente:
 
-![terminal output from npm run lint](../../images/3/55.png)
+![saída do terminal como resultado do comando 'npm run lint'](../../images/3/55.png)
 
-If there is something wrong in your configuration file, the lint plugin can behave quite erratically.
+O plugin do lint irá se comportar de forma bem errática se houver algo errado em seu arquivo de configuração.
 
-Many companies define coding standards that are enforced throughout the organization through the ESlint configuration file. It is not recommended to keep reinventing the wheel over and over again, and it can be a good idea to adopt a ready-made configuration from someone else's project into yours. Recently many projects have adopted the Airbnb [Javascript style guide](https://github.com/airbnb/javascript) by taking Airbnb's [ESlint](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb) configuration into use.
+Muitas empresas definem padrões de código que são aplicados em toda a organização por meio do arquivo de configuração do ESlint. Não é recomendado reinventar a roda toda vez, e pode ser até uma boa ideia adotar uma configuração pré-pronta do projeto de outra pessoa no seu. Muitos projetos adotaram recentemente o [guia de estilo Javascript](https://github.com/airbnb/javascript) da Airbnb, adotando a [configuração do ESlint da empresa](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb).
 
-You can find the code for our current application in its entirety in the <i>part3-6</i> branch of [this GitHub repository](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
+É possível encontrar o código da nossa aplicação atual na íntegra na branch <i>part3-6</i> [neste repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-6).
+
 </div>
 
 <div class="tasks">
 
-### Exercise 3.22.
+### Exercício 3.22
 
-#### 3.22: Lint configuration
+#### 3.22: Configuração do Lint
 
-Add ESlint to your application and fix all the warnings.
+Adicione o ESlint à sua aplicação e corrija todos os avisos.
 
-This was the last exercise of this part of the course. It's time to push your code to GitHub and mark all of your finished exercises to the [exercise submission system](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
+Este foi o último exercício para esta parte do curso, e é hora de enviar seu código para o GitHub e marcar todos os seus exercícios concluídos na guia "my submissions" do [sistema de envio de exercícios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 </div>

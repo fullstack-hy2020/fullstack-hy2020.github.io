@@ -992,7 +992,7 @@ const unknownEndpoint = (request, response) => {
 app.use(unknownEndpoint)
 ```
 
-É possível encontrar o código para nossa aplicação atual na íntegra na branch <i>part3-2</i> neste [repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
+É possível encontrar o código da nossa aplicação atual na íntegra na branch <i>part3-2</i> neste [repositório do GitHub](https://github.com/fullstack-hy2020/part3-notes-backend/tree/part3-2).
 
 </div>
 
