@@ -217,7 +217,7 @@ noteService.getAll().then(notes =>
 >
 > Await only works inside <i>async</i> functions, and the code in <i>index.js</i> is not inside a function, so due to the simple nature of the operation, we'll abstain from using <i>async</i> this time.
 
-We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual, when fetching data from a server, we'll use the <i>effect hook</i>. 
+We do, however, decide to move the initialization of the notes into the <i>App</i> component, and, as usual, when fetching data from a server, we'll use the <i>effect hook</i>.
 
 ```js
 import { useEffect } from 'react' // highlight-line
@@ -268,7 +268,7 @@ const App = () => {
 ```
 
 Now the variable <i>dispatch</i> we define in the _App_ component, which practically is the dispatch function of the redux store, has been added to the array useEffect receives as a parameter.
-**If** the value of the dispatch variable would change during runtime, 
+**If** the value of the dispatch variable would change during runtime,
 the effect would be executed again. This however cannot happen in our application, so the warning is unnecessary.
 
 Another way to get rid of the warning would be to disable ESlint on that line:
@@ -607,7 +607,6 @@ Modify the initialization of the Redux store to happen using asynchronous action
 
 Also modify the creation of a new anecdote to happen using asynchronous action creators, made possible by the Redux Thunk library.
 
-
 #### 6.18 Anecdotes and the backend, step5
 
 Voting does not yet save changes to the backend. Fix the situation with the help of the Redux Thunk library.
@@ -629,7 +628,7 @@ Make an action creator, which enables one to provide the notification as follows
 dispatch(setNotification(`you voted '${anecdote.content}'`, 10))
 ```
 
-The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds. 
+The first parameter is the text to be rendered and the second parameter is the time to display the notification given in seconds.
 
 Implement the use of this improved notification in your application.
 
