@@ -515,7 +515,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect
+- I will constantly keep on eye the state of the server to make sure that the data sent there by the frontend is saved there as I expect
 - I will keep on eye on the database: does the backend save data there in the right format
 - I progress with small steps
 - <i>when I suspect that there is a bug in the frontend, I make sure that the backend works for sure</i>
@@ -524,7 +524,7 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 - If my code does not work, I will not write more code.
   Instead, I start deleting the code until it works or just return to a state when everything still was still working
 -If a test does not pass, I make sure that the tested functionality for sure works in the application
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -598,7 +598,7 @@ The easiest solution will be to add a state to the blog post that controls the d
 We notice that something is wrong.
 When a new blog is created in the app, the name of the user that added the blog is not shown in the details of the blog:
 
-![browser showing names not added](../../images/5/59new.png)
+![browser showing missing name underneath like button](../../images/5/59new.png)
 
 When the browser is reloaded, the information of the person is displayed.
 This is not acceptable, find out where the problem is and make the necessary correction.

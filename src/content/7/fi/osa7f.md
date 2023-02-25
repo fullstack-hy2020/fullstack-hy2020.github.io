@@ -7,7 +7,7 @@ lang: fi
 
 <div class="content">
 
-Kurssin seitsemännessä osassa on lukujen [React-router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 13 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää myös osan toteuttamatta. Tehtävissä on melko suuressa roolissa [osassa 6](/osa6) käsiteltyjen edistyneempien tilanhallintamenetelmien (Redux, React Query ja context) soveltaminen.
+Kurssin seitsemännessä osassa on lukujen [React Router](/osa7/react_router) ja [custom-hookit](/osa7/custom_hookit) kahdeksan tehtävän lisäksi 13 tehtävää, joissa jatketaan osissa 4 ja 5 tehtyä Bloglist-sovellusta. Osa seuraavassa olevista tehtävistä on toisistaan riippumattomia "featureita", eli tehtäviä ei tarvitse tehdä järjestyksessä, voit jättää myös osan toteuttamatta. Tehtävissä on melko suuressa roolissa [osassa 6](/osa6) käsiteltyjen edistyneempien tilanhallintamenetelmien (Redux, React Query ja context) soveltaminen.
 
 Voit ottaa pohjaksi oman sovelluksesi sijaan myös mallivastauksen koodin.
 
@@ -63,17 +63,17 @@ Siirrä myös kirjautuneen käyttäjän tietojen talletus Reduxiin.
 
 Muuta tässä tehtävässä notifikaation tilanhallinta tapahtumaan käyttäen useReducer-hookia ja contextia.
 
-#### 7.11: React Query ja context step1
+#### 7.11: React Query ja context step2
 
 Siirrä blogien tietojen hallinnointi tapahtumaan React Query -kirjastoa hyväksikäyttäen. Tässä tehtävässä riittää, että sovellus näyttää olemassa olevat blogit ja, että uuden blogin luominen onnistuu.
 
 Kirjautumisen ja uuden blogin luomisen lomakkeiden tilaa kannattaa hallita edelleen Reactin tilan avulla.
 
-#### 7.12: React Query ja context step1
+#### 7.12: React Query ja context step3
 
 Laajenna ratkaisua siten, että blogien "liketys" ja poisto toimivat.
 
-#### 7.13: React Query ja context step1
+#### 7.13: React Query ja context step4
 
 Siirrä myös kirjautuneen käyttäjän tietojen hallinnointi tapahtumaan useReducer-hookin ja contextin avulla.
 

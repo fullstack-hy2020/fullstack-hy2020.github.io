@@ -36,7 +36,7 @@ We can access the backend from a browser and from postman without any problems.
 
 ### Same origin policy and CORS
 
-The issue lies with a thing called `same origin policy`.
+The issue lies with a thing called *same origin policy*.
 A URL's origin is defined by the combination of protocol (AKA scheme), hostname, and port.
 
 ```text
@@ -47,12 +47,12 @@ host: example.com
 port: 80
 ```
 
-When you visit a website (i.e <http://catwebsites.com>), the browser issues a request to the server on which the webiste (catwebsites.com) is hosted.
+When you visit a website (i.e <http://catwebsites.com>), the browser issues a request to the server on which the website (catwebsites.com) is hosted.
 The response sent by the server is an HTML file that may contain one or more references to external assets/resources hosted either on the same server that <i>catwebsites.com</i> is hosted on or a different website.
 When the browser sees reference(s) to a URL in the source HTML, it issues a request.
 If the request is issued using the URL that the source HTML was fetched from, then the browser processes the response without any issues.
-However, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the `Access-Control-Allow-origin` response header.
-If it contains `*` or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process it and throw an error.
+However, if the resource is fetched using a URL that doesn't share the same origin(scheme, host, port) as the source HTML, the browser will have to check the *Access-Control-Allow-origin* response header.
+If it contains *** or the URL of the source HTML, the browser will process the response, otherwise the browser will refuse to process it and throw an error.
   
 The <strong>same-origin policy</strong> is a security mechanism implemented by browsers in order to prevent session hijacking among other security vulnerabilities.
 
@@ -294,7 +294,7 @@ When the application is deployed, we must create a [production build](https://re
 
 A production build of applications created with <i>create-react-app</i> can be created with the command [npm run build](https://github.com/facebookincubator/create-react-app#npm-run-build-or-yarn-build).
 
-Let's run this command from the <i>root of the frontend project</i>.
+Let's run this command from the <i>root of the notes frontend project</i> that we developend in [Part 2](/en/part2).
 
 This creates a directory called <i>build</i> (which contains the only HTML file of our application, <i>index.html</i> ) which contains the directory <i>static</i>.
 [Minified](<https://en.wikipedia.org/wiki/Minification_(programming)>) version of our application's JavaScript code will be generated in the <i>static</i> directory.
@@ -355,7 +355,7 @@ const getAll = () => {
 // ...
 ```
 
-After the change, we have to create a new production build and copy it to the root of the backend repository.
+After the change, we have to create a new production build of the frontend and copy it to the root of the backend repository.
 
 The application can now be used from the <i>backend</i> address <http://localhost:3001>:
 
@@ -412,6 +412,8 @@ fly deploy
 The application works perfectly, except we haven't added the functionality for changing the importance of a note to the backend yet.
 
 ![screenshot of notes application](../../images/3/30new.png)
+
+<i>**NOTE:** changing of the importance DOES NOT work yet since the backend has no implementation for it yet.</i>
 
 Our application saves the notes to a variable.
 If the application crashes or is restarted, all of the data will disappear.
@@ -561,6 +563,13 @@ Test the deployed backend with a browser and Postman or VS Code REST client to e
 **PRO TIP:** When you deploy your application to Internet, it is worth it to at least in the beginning keep an eye on the logs of the application **AT ALL TIMES**.
 
 Create a README.md at the root of your repository, and add a link to your online application to it.
+
+**NOTE**: as it was said, you should deploy the BACKEND to the cloud service.
+If you are using Fly.io the commands should be run in the root directory of the backend (that is, in the same directory where the backend package.json is).
+In case of using Render, the backend must be in the root of your repository.
+
+You shall NOT be deploying the frontend directly at any stage of this part.
+It is just backend repository that is deployed throughout the whole part, nothing else.
 
 #### 3.11 phonebook full stack
 

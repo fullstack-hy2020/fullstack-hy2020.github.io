@@ -14,4 +14,8 @@ During the entire course, we've used create-react-app to generate the body of ou
 This time, we'll take a look under the hood: we'll learn how Webpack works and how we can use it to configure the application ourselves.
 We shall also have a look at hook functions and how to define a custom hook.
 
+<i>Part updated 1st Feb 2023</i>
+
+- <i>Alternative version of exercises 7.10-7.13 that use React Query and Context instead of Redux</i>
+
 </div>

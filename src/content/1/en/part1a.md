@@ -13,6 +13,10 @@ Let's start by making a simple React application as well as getting to know the 
 The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app).
 It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
+> <i>You may also use the new generation frontend tool [Vite](https://vitejs.dev/) in this course if you wish.
+The create-react-app is still the tool recommended by the React team and that is why it remains the default tool to set up a React project in this course.
+Read [here](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) how the React team sees the future of React tooling.</i>
+
 Let's create an application called <i>part1</i> and navigate to its directory.
 
 ```bash
@@ -153,7 +157,7 @@ export default App
 
 and observe what happens in the browser console
 
-![devtools console says 'hello from component'](../../images/1/30.png)
+![browser console showing console log with arrow to "Hello from component"](../../images/1/30.png)
 
 The first rule of frontend web development:
 
@@ -502,7 +506,7 @@ I finally remember the promise we made
 
 The console screams in red:
 
-![devtools uncaught error rectangle over objects are not valid as a react child](../../images/1/34new.png)
+![devtools showing error with highlight around "Objects are not valid as a React child"](../../images/1/34new.png)
 
 The core of the problem is <i>Objects are not valid as a React child</i>, i.e. the application tries to render <i>objects</i> and it fails again.
 

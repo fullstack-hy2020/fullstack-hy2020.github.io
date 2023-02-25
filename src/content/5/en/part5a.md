@@ -131,7 +131,7 @@ export default { login }
 
 If you have installed the eslint plugin in VS Code, you may now see the following warning:
 
-![vscode warning stating to assign a variable before exporting](../../images/5/50new.png)
+![vs code warning - assign object to a variable before exporting as module default](../../images/5/50new.png)
 
 We'll get back to configuring eslint in a moment.
 You can ignore the error for the time being or suppress it by adding the following to the line before the warning:

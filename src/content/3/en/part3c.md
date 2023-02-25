@@ -452,7 +452,7 @@ One way to format the objects returned by Mongoose is to [modify](https://stacko
 To modify the method we need to change the configurable options of the schema, options can be changed using the set method of the schema, see here for more info on this method: <https://mongoosejs.com/docs/guide.html#options>.
 See <https://mongoosejs.com/docs/guide.html#toJSON> and <https://mongoosejs.com/docs/api.html#document_Document-toObject> for more info on the toJSON option.
   
-See <https://mongoosejs.com/docs/api.html#transform> for more info on the transform function.
+see <https://mongoosejs.com/docs/api.html#transform> for more info on the transform function.
 
 ```js
 noteSchema.set('toJSON', {
@@ -628,7 +628,7 @@ Since also the PORT is defined in our .env it is actually essential to ignore th
 
 When using Render, the database url is given by defining the proper env in the dashboard:
 
-![specifying environment variables in render](../../images/3/render-env.png)
+![browser showing render environment variables](../../images/3/render-env.png)
 
 ### Using database in route handlers
 
@@ -1012,12 +1012,12 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect
-- I will constantly keep on eye the state of the server to make sure that the data sent there by the fronend is saved there as I expect
+- I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect
 - <i>I will keep an eye on the database: does the backend save data there in the right format</i>
 - I progress with small steps
 - I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpoint problems
 - If my code does not work, I will not write more code.
-  Instead, I start deleting the code until it works or just return to a state when everything still was still working
+Instead, I start deleting the code until it works or just return to a state when everything was still working
 - When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
 
 </div>

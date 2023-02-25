@@ -414,7 +414,7 @@ Instead, come up with a solution that fixes the issue, but is still easy to use 
 
 #### 7.7: country hook
 
-Let's return to exercises [2.18-20](/en/part2/getting_data_from_server#exercises-2-18-2-20).
+Let's return to exercises [2.18-2.20](/en/part2/adding_styles_to_react_app#exercises-2-18-2-20).
 
 Use the code from <https://github.com/fullstack-hy2020/country-hook> as your starting point.
 

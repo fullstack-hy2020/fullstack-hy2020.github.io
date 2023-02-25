@@ -398,7 +398,7 @@ When Apollo server is run in development mode the page [http://localhost:4000](h
 
 Let's try it out:
 
-![Screenshot from Initial Apollo Explorer](../../images/8/1x.png)
+![apollo studio inital Example Query with response allPersons](../../images/8/1x.png)
 
 At the left side Explorer shows the API-documentation that it has automatically generated based on the schema.
 
@@ -687,7 +687,7 @@ So the resolver of the <i>address</i> field of the <i>Person</i> type formats th
 
 If we try to create a new person, but the parameters do not correspond with the schema description, the server gives an error message:
 
-![apollo showing graphql validation failing](../../images/8/5x.png)
+![apollo showing error with addPerson GRAPHQL VALIDATION FAILED](../../images/8/5x.png)
 
 So some of the error handling can be automatically done with GraphQL [validation](https://graphql.org/learn/validation/).
 
@@ -724,9 +724,9 @@ const resolvers = {
 }
 ```
 
-So if the name to be added already exists in the phonebook, throw the *GraphQLError* error.
+So if the name to be added already exists in the phonebook, throw *GraphQLError* error.
 
-![Apollo showing GraphQLError thrown](../../images/8/6new.png)
+![apollo showing GraphQLError BAD_USER_INPUT](../../images/8/6new.png)
 
 The current code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-2), branch <i>part8-2</i>.
 

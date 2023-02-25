@@ -13,6 +13,9 @@ The course also has parts on TypeScript,  React Native, and Continuous integrati
 
 Other topics include debugging applications, container technology, configuration, managing runtime environments, and databases.
 
+The course is totally free of charge.
+You can get a certificate and even the University of Helsinki ECTS credits for free.
+
 ### Prerequisites
 
 Participants are expected to have good programming skills, basic knowledge of web programming and databases, and know the basics of the Git version control system.
@@ -383,15 +386,22 @@ The transcript will be delivered to you electronically through email.
 Present this document at your institution to have the credits included in your degree.
 The decision to include the credits will be made by your home institution.
 
-### Continuing the course in the year 2023
+### No more yearly versions
 
-The course has a two-week maintenance "break" starting at 1st of March 2023.
-During the break material stays online, and also exercises can be submitted.
-During the break the course content may change a bit, nothing too dramatic has been planned at the moment.
+There are no more "yearly versions" of the course, the course is open all the time.
+Each part is updated once or twice per year.
+Updates are mostly minor: library versions are updated and text clarity is improved.
+However, there might also be some bigger changes.
 
-All the submitted exercises remain valid after the maintainance break, the course can be continued without bothering too much about the break.
-Also the policy for getting certs, university credits etc. shall remain the same.
-So in practice, *nothing changes*, you can do the course without worrying about anything related to timing.
+Despite changes <i>all the submitted exercises remain valid</i>, and the course can be continued without bothering about the updates.
+Also the policy for getting certs, university credits etc. shall remain the same no matter what happens.
+
+Recent major changes
+
+- Part 2 (18th Jan 2023): Exercise numbering changed, the old 2.11-13. moved to the end of the part
+- Part 6 (30th Jan 2023): A new section on React Query, useReducer and React context replaced the section on Redux connect
+- Part 8 (5th Feb 2023): Backend updated to use Apollo Server 4.0
+- Part 9 (12th Feb 2023): content clarified, Patientor example app structure refactored to a much simpler form
 
 ### Expanding on a previously completed course
 

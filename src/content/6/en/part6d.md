@@ -303,7 +303,7 @@ For example, when we change the importance of a note, invalidating the query <i>
 
 The consequence of this, of course, is that after the PUT request that causes the note change, the application makes a new GET request to retrieve the query data from the server:
 
-![devtools showing network requests of 3 and notes](../../images/6/61new.png)
+![devtools network tab with highlight over 3 and notes requests](../../images/6/61new.png)
 
 If the amount of data retrieved by the application is not large, it doesn't really matter.
 After all, from a browser-side functionality point of view, making an extra HTTP GET request doesn't really matter, but in some situations it might put a strain on the server.
@@ -338,7 +338,7 @@ It would be relatively easy to make a similar change to a mutation that changes 
 
 If we closely follow the browser's network tab, we notice that React Query retrieves all notes as soon as we move the cursor to the input field:
 
-![devtools showing notes in the network tab as input is selected](../../images/6/62new.png)
+![dev tools notes app with input text field highlighted and arrow on network over notes request as 200](../../images/6/62new.png)
 
 What is going on?
 By reading the [documentation](https://react-query-v3.tanstack.com/reference/useQuery), we notice that the default functionality of React Query's queries is that the queries (whose status is <i>stale</i>) are updated when <i>window focus</i>, i.e. the active element of the application's user interface, changes.
@@ -390,7 +390,7 @@ Implement retrieving anecdotes from the server using React Query.
 
 The application should work in such a way that if there are problems communicating with the server, only an error page will be displayed:
 
-![browser showing message service not available as text](../../images/6/65new.png)
+![browser saying anecdote service not available due to problems in server on localhost](../../images/6/65new.png)
 
 You can find [here](https://react-query-v3.tanstack.com/guides/queries) info how to detect the possible errors.
 
@@ -443,7 +443,7 @@ Using Redux is of course possible, but there are other alternatives.
 Let's look at a simple counter application.
 The application displays the counter value, and offers three buttons to update the counter status:
 
-![browser showing simple counter application](../../images/6/63new.png)
+![browser showing simple counter application with + - 0 buttons and 7 above](../../images/6/63new.png)
 
 We shall now implement the counter state management using a Redux-like state management mechanism provided by React's built-in [useReducer](https://beta.reactjs.org/reference/react/useReducer) hook.
 Code looks like the following:
@@ -805,9 +805,9 @@ The entire state of the application, i.e. the value of the counter and the code 
 
 The final code for the application is in [GitHub](https://github.com/fullstack-hy2020/hook-counter/tree/part6-3) in the branch <i>part6-3</i>.
 
-As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks -rules.html) only from React components or custom hooks.
+As a technical detail, it should be noted that the helper functions <i>useCounterValue</i> and <i>useCounterDispatch</i> are defined as [custom hooks](https://reactjs.org/docs/hooks-custom.html), because calling the hook function <i>useContext</i> is [possible](https://reactjs.org/docs/hooks-rules.html) only from React components or custom hooks.
 Custom Hooks, on the other hand, are JavaScript functions whose name must start with the string *use*.
-We will return to custom hooks in a little more detail in [part 7](http://localhost:8000/en/part7/custom_hooks) of the course.
+We will return to custom hooks in a little more detail in [part 7](/en/part7/custom_hooks) of the course.
 
 </div>
 

@@ -210,7 +210,7 @@ The problem is quite likely caused by the Mongoose version 6.x, the problem does
 [Mongoose documentation](https://mongoosejs.com/docs/jest.html) does not recommend testing Mongoose applications with Jest.
 
 [One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
-create to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
+add to the directory <i>tests</i> a file <i>teardown.js</i> with the following content
 
 ```js
 module.exports = () => {
@@ -1122,8 +1122,8 @@ Notice that you will have to make similar changes to the code that were made [in
 
 ![Warning to read docs on connecting mongoose to jest](../../images/4/8a.png)
 
-[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles)
-to get rid of this is to create to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
+[One way](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) to get rid of this is to
+add to the <i>tests</i> directory a file <i>teardown.js</i> with the following content
 
 ```js
 module.exports = () => {

@@ -26,7 +26,7 @@ Many UI frameworks have React-friendly versions where the framework's "component
 There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
 Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://mui.com/).
-We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
+We will use both frameworks to add similar styles to the application we made in the [React Router](/en/part7/react_router) section of the course material.
 
 ### React Bootstrap
 
@@ -522,6 +522,7 @@ If you do not see your favorite UI framework in the list, please make a pull req
 - <https://semantic-ui.com/>
 - <https://mantine.dev/>
 - <https://react.fluentui.dev/>
+- <https://storybook.js.org>
 - <https://www.primefaces.org/primereact/>
 - <https://v2.grommet.io>
 - <https://blueprintjs.com>
@@ -529,6 +530,7 @@ If you do not see your favorite UI framework in the list, please make a pull req
 - <https://www.radix-ui.com/>
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
+- <https://www.radix-ui.com/>
 - <https://nextui.org/>
 
 ### Styled components
@@ -591,7 +593,7 @@ const Login = (props) => {
 }
 ```
 
-Let's create a few more components for styling that application which will be styled versions of <i>div</i> elements:
+Let's create a few more components for styling this application which will be styled versions of <i>div</i> elements:
 
 ```js
 const Page = styled.div`

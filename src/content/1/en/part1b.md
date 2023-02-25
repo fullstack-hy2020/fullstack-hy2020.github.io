@@ -599,6 +599,10 @@ Another great resource for learning JavaScript is [javascript.info](https://java
 The free and highly engaging book [Eloquent JavaScript](https://eloquentjavascript.net) takes you from the basics to interesting stuff quickly.
 It is a mixture of theory projects and exercises and covers general programming theory as well as the JavaScript language.
 
+[Namaste 🙏 JavaScript](https://www.youtube.com/playlist?list=PLlasXeu85E9cQ32gLCvAvr9vNaUccPVNP) is another great and highly recommended free JavaScript Tutorials in order to understand how JS works under the hood.
+Namaste JavaScript is a pure in-depth JavaScript Course released for Free on Youtube.
+It will cover the core concepts of JavaScript in detail and everything about how JS works behind the scenes inside the JavaScript engine.
+
 [egghead.io](https://egghead.io) has plenty of quality screencasts on JavaScript, React, and other interesting topics.
 Unfortunately, some of the material is behind a paywall.
 

@@ -363,7 +363,7 @@ const App = () => {
 
 The app breaks down:
 
-![error showing uncaught type error when reading map](../../images/2/31a.png)
+![console typerror cannot read properties of null via map from App](../../images/2/31a.png)
 
 The error message gives the reason and location for the error.
 The code that caused the problems is the following:
@@ -532,7 +532,7 @@ const App = () => {
 The user interface of the application has a form, in the input field of which the name of the desired currency is written.
 If the currency exists, the application renders the exchange rates of the currency to other currencies:
 
-![browser showing exchange rate for eur against aother currencies and developer tools opn](../../images/2/32new.png)
+![browser showing currency exchange rates with eur typed and cosole saying fetching exchange rates](../../images/2/32new.png)
 
 The application sets the name of the currency entered into the form to the state *currency* at the moment the button is pressed.
 
@@ -655,7 +655,7 @@ Note that it might take some minutes until a generated API key is valid.
 
 If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
 
-**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*.
+**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with `http://`.
 This issue can be fixed by completing the exercise using Chrome.
 
 **NB:** You need an api-key to use almost every weather service.

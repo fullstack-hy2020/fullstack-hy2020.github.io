@@ -72,17 +72,17 @@ Quite often it is useful to inspect HTTP requests in the <i>Network</i> tab of C
 
 We can use the inspector to check that the headers sent in the POST request are what we expected them to be:
 
-![content-type data in dev tools](../../images/2/21new1.png)
+![dev tools header shows 201 created and json content type for localhost:3001/notes](../../images/2/21new1.png)
 
 Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
 
 The tab <i>payload</i> can be used to check the request data:
 
-![dev tools showing payload tab](../../images/2/21new2.png)
+![devtools payload tab shows content and important fields from above](../../images/2/21new2.png)
 
 Also the tab <i>response</i> is useful, it shows what was the data the server responded with:
 
-![dev tools showing server response](../../images/2/21new3.png)
+![devtools response tab shows same content as payload but with id field too](../../images/2/21new3.png)
 
 The new note is not rendered to the screen yet.
 This is because we did not update the state of the <i>App</i> component when we created the new note.
@@ -750,12 +750,12 @@ Full stack development is <i> extremely hard</i>, that is why I will use all the
 
 - I will have my browser developer console open all the time
 - <i>I will use the network tab of the browser dev tools to ensure that frontend and backend are communicating as I expect</i>
-- <i>I will constantly keep an eye on the state of the server to make sure that the data sent there by the fronend is saved there as I expect</i>
+- <i>I will constantly keep an eye on the state of the server to make sure that the data sent there by the frontend is saved there as I expect</i>
 - I progress with small steps
 - I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpoint problems
 - If my code does not work, I will not write more code.
-  Instead, I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+Instead, I start deleting the code until it works or just return to a state when everything was still working
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](https://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 

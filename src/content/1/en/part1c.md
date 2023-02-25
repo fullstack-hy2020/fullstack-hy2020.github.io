@@ -718,9 +718,9 @@ const App = () => {
 } 
 ```
 
-Let us now see what gets rendered to the console when the buttons plus, plus, zero and minus are pressed:
+Let us now see what gets rendered to the console when the buttons plus, zero and minus are pressed:
 
-![devtools console showing rendering and increasing messages alternating](../../images/1/31.png)
+![browser showing console with rendering values highlighted](../../images/1/31.png)
 
 Do not ever try to guess what your code does.
 It is just better to use *console.log* and <i>see with your own eyes</i> what it does.

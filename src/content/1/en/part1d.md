@@ -262,6 +262,95 @@ const App = () => {
 
 We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the *allClicks* array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
 
+### Update of the state is asynchronous
+
+Let's expand the application so that it keeps track of the total number of button presses in the state *total*, whose value is always updated when the buttons are pressed:
+
+```js
+const App = () => {
+  const [left, setLeft] = useState(0)
+  const [right, setRight] = useState(0)
+  const [allClicks, setAll] = useState([])
+  const [total, setTotal] = useState(0) // highlight-line
+
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    setLeft(left + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  const handleRightClick = () => {
+    setAll(allClicks.concat('R'))
+    setRight(right + 1)
+    setTotal(left + right)  // highlight-line
+  }
+
+  return (
+    <div>
+      {left}
+      <button onClick={handleLeftClick}>left</button>
+      <button onClick={handleRightClick}>right</button>
+      {right}
+      <p>{allClicks.join(' ')}</p>
+      <p>total {total}</p>  // highlight-line
+    </div>
+  )
+}
+```
+
+The solution does not quite work:
+
+![browser showing 2 left|right 1, RLL total 2](../../images/1/33.png)
+
+For some reason the total of button presses is all the time one behind the actual amount of presses.
+
+Let us add couple of console.log statements to the event handler:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    console.log('left before', left)  // highlight-line
+    setLeft(left + 1)
+    console.log('left after', left)  // highlight-line
+    setTotal(left + right) 
+  }
+
+  // ...
+}
+```
+
+The console reveals the problem
+
+![devtools console showing left before 4 and left after 4](../../images/1/32.png)
+
+Even though a new value was set to *left* by calling *setLeft(left + 1)*, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
+
+```js
+setTotal(left + right) 
+```
+
+The reason for this is that a state update in React happens [asynchronously](https://reactjs.org/docs/state-and-lifecycle.html#state-updates-may-be-asynchronous), i.e. not immediately but "at some point" before the component is rendered again.
+
+We can fix the app as follows:
+
+```js
+const App = () => {
+  // ...
+  const handleLeftClick = () => {
+    setAll(allClicks.concat('L'))
+    const updatedLeft = left + 1
+    setLeft(updatedLeft)
+    setTotal(updatedLeft + right) 
+  }
+
+  // ...
+}
+```
+
+So now the number of button presses is definitely based on the correct number of left button presses.
+
 ### Conditional rendering
 
 Let's modify our application so that the rendering of the clicking history is handled by a new <i>History</i> component:
@@ -1100,7 +1189,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 - I will write lots of *console.log* statements to make sure I understand how the code behaves and to help pinpointing problems
 - If my code does not work, I will not write more code.
 Instead I start deleting the code until it works or just return to a state when everything was still working
-- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) how to ask for help
+- When I ask for help in the course Discord or Telegram channel or elsewhere I formulate my questions properly, see [here](http://fullstackopen.com/en/part0/general_info#how-to-get-help-in-discord-telegram) how to ask for help
 
 </div>
 
@@ -1131,7 +1220,7 @@ If and <i>when</i> you encounter an error message
 
 > <i>Objects are not valid as a React child</i>
 
-keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-object).
+keep in mind the things told [here](/en/part1/introduction_to_react#do-not-render-objects).
 
 <h4> 1.6: unicafe step1</h4>
 
@@ -1282,9 +1371,11 @@ const App = () => {
     'If it hurts, do it more often.',
     'Adding manpower to a late software project makes it later!',
     'The first 90 percent of the code accounts for the first 10 percent of the development time...The remaining 10 percent of the code accounts for the other 90 percent of the development time.',
-    'Any fool can write code that a computer can understand. Good programmers write code that humans can understand.',
+    'Any fool can write code that a computer can understand.
+Good programmers write code that humans can understand.',
     'Premature optimization is the root of all evil.',
-    'Debugging is twice as hard as writing the code in the first place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
+    'Debugging is twice as hard as writing the code in the first place.
+Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.',
     'Programming without an extremely heavy use of console.log is same as if a doctor would refuse to use x-rays or blood tests when diagnosing patients.',
     'The only way to go fast, is to go well.'
   ]

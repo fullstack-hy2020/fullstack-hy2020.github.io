@@ -5,12 +5,10 @@ letter: e
 lang: en
 ---
 
-
-
 <div class="tasks">
 
 **NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_context).
-This section remains here for couple of weeks.
+This section remains here for a couple of weeks.
 
 If you have started with the exercises (6.19-6.21) that use the Redux connect you may continue with those.
 If you have not yet started, I recommend to proceed with the new section.
@@ -18,7 +16,7 @@ If you have not yet started, I recommend to proceed with the new section.
 
 <div class="content">
 
-###
+### Understanding the older connect function
 
 So far we have used our Redux store with the help of the [hook](https://react-redux.js.org/api/hooks) API from react-redux.
 Practically this has meant using the [useSelector](https://react-redux.js.org/api/hooks#useselector) and [useDispatch](https://react-redux.js.org/api/hooks#usedispatch) functions.
@@ -602,7 +600,8 @@ HOCs are a generalization of the [Higher-Order Function](https://en.wikipedia.or
 HOFs are functions that either accept functions as parameters or return functions.
 We have been using HOFs throughout the course, e.g. all of the methods used for dealing with arrays like *map, filter and find* are HOFs.
 
-<!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin. Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
+<!-- Reactin hook-apin ilmestymisen jälkeen HOC:ien suosio on kääntynyt laskuun, ja melkein kaikki kirjastot, joiden käyttö on aiemmin perustunut HOC:eihin on saanut hook-perustaisen apin.
+Useimmiten , kuten myös reduxin kohdalla, hook-perustaiset apit ovat HOC-apeja huomattavasti yksinkertaisempia. -->
 After the React hook API was published, HOCs have become less and less popular.
 Almost all libraries which used to be based on HOCs have now been modified to use hooks.
 Most of the time hook-based APIs are a lot simpler than HOC-based ones, as is the case with Redux as well.
@@ -611,9 +610,7 @@ Most of the time hook-based APIs are a lot simpler than HOC-based ones, as is th
 
 We have come a long way in this course and, finally, we have come to the point at which we are using React "the right way", meaning React only focuses on generating the views, and the application state is wholly separated from the React components and passed on to Redux, its actions, and its reducers.
 
-What about the *useState* hook, which provides components with their own state?
-Does it have any role if an application is using Redux or some other external state management solution?
-If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the *useState* function.
+What about the *useState* hook, which provides components with their own state? Does it have any role if an application is using Redux or some other external state management solution? If the application has more complicated forms, it may be beneficial to implement their local state using the state provided by the *useState* function.
 One can, of course, have Redux manage the state of the forms, however, if the state of the form is only relevant when filling the form (e.g. for validation) it may be wise to leave the management of state to the component responsible for the form.
 
 Should we always use Redux?
@@ -632,7 +629,7 @@ We will also practice this in
 ### Exercises 6.19.-6.21
 
 **NOTE**: this is the old ending section of the 6 part that has 30th January 2023 been replaced with material about [React Query, useReducer and context](/en/part6/react_query_use_reducer_and_the_contex).
-This section remains here for couple of weeks.
+This section remains here for a couple of weeks.
 
 If you have started with the exercises that use the Redux connect you may continue with those.
 If you have not yet started, I recommend to proceed with the new section.

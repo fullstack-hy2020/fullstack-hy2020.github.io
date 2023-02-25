@@ -120,7 +120,8 @@ The following is printed to the console:
 (node:32911) UnhandledPromiseRejectionWarning: Error: secretOrPrivateKey must have a value
     at Object.module.exports [as sign] (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/node_modules/jsonwebtoken/sign.js:101:20)
     at loginRouter.post (/Users/mluukkai/opetus/_2019fullstack-koodit/osa3/notes-backend/controllers/login.js:26:21)
-(node:32911) UnhandledPromiseRejectionWarning: Unhandled promise rejection. This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
+(node:32911) UnhandledPromiseRejectionWarning: Unhandled promise rejection.
+This error originated either by throwing inside of an async function without a catch block, or by rejecting a promise which was not handled with .catch(). (rejection id: 2)
 ```
 
 The command *jwt.sign(userForToken, process.env.SECRET)* fails.
@@ -216,7 +217,7 @@ const errorHandler = (error, request, response, next) => {
   } else if (error.name === 'ValidationError') {
     return response.status(400).json({ error: error.message })
   } else if (error.name ===  'JsonWebTokenError') { // highlight-line
-    return response.status(400).json({ error: 'token missing or invalid' }) // highlight-line
+    return response.status(400).json({ error: error.message }) // highlight-line
   }
 
   next(error)
@@ -237,7 +238,7 @@ if (!decodedToken.id) {
 
 When the identity of the maker of the request is resolved, the execution continues as before.
 
-A new note can now be created using Postman if the <i>authorization</i> header is given the correct value, the string <i>bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, where the second value is the token returned by the <i>login</i> operation.
+A new note can now be created using Postman if the <i>authorization</i> header is given the correct value, the string <i>Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ</i>, where the second value is the token returned by the <i>login</i> operation.
 
 Using Postman this looks as follows:
 
@@ -359,7 +360,7 @@ We will implement login to the frontend in the [next part](/en/part5).
 ### Exercises 4.15-4.23
 
 In the next exercises, the basics of user management will be implemented for the Bloglist application.
-The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token-based authentication](/en/part4/token_authentication).
+The safest way is to follow the story from part 4 chapter [User administration](/en/part4/user_administration) to the chapter [Token authentication](/en/part4/token_authentication).
 You can of course also use your creativity.
 
 **One more warning:** If you notice you are mixing async/await and *then* calls, it is 99% certain you are doing something wrong.

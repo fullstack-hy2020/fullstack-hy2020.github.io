@@ -505,9 +505,11 @@ part2
 
 <!--   <h4>1.1: course information, step1</h4>-->
 
- <h4>1.1：课程信息，第1步</h4>。
+ <h4>1.1：课程信息，第1步</h4>
 
-<i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i>
+<!-- <i>The application that we will start working on in this exercise will be further developed in a few of the following exercises. In this and other upcoming exercise sets in this course, it is enough to only submit the final state of the application. If desired, you may also create a commit for each exercise of the series, but this is entirely optional.</i> -->
+ 
+ <i>我们将在本练习中开始处理的应用程序将在以下几个练习中得到进一步开发。 在本课程的这个和其他即将到来的练习集中，仅提交应用程序的最终状态就足够了。 如果你想，你也可以为本系列的每个练习创建一个提交，但这不是必要的。</i>
 
 <!-- Use create-react-app to initialize a new application. Modify <i>index.js</i> to match the following-->
  使用create-react-app来初始化一个新的应用。修改<i>index.js</i>如下：
