@@ -276,7 +276,7 @@ Implementaremos el inicio de sesión en la interfaz en la [siguiente parte](/es/
 
 ### Ejercicios 4.15.-4.22.
 
-En los próximos ejercicios, se implementarán los conceptos básicos de la gestión de usuarios para la aplicación Bloglist. La forma más segura es seguir la historia desde el capítulo de la parte 4 [Administración de usuarios](/es/part4/user_administration) hasta el capítulo [Autenticación basada en token](/es/part4/token_authentication). Por supuesto, también puede utilizar su creatividad.
+En los próximos ejercicios, se implementarán los conceptos básicos de la gestión de usuarios para la aplicación Bloglist. La forma más segura es seguir la historia desde el capítulo de la parte 4 [Administración de usuarios](/es/part4/administracion_de_usuarios) hasta el capítulo [Autenticación basada en token](/es/part4/autenticacion_de_token). Por supuesto, también puede utilizar su creatividad.
 
 **Una advertencia más:** Si nota que está mezclando llamadas async/await y _then_, es 99% seguro que está haciendo algo mal. Utilice uno u otro, nunca ambos.
 
@@ -284,7 +284,7 @@ En los próximos ejercicios, se implementarán los conceptos básicos de la gest
 
 Implemente una forma de crear nuevos usuarios realizando una solicitud POST HTTP para la dirección <i>api/users</i>. Los usuarios tienen <i>nombre de usuario, contraseña y nombre</i>.
 
-No guarde las contraseñas en la base de datos como texto sin cifrar, utilice la biblioteca <i>bcrypt</i> como hicimos en el capítulo de la parte 4 [Creación de nuevos usuarios](/es​​/part4/user_administration#creation-users).
+No guarde las contraseñas en la base de datos como texto sin cifrar, utilice la biblioteca <i>bcrypt</i> como hicimos en el capítulo de la parte 4 [Creación de nuevos usuarios](/es/part4/administracion_de_usuarios#creando-usuarios).
 
 **NB** Algunos usuarios de Windows han tenido problemas con <i>bcrypt</i>. Si tiene problemas, elimine la librería con el comando
 
@@ -306,7 +306,7 @@ Agrega una función que agrega las siguientes restricciones para la creación de
 
 La operación debe responder con un código de estado adecuado y algún tipo de mensaje de error si se crea un usuario no válido.
 
-**NB** No pruebe las restricciones de contraseña con las validaciones de Mongoose. No es una buena idea porque la contraseña recibida por el backend y el hash de contraseña guardado en la base de datos no son lo mismo. La longitud de la contraseña debe validarse en el controlador como hicimos en la [parte 3](/es/part3/validation_and_es_lint) antes de usar la validación de Mongoose.
+**NB** No pruebe las restricciones de contraseña con las validaciones de Mongoose. No es una buena idea porque la contraseña recibida por el backend y el hash de contraseña guardado en la base de datos no son lo mismo. La longitud de la contraseña debe validarse en el controlador como hicimos en la [parte 3](/es/part3/validacion_y_es_lint) antes de usar la validación de Mongoose.
 
 Además, implemente pruebas que verifiquen que no se creen usuarios no válidos y que la operación de agregar usuario no válida devuelva un código de estado adecuado y un mensaje de error.
 
@@ -314,7 +314,7 @@ Además, implemente pruebas que verifiquen que no se creen usuarios no válidos 
 
 Expande los blogs para que cada blog contenga información sobre el creador del blog.
 
-Modifique la adición de nuevos blogs para que cuando se cree un nuevo blog, <i>cualquier</i> usuario de la base de datos sea designado como su creador (por ejemplo, el que se encontró primero). Implemente esto de acuerdo con el capítulo de la parte 4 [poblar](/es/part4/user_administration#populate).
+Modifique la adición de nuevos blogs para que cuando se cree un nuevo blog, <i>cualquier</i> usuario de la base de datos sea designado como su creador (por ejemplo, el que se encontró primero). Implemente esto de acuerdo con el capítulo de la parte 4 [poblar](/administracion_de_usuarios#poblar).
 El usuario designado como creador no importa todavía. La funcionalidad se termina en el ejercicio 4.19.
 
 Modificar la lista de todos los blogs para que la información de usuario del creador se muestre con el blog:
@@ -327,7 +327,7 @@ y la lista de todos los usuarios también muestra los blogs creados por cada usu
 
 #### 4.18: expansión de la lista de blogs, paso 6
 
-Implementar la autenticación basada en token según la parte 4 capítulo [Autenticación de token](/es/part4/token_authentication).
+Implementar la autenticación basada en token según la parte 4 [Autenticación de token](/es/part4/autenticacion_de_token).
 
 #### 4.19: expansión de la lista de blogs , paso 7
 
@@ -335,9 +335,9 @@ Modificar la adición de nuevos blogs para que solo sea posible si se envía un 
 
 #### 4.20*: expansión de la lista de blogs, paso 8
 
-[Este ejemplo](/es/part4/token_authentication) de la parte 4 muestra cómo tomar el token del encabezado con la función auxiliar _getTokenFrom_.
+[Este ejemplo](/es/part4/autenticacion_de_token) de la parte 4 muestra cómo tomar el token del encabezado con la función auxiliar _getTokenFrom_.
 
-Si usó la misma solución, refactorice llevando el token a un [middleware](/es/part3/node_js_and_express#middleware). El middleware debe tomar el token del encabezado <i>Authorization</i> y colocarlo en el campo <i>token</i> del objeto <i>request</i>.
+Si usó la misma solución, refactorice llevando el token a un [middleware](/es/part3/node_js_y_express#middleware). El middleware debe tomar el token del encabezado <i>Authorization</i> y colocarlo en el campo <i>token</i> del objeto <i>request</i>.
 
 En otras palabras, si registra este middleware en el archivo <i>app.js</i> antes de todas las rutas
 
@@ -354,7 +354,7 @@ blogsRouter.post('/', async (request, response) => {
 })
 ```
 
-Recuerde que un [middleware] normal (/es/part3/node_js_and_express#middleware) es una función con tres parámetros, que al final llama al último parámetro <i>next</i> para mover el control al siguiente middleware:
+Recuerde que un [middleware] normal (/es/part3/node_js_y_express#middleware) es una función con tres parámetros, que al final llama al último parámetro <i>next</i> para mover el control al siguiente middleware:
 
 ```js
 const tokenExtractor = (request, response, next) => {
@@ -384,39 +384,64 @@ if ( blog.user.toString() === userid.toString() ) ...
 
 #### 4.22*: expansión de la lista de blogs, paso 10
 
+Tanto la creación de un nuevo blog como su eliminación necesitan averiguar la identidad del usuario que está realizando la operación. El middleware _tokenExtractor_ que hicimos en el ejercicio 4.20 ayuda, pero los controladores de las operaciones <i>post</i> y <i>delete</i> necesitan averiguar quién es el usuario que posee un token específico.
+
+Ahora cree un nuevo middleware _userExtractor_, que encuentre al usuario y lo establezca en el objeto de solicitud. Cuando registra el middleware en <i>app.js</i>
+
+```js
+app.use(middleware.userExtractor)
+```
+
+el usuario se configurará en el campo _request.user_:
+
+```js
+blogsRouter.post('/', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+
+blogsRouter.delete('/:id', async (request, response) => {
+  // get user from request object
+  const user = request.user
+  // ..
+})
+```
+
+Tenga en cuenta que es posible registrar un middleware solo para un conjunto específico de rutas. Entonces, en lugar de usar _userExtractor_ con todas las rutas,
+
+```js
+// use the middleware in all routes
+app.use(userExtractor) // highlight-line
+
+app.use('/api/blogs', blogsRouter)  
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+podríamos registrarlo para que solo se ejecute con rutas de ruta <i>/api/blogs</i>:
+
+```js
+// use the middleware only in /api/blogs routes
+app.use('/api/blogs', userExtractor, blogsRouter) // highlight-line
+app.use('/api/users', usersRouter)
+app.use('/api/login', loginRouter)
+```
+
+Como puede verse, esto se ouede realizar al encadenar múltiples middlewares como parámetro de la función <i>use</i>. También sería posible registrar un middleware solo para una operación específica:
+
+```js
+router.post('/', userExtractor, async (request, response) => {
+  // ...
+}
+```
+
+#### 4.23*: expansión de la lista de blogs, paso 11
+
 Después de agregar la autenticación basada en token, las pruebas para agregar un nuevo blog se rompió. Arregle las pruebas. También escriba una nueva prueba para asegurarse de que la adición de un blog falla con el código de estado adecuado <i>401 Unauthorized</i> si no se proporciona un token.
 
 [Esto](https://github.com/visionmedia/supertest/issues/398) probablemente sea útil al hacer la corrección.
 
 Este es el último ejercicio de esta parte del curso y es hora de enviar su código a GitHub y marcar todos sus ejercicios terminados en el [sistema de envío de ejercicios](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
-
-<!---
-note left of user
-  user fills in login form with
-  username and password
-end note
-user -> browser: login button pressed
-
-browser -> backend: HTTP POST /api/login { username, password }
-note left of backend
-  backend generates TOKEN that identifies user 
-end note
-backend -> browser: TOKEN returned as message body 
-note left of browser
-  browser saves TOKEN
-end note
-note left of user
-  user creates a note
-end note
-user -> browser: create note button pressed
-browser -> backend: HTTP POST /api/notes { content } TOKEN in header
-note left of backend
-  backend identifies userfrom the TOKEN
-end note
-
-backend -> browser: 201 created
-
-user -> user:
--->
 
 </div>
