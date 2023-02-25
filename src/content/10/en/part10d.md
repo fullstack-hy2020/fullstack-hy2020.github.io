@@ -323,7 +323,7 @@ const RepositoryItem = (/* ... */) => {
 Once the <em>testID</em> prop is added, you can use the [getAllByTestId](https://callstack.github.io/react-native-testing-library/docs/api-queries#getallby) query to get those elements:
 
 ```javascript
-const repositoryItems = getAllByTestId('repositoryItem');
+const repositoryItems = screen.getAllByTestId('repositoryItem');
 const [firstRepositoryItem, secondRepositoryItem] = repositoryItems;
 
 // expect something from the first and the second repository item
