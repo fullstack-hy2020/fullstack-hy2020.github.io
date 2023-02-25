@@ -64,6 +64,7 @@ We can then achieve cross-platform compatibility by using the cross-env library 
   // ...
 }
 ```
+
 **NB**: If you are deploying this application to Fly.io/Render, keep in mind that if cross-env is saved as a development dependency, it would cause an application error on your web server. To fix this, change cross-env to a production dependency by running this in the command line:
 
 ```bash
@@ -75,7 +76,6 @@ Now we can modify the way that our application runs in different modes. As an ex
 We can create our separate test database in MongoDB Atlas. This is not an optimal solution in situations where many people are developing the same application. Test execution in particular typically requires a single database instance that is not used by tests that are running concurrently.
 
 It would be better to run our tests using a database that is installed and running on the developer's local machine. The optimal solution would be to have every test execution use a separate database. This is "relatively simple" to achieve by [running Mongo in-memory](https://docs.mongodb.com/manual/core/inmemory/) or by using [Docker](https://www.docker.com) containers. We will not complicate things and will instead continue to use the MongoDB Atlas database.
-
 
 Let's make some changes to the module that defines the application's configuration:
 
@@ -392,12 +392,12 @@ The provided parameter can refer to the name of the test or the describe block. 
 npm test -- -t 'notes'
 ```
 
-**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run. 
-The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code. 
+**NB**: When running a single test, the mongoose connection might stay open if no tests using the connection are run.
+The problem might be because supertest primes the connection, but Jest does not run the afterAll portion of the code.
 
 ### async/await
 
-Before we write more tests let's take a look at the _async_ and _await_ keywords. 
+Before we write more tests let's take a look at the _async_ and _await_ keywords.
 
 The async/await syntax that was introduced in ES7 makes it possible to use <i>asynchronous functions that return a promise</i> in a way that makes the code look synchronous.
 
@@ -808,7 +808,7 @@ You can find the code for our current application in its entirety in the <i>part
 
 ### Eliminating the try-catch
 
-Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions. 
+Async/await unclutters the code a bit, but the 'price' is the <i>try/catch</i> structure required for catching exceptions.
 All of the route handlers follow the same structure
 
 ```js
@@ -821,7 +821,7 @@ try {
 
 One starts to wonder if it would be possible to refactor the code to eliminate the <i>catch</i> from the methods?
 
-The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this. 
+The [express-async-errors](https://github.com/davidbanham/express-async-errors) library has a solution for this.
 
 Let's install the library
 
@@ -829,7 +829,7 @@ Let's install the library
 npm install express-async-errors
 ```
 
-Using the library is <i>very</i> easy. 
+Using the library is <i>very</i> easy.
 You introduce the library in <i>app.js</i>:
 
 ```js
@@ -848,7 +848,7 @@ const mongoose = require('mongoose')
 module.exports = app
 ```
 
-The 'magic' of the library allows us to eliminate the try-catch blocks completely. 
+The 'magic' of the library allows us to eliminate the try-catch blocks completely.
 For example the route for deleting a note
 
 ```js
@@ -871,7 +871,7 @@ notesRouter.delete('/:id', async (request, response) => {
 })
 ```
 
-Because of the library, we do not need the _next(exception)_ call anymore. 
+Because of the library, we do not need the _next(exception)_ call anymore.
 The library handles everything under the hood. If an exception occurs in an <i>async</i> route, the execution is automatically passed to the error handling middleware.
 
 The other routes become:
@@ -936,7 +936,7 @@ test('notes are returned as json', async () => {
 }
 ```
 
-We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem. 
+We save the notes stored in the array into the database inside of a _forEach_ loop. The tests don't quite seem to work however, so we have added some console logs to help us find the problem.
 
 The console displays the following output:
 
@@ -1058,19 +1058,22 @@ and by extending the Jest definitions in the <i>package.json</i> as follows
 Write a test that verifies that the unique identifier property of the blog posts is named <i>id</i>, by default the database names the property <i>_id</i>. Verifying the existence of a property is easily done with Jest's [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) matcher.
 
 Make the required changes to the code so that it passes the test. The [toJSON](/en/part3/saving_data_to_mongo_db#backend-connected-to-a-database) method discussed in part 3 is an appropriate place for defining the <i>id</i> parameter.
+
 #### 4.10: Blog list tests, step3
 
 Write a test that verifies that making an HTTP POST request to the <i>/api/blogs</i> URL successfully creates a new blog post. At the very least, verify that the total number of blogs in the system is increased by one. You can also verify that the content of the blog post is saved correctly to the database.
 
 Once the test is finished, refactor the operation to use async/await instead of promises.
+
 #### 4.11*: Blog list tests, step4
 
 Write a test that verifies that if the <i>likes</i> property is missing from the request, it will default to the value 0. Do not test the other properties of the created blogs yet.
 
 Make the required changes to the code so that it passes the test.
+
 #### 4.12*: Blog list tests, step5
 
-Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verifiy that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
+Write tests related to creating new blogs via the <i>/api/blogs</i> endpoint, that verify that if the <i>title</i> or <i>url</i> properties are missing from the request data, the backend responds to the request with the status code <i>400 Bad Request</i>.
 
 Make the required changes to the code so that it passes the test.
 
