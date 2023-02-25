@@ -218,7 +218,7 @@ WebSockets is an API provided by the browser, which is not yet fully supported o
 
 ![caniuse chart showing websockets not usable by all yet](../../images/7/31ea.png)
 
-Instead of directly using the WebSocket API, it is advisable to use the [Socket.io](https://socket.io/) library, which provides various <i>fallback</i> options in case the browser does not have full support for WebSockets. 
+Instead of directly using the WebSocket API, it is advisable to use the [Socket.io](https://socket.io/) library, which provides various <i>fallback</i> options in case the browser does not have full support for WebSockets.
 
 In [part 8](/en/part8), our topic is GraphQL, which provides a nice mechanism for notifying clients when there are changes in the backend data.
 
@@ -264,7 +264,7 @@ We will, however, take a look at some things specific to this course.
 
 The Open Web Application Security Project, otherwise known as [OWASP](https://www.owasp.org), publishes an annual list of the most common security risks in Web applications. The most recent list can be found [here](https://owasp.org/www-project-top-ten/). The same risks can be found from one year to another.
 
-At the top of the list, we find <i>injection</i>, which means that e.g. text sent using a form in an application is interpreted completely differently than the software developer had intended. The most famous type of injection is probably [SQL injection](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work). 
+At the top of the list, we find <i>injection</i>, which means that e.g. text sent using a form in an application is interpreted completely differently than the software developer had intended. The most famous type of injection is probably [SQL injection](https://stackoverflow.com/questions/332365/how-does-the-sql-injection-from-the-bobby-tables-xkcd-comic-work).
 
 For example, imagine that the following SQL query is executed in a vulnerable application:
 
@@ -319,10 +319,13 @@ The one-year-old project that is used in [part 9](/en/part9) of this course alre
 ![npm outdated output of patientor](../../images/7/33x.png)
 
 The dependencies can be brought up to date by updating the file <i>package.json</i>. The best way to do that is by using a tool called _npm-check-updates_. It can be installed globally by running the command
+
 ```bash
 npm install -g npm-check-updates
 ```
+
 Using this tool, the up-to-dateness of dependencies is checked in the following way:
+
 ```bash
 $ npm-check-updates
 Checking ...\ultimate-hooks\package.json
@@ -334,7 +337,9 @@ Checking ...\ultimate-hooks\package.json
 
 Run ncu -u to upgrade package.json
 ```
+
 The file <i>package.json</i> is brought up to date by running the command _ncu -u_.
+
 ```bash
 $ ncu -u
 Upgrading ...\ultimate-hooks\package.json
@@ -346,11 +351,12 @@ Upgrading ...\ultimate-hooks\package.json
 
 Run npm install to install new versions.
 ```
+
 Then it is time to update the dependencies by running the command _npm install_. However, old versions of the dependencies are not necessarily a security risk.
 
-The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of dependencies. It compares the version numbers of the dependencies in your application to a list of the version numbers of dependencies containing known security threats in a centralized error database. 
+The npm [audit](https://docs.npmjs.com/cli/audit) command can be used to check the security of dependencies. It compares the version numbers of the dependencies in your application to a list of the version numbers of dependencies containing known security threats in a centralized error database.
 
-Running _npm audit_ on the same project prints a long list of complaints and suggested fixes. 
+Running _npm audit_ on the same project prints a long list of complaints and suggested fixes.
 Below is a part of the report:
 
 ```js
@@ -393,7 +399,7 @@ fixed 354 of 416 vulnerabilities in 20047 scanned packages
   (use `npm audit fix --force` to install breaking changes; or refer to `npm audit` for steps to fix these manually)
 ```
 
-62 threats remain because, by default, _audit fix_ does not update dependencies if their <i>major</i> version number has increased.  Updating these dependencies could lead to the whole application breaking down. 
+62 threats remain because, by default, _audit fix_ does not update dependencies if their <i>major</i> version number has increased.  Updating these dependencies could lead to the whole application breaking down.
 
 The source for the critical bug is the library [immer](https://github.com/immerjs/immer)
 
@@ -447,7 +453,7 @@ Lately, people have started using the term [progressive web app](https://develop
 
 In short, we are talking about web applications working as well as possible on every platform and taking advantage of the best parts of those platforms. The smaller screen of mobile devices must not hamper the usability of the application. PWAs should also work flawlessly in offline mode or with a slow internet connection. On mobile devices, they must be installable just like any other application. All the network traffic in a PWA should be encrypted.
 
-Applications created using Create React App are no longer [progressive](https://create-react-app.dev/docs/making-a-progressive-web-app/) by default since Create React App 4. If PWA is desired, you will have to create a new project using a PWA custom template. 
+Applications created using Create React App are no longer [progressive](https://create-react-app.dev/docs/making-a-progressive-web-app/) by default since Create React App 4. If PWA is desired, you will have to create a new project using a PWA custom template.
 
 ```js
 npx create-react-app my-app --template cra-template-pwa
@@ -505,15 +511,14 @@ Serverless is not about there not being a server in applications, but about how 
 
 ### Useful libraries and interesting links
 
-The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substantial, it is worth it to check if existing solutions are already available. 
+The JavaScript developer community has produced a large variety of useful libraries. If you are developing anything more substantial, it is worth it to check if existing solutions are already available.
 Below are listed some libraries recommended by trustworthy parties.
 
 If your application has to handle complicated data, [lodash](https://www.npmjs.com/package/lodash), which we recommended in [part 4](/en/part4/structure_of_backend_application_introduction_to_testing#exercises-4-3-4-7), is a good library to use. If you prefer the functional programming style, you might consider using [ramda](https://ramdajs.com/).
 
-
 If you are handling times and dates, [date-fns](https://github.com/date-fns/date-fns) offers good tools for that. If you have complex forms in your apps, hava a look would [React Hook Form](https://react-hook-form.com/) be good fit. If your application displays graphs, there are multiple options to choose from. Both [recharts](http://recharts.org/en-US/) and [highcharts](https://github.com/highcharts/highcharts-react) are well-recommended.
 
-The [Immer](https://github.com/mweststrate/immer) provides immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) in part 6, reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs. 
+The [Immer](https://github.com/mweststrate/immer) provides immutable implementations of some data structures. The library could be of use when using Redux, since as we [remember](/en/part6/flux_architecture_and_redux#pure-functions-immutable) in part 6, reducers must be pure functions, meaning they must not modify the store's state but instead have to replace it with a new one when a change occurs.
 
 [Redux-saga](https://redux-saga.js.org/) provides an alternative way to make asynchronous actions for [Redux Thunk](/en/part6/communicating_with_server_in_a_redux_application#asynchronous-actions-and-redux-thunk) familiar from part 6. Some embrace the hype and like it. I don't.
 

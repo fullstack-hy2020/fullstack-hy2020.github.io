@@ -6,7 +6,6 @@ lang: en
 ---
 <div class="content">
 
-
 Developing with React was notorious for requiring tools that were very difficult to configure. These days, getting started with React development is almost painless thanks to [create-react-app](https://github.com/facebookincubator/create-react-app). A better development workflow has probably never existed for browser-side JavaScript development.
 
 We cannot rely on the black magic of create-react-app forever and it's time for us to take a look under the hood. One of the key players in making React applications functional is a tool called [webpack](https://webpack.js.org/).
@@ -35,7 +34,6 @@ For this reason, code that is divided into modules must be <i>bundled</i> for br
         ├── main.88d3369d.js.LICENSE.txt
         └── main.88d3369d.js.map
 </pre>
-
 
 The <i>index.html</i> file located at the root of the build directory is the "main file" of the application which loads the bundled JavaScript file with a <i>script</i> tag:
 
@@ -73,7 +71,6 @@ Let's create a new directory for the project with the following subdirectories (
 └── webpack.config.js
 </pre>
 
-
 The contents of the <i>package.json</i> file can e.g. be the following:
 
 ```json
@@ -86,13 +83,11 @@ The contents of the <i>package.json</i> file can e.g. be the following:
 }
 ```
 
-
 Let's install webpack with the command:
 
 ```bash
 npm install --save-dev webpack webpack-cli
 ```
-
 
 We define the functionality of webpack in the <i>webpack.config.js</i> file, which we initialize with the following content:
 
@@ -139,7 +134,6 @@ We will then define a new npm script called <i>build</i> that will execute the b
 },
 // ...
 ```
-
 
 Let's add some more code to the <i>src/index.js</i> file:
 
@@ -209,7 +203,7 @@ const config = () => {
 module.exports = config
 ```
 
-The configuration file has been written in JavaScript and the function returning the configuration object is exported using Node's module syntax. 
+The configuration file has been written in JavaScript and the function returning the configuration object is exported using Node's module syntax.
 
 Our minimal configuration definition almost explains itself. The [entry](https://webpack.js.org/concepts/#entry) property of the configuration object specifies the file that will serve as the entry point for bundling the application.
 
@@ -491,7 +485,7 @@ When we install the loaders:
 npm install style-loader css-loader --save-dev
 ```
 
-The bundling will succeed once again and the application gets new styles. 
+The bundling will succeed once again and the application gets new styles.
 
 ### Webpack-dev-server
 
@@ -628,7 +622,7 @@ const config = {
 
 Webpack has to be restarted when we make changes to its configuration. It is also possible to make webpack watch for changes made to itself but we will not do that this time.
 
-The error message is now a lot better 
+The error message is now a lot better
 
 ![devtools console showing concat error at different line](../../images/7/27.png)
 
@@ -695,7 +689,6 @@ function h(){if(!d){var e=u(p);d=!0;for(var t=c.length;t;){for(s=c,c=[];++f<t;)s
 ### Development and production configuration
 
 Next, let's add a backend to our application by repurposing the now-familiar note application backend.
-
 
 Let's store the following content in the <i>db.json</i> file:
 
@@ -846,7 +839,7 @@ const App = () => {
 
 If the configuration for development and production differs a lot, it may be a good idea to [separate the configuration](https://webpack.js.org/guides/production/) of the two into their own files.
 
-Now, if the application is started with the command _npm start_ in development mode, it fetches the notes from the address http://localhost:3001/notes. The version bundled with the command _npm run build_ uses the address https://notes2023.fly.dev/api/notes to get the list of notes.
+Now, if the application is started with the command _npm start_ in development mode, it fetches the notes from the address <http://localhost:3001/notes>. The version bundled with the command _npm run build_ uses the address <https://notes2023.fly.dev/api/notes> to get the list of notes.
 
 We can inspect the bundled production version of the application locally by executing the following command in the <i>build</i> directory:
 
