@@ -250,7 +250,7 @@ The full explanation is as follows
 >
 ><i>Redux Toolkit is our recommended approach for writing Redux logic today, including store setup, reducers, data fetching, and more.</i>
 >
-><i>For more details, please read this Redux docs page: https://redux.js.org/introduction/why-rtk-is-redux-today</i>
+><i>For more details, please read this Redux docs page: <https://redux.js.org/introduction/why-rtk-is-redux-today></i>
 >
 ><i>configureStore from Redux Toolkit is an improved version of createStore that simplifies setup and helps avoid common bugs.</i>
 >
@@ -685,7 +685,7 @@ Now implement the actual functionality of the application.
 
 Your application can have a modest appearance, nothing else is needed but buttons and the number of reviews for each type:
 
-![screenshot of unicafe with buttons](../../images/6/50new.png)
+![browser showing unicafe good 5 ok 4 bad 3 buttons](../../images/6/50new.png)
 
 </div>
 
@@ -1201,8 +1201,8 @@ const App = () => {
   return (
     <div>
       <h2>Anecdotes</h2>
-      <AnecdoteForm />
       <AnecdoteList />
+      <AnecdoteForm />
     </div>
   )
 }

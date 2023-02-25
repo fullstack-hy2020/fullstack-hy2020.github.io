@@ -10,4 +10,8 @@ So far, we have placed the application's state and state logic directly inside R
 
 We'll learn about the lightweight version of Redux directly supported by React, namely the React context and useRedux hook, as well as the React Query library that simplifies the server state management.
 
+<i>Part updated 30th Jan 2023</i>
+
+- <i>A new section on React Query, useReducer and React context replaced the section on Redux connect</i>
+
 </div>

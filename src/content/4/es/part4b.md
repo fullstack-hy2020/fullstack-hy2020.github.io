@@ -72,15 +72,15 @@ Podemos crear nuestra base de datos de prueba separada en Mongo DB Atlas. Esta n
 
 Sería mejor ejecutar nuestras pruebas usando una base de datos que esté instalada y ejecutándose en la máquina local del desarrollador. La solución óptima sería que cada ejecución de prueba use su propia base de datos separada. Esto es "relativamente simple" de lograr [ejecutando Mongo en memoria](https://docs.mongodb.com/manual/core/inmemory/) o usando contenedores [Docker](https://www.docker.com ). No complicaremos las cosas y en su lugar continuaremos usando la base de datos MongoDB Atlas.
 
-Hagamos algunos cambios en el módulo que define la configuración de la aplicación: 
+Hagamos algunos cambios en el módulo que define la configuración de la aplicación (utils/config.js): 
 
 ```js
 require('dotenv').config()
 
 const PORT = process.env.PORT
+// highlight-start
 let MONGODB_URI = process.env.MONGODB_URI
 
-// highlight-start
 if (process.env.NODE_ENV === 'test') {
   MONGODB_URI = process.env.TEST_MONGODB_URI
 }
@@ -132,7 +132,7 @@ test('notes are returned as json', async () => {
   await api
     .get('/api/notes')
     .expect(200)
-    .expect('Content-Type', /application/json/)
+    .expect('Content-Type', /application\/json/)
 })
 
 afterAll(() => {
@@ -144,6 +144,22 @@ La prueba importa la aplicación Express del módulo <i>app.js</i> y la envuelve
 
 Nuestra prueba realiza una solicitud HTTP GET a la URL <i>api/notes</i> y verifica que se responda a la solicitud con el código de estado 200. La prueba también verifica que el encabezado <i>Content-Type</i> se establece en <i>application/json</i>, lo que indica que los datos están en el formato deseado.
 
+La verificación del valor en el encabezado usa una sintaxis un poco extraña:
+
+```js
+.expect('Content-Type', /application\/json/)
+```
+
+El valor lo definimos como una [expresión regular](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions) o en palabras cortas: regex. Las expresiones regulares en JavaScript inician y finalizan con un slash /. Dado que la cadena deseada <i>application/json</i> también contiene el mismo slash en el medio, entonces se precede por un \ de tal manera que no se interprete como un caracter de terminación.
+
+En princio, el test podría también ser definido simplemente como una cadena:
+
+```js
+.expect('Content-Type', 'application/json')
+```
+
+El problema, es que si usamos cadenas el valor del encabezado debe ser exactamente el mismo. Para la expresión que definimos, es suficiente que el encabezado <i>contenga</i> la cadena en cuestión. Por ejemplo, el valor actual del encabezado puede ser <i>application/json; charset=utf-8</i> ya que también tiene información de la codificación de caracteres (utf-8). Sin embargo, nuestra prueba no está interesada en esto y, por lo tanto, es mejor definir la prueba como una expresión regular en lugar verificar una cadena exacta.
+ 
 La prueba contiene algunos detalles que exploraremos [un poco más adelante](/es/part4/testing_the_backend#async-await). La función de flecha que define la prueba está precedida por la palabra clave <i>async</i> y la llamada al método para el objeto <i>api</i> está precedida por la palabra clave <i>await</i>. Escribiremos algunas pruebas y luego echaremos un vistazo más de cerca a esta magia asyn/await. No se preocupe por ellos por ahora, solo tenga la seguridad de que las pruebas de ejemplo funcionan correctamente. La sintaxis async/await está relacionada con el hecho de que hacer una solicitud a la API es una operación <i>asincrónica</i>. La [sintaxis async/await](https://facebook.github.io/jest/docs/en/asynchronous.html) se puede utilizar para escribir código asincrónico con la apariencia de código síncrono.
 
 Una vez que todas las pruebas (actualmente solo hay una) hayan terminado de ejecutarse, tenemos que cerrar la conexión a la base de datos utilizada por Mongoose. Esto se puede lograr fácilmente con el método [afterAll](https://facebook.github.io/jest/docs/en/api.html#afterallfn-timeout):
@@ -158,13 +174,40 @@ Al ejecutar las pruebas, es posible que se encuentre con la siguiente advertenci
 
 ![](../../images/4/8.png)
 
-Si esto ocurre, sigamos las [instrucciones](https://mongoosejs.com/docs/jest.html) y agregue un archivo <i>jest.config.js</i> en la raíz del proyecto con el siguiente contenido:
+Es muy probable que el problema sea causado por Mongoose versión 6.x, el problema no aparece cuando se usa la versión 5.x. [La documentación de Mongo](https://mongoosejs.com/docs/jest.html) no recomienda probar nuestras aplicaciones Mongoose con Jest.
+
+[Una forma](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) de no tener este error es adicionar dentro del directorio <i>tests</i> el archivo <i>teardown.js</i> con el siguiente contenido:
 
 ```js
-module.exports = {
-  testEnvironment: 'node'
+module.exports = () => {
+  process.exit(0)
 }
 ```
+
+Y extender la definición de Jest en el archivo <i>package.json</i> como se muestra a continuación
+
+```js
+{
+ //...
+ "jest": {
+   "testEnvironment": "node",
+   "globalTeardown": "./tests/teardown.js" // highlight-line
+ }
+}
+```
+
+Otro error que puede encontrar, es que su prueba tome más tiempo que el tiempo predeterminado de Jest de 5.000 ms. Esto se puede resolver agregando un tercer parámetro a la función de prueba:
+  
+```js
+test('notes are returned as json', async () => {
+  await api
+    .get('/api/notes')
+    .expect(200)
+    .expect('Content-Type', /application\/json/)
+}, 100000) // highlight-line
+```
+  
+Este tercer parámetro establece el tiempo de espera en 100.000 ms. Es posible que un tiempo de espera prolongado no sea lo que se desea para pruebas de rendimiento o la velocidad, pero está bien para nuestras pruebas de ejemplo.
 
 Un pequeño pero importante detalle: al [principio](/es/part4/structure_of_backend_application_introduction_to_testing#project-structure) de esta parte extrajimos la aplicación Express en el archivo <i>app.js</i>, y el rol del archivo <i>index.js</i> se cambió para iniciar la aplicación en el puerto especificado con el objeto <i>http</i> incorporado de Node:
 
@@ -241,7 +284,11 @@ const info = (...params) => {
 }
 
 const error = (...params) => {
-  console.error(...params)
+  // highlight-start
+  if (process.env.NODE_ENV !== 'test') { 
+    console.error(...params)
+  }
+  // highlight-end  
 }
 
 module.exports = {
@@ -942,6 +989,25 @@ beforeEach(async () => {
 ```
 
 La naturaleza asincrónica de JavaScript puede llevar a un comportamiento sorprendente por esta razón, es importante prestar mucha atención al usar la sintaxis async/await. Aunque la sintaxis hace que sea más fácil lidiar con las promesas, ¡es necesario entender cómo funcionan las promesas!
+  
+### El juramento de un verdadero desarrollador full stack 
+
+Realizar pruebas añade otro nivel de desafío a la programación. Debemos actualizar nuestro juramento como desarrolladores full stack para recordar que la sistematicidad también es clave al desarrollar pruebas.
+
+Por lo tanto, debemos extender nuestro juramento una vez más:
+
+El desarrollo full stack es <i> extremadamente difícil </i>, por eso usaré todos los medios posibles para hacerlo más fácil:
+
+- Mantendré la consola de desarrollador del navegador abierta todo el tiempo
+- Usaré la pestaña "Network" dentro de las herramientas de desarrollo del navegador, para asegurarme que el frontend y el backend se comuniquen como espero
+- Mantendré constantemente atento del estado del servidor, para asegurarme de que los datos enviados allí por el frontend se guarden como espero
+- Vigilaré la base de datos para confirmar que los datos enviado por el backend se guarden en el formato correcto
+- Progresaré en pequeños pasos
+- <i>Escribiré muchas sentencias console.log para asegurarme de que entiendo cómo se comporta el código y las pruebas; además para ayudarme a identificar los problemas</i>
+- Si mi código no funciona, no escribiré más código. En su lugar, comenzaré a eliminar código hasta que funcione o simplemente volveré a un estado en el que todo todavía funcionaba
+- <i>Si una prueba no pasa, me aseguraré de que la funcionalidad probada funcione correctamente en la aplicación</i>
+- Cuando pido ayuda en el canal Discord o Telegram del curso, o en otro lugar, formularé mis preguntas correctamente, vea [aquí](https://fullstackopen.com/en/part0/general_info#how-to-ask-help-in-discord-telegam) como pedir ayuda
+
 
 </div>
 
@@ -960,27 +1026,39 @@ Utilice el paquete supertest para escribir una prueba que realice una solicitud 
 
 Una vez finalizada la prueba, refactorice el controlador de ruta para usar la sintaxis async/await en lugar de promesas.
 
-Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/porbando_el_backend#entorno-de-prueba),
+Tenga en cuenta que tendrá que realizar cambios similares en el código que se hicieron [en el material](/es/part4/probando_el_backend#entorno-de-prueba),
 
 **NB:** Al ejecutar las pruebas, es posible que se encuentre con la siguiente advertencia:
 
 ![](../../images/4/8a.png)
 
-Si esto sucede, siga las [instrucciones](https://mongoosejs.com/docs/jest.html) y cree un nuevo archivo <i>jest.config.js</i> en la raíz del proyecto con el siguiente contenido:
+[Una forma](https://stackoverflow.com/questions/50687592/jest-and-mongoose-jest-has-detected-opened-handles) de no tener este error es adicionar dentro del directorio <i>tests</i> el archivo <i>teardown.js</i> con el siguiente contenido:
 
 ```js
-module.exports = {
-  testEnvironment: 'node'
+module.exports = () => {
+  process.exit(0)
 }
 ```
 
-**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/porbando_el_backend#ejecucion-de-pruebas-una-por-una). 
+Y extender la definición de Jest en el archivo <i>package.json</i> como se muestra a continuación
+
+```js
+{
+ //...
+ "jest": {
+   "testEnvironment": "node",
+   "globalTeardown": "./tests/teardown.js" // highlight-line
+ }
+}
+```
+
+**NB:** cuando estás escribiendo tus pruebas **<i>es mejor no ejecutar todas tus pruebas</i>**, solo ejecuta aquellas en las que estás trabajando. Lea más sobre esto [aquí](/es/part4/probando_el_backend#ejecucion-de-pruebas-una-por-una). 
 
 #### 4.9*: Pruebas de lista de blogs, paso 2
 
 Escriba una prueba que verifique que la propiedad de identificador único de las publicaciones del blog se llame <i>id</i>, de manera predeterminada, la base de datos nombra la propiedad <i>_id</i>. La verificación de la existencia de una propiedad se realiza fácilmente con el comparador [toBeDefined](https://jestjs.io/docs/en/expect#tobedefined) de Jest.
 
-Realice los cambios necesarios en el código para que pase la prueba. El método [toJSON](/es/part3/save_data_to_mongo_db#backend-connected-to-a-database) discutido en la parte 3 es un lugar apropiado para definir el parámetro <i>id</i>.
+Realice los cambios necesarios en el código para que pase la prueba. El método [toJSON](/es/part3/guardando_datos_en_mongo_db#backend-conectado-a-una-base-de-datos) discutido en la parte 3 es un lugar apropiado para definir el parámetro <i>id</i>.
 
 #### 4.10: Pruebas de lista de blogs, paso 3
 
@@ -1173,7 +1251,7 @@ Puede encontrar el código para nuestra aplicación actual en su totalidad en la
 
 Implementar la funcionalidad para eliminar un solo recurso de publicación de blog.
 
-Utilice la sintaxis async/await. Siga las convenciones de [RESTful](/es/part3/node_js_and_express#rest) al definir la API HTTP.
+Utilice la sintaxis async/await. Siga las convenciones de [RESTful](/es/part3/node_js_y_express#rest) al definir la API HTTP.
 
 No dude en implementar pruebas para la funcionalidad si lo desea. De lo contrario, verifique que la funcionalidad funcione con Postman o alguna otra herramienta.
 
@@ -1183,7 +1261,7 @@ Implementar la funcionalidad para actualizar la información de una publicación
 
 Utilice async / await.
 
-La aplicación principalmente necesita actualizar la cantidad de <i>likes</i> para una publicación de blog. Puede implementar esta funcionalidad de la misma manera que implementamos las notas de actualización en la [parte 3](/es/part3/save_data_to_mongo_db#other-operations).
+La aplicación principalmente necesita actualizar la cantidad de <i>likes</i> para una publicación de blog. Puede implementar esta funcionalidad de la misma manera que implementamos las notas de actualización en la [parte 3](/es/part3/guardando_datos_en_mongo_db#otras-operaciones).
 
 No dude en implementar pruebas para la funcionalidad si lo desea. De lo contrario, verifique que la funcionalidad funcione con Postman o alguna otra herramienta.
 

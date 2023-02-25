@@ -412,7 +412,7 @@ The command is long and quite unpleasant, so let's define a dedicated <i>npm scr
 }
 ```
 
-In the script there is no need to specify the <i>node\_modules/.bin/nodemon</i> path to nodemon, because *npm* automatically knows to search for the file from that directory.
+In the script there is no need to specify the <i>node\_modules/.bin/nodemon</i> path to nodemon, because _npm_ automatically knows to search for the file from that directory.
 
 We can now start the server in development mode with the command:
 
@@ -761,7 +761,6 @@ app.post('/api/notes', (request, response) => {
   const note = {
     content: body.content,
     important: body.important || false,
-    date: new Date(),
     id: generateId(),
   }
 

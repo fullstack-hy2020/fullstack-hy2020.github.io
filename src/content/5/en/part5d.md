@@ -77,9 +77,14 @@ Let's add an npm script to <i>the backend</i> which starts it in test mode, or s
 ```
 
 NB! To get Cypress working with WSL2 one might need to do some additional configuring first. These two [links](https://docs.cypress.io/guides/getting-started/installing-cypress#Windows-Subsystem-for-Linux) are great places to [start](https://nickymeuleman.netlify.app/blog/gui-on-wsl2-cypress).
-  
-./node_modules/.bin/cypress install -------- needed on windows.
-//https://github.com/cypress-io/cypress/issues/2610
+
+For example, if you are on Windows and are having errors stating <i>no version of cypress is installed</i>, typing:
+
+```bash
+./node_modules/.bin/cypress install
+```
+
+Might be [needed](https://github.com/cypress-io/cypress/issues/2610).
   
 When both the backend and frontend are running, we can start Cypress with the command
 
@@ -89,19 +94,19 @@ npm run cypress:open
 
 Cypress asks what type of tests we are doing. Let us answer "E2E Testing":
 
-![welcome cypress screen showing e2e testing](../../images/5/51new.png)
+![cypress arrow towards e2e testing option](../../images/5/51new.png)
 
 Next a browser is selected (e.g. Chrome) and then we click "Create new spec":
 
-![browser cypress screen creating first spect](../../images/5/52new.png)
+![create first spec with arrow pointing towards it](../../images/5/52new.png)
 
 Let us create the test file <i>cypress/e2e/note\_app.cy.js</i>:
 
-![browser dialog box showing cypress spec path](../../images/5/53new.png)
+![cypress entering path cypress/e2e/note_app.cy.js](../../images/5/53new.png)
 
 We could edit the tests in Cypress but let us rather use VS Code:
 
-![showing editing cypress commands in vscode](../../images/5/54new.png)
+![vscode showing edits of test and cypress showing spec added](../../images/5/54new.png)
 
 We can now close the edit view of Cypress.
 
@@ -167,7 +172,7 @@ the test fails
 
 Let's remove the failing code from the test.
 
-The variable *cy* our tests use gives us a nasty Eslint error
+The variable _cy_ our tests use gives us a nasty Eslint error
 
 ![vscode screenshot showing cy is not defined](../../images/5/58new.png)
 
@@ -308,7 +313,7 @@ describe('Note app',  function() {
     cy.get('#password').type('salainen')  // highlight-line
     cy.get('#login-button').click()  // highlight-line
 
-    cy.contains(M'atti Luukkainen logged in') // highlight-line
+    cy.contains('Matti Luukkainen logged in') // highlight-line
   })
 })
 ```
@@ -666,7 +671,7 @@ it('login fails with wrong password', function() {
 
 The command <i>should</i> is most often used by chaining it after the command <i>get</i> (or another similar command that can be chained). The <i>cy.get('html')</i> used in the test practically means the visible content of the entire application.
 
-We vould also check the same by chaining the command <i>contains</i> with the command <i>should</i> with a slightly different parameter:
+We would also check the same by chaining the command <i>contains</i> with the command <i>should</i> with a slightly different parameter:
 
 ```js
 cy.contains('Matti Luukkainen logged in').should('not.exist')

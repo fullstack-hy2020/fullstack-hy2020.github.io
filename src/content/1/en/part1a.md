@@ -11,6 +11,8 @@ We will now start getting familiar with probably the most important topic of thi
 
 The easiest way to get started by far is by using a tool called [create-react-app](https://github.com/facebook/create-react-app). It is possible (but not necessary) to install <i>create-react-app</i> on your machine if the <i>npm</i> tool that was installed along with Node has a version number of at least <i>5.3</i>.
 
+> <i>You may also use the new generation frontend tool [Vite](https://vitejs.dev/) in this course if you wish. The create-react-app is still the tool recommended by the React team and that is why it remains the default tool to set up a React project in this course. Read [here](https://github.com/reactjs/reactjs.org/pull/5487#issuecomment-1409720741) how the React team sees the future of React tooling.</i>
+
 Let's create an application called <i>part1</i> and navigate to its directory.
 
 ```bash
@@ -143,13 +145,13 @@ export default App
 
 and observe what happens in the browser console
 
-![](../../images/1/30.png)
+![browser console showing console log with arrow to "Hello from component"](../../images/1/30.png)
 
-The first rule of frontend web development: 
+The first rule of frontend web development:
 
 > <i>keep the console open all the time</i>
 
-Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and for the rest of my life when I'm doing web development. 
+Let us repeat this together: <i>I promise to keep the console open all the time</i> during this course, and for the rest of my life when I'm doing web development.
 
 It is also possible to render dynamic content inside of a component.
 
@@ -341,7 +343,7 @@ Component <i>Hello</i> also logs the value of the object props to the console.
 
 I really hope your console was open. If it was not, remember what you promised:
 
->  <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
+> <i>I promise to keep the console open all the time during this course, and for the rest of my life when I'm doing web development</i>
 
 Software development is hard. It gets even harder if one is not using all the possible available tools such as the web-console and debug printing with _console.log_. Professionals use both <i>all the time</i> and there is no single reason why a beginner should not adopt the use of these wonderful helper methods that will make life so much easier.
 
@@ -463,7 +465,7 @@ I finally remember the promise we made
 
 The console screams in red:
 
-![](../../images/1/34new.png)
+![devtools showing error with highlight around "Objects are not valid as a React child"](../../images/1/34new.png)
 
 The core of the problem is <i>Objects are not valid as a React child</i>, i.e. the application tries to render <i>objects</i> and it fails again.
 
@@ -632,7 +634,7 @@ const App = () => {
 }
 ```
 
-**WARNING** Don't try to program all the components concurrently, because that will almost certainly break down the whole app. Proceed in small steps, first make e.g. the component <i>Header</i> and only when it works for sure, you could proceed to the next component. 
+**WARNING** Don't try to program all the components concurrently, because that will almost certainly break down the whole app. Proceed in small steps, first make e.g. the component <i>Header</i> and only when it works for sure, you could proceed to the next component.
 
 Careful, small-step progress may seem slow, but it is actually <i> by far the fastest</i> way to progress. Famous software developer Robert "Uncle Bob" Martin has stated
 

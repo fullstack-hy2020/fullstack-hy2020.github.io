@@ -19,7 +19,7 @@ Many UI frameworks provide developers of web applications with ready-made themes
 
 Many UI frameworks have React-friendly versions where the framework's "components" have been transformed into React components. There are a few different React versions of Bootstrap like [reactstrap](http://reactstrap.github.io/) and [react-bootstrap](https://react-bootstrap.github.io/).
 
-Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://mui.com/). We will use both frameworks to add similar styles to the application we made in the [React-router](/en/part7/react_router) section of the course material.
+Next, we will take a closer look at two UI frameworks, Bootstrap and [MaterialUI](https://mui.com/). We will use both frameworks to add similar styles to the application we made in the [React Router](/en/part7/react_router) section of the course material.
 
 ### React Bootstrap
 
@@ -49,7 +49,7 @@ When we reload the application, we notice that it already looks a bit more styli
 
 ![browser notes app with bootstrap](../../images/7/5ea.png)
 
-In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers) (https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root *div* element of the application the  *container* class attribute:
+In Bootstrap, all of the contents of the application are typically rendered inside a [container](https://getbootstrap.com/docs/4.1/layout/overview/#containers). In practice this is accomplished by giving the root _div_ element of the application the  _container_ class attribute:
 
 ```js
 const App = () => {
@@ -67,7 +67,7 @@ We notice that this already affected the appearance of the application. The cont
 
 ![browser notes app with margin spacing](../../images/7/6ea.png)
 
-#### Table
+#### Tables
 
 Next, let's make some changes to the <i>Notes</i> component so that it renders the list of notes as a [table](https://getbootstrap.com/docs/4.1/content/tables/). React Bootstrap provides a built-in [Table](https://react-bootstrap.github.io/components/table/) component for this purpose, so there is no need to define CSS classes separately.
 
@@ -497,6 +497,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://semantic-ui.com/>
 - <https://mantine.dev/>
 - <https://react.fluentui.dev/>
+- <https://storybook.js.org>
 - <https://www.primefaces.org/primereact/>
 - <https://v2.grommet.io>
 - <https://blueprintjs.com>
@@ -504,6 +505,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://www.radix-ui.com/>
 - <https://react-spectrum.adobe.com/react-aria/index.html>
 - <https://master.co/>
+- <https://www.radix-ui.com/>
 - <https://nextui.org/>
 
 ### Styled components
@@ -565,7 +567,7 @@ const Login = (props) => {
 }
 ```
 
-Let's create a few more components for styling that application which will be styled versions of <i>div</i> elements:
+Let's create a few more components for styling this application which will be styled versions of <i>div</i> elements:
 
 ```js
 const Page = styled.div`

@@ -274,7 +274,7 @@ The [frontend](https://github.com/fullstack-hy2020/patientor) has already been b
 
 Quite often VS code looses track what is really happening in the code and it shows type or style related warnings despite the code has been fixed. If this happens (to me it has happened quite often), just restart the editor. It is also good to doublecheck that everything really works by running the compiler and the eslint from the command line with commands:
 
-```
+```bash
 npm run tsc
 npm run lint
 ```
@@ -489,7 +489,7 @@ import diaryData from '../../data/entries.json';
 
 import { DiaryEntry } from '../types'; // highlight-line
 
-const diaries: <DiaryEntry[] = diaryData; // highlight-line
+const diaries: DiaryEntry[] = diaryData; // highlight-line
 
 const getEntries = (): DiaryEntry[] => { // highlight-line
   return diaries; // highlight-line
@@ -541,7 +541,7 @@ We should never use type assertion unless there is no other way to proceed, as t
 While the compiler trusts you to know what you are doing when using *as*, by doing this, we are not using the full power of TypeScript but relying on the coder to secure the code.
 
 In our case, we could change how we export our data so we can type it within the data file.
-Since we cannot use typings in a JSON file, we should convert the JSON file to a ts file _diaries.ts_ which exports the typed data like so:
+Since we cannot use typings in a JSON file, we should convert the JSON file to a ts file *diaries.ts* which exports the typed data like so:
 
 ```js
 import { DiaryEntry } from "../src/types"; // highlight-line
@@ -563,7 +563,7 @@ export default diaryEntries; // highlight-line
 Now, when we import the array, the compiler interprets it correctly and the *weather* and *visibility* fields are understood right:
 
 ```js
-import diaries from '../../data/ntries'; // highlight-line
+import diaries from '../../data/entries'; // highlight-line
 
 import { DiaryEntry } from '../types';
 
@@ -1004,7 +1004,6 @@ app.listen(PORT, () => {
 
 Now the application is ready to receive HTTP POST requests for new diary entries of the correct type!
 
-
 ### Proofing requests
 
 There are plenty of things that can go wrong when we accept data from outside sources.
@@ -1371,7 +1370,7 @@ const toNewDiaryEntry = (object: unknown): NewDiaryEntry => {
 
 If the guard does not evaluate to true, an exeption is thrown.
 
-The use of operator _in_ actually now guarantees that the fields indeed exist in the object. Because of that, the existence check in parsers in no more needed:
+The use of operator *in* actually now guarantees that the fields indeed exist in the object. Because of that, the existence check in parsers in no more needed:
 
 ```js
 const parseVisibility = (visibility: unknown): Visibility => {
@@ -1383,13 +1382,13 @@ const parseVisibility = (visibility: unknown): Visibility => {
 };
 ```
 
-If a field, e.g. _comment_ would be optional, the type narrowing should take that into account, and the operator [in](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing) could not be used quite as we did here, since the _in_ test requires the field to be present.
+If a field, e.g. *comment* would be optional, the type narrowing should take that into account, and the operator [in](https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-in-operator-narrowing) could not be used quite as we did here, since the *in* test requires the field to be present.
 
 If we now try to create a new diary entry with invalid or missing fields, we are getting an appropriate error message:
 
 ![postman showing 400 bad request with incorrect or missing visibility - awsesome](../../images/9/62new.png)
 
-The source code of the application can be found on [GitHub](https://github.com/FullStack-HY/flight-diary).
+The source code of the application can be found on [GitHub](https://github.com/fullstack-hy2020/flight-diary).
 
 </div>
 

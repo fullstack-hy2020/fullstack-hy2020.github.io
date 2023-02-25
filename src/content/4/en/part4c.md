@@ -346,7 +346,7 @@ The test case obviously will not pass at this point. We are essentially practici
 
 Mongoose does not have a built-in validator for checking the uniqueness of a field. Fortunately there is a ready-made solution for this, the [mongoose-unique-validator](https://www.npmjs.com/package/mongoose-unique-validator) library. Let us install the library:
 
-```
+```bash
 npm install mongoose-unique-validator
 ```
 
@@ -426,7 +426,7 @@ notesRouter.post('/', async (request, response) => {
   const note = new Note({
     content: body.content,
     important: body.important === undefined ? false : body.important,
-    user: user._id //highlight-line
+    user: user.id //highlight-line
   })
 
   const savedNote = await note.save()

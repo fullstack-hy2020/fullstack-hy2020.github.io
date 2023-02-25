@@ -334,7 +334,7 @@ const App = () => {
 
 The app breaks down:
 
-![error showing uncaught type error when reading map](../../images/2/31a.png)
+![console typerror cannot read properties of null via map from App](../../images/2/31a.png)
 
 The error message gives the reason and location for the error. The code that caused the problems is the following:
 
@@ -374,7 +374,7 @@ The effect hook uses the function *setNotes* to set *notes* to have the notes th
 ```
 
 However the problem is that the effect is executed only <i>after the first render</i>.
-And because *notes* has the initial value of null:
+And because _notes_ has the initial value of null:
 
 ```js
 const App = () => {
@@ -393,7 +393,7 @@ notesToShow = notes
 notesToShow.map(note => ...)
 ```
 
-and this blows up the app since we can not call method *map* of the value *null*.
+and this blows up the app since we can not call method _map_ of the value _null_.
 
 When we set *notes* to be initially an empty array, there is no error since it is allowed to call *map* to an empty array.
 
@@ -498,7 +498,7 @@ const App = () => {
 
 The user interface of the application has a form, in the input field of which the name of the desired currency is written. If the currency exists, the application renders the exchange rates of the currency to other currencies:
 
-![browser showing exchange rate for eur against aother currencies and developer tools opn](../../images/2/32new.png)
+![browser showing currency exchange rates with eur typed and cosole saying fetching exchange rates](../../images/2/32new.png)
 
 The application sets the name of the currency entered to the form to the state *currency* at the moment the button is pressed.
 
@@ -538,7 +538,7 @@ if (currency) {
 
 which prevents requesting the exchange rates just after the first render when the variable *currency* still has the initial value, i.e. a null value.
 
-So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address https://open.er-api.com/v6/latest/eur and stores the response in the *rates* state.
+So if the user writes e.g. <i>eur</i> in the search field, the application uses Axios to perform an HTTP GET request to the address <https://open.er-api.com/v6/latest/eur> and stores the response in the _rates_ state.
 
 When the user then enters another value in the search field, e.g. <i>usd</i>, the effect function is executed again and the exchange rates of the new currency are requested from the API.
 
@@ -608,7 +608,7 @@ Add to the view showing the data of a single country, the weather report for the
 
 If you use Open weather map, [here](https://openweathermap.org/weather-conditions#Icon-list) is the description for how to get weather icons.
 
-**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with *http://*. This issue can be fixed by completing the exercise using Chrome.
+**NB:** In some browsers (such as Firefox) the chosen API might send an error response, which indicates that HTTPS encryption is not supported, although the request URL starts with `http://`. This issue can be fixed by completing the exercise using Chrome.
 
 **NB:** You need an api-key to use almost every weather service. Do not save the api-key to source control! Nor hardcode the api-key to your source code. Instead use an [environment variable](https://create-react-app.dev/docs/adding-custom-environment-variables/) to save the key.
 
@@ -627,7 +627,7 @@ const api_key = process.env.REACT_APP_API_KEY
 // variable api_key has now the value set in startup
 ```
 
-Note that if you created the application using *npx create-react-app ...* and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
+Note that if you created the application using _npx create-react-app ..._ and you want to use a different name for your environment variable then the environment variable name must still begin with *REACT\_APP_*. You can also use a `.env` file rather than defining it on the command line each time by creating a file entitled '.env' in the root of the project and adding the following.
 
 ```text
 # .env
