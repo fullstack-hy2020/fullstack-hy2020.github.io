@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-Let's continue our work on the backend of the notes application we started in [part 3](/en/part3). 
+Let's continue our work on the backend of the notes application we started in [part 3](/en/part3).
 
 ### Project structure
 
@@ -32,8 +32,8 @@ After making the changes to the directory structure of our project, we end up wi
 │   └── middleware.js  
 ```
 
-So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code. 
-However, this is not a very good way to do things. 
+So far we have been using <i>console.log</i> and <i>console.error</i> to print different information from the code.
+However, this is not a very good way to do things.
 Let's separate all printing to the console to its own module <i>utils/logger.js</i>:
 
 ```js
@@ -173,9 +173,7 @@ module.exports = notesRouter
 
 The module exports the router to be available for all consumers of the module.
 
-
 All routes are now defined for the router object, similar to what did before with the object representing the entire application.
-
 
 It's worth noting that the paths in the route handlers have shortened. In the previous version, we had:
 
@@ -203,7 +201,6 @@ app.use('/api/notes', notesRouter)
 ```
 
 The router we defined earlier is used <i>if</i> the URL of the request starts with <i>/api/notes</i>. For this reason, the notesRouter object must only define the relative parts of the routes, i.e. the empty path <i>/</i> or just the parameter <i>/:id</i>.
-
 
 After making these changes, our <i>app.js</i> file looks like this:
 
@@ -352,7 +349,7 @@ module.exports = {
 // highlight-end
 ```
 
-The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used in two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation: 
+The file exports <i>an object</i> that has two fields, both of which are functions. The functions can be used in two different ways. The first option is to require the whole object and refer to functions through the object using the dot notation:
 
 ```js
 const logger = require('./utils/logger')
@@ -361,6 +358,7 @@ logger.info('message')
 
 logger.error('error message')
 ```
+
 The other option is to destructure the functions to their own variables in the <i>require</i> statement:
 
 ```js
@@ -461,16 +459,13 @@ Verify that it is possible to add blogs to the list with Postman or the VS Code 
 
 Refactor the application into separate modules as shown earlier in this part of the course material.
 
-
 **NB** refactor your application in baby steps and verify that the application works after every change you make. If you try to take a "shortcut" by refactoring many things at once, then [Murphy's law](https://en.wikipedia.org/wiki/Murphy%27s_law) will kick in and it is almost certain that something will break in your application. The "shortcut" will end up taking more time than moving forward slowly and systematically.
-
 
 One best practice is to commit your code every time it is in a stable state. This makes it easy to rollback to a situation where the application still works.
 
 </div>
 
 <div class="content">
-
 
 ### Testing Node applications
 
@@ -502,12 +497,11 @@ module.exports = {
 
 > The _average_ function uses the array [reduce](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method. If the method is not familiar to you yet, then now is a good time to watch the first three videos from the [Functional Javascript](https://www.youtube.com/watch?v=BMUiFMZr7vk&list=PL0zVEGEvSaeEd9hlmCXrk5yUyqUag-n84) series on Youtube.
 
-There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), which resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/). 
+There are many different testing libraries or <i>test runners</i> available for JavaScript. In this course we will be using a testing library developed and used internally by Facebook called [jest](https://jestjs.io/), which resembles the previous king of JavaScript testing libraries [Mocha](https://mochajs.org/).
 
-Jest is a natural choice for this course, as it works well for testing backends, and it shines when it comes to testing React applications. 
+Jest is a natural choice for this course, as it works well for testing backends, and it shines when it comes to testing React applications.
 
 > <i>**Windows users:**</i> Jest may not work if the path of the project directory contains a directory that has spaces in its name.
-
 
 Since tests are only executed during the development of our application, we will install <i>jest</i> as a development dependency with the command:
 

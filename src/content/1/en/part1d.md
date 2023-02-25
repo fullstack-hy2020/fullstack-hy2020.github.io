@@ -38,6 +38,7 @@ const App = () => {
 The component gets access to the functions _setLeft_ and _setRight_ that it can use to update the two pieces of state.
 
 The component's state or a piece of its state can be of any type. We could implement the same functionality by saving the click count of both the <i>left</i> and <i>right</i> buttons into a single object:
+
 ```js
 {
   left: 0,
@@ -83,6 +84,7 @@ const App = () => {
 Now the component only has a single piece of state and the event handlers have to take care of changing the <i>entire application state</i>.
 
 The event handler looks a bit messy. When the left button is clicked, the following function is called:
+
 ```js
 const handleLeftClick = () => {
   const newClicks = { 
@@ -94,6 +96,7 @@ const handleLeftClick = () => {
 ```
 
 The following object is set as the new state of the application:
+
 ```js
 {
   left: clicks.left + 1,
@@ -224,7 +227,7 @@ const handleLeftClick = () => {
 
 However, __don't__ do this. As mentioned previously, the state of React components like _allClicks_ must not be mutated directly. Even if mutating state appears to work in some cases, it can lead to problems that are very hard to debug.
 
-Let's take a closer look at how the clicking 
+Let's take a closer look at how the clicking
 is rendered to the page:
 
 ```js
@@ -244,7 +247,6 @@ const App = () => {
 ```
 
 We call the [join](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) method on the _allClicks_ array that joins all the items into a single string, separated by the string passed as the function parameter, which in our case is an empty space.
-
 
 ### Update of the state is asynchronous
 
@@ -284,7 +286,7 @@ const App = () => {
 
 The solution does not quite work:
 
-![](../../images/1/33.png)
+![browser showing 2 left|right 1, RLL total 2](../../images/1/33.png)
 
 For some reason the total of button presses is all the time one behind the actual amount of presses.
 
@@ -307,8 +309,7 @@ const App = () => {
 
 The console reveals the problem
 
-![](../../images/1/32.png)
-
+![devtools console showing left before 4 and left after 4](../../images/1/32.png)
 
 Even though a new value was set to _left_ by calling _setLeft(left + 1)_, the old value is still there despite the update! Because of this, the following attempt to count button presses produces a too small result:
 
@@ -335,7 +336,6 @@ const App = () => {
 ```
 
 So now the number of button presses is definitely based on the correct number of left button presses.
-
 
 ### Conditional rendering
 
@@ -467,7 +467,7 @@ Before we move on, let us remind ourselves of one of the most important rules of
 
 <h4>The first rule of web development</h4>
 
->  **Keep the browser's developer console open at all times.**
+> **Keep the browser's developer console open at all times.**
 >
 > The <i>Console</i> tab in particular should always be open, unless there is a specific reason to view another tab.
 
@@ -547,7 +547,6 @@ It is highly recommended to add the [React developer tools](https://chrome.googl
 
 ![screenshot react developer tools extension](../../images/1/10ea.png)
 
-
 The _App_ component's state is defined like so:
 
 ```js
@@ -604,6 +603,7 @@ Event handling has proven to be a difficult topic in previous iterations of this
 For this reason, we will revisit the topic.
 
 Let's assume that we're developing this simple application with the following component <i>App</i>:
+
 ```js
 const App = () => {
   const [value, setValue] = useState(10)
@@ -651,6 +651,7 @@ index.js:2178 Warning: Expected `onClick` listener to be a function, instead got
 ```
 
 This attempt would not work either:
+
 ```js
 <button onClick={value = 0}>button</button>
 ```
@@ -672,6 +673,7 @@ The issue here is that our event handler is defined as a <i>function call</i> wh
 The _console.log_ function call gets executed when the component is rendered and for this reason, it gets printed once to the console.
 
 The following attempt is flawed as well:
+
 ```js
 <button onClick={setValue(0)}>button</button>
 ```
@@ -773,7 +775,7 @@ const App = () => {
 }
 ```
 
-The code functions correctly even though it looks complicated. 
+The code functions correctly even though it looks complicated.
 
 The event handler is now set to a function call:
 
@@ -1119,6 +1121,7 @@ You may find the following links useful:
 ### Web programmers oath
 
 Programming is hard, that is why I will use all the possible means to make it easier
+
 - I will have my browser developer console open all the time
 - I progress with small steps
 - I will write lots of _console.log_ statements to make sure I understand how the code behaves and to help pinpointing problems
@@ -1131,7 +1134,7 @@ Programming is hard, that is why I will use all the possible means to make it ea
 
 <h3>Exercises 1.6.-1.14.</h3>
 
-Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into 
+Submit your solutions to the exercises by first pushing your code to GitHub and then marking the completed exercises into
 the "my submissions" tab of the [submission application](https://studies.cs.helsinki.fi/stats/courses/fullstackopen).
 
 Remember, submit **all** the exercises of one part **in a single submission**. Once you have submitted your solutions for one part, **you cannot submit more exercises to that part anymore**.
@@ -1142,7 +1145,7 @@ Remember, submit **all** the exercises of one part **in a single submission**. O
 
 In some situations you may also have to run the command below from the root of the project:
 
-``` 
+```bash
 rm -rf node_modules/ && npm i
 ```
 
@@ -1280,7 +1283,7 @@ Then perform the necessary actions to make the warning disappear. Try pasting th
 
 The world of software engineering is filled with [anecdotes](http://www.comp.nus.edu.sg/~damithch/pages/SE-quotes.htm) that distill timeless truths from our field into short one-liners.
 
-Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering: 
+Expand the following application by adding a button that can be clicked to display a <i>random</i> anecdote from the field of software engineering:
 
 ```js
 import { useState } from 'react'
@@ -1309,7 +1312,7 @@ const App = () => {
 export default App
 ```
 
-Content of the file <i>index.js</i> is the same as in previous exercises. 
+Content of the file <i>index.js</i> is the same as in previous exercises.
 
 Find out how to generate random numbers in JavaScript, eg. via a search engine or on [Mozilla Developer Network](https://developer.mozilla.org). Remember that you can test generating random numbers e.g. straight in the console of your browser.
 

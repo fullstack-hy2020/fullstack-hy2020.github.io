@@ -69,8 +69,7 @@ In the part0 [example project](/en/part0/fundamentals_of_web_apps#running-applic
 
 The use of XHR is no longer recommended, and browsers already widely support the [fetch](https://developer.mozilla.org/en-US/docs/Web/API/WindowOrWorkerGlobalScope/fetch) method, which is based on so-called [promises](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise), instead of the event-driven model used by XHR.
 
-As a reminder from part0 (which one should <i>remember to not use</i> without a pressing reason), data was fetched using XHR in the following way: 
-
+As a reminder from part0 (which one should <i>remember to not use</i> without a pressing reason), data was fetched using XHR in the following way:
 
 ```js
 const xhttp = new XMLHttpRequest()
@@ -251,7 +250,7 @@ We will get more familiar with the _npm_ tool in the [third part of the course](
 
 The red print in the error message informs us about the issue:
 
-<i>Cannot bind to port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i> 
+<i>Cannot bind to port 3001. Please specify another port number either through --port argument or through the json-server.json configuration file</i>
 
 As we can see, the application is not able to bind itself to the [port](https://en.wikipedia.org/wiki/Port_(computer_networking)). The reason being that port 3001 is already occupied by the previously started json-server.
 
@@ -311,6 +310,7 @@ promise.then(response => {
   console.log(response)
 })
 ```
+
 The following is printed to the console:
 
 ![json object data printed to console](../../images/2/17new.png)
@@ -419,6 +419,7 @@ render 3 notes
 First, the body of the function defining the component is executed and the component is rendered for the first time. At this point <i>render 0 notes</i> is printed, meaning data hasn't been fetched from the server yet.
 
 The following function, or effect in React parlance:
+
 ```js
 () => {
   console.log('effect')
@@ -519,7 +520,7 @@ We still have a problem with our application. When adding new notes, they are no
 
 The code for the application, as described so far, can be found in full on [github](https://github.com/fullstack-hy2020/part2-notes/tree/part2-4), on branch <i>part2-4</i>.
 
-### The development runtime environment 
+### The development runtime environment
 
 The configuration for the whole application has steadily grown more complex. Let's review what happens and where. The following image describes the makeup of the application
 
@@ -569,7 +570,6 @@ We continue with developing the phonebook. Store the initial state of the applic
 ```
 
 Start json-server on port 3001 and make sure that the server returns the list of people by going to the address <http://localhost:3001/persons> in the browser.
-
 
 If you receive the following error message:
 

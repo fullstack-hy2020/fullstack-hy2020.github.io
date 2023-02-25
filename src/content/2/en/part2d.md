@@ -61,17 +61,17 @@ Quite often it is useful to inspect HTTP requests in the <i>Network</i> tab of C
 
 We can use the inspector to check that the headers sent in the POST request are what we expected them to be:
 
-![](../../images/2/21new1.png)
+![dev tools header shows 201 created for localhost:3001/notes](../../images/2/21new1.png)
 
 Since the data we sent in the POST request was a JavaScript object, axios automatically knew to set the appropriate <i>application/json</i> value for the <i>Content-Type</i> header.
 
 The tab <i>payload</i> can be used to check the request data:
 
-![](../../images/2/21new2.png)
+![devtools payload tab shows content and important fields from above](../../images/2/21new2.png)
 
 Also the tab <i>response</i> is useful, it shows what was the data the server responded with:
 
-![](../../images/2/21new3.png)
+![devtools response tab shows same content as payload but with id field too](../../images/2/21new3.png)
 
 The new note is not rendered to the screen yet. This is because we did not update the state of the <i>App</i> component when we created the new note. Let's fix this:
 
@@ -233,7 +233,7 @@ axios.put(url, note).then(response => {
   // ...
 ```
 
-This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React. 
+This is not recommended because the variable <em>note</em> is a reference to an item in the <em>notes</em> array in the component's state, and as we recall we must [never mutate state directly](https://reactjs.org/docs/state-and-lifecycle.html#using-state-correctly) in React.
 
 It's also worth noting that the new object _changedNote_ is only a so-called [shallow copy](https://en.wikipedia.org/wiki/Object_copying#Shallow_copy), meaning that the values of the new object are the same as the values of the old object. If the values of the old object were objects themselves, then the copied values in the new object would reference the same objects that were in the old object.
 
@@ -398,7 +398,6 @@ export default {
 }
 ```
 
-
 We no longer return the promise returned by axios directly. Instead, we assign the promise to the <em>request</em> variable and call its <em>then</em> method:
 
 ```js
@@ -421,7 +420,7 @@ const getAll = () => {
 }
 ```
 
-The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then). 
+The modified <em>getAll</em> function still returns a promise, as the <em>then</em> method of a promise also [returns a promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/then).
 
 After defining the parameter of the <em>then</em> method to directly return <i>response.data</i>, we have gotten the <em>getAll</em> function to work like we wanted it to. When the HTTP request is successful, the promise returns the data sent back in the response from the backend.
 
@@ -563,23 +562,23 @@ In defining the object using this shorter notation, we make use of a [new featur
 
 To demonstrate this feature, let's consider a situation where we have the following values assigned to variables:
 
-```js 
+```js
 const name = 'Leevi'
 const age = 0
 ```
 
 In older versions of JavaScript we had to define an object like this:
 
-```js 
+```js
 const person = {
   name: name,
   age: age
 }
 ```
 
-However, since both the property fields and the variable names in the object are the same, it's enough to simply write the following in ES6 JavaScript: 
+However, since both the property fields and the variable names in the object are the same, it's enough to simply write the following in ES6 JavaScript:
 
-```js 
+```js
 const person = { name, age }
 ```
 
@@ -613,7 +612,7 @@ We had [previously](/en/part2/getting_data_from_server#axios-and-promises) menti
 
 The rejection of a promise is [handled](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Using_promises) by providing the <em>then</em> method with a second callback function, which is called in the situation where the promise is rejected.
 
-The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method. 
+The more common way of adding a handler for rejected promises is to use the [catch](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/catch) method.
 
 In practice, the error handler for rejected promises is defined like this:
 
@@ -643,7 +642,7 @@ axios
   })
 ```
 
-The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>. 
+The <em>catch</em> method can be used to define a handler function at the end of a promise chain, which is called once any promise in the chain throws an error and the promise becomes <i>rejected</i>.
 
 ```js
 axios
@@ -748,7 +747,7 @@ const delete = (id) => {
 
 <i>Why is there a star in the exercise? See [here](/en/part0/general_info#taking-the-course) for the explanation.</i>
 
-Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number. 
+Change the functionality so that if a number is added to an already existing user, the new number will replace the old number. It's recommended to use the HTTP PUT method for updating the phone number.
 
 If the person's information is already in the phonebook, the application can ask the user to confirm the action:
 

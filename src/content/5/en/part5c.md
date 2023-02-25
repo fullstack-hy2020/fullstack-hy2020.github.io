@@ -91,13 +91,14 @@ CI=true npm test
 ```
 
 For Windows (PowerShell) users
+
 ```js
 $env:CI=$true; npm test
 ```
 
 **NB:** the console may issue a warning if you have not installed Watchman. Watchman is an application developed by Facebook that watches for changes that are made to files. The program speeds up the execution of tests and at least starting from macOS Sierra, running tests in watch mode issues some warnings to the console, that can be removed by installing Watchman.
 
-Instructions for installing Watchman on different operating systems can be found on the official Watchman website: https://facebook.github.io/watchman/
+Instructions for installing Watchman on different operating systems can be found on the official Watchman website: <https://facebook.github.io/watchman/>
 
 ### Test file location
 
@@ -134,7 +135,7 @@ test('renders content', () => {
 Test fails if _getByText_ does not find the element it is looking for.
 
 We could also use [CSS-selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) to find rendered elements by using the method [querySelector](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) of the object [container](https://testing-library.com/docs/react-testing-library/api/#container-1) that is one of the fields returned by the render:
- 
+
 ```js
 import React from 'react'
 import '@testing-library/jest-dom/extend-expect'
@@ -241,13 +242,14 @@ Now the HTML of the wanted element gets printed:
     </button>
   </li>
 ```
+
 ### Clicking buttons in tests
 
 In addition to displaying content, the <i>Note</i> component also makes sure that when the button associated with the note is pressed, the _toggleImportance_ event handler function gets called.
 
 Let us install a library [user-event](https://testing-library.com/docs/user-event/intro) that makes simulating user input a bit easier:
 
-```
+```bash
 npm install --save-dev @testing-library/user-event
 ```
 
@@ -289,6 +291,7 @@ const mockHandler = jest.fn()
 ```
 
 A [session](https://testing-library.com/docs/user-event/setup/) is started to interact with the rendered component:
+
 ```js
 const user = userEvent.setup()
 ```
@@ -380,7 +383,7 @@ describe('<Togglable />', () => {
 
 The _beforeEach_ function gets called before each test, which then renders the <i>Togglable</i> component and saves the field _container_ of the return value.
 
-The first test verifies that the <i>Togglable</i> component renders its child component 
+The first test verifies that the <i>Togglable</i> component renders its child component
 
 ```js
 <div className="testDiv">
@@ -491,12 +494,12 @@ test('<NoteForm /> updates parent state and calls onSubmit', async () => {
 })
 ```
 
-Tests get access to the input field using the function [getByRole](https://testing-library.com/docs/queries/byrole). 
+Tests get access to the input field using the function [getByRole](https://testing-library.com/docs/queries/byrole).
 
 The method [type](https://testing-library.com/docs/user-event/utility#type) of the userEvent is used to write text to the input field.
 
-The first test expectation ensures, that submitting the form calls the _createNote_ method. 
-The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled. 
+The first test expectation ensures, that submitting the form calls the _createNote_ method.
+The second expectation checks, that the event handler is called with the right parameters - that a note with the correct content is created when the form is filled.
 
 ### About finding the elements
 
@@ -547,7 +550,6 @@ await user.type(inputs[0], 'testing a form...')
 ```
 
 Method <i>getAllByRole</i> now returns an array and the right input field is the first element of the array. However, this approach is a bit suspicious since it relies on the order of the input fields.
-
 
 Quite often input fields have a <i>placeholder</i> text that hints user what kind of input is expected. Let us add a placeholder to our form:
 
@@ -632,7 +634,7 @@ const { container } = render(<NoteForm createNote={createNote} />)
 const input = container.querySelector('#note-input')
 ```
 
-However, we shall stick to the approach of using _getByPlaceholderText_ in the test. 
+However, we shall stick to the approach of using _getByPlaceholderText_ in the test.
 
 Let us look at a couple of details before moving on. Let us assume that a component would render text to an HTML element as follows:
 
@@ -654,7 +656,7 @@ export default Note
 
 the _getByText_ command that the test uses does <i>not</i> find the element
 
-```js 
+```js
 test('renders content', () => {
   const note = {
     content: 'Does not work anymore :(',
@@ -671,7 +673,7 @@ test('renders content', () => {
 
 Command _getByText_ looks for an element that has the **same text** that it has as a parameter, and nothing more. If we want to look for an element that <i>contains</i> the text, we could use an extra option:
 
-```js 
+```js
 const element = screen.getByText(
   'Does not work anymore :(', { exact: false }
 )
@@ -679,7 +681,7 @@ const element = screen.getByText(
 
 or we could use the command _findByText_:
 
-```js 
+```js
 const element = await screen.findByText('Does not work anymore :(')
 ```
 
@@ -689,7 +691,7 @@ There are situations where yet another form of the command _queryByText_ is usef
 
 We could eg. use the command to ensure that something <i>is not rendered</i> to the component:
 
-```js 
+```js
 test('does not render this', () => {
   const note = {
     content: 'This is a reminder',
@@ -713,7 +715,7 @@ CI=true npm test -- --coverage
 
 ![terminal output of test coverage](../../images/5/18ea.png)
 
-A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory. 
+A quite primitive HTML report will be generated to the <i>coverage/lcov-report</i> directory.
 The report will tell us the lines of untested code in each component:
 
 ![HTML report of the test coverage](../../images/5/19ea.png)
@@ -729,19 +731,19 @@ You can find the code for our current application in its entirety in the <i>part
 
 Make a test, which checks that the component displaying a blog renders the blog's title and author, but does not render its URL or number of likes by default.
 
-Add CSS classes to the component to help the testing as necessary. 
+Add CSS classes to the component to help the testing as necessary.
 
 #### 5.14: Blog list tests, step2
 
-Make a test, which checks that the blog's URL and number of likes are shown when the button controlling the shown details has been clicked. 
+Make a test, which checks that the blog's URL and number of likes are shown when the button controlling the shown details has been clicked.
 
 #### 5.15: Blog list tests, step3
 
-Make a test, which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice. 
+Make a test, which ensures that if the <i>like</i> button is clicked twice, the event handler the component received as props is called twice.
 
 #### 5.16: Blog list tests, step4
 
-Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created. 
+Make a test for the new blog form. The test should check, that the form calls the event handler it received as props with the right details when a new blog is created.
 
 </div>
 
@@ -753,12 +755,12 @@ In the previous part of the course material, we wrote integration tests for the 
 
 So far all of our tests for the frontend have been unit tests that have validated the correct functioning of individual components. Unit testing is useful at times, but even a comprehensive suite of unit tests is not enough to validate that the application works as a whole.
 
-We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server. 
+We could also make integration tests for the frontend. Integration testing tests the collaboration of multiple components. It is considerably more difficult than unit testing, as we would have to for example mock data from the server.
 We chose to concentrate on making end-to-end tests to test the whole application. We will work on the end-to-end tests in the last chapter of this part.
 
 ### Snapshot testing
 
-Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing. 
+Jest offers a completely different alternative to "traditional" testing called [snapshot](https://facebook.github.io/jest/docs/en/snapshot-testing.html) testing. The interesting feature of snapshot testing is that developers do not need to define any tests themselves, it is simple enough to adopt snapshot testing.
 
 The fundamental principle is to compare the HTML code defined by the component after it has changed to the HTML code that existed before it was changed.
 

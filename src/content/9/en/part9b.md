@@ -49,7 +49,7 @@ and setting up <i>scripts</i> within the package.json:
 }
 ```
 
-You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, command-line arguments that include short or long form options for the _npm run script_ need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i> and options _-s_ and _--someoption_, the whole command is:
+You can now use <i>ts-node</i> within this directory by running *npm run ts-node*. Note that if you are using ts-node through package.json, command-line arguments that include short or long form options for the *npm run script* need to be prefixed with *--*. So if you want to run file.ts with <i>ts-node</i> and options *-s* and *--someoption*, the whole command is:
 
 ```shell
 npm run ts-node file.ts -- -s --someoption
@@ -251,7 +251,7 @@ The default type of the catch block parameter *error* is *unknown*. The [unknown
 
 Both the possible causes of exception (wrong operator or division by zero) will throw an [Error](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error) object with an error message, that our program prints to the user.
 
-If our code would be JavaScript, we could print the error message by just referring to the field [message](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message) of the object _error_ as follows:
+If our code would be JavaScript, we could print the error message by just referring to the field [message](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error/message) of the object *error* as follows:
 
 ```js
 try {
@@ -297,9 +297,9 @@ Let's return to the basic idea of TypeScript. TypeScript expects all globally-us
 
 As with npm, the TypeScript world also celebrates open-source code. The community is active and continuously reacting to updates and changes in commonly-used npm packages. You can almost always find the typings for npm packages, so you don't have to create types for all of your thousands of dependencies alone.
 
-Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example: 
+Usually, types for existing packages can be found from the <i>@types</i> organization within npm, and you can add the relevant types to your project by installing an npm package with the name of your package with a @types/ prefix. For example:
 
-```
+```bash
 npm install --save-dev @types/react @types/express @types/lodash @types/jest @types/mongoose
 ```
 
@@ -428,7 +428,7 @@ we get a proper error message:
 Something bad happened. Error: Provided values were not numbers!
 ```
 
-There is quite a lot going on in the code. The most important addition is the function *parseArguments* that ensures that the parameters given to _multiplicator_ are of the right type. If not, an exception is thrown with a descriptive error message.
+There is quite a lot going on in the code. The most important addition is the function *parseArguments* that ensures that the parameters given to *multiplicator* are of the right type. If not, an exception is thrown with a descriptive error message.
 
 The definition of the function has a couple of interesting things:
 
@@ -438,8 +438,7 @@ const parseArguments = (args: string[]): MultiplyValues => {
 }
 ```
 
-Firstly, the parameter *args* is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings. 
-
+Firstly, the parameter *args* is an [array](https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#arrays) of strings.
 
 The return value of the function has the type *MultiplyValues*, which is defined as follows:
 
@@ -582,7 +581,7 @@ If you define helper functions in other modules, you should use the [JavaScript 
 import { isNotNumber } from "./utils";
 ```
 
-and exporting 
+and exporting
 
 ```js
 export const isNotNumber = (argument: any): boolean =>
@@ -853,7 +852,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-To get this working, we must add an <i>export</i> to the function _calculator_:
+To get this working, we must add an <i>export</i> to the function *calculator*:
 
 ```js
 export const calculator = (a: number, b: number, op: Operation) : number => {
@@ -1028,7 +1027,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-We shall see later on in this part some techniques how the <i>any</i> typed data (eg. the input an app receives from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules. 
+We shall see later on in this part some techniques how the <i>any</i> typed data (eg. the input an app receives from the user) can be <i>narrowed</i> to a more specific type (such as number). With a proper narrowing of types, there is no more need to silence the eslint rules.
 
 ### Type assertion
 
@@ -1038,7 +1037,7 @@ Using a [type assertion](https://www.typescriptlang.org/docs/handbook/2/everyday
 export type Operation = 'multiply' | 'add' | 'divide';
 ```
 
-Now we can import the type and use a <i>type assertion</i> to tell the TypeScript compiler what type a variable has: 
+Now we can import the type and use a <i>type assertion</i> to tell the TypeScript compiler what type a variable has:
 
 ```js
 import { calculator, Operation } from './calculator'; // highligh-line
@@ -1058,7 +1057,7 @@ app.post('/calculate', (req, res) => {
 });
 ```
 
-The defined constant _operation_ has now the type _Operation_ and the compiler is perfectly happy, no quieting of the Eslint rule is needed on the following function call. The new variable is actually not needed, the type assertion can be done when an argument is passed to the function:
+The defined constant *operation* has now the type *Operation* and the compiler is perfectly happy, no quieting of the Eslint rule is needed on the following function call. The new variable is actually not needed, the type assertion can be done when an argument is passed to the function:
 
 ```js
 app.post('/calculate', (req, res) => {
@@ -1091,7 +1090,7 @@ Configure your project to use the above ESlint settings and fix all the warnings
 
 #### 9.7 WebExercises
 
-Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to endpoint http://localhost:3002/exercises with the input in the request body:
+Add an endpoint to your app for the exercise calculator. It should be used by doing an HTTP POST request to endpoint <http://localhost:3002/exercises> with the input in the request body:
 
 ```js
 {
