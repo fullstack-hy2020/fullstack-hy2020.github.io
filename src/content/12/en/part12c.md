@@ -9,10 +9,10 @@ lang: en
 
 ### React in container
 
-Let's create and containerize a React application next. Let us choose npm as the package manager even though create-react-app defaults to yarn.
+Let's create and containerize a React application next.
 
 ```
-$ npx create-react-app hello-front --use-npm
+$ npx create-react-app hello-front
   ...
 
   Happy hacking!
@@ -70,13 +70,14 @@ root@98fa9483ee85:/usr/src/app# npm install -g serve
 
 root@98fa9483ee85:/usr/src/app# serve build
 
-   ┌───────────────────────────────────┐
-   │                                   │
-   │   Serving!                        │
-   │                                   │
-   │   Local:  http://localhost:5000   │
-   │                                   │
-   └───────────────────────────────────┘
+   ┌────────────────────────────────────────┐
+   │                                        │
+   │   Serving!                             │
+   │                                        │
+   │   - Local:    http://localhost:3000    │
+   │   - Network:  http://172.17.0.2:3000   │
+   │                                        │
+   └────────────────────────────────────────┘
 
 ```
 
@@ -102,7 +103,7 @@ CMD ["serve", "build"] # highlight-line
 
 Our CMD now includes square brackets and as a result we now used the so called <i>exec form</i> of CMD. There are actually **three** different forms for the CMD out of which the exec form is preferred. Read the [documentation](https://docs.docker.com/engine/reference/builder/#cmd) for more info.
 
-When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5000:3000 hello-front_, the app will be available in http://localhost:5000.
+When we now build the image with _docker build . -t hello-front_ and run it with _docker run -p 5001:3000 hello-front_, the app will be available in http://localhost:5001.
 
 ### Using multiple stages
 
@@ -130,7 +131,7 @@ RUN npm run build
 FROM nginx:1.20-alpine # highlight-line
 
 # COPY the directory build from build-stage to /usr/share/nginx/html
-# The target location here was found from the docker hub page
+# The target location here was found from the Docker hub page
 COPY --from=build-stage /usr/src/app/build /usr/share/nginx/html # highlight-line
 ```
 
@@ -152,11 +153,13 @@ Finally, we get to the todo-frontend. View the todo-app/todo-frontend and read t
 
 Start by running the frontend outside the container and ensure that it works with the backend.
 
-Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. Note that you need to set *REACT\_APP\_BACKEND\_URL* before running/building the frontend, otherwise it does not get defined in the code!
+Containerize the application by creating <i>todo-app/todo-frontend/Dockerfile</i> and use [ENV](https://docs.docker.com/engine/reference/builder/#env) instruction to pass *REACT\_APP\_BACKEND\_URL* to the application and run it with the backend. The backend should still be running outside a container. 
+
+Note that you need to set *REACT\_APP\_BACKEND\_URL* before building the frontend, otherwise it does not get defined in the code!
 
 #### Exercise 12.14: Testing during the build process
 
-One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where this might be a good idea. 
+One interesting possibility to utilize multi-stage builds is to use a separate build stage for [testing](https://docs.docker.com/language/nodejs/run-tests/). If the testing stage fails, the whole build process will also fail. Note that it may not be the best idea to move <i>all testing</i> to be done during the building of an image, but there may be <i>some</i> containerization-related tests where it might be worth considering. 
 
 Extract a component <i>Todo</i> that represents a single todo. Write a test for the new component and add running tests into the build process.
 
@@ -199,7 +202,13 @@ RUN npm install
 CMD ["npm", "start"]
 ```
  
-During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so _docker build -f ./dev.Dockerfile -t hello-front-dev ._ will build the image. The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
+During build the flag _-f_ will be used to tell which file to use, it would otherwise default to Dockerfile, so the following command will build the image:
+
+```bash
+docker build -f ./dev.Dockerfile -t hello-front-dev .
+```
+
+The create-react-app will be served in port 3000, so you can test that it works by running a container with that port published.
 
 The second task, accessing the files with VSCode, is not done yet. There are at least two ways of doing this: 
 
@@ -224,6 +233,8 @@ Note that it takes some time (for me it took 50 seconds!) for the frontend to ge
 You can now view hello-frontend in the browser.
 ```
 
+> <i>**Editor's note:** hot reload might work in your computer, but it is currently known to have some [issues](https://github.com/facebook/create-react-app/issues/11879). So if it does not work for you, just continue without the hot reload support, and reload the browser when you change the frontend code. You may also use use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).</i>
+
 Next, let's move the config to a <i>docker-compose.yml</i>. That file should be at the root of the project as well:
 
 ```yml
@@ -240,11 +251,9 @@ services:
     container_name: hello-front-dev # This will name the container hello-front-dev
 ```
 
-With this configuration, _docker-compose up_ can run the application in development mode. You don't even need Node installed to develop it!
+With this configuration, _docker compose up_ can run the application in development mode. You don't even need Node installed to develop it!
 
 Installing new dependencies is a headache for a development setup like this. One of the better options is to install the new dependency **inside** the container. So instead of doing e.g. _npm install axios_, you have to do it in the running container e.g. _docker exec hello-front-dev npm install axios_, or add it to the package.json and run _docker build_ again.
-
-A word of warnig for Windows users: it has been reported that the hot relading does not work properly in all the cases when volumes are used, see [this](https://github.com/microsoft/WSL/issues/4739). If you run into this problem, you could use [The Visual Studio Code Containers extension](https://code.visualstudio.com/docs/remote/containers).
 
 </div>
 <div class="tasks">
@@ -283,10 +292,10 @@ services:
     image: busybox # highlight-line
 ```
 
-The Busybox container won't have any process running inside so that we could _exec_ in there. Because of that, the output of _docker-compose up_ will also look like this:
+The Busybox container won't have any process running inside so we can not _exec_ in there. Because of that, the output of _docker compose up_ will also look like this:
 
 ```bash
-$ docker-compose up
+$ docker compose up
   Pulling debug-helper (busybox:)...
   latest: Pulling from library/busybox
   8ec32b265e94: Pull complete
@@ -304,10 +313,10 @@ $ docker-compose up
 
 This is expected as it's just a toolbox. Let's use it to send a request to hello-front-dev and see how the DNS works. While the hello-front-dev is running, we can do the request with [wget](https://en.wikipedia.org/wiki/Wget) since it's a tool included in Busybox to send a request from the debug-helper to hello-front-dev.
 
-With Docker Compose we can use _docker-compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
+With Docker Compose we can use _docker compose run SERVICE COMMAND_ to run a service with a specific command. Command wget requires the flag _-O_ with _-_ to output the response to the stdout:
 
 ```bash
-$ docker-compose run debug-helper wget -O - http://app:3000
+$ docker compose run debug-helper wget -O - http://app:3000
 
   Creating react-app_debug-helper_run ... done
   Connecting to hello-front-dev:3000 (172.26.0.2:3000)
@@ -319,7 +328,23 @@ $ docker-compose run debug-helper wget -O - http://app:3000
       ...
 ```
 
-The URL is the interesting part here. We simply said to connect to the service <i>hello-front-dev</i> and to that port 3000. The <i>hello-front-dev</i> is the name of the container, which was given by us using *container\_name* in the docker-compose file. And the port used is the port from which the application is available in that container. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
+The URL is the interesting part here. We simply said to connect to the port 3000 of the service <i>app</i>. The <i>app</i> is the name of the service specified in the <i>docker-compose.yml</i>: 
+
+```bash
+services:
+  app: // highlight-line
+    image: hello-front-dev
+    build:
+      context: .
+      dockerfile: dev.Dockerfile
+    volumes:
+      - ./:/usr/src/app
+    ports:
+      - 3000:3000 // highlight-line
+    container_name: hello-front-dev
+```
+
+And the port used is the port from which the application is available in that container, also specified in the <i>docker-compose.yml</i>. The port does not need to be published for other services in the same network to be able to connect to it. The "ports" in the docker-compose file are only for external access.
 
 Let's change the port configuration in the <i>docker-compose.yml</i> to emphasize this:
 
@@ -339,11 +364,11 @@ services:
     image: busybox
 ```
 
-With _docker-compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker-compose run debug-helper wget -O - http://app:3000_ works since the port is still 3000 within the docker network.
+With _docker compose up_ the application is available in <http://localhost:3210> at the <i>host machine</i>, but still _docker compose run debug-helper wget -O - http://app:3000_ works since the port is still 3000 within the docker network.
 
 ![](../../images/12/busybox_networking_drawio.png)
 
-As the above image illustrates, _docker-compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
+As the above image illustrates, _docker compose run_ asks debug-helper to send the request within the network. While the browser in host machine sends the request from outside of the network.
 
 Now that you know how easy it is to find other services in the <i>docker-compose.yml</i> and we have nothing to debug we can remove the debug-helper and revert the ports to 3000:3000 in our <i>docker-compose.yml</i>.
 
@@ -437,7 +462,7 @@ services:
       - app # wait for the frontend container to be started
 ```
 
-with that added we can run _docker-compose up_ and see what happens.
+with that added we can run _docker compose up_ and see what happens.
 
 ```bash
 $ docker container ls
@@ -461,7 +486,7 @@ root@374f9e62bfa8:/# curl http://localhost:80
   ...
 ```
 
-To help us, Docker Compose set up a network when we ran _docker-compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
+To help us, Docker Compose set up a network when we ran _docker compose up_. It also added all of the containers in the <i>docker-compose.yml</i> to the network. A DNS makes sure we can find the other container. The containers are each given two names: the service name and the container name.
 
 Since we are inside the container, we can also test the DNS! Let's curl the service name (app) in port 3000
 
@@ -480,7 +505,7 @@ root@374f9e62bfa8:/# curl http://app:3000
 
 That is it! Let's replace the proxy_pass address in nginx.conf with that one.
 
-If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker-compose up_.
+If you are still encountering 502, make sure that the create-react-app has been built first. You can read the logs output from the _docker compose up_.
 
 One more thing: we added an option [depends_on](https://docs.docker.com/compose/compose-file/compose-file-v3/#depends_on) to the configuration that ensures that the _nginx_ container is not started before the frontend container _app_ is started:
 
@@ -528,19 +553,27 @@ http {
 
 #### Exercise 12.17: Set up an Nginx reverse proxy server in front of todo-frontend
 
-We are going to put the nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
+We are going to put the Nginx server in front of both todo-frontend and todo-backend. Let's start by creating a new docker-compose file <i>todo-app/docker-compose.dev.yml</i> and <i>todo-app/nginx.conf</i>.
 
 ```bash
 todo-app
 ├── todo-frontend
 ├── todo-backend
-├── nginx.conf // highlight-line
+├── nginx.dev.conf // highlight-line
 └── docker-compose.dev.yml // highlight-line
 ```
 
-Add the services nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
+Add the services Nginx and todo-frontend built with <i>todo-app/todo-frontend/dev.Dockerfile</i> into the <i>todo-app/docker-compose.dev.yml</i>.
 
 ![](../../images/12/ex_12_16_nginx_front.png)
+
+In this and the following exercises you do not need to support the the build option, that is, the command
+
+```bash
+docker compose -f docker-compose.dev.yml up --build
+```
+
+It is enough to build the frontend and backend at their own repositories.
 
 #### Exercise 12.18: Configure the Nginx server to be in front of todo-backend
 
@@ -584,13 +617,57 @@ This illustrates what we are looking for and may be helpful if you are having tr
 
 > In this exercise, submit the entire development environment, including both Express and React applications, Dockerfiles and docker-compose.yml.
 
-Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable.
+Finally, it is time to put all the pieces together. Before starting, it is essential to understand <i>where</i> the React app is actually run. The above figure might give the impression that React app is run in the container but it is totally wrong. 
 
-If you already got this working during a previous exercise you may skip this.
+It is just the <i>React app source code</i> that is in the container. When the browser hits the address http://loclhost:8080 (assuming that you set up Nginx to be accessed in port 8080), the React source code gets downloaded from the container to the browser:
+
+![](../../images/12/nginx-setup.png)
+
+Next, the browser starts executing the React app, and all the requests it makes to the backend should be done through the Nginx reverse proxy:
+
+![](../../images/12/nginx-setup2.png)
+
+The frontent container is actually no more accessed beyond the first request that gets the React app source code to the browser.
+
+Set up now your app to work as in the abovefigure. Make sure that the todo-frontend works with todo-backend. It will require changes to the *REACT\_APP\_BACKEND\_URL* environmental variable in the frontend.
 
 Make sure that the development environment is now fully functional, that is:
 - all features of the todo app work
-- you can edit the source files <i>and</i> the changes take effect through hot reload in case of frontend and by reloading the app in case of backend
+- you can edit the source files <i>and</i> the changes take effect by reloading the app (the hot reloading may or may not work...)
+- frontend should access the backend throught Nginx, so the requests should be done to http://localhost:8080/api/todos:
+
+![](../../images/12/todos-dev-right-2.png)
+
+Note that your app should work even if no [exposed port](https://docs.docker.com/compose/compose-file/compose-file-v3/#ports) are defined for the backend and frontend in the docker compose file:
+
+```yml
+services:
+  app:
+    image: todo-front-dev
+    volumes:
+      - ./todo-frontend/:/usr/src/app
+    # no ports here!
+
+  server:
+      image: todo-back-dev
+      volumes:
+        - ./todo-backend/:/usr/src/app
+      environment: 
+        - ...
+      # no ports here!
+
+  nginx:
+    image: nginx:1.20.1
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    ports:
+      - 8080:80 # this is needed
+    container_name: reverse-proxy
+    depends_on:
+      - app
+```
+
+We just need to expose the Nginx port to the host machine since the access to the backend and frontend is proxied to the right container port by Nginx. Because Nginx, frontend and backend are defined in the same Docker compose configuration, Docker puts those to the same [Docker network](https://docs.docker.com/compose/networking/) and thanks to that, Nginx has direct access to frontend and backend containers ports.
 
 </div>
 
@@ -609,6 +686,7 @@ If you are interested in learning more in-depth about containers come to the [De
 <div class="tasks">
 
 ### Exercises 12.20.-12.22.
+
 #### Exercise 12.20:
 
 Create a production <i>todo-app/docker-compose.yml</i> with all of the services, Nginx, todo-backend, todo-frontend, MongoDB and Redis. Use Dockerfiles instead of <i>dev.Dockerfiles</i> and make sure to start the applications in production mode.
@@ -619,8 +697,9 @@ Please use the following structure for this exercise:
 todo-app
 ├── todo-frontend
 ├── todo-backend
-├── nginx.conf
+├── nginx.dev.conf
 ├── docker-compose.dev.yml
+├── nginx.conf  // highlight-line
 └── docker-compose.yml // highlight-line
 ```
 

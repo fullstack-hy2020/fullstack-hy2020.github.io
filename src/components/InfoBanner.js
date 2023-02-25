@@ -45,9 +45,12 @@ const InfoBanner = ({ visible, onHide }) => {
   return (
     <div style={style}>
       <div style={textStyle}>
-        <p>Part 6 has new content about React Query, useReducer hook and React context.</p>
-        <p>The new content replaces the chapter on Redux connect (that still remains online for a while).</p>
-        <div style={{ marginTop: 10 }}><i>If you have already completed the part 6, this change has no effect on your progress.</i></div>
+        <p>There are some changes in part 9. The <i>Patientor</i> example app structure has been refactored to a less complex form to make it easier to concentrate on learning TypeScript.</p>
+        <div style={{ marginTop: 10 }}>
+          If you are just working with the old Patientor, no worries, the old material shall stay online for a couple of weeks.
+        </div>
+
+        <div style={{ marginTop: 10 }}><i>If you have already completed the part 9, this change has absolutely no effect on your progress.</i></div>
       </div>
       <div style={buttonDiv}>
         <button style={buttonStyle} onClick={onHide}>

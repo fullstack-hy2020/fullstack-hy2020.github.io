@@ -45,7 +45,7 @@ const App = (props) => {
 
 We can also use React Developer Tools to see that this really happens:
 
-![](../../images/2/30.png)
+![browser showing dev react tools window](../../images/2/30.png)
 
 If we wanted to start with an empty list of notes, we would set the initial value as an empty array, and since the props would not be used, we could omit the <em>props</em> parameter from the function definition:
 
@@ -338,7 +338,7 @@ The comparison operator is redundant, since the value of <em>note.important</em>
 notes.filter(note => note.important)
 ```
 
-The reason we showed the comparison operator first was to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not work as expected in all situations and it's safer to use <em>val1 === val2</em> exclusively in comparisons. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
+We showed the comparison operator first to emphasize an important detail: in JavaScript <em>val1 == val2</em> does not always work as expected. When performing comparisons, it's therefore safer to exclusively use <em>val1 === val2</em>. You can read more about the topic [here](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness).
 
 You can test out the filtering functionality by changing the initial value of the <em>showAll</em> state.
 

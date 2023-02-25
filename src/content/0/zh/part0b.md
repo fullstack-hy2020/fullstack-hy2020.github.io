@@ -716,7 +716,7 @@ var sendToServer = function(note) {
  与其只使用JavaScript和DOM-API，不如使用包含更简易工具的库，与DOM-API相比更容易操作，通常用于操作页面。这些库中一个一直很流行的是[jQuery](https://jquery.com/)。
 
 <!-- jQuery was developed back when web applications mainly followed the traditional style of the server generating HTML pages, the functionality of which was enhanced on the browser side using JavaScript written with jQuery. One of the reasons for the success of jQuery was its so-called cross-browser compatibility. The library worked regardless of the browser or the company that made it, so there was no need for browser-specific solutions. Nowadays using jQuery is not as justified given the advancement of JavaScript, and the most popular browsers generally support basic functionalities well.-->
- jQuery是早在网络应用主要遵循服务器生成HTML页面的传统风格时开发的，这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 jQuery 来增强。。jQuery成功的原因之一是其所谓的跨浏览器兼容性。这个库无论在哪种浏览器或制造它的公司都能工作，所以不需要针对浏览器的解决方案。如今，考虑到JavaScript的发展，使用jQuery就不那么合理了，最流行的浏览器一般都能很好地支持基本功能。
+ jQuery是早在网络应用主要遵循服务器生成HTML页面的传统风格时开发的，这种风格的功能通过在浏览器端使用 JavaScript 搭配使用 jQuery 来增强。jQuery成功的原因之一是其所谓的跨浏览器兼容性。这个库无论在哪种浏览器或制造它的公司都能工作，所以不需要针对浏览器的解决方案。如今，考虑到JavaScript的发展，使用jQuery就不那么合理了，最流行的浏览器一般都能很好地支持基本功能。
 
 <!-- The rise of the single page app brought several more "modern" ways of web development than jQuery. The favorite of the first wave of developers was [BackboneJS](http://backbonejs.org/). After its [launch](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13) in 2012, Google's [AngularJS](https://angularjs.org/) quickly became almost the de facto standard of modern web development.-->
  单页应用的兴起带来了几种比jQuery更 "现代 "的网页开发方式。第一波开发者的最爱是[BackboneJS](http://backbonejs.org/)。在2012年[推出](https://github.com/angular/angular.js/blob/master/CHANGELOG.md#100-temporal-domination-2012-06-13)之后，谷歌的[AngularJS](https://angularjs.org/)迅速成为现代网页开发的事实标准。
@@ -802,7 +802,7 @@ part2
 <!-- Review the basics of HTML by reading this tutorial from Mozilla: [HTML tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics).-->
 通过阅读Mozilla的这个教程来复习HTML的基础知识：[HTML教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)。
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<!-- This exercise is not submitted to GitHub, it's enough to just read the tutorial -->
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
 
@@ -812,7 +812,7 @@ part2
 <!-- Review the basics of CSS by reading this tutorial from Mozilla: [CSS tutorial](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics).-->
  通过阅读Mozilla的这个教程来复习CSS的基础知识：[CSS教程](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/CSS_basics)。
 
-<i>This exercise is not submitted to GitHub, it's enough to just read the tutorial</i>
+<!-- This exercise is not submitted to GitHub, it's enough to just read the tutorial -->
 
 这个练习不用提交GitHub，仅仅阅读教程即可。
 
@@ -876,7 +876,7 @@ end note
  这些练习的目的是再一次通读文本，并思考其中的内容。阅读应用的[代码](https://github.com/mluukkai/example_app)不是必须的，但当然也可以。
 
 <!--   <h4>0.5: Single page app</h4>-->
- <h4>0.5: 单页应用</h4
+ <h4>0.5: 单页应用</h4>
 
 <!-- Create a diagram depicting the situation where the user goes to the [single page app](/en/part0/fundamentals_of_web_apps#single-page-app) version of the notes app at <https://studies.cs.helsinki.fi/exampleapp/spa>.-->
  创建一个图表，描述用户进入[单页应用](/en/part0/fundamentals_of_web_apps#single-page-app)版本的笔记应用的情况，网址为<https://studies.cs.helsinki.fi/exampleapp/spa>。

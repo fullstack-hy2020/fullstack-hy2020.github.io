@@ -34,8 +34,8 @@ La barra de navegación y una aplicación que contiene múltiples vistas son muy
 He aquí una forma:
 
 ```js
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import { useState }  from 'react'
+import ReactDOM from 'react-dom/client'
 
 const Home = () => (
   <div> <h2>TKTL notes app</h2> </div>
@@ -52,7 +52,7 @@ const Users = () => (
 const App = () => {
   const [page, setPage] = useState('home')
 
- const toPage = (page) => (event) => {
+  const toPage = (page) => (event) => {
     event.preventDefault()
     setPage(page)
   }
@@ -90,7 +90,7 @@ const App = () => {
   )
 }
 
-ReactDOM.render(<App />, document.getElementById('root'))
+ReactDOM.createRoot(document.getElementById('root')).render(<App />)
 ```
 
 Cada vista se implementa como su propio componente. Almacenamos la información del componente de vista en el estado de la aplicación llamado <i>page</i>. Esta información nos dice qué componente, que representa una vista, debe mostrarse debajo de la barra de menú.
@@ -136,7 +136,7 @@ const App = () => {
       </Routes>
 
       <div>
-        <i>Note app, Department of Computer Science 2022</i>
+        <i>Note app, Department of Computer Science 2023</i>
       </div>
     </Router>
   )
@@ -196,7 +196,7 @@ La aplicación ahora contiene cinco vistas diferentes cuya pantalla está contro
 
 <i>Home</i> y <i>Users</i> no han cambiado con respecto al ejercicio anterior. <i>Notes</i> es un poco más complicado. Muestra la lista de notas que se le pasan como props de tal manera que se puede hacer clic en el nombre de cada nota.
 
-![](../../images/7/3ea.png)
+![notes app, mostrando que las notas se pueden clickear](../../images/7/3ea.png)
 
 La capacidad de hacer clic en un nombre se implementa con el componente <i>Link</i>, y hacer clic en el nombre de una nota cuya identificación es 3 desencadenaría un evento que cambia la dirección del navegador a <i>notes/3</i>:
 
@@ -286,7 +286,7 @@ La opción para navegar a la vista de <i>Login</i> se representa de forma condic
 
 Entonces, si el usuario ya ha iniciado sesión, en lugar de mostrar el enlace <i>Login</i>, mostramos el nombre de usuario del usuario:
 
-![](../../images/7/4a.png)
+![app de notas mostrando usuario logeado](../../images/7/4a.png)
 
 El código del componente que maneja la funcionalidad de inicio de sesión es el siguiente:
 

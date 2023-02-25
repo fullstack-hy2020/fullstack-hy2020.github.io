@@ -15,7 +15,7 @@ In addition to Jest, we also need another testing library that will help us rend
 
 Let's install the library with the command:
 
-```js
+```bash
 npm install --save-dev @testing-library/react @testing-library/jest-dom
 ```
 

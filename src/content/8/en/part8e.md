@@ -6,8 +6,7 @@ lang: en
 ---
 <div class="content">
 
-
-We are approaching the end of this part. Let's finish by having a look at a few more details of GraphQL. 
+We are approaching the end of this part. Let's finish by having a look at a few more details of GraphQL.
 
 ### Fragments
 
@@ -41,9 +40,9 @@ query {
 }
 ```
 
-both return persons. When choosing the fields to return, both queries have to define exactly the same fields. 
+both return persons. When choosing the fields to return, both queries have to define exactly the same fields.
 
-These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Let's declare a fragment for selecting all fields of a person: 
+These kinds of situations can be simplified with the use of [fragments](https://graphql.org/learn/queries/#fragments). Let's declare a fragment for selecting all fields of a person:
 
 ```js
 fragment PersonDetails on Person {
@@ -72,7 +71,7 @@ query {
 }
 ```
 
-The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but in the client. The fragments must be declared when the client uses them for queries. 
+The fragments <i><strong>are not</strong></i> defined in the GraphQL schema, but in the client. The fragments must be declared when the client uses them for queries.
 
 In principle, we could declare the fragment with each query like so:
 
@@ -95,7 +94,7 @@ export const FIND_PERSON = gql`
 `
 ```
 
-However, it is much better to declare the fragment once and save it to a variable. 
+However, it is much better to declare the fragment once and save it to a variable.
 
 ```js
 const PERSON_DETAILS = gql`
@@ -126,13 +125,13 @@ export const FIND_PERSON = gql`
 
 ### Subscriptions
   
-Along with query and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions, clients can <i>subscribe</i> to updates about changes in the server. 
+Along with query and mutation types, GraphQL offers a third operation type: [subscriptions](https://www.apollographql.com/docs/react/data/subscriptions/). With subscriptions, clients can <i>subscribe</i> to updates about changes in the server.
 
-Subscriptions are radically different from anything we have seen in this course so far. Until now, all interaction between browser and server was due to a React application in the browser making HTTP requests to the server. GraphQL queries and mutations have also been done this way. 
-With subscriptions, the situation is the opposite. After an application has made a subscription, it starts to listen to the server. 
+Subscriptions are radically different from anything we have seen in this course so far. Until now, all interaction between browser and server was due to a React application in the browser making HTTP requests to the server. GraphQL queries and mutations have also been done this way.
+With subscriptions, the situation is the opposite. After an application has made a subscription, it starts to listen to the server.
 When changes occur on the server, it sends a notification to all of its <i>subscribers</i>.
 
-Technically speaking, the HTTP protocol is not well-suited for communication from the server to the browser. So, under the hood, Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication. 
+Technically speaking, the HTTP protocol is not well-suited for communication from the server to the browser. So, under the hood, Apollo uses [WebSockets](https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API) for server subscriber communication.
 
 ### Refactoring the backend
 
@@ -352,7 +351,7 @@ Unfortunately startStandaloneServer does not allow adding subscriptions to the a
 
 Let us install Express
 
-```
+```bash
 npm install express cors
 ```
 
@@ -438,7 +437,7 @@ There are several changes to the code. [ApolloServerPluginDrainHttpServer](https
 
 > <i>We highly recommend using this plugin to ensure your server shuts down gracefully.</i>
 
-The GraphQL server in the _server_ variable is now connected to listen to the root of the server, i.e. to the _/_ route, using the _expressMiddleware_ object. Information about the logged-in user is set in the context using the function we defined earlier. Since it is an Express server, the middlewares express-json and cors are also needed so that the data included in the requests is correctly parsed and so that CORS problems do not appear.
+The GraphQL server in the *server* variable is now connected to listen to the root of the server, i.e. to the */* route, using the *expressMiddleware* object. Information about the logged-in user is set in the context using the function we defined earlier. Since it is an Express server, the middlewares express-json and cors are also needed so that the data included in the requests is correctly parsed and so that CORS problems do not appear.
 
 Since the GraphQL server must be started before the Express application can start listening to the specified port, the entire initialization has had to be placed in an <i>async function</i>, which allows waiting for the GraphQL server to start:
 
@@ -446,8 +445,7 @@ The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/gr
 
 ### Subscriptions on the server
 
-
-Let's implement subscriptions for subscribing for notifications about new persons added. 
+Let's implement subscriptions for subscribing for notifications about new persons added.
 
 The schema changes like so:
 
@@ -461,7 +459,7 @@ So when a new person is added, all of its details are sent to all subscribers.
 
 First, we have to install two packages for adding subscriptions to GraphQL and a Node.js WebSocket library:
 
-```
+```bash
 npm install graphql-ws ws @graphql-tools/schema
 ```
 
@@ -546,7 +544,7 @@ If you're interested in more details about configurations, Apollo's [documentati
 
 WebSockets are a perfect match for communication in the case of GraphQL subscriptions since when WebSockets are used, also the server can initiate the communication.
 
-The subscription _personAdded_ needs a resolver. The _addPerson_ resolver also has to be modified so that it sends a notification to subscribers. 
+The subscription *personAdded* needs a resolver. The *addPerson* resolver also has to be modified so that it sends a notification to subscribers.
 
 The required changes are as follows:
 
@@ -604,13 +602,13 @@ const resolvers = {
 
 The following library needs to be installed
 
-```
+```bash
 npm install graphql-subscriptions
 ```
 
 With subscriptions, the communication happens using the [publish-subscribe](https://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern) principle utilizing the object [PubSub](https://www.apollographql.com/docs/apollo-server/data/subscriptions#the-pubsub-class).
 
-There is only few lines of code added, but quite much is happening under the hood. The resolver of the _personAdded_ subscription registers and saves info about all the clients that do the subscription. The clients are saved to an 
+There is only few lines of code added, but quite much is happening under the hood. The resolver of the *personAdded* subscription registers and saves info about all the clients that do the subscription. The clients are saved to an
 ["iterator object"](https://www.apollographql.com/docs/apollo-server/data/subscriptions/#listening-for-events) called <i>PERSON\_ADDED</i>  thanks to the following code:
 
 ```js
@@ -623,7 +621,7 @@ Subscription: {
 
 The iterator name is an arbitrary string, now the name follows the convention, it is the subscription name written in capital letters.
 
-Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method _publish_:
+Adding a new person <i>publishes</i> a notification about the operation to all subscribers with PubSub's method *publish*:
 
 ```js
 pubsub.publish('PERSON_ADDED', { personAdded: person }) 
@@ -633,13 +631,13 @@ Execution of this line sends a WebSocket message about the added person to all t
 
 It's possible to test the subscriptions with the Apollo Explorer like this:
 
-![](../../images/8/31x.png)
+![apollo explorer showing subscriptions tab and response](../../images/8/31x.png)
 
 When the blue button <i>PersonAdded</i> is pressed Explorer starts to wait for a new person to be added. On addition (that you need to do from another browser window) the info of the added person appears in the right side of the Explorer.
 
 If the subscription does not work, check that you have correct connection settings:
 
-![](../../images/8/35.png)
+![apollo studio showing cog red arrow highlighting](../../images/8/35.png)
 
 The backend code can be found on [GitHub](https://github.com/fullstack-hy2020/graphql-phonebook-backend/tree/part8-7), branch <i>part8-7</i>.
 
@@ -648,7 +646,7 @@ Implementin gsubscriptions involves a lot of configurations. You will be able to
 ### Subscriptions on the client
 
 In order to use subscriptions in our React application, we have to do some changes, especially on its [configuration](https://www.apollographql.com/docs/react/data/subscriptions/).
-The configuration in <i>index.js</i> has to be modified like so: 
+The configuration in <i>index.js</i> has to be modified like so:
 
 ```js
 import { 
@@ -761,15 +759,13 @@ const App = () => {
 }
 ```
 
+When a new person is now added to the phonebook, no matter where it's done, the details of the new person are printed to the client’s console:
 
-When a new person is now added to the phonebook, no matter where it's done, the details of the new person are printed to the client’s console: 
+![dev tools showing data personAdded Object with Mainroad](../../images/8/32e.png)
 
-![](../../images/8/32e.png)
+When a new person is added, the server sends a notification to the client, and the callback function defined in the *onData* attribute is called and given the details of the new person as parameters.
 
-
-When a new person is added, the server sends a notification to the client, and the callback function defined in the _onData_ attribute is called and given the details of the new person as parameters. 
-
-Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately. 
+Let's extend our solution so that when the details of a new person are received, the person is added to the Apollo cache, so it is rendered to the screen immediately.
 
 ```js
 const App = () => {
@@ -794,7 +790,7 @@ const App = () => {
 }
 ```
 
-Our solution has a small problem: a person is added to the cache and also rendered twice since the component _PersonForm_ is also adding it to the cache.
+Our solution has a small problem: a person is added to the cache and also rendered twice since the component *PersonForm* is also adding it to the cache.
 
 Let us now fix the problem by ensuring that a person is not added twice in the cache:
 
@@ -839,7 +835,7 @@ const App = () => {
 }
 ```
 
-The function _updateCache_ can also be used in _PersonForm_ for the cache update:
+The function *updateCache* can also be used in *PersonForm* for the cache update:
 
 ```js
 import { updateCache } from '../App' // highlight-line
@@ -864,7 +860,7 @@ The final code of the client can be found on [GitHub](https://github.com/fullsta
 
 ### n+1 problem
 
-First of all, you'll need to enable a debugging option via _mongoose_ in your backend project directory, by adding a line of code as shown below:
+First of all, you'll need to enable a debugging option via *mongoose* in your backend project directory, by adding a line of code as shown below:
 
 ```js
 mongoose.connect(MONGODB_URI)
@@ -878,7 +874,7 @@ mongoose.connect(MONGODB_URI)
 mongoose.set('debug', true); // highlight-line
 ```
 
-Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a _friendOf_ field, which tells whose friends list the person is on. 
+Let's add some things to the backend. Let's modify the schema so that a <i>Person</i> type has a *friendOf* field, which tells whose friends list the person is on.
 
 ```js
 type Person {
@@ -890,7 +886,7 @@ type Person {
 }
 ```
 
-The application should support the following query: 
+The application should support the following query:
 
 ```js
 query {
@@ -902,7 +898,7 @@ query {
 }
 ```
 
-Because _friendOf_ is not a field of <i>Person</i> objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list: 
+Because *friendOf* is not a field of <i>Person</i> objects on the database, we have to create a resolver for it, which can solve this issue. Let's first create a resolver that returns an empty list:
 
 ```js
 Person: {
@@ -922,7 +918,7 @@ Person: {
 },
 ```
 
-The parameter _root_ is the person object for which a friends list is being created, so we search from all _User_ objects the ones which have root._id in their friends list: 
+The parameter *root* is the person object for which a friends list is being created, so we search from all *User* objects the ones which have root._id in their friends list:
 
 ```js
   Person: {
@@ -939,9 +935,7 @@ The parameter _root_ is the person object for which a friends list is being crea
   },
 ```
 
-
-Now the application works. 
-
+Now the application works.
 
 We can immediately do even more complicated queries. It is possible for example to find the friends of all users:
 
@@ -957,6 +951,7 @@ query {
 ```
 
 There is however one issue with our solution: it does an unreasonable amount of queries to the database. If we log every query to the database, just like this for example,
+
 ```js
 
 Query: {
@@ -986,7 +981,7 @@ friendOf: async (root) => {
 },
 ```
 
-and considering we have 5 persons saved, and we query _allPersons_ without _phone_ as argument, we see an absurd amount of queries like below.
+and considering we have 5 persons saved, and we query *allPersons* without *phone* as argument, we see an absurd amount of queries like below.
 
 <pre>
 Person.find
@@ -999,11 +994,11 @@ User.find
 
 So even though we primarily do one query for all persons, every person causes one more query in their resolver.
 
-This is a manifestation of the famous [n+1 problem](https://www.google.com/search?q=n%2B1+problem), which appears every once in a while in different contexts, and sometimes sneaks up on developers without them noticing. 
+This is a manifestation of the famous [n+1 problem](https://www.google.com/search?q=n%2B1+problem), which appears every once in a while in different contexts, and sometimes sneaks up on developers without them noticing.
 
-The right solution for the n+1 problem depends on the situation. Often, it requires using some kind of a join query instead of multiple separate queries. 
+The right solution for the n+1 problem depends on the situation. Often, it requires using some kind of a join query instead of multiple separate queries.
 
-In our situation, the easiest solution would be to save whose friends list they are on each _Person_ object:
+In our situation, the easiest solution would be to save whose friends list they are on each *Person* object:
 
 ```js
 const schema = new mongoose.Schema({
@@ -1037,7 +1032,7 @@ const schema = new mongoose.Schema({
 })
 ```
 
-Then we could do a "join query", or populate the _friendOf_ fields of persons when we fetch the _Person_ objects:
+Then we could do a "join query", or populate the *friendOf* fields of persons when we fetch the *Person* objects:
 
 ```js
 Query: {
@@ -1054,11 +1049,9 @@ Query: {
 }
 ```
 
+After the change, we would not need a separate resolver for the *friendOf* field.
 
-After the change, we would not need a separate resolver for the _friendOf_ field. 
-
-
-The allPersons query <i>does not cause</i> an n+1 problem, if we only  fetch the name and the phone number: 
+The allPersons query <i>does not cause</i> an n+1 problem, if we only  fetch the name and the phone number:
 
 ```js
 query {
@@ -1069,7 +1062,7 @@ query {
 }
 ```
 
-If we modify _allPersons_ to do a join query because it sometimes causes an n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions, we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with a predicted threat of n+1 problems. However, we should not jump into this level of optimization before we are sure it's worth it. 
+If we modify *allPersons* to do a join query because it sometimes causes an n+1 problem, it becomes heavier when we don't need the information on related persons. By using the [fourth parameter](https://www.apollographql.com/docs/apollo-server/data/resolvers/#resolver-arguments) of resolver functions, we could optimize the query even further. The fourth parameter can be used to inspect the query itself, so we could do the join query only in cases with a predicted threat of n+1 problems. However, we should not jump into this level of optimization before we are sure it's worth it.
 
 [In the words of Donald Knuth](https://en.wikiquote.org/wiki/Donald_Knuth):
 
@@ -1088,15 +1081,15 @@ GraphQL is already a pretty old technology, having been used by Facebook since 2
 
 <div class="tasks">
 
-### Exercises 8.23.-8.26.
+### Exercises 8.23.-8.26
 
 #### 8.23: Subscriptions - server
 
-Do a backend implementation for subscription _bookAdded_, which returns the details of all new books to its subscribers. 
+Do a backend implementation for subscription *bookAdded*, which returns the details of all new books to its subscribers.
 
 #### 8.24: Subscriptions - client, part 1
 
-Start using subscriptions in the client, and subscribe to _bookAdded_. When new books are added, notify the user. Any method works. For example, you can use the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function. 
+Start using subscriptions in the client, and subscribe to *bookAdded*. When new books are added, notify the user. Any method works. For example, you can use the [window.alert](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) function.
 
 #### 8.25: Subscriptions - client, part 2
 
@@ -1125,6 +1118,6 @@ Once you have completed the exercises and want to get the credits, let us know t
 
 **Note** that you need a registration to the corresponding course part for getting the credits registered, see [here](/en/part0/general_info#parts-and-completion) for more information.
 
-You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language. 
+You can download the certificate for completing this part by clicking one of the flag icons. The flag icon corresponds to the certificate's language.
 
 </div>
