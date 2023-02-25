@@ -168,7 +168,7 @@ Inside the router, we define <i>links</i> that modify the address bar with the h
 
 creates a link in the application with the text <i>notes</i>, which when clicked changes the URL in the address bar to <i>/notes</i>.
 
-Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/en/main/route/route). For example, 
+Components rendered based on the URL of the browser are defined with the help of the component [Route](https://reactrouter.com/en/main/route/route). For example,
 
 ```js
 <Route path="/notes" element={<Notes />} />
@@ -178,7 +178,7 @@ defines that, if the browser address is <i>/notes</i>, we render the <i>Notes</i
 
 We wrap the components to be rendered based on the URL with a [Routes](https://reactrouter.com/en/main/components/routes) component
 
-```js 
+```js
 <Routes>
   <Route path="/notes" element={<Notes />} />
   <Route path="/users" element={<Users />} />
@@ -330,7 +330,7 @@ Both [useParams](https://reactrouter.com/en/main/hooks/use-params) and [useNavig
 
 ### redirect
 
-There is one more interesting detail about the <i>Users</i> route: 
+There is one more interesting detail about the <i>Users</i> route:
 
 ```js
 <Route path="/users" element={user ? <Users /> : <Navigate replace to="/login" />} />
@@ -397,7 +397,6 @@ We define an element common for modern web apps called <i>footer</i>, which defi
 ### Parameterized route revisited
 
 Our application has a flaw. The _Note_ component receives all of the notes, even though it only displays the one whose id matches the url parameter:
-
 
 ```js
 const Note = ({ notes }) => { 

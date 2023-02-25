@@ -7,7 +7,7 @@ lang: en
 
 <div class="content">
 
-In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline styles](/en/part2/adding_styles_to_react_app#inline_styles). In this part, we will take a look at a few other ways. 
+In part 2, we examined two different ways of adding styles to our application: the old-school [single CSS](/en/part2/adding_styles_to_react_app) file and [inline styles](/en/part2/adding_styles_to_react_app#inline_styles). In this part, we will take a look at a few other ways.
 
 ### Ready-made UI libraries
 
@@ -44,6 +44,7 @@ Then let's add a [link for loading the CSS stylesheet](https://react-bootstrap.g
   // ...
 </head>
 ```
+
 When we reload the application, we notice that it already looks a bit more stylish:
 
 ![browser notes app with bootstrap](../../images/7/5ea.png)
@@ -177,8 +178,7 @@ const App = () => {
 }
 ```
 
-
-We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/): 
+We will render the message as a Bootstrap [Alert](https://getbootstrap.com/docs/4.1/components/alerts/) component. Once again, the React Bootstrap library provides us with a matching [React component](https://react-bootstrap.github.io/components/alerts/):
 
 ```js
 <div className="container">
@@ -226,11 +226,9 @@ The resulting layout has a very clean and pleasing appearance:
 
 ![browser notes app bootstrap black navigation bar](../../images/7/10ea.png)
 
-
 If the viewport of the browser is narrowed, we notice that the menu "collapses" and it can be expanded by clicking the "hamburger" button:
 
 ![browser notes app with hamburger menu](../../images/7/11ea.png)
-
 
 Bootstrap and a large majority of existing UI frameworks produce [responsive](https://en.wikipedia.org/wiki/Responsive_web_design) designs, meaning that the resulting applications render well on a variety of different screen sizes.
 
@@ -318,7 +316,7 @@ import {
 
 Next, let's make the login form in the <i>Login</i> view better using the [TextField](https://mui.com/material-ui/react-text-field/) and [Button](https://mui.com/material-ui/api/button/) components:
 
-```js 
+```js
 const Login = (props) => {
   const navigate = useNavigate()
 
@@ -455,9 +453,9 @@ The code of the application can be found [here](https://github.com/fullstack-hy2
 
 ### Closing thoughts
 
-The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking. 
-I have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's. 
-According to https://www.npmtrends.com/ which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:
+The difference between react-bootstrap and MaterialUI is not big. It's up to you which one you find better looking.
+I have not used MaterialUI a lot, but my first impressions are positive. Its documentation is a bit better than react-bootstrap's.
+According to <https://www.npmtrends.com/> which tracks the popularity of different npm-libraries, MaterialUI passed react-bootstrap in popularity at the end of 2018:
 
 ![npmtrends of materialUI vs bootstrap](../../images/7/68ea.png)
 
@@ -485,7 +483,6 @@ In addition to making the frontend code more compact and readable, another benef
 
 Some potential downsides to using UI frameworks through integration libraries instead of using them "directly" are that integration libraries may have unstable APIs and poor documentation. The situation with [Semantic UI React](https://react.semantic-ui.com) is a lot better than with many other UI frameworks, as it is an official React integration library.
 
-
 There is also the question of whether or not UI framework libraries should be used in the first place. It is up to everyone to form their own opinion, but for people lacking knowledge in CSS and web design, they are very useful tools.
 
 ### Other UI frameworks
@@ -500,7 +497,7 @@ Here are some other UI frameworks for your consideration. If you do not see your
 - <https://semantic-ui.com/>
 - <https://mantine.dev/>
 - <https://react.fluentui.dev/>
-- - <https://storybook.js.org>
+- <https://storybook.js.org>
 - <https://www.primefaces.org/primereact/>
 - <https://v2.grommet.io>
 - <https://blueprintjs.com>
